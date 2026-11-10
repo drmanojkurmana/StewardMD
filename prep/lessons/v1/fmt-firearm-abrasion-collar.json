@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-firearm-abrasion-collar",
+ "subject": "forensic-medicine",
+ "module": "fmt-firearm",
+ "title": "Abrasion Collar, Contact Wounds and Muzzle Imprint",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "How the abrasion collar forms",
+   "tx": "As a bullet indents and stretches skin before piercing it, the rim of the hole is scraped and dried into the **abrasion collar**, also called the contusion ring. It surrounds the entry wound because the skin is dragged inward and abraded by the spinning projectile at the moment of penetration. The collar is therefore an entry sign. Exit wounds lack it unless the skin at exit is firmly supported, the shored exit trap.",
+   "say": "Skin stretched and scraped by the entering bullet dries into a collar that marks the hole as an entry wound.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet indents the skin"}, {"id": "b", "label": "Skin stretches and scrapes"}, {"id": "c", "label": "Bullet pierces and enters"}, {"id": "d", "label": "Abraded rim dries as a collar"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Entry margins are inverted",
+   "tx": "The **inverted margins of entry** complete the picture: skin edges turn inward, clothing fibres are carried into the wound, and bleeding is less than at exit. A lead or metal ring may show around the wound on radiology, and spectrography finds more metal around entry when the bullet passed only through soft tissue. When the edges are approximated, entry keeps a small central defect instead of closing neatly.",
+   "say": "Inward turned edges, fibres carried in and a metal ring on X ray all confirm the entry side of the track.",
+   "vis": {"kind": "table", "cols": ["Entry trait", "Finding", "Exit contrast"], "rows": [["Margins", "Inverted", "Everted or torn"], ["Abrasion collar", "Present", "Absent unless shored"], ["Bleeding", "Less", "More"], ["Clothing fibres", "Turned inward", "Turned outward"]]}
+  },
+  {
+   "title": "Oblique entry and shelving",
+   "tx": "A bullet arriving at an angle makes an **oblique entry wound** that is elliptical, longer as the angle shallows. One edge is shelved or undercut in the deeper skin layers, showing the direction the bullet came from. Rifle entries may add micro tears one to two millimetres long radiating around the wound with a reddish zone that browns on drying. Reading shelving correctly reconstructs the firing position relative to the victim.",
+   "say": "An elliptical hole with one shelved edge points back along the bullet's path to where the shooter stood.",
+   "vis": {"kind": "compare", "left": {"title": "Square on entry", "points": ["Round wound, even collar", "No shelving of edges", "Track runs straight inward", "Shooter faced the victim"]}, "right": {"title": "Oblique entry", "points": ["Elliptical wound shape", "One edge shelved or undercut", "Track angles through tissue", "Shooter stood to one side"]}}
+  },
+  {
+   "title": "Muzzle imprint in hard contact",
+   "tx": "When the muzzle is pressed hard and gases expand under the skin, the skin is thrown back against the barrel end and takes a **muzzle imprint** bruise or abrasion. It may be incomplete or indistinct, rarely a perfect copy of the muzzle, and bruising can ring it. Recoil often jerks the muzzle away, which is why many contact wounds show no imprint at all, and loose contact lets soot escape sideways as a corona.",
+   "say": "Hard contact can stamp the muzzle onto skin, but recoil removes the gun so fast that most contact wounds lack it.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Hard contact, muzzle sealed"}, {"id": "b", "label": "Gas expands beneath skin"}, {"id": "c", "label": "Skin slaps back onto muzzle"}, {"id": "d", "label": "Imprint bruise may be stamped"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Contact wounds of head, chest and abdomen",
+   "tx": "Contact effects follow local anatomy in **regional contact wounds**. On the head, gas bursts the entry into stellate tears with comminuted vault fractures and crazed paving fractures of the skull base; an eye can be blown out. On the chest, skin and subcutaneous tissue peel off the rib cage into a pocket. On the abdomen, gas in the peritoneal cavity herniates coils of small intestine through the entry hole.",
+   "say": "Contact bursts the skull, pockets the chest wall and can blow bowel out of the belly, each by trapped gas pressure.",
+   "vis": {"kind": "table", "cols": ["Contact site", "Gas effect", "Signature finding"], "rows": [["Head", "Skull bursts open", "Stellate tears, eye blown out"], ["Chest", "Skin peels off ribs", "Collapsing subcutaneous pocket"], ["Abdomen", "Peritoneum fills with gas", "Bowel herniates from entry"], ["Mouth", "Palate resists the shot", "Pellets lodge behind scalp"]]}
+  },
+  {
+   "title": "Cherry red tissues and carbon monoxide",
+   "tx": "Carbon monoxide in muzzle gases combines with haemoglobin and myoglobin, so the **wound track turns pink** near a contact or close entry. Tissues within and around the wound and up to thirty centimetres along the track may look cherry red between thirty centimetres and one metre of range. The colour fades gradually and is seen very rarely at an exit wound. Heat haematoma blood in burnt bodies carries the same carboxyhaemoglobin lesson.",
+   "say": "Muzzle carbon monoxide paints the entry track cherry red, a colour the exit wound almost never shares.",
+   "vis": {"kind": "compare", "left": {"title": "Cherry red supports entry", "points": ["CO binds haemoglobin in track", "Seen to 30 cm along track", "Strongest in contact shots", "Fades with time after death"]}, "right": {"title": "No colour change", "points": ["Typical of exit wounds", "No muzzle gas reached there", "Tissues keep normal colour", "Unless blood itself carries CO"]}}
+  },
+  {
+   "title": "Back spatter and wound contamination",
+   "tx": "The vacuum that follows discharge can suck blood, hair, tissue fragments and cloth fibres several centimetres back inside the barrel, called **back spatter**. Finding victim tissue inside a suspect weapon therefore supports contact or near contact firing by that weapon. The same negative pressure explains why a tightly held contact wound may show surprisingly little external soot: the products were driven inward or drawn back rather than spread on skin.",
+   "say": "Tissue sucked back into the barrel ties that weapon to a contact shot more firmly than any surface soot pattern.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Shot fired in tight contact"}, {"id": "b", "label": "Vacuum follows the gas blast"}, {"id": "c", "label": "Blood and fibres drawn inward"}, {"id": "d", "label": "Barrel swab matches the victim"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Shored exit, the collar in reverse",
+   "tx": "If skin at the exit is firmly supported by a belt, waistband, brassiere, wall, floor or chair back, the exiting bullet crushes it against that support and produces a **shored exit wound**: a circular defect with a broad abrasion rim that imitates entry. Shored exits follow long range shots, clothing pressure and bodies lying on hard surfaces. Fat protrusion and everted edges, plus a track arriving from entry, expose the truth.",
+   "say": "An exit braced against belt or floor borrows an abrasion collar, so trace the track before naming any hole an entry.",
+   "vis": {"kind": "table", "cols": ["Feature", "True entry", "Shored exit"], "rows": [["Abrasion rim", "Narrow collar", "Broad, lopsided abrasion"], ["Fat in wound", "Absent usually", "Often protrudes"], ["Burning or tattooing", "May be present", "Always absent"], ["Track direction", "Leads inward", "Arrives from entry side"]]}
+  },
+  {
+   "title": "Clothing examination in contact shots",
+   "tx": "In clothed contact shots the fabric tells the story through **clothing signs of discharge**. A cross shaped perforation with singed edges is typical, and smoke spreads between skin and clothing so each fabric layer blackens on both sides while the skin may show little soot. A grey to black bullet wipe rim of grease and debris rings the hole made by lead or jacketed bullets. Pieces of cloth may be carried into the entry wound itself.",
+   "say": "Cross torn singed fabric, smoke between layers and a bullet wipe rim reconstruct the shot when skin signs are missing.",
+   "vis": {"kind": "compare", "left": {"title": "Examine on clothing", "points": ["Cross shaped contact hole", "Singed perforation edges", "Smoke on inner surfaces", "Bullet wipe grey rim"]}, "right": {"title": "Examine on skin", "points": ["Muzzle imprint if present", "Abrasion collar at entry", "Cherry red track tissues", "Tattooing within a metre"]}}
+  }
+ ],
+ "quiz": []
+}

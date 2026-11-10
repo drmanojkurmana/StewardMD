@@ -1,0 +1,192 @@
+{
+ "v": 1,
+ "module": "obg-fetal-growth-surveillance",
+ "subject": "obstetrics-gynaecology",
+ "title": "Decelerations, Macrosomia and Intrauterine Fetal Death",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Heart rate falls beginning after the contraction peak and recovering after it ends are **late decelerations**. They reflect uteroplacental insufficiency and fetal hypoxia. Repetitive late decelerations demand urgent delivery assessment. Recovery lagging 30 seconds or more after the contraction ends, with each contraction, defines the pattern.",
+   "say": "Late decelerations follow contractions and reflect uteroplacental insufficiency with hypoxia.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ctg-late-deceleration.webp",
+    "alt": "Late decelerations on CTG.",
+    "caption": "Late decelerations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Abrupt variable depth and timing falls from cord compression are **variable decelerations**. Shoulders of acceleration bracket typical benign variables. Deep prolonged variables with reduced variability signal compromise needing action. Typical variables recover quickly and keep normal variability; atypical ones lose their shoulders and fall below 60 for over a minute.",
+   "say": "Variable decelerations come from cord compression and vary in depth and timing.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ctg-variable-deceleration.webp",
+    "alt": "Variable decelerations on CTG.",
+    "caption": "Variable decelerations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Mirror image falls with contractions from head compression are **early decelerations**. They are benign and need no intervention. Confusing them with late decelerations causes needless intervention, so timing against contractions is everything. They mirror the contraction exactly, starting and ending with it, which the examiner must time aloud.",
+   "say": "Early decelerations mirror contractions from head compression and are benign.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ctg-early-deceleration.webp",
+    "alt": "Early decelerations mirroring contractions.",
+    "caption": "Early decelerations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Birth weight above four to four and a half kilograms, or above the ninetieth centile, defines **macrosomia**. Maternal diabetes and obesity are the leading drivers. Shoulder dystocia and birth injury are its feared complications. Ninetieth centile on a customised chart flags more at risk babies than a flat 4 kilogram cut off.",
+   "say": "Macrosomia exceeds four kilograms and fears shoulder dystocia from diabetes and obesity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Association"
+    ],
+    "rows": [
+     [
+      "Diabetes",
+      "Truncal obesity pattern"
+     ],
+     [
+      "Post term",
+      "Continued growth"
+     ],
+     [
+      "Previous macrosomia",
+      "Recurrence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Death of the fetus after twenty weeks or five hundred grams, by local definition, is **intrauterine fetal death**. Parents usually notice absent movements first. Ultrasound showing absent cardiac activity, confirmed by a second operator, makes the diagnosis. Spalding sign, overlapping skull bones, and a hyperflexed spine appear on imaging days after death.",
+   "say": "Intrauterine fetal death is confirmed by absent cardiac activity with a second operator.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Movements absent"
+     },
+     {
+      "id": "n1",
+      "label": "Scan shows no heartbeat"
+     },
+     {
+      "id": "n2",
+      "label": "Second operator confirms"
+     },
+     {
+      "id": "n3",
+      "label": "Parents informed gently"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After fetal death, induction of labour is usually preferred over caesarean, following **vaginal delivery preference**. Mifepristone priming before misoprostol shortens the process. Investigations for cause run alongside bereavement care. Misoprostol doses are lower after 26 weeks, and a caesarean scar changes the induction regimen used.",
+   "say": "Vaginal delivery is preferred after fetal death, with mifepristone priming before misoprostol.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vaginal induction",
+     "points": [
+      "Usual preference",
+      "Avoids scar",
+      "Mifepristone priming"
+     ]
+    },
+    "right": {
+     "title": "Caesarean",
+     "points": [
+      "Rare indications",
+      "Previous scars complicating",
+      "Maternal indication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Retained dead fetus beyond weeks can consume fibrinogen, a risk called **retention coagulopathy**. Weekly fibrinogen checks guard women choosing expectant care briefly. Most deliver spontaneously within three weeks regardless. Fibrinogen can fall within three to four weeks of retention, so weekly checks start when delivery is deferred.",
+   "say": "Retention coagulopathy consumes fibrinogen when a dead fetus is retained for weeks.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ctg-trace-classification.webp",
+    "alt": "CTG trace classification for deceleration context.",
+    "caption": "Trace classification. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Intrauterine resuscitation for pathological traces includes stopping oxytocin, fluids and position change, grouped as **conservative measures**. These buy minutes while theatre prepares, not instead of it. Tocolysis may relax a hyperstimulated uterus. Terbutaline 250 micrograms under the skin relaxes a hyperstimulated uterus while theatre is prepared.",
+   "say": "Intrauterine resuscitation buys minutes while theatre prepares, not instead of it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Oxytocin stopped"
+     },
+     {
+      "id": "n1",
+      "label": "Position changed left"
+     },
+     {
+      "id": "n2",
+      "label": "Fluids and oxygen by protocol"
+     },
+     {
+      "id": "n3",
+      "label": "Theatre prepared"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shoulder dystocia risk rises steeply above four and a half kilograms in diabetic pregnancies, shaping **delivery planning**. Elective caesarean is discussed at estimated weights above four and a half to five kilograms by guideline. Ultrasound weight errors of fifteen percent temper these decisions.",
+   "say": "Delivery planning weighs shoulder dystocia risk against ultrasound weight error margins.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-obg-ctg_classification.webp",
+    "alt": "CTG categories and resuscitation steps.",
+    "caption": "CTG categories. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

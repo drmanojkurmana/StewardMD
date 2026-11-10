@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Dimorphic Systemic Mycoses: Histoplasma, Blastomyces and Coccidioides",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Endemic dimorphic systemic mycoses exist as infectious saprophytic molds with hyphae producing conidia in soil at ambient room temperatures of twenty-five degrees Celsius. Once inhaled into mammalian alveolar airspaces at thirty-seven degrees, the pathogens transition into parasitic yeast forms or specialised spherules. This fundamental biological adaptation, termed **thermal dimorphism**, permits survival against phagocytic killing inside deep host tissues.",
+      "say": "Dimorphic fungi grow as environmental molds at twenty-five degrees and transform into yeasts at body temperature.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mold phase at 25 degrees",
+          "points": [
+            "Environmental saprophytic soil form",
+            "Septate hyphae with airborne conidia",
+            "Infectious propagules inhaled by host",
+            "Slow mycelial growth on Sabouraud agar"
+          ]
+        },
+        "right": {
+          "title": "Yeast phase at 37 degrees",
+          "points": [
+            "Parasitic tissue phase in mammalian host",
+            "Unicellular yeasts or thick spherules",
+            "Resists phagolysosomal oxidative destruction",
+            "Triggers granulomatous inflammatory response"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Inhalation of microconidia from bird roosts or bat guano in caves and demolition sites initiates **Histoplasma capsulatum** infection. Microconidia deposit within terminal alveoli where alveolar macrophages ingest them without mounting an oxidative burst. Intracellular replication within phagolysosomes leads to haematogenous dissemination throughout the reticuloendothelial system, producing characteristic hepatosplenomegaly, diffuse lymphadenopathy, and progressive cytopenias in immunocompromised patients.",
+      "say": "Inhaled Histoplasma microconidia germinate and proliferate inside alveolar macrophages.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/histoplasmosis-fig1.webp",
+        "alt": "Histoplasma intracellular yeast cells",
+        "caption": "Histoplasma capsulatum tiny oval yeast forms packed within the cytoplasm of tissue macrophages [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Microscopic diagnosis of histoplasmosis relies on demonstrating small oval yeasts measuring two to four micrometres packed tightly inside mononuclear phagocytes on peripheral blood, bone marrow, or lymph node aspirates stained with Giemsa or Wright stains. The organism lacks a true capsule, but routine staining causes cytoplasmic shrinkage that produces an artificial **pseudo-capsule** halo mimicking encapsulated yeast.",
+      "say": "Giemsa stain reveals tiny intracellular yeasts with an artificial clear halo.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Giemsa stain of bone marrow aspirate or buffy coat"
+          },
+          {
+            "id": "h2",
+            "label": "Small intracellular oval yeasts inside macrophage cytoplasm"
+          },
+          {
+            "id": "h3",
+            "label": "Clear halo around yeast cell represents pseudo-capsule artifact"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2"
+          ],
+          [
+            "h2",
+            "h3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Culturing Histoplasma on Sabouraud dextrose agar at room temperature yields white to brownish velvety mycelial colonies over several weeks. Diagnostic microscopic mounts reveal large spherical **tuberculate macroconidia** with distinct finger-like surface projections along with smooth microconidia. Conversion from mycelial to yeast morphology by subculture on enriched blood agar at thirty-seven degrees confirms identity definitively.",
+      "say": "Mycelial cultures produce characteristic thick tuberculate macroconidia with surface projections.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic feature",
+          "Laboratory finding"
+        ],
+        "rows": [
+          [
+            "Sabouraud culture",
+            "Slow velvety white to brown mycelial colonies"
+          ],
+          [
+            "Microscopic conidia",
+            "Tuberculate macroconidia with digitiform spikes"
+          ],
+          [
+            "Thermal conversion",
+            "Yeast colonies on brain heart infusion at 37 degrees"
+          ],
+          [
+            "Antigen detection",
+            "Urinary polysaccharide antigen sensitivity over 90%"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Infection caused by **Blastomyces dermatitidis** follows soil exposure near waterways in the Ohio and Mississippi river basins and southeastern regions. Inhaled conidia transform at thirty-seven degrees into distinctive large spherical yeasts measuring eight to fifteen micrometres. The diagnostic hallmark is broad-based budding where the daughter bud attaches to the parent cell across a wide neck beneath a doubly refractile wall.",
+      "say": "Blastomyces produces large tissue yeasts with a wide neck between mother and daughter cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/blastomycosis-fig1.webp",
+        "alt": "Blastomyces broad based budding yeast",
+        "caption": "Blastomyces dermatitidis large round yeast cells exhibiting broad-based budding and thick doubly refractile cell walls [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Primary blastomycosis manifests as acute or chronic pneumonia that frequently mimics bacterial consolidation or bronchogenic carcinoma on imaging. Haematogenous dissemination produces striking verrucous, crusting **cutaneous lesions** with microabscesses along the advancing margins, often mistaken for squamous cell carcinoma. Osteolytic lesions affecting long bones, ribs, and vertebrae constitute the second most frequent extrapulmonary manifestation.",
+      "say": "Disseminated blastomycosis causes crusted skin ulcers with microabscesses and osteolytic bone destruction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cutaneous blastomycosis",
+          "points": [
+            "Verrucous crusted plaques with violaceous border",
+            "Multiple microabscesses on scraping",
+            "Pseudoepitheliomatous hyperplasia on biopsy",
+            "Mistaken clinically for squamous cell cancer"
+          ]
+        },
+        "right": {
+          "title": "Skeletal blastomycosis",
+          "points": [
+            "Well circumscribed osteolytic lesions",
+            "Predilection for vertebrae and long bones",
+            "Contiguous soft tissue extension and drainage",
+            "Joint effusion and secondary fungal arthritis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Inhalation of soil arthroconidia in arid southwestern desert regions, notably the San Joaquin Valley of California, causes **Coccidioides immitis** infection. Arthroconidia are barrel-shaped environmental cells that alternate with empty dysjunctor cells in mycelial hyphae. Even brief airborne exposure or dust storm travel can deliver an infectious inoculum sufficient to establish pulmonary infection.",
+      "say": "Fragile barrel-shaped arthroconidia in desert dust are inhaled into the pulmonary alveoli.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Arid alkaline soil contains infectious barrel-shaped arthroconidia"
+          },
+          {
+            "id": "c2",
+            "label": "Dust storms or soil excavation disperse airborne spores"
+          },
+          {
+            "id": "c3",
+            "label": "Inhaled arthroconidia lodge in terminal alveolar airspaces"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2"
+          ],
+          [
+            "c2",
+            "c3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within alveolar tissues at body temperature, each inhaled arthroconidium enlarges massively into a thick-walled **spherule** measuring twenty to one hundred micrometres. Internal cleavage yields hundreds of small non-budding endospores within the central cavity. Rupture of mature spherules releases endospores into adjacent parenchyma, where each liberated endospore matures into an independent secondary spherule.",
+      "say": "Tissue spherules undergo internal cleavage to produce hundreds of non-budding endospores.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coccidioidomycosis-fig1.webp",
+        "alt": "Coccidioides endosporulating spherule",
+        "caption": "Coccidioides immitis large thick-walled spherule filled with numerous non-budding endospores in lung parenchyma [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Most primary coccidioidomycosis cases cause self-limiting influenza-like respiratory illness, but classic immunological manifestations include erythema nodosum, erythema multiforme, and arthralgias, historically called **desert rheumatism**. Extrapulmonary dissemination carries high fatality and preferentially targets skin, subcutaneous tissues, skeleton, and the central nervous system, where chronic basilar meningitis necessitates lifelong antifungal suppression.",
+      "say": "Immune complex deposition produces painful erythema nodosum, whereas basilar meningitis represents the most feared complication.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benign and acute features",
+          "points": [
+            "Influenza-like illness with cough and fever",
+            "Hilar and mediastinal lymphadenopathy",
+            "Desert rheumatism with polyarthralgia",
+            "Pretibial erythema nodosum immune nodules"
+          ]
+        },
+        "right": {
+          "title": "Severe extrapulmonary spread",
+          "points": [
+            "Ulcerative skin lesions and verrucous plaques",
+            "Subcutaneous cold abscesses and fistulae",
+            "Lytic osteoarticular destructive lesions",
+            "Chronic basilar meningitis with CSF pleocytosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Initial medical therapy for mild to moderate forms of all three endemic mycoses relies on oral itraconazole with careful serum therapeutic drug monitoring. For fulminant pulmonary disease, severe hypoxaemia, or diffuse haematogenous dissemination, intravenous lipid-associated **amphotericin B** remains the definitive induction agent. In coccidioidal meningitis, high-dose oral or intravenous fluconazole represents standard first-line treatment.",
+      "say": "Lipid amphotericin B induces rapid control in severe dissemination, followed by step-down azole maintenance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rx1",
+            "label": "Severe or disseminated disease: IV liposomal amphotericin B"
+          },
+          {
+            "id": "rx2",
+            "label": "Clinical improvement: step-down to oral itraconazole maintenance"
+          },
+          {
+            "id": "rx3",
+            "label": "Coccidioidal meningitis: high-dose fluconazole maintained indefinitely"
+          }
+        ],
+        "edges": [
+          [
+            "rx1",
+            "rx2"
+          ],
+          [
+            "rx2",
+            "rx3"
+          ]
+        ]
+      }
+    }
+  ]
+}

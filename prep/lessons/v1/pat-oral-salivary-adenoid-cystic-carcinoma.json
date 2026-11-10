@@ -1,0 +1,228 @@
+{
+  "v": 1,
+  "module": "pat-oral-salivary",
+  "subject": "pathology",
+  "title": "Adenoid Cystic Carcinoma and Perineural Invasion",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Adenoid cystic carcinoma grows slowly yet relentlessly from minor and major salivary glands, cribriform Swiss cheese patterns around pseudocysts, invading nerves far beyond palpable tumour. Its patience deceives: **adenoid cystic carcinoma, slow but relentless**. Basaloid cells around hyaline globules mimic basal cell adenoma, so MYB testing resolves difficult biopsies.",
+      "say": "Slow growth, distant perineural reach, late lung metastases: adenoid cystic carcinoma plays a decades long game.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/salivary-gland-disorders-ent-fig1.webp",
+        "alt": "Salivary gland disorders",
+        "caption": "Salivary malignancies including adenoid cystic carcinoma of minor glands."
+      }
+    },
+    {
+      "tx": "Perineural invasion lets adenoid cystic carcinoma travel named nerves to skull base, producing pain, paraesthesia, and palsies while imaging underestimates microscopic extent along the pathway. That highway is **perineural invasion in adenoid cystic carcinoma**. The mandibular division route through foramen ovale deserves dedicated sequences when palatal primaries are staged.",
+      "say": "Pain along a nerve's map in salivary cancer means perineural travel; image the nerve to skull base.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tumour reaches nerve sheath"
+          },
+          {
+            "id": "b",
+            "label": "Cells track proximally along nerve"
+          },
+          {
+            "id": "c",
+            "label": "Pain, numbness, palsy by territory"
+          },
+          {
+            "id": "d",
+            "label": "Skull base imaging and RT fields follow nerve"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Histological pattern grades adenoid cystic carcinoma: tubular best, cribriform intermediate, solid worst, solid share above thirty percent worsening prognosis enough to alter adjuvant decisions. Pattern grading is **adenoid cystic carcinoma tubular, cribriform, solid grading**. Any solid component should be sampled generously, since small biopsies can miss the worst pattern.",
+      "say": "Count the solid pattern; above thirty percent, adenoid cystic carcinoma's prognosis darkens decisively.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Architecture",
+          "Prognosis"
+        ],
+        "rows": [
+          [
+            "Tubular",
+            "True ducts lined doubly",
+            "Most favourable"
+          ],
+          [
+            "Cribriform",
+            "Swiss cheese pseudocysts",
+            "Intermediate, classic images"
+          ],
+          [
+            "Solid",
+            "Sheets without spaces",
+            "Worst, over 30 percent critical"
+          ],
+          [
+            "High grade transformation",
+            "Dedifferentiated areas",
+            "Aggressive, nodal spread joins"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Years after the primary tumour was declared dealt with, this chest scan tells a slower story. Multiple round deposits stud both lungs, the indolent **pulmonary metastases** adenoid cystic carcinoma is notorious for, arriving a decade late and growing at a pace that tempts observation over intervention. Perineural spread made the original disease relentless locally, while haematogenous spread writes this delayed second chapter. Lifelong chest surveillance follows logically, because a cancer this patient may recur on a timescale that outlasts ordinary five year discharge policies.",
+      "say": "Indolent pulmonary metastases can appear years after adenoid cystic carcinoma, demanding lifelong chest surveillance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m1066-pat-oral-salivary-adenoid-cystic-carcinoma.webp",
+        "alt": "Chest CT or radiograph showing multiple indolent pulmonary metastases from adenoid cystic carcinoma appearing years after primary treatment",
+        "caption": "Chest CT or radiograph showing multiple indolent pulmonary metastases from adenoid cystic carcinoma appearing years after primary treatment. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Late pulmonary metastases arrive five, ten, even twenty years after controlled primaries, often indolently, so adenoid cystic follow up never truly discharges and chest imaging persists. That horizon defines **late metastasis surveillance in adenoid cystic carcinoma**. Haematogenous spread favours lung over regional nodes, reversing the usual salivary cancer pattern.",
+      "say": "Discharge is a fiction in adenoid cystic carcinoma; lung metastases keep appointments decades later."
+    },
+    {
+      "tx": "MYB oncogene rearrangement, classically MYB-NFIB fusion, drives most adenoid cystic carcinomas and increasingly confirms diagnosis in small biopsies while trials chase its downstream pathways. The molecular signature is **MYB-NFIB fusion in adenoid cystic carcinoma**. NOTCH1 activating mutations mark a more aggressive subset with earlier distant relapse in recent series.",
+      "say": "MYB rearrangement confirms adenoid cystic carcinoma molecularly when scant biopsies leave pathologists uncertain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Local control priorities",
+          "points": [
+            "Wide surgery with nerve mapping",
+            "Postoperative RT along nerve paths",
+            "Margins often microscopically close"
+          ]
+        },
+        "right": {
+          "title": "Systemic realities",
+          "points": [
+            "Chemotherapy modestly active",
+            "Indolent metastases sometimes observed",
+            "Trials and targeted studies ongoing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Palatal adenoid cystic carcinoma ulcerates late over bone it silently erodes toward nasal cavity and skull base, so palatal swellings with pain earn cross sectional imaging before biopsy conclusions. That erosion pattern is **palatal adenoid cystic carcinoma imaging duty**. Dental pain or a loosening molar can precede a visible palatal swelling in such cases.",
+      "say": "A painful palatal swelling needs imaging depths before reassurance; adenoid cystic erodes bone silently.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Favourite nerve route",
+          "Imaging duty"
+        ],
+        "rows": [
+          [
+            "Palate minor glands",
+            "Greater palatine to pterygopalatine",
+            "MRI nerve pathway to skull base"
+          ],
+          [
+            "Submandibular gland",
+            "Lingual nerve territory",
+            "Floor of mouth and nerve review"
+          ],
+          [
+            "Parotid",
+            "Facial nerve branches",
+            "Nerve function and MRI"
+          ],
+          [
+            "Lacrimal gland",
+            "Orbital nerves",
+            "Orbit and skull base staging"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Radiotherapy, especially neutron and particle therapy historically and modern photon or proton techniques, sterilises perineural microscopic disease beyond surgical margins in adenoid cystic carcinoma. Field design follows nerves: **perineural radiotherapy fields in adenoid cystic carcinoma**. Positive margins plus named nerve invasion form the classic indication for postoperative radiotherapy here.",
+      "say": "Radiation fields in adenoid cystic carcinoma are drawn along nerves, not merely around tumour beds.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Surgery maps involved nerves"
+          },
+          {
+            "id": "b",
+            "label": "MRI traces pathways to skull base"
+          },
+          {
+            "id": "c",
+            "label": "RT fields cover named nerve routes"
+          },
+          {
+            "id": "d",
+            "label": "Decades of chest surveillance scheduled"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prognostic counselling in adenoid cystic carcinoma must quote decades, not five years, because survival curves keep falling while many patients live long with metastases under observation. Honest horizons define **long term counselling in adenoid cystic carcinoma**. Slow growing lung deposits are sometimes observed for years before systemic therapy becomes necessary.",
+      "say": "Quote ten and twenty year horizons in adenoid cystic carcinoma; five year survival flatters it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early years",
+          "points": [
+            "Local control often achieved",
+            "Perineural symptoms managed",
+            "Return to normal life common"
+          ]
+        },
+        "right": {
+          "title": "Later decades",
+          "points": [
+            "Lung metastases may emerge",
+            "Indolent metastatic pace possible",
+            "Surveillance and trials continue"
+          ]
+        }
+      }
+    }
+  ]
+}

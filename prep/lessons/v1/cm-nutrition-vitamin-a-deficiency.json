@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-nutrition-vitamin-a-deficiency",
+ "subject": "community-medicine",
+ "module": "cm-nutrition",
+ "title": "Vitamin A Deficiency: Xerophthalmia Classification and Prophylaxis",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The eye signs in WHO order",
+   "tx": "**Xerophthalmia classification** runs XN night blindness, X1A conjunctival xerosis, X1B Bitot spots, X2 corneal xerosis, X3A corneal ulceration under one-third of the surface, X3B keratomalacia at one-third or more, XS corneal scar, and XF xerophthalmic fundus. Corneal stages (X2 onward) are ophthalmic emergencies; Bitot spots mark chronic deficiency in preschool children.",
+   "say": "Grade the eye in order. Night blindness and conjunctival dryness first, Bitot spots next, cornea clouding after. Corneal stages are emergencies measured in hours. Bitot spots in preschoolers mark chronic population deficiency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-a-deficiency-fig1.webp",
+    "alt": "Vitamin A deficiency eye signs showing Bitot spots and corneal xerosis stages of xerophthalmia.",
+    "caption": "Xerophthalmia signs from Bitot spots to corneal involvement. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Night blindness: the first functional cry",
+   "tx": "**Night blindness** (XN) is the earliest functional sign: the child stumbles at dusk, cannot find food or toys in dim light, in local idioms every community names. Mothers report it before any eye surface change exists, making a single history question the cheapest screening instrument in nutrition surveys.",
+   "say": "Ask about dusk. The child who cannot find food in dim light reports deficiency before any surface sign exists. One history question in the mother's idiom is nutrition's cheapest screening instrument.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Retinal rod function fails"},
+     {"id": "b", "label": "Child stumbles at dusk"},
+     {"id": "c", "label": "Mother reports night blindness"},
+     {"id": "d", "label": "Treatment before surface signs"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Treatment doses by age, on days 1, 2 and later",
+   "tx": "**Treatment dosing** for xerophthalmia gives vitamin A orally on diagnosis, repeated next day: 50000 IU under 6 months, 100000 IU at 6 to 11 months, 200000 IU at 12 months and above, with a third dose 4 to 6 weeks later when clinical deficiency signs exist. Women of reproductive age with corneal disease balance teratogenicity against blindness individually.",
+   "say": "Treat on sight, repeat tomorrow. Fifty, one hundred or two hundred thousand units by age band, third dose in a month when eye signs exist. Corneal disease never waits for laboratory confirmation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age", "Dose, day 1 and day 2"],
+    "rows": [
+     ["Under 6 months", "50000 IU"],
+     ["6 to 11 months", "100000 IU"],
+     ["12 months and above", "200000 IU"],
+     ["With clinical eye signs", "Third dose at 4 to 6 weeks"]
+    ]
+   }
+  },
+  {
+   "title": "Prophylaxis schedule rides immunisation",
+   "tx": "**Prophylaxis** gives the first 100000 IU (1 lakh) dose at 9 months with measles vaccination, then 200000 IU (2 lakh) every 6 months to age 5 (doses 2 to 9 in programme counting). Bitot spot prevalence fell to 0.7 percent in under-six children by 2001 nationally, and keratomalacia nearly disappeared, the programme's quoted victories.",
+   "say": "Prevention rides the vaccine visit. One lakh units at nine months, two lakh six-monthly to age five. Bitot spots fell under one percent and keratomalacia nearly vanished on that cadence nationally.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Contact", "Prophylactic dose"],
+    "rows": [
+     ["9 months, with MR vaccine", "100000 IU (1 ml)"],
+     ["16 to 18 months", "200000 IU (2 ml)"],
+     ["Every 6 months to 5 years", "200000 IU, doses to the 9th"]
+    ]
+   }
+  },
+  {
+   "title": "Measles and diarrhoea drain the liver store",
+   "tx": "**Precipitating infections** empty marginal reserves: measles, diarrhoea, respiratory infections and protein-energy malnutrition convert subclinical deficiency into blinding xerophthalmia within weeks. Hence vitamin A accompanies measles treatment, sick-child contacts become supplementation opportunities, and deficiency maps overlap infection maps district by district.",
+   "say": "Infections spend the liver's savings. Measles, diarrhoea and malnutrition tip marginal children into blinding eye disease within weeks. Sick-child contacts therefore double as supplementation opportunities by design.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subclinical deficiency",
+     "points": ["Low liver stores, normal eyes", "Common in poor diet districts", "Invisible without surveys"]
+    },
+    "right": {
+     "title": "After precipitating illness",
+     "points": ["Measles or diarrhoea drains stores", "Night blindness then corneal signs", "Blindness within weeks possible"]
+    }
+   }
+  },
+  {
+   "title": "Dietary sources and bioavailability",
+   "tx": "**Food sources** split into preformed retinol (milk, egg, liver, fish) and provitamin carotenoids from dark green leafy vegetables, mango, papaya and red palm oil, whose absorption needs dietary fat and intact gut. Colostrum is the newborn's first rich dose, one more argument for early breastfeeding initiation that nutrition and newborn programmes share.",
+   "say": "Two food families supply it. Animal retinol ready-made; plant carotenoids from green leaves and orange fruit needing fat for absorption. Colostrum is the first rich dose, uniting nutrition and breastfeeding messages.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Source family", "Examples", "Caveat"],
+    "rows": [
+     ["Preformed retinol", "Milk, egg, liver", "Cost limits daily use"],
+     ["Carotenoids", "Leafy greens, mango, papaya", "Needs fat for absorption"],
+     ["Colostrum", "First breast milk", "Free, at birth itself"]
+    ]
+   }
+  },
+  {
+   "title": "Public health thresholds for action",
+   "tx": "**Deficiency is a public health problem** when night blindness exceeds 1 percent in 24 to 71 month children, Bitot spots exceed 0.5 percent, corneal signs exceed 0.01 percent, or serum retinol under 0.70 micromol per litre affects 10 percent or more in WHO criteria. These cut-offs convert survey findings into programme obligations without ministerial debate.",
+   "say": "Thresholds convert surveys into duty. Night blindness over one percent, Bitot spots over half a percent, any corneal signal at population scale. Cross the line and supplementation stops being optional.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator (24 to 71 months)", "Public health threshold"],
+    "rows": [
+     ["Night blindness", "Above 1 percent"],
+     ["Bitot spots", "Above 0.5 percent"],
+     ["Corneal xerophthalmia", "Above 0.01 percent"],
+     ["Low serum retinol", "10 percent or more of children"]
+    ]
+   }
+  },
+  {
+   "title": "Teratogenicity: the adult caution",
+   "tx": "**Excess vitamin A** in early pregnancy is teratogenic, so high-dose supplementation avoids women who might be pregnant except when corneal disease threatens sight, where maternal blindness outweighs fetal risk individually judged. Weekly low-dose or dietary strategies serve reproductive-age women in deficient areas instead. This single caution generates stems contrasting child and maternal dosing.",
+   "say": "One caution governs adults. High doses in early pregnancy damage the fetus, so reproductive-age women take dietary or low-dose routes unless corneas are melting. Child megadoses never transfer to mothers by analogy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Children",
+     "points": ["Periodic megadose safe and effective", "Age-banded IU schedule", "Eye signs trigger treatment course"]
+    },
+    "right": {
+     "title": "Women of reproductive age",
+     "points": ["Avoid high dose if pregnancy possible", "Dietary and low-dose strategies", "Corneal emergency judged individually"]
+    }
+   }
+  },
+  {
+   "title": "Beyond the eye: mortality and immunity",
+   "tx": "**Vitamin A deficiency** also raises child mortality from measles and diarrhoea (the anti-infective vitamin of older teaching), which is why supplementation trials measured deaths, not only eyes. Modern programmes integrate doses with immunisation and sick-child care rather than vertical distribution days, keeping the eye signs as sentinels of the wider deficiency state.",
+   "say": "Eyes are sentinels, not the whole disease. Deficiency raises measles and diarrhoea deaths, so trials counted mortality. Doses now ride immunisation and sick-child contacts instead of vertical distribution days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Marginal vitamin A stores"},
+     {"id": "b", "label": "Infection severity amplified"},
+     {"id": "c", "label": "Eye signs appear as sentinels"},
+     {"id": "d", "label": "Supplementation cuts both risks"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

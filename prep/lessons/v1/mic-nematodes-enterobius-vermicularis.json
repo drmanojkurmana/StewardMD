@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "mic-nematodes",
+  "subject": "microbiology",
+  "title": "Enterobius Pinworms, Cellophane Swab and Strongyloides Hyperinfection",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The pinworm or threadworm **Enterobius vermicularis** is the most frequent nematode infection in temperate climates, commonly spreading through crowded households and daycare centers. Adult worms reside in the caecum and appendix. At night, the gravid female migrates through the relaxed anal sphincter onto the perianal skin folds to oviposit thousands of eggs before dying, triggering intense nocturnal pruritus ani.",
+      "say": "Gravid female pinworms migrate nocturnally to perianal skin folds, ovipositing eggs that cause intense itching.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/enterobiasis-fig1.webp",
+        "alt": "Enterobius vermicularis life cycle",
+        "caption": "Enterobius vermicularis pinworm life cycle illustrating perianal oviposition and autoinfection [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Because female pinworms oviposit directly onto the external perianal epithelium rather than the intestinal lumen, eggs are rarely present in routine fecal samples. The definitive diagnostic standard is the **cellophane tape swab** or Graham Scotch tape technique. Clear adhesive cellulose tape pressed firmly against the unwashed perianal folds early in the morning before bathing or defecation captures adhered eggs for immediate microscopic inspection.",
+      "say": "Adhesive cellophane tape pressed against perianal folds early in the morning captures eggs for microscopy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ev1",
+            "label": "Apply clear adhesive cellophane tape to perianal folds early in morning"
+          },
+          {
+            "id": "ev2",
+            "label": "Transfer tape sticky side down directly onto clean glass slide"
+          },
+          {
+            "id": "ev3",
+            "label": "Microscopy reveals characteristic planoconvex D-shaped eggs with folded larvae"
+          }
+        ],
+        "edges": [
+          [
+            "ev1",
+            "ev2"
+          ],
+          [
+            "ev2",
+            "ev3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under light microscopy, Enterobius eggs appear as transparent, elongated, asymmetrical structures measuring fifty by twenty-five micrometres that are distinctly **planoconvex**, being flattened on one side and convex on the other, creating a signature capital D shape. Eggs are fully embryonated and infectious within six hours of deposition, driving direct finger-to-mouth autoinfection following perianal scratching.",
+      "say": "Planoconvex D-shaped eggs contain fully developed larvae and become infectious within six hours.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enterobius egg morphology",
+          "points": [
+            "Shape: asymmetrical planoconvex (D-shaped)",
+            "Shell: smooth, double-layered, transparent shell",
+            "Development: contains fully formed coiled larva",
+            "Transmission: directly infective within hours"
+          ]
+        },
+        "right": {
+          "title": "Ascaris egg morphology",
+          "points": [
+            "Shape: broadly round to oval, symmetrical",
+            "Shell: thick golden-brown mammillated albuminous coat",
+            "Development: unembryonated single-cell yolk when passed",
+            "Transmission: requires 2-3 weeks in soil to become infective"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment requires single-dose oral **mebendazole** (one hundred milligrams) or pyrantel pamoate, but a second dose must be repeated strictly after two weeks to eradicate newly hatched worms because anthelmintics do not kill eggs. Because pinworm eggs contaminate bed linens and clothing easily, all household family members must be treated simultaneously regardless of symptoms to prevent ongoing cyclic reinfection.",
+      "say": "Treat all household members simultaneously with mebendazole and repeat the dose after two weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Step",
+          "Anthelmintic Protocol",
+          "Clinical Justification"
+        ],
+        "rows": [
+          [
+            "Initial therapy",
+            "Single dose oral mebendazole 100 mg",
+            "Paralyzes and eliminates all adult worms in caecum"
+          ],
+          [
+            "Mandatory repeat dose",
+            "Second dose mebendazole at 14 days",
+            "Kills larvae hatched from surviving environmental eggs"
+          ],
+          [
+            "Household contacts",
+            "Treat all family members concurrently",
+            "Prevents ping-pong reinfection from asymptomatic carriers"
+          ],
+          [
+            "Hygiene measures",
+            "Morning bathing, clip fingernails, wash sheets",
+            "Minimizes environmental egg transmission and autoinfection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The threadworm **Strongyloides stercoralis** is unique among human nematodes in its ability to complete its entire parasitic life cycle within a single human host through internal autoinfection. Filariform larvae in warm moist soil penetrate intact skin, undergo pulmonary migration, and mature into parthenogenetic parasitic females embedded within the duodenal and jejunal mucosa, where they produce eggs without male fertilization.",
+      "say": "Strongyloides completes internal autoinfection without leaving the host, sustaining infection for decades.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-nematode-infections-fig1.webp",
+        "alt": "Intestinal nematode clinical manifestations",
+        "caption": "Diagnostic clinical features and life cycles of Strongyloides and intestinal nematodes [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Eggs hatch rapidly within the intestinal mucosa into non-infectious rhabditiform larvae that pass into the stool. However, in **internal autoinfection**, rhabditiform larvae transform prematurely within the bowel lumen into infectious filariform larvae that penetrate the colonic mucosa or perianal skin directly. This cycle allows low-level Strongyloides infection to persist asymptomatically in the human host for forty to sixty years.",
+      "say": "Premature transformation into filariform larvae within the bowel sustains lifelong subclinical autoinfection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "st1",
+            "label": "Adult female oviposits in duodenal mucosa; eggs hatch into rhabditiform larvae"
+          },
+          {
+            "id": "st2",
+            "label": "Delayed transit allows larvae to moult into infectious filariform larvae"
+          },
+          {
+            "id": "st3",
+            "label": "Filariform larvae penetrate colonic wall, maintaining lifelong autoinfection"
+          }
+        ],
+        "edges": [
+          [
+            "st1",
+            "st2"
+          ],
+          [
+            "st2",
+            "st3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When a chronically infected carrier receives immunosuppressive therapy, particularly systemic **corticosteroid therapy** or acquires human T-cell lymphotropic virus type one coinfection, autoinfection accelerates catastrophically into hyperinfection syndrome. Corticosteroids stimulate parasite ecdysteroid receptors, triggering massive larval proliferation and transmural bowel perforation. Filariform larvae disseminate to lungs, liver, and brain, carrying enteric Gram-negative bacilli that cause polymicrobial sepsis and meningitis.",
+      "say": "Corticosteroids trigger catastrophic hyperinfection with disseminated larvae and fatal Gram-negative sepsis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Manifestation",
+          "Pathophysiological Mechanism",
+          "Clinical Features"
+        ],
+        "rows": [
+          [
+            "Larva currens",
+            "Rapid perianal migration of filariform larvae",
+            "Serpiginous urticarial rash moving 5-10 cm/hour"
+          ],
+          [
+            "Pulmonary hyperinfection",
+            "Massive alveolar capillary rupture by larvae",
+            "Severe bronchospasm, alveolar haemorrhage, ARDS"
+          ],
+          [
+            "Bacterial dissemination",
+            "Enteric bacteria carried on larval surface",
+            "Gram-negative bacteremia (E. coli, Klebsiella), meningitis"
+          ],
+          [
+            "Eosinophil paradox",
+            "Severe immunosuppression suppresses eosinophils",
+            "Absent or normal eosinophil count in fulminant disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Routine stool examination demonstrates active, motile rhabditiform larvae, characterized by a short buccal cavity and prominent genital primordium, rather than eggs. The undisputed drug of choice for all forms of strongyloidiasis is oral **ivermectin** (two hundred micrograms per kilogram daily), which activates glutamate-gated chloride channels to paralyze larvae. In hyperinfection syndrome, daily ivermectin combined with albendazole must continue until clinical recovery.",
+      "say": "Oral ivermectin is the drug of choice; stool microscopy shows motile rhabditiform larvae with short buccal cavities.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "iv1",
+            "label": "Screen for Strongyloides via serology before starting high-dose steroids"
+          },
+          {
+            "id": "iv2",
+            "label": "Uncomplicated strongyloidiasis: oral ivermectin 200 ug/kg/day for 2 consecutive days"
+          },
+          {
+            "id": "iv3",
+            "label": "Hyperinfection syndrome: daily ivermectin plus albendazole until repeat stools are negative"
+          }
+        ],
+        "edges": [
+          [
+            "iv1",
+            "iv2"
+          ],
+          [
+            "iv2",
+            "iv3"
+          ]
+        ]
+      }
+    }
+  ]
+}

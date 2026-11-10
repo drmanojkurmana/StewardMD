@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-zoonoses-nipah",
+ "subject": "community-medicine",
+ "module": "cm-zoonoses",
+ "title": "Zoonotic Outbreaks: Nipah Virus, Q Fever and Hydatid Disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Nipah virus: fruit bats and spillover",
+   "tx": "The highly fatal emerging paramyxovirus causing **Nipah virus encephalitis** is harboured naturally in fruit bats of the genus Pteropus, also known as flying foxes. Spillover into human communities occurs when individuals consume raw date palm sap or fallen fruits contaminated with infected bat saliva or urine, or through direct physical handling of sick amplifying domestic livestock, leading to rapid systemic microvascular endothelial infection.",
+   "say": "Nipah virus is carried by large fruit bats known as flying foxes. People become infected by drinking fresh date palm sap contaminated with bat saliva or handling sick animals.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nipah-virus-fig1.webp",
+    "alt": "Diagram illustrating Nipah virus transmission cycle from Pteropus bats to human clusters and hospital outbreaks",
+    "caption": "Nipah virus: Pteropus bat reservoir, date palm sap contamination, human clusters and severe brainstem encephalitis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Clinical manifestations and hospital-acquired transmission",
+   "tx": "After an incubation interval of four to fourteen days, patients develop intense fever, myalgia, vomiting and sore throat, rapidly deteriorating into severe **brainstem encephalitis** marked by dizziness, myoclonus, cerebellar ataxia, segmental motor seizures and deep unarousable coma within twenty-four to forty-eight hours. Close caregivers and nursing staff face severe hospital-acquired transmission through respiratory droplets and bodily secretions, demanding stringent barrier nursing and biosafety protocols.",
+   "say": "Infected patients progress from fever and sore throat to brainstem failure, muscle jerking and coma within two days. The virus spreads to bedside nurses and family through respiratory secretions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Bat sap or fruit ingestion"},
+     {"id": "b", "label": "Acute fever, dizziness, sore throat"},
+     {"id": "c", "label": "Brainstem dysfunction and myoclonus"},
+     {"id": "d", "label": "Rapid coma with 40-75% case fatality"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Outbreak containment and barrier precautions",
+   "tx": "Because Nipah carries a devastating case fatality rate between forty and seventy-five percent, public health officers enforce immediate **contact tracing protocol** around every confirmed index case. Rapid response squads establish strict negative-pressure isolation wards, mandate full personal protective equipment with N95 respirators for clinical personnel, restrict visitor entry, and quarantine all household and hospital contacts for twenty-one days with daily body temperature monitoring.",
+   "say": "Nipah containment demands strict isolation wards, full protective gowns and N95 masks for staff. All close contacts are quarantined for twenty-one days with twice-daily temperature checks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Containment action", "Public health standard", "Underlying objective"],
+    "rows": [
+     ["Isolation ward", "Dedicated negative-pressure rooms", "Prevents nosocomial droplet spread"],
+     ["Staff protection", "Full PPE, double gloves, N95 respirators", "Shields healthcare workers from body fluids"],
+     ["Contact surveillance", "Active follow-up for 21 days", "Covers maximum biological incubation window"],
+     ["Environmental action", "Bamboo skirts on date palm trees", "Stops bats accessing sap collecting pots"]
+    ]
+   }
+  },
+  {
+   "title": "Q fever: Coxiella burnetii and aerosol spread",
+   "tx": "The zoonotic bacterium Coxiella burnetii causes **Q fever transmission**, thriving within sheep, goats and cattle where it concentrates in placenta, amniotic fluid and milk. The organism demonstrates extraordinary environmental resistance, persisting in farm dust for months; agricultural labourers, veterinarians and abattoir personnel inhale windblown desiccated birth fluids during livestock calving seasons, presenting with abrupt high fever, severe retrobulbar headache, chills and dry cough.",
+   "say": "Coxiella burnetii concentrates in the afterbirth of goats, sheep and cows. Farm workers inhale dried birth dust blown by the wind, developing high fever, pounding headache and dry cough.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Q fever",
+     "points": ["Atypical pneumonia and high fever", "Granulomatous hepatitis with doughnut rings", "Responds to oral doxycycline in 14 days"]
+    },
+    "right": {
+     "title": "Chronic Q fever",
+     "points": ["Culture-negative infective endocarditis", "Develops on pre-existing damaged valves", "Requires dual antibiotics for 18 months"]
+    }
+   }
+  },
+  {
+   "title": "Chronic Q fever and valvular endocarditis",
+   "tx": "In individuals with pre-existing prosthetic heart valves or rheumatic valve damage, untreated infection may evolve into **culture-negative endocarditis**, which accounts for the vast majority of chronic Q fever morbidity. Diagnosis relies on phase-specific serology using indirect immunofluorescence, where Phase I IgG antibody titres of one in eight hundred or higher confirm chronic active endocarditis, requiring prolonged dual therapy with oral doxycycline and hydroxychloroquine.",
+   "say": "In patients with damaged heart valves, chronic Q fever causes persistent infective endocarditis with negative routine blood cultures. An elevated Phase one antibody titre confirms the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Inhalation of farm dust during calving"},
+     {"id": "b", "label": "Subclinical infection or acute pneumonia"},
+     {"id": "c", "label": "Colonisation of damaged heart valves"},
+     {"id": "d", "label": "Phase I IgG titre >= 1:800 endocarditis"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Hydatid disease: life cycle and definitive host",
+   "tx": "The parasitic cestode Echinococcus granulosus causes human **hydatid cyst disease**, completing its natural cycle between domestic dogs as definitive hosts and sheep or goats as intermediate hosts. Adult tapeworms live harmlessly in canine intestines, discharging gravid proglottids and infective ova into dog faeces; humans become accidental intermediate hosts through close contact with household dogs or consuming raw unwashed vegetables contaminated with canine excreta.",
+   "say": "Hydatid disease cycles between dogs and sheep. Dogs carry the adult tapeworms and shed eggs in their stool. Humans swallow the eggs through unwashed vegetables or petting farm dogs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Adult tapeworm in dog small intestine"},
+     {"id": "b", "label": "Infective ova shed in canine stool"},
+     {"id": "c", "label": "Sheep and human ingest contaminated ova"},
+     {"id": "d", "label": "Hydatid cyst expansion in human liver"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Hydatid cyst pathology and anaphylactic danger",
+   "tx": "Swallowed oncospheres hatch in the human duodenum, penetrate mesenteric venules, and settle predominantly in the liver parenchyma to develop a **unilocular hydatid cyst**. The expanding slow-growing cyst comprises an outer host-derived pericyst, an intermediate friable laminated membrane, and an inner germinal layer producing brood capsules and hydatid sand; accidental needle trauma or blunt rupture risks massive spillage, provoking fatal systemic anaphylactic shock.",
+   "say": "Hydatid cysts grow slowly inside the liver, filled with pressurized fluid and larval tapeworms. Accidental rupture spills fluid into the abdomen, triggering fatal allergic shock.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cyst anatomical layer", "Biological source", "Surgical / clinical significance"],
+    "rows": [
+     ["Pericyst", "Host inflammatory fibrous tissue", "Vascular shell; safe surgical plane outside it"],
+     ["Laminated membrane", "Parasite acellular chitinous layer", "Elastic white layer; curls inward when torn"],
+     ["Germinal layer", "Living parasite cellular layer", "Produces scolices and daughter cysts"],
+     ["Hydatid fluid", "Clear pressurized antigenic fluid", "Spillage causes anaphylactic shock and dissemination"]
+    ]
+   }
+  },
+  {
+   "title": "PAIR technique and medical therapy for hydatid",
+   "tx": "For accessible hepatic cysts without biliary communication, interventional radiologists perform the **PAIR procedure**, denoting percutaneous aspiration, injection of a scolicidal agent such as hypertonic twenty percent saline or ninety-five percent ethanol, and re-aspiration after ten minutes of contact time. Oral albendazole at fifteen milligrams per kilogram daily is administered for one month before and three months after intervention to prevent secondary peritoneal seeding.",
+   "say": "The PAIR procedure punctures the liver cyst under ultrasound, aspirates fluid, injects concentrated saline to kill parasites, and drains it out. Albendazole cover prevents secondary spread.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Puncture cyst under real-time ultrasound"},
+     {"id": "b", "label": "Aspirate clear pressurized hydatid fluid"},
+     {"id": "c", "label": "Inject scolicidal 20% hypertonic saline"},
+     {"id": "d", "label": "Re-aspirate completely after 10 minutes"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Preventive measures against hydatid transmission",
+   "tx": "Interrupting the pastoral transmission cycle requires enforcing **canine deworming campaigns** combined with strict municipal abattoir hygiene. Dogs must be systematically excluded from slaughterhouses and prevented from feeding on uncooked sheep offal containing hydatid cysts, while pet and shepherd dogs receive regular oral praziquantel at five milligrams per kilogram every six to eight weeks, alongside mandatory public hand-washing education.",
+   "say": "Eradicating hydatid requires deworming farm dogs every two months with praziquantel and strictly stopping dogs from eating raw sheep offal at village slaughterhouses.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Control strategy", "Operational action", "Target transmission seam"],
+    "rows": [
+     ["Abattoir inspection", "Condemnation and burial of cystic offal", "Prevents canine infection from sheep meat"],
+     ["Canine chemoprophylaxis", "Praziquantel 5 mg/kg every 6 to 8 weeks", "Destroys adult tapeworms in dog gut"],
+     ["Food hygiene education", "Washing raw vegetables and boiling water", "Prevents human ingestion of canine ova"],
+     ["Stray dog population control", "Shelter impounding and sterilisation", "Reduces environmental faecal contamination"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,226 @@
+{
+ "key": "ped-seizures-febrile-seizures",
+ "v": 1,
+ "module": "ped-seizures",
+ "subject": "paediatrics",
+ "title": "Pediatric Seizure Disorders: Febrile, Epileptic Encephalopathies, and Status",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Seizures triggered by fever in young children represent the most common convulsive disorder encountered in pediatric emergency medicine. Occurring between six months and five years of age with peak incidence at eighteen months, **pediatric febrile seizures** occur in children without intracranial infection, metabolic disturbance, or preceding afebrile seizures. The convulsion typically occurs early during the rapid rise of temperature.",
+   "say": "Febrile seizures peak at eighteen months in toddlers without central nervous system infection. They are provoked by rapid temperature spikes during common viral fevers.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cns-febrile_seizure.webp",
+    "alt": "Clinical algorithm flowchart illustrating emergency evaluation, red flags, and triage of pediatric febrile convulsions.",
+    "caption": "Diagnostic assessment and classification algorithm for pediatric febrile seizures. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating simple from complex febrile seizures establishes immediate clinical risk and long-term epilepsy prognosis. An episode is classified as a **simple febrile seizure** when it is generalized tonic-clonic in nature, lasts less than fifteen minutes, occurs only once in twenty-four hours, and resolves with complete return to baseline neurological status, carrying an excellent prognosis with negligible epilepsy risk.",
+   "say": "Simple febrile seizures are generalized, last under fifteen minutes, and occur once in twenty-four hours. Complex seizures are focal, prolonged, or recur within twenty-four hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Simple Febrile Seizure",
+     "Complex Febrile Seizure",
+     "Clinical Action Required"
+    ],
+    "rows": [
+     [
+      "Seizure semiology",
+      "Generalized tonic-clonic activity",
+      "Focal onset or focal motor features",
+      "Complex alert: neuroimaging / EEG"
+     ],
+     [
+      "Duration of convulsion",
+      "Short duration (<15 minutes)",
+      "Prolonged (>15 minutes duration)",
+      "Complex alert: abortive rescue therapy"
+     ],
+     [
+      "Frequency in 24 hours",
+      "Single episode within 24 hours",
+      "Recurrent episodes within 24 hours",
+      "Complex alert: close inpatient observation"
+     ],
+     [
+      "Post-ictal examination",
+      "Rapid complete recovery to baseline",
+      "Transient Todd paresis or focal deficit",
+      "Complex alert: urgent lumbar puncture rule-out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A devastating early-life epileptic encephalopathy presents with characteristic motor spasms, profound developmental decline, and chaotic electroencephalography. The classic triad of **infantile spasms in West syndrome** comprises clusters of brief jackknife flexor or extensor contractions upon waking, developmental arrest or regression, and characteristic hypsarrhythmia on electroencephalography, manifesting predominantly between three and eight months of age.",
+   "say": "West syndrome features infantile spasms in clusters, developmental arrest, and hypsarrhythmia on EEG. It represents a catastrophic epileptic encephalopathy in infants.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "West Syndrome Diagnostic Triad",
+     "points": [
+      "Infantile spasms occurring in repetitive clusters",
+      "Clusters typically occur upon awakening or drowsiness",
+      "Regression of previously attained milestones",
+      "Hypsarrhythmia pattern on interictal EEG"
+     ]
+    },
+    "right": {
+     "title": "First-Line Therapeutic Regimens",
+     "points": [
+      "Adrenocorticotropic hormone (ACTH) or oral prednisolone",
+      "Vigabatrin is the specific drug of choice for tuberous sclerosis",
+      "Rapid treatment initiation essential to preserve cognition",
+      "High risk of evolving into Lennox-Gastaut syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chaotic, high-voltage, disorganized electroencephalographic background activity with multi-focal spikes provides the definitive electrophysiological hallmark of infantile spasms. Termed **hypsarrhythmia on electroencephalogram**, this chaotic pattern lacks physiological background rhythms. Treatment requires immediate hormonal therapy with adrenocorticotropic hormone (ACTH) or oral prednisolone; however, in patients with tuberous sclerosis complex, vigabatrin represents the undisputed first-line agent.",
+   "say": "Hypsarrhythmia demonstrates chaotic high-voltage slow waves with multifocal spikes. Treat with ACTH or steroids, but use vigabatrin if tuberous sclerosis is present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticonvulsant Therapy",
+     "Mechanism of Action",
+     "Target Patient Population",
+     "Specific Monitoring Adverse Effect"
+    ],
+    "rows": [
+     [
+      "Adrenocorticotropic hormone (ACTH)",
+      "Suppresses central CRH neuropeptide release",
+      "Cryptogenic / Idiopathic West syndrome",
+      "Hypertension, glycosuria, opportunistic infection"
+     ],
+     [
+      "Oral high-dose prednisolone",
+      "Alternative corticosteroid suppression",
+      "Resource-limited settings where ACTH unavailable",
+      "Cushingoid features, electrolyte disturbance"
+     ],
+     [
+      "Vigabatrin (Sabril)",
+      "Irreversible GABA transaminase inhibition",
+      "Tuberous sclerosis-associated spasms (first-line)",
+      "Permanent concentric visual field constriction"
+     ],
+     [
+      "Sodium valproate / Topiramate",
+      "Broad-spectrum GABA enhancement",
+      "Second-line add-on maintenance",
+      "Hepatotoxicity, hyperammonaemia, weight change"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe childhood epileptic encephalopathy evolving from earlier infantile spasms produces multiple intractable seizure types. Typically emerging between two and seven years, **Lennox-Gastaut syndrome** is defined by a triad of polymorphic seizures including atonic drop attacks, atypical absences, and nocturnal tonic spasms, severe cognitive impairment, and an interictal EEG displaying diffuse slow spike-and-wave complexes below 2.5 Hertz.",
+   "say": "Lennox-Gastaut syndrome presents with multiple refractory seizure types including drop attacks, intellectual disability, and slow spike-and-wave discharges under 2.5 Hertz.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lennox-Gastaut Triad",
+     "points": [
+      "Polymorphic seizures: atonic drop attacks, tonic, atypical absence",
+      "Atonic drop attacks cause frequent traumatic facial injuries",
+      "Severe intellectual disability and behavioral disturbances",
+      "EEG shows slow spike-and-wave complexes (<2.5 Hz)"
+     ]
+    },
+    "right": {
+     "title": "Refractory Medical Management",
+     "points": [
+      "Highly resistant to conventional anticonvulsants",
+      "Valproate, clobazam, lamotrigine, and rufinamide",
+      "Ketogenic diet provides significant seizure reduction",
+      "Corpus callosotomy considered for disabling drop attacks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Brief, frequent staring spells provoked by hyperventilation characterize idiopathic generalized epilepsy in school-aged children. Classical **childhood absence epilepsy** presents between four and ten years with sudden five- to fifteen-second behavioral arrests without aura or post-ictal confusion, occurring dozens of times daily. Interictal electroencephalography demonstrates pathognomonic, generalized, symmetrical, synchronous three-Hertz spike-and-wave discharges.",
+   "say": "Childhood absence epilepsy causes brief staring spells provoked by hyperventilation. The electroencephalogram shows classic three-Hertz spike-and-wave complexes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-valproate.webp",
+    "alt": "Pharmaceutical packaging and dosing guidelines for sodium valproate oral solution in pediatric epilepsy.",
+    "caption": "Sodium valproate formulations utilized in childhood absence and juvenile myoclonic epilepsies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "First-line pharmacotherapy for typical absence seizures provides high rates of complete electroclinical remission. The primary drugs of choice are ethosuximide and **sodium valproate for absence epilepsy**, with ethosuximide preferred in pure absence epilepsy due to superior tolerability, and valproate preferred if concurrent generalized tonic-clonic convulsions exist. Sodium channel blockers like carbamazepine and phenytoin are strictly contraindicated as they precipitate absence status.",
+   "say": "Ethosuximide and sodium valproate are first-line treatments for absence epilepsy. Carbamazepine and phenytoin must be avoided because they aggravate absence seizures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Epilepsy Syndrome",
+     "Peak Age of Onset",
+     "Classic EEG Pattern",
+     "First-Line Anticonvulsant Drug"
+    ],
+    "rows": [
+     [
+      "Childhood absence epilepsy",
+      "4 to 10 years of age",
+      "Synchronous 3 Hz spike-and-wave complexes",
+      "Ethosuximide or Sodium valproate"
+     ],
+     [
+      "Juvenile myoclonic epilepsy",
+      "12 to 18 years (Adolescents)",
+      "Fast polyspike-and-wave discharges (4-6 Hz)",
+      "Sodium valproate (Lifelong therapy)"
+     ],
+     [
+      "Benign rolandic epilepsy",
+      "3 to 12 years (Centrotemporal)",
+      "Centrotemporal sharp waves in sleep",
+      "Observation or Levetiracetam / Sulthiame"
+     ],
+     [
+      "Contraindicated in absence",
+      "Absence & myoclonic syndromes",
+      "Can exacerbate seizures or cause status",
+      "Avoid carbamazepine, phenytoin, vigabatrin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous convulsive activity exceeding five minutes constitutes a critical medical emergency threatening permanent neuronal necrosis. Immediate emergency management of **pediatric status epilepticus** begins with securing airway, breathing, and circulation with high-flow oxygen, followed by intravenous lorazepam (0.1 mg/kg) or midazolam. If seizures persist beyond ten minutes, second-line infusions include intravenous levetiracetam (60 mg/kg), fosphenytoin (20 mg PE/kg), or valproate sodium.",
+   "say": "Status epilepticus is defined by five minutes of continuous seizures. Administer IV lorazepam immediately, followed by levetiracetam or fosphenytoin if seizures continue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Line Rescue (0 to 10 Minutes)",
+     "points": [
+      "Secure airway, supply high-flow 100% oxygen",
+      "Check bedside blood glucose immediately",
+      "IV lorazepam 0.1 mg/kg (max 4 mg) over 2 minutes",
+      "Or buccal midazolam 0.2 mg/kg / rectal diazepam 0.5 mg/kg"
+     ]
+    },
+    "right": {
+     "title": "Second-Line Anticonvulsants (10 to 30 Min)",
+     "points": [
+      "IV levetiracetam 60 mg/kg (max 4500 mg) over 10 min",
+      "Or IV fosphenytoin 20 mg PE/kg (max 1500 mg PE)",
+      "Or IV sodium valproate 40 mg/kg (max 3000 mg)",
+      "Prepare for PICU rapid sequence intubation if refractory"
+     ]
+    }
+   }
+  }
+ ]
+}

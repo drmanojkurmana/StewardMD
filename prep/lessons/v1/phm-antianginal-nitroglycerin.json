@@ -1,0 +1,242 @@
+{
+  "v": 1,
+  "module": "phm-antianginal",
+  "subject": "pharmacology",
+  "title": "Nitrates: Nitroglycerin, Isosorbide and Nitrate Tolerance",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Sublingual **nitroglycerin** (glyceryl trinitrate) aborts an angina attack in one to three minutes because the rich sublingual venous drainage bypasses hepatic first pass destruction that swallows most of an oral dose. Inside smooth muscle it is denitrated to nitric oxide, cyclic GMP rises, myosin light chains dephosphorylate and the vessel relaxes. Tablets degrade with light, air and moisture, so patients replace opened bottles regularly and expect a tingle that confirms potency.",
+      "say": "Under the tongue, nitroglycerin works in minutes because it dodges the liver on its way to the veins.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sl",
+            "label": "Sublingual nitroglycerin absorbed directly to systemic veins"
+          },
+          {
+            "id": "no",
+            "label": "Nitric oxide released in vascular smooth muscle"
+          },
+          {
+            "id": "cgmp",
+            "label": "Cyclic GMP rises, myosin light chain dephosphorylated"
+          },
+          {
+            "id": "relax",
+            "label": "Venodilatation predominates, preload falls"
+          }
+        ],
+        "edges": [
+          [
+            "sl",
+            "no"
+          ],
+          [
+            "no",
+            "cgmp"
+          ],
+          [
+            "cgmp",
+            "relax"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nitrates dilate veins far more than arteries at clinical doses, so their antianginal magic is mainly **preload** reduction: blood pools in capacitance veins, ventricular filling and wall tension fall, and myocardial oxygen demand drops to meet the fixed supply. Coronary dilatation helps at stenoses and in spasm, but demand reduction explains relief even when a rigid atherosclerotic artery cannot dilate at all.",
+      "say": "Nitrates rest the heart by pooling blood in veins and cutting wall tension, not mainly by opening the blocked artery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Demand side gains",
+          "points": [
+            "Venodilatation pools blood in capacitance vessels",
+            "Preload, chamber size and wall tension fall",
+            "Oxygen demand drops toward the fixed supply",
+            "Subendocardial perfusion improves as diastolic pressure falls"
+          ]
+        },
+        "right": {
+          "title": "Supply side gains",
+          "points": [
+            "Epicardial coronary segments dilate, even at stenoses",
+            "Collateral flow to ischaemic zones improves",
+            "Coronary spasm is directly antagonised",
+            "Platelet aggregation modestly inhibited by nitric oxide"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "An intravenous nitrate infusion titrated against pain and pressure serves **unstable angina** and acute heart failure, while the spray suits patients whose tablets have expired mid attack. Failure of three sublingual doses at five minute intervals is not a dosing problem but a triage signal: the patient needs an emergency department, aspirin and an infarction workup. Headache, flushing and postural dizziness are the everyday costs of cerebral and cutaneous vasodilatation.",
+      "say": "Three doses without relief means hospital, not a fourth dose; headache and flushing are the usual toll.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acs-fig1.webp",
+        "alt": "Acute coronary syndrome pathophysiology showing plaque disruption and thrombus formation",
+        "caption": "Acute coronary syndrome pathophysiology; pain persisting after three nitrate doses is managed on this pathway, not with more nitrate."
+      }
+    },
+    {
+      "tx": "For prevention rather than rescue, **isosorbide mononitrate** is the orally reliable workhorse: it is the active metabolite of isosorbide dinitrate, escapes the variable first pass activation its parent needs, and gives predictable levels once or twice daily. Isosorbide dinitrate itself is still used, including with hydralazine in heart failure, but variable conversion between patients makes the mononitrate the tidier examination and prescribing answer.",
+      "say": "Mononitrate is the predictable oral nitrate; the dinitrate needs liver activation that varies between patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Isosorbide mononitrate",
+          "points": [
+            "Active as swallowed, no activation step needed",
+            "Complete, predictable oral bioavailability",
+            "Once or twice daily prophylaxis dosing",
+            "Needs a daily nitrate free interval built in"
+          ]
+        },
+        "right": {
+          "title": "Isosorbide dinitrate",
+          "points": [
+            "Prodrug converted to mononitrate in the liver",
+            "Variable bioavailability between patients",
+            "Partner to hydralazine in heart failure regimens",
+            "Sublingual form can rescue attacks, slower than nitroglycerin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Continuous nitrate exposure bleaches its own effect within 24 hours, the phenomenon of **nitrate tolerance**: sulfhydryl groups needed to generate nitric oxide are depleted, oxidative stress scavenges what is made, and reflex neurohormonal activation fights back. Transdermal patches worn around the clock fail by the second day, which astonished early users. Sensitivity returns after ten to twelve hours without nitrate, so every chronic regimen is built around a daily free interval.",
+      "say": "Round the clock nitrate stops working within a day; tolerance is pharmacology, not the patient imagining it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cont",
+            "label": "Continuous nitrate exposure beyond 24 hours"
+          },
+          {
+            "id": "sh",
+            "label": "Sulfhydryl depletion and oxidative scavenging"
+          },
+          {
+            "id": "reflex",
+            "label": "Reflex renin and sympathetic activation adds opposition"
+          },
+          {
+            "id": "tol",
+            "label": "Antianginal effect fades: nitrate tolerance established"
+          }
+        ],
+        "edges": [
+          [
+            "cont",
+            "sh"
+          ],
+          [
+            "sh",
+            "tol"
+          ],
+          [
+            "cont",
+            "reflex"
+          ],
+          [
+            "reflex",
+            "tol"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prescribers engineer the **free interval** rather than fight tolerance: patches come off overnight, mononitrate is dosed asymmetrically at 8 am and 2 pm, and dinitrate skips the evening dose. The unprotected window is placed when angina is least likely, usually asleep, and covered by a beta blocker or calcium channel blocker in exertional disease. Escalating the nitrate dose to bulldoze tolerance only deepens it.",
+      "say": "Schedule the nitrate free window overnight and cover it with another class; never escalate through tolerance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regimens that preserve effect",
+          "points": [
+            "Patch on by day, off for 10 to 12 hours overnight",
+            "Mononitrate at 8 am and 2 pm, none in the evening",
+            "Beta blocker or calcium blocker covers the gap",
+            "Free interval timed to the patient's quiet hours"
+          ]
+        },
+        "right": {
+          "title": "Regimens that destroy effect",
+          "points": [
+            "Patch left on continuously for days",
+            "Even eight hourly oral dosing around the clock",
+            "Dose escalation chasing a fading response",
+            "Intravenous infusion beyond 24 hours without review"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Explosives workers taught medicine this pharmacology first: chronic factory exposure produced tolerance all week, then withdrawal angina and even infarction on days away, christened **Monday disease** as symptoms struck on returning after the weekend break had restored sensitivity and exposure resumed. The story is more than colour; it demonstrates dependence of vascular tone on exogenous nitrate and warns that abrupt withdrawal of long infusions can rebound coronary tone.",
+      "say": "Monday disease in explosives workers proved tolerance and withdrawal spasm decades before patches repeated the lesson.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "week",
+            "label": "Week long factory nitrate exposure builds tolerance"
+          },
+          {
+            "id": "weekend",
+            "label": "Weekend away restores vascular sensitivity"
+          },
+          {
+            "id": "monday",
+            "label": "Monday re exposure and withdrawal swings provoke symptoms"
+          },
+          {
+            "id": "lesson",
+            "label": "Lesson: taper long infusions, never stop abruptly"
+          }
+        ],
+        "edges": [
+          [
+            "week",
+            "weekend"
+          ],
+          [
+            "weekend",
+            "monday"
+          ],
+          [
+            "monday",
+            "lesson"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Two interactions can crash pressure: nitrates with **sildenafil** or any phosphodiesterase 5 inhibitor multiply cyclic GMP from both production and breakdown sides, and nitrates within 24 hours of sildenafil or 48 hours of tadalafil are contraindicated. Separately, nitrates in right ventricular infarction or severe aortic stenosis remove the preload those circulations depend on. Both scenarios headline the companion lesson on sildenafil interaction and variant angina.",
+      "say": "Nitrate plus sildenafil can collapse pressure; preload dependent hearts collapse on nitrates alone. Both are examination favourites.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dangerous combinations",
+          "points": [
+            "Sildenafil within 24 hours, tadalafil within 48 hours",
+            "Riociguat: absolute contraindication with nitrates",
+            "Alcohol and other vasodilators add postural falls",
+            "Volume depleted patients faint on standing doses"
+          ]
+        },
+        "right": {
+          "title": "Dangerous circulations",
+          "points": [
+            "Right ventricular infarction depends on preload",
+            "Severe aortic stenosis cannot raise output to compensate",
+            "Hypertrophic obstructive cardiomyopathy worsens",
+            "Inferior infarction with bradycardia: dose with caution"
+          ]
+        }
+      }
+    }
+  ]
+}

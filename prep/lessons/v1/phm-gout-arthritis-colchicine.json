@@ -1,252 +1,263 @@
 {
-  "v": 1,
-  "module": "phm-gout-arthritis",
-  "subject": "pharmacology",
-  "title": "Microtubule Disrupters, Uricosurics, and Recombinant Uricases in Gout Management",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "The ancient phenanthrene alkaloid derived from the autumn crocus utilized for acute termination and prophylaxis of gout flares is **colchicine**. By binding with high affinity to tubulin dimers, colchicine arrests microtubule polymerization, impairing neutrophil motility, chemotaxis, and phagocytosis. Furthermore, it inhibits the NLRP3 inflammasome, suppressing caspase-1 activation and cleavage of pro-interleukin-1-beta. Administered as 1.2 mg orally followed by 0.6 mg one hour later, it terminates acute pain within twenty-four hours. Dose-dependent gastrointestinal toxicity, notably nausea, vomiting, abdominal cramping, and profuse watery diarrhea, affects a majority of patients.",
-      "say": "Colchicine arrests microtubule assembly and inhibits the NLRP3 inflammasome to suppress acute gouty inflammation.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "tubulin",
-            "label": "Colchicine binds beta-tubulin dimers with high affinity"
-          },
-          {
-            "id": "micro",
-            "label": "Arrest of microtubule assembly and cellular mitotic spindle"
-          },
-          {
-            "id": "nlrp3",
-            "label": "Inhibition of NLRP3 inflammasome assembly and caspase-1"
-          },
-          {
-            "id": "arrest",
-            "label": "Suppression of neutrophil chemotaxis, degranulation, and IL-1-beta release"
-          }
-        ],
-        "edges": [
-          [
-            "tubulin",
-            "micro"
-          ],
-          [
-            "micro",
-            "nlrp3"
-          ],
-          [
-            "nlrp3",
-            "arrest"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "phm-gout-arthritis",
+ "subject": "pharmacology",
+ "title": "Microtubule Disrupters, Uricosurics, and Recombinant Uricases in Gout Management",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The ancient phenanthrene alkaloid derived from the autumn crocus utilized for acute termination and prophylaxis of gout flares is **colchicine**. By binding with high affinity to tubulin dimers, colchicine arrests microtubule polymerization, impairing neutrophil motility, chemotaxis, and phagocytosis. Furthermore, it inhibits the NLRP3 inflammasome, suppressing caspase-1 activation and cleavage of pro-interleukin-1-beta. Administered as 1.2 mg orally followed by 0.6 mg one hour later, it terminates acute pain within twenty-four hours. Dose-dependent gastrointestinal toxicity, notably nausea, vomiting, abdominal cramping, and profuse watery diarrhea, affects a majority of patients.",
+   "say": "Colchicine arrests microtubule assembly and inhibits the NLRP3 inflammasome to suppress acute gouty inflammation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tubulin",
+      "label": "Colchicine binds beta-tubulin dimers with high affinity"
+     },
+     {
+      "id": "micro",
+      "label": "Arrest of microtubule assembly and cellular mitotic spindle"
+     },
+     {
+      "id": "nlrp3",
+      "label": "Inhibition of NLRP3 inflammasome assembly and caspase-1"
+     },
+     {
+      "id": "arrest",
+      "label": "Suppression of neutrophil chemotaxis, degranulation, and IL-1-beta release"
+     }
+    ],
+    "edges": [
+     [
+      "tubulin",
+      "micro"
+     ],
+     [
+      "micro",
+      "nlrp3"
+     ],
+     [
+      "nlrp3",
+      "arrest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The prototypical uricosuric agent that promotes renal elimination of uric acid by inhibiting proximal tubular reabsorption is **probenecid**. In the renal proximal convoluted tubule, probenecid competitively blocks the apical URAT1 (urate transporter 1) and GLUT9 exchangers, preventing the reabsorption of filtered uric acid back into peritubular capillaries. This markedly enhances net urinary uric acid clearance, lowering serum urate. It is contraindicated in patients with pre-existing nephrolithiasis or severe renal failure with creatinine clearance below 30 mL/min, and liberal hydration is mandatory to prevent uric acid crystallization in renal tubules.",
+   "say": "Probenecid blocks URAT1 transporters in proximal tubules to enhance urinary excretion of uric acid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "URAT1 Inhibitor (Probenecid)",
+     "points": [
+      "Inhibits apical proximal tubular URAT1 and GLUT9 transporters",
+      "Enhances renal excretion of uric acid without altering synthesis",
+      "Ineffective when creatinine clearance falls below 30 mL/min",
+      "Elevates urinary uric acid concentration: nephrolithiasis risk"
+     ]
     },
-    {
-      "tx": "The prototypical uricosuric agent that promotes renal elimination of uric acid by inhibiting proximal tubular reabsorption is **probenecid**. In the renal proximal convoluted tubule, probenecid competitively blocks the apical URAT1 (urate transporter 1) and GLUT9 exchangers, preventing the reabsorption of filtered uric acid back into peritubular capillaries. This markedly enhances net urinary uric acid clearance, lowering serum urate. It is contraindicated in patients with pre-existing nephrolithiasis or severe renal failure with creatinine clearance below 30 mL/min, and liberal hydration is mandatory to prevent uric acid crystallization in renal tubules.",
-      "say": "Probenecid blocks URAT1 transporters in proximal tubules to enhance urinary excretion of uric acid.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "URAT1 Inhibitor (Probenecid)",
-          "points": [
-            "Inhibits apical proximal tubular URAT1 and GLUT9 transporters",
-            "Enhances renal excretion of uric acid without altering synthesis",
-            "Ineffective when creatinine clearance falls below 30 mL/min",
-            "Elevates urinary uric acid concentration: nephrolithiasis risk"
-          ]
-        },
-        "right": {
-          "title": "Xanthine Oxidase Inhibitors (Allopurinol, Febuxostat)",
-          "points": [
-            "Inhibits terminal purine degradation enzyme xanthine oxidase",
-            "Reduces total systemic production of uric acid",
-            "Decreases both serum and urinary uric acid concentrations",
-            "Effective across wide ranges of renal impairment"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The recombinant formulation of the enzyme urate oxidase produced by genetically modified Saccharomyces cerevisiae is **rasburicase**. Humans lack functional uricase due to evolutionary nonsense mutations in the UOX gene. Intravenous rasburicase enzymatically catalyzes the rapid oxidation of poorly soluble uric acid into allantoin, an inactive, non-toxic metabolite that is five to ten times more water-soluble and excreted effortlessly by the kidneys. It is indicated for emergency prevention and treatment of hyperuricemia in pediatric and adult leukemia and lymphoma patients receiving cytotoxic chemotherapy for tumor lysis syndrome.",
-      "say": "Rasburicase enzymatically oxidizes uric acid into soluble allantoin to prevent tumor lysis acute kidney injury.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Uric Acid (Endogenous Human End-Product)",
-          "points": [
-            "Terminal purine catabolite in humans due to non-functional uricase gene",
-            "Very low aqueous solubility at acidic urinary pH (pKa 5.75)",
-            "Precipitates readily as monosodium urate in joints and tubular lumens",
-            "Precipitates acute uric acid nephropathy in tumor lysis syndrome"
-          ]
-        },
-        "right": {
-          "title": "Allantoin (Uricase Enzymatic Cleavage Product)",
-          "points": [
-            "Formed by catalytic oxidation via recombinant rasburicase or pegloticase",
-            "Five to ten times higher aqueous solubility than parent uric acid",
-            "Completely freely filtered and excreted unchanged by the kidneys",
-            "Zero crystallization tendency in distal renal collecting tubules"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "A recombinant mammalian uricase enzyme covalently conjugated to multiple strands of monomethoxypolyethylene glycol is **pegloticase**. Formulated as an intravenous infusion administered every two weeks at 8 mg, pegylation dramatically extends its elimination half-life to twelve days while blunting host immunogenicity. Pegloticase is reserved for severe, refractory chronic tophaceous gout in patients failing or intolerant to oral xanthine oxidase inhibitors and uricosurics. It achieves rapid dissolution of chronic subcutaneous tophi, though development of high-titer anti-drug antibodies frequently causes loss of efficacy and acute infusion reactions.",
-      "say": "Pegloticase is a pegylated uricase infusion that rapidly dissolves subcutaneous tophi in treatment-refractory gout.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Urate-lowering drug class",
-          "Representative agent",
-          "Primary mechanism of action",
-          "Preferred clinical niche"
-        ],
-        "rows": [
-          [
-            "Xanthine oxidase inhibitor",
-            "Allopurinol / Febuxostat",
-            "Inhibits uric acid synthesis from purines",
-            "First-line chronic therapy for all gout patients"
-          ],
-          [
-            "Uricosuric agent",
-            "Probenecid",
-            "Blocks tubular URAT1 uric acid reabsorption",
-            "Underexcreters with preserved renal function"
-          ],
-          [
-            "Recombinant uricase (short)",
-            "Rasburicase",
-            "Converts uric acid to soluble allantoin",
-            "Acute prevention of tumor lysis syndrome"
-          ],
-          [
-            "Pegylated uricase (long)",
-            "Pegloticase",
-            "Enzymatic oxidation to allantoin (bi-weekly IV)",
-            "Refractory chronic disabling tophaceous gout"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The advanced, destructive stage of chronic hyperuricemia characterized by the deposition of large solid chalky aggregates of monosodium urate is **tophaceous gout**. Tophi develop insidiously in articular cartilage, subchondral bone, periarticular tendons, olecranon bursae, and the helix of the external ear, surrounded by a chronic foreign-body granulomatous reaction containing multinucleated giant cells. On plain radiographs, chronic tophi produce characteristic punched-out periarticular erosions with sclerotic borders and overhanging cortical edges, requiring aggressive urate lowering below 5 mg/dL to dissolve tophaceous deposits.",
-      "say": "Tophaceous gout produces destructive foreign-body granulomas with characteristic overhanging cortical edges on radiographs.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/tophaceous-gout-fig1.webp",
-        "alt": "Clinical and radiographic features of chronic tophaceous gout",
-        "caption": "Chronic tophaceous gout demonstrating subcutaneous periarticular tophi, marginal overhanging bone erosions, and foreign-body giant cell histopathology."
-      }
-    },
-    {
-      "tx": "The overarching therapeutic category of pharmacological agents that alter the underlying immunopathogenetic disease process rather than merely suppressing symptoms is a **DMARD** (disease-modifying antirheumatic drug). Subdivided into conventional synthetic DMARDs like methotrexate and leflunomide, targeted synthetic DMARDs like tofacitinib, and biologic DMARDs like adalimumab and etanercept, these drugs arrest radiographic joint erosion, preserve functional physical capacity, and reduce systemic cardiovascular mortality in inflammatory polyarthritis. Because their clinical benefits require six to twelve weeks to manifest, bridging anti-inflammatory therapy with NSAIDs or low-dose glucocorticoids is routinely employed.",
-      "say": "DMARDs arrest structural joint destruction in inflammatory arthritis, divided into conventional, targeted, and biologic classes.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "DMARD category",
-          "Representative therapeutic entities",
-          "Primary cellular or molecular target",
-          "Approximate onset of clinical benefit"
-        ],
-        "rows": [
-          [
-            "Conventional synthetic (csDMARD)",
-            "Methotrexate, leflunomide, sulfasalazine",
-            "Purine/pyrimidine synthesis; AICAR transformylase",
-            "6 to 12 weeks (slow onset)"
-          ],
-          [
-            "Targeted synthetic (tsDMARD)",
-            "Tofacitinib, baricitinib, upadacitinib",
-            "Intracellular Janus kinase (JAK) enzymes",
-            "2 to 4 weeks (rapid oral action)"
-          ],
-          [
-            "Biologic originator (bDMARD)",
-            "Adalimumab, infliximab, etanercept",
-            "Extracellular TNF-alpha cytokine trimers",
-            "2 to 6 weeks (parenteral biologics)"
-          ],
-          [
-            "Biologic receptor blocker",
-            "Tocilizumab (IL-6R), abatacept (CD80/86)",
-            "Interleukin-6 receptors and T-cell costimulation",
-            "4 to 8 weeks (parenteral infusion)"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "An absolute clinical contraindication to intravenous rasburicase and pegloticase therapy is **glucose-6-phosphate dehydrogenase deficiency** (G6PD deficiency). The catalytic conversion of uric acid to allantoin by recombinant uricase generates hydrogen peroxide as an equimolar chemical byproduct. In patients lacking G6PD, erythrocytes cannot regenerate reduced glutathione via NADPH, leaving them vulnerable to severe oxidant stress that precipitates acute methemoglobinemia, severe intravascular hemolysis, and fatal hemolytic crises. Pre-treatment G6PD enzymatic screening is legally mandated prior to administering any uricase enzyme formulation.",
-      "say": "Recombinant uricase generates hydrogen peroxide, triggering catastrophic hemolysis in G6PD-deficient patients.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "urate",
-            "label": "Uricase oxidizes uric acid to allantoin"
-          },
-          {
-            "id": "h2o2",
-            "label": "Equimolar generation of reactive hydrogen peroxide (H2O2)"
-          },
-          {
-            "id": "g6pd",
-            "label": "G6PD deficiency impairs NADPH production and glutathione reduction"
-          },
-          {
-            "id": "lysis",
-            "label": "Severe oxidative erythrocyte membrane damage, hemolysis, and methemoglobinemia"
-          }
-        ],
-        "edges": [
-          [
-            "urate",
-            "h2o2"
-          ],
-          [
-            "h2o2",
-            "g6pd"
-          ],
-          [
-            "g6pd",
-            "lysis"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Crucial clinical and laboratory distinction between monosodium urate arthritis and calcium pyrophosphate dihydrate crystal deposition disease is **pseudogout differentiation**. Under compensated polarized light microscopy, gout reveals needle-shaped monosodium urate crystals displaying strong negative birefringence (yellow when oriented parallel to the slow axis of the red compensator). In contrast, pseudogout exhibits rhomboid-shaped calcium pyrophosphate crystals displaying weak positive birefringence (blue when parallel), typically targeting the knee joint and demonstrating linear punctate chondrocalcinosis within articular fibrocartilage on plain radiographs.",
-      "say": "Gout displays needle-shaped negatively birefringent crystals, whereas pseudogout shows rhomboid positively birefringent crystals.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Gout (Monosodium Urate)",
-          "points": [
-            "Needle-shaped intracellular and extracellular crystals",
-            "Strong negative birefringence (yellow when parallel to red compensator)",
-            "Target: first metatarsophalangeal joint (podagra), ankles, knees",
-            "Therapy: colchicine, NSAIDs, allopurinol, febuxostat"
-          ]
-        },
-        "right": {
-          "title": "Pseudogout / CPPD (Calcium Pyrophosphate)",
-          "points": [
-            "Rhomboid or rod-shaped polymorphic crystals",
-            "Weak positive birefringence (blue when parallel to red compensator)",
-            "Target: large joints, predominantly knees, wrists, symphysis pubis",
-            "Therapy: intra-articular corticosteroids, NSAIDs, colchicine"
-          ]
-        }
-      }
+    "right": {
+     "title": "Xanthine Oxidase Inhibitors (Allopurinol, Febuxostat)",
+     "points": [
+      "Inhibits terminal purine degradation enzyme xanthine oxidase",
+      "Reduces total systemic production of uric acid",
+      "Decreases both serum and urinary uric acid concentrations",
+      "Effective across wide ranges of renal impairment"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "The recombinant formulation of the enzyme urate oxidase produced by genetically modified Saccharomyces cerevisiae is **rasburicase**. Humans lack functional uricase due to evolutionary nonsense mutations in the UOX gene. Intravenous rasburicase enzymatically catalyzes the rapid oxidation of poorly soluble uric acid into allantoin, an inactive, non-toxic metabolite that is five to ten times more water-soluble and excreted effortlessly by the kidneys. It is indicated for emergency prevention and treatment of hyperuricemia in pediatric and adult leukemia and lymphoma patients receiving cytotoxic chemotherapy for tumor lysis syndrome.",
+   "say": "Rasburicase enzymatically oxidizes uric acid into soluble allantoin to prevent tumor lysis acute kidney injury.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uric Acid (Endogenous Human End-Product)",
+     "points": [
+      "Terminal purine catabolite in humans due to non-functional uricase gene",
+      "Very low aqueous solubility at acidic urinary pH (pKa 5.75)",
+      "Precipitates readily as monosodium urate in joints and tubular lumens",
+      "Precipitates acute uric acid nephropathy in tumor lysis syndrome"
+     ]
+    },
+    "right": {
+     "title": "Allantoin (Uricase Enzymatic Cleavage Product)",
+     "points": [
+      "Formed by catalytic oxidation via recombinant rasburicase or pegloticase",
+      "Five to ten times higher aqueous solubility than parent uric acid",
+      "Completely freely filtered and excreted unchanged by the kidneys",
+      "Zero crystallization tendency in distal renal collecting tubules"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A recombinant mammalian uricase enzyme covalently conjugated to multiple strands of monomethoxypolyethylene glycol is **pegloticase**. Formulated as an intravenous infusion administered every two weeks at 8 mg, pegylation dramatically extends its elimination half-life to twelve days while blunting host immunogenicity. Pegloticase is reserved for severe, refractory chronic tophaceous gout in patients failing or intolerant to oral xanthine oxidase inhibitors and uricosurics. It achieves rapid dissolution of chronic subcutaneous tophi, though development of high-titer anti-drug antibodies frequently causes loss of efficacy and acute infusion reactions.",
+   "say": "Pegloticase is a pegylated uricase infusion that rapidly dissolves subcutaneous tophi in treatment-refractory gout.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urate-lowering drug class",
+     "Representative agent",
+     "Primary mechanism of action",
+     "Preferred clinical niche"
+    ],
+    "rows": [
+     [
+      "Xanthine oxidase inhibitor",
+      "Allopurinol / Febuxostat",
+      "Inhibits uric acid synthesis from purines",
+      "First-line chronic therapy for all gout patients"
+     ],
+     [
+      "Uricosuric agent",
+      "Probenecid",
+      "Blocks tubular URAT1 uric acid reabsorption",
+      "Underexcreters with preserved renal function"
+     ],
+     [
+      "Recombinant uricase (short)",
+      "Rasburicase",
+      "Converts uric acid to soluble allantoin",
+      "Acute prevention of tumor lysis syndrome"
+     ],
+     [
+      "Pegylated uricase (long)",
+      "Pegloticase",
+      "Enzymatic oxidation to allantoin (bi-weekly IV)",
+      "Refractory chronic disabling tophaceous gout"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The advanced, destructive stage of chronic hyperuricemia characterized by the deposition of large solid chalky aggregates of monosodium urate is **tophaceous gout**. Tophi develop insidiously in articular cartilage, subchondral bone, periarticular tendons, olecranon bursae, and the helix of the external ear, surrounded by a chronic foreign-body granulomatous reaction containing multinucleated giant cells. On plain radiographs, chronic tophi produce characteristic punched-out periarticular erosions with sclerotic borders and overhanging cortical edges, requiring aggressive urate lowering below 5 mg/dL to dissolve tophaceous deposits.",
+   "say": "Tophaceous gout produces destructive foreign-body granulomas with characteristic overhanging cortical edges on radiographs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tophaceous-gout-fig1.webp",
+    "alt": "Clinical and radiographic features of chronic tophaceous gout",
+    "caption": "Chronic tophaceous gout demonstrating subcutaneous periarticular tophi, marginal overhanging bone erosions, and foreign-body giant cell histopathology."
+   }
+  },
+  {
+   "tx": "The overarching therapeutic category of pharmacological agents that alter the underlying immunopathogenetic disease process rather than merely suppressing symptoms is a **DMARD** (disease-modifying antirheumatic drug). Subdivided into conventional synthetic DMARDs like methotrexate and leflunomide, targeted synthetic DMARDs like tofacitinib, and biologic DMARDs like adalimumab and etanercept, these drugs arrest radiographic joint erosion, preserve functional physical capacity, and reduce systemic cardiovascular mortality in inflammatory polyarthritis. Because their clinical benefits require six to twelve weeks to manifest, bridging anti-inflammatory therapy with NSAIDs or low-dose glucocorticoids is routinely employed.",
+   "say": "DMARDs arrest structural joint destruction in inflammatory arthritis, divided into conventional, targeted, and biologic classes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "DMARD category",
+     "Representative therapeutic entities",
+     "Primary cellular or molecular target",
+     "Approximate onset of clinical benefit"
+    ],
+    "rows": [
+     [
+      "Conventional synthetic (csDMARD)",
+      "Methotrexate, leflunomide, sulfasalazine",
+      "Purine/pyrimidine synthesis; AICAR transformylase",
+      "6 to 12 weeks (slow onset)"
+     ],
+     [
+      "Targeted synthetic (tsDMARD)",
+      "Tofacitinib, baricitinib, upadacitinib",
+      "Intracellular Janus kinase (JAK) enzymes",
+      "2 to 4 weeks (rapid oral action)"
+     ],
+     [
+      "Biologic originator (bDMARD)",
+      "Adalimumab, infliximab, etanercept",
+      "Extracellular TNF-alpha cytokine trimers",
+      "2 to 6 weeks (parenteral biologics)"
+     ],
+     [
+      "Biologic receptor blocker",
+      "Tocilizumab (IL-6R), abatacept (CD80/86)",
+      "Interleukin-6 receptors and T-cell costimulation",
+      "4 to 8 weeks (parenteral infusion)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An absolute clinical contraindication to intravenous rasburicase and pegloticase therapy is **glucose-6-phosphate dehydrogenase deficiency** (G6PD deficiency). The catalytic conversion of uric acid to allantoin by recombinant uricase generates hydrogen peroxide as an equimolar chemical byproduct. In patients lacking G6PD, erythrocytes cannot regenerate reduced glutathione via NADPH, leaving them vulnerable to severe oxidant stress that precipitates acute methemoglobinemia, severe intravascular hemolysis, and fatal hemolytic crises. Pre-treatment G6PD enzymatic screening is legally mandated prior to administering any uricase enzyme formulation.",
+   "say": "Recombinant uricase generates hydrogen peroxide, triggering catastrophic hemolysis in G6PD-deficient patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "urate",
+      "label": "Uricase oxidizes uric acid to allantoin"
+     },
+     {
+      "id": "h2o2",
+      "label": "Equimolar generation of reactive hydrogen peroxide (H2O2)"
+     },
+     {
+      "id": "g6pd",
+      "label": "G6PD deficiency impairs NADPH production and glutathione reduction"
+     },
+     {
+      "id": "lysis",
+      "label": "Severe oxidative erythrocyte membrane damage, hemolysis, and methemoglobinemia"
+     }
+    ],
+    "edges": [
+     [
+      "urate",
+      "h2o2"
+     ],
+     [
+      "h2o2",
+      "g6pd"
+     ],
+     [
+      "g6pd",
+      "lysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnosis of acute crystal arthropathies relies on polarized light microscopic analysis of synovial fluid aspirates. Monosodium urate crystals display **negative birefringence crystals**, appearing bright yellow when aligned parallel to the slow axis of the red compensator filter. In contrast, calcium pyrophosphate dihydrate crystals in pseudogout exhibit weak positive birefringence, appearing blue when aligned parallel.",
+   "say": "Negative birefringence crystals appearing needle-shaped and yellow parallel to the compensator axis confirm acute gout on synovial fluid polarized microscopy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-joints-soft-tissue-gen1.webp",
+    "alt": "Polarized micrograph of yellow and blue needle shaped urate crystals beside rhomboid pyrophosphate crystals.",
+    "caption": "Polarized micrograph of yellow and blue needle shaped urate crystals beside rhomboid pyrophosphate crystals. Synovial fluid crystals under compensated polarized light. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Crucial clinical and laboratory distinction between monosodium urate arthritis and calcium pyrophosphate dihydrate crystal deposition disease is **pseudogout differentiation**. Under compensated polarized light microscopy, gout reveals needle-shaped monosodium urate crystals displaying strong negative birefringence (yellow when oriented parallel to the slow axis of the red compensator). In contrast, pseudogout exhibits rhomboid-shaped calcium pyrophosphate crystals displaying weak positive birefringence (blue when parallel), typically targeting the knee joint and demonstrating linear punctate chondrocalcinosis within articular fibrocartilage on plain radiographs.",
+   "say": "Gout displays needle-shaped negatively birefringent crystals, whereas pseudogout shows rhomboid positively birefringent crystals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gout (Monosodium Urate)",
+     "points": [
+      "Needle-shaped intracellular and extracellular crystals",
+      "Strong negative birefringence (yellow when parallel to red compensator)",
+      "Target: first metatarsophalangeal joint (podagra), ankles, knees",
+      "Therapy: colchicine, NSAIDs, allopurinol, febuxostat"
+     ]
+    },
+    "right": {
+     "title": "Pseudogout / CPPD (Calcium Pyrophosphate)",
+     "points": [
+      "Rhomboid or rod-shaped polymorphic crystals",
+      "Weak positive birefringence (blue when parallel to red compensator)",
+      "Target: large joints, predominantly knees, wrists, symphysis pubis",
+      "Therapy: intra-articular corticosteroids, NSAIDs, colchicine"
+     ]
+    }
+   }
+  }
+ ]
 }

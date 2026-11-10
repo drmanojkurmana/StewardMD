@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "id": "fmt-trace-evidence-blood-stain-examination",
+ "subject": "forensic-medicine",
+ "module": "fmt-trace-evidence",
+ "title": "Trace Evidence: Forensic Bloodstain Analysis and Semen Examination",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The four fundamental questions in forensic bloodstain examination",
+   "tx": "When suspicious stains are encountered on weapons, clothing, or crime scene floors, forensic scientists address **four sequential bloodstain examination questions**. The laboratory must systematically prove: first, is the suspected stain genuinely blood; second, if blood, is it of human or animal origin; third, if human, what is the blood group and individual DNA profile; and fourth, what was the physical directionality and age of deposition.",
+   "say": "Forensic blood examination answers four questions: Is it blood, is it human, whose blood is it, and what were the angle and age of the stain?",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Step 1: Presumptive and confirmatory tests confirm presence of blood"
+     },
+     {
+      "id": "b",
+      "label": "Step 2: Precipitin test determines human versus animal origin"
+     },
+     {
+      "id": "c",
+      "label": "Step 3: STR DNA profiling establishes individual identity"
+     },
+     {
+      "id": "d",
+      "label": "Step 4: Bloodstain pattern analysis reconstructs assault dynamics"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Presumptive catalytic tests: Benzidine and phenolphthalein",
+   "tx": "Initial screening relies on **presumptive catalytic screening tests**, which exploit the peroxidase-like enzymatic activity of blood hemoglobin to oxidize chemical chromogens in the presence of hydrogen peroxide. The historical benzidine test produces an intense blue color with extreme sensitivity (one in three hundred thousand), but is largely phased out due to carcinogenicity. The Kastle-Meyer phenolphthalein test provides a safe, highly sensitive alternative, producing deep pink magenta within seconds.",
+   "say": "Presumptive tests use hemoglobin peroxidase action to produce color changes, including the historic benzidine test and the pink Kastle-Meyer test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Screening reagent",
+     "Reaction color",
+     "Sensitivity / limitations"
+    ],
+    "rows": [
+     [
+      "Benzidine (Adler test)",
+      "Intense dark blue",
+      "Extreme sensitivity (1:300,000); potent carcinogen"
+     ],
+     [
+      "Kastle-Meyer (Phenolphthalein)",
+      "Deep pink / magenta",
+      "Highly reliable; false positives with plant peroxidases"
+     ],
+     [
+      "Luminol chemiluminescence",
+      "Glowing blue-white in dark",
+      "Visualizes washed, latent bloodstains across large crime scenes"
+     ],
+     [
+      "Leucomalachite green",
+      "Dark blue-green",
+      "Stable reagent used on porous floorboards and fabrics"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Confirmatory microcrystalline tests: The Teichmann test",
+   "tx": "To confirm that a stain is blood beyond presumptive doubt, the laboratory performs **microcrystalline Teichmann haemin testing**. Discovered by Ludwik Teichmann, dried stain scrapings are placed on a glass slide, treated with a drop of glacial acetic acid containing trace sodium chloride, covered with a coverslip, and heated gently over a microflame. Under light microscopy, dark brown, rhombic, prismatic crystals of haemin (hematin hydrochloride) confirm blood.",
+   "say": "The Teichmann test heats blood scrapings with glacial acetic acid and salt, producing dark brown rhombic haemin crystals under the microscope.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stain scraping placed on clean microscope glass slide"
+     },
+     {
+      "id": "b",
+      "label": "Addition of Teichmann reagent (glacial acetic acid + NaCl)"
+     },
+     {
+      "id": "c",
+      "label": "Gentle slow heating over spirit lamp until boiling bubbles appear"
+     },
+     {
+      "id": "d",
+      "label": "Microscopic visualization of dark brown rhombic haemin crystals"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Takayama haemochromogen crystal test",
+   "tx": "When stains are old, weathered, or failed under Teichmann testing, the **Takayama haemochromogen crystal test** provides the most dependable confirmatory microcrystalline technique. The reagent combines pyridine, sodium hydroxide, and glucose. Upon gentle heating, pyridine combines with reduced heme, precipitating characteristic salmon-pink, shallow rhomboid needles or wheatsheaf crystals of pyridine haemochromogen. Takayama testing is remarkably robust, functioning effectively even on decades-old washed stains.",
+   "say": "The Takayama test uses pyridine and glucose to form salmon-pink wheatsheaf crystals, reliably identifying blood even on very old or washed fabrics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Teichmann test (Haemin)",
+     "points": [
+      "Reagent: Glacial acetic acid with trace chloride",
+      "Forms dark brown, rhombic prismatic crystals",
+      "Extremely heat-sensitive; easily ruined by overheating",
+      "May fail on old, weathered or laundered fabrics"
+     ]
+    },
+    "right": {
+     "title": "Takayama test (Haemochromogen)",
+     "points": [
+      "Reagent: Pyridine, glucose, and sodium hydroxide",
+      "Forms flat, salmon-pink rhomboid / wheatsheaf needles",
+      "Less sensitive to thermal variation during heating",
+      "Highly dependable on old, heated, or decomposed stains"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Determining human species origin: The precipitin test",
+   "tx": "Once blood presence is confirmed, determining whether the specimen originated from a human requires the **serological precipitin precipitin test** (Uhlenhuth test). The saline extract of the unknown stain is brought into contact with anti-human rabbit serum in a narrow capillary tube or agarose gel plate. If the stain is human, anti-human antibodies bind human serum albumin and globulins, producing a distinct cloudy white precipitation ring at the liquid interface.",
+   "say": "The precipitin test identifies human blood by layering stain extract against anti-human rabbit serum, creating a white precipitation ring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Saline extraction of bloodstain proteins from fabric"
+     },
+     {
+      "id": "b",
+      "label": "Layering extract over anti-human rabbit antiserum in capillary tube"
+     },
+     {
+      "id": "c",
+      "label": "Incubation at room temperature for 10 to 20 minutes"
+     },
+     {
+      "id": "d",
+      "label": "Formation of white precipitate ring confirms human species"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Seminal fluid identification in sexual offences",
+   "tx": "In rape and sodomy investigations, detecting **forensic seminal fluid trace evidence** provides objective proof of sexual contact. Semen comprises spermatozoa suspended in seminal plasma secreted by seminal vesicles, prostate, and bulbourethral glands. Stains on victim clothing or bedding appear stiff, starchy, grayish-white with irregular map-like edges, and exhibit intense bluish-white fluorescence under ultraviolet light illumination, guiding the forensic examiner to cut targeted fabric swatches.",
+   "say": "Seminal stains feel stiff and starchy, showing irregular map-like edges and bright bluish fluorescence under ultraviolet light on victim clothing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical / chemical parameter",
+     "Seminal characteristic",
+     "Diagnostic value in assault"
+    ],
+    "rows": [
+     [
+      "Visual and tactile inspection",
+      "Stiff, starchy, yellowish-gray map outline",
+      "Localizes suspected stain zones on dark bedding"
+     ],
+     [
+      "Ultraviolet fluorescence (365 nm)",
+      "Strong bluish-white glow under Wood lamp",
+      "Rapid non-destructive crime scene screening"
+     ],
+     [
+      "Prostatic acid phosphatase",
+      "Extremely high enzymatic activity (> 300 KA units)",
+      "Primary presumptive chemical screening marker"
+     ],
+     [
+      "Microscopic sperm demonstration",
+      "Visualizing intact heads and flagellar tails",
+      "Absolute confirmatory physical proof of semen"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Presumptive chemical testing: Prostatic acid phosphatase",
+   "tx": "The standard chemical test for semen is the **prostatic acid phosphatase enzyme assay** (Walker test). The human prostate gland secretes immense concentrations of acid phosphatase into seminal fluid, exceeding concentrations in any other human tissue by hundreds of times. Treating a stain extract with alpha-naphthyl phosphate and Brentamine Fast Blue B diazotizes the released naphthol, producing an intense purple-violet coloration within thirty seconds.",
+   "say": "The acid phosphatase test detects prostatic enzymes in semen, producing an intense purple color within thirty seconds to confirm suspected stains.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Filter paper moistened with water pressed onto suspected stain"
+     },
+     {
+      "id": "b",
+      "label": "Reagent applied: Sodium alpha-naphthyl phosphate + Fast Blue B"
+     },
+     {
+      "id": "c",
+      "label": "Cleavage of phosphate releases free naphthol substrate"
+     },
+     {
+      "id": "d",
+      "label": "Instant purple-violet color within 30 seconds indicates semen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Microscopic demonstration of spermatozoa",
+   "tx": "Providing absolute legal confirmation of seminal contact, the **microscopic spermatozoa cytological demonstration** visualizes male gametes directly under light microscopy. Smears prepared from vaginal swabs or stained clothing are stained with Christmas tree stain (Picroindigocarmine and Nuclear Fast Red). The oval sperm head stains bright red or pink with a lighter anterior acrosome cap, while the intermediate neck and flagellar tail stain vibrant green.",
+   "say": "Christmas tree staining provides conclusive proof of semen, coloring sperm heads bright red and flagellar tails green under high-power microscopy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Elution of seminal swab in sterile distilled water"
+     },
+     {
+      "id": "b",
+      "label": "Centrifugation to concentrate cellular sediment pellet"
+     },
+     {
+      "id": "c",
+      "label": "Smear staining with Nuclear Fast Red and Picroindigocarmine"
+     },
+     {
+      "id": "d",
+      "label": "Visualization of red sperm heads and green tails at 400x"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Semen detection in azoospermic or vasectomized subjects",
+   "tx": "When an assailant is vasectomized, azoospermic, or oligospermic, intact spermatozoa are completely absent, rendering microscopic searches negative. Under these circumstances, forensic laboratories deploy **prostate-specific antigen p30 immunochromatography**. PSA is a glycoprotein produced by prostatic epithelial cells, independent of spermatogenesis. Detection of p30 using rapid lateral flow immunochromatographic strips confirms human semen beyond doubt, enabling subsequent male epithelial DNA profiling.",
+   "say": "In vasectomized or azoospermic men, semen lacks sperm, so labs detect prostate-specific antigen p30 using rapid lateral flow test strips.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sperm-positive seminal stain",
+     "points": [
+      "Contains intact spermatozoa with heads and tails",
+      "Confirmed by Christmas tree differential staining",
+      "Nuclear DNA easily extracted from sperm heads",
+      "Typical of normal fertile post-pubertal males"
+     ]
+    },
+    "right": {
+     "title": "Azoospermic / vasectomized stain",
+     "points": [
+      "Completely devoid of spermatozoa on microscopy",
+      "Acid phosphatase test remains strongly positive",
+      "Confirmed via prostate-specific antigen (p30 / PSA)",
+      "Male identity established from seminal epithelial cells"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

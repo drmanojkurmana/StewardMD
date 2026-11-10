@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxiant-gases-hydrogen-sulphide",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxiant-gases",
+ "title": "Hydrogen Sulphide, Sewer Gas and Sulphmethaemoglobin",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Hydrogen sulphide paralyses the nose first",
+   "tx": "**Hydrogen sulphide** is a colourless, heavy, flammable gas smelling of rotten eggs up to twenty five parts per million, but above fifty parts per million it rapidly paralyses the sense of smell, removing its own warning exactly when danger rises. It forms during decomposition of sulphur containing organic matter and fills sewers, cesspools, privy vaults and tannery vats, besides glue and gas works, petroleum distillation and artificial silk manufacture. With carbon dioxide and methane in sewers it makes sewer gas.",
+   "say": "Rotten eggs warn at low levels, then the gas anaesthetises the nose above fifty parts per million and kills unwarned.",
+   "vis": {"kind": "table", "cols": ["H2S fact", "Detail", "Consequence"], "rows": [["Odour threshold", "Rotten eggs to 25 ppm", "Warning at low level"], ["Olfactory paralysis", "Above 50 ppm", "Warning lost as danger rises"], ["Sources", "Sewers, cesspools, tanneries", "Almost always accidental"], ["Immediate death", "0.1 to 0.2 percent breathed", "Respiratory centre paralysis"]]}
+  },
+  {
+   "title": "Cellular respiration blocked like cyanide",
+   "tx": "Hydrogen sulphide **inhibits cytochrome oxidase** and interferes with cellular respiration, a toxicity and rapidity comparable to hydrocyanic acid. It does not combine with haemoglobin but with methaemoglobin to form **sulphmethaemoglobin**, the pigment that also greens early putrefaction over the caecum. In great dilution it dulls and sleepens, and death may occur during sleep without regaining consciousness. Moderate concentration brings metabolic acidosis from anaerobic metabolism with central, respiratory and myocardial depression.",
+   "say": "Like cyanide it blocks the respiratory chain, and its green pigment sulphmethaemoglobin is the same one that stains putrefaction.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "H2S inhaled in sewer air"}, {"id": "b", "label": "Cytochrome oxidase inhibited"}, {"id": "c", "label": "Anaerobic metabolism, acidosis"}, {"id": "d", "label": "Brain, heart and breathing depressed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Clinical picture by concentration",
+   "tx": "Weak concentrations give **cough, giddiness, nausea and oppression**, laboured breathing, irregular heart, cyanosed face, inflamed conjunctivae with lacrimation and photophobia, muscular weakness and prostration. Stronger exposure adds delirium, convulsions or coma, and death from asphyxia; at nought point one to nought point two percent death is immediate from respiratory centre paralysis. Chronic low level exposure reduces lung function and leaves headache, depression, personality change and chronic eye irritation in survivors.",
+   "say": "Burning eyes and cough at weak levels, convulsions and coma stronger, instant respiratory paralysis at a tenth of a percent.",
+   "vis": {"kind": "compare", "left": {"title": "Weak concentration", "points": ["Cough, giddiness, nausea", "Conjunctivitis, photophobia", "Laboured breathing", "Weakness and prostration"]}, "right": {"title": "Strong concentration", "points": ["Delirium, convulsions, coma", "Metabolic acidosis", "Myocardial depression", "Immediate respiratory paralysis"]}}
+  },
+  {
+   "title": "The rescuer becomes the second victim",
+   "tx": "**Sewer gas deaths come in chains**: one worker collapses in a manhole and each rescuer who climbs down unprotected follows him, because the gas is heavy, pooled and odourless to the paralysed nose. The medicolegal rule is absolute, no entry without breathing apparatus and a lifeline, however urgent the shouting from below. Multiple bodies in one sewer with greenish discolouration is a scene diagnosis; the investigation then tests air, ventilation records and employer duty rather than hunting any assailant.",
+   "say": "Never climb down after a collapsed sewer worker unprotected, because hydrogen sulphide harvests rescuers in sequence.",
+   "vis": {"kind": "table", "cols": ["Scene element", "Finding", "Rule"], "rows": [["Multiple victims", "One access point, one space", "Suspect sewer gas"], ["Odour", "Absent at high concentration", "Nose cannot be trusted"], ["Rescue", "Apparatus and lifeline only", "No unprotected entry"], ["Investigation", "Air testing, ventilation records", "Employer duty examined"]]}
+  },
+  {
+   "title": "Treatment: fresh air, oxygen and nitrites",
+   "tx": "**Hydrogen sulphide treatment** is removal into fresh air, artificial respiration and one hundred percent oxygen. Excretion of sulphide is accelerated by forming sulphmethaemoglobin, letting non toxic sulphate and thiosulphate filter through the kidney: amyl nitrite inhalation and sodium nitrite infusion in the cyanide doses hasten that formation. The logic is identical to cyanide antidotal therapy, converting haemoglobin into a sulphide trap, and it must begin at the scene side after extraction, not after laboratory confirmation.",
+   "say": "Out, oxygen, then nitrites to build a sulphide trap in the blood: treatment starts at the manhole edge.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Extract to fresh air safely"}, {"id": "b", "label": "One hundred percent oxygen"}, {"id": "c", "label": "Nitrites form sulphmethaemoglobin"}, {"id": "d", "label": "Sulphate excreted by kidney"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Postmortem appearances of H2S death",
+   "tx": "At autopsy, **rotten egg odour** is given off, general signs of asphyxia are present, and the colour of blood, viscera and bronchial secretions is **greenish purple** from sulphmethaemoglobin. This must be separated from ordinary putrefaction green, which begins over the caecum and spreads with time and gas formation; a fresh body with greenish purple blood and secretions at a sewer scene is exposure, not decay. Air and scene samples, where taken early, carry the chemical proof the body cannot keep.",
+   "say": "Greenish purple blood in a fresh body at a sewer is sulphmethaemoglobin exposure, not the green of ordinary decay.",
+   "vis": {"kind": "compare", "left": {"title": "H2S death", "points": ["Fresh body, sewer scene", "Greenish purple blood", "Rotten egg odour", "Asphyxial signs present"]}, "right": {"title": "Putrefaction green", "points": ["Hours to days after death", "Starts over the caecum", "Gas and marbling progress", "No exposure scene"]}}
+  },
+  {
+   "title": "Sewer gas is a mixture, not one gas",
+   "tx": "**Sewer gas** combines hydrogen sulphide with carbon dioxide and methane from decomposing organic matter, adding simple asphyxia by oxygen displacement to chemical asphyxia by cytochrome blockade. Methane or marsh gas from wells in summer is itself an asphyxiant by displacement. The examiner therefore records the space, its ventilation and its contents, and expects mixed mechanisms in the certificate: environment, gas estimation where available, and exclusion of trauma in bodies recovered from below ground.",
+   "say": "Sewer gas suffocates twice, by displacing oxygen and by poisoning its use, so the certificate names the mixture and the space.",
+   "vis": {"kind": "table", "cols": ["Gas in the space", "Mechanism", "Example source"], "rows": [["Hydrogen sulphide", "Cytochrome oxidase blocked", "Sulphur decomposition"], ["Carbon dioxide", "Oxygen displaced, narcosis", "Fermentation"], ["Methane", "Oxygen displaced", "Marsh and well gas"], ["Carbon monoxide preview", "Haemoglobin blocked", "Incomplete combustion"]]}
+  },
+  {
+   "title": "Sulphur dioxide and other irritant gases",
+   "tx": "**Sulphur dioxide** is a direct respiratory irritant causing severe bronchospasm and inhibition of mucociliary transport, without the systemic cytochrome action of its sulphide cousin. Nitrous oxide is laughing gas, an anaesthetic whose asphyxial risk is displacement in closed delivery. The classification that matters clinically separates chemical asphyxiants acting in blood and cell, CO, H2S and cyanide, from irritants acting on airway, and simple asphyxiants acting by displacement.",
+   "say": "Sulphur dioxide burns airways only, while sulphide and monoxide poison blood and cell: irritant, chemical and simple asphyxiants part here.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Irritants injure the airway"}, {"id": "b", "label": "Simple gases displace oxygen"}, {"id": "c", "label": "Chemical gases block its use"}, {"id": "d", "label": "Treatment follows the class"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Methyl isocyanate: the Bhopal lesson",
+   "tx": "**Methyl isocyanate**, MIC, stable liquid below twenty seven degrees and gaseous at thirty one, boiling at thirty seven, is a pesticide intermediate of extreme toxicity by inhalation, ingestion and skin, acting by irritation and carbamylation. Acute exposure gives intense eye irritation, lachrymation, blurred vision, burning throat, chest pain, laboured breathing and death by pulmonary oedema, lungs two to three times normal weight at autopsy, with psychiatric symptoms in about ten percent of survivors and reproductive effects including stillbirth. Treatment is purely symptomatic, sodium thiosulphate being beneficial.",
+   "say": "MIC kills by pulmonary oedema at tiny doses and scars minds and pregnancies for years, with only symptomatic treatment to offer.",
+   "vis": {"kind": "compare", "left": {"title": "MIC acute picture", "points": ["Eyes burn, vision blurs", "Throat and chest pain", "Pulmonary oedema kills", "Lungs two to three times weight"]}, "right": {"title": "MIC late picture", "points": ["Psychiatric symptoms, ten percent", "Liver and kidney damage", "Stillbirth and fetal abnormality", "Neurological deficits persist"]}}
+  }
+ ],
+ "quiz": []
+}

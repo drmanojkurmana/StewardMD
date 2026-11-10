@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-arboviral-breteau-index",
+ "subject": "community-medicine",
+ "module": "cm-arboviral",
+ "title": "Aedes Surveillance: Larval Indices and Arboviral Transmission",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Aedes larval surveillance principles",
+   "tx": "To anticipate dengue and chikungunya epidemics, vector control squads conduct structured **entomological surveillance** targeting immature aquatic stages of Aedes aegypti and Aedes albopictus. Technicians systematically inspect indoor and peri-domestic water collections, including unsealed plastic overhead tanks, earthenware storage pots, discarded automobile tyres, air coolers and flower pots, sampling water to enumerate larvae and compute standardized community transmission indices.",
+   "say": "Entomological teams inspect homes and yards for stagnant water in storage pots, air coolers and discarded tyres, collecting larvae to calculate transmission risk indices.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Door-to-door container water inspection"},
+     {"id": "b", "label": "Larval collection and microscopic identification"},
+     {"id": "c", "label": "Calculation of entomological risk indices"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Breteau index: containers per hundred houses",
+   "tx": "Among entomological indicators, the **Breteau index** provides the most sensitive correlation with human arboviral transmission risk, calculated as the total number of positive water containers harboring Aedes larvae or pupae per one hundred houses inspected. When the Breteau index exceeds twenty, the locality enters a high-risk transmission zone capable of explosive dengue transmission, prompting immediate civic sanitary interventions and thermal fogging.",
+   "say": "The Breteau index counts the number of positive water containers found per one hundred homes inspected. An index above twenty warns of an impending explosive dengue outbreak.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Breteau index value", "Epidemiological risk status", "Recommended public action"],
+    "rows": [
+     ["Below 5", "Low transmission risk", "Routine health education and dry days"],
+     ["5 to 20", "Moderate transmission risk", "Intensive domestic container elimination"],
+     ["Above 20", "High explosive transmission danger", "Immediate emergency thermal fogging and larviciding"]
+    ]
+   }
+  },
+  {
+   "title": "House index and container index",
+   "tx": "Epidemiologists evaluate container distribution using the **House Index**, which denotes the percentage of inspected houses found positive for Aedes breeding, with values above five percent denoting transmission danger. Alongside this, the Container Index measures the percentage of all water-holding vessels positive for larvae; together, these three indices provide a comprehensive assessment of community container density and domestic water hygiene.",
+   "say": "The House Index measures the percentage of homes with mosquito breeding, while the Container Index measures the percentage of positive water vessels. A house index over five percent indicates danger.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Surveillance index", "Calculation formula", "Epidemic threshold"],
+    "rows": [
+     ["House Index (HI)", "(Houses with larvae / Total houses inspected) x 100", "Critical threshold exceeds 5 percent"],
+     ["Container Index (CI)", "(Containers with larvae / Total containers checked) x 100", "Critical threshold exceeds 10 percent"],
+     ["Breteau Index (BI)", "(Positive containers / 100 houses inspected)", "Critical threshold exceeds 20 containers"]
+    ]
+   }
+  },
+  {
+   "title": "Chikungunya fever: clinical picture and epidemiology",
+   "tx": "Sharing identical Aedes mosquito vectors with dengue, the **chikungunya virus** is an alphavirus of the Togaviridae family that causes sudden high fever, debilitating symmetrical polyarthralgia, headaches and prominent maculopapular rash. Severe joint pain predominantly strikes peripheral small joints of the hands and feet, often leaving patients bedridden and hobbled, with disabling chronic inflammatory arthralgia persisting for months to years.",
+   "say": "Chikungunya causes high fever and severe, crippling joint pain that can linger for months or years. It is spread by the same Aedes mosquitoes that transmit dengue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chikungunya presentation",
+     "points": ["Debilitating, crippling polyarthralgia", "Joint stiffness persists for months", "Haemorrhage and shock are rare"]
+    },
+    "right": {
+     "title": "Dengue presentation",
+     "points": ["Severe retro-orbital pain and myalgia", "Capillary leakage and plasma leakage", "Thrombocytopenia and dengue shock danger"]
+    }
+   }
+  },
+  {
+   "title": "Japanese encephalitis: vector and rural ecology",
+   "tx": "Unlike peri-domestic Aedes mosquitoes, the culicine species **Culex tritaeniorhynchus** serves as the principal vector of Japanese encephalitis across rural agrarian landscapes. This mosquito breeds abundantly in flooded paddy fields, shallow irrigation ditches, seepages and hyacinth-choked ponds; it displays twilight and nocturnal exophilic feeding habits, flying up to three kilometres between breeding rice fields and human settlements in search of blood.",
+   "say": "Culex tritaeniorhynchus breeds across flooded rice fields and ditches. It bites outdoors during evening twilight, carrying Japanese encephalitis virus across several kilometres.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Ecological trait", "Vector manifestation", "Epidemiological impact"],
+    "rows": [
+     ["Preferred breeding site", "Flooded agricultural paddy fields", "Outbreaks match monsoon rice cultivation"],
+     ["Flight range", "One to three kilometres", "Disperses infection beyond water bodies"],
+     ["Feeding behavior", "Exophilic and nocturnal biting", "Bed nets must be used in rural homes"],
+     ["Host preference", "Zoophilic with opportunistic human bites", "Amplified in animal sheds near villages"]
+    ]
+   }
+  },
+  {
+   "title": "Animal hosts: amplifying vs dead-end hosts",
+   "tx": "In Japanese encephalitis transmission ecology, pigs and ardeid wading birds act as primary **amplifying hosts**, developing high-titre, prolonged viraemia without exhibiting clinical neurological disease, thereby infecting thousands of feeding Culex mosquitoes. In contrast, humans and domestic horses represent accidental dead-end hosts; the transient, low-titre viraemia produced during human infection is entirely insufficient to transmit the virus back to biting vectors.",
+   "say": "Pigs and wading birds multiply the virus to high concentrations without falling sick. Humans are dead-end hosts who develop encephalitis but cannot pass the virus back to mosquitoes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Ardeid birds and pigs (amplifiers)"},
+     {"id": "b", "label": "Culex tritaeniorhynchus vector"},
+     {"id": "c", "label": "Accidental dead-end human infection"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Japanese encephalitis clinical presentation",
+   "tx": "In endemic populations, the vast majority of Japanese encephalitis infections run an asymptomatic or mild febrile course, with only one in three hundred to one thousand infected individuals progressing to overt **acute encephalitis syndrome**. Those affected present with high fever, neck stiffness, stupor, convulsions, cogwheel rigidity and tremors due to basal ganglia necrosis, suffering a thirty percent fatality rate and lifelong neurological handicaps.",
+   "say": "Only one in several hundred infected patients develops overt brain inflammation. Those who do face a thirty percent mortality rate and frequent permanent neurological damage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subclinical infection (99%)",
+     "points": ["Transient fever or asymptomatic", "Develops lifelong neutralizing antibodies", "No neurological complications"]
+    },
+    "right": {
+     "title": "Encephalitic illness (<1%)",
+     "points": ["Coma, seizures and motor deficits", "High case fatality up to 30 percent", "Permanent neuropsychiatric sequelae"]
+    }
+   }
+  },
+  {
+   "title": "Japanese encephalitis vaccination in endemic districts",
+   "tx": "Universal control in high-risk rural districts depends on the **Japanese encephalitis vaccine**, formulated as a live attenuated virus derived from the SA 14-14-2 strain and administered under the national immunization schedule. Children receive zero point five millilitres subcutaneously at nine completed months along with measles-rubella, followed by a second booster dose between sixteen and twenty-four months of age.",
+   "say": "Children in endemic districts receive the live attenuated SA 14-14-2 vaccine at nine months, followed by a booster dose in their second year to confer enduring immunity.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccination dose", "Recommended age", "Route and anatomical site"],
+    "rows": [
+     ["Primary dose 1", "9 completed months", "0.5 ml subcutaneous left upper arm"],
+     ["Booster dose 2", "16 to 24 months", "0.5 ml subcutaneous left upper arm"],
+     ["Adult campaigns", "Selected endemic districts", "Single subcutaneous dose in adults 15-65"]
+    ]
+   }
+  },
+  {
+   "title": "Integrated vector management for arboviral control",
+   "tx": "Community-wide containment of arboviral fevers requires rigorous environmental **source reduction**, observing weekly dry days where all households completely drain, scrub and dry domestic water storage containers to disrupt the eight-day aquatic cycle. Non-potable water bodies receive temephos larvicide or diflubenzuron, while outdoor spaces undergo thermal fogging with pyrethrum during active epidemics to slash adult mosquito density.",
+   "say": "A weekly community dry day empties domestic containers to break the eight-day larval cycle. Temephos treats standing water, and thermal fogging knocks down adult mosquitoes during outbreaks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Weekly domestic container dry day"},
+     {"id": "b", "label": "Temephos larviciding in non-potable water"},
+     {"id": "c", "label": "Thermal pyrethrum fogging during outbreaks"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,322 @@
+{
+    "v": 1,
+    "id": "ans-specialty-neuroanaesthesia",
+    "subject": "anaesthesia",
+    "module": "ans-specialty",
+    "title": "Specialty Anaesthesia: Neuroanaesthesia, Oculocardiac Reflex, and Laser Airway Safety",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Cerebral Perfusion Pressure Dynamics",
+            "tx": "**Cerebral perfusion pressure calculation** is defined by the formula: CPP equals mean arterial pressure (MAP) minus intracranial pressure (ICP), or central venous pressure (CVP) if higher than ICP. Normal adult resting CPP is 70 to 90 mmHg; maintaining CPP strictly above 60 to 70 mmHg prevents focal cerebral ischemia, while cerebral autoregulation maintains constant cerebral blood flow (approx 50 mL/100g/min) across MAP limits of 50 to 150 mmHg.",
+            "say": "Cerebral perfusion pressure calculation is defined by the formula: CPP equals mean arterial pressure (MAP) minus intracranial pressure (ICP), or central venous pressure (CVP) if higher than ICP. Normal adult resting CPP is 70 to 90 mmHg; maintaining CPP strictly above 60 to 70 mmHg prevents focal cerebral ischemia, while cerebral autoregulation maintains constant cerebral blood flow (approx 50 mL/100g/min) across MAP limits of 50 to 150 mmHg.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Physiological Parameter",
+                    "Normal Resting Value",
+                    "Critical Ischemic Threshold",
+                    "Neurosurgical Target"
+                ],
+                "rows": [
+                    [
+                        "Cerebral Perfusion Pressure (CPP)",
+                        "70 to 90 mmHg",
+                        "Falls below 50 mmHg (ischemia)",
+                        "Maintain strictly >60 to 70 mmHg"
+                    ],
+                    [
+                        "Intracranial Pressure (ICP)",
+                        "5 to 15 mmHg",
+                        "Exceeds 20 to 25 mmHg (herniation)",
+                        "Maintain <15 to 20 mmHg"
+                    ],
+                    [
+                        "Mean Arterial Pressure (MAP)",
+                        "80 to 100 mmHg",
+                        "Falls below 65 mmHg",
+                        "Titrate with vasopressors if ICP elevated"
+                    ],
+                    [
+                        "Cerebral Blood Flow (CBF)",
+                        "50 mL/100g/min",
+                        "Falls below 18 to 20 mL/100g/min",
+                        "Coupled with metabolic demand (CMRO2)"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "The flat top of this curve is the brain defending its own blood supply. Across a **cerebral autoregulation** plateau, vessels constrict as pressure rises and dilate as it falls, holding flow nearly constant between mean pressures of about fifty and one fifty. Beyond either end, flow follows pressure passively and injury follows. Chronic hypertension shifts the whole curve rightward, so a pressure normal for others can underperfuse a long hypertensive brain.",
+            "say": "Cerebral flow stays flat across the autoregulation plateau, then follows pressure beyond its ends. Chronic hypertension shifts the curve to the right.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m521-ans-specialty-neuroanaesthesia.webp",
+                "alt": "Cerebral autoregulation curve plotting blood flow against mean arterial pressure from fifty to one fifty millimetres of mercury.",
+                "caption": "Cerebral blood flow holds a plateau between mean pressures of fifty and one fifty, then falls steeply. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Intracranial Pressure Control Strategies",
+            "tx": "**Medical management of raised intracranial pressure** employs multiple synergistic modalities: elevate the head of the bed 30 degrees (facilitating venous drainage without kinking internal jugular veins), administer osmotic diuretic mannitol (0.5 to 1.0 g/kg IV) or 3 percent hypertonic saline, maintain normothermia, ensure deep neuromuscular relaxation, and induce temporary mild hyperventilation to a PaCO2 of 30 to 35 mmHg.",
+            "say": "Medical management of raised intracranial pressure employs multiple synergistic modalities: elevate the head of the bed 30 degrees (facilitating venous drainage without kinking internal jugular veins), administer osmotic diuretic mannitol (0.5 to 1.0 g/kg IV) or 3 percent hypertonic saline, maintain normothermia, ensure deep neuromuscular relaxation, and induce temporary mild hyperventilation to a PaCO2 of 30 to 35 mmHg.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Elevate head 30 degrees and maintain neutral neck alignment"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Infuse IV mannitol (0.5 to 1.0 g/kg) or 3% hypertonic saline bolus"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Hyperventilate temporarily to PaCO2 30 to 35 mmHg"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Deepen anaesthesia with propofol to suppress metabolic CMRO2"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Carbon Dioxide Vasoreactivity",
+            "tx": "**Cerebral vascular reactivity to carbon dioxide** causes marked changes in cerebral blood flow: for every 1 mmHg change in arterial PaCO2 between 20 and 60 mmHg, cerebral blood flow shifts linearly by approximately 1 to 2 mL/100g/min (or 3 to 4 percent). Acute hyperventilation to PaCO2 30 to 35 mmHg causes arteriolar vasoconstriction, shrinking cerebral blood volume and slackening a tense brain, but prolonged severe hypocapnia (<25 mmHg) induces cerebral ischemia.",
+            "say": "Cerebral vascular reactivity to carbon dioxide causes marked changes in cerebral blood flow: for every 1 mmHg change in arterial PaCO2 between 20 and 60 mmHg, cerebral blood flow shifts linearly by approximately 1 to 2 mL/100g/min (or 3 to 4 percent). Acute hyperventilation to PaCO2 30 to 35 mmHg causes arteriolar vasoconstriction, shrinking cerebral blood volume and slackening a tense brain, but prolonged severe hypocapnia (less than 25 mmHg) induces cerebral ischemia.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Controlled Mild Hyperventilation (PaCO2 30-35)",
+                    "points": [
+                        "Arteriolar cerebral vasoconstriction reduces cerebral blood volume",
+                        "Provides immediate slack, relaxed brain for surgical exposure",
+                        "Preserves adequate neuronal microvascular oxygen delivery"
+                    ]
+                },
+                "right": {
+                    "title": "Severe Excessive Hypocapnia (PaCO2 <25)",
+                    "points": [
+                        "Extreme vasoconstriction drops microcirculatory perfusion",
+                        "Shifts oxyhaemoglobin curve left, impairing tissue oxygen release",
+                        "Triggers secondary cytotoxic ischaemic neuronal necrosis"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "The Oculocardiac Reflex (Aschner Reflex)",
+            "tx": "**Oculocardiac reflex trigeminovagal pathway** (Aschner phenomenon) is triggered during ophthalmic surgery by traction on extraocular rectus muscles (medial rectus traction is most potent), pressure on the globe, or retrobulbar hematoma. The afferent pathway travels via ciliary nerves, ophthalmic division of the trigeminal nerve (cranial nerve V1), and Gasserian ganglion to the main sensory trigeminal nucleus in the brainstem.",
+            "say": "Oculocardiac reflex trigeminovagal pathway (Aschner phenomenon) is triggered during ophthalmic surgery by traction on extraocular rectus muscles (medial rectus traction is most potent), pressure on the globe, or retrobulbar hematoma. The afferent pathway travels via ciliary nerves, ophthalmic division of the trigeminal nerve (cranial nerve V1), and Gasserian ganglion to the main sensory trigeminal nucleus in the brainstem.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Reflex Arc Component",
+                    "Anatomical Structure Involved",
+                    "Physiological Function",
+                    "Clinical Intervention"
+                ],
+                "rows": [
+                    [
+                        "Stimulus",
+                        "Traction on extraocular rectus muscles",
+                        "Stretch receptors in muscle belly and tendon",
+                        "Most potent with medial rectus traction"
+                    ],
+                    [
+                        "Afferent Limb",
+                        "Long/short ciliary nerves to CN V1 (ophthalmic)",
+                        "Conducts sensory impulse to trigeminal nucleus",
+                        "Blocked by effective retrobulbar/peribulbar local block"
+                    ],
+                    [
+                        "Efferent Limb",
+                        "Vagus nerve (cranial nerve X)",
+                        "Cardioinhibitory fibers to sinoatrial node",
+                        "Premedicate with IV atropine or glycopyrrolate"
+                    ],
+                    [
+                        "Primary Clinical Manifestation",
+                        "Sinus bradycardia, junctional rhythm, asystole",
+                        "Immediate heart rate drop >20 percent",
+                        "Immediately tell surgeon to release muscle traction"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Trace the wiring in this diagram and a tug on an eye muscle ends at the heart. Afferent fibres ride the ophthalmic division of the trigeminal nerve into the brainstem, cross to the vagus, and return as a **trigeminovagal reflex** that can slow the heart to a standstill. Children under strabismus surgery fire it most readily, medial rectus traction pulling hardest. The treatment choreography is rehearsed: stop the stimulus, deepen anaesthesia, and give atropine if the bradycardia refuses to lift.",
+            "say": "The oculocardiac reflex runs from trigeminal V1 to vagus X, slowing the heart when eye muscles are pulled.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m522-ans-specialty-neuroanaesthesia.webp",
+                "alt": "Anatomical diagram of oculocardiac reflex pathway from ophthalmic V1 to vagus X",
+                "caption": "Anatomical diagram of oculocardiac reflex pathway from ophthalmic V1 to vagus X. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Management of Oculocardiac Reflex",
+            "tx": "**Emergency management of oculocardiac bradycardia** requires instant communication: immediately instruct the surgeon to release all traction on the extraocular muscle. Traction release typically restores normal sinus rhythm within seconds; if severe bradycardia or asystole persists despite cessation of traction, administer intravenous atropine (0.02 mg/kg) or glycopyrrolate, verify adequate depth of anaesthesia, and confirm normoxaemia.",
+            "say": "Emergency management of oculocardiac bradycardia requires instant communication: immediately instruct the surgeon to release all traction on the extraocular muscle. Traction release typically restores normal sinus rhythm within seconds; if severe bradycardia or asystole persists despite cessation of traction, administer intravenous atropine (0.02 mg/kg) or glycopyrrolate, verify adequate depth of anaesthesia, and confirm normoxaemia.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Sudden bradycardia or asystole during strabismus surgery"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Tell ophthalmic surgeon loudly to 'Release muscle traction immediately'"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Verify prompt return of normal sinus rhythm upon release"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Administer IV atropine (0.02 mg/kg) if bradycardia persists"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Laser Airway Surgery Fire Safety",
+            "tx": "**Laser airway surgery fire hazards** occur when carbon dioxide or Nd:YAG lasers ignite endotracheal tubes in an oxygen-enriched surgical field. Standard polyvinyl chloride tubes ignite and burn vigorously, generating toxic hydrochloric acid fumes. Laser safety mandates specialized laser-resistant metallic tubes (flexible stainless steel or copper-wrapped), filling the tube cuff with saline tinted with methylene blue, and reducing inspired oxygen concentration (FIO2) under 30 percent in helium or nitrogen.",
+            "say": "Laser airway surgery fire hazards occur when carbon dioxide or Nd:YAG lasers ignite endotracheal tubes in an oxygen-enriched surgical field. Standard polyvinyl chloride tubes ignite and burn vigorously, generating toxic hydrochloric acid fumes. Laser safety mandates specialized laser-resistant metallic tubes (flexible stainless steel or copper-wrapped), filling the tube cuff with saline tinted with methylene blue, and reducing inspired oxygen concentration (FIO2) under 30 percent in helium or nitrogen.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Safety Measure",
+                    "Technical Protocol Requirement",
+                    "Fire Prevention Mechanism",
+                    "Emergency Action if Fire Occurs"
+                ],
+                "rows": [
+                    [
+                        "Inspired Gas Mixture",
+                        "FIO2 under 0.30 (30 percent oxygen)",
+                        "Eliminates flammable oxidizer enrichment",
+                        "Avoid nitrous oxide entirely (supports combustion)"
+                    ],
+                    [
+                        "Endotracheal Tube Selection",
+                        "Flexible stainless steel or silicone-wrapped",
+                        "Reflects laser beam; prevents shaft puncture",
+                        "Never use standard polyvinyl chloride tubes"
+                    ],
+                    [
+                        "Tube Cuff Fluid Filling",
+                        "Saline tinted with methylene blue dye",
+                        "Extinguishes laser beam if cuff punctured",
+                        "Blue dye leak instantly alerts surgeon to cuff breach"
+                    ],
+                    [
+                        "Airway Fire Immediate Action",
+                        "Halt ventilation; pull tube; flood with saline",
+                        "Removes oxidizer, fuel, and heat source",
+                        "Ventilate with mask and re-intubate to assess damage"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Airway Fire Extinguishment Protocol",
+            "tx": "**Emergency airway fire protocol** demands immediate memorized execution: instantly halt ventilation and disconnect the breathing circuit (removing oxygen fuel), immediately extubate the burning endotracheal tube from the patient, and pour cold sterile saline down the airway to extinguish residual smoldering embers. Subsequently, ventilate via mask with 100 percent oxygen, reintubate, and perform rigid bronchoscopy to assess mucosal thermal damage.",
+            "say": "Emergency airway fire protocol demands immediate memorized execution: instantly halt ventilation and disconnect the breathing circuit (removing oxygen fuel), immediately extubate the burning endotracheal tube from the patient, and pour cold sterile saline down the airway to extinguish residual smoldering embers. Subsequently, ventilate via mask with 100 percent oxygen, reintubate, and perform rigid bronchoscopy to assess mucosal thermal damage.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Disconnect breathing circuit from endotracheal tube immediately"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Pull burning endotracheal tube from trachea and discard in bucket"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Instill cold sterile saline down pharynx and trachea"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Ventilate with 100% O2 via mask, re-intubate, and inspect via bronchoscopy"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Laparoscopic Pneumoperitoneum Hemodynamics",
+            "tx": "**Laparoscopic carbon dioxide pneumoperitoneum** (insufflation pressure maintained at 12 to 15 mmHg) alters cardiopulmonary mechanics: elevated intra-abdominal pressure compresses the inferior vena cava (dropping venous return and cardiac output), pushes the diaphragm cephalad (reducing functional residual capacity, promoting basal atelectasis, and escalating peak airway pressures), and absorbs carbon dioxide across the peritoneal membrane, causing hypercapnia that demands a 20 to 30 percent increase in minute ventilation.",
+            "say": "Laparoscopic carbon dioxide pneumoperitoneum (insufflation pressure maintained at 12 to 15 mmHg) alters cardiopulmonary mechanics: elevated intra-abdominal pressure compresses the inferior vena cava (dropping venous return and cardiac output), pushes the diaphragm cephalad (reducing functional residual capacity, promoting basal atelectasis, and escalating peak airway pressures), and absorbs carbon dioxide across the peritoneal membrane, causing hypercapnia that demands a 20 to 30 percent increase in minute ventilation.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Cardiovascular Consequences",
+                    "points": [
+                        "Elevated intra-abdominal pressure compresses inferior vena cava",
+                        "Reduces venous return and drops left ventricular cardiac output",
+                        "Systemic vascular resistance surges, elevating blood pressure"
+                    ]
+                },
+                "right": {
+                    "title": "Pulmonary Mechanics Alterations",
+                    "points": [
+                        "Diaphragm displaced cephalad, dropping FRC by up to 50 percent",
+                        "Peak airway pressures rise, demanding volume-controlled PEEP",
+                        "Peritoneal CO2 absorption requires increased minute ventilation"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

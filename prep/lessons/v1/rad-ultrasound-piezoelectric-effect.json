@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-ultrasound-piezoelectric-effect",
+ "subject": "radiology",
+ "module": "rad-ultrasound",
+ "title": "Piezoelectric Effect, Acoustic Impedance and Ultrasound Artefacts",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Piezoelectric crystals make the beam",
+   "tx": "**Piezoelectric effect** lets lead zirconate titanate crystals change shape when voltage is applied and generate voltage when returning echoes squeeze them. One crystal therefore transmits a pulse and then listens for its echo. Modern probes hold hundreds of elements fired in sequence to steer and focus the beam electronically. The crystal thickness sets the natural frequency, with thinner elements producing higher frequencies.",
+   "say": "Piezoelectric effect lets lead zirconate titanate crystals change shape when voltage is applied and generate voltage when returning echoes squeeze them. One crystal therefore transmits a pulse then listens for its echo. Modern probes hold hundreds of elements fired in sequence to steer the beam. Crystal thickness sets the natural frequency, thinner elements giving higher frequencies.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Voltage deforms crystal"}, {"id": "b", "label": "Sound pulse emitted"}, {"id": "c", "label": "Echo squeezes crystal"}, {"id": "d", "label": "Voltage forms image"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Frequency trades depth for detail",
+   "tx": "**Transducer frequency** balances resolution against penetration. A 12 megahertz linear probe resolves thyroid nodules and tendons within 4 cm of the skin but cannot reach the liver. A 3.5 megahertz curvilinear probe crosses 20 cm of abdomen with coarser detail. Axial resolution improves as frequency rises because wavelength shortens, reaching fractions of a millimetre at the highest diagnostic frequencies.",
+   "say": "Transducer frequency balances resolution against penetration. A twelve megahertz linear probe resolves thyroid nodules and tendons within four centimetres of skin but cannot reach the liver. A three point five megahertz curved probe crosses twenty centimetres of abdomen with coarser detail. Axial resolution improves as frequency rises because wavelength shortens.",
+   "vis": {"kind": "table", "cols": ["Probe", "Frequency", "Best target"], "rows": [["Linear", "7 to 15 MHz", "Thyroid, vessels, tendons"], ["Curvilinear", "3 to 5 MHz", "Liver and obstetrics"], ["Phased array", "2 to 4 MHz", "Heart through ribs"], ["Endocavitary", "5 to 9 MHz", "Pelvis and prostate"]]}
+  },
+  {
+   "title": "Acoustic impedance and reflection",
+   "tx": "**Acoustic impedance** equals tissue density multiplied by the speed of sound in that tissue. At a boundary the fraction of beam reflected rises with the impedance gap between the two sides. Soft tissue against bone reflects strongly and casts shadow, while fluid against soft tissue reflects weakly and lets most energy through. Coupling gel removes the skin air gap that would otherwise reflect nearly the whole beam.",
+   "say": "Acoustic impedance equals tissue density multiplied by the speed of sound in that tissue. At a boundary the reflected fraction rises with the impedance gap between the two sides. Soft tissue against bone reflects strongly and casts shadow, while fluid reflects weakly and lets most energy through. Gel removes the skin air gap that would reflect nearly everything.",
+   "vis": {"kind": "compare", "left": {"title": "Large impedance gap", "points": ["Bone and stone interfaces", "Most beam reflected", "Shadow behind the surface", "Little signal beyond"]}, "right": {"title": "Small impedance gap", "points": ["Fluid and soft tissue", "Weak reflection", "Most beam transmitted", "Enhancement behind fluid"]}}
+  },
+  {
+   "title": "Acoustic shadowing",
+   "tx": "**Acoustic shadowing** is the dark band behind a strongly reflecting or absorbing structure. Gallstones, kidney stones, ribs and bowel gas all produce it, and a clean sharp shadow behind a bright gallbladder focus is a core sign of a stone rather than a polyp. Polyps attach to the wall, do not move with posture and cast no shadow, which separates the two at the bedside.",
+   "say": "Acoustic shadowing is the dark band behind a strongly reflecting or absorbing structure. Gallstones, kidney stones, ribs and bowel gas all produce it, and a clean sharp shadow behind a bright gallbladder focus is a core sign of stone rather than polyp. Polyps attach to the wall, do not move with posture and cast no shadow.",
+   "vis": {"kind": "table", "cols": ["Structure", "Shadow", "Moves on rolling"], "rows": [["Gallstone", "Clean dark shadow", "Yes, falls to dependent wall"], ["Gallbladder polyp", "No shadow", "No, fixed to wall"], ["Bowel gas", "Dirty shadow", "Shifts with peristalsis"], ["Rib", "Clean shadow", "Fixed to chest wall"]]}
+  },
+  {
+   "title": "Posterior acoustic enhancement",
+   "tx": "**Posterior enhancement** is the bright band behind fluid because fluid attenuates the beam far less than solid tissue at the same depth. The scanner assumes average attenuation, so echoes returning through a cyst arrive stronger than expected and are painted brighter. Simple cysts of liver, kidney and breast all show this through transmission, which supports calling the lesion fluid rather than a solid mass.",
+   "say": "Posterior enhancement is the bright band behind fluid because fluid weakens the beam far less than solid tissue at the same depth. The scanner assumes average weakening, so echoes returning through a cyst arrive stronger than expected and are painted brighter. Simple cysts of liver, kidney and breast all show this through transmission, supporting a fluid diagnosis.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Beam crosses fluid"}, {"id": "b", "label": "Little attenuation"}, {"id": "c", "label": "Strong deep echoes"}, {"id": "d", "label": "Bright band painted"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Reverberation and comet tail",
+   "tx": "**Reverberation artefact** repeats bright lines at equal intervals when sound bounces between two strong reflectors, such as the pleura and probe face. The comet tail variant tapers behind a tiny reflector like a cholesterol crystal in gallbladder adenomyomatosis or a colloid fleck in a thyroid nodule. Ring down artefact instead streams behind gas bubbles that resonate continuously, a pattern linked to bowel gas and pneumobilia.",
+   "say": "Reverberation artefact repeats bright lines at equal intervals when sound bounces between two strong reflectors such as pleura and probe face. The comet tail variant tapers behind a tiny reflector like a cholesterol crystal in gallbladder wall or colloid in a thyroid nodule. Ring down instead streams behind resonating gas bubbles in bowel or bile ducts.",
+   "vis": {"kind": "compare", "left": {"title": "Comet tail", "points": ["Tapering bright trail", "Tiny crystal reflector", "Gallbladder adenomyomatosis", "Thyroid colloid fleck"]}, "right": {"title": "Ring down", "points": ["Continuous bright stream", "Gas bubble resonance", "Bowel gas", "Gas in bile ducts"]}}
+  },
+  {
+   "title": "Mirror image artefact",
+   "tx": "**Mirror image artefact** duplicates a structure across a strong smooth reflector, most often the diaphragm. A liver lesion can appear again inside the lung base above the diaphragm, and colour Doppler can paint a false vessel in the mirrored copy. Moving the probe to another angle breaks the geometry and the ghost copy vanishes, confirming artefact before a lung mass is reported.",
+   "say": "Mirror image artefact duplicates a structure across a strong smooth reflector, most often the diaphragm. A liver lesion can appear again inside the lung base above the diaphragm, and colour Doppler can paint a false vessel in the copy. Moving the probe to another angle breaks the geometry and the ghost vanishes, confirming artefact before reporting a lung mass.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Lesion near diaphragm"}, {"id": "b", "label": "Beam reflects off diaphragm"}, {"id": "c", "label": "Ghost copy in lung base"}, {"id": "d", "label": "Angle change removes it"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Speed of sound assumption",
+   "tx": "**Sound speed** in soft tissue is taken as 1540 metres per second, and the scanner converts echo return time into depth using that single value. Fat conducts sound slower near 1450 metres per second, so structures behind thick fat are placed slightly too deep. The same assumption explains why a silicone breast implant, with much slower sound speed, distorts the apparent position of tissue behind it.",
+   "say": "Sound speed in soft tissue is taken as fifteen forty metres per second, and the scanner converts echo return time into depth using that single value. Fat conducts sound slower, near fourteen fifty, so structures behind thick fat are placed slightly too deep. A silicone implant distorts apparent depth the same way because its sound speed is far slower.",
+   "vis": {"kind": "table", "cols": ["Medium", "Sound speed", "Effect"], "rows": [["Soft tissue average", "1540 m per second", "Assumed by scanner"], ["Fat", "1450 m per second", "Depth overstated"], ["Muscle", "1580 m per second", "Depth understated"], ["Bone", "4080 m per second", "Strong reflection"]]}
+  }
+ ]
+}

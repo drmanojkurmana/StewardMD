@@ -1,0 +1,272 @@
+{
+    "v": 1,
+    "id": "ans-iv-agents-dissociative-anaesthesia",
+    "subject": "anaesthesia",
+    "module": "ans-iv-agents",
+    "title": "Intravenous Induction: Ketamine Dissociation, Emergence Reactions, and Etomidate",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Dissociative Anaesthesia State",
+            "tx": "**Dissociative anaesthesia characteristics** induced by ketamine represent a unique electrophysiological dissociation between the limbic system and the neocortex. Patients enter a cataleptic state where the eyes remain open with a slow nystagmic gaze, corneal and laryngeal protective reflexes remain active, purposeful skeletal movement is abolished, and profound somatic analgesia and amnesia are established following an intravenous dose of 1 to 2 mg/kg.",
+            "say": "Dissociative anaesthesia characteristics induced by ketamine represent a unique electrophysiological dissociation between the limbic system and the neocortex. Patients enter a cataleptic state where the eyes remain open with a slow nystagmic gaze, corneal and laryngeal protective reflexes remain active, purposeful skeletal movement is abolished, and profound somatic analgesia and amnesia are established following an intravenous dose of 1 to 2 mg/kg.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m489-ans-iv-agents-dissociative-anaesthesia.webp",
+                "alt": "Clinical illustration of dissociative anaesthesia, the patient cataleptic with open nystagmic eyes and preserved airway tone.",
+                "caption": "An open eyed cataleptic state with slow nystagmus and maintained airway reflexes is shown in dissociative anaesthesia. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "NMDA Receptor Antagonism",
+            "tx": "**Ketamine NMDA receptor antagonism** acts via non-competitive inhibition of the phencyclidine binding site within the N-methyl-D-aspartate (NMDA) receptor-gated calcium ion channel complex. By preventing excitatory glutamate neurotransmission, ketamine suppresses dorsal horn central sensitization (wind-up phenomenon), rendering it a formidable analgesic for neuropathic pain and opioid-tolerant surgical patients.",
+            "say": "Ketamine NMDA receptor antagonism acts via non-competitive inhibition of the phencyclidine binding site within the N-methyl-D-aspartate (NMDA) receptor-gated calcium ion channel complex. By preventing excitatory glutamate neurotransmission, ketamine suppresses dorsal horn central sensitization (wind-up phenomenon), rendering it a formidable analgesic for neuropathic pain and opioid-tolerant surgical patients.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Receptor Target",
+                    "Ketamine Interaction",
+                    "Physiological Consequence",
+                    "Clinical Therapeutic Utility"
+                ],
+                "rows": [
+                    [
+                        "NMDA Receptor Ion Channel",
+                        "Non-competitive channel pore blockade",
+                        "Suppresses central glutamate excitation",
+                        "Abolishes spinal dorsal horn wind-up pain"
+                    ],
+                    [
+                        "Opioid Mu and Kappa Receptors",
+                        "Weak agonist activity",
+                        "Augments systemic antinociception",
+                        "Reduces perioperative opioid requirements"
+                    ],
+                    [
+                        "Monoaminergic Neurons",
+                        "Inhibits noradrenaline/dopamine reuptake",
+                        "Indirect sympathetic stimulation",
+                        "Maintains cardiac output in acute shock"
+                    ],
+                    [
+                        "Cholinergic Muscarinic Receptors",
+                        "Antagonistic inhibition",
+                        "Central anticholinergic symptoms",
+                        "Contributes to emergence delirium and bronchodilation"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Sympathetic Cardiovascular Stimulation",
+            "tx": "**Indirect sympathetic activation by ketamine** stimulates central sympathetic nervous system outflow while inhibiting peripheral neuronal uptake of norepinephrine. In hemodynamically stable patients, this produces transient elevations in heart rate, systemic blood pressure, cardiac output, and myocardial oxygen consumption, making ketamine the induction agent of choice for acute hypovolemic shock, trauma resuscitation, and cardiac tamponade.",
+            "say": "Indirect sympathetic activation by ketamine stimulates central sympathetic nervous system outflow while inhibiting peripheral neuronal uptake of norepinephrine. In hemodynamically stable patients, this produces transient elevations in heart rate, systemic blood pressure, cardiac output, and myocardial oxygen consumption, making ketamine the induction agent of choice for acute hypovolemic shock, trauma resuscitation, and cardiac tamponade.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Intact Catecholamine Reserves (Trauma Shock)",
+                    "points": [
+                        "Central sympathetic outflow surges dramatically",
+                        "Inhibits peripheral noradrenaline reuptake",
+                        "Maintains systemic arterial blood pressure and organ perfusion"
+                    ]
+                },
+                "right": {
+                    "title": "Depleted Catecholamine Stores (ICU Sepsis)",
+                    "points": [
+                        "Sympathetic compensatory mechanisms are completely exhausted",
+                        "Unmasks direct negative inotropic myocardial depression",
+                        "Can trigger abrupt paradoxical hypotension and cardiovascular collapse"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Bronchodilation and Airway Mechanics",
+            "tx": "**Potent bronchodilatory action of ketamine** makes it the undisputed induction agent of choice for patients in severe acute bronchospasm or status asthmaticus. Ketamine relaxes bronchial smooth muscle through two synergistic mechanisms: indirect sympathetic stimulation of beta-2 adrenergic receptors and direct antagonistic blockade of voltage-sensitive calcium channels and muscarinic receptors on bronchial myocytes.",
+            "say": "Potent bronchodilatory action of ketamine makes it the undisputed induction agent of choice for patients in severe acute bronchospasm or status asthmaticus. Ketamine relaxes bronchial smooth muscle through two synergistic mechanisms: indirect sympathetic stimulation of beta-2 adrenergic receptors and direct antagonistic blockade of voltage-sensitive calcium channels and muscarinic receptors on bronchial myocytes.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Administer IV ketamine 1.5 to 2 mg/kg in acute asthma"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Surge in circulating endogenous noradrenaline"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Direct beta-2 adrenergic bronchial relaxation"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Immediate reduction in peak airway pressures and wheezing"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Emergence Delirium and Hallucinations",
+            "tx": "**Ketamine emergence delirium phenomena** occur in up to 10 to 30 percent of adult patients emerging from ketamine anaesthesia, manifesting as vivid colourful dreams, floating sensory distortions, frightening illusions, and acute psychomotor delirium. The incidence is substantially reduced by co-administering intravenous benzodiazepines (midazolam 2 to 4 mg), ensuring a quiet dark recovery room, or using the purified S-enantiomer.",
+            "say": "Ketamine emergence delirium phenomena occur in up to 10 to 30 percent of adult patients emerging from ketamine anaesthesia, manifesting as vivid colourful dreams, floating sensory distortions, frightening illusions, and acute psychomotor delirium. The incidence is substantially reduced by co-administering intravenous benzodiazepines (midazolam 2 to 4 mg), ensuring a quiet dark recovery room, or using the purified S-enantiomer.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Patient Risk Factor",
+                    "Delirium Incidence",
+                    "Protective Intervention",
+                    "Clinical Rationale"
+                ],
+                "rows": [
+                    [
+                        "Adult Age (over 16 years)",
+                        "High incidence (20 to 30 percent)",
+                        "Pre-treatment with IV midazolam",
+                        "Benzodiazepines suppress limbic hyperreactivity"
+                    ],
+                    [
+                        "Female Gender",
+                        "Moderately elevated incidence",
+                        "Co-administer low-dose propofol",
+                        "Propofol provides calm pleasant awakening"
+                    ],
+                    [
+                        "High Rapid IV Dosing (>2 mg/kg)",
+                        "Significantly increased risk",
+                        "Slow titration over 60 seconds",
+                        "Avoids massive cerebral concentration spikes"
+                    ],
+                    [
+                        "Young Pediatric Patients (<10 years)",
+                        "Low incidence (under 5 percent)",
+                        "Minimal pharmacological prophylaxis required",
+                        "Children experience fewer frightening illusions"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cerebral Hemodynamics Controversy",
+            "tx": "**Cerebral blood flow and ICP with ketamine** traditionally discouraged its use in neurotrauma because ketamine causes cerebral vasodilation, increasing cerebral blood flow (CBF), cerebral metabolic rate (CMRO2), and intracranial pressure (ICP). However, modern neurocritical care demonstrates that when normocapnia is maintained via controlled mechanical ventilation alongside concurrent GABAergic sedation, ketamine safely preserves cerebral perfusion pressure without causing dangerous ICP spikes.",
+            "say": "Cerebral blood flow and ICP with ketamine traditionally discouraged its use in neurotrauma because ketamine causes cerebral vasodilation, increasing cerebral blood flow (CBF), cerebral metabolic rate (CMRO2), and intracranial pressure (ICP). However, modern neurocritical care demonstrates that when normocapnia is maintained via controlled mechanical ventilation alongside concurrent GABAergic sedation, ketamine safely preserves cerebral perfusion pressure without causing dangerous ICP spikes.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Spontaneous Respiration Setting",
+                    "points": [
+                        "Mild hypoventilation elevates arterial PaCO2",
+                        "Direct cerebral vasodilation synergizes with hypercapnia",
+                        "Produces significant elevation of intracranial pressure"
+                    ]
+                },
+                "right": {
+                    "title": "Controlled Mechanical Ventilation",
+                    "points": [
+                        "Strict maintenance of normocapnia (PaCO2 35 mmHg)",
+                        "Co-administration of propofol or midazolam blunts vasodilation",
+                        "Safely maintains cerebral perfusion pressure in neurotrauma"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Etomidate Hemodynamic Stability",
+            "tx": "**Etomidate pristine cardiovascular stability** stems from its unique carboxylated imidazole structure. Administered at 0.2 to 0.3 milligrams per kilogram, etomidate induces rapid hypnosis via GABA-A receptor activation with virtually zero impact on myocardial contractility, cardiac output, or systemic vascular resistance, making it the premier induction agent for patients with severe aortic stenosis, severe coronary artery disease, or congestive heart failure.",
+            "say": "Etomidate pristine cardiovascular stability stems from its unique carboxylated imidazole structure. Administered at 0.2 to 0.3 milligrams per kilogram, etomidate induces rapid hypnosis via GABA-A receptor activation with virtually zero impact on myocardial contractility, cardiac output, or systemic vascular resistance, making it the premier induction agent for patients with severe aortic stenosis, severe coronary artery disease, or congestive heart failure.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Induction Agent",
+                    "Impact on Mean Arterial Pressure",
+                    "Impact on Systemic Vascular Resistance",
+                    "Suitability for Severe Aortic Stenosis"
+                ],
+                "rows": [
+                    [
+                        "Etomidate (0.3 mg/kg)",
+                        "Minimal change (under 5 percent)",
+                        "Stable; zero peripheral vasodilation",
+                        "Gold standard; preserves critical coronary perfusion"
+                    ],
+                    [
+                        "Propofol (2 mg/kg)",
+                        "Severe drop (20 to 30 percent)",
+                        "Marked reduction from arterial vasodilation",
+                        "High risk of fatal hemodynamic collapse"
+                    ],
+                    [
+                        "Thiopentone (4 mg/kg)",
+                        "Moderate drop (15 to 20 percent)",
+                        "Peripheral venodilation and myocardial depression",
+                        "Poor; drops preload and cardiac stroke output"
+                    ],
+                    [
+                        "Ketamine (2 mg/kg)",
+                        "Moderate rise (10 to 25 percent)",
+                        "Elevates afterload and heart rate",
+                        "Avoid; tachycardia exhausts stenotic left ventricle"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Myoclonus and Pain on Etomidate",
+            "tx": "**Adverse motor effects of etomidate** include involuntary myoclonic muscle jerking observed in up to 50 to 70 percent of un-premedicated patients, caused by transient disinhibition of subcortical extrapyramidal pathways rather than epileptic cortical activity. In addition, formulation in propylene glycol causes significant pain on peripheral venous injection and high rates of postoperative nausea and vomiting.",
+            "say": "Adverse motor effects of etomidate include involuntary myoclonic muscle jerking observed in up to 50 to 70 percent of un-premedicated patients, caused by transient disinhibition of subcortical extrapyramidal pathways rather than epileptic cortical activity. In addition, formulation in propylene glycol causes significant pain on peripheral venous injection and high rates of postoperative nausea and vomiting.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Inject IV etomidate without opioid premedication"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Transient disinhibition of subcortical motor pacemakers"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Myoclonic muscle twitching in extremities and trunk"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Abolish completely using prior IV fentanyl or midazolam"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

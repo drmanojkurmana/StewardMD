@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-ncd-diabetes",
+ "subject": "community-medicine",
+ "module": "cm-ncd",
+ "title": "Diabetes Mellitus: Diagnosis, Screening and Community Prevention",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Diagnostic thresholds, confirmed twice",
+   "tx": "**Diabetes diagnosis** uses fasting plasma glucose 126 mg/dl or more, 2-hour post-load 200 or more, HbA1c 6.5 percent or more, or random glucose 200 or more with classic symptoms, confirmed by repeat testing on a different day when asymptomatic. One abnormal number in a well person starts verification, not lifelong labelling.",
+   "say": "Thresholds, then confirmation. One twenty six fasting, two hundred after load, six point five A1c, or symptomatic random two hundred. Asymptomatic positives repeat on another day before lifelong labels attach.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Diabetes threshold"],
+    "rows": [
+     ["Fasting plasma glucose", "126 mg/dl or more"],
+     ["2-hour OGTT glucose", "200 mg/dl or more"],
+     ["HbA1c", "6.5 percent or more"],
+     ["Random with symptoms", "200 mg/dl or more"]
+    ]
+   }
+  },
+  {
+   "title": "Prediabetes: the prevention window",
+   "tx": "**Prediabetes** brackets impaired fasting glucose (100 to 125) and impaired glucose tolerance (140 to 199 at 2 hours), converting to diabetes at several percent yearly, faster with obesity and family history. Lifestyle programmes in trials cut conversion by over half, making this band the highest-yield prevention population in the entire NCD portfolio.",
+   "say": "Between normal and diabetic lies the prevention window. Fasting one hundred to one twenty five, post-load one forty to one ninety nine. Structured lifestyle halves conversion in trials; no drug population beats that yield.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prediabetes found",
+     "points": ["Intensive lifestyle offered", "Weight and activity targets set", "Annual glucose surveillance"]
+    },
+    "right": {
+     "title": "Prediabetes ignored",
+     "points": ["Steady yearly conversion", "Complications begin silently", "Diagnosis arrives with disease"]
+    }
+   }
+  },
+  {
+   "title": "Screening logic in NPCDCS",
+   "tx": "**Community screening** from age 30 uses risk scoring (age, waist, activity, family history in the Indian Diabetes Risk Score pattern) plus capillary glucose, referring positives for venous confirmation. Screening everyone with laboratory panels bankrupts programmes; risk-stratified two-step testing preserves yield per rupee, the arithmetic NPCDCS camps run on.",
+   "say": "Two steps preserve yield. Risk score and capillary glucose for all above thirty, venous confirmation for positives. Laboratory panels for entire villages bankrupt programmes before finding their diabetics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Adults 30 plus risk-scored"},
+     {"id": "b", "label": "Capillary glucose measured"},
+     {"id": "c", "label": "Positives referred for venous test"},
+     {"id": "d", "label": "Confirmed cases registered, treated"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "HbA1c: control compass, diagnostic caveats",
+   "tx": "**HbA1c** reflects average glucose over about 3 months, with under 7 percent the common control target in programme teaching, individualised upward for frailty and hypoglycaemia risk. Anaemia, haemoglobinopathies and recent transfusion distort it in either direction, so discordance with glucose readings accuses the assay context before the patient.",
+   "say": "A1c averages three months; under seven percent is the common target, loosened for frailty. Anaemia and haemoglobin variants distort it both ways. Discordance with glucose readings accuses context before patient.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "A1c caution"],
+    "rows": [
+     ["Iron deficiency anaemia", "May read falsely high"],
+     ["Haemolysis or transfusion", "May read falsely low"],
+     ["Frail elderly, hypoglycaemia risk", "Target individualised upward"]
+    ]
+   }
+  },
+  {
+   "title": "Complications map the follow-up calendar",
+   "tx": "**Complication screening** schedules feet (neuropathy, pulses, ulcers), eyes (annual retinal examination), kidneys (urine albumin and creatinine), and cardiovascular risk (pressure, lipids, smoking) from diagnosis in type 2 disease, because years of silent hyperglycaemia precede the label. Foot ulcers precede most diabetes amputations and are the most preventable item on the list.",
+   "say": "Follow-up is a calendar, not a glucose log. Feet, retina, kidney and vessels from diagnosis in type two, because silent years preceded it. Foot ulcers precede most amputations and yield most to prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Organ", "Scheduled check"],
+    "rows": [
+     ["Feet", "Sensation, pulses, skin at visits"],
+     ["Eyes", "Dilated retinal examination yearly"],
+     ["Kidneys", "Urine albumin, creatinine yearly"],
+     ["Heart and vessels", "Pressure, lipids, tobacco review"]
+    ]
+   }
+  },
+  {
+   "title": "Hypoglycaemia: the treatment's shadow",
+   "tx": "**Hypoglycaemia** stalks insulin and sulfonylurea users: adrenergic warnings (sweating, tremor, palpitations) then neuroglycopenia (confusion, seizures), treated conscious with 15 grams fast carbohydrate and recheck, unconscious with intravenous dextrose or glucagon, never oral fluids. Driving, fasting festivals and renal failure are the counselling flashpoints Indian practice meets weekly.",
+   "say": "Know the shadow. Sweating and tremor warn before confusion and seizures. Conscious: fifteen grams fast sugar, recheck. Unconscious: vein or glucagon, never oral fluids. Driving and fasting need explicit counselling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Warning symptoms recognised"},
+     {"id": "b", "label": "15 g fast carbohydrate if conscious"},
+     {"id": "c", "label": "Recheck in 15 minutes"},
+     {"id": "d", "label": "IV dextrose or glucagon if unconscious"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Gestational diabetes: one-step Indian practice",
+   "tx": "**Gestational screening** in India uses the DIPSI single-step 75 gram glucose load irrespective of fasting, diagnosing at 2-hour 140 mg/dl or more, applied universally at first contact and repeated at 24 to 28 weeks if initially negative. Postpartum mothers re-enter glucose surveillance for life, and offspring inherit metabolic risk programming, making one pregnancy test a two-generation intervention.",
+   "say": "One load, any hour. Seventy five grams, two-hour one forty diagnoses in Indian single-step practice, repeated mid-pregnancy if negative. Postpartum surveillance lasts for mother and child across generations.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step", "Indian practice"],
+    "rows": [
+     ["Test", "75 g oral glucose, fasting not required"],
+     ["Diagnosis", "2-hour value 140 mg/dl or more"],
+     ["Timing", "First contact, repeat 24 to 28 weeks"],
+     ["After delivery", "Lifelong maternal glucose surveillance"]
+    ]
+   }
+  },
+  {
+   "title": "Population prevention: food and movement systems",
+   "tx": "**Primordial prevention** targets obesogenic environments: refined carbohydrate and sweetened beverage marketing, vanished walking infrastructure, and desk-bound schooling. Taxation of sugar-sweetened drinks, front-of-pack labelling, urban design for activity and school food standards are the policy instruments named in NCD best-buy lists, beyond any clinic's prescription pad.",
+   "say": "Environments manufacture diabetes. Drink taxes, honest labels, walkable streets and school food standards outrank prescription pads at population scale. Best-buy policy lists name these before clinic interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Policy levers",
+     "points": ["Sweetened drink taxation", "Front-of-pack labelling", "Walkable urban design"]
+    },
+    "right": {
+     "title": "Clinic levers",
+     "points": ["Risk screening and prediabetes care", "Weight management support", "Complication surveillance"]
+    }
+   }
+  },
+  {
+   "title": "Diabetes and TB, hypertension: the syndemic",
+   "tx": "**Comorbidity clustering** defines Indian NCD care: diabetes worsens tuberculosis outcomes and TB drugs disturb glucose; hypertension coexists in most diabetics and multiplies vascular risk; depression erodes self-care in both. NPCDCS and NTEP bidirectional screening (diabetics tested for TB symptoms, TB patients for glucose) operationalises the syndemic at facility level.",
+   "say": "Diseases arrive in clusters here. Diabetes worsens TB, hypertension multiplies diabetic vascular risk, depression erodes all self-care. Bidirectional screening between programmes operationalises the syndemic at the facility door.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pairing", "Bidirectional action"],
+    "rows": [
+     ["Diabetes and TB", "Screen each in the other's clinic"],
+     ["Diabetes and hypertension", "Combined vascular risk management"],
+     ["Diabetes and depression", "Screen mood, support adherence"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

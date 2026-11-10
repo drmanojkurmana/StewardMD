@@ -1,0 +1,195 @@
+{
+  "v": 1,
+  "module": "phm-targeted-anticancer",
+  "subject": "pharmacology",
+  "title": "Targeted Anticancer I: Imatinib, EGFR Inhibitors and Trastuzumab",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Imatinib** proved targeted therapy: a small molecule occupying the ATP pocket of **BCR ABL**, the Philadelphia chromosome fusion kinase driving chronic myeloid leukaemia, converting a fatal disease into a chronic oral one with major molecular responses tracked by PCR. It also inhibits KIT (gastrointestinal stromal tumours) and PDGF receptors, billing fluid retention, periorbital oedema, cramps, rash and marrow suppression at doses monitored by blood counts and transcript levels.",
+      "say": "Imatinib turned CML into a PCR monitored chronic disease; the fusion kinase was the whole disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/targeted-anticancer-kinase-antibody-immunotherapy-fig1.webp",
+        "alt": "Targeted anticancer kinase inhibitor and antibody mechanisms diagram",
+        "caption": "Targeted kinase and antibody inhibition, imatinib at the BCR ABL ATP pocket."
+      }
+    },
+    {
+      "tx": "**Imatinib resistance** imatinib's second chapter: kinase domain mutations (T315I the gatekeeper resisting first and second generation successors until ponatinib and asciminib's allosteric pocket), BCR ABL amplification and non adherence masquerading as resistance, so transcript rises trigger adherence interrogation then mutation testing then drug succession. Treatment free remission in deep sustained responders is modern CML's negotiated frontier.",
+      "say": "Rising transcripts: ask about adherence first, mutations second, then change the drug.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
+        "alt": "Chronic myeloid leukaemia pathogenesis diagram showing BCR ABL fusion",
+        "caption": "CML pathogenesis through BCR ABL, the fusion imatinib and its successors inhibit."
+      }
+    },
+    {
+      "tx": "**Gefitinib** and **erlotinib**, first generation EGFR tyrosine kinase inhibitors, taught oncology to genotype before prescribing: dramatic responses in EGFR mutated lung adenocarcinoma (exon 19 deletions, L858R, enriched in Asian never smokers) and failure in unselected disease, billing acneiform rash and diarrhoea as on target skin and gut EGFR blockade, with rash severity loosely tracking benefit. Interstitial lung disease is their rare lethal ledger.",
+      "say": "EGFR inhibitors work on mutations, not on lung cancer generally; rash is the target showing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Responder biology",
+          "points": [
+            "Exon 19 deletion and L858R sensitising",
+            "Adenocarcinoma, never smoker enrichment",
+            "T790M gatekeeper resistance at progression",
+            "Liquid biopsy tracks resistance mutations"
+          ]
+        },
+        "right": {
+          "title": "On target burdens",
+          "points": [
+            "Acneiform rash and paronychia",
+            "Diarrhoea dose limiting",
+            "Interstitial lung disease rare and serious",
+            "CYP3A4 interactions (erlotinib smoking induced)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Osimertinib**, third generation and mutant selective, inhibits sensitising and T790M EGFR while sparing wild type (less rash and diarrhoea), penetrates the CNS, and owns first line EGFR mutated lung cancer and adjuvant stages after trials moved it ever earlier. QT prolongation, cardiomyopathy signals and interstitial lung disease persist at lower rates, and C797S writes the next resistance chapter successors are chasing.",
+      "say": "Osimertinib hits mutant EGFR and brain metastases while sparing skin; resistance still evolves by letter and number.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Osimertinib design",
+          "points": [
+            "Sensitising plus T790M coverage",
+            "Wild type sparing: tolerability improved",
+            "CNS penetration clinically real",
+            "First line and adjuvant positions"
+          ]
+        },
+        "right": {
+          "title": "Osimertinib vigilance",
+          "points": [
+            "QT and ejection fraction monitoring in risk",
+            "Interstitial lung disease vigilance kept",
+            "C797S and MET amplification at progression",
+            "Embryo fetal toxicity counselling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Trastuzumab**, a monoclonal antibody against HER2, transformed HER2 positive breast and gastric cancer from worst to treatable biology: given with chemotherapy, then a year of adjuvant therapy, billing reversible cardiac dysfunction (type II, not dose cumulative, monitored by ejection fraction and usually recovering on interruption) unlike anthracycline injury. HER2 testing (immunohistochemistry and in situ hybridisation) is the prescription's first page.",
+      "say": "Trastuzumab made HER2 positive disease favourable; its cardiac injury pauses rather than accumulates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HER2 targeting system",
+          "points": [
+            "IHC 3+ or ISH amplified eligibility",
+            "With chemotherapy, then maintenance to a year adjuvant",
+            "Pertuzumab dual blockade in defined settings",
+            "Antibody drug conjugates succeed it (T DM1, T DXd)"
+          ]
+        },
+        "right": {
+          "title": "Cardiac personality",
+          "points": [
+            "Type II: not cumulative, usually reversible",
+            "Ejection fraction every 3 months tradition",
+            "Hold for significant EF fall, rechallenge often possible",
+            "Anthracycline proximity raises risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antibody drug conjugates** (ADCs) generalise trastuzumab's delivery trick: antibody postcode, linker, cytotoxic payload (trastuzumab emtansine and deruxtecan, brentuximab vedotin in CD30 lymphoma), billing payload toxicities (thrombocytopenia and liver for T DM1, neutropenia, lung injury and emesis for deruxtecan) at doses chemotherapy could never target. HER2 low disease entered eligibility through deruxtecan's bystander payload effect, redrawing the biomarker boundary.",
+      "say": "ADCs are chemotherapy with a postcode; the payload still writes the toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ADC anatomy",
+          "points": [
+            "Antibody selects antigen address",
+            "Linker stability decides premature payload release",
+            "Payload potency exceeds conventional dosing",
+            "Bystander effect kills antigen low neighbours"
+          ]
+        },
+        "right": {
+          "title": "Named ADCs",
+          "points": [
+            "Trastuzumab deruxtecan: HER2 positive and low",
+            "Trastuzumab emtansine: earlier HER2 settings",
+            "Brentuximab vedotin: CD30 lymphomas",
+            "Enfortumab vedotin: urothelial cancer"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Kinase inhibitor grammar** collects its shared fences: CYP3A4 metabolism inviting azole and rifampicin collisions, QT prolongation across many agents, hypertension and hand foot with VEGF pathway drugs (next lesson), embryo fetal toxicity nearly universal, and adherence as the invisible dose (oral oncology succeeds or fails in kitchens, not infusion chairs). Therapeutic drug monitoring remains exceptional (imatinib levels in defined failures).",
+      "say": "Oral targeted drugs move pharmacology into the kitchen; adherence and CYP3A4 are their infusion nurses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Shared fences",
+          "points": [
+            "CYP3A4 inhibitors and inducers rewrite levels",
+            "QT surveillance by agent",
+            "Pregnancy forbidden nearly universally",
+            "Diarrhoea and rash self management teaching"
+          ]
+        },
+        "right": {
+          "title": "Adherence system",
+          "points": [
+            "Pill counts and refill rhythms reviewed",
+            "Toxicity diaries at follow up",
+            "Transcript or imaging non response: ask first",
+            "Financial toxicity addressed as adherence factor"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Beyond EGFR** extend the genotype litany (alectinib, dabrafenib trametinib, sotorasib, larotrectinib's tissue agnostic approval), each a small examination universe unified by one rule: the drug follows the alteration, never the organ alone. Molecular tumour boards exist to match them, and rebiopsy at progression is their resistance management habit.",
+      "say": "Match drug to alteration, not organ; rebiopsy at progression is the habit that keeps matches current.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "test",
+            "label": "Tumour genotyped (tissue or liquid biopsy)"
+          },
+          {
+            "id": "match",
+            "label": "Alteration matched to targeted drug"
+          },
+          {
+            "id": "respond",
+            "label": "Response imaged and tolerability coached"
+          },
+          {
+            "id": "rebiopsy",
+            "label": "Progression: rebiopsy for resistance mechanism"
+          }
+        ],
+        "edges": [
+          [
+            "test",
+            "match"
+          ],
+          [
+            "match",
+            "respond"
+          ],
+          [
+            "respond",
+            "rebiopsy"
+          ]
+        ]
+      }
+    }
+  ]
+}

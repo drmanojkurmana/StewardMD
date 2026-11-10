@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "id": "oph-pharmacology-ethambutol-toxicity",
+ "subject": "ophthalmology",
+ "module": "oph-pharmacology",
+ "title": "Ocular Drug Toxicity and Screening",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Optic nerve toxicity** from a first line antitubercular agent causes painless central vision loss with colour desaturation, often before fundus changes appear visibly. Baseline and monthly vision with colour testing therefore guard patients on prolonged courses of that therapy. Colour loss therefore functions as the earliest toxicity alarm.",
+   "say": "Colour alarm together gives toxicity guarding in tuberculosis clinics for adults receiving prolonged first line therapy courses. Baseline gives comparison value additionally. Monthly gives testing cadence.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m313-oph-pharmacology-ethambutol-toxicity.webp",
+    "alt": "Fundus photograph and visual field showing toxic optic neuropathy with subtle disc hyperaemia and bilateral central scotomas",
+    "caption": "Fundus photograph and visual field showing toxic optic neuropathy with subtle disc hyperaemia and bilateral central scotomas. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Stopping the offending agent early offers the only recovery chance, because continued exposure converts functional colour loss into permanent optic atrophy over time. Eye symptoms on therapy therefore earn urgent drug review with the prescribing team, never routine annual review. **Symptoms stop and call** therefore appears in counselling for this antitubercular course.",
+   "say": "Urgent review together gives toxicity response in tuberculosis clinics for adults reporting new colour or central vision changes. Stopping gives recovery chance additionally. Atrophy gives delay consequence.",
+   "vis": {
+    "kind": "flow",
+    "title": "Toxicity response flow",
+    "nodes": [
+     {
+      "id": "baseline",
+      "label": "Vision colour baseline recorded"
+     },
+     {
+      "id": "monitor",
+      "label": "Monthly symptom and colour check"
+     },
+     {
+      "id": "alarm",
+      "label": "New colour loss reported"
+     },
+     {
+      "id": "review",
+      "label": "Urgent prescriber drug review"
+     }
+    ],
+    "edges": [
+     [
+      "baseline",
+      "monitor"
+     ],
+     [
+      "monitor",
+      "alarm"
+     ],
+     [
+      "alarm",
+      "review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two screening images combine here to catch poisoning that symptoms notice too late. Autofluorescence maps a ring of parafoveal damage while the scan shows photoreceptors thinned into the **flying saucer sign**, healthy foveal centre flanked by hollowed slopes. That pattern is hydroxychloroquine toxicity, which can progress briefly even after the tablets stop. Annual screening after five years of therapy, sooner with kidney disease or high doses, exists because early rings on imaging precede any complaint the patient can describe.",
+   "say": "Parafoveal photoreceptor loss with a flying saucer profile on OCT reveals hydroxychloroquine retinal toxicity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m314-oph-pharmacology-ethambutol-toxicity.webp",
+    "alt": "Fundus autofluorescence and OCT scan demonstrating hydroxychloroquine retinal toxicity with parafoveal photoreceptor loss ('flying saucer' sign)",
+    "caption": "Fundus autofluorescence and OCT scan demonstrating hydroxychloroquine retinal toxicity with parafoveal photoreceptor loss ('flying saucer' sign). Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Bull's eye maculopathy** describes ring shaped macular pigment damage from long term antimalarial therapy, where advanced rings mean irreversible central harm. Screening aims to detect damage before the ring stage using imaging and field testing in modern programmes. Prevention therefore depends on dose discipline and scheduled screening attendance.",
+   "say": "Screening prevention together gives maculopathy protection in rheumatology clinics for adults receiving long term antimalarial therapy. Ring gives advanced sign additionally. Dose gives discipline centre."
+  },
+  {
+   "tx": "The safer antimalarial successor drug still needs baseline examination within the first year and annual screening after five years, earlier with kidney disease or high dose exposure. Retinal imaging and central fields detect change before symptoms in screened patients. **Five year annual** rhythm therefore structures long term antimalarial eye surveillance.",
+   "say": "Surveillance rhythm together gives antimalarial screening in eye clinics for adults on long term therapy for autoimmune disease. Baseline gives first year task additionally. Kidney gives earlier start.",
+   "vis": {
+    "kind": "table",
+    "title": "Toxicity screening map",
+    "cols": [
+     "Therapy risk",
+     "Eye surveillance"
+    ],
+    "rows": [
+     [
+      "Antitubercular agent",
+      "Baseline and monthly colour vision"
+     ],
+     [
+      "Antimalarial long term",
+      "Baseline then annual after five years"
+     ],
+     [
+      "Antiarrhythmic",
+      "Cornea noted, usually benign"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An antiarrhythmic agent commonly deposits in the cornea as whorl like vortex keratopathy, visible on slit lamp yet rarely affecting vision or needing drug cessation. Recognising its benign nature therefore prevents unnecessary stopping of important cardiac therapy. **Whorls reassure** therefore guides slit lamp findings on this cardiac medication.",
+   "say": "Benign recognition together gives corneal reassurance in eye clinics for adults receiving long term antiarrhythmic cardiac therapy. Whorl gives vortex pattern additionally. Cessation gives unnecessary avoidance.",
+   "vis": {
+    "kind": "table",
+    "title": "Corneal drug signs",
+    "cols": [
+     "Pattern",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Vortex whorls",
+      "Antiarrhythmic deposit, benign"
+     ],
+     [
+      "Steroid cataract",
+      "Posterior subcapsular opacity"
+     ],
+     [
+      "Stevens type reactions",
+      "Urgent systemic referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long term steroid therapy by any route can produce posterior subcapsular cataract, linking medication history to a characteristic lens opacity location in younger adults. Lens examination therefore asks about inhaled, skin and systemic steroid exposure in early cataract. **Steroid lens history** therefore completes cataract clerking in younger patients.",
+   "say": "Exposure history together gives cataract explanation in lens clinics for younger adults with posterior subcapsular opacity. Route gives any exposure additionally. Location gives characteristic sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Toxicity needing action",
+     "points": [
+      "Colour loss optic nerve",
+      "Macular ring damage"
+     ]
+    },
+    "right": {
+     "title": "Finding needing reassurance",
+     "points": [
+      "Corneal vortex whorls",
+      "Continue cardiac therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Local anaesthetic drops abused for pain relief destroy corneal epithelium and delay healing, so take home anaesthetic supply is never appropriate in eye care practice. Corneal clinics therefore treat non healing epithelium by asking directly about drop misuse. **Never take home** therefore states the anaesthetic rule in corneal teaching.",
+   "say": "Direct asking together gives corneal protection in eye clinics for adults with non healing epithelial defects and chronic pain. Misuse gives hidden cause additionally. Healing gives delay mechanism.",
+   "vis": {
+    "kind": "table",
+    "title": "Drug toxicity counselling",
+    "cols": [
+     "Point",
+     "Wording"
+    ],
+    "rows": [
+     [
+      "Report colour change",
+      "Call immediately, do not wait"
+     ],
+     [
+      "Screening visits",
+      "Protection before symptoms"
+     ],
+     [
+      "Anaesthetic drops",
+      "Clinic use only, never home"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors here: colour loss alarms optic toxicity, macular rings mean late antimalarial damage prevented by screening, and corneal whorls reassure while steroid lens opacity needs exposure history. **Screen before symptoms** therefore closes ocular drug toxicity teaching. Students therefore state screening interval and alarm symptom together in medication scenarios.",
+   "say": "Screening priority together gives toxicity anchors in examinations for students reliably in medication cases everywhere. Colour gives earliest alarm additionally. Whorls gives benign completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Toxicity anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Optic toxicity",
+      "Colour loss is earliest alarm"
+     ],
+     [
+      "Maculopathy",
+      "Screen before bull's eye ring"
+     ],
+     [
+      "Vortex keratopathy",
+      "Benign, continue therapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Optic toxicity alarm",
+   "b": "Antitubercular therapy: colour desaturation precedes visible fundus change; urgent review."
+  },
+  {
+   "f": "Antimalarial screening",
+   "b": "Baseline in year one, annual after five years; bull's eye ring is late damage."
+  },
+  {
+   "f": "Vortex keratopathy",
+   "b": "Antiarrhythmic corneal whorls are benign; do not stop cardiac therapy."
+  }
+ ],
+ "keys": [
+  "Screen before symptoms appear",
+  "Colour loss is the earliest alarm",
+  "Whorls reassure, rings alarm"
+ ]
+}

@@ -1,0 +1,322 @@
+{
+    "v": 1,
+    "id": "ans-ventilation-volume-control-ventilation",
+    "subject": "anaesthesia",
+    "module": "ans-ventilation",
+    "title": "Mechanical Ventilation: Modes, Lung-Protective Strategy, and Weaning Indices",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Volume Control versus Pressure Control",
+            "tx": "**Volume control and pressure control ventilation mechanics** contrast fundamental delivery algorithms: Volume Control Ventilation (VCV) guarantees a preset tidal volume (VT) regardless of changing lung compliance, delivering gas with a constant square-wave inspiratory flow that results in variable peak airway pressures. In contrast, Pressure Control Ventilation (PCV) guarantees a preset inspiratory pressure with a decelerating flow pattern, resulting in variable tidal volumes.",
+            "say": "Volume control and pressure control ventilation mechanics contrast fundamental delivery algorithms: Volume Control Ventilation (VCV) guarantees a preset tidal volume (VT) regardless of changing lung compliance, delivering gas with a constant square-wave inspiratory flow that results in variable peak airway pressures. In contrast, Pressure Control Ventilation (PCV) guarantees a preset inspiratory pressure with a decelerating flow pattern, resulting in variable tidal volumes.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Ventilator Mode",
+                    "Guaranteed Controlled Variable",
+                    "Flow Waveform Pattern",
+                    "Clinical Hazard in Deterioration"
+                ],
+                "rows": [
+                    [
+                        "Volume Control (VCV)",
+                        "Preset tidal volume (guaranteed minute volume)",
+                        "Constant square-wave flow pattern",
+                        "Stiff lungs generate dangerous peak airway pressures"
+                    ],
+                    [
+                        "Pressure Control (PCV)",
+                        "Preset inspiratory airway pressure limit",
+                        "Decelerating exponential flow pattern",
+                        "Stiff lungs experience precipitous drops in tidal volume"
+                    ],
+                    [
+                        "Pressure Support (PSV)",
+                        "Patient-triggered pressure assist",
+                        "Decelerating flow terminating at flow threshold",
+                        "Demands intact spontaneous respiratory drive"
+                    ],
+                    [
+                        "SIMV Mode",
+                        "Synchronized mandatory breaths with spontaneous breathing",
+                        "Mixed mandatory and pressure-supported breaths",
+                        "Used historically during gradual ventilator weaning"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Two waveform pairs on this ventilator screen describe opposite promises. Volume control delivers its set breath with a square flow pattern and lets pressure fall where compliance dictates, while pressure control caps the pressure and lets volume wander. Reading the **pressure and flow scalars** together tells you which promise your patient is actually receiving and how stiff lungs are rewriting it breath by breath. A climbing pressure trace at constant flow warns of worsening compliance long before an alarm bothers to sound.",
+            "say": "Comparing pressure and flow scalars distinguishes volume control from pressure control ventilation at the bedside.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m524-ans-ventilation-volume-control-ventilation.webp",
+                "alt": "Mechanical ventilation airway pressure and flow scalars comparing volume control and pressure control",
+                "caption": "Mechanical ventilation airway pressure and flow scalars comparing volume control and pressure control. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Decelerating Flow in Pressure Control",
+            "tx": "**Decelerating flow profile of pressure control** delivers maximum inspiratory gas flow at the start of inspiration when lung volume is lowest and airway resistance is easily overcome, tapering down as alveolar pressure approaches target peak pressure. This decelerating flow pattern achieves lower peak airway pressures, optimizes alveolar recruitment in stiff non-compliant lung units, and improves gas distribution in acute respiratory distress syndrome.",
+            "say": "Decelerating flow profile of pressure control delivers maximum inspiratory gas flow at the start of inspiration when lung volume is lowest and airway resistance is easily overcome, tapering down as alveolar pressure approaches target peak pressure. This decelerating flow pattern achieves lower peak airway pressures, optimizes alveolar recruitment in stiff non-compliant lung units, and improves gas distribution in acute respiratory distress syndrome.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Constant Flow (Volume Control)",
+                    "points": [
+                        "Fixed square-wave flow delivers constant gas velocity",
+                        "Generates high initial resistive peak airway pressures",
+                        "Can exacerbate barotrauma in heterogeneous ARDS lungs"
+                    ]
+                },
+                "right": {
+                    "title": "Decelerating Flow (Pressure Control)",
+                    "points": [
+                        "High initial flow tapers exponentially across inspiration",
+                        "Promotes homogeneous alveolar recruitment across lung units",
+                        "Lower peak airway pressures for equivalent tidal volume delivery"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Lung-Protective ARDS Ventilation",
+            "tx": "**ARDS Network lung-protective ventilation protocol** minimizes ventilator-induced lung injury (volutrauma and barotrauma) through three strict parameters: low tidal volumes of 4 to 8 milliliters per kilogram of predicted body weight (PBW, calculated from patient height and sex, never actual weight), maintaining end-inspiratory plateau pressure (P-plat) strictly under 30 cmH2O, and applying positive end-expiratory pressure (PEEP).",
+            "say": "ARDS Network lung-protective ventilation protocol minimizes ventilator-induced lung injury (volutrauma and barotrauma) through three strict parameters: low tidal volumes of 4 to 8 milliliters per kilogram of predicted body weight (PBW, calculated from patient height and sex, never actual weight), maintaining end-inspiratory plateau pressure (P-plat) strictly under 30 cmH2O, and applying positive end-expiratory pressure (PEEP).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Protective Parameter",
+                    "Target Clinical Boundary",
+                    "Underlying Pathophysiology Prevented",
+                    "Adjustment Action if Exceeded"
+                ],
+                "rows": [
+                    [
+                        "Tidal Volume",
+                        "4 to 8 mL/kg predicted body weight",
+                        "Volutrauma and alveolar overdistension",
+                        "Reduce tidal volume down to 4 mL/kg if P-plat high"
+                    ],
+                    [
+                        "End-Inspiratory Plateau Pressure",
+                        "Strictly under 30 cmH2O",
+                        "Barotrauma and alveolar rupture",
+                        "Measure via 0.5-second inspiratory pause"
+                    ],
+                    [
+                        "Driving Pressure (P-plat minus PEEP)",
+                        "Strictly under 14 to 15 cmH2O",
+                        "Dynamic cyclic lung tissue strain",
+                        "Strongest predictor of survival; optimize PEEP"
+                    ],
+                    [
+                        "Permissive Hypercapnia",
+                        "Arterial pH 7.20 to 7.30 (PaCO2 50-70)",
+                        "Accepts respiratory acidosis to protect lungs",
+                        "Contraindicated in intracranial hypertension"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "This protocol shrinks the breath to protect the lung from its own ventilator. Tidal volumes of six millilitres per kilogram of predicted body weight, plateau pressure held below thirty, and PEEP titrated by table make up the **ARDS Network protocol** that first proved gentleness saves lives in ARDS. Predicted weight comes from height and sex, never the scales, a detail whose neglect quietly volutraumatises obese patients. The schematic's discipline feels restrictive until you remember the alternative stretches injured alveoli like overblown balloons.",
+            "say": "Low tidal volume by predicted weight with plateau pressure limits is the lung protective ARDS Network strategy.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m525-ans-ventilation-volume-control-ventilation.webp",
+                "alt": "ARDS Network lung-protective ventilation protocol schematic illustrating low tidal volume and plateau limit",
+                "caption": "ARDS Network lung-protective ventilation protocol schematic illustrating low tidal volume and plateau limit. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "PEEP and Alveolar Derecruitment",
+            "tx": "**Positive end-expiratory pressure mechanisms** prevent end-expiratory alveolar collapse (atelectasis) and cyclic recruitment-derecruitment shear stress (atelectotrauma). By maintaining positive airway pressure at end-expiration, PEEP increases functional residual capacity, shifts tidal ventilation onto the compliant linear portion of the respiratory pressure-volume curve, and redistributes extravascular lung water, reducing intrapulmonary shunt fraction.",
+            "say": "Positive end-expiratory pressure mechanisms prevent end-expiratory alveolar collapse (atelectasis) and cyclic recruitment-derecruitment shear stress (atelectotrauma). By maintaining positive airway pressure at end-expiration, PEEP increases functional residual capacity, shifts tidal ventilation onto the compliant linear portion of the respiratory pressure-volume curve, and redistributes extravascular lung water, reducing intrapulmonary shunt fraction.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "ARDS causes alveolar flooding and surfactant depletion"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Apply titrated PEEP (8 to 15 cmH2O)"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Recruits collapsed non-aerated alveoli and prevents cyclic derecruitment"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Improves PaO2/FiO2 ratio while slashing mechanical shear stress"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Peak versus Plateau Pressures",
+            "tx": "**Peak inspiratory and plateau pressure differentiation** isolates resistive airway pathology from compliance elastance pathology: Peak Inspiratory Pressure (PIP) reflects total resistance of the ventilator circuit, endotracheal tube, and airways plus lung compliance. Plateau pressure (measured during an end-inspiratory pause) reflects pure static compliance of the respiratory system (lung parenchyma plus chest wall).",
+            "say": "Peak inspiratory and plateau pressure differentiation isolates resistive airway pathology from compliance elastance pathology: Peak Inspiratory Pressure (PIP) reflects total resistance of the ventilator circuit, endotracheal tube, and airways plus lung compliance. Plateau pressure (measured during an end-inspiratory pause) reflects pure static compliance of the respiratory system (lung parenchyma plus chest wall).",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Elevated PIP with Normal Plateau Pressure",
+                    "points": [
+                        "Indicates pure increased airway resistance issue",
+                        "Kinked endotracheal tube, biting, secretions, or acute bronchospasm",
+                        "Alveoli are completely protected from barotrauma"
+                    ]
+                },
+                "right": {
+                    "title": "Elevated PIP with Elevated Plateau Pressure",
+                    "points": [
+                        "Indicates diminished respiratory system compliance",
+                        "Tension pneumothorax, pulmonary edema, severe ARDS, or obesity",
+                        "High risk of alveolar overdistension and barotrauma"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Ventilator Weaning and RSBI",
+            "tx": "**Rapid shallow breathing index weaning predictor** (Tobin RSBI) is calculated during one minute of unassisted spontaneous breathing via a T-piece or minimal pressure support: RSBI equals respiratory frequency (f in breaths/min) divided by tidal volume (VT in liters). An RSBI under 105 breaths/min/L strongly predicts successful extubation, whereas an RSBI exceeding 105 indicates impending diaphragmatic exhaustion and weaning failure.",
+            "say": "Rapid shallow breathing index weaning predictor (Tobin RSBI) is calculated during one minute of unassisted spontaneous breathing via a T-piece or minimal pressure support: RSBI equals respiratory frequency (f in breaths/min) divided by tidal volume (VT in liters). An RSBI under 105 breaths/min/L strongly predicts successful extubation, whereas an RSBI exceeding 105 indicates impending diaphragmatic exhaustion and weaning failure.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Weaning Parameter",
+                    "Threshold for Extubation Success",
+                    "Calculated Formula",
+                    "Physiological Significance"
+                ],
+                "rows": [
+                    [
+                        "Rapid Shallow Breathing Index (RSBI)",
+                        "Under 105 breaths/min/liter",
+                        "Frequency (f) / Tidal Volume (L)",
+                        "Absence of rapid shallow tachypneic fatigue"
+                    ],
+                    [
+                        "Spontaneous Breathing Trial (SBT)",
+                        "Tolerates 30 to 120 minutes",
+                        "Low CPAP or T-piece trial",
+                        "Confirms adequate muscular endurance"
+                    ],
+                    [
+                        "Maximal Inspiratory Pressure (P-max)",
+                        "More negative than minus 25 cmH2O",
+                        "Negative pressure gauge measurement",
+                        "Confirms diaphragmatic contractile strength"
+                    ],
+                    [
+                        "Vital Capacity",
+                        "Exceeds 10 to 15 mL/kg",
+                        "Deep inspiratory breath measurement",
+                        "Sufficient reserve for deep sighing and coughing"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Ventilator-Associated Pneumonia (VAP) Bundle",
+            "tx": "**Ventilator-associated pneumonia prevention bundle** slashes secondary nosocomial lung infections in mechanically ventilated patients through evidence-based nursing and clinical interventions: maintain head-of-bed elevation strictly between 30 and 45 degrees (preventing passive aspiration of gastric contents), daily sedation vacations with spontaneous breathing trials, continuous subglottic secretion drainage, and avoidance of routine ventilator circuit changes.",
+            "say": "Ventilator-associated pneumonia prevention bundle slashes secondary nosocomial lung infections in mechanically ventilated patients through evidence-based nursing and clinical interventions: maintain head-of-bed elevation strictly between 30 and 45 degrees (preventing passive aspiration of gastric contents), daily sedation vacations with spontaneous breathing trials, continuous subglottic secretion drainage, and avoidance of routine ventilator circuit changes.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Maintain head-of-bed elevation at 30 to 45 degrees continuously"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Perform daily sedation vacation and assess readiness to extubate"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Drain subglottic secretions continuously via dedicated suction port"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Maintain endotracheal tube cuff pressure between 20 and 30 cmH2O"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Arterial Blood Gas Systematic Analysis",
+            "tx": "**Systematic arterial blood gas interpretation** follows a five-step diagnostic framework: evaluate pH (normal 7.35 to 7.45; acidosis under 7.35, alkalosis over 7.45), assess primary respiratory driver via PaCO2 (normal 35 to 45 mmHg), assess metabolic component via serum bicarbonate (normal 22 to 26 mEq/L), calculate the anion gap (Na minus [Cl plus HCO3]; normal 8 to 12 mEq/L) to distinguish high-anion gap from normal-anion gap acidosis, and evaluate oxygenation (PaO2/FiO2 ratio).",
+            "say": "Systematic arterial blood gas interpretation follows a five-step diagnostic framework: evaluate pH (normal 7.35 to 7.45; acidosis under 7.35, alkalosis over 7.45), assess primary respiratory driver via PaCO2 (normal 35 to 45 mmHg), assess metabolic component via serum bicarbonate (normal 22 to 26 mEq/L), calculate the anion gap (Na minus [Cl plus HCO3]; normal 8 to 12 mEq/L) to distinguish high-anion gap from normal-anion gap acidosis, and evaluate oxygenation (PaO2/FiO2 ratio).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Acid-Base Derangement",
+                    "Arterial pH",
+                    "Primary Disturbance",
+                    "Compensatory Physiological Response"
+                ],
+                "rows": [
+                    [
+                        "Metabolic Acidosis",
+                        "Under 7.35",
+                        "Serum bicarbonate (HCO3) <22 mEq/L",
+                        "Hyperventilation drops PaCO2 (Winter formula: 1.5xHCO3 + 8)"
+                    ],
+                    [
+                        "Respiratory Acidosis",
+                        "Under 7.35",
+                        "Arterial PaCO2 >45 mmHg",
+                        "Renal retention of bicarbonate (1 mEq/L acute, 4 mEq/L chronic)"
+                    ],
+                    [
+                        "Metabolic Alkalosis",
+                        "Exceeds 7.45",
+                        "Serum bicarbonate (HCO3) >26 mEq/L",
+                        "Hypoventilation retains PaCO2 (elevates PaCO2 toward 50 mmHg)"
+                    ],
+                    [
+                        "Respiratory Alkalosis",
+                        "Exceeds 7.45",
+                        "Arterial PaCO2 <35 mmHg",
+                        "Renal excretion of bicarbonate (2 mEq/L acute, 5 mEq/L chronic)"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

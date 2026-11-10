@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-herpesviruses",
+  "subject": "microbiology",
+  "title": "Varicella Zoster Virus, Shingles and Cytomegalovirus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Varicella zoster virus** causes chickenpox during primary infection and herpes zoster after latency in dorsal root or cranial nerve ganglia. Varicella is highly contagious by airborne spread and lesion contact. Zoster follows declining cell mediated immunity with age or immunosuppression. The same virus therefore creates a diffuse childhood exanthem and a localised dermatomal eruption decades later.",
+      "say": "Chickenpox is first infection; shingles is VZV waking in one ganglion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Varicella",
+          "points": [
+            "Generalised itchy lesions in different stages",
+            "Macules, vesicles and crusts coexist",
+            "More severe in adults and pregnancy",
+            "Airborne precautions for susceptible inpatients"
+          ]
+        },
+        "right": {
+          "title": "Zoster",
+          "points": [
+            "Pain may precede rash by days",
+            "Unilateral dermatomal vesicles",
+            "Does not normally cross midline",
+            "Postherpetic neuralgia can persist for months"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Shingles** diagnosis is usually clinical, but PCR helps in atypical, disseminated or zoster sine herpete presentations where pain occurs without rash. Vesicles should be unroofed and the base swabbed. Antivirals work best within seventy two hours yet remain indicated later if new lesions, eye involvement or immunocompromise are present. Pain control is a treatment goal from the first day, not an afterthought.",
+      "say": "A dermatomal vesicular rash needs early antiviral therapy and deliberate pain control.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urgent features",
+          "points": [
+            "Hutchinson sign suggests nasociliary eye risk",
+            "Ramsay Hunt syndrome affects ear and facial nerve",
+            "Dissemination beyond primary and adjacent dermatomes",
+            "Visceral disease in profound immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "Management",
+          "points": [
+            "Valacyclovir or acyclovir promptly",
+            "Ophthalmology for eye involvement",
+            "Analgesia including neuropathic agents when needed",
+            "Recombinant zoster vaccine for prevention in eligible adults"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cytomegalovirus** is a beta herpesvirus that establishes latency in myeloid progenitors and persists in many tissues. Most immunocompetent infections are silent or cause a mononucleosis-like illness with negative heterophile tests. Reactivation or primary infection in transplant recipients and advanced HIV can cause retinitis, colitis, pneumonitis, hepatitis and graft injury. Tissue invasive disease requires compatible organ signs plus histology or validated molecular evidence.",
+      "say": "CMV is quiet in healthy hosts and an organ-by-organ opportunist when T cell control fails.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hosts at risk",
+          "points": [
+            "Solid organ and stem cell transplant recipients",
+            "Advanced HIV",
+            "Fetus after maternal primary infection",
+            "Critically ill immunocompetent patients occasionally"
+          ]
+        },
+        "right": {
+          "title": "Organ disease",
+          "points": [
+            "Retinitis threatening sight",
+            "Colitis with ulceration and bleeding",
+            "Pneumonitis especially after stem cell transplant",
+            "Hepatitis, encephalitis and marrow suppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "CMV infected cells enlarge with a basophilic intranuclear **owl eye inclusion** and smaller cytoplasmic inclusions. Histology remains valuable in colitis and pneumonitis because blood viral load alone cannot prove which organ is invaded. Quantitative CMV DNA monitoring guides pre emptive therapy after transplantation; thresholds and kinetics differ by assay and organ risk, so trends must be interpreted with a single validated platform where possible.",
+      "say": "Owl eye cells prove CMV in tissue; blood viral load shows systemic replication pressure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tissue proof",
+          "points": [
+            "Cytomegalic cells with nuclear inclusion",
+            "Halo around inclusion creates owl eye",
+            "Immunohistochemistry increases sensitivity",
+            "Biopsy site must match clinical syndrome"
+          ]
+        },
+        "right": {
+          "title": "Blood monitoring",
+          "points": [
+            "Quantitative PCR in plasma or whole blood",
+            "Rising trend can trigger preemptive therapy",
+            "Prophylaxis used in highest risk transplants",
+            "Low level DNAemia is not automatically organ disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Congenital CMV** is the leading infectious cause of sensorineural hearing loss and neurodevelopmental injury in many settings. Maternal primary infection carries higher transmission risk than reactivation, but preexisting immunity does not eliminate fetal disease. Newborn saliva or urine PCR within the first three weeks distinguishes congenital from postnatal acquisition. Hearing follow up remains necessary even when the newborn examination is normal.",
+      "say": "A positive CMV test after three weeks cannot prove congenital infection; test early and follow hearing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "maternal",
+            "label": "Maternal infection or reactivation"
+          },
+          {
+            "id": "fetal",
+            "label": "Placental and fetal infection"
+          },
+          {
+            "id": "test",
+            "label": "Urine or saliva PCR by three weeks"
+          },
+          {
+            "id": "follow",
+            "label": "Serial hearing and developmental follow up"
+          }
+        ],
+        "edges": [
+          [
+            "maternal",
+            "fetal"
+          ],
+          [
+            "fetal",
+            "test"
+          ],
+          [
+            "test",
+            "follow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ganciclovir and valganciclovir inhibit CMV DNA synthesis after initial phosphorylation, but can cause neutropenia and thrombocytopenia. Foscarnet and cidofovir are alternatives with nephrotoxicity. **Letermovir** inhibits the terminase complex and is used for prophylaxis in defined transplant groups, not as a universal treatment. **Maribavir** targets the viral kinase and has a role in refractory or resistant CMV under specialist direction.",
+      "say": "CMV drugs trade antiviral power against marrow and kidney toxicity, so monitoring is inseparable.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treatment backbone",
+          "points": [
+            "IV ganciclovir for severe disease",
+            "Oral valganciclovir for many stable patients",
+            "Monitor full blood count and renal function",
+            "Reduce immunosuppression where feasible"
+          ]
+        },
+        "right": {
+          "title": "Special situations",
+          "points": [
+            "Foscarnet for UL97 resistance or marrow intolerance",
+            "Cidofovir needs renal protection strategies",
+            "Letermovir mainly prophylaxis in eligible transplant recipients",
+            "Resistance genotyping guides refractory disease"
+          ]
+        }
+      }
+    }
+  ]
+}

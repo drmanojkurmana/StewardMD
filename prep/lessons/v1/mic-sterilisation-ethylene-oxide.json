@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-sterilisation",
+  "subject": "microbiology",
+  "title": "Ethylene Oxide, Hydrogen Peroxide Plasma and Low-Temperature Sterilisation",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Ethylene oxide** (EtO) is an alkylating gas that sterilises heat and moisture sensitive devices (catheters, endoscope accessories, electrical equipment, packaged disposables) at 37 to 63 degrees over hours, penetrating packaging and lumens, then demanding prolonged aeration because residual EtO and its ethylene chlorohydrin products burn tissue and carry carcinogenic and mutagenic staff risk. Concentration, humidity, temperature and time quadrangulate its cycles.",
+      "say": "EtO sterilises the heat fragile and then must be aired out of them; penetration and patience are its prices.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "EtO cycle",
+          "points": [
+            "Alkylates DNA and proteins in all microbes and spores",
+            "Low temperature, high penetration (lumens, packaging)",
+            "Hours of exposure plus 8 to 12 hours aeration traditions",
+            "Humidity and gas concentration critical"
+          ]
+        },
+        "right": {
+          "title": "EtO hazards",
+          "points": [
+            "Residual gas burns tissue and haemolyses blood in devices",
+            "Carcinogen and mutagen: staff exposure monitored",
+            "Flammable and explosive handling rules",
+            "Environmental emission controls tightening"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hydrogen peroxide plasma** (gas plasma) sterilises in under an hour at near room temperature: vaporised peroxide diffuses through the load, radiofrequency energy creates microbicidal plasma radicals, and residues resolve to water and oxygen needing no aeration. Lumens have validated length and diameter limits, cellulose and liquids are forbidden, and heat sensitive cameras, scopes and electronics are its natural loads.",
+      "say": "Plasma turns peroxide into radicals and back into water; fast, cool and lumen limited.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Plasma profile",
+          "points": [
+            "Cycle under 75 minutes typically",
+            "No toxic residue or aeration",
+            "Moisture sensitive loads must be dry",
+            "Lumen claims validated per model"
+          ]
+        },
+        "right": {
+          "title": "Plasma exclusions",
+          "points": [
+            "Cellulose, linen and paper absorb peroxide",
+            "Liquids and powders forbidden",
+            "Long narrow lumens beyond claims fail",
+            "Higher per cycle consumable cost"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Peracetic acid systems** sterilise immersible endoscopes and surgical items in automated liquid chemical cycles at point of use (no storage sterility, items used immediately), while vapour phase peroxide rooms decontaminate isolation spaces and equipment between patients. Each low temperature method trades storage, speed, material compatibility and penetration differently, which is why sterile services departments run a portfolio, not a machine.",
+      "say": "Liquid peracetic sterilises for immediate use only; methods form a portfolio, not a rivalry.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peracetic acid",
+          "points": [
+            "Automated immersion cycles, sporicidal",
+            "Point of use: no wrapped storage",
+            "Corrosion managed by formulation",
+            "Endoscopes and delicate instruments"
+          ]
+        },
+        "right": {
+          "title": "Room peroxide vapour",
+          "points": [
+            "Isolation room and equipment decontamination",
+            "Sporicidal surface efficacy",
+            "Room sealed and aerated after cycle",
+            "Outbreak tool (C difficile, norovirus adjunct)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Low temperature methods** inherit the same referee: biological indicators with Geobacillus stearothermophilus spores for peroxide and plasma systems, chemical integrators per pack, and parametric records per cycle, with EtO additionally monitored for residual gas in devices and workplace air. A method's novelty never exempts its spores.",
+      "say": "Every steriliser, however futuristic, still answers to a spore ampoule.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Monitoring shared",
+          "points": [
+            "Biological indicators cycle appropriate",
+            "Chemical indicators in every pack",
+            "Cycle parameters recorded and reviewed",
+            "Failed indicator recalls the load"
+          ]
+        },
+        "right": {
+          "title": "EtO extras",
+          "points": [
+            "Device residual testing traditions",
+            "Workplace exposure badges",
+            "Aeration times validated per material",
+            "Emission abatement systems"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Material compatibility decides** method before microbiology does: steam warps and dulls, EtO aerates slowly out of plastics, plasma excludes cellulose, peracetic corrodes some metals, and every manufacturer's instructions for use legally define validated cycles for that device. Reprocessing single use devices and exceeding lumen claims are where sterile services incidents are born.",
+      "say": "The device's instructions choose the cycle; improvisation is an incident report in embryo.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "device",
+            "label": "Device and manufacturer reprocessing instructions"
+          },
+          {
+            "id": "method",
+            "label": "Validated method selected (steam, EtO, plasma, liquid)"
+          },
+          {
+            "id": "cycle",
+            "label": "Cycle run with indicators"
+          },
+          {
+            "id": "release",
+            "label": "Indicators pass: load released and traced"
+          }
+        ],
+        "edges": [
+          [
+            "device",
+            "method"
+          ],
+          [
+            "method",
+            "cycle"
+          ],
+          [
+            "cycle",
+            "release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Endoscope reprocessing is** low temperature disinfection's daily battlefield: bedside precleaning, leak testing, manual brush cleaning (the step that decides everything), high level disinfection in automated reprocessors (glutaraldehyde or peracetic from the next lesson), rinsing, alcohol and forced air drying, and vertical storage, with duodenoscope elevator mechanisms teaching outbreaks when any step thins.",
+      "say": "Scopes are made safe by brushing and drying more than by the disinfectant's brand.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reprocessing chain",
+          "points": [
+            "Preclean at bedside immediately",
+            "Leak test and manual brush all channels",
+            "Automated high level disinfection",
+            "Dry with alcohol and forced air, store vertical"
+          ]
+        },
+        "right": {
+          "title": "Failure literature",
+          "points": [
+            "Elevator channel duodenoscopes and CRE outbreaks",
+            "Biofilm in wet stored channels",
+            "Culture surveillance programmes debated",
+            "Single use scopes enter where risk concentrates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**EtO's regulatory weather** (emissions, worker exposure, supply concentration) pushed hospitals toward peroxide systems and steam where devices allow, a live example that sterilisation choices are environmental and occupational decisions as much as microbiological ones. Disaster and low resource settings invert the portfolio again toward steam's robustness.",
+      "say": "Sterilisation portfolios follow regulation and resources as faithfully as microbiology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pressures on EtO",
+          "points": [
+            "Community emission concerns near plants",
+            "Worker exposure limits",
+            "Capacity concentrated in few facilities",
+            "Long turnaround versus surgical schedules"
+          ]
+        },
+        "right": {
+          "title": "Portfolio responses",
+          "points": [
+            "Steam compatible device redesign",
+            "Peroxide plasma and vapour expansion",
+            "Outsourced versus in house economics",
+            "Low resource: autoclave primacy endures"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Examination synthesis for** this family is a matching exercise: heart lung machine components, cystoscopes, plastic syringes (factory radiation), endotracheal tubes, endoscopes and catgut each map to one best method with one reason (heat sensitivity, lumen, packaging, material). Learn the reason and the list memorises itself.",
+      "say": "Name the material constraint and the sterilisation method names itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic matches",
+          "points": [
+            "Cystoscope and endoscope: high level disinfection or EtO",
+            "Plastic disposables: radiation at factory",
+            "Culture media: autoclave (filtration if heat labile)",
+            "Oils and powders: hot air oven"
+          ]
+        },
+        "right": {
+          "title": "Reason first",
+          "points": [
+            "Heat labile plus lumen: EtO or plasma by claim",
+            "Moisture labile: dry heat or gas",
+            "Fluid heat labile: filtration",
+            "Prion risk: single use or destruction"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-behavioural-socialisation",
+  "subject": "community-medicine",
+  "module": "cm-behavioural",
+  "title": "Socialisation, Culture, Family Types, and Social Class",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Socialisation: learning to belong",
+      "tx": "**Socialisation** is the lifelong process by which a person acquires the language, norms, values, skills, and roles of their society, beginning in the family (primary socialisation) and continuing through school, peers, workplaces, and media (secondary socialisation). Health behaviour is socialised early: food habits, hygiene, tobacco norms, and care seeking scripts are absorbed long before any clinic visit teaches them.",
+      "say": "Socialisation teaches us how our society eats, cleans, smokes, and seeks care. Families write the first and deepest draft.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "so1", "label": "Family: primary socialisation" },
+          { "id": "so2", "label": "School, peers, media: secondary" },
+          { "id": "so3", "label": "Adult roles and health habits stabilise" }
+        ],
+        "edges": [["so1", "so2"], ["so2", "so3"]]
+      }
+    },
+    {
+      "title": "Culture and health behaviour",
+      "tx": "**Culture in medical sociology** is the learned, shared way of life of a group: beliefs about hot and cold foods in illness, evil eye explanations of disease, fasting practices, and food taboos in pregnancy. Culture is not ignorance to be scolded but the operating system every health message must run on. Acculturation describes adopting a new culture's traits on migration, with diet and disease patterns shifting within a generation.",
+      "say": "Culture is the software health messages must run on. Work with food beliefs and illness explanations, not against them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cultural patterns aiding health",
+          "points": ["Vegetarian traditions limiting some risks", "Fasting disciplines and food restraint", "Strong elder care expectations"]
+        },
+        "right": {
+          "title": "Patterns needing negotiation",
+          "points": ["Food taboos starving pregnant women", "Hot cold illness theories delaying care", "Faith healing replacing emergency care"]
+        }
+      }
+    },
+    {
+      "title": "Types of family",
+      "tx": "Sociology classifies the **types of family in health practice**: nuclear (couple with unmarried children), joint (multiple related couples and kin sharing roof, kitchen, and purse), extended, three generation, single parent, and broken families where a parent has died or deserted. The family is the unit of health care in Indian practice because decisions, money, and caregiving pool inside it.",
+      "say": "Nuclear, joint, extended, broken: family form decides who pays, decides, and nurses. Treat the family, not just the patient.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Family type", "Structure"],
+        "rows": [
+          ["Nuclear", "Couple plus unmarried children"],
+          ["Joint", "Related couples, common kitchen and purse"],
+          ["Three generation", "Grandparents, parents, children together"],
+          ["Broken", "Parent dead, deserted, or separated"]
+        ]
+      }
+    },
+    {
+      "title": "Joint family: health balance sheet",
+      "tx": "The **joint family system** pools income, childcare, and elder care, buffers crises, and enforces health norms, at the cost of crowding, shared infections, less privacy for contraception counselling, and slower decisions when elders veto modern care. Urbanisation and migration are nuclearising Indian households measurably in census and survey rounds, shifting caregiving burdens onto smaller units.",
+      "say": "Joint families buffer illness costs and care for elders, but crowd infections in and privacy out. Cities are nuclearising fast.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Joint family gains",
+          "points": ["Pooled money for treatment", "Child and elder care built in", "Crisis support and norm enforcement"]
+        },
+        "right": {
+          "title": "Joint family costs",
+          "points": ["Crowding spreads respiratory infection", "Little privacy for young couples", "Elder veto can delay modern care"]
+        }
+      }
+    },
+    {
+      "title": "Family cycle and vulnerable phases",
+      "tx": "Families move through a **family life cycle**: formation, extension with children, complete extension, contraction as children leave, and dissolution. Health risks cluster by phase: young extension strains maternal and child services, contraction brings empty nest loneliness, and dissolution leaves widowed elders destitute. Community workers who map households by phase anticipate needs (immunisation versus elder care) before crises announce them.",
+      "say": "Each family phase carries predictable health needs. Map the phase and you can predict the service before the crisis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "fc1", "label": "Extension: births, immunisation, nutrition" },
+          { "id": "fc2", "label": "Contraction: children leave, chronic disease" },
+          { "id": "fc3", "label": "Dissolution: widowed elder support" }
+        ],
+        "edges": [["fc1", "fc2"], ["fc2", "fc3"]]
+      }
+    },
+    {
+      "title": "Social class and health gradients",
+      "tx": "**Social class** (grouping by occupation, income, education, and prestige) predicts health with brutal regularity: lower classes suffer higher mortality, malnutrition, and exposure, and use preventive services less, the inverse care law. Indian scales operationalise class for research: Kuppuswamy (urban) and BG Prasad (income based) dominate, detailed in the next lesson. Class is a confounder in nearly every epidemiological analysis.",
+      "say": "Lower class means sicker and less served: the inverse care law. Measure class in every community study or be confounded by it.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Class marker", "Health correlate"],
+        "rows": [
+          ["Occupation", "Exposure type and income stability"],
+          ["Education", "Health literacy and service use"],
+          ["Income", "Nutrition, housing, ability to pay"],
+          ["Residence", "Water, sanitation, facility distance"]
+        ]
+      }
+    },
+    {
+      "title": "Kuppuswamy scale introduced",
+      "tx": "The **Kuppuswamy socioeconomic scale** scores the head of family's education (one to seven), occupation (one to ten), and monthly family income (one to twelve), summing to classes from upper (twenty six to twenty nine) to lower (below five). Built for urban families, it needs income revision with inflation (consumer price index linking), the maintenance task students most often forget.",
+      "say": "Kuppuswamy adds education, occupation, and income scores for urban families. Update the income bands or the scale rots.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ku1", "label": "Score education 1 to 7" },
+          { "id": "ku2", "label": "Add occupation 1 to 10, income 1 to 12" },
+          { "id": "ku3", "label": "Total 26 to 29 upper, below 5 lower" }
+        ],
+        "edges": [["ku1", "ku2"], ["ku2", "ku3"]]
+      }
+    },
+    {
+      "title": "Social mobility and social pathology",
+      "tx": "Movement between classes (social mobility) through education and occupation reshapes health within a generation, while **social pathology** studies community level diseases of society: alcoholism, drug dependence, suicide, juvenile delinquency, and prostitution as social diagnoses needing social treatment. Community medicine claims these because their causes and cures sit in families, markets, and laws more than in clinics.",
+      "say": "Addiction and suicide are social pathology: caused socially, cured socially. Clinics alone cannot close that loop.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Social mobility levers",
+          "points": ["Education of daughters", "Skill and occupation change", "Migration and remittances"]
+        },
+        "right": {
+          "title": "Social pathology responses",
+          "points": ["De addiction services plus livelihood", "Suicide prevention and crisis lines", "Legal and rehabilitation frameworks"]
+        }
+      }
+    },
+    {
+      "title": "Doctor as social scientist",
+      "tx": "The closing frame is the **doctor patient relationship in society**: Parsons cast the doctor as applied scientist and the patient in a sick role (detailed next lesson), while Indian practice adds family negotiation, plural medical systems (AYUSH, informal providers), and payment at point of care. Cultural competence (asking what the patient believes caused this illness) is a clinical skill with measurable effects on adherence.",
+      "say": "Ask what the patient believes caused the illness. That one question aligns your prescription with their world.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "dr1", "label": "Elicit the patient's explanatory model" },
+          { "id": "dr2", "label": "Negotiate a plan both worlds accept" },
+          { "id": "dr3", "label": "Adherence and trust compound" }
+        ],
+        "edges": [["dr1", "dr2"], ["dr2", "dr3"]]
+      }
+    }
+  ]
+}

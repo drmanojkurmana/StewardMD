@@ -1,0 +1,311 @@
+{
+    "v": 1,
+    "id": "ans-local-anaesthetics-ester-local-anaesthetics",
+    "subject": "anaesthesia",
+    "module": "ans-local-anaesthetics",
+    "title": "Local Anaesthetic Chemistry: Esters, Amides, pKa, and Onset of Action",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Ester versus Amide Chemical Classes",
+            "tx": "**Classification of ester and amide anaesthetics** divides local anaesthetics into two distinct metabolic families: esters (procaine, chloroprocaine, tetracaine, benzocaine, cocaine) contain an ester (-COO-) linkage, whereas amides (lignocaine, bupivacaine, ropivacaine, prilocaine, mepivacaine, etidocaine) contain an amide (-NHCO-) linkage. Amide molecules are recognized by having two letter 'i's in their spelling, while esters contain only one letter 'i'.",
+            "say": "Classification of ester and amide anaesthetics divides local anaesthetics into two distinct metabolic families: esters (procaine, chloroprocaine, tetracaine, benzocaine, cocaine) contain an ester (-COO-) linkage, whereas amides (lignocaine, bupivacaine, ropivacaine, prilocaine, mepivacaine, etidocaine) contain an amide (-NHCO-) linkage. Amide molecules are recognized by having two letter 'i's in their spelling, while esters contain only one letter 'i'.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Chemical Class",
+                    "Representative Drug Molecules",
+                    "Primary Metabolism Pathway",
+                    "Allergic Reaction Potential"
+                ],
+                "rows": [
+                    [
+                        "Amino-Esters",
+                        "Procaine, chloroprocaine, tetracaine, cocaine",
+                        "Hydrolyzed by plasma pseudocholinesterase",
+                        "Moderate; PABA metabolite triggers IgE allergy"
+                    ],
+                    [
+                        "Amino-Amides",
+                        "Lignocaine, bupivacaine, ropivacaine, prilocaine",
+                        "Hepatic cytochrome P450 microsomal enzymes",
+                        "Extremely rare; reactions driven by methylparaben preservative"
+                    ],
+                    [
+                        "Hybrid Articaine",
+                        "Contains both amide and ester ring bonds",
+                        "90% plasma esterase; 10% hepatic CYP",
+                        "Very low; ultra-short half-life of 20 minutes"
+                    ],
+                    [
+                        "Topical Benzocaine",
+                        "Ester lacking tertiary amine group",
+                        "Plasma pseudocholinesterase",
+                        "Induces acute methaemoglobinaemia"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "One bond in the middle of the molecule decides how the whole drug family lives and dies. Esters carry the **ester linkage** that plasma cholinesterase shreds within minutes, while amides carry an amide bond reserved for slower hepatic handling. The spelling trick follows the chemistry: amides hide two letter i's in names like lignocaine and bupivacaine, esters manage with one. Allergy follows the same divide, since ester breakdown yields the para aminobenzoic acid behind most true local anaesthetic reactions.",
+            "say": "Ester and amide linkages split local anaesthetics into plasma cleared and liver cleared families.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m507-ans-local-anaesthetics-ester-local-anaesthetics.webp",
+                "alt": "Chemical comparison diagram showing ester (-COO-) versus amide (-NHCO-) intermediate linkages",
+                "caption": "Chemical comparison diagram showing ester (-COO-) versus amide (-NHCO-) intermediate linkages. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Pseudocholinesterase Metabolism of Esters",
+            "tx": "**Plasma pseudocholinesterase ester clearance** breaks down amino-ester local anaesthetics rapidly within circulating blood via butyrylcholinesterase. This rapid hydrolysis prevents ester accumulation in the body, resulting in ultra-short elimination half-lives (under one minute for chloroprocaine), though patients with genetic pseudocholinesterase deficiency or organophosphate toxicity experience significantly slowed ester clearance.",
+            "say": "Plasma pseudocholinesterase ester clearance breaks down amino-ester local anaesthetics rapidly within circulating blood via butyrylcholinesterase. This rapid hydrolysis prevents ester accumulation in the body, resulting in ultra-short elimination half-lives (under one minute for chloroprocaine), though patients with genetic pseudocholinesterase deficiency or organophosphate toxicity experience significantly slowed ester clearance.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Inject ester local anaesthetic into vascular tissues"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Rapid uptake into circulating plasma bloodstream"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Pseudocholinesterase cleaves ester bond into PABA and alcohol"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Eliminated with elimination half-life under 1 to 2 minutes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Para-Aminobenzoic Acid Allergic Reactions",
+            "tx": "**Para-aminobenzoic acid allergenicity** explains why ester local anaesthetics carry a substantially higher risk of true IgE-mediated anaphylactic reactions than amides. Enzymatic cleavage of procaine, tetracaine, and chloroprocaine liberates para-aminobenzoic acid (PABA), a potent immunogenic hapten that sensitizes mast cells. In contrast, true allergic reactions to amino-amides are extraordinarily rare, almost universally triggered by methylparaben preservatives.",
+            "say": "Para-aminobenzoic acid allergenicity explains why ester local anaesthetics carry a substantially higher risk of true IgE-mediated anaphylactic reactions than amides. Enzymatic cleavage of procaine, tetracaine, and chloroprocaine liberates para-aminobenzoic acid (PABA), a potent immunogenic hapten that sensitizes mast cells. In contrast, true allergic reactions to amino-amides are extraordinarily rare, almost universally triggered by methylparaben preservatives.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Ester PABA-Mediated Allergy",
+                    "points": [
+                        "Hydrolysis produces immunogenic para-aminobenzoic acid",
+                        "True IgE-mediated anaphylaxis with urticaria and bronchospasm",
+                        "Cross-sensitization occurs across all ester anaesthetics"
+                    ]
+                },
+                "right": {
+                    "title": "Amide Preservative Sensitivity",
+                    "points": [
+                        "Pure amide molecules exhibit zero cross-reactivity with PABA",
+                        "Reactions almost always caused by methylparaben preservative",
+                        "Use single-dose preservative-free vials for suspected allergy"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Hepatic Cytochrome Clearance of Amides",
+            "tx": "**Hepatic clearance kinetics of amides** depend on hepatic blood flow and microsomal cytochrome P450 enzymes (specifically CYP1A2 and CYP3A4). Because amides possess intermediate-to-high hepatic extraction ratios, conditions that decrease hepatic perfusion (congestive heart failure, general anaesthesia, beta-adrenergic blockade) or impair microsomal enzyme function (cirrhosis) substantially prolong elimination half-lives, elevating systemic toxicity risk.",
+            "say": "Hepatic clearance kinetics of amides depend on hepatic blood flow and microsomal cytochrome P450 enzymes (specifically CYP1A2 and CYP3A4). Because amides possess intermediate-to-high hepatic extraction ratios, conditions that decrease hepatic perfusion (congestive heart failure, general anaesthesia, beta-adrenergic blockade) or impair microsomal enzyme function (cirrhosis) substantially prolong elimination half-lives, elevating systemic toxicity risk.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Clinical Factor",
+                    "Impact on Hepatic Clearance",
+                    "Pharmacokinetic Consequence",
+                    "Recommended Dosage Adjustment"
+                ],
+                "rows": [
+                    [
+                        "Congestive Heart Failure",
+                        "Decreased hepatic blood flow",
+                        "Halves lignocaine clearance rate",
+                        "Reduce infusion rates by 50 percent"
+                    ],
+                    [
+                        "Severe Hepatic Cirrhosis",
+                        "Loss of functioning hepatocytes",
+                        "Extends elimination half-life from 1.5h to >5h",
+                        "Decrease total repetitive doses significantly"
+                    ],
+                    [
+                        "CYP3A4 Enzyme Inhibitors",
+                        "Inhibits microsomal biotransformation",
+                        "Accumulation of parent drug and active metabolites",
+                        "Exercise caution with cimetidine or erythromycin"
+                    ],
+                    [
+                        "Normal Healthy Liver",
+                        "High hepatic clearance (approx 1 L/min)",
+                        "Rapid first-pass elimination of swallowed drug",
+                        "Standard weight-based dosage guidelines apply"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "pKa and Henderson-Hasselbalch Kinetics",
+            "tx": "**pKa governing anaesthetic onset velocity** represents the dissociation constant at which exactly 50 percent of the drug exists in the uncharged lipophilic base form (B) and 50 percent exists in the charged hydrophilic cation form (BH+). According to the Henderson-Hasselbalch equation, anaesthetics with a pKa closest to physiological tissue pH (7.4) possess the largest fraction of uncharged base, driving rapid membrane diffusion and fast clinical onset.",
+            "say": "pKa governing anaesthetic onset velocity represents the dissociation constant at which exactly 50 percent of the drug exists in the uncharged lipophilic base form (B) and 50 percent exists in the charged hydrophilic cation form (BH+). According to the Henderson-Hasselbalch equation, anaesthetics with a pKa closest to physiological tissue pH (7.4) possess the largest fraction of uncharged base, driving rapid membrane diffusion and fast clinical onset.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Local Anaesthetic",
+                    "pKa Dissociation Constant",
+                    "Uncharged Base Fraction at pH 7.4",
+                    "Clinical Onset of Action"
+                ],
+                "rows": [
+                    [
+                        "Mepivacaine",
+                        "7.6",
+                        "40 percent uncharged base",
+                        "Very rapid onset (1 to 2 minutes)"
+                    ],
+                    [
+                        "Lignocaine",
+                        "7.9",
+                        "25 percent uncharged base",
+                        "Rapid onset (2 to 3 minutes)"
+                    ],
+                    [
+                        "Bupivacaine",
+                        "8.1",
+                        "15 percent uncharged base",
+                        "Moderate to slow onset (5 to 10 minutes)"
+                    ],
+                    [
+                        "Tetracaine / Procaine",
+                        "8.5 to 8.9",
+                        "Under 5 percent uncharged base",
+                        "Very slow onset (10 to 15 minutes)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Acidosis and Infection Failure",
+            "tx": "**Local anaesthetic failure in infected tissues** occurs when acidic inflammatory exudate (tissue pH falling to 5.5 to 6.0 within an abscess) disrupts the Henderson-Hasselbalch equilibrium. Acidosis heavily ionizes the local anaesthetic into its charged cation form (BH+), leaving under one percent as uncharged lipophilic base (B), rendering molecules incapable of traversing the hydrophobic lipid axonal membrane to reach internal sodium channels.",
+            "say": "Local anaesthetic failure in infected tissues occurs when acidic inflammatory exudate (tissue pH falling to 5.5 to 6.0 within an abscess) disrupts the Henderson-Hasselbalch equilibrium. Acidosis heavily ionizes the local anaesthetic into its charged cation form (BH+), leaving under one percent as uncharged lipophilic base (B), rendering molecules incapable of traversing the hydrophobic lipid axonal membrane to reach internal sodium channels.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Inject local anaesthetic into purulent infected tissue (pH 5.8)"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Extreme acidic environment forces equilibrium toward charged BH+"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Uncharged lipophilic base (B) drops below 1 percent"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Molecules cannot cross axonal membrane; regional block fails completely"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Sodium Bicarbonate Alkalinisation",
+            "tx": "**Alkalinisation using sodium bicarbonate** accelerates the onset of local anaesthesia and reduces injection pain. Adding 1 milliliter of 8.4 percent sodium bicarbonate to 10 milliliters of 1 percent or 2 percent lignocaine elevates solution pH closer to 7.4, increasing the fraction of uncharged lipophilic base four-fold, accelerating neural onset while neutralizing acidic commercial hydrochloric acid vehicles.",
+            "say": "Alkalinisation using sodium bicarbonate accelerates the onset of local anaesthesia and reduces injection pain. Adding 1 milliliter of 8.4 percent sodium bicarbonate to 10 milliliters of 1 percent or 2 percent lignocaine elevates solution pH closer to 7.4, increasing the fraction of uncharged lipophilic base four-fold, accelerating neural onset while neutralizing acidic commercial hydrochloric acid vehicles.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Commercial Acidic Preparation",
+                    "points": [
+                        "Packaged at acidic pH 4.5 to 5.5 to ensure chemical shelf stability",
+                        "Causes severe stinging and burning pain upon subcutaneous injection",
+                        "Low fraction of uncharged base slows trans-axonal penetration"
+                    ]
+                },
+                "right": {
+                    "title": "Bicarbonate-Alkalinised Solution",
+                    "points": [
+                        "Elevates pH toward 7.2 to 7.4 immediately before injection",
+                        "Multiplies uncharged lipid-soluble base fraction by 400 percent",
+                        "Virtually eliminates stinging pain and halves onset latency"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Lipid Solubility and Protein Binding",
+            "tx": "**Lipid solubility and protein binding metrics** govern anaesthetic potency and duration: lipid solubility (measured by the octanol-water partition coefficient) correlates directly with intrinsic anaesthetic potency, allowing lower drug concentrations to block nerve conduction. Plasma protein binding (primarily to alpha-1 acid glycoprotein) correlates with receptor attachment duration, determining the persistence of clinical anaesthesia.",
+            "say": "Lipid solubility and protein binding metrics govern anaesthetic potency and duration: lipid solubility (measured by the octanol-water partition coefficient) correlates directly with intrinsic anaesthetic potency, allowing lower drug concentrations to block nerve conduction. Plasma protein binding (primarily to alpha-1 acid glycoprotein) correlates with receptor attachment duration, determining the persistence of clinical anaesthesia.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Physical Property",
+                    "Key Physicochemical Metric",
+                    "Governing Clinical Trait",
+                    "Clinical Example"
+                ],
+                "rows": [
+                    [
+                        "Lipid Solubility",
+                        "Octanol-buffer partition coefficient",
+                        "Determines intrinsic potency",
+                        "Bupivacaine (oil solubility 1,000) is 4x more potent than lignocaine"
+                    ],
+                    [
+                        "pKa Dissociation Constant",
+                        "Negative logarithm of Ka",
+                        "Determines speed of onset",
+                        "Lignocaine (pKa 7.9) has faster onset than bupivacaine (pKa 8.1)"
+                    ],
+                    [
+                        "Protein Binding",
+                        "Percentage bound to alpha-1 acid glycoprotein",
+                        "Determines duration of action",
+                        "Bupivacaine (95% bound) lasts 4x longer than procaine (6% bound)"
+                    ],
+                    [
+                        "Vascular Absorption",
+                        "Tissue blood flow and vasoactivity",
+                        "Determines systemic toxicity risk",
+                        "Intercostal blocks produce highest peak arterial plasma levels"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

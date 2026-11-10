@@ -1,0 +1,214 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Paracoccidioides Mariner Wheel, Blastomyces and Coccidioides Spherules",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Paracoccidioides** causes a Latin American systemic mycosis of rural workers. In tissue it forms large mother yeast cells ringed by multiple narrow-necked buds, the mariner wheel or ship's wheel appearance. Chronic adult disease affects lungs and mucocutaneous sites, especially painful oral lesions, while the juvenile form is an acute reticuloendothelial illness. Itraconazole is preferred for many cases, with cotrimoxazole as an alternative.",
+      "say": "A yeast ringed by buds like a ship's wheel is Paracoccidioides.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/paracoccidioidomycosis-fig1.webp",
+        "alt": "Paracoccidioides mariner wheel morphology",
+        "caption": "Paracoccidioides brasiliensis yeast cell exhibiting pathognomonic pilot wheel morphology with multiple narrow-necked daughter buds [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "**Blastomyces** produces broad-based budding yeast in tissue, a key discriminator from the narrow-based budding of Histoplasma and Cryptococcus. Blastomycosis affects lungs and spreads to skin, bone and prostate, producing verrucous skin lesions that mimic squamous carcinoma. It overlaps Histoplasma geography in North American river valleys and lake regions. Urine antigen is sensitive but cross-reacts strongly with histoplasmosis.",
+      "say": "Broad-based budding separates Blastomyces from its narrow-based cousins.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blastomyces yeast",
+          "points": [
+            "Eight to fifteen micrometres",
+            "Thick double contoured wall",
+            "Single broad based bud",
+            "Pyogranulomatous inflammation"
+          ]
+        },
+        "right": {
+          "title": "Disease sites",
+          "points": [
+            "Pneumonia that fails antibacterials",
+            "Verrucous skin plaques",
+            "Osteomyelitis",
+            "Prostatic and epididymal disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Coccidioides** forms spherules in tissue: large round structures packed with endospores that rupture and seed new spherules. It lives in arid soils of the Americas and causes valley fever with fever, cough, erythema nodosum and eosinophilia, usually self-limited. Dissemination to meninges, skin and bone strikes immunocompromised and some ethnic risk groups. Its arthroconidia are among the most infectious fungal laboratory hazards.",
+      "say": "Endospore-filled spherules, never yeast, define Coccidioides in tissue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spherule cycle",
+          "points": [
+            "Arthroconidia inhaled from desert dust",
+            "Spherule enlarges in lung",
+            "Endospores released on rupture",
+            "Each endospore forms a new spherule"
+          ]
+        },
+        "right": {
+          "title": "Clinical notes",
+          "points": [
+            "Desert travel or residence",
+            "Erythema nodosum is a favourable immune sign",
+            "Chronic meningitis needs lifelong azole often",
+            "Serology complements culture and histology"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **tissue form shortcut** resolves most dimorphic MCQs faster than geography alone: small intracellular narrow-based yeast is Histoplasma, broad-based bud is Blastomyces, mariner wheel is Paracoccidioides, spherule is Coccidioides, encapsulated narrow-based yeast with mucicarmine-positive capsule suggests Cryptococcus, and cigar-shaped sparse yeast with asteroid bodies suggests Sporothrix. Morphology must still be confirmed by culture, antigen or molecular tests.",
+      "say": "Read the tissue form first and the endemic fungus usually names itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Yeast forms",
+          "points": [
+            "Histoplasma small intracellular",
+            "Blastomyces broad based bud",
+            "Paracoccidioides mariner wheel",
+            "Cryptococcus encapsulated and mucicarmine positive"
+          ]
+        },
+        "right": {
+          "title": "Non yeast forms",
+          "points": [
+            "Coccidioides spherules",
+            "Mucorales broad ribbon hyphae",
+            "Aspergillus septate acute angle hyphae",
+            "Candida yeast with pseudohyphae in tissue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Talaromyces marneffei** is a Southeast Asian dimorphic fungus causing disseminated disease in advanced HIV, with fever, anaemia, lymphadenopathy and skin papules with central umbilication resembling molluscum. Its mould phase produces a red diffusible pigment, and tissue yeast divides by fission with a central septum rather than budding. Travel to endemic regions plus advanced HIV should trigger antigen, culture and early amphotericin or itraconazole therapy.",
+      "say": "Umbilicated skin papules in advanced HIV after Southeast Asia travel suggest Talaromyces.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Talaromyces clues",
+          "points": [
+            "Endemic Southeast Asia and southern China",
+            "Red pigment in mould culture",
+            "Fission yeast with cross wall",
+            "Skin lesions with central necrosis"
+          ]
+        },
+        "right": {
+          "title": "Lookalikes",
+          "points": [
+            "Histoplasmosis clinically overlaps",
+            "Molluscum contagiosum lesions lack systemic illness",
+            "Cryptococcosis skin lesions possible",
+            "Culture and antigen testing separate them"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Endemic mycoses are **not usually person-to-person transmissible**; patients acquire them from soil and dust, so isolation is not required for the fungus itself, though tuberculosis may remain in the differential and need airborne precautions until excluded. This distinction protects contacts appropriately and prevents both complacency and stigma. Laboratory transmission, by contrast, is a genuine risk from mould-phase cultures.",
+      "say": "Patients with endemic mycoses do not infect families, but their cultures can infect laboratories.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "soil",
+            "label": "Inhale soil or dust conidia"
+          },
+          {
+            "id": "convert",
+            "label": "Convert to tissue form"
+          },
+          {
+            "id": "immune",
+            "label": "Immune status decides dissemination"
+          },
+          {
+            "id": "warn",
+            "label": "Warn laboratory before culture"
+          }
+        ],
+        "edges": [
+          [
+            "soil",
+            "convert"
+          ],
+          [
+            "convert",
+            "immune"
+          ],
+          [
+            "immune",
+            "warn"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Thermal dimorphism in **Talaromyces marneffei**, an opportunistic pathogen endemic across Southeast Asia, produces distinctive colony features. At room temperature, mycelial cultures release a striking soluble red pigment that diffuses extensively into surrounding Sabouraud dextrose agar. In host reticuloendothelial macrophages at thirty-seven degrees, the organism transforms into intracellular fission yeasts exhibiting a prominent central transverse septum without budding.",
+      "say": "Talaromyces mycelia secrete diffusing red pigment at room temperature and form septate fission yeasts in tissues.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Temperature",
+          "Morphology & Features"
+        ],
+        "rows": [
+          [
+            "25 degrees Celsius",
+            "Mold with green-yellow colony and diffusing red pigment"
+          ],
+          [
+            "Microscopy at 25C",
+            "Penicillium-like brush conidiophores with chains of conidia"
+          ],
+          [
+            "37 degrees Celsius",
+            "Intracellular oval yeasts multiplying by fission, not budding"
+          ],
+          [
+            "Clinical context",
+            "Severe disseminated disease in advanced HIV infection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic adult paracoccidioidomycosis characteristically causes painful ulcerations across oral, pharyngeal, and nasal mucosa, historically described as **moriform stomatitis** or mulberry stomatitis. Patients present with indurated, granular ulcerations covered by tiny haemorrhagic spots along the gingiva and buccal mucosa. Contiguous regional lymph node enlargement and secondary laryngeal destruction frequently mimic advanced squamous cell carcinoma of the upper aerodigestive tract.",
+      "say": "Granular mulberry stomatitis with microabscesses on oral mucosa mimics head and neck carcinoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Moriform stomatitis features",
+          "points": [
+            "Granular mulberry-like oral ulcerations",
+            "Punctate haemorrhagic vascular dots",
+            "Painful lesions over gums and tongue",
+            "Marked regional cervical lymphadenopathy"
+          ]
+        },
+        "right": {
+          "title": "Pulmonary involvement",
+          "points": [
+            "Bilateral bat-wing interstitial infiltrates",
+            "Spares lung apices unlike tuberculosis",
+            "Fibrosis causes progressive dyspnoea",
+            "Oral itraconazole maintains clinical control"
+          ]
+        }
+      }
+    }
+  ]
+}

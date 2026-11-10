@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-infectious-epi-vehicle-borne",
+ "subject": "community-medicine",
+ "module": "cm-infectious-epi",
+ "title": "Modes of Transmission: Vehicle, Vector, Airborne and Direct Spread",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Direct transmission without an intermediary",
+   "tx": "**Direct transmission** passes the agent person to person without intermediates: direct contact including skin and sexual contact, droplet spread over short range, contact with soil, inoculation into skin or mucosa, and transplacental vertical passage. Each route names its own barrier: condoms, masks at close range, wound care, antenatal screening.",
+   "say": "No intermediary, no delay. Skin contact, short-range droplets, soil contact, direct inoculation and placental passage all qualify. Each route names its own barrier, from condoms to antenatal screening.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Direct route", "Barrier that answers it"],
+    "rows": [
+     ["Direct contact and sexual contact", "Condoms, lesion care"],
+     ["Droplet spread, short range", "Masks, distance at bedside"],
+     ["Transplacental", "Antenatal screening and treatment"],
+     ["Soil contact", "Wound care, footwear"]
+    ]
+   }
+  },
+  {
+   "title": "Vehicle-borne: water and food carry the agent",
+   "tx": "**Vehicle-borne transmission** moves agents on inanimate vehicles, chiefly water and food, also blood, organs and tissues. Water carries typhoid, cholera, dysentery, hepatitis A and gastroenteritis; contaminated food explodes as point source outbreaks. Agents may multiply in the vehicle, as bacteria in milk, or merely ride it, and the dose received decides severity.",
+   "say": "Water and food do the travelling. Typhoid, cholera and hepatitis ride water; shared meals explode as point source outbreaks. Agents may multiply inside the vehicle or merely ride it, and swallowed dose shapes severity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Water vehicle",
+     "points": ["Typhoid, cholera, dysentery", "Hepatitis A, gastroenteritis", "Chlorination interrupts spread"]
+    },
+    "right": {
+     "title": "Food vehicle",
+     "points": ["Point source meal outbreaks", "Multiplication in milk possible", "Cooking and refrigeration interrupt"]
+    }
+   }
+  },
+  {
+   "title": "Vector-borne: mechanical versus biological",
+   "tx": "**Vector-borne transmission** divides into mechanical carriage, where the insect merely transports the agent (flies on food), and biological transmission, where the agent develops or multiplies inside the vector before delivery. Biological forms split further: propagative (multiplication only), developmental (development only) and cyclo-developmental (both), the malaria pattern examiners quote.",
+   "say": "Insects carry two ways. Mechanical carriage is transport only, flies seeding food. Biological transmission transforms the agent inside the vector: multiplication alone, development alone, or both together as malaria shows. The distinction decides incubation inside the vector.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vector pattern", "Inside the vector"],
+    "rows": [
+     ["Mechanical", "No development or multiplication"],
+     ["Propagative", "Multiplication only"],
+     ["Developmental", "Development only"],
+     ["Cyclo-developmental", "Development plus multiplication, malaria"]
+    ]
+   }
+  },
+  {
+   "title": "Airborne: droplet nuclei travel far",
+   "tx": "**Droplet nuclei** are dried residues under 5 microns that float for hours and travel metres, carrying tuberculosis, measles and chickenpox beyond the index room. Larger droplets fall within about a metre and count as direct spread instead. Ventilation, upper-room air disinfection and respiratory isolation answer the nuclei; distance alone answers droplets.",
+   "say": "Size decides distance. Dried nuclei under five microns float for hours carrying tuberculosis and measles across rooms. Larger droplets fall within a metre. Ventilation answers nuclei; mere distance answers only droplets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Droplet nuclei (airborne)",
+     "points": ["Under 5 microns, float for hours", "Tuberculosis, measles, chickenpox", "Ventilation and isolation answer"]
+    },
+    "right": {
+     "title": "Large droplets (direct)",
+     "points": ["Fall within about one metre", "Short range cough and sneeze", "Distance and masks answer"]
+    }
+   }
+  },
+  {
+   "title": "Fomites and unclean hands",
+   "tx": "**Fomite-borne spread** uses contaminated articles: towels, linen, utensils, toys and medical instruments bridging patients. Unclean hands and fingers deserve their own category in the classic scheme, seeding food and mucosa after toilet contact. Handwashing, instrument sterilisation and prompt refrigeration of prepared food cut this whole family at household level.",
+   "say": "Objects and hands bridge patients. Towels, utensils and instruments carry agents between hosts, and unclean fingers seed food after toilet contact. Handwashing and sterilisation cut the whole family at its cheapest point.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Case contaminates article or hands"},
+     {"id": "b", "label": "Agent survives on surface"},
+     {"id": "c", "label": "Susceptible touches, then mouth or wound"},
+     {"id": "d", "label": "Handwashing breaks the chain"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Breaking the chain at its weakest link",
+   "tx": "**Interruption of transmission** changes the environment between reservoir and susceptible host: water treatment from chlorination to full processing, clean food practice, vector and breeding place destruction, and stray animal control. Droplet infections resist this link and lean instead on early treatment and hygiene of secretions, a contrast stems test directly.",
+   "say": "Attack the middle link environmentally. Treated water, clean food practice and vector destruction break chains before hosts meet agents. Droplet infections resist this link and lean on early treatment plus secretion hygiene instead.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Chain link", "Attack mounted there"],
+    "rows": [
+     ["Reservoir", "Diagnosis, treatment, isolation"],
+     ["Transmission route", "Water, food, vector and hand measures"],
+     ["Susceptible host", "Immunisation and chemoprophylaxis"]
+    ]
+   }
+  },
+  {
+   "title": "Protecting the susceptible host",
+   "tx": "The third link takes **active immunisation**, passive immunoglobulin for immediate cover, combined active-passive post-exposure care, chemoprophylaxis for defined exposures, and non-specific measures such as nutrition and personal protection. Diseases controlled solely by immunisation, polio, tetanus, diphtheria and measles among them, prove this link can carry an entire programme.",
+   "say": "Strengthen the final link. Vaccines for durable cover, immunoglobulin for immediate cover, both together after exposure, drugs for defined risks. Polio, tetanus, diphtheria and measles control rests almost entirely on this link.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immunity based",
+     "points": ["Active immunisation, durable", "Passive immunoglobulin, immediate", "Combined post-exposure cover"]
+    },
+    "right": {
+     "title": "Non-immunity based",
+     "points": ["Chemoprophylaxis for exposures", "Nutrition and general resistance", "Personal protective measures"]
+    }
+   }
+  },
+  {
+   "title": "Matching route to disease in stems",
+   "tx": "Stems encode routes in clues: **well water plus monsoon flooding** suggests water-borne enteric disease, a shared wedding meal suggests food vehicle point source, and winter crowding with cough suggests droplet spread. Sexual contact, blood products and mosquito density each name their route. Read the clue before the organism; control marks follow the route, not the microbe name.",
+   "say": "Clues name routes before organisms. Flooded wells, shared meals, winter crowding, blood products, mosquito density: each points one way. Control answers follow the route identified, so decode the setting first.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stem clue", "Route to answer"],
+    "rows": [
+     ["Flooded well, many households ill", "Water vehicle-borne"],
+     ["Wedding meal, onset in hours", "Food vehicle, point source"],
+     ["Winter crowding, cough spread", "Droplet, direct"],
+     ["Mosquito density high", "Vector-borne, biological"]
+    ]
+   }
+  },
+  {
+   "title": "One Health closing note",
+   "tx": "**Zoonotic spillover** reminds planners that animal reservoirs, vectors and human behaviour meet in one system: destroying stray dogs, controlling cattle infection and managing rodent reservoirs protect people without a single human prescription. Transmission thinking therefore ends where this set began, with environment and society deciding which microbes reach susceptible hosts.",
+   "say": "Close the loop ecologically. Animal reservoirs, vectors and human behaviour form one system, so dog, cattle and rodent measures protect people without prescriptions. Transmission answers live in environments and societies, not microbes alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Animal reservoir controlled"},
+     {"id": "b", "label": "Vector breeding reduced"},
+     {"id": "c", "label": "Human exposure falls"},
+     {"id": "d", "label": "Spillover events prevented"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

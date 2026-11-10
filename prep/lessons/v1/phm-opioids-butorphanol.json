@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-opioids",
+  "subject": "pharmacology",
+  "title": "Butorphanol, Naloxone, Naltrexone and the Opioid Receptor Families",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Butorphanol**, a kappa agonist and mu partial antagonist delivered intranasally for migraine historically and parenterally for labour and perioperative pain, carries the mixed agent signature: ceiling limited analgesia, sedation, dysphoria at higher doses, and withdrawal precipitation in mu dependent patients. Its nasal spray era added dependence reports that tightened scheduling. Like pentazocine and nalbuphine, it now teaches receptor taxonomy better than it treats pain.",
+      "say": "Butorphanol is the nasal kappa lesson: ceiling, dysphoria, and withdrawal for the dependent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Butorphanol profile",
+          "points": [
+            "Kappa agonist, mu partial antagonist",
+            "Intranasal migraine and parenteral pain history",
+            "Analgesic ceiling with rising sedation",
+            "Dysphoria through kappa activation"
+          ]
+        },
+        "right": {
+          "title": "Mixed agent prohibitions",
+          "points": [
+            "Never in mu dependent patients needing analgesia",
+            "Never layered onto full agonist regimens",
+            "Cardiac work increased: caution after infarction",
+            "Dependence scheduling after misuse reports"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Three receptor families divide opioid pharmacology: **mu** (analgesia, respiratory depression, euphoria, constipation, dependence), kappa (analgesia, dysphoria, miosis contribution) and delta (modulation, mood and analgesia in development), each a GPCR lowering cyclic AMP and neuronal excitability, with endogenous ligands endorphins, enkephalins and dynorphins respectively. Every drug in this module is a chord struck across these three strings, and its adverse melody is predictable from the chord.",
+      "say": "Mu, kappa, delta: three strings, and every opioid adverse effect is a note from one of them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mu and kappa",
+          "points": [
+            "Mu: analgesia, respiratory depression, euphoria, constipation",
+            "Mu agonists: morphine family; antagonists: naloxone",
+            "Kappa: analgesia with dysphoria and psychotomimesis",
+            "Kappa agonists: pentazocine, butorphanol, nalbuphine"
+          ]
+        },
+        "right": {
+          "title": "Delta and endogenous ligands",
+          "points": [
+            "Delta: analgesia modulation, mood, development targets",
+            "Beta endorphin prefers mu, enkephalins delta, dynorphins kappa",
+            "NOP (nociceptin) receptor the fourth family member",
+            "Biased agonism research seeks analgesia without respiratory cost"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Naloxone** is the pure competitive antagonist at all three receptors with no agonist whisper, intravenous onset in one to two minutes, and a half life of 30 to 90 minutes shorter than almost every agonist it reverses, which is why renarcotisation stalks recovery rooms and infusions follow boluses for long acting opioids. Titration to ventilation, not full alertness, avoids catecholamine surge, pain crisis and precipitation misery in dependent patients while keeping the airway safe.",
+      "say": "Naloxone reverses in minutes and leaves in an hour; titrate to breathing and watch for the agonist's return.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-poisoning-antidotes.webp",
+        "alt": "Five panels showing antidotes for common paediatric poisonings including naloxone",
+        "caption": "Poisoning antidote panels, with naloxone the opioid entry in every resuscitation room's memory. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Community naloxone** rewrote overdose geography: intranasal and intramuscular kits carried by families, police and venues reverse witnessed overdoses before ambulances arrive, with repeat dosing for fentanyl analogues and mandatory observation because the antagonist wanes first. Programmes pair kits with the teaching that naloxone cannot harm an opioid free patient, removing hesitation. Post reversal agitation and withdrawal are managed supportively; the alternative being treated is death.",
+      "say": "Give naloxone first and adjudicate later; it cannot hurt the opioid free and the clock is the brain's.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "find",
+            "label": "Unresponsive, slow breathing, miosis: overdose presumed"
+          },
+          {
+            "id": "nalox",
+            "label": "Naloxone intranasal or intramuscular, repeat as needed"
+          },
+          {
+            "id": "vent",
+            "label": "Ventilate, call emergency services, observe"
+          },
+          {
+            "id": "rebound",
+            "label": "Watch for renarcotisation as naloxone wanes"
+          }
+        ],
+        "edges": [
+          [
+            "find",
+            "nalox"
+          ],
+          [
+            "nalox",
+            "vent"
+          ],
+          [
+            "vent",
+            "rebound"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Naltrexone**, naloxone's orally bioavailable, longer acting sibling (with an active metabolite and a monthly depot injection), cannot reverse emergencies (too slow, too oral) and instead guards the future: relapse prevention in opioid dependence after detoxification, and alcohol dependence by blunting reward. It blocks analgesia for months after depot dosing, so surgical planning and alert documentation are part of the prescription, and opioid pain emergencies on naltrexone need non opioid and regional strategies at multiplied doses of patience.",
+      "say": "Naltrexone is the month long fence, not the rescue; plan surgery and pain around it in writing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Naltrexone roles",
+          "points": [
+            "Opioid relapse prevention after detoxification",
+            "Alcohol dependence: heavy drinking days reduced",
+            "Monthly depot defeats daily adherence failure",
+            "Oral daily form for motivated patients"
+          ]
+        },
+        "right": {
+          "title": "Naltrexone obligations",
+          "points": [
+            "Opioid free interval before starting (7 to 10 days)",
+            "Alert card: analgesia blockade documented",
+            "Emergency pain needs non opioid strategies",
+            "Hepatitis caution at high doses historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Miosis**, the pinpoint pupil of mu and kappa agonism on the Edinger Westphal nucleus, completes the overdose triad with respiratory depression and reduced consciousness, and its exceptions teach differential craft: meperidine (anticholinergic) may spare the pupil, hypoxia eventually dilates, and pontine lesions mimic without the history. Tolerance never develops to miosis or constipation, the two mu effects that survive chronic dosing intact and therefore keep diagnostic value in dependent patients.",
+      "say": "Pinpoint pupils plus slow breathing is opioid until excluded; tolerance spares pupils and bowel, so both still testify.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Overdose triad",
+          "points": [
+            "Respiratory depression: rate and CO2 response",
+            "Reduced consciousness progressing to coma",
+            "Miosis: pinpoint, light reactive until hypoxia",
+            "Response to naloxone confirms"
+          ]
+        },
+        "right": {
+          "title": "Mimics and exceptions",
+          "points": [
+            "Pontine haemorrhage: pinpoint without opioids",
+            "Organophosphate poisoning: miosis with secretions",
+            "Pethidine may spare pupil size",
+            "Cold, hypoxic pupils eventually dilate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Peripherally restricted antagonists** cash the receptor map for the gut: methylnaltrexone (quaternary, barrier excluded), naloxegol and naldemedine reverse opioid induced constipation without touching analgesia or precipitating central withdrawal, in palliative and chronic pain populations failing laxatives. Their existence proves constipation is peripheral mu pharmacology, and their perforation caution in bowel obstruction or friable gut is the safety footnote.",
+      "say": "Quaternary antagonists unblock the gut and spare the brain; receptor geography made them possible.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oic",
+            "label": "Opioid induced constipation refractory to laxatives"
+          },
+          {
+            "id": "pamora",
+            "label": "Peripherally restricted mu antagonist started"
+          },
+          {
+            "id": "bowel",
+            "label": "Bowel movement within hours to days"
+          },
+          {
+            "id": "guard",
+            "label": "Analgesia preserved, obstruction excluded first"
+          }
+        ],
+        "edges": [
+          [
+            "oic",
+            "pamora"
+          ],
+          [
+            "pamora",
+            "bowel"
+          ],
+          [
+            "bowel",
+            "guard"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Antagonist precipitated withdrawal** is the shadow curriculum: naloxone in dependence produces abrupt sweating, piloerection, vomiting, diarrhoea, cramps and craving within minutes, miserable and occasionally dangerous (aspiration, catecholamine surge), which is why titration targets ventilation. The same physiology, harnessed gently, performs ultra rapid detoxification only in intensive care mythology now largely abandoned. Respect for the antagonist's power is what separates resuscitation from punishment.",
+      "say": "Titrate naloxone to breaths, not to bright eyes; precipitated withdrawal is a harm, not a lesson to teach.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Titrated reversal",
+          "points": [
+            "Small intravenous increments (for example 40 to 100 micrograms)",
+            "Target respiratory rate and oxygenation",
+            "Infusion matched to agonist half life",
+            "Supportive care for emerging withdrawal"
+          ]
+        },
+        "right": {
+          "title": "Full bolus consequences",
+          "points": [
+            "Abrupt complete withdrawal in dependence",
+            "Pain crisis and catecholamine surge",
+            "Pulmonary oedema reports in catecholamine storms",
+            "Reserved for apnoeic, peri arrest presentations"
+          ]
+        }
+      }
+    }
+  ]
+}

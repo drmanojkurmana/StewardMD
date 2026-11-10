@@ -1,0 +1,271 @@
+{
+  "v": 1,
+  "module": "phm-glaucoma",
+  "subject": "pharmacology",
+  "title": "Ocular Pharmacology, Beta Blockers, Prostaglandin Analogues, and First-Line Glaucoma Therapeutics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical topical non-selective beta-adrenergic receptor antagonist utilized in primary open-angle glaucoma is **timolol**. Applied as a 0.25% or 0.5% ophthalmic solution, timolol reduces intraocular pressure by decreasing aqueous humour synthesis by the ciliary epithelium through beta-2 receptor blockade. It lacks intrinsic sympathomimetic or local anaesthetic membrane-stabilizing activity, preserving corneal reflex sensation. However, systemic absorption via the nasolacrimal duct can provoke severe bronchospasm in asthma, resting sinus bradycardia, and high-degree heart block.",
+      "say": "Timolol reduces intraocular pressure by suppressing aqueous humour secretion without compromising protective corneal sensation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ophthalmic beta blocker",
+          "Receptor selectivity profile",
+          "Intrinsic sympathomimetic action",
+          "Primary clinical distinction"
+        ],
+        "rows": [
+          [
+            "Timolol",
+            "Non-selective beta-1 and beta-2",
+            "None",
+            "Gold standard topical ocular hypotensive reference"
+          ],
+          [
+            "Betaxolol",
+            "Cardioselective beta-1 antagonist",
+            "None",
+            "Safer in mild pulmonary disease but lower pressure reduction"
+          ],
+          [
+            "Levobunolol",
+            "Non-selective beta-1 and beta-2",
+            "None",
+            "Prolonged ocular half-life permitting once-daily application"
+          ],
+          [
+            "Carteolol",
+            "Non-selective beta-1 and beta-2",
+            "Present (partial agonist)",
+            "Less resting bradycardia and favorable lipid effects"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Look closely at the two eyes and one iris has quietly changed its mind about colour. Years of latanoprost drops have coaxed brown pigment through the lighter iris, a **heterochromia** that grows concentrically from the pupil outwards. The change is cosmetic and permanent, yet patients deserve warning before it starts, particularly when only one eye needs treatment. Increased lash growth and periorbital fat loss complete the prostaglandin signature that an observant clinician reads straight off the face at review.",
+      "say": "Latanoprost can darken the treated iris into heterochromia, a permanent cosmetic change patients should expect.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m483-phm-glaucoma-timolol.webp",
+        "alt": "Clinical slit-lamp photograph showing latanoprost-induced iris heterochromia with concentric brown stromal hyperpigmentation",
+        "caption": "Clinical slit-lamp photograph showing latanoprost-induced iris heterochromia with concentric brown stromal hyperpigmentation. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The preferred first-line topical monotherapy for open-angle glaucoma and ocular hypertension is the prostanoid ester **latanoprost**. As an inactive prodrug, latanoprost is hydrolyzed by corneal esterases into latanoprost acid, selectively activating prostaglandin FP receptors to remodel extracellular matrix and markedly increase unconventional uveoscleral outflow. Administered once daily at night, its hallmark adverse reactions comprise irreversible brown hyperpigmentation of the iris stroma, hypertrichosis with eyelash lengthening, periorbital deepening, and flare-ups of anterior uveitis.",
+      "say": "Latanoprost is a bedtime prostaglandin prodrug that increases uveoscleral outflow but causes gradual iris darkening.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prodrug",
+            "label": "Topical latanoprost isopropyl ester administration"
+          },
+          {
+            "id": "esterase",
+            "label": "Corneal esterase cleavage to active latanoprost free acid"
+          },
+          {
+            "id": "fprec",
+            "label": "Prostanoid FP receptor binding in ciliary muscle"
+          },
+          {
+            "id": "matrix",
+            "label": "Matrix metalloproteinase induction and uveoscleral outflow"
+          }
+        ],
+        "edges": [
+          [
+            "prodrug",
+            "esterase"
+          ],
+          [
+            "esterase",
+            "fprec"
+          ],
+          [
+            "fprec",
+            "matrix"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A synthetic prostamide analogue that reduces intraocular pressure through dual physiological pathways is **bimatoprost**. Structurally related to prostaglandin F2-alpha with an ethylamide substitution, bimatoprost acts on distinct prostamide receptors in addition to FP receptors, enhancing both uveoscleral drainage and conventional trabecular meshwork outflow. Bimatoprost produces the greatest mean reduction in intraocular pressure among topical prostaglandin formulations. Dermatologic formulations are commercially indicated for hypotrichosis of eyelashes, though periorbital fat atrophy occurs frequently.",
+      "say": "Bimatoprost enhances both trabecular and uveoscleral drainage to deliver potent ocular hypotensive control.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bimatoprost (Prostamide)",
+          "points": [
+            "Synthetic prostamide analogue structure",
+            "Dual outflow: uveoscleral and trabecular meshwork",
+            "Produces greatest numerical pressure decline",
+            "Formulated for eyelash growth in hypotrichosis"
+          ]
+        },
+        "right": {
+          "title": "Latanoprost (Prostaglandin analogue)",
+          "points": [
+            "Ester prodrug converted by corneal esterases",
+            "Enhances uveoscleral drainage pathway exclusively",
+            "Mildly less periorbital fat involution reported",
+            "First-line bedtime standard across adult populations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A highly selective alpha-2 adrenergic receptor agonist that decreases aqueous secretion and promotes uveoscleral outflow is **brimonidine**. Exhibiting a thousand-fold selectivity for alpha-2 over alpha-1 receptors, brimonidine inhibits ciliary adenylate cyclase, curtailing aqueous synthesis while concurrently upregulating prostaglandin release to stimulate uveoscleral outflow. Furthermore, brimonidine exerts neuroprotective properties on ischemic retinal ganglion cells. Crucially, brimonidine is strictly contraindicated in infants and toddlers under two years because it readily penetrates the immature brain, provoking severe central apnea, bradycardia, and coma.",
+      "say": "Brimonidine lowers ocular pressure through dual inflow suppression and outflow enhancement, but is toxic in infants.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alpha-2 adrenergic agent",
+          "Alpha-2 to alpha-1 selectivity ratio",
+          "Duration of therapy",
+          "Dominant adverse hazard"
+        ],
+        "rows": [
+          [
+            "Brimonidine",
+            "1000:1 highly selective",
+            "Long-term chronic open-angle glaucoma",
+            "Fatal central apnea and hypothermia in infants"
+          ],
+          [
+            "Apraclonidine",
+            "30:1 moderately selective",
+            "Short-term perioperative laser prophylaxis",
+            "Severe allergic contact blepharoconjunctivitis"
+          ],
+          [
+            "Clonidine (systemic)",
+            "200:1 central agent",
+            "Systemic essential hypertension crisis",
+            "Rebound hypertensive storm on discontinuation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A polar alpha-2 agonist specifically employed for short-term prevention of postsurgical intraocular pressure spikes is **apraclonidine**. As a hydrophilic para-amino derivative of clonidine, apraclonidine exhibits limited blood-brain barrier penetration, sparing patients from central hypotension or somnolence. Administered as a 1% solution prior to and immediately following anterior segment laser surgery, such as Nd:YAG laser peripheral iridotomy or argon laser trabeculoplasty, it aborts acute hypertensive surges. Due to rapid tachyphylaxis and contact dermatitis, its use is restricted to acute prophylaxis.",
+      "say": "Apraclonidine is an ocular alpha-2 agonist used specifically to prevent sudden hypertensive spikes after anterior segment laser procedures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apraclonidine (Acute laser prophylaxis)",
+          "points": [
+            "Administered as 1% concentration pre- and post-laser",
+            "Prevents catastrophic post-iridotomy pressure spikes",
+            "Hydrophilic molecule with negligible CNS sedation",
+            "High rate of tachyphylaxis and follicular conjunctivitis"
+          ]
+        },
+        "right": {
+          "title": "Brimonidine (Chronic glaucoma maintenance)",
+          "points": [
+            "Administered as 0.1% to 0.2% concentration twice daily",
+            "Maintains long-term intraocular pressure reduction",
+            "Provides neuroprotective action to ganglion cells",
+            "Lower rates of ocular allergy during chronic dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The prototypical topical carbonic anhydrase II inhibitor designed to avoid systemic diuretic complications is **dorzolamide**. Formulated as a 2% ophthalmic solution, dorzolamide directly blocks carbonic anhydrase in non-pigmented ciliary epithelial cells, slowing bicarbonate, sodium, and water transit into the posterior chamber. This lowers aqueous formation by twenty percent without provoking systemic hypokalemia, metabolic acidosis, or renal lithiasis. Patients frequently report a transient bitter metallic taste following nasolacrimal drainage, and the drug is contraindicated in patients with severe sulfonamide hypersensitivity.",
+      "say": "Dorzolamide topically inhibits ciliary carbonic anhydrase to reduce aqueous synthesis without causing systemic acidosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "enzyme",
+            "label": "Topical dorzolamide penetrates corneal epithelium"
+          },
+          {
+            "id": "block",
+            "label": "Selective inhibition of ciliary carbonic anhydrase II"
+          },
+          {
+            "id": "bicarb",
+            "label": "Impaired bicarbonate ion and sodium secretion"
+          },
+          {
+            "id": "inflow",
+            "label": "Blunted osmotic water movement and decreased aqueous formation"
+          }
+        ],
+        "edges": [
+          [
+            "enzyme",
+            "block"
+          ],
+          [
+            "block",
+            "bicarb"
+          ],
+          [
+            "bicarb",
+            "inflow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A potent oral and parenteral carbonic anhydrase inhibitor reserved for acute hypertensive emergencies in the eye is **acetazolamide**. Administered orally in doses of 250 mg or intravenously at 500 mg, acetazolamide achieves more than 99% enzyme inhibition in the ciliary body, producing a prompt 50% drop in aqueous production within sixty minutes. It serves as essential emergency medical therapy in acute angle-closure glaucoma while awaiting definitive laser iridotomy. Systemic adverse reactions include hyperchloremic metabolic acidosis, hypokalemia, distal limb paresthesias, calcium phosphate nephrolithiasis, and bone marrow suppression.",
+      "say": "Acetazolamide is a systemic carbonic anhydrase inhibitor given orally or intravenously for rapid pressure reduction in acute glaucoma.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-eye-gross.webp",
+        "alt": "Cross section of ocular anatomy showing anterior chamber and ciliary body",
+        "caption": "Ocular cross-sectional architecture showing the ciliary body processes that secrete aqueous humor into the posterior chamber."
+      }
+    },
+    {
+      "tx": "The primary physiological site responsible for aqueous secretion and target of multiple antiglaucoma drug classes is the **ciliary epithelium**. Composed of a double layer of neuroepithelial cells on the ciliary processes, active secretion accounts for eighty percent of aqueous humor generation, energized by membrane Na-K ATPase pumps and intracellular carbonic anhydrase. Medical management of glaucoma balances suppression of inflow at the ciliary processes using beta blockers, alpha agonists, and carbonic anhydrase inhibitors against enhancement of uveoscleral or trabecular outflow using prostaglandins, rho kinase inhibitors, and parasympathomimetics.",
+      "say": "The ciliary epithelium generates aqueous humor, making its secretory machinery the primary target for medical inflow reduction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacologic mechanism",
+          "Dominant drug classes",
+          "Primary site of ocular action",
+          "Clinical effect on fluid dynamics"
+        ],
+        "rows": [
+          [
+            "Aqueous inflow suppression",
+            "Beta blockers, carbonic anhydrase inhibitors",
+            "Non-pigmented ciliary epithelium",
+            "Reduces active secretion and water transport"
+          ],
+          [
+            "Dual inflow and outflow action",
+            "Alpha-2 adrenergic agonists (brimonidine)",
+            "Ciliary processes and uveoscleral pathway",
+            "Decreases secretion while enhancing uveoscleral drain"
+          ],
+          [
+            "Uveoscleral outflow enhancement",
+            "Prostaglandin analogues (latanoprost, bimatoprost)",
+            "Ciliary muscle bundles and scleral matrix",
+            "Remodels collagen to widen interstitial spaces"
+          ],
+          [
+            "Trabecular outflow facilitation",
+            "Miotics (pilocarpine), rho kinase inhibitors",
+            "Trabecular meshwork and Schlemm canal",
+            "Contracts ciliary spur to open trabecular spaces"
+          ]
+        ]
+      }
+    }
+  ]
+}

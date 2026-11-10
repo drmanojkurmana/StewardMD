@@ -1,0 +1,266 @@
+{
+    "v": 1,
+    "id": "ans-nmb-atracurium",
+    "subject": "anaesthesia",
+    "module": "ans-nmb",
+    "title": "Benzylisoquinoliniums: Atracurium, Cisatracurium, and Hofmann Elimination",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Atracurium Molecular Composition",
+            "tx": "**Atracurium bisquaternary benzylisoquinolinium structure** exists as a mixture of ten distinct optical and geometrical stereoisomers. Administered at an intubating dose of 0.5 mg/kg (2x ED95), atracurium produces surgical flaccid paralysis within two to two-and-a-half minutes with an intermediate duration of action of 30 to 45 minutes, acting via competitive antagonism of nicotinic acetylcholine receptors at the motor endplate.",
+            "say": "Atracurium bisquaternary benzylisoquinolinium structure exists as a mixture of ten distinct optical and geometrical stereoisomers. Administered at an intubating dose of 0.5 mg/kg (2x ED95), atracurium produces surgical flaccid paralysis within two to two-and-a-half minutes with an intermediate duration of action of 30 to 45 minutes, acting via competitive antagonism of nicotinic acetylcholine receptors at the motor endplate.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+                "alt": "Benzylisoquinolinium competitive neuromuscular blockade at motor endplate",
+                "caption": "Benzylisoquinolinium competitive neuromuscular blockade at motor endplate"
+            }
+        },
+        {
+            "title": "Organ-Independent Hofmann Elimination",
+            "tx": "**Hofmann elimination chemical degradation** represents a non-biological, non-enzymatic spontaneous chemical breakdown occurring directly within circulating blood and tissues. Under physiological body temperature (37 degrees Celsius) and physiological pH (7.4), atracurium undergoes quaternary ammonium cleavage into the tertiary amine laudanosine and a monoacrylate metabolite, completely independent of hepatic metabolism or renal clearance.",
+            "say": "Hofmann elimination chemical degradation represents a non-biological, non-enzymatic spontaneous chemical breakdown occurring directly within circulating blood and tissues. Under physiological body temperature (37 degrees Celsius) and physiological pH (7.4), atracurium undergoes quaternary ammonium cleavage into the tertiary amine laudanosine and a monoacrylate metabolite, completely independent of hepatic metabolism or renal clearance.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Atracurium circulates at physiological pH 7.4 and 37C"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Spontaneous non-enzymatic cleavage of ester bonds"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Cleavage generates tertiary amine laudanosine and monoacrylate"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Predictable elimination completely spared from liver/kidney failure"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "No enzyme lifts a finger in this reaction, and that is precisely its elegance. At body temperature and pH, atracurium's own structure collapses by **Hofmann elimination**, snapping into laudanosine and an acrylate fragment while plasma merely watches. Kidneys and liver may fail completely and the block still melts on schedule, a property anaesthetists lean on in the sickest patients. Laudanosine can excite the brain at extreme concentrations in animals, yet clinical doses keep it a footnote rather than a fear.",
+            "say": "Atracurium breaks itself down by Hofmann elimination at body pH, independent of liver and kidney.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m497-ans-nmb-atracurium.webp",
+                "alt": "Chemical structural reaction diagram illustrating non-enzymatic spontaneous Hofmann elimination into laudanosine",
+                "caption": "Chemical structural reaction diagram illustrating non-enzymatic spontaneous Hofmann elimination into laudanosine. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "pH and Temperature Influences on Hofmann",
+            "tx": "**Physicochemical modulators of Hofmann elimination** alter spontaneous degradation kinetics: because Hofmann elimination is an alkaline-accelerated and heat-accelerated chemical reaction, systemic acidosis (pH under 7.30) and hypothermia (temperature under 35 degrees Celsius) markedly retard elimination, prolonging paralysis. Conversely, respiratory or metabolic alkalosis and hyperthermia accelerate drug breakdown, shortening neuromuscular blockade.",
+            "say": "Physicochemical modulators of Hofmann elimination alter spontaneous degradation kinetics: because Hofmann elimination is an alkaline-accelerated and heat-accelerated chemical reaction, systemic acidosis (pH under 7.30) and hypothermia (temperature under 35 degrees Celsius) markedly retard elimination, prolonging paralysis. Conversely, respiratory or metabolic alkalosis and hyperthermia accelerate drug breakdown, shortening neuromuscular blockade.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Hypothermia and Acidosis",
+                    "points": [
+                        "Lower molecular kinetic energy retards spontaneous chemical cleavage",
+                        "Acidic pH stabilizes the quaternary ammonium bridge",
+                        "Significantly prolongs clinical duration of neuromuscular blockade"
+                    ]
+                },
+                "right": {
+                    "title": "Hyperthermia and Alkalosis",
+                    "points": [
+                        "Elevated thermal energy accelerates spontaneous molecular breakdown",
+                        "Alkaline pH promotes base-catalyzed elimination reaction",
+                        "Accelerates clearance, shortening the duration of muscular paralysis"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Non-Specific Ester Hydrolysis",
+            "tx": "**Non-specific plasma ester hydrolysis** accounts for approximately 60 percent of atracurium metabolic clearance, while Hofmann elimination accounts for the remaining 30 to 40 percent. This hydrolysis is mediated by circulating non-specific carboxyl-esterases, completely independent of butyrylcholinesterase (pseudocholinesterase), ensuring that patients with genetic pseudocholinesterase deficiency clear atracurium with completely normal kinetics.",
+            "say": "Non-specific plasma ester hydrolysis accounts for approximately 60 percent of atracurium metabolic clearance, while Hofmann elimination accounts for the remaining 30 to 40 percent. This hydrolysis is mediated by circulating non-specific carboxyl-esterases, completely independent of butyrylcholinesterase (pseudocholinesterase), ensuring that patients with genetic pseudocholinesterase deficiency clear atracurium with completely normal kinetics.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Enzymatic or Chemical Pathway",
+                    "Percentage Contribution",
+                    "Operating Enzyme or Catalyst",
+                    "Impact of Pseudocholinesterase Deficiency"
+                ],
+                "rows": [
+                    [
+                        "Non-Specific Ester Hydrolysis",
+                        "Approximately 60 percent",
+                        "Ubiquitous tissue and plasma carboxylesterases",
+                        "Completely unimpaired; normal clearance rate"
+                    ],
+                    [
+                        "Hofmann Elimination",
+                        "Approximately 30 to 40 percent",
+                        "Non-biological spontaneous thermal/alkaline cleavage",
+                        "Completely unimpaired; zero enzyme required"
+                    ],
+                    [
+                        "Renal Elimination",
+                        "Under 10 percent",
+                        "Passive glomerular filtration of metabolites",
+                        "Negligible impact on neuromuscular recovery"
+                    ],
+                    [
+                        "Hepatic Biotransformation",
+                        "Under 10 percent",
+                        "Minor microsomal oxidation of laudanosine",
+                        "Zero impact on primary parent drug duration"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Laudanosine Toxicity and Seizures",
+            "tx": "**Laudanosine metabolite epileptogenic toxicity** represents the major breakdown product of both Hofmann elimination and ester hydrolysis. Laudanosine lacks neuromuscular blocking activity, but because it is a tertiary amine, it readily crosses the blood-brain barrier. Prolonged high-dose atracurium infusions in intensive care units lead to laudanosine accumulation, lowering seizure thresholds and provoking epileptiform cerebral spikes.",
+            "say": "Laudanosine metabolite epileptogenic toxicity represents the major breakdown product of both Hofmann elimination and ester hydrolysis. Laudanosine lacks neuromuscular blocking activity, but because it is a tertiary amine, it readily crosses the blood-brain barrier. Prolonged high-dose atracurium infusions in intensive care units lead to laudanosine accumulation, lowering seizure thresholds and provoking epileptiform cerebral spikes.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Parent Atracurium Molecule",
+                    "points": [
+                        "Bisquaternary ammonium structure cannot cross blood-brain barrier",
+                        "Acts exclusively on peripheral motor endplate receptors",
+                        "Zero central nervous system neurotoxicity or seizure risk"
+                    ]
+                },
+                "right": {
+                    "title": "Metabolite Laudanosine",
+                    "points": [
+                        "Lipophilic tertiary amine crosses blood-brain barrier easily",
+                        "Inhibits central GABA neurotransmission, lowering seizure threshold",
+                        "Slow hepatic clearance allows accumulation during multi-day ICU infusions"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Histamine Release and Bronchospasm",
+            "tx": "**Histamine release by atracurium** occurs when bolus doses exceeding 0.5 mg/kg are injected rapidly, triggering direct, non-immunological degranulation of tissue mast cells and circulating basophils. This histamine surge produces cutaneous flushing, transient hypotension, tachycardia, and potentially severe bronchospasm in asthmatic patients. Histamine release is prevented by slow injection over 60 seconds or pre-treatment with H1/H2 antihistamines.",
+            "say": "Histamine release by atracurium occurs when bolus doses exceeding 0.5 mg/kg are injected rapidly, triggering direct, non-immunological degranulation of tissue mast cells and circulating basophils. This histamine surge produces cutaneous flushing, transient hypotension, tachycardia, and potentially severe bronchospasm in asthmatic patients. Histamine release is prevented by slow injection over 60 seconds or pre-treatment with H1/H2 antihistamines.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Clinical Manifestation",
+                    "Underlying Histamine Receptor",
+                    "Pathophysiological Mechanism",
+                    "Clinical Prevention Strategy"
+                ],
+                "rows": [
+                    [
+                        "Cutaneous Erythema / Flushing",
+                        "H1 and H2 vascular receptors",
+                        "Direct precapillary arteriolar vasodilation",
+                        "Inject bolus slowly over 60 to 90 seconds"
+                    ],
+                    [
+                        "Systemic Arterial Hypotension",
+                        "H1 and H2 vascular receptors",
+                        "Sudden drop in systemic vascular resistance",
+                        "Administer fluid pre-load or co-administer phenylephrine"
+                    ],
+                    [
+                        "Bronchial Bronchospasm",
+                        "H1 bronchial smooth muscle",
+                        "Smooth muscle contraction in reactive airways",
+                        "Avoid atracurium in severe asthmatics; use cisatracurium"
+                    ],
+                    [
+                        "Tachycardia Surge",
+                        "H2 cardiac receptors and baroreflex",
+                        "Direct chronotropic stimulation and reflex response",
+                        "Slow fractionated injection prevents catecholamine surge"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cisatracurium Stereoisomer Virtues",
+            "tx": "**Cisatracurium 1R-cis 1 prime R-cis stereoisomer** is one of the ten isomers of atracurium, manufactured in purified form. Cisatracurium is approximately three to four times more potent than racemic atracurium (ED95 of 0.05 mg/kg, intubating dose 0.15 to 0.2 mg/kg). Because its high potency requires much smaller molar quantities, cisatracurium produces zero histamine release, zero hemodynamic fluctuation, and generates five times less laudanosine.",
+            "say": "Cisatracurium 1R-cis 1 prime R-cis stereoisomer is one of the ten isomers of atracurium, manufactured in purified form. Cisatracurium is approximately three to four times more potent than racemic atracurium (ED95 of 0.05 mg/kg, intubating dose 0.15 to 0.2 mg/kg). Because its high potency requires much smaller molar quantities, cisatracurium produces zero histamine release, zero hemodynamic fluctuation, and generates five times less laudanosine.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Racemic Atracurium (0.5 mg/kg)",
+                    "points": [
+                        "Mixture of 10 stereoisomers; lower potency",
+                        "Releases histamine, causing hypotension and bronchospasm",
+                        "Generates significant laudanosine during prolonged infusions"
+                    ]
+                },
+                "right": {
+                    "title": "Purified Cisatracurium (0.15 mg/kg)",
+                    "points": [
+                        "Single purified 1R-cis 1'R-cis isomer with 3x higher potency",
+                        "Completely devoid of dose-dependent histamine release",
+                        "Generates minimal laudanosine; ideal for ICU infusions"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Choice of Relaxant in Organ Failure",
+            "tx": "**Neuromuscular blocker of choice in renal and hepatic failure** is universally cisatracurium (or atracurium) due to organ-independent Hofmann elimination. While steroidal relaxants like rocuronium, vecuronium, and pancuronium exhibit markedly prolonged elimination and unpredictably delayed recovery in patients with end-stage renal disease or hepatic cirrhosis, cisatracurium provides unvarying, predictable recovery kinetics regardless of end-organ disease.",
+            "say": "Neuromuscular blocker of choice in renal and hepatic failure is universally cisatracurium (or atracurium) due to organ-independent Hofmann elimination. While steroidal relaxants like rocuronium, vecuronium, and pancuronium exhibit markedly prolonged elimination and unpredictably delayed recovery in patients with end-stage renal disease or hepatic cirrhosis, cisatracurium provides unvarying, predictable recovery kinetics regardless of end-organ disease.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify patient with end-stage renal disease (ESRD) or cirrhosis"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Avoid steroidal relaxants (rocuronium/vecuronium) that rely on organs"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Administer IV cisatracurium 0.15 mg/kg for intubation"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Predictable Hofmann clearance ensures prompt recovery in 45 minutes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

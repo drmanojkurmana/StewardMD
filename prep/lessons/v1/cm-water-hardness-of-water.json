@@ -1,0 +1,298 @@
+{
+ "v": 1,
+ "id": "cm-water-hardness-of-water",
+ "subject": "community-medicine",
+ "module": "cm-water",
+ "title": "Water Hardness, Well Chlorination, and the Nalgonda Defluoridation Technique",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Classification and chemistry of water hardness",
+   "tx": "Water hardness reflects the soap-destroying capacity of dissolved polyvalent metallic cations, predominantly calcium and magnesium salts interacting with fatty acids. Total hardness is divided into carbonate and non-carbonate fractions, where **carbonate temporary hardness classification** designates calcium and magnesium bicarbonates, while non-carbonate permanent hardness comprises sulfates, chlorides, and nitrates that persist after ordinary thermal boiling.",
+   "say": "Hard water wastes soap and forms scale inside boilers. Dissolved calcium and magnesium bicarbonates create temporary hardness, while sulfates and chlorides cause permanent hardness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Temporary carbonate hardness",
+     "points": [
+      "Calcium and magnesium bicarbonates",
+      "Precipitated easily by thermal boiling",
+      "Removed by addition of hydrated lime"
+     ]
+    },
+    "right": {
+     "title": "Permanent non-carbonate hardness",
+     "points": [
+      "Calcium and magnesium sulfates and chlorides",
+      "Unaffected by ordinary boiling",
+      "Requires ion exchange or soda ash"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Grading hardness and public health impacts",
+   "tx": "Public health standards quantify hardness in milligrams per litre or parts per million of calcium carbonate equivalents under the **hardness concentration grading scale**. Water below fifty milligrams per litre is soft, fifty to one hundred and fifty is moderately hard, one hundred and fifty to three hundred is hard, and above three hundred is considered very hard; cardiovascular epidemiological studies observe an inverse correlation between municipal water hardness and ischemic heart disease mortality.",
+   "say": "Hardness is graded by calcium carbonate concentration. Levels between one hundred and three hundred parts per million are common, and drinking hard water protects against cardiovascular disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hardness category",
+     "CaCO3 equivalent (mg/L)",
+     "Consumer and industrial effects"
+    ],
+    "rows": [
+     [
+      "Soft water",
+      "Less than 50",
+      "Lathers readily; corrosive to metal pipes"
+     ],
+     [
+      "Moderately hard",
+      "50 to 150",
+      "Acceptable lathering; balance of minerals"
+     ],
+     [
+      "Hard water",
+      "150 to 300",
+      "Noticeable soap curd; mild boiler scale"
+     ],
+     [
+      "Very hard water",
+      "Greater than 300",
+      "Severe scaling; excessive soap consumption"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Softening methods for community supplies",
+   "tx": "Municipal and industrial systems deploy chemical and physical technologies according to the **water softening process selection**. Temporary hardness is eliminated through Clark process by adding slaked lime, precipitating calcium carbonate and magnesium hydroxide; permanent hardness requires the sodium carbonate soda process or synthetic zeolite base-exchange beds where hard cations are exchanged for harmless sodium ions, regenerable periodically with concentrated sodium chloride brine.",
+   "say": "Temporary hardness is removed by adding lime, while permanent hardness requires base-exchange zeolites. Cation resin beds swap calcium and magnesium ions for sodium, restored with brine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Raw hard water intake"
+     },
+     {
+      "id": "h2",
+      "label": "Lime addition precipitates carbonates"
+     },
+     {
+      "id": "h3",
+      "label": "Zeolite bed exchanges Ca/Mg for Na"
+     },
+     {
+      "id": "h4",
+      "label": "Softened drinking water output"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Principles of the double pot chlorination method",
+   "tx": "During cholera outbreaks and monsoon flooding in rural settlements, emergency disinfection of open dug wells relies on the **double pot chlorination method**, pioneered by the National Environmental Engineering Research Institute. The device delivers continuous constant-rate hypochlorite diffusion into well reservoirs for two to three weeks, overcoming the rapid dilution and washout that typically foils direct unmetered chemical addition.",
+   "say": "The double pot method was designed for rural well chlorination. It steadily releases chlorine into well water for several weeks, preventing washout during continuous extraction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct batch addition",
+     "points": [
+      "Initial toxic chlorine surge",
+      "Rapid chemical depletion in days",
+      "Frequent re-dosing required"
+     ]
+    },
+    "right": {
+     "title": "Double pot apparatus",
+     "points": [
+      "Constant slow hypochlorite seepage",
+      "Maintains 0.2 to 0.5 mg/L residual",
+      "Protects well for 2 to 3 weeks"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Construction and operation of the double pot",
+   "tx": "The apparatus comprises an inner earthen pot holding one kilogram of fresh bleaching powder mixed thoroughly with two kilograms of coarse sand, nested inside a larger outer earthen vessel. As defined by **double pot structural specifications**, the inner pot features a six-millimetre drainage hole near its base, while the outer pot features a corresponding six-millimetre release aperture positioned halfway up its side, plugged with moist pebbles to govern diffusion.",
+   "say": "An inner pot containing bleaching powder and coarse sand sits inside an outer vessel. Offset drainage holes ensure water enters slowly and leaches chlorine at a controlled rate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Inner pot with 1 kg powder + 2 kg sand"
+     },
+     {
+      "id": "p2",
+      "label": "Bottom hole allows slow seepage"
+     },
+     {
+      "id": "p3",
+      "label": "Outer pot mid-level aperture controls exit"
+     },
+     {
+      "id": "p4",
+      "label": "Suspended 1 metre below well water level"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Endemic fluorosis and fluoride thresholds",
+   "tx": "While drinking water fluoride concentrations between zero point five and zero point eight milligrams per litre prevent dental caries, levels exceeding one point five milligrams per litre cause severe **endemic fluorosis toxic manifestations**. Toxicity initially manifests as chalky-white dental mottling and yellow-brown enamel staining in children, progressing over decades of continuous exposure into crippling skeletal fluorosis characterised by osteosclerosis, kyphosis, and crippling joint contractures.",
+   "say": "Fluoride in water prevents tooth cavities at low levels, but concentrations above one point five milligrams per litre cause dental mottling and crippling skeletal deformities.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Water fluoride (mg/L)",
+     "Clinical health outcome",
+     "Pathophysiological mechanism"
+    ],
+    "rows": [
+     [
+      "Below 0.5",
+      "Increased dental caries",
+      "Deficient fluoroapatite enamel matrix"
+     ],
+     [
+      "0.5 to 1.0",
+      "Optimal dental protection",
+      "Dense acid-resistant tooth enamel"
+     ],
+     [
+      "1.5 to 3.0",
+      "Dental fluorosis (mottled enamel)",
+      "Ameloblast toxicity during calcification"
+     ],
+     [
+      "Above 3.0 to 10.0",
+      "Skeletal fluorosis and calcification",
+      "Excessive periosteal osteogenesis and rigidity"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Nalgonda defluoridation technique",
+   "tx": "To purify fluoride-contaminated rural groundwater, the National Environmental Engineering Research Institute devised the **Nalgonda defluoridation technique**, which combines chemical coagulation, flocculation, sedimentation, and filtration. Designed for domestic buckets as well as municipal community plants, the simple operational protocol requires only readily available, inexpensive chemicals that rural operators can dose reliably without advanced technical training.",
+   "say": "The Nalgonda technique removes excess fluoride through coagulation and filtration. Developed in India, it uses common alum and lime to make groundwater safe for drinking.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Domestic Nalgonda bucket",
+     "points": [
+      "Two 20-litre buckets with tap",
+      "Direct addition of alum and lime",
+      "Simple overnight gravity settling"
+     ]
+    },
+    "right": {
+     "title": "Community Nalgonda plant",
+     "points": [
+      "Continuous rapid flash mixer",
+      "Flocculation and settling tanks",
+      "Rapid sand polishing filter"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Chemical reagents and adsorption mechanism",
+   "tx": "The process commences by adding bleaching powder for disinfection, followed by lime or sodium carbonate to maintain alkaline buffering, and aluminium sulphate alum under the **Nalgonda chemical dosing protocol**. Rapid mixing for ten minutes forms insoluble aluminium hydroxide flocs that complex and adsorb fluoride anions from solution; subsequent gentle slow stirring for twenty minutes promotes aggregate floc settling over a two-hour retention period.",
+   "say": "Bleaching powder disinfects the water, while lime and alum produce aluminium hydroxide flocs. Fluoride ions stick to these flocs and settle to the bottom as sludge.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Add bleaching powder for disinfection"
+     },
+     {
+      "id": "n2",
+      "label": "Add lime for pH stabilization"
+     },
+     {
+      "id": "n3",
+      "label": "Add alum: forms aluminium hydroxide flocs"
+     },
+     {
+      "id": "n4",
+      "label": "Flocs adsorb fluoride and settle as sludge"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Performance and sludge disposal considerations",
+   "tx": "The final stage involves decanting supernatant through a clean sand filter, achieving **fluoride removal efficiency benchmarks** that reliably reduce raw groundwater concentrations from up to ten milligrams per litre down to safe potability standards below one milligram per litre. Operators must safely dispose of fluoride-laden aluminium sludge in designated lined pits away from water tables to avoid secondary environmental leaching.",
+   "say": "Decanting through sand filters delivers water with safe fluoride levels below one milligram per litre. Toxic sludge must be buried in lined pits to prevent groundwater recontamination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Purified water quality",
+     "points": [
+      "Fluoride reduced below 1.0 mg/L",
+      "Bacterial pathogens eliminated",
+      "Clear colourless potable supply"
+     ]
+    },
+    "right": {
+     "title": "Aluminium fluoride sludge",
+     "points": [
+      "High toxic fluoride concentration",
+      "Requires lined burial pits",
+      "Must prevent surface water runoff"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

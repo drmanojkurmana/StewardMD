@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "id": "fmt-identification-fingerprint-patterns",
+ "subject": "forensic-medicine",
+ "module": "fmt-identification",
+ "title": "Identification: Dactylography, Fingerprint Patterns and Poroscopy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The scientific foundation of dactylography",
+   "tx": "Pioneered by Sir William Herschel, Sir Francis Galton, and Sir Edward Henry, the **dactylography forensic identification system** represents the study of epidermal friction ridges on fingertips. Dactylography rests on two immutable biological principles: absolute uniqueness, meaning no two individuals or fingers have identical patterns, and permanence, as ridge patterns develop by the fourth intrauterine month and remain unchanged throughout life until postmortem decomposition.",
+   "say": "Dactylography is the study of finger ridge patterns, which are completely unique and permanent from the fourth fetal month until decomposition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pioneering contributor",
+     "Historical innovation",
+     "Core contribution to science"
+    ],
+    "rows": [
+     [
+      "William Herschel (1858)",
+      "First practical use in Bengal",
+      "Recorded handprints on contracts to prevent impersonation"
+     ],
+     [
+      "Francis Galton (1892)",
+      "Scientific biological validation",
+      "Proved permanence and classified prints into three core types"
+     ],
+     [
+      "Edward Henry (1897)",
+      "Ten-finger classification system",
+      "Formulated primary numerical filing formula for police archives"
+     ],
+     [
+      "Azizul Haque and Hem Chandra Bose",
+      "Mathematical categorization",
+      "Devised Henry system formula at Kolkata fingerprint bureau"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The four primary Galton fingerprint patterns",
+   "tx": "In dermatoglyphic classification, every human fingerprint conforms to one of the **four Galton pattern types**, categorized by ridge architecture and focal cores. Loops represent the most prevalent pattern, accounting for sixty to sixty-five percent of prints. Whorls constitute twenty-five to thirty percent, arches represent five to seven percent, and composite or accidental patterns comprise the remaining two to three percent of friction ridge configurations.",
+   "say": "Fingerprints divide into four patterns: loops form sixty-five percent, whorls thirty percent, arches five to seven percent, and composites two to three percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Galton pattern",
+     "Population frequency",
+     "Core anatomical characteristics"
+    ],
+    "rows": [
+     [
+      "Loops (Ulnar and Radial)",
+      "60 to 65 percent",
+      "One delta and one core; ridges enter and recurve out same side"
+     ],
+     [
+      "Whorls (Concentric, Spiral)",
+      "25 to 30 percent",
+      "Two or more deltas with circular, spiral, or target core ridges"
+     ],
+     [
+      "Arches (Plain and Tented)",
+      "5 to 7 percent",
+      "Zero deltas and zero cores; ridges enter one side and exit opposite"
+     ],
+     [
+      "Composites / Accidentals",
+      "2 to 3 percent",
+      "Combines two distinct patterns (e.g. double loop or pocket whorl)"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Loop patterns: Ulnar loops versus radial loops",
+   "tx": "Characterized by flowing ridges that enter, recurve, and exit on the same side, the **loop fingerprint architectural pattern** possesses exactly one triradius delta and one central core. Forensic examiners classify loops based on ridge exit direction relative to forearm bones: an ulnar loop flows toward the little finger (ulna), while a radial loop opens toward the thumb (radius), with ulnar loops predominating overwhelmingly.",
+   "say": "Loops have one delta and one core. An ulnar loop opens toward the little finger, while a radial loop opens toward the thumb.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ulnar loop",
+     "points": [
+      "Ridges open toward little finger (ulnar margin)",
+      "Most common loop variety in human hands",
+      "Single delta situated on radial side of pattern",
+      "High frequency on fifth digit (pinky)"
+     ]
+    },
+    "right": {
+     "title": "Radial loop",
+     "points": [
+      "Ridges open toward thumb (radial margin)",
+      "Much less common than ulnar loop variety",
+      "Single delta situated on ulnar side of pattern",
+      "Most commonly observed on index finger"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Whorl patterns and delta formations",
+   "tx": "Demonstrating complex circular dynamics, the **whorl fingerprint ridge structure** possesses at least two triradius deltas and a central core surrounded by complete circuit ridges. The concentric ridges may form concentric rings, expanding spirals, or target-like circular patterns. Subtypes include central pocket loops, double loop whorls comprising two interlocking loops, and accidental whorls combining multiple divergent patterns that resist standard categorization.",
+   "say": "Whorls feature circular or spiral ridges with at least two deltas and a core, including plain whorls, double loops, and accidental configurations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identification of two distinct triradius deltas"
+     },
+     {
+      "id": "b",
+      "label": "Verification of complete circular or spiral recurve around core"
+     },
+     {
+      "id": "c",
+      "label": "Drawing Galton line connecting left and right deltas"
+     },
+     {
+      "id": "d",
+      "label": "Ridge tracing: Classification as inner, outer, or meet whorl"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Arch patterns: Plain arches and tented arches",
+   "tx": "Representing the simplest yet rarest configuration, the **arch fingerprint ridge structure** is characterized by complete absence of deltas and cores. Ridges enter from one side of the fingertip, rise in the center forming a smooth wave, and exit smoothly on the opposite side. Plain arches display gentle wave-like elevations, whereas tented arches display a sharp vertical central spike resembling an erect tent pole.",
+   "say": "Arches have no deltas or cores. Ridges enter one side, rise in the middle, and exit the other side, forming plain waves or sharp tented spikes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plain arch",
+     "points": [
+      "Ridges flow across with smooth central wave",
+      "Zero deltas and zero cores",
+      "Rarest primary pattern type (~5%)",
+      "Effortless laminar ridge flow across digit"
+     ]
+    },
+    "right": {
+     "title": "Tented arch",
+     "points": [
+      "Central ridges thrust sharply upward",
+      "Forms acute vertical tent pole angle (> 45 deg)",
+      "Simulates a rudimentary delta appearance",
+      "Commonly found on index finger"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Minutiae characteristics and legal matching standards",
+   "tx": "Individual fingerprint identification does not rely on gross patterns alone, but on microscopic **individual ridge minutiae characteristics**, also known as Galton details. Minutiae comprise ridge endings, bifurcations (Y-shaped splitting), islands (independent short ridges), enclosures (lakes), dots, bridges, and spurs. Under Indian judicial practice, demonstrating sixteen matching minutiae with identical relative spatial positions establishes incontrovertible, conclusive legal identification in court.",
+   "say": "Conclusive identification relies on minutiae like ridge endings, bifurcations, and islands. In Indian courts, sixteen matching minutiae provide proof of identity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Minutiae type",
+     "Anatomical morphology",
+     "Frequency in latent prints"
+    ],
+    "rows": [
+     [
+      "Ridge ending",
+      "Abrupt termination of a continuous papillary ridge",
+      "Most common minutiae feature in impressions"
+     ],
+     [
+      "Bifurcation",
+      "Single ridge dividing into two distinct branches",
+      "Second most common minutiae marker"
+     ],
+     [
+      "Island / short ridge",
+      "Isolated short ridge segment with two defined ends",
+      "Valuable unique spatial anchor"
+     ],
+     [
+      "Enclosure / lake",
+      "Ridge bifurcates and reunites forming central oval",
+      "High individual discriminating value"
+     ],
+     [
+      "Spur / hook",
+      "Short branch projecting off a primary ridge trunk",
+      "Distinctive localized identification clue"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Poroscopy: Locard's microscopic pore identification",
+   "tx": "Pioneered by Edmond Locard, the science of **poroscopy sweat pore analysis** examines the microscopic pores of sweat gland ducts opening along friction ridges. There are nine to eighteen pores per linear millimeter of ridge. Pores vary in size, spatial interval, and geometric shape (round, oval, triangular). Because pore configurations never change, finding twenty to forty identical pores identifies an individual even from partial fragments.",
+   "say": "Poroscopy examines microscopic sweat gland pores along ridges. Finding twenty to forty matching pores confirms identity even from small partial prints.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fragmentary latent fingerprint recovered from weapon"
+     },
+     {
+      "id": "b",
+      "label": "Insufficient minutiae (< 8 ridge characteristics) present"
+     },
+     {
+      "id": "c",
+      "label": "High-magnification microscopic examination of sweat pores"
+     },
+     {
+      "id": "d",
+      "label": "Demonstration of 20 to 40 matching pore shapes and locations"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Edgeoscopy and modern automated biometric systems",
+   "tx": "Complementing poroscopy, the discipline of **edgeoscopy ridge contour analysis** examines microscopic morphological irregularities, indentations, and notches along the lateral borders of friction ridges. In modern crime laboratories, these features integrate into the Automated Fingerprint Identification System (AFIS), which digitizes latent crime scene prints, maps minutiae coordinate vectors, and scans millions of national criminal records within seconds.",
+   "say": "Edgeoscopy examines irregular ridge borders, working alongside computerized AFIS databases that match latent crime scene prints against national databases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Latent print dusted and photographed at crime scene"
+     },
+     {
+      "id": "b",
+      "label": "AFIS software maps minutiae spatial coordinates"
+     },
+     {
+      "id": "c",
+      "label": "Automated algorithmic search against national police repository"
+     },
+     {
+      "id": "d",
+      "label": "Top candidate prints verified manually by forensic expert"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Latent fingerprint development methods",
+   "tx": "At crime scenes, invisible **latent fingerprint chemical development** techniques visualize deposited sebaceous oils and eccrine sweat residues. Non-porous surfaces like glass or metal are developed using black powder dusting, magnetic powders, or cyanoacrylate superglue fuming. Porous documents, paper notes, or cardboard are treated with ninhydrin spraying (reacting with amino acids to form Ruhemann purple) or silver nitrate reacting with sodium chloride.",
+   "say": "Latent prints are developed with black powder or superglue fuming on smooth surfaces, and ninhydrin spray on paper, revealing invisible sweat deposits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Crime scene surface",
+     "Development technique",
+     "Chemical reaction mechanism"
+    ],
+    "rows": [
+     [
+      "Glass, polished metal, plastic",
+      "Black powder / magnetic powder",
+      "Mechanical adhesion to oily sebaceous secretions"
+     ],
+     [
+      "Weapon handles, firearm magazines",
+      "Cyanoacrylate superglue fuming",
+      "Polymerisation with moisture forming white ridges"
+     ],
+     [
+      "Paper documents, cheque leaves",
+      "Ninhydrin reagent spray",
+      "Reacts with sweat amino acids forming Ruhemann purple"
+     ],
+     [
+      "Porous unpainted timber",
+      "Silver nitrate solution",
+      "Reacts with sweat sodium chloride to form silver chloride"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

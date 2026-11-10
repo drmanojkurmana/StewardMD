@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "id": "psy-schizophrenia-expressed-emotion",
+ "subject": "psychiatry",
+ "module": "psy-schizophrenia",
+ "title": "Expressed Emotion and Structural Neuropathology in Schizophrenia",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Schizophrenia prodrome** represents an attenuated clinical phase lasting months to years before the overt manifestation of diagnosable psychotic illness. Adolescents exhibit progressive social withdrawal, deteriorating academic performance, declining personal hygiene, perceptual distortions, and unusual overvalued ideation bordering on magical thinking.",
+   "say": "The prodromal stage of schizophrenia presents with subtle functional decline, social detachment, school difficulties, and idiosyncratic magical beliefs preceding frank psychosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Schizophrenia Progression Stages",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Premorbid phase with subtle motor & cognitive signs"
+     },
+     {
+      "id": "n2",
+      "label": "Prodromal stage with attenuated magical ideation"
+     },
+     {
+      "id": "n3",
+      "label": "First psychotic episode with frank delusions"
+     },
+     {
+      "id": "n4",
+      "label": "Chronic residual stage with stable negative symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Attenuated psychotic symptoms** during the prodromal period include transient auditory illusions, ideas of reference, perplexity, and suspiciousness that do not meet strict delusional conviction. Early detection through specialized youth mental health services allows supportive psychosocial intervention before catastrophic social disconnection occurs.",
+   "say": "Prodromal patients experience suspiciousness, fleeting ideas of reference, and auditory perceptual distortions. Timely supportive intervention preserves educational and interpersonal connections.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/schizophrenia-fig1.webp",
+    "alt": "Schizophrenia clinical course and relapse risk factors",
+    "caption": "Schizophrenia clinical trajectory illustrating progression from the prodromal phase to acute psychosis and maintenance.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Ventricular enlargement on neuroimaging** stands as the most replicated structural brain abnormality in schizophrenia, demonstrable on cranial computed tomography and magnetic resonance imaging. Enlargement predominantly involves the lateral and third ventricles, accompanied by compensatory reduction in cortical grey matter volume.",
+   "say": "Structural cranial imaging consistently reveals bilateral lateral and third ventricular dilation alongside cerebral cortical volume reduction in chronic schizophrenia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ventricular Dilation",
+     "points": [
+      "Lateral ventricles prominently enlarged",
+      "Third ventricular volume expansion",
+      "Detectable at first psychotic episode",
+      "Non-progressive static neurodevelopmental sign"
+     ]
+    },
+    "right": {
+     "title": "Parenchymal Changes",
+     "points": [
+      "Temporal lobe volume contraction",
+      "Hippocampal and amygdala shrinkage",
+      "Prefrontal cortical grey matter thinning",
+      "Widening of cerebral cortical sulci"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The scan finding most often quoted in schizophrenia is also one of its least specific. **Enlarged lateral ventricles** with prominent cortical sulci appear across chronic psychotic illness groups and in other brain disorders, so they support a neurodevelopmental story without diagnosing anyone. Families sometimes ask whether the scan proves the illness; the honest answer is that imaging here excludes other causes rather than confirming this one. Group averages must never be read back onto an individual patient.",
+   "say": "Ventricular enlargement in schizophrenia is a group finding, not a diagnostic test. Imaging mainly excludes other causes of psychosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m323-psy-schizophrenia-expressed-emotion.webp",
+    "alt": "Axial brain scan showing enlarged lateral ventricles and prominent cortical sulci in schizophrenia.",
+    "caption": "Both lateral ventricles are enlarged with widened cortical sulci on an axial brain scan. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Cortical sulcal widening** and progressive bilateral temporal lobe contraction correlate clinically with chronic negative symptoms, cognitive impairment, and treatment refractoriness. These volumetric cerebral deficits represent early neurodevelopmental anomalies occurring in utero and early childhood rather than progressive acute post-onset neurodegenerative tissue breakdown.",
+   "say": "Sulcal widening and temporal lobe shrinkage parallel severe negative deficits and treatment resistance. Neuropathological changes represent early neurodevelopmental disturbances.",
+   "vis": {
+    "kind": "table",
+    "title": "Structural Neuroimaging Findings",
+    "cols": [
+     "Brain Region",
+     "Observed Pathology",
+     "Clinical Correlation"
+    ],
+    "rows": [
+     [
+      "Lateral ventricles",
+      "Bilateral ventricular expansion",
+      "Negative symptoms & cognitive slowing"
+     ],
+     [
+      "Temporal lobes",
+      "Superior temporal gyrus shrinkage",
+      "Auditory hallucinations & formal thought disorder"
+     ],
+     [
+      "Medial temporal",
+      "Reduced hippocampal volume",
+      "Working memory & verbal encoding deficits"
+     ],
+     [
+      "Prefrontal cortex",
+      "Dorsolateral grey matter loss",
+      "Executive dysfunction & avolition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Expressed emotion construct** defines the qualitative emotional climate within a patient's domestic family environment, assessed using the standardized Camberwell Family Interview. It encompasses three pathological components: critical comments regarding patient habits, hostile rejection of the patient's personhood, and intrusive emotional over-involvement in daily choices.",
+   "say": "Expressed emotion gauges the familial emotional climate across three domains: frequent critical comments, overt hostility, and intrusive emotional over-involvement.",
+   "vis": {
+    "kind": "table",
+    "title": "Expressed Emotion Components",
+    "cols": [
+     "Component",
+     "Behavioral Manifestation",
+     "Relapse Impact"
+    ],
+    "rows": [
+     [
+      "Critical comments",
+      "Fault-finding regarding hygiene and apathy",
+      "Elevates acute relapse rate three-fold"
+     ],
+     [
+      "Hostility",
+      "Generalized rejection and anger towards patient",
+      "High domestic tension triggers acute paranoia"
+     ],
+     [
+      "Emotional over-involvement",
+      "Intrusive surveillance and excessive martyrdom",
+      "Smothers independence and elevates distress"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High expressed emotion environments** significantly increase the probability of psychotic relapse, yielding relapse rates exceeding 50 percent within nine months despite full medication compliance. Patients spending more than 35 hours per week in direct contact with high expressed emotion relatives show the highest relapse vulnerability.",
+   "say": "Living in a high expressed emotion household doubles psychotic relapse risk even when medication is taken reliably. Contact over thirty-five hours weekly carries the highest risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High Expressed Emotion",
+     "points": [
+      "Relapse rate fifty to sixty percent at nine months",
+      "Constant critical judgements and surveillance",
+      "Direct domestic contact exceeding thirty-five hours",
+      "Hostility directed at negative symptoms"
+     ]
+    },
+    "right": {
+     "title": "Low Expressed Emotion",
+     "points": [
+      "Relapse rate ten to fifteen percent at nine months",
+      "Calm, supportive, respectful communication",
+      "Encouragement of personal autonomy",
+      "Realistic expectations of daily recovery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Family psychoeducation interventions** specifically target expressed emotion by educating relatives about schizophrenia neurobiology, defusing guilt, establishing realistic behavioural expectations, and teaching structured problem-solving skills. Reducing critical interactions lowers nine-month relapse frequencies to below fifteen percent when combined with maintenance antipsychotics.",
+   "say": "Structured family psychoeducation educates relatives, resolves blame, teaches problem solving, and lowers relapse rates below fifteen percent.",
+   "vis": {
+    "kind": "flow",
+    "title": "Family Psychoeducation Strategy",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Identify domestic communication stress & high criticism"
+     },
+     {
+      "id": "n2",
+      "label": "Provide biological education to reframe negative symptoms"
+     },
+     {
+      "id": "n3",
+      "label": "Establish clear interpersonal boundaries & reduce face-to-face hours"
+     },
+     {
+      "id": "n4",
+      "label": "Sustained clinical remission with lowered domestic stress"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Social skills training** complements family therapy by equipping patients with structured verbal assertiveness, conflict resolution techniques, and conversational competence to navigate daily interpersonal friction. Improving social communication mitigates domestic misunderstandings, bolsters vocational confidence, and substantially diminishes physiological hyperarousal triggered by acute psychosocial stressors.",
+   "say": "Social skills training teaches assertive communication and conflict management. Enhancing personal competence reduces domestic tension and stress-induced relapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Patient-Centred Skills",
+     "points": [
+      "Assertive verbal communication training",
+      "Conflict de-escalation practice",
+      "Medication self-management skills",
+      "Community navigation routines"
+     ]
+    },
+    "right": {
+     "title": "Systemic Outcomes",
+     "points": [
+      "Reduced physiological stress arousal",
+      "Decreased domestic friction",
+      "Independent community functioning",
+      "Prolonged hospitalization-free intervals"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

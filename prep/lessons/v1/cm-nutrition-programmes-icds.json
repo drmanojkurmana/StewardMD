@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-nutrition-programmes-icds",
+ "subject": "community-medicine",
+ "module": "cm-nutrition-programmes",
+ "title": "Nutritional Programs: ICDS, POSHAN Abhiyaan and Growth Monitoring",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Integrated Child Development Services (ICDS)",
+   "tx": "Launched in 1975, the centrally sponsored **Integrated Child Development Services scheme** represents one of the largest early childhood care and development networks in the world. Administered by the Ministry of Women and Child Development, ICDS delivers an integrated package of six core services targeting children under six years of age, pregnant women, and lactating mothers to break vicious intergenerational cycles of malnutrition, infection and developmental delay.",
+   "say": "Launched in 1975, the Integrated Child Development Services scheme provides food, preschool learning and healthcare to mothers and children under six across every village.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Service package", "Target beneficiary group", "Primary delivering agency"],
+    "rows": [
+     ["Supplementary nutrition", "Children 6 mos to 6 yrs, pregnant/lactating women", "Anganwadi worker (AWW) at Anganwadi Centre"],
+     ["Immunization", "Infants, children under 6, pregnant women", "Auxiliary Nurse Midwife (ANM) with ASHA"],
+     ["Health check-ups", "Children under 6, pregnant women, mothers", "Primary Health Centre medical officer and ANM"],
+     ["Referral services", "Severely malnourished and sick children", "Nutrition Rehabilitation Centres and hospitals"],
+     ["Non-formal preschool education", "Children aged 3 to 6 years", "Anganwadi worker using play-based kits"],
+     ["Nutrition and health education", "Women aged 15 to 45 years", "Joint sessions by AWW, ASHA and ANM"]
+    ]
+   }
+  },
+  {
+   "title": "The Anganwadi Centre: focal village institution",
+   "tx": "The focal grassroots delivery point in rural and tribal villages is the **Anganwadi Centre institution**, established on a population norm of one centre per eight hundred population in rural and urban areas (and one per three hundred in difficult tribal or hilly terrain). Staffed by an honorary resident female Anganwadi Worker and an Anganwadi Helper, the centre serves as a crèche, supplementary feeding station, preschool classroom and community immunization point.",
+   "say": "The village Anganwadi Centre serves as a neighbourhood preschool, health clinic and food distribution hub, operated by a resident female worker and her helper.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Locality terrain", "Standard population norm", "Mini-Anganwadi norm"],
+    "rows": [
+     ["Rural agricultural plains", "1 Anganwadi per 400 to 800 population", "1 per 150 to 300 (hamlets)"],
+     ["Urban municipal wards", "1 Anganwadi per 400 to 800 population", "Not typically sanctioned"],
+     ["Tribal, desert and hilly belts", "1 Anganwadi per 300 to 800 population", "1 per 100 to 300 (scattered habitations)"],
+     ["Human resources", "1 Anganwadi Worker + 1 Helper per centre", "Monthly honorarium with performance incentives"]
+    ]
+   }
+  },
+  {
+   "title": "Supplementary nutrition norms and take-home rations",
+   "tx": "Under statutory provisions of the National Food Security Act, the programme mandates **supplementary nutrition provision** for three hundred days annually. Normal preschool children receive five hundred kilocalories and twelve to fifteen grams of protein daily; severely malnourished children receive eight hundred kilocalories and twenty to twenty-five grams of protein as therapeutic rations; pregnant and nursing mothers receive six hundred kilocalories and eighteen to twenty grams of protein.",
+   "say": "Anganwadis provide meals for three hundred days a year. Normal children receive five hundred calories, while severely malnourished children receive eight hundred calories daily.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Beneficiary category", "Daily caloric entitlement", "Daily protein entitlement", "Delivery mode"],
+    "rows": [
+     ["Children 6 to 72 months", "500 kilocalories daily", "12 to 15 grams protein", "Hot cooked meal (3-6 yrs) / THR (6-36 mos)"],
+     ["Severely malnourished children", "800 kilocalories daily", "20 to 25 grams protein", "Energy-dense fortified take-home ration"],
+     ["Pregnant and lactating mothers", "600 kilocalories daily", "18 to 20 grams protein", "Take-home ration packets with micronutrients"]
+    ]
+   }
+  },
+  {
+   "title": "POSHAN Abhiyaan: National Nutrition Mission",
+   "tx": "To galvanize multi-sectoral convergence, the government launched **POSHAN Abhiyaan initiatives**, an overarching national nutrition mission designed to reduce stunting, undernutrition and low birth weight by two percent annually, and anaemia among children and women by three percent annually. Built on technology and behavioural nudges, it equips Anganwadi workers with smartphones running the Poshan Tracker app, enforces real-time digital monitoring, and mobilizes monthly Poshan Maah campaigns.",
+   "say": "POSHAN Abhiyaan is India's national mission to cut stunting and anaemia. Frontline workers use smartphones with the Poshan Tracker app to monitor child feeding in real time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Multi-sectoral convergence (Water, Sanitation, Health)"},
+     {"id": "b", "label": "Poshan Tracker smartphone application for AWWs"},
+     {"id": "c", "label": "Real-time growth monitoring and tracking"},
+     {"id": "d", "label": "Annual reduction: 2% stunting, 3% anaemia"}
+    ],
+    "edges": [["a", "d"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "PM POSHAN: school mid-day meal scheme",
+   "tx": "The nationwide school nutrition scheme **PM POSHAN mid-day meal** provides hot cooked lunches to all children attending government and government-aided primary and upper primary schools for at least two hundred days each year. Primary children receive four hundred and fifty kilocalories and twelve grams of protein daily, while upper primary children receive seven hundred kilocalories and twenty grams of protein, simultaneously improving school attendance and childhood nutritional status.",
+   "say": "PM POSHAN serves hot lunches in government schools. Primary students receive four hundred and fifty calories, while older students get seven hundred calories, boosting both health and learning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary school (Classes 1 to 5)",
+     "points": ["450 kilocalories minimum energy", "12 grams protein content per meal", "100 grams food grains (rice / wheat)"]
+    },
+    "right": {
+     "title": "Upper primary (Classes 6 to 8)",
+     "points": ["700 kilocalories minimum energy", "20 grams protein content per meal", "150 grams food grains (rice / wheat)"]
+    }
+   }
+  },
+  {
+   "title": "WHO child growth standards and growth monitoring",
+   "tx": "Routine growth surveillance uses the **WHO child growth standards**, which depict the biological growth potential of healthy breastfed infants raised in optimal socioeconomic and hygienic environments worldwide. Frontline workers plot monthly body weight against age on standardized gender-specific growth charts, comparing trajectories against median, minus two, and minus three standard deviation Z-score lines to identify subtle growth faltering before clinical wasting appears.",
+   "say": "Monthly growth charts plot a child's weight against age. A flattening curve gives an early warning of growth faltering weeks before visible wasting or illness develops.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Growth chart curve pattern", "Biological meaning", "Action required by health worker"],
+    "rows": [
+     ["Upward sloping curve", "Normal healthy growth velocity", "Praise mother; continue current feeding"],
+     ["Flat horizontal curve", "Growth faltering (stagnation)", "Investigate feeding, illness, advise calorie boost"],
+     ["Downward sloping curve", "Active loss of weight (danger sign)", "Immediate medical review, rule out TB, diarrhea"]
+    ]
+   }
+  },
+  {
+   "title": "Nutritional anthropometry: Salter scale and infantometer",
+   "tx": "Accurate field growth monitoring relies on **nutritional anthropometry instrumentation**, using calibrated digital or spring-loaded Salter hanging scales to weigh infants to the nearest one hundred grams. Recumbent crown-to-heel length is measured using a rigid wooden infantometer for children under two years of age (or standing height below eighty-five centimetres), while a vertical stadiometer measures standing height in children aged two years and older.",
+   "say": "Weigh infants on hanging Salter scales to the nearest hundred grams. Measure babies lying down on an infantometer, and measure children older than two years standing up on a stadiometer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infantometer (Recumbent length)",
+     "points": ["Used for children under 2 years of age", "Lying flat on back with knees pressed flat", "Head against fixed board; footboard to heels"]
+    },
+    "right": {
+     "title": "Stadiometer (Standing height)",
+     "points": ["Used for children aged 2 years and older", "Standing barefoot with heels and buttocks touching wall", "Frankfort plane horizontal to floor"]
+    }
+   }
+  },
+  {
+   "title": "Diet survey methodology: weighment method",
+   "tx": "To quantify community dietary consumption, nutritional researchers execute a standardized **diet survey weighment method**, considered the most accurate field technique for rural households. A trained field investigator visits the home before meal preparation and uses a calibrated scale to weigh raw food ingredients (raw weighment method) or measures cooked portions served and leftover plates (cooked weighment method) continuously over seven consecutive days.",
+   "say": "The weighment method visits homes before cooking to weigh all raw grains, vegetables and cooking oil. Recording food weights over a full week reveals exact family nutrient intakes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Home visit before daily kitchen meal preparation"},
+     {"id": "b", "label": "Weighing raw grains, pulses, vegetables, oils on scale"},
+     {"id": "c", "label": "Recording plate leftovers and family member consumption"},
+     {"id": "d", "label": "Calculation of per-capita daily nutrient intake using food tables"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Nutritional surveillance and early warning systems",
+   "tx": "At the district and state levels, health administrators maintain continuous **nutritional surveillance systems** to track chronic trends and detect impending famine emergencies before mortality surges. Routine indicators combine monthly Anganwadi growth charts, seasonal rainfall deficits, market grain prices, distress migration patterns, and agricultural wage trends, triggering emergency buffer food grain releases and intensified child supplementary feeding.",
+   "say": "Nutritional surveillance monitors child weights, rainfall, grain prices and rural distress migration. Tracking these trends provides an early warning to rush extra food before famine strikes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Routine monthly Anganwadi growth monitoring data"},
+     {"id": "b", "label": "Tracking rainfall deficits and market staple prices"},
+     {"id": "c", "label": "Early warning trigger of localized food insecurity"},
+     {"id": "d", "label": "Emergency supplementary feeding and buffer food release"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

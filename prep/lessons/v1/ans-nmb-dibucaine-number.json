@@ -1,0 +1,322 @@
+{
+    "v": 1,
+    "id": "ans-nmb-dibucaine-number",
+    "subject": "anaesthesia",
+    "module": "ans-nmb",
+    "title": "Pseudocholinesterase Variants: Dibucaine Number and Steroidal Muscle Relaxants",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Pseudocholinesterase Deficiency Genetics",
+            "tx": "**Pseudocholinesterase enzyme genetic variants** dictate prolonged neuromuscular paralysis following standard succinylcholine dosing. The human BCHE gene located on chromosome 3 encodes plasma butyrylcholinesterase. Mutations alter enzyme catalytic efficiency: the typical normal allele is designated Eu, the atypical dibucaine-resistant allele is Ea, the fluoride-resistant allele is Ef, and the silent completely inactive allele is Es.",
+            "say": "Pseudocholinesterase enzyme genetic variants dictate prolonged neuromuscular paralysis following standard succinylcholine dosing. The human BCHE gene located on chromosome 3 encodes plasma butyrylcholinesterase. Mutations alter enzyme catalytic efficiency: the typical normal allele is designated Eu, the atypical dibucaine-resistant allele is Ea, the fluoride-resistant allele is Ef, and the silent completely inactive allele is Es.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Genotype Pattern",
+                    "Allelic Composition",
+                    "Population Prevalence",
+                    "Succinylcholine Paralysis Duration"
+                ],
+                "rows": [
+                    [
+                        "Homozygous Typical",
+                        "Eu / Eu",
+                        "96 percent of population",
+                        "Normal rapid recovery in 8 to 12 minutes"
+                    ],
+                    [
+                        "Heterozygous Atypical",
+                        "Eu / Ea",
+                        "Approximately 1 in 25 to 50 individuals",
+                        "Mild prolongation to 20 to 30 minutes"
+                    ],
+                    [
+                        "Homozygous Atypical",
+                        "Ea / Ea",
+                        "Approximately 1 in 2,500 individuals",
+                        "Severe prolonged paralysis lasting 4 to 8 hours"
+                    ],
+                    [
+                        "Homozygous Silent",
+                        "Es / Es",
+                        "Extremely rare (1 in 100,000)",
+                        "Total absence of enzyme; paralysis up to 8 to 12 hours"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Dibucaine Number Laboratory Test",
+            "tx": "**Dibucaine number laboratory interpretation** measures the percentage of butyrylcholinesterase activity inhibited by the local anaesthetic dibucaine (cinchocaine) under standardized in vitro assay conditions. Normal enzyme is inhibited by 80 percent (dibucaine number 80), heterozygous atypical enzyme exhibits intermediate inhibition (dibucaine number 50 to 60), whereas homozygous atypical enzyme is inhibited by only 20 percent (dibucaine number 20).",
+            "say": "Dibucaine number laboratory interpretation measures the percentage of butyrylcholinesterase activity inhibited by the local anaesthetic dibucaine (cinchocaine) under standardized in vitro assay conditions. Normal enzyme is inhibited by 80 percent (dibucaine number 80), heterozygous atypical enzyme exhibits intermediate inhibition (dibucaine number 50 to 60), whereas homozygous atypical enzyme is inhibited by only 20 percent (dibucaine number 20).",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Dibucaine Number (Quality Metric)",
+                    "points": [
+                        "Reflects the intrinsic catalytic efficiency of the enzyme",
+                        "Completely independent of total circulating enzyme quantity",
+                        "Normal is 80; heterozygous is 50 to 60; atypical homozygous is 20"
+                    ]
+                },
+                "right": {
+                    "title": "Enzyme Activity Level (Quantity Metric)",
+                    "points": [
+                        "Measures absolute circulating enzymatic activity units per liter",
+                        "Depressed in liver disease, malnutrition, pregnancy, and burns",
+                        "Produces only mild prolongation of paralysis if dibucaine number is normal"
+                    ]
+                }
+            }
+        },
+        {
+            "tx": "One percentage sorts a family into three genetic futures after a prolonged apnoea. A **dibucaine number** near eighty means typical enzyme, fifty to sixty suggests one atypical copy, and around twenty marks the homozygous state where suxamethonium paralysis lasts hours. The number describes quality of enzyme, not quantity, so a normal amount of poor enzyme still gives a low result. Testing relatives prevents the next unexpected stay on a ventilator.",
+            "say": "A dibucaine number near eighty is typical, sixty suggests a heterozygote, and twenty marks atypical homozygotes. It measures enzyme quality, not quantity.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m495-ans-nmb-dibucaine-number.webp",
+                "alt": "Graph of dibucaine inhibition percentage curves for typical, heterozygous and atypical butyrylcholinesterase genotypes.",
+                "caption": "Inhibition curves separate typical enzyme at eighty percent from heterozygous and atypical genotypes. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Management of Suxamethonium Apnoea",
+            "tx": "**Management of prolonged suxamethonium apnea** requires patient mechanical ventilation and continuous sedation until neuromuscular function recovers spontaneously. Clinicians must maintain tracheal intubation, verify ventilatory support, administer intravenous sedatives to prevent conscious awareness during paralysis, and monitor the peripheral nerve stimulator; fresh frozen plasma is generally avoided due to transfusion reaction and viral risks.",
+            "say": "Management of prolonged suxamethonium apnea requires patient mechanical ventilation and continuous sedation until neuromuscular function recovers spontaneously. Clinicians must maintain tracheal intubation, verify ventilatory support, administer intravenous sedatives to prevent conscious awareness during paralysis, and monitor the peripheral nerve stimulator; fresh frozen plasma is generally avoided due to transfusion reaction and viral risks.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Patient fails to breathe 20 minutes post-succinylcholine"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Attach nerve stimulator and confirm persistent flaccid paralysis"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Maintain controlled ventilation and sedation in ICU/PACU"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Draw blood for dibucaine number and await spontaneous recovery"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Rocuronium Rapid-Sequence Sizing",
+            "tx": "**Rocuronium monoquaternary aminosteroid kinetics** provide the fastest onset of any non-depolarizing relaxant. At a standard intubating dose of 0.6 mg/kg (2x ED95), rocuronium produces intubating conditions in 90 seconds. When administered at a rapid sequence induction dose of 1.2 mg/kg (4x ED95), rocuronium establishes excellent intubating conditions within 45 to 60 seconds, directly matching succinylcholine speed without its lethal hyperkalaemic hazards.",
+            "say": "Rocuronium monoquaternary aminosteroid kinetics provide the fastest onset of any non-depolarizing relaxant. At a standard intubating dose of 0.6 mg/kg (2x ED95), rocuronium produces intubating conditions in 90 seconds. When administered at a rapid sequence induction dose of 1.2 mg/kg (4x ED95), rocuronium establishes excellent intubating conditions within 45 to 60 seconds, directly matching succinylcholine speed without its lethal hyperkalaemic hazards.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Dosing Regimen",
+                    "Multiples of ED95",
+                    "Time to Maximal Glottic Paralysis",
+                    "Clinical Duration of Action"
+                ],
+                "rows": [
+                    [
+                        "Standard Intubating Dose (0.6 mg/kg)",
+                        "2 times ED95",
+                        "60 to 90 seconds",
+                        "30 to 45 minutes intermediate block"
+                    ],
+                    [
+                        "Rapid Sequence Dose (1.2 mg/kg)",
+                        "4 times ED95",
+                        "45 to 60 seconds (matches sux)",
+                        "60 to 90 minutes prolonged block"
+                    ],
+                    [
+                        "Maintenance Bolus (0.15 mg/kg)",
+                        "0.5 times ED95",
+                        "2 to 3 minutes",
+                        "15 to 25 minutes surgical extension"
+                    ],
+                    [
+                        "ICU Bolus Sedation",
+                        "Variable titration",
+                        "2 to 3 minutes",
+                        "Monitor closely with train-of-four"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Vecuronium Pharmacological Profile",
+            "tx": "**Vecuronium steroidal pharmacology** represents an intermediate-duration, non-depolarizing monoquaternary aminosteroid derived from pancuronium. Administered at 0.1 mg/kg, vecuronium produces intubation conditions in 2.5 to 3 minutes with zero cardiovascular side effects, zero histamine release, and zero vagolytic tachycardia, making it remarkably stable for cardiac surgery.",
+            "say": "Vecuronium steroidal pharmacology represents an intermediate-duration, non-depolarizing monoquaternary aminosteroid derived from pancuronium. Administered at 0.1 mg/kg, vecuronium produces intubation conditions in 2.5 to 3 minutes with zero cardiovascular side effects, zero histamine release, and zero vagolytic tachycardia, making it remarkably stable for cardiac surgery.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Vecuronium Hemodynamics",
+                    "points": [
+                        "Pristine cardiac stability with zero autonomic ganglia blockade",
+                        "No muscarinic receptor blockade (no vagolytic tachycardia)",
+                        "Zero histamine release from mast cells; safe in reactive airways"
+                    ]
+                },
+                "right": {
+                    "title": "Pancuronium Parent Molecule",
+                    "points": [
+                        "Potent vagolytic blockade of cardiac muscarinic M2 receptors",
+                        "Prominent tachycardia, hypertension, and catecholamine release",
+                        "Long duration of action (60 to 90 minutes) prone to residual block"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Organ Elimination of Aminosteroids",
+            "tx": "**Elimination pathways of steroidal relaxants** depend predominantly on hepatic metabolism and biliary excretion: vecuronium is cleared 40 to 60 percent by biliary excretion and 20 to 30 percent by renal excretion, producing active 3-hydroxy metabolites that can accumulate during prolonged intensive care infusions. Rocuronium is cleared over 70 percent unchanged by the liver into bile, causing prolonged duration in cirrhosis.",
+            "say": "Elimination pathways of steroidal relaxants depend predominantly on hepatic metabolism and biliary excretion: vecuronium is cleared 40 to 60 percent by biliary excretion and 20 to 30 percent by renal excretion, producing active 3-hydroxy metabolites that can accumulate during prolonged intensive care infusions. Rocuronium is cleared over 70 percent unchanged by the liver into bile, causing prolonged duration in cirrhosis.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Relaxant Drug",
+                    "Biliary and Hepatic Clearance",
+                    "Renal Elimination Percentage",
+                    "Active Metabolite Hazards"
+                ],
+                "rows": [
+                    [
+                        "Vecuronium",
+                        "40 to 60 percent biliary",
+                        "20 to 30 percent renal",
+                        "3-desacetylvecuronium accumulates in renal failure"
+                    ],
+                    [
+                        "Rocuronium",
+                        "70 to 80 percent biliary",
+                        "10 to 25 percent renal",
+                        "Minimal active metabolites; prolonged in liver cirrhosis"
+                    ],
+                    [
+                        "Pancuronium",
+                        "15 to 20 percent biliary",
+                        "60 to 80 percent renal",
+                        "3-hydroxypancuronium causes prolonged paralysis in renal failure"
+                    ],
+                    [
+                        "Cisatracurium",
+                        "Zero hepatic clearance",
+                        "Zero renal elimination",
+                        "Organ-independent Hofmann elimination"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Sugammadex Cyclodextrin Reversal",
+            "tx": "**Sugammadex selective relaxant binding** represents a modified gamma-cyclodextrin molecule with a lipophilic central cavity and a hydrophilic exterior. Administered intravenously, sugammadex encapsulates rocuronium and vecuronium molecules in a tight 1:1 guest-host molecular complex, reducing free plasma concentration to zero and rapidly reversing deep neuromuscular blockade within two to three minutes without anticholinergic side effects.",
+            "say": "Sugammadex selective relaxant binding represents a modified gamma-cyclodextrin molecule with a lipophilic central cavity and a hydrophilic exterior. Administered intravenously, sugammadex encapsulates rocuronium and vecuronium molecules in a tight 1:1 guest-host molecular complex, reducing free plasma concentration to zero and rapidly reversing deep neuromuscular blockade within two to three minutes without anticholinergic side effects.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Inject IV sugammadex (2 to 16 mg/kg depending on block depth)"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Encapsulates free intravascular rocuronium molecules 1:1"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Creates massive concentration gradient drawing rocuronium from NMJ"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Full recovery to TOF ratio >0.9 within 2 to 3 minutes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "This molecule was engineered as a trap with a water soluble outside and a greedy hollow heart. Sugammadex wraps rocuronium in a one to one **encapsulation**, plucking it off receptors by draining the free drug that equilibrium depends on. Within minutes even deep paralysis melts away, without the muscarinic baggage of neostigmine and its atropine chaperone. The schematic explains both the speed and the selectivity: steroidal relaxants fit the cavity, benzylisoquinoliniums simply do not, so the drug chart must be checked before promising anyone a rapid sugammadex reversal.",
+            "say": "Sugammadex encapsulates rocuronium one to one, reversing even deep blockade within minutes without anticholinergics.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m496-ans-nmb-dibucaine-number.webp",
+                "alt": "Structural molecular encapsulation schematic showing sugammadex gamma-cyclodextrin binding rocuronium 1:1",
+                "caption": "Structural molecular encapsulation schematic showing sugammadex gamma-cyclodextrin binding rocuronium 1:1. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Sugammadex Dosing Thresholds",
+            "tx": "**Weight-based sugammadex dosing tiers** correspond directly to objective neuromuscular monitoring depth: routine reversal of moderate blockade (reappearance of two twitches on train-of-four) requires 2 mg/kg; deep blockade (zero TOF twitches with 1 to 2 post-tetanic twitches) demands 4 mg/kg; and emergency immediate rescue reversal three minutes following a 1.2 mg/kg rocuronium bolus demands 16 mg/kg.",
+            "say": "Weight-based sugammadex dosing tiers correspond directly to objective neuromuscular monitoring depth: routine reversal of moderate blockade (reappearance of two twitches on train-of-four) requires 2 mg/kg; deep blockade (zero TOF twitches with 1 to 2 post-tetanic twitches) demands 4 mg/kg; and emergency immediate rescue reversal three minutes following a 1.2 mg/kg rocuronium bolus demands 16 mg/kg.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Neuromuscular Block Depth",
+                    "Objective Stimulation Indicator",
+                    "Required Sugammadex Dose",
+                    "Typical Reversal Speed"
+                ],
+                "rows": [
+                    [
+                        "Moderate Blockade",
+                        "Reappearance of T2 on train-of-four",
+                        "2 milligrams per kilogram",
+                        "TOF ratio >0.9 within 2 minutes"
+                    ],
+                    [
+                        "Deep Blockade",
+                        "0 twitches on TOF; 1 to 2 post-tetanic twitches",
+                        "4 milligrams per kilogram",
+                        "TOF ratio >0.9 within 3 minutes"
+                    ],
+                    [
+                        "Immediate Rescue (CICO)",
+                        "Within 3 minutes of 1.2 mg/kg rocuronium",
+                        "16 milligrams per kilogram",
+                        "Full recovery of motor function in 3 minutes"
+                    ],
+                    [
+                        "Neostigmine Equivalent",
+                        "Requires at least 2 to 4 TOF twitches",
+                        "50 mcg/kg with glycopyrrolate",
+                        "Requires 10 to 15 minutes and risks muscarinic surges"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

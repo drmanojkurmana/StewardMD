@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-chest-cannonball-metastases",
+ "subject": "radiology",
+ "module": "rad-chest",
+ "title": "Cannonball Metastases, Egg Shell Calcification and Miliary Mottling",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Cannonball metastases are blood borne",
+   "tx": "**Cannonball metastases** are large, round, sharply edged lung nodules scattered through both lungs by tumour emboli travelling in pulmonary arteries. Renal cell carcinoma and choriocarcinoma classically throw these big smooth balls, while breast, thyroid and colon cancers seed smaller nodules more often. Lower lobes collect more deposits because they receive the greater share of pulmonary blood flow in the upright lung.",
+   "say": "Cannonball metastases are large, round, sharply edged lung nodules scattered through both lungs by tumour emboli travelling in pulmonary arteries. Renal cell carcinoma and choriocarcinoma classically throw these big smooth balls. Lower lobes collect more deposits because they receive the greater share of pulmonary blood flow in the upright lung.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tumour enters venous blood"}, {"id": "b", "label": "Emboli reach lung arteries"}, {"id": "c", "label": "Round nodules grow"}, {"id": "d", "label": "Lower lobes favoured"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Feeding vessel and smooth margins",
+   "tx": "**Feeding vessel sign** shows a pulmonary artery branch running straight into a nodule, supporting a blood borne origin on CT. Haematogenous metastases tend to grow smoother than the primary tumour that seeded them, with round margins and varied sizes reflecting repeated embolic showers. Head and neck squamous cancers break the smooth rule because their lung deposits cavitate often, leaving thick walled holes inside nodules.",
+   "say": "Feeding vessel sign shows a pulmonary artery branch running straight into a nodule, supporting a blood borne origin on CT. Haematogenous metastases grow smoother than the primary tumour, with varied sizes reflecting repeated embolic showers. Head and neck squamous cancers break the rule because their deposits cavitate often, leaving thick walled holes.",
+   "vis": {"kind": "compare", "left": {"title": "Typical metastases", "points": ["Smooth round margins", "Varied nodule sizes", "Feeding vessel on CT", "Lower lobe predominance"]}, "right": {"title": "Cavitating deposits", "points": ["Head and neck squamous source", "Thick walled cavities", "Chemo treated germ cell tumours", "Exclude septic emboli"]}}
+  },
+  {
+   "title": "Finding the primary tumour",
+   "tx": "**Primary search** after cannonball nodules starts with kidneys, testes, thyroid, breast and colon because those sources dominate examination lists. A renal mass with lung balls points to clear cell carcinoma spreading through the renal vein and inferior vena cava. A testicular mass with very high human chorionic gonadotropin points to choriocarcinoma, whose lung deposits bleed and show haloes of haemorrhage around each nodule.",
+   "say": "Primary search after cannonball nodules starts with kidneys, testes, thyroid, breast and colon because those sources dominate. A renal mass points to clear cell carcinoma spreading through the renal vein. A testicular mass with very high gonadotropin points to choriocarcinoma, whose lung deposits bleed and show haloes around each nodule.",
+   "vis": {"kind": "table", "cols": ["Primary site", "Clue", "Lung pattern"], "rows": [["Kidney", "Flank mass, haematuria", "Large cannonballs"], ["Testis choriocarcinoma", "Very high hCG", "Bleeding nodules with halo"], ["Thyroid", "Neck mass", "Miliary or large nodules"], ["Breast", "Breast lump, nodes", "Nodules plus lymphangitis"]]}
+  },
+  {
+   "title": "Egg shell calcification in nodes",
+   "tx": "**Egg shell calcification** rims hilar and mediastinal lymph nodes with a thin calcified shell under 2 mm thick covering most of the node circumference. Silicosis in miners and stone workers is the classic cause, and only about 5 percent of silicotic nodes rim this way. Sarcoidosis, treated lymphoma and tuberculosis also rim nodes occasionally, so exposure history separates the occupational cause from its mimics.",
+   "say": "Egg shell calcification rims hilar and mediastinal nodes with a thin calcified shell under two millimetres thick covering most of the circumference. Silicosis in miners and stone workers is the classic cause, though only about five percent of silicotic nodes rim this way. Sarcoidosis, treated lymphoma and tuberculosis occasionally mimic it.",
+   "vis": {"kind": "compare", "left": {"title": "Silicosis pattern", "points": ["Mining or stone exposure", "Upper lobe nodules too", "About 5 percent rim", "Progressive massive fibrosis"]}, "right": {"title": "Other rim causes", "points": ["Sarcoidosis", "Treated lymphoma", "Tuberculosis nodes", "Coal worker pneumoconiosis"]}}
+  },
+  {
+   "title": "Miliary mottling means millet seeds",
+   "tx": "**Miliary mottling** covers both lungs with uniform nodules 1 to 3 mm wide, named after millet seeds. Miliary tuberculosis seeds them through the bloodstream during uncontrolled primary infection, in infants, malnourished patients and advanced HIV. The nodules share one size because one embolic shower seeded them together. Silicosis, metastases and sarcoidosis mimic the pattern but vary more in size or favour upper zones.",
+   "say": "Miliary mottling covers both lungs with uniform nodules one to three millimetres wide, named after millet seeds. Miliary tuberculosis seeds them through the bloodstream during uncontrolled primary infection, in infants and advanced HIV. The nodules share one size because one shower seeded them together. Mimics vary more in size or favour upper zones.",
+   "vis": {"kind": "table", "cols": ["Cause", "Nodule size", "Distribution clue"], "rows": [["Miliary tuberculosis", "Uniform 1 to 3 mm", "All zones equally"], ["Silicosis", "2 to 5 mm, may rim nodes", "Upper zones favoured"], ["Metastases", "Varied sizes", "Lower zones favoured"], ["Sarcoidosis", "Along fissures and bronchi", "Perilymphatic pattern"]]}
+  },
+  {
+   "title": "Miliary tuberculosis workup",
+   "tx": "**Miliary tuberculosis** with a normal early film is common because nodules need weeks to reach visible size, so treatment starts on clinical suspicion in a deteriorating patient. Fundoscopy can show choroidal tubercles, and liver or bone marrow biopsy finds granulomas when sputum stays negative. HIV testing, sputum molecular testing and lumbar puncture for meningitis complete the first day screen because meningeal spread changes drug duration.",
+   "say": "Miliary tuberculosis with a normal early film is common because nodules need weeks to reach visible size, so treatment starts on suspicion in a deteriorating patient. Fundoscopy can show choroidal tubercles, and liver or marrow biopsy finds granulomas when sputum stays negative. Meningeal spread changes drug duration, so lumbar puncture joins the screen.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Miliary pattern or suspicion"}, {"id": "b", "label": "HIV and sputum testing"}, {"id": "c", "label": "Fundoscopy and biopsy"}, {"id": "d", "label": "Start therapy, check meninges"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Random versus perilymphatic nodules",
+   "tx": "**Random distribution** places miliary and metastatic nodules anywhere including fissure surfaces, because blood delivers them evenly through the lobule. Perilymphatic diseases like sarcoidosis and silicosis instead bead along bronchi, vessels, septa and fissures where lymphatics run. Centrilobular causes such as hypersensitivity pneumonitis spare the fissures entirely. Naming the lobular address on CT therefore narrows a page of causes to a short working list.",
+   "say": "Random distribution places miliary and metastatic nodules anywhere including fissure surfaces, because blood delivers them evenly. Perilymphatic diseases like sarcoidosis instead bead along bronchi, vessels and fissures where lymphatics run. Centrilobular causes spare the fissures entirely. Naming the lobular address on CT narrows a page of causes to a short list.",
+   "vis": {"kind": "compare", "left": {"title": "Random nodules", "points": ["Touch fissure surfaces", "Even lobular spread", "Miliary tuberculosis", "Haematogenous metastases"]}, "right": {"title": "Perilymphatic nodules", "points": ["Bead along lymphatics", "Fissures studded in rows", "Sarcoidosis", "Silicosis and lymphangitis"]}}
+  },
+  {
+   "title": "Cannonballs versus septic emboli",
+   "tx": "**Septic emboli** mimic metastases with multiple peripheral nodules, but they evolve over days, cavitate early and arrive with fever, a heart murmur or an infected line. The feeding vessel sign appears in both, so it cannot separate them alone. Blood cultures, echocardiography and a hunt for endocarditis or an infected thrombus decide the path, while a known renal or testicular primary with slow growth favours true cannonball metastases.",
+   "say": "Septic emboli mimic metastases with multiple peripheral nodules, but they evolve over days, cavitate early and arrive with fever, a murmur or an infected line. The feeding vessel sign appears in both, so blood cultures, echocardiography and a hunt for endocarditis decide the path, while slow growth favours true cannonball metastases.",
+   "vis": {"kind": "table", "cols": ["Feature", "Metastases", "Septic emboli"], "rows": [["Speed of change", "Weeks to months", "Days"], ["Cavitation", "Source dependent", "Early and frequent"], ["Fever", "Usually absent", "Usually present"], ["First tests", "Primary tumour search", "Cultures and echo"]]}
+  }
+ ]
+}

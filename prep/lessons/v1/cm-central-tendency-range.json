@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-central-tendency-range",
+  "subject": "community-medicine",
+  "module": "cm-central-tendency",
+  "title": "Dispersion: Range, Variance, and Standard Deviation",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Why averages alone mislead",
+      "tx": "Two villages can share a mean haemoglobin of eleven grams yet differ completely: one clusters tightly, the other splits between severe anaemia and high values. **Measures of dispersion** quantify that scatter around the average. Without them, means conceal inequality, laboratory imprecision, and outbreak heterogeneity, which is why every thesis table pairs each mean with a standard deviation or median with an interquartile range.",
+      "say": "Same mean, different scatter, different story. Always report spread beside the average.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tight distribution",
+          "points": ["Values crowd near the mean", "Small standard deviation", "Uniform population or precise assay"]
+        },
+        "right": {
+          "title": "Wide distribution",
+          "points": ["Values spread far from mean", "Large standard deviation", "Mixed population or noisy assay"]
+        }
+      }
+    },
+    {
+      "title": "Range: the crudest spread",
+      "tx": "The **range in descriptive statistics** is simply the maximum minus the minimum (or the interval between them). It needs two seconds to compute, serves quality control charts and weather reports, but depends on exactly two extreme values, grows with sample size, and ignores the interior entirely. One data entry error can double it, so it never stands alone in serious reporting.",
+      "say": "Range is maximum minus minimum: quick but fragile. One typo can double it.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Range feature", "Consequence"],
+        "rows": [
+          ["Uses only two values", "Ignores the middle completely"],
+          ["Grows with sample size", "Larger samples show wider ranges"],
+          ["Outlier sensitive", "One error distorts the result"],
+          ["Quick field use", "Fever charts and control limits"]
+        ]
+      }
+    },
+    {
+      "title": "Mean deviation",
+      "tx": "Averaging the absolute departures from the mean gives the **mean deviation** (average deviation), an intuitive spread in original units that uses every observation. It lost favour historically because absolute values resist algebra, but its robust descendant, the median absolute deviation, now serves outlier detection in laboratory and survey data where standard deviations would be corrupted by the very extremes under hunt.",
+      "say": "Mean deviation averages distances from the mean in plain units. Its median based cousin hunts outliers today.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "md1", "label": "Subtract mean from each value" },
+          { "id": "md2", "label": "Drop signs, average the distances" },
+          { "id": "md3", "label": "Report in original units" }
+        ],
+        "edges": [["md1", "md2"], ["md2", "md3"]]
+      }
+    },
+    {
+      "title": "Variance: squared departures",
+      "tx": "Squaring departures before averaging yields the **variance**, which punishes distant values quadratically and unlocks beautiful algebra: variances of independent variables add. Population variance divides by N; sample variance divides by n minus one (Bessel correction) because the sample mean itself consumes one degree of freedom and otherwise underestimates spread. Squared units (centimetres squared) are the price paid.",
+      "say": "Variance averages squared distances and divides samples by n minus one. Its units are squared, so we take the root next.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Population variance",
+          "points": ["Denominator N", "Whole population known", "Symbol sigma squared"]
+        },
+        "right": {
+          "title": "Sample variance",
+          "points": ["Denominator n minus 1", "Corrects underestimation", "Symbol s squared"]
+        }
+      }
+    },
+    {
+      "title": "Standard deviation: the working measure",
+      "tx": "The square root of variance is the **standard deviation**, restoring original units and becoming the universal partner of the mean. It measures typical distance from the mean, defines normal distribution bands, and feeds standard errors, z scores, and t tests. In a normal distribution about sixty eight percent of values lie within one standard deviation of the mean, the bridge to the next lessons.",
+      "say": "Standard deviation is the root of variance, back in real units. It is the spread measure every later test consumes.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Band around mean", "Normal share inside"],
+        "rows": [
+          ["Mean plus minus 1 SD", "About 68 percent"],
+          ["Mean plus minus 2 SD", "About 95 percent"],
+          ["Mean plus minus 3 SD", "About 99.7 percent"],
+          ["Mean plus minus 1.96 SD", "Exactly 95 percent convention"]
+        ]
+      }
+    },
+    {
+      "title": "Computing SD from grouped data",
+      "tx": "For frequency tables the **standard deviation calculation** multiplies squared deviations of class marks from the mean by class frequencies, sums, divides by total frequency (or n minus one for samples), and takes the root. Assumed mean shortcuts shift the origin to simplify arithmetic without changing the result. Examinations still reward knowing denominator choice more than button pressing speed.",
+      "say": "Group marks, weight by frequency, divide correctly, then root. Samples divide by n minus one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "sd1", "label": "Class marks minus mean, squared" },
+          { "id": "sd2", "label": "Weight by frequency and sum" },
+          { "id": "sd3", "label": "Divide, then take square root" }
+        ],
+        "edges": [["sd1", "sd2"], ["sd2", "sd3"]]
+      }
+    },
+    {
+      "title": "Interquartile range for skewed data",
+      "tx": "Where the median leads, the **interquartile range** follows: the distance between the third and first quartiles (seventy fifth and twenty fifth percentiles), covering the middle fifty percent of values. It ignores tails completely, survives open ended classes, and pairs with the median in every skewed report (hospital stay, income, incubation period). Box plots draw it literally as the box.",
+      "say": "Interquartile range spans the middle half of the data. It partners the median wherever data are skewed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mean plus SD pair",
+          "points": ["For symmetric data", "SD uses every value", "Broken by heavy outliers"]
+        },
+        "right": {
+          "title": "Median plus IQR pair",
+          "points": ["For skewed data", "IQR uses middle half only", "Robust to outliers"]
+        }
+      }
+    },
+    {
+      "title": "Standard deviation versus standard error (preview)",
+      "tx": "Confusing these two is the commonest viva error: the **standard deviation versus standard error** distinction separates describing data from estimating precision. Standard deviation describes scatter of individuals and stays stable as samples grow; standard error describes scatter of sample means and shrinks with root n. The full standard error treatment arrives with the z score lesson; the seed distinction belongs here.",
+      "say": "Standard deviation describes people; standard error describes means. One stays, the other shrinks with sample size.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Property", "SD versus SE"],
+        "rows": [
+          ["Describes", "Individuals versus sample means"],
+          ["Effect of larger n", "Stable versus shrinks by root n"],
+          ["Used for", "Reference ranges versus confidence intervals"],
+          ["Symbol", "s or sigma versus SE of mean"]
+        ]
+      }
+    },
+    {
+      "title": "Choosing the dispersion measure",
+      "tx": "Close with the matching discipline for **choosing a measure of dispersion**: range for instant field impressions, interquartile range beside medians, standard deviation beside means, and variance when algebra (pooling, analysis of variance) lies ahead. A stem mentioning skewed data with median answered wants interquartile range; one feeding a t test wants standard deviation. The pair must always match the average chosen.",
+      "say": "Match spread to average: range for speed, IQR for median, SD for mean. Examiners test the pairing, not the arithmetic.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "cd1", "label": "Median chosen? Report IQR" },
+          { "id": "cd2", "label": "Mean chosen? Report SD" },
+          { "id": "cd3", "label": "Field snapshot? Report range" }
+        ],
+        "edges": [["cd1", "cd2"], ["cd2", "cd3"]]
+      }
+    }
+  ]
+}

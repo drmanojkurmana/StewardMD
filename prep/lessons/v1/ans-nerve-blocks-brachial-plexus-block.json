@@ -1,0 +1,282 @@
+{
+    "v": 1,
+    "id": "ans-nerve-blocks-brachial-plexus-block",
+    "subject": "anaesthesia",
+    "module": "ans-nerve-blocks",
+    "title": "Peripheral Nerve Blocks: Brachial Plexus Approaches, Ultrasound Guidance, and Bier Block",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Brachial Plexus Functional Anatomy",
+            "tx": "**Brachial plexus root-to-terminal anatomy** originates from the anterior primary rami of C5 to T1 spinal nerves, organizing sequentially into five roots (emerging between the anterior and middle scalene muscles), three trunks (superior, middle, inferior in the posterior triangle), six divisions (anterior and posterior beneath the clavicle), three cords (lateral, posterior, medial surrounding the axillary artery), and terminal peripheral nerves.",
+            "say": "Brachial plexus root-to-terminal anatomy originates from the anterior primary rami of C5 to T1 spinal nerves, organizing sequentially into five roots (emerging between the anterior and middle scalene muscles), three trunks (superior, middle, inferior in the posterior triangle), six divisions (anterior and posterior beneath the clavicle), three cords (lateral, posterior, medial surrounding the axillary artery), and terminal peripheral nerves.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/local-anaesthetics-esters-amides-blocks-fig1.webp",
+                "alt": "Anatomical progression of brachial plexus roots, trunks, divisions, cords, and terminal nerves",
+                "caption": "Anatomical progression of brachial plexus roots, trunks, divisions, cords, and terminal nerves"
+            }
+        },
+        {
+            "title": "Interscalene Block and Phrenic Palsy",
+            "tx": "**Interscalene brachial plexus block** targets the roots and trunks within the interscalene groove at the level of the cricoid cartilage (C6 vertebra) for shoulder and upper arm surgeries. Because the phrenic nerve traverses the anterior surface of the anterior scalene muscle within the same prevertebral fascial sheath, ipsilateral phrenic nerve palsy occurs in 100 percent of patients, causing hemidiaphragmatic paralysis that strictly contraindicates this block in severe COPD.",
+            "say": "Interscalene brachial plexus block targets the roots and trunks within the interscalene groove at the level of the cricoid cartilage (C6 vertebra) for shoulder and upper arm surgeries. Because the phrenic nerve traverses the anterior surface of the anterior scalene muscle within the same prevertebral fascial sheath, ipsilateral phrenic nerve palsy occurs in 100 percent of patients, causing hemidiaphragmatic paralysis that strictly contraindicates this block in severe COPD.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Surgical Indications",
+                    "points": [
+                        "Total shoulder arthroplasty and rotator cuff repairs",
+                        "Proximal humerus fracture fixation",
+                        "Dense sensory blockade of C5 and C6 dermatomes"
+                    ]
+                },
+                "right": {
+                    "title": "Ipsilateral Side Effects (100% Rate)",
+                    "points": [
+                        "Ipsilateral phrenic nerve palsy drops vital capacity by 25 to 30%",
+                        "Horner syndrome (ptosis, miosis, anhidrosis via stellate ganglion block)",
+                        "Hoarseness resulting from recurrent laryngeal nerve block"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Supraclavicular Block Spinal of the Arm",
+            "tx": "**Supraclavicular brachial plexus block** is celebrated as the 'spinal of the arm' because all trunks and divisions are tightly clustered as a compact bundle posterior and lateral to the subclavian artery resting over the first rib. Administered at this bottleneck, local anaesthetic produces rapid, dense, uniform surgical anaesthesia of the entire upper extremity below the shoulder, with a small risk of pneumothorax (under 1 percent with ultrasound guidance).",
+            "say": "Supraclavicular brachial plexus block is celebrated as the 'spinal of the arm' because all trunks and divisions are tightly clustered as a compact bundle posterior and lateral to the subclavian artery resting over the first rib. Administered at this bottleneck, local anaesthetic produces rapid, dense, uniform surgical anaesthesia of the entire upper extremity below the shoulder, with a small risk of pneumothorax (under 1 percent with ultrasound guidance).",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Position high-frequency ultrasound probe in supraclavicular fossa"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Identify pulsating subclavian artery resting directly on hyperechoic first rib"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Locate hypoechoic 'cluster of grapes' plexus lateral to artery"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Advance needle in-plane and inject 20 mL local anaesthetic around corner pocket"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Anaesthetists call this ultrasound view a bunch of grapes, and once seen it is never forgotten. The trunks and divisions of the brachial plexus cluster as dark round grapes beside the pulsating subclavian artery, all resting on the first rib's bright line. That **cluster of grapes** is the supraclavicular target, where one injection bathes the whole arm's supply at its tightest point. Pleura lurks just medially in the same frame, which is why the needle never advances unseen towards it.",
+            "say": "The supraclavicular plexus appears as a cluster of grapes beside the subclavian artery on ultrasound.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m515-ans-nerve-blocks-brachial-plexus-block.webp",
+                "alt": "High-resolution ultrasound sonoanatomy of supraclavicular fossa showing cluster of grapes plexus and subclavian artery",
+                "caption": "High-resolution ultrasound sonoanatomy of supraclavicular fossa showing cluster of grapes plexus and subclavian artery. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Infraclavicular and Axillary Approaches",
+            "tx": "**Infraclavicular and axillary block indications** target the distal brachial plexus for elbow, forearm, and hand surgery. The infraclavicular block deposits local anaesthetic around lateral, posterior, and medial cords surrounding the axillary artery deep to the pectoralis minor muscle. The axillary block deposits drug around median, ulnar, and radial nerves within the axillary sheath, requiring separate subcutaneous infiltration of the musculocutaneous nerve in the coracobrachialis muscle.",
+            "say": "Infraclavicular and axillary block indications target the distal brachial plexus for elbow, forearm, and hand surgery. The infraclavicular block deposits local anaesthetic around lateral, posterior, and medial cords surrounding the axillary artery deep to the pectoralis minor muscle. The axillary block deposits drug around median, ulnar, and radial nerves within the axillary sheath, requiring separate subcutaneous infiltration of the musculocutaneous nerve in the coracobrachialis muscle.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Brachial Plexus Approach",
+                    "Anatomical Plexus Stage Blocked",
+                    "Primary Surgical Coverage",
+                    "Uncovered Nerve Hazard"
+                ],
+                "rows": [
+                    [
+                        "Interscalene Approach",
+                        "Roots and trunks (C5-C7)",
+                        "Shoulder and clavicle surgery",
+                        "Ulnar nerve (C8-T1) frequently spared"
+                    ],
+                    [
+                        "Supraclavicular Approach",
+                        "Trunks and divisions",
+                        "Entire arm from mid-humerus to hand",
+                        "Spares intercostobrachial (T2) tourniquet pain"
+                    ],
+                    [
+                        "Infraclavicular Approach",
+                        "Cords (lateral, posterior, medial)",
+                        "Elbow, forearm, and hand surgery",
+                        "Deep needle path; excellent for indwelling catheter"
+                    ],
+                    [
+                        "Axillary Approach",
+                        "Terminal peripheral branches",
+                        "Forearm, wrist, and hand procedures",
+                        "Musculocutaneous nerve lies outside sheath in coracobrachialis"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Nerve Stimulator Localization Principles",
+            "tx": "**Peripheral nerve stimulator guidance** delivers isolated electrical square-wave pulses (0.1-millisecond duration at 1 to 2 Hertz) through an insulated needle. The needle is advanced until an appropriate motor twitch is elicited at a current of 0.5 to 1.0 milliampere (mA); advancing until the twitch persists at 0.2 to 0.5 mA confirms ideal perineural needle tip positioning. If a twitch persists under 0.2 mA, intraneural placement is diagnosed, demanding immediate withdrawal.",
+            "say": "Peripheral nerve stimulator guidance delivers isolated electrical square-wave pulses (0.1-millisecond duration at 1 to 2 Hertz) through an insulated needle. The needle is advanced until an appropriate motor twitch is elicited at a current of 0.5 to 1.0 milliampere (mA); advancing until the twitch persists at 0.2 to 0.5 mA confirms ideal perineural needle tip positioning. If a twitch persists under 0.2 mA, intraneural placement is diagnosed, demanding immediate withdrawal.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Current Threshold (mA)",
+                    "Physiological Needle Tip Location",
+                    "Clinical Action",
+                    "Neurological Risk"
+                ],
+                "rows": [
+                    [
+                        "Greater than 1.0 mA",
+                        "Distant from nerve trunk",
+                        "Advance needle gently toward nerve",
+                        "Ineffective block if local anaesthetic injected"
+                    ],
+                    [
+                        "0.2 to 0.5 mA (Target)",
+                        "Ideal perineural paraneural space",
+                        "Aspirate for blood and inject local anaesthetic",
+                        "Optimal position for high success and safety"
+                    ],
+                    [
+                        "Less than 0.2 mA",
+                        "Intraneural needle tip placement",
+                        "Withdraw needle immediately before injecting",
+                        "Extreme risk of permanent nerve fascicle damage"
+                    ],
+                    [
+                        "Motor Twitch Disappears on Injection",
+                        "Conductive local anaesthetic displacement",
+                        "Confirms successful perineural fluid expansion",
+                        "Normal Raj test confirms correct placement"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Ultrasound Guidance Sonoanatomy",
+            "tx": "**Ultrasound-guided regional anaesthesia principles** visualize needle trajectory, target neural structures, and local anaesthetic spread in real time. Nerves appear as round or oval structures with a characteristic 'honeycomb' internal architecture consisting of hypoechoic neuronal fascicles embedded within hyperechoic connective tissue perineurium. Observing local anaesthetic fluid expand smoothly around the nerve (donut sign) confirms circumferential perineural coverage.",
+            "say": "Ultrasound-guided regional anaesthesia principles visualize needle trajectory, target neural structures, and local anaesthetic spread in real time. Nerves appear as round or oval structures with a characteristic 'honeycomb' internal architecture consisting of hypoechoic neuronal fascicles embedded within hyperechoic connective tissue perineurium. Observing local anaesthetic fluid expand smoothly around the nerve (donut sign) confirms circumferential perineural coverage.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify target nerve honeycomb fascicular architecture on ultrasound"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Advance echogenic needle in-plane under continuous real-time tip tracking"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Negative aspiration followed by test injection of 1 mL saline"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Observe circumferential 'donut sign' hydrodissection around nerve"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Bier Block Intravenous Regional Anaesthesia",
+            "tx": "**Intravenous regional anaesthesia Bier block** provides surgical anaesthesia for minor hand and forearm procedures lasting under 60 minutes. The arm is elevated and exsanguinated with an Esmarch elastic bandage, a pneumatic double tourniquet is inflated on the upper arm to 100 mmHg above systolic blood pressure (minimum 250 mmHg), and 40 milliliters of 0.5 percent preservative-free plain lignocaine is injected intravenously into a distal cannulated vein.",
+            "say": "Intravenous regional anaesthesia Bier block provides surgical anaesthesia for minor hand and forearm procedures lasting under 60 minutes. The arm is elevated and exsanguinated with an Esmarch elastic bandage, a pneumatic double tourniquet is inflated on the upper arm to 100 mmHg above systolic blood pressure (minimum 250 mmHg), and 40 milliliters of 0.5 percent preservative-free plain lignocaine is injected intravenously into a distal cannulated vein.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Bier Block Tourniquet Safety Rules",
+                    "points": [
+                        "Double pneumatic tourniquet checked for zero mechanical leaks",
+                        "Inflate proximal cuff first to 100 mmHg above systolic pressure",
+                        "Switch to distal cuff when proximal tourniquet pain emerges at 20 to 30 min"
+                    ]
+                },
+                "right": {
+                    "title": "Minimum Inflation Timing (20 Minutes)",
+                    "points": [
+                        "Tourniquet must remain inflated for at least 20 minutes minimum",
+                        "Permits 70 percent of injected lignocaine to bind tissue proteins",
+                        "Prevents catastrophic bolus release of local anaesthetic into heart"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Transversus Abdominis Plane (TAP) Block",
+            "tx": "**Transversus abdominis plane block anatomy** deposits local anaesthetic into the neurovascular fascial plane between the internal oblique and transversus abdominis muscles, targeting anterior rami of T7 to L1 intercostal nerves. Ultrasound guidance identifies the classical three muscular layers of the lateral abdominal wall (external oblique, internal oblique, transversus abdominis), providing dense somatic analgesia for lower abdominal incisions.",
+            "say": "Transversus abdominis plane block anatomy deposits local anaesthetic into the neurovascular fascial plane between the internal oblique and transversus abdominis muscles, targeting anterior rami of T7 to L1 intercostal nerves. Ultrasound guidance identifies the classical three muscular layers of the lateral abdominal wall (external oblique, internal oblique, transversus abdominis), providing dense somatic analgesia for lower abdominal incisions.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Layer",
+                    "Sonographic Appearance",
+                    "Block Spatial Target",
+                    "Clinical Surgical Coverage"
+                ],
+                "rows": [
+                    [
+                        "External Oblique Muscle",
+                        "Most superficial muscular layer",
+                        "Subcutaneous margin boundary",
+                        "Not injected"
+                    ],
+                    [
+                        "Internal Oblique Muscle",
+                        "Intermediate muscular layer",
+                        "Forms upper roof of target fascial plane",
+                        "Sensory nerve branches traverse lower border"
+                    ],
+                    [
+                        "Transversus Abdominis Muscle",
+                        "Deepest muscular layer overlying fascia transversalis",
+                        "Forms floor of target fascial plane",
+                        "Inject 15 to 20 mL local anaesthetic in plane"
+                    ],
+                    [
+                        "Targeted Nerves (T7 to L1)",
+                        "Intercostal, subcostal, and iliohypogastric nerves",
+                        "Somatic sensory fibers to anterior abdominal wall",
+                        "Analgesia for caesarean, appendicectomy, and hernia"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

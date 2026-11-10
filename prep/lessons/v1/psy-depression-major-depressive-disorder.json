@@ -1,0 +1,268 @@
+{
+ "v": 1,
+ "id": "psy-depression-major-depressive-disorder",
+ "subject": "psychiatry",
+ "module": "psy-depression",
+ "title": "Major Depressive Disorder and Clinical Subtypes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Major depressive disorder** requires at least five out of nine diagnostic criteria present for a minimum duration of two continuous weeks, causing clinically significant distress or functional impairment. At least one of the essential symptoms must be depressed mood or prominent loss of interest and pleasure.",
+   "say": "Major depressive disorder requires five or more symptoms lasting at least two weeks. Either depressed mood or loss of interest must be present.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/major-depressive-disorder-fig1.webp",
+    "alt": "Major depressive disorder clinical criteria and pathophysiology",
+    "caption": "Major depressive disorder core criteria, monoamine deficiency pathways, and somatic manifestations.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Anhedonia** represents the inability to experience pleasure from activities that previously elicited enjoyment, serving as one of the two cardinal diagnostic pillars of depressive disorders. Patients report pervasive emotional emptiness, complete loss of motivation, indifference toward hobbies, and profound social disengagement from family and friends.",
+   "say": "Anhedonia is the loss of pleasure from previously enjoyable activities. It constitutes a cardinal diagnostic requirement reflecting reward pathway dysfunction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anhedonia Presentation",
+     "points": [
+      "Loss of pleasure in sports, dining, and hobbies",
+      "Emotional numbness and flattening",
+      "Reward circuitry blunting in nucleus accumbens",
+      "Distinct from physical fatigue"
+     ]
+    },
+    "right": {
+     "title": "Depressed Mood Presentation",
+     "points": [
+      "Persistent sadness, tearfulness, and gloom",
+      "Subjective gloom reported across all days",
+      "Accompanied by guilt and worthlessness",
+      "Exacerbated by cognitive distortions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**SIGECAPS diagnostic mnemonic** aids bedside recall of the nine DSM-5 major depressive criteria: Sleep disturbance, diminished Interest, excessive Guilt, low Energy, impaired Concentration, Appetite changes, Psychomotor agitation or retardation, and Suicidal ideation. Experiencing five or more criteria confirms an acute major depressive episode.",
+   "say": "The mnemonic SIGECAPS summarizes sleep changes, interest loss, guilt, energy depletion, concentration deficits, appetite alteration, psychomotor shifts, and suicidal thoughts.",
+   "vis": {
+    "kind": "table",
+    "title": "SIGECAPS Criteria Assessment",
+    "cols": [
+     "Letter",
+     "Symptom Domain",
+     "Clinical Evaluation"
+    ],
+    "rows": [
+     [
+      "S",
+      "Sleep disturbance",
+      "Insomnia (early, middle, late) or hypersomnia"
+     ],
+     [
+      "I",
+      "Interest loss",
+      "Pervasive anhedonia across social and personal pursuits"
+     ],
+     [
+      "G",
+      "Guilt & worthlessness",
+      "Excessive, inappropriate self-blame and remorse"
+     ],
+     [
+      "E",
+      "Energy depletion",
+      "Persistent fatigue and exhaustion without exertion"
+     ],
+     [
+      "C",
+      "Concentration deficits",
+      "Indecisiveness, memory lapses, and slowed processing"
+     ],
+     [
+      "A",
+      "Appetite & weight change",
+      "Significant weight loss or gain exceeding five percent in a month"
+     ],
+     [
+      "P",
+      "Psychomotor alteration",
+      "Observable psychomotor agitation or severe psychomotor retardation"
+     ],
+     [
+      "S",
+      "Suicidal ideation",
+      "Recurrent thoughts of death, suicidal ideation, or suicide plans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Melancholic features** denote a severe biological subtype characterized by total loss of pleasure in all activities, distinct lack of mood reactivity to positive news, and severe diurnal variation with mood consistently worst in the morning. Patients characteristically exhibit early morning awakening at least two hours before baseline.",
+   "say": "Melancholic depression exhibits non-reactive mood, morning worsening, early awakening, psychomotor slowing, and marked anorexia with weight loss.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Melancholic Features",
+     "points": [
+      "Lack of mood reactivity to positive events",
+      "Diurnal variation with morning worsening",
+      "Terminal insomnia (awakening two hours early)",
+      "Profound anorexia and weight loss"
+     ]
+    },
+    "right": {
+     "title": "Atypical Features",
+     "points": [
+      "Preserved mood reactivity to positive news",
+      "Diurnal variation with evening worsening",
+      "Hypersomnia sleeping over ten hours daily",
+      "Hyperphagia and carbohydrate craving"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Not every depression sleeps late and eats more. **Melancholic depression** empties pleasure completely, worst in the early morning with waking hours before the alarm, while atypical depression keeps mood reactive and reverses the vegetative signs toward oversleeping and overeating. The contrast matters because melancholic and psychotic pictures push treatment toward physical therapies sooner. Naming the subtype at assessment quietly changes the whole plan that follows.",
+   "say": "Melancholic depression is non reactive with early waking; atypical depression stays reactive and reverses sleep and appetite. Subtype changes treatment planning.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m327-psy-depression-major-depressive-disorder.webp",
+    "alt": "Comparative diagram of melancholic features versus atypical depression features.",
+    "caption": "Empty non reactive mood with early waking is contrasted with reactive mood and reversed vegetative signs. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Atypical depression** is characterized by preserved mood reactivity, where mood brightens in response to actual or potential positive events. Diagnostic criteria require at least two associated features: significant weight gain or increased appetite, hypersomnia, leaden paralysis sensation in extremities, and longstanding interpersonal rejection sensitivity.",
+   "say": "Atypical depression features preserved mood reactivity, weight gain, prolonged hypersomnia, heavy leaden limb sensations, and interpersonal rejection sensitivity.",
+   "vis": {
+    "kind": "table",
+    "title": "Atypical Depression Tetrad",
+    "cols": [
+     "Criterion",
+     "Clinical Presentation",
+     "Pharmacological Response"
+    ],
+    "rows": [
+     [
+      "Mood reactivity",
+      "Mood brightens immediately to positive news",
+      "Responds superiorly to MAO inhibitors"
+     ],
+     [
+      "Leaden paralysis",
+      "Heavy, leaden sensations in arms and legs",
+      "Improves with SSRIs or bupropion"
+     ],
+     [
+      "Rejection sensitivity",
+      "Interpersonal hypersensitivity and work avoidance",
+      "Psychotherapy combined with pharmacotherapy"
+     ],
+     [
+      "Reversed vegetative",
+      "Hyperphagia and hypersomnia exceeding 10 hours",
+      "Avoid sedative tricyclic antidepressants"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Psychotic depression** involves severe major depressive episodes accompanied by delusions or hallucinations, which may be mood-congruent or mood-incongruent. Mood-congruent delusions reflect themes of personal sin, unworthiness, severe bodily disease, poverty, or deserved punishment, whereas mood-incongruent delusions involve persecutory or bizarre content.",
+   "say": "Psychotic depression presents with delusions of guilt, poverty, or somatic rot. Mood-congruent themes reflect guilt and punishment, requiring combination therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mood-Congruent Delusions",
+     "points": [
+      "Delusions of financial ruin and poverty",
+      "Delusions of unforgivable sin and damnation",
+      "Nihilistic delusions of internal organ decay",
+      "Conviction of deserving harsh punishment"
+     ]
+    },
+    "right": {
+     "title": "Mood-Incongruent Delusions",
+     "points": [
+      "Persecutory delusions of external spying",
+      "Delusions of control or thought broadcasting",
+      "Bizarre somatic delusions unrelated to guilt",
+      "Signals higher complexity and poorer prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Treatment of psychotic depression** requires combined pharmacotherapy utilizing an antidepressant alongside a second-generation antipsychotic, such as sertraline combined with olanzapine. Antidepressant monotherapy is ineffective in resolving psychotic depression; electroconvulsive therapy serves as the most effective rapid intervention for severe refractory presentations.",
+   "say": "Treating psychotic depression requires combining an antidepressant with an atypical antipsychotic. Antidepressant monotherapy is ineffective. ECT provides rapid relief.",
+   "vis": {
+    "kind": "flow",
+    "title": "Psychotic Depression Management",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Identify psychotic depression with delusions of guilt/ruin"
+     },
+     {
+      "id": "n2",
+      "label": "Initiate combination: SSRI plus atypical antipsychotic"
+     },
+     {
+      "id": "n3",
+      "label": "For acute suicidality or food refusal, immediately administer bilateral ECT"
+     },
+     {
+      "id": "n4",
+      "label": "Maintain combined therapy for at least twelve months post-remission"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neuroendocrine abnormalities in depression** prominently involve hyperactivity of the hypothalamic-pituitary-adrenal axis, manifesting as elevated baseline serum cortisol and non-suppression on the dexamethasone suppression test. Prolonged hypercortisolaemia contributes to progressive hippocampal volume reduction, suppression of brain-derived neurotrophic factor synthesis, and impaired neurogenesis within the subgranular zone.",
+   "say": "Hypothalamic-pituitary-adrenal hyperactivity elevates serum cortisol and impairs dexamethasone suppression, contributing to hippocampal atrophy in severe depression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HPA Axis Hyperactivity",
+     "points": [
+      "Elevated twenty-four hour urinary free cortisol",
+      "Dexamethasone suppression test non-suppression",
+      "Blunted ACTH response to CRH stimulation",
+      "Adrenal cortical hypertrophy on imaging"
+     ]
+    },
+    "right": {
+     "title": "Downstream Neuropathology",
+     "points": [
+      "Decreased brain-derived neurotrophic factor",
+      "Reduced hippocampal neuronal dendritic branching",
+      "Prefrontal cortical metabolic hypoperfusion",
+      "Reversible with prolonged antidepressant therapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

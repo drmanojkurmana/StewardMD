@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-diarrhoea-ors-oral-rehydration-solution",
+ "subject": "community-medicine",
+ "module": "cm-diarrhoea-ors",
+ "title": "Oral Rehydration Therapy: Composition, Mechanism and Home Fluids",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Glucose carries sodium, sodium carries water",
+   "tx": "**Oral rehydration solution** exploits coupled transport: intestinal sodium-glucose cotransport stays intact even in secretory diarrhoea, so glucose drags sodium, and water follows osmotically. That preserved pathway is the entire physiological bet of oral rehydration therapy, and it holds in cholera as in childhood gastroenteritis.",
+   "say": "One transporter saves millions. Glucose drags sodium through a pathway secretory diarrhoea cannot shut, and water follows. That preserved cotransport is the whole physiological bet, holding even in cholera.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Glucose plus sodium in solution"},
+     {"id": "b", "label": "Cotransporter absorbs both"},
+     {"id": "c", "label": "Water follows osmotically"},
+     {"id": "d", "label": "Circulating volume restored"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Assessing dehydration before choosing fluids",
+   "tx": "**Dehydration assessment** sorts children by mental state, eyes, thirst drinking behaviour and skin pinch: alert with no signs (no dehydration), restless or irritable with sunken eyes and eager drinking (some dehydration), and lethargic with very sunken eyes, poor drinking and skin pinch returning very slowly (severe dehydration). Two signs in a column assign the class and its plan.",
+   "say": "Look, touch, then decide. Alert versus restless versus lethargic; normal versus sunken eyes; skin pinch snapping back versus lingering. Two signs in a column assign no, some or severe dehydration and with it the plan.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Some dehydration", "Severe dehydration"],
+    "rows": [
+     ["General state", "Restless, irritable", "Lethargic or unconscious"],
+     ["Eyes", "Sunken", "Very sunken"],
+     ["Drinking", "Eager, thirsty", "Poorly or unable"],
+     ["Skin pinch", "Goes back slowly", "Goes back very slowly"]
+    ]
+   }
+  },
+  {
+   "title": "ORT is wider than ORS packets",
+   "tx": "**Oral rehydration therapy** includes packet ORS, sugar-salt solution, food-based fluids and home available fluids with continued feeding, not packets alone. Programmes teach mothers the home fluids first because diarrhoea begins at home at night, not at facilities. Packets anchor severe losses; kitchens anchor early ones.",
+   "say": "Therapy is wider than packets. Sugar-salt solution, food fluids and home drinks with continued feeding all count. Diarrhoea begins at home at night, so mothers learn kitchen fluids first and packets anchor heavier losses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Home first fluids",
+     "points": ["Sugar-salt solution correctly mixed", "Rice water, dal water, coconut water", "Continued breastfeeding and feeding"]
+    },
+    "right": {
+     "title": "Packet ORS moments",
+     "points": ["Visible dehydration present", "Large ongoing losses", "Home fluids failing or refused"]
+    }
+   }
+  },
+  {
+   "title": "Plan A: treat at home, prevent dehydration",
+   "tx": "**Plan A** manages no dehydration at home: give extra fluid after each loose stool (50 to 100 ml under 2 years, 100 to 200 ml from 2 to 10 years, as much as wanted above), continue feeding and breastfeeding, add zinc, and return immediately for blood in stool, poor drinking, or worsening. Two ORS packets go home for use.",
+   "say": "No dehydration stays home with rules. Extra fluid after every stool by age band, feeding continued, zinc added, two packets sent along. Blood in stool, poor drinking or worsening means return at once.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age", "ORS after each loose stool"],
+    "rows": [
+     ["2 to 24 months", "50 to 100 ml"],
+     ["2 to 10 years", "100 to 200 ml"],
+     ["10 years and above", "As much as wanted"]
+    ]
+   }
+  },
+  {
+   "title": "Plan B: ORS by weight over four hours",
+   "tx": "**Plan B** treats some dehydration at a facility or ORS corner: approximately 75 ml per kg of ORS over 4 hours, sipped steadily, with breastfeeding continued and reassessment at 4 hours. Vomiting pauses intake for 10 minutes, then slower resumption; most vomiting children still rehydrate orally, which is why Plan B succeeds in 95 percent plus of its cases.",
+   "say": "Some dehydration gets measured fluid: seventy five millilitres per kilogram over four hours, reassessed at the end. Vomiting pauses ten minutes, then slower sipping. Ninety five percent plus succeed without a drip.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Weigh child, calculate 75 ml per kg"},
+     {"id": "b", "label": "Sip steadily over 4 hours"},
+     {"id": "c", "label": "Reassess hydration at 4 hours"},
+     {"id": "d", "label": "Move to Plan A, repeat B, or escalate"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Continued feeding is treatment, not comfort",
+   "tx": "**Continued feeding** during diarrhoea protects nutrition and mucosal recovery: breastfeeding never stops, energy-dense local foods (khichdi, rice-dal porridge) continue in small frequent meals, and an extra meal daily for a week after recovery repays losses. Stopping feeds, the commonest home error, converts a 4-day illness into malnutrition's doorway.",
+   "say": "Feeding is therapy. Breastfeeding never stops, local energy foods continue in small frequent meals, and an extra daily meal for a week after repays losses. Stopping feeds turns four days of illness into malnutrition's doorway.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Practice", "Verdict"],
+    "rows": [
+     ["Continue breastfeeding", "Always, throughout illness"],
+     ["Small frequent energy foods", "Encourage actively"],
+     ["Extra meal for a week after", "Repays nutritional losses"],
+     ["Stop feeds to rest the gut", "Harmful, never advise"]
+    ]
+   }
+  },
+  {
+   "title": "Zinc: the adjunct that shortens illness",
+   "tx": "**Zinc supplementation** accompanies ORS for 14 days: 10 mg daily from 2 to 6 months and 20 mg daily above 6 months in common programme wording (5 to 10 mg in the youngest band in some texts). It reduces duration and severity of the episode and protects against subsequent episodes in following months, an effect ORS alone does not claim.",
+   "say": "Zinc rides beside ORS for fourteen days. Dose doubles after six months of age. Illness shortens and softens, and protection extends into following months, an effect rehydration alone never claimed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ORS alone does",
+     "points": ["Replaces water and salts", "Prevents dehydration death", "No effect on episode length"]
+    },
+    "right": {
+     "title": "Adding zinc does",
+     "points": ["Shortens duration and severity", "Fewer subsequent episodes", "Supports mucosal recovery"]
+    }
+   }
+  },
+  {
+   "title": "When oral therapy is not enough",
+   "tx": "**Escalation signs** override oral persistence: shock or severe dehydration, persistent vomiting defeating intake, unconsciousness or convulsions, ileus or abdominal distension, and glucose malabsorption with worsening stool output on ORS. These children need intravenous or nasogastric routes under supervision. Oral therapy's triumph is statistical, 95 percent plus, never absolute for every child.",
+   "say": "Know when mouths lose. Shock, defeating vomiting, unconsciousness, distended silent abdomen, or worsening output on ORS all escalate to drip or tube. Ninety five percent oral success still leaves a supervised minority.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Escalation sign", "Route chosen"],
+    "rows": [
+     ["Severe dehydration or shock", "Rapid intravenous fluids, Plan C"],
+     ["Persistent vomiting, conscious", "Nasogastric ORS under supervision"],
+     ["Unconscious or convulsing", "Intravenous, airway protected"]
+    ]
+   }
+  },
+  {
+   "title": "ORS corners and programme design",
+   "tx": "**ORS-zinc corners** at facilities put rehydration where triage happens, staffed by workers trained to assess, weigh, mix and observe for the 4-hour window rather than dispensing packets at a counter. Diarrhoeal disease control combines this with water, sanitation, rotavirus vaccination and nutrition, because rehydration saves the child in front of you while prevention empties the corner.",
+   "say": "Design puts fluid at triage. ORS-zinc corners assess, weigh, mix and observe for four hours instead of handing packets over counters. Water, sanitation, rotavirus vaccine and nutrition then empty the corner upstream.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Child assessed at ORS corner"},
+     {"id": "b", "label": "Plan A, B or C assigned"},
+     {"id": "c", "label": "Observed rehydration on site"},
+     {"id": "d", "label": "Mother taught before discharge"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

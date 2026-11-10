@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-spirochaetes",
+  "subject": "microbiology",
+  "title": "FTA ABS, Dark-Ground Microscopy, Chancre and Congenital Syphilis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**FTA ABS** is the fluorescent treponemal antibody absorption test. Serum is first absorbed with nonpathogenic treponemal material to remove cross-reactive antibodies, then applied to Treponema pallidum fixed on a slide and detected with fluorescent antihuman antibody. It becomes positive early and usually remains positive for life. The labour-intensive manual method has largely been replaced by automated treponemal immunoassays, TPPA and line immunoassays.",
+      "say": "FTA ABS confirmed treponemal infection historically, but absorbed serum and fluorescence interpretation limit routine use.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Method",
+          "points": [
+            "Absorption removes group treponemal cross reactivity",
+            "Patient antibody binds fixed Nichols strain organisms",
+            "Fluorescent conjugate reveals antibody binding",
+            "Reactive intensity is graded under ultraviolet microscopy"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "Positive early in primary syphilis",
+            "Usually lifelong despite treatment",
+            "Cannot judge activity without RPR or VDRL trend",
+            "False positives occur with autoimmune and other treponemal disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Dark ground microscopy** makes living treponemes visible as bright, slender corkscrew organisms against a black background because oblique light is scattered by the specimen into the objective. It requires immediate examination of fresh serous exudate from a moist lesion, minimal blood contamination and an experienced observer. Characteristic slow rotation and bending support primary syphilis before seroconversion.",
+      "say": "Dark-field diagnosis depends on fresh lesion fluid and recognising slow corkscrew motility.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Good specimen",
+          "points": [
+            "Clean lesion gently and collect serous exudate",
+            "Avoid antiseptics and topical antibiotics first",
+            "Examine immediately while organisms are motile",
+            "Genital lesions are more reliable than oral lesions"
+          ]
+        },
+        "right": {
+          "title": "Pitfalls",
+          "points": [
+            "Oral commensal treponemes can look similar",
+            "Blood and debris obscure organisms",
+            "Drying rapidly abolishes motility",
+            "One negative examination does not exclude syphilis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A syphilitic **chancre** begins as a papule that ulcerates into a characteristically painless, indurated lesion with a clean base and firm regional lymphadenopathy. Atypical painful or multiple lesions occur, especially with HSV coinfection or HIV. The chancre resolves spontaneously in several weeks, creating a dangerous false impression of cure while treponemes disseminate and secondary disease approaches.",
+      "say": "Spontaneous healing of a chancre means stage transition is possible, not that infection has ended.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic chancre",
+          "points": [
+            "Single painless ulcer",
+            "Button like induration at base",
+            "Painless rubbery regional nodes",
+            "Serous rather than purulent exudate"
+          ]
+        },
+        "right": {
+          "title": "Important mimics",
+          "points": [
+            "Herpes simplex grouped painful vesicles and ulcers",
+            "Chancroid painful soft ulcer with tender bubo",
+            "Traumatic ulcer lacks induration",
+            "LGV ulcer is often transient and unnoticed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Congenital syphilis** follows transplacental Treponema pallidum dissemination. Early disease can cause rhinitis or snuffles, widespread rash involving palms and soles, hepatosplenomegaly, anaemia, osteochondritis and periostitis. Late stigmata include Hutchinson incisors, mulberry molars, interstitial keratitis, sensorineural deafness, saddle nose and frontal bossing. Maternal screening and adequate treatment at least thirty days before delivery prevent most cases.",
+      "say": "Congenital syphilis is preventable when maternal infection is screened and treated early enough.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early congenital",
+          "points": [
+            "Snuffles and maculopapular rash",
+            "Pemphigus syphiliticus on palms and soles",
+            "Hepatosplenomegaly and jaundice",
+            "Painful limbs from osteochondritis"
+          ]
+        },
+        "right": {
+          "title": "Late stigmata",
+          "points": [
+            "Notched Hutchinson incisors",
+            "Interstitial keratitis",
+            "Eighth cranial nerve deafness",
+            "Saddle nose and Clutton joints"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Infant evaluation compares infant and maternal **quantitative nontreponemal titres**, physical findings, long bone imaging, cerebrospinal fluid studies and placental or umbilical molecular or pathological testing where available. Transplacental maternal IgG makes a reactive treponemal test expected in exposed infants, so a fourfold higher infant titre or signs of disease carry more diagnostic weight than any single positive antibody result.",
+      "say": "A positive infant treponemal test may be maternal antibody; titre comparison and clinical signs decide risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mother",
+            "label": "Review maternal stage and treatment"
+          },
+          {
+            "id": "infant",
+            "label": "Examine infant and compare RPR titre"
+          },
+          {
+            "id": "tests",
+            "label": "Blood, CSF and long bone evaluation"
+          },
+          {
+            "id": "treat",
+            "label": "Treat or closely follow by risk category"
+          }
+        ],
+        "edges": [
+          [
+            "mother",
+            "infant"
+          ],
+          [
+            "infant",
+            "tests"
+          ],
+          [
+            "tests",
+            "treat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In neurosyphilis, **CSF VDRL** is specific but insensitive, so a reactive result strongly supports the diagnosis while a negative result does not exclude it. CSF lymphocytic pleocytosis and raised protein provide supportive evidence. Ocular syphilis and otosyphilis are clinical syndromes that can arise at any stage and are managed with a neurosyphilis regimen. Benzathine penicillin does not reliably reach treponemicidal CSF concentrations.",
+      "say": "Reactive CSF VDRL helps confirm neurosyphilis, but benzathine penicillin is not adequate central nervous system therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CSF clues",
+          "points": [
+            "Reactive VDRL is highly supportive",
+            "White cell count often lymphocyte predominant",
+            "Protein often elevated",
+            "Treponemal CSF tests are sensitive but nonspecific"
+          ]
+        },
+        "right": {
+          "title": "Treatment point",
+          "points": [
+            "Aqueous crystalline penicillin G intravenously",
+            "Benzathine penicillin does not treat CNS disease",
+            "Eye and ear disease use neurosyphilis approach",
+            "Follow CSF cell count and serum titres"
+          ]
+        }
+      }
+    }
+  ]
+}

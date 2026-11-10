@@ -1,223 +1,234 @@
 {
-  "v": 1,
-  "module": "pat-thyroid-parathyroid",
-  "subject": "pathology",
-  "title": "Multinodular Goitre, Papillary Cancer Orphan Annie Nuclei, Follicular and Medullary Carcinomas",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Multinodular goitre enlarges thyroid through cycles of hyperplasia and involution under iodine deficiency or goitrogens, nodules autonomously functioning toward toxic multinodular disease in older patients. That nodular enlargement is **multinodular goitre**. Individual nodules in the same gland behave independently, some hyperfunctioning while neighbours involute, and dominant or enlarging nodules still deserve cytology despite the benign background.",
-      "say": "Nodular, asymmetric, longstanding goitre in an older patient is multinodular disease; scan its function and airways.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Euthyroid MNG",
-          "points": [
-            "Cosmetic or compressive symptoms",
-            "Ultrasound surveillance",
-            "Surgery for compression or suspicion"
-          ]
-        },
-        "right": {
-          "title": "Toxic MNG",
-          "points": [
-            "Autonomous hot nodules",
-            "Atrial fibrillation in elderly",
-            "Radioiodine or surgery definitive"
-          ]
-        }
-      }
+ "v": 1,
+ "module": "pat-thyroid-parathyroid",
+ "subject": "pathology",
+ "title": "Multinodular Goitre, Papillary Cancer Orphan Annie Nuclei, Follicular and Medullary Carcinomas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Multinodular goitre enlarges thyroid through cycles of hyperplasia and involution under iodine deficiency or goitrogens, nodules autonomously functioning toward toxic multinodular disease in older patients. That nodular enlargement is **multinodular goitre**. Individual nodules in the same gland behave independently, some hyperfunctioning while neighbours involute, and dominant or enlarging nodules still deserve cytology despite the benign background.",
+   "say": "Nodular, asymmetric, longstanding goitre in an older patient is multinodular disease; scan its function and airways.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Euthyroid MNG",
+     "points": [
+      "Cosmetic or compressive symptoms",
+      "Ultrasound surveillance",
+      "Surgery for compression or suspicion"
+     ]
     },
-    {
-      "tx": "Papillary thyroid carcinoma spreads lymphatically to neck nodes in young patients with excellent survival, psammoma bodies, and grooved coffee bean nuclei whose empty chromatin earns Orphan Annie fame. Those nuclei are **Orphan Annie eye nuclei of papillary thyroid carcinoma**. Intranuclear cytoplasmic pseudoinclusions complete the cytological signature, and BRAF V600E is the commonest driver mutation in adult papillary tumours submitted to molecular panels.",
-      "say": "Empty grooved nuclei like Orphan Annie eyes name papillary thyroid cancer before immunostains speak.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Papillary carcinoma",
-          "Follicular carcinoma"
-        ],
-        "rows": [
-          [
-            "Diagnosis by",
-            "Nuclear features alone suffice",
-            "Capsular or vascular invasion required"
-          ],
-          [
-            "Spread",
-            "Lymph nodes early",
-            "Blood to bone and lung"
-          ],
-          [
-            "FNAC",
-            "Diagnostic usually",
-            "Follicular neoplasm indeterminate"
-          ],
-          [
-            "Prognosis accent",
-            "Excellent generally",
-            "Invasion extent decides"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Follicular carcinoma cannot be diagnosed cytologically because malignancy means capsular or vascular invasion seen only histologically, follicular adenoma its benign twin. That invasion rule is **follicular thyroid carcinoma, invasion-defined malignancy**. Widely invasive tumours spread haematogenously to lung and bone, while minimally invasive capsular only lesions often need little beyond lobectomy and surveillance.",
-      "say": "Follicular cytology can never promise benign; invasion on histology alone separates adenoma from carcinoma.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/thyroid-carcinoma-and-bethesda-classification-fig1.webp",
-        "alt": "Thyroid carcinoma types and Bethesda features",
-        "caption": "Four thyroid cancer panels showing papillary, follicular, medullary and anaplastic features and markers."
-      }
-    },
-    {
-      "tx": "Medullary thyroid carcinoma secretes calcitonin from parafollicular C cells, amyloid stromal deposits Congo red positive, RET mutations in familial MEN2 forms earning prophylactic thyroidectomy timing. That C cell cancer is **medullary thyroid carcinoma**. About a quarter of cases are hereditary, so germline RET testing follows every new diagnosis, and phaeochromocytoma must be excluded before thyroid surgery in carriers.",
-      "say": "Calcitonin plus amyloid stroma names medullary carcinoma; RET status decides family thyroidectomy clocks.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "C cell tumour secretes calcitonin"
-          },
-          {
-            "id": "b",
-            "label": "Calcitonin and CEA track burden"
-          },
-          {
-            "id": "c",
-            "label": "RET germline testing offered"
-          },
-          {
-            "id": "d",
-            "label": "Family prophylactic surgery timed by codon"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "BRAF and RAS molecular panels refine indeterminate thyroid cytology toward surgery or surveillance while papillary microcarcinomas increasingly earn active surveillance in selected patients. That molecular triage is **molecular testing in indeterminate thyroid nodules**. Bethesda III and IV nodules benefit most, because a benign genomic call there can safely spare a diagnostic lobectomy that older pathways imposed.",
-      "say": "Molecular panels rescue indeterminate cytology from diagnostic surgery in many thyroid nodules.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/thyroid-nodule-fig1.webp",
-        "alt": "Thyroid nodule diagnostic pathway",
-        "caption": "Diagnostic pathway for thyroid nodules integrating TSH, ultrasound and fine needle aspiration."
-      }
-    },
-    {
-      "tx": "Thyroid nodule workup sequences TSH, ultrasound risk pattern, and FNAC by size thresholds, suppressed TSH diverting to scintigraphy for hot nodules rarely malignant. That sequence is **thyroid nodule TSH ultrasound FNAC pathway**. Taller than wide shape, irregular margins and microcalcifications each raise suspicion, and purely cystic or spongiform nodules can usually be watched without any needle pass.",
-      "say": "TSH first, ultrasound pattern second, needle by size and suspicion: thyroid nodules in three moves.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Ultrasound accent",
-          "Suspicion",
-          "FNAC threshold accent"
-        ],
-        "rows": [
-          [
-            "Microcalcifications, irregular margins",
-            "High",
-            "Needle from one centimetre"
-          ],
-          [
-            "Spongiform, purely cystic",
-            "Very low",
-            "Observe usually"
-          ],
-          [
-            "Hypoechoic taller than wide",
-            "High",
-            "Needle smaller lesions"
-          ],
-          [
-            "Comet tail colloid artefacts",
-            "Benign accent",
-            "Reassurance pattern"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Postoperative thyroglobulin monitors differentiated thyroid cancer recurrence after total thyroidectomy and ablation, rising levels hunting residual disease by imaging. That surveillance protein is **thyroglobulin after thyroid cancer treatment**. Antithyroglobulin antibodies interfere with the assay in about a quarter of patients, so antibody trend itself becomes a surrogate marker when the main measurement turns unreliable.",
-      "say": "After total thyroidectomy, thyroglobulin becomes the tumour marker it could never be with gland intact.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Differentiated cancers",
-          "points": [
-            "Papillary and follicular types",
-            "Thyroglobulin surveillance valid",
-            "Radioiodine by risk"
-          ]
-        },
-        "right": {
-          "title": "Medullary and anaplastic",
-          "points": [
-            "Calcitonin or no marker logic",
-            "Thyroglobulin useless",
-            "Distinct surgical urgencies"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Retrosternal goitre compresses trachea and veins behind sternum, Pemberton sign flushing face on arm raising, CT mapping surgery before airway emergencies. That thoracic inlet squeeze is **retrosternal goitre with Pemberton sign**. Pemberton manoeuvre raises both arms until facial flushing, venous engorgement or breathlessness appears, and most such glands still deliver through a cervical incision alone.",
-      "say": "Arms up, face flushed: Pemberton sign warns the goitre is strangling the thoracic inlet.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Goitre size and tracheal deviation imaged"
-          },
-          {
-            "id": "b",
-            "label": "Function and cytology assessed"
-          },
-          {
-            "id": "c",
-            "label": "Airway and surgical approach planned"
-          },
-          {
-            "id": "d",
-            "label": "Thyroidectomy relieves compression"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Toxic MNG",
+     "points": [
+      "Autonomous hot nodules",
+      "Atrial fibrillation in elderly",
+      "Radioiodine or surgery definitive"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Papillary thyroid carcinoma spreads lymphatically to neck nodes in young patients with excellent survival, psammoma bodies, and grooved coffee bean nuclei whose empty chromatin earns Orphan Annie fame. Those nuclei are **Orphan Annie eye nuclei of papillary thyroid carcinoma**. Intranuclear cytoplasmic pseudoinclusions complete the cytological signature, and BRAF V600E is the commonest driver mutation in adult papillary tumours submitted to molecular panels.",
+   "say": "Empty grooved nuclei like Orphan Annie eyes name papillary thyroid cancer before immunostains speak.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Papillary carcinoma",
+     "Follicular carcinoma"
+    ],
+    "rows": [
+     [
+      "Diagnosis by",
+      "Nuclear features alone suffice",
+      "Capsular or vascular invasion required"
+     ],
+     [
+      "Spread",
+      "Lymph nodes early",
+      "Blood to bone and lung"
+     ],
+     [
+      "FNAC",
+      "Diagnostic usually",
+      "Follicular neoplasm indeterminate"
+     ],
+     [
+      "Prognosis accent",
+      "Excellent generally",
+      "Invasion extent decides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cytological assessment of fine-needle aspiration specimens from thyroid nodules focuses on diagnostic nuclear characteristics of papillary malignancy. The presence of **intranuclear cytoplasmic pseudoinclusions**, distinct nuclear grooves, and optically clear ground-glass chromatin allows definitive recognition. Psammoma bodies represent concentric laminated calcifications of necrotic papillary tips that provide additional supportive histological evidence.",
+   "say": "Intranuclear cytoplasmic pseudoinclusions, grooves, and ground-glass chromatin on fine-needle aspiration confirm papillary thyroid carcinoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/papillary-thyroid-carcinoma-fig1.webp",
+    "alt": "Annotated cytology composite showing papillary formations, crowded overlapping nuclei, psammoma bodies, and Orphan Annie chromatin clearing.",
+    "caption": "Annotated cytology composite showing papillary formations, crowded overlapping nuclei, psammoma bodies, Orphan Annie chromatin clearing, pseudoinclusions and nuclear grooves. Image: Mikael Häggström / Wikimedia Commons (Public domain).",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Follicular carcinoma cannot be diagnosed cytologically because malignancy means capsular or vascular invasion seen only histologically, follicular adenoma its benign twin. That invasion rule is **follicular thyroid carcinoma, invasion-defined malignancy**. Widely invasive tumours spread haematogenously to lung and bone, while minimally invasive capsular only lesions often need little beyond lobectomy and surveillance.",
+   "say": "Follicular cytology can never promise benign; invasion on histology alone separates adenoma from carcinoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-carcinoma-and-bethesda-classification-fig1.webp",
+    "alt": "Thyroid carcinoma types and Bethesda features",
+    "caption": "Four thyroid cancer panels showing papillary, follicular, medullary and anaplastic features and markers."
+   }
+  },
+  {
+   "tx": "Medullary thyroid carcinoma secretes calcitonin from parafollicular C cells, amyloid stromal deposits Congo red positive, RET mutations in familial MEN2 forms earning prophylactic thyroidectomy timing. That C cell cancer is **medullary thyroid carcinoma**. About a quarter of cases are hereditary, so germline RET testing follows every new diagnosis, and phaeochromocytoma must be excluded before thyroid surgery in carriers.",
+   "say": "Calcitonin plus amyloid stroma names medullary carcinoma; RET status decides family thyroidectomy clocks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "C cell tumour secretes calcitonin"
+     },
+     {
+      "id": "b",
+      "label": "Calcitonin and CEA track burden"
+     },
+     {
+      "id": "c",
+      "label": "RET germline testing offered"
+     },
+     {
+      "id": "d",
+      "label": "Family prophylactic surgery timed by codon"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "BRAF and RAS molecular panels refine indeterminate thyroid cytology toward surgery or surveillance while papillary microcarcinomas increasingly earn active surveillance in selected patients. That molecular triage is **molecular testing in indeterminate thyroid nodules**. Bethesda III and IV nodules benefit most, because a benign genomic call there can safely spare a diagnostic lobectomy that older pathways imposed.",
+   "say": "Molecular panels rescue indeterminate cytology from diagnostic surgery in many thyroid nodules.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-nodule-fig1.webp",
+    "alt": "Thyroid nodule diagnostic pathway",
+    "caption": "Diagnostic pathway for thyroid nodules integrating TSH, ultrasound and fine needle aspiration."
+   }
+  },
+  {
+   "tx": "Thyroid nodule workup sequences TSH, ultrasound risk pattern, and FNAC by size thresholds, suppressed TSH diverting to scintigraphy for hot nodules rarely malignant. That sequence is **thyroid nodule TSH ultrasound FNAC pathway**. Taller than wide shape, irregular margins and microcalcifications each raise suspicion, and purely cystic or spongiform nodules can usually be watched without any needle pass.",
+   "say": "TSH first, ultrasound pattern second, needle by size and suspicion: thyroid nodules in three moves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ultrasound accent",
+     "Suspicion",
+     "FNAC threshold accent"
+    ],
+    "rows": [
+     [
+      "Microcalcifications, irregular margins",
+      "High",
+      "Needle from one centimetre"
+     ],
+     [
+      "Spongiform, purely cystic",
+      "Very low",
+      "Observe usually"
+     ],
+     [
+      "Hypoechoic taller than wide",
+      "High",
+      "Needle smaller lesions"
+     ],
+     [
+      "Comet tail colloid artefacts",
+      "Benign accent",
+      "Reassurance pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postoperative thyroglobulin monitors differentiated thyroid cancer recurrence after total thyroidectomy and ablation, rising levels hunting residual disease by imaging. That surveillance protein is **thyroglobulin after thyroid cancer treatment**. Antithyroglobulin antibodies interfere with the assay in about a quarter of patients, so antibody trend itself becomes a surrogate marker when the main measurement turns unreliable.",
+   "say": "After total thyroidectomy, thyroglobulin becomes the tumour marker it could never be with gland intact.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Differentiated cancers",
+     "points": [
+      "Papillary and follicular types",
+      "Thyroglobulin surveillance valid",
+      "Radioiodine by risk"
+     ]
+    },
+    "right": {
+     "title": "Medullary and anaplastic",
+     "points": [
+      "Calcitonin or no marker logic",
+      "Thyroglobulin useless",
+      "Distinct surgical urgencies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Retrosternal goitre compresses trachea and veins behind sternum, Pemberton sign flushing face on arm raising, CT mapping surgery before airway emergencies. That thoracic inlet squeeze is **retrosternal goitre with Pemberton sign**. Pemberton manoeuvre raises both arms until facial flushing, venous engorgement or breathlessness appears, and most such glands still deliver through a cervical incision alone.",
+   "say": "Arms up, face flushed: Pemberton sign warns the goitre is strangling the thoracic inlet.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Goitre size and tracheal deviation imaged"
+     },
+     {
+      "id": "b",
+      "label": "Function and cytology assessed"
+     },
+     {
+      "id": "c",
+      "label": "Airway and surgical approach planned"
+     },
+     {
+      "id": "d",
+      "label": "Thyroidectomy relieves compression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ]
 }

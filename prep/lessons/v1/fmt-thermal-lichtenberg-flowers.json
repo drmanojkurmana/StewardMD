@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-thermal-lichtenberg-flowers",
+ "subject": "forensic-medicine",
+ "module": "fmt-thermal",
+ "title": "Lichtenberg Flowers, Hypothermia, Frostbite and Heat Stroke",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Lichtenberg flowers after lightning",
+   "tx": "**Arborescent or filigree burns, called Lichtenberg flowers**, are superficial thin irregular tortuous markings that branch like a tree or fern over the shoulders and flanks after lightning strike. They appear within minutes to an hour. Proposed mechanisms include staining by haemoglobin from lysed red cells along the current path and rupture of small vessels into ecchymoses. They are really an erythema marking the discharge path, they are rare, and they vanish in one to two days in survivors.",
+   "say": "Fern like red branching over shoulders after lightning is a Lichtenberg flower, and it fades within a day or two.",
+   "vis": {"kind": "table", "cols": ["Feature", "Lichtenberg flower", "Ordinary burn"], "rows": [["Pattern", "Branching fern or tree", "Matches contact area"], ["Depth", "Superficial erythema", "Blistering to charring"], ["Onset", "Minutes to one hour", "Immediate"], ["Duration", "One to two days", "Heals over weeks"]]}
+  },
+  {
+   "title": "Lightning deaths are always accidental",
+   "tx": "Most lightning deaths happen in the open: persons sheltering under trees or crossing fields, especially while carrying or wearing metal that attracts the strike, under **lightning fatality patterns**. Less than half of those struck are killed, and death is always accidental. Persons inside motor vehicles are protected by tyre insulation and the absence of a circuit through them. Fused or magnetised metal objects near the body support the diagnosis.",
+   "say": "Under half of lightning victims die, vehicles protect their occupants, and fused metal near the body confirms the strike.",
+   "vis": {"kind": "compare", "left": {"title": "Supports lightning", "points": ["Thunderstorm in the locality", "Tree or ground strike marks nearby", "Metal fused or magnetised", "Fern pattern on the skin"]}, "right": {"title": "Can mislead", "points": ["Contusions and lacerations present", "Fractures from the fall", "Looks like criminal violence", "Clothing torn by the blast"]}}
+  },
+  {
+   "title": "Hypothermia defined below thirty five degrees",
+   "tx": "**Hypothermia** means an oral or axillary temperature below 35 degrees Celsius. Dry cold is tolerated far better than wet cold, because wetness multiplies heat loss. Temperature regulation by the hypothalamus is completely lost below 30 degrees. Fat persons and women tolerate cold better than lean persons and men. Direct cold effects strike fatty tissue and myelinated nerve fibres; indirect effects are ischaemic from vascular damage.",
+   "say": "Below thirty five degrees is hypothermia, wet cold kills faster than dry, and regulation itself fails below thirty.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Cold exposure, worse if wet"}, {"id": "b", "label": "Temperature falls below 35 degrees"}, {"id": "c", "label": "Shivering stops near 32 degrees"}, {"id": "d", "label": "Regulation lost below 30 degrees"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Three stages of general cold effects",
+   "tx": "General cold effects merge through **three stages of hypothermia**. First the patient feels cold and shivers as temperature falls. In the second stage shivering stops at or below thirty two degrees; the victim is depressed, lethargic, drowsy and may walk as if drunk, with stiffening muscles. In the third stage temperature reaches twenty seven degrees or less, fatal if maintained for twenty four hours, from anoxic failure of the vital centres.",
+   "say": "Shivering, then its silence at thirty two degrees, then stupor toward twenty seven, mark the three deepening stages.",
+   "vis": {"kind": "table", "cols": ["Stage", "Temperature guide", "Clinical picture"], "rows": [["First", "Falling toward 35 degrees", "Feels cold, shivers"], ["Second", "At or below 32 degrees", "Shivering stops, drowsy, ataxic"], ["Third", "27 degrees or less", "Stupor, coma, stiff muscles"], ["Fatal course", "Held 24 hours at third stage", "Vital centre failure"]]}
+  },
+  {
+   "title": "Postmortem signs of hypothermia",
+   "tx": "The characteristic external sign is **pink or brown pink discolouration over joints**, knees, elbows and hips, with blurred margins, plus pink patches on cheeks, chin and nose and bright pink lividity. Blood stays bright red because haemoglobin retains oxygen at low temperature. Inside, the stomach mucosa shows brown black erosions and haemorrhages, pancreatic fat necrosis appears in about half of cases, and ice crystals may be found in vessels and heart.",
+   "say": "Pink patches over joints, bright red blood and gastric erosions with pancreatic fat necrosis point to death from cold.",
+   "vis": {"kind": "compare", "left": {"title": "External cold signs", "points": ["Pink patches over joints", "Bright pink postmortem lividity", "Cyanosed extremities", "Oedema of feet and legs"]}, "right": {"title": "Internal cold signs", "points": ["Brown black gastric erosions", "Pancreatic fat necrosis, half of cases", "Ice crystals in vessels", "Bright red retained blood"]}}
+  },
+  {
+   "title": "Paradoxical undressing and hide and die",
+   "tx": "Two behaviours confuse investigators. In **paradoxical undressing**, failure of skin vasoconstriction floods the skin with core blood, giving a false sensation of warmth, and the victim removes clothing amid terminal hallucinations, raising false suspicion of sexual offence. In the **hide and die syndrome**, the disoriented victim burrows into corners, cupboards or snow, emptying drawers at low level only, which can imitate homicide with robbery until hypothermia signs are recognised.",
+   "say": "A naked body in a ransacked looking room may be paradoxical undressing and burrowing, not assault or robbery at all.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Vasoconstriction fails in deep cold"}, {"id": "b", "label": "Warm blood floods the skin"}, {"id": "c", "label": "Victim feels hot and undresses"}, {"id": "d", "label": "Burrowing hides the body away"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Frostbite, infarction of the digits",
+   "tx": "**Frostbite** is infarction of peripheral digits from exposure below about minus 2.5 degrees Celsius, developing faster than trench foot and also striking nose, ears and face. Oedema and redness give way to necrosis beyond a line of inflammatory demarcation, and skin turns hard and black in about two weeks. It may involve skin alone or extend deeply, with blistering and gangrene along the way.",
+   "say": "Freezing below minus two point five degrees infarcts fingers, toes, nose and ears, turning hard and black in two weeks.",
+   "vis": {"kind": "table", "cols": ["Cold injury", "Exposure", "Hallmark"], "rows": [["Frostbite", "Below minus 2.5 degrees", "Digit infarction, demarcation line"], ["Trench foot", "5 to 8 degrees plus damp", "Blistering, ulceration, gangrene"], ["Immersion foot", "Prolonged cold immersion", "Soldiers and seafarers pattern"], ["Hypothermia", "Whole body below 35 degrees", "Pink patches over joints"]]}
+  },
+  {
+   "title": "Trench foot and immersion foot",
+   "tx": "**Trench foot and immersion foot** follow prolonged exposure to severe cold of five to eight degrees combined with dampness, classically in soldiers in winter trenches and persons exposed at sea. The extremities are affected. Local cold injury progresses from blanching and vascular spasm, through erythema, oedema and swelling, to blister formation with ulceration and localised dry gangrene, as vessels thrombose and tissues infarct downstream.",
+   "say": "Days of cold damp at five to eight degrees blister and gangrene the feet of trench soldiers and the shipwrecked alike.",
+   "vis": {"kind": "compare", "left": {"title": "Early local cold effect", "points": ["Blanching from vascular spasm", "Then erythema and oedema", "Capillary permeability rises", "Blistering begins"]}, "right": {"title": "Late local cold effect", "points": ["Tissues frozen stiff or necrotic", "Thrombosis and endarteritis", "Ulceration of blistered skin", "Localised dry gangrene"]}}
+  },
+  {
+   "title": "Heat stroke and its postmortem picture",
+   "tx": "In **heat stroke**, vasodilatation with falling blood volume brings circulatory collapse and cardiac failure as temperature climbs toward forty two degrees, with convulsions, delirium and coma over minutes to three days. Postmortem findings are not specific: the body temperature stays high after death, the brain is congested and oedematous with petechial haemorrhages, and the cerebellar Purkinje layer degenerates strikingly, completely if survival reaches twenty four hours. Disseminated intravascular coagulation appears in most organs.",
+   "say": "Heat stroke collapses the circulation near forty two degrees, and Purkinje cell loss in the cerebellum is its most consistent mark.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Heat load overwhelms sweating"}, {"id": "b", "label": "Vasodilatation, volume falls"}, {"id": "c", "label": "Convulsions, delirium, coma"}, {"id": "d", "label": "Cardiac failure and DIC follow"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

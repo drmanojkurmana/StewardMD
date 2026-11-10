@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-hiv-naco",
+ "subject": "community-medicine",
+ "module": "cm-hiv",
+ "title": "HIV and NACO: Testing, ART, PPTCT and 95-95-95",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Markers over time: why tests change",
+   "tx": "The timeline shows **viral RNA and p24 antigen first**, antibody weeks later, and CD4 counts falling across years of untreated infection toward AIDS. That sequence explains every testing rule: early infection needs antigen or RNA methods, established infection needs antibody tests, and monitoring needs CD4 plus viral load, never symptoms alone.",
+   "say": "Sequence explains testing. Virus and its antigen appear first, antibody weeks behind, CD4 erodes over years. Early, established and monitoring questions each demand different tools from this one timeline.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hiv-aids-fig1.webp",
+    "alt": "HIV progression timeline showing diagnostic markers appearing in sequence and CD4 count falling toward AIDS.",
+    "caption": "HIV markers in sequence and CD4 decline without treatment. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Window period: infectious but antibody negative",
+   "tx": "The **window period** (about 2 to 12 weeks before antibodies appear on standard tests) carries high viral levels and high infectiousness with negative antibody results. Blood safety and post-exposure counselling both turn on it: a negative antibody test days after exposure cannot close the case, and repeat testing at defined intervals is protocol, not anxiety.",
+   "say": "Negative can still mean infectious. Before antibodies appear at two to twelve weeks, virus runs high and tests read negative. Exposure protocols repeat testing on schedule because one early negative closes nothing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Moment", "Antibody test", "Reality"],
+    "rows": [
+     ["Days after exposure", "Negative", "Virus may already replicate"],
+     ["Window period", "Negative", "High infectiousness possible"],
+     ["After 12 weeks", "Positive if infected", "Established seroconversion"]
+    ]
+   }
+  },
+  {
+   "title": "Transmission routes and their weights",
+   "tx": "**Transmission efficiency** ranks routes: transfusion of infected blood near-certain, mother-to-child without intervention roughly 15 to 45 percent across pregnancy, delivery and breastfeeding, needle sharing high, sexual exposures fractions of a percent per act rising with viral load and ulcerative disease. Occupational needle-stick averages about 0.3 percent, the number counselling starts from.",
+   "say": "Routes carry weights. Infected transfusion almost always transmits; untreated vertical transmission reaches a third or more; needle-stick averages zero point three percent. Viral load and ulcers multiply sexual risk per act.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High efficiency",
+     "points": ["Infected blood transfusion", "Shared injecting equipment", "Untreated vertical transmission"]
+    },
+    "right": {
+     "title": "Lower per act",
+     "points": ["Sexual exposure, viral load dependent", "Occupational needle-stick about 0.3 percent", "No risk: casual contact, food, mosquitoes"]
+    }
+   }
+  },
+  {
+   "title": "Testing strategy: screen, confirm, consent",
+   "tx": "**HIV testing** in India runs through integrated counselling and testing centres with informed consent, pre and post-test counselling, and confirmatory algorithms (reactive screening tests confirmed by supplemental assays before reporting positive). Provider-initiated testing reaches antenatal, TB and STI patients routinely. Children under 18 months need virological testing because maternal antibody confounds serology.",
+   "say": "Testing is a service, not a strip. Consent, counselling, confirmatory algorithms before any positive report, routine offers in antenatal, TB and STI care. Infant diagnosis goes virological because maternal antibody confounds serology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Consent and pre-test counselling"},
+     {"id": "b", "label": "Screening assay performed"},
+     {"id": "c", "label": "Confirmatory algorithm if reactive"},
+     {"id": "d", "label": "Result with post-test counselling"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Test and treat: ART for every positive",
+   "tx": "**Test and treat** starts antiretroviral therapy for every diagnosed person regardless of CD4, rapidly after diagnosis, because early treatment prevents AIDS events and onward transmission (undetectable viral load does not transmit sexually, U equals U). NACO 2021 guidance formalised rapid initiation at ART centres with preferred tenofovir-lamivudine-dolutegravir single-pill first line.",
+   "say": "Diagnosis now means treatment, whatever the CD4. Rapid single-pill first-line therapy prevents illness and transmission; undetectable equals untransmittable anchors adherence counselling. Waiting for CD4 thresholds belongs to history.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Principle", "Practice"],
+    "rows": [
+     ["Treat all", "ART regardless of CD4 count"],
+     ["Start rapidly", "Same week, often same day readiness"],
+     ["Preferred first line", "Tenofovir plus lamivudine plus dolutegravir"],
+     ["Goal", "Sustained undetectable viral load"]
+    ]
+   }
+  },
+  {
+   "title": "95-95-95 and India's concentrated epidemic",
+   "tx": "The **95-95-95 targets** demand 95 percent of people with HIV diagnosed, 95 percent of those on treatment, 95 percent of those virally suppressed by 2030 in global strategy. India's epidemic is concentrated: prevalence stays low in the general population but high in key populations (female sex workers, men who have sex with men, injecting drug users, transgender persons), so NACO aims services there through targeted interventions.",
+   "say": "Three ninety fives cascade to 2030. India's epidemic concentrates in key populations while general prevalence stays low, so targeted interventions, STI care and harm reduction carry national strategy disproportionately.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "95 percent diagnosed"},
+     {"id": "b", "label": "95 percent of those treated"},
+     {"id": "c", "label": "95 percent of those suppressed"},
+     {"id": "d", "label": "Transmission chains collapse"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "PPTCT: protecting the next generation",
+   "tx": "**Prevention of parent-to-child transmission** tests every pregnant woman, starts lifelong ART immediately in positives, gives infant prophylaxis by risk, and guides feeding with ART cover, cutting transmission from up to 45 percent to under 2 percent when complete. Partner testing and syphilis-hepatitis dual screening ride the same antenatal visit in elimination-of-vertical-transmission frameworks.",
+   "say": "Vertical transmission is preventable end to end. Test every pregnancy, treat positives for life, prophylax the infant, guide feeding under cover. Forty five percent collapses below two when the cascade completes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cascade step", "Effect"],
+    "rows": [
+     ["Antenatal HIV testing", "Finds positives early"],
+     ["Lifelong maternal ART", "Viral load suppressed by delivery"],
+     ["Infant prophylaxis", "Covers delivery and early exposure"],
+     ["Complete cascade", "Transmission under 2 percent"]
+    ]
+   }
+  },
+  {
+   "title": "PEP and PrEP: drugs around exposure",
+   "tx": "**Post-exposure prophylaxis** starts within 72 hours (ideally 2) after occupational or sexual exposure and runs 28 days with adherence and follow-up testing. Pre-exposure prophylaxis serves ongoing high risk with daily or event-driven tenofovir-based regimens plus regular testing. Cotrimoxazole prophylaxis still guards advanced HIV against opportunistic infections at low CD4 in programme guidance.",
+   "say": "Drugs bracket exposure. After: inside seventy two hours, twenty eight days, follow-up testing. Before: daily or event-driven cover for ongoing risk. Cotrimoxazole still guards advanced disease opportunistically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Post-exposure (PEP)",
+     "points": ["Start within 72 hours", "28 days of therapy", "Occupational and sexual exposure"]
+    },
+    "right": {
+     "title": "Pre-exposure (PrEP)",
+     "points": ["Before ongoing risk", "Daily or event-driven dosing", "Regular HIV testing mandatory"]
+    }
+   }
+  },
+  {
+   "title": "NACO architecture in one pass",
+   "tx": "**NACO** (National AIDS Control Organisation) steers state AIDS control societies delivering targeted interventions, ICTC testing, ART centres, STI clinics (Suraksha), blood safety and condom programming, with NACP phases iterating since 1992. Stigma and discrimination protections under the HIV/AIDS Act 2017 make testing and treatment legally safer to seek, a structural intervention stems increasingly cite.",
+   "say": "One organisation steers the architecture: targeted interventions, testing centres, ART and STI clinics, blood safety, condoms, through state societies since 1992. The 2017 Act's anti-discrimination shield is itself a structural intervention.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Delivers"],
+    "rows": [
+     ["Targeted interventions", "Key population prevention"],
+     ["ICTC network", "Counselling and testing"],
+     ["ART centres", "Free treatment and monitoring"],
+     ["Suraksha STI clinics", "Syndromic STI management"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,282 @@
+{
+    "v": 1,
+    "id": "ans-nmb-succinylcholine",
+    "subject": "anaesthesia",
+    "module": "ans-nmb",
+    "title": "Depolarizing Neuromuscular Block: Succinylcholine, Hyperkalaemia, and Phase II Block",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Succinylcholine Molecular Mechanism",
+            "tx": "**Succinylcholine depolarizing mechanism** stems from its unique chemical structure consisting of two conjoined acetylcholine molecules (di-acetylcholine). Succinylcholine binds nicotinic acetylcholine receptors at the motor endplate, opening channel pore complexes to trigger sustained muscular depolarization. This persistent depolarization causes initial visible muscular fasciculations followed rapidly by profound flaccid paralysis within 30 to 60 seconds (dose 1.0 to 1.5 mg/kg).",
+            "say": "Succinylcholine depolarizing mechanism stems from its unique chemical structure consisting of two conjoined acetylcholine molecules (di-acetylcholine). Succinylcholine binds nicotinic acetylcholine receptors at the motor endplate, opening channel pore complexes to trigger sustained muscular depolarization. This persistent depolarization causes initial visible muscular fasciculations followed rapidly by profound flaccid paralysis within 30 to 60 seconds (dose 1.0 to 1.5 mg/kg).",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+                "alt": "Nicotinic acetylcholine receptor activation and depolarizing neuromuscular blockade",
+                "caption": "Nicotinic acetylcholine receptor activation and depolarizing neuromuscular blockade"
+            }
+        },
+        {
+            "title": "Metabolism by Butyrylcholinesterase",
+            "tx": "**Plasma pseudocholinesterase metabolism** of succinylcholine occurs rapidly within circulating blood via butyrylcholinesterase (pseudocholinesterase), breaking down succinylcholine into inactive succinylmonocholine and choline. Because merely 10 percent of the injected intravenous dose ever reaches the neuromuscular junction, termination of action is exceptionally rapid, with full recovery of muscle tone occurring within 8 to 12 minutes.",
+            "say": "Plasma pseudocholinesterase metabolism of succinylcholine occurs rapidly within circulating blood via butyrylcholinesterase (pseudocholinesterase), breaking down succinylcholine into inactive succinylmonocholine and choline. Because merely 10 percent of the injected intravenous dose ever reaches the neuromuscular junction, termination of action is exceptionally rapid, with full recovery of muscle tone occurring within 8 to 12 minutes.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Intravenous bolus of succinylcholine 1.5 mg/kg"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Circulating butyrylcholinesterase hydrolyzes 90% in blood"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "10% reaches motor endplate inducing flaccid paralysis"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Rapid diffusion away into plasma enables recovery in 10 minutes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Phase I versus Phase II Blockade",
+            "tx": "**Phase I and Phase II neuromuscular characteristics** distinguish normal depolarizing blockade from desensitization block. Phase I block displays equal reduction of all four twitches on train-of-four stimulation with zero fade (TOF ratio of 1.0), absence of post-tetanic facilitation, and marked muscle fasciculations. Following large cumulative doses (>4 to 5 mg/kg) or prolonged infusions, Phase II block emerges, mimicking non-depolarizing block with pronounced fade and post-tetanic potentiation.",
+            "say": "Phase I and Phase II neuromuscular characteristics distinguish normal depolarizing blockade from desensitization block. Phase I block displays equal reduction of all four twitches on train-of-four stimulation with zero fade (TOF ratio of 1.0), absence of post-tetanic facilitation, and marked muscle fasciculations. Following large cumulative doses (greater than 4 to 5 mg/kg) or prolonged infusions, Phase II block emerges, mimicking non-depolarizing block with pronounced fade and post-tetanic potentiation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Neuromuscular Feature",
+                    "Phase I Block (Standard Depolarizing)",
+                    "Phase II Block (Desensitization)",
+                    "Non-Depolarizing Block (Vecuronium)"
+                ],
+                "rows": [
+                    [
+                        "Train-of-Four Pattern",
+                        "All 4 twitches decreased equally (no fade)",
+                        "Prominent progressive fade (TOF ratio <0.7)",
+                        "Prominent progressive fade (TOF ratio <0.7)"
+                    ],
+                    [
+                        "Tetanic Stimulation Response",
+                        "Sustained contraction without fade",
+                        "Marked tetanic fade during stimulation",
+                        "Marked tetanic fade during stimulation"
+                    ],
+                    [
+                        "Post-Tetanic Facilitation",
+                        "Completely absent",
+                        "Present (post-tetanic twitch potentiation)",
+                        "Present (post-tetanic twitch potentiation)"
+                    ],
+                    [
+                        "Anticholinesterase (Neostigmine)",
+                        "Augments and prolongs blockade dangerously",
+                        "Reverses blockade (hastens recovery)",
+                        "Reverses blockade (hastens recovery)"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Side by side, these two recordings show a block changing its character. Early **Phase I block** shrinks all four twitches together without fade and ignores tetanus, the honest signature of depolarisation. After large or prolonged succinylcholine, Phase II creeps in wearing the costume of a non depolarising block, fade and post tetanic potentiation included. Telling them apart matters because anticholinesterases may rescue Phase II yet deepen Phase I, a reversal decision that must wait until the pattern declares itself clearly.",
+            "say": "Phase I block lacks fade, while Phase II mimics non depolarising block with fade and post tetanic potentiation.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m494-ans-nmb-succinylcholine.webp",
+                "alt": "Peripheral nerve stimulator train-of-four and tetanic stimulation recordings comparing Phase I and Phase II block",
+                "caption": "Peripheral nerve stimulator train-of-four and tetanic stimulation recordings comparing Phase I and Phase II block. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Acute Hyperkalaemia Hazards",
+            "tx": "**Succinylcholine-induced hyperkalaemia** produces an obligatory transient serum potassium rise of 0.5 to 1.0 mEq/L in normal healthy individuals as intracellular potassium escapes through open nicotinic channels during generalized fasciculation. However, in patients with up-regulated extrajunctional acetylcholine receptors, succinylcholine provokes massive, lethal potassium surges exceeding 2 to 5 mEq/L, triggering intractable ventricular fibrillation and cardiac arrest.",
+            "say": "Succinylcholine-induced hyperkalaemia produces an obligatory transient serum potassium rise of 0.5 to 1.0 mEq/L in normal healthy individuals as intracellular potassium escapes through open nicotinic channels during generalized fasciculation. However, in patients with up-regulated extrajunctional acetylcholine receptors, succinylcholine provokes massive, lethal potassium surges exceeding 2 to 5 mEq/L, triggering intractable ventricular fibrillation and cardiac arrest.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Normal Physiological Response",
+                    "points": [
+                        "Normal localized junctional receptor distribution",
+                        "Potassium elevation capped at 0.5 to 1.0 mEq/L",
+                        "Completely benign and well-tolerated by normal myocardium"
+                    ]
+                },
+                "right": {
+                    "title": "Extrajunctional Receptor Proliferation",
+                    "points": [
+                        "Immature alpha-7 and gamma receptors spread across entire sarcolemma",
+                        "Massive uninhibited potassium efflux upon depolarisation",
+                        "Severe hyperkalaemia (>7 to 10 mEq/L) causing cardiac arrest"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "High-Risk Extrajunctional Conditions",
+            "tx": "**Clinical conditions predisposing to lethal hyperkalaemia** involve any denervation or extensive tissue trauma triggering extrajunctional nicotinic receptor upregulation across the sarcolemma: severe third-degree burns (risk emerges after 24 to 48 hours and lasts 1 to 2 years), spinal cord transection or paraplegia, severe crush injury, prolonged abdominal sepsis, stroke with hemiplegia, and undiagnosed muscular dystrophies (Duchenne).",
+            "say": "Clinical conditions predisposing to lethal hyperkalaemia involve any denervation or extensive tissue trauma triggering extrajunctional nicotinic receptor upregulation across the sarcolemma: severe third-degree burns (risk emerges after 24 to 48 hours and lasts 1 to 2 years), spinal cord transection or paraplegia, severe crush injury, prolonged abdominal sepsis, stroke with hemiplegia, and undiagnosed muscular dystrophies (Duchenne).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Underlying Pathology",
+                    "Onset of Hyperkalaemic Vulnerability",
+                    "Safe Recovery Window",
+                    "Primary Alternative Relaxant"
+                ],
+                "rows": [
+                    [
+                        "Severe Thermal Burns (>10% BSA)",
+                        "Begins 24 to 48 hours post-burn",
+                        "Persists 1 to 2 years until healed",
+                        "High-dose rocuronium (1.2 mg/kg)"
+                    ],
+                    [
+                        "Spinal Cord Injury / Paraplegia",
+                        "Begins 72 hours post-injury",
+                        "Persists minimum 6 months to indefinitely",
+                        "High-dose rocuronium (1.2 mg/kg)"
+                    ],
+                    [
+                        "Duchenne Muscular Dystrophy",
+                        "Constant lifetime absolute contraindication",
+                        "Never safe (causes fatal rhabdomyolysis)",
+                        "Non-depolarizing relaxants only"
+                    ],
+                    [
+                        "Severe Crush / Rhabdomyolysis",
+                        "Immediate upon muscle tissue necrosis",
+                        "Persists until muscle inflammation resolves",
+                        "Non-depolarizing relaxants only"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Fasciculations and Intracranial Pressure",
+            "tx": "**Adverse systemic effects of fasciculations** include generalized postoperative muscle myalgias, transient elevations in intragastric pressure (up to 15 to 20 cmH2O, countered by an even greater rise in lower esophageal sphincter tone), intraocular pressure spikes (5 to 10 mmHg via extraocular muscle contracture, risking extrusion of vitreous in open globe injuries), and transient rises in intracranial pressure.",
+            "say": "Adverse systemic effects of fasciculations include generalized postoperative muscle myalgias, transient elevations in intragastric pressure (up to 15 to 20 cmH2O, countered by an even greater rise in lower esophageal sphincter tone), intraocular pressure spikes (5 to 10 mmHg via extraocular muscle contracture, risking extrusion of vitreous in open globe injuries), and transient rises in intracranial pressure.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Open Eye Injury Risk",
+                    "points": [
+                        "Fasciculation of extraocular rectus muscles compresses globe",
+                        "Transient intraocular pressure rise of 5 to 10 mmHg",
+                        "Risk of expulsive vitreous extrusion in penetrating globe trauma"
+                    ]
+                },
+                "right": {
+                    "title": "Defasciculating Pretreatment",
+                    "points": [
+                        "Administer 10 percent of non-depolarizing ED95 (rocuronium 0.06 mg/kg)",
+                        "Given 3 minutes prior to succinylcholine injection",
+                        "Attenuates muscle fasciculations, myalgias, and pressure surges"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Bradycardia and Autonomic Dysrhythmias",
+            "tx": "**Succinylcholine autonomic dysrhythmias** stem from direct stimulation of cardiac muscarinic M2 receptors in the sinoatrial node, commonly producing profound sinus bradycardia, nodal escape rhythms, or asystole. This is particularly prevalent in children (who have high resting vagal tone) following a single dose, and in adults receiving a second repeat dose within five minutes, mandating prophylactic intravenous atropine in pediatric patients.",
+            "say": "Succinylcholine autonomic dysrhythmias stem from direct stimulation of cardiac muscarinic M2 receptors in the sinoatrial node, commonly producing profound sinus bradycardia, nodal escape rhythms, or asystole. This is particularly prevalent in children (who have high resting vagal tone) following a single dose, and in adults receiving a second repeat dose within five minutes, mandating prophylactic intravenous atropine in pediatric patients.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Inject repeat bolus of succinylcholine within 5 minutes"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Metabolite succinylmonocholine sensitizes SA node muscarinic M2 receptors"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Profound vagal bradycardia, junctional rhythm, or sinus arrest"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Treat instantly with IV atropine (0.02 mg/kg) or glycopyrrolate"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Trigger for Malignant Hyperthermia",
+            "tx": "**Malignant hyperthermia triggering potential** classifies succinylcholine as the only depolarizing muscle relaxant capable of triggering fulminant malignant hyperthermia in genetically susceptible individuals harboring mutations in the RYR1 or CACNA1S genes. Succinylcholine can also induce masseter muscle rigidity (jaws of steel), which serves as a major herald warning sign of evolving malignant hyperthermia.",
+            "say": "Malignant hyperthermia triggering potential classifies succinylcholine as the only depolarizing muscle relaxant capable of triggering fulminant malignant hyperthermia in genetically susceptible individuals harboring mutations in the RYR1 or CACNA1S genes. Succinylcholine can also induce masseter muscle rigidity (jaws of steel), which serves as a major herald warning sign of evolving malignant hyperthermia.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Clinical Finding",
+                    "Diagnostic Suspicion",
+                    "Urgent Intervention",
+                    "Subsequent Action"
+                ],
+                "rows": [
+                    [
+                        "Isolated Masseter Rigidity",
+                        "Herald sign of evolving malignant hyperthermia",
+                        "Attempt gentle intubation; check for body rigidity",
+                        "Monitor EtCO2, core temperature, and urine color"
+                    ],
+                    [
+                        "Generalized Muscle Rigidity",
+                        "Confirmed malignant hyperthermia crisis",
+                        "Halt surgery; administer IV dantrolene 2.5 mg/kg",
+                        "Hyperventilate with 100% O2 and initiate active cooling"
+                    ],
+                    [
+                        "Severe Hypercapnia (EtCO2 >70)",
+                        "Massive hypermetabolic state in skeletal muscle",
+                        "Increase minute ventilation three-fold",
+                        "Draw serial arterial blood gases for metabolic acidosis"
+                    ],
+                    [
+                        "Hyperkalaemia and Cardiac Arrest",
+                        "Fulminant rhabdomyolysis and myoglobinuria",
+                        "Administer calcium chloride, bicarbonate, and insulin",
+                        "Prepare for prolonged CPR and forced alkaline diuresis"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

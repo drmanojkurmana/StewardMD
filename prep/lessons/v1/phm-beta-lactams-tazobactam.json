@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-beta-lactams",
+  "subject": "pharmacology",
+  "title": "Tazobactam Combinations and Cephalosporin Generations to Ceftriaxone",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Tazobactam** extends clavulanate's suicide inhibitor concept to intravenous hospital duty, protecting piperacillin (pip tazo, previous lesson) and ceftolozane (the anti pseudomonal cephalosporin pairing for resistant Gram negatives). Pip tazo's empire is empirical breadth (Gram negatives including Pseudomonas, anaerobes, Gram positive cover short of MRSA and VRE) bought with C difficile, cytopenia and the vancomycin pairing nephrotoxicity debate (acute kidney injury signals higher than with cefepime or meropenem partners in several analyses).",
+      "say": "Tazobactam guards piperacillin's breadth; mind the vancomycin kidney pairing and the C difficile toll.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pip tazo empire",
+          "points": [
+            "Nosocomial pneumonia and intra abdominal sepsis",
+            "Febrile neutropenia monotherapy tradition",
+            "Diabetic foot and aspiration cover",
+            "Extended infusion protocols maximise killing"
+          ]
+        },
+        "right": {
+          "title": "Pip tazo vigilance",
+          "points": [
+            "Acute kidney injury signal with vancomycin pairing",
+            "C difficile and cytopenias on long courses",
+            "No MRSA, VRE or atypical cover",
+            "De escalate at culture results without exception"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cephalosporin generations** narrate a Gram negative march: first generation (cefazolin, cephalexin) Gram positive strong with modest Gram negative, second (cefuroxime) balanced respiratory, third (ceftriaxone, ceftazidime) Gram negative powerful with CNS entry, fourth (cefepime) adding Pseudomonas and AmpC stability, fifth (ceftaroline) alone against MRSA. Each generation trades Gram positive potency for Gram negative reach until the fifth reverses the trade, the generational seesaw every examination asks candidates to ride.",
+      "say": "Generations march Gram negative and surrender Gram positive, until the fifth comes back for MRSA.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-cefixime.webp",
+        "alt": "Cefixime oral third generation cephalosporin illustration",
+        "caption": "Cefixime, an oral third generation cephalosporin, within the generational spectrum this lesson maps. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**First generation anchors** deserve their names: cefazolin, the intravenous surgical prophylaxis champion (weight dosed, redosed by duration and blood loss) and osteomyelitis workhorse, and cephalexin, its oral twin owning streptococcal and MSSA skin infection, urinary infection in pregnancy and step down therapy. Their Gram positive strength exceeds later generations for MSSA, which is why generation number never substitutes for organism specific choice.",
+      "say": "Cefazolin prevents surgical infections and kills MSSA better than its grandchildren; generation is not rank.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cefazolin (intravenous)",
+          "points": [
+            "Surgical prophylaxis first choice by weight",
+            "MSSA bacteraemia and osteomyelitis therapy",
+            "Redosing by case duration and blood loss",
+            "Well tolerated over long courses"
+          ]
+        },
+        "right": {
+          "title": "Cephalexin (oral)",
+          "points": [
+            "Skin and soft tissue streptococci and MSSA",
+            "Urinary infection including pregnancy use",
+            "Oral step down from cefazolin therapy",
+            "Four times daily classic dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Second generation cefuroxime** balances respiratory pathogens (pneumococcus, Haemophilus, Moraxella) across intravenous and oral axetil forms for pneumonia, sinusitis and perioperative niches, while cefoxitin's anaerobic accent served historical intra abdominal prophylaxis. The generation is the least examinable and most workmanlike: competent everywhere, definitive almost nowhere, and frequently the right empirical answer for community respiratory presentations before cultures speak.",
+      "say": "Second generation is the competent middle: respiratory balance without definitive empires.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resp",
+            "label": "Community respiratory infection empirically"
+          },
+          {
+            "id": "cefur",
+            "label": "Cefuroxime covers pneumococcus, Haemophilus, Moraxella"
+          },
+          {
+            "id": "culture",
+            "label": "Culture results refine or stop therapy"
+          },
+          {
+            "id": "oral",
+            "label": "Axetil oral step down with food"
+          }
+        ],
+        "edges": [
+          [
+            "resp",
+            "cefur"
+          ],
+          [
+            "cefur",
+            "culture"
+          ],
+          [
+            "culture",
+            "oral"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ceftriaxone** is the third generation's emperor: once daily (long half life, biliary excretion), crossing into cerebrospinal fluid for meningitis, and owning gonorrhoea, typhoid, Lyme and community pneumonia empiricism across the planet. Its biliary excretion precipitates calcium salts (biliary sludge, and fatal neonatal calcium ceftriaxone precipitates with intravenous calcium, contraindicating the pair in the first month of life, the kernicterus adjacent fence from the sulfonamide lesson) and spares renally impaired dosing entirely.",
+      "say": "Once daily ceftriaxone rules meningitis and gonorrhoea; never mix it with neonatal calcium lines.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ceftriaxone empire",
+          "points": [
+            "Meningitis at meningeal doses twice daily",
+            "Gonorrhoea single dose (resistance permitting)",
+            "Typhoid, Lyme and severe community infections",
+            "No renal adjustment, biliary excretion"
+          ]
+        },
+        "right": {
+          "title": "Ceftriaxone fences",
+          "points": [
+            "Calcium precipitation: neonatal contraindication",
+            "Biliary sludge and pseudolithiasis",
+            "No enterococcus or Listeria cover",
+            "C difficile pressure from breadth and duration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oral third generation** cefixime and cefpodoxime extend step down and gonorrhoea history (cefixime demoted by resistance there), while ceftazidime waits for the next lesson's Pseudomonas focus. The cephalosporin allergy cross talk with penicillins was rehearsed previously (side chains, low percentages); cefazolin's unique side chain makes it usable in most penicillin allergy labels, a perioperative fact that rescues first line prophylaxis daily.",
+      "say": "Cefazolin's unique side chain rescues surgical prophylaxis from most penicillin labels; ask before defaulting to vancomycin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral third generation",
+          "points": [
+            "Cefixime and cefpodoxime step down roles",
+            "Urinary and respiratory niches",
+            "Gonorrhoea: cefixime demoted by resistance",
+            "No anaerobic or staphylococcal reliability"
+          ]
+        },
+        "right": {
+          "title": "Allergy practice",
+          "points": [
+            "Side chain similarity predicts cross reaction",
+            "Cefazolin usable in most penicillin labels",
+            "Severe cutaneous reactions fence all beta lactams",
+            "Delabelling referral for recurrent surgical patients"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ceftriaxone's meningitis regimen** teaches beta lactam CNS principles: inflamed meninges admit 10 to 20 percent of serum levels, doses double (2 g twice daily), dexamethasone adjunct precedes or accompanies the first dose in pneumococcal suspicion, and ampicillin joins wherever Listeria threatens (pregnancy, neonates, elderly, immunocompromised) because every cephalosporin is blind to it. Vancomycin covers resistant pneumococcus until susceptibilities return, completing the empirical quartet.",
+      "say": "Meningitis dosing doubles, steroids precede, ampicillin covers Listeria, vancomycin waits for susceptibilities.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Bacterial meningitis suspected, cultures drawn"
+          },
+          {
+            "id": "dex",
+            "label": "Dexamethasone with or before first antibiotic"
+          },
+          {
+            "id": "cef",
+            "label": "Ceftriaxone 2 g twice daily plus vancomycin"
+          },
+          {
+            "id": "amp",
+            "label": "Ampicillin added where Listeria threatens"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "dex"
+          ],
+          [
+            "dex",
+            "cef"
+          ],
+          [
+            "cef",
+            "amp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cephalosporin adverse grammar** beyond allergy includes C difficile (class pressure), cytopenias and interstitial nephritis on long courses, cefepime neurotoxicity next lesson, ceftriaxone biliary sludge, and the NMTT side chain syndromes (hypoprothrombinaemia and disulfiram reactions) chained to cefoperazone antiques. Positive direct Coombs tests without haemolysis decorate prolonged therapy and confuse transfusion services unless documented.",
+      "say": "Long cephalosporin courses earn blood, kidney and bowel surveillance; document the Coombs before transfusion calls.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Class adverse set",
+          "points": [
+            "C difficile risk with breadth and duration",
+            "Cytopenias and interstitial nephritis",
+            "Positive Coombs without haemolysis",
+            "Seizures at accumulated high doses in renal failure"
+          ]
+        },
+        "right": {
+          "title": "Agent specific entries",
+          "points": [
+            "Ceftriaxone: biliary sludge, calcium precipitation",
+            "Cefepime: neurotoxicity (next lesson)",
+            "NMTT agents: bleeding and disulfiram effects",
+            "Ceftaroline: neutropenia on long courses"
+          ]
+        }
+      }
+    }
+  ]
+}

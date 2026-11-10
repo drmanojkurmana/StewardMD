@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-tubulointerstitial-cystic",
+  "subject": "pathology",
+  "title": "Malignant Nephrosclerosis, Flea-Bitten Kidney, ADPKD, and Renal Stones",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "In malignant hypertension, arterioles undergo fibrinoid necrosis and concentric hyperplastic **onion-skin** thickening that can close the lumen entirely. Cortical petechial haemorrhages from necrotised vessels fleck the kidney surface, producing the flea-bitten kidney appearance. Optic disc swelling alongside acute kidney injury and a pressure above roughly 180/120 completes the emergency picture needing same-day hospital assessment.",
+      "say": "Petechial flea bitten kidneys mean malignant hypertension has necrotised arterioles; lower pressure controlledly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benign nephrosclerosis",
+          "points": [
+            "Fine granular surface",
+            "Hyaline arterioles only",
+            "Years of pressure, slow decline"
+          ]
+        },
+        "right": {
+          "title": "Malignant nephrosclerosis",
+          "points": [
+            "Flea bitten petechial surface",
+            "Fibrinoid necrosis, onion skinning",
+            "Emergency, AKI and retinopathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic severe hypertension shifts cerebral and renal autoregulation rightward, so dropping pressure to normal in minutes can infarct brain and kidney. **Controlled lowering** therefore targets a mean arterial pressure fall of no more than about 20 to 25 percent in the first hours, with further gradual reduction over days. Papilloedema with acute organ damage separates malignant hypertension from asymptomatic severe readings.",
+      "say": "Lower malignant pressure by quarters over days, not to normal by lunch; organs adapted to height.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ",
+          "Malignant phase sign",
+          "Urgency clue"
+        ],
+        "rows": [
+          [
+            "Kidney",
+            "AKI, haematuria, proteinuria",
+            "Flea bitten pathology behind"
+          ],
+          [
+            "Retina",
+            "Haemorrhages, exudates, papilloedema",
+            "Grades three and four"
+          ],
+          [
+            "Brain",
+            "Encephalopathy, headache, seizures",
+            "Imaging excludes haemorrhage"
+          ],
+          [
+            "Blood",
+            "Microangiopathic haemolysis sometimes",
+            "Schistocytes, thrombocytopenia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Autosomal dominant polycystic kidney disease** replaces both kidneys with expanding cysts arising from PKD1, encoding polycystin-1, or the milder PKD2 gene. Kidneys enlarge massively while hypertension, loin pain and haematuria precede kidney failure, often by the fifth or sixth decade. The extrarenal association examiners love is a berry aneurysm of the circle of Willis, alongside liver cysts and mitral valve prolapse.",
+      "say": "Huge cystic kidneys plus a family history and berry aneurysm risk name ADPKD and its genes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adpkd-fig1.webp",
+        "alt": "ADPKD renal and extrarenal manifestations",
+        "caption": "ADPKD with massive renal cysts and extrarenal manifestations including berry aneurysms."
+      }
+    },
+    {
+      "tx": "Blocking vasopressin V2 receptors with **tolvaptan** lowers cyclic AMP inside cyst-lining cells, slowing kidney volume growth and decline in filtration in rapidly progressing ADPKD. The price is aquaresis with thirst and polyuria, plus a small risk of drug-induced liver injury needing scheduled liver function monitoring. Strict blood pressure control with renin-angiotensin blockade remains the foundation for every patient.",
+      "say": "Tolvaptan slows cysts in selected rapid progressors; blood pressure control protects every ADPKD kidney.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Imaging classifies progression risk"
+          },
+          {
+            "id": "b",
+            "label": "Pressure controlled, RAAS based"
+          },
+          {
+            "id": "c",
+            "label": "Tolvaptan if rapid and tolerant"
+          },
+          {
+            "id": "d",
+            "label": "Aneurysm and family screening offered"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**ARPKD** dilates collecting ducts into fusiform cysts arrayed radially, enlarging kidneys so much in newborns that lung development can suffer. Its inseparable partner is congenital hepatic fibrosis, which later causes portal hypertension and variceal bleeding even when kidney function is supported. That kidney plus liver pairing distinguishes recessive disease from the dominant form, which presents in adult life.",
+      "say": "Enlarged echogenic infant kidneys plus liver fibrosis mean recessive, not dominant, polycystic disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-fig1.webp",
+        "alt": "Chronic kidney disease histopathology",
+        "caption": "Chronic kidney histopathology contrasting cystic and sclerotic progression."
+      }
+    },
+    {
+      "tx": "Calcium oxalate forms about three quarters of **renal stones**, visible on plain films, while uric acid stones stay radiolucent and dissolve when urine is alkalinised. Struvite grows only in urease-producing infection, moulding itself into a staghorn cast of the pelvis. Hexagonal crystals in acidic morning urine betray cystinuria. Each chemistry dictates entirely different prevention, so stone analysis is never optional.",
+      "say": "Name the stone's chemistry or lose the prevention plan; oxalate, urate, struvite, cystine obey different rules.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stone",
+          "Imaging and shape",
+          "Prevention accent"
+        ],
+        "rows": [
+          [
+            "Calcium oxalate",
+            "Radiopaque, most common",
+            "Fluids, citrate, oxalate sense"
+          ],
+          [
+            "Uric acid",
+            "Radiolucent on plain film",
+            "Alkalinise urine, allopurinol"
+          ],
+          [
+            "Struvite staghorn",
+            "Infection moulded cast",
+            "Complete clearance, antibiotics"
+          ],
+          [
+            "Cystine",
+            "Hexagonal crystals, inherited",
+            "High fluids, alkalinisation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fever, rigors and an obstructed kidney on imaging define an **infected obstructed system**, where pus under pressure seeds Gram-negative sepsis within hours. Antibiotics alone cannot sterilise a blocked system, so emergency decompression by retrograde stent or percutaneous nephrostomy comes first. Definitive stone fragmentation waits until sepsis settles; attempting it during bacteraemia is the management error this step guards against.",
+      "say": "Fever plus obstructed kidney means drain tonight and fragment later; sepsis sets the order.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uncomplicated colic",
+          "points": [
+            "Pain controlled, no infection",
+            "NSAID analgesia, strain urine",
+            "Imaging by persistence"
+          ]
+        },
+        "right": {
+          "title": "Obstructed and infected",
+          "points": [
+            "Fever, hypotension risk",
+            "Antibiotics plus urgent drainage",
+            "Definitive stone surgery delayed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Anyone forming a second stone deserves a **metabolic evaluation**: serum calcium and parathyroid hormone, uric acid, and 24-hour urine measuring calcium, oxalate, citrate and volume. Distal renal tubular acidosis leaves urine alkaline with low citrate, favouring calcium phosphate stones and nephrocalcinosis. Low urine volume below 2 litres daily is the commonest reversible finding, making fluid prescription the first intervention.",
+      "say": "Recurrent stones earn metabolic workup; anatomy and urine chemistry manufacture repeat offenders.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stone analysed when passed"
+          },
+          {
+            "id": "b",
+            "label": "Serum calcium, urate, bicarbonate"
+          },
+          {
+            "id": "c",
+            "label": "Urine volume chemistry profiled"
+          },
+          {
+            "id": "d",
+            "label": "Targeted fluids and drug prevention"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

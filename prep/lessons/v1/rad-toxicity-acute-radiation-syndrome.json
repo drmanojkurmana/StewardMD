@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-toxicity-acute-radiation-syndrome",
+ "subject": "radiology",
+ "module": "rad-toxicity",
+ "title": "Acute Radiation Syndrome, Tissue Tolerance and Late Radiation Injury",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Syndromes climb with whole body dose",
+   "tx": "**Acute radiation syndrome** unfolds in stages as whole body dose climbs: haematopoietic syndrome from about 1 to 6 gray, gastrointestinal from about 6 to 10, and cerebrovascular above 10 to 20, each opening with a prodrome of nausea and vomiting whose speed of onset itself estimates dose. Vomiting inside the first hour warns of a high, likely lethal exposure and triages scarce care in mass casualty planning.",
+   "say": "Acute radiation syndrome climbs with whole body dose: haematopoietic from about one to six gray, gastrointestinal six to ten, cerebrovascular above ten to twenty. Prodromal vomiting speed itself estimates dose, and vomiting inside the first hour warns of a likely lethal exposure.",
+   "vis": {"kind": "table", "cols": ["Syndrome", "Dose guide", "Dominant failure"], "rows": [["Haematopoietic", "1 to 6 gray", "Marrow aplasia, infection"], ["Gastrointestinal", "6 to 10 gray", "Mucosal denudation, sepsis"], ["Cerebrovascular", "Over 10 to 20 gray", "Brain oedema, shock"], ["Cutaneous", "Local high dose", "Skin burns and necrosis"]]}
+  },
+  {
+   "title": "LD50 and the latent period",
+   "tx": "**LD50 60** is the whole body dose lethal to half of exposed humans within sixty days, near 3.5 to 4.5 gray without treatment and higher with cytokines, transfusion and intensive support. After the prodrome a deceptive latent period of apparent recovery lasts days to weeks while stem cell compartments empty silently. Lymphocyte counts falling over the first forty eight hours grade the exposure before any syndrome declares itself clinically.",
+   "say": "LD50 60 is the dose lethal to half of exposed humans within sixty days, near three point five to four point five gray without treatment. A deceptive latent period follows while stem cell compartments empty silently. Lymphocyte counts falling over forty eight hours grade the exposure early.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Prodrome: vomiting hours"}, {"id": "b", "label": "Latent false recovery"}, {"id": "c", "label": "Manifest syndrome"}, {"id": "d", "label": "Recovery or death"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Deterministic versus stochastic effects",
+   "tx": "**Deterministic effects** have dose thresholds, rise in severity with dose and follow predictable organ patterns: skin burns, cataract, marrow suppression and sterility. Stochastic effects have probability, not severity, rising with dose and no safe threshold in protection models: cancer induction and hereditary effects. Examinations swap these definitions deliberately, so anchor them to threshold and severity words, never to the organ involved.",
+   "say": "Deterministic effects have thresholds and rise in severity with dose: burns, cataract and marrow suppression. Stochastic effects have probability rising with dose and no safe threshold in protection models: cancer induction. Anchor them to threshold and severity words, never to the organ involved.",
+   "vis": {"kind": "compare", "left": {"title": "Deterministic", "points": ["Threshold exists", "Severity rises with dose", "Burns, cataract, sterility", "Prevented by staying below limit"]}, "right": {"title": "Stochastic", "points": ["No threshold assumed", "Probability rises, severity fixed", "Cancer and hereditary effects", "Reduced by ALARA, never zero"]}}
+  },
+  {
+   "title": "Most sensitive and resistant tissues",
+   "tx": "**Radiosensitivity ranking** places lymphocytes, spermatogonia and marrow stem cells at the top, and mature neurons, muscle and connective tissue at the bottom, following the Bergonie Tribondeau law of mitotic activity. Gonads and lens carry special protection weight because sterility and cataract arrive at doses other organs shrug off. Foetal tissue in the eight to fifteen week brain window is the most protected radiosensitive system of all.",
+   "say": "Radiosensitivity ranking places lymphocytes, spermatogonia and marrow at the top, and neurons and muscle at the bottom, following mitotic activity. Gonads and lens carry special weight because sterility and cataract arrive at low doses. The eight to fifteen week foetal brain is most protected of all.",
+   "vis": {"kind": "table", "cols": ["Rank", "Tissue", "Signature injury"], "rows": [["Most sensitive", "Lymphocytes, gonads, marrow", "Count falls, sterility"], ["Sensitive", "Gut lining, skin, lens", "Denudation, dermatitis, cataract"], ["Intermediate", "Liver, lung, kidney", "Pneumonitis, nephropathy late"], ["Most resistant", "Neurons, muscle, mature bone", "Very late dysfunction"]]}
+  },
+  {
+   "title": "Tolerance doses guard organs",
+   "tx": "**Tolerance dose** TD5 5 names the dose causing severe late injury in five percent of patients at five years for a stated volume: whole spinal cord near 45 to 50 gray in standard fractions, whole lung near 20, kidney near 18 to 23 and lens only a few gray. Partial volumes tolerate more, which is why constraints are quoted with the volume treated, never as one naked number.",
+   "say": "Tolerance dose names the dose causing severe late injury in five percent at five years for a stated volume: cord near forty five to fifty gray, whole lung near twenty, kidney near eighteen to twenty three. Partial volumes tolerate more, so constraints always carry the volume treated.",
+   "vis": {"kind": "table", "cols": ["Organ", "Tolerance guide", "Late injury"], "rows": [["Spinal cord whole", "45 to 50 gray", "Myelitis, paralysis"], ["Lung whole", "About 20 gray", "Fibrosis, pneumonitis"], ["Kidney both", "18 to 23 gray", "Radiation nephropathy"], ["Lens", "A few gray fractionated", "Cataract"]]}
+  },
+  {
+   "title": "Radiation pneumonitis timing",
+   "tx": "**Radiation pneumonitis** inflames irradiated lung six weeks to six months after thoracic radiotherapy with dry cough, breathlessness and fever over ground glass change confined to the treatment field, straight edges betraying its geometry. It answers steroids tapered slowly, while later fibrosis stiffens the same field permanently over one to two years. Mean lung dose and the volume receiving twenty gray predict risk at planning, long before symptoms audition treatments.",
+   "say": "Radiation pneumonitis inflames irradiated lung six weeks to six months after treatment, with ground glass confined to the field and straight edges betraying its geometry. It answers slow steroids, while later fibrosis stiffens the same field permanently. Mean lung dose predicts risk at planning.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Thoracic radiotherapy ends"}, {"id": "b", "label": "6 weeks to 6 months: pneumonitis"}, {"id": "c", "label": "Steroids, slow taper"}, {"id": "d", "label": "Fibrosis over 1 to 2 years"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Late bowel, bladder and bone injury",
+   "tx": "**Late radiation injury** scars hollow organs on a delay of months to decades: proctitis with bleeding and urgency after prostate or cervix treatment, cystitis with haematuria and a shrinking bladder, strictures and fistulae where dose hotspots crossed organ walls. Irradiated bone weakens into insufficiency fractures of sacrum and ribs, and irradiated vessels stenose. Every late effect shares the same histology of small vessel obliteration and fibrosis, which is why hyperbaric and surgical decisions are specialist territory.",
+   "say": "Late radiation injury scars hollow organs months to decades later: proctitis, cystitis, strictures and fistulae where hotspots crossed walls. Irradiated bone weakens into insufficiency fractures. Every late effect shares small vessel obliteration and fibrosis, which is why management is specialist territory.",
+   "vis": {"kind": "compare", "left": {"title": "Hollow organ late effects", "points": ["Proctitis and cystitis bleeding", "Strictures and obstruction", "Fistulae at hotspots", "Onset months to decades"]}, "right": {"title": "Solid tissue late effects", "points": ["Sacral insufficiency fractures", "Radiation myelitis if cord overdosed", "Second malignancy in field", "Hypothyroid after neck fields"]}}
+  },
+  {
+   "title": "Radiation dermatitis grades",
+   "tx": "**Acute dermatitis** inside a treatment field climbs from faint erythema at about twenty gray through dry desquamation to moist desquamation in skin folds near forty to fifty gray over a standard course, healing from surviving follicle stem cells over weeks. Chronic change thins the skin, tattoos it with telangiectasia and can ulcerate after trivial trauma years later. Field edge photographs at consent prepare patients for both arcs of that story.",
+   "say": "Acute dermatitis climbs from faint erythema through dry to moist desquamation in folds over a standard course, healing from follicle stem cells over weeks. Chronic change thins skin, adds telangiectasia and can ulcerate after trivial trauma years later. Consent photographs prepare patients for both arcs.",
+   "vis": {"kind": "table", "cols": ["Grade guide", "Skin finding", "Care"], "rows": [["Early reaction", "Faint erythema, dry flaking", "Moisturise, protect"], ["Established", "Dry desquamation", "Barrier care"], ["Severe acute", "Moist desquamation in folds", "Dressings, pause if needed"], ["Chronic", "Atrophy, telangiectasia", "Trauma avoidance, review"]]}
+  }
+ ]
+}

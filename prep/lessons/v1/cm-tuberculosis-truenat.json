@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-tuberculosis-truenat",
+ "subject": "community-medicine",
+ "module": "cm-tuberculosis",
+ "title": "Truenat and Molecular Diagnosis in the TB Programme",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Presumptive TB: who gets tested first",
+   "tx": "A **presumptive TB case** is anyone with symptoms or signs suggestive of tuberculosis, classically cough for two weeks or more, fever, weight loss or haemoptysis. Every such person entering a facility must be offered a diagnostic test the same day rather than a trial of broad spectrum antibiotics. Fast tracking this group shortens infectious weeks in the community.",
+   "say": "Two weeks of cough, fever, weight loss or blood in sputum makes presumptive TB. Test the same day. Do not waste infectious weeks on blind antibiotic trials.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clue", "Action"],
+    "rows": [
+     ["Cough 2 weeks or more", "Offer molecular test today"],
+     ["Haemoptysis any duration", "Test and chest radiograph"],
+     ["Contact of a TB case with symptoms", "Test without waiting"],
+     ["HIV positive with any cough", "Test at every visit"]
+    ]
+   }
+  },
+  {
+   "title": "From smear microscopy to molecular tests",
+   "tx": "**Sputum smear microscopy** with Ziehl Neelsen or fluorescent staining needs about ten thousand bacilli per millilitre, so it misses paucibacillary, childhood and HIV associated disease. Culture is more sensitive but takes weeks. Molecular tests detect far fewer bacilli within hours and simultaneously flag rifampicin resistance, which is why programmes moved them to the front line.",
+   "say": "Smear needs ten thousand bacilli per millilitre and misses sparse disease. Molecular tests find fewer bacilli in hours and report rifampicin resistance in the same run.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Smear microscopy",
+     "points": ["Cheap and widely placed", "Misses paucibacillary disease", "No resistance information", "Result same day but insensitive"]
+    },
+    "right": {
+     "title": "Molecular test",
+     "points": ["Detects low bacillary loads", "Result within hours", "Flags rifampicin resistance", "Higher unit cost per test"]
+    }
+   }
+  },
+  {
+   "title": "Truenat: a chip based Indian platform",
+   "tx": "**Truenat** is a chip based real time polymerase chain reaction platform developed in India that extracts DNA and amplifies mycobacterial targets at peripheral laboratories with battery backup. A positive screen is reflex tested on a second chip for rifampicin resistance. Its portability suits district and subdistrict sites where larger cartridge systems are hard to sustain.",
+   "say": "Truenat runs chip based PCR at the periphery, even on battery. Screen first, reflex for rifampicin resistance second. Portability is its programme advantage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Sputum sample collected"},
+     {"id": "b", "label": "DNA extracted on device"},
+     {"id": "c", "label": "Truenat MTB chip run"},
+     {"id": "d", "label": "Reflex rifampicin chip if positive"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "CBNAAT and the cartridge cousin",
+   "tx": "The **CBNAAT** (cartridge based nucleic acid amplification test), sold as GeneXpert, processes a sputum cartridge in about two hours and reports Mycobacterium tuberculosis plus rifampicin resistance together. Programmes place Truenat and CBNAAT as equivalent upfront molecular tests for presumptive cases, choosing by site volume, power supply and maintenance reach.",
+   "say": "CBNAAT answers in two hours with rifampicin resistance built in. The programme treats it and Truenat as upfront equals, placed by site volume and maintenance reach.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Programme point"],
+    "rows": [
+     ["Turnaround", "About 2 hours per cartridge"],
+     ["Resistance read", "Rifampicin in same run"],
+     ["Placement", "District and high load sites"],
+     ["Upfront use", "First test for presumptive TB"]
+    ]
+   }
+  },
+  {
+   "title": "Reading the result: detected, not detected, resistance",
+   "tx": "A **rifampicin resistant result** on the upfront test moves the patient straight into drug resistant TB evaluation with further molecular and culture drug susceptibility testing, without waiting for a full regimen guess. Trace or very low detection in a treated patient needs clinical correlation. Negative molecular results with strong suspicion still deserve radiography and culture referral.",
+   "say": "Rifampicin resistance reported upfront changes the whole pathway: full resistance workup starts at once. A negative test never overrules a strong clinical and radiographic picture.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Result", "Next step"],
+    "rows": [
+     ["TB detected, rifampicin sensitive", "Start daily first line regimen"],
+     ["TB detected, rifampicin resistant", "Drug resistant TB evaluation"],
+     ["TB not detected, suspicion high", "Radiograph, culture, review"],
+     ["Trace in old treated case", "Correlate clinically, repeat"]
+    ]
+   }
+  },
+  {
+   "title": "Children, HIV and extrapulmonary samples",
+   "tx": "**Paucibacillary disease** dominates childhood, HIV associated and extrapulmonary tuberculosis, where sputum is scanty or the lesion sits outside the lung. Gastric aspirate, induced sputum, cerebrospinal fluid, pleural fluid and lymph node samples all go for molecular testing under the programme. A negative result here excludes far less than a negative in cavitary adult disease.",
+   "say": "Children and HIV positive patients carry few bacilli. Send gastric aspirate, fluids and node samples for molecular testing, and remember a negative excludes much less here.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pulmonary-tb-fig1.webp",
+    "alt": "Lung cutaway showing an apical reactivation cavity, Ghon focus and caseating granuloma histology",
+    "caption": "Pulmonary tuberculosis lesions: apical cavity, Ghon focus and caseating granuloma. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Samples, transport and quality traps",
+   "tx": "**Sample quality** decides molecular yield: saliva submitted as sputum, tiny volumes, blood stained swabs and long unrefrigerated delays all raise invalid and false negative rates. Two spot samples collected with coaching, labelled at the bedside and transported promptly protect the result. Invalid or error outputs must be repeated on a fresh sample, never reported as negative.",
+   "say": "Saliva passed off as sputum is the commonest quality failure. Coach the sample, label at the bedside, repeat errors on fresh sputum. Never report an error as negative.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Protection"],
+    "rows": [
+     ["Saliva instead of sputum", "Coached deep cough sample"],
+     ["Long transport delay", "Prompt, cool transport"],
+     ["Error or invalid output", "Repeat on fresh sample"],
+     ["Wrong patient label", "Bedside labelling check"]
+    ]
+   }
+  },
+  {
+   "title": "Notification and Nikshay entry",
+   "tx": "**Nikshay** is the programme case based digital system where every diagnosed patient is notified, assigned a treatment supporter and followed to outcome. Molecular results feed directly into this record, linking laboratory, treatment centre and district TB officer. Notification is mandatory for public and private providers alike, and unnotified cases are the leak molecular expansion was built to close.",
+   "say": "Every positive enters Nikshay for notification, supporter assignment and outcome tracking. Private notification is mandatory too. The register, not the laboratory slip, drives follow up.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Molecular result positive"},
+     {"id": "b", "label": "Notify on Nikshay"},
+     {"id": "c", "label": "Assign treatment supporter"},
+     {"id": "d", "label": "Follow to declared outcome"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "What molecular scale up changed",
+   "tx": "**Universal drug susceptibility testing** became realistic once upfront molecular tests spread: every new case effectively receives at least a rifampicin susceptibility read at diagnosis. Diagnostic delay fell from weeks to days, childhood and extrapulmonary confirmation rose, and resistance is caught before months of failing first line therapy amplify it. Coverage gaps now sit in private sector linkage, not test science.",
+   "say": "Upfront molecular testing made universal rifampicin susceptibility reads routine. Diagnosis shrank from weeks to days. The remaining gap is linking private patients, not laboratory science.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Before scale up", "After scale up"],
+    "rows": [
+     ["Smear first, weeks to resistance data", "Resistance read at diagnosis"],
+     ["Children rarely confirmed", "Molecular confirmation routine"],
+     ["Resistance found after failure", "Resistance found before regimen"],
+     ["Private cases invisible", "Notification linked to testing"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

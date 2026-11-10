@@ -1,0 +1,289 @@
+{
+    "v": 1,
+    "id": "ans-machine-boyle-machine",
+    "subject": "anaesthesia",
+    "module": "ans-machine",
+    "title": "Anaesthesia Workstation: Gas Delivery, Breathing Circuits, and Soda Lime",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Workstation Pressure System Zones",
+            "tx": "**Anaesthesia workstation pressure systems** divide into three distinct operational pressure zones: the high-pressure system receives gas directly from cylinders at up to 137 bar; the intermediate-pressure system receives pipeline gas at 4 bar (400 kPa or 60 psi) or gas stepped down by first-stage regulators; and the low-pressure system extends downstream of flow control valves to the common gas outlet at near-atmospheric pressure.",
+            "say": "Anaesthesia workstation pressure systems divide into three distinct operational pressure zones: the high-pressure system receives gas directly from cylinders at up to 137 bar; the intermediate-pressure system receives pipeline gas at 4 bar (400 kPa or 60 psi) or gas stepped down by first-stage regulators; and the low-pressure system extends downstream of flow control valves to the common gas outlet at near-atmospheric pressure.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pressure System Tier",
+                    "Pressure Boundaries",
+                    "Contained Components",
+                    "Crucial Safety Devices"
+                ],
+                "rows": [
+                    [
+                        "High-Pressure Zone",
+                        "Up to 137 bar (2,000 psi)",
+                        "Hanger yokes, cylinder gauges, first-stage regulators",
+                        "Pin index safety system and pressure relief discs"
+                    ],
+                    [
+                        "Intermediate-Pressure Zone",
+                        "3.5 to 4 bar (50 to 60 psi)",
+                        "Pipeline inlets, O2 flush valve, second-stage regulators",
+                        "Oxygen failure whistle and hypoxic guard linkage"
+                    ],
+                    [
+                        "Low-Pressure Zone",
+                        "Slightly above atmospheric",
+                        "Rotameter flow tubes, vaporisers, common gas outlet",
+                        "Anti-spill check valves and pressure relief valves"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Trace gas through this machine from cylinder to patient and the pressure falls in three landings. The **high pressure system** takes cylinder gas at full storage pressure, the intermediate system works at pipeline pressure, and the low pressure system meters flow to the breathing circuit. Each drop is deliberate, guarded by regulators and check valves. A leak or failure behaves differently in each zone, which is why the schematic is a safety map and not decoration.",
+            "say": "Gas pressure falls through high, intermediate and low pressure zones in the workstation. Each zone fails differently, making the schematic a safety map.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m473-ans-machine-boyle-machine.webp",
+                "alt": "Anaesthesia workstation schematic showing high, intermediate and low pressure systems.",
+                "caption": "Cylinder and pipeline gas are traced through high, intermediate and low pressure zones of the workstation. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Rotameter Thorpe Tube Mechanics",
+            "tx": "**Thorpe tube rotameter flowmeters** feature variable-orifice vertical glass tubes with an internally tapered lumen that widens progressively toward the top. Gas entering from the bottom suspends a bobbin or float: at low flows, gas passage is laminar and governed by gas viscosity (Poiseuille law); at high flows, the orifice is wide, and turbulent flow is determined by gas density. Rotating skirted floats are read at the top edge, whereas spherical ball floats are read at their midpoint.",
+            "say": "Thorpe tube rotameter flowmeters feature variable-orifice vertical glass tubes with an internally tapered lumen that widens progressively toward the top. Gas entering from the bottom suspends a bobbin or float: at low flows, gas passage is laminar and governed by gas viscosity (Poiseuille law); at high flows, the orifice is wide, and turbulent flow is determined by gas density. Rotating skirted floats are read at the top edge, whereas spherical ball floats are read at their midpoint.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Rotating Skirted Bobbin Float",
+                    "points": [
+                        "Fluted head spins continuously in laminar gas stream",
+                        "Flow rate read precisely at upper horizontal rim",
+                        "Sticking indicates dirt or static electrical charges"
+                    ]
+                },
+                "right": {
+                    "title": "Spherical Ball Float",
+                    "points": [
+                        "Simple non-rotating sphere suspended in gas flow",
+                        "Flow rate read strictly at central equator of ball",
+                        "Commonly encountered in transport and auxiliary flowmeters"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Workstation Safety Mechanisms",
+            "tx": "**Workstation hypoxic guard mechanisms** guarantee that oxygen concentration in the delivered fresh gas mixture never drops below 25 percent. The mechanical link-25 system or pneumatic ratio controller interlocks nitrous oxide and oxygen flow control spindles so that advancing nitrous oxide automatically drives the oxygen valve forward, while an audible Ritchie whistle sounds when oxygen supply pipeline pressure plummets below 2 bar.",
+            "say": "Workstation hypoxic guard mechanisms guarantee that oxygen concentration in the delivered fresh gas mixture never drops below 25 percent. The mechanical link-25 system or pneumatic ratio controller interlocks nitrous oxide and oxygen flow control spindles so that advancing nitrous oxide automatically drives the oxygen valve forward, while an audible Ritchie whistle sounds when oxygen supply pipeline pressure plummets below 2 bar.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Oxygen supply pressure falls below 2 bar"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Pneumatic valve vents gas through Ritchie whistle"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Audible high-priority alarm sounds continuously"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Nitrous oxide fail-safe valve shuts off N2O flow completely"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Desflurane Tec 6 Vaporizer",
+            "tx": "**Desflurane Tec 6 vaporizer engineering** differs radically from conventional variable-bypass plenum vaporizers because desflurane has an extraordinarily low boiling point of 22.8 degrees Celsius at atmospheric pressure. To prevent uncontrolled boiling and catastrophic overdosing, the Tec 6 electronically heats liquid desflurane to 39 degrees Celsius and pressurizes its chamber to 2 atmospheres (1,500 mmHg), injecting pure vapor directly into the fresh gas stream.",
+            "say": "Desflurane Tec 6 vaporizer engineering differs radically from conventional variable-bypass plenum vaporizers because desflurane has an extraordinarily low boiling point of 22.8 degrees Celsius at atmospheric pressure. To prevent uncontrolled boiling and catastrophic overdosing, the Tec 6 electronically heats liquid desflurane to 39 degrees Celsius and pressurizes its chamber to 2 atmospheres (1,500 mmHg), injecting pure vapor directly into the fresh gas stream.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Standard Variable-Bypass Vaporizer",
+                    "points": [
+                        "Splits fresh gas into bypass and vaporizing chambers",
+                        "Bimetallic strip provides temperature compensation",
+                        "Wick assembly ensures full vapor saturation without electricity"
+                    ]
+                },
+                "right": {
+                    "title": "Heated Desflurane Tec 6 Vaporizer",
+                    "points": [
+                        "Electrically heated to 39 degrees Celsius at 2 bar",
+                        "Vapor pressure exceeds ambient atmospheric boiling point",
+                        "Differential pressure transducer modulates vapor injection"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Mapleson Breathing Circuit Classification",
+            "tx": "**Mapleson breathing system classification** categorizes semi-closed circuits from A to F based on the spatial arrangement of the fresh gas inlet, reservoir bag, corrugated tubing, and adjustable pressure limiting (APL) valve. Mapleson A (Magill circuit) is the most efficient for spontaneous respiration, requiring fresh gas flow equal to alveolar minute ventilation (approximately 70 to 100 milliliters per kilogram per minute) to prevent rebreathing.",
+            "say": "Mapleson breathing system classification categorizes semi-closed circuits from A to F based on the spatial arrangement of the fresh gas inlet, reservoir bag, corrugated tubing, and adjustable pressure limiting (APL) valve. Mapleson A (Magill circuit) is the most efficient for spontaneous respiration, requiring fresh gas flow equal to alveolar minute ventilation (approximately 70 to 100 milliliters per kilogram per minute) to prevent rebreathing.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Mapleson Type",
+                    "Eponymous Common Name",
+                    "Spontaneous Breathing Efficiency",
+                    "Controlled Ventilation Efficiency"
+                ],
+                "rows": [
+                    [
+                        "Mapleson A",
+                        "Magill circuit",
+                        "Most efficient (FGF = 0.8 to 1x minute volume)",
+                        "Least efficient (demands FGF 2.5 to 3x minute volume)"
+                    ],
+                    [
+                        "Mapleson D",
+                        "Bain coaxial circuit",
+                        "Intermediate (requires FGF 2 to 2.5x minute volume)",
+                        "Most efficient (FGF = 1 to 1.5x minute volume)"
+                    ],
+                    [
+                        "Mapleson E",
+                        "Ayre T-piece (valveless)",
+                        "Excellent for paediatric spontaneous respiration",
+                        "Low resistance; lacks reservoir bag"
+                    ],
+                    [
+                        "Mapleson F",
+                        "Jackson-Rees circuit",
+                        "Paediatric breathing with open tail bag",
+                        "Controlled ventilation via manual tail bag occlusion"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Bain Coaxial Circuit Features",
+            "tx": "**Bain coaxial circuit construction** represents a modified Mapleson D system where a narrow inner plastic tube delivers fresh gas directly to the patient airway connection, surrounded by a wider outer corrugated tube conveying exhaled gases back to the APL valve. Exhaled gases warm the incoming fresh gas, but crack rupture of the inner tube causes severe unrecognized dead space rebreathing and lethal hypercapnia (Pethick test detects inner tube disconnection).",
+            "say": "Bain coaxial circuit construction represents a modified Mapleson D system where a narrow inner plastic tube delivers fresh gas directly to the patient airway connection, surrounded by a wider outer corrugated tube conveying exhaled gases back to the APL valve. Exhaled gases warm the incoming fresh gas, but crack rupture of the inner tube causes severe unrecognized dead space rebreathing and lethal hypercapnia (Pethick test detects inner tube disconnection).",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Occlude patient end of Bain circuit"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Depress machine oxygen flush valve"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Venturi effect draws gas from outer tube"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Reservoir bag flattens confirming intact inner tube"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Circle System and Soda Lime",
+            "tx": "**Circle system CO2 absorption** enables closed and low-flow anaesthesia (fresh gas flows under 1 liter per minute), drastically economizing volatile anaesthetic agents while preserving airway humidity. Soda lime granules (80 percent calcium hydroxide, 4 percent sodium hydroxide, 1 percent potassium hydroxide, and 15 percent water) absorb exhaled carbon dioxide in an exothermic neutralization reaction, forming calcium carbonate and water.",
+            "say": "Circle system CO2 absorption enables closed and low-flow anaesthesia (fresh gas flows under 1 liter per minute), drastically economizing volatile anaesthetic agents while preserving airway humidity. Soda lime granules (80 percent calcium hydroxide, 4 percent sodium hydroxide, 1 percent potassium hydroxide, and 15 percent water) absorb exhaled carbon dioxide in an exothermic neutralization reaction, forming calcium carbonate and water.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Chemical Constituent",
+                    "Percentage Composition",
+                    "Chemical Reaction Function",
+                    "Exhaustion Warning Indicator"
+                ],
+                "rows": [
+                    [
+                        "Calcium Hydroxide",
+                        "76 to 80 percent",
+                        "Primary reactant binding carbon dioxide",
+                        "Forms insoluble calcium carbonate"
+                    ],
+                    [
+                        "Sodium Hydroxide",
+                        "3 to 4 percent",
+                        "Catalytic activator accelerating carbonic reaction",
+                        "Regenerates during rest periods"
+                    ],
+                    [
+                        "Water Moisture",
+                        "14 to 19 percent",
+                        "Forms essential carbonic acid medium",
+                        "Dry absorbent promotes carbon monoxide production"
+                    ],
+                    [
+                        "Ethyl Violet Dye",
+                        "0.03 percent",
+                        "pH indicator (colorless to deep violet)",
+                        "Turns purple when absorbent pH drops below 10.3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Compound A and Carbon Monoxide Risks",
+            "tx": "**Toxic degradation hazards of volatile agents** arise during interaction with carbon dioxide absorbents: sevoflurane reacts with dry alkaline absorbents containing strong bases to produce Compound A (fluoromethyl-2,2-difluoro-1-trifluoromethyl vinyl ether), which induces nephrotoxicity in rats, mandating fresh gas flows of at least 1 to 2 liters per minute. Conversely, desflurane and isoflurane exposed to desiccated Baralyme generate dangerous carboxyhaemoglobin-producing carbon monoxide.",
+            "say": "Toxic degradation hazards of volatile agents arise during interaction with carbon dioxide absorbents: sevoflurane reacts with dry alkaline absorbents containing strong bases to produce Compound A (fluoromethyl-2,2-difluoro-1-trifluoromethyl vinyl ether), which induces nephrotoxicity in rats, mandating fresh gas flows of at least 1 to 2 liters per minute. Conversely, desflurane and isoflurane exposed to desiccated Baralyme generate dangerous carboxyhaemoglobin-producing carbon monoxide.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Compound A Generation",
+                    "points": [
+                        "Reaction between sevoflurane and dry strong-base absorbents",
+                        "Directly toxic to proximal renal tubule cells in rodent models",
+                        "Prevented by maintaining fresh gas flow greater than 1-2 L/min"
+                    ]
+                },
+                "right": {
+                    "title": "Carbon Monoxide Generation",
+                    "points": [
+                        "Desflurane or isoflurane exposed to bone-dry alkaline absorbent",
+                        "Binds hemoglobin with 200-fold affinity forming HbCO",
+                        "Avoided by replacing desiccated absorbents and Monday flushes"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

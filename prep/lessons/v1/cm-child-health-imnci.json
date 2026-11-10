@@ -1,0 +1,144 @@
+{
+  "v": 1,
+  "id": "cm-child-health-imnci",
+  "subject": "community-medicine",
+  "module": "cm-child-health",
+  "title": "IMNCI, RBSK, Growth Monitoring, and Child Survival Strategy",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Why IMNCI was created",
+      "tx": "**Integrated Management of Neonatal and Childhood Illness**, shortened to IMNCI, adapts the global IMCI strategy to India by adding the newborn week, home visits, and community workers. Most under five deaths come from a short list of conditions (pneumonia, diarrhoea, malaria, measles, sepsis, and severe malnutrition) that often coexist, so one integrated assessment outperforms separate vertical programmes in busy peripheral clinics.",
+      "say": "IMNCI handles the newborn and the young child in one integrated visit. Sick children usually have overlapping problems, so assessment must be integrated too.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "i1", "label": "Check danger signs in every sick child" },
+          { "id": "i2", "label": "Classify by colour: pink, yellow, green" },
+          { "id": "i3", "label": "Treat at facility or refer urgently" }
+        ],
+        "edges": [["i1", "i2"], ["i2", "i3"]]
+      }
+    },
+    {
+      "title": "The colour classification system",
+      "tx": "Each main symptom ends in a colour coded **IMNCI classification**: pink means severe disease needing urgent referral after a first dose, yellow means treatment at the facility with a named drug and review date, and green means home care with feeding advice and clear return instructions. Workers use chart booklets for two age bands: the young infant up to two months, and the child from two months to five years.",
+      "say": "Pink means refer urgently, yellow means treat here, green means care at home. The same colour logic covers the young infant and the older child charts.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Colour", "Meaning and action"],
+        "rows": [
+          ["Pink", "Severe classification, pre referral dose, urgent hospital transfer"],
+          ["Yellow", "Facility treatment with oral antibiotic or ORS and fixed review"],
+          ["Green", "Home care, feeding counsel, return if danger signs appear"]
+        ]
+      }
+    },
+    {
+      "title": "Fast breathing cut offs for pneumonia",
+      "tx": "Respiratory rate counted for a full minute while the child is calm decides pneumonia: the **fast breathing cut offs in IMNCI** are sixty per minute below two months, fifty from two to twelve months, and forty from one to five years. Chest indrawing or any danger sign upgrades the illness to severe pneumonia. Amoxicillin is the first line oral drug for non severe pneumonia at peripheral level.",
+      "say": "Count breaths for one full minute. Sixty, fifty, and forty are the cut offs by age band, and chest indrawing makes it severe pneumonia.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Age band", "Fast breathing at or above"],
+        "rows": [
+          ["Under 2 months", "60 breaths per minute"],
+          ["2 to 12 months", "50 breaths per minute"],
+          ["1 to 5 years", "40 breaths per minute"]
+        ]
+      }
+    },
+    {
+      "title": "Diarrhoea: dehydration classes and plans",
+      "tx": "Skin pinch, sunken eyes, thirst, and mental state sort diarrhoea into severe dehydration, some dehydration, or no dehydration under **IMNCI diarrhoea management**. Severe dehydration gets rapid intravenous fluids as Plan C, some dehydration gets oral rehydration solution over four hours as Plan B, and no dehydration gets home fluids as Plan A. Zinc for ten to fourteen days shortens the episode and protects against the next one.",
+      "say": "Dehydration class decides the plan: intravenous fluids, oral rehydration over four hours, or home fluids. Add zinc for ten to fourteen days in every case.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Some dehydration (Plan B)",
+          "points": ["Restless, thirsty, drinks eagerly", "Skin pinch goes back slowly", "ORS 75 millilitres per kilogram over 4 hours"]
+        },
+        "right": {
+          "title": "Severe dehydration (Plan C)",
+          "points": ["Lethargic or unconscious, drinks poorly", "Skin pinch returns in 2 seconds or more", "Rapid intravenous Ringer lactate by age schedule"]
+        }
+      }
+    },
+    {
+      "title": "Young infant: possible severe bacterial infection",
+      "tx": "A sick infant under two months with fast breathing, severe chest indrawing, fever or hypothermia, poor feeding, or convulsions has **possible severe bacterial infection** in IMNCI language and needs hospital referral after a first dose of intramuscular gentamicin and oral amoxicillin where protocols allow. Local bacterial infection such as umbilical redness or skin pustules stays yellow with oral treatment and review in two days.",
+      "say": "In the young infant, poor feeding, temperature instability, or severe indrawing means possible severe bacterial infection. Give the first dose and refer without delay.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "y1", "label": "Young infant with danger or severe signs" },
+          { "id": "y2", "label": "First dose gentamicin plus amoxicillin" },
+          { "id": "y3", "label": "Keep warm and refer to hospital" }
+        ],
+        "edges": [["y1", "y2"], ["y2", "y3"]]
+      }
+    },
+    {
+      "title": "Growth monitoring and the growth chart",
+      "tx": "Monthly weighing plotted on the World Health Organization based **growth chart in child health** turns nutrition into a visible line for the mother: rising along a channel is healthy, a flat line warns, and a falling line demands action. India uses separate charts for boys and girls in the Mother and Child Protection card, and mid upper arm circumference below eleven point five centimetres flags severe acute malnutrition in children six months to five years.",
+      "say": "The direction of the growth line matters more than one weight. Flat is a warning, falling is danger, and arm circumference under eleven point five centimetres means severe acute malnutrition.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Signal", "Interpretation"],
+        "rows": [
+          ["Line rising parallel to channels", "Healthy growth, continue feeding advice"],
+          ["Flat line over two months", "Growth faltering, find cause and counsel"],
+          ["Falling line crossing channels", "Urgent nutrition and illness work up"],
+          ["MUAC below 11.5 centimetres", "Severe acute malnutrition, therapeutic feeding"]
+        ]
+      }
+    },
+    {
+      "title": "RBSK and the four Ds",
+      "tx": "**Rashtriya Bal Swasthya Karyakram**, the national child health screening programme, sends mobile teams to anganwadis and schools to screen children up to eighteen years for the four Ds: defects at birth, deficiencies, diseases of childhood, and developmental delays including disability. Children found positive move free of cost to district early intervention centres for confirmation, surgery, therapy, or nutritional rehabilitation.",
+      "say": "RBSK teams screen every child for birth defects, deficiencies, diseases, and developmental delay. Treatment at district centres is free for referred children.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Screened by mobile teams",
+          "points": ["Birth defects such as cleft lip and club foot", "Anaemia and vitamin deficiencies", "Developmental delay and vision or hearing loss"]
+        },
+        "right": {
+          "title": "Managed at DEIC",
+          "points": ["Confirmatory tests and specialist review", "Free surgery and therapy", "Early stimulation and follow up plan"]
+        }
+      }
+    },
+    {
+      "title": "Child survival and the first thousand days",
+      "tx": "Growth and brain development are fastest from conception to the second birthday, the window called the **first thousand days of life**, when undernutrition causes stunting that later feeding cannot fully reverse. India's child survival strategy therefore bundles antenatal nutrition, institutional delivery, early breastfeeding, complementary feeding from six months, immunisation, and prompt illness care into one continuum watched through the National Family Health Survey.",
+      "say": "The first thousand days decide lifelong growth and learning. Nutrition, vaccines, and quick treatment in this window prevent stunting that cannot be undone later.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "t1", "label": "Antenatal nutrition and safe delivery" },
+          { "id": "t2", "label": "Exclusive breastfeeding then complementary food" },
+          { "id": "t3", "label": "Immunisation plus prompt illness care" }
+        ],
+        "edges": [["t1", "t2"], ["t2", "t3"]]
+      }
+    },
+    {
+      "title": "Counselling and follow up discipline",
+      "tx": "Classification fails without **IMNCI counselling and follow up**: the worker teaches the mother how to give oral drugs, how much fluid to offer, which danger signs demand an immediate return, and the exact review day written on the card. Feeding assessment corrects dilution of milk, early water, and bottle use. Every yellow classification carries a named follow up interval, commonly two, five, or fourteen days by condition.",
+      "say": "End every visit with drug teaching, return signs, and a written review date. Good counselling is what turns a classification into a cured child.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Counsel point", "Example instruction"],
+        "rows": [
+          ["Drug teaching", "Show first dose, mark doses on the packet"],
+          ["Fluid advice", "Extra fluid with every loose stool"],
+          ["Return at once", "Unable to drink, blood in stool, fever, fast breathing"],
+          ["Fixed review", "Pneumonia in 2 days, dysentery in 2 days, anaemia in 14 days"]
+        ]
+      }
+    }
+  ]
+}

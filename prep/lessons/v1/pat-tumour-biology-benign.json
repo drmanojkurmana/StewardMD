@@ -1,208 +1,219 @@
 {
-  "v": 1,
-  "module": "pat-tumour-biology",
-  "subject": "pathology",
-  "title": "Benign and Malignant Tumours, Anaplasia, Dysplasia, and Hamartoma",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Tumour nomenclature encodes behaviour: benign epithelial growths are adenomas or papillomas, benign mesenchymal growths take the suffix oma, while carcinomas arise from epithelium and sarcomas from mesenchyme. A tumour that stays localised, grows slowly, and never spreads is classified **benign**, however large or awkwardly placed it becomes.",
-      "say": "Benign tumours grow slowly, stay localised, and never metastasise, even when their size causes local trouble.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Benign",
-          "Malignant"
-        ],
-        "rows": [
-          [
-            "Growth",
-            "Slow, expansile, encapsulated",
-            "Rapid, infiltrative, unencapsulated"
-          ],
-          [
-            "Differentiation",
-            "Resembles tissue of origin",
-            "Variable, may be anaplastic"
-          ],
-          [
-            "Spread",
-            "Never metastasises",
-            "Invades and metastasises"
-          ],
-          [
-            "Effect",
-            "Local pressure effects",
-            "Destruction, cachexia, death"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "pat-tumour-biology",
+ "subject": "pathology",
+ "title": "Benign and Malignant Tumours, Anaplasia, Dysplasia, and Hamartoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Tumour nomenclature encodes behaviour: benign epithelial growths are adenomas or papillomas, benign mesenchymal growths take the suffix oma, while carcinomas arise from epithelium and sarcomas from mesenchyme. A tumour that stays localised, grows slowly, and never spreads is classified **benign**, however large or awkwardly placed it becomes.",
+   "say": "Benign tumours grow slowly, stay localised, and never metastasise, even when their size causes local trouble.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Benign",
+     "Malignant"
+    ],
+    "rows": [
+     [
+      "Growth",
+      "Slow, expansile, encapsulated",
+      "Rapid, infiltrative, unencapsulated"
+     ],
+     [
+      "Differentiation",
+      "Resembles tissue of origin",
+      "Variable, may be anaplastic"
+     ],
+     [
+      "Spread",
+      "Never metastasises",
+      "Invades and metastasises"
+     ],
+     [
+      "Effect",
+      "Local pressure effects",
+      "Destruction, cachexia, death"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant tumours lose the orderly resemblance to their parent tissue, showing pleomorphism, hyperchromatic nuclei, high nuclear to cytoplasmic ratios, abnormal mitoses, and loss of polarity. That complete loss of differentiation, the morphological hallmark of malignancy at its most aggressive, is **anaplasia**.",
+   "say": "Anaplasia, the total loss of differentiation with pleomorphism and abnormal mitoses, marks the most aggressive malignant tumours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Well differentiated",
+     "points": [
+      "Closely resembles parent tissue",
+      "Orderly maturation preserved",
+      "Usually slower behaviour"
+     ]
     },
-    {
-      "tx": "Malignant tumours lose the orderly resemblance to their parent tissue, showing pleomorphism, hyperchromatic nuclei, high nuclear to cytoplasmic ratios, abnormal mitoses, and loss of polarity. That complete loss of differentiation, the morphological hallmark of malignancy at its most aggressive, is **anaplasia**.",
-      "say": "Anaplasia, the total loss of differentiation with pleomorphism and abnormal mitoses, marks the most aggressive malignant tumours.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Well differentiated",
-          "points": [
-            "Closely resembles parent tissue",
-            "Orderly maturation preserved",
-            "Usually slower behaviour"
-          ]
-        },
-        "right": {
-          "title": "Anaplastic",
-          "points": [
-            "No resemblance to parent tissue",
-            "Pleomorphism, abnormal mitoses, giant cells",
-            "Aggressive growth and spread"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Before epithelium becomes invasive cancer it often passes through disordered growth with cytological atypia confined above an intact basement membrane, graded from mild to severe by the thickness involved. Full thickness atypia without invasion is carcinoma in situ, and the precursor spectrum is **epithelial dysplasia**.",
-      "say": "Dysplasia is disordered atypical growth still confined by the basement membrane; full thickness change is carcinoma in situ.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/pat-cervix-uterus-gen1.webp",
-        "alt": "Stained cervical epithelium with atypical cells throughout thickness, annotated for CIN3 atypia, intact basement membrane and uninvaded stroma.",
-        "caption": "Cervical and uterine pathology: HPV, carcinoma and leiomyoma Stained cervical epithelium with atypical cells throughout thickness, annotated for CIN3 atypia, intact basement membrane and uninvaded stroma. Cervical histology showing full thickness atypia with intact basement membrane. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The cervix demonstrates the dysplasia sequence perfectly: human papillomavirus oncoproteins disable p53 and RB, producing cervical intraepithelial neoplasia that screening detects and excision cures before invasion. Once tumour cells breach the basement membrane the lesion is invasive carcinoma; the preinvasive stage remains **carcinoma in situ**.",
-      "say": "Cervical screening works because carcinoma in situ can be excised years before basement membrane invasion occurs.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "HPV oncoproteins disable p53 and RB"
-          },
-          {
-            "id": "b",
-            "label": "Dysplasia grades through epithelial thickness"
-          },
-          {
-            "id": "c",
-            "label": "Full thickness carcinoma in situ"
-          },
-          {
-            "id": "d",
-            "label": "Basement membrane breach means invasion"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "A hamartoma is a disorganised overgrowth of tissues normally present at a site, growing with the patient and lacking true neoplastic autonomy; pulmonary chondroid hamartomas and infantile haemangiomas are familiar examples. Because its elements belong at that site, the lesion is a **hamartoma** rather than a true neoplasm.",
-      "say": "A hamartoma is disorganised native tissue growing with the patient, not a true autonomous neoplasm.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Hamartoma",
-          "points": [
-            "Native tissues, disorganised arrangement",
-            "Grows with the patient, then stops",
-            "Examples: lung chondroid hamartoma"
-          ]
-        },
-        "right": {
-          "title": "True benign neoplasm",
-          "points": [
-            "Single clonal proliferation",
-            "Autonomous continued growth",
-            "Examples: lipoma, leiomyoma, adenoma"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Uterine leiomyomas, benign smooth muscle tumours, illustrate benign behaviour at scale: well circumscribed, whorled, slow growing, hormone responsive, and cured by excision despite occasionally huge size. Their rubbery white whorled cut surface is instantly recognisable in the gross room; the tumour is a **leiomyoma**.",
-      "say": "Leiomyomas are the everyday benign tumour: circumscribed, whorled, slow growing, and cured by removal.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/cervix-uterus-hpv-endometrial-leiomyoma-fig1.webp",
-        "alt": "Cervical and uterine pathology with leiomyoma",
-        "caption": "Uterine leiomyoma among cervical and uterine pathology specimens, showing benign circumscribed growth."
-      }
-    },
-    {
-      "tx": "Benign does not mean harmless: a benign meningioma can kill by location, a parathyroid adenoma by hypercalcaemia, and a colonic adenoma by transforming into carcinoma. Judging a tumour therefore needs behaviour, site, secretions, and malignant potential together, summarised by clinicians as **clinical tumour assessment**.",
-      "say": "Benign describes spread, not safety; site, secretions, and transformation risk decide how dangerous a benign tumour is.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Benign tumour",
-          "Harm despite no spread",
-          "Lesson"
-        ],
-        "rows": [
-          [
-            "Meningioma",
-            "Brain compression by location",
-            "Site can kill without metastasis"
-          ],
-          [
-            "Parathyroid adenoma",
-            "Severe hypercalcaemia",
-            "Secretions cause systemic harm"
-          ],
-          [
-            "Colonic adenoma",
-            "Adenoma carcinoma sequence",
-            "Precursors need removal"
-          ],
-          [
-            "Pituitary adenoma",
-            "Vision loss, hormone excess",
-            "Surveillance and surgery by effect"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Grading and naming only help when the underlying biology is respected: encapsulation, differentiation, mitotic rate, and necrosis predict behaviour far better than size alone. A small anaplastic tumour outranks a huge lipoma in danger every time; the pathologist's synthesis of these features is the **histological grade**.",
-      "say": "Differentiation and mitotic activity predict behaviour; a huge lipoma is safer than a small anaplastic cancer.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Reassuring morphology",
-          "points": [
-            "Encapsulated, uniform cells",
-            "Rare normal mitoses, no necrosis",
-            "Complete excision curative"
-          ]
-        },
-        "right": {
-          "title": "Alarming morphology",
-          "points": [
-            "Infiltrative edges, anaplasia",
-            "Abnormal mitoses and necrosis",
-            "Staging and adjuvant therapy needed"
-          ]
-        }
-      }
+    "right": {
+     "title": "Anaplastic",
+     "points": [
+      "No resemblance to parent tissue",
+      "Pleomorphism, abnormal mitoses, giant cells",
+      "Aggressive growth and spread"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Between normal epithelium and invasive cancer sits a reversible warning stage. **Epithelial dysplasia** shows disordered growth, lost polarity and atypical nuclei still confined above the basement membrane, graded by how much of the thickness is involved. Removing the irritant or the lesion at this stage prevents cancer rather than treating it. A dysplasia report therefore always deserves a completed plan, documented, instead of a surprised review years later.",
+   "say": "Dysplasia is disordered atypical growth still above the basement membrane, graded by thickness involved. Removing it prevents rather than treats cancer.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m991-pat-tumour-biology-benign.webp",
+    "alt": "Histology image of epithelial dysplasia with atypical cells in the lower epithelial layers.",
+    "caption": "Disordered atypical cells fill the lower epithelium above an intact basement membrane. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Before epithelium becomes invasive cancer it often passes through disordered growth with cytological atypia confined above an intact basement membrane, graded from mild to severe by the thickness involved. Full thickness atypia without invasion is carcinoma in situ, and the precursor spectrum is **epithelial dysplasia**.",
+   "say": "Dysplasia is disordered atypical growth still confined by the basement membrane; full thickness change is carcinoma in situ.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-cervix-uterus-gen1.webp",
+    "alt": "Stained cervical epithelium with atypical cells throughout thickness, annotated for CIN3 atypia, intact basement membrane and uninvaded stroma.",
+    "caption": "Stained cervical epithelium with atypical cells throughout thickness, annotated for CIN3 atypia, intact basement membrane and uninvaded stroma. Cervical histology showing full thickness atypia with intact basement membrane. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The cervix demonstrates the dysplasia sequence perfectly: human papillomavirus oncoproteins disable p53 and RB, producing cervical intraepithelial neoplasia that screening detects and excision cures before invasion. Once tumour cells breach the basement membrane the lesion is invasive carcinoma; the preinvasive stage remains **carcinoma in situ**.",
+   "say": "Cervical screening works because carcinoma in situ can be excised years before basement membrane invasion occurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HPV oncoproteins disable p53 and RB"
+     },
+     {
+      "id": "b",
+      "label": "Dysplasia grades through epithelial thickness"
+     },
+     {
+      "id": "c",
+      "label": "Full thickness carcinoma in situ"
+     },
+     {
+      "id": "d",
+      "label": "Basement membrane breach means invasion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A hamartoma is a disorganised overgrowth of tissues normally present at a site, growing with the patient and lacking true neoplastic autonomy; pulmonary chondroid hamartomas and infantile haemangiomas are familiar examples. Because its elements belong at that site, the lesion is a **hamartoma** rather than a true neoplasm.",
+   "say": "A hamartoma is disorganised native tissue growing with the patient, not a true autonomous neoplasm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hamartoma",
+     "points": [
+      "Native tissues, disorganised arrangement",
+      "Grows with the patient, then stops",
+      "Examples: lung chondroid hamartoma"
+     ]
+    },
+    "right": {
+     "title": "True benign neoplasm",
+     "points": [
+      "Single clonal proliferation",
+      "Autonomous continued growth",
+      "Examples: lipoma, leiomyoma, adenoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Uterine leiomyomas, benign smooth muscle tumours, illustrate benign behaviour at scale: well circumscribed, whorled, slow growing, hormone responsive, and cured by excision despite occasionally huge size. Their rubbery white whorled cut surface is instantly recognisable in the gross room; the tumour is a **leiomyoma**.",
+   "say": "Leiomyomas are the everyday benign tumour: circumscribed, whorled, slow growing, and cured by removal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervix-uterus-hpv-endometrial-leiomyoma-fig1.webp",
+    "alt": "Cervical and uterine pathology with leiomyoma",
+    "caption": "Uterine leiomyoma among cervical and uterine pathology specimens, showing benign circumscribed growth."
+   }
+  },
+  {
+   "tx": "Benign does not mean harmless: a benign meningioma can kill by location, a parathyroid adenoma by hypercalcaemia, and a colonic adenoma by transforming into carcinoma. Judging a tumour therefore needs behaviour, site, secretions, and malignant potential together, summarised by clinicians as **clinical tumour assessment**.",
+   "say": "Benign describes spread, not safety; site, secretions, and transformation risk decide how dangerous a benign tumour is.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Benign tumour",
+     "Harm despite no spread",
+     "Lesson"
+    ],
+    "rows": [
+     [
+      "Meningioma",
+      "Brain compression by location",
+      "Site can kill without metastasis"
+     ],
+     [
+      "Parathyroid adenoma",
+      "Severe hypercalcaemia",
+      "Secretions cause systemic harm"
+     ],
+     [
+      "Colonic adenoma",
+      "Adenoma carcinoma sequence",
+      "Precursors need removal"
+     ],
+     [
+      "Pituitary adenoma",
+      "Vision loss, hormone excess",
+      "Surveillance and surgery by effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Grading and naming only help when the underlying biology is respected: encapsulation, differentiation, mitotic rate, and necrosis predict behaviour far better than size alone. A small anaplastic tumour outranks a huge lipoma in danger every time; the pathologist's synthesis of these features is the **histological grade**.",
+   "say": "Differentiation and mitotic activity predict behaviour; a huge lipoma is safer than a small anaplastic cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reassuring morphology",
+     "points": [
+      "Encapsulated, uniform cells",
+      "Rare normal mitoses, no necrosis",
+      "Complete excision curative"
+     ]
+    },
+    "right": {
+     "title": "Alarming morphology",
+     "points": [
+      "Infiltrative edges, anaplasia",
+      "Abnormal mitoses and necrosis",
+      "Staging and adjuvant therapy needed"
+     ]
+    }
+   }
+  }
+ ]
 }

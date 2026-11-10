@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "id": "cm-malaria-malaria",
+ "subject": "community-medicine",
+ "module": "cm-malaria",
+ "title": "Malaria Epidemiology: Transmission, Vectors and Surveillance Indices",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Malaria parasites and global burden",
+   "tx": "Human **malaria transmission** is mediated by protozoa of the genus Plasmodium, primarily Plasmodium falciparum and Plasmodium vivax across the Indian subcontinent, with Plasmodium malariae and Plasmodium ovale occurring infrequently. Infection spreads through the infective bite of female Anopheline mosquitoes during nocturnal blood meals, introducing sporozoites that initiate pre-erythrocytic hepatic schizogony before invading host erythrocytes.",
+   "say": "Plasmodium falciparum and vivax account for the vast majority of Indian malaria. Female Anopheles mosquitoes inject sporozoites during nighttime feeding, launching liver and red cell cycles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/malaria-fig1.webp",
+    "alt": "Diagram illustrating the Plasmodium parasite life cycle through mosquito vector and human host",
+    "caption": "Plasmodium life cycle spanning mosquito vector and human hepatic and erythrocytic schizogony. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Rural vector biology: Anopheles culicifacies",
+   "tx": "The mosquito **Anopheles culicifacies** serves as the chief vector of rural and peri-urban malaria across peninsular and central India, accounting for roughly sixty to seventy percent of rural transmission. It breeds preferentially in clean, unpolluted water bodies such as irrigation channels, riverbed pools, seepages, borrow pits and freshly flooded agricultural fields, displaying zoophilic biting patterns but feeding readily on sleeping humans.",
+   "say": "Anopheles culicifacies drives rural malaria in India. It breeds in clean irrigation channels and riverbed pools, biting indoors during evening and night hours.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vector parameter", "Characteristic in nature", "Programmatic implication"],
+    "rows": [
+     ["Primary habitat", "Rural agricultural belts", "Dominates rural transmission"],
+     ["Breeding sites", "Clean streams and irrigation canals", "Surges after monsoon rains"],
+     ["Feeding preference", "Zoophilic with opportunistic human bites", "Indoor resting allows IRS targeting"],
+     ["Insecticide status", "Widespread resistance to organochlorines", "Requires synthetic pyrethroid sprays"]
+    ]
+   }
+  },
+  {
+   "title": "Urban malaria vector: Anopheles stephensi",
+   "tx": "In municipal settings, **Anopheles stephensi** acts as the primary urban malaria vector, demonstrating remarkable adaptation to domestic artificial water storage collections. It proliferates in overhead storage tanks, masonry curing tanks at active construction sites, domestic cisterns, ornamental fountains, desert coolers and shallow wells, persisting despite high human population densities and intensive urban construction activities.",
+   "say": "Anopheles stephensi thrives in towns and cities. It colonises overhead masonry tanks and construction site curing water, maintaining transmission in densely populated streets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anopheles culicifacies (rural)",
+     "points": ["Breeds in clean riverbeds and canals", "Rural agricultural plain distribution", "Indoor rester in cattle sheds and huts"]
+    },
+    "right": {
+     "title": "Anopheles stephensi (urban)",
+     "points": ["Breeds in overhead tanks and cisterns", "Towns, ports and building sites", "Adapts to artificial domestic water storage"]
+    }
+   }
+  },
+  {
+   "title": "Annual parasite incidence as an endemicity yardstick",
+   "tx": "The **annual parasite incidence** represents the most reliable epidemiological index for classifying malaria endemicity, calculated as the total number of confirmed laboratory-positive cases per year divided by the total population under surveillance multiplied by one thousand. An incidence below one case per thousand marks low transmission suitable for elimination, whereas an incidence of two or more demands intensive focal vector control.",
+   "say": "Annual parasite incidence measures confirmed cases per thousand population yearly. An incidence below one signals pre-elimination, while two or higher triggers intensive vector control.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Endemicity strata", "API threshold", "Strategic action"],
+    "rows": [
+     ["Category 1 (Elimination)", "API less than 1 per 1,000", "Case investigation and focal tracking"],
+     ["Category 2 (Pre-elimination)", "API between 1 and 2 per 1,000", "Active case search and targeted LLINs"],
+     ["Category 3 (Intensified control)", "API 2 or greater per 1,000", "Universal IRS rounds and mass LLIN coverage"]
+    ]
+   }
+  },
+  {
+   "title": "Annual blood examination rate: assessing case finding vigour",
+   "tx": "Surveillance adequacy must be confirmed using the **annual blood examination rate**, which measures the percentage of the resident population screened through blood slides or rapid tests over one full calendar year. National vector control guidelines require a minimum operational examination rate of ten percent in endemic areas, ensuring that a low reported case count reflects true interruption rather than inadequate surveillance.",
+   "say": "The annual blood examination rate measures the percentage of people tested for malaria each year. An area must test at least ten percent of residents to prove cases are not missed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Annual blood examination rate >= 10%"},
+     {"id": "b", "label": "Reliable denominator coverage confirmed"},
+     {"id": "c", "label": "Calculated API reflects true transmission"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Slide positivity rate and falciparum proportions",
+   "tx": "The **slide positivity rate** expresses the percentage of examined blood slides that demonstrate malaria parasites on microscopic review, serving as an immediate indicator of seasonal surges and focal transmission flare-ups. Within positive examinations, the slide falciparum rate calculates the proportion attributable to Plasmodium falciparum, guiding local therapeutic stockpiles because falciparum carries lethal microvascular sequelae that require prompt combination therapy.",
+   "say": "Slide positivity rate reveals the percentage of examined slides containing parasites. The falciparum proportion determines antimalarial stockpiles because falciparum causes life-threatening complications.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Surveillance index", "Mathematical formula", "Epidemiological value"],
+    "rows": [
+     ["Slide Positivity Rate (SPR)", "(Total positive slides / Total examined) x 100", "Tracks transmission surges and outbreaks"],
+     ["Slide Falciparum Rate (SFR)", "(Falciparum positive slides / Total examined) x 100", "Measures burden of life-threatening species"],
+     ["Pf Percentage", "(Falciparum positive / Total positive) x 100", "Determines ACT drug supply logistics"]
+    ]
+   }
+  },
+  {
+   "title": "Severe malaria and microvascular complications",
+   "tx": "Lethal clinical manifestations develop during **severe malaria**, almost exclusively triggered by Plasmodium falciparum due to cytoadherence of knob-bearing infected erythrocytes to microvascular endothelial receptors, including ICAM-1 and CD36. This sequestration causes microvascular occlusion, tissue hypoxia and cytokine release, precipitating unarousable coma in cerebral malaria, non-cardiogenic pulmonary oedema, acute tubular necrosis, severe normocytic anaemia and profound lactic acidosis.",
+   "say": "Severe malaria arises when falciparum-parasitised red cells adhere to capillary linings. Sequestration chokes blood flow to the brain, kidneys and lungs, causing coma and acidosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/malaria-fig2.webp",
+    "alt": "Pathology diagram of cerebral malaria microvascular sequestration in capillaries",
+    "caption": "Microvascular sequestration of parasitised erythrocytes in cerebral capillaries during falciparum malaria. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Integrated vector management strategies",
+   "tx": "To disrupt transmission, health authorities deploy **indoor residual spraying** using synthetic pyrethroids or organophosphates, covering internal walls and ceilings where female mosquitoes rest after blood meals. In high-burden villages, distribution of long-lasting insecticidal nets provides physical and chemical barriers for three years, while urban authorities seed overhead tanks with larvivorous fish, specifically Gambusia affinis and Poecilia reticulata, for eco-friendly biological larval control.",
+   "say": "Indoor spraying coats resting walls with insecticide, while long-lasting bed nets protect sleepers. In cities, larvivorous fish clear larvae from overhead tanks without chemicals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult mosquito control",
+     "points": ["Indoor residual spraying on walls", "Long-lasting insecticidal nets", "Thermal fogging during outbreaks"]
+    },
+    "right": {
+     "title": "Larval mosquito control",
+     "points": ["Temephos chemical larvicide", "Gambusia and Poecilia biological fish", "Covering overhead domestic tanks"]
+    }
+   }
+  },
+  {
+   "title": "Surveillance architecture from community to district",
+   "tx": "Public health teams maintain **active surveillance** through fortnightly household visits conducted by multi-purpose health workers, inquiring about fever, preparing blood smears and administering rapid tests at the doorstep. Concurrently, passive surveillance captures patients seeking care at primary health centres and hospitals, with all verified cases entered into the online Integrated Health Information Platform to launch focal vector control within forty-eight hours.",
+   "say": "Multi-purpose workers visit homes every fortnight to detect fever cases and test blood. Concurrently, clinics test walk-in patients, logging every case into the digital surveillance portal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Fortnightly household fever screening"},
+     {"id": "b", "label": "On-site blood smear and rapid test"},
+     {"id": "c", "label": "Immediate treatment and IHIP reporting"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

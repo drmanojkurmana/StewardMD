@@ -1,223 +1,245 @@
 {
-  "v": 1,
-  "module": "pat-acute-inflammation",
-  "subject": "pathology",
-  "title": "Chediak-Higashi Syndrome, Inflammatory Exudates, and Serous Inflammation",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "A rare autosomal recessive disorder of intracellular vesicle trafficking resulting from mutations in the lysosomal trafficking regulator gene is Chediak-Higashi syndrome. The defective LYST protein in **Chediak-Higashi syndrome** disrupts organelle membrane fission and fusion, producing giant, abnormal, non-functional lysosomal granules across multiple cell lineages.",
-      "say": "Chediak-Higashi syndrome is caused by LYST mutations, producing giant non-functional lysosomes.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "lyst_mutation",
-            "label": "Autosomal Recessive Mutation in LYST Gene on Chromosome 1q42"
-          },
-          {
-            "id": "membrane_fusion_block",
-            "label": "Failure of Controlled Vesicular Fission and Microtubule Docking"
-          },
-          {
-            "id": "giant_granules",
-            "label": "Uncontrolled Fusion Generates Megagranules in Neutrophils and Melanocytes"
-          },
-          {
-            "id": "clinical_deficits",
-            "label": "Produces Immunodeficiency, Partial Oculocutaneous Albinism, and Neuropathy"
-          }
-        ],
-        "edges": [
-          [
-            "lyst_mutation",
-            "membrane_fusion_block"
-          ],
-          [
-            "membrane_fusion_block",
-            "giant_granules"
-          ],
-          [
-            "giant_granules",
-            "clinical_deficits"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "pat-acute-inflammation",
+ "subject": "pathology",
+ "title": "Chediak-Higashi Syndrome, Inflammatory Exudates, and Serous Inflammation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A rare autosomal recessive disorder of intracellular vesicle trafficking resulting from mutations in the lysosomal trafficking regulator gene is Chediak-Higashi syndrome. The defective LYST protein in **Chediak-Higashi syndrome** disrupts organelle membrane fission and fusion, producing giant, abnormal, non-functional lysosomal granules across multiple cell lineages.",
+   "say": "Chediak-Higashi syndrome is caused by LYST mutations, producing giant non-functional lysosomes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lyst_mutation",
+      "label": "Autosomal Recessive Mutation in LYST Gene on Chromosome 1q42"
+     },
+     {
+      "id": "membrane_fusion_block",
+      "label": "Failure of Controlled Vesicular Fission and Microtubule Docking"
+     },
+     {
+      "id": "giant_granules",
+      "label": "Uncontrolled Fusion Generates Megagranules in Neutrophils and Melanocytes"
+     },
+     {
+      "id": "clinical_deficits",
+      "label": "Produces Immunodeficiency, Partial Oculocutaneous Albinism, and Neuropathy"
+     }
+    ],
+    "edges": [
+     [
+      "lyst_mutation",
+      "membrane_fusion_block"
+     ],
+     [
+      "membrane_fusion_block",
+      "giant_granules"
+     ],
+     [
+      "giant_granules",
+      "clinical_deficits"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On routine peripheral blood smears, Chediak-Higashi neutrophils display pathognomonic giant azurophilic granules within their abundant cytoplasm. Because these abnormal lysosomes cannot fuse properly with phagocytic vacuoles, **phagolysosomal degranulation fails completely**, severely impairing bactericidal killing mechanisms and predisposing affected children to recurrent severe pyogenic bacterial infections.",
+   "say": "Giant neutrophil granules fail to fuse with phagosomes, predisposing patients to pyogenic infections.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chediak-Higashi Syndrome Cellular Triad",
+     "points": [
+      "Giant azurophilic lysosomal inclusion granules in circulating neutrophils",
+      "Defective phagolysosome formation and impaired microbial killing",
+      "Trapping of melanosomes in melanocytes causing partial albinism",
+      "Peripheral neuropathy resulting from axonal vesicular transport failure"
+     ]
     },
-    {
-      "tx": "On routine peripheral blood smears, Chediak-Higashi neutrophils display pathognomonic giant azurophilic granules within their abundant cytoplasm. Because these abnormal lysosomes cannot fuse properly with phagocytic vacuoles, **phagolysosomal degranulation fails completely**, severely impairing bactericidal killing mechanisms and predisposing affected children to recurrent severe pyogenic bacterial infections.",
-      "say": "Giant neutrophil granules fail to fuse with phagosomes, predisposing patients to pyogenic infections.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Chediak-Higashi Syndrome Cellular Triad",
-          "points": [
-            "Giant azurophilic lysosomal inclusion granules in circulating neutrophils",
-            "Defective phagolysosome formation and impaired microbial killing",
-            "Trapping of melanosomes in melanocytes causing partial albinism",
-            "Peripheral neuropathy resulting from axonal vesicular transport failure"
-          ]
-        },
-        "right": {
-          "title": "Accelerated Phase (Hemophagocytic Lymphohistiocytosis)",
-          "points": [
-            "Fatal non-malignant expansion of activated CD8+ T-cells and histiocytes",
-            "Massive uncontrolled cytokine storm (hyperferritinemia, IFN-gamma)",
-            "Diffuse hemophagocytosis of red blood cells in bone marrow and spleen",
-            "Requires urgent allogeneic hematopoietic stem cell transplantation"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The escape of fluid, proteins, and blood cells from the vascular system into interstitial tissues or body cavities represents an effusion. In acute inflammation, increased microvascular permeability permits the escape of protein-rich fluid with a high specific gravity and abundant cellular debris, formalizing the definition of an **inflammatory exudate**.",
-      "say": "An exudate is protein-rich inflammatory fluid with high specific gravity resulting from vascular permeability.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/pleural-effusion-fig1.webp",
-        "caption": "Large pleural effusion demonstrating fluid accumulation within the serosal pleural space.",
-        "alt": "Chest radiograph and pleural fluid accumulation in serosal space"
-      }
-    },
-    {
-      "tx": "In contrast to inflammatory exudates, transudates develop across structurally normal microvessels with preserved endothelial barrier integrity. A **transudate fluid effusion** is a low-protein ultrafiltrate of blood plasma caused purely by elevated hydrostatic pressure or decreased colloid oncotic pressure, containing minimal protein and a specific gravity below 1.012.",
-      "say": "A transudate is a low-protein fluid ultrafiltrate caused by hydrostatic or oncotic pressure imbalances.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Inflammatory Exudate",
-          "points": [
-            "Driven by increased microvascular permeability from endothelial gaps",
-            "High protein content (> 3.0 g/dL); pleural/serum protein ratio > 0.5",
-            "High specific gravity (> 1.020); high lactate dehydrogenase (LDH > 200 IU/L)",
-            "Abundant inflammatory cells (neutrophils in acute, lymphocytes in chronic)"
-          ]
-        },
-        "right": {
-          "title": "Non-Inflammatory Transudate",
-          "points": [
-            "Driven by elevated hydrostatic pressure (heart failure) or low albumin (cirrhosis)",
-            "Low protein content (< 3.0 g/dL); pleural/serum protein ratio < 0.5",
-            "Low specific gravity (< 1.012); low lactate dehydrogenase (LDH < 200 IU/L)",
-            "Paucicellular: contains minimal cellular debris or inflammatory cells"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "In clinical practice, Light criteria provide a highly sensitive laboratory tool for classifying serosal fluid effusions. A pleural effusion is classified definitively as an exudate if the **pleural-to-serum protein ratio** exceeds zero point five, the fluid LDH exceeds two-thirds the upper limit of normal, or the pleural-to-serum LDH ratio exceeds zero point six.",
-      "say": "Light criteria classify an effusion as an exudate if the fluid protein ratio exceeds zero point five.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "effusion_tap",
-            "label": "Diagnostic Thoracentesis Yields Pleural Fluid for Laboratory Analysis"
-          },
-          {
-            "id": "light_criteria_test",
-            "label": "Measure Pleural and Serum Total Protein and Lactate Dehydrogenase (LDH)"
-          },
-          {
-            "id": "ratio_threshold",
-            "label": "Exudate Confirmed if Protein Ratio >0.5 or LDH Ratio >0.6"
-          },
-          {
-            "id": "etiology_direct",
-            "label": "Guides Investigation Toward Infection, Malignancy, or Systemic Infarction"
-          }
-        ],
-        "edges": [
-          [
-            "effusion_tap",
-            "light_criteria_test"
-          ],
-          [
-            "light_criteria_test",
-            "ratio_threshold"
-          ],
-          [
-            "ratio_threshold",
-            "etiology_direct"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Morphological patterns of acute inflammation vary based on the severity of vascular injury and the specific tissue bed involved. Characterized by the outpouring of a watery, relatively protein-poor fluid derived from plasma or mesothelial secretions, **serous inflammation** represents the mildest morphological expression of acute vascular injury.",
-      "say": "Serous inflammation is characterized by watery, protein-poor fluid seen in skin blisters and viral effusions.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Serous Inflammation Examples",
-          "points": [
-            "Cutaneous burn blisters (second-degree thermal scalds)",
-            "Viral herpes simplex and varicella-zoster vesicle fluid",
-            "Tuberculous or viral serositis (pleurisy, pericardial effusion)",
-            "Peritoneal ascites in early subacute peritonitis"
-          ]
-        },
-        "right": {
-          "title": "Microscopic Characteristics",
-          "points": [
-            "Acellular or paucicellular watery fluid accumulation",
-            "Fluid accumulates beneath epidermis or within serosal cavity",
-            "Minimal fibrin deposition without visible clot formation",
-            "Absorbed rapidly without fibrous organization or scarring"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "A familiar clinical example of serous inflammation is the skin blister resulting from a second-degree burn or frictional trauma. Epidermal detachment from the underlying dermis creates a closed space filled with **serous blister fluid**, which insulates underlying germinative basal keratinocytes to foster rapid re-epithelialization without residual scarring.",
-      "say": "Friction and burn blisters fill with serous fluid, protecting basal cells during re-epithelialization.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "thermal_shear",
-            "label": "Thermal Scald or Mechanical Friction Strains Dermo-Epidermal Junction"
-          },
-          {
-            "id": "desmosome_cleave",
-            "label": "Basal Keratinocytes Detach from Dermal Basement Membrane"
-          },
-          {
-            "id": "serous_fill",
-            "label": "Leaking Dermal Capillaries Fill Cavity with Watery Acellular Fluid"
-          },
-          {
-            "id": "re_epithelialize",
-            "label": "Preserved Stratum Basale Migrates Across Fluid Floor to Heal Blister"
-          }
-        ],
-        "edges": [
-          [
-            "thermal_shear",
-            "desmosome_cleave"
-          ],
-          [
-            "desmosome_cleave",
-            "serous_fill"
-          ],
-          [
-            "serous_fill",
-            "re_epithelialize"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "If serous inflammation involves closed serosal cavities such as the pericardium, peritoneum, or pleura, mesothelial cells secrete copious fluid into the space. If the underlying insult worsens or becomes contaminated by bacteria, vascular gaps enlarge, transitioning serous effusions into **fibrinous or purulent exudates**.",
-      "say": "As vascular permeability increases, serous effusions progress into fibrinous or purulent exudates.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/acute-appendicitis-fig1.webp",
-        "caption": "Progression from early serosal vascular congestion to purulent transmural suppurative appendicitis.",
-        "alt": "Acute suppurative appendicitis showing transmural neutrophilic infiltration and serosal exudate"
-      }
+    "right": {
+     "title": "Accelerated Phase (Hemophagocytic Lymphohistiocytosis)",
+     "points": [
+      "Fatal non-malignant expansion of activated CD8+ T-cells and histiocytes",
+      "Massive uncontrolled cytokine storm (hyperferritinemia, IFN-gamma)",
+      "Diffuse hemophagocytosis of red blood cells in bone marrow and spleen",
+      "Requires urgent allogeneic hematopoietic stem cell transplantation"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI"
+   }
+  },
+  {
+   "tx": "Protein rich fluid leaving vessels is what makes inflammation visible. An **inflammatory exudate** carries fibrinogen and cells into tissue, producing the swelling, heat and pus that serous fluid never could. Fibrin walls off the battleground, which helps containment and later becomes the scaffold of adhesions and scars. Distinguishing exudate from transudate by protein and cell content remains a working test at every pleural and peritoneal tap.",
+   "say": "An exudate is protein and cell rich fluid escaping inflamed vessels, forming pus and fibrin. Its protein content separates it from a transudate at any tap.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m949-pat-acute-inflammation-chediak-higashi-syndrome.webp",
+    "alt": "Image of inflammatory exudate with fibrin and neutrophils collecting in tissue.",
+    "caption": "Fibrin strands and neutrophils fill an inflammatory exudate in injured tissue. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The escape of fluid, proteins, and blood cells from the vascular system into interstitial tissues or body cavities represents an effusion. In acute inflammation, increased microvascular permeability permits the escape of protein-rich fluid with a high specific gravity and abundant cellular debris, formalizing the definition of an **inflammatory exudate**.",
+   "say": "An exudate is protein-rich inflammatory fluid with high specific gravity resulting from vascular permeability.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pleural-effusion-fig1.webp",
+    "caption": "Large pleural effusion demonstrating fluid accumulation within the serosal pleural space.",
+    "alt": "Chest radiograph and pleural fluid accumulation in serosal space"
+   }
+  },
+  {
+   "tx": "In contrast to inflammatory exudates, transudates develop across structurally normal microvessels with preserved endothelial barrier integrity. A **transudate fluid effusion** is a low-protein ultrafiltrate of blood plasma caused purely by elevated hydrostatic pressure or decreased colloid oncotic pressure, containing minimal protein and a specific gravity below 1.012.",
+   "say": "A transudate is a low-protein fluid ultrafiltrate caused by hydrostatic or oncotic pressure imbalances.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inflammatory Exudate",
+     "points": [
+      "Driven by increased microvascular permeability from endothelial gaps",
+      "High protein content (> 3.0 g/dL); pleural/serum protein ratio > 0.5",
+      "High specific gravity (> 1.020); high lactate dehydrogenase (LDH > 200 IU/L)",
+      "Abundant inflammatory cells (neutrophils in acute, lymphocytes in chronic)"
+     ]
+    },
+    "right": {
+     "title": "Non-Inflammatory Transudate",
+     "points": [
+      "Driven by elevated hydrostatic pressure (heart failure) or low albumin (cirrhosis)",
+      "Low protein content (< 3.0 g/dL); pleural/serum protein ratio < 0.5",
+      "Low specific gravity (< 1.012); low lactate dehydrogenase (LDH < 200 IU/L)",
+      "Paucicellular: contains minimal cellular debris or inflammatory cells"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In clinical practice, Light criteria provide a highly sensitive laboratory tool for classifying serosal fluid effusions. A pleural effusion is classified definitively as an exudate if the **pleural-to-serum protein ratio** exceeds zero point five, the fluid LDH exceeds two-thirds the upper limit of normal, or the pleural-to-serum LDH ratio exceeds zero point six.",
+   "say": "Light criteria classify an effusion as an exudate if the fluid protein ratio exceeds zero point five.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "effusion_tap",
+      "label": "Diagnostic Thoracentesis Yields Pleural Fluid for Laboratory Analysis"
+     },
+     {
+      "id": "light_criteria_test",
+      "label": "Measure Pleural and Serum Total Protein and Lactate Dehydrogenase (LDH)"
+     },
+     {
+      "id": "ratio_threshold",
+      "label": "Exudate Confirmed if Protein Ratio >0.5 or LDH Ratio >0.6"
+     },
+     {
+      "id": "etiology_direct",
+      "label": "Guides Investigation Toward Infection, Malignancy, or Systemic Infarction"
+     }
+    ],
+    "edges": [
+     [
+      "effusion_tap",
+      "light_criteria_test"
+     ],
+     [
+      "light_criteria_test",
+      "ratio_threshold"
+     ],
+     [
+      "ratio_threshold",
+      "etiology_direct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Morphological patterns of acute inflammation vary based on the severity of vascular injury and the specific tissue bed involved. Characterized by the outpouring of a watery, relatively protein-poor fluid derived from plasma or mesothelial secretions, **serous inflammation** represents the mildest morphological expression of acute vascular injury.",
+   "say": "Serous inflammation is characterized by watery, protein-poor fluid seen in skin blisters and viral effusions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serous Inflammation Examples",
+     "points": [
+      "Cutaneous burn blisters (second-degree thermal scalds)",
+      "Viral herpes simplex and varicella-zoster vesicle fluid",
+      "Tuberculous or viral serositis (pleurisy, pericardial effusion)",
+      "Peritoneal ascites in early subacute peritonitis"
+     ]
+    },
+    "right": {
+     "title": "Microscopic Characteristics",
+     "points": [
+      "Acellular or paucicellular watery fluid accumulation",
+      "Fluid accumulates beneath epidermis or within serosal cavity",
+      "Minimal fibrin deposition without visible clot formation",
+      "Absorbed rapidly without fibrous organization or scarring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A familiar clinical example of serous inflammation is the skin blister resulting from a second-degree burn or frictional trauma. Epidermal detachment from the underlying dermis creates a closed space filled with **serous blister fluid**, which insulates underlying germinative basal keratinocytes to foster rapid re-epithelialization without residual scarring.",
+   "say": "Friction and burn blisters fill with serous fluid, protecting basal cells during re-epithelialization.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thermal_shear",
+      "label": "Thermal Scald or Mechanical Friction Strains Dermo-Epidermal Junction"
+     },
+     {
+      "id": "desmosome_cleave",
+      "label": "Basal Keratinocytes Detach from Dermal Basement Membrane"
+     },
+     {
+      "id": "serous_fill",
+      "label": "Leaking Dermal Capillaries Fill Cavity with Watery Acellular Fluid"
+     },
+     {
+      "id": "re_epithelialize",
+      "label": "Preserved Stratum Basale Migrates Across Fluid Floor to Heal Blister"
+     }
+    ],
+    "edges": [
+     [
+      "thermal_shear",
+      "desmosome_cleave"
+     ],
+     [
+      "desmosome_cleave",
+      "serous_fill"
+     ],
+     [
+      "serous_fill",
+      "re_epithelialize"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The character of escaped fluid names the pattern of inflammation. **Fibrinous exudate** coats surfaces like pericardium and pleura in a shaggy layer that can organise into adhesions, while purulent exudate is pus: living and dead neutrophils in liquefied tissue. Bread and butter pericarditis and an empyema are these two patterns at work. Either finding tells you permeability rose far beyond the watery leak of a serous effusion.",
+   "say": "Fibrinous exudate coats serosal surfaces while purulent exudate is pus from neutrophil liquefaction. Both mark severe rises in vessel permeability.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m950-pat-acute-inflammation-chediak-higashi-syndrome.webp",
+    "alt": "Image showing fibrinous and purulent exudates on inflamed surfaces.",
+    "caption": "A shaggy fibrin coat and a pus collection are shown on inflamed surfaces. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "If serous inflammation involves closed serosal cavities such as the pericardium, peritoneum, or pleura, mesothelial cells secrete copious fluid into the space. If the underlying insult worsens or becomes contaminated by bacteria, vascular gaps enlarge, transitioning serous effusions into **fibrinous or purulent exudates**.",
+   "say": "As vascular permeability increases, serous effusions progress into fibrinous or purulent exudates.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pericarditis-fig1.webp",
+    "caption": "Acute fibrinous pericarditis: shaggy fibrinous exudate between visceral and parietal pericardium with diffuse concave ST elevation on ECG. Illustration: StewardMD original.",
+    "alt": "Acute suppurative appendicitis showing transmural neutrophilic infiltration and serosal exudate"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

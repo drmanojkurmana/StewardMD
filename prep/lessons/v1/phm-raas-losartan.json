@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "phm-raas",
+  "subject": "pharmacology",
+  "title": "Angiotensin Receptor Blockers and Aliskiren: Losartan, Telmisartan, Valsartan",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The first oral angiotensin receptor blocker, **losartan**, competitively blocks the AT1 receptor so angiotensin II cannot constrict vessels, release aldosterone or drive sympathetic tone, whatever enzyme made it. That last point matters because chymase and other non ACE pathways keep generating angiotensin II during ACE inhibition. Receptor blockade is therefore more complete at the effector, while bradykinin is left untouched and the dry cough largely disappears.",
+      "say": "Losartan blocks the AT1 receptor itself, catching angiotensin II from every pathway, without touching bradykinin.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+        "alt": "Renin angiotensin cascade diagram showing where ACE inhibition acts, with vasodilatation and fetal effects",
+        "caption": "The cascade blocked one step lower by receptor blockers: angiotensin II is still made, but its AT1 receptor is occupied. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Losartan is a prodrug in disguise: about 14 percent of each dose is oxidised to **EXP3174**, a metabolite ten to forty times more potent that blocks the receptor insurmountably and lasts six to nine hours. The parent compound also uniquely promotes uric acid excretion by blocking the URAT1 transporter in the proximal tubule. No other common blocker shares that uricosuric bonus, which makes losartan attractive when hypertension travels with gout.",
+      "say": "Losartan works through a stronger metabolite, and it alone among blockers also wastes uric acid helpfully.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Losartan and EXP3174",
+          "points": [
+            "Parent drug partly converted by CYP2C9 and CYP3A4",
+            "EXP3174 is 10 to 40 times more potent, longer acting",
+            "URAT1 blockade adds uricosuric action",
+            "Preferred blocker when gout coexists with hypertension"
+          ]
+        },
+        "right": {
+          "title": "Other blockers at a glance",
+          "points": [
+            "Valsartan: food reduces absorption, heart failure staple",
+            "Irbesartan: high bioavailability, diabetic kidney data",
+            "Candesartan: tightest receptor binding, prodrug ester",
+            "Olmesartan: rare sprue like enteropathy with chronic use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Blocking one receptor leaves its sibling free, and that detail is the drug design. With the **AT1 receptor** occupied by losartan, angiotensin II cannot constrict vessels or release aldosterone, while the unblocked AT2 receptor stays available for opposing, protective signalling. Blood pressure falls without the cough that ACE inhibition causes, because bradykinin is untouched. Kidney protection in diabetic proteinuria is the clinical dividend most often claimed for this class.",
+      "say": "Losartan blocks the AT1 receptor while leaving AT2 free and bradykinin untouched. Pressure falls without an ACE inhibitor cough.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m897-phm-raas-losartan.webp",
+        "alt": "Diagram of AT1 receptor blockade, angiotensin II unable to bind while the AT2 receptor remains free.",
+        "caption": "Angiotensin II is shown turned away from a blocked AT1 receptor, with AT2 left open. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The longest acting member, **telmisartan**, has a half life near 24 hours, the highest lipophilicity in the class and partial PPAR gamma agonist activity that modestly improves insulin sensitivity. It forgives a missed dose better than shorter agents and covers the vulnerable early morning pressure surge. Its biliary excretion means dose adjustment is a liver rather than kidney question, the reverse of most cardiovascular drugs students meet.",
+      "say": "Telmisartan lasts a full day, dissolves into tissue, and even nudges PPAR gamma toward insulin sensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "telmi",
+            "label": "Once daily telmisartan, highly lipophilic"
+          },
+          {
+            "id": "tissue",
+            "label": "Deep tissue distribution, 24 hour receptor cover"
+          },
+          {
+            "id": "ppar",
+            "label": "Partial PPAR gamma activation in adipose tissue"
+          },
+          {
+            "id": "effect",
+            "label": "Smooth pressure control plus modest metabolic benefit"
+          }
+        ],
+        "edges": [
+          [
+            "telmi",
+            "tissue"
+          ],
+          [
+            "tissue",
+            "effect"
+          ],
+          [
+            "telmi",
+            "ppar"
+          ],
+          [
+            "ppar",
+            "effect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Valsartan** earned its place in heart failure and post infarction care, including equivalence to captopril after infarction with ventricular dysfunction, and it is the blocker paired with sacubitril in modern heart failure therapy. Like all AT1 blockers it spares bradykinin, so cough is no more frequent than with placebo. Angioedema is far rarer than with ACE inhibitors but not zero, and prior ACE inhibitor angioedema still demands caution.",
+      "say": "Valsartan matched captopril after infarction and now anchors combination heart failure therapy, with placebo level cough rates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Where valsartan is chosen",
+          "points": [
+            "Heart failure with reduced ejection fraction",
+            "Post infarction ventricular dysfunction",
+            "ACE inhibitor intolerance from cough",
+            "Fixed combination with sacubitril for heart failure"
+          ]
+        },
+        "right": {
+          "title": "Class cautions that remain",
+          "points": [
+            "Hyperkalaemia and creatinine rise, same as ACE inhibitors",
+            "Fetopathy: contraindicated in pregnancy",
+            "Rare angioedema, caution after ACE inhibitor angioedema",
+            "Never combine routinely with an ACE inhibitor"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Blocking the cascade at its first step, **aliskiren** is the only direct renin inhibitor in clinical use, binding the active site of renin so angiotensinogen is never cleaved. Plasma renin concentration rises because feedback is lost, yet renin activity falls, the reverse pattern from every other blocker. Oral bioavailability is only about 2.5 percent and fatty food cuts it further, which limited its commercial and clinical footprint.",
+      "say": "Aliskiren gags renin itself: renin levels rise but renin activity falls, and almost none of the tablet is absorbed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "alis",
+            "label": "Aliskiren binds the active site of renin"
+          },
+          {
+            "id": "noang",
+            "label": "Angiotensinogen cleavage and angiotensin I formation fall"
+          },
+          {
+            "id": "down",
+            "label": "Angiotensin II and aldosterone decline downstream"
+          },
+          {
+            "id": "feed",
+            "label": "Feedback raises renin concentration, activity stays low"
+          }
+        ],
+        "edges": [
+          [
+            "alis",
+            "noang"
+          ],
+          [
+            "noang",
+            "down"
+          ],
+          [
+            "down",
+            "feed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Trials taught restraint with stacked blockade: combining aliskiren with an ACE inhibitor or blocker in diabetes increased stroke, hyperkalaemia and renal failure without benefit, and dual ACE inhibitor plus blocker therapy did the same in high risk vascular patients. The rule for practice is one blocker of the renin angiotensin system at a time, with **dual blockade** reserved for exceptional specialist indications such as selected proteinuric kidney disease under close laboratory surveillance.",
+      "say": "One blocker at a time: stacking renin system drugs bought harm, not benefit, in the big trials.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "What dual blockade promised",
+          "points": [
+            "More complete suppression of angiotensin II",
+            "Greater proteinuria reduction in early studies",
+            "Lower pressure by a few extra millimetres"
+          ]
+        },
+        "right": {
+          "title": "What dual blockade delivered",
+          "points": [
+            "More hyperkalaemia and acute kidney injury",
+            "More hypotension and, with aliskiren in diabetes, stroke",
+            "No reduction in deaths or major events",
+            "Verdict: avoid routine combinations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Unblocked AT2 receptors are the blockers' theoretical bonus: with AT1 occupied, circulating angiotensin II is free to stimulate **AT2** receptors, which promote vasodilatation, natriuresis and antiproliferative signalling. How much this contributes in patients is debated, but it explains why receptor blockers lower pressure as effectively as ACE inhibitors despite higher measured angiotensin II levels. It also predicts their clean cough profile, since bradykinin metabolism is never disturbed.",
+      "say": "With AT1 blocked, angiotensin II spills onto AT2 receptors that dilate and protect, while bradykinin stays out of it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "at1",
+            "label": "AT1 receptor occupied by the blocker"
+          },
+          {
+            "id": "ang2",
+            "label": "Angiotensin II levels rise by feedback"
+          },
+          {
+            "id": "at2",
+            "label": "Free AT2 receptors now stimulated"
+          },
+          {
+            "id": "benefit",
+            "label": "Vasodilatation, natriuresis, antiproliferative signals"
+          }
+        ],
+        "edges": [
+          [
+            "at1",
+            "ang2"
+          ],
+          [
+            "ang2",
+            "at2"
+          ],
+          [
+            "at2",
+            "benefit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Choice among **blockers** is made on half life, outcome data and comorbidity rather than potency: losartan for the gout patient, telmisartan for unreliable adherence, valsartan within heart failure combinations, irbesartan or losartan where diabetic proteinuria dominates. All share the monitoring discipline of ACE inhibitors, with potassium and creatinine checked after starting and after each increase, and all are stopped in pregnancy and in bilateral renal artery stenosis.",
+      "say": "Pick the blocker by the patient in front of you, then monitor potassium and creatinine exactly as with ACE inhibitors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Matching blocker to patient",
+          "points": [
+            "Gout: losartan for its uricosuric effect",
+            "Missed doses: telmisartan for its 24 hour half life",
+            "Heart failure: valsartan, alone or with sacubitril",
+            "Diabetic proteinuria: losartan or irbesartan outcome data"
+          ]
+        },
+        "right": {
+          "title": "Monitoring shared by all",
+          "points": [
+            "Baseline and follow up potassium and creatinine",
+            "Accept creatinine rise up to about 30 percent",
+            "Stop in pregnancy, plan switches before conception",
+            "Avoid in bilateral renal artery stenosis"
+          ]
+        }
+      }
+    }
+  ]
+}

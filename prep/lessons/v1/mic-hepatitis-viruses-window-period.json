@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-hepatitis-viruses",
+  "subject": "microbiology",
+  "title": "HBV Window Period, Dane Particle, HBV DNA and Hepatitis C",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The HBV **window period** is the interval when HBsAg has disappeared but anti-HBs has not yet become detectable. **Anti-HBc IgM** can be the only positive marker during this gap in acute resolving infection. HBV DNA may also clarify occult or early disease. The window is a sequence problem, not a separate species of hepatitis, and timing plus the full marker panel resolves it.",
+      "say": "In the HBV window, anti-HBc IgM is the footprint between antigen loss and antibody arrival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Marker sequence",
+          "points": [
+            "HBV DNA appears early",
+            "HBsAg rises then falls in recovery",
+            "Anti HBc appears and persists",
+            "Anti HBs appears last and protects"
+          ]
+        },
+        "right": {
+          "title": "Window findings",
+          "points": [
+            "HBsAg negative",
+            "Anti HBs not yet positive",
+            "Anti HBc IgM positive in acute recovery",
+            "HBV DNA may still be low positive"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Dane particle** contains an envelope with HBsAg, a nucleocapsid with HBcAg and partially double-stranded DNA plus polymerase. Excess subviral HBsAg particles are not infectious. The virus uses reverse transcription despite carrying DNA, making polymerase the tenofovir and entecavir target class. HBV DNA level informs infectivity, phase classification, treatment need and mother-to-child prevention decisions.",
+      "say": "HBV DNA is the direct measure of the infectious Dane particle's replication.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dane particle",
+          "points": [
+            "Complete infectious virion",
+            "Outer HBsAg envelope",
+            "Core contains genome and polymerase",
+            "Diameter about forty two nanometres"
+          ]
+        },
+        "right": {
+          "title": "HBV DNA uses",
+          "points": [
+            "Baseline before therapy",
+            "Monitor antiviral response",
+            "Detect occult infection",
+            "High maternal load guides perinatal prophylaxis strategy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hepatitis C virus** is an enveloped positive-sense RNA flavivirus transmitted mainly by blood. Acute infection is often silent, yet most untreated people historically developed chronic infection, cirrhosis and hepatocellular carcinoma risk. Anti-HCV indicates exposure but cannot separate resolved from active infection; HCV RNA confirms current viraemia and is required before direct-acting antiviral treatment.",
+      "say": "Anti HCV is the exposure scar; HCV RNA proves living infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antibody positive",
+          "points": [
+            "Past or current infection",
+            "Can persist after spontaneous clearance",
+            "Can persist after successful therapy",
+            "Does not confer protective immunity"
+          ]
+        },
+        "right": {
+          "title": "RNA positive",
+          "points": [
+            "Current HCV infection",
+            "Quantify before treatment in many pathways",
+            "Genotype less universally needed with pangenotypic regimens",
+            "Confirm cure with sustained virologic response"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "HCV has multiple **genotypes** and subtypes shaped by its error-prone RNA polymerase. Genotype once dictated regimen and duration; pangenotypic direct-acting antivirals have simplified most care, though genotype 3, cirrhosis and prior failure still matter in selected pathways. Resistance testing is not routine before first therapy in many patients but becomes important after direct-acting antiviral failure.",
+      "say": "Pangenotypic therapy reduced genotype's power, but prior failure restores its importance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Genotype legacy",
+          "points": [
+            "Interferon response varied sharply",
+            "Early direct antivirals were genotype specific",
+            "Genotype 3 linked with steatosis and harder cure historically",
+            "Subtype matters in some resistance patterns"
+          ]
+        },
+        "right": {
+          "title": "Modern pathway",
+          "points": [
+            "Confirm HCV RNA",
+            "Assess fibrosis and drug interactions",
+            "Use pangenotypic regimen where appropriate",
+            "Check sustained response after treatment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sustained virologic response** means HCV RNA remains undetectable usually twelve weeks after therapy and is regarded as cure. It greatly reduces liver complications but does not erase established cirrhosis or hepatocellular carcinoma surveillance needs, nor does it prevent reinfection. Patients with ongoing exposure require harm reduction and repeat RNA testing when risk continues, because antibody remains positive and is useless for reinfection detection.",
+      "say": "SVR cures HCV infection, not cirrhosis risk already built or future exposure risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rna",
+            "label": "HCV RNA positive"
+          },
+          {
+            "id": "daa",
+            "label": "Direct acting antiviral course"
+          },
+          {
+            "id": "svr",
+            "label": "RNA negative twelve weeks after"
+          },
+          {
+            "id": "follow",
+            "label": "Cirrhosis surveillance and reinfection prevention"
+          }
+        ],
+        "edges": [
+          [
+            "rna",
+            "daa"
+          ],
+          [
+            "daa",
+            "svr"
+          ],
+          [
+            "svr",
+            "follow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A common examination trap is calling **anti-HCV positive** synonymous with immunity. It is not protective and may coexist with high-level viraemia. Likewise, a negative antibody test in very early infection or severe immunosuppression does not always exclude HCV; RNA testing closes those windows. Distinguishing exposure markers from nucleic acid markers is the shared skill across HBV, HCV and HIV testing.",
+      "say": "For blood-borne viruses, antibody tells exposure, nucleic acid tells current replication.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antibody answers",
+          "points": [
+            "Has the immune system met it",
+            "HBV anti HBs can mean protection",
+            "HCV antibody is not protective",
+            "HIV antibody is part of diagnostic algorithm"
+          ]
+        },
+        "right": {
+          "title": "Nucleic acid answers",
+          "points": [
+            "Is viral genome present now",
+            "How much replication is occurring",
+            "Useful in early and occult infection",
+            "Used to prove HCV cure and monitor HIV or HBV"
+          ]
+        }
+      }
+    }
+  ]
+}

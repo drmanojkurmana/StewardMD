@@ -1,0 +1,264 @@
+{
+ "key": "ped-diarrhoea-acute-diarrhoea",
+ "v": 1,
+ "module": "ped-diarrhoea",
+ "subject": "paediatrics",
+ "title": "Acute Diarrhoea, Dehydration Assessment and WHO Rehydration Plans",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Excessive gastrointestinal water and electrolyte loss represents a foremost cause of preventable global child mortality. Defined as the passage of three or more abnormally loose or watery stools per twenty-four hours, **pediatric acute diarrhoea** rapidly depletes extracellular fluid volume. Early structured assessment categorizes the fluid deficit to deploy standardized oral or intravenous rehydration protocols before hypovolaemic shock and prerenal failure develop.",
+   "say": "Acute diarrhoea is defined as three or more watery stools daily lasting under fourteen days. Rapid fluid loss depletes extracellular volume, requiring systematic dehydration grading.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-dehydration-ors.webp",
+    "alt": "Clinical chart grading pediatric dehydration into No, Some, and Severe dehydration with management plans.",
+    "caption": "WHO dehydration grading matrix, oral rehydration solution formulations, and fluid administration protocols. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Standardized clinical examination stratifies dehydration into three distinct management tiers. Under World Health Organization protocols, **clinical dehydration assessment** surveys four physical parameters: general sensorium, appearance of the eyes, thirst when offered fluids, and skin pinch retraction speed. Identifying two or more abnormal signs establishes whether the child has no dehydration, some dehydration, or severe dehydration.",
+   "say": "Assess dehydration using four signs: mental status, eye appearance, thirst, and skin pinch speed. Two abnormal signs determine whether the child has some or severe dehydration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Parameter",
+     "No Dehydration (<5% Deficit)",
+     "Some Dehydration (5-10% Deficit)",
+     "Severe Dehydration (>10% Deficit)"
+    ],
+    "rows": [
+     [
+      "Mental sensorium",
+      "Alert, interactive, calm",
+      "Restless, irritable, fretful",
+      "Lethargic, floppy, or unconscious"
+     ],
+     [
+      "Appearance of eyes",
+      "Normal, bright, tears present",
+      "Sunken, reduced tears",
+      "Deeply sunken, dry, absent tears"
+     ],
+     [
+      "Thirst & drinking",
+      "Drinks normally, not thirsty",
+      "Drinks eagerly, clearly thirsty",
+      "Unable to drink or drinking poorly"
+     ],
+     [
+      "Abdominal skin pinch",
+      "Retracts immediately (<1 sec)",
+      "Goes back slowly (1 to 2 sec)",
+      "Goes back very slowly (>2 seconds)"
+     ],
+     [
+      "Therapeutic protocol",
+      "Deploy WHO Plan A (Home care)",
+      "Deploy WHO Plan B (Oral rehydration)",
+      "Deploy WHO Plan C (Emergency IV fluids)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pinching abdominal skin between thumb and forefinger evaluates dermal turgor and interstitial hydration. The standardized **abdominal skin pinch test** is performed by pinching a fold of skin and subcutaneous tissue longitudinally halfway between the umbilicus and mid-axillary line for one second and releasing. Retraction taking longer than two seconds defines a very slow skin pinch, signifying greater than ten percent extracellular volume depletion.",
+   "say": "Pinch the abdominal skin halfway between the navel and flank for one second. If the fold takes over two seconds to flatten, severe dehydration exceeding ten percent is present.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-gen-paed-hydration.webp",
+    "alt": "Clinical photograph demonstrating the technique of performing the abdominal skin pinch test in a child.",
+    "caption": "Standardized abdominal skin pinch technique demonstrating slow elastic retraction in severe dehydration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Optimal intestinal sodium-glucose cotransport requires specific chemical osmolarity balancing. The standard global rehydration fluid is **WHO low-osmolarity ORS**, containing an osmolarity of 245 mOsm/L with 75 mmol/L sodium and 75 mmol/L glucose. Low-osmolarity ORS significantly reduces stool volume by twenty percent, decreases vomiting by thirty percent, and eliminates the need for intravenous fluid infusions compared to historical higher-osmolarity formulations.",
+   "say": "WHO low-osmolarity ORS has a balanced osmolarity of 245 mOsm/L with equal sodium and glucose. It reduces stool volume by twenty percent and vomiting by thirty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chemical Solute",
+     "Low-Osmolarity ORS (WHO)",
+     "Old High-Osmolarity ORS",
+     "Physiological Function"
+    ],
+    "rows": [
+     [
+      "Sodium",
+      "75 mmol/L",
+      "90 mmol/L",
+      "Drives SGLT-1 intestinal fluid cotransport"
+     ],
+     [
+      "Glucose",
+      "75 mmol/L",
+      "111 mmol/L",
+      "Equimolar cotransport driver for sodium"
+     ],
+     [
+      "Chloride",
+      "65 mmol/L",
+      "80 mmol/L",
+      "Principal accompanying extracellular anion"
+     ],
+     [
+      "Potassium",
+      "20 mmol/L",
+      "20 mmol/L",
+      "Replaces severe diarrhoeal potassium loss"
+     ],
+     [
+      "Citrate (Trisodium)",
+      "10 mmol/L (2.9 g/L)",
+      "10 mmol/L (2.9 g/L)",
+      "Corrects metabolic acidosis, extends shelf-life"
+     ],
+     [
+      "Total Osmolarity",
+      "245 mOsm/L",
+      "311 mOsm/L",
+      "Prevents hypertonic osmotic stool fluid loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preventing dehydration and replacing ongoing fluid losses forms the core of home management. Under **WHO Plan A protocol**, children with diarrhoea but no signs of clinical dehydration are managed at home with extra fluids, including ORS, clean water, coconut water, or buttermilk. Caregivers administer 50 to 100 mL of fluid after each loose stool for children under two years, and 100 to 200 mL for older children, continuing feeding.",
+   "say": "Plan A treats children at home to prevent dehydration. Give 50 to 100 mL of ORS after each loose stool under two years, and double that for older children, while continuing feeds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plan A Four Home Rules",
+     "points": [
+      "1. Give extra fluids (ORS, soup, coconut water)",
+      "2. Give zinc supplements daily for 14 days",
+      "3. Continue feeding including breast milk",
+      "4. Counsel on danger signs to return immediately"
+     ]
+    },
+    "right": {
+     "title": "Immediate Danger Return Signs",
+     "points": [
+      "Child drinks poorly or unable to drink",
+      "Persistent vomiting of all fluids",
+      "Blood appears in the stool (dysentery)",
+      "Fever spikes or condition deteriorates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Supervised oral rehydration reverses moderate volume depletion within a four-hour window. For children diagnosed with some dehydration, **WHO Plan B oral rehydration** prescribes 75 millilitres per kilogram of low-osmolarity ORS administered over four hours in the healthcare facility. If the child vomits, the caregiver waits ten minutes and resumes feeding ORS more slowly with a spoon, reassessing hydration status at four hours.",
+   "say": "Plan B treats some dehydration by giving 75 mL per kilogram of ORS over four hours in clinic. If the child vomits, wait ten minutes and continue slowly with a spoon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Weight Bracket",
+     "Patient Age Guideline",
+     "Total 4-Hour ORS Volume",
+     "Hourly Administration Rate"
+    ],
+    "rows": [
+     [
+      "Under 5 kg",
+      "Under 4 months",
+      "200 to 400 mL",
+      "50 to 100 mL per hour"
+     ],
+     [
+      "5 to 7.9 kg",
+      "4 to 11 months",
+      "400 to 600 mL",
+      "100 to 150 mL per hour"
+     ],
+     [
+      "8 to 10.9 kg",
+      "12 to 23 months",
+      "600 to 800 mL",
+      "150 to 200 mL per hour"
+     ],
+     [
+      "11 to 15.9 kg",
+      "2 to 4 years",
+      "800 to 1200 mL",
+      "200 to 300 mL per hour"
+     ],
+     [
+      "16 to 29.9 kg",
+      "5 to 14 years",
+      "1200 to 2200 mL",
+      "300 to 550 mL per hour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe dehydration with shock mandates emergency parenteral volume resuscitation. The emergency protocol **WHO Plan C intravenous rehydration** delivers 100 mL/kg of Ringer's Lactate (or normal saline). For infants under twelve months, 30 mL/kg is infused over one hour, followed by 70 mL/kg over five hours (total six hours); for children twelve months and older, 30 mL/kg is given over thirty minutes, then 70 mL/kg over 2.5 hours (total three hours).",
+   "say": "Plan C delivers 100 mL per kilogram of Ringer's lactate intravenously. Infants receive 30 mL/kg in the first hour and 70 mL/kg over five hours. Older children finish within three hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infants Under 12 Months (Total 6 Hours)",
+     "points": [
+      "Initial rapid bolus: 30 mL/kg over 1 hour",
+      "Maintenance replacement: 70 mL/kg over 5 hours",
+      "Reassess radial pulse and capillary refill hourly",
+      "Offer ORS (5 mL/kg/hr) as soon as child can drink"
+     ]
+    },
+    "right": {
+     "title": "Children 12 Months and Older (Total 3 Hours)",
+     "points": [
+      "Initial rapid bolus: 30 mL/kg over 30 minutes",
+      "Maintenance replacement: 70 mL/kg over 2.5 hours",
+      "Faster infusion safe due to mature renal function",
+      "Switch to oral ORS as soon as alert and drinking"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Universal micronutrient supplementation accelerates mucosal regeneration and prevents future diarrhoeal episodes. The World Health Organization recommends routine **zinc supplementation in diarrhoea**, providing twenty milligrams of elemental zinc daily for children older than six months, and ten milligrams daily for infants under six months, for fourteen completed days. Zinc stimulates enterocyte brush border enzyme synthesis and enhances mucosal cellular immunity, reducing episode duration and preventing recurrence.",
+   "say": "Give oral zinc daily for fourteen days to all children with acute diarrhoea: ten milligrams under six months, and twenty milligrams older. It shortens the illness and prevents future episodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Age Bracket",
+     "Daily Elemental Zinc Dose",
+     "Duration of Therapy",
+     "Clinical Evidence Endpoints"
+    ],
+    "rows": [
+     [
+      "Infants under 6 months",
+      "10 mg elemental zinc daily",
+      "14 completed days strictly",
+      "Shortens diarrhoea duration by 20%"
+     ],
+     [
+      "Children 6 months and older",
+      "20 mg elemental zinc daily",
+      "14 completed days strictly",
+      "Decreases total stool volume by 30%"
+     ],
+     [
+      "Dispersible zinc tablet",
+      "Dissolved in breast milk or ORS",
+      "Give once daily with food",
+      "Prevents subsequent diarrhoea for 3 months"
+     ],
+     [
+      "Zinc syrup formulation",
+      "20 mg per 5 mL liquid syrup",
+      "Alternative liquid administration",
+      "Restores mucosal enterocyte brush border"
+     ]
+    ]
+   }
+  }
+ ]
+}

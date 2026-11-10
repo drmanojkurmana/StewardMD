@@ -1,0 +1,282 @@
+{
+    "v": 1,
+    "id": "ans-neuraxial-post-dural-puncture",
+    "subject": "anaesthesia",
+    "module": "ans-neuraxial",
+    "title": "Neuraxial Complications: Post-Dural Puncture Headache, High Spinal, and Hypotension",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "PDPH Pathophysiology and Presentation",
+            "tx": "**Post-dural puncture headache pathophysiology** results from continuous cerebrospinal fluid (CSF) leakage through an unhealed dural puncture hole exceeding CSF production rates (normal production 0.35 mL/min or 500 mL/day). Loss of CSF cushioning drops intracranial pressure, causing gravitational downward sagging of the brain when upright. This sags pain-sensitive intracranial meninges, nerves (cranial nerves V, IX, X), and stretches the abducens nerve (CN VI).",
+            "say": "Post-dural puncture headache pathophysiology results from continuous cerebrospinal fluid (CSF) leakage through an unhealed dural puncture hole exceeding CSF production rates (normal production 0.35 mL/min or 500 mL/day). Loss of CSF cushioning drops intracranial pressure, causing gravitational downward sagging of the brain when upright. This sags pain-sensitive intracranial meninges, nerves (cranial nerves V, IX, X), and stretches the abducens nerve (CN VI).",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/spinal-anaesthesia-complications-fig1.webp",
+                "alt": "Pathophysiological mechanisms of cerebrospinal fluid leakage and meningeal traction in PDPH",
+                "caption": "Pathophysiological mechanisms of cerebrospinal fluid leakage and meningeal traction in PDPH"
+            }
+        },
+        {
+            "title": "Postural Hallmark and Cranial Nerve Signs",
+            "tx": "**Clinical hallmark of PDPH** is its strictly postural character: severe fronto-occipital throbbing headache that erupts within 15 to 45 seconds of sitting or standing upright, completely resolving or improving dramatically upon assuming the supine horizontal position. Associated features include neck stiffness, photophobia, nausea, tinnitus, and lateral rectus palsy with diplopia resulting from traction on the elongated intracranial course of the sixth cranial nerve.",
+            "say": "Clinical hallmark of PDPH is its strictly postural character: severe fronto-occipital throbbing headache that erupts within 15 to 45 seconds of sitting or standing upright, completely resolving or improving dramatically upon assuming the supine horizontal position. Associated features include neck stiffness, photophobia, nausea, tinnitus, and lateral rectus palsy with diplopia resulting from traction on the elongated intracranial course of the sixth cranial nerve.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Postural Upright Position",
+                    "points": [
+                        "Gravity pulls brain downward in depleted CSF bath",
+                        "Traction on pain-sensitive dura, tentorium, and venous sinuses",
+                        "Excruciating bilateral fronto-occipital throbbing pain"
+                    ]
+                },
+                "right": {
+                    "title": "Supine Horizontal Position",
+                    "points": [
+                        "Brain settles back into anatomical neutral resting position",
+                        "Menigeal traction and tentorial stretch are abolished",
+                        "Headache completely resolves or drops to mild ache"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Risk Factors for PDPH",
+            "tx": "**Risk factors for post-dural puncture headache** are dominated by mechanical needle design and patient age: young adult females (particularly obstetric parturients aged 20 to 40 years) have high dural compliance and high CSF pressure, rendering them vulnerable. Cutting Quincke needles and large needle calibers (16-gauge or 18-gauge accidental epidural punctures cause 50 to 70% PDPH) multiply risk compared to 25-gauge or 27-gauge pencil-point Whitacre needles.",
+            "say": "Risk factors for post-dural puncture headache are dominated by mechanical needle design and patient age: young adult females (particularly obstetric parturients aged 20 to 40 years) have high dural compliance and high CSF pressure, rendering them vulnerable. Cutting Quincke needles and large needle calibers (16-gauge or 18-gauge accidental epidural punctures cause 50 to 70% PDPH) multiply risk compared to 25-gauge or 27-gauge pencil-point Whitacre needles.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Risk Factor Dimension",
+                    "High-Risk Category",
+                    "Low-Risk Category",
+                    "Mechanistic Rationale"
+                ],
+                "rows": [
+                    [
+                        "Needle Tip Geometry",
+                        "Cutting Quincke needle",
+                        "Pencil-point Whitacre / Sprotte",
+                        "Pencil-point spreads fibers, promoting elastic recoil hole closure"
+                    ],
+                    [
+                        "Needle Gauge Caliber",
+                        "Large bore (16G-18G Tuohy needle)",
+                        "Small bore (25G-27G pencil point)",
+                        "Hole cross-sectional area correlates with CSF leak rate"
+                    ],
+                    [
+                        "Patient Age and Sex",
+                        "Young females aged 18 to 35 years",
+                        "Elderly patients over 65 years",
+                        "Elderly have reduced dural elasticity and lower intracranial sensitivity"
+                    ],
+                    [
+                        "Bevel Orientation (Quincke)",
+                        "Bevel oriented across dural fibers",
+                        "Bevel oriented parallel to dural fibers",
+                        "Parallel entry slices fewer longitudinal elastic dural collagen strands"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Conservative Medical Management",
+            "tx": "**Conservative medical therapy for PDPH** encompasses bed rest in the comfortable position, aggressive oral and intravenous hydration, oral analgesics (paracetamol, NSAIDs, codeine), and intravenous or oral caffeine (300 to 500 mg orally or 500 mg IV caffeine sodium benzoate). Caffeine acts as a central adenosine receptor antagonist, producing compensatory cerebral vasoconstriction that counteracts intracranial compensatory venodilation.",
+            "say": "Conservative medical therapy for PDPH encompasses bed rest in the comfortable position, aggressive oral and intravenous hydration, oral analgesics (paracetamol, NSAIDs, codeine), and intravenous or oral caffeine (300 to 500 mg orally or 500 mg IV caffeine sodium benzoate). Caffeine acts as a central adenosine receptor antagonist, producing compensatory cerebral vasoconstriction that counteracts intracranial compensatory venodilation.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Prescribe bed rest and aggressive oral/IV hydration"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Administer regular paracetamol and NSAID analgesia"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Give oral or IV caffeine (300-500 mg) for cerebral vasoconstriction"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Re-evaluate at 24 to 48 hours; proceed to blood patch if headache persists"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Epidural Blood Patch (EBP) Protocol",
+            "tx": "**Epidural blood patch definitive protocol** represents the gold standard curative intervention for moderate to severe refractory PDPH, boasting a 70 to 90 percent success rate on the first attempt. Under strict aseptic technique, an epidural needle enters the epidural space at or one space below the prior dural puncture site; concurrently, 15 to 20 milliliters of autologous blood is drawn sterilely from an antecubital vein and slowly injected into the epidural space.",
+            "say": "Epidural blood patch definitive protocol represents the gold standard curative intervention for moderate to severe refractory PDPH, boasting a 70 to 90 percent success rate on the first attempt. Under strict aseptic technique, an epidural needle enters the epidural space at or one space below the prior dural puncture site; concurrently, 15 to 20 milliliters of autologous blood is drawn sterilely from an antecubital vein and slowly injected into the epidural space.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "EBP Procedural Component",
+                    "Standard Clinical Technique",
+                    "Mechanistic Action",
+                    "Key Safety Precaution"
+                ],
+                "rows": [
+                    [
+                        "Epidural Needle Placement",
+                        "Tuohy needle at or below puncture site",
+                        "Positions blood clot directly over dural hole",
+                        "Confirm epidural space with loss of resistance to saline"
+                    ],
+                    [
+                        "Autologous Blood Volume",
+                        "15 to 20 milliliters sterile venipuncture",
+                        "Forms gelatinous compressive fibrin seal",
+                        "Halt injection if severe back or radicular pain occurs"
+                    ],
+                    [
+                        "Immediate Mechanism",
+                        "Massive volume compression of thecal sac",
+                        "Instantly elevates intracranial CSF pressure",
+                        "Explains instant relief of headache while on table"
+                    ],
+                    [
+                        "Post-Procedure Protocol",
+                        "Strict supine position for 1 to 2 hours",
+                        "Allows fibrin clot to firmly adhere to dura",
+                        "Avoid heavy lifting or straining for 48 hours"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "The patient's own blood becomes the dressing in this cross section. Injected into the epidural space, it spreads over the torn dura and clots into the **blood patch**, sealing the leak while epidural pressure itself squeezes the defect shut from outside. Relief of the postural headache often arrives before the needle leaves the room. Fifteen to twenty millilitres is the usual volume, drawn sterile from the arm at the same sitting, making this a cure assembled entirely from the patient.",
+            "say": "An epidural blood patch seals the dural hole with the patient's own clotted blood, curing postural headache.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m513-ans-neuraxial-post-dural-puncture.webp",
+                "alt": "Anatomical cross-section of lumbar epidural space showing autologous blood patch compressing dural defect",
+                "caption": "Anatomical cross-section of lumbar epidural space showing autologous blood patch compressing dural defect. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "High Spinal versus Total Spinal",
+            "tx": "**High spinal and total spinal emergency** occurs when local anaesthetic spreads cephalad above anticipated dermatomes: a high spinal (blocking thoracic T1 to T4 cardioaccelerator fibers) causes severe bradycardia, hypotension, dyspnoea, and upper limb numbness. A total spinal occurs when local anaesthetic enters the subdural space or ascends into the cervical spine and brainstem, paralyzing the diaphragm (phrenic C3-C5), provoking unconsciousness, apnea, and dilated fixed pupils.",
+            "say": "High spinal and total spinal emergency occurs when local anaesthetic spreads cephalad above anticipated dermatomes: a high spinal (blocking thoracic T1 to T4 cardioaccelerator fibers) causes severe bradycardia, hypotension, dyspnoea, and upper limb numbness. A total spinal occurs when local anaesthetic enters the subdural space or ascends into the cervical spine and brainstem, paralyzing the diaphragm (phrenic C3-C5), provoking unconsciousness, apnea, and dilated fixed pupils.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "High Spinal Blockade (T1 to T4)",
+                    "points": [
+                        "Blocks cardiac sympathetic accelerator fibers (T1-T4)",
+                        "Severe bradycardia and profound systemic hypotension",
+                        "Patient remains fully conscious with weak hand grip and dyspnoea"
+                    ]
+                },
+                "right": {
+                    "title": "Total Spinal Blockade (C1 to Brainstem)",
+                    "points": [
+                        "Ascends to cervical roots and medullary cardiorespiratory centers",
+                        "Complete respiratory arrest and total loss of consciousness",
+                        "Bilateral unreactive dilated pupils and cardiovascular collapse"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Emergency Total Spinal Resuscitation",
+            "tx": "**Emergency management of total spinal** requires swift, aggressive supportive resuscitation following airway, breathing, and circulation priorities: immediately tilt table head-up slightly if within 5 minutes (to arrest hyperbaric ascent), support airway with 100 percent oxygen, perform rapid tracheal intubation with mechanical ventilation, infuse rapid crystalloid boluses, and administer intravenous adrenaline or ephedrine and atropine for profound bradycardia.",
+            "say": "Emergency management of total spinal requires swift, aggressive supportive resuscitation following airway, breathing, and circulation priorities: immediately tilt table head-up slightly if within 5 minutes (to arrest hyperbaric ascent), support airway with 100 percent oxygen, perform rapid tracheal intubation with mechanical ventilation, infuse rapid crystalloid boluses, and administer intravenous adrenaline or ephedrine and atropine for profound bradycardia.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify sudden loss of consciousness, apnea, and hypotension"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Call operating theatre cardiac arrest team immediately"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Ventilate with 100% O2 and execute rapid tracheal intubation"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Administer IV adrenaline bolus (10-50 mcg) and rapid IV fluid bolus"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Post-Spinal Hypotension Management",
+            "tx": "**Spinal-induced hypotension mechanisms** result from preganglionic sympathetic vasoconstrictor nerve blockade (sympathetic denervation extending two to four dermatomes higher than sensory block), causing massive venodilation that pools blood in capacitance beds, dropping venous return, preload, and cardiac output. Treat with intravenous fluid coloading (crystalloid 15 mL/kg given during block placement), phenylephrine (alpha-1 agonist), or ephedrine.",
+            "say": "Spinal-induced hypotension mechanisms result from preganglionic sympathetic vasoconstrictor nerve blockade (sympathetic denervation extending two to four dermatomes higher than sensory block), causing massive venodilation that pools blood in capacitance beds, dropping venous return, preload, and cardiac output. Treat with intravenous fluid coloading (crystalloid 15 mL/kg given during block placement), phenylephrine (alpha-1 agonist), or ephedrine.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Vasopressor Agent",
+                    "Receptor Pharmacological Profile",
+                    "Hemodynamic Clinical Effect",
+                    "Clinical Indication in Spinal Shock"
+                ],
+                "rows": [
+                    [
+                        "Phenylephrine",
+                        "Pure alpha-1 adrenergic agonist",
+                        "Arteriolar vasoconstriction without tachycardia",
+                        "First-line agent when maternal heart rate is elevated"
+                    ],
+                    [
+                        "Ephedrine",
+                        "Mixed direct/indirect alpha and beta agonist",
+                        "Increases cardiac output and heart rate",
+                        "First-line agent when maternal hypotension is accompanied by bradycardia"
+                    ],
+                    [
+                        "Noradrenaline (Norepinephrine)",
+                        "Potent alpha-1 and mild beta-1 agonist",
+                        "Restores arterial tone with stable stroke volume",
+                        "Increasingly favored low-dose infusion in obstetric spinal"
+                    ],
+                    [
+                        "Crystalloid Coloading",
+                        "Volume expansion during injection",
+                        "Counters rapid capacitance bed venodilation",
+                        "Superior to resting pre-loads which clear via diuresis"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

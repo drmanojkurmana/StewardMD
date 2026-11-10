@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-helminths-ascaris",
+ "subject": "community-medicine",
+ "module": "cm-helminths",
+ "title": "Ascaris and Soil Transmitted Helminths: Burden, Deworming and WASH",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The commonest worm on earth",
+   "tx": "**Ascaris lumbricoides** infects more people than any other intestinal worm, thriving wherever faeces reach soil and hands, food or water carry embryonated eggs back to mouths. Adult worms live a year or two in the jejunum, females releasing enormous daily egg counts that need two to three weeks in warm moist soil to become infective.",
+   "say": "The world's commonest worm rides faeces to soil to mouth. Eggs need weeks in warm soil before they can infect. Break that soil interval and transmission falls.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fact"],
+    "rows": [
+     ["Site in host", "Jejunum lumen"],
+     ["Infective stage", "Embryonated egg from soil"],
+     ["Soil maturation", "About 2 to 3 weeks"],
+     ["Adult life span", "1 to 2 years"]
+    ]
+   }
+  },
+  {
+   "title": "The lung passage nobody expects",
+   "tx": "**Larval migration** carries hatched larvae from gut through liver and lungs, where a heavy passage ten to fourteen days after ingestion produces cough, wheeze, fever and fleeting lung shadows with blood eosinophilia, the Loeffler syndrome pattern. Larvae are then coughed up and swallowed into their intestinal adult life. Light infections skip symptoms entirely.",
+   "say": "Larvae tour liver and lungs before settling in gut. Heavy passage gives transient cough, shadows and eosinophilia around two weeks. Light infections stay silent throughout.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Eggs swallowed from soil route"},
+     {"id": "b", "label": "Larvae hatch, reach liver and lungs"},
+     {"id": "c", "label": "Coughed up and swallowed"},
+     {"id": "d", "label": "Adults mature in jejunum"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "When worm load becomes surgical",
+   "tx": "A **worm bolus** in a heavily infected child can obstruct the ileum, presenting with colicky pain, vomiting, a palpable mobile mass and absolute constipation, sometimes progressing to volvulus or intussusception. Single worms wander into the biliary tree causing cholangitis or pancreatitis, or exit through nose and mouth during fever or anaesthesia, stories every examiner expects recognised.",
+   "say": "Heavy loads knot into obstructing boluses in children; single wanderers enter bile ducts or appear at the nose. Colic plus a mobile mass in endemic country means worms.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Event", "Presentation"],
+    "rows": [
+     ["Bolus obstruction", "Colic, vomiting, palpable mass"],
+     ["Biliary migration", "Cholangitis, pancreatitis"],
+     ["Volvulus, intussusception", "Surgical abdomen"],
+     ["Wandering worm", "Exit via nose or mouth"]
+    ]
+   }
+  },
+  {
+   "title": "Nutrition: the quiet daily tax",
+   "tx": "**Nutritional harm** from chronic soil transmitted infection is cumulative rather than dramatic: appetite loss, malabsorption, vitamin A and iron losses, and competition for food blunt growth, school attention and physical fitness in children carrying moderate to heavy loads. Hookworm adds direct blood loss and anaemia, whipworm adds dysentery and growth failure in heavy infections.",
+   "say": "The daily tax is growth, attention and fitness, not drama. Hookworm bleeds iron away, whipworm inflames the colon. Moderate loads in schoolchildren carry the population burden.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ascaris and whipworm",
+     "points": ["Malabsorption, appetite loss", "Growth and learning effects", "Obstruction at heavy loads", "Dysentery with heavy whipworm"]
+    },
+    "right": {
+     "title": "Hookworm",
+     "points": ["Chronic intestinal blood loss", "Iron deficiency anaemia", "Ground itch at entry", "Protein loss in heavy loads"]
+    }
+   }
+  },
+  {
+   "title": "Diagnosis: eggs under the microscope",
+   "tx": "**Stool microscopy** finds fertile Ascaris eggs with their thick mamillated coats readily in established infections, and concentration methods raise yield in light infections. Eggs are absent during the lung migration weeks and in male only infections, so a negative stool never excludes early disease. Eosinophilia supports the suspicion while larvae travel.",
+   "say": "Mamillated eggs confirm established infection easily. Early lung passage and male only infections shed nothing. Negative stool plus eosinophilia still fits travelling larvae.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Finding", "Interpretation"],
+    "rows": [
+     ["Mamillated fertile eggs", "Established Ascaris infection"],
+     ["No eggs, eosinophilia", "Migration phase possible"],
+     ["Adult worm passed", "Confirm species visually"],
+     ["Eggs per gram counts", "Intensity classification"]
+    ]
+   }
+  },
+  {
+   "title": "Albendazole: one dose, whole class",
+   "tx": "A **single 400 milligram albendazole** dose cures most Ascaris infections and reduces hookworm and whipworm loads, with mebendazole as the standard alternative, and both are safe enough for population campaigns without individual diagnosis. Obstruction changes everything: conservative decompression and fluids come first, anthelmintics follow once the bowel moves, under surgical watch.",
+   "say": "One albendazole tablet clears most Ascaris. In obstruction, decompress first and deworm when the bowel moves, surgeons watching. Campaign safety never overrides surgical sequence.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Drug action"],
+    "rows": [
+     ["Uncomplicated infection", "Albendazole 400 mg single dose"],
+     ["Campaign setting", "No prior stool test needed"],
+     ["Bowel obstruction", "Decompress first, drug later"],
+     ["Pregnancy first trimester", "Defer routine deworming"]
+    ]
+   }
+  },
+  {
+   "title": "National Deworming Day logic",
+   "tx": "**Mass deworming** through National Deworming Day delivers albendazole to children one to nineteen years through schools and Anganwadis on fixed February and August rounds, with mop up days for absentees. The strategy accepts instant reinfection as inevitable and instead holds worm intensity below the level where nutrition, anaemia and obstruction accumulate.",
+   "say": "Fixed national rounds dose every child one to nineteen, absentees mopped up. Reinfection is expected; the goal is keeping intensity below harm, not sterile soil.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Fixed national deworming date"},
+     {"id": "b", "label": "Dose at school or Anganwadi"},
+     {"id": "c", "label": "Mop up day for absentees"},
+     {"id": "d", "label": "Repeat next round, intensity held low"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "WASH: ending reinfection at source",
+   "tx": "**Sanitation first** is the permanent half of control: toilets that end open defecation, safe disposal of child faeces, handwashing with soap, washed raw vegetables and protected water stop eggs reaching soil and mouths. Deworming without WASH is a subscription renewed forever; WASH without deworming leaves today's burden untreated. Programmes fund both deliberately.",
+   "say": "Tablets rent control; toilets own it. Handwashing, safe child faeces disposal and washed food close the soil loop. Neither half works alone for long.",
+   "vis": {
+    "kind": "table",
+    "cols": ["WASH element", "Transmission blocked"],
+    "rows": [
+     ["Toilet use, no open defecation", "Eggs reaching soil"],
+     ["Child faeces disposal", "Household soil seeding"],
+     ["Handwashing with soap", "Hand to mouth transfer"],
+     ["Washing raw vegetables", "Food borne eggs"]
+    ]
+   }
+  },
+  {
+   "title": "Measuring control: prevalence and intensity",
+   "tx": "**Programme monitoring** repeats stool surveys in sentinel schools, classifying communities by prevalence and intensity to set treatment frequency: high prevalence areas treat twice yearly, moderate yearly, and low areas may shift to targeted case care. Egg reduction after rounds audits drug delivery quality, while sanitation coverage predicts whether gains will hold.",
+   "say": "Sentinel school surveys set the rhythm: twice yearly, yearly, or targeted. Egg reduction audits delivery, sanitation coverage forecasts whether gains survive.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Survey result", "Response"],
+    "rows": [
+     ["High prevalence", "Twice yearly mass treatment"],
+     ["Moderate prevalence", "Yearly mass treatment"],
+     ["Low prevalence", "Targeted case treatment"],
+     ["Poor egg reduction", "Audit drug quality and coverage"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

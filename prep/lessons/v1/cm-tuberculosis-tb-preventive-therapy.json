@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-tuberculosis-tb-preventive-therapy",
+ "subject": "community-medicine",
+ "module": "cm-tuberculosis",
+ "title": "TB Preventive Therapy: Treating Infection Before Disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Infection is not disease",
+   "tx": "**Latent TB infection** means viable bacilli held in check by immunity, with no symptoms, no radiographic disease and no infectiousness, yet a lifetime reactivation risk around five to ten percent, concentrated in the first two years and in immunosuppression. Preventive therapy treats this silent state in people whose risk justifies drug exposure.",
+   "say": "Infected, healthy, non infectious, five to ten percent lifetime risk. Early years and weak immunity hold most danger. Preventive therapy treats risk, not symptoms.",
+   "vis": {
+    "kind": "table",
+    "cols": ["State", "Features"],
+    "rows": [
+     ["Latent infection", "No symptoms, not infectious"],
+     ["Lifetime risk", "About 5 to 10 percent"],
+     ["Highest risk window", "First 2 years after infection"],
+     ["Risk amplifiers", "HIV, TNF blockers, silicosis"]
+    ]
+   }
+  },
+  {
+   "title": "Rule out active TB first, always",
+   "tx": "**Excluding active disease** precedes every preventive course: symptom enquiry for cough, fever, weight loss and night sweats, chest radiography where indicated, and sputum testing for anyone symptomatic. Giving one or two drugs to undiagnosed active TB manufactures resistance, the cardinal error preventive programmes are designed never to commit.",
+   "say": "Symptoms, film, sputum if symptomatic, then preventive drugs. Treating hidden active disease with one drug breeds resistance. Exclusion first is not bureaucracy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Contact or risk person identified"},
+     {"id": "b", "label": "Symptom screen and radiograph"},
+     {"id": "c", "label": "Sputum test if symptomatic"},
+     {"id": "d", "label": "Preventive course if disease excluded"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Who gets it: contacts and risk groups",
+   "tx": "**Eligible groups** under the programme centre on household contacts of bacteriologically confirmed pulmonary cases, all ages once disease is excluded, plus people living with HIV, dialysis and transplant patients, silicosis, and those starting anti TNF or steroid immunosuppression. Young child contacts sit first in every queue because progression is fastest and severest there.",
+   "say": "Household contacts first, youngest children ahead, then HIV, dialysis, silicosis and planned immunosuppression. Progression speed writes the queue order.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group", "Why first"],
+    "rows": [
+     ["Child household contacts", "Fast, severe progression"],
+     ["Adult household contacts", "Recent infection likely"],
+     ["People with HIV", "High annual reactivation"],
+     ["Anti TNF starters", "Risk spikes with therapy"]
+    ]
+   }
+  },
+  {
+   "title": "Testing for infection: TST and IGRA",
+   "tx": "The **tuberculin skin test** and interferon gamma release assays both detect immune memory of infection, neither distinguishes latent from active disease, and neither is mandatory before preventive therapy in high risk contacts under programme guidance where testing would delay protection. BCG vaccination clouds skin test specificity, one reason blood assays attract despite cost.",
+   "say": "Skin test and IGRA read immune memory, never disease itself. High risk contacts should not wait on tests. BCG muddies skin readings; blood tests cost more.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tuberculin skin test",
+     "points": ["Cheap, field friendly", "Needs return visit at 48 to 72 h", "BCG cross reaction", "Boosting on repeats"]
+    },
+    "right": {
+     "title": "IGRA blood test",
+     "points": ["Single visit", "BCG does not interfere", "Laboratory dependent", "Higher cost per test"]
+    }
+   }
+  },
+  {
+   "title": "Regimens: shorter wins adherence",
+   "tx": "**Preventive regimens** have shortened over time: six to nine months of daily isoniazid historically, then three months of weekly rifapentine plus isoniazid, three to four months of rifampicin combinations, and one month daily rifapentine isoniazid in some guidance. Shorter courses complete far more often, and completion, not theoretical efficacy, decides population benefit.",
+   "say": "Months of isoniazid yielded to twelve weekly doses and other short courses. Completion beats elegance. The best regimen is the one contacts actually finish.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regimen pattern", "Duration"],
+    "rows": [
+     ["Isoniazid daily", "6 to 9 months"],
+     ["Weekly rifapentine plus isoniazid", "3 months"],
+     ["Rifampicin combinations", "3 to 4 months"],
+     ["Daily rifapentine isoniazid", "1 month, selected guidance"]
+    ]
+   }
+  },
+  {
+   "title": "Safety: liver, nerves and interactions",
+   "tx": "**Isoniazid safety** work watches for hepatitis, risk rising with age, alcohol and pregnancy, and peripheral neuropathy prevented by pyridoxine in diabetes, HIV, pregnancy and malnutrition. Rifamycins induce metabolising enzymes, cutting levels of oral contraceptives, some antiretrovirals and transplant drugs, so a medication reconciliation precedes the first dose, not the first complication.",
+   "say": "Liver symptoms stop isoniazid fast; pyridoxine shields nerves in risk groups. Rifamycins rewrite other drugs' levels. Reconcile medicines before dose one.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk", "Guard"],
+    "rows": [
+     ["Hepatitis", "Symptom review, stop rules"],
+     ["Peripheral neuropathy", "Pyridoxine in risk groups"],
+     ["Drug interactions", "Medication reconciliation"],
+     ["Alcohol use", "Counselling at start"]
+    ]
+   }
+  },
+  {
+   "title": "Children under five: the window period",
+   "tx": "**Child contacts** under five receive preventive therapy once active disease is excluded, without waiting for skin test conversion, because progression to meningitis and miliary disease can outrun test timelines. A repeat assessment after the window period catches late converters. This single rule prevents the most catastrophic TB presentations in paediatrics.",
+   "say": "Under five, treat after excluding disease; never wait for skin conversion. Meningitis outruns test schedules at this age. Speed is the safety mechanism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Child contact under five identified"},
+     {"id": "b", "label": "Exclude active disease"},
+     {"id": "c", "label": "Start preventive therapy promptly"},
+     {"id": "d", "label": "Reassess after window period"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Cascade losses: where contacts disappear",
+   "tx": "The **preventive cascade** leaks at every step: contacts not listed, listed but not evaluated, evaluated but not started, started but not completed. Programmes now report each step's conversion like a laboratory funnel, because a perfect regimen multiplied by twenty percent completion changes almost nothing at population level.",
+   "say": "Listed, evaluated, started, completed: contacts vanish at every joint. Report each conversion honestly. Regimen quality times completion equals impact.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cascade step", "Typical leak"],
+    "rows": [
+     ["Contacts listed", "Incomplete household listing"],
+     ["Evaluated", "Travel and wage loss barriers"],
+     ["Started", "Fear of drugs without illness"],
+     ["Completed", "No follow up ownership"]
+    ]
+   }
+  },
+  {
+   "title": "Drug resistant contacts: specialist ground",
+   "tx": "**Contacts of multidrug resistant cases** need individualised decisions, increasingly fluoroquinolone based preventive regimens under specialist and programme guidance, with two years of clinical observation as the safety net when therapy is deferred. Extrapolating drug sensitive recipes to resistant exposures is the error this referral step exists to prevent.",
+   "say": "Resistant index, specialist decision. Fluoroquinolone based prevention where advised, two years of watching otherwise. Never photocopy the drug sensitive recipe here.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Approach"],
+    "rows": [
+     ["MDR index contact", "Specialist evaluation"],
+     ["Preventive chosen", "Fluoroquinolone based per guidance"],
+     ["Therapy deferred", "Clinical observation 2 years"],
+     ["Any symptoms", "Immediate full evaluation"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

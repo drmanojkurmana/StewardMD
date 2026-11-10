@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-exanthems-congenital-rubella-syndrome",
+ "subject": "community-medicine",
+ "module": "cm-exanthems",
+ "title": "Congenital Rubella Syndrome: Timing, Triad and Prevention",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A mild rash with a nine month shadow",
+   "tx": "**Rubella** in children and adults is a brief, mild illness of low fever, pink rash and tender lymph nodes behind the ears and in the neck, often passing unnoticed entirely. Its public health importance is entirely fetal: infection in early pregnancy can devastate organ development, so surveillance counts pregnant exposures, not playground rashes.",
+   "say": "A trivial rash in children, a catastrophe in early pregnancy. Rubella programmes exist for the fetus, not the febrile child in front of you.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rubella-german-measles-fig1.webp",
+    "alt": "Clinical features of rubella including rash and lymphadenopathy",
+    "caption": "Rubella: fine pink rash with posterior auricular lymphadenopathy. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Risk by week of gestation",
+   "tx": "**Gestational timing** decides damage: infection in the first ten to twelve weeks infects most fetuses and causes defects in the great majority, with risk falling steeply after sixteen weeks and deafness the latest possible injury into the second trimester. The same maternal rash is therefore an emergency at eight weeks and a lesser threat at twenty.",
+   "say": "First twelve weeks carry the worst risk, fading after sixteen, deafness last to leave. Week of pregnancy converts a mild rash into a prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Timing", "Fetal risk pattern"],
+    "rows": [
+     ["First 10 to 12 weeks", "High infection and defect rates"],
+     ["Weeks 13 to 16", "Falling, mainly deafness"],
+     ["After 16 to 20 weeks", "Low, hearing still watched"],
+     ["Late pregnancy", "Defects unlikely"]
+    ]
+   }
+  },
+  {
+   "title": "The classic triad",
+   "tx": "The **classic triad** of congenital rubella syndrome is sensorineural deafness, eye defects led by cataract, and congenital heart disease led by patent ductus arteriosus and pulmonary artery stenosis. Deafness is the commonest single defect and may be the only one, presenting late when newborn hearing screening or speech delay finally betrays it.",
+   "say": "Deafness, cataracts, patent ductus. Hearing loss leads and often hides alone until speech delays. Every unexplained congenital deafness deserves a rubella history.",
+   "vis": {
+    "kind": "table",
+    "cols": ["System", "Signature defect"],
+    "rows": [
+     ["Ear", "Sensorineural deafness"],
+     ["Eye", "Cataract, pigmentary retinopathy"],
+     ["Heart", "Patent ductus, pulmonary stenosis"],
+     ["Growth", "Low birth weight, growth delay"]
+    ]
+   }
+  },
+  {
+   "title": "Beyond the triad: the expanded syndrome",
+   "tx": "**Expanded features** include purpuric blueberry muffin skin lesions from extramedullary blood formation, enlarged liver and spleen, low platelets, bone lucencies, meningoencephalitis, microcephaly and developmental disability. Infected infants shed virus from throat and urine for many months, infecting susceptible pregnant contacts in nurseries and clinics.",
+   "say": "Blueberry muffin purpura, big liver and spleen, low platelets, small head. These infants shed virus for months. Nursery contacts who are pregnant need protection.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Origin"],
+    "rows": [
+     ["Blueberry muffin spots", "Skin blood formation"],
+     ["Hepatosplenomegaly", "Persistent fetal infection"],
+     ["Thrombocytopenia", "Marrow and spleen effects"],
+     ["Microcephaly", "Brain growth injury"]
+    ]
+   }
+  },
+  {
+   "title": "Confirming infection in mother and baby",
+   "tx": "**Laboratory confirmation** in the infant rests on rubella IgM at birth, persistent or rising IgG beyond the expected maternal antibody decay, and virus detection in throat or urine samples. Maternal diagnosis uses IgM and IgG avidity where available. Documentation matters for counselling, cohorting and the child's long term follow up plan.",
+   "say": "Infant IgM, IgG that refuses to decay, virus in throat or urine. Maternal avidity dates the infection. Confirm properly; labels follow this child for life.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Use"],
+    "rows": [
+     ["Infant rubella IgM", "Confirms congenital infection"],
+     ["Serial infant IgG", "Persistence beyond maternal decay"],
+     ["Throat or urine PCR", "Virus detection and shedding"],
+     ["Maternal IgG avidity", "Dates maternal infection"]
+    ]
+   }
+  },
+  {
+   "title": "Salt and pepper retinopathy",
+   "tx": "**Pigmentary retinopathy** gives the fundus a salt and pepper mottling that is the commonest eye finding yet usually spares vision, unlike dense congenital cataracts, microphthalmos and infantile glaucoma which threaten sight directly. A white pupil reflex in a newborn with maternal rash history is rubella until ophthalmology proves otherwise.",
+   "say": "Salt and pepper fundus mottling usually spares vision; cataract and glaucoma do not. White pupil plus rash history means urgent eye referral.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vision sparing",
+     "points": ["Salt and pepper retinopathy", "Mild pigment change", "Observe with follow up", "Commonest eye sign"]
+    },
+    "right": {
+     "title": "Vision threatening",
+     "points": ["Dense congenital cataract", "Microphthalmos", "Infantile glaucoma", "Early surgery referral"]
+    }
+   }
+  },
+  {
+   "title": "Prevention is vaccination before pregnancy",
+   "tx": "**Rubella containing vaccine** given in childhood measles rubella campaigns and to susceptible adolescent girls and women before pregnancy is the only prevention, because no treatment alters fetal infection once acquired. Live vaccine is avoided during pregnancy itself and pregnancy is deferred briefly after vaccination, a counselling point every antenatal clinic repeats.",
+   "say": "Vaccinate before pregnancy; nothing treats fetal infection afterwards. Live vaccine avoids pregnancy itself, with a short deferral after the dose. Timing is everything.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Childhood MR vaccination"},
+     {"id": "b", "label": "Check susceptibility before pregnancy"},
+     {"id": "c", "label": "Vaccinate non pregnant susceptibles"},
+     {"id": "d", "label": "Defer pregnancy briefly after dose"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Caring for the infected infant",
+   "tx": "**Infection control** cohorts congenitally infected infants away from non immune pregnant staff and visitors, with contact precautions for secretions and urine through the first year unless repeat testing shows shedding has stopped. Families need explicit warning that grandparents and pregnant relatives are the people this cheerful baby can silently harm.",
+   "say": "Cohort the baby, precautions with urine and secretions, shield pregnant contacts for months. Families rarely guess their infant endangers a pregnant grandmother.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Duration"],
+    "rows": [
+     ["Contact precautions", "While shedding persists"],
+     ["Avoid pregnant carers", "First year unless cleared"],
+     ["Repeat virus testing", "Guides release from precautions"],
+     ["Family counselling", "At diagnosis and discharge"]
+    ]
+   }
+  },
+  {
+   "title": "Elimination goals and surveillance",
+   "tx": "**Rubella elimination** rides on measles platforms: combined vaccine, coverage above ninety five percent, surveillance of congenital rubella syndrome through sentinel sites auditing deafness, cataract and heart defects in infants, plus rash fever surveillance with laboratory confirmation. Each detected syndrome case marks a chain of missed vaccination years earlier.",
+   "say": "One syndrome baby audits years of missed doses. Sentinel surveillance of deafness, cataract and heart defects keeps programmes honest about that debt.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Surveillance limb", "Catches"],
+    "rows": [
+     ["CRS sentinel sites", "Defect triad in infants"],
+     ["Rash fever surveillance", "Circulating rubella"],
+     ["Coverage surveys", "Susceptible pockets"],
+     ["Genotyping", "Importation versus endemic"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

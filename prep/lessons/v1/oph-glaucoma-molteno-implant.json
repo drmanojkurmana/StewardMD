@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-molteno-implant",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Glaucoma Drainage Devices and MIGS",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Glaucoma drainage devices** shunt aqueous through tube to equatorial plate reservoir where capsule absorbs, Molteno historical prototype and valved versus non valved modern designs controlling early hypotony differently. They serve failed trabeculectomy, scarred conjunctiva, uveitic and neovascular glaucoma where bleb filtration unlikely. Plate capsule resistance sets long term pressure floor for device eyes.",
+   "say": "Tube plate shunting together gives scarred conjunctiva solution in refractory glaucoma at surgical centres for adults failing filtration. Valve design gives hypotony difference additionally. Capsule gives pressure floor.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m272-oph-glaucoma-molteno-implant.webp",
+    "alt": "Diagram of a glaucoma drainage device, anterior chamber tube entry and equatorial plate covered by a fibrous bleb capsule.",
+    "caption": "A tube enters the anterior chamber while its equatorial plate sits under a fibrous capsule absorbing aqueous. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Molteno implant** pioneered plate concept, double plate larger surface lowering pressure more at diplopia and exposure cost in historical evolution to modern single plate valved devices. Surface area versus motility trade therefore writes device selection in large target reductions. Historical eponym therefore still anchors device examinations conceptually.",
+   "say": "Plate concept together gives device evolution in glaucoma surgery teaching at examinations for students reliably. Surface trade gives selection additionally. Eponym gives conceptual anchor.",
+   "vis": {
+    "kind": "table",
+    "title": "Device design split",
+    "cols": [
+     "Design",
+     "Early flow behaviour"
+    ],
+    "rows": [
+     [
+      "Valved device",
+      "Immediate flow, less hypotony"
+     ],
+     [
+      "Non valved device",
+      "Ligated until capsule forms"
+     ],
+     [
+      "Large plate area",
+      "Lower floor, motility cost"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tube complications corneal touch decompensation, tube exposure, plate motility diplopia and hypertensive phase weeks after non valved flow opens structure device follow up. Corneal endothelial surveillance therefore accompanies device years as graft endothelium surveillance anteriorly. **Tube position** at each visit protects cornea before symptoms in device clinics.",
+   "say": "Tube position together gives corneal protection in device follow up at glaucoma clinics for operated adults over years. Hypertensive phase gives timing additionally. Exposure gives surface review value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Trabeculectomy bleb route",
+     "points": [
+      "Subconjunctival bleb anterior",
+      "Thin bleb infection late"
+     ]
+    },
+    "right": {
+     "title": "Device plate route",
+     "points": [
+      "Equatorial capsule reservoir",
+      "Tube cornea motility risks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypertensive phase** after device flow opens gives pressure rise weeks three to six as capsule inflames before thinning to final resistance, drops bridging rather than failure labelling prematurely. Phase recognition therefore prevents unnecessary revision during expected capsule maturation. Timeline counselling at discharge sets this expectation explicitly.",
+   "say": "Phase recognition together gives bridging patience in device follow up at surgical clinics for operated adults over first months. Premature labelling gives revision error additionally. Timeline gives discharge value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Device course timeline",
+    "nodes": [
+     {
+      "id": "early",
+      "label": "Early flow controlled phase"
+     },
+     {
+      "id": "hyper",
+      "label": "Hypertensive capsule phase"
+     },
+     {
+      "id": "mature",
+      "label": "Mature capsule floor reached"
+     },
+     {
+      "id": "surv",
+      "label": "Tube cornea surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "early",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "mature"
+     ],
+     [
+      "mature",
+      "surv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pressure after a tube operation follows a script, and this graph is that script. Early **hypertensive phase** swelling of the capsule around week four to six raises pressure just when the team hopes for success, before the capsule thins and pressure settles. Drops bridge this interval; labelling the device failed at its first rise invites an operation nobody needed. Patients warned about the hump at consent tolerate it far better than patients surprised by it.",
+   "say": "Pressure after tube surgery often rises at four to six weeks as the capsule inflames, then settles. Bridge it with drops instead of declaring failure early.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m273-oph-glaucoma-molteno-implant.webp",
+    "alt": "Clinical intraocular pressure timeline after tube shunt implantation, early hypotony, a hypertensive phase at four to six weeks, then a plateau.",
+    "caption": "Intraocular pressure dips, peaks in a hypertensive phase at four to six weeks, then plateaus after tube surgery. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Minimally invasive glaucoma surgery** trabecular stents, canal procedures and subconjunctival micro shunts trade modest pressure lowering for safety and conjunctiva preservation, usually combined cataract surgery in mild moderate disease. They rarely achieve trabeculectomy low targets in advanced progression. Target magnitude therefore gates MIGS candidacy honestly in modern algorithms.",
+   "say": "Target magnitude together gives MIGS candidacy in modern glaucoma algorithms at surgical clinics for mild moderate adults. Safety trade gives conjunctiva value additionally. Advanced gives trabeculectomy persistence."
+  },
+  {
+   "tx": "Surgery selection algorithm by target, conjunctiva, prior surgery, angle type and visual potential: virgin moderate may MIGS or trabeculectomy, scarred refractory device, poor potential cycloablation from laser lesson. **Potential plus target** therefore writes glaucoma operation name in examinations algorithmically. Shared decision therefore documents target and potential explicitly before any device is ordered.",
+   "say": "Potential together with target gives operation naming in glaucoma examinations for students algorithmically in surgical cases. Conjunctiva gives route additionally. Angle gives family split completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Operation selection map",
+    "cols": [
+     "Scenario",
+     "Tendency"
+    ],
+    "rows": [
+     [
+      "Mild moderate with cataract",
+      "MIGS combined consideration"
+     ],
+     [
+      "Low target progressing virgin",
+      "Trabeculectomy benchmark"
+     ],
+     [
+      "Scarred failed filtration",
+      "Drainage device route"
+     ],
+     [
+      "Poor visual potential painful",
+      "Cycloablation consideration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paediatric glaucoma surgery angle based goniotomy or trabeculotomy first, devices and trabeculectomy later where angle surgery fails, contrasting adult filtration first habits. Lifelong device surveillance in child therefore counsels growth and revision probability honestly. **Angle first childhood** rule therefore separates paediatric algorithms in examinations.",
+   "say": "Angle first together gives paediatric separation in glaucoma surgery examinations for students reliably in congenital cases. Lifelong gives counselling additionally. Adult gives filtration contrast.",
+   "vis": {
+    "kind": "table",
+    "title": "Age algorithm split",
+    "cols": [
+     "Group",
+     "First surgical logic"
+    ],
+    "rows": [
+     [
+      "Infant congenital",
+      "Angle surgery goniotomy route"
+     ],
+     [
+      "Adult virgin progressing",
+      "Trabeculectomy or MIGS target"
+     ],
+     [
+      "Scarred refractory any",
+      "Device plate route"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors devices: tube to plate capsule floor, valved early flow, hypertensive phase bridges and tube watches cornea. MIGS trades target for safety, trabeculectomy benchmarks low targets. **Operation by scenario** table answers glaucoma surgery selection faster than device brand recall. Device registries therefore track tube and capsule outcomes across years for governance learning.",
+   "say": "Scenario table together gives operation selection in glaucoma examinations for students reliably across surgical cases. Capsule gives device floor additionally. Target gives MIGS honesty completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Device anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Molteno concept",
+      "Tube to equatorial plate capsule"
+     ],
+     [
+      "Hypertensive phase",
+      "Weeks rise, bridge not failure"
+     ],
+     [
+      "MIGS trade",
+      "Safety over low target depth"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Drainage device principle",
+   "b": "Tube shunts aqueous to equatorial plate capsule reservoir in scarred or refractory glaucoma."
+  },
+  {
+   "f": "Hypertensive phase",
+   "b": "Pressure rise weeks after device flow opens as capsule inflames; bridge with drops, not failure."
+  },
+  {
+   "f": "MIGS trade",
+   "b": "Modest lowering with safety and conjunctiva preservation; not for low advanced targets."
+  }
+ ],
+ "keys": [
+  "Tube position protects cornea lifelong",
+  "Operation follows target, conjunctiva, potential",
+  "Children angle surgery before devices"
+ ]
+}

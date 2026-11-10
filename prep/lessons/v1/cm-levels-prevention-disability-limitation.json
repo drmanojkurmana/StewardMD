@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-levels-prevention-disability-limitation",
+ "subject": "community-medicine",
+ "module": "cm-levels-prevention",
+ "title": "Disability Limitation, Rehabilitation, Impairment and Handicap",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The sequence from disease to handicap",
+   "tx": "Learn the chain in order: **disease** leads to impairment, impairment to disability, and disability to handicap. An accident illustrates each link: the injury is the disorder, loss of a foot is the impairment, inability to walk is the disability, and unemployment that follows is the handicap. Each link invites a different intervention, which the next steps separate.",
+   "say": "Memorise the chain in order. Disease brings impairment, impairment brings disability, disability brings handicap. An accident shows it clearly: injury, lost foot, cannot walk, loses the job. Each link needs a different response.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Disease or disorder"},
+     {"id": "b", "label": "Impairment"},
+     {"id": "c", "label": "Disability"},
+     {"id": "d", "label": "Handicap"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Impairment: loss of structure or function",
+   "tx": "**Impairment** means any loss or abnormality of psychological, physiological or anatomical structure or function, such as a lost foot, defective vision or intellectual disability. It may be visible or invisible, temporary or permanent, progressive or regressive. One impairment can breed another: nerve damage in leprosy, the primary impairment, leads to plantar ulcers as a secondary impairment.",
+   "say": "First link means loss of structure or function. A lost foot, defective vision or intellectual disability all qualify. Impairments can hide or show, pass or persist, even breed secondary ones, as leprosy nerve damage leads to plantar ulcers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Property", "Possibilities"],
+    "rows": [
+     ["Visibility", "Visible, like limb loss, or invisible, like pain pathways"],
+     ["Duration", "Temporary or permanent"],
+     ["Course", "Progressive or regressive"],
+     ["Sequence", "Primary, then secondary impairments"]
+    ]
+   }
+  },
+  {
+   "title": "Disability: activity beyond normal range",
+   "tx": "**Disability** means restriction or lack of ability to perform an activity in the manner or within the range considered normal for a human being, resulting from an impairment. Difficulty seeing, hearing, walking, writing or speaking all qualify. Modern usage treats disability as an umbrella term covering impairments, activity limitations and participation restrictions together.",
+   "say": "Second link concerns activity. The person cannot perform an activity in the normal manner or range: seeing, hearing, walking, writing or speaking. Modern usage widens the word into an umbrella over impairment, activity limits and participation limits.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Activity lost", "Impairment behind it"],
+    "rows": [
+     ["Seeing", "Defective vision or eye loss"],
+     ["Hearing", "Conductive or nerve deafness"],
+     ["Walking", "Limb loss or paralysis"],
+     ["Writing or speaking", "Hand or speech pathway injury"]
+    ]
+   }
+  },
+  {
+   "title": "Handicap: the social disadvantage",
+   "tx": "**Handicap** means a disadvantage resulting from impairment or disability that limits or prevents fulfilment of a role normal for that person by age, sex and social and cultural factors. A disability becomes a handicap only when it blocks what society expects at that life stage. The term has since been dropped from current classifications, a favourite exam footnote.",
+   "say": "Third link is social. Disadvantage blocks the role expected at that age and in that culture, like work expected of an adult. A disability turns into this only when it blocks expected roles. Note the footnote: current classifications have dropped the term.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Disability stays individual",
+     "points": ["Cannot walk the normal distance", "Measured against normal human range", "Belongs to body and activity"]
+    },
+    "right": {
+     "title": "Handicap adds society",
+     "points": ["Cannot keep the expected job", "Measured against age and social role", "Belongs to participation in life"]
+    }
+   }
+  },
+  {
+   "title": "Disability limitation in late presentation",
+   "tx": "**Disability limitation** applies when a patient reports late in pathogenesis, aiming to prevent or halt the move from impairment toward handicap. Intense, adequate treatment at this stage can still arrest the process: cataract surgery restores sight, glaucoma treatment saves remaining vision, and leprosy therapy prevents deformity. Reporting late narrows, but does not erase, what treatment can win back.",
+   "say": "Late presentation still leaves room to act. Adequate treatment here halts the slide from impairment toward handicap. Cataract surgery restores sight, glaucoma care saves remaining vision, leprosy therapy prevents deformity. Late narrows the winnings; it does not erase them.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Late presentation", "Limitation achieved"],
+    "rows": [
+     ["Cataract with poor vision", "Surgery restores sight"],
+     ["Glaucoma with field loss", "Treatment saves remaining vision"],
+     ["Leprosy with nerve damage", "Therapy prevents deformity"],
+     ["Diabetes with foot ulcer", "Care prevents amputation"]
+    ]
+   }
+  },
+  {
+   "title": "Disability prevention across all levels",
+   "tx": "**Disability prevention** spans every level: immunisation against polio reduces impairment occurrence at the primary level, appropriate treatment limits disability at the secondary level, and rehabilitation prevents disability hardening into handicap at the tertiary level. Communicable diseases, malnutrition, poor perinatal care and accidents cause about 70 percent of disabling impairments in developing countries, so primary action dominates.",
+   "say": "Prevention of disability uses every level. Polio vaccine stops impairment arising, good treatment limits disability, rehabilitation stops handicap forming. Since infections, malnutrition, poor perinatal care and accidents cause most cases in developing countries, primary action dominates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Immunisation stops impairment"},
+     {"id": "b", "label": "Treatment limits disability"},
+     {"id": "c", "label": "Rehabilitation blocks handicap"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Rehabilitation defined by restoration",
+   "tx": "**Rehabilitation** means the combined and coordinated use of medical, social, educational and vocational measures to train or retrain a person to the highest possible level of functional ability. Its test is social integration: active participation in mainstream community life. Care therefore continues after fever settles and stitches come out, until the person lives and works to the hilt of capacity.",
+   "say": "Restoration defines this stage. Medical, social, educational and vocational measures combine to train the person toward the highest reachable function. Social integration is the test. Care ends not when stitches come out, but when the person lives and works to full capacity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Stabilised defect or disability"},
+     {"id": "b", "label": "Coordinated retraining measures"},
+     {"id": "c", "label": "Highest reachable function"},
+     {"id": "d", "label": "Social integration"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Four areas of rehabilitation",
+   "tx": "Rehabilitation works in four areas: **medical rehabilitation** restores function, vocational rehabilitation restores capacity to earn a livelihood, social rehabilitation restores family and social relationships, and psychological rehabilitation restores personal dignity and confidence. Teams add physiotherapy, occupational therapy, speech therapy, audiology, psychology, education, social work and vocational guidance around the physician.",
+   "say": "Four areas organise the work. Medical care restores function, vocational training restores earning, social work restores relationships, psychological support restores dignity and confidence. Therapists, educators and vocational counsellors join the physician around the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Area", "Restores"],
+    "rows": [
+     ["Medical", "Bodily function"],
+     ["Vocational", "Capacity to earn a livelihood"],
+     ["Social", "Family and social relationships"],
+     ["Psychological", "Personal dignity and confidence"]
+    ]
+   }
+  },
+  {
+   "title": "Examples examiners quote",
+   "tx": "Quoted examples include **schools for the blind**, aids for people with limb loss, reconstructive surgery in leprosy, muscle re-education and graded exercises after neurological disorders, and change of profession where the old job no longer fits. Each example pairs a stabilised disability with a route back into ordinary life, which is exactly what the definition demands.",
+   "say": "Anchor the definition with examples. Schools for the blind, aids after limb loss, reconstructive surgery in leprosy, graded exercises after nerve injury, and a changed profession all pair lasting disability with a route back into ordinary life.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stabilised disability", "Route back"],
+    "rows": [
+     ["Blindness", "Schools for the blind and mobility training"],
+     ["Limb loss", "Prosthetic aids and gait training"],
+     ["Leprosy deformity", "Reconstructive surgery"],
+     ["Neurological weakness", "Muscle re-education and graded exercises"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-genitourinary-bosniak-classification",
+ "subject": "radiology",
+ "module": "rad-genitourinary",
+ "title": "Bosniak Classification of Renal Cysts and Renal Mass Imaging",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Bosniak grades cyst complexity",
+   "tx": "**Bosniak classification** sorts cystic renal masses by wall, septa, calcification and enhancing soft tissue into categories that carry rising cancer risk. Category 1 is a simple cyst with an imperceptible wall and water density, needing no follow up. Category 4 holds an enhancing solid nodule inside the cyst and is cancer until removed. The middle categories trade imaging features against surveillance intervals.",
+   "say": "Bosniak classification sorts cystic renal masses by wall, septa, calcification and enhancing tissue into categories with rising cancer risk. Category one is a simple cyst needing no follow up. Category four holds an enhancing solid nodule and is cancer until removed. Middle categories trade features against surveillance intervals.",
+   "vis": {"kind": "table", "cols": ["Category", "Key features", "Cancer risk guide"], "rows": [["1", "Thin wall, water density", "Near zero"], ["2", "Few thin septa, fine calcification", "Near zero"], ["2F", "More septa, needs follow up", "About 5 percent"], ["3", "Thick wall or septa enhance", "About 50 percent"], ["4", "Enhancing solid nodule", "About 90 percent"]]}
+  },
+  {
+   "title": "Simple cyst rules on ultrasound",
+   "tx": "**Simple renal cyst** on ultrasound is round, anechoic, with an imperceptible wall, posterior enhancement and no internal echoes or septa. Meeting every rule ends the workup at any age. A single thin septum or fine calcification still fits the minimally complex group that needs no follow up in most adults, while thick septa, debris or Doppler flow inside pushes the lesion into CT or MRI characterisation.",
+   "say": "Simple renal cyst on ultrasound is round, echo free, with an imperceptible wall, posterior enhancement and no septa. Meeting every rule ends the workup. Thick septa, debris or Doppler flow inside pushes the lesion into CT or MRI characterisation instead.",
+   "vis": {"kind": "compare", "left": {"title": "Simple cyst rules", "points": ["Round and echo free", "Imperceptible wall", "Posterior enhancement", "No septa or flow"]}, "right": {"title": "Needs characterisation", "points": ["Thick or many septa", "Internal debris", "Solid component", "Doppler flow inside"]}}
+  },
+  {
+   "title": "Enhancement separates cyst from tumour",
+   "tx": "**Enhancement** on CT means the lesion density rises at least 15 to 20 Hounsfield units after contrast, proving vascular tissue rather than fluid. A Bosniak 3 cyst shows enhancing thick walls or septa without a discrete nodule, landing near a fifty percent cancer rate and usually going to surgery or ablation. Pseudoenhancement can fake a 10 unit rise in small cysts surrounded by enhancing kidney, so MRI settles lesions under 2 cm.",
+   "say": "Enhancement on CT means density rises at least fifteen to twenty Hounsfield units after contrast, proving vascular tissue rather than fluid. A Bosniak three cyst shows enhancing thick walls without a nodule, landing near fifty percent cancer risk. MRI settles small lesions where pseudoenhancement fakes a rise.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Measure pre contrast density"}, {"id": "b", "label": "Measure post contrast density"}, {"id": "c", "label": "Rise 20 HU means tissue"}, {"id": "d", "label": "Assign Bosniak category"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Hyperdense cysts and the 2F watch",
+   "tx": "**Hyperdense cyst** holds old blood or protein, reading 20 to 90 Hounsfield units before contrast but never enhancing after it. A smooth round hyperdense lesion under 3 cm fully inside the kidney fits category 2 and needs nothing. Category 2F lesions carry more septa, thicker calcification or size over 3 cm, earning CT or MRI surveillance at six and twelve months then yearly to prove stability.",
+   "say": "Hyperdense cyst holds old blood or protein, reading twenty to ninety units before contrast but never enhancing after it. Category 2F lesions carry more septa or size over three centimetres, earning surveillance at six and twelve months then yearly to prove stability.",
+   "vis": {"kind": "table", "cols": ["Feature", "Category 2", "Category 2F"], "rows": [["Septa", "One or two thin", "Several, minimally thick"], ["Size guide", "Under 3 cm if hyperdense", "Over 3 cm watched"], ["Follow up", "None", "6 and 12 months, then yearly"], ["Action trigger", "Not applicable", "Growth or new nodule"]]}
+  },
+  {
+   "title": "Solid renal mass pathways",
+   "tx": "**Solid renal mass** imaging asks fat first: macroscopic fat inside the mass names angiomyolipoma, a benign tumour of fat, vessels and muscle that bleeds when over 4 cm or aneurysmal. No fat means renal cell carcinoma until proven otherwise, with clear cell type enhancing avidly and often heterogeneously. Oncocytoma mimics cancer on every sequence including its spoke wheel arteries and central scar, so most solid masses still end in histology.",
+   "say": "Solid renal mass imaging asks fat first: macroscopic fat names angiomyolipoma, which bleeds when over four centimetres. No fat means renal cell carcinoma until proven otherwise. Oncocytoma mimics cancer on every sequence, so most solid masses without fat still end in histology.",
+   "vis": {"kind": "compare", "left": {"title": "Fat present", "points": ["Angiomyolipoma", "Bleeds over 4 cm", "Tuberous sclerosis if multiple", "Embolisation for bleeding"]}, "right": {"title": "No fat", "points": ["Renal cell carcinoma likely", "Clear cell enhances avidly", "Oncocytoma mimics it", "Histology usually decides"]}}
+  },
+  {
+   "title": "Staging looks at veins and nodes",
+   "tx": "**Renal tumour staging** on CT hunts tumour thrombus climbing the renal vein into the inferior vena cava, which changes the operation from simple nephrectomy to vascular control and possible bypass. Chest CT follows because lung is the commonest metastatic site, and bone scan waits for pain or raised alkaline phosphatase. The kidney outline image set used in teaching pairs these anatomy points with the cyst categories in one view.",
+   "say": "Renal tumour staging hunts tumour thrombus climbing the renal vein into the vena cava, which changes the operation completely. Chest CT follows because lung is the commonest metastatic site. Bone scan waits for pain or raised alkaline phosphatase rather than running routinely.",
+   "vis": {"kind": "image", "src": "v1/lessons/media/srd-gu-kidney-fig1.webp", "alt": "Kidney imaging figure showing renal anatomy used for cyst and mass assessment.", "caption": "Renal anatomy reference for cyst and mass imaging. Illustration: StewardMD."}
+  },
+  {
+   "title": "Bosniak in polycystic kidneys",
+   "tx": "**Polycystic kidneys** break Bosniak scoring because hundreds of cysts overlap, bleed and calcify without cancer. New pain or fever in polycystic disease more often means cyst haemorrhage or infection than malignancy. A dominant mass that enhances solidly, grows fast or invades the vein still earns the cancer pathway. Transplant and dialysis kidneys develop acquired cystic disease with a real carcinoma risk, so their new solid nodules are never dismissed as just another cyst.",
+   "say": "Polycystic kidneys break Bosniak scoring because hundreds of cysts overlap, bleed and calcify without cancer. New pain more often means cyst haemorrhage or infection. A dominant solid enhancing mass still earns the cancer pathway, and dialysis kidneys with new solid nodules are never dismissed.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Dominant mass in cystic kidney"}, {"id": "b", "label": "Solid enhancement present"}, {"id": "c", "label": "Cancer pathway workup"}, {"id": "d", "label": "No enhancement: observe"}], "edges": [["a", "b"], ["b", "c"], ["b", "d"]]}
+  },
+  {
+   "title": "Reporting language that drives care",
+   "tx": "**Bosniak reporting** must name the category, the features earning it, comparison with priors and the exact follow up interval or surgical referral. Incidental simple cysts should be called benign in plain words so patients are not recalled needlessly. Growth of a cyst alone does not upgrade it, because benign cysts enlarge; new enhancing nodules, thickening walls or multiplying septa are the changes that move a lesion up a category.",
+   "say": "Bosniak reporting must name the category, the features earning it and the exact follow up interval or surgical referral. Simple cysts should be called benign plainly so patients are not recalled needlessly. Growth alone does not upgrade a cyst; new enhancing nodules or thickening walls move it up.",
+   "vis": {"kind": "table", "cols": ["Change on follow up", "Upgrade", "Reason"], "rows": [["Cyst enlarges only", "No", "Benign cysts grow"], ["New solid nodule", "Yes to 4", "Enhancing tissue appeared"], ["Wall thickens", "Yes", "Complexity increased"], ["Septa unchanged years", "No, discharge considered", "Stability proven"]]}
+  }
+ ]
+}

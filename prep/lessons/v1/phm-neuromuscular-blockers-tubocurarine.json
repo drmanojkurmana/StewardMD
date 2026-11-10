@@ -1,0 +1,283 @@
+{
+  "v": 1,
+  "module": "phm-neuromuscular-blockers",
+  "subject": "pharmacology",
+  "title": "Curare Alkaloids, Ganglionic Blockers, and Neuromuscular Safety Monitoring",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The classical historical prototype non-depolarizing neuromuscular blocking agent extracted from South American arrow poisons is **d-tubocurarine**. As a natural quaternary benzylisoquinoline alkaloid, it competes with acetylcholine for motor endplate nicotinic receptors without intrinsic agonist efficacy. Major clinical disadvantages that led to its obsolescence include substantial mast cell histamine liberation producing severe bronchospasm and autonomic ganglion blockade that causes precipitous systemic arterial hypotension.",
+      "say": "Tubocurarine is the prototype competitive blocker that fell out of clinical favor due to histamine release and hypotension.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "d-Tubocurarine",
+          "Pancuronium",
+          "Atracurium"
+        ],
+        "rows": [
+          [
+            "Chemical class",
+            "Benzylisoquinoline alkaloid",
+            "Synthetic aminosteroid",
+            "Synthetic benzylisoquinolinium"
+          ],
+          [
+            "Histamine liberation",
+            "Extensive (wheal, bronchospasm)",
+            "Negligible",
+            "Mild to moderate"
+          ],
+          [
+            "Autonomic ganglion block",
+            "Marked (arterial hypotension)",
+            "None (vagolytic tachycardia)",
+            "None"
+          ],
+          [
+            "Primary elimination",
+            "Hepatic and renal excretion",
+            "Renal excretion (80%)",
+            "Hofmann degradation (organ-independent)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Packed into bamboo, the dark resin in this photograph travelled from Amazonian hunting camps into the foundations of anaesthesia. Indigenous hunters valued **curare** because a poisoned dart paralysed prey without poisoning the meat, a selectivity that later fascinated physiologists. Purifying its active alkaloid gave medicine d-tubocurarine, the first relaxant whose dose could be measured and reversed. Holding the crude preparation beside its refined descendant reminds students that drug classes often begin as poisons, tamed by chemistry into tools with therapeutic indices.",
+      "say": "Crude curare resin carried in bamboo became d-tubocurarine, the first measurable neuromuscular blocking drug.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m450-phm-neuromuscular-blockers-tubocurarine.webp",
+        "alt": "Chondrodendron tomentosum botanical specimen and crude curare resin preparation in bamboo tubes",
+        "caption": "Chondrodendron tomentosum botanical specimen and crude curare resin preparation in bamboo tubes. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Every modern relaxant traces its family tree back to this jungle specimen. The vine **Chondrodendron tomentosum** yielded the resin hunters smeared on arrow tips, later purified into tubocurarine and carried to laboratories in bamboo tubes. From that crude poison came the first controlled paralysis in anaesthesia, and with it the ability to operate inside still abdomens. Its flaws, histamine release and ganglion blockade, then drove the design of cleaner successors, but the botanical starting point still anchors how the whole drug class is taught.",
+      "say": "Curare resin from a South American vine in bamboo tubes was the botanical origin of neuromuscular blockade.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m441-phm-neuromuscular-blockers-tubocurarine.webp",
+        "alt": "Chondrodendron tomentosum botanical specimen and crude curare resin preparation in bamboo tubes",
+        "caption": "Chondrodendron tomentosum botanical specimen and crude curare resin preparation in bamboo tubes. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Experimental demonstration of autonomic ganglionic blockade was established using the prototype competitive nicotinic antagonist **hexamethonium**. Acting as a selective antagonist at neuronal Nn nicotinic receptors in sympathetic and parasympathetic ganglia, hexamethonium interrupts autonomic transmission without affecting somatic neuromuscular Nm junctions. Its systemic administration abolishes vasomotor tone, collapses peripheral vascular resistance, and paralyzes intestinal peristalsis, providing foundational pharmacological insights into vascular control.",
+      "say": "Hexamethonium selectively blocks autonomic ganglionic Nn receptors without affecting skeletal muscle motor endplates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neuronal Nn blocker (Hexamethonium)",
+          "points": [
+            "Blocks autonomic ganglia and adrenal medulla",
+            "Abolishes sympathetic and parasympathetic tone",
+            "Causes profound postural hypotension",
+            "No direct action on skeletal motor endplates"
+          ]
+        },
+        "right": {
+          "title": "Muscular Nm blocker (Tubocurarine)",
+          "points": [
+            "Blocks somatic skeletal neuromuscular junctions",
+            "Produces voluntary flaccid motor paralysis",
+            "Minimal autonomic ganglion blockade at low doses",
+            "Causes respiratory diaphragmatic arrest"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Controlled surgical hypotensive anesthesia was historically managed using the ultra-short-acting sulfonium ganglionic blocker **trimethaphan**. By competitively antagonizing autonomic ganglionic Nn receptors and exerting direct peripheral vasodilating actions, trimethaphan allowed precise minute-to-minute arterial blood pressure titration during major intracranial aneurysm clipping. Its short five-minute elimination half-life required continuous intravenous micro-infusion, but modern vasodilators like nitroprusside and clevidipine have entirely superseded its use.",
+      "say": "Trimethaphan was an ultra-short-acting ganglion blocker used by infusion for controlled hypotensive neurosurgery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inf",
+            "label": "Continuous intravenous trimethaphan infusion"
+          },
+          {
+            "id": "gang",
+            "label": "Reversible blockade of sympathetic ganglia"
+          },
+          {
+            "id": "vaso",
+            "label": "Arteriolar and venous smooth muscle dilation"
+          },
+          {
+            "id": "bp",
+            "label": "Controlled operative hypotension minimizing aneurysm hemorrhage"
+          }
+        ],
+        "edges": [
+          [
+            "inf",
+            "gang"
+          ],
+          [
+            "gang",
+            "vaso"
+          ],
+          [
+            "vaso",
+            "bp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An acute hypermetabolic pharmacogenetic crisis triggered by succinylcholine combined with volatile anesthetics is **malignant hyperthermia**. Driven by gain-of-function mutations in the sarcoplasmic reticulum ryanodine receptor gene (RYR1), massive calcium efflux into skeletal myoplasm triggers sustained muscle contracture, intense heat production, severe lactic acidosis, and extensive rhabdomyolysis. Management demands immediate cessation of triggering agents, hyperventilation with one hundred percent oxygen, active cooling, and rapid administration of dantrolene.",
+      "say": "Malignant hyperthermia is a life-threatening calcium surge in muscle treated with immediate cessation and dantrolene.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trig",
+            "label": "Succinylcholine plus volatile anesthetic trigger"
+          },
+          {
+            "id": "ryr",
+            "label": "Sustained opening of mutated RYR1 calcium channels"
+          },
+          {
+            "id": "myo",
+            "label": "Massive myoplasmic calcium overload and rigor"
+          },
+          {
+            "id": "tox",
+            "label": "Hyperpyrexia, hyperkalemia, and rhabdomyolysis"
+          }
+        ],
+        "edges": [
+          [
+            "trig",
+            "ryr"
+          ],
+          [
+            "ryr",
+            "myo"
+          ],
+          [
+            "myo",
+            "tox"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Quantitative evaluation of competitive versus depolarizing neuromuscular blockade relies on peripheral nerve stimulation using the **train-of-four** pattern. Anesthesiologists deliver four electrical impulses at two hertz to the ulnar nerve while monitoring adductor pollicis twitches. Non-depolarizing blockers produce characteristic progressive fade between the fourth and first twitch (T4/T1 ratio), while depolarizing Phase I blocks exhibit uniform twitch depression without fade or post-tetanic exhaustion.",
+      "say": "Train-of-four peripheral nerve stimulation measures twitch fade to quantify competitive neuromuscular blockade.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Phase I depolarizing block",
+          "Phase II and non-depolarizing block"
+        ],
+        "rows": [
+          [
+            "Train-of-four response",
+            "All 4 twitches reduced equally (no fade)",
+            "Progressive fade from T1 to T4 (ratio < 0.9)"
+          ],
+          [
+            "Tetanic stimulation",
+            "Sustained twitch without fade",
+            "Rapid nonsustained fade during tetany"
+          ],
+          [
+            "Post-tetanic facilitation",
+            "Absent",
+            "Marked post-tetanic twitch potentiation"
+          ],
+          [
+            "Anticholinesterase effect",
+            "Augments and worsens paralysis",
+            "Reverses competitive blockade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Termination of non-depolarizing block requires pharmacological reversal with **cholinesterase inhibitors**. By preventing endogenous acetylcholine hydrolysis, intravenous neostigmine raises neurotransmitter concentrations in the synaptic cleft, competitively displacing curare-like blockers from postjunctional nicotinic receptors. To protect against parasympathetic bradycardia, excessive salivation, and bronchospasm, clinicians strictly co-administer muscarinic antagonists like glycopyrrolate or atropine in fixed stoichiometric proportions.",
+      "say": "Cholinesterase inhibitors elevate acetylcholine to displace competitive muscle relaxants from the motor endplate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neostigmine reversal mechanism",
+          "points": [
+            "Inhibits junctional acetylcholinesterase",
+            "Increases synaptic acetylcholine density",
+            "Competitively displaces non-depolarizing blocker",
+            "Restores spontaneous tidal ventilation"
+          ]
+        },
+        "right": {
+          "title": "Glycopyrrolate protection",
+          "points": [
+            "Selectively blocks peripheral muscarinic receptors",
+            "Neutralizes neostigmine-induced bradycardia",
+            "Suppresses pharyngeal and airway secretions",
+            "Lacks central blood-brain barrier penetrance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The target receptor for both physiological neurotransmission and competitive pharmacological blockade is the **nicotinic acetylcholine receptor**. Situated on junctional sarcolemmal crests at the motor endplate, this pentameric ligand-gated cation channel contains two alpha-1 subunits alongside beta-1, delta, and epsilon subunits. Binding of competitive antagonists to even one alpha subunit prevents channel opening, abolishing inward sodium flux and preventing muscle action potentials.",
+      "say": "Motor endplate nicotinic receptors are pentameric cation channels blocked competitively by curare drugs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nmj-endplate-myasthenia-blockers-fig1.webp",
+        "alt": "Neuromuscular junction endplate and receptor structure",
+        "caption": "Nicotinic acetylcholine receptor architecture on folded postjunctional muscle endplates targeted by neuromuscular blocking agents."
+      }
+    },
+    {
+      "tx": "Reversal of profound or intermediate steroid-based neuromuscular paralysis without autonomic side effects is achieved by **selective relaxant encapsulation**. The cyclodextrin host molecule sugammadex encapsulates rocuronium and vecuronium in a 1:1 ratio in the bloodstream. Because free drug is eliminated from plasma immediately, relaxant molecules diffuse away from neuromuscular junctions down their concentration gradient, restoring neuromuscular transmission within three minutes without requiring anticholinesterases.",
+      "say": "Sugammadex encapsulates rocuronium and vecuronium to reverse neuromuscular paralysis without anticholinergic drugs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sug",
+            "label": "Intravenous sugammadex injection"
+          },
+          {
+            "id": "enc",
+            "label": "1:1 stoichiometric encapsulation of free rocuronium"
+          },
+          {
+            "id": "diff",
+            "label": "Rapid diffusion of blocker away from motor endplate"
+          },
+          {
+            "id": "rec",
+            "label": "Full muscle strength restored within 3 minutes"
+          }
+        ],
+        "edges": [
+          [
+            "sug",
+            "enc"
+          ],
+          [
+            "enc",
+            "diff"
+          ],
+          [
+            "diff",
+            "rec"
+          ]
+        ]
+      }
+    }
+  ]
+}

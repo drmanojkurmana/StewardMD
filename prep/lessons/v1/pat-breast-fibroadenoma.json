@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-breast",
+  "subject": "pathology",
+  "title": "Fibroadenoma, Phyllodes, Fibrocystic Change, DCIS, and Invasive Breast Carcinomas",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A **fibroadenoma** is a biphasic tumour of glands and stroma that feels rubbery, smooth and strikingly mobile under the examining fingers, earning it the nickname breast mouse. It peaks between ages 15 and 35, may enlarge during pregnancy, and often shrinks with coarse popcorn calcification after menopause. A classic lump in a young woman needs ultrasound confirmation rather than immediate excision.",
+      "say": "A rubbery mobile lump in a twenty year old is fibroadenoma; ultrasound and age usually settle it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fibroadenoma",
+          "points": [
+            "Young women, rubbery mobile",
+            "Biphasic glands and stroma",
+            "Observe or excise by preference"
+          ]
+        },
+        "right": {
+          "title": "Phyllodes tumour",
+          "points": [
+            "Older, larger, leaf like clefts",
+            "Stromal cellularity grades behaviour",
+            "Wide excision, recurrence watched"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In a **phyllodes tumour**, hypercellular stroma bulges into cystic clefts to create leaf-like fronds lined by benign epithelium. Stromal mitoses, atypia and overgrowth sort lesions into benign, borderline and malignant grades. A rapidly growing large lump in a woman over 40 should prompt wide excision with clear margins. Malignant examples spread through blood to lung, almost never through axillary nodes.",
+      "say": "Leaf like clefts and stromal overgrowth name phyllodes; grade the stroma, spare the axilla.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-staging-subtypes-and-surgical-management-fig1.webp",
+        "alt": "Breast cancer surgical anatomy and staging",
+        "caption": "Breast anatomy and cancer staging framing benign and malignant lump triage."
+      }
+    },
+    {
+      "tx": "Premenopausal breast pain and lumpiness that swell before periods usually reflect **fibrocystic change**, a mix of cysts, apocrine metaplasia, stromal fibrosis and usual ductal hyperplasia. Simple cysts and apocrine change carry no meaningful cancer risk. Atypical ductal hyperplasia, by contrast, multiplies later cancer risk roughly fourfold, so that single biopsy word converts reassurance into closer surveillance and risk-reducing discussion.",
+      "say": "Fibrocystic change reassures; atypical hyperplasia inside it is the finding that changes surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Benign lesion",
+          "Relative risk accent",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Cysts, apocrine change",
+            "No meaningful increase",
+            "Reassurance"
+          ],
+          [
+            "Usual ductal hyperplasia",
+            "Mild increase",
+            "Routine screening"
+          ],
+          [
+            "Atypical ductal hyperplasia",
+            "Moderate increase",
+            "Enhanced surveillance, risk therapy"
+          ],
+          [
+            "Intraductal papilloma central",
+            "Bloody discharge accent",
+            "Excise if atypia or symptoms"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Blood oozing from a single duct orifice in a non-lactating woman points first to an **intraductal papilloma**, a frond of fibrovascular cores covered by epithelium inside a dilated duct. Solitary central papillomas near the nipple are usually benign. Multiple peripheral papillomas behave differently, harbouring atypia more often, which is why discharge plus any atypia on sampling leads to surgical excision.",
+      "say": "Single duct bloody discharge thinks central papilloma first; excise to exclude its atypical neighbours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Lump or discharge presented"
+          },
+          {
+            "id": "b",
+            "label": "Imaging age appropriately, core biopsy"
+          },
+          {
+            "id": "c",
+            "label": "Triple assessment concordance checked"
+          },
+          {
+            "id": "d",
+            "label": "Excise discordant, atypical, symptomatic"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ductal carcinoma in situ** confines malignant epithelial cells inside ducts, bounded by an intact basement membrane and myoepithelial layer, so it cannot yet metastasise. Screening mammography detects most cases as linear branching microcalcifications without any lump. Comedo necrosis and high nuclear grade mark aggressive DCIS. Clear excision margins matter because roughly half of untreated high grade lesions eventually become invasive.",
+      "say": "Calcifications without a lump may be DCIS; grade and margins decide its surgery and radiation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Breast cancer subtypes and metastasis",
+        "caption": "Breast cancer subtypes and metastatic patterns beyond DCIS."
+      }
+    },
+    {
+      "tx": "About three quarters of invasive breast cancers are classified as **invasive ductal carcinoma, no special type**, a diagnosis of exclusion once special patterns are ruled out. Tumour cells form irregular glands within dense desmoplastic stroma, producing the hard gritty mass that tethers skin. Unlike tubular or mucinous special types, NST prognosis hinges entirely on grade, stage and receptor profile.",
+      "say": "Most breast cancers are invasive ductal NST; special types earn their names by kinder prognoses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Invasive ductal NST",
+          "points": [
+            "Desmoplastic hard mass",
+            "Grade and receptors decide therapy",
+            "Nodes prognosticate"
+          ]
+        },
+        "right": {
+          "title": "Invasive lobular",
+          "points": [
+            "Single file, E-cadherin lost",
+            "Occult imaging, bilateral accent",
+            "Peritoneal and serosal spread oddities"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Loss of the adhesion protein E-cadherin lets **invasive lobular carcinoma** cells drift apart and infiltrate in single file Indian file rows around ducts. Because little desmoplasia forms, mammography may show only vague architectural distortion despite a palpable thickening. Multifocal and bilateral disease are common enough that breast MRI often maps true extent before surgery, and metastases favour peritoneum, gut and ovaries.",
+      "say": "Single file cells without E-cadherin hide lobular cancer from mammograms; MRI finds its extent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Ductal NST",
+          "Lobular"
+        ],
+        "rows": [
+          [
+            "E-cadherin",
+            "Retained membranous",
+            "Lost characteristically"
+          ],
+          [
+            "Imaging",
+            "Mass and calcifications",
+            "Subtle distortion, occult"
+          ],
+          [
+            "Spread accent",
+            "Nodes, bone, lung, liver",
+            "Serosa, gut, ovaries, meninges"
+          ],
+          [
+            "Bilaterality",
+            "Baseline",
+            "Increased vigilance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Every breast lump is judged by **triple assessment**: clinical examination, imaging chosen by age, and core needle pathology read together at one sitting. When all three agree on benign disease, discharge is safe. Any single discordant element, such as a benign core from a hard irregular mass, mandates diagnostic excision rather than reassurance, because sampling error is the trap being guarded against.",
+      "say": "Examination, imaging, and core must agree; any discordant leg sends the lump to excision.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Examination grades suspicion"
+          },
+          {
+            "id": "b",
+            "label": "Ultrasound or mammography images"
+          },
+          {
+            "id": "c",
+            "label": "Core pathology reports"
+          },
+          {
+            "id": "d",
+            "label": "Concordance or excision decision"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

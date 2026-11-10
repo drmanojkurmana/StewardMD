@@ -1,0 +1,282 @@
+{
+    "v": 1,
+    "id": "ans-local-anaesthetics-lignocaine",
+    "subject": "anaesthesia",
+    "module": "ans-local-anaesthetics",
+    "title": "Local Anaesthetics: Amides, Esters, and Differential Cardiotoxicity",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Molecular Structure of Local Anaesthetics",
+            "tx": "**Chemical anatomy of local anaesthetics** consists of three fundamental structural components: an aromatic lipophilic ring (conferring lipid membrane solubility and anaesthetic potency), an intermediate ester or amide hydrocarbon linkage (dictating metabolic clearance pathway), and a hydrophilic tertiary amine group (governing water solubility and ionization equilibrium). Amides contain an 'i' before the 'caine' suffix (lignocaine, bupivacaine, ropivacaine), whereas esters lack this letter (procaine, tetracaine, cocaine).",
+            "say": "Chemical anatomy of local anaesthetics consists of three fundamental structural components: an aromatic lipophilic ring (conferring lipid membrane solubility and anaesthetic potency), an intermediate ester or amide hydrocarbon linkage (dictating metabolic clearance pathway), and a hydrophilic tertiary amine group (governing water solubility and ionization equilibrium). Amides contain an 'i' before the 'caine' suffix (lignocaine, bupivacaine, ropivacaine), whereas esters lack this letter (procaine, tetracaine, cocaine).",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/local-anaesthetics-esters-amides-blocks-fig1.webp",
+                "alt": "Chemical structure and classification of ester and amide local anaesthetics",
+                "caption": "Chemical structure and classification of ester and amide local anaesthetics"
+            }
+        },
+        {
+            "title": "Voltage-Gated Sodium Channel Blockade",
+            "tx": "**Mechanism of voltage-gated sodium channel blockade** requires uncharged lipid-soluble neutral local anaesthetic base molecules (B) to penetrate the neuronal lipid membrane. Once inside the intracellular axoplasm, molecules re-protonate into charged cations (BH+), entering the open or inactivated sodium channel pore from the intracellular side to bind the receptor, blocking sodium influx and halting action potential propagation along the axon.",
+            "say": "Mechanism of voltage-gated sodium channel blockade requires uncharged lipid-soluble neutral local anaesthetic base molecules (B) to penetrate the neuronal lipid membrane. Once inside the intracellular axoplasm, molecules re-protonate into charged cations (BH+), entering the open or inactivated sodium channel pore from the intracellular side to bind the receptor, blocking sodium influx and halting action potential propagation along the axon.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Uncharged base (B) traverses lipophilic axonal membrane"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Protonates into charged cation (BH+) in intracellular axoplasm"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Binds S6 alpha-subunit receptor of voltage-gated Na+ channel"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Halts sodium conductance; abolishes action potential propagation"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Peer into the channel pore and the block becomes a matter of doors and keys. The charged local anaesthetic cation slips in from the cytoplasmic side and lodges against the **S6 segment** receptor, corking sodium flow only when the channel opens or inactivates. That is why rapidly firing pain fibres block first: their channels visit the welcoming states most often. Resting neurones keep their doors shut and resist, a use dependence this binding model explains more elegantly than any membrane dissolving theory.",
+            "say": "Local anaesthetic cations bind the S6 pore receptor from inside, preferring open and inactivated sodium channels.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m506-ans-local-anaesthetics-lignocaine.webp",
+                "alt": "Voltage-gated sodium channel S6 segment pore receptor binding model for local anaesthetic cation",
+                "caption": "Voltage-gated sodium channel S6 segment pore receptor binding model for local anaesthetic cation. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Lignocaine Pharmacological Profile",
+            "tx": "**Lignocaine intermediate amide pharmacology** features a rapid onset (one to two minutes), intermediate duration (60 to 90 minutes plain, extended to 120 to 180 minutes with adrenaline), and pKa of 7.9. Extensively biotransformed in the liver via cytochrome P450 CYP3A4 into active metabolites monoethylglycinexylidide (MEGX) and glycinexylidide (GX), lignocaine serves as the versatile workhorse for infiltration, regional nerve blocks, and intravenous antiarrhythmic therapy.",
+            "say": "Lignocaine intermediate amide pharmacology features a rapid onset (one to two minutes), intermediate duration (60 to 90 minutes plain, extended to 120 to 180 minutes with adrenaline), and pKa of 7.9. Extensively biotransformed in the liver via cytochrome P450 CYP3A4 into active metabolites monoethylglycinexylidide (MEGX) and glycinexylidide (GX), lignocaine serves as the versatile workhorse for infiltration, regional nerve blocks, and intravenous antiarrhythmic therapy.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pharmacological Parameter",
+                    "Lignocaine (Lidocaine)",
+                    "Bupivacaine",
+                    "Ropivacaine"
+                ],
+                "rows": [
+                    [
+                        "Chemical Intermediate Linkage",
+                        "Amide (hepatic CYP metabolism)",
+                        "Amide (hepatic CYP metabolism)",
+                        "Amide (hepatic CYP metabolism)"
+                    ],
+                    [
+                        "pKa Ionization Value",
+                        "7.9 (25% non-ionized at pH 7.4)",
+                        "8.1 (15% non-ionized at pH 7.4)",
+                        "8.1 (15% non-ionized at pH 7.4)"
+                    ],
+                    [
+                        "Protein Binding Percentage",
+                        "65 percent (alpha-1 acid glycoprotein)",
+                        "95 percent (high tissue binding)",
+                        "94 percent (high tissue binding)"
+                    ],
+                    [
+                        "Relative Anaesthetic Potency",
+                        "1 (standard reference intermediate)",
+                        "4 (high potency; lipid soluble)",
+                        "3.5 (high potency)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Bupivacaine Cardiotoxicity Mechanics",
+            "tx": "**Severe cardiotoxicity of bupivacaine** stems from its extreme lipid solubility and high-affinity binding to myocardial fast voltage-gated sodium channels. During ventricular diastole, bupivacaine dissociates from inactivated sodium channels with profound sluggishness (fast in, slow off kinetics), inducing refractory intraventricular conduction block, broad QRS complexes, malignant ventricular arrhythmias, and electromechanical dissociation resistant to standard resuscitation.",
+            "say": "Severe cardiotoxicity of bupivacaine stems from its extreme lipid solubility and high-affinity binding to myocardial fast voltage-gated sodium channels. During ventricular diastole, bupivacaine dissociates from inactivated sodium channels with profound sluggishness (fast in, slow off kinetics), inducing refractory intraventricular conduction block, broad QRS complexes, malignant ventricular arrhythmias, and electromechanical dissociation resistant to standard resuscitation.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Lignocaine Fast-Off Kinetics",
+                    "points": [
+                        "Rapid dissociation from myocardial sodium channels during diastole",
+                        "Minimal disruption of normal cardiac conduction velocities",
+                        "Wide margin of cardiovascular safety (CC/CNS ratio >7.0)"
+                    ]
+                },
+                "right": {
+                    "title": "Bupivacaine Slow-Off Kinetics",
+                    "points": [
+                        "Extremely slow dissociation from cardiac sodium channels in diastole",
+                        "Accumulates channel blockade during normal resting heart rates",
+                        "Narrow cardiovascular safety margin (CC/CNS ratio approx 2.0)"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Ropivacaine S-Enantiomer Benefits",
+            "tx": "**Ropivacaine S-enantiomer stereoisomer safety** represents a pure S(-)-enantiomer of propyl-pipecoloxylidide, created to eliminate the lethal cardiotoxicity of racemic bupivacaine (which is a 50:50 mixture of S- and R-enantiomers). The purified S-enantiomer exhibits far less affinity for cardiac sodium channels, significantly widening the cardiovascular safety margin while producing excellent sensory blockade with reduced motor paralysis.",
+            "say": "Ropivacaine S-enantiomer stereoisomer safety represents a pure S(-)-enantiomer of propyl-pipecoloxylidide, created to eliminate the lethal cardiotoxicity of racemic bupivacaine (which is a 50:50 mixture of S- and R-enantiomers). The purified S-enantiomer exhibits far less affinity for cardiac sodium channels, significantly widening the cardiovascular safety margin while producing excellent sensory blockade with reduced motor paralysis.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Stereochemical Feature",
+                    "Racemic Bupivacaine",
+                    "Purified Ropivacaine S(-)",
+                    "Levobupivacaine S(-)"
+                ],
+                "rows": [
+                    [
+                        "Optical Isomer Composition",
+                        "50:50 racemic mix (R+ and S-)",
+                        "Pure single S(-)-enantiomer",
+                        "Pure single S(-)-enantiomer"
+                    ],
+                    [
+                        "Cardiovascular Collapse Ratio (CC/CNS)",
+                        "2.0 (cardiac arrest follows seizure)",
+                        "3.0 to 4.0 (substantially safer)",
+                        "3.0 to 3.5 (substantially safer)"
+                    ],
+                    [
+                        "Motor Blockade Characteristics",
+                        "Dense, profound motor paralysis",
+                        "Motor-sparing sensory block",
+                        "Dense sensory and motor block"
+                    ],
+                    [
+                        "Intrinsic Vasoactivity",
+                        "Vasodilator at clinical doses",
+                        "Mild intrinsic vasoconstrictor",
+                        "Mild vasoconstrictor"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Chloroprocaine Ultra-Short Ester",
+            "tx": "**Chloroprocaine ester pharmacology** features halogenation of procaine by a single chlorine atom, increasing its enzymatic hydrolysis rate by circulating plasma pseudocholinesterase four-fold. With an elimination half-life of under 25 seconds in maternal blood, 2-chloroprocaine provides ultra-rapid onset (3 to 5 minutes) and rapid offset (30 to 45 minutes), making it the premier agent for emergency crash cesarean section epidurals and ambulatory spinal anaesthesia.",
+            "say": "Chloroprocaine ester pharmacology features halogenation of procaine by a single chlorine atom, increasing its enzymatic hydrolysis rate by circulating plasma pseudocholinesterase four-fold. With an elimination half-life of under 25 seconds in maternal blood, 2-chloroprocaine provides ultra-rapid onset (3 to 5 minutes) and rapid offset (30 to 45 minutes), making it the premier agent for emergency crash cesarean section epidurals and ambulatory spinal anaesthesia.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Inject 3% 2-chloroprocaine into indwelling epidural catheter"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Establish dense surgical T4 sensory block within 5 minutes"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Rapid enzymatic hydrolysis by circulating pseudocholinesterase"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Plasma half-life under 30s prevents systemic maternal or fetal toxicity"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Differential Nerve Fiber Blockade",
+            "tx": "**Differential nerve fiber susceptibility** dictates the sequential progression of clinical blockade: small unmyelinated C fibers (conducting dull pain and sympathetic vasomotor tone) and thin myelinated B fibers (preganglionic autonomic) are blocked first, followed by A-delta fibers (sharp pain, temperature), A-gamma and A-beta fibers (touch, pressure, proprioception), and lastly thick, heavily myelinated A-alpha motor fibers.",
+            "say": "Differential nerve fiber susceptibility dictates the sequential progression of clinical blockade: small unmyelinated C fibers (conducting dull pain and sympathetic vasomotor tone) and thin myelinated B fibers (preganglionic autonomic) are blocked first, followed by A-delta fibers (sharp pain, temperature), A-gamma and A-beta fibers (touch, pressure, proprioception), and lastly thick, heavily myelinated A-alpha motor fibers.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Fiber Type",
+                    "Myelination and Diameter",
+                    "Physiological Function",
+                    "Sequential Onset of Blockade"
+                ],
+                "rows": [
+                    [
+                        "B Fibers",
+                        "Lightly myelinated (under 3 um)",
+                        "Preganglionic sympathetic vasomotor tone",
+                        "Blocked first; causes sympathetic vasodilation"
+                    ],
+                    [
+                        "C Fibers",
+                        "Unmyelinated (0.4 to 1.2 um)",
+                        "Slow dull pain and postganglionic autonomic",
+                        "Blocked early; loss of burning pain sensation"
+                    ],
+                    [
+                        "A-Delta Fibers",
+                        "Moderately myelinated (2 to 5 um)",
+                        "Fast sharp pain and temperature sensation",
+                        "Blocked next; loss of cold temperature discrimination"
+                    ],
+                    [
+                        "A-Alpha Fibers",
+                        "Heavily myelinated (12 to 20 um)",
+                        "Somatic motor efferent innervation",
+                        "Blocked last; motor paralysis demands high drug concentration"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Frequency-Dependent Use-Dependent Block",
+            "tx": "**Use-dependent phasic block** describes how local anaesthetic molecules gain preferential access to sodium channel receptor binding sites when channels cycle repeatedly through open and inactivated states during high-frequency firing. Consequently, rapidly firing sensory nociceptive axons (transmitting agonizing pain impulses at high frequency) are blocked with exquisite sensitivity compared to resting motor axons.",
+            "say": "Use-dependent phasic block describes how local anaesthetic molecules gain preferential access to sodium channel receptor binding sites when channels cycle repeatedly through open and inactivated states during high-frequency firing. Consequently, rapidly firing sensory nociceptive axons (transmitting agonizing pain impulses at high frequency) are blocked with exquisite sensitivity compared to resting motor axons.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "High-Frequency Firing Axons (Nociceptors)",
+                    "points": [
+                        "Sodium channels cycle rapidly between open and inactivated states",
+                        "Provides frequent hydrophilic pore access for local anaesthetic",
+                        "Rapid, dense blockade of active high-frequency pain transmission"
+                    ]
+                },
+                "right": {
+                    "title": "Low-Frequency Quiescent Axons (Resting Motor)",
+                    "points": [
+                        "Sodium channels remain closed in the resting state",
+                        "Binding sites are physically occluded to hydrophilic cations",
+                        "Demands higher total drug concentrations to establish blockade"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

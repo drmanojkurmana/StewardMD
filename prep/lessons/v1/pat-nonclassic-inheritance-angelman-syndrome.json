@@ -1,246 +1,257 @@
 {
-  "v": 1,
-  "module": "pat-nonclassic-inheritance",
-  "subject": "pathology",
-  "title": "Genomic Imprinting, Mitochondrial Genetics, and Molecular Diagnostics",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "Disruption of the imprinted chromosomal region 15q11-q13 produces two strikingly distinct syndromes depending strictly on the parental origin of the missing genetic information. Loss of paternal gene expression causes Prader-Willi syndrome, while loss of maternal UBE3A expression leads to **Angelman syndrome**.",
-      "say": "Imprinted 15q11-q13 yields Prader-Willi syndrome when paternal, and Angelman syndrome when maternal.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/angelman-syndrome-fig1.webp",
-        "alt": "Angelman syndrome neurobiology and imprinted maternal UBE3A deletion",
-        "caption": "Maternal deletion of imprinted UBE3A on chromosome 15q11-q13 causing Angelman syndrome."
-      }
+ "v": 1,
+ "module": "pat-nonclassic-inheritance",
+ "subject": "pathology",
+ "title": "Genomic Imprinting, Mitochondrial Genetics, and Molecular Diagnostics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Disruption of the imprinted chromosomal region 15q11-q13 produces two strikingly distinct syndromes depending strictly on the parental origin of the missing genetic information. Loss of paternal gene expression causes Prader-Willi syndrome, while loss of maternal UBE3A expression leads to **Angelman syndrome**.",
+   "say": "Imprinted 15q11-q13 yields Prader-Willi syndrome when paternal, and Angelman syndrome when maternal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/angelman-syndrome-fig1.webp",
+    "alt": "Angelman syndrome neurobiology and imprinted maternal UBE3A deletion",
+    "caption": "Maternal deletion of imprinted UBE3A on chromosome 15q11-q13 causing Angelman syndrome."
+   }
+  },
+  {
+   "tx": "Children with Angelman syndrome exhibit profound intellectual disability, complete absence of functional expressive speech, microcephaly, severe ataxic jerky gait, unprovoked paroxysms of inappropriate laughter, and an unusually cheerful smiling disposition, leading to the historical clinical designation of **happy puppet syndrome**.",
+   "say": "Angelman syndrome presents with ataxia, absent speech, unprovoked laughter, and microcephaly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prader-Willi Syndrome (Paternal 15q11-q13 Loss)",
+     "points": [
+      "Deletion of paternal SNRPN/necdin cluster or maternal uniparental disomy",
+      "Neonatal profound hypotonia and severe failure to thrive in infancy",
+      "Childhood emergence of uncontrollable hyperphagia and morbid obesity",
+      "Hypogonadism, small hands and feet, short stature, and mild cognitive deficit"
+     ]
     },
-    {
-      "tx": "Children with Angelman syndrome exhibit profound intellectual disability, complete absence of functional expressive speech, microcephaly, severe ataxic jerky gait, unprovoked paroxysms of inappropriate laughter, and an unusually cheerful smiling disposition, leading to the historical clinical designation of **happy puppet syndrome**.",
-      "say": "Angelman syndrome presents with ataxia, absent speech, unprovoked laughter, and microcephaly.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Prader-Willi Syndrome (Paternal 15q11-q13 Loss)",
-          "points": [
-            "Deletion of paternal SNRPN/necdin cluster or maternal uniparental disomy",
-            "Neonatal profound hypotonia and severe failure to thrive in infancy",
-            "Childhood emergence of uncontrollable hyperphagia and morbid obesity",
-            "Hypogonadism, small hands and feet, short stature, and mild cognitive deficit"
-          ]
-        },
-        "right": {
-          "title": "Angelman Syndrome (Maternal 15q11-q13 Loss)",
-          "points": [
-            "Deletion of maternal UBE3A ubiquitin ligase gene or paternal disomy",
-            "Profound intellectual disability with complete absence of functional speech",
-            "Severe ataxic, puppet-like jerky motor movements and wide-based gait",
-            "Frequent unprovoked paroxysms of inappropriate laughter and smiling"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Inheriting both homologous copies of a chromosomal pair from a single parent, with no contribution from the other parent, represents **uniparental disomy**. Maternal uniparental disomy of chromosome 15 accounts for twenty-five percent of Prader-Willi syndrome cases, while paternal uniparental disomy causes Angelman syndrome.",
-      "say": "Uniparental disomy occurs when an offspring inherits both chromosome copies from one parent.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "meiotic_nondisjunction",
-            "label": "Meiotic Nondisjunction Produces a Disomic Ovum or Sperm"
-          },
-          {
-            "id": "trisomic_zygote",
-            "label": "Fertilization Yields an Unstable Trisomic Conception"
-          },
-          {
-            "id": "trisomy_rescue",
-            "label": "Post-Zygotic Mitotic Loss of the Single Opposite Parental Chromosome"
-          },
-          {
-            "id": "uniparental_state",
-            "label": "Embryo Left with Two Homologous Chromosomes from One Parent"
-          }
-        ],
-        "edges": [
-          [
-            "meiotic_nondisjunction",
-            "trisomic_zygote"
-          ],
-          [
-            "trisomic_zygote",
-            "trisomy_rescue"
-          ],
-          [
-            "trisomy_rescue",
-            "uniparental_state"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Human mitochondria possess circular double-stranded DNA encoding thirteen respiratory chain subunits, twenty-two transfer RNAs, and two ribosomal RNAs. Because spermatozoa contribute negligible cytoplasm to the zygote, mitochondrial gene mutations are transmitted exclusively by mothers to all offspring through **maternal mitochondrial inheritance**.",
-      "say": "Mitochondrial DNA is inherited exclusively from mothers, affecting high-energy organs.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/neuromuscular-dmd-sma-cerebral-palsy-fig1.webp",
-        "alt": "Neuromuscular degeneration and myopathy in mitochondrial respiratory defects",
-        "caption": "Neuromuscular degeneration, muscle weakness, and cerebral dysfunction in mitochondrial disorders."
-      }
-    },
-    {
-      "tx": "Within a single patient cell, thousands of mitochondria can contain a mixture of mutant and wild-type mitochondrial genomes. The clinical severity of mitochondrial diseases depends directly upon the proportion of mutant DNA exceeding a critical biochemical threshold, a phenomenon known as **replicative heteroplasmy**.",
-      "say": "Heteroplasmy is the coexistence of mutant and normal mitochondrial DNA within cells.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "mixed_mitochondria",
-            "label": "Oocyte Contains Mixture of Wild-Type and Mutant Mitochondrial DNA"
-          },
-          {
-            "id": "cytoplasmic_segregation",
-            "label": "Passive Random Segregation of Mitochondria During Cleavage Divisions"
-          },
-          {
-            "id": "threshold_effect",
-            "label": "Tissues Exceeding Critical Mutant Proportion Suffer Metabolic Collapse"
-          },
-          {
-            "id": "organ_failure",
-            "label": "Selective Failure of High-Energy Organs (Brain, Heart, Skeletal Muscle)"
-          }
-        ],
-        "edges": [
-          [
-            "mixed_mitochondria",
-            "cytoplasmic_segregation"
-          ],
-          [
-            "cytoplasmic_segregation",
-            "threshold_effect"
-          ],
-          [
-            "threshold_effect",
-            "organ_failure"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The prototypic point mutation disorder of mitochondrial DNA involves complex I NADH dehydrogenase subunits. Presenting with painless, subacute bilateral loss of central vision in young adult males between fifteen and thirty-five years of age, this disorder is **Leber hereditary optic neuropathy**.",
-      "say": "Leber hereditary optic neuropathy causes subacute bilateral central vision loss in young males.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Mitochondrial Disorder",
-          "Primary Genetic Mutation",
-          "Principal Target Organs Affected"
-        ],
-        "rows": [
-          [
-            "Leber Hereditary Optic Neuropathy",
-            "Point Mutations in ND1, ND4, ND6",
-            "Retinal Ganglion Cells, Optic Nerve Atrophy"
-          ],
-          [
-            "MELAS Syndrome",
-            "Mitochondrial tRNA-Leu (m.3243A>G)",
-            "Brain Infarct-like Episodes, Lactic Acidosis"
-          ],
-          [
-            "MERRF Syndrome",
-            "Mitochondrial tRNA-Lys (m.8344A>G)",
-            "Myoclonus, Epilepsy, Ragged Red Skeletal Fibers"
-          ],
-          [
-            "Kearns-Sayre Syndrome",
-            "Large Heteroplasmic mtDNA Deletions",
-            "External Ophthalmoplegia, Retinitis Pigmentosa, Heart Block"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Molecular amplification of minute DNA sequences using thermostable Taq polymerase revolutionized modern genetic diagnostics. By repeatedly cycling through thermal denaturation, oligonucleotide primer annealing, and enzymatic extension, rapid exponential enzymatic amplification of targeted genomic loci is achieved via the **polymerase chain reaction (PCR)**.",
-      "say": "PCR uses thermal cycling and Taq polymerase to amplify targeted DNA sequences billions of times.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "denaturation_step",
-            "label": "Heat Denaturation Separates Double-Stranded DNA at 95 Degrees C"
-          },
-          {
-            "id": "annealing_step",
-            "label": "Specific Oligonucleotide Primers Anneal to Flanking Regions at 55 C"
-          },
-          {
-            "id": "extension_step",
-            "label": "Thermostable Taq Polymerase Synthesizes Complementary Strands at 72 C"
-          },
-          {
-            "id": "exponential_amplification",
-            "label": "Thirty Thermal Cycles Generate Billions of Identical Target Amplicons"
-          }
-        ],
-        "edges": [
-          [
-            "denaturation_step",
-            "annealing_step"
-          ],
-          [
-            "annealing_step",
-            "extension_step"
-          ],
-          [
-            "extension_step",
-            "exponential_amplification"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Massively parallel high-throughput sequencing technologies can sequence millions of small DNA fragments simultaneously across the entire human genome. Uncovering novel point mutations, small indels, and complex somatic rearrangements in constitutional diseases and neoplastic disorders, this platform is **next-generation sequencing (NGS)**.",
-      "say": "Next-generation sequencing enables high-throughput parallel sequencing of millions of DNA fragments.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "library_preparation",
-            "label": "Genomic DNA Fragmented and Ligated to Sequencing Adapters"
-          },
-          {
-            "id": "clonal_amplification",
-            "label": "Clonal Cluster Generation on Solid Flowcell Surface"
-          },
-          {
-            "id": "sequencing_by_synthesis",
-            "label": "Fluorescent Reversible Terminators Track Base Additions in Real Time"
-          },
-          {
-            "id": "bioinformatics_alignment",
-            "label": "Bioinformatics Pipelines Align Millions of Reads to Reference Genome"
-          }
-        ],
-        "edges": [
-          [
-            "library_preparation",
-            "clonal_amplification"
-          ],
-          [
-            "clonal_amplification",
-            "sequencing_by_synthesis"
-          ],
-          [
-            "sequencing_by_synthesis",
-            "bioinformatics_alignment"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Angelman Syndrome (Maternal 15q11-q13 Loss)",
+     "points": [
+      "Deletion of maternal UBE3A ubiquitin ligase gene or paternal disomy",
+      "Profound intellectual disability with complete absence of functional speech",
+      "Severe ataxic, puppet-like jerky motor movements and wide-based gait",
+      "Frequent unprovoked paroxysms of inappropriate laughter and smiling"
+     ]
     }
-  ],
-  "gen": "AI",
-  "quiz": []
+   }
+  },
+  {
+   "tx": "Inheriting both homologous copies of a chromosomal pair from a single parent, with no contribution from the other parent, represents **uniparental disomy**. Maternal uniparental disomy of chromosome 15 accounts for twenty-five percent of Prader-Willi syndrome cases, while paternal uniparental disomy causes Angelman syndrome.",
+   "say": "Uniparental disomy occurs when an offspring inherits both chromosome copies from one parent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "meiotic_nondisjunction",
+      "label": "Meiotic Nondisjunction Produces a Disomic Ovum or Sperm"
+     },
+     {
+      "id": "trisomic_zygote",
+      "label": "Fertilization Yields an Unstable Trisomic Conception"
+     },
+     {
+      "id": "trisomy_rescue",
+      "label": "Post-Zygotic Mitotic Loss of the Single Opposite Parental Chromosome"
+     },
+     {
+      "id": "uniparental_state",
+      "label": "Embryo Left with Two Homologous Chromosomes from One Parent"
+     }
+    ],
+    "edges": [
+     [
+      "meiotic_nondisjunction",
+      "trisomic_zygote"
+     ],
+     [
+      "trisomic_zygote",
+      "trisomy_rescue"
+     ],
+     [
+      "trisomy_rescue",
+      "uniparental_state"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mitochondria keep a separate inheritance rule from every chromosome in the nucleus. **Maternal mitochondrial inheritance** passes mitochondrial DNA only through the egg, so an affected mother passes variants to all her children while an affected father passes them to none. Tissues hungry for energy, muscle, nerve and retina, fail first and in mixed proportion. A pedigree with deafness, diabetes and exercise intolerance down the maternal line should trigger this thought.",
+   "say": "Mitochondrial DNA passes only from mother to all her children, never through fathers. Energy hungry tissues fail first in these disorders.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m986-pat-nonclassic-inheritance-angelman-syndrome.webp",
+    "alt": "Pedigree image showing maternal mitochondrial inheritance through the female line.",
+    "caption": "A pedigree shows an affected mother passing the trait to all children. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Human mitochondria possess circular double-stranded DNA encoding thirteen respiratory chain subunits, twenty-two transfer RNAs, and two ribosomal RNAs. Because spermatozoa contribute negligible cytoplasm to the zygote, mitochondrial gene mutations are transmitted exclusively by mothers to all offspring through **maternal mitochondrial inheritance**.",
+   "say": "Mitochondrial DNA is inherited exclusively from mothers, affecting high-energy organs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nonmendelian-imprinting-repeats-mitochondrial-fig1.webp",
+    "alt": "Neuromuscular degeneration and myopathy in mitochondrial respiratory defects",
+    "caption": "Non-Mendelian inheritance mechanisms: genomic imprinting, trinucleotide repeat expansion, maternal mitochondrial inheritance and mosaicism. Illustration: StewardMD original."
+   }
+  },
+  {
+   "tx": "Within a single patient cell, thousands of mitochondria can contain a mixture of mutant and wild-type mitochondrial genomes. The clinical severity of mitochondrial diseases depends directly upon the proportion of mutant DNA exceeding a critical biochemical threshold, a phenomenon known as **replicative heteroplasmy**.",
+   "say": "Heteroplasmy is the coexistence of mutant and normal mitochondrial DNA within cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mixed_mitochondria",
+      "label": "Oocyte Contains Mixture of Wild-Type and Mutant Mitochondrial DNA"
+     },
+     {
+      "id": "cytoplasmic_segregation",
+      "label": "Passive Random Segregation of Mitochondria During Cleavage Divisions"
+     },
+     {
+      "id": "threshold_effect",
+      "label": "Tissues Exceeding Critical Mutant Proportion Suffer Metabolic Collapse"
+     },
+     {
+      "id": "organ_failure",
+      "label": "Selective Failure of High-Energy Organs (Brain, Heart, Skeletal Muscle)"
+     }
+    ],
+    "edges": [
+     [
+      "mixed_mitochondria",
+      "cytoplasmic_segregation"
+     ],
+     [
+      "cytoplasmic_segregation",
+      "threshold_effect"
+     ],
+     [
+      "threshold_effect",
+      "organ_failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The prototypic point mutation disorder of mitochondrial DNA involves complex I NADH dehydrogenase subunits. Presenting with painless, subacute bilateral loss of central vision in young adult males between fifteen and thirty-five years of age, this disorder is **Leber hereditary optic neuropathy**.",
+   "say": "Leber hereditary optic neuropathy causes subacute bilateral central vision loss in young males.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mitochondrial Disorder",
+     "Primary Genetic Mutation",
+     "Principal Target Organs Affected"
+    ],
+    "rows": [
+     [
+      "Leber Hereditary Optic Neuropathy",
+      "Point Mutations in ND1, ND4, ND6",
+      "Retinal Ganglion Cells, Optic Nerve Atrophy"
+     ],
+     [
+      "MELAS Syndrome",
+      "Mitochondrial tRNA-Leu (m.3243A>G)",
+      "Brain Infarct-like Episodes, Lactic Acidosis"
+     ],
+     [
+      "MERRF Syndrome",
+      "Mitochondrial tRNA-Lys (m.8344A>G)",
+      "Myoclonus, Epilepsy, Ragged Red Skeletal Fibers"
+     ],
+     [
+      "Kearns-Sayre Syndrome",
+      "Large Heteroplasmic mtDNA Deletions",
+      "External Ophthalmoplegia, Retinitis Pigmentosa, Heart Block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular amplification of minute DNA sequences using thermostable Taq polymerase revolutionized modern genetic diagnostics. By repeatedly cycling through thermal denaturation, oligonucleotide primer annealing, and enzymatic extension, rapid exponential enzymatic amplification of targeted genomic loci is achieved via the **polymerase chain reaction (PCR)**.",
+   "say": "PCR uses thermal cycling and Taq polymerase to amplify targeted DNA sequences billions of times.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "denaturation_step",
+      "label": "Heat Denaturation Separates Double-Stranded DNA at 95 Degrees C"
+     },
+     {
+      "id": "annealing_step",
+      "label": "Specific Oligonucleotide Primers Anneal to Flanking Regions at 55 C"
+     },
+     {
+      "id": "extension_step",
+      "label": "Thermostable Taq Polymerase Synthesizes Complementary Strands at 72 C"
+     },
+     {
+      "id": "exponential_amplification",
+      "label": "Thirty Thermal Cycles Generate Billions of Identical Target Amplicons"
+     }
+    ],
+    "edges": [
+     [
+      "denaturation_step",
+      "annealing_step"
+     ],
+     [
+      "annealing_step",
+      "extension_step"
+     ],
+     [
+      "extension_step",
+      "exponential_amplification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massively parallel high-throughput sequencing technologies can sequence millions of small DNA fragments simultaneously across the entire human genome. Uncovering novel point mutations, small indels, and complex somatic rearrangements in constitutional diseases and neoplastic disorders, this platform is **next-generation sequencing (NGS)**.",
+   "say": "Next-generation sequencing enables high-throughput parallel sequencing of millions of DNA fragments.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "library_preparation",
+      "label": "Genomic DNA Fragmented and Ligated to Sequencing Adapters"
+     },
+     {
+      "id": "clonal_amplification",
+      "label": "Clonal Cluster Generation on Solid Flowcell Surface"
+     },
+     {
+      "id": "sequencing_by_synthesis",
+      "label": "Fluorescent Reversible Terminators Track Base Additions in Real Time"
+     },
+     {
+      "id": "bioinformatics_alignment",
+      "label": "Bioinformatics Pipelines Align Millions of Reads to Reference Genome"
+     }
+    ],
+    "edges": [
+     [
+      "library_preparation",
+      "clonal_amplification"
+     ],
+     [
+      "clonal_amplification",
+      "sequencing_by_synthesis"
+     ],
+     [
+      "sequencing_by_synthesis",
+      "bioinformatics_alignment"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
 }

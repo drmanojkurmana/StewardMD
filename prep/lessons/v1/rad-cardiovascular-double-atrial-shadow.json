@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-cardiovascular-double-atrial-shadow",
+ "subject": "radiology",
+ "module": "rad-cardiovascular",
+ "title": "Left Atrial Enlargement, Double Atrial Shadow and Cardiac MRI",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Double density inside the heart shadow",
+   "tx": "**Double atrial shadow** is a second curved density seen through the right heart border, the enlarged left atrium peeking out behind the right atrium. It is the frontal film signature of left atrial enlargement, most often from mitral stenosis. The left atrium enlarges upward and backward first, so this double density joins splaying of the carina and a lifted left main bronchus in the full sign set.",
+   "say": "Double atrial shadow is a second curved density seen through the right heart border, the enlarged left atrium peeking behind the right atrium. It is the frontal signature of left atrial enlargement, most often from mitral stenosis. It joins splayed carina and a lifted left main bronchus in the full sign set.",
+   "vis": {"kind": "compare", "left": {"title": "Left atrial enlargement", "points": ["Double density shadow", "Carina splayed wide", "Left bronchus lifted", "Appendage bulge on left border"]}, "right": {"title": "Right atrial enlargement", "points": ["Right border bulges out", "No double density", " Caval enlargement below", "No bronchial lift"]}}
+  },
+  {
+   "title": "Mitral stenosis drives atrial enlargement",
+   "tx": "**Mitral stenosis** narrows the valve until left atrial pressure climbs and the chamber dilates, exactly the progression the illustration traces from valve narrowing to pulmonary congestion. Rheumatic disease fuses the commissures into a fish mouth valve, most patients are women, and symptoms often declare in pregnancy when cardiac output rises. The film then adds upper lobe venous diversion and Kerley lines as pressures climb further.",
+   "say": "Mitral stenosis narrows the valve until left atrial pressure climbs and the chamber dilates, the progression the illustration traces toward pulmonary congestion. Rheumatic disease fuses the commissures, and symptoms often declare in pregnancy when output rises. The film adds upper lobe diversion and Kerley lines as pressures climb.",
+   "vis": {"kind": "image", "src": "v1/kb/media/mitral-stenosis-fig2.webp", "alt": "Illustration of mitral stenosis with chamber enlargement and pulmonary congestion progression.", "caption": "Mitral stenosis progression with atrial enlargement and pulmonary congestion. Illustration: StewardMD."}
+  },
+  {
+   "title": "Straightened left heart border",
+   "tx": "**Mitralised heart** straightens the left border when the enlarged left atrial appendage fills the normal concavity below the pulmonary segment. Four bumps then stack down the left border: aortic knuckle, pulmonary artery, atrial appendage and left ventricle. Loss of the appendage concavity is an early film clue that precedes frank cardiomegaly, which is why examiners crop the left border into spot questions so often.",
+   "say": "Mitralised heart straightens the left border when the enlarged atrial appendage fills the normal concavity below the pulmonary segment. Four bumps then stack down the border: aortic knuckle, pulmonary artery, appendage and ventricle. Loss of that concavity is an early clue preceding frank enlargement of the whole heart.",
+   "vis": {"kind": "table", "cols": ["Left border bump", "Structure", "Enlarges in"], "rows": [["First", "Aortic knuckle", "Aortic dilatation"], ["Second", "Pulmonary artery", "Pulmonary hypertension"], ["Third", "Left atrial appendage", "Mitral stenosis"], ["Fourth", "Left ventricle", "Aortic and mitral regurgitation"]]}
+  },
+  {
+   "title": "Carinal angle and bronchial lift",
+   "tx": "**Carinal splaying** widens the angle between the main bronchi beyond about 90 degrees as the enlarging left atrium pushes up from below. The left main bronchus also turns horizontal, sometimes called the walking man appearance on the lateral film. On barium swallow the same atrium indents the oesophagus from the front, a classic indirect sign from the era before echocardiography measured the chamber directly.",
+   "say": "Carinal splaying widens the angle between the main bronchi beyond about ninety degrees as the enlarging left atrium pushes up from below. The left main bronchus turns horizontal. On barium swallow the same atrium indents the oesophagus from the front, a classic indirect sign from before echocardiography.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Left atrium enlarges"}, {"id": "b", "label": "Carina pushed upward"}, {"id": "c", "label": "Angle exceeds 90 degrees"}, {"id": "d", "label": "Left bronchus horizontal"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Coronary calcium scoring",
+   "tx": "**Coronary calcium score** quantifies calcified plaque on a non contrast cardiac CT using the Agatston method, multiplying plaque area by a density factor. Zero excludes calcified plaque and carries a strong negative prediction in symptomatic low risk patients, while scores above 400 mark heavy burden needing aggressive prevention. The score sees only calcified plaque, so a symptomatic patient with zero calcium still needs functional or angiographic assessment.",
+   "say": "Coronary calcium score quantifies calcified plaque on non contrast cardiac CT by the Agatston method, multiplying plaque area by a density factor. Zero carries strong negative prediction in low risk patients, while above four hundred marks heavy burden. It sees only calcified plaque, so symptomatic patients still need further assessment.",
+   "vis": {"kind": "table", "cols": ["Agatston score", "Plaque burden", "Usual response"], "rows": [["0", "No calcified plaque", "Reassure, lifestyle"], ["1 to 99", "Mild", "Risk factor control"], ["100 to 399", "Moderate", "Statin, evaluate symptoms"], ["400 and above", "Heavy", "Aggressive prevention, angiography if symptomatic"]]}
+  },
+  {
+   "title": "CT coronary angiography",
+   "tx": "**CT coronary angiography** images the coronary lumen with iodinated contrast timed to a bolus, electrocardiogram gating and heart rate control near or below 65 beats per minute. Its strength is a very high negative predictive value in low to intermediate risk chest pain, clearing patients for discharge. Heavy calcification blooms and overstates stenosis, and irregular rhythm blurs segments, which remain its two practical limits at the reporting desk.",
+   "say": "CT coronary angiography images the coronary lumen with contrast, electrocardiogram gating and heart rate control near sixty five beats per minute. Its strength is a very high negative predictive value in low to intermediate risk chest pain. Heavy calcification overstates narrowing, and irregular rhythm blurs segments, its two practical limits.",
+   "vis": {"kind": "compare", "left": {"title": "Best conditions", "points": ["Rate near 65 or below", "Regular sinus rhythm", "Low to intermediate risk pain", "Little coronary calcium"]}, "right": {"title": "Difficult conditions", "points": ["Atrial fibrillation", "Heavy calcification blooming", "High body mass index", "Inability to breath hold"]}}
+  },
+  {
+   "title": "Cardiac MRI tissue character",
+   "tx": "**Cardiac MRI** separates scar, oedema and infiltration where echocardiography only shows thickness and motion. Late gadolinium enhancement lights up scar ten minutes after contrast: subendocardial in infarction territories, mid wall in dilated cardiomyopathy and patchy basal in myocarditis. T2 weighted images show the oedema of acute injury, so pairing both sequences dates a lesion and names its pattern in one sitting.",
+   "say": "Cardiac MRI separates scar, oedema and infiltration where echocardiography shows only thickness and motion. Late gadolinium enhancement lights up scar: subendocardial after infarction, mid wall in dilated cardiomyopathy and patchy in myocarditis. T2 images show acute oedema, so pairing both sequences dates a lesion and names its pattern.",
+   "vis": {"kind": "table", "cols": ["Disease", "Enhancement pattern", "Layer"], "rows": [["Infarction", "Territorial, wavefront", "Subendocardial to transmural"], ["Dilated cardiomyopathy", "Linear stripe", "Mid wall septum"], ["Myocarditis", "Patchy, basal lateral", "Subepicardial"], ["Amyloidosis", "Diffuse, hard to null", "Subendocardial global"]]}
+  },
+  {
+   "title": "Double density versus pericardial fat",
+   "tx": "**Pericardial fat pad** mimics atrial enlargement at the cardiophrenic angles, but it reads less dense than heart muscle and never splays the carina or lifts a bronchus. The double atrial shadow instead matches soft tissue density exactly and curves parallel inside the right border. Checking the carina and left bronchus on the same film settles the mimic without extra radiation, a favourite examiner trap in both directions.",
+   "say": "Pericardial fat pad mimics atrial enlargement at the cardiophrenic angles, but it reads less dense than heart muscle and never splays the carina or lifts a bronchus. The double atrial shadow matches soft tissue density and curves inside the right border. Checking the carina on the same film settles the mimic.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Extra density at heart border"}, {"id": "b", "label": "Check carina and bronchus"}, {"id": "c", "label": "Splayed: atrial enlargement"}, {"id": "d", "label": "Normal: fat pad likely"}], "edges": [["a", "b"], ["b", "c"], ["b", "d"]]}
+  }
+ ]
+}

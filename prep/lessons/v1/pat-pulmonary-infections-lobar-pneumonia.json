@@ -1,0 +1,205 @@
+{
+  "v": 1,
+  "module": "pat-pulmonary-infections",
+  "subject": "pathology",
+  "title": "Lobar Pneumonia Stages, Tuberculosis Complexes, Miliary TB, Aspergilloma, and Pneumocystis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Lobar pneumonia consolidates an entire lobe through congestion, red hepatisation of exudate and red cells, grey hepatisation of fibrin and neutrophils, then enzymatic resolution, classically from pneumococcus. That four act sequence is **lobar pneumonia pathological stages**. Resolution normally restores normal lung architecture because alveolar walls survive, unlike abscess forming infections that leave permanent scars.",
+      "say": "Congestion, red hepatisation, grey hepatisation, resolution: lobar pneumonia performs in four classic acts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Lung character",
+          "Clinical echo"
+        ],
+        "rows": [
+          [
+            "Congestion (day 1)",
+            "Heavy, boggy, early exudate",
+            "Fever begins, crepitations"
+          ],
+          [
+            "Red hepatisation",
+            "Firm red, red cells and fibrin",
+            "Rusty sputum, consolidation signs"
+          ],
+          [
+            "Grey hepatisation",
+            "Firm grey, fibrin and neutrophils",
+            "Dullness persists, fever plateaus"
+          ],
+          [
+            "Resolution",
+            "Enzymatic digestion, macrophage clearance",
+            "Crisis and recovery classically"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cut across a consolidated lobe and its colour betrays how long the infection has been running. Early on, blood filled alveoli turn the tissue liver firm and red, whereas a day or two later fibrin and neutrophils grey that same lobe. Pathologists call this second stage **grey hepatisation**, because the lung slices with the dull firmness of liver. Resolution may still restore normal architecture afterwards, since the alveolar framework survives both stages intact in uncomplicated pneumococcal disease.",
+      "say": "Red hepatisation gives way to grey hepatisation as fibrin and neutrophils replace blood inside the consolidated lobe.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m112-pat-pulmonary-infections-lobar-pneumonia.webp",
+        "alt": "Lobar pneumonia gross lung at red and grey hepatisation stages",
+        "caption": "Lobar pneumonia gross lung at red and grey hepatisation stages. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Bronchopneumonia patches patchy consolidation around bronchioles in infants, elderly, and debilitated patients from staphylococci, streptococci, and gram negatives, unlike lobar disease's single lobe drama. The patchy pattern is **bronchopneumonia of the vulnerable host**. Staphylococcus aureus bronchopneumonia can excavate lung abscesses and pneumatoceles, complications pneumococcal lobar disease produces far less often.",
+      "say": "Patchy peribronchiolar consolidation in the very young or old is bronchopneumonia, not lobar disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lobar pneumonia",
+          "points": [
+            "Whole lobe, pneumococcus classic",
+            "Previously healthy adults",
+            "Four hepatisation stages"
+          ]
+        },
+        "right": {
+          "title": "Bronchopneumonia",
+          "points": [
+            "Patchy bronchocentric foci",
+            "Infants, elderly, debilitated",
+            "Multiple organisms, abscess risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Atypical pneumonia inflames interstitium more than airspaces with mycoplasma, viruses, chlamydia, and legionella, producing dry cough and infiltrates out of proportion to sparse chest signs. The interstitial pattern is **atypical (interstitial) pneumonia**. Mycoplasma pneumoniae classically strikes school aged children and young adults, spreading efficiently through classrooms, dormitories, and military barracks.",
+      "say": "Dry cough, scanty signs, striking film: atypical pneumonia lives in interstitium, not alveoli.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cap-fig1.webp",
+        "alt": "Community acquired pneumonia patterns including interstitial distribution",
+        "caption": "Pneumonia pattern diagram contrasting lobar, bronchopneumonia, and interstitial distributions, with hepatisation stages and a consolidation radiograph."
+      }
+    },
+    {
+      "tx": "Primary tuberculosis implants a subpleural Ghon focus with draining hilar nodes as Ghon complex in children, usually calcifying into Ranke complex while viable bacilli may sleep for decades. That childhood imprint is the **Ghon and Ranke complex of primary tuberculosis**. Calcified Ghon complexes still surface incidentally on chest films in endemic regions decades after silent childhood infection ended.",
+      "say": "Ghon focus plus its node makes the complex; calcified Ranke complex is its tombstone with sleeping tenants.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Inhaled bacilli implant subpleurally"
+          },
+          {
+            "id": "b",
+            "label": "Ghon focus plus hilar node complex"
+          },
+          {
+            "id": "c",
+            "label": "Cell immunity contains, calcification follows"
+          },
+          {
+            "id": "d",
+            "label": "Ranke complex, latent bacilli may persist"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary tuberculosis reactivates at oxygen rich apices as Assmann foci, cavitating, spreading bronchogenically and by cough to contacts, while Simon foci mark early haematogenous apical seeding. Apical cavitation defines **secondary (reactivation) pulmonary tuberculosis**. A Rasmussen aneurysm, a pulmonary artery branch weakened inside a cavity wall, explains some episodes of massive haemoptysis.",
+      "say": "Apical cavities coughing bacilli are secondary tuberculosis; oxygen rich apices wake sleeping disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary pattern",
+          "points": [
+            "Childhood, mid lung Ghon focus",
+            "Nodes prominent, usually contained",
+            "Pleural effusion may follow"
+          ]
+        },
+        "right": {
+          "title": "Secondary pattern",
+          "points": [
+            "Apical cavitary reactivation",
+            "Bronchogenic spread, haemoptysis",
+            "Infectious cough spreads disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Miliary tuberculosis showers millet seed granulomas through lungs, liver, spleen, and meninges when bacilli disseminate haematogenously in infants or immunocompromised hosts, demanding lumbar and fundal examination. The millet shower is **miliary disseminated tuberculosis**. Meningitis accompanies miliary spread often enough that headache or neck stiffness in such patients mandates urgent lumbar puncture.",
+      "say": "Millet seeds on imaging plus choroid tubercles in the eye spell miliary tuberculosis; treat on sight.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/disseminated-tb-fig1.webp",
+        "alt": "Miliary tuberculosis pathogenesis and features",
+        "caption": "Miliary tuberculosis dissemination with millet seed granulomas across organs."
+      }
+    },
+    {
+      "tx": "Aspergilloma balls fungus inside old tuberculous cavities without invading tissue in immunocompetent hosts, declaring through haemoptysis that may turn catastrophic, imaged with mobile intracavitary mass and air crescent. The saprophytic ball is **aspergilloma (fungus ball) in old cavities**. The air crescent, or Monod sign, shifts position when the patient rolls, proving the ball sits freely inside its cavity.",
+      "say": "A mobile ball in an old TB cavity with haemoptysis is aspergilloma; invasion is not its style.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Aspergillus pattern",
+          "Host and site",
+          "Behaviour"
+        ],
+        "rows": [
+          [
+            "Aspergilloma",
+            "Old cavity, competent host",
+            "Saprophytic ball, haemoptysis"
+          ],
+          [
+            "Allergic bronchopulmonary",
+            "Asthma, cystic fibrosis",
+            "Mucus plugs, bronchiectasis"
+          ],
+          [
+            "Chronic cavitary",
+            "Structural lung disease",
+            "Slow cavity expansion"
+          ],
+          [
+            "Invasive aspergillosis",
+            "Neutropenia, transplantation",
+            "Vessel invasion, infarction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pneumocystis pneumonia frosts alveoli with foamy eosinophilic exudate and cup shaped organisms on silver stain in advanced HIV, producing hypoxaemia out of proportion to imaging whispers. The AIDS defining pneumonia is **Pneumocystis jirovecii pneumonia (PCP)**. Co-trimoxazole remains first line treatment, with corticosteroids added when arterial oxygen falls below 70 millimetres of mercury breathing air.",
+      "say": "Foamy alveolar casts and silver stained cups in advanced HIV mean Pneumocystis pneumonia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pneumocystis-pneumonia-fig1.webp",
+        "alt": "Pneumocystis pneumonia histology",
+        "caption": "Pneumocystis pneumonia histology with foamy alveolar exudate and cup organisms."
+      }
+    }
+  ]
+}

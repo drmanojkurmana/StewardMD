@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-sexual-offences-rape",
+ "subject": "forensic-medicine",
+ "module": "fmt-sexual-offences",
+ "title": "Rape Law, Consent and POCSO: BNS Sections 63 and 64",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Definition of rape in BNS section 63",
+   "tx": "**Rape under Bharatiya Nyaya Sanhita section 63**, formerly section 375 of the Penal Code, covers penetration of the penis to any extent into the vagina, mouth, urethra or anus, insertion of any object or body part other than the penis, manipulation causing penetration, and application of the mouth to the vagina, anus or urethra, when done in the seven prohibited circumstances. For this section, vagina includes the labia majora, so penetration need not be complete.",
+   "say": "Section sixty three defines rape by any penetration, however slight, including with objects and by mouth, in seven situations.",
+   "vis": {"kind": "table", "cols": ["Act covered", "Body part or object", "Extent needed"], "rows": [["Penile penetration", "Vagina, mouth, urethra, anus", "To any extent"], ["Object insertion", "Object or non penile body part", "To any extent"], ["Manipulation", "Causing penetration", "Into any body part"], ["Oral application", "Mouth to vagina, anus, urethra", "Contact suffices"]]}
+  },
+  {
+   "title": "The seven circumstances that remove consent",
+   "tx": "The act becomes rape under **seven prohibited circumstances**: against her will; without her consent; with consent obtained by fear of death or hurt to her or someone she cares for; with consent given believing the man is her husband; with consent given under unsoundness of mind, intoxication or a stupefying substance; with or without consent when she is under eighteen years; and when she is unable to communicate consent at all.",
+   "say": "Fear, impersonation of a husband, intoxication and age under eighteen each destroy consent in law, whatever was said.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Check will and consent first"}, {"id": "b", "label": "Fear or impersonation voids it"}, {"id": "c", "label": "Intoxication voids understanding"}, {"id": "d", "label": "Under eighteen, consent irrelevant"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "What consent means in law",
+   "tx": "**Consent** in this chapter means an unequivocal voluntary agreement communicated by words, gestures or any verbal or non verbal communication of willingness to take part in the specific sexual act. A woman who does not physically resist penetration is not, by that fact alone, consenting. Medical procedures or interventions are expressly excluded from the definition. The examiner records the history exactly as narrated and never certifies consent or its absence, which is for the court.",
+   "say": "Consent must be unequivocal and specific, absence of resistance is not consent, and doctors record history without judging it.",
+   "vis": {"kind": "compare", "left": {"title": "Consent in law", "points": ["Unequivocal voluntary agreement", "Communicated by words or gestures", "Specific to the act in question", "Non resistance is not consent"]}, "right": {"title": "Doctor's boundary", "points": ["Record the narration verbatim", "Examine and preserve evidence", "Treat injuries and infection risk", "Never certify consent occurred"]}}
+  },
+  {
+   "title": "Punishment under BNS section 64",
+   "tx": "**BNS section 64**, formerly section 376, punishes rape with rigorous imprisonment of not less than ten years, extendable to imprisonment for life, with fine, and aggravated categories attract higher floors. Rape causing death or a persistent vegetative state carries at least twenty years, life for the remainder of natural life, or death. Gang rape and rape of young children carry the severest punishments, including death where the statute provides. Exact sentencing is the court's function, not the clinician's.",
+   "say": "Section sixty four sets a ten year floor for rape, rising to life or death where the victim dies or is a young child.",
+   "vis": {"kind": "table", "cols": ["Offence form", "Statute", "Punishment guide"], "rows": [["Rape", "BNS 64, formerly IPC 376", "Ten years to life, plus fine"], ["Rape causing death or vegetative state", "Formerly IPC 376A", "Twenty years to natural life, or death"], ["Intercourse by authority, not rape", "Formerly IPC 376C", "Five to ten years"], ["Gang rape", "Formerly IPC 376D", "Life level punishment, death for children"]]}
+  },
+  {
+   "title": "Aggravated rape categories",
+   "tx": "The aggravated list under the former section 376(2) survives in the new codes as **aggravated rape**: by a police officer, public servant, armed forces member, jail, remand home, institution or hospital staff, or by a relative, guardian, teacher or person in trust, during communal violence, on a pregnant woman, on a woman incapable of consent, by a person in control or dominance, on a woman with mental or physical disability, causing grievous harm, or repeated on the same woman.",
+   "say": "Custody, trust, pregnancy, disability and repetition aggravate rape in law because each exploits a helpless advantage.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Identify position of power"}, {"id": "b", "label": "Custody, trust or authority present"}, {"id": "c", "label": "Victim vulnerability noted"}, {"id": "d", "label": "Aggravated charge follows"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "POCSO protects every child",
+   "tx": "The **Protection of Children from Sexual Offences Act, POCSO**, governs sexual offences against any child under eighteen, boy or girl, and treats penetrative sexual assault on a child as aggravated when committed by persons in trust or authority or on very young children. Consent of a child is no defence. Examination of a child survivor requires a parent or trusted person present, a female doctor for a girl, and reporting is mandatory for anyone who learns of the offence.",
+   "say": "POCSO covers every child under eighteen, child consent is no defence, and reporting a known offence is mandatory.",
+   "vis": {"kind": "compare", "left": {"title": "POCSO essentials", "points": ["Every child under eighteen", "Gender neutral protection", "Consent of child irrelevant", "Mandatory reporting duty"]}, "right": {"title": "Child examination rules", "points": ["Parent or trusted person present", "Female doctor examines a girl", "Minimal, gentle examination", "Evidence kit sealed and labelled"]}}
+  },
+  {
+   "title": "Age of consent and the eighteen line",
+   "tx": "The **eighteen year consent line** is absolute in rape law: intercourse with a girl under eighteen is rape with or without her consent, and POCSO applies the same threshold to all children. This is why age estimation by ossification, dentition and documents, built in the identification module, becomes court critical in sexual offence cases. Where documents conflict with medical estimation, the benefit and the statute followed must be recorded transparently in the report.",
+   "say": "Under eighteen there is no consent to give, so honest age estimation often decides whether an offence exists at all.",
+   "vis": {"kind": "table", "cols": ["Age question", "Method", "Use in court"], "rows": [["Documents conflict", "Birth and school records compared", "Hierarchy explained in report"], ["No documents", "Ossification and dentition", "Age range with margin stated"], ["Near eighteen", "Combined assessment", "Benefit recorded transparently"], ["Adult survivor", "Age rarely in dispute", "Consent facts decide instead"]]}
+  },
+  {
+   "title": "Marital and medical exceptions, carefully read",
+   "tx": "Two exceptions frame the definition in **exceptions to rape**. A medical procedure or intervention does not constitute rape. Sexual intercourse by a man with his own wife is treated under separate provisions, with the wife's age and any separation without consent addressed by specific sections formerly numbered 376B. Clinicians should know these boundaries exist, record facts neutrally, and leave their application entirely to the court after evidence is preserved.",
+   "say": "Medical procedures are excluded and marital acts sit in separate sections, but clinicians record facts and leave law to court.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Record facts without labels"}, {"id": "b", "label": "Preserve medical evidence fully"}, {"id": "c", "label": "Note relationship as stated"}, {"id": "d", "label": "Court applies the exceptions"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "The clinician's role in a rape case",
+   "tx": "The doctor's duties in **medical examination after rape** are care and evidence together: informed consent for examination, treatment of injuries, prevention of pregnancy and sexually transmitted infection, psychological support, and meticulous collection, sealing and labelling of samples with an unbroken chain of custody. The opinion states findings and their consistency with the history. It never names a culprit, never certifies rape, and uses respectful language throughout the record.",
+   "say": "Treat first, collect and seal evidence carefully, opine only on findings and consistency, and never name the culprit.",
+   "vis": {"kind": "compare", "left": {"title": "Care duties", "points": ["Consent for every step", "Injuries treated promptly", "Pregnancy and infection prevented", "Psychological support arranged"]}, "right": {"title": "Evidence duties", "points": ["Samples collected and sealed", "Chain of custody unbroken", "Findings matched to history", "No culprit named in opinion"]}}
+  }
+ ],
+ "quiz": []
+}

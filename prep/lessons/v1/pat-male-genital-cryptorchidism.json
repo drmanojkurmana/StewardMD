@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "pat-male-genital",
+  "subject": "pathology",
+  "title": "Cryptorchidism, Seminoma, Embryonal and Yolk Sac Tumours, and Choriocarcinoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Cryptorchidism** leaves a testis arrested in the inguinal canal or abdomen, where higher temperature impairs spermatogenesis. Germ cell cancer risk rises roughly fourfold, and orchidopexy before puberty improves fertility prospects while making the testis examinable, yet it does not return cancer risk to baseline. An intra-abdominal testis carries the highest malignant potential of all undescended positions.",
+      "say": "Bring the testis down early for fertility and examination; cancer risk falls but never vanishes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Descent arrests inguinal or abdominal"
+          },
+          {
+            "id": "b",
+            "label": "Heat impairs spermatogenesis"
+          },
+          {
+            "id": "c",
+            "label": "Germ cell neoplasia risk rises"
+          },
+          {
+            "id": "d",
+            "label": "Orchidopexy by six to twelve months"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Seminoma** is the commonest single germ cell tumour, typically presenting as a painless testicular enlargement in men aged 30 to 50. Sheets of uniform cells with clear glycogen-rich cytoplasm are divided by fibrous septa crowded with lymphocytes. Even metastatic seminoma is exquisitely sensitive to radiotherapy and platinum chemotherapy, giving cure rates that few solid tumours can match.",
+      "say": "Uniform clear sheets, lymphocyte septa, superb cure: seminoma is germ cell oncology's success story.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m134-pat-male-genital-cryptorchidism.webp",
+        "alt": "Seminoma testis gross specimen with fried-egg cell histology inset",
+        "caption": "Seminoma testis gross specimen with fried-egg cell histology inset. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Under the microscope a seminoma cell resembles a **fried egg**: pale clear cytoplasm forms the white, while a central round nucleus with a prominent nucleolus forms the yolk. Glycogen dissolving during processing creates that empty look, and PAS staining can demonstrate it before fixation. Squaring off where neighbouring cells press together is another subtle clue separating seminoma from embryonal carcinoma.",
+      "say": "Fried egg cells with lymphocyte rich septa let microscopy name seminoma before markers return.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Seminoma",
+          "points": [
+            "Fried egg uniform sheets",
+            "PLAP positive, AFP never raised",
+            "Stage I surveillance or single carboplatin debates"
+          ]
+        },
+        "right": {
+          "title": "Embryonal carcinoma",
+          "points": [
+            "Primitive pleomorphic glands",
+            "CD30 positive, haemorrhagic",
+            "Chemotherapy accent stronger"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Immunostaining with **PLAP** lights up seminoma cells and their precursor, germ cell neoplasia in situ, helping separate them from other round cell tumours. Serum markers add a second check: pure seminoma never secretes AFP, so any AFP rise proves a nonseminomatous element hides somewhere. Beta-hCG rises modestly in some seminomas containing syncytiotrophoblast cells, without changing the diagnosis.",
+      "say": "PLAP stains seminoma, AFP never rises in pure seminoma; a raised AFP rewrites the tumour as mixed.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/testicular-germ-cell-tumor-fig1.webp",
+        "alt": "Testicular germ cell tumor pathology",
+        "caption": "Germ cell tumour pathology across seminoma and nonseminomatous types."
+      }
+    },
+    {
+      "tx": "**Embryonal carcinoma** is the primitive, stem-like component of many mixed germ cell tumours, growing in glandular, papillary and solid patterns with crowded overlapping nuclei. Tumour cells stain for CD30 and OCT3/4, confirming their pluripotent character. Large embryonal volume, vascular invasion and rete testis involvement each push a stage I patient toward adjuvant chemotherapy rather than surveillance alone.",
+      "say": "Embryonal carcinoma is the primitive engine inside many mixed germ cell tumours; chemotherapy respects it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour",
+          "Marker accent",
+          "Histology cue"
+        ],
+        "rows": [
+          [
+            "Seminoma",
+            "PLAP, beta-hCG sometimes mild",
+            "Fried egg sheets, septal lymphocytes"
+          ],
+          [
+            "Embryonal carcinoma",
+            "CD30, AFP variable by mix",
+            "Primitive glands, necrosis"
+          ],
+          [
+            "Yolk sac tumour",
+            "AFP strongly",
+            "Schiller-Duval bodies"
+          ],
+          [
+            "Choriocarcinoma",
+            "Beta-hCG very high",
+            "Haemorrhagic syncytiotrophoblast"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A fibrovascular papilla projecting into a cystic space, mimicking a renal glomerulus, is a **Schiller-Duval body**, the signature structure of yolk sac tumour. This is the commonest testicular tumour of early childhood and a frequent ingredient in adult mixed tumours. Alpha-fetoprotein pours from its endodermal sinus pattern, so AFP level tracks tumour burden and response to treatment.",
+      "say": "Schiller-Duval bodies plus high AFP name yolk sac tumour from childhood to mixed adult disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Childhood yolk sac",
+          "points": [
+            "Pure tumour, AFP tracked",
+            "Chemotherapy curative mostly",
+            "Sacrococcygeal and testicular sites"
+          ]
+        },
+        "right": {
+          "title": "Adult mixed component",
+          "points": [
+            "Within mixed germ cell tumours",
+            "Worst component guides therapy",
+            "Markers map components imperfectly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pure **choriocarcinoma** mixes syncytiotrophoblast and cytotrophoblast without any chorionic villi, and it bleeds wherever it lands. Beta-hCG can climb into hundreds of thousands, occasionally causing thyrotoxicosis through weak TSH activity. Haematogenous spread reaches lung and brain while the testicular primary is still tiny, sometimes regressing to a scar, so haemorrhagic brain lesions in a young man demand a testicular examination.",
+      "say": "Beta-hCG in tens of thousands plus haemorrhagic lung lesions means choriocarcinoma, however small the testis feels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Painless testicular lump or marker rise"
+          },
+          {
+            "id": "b",
+            "label": "Ultrasound, AFP, beta-hCG, LDH"
+          },
+          {
+            "id": "c",
+            "label": "Radical inguinal orchidectomy"
+          },
+          {
+            "id": "d",
+            "label": "Stage, surveillance or chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A suspicious testicular mass is removed by **radical inguinal orchidectomy** with high ligation of the spermatic cord at the internal ring, never by transcrotal biopsy. Scrotal violation breaches lymphatic planes that drain to inguinal nodes instead of the para-aortic chain, potentially changing stage and adjuvant decisions. Ultrasound confirms a solid intratesticular lesion first, but it never replaces excision histology.",
+      "say": "Never biopsy a testicular mass through scrotum; radical inguinal orchidectomy diagnoses and treats first.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Extent",
+          "Typical path"
+        ],
+        "rows": [
+          [
+            "Stage I",
+            "Testis confined, markers normalised",
+            "Surveillance favoured many"
+          ],
+          [
+            "Stage II",
+            "Retroperitoneal nodes",
+            "Chemo or node dissection selected"
+          ],
+          [
+            "Stage III",
+            "Visceral metastases",
+            "Combination chemotherapy"
+          ],
+          [
+            "Marker only relapse",
+            "Imaging silent, markers rising",
+            "Chemotherapy generally"
+          ]
+        ]
+      }
+    }
+  ]
+}
