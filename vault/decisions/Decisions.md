@@ -12159,3 +12159,27 @@ specialty named after the kit, switchable from a picker. Plus: plain-language su
 **Anaesthetica** (British spelling, owner), problem search ("sodium 122" -> Electrolytes), a weekly "Try something
 new" card and New chips on never-opened tools. Not yet built: tools suggesting the next tool in context, and a
 "Try with a sample patient" button per tool. Flag `smd_home_tabs` (default on; "0" or `?hometabs=0` restores the grid).
+
+## OPD Queue revamp: refine the look, patient is the record key (owner "implement the plan", 2026-11-09)
+The 2026-11-09 rating scored the personal-clinic queue 6 / 6.5 / 6.5 (doctor, AI, engineering). Plan:
+`design-plans/opd-queue-10-of-10.md`. The owner said "implement the plan" without answering its three open
+decisions, so the plan's recommendations were taken: REFINE the existing "Clinical Precision" look (no new
+visual world, so the doctor queue still matches the staff console); clinic set-up moves INTO the app;
+duplicate records made before the fix are NOT auto-merged (a wrong merge puts one patient's notes under
+another's name). The on-device record is keyed by the server's MR number, not the ticket. The new screen
+ships behind `smd_opd_q2`, default off, with a switch in Settings because the app has no flag screen.
+The plan's ui-ux-pro-max style suggestion for healthcare (Neumorphism / Claymorphism) was rejected: low
+contrast surfaces fight a dense clinical list. Recovery point: commit `6649970a`, the parent of the change (the tag `opd-queue-pre-revamp` could not be pushed from the cloud session).
+Reversible: `smd_opd_q2=0` (the default) and `smd_opd_patient_key=0`.
+
+## OPD Queue new screen: Manrope, one emerald, flat grouped surfaces (owner, 2026-11-10)
+The owner reviewed two builds of the new queue screen (`smd_opd_q2`) and called both "vibe coded", then asked
+for a new font, new colours and a premium feel using the Appllama skills. This supersedes the 2026-11-09
+"refine the existing Clinical Precision look" choice FOR THE NEW SCREEN ONLY: the earlier screen and the staff
+console keep theirs. Chosen: Manrope (already bundled, so no install-size cost and no new file for the bundle
+to miss) over staying on Inter or adding a new download; one accent, emerald `#0a7556`, over the teal
+`#0e6e63`; borderless white surfaces on a grey ground over outlined cards. Rejected: the reference images'
+gradient header, stat tiles and tabs (features and data the screen does not have).
+Not verified on a phone. Reversible: `smd_opd_q2=0` (the default).
+Update, same day: the owner asked for an Apple-like font and said the rest is fine. The new screen now uses the
+system face (`-apple-system`, San Francisco on iPhone) with Inter as the Android fallback, in place of Manrope.
