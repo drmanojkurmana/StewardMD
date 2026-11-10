@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-other-antibacterials",
+  "subject": "pharmacology",
+  "title": "Mupirocin, Fusidic Acid, Metronidazole and Urinary Antiseptics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Mupirocin**, from Pseudomonas fluorescens, blocks bacterial isoleucyl tRNA synthetase and lives entirely on skin and in noses: impetigo and secondarily infected lesions topically, and nasal decolonisation of Staphylococcus aureus (with chlorhexidine body wash) before surgery and in dialysis and outbreak protocols. Resistance divides into low level (MIC creep) and plasmid borne high level (mupA) that predicts decolonisation failure, which is why programmes screen outcomes rather than assuming eradication.",
+      "say": "Mupirocin decolonises noses before it treats skin; high level resistance announces failed eradication in advance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mupirocin territory",
+          "points": [
+            "Impetigo and infected minor skin lesions",
+            "Nasal MRSA and MSSA decolonisation courses",
+            "Pre surgical and dialysis protocols",
+            "Five day courses with chlorhexidine washing"
+          ]
+        },
+        "right": {
+          "title": "Mupirocin limits",
+          "points": [
+            "High level mupA resistance: decolonisation fails",
+            "Not for large areas or prolonged use",
+            "Polyethylene glycol base caution in renal failure wounds",
+            "Stewardship restricts routine community use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fusidic acid**, a steroidal antibiotic blocking elongation factor G, covers staphylococci including many MRSA in skin, bone and joint partnerships (classically with rifampicin, never alone because resistance emerges in days by fusA mutations), while its systemic use is fenced by hepatotoxicity and one of pharmacology's sharpest interactions: statin co therapy causing rhabdomyolysis, mandating statin pauses for systemic courses. Topical monotherapy resistance in community staphylococci is its stewardship controversy.",
+      "say": "Fusidic acid never travels alone, and stops the statin before it stops the staphylococcus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "staph",
+            "label": "Staphylococcal bone, joint or skin infection"
+          },
+          {
+            "id": "partner",
+            "label": "Fusidic acid partnered, never monotherapy systemically"
+          },
+          {
+            "id": "statin",
+            "label": "Statin paused for the course duration"
+          },
+          {
+            "id": "liver",
+            "label": "Liver enzymes and bilirubin monitored"
+          }
+        ],
+        "edges": [
+          [
+            "staph",
+            "partner"
+          ],
+          [
+            "partner",
+            "statin"
+          ],
+          [
+            "statin",
+            "liver"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Metronidazole** is a prodrug reduced only at low redox potentials (anaerobes, microaerophiles, protozoa), generating cytotoxic radicals that shatter DNA, bactericidal against Bacteroides and Clostridioides (systemically), Gardnerella, Helicobacter partnerships, and the protozoa Entamoeba, Giardia and Trichomonas. Its disulfiram like alcohol reaction (debated mechanism, universally counselled), metallic taste, peripheral neuropathy on long courses and warfarin potentiation complete a profile every junior prescriber recites.",
+      "say": "Metronidazole wakes only where oxygen is absent; alcohol, neuropathy and warfarin ride along.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antibacterials-fq-vanco-metronidazole-uti-fig1.webp",
+        "alt": "Bacterial targets of three antibacterials diagram including metronidazole DNA damage",
+        "caption": "Metronidazole's DNA shattering action among the three antibacterial targets mapped here."
+      }
+    },
+    {
+      "tx": "**Anaerobic geography divides** metronidazole's empire from clindamycin's by the diaphragm: below it (Bacteroides fragilis group) metronidazole is king and clindamycin resistance grows, above it (oral and pulmonary anaerobes) clindamycin and penicillins serve, with brain abscess and bacterial vaginosis (topical or oral) and C difficile's historical corner completing metronidazole's map. Tinidazole stretches the same chemistry to longer, kinder single dose protozoal regimens.",
+      "say": "Below the diaphragm metronidazole, above it clindamycin and penicillins; abscess geography chooses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Metronidazole empire",
+          "points": [
+            "Intra abdominal and gynaecological anaerobes",
+            "Brain abscess partnerships",
+            "Amoebiasis, giardiasis, trichomoniasis",
+            "Bacterial vaginosis and H pylori regimens"
+          ]
+        },
+        "right": {
+          "title": "Clindamycin anaerobe territory",
+          "points": [
+            "Aspiration and oral anaerobes above diaphragm",
+            "Bacteroides resistance rising against it",
+            "Toxin suppression roles (previous lesson)",
+            "C difficile propensity caps enthusiasm"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Urinary antiseptics** formalise the bladder confined doctrine: methenamine (hippurate or mandelate) hydrolyses to formaldehyde in acidic urine, a non specific bactericide against which resistance cannot organise, serving long term recurrent urinary prophylaxis where urine pH under 5.5 and bladder dwell time permit, useless in catheterised or alkaline systems and in renal failure. It treats nothing acute; it prevents, chemically and quietly, in selected recurrent patients.",
+      "say": "Methenamine brews formaldehyde in acid urine; prophylaxis only, and only where acid and dwell allow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methenamine conditions",
+          "points": [
+            "Acidic urine below pH 5.5 required",
+            "Adequate bladder dwell time (no catheter)",
+            "Recurrent urinary infection prophylaxis",
+            "Functioning kidneys and liver required"
+          ]
+        },
+        "right": {
+          "title": "Methenamine exclusions",
+          "points": [
+            "Acute infection: not a treatment",
+            "Alkaline urine from Proteus splitting urea",
+            "Catheterised bladders: no dwell, no effect",
+            "Sulfonamide co therapy precipitates historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Topical antiseptic and** antibiotic stewardship parallels the systemic rules at skin scale: antiseptics (chlorhexidine, povidone iodine, octenidine) for decolonisation and wound care without resistance selection of antibiotic grade, topical antibiotics (mupirocin, fusidic acid, retapamulin) reserved, short and indication bound, because community resistance to both skin agents rose exactly where cosmetic and repeat use sprawled. Wound infection needs systemic therapy when spreading, topical therapy alone being a common undertreatment error.",
+      "say": "Antiseptics for surfaces, antibiotics for invasion; topical antibiotics are spent by casual repetition like any other.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "assess",
+            "label": "Skin lesion: colonisation, local or spreading infection"
+          },
+          {
+            "id": "antisep",
+            "label": "Antiseptic care for colonisation and wounds"
+          },
+          {
+            "id": "topical",
+            "label": "Topical antibiotic short and indication bound"
+          },
+          {
+            "id": "systemic",
+            "label": "Spreading or systemic signs: oral or IV therapy"
+          }
+        ],
+        "edges": [
+          [
+            "assess",
+            "antisep"
+          ],
+          [
+            "antisep",
+            "topical"
+          ],
+          [
+            "topical",
+            "systemic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Metronidazole's protozoal empire** deserves its dosing coda: amoebic liver abscess and dysentery (followed by luminal paromomycin or diloxanide to clear cysts, the step students forget and relapses remember), giardiasis single dose tinidazole convenience, trichomoniasis with partner treatment and alcohol abstinence counselled, and Dientamoeba and Balantidium niches. Tissue agent then luminal agent is amoebiasis's two act structure across all formularies.",
+      "say": "Kill amoebae in tissue with metronidazole, then clear the lumen or relapse is scheduled.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tissue phase",
+          "points": [
+            "Metronidazole or tinidazole for invasive disease",
+            "Liver abscess: antibiotics usually suffice without drainage",
+            "Clinical response within days expected",
+            "Serology supports amoebic aetiology"
+          ]
+        },
+        "right": {
+          "title": "Luminal phase",
+          "points": [
+            "Paromomycin or diloxanide after tissue therapy",
+            "Clears cyst carriage and relapse source",
+            "Household and food hygiene reviewed",
+            "Stool clearance confirmed where required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Decolonisation programmes assemble** this lesson institutionally: universal (chlorhexidine bathing in intensive care) versus targeted (screen and mupirocin treat carriers pre surgery or in outbreaks) strategies, resistance surveillance for both agents, and the honesty that decolonisation decays over months. The pharmacology is humble (a nasal ointment and a wash), the outcomes (surgical site and bacteraemia reductions in trials) are not, which is why these paragraphs sit in a pharmacology syllabus at all.",
+      "say": "Nasal ointment plus body wash, targeted by screening, measurably empties surgical infection wards.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Targeted strategy",
+          "points": [
+            "Screen carriers before high risk surgery",
+            "Mupirocin nasal plus chlorhexidine washes",
+            "Resistance and eradication audited",
+            "Outbreak and dialysis populations included"
+          ]
+        },
+        "right": {
+          "title": "Universal strategy",
+          "points": [
+            "Chlorhexidine bathing for all intensive care patients",
+            "No screening delay, resistance watched",
+            "Bacteraemia reductions in trials",
+            "Skin tolerance and supply logistics managed"
+          ]
+        }
+      }
+    }
+  ]
+}
