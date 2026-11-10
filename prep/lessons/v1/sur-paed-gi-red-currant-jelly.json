@@ -1,245 +1,245 @@
 {
-  "v": 1,
-  "module": "sur-paed-gi",
-  "subject": "surgery",
-  "title": "Intussusception Reduction and Hirschsprung Disease",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Blood and mucus passed per rectum resembling fruit jelly is **red currant jelly stool**. It signals bowel wall congestion in intussusception and appears relatively late. Its absence never excludes the diagnosis in a colicky infant. It appears in under half of cases, so waiting for it before acting on colic and a mass loses bowel.",
-      "say": "Red currant jelly stool signals congested bowel in intussusception but appears relatively late.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/intussusception-fig1.webp",
-        "alt": "Intussusception with bowel congestion.",
-        "caption": "Intussusception and jelly stool. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "sur-paed-gi",
+ "subject": "surgery",
+ "title": "Intussusception Reduction and Hirschsprung Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Blood and mucus passed per rectum resembling fruit jelly is **red currant jelly stool**. It signals bowel wall congestion in intussusception and appears relatively late. Its absence never excludes the diagnosis in a colicky infant. It appears in under half of cases, so waiting for it before acting on colic and a mass loses bowel.",
+   "say": "Red currant jelly stool signals congested bowel in intussusception but appears relatively late.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intussusception-fig1.webp",
+    "alt": "Intussusception with bowel congestion.",
+    "caption": "Intussusception and jelly stool. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pushing the telescoped bowel back with air or fluid pressure is **hydrostatic reduction**. Pneumatic reduction under imaging succeeds in most stable infants without peritonitis. Failure, perforation or shock mandates immediate surgery. Perforation risk during air reduction is under one percent, and up to three attempts with pauses are usual practice.",
+   "say": "Hydrostatic or pneumatic reduction pushes telescoped bowel back in most stable infants.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Stable infant confirmed"
+     },
+     {
+      "id": "n1",
+      "label": "Air enema under imaging"
+     },
+     {
+      "id": "n2",
+      "label": "Bowel reduces completely"
+     },
+     {
+      "id": "n3",
+      "label": "Observation after success"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absence of ganglion cells in the distal bowel causing functional obstruction is **Hirschsprung disease**. The aganglionic segment stays contracted, so stool accumulates above it. Delayed passage of meconium beyond forty eight hours is an early clue. Total colonic Hirschsprung disease presents later and worse, because the whole colon lacks ganglion cells.",
+   "say": "Hirschsprung disease lacks ganglion cells in distal bowel and delays meconium passage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-enema-hirschsprung-disease.webp",
+    "alt": "Hirschsprung disease on contrast enema.",
+    "caption": "Hirschsprung disease contrast study. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The junction between narrow aganglionic and dilated normal bowel is the **transition zone**. Contrast enema shows this calibre change, usually in the rectosigmoid region. Biopsy remains necessary because imaging can mislead. Calretinin staining on biopsy helps where ganglion cells are sparse and the first sample is equivocal.",
+   "say": "The transition zone shows calibre change on enema, though biopsy remains necessary.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Segment",
+     "Appearance"
+    ],
+    "rows": [
+     [
+      "Aganglionic",
+      "Narrow, contracted"
+     ],
+     [
+      "Transition zone",
+      "Calibre change"
+     ],
+     [
+      "Proximal bowel",
+      "Dilated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive treatment pulls ganglionated bowel down to the anus, called a **pull through operation**. A preliminary colostomy may be needed in sick or late presenting children. Bowel function afterwards is usually good with time. Swenson, Duhamel and Soave are the three classic operations, differing in how much rectal wall is left behind.",
+   "say": "Pull through operations bring ganglionated bowel to the anus for Hirschsprung disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Diagnosis confirmed by biopsy"
+     },
+     {
+      "id": "n1",
+      "label": "Sick child gets colostomy first"
+     },
+     {
+      "id": "n2",
+      "label": "Pull through performed"
+     },
+     {
+      "id": "n3",
+      "label": "Bowel function matures"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Life threatening enterocolitis complicating Hirschsprung disease is **Hirschsprung enterocolitis**. Explosive foul diarrhoea, distension and sepsis develop rapidly. It can occur before or after surgery and needs urgent resuscitation and washouts. Rectal washouts decompress the bowel at home and cut enterocolitis episodes while awaiting definitive surgery.",
+   "say": "Hirschsprung enterocolitis causes explosive diarrhoea and sepsis needing urgent resuscitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncomplicated",
+     "points": [
+      "Chronic constipation",
+      "Distended abdomen",
+      "Planned surgery"
+     ]
     },
-    {
-      "tx": "Pushing the telescoped bowel back with air or fluid pressure is **hydrostatic reduction**. Pneumatic reduction under imaging succeeds in most stable infants without peritonitis. Failure, perforation or shock mandates immediate surgery. Perforation risk during air reduction is under one percent, and up to three attempts with pauses are usual practice.",
-      "say": "Hydrostatic or pneumatic reduction pushes telescoped bowel back in most stable infants.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Stable infant confirmed"
-          },
-          {
-            "id": "n1",
-            "label": "Air enema under imaging"
-          },
-          {
-            "id": "n2",
-            "label": "Bowel reduces completely"
-          },
-          {
-            "id": "n3",
-            "label": "Observation after success"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Absence of ganglion cells in the distal bowel causing functional obstruction is **Hirschsprung disease**. The aganglionic segment stays contracted, so stool accumulates above it. Delayed passage of meconium beyond forty eight hours is an early clue. Total colonic Hirschsprung disease presents later and worse, because the whole colon lacks ganglion cells.",
-      "say": "Hirschsprung disease lacks ganglion cells in distal bowel and delays meconium passage.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/surg-xray-barium-enema-hirschsprung-disease.webp",
-        "alt": "Hirschsprung disease on contrast enema.",
-        "caption": "Hirschsprung disease contrast study. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "The junction between narrow aganglionic and dilated normal bowel is the **transition zone**. Contrast enema shows this calibre change, usually in the rectosigmoid region. Biopsy remains necessary because imaging can mislead. Calretinin staining on biopsy helps where ganglion cells are sparse and the first sample is equivocal.",
-      "say": "The transition zone shows calibre change on enema, though biopsy remains necessary.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Segment",
-          "Appearance"
-        ],
-        "rows": [
-          [
-            "Aganglionic",
-            "Narrow, contracted"
-          ],
-          [
-            "Transition zone",
-            "Calibre change"
-          ],
-          [
-            "Proximal bowel",
-            "Dilated"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Definitive treatment pulls ganglionated bowel down to the anus, called a **pull through operation**. A preliminary colostomy may be needed in sick or late presenting children. Bowel function afterwards is usually good with time. Swenson, Duhamel and Soave are the three classic operations, differing in how much rectal wall is left behind.",
-      "say": "Pull through operations bring ganglionated bowel to the anus for Hirschsprung disease.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Diagnosis confirmed by biopsy"
-          },
-          {
-            "id": "n1",
-            "label": "Sick child gets colostomy first"
-          },
-          {
-            "id": "n2",
-            "label": "Pull through performed"
-          },
-          {
-            "id": "n3",
-            "label": "Bowel function matures"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Life threatening enterocolitis complicating Hirschsprung disease is **Hirschsprung enterocolitis**. Explosive foul diarrhoea, distension and sepsis develop rapidly. It can occur before or after surgery and needs urgent resuscitation and washouts. Rectal washouts decompress the bowel at home and cut enterocolitis episodes while awaiting definitive surgery.",
-      "say": "Hirschsprung enterocolitis causes explosive diarrhoea and sepsis needing urgent resuscitation.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Uncomplicated",
-          "points": [
-            "Chronic constipation",
-            "Distended abdomen",
-            "Planned surgery"
-          ]
-        },
-        "right": {
-          "title": "Enterocolitis",
-          "points": [
-            "Explosive foul diarrhoea",
-            "Sepsis picture",
-            "Emergency care"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Most intussusceptions in infants have no structural lead point and are called **idiopathic**. In older children, a polyp, Meckel diverticulum or lymphoma may lead the telescoping. Recurrence after enema reduction happens in about one in ten. Age over two years with intussusception should trigger a search for a lead point at surgery or on imaging.",
-      "say": "Infant intussusception is usually idiopathic, while older children may have a lead point.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Age",
-          "Lead point"
-        ],
-        "rows": [
-          [
-            "Under 2 years",
-            "Usually none"
-          ],
-          [
-            "Older child",
-            "Polyp or Meckel possible"
-          ],
-          [
-            "Adult",
-            "Tumour until excluded"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Most infant intussusceptions have no structural lead point and are called **idiopathic**. In older children a polyp, a Meckel diverticulum, or lymphoma may head the telescoping segment. Recurrence after enema reduction occurs in about one child in ten. Age over two years should prompt a search for a lead point on imaging or at surgery. On palpation the Dance sign fits the same event: a sausage shaped mass in the right abdomen and an empty right iliac fossa where the caecum has been drawn up.",
-      "say": "Infant intussusception is usually idiopathic, whereas a polyp, Meckel diverticulum, or lymphoma may lead the segment in an older child. About one in ten recurs after enema reduction, and age over two years calls for a lead point search. The Dance sign is a sausage shaped mass on the right with an empty right iliac fossa.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n91-sur-paed-gi-red-currant-jelly.webp",
-        "alt": "Palpation showing a sausage shaped intussusception mass in the right abdomen and an empty right iliac fossa.",
-        "caption": "A sausage shaped mass lies in the right side of the abdomen while the right iliac fossa is empty, the Dance sign. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "A sausage shaped mass palpable in the right abdomen with emptiness below it is **Dance sign** territory. The right iliac fossa feels empty because the caecum has moved upward. This supports intussusception on examination. The sign is Dance sign, and an empty right iliac fossa with a mass above it is often easier to feel under anaesthesia.",
-      "say": "An empty right iliac fossa with a sausage mass supports intussusception on examination.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n91-sur-paed-gi-red-currant-jelly.webp",
-        "alt": "Dance sign with a sausage-shaped intussusception mass in the right abdomen and empty right iliac fossa on palpation",
-        "caption": "Dance sign with a sausage-shaped intussusception mass in the right abdomen and empty right iliac fossa on palpation. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Children with peritonitis or perforation bypass enema attempts and go to **immediate surgery**. At operation, gentle squeezing reduces viable bowel, while dead segments are resected. Delay converts a reducible problem into bowel loss. Milking the intussusception back gently from its apex, never pulling, reduces most cases without tearing the bowel wall.",
-      "say": "Peritonitis or perforation means immediate surgery, where dead bowel is resected.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Peritonitis present"
-          },
-          {
-            "id": "n1",
-            "label": "Enema not attempted"
-          },
-          {
-            "id": "n2",
-            "label": "Surgery explores bowel"
-          },
-          {
-            "id": "n3",
-            "label": "Dead segment resected"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Enterocolitis",
+     "points": [
+      "Explosive foul diarrhoea",
+      "Sepsis picture",
+      "Emergency care"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Most intussusceptions in infants have no structural lead point and are called **idiopathic**. In older children, a polyp, Meckel diverticulum or lymphoma may lead the telescoping. Recurrence after enema reduction happens in about one in ten. Age over two years with intussusception should trigger a search for a lead point at surgery or on imaging.",
+   "say": "Infant intussusception is usually idiopathic, while older children may have a lead point.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Lead point"
+    ],
+    "rows": [
+     [
+      "Under 2 years",
+      "Usually none"
+     ],
+     [
+      "Older child",
+      "Polyp or Meckel possible"
+     ],
+     [
+      "Adult",
+      "Tumour until excluded"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most infant intussusceptions have no structural lead point and are called **idiopathic**. In older children a polyp, a Meckel diverticulum, or lymphoma may head the telescoping segment. Recurrence after enema reduction occurs in about one child in ten. Age over two years should prompt a search for a lead point on imaging or at surgery. On palpation the Dance sign fits the same event: a sausage shaped mass in the right abdomen and an empty right iliac fossa where the caecum has been drawn up.",
+   "say": "Infant intussusception is usually idiopathic, whereas a polyp, Meckel diverticulum, or lymphoma may lead the segment in an older child. About one in ten recurs after enema reduction, and age over two years calls for a lead point search. The Dance sign is a sausage shaped mass on the right with an empty right iliac fossa.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n91-sur-paed-gi-red-currant-jelly.webp",
+    "alt": "Palpation showing a sausage shaped intussusception mass in the right abdomen and an empty right iliac fossa.",
+    "caption": "A sausage shaped mass lies in the right side of the abdomen while the right iliac fossa is empty, the Dance sign. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "A sausage shaped mass palpable in the right abdomen with emptiness below it is **Dance sign** territory. The right iliac fossa feels empty because the caecum has moved upward. This supports intussusception on examination. The sign is Dance sign, and an empty right iliac fossa with a mass above it is often easier to feel under anaesthesia.",
+   "say": "An empty right iliac fossa with a sausage mass supports intussusception on examination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n91-sur-paed-gi-red-currant-jelly.webp",
+    "alt": "Dance sign with a sausage-shaped intussusception mass in the right abdomen and empty right iliac fossa on palpation",
+    "caption": "Dance sign with a sausage-shaped intussusception mass in the right abdomen and empty right iliac fossa on palpation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Children with peritonitis or perforation bypass enema attempts and go to **immediate surgery**. At operation, gentle squeezing reduces viable bowel, while dead segments are resected. Delay converts a reducible problem into bowel loss. Milking the intussusception back gently from its apex, never pulling, reduces most cases without tearing the bowel wall.",
+   "say": "Peritonitis or perforation means immediate surgery, where dead bowel is resected.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Peritonitis present"
+     },
+     {
+      "id": "n1",
+      "label": "Enema not attempted"
+     },
+     {
+      "id": "n2",
+      "label": "Surgery explores bowel"
+     },
+     {
+      "id": "n3",
+      "label": "Dead segment resected"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
 }

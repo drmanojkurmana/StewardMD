@@ -1,267 +1,267 @@
 {
-  "v": 1,
-  "module": "sur-colon-benign",
-  "subject": "surgery",
-  "title": "Diverticular Disease, Hinchey Staging, and Colonic Polyps",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Acquired herniation of the colonic mucosa and submucosa through defects in the circular muscular layer constitutes colonic **diverticular disease**. Because these outpouchings lack a muscularis propria layer, they represent false or pulsion diverticula. Over ninety-five percent of colonic diverticula involve the sigmoid colon, driven by elevated intraluminal segmentation pressures secondary to low-dietary-fibre Western diets and decreased colonic luminal diameter.",
-      "say": "Colonic diverticular disease involves mucosal herniation through muscular defects, predominantly in the high-pressure sigmoid colon.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/diverticular-disease-fig1.webp",
-        "alt": "Anatomical schematic illustrating colonic diverticula protruding through mesenteric taenia vascular gaps in the circular muscle.",
-        "caption": "Colonic diverticular disease: false diverticula herniating through anatomical clefts where nutrient arteries penetrate the bowel wall. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "sur-colon-benign",
+ "subject": "surgery",
+ "title": "Diverticular Disease, Hinchey Staging, and Colonic Polyps",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Acquired herniation of the colonic mucosa and submucosa through defects in the circular muscular layer constitutes colonic **diverticular disease**. Because these outpouchings lack a muscularis propria layer, they represent false or pulsion diverticula. Over ninety-five percent of colonic diverticula involve the sigmoid colon, driven by elevated intraluminal segmentation pressures secondary to low-dietary-fibre Western diets and decreased colonic luminal diameter.",
+   "say": "Colonic diverticular disease involves mucosal herniation through muscular defects, predominantly in the high-pressure sigmoid colon.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diverticular-disease-fig1.webp",
+    "alt": "Anatomical schematic illustrating colonic diverticula protruding through mesenteric taenia vascular gaps in the circular muscle.",
+    "caption": "Colonic diverticular disease: false diverticula herniating through anatomical clefts where nutrient arteries penetrate the bowel wall. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anatomically, diverticula develop at specific weak points where nutrient arteries, the vasa recta, penetrate the circular muscularis propria between the mesenteric and antimesenteric taeniae coli. When a faecolith obstructs the narrow neck of a diverticulum, microperforation and localized phlegmonous inflammation ensue, designated as acute **diverticulitis**. Patients present with continuous left lower quadrant abdominal pain, fever, altered bowel habits, and leukocytosis, classically described as left-sided appendicitis.",
+   "say": "Acute diverticulitis arises from microperforation of an obstructed diverticulum, presenting with left lower quadrant pain and fever.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "defect",
+      "label": "Mucosal Herniation at Vasa Recta Clefts in Sigmoid Colon"
+     },
+     {
+      "id": "block",
+      "label": "Faecolith Inspissation & Obstruction of Diverticular Neck"
+     },
+     {
+      "id": "micro",
+      "label": "Microperforation & Local Peridiverticular Inflammation"
+     },
+     {
+      "id": "pain",
+      "label": "Acute Diverticulitis: Left Lower Quadrant Pain & Sepsis"
+     }
+    ],
+    "edges": [
+     [
+      "defect",
+      "block"
+     ],
+     [
+      "block",
+      "micro"
+     ],
+     [
+      "micro",
+      "pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic gold standard imaging modality for acute diverticulitis is contrast-enhanced computed tomography of the abdomen and pelvis. Computed tomography demonstrates sigmoid wall thickening exceeding four millimetres, pericolic fat stranding, and potential extraluminal gas or fluid collections. Diagnostic lower gastrointestinal endoscopy and barium enema are strictly contraindicated during the acute inflammatory phase due to the severe hazard of converting a contained microperforation into free **fecal peritonitis**.",
+   "say": "Contrast CT is the investigation of choice for acute diverticulitis, while colonoscopy is avoided acutely to prevent free perforation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contrast CT (Indicated)",
+     "points": [
+      "Gold standard acute investigation",
+      "Assesses extraluminal inflammation",
+      "Detects abscesses and free peritonitis",
+      "Guides percutaneous drainage"
+     ]
     },
-    {
-      "tx": "Anatomically, diverticula develop at specific weak points where nutrient arteries, the vasa recta, penetrate the circular muscularis propria between the mesenteric and antimesenteric taeniae coli. When a faecolith obstructs the narrow neck of a diverticulum, microperforation and localized phlegmonous inflammation ensue, designated as acute **diverticulitis**. Patients present with continuous left lower quadrant abdominal pain, fever, altered bowel habits, and leukocytosis, classically described as left-sided appendicitis.",
-      "say": "Acute diverticulitis arises from microperforation of an obstructed diverticulum, presenting with left lower quadrant pain and fever.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "defect",
-            "label": "Mucosal Herniation at Vasa Recta Clefts in Sigmoid Colon"
-          },
-          {
-            "id": "block",
-            "label": "Faecolith Inspissation & Obstruction of Diverticular Neck"
-          },
-          {
-            "id": "micro",
-            "label": "Microperforation & Local Peridiverticular Inflammation"
-          },
-          {
-            "id": "pain",
-            "label": "Acute Diverticulitis: Left Lower Quadrant Pain & Sepsis"
-          }
-        ],
-        "edges": [
-          [
-            "defect",
-            "block"
-          ],
-          [
-            "block",
-            "micro"
-          ],
-          [
-            "micro",
-            "pain"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The diagnostic gold standard imaging modality for acute diverticulitis is contrast-enhanced computed tomography of the abdomen and pelvis. Computed tomography demonstrates sigmoid wall thickening exceeding four millimetres, pericolic fat stranding, and potential extraluminal gas or fluid collections. Diagnostic lower gastrointestinal endoscopy and barium enema are strictly contraindicated during the acute inflammatory phase due to the severe hazard of converting a contained microperforation into free **fecal peritonitis**.",
-      "say": "Contrast CT is the investigation of choice for acute diverticulitis, while colonoscopy is avoided acutely to prevent free perforation.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Contrast CT (Indicated)",
-          "points": [
-            "Gold standard acute investigation",
-            "Assesses extraluminal inflammation",
-            "Detects abscesses and free peritonitis",
-            "Guides percutaneous drainage"
-          ]
-        },
-        "right": {
-          "title": "Colonoscopy (Contraindicated Acutely)",
-          "points": [
-            "Strictly contraindicated in acute phase",
-            "High risk of barogenic free perforation",
-            "Deferred for 6 weeks after recovery",
-            "Mandatory later to exclude colon cancer"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The severity and extent of complicated acute diverticulitis are universally categorized using the **Hinchey classification**. Modified by Wasvary, stage Ia defines confined peridiverticular soft-tissue phlegmon, while stage Ib encompasses a pericolic abscess under four to five centimetres. Stage II describes a distant pelvic or retroperitoneal abscess. Stage III represents generalized purulent peritonitis without bowel wall defect, and stage IV defines catastrophic generalized feculent peritonitis.",
-      "say": "The Hinchey classification categorizes diverticulitis from pericolic phlegmon in stage one to purulent and feculent peritonitis in stages three and four.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Hinchey Stage",
-          "Pathological Findings",
-          "First-Line Clinical Management"
-        ],
-        "rows": [
-          [
-            "Stage Ia",
-            "Confined peridiverticular phlegmon",
-            "Oral / IV broad-spectrum antibiotics, bowel rest"
-          ],
-          [
-            "Stage Ib",
-            "Pericolic abscess (< 4-5 cm)",
-            "Antibiotics; percutaneous drainage if > 4 cm"
-          ],
-          [
-            "Stage II",
-            "Distant pelvic or retroperitoneal abscess",
-            "CT-guided percutaneous catheter drainage"
-          ],
-          [
-            "Stage III",
-            "Generalized purulent peritonitis",
-            "Emergency surgery (Hartmann or resection + ileostomy)"
-          ],
-          [
-            "Stage IV",
-            "Generalized feculent peritonitis",
-            "Emergency Hartmann procedure with end colostomy"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "For Hinchey stage Ib and stage II abscesses measuring larger than four centimetres, ultrasound or CT-guided percutaneous drainage avoids emergency open surgery in over eighty percent of patients. Conversely, Hinchey stage three and stage four disease with peritonitis and sepsis mandates emergency laparotomy. The historical gold standard operative procedure is the **Hartmann procedure**, which resects the diseased sigmoid colon, closes the rectal stump, and exteriorizes the descending colon as an end colostomy.",
-      "say": "Percutaneous drainage manages large abscesses, whereas perforated peritonitis requires an emergency Hartmann procedure.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "sepsis",
-            "label": "Hinchey Stage III / IV Peritonitis with Septic Shock"
-          },
-          {
-            "id": "resect",
-            "label": "Emergency Resection of Perforated Sigmoid Colon"
-          },
-          {
-            "id": "stump",
-            "label": "Closure of Non-Inflamed Distal Rectal Stump"
-          },
-          {
-            "id": "stoma",
-            "label": "Exteriorization of Proximal Colon as End Colostomy"
-          }
-        ],
-        "edges": [
-          [
-            "sepsis",
-            "resect"
-          ],
-          [
-            "resect",
-            "stump"
-          ],
-          [
-            "stump",
-            "stoma"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "In hemodynamically stable patients with purulent peritonitis, primary sigmoid resection with immediate colorectal anastomosis and temporary diverting loop ileostomy is increasingly performed as an alternative to the Hartmann operation. This primary strategy avoids the formidable morbidity and high permanent stoma rate associated with subsequent **Hartmann reversal** operations.",
-      "say": "Primary resection with anastomosis and diverting stoma offers an alternative to Hartmann procedure in stable purulent peritonitis.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Hartmann Procedure",
-          "points": [
-            "Sigmoid resection + end colostomy",
-            "Safest in hemodynamic instability / fecal peritonitis",
-            "Eliminates risk of anastomotic breakdown",
-            "40% of colostomies never reversed"
-          ]
-        },
-        "right": {
-          "title": "Primary Anastomosis + Diverting Stoma",
-          "points": [
-            "Sigmoid resection + primary anastomosis",
-            "Protective diverting loop ileostomy",
-            "Suitable for stable purulent peritonitis",
-            "Significantly higher reversal rate (> 80%)"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "In stable patients with purulent peritonitis, sigmoid resection with an immediate colorectal join and a temporary diverting loop ileostomy is increasingly used instead of a Hartmann procedure. That choice avoids the morbidity and the high rate of a permanent stoma that follow later **Hartmann reversal**. A stricture found with diverticular disease is not assumed to be benign scarring. After the acute inflammation settles, colonoscopy is required, because an occult stenosing adenocarcinoma can mimic a diverticular narrowing exactly.",
-      "say": "Stable purulent peritonitis may be treated by sigmoid resection, immediate anastomosis, and a temporary loop ileostomy, sparing the patient a later Hartmann reversal and its high chance of a stoma that is never closed. Separately, a diverticular stricture can hide a cancer. Colonoscopy after the acute attack is what excludes a stenosing adenocarcinoma.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n86-sur-colon-benign-diverticular-disease.webp",
-        "alt": "Colonoscopy after diverticulitis inspecting a narrowed segment to exclude a hidden stenosing cancer.",
-        "caption": "The colonoscope examines a diverticular stricture so that an occult adenocarcinoma is not mistaken for benign scarring. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The cancer hiding inside this diverticular story is the one nobody wanted the stricture to be. **Colonic adenocarcinoma** narrows the sigmoid with an apple core shoulder that diverticular inflammation imitates on every scan and scope, which is why inflamed segments earn resection or relook colonoscopy once they settle. Both diseases favour the same bowel, the same decade and the same presenting complaints. Treating a presumed diverticular stricture without excluding malignancy is therefore the classic trap this image exists to spring shut.",
-      "say": "Colonic adenocarcinoma mimics diverticular stricture, so inflamed segments must be cleared of cancer once settled.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m1044-sur-colon-benign-diverticular-disease.webp",
-        "alt": "Colonic adenocarcinoma",
-        "caption": "Colonic adenocarcinoma. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Six weeks following complete clinical recovery from an episode of acute diverticulitis, complete diagnostic evaluation using optical colonoscopy is mandatory. Colonoscopy is essential to rule out an occult stenosing **colonic adenocarcinoma**, which can present with identical radiological and clinical features. Furthermore, endoscopic examination detects premalignant mucosal polyps throughout the remaining colon.",
-      "say": "Colonoscopy is performed six weeks after recovery to exclude occult colorectal carcinoma and identify premalignant polyps.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n86-sur-colon-benign-diverticular-disease.webp",
-        "alt": "Colonoscopy after diverticulitis excluding an occult stenosing colonic adenocarcinoma mimicking a diverticular stricture",
-        "caption": "Colonoscopy after diverticulitis excluding an occult stenosing colonic adenocarcinoma mimicking a diverticular stricture. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Discrete mucosal projections elevating above the surface of the large intestine are designated as **colonic polyps**. Neoplastic adenomatous polyps are classified histologically into tubular, tubulovillous, and villous adenomas. Villous adenomas carry the highest malignant potential, exceeding forty percent when larger than two centimetres, and can secrete massive volumes of potassium-rich mucus leading to profound hypokalaemia, termed McKittrick-Wheelock syndrome.",
-      "say": "Villous adenomas carry the highest malignant potential among colonic polyps, with large lesions causing severe secretory hypokalaemia.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Polyp Classification",
-          "Histological Subtype",
-          "Malignant Potential",
-          "Endoscopic Strategy"
-        ],
-        "rows": [
-          [
-            "Non-Neoplastic",
-            "Hyperplastic polyp",
-            "Virtually zero (rectosigmoid)",
-            "Biopsy / observe if small"
-          ],
-          [
-            "Non-Neoplastic",
-            "Inflammatory pseudopolyp",
-            "Zero (seen in ulcerative colitis)",
-            "Leave in situ, medical IBD therapy"
-          ],
-          [
-            "Neoplastic (Adenoma)",
-            "Tubular adenoma (75% of adenomas)",
-            "Low (5% malignant potential)",
-            "Complete endoscopic snare polypectomy"
-          ],
-          [
-            "Neoplastic (Adenoma)",
-            "Tubulovillous adenoma (15%)",
-            "Intermediate (20% malignant potential)",
-            "Endoscopic mucosal resection (EMR)"
-          ],
-          [
-            "Neoplastic (Adenoma)",
-            "Villous adenoma (10% of adenomas)",
-            "Highest (> 40% if > 2 cm)",
-            "Endoscopic submucosal dissection or surgery"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Colonoscopy (Contraindicated Acutely)",
+     "points": [
+      "Strictly contraindicated in acute phase",
+      "High risk of barogenic free perforation",
+      "Deferred for 6 weeks after recovery",
+      "Mandatory later to exclude colon cancer"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "The severity and extent of complicated acute diverticulitis are universally categorized using the **Hinchey classification**. Modified by Wasvary, stage Ia defines confined peridiverticular soft-tissue phlegmon, while stage Ib encompasses a pericolic abscess under four to five centimetres. Stage II describes a distant pelvic or retroperitoneal abscess. Stage III represents generalized purulent peritonitis without bowel wall defect, and stage IV defines catastrophic generalized feculent peritonitis.",
+   "say": "The Hinchey classification categorizes diverticulitis from pericolic phlegmon in stage one to purulent and feculent peritonitis in stages three and four.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hinchey Stage",
+     "Pathological Findings",
+     "First-Line Clinical Management"
+    ],
+    "rows": [
+     [
+      "Stage Ia",
+      "Confined peridiverticular phlegmon",
+      "Oral / IV broad-spectrum antibiotics, bowel rest"
+     ],
+     [
+      "Stage Ib",
+      "Pericolic abscess (< 4-5 cm)",
+      "Antibiotics; percutaneous drainage if > 4 cm"
+     ],
+     [
+      "Stage II",
+      "Distant pelvic or retroperitoneal abscess",
+      "CT-guided percutaneous catheter drainage"
+     ],
+     [
+      "Stage III",
+      "Generalized purulent peritonitis",
+      "Emergency surgery (Hartmann or resection + ileostomy)"
+     ],
+     [
+      "Stage IV",
+      "Generalized feculent peritonitis",
+      "Emergency Hartmann procedure with end colostomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For Hinchey stage Ib and stage II abscesses measuring larger than four centimetres, ultrasound or CT-guided percutaneous drainage avoids emergency open surgery in over eighty percent of patients. Conversely, Hinchey stage three and stage four disease with peritonitis and sepsis mandates emergency laparotomy. The historical gold standard operative procedure is the **Hartmann procedure**, which resects the diseased sigmoid colon, closes the rectal stump, and exteriorizes the descending colon as an end colostomy.",
+   "say": "Percutaneous drainage manages large abscesses, whereas perforated peritonitis requires an emergency Hartmann procedure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sepsis",
+      "label": "Hinchey Stage III / IV Peritonitis with Septic Shock"
+     },
+     {
+      "id": "resect",
+      "label": "Emergency Resection of Perforated Sigmoid Colon"
+     },
+     {
+      "id": "stump",
+      "label": "Closure of Non-Inflamed Distal Rectal Stump"
+     },
+     {
+      "id": "stoma",
+      "label": "Exteriorization of Proximal Colon as End Colostomy"
+     }
+    ],
+    "edges": [
+     [
+      "sepsis",
+      "resect"
+     ],
+     [
+      "resect",
+      "stump"
+     ],
+     [
+      "stump",
+      "stoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In hemodynamically stable patients with purulent peritonitis, primary sigmoid resection with immediate colorectal anastomosis and temporary diverting loop ileostomy is increasingly performed as an alternative to the Hartmann operation. This primary strategy avoids the formidable morbidity and high permanent stoma rate associated with subsequent **Hartmann reversal** operations.",
+   "say": "Primary resection with anastomosis and diverting stoma offers an alternative to Hartmann procedure in stable purulent peritonitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hartmann Procedure",
+     "points": [
+      "Sigmoid resection + end colostomy",
+      "Safest in hemodynamic instability / fecal peritonitis",
+      "Eliminates risk of anastomotic breakdown",
+      "40% of colostomies never reversed"
+     ]
+    },
+    "right": {
+     "title": "Primary Anastomosis + Diverting Stoma",
+     "points": [
+      "Sigmoid resection + primary anastomosis",
+      "Protective diverting loop ileostomy",
+      "Suitable for stable purulent peritonitis",
+      "Significantly higher reversal rate (> 80%)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In stable patients with purulent peritonitis, sigmoid resection with an immediate colorectal join and a temporary diverting loop ileostomy is increasingly used instead of a Hartmann procedure. That choice avoids the morbidity and the high rate of a permanent stoma that follow later **Hartmann reversal**. A stricture found with diverticular disease is not assumed to be benign scarring. After the acute inflammation settles, colonoscopy is required, because an occult stenosing adenocarcinoma can mimic a diverticular narrowing exactly.",
+   "say": "Stable purulent peritonitis may be treated by sigmoid resection, immediate anastomosis, and a temporary loop ileostomy, sparing the patient a later Hartmann reversal and its high chance of a stoma that is never closed. Separately, a diverticular stricture can hide a cancer. Colonoscopy after the acute attack is what excludes a stenosing adenocarcinoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n86-sur-colon-benign-diverticular-disease.webp",
+    "alt": "Colonoscopy after diverticulitis inspecting a narrowed segment to exclude a hidden stenosing cancer.",
+    "caption": "The colonoscope examines a diverticular stricture so that an occult adenocarcinoma is not mistaken for benign scarring. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The cancer hiding inside this diverticular story is the one nobody wanted the stricture to be. **Colonic adenocarcinoma** narrows the sigmoid with an apple core shoulder that diverticular inflammation imitates on every scan and scope, which is why inflamed segments earn resection or relook colonoscopy once they settle. Both diseases favour the same bowel, the same decade and the same presenting complaints. Treating a presumed diverticular stricture without excluding malignancy is therefore the classic trap this image exists to spring shut.",
+   "say": "Colonic adenocarcinoma mimics diverticular stricture, so inflamed segments must be cleared of cancer once settled.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m1044-sur-colon-benign-diverticular-disease.webp",
+    "alt": "Colonic adenocarcinoma",
+    "caption": "Colonic adenocarcinoma. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Six weeks following complete clinical recovery from an episode of acute diverticulitis, complete diagnostic evaluation using optical colonoscopy is mandatory. Colonoscopy is essential to rule out an occult stenosing **colonic adenocarcinoma**, which can present with identical radiological and clinical features. Furthermore, endoscopic examination detects premalignant mucosal polyps throughout the remaining colon.",
+   "say": "Colonoscopy is performed six weeks after recovery to exclude occult colorectal carcinoma and identify premalignant polyps.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n86-sur-colon-benign-diverticular-disease.webp",
+    "alt": "Colonoscopy after diverticulitis excluding an occult stenosing colonic adenocarcinoma mimicking a diverticular stricture",
+    "caption": "Colonoscopy after diverticulitis excluding an occult stenosing colonic adenocarcinoma mimicking a diverticular stricture. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Discrete mucosal projections elevating above the surface of the large intestine are designated as **colonic polyps**. Neoplastic adenomatous polyps are classified histologically into tubular, tubulovillous, and villous adenomas. Villous adenomas carry the highest malignant potential, exceeding forty percent when larger than two centimetres, and can secrete massive volumes of potassium-rich mucus leading to profound hypokalaemia, termed McKittrick-Wheelock syndrome.",
+   "say": "Villous adenomas carry the highest malignant potential among colonic polyps, with large lesions causing severe secretory hypokalaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polyp Classification",
+     "Histological Subtype",
+     "Malignant Potential",
+     "Endoscopic Strategy"
+    ],
+    "rows": [
+     [
+      "Non-Neoplastic",
+      "Hyperplastic polyp",
+      "Virtually zero (rectosigmoid)",
+      "Biopsy / observe if small"
+     ],
+     [
+      "Non-Neoplastic",
+      "Inflammatory pseudopolyp",
+      "Zero (seen in ulcerative colitis)",
+      "Leave in situ, medical IBD therapy"
+     ],
+     [
+      "Neoplastic (Adenoma)",
+      "Tubular adenoma (75% of adenomas)",
+      "Low (5% malignant potential)",
+      "Complete endoscopic snare polypectomy"
+     ],
+     [
+      "Neoplastic (Adenoma)",
+      "Tubulovillous adenoma (15%)",
+      "Intermediate (20% malignant potential)",
+      "Endoscopic mucosal resection (EMR)"
+     ],
+     [
+      "Neoplastic (Adenoma)",
+      "Villous adenoma (10% of adenomas)",
+      "Highest (> 40% if > 2 cm)",
+      "Endoscopic submucosal dissection or surgery"
+     ]
+    ]
+   }
+  }
+ ]
 }

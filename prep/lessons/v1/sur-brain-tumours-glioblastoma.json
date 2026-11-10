@@ -1,245 +1,245 @@
 {
-  "v": 1,
-  "module": "sur-brain-tumours",
-  "subject": "surgery",
-  "title": "Brain Tumours: Glioma, Meningioma and Posterior Fossa",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "The most malignant primary brain tumour of adults, infiltrating widely, is **glioblastoma**. It grows rapidly, crosses the corpus callosum in a butterfly pattern and resists complete removal. Treatment combines maximal safe resection with radiotherapy and chemotherapy. Median survival stays near 15 months even with full treatment, and tumour DNA MGMT methylation predicts who gains most from temozolomide.",
-      "say": "Glioblastoma infiltrates widely, crosses in a butterfly pattern, and needs combined treatment.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/glioblastoma-fig1.webp",
-        "alt": "Glioblastoma MRI showing butterfly lesion.",
-        "caption": "Glioblastoma butterfly lesion on MRI. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "sur-brain-tumours",
+ "subject": "surgery",
+ "title": "Brain Tumours: Glioma, Meningioma and Posterior Fossa",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most malignant primary brain tumour of adults, infiltrating widely, is **glioblastoma**. It grows rapidly, crosses the corpus callosum in a butterfly pattern and resists complete removal. Treatment combines maximal safe resection with radiotherapy and chemotherapy. Median survival stays near 15 months even with full treatment, and tumour DNA MGMT methylation predicts who gains most from temozolomide.",
+   "say": "Glioblastoma infiltrates widely, crosses in a butterfly pattern, and needs combined treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glioblastoma-fig1.webp",
+    "alt": "Glioblastoma MRI showing butterfly lesion.",
+    "caption": "Glioblastoma butterfly lesion on MRI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Slow growing tumours arising from astrocytes with better outlook form **low grade gliomas**. They commonly present with seizures in young adults. Management balances watchful scanning against early surgery by tumour behaviour. A glioma with IDH mutation behaves far better than one without, and that single test now reshapes prognosis discussions.",
+   "say": "Low grade gliomas grow slowly, present with seizures in young adults, and need balanced management.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "Low grade",
+      "Slow, seizures common"
+     ],
+     [
+      "Anaplastic",
+      "Faster growth"
+     ],
+     [
+      "Glioblastoma",
+      "Most malignant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tumours arising from the membranes covering the brain, usually benign, are **meningiomas**. They compress rather than invade brain and often calcify. Complete removal is frequently curative, and many small silent ones are simply watched. Simpson grade describes how completely a meningioma was removed, and grade one removal gives the lowest recurrence rate.",
+   "say": "Meningiomas arise from brain coverings, compress rather than invade, and complete removal often cures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-brain-tumours-fig1.webp",
+    "alt": "Brain tumour imaging overview.",
+    "caption": "Brain tumour imaging. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A benign tumour of the hearing nerve sheath in the cerebellopontine angle is an **acoustic neuroma**. Also called vestibular schwannoma, it causes one sided hearing loss and tinnitus. Growth is slow, so watching, radiosurgery or removal are chosen by size. Tumours under 3 centimetres suit single shot radiosurgery, while larger ones near the facial nerve often need staged treatment.",
+   "say": "Acoustic neuroma, or vestibular schwannoma, causes one sided hearing loss and grows slowly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "One sided hearing loss"
+     },
+     {
+      "id": "n1",
+      "label": "MRI shows angle tumour"
+     },
+     {
+      "id": "n2",
+      "label": "Size guides watching"
+     },
+     {
+      "id": "n3",
+      "label": "Radiosurgery or removal"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hormone producing tumours of the pituitary gland needing surgery form **pituitary adenomas**. Surgery usually passes through the nose and sphenoid sinus to reach the gland. Prolactin secreting tumours are treated with medicines first, unlike most others. Prolactinomas shrink on cabergoline tablets, so surgery for them is reserved for drug failure, intolerance or bleeding into the tumour.",
+   "say": "Pituitary adenoma surgery usually passes through the nose, though prolactin tumours get medicines first.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prolactinoma",
+     "points": [
+      "Medicines first",
+      "Shrinks with dopamine drugs",
+      "Surgery if resistant"
+     ]
     },
-    {
-      "tx": "Slow growing tumours arising from astrocytes with better outlook form **low grade gliomas**. They commonly present with seizures in young adults. Management balances watchful scanning against early surgery by tumour behaviour. A glioma with IDH mutation behaves far better than one without, and that single test now reshapes prognosis discussions.",
-      "say": "Low grade gliomas grow slowly, present with seizures in young adults, and need balanced management.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Grade",
-          "Behaviour"
-        ],
-        "rows": [
-          [
-            "Low grade",
-            "Slow, seizures common"
-          ],
-          [
-            "Anaplastic",
-            "Faster growth"
-          ],
-          [
-            "Glioblastoma",
-            "Most malignant"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Tumours arising from the membranes covering the brain, usually benign, are **meningiomas**. They compress rather than invade brain and often calcify. Complete removal is frequently curative, and many small silent ones are simply watched. Simpson grade describes how completely a meningioma was removed, and grade one removal gives the lowest recurrence rate.",
-      "say": "Meningiomas arise from brain coverings, compress rather than invade, and complete removal often cures.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/sur-brain-tumours-fig1.webp",
-        "alt": "Brain tumour imaging overview.",
-        "caption": "Brain tumour imaging. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "A benign tumour of the hearing nerve sheath in the cerebellopontine angle is an **acoustic neuroma**. Also called vestibular schwannoma, it causes one sided hearing loss and tinnitus. Growth is slow, so watching, radiosurgery or removal are chosen by size. Tumours under 3 centimetres suit single shot radiosurgery, while larger ones near the facial nerve often need staged treatment.",
-      "say": "Acoustic neuroma, or vestibular schwannoma, causes one sided hearing loss and grows slowly.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "One sided hearing loss"
-          },
-          {
-            "id": "n1",
-            "label": "MRI shows angle tumour"
-          },
-          {
-            "id": "n2",
-            "label": "Size guides watching"
-          },
-          {
-            "id": "n3",
-            "label": "Radiosurgery or removal"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Hormone producing tumours of the pituitary gland needing surgery form **pituitary adenomas**. Surgery usually passes through the nose and sphenoid sinus to reach the gland. Prolactin secreting tumours are treated with medicines first, unlike most others. Prolactinomas shrink on cabergoline tablets, so surgery for them is reserved for drug failure, intolerance or bleeding into the tumour.",
-      "say": "Pituitary adenoma surgery usually passes through the nose, though prolactin tumours get medicines first.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Prolactinoma",
-          "points": [
-            "Medicines first",
-            "Shrinks with dopamine drugs",
-            "Surgery if resistant"
-          ]
-        },
-        "right": {
-          "title": "Other adenomas",
-          "points": [
-            "Surgery first",
-            "Transsphenoidal route",
-            "Hormones replaced after"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The commonest malignant posterior fossa tumour of childhood is **medulloblastoma**. It arises in the cerebellum, blocks spinal fluid flow and seeds through it. Treatment combines surgery, craniospinal radiotherapy and chemotherapy. It spreads through cerebrospinal fluid in up to a third of children, so the whole spine is imaged and treated.",
-      "say": "Medulloblastoma arises in the child cerebellum, blocks fluid flow, and needs combined treatment.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Medulloblastoma"
-        ],
-        "rows": [
-          [
-            "Age",
-            "Childhood"
-          ],
-          [
-            "Site",
-            "Cerebellum"
-          ],
-          [
-            "Spread",
-            "Through spinal fluid"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Tumours below the tentorium in the back skull compartment are **posterior fossa tumours**. They cause headache, vomiting and unsteadiness through hydrocephalus. Relieving fluid blockage often precedes definitive tumour surgery. Morning headache with vomiting that eases after vomiting fits raised pressure from a blocked fourth ventricle.",
-      "say": "Posterior fossa tumours cause hydrocephalus with headache and unsteadiness needing early relief.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Tumour blocks fluid flow"
-          },
-          {
-            "id": "n1",
-            "label": "Headache and vomiting"
-          },
-          {
-            "id": "n2",
-            "label": "Hydrocephalus relieved"
-          },
-          {
-            "id": "n3",
-            "label": "Tumour surgery follows"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Tumours in the posterior compartment below the tentorium are **posterior fossa tumours**. They produce headache, vomiting, and unsteadiness by blocking the fourth ventricle and causing hydrocephalus, and relieving that fluid block often comes before tumour removal. Morning headache that eases after vomiting fits this pressure pattern. Brain metastases look unlike that single posterior mass on the scan: several ring enhancing deposits sit at the grey white junction, and lung, breast, and melanoma are the primaries that most often seed them.",
-      "say": "Posterior fossa tumours block the fourth ventricle, causing hydrocephalus with headache, vomiting, and unsteadiness, and the fluid often needs relief before the tumour is removed. Headache on waking that improves after vomiting matches that pressure. Metastases instead appear as multiple ring enhancing lesions at the grey white junction, commonly from lung, breast, or melanoma.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n83-sur-brain-tumours-glioblastoma.webp",
-        "alt": "Several ring enhancing brain metastases at the grey white junction, typical of spread from lung, breast, or melanoma.",
-        "caption": "Multiple ring enhancing deposits sit where grey matter meets white matter, the usual site of metastases from lung, breast, and melanoma. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Cancer deposits in the brain from elsewhere in the body are **brain metastases**. Lung, breast and melanoma are the commonest sources. Solitary deposits may be removed or treated with focused radiosurgery. Melanoma and lung deposits bleed into themselves more than others, and sudden deterioration in a known cancer patient suggests this.",
-      "say": "Brain metastases come commonly from lung, breast and melanoma, and solitary deposits may be removed.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n83-sur-brain-tumours-glioblastoma.webp",
-        "alt": "Brain metastases as multiple ring-enhancing deposits at the grey-white junction from lung, breast and melanoma primaries",
-        "caption": "Brain metastases as multiple ring-enhancing deposits at the grey-white junction from lung, breast and melanoma primaries. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Opening the skull to access the brain is a **craniotomy**. Focused single dose radiation without opening is stereotactic radiosurgery, suited to small deep lesions. Tumours inside the spinal cord itself are intramedullary, while those outside but within coverings are extramedullary, a distinction guiding surgical approach.",
-      "say": "Craniotomy opens the skull for surgery, while focused radiosurgery treats small deep lesions without opening.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Lesion localised precisely"
-          },
-          {
-            "id": "n1",
-            "label": "Approach chosen by depth"
-          },
-          {
-            "id": "n2",
-            "label": "Removal or radiosurgery"
-          },
-          {
-            "id": "n3",
-            "label": "Recovery monitored closely"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Other adenomas",
+     "points": [
+      "Surgery first",
+      "Transsphenoidal route",
+      "Hormones replaced after"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "The commonest malignant posterior fossa tumour of childhood is **medulloblastoma**. It arises in the cerebellum, blocks spinal fluid flow and seeds through it. Treatment combines surgery, craniospinal radiotherapy and chemotherapy. It spreads through cerebrospinal fluid in up to a third of children, so the whole spine is imaged and treated.",
+   "say": "Medulloblastoma arises in the child cerebellum, blocks fluid flow, and needs combined treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Medulloblastoma"
+    ],
+    "rows": [
+     [
+      "Age",
+      "Childhood"
+     ],
+     [
+      "Site",
+      "Cerebellum"
+     ],
+     [
+      "Spread",
+      "Through spinal fluid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tumours below the tentorium in the back skull compartment are **posterior fossa tumours**. They cause headache, vomiting and unsteadiness through hydrocephalus. Relieving fluid blockage often precedes definitive tumour surgery. Morning headache with vomiting that eases after vomiting fits raised pressure from a blocked fourth ventricle.",
+   "say": "Posterior fossa tumours cause hydrocephalus with headache and unsteadiness needing early relief.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tumour blocks fluid flow"
+     },
+     {
+      "id": "n1",
+      "label": "Headache and vomiting"
+     },
+     {
+      "id": "n2",
+      "label": "Hydrocephalus relieved"
+     },
+     {
+      "id": "n3",
+      "label": "Tumour surgery follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tumours in the posterior compartment below the tentorium are **posterior fossa tumours**. They produce headache, vomiting, and unsteadiness by blocking the fourth ventricle and causing hydrocephalus, and relieving that fluid block often comes before tumour removal. Morning headache that eases after vomiting fits this pressure pattern. Brain metastases look unlike that single posterior mass on the scan: several ring enhancing deposits sit at the grey white junction, and lung, breast, and melanoma are the primaries that most often seed them.",
+   "say": "Posterior fossa tumours block the fourth ventricle, causing hydrocephalus with headache, vomiting, and unsteadiness, and the fluid often needs relief before the tumour is removed. Headache on waking that improves after vomiting matches that pressure. Metastases instead appear as multiple ring enhancing lesions at the grey white junction, commonly from lung, breast, or melanoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n83-sur-brain-tumours-glioblastoma.webp",
+    "alt": "Several ring enhancing brain metastases at the grey white junction, typical of spread from lung, breast, or melanoma.",
+    "caption": "Multiple ring enhancing deposits sit where grey matter meets white matter, the usual site of metastases from lung, breast, and melanoma. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Cancer deposits in the brain from elsewhere in the body are **brain metastases**. Lung, breast and melanoma are the commonest sources. Solitary deposits may be removed or treated with focused radiosurgery. Melanoma and lung deposits bleed into themselves more than others, and sudden deterioration in a known cancer patient suggests this.",
+   "say": "Brain metastases come commonly from lung, breast and melanoma, and solitary deposits may be removed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n83-sur-brain-tumours-glioblastoma.webp",
+    "alt": "Brain metastases as multiple ring-enhancing deposits at the grey-white junction from lung, breast and melanoma primaries",
+    "caption": "Brain metastases as multiple ring-enhancing deposits at the grey-white junction from lung, breast and melanoma primaries. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Opening the skull to access the brain is a **craniotomy**. Focused single dose radiation without opening is stereotactic radiosurgery, suited to small deep lesions. Tumours inside the spinal cord itself are intramedullary, while those outside but within coverings are extramedullary, a distinction guiding surgical approach.",
+   "say": "Craniotomy opens the skull for surgery, while focused radiosurgery treats small deep lesions without opening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Lesion localised precisely"
+     },
+     {
+      "id": "n1",
+      "label": "Approach chosen by depth"
+     },
+     {
+      "id": "n2",
+      "label": "Removal or radiosurgery"
+     },
+     {
+      "id": "n3",
+      "label": "Recovery monitored closely"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
 }

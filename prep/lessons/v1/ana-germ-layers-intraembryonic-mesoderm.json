@@ -1,253 +1,253 @@
 {
-  "v": 1,
-  "module": "ana-germ-layers",
-  "subject": "anatomy",
-  "title": "Intraembryonic Mesoderm and Somite Derivatives",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "During gastrulation, cells ingressing through the primitive streak migrate laterally between ectoderm and endoderm to form the **intraembryonic mesoderm**. As the embryonic disc elongates, this mesoderm organizes into three paired longitudinal columns flanking the central notochord: paraxial mesoderm medially, intermediate mesoderm, and lateral plate mesoderm laterally.",
-      "say": "During gastrulation, ingressing epiblast cells migrate between ectoderm and endoderm to establish intraembryonic mesoderm. As the disc lengthens, this tissue organizes into three longitudinal columns flanking the notochord: paraxial, intermediate, and lateral plate mesoderm.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/ana-trilaminar-disc.svg",
-        "alt": "Three mesodermal columns: paraxial, intermediate, and lateral plate mesoderm",
-        "caption": "Longitudinal mesodermal divisions flanking the midline notochord. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "ana-germ-layers",
+ "subject": "anatomy",
+ "title": "Intraembryonic Mesoderm and Somite Derivatives",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During gastrulation, cells ingressing through the primitive streak migrate laterally between ectoderm and endoderm to form the **intraembryonic mesoderm**. As the embryonic disc elongates, this mesoderm organizes into three paired longitudinal columns flanking the central notochord: paraxial mesoderm medially, intermediate mesoderm, and lateral plate mesoderm laterally.",
+   "say": "During gastrulation, ingressing epiblast cells migrate between ectoderm and endoderm to establish intraembryonic mesoderm. As the disc lengthens, this tissue organizes into three longitudinal columns flanking the notochord: paraxial, intermediate, and lateral plate mesoderm.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-trilaminar-disc.svg",
+    "alt": "Three mesodermal columns: paraxial, intermediate, and lateral plate mesoderm",
+    "caption": "Longitudinal mesodermal divisions flanking the midline notochord. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The column lying immediately adjacent to the notochord and neural tube is the **paraxial mesoderm**. Starting in the cephalic region and proceeding caudally, the paraxial mesoderm segments into distinct epithelial cuboidal blocks called somites. Appearing at approximately three pairs per day, forty-two to forty-four pairs of somites develop by the end of week five.",
+   "say": "The column flanking the notochord is the paraxial mesoderm. Beginning in the head and proceeding tailward, it segments into cuboidal blocks called somites. Developing at three pairs per day, around forty-four pairs form by the end of week five.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mesodermal Column Stratification",
+    "nodes": [
+     {
+      "id": "noto",
+      "label": "Midline Notochord and Neural Tube"
+     },
+     {
+      "id": "parax",
+      "label": "Paraxial Mesoderm: Somites"
+     },
+     {
+      "id": "inter",
+      "label": "Intermediate Mesoderm: Urogenital"
+     },
+     {
+      "id": "lat",
+      "label": "Lateral Plate: Somatic and Splanchnic"
+     }
+    ],
+    "edges": [
+     [
+      "noto",
+      "parax"
+     ],
+     [
+      "parax",
+      "inter"
+     ],
+     [
+      "inter",
+      "lat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Each somite differentiates into three specialized tissue components under environmental signaling. The ventromedial portion becomes the **sclerotome**, induced by sonic hedgehog protein from the notochord and neural tube floor. Sclerotome cells undergo epithelial-to-mesenchymal transition and migrate medially to surround the notochord and spinal cord.",
+   "say": "Every somite differentiates into three distinct subregions under molecular signaling. The ventromedial region becomes the sclerotome, induced by sonic hedgehog from the notochord. These cells migrate medially to encircle the notochord and spinal cord.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sclerotome Derivatives",
+     "points": [
+      "Vertebral bodies and neural arches",
+      "Intervertebral disc anulus fibrosus",
+      "Ribs and costal cartilages",
+      "Portions of the cranial occiput"
+     ]
     },
-    {
-      "tx": "The column lying immediately adjacent to the notochord and neural tube is the **paraxial mesoderm**. Starting in the cephalic region and proceeding caudally, the paraxial mesoderm segments into distinct epithelial cuboidal blocks called somites. Appearing at approximately three pairs per day, forty-two to forty-four pairs of somites develop by the end of week five.",
-      "say": "The column flanking the notochord is the paraxial mesoderm. Beginning in the head and proceeding tailward, it segments into cuboidal blocks called somites. Developing at three pairs per day, around forty-four pairs form by the end of week five.",
-      "vis": {
-        "kind": "flow",
-        "title": "Mesodermal Column Stratification",
-        "nodes": [
-          {
-            "id": "noto",
-            "label": "Midline Notochord and Neural Tube"
-          },
-          {
-            "id": "parax",
-            "label": "Paraxial Mesoderm: Somites"
-          },
-          {
-            "id": "inter",
-            "label": "Intermediate Mesoderm: Urogenital"
-          },
-          {
-            "id": "lat",
-            "label": "Lateral Plate: Somatic and Splanchnic"
-          }
-        ],
-        "edges": [
-          [
-            "noto",
-            "parax"
-          ],
-          [
-            "parax",
-            "inter"
-          ],
-          [
-            "inter",
-            "lat"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Each somite differentiates into three specialized tissue components under environmental signaling. The ventromedial portion becomes the **sclerotome**, induced by sonic hedgehog protein from the notochord and neural tube floor. Sclerotome cells undergo epithelial-to-mesenchymal transition and migrate medially to surround the notochord and spinal cord.",
-      "say": "Every somite differentiates into three distinct subregions under molecular signaling. The ventromedial region becomes the sclerotome, induced by sonic hedgehog from the notochord. These cells migrate medially to encircle the notochord and spinal cord.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Sclerotome Derivatives",
-          "points": [
-            "Vertebral bodies and neural arches",
-            "Intervertebral disc anulus fibrosus",
-            "Ribs and costal cartilages",
-            "Portions of the cranial occiput"
-          ]
-        },
-        "right": {
-          "title": "Dermomyotome Derivatives",
-          "points": [
-            "Dermatome forms dorsal dermis",
-            "Myotome forms skeletal musculature",
-            "Epimere forms deep intrinsic back muscles",
-            "Hypomere forms ventrolateral body wall and limbs"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Sclerotome cells undergo a critical process called resegmentation, wherein the caudal half of each sclerotome fuses with the cranial half of the subjacent sclerotome to construct a definitive **vertebral body**. This intersegmental arrangement ensures that spinal nerves exit between adjacent vertebrae through intervertebral foramina to innervate alternating myotomal muscles.",
-      "say": "Sclerotomes undergo resegmentation, where the caudal half of one somite fuses with the cranial half of the next to build a vertebral body. This offset design allows spinal nerves to exit between vertebrae and directly reach alternating muscle groups.",
-      "vis": {
-        "kind": "flow",
-        "title": "Sclerotome Resegmentation",
-        "nodes": [
-          {
-            "id": "cranial",
-            "label": "Cranial Half Sclerotome (Loose)"
-          },
-          {
-            "id": "caudal",
-            "label": "Caudal Half Sclerotome (Dense)"
-          },
-          {
-            "id": "inter",
-            "label": "Intervertebral Disc Space"
-          },
-          {
-            "id": "vert",
-            "label": "Definitive Re-segmented Vertebra"
-          }
-        ],
-        "edges": [
-          [
-            "cranial",
-            "vert"
-          ],
-          [
-            "caudal",
-            "vert"
-          ],
-          [
-            "caudal",
-            "inter"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Beside the neural tube each somite splits into sclerotome ventromedially and dermomyotome dorsolaterally, and the dermomyotome then separates into dermatome for dermis and myotome for muscle. Sclerotome cells do not stay in one segmental block. They resegment: the caudal half of one sclerotome fuses with the cranial half of the next to form a **vertebral body**. Because of that offset, spinal nerves leave between vertebrae and reach the myotomes that have themselves split across the new boundary.",
-      "say": "Each somite beside the neural tube forms sclerotome and dermomyotome, and the dermomyotome splits into dermatome and myotome. Vertebrae are not one sclerotome each. The caudal half of one joins the cranial half of the next. That shift lets spinal nerves exit between vertebrae and supply the split muscle masses.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n7-ana-germ-layers-intraembryonic-mesoderm.webp",
-        "alt": "A somite beside the neural tube dividing into sclerotome, dermomyotome, dermatome, and myotome.",
-        "caption": "Next to the neural tube a somite separates into sclerotome and dermomyotome, and the dermomyotome further splits into dermatome and myotome. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The dorsolateral portion of the somite forms the **dermomyotome**, which subsequently divides into a dermatome and a myotome. The dermatome disperses beneath the overlying ectoderm to form the dermis and subcutaneous tissue of the dorsal torso. In contrast, the dermis of the face derives from neural crest ectomesenchyme.",
-      "say": "The dorsolateral somite forms the dermomyotome, which divides into dermatome and myotome. The dermatome migrates beneath the ectoderm to generate the dermis and subcutaneous tissue of the back. Facial dermis instead originates from neural crest cells.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n7-ana-germ-layers-intraembryonic-mesoderm.webp",
-        "alt": "Somite differentiating into sclerotome, dermomyotome, dermatome and myotome beside the neural tube",
-        "caption": "Somite differentiating into sclerotome, dermomyotome, dermatome and myotome beside the neural tube. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The **myotome** splits into an epaxial division (epimere) innervated by dorsal rami of spinal nerves, and a hypaxial division (hypomere) innervated by ventral rami. Epimeres develop into deep intrinsic extensor muscles of the back like the erector spinae. Hypomeres migrate to form the muscles of the ventrolateral body wall and limbs.",
-      "say": "The myotome splits into an epaxial epimere supplied by dorsal rami and a hypaxial hypomere supplied by ventral rami. Epimeres form deep extensor muscles like erector spinae, while hypomeres migrate to form abdominal wall and limb musculature.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Myotomal Division",
-          "Spinal Innervation",
-          "Adult Muscle Group",
-          "Functional Action"
-        ],
-        "rows": [
-          [
-            "Epimere (Epaxial)",
-            "Dorsal rami of spinal nerves",
-            "Erector spinae, transversospinalis",
-            "Extends and stabilizes spine"
-          ],
-          [
-            "Hypomere (Hypaxial)",
-            "Ventral rami of spinal nerves",
-            "Intercostals, rectus abdominis, obliques",
-            "Flexes torso, compresses viscera"
-          ],
-          [
-            "Limb Bud Myoblasts",
-            "Ventral rami plexus branches",
-            "Flexor and extensor limb compartments",
-            "Locomotion and manipulation"
-          ],
-          [
-            "Branchial Myoblasts",
-            "Cranial nerves V, VII, IX, X",
-            "Muscles of mastication and expression",
-            "Speech, chewing, facial motion"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Positioned laterally between paraxial and lateral plate columns is the **intermediate mesoderm**, which differentiates into the entire urogenital system. In cervical and upper thoracic regions it forms nephrotomes, while caudally it forms the continuous nephrogenic cord that successively generates the pronephros, mesonephros, and metanephros, as well as the internal gonads.",
-      "say": "Lying between paraxial and lateral plate mesoderm is the intermediate mesoderm, which builds the urogenital system. Segmented cranially into nephrotomes and continuous caudally as the nephrogenic cord, it gives rise to kidneys, ureters, and internal gonads.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Intermediate Mesoderm",
-          "points": [
-            "Pronephros (transient nonfunctional)",
-            "Mesonephros and mesonephric Wolffian duct",
-            "Metanephros (definitive kidney)",
-            "Ureteric bud and collecting system"
-          ]
-        },
-        "right": {
-          "title": "Lateral Plate Mesoderm",
-          "points": [
-            "Splits into somatic and splanchnic layers",
-            "Forms intraembryonic coelom cavity",
-            "Parietal layer lines body walls and limbs",
-            "Visceral layer forms gut smooth muscle and heart"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The **lateral plate mesoderm** splits into two layers separated by the intraembryonic coelom. The somatic (parietal) layer lines the inner aspect of the body wall and forms the appendicular skeleton and connective tissue of limbs. The splanchnic (visceral) layer coats the gut tube, generating visceral smooth muscle, the heart, and the serous membranes.",
-      "say": "The lateral plate mesoderm cleaves into somatic and splanchnic layers enclosing the body cavity. The somatic layer builds the body wall lining and limb skeletons. The splanchnic layer envelopes the gut, creating visceral smooth muscle, the heart, and serous pericardium.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Mesodermal Column",
-          "Primary Derivatives",
-          "Internal Cavity Associated",
-          "Clinical Defect"
-        ],
-        "rows": [
-          [
-            "Paraxial Mesoderm",
-            "Axial skeleton, back dermis, voluntary muscle",
-            "None",
-            "Hemivertebra, Klippel-Feil"
-          ],
-          [
-            "Intermediate Mesoderm",
-            "Kidneys, ureters, gonads, genital ducts",
-            "None",
-            "Renal agenesis, horseshoe kidney"
-          ],
-          [
-            "Somatic Lateral Plate",
-            "Limb bones, dermis of limbs, parietal serosa",
-            "Lines intraembryonic coelom",
-            "Limb reduction anomalies"
-          ],
-          [
-            "Splanchnic Lateral Plate",
-            "Heart, cardiac vessels, visceral gut muscle",
-            "Visceral serosa of pleura/peritoneum",
-            "Ectopia cordis, omphalocele"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Dermomyotome Derivatives",
+     "points": [
+      "Dermatome forms dorsal dermis",
+      "Myotome forms skeletal musculature",
+      "Epimere forms deep intrinsic back muscles",
+      "Hypomere forms ventrolateral body wall and limbs"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI",
-  "src": []
+   }
+  },
+  {
+   "tx": "Sclerotome cells undergo a critical process called resegmentation, wherein the caudal half of each sclerotome fuses with the cranial half of the subjacent sclerotome to construct a definitive **vertebral body**. This intersegmental arrangement ensures that spinal nerves exit between adjacent vertebrae through intervertebral foramina to innervate alternating myotomal muscles.",
+   "say": "Sclerotomes undergo resegmentation, where the caudal half of one somite fuses with the cranial half of the next to build a vertebral body. This offset design allows spinal nerves to exit between vertebrae and directly reach alternating muscle groups.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sclerotome Resegmentation",
+    "nodes": [
+     {
+      "id": "cranial",
+      "label": "Cranial Half Sclerotome (Loose)"
+     },
+     {
+      "id": "caudal",
+      "label": "Caudal Half Sclerotome (Dense)"
+     },
+     {
+      "id": "inter",
+      "label": "Intervertebral Disc Space"
+     },
+     {
+      "id": "vert",
+      "label": "Definitive Re-segmented Vertebra"
+     }
+    ],
+    "edges": [
+     [
+      "cranial",
+      "vert"
+     ],
+     [
+      "caudal",
+      "vert"
+     ],
+     [
+      "caudal",
+      "inter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beside the neural tube each somite splits into sclerotome ventromedially and dermomyotome dorsolaterally, and the dermomyotome then separates into dermatome for dermis and myotome for muscle. Sclerotome cells do not stay in one segmental block. They resegment: the caudal half of one sclerotome fuses with the cranial half of the next to form a **vertebral body**. Because of that offset, spinal nerves leave between vertebrae and reach the myotomes that have themselves split across the new boundary.",
+   "say": "Each somite beside the neural tube forms sclerotome and dermomyotome, and the dermomyotome splits into dermatome and myotome. Vertebrae are not one sclerotome each. The caudal half of one joins the cranial half of the next. That shift lets spinal nerves exit between vertebrae and supply the split muscle masses.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n7-ana-germ-layers-intraembryonic-mesoderm.webp",
+    "alt": "A somite beside the neural tube dividing into sclerotome, dermomyotome, dermatome, and myotome.",
+    "caption": "Next to the neural tube a somite separates into sclerotome and dermomyotome, and the dermomyotome further splits into dermatome and myotome. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The dorsolateral portion of the somite forms the **dermomyotome**, which subsequently divides into a dermatome and a myotome. The dermatome disperses beneath the overlying ectoderm to form the dermis and subcutaneous tissue of the dorsal torso. In contrast, the dermis of the face derives from neural crest ectomesenchyme.",
+   "say": "The dorsolateral somite forms the dermomyotome, which divides into dermatome and myotome. The dermatome migrates beneath the ectoderm to generate the dermis and subcutaneous tissue of the back. Facial dermis instead originates from neural crest cells.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n7-ana-germ-layers-intraembryonic-mesoderm.webp",
+    "alt": "Somite differentiating into sclerotome, dermomyotome, dermatome and myotome beside the neural tube",
+    "caption": "Somite differentiating into sclerotome, dermomyotome, dermatome and myotome beside the neural tube. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The **myotome** splits into an epaxial division (epimere) innervated by dorsal rami of spinal nerves, and a hypaxial division (hypomere) innervated by ventral rami. Epimeres develop into deep intrinsic extensor muscles of the back like the erector spinae. Hypomeres migrate to form the muscles of the ventrolateral body wall and limbs.",
+   "say": "The myotome splits into an epaxial epimere supplied by dorsal rami and a hypaxial hypomere supplied by ventral rami. Epimeres form deep extensor muscles like erector spinae, while hypomeres migrate to form abdominal wall and limb musculature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Myotomal Division",
+     "Spinal Innervation",
+     "Adult Muscle Group",
+     "Functional Action"
+    ],
+    "rows": [
+     [
+      "Epimere (Epaxial)",
+      "Dorsal rami of spinal nerves",
+      "Erector spinae, transversospinalis",
+      "Extends and stabilizes spine"
+     ],
+     [
+      "Hypomere (Hypaxial)",
+      "Ventral rami of spinal nerves",
+      "Intercostals, rectus abdominis, obliques",
+      "Flexes torso, compresses viscera"
+     ],
+     [
+      "Limb Bud Myoblasts",
+      "Ventral rami plexus branches",
+      "Flexor and extensor limb compartments",
+      "Locomotion and manipulation"
+     ],
+     [
+      "Branchial Myoblasts",
+      "Cranial nerves V, VII, IX, X",
+      "Muscles of mastication and expression",
+      "Speech, chewing, facial motion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Positioned laterally between paraxial and lateral plate columns is the **intermediate mesoderm**, which differentiates into the entire urogenital system. In cervical and upper thoracic regions it forms nephrotomes, while caudally it forms the continuous nephrogenic cord that successively generates the pronephros, mesonephros, and metanephros, as well as the internal gonads.",
+   "say": "Lying between paraxial and lateral plate mesoderm is the intermediate mesoderm, which builds the urogenital system. Segmented cranially into nephrotomes and continuous caudally as the nephrogenic cord, it gives rise to kidneys, ureters, and internal gonads.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intermediate Mesoderm",
+     "points": [
+      "Pronephros (transient nonfunctional)",
+      "Mesonephros and mesonephric Wolffian duct",
+      "Metanephros (definitive kidney)",
+      "Ureteric bud and collecting system"
+     ]
+    },
+    "right": {
+     "title": "Lateral Plate Mesoderm",
+     "points": [
+      "Splits into somatic and splanchnic layers",
+      "Forms intraembryonic coelom cavity",
+      "Parietal layer lines body walls and limbs",
+      "Visceral layer forms gut smooth muscle and heart"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **lateral plate mesoderm** splits into two layers separated by the intraembryonic coelom. The somatic (parietal) layer lines the inner aspect of the body wall and forms the appendicular skeleton and connective tissue of limbs. The splanchnic (visceral) layer coats the gut tube, generating visceral smooth muscle, the heart, and the serous membranes.",
+   "say": "The lateral plate mesoderm cleaves into somatic and splanchnic layers enclosing the body cavity. The somatic layer builds the body wall lining and limb skeletons. The splanchnic layer envelopes the gut, creating visceral smooth muscle, the heart, and serous pericardium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mesodermal Column",
+     "Primary Derivatives",
+     "Internal Cavity Associated",
+     "Clinical Defect"
+    ],
+    "rows": [
+     [
+      "Paraxial Mesoderm",
+      "Axial skeleton, back dermis, voluntary muscle",
+      "None",
+      "Hemivertebra, Klippel-Feil"
+     ],
+     [
+      "Intermediate Mesoderm",
+      "Kidneys, ureters, gonads, genital ducts",
+      "None",
+      "Renal agenesis, horseshoe kidney"
+     ],
+     [
+      "Somatic Lateral Plate",
+      "Limb bones, dermis of limbs, parietal serosa",
+      "Lines intraembryonic coelom",
+      "Limb reduction anomalies"
+     ],
+     [
+      "Splanchnic Lateral Plate",
+      "Heart, cardiac vessels, visceral gut muscle",
+      "Visceral serosa of pleura/peritoneum",
+      "Ectopia cordis, omphalocele"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
 }

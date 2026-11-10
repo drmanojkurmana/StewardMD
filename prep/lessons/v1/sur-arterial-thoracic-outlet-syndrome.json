@@ -1,279 +1,279 @@
 {
-  "v": 1,
-  "module": "sur-arterial",
-  "subject": "surgery",
-  "title": "Thoracic Outlet Syndrome, Gangrene and Amputation",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Compression of nerves and vessels between neck and armpit causes **thoracic outlet syndrome**. Extra cervical ribs or fibrous bands narrow the passage. Arm pain, tingling and hand weakness follow, worse when the arm is raised. Adson test, feeling the radial pulse fade as the head turns, is suggestive but positive in many normal people too.",
-      "say": "Thoracic outlet syndrome compresses nerves and vessels at the neck, worsening when the arm rises.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Type",
-          "Structure compressed"
-        ],
-        "rows": [
-          [
-            "Neurogenic",
-            "Brachial plexus"
-          ],
-          [
-            "Venous",
-            "Subclavian vein"
-          ],
-          [
-            "Arterial",
-            "Subclavian artery"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "sur-arterial",
+ "subject": "surgery",
+ "title": "Thoracic Outlet Syndrome, Gangrene and Amputation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Compression of nerves and vessels between neck and armpit causes **thoracic outlet syndrome**. Extra cervical ribs or fibrous bands narrow the passage. Arm pain, tingling and hand weakness follow, worse when the arm is raised. Adson test, feeling the radial pulse fade as the head turns, is suggestive but positive in many normal people too.",
+   "say": "Thoracic outlet syndrome compresses nerves and vessels at the neck, worsening when the arm rises.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Structure compressed"
+    ],
+    "rows": [
+     [
+      "Neurogenic",
+      "Brachial plexus"
+     ],
+     [
+      "Venous",
+      "Subclavian vein"
+     ],
+     [
+      "Arterial",
+      "Subclavian artery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gap drawn between the scalenes and the first rib is where nerves and vessels are pinched on the way from neck to armpit. That compression causes **thoracic outlet syndrome**. An extra cervical rib or a fibrous band narrows the passage further. Arm pain, tingling, and weakness of the hand follow, and they are worse when the arm is raised. Adson test, in which the radial pulse fades as the head is turned, suggests the diagnosis but is positive in many people with no disease.",
+   "say": "Thoracic outlet syndrome compresses nerves and vessels between neck and armpit, often via a cervical rib or fibrous band. Pain, tingling, and hand weakness worsen when the arm is raised. Fading of the radial pulse as the head turns is only suggestive, because many healthy people show the same sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m62-sur-arterial-thoracic-outlet-syndrome.webp",
+    "alt": "An anatomical diagram shows the brachial plexus and subclavian vessels between the scalene muscles and the first rib, narrowed by a cervical rib.",
+    "caption": "The neurovascular bundle crosses the scalene triangle above the first rib, and a cervical rib further crowds that passage. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Most thoracic outlet cases are neurogenic and improve with **physiotherapy first**. Posture correction and scalene stretching relieve compression without surgery. Operation is reserved for persistent disabling symptoms or vascular damage. Ninety percent of neurogenic cases settle without surgery, so an operation offered at first visit should prompt a second opinion.",
+   "say": "Most thoracic outlet syndrome is neurogenic and improves with physiotherapy before any surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Posture corrected"
+     },
+     {
+      "id": "n1",
+      "label": "Scalene stretching taught"
+     },
+     {
+      "id": "n2",
+      "label": "Symptoms reassessed"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery only if disabling"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An extra rib arising from the lowest neck vertebra is a **cervical rib**. It lifts the subclavian artery and plexus over a hard edge. Many cervical ribs cause no symptoms and are incidental findings. Cervical ribs occur in under one percent of people, are commoner in women, and are bilateral in about half of cases.",
+   "say": "A cervical rib lifts vessels and nerves over a hard edge, though many cause no symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Symptomatic rib",
+     "points": [
+      "Pain and tingling",
+      "Vascular damage possible",
+      "Removal considered"
+     ]
     },
-    {
-      "tx": "The gap drawn between the scalenes and the first rib is where nerves and vessels are pinched on the way from neck to armpit. That compression causes **thoracic outlet syndrome**. An extra cervical rib or a fibrous band narrows the passage further. Arm pain, tingling, and weakness of the hand follow, and they are worse when the arm is raised. Adson test, in which the radial pulse fades as the head is turned, suggests the diagnosis but is positive in many people with no disease.",
-      "say": "Thoracic outlet syndrome compresses nerves and vessels between neck and armpit, often via a cervical rib or fibrous band. Pain, tingling, and hand weakness worsen when the arm is raised. Fading of the radial pulse as the head turns is only suggestive, because many healthy people show the same sign.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m62-sur-arterial-thoracic-outlet-syndrome.webp",
-        "alt": "An anatomical diagram shows the brachial plexus and subclavian vessels between the scalene muscles and the first rib, narrowed by a cervical rib.",
-        "caption": "The neurovascular bundle crosses the scalene triangle above the first rib, and a cervical rib further crowds that passage. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Most thoracic outlet cases are neurogenic and improve with **physiotherapy first**. Posture correction and scalene stretching relieve compression without surgery. Operation is reserved for persistent disabling symptoms or vascular damage. Ninety percent of neurogenic cases settle without surgery, so an operation offered at first visit should prompt a second opinion.",
-      "say": "Most thoracic outlet syndrome is neurogenic and improves with physiotherapy before any surgery.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Posture corrected"
-          },
-          {
-            "id": "n1",
-            "label": "Scalene stretching taught"
-          },
-          {
-            "id": "n2",
-            "label": "Symptoms reassessed"
-          },
-          {
-            "id": "n3",
-            "label": "Surgery only if disabling"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "An extra rib arising from the lowest neck vertebra is a **cervical rib**. It lifts the subclavian artery and plexus over a hard edge. Many cervical ribs cause no symptoms and are incidental findings. Cervical ribs occur in under one percent of people, are commoner in women, and are bilateral in about half of cases.",
-      "say": "A cervical rib lifts vessels and nerves over a hard edge, though many cause no symptoms.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Symptomatic rib",
-          "points": [
-            "Pain and tingling",
-            "Vascular damage possible",
-            "Removal considered"
-          ]
-        },
-        "right": {
-          "title": "Silent rib",
-          "points": [
-            "Incidental finding",
-            "No symptoms",
-            "No treatment needed"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Arterial damage at the outlet can shower clots into the hand, causing **digital emboli**. Fingers become painful and mottled in patches. Treating the outlet compression stops further embolisation. A subclavian artery aneurysm behind the narrowing is the usual source, and it needs repair, not just rib removal.",
-      "say": "Digital emboli from outlet arterial damage mottles fingers painfully until compression is relieved.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Artery damaged at outlet"
-          },
-          {
-            "id": "n1",
-            "label": "Clots shower to hand"
-          },
-          {
-            "id": "n2",
-            "label": "Fingers mottled and painful"
-          },
-          {
-            "id": "n3",
-            "label": "Outlet decompressed"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Removal of the first rib to widen the outlet is **first rib resection**. It decompresses nerves and vessels definitively in selected cases. Physiotherapy continues after surgery to restore shoulder movement. Pneumothorax and injury to the brachial plexus or long thoracic nerve are the complications patients must hear about beforehand.",
-      "say": "First rib resection widens the thoracic outlet definitively in selected persistent cases.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Indication",
-          "Reason"
-        ],
-        "rows": [
-          [
-            "Failed physiotherapy",
-            "Persistent disabling pain"
-          ],
-          [
-            "Arterial damage",
-            "Emboli recurring"
-          ],
-          [
-            "Venous thrombosis",
-            "Effort thrombosis"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Dead tissue declares a boundary problem, and this step is about managing the border honestly. **Gangrene care** begins with keeping dry necrosis dry, protecting it from maceration and infection while the circulation is assessed for any salvageable inflow. Wet gangrene reverses every rule, becoming a surgical emergency where infected dead tissue seeds sepsis by the hour. Between those poles lie analgesia, glycaemic control, offloading and honest conversations about amputation levels, all timed so that demarcation guides the knife rather than panic doing so.",
-      "say": "Gangrene care keeps dry necrosis protected, treats wet gangrene as an emergency, and times amputation to demarcation.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m1041-sur-arterial-thoracic-outlet-syndrome.webp",
-        "alt": "Gangrene care",
-        "caption": "Gangrene care. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Dead tissue at the limb end from any cause is managed by the principles of **gangrene care**. Infection is controlled, blood supply optimised and dead tissue removed at the right time. Premature amputation through inflamed tissue fails to heal. Dry gangrene is given time to declare its level, while wet gangrene is drained and debrided the same day.",
-      "say": "Gangrene care controls infection, optimises flow, and times removal where healing is possible.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n80-sur-arterial-thoracic-outlet-syndrome.webp",
-        "alt": "Gangrene care principles with demarcating dry gangrene observed and infected wet gangrene debrided urgently",
-        "caption": "Gangrene care principles with demarcating dry gangrene observed and infected wet gangrene debrided urgently. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Autoamputation, where dead toes separate naturally, occasionally suits frail patients with dry **demarcated gangrene**. It avoids anaesthesia when disease is stable and painless. Wet infected gangrene never qualifies for this approach. It can take months for a toe to separate, so pain, smell and the patient ability to cope decide whether waiting is humane.",
-      "say": "Dry demarcated gangrene in frail patients may autoamputate, but wet infected gangrene never qualifies.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Dry gangrene",
-          "points": [
-            "Mummified, painless",
-            "May autoamputate",
-            "Frail patients"
-          ]
-        },
-        "right": {
-          "title": "Wet gangrene",
-          "points": [
-            "Infected, spreading",
-            "Emergency surgery",
-            "Sepsis risk"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Rehabilitation after major amputation centres on early **prosthetic fitting**. A well healed, well shaped stump accepts a prosthesis sooner. Physiotherapy, pain control and psychological support all begin before surgery. Fitting within the first month improves the chance of walking again, and stump shaping with rigid dressings speeds it.",
-      "say": "Early prosthetic fitting after amputation needs a well shaped stump plus pain and psychological support.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Stump healed and shaped"
-          },
-          {
-            "id": "n1",
-            "label": "Physiotherapy started"
-          },
-          {
-            "id": "n2",
-            "label": "Prosthesis fitted"
-          },
-          {
-            "id": "n3",
-            "label": "Gait training progresses"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The pain that outlives the limb is the strangest entry in the amputee's chart. **Neuropathic pain** after amputation splits into stump pain from neuromas and phantom pain felt in a foot that no longer exists, two mechanisms sharing one clinic appointment. Early fitting, desensitisation and mirror therapy retrain the brain's map, while medicines borrowed from epilepsy and depression calm ectopic firing. Teams that warn patients beforehand, and treat early, spare them the fear that phantom sensations mean something has gone wrong.",
-      "say": "Neuropathic and phantom pain follow amputation, eased by early fitting, desensitisation and adjuvant medicines.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m1042-sur-arterial-thoracic-outlet-syndrome.webp",
-        "alt": "Neuropathic pain",
-        "caption": "Neuropathic pain. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Phantom limb pain after amputation is managed with medicines for **neuropathic pain**. Gabapentinoids, mirror therapy and desensitisation help most patients. Reassurance that phantom sensation is normal reduces distress greatly. Pain that burns and shoots, with sensitivity to light touch, fits neuropathic pain and responds poorly to ordinary opioids.",
-      "say": "Phantom limb pain responds to neuropathic medicines, mirror therapy and clear reassurance.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/neuropathic-pain-fig1.webp",
-        "alt": "Extremity arterial disease and amputation planning.",
-        "caption": "Neuropathic pain mechanisms: damaged myelin with ectopic sodium channel accumulation, dorsal root ganglion firing and dorsal horn central sensitisation. Illustration: StewardMD original.",
-        "ar": 1.5
-      }
+    "right": {
+     "title": "Silent rib",
+     "points": [
+      "Incidental finding",
+      "No symptoms",
+      "No treatment needed"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Arterial damage at the outlet can shower clots into the hand, causing **digital emboli**. Fingers become painful and mottled in patches. Treating the outlet compression stops further embolisation. A subclavian artery aneurysm behind the narrowing is the usual source, and it needs repair, not just rib removal.",
+   "say": "Digital emboli from outlet arterial damage mottles fingers painfully until compression is relieved.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Artery damaged at outlet"
+     },
+     {
+      "id": "n1",
+      "label": "Clots shower to hand"
+     },
+     {
+      "id": "n2",
+      "label": "Fingers mottled and painful"
+     },
+     {
+      "id": "n3",
+      "label": "Outlet decompressed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Removal of the first rib to widen the outlet is **first rib resection**. It decompresses nerves and vessels definitively in selected cases. Physiotherapy continues after surgery to restore shoulder movement. Pneumothorax and injury to the brachial plexus or long thoracic nerve are the complications patients must hear about beforehand.",
+   "say": "First rib resection widens the thoracic outlet definitively in selected persistent cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Failed physiotherapy",
+      "Persistent disabling pain"
+     ],
+     [
+      "Arterial damage",
+      "Emboli recurring"
+     ],
+     [
+      "Venous thrombosis",
+      "Effort thrombosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dead tissue declares a boundary problem, and this step is about managing the border honestly. **Gangrene care** begins with keeping dry necrosis dry, protecting it from maceration and infection while the circulation is assessed for any salvageable inflow. Wet gangrene reverses every rule, becoming a surgical emergency where infected dead tissue seeds sepsis by the hour. Between those poles lie analgesia, glycaemic control, offloading and honest conversations about amputation levels, all timed so that demarcation guides the knife rather than panic doing so.",
+   "say": "Gangrene care keeps dry necrosis protected, treats wet gangrene as an emergency, and times amputation to demarcation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m1041-sur-arterial-thoracic-outlet-syndrome.webp",
+    "alt": "Gangrene care",
+    "caption": "Gangrene care. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Dead tissue at the limb end from any cause is managed by the principles of **gangrene care**. Infection is controlled, blood supply optimised and dead tissue removed at the right time. Premature amputation through inflamed tissue fails to heal. Dry gangrene is given time to declare its level, while wet gangrene is drained and debrided the same day.",
+   "say": "Gangrene care controls infection, optimises flow, and times removal where healing is possible.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n80-sur-arterial-thoracic-outlet-syndrome.webp",
+    "alt": "Gangrene care principles with demarcating dry gangrene observed and infected wet gangrene debrided urgently",
+    "caption": "Gangrene care principles with demarcating dry gangrene observed and infected wet gangrene debrided urgently. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Autoamputation, where dead toes separate naturally, occasionally suits frail patients with dry **demarcated gangrene**. It avoids anaesthesia when disease is stable and painless. Wet infected gangrene never qualifies for this approach. It can take months for a toe to separate, so pain, smell and the patient ability to cope decide whether waiting is humane.",
+   "say": "Dry demarcated gangrene in frail patients may autoamputate, but wet infected gangrene never qualifies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dry gangrene",
+     "points": [
+      "Mummified, painless",
+      "May autoamputate",
+      "Frail patients"
+     ]
+    },
+    "right": {
+     "title": "Wet gangrene",
+     "points": [
+      "Infected, spreading",
+      "Emergency surgery",
+      "Sepsis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rehabilitation after major amputation centres on early **prosthetic fitting**. A well healed, well shaped stump accepts a prosthesis sooner. Physiotherapy, pain control and psychological support all begin before surgery. Fitting within the first month improves the chance of walking again, and stump shaping with rigid dressings speeds it.",
+   "say": "Early prosthetic fitting after amputation needs a well shaped stump plus pain and psychological support.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Stump healed and shaped"
+     },
+     {
+      "id": "n1",
+      "label": "Physiotherapy started"
+     },
+     {
+      "id": "n2",
+      "label": "Prosthesis fitted"
+     },
+     {
+      "id": "n3",
+      "label": "Gait training progresses"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pain that outlives the limb is the strangest entry in the amputee's chart. **Neuropathic pain** after amputation splits into stump pain from neuromas and phantom pain felt in a foot that no longer exists, two mechanisms sharing one clinic appointment. Early fitting, desensitisation and mirror therapy retrain the brain's map, while medicines borrowed from epilepsy and depression calm ectopic firing. Teams that warn patients beforehand, and treat early, spare them the fear that phantom sensations mean something has gone wrong.",
+   "say": "Neuropathic and phantom pain follow amputation, eased by early fitting, desensitisation and adjuvant medicines.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m1042-sur-arterial-thoracic-outlet-syndrome.webp",
+    "alt": "Neuropathic pain",
+    "caption": "Neuropathic pain. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Phantom limb pain after amputation is managed with medicines for **neuropathic pain**. Gabapentinoids, mirror therapy and desensitisation help most patients. Reassurance that phantom sensation is normal reduces distress greatly. Pain that burns and shoots, with sensitivity to light touch, fits neuropathic pain and responds poorly to ordinary opioids.",
+   "say": "Phantom limb pain responds to neuropathic medicines, mirror therapy and clear reassurance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuropathic-pain-fig1.webp",
+    "alt": "Extremity arterial disease and amputation planning.",
+    "caption": "Neuropathic pain mechanisms: damaged myelin with ectopic sodium channel accumulation, dorsal root ganglion firing and dorsal horn central sensitisation. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  }
+ ]
 }

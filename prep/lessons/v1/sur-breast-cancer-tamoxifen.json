@@ -1,266 +1,266 @@
 {
-  "v": 1,
-  "module": "sur-breast-cancer",
-  "subject": "surgery",
-  "title": "Hormone Receptor-Positive Breast Cancer, Tamoxifen, and Aromatase Inhibitors",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Nearly eighty percent of all invasive breast carcinomas express nuclear hormone receptors for estrogen and progesterone. Following definitive surgical resection, adjuvant endocrine deprivation significantly reduces the risk of locoregional recurrence, contralateral new primary breast tumours, and distant haematogenous metastasis. The foundational agent in premenopausal hormone receptor-positive disease is **tamoxifen**, a selective estrogen receptor modulator that competitively inhibits estradiol binding to tumour cell receptors.",
-      "say": "Most breast cancers express estrogen receptors. Following surgery, adjuvant endocrine therapy suppresses hormone-driven growth. Tamoxifen is the foundational agent for premenopausal women, blocking estrogen receptors in breast tissue.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/obg-drug-tamoxifen.webp",
-        "alt": "Clinical practical photograph of tamoxifen tablets and chemical structure display.",
-        "caption": "Tamoxifen: selective estrogen receptor modulator suppressing hormone receptor-positive mammary recurrence. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Hormone Receptor-Positive Breast Cancer, Tamoxifen, and Aromatase Inhibitors",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Nearly eighty percent of all invasive breast carcinomas express nuclear hormone receptors for estrogen and progesterone. Following definitive surgical resection, adjuvant endocrine deprivation significantly reduces the risk of locoregional recurrence, contralateral new primary breast tumours, and distant haematogenous metastasis. The foundational agent in premenopausal hormone receptor-positive disease is **tamoxifen**, a selective estrogen receptor modulator that competitively inhibits estradiol binding to tumour cell receptors.",
+   "say": "Most breast cancers express estrogen receptors. Following surgery, adjuvant endocrine therapy suppresses hormone-driven growth. Tamoxifen is the foundational agent for premenopausal women, blocking estrogen receptors in breast tissue.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-tamoxifen.webp",
+    "alt": "Clinical practical photograph of tamoxifen tablets and chemical structure display.",
+    "caption": "Tamoxifen: selective estrogen receptor modulator suppressing hormone receptor-positive mammary recurrence. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tamoxifen exhibits tissue-specific agonist and antagonist properties throughout the body. In breast tissue, it acts as a potent competitive antagonist, arresting cells in the G0 and G1 phases of the mitotic cycle. Conversely, in the female genital tract and skeletal system, tamoxifen functions as a partial estrogen agonist. In bone, this agonistic activity preserves bone mineral density and prevents osteopenia in postmenopausal women, but in the uterus, it can cause **endometrial glandular hyperplasia**.",
+   "say": "Tamoxifen acts as an estrogen antagonist in breast tissue to block cancer cell growth, but behaves as an agonist in bone and the uterus. Uterine stimulation can lead to endometrial hyperplasia and polyp formation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antagonist Effects (Breast)",
+     "points": [
+      "Competitively blocks nuclear ER alpha",
+      "Halts cellular cycle in G0/G1 phase",
+      "Reduces ipsilateral local recurrence",
+      "Decreases contralateral new primary risk"
+     ]
     },
-    {
-      "tx": "Tamoxifen exhibits tissue-specific agonist and antagonist properties throughout the body. In breast tissue, it acts as a potent competitive antagonist, arresting cells in the G0 and G1 phases of the mitotic cycle. Conversely, in the female genital tract and skeletal system, tamoxifen functions as a partial estrogen agonist. In bone, this agonistic activity preserves bone mineral density and prevents osteopenia in postmenopausal women, but in the uterus, it can cause **endometrial glandular hyperplasia**.",
-      "say": "Tamoxifen acts as an estrogen antagonist in breast tissue to block cancer cell growth, but behaves as an agonist in bone and the uterus. Uterine stimulation can lead to endometrial hyperplasia and polyp formation.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Antagonist Effects (Breast)",
-          "points": [
-            "Competitively blocks nuclear ER alpha",
-            "Halts cellular cycle in G0/G1 phase",
-            "Reduces ipsilateral local recurrence",
-            "Decreases contralateral new primary risk"
-          ]
-        },
-        "right": {
-          "title": "Agonist Effects (Other Tissues)",
-          "points": [
-            "Stimulates endometrial glandular proliferation",
-            "Elevates risk of endometrial adenocarcinoma",
-            "Preserves postmenopausal bone mineral density",
-            "Increases hepatic synthesis of clotting factors"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Due to its partial agonist effects on hepatic coagulation factor synthesis, tamoxifen therapy carries a two- to three-fold increased risk of thromboembolic disease. Patients may develop deep vein thrombosis, pulmonary embolism, or retinal vein thrombosis. Tamoxifen is therefore contraindicated in individuals with a documented history of unprovoked venous thromboembolism. Additionally, women taking tamoxifen must report any abnormal vaginal spotting or bleeding promptly, as this may be the first clinical sign of **endometrial adenocarcinoma**.",
-      "say": "Because tamoxifen stimulates hepatic clotting factor synthesis, it increases the risk of deep vein thrombosis and pulmonary embolism. Patients must immediately report any abnormal uterine bleeding to rule out endometrial carcinoma.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Adverse Effect",
-          "Pathophysiological Mechanism",
-          "Clinical Monitoring Strategy"
-        ],
-        "rows": [
-          [
-            "Thromboembolism",
-            "Increased hepatic clotting factor release",
-            "DVT and PE symptom surveillance"
-          ],
-          [
-            "Endometrial Cancer",
-            "Uterine estrogen receptor agonism",
-            "Annual pelvic exams and transvaginal ultrasound"
-          ],
-          [
-            "Hot Flushes",
-            "Thermoregulatory central estrogen blockade",
-            "Venlafaxine or gabapentin symptom control"
-          ],
-          [
-            "Ocular Toxicity",
-            "Retinal and corneal microcrystalline deposits",
-            "Periodic ophthalmological evaluation"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Tamoxifen is a prodrug that requires bioactivation by the hepatic cytochrome P450 enzyme CYP2D6 into its active metabolites, 4-hydroxytamoxifen and endoxifen. Endoxifen possesses roughly one hundred times greater affinity for the estrogen receptor than the parent drug. Consequently, co-prescribing strong CYP2D6 inhibitors such as fluoxetine or paroxetine for hot flushes severely impairs tamoxifen activation. When antidepressant therapy is necessary, clinicians select agents with minimal CYP2D6 inhibition, such as **venlafaxine or escitalopram**.",
-      "say": "Tamoxifen requires conversion into its active metabolite endoxifen by the CYP2D6 liver enzyme. Prescribing strong CYP2D6 inhibitors like fluoxetine or paroxetine impairs this conversion, so venlafaxine is preferred for hot flushes.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "tam",
-            "label": "Oral Tamoxifen Ingestion & Gastrointestinal Absorption"
-          },
-          {
-            "id": "cyp",
-            "label": "Hepatic CYP2D6 Hydroxylation & Bioactivation"
-          },
-          {
-            "id": "endox",
-            "label": "Generation of Highly Active Endoxifen Metabolite"
-          },
-          {
-            "id": "block",
-            "label": "Competitive Inhibition of Nuclear Estrogen Receptors"
-          },
-          {
-            "id": "drug",
-            "label": "Avoid Potent CYP2D6 Inhibitors (Fluoxetine, Paroxetine)"
-          }
-        ],
-        "edges": [
-          [
-            "tam",
-            "cyp"
-          ],
-          [
-            "cyp",
-            "endox"
-          ],
-          [
-            "endox",
-            "block"
-          ],
-          [
-            "drug",
-            "cyp"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "In postmenopausal breast cancer, aromatase in fat converts adrenal androgens to oestrogen, and blocking that enzyme removes the main remaining source of oestrogen the tumour can use. Tamoxifen is another strategy and a prodrug. CYP2D6 must convert it to 4 hydroxytamoxifen and endoxifen, and endoxifen binds the oestrogen receptor about a hundred times more tightly than the parent. Strong CYP2D6 inhibitors such as fluoxetine or paroxetine, given for hot flushes, cripple that activation. **Venlafaxine or escitalopram** are chosen when an antidepressant is required because they barely inhibit the enzyme.",
-      "say": "After menopause, fat aromatase turns adrenal androgens into the oestrogen that feeds many breast cancers, and inhibiting the enzyme cuts that supply off. Tamoxifen instead must be activated by CYP2D6 to endoxifen, which binds the receptor far more strongly than tamoxifen itself. Fluoxetine and paroxetine block that activation, so venlafaxine or escitalopram is preferred for flushes.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n84-sur-breast-cancer-tamoxifen.webp",
-        "alt": "Postmenopausal adipose tissue in which aromatase inhibition stops adrenal androgens becoming oestrogen.",
-        "caption": "In fat after menopause, aromatase no longer converts adrenal androgens to oestrogen once the enzyme is blocked. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "In postmenopausal women, the ovaries are quiescent, and circulating estrogens derive almost entirely from the peripheral conversion of adrenal androgens by the aromatase enzyme in adipose tissue and skeletal muscle. In this demographic, the superior adjuvant standard is therapy with **third-generation aromatase inhibitors**, such as anastrozole, letrozole, or exemestane. These agents achieve profound estrogen suppression by selectively blocking the aromatase enzyme complex throughout peripheral fat depots.",
-      "say": "In postmenopausal women, estrogen is produced primarily through the conversion of adrenal androgens by aromatase in fat tissue. Aromatase inhibitors like anastrozole and letrozole block this enzyme to lower circulating estrogens.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n84-sur-breast-cancer-tamoxifen.webp",
-        "alt": "Aromatase inhibition in postmenopausal breast cancer blocking peripheral conversion of adrenal androgens to oestrogen in fat",
-        "caption": "Aromatase inhibition in postmenopausal breast cancer blocking peripheral conversion of adrenal androgens to oestrogen in fat. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Aromatase inhibitors are classified into non-steroidal and steroidal compounds. Non-steroidal agents such as anastrozole and letrozole bind reversibly to the cytochrome P450 haem prosthetic group of the aromatase enzyme. Conversely, exemestane is a steroidal analogue that acts as a false substrate, irreversibly inactivating the enzyme as a **suicide aromatase inhibitor**. In postmenopausal clinical trials, aromatase inhibitors consistently demonstrated superior disease-free survival and lower recurrence rates than tamoxifen.",
-      "say": "Aromatase inhibitors include non-steroidal drugs like letrozole, which bind reversibly to the enzyme, and steroidal agents like exemestane, which permanently inactivate aromatase as suicide inhibitors.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Non-Steroidal (Anastrozole/Letrozole)",
-          "points": [
-            "Reversible binding to aromatase haem group",
-            "Suppresses plasma estradiol over 98 percent",
-            "First-line postmenopausal adjuvant therapy",
-            "Oral once-daily daily administration"
-          ]
-        },
-        "right": {
-          "title": "Steroidal (Exemestane)",
-          "points": [
-            "Irreversible suicide inhibitor mechanism",
-            "Permanent structural enzyme destruction",
-            "Effective after failure of non-steroidal agents",
-            "Slight androgenic steroid side effect profile"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Unlike tamoxifen, aromatase inhibitors lack partial estrogenic agonist activity in bone and vascular tissue. Consequently, they do not increase the risk of endometrial cancer or deep vein thrombosis. However, the profound systemic estrogen depletion frequently leads to arthralgias, joint stiffness, and accelerated trabecular bone mineral loss. Baseline dual-energy X-ray absorptiometry scanning is mandatory before starting treatment, and patients with osteopenia require calcium, vitamin D, and concurrent **antiresorptive bisphosphonate therapy**.",
-      "say": "Aromatase inhibitors do not cause endometrial cancer or blood clots, but deep estrogen suppression promotes joint pains and accelerated bone mineral loss, requiring baseline bone density scans and bisphosphonate support.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Tamoxifen",
-          "Aromatase Inhibitors"
-        ],
-        "rows": [
-          [
-            "Target Population",
-            "Premenopausal and postmenopausal",
-            "Strictly postmenopausal (or with OFS)"
-          ],
-          [
-            "Mechanism",
-            "Selective receptor modulator (SERM)",
-            "Enzyme inhibitor of peripheral conversion"
-          ],
-          [
-            "Endometrial Risk",
-            "Increased (hyperplasia & carcinoma)",
-            "No increased uterine risk"
-          ],
-          [
-            "Thromboembolism",
-            "Increased (DVT & PE risk)",
-            "No elevated thromboembolic risk"
-          ],
-          [
-            "Bone Mineral Density",
-            "Preserved in postmenopausal women",
-            "Loss of density, osteoporosis, fractures"
-          ],
-          [
-            "Musculoskeletal Pain",
-            "Infrequent joint complaints",
-            "Severe arthralgias and morning stiffness"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "For high-risk premenopausal women with large primary tumours or multiple positive axillary lymph nodes, international trials have proven that combining an aromatase inhibitor with **ovarian function suppression** is superior to tamoxifen alone. Monthly injections of a gonadotropin-releasing hormone agonist such as goserelin or leuprolide suppress pituitary FSH and LH release, rendering the ovaries functionally postmenopausal. This allows safe, effective administration of exemestane or letrozole to maximize recurrence-free survival.",
-      "say": "In high-risk premenopausal patients, combining an aromatase inhibitor with medical ovarian suppression using GnRH agonists like goserelin outperforms tamoxifen alone in preventing recurrence.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "risk",
-            "label": "Premenopausal Patient with High-Risk Nodal Disease"
-          },
-          {
-            "id": "gnrh",
-            "label": "Monthly GnRH Agonist Depot (Goserelin or Leuprolide)"
-          },
-          {
-            "id": "cast",
-            "label": "Suppression of Pituitary Gonadotropins & Ovarian Quiescence"
-          },
-          {
-            "id": "ai",
-            "label": "Addition of Aromatase Inhibitor (Exemestane or Letrozole)"
-          },
-          {
-            "id": "surv",
-            "label": "Significant Reduction in Distant Metastatic Relapse"
-          }
-        ],
-        "edges": [
-          [
-            "risk",
-            "gnrh"
-          ],
-          [
-            "gnrh",
-            "cast"
-          ],
-          [
-            "cast",
-            "ai"
-          ],
-          [
-            "ai",
-            "surv"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Agonist Effects (Other Tissues)",
+     "points": [
+      "Stimulates endometrial glandular proliferation",
+      "Elevates risk of endometrial adenocarcinoma",
+      "Preserves postmenopausal bone mineral density",
+      "Increases hepatic synthesis of clotting factors"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Due to its partial agonist effects on hepatic coagulation factor synthesis, tamoxifen therapy carries a two- to three-fold increased risk of thromboembolic disease. Patients may develop deep vein thrombosis, pulmonary embolism, or retinal vein thrombosis. Tamoxifen is therefore contraindicated in individuals with a documented history of unprovoked venous thromboembolism. Additionally, women taking tamoxifen must report any abnormal vaginal spotting or bleeding promptly, as this may be the first clinical sign of **endometrial adenocarcinoma**.",
+   "say": "Because tamoxifen stimulates hepatic clotting factor synthesis, it increases the risk of deep vein thrombosis and pulmonary embolism. Patients must immediately report any abnormal uterine bleeding to rule out endometrial carcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adverse Effect",
+     "Pathophysiological Mechanism",
+     "Clinical Monitoring Strategy"
+    ],
+    "rows": [
+     [
+      "Thromboembolism",
+      "Increased hepatic clotting factor release",
+      "DVT and PE symptom surveillance"
+     ],
+     [
+      "Endometrial Cancer",
+      "Uterine estrogen receptor agonism",
+      "Annual pelvic exams and transvaginal ultrasound"
+     ],
+     [
+      "Hot Flushes",
+      "Thermoregulatory central estrogen blockade",
+      "Venlafaxine or gabapentin symptom control"
+     ],
+     [
+      "Ocular Toxicity",
+      "Retinal and corneal microcrystalline deposits",
+      "Periodic ophthalmological evaluation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tamoxifen is a prodrug that requires bioactivation by the hepatic cytochrome P450 enzyme CYP2D6 into its active metabolites, 4-hydroxytamoxifen and endoxifen. Endoxifen possesses roughly one hundred times greater affinity for the estrogen receptor than the parent drug. Consequently, co-prescribing strong CYP2D6 inhibitors such as fluoxetine or paroxetine for hot flushes severely impairs tamoxifen activation. When antidepressant therapy is necessary, clinicians select agents with minimal CYP2D6 inhibition, such as **venlafaxine or escitalopram**.",
+   "say": "Tamoxifen requires conversion into its active metabolite endoxifen by the CYP2D6 liver enzyme. Prescribing strong CYP2D6 inhibitors like fluoxetine or paroxetine impairs this conversion, so venlafaxine is preferred for hot flushes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tam",
+      "label": "Oral Tamoxifen Ingestion & Gastrointestinal Absorption"
+     },
+     {
+      "id": "cyp",
+      "label": "Hepatic CYP2D6 Hydroxylation & Bioactivation"
+     },
+     {
+      "id": "endox",
+      "label": "Generation of Highly Active Endoxifen Metabolite"
+     },
+     {
+      "id": "block",
+      "label": "Competitive Inhibition of Nuclear Estrogen Receptors"
+     },
+     {
+      "id": "drug",
+      "label": "Avoid Potent CYP2D6 Inhibitors (Fluoxetine, Paroxetine)"
+     }
+    ],
+    "edges": [
+     [
+      "tam",
+      "cyp"
+     ],
+     [
+      "cyp",
+      "endox"
+     ],
+     [
+      "endox",
+      "block"
+     ],
+     [
+      "drug",
+      "cyp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In postmenopausal breast cancer, aromatase in fat converts adrenal androgens to oestrogen, and blocking that enzyme removes the main remaining source of oestrogen the tumour can use. Tamoxifen is another strategy and a prodrug. CYP2D6 must convert it to 4 hydroxytamoxifen and endoxifen, and endoxifen binds the oestrogen receptor about a hundred times more tightly than the parent. Strong CYP2D6 inhibitors such as fluoxetine or paroxetine, given for hot flushes, cripple that activation. **Venlafaxine or escitalopram** are chosen when an antidepressant is required because they barely inhibit the enzyme.",
+   "say": "After menopause, fat aromatase turns adrenal androgens into the oestrogen that feeds many breast cancers, and inhibiting the enzyme cuts that supply off. Tamoxifen instead must be activated by CYP2D6 to endoxifen, which binds the receptor far more strongly than tamoxifen itself. Fluoxetine and paroxetine block that activation, so venlafaxine or escitalopram is preferred for flushes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n84-sur-breast-cancer-tamoxifen.webp",
+    "alt": "Postmenopausal adipose tissue in which aromatase inhibition stops adrenal androgens becoming oestrogen.",
+    "caption": "In fat after menopause, aromatase no longer converts adrenal androgens to oestrogen once the enzyme is blocked. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "In postmenopausal women, the ovaries are quiescent, and circulating estrogens derive almost entirely from the peripheral conversion of adrenal androgens by the aromatase enzyme in adipose tissue and skeletal muscle. In this demographic, the superior adjuvant standard is therapy with **third-generation aromatase inhibitors**, such as anastrozole, letrozole, or exemestane. These agents achieve profound estrogen suppression by selectively blocking the aromatase enzyme complex throughout peripheral fat depots.",
+   "say": "In postmenopausal women, estrogen is produced primarily through the conversion of adrenal androgens by aromatase in fat tissue. Aromatase inhibitors like anastrozole and letrozole block this enzyme to lower circulating estrogens.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n84-sur-breast-cancer-tamoxifen.webp",
+    "alt": "Aromatase inhibition in postmenopausal breast cancer blocking peripheral conversion of adrenal androgens to oestrogen in fat",
+    "caption": "Aromatase inhibition in postmenopausal breast cancer blocking peripheral conversion of adrenal androgens to oestrogen in fat. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Aromatase inhibitors are classified into non-steroidal and steroidal compounds. Non-steroidal agents such as anastrozole and letrozole bind reversibly to the cytochrome P450 haem prosthetic group of the aromatase enzyme. Conversely, exemestane is a steroidal analogue that acts as a false substrate, irreversibly inactivating the enzyme as a **suicide aromatase inhibitor**. In postmenopausal clinical trials, aromatase inhibitors consistently demonstrated superior disease-free survival and lower recurrence rates than tamoxifen.",
+   "say": "Aromatase inhibitors include non-steroidal drugs like letrozole, which bind reversibly to the enzyme, and steroidal agents like exemestane, which permanently inactivate aromatase as suicide inhibitors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Steroidal (Anastrozole/Letrozole)",
+     "points": [
+      "Reversible binding to aromatase haem group",
+      "Suppresses plasma estradiol over 98 percent",
+      "First-line postmenopausal adjuvant therapy",
+      "Oral once-daily daily administration"
+     ]
+    },
+    "right": {
+     "title": "Steroidal (Exemestane)",
+     "points": [
+      "Irreversible suicide inhibitor mechanism",
+      "Permanent structural enzyme destruction",
+      "Effective after failure of non-steroidal agents",
+      "Slight androgenic steroid side effect profile"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unlike tamoxifen, aromatase inhibitors lack partial estrogenic agonist activity in bone and vascular tissue. Consequently, they do not increase the risk of endometrial cancer or deep vein thrombosis. However, the profound systemic estrogen depletion frequently leads to arthralgias, joint stiffness, and accelerated trabecular bone mineral loss. Baseline dual-energy X-ray absorptiometry scanning is mandatory before starting treatment, and patients with osteopenia require calcium, vitamin D, and concurrent **antiresorptive bisphosphonate therapy**.",
+   "say": "Aromatase inhibitors do not cause endometrial cancer or blood clots, but deep estrogen suppression promotes joint pains and accelerated bone mineral loss, requiring baseline bone density scans and bisphosphonate support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Tamoxifen",
+     "Aromatase Inhibitors"
+    ],
+    "rows": [
+     [
+      "Target Population",
+      "Premenopausal and postmenopausal",
+      "Strictly postmenopausal (or with OFS)"
+     ],
+     [
+      "Mechanism",
+      "Selective receptor modulator (SERM)",
+      "Enzyme inhibitor of peripheral conversion"
+     ],
+     [
+      "Endometrial Risk",
+      "Increased (hyperplasia & carcinoma)",
+      "No increased uterine risk"
+     ],
+     [
+      "Thromboembolism",
+      "Increased (DVT & PE risk)",
+      "No elevated thromboembolic risk"
+     ],
+     [
+      "Bone Mineral Density",
+      "Preserved in postmenopausal women",
+      "Loss of density, osteoporosis, fractures"
+     ],
+     [
+      "Musculoskeletal Pain",
+      "Infrequent joint complaints",
+      "Severe arthralgias and morning stiffness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For high-risk premenopausal women with large primary tumours or multiple positive axillary lymph nodes, international trials have proven that combining an aromatase inhibitor with **ovarian function suppression** is superior to tamoxifen alone. Monthly injections of a gonadotropin-releasing hormone agonist such as goserelin or leuprolide suppress pituitary FSH and LH release, rendering the ovaries functionally postmenopausal. This allows safe, effective administration of exemestane or letrozole to maximize recurrence-free survival.",
+   "say": "In high-risk premenopausal patients, combining an aromatase inhibitor with medical ovarian suppression using GnRH agonists like goserelin outperforms tamoxifen alone in preventing recurrence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "Premenopausal Patient with High-Risk Nodal Disease"
+     },
+     {
+      "id": "gnrh",
+      "label": "Monthly GnRH Agonist Depot (Goserelin or Leuprolide)"
+     },
+     {
+      "id": "cast",
+      "label": "Suppression of Pituitary Gonadotropins & Ovarian Quiescence"
+     },
+     {
+      "id": "ai",
+      "label": "Addition of Aromatase Inhibitor (Exemestane or Letrozole)"
+     },
+     {
+      "id": "surv",
+      "label": "Significant Reduction in Distant Metastatic Relapse"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "gnrh"
+     ],
+     [
+      "gnrh",
+      "cast"
+     ],
+     [
+      "cast",
+      "ai"
+     ],
+     [
+      "ai",
+      "surv"
+     ]
+    ]
+   }
+  }
+ ]
 }
