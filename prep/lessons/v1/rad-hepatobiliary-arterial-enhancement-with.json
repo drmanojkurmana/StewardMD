@@ -15,10 +15,32 @@
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Arterial phase: tumour bright"}, {"id": "b", "label": "Portal phase: tumour fades"}, {"id": "c", "label": "Delayed: washout dark"}, {"id": "d", "label": "Capsule may enhance late"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
   },
   {
+   "tx": "**Arterial phase hyperenhancement** followed by washout is the CT and MRI signature of hepatocellular carcinoma in a cirrhotic liver. New hepatic arterial branches make the mass brighter than liver in the arterial phase. A poor portal supply then leaves it darker than liver in the portal venous and delayed phases. A capsule may appear on those later images. In cirrhosis, that in and out pattern allows a diagnosis of cancer without biopsy.",
+   "say": "In cirrhosis, hepatocellular carcinoma brightens in the arterial phase from new arterial branches, then becomes darker than liver as portal phase washout occurs. A capsule may rim the lesion on later images. That pattern supports the diagnosis without a biopsy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n206-rad-hepatobiliary-arterial-enhancement-with.webp",
+    "alt": "Triphasic liver CT shows a hepatocellular carcinoma that is bright in the arterial phase, dark after washout, and outlined by a capsule.",
+    "caption": "An arterial phase image lights a liver lesion brighter than the surrounding cirrhotic liver, and a later phase shows washout with a capsule. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Haemangioma fills from the edge",
    "tx": "**Peripheral nodular enhancement** that creeps inward is the haemangioma pattern: discontinuous bright nodules at the lesion edge in the arterial phase match blood pool density at every phase, then fill centripetally until the lesion is uniform. Small haemangiomas can flash fill completely and mimic cancer, but they stay bright on delayed images instead of washing out, and they shine very bright on T2 MRI like a light bulb.",
    "say": "Peripheral nodular enhancement creeping inward is the haemangioma pattern: bright edge nodules match blood pool at every phase, then fill toward the centre. Small lesions can flash fill and mimic cancer, but they stay bright on delayed images instead of washing out, and shine very bright on T2 like a light bulb.",
    "vis": {"kind": "compare", "left": {"title": "Haemangioma", "points": ["Peripheral nodules first", "Matches blood pool density", "Centripetal fill in", "No washout, T2 light bulb"]}, "right": {"title": "Hepatocellular carcinoma", "points": ["Whole lesion arterial bright", "Washout in portal phase", "Enhancing capsule late", "Cirrhotic liver background"]}}
+  },
+  {
+   "tx": "**Peripheral nodular enhancement** that creeps inward is the haemangioma pattern. Discontinuous bright nodules at the edge during the arterial phase match the density of blood pool in every phase, then fill toward the centre until the lesion looks uniform. A small haemangioma may flash fill and imitate cancer, but it stays bright on delayed images instead of washing out. On T2 weighted MRI the same lesion is extremely bright, like a light bulb.",
+   "say": "Haemangioma enhancement begins as discontinuous bright edge nodules that match blood pool and then fill inward. A tiny lesion may fill at once and mimic cancer, yet it remains bright on delayed images rather than washing out, and it is very bright on T2 weighted MRI.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n207-rad-hepatobiliary-arterial-enhancement-with.webp",
+    "alt": "Liver CT shows a haemangioma with discontinuous peripheral nodules that fill toward the centre.",
+    "caption": "Bright nodules at the edge of a liver lesion match blood pool and extend inward on later phases. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Focal nodular hyperplasia keeps its scar",

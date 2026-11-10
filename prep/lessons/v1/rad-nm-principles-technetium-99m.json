@@ -15,6 +15,17 @@
    "vis": {"kind": "table", "cols": ["Property", "Technetium 99m", "Why it matters"], "rows": [["Gamma energy", "140 keV", "Matches gamma camera crystal"], ["Physical half life", "6 hours", "Image today, dose gone tomorrow"], ["Decay mode", "Isomeric transition", "No particle dose in patient"], ["Chemistry", "Many labelled kits", "One isotope, many organs"]]}
   },
   {
+   "tx": "**Technetium 99m** dominates nuclear medicine because it emits one 140 kiloelectronvolt gamma photon that a gamma camera detects efficiently. Its physical half life of six hours is long enough for imaging and short enough to limit dose. Kits bind it for bone, kidney, heart, liver, and infection studies. Decay is an isomeric transition, so the photon is released without particle radiation left in the patient. No rival isotope matches that clean profile at a similar cost, which is why a routine whole body bone scan uses this tracer.",
+   "say": "Technetium 99m emits a single 140 kiloelectronvolt gamma and decays with a six hour half life, which suits the camera and limits dose. Different kits send it to bone, kidney, heart, liver, or sites of infection. The photon comes from an isomeric transition, without particle radiation in the patient.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n236-rad-nm-principles-technetium-99m.webp",
+    "alt": "A whole body gamma camera image shows a technetium bone scan with the skeleton outlined.",
+    "caption": "Planar images from head to feet display skeletal uptake of a technetium tracer against a quieter background. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "The molybdenum generator cow",
    "tx": "**Molybdenum technetium generator** ships parent molybdenum 99, half life sixty six hours, adsorbed on an alumina column, and saline elution milks off the technetium daughter as pertechnetate each morning. Daughter regrows to a new peak about twenty four hours after each milking, so one generator serves a department for roughly a week. Alumina breakthrough and molybdenum contamination are assayed because both add useless patient dose.",
    "say": "Molybdenum generator ships parent molybdenum 99 on an alumina column, and saline milks off the technetium daughter each morning. Daughter regrows to a peak about twenty four hours after each milking, so one generator serves about a week. Contamination is assayed because it adds useless dose.",
@@ -37,6 +48,17 @@
    "tx": "**Positron emission tomography** detects the paired 511 kiloelectronvolt photons fired back to back when a positron from fluorine 18, carbon 11, nitrogen 13 or oxygen 15 annihilates with an electron. Coincidence detection of that pair draws the line of response electronically, no lead collimator needed, buying sensitivity and resolution near four to five millimetres. Cyclotrons make the short lived parent isotopes, fluorine 18 at one hundred ten minutes being just shippable.",
    "say": "PET detects paired five hundred eleven kiloelectronvolt photons fired back to back when a positron annihilates with an electron. Coincidence detection draws the response line electronically without a collimator, buying resolution near four to five millimetres. Fluorine 18 at one hundred ten minutes is just shippable.",
    "vis": {"kind": "table", "cols": ["Isotope", "Half life", "Typical tracer"], "rows": [["Fluorine 18", "110 minutes", "FDG glucose analogue"], ["Carbon 11", "20 minutes", "On site cyclotron tracers"], ["Gallium 68", "68 minutes", "PSMA and DOTATATE"], ["Rubidium 82", "75 seconds", "Generator myocardial perfusion"]]}
+  },
+  {
+   "tx": "**Positron emission tomography** detects the paired 511 kiloelectronvolt photons that leave in opposite directions when a positron from fluorine 18, carbon 11, nitrogen 13, or oxygen 15 annihilates with an electron. Coincidence timing of that pair draws the line of response electronically, and no lead collimator is required. Sensitivity rises, and resolution is near 4 to 5 mm. Cyclotrons make the short lived parent isotopes. Fluorine 18, with a half life of 110 minutes, is just long lived enough to ship from the cyclotron to the scanner.",
+   "say": "PET records two 511 kiloelectronvolt photons that fly apart when a positron meets an electron. Accepting only coincident pairs draws the line of response without a lead collimator and gives resolution near 4 to 5 mm. Fluorine 18 lasts about 110 minutes, just long enough to transport.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n237-rad-nm-principles-technetium-99m.webp",
+    "alt": "A PET detector ring records two opposite 511 kiloelectronvolt photons from a positron annihilation.",
+    "caption": "Detectors on opposite sides of a ring accept a photon pair only when both arrive together, drawing a line through the patient. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Half lives combine into effective decay",

@@ -15,6 +15,17 @@
    "vis": {"kind": "table", "cols": ["Wall feature", "Favours malignancy", "Favours benign"], "rows": [["Maximum thickness", "Over 15 mm", "Under 4 mm"], ["Inner margin", "Irregular, nodular", "Smooth"], ["Outer margin", "Spiculated", "Well defined"], ["Contents", "Solid mural nodule", "Mobile fungal ball"]]}
   },
   {
+   "tx": "A **lung cavity** is a gas filled space inside a consolidation, mass, or nodule, formed when a necrotic centre drains out through a bronchus. Wall thickness points to the cause. A wall thicker than 15 mm with an irregular inner edge favours squamous cell carcinoma. A wall thinner than 4 mm and smooth favours a benign cyst, a bulla, or infection that is resolving. An air crescent around a fungal ball is a separate pattern between those extremes.",
+   "say": "Necrotic lung tissue that drains through a bronchus leaves a gas filled space inside a mass, nodule, or consolidation. An irregular wall thicker than 15 mm favours squamous carcinoma, while a smooth wall under 4 mm favours a cyst, bulla, or fading infection. A fungal ball with an air crescent sits between those two patterns.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n198-rad-chest-lung-cavity.webp",
+    "alt": "An HRCT slice of a thick walled lung cavity with an irregular inner margin typical of squamous carcinoma.",
+    "caption": "A gas filled space sits inside a mass, and the wall is thick with an uneven inner edge. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Tuberculosis loves the upper lobes",
    "tx": "**Post primary tuberculosis** cavitates in the apical and posterior segments of upper lobes and the superior segment of lower lobes, where high oxygen tension suits the bacillus. Multiple thin walled cavities with surrounding tree in bud nodules and fibrosis mark active disease needing isolation and sputum testing. A thick walled single cavity with weight loss in a smoker instead earns a malignancy workup first.",
    "say": "Post primary tuberculosis cavitates in the apical and posterior upper lobe segments and the superior lower lobe segment, where high oxygen suits the bacillus. Multiple thin walled cavities with tree in bud nodules mark active disease needing isolation. A thick walled single cavity with weight loss in a smoker earns a malignancy workup first.",
@@ -25,6 +36,17 @@
    "tx": "**Air crescent sign** is the crescent of air capping a fungal ball inside a pre existing cavity, classically an aspergilloma in an old tuberculous space. The ball moves when the patient rolls, which is the Monod sign, separating it from a clot or tumour fixed to the wall. In a neutropenic patient an air crescent instead means recovering invasive aspergillosis as white cells return and dead lung retracts.",
    "say": "Air crescent sign is the crescent of air capping a fungal ball inside a pre existing cavity, classically an aspergilloma in an old tuberculous space. The ball moves when the patient rolls, the Monod sign, separating it from fixed clot or tumour. In neutropenic patients it instead means recovering invasive aspergillosis.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Old cavity exists"}, {"id": "b", "label": "Fungal ball grows inside"}, {"id": "c", "label": "Air crescent caps it"}, {"id": "d", "label": "Ball moves on rolling"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "The **air crescent sign** is a rim of air over a fungal ball lying in a cavity that already existed, classically an aspergilloma inside an old tuberculous space. When the patient rolls, the ball moves, which is the Monod sign, and that movement separates it from clot or tumour stuck to the wall. In a neutropenic patient the same crescent means something else: invasive aspergillosis that is recovering as white cells return and dead lung pulls away.",
+   "say": "Air capping a fungal ball inside an old tuberculous cavity is the air crescent of an aspergilloma. The ball shifts when the patient turns, the Monod sign, unlike clot or tumour fixed to the wall. During neutropenia the same crescent instead marks invasive aspergillosis recovering as neutrophils return and necrotic lung retracts.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n199-rad-chest-lung-cavity.webp",
+    "alt": "A CT slice of an old tuberculous cavity containing a fungal ball capped by a crescent of air.",
+    "caption": "A mobile soft tissue ball rests in a preexisting cavity, separated from the wall by a crescent of air. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Tree in bud means small airway pus",

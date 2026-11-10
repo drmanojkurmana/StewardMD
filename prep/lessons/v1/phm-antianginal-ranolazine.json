@@ -22,6 +22,17 @@
       }
     },
     {
+      "tx": "Ischaemic muscle lets sodium leak through the persistent late sodium current. Calcium then enters on the sodium calcium exchanger, the cell loads with calcium, and the stiff ventricle relaxes badly. **Ranolazine** blocks the late current, diastolic wall tension falls, and flow to the subendocardium improves. Heart rate and blood pressure do not change. That silence is why the drug can be added when rate and pressure leave no room for a beta blocker or a nitrate.",
+      "say": "Ischaemia leaves a late sodium leak, calcium follows through the exchanger, and the stiff ventricle relaxes poorly. Ranolazine closes that late current so diastolic tension falls and inner wall perfusion improves, without changing heart rate or blood pressure. It is added when those two cannot be lowered any further.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n101-phm-antianginal-ranolazine.webp",
+        "alt": "An ischaemic myocyte diagram shows sodium entering through the late sodium current, calcium loading through sodium calcium exchange, and ranolazine blocking the late current.",
+        "caption": "Late sodium entry in an ischaemic muscle cell pulls calcium in through the exchanger, and ranolazine is shown closing that late current. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "Ranolazine prolongs the **QT interval** modestly by blocking the rapid delayed rectifier potassium current, yet torsades is rare because its sodium blockade simultaneously suppresses early afterdepolarisations. It is contraindicated with strong CYP3A4 inhibitors and in significant liver disease, and it raises levels of digoxin and simvastatin. Dizziness, constipation and nausea are the common complaints; the dose ceiling is 1000 mg twice daily in American labelling.",
       "say": "QT lengthens a little on ranolazine but torsades stays rare; mind CYP3A4 partners and liver disease.",
       "vis": {
@@ -97,6 +108,17 @@
           { "id": "pure", "label": "Contractility, conduction and pressure unchanged" }
         ],
         "edges": [["if", "iva"], ["iva", "slow"], ["slow", "pure"]]
+      }
+    },
+    {
+      "tx": "The pacemaker current If, called the funny current, sets how quickly the sinoatrial node drifts up to threshold. **Ivabradine** blocks that current and nothing else important, so heart rate falls while contractility, conduction and blood pressure stay the same. It suits chronic stable angina and heart failure when sinus rhythm persists above 70 beats per minute despite beta blockade, or when beta blockers are contraindicated. Atrial fibrillation makes it useless, because the node is no longer the pacemaker.",
+      "say": "Ivabradine blocks only the funny current that lets the sinus node reach threshold, so pulse rate falls and contractility, conduction and pressure do not. It helps sinus rhythm above 70 in angina or heart failure despite beta blockade, or when beta blockers cannot be used. In atrial fibrillation the node is not setting the rate, so the drug has no job.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n102-phm-antianginal-ranolazine.webp",
+        "alt": "A sinoatrial node tracing shows the funny current driving diastolic depolarisation, flattened where ivabradine blocks the channel.",
+        "caption": "Diastolic drift of the sinus node membrane is flattened at the funny current, the current ivabradine blocks. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
