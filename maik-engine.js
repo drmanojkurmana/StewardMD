@@ -864,7 +864,7 @@
     function row(v, label, badge, desc, first) { return opt(v, label, badge, desc, first, false, cur === v, "data-me-edge"); }
     var size = (M && M.sizeLabel) ? M.sizeLabel(fid) : "290 MB";
     var dl = (!fgHave && native && P && P.Llama && M && M.ensure)
-      ? '<div style="display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px">' +
+      ? '<div class="me-edgedl" style="display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px">' +
           '<span style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
             '<span data-me-status="' + fid + '" aria-live="polite">' + (st.downloading ? (st.frac * 100).toFixed(1) + "% of " + size : "FunctionGemma is not on this phone · " + size) + '</span>' +
             '<span data-me-bar="' + fid + '" style="display:block"></span></span>' +
@@ -1001,7 +1001,7 @@
   function cloudBlockHTML() {
     var on = lget("smd_ai_cloud_block") === "1";
     var n = 0; try { n = window.__SMD_CLOUD_ATTEMPTS || 0; } catch (e) {}
-    return '<div style="padding:10px 14px 12px">' +
+    return '<div class="me-cloudblock" style="padding:10px 14px 12px">' +
       '<div style="font:700 13px/1.3 var(--sans,system-ui)">Test: block cloud AI on this phone</div>' +
       '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:3px">' +
         (on ? 'ON. Every cloud AI request from this phone is stopped and counted. Attempts stopped this session: <b>' + n + '</b>. With the on-device engine selected this number should stay at 0.'
@@ -1067,12 +1067,12 @@
       PhD: { code: "PhD", blurb: "Broad knowledge, not a doctor. Answer everything you want." }
     };
     function rung(code, who) {
-      return '<div style="border:1px solid var(--line,#e2e8f0);border-radius:12px;background:var(--panel,#fff);padding:9px 10px">' +
+      return '<div class="me-rung" style="border:1px solid var(--line,#e2e8f0);border-radius:12px;background:var(--panel,#fff);padding:9px 10px">' +
         gradePill(code) + '<span style="display:block;font:700 12.5px/1.3 var(--sans,system-ui);margin-top:6px">' + esc(who) + '</span>' +
         '<span style="display:block;font:500 11.5px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(G[code].blurb) + '</span></div>';
     }
-    return '<div style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:0 0 8px 2px">Every model here is a MaiK. The grade says how it was trained: MBBS, MD and DM are doctors, PhD is a scholar.</div>' +
-      '<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;margin-bottom:10px">' +
+    return '<div class="me-intro" style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin:0 0 8px 2px">Every model here is a MaiK. The grade says how it was trained: MBBS, MD and DM are doctors, PhD is a scholar.</div>' +
+      '<div class="me-ladder" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px;margin-bottom:10px">' +
       rung("MBBS", "MAiK Lite") + rung("MD", "Medical specialists") + rung("DM", "MaiK Cloud") + rung("PhD", "General models") + '</div>';
   }
 
@@ -1275,7 +1275,7 @@
    */
   function ragLinkHTML() {
     var on = ragLinked();
-    return '<div style="border-top:1px solid var(--line,#e2e8f0);padding:2px 14px">' +
+    return '<div class="me-kb" style="border-top:1px solid var(--line,#e2e8f0);padding:2px 14px">' +
         '<div class="smd-nav-row">' +
           '<div class="smd-nav-rl">' +
             '<div class="smd-nav-lbl">Check answers against the Knowledge Base</div>' +
@@ -1330,7 +1330,7 @@
     var M = window.SMD_MAIK_MODELS;
     var t = (M && M.DEVICE_WARNING) || "";
     if (!t) return "";
-    return '<div role="note" style="display:flex;gap:8px;align-items:flex-start;border:1px solid var(--yellow-line,#f0d49b);' +
+    return '<div role="note" class="me-warn" style="display:flex;gap:8px;align-items:flex-start;border:1px solid var(--yellow-line,#f0d49b);' +
       'background:var(--yellow-bg,#fdf2de);color:var(--yellow,#92620a);border-radius:12px;padding:10px 12px;margin:0 0 8px">' +
       '<span aria-hidden="true" style="flex:0 0 auto;font:800 13px/1.4 var(--sans,system-ui)">!</span>' +
       '<span style="font:600 12.5px/1.5 var(--sans,system-ui)">' + esc(t) + '</span>' +
