@@ -23,7 +23,7 @@
   "steps": [
     {
       "say": "Anti-Mullerian hormone is the most dependable serum biomarker of functional ovarian reserve. Because preantral follicle secretion remains consistent across all cycle phases, it shows minimal intra-cycle variation.",
-      "tx": "Serum **Anti-Mullerian hormone** demonstrates negligible fluctuations across consecutive menses, exhibiting negligible **intra-cycle variation**. This stability establishes AMH as the preeminent **ovarian reserve marker**, reflecting the quantity of responsive preantral and small antral follicles without requiring specific cycle-day scheduling. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "tx": "Serum **Anti-Mullerian hormone** demonstrates negligible fluctuations across consecutive menses, exhibiting negligible **intra-cycle variation**. This stability establishes AMH as the preeminent **ovarian reserve marker**, reflecting the quantity of responsive preantral and small antral follicles without requiring specific cycle-day scheduling. A single blood draw for this marker can therefore be scheduled on any convenient cycle day.",
       "vis": {
         "kind": "table",
         "rows": [
@@ -62,7 +62,7 @@
     },
     {
       "say": "Serum AMH cutoffs guide stimulation protocol choice and alert clinicians to excessive response. Levels under 1.1 ng/mL signal reduced reserve, whereas levels over 3.5 ng/mL flag elevated hyperstimulation risk.",
-      "tx": "Stratification by **AMH thresholds** shapes clinical management. A concentration below 1.1 ng/mL indicates **diminished ovarian reserve** with anticipated poor oocyte yield, while an AMH reading above 3.5 ng/mL conveys significant **OHSS risk**, mandating GnRH antagonist protocols and agonist trigger strategies. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "tx": "Stratification by **AMH thresholds** shapes clinical management. A concentration below 1.1 ng/mL indicates **diminished ovarian reserve** with anticipated poor oocyte yield, while an AMH reading above 3.5 ng/mL conveys significant **OHSS risk**, mandating GnRH antagonist protocols and agonist trigger strategies. The result directly sets gonadotropin starting dose and the safety plan chosen for stimulation ahead.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -126,7 +126,7 @@
     },
     {
       "say": "Measuring follicle stimulating hormone early in the cycle evaluates pituitary feedback restraint. Serum FSH above 10 IU/L on days 2 or 3 suggests dwindling follicles, while levels above 20 predict poor stimulation.",
-      "tx": "Evaluating **basal FSH** on **cycle day 3** reveals loss of negative feedback inhibition from reduced inhibin B and estradiol. Values exceeding 10 IU/L suggest diminishing functional **ovarian reserve**, while concentrations surpassing 20 IU/L predict poor oocyte retrieval and high cancellation rates. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "tx": "Evaluating **basal FSH** on **cycle day 3** reveals loss of negative feedback inhibition from reduced inhibin B and estradiol. Values exceeding 10 IU/L suggest diminishing functional **ovarian reserve**, while concentrations surpassing 20 IU/L predict poor oocyte retrieval and high cancellation rates. FSH is consequently best read alongside estradiol and antral follicle count rather than interpreted alone.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -159,7 +159,7 @@
     },
     {
       "say": "Always pair early FSH testing with a matching estradiol measurement. When day 3 estradiol climbs over 60 to 80 pg/mL, advanced recruitment suppresses FSH into misleadingly normal laboratory ranges.",
-      "tx": "Solitary FSH testing risks misinterpretation without simultaneous **basal estradiol** evaluation on day 3. Accelerated **early recruitment** produces premature estrogen elevation above 60 to 80 pg/mL, which downregulates pituitary output and creates a **false normal FSH** reading despite profound reserve compromise. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "tx": "Solitary FSH testing risks misinterpretation without simultaneous **basal estradiol** evaluation on day 3. Accelerated **early recruitment** produces premature estrogen elevation above 60 to 80 pg/mL, which downregulates pituitary output and creates a **false normal FSH** reading despite profound reserve compromise. Paired day three results prevent a falsely reassuring label in women who need timely treatment planning.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -223,7 +223,7 @@
     },
     {
       "say": "Addressing heterogeneity among low responders led to the POSEIDON classification. Patients are stratified into four distinct prognostic groups by integrating age, reserve markers, and actual stimulation response.",
-      "tx": "The **POSEIDON criteria** refine management of **low prognosis** patients undergoing ART by establishing 4 distinct groups. This system separates expected poor responders from the **unexpected poor responder** who possesses adequate pre-stimulation biomarkers yet produces an inadequate oocyte cohort. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "tx": "The **POSEIDON criteria** refine management of **low prognosis** patients undergoing ART by establishing 4 distinct groups. This system separates expected poor responders from the **unexpected poor responder** who possesses adequate pre-stimulation biomarkers yet produces an inadequate oocyte cohort. That separation changes counselling because expected and unexpected poor responders need genuinely different stimulation strategies.",
       "vis": {
         "kind": "table",
         "rows": [
@@ -258,6 +258,17 @@
           "Ovarian Biomarkers (AFC / AMH)",
           "Ovarian Response"
         ]
+      }
+    },
+    {
+      "tx": "Grouping poor prognosis patients by numbers alone hides why two women with the same oocyte yield need different plans. The classification in the picture combines age with **POSEIDON groups** built from AMH or antral count and the response to a previous cycle. A young woman with good markers but an unexpectedly low yield is separated from an older patient whose low reserve predicted the result from the start.",
+      "say": "POSEIDON groups combine age, AMH or antral follicle count and prior oocyte yield. Unexpected and expected poor responders are managed differently.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-s44-srm-ovarian-reserve-testing.webp",
+        "alt": "POSEIDON low prognosis grouping chart combining age, AMH or AFC and prior oocyte yield",
+        "caption": "POSEIDON low prognosis groups combine age with AMH or AFC and prior oocyte yield in one chart. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
