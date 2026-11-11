@@ -173,6 +173,17 @@ test("celebrate paths are the boot splash's trace paths, verbatim", () => {
 });
 
 test("engagement notifier routes through SMD_CELEBRATE with once-per-achievement keys", () => {
-  assert.match(ENG, /SMD_CELEBRATE\.show\(\{ title: n\.title, detail: n\.body, key: n\.key \}\)/);
-  assert.match(ENG, /"lvl:" \+ n\.level/); assert.match(ENG, /"badge:" \+ id/); assert.match(ENG, /"tier:" \+ n\.discount/); assert.match(ENG, /"quest:"/);
+  assert.match(ENG, /SMD_CELEBRATE\.show\(\{ title: n\.title, detail: n\.body, key: n\.key, big: n\.big \}\)/);
+  // keys are per account now (uid prefix), so a shared device celebrates each doctor's own unlocks
+  assert.match(ENG, /":lvl:" \+ n\.level/); assert.match(ENG, /":badge:" \+ id/); assert.match(ENG, /":tier:" \+ n\.discount/); assert.match(ENG, /":quest:"/);
+  assert.match(ENG, /":streak:" \+ m/);
+});
+
+test("confetti: every celebration bursts, pointer-events none, reduced motion and kill switch respected", () => {
+  const CEL = readFileSync(new URL("../smd-celebrate.js", import.meta.url), "utf8");
+  assert.match(CEL, /if \(!o\.noConfetti\) confetti\(/);
+  assert.match(CEL, /pointer-events:none/);
+  assert.match(CEL, /!confettiOn\(\) \|\| reduced\(\) \|\| document\.hidden/);
+  assert.match(CEL, /"smd_confetti"\) !== "0"/);
+  assert.match(CEL, /confetti: confetti/);
 });

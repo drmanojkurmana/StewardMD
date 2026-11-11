@@ -12226,3 +12226,7 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - ku.js listens to Firebase auth directly (Firebase loads lazily and can restore a session without SMD_ACCOUNT emitting), so the header Knowledge Units chip shows for signed-in doctors.
 - The KU chip sits right-aligned before Search. Phones: slimmer mark and compact chip so the header fits 320-430 px with a 5-digit KU count; below 381 px the header Pro chip yields while KU shows (the banner says Pro).
 - Frosted/Liquid: the quick-action card over the hero stays 84-90% opaque. First-row icons carry the brand teal; the second row stays neutral.
+
+## 2026-11-11 Celebrations get confetti (reverses 2026-10-03 "no confetti")
+- Owner: every achievement or award gets an on-screen confetti celebration. smd-celebrate.js fires one canvas burst (pointer-events:none, brand colours, ~2.4 s) with every card, so all callers (KU level/badge/reward/quest/streak, PG logbook, CliniX) get it. Off under reduced motion or a hidden page; kill switch localStorage smd_confetti = "0" (smd_celebrate = "0" still turns off the whole celebration).
+- engagement.js keeps the last progress snapshot per account in localStorage (smd_eng_snap:<uid>), so awards granted while the app was closed celebrate on the next open; the first snapshot on a device is a silent baseline. Streak milestones 3/7/14/30/50/100/200/365 now celebrate. Keys are uid-prefixed.

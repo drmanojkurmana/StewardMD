@@ -6,10 +6,14 @@
  *
  * The StewardMD mark draws itself using the boot splash's own trace paths (index.html .sbs-logo-trace,
  * copied here, the splash is not edited), a check settles, the title rises in, success haptic. ~700 ms.
- * Compact card on the bottom safe area; no confetti, no focus steal, never blocks the page behind it
+ * Compact card on the bottom safe area, no focus steal, never blocks the page behind it
  * (the host is pointer-events:none, only the card takes touches). Tap or swipe down dismisses;
  * auto-dismiss ~2.6 s; exit is faster than enter. Queue plays one at a time.
  * Kill switch: localStorage "smd_celebrate" = "0". Reduced motion: static mark + text, fade only (CSS).
+ * CONFETTI (owner 2026-11-11, reversing the 2026-10-03 "no confetti"): every celebration fires one
+ * burst from both bottom corners on a pointer-events:none canvas (~2.4 s, brand colours). Skipped under
+ * reduced motion and when the page is hidden; its own kill switch: localStorage "smd_confetti" = "0".
+ * Also callable alone: SMD_CELEBRATE.confetti().
  * `key` makes an achievement fire once ever (persisted in "smd_celebrated"), so a re-render or reload
  * of the same achievement never repeats it. */
 (function () {
@@ -74,6 +78,62 @@
     document.head.appendChild(s);
   }
 
+  function confettiOn() { try { return localStorage.getItem("smd_confetti") !== "0"; } catch (e) { return true; } }
+  function reduced() { try { return !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; } }
+  var COLORS = ["#0E6A5F", "#3fc4a0", "#8fe3c8", "#F4A62A", "#ffd36b", "#ffffff", "#5aa9ff", "#ff7a8a"];
+  var fx = null;   // one canvas, reused; a second burst adds pieces to the running one
+  function confetti(opts) {
+    try {
+      if (!confettiOn() || reduced() || document.hidden) return false;
+      var W = window.innerWidth, H = window.innerHeight, dpr = Math.min(2, window.devicePixelRatio || 1);
+      if (!fx) {
+        var cv = document.createElement("canvas");
+        cv.id = "smdConfetti"; cv.setAttribute("aria-hidden", "true");
+        cv.style.cssText = "position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:99999";
+        document.body.appendChild(cv);
+        fx = { cv: cv, ctx: cv.getContext("2d"), parts: [], raf: 0, last: 0 };
+      }
+      fx.cv.width = Math.round(W * dpr); fx.cv.height = Math.round(H * dpr);
+      fx.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.round(((opts && opts.count) || 140) * Math.min(1.4, Math.max(0.7, W / 400)));
+      for (var i = 0; i < n; i++) {
+        var left = i % 2 === 0, ang = (left ? -62 : -118) + (Math.random() * 30 - 15);   // up and inwards
+        var sp = (H * 0.0021 + 1.1) * (0.75 + Math.random() * 0.55) * 7;
+        fx.parts.push({
+          x: left ? -8 : W + 8, y: H * 0.86 + Math.random() * 20,
+          vx: Math.cos(ang * Math.PI / 180) * sp, vy: Math.sin(ang * Math.PI / 180) * sp,
+          w: 6 + Math.random() * 6, h: 4 + Math.random() * 5, r: Math.random() * 6.28, vr: (Math.random() - .5) * .35,
+          tilt: Math.random() * 6.28, vt: .08 + Math.random() * .12, c: COLORS[(Math.random() * COLORS.length) | 0],
+          round: Math.random() < .28, life: 0, max: 150 + Math.random() * 60
+        });
+      }
+      if (!fx.raf) { fx.last = 0; fx.raf = requestAnimationFrame(tick); }
+      return true;
+    } catch (e) { return false; }
+  }
+  function tick(ts) {
+    var f = fx; if (!f) return;
+    var dt = f.last ? Math.min(2.2, (ts - f.last) / 16.67) : 1; f.last = ts;
+    var W = window.innerWidth, H = window.innerHeight, ctx = f.ctx;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = f.parts.length - 1; i >= 0; i--) {
+      var p = f.parts[i];
+      p.life += dt;
+      p.vy += 0.32 * dt; p.vx *= Math.pow(0.985, dt); p.vy *= Math.pow(0.99, dt);
+      p.x += p.vx * dt + Math.sin(p.tilt) * .6; p.y += p.vy * dt; p.r += p.vr * dt; p.tilt += p.vt * dt;
+      if (p.life > p.max || p.y > H + 40) { f.parts.splice(i, 1); continue; }
+      var a = p.life > p.max * .7 ? Math.max(0, 1 - (p.life - p.max * .7) / (p.max * .3)) : 1;
+      ctx.globalAlpha = a; ctx.fillStyle = p.c;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r); ctx.scale(1, Math.cos(p.tilt));
+      if (p.round) { ctx.beginPath(); ctx.arc(0, 0, p.w * .42, 0, 6.283); ctx.fill(); } else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    }
+    ctx.globalAlpha = 1;
+    if (f.parts.length) { f.raf = requestAnimationFrame(tick); return; }
+    try { f.cv.remove(); } catch (e) {}
+    fx = null;
+  }
+
   function getHost() {
     if (host && host.parentNode) return host;
     host = document.createElement("div");
@@ -102,6 +162,7 @@
     showing = rec;
     getHost().appendChild(card);
     try { if (window.SMD_HAPTICS && window.SMD_HAPTICS.success) window.SMD_HAPTICS.success(); } catch (e) {}
+    if (!o.noConfetti) confetti({ count: o.big ? 200 : 140 });
     rec.timer = setTimeout(function () { dismiss(rec); }, HOLD_MS);
     // tap or swipe down dismisses; a quick flick counts, distance is not required
     var y0 = null, t0 = 0, dy = 0;
@@ -138,11 +199,11 @@
       if (!o || !o.title || !enabled()) return false;
       if (o.key) { if (seen().indexOf(o.key) >= 0) return false; remember(o.key); }
       if (queue.length >= MAX_QUEUE) queue.shift();
-      queue.push({ title: String(o.title), detail: o.detail ? String(o.detail) : "" });
+      queue.push({ title: String(o.title), detail: o.detail ? String(o.detail) : "", big: !!o.big, noConfetti: !!o.noConfetti });
       next();
       return true;
     } catch (e) { return false; }
   }
 
-  window.SMD_CELEBRATE = { show: show, enabled: enabled, _state: function () { return { queued: queue.length, showing: !!showing }; } };
+  window.SMD_CELEBRATE = { show: show, enabled: enabled, confetti: confetti, _state: function () { return { queued: queue.length, showing: !!showing }; } };
 })();
