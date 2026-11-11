@@ -612,6 +612,14 @@
     b.tries = (b.tries || 0) + 1; b.best = Math.max(b.best || 0, right); if (r.bossWon && !b.won) b.won = Date.now();
     r.bossRight = right; H.save();
     bossResult(r);
+    // Owner 2026-11-11: beating a boss is a full celebration (card, big confetti, celebration buzz), once per fight.
+    if (r.bossWon) {
+      var bk = "prepboss:" + sid + ":" + (r.t0 || Date.now()), bd = right + " of " + r.items.length + " right, " + livesLeft(r) + (livesLeft(r) === 1 ? " life" : " lives") + " to spare";
+      try {
+        if (G.SMD_BOSS_CELE) G.SMD_BOSS_CELE.play({ eyebrow: subjName(sid) + " boss beaten", title: "You are the boss", detail: bd, key: bk });
+        else if (G.SMD_CELEBRATE) G.SMD_CELEBRATE.show({ title: subjName(sid) + " boss beaten", detail: bd, key: bk, big: true });
+      } catch (e) {}
+    }
   }
   function bossResult(r) {
     var won = r.bossWon, sid = r.bossSid;

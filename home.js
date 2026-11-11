@@ -3224,7 +3224,8 @@
       chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none";
     }
     paint(); try { SMD_KU.onChange(paint); } catch (e) {}
-    var anchor = hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
+    // Home header: the chip sits before the two icon buttons (search, more) so they stay a pair.
+    var anchor = (hdr.classList.contains("hrf-head") && hdr.querySelector('[data-act="search"]')) || hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
     if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
     try { SMD_KU.summary(); } catch (e) {}   // refresh balance from server on home mount
   }
@@ -3841,6 +3842,8 @@
   /* The role label, read defensively. SMD_ROLE is shared by role-features.js and native-watch.js,
    * and native-watch.js once REPLACED it on phones, leaving no labelOf: Profile threw here, before
    * its sheet opened, and every tap on it did nothing. An optional line must never cost the page. */
+  // Male unless the doctor chose Female (owner 2026-11-11); picks the doctor in the boss celebration.
+  function acctGenderLabel() { try { return (window.SMD_GENDER ? SMD_GENDER.get() : localStorage.getItem("smd_gender")) === "female" ? "Female" : "Male"; } catch (e) { return "Male"; } }
   function acctRoleLabel() {
     try {
       var R = window.SMD_ROLE;
@@ -3932,6 +3935,7 @@
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
         row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
         row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Gender", "gender", { value: acctGenderLabel(), placeholder: "Male", editLabel: "Change" }) +
         row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
@@ -4012,6 +4016,7 @@
           row("Hospital", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
           row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
           row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
+          row("Gender", "gender", { value: acctGenderLabel(), placeholder: "Male", editLabel: "Change" }) +
           row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
         '</div>' +
 
@@ -4457,6 +4462,8 @@
         if (R0) setRow("role", R0.labelOf(R0.current() || d.role), R0.isVerified() ? { edit: false } : { editLabel: (R0.current() || d.role) ? "Change" : "Choose" });
       } catch (e) {}
       setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
+      if (d.gender === "male" || d.gender === "female") { try { if (window.SMD_GENDER) SMD_GENDER.set(d.gender); else localStorage.setItem("smd_gender", d.gender); } catch (e) {} }
+      setRow("gender", acctGenderLabel(), { editLabel: "Change" });
       setRow("city", d.city);
       setRow("phone", d.phone);
       if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
@@ -4517,6 +4524,15 @@
                   if (window.toast) toast("Role updated. Home now shows the tools for a " + RL.labelOf(k) + ".");
                   openAccount();
                 }).catch(function () { if (window.toast) toast("Saved on this device. It will sync when you are online."); openAccount(); });
+              });
+              return;
+            }
+            if (f === "gender") {
+              openChoicePicker("Gender", ["Male", "Female"], function (val) {
+                var g = val === "Female" ? "female" : "male";
+                try { if (window.SMD_GENDER) SMD_GENDER.set(g); else localStorage.setItem("smd_gender", g); } catch (e) {}
+                save({ gender: g }).then(function () { if (window.toast) toast("Gender updated"); openAccount(); })
+                  .catch(function () { if (window.toast) toast("Saved on this device. It will sync when you are online."); openAccount(); });
               });
               return;
             }

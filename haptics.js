@@ -99,6 +99,13 @@
     success: function () { notify(NOTIF.success, "success"); },
     warning: function () { notify(NOTIF.warning, "warning"); },
     error: function () { notify(NOTIF.error, "error"); },
+    // Confetti: a success note then three quick pops that feel like the burst (owner 2026-11-11).
+    celebrate: function () {
+      notify(NOTIF.success, "success");
+      setTimeout(function () { impact(IMPACT.heavy, "heavy"); }, 140);
+      setTimeout(function () { impact(IMPACT.medium, "medium"); }, 250);
+      setTimeout(function () { impact(IMPACT.light, "light"); }, 350);
+    },
     enabled: enabled,
     setEnabled: function (on) { try { localStorage.setItem("smd_haptics", on ? "1" : "0"); } catch (e) {} },
     supported: function () { return !!(plugin() || androidPlugin()); }   // true only on iOS / Android native with its plugin

@@ -94,6 +94,8 @@ mkdir -p "$WWW/assets" && cp assets/oncqis-* "$WWW/assets/" 2>/dev/null || true
 mkdir -p "$WWW/assets" && cp assets/maik-logo-*.webp "$WWW/assets/" 2>/dev/null || true
 # Home hero (reference look): stethoscope crop cropped from the owner reference, ships offline + OTA.
 [ -f assets/home-hero.webp ] && cp assets/home-hero.webp "$WWW/assets/"
+# "You are the boss" clips + stills (boss-cele.js): boss-male/female .mp4 and their start/end .webp, about 3 MB.
+if [ -d assets/celebrate ]; then mkdir -p "$WWW/assets/celebrate"; cp assets/celebrate/* "$WWW/assets/celebrate/" 2>/dev/null || true; fi
 [ -f assets/maik-mark-white.webp ] && cp assets/maik-mark-white.webp "$WWW/assets/"
 # Knowledge Base real clinical images (authentic X-rays, CTs, ECGs, photographs under assets/kb-real-images/)
 if [ -d assets/kb-real-images ]; then mkdir -p "$WWW/assets/kb-real-images"; cp assets/kb-real-images/* "$WWW/assets/kb-real-images/" 2>/dev/null || true; fi

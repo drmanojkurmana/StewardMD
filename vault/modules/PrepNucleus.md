@@ -1995,3 +1995,12 @@ integrated into the app, reminding us what to read, what to practise". Decision:
 ## Image Library (2026-11-04)
 
 Every PrepNucleus subject screen shows an "Image Library" button next to the atlases (`prep-imglearn.js`, act `il-imglib`), opening the shared central image bank ([[Image Library]], flag `smd_imglib` default ON) filtered to the subject system where one maps. Lesson images (`vis.kind "image"`) and the ECG atlas tracings are part of the bank.
+
+## Celebrations back (owner 2026-11-11)
+- Right answers in a row in a practice set burst confetti with the celebration buzz at 3, 5, 10 and every 10 after
+  (`streakCele` in prep.js, from `answer()`; practice only, once per question). A boss win is a full celebration
+  card with a big burst (`bossDone` in prep-play.js, key `prepboss:<sid>:<t0>`). Both go through the app-wide
+  `SMD_CELEBRATE` (smd-celebrate.js) and `SMD_HAPTICS.celebrate` (success + three pops), not the retired
+  `PREP_MOTION.confetti`. Off under reduced motion; kill switch `smd_confetti = "0"`. Test: run-prep-play-ui.
+- "You are the boss" clip (owner 2026-11-11): a boss win and 100% on 5+ questions play boss-cele.js (male/female
+  doctor by profile gender) instead of the card. See Decisions 2026-11-11.

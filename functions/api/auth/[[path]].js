@@ -118,6 +118,8 @@ async function handle(context) {
     var SAVE_FIELDS = ["role", "name", "phone", "state", "city", "hospital", "degree", "speciality"];
     var patch = {};
     SAVE_FIELDS.forEach(function (k) { if (typeof body[k] === "string") patch[k] = body[k].trim().slice(0, 200); });
+    // Gender (owner 2026-11-11): picks the male or female doctor in the "You are the boss" celebration. Only these two.
+    if (body.gender === "male" || body.gender === "female") patch.gender = body.gender;
     if (body.patch === true) {
       /* ONE field edited from the Profile page (owner, 2026-10-10: "Couldn't save, check your connection" when saving
        * the college from the profile). The same SDK problem as the first-run form, so the edit goes through here.

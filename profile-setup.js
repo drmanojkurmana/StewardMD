@@ -90,7 +90,7 @@
           var rk = roleKey(d.role);
           return fetch((window.SMD_API_BASE || "") + "/api/auth/save-profile", {
             method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok },
-            body: JSON.stringify({ role: rk, name: d.name, phone: d.phone, state: d.state, city: d.city, hospital: d.hospital, degree: d.degree, speciality: d.speciality })
+            body: JSON.stringify({ role: rk, gender: d.gender === "female" ? "female" : "male", name: d.name, phone: d.phone, state: d.state, city: d.city, hospital: d.hospital, degree: d.degree, speciality: d.speciality })
           });
         }).then(function (r) { end(!!(r && r.ok)); }).catch(function () { end(false); });
       } catch (e) { end(false); }
@@ -149,6 +149,9 @@
   var FIELDS = [
     { key: "role", label: "I am a", kind: "choice", opts: ROLE_LABELS, ph: "Choose your role", req: true, title: "What best describes you?" },
     { key: "name", label: "Full name", kind: "text", ph: "Dr Jane Doe", req: true },
+    /* Owner 2026-11-11: Male or Female, Male when not chosen. Only picks which doctor plays the "You are the boss"
+       celebration; never blocks Save. */
+    { key: "gender", label: "Gender", kind: "seg", opts: [["male", "Male"], ["female", "Female"]] },
     { key: "phone", label: "Phone number", kind: "tel", ph: "10-digit mobile number", req: true },
     { key: "state", label: "State / UT", kind: "state", ph: "Choose your state" },
     { key: "city", label: "City / district", kind: "city", ph: "Search your city" },
@@ -186,6 +189,10 @@
       "#" + ROOT_ID + " .pfs-l{display:block;font:700 11.5px/1 var(--hfont,system-ui);letter-spacing:.04em;text-transform:uppercase;color:var(--hmut,#64748b);margin:0 0 6px}",
       "#" + ROOT_ID + " .pfs-in,#" + ROOT_ID + " .pfs-pick{width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);background:var(--hpanel,#fff);color:var(--hink,#0f172a);text-align:left;min-height:46px}",
       "#" + ROOT_ID + " .pfs-pick{cursor:pointer}",
+      "#" + ROOT_ID + " .pfs-seg{display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(15,23,42,.06)}",
+      "#" + ROOT_ID + " .pfs-seg button{flex:1;min-height:44px;border:0;border-radius:9px;background:transparent;font:700 14px var(--hfont,system-ui);color:var(--hmut,#64748b);cursor:pointer}",
+      "#" + ROOT_ID + " .pfs-seg button.on{background:var(--hpanel,#fff);color:var(--hink,#0f172a);box-shadow:0 1px 3px rgba(0,0,0,.14)}",
+      "body.dark #" + ROOT_ID + " .pfs-seg{background:#0b1220}body.dark #" + ROOT_ID + " .pfs-seg button{color:#9fb0c6}body.dark #" + ROOT_ID + " .pfs-seg button.on{background:#1e2b43;color:#f2f6fb}",
       "#" + ROOT_ID + " .pfs-pick.unset{color:var(--hmut,#94a3b8);font-weight:500}",
       "#" + ROOT_ID + " .pfs-err{font:600 11.5px var(--hfont,system-ui);color:#b91c1c;margin-top:5px;display:none}",
       "#" + ROOT_ID + " .pfs-f.bad .pfs-in,#" + ROOT_ID + " .pfs-f.bad .pfs-pick{border-color:#b91c1c}",
@@ -429,7 +436,12 @@
       FIELDS.map(function (f) {
         var v = draft[f.key] || "";
         var ctl;
-        if (f.kind === "tel") {
+        if (f.kind === "seg") {
+          var gv = v === "female" ? "female" : "male";
+          ctl = '<div class="pfs-seg" role="radiogroup" aria-label="' + esc(f.label) + '">' + f.opts.map(function (o) {
+            return '<button type="button" role="radio" aria-checked="' + (gv === o[0]) + '" class="' + (gv === o[0] ? "on" : "") + '" data-seg="' + f.key + '" data-v="' + o[0] + '">' + esc(o[1]) + "</button>";
+          }).join("") + "</div>";
+        } else if (f.kind === "tel") {
           ctl = '<input class="pfs-in" data-k="' + f.key + '" type="tel" inputmode="numeric" autocomplete="tel" placeholder="' + esc(f.ph) + '" value="' + esc(v) + '">';
         } else if (f.kind === "text") {
           ctl = '<input class="pfs-in" data-k="' + f.key + '" type="text" autocomplete="name" placeholder="' + esc(f.ph) + '" value="' + esc(v) + '">';
@@ -449,6 +461,12 @@
 
     el.querySelectorAll("[data-k]").forEach(function (i) {
       i.addEventListener("input", function () { draft[i.getAttribute("data-k")] = i.value; });
+    });
+    el.querySelectorAll("[data-seg]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        draft[b.getAttribute("data-seg")] = b.getAttribute("data-v");
+        b.parentNode.querySelectorAll("button").forEach(function (x) { var on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-checked", String(on)); });
+      });
     });
     el.querySelectorAll("[data-pick]").forEach(function (b) {
       b.addEventListener("click", function () {
@@ -513,6 +531,8 @@
       if (String(draft.phone || "").replace(/\D/g, "").length < 7 && bad.indexOf("phone") < 0) bad.push("phone");
       el.querySelectorAll(".pfs-f").forEach(function (f) { f.classList.toggle("bad", bad.indexOf(f.getAttribute("data-f")) >= 0); });
       if (bad.length) return;
+      if (draft.gender !== "female") draft.gender = "male";
+      try { if (window.SMD_GENDER) SMD_GENDER.set(draft.gender); else localStorage.setItem("smd_gender", draft.gender); } catch (e) {}
       var btn = el.querySelector("#pfsSave"); btn.disabled = true; btn.textContent = "Saving…";
       ensureRef(function (ref, why) {
       if (!ref) {
@@ -536,7 +556,7 @@
       try { if (rk && window.SMD_ROLE) SMD_ROLE.set(rk); } catch (e) {}
       Promise.race([
       ref.set({
-        role: rk,
+        role: rk, gender: draft.gender === "female" ? "female" : "male",
         name: draft.name || "", phone: draft.phone || "",
         state: draft.state || "", city: draft.city || "",
         hospital: draft.hospital || "", degree: draft.degree || "", speciality: draft.speciality || "",
@@ -570,6 +590,7 @@
   /* Tell the rest of the app the clinician's degree and speciality (specialty-kits.js personalises
    * Home, the default kit and MaiK from it). Professional details only, never patient data. */
   function announce(d) {
+    try { if (d && (d.gender === "male" || d.gender === "female")) { if (window.SMD_GENDER) SMD_GENDER.set(d.gender); else localStorage.setItem("smd_gender", d.gender); } } catch (e) {}
     try { document.dispatchEvent(new CustomEvent("smd:profile-loaded", { detail: { degree: (d && d.degree) || "", speciality: (d && d.speciality) || "", role: roleKey(d && d.role) } })); } catch (e) {}
   }
   /* Should we ask? Signed in, not snoozed this app-open, and something is genuinely missing. */

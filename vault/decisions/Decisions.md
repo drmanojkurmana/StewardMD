@@ -12221,3 +12221,17 @@ small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner
 **Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
 rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 **Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].
+
+## 2026-11-11 Home polish: KU chip restored, quick row contrast, header fit
+- ku.js listens to Firebase auth directly (Firebase loads lazily and can restore a session without SMD_ACCOUNT emitting), so the header Knowledge Units chip shows for signed-in doctors.
+- The KU chip sits right-aligned before Search. Phones: slimmer mark and compact chip so the header fits 320-430 px with a 5-digit KU count; below 381 px the header Pro chip yields while KU shows (the banner says Pro).
+- Frosted/Liquid: the quick-action card over the hero stays 84-90% opaque. First-row icons carry the brand teal; the second row stays neutral.
+
+## 2026-11-11 Celebrations get confetti (reverses 2026-10-03 "no confetti")
+- Owner: every achievement or award gets an on-screen confetti celebration. smd-celebrate.js fires one canvas burst (pointer-events:none, brand colours, ~2.4 s) with every card, so all callers (KU level/badge/reward/quest/streak, PG logbook, CliniX) get it. Off under reduced motion or a hidden page; kill switch localStorage smd_confetti = "0" (smd_celebrate = "0" still turns off the whole celebration).
+- engagement.js keeps the last progress snapshot per account in localStorage (smd_eng_snap:<uid>), so awards granted while the app was closed celebrate on the next open; the first snapshot on a device is a silent baseline. Streak milestones 3/7/14/30/50/100/200/365 now celebrate. Keys are uid-prefixed.
+
+## 2026-11-11 "You are the boss" clip + gender on the profile
+- Two Gemini (Veo) clips from the owner, cut and re-encoded to 720x1280 H.264 (assets/celebrate/boss-male.mp4 1.2 MB, boss-female.mp4 1.7 MB, plus start/end webp stills; the ring-and-check clip that came joined to the female one was cut off and not shipped). boss-cele.js plays the clip full screen, draws "You are the boss" + subject + score over it at the hero pose with confetti and SMD_HAPTICS.celebrate, Skip / Continue; reduced motion shows the end still; a video error falls back to SMD_CELEBRATE's card; kill switch smd_boss_video = "0".
+- Plays on a PrepNucleus boss win (prep-play.js bossDone) and on 100% in any finished set of 5+ questions (prep.js perfectCele).
+- Gender: Male / Female on the profile form (profile-setup.js, Male preselected, never blocks Save) and as a Profile row (home.js); saved to users/<uid>/profile/self.gender (server save-profile accepts only "male"|"female"); mirrored to localStorage smd_gender (window.SMD_GENDER). Used only to pick the clip.
