@@ -33,7 +33,7 @@ const VERSION = "wardsynq-v8";
    works until the one screen nobody opened before the wifi went is the one somebody needs. */
 const SHELL = [
   "./wardsynq.html",
-  "./wardsynq.css?v=12",
+  "./wardsynq.css?v=13",
   "./wardsynq-app.js",
   "./wardsynq-app.js?v=15",
   "./opd.html",

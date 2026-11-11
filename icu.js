@@ -1131,8 +1131,8 @@
       '.icu-lw-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}.icu-lw-tag{font:700 11.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 9px}' +
       '.icu-lw-banner{font:600 12px/1.4 var(--font);color:var(--primary);background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-bottom:10px}' +
       '.icu-lw-acts{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}' +
-      '.icu-lw-act{text-align:left;background:var(--panel2);border:1px solid var(--border);border-left-width:3px;border-radius:10px;padding:8px 11px;cursor:pointer;display:flex;flex-direction:column;gap:2px}' +
-      '.icu-lw-act.crit{border-left-color:var(--danger)}.icu-lw-act.chg{border-left-color:var(--warn)}.icu-lw-act.new{border-left-color:var(--primary)}' +
+      '.icu-lw-act{text-align:left;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 11px;cursor:pointer;display:flex;flex-direction:column;gap:2px}' +
+      '' +
       '.icu-lw-act-t{font:700 13px var(--font);color:var(--ink)}.icu-lw-act-w{font:600 11px var(--font);color:var(--muted)}' +
       '.icu-lw-btns{display:flex;gap:8px;margin:4px 0}.icu-lw-btns .icu-btn{flex:1;margin:0}' +
       '.icu-tr-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}' +
@@ -3666,7 +3666,7 @@
       }).map(function (x) { return x.r; });
       var cards = res.map(function (r) {
         var c = COLOR[r.level] || "var(--muted)", open = !!_lytesExp[r.name];
-        return '<div class="icu-card" style="padding:0;overflow:hidden;border-left:3px solid ' + c + '">' +
+        return '<div class="icu-card" style="padding:0;overflow:hidden;">' +
           '<button data-icu-act="lyte:' + esc(r.name) + '" style="width:100%;display:flex;align-items:center;gap:8px;padding:12px 14px;background:none;border:none;cursor:pointer;color:var(--ink);text-align:left">' +
             '<b style="flex:1;font:800 14px var(--font)">' + esc(r.name) + (r.value != null ? ' <span style="color:var(--muted);font-weight:600">' + esc(r.value) + " " + esc(r.unit || "") + "</span>" : "") + '</b>' +
             '<span style="font:800 10px var(--font);text-transform:uppercase;letter-spacing:.03em;color:' + c + '">' + esc(r.severity) + '</span>' +
@@ -4067,7 +4067,7 @@
   function renderConflicts() {
     var cs = _raw.conflicts || []; if (!cs.length) return "";
     return '<div class="icu-sec-lbl">' + ico("warn", "⚠️") + ' Value conflicts — your choice</div>' + cs.map(function (c) {
-      return '<div class="icu-card" style="border-left:3px solid var(--warn)"><b>' + esc(c.label) + '</b>' +
+      return '<div class="icu-card" style=""><b>' + esc(c.label) + '</b>' +
         '<div class="icu-row"><span>Ward Sync (' + fmtAgo(c.wardTs) + ')</span><b>' + esc(c.ward) + "</b></div>" +
         '<div class="icu-row"><span>Your manual entry (' + fmtAgo(c.manualTs) + ')</span><b>' + esc(c.manual) + "</b></div>" +
         '<div style="display:flex;gap:8px;margin-top:8px"><button class="icu-btn" data-icu-act="conflict:' + esc(c.key) + '|ward">Use Ward value</button>' +
@@ -5451,7 +5451,7 @@
         // Instructing roles can re-ping the executor roles (SR/JR/intern) to do the task — or, once
         // it's marked done, to do it again. Server (task-remind) re-checks the caller's role.
         var nudgeBtn = grpCanInstruct(_grp && _grp.myRole) ? '<button class="icu-btn ghost" data-icu-act="grpnudge:' + encodeURIComponent(t.id) + '" style="margin-top:6px;margin-left:6px;padding:6px 10px;min-height:32px;width:auto;font:700 12px var(--font)">' + ico("bell", "🔔") + (t.status === "done" ? " Remind to redo" : " Nudge") + "</button>" : "";
-        return '<div class="icu-row" style="align-items:flex-start;gap:8px' + (overdue ? ";border-left:3px solid var(--danger);padding-left:9px" : "") + '"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + "</button>" +
+        return '<div class="icu-row" style="align-items:flex-start;gap:8px' + (overdue ? ";padding-left:9px" : "") + '"><button class="icu-v2-tasktog" data-icu-act="grptask:' + encodeURIComponent(t.id) + '" aria-label="Change status of: ' + esc(t.text || "task") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;margin:-6px 0;color:' + col + '">' + mark + "</button>" +
           '<span style="flex:1;min-width:0">' + badge + '<span style="' + (t.status === "done" ? "text-decoration:line-through;opacity:.6" : "") + '">' + esc(t.text) + "</span>" +
           (meta ? '<span class="icu-v2-due' + (overdue ? " over" : "") + '" style="display:block;margin-top:3px">' + esc(meta) + "</span>" : "") +
           expl + explBtn + nudgeBtn + "</span></div>";
@@ -7455,7 +7455,7 @@
       '.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 26px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;margin-bottom:14px}' +
       '.row{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dotted #e5edf0;font-size:12.5px}' +
       '.row .k{color:#64748b;font-weight:600}.row .v{color:#0f172a;font-weight:700;text-align:right}' +
-      '.dx{margin:0 0 14px;padding:9px 14px;background:#ecfdf5;border-left:4px solid #0f766e;border-radius:0 8px 8px 0}' +
+      '.dx{margin:0 0 14px;padding:9px 14px;background:#ecfdf5;border-radius:0 8px 8px 0}' +
       '.dx .k{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e}' +
       '.dx .dxv{font-size:15px;font-weight:800;color:#0f172a;margin-top:2px}.dx .sdx{font-size:12px;color:#334155;margin-top:4px}' +
       'section{margin:0 0 12px}section h2{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:#0f766e;margin:0 0 4px;padding-bottom:3px;border-bottom:1px solid #e2e8f0}' +

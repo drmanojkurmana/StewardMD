@@ -384,7 +384,7 @@
       "#doseCalc .dc-adj{font:700 15px var(--dc-f);color:var(--dc-warn)}",
       "#doseCalc .dc-note{font:500 13px var(--dc-f);color:var(--dc-warn);background:var(--dc-warn-soft);border-radius:9px;padding:7px 10px}",
       "#doseCalc .dc-avoid{font:700 14px var(--dc-f);color:var(--dc-bad);background:var(--dc-bad-soft);border-radius:10px;padding:10px 12px}",
-      "#doseCalc .dc-src{font:500 12.5px/1.5 var(--dc-mono);color:var(--dc-mut);border-left:3px solid var(--dc-line);padding-left:9px}",
+      "#doseCalc .dc-src{font:500 12.5px/1.5 var(--dc-mono);color:var(--dc-mut);padding-left:9px}",
       "#doseCalc .dc-fixed{font:600 15px var(--dc-f)}",
       "#doseCalc .dc-pill{align-self:flex-start;font:700 10.5px var(--dc-f);letter-spacing:.05em;text-transform:uppercase;color:var(--dc-mut);background:var(--dc-bg);border-radius:999px;padding:3px 8px}",
       "#doseCalc details summary{font:600 13.5px var(--dc-f);color:var(--dc-acc);cursor:pointer;min-height:36px;display:flex;align-items:center}",

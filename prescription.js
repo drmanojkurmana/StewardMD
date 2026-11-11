@@ -235,9 +235,9 @@
       ".rx-safety-badge.crit{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}" +
       ".rx-safety-body{padding:10px 12px;display:flex;flex-direction:column;gap:8px}" +
       ".rx-safety-row{display:flex;flex-direction:column;gap:3px;padding:7px 10px;border-radius:8px;font-size:12px;line-height:1.4}" +
-      ".rx-safety-row.crit{background:#fef2f2;border-left:3.5px solid #dc2626;color:#7f1d1d}" +
-      ".rx-safety-row.maj{background:#fffbeb;border-left:3.5px solid #f59e0b;color:#78350f}" +
-      ".rx-safety-row.mod{background:#f0f9ff;border-left:3.5px solid #0284c7;color:#0c4a6e}" +
+      ".rx-safety-row.crit{background:#fef2f2;color:#7f1d1d}" +
+      ".rx-safety-row.maj{background:#fffbeb;color:#78350f}" +
+      ".rx-safety-row.mod{background:#f0f9ff;color:#0c4a6e}" +
       ".rx-safety-counsel{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:8px 10px}" +
       ".rx-safety-counsel-title{font:700 10.5px -apple-system,BlinkMacSystemFont,sans-serif;color:#334155;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}" +
       ".rx-safety-counsel-list{font:400 11.5px/1.4 -apple-system,BlinkMacSystemFont,sans-serif;color:#475569;margin:0;padding-left:14px}" +
@@ -2033,7 +2033,7 @@
       alertsHtml = '<div style="margin-bottom:10px">' +
         safety.findings.map(function (w) {
           var c = col[w.sev] || col.moderate;
-          return '<div style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,sans-serif;padding:7px 10px;border-radius:8px;margin:4px 0;background:' + c[0] + ';color:' + c[1] + ';border-left:3px solid ' + c[2] + '">' +
+          return '<div style="font:500 12px/1.45 -apple-system,BlinkMacSystemFont,sans-serif;padding:7px 10px;border-radius:8px;margin:4px 0;background:' + c[0] + ';color:' + c[1] + ';">' +
             '<b>' + (w.sev === "critical" ? "ALLERGY WARNING" : (w.sev === "major" ? "MAJOR INTERACTION" : "PRECAUTION")) + ':</b> ' + esc(w.txt) +
           '</div>';
         }).join("") +

@@ -30,7 +30,7 @@ body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mk
 .mkp-f textarea { resize: vertical; font-size: 13px; }
 
 /* drug card */
-.mkp-drug { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; padding: 12px; border: 1px solid var(--mkp-line); border-left: 3px solid var(--mkp-primary); border-radius: 12px; margin-bottom: 12px; background: color-mix(in srgb, var(--mkp-primary) 3%, var(--mkp-card)); }
+.mkp-drug { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; padding: 12px; border: 1px solid var(--mkp-line);  border-radius: 12px; margin-bottom: 12px; background: color-mix(in srgb, var(--mkp-primary) 3%, var(--mkp-card)); }
 .mkp-drug .mkp-f.mkp-wide { grid-column: 1 / -1; }
 .mkp-drug-hd { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
 .mkp-drug-n { font: 800 11px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--mkp-primary); }

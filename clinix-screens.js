@@ -2821,7 +2821,7 @@
       var dm = layers.dontMiss || [];
       html += '<div class="cx-sec-h" style="margin-left:0;">Emergency "Don\'t Miss" Diagnoses</div>';
       for (var m = 0; m < dm.length; m++) {
-        html += '<div class="cx-pres-card" style="border-left:4px solid var(--cx-bad);">' +
+        html += '<div class="cx-pres-card" style="">' +
           '<div style="font-weight:800;font-size:16px;color:var(--cx-bad);margin-bottom:4px;">' + esc(dm[m].disease) + '</div>' +
           '<div style="font-size:13.5px;margin-bottom:6px;"><b>Clinical Clue:</b> ' + esc(dm[m].clue) + '</div>' +
           '<div style="font-size:13.5px;background:var(--cx-bad-bg);padding:8px 10px;border-radius:var(--cx-r-ctl);color:var(--cx-bad);line-height:1.45;">' +

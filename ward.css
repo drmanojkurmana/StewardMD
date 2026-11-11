@@ -187,7 +187,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-st.recheck { background: var(--warn-container); color: var(--on-warn-container); box-shadow: inset 0 0 0 1px currentColor; }
 /* A sentence about a dose (order changed, safety check did not run). Sentence case and its own block, never a capitalised chip:
  * a long sentence in a pill is unreadable on a phone. The icon and the lead words carry the meaning, the colour only reinforces it. */
-#smdWard .w-dose-note { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; padding: 8px 10px; border-radius: 10px; border-left: 3px solid currentColor;
+#smdWard .w-dose-note { display: flex; align-items: flex-start; gap: 8px; margin: 8px 0; padding: 8px 10px; border-radius: 10px; 
   background: var(--warn-container); color: var(--on-warn-container); font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
 #smdWard .w-dose-note > .material-symbols-outlined { font-size: 18px; flex: 0 0 auto; margin-top: 1px; }
 #smdWard .w-dose-note > div { min-width: 0; }
@@ -199,13 +199,12 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* Critical results. The loudest card on the chart, and it sits first — the only thing on this
    screen allowed to outrank the medication round. Restrained even so: a border, a tint and text,
    because a wall of red on a ward screen stops being read within a shift. */
-#smdWard .w-card.crit { border-color: var(--on-error-container); border-left-width: 3px; }
+#smdWard .w-card.crit { border-color: var(--on-error-container);  }
 #smdWard .w-card.crit .w-card-h { color: var(--on-error-container); }
 #smdWard .w-crits { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-#smdWard .w-crits li { border: 1px solid var(--outline-variant); border-left-width: 3px; border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
-#smdWard .w-crits li.lvl-escalate { border-left-color: var(--on-error-container); background: var(--error-container); color: var(--on-error-container); }
-#smdWard .w-crits li.lvl-overdue { border-left-color: var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container); }
-#smdWard .w-crits li.lvl-due { border-left-color: var(--outline); }
+#smdWard .w-crits li { border: 1px solid var(--outline-variant);  border-radius: 12px; padding: 11px 13px; background: var(--sc-low); }
+#smdWard .w-crits li.lvl-escalate {  background: var(--error-container); color: var(--on-error-container); }
+#smdWard .w-crits li.lvl-overdue {  background: var(--warn-container); color: var(--on-warn-container); }
 #smdWard .w-crit-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 9px; }
 #smdWard .w-crit-h b { font: 700 15px var(--w-sans); }
 #smdWard .w-crit-v { font: 700 15px var(--mono, ui-monospace, Menlo, monospace); font-variant-numeric: tabular-nums; }
@@ -251,7 +250,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
  * card on the chart is - a scroll box inside a scrolling page is what makes a long stay unreadable.
  * The card keeps its cap; only the page releases it. */
 #smdWard .w-chart-h ~ .w-card .w-timeline { max-height: none; }
-#smdWard .w-timeline li { position: relative; padding-left: 10px; border-left: 3px solid var(--outline-variant); }
+#smdWard .w-timeline li { position: relative; padding-left: 10px;  }
 #smdWard .w-timeline li > span:nth-of-type(3) { flex: 1 1 220px; min-width: 0; }
 
 /* COLOUR CODING, UNDER THIS FILE'S OWN RULE ABOUT COLOUR.
@@ -266,19 +265,12 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
  * The category is also written on every row in words, which is what actually tells a reader what
  * they are looking at; the edge is there to group, not to explain. */
 #smdWard .w-tl-note,
-#smdWard .w-tl-problem      { border-left-color: var(--primary); }
-#smdWard .w-tl-procedure    { border-left-color: var(--outline); border-left-width: 4px; }
 #smdWard .w-tl-investigation,
-#smdWard .w-tl-result       { border-left-color: var(--on-warn-container); }
-#smdWard .w-tl-medication   { border-left-color: var(--outline); }
-#smdWard .w-tl-observation  { border-left-color: var(--outline-variant); }
 #smdWard .w-tl-visit,
 #smdWard .w-tl-registration,
-#smdWard .w-tl-billing      { border-left-color: var(--outline-variant); }
 /* The two that get real colour, and the only two. */
-#smdWard .w-tl-allergy      { border-left-color: var(--error); }
 #smdWard .w-tl-critical,
-#smdWard .w-tl-crit         { border-left-color: var(--error); border-left-width: 4px; background: var(--error-container); }
+#smdWard .w-tl-crit         {   background: var(--error-container); }
 
 /* The note's own words. Indented under the line they belong to and set slightly quieter, because
    the event is the anchor and the words are the detail. pre-wrap so a clinician's own line breaks
@@ -301,9 +293,9 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* THE SAFETY INBOX. A worklist, so the urgency reads as a left edge and a word rather than as a
    coloured card - the same restraint the timeline keeps, and for the same reason: a wall of red
    teaches people to scroll past red. Only the top level gets the error colour. */
-#smdWard .w-ib-escalate { border-left: 4px solid var(--error); background: var(--error-container); padding-left: 10px; }
-#smdWard .w-ib-overdue { border-left: 3px solid var(--on-warn-container); padding-left: 10px; }
-#smdWard .w-ib-due { border-left: 3px solid var(--outline-variant); padding-left: 10px; }
+#smdWard .w-ib-escalate {  background: var(--error-container); padding-left: 10px; }
+#smdWard .w-ib-overdue {  padding-left: 10px; }
+#smdWard .w-ib-due {  padding-left: 10px; }
 
 /* THE WORKSPACE. Dense on purpose: the point of the screen is that a doctor does not have to
    navigate to answer "what am I dealing with", so everything that changes what they may safely do
@@ -322,7 +314,6 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 
 /* The three blocks in the top row carry the rows that stop a prescription. Real colour, for the
    same reason a critical result gets it: these are clinically abnormal, not decorative. */
-#smdWard .w-ws-top .w-ws-b { border-left: 3px solid var(--outline); }
 #smdWard .w-ws-alert { color: var(--on-error-container); font-weight: 600; }
 #smdWard .w-ws-b li.w-ws-alert { list-style: none; padding-left: 0; }
 
@@ -351,7 +342,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* A patient recorded as deceased. One of the few places this app spends real colour, for the same
    reason a critical result does: it changes how everything below it should be read, and somebody
    about to telephone a family needs to know before they dial. */
-#smdWard .w-dead { border-left: 4px solid var(--error); background: var(--error-container); padding-left: 10px; }
+#smdWard .w-dead {  background: var(--error-container); padding-left: 10px; }
 #smdWard .w-dead h4 { color: var(--on-error-container); }
 
 /* The result a reader arrived at from the timeline's own button. */
@@ -360,9 +351,6 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* Prescription outbox. Only "confirmed received" is styled as finished; queued, sent and failed all
    read as unfinished work, because they are. Restrained on purpose: this is a worklist, not an
    alarm, and the one that failed is distinguished by a left edge and a reason, not by a red card. */
-#smdWard .w-tx li { border-left-width: 3px; border-left-color: var(--outline-variant); }
-#smdWard .w-tx li.open { border-left-color: var(--outline); }
-#smdWard .w-tx li.tx-failed { border-left-color: var(--on-warn-container); }
 #smdWard .w-st.acknowledged { background: var(--ok-container); color: var(--on-ok-container); }
 #smdWard .w-st.failed { background: var(--warn-container); color: var(--on-warn-container); }
 #smdWard .w-tx .w-dose-h span { text-transform: capitalize; }
@@ -410,7 +398,6 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 /* A rule overridden almost every time it fires. Marked with an edge and a tint, not a red card: the
    finding is about a RULE, and a wall of red on a report people read once a month is a report they
    stop reading. */
-#smdWard .w-q li.hot { border-left: 3px solid var(--on-warn-container); }
 
 /* The downtime pack. On screen it is a preview; on paper it is the thing. Everything about the
    styling serves one property: it must be obvious that this is a COPY, and obvious where it does not
@@ -421,7 +408,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-dt-h { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; }
 #smdWard .w-dt-h h2 { margin: 0 0 4px; font-size: 17px; }
 #smdWard .w-dt-h p { margin: 4px 0 0; font-size: 13px; color: var(--on-surface-variant); }
-#smdWard .w-dt-warn { border-left: 3px solid var(--on-warn-container); background: var(--warn-container); color: var(--on-warn-container) !important;
+#smdWard .w-dt-warn {  background: var(--warn-container); color: var(--on-warn-container) !important;
   padding: 9px 11px; border-radius: 0 10px 10px 0; line-height: 1.5; }
 #smdWard .w-dt-gap { color: var(--on-error-container); background: var(--error-container); padding: 2px 7px; border-radius: 6px; font-weight: 700; display: inline-block; }
 #smdWard .w-dt-p { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 14px; break-inside: avoid; }
@@ -579,7 +566,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 #smdWard .w-int-stat span { display: block; margin-top: 2px; font: 600 10.5px var(--w-sans); text-transform: uppercase; letter-spacing: .05em; color: var(--on-surface-variant); }
 #smdWard .w-int-stat small { display: block; margin-top: 3px; font: 500 11px var(--w-sans); opacity: .85; }
 #smdWard .w-int-stat small.warn { color: var(--on-warn-container); opacity: 1; }
-#smdWard .w-int-stat.on { border-color: var(--outline); border-left-width: 3px; }
+#smdWard .w-int-stat.on { border-color: var(--outline);  }
 #smdWard .w-int-list { list-style: none; margin: 0; padding: 0; }
 #smdWard .w-int-list li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 0; border-top: 1px solid var(--outline-variant); }
 #smdWard .w-int-list li:first-child { border-top: 0; }
@@ -597,7 +584,7 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
    itself with gradients and glow is one a clinician learns to skim past. The only colour belongs to
    the two things that change what a reader should believe - text from another hospital, and a
    document that contained something shaped like an instruction. */
-#smdWard .w-maik-out { border-left: 3px solid var(--outline); padding: 2px 0 2px 12px; margin: 2px 0 12px; font: 400 14px/1.55 var(--w-sans); }
+#smdWard .w-maik-out {  padding: 2px 0 2px 12px; margin: 2px 0 12px; font: 400 14px/1.55 var(--w-sans); }
 #smdWard .w-maik-prov { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
 #smdWard .w-maik-prov li { display: flex; align-items: flex-start; gap: 7px; font: 500 12px/1.45 var(--w-sans); color: var(--on-surface-variant); }
 #smdWard .w-maik-prov li.warn { color: var(--on-warn-container); }

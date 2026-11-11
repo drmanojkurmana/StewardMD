@@ -670,12 +670,12 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   color: var(--kbr-red);
   font-weight: 700;
 }
-/* Red flags: tinted callout with a red left rule (owner target photo). */
+/* Red flags: tinted callout, no side bar (owner, 2026-11-11: no accent stripes anywhere). */
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert {
   margin: 0 0 14px;
   padding: 14px 16px 6px;
   border: 0;
-  border-left: 3px solid var(--kbr-red);
+  
   border-radius: 12px;
   background: #fdf1f0;
 }

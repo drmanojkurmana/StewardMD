@@ -185,7 +185,7 @@
       ".fc-err{color:#b3261e;font-size:12.5px;margin-top:4px}",
       ".fc-link{background:#e7f6ee;border:1px solid #bfe3cf;border-radius:12px;padding:12px;margin-top:12px;word-break:break-all;font-size:13px}",
       ".fc-empty{text-align:center;color:var(--slate,#5a7184);padding:40px 10px}",
-      ".fc-tl{border-left:2px solid var(--line,#dbe4e2);padding-left:14px;margin:8px 0 0}",
+      ".fc-tl{padding-left:14px;margin:8px 0 0}",
       ".fc-tl .fc-ev{margin-bottom:12px}.fc-tl .fc-ev .fc-d{font-weight:700;font-size:13.5px}.fc-tl .fc-ev .fc-r{color:var(--slate,#5a7184);font-size:12.5px}",
       // Doctor Action Center
       ".fc-actgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}",

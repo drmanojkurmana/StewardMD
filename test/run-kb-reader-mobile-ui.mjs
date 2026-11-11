@@ -175,7 +175,7 @@ try {
     await shot(`390-card-${mode}-end`);
     // Red-flag callout, when present.
     const alert = JSON.parse(await ev(`(()=>{const a=document.querySelector('#dxMgmt .dx-reader-alert');if(!a)return 'null';const s=getComputedStyle(a);return JSON.stringify({l:parseFloat(s.borderLeftWidth),r:parseFloat(s.borderTopLeftRadius),bg:s.backgroundColor})})()`));
-    ok(!alert || (alert.l >= 2 && alert.r >= 8 && alert.bg !== 'rgba(0, 0, 0, 0)'), `${mode} @390: red flags are a tinted callout with a red left border ${JSON.stringify(alert)}`);
+    ok(!alert || (alert.l === 0 && alert.r >= 8 && alert.bg !== 'rgba(0, 0, 0, 0)'), `${mode} @390: red flags are a tinted callout with no side bar ${JSON.stringify(alert)}`);
   }
   // iPad 820: card centred, max 960px, same insets.
   await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });

@@ -1977,7 +1977,7 @@
 ".mlr-explain-btn{background:transparent;border:1px solid var(--line,#d7dee3);border-radius:9px;padding:7px 12px;font:800 11.5px var(--sans);cursor:pointer;color:var(--teal,#0e6e63);min-height:38px}",
 ".mlr-explain-btn:disabled{opacity:.7;cursor:default}",
 ".mlr-explain-out{margin-top:8px;box-shadow:0 2px 16px rgba(14,110,99,.12);background:var(--teal-soft,#e3f1ee);border-radius:8px;padding:9px 11px}",
-".mlr-explain-out.mlr-explain-err{border-left-color:var(--red-line,#efa9b1);background:var(--red-bg,#fbe7e9)}",
+".mlr-explain-out.mlr-explain-err{background:var(--red-bg,#fbe7e9)}",
 ".mlr-explain-label{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
 ".mlr-explain-note{font:500 10.5px var(--sans);color:var(--slate,#2d4356);margin:1px 0 5px;font-style:italic}",
 ".mlr-explain-body{font:500 12.5px var(--sans);color:var(--ink,#14202b);line-height:1.5;white-space:pre-wrap}",

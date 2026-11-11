@@ -501,7 +501,7 @@
     var css = ".gi-summary{font:700 12px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:9px;padding:8px 11px;margin-bottom:8px;line-height:1.4}"
       + ".gi-rows{display:flex;flex-direction:column;gap:10px;padding-top:6px}"
       + ".gi-row{border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 12px;background:var(--panel,#fff)}"
-      + ".gi-row.gi-flagged{border-left:4px solid #c77700;background:#fffaf2}"
+      + ".gi-row.gi-flagged{background:#fffaf2}"
       + ".gi-top{display:flex;align-items:flex-start;gap:9px}"
       + ".gi-titlewrap{flex:1;min-width:0}"
       + ".gi-mapped{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"

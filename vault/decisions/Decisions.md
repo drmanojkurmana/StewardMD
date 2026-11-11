@@ -12203,3 +12203,17 @@ clipped by the rail into a grey band; search and the category rail now sit in a 
 scrolling list, as the owner drew; the star (now a 44px target) and a real chevron are centred on the row;
 card shadow lightened and the doubled gap between cards removed. Do not re-propose the tabbed redesign.
 Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.
+
+## No side-accent stripes anywhere in the app (owner, 2026-11-11)
+- Owner, on the Knowledge Library red-flags callout: "Remove this red line ... I dont want see this type of bar which
+  indicate ai slop anywhere in the app. Every module every piece of app ui remove this". Supersedes the 2026-10-29 ICU
+  and 2026-10-31 onco stripe bans by making them app-wide, and reverses the earlier "red left rule (owner target photo)"
+  on `.dx-reader-alert` in `knowledge-library.css`.
+- Removed: every coloured `border-left` of 2px or more, every `border-left-width` / `border-left-color` accent,
+  inset left box-shadow stripes (`inset 3px 0 0`), the `.kblib-row:before` bar (`reasoning.js`) and the 1px teal
+  rule on the splash AMR figures. Severity stays carried by tint, text and badges. 151 declarations, 48 files.
+- Kept on purpose: chevrons, ticks and triangles drawn with borders (rotated or zero-size boxes); the reply-quote
+  marker in outgoing email HTML (`mail.js`, mail-client convention); thin connector lines between stepper dots
+  (ClinIx rail, Narke, OPD timeline, SurgX band); the ECG marker line; compiled Kardia lab bundles.
+- Guard: `test/no-side-stripes.test.mjs` scans every shipping CSS/JS/HTML file. Do not reintroduce a side bar to
+  mark severity, selection or a callout.

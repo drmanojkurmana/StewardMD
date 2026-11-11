@@ -119,10 +119,9 @@ td.num, th.num { font-variant-numeric: tabular-nums lining-nums; text-align: rig
  * own words (what the gap or failure is) carry the rest: never colour alone. */
 tr.warn { background: var(--sig-major-wash); }
 tr.warn td { color: var(--sig-major); font-weight: 600; }
-.msg { margin: var(--sp-2) 0; padding-left: 11px; border-left: 2px solid var(--hair); font-size: var(--t-small); color: var(--ink-2); max-width: 68ch; }
-.msg.err { border-left-color: var(--sig-stop); color: var(--sig-stop); }
-.msg.ok { border-left-color: var(--sig-clear); color: var(--sig-clear); }
-.msg.note { border-left-color: var(--sig-major); }
+.msg { margin: var(--sp-2) 0; padding-left: 11px;  font-size: var(--t-small); color: var(--ink-2); max-width: 68ch; }
+.msg.err {  color: var(--sig-stop); }
+.msg.ok {  color: var(--sig-clear); }
 .quiet { color: var(--ink-3); font-size: var(--t-small); }
 .mono { font-family: var(--mono); font-size: var(--t-small); white-space: pre-wrap; word-break: break-word; }
 .kv { display: grid; grid-template-columns: max-content minmax(0,1fr); gap: 4px 14px; font-size: var(--t-small); }
