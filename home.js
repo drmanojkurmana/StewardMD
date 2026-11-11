@@ -3224,7 +3224,8 @@
       chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none";
     }
     paint(); try { SMD_KU.onChange(paint); } catch (e) {}
-    var anchor = hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
+    // Home header: the chip sits before the two icon buttons (search, more) so they stay a pair.
+    var anchor = (hdr.classList.contains("hrf-head") && hdr.querySelector('[data-act="search"]')) || hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
     if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
     try { SMD_KU.summary(); } catch (e) {}   // refresh balance from server on home mount
   }

@@ -12221,3 +12221,8 @@ small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner
 **Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
 rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 **Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].
+
+## 2026-11-11 Home polish: KU chip restored, quick row contrast, header fit
+- ku.js listens to Firebase auth directly (Firebase loads lazily and can restore a session without SMD_ACCOUNT emitting), so the header Knowledge Units chip shows for signed-in doctors.
+- The KU chip sits right-aligned before Search. Phones: slimmer mark and compact chip so the header fits 320-430 px with a 5-digit KU count; below 381 px the header Pro chip yields while KU shows (the banner says Pro).
+- Frosted/Liquid: the quick-action card over the hero stays 84-90% opaque. First-row icons carry the brand teal; the second row stays neutral.
