@@ -72,6 +72,23 @@
       "#smdBoss .bc-snd{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:14px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#e8f6f1;font:700 15px/1 var(--rds-font,system-ui);cursor:pointer;display:none}",
       "#smdBoss.muted .bc-snd{display:block}",
       "@media (min-width:600px){#smdBoss video,#smdBoss .bc-still{object-fit:contain;-webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000 50%,transparent 100%);mask-image:radial-gradient(closest-side at 50% 50%,#000 50%,transparent 100%);-webkit-mask-size:min(100vw,56.25vh) 100vh;mask-size:min(100vw,56.25vh) 100vh;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}#smdBoss .bc-t{font-size:56px}#smdBoss .bc-amb{filter:blur(60px) saturate(1.3) brightness(.62)}}",
+      /* Landscape iPad (owner 2026-11-11): the portrait clip would be a narrow centre column with the title on the
+         doctor's head and a stretched, banded backdrop. Split instead: the doctor on the left in a feathered oval over
+         a plain brand glow (no blurred still), the words and Continue on the right, left aligned. */
+      "@media (orientation:landscape) and (min-width:700px){" +
+        "#smdBoss{background:radial-gradient(55% 95% at 33% 55%,#10343a 0,#0a2025 45%,#071318 80%)}" +
+        "#smdBoss .bc-amb{display:none}" +
+        "#smdBoss .bc-glow{left:33%;top:55%;width:90vh;height:90vh}" +
+        "#smdBoss video,#smdBoss .bc-still{left:1%;width:64%;object-fit:contain;-webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(closest-side at 50% 50%,#000 55%,transparent 100%);-webkit-mask-size:56.25vh 100vh;mask-size:56.25vh 100vh;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}" +
+        "#smdBoss .bc-vig{background:radial-gradient(90% 120% at 40% 50%,transparent 60%,rgba(4,14,17,.6) 100%)}" +
+        "#smdBoss .bc-shade{background:linear-gradient(90deg,transparent 40%,rgba(7,19,24,.35) 62%,rgba(7,19,24,.55) 100%)}" +
+        "#smdBoss .bc-top{left:56%;right:5%;top:auto;bottom:calc(50% + 6px);text-align:left;padding:0}" +
+        "#smdBoss .bc-t{font-size:clamp(40px,4.3vw,72px);line-height:1;white-space:nowrap}" +
+        "#smdBoss .bc-eb{font-size:14px}" +
+        "#smdBoss .bc-bot{left:56%;right:5%;top:calc(50% + 18px);bottom:auto;align-items:flex-start;padding:0;gap:22px}" +
+        "#smdBoss .bc-d{text-align:left;font-size:18px}" +
+        "#smdBoss .bc-go{width:auto;min-width:220px;padding:0 36px}" +
+      "}",
       "@media (prefers-reduced-motion:reduce){#smdBoss,#smdBoss *{transition:none!important}}"
     ].join("\n");
     document.head.appendChild(s);

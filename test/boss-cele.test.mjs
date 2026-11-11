@@ -32,6 +32,15 @@ test("player: words at the hero pose with confetti and the celebration buzz; sti
   assert.match(BC, /playsinline webkit-playsinline/);
 });
 
+test("blend and landscape: feathered edges, own motion, split layout on a landscape iPad", () => {
+  assert.match(BC, /mask-composite:intersect/);
+  assert.match(BC, /data-own-motion/);
+  assert.match(R("dialog-motion.js"), /!el\.hasAttribute\("data-own-motion"\)/);
+  assert.match(BC, /@media \(orientation:landscape\) and \(min-width:700px\)\{/);
+  assert.match(BC, /#smdBoss \.bc-amb\{display:none\}/);
+  assert.match(BC, /#smdBoss \.bc-top\{left:56%/);
+});
+
 test("PrepNucleus: a boss win and 100% on 5+ questions play the clip", () => {
   assert.match(R("prep-play.js"), /SMD_BOSS_CELE\.play\(\{ eyebrow: subjName\(sid\) \+ " boss beaten", title: "You are the boss"/);
   const P = R("prep.js");
