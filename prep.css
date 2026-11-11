@@ -1967,7 +1967,9 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 /* Read-along: the sentence being spoken in a lesson step. */
 .pn-root .pn-sent { border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-color 220ms ease; }
 .pn-root .pn-sent.on { background: var(--pn-pri-soft); }
-@media (prefers-reduced-motion: reduce) { .pn-root .pn-sent { transition: none; } }
+.pn-root .pn-vis { transition: border-color 220ms ease; }
+.pn-root .pn-vis.say { border-color: var(--pn-pri); }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-sent, .pn-root .pn-vis { transition: none; } }
 
 /* ---- Why option chips (free stored explanation) ---- */
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
