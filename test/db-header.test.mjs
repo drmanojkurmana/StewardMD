@@ -13,7 +13,7 @@ test("Brands reads 'N brands' (one brand: 'brand'), no pill inside the button", 
   assert.ok(!/db-bb-ct">' \+ cnt/.test(A));
 });
 test("the bar title waits for the drug heading to scroll away; the list keeps its title", () => {
-  assert.match(A, /root\.classList\.toggle\("db-is-detail", !!showBack\)/);
+  assert.match(A, /root\.classList\.toggle\("db-is-detail", !!showBack \|\| !isWide\(\)\)/);
   assert.match(A, /\.db-is-detail:not\(\.db-scrolled\) \.db-title\{opacity:0\}/);
   assert.match(A, /root\.classList\.toggle\("db-scrolled", t\.scrollTop > lim\)/);
 });

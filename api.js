@@ -162,15 +162,16 @@
     root.addEventListener("scroll", function (e) {
       var t = e.target; if (!t || !t.classList || !(t.classList.contains("db-body") || t.id === "dbMain")) return;
       if (!root.classList.contains("db-is-detail")) return;
-      var g = t.querySelector(".db-gen"), lim = g ? g.offsetTop + g.offsetHeight - 8 : 40;
+      var g = t.querySelector(".db-gen, .db-bigt"), lim = g ? g.offsetTop + g.offsetHeight - 8 : 40;
       root.classList.toggle("db-scrolled", t.scrollTop > lim);
     }, true);
     return root;
   }
   function setTitle(t, showBack) {
     root.querySelector("#dbTitle").textContent = t;
-    // A drug page shows its name as the big heading; the bar title waits until that heading scrolls under the bar.
-    root.classList.toggle("db-is-detail", !!showBack); root.classList.remove("db-scrolled");
+    // A drug page shows its name as the big heading, and the phone list shows "Drugs" big: the bar title waits until
+    // that heading scrolls under the bar (owner 2026-11-11: it said the name twice). iPad's split list has no big title.
+    root.classList.toggle("db-is-detail", !!showBack || !isWide()); root.classList.remove("db-scrolled");
     root.querySelector("#dbBack").style.visibility = "visible";
   }
 
@@ -431,7 +432,7 @@
     else renderBrowse(true);                 // no query → the browser (A-Z or by class), never an empty screen
   }
   function renderList() {
-    st.name = null; setTitle("Drugs Database", false);
+    st.name = null; setTitle("Drugs", false);
     var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
     renderSideList();
     if (isWide()) renderMainPlaceholder();
