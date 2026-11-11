@@ -108,6 +108,8 @@
         });
       }
       if (!fx.raf) { fx.last = 0; fx.raf = requestAnimationFrame(tick); }
+      // Standalone bursts (no card) carry their own celebration buzz; show() plays it for card bursts.
+      if (opts && opts.haptic) { try { var Hp = window.SMD_HAPTICS; if (Hp && Hp.celebrate) Hp.celebrate(); } catch (e) {} }
       return true;
     } catch (e) { return false; }
   }
@@ -161,8 +163,8 @@
     var rec = { card: card, timer: null, done: false };
     showing = rec;
     getHost().appendChild(card);
-    try { if (window.SMD_HAPTICS && window.SMD_HAPTICS.success) window.SMD_HAPTICS.success(); } catch (e) {}
-    if (!o.noConfetti) confetti({ count: o.big ? 200 : 140 });
+    var burst = !o.noConfetti && confetti({ count: o.big ? 200 : 140 });
+    try { var Hp = window.SMD_HAPTICS; if (Hp) { if (burst && Hp.celebrate) Hp.celebrate(); else if (Hp.success) Hp.success(); } } catch (e) {}
     rec.timer = setTimeout(function () { dismiss(rec); }, HOLD_MS);
     // tap or swipe down dismisses; a quick flick counts, distance is not required
     var y0 = null, t0 = 0, dy = 0;

@@ -2638,6 +2638,17 @@
     for (var i = r.i; i >= 0 && r.ans[i] >= 0 && r.ans[i] === r.items[i].a; i--) n++;
     return n;
   }
+  /* Owner 2026-11-11: right answers in a row earn a confetti burst with the celebration buzz, at 3, 5, 10 and every 10
+     after. Practice only (runStreak is 0 in a mock or test, which shows no answers). A milestone fires once per run. */
+  function streakMilestone(n) { return n === 3 || n === 5 || (n >= 10 && n % 10 === 0); }
+  function streakCele(r) {
+    try {
+      if (r.mode !== "study" || r.ans[r.i] !== r.items[r.i].a) return;
+      var n = runStreak(r); if (!streakMilestone(n)) return;
+      r.celeAt = r.celeAt || {}; if (r.celeAt[r.i]) return; r.celeAt[r.i] = 1;
+      if (G.SMD_CELEBRATE && G.SMD_CELEBRATE.confetti) G.SMD_CELEBRATE.confetti({ count: n >= 10 ? 170 : 110, haptic: true });
+    } catch (e) {}
+  }
   function qprogHtml(r) {
     var cs0 = secCur(r), lo0 = cs0 && r.phase !== "between" ? cs0.from : 0, its = cs0 && r.phase !== "between" ? r.items.slice(cs0.from, cs0.to) : r.items;
     var n = its.length, done = r.ans.slice(lo0, lo0 + n).filter(function (a) { return a >= 0; }).length, sk = runStreak(r), segs;
@@ -3136,6 +3147,7 @@
     if (r.changed && r.ans[r.i] >= 0 && r.ans[r.i] !== k) r.changed[r.i]++;
     if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; if (!r.norec) record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
     else r.ans[r.i] = k;
+    streakCele(r);
     // A run's own rule after each answer (prep-play.js boss lives); it may finish the run.
     if (r.onAnswer) { try { r.onAnswer(r, k); } catch (e) {} if (r.done) return; }
     renderRun();
