@@ -357,3 +357,36 @@ test("read-along: across the shipped lessons the spoken pieces always map in ord
   }
   assert.ok(steps > 5000, "steps checked: " + steps); assert.equal(bad, 0);
 });
+
+test("narration reads everything the step shows: the displayed text, then the visual, never the short stored script", () => {
+  const st = { tx: "**Mannitol** is freely filtered and not reabsorbed. It lowers intracranial pressure but is avoided in pulmonary oedema.", say: "Mannitol is an osmotic diuretic.",
+    vis: { kind: "table", cols: ["Drug", "Site", "Use"], rows: [["Mannitol", "Proximal tubule", "Raised **ICP**"], ["Furosemide", "Thick ascending limb", "Oedema"]] } };
+  const s = P.stepSay(st), all = s.tx.concat(s.vis).join(" ");
+  assert.match(s.tx.join(" "), /^Mannitol is freely filtered and not reabsorbed\. It lowers intracranial pressure but is avoided in pulmonary oedema\.$/);
+  assert.ok(!/osmotic diuretic/.test(all), "the stored summary is not what is read");
+  for (const w of ["Drug", "Site", "Use", "Mannitol", "Proximal tubule", "Raised ICP", "Furosemide", "Thick ascending limb", "Oedema"]) assert.ok(all.includes(w), w);
+  assert.ok(!/\*\*/.test(all));
+  assert.deepEqual(P.visSay(null), []);
+  const flow = P.visSay({ kind: "flow", nodes: [{ id: "a", label: "Lump", sub: "any age" }, { id: "b", label: "Triple assessment" }], edges: [["a", "b", "always"]] });
+  assert.deepEqual(flow, ["Lump, any age.", "Triple assessment.", "From Lump to Triple assessment, always."]);
+  assert.deepEqual(P.visSay({ kind: "compare", left: { title: "Benign", points: ["Mobile", "Smooth."] }, right: { title: "Malignant", points: ["Fixed"] } }), ["Benign.", "Mobile.", "Smooth.", "Malignant.", "Fixed."]);
+  assert.deepEqual(P.visSay({ kind: "image", src: "a.webp", alt: "x-ray", caption: "Chest film", marks: [{ x: 0.1, y: 0.1, label: "Hidden label" }] }), ["Chest film."], "labels behind a tap are not read out");
+  assert.deepEqual(P.visSay({ kind: "image", src: "a.webp", alt: "x", caption: "Cap", spot: { q: "Where is the fracture?", label: "Answer", why: "Because", box: [0, 0, 0.1, 0.1] } }), ["Where is the fracture?", "Cap."], "the spot answer is not given away");
+});
+
+test("narration covers the page in every bundled lesson: each word of the displayed text and of the visual is spoken", () => {
+  const dir = new URL("../prep/lessons/v1/", import.meta.url), W = (t) => new Set((String(t).toLowerCase().replace(/\*\*/g, "").match(/[a-z]{4,}/g) || []));
+  let steps = 0, low = 0;
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith(".json") || f === "index.json") continue;
+    let l; try { l = JSON.parse(fs.readFileSync(new URL(f, dir), "utf8")); } catch (e) { continue; }
+    for (const st of l.steps || []) {
+      if (!st || !st.tx) continue; steps++;
+      const s = P.stepSay(st), said = W(s.tx.concat(s.vis).join(" ")), want = W(st.tx);
+      let hit = 0; for (const w of want) if (said.has(w)) hit++;
+      if (want.size && hit / want.size < 0.9) low++;
+    }
+  }
+  assert.ok(steps > 1000, "lessons read: " + steps);
+  assert.equal(low, 0, low + " steps where the voice drops over a tenth of the displayed words");
+});

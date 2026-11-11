@@ -139,6 +139,14 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   0.75/1/1.25/1.5, Next/Finish; swipe left/right; "Auto" in the top bar advances when a step's narration ends. Image:
   tap to enlarge (opaque overlay, tap again for 2.2x, back/Escape closes it first). Finish: +10 XP a step on the first
   finish only, then "3 quick questions" through the normal runner (`study` mode: FSRS cards, mistakes), "Read again".
+- **What is read (2026-11-11, `prep135`):** the voice reads what the step shows, not the stored `say`: the displayed `tx`
+  through `sayText`, then the visual (`visSay`: table row by row with column names, flow nodes then labelled links, both
+  sides of a compare, a figure's caption, a spot question, a pair's tags and why). Not read: buttons, the quick check,
+  mark labels and the spot answer (hidden until tapped). Reason: about 15,400 of 34,700 shipped steps carried a `say`
+  under 60% of the text's length (worst about 17%, a one-line summary), so the owner heard the voice skip most of the
+  page. `say` stays in the format and the gates but is no longer spoken. While the visual is read it is lit
+  (`.pn-vis.say`) and kept in view. Tests: `test/prep-lessons.test.mjs` (every bundled step: at least 90% of displayed
+  words spoken), `test/run-prep-lessons-ui.mjs`.
 - **Narration:** `Capacitor.Plugins.TextToSpeech` on native (`lang en-IN`, `rate` = speed), `speechSynthesis` on the
   web; nothing leaves the phone.
   Text goes through `sayText` first (mg, %, >, markdown spoken as words) and is read a sentence at a time (`sayChunks`,
