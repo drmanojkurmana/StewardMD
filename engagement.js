@@ -134,7 +134,22 @@
       ".smd-day .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}",
       ".smd-day .tag{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 10px;background:var(--e-track);font:600 12px " + F + ";color:var(--e-ink)}",
       ".smd-day .tag.hi{background:rgba(244,166,42,.16);color:#a3620a}body.dark .smd-day .tag.hi{color:#f6c06a}",
-      ".smd-empty{text-align:center;padding:28px 12px;font:500 14px " + F + ";color:var(--e-mut)}"
+      ".smd-empty{text-align:center;padding:28px 12px;font:500 14px " + F + ";color:var(--e-mut)}",
+      /* Tappable "Today" sources: each one takes you to where that KU is earned. */
+      ".smd-src button{all:unset;display:block;cursor:pointer;border-radius:10px;padding:6px;margin:-6px;-webkit-tap-highlight-color:transparent}",
+      ".smd-src button:active{background:var(--e-track)}.smd-src button:focus-visible{outline:2px solid var(--e-teal);outline-offset:1px}",
+      ".smd-src .t .smd-ico{width:13px;height:13px;color:var(--e-mut);margin-left:2px}",
+      ".smd-src .full .t span:first-child{color:var(--e-mut)}",
+      ".smd-hint{font:500 12.5px " + F + ";color:var(--e-mut);margin-top:12px}",
+      ".smd-welcome{font:500 13px/1.45 " + F + ";margin-top:12px;color:rgba(232,246,241,.86)}",
+      ".smd-sortrow{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font:500 12.5px " + F + ";color:var(--e-mut)}",
+      ".smd-sort{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:var(--e-teal-d);font:700 12.5px " + F + ";padding:4px 18px 4px 4px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-size:5px 5px;background-position:right 6px top 55%,right 2px top 55%;background-repeat:no-repeat}",
+      ".smd-ring circle.fg{transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}",
+      ".smd-bar>i{transition:width .6s cubic-bezier(.2,.8,.2,1)}",
+      ".smd-sk{border-radius:18px;margin-bottom:12px;background:linear-gradient(90deg,var(--e-track) 0,rgba(255,255,255,.35) 50%,var(--e-track) 100%) 0 0/200% 100%;animation:smdSk 1.2s linear infinite}",
+      "@keyframes smdSk{to{background-position:-200% 0}}",
+      ".smd-eng.drag{transition:none}",
+      "@media (prefers-reduced-motion:reduce){.smd-ring circle.fg,.smd-bar>i{transition:none}.smd-sk{animation:none}}"
     ].join("");
     document.head.appendChild(s);
   }
@@ -148,7 +163,7 @@
   }
   function ring(p) {
     var C = 169.6, off = C - C * Math.max(0, Math.min(100, p || 0)) / 100;
-    return '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="6"/><circle cx="32" cy="32" r="27" fill="none" stroke="#8fe3c8" stroke-width="6" stroke-linecap="round" stroke-dasharray="' + C + '" stroke-dashoffset="' + off.toFixed(1) + '"/></svg>';
+    return '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="6"/><circle cx="32" cy="32" r="27" fill="none" stroke="#8fe3c8" stroke-width="6" stroke-linecap="round" class="fg" stroke-dasharray="' + C + '" stroke-dashoffset="' + C + '" data-off="' + off.toFixed(1) + '"/></svg>';
   }
 
   function renderDashboard(s, streakP) {
@@ -156,9 +171,10 @@
     var today = s.today || {};
     var q = s.quest || { goals: [] };
     var tot = today.total || 0;
+    var GO = { read: "search", "case": "startcase", calc: "calculators", maik: "askai" };
     var src = function (key, label) {
-      var t = today[key] || { ku: 0, cap: 0 };
-      return '<div><div class="t"><span>' + label + '</span><span class="smd-muted smd-num">' + t.ku + '/' + t.cap + '</span></div><div class="smd-bar"><i style="width:' + pct(t.ku, t.cap) + '%"></i></div></div>';
+      var t = today[key] || { ku: 0, cap: 0 }, full = t.cap > 0 && t.ku >= t.cap;
+      return '<button type="button" data-go="' + GO[key] + '" class="' + (full ? 'full' : '') + '" aria-label="' + label + ': ' + t.ku + ' of ' + t.cap + ' KU today' + (full ? ', daily limit reached' : ', open') + '"><div class="t"><span>' + label + (full ? ' ' + egIco("check") : '') + '</span><span class="smd-muted smd-num">' + t.ku + '/' + t.cap + (full ? '' : egIco("chev")) + '</span></div><div class="smd-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + t.cap + '" aria-valuenow="' + t.ku + '"><i style="width:' + pct(t.ku, t.cap) + '%"></i></div></button>';
     };
     var sp = streakP || { seconds: 0, target: 300, done: false };
     var mins = Math.floor(sp.seconds / 60), tmin = Math.round(sp.target / 60);
@@ -179,17 +195,19 @@
         '<div class="smd-lv"><div class="smd-ring">' + ring(s.levelPct) + '<b>' + lvl + '</b></div>' +
         '<div style="min-width:0"><div class="smd-lv-eb">Your level</div><div class="smd-lv-nm">' + esc(s.levelName || "Intern") + '</div><div class="smd-lv-to smd-muted">' + fmt(lvlToNext) + ' KU to level ' + (lvl + 1) + '</div></div></div>' +
         '<div class="smd-hstats">' +
-          '<div><div class="n">' + fmt(s.balance || 0) + '</div><div class="l smd-muted">Knowledge Units</div></div>' +
+          '<div><div class="n" data-count="' + (s.balance || 0) + '">' + fmt(s.balance || 0) + '</div><div class="l smd-muted">Knowledge Units</div></div>' +
           '<div><div class="n">' + egIco("bolt") + (s.streak || 0) + '</div><div class="l smd-muted">Day streak</div></div>' +
           '<div><div class="n">' + egIco("award") + (s.longestStreak || 0) + '</div><div class="l smd-muted">Best streak</div></div>' +
         '</div>' +
+        (!(s.balance > 0) ? '<div class="smd-welcome">Earn Knowledge Units as you read topics, run cases, use calculators and ask MaiK. Five active minutes a day builds your streak.</div>' : '') +
       '</div>' +
       '<div class="smd-card"><h4>Today <span class="smd-pill">+' + tot + ' KU</span></h4>' + streakLine +
-        '<div class="smd-src">' + src("read", "Reading") + src("case", "Cases") + src("calc", "Calculators") + src("maik", "MaiK") + '</div></div>' +
+        '<div class="smd-src">' + src("read", "Reading") + src("case", "Cases") + src("calc", "Calculators") + src("maik", "MaiK") + '</div>' +
+        '<div class="smd-hint">Tap a row to earn more. Each source has a daily limit.</div></div>' +
       (q.label || goals ? '<div class="smd-card"><h4>Daily quest ' + (q.completedToday ? '<span class="smd-pill">' + egIco("check") + ' Done</span>' : '<span class="smd-pill amber">+' + (q.reward || 20) + ' KU</span>') + '</h4>' +
         (q.label ? '<div class="smd-sm smd-muted" style="margin:-6px 0 6px">' + esc(q.label) + '</div>' : '') + goals + '</div>' : '') +
       '<div class="smd-card"><h4>Next reward</h4>' + reward + '</div>' +
-      '<button class="smd-btn" data-eng="share">' + egIco("share") + ' Share my progress</button>'
+      (s.balance > 0 ? '<button class="smd-btn" data-eng="share">' + egIco("share") + ' Share my progress</button>' : '')
     );
   }
 
@@ -206,8 +224,8 @@
       return true;
     });
     filtered.sort(function (a, b) {
-      if (state.sort === "progress") return (b.pct || 0) - (a.pct || 0);
-      if (state.sort === "recent") return (b.unlockedAt || 0) - (a.unlockedAt || 0);
+      if (state.sort === "progress") { if (a.unlocked !== b.unlocked) return a.unlocked ? 1 : -1; return (b.pct || 0) - (a.pct || 0); }
+      if (state.sort === "recent") { if (a.unlocked !== b.unlocked) return a.unlocked ? -1 : 1; return (b.unlockedAt || 0) - (a.unlockedAt || 0); }
       if (a.unlocked !== b.unlocked) return a.unlocked ? -1 : 1;
       if (a.unlocked) return (b.unlockedAt || 0) - (a.unlockedAt || 0);
       return (b.pct || 0) - (a.pct || 0);
@@ -232,7 +250,10 @@
       '<div class="smd-bar" style="margin-top:-4px"><i style="width:' + pct(unlocked, badges.length) + '%"></i></div>' +
       '<div class="smd-srch">' + egIco("search") + '<input class="smd-input" data-search type="search" placeholder="Search achievements" aria-label="Search achievements" value="' + esc(state.q || "") + '"></div>' +
       '<div class="smd-chips">' + chips + '</div>' +
-      '<div class="smd-seg">' + seg + '</div></div>' +
+      '<div class="smd-seg" role="group" aria-label="Show">' + seg + '</div>' +
+      '<div class="smd-sortrow"><span class="smd-num">' + filtered.length + (filtered.length === 1 ? ' achievement' : ' achievements') + '</span><label>Sort <select class="smd-sort" data-sortsel aria-label="Sort achievements">' +
+        [["default", "Suggested"], ["progress", "Closest to unlock"], ["recent", "Recently unlocked"]].map(function (x) { return '<option value="' + x[0] + '"' + ((state.sort || "default") === x[0] ? ' selected' : '') + '>' + x[1] + '</option>'; }).join("") +
+      '</select></label></div></div>' +
       '<div class="smd-badges">' + (tiles || '<div class="smd-empty" style="grid-column:1/-1">No achievements match.</div>') + '</div>';
   }
 
@@ -295,8 +316,8 @@
     ov.innerHTML =
       '<div class="smd-eng" role="dialog" aria-modal="true" aria-label="Clinical progress"><div class="smd-eng-grab" aria-hidden="true"></div>' +
       '<div class="smd-eng-hd"><h3>Clinical Progress</h3><button class="smd-eng-x" aria-label="Close">' + (egIco("x") || "×") + '</button></div>' +
-      '<div class="smd-eng-tabs">' +
-      ['dashboard,Dashboard', 'achievements,Achievements', 'stats,Stats', 'timeline,Timeline'].map(function (t) { var p = t.split(","); return '<button class="smd-eng-tab" data-tab="' + p[0] + '">' + p[1] + '</button>'; }).join("") +
+      '<div class="smd-eng-tabs" role="tablist" aria-label="Clinical progress sections">' +
+      ['dashboard,Dashboard', 'achievements,Achievements', 'stats,Stats', 'timeline,Timeline'].map(function (t) { var p = t.split(","); return '<button class="smd-eng-tab" role="tab" data-tab="' + p[0] + '">' + p[1] + '</button>'; }).join("") +
       '</div><div class="smd-eng-bd" data-body></div></div>';
     document.body.appendChild(ov);
     var bodyEl = ov.querySelector("[data-body]");
@@ -304,19 +325,39 @@
     function paint() {
       var s = cache() || {};
       var sp = (window.SMD_STREAK && SMD_STREAK.progress) ? SMD_STREAK.progress() : null;
-      ov.querySelectorAll(".smd-eng-tab").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-tab") === cur); });
+      ov.querySelectorAll(".smd-eng-tab").forEach(function (b) { var on = b.getAttribute("data-tab") === cur; b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); });
+      // First open before the server has answered: a skeleton, not a page of zeros that then jumps.
+      if (!cache() && !loaded) { bodyEl.innerHTML = '<div class="smd-sk" style="height:178px"></div><div class="smd-sk" style="height:150px"></div><div class="smd-sk" style="height:130px"></div>'; return; }
       if (cur === "dashboard") bodyEl.innerHTML = renderDashboard(s, sp);
       else if (cur === "achievements") bodyEl.innerHTML = renderAchievements(s, achState);
       else if (cur === "stats") bodyEl.innerHTML = renderStats(s);
       else bodyEl.innerHTML = renderTimeline(s);
+      afterPaint();
     }
-    function close() { ov.remove(); cleanup(); }
+    var loaded = false, animated = false;
+    var RM = false; try { RM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+    // The level ring fills and the KU total counts up once per opening; later repaints (the streak
+    // timer repaints the dashboard) land on the final values without replaying the motion.
+    function afterPaint() {
+      var fg = bodyEl.querySelector(".smd-ring circle.fg"), n = bodyEl.querySelector("[data-count]");
+      if (!fg) return;
+      var first = !animated && loaded; if (first) animated = true;
+      if (!first || RM) { fg.style.transition = "none"; fg.setAttribute("stroke-dashoffset", fg.getAttribute("data-off")); return; }
+      requestAnimationFrame(function () { requestAnimationFrame(function () { fg.setAttribute("stroke-dashoffset", fg.getAttribute("data-off")); }); });
+      var to = +n.getAttribute("data-count") || 0; if (to < 10) return;
+      var t0 = 0, dur = 800;
+      requestAnimationFrame(function step(ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / dur), e = 1 - Math.pow(1 - k, 3); if (!n.isConnected) return; n.textContent = fmt(Math.round(to * e)); if (k < 1) requestAnimationFrame(step); });
+    }
+    var closing = false;
+    function close() { if (closing) return; closing = true; ov.remove(); cleanup(); }
     ov.querySelector(".smd-eng-x").addEventListener("click", close);
     ov.addEventListener("click", function (e) { if (e.target === ov) close(); });
     ov.querySelectorAll(".smd-eng-tab").forEach(function (b) { b.addEventListener("click", function () { cur = b.getAttribute("data-tab"); bodyEl.scrollTop = 0; paint(); }); });
     // delegated interactions inside the body
     bodyEl.addEventListener("click", function (e) {
       var t = e.target;
+      var go = t.closest && t.closest("[data-go]");
+      if (go) { var a = go.getAttribute("data-go"); close(); setTimeout(function () { try { if (window.SMD_moreAct) SMD_moreAct(a); } catch (x) {} }, 160); return; }
       var share = t.closest && t.closest('[data-eng="share"]'); if (share) { try { if (window.SMD_SHARECARD) SMD_SHARECARD.open(); } catch (x) {} return; }
       var cat = t.closest && t.closest("[data-cat]"); if (cat) { achState.cat = cat.getAttribute("data-cat"); paint(); return; }
       var stc = t.closest && t.closest("[data-status]"); if (stc) { achState.status = stc.getAttribute("data-status"); paint(); return; }
@@ -324,10 +365,20 @@
       var pin = t.closest && t.closest("[data-pin]"); if (pin) { togglePin(pin.getAttribute("data-pin"), s2()); paint(); return; }
     });
     bodyEl.addEventListener("input", function (e) { var se = e.target.closest && e.target.closest("[data-search]"); if (se) { achState.q = se.value; var v = se.value; paint(); var ns = bodyEl.querySelector("[data-search]"); if (ns) { ns.focus(); ns.value = v; ns.setSelectionRange(v.length, v.length); } } });
+    bodyEl.addEventListener("change", function (e) { var sel = e.target.closest && e.target.closest("[data-sortsel]"); if (sel) { achState.sort = sel.value; paint(); var ns = bodyEl.querySelector("[data-sortsel]"); if (ns) ns.focus(); } });
+    // Drag the handle or the title bar down to close, like every other sheet in the app.
+    (function () {
+      var sheet = ov.querySelector(".smd-eng"), y0 = 0, dy = 0, on = false;
+      function start(e) { if (!e.touches || e.touches.length !== 1) return; if (!e.target.closest(".smd-eng-grab, .smd-eng-hd") || e.target.closest(".smd-eng-x")) return; on = true; y0 = e.touches[0].clientY; dy = 0; sheet.classList.add("drag"); }
+      function move(e) { if (!on) return; dy = Math.max(0, e.touches[0].clientY - y0); sheet.style.transform = dy ? "translateY(" + dy + "px)" : ""; }
+      function end() { if (!on) return; on = false; sheet.classList.remove("drag"); if (dy > 110) { close(); return; } sheet.style.transition = "transform .2s ease"; sheet.style.transform = ""; setTimeout(function () { sheet.style.transition = ""; }, 220); }
+      sheet.addEventListener("touchstart", start, { passive: true }); sheet.addEventListener("touchmove", move, { passive: true });
+      sheet.addEventListener("touchend", end); sheet.addEventListener("touchcancel", end);
+    })();
     function s2() { return cache() || {}; }
     // live refresh
-    function onSummary() { paint(); }
-    function onProg() { if (cur === "dashboard") paint(); }
+    function onSummary() { if (ov.isConnected) paint(); }
+    function onProg() { if (cur === "dashboard" && ov.isConnected) paint(); }
     var offList = [];
     try { if (window.SMD_KU && SMD_KU.onChange) { SMD_KU.onChange(onSummary); } } catch (e) {}
     try { window.addEventListener("smd-streak-progress", onProg); offList.push(function () { window.removeEventListener("smd-streak-progress", onProg); }); } catch (e) {}
@@ -335,7 +386,10 @@
     function cleanup() { offList.forEach(function (f) { try { f(); } catch (e) {} }); }
     paint();
     // refresh from server
-    try { if (window.SMD_KU && SMD_KU.summary) SMD_KU.summary().then(function () { paint(); }); } catch (e) {}
+    function settle() { loaded = true; if (ov.isConnected) paint(); }
+    try { if (window.SMD_KU && SMD_KU.summary) SMD_KU.summary().then(settle, settle); else settle(); } catch (e) { settle(); }
+    // Offline or a slow server: never leave the skeleton up for long.
+    setTimeout(function () { if (!loaded) settle(); }, 2500);
   }
 
   function togglePin(id, s) {
