@@ -150,6 +150,16 @@ The Library home carries an "Image Library" entry opening the shared central ima
 - `SMD_KB.open()` with no id now opens the Syndromes tab instead of an empty reader (that empty card was what the
   `kb-library` screen of `test/run-ipad-layout-ui.mjs` measured).
 
+## Reader header and hero (owner photo, 2026-11-11)
+The disease reader's header now carries the StewardMD Knowledge Base mark (logo + "StewardMD / Knowledge
+Base", `.dx-reader-brand-kb`) in place of "Knowledge Library / Clinical disease reference", so the banner is no
+longer repeated in the hero. Save is an icon-only star (`.dx-reader-star`, aria-label carries the state) in the
+header's right slot (`.dx-reader-topacts`). Ask MaiK sits on the right of the system line
+(`.dx-reader-metarow`) as the MaiK logo only, a white 3D orb with the navy mark (`.dx-reader-askorb`, owner "White one"; not the teal bottom-nav
+tab; aria-label "Ask MaiK about <disease>"). The hero is just the name. The Management page (`openMgmt`) and the library tabs keep
+`kbBannerHTML()`. Code: `reasoning.js` reader render; CSS block at the end of `knowledge-library.css`.
+Guard: `test/run-library-discover-ui.mjs`. The red-flags side bar is gone app-wide (see Decisions 2026-11-11).
+
 ## Header variants (2026-11-11, flag `smd_kb_head`, default "d")
 
 Owner marked up the Discover screen: drop the "Knowledge Library" bar title, put the StewardMD Knowledge Base brand

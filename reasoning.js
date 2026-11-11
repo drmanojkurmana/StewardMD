@@ -3488,17 +3488,16 @@
       ".ev-bt-l{padding-top:11px;padding-right:10px}.ev-bt-l--now{color:#b3261e}",
       ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
-      // high-yield terms in bold purple, warnings in red (owner 2026-11-02, replaces the 2026-09-30 weight-only rule)
-      ":root{--md-hy:#6d28d9;--md-red:#b3261e}body.dark{--md-hy:#c4b5fd;--md-red:#ff8a80}",
-      ".md-dose,.md-drug,.md-key,.md-sig,.md-hi,.md-action,.md-resist,.md-ix{font-weight:700;color:var(--md-hy)}",
-      ".md-abs,.md-emerg{font-weight:700;color:var(--md-red)}",
-      ".md-bug{font-style:italic;font-weight:700;color:var(--md-hy)}",
+      // high-yield terms are BLACK BOLD only: no purple, no red, no pill (owner 2026-11-11, replaces the 2026-11-02
+      // purple/red rule). They take the paragraph's own ink, so dark mode follows.
+      ".md-dose,.md-drug,.md-key,.md-sig,.md-hi,.md-action,.md-resist,.md-ix,.md-abs,.md-emerg{font-weight:700;color:inherit}",
+      ".md-bug{font-style:italic;font-weight:700;color:inherit}",
       ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}.ev-wrap[data-ev-src=idsa] .ev-top-ic{color:#5b21b6}",
       ".ev-wrap[data-ev-src=sanford]>.ev-top{background:linear-gradient(180deg,#f0fdf4,#ecfdf5)}.ev-wrap[data-ev-src=sanford] .ev-top-sub{color:#047857}",
       ".ev-rx-note{color:#94a3b8;font-size:.92em}",
       ".ev-sec-in a,.ev-cite a{color:#1d4ed8;text-decoration:underline;word-break:break-word}",
       ".md-cite{font-size:.86em;color:#94a3b8}",
-      ".ev-sec-in p.ev-lead{font-weight:600;color:#0f172a;font-size:14px;line-height:1.6;background:#f6f8ff;border-left:3px solid #818cf8;border-radius:8px;padding:9px 11px;margin:2px 0 10px}",
+      ".ev-sec-in p.ev-lead{font-weight:600;color:#0f172a;font-size:14px;line-height:1.6;background:#f6f8ff;border-radius:8px;padding:9px 11px;margin:2px 0 10px}",
       ".ev-cite strong{color:#334155}",
       ".ev-cite strong svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.85;fill:none;vertical-align:-.12em}",
       ".ev-sec{border:1px solid #e2e8f0;border-radius:11px;margin-bottom:8px;overflow:hidden;background:#fff}",
@@ -4768,12 +4767,12 @@
     var rd = kbReaderBodyHTML(id, H, { name: name, reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
-        '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
+        '<div class="dx-reader-brand dx-reader-brand-kb"><img class="dx-reader-logo" src="/logo.png" alt="" width="28" height="28" decoding="async"><div class="dx-reader-brandtx"><strong>StewardMD</strong><span>Knowledge Base</span></div></div><span class="dx-reader-spacer dx-reader-topacts"></span></div>' +
       '<div class="kbr-sheet" aria-hidden="true"></div>' +
       '<div class="dx-mgmt-body"><div class="kbr-read" data-hl-key="' + esc("kb:" + id) + '">' +
-        '<section class="dx-reader-hero">' + kbBannerHTML() +
+        '<section class="dx-reader-hero">' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
-        '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
+        '<div class="dx-reader-metarow"><div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></div></section>' +
         rd.jump +
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
         rd.glance + kbFigRow(name, rdMgmt, rd.body) +
@@ -4793,22 +4792,24 @@
         }
       });
     }
-    var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
-    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
+    var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite dx-reader-star";
+    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg>'; favourite.classList.remove("is-err"); favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
-    favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
-    var heroActs = document.createElement("div"); heroActs.className = "dx-reader-acts";
-    heroActs.appendChild(favourite);
+    favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else { favourite.classList.add("is-err"); favourite.setAttribute("aria-label", "Could not save. Try again."); } });
+    // Owner layout (2026-11-11 photo): the save star sits in the header's right slot, Ask MaiK on the
+    // right of the system line, so the hero is just the name.
+    var topActs = el.querySelector(".dx-reader-topacts");
+    if (topActs) topActs.appendChild(favourite);
+    var heroActs = el.querySelector(".dx-reader-metarow");
     // "Ask MaiK" (2026-10-04): MaiK opens over this page with the disease as its topic (home.js
     // SMD_askMaikTopic). Absent when MaiK is not loaded, so it is never a dead button.
     if (typeof window.SMD_askMaikTopic === "function") {
-      var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-favourite dx-reader-askmaik";
-      askMk.setAttribute("aria-label", "Ask MaiK about " + name);
-      askMk.innerHTML = (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("mark", { size: 20 }) : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>') + '<span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span>';
+      var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-askmaik dx-reader-askorb";
+      askMk.setAttribute("aria-label", "Ask MaiK about " + name); askMk.title = "Ask MaiK";
+      askMk.innerHTML = '<span class="dx-reader-orb" aria-hidden="true"><img src="/assets/maik-logo-128.webp" alt="" width="40" height="40" decoding="async" draggable="false"></span>';   // owner 2026-11-11: the MaiK logo only, as a white 3D orb with the navy mark
       askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
       heroActs.appendChild(askMk);
     }
-    el.querySelector(".dx-reader-hero").appendChild(heroActs);
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
       el.classList.remove("on");
@@ -5052,8 +5053,6 @@
       ".dx-col-n{font-size:11px;background:var(--line);color:var(--slate);border-radius:8px;padding:1px 7px;vertical-align:middle}",
       ".dx-col{display:flex;flex-direction:column;gap:9px}",
       ".dx-card{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden;transition:border-color .15s}",
-      ".dx-card.inf{border-left:3px solid var(--red)}",
-      ".dx-card.ni{border-left:3px solid var(--green)}",
       ".dx-card.open{border-color:var(--teal)}",
       ".dx-row-head{display:flex;align-items:center;gap:11px;padding:11px 13px;cursor:pointer}",
       ".dx-rank{width:22px;height:22px;flex:0 0 auto;border-radius:50%;font:800 12px var(--sans);display:flex;align-items:center;justify-content:center}",
@@ -5130,7 +5129,7 @@
       ".dx-sess-item{text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font:600 12.5px var(--sans);color:var(--ink);cursor:pointer}",
       ".dx-sess-item span{display:block;font:500 10.5px var(--sans);color:var(--slate-soft);margin-top:2px}",
       ".dx-tl{display:flex;flex-direction:column;gap:5px}",
-      ".dx-tl-item{font:500 12px var(--sans);color:var(--slate);border-left:2px solid var(--teal);padding:4px 0 4px 10px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}",
+      ".dx-tl-item{font:500 12px var(--sans);color:var(--slate);padding:4px 0 4px 10px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}",
       ".dx-tl-item b{color:var(--ink)}",
       ".dx-tl-n{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--teal);color:#fff;font:800 9.5px var(--sans);display:inline-flex;align-items:center;justify-content:center}",
       ".dx-tl-item .up{color:var(--red)}.dx-tl-item .down{color:var(--teal)}",
@@ -6118,10 +6117,8 @@
       ".kblib-f.on{background:#0f766e;color:#fff;border-color:#0f766e}" +
       ".kblib-count{font-size:12px;color:#475569;margin:10px 2px}" +
       ".kblib-grid{display:block;border:1px solid #e8ecf1;border-radius:14px;overflow:hidden}" +
-      ".kblib-row{position:relative;display:block;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid #eef1f4;padding:13px 14px 14px 17px;cursor:pointer}" +
+      ".kblib-row{position:relative;display:block;width:100%;text-align:left;background:#fff;border:0;border-bottom:1px solid #eef1f4;padding:13px 14px 14px 14px;cursor:pointer}" +
       ".kblib-row:last-child{border-bottom:0}" +
-      ".kblib-row:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:#16a34a}" +
-      ".kblib-row.inf:before{background:#dc2626}" +
       ".kblib-eye{font-weight:800;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#15803d;margin-bottom:5px}" +
       ".kblib-row.inf .kblib-eye{color:#b91c1c}" +
       ".kblib-name{font-weight:700;font-size:15px;line-height:1.32;color:#0f172a;letter-spacing:-.005em}" +
@@ -7775,7 +7772,7 @@
       '.sl-gate{display:inline-block;font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin:8px 0 2px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)}.sl-gate.ab{background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c)}' +
       '.sl-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:8px}@media (max-width:560px){.sl-cols{grid-template-columns:minmax(0,1fr)}}' +
       '.sl-col-h{font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin:0 0 6px}.sl-col-h span{color:var(--slate-soft,#5a7184)}' +
-      '.sl-card{border:1px solid var(--line,#d7dee3);border-radius:10px;margin-bottom:7px;overflow:hidden;background:var(--paper,#f6f7f5)}.sl-card.inf{border-left:3px solid var(--red,#ab1c2c)}.sl-card.ni{border-left:3px solid var(--green,#1c7a4a)}' +
+      '.sl-card{border:1px solid var(--line,#d7dee3);border-radius:10px;margin-bottom:7px;overflow:hidden;background:var(--paper,#f6f7f5)}' +
       '.sl-head{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;padding:9px 10px;text-align:left;color:var(--ink,#14202b)}' +
       '.sl-rank{flex:0 0 auto;width:20px;height:20px;border-radius:50%;font:800 11px var(--sans);display:flex;align-items:center;justify-content:center;color:#fff}.sl-rank.inf{background:var(--red,#ab1c2c)}.sl-rank.ni{background:var(--green,#1c7a4a)}' +
       '.sl-nm{flex:1;min-width:0;font:700 13px var(--sans)}.sl-met{font:700 9px var(--sans);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:5px;padding:1px 5px}' +
@@ -8837,7 +8834,7 @@
     if (document.getElementById("smd-tb-css")) return;
     var st = document.createElement("style"); st.id = "smd-tb-css";
     st.textContent =
-      ".smd-tb-card{margin:0 0 14px;padding:14px 16px;border:1px solid var(--line,#e2e8f0);border-left:4px solid var(--teal,#0e6e63);border-radius:12px;background:var(--panel,#fff)}" +
+      ".smd-tb-card{margin:0 0 14px;padding:14px 16px;border:1px solid var(--line,#e2e8f0);border-radius:12px;background:var(--panel,#fff)}" +
       ".smd-tb-h{font:800 14px var(--sans,system-ui);color:var(--teal,#0e6e63);margin:0 0 3px}" +
       ".smd-tb-policy{font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px}" +
       ".smd-tb-inputs{display:flex;flex-wrap:wrap;gap:9px 12px;margin:0 0 10px;padding:0 0 11px;border-bottom:1px dashed var(--line,#e2e8f0)}" +
@@ -8847,7 +8844,7 @@
       ".smd-tb-state{display:inline-block;font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;padding:3px 9px;border-radius:999px;margin:0 0 9px}" +
       ".smd-tb-state.ok{background:#e3f1ee;color:#0e6e63}.smd-tb-state.dr{background:#fef3c7;color:#b45309}.smd-tb-state.pend{background:#e2e8f0;color:#475569}" +
       ".smd-tb-reg{border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px 12px;margin:0 0 8px}" +
-      ".smd-tb-reg.elig{border-left:3px solid #0e6e63}.smd-tb-reg.excl{border-left:3px solid #cbd5e1;opacity:.9}" +
+      ".smd-tb-reg.excl{opacity:.9}" +
       ".smd-tb-reg h4{font:800 13px var(--sans,system-ui);color:var(--ink,#14202b);margin:0 0 4px}" +
       ".smd-tb-why{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}.smd-tb-why b{color:var(--ink,#14202b)}" +
       ".smd-tb-excl-why{color:#b45309}" +

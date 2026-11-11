@@ -1302,7 +1302,6 @@
  * and the shared .kx-ecg / .kx-btn primitives. Pastel banner bg/borders use
  * the handoff hexes (same approach as .kx-verify) with token text colours. */
 
-#kardioxRoot .kx-lesson-body { }
 
 /* Header: back · title/sub · filled bookmark */
 #kardioxRoot .kx-lesson-head {
@@ -1472,9 +1471,9 @@
 #kardioxRoot .kx-quiz-submit.kx-quiz-done{ background:var(--kx-sev-stable); color:#fff; opacity:1; }
 
 /* Explanation reveal */
-#kardioxRoot .kx-quiz-explain{ margin-top:14px; padding:13px 14px; border-radius:var(--kx-r-ctl); border-left:3px solid var(--kx-hairline); animation:kxRise .3s var(--kx-ease) both; }
-#kardioxRoot .kx-quiz-explain.is-correct{ background:#EAF7F0; border-left-color:var(--kx-sev-stable); }
-#kardioxRoot .kx-quiz-explain.is-wrong{ background:#FFF4EC; border-left-color:var(--kx-sev-urgent); }
+#kardioxRoot .kx-quiz-explain{ margin-top:14px; padding:13px 14px; border-radius:var(--kx-r-ctl);  animation:kxRise .3s var(--kx-ease) both; }
+#kardioxRoot .kx-quiz-explain.is-correct{ background:#EAF7F0;  }
+#kardioxRoot .kx-quiz-explain.is-wrong{ background:#FFF4EC;  }
 #kardioxRoot .kx-quiz-explain-head{ display:flex; align-items:center; gap:7px; font-size:14px; }
 #kardioxRoot .kx-quiz-explain.is-correct .kx-quiz-explain-head{ color:var(--kx-sev-stable); }
 #kardioxRoot .kx-quiz-explain.is-wrong .kx-quiz-explain-head{ color:var(--kx-sev-urgent); }

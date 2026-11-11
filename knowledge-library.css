@@ -180,8 +180,7 @@ body.dark #dxOverlay #dxMgmt.dx-reader { --rd-red: #ff8a80; }
 #dxOverlay #dxMgmt.dx-reader :is(.ev-ul li, .ev-sec-in p, .ev-pearl-bd) { color: var(--rd-ink); font-size: 15px; }
 /* high-yield points are bold ink, never colour (owner 2026-09-30): doses, drugs, thresholds, pitfalls,
  * key clinical signs. Tests are medium weight; organisms are italic, as in print. */
-#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: var(--md-hy, #6d28d9); font-weight: 700; }
-#dxOverlay #dxMgmt.dx-reader .md-abs, #dxOverlay #dxMgmt.dx-reader .md-emerg { color: var(--md-red, #b3261e); }
+#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: inherit; font-weight: 700; }   /* black bold only (owner 2026-11-11) */
 #dxOverlay #dxMgmt.dx-reader .md-bug { font-style: italic; font-weight: 600; }
 @media (max-width: 420px) {
   #dxOverlay #dxMgmt.dx-reader .dx-mgmt-name { font-size: 30px; }
@@ -670,12 +669,12 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   color: var(--kbr-red);
   font-weight: 700;
 }
-/* Red flags: tinted callout with a red left rule (owner target photo). */
+/* Red flags: tinted callout, no side bar (owner, 2026-11-11: no accent stripes anywhere). */
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert {
   margin: 0 0 14px;
   padding: 14px 16px 6px;
   border: 0;
-  border-left: 3px solid var(--kbr-red);
+  
   border-radius: 12px;
   background: #fdf1f0;
 }
@@ -698,16 +697,7 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert h4::befo
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert { background: rgba(255, 139, 132, 0.13); }
 /* the table scroll-hint fade paints --panel; on the card it must be the card colour or it shows as black bars */
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.kbv2-scroll, .kbr-scroll) { --panel: var(--kbr-card-bg); }
-/* Key terms: soft lavender pill. Background only, no vertical padding, so
- * line height and wrapping are unchanged. */
-#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) {
-  padding-inline: 3px;
-  border-radius: 5px;
-  background: rgba(91, 70, 176, 0.12);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) { background: rgba(196, 182, 255, 0.18); }
+/* Key terms are black bold only: the lavender pill is gone (owner 2026-11-11). */
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .ev-ul { margin: 2px 0 4px; padding: 0; }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .ev-ul li {
   padding: 8px 0 8px 16px;
@@ -865,6 +855,67 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
 @media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { transition: none; } }
 /* the figure image's own box, so the watermark overlay (image-viewer.css .smd-wm) covers the picture and its rounded corners */
 #dxOverlay #dxMgmt.dx-reader .kbr-media-host { display: block; border-radius: 12px; }
+
+/* Reader header and hero, owner photo 2026-11-11: the header carries the StewardMD Knowledge Base mark
+   (replacing "Knowledge Library / Clinical disease reference"), Save is a star in the header's right slot,
+   and Ask MaiK sits on the right of the system line under the disease name. */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-brand-kb { display: flex; align-items: center; gap: 9px; text-align: left; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-logo { flex: 0 0 auto; width: 28px; height: 28px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-brandtx { min-width: 0; }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-brand-kb { text-align: left; }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-topacts { display: flex; justify-content: flex-end; justify-self: end; width: auto; min-width: 44px; overflow: visible; position: relative; z-index: 2; }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-star,
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0;
+  width: 44px; height: 44px; min-height: 44px; margin: 0; padding: 0;
+  border: 1px solid var(--kbr-line, var(--rd-line)); border-radius: 999px; background: transparent; color: var(--reader-accent);
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star svg { width: 22px; height: 22px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star[aria-pressed="true"] { background: transparent; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star.is-err { color: var(--kbr-red, #b42318); border-color: currentColor; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-mgmt-sys { margin: 0; min-width: 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askmaik { flex: 0 0 auto; margin: 0; white-space: nowrap; }
+/* Ask MaiK is the MaiK logo only, as a white 3D orb (owner 2026-11-11: "Only MaiK logo 3D", then "White one"):
+   a lit white sphere (top-left highlight, cool shaded base, soft drop shadow) carrying the owner's navy M-star
+   (assets/maik-logo-128.webp, multiplied onto the sphere so its white disc takes the shading) and a glint sweep.
+   Reduced motion keeps the look, no motion. */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askorb {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; min-height: 44px; margin: 0; padding: 0; border: 0; border-radius: 50%;
+  background: none; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-askorb:active { transform: scale(0.94); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-askorb:focus-visible { outline: 2px solid var(--reader-accent); outline-offset: 2px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-orb {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 22%, #ffffff 0%, #ffffff 22%, rgba(255,255,255,0) 46%),
+    radial-gradient(circle at 50% 112%, rgba(203,213,225,.85) 0%, rgba(203,213,225,0) 58%),
+    radial-gradient(circle at 40% 32%, #ffffff 0%, #f1f4f8 48%, #d5dbe4 100%);
+  box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -5px 9px rgba(30,41,59,.16), 0 0 0 1px rgba(15,23,42,.06), 0 4px 10px -2px rgba(15,23,42,.28);
+  animation: kbrMaikOrbGlow 2.8s ease-in-out infinite;
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-orb::after {
+  content: ""; position: absolute; inset: -40%; z-index: 2; pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.7) 50%, transparent 60%);
+  transform: translateX(-120%); animation: kbrMaikOrbGlint 4.2s ease-in-out infinite;
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-orb img {
+  position: relative; z-index: 1; display: block; width: 42px; height: 42px; pointer-events: none;
+  border-radius: 50%; mix-blend-mode: multiply;
+}
+@keyframes kbrMaikOrbGlow {
+  0%, 100% { box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -5px 9px rgba(30,41,59,.16), 0 0 0 1px rgba(15,23,42,.06), 0 4px 10px -2px rgba(15,23,42,.28); }
+  50%      { box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -5px 9px rgba(30,41,59,.16), 0 0 0 1px rgba(15,23,42,.08), 0 4px 12px -2px rgba(15,23,42,.32), 0 0 14px 2px rgba(255,255,255,.35); }
+}
+@keyframes kbrMaikOrbGlint { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) {
+  #dxOverlay #dxMgmt.dx-reader .dx-reader-orb, #dxOverlay #dxMgmt.dx-reader .dx-reader-orb::after { animation: none; }
+  #dxOverlay #dxMgmt.dx-reader .dx-reader-askorb { transition: none; }
+}
 
 /* ---- Your library: list rows + empty card (owner mock 2026-11-11). Same palette: --kl-accent, --kl-muted, --kl-line. */
 .kblib-discover .kblib-personal.kbl h2 { margin: 0 0 4px; font-size: 24px; }

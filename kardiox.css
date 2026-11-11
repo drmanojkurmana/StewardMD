@@ -213,12 +213,9 @@ html.kx-lock .ghis-ward-fab { display: none !important; }
 
 .kx-acs-result {
   margin: 12px 0 4px; padding: 14px 16px; border-radius: var(--kx-r, 16px);
-  border: 1px solid var(--kx-hairline, #E3EAEE); border-left-width: 4px;
+  border: 1px solid var(--kx-hairline, #E3EAEE); 
   background: var(--kx-card, #fff); font-family: var(--kx-sans, "IBM Plex Sans", system-ui, sans-serif);
 }
-.kx-acs-result--urgent { border-left-color: var(--kx-sev-urgent, #C2410C); }
-.kx-acs-result--warn { border-left-color: var(--kx-sev-warn, #996007); }
-.kx-acs-result--info { border-left-color: var(--kx-sev-info, #1D6FA3); }
 .kx-acs-stemi { font-size: 15px; font-weight: 800; color: var(--kx-sev-urgent, #C2410C); margin-bottom: 6px; }
 .kx-acs-cat { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
 .kx-acs-scores { font-family: var(--kx-mono, ui-monospace, Menlo, monospace); font-size: 12px; color: var(--kx-text-2, #5B7083); margin-bottom: 8px; }

@@ -86,7 +86,7 @@ body.dark #smdDischarge {
 #smdDischarge .d-identity {
   background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 14px;
   box-shadow: var(--d-shadow); padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: center;
-  border-left: 3px solid var(--primary);
+  
 }
 #smdDischarge .d-idmain { display: flex; align-items: center; gap: 14px; min-width: 0; }
 #smdDischarge .d-avatar { flex: 0 0 auto; width: 48px; height: 48px; border-radius: 50%; background: var(--primary-container); color: var(--on-primary-container); display: grid; place-items: center; font: 700 17px var(--d-sans); }
@@ -108,7 +108,7 @@ body.dark #smdDischarge {
 
 /* ---- document sections -------------------------------------------------------------------- */
 #smdDischarge .d-sec { background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 14px; box-shadow: var(--d-shadow); padding: 16px 20px 18px; scroll-margin-top: 16px; }
-#smdDischarge .d-sec.is-edited { border-left: 3px solid var(--sev-info-fg); padding-left: 18px; }
+#smdDischarge .d-sec.is-edited {  padding-left: 18px; }
 #smdDischarge .d-sech { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 #smdDischarge .d-sech h3 { flex: 1; margin: 0; font: 700 16px var(--d-sans); letter-spacing: -.01em; display: flex; align-items: center; gap: 8px; min-width: 0; }
 #smdDischarge .d-sech h3 .material-symbols-outlined { color: var(--primary); font-size: 19px; }
@@ -123,7 +123,7 @@ body.dark #smdDischarge {
 
 #smdDischarge .d-compare { margin-top: 12px; background: none; border: 0; padding: 4px 0; cursor: pointer; color: var(--sev-info-fg); font: 600 12.5px var(--d-sans); display: inline-flex; align-items: center; gap: 4px; }
 #smdDischarge .d-compare .material-symbols-outlined { font-size: 18px; }
-#smdDischarge .d-source { margin-top: 8px; border-left: 2px solid var(--outline-variant); padding: 8px 0 4px 14px; }
+#smdDischarge .d-source { margin-top: 8px;  padding: 8px 0 4px 14px; }
 #smdDischarge .d-srclabel { display: inline-flex; align-items: center; gap: 5px; font: 600 10.5px var(--d-sans); text-transform: uppercase; letter-spacing: .06em; color: var(--on-surface-variant); margin-bottom: 6px; }
 #smdDischarge .d-srclabel .material-symbols-outlined { font-size: 14px; }
 

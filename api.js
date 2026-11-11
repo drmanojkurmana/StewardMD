@@ -1154,7 +1154,6 @@
       ".db-clsback{background:transparent;border:none;color:var(--teal,#0e6e63);font:700 12.5px var(--sans,system-ui);padding:4px 2px;cursor:pointer}",
       ".db-back-ic{transform:rotate(180deg);vertical-align:-2px}",
       ".db-sec-l:first-child{margin-top:2px}",
-      ".db-brandhit{border-left:3px solid var(--teal,#0a9396)}",
       ".db-brandhit .db-bh-comp{color:var(--teal,#0a9396);font-weight:700}",
       ".db-brandhit.disc{opacity:.6}",
       ".db-dwsearch{margin:2px 2px 10px}",
@@ -1322,7 +1321,6 @@
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
       ".db-bh-comp{font-weight:700}",
-      ".db-brandhit{border-left-width:4px}",
       // adaptive split view (option C): persistent browse sidebar + detail pane on wide screens
       ".db-body.db-widebody{max-width:1180px}",
       ".db-split{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}",

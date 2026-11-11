@@ -559,11 +559,6 @@ html body.rds-on .mlr-chip-major     { background: var(--sev-urgent-bg);   color
 html body.rds-on .mlr-chip-monitor   { background: var(--sev-info-bg);     color: var(--sev-info-fg);     border-color: var(--sev-info-bd); }
 html body.rds-on .mlr-chip-duplicate { background: var(--sev-warning-bg);  color: var(--sev-warning-fg);  border-color: var(--sev-warning-bd); }
 html body.rds-on .mlr-card { border-radius: var(--rds-r); border: 1px solid var(--rds-line); box-shadow: var(--rds-el-card); overflow: hidden; }
-html body.rds-on .mlr-card-critical { border-left: 4px solid var(--sev-critical-fg); }
-html body.rds-on .mlr-card-major    { border-left: 4px solid var(--sev-urgent-fg); }
-html body.rds-on .mlr-card-moderate { border-left: 4px solid var(--sev-warning-fg); }
-html body.rds-on .mlr-card-minor    { border-left: 4px solid var(--sev-info-fg); }
-html body.rds-on .mlr-card-monitor  { border-left: 4px solid var(--sev-info-fg); }
 html body.rds-on .mlr-sev-critical { color: var(--sev-critical-fg); }
 html body.rds-on .mlr-sev-major    { color: var(--sev-urgent-fg); }
 html body.rds-on .mlr-explain-btn, html body.rds-on .mlr-whatnow-btn, html body.rds-on .mlr-filter-btn, html body.rds-on .mlr-remove-drug { min-height: 40px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
@@ -610,7 +605,6 @@ html body.rds-on .mc-disc { border: 1px dashed var(--rds-line); border-radius: v
 
 /* --- 2f · Scan review (medlist.js .ml-scan-*) --- */
 html body.rds-on .ml-scan-row { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
-html body.rds-on .ml-scan-flagged { border-left: 4px solid var(--sev-warning-fg); }
 html body.rds-on .ml-scan-mapped { font-family: var(--rds-font); color: var(--rds-ink); }
 html body.rds-on .ml-scan-detected, html body.rds-on .ml-scan-line { color: var(--rds-muted); font-family: var(--rds-font); }
 html body.rds-on .ml-scan-edit { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); }

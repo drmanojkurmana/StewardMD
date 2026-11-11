@@ -220,7 +220,7 @@
 
     var rows = GRADES.map(function (n) {
       var borderColor = n === "1" ? "#10b981" : (n === "2" ? "#38bdf8" : (n === "3" ? "#f59e0b" : "#ef4444"));
-      return '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-left:4px solid ' + borderColor + ';border-radius:8px;padding:12px 14px;margin-bottom:10px;">' +
+      return '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 14px;margin-bottom:10px;">' +
         '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">' +
           gradeBadge(n) +
         '</div>' +

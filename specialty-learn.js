@@ -97,7 +97,7 @@
     // sentence. Enter and Space open it (termKey).
     function rich(obj) {
       var h = D.glossParts(D.t(obj, L())).map(function (p) {
-        if (p.text != null) return esc(p.text);
+        if (p.text != null) return typeof window !== "undefined" && window.SMD_HY ? window.SMD_HY.html(p.text) : esc(p.text);   // key terms black bold (owner 2026-11-11, smd-hy.js)
         var label = esc(p.shown || termText(p.term));
         return W.gloss && W.gloss[p.term] ? '<span class="ln-term" role="button" tabindex="0" data-act="lngloss" data-g="' + esc(p.term) + '" aria-haspopup="dialog">' + label + "</span>" : label;
       }).join("");

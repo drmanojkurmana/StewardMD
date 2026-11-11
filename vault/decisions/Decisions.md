@@ -12204,6 +12204,20 @@ scrolling list, as the owner drew; the star (now a 44px target) and a real chevr
 card shadow lightened and the doubled gap between cards removed. Do not re-propose the tabbed redesign.
 Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.
 
+## No side-accent stripes anywhere in the app (owner, 2026-11-11)
+- Owner, on the Knowledge Library red-flags callout: "Remove this red line ... I dont want see this type of bar which
+  indicate ai slop anywhere in the app. Every module every piece of app ui remove this". Supersedes the 2026-10-29 ICU
+  and 2026-10-31 onco stripe bans by making them app-wide, and reverses the earlier "red left rule (owner target photo)"
+  on `.dx-reader-alert` in `knowledge-library.css`.
+- Removed: every coloured `border-left` of 2px or more, every `border-left-width` / `border-left-color` accent,
+  inset left box-shadow stripes (`inset 3px 0 0`), the `.kblib-row:before` bar (`reasoning.js`) and the 1px teal
+  rule on the splash AMR figures. Severity stays carried by tint, text and badges. 151 declarations, 48 files.
+- Kept on purpose: chevrons, ticks and triangles drawn with borders (rotated or zero-size boxes); the reply-quote
+  marker in outgoing email HTML (`mail.js`, mail-client convention); thin connector lines between stepper dots
+  (ClinIx rail, Narke, OPD timeline, SurgX band); the ECG marker line; compiled Kardia lab bundles.
+- Guard: `test/no-side-stripes.test.mjs` scans every shipping CSS/JS/HTML file. Do not reintroduce a side bar to
+  mark severity, selection or a callout.
+
 ## 2026-11-11 - Highlight and bold while reading (Learn + KB)
 
 **Decision.** One shared highlighter (`text-highlight.js`, flag `smd_hl` default ON) that any reading surface opts into
@@ -12221,6 +12235,21 @@ small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner
 **Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
 rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 **Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].
+
+## Key terms are black bold only, in the KB and every lesson (owner, 2026-11-11)
+- Owner, on the KB reader photo (purple terms in lavender pills): "Make this black bold only no need this color. And
+  similar important points and words concepts bolding in cliniX, other learning lessons too". Replaces the 2026-11-02
+  purple/red rule for `md-*` terms and the lavender pill in `knowledge-library.css`.
+- KB reader, Protocols, management page: every `md-*` term is `font-weight:700; color:inherit` (reasoning.js
+  evInjectCSS, knowledge-library.css, kb-protocols.css). Red for `md-abs`/`md-emerg` is gone too.
+- New `smd-hy.js` (`window.SMD_HY.html/mark`): escaped text with numbers+units, signal phrases, never/do not,
+  eponymous signs, bedside findings and core diagnoses/organisms wrapped in `<b class="smd-hy">` (ink, no colour).
+  Wired into CliniX teaching turns (`clinix-screens.js teachTurn`), specialty-engine lessons (`specialty-learn.js
+  rich()`: Tokós, Narkē, Kardia ...) and KardiQ lessons (`kardiox-screens.js` overview, lists, pearl, pitfall).
+  Glossary terms (`.ln-term`) in the specialty engine are black bold with a neutral dotted underline. PrepNucleus
+  lesson bolds lost their coloured underline. Guard: `test/smd-hy.test.mjs`.
+- Not done here: Ophthalmós (`ophthalmos-learn.*`) is synced byte-identical from `drmanojkurmana/ophthalmos`
+  (`test/ophthalmos-module.test.mjs`); the same change must be made in that repo and synced.
 
 ## 2026-11-11 Home polish: KU chip restored, quick row contrast, header fit
 - ku.js listens to Firebase auth directly (Firebase loads lazily and can restore a session without SMD_ACCOUNT emitting), so the header Knowledge Units chip shows for signed-in doctors.
