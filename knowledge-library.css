@@ -886,3 +886,41 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-mgmt-sys { margin: 0; min-width: 0; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askmaik { flex: 0 0 auto; margin: 0; white-space: nowrap; }
+/* Ask MaiK is the 3D MaiK orb only, no label (owner 2026-11-11): the same lit teal sphere, white M-star mark and
+   glint as the bottom-nav Ask MaiK tab (redesign-system.css, smdMaikOrb*). Reduced motion keeps the look, no motion. */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askorb {
+  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; min-height: 44px; margin: 0; padding: 0; border: 0; border-radius: 50%;
+  background: none; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-askorb:active { transform: scale(0.94); }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-askorb:focus-visible { outline: 2px solid var(--reader-accent); outline-offset: 2px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-orb {
+  position: relative; overflow: hidden; isolation: isolate;
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 24%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 34%),
+    radial-gradient(circle at 50% 115%, rgba(94,234,212,.55) 0%, rgba(94,234,212,0) 55%),
+    radial-gradient(circle at 38% 30%, #2bb3a1 0%, #12786b 46%, #08463e 100%);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.07), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 14px 2px rgba(45,212,191,.09);
+  animation: kbrMaikOrbGlow 2.8s ease-in-out infinite;
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-orb::after {
+  content: ""; position: absolute; inset: -40%; z-index: 2; pointer-events: none;
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
+  transform: translateX(-120%); animation: kbrMaikOrbGlint 4.2s ease-in-out infinite;
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-orb img {
+  position: relative; z-index: 1; display: block; width: 24px; height: auto; pointer-events: none;
+  filter: drop-shadow(0 0 3px rgba(255,255,255,.17)) drop-shadow(0 0 7px rgba(153,246,228,.14));
+}
+@keyframes kbrMaikOrbGlow {
+  0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.07), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 10px 1px rgba(45,212,191,.07); }
+  50%      { box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.11), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 20px 5px rgba(45,212,191,.12); }
+}
+@keyframes kbrMaikOrbGlint { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
+@media (prefers-reduced-motion: reduce) {
+  #dxOverlay #dxMgmt.dx-reader .dx-reader-orb, #dxOverlay #dxMgmt.dx-reader .dx-reader-orb::after { animation: none; }
+  #dxOverlay #dxMgmt.dx-reader .dx-reader-askorb { transition: none; }
+}

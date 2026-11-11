@@ -155,6 +155,7 @@ The disease reader's header now carries the StewardMD Knowledge Base mark (logo 
 Base", `.dx-reader-brand-kb`) in place of "Knowledge Library / Clinical disease reference", so the banner is no
 longer repeated in the hero. Save is an icon-only star (`.dx-reader-star`, aria-label carries the state) in the
 header's right slot (`.dx-reader-topacts`). Ask MaiK sits on the right of the system line
-(`.dx-reader-metarow`). The hero is just the name. The Management page (`openMgmt`) and the library tabs keep
+(`.dx-reader-metarow`) as the 3D MaiK orb only, no label (`.dx-reader-askorb`, same sphere as the bottom-nav Ask MaiK
+tab; aria-label "Ask MaiK about <disease>"). The hero is just the name. The Management page (`openMgmt`) and the library tabs keep
 `kbBannerHTML()`. Code: `reasoning.js` reader render; CSS block at the end of `knowledge-library.css`.
 Guard: `test/run-library-discover-ui.mjs`. The red-flags side bar is gone app-wide (see Decisions 2026-11-11).
