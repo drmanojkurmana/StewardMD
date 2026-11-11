@@ -12203,3 +12203,14 @@ clipped by the rail into a grey band; search and the category rail now sit in a 
 scrolling list, as the owner drew; the star (now a 44px target) and a real chevron are centred on the row;
 card shadow lightened and the doubled gap between cards removed. Do not re-propose the tabbed redesign.
 Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.
+
+## 2026-11-11 - Highlight and bold while reading (Learn + KB)
+
+**Decision.** One shared highlighter (`text-highlight.js`, flag `smd_hl` default ON) that any reading surface opts into
+with `data-hl-key`; first users are the PrepNucleus Learn reader and the KB disease reader. Owner asked for the
+notes-app style palette from a screen recording, plus bold. Palette under the selection (the native Copy menu sits
+above), 7 colours + Bold + Remove, tap a highlight to edit, list of the page's highlights.
+**Why.** One module instead of two per-screen copies; text-quote anchoring survives the readers' re-renders.
+**Trade-off.** Device-local only (not synced); a highlight whose words change in a content update is not drawn.
+**Status.** Built and tested headless; not tried on a phone. Needs build-www + native rebuild. See [[Text Highlights]].
+

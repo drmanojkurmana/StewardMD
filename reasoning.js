@@ -4770,7 +4770,7 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="kbr-sheet" aria-hidden="true"></div>' +
-      '<div class="dx-mgmt-body"><div class="kbr-read">' +
+      '<div class="dx-mgmt-body"><div class="kbr-read" data-hl-key="' + esc("kb:" + id) + '">' +
         '<section class="dx-reader-hero">' + kbBannerHTML() +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
