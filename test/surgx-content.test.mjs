@@ -517,7 +517,10 @@ test("the SURGX logo ships and is ALPHA-MASKED, not a white-background image", (
   const home = readFileSync(join(ROOT, "home.js"), "utf8");
   const screens = readFileSync(join(ROOT, "surgx-screens.js"), "utf8");
   assert.ok(/surgx-logo\.png/.test(home), "the home tile badge must use the logo");
-  assert.ok(/surgx-logo\.png/.test(screens), "the SURGX hero must use the logo");
+  // Since 2026-11-11 the hero draws it as a CSS mask (.sgx-hero-logo in surgx.css) so it takes the brand green.
+  const sgxCss = readFileSync(join(ROOT, "surgx.css"), "utf8");
+  assert.ok(/surgx-logo\.png/.test(screens) || (/sgx-hero-logo/.test(screens) && /\.sgx-hero-logo \{[^}]*mask: url\("\/surgx-logo\.png"\)/.test(sgxCss)),
+    "the SURGX hero must use the logo");
   assert.ok(/brightness\(0\) invert\(1\)/.test(home), "the tile badge must force it white on the dark badge");
 });
 
