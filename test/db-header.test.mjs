@@ -17,3 +17,9 @@ test("the bar title waits for the drug heading to scroll away; the list keeps it
   assert.match(A, /\.db-is-detail:not\(\.db-scrolled\) \.db-title\{opacity:0\}/);
   assert.match(A, /root\.classList\.toggle\("db-scrolled", t\.scrollTop > lim\)/);
 });
+test("phone: no top bar, Back and Brands float like the CliniX and SURGX homes; iPad keeps its bar", () => {
+  assert.match(A, /root\.classList\.toggle\("db-float", !isWide\(\)\)/);
+  assert.match(A, /#dbOverlay#dbOverlay\.db-float \.db-top\{position:absolute!important[^"]*background:transparent!important/);
+  assert.match(A, /#dbOverlay#dbOverlay\.db-float \.db-back\{width:40px[^"]*border-radius:50%!important/);
+  assert.match(A, /#dbOverlay#dbOverlay\.db-float \.db-body\{padding-top:calc\(env\(safe-area-inset-top\) \+ 66px\)!important;-webkit-mask-image/);
+});

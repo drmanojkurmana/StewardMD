@@ -172,6 +172,8 @@
     // A drug page shows its name as the big heading, and the phone list shows "Drugs" big: the bar title waits until
     // that heading scrolls under the bar (owner 2026-11-11: it said the name twice). iPad's split list has no big title.
     root.classList.toggle("db-is-detail", !!showBack || !isWide()); root.classList.remove("db-scrolled");
+    // No top bar on a phone (owner 2026-11-11, "like CliniX and SurgX"): Back and Brands float over the page.
+    root.classList.toggle("db-float", !isWide());
     root.querySelector("#dbBack").style.visibility = "visible";
   }
 
@@ -1303,6 +1305,20 @@
       "html body #dbOverlay#dbOverlay .db-brandbtn:focus-visible,html body #dbOverlay#dbOverlay .db-back:focus-visible{outline:2px solid var(--teal,#0a7c6b);outline-offset:2px}",
       "body.dark #dbOverlay#dbOverlay .db-brandbtn{background:rgba(63,196,160,.16)!important;color:#8fe3c8!important}",
       "body.dark #dbOverlay#dbOverlay .db-back{color:#8fe3c8!important}",
+      /* Floating controls (phone): the bar is gone, as on the CliniX and SURGX homes. The page's own heading ("Drugs",
+         the drug's name) is the title; Back is a round glass button top left, Brands a glass pill top right. */
+      "html body #dbOverlay#dbOverlay.db-float .db-top{position:absolute!important;top:0;left:0;right:0;z-index:5;display:flex!important;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top) + 10px) 14px 0!important;background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none}",
+      "html body #dbOverlay#dbOverlay.db-float .db-top>*{pointer-events:auto}",
+      "html body #dbOverlay#dbOverlay.db-float .db-title{display:none!important}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back{width:40px;height:40px!important;padding:0!important;justify-content:center;border-radius:50%!important;background:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;box-shadow:0 1px 2px rgba(16,48,59,.12),0 0 0 1px rgba(16,48,59,.06)!important;color:var(--ink,#13262b)!important}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back .db-back-ic{width:22px;height:22px;margin-left:-1px}",
+      "html body #dbOverlay#dbOverlay.db-float .db-brandbtn{height:40px!important;padding:0 14px!important;border-radius:20px!important;background:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;box-shadow:0 1px 2px rgba(16,48,59,.12),0 0 0 1px rgba(16,48,59,.06)!important;color:var(--teal,#0a7c6b)!important}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back:active,html body #dbOverlay#dbOverlay.db-float .db-brandbtn:active{transform:scale(.94);opacity:1}",
+      "html body #dbOverlay#dbOverlay.db-float .db-body{padding-top:calc(env(safe-area-inset-top) + 66px)!important;-webkit-mask-image:linear-gradient(180deg,transparent calc(env(safe-area-inset-top) + 6px),#000 calc(env(safe-area-inset-top) + 58px));mask-image:linear-gradient(180deg,transparent calc(env(safe-area-inset-top) + 6px),#000 calc(env(safe-area-inset-top) + 58px))}",
+      "body.dark #dbOverlay#dbOverlay.db-float .db-back,body.dark #dbOverlay#dbOverlay.db-float .db-brandbtn{background:rgba(20,36,40,.72)!important;box-shadow:0 0 0 1px rgba(255,255,255,.08)!important}",
+      "body.dark #dbOverlay#dbOverlay.db-float .db-back{color:#e8f3ef!important}body.dark #dbOverlay#dbOverlay.db-float .db-brandbtn{color:#8fe3c8!important}",
+      "@media(prefers-reduced-transparency:reduce){html body #dbOverlay#dbOverlay.db-float .db-back,html body #dbOverlay#dbOverlay.db-float .db-brandbtn{background:var(--panel,#fff)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}",
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
       ".db-bh-comp{font-weight:700}",
