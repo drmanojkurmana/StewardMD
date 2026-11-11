@@ -41,7 +41,21 @@
     s.textContent = [
       "#smdBoss{position:fixed;inset:0;z-index:100002;background:#071318;display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:0;transition:opacity .28s ease;-webkit-user-select:none;user-select:none}",
       "#smdBoss.on{opacity:1}",
-      "#smdBoss video,#smdBoss .bc-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#071318}",
+      /* Blend (owner 2026-11-11, "mix well into the screen"): a blurred, brightened copy of the scene fills the screen
+         behind the clip; the clip's edges are feathered into it, so there is no hard frame line on any screen shape;
+         a teal glow breathes in behind the doctor at the hero pose; a vignette and a blur-in / blur-out entrance. */
+      "#smdBoss .bc-amb{position:absolute;inset:-12%;background:#071318 center/cover no-repeat;filter:blur(38px) saturate(1.5) brightness(.9);transform:scale(1.08);transition:opacity .9s ease}",
+      "#smdBoss .bc-amb.b{opacity:0}#smdBoss.hero .bc-amb.b{opacity:1}#smdBoss.hero .bc-amb.a{opacity:.55}",
+      "#smdBoss .bc-glow{position:absolute;left:50%;top:52%;width:120vmin;height:120vmin;transform:translate(-50%,-50%) scale(.6);border-radius:50%;background:radial-gradient(closest-side,rgba(63,196,160,.42),rgba(63,196,160,.12) 55%,transparent 72%);opacity:0;transition:opacity .8s ease,transform 1.2s cubic-bezier(.2,.8,.2,1);pointer-events:none;mix-blend-mode:screen}",
+      "#smdBoss.hero .bc-glow{opacity:1;transform:translate(-50%,-50%) scale(1);animation:bcBreathe 3.2s ease-in-out 1.2s infinite}",
+      "@keyframes bcBreathe{50%{opacity:.7;transform:translate(-50%,-50%) scale(1.06)}}",
+      "#smdBoss video,#smdBoss .bc-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent;" +
+        "-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 84%,transparent 100%),linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);-webkit-mask-composite:source-in;" +
+        "mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 84%,transparent 100%),linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-composite:intersect;" +
+        "transform:scale(1.04);filter:blur(10px);transition:transform 1.1s cubic-bezier(.2,.8,.2,1),filter .7s ease}",
+      "#smdBoss.on video,#smdBoss.on .bc-still{transform:none;filter:none}",
+      "#smdBoss.out video,#smdBoss.out .bc-still{transform:scale(1.05);filter:blur(12px)}",
+      "#smdBoss .bc-vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 46%,transparent 55%,rgba(4,14,17,.55) 100%)}",
       "#smdBoss .bc-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,19,24,.78) 0,rgba(7,19,24,.2) 30%,transparent 45%,transparent 70%,rgba(7,19,24,.85) 100%)}",
       "#smdBoss .bc-top{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 64px);text-align:center;padding:0 24px;pointer-events:none}",
       "#smdBoss .bc-eb,#smdBoss .bc-t,#smdBoss .bc-d,#smdBoss .bc-go{opacity:0;transform:translateY(14px);transition:opacity .45s cubic-bezier(.2,.8,.2,1),transform .55s cubic-bezier(.2,.8,.2,1)}",
@@ -57,7 +71,7 @@
       "#smdBoss.end .bc-skip{display:none}",
       "#smdBoss .bc-snd{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);left:14px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#e8f6f1;font:700 15px/1 var(--rds-font,system-ui);cursor:pointer;display:none}",
       "#smdBoss.muted .bc-snd{display:block}",
-      "@media (min-width:600px){#smdBoss video,#smdBoss .bc-still{object-fit:contain}#smdBoss .bc-t{font-size:56px}}",
+      "@media (min-width:600px){#smdBoss video,#smdBoss .bc-still{object-fit:contain;-webkit-mask-image:radial-gradient(closest-side at 50% 50%,#000 50%,transparent 100%);mask-image:radial-gradient(closest-side at 50% 50%,#000 50%,transparent 100%);-webkit-mask-size:min(100vw,56.25vh) 100vh;mask-size:min(100vw,56.25vh) 100vh;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}#smdBoss .bc-t{font-size:56px}#smdBoss .bc-amb{filter:blur(60px) saturate(1.3) brightness(.62)}}",
       "@media (prefers-reduced-motion:reduce){#smdBoss,#smdBoss *{transition:none!important}}"
     ].join("\n");
     document.head.appendChild(s);
@@ -74,10 +88,11 @@
     var clip = CLIP[window.SMD_GENDER.get()] || CLIP.male;
     var still = reduced();
     var el = document.createElement("div");
-    el.id = "smdBoss"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", o.title);
-    el.innerHTML = (still ? '<img class="bc-still" alt="" src="' + clip.end + "?v=" + V + '">'
+    el.id = "smdBoss"; el.setAttribute("data-own-motion", ""); el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", o.title);
+    var amb = '<div class="bc-amb a" style="background-image:url(' + clip.start + "?v=" + V + ')"></div><div class="bc-amb b" style="background-image:url(' + clip.end + "?v=" + V + ')"></div><div class="bc-glow"></div>';
+    el.innerHTML = amb + (still ? '<img class="bc-still" alt="" src="' + clip.end + "?v=" + V + '">'
         : '<video playsinline webkit-playsinline preload="auto" poster="' + clip.start + "?v=" + V + '" src="' + clip.src + "?v=" + V + '"></video>') +
-      '<div class="bc-shade"></div>' +
+      '<div class="bc-vig"></div><div class="bc-shade"></div>' +
       '<div class="bc-top">' + (o.eyebrow ? '<div class="bc-eb">' + esc(o.eyebrow) + "</div>" : "") + '<div class="bc-t">' + esc(o.title) + "</div></div>" +
       '<div class="bc-bot">' + (o.detail ? '<div class="bc-d">' + esc(o.detail) + "</div>" : "") + '<button type="button" class="bc-go">Continue</button></div>' +
       (still ? "" : '<button type="button" class="bc-skip" aria-label="Skip">Skip</button><button type="button" class="bc-snd" aria-label="Turn sound on">&#9834;</button>');
@@ -95,7 +110,7 @@
     function close() {
       if (rec.done) return; rec.done = true; clearTimeout(rec.heroT); clearTimeout(rec.endT);
       var v = el.querySelector("video"); if (v) { try { v.pause(); } catch (e) {} }
-      el.classList.remove("on");
+      el.classList.add("out"); el.classList.remove("on");
       setTimeout(function () { try { v && v.removeAttribute("src"); v && v.load(); } catch (e) {} el.remove(); if (active === rec) active = null; }, 300);
       document.removeEventListener("keydown", onKey, true);
     }
