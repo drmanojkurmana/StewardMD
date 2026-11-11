@@ -355,3 +355,11 @@ Structure, not detail, was the tell. Changed:
 - **Evidence "Used by"** lists real protocol and operation titles as rows (`itemTitle()`), not raw ids on pills.
 - Case vitals read as label over value (tabular numbers, sans), not mono pills; phase label capitalised.
 - Radii 12 / 10 (was 16 / 12).
+
+## Home in the CliniX pattern (owner 2026-11-11)
+Home has no top bar: `screenHome()` renders the hero with a round floating close button at the top right (`.sgx-hero-close`,
+as CliniX `.cx-hero-close`), the monogram inline with the live-text wordmark (`.sgx-hero-logo` is a CSS mask of
+`surgx-logo.png` in `--sgx-steel`, so it follows dark mode without a filter), a one-line tagline, a "Sections"
+heading and one grouped card (`.sgx-secs`) of rows with icon tiles (`SECTIONS[].icon`). The educational-content
+note moved to the footer disclaimer. Inner screens still use `head()` and its sticky bar. CSS block at the end
+of `surgx.css`.

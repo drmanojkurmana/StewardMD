@@ -12217,3 +12217,21 @@ Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.
   (ClinIx rail, Narke, OPD timeline, SurgX band); the ECG marker line; compiled Kardia lab bundles.
 - Guard: `test/no-side-stripes.test.mjs` scans every shipping CSS/JS/HTML file. Do not reintroduce a side bar to
   mark severity, selection or a callout.
+
+## 2026-11-11 - Highlight and bold while reading (Learn + KB)
+
+**Decision.** One shared highlighter (`text-highlight.js`, flag `smd_hl` default ON) that any reading surface opts into
+with `data-hl-key`; first users are the PrepNucleus Learn reader and the KB disease reader. Owner asked for the
+notes-app style palette from a screen recording, plus bold. Palette under the selection (the native Copy menu sits
+above), 7 colours + Bold + Remove, tap a highlight to edit, list of the page's highlights.
+**Why.** One module instead of two per-screen copies; text-quote anchoring survives the readers' re-renders.
+**Trade-off.** Device-local only (not synced); a highlight whose words change in a content update is not drawn.
+**Status.** Built and tested headless; not tried on a phone. Needs build-www + native rebuild. See [[Text Highlights]].
+
+## 2026-11-11 · Watermark by module; Home fixed size
+**Decision.** PrepNucleus marks only inside PrepNucleus and the Image Library (centre mark + corner lockup); elsewhere a
+small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner ignore the Display font size and density.
+**Why.** Owner: tiled marks covered labels; Home looked wrong at larger sizes.
+**Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
+rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
+**Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].

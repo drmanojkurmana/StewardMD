@@ -1,0 +1,62 @@
+/* Knowledge Library header variants (reasoning.js kbHeadApply, localStorage smd_kb_head = a | b | c).
+ * Same palette and type as knowledge-library.css; only the layout of the top of the page changes. */
+
+/* ---- all variants: the brand is the bar title (library pages only; the overlay also hosts other references) ---- */
+#sbrefOverlay .kbh-brand { display: none; }
+#sbrefOverlay.kbh:is(:has(.kblib-discover), :has(.kblib-tool-page)) .sbref-top { display: flex; align-items: center; gap: 10px; min-height: 56px; }
+#sbrefOverlay.kbh:is(:has(.kblib-discover), :has(.kblib-tool-page)) .kbh-brand { display: flex; align-items: center; gap: 10px; flex: 1 1 auto; min-width: 0; }
+#sbrefOverlay.kbh .kbh-brand img { width: 28px; height: 28px; flex: 0 0 auto; }
+#sbrefOverlay.kbh .kbh-brand span { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+#sbrefOverlay.kbh .kbh-brand strong { font-size: 16px; font-weight: 650; letter-spacing: -.01em; color: var(--ink); }
+#sbrefOverlay.kbh .kbh-brand small { font-size: 12.5px; font-weight: 500; color: var(--slate-soft, #646b77); }
+/* the old title stays for screen readers only */
+#sbrefOverlay.kbh:is(:has(.kblib-discover), :has(.kblib-tool-page)) #sbrefTitle {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: -1px; padding: 0; }
+#sbrefOverlay.kbh:is(:has(.kblib-discover), :has(.kblib-tool-page)) .sbref-top .sb-x { margin-left: auto; }
+/* the banner inside each page now lives in the bar */
+#sbrefOverlay.kbh #sbrefBody :is(.kblib-intro, .kblib-tool-intro) > .smd-kb-banner { display: none; }
+/* search: no separate "Search the library" heading, the field says it */
+#sbrefOverlay.kbh :is(.kblib-discover, .kblib-tool-intro) .kblib-search-label {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: -1px; }
+#sbrefOverlay.kbh .kblib-discover .kblib-try { margin-top: 12px; }
+
+/* ---- A: compact. Tabs, then search. No hero. ---- */
+#sbrefOverlay.kbh-a .kblib-discover .kblib-intro,
+#sbrefOverlay.kbh-c .kblib-discover .kblib-intro { display: none; }
+#sbrefOverlay:is(.kbh-a, .kbh-c) .kblib-discover { padding-top: 16px !important; }
+
+/* ---- B: a smaller title with the search right under it ---- */
+#sbrefOverlay.kbh-b .kblib-discover .kblib-intro { padding: 14px 0 0; margin: 0; }
+#sbrefOverlay.kbh-b .kblib-discover .kblib-intro h1 { font-size: 28px; margin: 4px 0 6px; }
+#sbrefOverlay.kbh-b .kblib-discover .kblib-intro p { margin: 0 0 14px; font-size: 14px; }
+
+/* ---- C: the search lives in the bar, under the brand; tabs and content scroll below ---- */
+#sbrefOverlay.kbh-c:has(.kblib-discover) .sbref-top { flex-wrap: wrap; row-gap: 8px; padding-bottom: 12px; }
+#sbrefOverlay.kbh-c .sbref-top .kblib-searchbox { position: relative; flex: 1 0 100%; order: 3; margin: 0; padding: 0; background: none; top: auto; }
+#sbrefOverlay.kbh-c .sbref-top .kblib-search { width: 100%; min-height: 44px; padding: 10px 14px 10px 44px; border: 0; border-radius: 12px;
+  background: color-mix(in srgb, var(--ink, #111) 7%, var(--paper, #f5f5f7)); color: var(--ink); font-size: 16px; }
+#sbrefOverlay.kbh-c .sbref-top .kblib-searchbox svg { left: 14px; width: 18px; height: 18px; }
+#sbrefOverlay:not(:has(.kblib-discover)) .sbref-top .kblib-searchbox { display: none; }
+#sbrefOverlay.kbh-c .kblib-discover .kblib-try { margin-top: 4px; }
+
+/* ---- D (default, owner's layout 2026-11-11): brand bar, search with its heading, one swipeable Try row, then
+ * "Find any disease", Your library and the disease index. ---- */
+#sbrefOverlay.kbh .kbh-div { display: none; }
+#sbrefOverlay.kbh-d .kbh-brand { gap: 12px; }
+#sbrefOverlay.kbh-d .kbh-brand img { width: 34px; height: 34px; }
+#sbrefOverlay.kbh-d .kbh-div { display: block; width: 1px; height: 30px; background: var(--line, #e3e5eb); }
+#sbrefOverlay.kbh-d .kbh-brand strong { font-size: 18px; font-weight: 700; }
+#sbrefOverlay.kbh-d .kbh-brand small { font-size: 14px; }
+#sbrefOverlay.kbh-d:has(.kblib-discover) .sbref-top { min-height: 64px; }
+#sbrefOverlay.kbh-d #sbrefBody:has(.kblib-discover) .sbref-tabs { padding-bottom: 0; }
+#sbrefOverlay.kbh-d .kblib-discover { padding-top: 22px !important; border-top: 1px solid var(--kl-line, var(--line)) !important; margin-top: 14px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-search-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0 0 12px;
+  display: block; font-size: 17px; font-weight: 650; color: var(--ink); }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-try { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+  margin: 12px -20px 0; padding: 2px 20px; scroll-padding-inline: 20px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-try::-webkit-scrollbar { display: none; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-try > * { flex: 0 0 auto; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-intro { padding: 26px 0 4px; margin: 0; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-intro h1 { margin: 0 0 8px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-intro p { margin: 0 0 6px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-personal { border-top: 0; padding-top: 18px; }

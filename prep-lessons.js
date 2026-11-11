@@ -909,7 +909,7 @@
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
-        '<p class="pn-lsn-tx">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
+        '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
@@ -1004,11 +1004,13 @@
     };
     ON(sc, "lsn", "pointerup", up); ON(sc, "lsn", "pointercancel", up);
   }
+  // Dragging a text-selection handle (highlighting, text-highlight.js) must not turn the page.
+  function selecting(el) { try { var s = G.getSelection && G.getSelection(); return !!(s && !s.isCollapsed && s.rangeCount && el.contains(s.getRangeAt(0).commonAncestorContainer)); } catch (e) { return false; } }
   function bindSwipe(el) {
     if (!el) return;
     var x0 = 0, y0 = 0, on = false;
     ON(el, "lsn", "pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl,.pn-cmp-sl,.pn-flips"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
-    ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
+    ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; if (selecting(el)) return; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
     ON(el, "lsn", "pointercancel", function () { on = false; });
   }
 

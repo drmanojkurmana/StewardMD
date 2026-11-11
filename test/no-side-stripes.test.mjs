@@ -51,6 +51,8 @@ test("no side-accent stripes in shipping UI source", () => {
         if (m[1] !== undefined && parseFloat(m[1]) < 1) continue;
         if (rx === BAD[0] && parseFloat(m[1]) < 2 && !/rgba\(63,199,179|var\(--(teal|red|primary|accent|green|amber|orange)/.test(src.slice(m.index, m.index + 80))) continue;
         if (rx === BAD[1] && parseFloat(m[1]) < 2) continue;
+        // a neutral hairline colour (low-alpha rgba or a line/hair token) recolours a divider, not a stripe
+        if (rx === BAD[2] && /^border-left-color\s*:\s*(rgba\([^)]*,\s*0?\.[0-3]\d*\s*\)|var\(--[\w-]*(line|hair|bd|outline-variant)[\w-]*)/.test(src.slice(m.index, m.index + 80))) continue;
         hits.push(f + ":" + (src.slice(0, m.index).split("\n").length) + "  " + src.slice(m.index, m.index + 60).split("\n")[0]);
       }
     }

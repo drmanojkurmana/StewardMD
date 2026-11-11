@@ -1181,6 +1181,8 @@ body.dark #homeV2.rnav .hrf-qa-btn.is-first .hrf-ic{color:var(--hrf-firstink)}
 #homeV2.rnav .hrf-banner .rnav-hero-bd{position:relative;z-index:2}
 #homeV2.rnav .hrf-banner .rnav-hero-tt{font:800 22px/1.15 var(--rds-font);color:#fff}
 #homeV2.rnav .hrf-banner-pro{font-weight:500}
+/* MD in the brand teal, as in the header logo (owner 2026-11-11) */
+#homeV2.rnav .hrf-banner .hrf-banner-md{color:var(--hrf-mint);font-weight:inherit}
 #homeV2.rnav .hrf-banner-tag{letter-spacing:.18em;font:700 10px var(--rds-font);color:rgba(255,255,255,.82);text-transform:uppercase}
 #homeV2.rnav .hrf-banner .rnav-hero-p{color:rgba(255,255,255,.92);max-width:230px;font:500 13.5px/1.35 var(--rds-font);margin-top:5px}
 #homeV2.rnav .hrf-banner-line{display:block}
@@ -1342,6 +1344,9 @@ html[data-appearance="blend"] #homeV2#homeV2.rnav{--hrf-fill:linear-gradient(135
 @media (min-width:640px){#aboutModal .smd-fx-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 #homeV2.rnav .hrf-banner[data-act]:active{transform:scale(.99)}
 /* Display density on the current Home (the older .hv-* rules in home.js target markup that no longer exists). Default adds nothing. */
-html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:72px!important;min-height:72px!important}html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav .hrf-qc{height:68px!important;min-height:68px!important}html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav .hrf-banner{height:96px!important}html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:10px!important}
-html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:94px!important;min-height:94px!important}html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav .hrf-qc{height:90px!important;min-height:90px!important}html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav .hrf-banner{height:126px!important}html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:26px!important}
-html body.smd-dens-large #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:104px!important;min-height:104px!important}html body.smd-dens-large #homeV2#homeV2#homeV2.rnav .hrf-qc{height:100px!important;min-height:100px!important}html body.smd-dens-large #homeV2#homeV2#homeV2.rnav .hrf-banner{height:138px!important}html body.smd-dens-large #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:34px!important}
+/* Home ignores the Display font size and density (owner 2026-11-11): home.js homeFitD sets --smd-home-zoom (takes the html zoom back
+   out to the Auto fit scale) and html[data-home-dens] (the Auto fit density). */
+#homeV2{zoom:var(--smd-home-zoom,1)}
+html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:72px!important;min-height:72px!important}html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav .hrf-qc{height:68px!important;min-height:68px!important}html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav .hrf-banner{height:96px!important}html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:10px!important}
+html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:94px!important;min-height:94px!important}html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav .hrf-qc{height:90px!important;min-height:90px!important}html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav .hrf-banner{height:126px!important}html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:26px!important}
+html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:104px!important;min-height:104px!important}html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav .hrf-qc{height:100px!important;min-height:100px!important}html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav .hrf-banner{height:138px!important}html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:34px!important}
