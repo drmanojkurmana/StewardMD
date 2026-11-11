@@ -150,7 +150,7 @@ The Library home carries an "Image Library" entry opening the shared central ima
 - `SMD_KB.open()` with no id now opens the Syndromes tab instead of an empty reader (that empty card was what the
   `kb-library` screen of `test/run-ipad-layout-ui.mjs` measured).
 
-## Header variants (2026-11-11, flag `smd_kb_head`, default off)
+## Header variants (2026-11-11, flag `smd_kb_head`, default "d")
 
 Owner marked up the Discover screen: drop the "Knowledge Library" bar title, put the StewardMD Knowledge Base brand
 in the bar, move the search up. Three variants, picked with localStorage `smd_kb_head` (`a` | `b` | `c`; anything else
@@ -171,3 +171,10 @@ for Favourites, history clock for Recently viewed, in `--kl-accent`; label; coun
 open) split by a hairline. A row opens its list in place. When both lists are empty, one grey rounded card (book icon,
 "Your library is empty", "Diseases you open will appear here.") replaces the two empty hints. Both rows start closed.
 Styles: end of `knowledge-library.css` (`.kbl-*`). Test: `test/run-kb-yourlib-ui.mjs` (light + dark, empty and filled).
+
+**Default "d" (owner's own layout, later the same day; `smd_kb_head` unset = d, `"0"` = the old page, a/b/c still
+selectable):** bar = logo, a thin divider, StewardMD / Knowledge Base, close. Then tabs, a hairline, "Search the
+library" heading + the search field (original placeholder), the Try chips on ONE line that swipes sideways, "Find any
+disease" with the count line, Your library (icon rows), and the whole disease list ("All diseases", refine, 40 at a
+time, Show more) right under it; Image Library and the branch tiles come after the list. `kbHeadApply` moves the nodes
+after each Discover render; search mode still hides everything but the results.

@@ -18,7 +18,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); 
 const browser = await pw.chromium.launch();
 const vis = (sel) => `(()=>{const e=document.querySelector(${JSON.stringify(sel)});if(!e)return false;const r=e.getBoundingClientRect();return r.width>2&&r.height>2&&getComputedStyle(e).visibility!=="hidden"})()`;
 try {
-  for (const v of ["", "a", "b", "c"]) {
+  for (const v of ["0", "", "a", "b", "c"]) {
     const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
     await ctx.addInitScript(`try{localStorage.setItem("smd_kb_head", ${JSON.stringify(v)});}catch(e){}`);
     const p = await ctx.newPage();
@@ -27,12 +27,26 @@ try {
     await p.evaluate(() => { ["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(k=>document.getElementById(k)?.remove()); SB.openRef("syndromes"); });
     await p.waitForSelector("#kblibQ", { timeout: 10000 });
     await sleep(300);
-    const L = v || "none";
-    const W = await p.evaluate(() => { let o = 0; document.querySelectorAll("#sbrefOverlay *").forEach(e => { const r = e.getBoundingClientRect(); if (r.width && r.right > innerWidth + 1 && !e.closest(".sbref-tabs")) o++; }); return o; });
-    ok(W === 0, `${L}: nothing wider than 390 px`);
-    if (!v) {
-      ok(await p.evaluate(vis("#sbrefTitle")) && !(await p.evaluate(vis(".kbh-brand"))), "none: today's bar title, no bar brand");
-      ok(await p.evaluate(vis(".kblib-discover .kblib-intro h1")) && await p.evaluate(vis(".kblib-search-label")), "none: hero and search label as before");
+    const L = v === "0" ? "old" : v || "d (default)";
+    const W = await p.evaluate(() => { let o = 0; document.querySelectorAll("#sbrefOverlay *").forEach(e => { const r = e.getBoundingClientRect(); if (r.width && r.right > innerWidth + 1 && !e.closest(".sbref-tabs") && !e.closest(".kblib-try")) o++; }); return o; });
+    ok(W === 0, `${L}: nothing wider than 390 px (the Try row scrolls inside itself)`);
+    if (!v) ok(await p.evaluate(() => { const r = document.getElementById("kblibTry").getBoundingClientRect(); return r.left >= -1 && r.right <= innerWidth + 1; }), `${L}: the Try row itself spans the screen exactly`);
+    if (v === "0") {
+      ok(await p.evaluate(vis("#sbrefTitle")) && !(await p.evaluate(vis(".kbh-brand"))), "old: the bar title, no bar brand");
+      ok(await p.evaluate(vis(".kblib-discover .kblib-intro h1")) && await p.evaluate(vis(".kblib-search-label")), "old: hero and search label as before");
+    } else if (!v) {
+      ok(await p.evaluate(vis(".sbref-top .kbh-brand")) && !(await p.evaluate(vis("#sbrefTitle"))), `${L}: brand is the bar title`);
+      ok(await p.evaluate(vis(".kblib-search-label")) && await p.evaluate(() => document.querySelector(".kblib-search-label").textContent === "Search the library"), `${L}: "Search the library" heading shown`);
+      const order = await p.evaluate(() => { const y = (s) => { const e = document.querySelector(s); return e ? e.getBoundingClientRect().top : -1; }; return [y("#kblibQ"), y("#kblibTry"), y(".kblib-intro h1"), y(".kblib-personal"), y("#kblibGrid"), y("#kblibDiscovery")]; });
+      ok(order.every((t, i) => t >= 0 && (i === 0 || t > order[i - 1])), `${L}: search, Try, Find any disease, Your library, all diseases, then branches (${order.map(Math.round).join(",")})`);
+      ok(await p.evaluate(() => { const t = document.getElementById("kblibTry"), b = [...t.querySelectorAll("button")]; return getComputedStyle(t).flexWrap === "nowrap" && new Set(b.map((x) => Math.round(x.getBoundingClientRect().top))).size === 1 && t.scrollWidth > t.clientWidth; }), `${L}: Try chips on one swipeable line`);
+      ok(await p.evaluate(() => document.getElementById("kblibResultsTitle").textContent === "All diseases" && document.querySelectorAll("#kblibGrid > *").length >= 20), `${L}: "All diseases" list right under Your library`);
+      ok(!(await p.evaluate(vis("#sbrefBody .kblib-intro .smd-kb-banner"))), `${L}: no banner inside the page`);
+      await p.fill("#kblibQ", "mening"); await sleep(300);
+      ok(/mening/i.test(await p.evaluate(() => (document.getElementById("kblibGrid") || {}).textContent || "")), `${L}: typing still filters the index`);
+      ok(await p.evaluate(() => ["#kblibTry", ".kblib-intro", ".kblib-personal"].every((s) => getComputedStyle(document.querySelector(s)).display === "none")), `${L}: while searching only the results show`);
+      await p.fill("#kblibQ", ""); await sleep(300);
+      ok(await p.evaluate(() => [".kblib-intro", ".kblib-personal"].every((s) => getComputedStyle(document.querySelector(s)).display !== "none")), `${L}: clearing the search brings the page back`);
     } else {
       ok(await p.evaluate(vis(".sbref-top .kbh-brand")) && /StewardMD\s*Knowledge Base/.test(await p.evaluate(() => document.querySelector(".kbh-brand").textContent)), `${L}: brand is the bar title`);
       ok(!(await p.evaluate(vis("#sbrefTitle"))) && await p.evaluate(() => document.getElementById("sbrefTitle").textContent === "Knowledge Library"), `${L}: old title kept for screen readers only`);

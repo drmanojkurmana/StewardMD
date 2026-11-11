@@ -5891,22 +5891,34 @@
    * brand up into the bar, search up). localStorage smd_kb_head = "a" | "b" | "c"; anything else keeps today's
    * layout. Styles in kb-head.css. a = compact (tabs, then search; no hero), b = small title with search under it,
    * c = compact with the search pinned under the bar while the page scrolls. */
-  function kbHeadVariant() { try { var v = localStorage.getItem("smd_kb_head"); return /^[abc]$/.test(v || "") ? v : ""; } catch (e) { return ""; } }
+  // Default "d" (owner's layout, 2026-11-11); "a" | "b" | "c" are the earlier variants; "0" restores the old page.
+  function kbHeadVariant() { try { var v = localStorage.getItem("smd_kb_head"); return v === "0" ? "" : /^[abcd]$/.test(v || "") ? v : "d"; } catch (e) { return "d"; } }
   function kbHeadApply(count) {
     var o = document.getElementById("sbrefOverlay"); if (!o) return;
     var v = kbHeadVariant();
-    o.classList.remove("kbh", "kbh-a", "kbh-b", "kbh-c");
+    o.classList.remove("kbh", "kbh-a", "kbh-b", "kbh-c", "kbh-d");
     if (!v) return;
     o.classList.add("kbh", "kbh-" + v);
     var top = o.querySelector(".sbref-top");
     if (top && !top.querySelector(".kbh-brand")) {
       var b = document.createElement("div"); b.className = "kbh-brand"; b.setAttribute("aria-hidden", "true");
-      b.innerHTML = '<img src="/logo.png" alt="" width="28" height="28" decoding="async"><span><strong>StewardMD</strong><small>Knowledge Base</small></span>';
+      b.innerHTML = '<img src="/logo.png" alt="" width="28" height="28" decoding="async"><i class="kbh-div"></i><span><strong>StewardMD</strong><small>Knowledge Base</small></span>';
       top.insertBefore(b, top.firstChild);
     }
     // the freshly rendered field is the one in the page; an older one may still sit in the bar (c)
     var q = document.querySelector("#sbrefBody #kblibQ") || document.getElementById("kblibQ");
-    if (q && count) q.placeholder = "Search " + count + " diseases";
+    if (q && count && v !== "d") q.placeholder = "Search " + count + " diseases";
+    // d: search, the Try row, then "Find any disease", Your library, and the whole disease index right under it
+    // (Image Library and the branch tiles follow the index). Only on a fresh Discover render (count is passed).
+    var sec = count && document.querySelector("#sbrefBody .kblib-discover");
+    if (v === "d" && sec) {
+      var intro = sec.querySelector(".kblib-intro"), tr = sec.querySelector("#kblibTry"), per = sec.querySelector(".kblib-personal");
+      if (intro && tr) tr.parentNode.insertBefore(intro, tr.nextSibling);
+      var anchor = sec.querySelector("#kblibImgLib") || sec.querySelector("#kblibDiscovery"), head = sec.querySelector("#kblibResultsTitle");
+      head = head && head.closest(".kblib-section-heading");
+      if (per && anchor && head) [head, sec.querySelector(".kblib-refine"), sec.querySelector("#kblibCount"), sec.querySelector("#kblibGrid"), sec.querySelector("#kblibMore")]
+        .forEach(function (n) { if (n) sec.insertBefore(n, anchor); });
+    }
     // c: the Discover search field moves into the bar, under the brand (handlers are delegated by id).
     if (top) {
       var box = q && q.closest(".kblib-searchbox"), old = top.querySelectorAll(".kblib-searchbox");
@@ -6039,7 +6051,7 @@
       var sb = document.getElementById("sbrefBody"); if (sb) sb.scrollTop = 0;
     }
     var discovery = document.getElementById("kblibDiscovery"); if (discovery) discovery.hidden = searching || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all";
-    var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : "Disease index";
+    var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : (kbHeadVariant() === "d" ? "All diseases" : "Disease index");
     var clear = document.getElementById("kblibClear"); if (clear) clear.hidden = !(_libState.q || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all");
     var more = document.getElementById("kblibMore"); if (more) more.hidden = shown >= res.length;
     grid.innerHTML = res.slice(0, _libState.limit).map(function (d) {

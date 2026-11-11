@@ -38,3 +38,25 @@
 #sbrefOverlay.kbh-c .sbref-top .kblib-searchbox svg { left: 14px; width: 18px; height: 18px; }
 #sbrefOverlay:not(:has(.kblib-discover)) .sbref-top .kblib-searchbox { display: none; }
 #sbrefOverlay.kbh-c .kblib-discover .kblib-try { margin-top: 4px; }
+
+/* ---- D (default, owner's layout 2026-11-11): brand bar, search with its heading, one swipeable Try row, then
+ * "Find any disease", Your library and the disease index. ---- */
+#sbrefOverlay.kbh .kbh-div { display: none; }
+#sbrefOverlay.kbh-d .kbh-brand { gap: 12px; }
+#sbrefOverlay.kbh-d .kbh-brand img { width: 34px; height: 34px; }
+#sbrefOverlay.kbh-d .kbh-div { display: block; width: 1px; height: 30px; background: var(--line, #e3e5eb); }
+#sbrefOverlay.kbh-d .kbh-brand strong { font-size: 18px; font-weight: 700; }
+#sbrefOverlay.kbh-d .kbh-brand small { font-size: 14px; }
+#sbrefOverlay.kbh-d:has(.kblib-discover) .sbref-top { min-height: 64px; }
+#sbrefOverlay.kbh-d #sbrefBody:has(.kblib-discover) .sbref-tabs { padding-bottom: 0; }
+#sbrefOverlay.kbh-d .kblib-discover { padding-top: 22px !important; border-top: 1px solid var(--kl-line, var(--line)) !important; margin-top: 14px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-search-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; white-space: normal; margin: 0 0 12px;
+  display: block; font-size: 17px; font-weight: 650; color: var(--ink); }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-try { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
+  margin: 12px -20px 0; padding: 2px 20px; scroll-padding-inline: 20px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-try::-webkit-scrollbar { display: none; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-try > * { flex: 0 0 auto; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-intro { padding: 26px 0 4px; margin: 0; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-intro h1 { margin: 0 0 8px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-intro p { margin: 0 0 6px; }
+#sbrefOverlay.kbh-d .kblib-discover .kblib-personal { border-top: 0; padding-top: 18px; }
