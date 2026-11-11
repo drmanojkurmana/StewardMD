@@ -185,8 +185,10 @@ test("gate: loader lists the module as optional; prep.js forwards sp- acts only"
   assert.match(read("prep.js"), /a\.indexOf\("sp-"\) === 0 && G\.PREP_SOUND_SPOTIFY/);
   const src = read("prep-sound-spotify.js");
   assert.match(src, /smd_prep_sound_spotify/);
-  // Owner 2026-10-31: Spotify is ON by default (explicit "0" turns it off) and still inert without PrepNucleus or a client id.
-  assert.match(src, /if \(!prepOn\(\) \|\| !flagOn\("smd_prep_sound_spotify", "spotify", true\) \|\| !CID\) return;/, "on by default, inert without prep or client id");
+  // Owner 2026-11-11: Spotify is OFF by default (only "1" turns it on) and inert without PrepNucleus or a client id.
+  assert.match(src, /if \(!prepOn\(\) \|\| !flagOn\("smd_prep_sound_spotify", "spotify", false\) \|\| !CID\) return;/, "off by default, inert without prep or client id");
+  // Never over the setup steps, and gone at once when switched off.
+  assert.match(src, /var hide = !!root\.querySelector\("\.pl-ob"\) \|\| !flagOn\("smd_prep_sound_spotify", "spotify", false\);/);
   assert.match(read("_headers"), /https:\/\/api\.spotify\.com https:\/\/accounts\.spotify\.com/);
 });
 

@@ -198,14 +198,19 @@ test("loader: first open injects the stylesheet and scripts in order at one toke
   assert.ok(L.JS.indexOf("specialty-core.js") < L.JS.indexOf("prep.js"));
 });
 
-test("loader: Spotify loads by default after the base files; ?spotify=0 leaves them out", () => {
-  const on = loaderIn("?prep=1", {});
+test("loader: Spotify is OFF by default (owner 2026-11-11); ?spotify=1 or the Settings switch loads it", () => {
+  const off = loaderIn("?prep=1", {});
+  off.win.PREP.open();
+  assert.ok(!off.added.some((e) => /prep-sound/.test(e.href || e.src || "")), "no Spotify files by default");
+  const on = loaderIn("?prep=1&spotify=1", {});
   on.win.PREP.open();
   const got = on.added.map((e) => e.href || e.src);
   assert.ok(got.some((u) => /\/prep-sound-spotify\.js\?/.test(u)) && got.some((u) => /\/prep-sound-player\.js\?/.test(u)));
-  const off = loaderIn("?prep=1&spotify=0", {});
-  off.win.PREP.open();
-  assert.ok(!off.added.some((e) => /prep-sound/.test(e.href || e.src || "")));
+  assert.match(read("prep-loader.js"), /getItem\("smd_prep_sound_spotify"\) === "1"/);
+  assert.match(read("prep-loader.js"), /function loadSpotify\(\)/);
+  const plan = read("prep-plan.js");
+  assert.match(plan, /data-act="p-spotify" data-v="1"/);
+  assert.match(plan, /G\.PREP_LOADER\.loadSpotify\(\)/);
 });
 
 test("wiring: index.html boots only the loader, at the loader's token; home, back and the bundle know PrepNucleus", () => {

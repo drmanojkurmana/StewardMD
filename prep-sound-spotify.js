@@ -547,8 +547,8 @@
     return G.location.origin + G.location.pathname;
   }
   var CID = clientId();
-  // Spotify is ON by default for everyone (owner 2026-10-31); smd_prep_sound_spotify="0" or ?spotify=0 turns it off.
-  if (!prepOn() || !flagOn("smd_prep_sound_spotify", "spotify", true) || !CID) return;
+  // Spotify is OFF by default (owner 2026-11-11): only smd_prep_sound_spotify = "1" (Settings > Sound) or ?spotify=1.
+  if (!prepOn() || !flagOn("smd_prep_sound_spotify", "spotify", false) || !CID) return;
 
   /* ================= live state + sheet ================= */
   var D = G.document;
@@ -1141,7 +1141,10 @@
     if (S.sheet && !S.sheet.isConnected) { S.sheet = null; S.playerHandle = null; S.provOpen = false; }   // removed by someone else: show the dock again
     if (!S.dock || !S.dock.isConnected) { S.dock = D.createElement("div"); S.dock.className = "pn-sound-sp-dock"; root.appendChild(S.dock); }
     // Entry is Settings > Sound (Beta); the round button is only the swiped-down form of a player with a song.
-    var html = S.sheet ? "" : miniOn() ? miniHtml() : (S.state === "icon" && S.now && S.now.title && client().store.has() ? dockButtonHtml() : "");
+    // Never over the setup steps (owner 2026-11-11: the mini player sat on the subject list), and gone at once when
+    // the switch in Settings is turned off.
+    var hide = !!root.querySelector(".pl-ob") || !flagOn("smd_prep_sound_spotify", "spotify", false);
+    var html = S.sheet || hide ? "" : miniOn() ? miniHtml() : (S.state === "icon" && S.now && S.now.title && client().store.has() ? dockButtonHtml() : "");
     S.dock.classList.toggle("is-stacked", !!root.querySelector(".pn-sound-dock"));   // sit above the ambience dock
     if (S.dock.getAttribute("data-html") !== html) { S.dock.innerHTML = html; S.dock.setAttribute("data-html", html); wireSwipe(S.dock.firstChild); }
     var bar = S.dock.querySelector(".pn-sound-sp-mprog span"), m = S.now;

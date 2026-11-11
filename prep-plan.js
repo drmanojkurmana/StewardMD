@@ -676,11 +676,19 @@
   // A plan choice for an exam tab: the first choice on it (legacy "usmle" reads Step 1).
   function choiceForTab(tab) { for (var i = 0; i < EXAM_CHOICES.length; i++) if (EXAM_CHOICES[i].tab === tab) return EXAM_CHOICES[i].id; return null; }
   // Sound (Beta) lives here, not on home (owner 2026-11-01). Ambience is flag-gated; the Spotify player is on for all.
+  /* Spotify switch (owner 2026-11-11): OFF by default; on here, off here. Shown whatever else Sound shows. */
+  function spotifyIsOn() { try { return G.localStorage.getItem("smd_prep_sound_spotify") === "1"; } catch (e) { return false; } }
+  function spotifySwitchHtml() {
+    var on = spotifyIsOn();
+    return '<section class="pl-grp pl-g-spotify"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/></svg></span>Sound <span class="pn-sound-beta">Beta</span></h3><p class="pl-sp-l"><b>Spotify player</b></p>' +
+      '<div class="pn-wrap">' + '<button type="button" class="pn-chip' + (on ? " on" : "") + '" data-act="p-spotify" data-v="1" aria-pressed="' + on + '">On</button>' +
+      '<button type="button" class="pn-chip' + (on ? "" : " on") + '" data-act="p-spotify" data-v="0" aria-pressed="' + !on + '">Off</button></div>' +
+      '<p class="pn-mut pn-small">' + (on ? "A small player shows while a song plays. Swipe it down to tuck it away." : "Off: no player appears in PrepNucleus.") + "</p>" +
+      (on && G.PREP_SOUND_SPOTIFY ? '<button type="button" class="pn-btn" data-act="p-music">Open music player</button>' : "") + "</section>";
+  }
   function soundSettingsHtml() {
-    if (G.PREP_SOUND && G.PREP_SOUND.settingsHtml) return G.PREP_SOUND.settingsHtml(H);
-    if (!G.PREP_SOUND_SPOTIFY) return "";
-    return '<section class="pl-grp pl-g-sound"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/></svg></span>Sound <span class="pn-sound-beta">Beta</span></h3>' +
-      '<button type="button" class="pn-btn" data-act="p-music">Music player (Spotify)</button></section>';
+    if (G.PREP_SOUND && G.PREP_SOUND.settingsHtml) return G.PREP_SOUND.settingsHtml(H) + spotifySwitchHtml();
+    return spotifySwitchHtml();
   }
   function settingsSheet() {
     SET = JSON.parse(JSON.stringify(cfg())); P.cal = null; P.calOpen = false;
@@ -849,6 +857,13 @@
     if (a === "p-why") return whySheet();
     if (a === "p-settings") return settingsSheet();
     if (a === "p-close") return closeSheet();
+    if (a === "p-spotify") {
+      var want = b && b.getAttribute("data-v") === "1";
+      try { G.localStorage.setItem("smd_prep_sound_spotify", want ? "1" : "0"); } catch (e) {}
+      if (want && !G.PREP_SOUND_SPOTIFY && G.PREP_LOADER && G.PREP_LOADER.loadSpotify) G.PREP_LOADER.loadSpotify().then(function () { drawSettings(false); }, function () {});
+      if (!want && G.PREP_SOUND_SPOTIFY) { try { var sp = G.PREP_SOUND_SPOTIFY.adapter; if (sp && sp.pause) sp.pause(); } catch (e) {} }
+      drawSettings(false); return true;
+    }
     if (a === "p-music") { closeSheet(); try { G.PREP_SOUND_SPOTIFY.act("sp-open", null, H); } catch (e) {} return true; }
     if (a === "p-go") return go(b.getAttribute("data-k"));
     if (a === "p-mod" || a === "p-sub") {
