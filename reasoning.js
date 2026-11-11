@@ -4770,7 +4770,7 @@
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
       '<div class="kbr-sheet" aria-hidden="true"></div>' +
-      '<div class="dx-mgmt-body"><div class="kbr-read">' +
+      '<div class="dx-mgmt-body"><div class="kbr-read" data-hl-key="' + esc("kb:" + id) + '">' +
         '<section class="dx-reader-hero">' + kbBannerHTML() +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
@@ -5672,12 +5672,27 @@
   try { window.SMD_KB = { search: kbSearch, open: kbOpen }; } catch (e) {}
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
+  /* Your library (owner mock 2026-11-11): two list rows (icon, label, count, chevron) split by a hairline, each opens
+   * its list in place; when both lists are empty, one composed empty card instead of two empty hints. */
+  var KB_LIB_ICO = {
+    favourites: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11a1 1 0 0 1 1 1v16.2a.5.5 0 0 1-.8.4L12 17l-5.7 4.1a.5.5 0 0 1-.8-.4V4.5a1 1 0 0 1 1-1z" fill="currentColor"/></svg>',
+    recent: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 7.5V12l3 2"/></svg>',
+    chev: '<svg class="kbl-chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg>',
+    book: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 6.5C10.3 5.2 7.7 4.6 3.5 4.8v13.4c4.2-.2 6.8.4 8.5 1.8 1.7-1.4 4.3-2 8.5-1.8V4.8c-4.2-.2-6.8.4-8.5 1.7z"/><path d="M12 6.5V20"/></svg>'
+  };
   function kbPersonalHTML(entries) {
     var byId = {}; entries.forEach(function (d) { byId[d.id] = d; });
-    return '<section class="kblib-personal"><h2>Your library</h2><small>Saved on this device</small>' + ["favourites", "recent"].map(function (kind) {
-      var ids = kbReadList(kind).filter(function (id) { return !!byId[id]; });
-      return '<details' + (kind === "favourites" ? ' open' : '') + '><summary>' + (kind === "favourites" ? "Favourites" : "Recently viewed") + ' · ' + ids.length + '</summary>' + (ids.length ? ids.map(function (id) { return '<button type="button" class="kblib-row" data-kb="' + esc(id) + '">' + esc(byId[id].name) + '</button>'; }).join('') : '<p>' + (kind === "favourites" ? "Save a disease from its reference page for quick access." : "Diseases you open will appear here.") + '</p>') + '</details>';
-    }).join('') + '</section>';
+    var lists = ["favourites", "recent"].map(function (kind) { return { kind: kind, ids: kbReadList(kind).filter(function (id) { return !!byId[id]; }) }; });
+    var empty = !lists[0].ids.length && !lists[1].ids.length;
+    return '<section class="kblib-personal kbl"><h2>Your library</h2><small>Saved on this device</small><div class="kbl-rows">' + lists.map(function (l) {
+      var label = l.kind === "favourites" ? "Favourites" : "Recently viewed";
+      return '<details class="kbl-item kbl-' + l.kind + '"><summary><span class="kbl-ico">' + KB_LIB_ICO[l.kind] + '</span><span class="kbl-label">' + label + '</span>' +
+        '<span class="kbl-n" aria-label="' + l.ids.length + ' saved">' + l.ids.length + '</span>' + KB_LIB_ICO.chev + '</summary><div class="kbl-list">' +
+        (l.ids.length ? l.ids.map(function (id) { return '<button type="button" class="kblib-row" data-kb="' + esc(id) + '">' + esc(byId[id].name) + '</button>'; }).join('')
+          : '<p>' + (l.kind === "favourites" ? "Save a disease from its reference page for quick access." : "Diseases you open will appear here.") + '</p>') + '</div></details>';
+    }).join('') + '</div>' +
+      (empty ? '<div class="kbl-empty"><span class="kbl-empty-ico">' + KB_LIB_ICO.book + '</span><strong>Your library is empty</strong><span>Diseases you open will appear here.</span></div>' : '') +
+      '</section>';
   }
   // ---- recent search history (replaces the hardcoded #spChips example chips) --------------
   var SMD_RECENT_KEY = "smd_recent_searches", SMD_RECENT_MAX = 8;
@@ -5783,7 +5798,7 @@
       if (tab === "ilearn") { var ri = orig.call(this, "guidelines"); try { if (window.SMD_ILEARN) SMD_ILEARN.render(); } catch (e) {} return ri; }
       var r = orig.apply(this, arguments);
       if (tab === "syndromes") { try { kbRenderLibrary(); } catch (e) {} }
-      else { try { kbPolishReference(tab); } catch (e) {} }
+      else { try { kbPolishReference(tab); } catch (e) {} try { kbHeadApply(); } catch (e) {} }
       return r;
     };
     if (typeof window.SB.abgOrg === "function" && !window.SB.__smdAbgWrapped) {
@@ -5872,6 +5887,46 @@
     document.addEventListener("focusout", function () { setTimeout(f, 60); }, true);
   }
   window.SMD_kbFitViewport = kbFitViewport;
+  /* Knowledge Library header variants (owner, 2026-11-11: "Knowledge Library" title out, StewardMD Knowledge Base
+   * brand up into the bar, search up). localStorage smd_kb_head = "a" | "b" | "c"; anything else keeps today's
+   * layout. Styles in kb-head.css. a = compact (tabs, then search; no hero), b = small title with search under it,
+   * c = compact with the search pinned under the bar while the page scrolls. */
+  // Default "d" (owner's layout, 2026-11-11); "a" | "b" | "c" are the earlier variants; "0" restores the old page.
+  function kbHeadVariant() { try { var v = localStorage.getItem("smd_kb_head"); return v === "0" ? "" : /^[abcd]$/.test(v || "") ? v : "d"; } catch (e) { return "d"; } }
+  function kbHeadApply(count) {
+    var o = document.getElementById("sbrefOverlay"); if (!o) return;
+    var v = kbHeadVariant();
+    o.classList.remove("kbh", "kbh-a", "kbh-b", "kbh-c", "kbh-d");
+    if (!v) return;
+    o.classList.add("kbh", "kbh-" + v);
+    var top = o.querySelector(".sbref-top");
+    if (top && !top.querySelector(".kbh-brand")) {
+      var b = document.createElement("div"); b.className = "kbh-brand"; b.setAttribute("aria-hidden", "true");
+      b.innerHTML = '<img src="/logo.png" alt="" width="28" height="28" decoding="async"><i class="kbh-div"></i><span><strong>StewardMD</strong><small>Knowledge Base</small></span>';
+      top.insertBefore(b, top.firstChild);
+    }
+    // the freshly rendered field is the one in the page; an older one may still sit in the bar (c)
+    var q = document.querySelector("#sbrefBody #kblibQ") || document.getElementById("kblibQ");
+    if (q && count && v !== "d") q.placeholder = "Search " + count + " diseases";
+    // d: search, the Try row, then "Find any disease", Your library, and the whole disease index right under it
+    // (Image Library and the branch tiles follow the index). Only on a fresh Discover render (count is passed).
+    var sec = count && document.querySelector("#sbrefBody .kblib-discover");
+    if (v === "d" && sec) {
+      var intro = sec.querySelector(".kblib-intro"), tr = sec.querySelector("#kblibTry"), per = sec.querySelector(".kblib-personal");
+      if (intro && tr) tr.parentNode.insertBefore(intro, tr.nextSibling);
+      var anchor = sec.querySelector("#kblibImgLib") || sec.querySelector("#kblibDiscovery"), head = sec.querySelector("#kblibResultsTitle");
+      head = head && head.closest(".kblib-section-heading");
+      if (per && anchor && head) [head, sec.querySelector(".kblib-refine"), sec.querySelector("#kblibCount"), sec.querySelector("#kblibGrid"), sec.querySelector("#kblibMore")]
+        .forEach(function (n) { if (n) sec.insertBefore(n, anchor); });
+    }
+    // c: the Discover search field moves into the bar, under the brand (handlers are delegated by id).
+    if (top) {
+      var box = q && q.closest(".kblib-searchbox"), old = top.querySelectorAll(".kblib-searchbox");
+      for (var i = 0; i < old.length; i++) if (old[i] !== box) old[i].parentNode.removeChild(old[i]);
+      if (v === "c" && box && box.parentNode !== top) top.appendChild(box);
+    }
+  }
+  window.SMD_kbHeadApply = kbHeadApply;
   function kbRenderLibrary() {
     kbBindViewport();
     var body = document.getElementById("sbrefBody"); if (!body) return;
@@ -5908,6 +5963,7 @@
         f(_libState.branch === "all", "br", "all", "All") +
         branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div></details>' +
       '<div class="kblib-count" id="kblibCount" role="status"></div><div class="kblib-grid" id="kblibGrid"></div><button type="button" id="kblibMore" class="kblib-more">Show more diseases</button>';
+    try { kbHeadApply(entries.length >= 4800 ? "4,800+" : entries.length.toLocaleString()); } catch (e) {}
     kbWireLibrary();   // ensure the (delegated) handlers exist
     var _iglBtn = document.getElementById("kblibImgLib");
     if (_iglBtn) _iglBtn.addEventListener("click", function () { try { if (window.SMD_IMGLIB) window.SMD_IMGLIB.open({}); } catch (e) {} });
@@ -5995,7 +6051,7 @@
       var sb = document.getElementById("sbrefBody"); if (sb) sb.scrollTop = 0;
     }
     var discovery = document.getElementById("kblibDiscovery"); if (discovery) discovery.hidden = searching || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all";
-    var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : "Disease index";
+    var title = document.getElementById("kblibResultsTitle"); if (title) title.textContent = searching ? "Search results" : _libState.branch !== "all" ? _libState.branch : (kbHeadVariant() === "d" ? "All diseases" : "Disease index");
     var clear = document.getElementById("kblibClear"); if (clear) clear.hidden = !(_libState.q || _libState.branch !== "all" || _libState.cls !== "all" || _libState.src !== "all");
     var more = document.getElementById("kblibMore"); if (more) more.hidden = shown >= res.length;
     grid.innerHTML = res.slice(0, _libState.limit).map(function (d) {

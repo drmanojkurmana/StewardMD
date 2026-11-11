@@ -865,3 +865,30 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
 @media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { transition: none; } }
 /* the figure image's own box, so the watermark overlay (image-viewer.css .smd-wm) covers the picture and its rounded corners */
 #dxOverlay #dxMgmt.dx-reader .kbr-media-host { display: block; border-radius: 12px; }
+
+/* ---- Your library: list rows + empty card (owner mock 2026-11-11). Same palette: --kl-accent, --kl-muted, --kl-line. */
+.kblib-discover .kblib-personal.kbl h2 { margin: 0 0 4px; font-size: 24px; }
+.kblib-discover .kblib-personal.kbl > small { display: block; margin: 0 0 6px; color: var(--kl-muted); font-size: 15px; }
+.kblib-discover .kbl-item + .kbl-item { border-top: 1px solid var(--kl-line); }
+.kblib-discover .kbl-item > summary { display: flex; align-items: center; gap: 14px; min-height: 56px; padding: 6px 0; list-style: none;
+  color: var(--ink); font-size: 17px; font-weight: 500; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.kblib-discover .kbl-item > summary::-webkit-details-marker { display: none; }
+.kblib-discover .kbl-item > summary::marker { content: ""; }
+.kblib-discover .kbl-item > summary:active { background: color-mix(in srgb, var(--ink, #111) 5%, transparent); }
+.kblib-discover .kbl-ico { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 28px; color: var(--kl-accent); }
+.kblib-discover .kbl-ico svg { width: 26px; height: 26px; }
+.kblib-discover .kbl-label { flex: 1 1 auto; min-width: 0; }
+.kblib-discover .kbl-n { color: var(--kl-muted); font-size: 17px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.kblib-discover .kbl-chev { width: 18px; height: 18px; flex: 0 0 18px; margin-left: 10px; color: var(--kl-muted); transition: transform .2s cubic-bezier(.23, 1, .32, 1); }
+.kblib-discover .kbl-item[open] .kbl-chev { transform: rotate(90deg); }
+.kblib-discover .kbl-list { padding: 0 0 10px 42px; }
+.kblib-discover .kbl-list p { margin: 0 0 6px; color: var(--kl-muted); font-size: 14px; }
+.kblib-discover .kbl-list .kblib-row { display: block; width: 100%; min-height: 44px; padding: 10px 0; border: 0; border-top: 1px solid var(--kl-line);
+  border-radius: 0; background: none; color: var(--ink); text-align: left; font-size: 16px; }
+.kblib-discover .kbl-empty { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 16px 0 4px; padding: 26px 20px 28px;
+  border-radius: 18px; background: color-mix(in srgb, var(--ink, #111) 4%, var(--kl-paper)); text-align: center; }
+.kblib-discover .kbl-empty-ico { color: var(--kl-muted); margin-bottom: 4px; }
+.kblib-discover .kbl-empty-ico svg { width: 38px; height: 38px; }
+.kblib-discover .kbl-empty strong { color: var(--ink); font-size: 18px; font-weight: 600; }
+.kblib-discover .kbl-empty > span:last-child { color: var(--kl-muted); font-size: 15px; }
+@media (prefers-reduced-motion: reduce) { .kblib-discover .kbl-chev { transition: none; } }
