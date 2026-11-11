@@ -23,6 +23,17 @@
       }
     },
     {
+      "tx": "On a forest plot each study is a square or diamond with a horizontal **confidence interval**. A vertical line marks the null, usually a ratio of one or a difference of zero. When the interval crosses that line the result remains compatible with no effect. When the interval lies wholly to one side, the estimate excludes the null at the stated confidence, often ninety five percent. Width shows precision: a narrow bar means a smaller standard error.",
+      "say": "On a forest plot each study is a square or diamond with a horizontal confidence interval. A vertical line marks the null, usually a ratio of one or a difference of zero. When the interval crosses that line the result remains compatible with no effect. When the interval lies wholly to one side, the estimate excludes the null at the stated confidence, often ninety five percent. Width shows precision: a narrow bar means a smaller standard error.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n708-cm-significance-tests-confidence-interval.webp",
+        "alt": "Forest plot of study estimates with horizontal confidence intervals, some crossing the null line and some excluding it",
+        "caption": "A forest plot shows study estimates and their confidence intervals relative to a vertical null line, with some intervals crossing the null and others lying entirely to one side. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "title": "Reading intervals against the null",
       "tx": "For differences, a **confidence interval including zero** (or one for ratios such as odds and risk ratios) means the null survives at that confidence level; excluding it means significance. The interval's width grades precision, and its position grades importance: a risk reduction interval from one to two percent is significant yet small, while zero point five to twenty percent is important yet imprecise.",
       "say": "If the interval crosses zero for differences or one for ratios, the result is not significant. Width tells precision.",

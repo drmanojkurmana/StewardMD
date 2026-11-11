@@ -12184,6 +12184,16 @@ Not verified on a phone. Reversible: `smd_opd_q2=0` (the default).
 Update, same day: the owner asked for an Apple-like font and said the rest is fine. The new screen now uses the
 system face (`-apple-system`, San Francisco on iPhone) with Inter as the Android fallback, in place of Manrope.
 
+## ICD Search and Scheme Search take the queue's look, default ON with a kill switch (owner, 2026-11-10)
+- Owner: "apply all the same skills on ICD and Scheme Search modules too, premium, more user friendly".
+- One shared layer (`ref-ui.js` + `ref-ui.css`, class `.r2`) instead of restyling `icd.css` / `govschemes.css` in
+  place, so the earlier screens survive byte-for-byte behind `smd_ref_ui2=0` (`?refui=0`). Default ON, unlike the
+  queue's `smd_opd_q2`: these are read-only look-up screens with no clinical write path, and the owner asked for
+  the result, not a switch. Recovery point: the commit before this change on `main`.
+- Palette and type are copied from `.q2app` in `queue.css`, not imported, because that block is scoped to
+  `#smdQueue`. If a third screen wants it, lift the tokens to one file.
+- Codes stay monospace (O/0, I/1), everything else is the system face. No gradients, one shadow (selected segment).
+
 ## Clinical Calculators: polish the existing screen, no redesign (owner, 2026-11-11)
 The owner first asked for a full redesign (flat white list, All / Favorites / Recent / Popular tabs). A build of
 it was shown and rejected as "vibe coded": "just polish this rather than changing whole UI". The redesign was

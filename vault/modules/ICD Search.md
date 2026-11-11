@@ -94,3 +94,15 @@ dedup, cap-at-6, and malformed-input handling) — no network/LLM/D1 involved in
 - On `html.smd-tablet` at 1000 px and wider, tapping a result opens the code in a pane beside the list
   (`openDetailSplit` in `icd.js`, root class `.icd-split`, layout in `ipad-clinical.css`). Below 1000 px and on phones
   the detail still replaces the list (unchanged). Picker mode (`SMD_ICD.pick`) never opens a detail.
+
+## 2026-11 look (flag `smd_ref_ui2`, default ON, 2026-11-10)
+- Shared with [[Government Health Schemes]]: `ref-ui.js` (`window.SMD_REFUI`: flag, search field with clear button, composed
+  empty/error block with Try again, loading rows, copy) and `ref-ui.css` (every rule scoped to `.r2`, which
+  `openWith()` toggles on `#icdOverlay` on each open). Same system as the OPD queue's new screen: one emerald, green-tinted
+  greys, the iPhone's own face, surfaces 24 / controls 14 / tags 8, 44px targets, tokens only below the palette block.
+- **Kill switch:** `?refui=0` or `localStorage smd_ref_ui2=0` brings back the earlier screen untouched (its markup
+  branches and `icd.css` are still there). If `ref-ui.js` is missing from the bundle the module falls back by itself.
+- New here: example searches on the empty screen, switching Both / ICD-10 / ICD-11 in place (field keeps focus), a "Copy code and name" button on the detail (copies `CODE - Title`, the line OPD appends), picker rows carry a plus instead of a chevron. API, `pick()` contract and iPad split are unchanged; on iPad the result list is one column (the two-column grid would split the grouped surface).
+- Tests: `test/ref-ui.test.mjs` (flag, helpers), `test/run-ref-ui.mjs` + `test/ref-ui-harness.html` (headless
+  Chrome, every state of both screens, flag off, 320/390, light/dark; CI `.github/workflows/ref-ui.yml`).
+  Reference screenshots: `docs/ref-ui/screens/`. **Not yet seen on a phone.**

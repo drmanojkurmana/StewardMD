@@ -1,0 +1,29 @@
+name: ICD and Scheme Search UI
+on:
+  pull_request:
+    branches: [main]
+    paths: ['icd.js', 'icd.css', 'govschemes.js', 'govschemes.css', 'ref-ui.js', 'ref-ui.css', 'ipad-clinical.css', 'test/run-ref-ui.mjs', 'test/ref-ui-harness.html', '.github/workflows/ref-ui.yml']
+  push:
+    branches: [main]
+    paths: ['icd.js', 'icd.css', 'govschemes.js', 'govschemes.css', 'ref-ui.js', 'ref-ui.css', 'ipad-clinical.css', 'test/run-ref-ui.mjs', 'test/ref-ui-harness.html', '.github/workflows/ref-ui.yml']
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CHROME: /usr/bin/google-chrome
+      CHROME_FLAGS: --no-sandbox --disable-dev-shm-usage
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: ICD Search and Scheme Search on the phone (every state, flag off, layout)
+        run: node test/run-ref-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ref-ui-screenshots
+          path: test-output/ref-*.png

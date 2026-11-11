@@ -32,6 +32,17 @@
    "vis": {"kind": "table", "cols": ["Toxidrome", "Pupils and skin", "Antidote direction"], "rows": [["Cholinergic", "Pinpoint, secretions everywhere", "Atropine family"], ["Anticholinergic", "Wide pupils, dry hot skin", "Supportive, physostigmine debate"], ["Opioid", "Pinpoint, breathing depressed", "Naloxone"], ["Sympathomimetic", "Wide pupils, sweaty, fast pulse", "Sedation and cooling"]]}
   },
   {
+    "tx": "A ward chart lines up pupil size against skin findings so a poison class can be named before any laboratory result. A **cholinergic toxidrome** floods secretions and pins the pupils. Anticholinergic poisoning is dry, hot and confused, with wide pupils. Opioid effect pins the pupils and slows breathing. Sympathomimetic effect brings sweat, a fast pulse and agitation. Each pattern points toward its own antidote family, using pulse, temperature and mental state along with the eye and the skin.",
+    "say": "A ward chart lines up pupil size against skin findings so a poison class can be named before any laboratory result. A cholinergic toxidrome floods secretions and pins the pupils. Anticholinergic poisoning is dry, hot and confused, with wide pupils. Opioid effect pins the pupils and slows breathing. Sympathomimetic effect brings sweat, a fast pulse and agitation. Each pattern points toward its own antidote family, using pulse, temperature and mental state along with the eye and the skin.",
+    "vis": {
+      "kind": "image",
+      "src": "v1/lessons/media/need-n801-fmt-general-toxicology-penicillamine.webp",
+      "alt": "Ward chart of toxidromes with columns for pupil size and skin findings",
+      "caption": "Pupil size and skin findings are set in columns so the main toxidromes can be compared at a glance. Illustration: StewardMD original.",
+      "ar": 1.3393
+    }
+  },
+  {
    "title": "Enhanced elimination of absorbed poison",
    "tx": "When supportive care fails, **elimination by excretion** is escalated for severe poisoning, progressive deterioration despite full support, high risk of serious morbidity, or failure of the normal excretory route. Options climb from multidose charcoal through urinary manipulation to haemodialysis and haemoperfusion, chosen by the poison's molecular size, protein binding and volume of distribution. The indications, not the availability of a machine, decide whether extracorporeal removal is attempted.",
    "say": "Escalate elimination for severity, deterioration despite support or a blocked natural route, matched to the poison's properties.",
@@ -42,6 +53,17 @@
    "tx": "At autopsy in suspected poisoning, **preservation of viscera** follows the rules built in the autopsy module: stomach and contents with small intestine in one bottle, sliced liver and kidney in another, blood and urine separately, in saturated saline or rectified spirit according to the exception lists, never formalin. A sample of the preservative itself travels with the set, bottles are filled two thirds, sealed, labelled and locked in a sealed box with the inquest and authorisation papers.",
    "say": "Two bottles, separate blood and urine, the right preservative, a preservative control sample and never formalin: viscera discipline decides poisoning trials.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Stomach and intestine bottled"}, {"id": "b", "label": "Liver and kidney bottled apart"}, {"id": "c", "label": "Blood and urine kept separate"}, {"id": "d", "label": "Sealed box with papers dispatched"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+    "tx": "Sealed bottles sit in a locked dispatch box with the inquest papers. **Preservation of viscera** in suspected poisoning puts the stomach, its contents and small bowel in one bottle, and cut liver plus kidney in a second. Blood and urine stay apart in saturated saline or rectified spirit, chosen from the exception lists, never formalin. Some of that fluid travels along. Each bottle, two thirds full, is sealed, labelled and locked with the authorisation papers.",
+    "say": "Sealed bottles sit in a locked dispatch box with the inquest papers. Preservation of viscera in suspected poisoning puts the stomach, its contents and small bowel in one bottle, and cut liver plus kidney in a second. Blood and urine stay apart in saturated saline or rectified spirit, chosen from the exception lists, never formalin. Some of that fluid travels along. Each bottle, two thirds full, is sealed, labelled and locked with the authorisation papers.",
+    "vis": {
+      "kind": "image",
+      "src": "v1/lessons/media/need-n802-fmt-general-toxicology-penicillamine.webp",
+      "alt": "Sealed viscera bottles locked in a dispatch box with papers",
+      "caption": "Viscera bottles are sealed inside a locked dispatch box together with the case papers. Illustration: StewardMD original.",
+      "ar": 1.3393
+    }
   },
   {
    "title": "Which poison needs which preservative",
