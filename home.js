@@ -2844,7 +2844,7 @@
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + svg("hrfCapsule", "hrf-ic") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + svg("hrfCalc", "hrf-ic") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + ' data-act="aboutfacts" role="button" tabindex="0" aria-label="StewardMD facts and milestones"' + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
+        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + ' data-act="aboutfacts" role="button" tabindex="0" aria-label="StewardMD facts and milestones"' + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b class="hrf-banner-md">MD</b> <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
         '<div class="rnav-qrow hrf-qrow">' +
           '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + svg("hrfVirus", "hrf-ic") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("hrfFlask", "hrf-ic") + '<span>Antibiogram</span></button>' +
@@ -10476,9 +10476,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (!document.documentElement.classList.contains("pn-open")) return s;
     return ds.autoFit && ds.tabletScale > 1 ? prepZoomD(ds.tabletScale, true) : prepZoomD(s, ds.autoFit);
   }
+  /* Home keeps the device's default size (owner 2026-11-11: "this tile and homepage should not be affected by size
+     changes"). The font size and density the user picks still apply to every other screen through the html zoom; Home
+     takes that zoom back out with its own (--smd-home-zoom = the Auto fit scale for this device / the html zoom), so it
+     always draws at what Auto fit would give, and its density rules follow html[data-home-dens] (the Auto fit density),
+     not body.smd-dens-*. redesign-system.css applies both. With Auto fit on, the home zoom is 1 and nothing changes. */
+  /* Owner 2026-11-11 (screenshots "After Reset to default" vs "On Restart"): Home looks right at 100% and Default density
+     and wrong with Auto fit's small-phone shrink (0.95 and Compact under 400 px, which a restart applies). So Home never
+     takes the shrink: at least 1.0 and never Compact. A tablet's Comfortable density and a phone under 340 px aside, this
+     is the "after reset" look on every launch. */
+  function homeBaseD() { var b = autoBaseD(); return { fs: Math.max(1, b.fs), d: b.d === "compact" ? "default" : b.d }; }
+  function homeFitD() {
+    var b = homeBaseD(), z = +document.documentElement.style.zoom || zoomOfD() || 1, de = document.documentElement;
+    var hz = String(Math.round(b.fs / z * 1e4) / 1e4);
+    if (de.style.getPropertyValue("--smd-home-zoom") !== hz) de.style.setProperty("--smd-home-zoom", hz);
+    if (de.getAttribute("data-home-dens") !== b.d) de.setAttribute("data-home-dens", b.d);
+  }
   function zoomNowD() {
     var z = zoomOfD(), de = document.documentElement;
     if (String(de.style.zoom) !== String(z)) de.style.zoom = z;
+    try { homeFitD(); } catch (e) {}
     // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
     // controls needed to recover are always reachable, even at max scale.
     var _inv = 1 / z;
@@ -10493,6 +10510,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (on !== _pnWas) { _pnWas = on; zoomNowD(); }
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
   } catch (e) {}
+  /* What Auto fit gives this device right now (scale and density), without changing anything: Home always draws at
+     this (homeFitD). An iPad's 1.08 / 1.15 is held back to 1.0 as in autoFitD. */
+  function autoBaseD() {
+    var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
+    if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
+    if (w > h && h < 500) d = "compact";
+    if (dpr >= 3 && w >= 400) fs = Math.min(1.2, fs + .05);
+    if (fs < 1 && bigTouchD()) { fs = 1; d = "default"; }
+    if (fs > 1 && bigTouchD() && !tabletZoomD()) fs = 1;
+    return { fs: fs, d: d };
+  }
   function autoFitD() {
     var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
     if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
@@ -10525,7 +10553,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // Only a WIDTH change re-fits: a keyboard opening (height only) must never undo the OS text-size seed.
   var _fitT = 0, _fitW = 0;
   function fitOnResizeD() {
-    if (!ds.autoFit) return;
+    if (!ds.autoFit) { clearTimeout(_fitT); _fitT = setTimeout(function () { try { homeFitD(); } catch (e) {} }, 150); return; }   // a chosen size: Home still follows rotation
     clearTimeout(_fitT);
     _fitT = setTimeout(function () {
       var w = window.innerWidth || 0;
@@ -10625,7 +10653,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var r = SMD_MAIK_ATMOSPHERE.resetConfig();
         if (r && r[atmoKey()]) syncAtmoUI(r[atmoKey()]);
       }
-      applyD(); refreshD();
+      // Defaults mean Auto fit ON, so fit now: applyD alone left 100% and Default density until the next launch
+      // (0.95 and Compact on a 390 px phone), and the switch said Auto fit while the size was not.
+      _fitW = 0; applyD(); autoFitD(); refreshD();
     });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
     var hcIn = s.querySelector("#hvHomeColor"), hcMsg = s.querySelector("#hvHomeColorMsg"), hcRs = s.querySelector("#hvHomeColorReset");
