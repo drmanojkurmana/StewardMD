@@ -49,7 +49,13 @@
   // Spotify is ON by default (owner 2026-10-31) and does not need Sound; it brings the shared player card with it.
   var SPOTIFY_CSS = ["prep-sound-player.css", "prep-sound-spotify.css"], SPOTIFY_JS = ["prep-sound-player.js", "prep-sound-spotify.js"];
   function soundOn() { try { var q = (G.location.search.match(/[?&]sound=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound") === "1"; } catch (e) { return false; } }
-  function spotifyOn() { try { var q = (G.location.search.match(/[?&]spotify=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound_spotify") !== "0"; } catch (e) { return false; } }
+  function spotifyOn() { try { var q = (G.location.search.match(/[?&]spotify=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound_spotify") === "1"; } catch (e) { return false; } }
+  /* Spotify is OFF by default (owner 2026-11-11, reversing 2026-10-31): it loads only once turned on in PrepNucleus
+     Settings > Sound. loadSpotify() brings its files in at that moment, no restart needed. */
+  function loadSpotify() {
+    SPOTIFY_CSS.forEach(css);
+    return SPOTIFY_JS.reduce(function (p, f) { return p.then(function () { return js(f); }); }, Promise.resolve());
+  }
   var loading = null;
 
   function enabled() {
@@ -109,6 +115,6 @@
     var AppP = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.App;
     if (AppP) AppP.addListener("appUrlOpen", function (d) { applyFlagLink(d && d.url); });
   } catch (e) {}
-  G.PREP_LOADER = { load: load, enabled: enabled, V: V, CSS: CSS, JS: JS, applyFlagLink: applyFlagLink };
+  G.PREP_LOADER = { load: load, loadSpotify: loadSpotify, spotifyOn: spotifyOn, enabled: enabled, V: V, CSS: CSS, JS: JS, applyFlagLink: applyFlagLink };
   if (!G.PREP) G.PREP = stub;
 })(typeof window !== "undefined" ? window : this);

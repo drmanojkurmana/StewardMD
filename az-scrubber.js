@@ -6,7 +6,9 @@
  * Generic: it appears when a screen shows a row of single-letter A–Z buttons (the Drug Database's
  * "A-Z" chips, `.db-az`) and presses THOSE buttons, so the list behaves exactly as if each chip were
  * tapped. Letters the screen does not offer are dimmed and skipped. Gone when the chip row is gone.
- * Kill switch: localStorage smd_az_scrub=0. */
+ * Kill switch: localStorage smd_az_scrub=0.
+ * PEEK (owner 2026-11-11: "placed over, not mixing well"): the strip shows only while the list is scrolling or a
+ * finger is on it, and fades out 1.4 s after either stops, so the cards are clear when you are reading. */
 (function () {
   "use strict";
   var ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
@@ -77,13 +79,13 @@
     document.body.appendChild(strip); document.body.appendChild(bubble);
     var id = null;
     strip.addEventListener("pointerdown", function (e) {
-      id = e.pointerId; try { strip.setPointerCapture(id); } catch (x) {}
+      id = e.pointerId; touching = true; reveal(); try { strip.setPointerCapture(id); } catch (x) {}
       stripRect = strip.getBoundingClientRect();   // cached for the whole scrub: no layout read per move
       strip.style.background = "rgba(120,130,140,.26)"; pick(e.clientY, true);
     });
     strip.addEventListener("pointermove", function (e) { if (e.pointerId === id) pick(e.clientY, false); });
     var end = function (e) {
-      if (e.pointerId !== id) return; id = null; stripRect = null;
+      if (e.pointerId !== id) return; id = null; stripRect = null; touching = false; reveal();
       strip.style.background = "rgba(120,130,140,.14)"; bubble.style.opacity = "0";
       clearTimeout(dwell); if (curIdx >= 0) commit(ABC[curIdx]);
       curIdx = -1;
@@ -122,7 +124,21 @@
     clearTimeout(dwell); dwell = setTimeout(function () { commit(L); }, 220);
   }
 
-  var hideT = 0;
+  var hideT = 0, avail = false, touching = false, peekT = 0, PEEK_MS = 1400;
+  function hideNow() {
+    if (!strip) return;
+    strip.style.opacity = "0"; strip.style.pointerEvents = "none"; strip.style.transform = "translate(8px,-50%)";
+    if (bubble) bubble.style.opacity = "0";
+  }
+  // Show the strip (if this screen has one) and fade it out PEEK_MS after the last scroll or touch.
+  function reveal() {
+    if (!avail || !strip) return;
+    clearTimeout(hideT); strip.style.visibility = "visible";
+    strip.style.opacity = "1"; strip.style.pointerEvents = "auto"; strip.style.transform = "translate(0,-50%)";
+    clearTimeout(peekT);
+    if (!touching) peekT = setTimeout(function () { if (!touching) hideNow(); }, PEEK_MS);
+  }
+  document.addEventListener("scroll", function () { if (avail) reveal(); }, true);
   function sync() {
     timer = 0;
     var ch = findChips(), show = !!(ch && overlayVisible(ch.row));
@@ -131,11 +147,10 @@
     if (show) { try { if (ch.row.getBoundingClientRect().right < window.innerWidth * 0.75) show = false; } catch (e) {} }
     // Hidden means hidden: once faded out it also leaves layout visibility, so its letters are not on screen
     // 8 px past the edge (foldable inner screen and split view, where the list stops short of the right edge).
-    if (!show) { if (strip) { strip.style.opacity = "0"; strip.style.pointerEvents = "none"; strip.style.transform = "translate(8px,-50%)"; clearTimeout(hideT); hideT = setTimeout(function () { if (strip && strip.style.opacity === "0") strip.style.visibility = "hidden"; }, 220); } return; }
+    if (!show) { avail = false; if (strip) { strip.style.opacity = "0"; strip.style.pointerEvents = "none"; strip.style.transform = "translate(8px,-50%)"; clearTimeout(hideT); hideT = setTimeout(function () { if (strip && strip.style.opacity === "0") strip.style.visibility = "hidden"; }, 220); } return; }
     if (!strip || !strip.isConnected) build();
     ABC.forEach(function (L, i) { strip.children[i].style.opacity = ch.map[L] ? "1" : ".28"; });
-    clearTimeout(hideT); strip.style.visibility = "visible";
-    strip.style.opacity = "1"; strip.style.pointerEvents = "auto"; strip.style.transform = "translate(0,-50%)";
+    avail = true;   // ready, but it waits for a scroll or a touch to appear (reveal)
   }
   function schedule() { if (!timer) timer = setTimeout(sync, 120); }
   // childList only (not class changes: those are constant in this app). While the strip is up, a slow
@@ -143,7 +158,7 @@
   var mo = new MutationObserver(schedule), watch = 0;
   function start() {
     mo.observe(document.body, { childList: true, subtree: true });
-    watch = setInterval(function () { if (strip && strip.style.opacity === "1") sync(); }, 800);
+    watch = setInterval(function () { if (avail) sync(); }, 800);
     sync();
   }
   if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
