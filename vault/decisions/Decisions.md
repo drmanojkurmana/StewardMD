@@ -12193,3 +12193,13 @@ system face (`-apple-system`, San Francisco on iPhone) with Inter as the Android
 - Palette and type are copied from `.q2app` in `queue.css`, not imported, because that block is scoped to
   `#smdQueue`. If a third screen wants it, lift the tokens to one file.
 - Codes stay monospace (O/0, I/1), everything else is the system face. No gradients, one shadow (selected segment).
+
+## Clinical Calculators: polish the existing screen, no redesign (owner, 2026-11-11)
+The owner first asked for a full redesign (flat white list, All / Favorites / Recent / Popular tabs). A build of
+it was shown and rejected as "vibe coded": "just polish this rather than changing whole UI". The redesign was
+discarded, never committed. Kept: the glass look, the header, the cards. Repaired in `calculators.js`
+(`polishCSS()`): the selected category chip was white text on white glass; the chips' 30px glass shadow was
+clipped by the rail into a grey band; search and the category rail now sit in a strip (`.mc-pin`) outside the
+scrolling list, as the owner drew; the star (now a 44px target) and a real chevron are centred on the row;
+card shadow lightened and the doubled gap between cards removed. Do not re-propose the tabbed redesign.
+Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.
