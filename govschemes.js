@@ -97,6 +97,21 @@
   };
 
   var root = null, timer = null, seq = 0, filterTimer = null;
+
+  // The 2026-11 look (flag smd_ref_ui2, default on, ref-ui.js + ref-ui.css). U2 is read on every open();
+  // with the flag off, or ref-ui.js missing from the bundle, every branch below renders the earlier screen.
+  var R = null, U2 = false;
+  function readU2() { R = window.SMD_REFUI || null; U2 = !!(R && R.on()); }
+  var DOWN = "Could not reach the government schemes service. Check your connection and try again.";
+  function loading(text) { return U2 ? R.skeleton(text.replace(/…$/, "")) : '<div class="gs-hint">' + text + '</div>'; }
+  // title / text are already-escaped HTML; legacy is the earlier screen's one-line message.
+  function note(cls, legacy, title, text, action) { return U2 ? R.state(cls, title, text, action) : '<div class="' + cls + '">' + legacy + '</div>'; }
+  function down(box, retry) {
+    box.innerHTML = note("gs-err", DOWN, "Could not reach the schemes service", "Check your connection, then try again.", retry ? "retry" : "");
+    var btn = box.querySelector('[data-r2="retry"]'); if (btn && retry) btn.addEventListener("click", retry);
+  }
+  function group(rows) { return U2 ? '<div class="r2-list">' + rows + '</div>' : rows; }
+  function count(n, word) { return (n || 0).toLocaleString("en-IN") + " " + word + (n === 1 ? "" : "s"); }
   var st = {
     view: "list", mode: "browse", q: "", jurisdiction: "", compare: false, jur: null,
     // browse.level: "states" | "schemes" | "specialities" | "packages"
@@ -130,6 +145,7 @@
   function setTitle(t) { var e = root.querySelector("#gsTitle"); if (e) e.textContent = t; }
 
   function loadJurisdictions() {
+    st.jur = null;
     GSAPI.jurisdictions().then(function (d) {
       st.jur = (d && d.jurisdictions) || [];
       var sel = root.querySelector("#gsState");
@@ -151,13 +167,13 @@
     var b = root.querySelector("#gsBody");
     b.innerHTML =
       '<div class="gs-tabs">' +
-        '<button type="button" class="gs-tab' + (st.mode === "browse" ? " on" : "") + '" data-m="browse">Browse</button>' +
-        '<button type="button" class="gs-tab' + (st.mode === "search" ? " on" : "") + '" data-m="search">Search</button>' +
+        '<button type="button" class="gs-tab' + (st.mode === "browse" ? " on" : "") + '" data-m="browse" aria-pressed="' + (st.mode === "browse") + '">Browse</button>' +
+        '<button type="button" class="gs-tab' + (st.mode === "search" ? " on" : "") + '" data-m="search" aria-pressed="' + (st.mode === "search") + '">Search</button>' +
       '</div>' +
       '<div id="gsCrumbs"></div>' +
       '<div id="gsMode"></div>';
     b.querySelectorAll(".gs-tab").forEach(function (t) {
-      t.addEventListener("click", function () { st.mode = t.getAttribute("data-m"); renderList(); });
+      t.addEventListener("click", function () { if (U2 && st.mode !== t.getAttribute("data-m")) R.hap("selection"); st.mode = t.getAttribute("data-m"); renderList(); });
     });
     if (st.mode === "browse") renderBrowseShell(); else renderSearchShell();
   }
@@ -167,7 +183,7 @@
     if (st.mode !== "browse" || st.browse.level === "states") { c.innerHTML = ""; return; }
     var parts = [];
     parts.push({ t: st.browse.stateName, lvl: "states" });
-    if (st.browse.schemes && st.browse.schemes.length > 1) parts.push({ t: st.browse.schemeName, lvl: "schemes" });
+    if (st.browse.schemes && st.browse.schemes.length > 1) parts.push({ t: st.browse.level === "schemes" ? "Scheme" : st.browse.schemeName, lvl: "schemes" });
     if (st.browse.level === "specialities" || st.browse.level === "packages") {
       parts.push({ t: st.browse.level === "packages" ? (st.browse.specialityName || "All categories") : "Category", lvl: "specialities", current: st.browse.level === "specialities" });
     }
@@ -192,6 +208,7 @@
   // packages filters the loaded page and whatever "Show more" has pulled in since). Renders once;
   // the input listener only replaces #gsBrowseList so typing never loses focus.
   function filterBarHTML(placeholder) {
+    if (U2) return R.searchBar({ id: "gsBrowseFilter", cls: "gs-search", wrap: "gs-searchbar gs-inline-search", placeholder: placeholder, value: st.browse.filter }) + '<div id="gsBrowseList"></div>';
     return '<div class="gs-searchbar gs-inline-search">' + gsIco("search", "gs-ico gs-search-ic") +
       '<input id="gsBrowseFilter" class="gs-search" type="text" autocomplete="off" placeholder="' + esc(placeholder) + '" value="' + esc(st.browse.filter) + '"></div>' +
       '<div id="gsBrowseList"></div>';
@@ -200,6 +217,7 @@
     var fi = m.querySelector("#gsBrowseFilter");
     if (!fi) return;
     fi.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    if (U2) R.wireClear(fi, function () { if (filterTimer) clearTimeout(filterTimer); st.browse.filter = ""; renderListFn(); });
     fi.addEventListener("input", function () {
       var v = fi.value;
       if (filterTimer) clearTimeout(filterTimer);
@@ -232,8 +250,8 @@
     if (st.browse.level === "packages") return renderBrowsePackages(m);
   }
   function renderStatesGrid(m) {
-    if (!st.jur) { m.innerHTML = '<div class="gs-hint">Loading states…</div>'; return; }
-    if (!st.jur.length) { m.innerHTML = '<div class="gs-err">Could not reach the government schemes service. Check your connection and try again.</div>'; return; }
+    if (!st.jur) { m.innerHTML = loading("Loading states…"); return; }
+    if (!st.jur.length) { down(m, function () { loadJurisdictions(); renderBrowseBody(); }); return; }
     m.innerHTML = filterBarHTML("Search states or UTs");
     wireFilterBar(m, function () { renderStatesList(m); });
     renderStatesList(m);
@@ -242,11 +260,12 @@
     var list = m.querySelector("#gsBrowseList"); if (!list) return;
     var q = norm(st.browse.filter);
     var rows = q ? st.jur.filter(function (j) { return norm(j.name).indexOf(q) >= 0; }) : st.jur;
-    if (!rows.length) { list.innerHTML = '<div class="gs-empty">No state or UT matches “' + esc(st.browse.filter) + '”.</div>'; return; }
-    list.innerHTML = '<div class="gs-cat-grid">' + rows.map(function (j) {
+    if (!rows.length) { list.innerHTML = note("gs-empty", 'No state or UT matches “' + esc(st.browse.filter) + '”.', 'No state or UT matches “' + esc(st.browse.filter) + '”', "Check the spelling or clear the search."); return; }
+    list.innerHTML = '<div class="gs-cat-grid' + (U2 ? " r2-list" : "") + '">' + rows.map(function (j) {
       return '<button type="button" class="gs-cat" data-id="' + esc(j.id) + '" data-name="' + esc(j.name) + '">' +
         '<span class="gs-cat-name">' + esc(j.name) + '</span>' +
-        '<span class="gs-cat-count">' + (j.packages || 0).toLocaleString("en-IN") + ' package' + (j.packages === 1 ? "" : "s") + '</span>' +
+        '<span class="gs-cat-count">' + (U2 ? (j.packages || 0).toLocaleString("en-IN") : count(j.packages, "package")) + '</span>' +
+        (U2 ? R.CHEV : "") +
       '</button>';
     }).join("") + '</div>';
     list.querySelectorAll(".gs-cat").forEach(function (c) {
@@ -271,9 +290,9 @@
     });
   }
   function renderSchemesList(m) {
-    if (st.browse.schemes == null) { m.innerHTML = '<div class="gs-hint">Loading schemes in ' + esc(st.browse.stateName) + '…</div>'; return; }
-    if (!st.browse.schemes.length) { m.innerHTML = '<div class="gs-empty">No schemes on file yet for ' + esc(st.browse.stateName) + '. Try Search instead.</div>'; return; }
-    m.innerHTML = filterBarHTML("Search schemes in " + st.browse.stateName);
+    if (st.browse.schemes == null) { m.innerHTML = loading('Loading schemes in ' + esc(st.browse.stateName) + '…'); return; }
+    if (!st.browse.schemes.length) { m.innerHTML = note("gs-empty", 'No schemes on file yet for ' + esc(st.browse.stateName) + '. Try Search instead.', 'No schemes on file for ' + esc(st.browse.stateName), "Nothing has been loaded for this state yet. The Search tab looks across every state."); return; }
+    m.innerHTML = filterBarHTML(U2 ? "Search schemes" : "Search schemes in " + st.browse.stateName);
     wireFilterBar(m, function () { renderSchemesInner(m); });
     renderSchemesInner(m);
   }
@@ -281,14 +300,16 @@
     var list = m.querySelector("#gsBrowseList"); if (!list) return;
     var q = norm(st.browse.filter);
     var rows = q ? st.browse.schemes.filter(function (s) { return norm(s.name).indexOf(q) >= 0 || norm(s.authority).indexOf(q) >= 0; }) : st.browse.schemes;
-    if (!rows.length) { list.innerHTML = '<div class="gs-empty">No scheme matches “' + esc(st.browse.filter) + '”.</div>'; return; }
-    list.innerHTML = rows.map(function (s) {
+    if (!rows.length) { list.innerHTML = note("gs-empty", 'No scheme matches “' + esc(st.browse.filter) + '”.', 'No scheme matches “' + esc(st.browse.filter) + '”', "Check the spelling or clear the search."); return; }
+    list.innerHTML = group(rows.map(function (s) {
       return '<button type="button" class="gs-card gs-schemecard" data-id="' + esc(s.id) + '" data-name="' + esc(s.name) + '">' +
+        (U2 ? '<span class="r2-main">' : "") +
         '<div class="gs-card-name">' + esc(s.name) + '</div>' +
         (s.authority ? '<div class="gs-scheme-auth">' + esc(s.authority) + '</div>' : "") +
-        '<div class="gs-cat-count">' + (s.packages || 0).toLocaleString("en-IN") + ' package' + (s.packages === 1 ? "" : "s") + '</div>' +
+        '<div class="gs-cat-count">' + count(s.packages, "package") + '</div>' +
+        (U2 ? '</span>' + R.CHEV : "") +
       '</button>';
-    }).join("");
+    }).join(""));
     list.querySelectorAll(".gs-schemecard").forEach(function (c) {
       c.addEventListener("click", function () { pickScheme(c.getAttribute("data-id"), c.getAttribute("data-name")); });
     });
@@ -312,7 +333,7 @@
     });
   }
   function renderSpecialitiesGrid(m) {
-    if (st.browse.specialities == null) { m.innerHTML = '<div class="gs-hint">Loading categories…</div>'; return; }
+    if (st.browse.specialities == null) { m.innerHTML = loading("Loading categories…"); return; }
     if (!st.browse.specialities.length) { pickSpeciality(null, "", true); return; }
     m.innerHTML = filterBarHTML("Search categories");
     wireFilterBar(m, function () { renderSpecialitiesInner(m); });
@@ -324,14 +345,14 @@
     var sps = q ? st.browse.specialities.filter(function (sp) { return norm(sp.name).indexOf(q) >= 0; }) : st.browse.specialities;
     var chips = q ? "" : '<button type="button" class="gs-cat gs-cat-all" data-spec="">' +
       '<span class="gs-cat-name">All categories</span>' +
-      '<span class="gs-cat-count">Browse every package</span></button>';
+      '<span class="gs-cat-count">' + (U2 ? "Every package" : "Browse every package") + '</span>' + (U2 ? R.CHEV : "") + '</button>';
     chips += sps.map(function (sp) {
       return '<button type="button" class="gs-cat" data-spec="' + esc(sp.name === "Other / uncategorised" ? "" : sp.name) + '" data-label="' + esc(sp.name) + '">' +
         '<span class="gs-cat-name">' + esc(sp.name) + '</span>' +
-        '<span class="gs-cat-count">' + (sp.packages || 0).toLocaleString("en-IN") + '</span></button>';
+        '<span class="gs-cat-count">' + (sp.packages || 0).toLocaleString("en-IN") + '</span>' + (U2 ? R.CHEV : "") + '</button>';
     }).join("");
-    if (!chips) { list.innerHTML = '<div class="gs-empty">No category matches “' + esc(st.browse.filter) + '”.</div>'; return; }
-    list.innerHTML = '<div class="gs-cat-grid">' + chips + '</div>';
+    if (!chips) { list.innerHTML = note("gs-empty", 'No category matches “' + esc(st.browse.filter) + '”.', 'No category matches “' + esc(st.browse.filter) + '”', "Check the spelling or clear the search."); return; }
+    list.innerHTML = '<div class="gs-cat-grid' + (U2 ? " r2-list" : "") + '">' + chips + '</div>';
     list.querySelectorAll(".gs-cat").forEach(function (c) {
       c.addEventListener("click", function () {
         var spec = c.hasAttribute("data-spec") && c.getAttribute("data-spec") !== "" ? c.getAttribute("data-spec") : (c.classList.contains("gs-cat-all") ? null : "");
@@ -361,12 +382,12 @@
   }
   function renderBrowsePackagesError() {
     var m = root.querySelector("#gsBrowse"); if (!m) return;
-    m.innerHTML = '<div class="gs-err">Could not reach the government schemes service. Check your connection and try again.</div>';
+    down(m, function () { st.browse.rows = null; renderBrowsePackages(m); loadBrowsePage(true); });
   }
   function renderBrowsePackages(m) {
-    if (st.browse.rows === null) { m.innerHTML = '<div class="gs-hint">Loading packages…</div>'; return; }
+    if (st.browse.rows === null) { m.innerHTML = loading("Loading packages…"); return; }
     if (!st.browse.rows.length) {
-      m.innerHTML = '<div class="gs-empty">No packages in this category yet. Try "All categories" or Search instead.</div>';
+      m.innerHTML = note("gs-empty", 'No packages in this category yet. Try "All categories" or Search instead.', "No packages in this category", "Go back and pick All categories, or use the Search tab.");
       return;
     }
     m.innerHTML = filterBarHTML("Search within " + (st.browse.specialityName || "this category"));
@@ -381,27 +402,33 @@
     var list = m.querySelector("#gsBrowseList"); if (!list) return;
     var q = norm(st.browse.filter);
     var rows = q ? st.browse.rows.filter(function (x) { return norm(x.treatment_name).indexOf(q) >= 0 || norm(x.treatment_code).indexOf(q) >= 0; }) : st.browse.rows;
-    var html = rows.length ? rows.map(function (x) { return rowHTML(x, { showSpeciality: !st.browse.speciality && st.browse.speciality !== "" }); }).join("")
-      : '<div class="gs-empty">No loaded package matches “' + esc(st.browse.filter) + '”' + (st.browse.rows.length < st.browse.total ? " yet - try Show more, or use the Search tab." : ".") + '</div>';
+    var moreLeft = st.browse.rows.length < st.browse.total;
+    var html = rows.length ? group(rows.map(function (x) { return rowHTML(x, { showSpeciality: !st.browse.speciality && st.browse.speciality !== "" }); }).join(""))
+      : note("gs-empty", 'No loaded package matches “' + esc(st.browse.filter) + '”' + (moreLeft ? " yet - try Show more, or use the Search tab." : "."),
+          'No loaded package matches “' + esc(st.browse.filter) + '”', moreLeft ? "Only part of this list is loaded. Show more below, or use the Search tab." : "Check the spelling or clear the search.");
     if (st.browse.rows.length < st.browse.total) {
       html += '<button type="button" class="gs-more" id="gsMore">Show more (' + (st.browse.total - st.browse.rows.length).toLocaleString("en-IN") + ' left)</button>';
+    }
+    if (U2 && rows.length && !q) {
+      html = '<p class="r2-countline">' + (moreLeft ? "Showing " + st.browse.rows.length.toLocaleString("en-IN") + " of " : "") + count(st.browse.total, "package") + '</p>' + html;
     }
     list.innerHTML = html;
     list.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.addEventListener("click", function () { openDetail(c.getAttribute("data-id")); }); });
     markSel(list);
     var more = list.querySelector("#gsMore");
-    if (more) more.addEventListener("click", function () { more.textContent = "Loading…"; more.disabled = true; loadBrowsePage(false); });
+    if (more) more.addEventListener("click", function () { more.textContent = U2 ? "Loading" : "Loading…"; more.disabled = true; loadBrowsePage(false); });
   }
 
   /* ---------------- Search: free text + state filter + compare toggle ---------------- */
   function renderSearchShell() {
     var m = root.querySelector("#gsMode");
     m.innerHTML =
-      '<div class="gs-searchbar">' + gsIco("search", "gs-ico gs-search-ic") +
-        '<input id="gsSearch" class="gs-search" type="text" autocomplete="off" ' +
-        'placeholder="Disease, procedure or govt code, e.g. mastectomy, S7.1.5.1" value="' + esc(st.q) + '"></div>' +
+      (U2 ? R.searchBar({ id: "gsSearch", cls: "gs-search", wrap: "gs-searchbar", placeholder: "Disease, procedure or code", value: st.q, label: "Search scheme packages by disease, procedure or government code" })
+        : '<div class="gs-searchbar">' + gsIco("search", "gs-ico gs-search-ic") +
+          '<input id="gsSearch" class="gs-search" type="text" autocomplete="off" ' +
+          'placeholder="Disease, procedure or govt code, e.g. mastectomy, S7.1.5.1" value="' + esc(st.q) + '"></div>') +
       '<div class="gs-row2">' +
-        '<select id="gsState" class="gs-state"' + (st.compare ? " disabled" : "") + '><option value="">All India</option></select>' +
+        '<select id="gsState" class="gs-state" aria-label="State or UT"' + (st.compare ? " disabled" : "") + '><option value="">All India</option></select>' +
         '<label class="gs-cmp"><input type="checkbox" id="gsCmp"' + (st.compare ? " checked" : "") + '> Compare across states</label>' +
       '</div>' +
       '<div id="gsResults" class="gs-results"></div>';
@@ -410,6 +437,7 @@
     var si = m.querySelector("#gsSearch");
     si.addEventListener("input", function () { onQueryInput(si.value); });
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    if (U2) R.wireClear(si, function () { if (timer) clearTimeout(timer); st.q = ""; runQuery(); });
     sel.addEventListener("change", function () { st.jurisdiction = sel.value; runQuery(); });
     m.querySelector("#gsCmp").addEventListener("change", function (e) { st.compare = e.target.checked; renderSearchShell(); runQuery(); });
     setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
@@ -423,22 +451,24 @@
   function runQuery() {
     var r = root.querySelector("#gsResults"); if (!r) return;
     if (st.q.length < MINLEN) {
-      r.innerHTML = '<div class="gs-hint">Type a disease, procedure or government code to search scheme packages - or switch to Browse to look without typing.</div>';
+      seq++;
+      r.innerHTML = note("gs-hint", 'Type a disease, procedure or government code to search scheme packages - or switch to Browse to look without typing.',
+        st.compare ? "Compare one procedure across states" : "Search every scheme package", "Type a disease, a procedure or a government code. Browse lists them without typing.");
       return;
     }
-    r.innerHTML = '<div class="gs-hint">Searching…</div>';
+    r.innerHTML = loading("Searching…");
     var mySeq = ++seq, q = st.q;
     var p = st.compare ? GSAPI.compare(q) : GSAPI.search(q, st.jurisdiction);
     p.then(function (d) {
       if (mySeq !== seq || q !== st.q) return;
-      if (d == null) { r.innerHTML = '<div class="gs-err">Could not reach the government schemes service. Check your connection and try again.</div>'; return; }
+      if (d == null) { down(r, runQuery); return; }
       st.compare ? renderCompareResults(r, d, q) : renderSearchResults(r, d, q);
     });
   }
   function renderSearchResults(r, d, q) {
     var rows = (d && d.results) || [];
-    if (!rows.length) { r.innerHTML = '<div class="gs-empty">No scheme packages match “' + esc(q) + '”. Try a shorter term, or switch to Browse.</div>'; return; }
-    r.innerHTML = rows.map(function (x) { return rowHTML(x, { showState: true, showScheme: true }); }).join("");
+    if (!rows.length) { r.innerHTML = note("gs-empty", 'No scheme packages match “' + esc(q) + '”. Try a shorter term, or switch to Browse.', 'No package matches “' + esc(q) + '”', "Try a shorter term" + (st.jurisdiction ? ", search All India," : "") + " or switch to Browse."); return; }
+    r.innerHTML = group(rows.map(function (x) { return rowHTML(x, { showState: true, showScheme: true }); }).join(""));
     r.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.addEventListener("click", function () { openDetail(c.getAttribute("data-id")); }); });
     markSel(r);
   }
@@ -453,6 +483,17 @@
     if (opts.showScheme && g(x, "scheme")) pills += '<span class="gs-pill">' + esc(x.scheme) + '</span>';
     if (opts.showState && g(x, "state")) pills += '<span class="gs-pill">' + esc(x.state) + '</span>';
     if (opts.showSpeciality && g(x, "speciality_name")) pills += '<span class="gs-pill">' + esc(x.speciality_name) + '</span>';
+    if (U2) {
+      // Name, then what it pays and at which tier, then the quiet context: code, scheme, state.
+      return '<button type="button" class="gs-card" data-id="' + esc(x.package_id) + '"><span class="r2-main">' +
+        '<span class="gs-card-name">' + esc(g(x, "treatment_name")) + '</span>' +
+        '<span class="gs-amtrow">' +
+          (amt ? '<span class="gs-amt">' + amt + '</span>' : '<span class="gs-amt unset">Amount not stated</span>') +
+          (tier ? '<span class="gs-tier">' + esc(tier) + '</span>' : '<span class="gs-tier unset">tier not stated</span>') +
+        '</span>' +
+        ((code || pills) ? '<span class="gs-pills">' + (code ? '<span class="gs-card-code">' + esc(code) + '</span>' : "") + pills + '</span>' : "") +
+        '</span>' + R.CHEV + '</button>';
+    }
     return '<button type="button" class="gs-card" data-id="' + esc(x.package_id) + '">' +
       (code ? '<div class="gs-card-code">' + esc(code) + '</div>' : "") +
       '<div class="gs-card-name">' + esc(g(x, "treatment_name")) + '</div>' +
@@ -466,7 +507,7 @@
   /* ---------------- compare mode ---------------- */
   function renderCompareResults(r, d, q) {
     var groups = (d && d.groups) || [];
-    if (!groups.length) { r.innerHTML = '<div class="gs-empty">No state-by-state comparison found for “' + esc(q) + '”.</div>'; return; }
+    if (!groups.length) { r.innerHTML = note("gs-empty", 'No state-by-state comparison found for “' + esc(q) + '”.', 'Nothing to compare for “' + esc(q) + '”', "No two states list this procedure under a matching name. Try a shorter term."); return; }
     r.innerHTML = groups.map(cmpCardHTML).join("");
   }
   function cmpCardHTML(c) {
@@ -506,35 +547,40 @@
     splitId = id;
     root.classList.add("gs-split");
     markSel(root.querySelector("#gsBody"));
-    pane.innerHTML = '<div class="gs-hint">Loading…</div>';
+    pane.innerHTML = loading("Loading…");
     pane.scrollTop = 0;
     var mySeq = ++dseq;
     GSAPI.pkg(id).then(function (d) {
       if (mySeq !== dseq || splitId !== id) return;
-      if (d == null) { pane.innerHTML = '<div class="gs-err">Could not load this package. Check your connection and try again.</div>'; return; }
+      if (d == null) { pkgError(pane, function () { openDetailSplit(id); }); return; }
       renderDetail(pane, d);
       setTitle("Scheme Search");
     });
+  }
+  function pkgError(box, retry) {
+    box.innerHTML = note("gs-err", "Could not load this package. Check your connection and try again.", "Could not load this package", "Check your connection, then try again.", "retry");
+    var btn = box.querySelector('[data-r2="retry"]'); if (btn) btn.addEventListener("click", retry);
   }
   function openDetail(id) {
     if (splitOn() && st.view === "list") { openDetailSplit(id); return; }
     st.view = "detail"; st.detailId = id;
     setTitle("Package detail");
     var b = root.querySelector("#gsBody");
-    b.innerHTML = '<div class="gs-hint">Loading…</div>';
+    b.innerHTML = loading("Loading…");
+    b.scrollTop = 0;
     var mySeq = ++seq;
     GSAPI.pkg(id).then(function (d) {
       if (mySeq !== seq || st.view !== "detail" || st.detailId !== id) return;
-      if (d == null) { b.innerHTML = '<div class="gs-err">Could not load this package. Check your connection and try again.</div>'; return; }
+      if (d == null) { pkgError(b, function () { openDetail(id); }); return; }
       renderDetail(b, d);
     });
   }
   function kv(label, val, mono) {
     if (val == null || val === "") return "";
-    return '<div class="gs-kv"><b>' + esc(label) + '</b><span>' + (mono ? '<code>' + esc(val) + '</code>' : esc(val)) + '</span></div>';
+    return '<div class="gs-kv' + (String(val).length > 40 ? " long" : "") + '"><b>' + esc(label) + '</b><span>' + (mono ? '<code>' + esc(val) + '</code>' : esc(val)) + '</span></div>';
   }
   function renderDetail(b, d) {
-    setTitle(g(d, "treatment_name") || "Package detail");
+    setTitle(U2 ? "Package" : (g(d, "treatment_name") || "Package detail"));
     var amt = inr(d.package_amount), rider = inr(d.rider_amount), tier = g(d, "rate_tier");
     var src = d.source || {};
     // The API may nest verification_status under source (matches the sources table) or flatten it
@@ -549,8 +595,8 @@
         (g(d, "state") ? '<span class="gs-pill">' + esc(d.state) + '</span>' : "") +
         (g(d, "version_label") ? '<span class="gs-pill">v' + esc(d.version_label) + '</span>' : "") +
       '</div>' +
-      '<div class="gs-amtrow" style="margin-top:9px">' +
-        (amt ? '<span class="gs-amt" style="font-size:19px">' + amt + '</span>' : '<span class="gs-amt unset">Amount not stated</span>') +
+      '<div class="gs-amtrow gs-amtrow-d">' +
+        (amt ? '<span class="gs-amt gs-amt-lg">' + amt + '</span>' : '<span class="gs-amt unset">Amount not stated</span>') +
         (tier ? '<span class="gs-tier">' + esc(tier) + '</span>' : '<span class="gs-tier unset">tier not stated</span>') +
       '</div></div>';
 
@@ -595,6 +641,9 @@
 
   function open() {
     ensureRoot();
+    readU2();
+    root.classList.toggle("r2", U2);
+    root.querySelector("#gsBack").innerHTML = U2 ? R.backHTML() : "‹ Back";
     root.classList.add("on");
     document.body.classList.add("gs-lock");
     st.view = "list";

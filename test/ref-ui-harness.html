@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ICD Search and Scheme Search (2026-11 look) harness</title>
+<link rel="stylesheet" href="/govschemes.css">
+<link rel="stylesheet" href="/icd.css">
+<link rel="stylesheet" href="/ipad-clinical.css">
+<link rel="stylesheet" href="/ref-ui.css">
+<style>
+/* What index.html gives every screen: the app's shared variables and the bundled faces. */
+:root{--ink:#1a1a1a;--slate:#2d4356;--slate-soft:#888;--line:#e5e5e0;--paper:#f7f7f5;--panel:#fff;--teal:#0a9396;--teal-soft:#e0f2f1;--amber:#92620a;--red:#ab1c2c;--sans:system-ui,sans-serif;--mono:ui-monospace,Menlo,monospace}
+@font-face{font-family:"Inter Variable";src:url("/assets/fonts/inter-variable.woff2") format("woff2");font-weight:100 900}
+html,body{margin:0;height:100%;background:#f7f7f5}
+</style>
+</head><body>
+<script>
+// A fake of /api/icd and /api/schemes that really filters, pages and fails on demand, so the test reads
+// the screen after an answer that depends on what was typed, not a canned reply.
+window.__errs = [];
+window.addEventListener("error", function (e) { window.__errs.push("error: " + (e && (e.message || e.error) || "?")); });
+window.addEventListener("unhandledrejection", function (e) { window.__errs.push("reject: " + (e && e.reason && (e.reason.message || e.reason) || "?")); });
+window.__down = false;   // true: every call fails like a dead network
+window.__delay = 0;      // ms before an answer, to hold the loading rows on screen
+window.__calls = [];
+window.__copied = [];
+try { Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText: function (t) { window.__copied.push(t); return Promise.resolve(); } } }); } catch (e) {}
+window.__haps = [];
+window.SMD_HAPTICS = { selection: function () { window.__haps.push("selection"); }, success: function () { window.__haps.push("success"); } };
+
+var ICD = [
+  { id: "icd10:E11", system: "ICD-10", code: "E11", title: "Type 2 diabetes mellitus", chapter: "IV", is_leaf: 0 },
+  { id: "icd10:E11.9", system: "ICD-10", code: "E11.9", title: "Type 2 diabetes mellitus without complications", chapter: "IV", is_leaf: 1 },
+  { id: "icd10:E10", system: "ICD-10", code: "E10", title: "Type 1 diabetes mellitus", chapter: "IV", is_leaf: 0 },
+  { id: "icd11:5A11", system: "ICD-11", code: "5A11", title: "Type 2 diabetes mellitus", chapter: "05", is_leaf: 1 },
+  { id: "icd11:5A14", system: "ICD-11", code: "5A14", title: "Diabetes mellitus, type unspecified", chapter: "05", is_leaf: 1 },
+  { id: "icd11:1A00", system: "ICD-11", code: "1A00", title: "Cholera", chapter: "01", is_leaf: 1 },
+  { id: "icd10:O24.4", system: "ICD-10", code: "O24.4", title: "Diabetes mellitus arising in pregnancy, with a deliberately long title that has to wrap over more than one line on a narrow phone without pushing anything off the edge", chapter: "XV", is_leaf: 1 }
+];
+var JUR = [
+  { id: "andhra-pradesh", name: "Andhra Pradesh", type: "state", schemes: 2, packages: 3713 },
+  { id: "bihar", name: "Bihar", type: "state", schemes: 1, packages: 85 },
+  { id: "dadra", name: "Dadra and Nagar Haveli and Daman and Diu", type: "ut", schemes: 1, packages: 1 },
+  { id: "central", name: "Central (PM-JAY)", type: "central", schemes: 1, packages: 1949 }
+];
+var SCHEMES = { "andhra-pradesh": [
+  { id: "ap-ntr", name: "Dr. NTR Vaidya Seva", authority: "Dr. NTR Vaidya Seva Trust, Government of Andhra Pradesh", packages: 3713 },
+  { id: "ap-ehs", name: "Employees Health Scheme", authority: "Government of Andhra Pradesh", packages: 1 } ],
+  "bihar": [{ id: "bihar-pmjay", name: "PM-JAY Bihar (HBP 2022)", authority: "State Health Agency, Bihar", packages: 85 }] };
+var SPECS = [ { code: "SG", name: "General Surgery", packages: 60 }, { code: "MO", name: "Medical Oncology", packages: 25 }, { code: "", name: "Other / uncategorised", packages: 3 } ];
+var PK = [];
+for (var i = 0; i < 85; i++) PK.push({ package_id: "p" + i, treatment_name: i === 0 ? "Modified radical mastectomy" : (i === 1 ? "Laparoscopic cholecystectomy with intra-operative cholangiogram and common bile duct exploration, any approach" : "Procedure number " + (i + 1)),
+  treatment_code: i === 0 ? "SG075B" : "SG" + (100 + i), speciality_name: i % 3 ? "General Surgery" : "Medical Oncology",
+  package_amount: i === 2 ? 0 : 25000 + i * 500, rate_tier: i === 3 ? "" : "Tier 2", scheme: "PM-JAY Bihar (HBP 2022)", state: "Bihar", version_label: "2022" });
+window.fetch = function (url) {
+  url = String(url); window.__calls.push(url);
+  var u = new URL(url, location.href), q = function (k) { return u.searchParams.get(k); };
+  function J(o) { return new Promise(function (res) { setTimeout(function () { res({ ok: true, status: 200, json: function () { return Promise.resolve(o); } }); }, window.__delay); }); }
+  if (window.__down) return new Promise(function (_, rej) { setTimeout(function () { rej(new Error("offline")); }, window.__delay); });
+  var p = u.pathname;
+  if (p === "/api/icd/search") {
+    var t = (q("q") || "").toLowerCase(), sys = q("system");
+    return J({ results: ICD.filter(function (x) { return (!sys || x.system === sys) && (x.title.toLowerCase().indexOf(t) >= 0 || x.code.toLowerCase().indexOf(t) === 0); }) });
+  }
+  if (p.indexOf("/api/icd/code/") === 0) { var id = decodeURIComponent(p.slice(14)); return J(ICD.filter(function (x) { return x.id === id; })[0] || { error: "not_found" }); }
+  if (p === "/api/schemes/jurisdictions") return J({ jurisdictions: JUR });
+  if (p === "/api/schemes/schemes") return J({ schemes: SCHEMES[q("state")] || [{ id: "one", name: "State scheme", authority: "", packages: 1 }] });
+  if (p === "/api/schemes/specialities") return J({ specialities: SPECS });
+  if (p === "/api/schemes/browse") { var off = Number(q("offset") || 0), lim = Number(q("limit") || 40); return J({ results: PK.slice(off, off + lim), total: PK.length }); }
+  if (p === "/api/schemes/search") { var s = (q("q") || "").toLowerCase(); return J({ results: PK.filter(function (x) { return x.treatment_name.toLowerCase().indexOf(s) >= 0 || x.treatment_code.toLowerCase().indexOf(s) === 0; }).slice(0, 40) }); }
+  if (p === "/api/schemes/compare") { var c = (q("q") || "").toLowerCase(); return J({ groups: c.indexOf("mast") === 0 ? [{ treatment_name_normalised: "mastectomy", rows: [
+    { treatment_name: "Modified radical mastectomy", state: "Bihar", treatment_code: "SG075B", package_amount: 25000, rate_tier: "Tier 2" },
+    { treatment_name: "Modified radical mastectomy", state: "Andhra Pradesh", treatment_code: "S7.1.5.1", package_amount: 31500, rate_tier: "" } ] }] : [] }); }
+  if (p.indexOf("/api/schemes/package/") === 0) { var k = PK.filter(function (x) { return x.package_id === decodeURIComponent(p.slice(21)); })[0]; if (!k) return J(null);
+    var d = JSON.parse(JSON.stringify(k)); d.speciality_code = "SG"; d.package_code = "SG075"; d.package_name = "Breast surgery"; d.treatment_type = "Surgical"; d.los_days = 5; d.preauth_required = 1; d.rider_amount = 2000; d.icd_code = "C50";
+    d.pre_investigation = "Biopsy report, mammography or ultrasound of the breast, and a metastatic work-up where the stage calls for one"; d.post_investigation = "Histopathology report and a clinical photograph of the scar";
+    d.source = { authority: "State Health Agency, Bihar", url: "https://example.test/hbp-2022.pdf", retrieved_ts: 1756684800000, verification_status: "unverified" }; return J(d); }
+  return J(null);
+};
+</script>
+<script src="/ref-ui.js"></script>
+<script src="/icd.js"></script>
+<script src="/govschemes.js"></script>
+<script>window.__ready = true;</script>
+</body></html>

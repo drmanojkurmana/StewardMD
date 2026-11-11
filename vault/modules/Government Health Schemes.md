@@ -374,3 +374,15 @@ Deps: [[Decisions]]
   pane beside the list (`openDetailSplit` in `govschemes.js`, root class `.gs-split`, layout in `ipad-clinical.css`).
   `renderList` / `renderBrowseBody` clear the split, so changing level or tab returns to the full-width list. Phones
   and narrow Split View keep the push to the detail screen.
+
+## 2026-11 look (flag `smd_ref_ui2`, default ON, 2026-11-10)
+- Shared with [[ICD Search]]: `ref-ui.js` (`window.SMD_REFUI`: flag, search field with clear button, composed
+  empty/error block with Try again, loading rows, copy) and `ref-ui.css` (every rule scoped to `.r2`, which
+  `open()` toggles on `#gsOverlay` on each open). Same system as the OPD queue's new screen: one emerald, green-tinted
+  greys, the iPhone's own face, surfaces 24 / controls 14 / tags 8, 44px targets, tokens only below the palette block.
+- **Kill switch:** `?refui=0` or `localStorage smd_ref_ui2=0` brings back the earlier screen untouched (its markup
+  branches and `govschemes.css` are still there). If `ref-ui.js` is missing from the bundle the module falls back by itself.
+- New here: states, schemes and categories are grouped lists, package rows lead with name then amount + tier (tier is still always shown, "tier not stated" when missing), "Showing 40 of 85 packages" line, Try again on a failed load, long detail values sit under their label. Fixed for both looks: the breadcrumb showed an empty last crumb at the scheme level (now "Scheme"). No API or data change.
+- Tests: `test/ref-ui.test.mjs` (flag, helpers), `test/run-ref-ui.mjs` + `test/ref-ui-harness.html` (headless
+  Chrome, every state of both screens, flag off, 320/390, light/dark; CI `.github/workflows/ref-ui.yml`).
+  Reference screenshots: `docs/ref-ui/screens/`. **Not yet seen on a phone.**

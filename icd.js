@@ -144,6 +144,12 @@
   var root = null, timer = null, seq = 0;
   var st = { view: "list", q: "", system: "", onSelect: null };
 
+  // The 2026-11 look (flag smd_ref_ui2, default on, ref-ui.js + ref-ui.css). U2 is read on every open();
+  // with the flag off, or ref-ui.js missing from the bundle, every branch below renders the earlier screen.
+  var R = null, U2 = false;
+  function readU2() { R = window.SMD_REFUI || null; U2 = !!(R && R.on()); }
+  var EXAMPLES = ["diabetes", "E11", "1A00"];
+
   function ensureRoot() {
     if (root) return root;
     root = document.createElement("div");
@@ -164,27 +170,52 @@
   }
   function setTitle(t) { var e = root.querySelector("#icdTitle"); if (e) e.textContent = t; }
 
+  function sysBtn(val, label) {
+    var on = st.system === val;
+    return '<button type="button" class="icd-sys' + (on ? " on" : "") + '" data-sys="' + val + '" aria-pressed="' + (on ? "true" : "false") + '">' + label + '</button>';
+  }
   function renderList() {
-    setTitle(st.onSelect ? "Search ICD - pick a code" : "Search ICD");
+    setTitle(U2 ? (st.onSelect ? "Pick an ICD code" : "Search ICD") : (st.onSelect ? "Search ICD - pick a code" : "Search ICD"));
     var b = root.querySelector("#icdBody");
     b.innerHTML =
-      '<div class="icd-searchbar">' + gsIco("search", "icd-ico icd-search-ic") +
-        '<input id="icdSearch" class="icd-search" type="text" autocomplete="off" ' +
-        'placeholder="Diagnosis name or code, e.g. diabetes, E11, 1A00" value="' + esc(st.q) + '"></div>' +
-      '<div class="icd-row2">' +
-        '<button type="button" class="icd-sys' + (st.system === "" ? " on" : "") + '" data-sys="">Both</button>' +
-        '<button type="button" class="icd-sys' + (st.system === "ICD-10" ? " on" : "") + '" data-sys="ICD-10">ICD-10</button>' +
-        '<button type="button" class="icd-sys' + (st.system === "ICD-11" ? " on" : "") + '" data-sys="ICD-11">ICD-11</button>' +
+      (U2 ? R.searchBar({ id: "icdSearch", cls: "icd-search", wrap: "icd-searchbar", placeholder: "Diagnosis name or code", value: st.q, label: "Search ICD-10 and ICD-11 codes" })
+        : '<div class="icd-searchbar">' + gsIco("search", "icd-ico icd-search-ic") +
+          '<input id="icdSearch" class="icd-search" type="text" autocomplete="off" ' +
+          'placeholder="Diagnosis name or code, e.g. diabetes, E11, 1A00" value="' + esc(st.q) + '"></div>') +
+      '<div class="icd-row2"' + (U2 ? ' role="group" aria-label="Code system"' : "") + '>' +
+        sysBtn("", "Both") + sysBtn("ICD-10", "ICD-10") + sysBtn("ICD-11", "ICD-11") +
       '</div>' +
-      '<div id="icdResults" class="icd-results"></div>';
+      '<div id="icdResults" class="icd-results"' + (U2 ? ' aria-live="polite"' : "") + '></div>';
     var si = b.querySelector("#icdSearch");
     si.addEventListener("input", function () { onQueryInput(si.value); });
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    if (U2) R.wireClear(si, function () { if (timer) clearTimeout(timer); st.q = ""; runQuery(); });
     b.querySelectorAll(".icd-sys").forEach(function (btn) {
-      btn.addEventListener("click", function () { st.system = btn.getAttribute("data-sys"); renderList(); });
+      btn.addEventListener("click", function () {
+        var v = btn.getAttribute("data-sys");
+        if (U2) {
+          // Switch in place: the field keeps its focus and the keyboard stays up.
+          if (v === st.system) return;
+          st.system = v; R.hap("selection");
+          b.querySelectorAll(".icd-sys").forEach(function (o) {
+            var on = o.getAttribute("data-sys") === v;
+            o.classList.toggle("on", on); o.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+          clearPane(); runQuery(); return;
+        }
+        st.system = v; renderList();
+      });
     });
     setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
     runQuery();
+  }
+  function clearPane() { if (root) root.classList.remove("icd-split"); dseq++; }
+  function useExample(v) {
+    var si = root.querySelector("#icdSearch"); if (!si) return;
+    si.value = v;
+    try { si.dispatchEvent(new Event("input")); } catch (e) {}
+    if (timer) clearTimeout(timer);
+    st.q = v; runQuery();
   }
   function onQueryInput(v) {
     st.q = (v || "").trim();
@@ -194,17 +225,39 @@
   function runQuery() {
     var r = root.querySelector("#icdResults"); if (!r) return;
     if (st.q.length < MINLEN) {
+      if (U2) {
+        seq++;
+        r.innerHTML = '<div class="icd-hint r2-state"><b class="r2-state-t">' + (st.onSelect ? "Find the code to add" : "Look up a diagnosis code") + '</b>' +
+          '<span class="r2-state-x">Type a diagnosis name, or an ICD-10 or ICD-11 code.</span>' +
+          '<div class="r2-chips" role="group" aria-label="Examples">' + EXAMPLES.map(function (x) {
+            return '<button type="button" class="r2-chip" data-ex="' + esc(x) + '">' + esc(x) + '</button>';
+          }).join("") + '</div></div>';
+        r.querySelectorAll(".r2-chip").forEach(function (c) { c.addEventListener("click", function () { useExample(c.getAttribute("data-ex")); }); });
+        return;
+      }
       r.innerHTML = '<div class="icd-hint">Type a diagnosis name or an ICD-10/ICD-11 code to search.</div>';
       return;
     }
-    r.innerHTML = '<div class="icd-hint">Searching…</div>';
+    r.innerHTML = U2 ? R.skeleton("Searching") : '<div class="icd-hint">Searching…</div>';
     var mySeq = ++seq, q = st.q;
     ICDAPI.search(q, st.system).then(function (d) {
       if (mySeq !== seq || q !== st.q) return;
-      if (d == null) { r.innerHTML = '<div class="icd-err">Could not reach the ICD service. Check your connection and try again.</div>'; return; }
+      if (d == null) {
+        if (U2) {
+          r.innerHTML = R.state("icd-err", "Could not reach the ICD service", "Check your connection, then try again.", "retry");
+          r.querySelector('[data-r2="retry"]').addEventListener("click", runQuery);
+          return;
+        }
+        r.innerHTML = '<div class="icd-err">Could not reach the ICD service. Check your connection and try again.</div>'; return;
+      }
       var rows = (d && d.results) || [];
-      if (!rows.length) { r.innerHTML = '<div class="icd-empty">No ICD-10/ICD-11 code matches “' + esc(q) + '”.</div>'; return; }
-      r.innerHTML = rows.map(rowHTML).join("");
+      if (!rows.length) {
+        r.innerHTML = U2
+          ? R.state("icd-empty", "No code matches “" + esc(q) + "”", "Check the spelling or try a shorter term" + (st.system ? ". This search covers " + esc(st.system) + " only; Both searches the two together." : "."))
+          : '<div class="icd-empty">No ICD-10/ICD-11 code matches “' + esc(q) + '”.</div>';
+        return;
+      }
+      r.innerHTML = U2 ? '<div class="r2-list">' + rows.map(rowHTML).join("") + '</div>' : rows.map(rowHTML).join("");
       r.querySelectorAll(".icd-card").forEach(function (c) {
         c.addEventListener("click", function () {
           var id = c.getAttribute("data-id");
@@ -219,6 +272,13 @@
     });
   }
   function rowHTML(x) {
+    if (U2) {
+      return '<button type="button" class="icd-card" data-id="' + esc(x.id) + '">' +
+        '<span class="r2-main"><span class="icd-card-name">' + esc(g(x, "title")) + '</span>' +
+        '<span class="r2-sub"><span class="r2-code">' + esc(g(x, "code")) + '</span><span>' + esc(g(x, "system")) + '</span>' +
+        (g(x, "chapter") ? '<span>Chapter ' + esc(x.chapter) + '</span>' : "") + '</span></span>' +
+        (st.onSelect ? R.PLUS : R.CHEV) + '</button>';
+    }
     return '<button type="button" class="icd-card" data-id="' + esc(x.id) + '">' +
       '<div class="icd-card-code">' + esc(g(x, "code")) + '<span class="icd-card-sys">' + esc(g(x, "system")) + '</span></div>' +
       '<div class="icd-card-name">' + esc(g(x, "title")) + '</div>' +
@@ -238,15 +298,41 @@
     if (!pane) { pane = document.createElement("div"); pane.className = "icd-pane"; pane.setAttribute("aria-live", "polite"); root.appendChild(pane); }
     root.classList.add("icd-split");
     root.querySelectorAll(".icd-card").forEach(function (c) { c.classList.toggle("sel", c.getAttribute("data-id") === id); });
-    pane.innerHTML = '<div class="icd-hint">Loading…</div>';
+    pane.innerHTML = U2 ? R.skeleton("Loading", 1) : '<div class="icd-hint">Loading…</div>';
     var mySeq = ++dseq;
     ICDAPI.code(id).then(function (d) {
       if (mySeq !== dseq) return;
-      if (d == null || d.error) { pane.innerHTML = '<div class="icd-err">Could not load this code. Check your connection and try again.</div>'; return; }
+      if (d == null || d.error) { detailError(pane, function () { openDetailSplit(id); }); return; }
       pane.innerHTML = detailHTML(d);
+      wireDetail(pane, d);
+    });
+  }
+  function detailError(box, retry) {
+    if (!U2) { box.innerHTML = '<div class="icd-err">Could not load this code. Check your connection and try again.</div>'; return; }
+    box.innerHTML = R.state("icd-err", "Could not load this code", "Check your connection, then try again.", "retry");
+    box.querySelector('[data-r2="retry"]').addEventListener("click", retry);
+  }
+  // "CODE - Title", the same line the OPD note gets when a code is picked there.
+  function wireDetail(box, d) {
+    var btn = box.querySelector('[data-r2="copy"]'); if (!btn) return;
+    btn.addEventListener("click", function () {
+      R.copy(g(d, "code") + " - " + g(d, "title")).then(function (ok) {
+        if (ok) R.hap("success");
+        btn.textContent = ok ? "Copied" : "Could not copy";
+        setTimeout(function () { btn.textContent = "Copy code and name"; }, 1600);
+      });
     });
   }
   function detailHTML(d) {
+    if (U2) {
+      return '<div class="icd-dhead">' +
+          '<div class="icd-dcode"><span>' + esc(g(d, "code")) + '</span><span class="icd-card-sys">' + esc(g(d, "system")) + '</span></div>' +
+          '<div class="icd-dname">' + esc(g(d, "title")) + '</div>' +
+          (g(d, "chapter") ? '<div class="icd-card-ch">Chapter ' + esc(d.chapter) + '</div>' : "") +
+        '</div>' +
+        '<button type="button" class="r2-btn r2-primary" data-r2="copy">Copy code and name</button>' +
+        '<div class="icd-src">Source: WHO ' + esc(g(d, "system")) + ' public reference release. Classification reference data, no patient information.</div>';
+    }
     return '<div class="icd-dhead">' +
         '<div class="icd-dcode">' + esc(g(d, "code")) + '<span class="icd-card-sys">' + esc(g(d, "system")) + '</span></div>' +
         '<div class="icd-dname">' + esc(g(d, "title")) + '</div>' +
@@ -259,19 +345,23 @@
     st.view = "detail";
     setTitle("ICD code");
     var b = root.querySelector("#icdBody");
-    b.innerHTML = '<div class="icd-hint">Loading…</div>';
+    b.innerHTML = U2 ? R.skeleton("Loading", 1) : '<div class="icd-hint">Loading…</div>';
     var mySeq = ++seq;
     ICDAPI.code(id).then(function (d) {
       if (mySeq !== seq || st.view !== "detail") return;
-      if (d == null || d.error) { b.innerHTML = '<div class="icd-err">Could not load this code. Check your connection and try again.</div>'; return; }
-      setTitle(g(d, "code") || "ICD code");
+      if (d == null || d.error) { detailError(b, function () { openDetail(id); }); return; }
+      setTitle(U2 ? (g(d, "system") || "ICD code") : (g(d, "code") || "ICD code"));
       b.innerHTML = detailHTML(d);
+      wireDetail(b, d);
     });
   }
 
   /* ---------------- open() / pick() / close() ---------------- */
   function openWith(onSelect) {
     ensureRoot();
+    readU2();
+    root.classList.toggle("r2", U2);
+    root.querySelector("#icdBack").innerHTML = U2 ? R.backHTML() : "‹ Back";
     root.classList.add("on");
     document.body.classList.add("icd-lock");
     root.classList.remove("icd-split"); dseq++;
