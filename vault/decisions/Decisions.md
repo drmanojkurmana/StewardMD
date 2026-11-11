@@ -12183,3 +12183,13 @@ gradient header, stat tiles and tabs (features and data the screen does not have
 Not verified on a phone. Reversible: `smd_opd_q2=0` (the default).
 Update, same day: the owner asked for an Apple-like font and said the rest is fine. The new screen now uses the
 system face (`-apple-system`, San Francisco on iPhone) with Inter as the Android fallback, in place of Manrope.
+
+## Clinical Calculators: polish the existing screen, no redesign (owner, 2026-11-11)
+The owner first asked for a full redesign (flat white list, All / Favorites / Recent / Popular tabs). A build of
+it was shown and rejected as "vibe coded": "just polish this rather than changing whole UI". The redesign was
+discarded, never committed. Kept: the glass look, the header, the cards. Repaired in `calculators.js`
+(`polishCSS()`): the selected category chip was white text on white glass; the chips' 30px glass shadow was
+clipped by the rail into a grey band; search and the category rail now sit in a strip (`.mc-pin`) outside the
+scrolling list, as the owner drew; the star (now a 44px target) and a real chevron are centred on the row;
+card shadow lightened and the doubled gap between cards removed. Do not re-propose the tabbed redesign.
+Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.

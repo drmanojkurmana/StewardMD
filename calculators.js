@@ -8045,9 +8045,13 @@
         '<div class="mc-title">Clinical Calculators <span class="mc-count">'+CALCS.length+'</span></div>'+
         '<span style="width:64px"></span>'+
       '</div>'+
-      '<div class="mc-body">'+
-        '<input id="mcSearch" class="mc-search" type="text" placeholder="Search calculators (e.g. MELD, sepsis, sodium, stroke)…" autocomplete="off">'+
+      // Search and the category rail sit in their own strip under the header, outside the scrolling
+      // list, so both stay in reach however far down the 456 calculators the doctor has scrolled.
+      '<div class="mc-pin">'+
+        '<input id="mcSearch" class="mc-search" type="text" placeholder="Search, e.g. MELD, sepsis, sodium" aria-label="Search calculators" autocomplete="off">'+
         '<div id="mcCats" class="mc-cats"></div>'+
+      '</div>'+
+      '<div class="mc-body">'+
         '<div id="mcList" class="mc-list"></div>'+
         '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+mcIco("interact")+' Check Drug Interactions</button>'+
         '<div class="mc-disc">'+mcIco("warn")+' For licensed healthcare professionals. These calculators are faithful implementations of established, peer-reviewed clinical tools, each attributed to its original author and publication; the scientific validity and all intellectual-property rights in those instruments belong to their respective authors and publishers. StewardMD computes and presents the score for decision support only; the clinician verifies every input, formula and result against the individual patient and local protocol before acting. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder.</div>'+
@@ -8120,9 +8124,9 @@
   // Card markup, shared between the browse (grouped-by-category) and search (flat) layouts below.
   function calcCardHTML(c){
     var favOn=isWatchFav(c.id), W=window.SMD_HAS_WATCH?" Apple Watch":"";
-    return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
-      '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+(W||" starred")+'" title="'+(W?"Show on Apple Watch":"Star this calculator")+'" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
-      '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
+    return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'">'+
+      '<button class="mc-star'+(favOn?" on":"")+'" data-fav="'+c.id+'" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(W||" starred")+'" title="'+(W?"Show on Apple Watch":"Star this calculator")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
+      '<button class="mc-card-head" data-open="'+c.id+'" aria-expanded="'+(openId===c.id?"true":"false")+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span></button>'+
       (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
     '</div>';
   }
@@ -8567,8 +8571,49 @@
       ".mc-af-ok span{color:var(--slate-soft,#888);font-size:10.5px}",
       ".mc-af-miss{color:#b45309;margin-top:6px}",
       ".mc-af-verify{margin-top:7px;font-size:10.5px;color:var(--slate-soft,#888)}"
-    ].join("");
+    ].join("") + polishCSS();
     var st=document.createElement("style"); st.id="mc-styles"; st.textContent=css; document.head.appendChild(st);
+  }
+
+  /* Polish pass (owner 2026-11-11: "just polish this rather than changing whole UI"). Same screen, same
+     glass; this only repairs what was broken on it. The id is tripled and the contested declarations are
+     !important because appearance.css (which already doubles the id with :not(#_)), refined.css and the
+     body.ui-v2 block in home.js all restyle .mc-* after this sheet. */
+  function polishCSS(){
+    var Q="html body #mcOverlay#mcOverlay#mcOverlay";
+    return [
+      /* pinned strip: search + category rail */
+      Q+" .mc-pin{flex:0 0 auto;position:relative;z-index:2;padding:12px 14px 0;border-bottom:1px solid rgba(15,23,42,.07)}",
+      "html body.dark #mcOverlay#mcOverlay#mcOverlay .mc-pin,html body.v3-dark #mcOverlay#mcOverlay#mcOverlay .mc-pin{border-bottom-color:rgba(255,255,255,.09)}",
+      "@media(min-width:700px){"+Q+" .mc-pin{padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 1100px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 1100px)/2))}}",
+      Q+" .mc-pin .mc-search{margin-bottom:10px!important}",
+      /* the rail runs edge to edge, so a chip slides off the screen instead of being cut at an inner margin */
+      Q+" .mc-pin .mc-cats{margin:0 -14px!important;padding:2px 14px 12px!important;scroll-padding-left:14px}",
+      Q+" .mc-body{padding-top:2px!important}",
+      Q+" .mc-list>.mc-grp-h:first-child{margin-top:8px!important}",
+      /* chips: the glass layer gave each a 30px drop shadow, which the rail clipped into a grey band */
+      Q+" .mc-cat{display:inline-flex!important;align-items:center;gap:5px;min-height:36px;box-shadow:0 1px 2px rgba(15,23,42,.07)!important}",
+      Q+" .mc-cat svg{margin-right:0!important}",
+      Q+" .mc-cat span{margin-left:1px}",
+      /* the selected chip was white text on white glass: unreadable */
+      Q+" .mc-cat.on{background:var(--teal,#0f766e)!important;border-color:var(--teal,#0f766e)!important;color:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 1px 3px rgba(15,23,42,.18)!important}",
+      /* dark: the Refined look's deeper teal keeps white text above 4.5:1; with that look off the chip keeps its own teal */
+      "html.smd-refined body.dark #mcOverlay#mcOverlay#mcOverlay .mc-cat.on,html.smd-refined body.v3-dark #mcOverlay#mcOverlay#mcOverlay .mc-cat.on{background:#1F7A6E!important;border-color:#1F7A6E!important}",
+      Q+" .mc-cat.on span{opacity:.85}",
+      /* cards: a light lift instead of the heavy shadow that muddied the gaps between them */
+      Q+" .mc-card{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;margin-bottom:0!important;box-shadow:0 1px 2px rgba(15,23,42,.05),0 3px 10px rgba(15,23,42,.05)!important}",
+      Q+" .mc-card-head{position:relative;grid-column:1/-1;grid-row:1;min-height:60px;padding:11px 84px 11px 14px!important;gap:12px}",
+      Q+" .mc-card .mc-panel{grid-column:1/-1;grid-row:2;min-width:0}",
+      Q+" .mc-card-d{line-height:1.35}",
+      /* star and chevron: centred on the row, star with a full-size touch target */
+      Q+" .mc-star{grid-column:2;grid-row:1;position:relative!important;top:auto!important;right:auto!important;z-index:2;width:44px;height:44px;margin:0 34px 0 0;padding:0!important;display:flex;align-items:center;justify-content:center;background:none;border:0;border-radius:12px;cursor:pointer;line-height:0;color:#b6bcc4}",
+      Q+" .mc-star.on{color:#e0a800}",
+      Q+" .mc-star .mc-fav{width:19px;height:19px}",
+      Q+" .mc-chev{position:absolute;right:12px;top:50%;width:22px;height:22px;margin-top:-11px;display:flex;align-items:center;justify-content:center;font-size:0;transition:transform .16s ease}",
+      Q+" .mc-chev svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}",
+      Q+" .mc-card.open .mc-chev{transform:rotate(90deg);color:var(--teal,#0f766e)}",
+      "@media(prefers-reduced-motion:reduce){"+Q+" .mc-chev{transition:none}}"
+    ].join("");
   }
 
   // ── Headless facade (for MaiKBrain / programmatic use — no UI) ──────────────
