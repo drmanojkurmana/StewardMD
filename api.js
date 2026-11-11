@@ -138,7 +138,7 @@
     root.innerHTML =
       '<div class="db-top">' +
         '<div class="db-grab" id="dbGrab" aria-hidden="true"><i></i></div>' +
-        '<button class="db-back" id="dbBack">‹ Back</button>' +
+        '<button class="db-back" id="dbBack" aria-label="Back">' + dbIco("chev", "db-ico db-back-ic") + '<span>Back</span></button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
         // The home button was removed (owner 2026-10-28). "‹ Back" steps back; the app's own
@@ -158,10 +158,19 @@
       closeDrawer(); if (st.name) { st.name = null; renderList(); } else close();
     });
     attachSheetGestures();
+    // The bar title fades in once the drug's own heading has scrolled under the bar.
+    root.addEventListener("scroll", function (e) {
+      var t = e.target; if (!t || !t.classList || !(t.classList.contains("db-body") || t.id === "dbMain")) return;
+      if (!root.classList.contains("db-is-detail")) return;
+      var g = t.querySelector(".db-gen"), lim = g ? g.offsetTop + g.offsetHeight - 8 : 40;
+      root.classList.toggle("db-scrolled", t.scrollTop > lim);
+    }, true);
     return root;
   }
   function setTitle(t, showBack) {
     root.querySelector("#dbTitle").textContent = t;
+    // A drug page shows its name as the big heading; the bar title waits until that heading scrolls under the bar.
+    root.classList.toggle("db-is-detail", !!showBack); root.classList.remove("db-scrolled");
     root.querySelector("#dbBack").style.visibility = "visible";
   }
 
@@ -741,7 +750,7 @@
     var nBrands = st.total || st.brands.length || 0;
     if (bb) {
       if (!nBrands) { bb.style.display = "none"; }
-      else { bb.style.display = ""; bb.innerHTML = dbIco("pills") + '<span class="db-bb-lbl"><span class="db-bb-long">Available </span>Brands</span><span class="db-bb-ct">' + cnt + '</span>'; }
+      else { bb.style.display = ""; bb.setAttribute("aria-label", cnt + (nBrands === 1 ? " brand" : " brands") + " available"); bb.innerHTML = dbIco("pills") + '<span class="db-bb-lbl"><b>' + cnt + '</b>' + (nBrands === 1 ? " brand" : " brands") + '</span>'; }
     }
     if (dwOpen) openDrawer();
     loadStructured(d.composition);
@@ -1275,6 +1284,24 @@
       ".db-overlay.db-sheet .db-top .db-brandbtn{grid-column:3;justify-self:end}",
       ".db-overlay .db-az{height:0;margin:0;padding:0;overflow:hidden;pointer-events:none}",   // keeps its full width: az-scrubber.js shows its strip only when this row reaches the right edge
       ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
+      /* Header revamp (owner 2026-11-11: "why so much place left", the Brands button "can look better"). One calm 44 px
+         bar under the notch: the drag handle no longer takes a row of its own, Back is a plain chevron and word, the
+         title waits for the drug heading to scroll away, and Brands is one solid button ("6 brands") with no pulsing
+         glow and no pill inside a pill. High specificity because Home's v3 polish and the Appearance looks restyle it. */
+      "html body #dbOverlay#dbOverlay .db-top{display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center!important;gap:0 8px!important;min-height:0!important;padding:calc(env(safe-area-inset-top) + 2px) 8px 6px!important;position:relative;background:var(--panel,#fff)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:0!important;border-bottom:1px solid var(--line,#e5e5e0)!important;border-radius:0!important;box-shadow:none!important}",
+      "html body #dbOverlay#dbOverlay .db-top .db-grab{position:absolute!important;left:0;right:0;top:0;height:calc(env(safe-area-inset-top) + 10px)!important;padding:0!important;margin:0!important;z-index:1}",
+      "html body #dbOverlay#dbOverlay .db-back{grid-column:1;justify-self:start;display:inline-flex!important;align-items:center;gap:2px;height:44px!important;padding:0 8px 0 2px!important;margin:0!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:10px!important;color:var(--teal,#0a7c6b)!important;font:600 16px var(--sans,system-ui)!important}",
+      "html body #dbOverlay#dbOverlay .db-back .db-back-ic{width:22px;height:22px;transform:rotate(180deg);vertical-align:0}",
+      "html body #dbOverlay#dbOverlay .db-back:active{opacity:.55}",
+      "html body #dbOverlay#dbOverlay .db-title{grid-column:2;max-width:56vw;font:700 16px/1.2 var(--sans,system-ui)!important;transition:opacity .18s ease}",
+      "html body #dbOverlay#dbOverlay.db-is-detail:not(.db-scrolled) .db-title{opacity:0}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn{grid-column:3;justify-self:end;display:inline-flex;align-items:center;gap:6px;height:36px!important;padding:0 12px!important;margin:0!important;border:0!important;border-radius:10px!important;background:color-mix(in srgb,var(--teal,#0a7c6b) 12%,var(--panel,#fff))!important;color:var(--teal,#0a7c6b)!important;font:600 14px var(--sans,system-ui)!important;animation:none!important;box-shadow:none!important;filter:none!important}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn b{font-weight:800;font-variant-numeric:tabular-nums;margin-right:3px}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn .db-ico{width:16px;height:16px;vertical-align:0}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn:active{background:color-mix(in srgb,var(--teal,#0a7c6b) 20%,var(--panel,#fff))!important}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn:focus-visible,html body #dbOverlay#dbOverlay .db-back:focus-visible{outline:2px solid var(--teal,#0a7c6b);outline-offset:2px}",
+      "body.dark #dbOverlay#dbOverlay .db-brandbtn{background:rgba(63,196,160,.16)!important;color:#8fe3c8!important}",
+      "body.dark #dbOverlay#dbOverlay .db-back{color:#8fe3c8!important}",
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
       ".db-bh-comp{font-weight:700}",
