@@ -3183,7 +3183,19 @@
     }
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
+    perfectCele(r);
     if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
+  }
+  /* Owner 2026-11-11: every question right in a set of 5 or more (any module, practice or test) plays the
+     "You are the boss" clip (boss-cele.js). Once per finished set. */
+  function perfectCele(r) {
+    try {
+      var n = r.items.length; if (n < 5 || r.perfectDone) return;
+      for (var i = 0; i < n; i++) if (r.ans[i] !== r.items[i].a) return;
+      r.perfectDone = true;
+      var o = { eyebrow: "100% correct", title: "You are the boss", detail: n + " of " + n + " right" + (r.title ? " · " + String(r.title).replace(/<[^>]*>/g, "") : ""), key: "prepperfect:" + (r.t0 || Date.now()) };
+      setTimeout(function () { if (G.SMD_BOSS_CELE) G.SMD_BOSS_CELE.play(o); else if (G.SMD_CELEBRATE) G.SMD_CELEBRATE.show({ title: "100% correct", detail: o.detail, key: o.key, big: true }); }, 350);
+    } catch (e) {}
   }
   // Timer box (2026-10-10): the time a question took on average and how many ran out, when the set had a clock per question.
   function tstatHtml(r) {

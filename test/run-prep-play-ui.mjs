@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_focus");}catch(e){} indexedDB.deleteDatabase("prep-bank"); ${SIGN_IN} return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-feed]");`, 20000), "Play loads and home shows its section");
-  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep137";`) === true, "all nine Play rows; loader prep136");
+  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep138";`) === true, "all nine Play rows; loader prep136");
   // Header: Close and Search at the same gutter (owner screenshot 2026-10-30: Search sat one slot in from the edge).
   const gut = await ev(`var c=document.querySelector("#smdPrep .pn-bar-brand [data-act=close]"), f=document.querySelector("#smdPrep .pn-bar-brand [data-act=find]"), m=document.querySelector("#smdPrep .pn-bar-brand [data-act=menu]"); var a=c.getBoundingClientRect(), b=f.getBoundingClientRect(); return JSON.stringify({ l: Math.round(a.left), r: Math.round(innerWidth - b.right), nav: document.getElementById("smdPrep").classList.contains("pn-navon"), menu: m ? getComputedStyle(m).display : "none" });`);
   const g = JSON.parse(gut);
@@ -185,7 +185,8 @@ try {
   // Owner 2026-11-11: right answers in a row burst confetti (3, 5, 10, every 10); a boss win is a full celebration.
   await ev(`window.__cf = []; window.__cs = []; var C = window.SMD_CELEBRATE; var cf = C.confetti, sh = C.show;
     C.confetti = function (o) { window.__cf.push(PREP._st.run ? PREP._st.run.i + 1 : -1); return cf.apply(this, arguments); };
-    C.show = function (o) { window.__cs.push(o.title + "|" + (o.big ? "big" : "")); return sh.apply(this, arguments); }; return 1;`);
+    C.show = function (o) { window.__cs.push(o.title + "|" + (o.big ? "big" : "")); return sh.apply(this, arguments); };
+    var B = window.SMD_BOSS_CELE; if (B) { var bp = B.play; B.play = function (o) { window.__cs.push("clip:" + o.eyebrow + "|" + o.title); return bp.apply(this, arguments); }; } return 1;`);
   for (let i = 0; i < 20; i++) {
     await ev(`var r=PREP._st.run, it=r.items[r.i]; document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]').click(); return 1;`);
     await until(`return !!document.querySelector("#smdPrep [data-act=next]");`, 3000);
@@ -195,7 +196,10 @@ try {
   ok(await ev(`return window.__cf.slice(0, 4).join();`) === "3,5,10,20", "streak: bursts at 3, 5, 10, 20 " + await ev(`return window.__cf.join();`));
   ok(await until(`return /Boss beaten/.test(document.querySelector("#smdPrep .pv-boss-end").textContent);`, 5000), "boss: all right beats it");
   ok(await store(`!!s.boss.anatomy.won && s.boss.anatomy.best === 20 && s.boss.anatomy.tries === 2`) === true, "boss: the win is stored");
-  ok(await ev(`return window.__cs.some(function (t) { return /boss beaten\|big$/.test(t); });`) === true, "boss win: a big celebration card " + await ev(`return window.__cs.join(";");`));
+  ok(await ev(`return window.__cs.some(function (t) { return /^clip:Anatomy boss beaten\|You are the boss$/.test(t); });`) === true, "boss win: the You are the boss clip " + await ev(`return window.__cs.join(";");`));
+  ok(await until(`return !!document.getElementById("smdBoss") || window.__cs.some(function (t) { return /boss beaten\|big$/.test(t); });`, 3000), "boss win: clip on screen (or the card if the video cannot play)");
+  await sleep(1200); await shot("play-boss-won-clip");
+  await ev(`var b = document.querySelector("#smdBoss .bc-skip, #smdBoss .bc-go"); if (b) b.click(); return 1;`); await sleep(400);
   await sleep(450); await shot("play-boss-won");
 
   // ---- quick fire

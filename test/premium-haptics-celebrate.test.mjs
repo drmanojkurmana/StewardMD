@@ -181,7 +181,7 @@ test("engagement notifier routes through SMD_CELEBRATE with once-per-achievement
 
 test("confetti: every celebration bursts, pointer-events none, reduced motion and kill switch respected", () => {
   const CEL = readFileSync(new URL("../smd-celebrate.js", import.meta.url), "utf8");
-  assert.match(CEL, /if \(!o\.noConfetti\) confetti\(/);
+  assert.match(CEL, /var burst = !o\.noConfetti && confetti\(/); assert.match(CEL, /Hp\.celebrate\(\)/);
   assert.match(CEL, /pointer-events:none/);
   assert.match(CEL, /!confettiOn\(\) \|\| reduced\(\) \|\| document\.hidden/);
   assert.match(CEL, /"smd_confetti"\) !== "0"/);
