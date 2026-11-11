@@ -163,3 +163,11 @@ old title stays for screen readers, the in-page banner and the "Search the libra
   style), tabs and content scroll below; on other tabs the bar has no search.
 Code: `kbHeadApply` in `reasoning.js` (called after Discover renders and after each tab), styles `kb-head.css`.
 Test: `test/run-kb-head-ui.mjs`. Theme unchanged. Owner to pick one; then make it the default and drop the others.
+
+## Your library rows (2026-11-11, owner mock)
+
+`kbPersonalHTML` (reasoning.js): "Your library" / "Saved on this device", then two `<details>` rows (filled bookmark
+for Favourites, history clock for Recently viewed, in `--kl-accent`; label; count; chevron that turns 90 degrees when
+open) split by a hairline. A row opens its list in place. When both lists are empty, one grey rounded card (book icon,
+"Your library is empty", "Diseases you open will appear here.") replaces the two empty hints. Both rows start closed.
+Styles: end of `knowledge-library.css` (`.kbl-*`). Test: `test/run-kb-yourlib-ui.mjs` (light + dark, empty and filled).

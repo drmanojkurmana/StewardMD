@@ -5672,12 +5672,27 @@
   try { window.SMD_KB = { search: kbSearch, open: kbOpen }; } catch (e) {}
   function kbReadList(kind) { try { var list = JSON.parse(localStorage.getItem("smd_library_" + kind) || "[]"); return Array.isArray(list) ? list.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
   function kbSaveList(kind, list) { try { localStorage.setItem("smd_library_" + kind, JSON.stringify(list)); return true; } catch (e) { return false; } }
+  /* Your library (owner mock 2026-11-11): two list rows (icon, label, count, chevron) split by a hairline, each opens
+   * its list in place; when both lists are empty, one composed empty card instead of two empty hints. */
+  var KB_LIB_ICO = {
+    favourites: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h11a1 1 0 0 1 1 1v16.2a.5.5 0 0 1-.8.4L12 17l-5.7 4.1a.5.5 0 0 1-.8-.4V4.5a1 1 0 0 1 1-1z" fill="currentColor"/></svg>',
+    recent: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 4v4.5h4.5"/><path d="M12 7.5V12l3 2"/></svg>',
+    chev: '<svg class="kbl-chev" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5.5l6.5 6.5L9 18.5"/></svg>',
+    book: '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 6.5C10.3 5.2 7.7 4.6 3.5 4.8v13.4c4.2-.2 6.8.4 8.5 1.8 1.7-1.4 4.3-2 8.5-1.8V4.8c-4.2-.2-6.8.4-8.5 1.7z"/><path d="M12 6.5V20"/></svg>'
+  };
   function kbPersonalHTML(entries) {
     var byId = {}; entries.forEach(function (d) { byId[d.id] = d; });
-    return '<section class="kblib-personal"><h2>Your library</h2><small>Saved on this device</small>' + ["favourites", "recent"].map(function (kind) {
-      var ids = kbReadList(kind).filter(function (id) { return !!byId[id]; });
-      return '<details' + (kind === "favourites" ? ' open' : '') + '><summary>' + (kind === "favourites" ? "Favourites" : "Recently viewed") + ' · ' + ids.length + '</summary>' + (ids.length ? ids.map(function (id) { return '<button type="button" class="kblib-row" data-kb="' + esc(id) + '">' + esc(byId[id].name) + '</button>'; }).join('') : '<p>' + (kind === "favourites" ? "Save a disease from its reference page for quick access." : "Diseases you open will appear here.") + '</p>') + '</details>';
-    }).join('') + '</section>';
+    var lists = ["favourites", "recent"].map(function (kind) { return { kind: kind, ids: kbReadList(kind).filter(function (id) { return !!byId[id]; }) }; });
+    var empty = !lists[0].ids.length && !lists[1].ids.length;
+    return '<section class="kblib-personal kbl"><h2>Your library</h2><small>Saved on this device</small><div class="kbl-rows">' + lists.map(function (l) {
+      var label = l.kind === "favourites" ? "Favourites" : "Recently viewed";
+      return '<details class="kbl-item kbl-' + l.kind + '"><summary><span class="kbl-ico">' + KB_LIB_ICO[l.kind] + '</span><span class="kbl-label">' + label + '</span>' +
+        '<span class="kbl-n" aria-label="' + l.ids.length + ' saved">' + l.ids.length + '</span>' + KB_LIB_ICO.chev + '</summary><div class="kbl-list">' +
+        (l.ids.length ? l.ids.map(function (id) { return '<button type="button" class="kblib-row" data-kb="' + esc(id) + '">' + esc(byId[id].name) + '</button>'; }).join('')
+          : '<p>' + (l.kind === "favourites" ? "Save a disease from its reference page for quick access." : "Diseases you open will appear here.") + '</p>') + '</div></details>';
+    }).join('') + '</div>' +
+      (empty ? '<div class="kbl-empty"><span class="kbl-empty-ico">' + KB_LIB_ICO.book + '</span><strong>Your library is empty</strong><span>Diseases you open will appear here.</span></div>' : '') +
+      '</section>';
   }
   // ---- recent search history (replaces the hardcoded #spChips example chips) --------------
   var SMD_RECENT_KEY = "smd_recent_searches", SMD_RECENT_MAX = 8;
