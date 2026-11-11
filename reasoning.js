@@ -4768,12 +4768,12 @@
     var rd = kbReaderBodyHTML(id, H, { name: name, reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
-        '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
+        '<div class="dx-reader-brand dx-reader-brand-kb"><img class="dx-reader-logo" src="/logo.png" alt="" width="28" height="28" decoding="async"><div class="dx-reader-brandtx"><strong>StewardMD</strong><span>Knowledge Base</span></div></div><span class="dx-reader-spacer dx-reader-topacts"></span></div>' +
       '<div class="kbr-sheet" aria-hidden="true"></div>' +
       '<div class="dx-mgmt-body"><div class="kbr-read">' +
-        '<section class="dx-reader-hero">' + kbBannerHTML() +
+        '<section class="dx-reader-hero">' +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
-        '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
+        '<div class="dx-reader-metarow"><div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></div></section>' +
         rd.jump +
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
         rd.glance + kbFigRow(name, rdMgmt, rd.body) +
@@ -4793,12 +4793,15 @@
         }
       });
     }
-    var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
-    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
+    var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite dx-reader-star";
+    function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg>'; favourite.classList.remove("is-err"); favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
-    favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else favourite.textContent = "Could not save. Try again."; });
-    var heroActs = document.createElement("div"); heroActs.className = "dx-reader-acts";
-    heroActs.appendChild(favourite);
+    favourite.addEventListener("click", function () { var list = kbReadList("favourites"), saved = list.indexOf(id) >= 0; if (kbSaveList("favourites", saved ? list.filter(function (x) { return x !== id; }) : list.concat(id))) favouritePaint(); else { favourite.classList.add("is-err"); favourite.setAttribute("aria-label", "Could not save. Try again."); } });
+    // Owner layout (2026-11-11 photo): the save star sits in the header's right slot, Ask MaiK on the
+    // right of the system line, so the hero is just the name.
+    var topActs = el.querySelector(".dx-reader-topacts");
+    if (topActs) topActs.appendChild(favourite);
+    var heroActs = el.querySelector(".dx-reader-metarow");
     // "Ask MaiK" (2026-10-04): MaiK opens over this page with the disease as its topic (home.js
     // SMD_askMaikTopic). Absent when MaiK is not loaded, so it is never a dead button.
     if (typeof window.SMD_askMaikTopic === "function") {
@@ -4808,7 +4811,6 @@
       askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
       heroActs.appendChild(askMk);
     }
-    el.querySelector(".dx-reader-hero").appendChild(heroActs);
     el.classList.add("on"); el.scrollTop = 0;
     var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () {
       el.classList.remove("on");

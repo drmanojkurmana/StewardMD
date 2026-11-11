@@ -865,3 +865,24 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
 @media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { transition: none; } }
 /* the figure image's own box, so the watermark overlay (image-viewer.css .smd-wm) covers the picture and its rounded corners */
 #dxOverlay #dxMgmt.dx-reader .kbr-media-host { display: block; border-radius: 12px; }
+
+/* Reader header and hero, owner photo 2026-11-11: the header carries the StewardMD Knowledge Base mark
+   (replacing "Knowledge Library / Clinical disease reference"), Save is a star in the header's right slot,
+   and Ask MaiK sits on the right of the system line under the disease name. */
+#dxOverlay #dxMgmt.dx-reader .dx-reader-brand-kb { display: flex; align-items: center; gap: 9px; text-align: left; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-logo { flex: 0 0 auto; width: 28px; height: 28px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-brandtx { min-width: 0; }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-brand-kb { text-align: left; }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-topacts { display: flex; justify-content: flex-end; justify-self: end; width: auto; min-width: 44px; overflow: visible; position: relative; z-index: 2; }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-star,
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0;
+  width: 44px; height: 44px; min-height: 44px; margin: 0; padding: 0;
+  border: 1px solid var(--kbr-line, var(--rd-line)); border-radius: 999px; background: transparent; color: var(--reader-accent);
+}
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star svg { width: 22px; height: 22px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star[aria-pressed="true"] { background: transparent; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-star.is-err { color: var(--kbr-red, #b42318); border-color: currentColor; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-mgmt-sys { margin: 0; min-width: 0; }
+#dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askmaik { flex: 0 0 auto; margin: 0; white-space: nowrap; }
