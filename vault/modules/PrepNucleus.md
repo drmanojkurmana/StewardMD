@@ -756,6 +756,15 @@ prefers confident Gemini answers; embeddings are only the fallback, so bge-small
 `vec-*.npy` caches are not.
 
 ## Gotchas
+- **"Learn this module" must open the module's own lesson** (owner bug 2026-11-12, `?v=prep135`). The links index
+  (`tools/prep-links.mjs` `subjectLesson`) can give a module that HAS its own lesson the subject rapid-review lesson
+  (`med-mixed`) as its `lt ev 0` fallback, so Q-SYY-89K-M86 (son-natural-products, Anthracyclines) opened "Mixed
+  practice: high-yield medicine review". `prep-reason.js` `routeFallbackLessons` now re-points every fallback lesson
+  at the module's own lesson from the live lesson index (`ownLessonIn`: key === mid, else first `module === mid`);
+  item pipeline lessons and lessons already in the module are kept; with no own lesson the row is subtitled with the
+  real lesson title instead of the module name. Test: `test/prep-reason-module-lesson.test.mjs`. The builder already
+  prefers an own lesson (`own: k === mid`), so the published shard likely predates the module's lesson: a links
+  rebuild + publish (owner's Mac, needs the bank and Cloudflare token) refreshes the data side.
 - **MedMCQA "rt" repair needs guards.** Building the repair vocabulary over every subject attests rare words
   ("RTIs", "tort", "arts"), and the unguarded Tokós repair turned "is" into "rtis" in about half the questions.
   `REPAIR` in `prep-build-bank.mjs` (ratio guards + keep list) fixes it; Tokós calls `buildRepair` without options
