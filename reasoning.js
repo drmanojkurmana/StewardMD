@@ -5783,7 +5783,7 @@
       if (tab === "ilearn") { var ri = orig.call(this, "guidelines"); try { if (window.SMD_ILEARN) SMD_ILEARN.render(); } catch (e) {} return ri; }
       var r = orig.apply(this, arguments);
       if (tab === "syndromes") { try { kbRenderLibrary(); } catch (e) {} }
-      else { try { kbPolishReference(tab); } catch (e) {} }
+      else { try { kbPolishReference(tab); } catch (e) {} try { kbHeadApply(); } catch (e) {} }
       return r;
     };
     if (typeof window.SB.abgOrg === "function" && !window.SB.__smdAbgWrapped) {
@@ -5872,6 +5872,34 @@
     document.addEventListener("focusout", function () { setTimeout(f, 60); }, true);
   }
   window.SMD_kbFitViewport = kbFitViewport;
+  /* Knowledge Library header variants (owner, 2026-11-11: "Knowledge Library" title out, StewardMD Knowledge Base
+   * brand up into the bar, search up). localStorage smd_kb_head = "a" | "b" | "c"; anything else keeps today's
+   * layout. Styles in kb-head.css. a = compact (tabs, then search; no hero), b = small title with search under it,
+   * c = compact with the search pinned under the bar while the page scrolls. */
+  function kbHeadVariant() { try { var v = localStorage.getItem("smd_kb_head"); return /^[abc]$/.test(v || "") ? v : ""; } catch (e) { return ""; } }
+  function kbHeadApply(count) {
+    var o = document.getElementById("sbrefOverlay"); if (!o) return;
+    var v = kbHeadVariant();
+    o.classList.remove("kbh", "kbh-a", "kbh-b", "kbh-c");
+    if (!v) return;
+    o.classList.add("kbh", "kbh-" + v);
+    var top = o.querySelector(".sbref-top");
+    if (top && !top.querySelector(".kbh-brand")) {
+      var b = document.createElement("div"); b.className = "kbh-brand"; b.setAttribute("aria-hidden", "true");
+      b.innerHTML = '<img src="/logo.png" alt="" width="28" height="28" decoding="async"><span><strong>StewardMD</strong><small>Knowledge Base</small></span>';
+      top.insertBefore(b, top.firstChild);
+    }
+    // the freshly rendered field is the one in the page; an older one may still sit in the bar (c)
+    var q = document.querySelector("#sbrefBody #kblibQ") || document.getElementById("kblibQ");
+    if (q && count) q.placeholder = "Search " + count + " diseases";
+    // c: the Discover search field moves into the bar, under the brand (handlers are delegated by id).
+    if (top) {
+      var box = q && q.closest(".kblib-searchbox"), old = top.querySelectorAll(".kblib-searchbox");
+      for (var i = 0; i < old.length; i++) if (old[i] !== box) old[i].parentNode.removeChild(old[i]);
+      if (v === "c" && box && box.parentNode !== top) top.appendChild(box);
+    }
+  }
+  window.SMD_kbHeadApply = kbHeadApply;
   function kbRenderLibrary() {
     kbBindViewport();
     var body = document.getElementById("sbrefBody"); if (!body) return;
@@ -5908,6 +5936,7 @@
         f(_libState.branch === "all", "br", "all", "All") +
         branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div></details>' +
       '<div class="kblib-count" id="kblibCount" role="status"></div><div class="kblib-grid" id="kblibGrid"></div><button type="button" id="kblibMore" class="kblib-more">Show more diseases</button>';
+    try { kbHeadApply(entries.length >= 4800 ? "4,800+" : entries.length.toLocaleString()); } catch (e) {}
     kbWireLibrary();   // ensure the (delegated) handlers exist
     var _iglBtn = document.getElementById("kblibImgLib");
     if (_iglBtn) _iglBtn.addEventListener("click", function () { try { if (window.SMD_IMGLIB) window.SMD_IMGLIB.open({}); } catch (e) {} });

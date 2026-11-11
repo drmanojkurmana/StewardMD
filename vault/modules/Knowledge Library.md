@@ -149,3 +149,17 @@ The Library home carries an "Image Library" entry opening the shared central ima
 - Protocol reader at 1,000 px container width and wider: the section list is a sticky left column.
 - `SMD_KB.open()` with no id now opens the Syndromes tab instead of an empty reader (that empty card was what the
   `kb-library` screen of `test/run-ipad-layout-ui.mjs` measured).
+
+## Header variants (2026-11-11, flag `smd_kb_head`, default off)
+
+Owner marked up the Discover screen: drop the "Knowledge Library" bar title, put the StewardMD Knowledge Base brand
+in the bar, move the search up. Three variants, picked with localStorage `smd_kb_head` (`a` | `b` | `c`; anything else
+keeps today's layout). All three: brand (logo + StewardMD / Knowledge Base) is the bar title on every library tab, the
+old title stays for screen readers, the in-page banner and the "Search the library" label go, the placeholder reads
+"Search 4,770 diseases" (live count).
+- **a, compact:** tabs, then search; the "Find any disease" hero is removed.
+- **b, title + search:** tabs, a 28 px "Find any disease" with the count line, search right under it.
+- **c, search in the bar:** the Discover search field moves into the bar under the brand (iOS large-title search
+  style), tabs and content scroll below; on other tabs the bar has no search.
+Code: `kbHeadApply` in `reasoning.js` (called after Discover renders and after each tab), styles `kb-head.css`.
+Test: `test/run-kb-head-ui.mjs`. Theme unchanged. Owner to pick one; then make it the default and drop the others.
