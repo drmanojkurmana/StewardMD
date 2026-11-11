@@ -62,5 +62,7 @@ preset or density the user picks; every other screen still follows them. `home.j
 `zoomNowD`, and on resize) sets `--smd-home-zoom` = Auto fit scale / html zoom and `html[data-home-dens]` = the Auto
 fit density; `redesign-system.css` applies `#homeV2{zoom:var(--smd-home-zoom,1)}` and keys the Home density rules on
 `html[data-home-dens]` instead of `body.smd-dens-*`. `autoBaseD()` is the side-effect-free Auto fit calculation.
+Home never takes Auto fit's small-phone shrink (`homeBaseD`: at least 1.0, never Compact), owner 2026-11-11: the
+restart look (0.95 + Compact on a 393 px iPhone) squashed the tiles and banner; 100% + Default is the wanted look.
 "Reset to defaults" now runs Auto fit at once (it left 100% and Default density until relaunch).
 Audit note: outside Home, Density only changes Settings rows (`settings-ui.css`), so it does very little on its own.

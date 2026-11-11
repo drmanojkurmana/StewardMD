@@ -10481,8 +10481,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      takes that zoom back out with its own (--smd-home-zoom = the Auto fit scale for this device / the html zoom), so it
      always draws at what Auto fit would give, and its density rules follow html[data-home-dens] (the Auto fit density),
      not body.smd-dens-*. redesign-system.css applies both. With Auto fit on, the home zoom is 1 and nothing changes. */
+  /* Owner 2026-11-11 (screenshots "After Reset to default" vs "On Restart"): Home looks right at 100% and Default density
+     and wrong with Auto fit's small-phone shrink (0.95 and Compact under 400 px, which a restart applies). So Home never
+     takes the shrink: at least 1.0 and never Compact. A tablet's Comfortable density and a phone under 340 px aside, this
+     is the "after reset" look on every launch. */
+  function homeBaseD() { var b = autoBaseD(); return { fs: Math.max(1, b.fs), d: b.d === "compact" ? "default" : b.d }; }
   function homeFitD() {
-    var b = autoBaseD(), z = +document.documentElement.style.zoom || zoomOfD() || 1, de = document.documentElement;
+    var b = homeBaseD(), z = +document.documentElement.style.zoom || zoomOfD() || 1, de = document.documentElement;
     var hz = String(Math.round(b.fs / z * 1e4) / 1e4);
     if (de.style.getPropertyValue("--smd-home-zoom") !== hz) de.style.setProperty("--smd-home-zoom", hz);
     if (de.getAttribute("data-home-dens") !== b.d) de.setAttribute("data-home-dens", b.d);
