@@ -12214,3 +12214,10 @@ above), 7 colours + Bold + Remove, tap a highlight to edit, list of the page's h
 **Trade-off.** Device-local only (not synced); a highlight whose words change in a content update is not drawn.
 **Status.** Built and tested headless; not tried on a phone. Needs build-www + native rebuild. See [[Text Highlights]].
 
+## 2026-11-11 · Watermark by module; Home fixed size
+**Decision.** PrepNucleus marks only inside PrepNucleus and the Image Library (centre mark + corner lockup); elsewhere a
+small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner ignore the Display font size and density.
+**Why.** Owner: tiled marks covered labels; Home looked wrong at larger sizes.
+**Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
+rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
+**Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].

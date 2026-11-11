@@ -53,3 +53,11 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   Ophthalmós Learn row is a StewardMD-side edit to a synced file: its hash in
   `test/ophthalmos-sync.json` was regenerated here, and the same change must be
   ported to the Ophthalmós module repo before the next sync or it is overwritten.
+- **Watermark (owner 2026-11-11):** `image-watermark.js` overlays carry two looks and `image-viewer.css` picks by
+  ancestry: inside `#smdPrep` (PrepNucleus, exists only while open) or `.igl-overlay` (this library, grid and viewer) =
+  one faint centre PrepNucleus mark + the "PrepNucleus | Powered by StewardMD" lockup in the bottom right corner;
+  anywhere else (Knowledge Library figures, the shared viewer opened outside PrepNucleus) = one small StewardMD logo in
+  the bottom right corner. Press and hold an image (260 ms, still) fades the marks to 14% (`.smd-wm-peek`), release
+  restores. Gotcha: `.igl-viewer` needs its `z-index: 5; isolation: isolate`; without it the grid's thumbnail
+  overlays (z-index 1) painted through the viewer as a 5 x 3 grid of PrepNucleus marks over the image and caption
+  panel on iPad. Tests: `test/image-report.test.mjs`, `test/run-image-report-ui.mjs`.

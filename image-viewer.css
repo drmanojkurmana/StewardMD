@@ -64,29 +64,47 @@ body.dark .izr-r:has(input:checked) { background: #0f2b28; border-color: #2dd4bf
 body.dark .izr-file { color: #7fd1c5; border-color: #3a4352; }
 body.dark .izr-msg { color: #7fd1c5; }
 
-/* Brand watermark (image-watermark.js; owner 2026-11-07, after "many watermarks" irritated): ONE large, very faint
-   PrepNucleus mark and name across the middle, like a textbook figure, and at the bottom the PrepNucleus home lockup:
-   "PrepNucleus | Powered by StewardMD". Marks are masks of the logo alpha in the brand ink. Sized from the image
-   (container units), so a thumbnail and a full-screen image carry the same share. Never takes a tap. */
+/* Brand watermark (image-watermark.js). Two looks, picked by where the image is (owner 2026-11-11):
+   - Anywhere in the app: one small StewardMD logo in the bottom right corner, nothing across the picture.
+   - Inside PrepNucleus (#smdPrep) and the Image Library (.igl-overlay): ONE large, very faint PrepNucleus mark across
+     the middle, like a textbook figure (owner 2026-11-07), and the PrepNucleus home lockup "PrepNucleus | Powered by
+     StewardMD" small in the bottom right corner (it sat bottom centre, over the labels most figures put there).
+   Press and hold fades both (.smd-wm-peek) so the text under them can be read; release brings them back.
+   Marks are masks of the logo alpha in the brand ink. Sized from the image (container units), so a thumbnail and a
+   full-screen image carry the same share. Never takes a tap. */
 .smd-wm-host { position: relative; }
-.smd-wm { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; container-type: size; border-radius: inherit; -webkit-user-select: none; user-select: none; }
+.smd-wm-host img, .igl-vimg { -webkit-touch-callout: none; }
+.smd-wm { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; container-type: size; border-radius: inherit; -webkit-user-select: none; user-select: none;
+  transition: opacity 160ms ease-out; }
+.smd-wm.smd-wm-peek { opacity: .14; }
 .smd-wm--follow { inset: auto; transform-origin: 50% 50%; will-change: transform; }
 .smd-wm-pn, .smd-wm-gl { display: block; flex: none; background: currentColor; }
 .smd-wm-pn { -webkit-mask: url("/prepnucleus-wm.png") center / contain no-repeat; mask: url("/prepnucleus-wm.png") center / contain no-repeat; }
 .smd-wm-gl { -webkit-mask: url("/stewardmd-glyph.png") center / contain no-repeat; mask: url("/stewardmd-glyph.png") center / contain no-repeat; }
+.smd-wm-wd { font-weight: 400; letter-spacing: -.01em; }
+.smd-wm-wd b { font-weight: 700; color: #0e6e63; }
+/* the StewardMD look (default): the small corner logo only */
+.smd-wm-big, .smd-wm-by { display: none; }
+.smd-wm-sm { position: absolute; right: 1.8cqw; bottom: 1.8cqw; display: flex; align-items: center; gap: .35em; height: clamp(14px, 4.2cqw, 22px); padding: 0 .6em;
+  border-radius: 999px; background: rgba(255, 255, 255, .78); box-shadow: 0 1px 2px rgba(0, 0, 0, .12); color: #1d4e6e; opacity: .85; white-space: nowrap;
+  font: 600 clamp(6.5px, 1.9cqw, 11px)/1 -apple-system, "Segoe UI", Roboto, sans-serif; }
+.smd-wm-sm .smd-wm-gl { height: 68%; aspect-ratio: 1; color: #0e6e63; }
+/* the PrepNucleus look: inside PrepNucleus and the Image Library */
+:is(#smdPrep, .igl-overlay) .smd-wm-sm { display: none; }
+:is(#smdPrep, .igl-overlay) .smd-wm-by { display: flex; }
+:is(#smdPrep, .igl-overlay) .smd-wm:not(.smd-wm--ext) .smd-wm-big { display: flex; }
 /* the one big mark: centred, about 70% of the width, barely there */
-.smd-wm-big { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 2.4cqw; color: #2b7fa6; opacity: .11;
+.smd-wm-big { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); align-items: center; gap: 2.4cqw; color: #2b7fa6; opacity: .11;
   font: 700 11cqw/1 -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: -.02em; white-space: nowrap; }
 .smd-wm-big .smd-wm-pn { width: 13cqw; height: 13cqw; }
-/* the bottom line: PrepNucleus mark and name, a hairline, Powered by StewardMD */
-.smd-wm-by { position: absolute; left: 50%; bottom: 2.4cqw; transform: translateX(-50%); display: flex; align-items: center; gap: .45em; height: clamp(14px, 5cqw, 26px); padding: 0 .7em;
-  border-radius: 999px; background: rgba(255, 255, 255, .82); box-shadow: 0 1px 2px rgba(0, 0, 0, .12); color: #1d4e6e; white-space: nowrap;
-  font: 600 clamp(6.5px, 2.1cqw, 11.5px)/1 -apple-system, "Segoe UI", Roboto, sans-serif; }
+/* the corner lockup: PrepNucleus mark and name, a hairline, Powered by StewardMD */
+.smd-wm-by { position: absolute; right: 1.8cqw; bottom: 1.8cqw; align-items: center; gap: .45em; height: clamp(14px, 4.4cqw, 24px); padding: 0 .7em;
+  border-radius: 999px; background: rgba(255, 255, 255, .8); box-shadow: 0 1px 2px rgba(0, 0, 0, .12); color: #1d4e6e; opacity: .9; white-space: nowrap;
+  font: 600 clamp(6px, 1.8cqw, 10.5px)/1 -apple-system, "Segoe UI", Roboto, sans-serif; }
 .smd-wm-by .smd-wm-pn, .smd-wm-by .smd-wm-gl { height: 66%; aspect-ratio: 1; }
 .smd-wm-pt { font-weight: 700; letter-spacing: -.01em; }
 .smd-wm-sep { display: block; width: 1px; height: 58%; background: currentColor; opacity: .3; }
 .smd-wm-pb { font-size: .78em; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
-.smd-wm-wd { font-weight: 400; letter-spacing: -.01em; }
-.smd-wm-wd b { font-weight: 700; color: #0e6e63; }
+@media (prefers-reduced-motion: reduce) { .smd-wm { transition: none; } }
 @media print { .smd-wm { display: block; } }
 .kbp-diagram-host, .kbr-media-host { display: block; border-radius: 8px; }
