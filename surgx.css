@@ -607,12 +607,12 @@ html.sgx-lock .abg { z-index: 1300; }
 @media (min-width: 700px) { #surgxRoot .sgx-wrap { max-width: 960px; } }
 
 /* ── home in the CliniX pattern (owner 2026-11-11: "it should look like CliniX UI") ─────────────
-   No top bar on home: a round close button floats on the wash (as .cx-hero-close), the monogram sits
+   No top bar on home: a round close button floats on the wash, top RIGHT (owner 2026-11-11), the monogram sits
    inline with the live-text wordmark in the brand green, a one-line tagline, a titled section group
    with icon tiles (as .cx-rows / .cx-row-ic). Inner screens keep the sticky .sgx-head bar. */
 #surgxRoot .sgx-hero { position: relative; padding: calc(env(safe-area-inset-top, 0px) + 66px) 22px 6px; }
 #surgxRoot .sgx-hero-close {
-  position: absolute; top: calc(env(safe-area-inset-top, 0px) + 12px); left: 16px;
+  position: absolute; top: calc(env(safe-area-inset-top, 0px) + 12px); right: 16px;
   width: 40px; height: 40px; border-radius: 50%;
   background: rgba(255,255,255,.62); box-shadow: 0 1px 2px rgba(16,48,59,.10); color: var(--sgx-ink);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
