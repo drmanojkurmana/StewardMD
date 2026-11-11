@@ -69,14 +69,16 @@ body.dark .izr-msg { color: #7fd1c5; }
    - Inside PrepNucleus (#smdPrep) and the Image Library (.igl-overlay): ONE large, very faint PrepNucleus mark across
      the middle, like a textbook figure (owner 2026-11-07), and the PrepNucleus home lockup "PrepNucleus | Powered by
      StewardMD" small in the bottom right corner (it sat bottom centre, over the labels most figures put there).
-   Press and hold fades both (.smd-wm-peek) so the text under them can be read; release brings them back.
+   Press and hold fades the corner badges (.smd-wm-peek) so the text under them can be read; release brings them back.
+   The big centre mark always stays.
    Marks are masks of the logo alpha in the brand ink. Sized from the image (container units), so a thumbnail and a
    full-screen image carry the same share. Never takes a tap. */
 .smd-wm-host { position: relative; }
 .smd-wm-host img, .igl-vimg { -webkit-touch-callout: none; }
-.smd-wm { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; container-type: size; border-radius: inherit; -webkit-user-select: none; user-select: none;
-  transition: opacity 160ms ease-out; }
-.smd-wm.smd-wm-peek { opacity: .14; }
+.smd-wm { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; container-type: size; border-radius: inherit; -webkit-user-select: none; user-select: none; }
+/* Hold fades the corner badges only. The big centre PrepNucleus mark never fades or disappears (owner 2026-11-11). */
+.smd-wm-by, .smd-wm-sm { transition: opacity 160ms ease-out; }
+.smd-wm.smd-wm-peek .smd-wm-by, .smd-wm.smd-wm-peek .smd-wm-sm { opacity: .14; }
 .smd-wm--follow { inset: auto; transform-origin: 50% 50%; will-change: transform; }
 .smd-wm-pn, .smd-wm-gl { display: block; flex: none; background: currentColor; }
 .smd-wm-pn { -webkit-mask: url("/prepnucleus-wm.png") center / contain no-repeat; mask: url("/prepnucleus-wm.png") center / contain no-repeat; }
@@ -105,6 +107,6 @@ body.dark .izr-msg { color: #7fd1c5; }
 .smd-wm-pt { font-weight: 700; letter-spacing: -.01em; }
 .smd-wm-sep { display: block; width: 1px; height: 58%; background: currentColor; opacity: .3; }
 .smd-wm-pb { font-size: .78em; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; opacity: .75; }
-@media (prefers-reduced-motion: reduce) { .smd-wm { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .smd-wm-by, .smd-wm-sm { transition: none; } }
 @media print { .smd-wm { display: block; } }
 .kbp-diagram-host, .kbr-media-host { display: block; border-radius: 8px; }

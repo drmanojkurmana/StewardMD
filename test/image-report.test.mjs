@@ -119,7 +119,9 @@ test("watermark (owner 2026-11-11): PrepNucleus marks inside PrepNucleus and the
   assert.match(css, /:is\(#smdPrep, \.igl-overlay\) \.smd-wm:not\(\.smd-wm--ext\) \.smd-wm-big \{ display: flex; \}/, "the big mark never on a Commons image");
   assert.match(css, /\.smd-wm-by \{[^}]*right: 1\.8cqw; bottom: 1\.8cqw/, "the lockup sits in the bottom right corner, not bottom centre");
   assert.doesNotMatch(css, /\.smd-wm-by \{[^}]*left: 50%/);
-  assert.match(css, /\.smd-wm\.smd-wm-peek \{ opacity: \.14; \}/, "press and hold fades the marks");
+  assert.match(css, /\.smd-wm\.smd-wm-peek \.smd-wm-by, \.smd-wm\.smd-wm-peek \.smd-wm-sm \{ opacity: \.14; \}/, "press and hold fades the corner badges");
+  assert.doesNotMatch(css, /smd-wm-peek[^{]*smd-wm-big/, "the big centre mark never fades");
+  assert.doesNotMatch(css, /\.smd-wm\.smd-wm-peek \{/, "the overlay as a whole never fades");
   const lib = readFileSync(new URL("../image-library.css", import.meta.url), "utf8");
   assert.match(lib, /\.igl-viewer\{position:absolute;inset:0;z-index:5;isolation:isolate;/, "thumbnail marks (z-index 1) cannot paint through the viewer");
   assert.equal(typeof W.peekScope, "function");

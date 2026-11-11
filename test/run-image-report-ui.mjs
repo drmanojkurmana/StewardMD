@@ -51,12 +51,12 @@ try {
   const hold = await p.evaluate(async () => { const h = document.querySelector("#kbr-patho .kbr-fig .smd-wm-host"), i = h.querySelector("img"), w = h.querySelector(".smd-wm"), r = i.getBoundingClientRect();
     const o = { bubbles: true, pointerId: 7, pointerType: "touch", isPrimary: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 };
     i.dispatchEvent(new PointerEvent("pointerdown", o)); await new Promise((z) => setTimeout(z, 120)); const early = w.classList.contains("smd-wm-peek");
-    await new Promise((z) => setTimeout(z, 300)); const held = w.classList.contains("smd-wm-peek"); await new Promise((z) => setTimeout(z, 200)); const op = +getComputedStyle(w).opacity;
+    await new Promise((z) => setTimeout(z, 300)); const held = w.classList.contains("smd-wm-peek"); await new Promise((z) => setTimeout(z, 200)); const c = w.querySelector(".smd-wm-sm"), op = +getComputedStyle(c).opacity, wop = +getComputedStyle(w).opacity, bigop = +getComputedStyle(w.querySelector(".smd-wm-big")).opacity;
     i.dispatchEvent(new PointerEvent("pointerup", o)); const after = w.classList.contains("smd-wm-peek");
     i.dispatchEvent(new PointerEvent("pointerdown", o)); i.dispatchEvent(new PointerEvent("pointermove", Object.assign({}, o, { clientX: o.clientX + 40 }))); await new Promise((z) => setTimeout(z, 400));
     const moved = w.classList.contains("smd-wm-peek"); i.dispatchEvent(new PointerEvent("pointerup", o));
-    return { early, held, op, after, moved }; });
-  ok(!hold.early && hold.held && hold.op < 0.3 && !hold.after && !hold.moved, "press and hold fades the watermark, release restores it, a drag does not fade it " + JSON.stringify(hold));
+    return { early, held, op, wop, bigop, after, moved }; });
+  ok(!hold.early && hold.held && hold.op < 0.3 && hold.wop === 1 && hold.bigop > 0.1 && !hold.after && !hold.moved, "press and hold fades the corner badge only (centre mark stays), release restores it, a drag does not fade it " + JSON.stringify(hold));
   if (SHOTS) { await p.waitForTimeout(300); await p.screenshot({ path: SHOTS + "/figure-wm.png" }); }
   await img.click(); await p.waitForSelector(".pv", { timeout: 8000 }).catch(() => {});
   ok(!!(await p.$(".pv")), "tapping an article image opens the full-screen viewer");

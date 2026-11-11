@@ -6,8 +6,8 @@
  * StewardMD logo in its bottom right corner. The overlay holds both looks and image-viewer.css picks one from where
  * the image is: inside PrepNucleus (#smdPrep, which exists only while it is open) or the Image Library (.igl-overlay)
  * it is the big centre mark plus the lockup in the bottom right corner; anywhere else, the small StewardMD corner.
- * Press and hold a watermarked image and the marks fade (.smd-wm-peek) so the labels under them can be read; they come
- * back on release.
+ * Press and hold a watermarked image and the corner badges fade (.smd-wm-peek) so the labels under them can be read;
+ * they come back on release. The big centre PrepNucleus mark never fades (owner 2026-11-11).
  * Drawn OVER the image (an overlay span), never burned into the file, so originals stay clean.
  *
  * Images from Wikimedia Commons are not ours: they never get the big mark across them, and keep their author and

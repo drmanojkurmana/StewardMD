@@ -57,7 +57,7 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   ancestry: inside `#smdPrep` (PrepNucleus, exists only while open) or `.igl-overlay` (this library, grid and viewer) =
   one faint centre PrepNucleus mark + the "PrepNucleus | Powered by StewardMD" lockup in the bottom right corner;
   anywhere else (Knowledge Library figures, the shared viewer opened outside PrepNucleus) = one small StewardMD logo in
-  the bottom right corner. Press and hold an image (260 ms, still) fades the marks to 14% (`.smd-wm-peek`), release
+  the bottom right corner. Press and hold an image (260 ms, still) fades the corner badges to 14% (`.smd-wm-peek`; the centre mark never fades), release
   restores. Gotcha: `.igl-viewer` needs its `z-index: 5; isolation: isolate`; without it the grid's thumbnail
   overlays (z-index 1) painted through the viewer as a 5 x 3 grid of PrepNucleus marks over the image and caption
   panel on iPad. Tests: `test/image-report.test.mjs`, `test/run-image-report-ui.mjs`.
