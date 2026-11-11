@@ -180,8 +180,7 @@ body.dark #dxOverlay #dxMgmt.dx-reader { --rd-red: #ff8a80; }
 #dxOverlay #dxMgmt.dx-reader :is(.ev-ul li, .ev-sec-in p, .ev-pearl-bd) { color: var(--rd-ink); font-size: 15px; }
 /* high-yield points are bold ink, never colour (owner 2026-09-30): doses, drugs, thresholds, pitfalls,
  * key clinical signs. Tests are medium weight; organisms are italic, as in print. */
-#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: var(--md-hy, #6d28d9); font-weight: 700; }
-#dxOverlay #dxMgmt.dx-reader .md-abs, #dxOverlay #dxMgmt.dx-reader .md-emerg { color: var(--md-red, #b3261e); }
+#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: inherit; font-weight: 700; }   /* black bold only (owner 2026-11-11) */
 #dxOverlay #dxMgmt.dx-reader .md-bug { font-style: italic; font-weight: 600; }
 @media (max-width: 420px) {
   #dxOverlay #dxMgmt.dx-reader .dx-mgmt-name { font-size: 30px; }
@@ -698,16 +697,7 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert h4::befo
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert { background: rgba(255, 139, 132, 0.13); }
 /* the table scroll-hint fade paints --panel; on the card it must be the card colour or it shows as black bars */
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.kbv2-scroll, .kbr-scroll) { --panel: var(--kbr-card-bg); }
-/* Key terms: soft lavender pill. Background only, no vertical padding, so
- * line height and wrapping are unchanged. */
-#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) {
-  padding-inline: 3px;
-  border-radius: 5px;
-  background: rgba(91, 70, 176, 0.12);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) { background: rgba(196, 182, 255, 0.18); }
+/* Key terms are black bold only: the lavender pill is gone (owner 2026-11-11). */
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .ev-ul { margin: 2px 0 4px; padding: 0; }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .ev-ul li {
   padding: 8px 0 8px 16px;

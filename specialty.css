@@ -348,8 +348,9 @@ body.sp-lock { overflow: hidden; }
 .sp-root .ln-mcap { display: flex; align-items: flex-start; gap: 12px; }
 .sp-root .ln-mcap > span { flex: 1 1 auto; min-width: 0; }
 .sp-root .ln-play { flex: 0 0 auto; min-width: 76px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 22px; background: var(--sp-s2); font-size: 15px; font-weight: 600; }
-.sp-root .ln-term { display: inline; padding: 10px 0; margin: -10px 0; color: var(--sp-link); cursor: pointer; -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation; text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--sp-link-line); }
+/* glossary terms: black bold, a quiet dotted underline says they open (owner 2026-11-11: no colour) */
+.sp-root .ln-term { display: inline; padding: 10px 0; margin: -10px 0; color: inherit; font-weight: 700; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation; text-decoration: underline dotted; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
 .sp-root .ln-term:active { text-decoration-style: solid; text-decoration-color: currentColor; }
 .sp-root .ln-sheetwrap { position: absolute; inset: 0; z-index: 4; }
 .sp-root .ln-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .45); transition: opacity 260ms var(--sp-ease); }

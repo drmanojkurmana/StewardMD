@@ -12235,3 +12235,18 @@ small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner
 **Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
 rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 **Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].
+
+## Key terms are black bold only, in the KB and every lesson (owner, 2026-11-11)
+- Owner, on the KB reader photo (purple terms in lavender pills): "Make this black bold only no need this color. And
+  similar important points and words concepts bolding in cliniX, other learning lessons too". Replaces the 2026-11-02
+  purple/red rule for `md-*` terms and the lavender pill in `knowledge-library.css`.
+- KB reader, Protocols, management page: every `md-*` term is `font-weight:700; color:inherit` (reasoning.js
+  evInjectCSS, knowledge-library.css, kb-protocols.css). Red for `md-abs`/`md-emerg` is gone too.
+- New `smd-hy.js` (`window.SMD_HY.html/mark`): escaped text with numbers+units, signal phrases, never/do not,
+  eponymous signs, bedside findings and core diagnoses/organisms wrapped in `<b class="smd-hy">` (ink, no colour).
+  Wired into CliniX teaching turns (`clinix-screens.js teachTurn`), specialty-engine lessons (`specialty-learn.js
+  rich()`: Tokós, Narkē, Kardia ...) and KardiQ lessons (`kardiox-screens.js` overview, lists, pearl, pitfall).
+  Glossary terms (`.ln-term`) in the specialty engine are black bold with a neutral dotted underline. PrepNucleus
+  lesson bolds lost their coloured underline. Guard: `test/smd-hy.test.mjs`.
+- Not done here: Ophthalmós (`ophthalmos-learn.*`) is synced byte-identical from `drmanojkurmana/ophthalmos`
+  (`test/ophthalmos-module.test.mjs`); the same change must be made in that repo and synced.

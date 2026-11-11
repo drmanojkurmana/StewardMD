@@ -584,7 +584,7 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-lsn-prog i.cur { flex-basis: 22px; background: var(--pn-pri); }
 .pn-root .pn-lsn-tx { font-size: 21px; line-height: 1.6; letter-spacing: -.011em; }
 @media (min-width: 600px) { .pn-root .pn-lsn-tx { font-size: 22px; } }
-.pn-root .pn-lsn-tx b { font-weight: 700; color: var(--pn-text); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .2em; text-decoration-color: color-mix(in srgb, var(--pn-pri) 55%, transparent); text-decoration-skip-ink: auto; }
+.pn-root .pn-lsn-tx b { font-weight: 700; color: var(--pn-text); text-decoration: none; }   /* key terms: black bold only, no coloured underline (owner 2026-11-11) */
 @media (max-width: 751px) {
   .pn-root .pn-lsn-step > .pn-vis-image { width: auto; margin: 0 -16px; padding: 0 0 10px; border-radius: 0; border: 0; box-shadow: none; background: none; }
   .pn-root .pn-lsn-step > .pn-vis-image .pn-vimg { border-radius: 0; }
@@ -1427,7 +1427,6 @@ body.dark .pn-root .ps-item .pn-btn.sm.pri { color: var(--pn-c-amber); }
 .pn-root .pn-heat-g i, .pn-root .pn-heat-l i { border-radius: 3px; }
 
 /* ---- Lessons ---- */
-.pn-root .pn-lsn-tx b { text-decoration-color: color-mix(in srgb, var(--pn-acc) 85%, transparent); text-decoration-thickness: 3px; }
 .pn-root .pn-lsn-bar { background: var(--pn-bg); border-top-color: var(--pn-line); }
 .pn-root .pn-lsn-play { background: var(--pn-s1); color: var(--pn-text); }
 .pn-root .pn-lsn-play.on { background: var(--pn-sel-bg); color: var(--pn-sel-ink); }

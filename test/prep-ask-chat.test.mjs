@@ -289,10 +289,14 @@ test("every Ask MaiK label draws MaiK as the wordmark", () => {
     ["icu.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["icu.js", 'label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</h3>'],
     ["icu.js", 'label("Ask MaiK about this patient") : "Ask MaiK about this patient") + "</button>"'], ["ophthalmos.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
     ["specialty-shell.js", 'window.SMD_MAIK_MARK.label(s("askMaik"))'], ["workspaces.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'],
-    ["reasoning.js", 'window.SMD_MAIK_MARK.label("Ask MaiK")'], ["ward.js", 'window.SMD_MAIK_MARK.label(wTH("ward.ask-maik-to-explain-this-verdict"'],
+    // reasoning.js: the KB reader's Ask MaiK is the MaiK logo alone, no label (owner 2026-11-11); checked below
+    ["ward.js", 'window.SMD_MAIK_MARK.label(wTH("ward.ask-maik-to-explain-this-verdict"'],
     ["search.js", 'G.SMD_MAIK_MARK.label(esc(it.title))'], ["home.js", 't.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt)'],
   ];
   for (const [f, needle] of LABELS) assert.ok(src(f).indexOf(needle) >= 0, f + ": " + needle);
+  // the KB reader's Ask MaiK: the owner's MaiK logo as a white orb, no visible label, named for screen readers
+  const rs = src("reasoning.js");
+  assert.ok(/dx-reader-askorb[\s\S]{0,600}maik-logo-128\.webp/.test(rs) && rs.indexOf('askMk.setAttribute("aria-label", "Ask MaiK about " + name)') > 0, "reasoning.js: Ask MaiK is the logo orb with an aria-label");
   const ask = src("prep-ask.js");
   assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">' + askLbl() + '</h2>") > 0 && ask.indexOf("avatar(30) + '<h2 id=\"paT\">' + askLbl() + '</h2>'") > 0, "both sheet headers");
   // no visible "Ask MaiK" label is left as plain text next to the mark (the aria-labels and fallbacks keep plain text)
@@ -312,7 +316,7 @@ test("every Ask MaiK entry point across the app carries the mark; the MaiK assis
     ["surgx-screens.js", 'data-sgx="ask"'], ["clinix-screens.js", 'label("Ask MaiK about this step")'], ["clinix-screens.js", 'label("Ask MaiK to review this answer")'],
     ["opd-emr.js", '<span class="oe-maik-ico">'], ["thorex-screens.js", '<span class="tx-maik-ico">'], ["icu.js", 'data-icu-act="asksend"'],
     ["icu.js", '"Ask MaiK about this patient") + "</h3>'], ["icu.js", 'data-icu-act="askmaik"'], ["ophthalmos.js", 'class="oph-btn sec oph-maik"'],
-    ["specialty-shell.js", 's("askMaik")'], ["workspaces.js", 'data-poc="maik"'], ["reasoning.js", 'label("Ask MaiK")'],
+    ["specialty-shell.js", 's("askMaik")'], ["workspaces.js", 'data-poc="maik"'],
     ["ward.js", '"Ask MaiK to explain this verdict"'], ["search.js", '<span class="us-row-ico">'],
   ];
   for (const [f, label] of ENTRIES) {

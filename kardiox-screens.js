@@ -1978,14 +1978,16 @@
       '</figure>';
     }
     // Content-enrichment helpers — reuse existing lesson CSS classes; each renders nothing when empty.
-    function pill(label, text) { return text ? ('<div class="kx-lesson-label">' + esc(label) + '</div><p class="kx-lesson-overview">' + esc(text) + '</p>') : ''; }
+    // Key terms, numbers and must/never phrases in lesson text are black bold (owner 2026-11-11, smd-hy.js).
+    function hy(t) { return (typeof window !== 'undefined' && window.SMD_HY) ? window.SMD_HY.html(t) : esc(t); }
+    function pill(label, text) { return text ? ('<div class="kx-lesson-label">' + esc(label) + '</div><p class="kx-lesson-overview">' + hy(text) + '</p>') : ''; }
     function listBlock(label, items, icon) {
       if (!items || !items.length) return '';
       return '<div class="kx-lesson-label">' + esc(label) + '</div><div class="kx-lesson-crit-list">' +
-        items.map(function (c) { return '<div class="kx-lesson-crit"><span class="kx-lesson-crit-ic">' + ic(icon || 'chevron_right') + '</span><span>' + esc(c) + '</span></div>'; }).join('') + '</div>';
+        items.map(function (c) { return '<div class="kx-lesson-crit"><span class="kx-lesson-crit-ic">' + ic(icon || 'chevron_right') + '</span><span>' + hy(c) + '</span></div>'; }).join('') + '</div>';
     }
     function emergencyNote(vm) {
-      return vm.emergency ? ('<div class="kx-lesson-note kx-lesson-note--pitfall"><div class="kx-lesson-note-hd">' + ic('emergency') + '<b>Emergency considerations</b></div><span>' + esc(vm.emergency) + '</span></div>') : '';
+      return vm.emergency ? ('<div class="kx-lesson-note kx-lesson-note--pitfall"><div class="kx-lesson-note-hd">' + ic('emergency') + '<b>Emergency considerations</b></div><span>' + hy(vm.emergency) + '</span></div>') : '';
     }
   
     function tagsHtml(vm) {
@@ -2015,13 +2017,13 @@
       if (vm.pearl) {
         out += '<div class="kx-lesson-note kx-lesson-note--pearl">' +
           '<div class="kx-lesson-note-hd">' + ic('lightbulb') + '<b>Clinical pearl</b></div>' +
-          '<span>' + esc(vm.pearl) + '</span>' +
+          '<span>' + hy(vm.pearl) + '</span>' +
         '</div>';
       }
       if (vm.pitfall) {
         out += '<div class="kx-lesson-note kx-lesson-note--pitfall">' +
           '<div class="kx-lesson-note-hd">' + ic('error') + '<b>Common pitfall</b></div>' +
-          '<span>' + esc(vm.pitfall) + '</span>' +
+          '<span>' + hy(vm.pitfall) + '</span>' +
         '</div>';
       }
       return out;

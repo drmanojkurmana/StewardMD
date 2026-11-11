@@ -3488,11 +3488,10 @@
       ".ev-bt-l{padding-top:11px;padding-right:10px}.ev-bt-l--now{color:#b3261e}",
       ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
-      // high-yield terms in bold purple, warnings in red (owner 2026-11-02, replaces the 2026-09-30 weight-only rule)
-      ":root{--md-hy:#6d28d9;--md-red:#b3261e}body.dark{--md-hy:#c4b5fd;--md-red:#ff8a80}",
-      ".md-dose,.md-drug,.md-key,.md-sig,.md-hi,.md-action,.md-resist,.md-ix{font-weight:700;color:var(--md-hy)}",
-      ".md-abs,.md-emerg{font-weight:700;color:var(--md-red)}",
-      ".md-bug{font-style:italic;font-weight:700;color:var(--md-hy)}",
+      // high-yield terms are BLACK BOLD only: no purple, no red, no pill (owner 2026-11-11, replaces the 2026-11-02
+      // purple/red rule). They take the paragraph's own ink, so dark mode follows.
+      ".md-dose,.md-drug,.md-key,.md-sig,.md-hi,.md-action,.md-resist,.md-ix,.md-abs,.md-emerg{font-weight:700;color:inherit}",
+      ".md-bug{font-style:italic;font-weight:700;color:inherit}",
       ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}.ev-wrap[data-ev-src=idsa] .ev-top-ic{color:#5b21b6}",
       ".ev-wrap[data-ev-src=sanford]>.ev-top{background:linear-gradient(180deg,#f0fdf4,#ecfdf5)}.ev-wrap[data-ev-src=sanford] .ev-top-sub{color:#047857}",
       ".ev-rx-note{color:#94a3b8;font-size:.92em}",
