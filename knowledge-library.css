@@ -886,8 +886,10 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-mgmt-sys { margin: 0; min-width: 0; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askmaik { flex: 0 0 auto; margin: 0; white-space: nowrap; }
-/* Ask MaiK is the 3D MaiK orb only, no label (owner 2026-11-11): the same lit teal sphere, white M-star mark and
-   glint as the bottom-nav Ask MaiK tab (redesign-system.css, smdMaikOrb*). Reduced motion keeps the look, no motion. */
+/* Ask MaiK is the MaiK logo only, as a white 3D orb (owner 2026-11-11: "Only MaiK logo 3D", then "White one"):
+   a lit white sphere (top-left highlight, cool shaded base, soft drop shadow) carrying the owner's navy M-star
+   (assets/maik-logo-128.webp, multiplied onto the sphere so its white disc takes the shading) and a glint sweep.
+   Reduced motion keeps the look, no motion. */
 #dxOverlay #dxMgmt.dx-reader .dx-reader-metarow .dx-reader-askorb {
   flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center;
   width: 48px; height: 48px; min-height: 44px; margin: 0; padding: 0; border: 0; border-radius: 50%;
@@ -900,24 +902,24 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
   position: relative; overflow: hidden; isolation: isolate;
   display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 24%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 34%),
-    radial-gradient(circle at 50% 115%, rgba(94,234,212,.55) 0%, rgba(94,234,212,0) 55%),
-    radial-gradient(circle at 38% 30%, #2bb3a1 0%, #12786b 46%, #08463e 100%);
-  box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.07), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 14px 2px rgba(45,212,191,.09);
+    radial-gradient(circle at 32% 22%, #ffffff 0%, #ffffff 22%, rgba(255,255,255,0) 46%),
+    radial-gradient(circle at 50% 112%, rgba(203,213,225,.85) 0%, rgba(203,213,225,0) 58%),
+    radial-gradient(circle at 40% 32%, #ffffff 0%, #f1f4f8 48%, #d5dbe4 100%);
+  box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -5px 9px rgba(30,41,59,.16), 0 0 0 1px rgba(15,23,42,.06), 0 4px 10px -2px rgba(15,23,42,.28);
   animation: kbrMaikOrbGlow 2.8s ease-in-out infinite;
 }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-orb::after {
   content: ""; position: absolute; inset: -40%; z-index: 2; pointer-events: none;
-  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
+  background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,.7) 50%, transparent 60%);
   transform: translateX(-120%); animation: kbrMaikOrbGlint 4.2s ease-in-out infinite;
 }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-orb img {
-  position: relative; z-index: 1; display: block; width: 24px; height: auto; pointer-events: none;
-  filter: drop-shadow(0 0 3px rgba(255,255,255,.17)) drop-shadow(0 0 7px rgba(153,246,228,.14));
+  position: relative; z-index: 1; display: block; width: 42px; height: 42px; pointer-events: none;
+  border-radius: 50%; mix-blend-mode: multiply;
 }
 @keyframes kbrMaikOrbGlow {
-  0%, 100% { box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.07), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 10px 1px rgba(45,212,191,.07); }
-  50%      { box-shadow: inset 0 2px 4px rgba(255,255,255,.45), inset 0 -6px 10px rgba(0,0,0,.38), 0 0 0 1px rgba(94,234,212,.11), 0 4px 10px -2px rgba(6,60,52,.55), 0 0 20px 5px rgba(45,212,191,.12); }
+  0%, 100% { box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -5px 9px rgba(30,41,59,.16), 0 0 0 1px rgba(15,23,42,.06), 0 4px 10px -2px rgba(15,23,42,.28); }
+  50%      { box-shadow: inset 0 2px 3px rgba(255,255,255,.9), inset 0 -5px 9px rgba(30,41,59,.16), 0 0 0 1px rgba(15,23,42,.08), 0 4px 12px -2px rgba(15,23,42,.32), 0 0 14px 2px rgba(255,255,255,.35); }
 }
 @keyframes kbrMaikOrbGlint { 0%, 55% { transform: translateX(-120%); } 85%, 100% { transform: translateX(120%); } }
 @media (prefers-reduced-motion: reduce) {

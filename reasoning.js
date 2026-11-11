@@ -4807,7 +4807,7 @@
     if (typeof window.SMD_askMaikTopic === "function") {
       var askMk = document.createElement("button"); askMk.type = "button"; askMk.className = "dx-reader-askmaik dx-reader-askorb";
       askMk.setAttribute("aria-label", "Ask MaiK about " + name); askMk.title = "Ask MaiK";
-      askMk.innerHTML = '<span class="dx-reader-orb" aria-hidden="true"><img src="/maik-ai-mark.png" alt="" width="22" height="21" decoding="async" draggable="false"></span>';   // owner 2026-11-11: the 3D MaiK orb only, no label (same orb as the bottom-nav Ask MaiK tab)
+      askMk.innerHTML = '<span class="dx-reader-orb" aria-hidden="true"><img src="/assets/maik-logo-128.webp" alt="" width="40" height="40" decoding="async" draggable="false"></span>';   // owner 2026-11-11: the MaiK logo only, as a white 3D orb with the navy mark
       askMk.addEventListener("click", function () { try { window.SMD_askMaikTopic(id, name); } catch (e) {} });
       heroActs.appendChild(askMk);
     }
