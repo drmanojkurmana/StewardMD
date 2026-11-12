@@ -212,7 +212,7 @@
       ".rc-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box}",
       ".rc-note{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:10px;padding:10px 12px;margin-bottom:14px;line-height:1.5}",
       ".rc-list{display:flex;flex-direction:column;gap:10px}",
-      ".rc-card{display:flex;align-items:center;gap:12px;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:13px 14px;cursor:pointer;text-align:left;width:100%;border-left:4px solid var(--line,#e5e5e0)}",
+      ".rc-card{display:flex;align-items:center;gap:12px;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:13px 14px;cursor:pointer;text-align:left;width:100%;}",
       ".rc-card:active{transform:scale(.995)}",
       ".rc-ic{flex:none;width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--teal-soft,#e0f2f1)}",
       ".rc-ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}",
@@ -251,7 +251,7 @@
     if (!list.length) { el.innerHTML = '<div class="rc-empty">No recent cases yet.<br>Work a case in Clinical reasoning, Clinical decision or ICU and it will appear here.</div>'; return; }
     el.innerHTML = list.map(function (c) {
       var f = FEAT[c.feature] || { icon: "stcase", label: "Case", color: "#0F766E" };
-      return '<button class="rc-card" data-cid="' + esc(c.caseId) + '" style="border-left-color:' + f.color + '">' +
+      return '<button class="rc-card" data-cid="' + esc(c.caseId) + '" style="">' +
         '<span class="rc-ic" style="color:' + f.color + '">' + rcIco(f.icon) + '</span>' +
         '<span class="rc-main"><span class="rc-feat" style="color:' + f.color + '">' + esc(f.label) + '</span>' +
         '<span class="rc-title">' + titleHtml(c, f.label) + '</span>' +

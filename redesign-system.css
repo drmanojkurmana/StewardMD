@@ -559,11 +559,6 @@ html body.rds-on .mlr-chip-major     { background: var(--sev-urgent-bg);   color
 html body.rds-on .mlr-chip-monitor   { background: var(--sev-info-bg);     color: var(--sev-info-fg);     border-color: var(--sev-info-bd); }
 html body.rds-on .mlr-chip-duplicate { background: var(--sev-warning-bg);  color: var(--sev-warning-fg);  border-color: var(--sev-warning-bd); }
 html body.rds-on .mlr-card { border-radius: var(--rds-r); border: 1px solid var(--rds-line); box-shadow: var(--rds-el-card); overflow: hidden; }
-html body.rds-on .mlr-card-critical { border-left: 4px solid var(--sev-critical-fg); }
-html body.rds-on .mlr-card-major    { border-left: 4px solid var(--sev-urgent-fg); }
-html body.rds-on .mlr-card-moderate { border-left: 4px solid var(--sev-warning-fg); }
-html body.rds-on .mlr-card-minor    { border-left: 4px solid var(--sev-info-fg); }
-html body.rds-on .mlr-card-monitor  { border-left: 4px solid var(--sev-info-fg); }
 html body.rds-on .mlr-sev-critical { color: var(--sev-critical-fg); }
 html body.rds-on .mlr-sev-major    { color: var(--sev-urgent-fg); }
 html body.rds-on .mlr-explain-btn, html body.rds-on .mlr-whatnow-btn, html body.rds-on .mlr-filter-btn, html body.rds-on .mlr-remove-drug { min-height: 40px; border-radius: var(--rds-r-ctl); font-family: var(--rds-font); }
@@ -610,7 +605,6 @@ html body.rds-on .mc-disc { border: 1px dashed var(--rds-line); border-radius: v
 
 /* --- 2f · Scan review (medlist.js .ml-scan-*) --- */
 html body.rds-on .ml-scan-row { border: 1px solid var(--rds-line); border-radius: var(--rds-r); background: var(--rds-surface); box-shadow: var(--rds-el-card); }
-html body.rds-on .ml-scan-flagged { border-left: 4px solid var(--sev-warning-fg); }
 html body.rds-on .ml-scan-mapped { font-family: var(--rds-font); color: var(--rds-ink); }
 html body.rds-on .ml-scan-detected, html body.rds-on .ml-scan-line { color: var(--rds-muted); font-family: var(--rds-font); }
 html body.rds-on .ml-scan-edit { border-radius: var(--rds-r-ctl); border: 1.5px solid var(--rds-line); }
@@ -1187,6 +1181,8 @@ body.dark #homeV2.rnav .hrf-qa-btn.is-first .hrf-ic{color:var(--hrf-firstink)}
 #homeV2.rnav .hrf-banner .rnav-hero-bd{position:relative;z-index:2}
 #homeV2.rnav .hrf-banner .rnav-hero-tt{font:800 22px/1.15 var(--rds-font);color:#fff}
 #homeV2.rnav .hrf-banner-pro{font-weight:500}
+/* MD in the brand teal, as in the header logo (owner 2026-11-11) */
+#homeV2.rnav .hrf-banner .hrf-banner-md{color:var(--hrf-mint);font-weight:inherit}
 #homeV2.rnav .hrf-banner-tag{letter-spacing:.18em;font:700 10px var(--rds-font);color:rgba(255,255,255,.82);text-transform:uppercase}
 #homeV2.rnav .hrf-banner .rnav-hero-p{color:rgba(255,255,255,.92);max-width:230px;font:500 13.5px/1.35 var(--rds-font);margin-top:5px}
 #homeV2.rnav .hrf-banner-line{display:block}
@@ -1348,6 +1344,39 @@ html[data-appearance="blend"] #homeV2#homeV2.rnav{--hrf-fill:linear-gradient(135
 @media (min-width:640px){#aboutModal .smd-fx-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 #homeV2.rnav .hrf-banner[data-act]:active{transform:scale(.99)}
 /* Display density on the current Home (the older .hv-* rules in home.js target markup that no longer exists). Default adds nothing. */
-html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:72px!important;min-height:72px!important}html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav .hrf-qc{height:68px!important;min-height:68px!important}html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav .hrf-banner{height:96px!important}html body.smd-dens-compact #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:10px!important}
-html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:94px!important;min-height:94px!important}html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav .hrf-qc{height:90px!important;min-height:90px!important}html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav .hrf-banner{height:126px!important}html body.smd-dens-comfortable #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:26px!important}
-html body.smd-dens-large #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:104px!important;min-height:104px!important}html body.smd-dens-large #homeV2#homeV2#homeV2.rnav .hrf-qc{height:100px!important;min-height:100px!important}html body.smd-dens-large #homeV2#homeV2#homeV2.rnav .hrf-banner{height:138px!important}html body.smd-dens-large #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:34px!important}
+/* Home ignores the Display font size and density (owner 2026-11-11): home.js homeFitD sets --smd-home-zoom (takes the html zoom back
+   out to the Auto fit scale) and html[data-home-dens] (the Auto fit density). */
+#homeV2{zoom:var(--smd-home-zoom,1)}
+html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:72px!important;min-height:72px!important}html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav .hrf-qc{height:68px!important;min-height:68px!important}html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav .hrf-banner{height:96px!important}html[data-home-dens="compact"] body #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:10px!important}
+html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:94px!important;min-height:94px!important}html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav .hrf-qc{height:90px!important;min-height:90px!important}html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav .hrf-banner{height:126px!important}html[data-home-dens="comfortable"] body #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:26px!important}
+html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{height:104px!important;min-height:104px!important}html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav .hrf-qc{height:100px!important;min-height:100px!important}html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav .hrf-banner{height:138px!important}html[data-home-dens="large"] body #homeV2#homeV2#homeV2.rnav #rnavToolsGrid{row-gap:34px!important}
+/* Home polish (owner 2026-11-11, "make it 10/10").
+   1. The quick-action card sits over the dark hero. In Frosted and Liquid it let the hero through at
+      42-64%, which turned the four buttons a muddy grey-teal with weak label contrast. That card alone
+      stays nearly opaque; the blur stays, so it still reads as glass.
+   2. Hierarchy: the four first-row actions (what a doctor does) carry the brand teal on their icons and
+      a firmer label; the second row (where to go) stays neutral, so the two cards no longer look alike. */
+html[data-appearance="frosted"] #homeV2#homeV2#homeV2.rnav .hrf-qa{background:color-mix(in srgb,var(--hrf-card) 90%,transparent)}
+html[data-appearance="liquid"] #homeV2#homeV2#homeV2.rnav .hrf-qa{background:color-mix(in srgb,var(--hrf-card) 84%,transparent)}
+html #homeV2#homeV2#homeV2.rnav .hrf-qa-btn .hrf-ic{color:var(--hrf-deep)}
+html #homeV2#homeV2#homeV2.rnav .hrf-qa-btn{font-weight:600}
+html #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{font-weight:700}
+/* 3. Header fit with the Knowledge Units chip (it was hidden for most signed-in launches until ku.js
+      learned to hear Firebase restore, so nobody saw the overflow). At 393 px the row needed ~408 px and
+      clipped the More button. On phones: a slimmer mark, tighter brand gap and a compact chip. Below
+      381 px the header Pro chip gives way while the KU chip shows; the banner right below still says Pro. */
+@media (max-width:430px){
+  #homeV2#homeV2#homeV2.rnav .hrf-head{gap:0}
+  #homeV2#homeV2#homeV2.rnav .hrf-head .rnav-brand{gap:6px}
+  #homeV2#homeV2#homeV2.rnav .hrf-head .rnav-brand img{width:30px;height:30px}
+  #homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{padding:5px 8px;gap:3px;font-size:12.5px;margin:0 3px 0 auto}
+}
+@media (max-width:380px){
+  html body #homeV2#homeV2#homeV2.rnav .hrf-head:has(.v3-ku:not([style*="none"])) .hrf-pro{display:none!important}
+}
+@media (max-width:340px){
+  #homeV2#homeV2#homeV2.rnav .hrf-head .rnav-brand{font-size:16px;gap:5px}
+  #homeV2#homeV2#homeV2.rnav .hrf-head .rnav-brand img{width:26px;height:26px}
+  #homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{padding:5px 7px}
+}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{margin-left:auto}

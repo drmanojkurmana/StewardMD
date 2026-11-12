@@ -149,3 +149,42 @@ The Library home carries an "Image Library" entry opening the shared central ima
 - Protocol reader at 1,000 px container width and wider: the section list is a sticky left column.
 - `SMD_KB.open()` with no id now opens the Syndromes tab instead of an empty reader (that empty card was what the
   `kb-library` screen of `test/run-ipad-layout-ui.mjs` measured).
+
+## Reader header and hero (owner photo, 2026-11-11)
+The disease reader's header now carries the StewardMD Knowledge Base mark (logo + "StewardMD / Knowledge
+Base", `.dx-reader-brand-kb`) in place of "Knowledge Library / Clinical disease reference", so the banner is no
+longer repeated in the hero. Save is an icon-only star (`.dx-reader-star`, aria-label carries the state) in the
+header's right slot (`.dx-reader-topacts`). Ask MaiK sits on the right of the system line
+(`.dx-reader-metarow`) as the MaiK logo only, a white 3D orb with the navy mark (`.dx-reader-askorb`, owner "White one"; not the teal bottom-nav
+tab; aria-label "Ask MaiK about <disease>"). The hero is just the name. The Management page (`openMgmt`) and the library tabs keep
+`kbBannerHTML()`. Code: `reasoning.js` reader render; CSS block at the end of `knowledge-library.css`.
+Guard: `test/run-library-discover-ui.mjs`. The red-flags side bar is gone app-wide (see Decisions 2026-11-11).
+
+## Header variants (2026-11-11, flag `smd_kb_head`, default "d")
+
+Owner marked up the Discover screen: drop the "Knowledge Library" bar title, put the StewardMD Knowledge Base brand
+in the bar, move the search up. Three variants, picked with localStorage `smd_kb_head` (`a` | `b` | `c`; anything else
+keeps today's layout). All three: brand (logo + StewardMD / Knowledge Base) is the bar title on every library tab, the
+old title stays for screen readers, the in-page banner and the "Search the library" label go, the placeholder reads
+"Search 4,770 diseases" (live count).
+- **a, compact:** tabs, then search; the "Find any disease" hero is removed.
+- **b, title + search:** tabs, a 28 px "Find any disease" with the count line, search right under it.
+- **c, search in the bar:** the Discover search field moves into the bar under the brand (iOS large-title search
+  style), tabs and content scroll below; on other tabs the bar has no search.
+Code: `kbHeadApply` in `reasoning.js` (called after Discover renders and after each tab), styles `kb-head.css`.
+Test: `test/run-kb-head-ui.mjs`. Theme unchanged. Owner to pick one; then make it the default and drop the others.
+
+## Your library rows (2026-11-11, owner mock)
+
+`kbPersonalHTML` (reasoning.js): "Your library" / "Saved on this device", then two `<details>` rows (filled bookmark
+for Favourites, history clock for Recently viewed, in `--kl-accent`; label; count; chevron that turns 90 degrees when
+open) split by a hairline. A row opens its list in place. When both lists are empty, one grey rounded card (book icon,
+"Your library is empty", "Diseases you open will appear here.") replaces the two empty hints. Both rows start closed.
+Styles: end of `knowledge-library.css` (`.kbl-*`). Test: `test/run-kb-yourlib-ui.mjs` (light + dark, empty and filled).
+
+**Default "d" (owner's own layout, later the same day; `smd_kb_head` unset = d, `"0"` = the old page, a/b/c still
+selectable):** bar = logo, a thin divider, StewardMD / Knowledge Base, close. Then tabs, a hairline, "Search the
+library" heading + the search field (original placeholder), the Try chips on ONE line that swipes sideways, "Find any
+disease" with the count line, Your library (icon rows), and the whole disease list ("All diseases", refine, 40 at a
+time, Show more) right under it; Image Library and the branch tiles come after the list. `kbHeadApply` moves the nodes
+after each Discover render; search mode still hides everything but the results.

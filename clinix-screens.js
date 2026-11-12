@@ -933,6 +933,10 @@
 
   /* The teaching turn. One idea per screen, short paragraphs, and a quiet "2 of 5" so the student
    * can see how much learning is left before they are asked to do anything. */
+  /* Key terms, numbers and must/never phrases in the teaching text are black bold (owner 2026-11-11, smd-hy.js).
+   * Without the helper the text is escaped exactly as before. */
+  function hy(t) { return window.SMD_HY ? window.SMD_HY.html(t) : esc(t); }
+
   function teachTurn(t) {
     var b = t.block || {};
     var html = '<div class="cx-eyebrow cx-eyebrow--learn">' + ic("school") + " Learning" +
@@ -943,15 +947,15 @@
       // Author paragraphs are split on blank lines so long prose never arrives as one wall.
       var paras = String(b.body).split(/\n\s*\n/);
       for (var p = 0; p < paras.length; p++) {
-        if (paras[p].trim()) html += '<p class="cx-body">' + esc(paras[p].trim()) + "</p>";
+        if (paras[p].trim()) html += '<p class="cx-body">' + hy(paras[p].trim()) + "</p>";
       }
     }
     if (b.points && b.points.length) {
       html += '<ul class="cx-teach-list">';
       for (var i = 0; i < b.points.length; i++) {
         var pt = b.points[i];
-        if (typeof pt === "string") html += "<li>" + esc(pt) + "</li>";
-        else html += "<li><b>" + esc(pt.t || "") + "</b> " + esc(pt.d || "") + "</li>";
+        if (typeof pt === "string") html += "<li>" + hy(pt) + "</li>";
+        else html += "<li><b>" + esc(pt.t || "") + "</b> " + hy(pt.d || "") + "</li>";
       }
       html += "</ul>";
     }
@@ -969,21 +973,21 @@
     if (b.analogy) {
       html += '<div class="cx-teach-analogy">' +
         '<div class="cx-teach-analogy-h">' + ic("lightbulb") + " Physical Intuition & Everyday Analogy</div>" +
-        '<p class="cx-teach-analogy-p">' + esc(b.analogy) + "</p></div>";
+        '<p class="cx-teach-analogy-p">' + hy(b.analogy) + "</p></div>";
     }
     if (b.technique && b.technique.length) {
       html += '<div class="cx-teach-technique">' +
         '<div class="cx-teach-technique-h">' + ic("pan_tool") + " Step-by-Step Bedside Technique</div>" +
         '<ol class="cx-teach-technique-steps">';
       for (var ti = 0; ti < b.technique.length; ti++) {
-        html += "<li>" + esc(b.technique[ti]) + "</li>";
+        html += "<li>" + hy(b.technique[ti]) + "</li>";
       }
       html += "</ol></div>";
     }
     if (b.sensory && (b.sensory.normal || b.sensory.abnormal)) {
       html += '<div class="cx-teach-sensory">' +
-        (b.sensory.normal ? '<div class="cx-sensory-box cx-sensory-norm"><div class="cx-sensory-h">' + ic("check_circle") + ' What Normal Feels & Sounds Like</div><p class="cx-sensory-b">' + esc(b.sensory.normal) + '</p></div>' : "") +
-        (b.sensory.abnormal ? '<div class="cx-sensory-box cx-sensory-abnorm"><div class="cx-sensory-h">' + ic("warning") + ' What Pathology Feels & Sounds Like</div><p class="cx-sensory-b">' + esc(b.sensory.abnormal) + '</p></div>' : "") +
+        (b.sensory.normal ? '<div class="cx-sensory-box cx-sensory-norm"><div class="cx-sensory-h">' + ic("check_circle") + ' What Normal Feels & Sounds Like</div><p class="cx-sensory-b">' + hy(b.sensory.normal) + '</p></div>' : "") +
+        (b.sensory.abnormal ? '<div class="cx-sensory-box cx-sensory-abnorm"><div class="cx-sensory-h">' + ic("warning") + ' What Pathology Feels & Sounds Like</div><p class="cx-sensory-b">' + hy(b.sensory.abnormal) + '</p></div>' : "") +
         '</div>';
     }
     if (b.traps && b.traps.length) {
@@ -991,12 +995,12 @@
         '<div class="cx-teach-traps-h">' + ic("error") + " Common Rookie Traps & OSCE Pitfalls</div>" +
         '<ul class="cx-teach-traps-list">';
       for (var tri = 0; tri < b.traps.length; tri++) {
-        html += "<li>" + esc(b.traps[tri]) + "</li>";
+        html += "<li>" + hy(b.traps[tri]) + "</li>";
       }
       html += "</ul></div>";
     }
     if (b.wideTable) html += wideTableHtml(b.wideTable);
-    if (b.note) html += '<div class="cx-teach-note">' + ic("lightbulb") + "<span>" + esc(b.note) + "</span></div>";
+    if (b.note) html += '<div class="cx-teach-note">' + ic("lightbulb") + "<span>" + hy(b.note) + "</span></div>";
     return html;
   }
 
@@ -2821,7 +2825,7 @@
       var dm = layers.dontMiss || [];
       html += '<div class="cx-sec-h" style="margin-left:0;">Emergency "Don\'t Miss" Diagnoses</div>';
       for (var m = 0; m < dm.length; m++) {
-        html += '<div class="cx-pres-card" style="border-left:4px solid var(--cx-bad);">' +
+        html += '<div class="cx-pres-card" style="">' +
           '<div style="font-weight:800;font-size:16px;color:var(--cx-bad);margin-bottom:4px;">' + esc(dm[m].disease) + '</div>' +
           '<div style="font-size:13.5px;margin-bottom:6px;"><b>Clinical Clue:</b> ' + esc(dm[m].clue) + '</div>' +
           '<div style="font-size:13.5px;background:var(--cx-bad-bg);padding:8px 10px;border-radius:var(--cx-r-ctl);color:var(--cx-bad);line-height:1.45;">' +

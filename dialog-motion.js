@@ -33,7 +33,9 @@
   }
 
   var SEL = "#maikSheet,#maikScrim,.hv-sheet,.hv-scrim,[role=dialog],.modal,.overlay,.drawer,.sheet,.ntf-overlay,.smd-dialog";
-  function isDialog(el) { try { return el && el.nodeType === 1 && el.matches && el.matches(SEL); } catch (e) { return false; } }
+  // data-own-motion: a full-screen moment that animates itself (boss-cele.js fades and un-blurs; a slide-up from the
+  // bottom read as a sheet). Opted out here rather than in SEL so every other dialog keeps the shared motion.
+  function isDialog(el) { try { return el && el.nodeType === 1 && el.matches && el.matches(SEL) && !el.hasAttribute("data-own-motion"); } catch (e) { return false; } }
   function hasOpen(el) { var c = el.classList; return !!(c && (c.contains("on") || c.contains("open") || c.contains("active") || c.contains("show"))); }
 
   // Family. Bottom sheets slide up; scrims/backdrops fade; a full-viewport overlay FADES (scaling the

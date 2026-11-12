@@ -75,7 +75,21 @@
   // DEFER the network flush() to idle. The signed-in startup fan-out (this + streak + push) otherwise
   // hammers the single JS thread the moment you sign in, starving MaiK/Vision/Research's KB warm-up and
   // callbacks — the reason AI hung/was slow for signed-in accounts while guest (no fan-out) was fast.
-  try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(function () { loadCache(); listeners.forEach(function (f) { try { f(cache); } catch (e) {} }); if (signedIn()) _kuIdle(flush); }); } catch (e) {}
+  function acctChanged() { loadCache(); listeners.forEach(function (f) { try { f(cache); } catch (e) {} }); if (signedIn()) _kuIdle(flush); }
+  try { if (window.SMD_ACCOUNT && SMD_ACCOUNT.onChange) SMD_ACCOUNT.onChange(acctChanged); } catch (e) {}
+  // Firebase loads lazily and can restore a saved session without SMD_ACCOUNT announcing it (the
+  // app.js restore hook only fires when its seam is already defined). The header KU chip then stayed
+  // hidden for a signed-in doctor. Listen to Firebase auth directly once it exists; repaint only when
+  // the signed-in uid actually changes.
+  var _lastUid = null;
+  function authTick() { var u = uid() || "anon"; if (u === _lastUid) return; _lastUid = u; acctChanged(); }
+  (function watchAuth(n) {
+    try {
+      var F = window.firebase;
+      if (F && F.apps && F.apps.length && F.auth) { F.auth().onAuthStateChanged(function () { authTick(); }); authTick(); return; }
+    } catch (e) {}
+    if (n < 120) setTimeout(function () { watchAuth(n + 1); }, 1000);
+  })(0);
   try { window.addEventListener("beforeunload", function () { if (queue.length) { try { flush(); } catch (e) {} } }); } catch (e) {}
   loadCache();
 

@@ -175,14 +175,14 @@ try {
     "AMR stat block is a grid");
   /* the craft pass de-carded this block on purpose: three identical glass panels in a row was
      the most template-looking thing in the set, so the figures are now an open list hung off a
-     teal rule. Assert the card chrome is gone and the rule is there. */
+     teal rule; the owner later removed every side rule from the app. Assert neither is there. */
   okv(await ev(`var e=document.querySelector(".ip-stats"); if(!e)return "no stats";
       var s=getComputedStyle(e);
       return s.borderTopLeftRadius + " " + s.backgroundImage + " " + s.borderTopWidth;`), "0px none 0px",
     "AMR figures are no longer boxed in a third identical glass card");
   ok(await ev(`var e=document.querySelector(".ip-stats"); if(!e)return false;
-      var s=getComputedStyle(e); return parseFloat(s.borderLeftWidth) >= 1 && /rgba?\\(/.test(s.borderLeftColor||"");`) === true,
-    "AMR figures hang off a teal rule instead");
+      var s=getComputedStyle(e); return parseFloat(s.borderLeftWidth) === 0;`) === true,
+    "AMR figures carry no side rule");
   ok(await ev(`var e=document.querySelector(".ip-stat-num"); return e ? /Bricolage Grotesque/.test(getComputedStyle(e).fontFamily||"") : false;`) === true,
     "the AMR figures are set in the display face");
   ok(await ev(`var e=document.querySelector(".ip-amr-head"),k=document.querySelector(".ip-amr-sub");

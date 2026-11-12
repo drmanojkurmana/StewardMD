@@ -1030,11 +1030,11 @@
         s.redFlags.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></div></div>";
     }
     // smd_calib: not enough information for a working diagnosis at all
-    if (s.insufficient) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#f1f5f9;color:#334155;border-left:3px solid #64748b;display:flex;gap:6px;align-items:flex-start">' + ms("help") +
+    if (s.insufficient) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#f1f5f9;color:#334155;display:flex;gap:6px;align-items:flex-start">' + ms("help") +
       "<span><b>Not enough information for a working diagnosis yet.</b> The list below is only what these findings are compatible with; no treatment is suggested." +
       ((s.nextFindings && s.nextFindings.length) ? " Most useful next: " + esc(s.nextFindings.slice(0, 5).join(", ")) + "." : "") + "</span></div>";
     // Never-guess: when the top possibilities are genuinely close, say so instead of presenting a confident dx.
-    if (s.lowConfidence) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#fff8e1;color:#7a5b00;border-left:3px solid #eab308;display:flex;gap:6px;align-items:flex-start">' + ms("help") + "<span>MaiK is not confident here — the leading possibilities are close. Treat this as a checklist, not an answer; add discriminating findings (exam, labs) to narrow it.</span></div>";
+    if (s.lowConfidence) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#fff8e1;color:#7a5b00;display:flex;gap:6px;align-items:flex-start">' + ms("help") + "<span>MaiK is not confident here — the leading possibilities are close. Treat this as a checklist, not an answer; add discriminating findings (exam, labs) to narrow it.</span></div>";
     if (s.provisionalDx) body += aiGroup("Provisional diagnosis", scribeRow("dx", 0, { label: s.provisionalDx, why: s.provisionalWhy, accepted: !!s.acceptedDx }), null, 1);
     if (s.ddx && s.ddx.length) body += aiGroup("Differential", s.ddx.map(function (d, i) { return scribeRow("ddx", i, { label: d.label, score: d.score, why: d.why, accepted: !!(s.acceptedDdx && s.acceptedDdx[i]) }); }).join(""), null, s.ddx.length);
     if (s.investigations && s.investigations.length) body += aiGroup("Investigations to consider", s.investigations.map(function (d, i) { return scribeRow("inv", i, { label: d.label, accepted: !!(s.acceptedInv && s.acceptedInv[i]) }); }).join(""), "inv", s.investigations.length);
@@ -1159,7 +1159,7 @@
     var redFlags = detectTriageRedFlags(vals);
     var triageHtml = "";
     if (redFlags.length) {
-      triageHtml = '<div class="oe-ai-redflags" style="border-left:4px solid #ef4444;background:#fef2f2;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
+      triageHtml = '<div class="oe-ai-redflags" style="background:#fef2f2;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:10px">' +
         '<div style="display:flex;gap:8px;align-items:flex-start">' +
           '<span class="oe-ico" style="color:#dc2626;font-size:22px">' + ms("warning") + '</span>' +
           '<div><b style="color:#991b1b;font-size:13px">Emergency / Critical Triage Alert</b>' +
@@ -1175,7 +1175,7 @@
     var conflicts = checkAllergyConflicts(vals.Known_allergies_details, vals.management_plan);
     var allergyHtml = "";
     if (conflicts.length) {
-      allergyHtml = '<div class="oe-ai-redflags" style="border-left:4px solid #f97316;background:#fff7ed;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;gap:8px;align-items:flex-start">' +
+      allergyHtml = '<div class="oe-ai-redflags" style="background:#fff7ed;margin:8px 0;padding:10px 12px;border-radius:8px;display:flex;gap:8px;align-items:flex-start">' +
         '<span class="oe-ico" style="color:#ea580c;font-size:22px">' + ms("medication") + '</span>' +
         '<div><b style="color:#9a3412;font-size:13px">Drug-Allergy Conflict Warning</b>' +
           '<div style="font-size:12.5px;color:#7c2d12;margin-top:2px">' +

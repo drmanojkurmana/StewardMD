@@ -138,7 +138,7 @@
     root.innerHTML =
       '<div class="db-top">' +
         '<div class="db-grab" id="dbGrab" aria-hidden="true"><i></i></div>' +
-        '<button class="db-back" id="dbBack">‹ Back</button>' +
+        '<button class="db-back" id="dbBack" aria-label="Back">' + dbIco("chev", "db-ico db-back-ic") + '<span>Back</span></button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
         // The home button was removed (owner 2026-10-28). "‹ Back" steps back; the app's own
@@ -158,10 +158,22 @@
       closeDrawer(); if (st.name) { st.name = null; renderList(); } else close();
     });
     attachSheetGestures();
+    // The bar title fades in once the drug's own heading has scrolled under the bar.
+    root.addEventListener("scroll", function (e) {
+      var t = e.target; if (!t || !t.classList || !(t.classList.contains("db-body") || t.id === "dbMain")) return;
+      if (!root.classList.contains("db-is-detail")) return;
+      var g = t.querySelector(".db-gen, .db-bigt"), lim = g ? g.offsetTop + g.offsetHeight - 8 : 40;
+      root.classList.toggle("db-scrolled", t.scrollTop > lim);
+    }, true);
     return root;
   }
   function setTitle(t, showBack) {
     root.querySelector("#dbTitle").textContent = t;
+    // A drug page shows its name as the big heading, and the phone list shows "Drugs" big: the bar title waits until
+    // that heading scrolls under the bar (owner 2026-11-11: it said the name twice). iPad's split list has no big title.
+    root.classList.toggle("db-is-detail", !!showBack || !isWide()); root.classList.remove("db-scrolled");
+    // No top bar on a phone (owner 2026-11-11, "like CliniX and SurgX"): Back and Brands float over the page.
+    root.classList.toggle("db-float", !isWide());
     root.querySelector("#dbBack").style.visibility = "visible";
   }
 
@@ -422,7 +434,7 @@
     else renderBrowse(true);                 // no query → the browser (A-Z or by class), never an empty screen
   }
   function renderList() {
-    st.name = null; setTitle("Drugs Database", false);
+    st.name = null; setTitle("Drugs", false);
     var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
     renderSideList();
     if (isWide()) renderMainPlaceholder();
@@ -741,7 +753,7 @@
     var nBrands = st.total || st.brands.length || 0;
     if (bb) {
       if (!nBrands) { bb.style.display = "none"; }
-      else { bb.style.display = ""; bb.innerHTML = dbIco("pills") + '<span class="db-bb-lbl"><span class="db-bb-long">Available </span>Brands</span><span class="db-bb-ct">' + cnt + '</span>'; }
+      else { bb.style.display = ""; bb.setAttribute("aria-label", cnt + (nBrands === 1 ? " brand" : " brands") + " available"); bb.innerHTML = dbIco("pills") + '<span class="db-bb-lbl"><b>' + cnt + '</b>' + (nBrands === 1 ? " brand" : " brands") + '</span>'; }
     }
     if (dwOpen) openDrawer();
     loadStructured(d.composition);
@@ -1142,7 +1154,6 @@
       ".db-clsback{background:transparent;border:none;color:var(--teal,#0e6e63);font:700 12.5px var(--sans,system-ui);padding:4px 2px;cursor:pointer}",
       ".db-back-ic{transform:rotate(180deg);vertical-align:-2px}",
       ".db-sec-l:first-child{margin-top:2px}",
-      ".db-brandhit{border-left:3px solid var(--teal,#0a9396)}",
       ".db-brandhit .db-bh-comp{color:var(--teal,#0a9396);font-weight:700}",
       ".db-brandhit.disc{opacity:.6}",
       ".db-dwsearch{margin:2px 2px 10px}",
@@ -1275,10 +1286,41 @@
       ".db-overlay.db-sheet .db-top .db-brandbtn{grid-column:3;justify-self:end}",
       ".db-overlay .db-az{height:0;margin:0;padding:0;overflow:hidden;pointer-events:none}",   // keeps its full width: az-scrubber.js shows its strip only when this row reaches the right edge
       ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
+      /* Header revamp (owner 2026-11-11: "why so much place left", the Brands button "can look better"). One calm 44 px
+         bar under the notch: the drag handle no longer takes a row of its own, Back is a plain chevron and word, the
+         title waits for the drug heading to scroll away, and Brands is one solid button ("6 brands") with no pulsing
+         glow and no pill inside a pill. High specificity because Home's v3 polish and the Appearance looks restyle it. */
+      "html body #dbOverlay#dbOverlay .db-top{display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center!important;gap:0 8px!important;min-height:0!important;padding:calc(env(safe-area-inset-top) + 2px) 8px 6px!important;position:relative;background:var(--panel,#fff)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border:0!important;border-bottom:1px solid var(--line,#e5e5e0)!important;border-radius:0!important;box-shadow:none!important}",
+      "html body #dbOverlay#dbOverlay .db-top .db-grab{position:absolute!important;left:0;right:0;top:0;height:calc(env(safe-area-inset-top) + 10px)!important;padding:0!important;margin:0!important;z-index:1}",
+      "html body #dbOverlay#dbOverlay .db-back{grid-column:1;justify-self:start;display:inline-flex!important;align-items:center;gap:2px;height:44px!important;padding:0 8px 0 2px!important;margin:0!important;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:10px!important;color:var(--teal,#0a7c6b)!important;font:600 16px var(--sans,system-ui)!important}",
+      "html body #dbOverlay#dbOverlay .db-back .db-back-ic{width:22px;height:22px;transform:rotate(180deg);vertical-align:0}",
+      "html body #dbOverlay#dbOverlay .db-back:active{opacity:.55}",
+      "html body #dbOverlay#dbOverlay .db-title{grid-column:2;max-width:56vw;font:700 16px/1.2 var(--sans,system-ui)!important;transition:opacity .18s ease}",
+      "html body #dbOverlay#dbOverlay.db-is-detail:not(.db-scrolled) .db-title{opacity:0}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn{grid-column:3;justify-self:end;display:inline-flex;align-items:center;gap:6px;height:36px!important;padding:0 12px!important;margin:0!important;border:0!important;border-radius:10px!important;background:color-mix(in srgb,var(--teal,#0a7c6b) 12%,var(--panel,#fff))!important;color:var(--teal,#0a7c6b)!important;font:600 14px var(--sans,system-ui)!important;animation:none!important;box-shadow:none!important;filter:none!important}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn b{font-weight:800;font-variant-numeric:tabular-nums;margin-right:3px}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn .db-ico{width:16px;height:16px;vertical-align:0}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn:active{background:color-mix(in srgb,var(--teal,#0a7c6b) 20%,var(--panel,#fff))!important}",
+      "html body #dbOverlay#dbOverlay .db-brandbtn:focus-visible,html body #dbOverlay#dbOverlay .db-back:focus-visible{outline:2px solid var(--teal,#0a7c6b);outline-offset:2px}",
+      "body.dark #dbOverlay#dbOverlay .db-brandbtn{background:rgba(63,196,160,.16)!important;color:#8fe3c8!important}",
+      "body.dark #dbOverlay#dbOverlay .db-back{color:#8fe3c8!important}",
+      /* Floating controls (phone): the bar is gone, as on the CliniX and SURGX homes. The page's own heading ("Drugs",
+         the drug's name) is the title; Back is a round glass button top left, Brands a glass pill top right. */
+      "html body #dbOverlay#dbOverlay.db-float .db-top{position:absolute!important;top:0;left:0;right:0;z-index:5;display:flex!important;justify-content:space-between;align-items:center;padding:calc(env(safe-area-inset-top) + 10px) 14px 0!important;background:transparent!important;border:0!important;box-shadow:none!important;pointer-events:none}",
+      "html body #dbOverlay#dbOverlay.db-float .db-top>*{pointer-events:auto}",
+      "html body #dbOverlay#dbOverlay.db-float .db-title{display:none!important}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back{width:40px;height:40px!important;padding:0!important;justify-content:center;border-radius:50%!important;background:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;box-shadow:0 1px 2px rgba(16,48,59,.12),0 0 0 1px rgba(16,48,59,.06)!important;color:var(--ink,#13262b)!important}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back .db-back-ic{width:22px;height:22px;margin-left:-1px}",
+      "html body #dbOverlay#dbOverlay.db-float .db-brandbtn{height:40px!important;padding:0 14px!important;border-radius:20px!important;background:rgba(255,255,255,.72)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;box-shadow:0 1px 2px rgba(16,48,59,.12),0 0 0 1px rgba(16,48,59,.06)!important;color:var(--teal,#0a7c6b)!important}",
+      "html body #dbOverlay#dbOverlay.db-float .db-back:active,html body #dbOverlay#dbOverlay.db-float .db-brandbtn:active{transform:scale(.94);opacity:1}",
+      "html body #dbOverlay#dbOverlay.db-float .db-body{padding-top:calc(env(safe-area-inset-top) + 66px)!important;-webkit-mask-image:linear-gradient(180deg,transparent calc(env(safe-area-inset-top) + 6px),#000 calc(env(safe-area-inset-top) + 58px));mask-image:linear-gradient(180deg,transparent calc(env(safe-area-inset-top) + 6px),#000 calc(env(safe-area-inset-top) + 58px))}",
+      "body.dark #dbOverlay#dbOverlay.db-float .db-back,body.dark #dbOverlay#dbOverlay.db-float .db-brandbtn{background:rgba(20,36,40,.72)!important;box-shadow:0 0 0 1px rgba(255,255,255,.08)!important}",
+      "body.dark #dbOverlay#dbOverlay.db-float .db-back{color:#e8f3ef!important}body.dark #dbOverlay#dbOverlay.db-float .db-brandbtn{color:#8fe3c8!important}",
+      "@media(prefers-reduced-transparency:reduce){html body #dbOverlay#dbOverlay.db-float .db-back,html body #dbOverlay#dbOverlay.db-float .db-brandbtn{background:var(--panel,#fff)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}}",
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
       ".db-bh-comp{font-weight:700}",
-      ".db-brandhit{border-left-width:4px}",
       // adaptive split view (option C): persistent browse sidebar + detail pane on wide screens
       ".db-body.db-widebody{max-width:1180px}",
       ".db-split{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px;align-items:start}",

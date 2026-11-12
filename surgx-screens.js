@@ -253,6 +253,7 @@
         if (notesAccess === "verify_required") locked = '<span class="lock">Verify</span>';
       }
       return '<button class="sgx-sec" data-sgx="go" data-r="' + attr(s.act) + '"' + disabled + '>' +
+        '<span class="ico">' + ic(s.icon) + "</span>" +
         '<span class="tx"><span class="tt">' + esc(s.tt) + '</span><span class="sb">' + esc(s.sb) + "</span></span>" +
         locked +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
@@ -268,21 +269,19 @@
       }).join("");
     }
 
-    return head("SURGX", "", { titleless: true }) +
-      '<div class="sgx-hero">' +
-      // The owner-supplied monogram, forced white against the hero gradient (the PNG is
-      // alpha-masked, so brightness(0) invert(1) yields clean white). The wordmark below stays LIVE
-      // TEXT rather than part of the image, so it scales with Dynamic Type and stays selectable -
-      // mark over wordmark is the supplied lockup either way.
-      '<img class="sgx-hero-logo" src="/surgx-logo.png" alt="" aria-hidden="true">' +
-      '<div class="sgx-hero-mark">SURG<sup>x</sup></div>' +
-      '<div class="sgx-hero-tag">Surgical Intelligence</div>' +
-      '<div class="sgx-hero-note">Decision support for clinicians. Educational content is reference material, ' +
-      "not patient-specific advice. Everything here carries its source.</div></div>" +
-      wrap('<div class="sgx-seclabel">Sections</div>' + rows + recentHTML +
-        '<div class="sgx-disclaim">Calculators, drug data, the antibiogram and MaiK are the app\'s own; SURGX links ' +
-        "into them rather than keeping copies. Surgical protocol logic is shared with the Surgery workspace, so " +
-        "there is exactly one version of it.</div>");
+    /* Home in the CliniX pattern (owner 2026-11-11: "it should look like CliniX UI"): no top bar, a round
+       close button floating on the wash, the monogram INLINE with the live-text wordmark, a one-line
+       tagline, then a titled group of rows with icon tiles. The educational-content note moves to the
+       footer. Inner screens keep the sticky bar from head(). */
+    return '<div class="sgx-hero">' +
+      '<button class="sgx-hbtn sgx-close sgx-hero-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>" +
+      '<div class="sgx-hero-mark"><span class="sgx-hero-logo" aria-hidden="true"></span><span>SURG<sup>x</sup></span></div>' +
+      '<div class="sgx-hero-tag">Surgical Intelligence. Notes, protocols and procedures for the surgical team.</div></div>' +
+      wrap('<div class="sgx-seclabel">Sections</div><div class="sgx-secs">' + rows + "</div>" + recentHTML +
+        '<div class="sgx-disclaim">Decision support for clinicians. Educational content is reference material, not ' +
+        "patient-specific advice, and everything here carries its source. Calculators, drug data, the antibiogram and " +
+        "MaiK are the app's own; SURGX links into them rather than keeping copies. Surgical protocol logic is shared " +
+        "with the Surgery workspace, so there is exactly one version of it.</div>");
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════

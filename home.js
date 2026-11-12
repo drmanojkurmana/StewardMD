@@ -1757,7 +1757,7 @@
       ".smd-ab-tab{border:none;background:none;font:700 12.5px var(--sans);color:var(--slate-soft);padding:8px 2px;margin-right:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}",
       ".smd-ab-tab.on{color:var(--teal);border-bottom-color:var(--teal)}",
       ".smd-ab-badge{display:inline-block;background:var(--teal-soft);color:var(--teal);font:700 11px var(--sans);padding:3px 10px;border-radius:999px;margin-bottom:12px}",
-      ".smd-vh-item{padding:0 0 16px 16px;border-left:2px solid var(--line);position:relative}",
+      ".smd-vh-item{padding:0 0 16px 16px;position:relative}",
       ".smd-vh-item:last-child{border-left-color:transparent;padding-bottom:2px}",
       ".smd-vh-item:before{content:'';position:absolute;left:-6px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}",
       ".smd-vh-ver{font:800 14px var(--sans);color:var(--ink);margin-bottom:6px}",
@@ -2844,7 +2844,7 @@
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + svg("hrfCapsule", "hrf-ic") + '<span>Drugs</span></button>' +
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + svg("hrfCalc", "hrf-ic") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + ' data-act="aboutfacts" role="button" tabindex="0" aria-label="StewardMD facts and milestones"' + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
+        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + ' data-act="aboutfacts" role="button" tabindex="0" aria-label="StewardMD facts and milestones"' + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b class="hrf-banner-md">MD</b> <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
         '<div class="rnav-qrow hrf-qrow">' +
           '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + svg("hrfVirus", "hrf-ic") + '<span>Syndromes</span></button>' +
           '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("hrfFlask", "hrf-ic") + '<span>Antibiogram</span></button>' +
@@ -3224,7 +3224,8 @@
       chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none";
     }
     paint(); try { SMD_KU.onChange(paint); } catch (e) {}
-    var anchor = hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
+    // Home header: the chip sits before the two icon buttons (search, more) so they stay a pair.
+    var anchor = (hdr.classList.contains("hrf-head") && hdr.querySelector('[data-act="search"]')) || hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
     if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
     try { SMD_KU.summary(); } catch (e) {}   // refresh balance from server on home mount
   }
@@ -3841,6 +3842,8 @@
   /* The role label, read defensively. SMD_ROLE is shared by role-features.js and native-watch.js,
    * and native-watch.js once REPLACED it on phones, leaving no labelOf: Profile threw here, before
    * its sheet opened, and every tap on it did nothing. An optional line must never cost the page. */
+  // Male unless the doctor chose Female (owner 2026-11-11); picks the doctor in the boss celebration.
+  function acctGenderLabel() { try { return (window.SMD_GENDER ? SMD_GENDER.get() : localStorage.getItem("smd_gender")) === "female" ? "Female" : "Male"; } catch (e) { return "Male"; } }
   function acctRoleLabel() {
     try {
       var R = window.SMD_ROLE;
@@ -3932,6 +3935,7 @@
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
         row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
         row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Gender", "gender", { value: acctGenderLabel(), placeholder: "Male", editLabel: "Change" }) +
         row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
@@ -4012,6 +4016,7 @@
           row("Hospital", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
           row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
           row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
+          row("Gender", "gender", { value: acctGenderLabel(), placeholder: "Male", editLabel: "Change" }) +
           row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
         '</div>' +
 
@@ -4457,6 +4462,8 @@
         if (R0) setRow("role", R0.labelOf(R0.current() || d.role), R0.isVerified() ? { edit: false } : { editLabel: (R0.current() || d.role) ? "Change" : "Choose" });
       } catch (e) {}
       setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
+      if (d.gender === "male" || d.gender === "female") { try { if (window.SMD_GENDER) SMD_GENDER.set(d.gender); else localStorage.setItem("smd_gender", d.gender); } catch (e) {} }
+      setRow("gender", acctGenderLabel(), { editLabel: "Change" });
       setRow("city", d.city);
       setRow("phone", d.phone);
       if (profileHubOn()) acctPaintPhone(card.closest(".hv-pf") || card, d);
@@ -4517,6 +4524,15 @@
                   if (window.toast) toast("Role updated. Home now shows the tools for a " + RL.labelOf(k) + ".");
                   openAccount();
                 }).catch(function () { if (window.toast) toast("Saved on this device. It will sync when you are online."); openAccount(); });
+              });
+              return;
+            }
+            if (f === "gender") {
+              openChoicePicker("Gender", ["Male", "Female"], function (val) {
+                var g = val === "Female" ? "female" : "male";
+                try { if (window.SMD_GENDER) SMD_GENDER.set(g); else localStorage.setItem("smd_gender", g); } catch (e) {}
+                save({ gender: g }).then(function () { if (window.toast) toast("Gender updated"); openAccount(); })
+                  .catch(function () { if (window.toast) toast("Saved on this device. It will sync when you are online."); openAccount(); });
               });
               return;
             }
@@ -6534,7 +6550,7 @@ body.dark .maik-topicmode button[aria-pressed="true"],body.v3-dark .maik-topicmo
 .maik-welcome{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
 .maik-calc-pf{margin-top:9px}.maik-calc-pf ul{margin:4px 0 0;padding-left:18px}.maik-calc-pf li{margin:2px 0}.maik-calc-src{color:var(--mk-mut);font-size:11.5px}.maik-calc-res{margin-top:6px}.maik-calc-in{margin-top:6px;color:var(--mk-mut)}
 .maik-edu{font:600 11px 'Inter';color:var(--mk-mut);background:var(--mk-soft);border-radius:10px;padding:6px 9px;margin-bottom:6px}
-.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border-left:3px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
+.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border-radius:10px;padding:7px 10px;margin-bottom:8px}
 .maik-assume b{color:var(--mk-acc)}
 /* content sits above the faint watermark */
 .maik-body>.maik-wm{z-index:0}
@@ -10476,9 +10492,26 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (!document.documentElement.classList.contains("pn-open")) return s;
     return ds.autoFit && ds.tabletScale > 1 ? prepZoomD(ds.tabletScale, true) : prepZoomD(s, ds.autoFit);
   }
+  /* Home keeps the device's default size (owner 2026-11-11: "this tile and homepage should not be affected by size
+     changes"). The font size and density the user picks still apply to every other screen through the html zoom; Home
+     takes that zoom back out with its own (--smd-home-zoom = the Auto fit scale for this device / the html zoom), so it
+     always draws at what Auto fit would give, and its density rules follow html[data-home-dens] (the Auto fit density),
+     not body.smd-dens-*. redesign-system.css applies both. With Auto fit on, the home zoom is 1 and nothing changes. */
+  /* Owner 2026-11-11 (screenshots "After Reset to default" vs "On Restart"): Home looks right at 100% and Default density
+     and wrong with Auto fit's small-phone shrink (0.95 and Compact under 400 px, which a restart applies). So Home never
+     takes the shrink: at least 1.0 and never Compact. A tablet's Comfortable density and a phone under 340 px aside, this
+     is the "after reset" look on every launch. */
+  function homeBaseD() { var b = autoBaseD(); return { fs: Math.max(1, b.fs), d: b.d === "compact" ? "default" : b.d }; }
+  function homeFitD() {
+    var b = homeBaseD(), z = +document.documentElement.style.zoom || zoomOfD() || 1, de = document.documentElement;
+    var hz = String(Math.round(b.fs / z * 1e4) / 1e4);
+    if (de.style.getPropertyValue("--smd-home-zoom") !== hz) de.style.setProperty("--smd-home-zoom", hz);
+    if (de.getAttribute("data-home-dens") !== b.d) de.setAttribute("data-home-dens", b.d);
+  }
   function zoomNowD() {
     var z = zoomOfD(), de = document.documentElement;
     if (String(de.style.zoom) !== String(z)) de.style.zoom = z;
+    try { homeFitD(); } catch (e) {}
     // BUG-07: keep the Display sheet + its Reset OUT of the app zoom (counter-zoom) so the
     // controls needed to recover are always reachable, even at max scale.
     var _inv = 1 / z;
@@ -10493,6 +10526,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (on !== _pnWas) { _pnWas = on; zoomNowD(); }
     }).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
   } catch (e) {}
+  /* What Auto fit gives this device right now (scale and density), without changing anything: Home always draws at
+     this (homeFitD). An iPad's 1.08 / 1.15 is held back to 1.0 as in autoFitD. */
+  function autoBaseD() {
+    var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
+    if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
+    if (w > h && h < 500) d = "compact";
+    if (dpr >= 3 && w >= 400) fs = Math.min(1.2, fs + .05);
+    if (fs < 1 && bigTouchD()) { fs = 1; d = "default"; }
+    if (fs > 1 && bigTouchD() && !tabletZoomD()) fs = 1;
+    return { fs: fs, d: d };
+  }
   function autoFitD() {
     var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
     if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
@@ -10525,7 +10569,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // Only a WIDTH change re-fits: a keyboard opening (height only) must never undo the OS text-size seed.
   var _fitT = 0, _fitW = 0;
   function fitOnResizeD() {
-    if (!ds.autoFit) return;
+    if (!ds.autoFit) { clearTimeout(_fitT); _fitT = setTimeout(function () { try { homeFitD(); } catch (e) {} }, 150); return; }   // a chosen size: Home still follows rotation
     clearTimeout(_fitT);
     _fitT = setTimeout(function () {
       var w = window.innerWidth || 0;
@@ -10625,7 +10669,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var r = SMD_MAIK_ATMOSPHERE.resetConfig();
         if (r && r[atmoKey()]) syncAtmoUI(r[atmoKey()]);
       }
-      applyD(); refreshD();
+      // Defaults mean Auto fit ON, so fit now: applyD alone left 100% and Default density until the next launch
+      // (0.95 and Compact on a 390 px phone), and the switch said Auto fit while the size was not.
+      _fitW = 0; applyD(); autoFitD(); refreshD();
     });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
     var hcIn = s.querySelector("#hvHomeColor"), hcMsg = s.querySelector("#hvHomeColorMsg"), hcRs = s.querySelector("#hvHomeColorReset");
@@ -11731,8 +11777,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".ntf-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}",
       ".ntf-note{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:10px;padding:10px 12px;margin-bottom:14px;line-height:1.5}",
       ".ntf-list{display:flex;flex-direction:column;gap:10px}",
-      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--line,#e5e5e0)}",
-      ".ntf-card.hi{border-left-color:#ef4444}",
+      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;}",
       ".ntf-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}",
       ".ntf-cat{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
       ".ntf-cat.cat-safety,.ntf-cat.cat-recall{color:#b45309;background:#fef3c7}",
@@ -11761,9 +11806,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".fd-chip.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
       ".fd-search{width:100%;box-sizing:border-box;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 12px;font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
       // feed card
-      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
+      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
       ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
-      ".fd-card.hi{border-left-color:#ef4444}",
       ".fd-signed{font:600 11px var(--sans,system-ui);color:#0f766e;background:rgba(15,118,110,.1);border-radius:999px;padding:2px 8px;white-space:nowrap}",
       ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
       ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",

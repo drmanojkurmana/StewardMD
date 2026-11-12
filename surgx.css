@@ -225,7 +225,7 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   background: var(--sgx-steel-soft); border-radius: var(--sgx-r-ctl);
   font: 700 15px/1.4 var(--sgx-sans);
 }
-#surgxRoot .sgx-headline.emerg { border-left-color: var(--sgx-bad); background: var(--sgx-bad-bg); color: var(--sgx-bad); }
+#surgxRoot .sgx-headline.emerg {  background: var(--sgx-bad-bg); color: var(--sgx-bad); }
 
 #surgxRoot .sgx-band { position: relative; padding-left: 30px; margin-bottom: 4px; }
 #surgxRoot .sgx-band::before {
@@ -605,3 +605,42 @@ html.sgx-lock .abg { z-index: 1300; }
 #surgxRoot #sgxMentorQ { display: block; width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line, #d7dee3); border-radius: 10px; margin: 8px 0; background: var(--panel, #fff); color: inherit; }
 /* iPad: .sgx-scroll spans the screen; the wrap column widens to 960px. */
 @media (min-width: 700px) { #surgxRoot .sgx-wrap { max-width: 960px; } }
+
+/* ── home in the CliniX pattern (owner 2026-11-11: "it should look like CliniX UI") ─────────────
+   No top bar on home: a round close button floats on the wash, top RIGHT (owner 2026-11-11), the monogram sits
+   inline with the live-text wordmark in the brand green, a one-line tagline, a titled section group
+   with icon tiles (as .cx-rows / .cx-row-ic). Inner screens keep the sticky .sgx-head bar. */
+#surgxRoot .sgx-hero { position: relative; padding: calc(env(safe-area-inset-top, 0px) + 66px) 22px 6px; }
+#surgxRoot .sgx-hero-close {
+  position: absolute; top: calc(env(safe-area-inset-top, 0px) + 12px); right: 16px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.62); box-shadow: 0 1px 2px rgba(16,48,59,.10); color: var(--sgx-ink);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: transform .2s var(--sgx-ease);
+}
+#surgxRoot .sgx-hero-close:active { transform: scale(.94); background: rgba(255,255,255,.85); }
+#surgxRoot .sgx-hero-close .material-symbols-rounded { font-size: 20px; }
+#surgxRoot .sgx-hero-mark { display: flex; align-items: center; gap: 12px; font-size: 32px; font-weight: 750; letter-spacing: -.03em; line-height: 1.05; color: var(--sgx-steel); }
+#surgxRoot .sgx-hero-mark sup { font-size: .5em; top: -.7em; }
+#surgxRoot .sgx-hero-logo {
+  flex: 0 0 auto; display: block; width: 36px; height: 40px; margin: 0; filter: none; background: var(--sgx-steel);
+  -webkit-mask: url("/surgx-logo.png") center / contain no-repeat; mask: url("/surgx-logo.png") center / contain no-repeat;
+}
+#surgxRoot .sgx-hero-tag { margin-top: 10px; max-width: 34ch; font: 500 15px/1.45 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-hero + .sgx-wrap .sgx-seclabel { font: 700 21px/1.2 var(--sgx-sans); letter-spacing: -.024em; color: var(--sgx-ink); margin: 22px 2px 12px; }
+#surgxRoot .sgx-secs { background: var(--sgx-surface); border-radius: 16px; box-shadow: 0 1px 2px rgba(16,48,59,.06), 0 6px 18px -8px rgba(16,48,59,.14); overflow: hidden; }
+#surgxRoot .sgx-secs .sgx-sec, #surgxRoot .sgx-secs .sgx-sec:has(+ .sgx-sec), #surgxRoot .sgx-secs .sgx-sec + .sgx-sec {
+  position: relative; margin: 0; border: 0; border-radius: 0; background: transparent; min-height: 64px; padding: 12px 16px; gap: 14px;
+}
+#surgxRoot .sgx-secs .sgx-sec + .sgx-sec::before { content: ""; position: absolute; top: 0; left: 64px; right: 0; height: 1px; background: var(--sgx-line); }
+#surgxRoot .sgx-secs .sgx-sec:active { background: var(--sgx-surface-2); }
+#surgxRoot .sgx-sec .ico { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; background: var(--sgx-steel-soft); color: var(--sgx-steel); }
+#surgxRoot .sgx-sec .ico .material-symbols-rounded { font-size: 19px; }
+#surgxRoot .sgx-secs .sgx-sec .tt { font: 600 16px/1.25 var(--sgx-sans); letter-spacing: -.016em; }
+#surgxRoot .sgx-secs .sgx-sec .sb { font: 500 13.5px/1.35 var(--sgx-sans); }
+#surgxRoot .sgx-secs .sgx-sec .go .material-symbols-rounded { font-size: 18px; }
+body.dark #surgxRoot .sgx-hero-close, body.v3-dark #surgxRoot .sgx-hero-close { background: rgba(239,233,215,.10); box-shadow: none; }
+body.dark #surgxRoot .sgx-hero-logo, body.v3-dark #surgxRoot .sgx-hero-logo { filter: none; }
+body.dark #surgxRoot .sgx-secs, body.v3-dark #surgxRoot .sgx-secs { box-shadow: 0 0 0 1px var(--sgx-line); }
+@media (min-width: 720px) { #surgxRoot .sgx-hero { padding: calc(env(safe-area-inset-top, 0px) + 70px) 24px 6px; } #surgxRoot .sgx-hero-mark { font-size: 34px; } }
+@media (prefers-reduced-motion: reduce) { #surgxRoot .sgx-hero-close { transition: none; } #surgxRoot .sgx-hero-close:active { transform: none; } }

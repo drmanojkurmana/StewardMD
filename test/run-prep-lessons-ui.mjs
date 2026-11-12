@@ -135,7 +135,7 @@ try {
   // ---- narration
   await click("#smdPrep [data-act=l-play]");
   ok(await until(`return window.__tts.length===1;`, 3000), "Play speaks");
-  ok(await ev(`var u=window.__tts[0]; return /^A suspicious lump goes through triple assessment/.test(u.text) && u.rate===1 && u.lang==="en-IN";`) === true, "it speaks the step's narration at 1x, en-IN");
+  ok(await ev(`var u=window.__tts[0]; return /^A suspicious lump goes through triple assessment/.test(u.text) && u.rate===1 && u.lang==="en-IN";`) === true, "it speaks the step's own text at 1x, en-IN");
   ok(await ev(`var on=document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent.on"); return on.length===1 && on[0].getAttribute("data-k")==="0" && /^A suspicious lump/.test(on[0].textContent);`) === true, "read-along: the first sentence is lit while it is spoken");
   ok(await until(`var on=document.querySelector("#smdPrep .pn-lsn-tx .pn-sent.on"); return !!on && Number(on.getAttribute("data-k"))>=1;`, 4000), "read-along: the light moves on to the next sentence as the voice does");
   ok(await ev(`var s=document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent"), tx=document.querySelector("#smdPrep .pn-lsn-tx"); return s.length>=3 && tx.textContent.replace(/\\s+/g," ").trim().indexOf("A suspicious lump goes through triple assessment")===0;`) === true, "read-along: the step text reads the same with its sentences wrapped");
@@ -148,12 +148,14 @@ try {
   ok(await ev(`return document.querySelector("#smdPrep [data-act=l-speed]").textContent;`) === "1.25x", "speed cycles to 1.25x");
   ok(await until(`return window.__tts.some(function (u) { return u.rate===1.25 && /^A suspicious lump goes through triple assessment/.test(u.text); });`, 2000), "a speed change while playing restarts the step at the new rate");
   ok(await store(`s.lsp.r`) === 1.25, "the speed is kept in the store");
-  ok(await until(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed")==="false";`, 4000) && await step() === "Step 2 of 8", "without auto-advance the narration ends on the same step and Play resets");
+  ok(await until(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed")==="true" && !!document.querySelector("#smdPrep .pn-lsn-step .pn-vis.say");`, 15000), "read-along: the flow diagram is lit while the voice reads it");
+  ok(await until(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed")==="false";`, 20000) && await step() === "Step 2 of 8", "without auto-advance the narration ends on the same step and Play resets");
+  ok(await ev(`var t=window.__tts.filter(function(u){return u.rate===1.25;}).map(function(u){return u.text;}).join(" "); var want=Array.from(document.querySelectorAll("#smdPrep .pn-fn b")).map(function(x){return x.textContent;}).concat(["A normal mammogram never clears a palpable lump"]); return want.length>3 && want.every(function(w){return t.indexOf(w)>=0;}) && !document.querySelector("#smdPrep .pn-vis.say");`) === true, "the voice reads the whole step: the text as shown, then every node of the flow");
   await click("#smdPrep [data-act=l-auto]");
   ok(await store(`s.lsp.au`) === 1, "auto-advance turns on and is kept");
   await click("#smdPrep [data-act=l-play]");
-  ok(await until(`return /Step 3 of 8/.test(document.querySelector("#smdPrep .pn-t p").textContent);`, 5000), "auto-advance moves to step 3 when the narration ends");
-  ok(await until(`var u=window.__tts[window.__tts.length-1]; return /^Most invasive breast cancers are ductal/.test(u.text);`, 2000), "and speaks step 3");
+  ok(await until(`return /Step 3 of 8/.test(document.querySelector("#smdPrep .pn-t p").textContent);`, 20000), "auto-advance moves to step 3 when the narration ends");
+  ok(await until(`return window.__tts.some(function (u) { return /^Most invasive cancers are ductal/.test(u.text); });`, 2000), "and speaks step 3");
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-cmp-c").length===2 && document.querySelectorAll("#smdPrep .pn-cmp-c li").length===7;`) === true, "compare cards drawn (step 3)");
   const c0 = await ev(`return window.__ttsCancel;`);
   await click("#smdPrep [data-act=l-play]");

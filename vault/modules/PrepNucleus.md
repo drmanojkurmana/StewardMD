@@ -139,6 +139,14 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   0.75/1/1.25/1.5, Next/Finish; swipe left/right; "Auto" in the top bar advances when a step's narration ends. Image:
   tap to enlarge (opaque overlay, tap again for 2.2x, back/Escape closes it first). Finish: +10 XP a step on the first
   finish only, then "3 quick questions" through the normal runner (`study` mode: FSRS cards, mistakes), "Read again".
+- **What is read (2026-11-11, `prep135`):** the voice reads what the step shows, not the stored `say`: the displayed `tx`
+  through `sayText`, then the visual (`visSay`: table row by row with column names, flow nodes then labelled links, both
+  sides of a compare, a figure's caption, a spot question, a pair's tags and why). Not read: buttons, the quick check,
+  mark labels and the spot answer (hidden until tapped). Reason: about 15,400 of 34,700 shipped steps carried a `say`
+  under 60% of the text's length (worst about 17%, a one-line summary), so the owner heard the voice skip most of the
+  page. `say` stays in the format and the gates but is no longer spoken. While the visual is read it is lit
+  (`.pn-vis.say`) and kept in view. Tests: `test/prep-lessons.test.mjs` (every bundled step: at least 90% of displayed
+  words spoken), `test/run-prep-lessons-ui.mjs`.
 - **Narration:** `Capacitor.Plugins.TextToSpeech` on native (`lang en-IN`, `rate` = speed), `speechSynthesis` on the
   web; nothing leaves the phone.
   Text goes through `sayText` first (mg, %, >, markdown spoken as words) and is read a sentence at a time (`sayChunks`,
@@ -756,7 +764,7 @@ prefers confident Gemini answers; embeddings are only the fallback, so bge-small
 `vec-*.npy` caches are not.
 
 ## Gotchas
-- **"Learn this module" must open the module's own lesson** (owner bug 2026-11-12, `?v=prep135`). The links index
+- **"Learn this module" must open the module's own lesson** (owner bug 2026-11-12, `?v=prep140`). The links index
   (`tools/prep-links.mjs` `subjectLesson`) can give a module that HAS its own lesson the subject rapid-review lesson
   (`med-mixed`) as its `lt ev 0` fallback, so Q-SYY-89K-M86 (son-natural-products, Anthracyclines) opened "Mixed
   practice: high-yield medicine review". `prep-reason.js` `routeFallbackLessons` now re-points every fallback lesson
@@ -1996,3 +2004,12 @@ integrated into the app, reminding us what to read, what to practise". Decision:
 ## Image Library (2026-11-04)
 
 Every PrepNucleus subject screen shows an "Image Library" button next to the atlases (`prep-imglearn.js`, act `il-imglib`), opening the shared central image bank ([[Image Library]], flag `smd_imglib` default ON) filtered to the subject system where one maps. Lesson images (`vis.kind "image"`) and the ECG atlas tracings are part of the bank.
+
+## Celebrations back (owner 2026-11-11)
+- Right answers in a row in a practice set burst confetti with the celebration buzz at 3, 5, 10 and every 10 after
+  (`streakCele` in prep.js, from `answer()`; practice only, once per question). A boss win is a full celebration
+  card with a big burst (`bossDone` in prep-play.js, key `prepboss:<sid>:<t0>`). Both go through the app-wide
+  `SMD_CELEBRATE` (smd-celebrate.js) and `SMD_HAPTICS.celebrate` (success + three pops), not the retired
+  `PREP_MOTION.confetti`. Off under reduced motion; kill switch `smd_confetti = "0"`. Test: run-prep-play-ui.
+- "You are the boss" clip (owner 2026-11-11): a boss win and 100% on 5+ questions play boss-cele.js (male/female
+  doctor by profile gender) instead of the card. See Decisions 2026-11-11.

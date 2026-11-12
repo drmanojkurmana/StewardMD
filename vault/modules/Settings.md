@@ -55,3 +55,14 @@ The existing `test/run-graphite-dark-ui.mjs` harness has a syntax issue that pre
 (iPad landscape), the iPadOS split view: search plus the category list in a sticky 280 px sidebar, the selected
 category's groups on the right. Same `settings-ui.js` nodes and handlers; CSS only. Experimental keeps its centred column.
 Phones and Split View (507 px) are unchanged.
+
+## Home ignores Display size (owner 2026-11-11)
+Home (`#homeV2`, incl. the StewardMD Pro banner) always draws at the Auto fit size for the device, whatever font size,
+preset or density the user picks; every other screen still follows them. `home.js` `homeFitD()` (called from
+`zoomNowD`, and on resize) sets `--smd-home-zoom` = Auto fit scale / html zoom and `html[data-home-dens]` = the Auto
+fit density; `redesign-system.css` applies `#homeV2{zoom:var(--smd-home-zoom,1)}` and keys the Home density rules on
+`html[data-home-dens]` instead of `body.smd-dens-*`. `autoBaseD()` is the side-effect-free Auto fit calculation.
+Home never takes Auto fit's small-phone shrink (`homeBaseD`: at least 1.0, never Compact), owner 2026-11-11: the
+restart look (0.95 + Compact on a 393 px iPhone) squashed the tiles and banner; 100% + Default is the wanted look.
+"Reset to defaults" now runs Auto fit at once (it left 100% and Default density until relaunch).
+Audit note: outside Home, Density only changes Settings rows (`settings-ui.css`), so it does very little on its own.

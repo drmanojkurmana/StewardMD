@@ -12193,3 +12193,77 @@ system face (`-apple-system`, San Francisco on iPhone) with Inter as the Android
 - Palette and type are copied from `.q2app` in `queue.css`, not imported, because that block is scoped to
   `#smdQueue`. If a third screen wants it, lift the tokens to one file.
 - Codes stay monospace (O/0, I/1), everything else is the system face. No gradients, one shadow (selected segment).
+
+## Clinical Calculators: polish the existing screen, no redesign (owner, 2026-11-11)
+The owner first asked for a full redesign (flat white list, All / Favorites / Recent / Popular tabs). A build of
+it was shown and rejected as "vibe coded": "just polish this rather than changing whole UI". The redesign was
+discarded, never committed. Kept: the glass look, the header, the cards. Repaired in `calculators.js`
+(`polishCSS()`): the selected category chip was white text on white glass; the chips' 30px glass shadow was
+clipped by the rail into a grey band; search and the category rail now sit in a strip (`.mc-pin`) outside the
+scrolling list, as the owner drew; the star (now a 44px target) and a real chevron are centred on the row;
+card shadow lightened and the doubled gap between cards removed. Do not re-propose the tabbed redesign.
+Guard: `test/run-calc-polish-ui.mjs`. Not verified on a phone.
+
+## No side-accent stripes anywhere in the app (owner, 2026-11-11)
+- Owner, on the Knowledge Library red-flags callout: "Remove this red line ... I dont want see this type of bar which
+  indicate ai slop anywhere in the app. Every module every piece of app ui remove this". Supersedes the 2026-10-29 ICU
+  and 2026-10-31 onco stripe bans by making them app-wide, and reverses the earlier "red left rule (owner target photo)"
+  on `.dx-reader-alert` in `knowledge-library.css`.
+- Removed: every coloured `border-left` of 2px or more, every `border-left-width` / `border-left-color` accent,
+  inset left box-shadow stripes (`inset 3px 0 0`), the `.kblib-row:before` bar (`reasoning.js`) and the 1px teal
+  rule on the splash AMR figures. Severity stays carried by tint, text and badges. 151 declarations, 48 files.
+- Kept on purpose: chevrons, ticks and triangles drawn with borders (rotated or zero-size boxes); the reply-quote
+  marker in outgoing email HTML (`mail.js`, mail-client convention); thin connector lines between stepper dots
+  (ClinIx rail, Narke, OPD timeline, SurgX band); the ECG marker line; compiled Kardia lab bundles.
+- Guard: `test/no-side-stripes.test.mjs` scans every shipping CSS/JS/HTML file. Do not reintroduce a side bar to
+  mark severity, selection or a callout.
+
+## 2026-11-11 - Highlight and bold while reading (Learn + KB)
+
+**Decision.** One shared highlighter (`text-highlight.js`, flag `smd_hl` default ON) that any reading surface opts into
+with `data-hl-key`; first users are the PrepNucleus Learn reader and the KB disease reader. Owner asked for the
+notes-app style palette from a screen recording, plus bold. Palette under the selection (the native Copy menu sits
+above), 7 colours + Bold + Remove, tap a highlight to edit, list of the page's highlights.
+**Why.** One module instead of two per-screen copies; text-quote anchoring survives the readers' re-renders.
+**Trade-off.** Device-local only (not synced); a highlight whose words change in a content update is not drawn.
+**Status.** Built and tested headless; not tried on a phone. Needs build-www + native rebuild. See [[Text Highlights]].
+
+## 2026-11-11 · Watermark by module; Home fixed size
+**Decision.** PrepNucleus marks only inside PrepNucleus and the Image Library (centre mark + corner lockup); elsewhere a
+small StewardMD corner logo. Press and hold fades marks. Home and its Pro banner ignore the Display font size and density.
+**Why.** Owner: tiled marks covered labels; Home looked wrong at larger sizes.
+**Trade-off.** A user who needs 200% text gets it on every screen except Home. Pure CSS context switch, so an image
+rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
+**Status.** Headless tested; needs build-www + native rebuild. See [[Image Library]], [[Settings]].
+
+## Key terms are black bold only, in the KB and every lesson (owner, 2026-11-11)
+- Owner, on the KB reader photo (purple terms in lavender pills): "Make this black bold only no need this color. And
+  similar important points and words concepts bolding in cliniX, other learning lessons too". Replaces the 2026-11-02
+  purple/red rule for `md-*` terms and the lavender pill in `knowledge-library.css`.
+- KB reader, Protocols, management page: every `md-*` term is `font-weight:700; color:inherit` (reasoning.js
+  evInjectCSS, knowledge-library.css, kb-protocols.css). Red for `md-abs`/`md-emerg` is gone too.
+- New `smd-hy.js` (`window.SMD_HY.html/mark`): escaped text with numbers+units, signal phrases, never/do not,
+  eponymous signs, bedside findings and core diagnoses/organisms wrapped in `<b class="smd-hy">` (ink, no colour).
+  Wired into CliniX teaching turns (`clinix-screens.js teachTurn`), specialty-engine lessons (`specialty-learn.js
+  rich()`: Tokós, Narkē, Kardia ...) and KardiQ lessons (`kardiox-screens.js` overview, lists, pearl, pitfall).
+  Glossary terms (`.ln-term`) in the specialty engine are black bold with a neutral dotted underline. PrepNucleus
+  lesson bolds lost their coloured underline. Guard: `test/smd-hy.test.mjs`.
+- Not done here: Ophthalmós (`ophthalmos-learn.*`) is synced byte-identical from `drmanojkurmana/ophthalmos`
+  (`test/ophthalmos-module.test.mjs`); the same change must be made in that repo and synced.
+
+## 2026-11-11 Home polish: KU chip restored, quick row contrast, header fit
+- ku.js listens to Firebase auth directly (Firebase loads lazily and can restore a session without SMD_ACCOUNT emitting), so the header Knowledge Units chip shows for signed-in doctors.
+- The KU chip sits right-aligned before Search. Phones: slimmer mark and compact chip so the header fits 320-430 px with a 5-digit KU count; below 381 px the header Pro chip yields while KU shows (the banner says Pro).
+- Frosted/Liquid: the quick-action card over the hero stays 84-90% opaque. First-row icons carry the brand teal; the second row stays neutral.
+
+## 2026-11-11 Celebrations get confetti (reverses 2026-10-03 "no confetti")
+- Owner: every achievement or award gets an on-screen confetti celebration. smd-celebrate.js fires one canvas burst (pointer-events:none, brand colours, ~2.4 s) with every card, so all callers (KU level/badge/reward/quest/streak, PG logbook, CliniX) get it. Off under reduced motion or a hidden page; kill switch localStorage smd_confetti = "0" (smd_celebrate = "0" still turns off the whole celebration).
+- engagement.js keeps the last progress snapshot per account in localStorage (smd_eng_snap:<uid>), so awards granted while the app was closed celebrate on the next open; the first snapshot on a device is a silent baseline. Streak milestones 3/7/14/30/50/100/200/365 now celebrate. Keys are uid-prefixed.
+
+## 2026-11-11 "You are the boss" clip + gender on the profile
+- Two Gemini (Veo) clips from the owner, cut and re-encoded to 720x1280 H.264 (assets/celebrate/boss-male.mp4 1.2 MB, boss-female.mp4 1.7 MB, plus start/end webp stills; the ring-and-check clip that came joined to the female one was cut off and not shipped). boss-cele.js plays the clip full screen, draws "You are the boss" + subject + score over it at the hero pose with confetti and SMD_HAPTICS.celebrate, Skip / Continue; reduced motion shows the end still; a video error falls back to SMD_CELEBRATE's card; kill switch smd_boss_video = "0".
+- Plays on a PrepNucleus boss win (prep-play.js bossDone) and on 100% in any finished set of 5+ questions (prep.js perfectCele).
+- Gender: Male / Female on the profile form (profile-setup.js, Male preselected, never blocks Save) and as a Profile row (home.js); saved to users/<uid>/profile/self.gender (server save-profile accepts only "male"|"female"); mirrored to localStorage smd_gender (window.SMD_GENDER). Used only to pick the clip.
+
+## 2026-11-11 PrepNucleus Spotify player OFF by default (reverses 2026-10-31 "on for everyone")
+- Owner: the mini player appeared over the onboarding subject list. Now smd_prep_sound_spotify must be "1": the loader leaves the Spotify files out otherwise, and prep-sound-spotify.js stays inert. Turned on/off in PrepNucleus Settings > Sound (Beta) > Spotify player; On loads the files at once (PREP_LOADER.loadSpotify), Off pauses and hides the dock immediately. The dock never shows over the setup steps (.pl-ob).

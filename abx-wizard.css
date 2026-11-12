@@ -174,11 +174,11 @@ html.abx-ui #abxWizard .abxw-diff.sev-red .abxw-diffpct { color: var(--sv-red-ba
 html.abx-ui #abxWizard .abxw-diff.sev-yellow .abxw-diffpct { color: var(--sv-yellow-bar); } html.abx-ui #abxWizard .abxw-diff.sev-green .abxw-diffpct { color: var(--sv-green-bar); }
 
 /* decision */
-html.abx-ui #abxWizard .abxw-deccard { border-radius: 16px; padding: 18px; border: 1px solid var(--w-line); border-left: 5px solid var(--w-slate); background: var(--w-panel); }
-html.abx-ui #abxWizard .abxw-deccard.sev-green { background: var(--sv-green-bg); border-color: var(--sv-green-ln); border-left-color: var(--sv-green-bar); }
-html.abx-ui #abxWizard .abxw-deccard.sev-yellow { background: var(--sv-yellow-bg); border-color: var(--sv-yellow-ln); border-left-color: var(--sv-yellow-bar); }
-html.abx-ui #abxWizard .abxw-deccard.sev-orange { background: var(--sv-orange-bg); border-color: var(--sv-orange-ln); border-left-color: var(--sv-orange-bar); }
-html.abx-ui #abxWizard .abxw-deccard.sev-red { background: var(--sv-red-bg); border-color: var(--sv-red-ln); border-left-color: var(--sv-red-bar); }
+html.abx-ui #abxWizard .abxw-deccard { border-radius: 16px; padding: 18px; border: 1px solid var(--w-line);  background: var(--w-panel); }
+html.abx-ui #abxWizard .abxw-deccard.sev-green { background: var(--sv-green-bg); border-color: var(--sv-green-ln);  }
+html.abx-ui #abxWizard .abxw-deccard.sev-yellow { background: var(--sv-yellow-bg); border-color: var(--sv-yellow-ln);  }
+html.abx-ui #abxWizard .abxw-deccard.sev-orange { background: var(--sv-orange-bg); border-color: var(--sv-orange-ln);  }
+html.abx-ui #abxWizard .abxw-deccard.sev-red { background: var(--sv-red-bg); border-color: var(--sv-red-ln);  }
 html.abx-ui #abxWizard .abxw-dechead { display: flex; align-items: flex-start; gap: 12px; }
 html.abx-ui #abxWizard .abxw-decic { width: 44px; height: 44px; border-radius: 12px; flex: none; display: grid; place-items: center; background: #fff; border: 1px solid var(--w-line); }
 html.abx-ui #abxWizard .abxw-deccard.sev-green .abxw-decic .abx-ms { color: var(--sv-green-bar); } html.abx-ui #abxWizard .abxw-deccard.sev-yellow .abxw-decic .abx-ms { color: var(--sv-yellow-bar); }
@@ -199,7 +199,7 @@ html.abx-ui #abxWizard .abxw-why { background: var(--w-panel); border: 1px solid
 html.abx-ui #abxWizard .abxw-why p { margin: 6px 0 0; font: 400 14.5px/1.6 var(--w-sans); color: var(--w-slate); }
 
 /* plan */
-html.abx-ui #abxWizard .abxw-drug { background: var(--w-panel); border: 1px solid var(--w-line); border-left: 4px solid var(--w-teal); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
+html.abx-ui #abxWizard .abxw-drug { background: var(--w-panel); border: 1px solid var(--w-line);  border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; }
 html.abx-ui #abxWizard .abxw-drugnm { font: 800 16px var(--w-sans); color: var(--w-ink); }
 html.abx-ui #abxWizard .abxw-drugdose { font: 500 13.5px var(--w-mono); color: var(--w-slate); margin-top: 6px; }
 html.abx-ui #abxWizard .abxw-drugwhy { font: 400 13.5px/1.55 var(--w-sans); color: var(--w-slate); margin-top: 4px; }
@@ -316,8 +316,8 @@ html.abx-ui #abxWizard .abxw-resume-yes { height: 40px; padding: 0 16px; border-
 html.abx-ui #abxWizard .abxw-resume-no { height: 40px; padding: 0 14px; border-radius: 11px; border: 1px solid var(--w-line); background: var(--w-panel); color: var(--w-slate); font: 700 13.5px var(--w-sans); }
 
 /* --- PINNED EMERGENCY ALERT (time-critical) — theme-invariant red --------- */
-html.abx-ui #abxWizard .abxw-emergency { margin: 0 0 14px; border-radius: 14px; padding: 14px 16px; background: var(--sv-red-bg); border: 1.5px solid var(--sv-red-bar); border-left: 6px solid var(--sv-red-bar); box-shadow: 0 2px 14px rgba(171,28,44,.28); }
-html body.dark.abx-ui #abxWizard .abxw-emergency, html.abx-ui body.dark #abxWizard .abxw-emergency { background: #2a0810; border-color: #e85070; border-left-color: #e85070; box-shadow: 0 2px 16px rgba(232,80,112,.35); }
+html.abx-ui #abxWizard .abxw-emergency { margin: 0 0 14px; border-radius: 14px; padding: 14px 16px; background: var(--sv-red-bg); border: 1.5px solid var(--sv-red-bar);  box-shadow: 0 2px 14px rgba(171,28,44,.28); }
+html body.dark.abx-ui #abxWizard .abxw-emergency, html.abx-ui body.dark #abxWizard .abxw-emergency { background: #2a0810; border-color: #e85070;  box-shadow: 0 2px 16px rgba(232,80,112,.35); }
 html.abx-ui #abxWizard .abxw-emerg-hd { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
 html.abx-ui #abxWizard .abxw-emerg-hd .abx-ms { color: var(--sv-red-bar); font-size: 24px; flex: none; }
 html body.dark.abx-ui #abxWizard .abxw-emerg-hd .abx-ms { color: #e85070; }

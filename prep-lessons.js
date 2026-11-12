@@ -325,6 +325,46 @@
     var x = sayText(t);
     return x ? splitSay(x) : [];
   }
+  /* What the voice reads for a step: everything the page shows of the lesson, in reading order. The stored `say` was meant
+     to be the same content reworded, but about four steps in ten carry a one-line summary of it, so the voice skipped most
+     of the page (owner 2026-11-11). Now the displayed text is read as written, then the visual: a table row by row with
+     its column names, a flow node by node with its labelled links, both sides of a comparison, a figure's caption.
+     Buttons, the quick check and labels still hidden behind a tap are not read.
+     visSay(vis) -> sentences; stepSay(step) -> { tx: [pieces of the text], vis: [pieces of the visual] }. */
+  function sayEnd(t) { var x = plain(t).replace(/\s+/g, " ").trim(); return !x ? "" : /[.!?]$/.test(x) ? x : x.replace(/[,;:]+$/, "") + "."; }
+  function visSay(v) {
+    var out = [], add = function (t) { var x = sayEnd(t); if (x) out.push(x); };
+    if (!v || typeof v !== "object") return out;
+    if (v.kind === "table") {
+      var cols = v.cols || [];
+      if (cols.length) add("Table: " + cols.map(plain).join(", "));
+      (v.rows || []).forEach(function (r) {
+        add(r[0]);
+        for (var j = 1; j < r.length; j++) if (nonEmpty(r[j])) add((nonEmpty(cols[j]) ? plain(cols[j]) + ", " : "") + r[j]);
+      });
+    } else if (v.kind === "flow") {
+      var by = {}, lv = null;
+      (v.nodes || []).forEach(function (n) { by[n.id] = n; });
+      try { lv = flowLevels(v.nodes, v.edges); } catch (e) { lv = null; }
+      var order = lv ? [].concat.apply([], lv) : (v.nodes || []).map(function (n) { return n.id; });
+      order.forEach(function (id) { var n = by[id]; if (n) add(n.label + (n.sub ? ", " + n.sub : "")); });
+      (v.edges || []).forEach(function (e) { if (e[2] && by[e[0]] && by[e[1]]) add("From " + plain(by[e[0]].label) + " to " + plain(by[e[1]].label) + ", " + e[2]); });
+    } else if (v.kind === "compare") {
+      [v.left, v.right].forEach(function (c) { if (!c) return; add(c.title); (c.points || []).forEach(add); });
+    } else if (v.kind === "figure") {
+      add(v.alt); add(v.caption);
+    } else if (v.kind === "image") {
+      if (v.spot) add(v.spot.q);
+      if (v.pair) { add((v.pair.tagA || "This image") + " and " + v.pair.tag); add(v.pair.why); }
+      add(v.caption);
+    }
+    return out;
+  }
+  function stepSay(step) {
+    var vis = [];
+    visSay(step && step.vis).forEach(function (t) { sayChunks(t).forEach(function (c) { vis.push(c); }); });
+    return { tx: sayChunks(step && step.tx), vis: vis };
+  }
   // The sentences of a step's displayed text (raw, with its **bold** marks), for the read-along highlight.
   function stepSentences(tx) { var x = String(tx == null ? "" : tx).replace(/\s+/g, " ").trim(); return x ? splitSay(x) : []; }
   function wordSet(t) { var m = String(t).toLowerCase().replace(/\*\*/g, "").match(/[a-z0-9]+/g) || [], o = {}, n = 0; for (var i = 0; i < m.length; i++) if (!o[m[i]]) { o[m[i]] = 1; n++; } return { w: o, n: n }; }
@@ -378,7 +418,7 @@
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
     swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, groups: groups, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
-    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, stepSentences: stepSentences, alignSay: alignSay, voiceScore: voiceScore, bestVoice: bestVoice };
+    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, visSay: visSay, stepSay: stepSay, stepSentences: stepSentences, alignSay: alignSay, voiceScore: voiceScore, bestVoice: bestVoice };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -452,10 +492,14 @@
   function plugin() { try { var C = G.Capacitor; return C && C.isNativePlatform && C.isNativePlatform() && C.Plugins && C.Plugins.TextToSpeech || null; } catch (e) { return null; } }
   function canSpeak() { return !!(plugin() || (G.speechSynthesis && G.SpeechSynthesisUtterance)); }
   /* Read-along: the sentence being spoken is lit in the step's text and kept in view. */
+  var HL_VIS = -2;
   function hlSet(k) {
     var r = host && host.root && host.root(); if (!r) return;
     var els = r.querySelectorAll(".pn-lsn-tx .pn-sent"), cur = null;
     for (var i = 0; i < els.length; i++) { var on = i === k; if (els[i].classList.contains("on") !== on) els[i].classList.toggle("on", on); if (on) cur = els[i]; }
+    // HL_VIS: the voice is on the visual, so that is what is lit and kept in view.
+    var vs = r.querySelector(".pn-lsn-step .pn-vis");
+    if (vs) { var von = k === HL_VIS; if (vs.classList.contains("say") !== von) vs.classList.toggle("say", von); if (von) cur = vs; }
     if (!cur || !cur.getBoundingClientRect) return;
     var b = cur.getBoundingClientRect(), vh = G.innerHeight || 700;
     if (b.top < 120 || b.bottom > vh - 150) { try { cur.scrollIntoView({ block: "center", behavior: reduced() ? "auto" : "smooth" }); } catch (e) {} }
@@ -513,7 +557,7 @@
   }
   function speak(text, rate, done, onPiece) {
     stopVoice();
-    var tok = ++L.tok, chunks = sayChunks(text), n = 0;
+    var tok = ++L.tok, chunks = Array.isArray(text) ? text : sayChunks(text), n = 0;
     var fail = function () { if (tok === L.tok) { L.playing = false; draw(); } };
     var next = function () {
       if (tok !== L.tok) return;
@@ -544,8 +588,12 @@
     next();
   }
   function narrate() {
-    var s = store(), pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null, say = pageSay();
-    var map = step ? alignSay(sayChunks(say), stepSentences(step.tx)) : null;
+    var s = store(), pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null, say = pageSay(), map = null;
+    if (step) {
+      var ss = stepSay(step);
+      map = alignSay(ss.tx, stepSentences(step.tx)).concat(ss.vis.map(function () { return HL_VIS; }));
+      say = ss.tx.concat(ss.vis);
+    }
     speak(say, s.lsp.r, function () {
       hlClear();
       if (!L.playing || L.fin) return;
@@ -827,7 +875,8 @@
     var p = page(), les = L.les;
     if (p === "cards") return "Classic signs. " + les.cards.map(function (c) { return c.f + ". " + c.b; }).join(" ");
     if (p === "keys") return "Key points. " + les.keys.join(" ").replace(/\*\*/g, "");
-    return les.steps[p].say;
+    var ss = stepSay(les.steps[p]);
+    return ss.tx.concat(ss.vis).join(" ");
   }
 
   // Ask MaiK (prep-ask.js) is always offered: on this phone or online, and the sheet says which works here. Without it,
@@ -860,7 +909,7 @@
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
-        '<p class="pn-lsn-tx">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
+        '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
@@ -955,11 +1004,13 @@
     };
     ON(sc, "lsn", "pointerup", up); ON(sc, "lsn", "pointercancel", up);
   }
+  // Dragging a text-selection handle (highlighting, text-highlight.js) must not turn the page.
+  function selecting(el) { try { var s = G.getSelection && G.getSelection(); return !!(s && !s.isCollapsed && s.rangeCount && el.contains(s.getRangeAt(0).commonAncestorContainer)); } catch (e) { return false; } }
   function bindSwipe(el) {
     if (!el) return;
     var x0 = 0, y0 = 0, on = false;
     ON(el, "lsn", "pointerdown", function (e) { if (e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-vtbl,.pn-cmp-sl,.pn-flips"))) return; on = true; x0 = e.clientX; y0 = e.clientY; });
-    ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
+    ON(el, "lsn", "pointerup", function (e) { if (!on) return; on = false; if (selecting(el)) return; var d = swipeDir(e.clientX - x0, e.clientY - y0); if (d > 0) next(); else if (d < 0 && L.i) go(L.i - 1); });
     ON(el, "lsn", "pointercancel", function () { on = false; });
   }
 

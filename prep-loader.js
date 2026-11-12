@@ -33,7 +33,7 @@
    boss battles, quick fire, voice mode, focus room, Wrapped, seasons, mnemonic lab, streak freezes; flag smd_prep_play, optional). */
 (function (G) {
   "use strict";
-  var V = "prep135";
+  var V = "prep140";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css", "prep-play.css"];
   var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-voice.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-pyqss.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js", "prep-play.js"];
@@ -49,7 +49,13 @@
   // Spotify is ON by default (owner 2026-10-31) and does not need Sound; it brings the shared player card with it.
   var SPOTIFY_CSS = ["prep-sound-player.css", "prep-sound-spotify.css"], SPOTIFY_JS = ["prep-sound-player.js", "prep-sound-spotify.js"];
   function soundOn() { try { var q = (G.location.search.match(/[?&]sound=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound") === "1"; } catch (e) { return false; } }
-  function spotifyOn() { try { var q = (G.location.search.match(/[?&]spotify=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound_spotify") !== "0"; } catch (e) { return false; } }
+  function spotifyOn() { try { var q = (G.location.search.match(/[?&]spotify=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound_spotify") === "1"; } catch (e) { return false; } }
+  /* Spotify is OFF by default (owner 2026-11-11, reversing 2026-10-31): it loads only once turned on in PrepNucleus
+     Settings > Sound. loadSpotify() brings its files in at that moment, no restart needed. */
+  function loadSpotify() {
+    SPOTIFY_CSS.forEach(css);
+    return SPOTIFY_JS.reduce(function (p, f) { return p.then(function () { return js(f); }); }, Promise.resolve());
+  }
   var loading = null;
 
   function enabled() {
@@ -109,6 +115,6 @@
     var AppP = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.App;
     if (AppP) AppP.addListener("appUrlOpen", function (d) { applyFlagLink(d && d.url); });
   } catch (e) {}
-  G.PREP_LOADER = { load: load, enabled: enabled, V: V, CSS: CSS, JS: JS, applyFlagLink: applyFlagLink };
+  G.PREP_LOADER = { load: load, loadSpotify: loadSpotify, spotifyOn: spotifyOn, enabled: enabled, V: V, CSS: CSS, JS: JS, applyFlagLink: applyFlagLink };
   if (!G.PREP) G.PREP = stub;
 })(typeof window !== "undefined" ? window : this);
