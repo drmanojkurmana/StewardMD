@@ -12282,3 +12282,10 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Owner: "make it 10 better". Layout only: one-row kit header, one-line save note, sticky tool title with the live result, kit bar flush with the bottom edge. No change to what a kit writes or when.
 - Kept behind a flag (`?kitsui=0`) with recovery tag `kits-ui-pre-compact` until the owner approves on the phone; then the old header branch in `kitBody` can be deleted.
 - Not changed: three entry points (Specialty tab, Tools button, Home tile) still exist; consolidating them is the owner's call (vault note says "kept for now").
+
+## 2026-11-13 Settings is an iOS navigation stack
+- Owner sent a recording of iOS Settings: "this is how it should behave", with a screenshot of Profile and Settings showing through each other.
+- Cause of the overlap: syndromes-motion.js staggers `#hvSheet` children from opacity 0, so Profile's rows faded in over a fully visible Settings. A second bug: adding `sbr-pushed` was itself transitioned, so the page arrived diagonally from below.
+- Now (`sidebar-redesign.js`): a row pushes its page in from the right, opaque, in Settings' own background. Settings slides 30% left under a dim layer (`#sbrDim`). The nav bar has a round Back and a centred title; the page's own `.hv-sh-t` and Appearance's Done are hidden. Back, or a drag from the left 24 px (interactive, commits at 40% or a flick), reverses it. Experimental pushes the same way. One curve for all of it: 0.5s `cubic-bezier(.32,.72,0,1)`.
+- The edge drag is taken in the capture phase only while a pushed page shows, so swipe-back.js never acts on the same touch. Android's system back still reaches the round Back through swipe-back.js.
+- Test: `test/run-settings-push-ui.mjs` (dark and light).
