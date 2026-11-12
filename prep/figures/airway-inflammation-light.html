@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -484,22 +487,13 @@ function initPanel() {
   [["eos", "Eosinophils", "g-eos", "Eosinophils in the airway wall. They follow IL-5 and release proteins that damage the lining and inflame the wall."], ["neu", "Neutrophils", "g-neu", "Neutrophils in the airway wall. They follow IL-17 and IL-8, typically with smoke or infection."], ["muc", "Mucus", "g-mucus", "Mucus from goblet cells. IL-13 drives it in the type-2 pattern, IL-17 in the neutrophilic pattern. It can plug small airways."], ["mast", "Mast cells", "g-mast", "Mast cell activation: IgE on the surface, cross-linked by allergen, releases histamine and leukotrienes."], ["bc", "Tightening", "g-bad", "How much the airway muscle is tightening and the wall swelling, which narrows the lumen."], ["air", "Airflow", "g-air", "How open the airway is. A bronchodilator raises this fast but does not change the inflammation underneath."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = L.over;
-  pill(ox, "Epithelium", 150, 180, 250, 82, "The airway lining. It senses triggers and releases alarmins (type-2) or IL-17 signals (non-type-2). Cilia sweep mucus out.");
-  pill(ox, "Goblet cell", 332, 184, 400, 82, "Goblet cells make mucus. IL-13 turns them up and increases their number, so mucus becomes thick and can plug the airway.");
-  pill(ox, "Allergen", 600, 80, 600, 64, "Allergens such as pollen or dust mite, the usual trigger in the type-2 pattern.");
-  pill(ox, "Smoke or infection", 840, 90, 840, 64, "Smoke, pollution and infection, a usual trigger in the neutrophilic pattern.");
-  pill(ox, "Dendritic cell", POS.dc[0], POS.dc[1] + 18, 80, 288, "Dendritic cell: picks up allergen at the lining and presents it to T cells.");
-  pill(ox, "ILC2", POS.ilc[0] - 8, POS.ilc[1] - 12, 164, 214, "ILC2: innate lymphoid cell. Alarmins make it release IL-5 and IL-13 fast, without needing an allergen.");
-  pill(ox, "Th2 cell", POS.th2[0], POS.th2[1] + 14, 316, 316, "Th2 cell: a helper T cell that makes IL-4, IL-5 and IL-13.");
-  pill(ox, "B cell", POS.b[0], POS.b[1] - 16, 430, 186, "B cell. IL-4 tells it to switch to making IgE antibody.");
-  pill(ox, "Mast cell", POS.m1[0] + 16, POS.m1[1] - 14, 614, 190, "Mast cell armed with IgE. Allergen cross-links the IgE and the cell releases histamine and leukotrienes, which tighten the airway muscle and swell the wall.");
-  pill(ox, "Eosinophils", 560, 306, 610, 336, "Eosinophils come from blood, called in by IL-5. Their granule proteins damage the lining and keep the wall inflamed.");
-  pill(ox, "Th17 cell", POS.th17[0], POS.th17[1] - 14, 700, 186, "Th17 cell: makes IL-17, which makes the lining release IL-8 and call in neutrophils.");
-  pill(ox, "Neutrophils", 840, 300, 880, 336, "Neutrophils, called in by IL-8. They release enzymes and oxygen radicals and often do not respond to steroid.");
-  pill(ox, "Airway smooth muscle", 110, MY, 130, 392, "Smooth muscle around the airway. Histamine, leukotrienes and IL-13 make it tighten, and it narrows the lumen.");
-  pill(ox, "Blood vessel", 400, VY + 6, 346, 430, "Vessel that supplies the wall. Eosinophils and neutrophils leave from here.");
-  [["alarm", "Alarmins", 214, 196, 270, 160, "Alarmins (TSLP, IL-33, IL-25) from the epithelium. They wake ILC2 and Th2 cells."], ["il5", "IL-5", 480, 302, 470, 320, "IL-5: calls eosinophils in from blood and keeps them alive."], ["il4", "IL-4", 386, 246, 380, 206, "IL-4: pushes B cells to make IgE and Th2 cells to grow."], ["ige", "IgE", 490, 222, 492, 190, "IgE antibody made by B cells; it sits on mast cells."], ["il13", "IL-13", 332, 224, 292, 196, "IL-13: more mucus, goblet cell growth and twitchy muscle."], ["il17", "IL-17", 760, 200, 800, 160, "IL-17 from Th17 cells, calling for neutrophils."]]
-    .forEach(([k, n, x, y, tx, ty, tip]) => { pill(ox, n, x, y, tx, ty, tip); });
+  pill(ox, "Triggers", 720, 78, 700, 64, "Allergens such as pollen or dust mite start the type 2 pattern. Smoke, pollution and infection start the neutrophilic pattern.");
+  pill(ox, "Lining", 240, 180, 230, 86, "The airway lining senses triggers and releases alarmins (TSLP, IL-33, IL-25) that wake ILC2 and Th2 cells, or IL-17 signals in the non type 2 pattern. Cilia sweep mucus out. Goblet cells make mucus. IL-13 turns them up, so mucus becomes thick and can plug the airway.");
+  pill(ox, "Type 2 start", POS.th2[0], POS.th2[1], 200, 250, "A dendritic cell picks up allergen at the lining and presents it to T cells. An ILC2 cell releases IL-5 and IL-13 fast when alarmins arrive, without needing an allergen. A Th2 cell makes IL-4, IL-5 and IL-13.");
+  pill(ox, "IgE and mast", POS.m1[0], POS.m1[1], 560, 200, "IL-4 pushes B cells to make IgE and helps Th2 cells grow. IgE sits on the mast cell. Allergen cross links that IgE and the cell releases histamine and leukotrienes, which tighten the airway muscle and swell the wall.");
+  pill(ox, "Eosinophils", 560, 306, 500, 340, "IL-5 calls eosinophils in from the blood and keeps them alive. They leave through the wall vessel. Their granule proteins damage the lining and keep the wall inflamed.");
+  pill(ox, "Neutrophil path", POS.th17[0], POS.th17[1], 800, 260, "A Th17 cell makes IL-17, which makes the lining release IL-8 and call in neutrophils. Neutrophils release enzymes and oxygen radicals and often do not respond to steroid.");
+  pill(ox, "Airway muscle", 110, MY, 160, 400, "Smooth muscle around the airway. Histamine, leukotrienes and IL-13 make it tighten, which narrows the lumen. Eosinophils and neutrophils leave the blood through the vessel in this wall.");
   [[1, "Steroid: many genes off", 300, 214, 300, 236, "Inhaled corticosteroid: switches off many inflammatory genes in many cells, so type-2 and some neutrophilic signals fall."], [2, "Anti-IgE", 566, 206, 700, 158, "Anti-IgE antibody: mops up IgE so mast cells are no longer armed."], [3, "Anti-IL-5", 420, 276, 420, 262, "Anti-IL-5 antibody (or receptor blocker): cuts the eosinophil signal."], [4, "Anti-IL-4R alpha", 366, 214, 340, 304, "Blocks the receptor shared by IL-4 and IL-13: less IgE, mucus and twitchy muscle."], [5, "Anti-TSLP", 217, 193, 140, 174, "Anti-TSLP antibody: blocks an upstream alarmin, so the whole type-2 pathway quietens."], [6, "Bronchodilator", 700, 336, 770, 318, "A beta-2 agonist relaxes the airway muscle and opens the airway quickly. It does not treat the inflammation."]]
     .forEach(([d, n, x, y, tx, ty, tip]) => { dpills[d] = pill(ox, n, x, y, tx, ty, tip); dpills[d].style.opacity = 0; });
 }
