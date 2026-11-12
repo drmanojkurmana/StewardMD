@@ -202,6 +202,13 @@ test("paid stages: requests never carry the key to the solver, explanation gates
   fs.rmSync(root, { recursive: true, force: true });
 });
 
+test("onMod: a question shows under its module and under a second subject's module (tt)", () => {
+  assert.equal(PY.onMod({ t: "med-arrhythmias" }, "med-arrhythmias"), true);
+  assert.equal(PY.onMod({ t: "med-arrhythmias", tt: ["phm-antiarrhythmics"] }, "phm-antiarrhythmics"), true);
+  assert.equal(PY.onMod({ t: "med-arrhythmias" }, "phm-antiarrhythmics"), false);
+  assert.equal(PY.onMod({}, "med-arrhythmias"), false);
+});
+
 test("app pure: recall labels, paper titles, the NEET-PG pattern, paper order, module counts", () => {
   assert.deepEqual(PY.tagLabel([["neet-pg", 2024, "recall"], ["neet-pg", 2025, "recall"], ["neet-pg", 2025, "recall"]]), ["Asked in NEET-PG 2025, 2024 (recall)"]);
   assert.deepEqual(PY.tagLabel([{ exam: "neet-pg", year: 2023, kind: "official" }]), ["Asked in NEET-PG 2023"]);
