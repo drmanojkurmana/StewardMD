@@ -73,7 +73,8 @@ for (const l of wave3bLessons) {
     title: l.title,
     minutes: l.minutes,
     steps: l.steps.length,
-    gen: l.gen
+    gen: l.gen,
+    module: l.module
   };
   totalNewSteps += l.steps.length;
   console.log(`OK: wrote lesson ${l.module} (${l.steps.length} steps)`);

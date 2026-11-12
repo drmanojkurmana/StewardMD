@@ -541,11 +541,11 @@ const ALL12 = [
  ["rad-ir-safety", "ir_safety_contrast_radiation_consent", "Contrast AKI prevention, metformin rules, gadolinium caution, foetal dose, SIR thresholds, Montgomery consent"],
 ];
 let idx = JSON.parse(fs.readFileSync(path.join(LESSON_DIR, "index.json"), "utf8"));
-for (const m of M) idx.modules[m.id] = { title: m.title, minutes: 7, steps: m.steps.length, gen: "AI" };
+for (const m of M) idx.modules[m.id] = { title: m.title, minutes: 7, steps: m.steps.length, gen: "AI", module: m.id };
 for (const [id] of ALL12.slice(0, 6)) {
   if (!idx.modules[id]) {
     const L = JSON.parse(fs.readFileSync(path.join(LESSON_DIR, id + ".json"), "utf8"));
-    idx.modules[id] = { title: L.title, minutes: 7, steps: L.steps.length, gen: "AI" };
+    idx.modules[id] = { title: L.title, minutes: 7, steps: L.steps.length, gen: "AI", module: L.module || id };
   }
 }
 fs.writeFileSync(path.join(LESSON_DIR, "index.json"), JSON.stringify(idx, null, 1) + "\n");

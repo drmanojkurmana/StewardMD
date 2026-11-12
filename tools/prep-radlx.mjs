@@ -713,7 +713,7 @@ function put(key, file, type, dry) {
  * keeps that entry: a re-run of this pass must not send phones back to the older v<REV> copy. */
 export function indexWith(live, changed) {
   const mods = { ...((live && live.modules) || {}) };
-  for (const l of changed) if (mods[l.id] && !(mods[l.id].r > REV)) mods[l.id] = { ...mods[l.id], r: REV, steps: l.steps.length, minutes: l.minutes };
+  for (const l of changed) if (mods[l.id] && !(mods[l.id].r > REV)) mods[l.id] = { ...mods[l.id], r: REV, steps: l.steps.length, minutes: l.minutes, module: l.module || mods[l.id].module };
   return { ...live, v: 1, modules: mods };
 }
 async function upload(D, args) {

@@ -260,6 +260,26 @@
   }
   /* moduleOf(key, meta) -> the module a lesson belongs to. */
   function moduleOf(key, meta) { return (meta && meta.module) || key; }
+  /* Local calendar day, so a lesson added late in the evening is still that day. */
+  function isoDay(d) {
+    var y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+    return y + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+  }
+  function dayNum(iso) { var p = String(iso).split("-"); return Date.UTC(+p[0], +p[1] - 1, +p[2]); }
+  /* isNew(meta, today) -> true when meta.added is a YYYY-MM-DD within the last 45 days, inclusive. */
+  function isNew(meta, today) {
+    var a = meta && meta.added;
+    if (!a || !/^\d{4}-\d{2}-\d{2}$/.test(String(a))) return false;
+    var t = today instanceof Date ? today : new Date();
+    var diff = Math.round((dayNum(isoDay(t)) - dayNum(a)) / 86400000);
+    return diff >= 0 && diff <= 45;
+  }
+  function newTag(meta) { return isNew(meta) ? '<span class="pn-newtag">New</span>' : ""; }
+  function countNew(list, today) {
+    var n = 0;
+    (list || []).forEach(function (x) { if (isNew(x[1], today)) n++; });
+    return n;
+  }
   /* imgUrl(src, bankApi, apiBase) -> where an image step loads from. "api/prep/bank/..." goes through the bank API base
      (tests point it at fixtures); a root path on native gets the API origin (the app runs at https://localhost and
      only stewardmd.in/api is served). */
@@ -417,7 +437,7 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, groups: groups, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, groups: groups, moduleOf: moduleOf, isNew: isNew, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
     XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, visSay: visSay, stepSay: stepSay, stepSentences: stepSentences, alignSay: alignSay, voiceScore: voiceScore, bestVoice: bestVoice };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -1067,7 +1087,7 @@
   }
   function rowHtml(sid, mid, key, meta, s, label) {
     return '<button type="button" class="pn-row" data-act="l-open" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '" data-l="' + escH(key) + '"><span class="pn-ri" aria-hidden="true">' + ic("book") +
-      '</span><span class="pn-rb"><b>' + escH(label) + "</b><small>" + escH(entrySub(key, meta, s)) + "</small></span>" + ico("chev") + "</button>";
+      '</span><span class="pn-rb"><b>' + escH(label) + newTag(meta) + "</b><small>" + escH(entrySub(key, meta, s)) + "</small></span>" + ico("chev") + "</button>";
   }
   var SHOW = 3;
   /* The module's lessons: one row reads "Lesson"; several are listed by title, the first 3 then "Show all". */
@@ -1094,13 +1114,13 @@
     host = h;
     if (!wrap) return;
     index().then(function (ix) {
-      var sb = host.subjectById ? host.subjectById(sid) : null, mods = subjectLessons(ix, topics, sb && sb.sections), n = 0;
-      mods.forEach(function (m) { n += m.list.length; });
+      var sb = host.subjectById ? host.subjectById(sid) : null, mods = subjectLessons(ix, topics, sb && sb.sections), n = 0, nn = 0;
+      mods.forEach(function (m) { n += m.list.length; nn += countNew(m.list); });
       if (!n || !wrap.isConnected) return;
       if (wrap.querySelector("[data-act=l-subject]")) { wrap.hidden = false; return; }
       var b = G.document.createElement("button");
       b.type = "button"; b.__pnKeep = 1; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
-      b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + "</span>";
+      b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + (nn ? " · " + nn + " new" : "") + "</span>";
       var last = wrap.querySelector(".su-lastb");
       wrap.insertBefore(b, last || null);
       wrap.hidden = false;
@@ -1123,10 +1143,10 @@
       var ixs = host.ix ? host.ix() : {}, topics = (ixs[sid] && ixs[sid].topics) || [], sb = host.subjectById(sid), name = sb ? host.tx(sb.name) : "";
       index().then(function (ix) {
         if (host.stackTop() !== view) return;
-        var mods = subjectLessons(ix, topics, sb && sb.sections), s = store(), n = 0, done = 0;
-        mods.forEach(function (m) { m.list.forEach(function (x) { n++; if (s.ls[x[0]] && s.ls[x[0]].done) done++; }); });
+        var mods = subjectLessons(ix, topics, sb && sb.sections), s = store(), n = 0, done = 0, nn = 0;
+        mods.forEach(function (m) { m.list.forEach(function (x) { n++; if (isNew(x[1])) nn++; if (s.ls[x[0]] && s.ls[x[0]].done) done++; }); });
         host.paint(host.bar("Learn", escH(name), "back") + '<div class="pn-body pn-lsn-all">' +
-          (n ? '<p class="pn-mut pn-lsn-sum">' + n + (n === 1 ? " lesson" : " lessons") + " in " + mods.length + (mods.length === 1 ? " module" : " modules") + (done ? ", " + done + " finished" : "") + ". Each is a few short steps you can listen to, then quick questions.</p>" : '<p class="pn-empty">No lessons for this subject yet.</p>') +
+          (n ? '<p class="pn-mut pn-lsn-sum">' + n + (n === 1 ? " lesson" : " lessons") + " in " + mods.length + (mods.length === 1 ? " module" : " modules") + (nn ? ", " + nn + " new" : "") + (done ? ", " + done + " finished" : "") + ". Each is a few short steps you can listen to, then quick questions.</p>" : '<p class="pn-empty">No lessons for this subject yet.</p>') +
           groups(mods).map(function (g) {
             // One heading per system (taxonomy section) with all its lessons; a module outside every section keeps its own heading.
             return '<section class="pn-lsn-mod"><h2 class="pn-sec">' + host.tx(g.title) + (g.n > 1 ? ' <small class="pn-mut">' + g.n + " lessons</small>" : "") + '</h2><div class="pn-group">' + g.mods.map(function (m) { return m.list.map(function (x) { return rowHtml(sid, m.mid, x[0], x[1], s, x[1].title || host.tx(m.topic.title) || "Lesson"); }).join(""); }).join("") + "</div></section>";
