@@ -16,6 +16,15 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Pipeline:** `atlas-pipeline/bp3d-map.json` (HAND-CURATED canonical ↔ FMA mapping) → `atlas-pipeline/bp3d_import.py --src <human-atlas checkout> --write` → `atlas-pipeline/ontology.py --write` (merges `bp3d` + the `3D` modality into `ontology.json`). Living body: `atlas-pipeline/live3d.py --work atlas-pipeline/work/tsd --out <dir>` (marching cubes on the masks + slice-plane registration; needs the `.venv` with nibabel/scipy/skimage and the downloaded s0108 volumes) → `node atlas-pipeline/pack3d.mjs live --in <dir> --out atlas/3d --base 2227` (meshoptimizer simplify + pack) → `bp3d_import.py --write` picks up `live.json`. LOD: `node atlas-pipeline/pack3d.mjs lod --out atlas/3d` (writes `lod.json` + `*.lo.bin.gz`), then `bp3d_import.py --write`.
 - **Provenance / licence:** `HUMAN_ATLAS_PROVENANCE.md` (repo root) — upstream commit, checksums, rejects, modifications, the verbatim CC BY attribution
 - **Tests:** `test/atlas3d-data.test.mjs` (57) · `test/atlas3d-pure.test.mjs` (57) · `test/run-atlas3d-ui.mjs` (140, real headless WebGL via SwiftShader; serves on 8995; `CDP_PORT=<port>` picks the Chrome debug port and refuses a busy one, `SHOTS=<dir>` saves screenshots)
+- **Immersive CT (2026-11-12):** `ATLAS3D.openImmersive()` / `open({immersive:true})`, flag `smd_atlas_imm` (default ON,
+  `?immersive=0` kills it per device, needs `smd_atlas3d` too). Living body on top, `ct-live-torso-axial` underneath, one
+  slider for both. `st.imm` holds its state. `clipPlane()` always cuts ABOVE an axial slice here (+y is superior), and
+  render pass 5 redraws only the cut-away half at `st.imm.above` alpha (the "Above the slice" slider). Selection never opens
+  the sheet or moves the camera in this mode; a 3D tap selects the whole canonical structure so it matches the CT pins.
+  CT taps resolve to the nearest pin within 40 px (pins are points, not masks). Reads `atlas/<module>/atlas.json` +
+  `modules.json` (both bundled by build-www). Tests: `test/atlas-imm.test.mjs` (27, pure + data contract),
+  `test/run-atlas-imm-ui.mjs` (43, real WebGL + real touch on the CT, `CDP_PORT`/`BASE`/`SHOTS` like the 3D test).
+  Not copied from 2Doctor (decision 2026-11-12).
 - **Premium pass (2026-09-25):** WebGL context restore in place (plus a fresh canvas if never restored), per-chunk failure with Retry, byte progress, first-open gesture hint (`smd_atlas3d_hint`), X-ray slider + per-structure Fade, Undo, free Axial/Coronal/Sagittal cut plane, saved views (`smd_atlas3d_views`), snapshot/share with the CC BY credit drawn into the PNG (never in the DOM), Find it quiz, Taubin-smoothed living surfaces + fresnel skin.
 - **Status (2026-09-06):** built + RUN ON THE iPhone 15 Pro (build a3d8, iOS 27). Living body (66 parts: organs + skeleton + skin shell) streams in ~2 s from R2, 60 fps, cut planes register on the meshes, no JS errors. Reinstall after each web change: `build:www` → `cap copy ios` → rebuild `App` scheme → `devicectl uninstall` + `install` (wipes device-local data).
 
@@ -135,8 +144,13 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **`ATLAS.back()` delegates to `ATLAS3D.back()` first**, so swipe-back / Escape unwind About →
   Layers → search results → sheet → 3D layer → then the atlas. `ATLAS.openAt(module, sid, slice)`
   is the deep link the 3D rows use; it LOCKS the structure.
-- **The 3D sheet has no drag-to-resize** (atlas.js's `bindSheetDrag` is file-local); tapping the
-  grab handle or the title toggles `.full`. Peek height is 330 px so CT/MRI rows show.
+- **The 3D sheet resizes by drag** through `ATLAS._bindSheetDrag` (`sheetEl()`); tapping the grab handle or the
+  title also toggles `.full`. Peek height is 330 px so CT/MRI rows show.
+- **Canvas taps must divide out the Display zoom.** `home.js` zooms the whole document, so the canvas bounding rect is
+  in zoomed px while `clientWidth` and the backing store are not. `bindInput pos()` scales by `rect.width/clientWidth`
+  (fixed 2026-11-12; before that every pick landed off by the zoom factor).
+- **Two SwiftShader suites at once starve each other.** Running `run-atlas3d-ui.mjs` next to `run-atlas-ui.mjs` failed
+  the 3D suite's first open; alone it was clean. Run the WebGL suites one at a time.
 - **Headless test needs SwiftShader flags** (`--use-angle=swiftshader --enable-unsafe-swiftshader`);
   with `--disable-gpu` alone WebGL is absent and every 3D check fails. A render+pick pass is
   ~600 ms there; that is software GL, not a device number.

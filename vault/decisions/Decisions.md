@@ -12272,3 +12272,27 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Owner: "make it 10 better". Layout only: one-row kit header, one-line save note, sticky tool title with the live result, kit bar flush with the bottom edge. No change to what a kit writes or when.
 - Kept behind a flag (`?kitsui=0`) with recovery tag `kits-ui-pre-compact` until the owner approves on the phone; then the old header branch in `kitBody` can be deleted.
 - Not changed: three entry points (Specialty tab, Tools button, Home tile) still exist; consolidating them is the owner's call (vault note says "kept for now").
+
+## 2026-11-12 RadioAnatome Immersive CT: built from our own scan, not copied from 2Doctor
+- **Ask:** owner pointed at 2Doctor's "Immersive radiology" page (2doctor.ai/#radiologia: a 3D view of one CT with the
+  axial slice drawn through it, plus a tappable axial CT) and asked to crawl it and integrate it, then to "use their already
+  made one".
+- **Decision:** none of 2Doctor's code or files are in the app. A Copyright License PDF was supplied, but it had no
+  effective date, no licensor address and a licensor title that is not a role ("Edwig"), and it was signed the same day.
+  It could not be verified, so it was not treated as clearance and is not in the repo. Their own sources file shows
+  their data is TotalSegmentator s1397 (CC BY 4.0) prepared by a third party. Their viewer is three.js plus their own
+  app shell, which cannot run in our ES5 bundle. RadioAnatome already shipped the same kind of material: TotalSegmentator
+  living CT s0108 with expert masks, the 3D living body meshed from it, and 72 registered slice planes. So only the
+  layout was new.
+- **Built:** "Immersive CT" inside the 3D layer (`atlas3d.js` `openImmersive`): the living body on top, its own
+  axial CT (`ct-live-torso-axial`, 48 slices) underneath. The 3D cut follows the slice, and the anatomy above the slice
+  draws as an adjustable see-through ghost (render pass 5). A tap on a CT pin or on the 3D body names the structure on
+  both sides. A structure not on the slice offers "Go to slice N". Also: cine, Soft tissue/Lung/Bone windows (the 3D
+  texture follows), Show all labels with no overlaps. Entry: a catalog card under "3D Anatomy" and an "Immersive"
+  button on the Living CT tools.
+- **Flag:** `smd_atlas_imm`, default ON like the 3D layer it lives in; `?immersive=0` / localStorage `0` hides it on
+  one device. Recovery point: commit `15a0af15` (main before this change).
+- **Bug fixed on the way:** 3D canvas taps ignored the Display zoom (`documentElement.style.zoom`), so picks landed off by
+  the zoom factor (about 10 px in the test). `bindInput pos()` now divides it out, as `atlas.js stagePt()` does.
+- **Not done:** Chest-only and Head-and-neck regions. The neck and thorax-neck CT modules have no 3D meshes yet
+  (`bp3d-map.json _pending_3d`), and new geometry has to be uploaded to R2 before a build names it (see [[RadioAnatome 3D]]).

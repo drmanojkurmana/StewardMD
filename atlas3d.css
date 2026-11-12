@@ -201,3 +201,65 @@
   .a3d-btn, .a3d-pbar b { transition: none; }
   .a3d-btn:active { transform: none; }
 }
+
+/* ---------- Immersive CT: the living body and its axial CT on one screen ---------- */
+.atlas-3d-card.imm { margin-top: 4px; }
+.atlas-3d-card.imm i { background: #ffd27a; color: #2a1d00; font-size: 14px; }
+.a3d-imm { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.a3d-imm-cap { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 8px 12px 6px; }
+.a3d-imm-cap b { color: #eee; font-size: 13px; font-weight: 700; }
+.a3d-imm-cap small { color: #8fa3a1; font-size: 12px; text-align: right; }
+.a3d-imm-3d .a3d-stage { flex: none; height: clamp(200px, 36vh, 440px); margin: 0 12px; border-radius: 14px; background: #121416; }
+.a3d-imm-ct { padding: 0 12px; }
+.a3d-ct { max-width: 560px; margin: 0 auto; }
+.a3d-ct-box {
+  position: relative; width: 100%; height: 0; padding-bottom: 86.6%; overflow: hidden; border-radius: 14px; background: #000;
+  cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+.a3d-ct-box img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+.a3d-ct-pins { position: absolute; inset: 0; pointer-events: none; }
+.a3d-ct-pin {
+  position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%;
+  background: var(--c, #43d9c6); border: 1.5px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.65);
+}
+.a3d-ct-pin.on { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: #43d9c6; border: 2px solid #fff; box-shadow: 0 0 0 4px rgba(67,217,198,.35); }
+.a3d-ct-lbl {
+  position: absolute; box-sizing: border-box; height: 20px; line-height: 20px; padding: 0 7px; border-radius: 999px; text-align: center;
+  background: rgba(0,0,0,.76); color: #fff; font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.a3d-ct-lbl.on { background: rgba(6,102,90,.94); }
+.a3d-ct-edge { position: absolute; z-index: 1; color: #fff; font-size: 12px; font-weight: 700; text-shadow: 0 1px 2px #000; pointer-events: none; }
+.a3d-ct-edge.t { top: 6px; left: 50%; transform: translateX(-50%); }
+.a3d-ct-edge.b { bottom: 6px; left: 50%; transform: translateX(-50%); }
+.a3d-ct-edge.l { left: 8px; top: 50%; transform: translateY(-50%); }
+.a3d-ct-edge.r { right: 8px; top: 50%; transform: translateY(-50%); }
+.a3d-ct-wait { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; text-align: center; color: #aaa; font-size: 14px; }
+.a3d-ct-wait[hidden] { display: none; }
+.a3d-imm-info { max-width: 560px; margin: 0 auto; padding: 10px 2px 2px; min-height: 52px; }
+.a3d-imm-hint { margin: 0; color: #9aa; font-size: 14px; line-height: 1.45; }
+.a3d-imm-sel { display: flex; align-items: center; gap: 8px; }
+.a3d-imm-sel h3 { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 8px; margin: 0; color: #fff; font-size: 18px; font-weight: 700; }
+.a3d-imm-sel h3 i { width: 12px; height: 12px; border-radius: 50%; flex: 0 0 auto; }
+.a3d-imm-cat { display: inline-block; margin-top: 2px; color: #9cc; font-size: 12px; }
+.a3d-imm-def { margin: 6px 0 0; color: #ccc; font-size: 14px; line-height: 1.45; }
+.a3d-imm-go { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 8px; color: #ffd27a; font-size: 14px; }
+.a3d-imm-opts { max-width: 560px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; padding: 8px 0 16px; }
+.a3d-imm-opts .a3d-seg { flex: 1 0 100%; }
+.a3d-imm-check { display: flex; align-items: center; gap: 8px; min-height: 44px; color: #ddd; font-size: 14px; cursor: pointer; }
+.a3d-imm-check input { width: 20px; height: 20px; margin: 0; accent-color: #43d9c6; }
+.a3d-imm-above { flex: 1 1 200px; display: flex; align-items: center; gap: 10px; min-height: 44px; color: #bbb; font-size: 13px; }
+.a3d-imm-above input { flex: 1 1 auto; min-width: 80px; accent-color: #43d9c6; }
+.a3d-imm-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 12px; padding: 8px 12px; background: #141414; border-top: 1px solid #222; }
+.a3d-imm-slice { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; color: #9aa; font-size: 12px; }
+.a3d-imm-slice input { width: 100%; min-height: 32px; margin: 0; accent-color: #43d9c6; }
+.a3d-imm-n { flex: 0 0 auto; min-width: 44px; text-align: right; color: #ddd; font-size: 13px; font-variant-numeric: tabular-nums; }
+.a3d-btn.a3d-play { border-radius: 50%; font-size: 14px; }
+.a3d-pause { display: block; width: 12px; height: 14px; background: linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px, currentColor 8px 12px); }
+/* Tablet / landscape: the body and the CT side by side, each filling the height */
+@media (min-width: 760px) {
+  .a3d-imm { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 4px; overflow: hidden; }
+  .a3d-imm-3d { display: flex; flex-direction: column; min-height: 0; padding-bottom: 12px; }
+  .a3d-imm-3d .a3d-stage { flex: 1 1 auto; height: auto; min-height: 240px; }
+  .a3d-imm-ct { min-height: 0; overflow-y: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .a3d-btn.a3d-play { transition: none; } }

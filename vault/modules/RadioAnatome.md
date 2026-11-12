@@ -4,7 +4,7 @@ Educational cross-sectional anatomy atlas. Scroll a stack of labelled slices, ta
 structure, read its definition. Interaction modelled on e-Anatomy (IMAIOS); content
 built only from licence-cleared sources.
 
-- **Entry points:** Home tile `atlas` · sidebar row `RadioAnatome` · `stewardmd://atlas` · `ATLAS.open(moduleId?)`
+- **Entry points:** Home tile `atlas` · sidebar row `RadioAnatome` · `stewardmd://atlas` · `ATLAS.open(moduleId?)` · catalog cards "3D Anatomy" and "Immersive CT" (both in `atlas3d.js`, see [[RadioAnatome 3D]])
 - **Files:** `atlas.js`, `atlas.css`, `atlas/modules.json`, `atlas/<id>/atlas.json`, `atlas/<id>/NNN.webp`, `atlas/<id>/w/<window>/NNN.webp` (CT windows), `atlas/index.json` (search), `atlas/notes.json` (review-gated clinical notes)
 - **Pipeline:** `atlas-pipeline/` (dev-only, never shipped); `living.py` is the exact reproduction of the torso/brain chain; `atlas-index.mjs` writes the search index
 - **Spec:** `docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md` · premium pass contract `docs/radioanatome/PREMIUM_PLAN_2026-09-25.md` · orientation evidence `docs/radioanatome/ORIENTATION.md`

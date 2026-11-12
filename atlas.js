@@ -728,8 +728,12 @@
   function threeDCard() {
     if (!threeD()) return "";
     return '<button class="atlas-3d-card" data-atlas-act="3d"><i>3D</i>' +
-      '<span><b>3D Anatomy</b><span>Reference body · 2,200+ structures · linked to CT and MRI</span></span></button>';
+      '<span><b>3D Anatomy</b><span>Reference body · 2,200+ structures · linked to CT and MRI</span></span></button>' +
+      (immersive() ? '<button class="atlas-3d-card imm" data-atlas-act="imm"><i>CT</i>' +
+        '<span><b>Immersive CT</b><span>One living patient: 3D body and its CT on one screen, moving together</span></span></button>' : "");
   }
+  // Immersive CT (atlas3d.js, flag smd_atlas_imm) lives inside the 3D layer, so it needs both flags.
+  function immersive() { return threeD() && !!(G.ATLAS3D.immEnabled && G.ATLAS3D.immEnabled()); }
 
   // A module is Beta until a radiologist marks it verified on /validation; only then does
   // modules.json carry `verified: true`. New modules are Beta by default.
@@ -1902,6 +1906,7 @@
     if (a === "adjreset") { st.adj = { b: 100, c: 100 }; renderTools(); return drawOverlay(); }
     if (a === "zoomreset") { st.z = { s: 1, px: 0, py: 0 }; return drawOverlay(); }
     if (a === "cine") return toggleCine();
+    if (a === "imm") { if (immersive()) G.ATLAS3D.openImmersive(); return; }
     if (a === "3d") {
       if (!threeD()) return;
       var canon = b.getAttribute("data-canon");

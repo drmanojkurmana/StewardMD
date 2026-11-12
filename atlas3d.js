@@ -45,17 +45,66 @@
   // Scheme Search entry): no per-device gate on a new module. ?atlas3d=0 or
   // localStorage smd_atlas3d=0 still turns it off on one device; set DEFAULT_ON=false to close it.
   var DEFAULT_ON = true;
-  function enabled() {
+  function flagOn(key, query, def) {
     try {
-      var m = (G.location && G.location.search || "").match(new RegExp("[?&]" + QUERY + "=([^&]+)"));
+      var m = (G.location && G.location.search || "").match(new RegExp("[?&]" + query + "=([^&]+)"));
       if (m) return m[1] === "1" || m[1] === "on" || m[1] === "true";
-      var v = G.localStorage && G.localStorage.getItem(FLAG_KEY);
-      if (v == null || v === "") return DEFAULT_ON;
+      var v = G.localStorage && G.localStorage.getItem(key);
+      if (v == null || v === "") return def;
       return v === "1" || v === "on" || v === "true";
-    } catch (e) { return DEFAULT_ON; }
+    } catch (e) { return def; }
   }
+  function enabled() { return flagOn(FLAG_KEY, QUERY, DEFAULT_ON); }
+
+  // Immersive CT: the living body and its own axial CT on one screen, moving together (the 3D
+  // cut follows the slice, the half above the slice turns see-through, a tap on either side
+  // names the structure on both). Flag smd_atlas_imm, default ON like the 3D layer it lives in;
+  // ?immersive=0 or localStorage smd_atlas_imm=0 hides its entry points on one device.
+  var IMM_KEY = "smd_atlas_imm", IMM_QUERY = "immersive", IMM_DEFAULT_ON = true;
+  var IMM_MODULE = "ct-live-torso-axial";      // the slice stack the living body was meshed from
+  function immEnabled() { return enabled() && flagOn(IMM_KEY, IMM_QUERY, IMM_DEFAULT_ON); }
 
   /* ---------- pure helpers (exported for tests) ---------- */
+
+  // Immersive CT helpers. Pins are percentages of the IMAGE box (x of its width, y of its
+  // height), stored unflipped; `flipX` mirrors them for display only.
+  function immShownX(x, flipX) { return flipX ? 100 - x : x; }
+  // The pin nearest a tap, in pixels of a box w x h, or null when none is within maxPx.
+  // x/y are the tap in image percent, already unflipped.
+  function immNearestPin(pins, x, y, w, h, maxPx) {
+    var best = null, bd = Infinity;
+    (pins || []).forEach(function (p) {
+      var dx = (p.x - x) / 100 * w, dy = (p.y - y) / 100 * h, d = Math.sqrt(dx * dx + dy * dy);
+      if (d < bd) { bd = d; best = p; }
+    });
+    return best && bd <= maxPx ? best : null;
+  }
+  // The slice (1-based i) nearest `from` that pins any structure whose canonical id is cid.
+  function immNearestSlice(slices, cid, from) {
+    var best = null, bd = Infinity;
+    (slices || []).forEach(function (s) {
+      var has = (s.pins || []).some(function (p) { return canonicalOf(p.s) === cid; });
+      if (!has) return;
+      var d = Math.abs(s.i - from);
+      if (d < bd) { bd = d; best = s.i; }
+    });
+    return best;
+  }
+  // Greedy label placement: keep a label only when its box clears every label already placed.
+  // items: [{x, y, w, h}] in px, the label centred above its pin (x, y) and kept inside the
+  // box; each kept item gets its top-left as it.l / it.t. Returns the indices kept.
+  function immPlaceLabels(items, boxW, boxH) {
+    var kept = [], boxes = [];
+    (items || []).forEach(function (it, i) {
+      var l = Math.max(0, Math.min(boxW - it.w, it.x - it.w / 2)), t = Math.max(0, it.y - it.h - 7), r = l + it.w, b = t + it.h;
+      if (b > boxH) return;
+      for (var k = 0; k < boxes.length; k++) { var o = boxes[k]; if (l < o[2] && r > o[0] && t < o[3] && b > o[1]) return; }
+      boxes.push([l, t, r, b]); it.l = l; it.t = t; kept.push(i);
+    });
+    return kept;
+  }
+  // Windowed variants live beside the slice (same rule as atlas.js windowUrl).
+  function immWindowUrl(img, win) { return win ? String(img == null ? "" : img).replace(/\/([^/]+)$/, "/w/" + win + "/$1") : img; }
 
   function canonicalOf(sid) { return String(sid == null ? "" : sid).replace(/-/g, "_").toUpperCase(); }
 
@@ -292,7 +341,8 @@
     subject: null, dirty: true, raf: 0, err: "", progress: 0, _tab: "about", _prevFocus: null, from: null,
     // premium controls; each null/empty value leaves the default view exactly as before
     faded: {}, xray: null, clip: null, hist: [], quiz: null, failed: {}, lost: false,
-    bytesDone: 0, bytesTotal: 0, counted: {}, _ghostA: 0.16, _othersOpaque: 1, _bounds: {}
+    bytesDone: 0, bytesTotal: 0, counted: {}, _ghostA: 0.16, _othersOpaque: 1, _bounds: {},
+    imm: null           // Immersive CT state while that view is open (openImmersive)
   };
   var HINT_KEY = "smd_atlas3d_hint", VIEWS_KEY = "smd_atlas3d_views", MAX_VIEWS = 20;
 
@@ -513,10 +563,12 @@
     " if (vState.r < 0.5) discard;",
     " bool sel = vState.g > 0.5; bool fade = vFade > 0.5 && !sel;",
     // the registered CT cut spares the selection (uClipSel); the free cut plane cuts everything
-    " if (uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w && !(uClipSel > 0.5 && sel)) discard;",
+    " bool cut = uClipOn > 0.5 && dot(vP, uClip.xyz) > uClip.w;",
+    // pass 5 (Immersive CT): ONLY the cut-away half, as a see-through ghost above the slice
+    " if (uPass > 4.5) { if (!cut || sel) discard; } else if (cut && !(uClipSel > 0.5 && sel)) discard;",
     " float shell = (vState.b > 0.4 && vState.b < 0.75) ? 1.0 : 0.0;", // body outline (living CT skin)
-    " if (uPass < 3.5 && shell > 0.5) discard;",                     // shell renders only in pass 4
-    " if (uPass > 3.5 && shell < 0.5) discard;",
+    " if ((uPass < 3.5 || uPass > 4.5) && shell > 0.5) discard;",    // shell renders only in pass 4
+    " if (uPass > 3.5 && uPass < 4.5 && shell < 0.5) discard;",
     // pass 1: opaque = the selection, plus everything else unless it is x-rayed (uOthers 0); never a faded part
     " if (uPass > 0.5 && uPass < 1.5 && !sel && (fade || uOthers < 0.5)) discard;",
     // pass 2: translucent = the x-rayed rest and the faded parts
@@ -724,7 +776,7 @@
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
       gl.uniform1f(prog.u.uPass, pass || 0);
-      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : st._ghostA);
+      gl.uniform1f(prog.u.uGhost, pass === 3 ? 0.42 : pass === 4 ? 0.26 : pass === 5 ? immAbove() : st._ghostA);
     }
     var sysIdx = {}; d.systems.forEach(function (s, i) { sysIdx[s.id] = i; });
     var want = srcIndex();
@@ -759,6 +811,13 @@
       gl.disable(gl.BLEND); gl.depthMask(true);
     } else drawScene(R.main, false, 0);
     drawSliceQuad();
+    if (st.imm && st.plane && immAbove() > 0.005) {
+      // Immersive CT: the anatomy above the slice stays in view as a translucent ghost, so the
+      // slice reads as a level through a whole body rather than the top of a cut-off block.
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
+      drawScene(R.main, false, 5);
+      gl.depthMask(true); gl.disable(gl.BLEND);
+    }
     if (st.plane && st.sel.length) {
       // The selected structure must stay readable THROUGH the slice: the cut removes the near
       // half and the slice hides the far half, so redraw the selection as a ghost, no depth test.
@@ -834,7 +893,10 @@
   function clipPlane(eye) {
     var p = planeInfo();
     if (!p) return st.clip ? freeClip(st.clip.axis, st.clip.t, st.clip.flip, srcBounds()) : null;
-    var n = p.axis === "x" ? [1, 0, 0] : p.axis === "z" ? [0, 0, 1] : [0, 1, 0];
+    // Immersive CT always removes what is ABOVE an axial slice (+y is superior in this frame),
+    // whichever side the camera is on, so "above the slice" means the same thing at every angle.
+    if (st.imm && p.axis === "y") return [0, 1, 0, p.pos];
+    var n =p.axis === "x" ? [1, 0, 0] : p.axis === "z" ? [0, 0, 1] : [0, 1, 0];
     var side = dot(eye, n) - p.pos;
     if (side < 0) { n = [-n[0], -n[1], -n[2]]; }
     return [n[0], n[1], n[2], dot(n, p.axis === "x" ? [p.pos, 0, 0] : p.axis === "z" ? [0, 0, p.pos] : [0, p.pos, 0])];
@@ -852,6 +914,7 @@
     // stays as the fallback.
     var entry = d.planes[pl.m] && d.planes[pl.m][String(pl.i)];
     var url = (entry && entry.img) || "/atlas/" + pl.m + "/" + ("00" + pl.i).slice(-3) + ".webp";
+    if (st.imm && st.imm.win && entry && entry.img) url = immWindowUrl(url, st.imm.win);   // the CT window the user picked
     var img = new G.Image();
     img.crossOrigin = "anonymous";
     pl.ready = false;
@@ -912,6 +975,7 @@
     if (st.src !== "live") setSource("live", { keepSel: true });
     loadSliceTexture();
     paintBar();
+    if (st.imm) { paintImm(); invalidate(); return true; }
     if (!(opts && opts.noFocus)) {
       var p = d.planes[m][String(i)], tl = p.tl, u = p.u, v = p.v;
       var b = [Math.min(tl[0], tl[0] + u[0] + v[0]), Math.min(tl[1], tl[1] + u[1] + v[1]), Math.min(tl[2], tl[2] + u[2] + v[2]),
@@ -1054,7 +1118,11 @@
   }
   function bindInput(cv) {
     var ptrs = {}, n = 0, last = null, t0 = 0, moved = 0, pinch0 = 0, dist0 = 0, mid0 = null;
-    function pos(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+    // In the canvas's own CSS pixels. The app's Display setting zooms the whole document
+    // (home.js applyD sets documentElement.style.zoom), so the bounding rect is in zoomed
+    // pixels while clientWidth (and the backing store) are not: divide the zoom back out, the
+    // way atlas.js stagePt() does, or every pick lands off by the zoom factor.
+    function pos(e) { var r = cv.getBoundingClientRect(), k = (cv.clientWidth && r.width) ? r.width / cv.clientWidth : 1; return [(e.clientX - r.left) / k, (e.clientY - r.top) / k]; }
     cv.addEventListener("pointerdown", function (e) {
       ptrs[e.pointerId] = pos(e); n = Object.keys(ptrs).length;
       try { cv.setPointerCapture(e.pointerId); } catch (x) {}
@@ -1102,6 +1170,14 @@
   /* ---------- selection ---------- */
   function onTap(i) {
     if (i < 0) { if (st.subject && st.subject.kind === "part") { select([], null); } return; }
+    if (st.imm) {
+      // Immersive CT names STRUCTURES, the unit the CT pins use: a tap on one kidney selects both,
+      // so the 3D highlight and the pins on the slice always agree.
+      var cid = canonOfPart(st.data, i), ce = cid && st.data.canon[cid];
+      if (ce && ce.live && ce.live.length) { select(ce.live, { kind: "canon", cid: cid }, { noFocus: true }); return; }
+      select([i], { kind: "part", i: i }, { noFocus: true });
+      return;
+    }
     select([i], { kind: "part", i: i });
   }
   function select(idxs, subject, opts) {
@@ -1110,7 +1186,10 @@
     applyState();
     var missing = neededChunks();
     if (missing.length) ensureChunks();
-    if (st.subject) { openSheet(); if (!(opts && opts.noFocus)) focusOn(st.sel, { pad: 1.25 }); }
+    // Immersive CT shows the name under the slice instead of a sheet over it, and never moves
+    // the camera on a selection: the slice level is what the user is studying.
+    if (st.imm) { closeSheet(); paintImm(); }
+    else if (st.subject) { openSheet(); if (!(opts && opts.noFocus)) focusOn(st.sel, { pad: 1.25 }); }
     else closeSheet();
     paintBar();
     invalidate();
@@ -1234,6 +1313,7 @@
     el.innerHTML = sliceRow + clipRowHtml() +
       '<div class="a3d-tools">' +
         (st.src === "live" && defaultPlaneModule() ? '<button class="a3d-btn' + on(pl) + '" data-a3d-act="ctslice"' + pr(!!pl) + ' aria-label="Show a CT slice through the body">CT slice</button>' : "") +
+        (st.src === "live" && immEnabled() && st.data.planes[IMM_MODULE] ? '<button class="a3d-btn" data-a3d-act="immopen" aria-label="Immersive CT: the body and its CT on one screen">Immersive</button>' : "") +
         (st.hist.length ? '<button class="a3d-btn accent" data-a3d-act="undo" aria-label="Undo the last hide, fade or isolate">Undo</button>' : "") +
         (hidden || faded ? '<button class="a3d-btn" data-a3d-act="unhide" aria-label="Show all hidden and faded structures">Show all ' + (hidden + faded) + "</button>" : "") +
         '<button class="a3d-btn" data-a3d-act="systems" aria-label="Layers and saved views">' + (ico("layers") || "") + "Layers</button>" +
@@ -1658,10 +1738,18 @@
   function onClick(e) {
     var grab = e.target && e.target.closest ? e.target.closest(".a3d-sheet .atlas-grab, .a3d-sheet .atlas-sheet-ttl") : null;
     if (grab) { var sh = G.document.getElementById("a3dSheet"); if (sh) sh.classList.toggle("full"); return; }
+    var ctBox = st.imm && e.target && e.target.closest ? e.target.closest("#a3dCtBox") : null;
+    if (ctBox) { immTapCt(e, ctBox); return; }
     var t = e.target && e.target.closest ? e.target.closest("[data-a3d-act]") : null;
     if (!t || t.tagName === "INPUT") return;
     var act = t.getAttribute("data-a3d-act"), d = st.data;
     if (act === "close") { close(); return; }
+    if (act === "immopen") { close(); open({ immersive: true }); return; }
+    if (act === "immplay") { immPlay(!(st.imm && st.imm.play)); return; }
+    if (act === "immwin" && st.imm) { st.imm.win = t.getAttribute("data-w") || null; loadSliceTexture(); paintImm(); return; }
+    if (act === "immgo") { immPlay(false); immGo(+t.getAttribute("data-i")); return; }
+    if (act === "immmore") { openSheet(); return; }
+    if (act === "immclear") { select([], null); return; }
     if (act === "info") { pushPanel(infoHtml()); return; }
     if (act === "systems") { pushPanel(systemsHtml()); return; }
     if (act === "panelclose") { dropPanel("a3dInfo"); dropPanel("a3dSystems"); return; }
@@ -1722,6 +1810,8 @@
     if (act === "sys") setSystem(t.getAttribute("data-id"), t.checked);
     if (act === "shell") { st.shell = !!t.checked; applyState(); ensureChunks(); invalidate(); }
     if (act === "bowel") { st.bowel = !!t.checked; liveDefaults(); applyState(); invalidate(); }
+    if (act === "immall" && st.imm) { st.imm.all = !!t.checked; paintImm(); }
+    if (act === "immslice" || act === "immabove") onInput(e);
     if (act === "lod") { setLod(!t.checked); var sm = t.parentNode && t.parentNode.querySelector("small"); if (sm) sm.textContent = st.lod ? "mobile LOD" : "2.3M triangles"; }
     if (act === "explode") { st.explodeTarget = (+t.value || 0) / 100; schedule(); }
     if (act === "slice" && st.plane) { setPlane(st.plane.m, +t.value, { noFocus: true }); if (st.subject) openSheet(); }
@@ -1734,6 +1824,8 @@
     // both sliders redraw live while dragging, so the effect is visible under the finger
     if (act === "xray") { st.xray = 1 - (+t.value || 0) / 100; t.setAttribute("aria-valuetext", t.value + " percent"); invalidate(); }
     if (act === "clippos" && st.clip) { st.clip.t = (+t.value || 0) / 100; invalidate(); }
+    if (act === "immslice" && st.imm) { immPlay(false); immGo(+t.value); t.setAttribute("aria-valuetext", "Slice " + t.value + " of " + (st.plane ? st.plane.n : "")); }
+    if (act === "immabove" && st.imm) { st.imm.above = (+t.value || 0) / 100; t.setAttribute("aria-valuetext", t.value + " percent"); invalidate(); }
   }
   function onKey(e) { if (e.key === "Enter" && e.target && e.target.id === "a3dViewName") { e.preventDefault(); saveView(); } }
   function onSliceInput(e) {
@@ -1741,6 +1833,208 @@
     var lbl = t.parentNode && t.parentNode.querySelector("span"); if (lbl) lbl.textContent = "Slice " + t.value + "/" + st.plane.n;
   }
   function hideResults() { var q = G.document.getElementById("a3dQ"); if (q) q.value = ""; var box = G.document.getElementById("a3dResults"); if (box) { box.hidden = true; box.innerHTML = ""; } }
+
+  /* ---------- Immersive CT ---------- */
+  // The same living patient twice: the meshed body on top, its axial CT underneath. Both are
+  // the files RadioAnatome already ships (atlas/ct-live-torso-axial + the live 3D chunks); the
+  // 3D cut plane is the registered plane of the slice on show, so the two cannot disagree.
+  var _immP = null;
+  function immFetchJson(u) { return G.fetch(u).then(function (r) { if (!r || !r.ok) throw new Error("http " + u); return r.json(); }); }
+  function loadImmData() {
+    if (_immP) return _immP;
+    var cat = (G.ATLAS && G.ATLAS._state && G.ATLAS._state.catalog) || null;
+    var metaP = cat && cat.modules ? Promise.resolve(cat) : immFetchJson("/atlas/modules.json");
+    _immP = Promise.all([immFetchJson("/atlas/" + IMM_MODULE + "/atlas.json"), metaP]).then(function (r) {
+      var mods = (r[1] && (r[1].modules || r[1])) || [];
+      var meta = (mods.filter ? mods.filter(function (m) { return m.id === IMM_MODULE; })[0] : null) || {};
+      return { atlas: r[0], meta: meta };
+    });
+    _immP.catch(function () { _immP = null; });
+    return _immP;
+  }
+  function immAbove() { return st.imm ? st.imm.above : 0; }
+  function immShellHtml() {
+    return '<div class="atlas-top">' +
+        '<button class="atlas-back" data-a3d-act="close" aria-label="Back">‹</button>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">Immersive CT</span><span class="atlas-sub" id="a3dSub">Living-patient CT · lower chest to pelvis</span></span>' +
+        '<button class="atlas-info" data-a3d-act="info" aria-label="About the 3D anatomy">' + (ico("info") || "i") + "</button></div>" +
+      '<div class="a3d-imm" id="a3dImm">' +
+        '<section class="a3d-imm-3d" aria-label="3D body">' +
+          '<div class="a3d-imm-cap"><b>3D body</b><small>Drag to rotate · pinch to zoom · tap to name</small></div>' +
+          '<div class="a3d-stage" id="a3dStage"><canvas id="a3dCanvas" aria-label="3D body cut at the CT slice. Drag to orbit, pinch to zoom, tap a structure to name it."></canvas>' +
+            '<div class="a3d-label" id="a3dLabel" hidden></div>' +
+            '<div class="a3d-progress" id="a3dProgress"></div></div>' +
+        "</section>" +
+        '<section class="a3d-imm-ct" aria-label="Axial CT">' +
+          '<div class="a3d-imm-cap"><b>Axial CT</b><small id="a3dImmLvl"></small></div>' +
+          '<div class="a3d-ct" id="a3dCt"><div class="a3d-ct-box" id="a3dCtBox" role="img" aria-label="Axial CT slice. Tap a structure to name it.">' +
+            '<img id="a3dCtImg" alt="" draggable="false"><div class="a3d-ct-pins" id="a3dCtPins"></div>' +
+            '<span class="a3d-ct-edge t" id="a3dEdT"></span><span class="a3d-ct-edge b" id="a3dEdB"></span>' +
+            '<span class="a3d-ct-edge l" id="a3dEdL"></span><span class="a3d-ct-edge r" id="a3dEdR"></span>' +
+            '<div class="a3d-ct-wait" id="a3dCtWait">Loading CT</div></div></div>' +
+          '<div class="a3d-imm-info" id="a3dImmInfo" aria-live="polite"></div>' +
+          '<div class="a3d-imm-opts" id="a3dImmOpts"></div>' +
+        "</section>" +
+      "</div>" +
+      '<div class="a3d-imm-bar" id="a3dImmBar"></div>' +
+      '<div class="atlas-foot">Educational reference only, not for diagnosis.</div>';
+  }
+  function immSlice() { var a = st.imm && st.imm.atlas; return a && st.plane ? (a.slices[st.plane.i - 1] || null) : null; }
+  function immCid() { var d = st.data, s = st.subject; return d && s ? subjectCanon(d, s) : null; }
+  // The CT's own name for a canonical structure (its atlas.json key), for the definition and colour.
+  function immStruct(cid) {
+    var a = st.imm && st.imm.atlas; if (!a || !cid) return null;
+    for (var k in a.structures) if (canonicalOf(k) === cid) return { id: k, s: a.structures[k] };
+    return null;
+  }
+  function immCatColor(sid) {
+    var a = st.imm.atlas, s = a.structures[sid], c = s && a.categories[s.category];
+    return (c && c.color) || "#43d9c6";
+  }
+  function immCamera() {
+    var idxs = st.data.parts.filter(function (p) { return p.src === 1; }).map(function (p) { return p.i; });
+    var b = unionBounds(st.data, idxs); if (!b) return;
+    var aspect = st.canvas ? st.canvas.width / Math.max(1, st.canvas.height) : 1;
+    // three-quarter view from above the patient's front: the slice face and the body below it
+    // both read, and the ghost above sits behind the slice rather than over it
+    st.camTo = { target: center(b), yaw: 0.55, pitch: 0.42, dist: fitDistance(b, 34, aspect) * 0.74 };
+    schedule();
+  }
+  function paintImm() {
+    if (!st.imm || !G.document) return;
+    paintImmCt(); paintImmInfo(); paintImmBar();
+  }
+  function paintImmCt() {
+    var s = immSlice(), meta = st.imm.meta || {}, flip = !!meta.flipX;
+    var img = G.document.getElementById("a3dCtImg"), box = G.document.getElementById("a3dCtBox");
+    var pinsEl = G.document.getElementById("a3dCtPins"), wait = G.document.getElementById("a3dCtWait");
+    if (!img || !box || !pinsEl) return;
+    if (!s) { if (wait) wait.hidden = false; return; }
+    box.style.paddingBottom = (100 / (s.aspect || 1)).toFixed(3) + "%";
+    img.className = flip ? "flip" : "";
+    var url = imgUrl(immWindowUrl(s.img, st.imm.win));
+    if (img.getAttribute("src") !== url) {
+      if (wait) wait.hidden = !!img.getAttribute("src");    // only the very first image shows the wait note
+      img.onload = function () { if (wait) wait.hidden = true; };
+      img.onerror = function () { if (wait) { wait.hidden = false; wait.textContent = "CT image could not load"; } };
+      img.setAttribute("src", url);
+    }
+    // the next slices, so scrubbing and cine do not wait on the network
+    [1, 2].forEach(function (k) { var n = st.imm.atlas.slices[st.plane.i - 1 + k]; if (n) { var p = new G.Image(); p.src = imgUrl(immWindowUrl(n.img, st.imm.win)); } });
+    var o = meta.orient || {};
+    [["a3dEdT", o.top], ["a3dEdB", o.bottom], ["a3dEdL", o.left], ["a3dEdR", o.right]].forEach(function (e) { var el = G.document.getElementById(e[0]); if (el) el.textContent = e[1] || ""; });
+    var lvl = G.document.getElementById("a3dImmLvl");
+    if (lvl) lvl.textContent = "Slice " + st.plane.i + " of " + st.plane.n;
+    // pins: the selected structure always, every structure when "Show all labels" is on
+    var cid = immCid(), w = box.clientWidth || 300, h = box.clientHeight || 260, a = st.imm.atlas;
+    var pins = (s.pins || []).map(function (p) { return { p: p, on: !!cid && canonicalOf(p.s) === cid }; })
+      .filter(function (q) { return q.on || st.imm.all; });
+    pins.sort(function (x, y) { return (y.on ? 1 : 0) - (x.on ? 1 : 0); });
+    var seen = {}, items = [];
+    pins.forEach(function (q, k) {
+      var nm = (a.structures[q.p.s] || {}).name || q.p.s;
+      // a bilateral structure is pinned twice; label it once, on its first pin
+      q.label = seen[q.p.s] ? "" : nm; seen[q.p.s] = 1;
+      items.push({ x: immShownX(q.p.x, flip) / 100 * w, y: q.p.y / 100 * h, w: q.label ? Math.round(q.label.length * 6.9 + 16) : 0, h: q.label ? 20 : 0, k: k });
+    });
+    var lab = items.filter(function (it) { return it.w; }), keep = {};
+    immPlaceLabels(lab, w, h).forEach(function (i) { keep[lab[i].k] = lab[i]; });
+    pinsEl.innerHTML = pins.map(function (q, k) {
+      var x = immShownX(q.p.x, flip), col = immCatColor(q.p.s), L = keep[k];
+      return '<i class="a3d-ct-pin' + (q.on ? " on" : "") + '" style="left:' + x.toFixed(2) + "%;top:" + q.p.y.toFixed(2) + "%;--c:" + esc(col) + '"></i>' +
+        (q.label && L ? '<b class="a3d-ct-lbl' + (q.on ? " on" : "") + '" style="left:' + Math.round(L.l) + "px;top:" + Math.round(L.t) + "px;width:" + L.w + 'px">' + esc(q.label) + "</b>" : "");
+    }).join("");
+  }
+  function paintImmInfo() {
+    var el = G.document.getElementById("a3dImmInfo"); if (!el) return;
+    var d = st.data, s = st.subject;
+    if (!s) {
+      el.innerHTML = st.imm.miss
+        ? '<p class="a3d-imm-hint">No labelled structure there. Tap closer to an organ, or turn on Show all labels.</p>'
+        : '<p class="a3d-imm-hint">Tap the CT or the 3D body to name a structure. Move the slice to follow it through the body.</p>';
+      return;
+    }
+    var cid = immCid(), cs = immStruct(cid), title = cs ? cs.s.name : subjectTitle(d, s);
+    var def = cs && cs.s.definition ? cs.s.definition : "";
+    var cat = cs && st.imm.atlas.categories[cs.s.category];
+    var onSlice = !!cid && (immSlice() && (immSlice().pins || []).some(function (p) { return canonicalOf(p.s) === cid; }));
+    var go = !onSlice && cid ? immNearestSlice(st.imm.atlas.slices, cid, st.plane ? st.plane.i : 1) : null;
+    el.innerHTML = '<div class="a3d-imm-sel">' +
+        '<h3>' + (cat ? '<i style="background:' + esc(cat.color) + '"></i>' : "") + esc(title) + "</h3>" +
+        '<button class="a3d-btn sm" data-a3d-act="immmore" aria-label="More about ' + esc(title) + '">More</button>' +
+        '<button class="a3d-btn sm icon" data-a3d-act="immclear" aria-label="Clear the selection">' + (ico("close") || "×") + "</button></div>" +
+      (cat ? '<span class="a3d-imm-cat">' + esc(cat.label) + "</span>" : "") +
+      (def ? '<p class="a3d-imm-def">' + esc(def) + "</p>" : "") +
+      (go ? '<div class="a3d-imm-go"><span>Not on this slice.</span><button class="a3d-btn sm accent" data-a3d-act="immgo" data-i="' + go + '">Go to slice ' + go + "</button></div>"
+          : (!onSlice && cid ? '<p class="a3d-imm-hint">Not pinned on any slice of this CT.</p>' : ""));
+  }
+  function paintImmBar() {
+    var bar = G.document.getElementById("a3dImmBar"), opts = G.document.getElementById("a3dImmOpts");
+    if (!bar || !opts || !st.plane) return;
+    var pl = st.plane, playing = !!st.imm.play;
+    var rng = bar.querySelector("input[data-a3d-act=immslice]");
+    if (rng && G.document.activeElement === rng) {
+      // mid-drag: update in place, never rebuild the slider under the finger
+      rng.value = pl.i; var sp = bar.querySelector(".a3d-imm-n"); if (sp) sp.textContent = pl.i + "/" + pl.n;
+      var pb = bar.querySelector("[data-a3d-act=immplay]"); if (pb) pb.setAttribute("aria-pressed", playing ? "true" : "false");
+    } else {
+      // no cine under reduced motion, the same rule as the 2D viewer's Play
+      var reduce = false; try { reduce = !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) {}
+      bar.innerHTML = (reduce ? "" : '<button class="a3d-btn icon a3d-play' + (playing ? " on" : "") + '" data-a3d-act="immplay" aria-pressed="' + (playing ? "true" : "false") + '" aria-label="' + (playing ? "Pause" : "Play through the slices") + '">' +
+          (playing ? '<i class="a3d-pause" aria-hidden="true"></i>' : (ico("play") || "Play")) + "</button>") +
+        '<label class="a3d-imm-slice"><span>Slice level</span><input type="range" min="1" max="' + pl.n + '" value="' + pl.i + '" data-a3d-act="immslice" aria-label="CT slice level" aria-valuetext="Slice ' + pl.i + " of " + pl.n + '"></label>' +
+        '<span class="a3d-imm-n">' + pl.i + "/" + pl.n + "</span>";
+    }
+    if (!opts.firstChild || opts._win !== st.imm.win || opts._all !== st.imm.all) {
+      var wins = (st.imm.meta && st.imm.meta.windows) || [];
+      opts._win = st.imm.win; opts._all = st.imm.all;
+      opts.innerHTML = (wins.length > 1 ? '<div class="a3d-seg" role="radiogroup" aria-label="CT window">' + wins.map(function (w, k) {
+          var id = k ? w.id : null, on = (st.imm.win || null) === id;
+          return '<button class="a3d-segbtn' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-a3d-act="immwin" data-w="' + esc(id || "") + '">' + esc(w.label) + "</button>";
+        }).join("") + "</div>" : "") +
+        '<label class="a3d-imm-check"><input type="checkbox" data-a3d-act="immall"' + (st.imm.all ? " checked" : "") + "> Show all labels</label>" +
+        '<label class="a3d-imm-above"><span>Above the slice</span><input type="range" min="0" max="80" value="' + Math.round(st.imm.above * 100) + '" data-a3d-act="immabove" aria-label="See-through anatomy above the slice" aria-valuetext="' + Math.round(st.imm.above * 100) + ' percent"></label>';
+    }
+  }
+  function immGo(i) {
+    if (!st.imm || !st.plane) return;
+    var n = st.plane.n; i = Math.max(1, Math.min(n, Math.round(i)));
+    if (i !== st.plane.i) setPlane(IMM_MODULE, i, { noFocus: true });
+  }
+  function immPlay(on) {
+    if (!st.imm) return;
+    clearInterval(st.imm.play); st.imm.play = null;
+    if (on) st.imm.play = setInterval(function () {
+      if (!st.imm || !isOpen() || (G.document && G.document.hidden)) { immPlay(false); return; }
+      immGo(st.plane.i >= st.plane.n ? 1 : st.plane.i + 1);
+    }, 220);
+    paintImmBar();
+  }
+  // A tap on the CT names the structure whose pin is nearest (pins are points, not masks, so
+  // each pin owns the area closest to it), within ~40 px; the 3D side highlights the same one.
+  function immTapCt(e, box) {
+    var s = immSlice(); if (!s) return;
+    var r = box.getBoundingClientRect(); if (!r.width || !r.height) return;
+    var fx = (e.clientX - r.left) / r.width * 100, fy = (e.clientY - r.top) / r.height * 100;
+    var x = immShownX(fx, !!(st.imm.meta && st.imm.meta.flipX));      // the same reflection undoes itself
+    var hit = immNearestPin(s.pins, x, fy, box.clientWidth, box.clientHeight, 40);
+    if (!hit) { st.imm.miss = true; select([], null); st.imm.miss = false; return; }
+    var cid = canonicalOf(hit.s), ce = st.data.canon[cid];
+    if (ce && ce.live && ce.live.length) select(ce.live, { kind: "canon", cid: cid }, { noFocus: true });
+    else { st.subject = { kind: "canon", cid: cid }; st.sel = []; applyState(); paintImm(); invalidate(); }
+  }
+  function startImmersive(d) {
+    if (!d.planes[IMM_MODULE]) { st.err = "Immersive CT needs the living-CT body, which this build does not have."; paintProgress(); return; }
+    setSource("live", { keepCam: true });
+    loadImmData().then(function (x) {
+      if (!st.imm || !isOpen()) return;
+      st.imm.atlas = x.atlas; st.imm.meta = x.meta;
+      setPlane(IMM_MODULE, Math.round(midSlice(IMM_MODULE) * 0.75), { noFocus: true });   // upper abdomen: liver, stomach, kidneys, spleen
+      immCamera(); paintImm();
+    }).catch(function () {
+      var w = G.document.getElementById("a3dCtWait"); if (w) { w.hidden = false; w.textContent = "The CT could not load. Check the connection and open it again."; }
+    });
+  }
 
   /* ---------- lifecycle ---------- */
   function open(opts) {
@@ -1755,7 +2049,9 @@
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
     el.removeEventListener("input", onSliceInput); el.addEventListener("input", onSliceInput);
     el.removeEventListener("keydown", onKey); el.addEventListener("keydown", onKey);
-    el.innerHTML = shellHtml();
+    st.imm = opts.immersive && immEnabled() ? { atlas: null, meta: null, win: null, all: false, above: 0.18, play: null, miss: false } : null;
+    el.innerHTML = st.imm ? immShellHtml() : shellHtml();
+    el.classList.toggle("a3d-immersive", !!st.imm);
     el.classList.add("on");
     st.err = ""; st.base = null; st.sel = []; st.subject = null; st.isolate = false; st.hidden = {}; st.region = ""; st.explodeTarget = 0; st.explode = 0;
     st.faded = {}; st.xray = null; st.clip = null; st.hist = []; st.quiz = null; st.failed = {}; st.lost = false; st.bytesDone = st.bytesTotal = 0; st.counted = {};
@@ -1770,9 +2066,15 @@
       try { st.gl = initGL(cv); } catch (e) { st.err = e.message; paintProgress(); return; }
       bindInput(cv);
       resizeCanvas();
-      showHint();
+      if (!st.imm) showHint();
       paintChips(); paintBar();
       applyState();
+      if (st.imm) {
+        startImmersive(d);
+        ensureChunks().then(function () { paintProgress(); settleFrames(); });
+        invalidate();
+        return;
+      }
       // Opened from a living-torso slice: land on the living body with THAT slice as the cut.
       var fromLive = opts.from && d.planes[opts.from.m] && d.planes[opts.from.m][String(opts.from.i)];
       if (opts.src === "live" || fromLive) setSource("live", { keepCam: true });
@@ -1789,6 +2091,8 @@
     var el = G.document && G.document.getElementById("smdAtlas3d");
     if (el) el.classList.remove("on");
     closeSheet(); dropPanel("a3dInfo"); dropPanel("a3dSystems");
+    if (st.imm) { clearInterval(st.imm.play); st.imm = null; }
+    if (el) el.classList.remove("a3d-immersive");
     st.quiz = null; clearTimeout(st._lostTimer); st.lost = false;
     disposeGL();
     if (el) el.innerHTML = "";
@@ -1813,11 +2117,13 @@
     var k = st.index && st.index[cid];
     return !!k && k !== "none";
   }
-  if (G.addEventListener) G.addEventListener("resize", function () { if (isOpen()) resizeCanvas(); });
+  if (G.addEventListener) G.addEventListener("resize", function () { if (isOpen()) { resizeCanvas(); if (st.imm) paintImmCt(); } });
 
   /* ---------- exports ---------- */
   G.ATLAS3D = G.ATLAS3D || {};
   G.ATLAS3D.enabled = enabled;
+  G.ATLAS3D.immEnabled = immEnabled;
+  G.ATLAS3D.openImmersive = function () { if (isOpen()) close(); open({ immersive: true }); };
   G.ATLAS3D.open = open;
   G.ATLAS3D.close = close;
   G.ATLAS3D.isOpen = isOpen;
@@ -1844,7 +2150,8 @@
     linksFor: linksFor, regionParts: regionParts, perspective: perspective, lookAt: lookAt, mul: mul, eyeFrom: eyeFrom,
     looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl,
     ghostAlpha: ghostAlpha, freeClip: freeClip, layerSnap: layerSnap, pushHist: pushHist, progressLabel: progressLabel,
-    serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug, creditLine: creditLine, wrapLines: wrapLines
+    serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug, creditLine: creditLine, wrapLines: wrapLines,
+    immShownX: immShownX, immNearestPin: immNearestPin, immNearestSlice: immNearestSlice, immPlaceLabels: immPlaceLabels, immWindowUrl: immWindowUrl
   };
   G.ATLAS3D._version = "1.0";
 
