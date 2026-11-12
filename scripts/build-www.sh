@@ -337,6 +337,9 @@ if [ -f prep/taxonomy.json ]; then
     mkdir -p "$WWW/prep/figures" && cp prep/figures/*.html prep/figures/figures.json prep/figures/ANIMA-LICENSE.txt prep/figures/ANATOMY-LICENSE.txt "$WWW/prep/figures/"
     # Mechanism mastery (fig-viewer.js "Steps" sheet): Trigger, Target, Mechanism, Manifestation, Intervention per figure.
     [ -f prep/figures/mastery.json ] && cp prep/figures/mastery.json "$WWW/prep/figures/"
+    # One page per figure: the light twins are the dark pages with one attribute changed (about 42 MB). The dark
+    # page switches itself to light from the frame name fig-viewer.js gives it. SMD_KEEP_FIG_TWINS=1 ships both.
+    if [ "${SMD_KEEP_FIG_TWINS:-}" != "1" ]; then node "$ROOT/scripts/slim-figures.mjs" "$WWW" || { echo "  figure slim FAILED"; exit 1; }; fi
   fi
   # Cards (prep-flash.js): the committed pilot decks and their index (occlusion images come from prep/lessons/media).
   # A full generated set (prep/cards/gen) goes to R2, not here; tools/prep-cards.mjs work files never ship.
@@ -361,6 +364,12 @@ fi
 # SMD_KEEP_SOURCES=1 skips it (internal/debug builds only).
 if [ "${SMD_KEEP_SOURCES:-}" != "1" ]; then
   node "$ROOT/scripts/sanitize-sources.mjs" "$WWW" || { echo "  source sanitize FAILED"; exit 1; }
+fi
+
+# ── 5b. Minify bundled JSON (whitespace only; the app reads every one with JSON.parse). The repo keeps the
+# pretty-printed sources. SMD_KEEP_JSON_PRETTY=1 skips it. ────────────────────────────────────────────────
+if [ "${SMD_KEEP_JSON_PRETTY:-}" != "1" ]; then
+  node "$ROOT/scripts/minify-json.mjs" "$WWW" || { echo "  json minify FAILED"; exit 1; }
 fi
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,

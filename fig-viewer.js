@@ -461,7 +461,9 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
   }
   function pageOf(src, dark) {
     var base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, "");
-    return (base || "/") + (dark ? src : src.replace(/\.html$/, "-light.html"));
+    // The app bundle ships one page per figure (scripts/slim-figures.mjs sets SMD_FIG_ONEFILE): the dark page turns
+    // itself light when its frame is named "smdfig-light". Elsewhere the "-light" build is still a separate page.
+    return (base || "/") + ((dark || G.SMD_FIG_ONEFILE) ? src : src.replace(/\.html$/, "-light.html"));
   }
   function close() {
     if (!cur) return false;
@@ -480,7 +482,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     var el = D.createElement("div");
     el.className = "smdfig" + (dark ? "" : " lt"); el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", String(o.title || "Interactive figure"));
     el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><span class="smdfig-tools"><button type="button" class="smdfig-pp smdfig-ms-btn" aria-expanded="false" hidden>Steps</button><button type="button" class="smdfig-pp" aria-pressed="false" hidden>Pause</button><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></span></div>' +
-      '<div class="smdfig-sc"><iframe class="smdfig-fr" title="' + esc(o.title || "Interactive figure") + '" src="' + esc(pageOf(src, dark) + (q ? "?" + q : "")) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
+      '<div class="smdfig-sc"><iframe class="smdfig-fr" title="' + esc(o.title || "Interactive figure") + '" src="' + esc(pageOf(src, dark) + (q ? "?" + q : "")) + '"' + (dark ? '' : ' name="smdfig-light"') + ' sandbox="allow-scripts allow-same-origin"></iframe></div>';
     var fr = el.querySelector("iframe");
     fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { tapInfo(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
     el.querySelector(".smdfig-x").addEventListener("click", close);
