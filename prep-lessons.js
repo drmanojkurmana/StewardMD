@@ -430,6 +430,10 @@
   var host = null;
 
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+  // A lesson file on the bank is signed-in only (owner 2026-11-12): it goes through the bank client, which adds the app
+  // proof. Without the client (tests, an old shell) it is a plain fetch, which the server still answers in shadow mode.
+  function bankJSON(url) { var C = G.PREP_BANK_CLIENT; return C && C.fetchBankJSON ? C.fetchBankJSON(url) : getJSON(url); }
+  function bankRoot() { return ((host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/").replace(/\/?$/, "/"); }
   // Generated lessons live in R2: /api/prep/bank/v1/lessons/... (the same API base as the bank, so tests can point it at fixtures).
   function api() { return ((host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/") + VER + "/lessons/"; }
   // The network copy, else the IndexedDB copy (offline); null when neither.
@@ -448,6 +452,12 @@
   // Bundled file: memory, then the shipped file (refreshing the IndexedDB copy), then IndexedDB when offline.
   function appFile(mid) {
     var key = "lessons/" + VER + "/" + mid + ".json";
+    // Not in the app bundle any more (build-www SMD_REMOTE_MEDIA=1): the phone's copy, else R2 at app/prep/lessons/v1/.
+    if (G.SMD_REMOTE_MEDIA_ON === 1) {
+      return (host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : Promise.resolve(null)).then(function (hit) {
+        return hit || bankJSON(bankRoot() + "app/prep/lessons/" + VER + "/" + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
+      });
+    }
     return getJSON(BASE + VER + "/" + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; }, function (e) {
       return (host.cacheGet ? host.cacheGet(key) : Promise.resolve(null)).then(function (hit) { if (!hit) throw e; return hit; });
     });
@@ -458,7 +468,7 @@
   function bankFile(mid, rev) {
     var ver = rev ? "v" + rev : VER, key = ver + "/lessons/" + mid + ".json", url = api().replace(/\/v\d{1,3}\/lessons\/$/, "/" + ver + "/lessons/");
     return (host.cacheGet ? host.cacheGet(key).then(null, function () { return null; }) : Promise.resolve(null)).then(function (hit) {
-      return hit || getJSON(url + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
+      return hit || bankJSON(url + encodeURIComponent(mid) + ".json").then(function (f) { if (host.cachePut) host.cachePut(key, f); return f; });
     }).then(null, function () { return rev ? bankFile(mid, 0) : appFile(mid); });
   }
   function lessonFile(mid) {
@@ -666,6 +676,12 @@
   // Every figure of a lesson is fetched when it opens (not only as the reader reaches it), so a lesson opened once
   // online keeps its X-rays offline: figures are immutable and served with a one-year cache.
   function warm(les) {
+    // With the shared loader (remote-media.js) the figures land in its on-phone cache, one request each in their lifetime.
+    var RM = G.SMD_REMOTE_MEDIA;
+    if (RM && RM.load && RM.key) {
+      try { lessonImages(les).forEach(function (src) { var k = RM.key(imgSrc(src), { remoteBundle: G.SMD_REMOTE_MEDIA_ON === 1, isGated: function (p) { var C = G.PREP_BANK_CLIENT; return C && C.isGatedPath ? C.isGatedPath(p) : /^v\d{1,3}\/lessons\/media\//.test(p); } }); if (k) RM.load(k).then(null, function () {}); }); } catch (e) {}
+      return;
+    }
     try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.onerror = function () { if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg) G.PREP_BANK_CLIENT.resignImg(im, imgSrc(src)); }; im.src = imgSrc(src); }); } catch (e) {}
   }
   // width and height from the image's shape reserve its box before it loads (no jump under the text).

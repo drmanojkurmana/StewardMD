@@ -31,6 +31,7 @@ import {
   mintBankSession,
   signImagePath,
   resetBankGateMemory,
+  LESSON_GATED_RE,
 } from "../../../_prep_bank_gate.js";
 
 // Re-export helpers for consumers and tests
@@ -81,6 +82,10 @@ const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
 const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9_-]{2,60}\/[a-z0-9-]{2,120}\.json)$/;
 // Attribution credits for freely licensed images: image-credits.json
 const CREDITS_RE = /^image-credits\.json$/;
+/* Content that used to ship inside the app and now loads from R2 on first open (owner 2026-11-12), at the SAME path it
+ * had in the bundle under app/: the bundled PrepNucleus lessons and their diagrams, and the CliniX photos. Gated like the
+ * question bank (signed-in user; pictures through short-lived signed URLs). tools/upload-app-media.mjs puts them there. */
+const APP_RE = /^app\/(?:prep\/lessons\/v1\/[a-z0-9-]{2,80}\.json|prep\/lessons\/media\/[a-z0-9_-]{2,80}\.(?:svg|webp)|clinix\/media\/(?:practicals|skills)\/[a-z0-9_-]{2,120}\.webp)$/;
 // On-phone search vectors (kb/ai/embed-local.js): the EmbeddingGemma disease vectors,
 // v<n>/kb/kb-vectors-q5.json (the id list plus dims/scale) and v<n>/kb/kb-vectors-q5.i8
 // (the raw int8 rows). Immutable like every other versioned bank file: a rebuild goes to
@@ -128,6 +133,7 @@ export function bankPath(params) {
     QUALITY_RE.test(p) ||
     TESTS_RE.test(p) ||
     KB_RE.test(p) ||
+    APP_RE.test(p) ||
     CREDITS_RE.test(p)
     ? p
     : null;
@@ -212,11 +218,16 @@ export async function onRequestGet(ctx) {
     );
   }
 
-  const classification = classifyBankPath(p);
+  let classification = classifyBankPath(p);
   // Live flag: KV billing:cfg flags.PREP_BANK_ENFORCE (owner-set, cached 30s) wins over the env value, so the
   // gate can be switched without a new Pages binding or a redeploy. No KV or no key falls back to env.
   try { await warmBillingCfg(env && env.MAIK_KV); } catch (e) {}
-  const enforced = String(cfgFlag(env, "PREP_BANK_ENFORCE")) === "1";
+  let enforced = String(cfgFlag(env, "PREP_BANK_ENFORCE")) === "1";
+  // Lessons and their pictures become signed-in only when PREP_LESSONS_GATED=1 (env or KV billing:cfg flags), and then
+  // the gate is enforced for them whatever PREP_BANK_ENFORCE says.
+  if (classification === "public" && LESSON_GATED_RE.test(p) && String(cfgFlag(env, "PREP_LESSONS_GATED")) === "1") { classification = "gated"; enforced = true; }
+  // Content moved out of the app (app/...) is new, so no older app build depends on reaching it without proof: always enforced.
+  if (/^app\//.test(p)) enforced = true;
 
   // Public paths: lessons, cards, credits
   if (classification === "public") {

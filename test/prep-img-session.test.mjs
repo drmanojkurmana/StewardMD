@@ -78,7 +78,17 @@ test("resignImg sets a signed src after an img error and retries only once", asy
 
 test("resignImg leaves non-gated images alone", async () => {
   const { client } = loadClient();
-  const img = fakeImg("/api/prep/bank/v1/lessons/media/neck-us.webp");
+  const img = fakeImg("/api/prep/bank/v1/kb/media/neck-us.webp");
   assert.equal(await client.resignImg(img), false);
-  assert.equal(img.src, "/api/prep/bank/v1/lessons/media/neck-us.webp");
+  assert.equal(img.src, "/api/prep/bank/v1/kb/media/neck-us.webp");
+});
+
+test("a lesson and its pictures are signed-in only (owner 2026-11-12); the lesson list stays public", () => {
+  const { client } = loadClient();
+  assert.equal(client.isGatedPath("v1/lessons/media/neck-us.webp"), true);
+  assert.equal(client.isGatedPath("v1/lessons/neck-us.json"), true);
+  assert.equal(client.isGatedPath("app/clinix/media/practicals/obg-ins-veress-needle.webp"), true);
+  assert.equal(client.isGatedPath("v1/lessons/index.json"), false);
+  assert.equal(client.isGatedPath("v1/cards/index.json"), false);
+  assert.equal(client.isGatedPath("v1/kb/media/neck-us.webp"), false);
 });

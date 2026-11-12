@@ -12283,3 +12283,8 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 
 ## 2026-11-12 CliniX practical pictures that showed the wrong thing were removed
 - 70 practical items (and 91 PrepNucleus lesson steps, 5 Image Library entries reusing the same files) showed a picture of something else. The files are deleted; each item keeps its `image.brief`, so it shows the placeholder and drops out of the picture spotter quiz until a correct, licensed picture is sourced. Pictures legitimately shared by the same instrument in two decks are kept and allow-listed in test/clinix-practical-images.test.mjs. Details in [[CliniX]] Gotchas.
+
+## 2026-11-12 Lessons and CliniX photos from R2 on first view, signed-in only
+- Owner chose "signed in only" (not phone or registration verification). Each lesson and picture is fetched when viewed, not in bulk, and kept on the phone, so a second view is instant, offline and free. Cost at the time: 10 M requests and 10 M R2 reads a month included, then $0.30 and $0.36 per million; egress free.
+- Rollout is staged and reversible: upload, `--check`, build with `SMD_REMOTE_MEDIA=1`, release, then `PREP_LESSONS_GATED=1` once app builds that fetch lessons without proof are gone. Details in [[PrepNucleus]] Lessons and [[Infra]].
+- Found while testing: the native boot script in index.html deleted EVERY Cache Storage cache on every launch, and sw.js deleted every non-current cache on activate. That wiped Atlas offline modules, on-device model files and the lesson voice model each time. Both now delete only `stewardmd-*` (the service worker's own versions).

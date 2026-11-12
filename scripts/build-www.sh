@@ -358,6 +358,21 @@ fi
 # the evidence the provenance test checks the packs against, not a runtime asset, and it lives outside
 # pglog/ precisely so this line cannot pick it up.
 
+# ── 4z. Learning content served from R2 on first view (owner 2026-11-12) ─────────────────────────────────────
+# SMD_REMOTE_MEDIA=1 leaves the bundled PrepNucleus lesson files and diagrams and the CliniX photos OUT of the app and
+# sets window.SMD_REMOTE_MEDIA_ON=1: prep-lessons.js then reads lessons from /api/prep/bank/app/prep/lessons/v1/ and
+# remote-media.js loads the pictures from /api/prep/bank/app/<same path>, signed-in only, kept on the phone after the
+# first view. ONLY build with it after tools/upload-app-media.mjs has put the same files on R2 (it prints a check),
+# otherwise those lessons and photos are missing from the app. Unset (default): everything ships as before.
+if [ "${SMD_REMOTE_MEDIA:-}" = "1" ]; then
+  find "$WWW/prep/lessons/v1" -name '*.json' ! -name 'index.json' -delete 2>/dev/null || true
+  find "$WWW/prep/lessons/media" -type f \( -name '*.svg' -o -name '*.webp' \) -delete 2>/dev/null || true
+  rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills"
+  grep -q "window.SMD_REMOTE_MEDIA_ON=0;" "$WWW/index.html" || { echo "  remote media: index.html has no SMD_REMOTE_MEDIA_ON flag"; exit 1; }
+  sed -i.bak 's/window\.SMD_REMOTE_MEDIA_ON=0;/window.SMD_REMOTE_MEDIA_ON=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
+  echo "  remote media: lessons, lesson diagrams and CliniX photos load from R2 (SMD_REMOTE_MEDIA_ON=1)"
+fi
+
 # ── 5a. No textbook citations or page numbers in the shipped bundle (copyright, owner 2026-09-24) ─────
 # Specific citations become the subject's standard-textbook line, page/chapter locators are removed;
 # the repo keeps its authoring provenance. Runs BEFORE encryption so the .enc blobs are clean too.
