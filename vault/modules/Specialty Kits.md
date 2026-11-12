@@ -92,6 +92,16 @@ A kit is:
 - Tool title is sticky (`.kit-thead`) and carries the live result (`.kit-sum`, `SUMS[toolId]`, falling back to the tool's `text()` after its first ": "). Updated in place by the input handler and `refreshAllTools` (`setSum`); `jump:<tool>` scrolls the full result into view.
 - **Sticky gotcha (the bleed fixed here):** Chrome and WebKit stop a sticky box at the scroller's PADDING edge, so `bottom:0` left the sheet/canvas bottom padding showing under the kit bar (24 to 28 px of page). Each kit scroller now declares `--kit-pb`/`--kit-pt` (`.kit-sheet-body`, `#smdOpdEmr .oe-canvas`, `.oe-toolsheet-b`) and the bar/title use `bottom/top: calc(-1 * var)`. A new scroller that hosts a kit must declare them too.
 - Browser test checks: result line, bar flush with the bottom edge, one-row header, sticky title, jump, flag off.
+- **Accessibility pass (same day, not behind the flag):** measured all 26 kits at 390 px, light and dark, plus 200% zoom.
+  - Dark OPD: `#smdOpdEmr` never remaps `--primary` in dark mode, so kit links, legends, source links, the Assign pill and the result line were #00685f on #1f2325 (2.37:1). Fixed scoped to the kit only: `body.dark #smdOpdEmr .kit { --primary:#3fc7b3; --on-primary:#04322c }` (7.57:1 and 6.70:1), the same teal the Home sheet uses. The rest of the OPD EMR still has this gap in dark mode; not touched.
+  - Themed `:focus-visible` ring on every kit control (was the browser's near-black `outline:auto`, invisible on dark); inputs get a 3 px teal halo.
+  - Text floor 12 px: units, hints, table heads, jaw labels, tooth numbers, legal line; SVG body-chart labels 10 user units (about 12 px rendered).
+  - Mic button keeps its 36 px look with a 44 px hit area (`::after`); source links are 44 px tall rows.
+  - `scroll-padding` on kit scrollers so the sticky title and kit bar never cover the focused field (WCAG 2.4.11).
+  - The result-line jump honours reduced motion.
+  - 200% zoom: the one-row header squeezed the title to one letter per line; the header now wraps (`flex-wrap: wrap`, title `flex-basis: 10ch`).
+  - Empty investigations button reads "Tick tests to add" ("to copy" on the Home sheet) instead of "Add 0 to investigations".
+  - Disabled buttons (opacity .45) stay below 4.5:1 by design (WCAG exempts disabled controls).
 - Test timing note: the Docs, Review, Kit and Share sheets slide in over 300 ms (a Web Animation); `topSoon()` waits for them to settle. The four "opens above" checks that failed before were this, not a stacking bug.
 
 ## ICU and ward notes (IPD, 2026-10-28)

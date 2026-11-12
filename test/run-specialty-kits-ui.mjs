@@ -57,7 +57,7 @@ try{
  await click('#smdKit [data-kit-act="picker"]');
  ok(await until(`!document.querySelector('#smdKit [data-kit-picker]')`),'tapping All kits again closes the picker');
  ok(await ev(`document.documentElement.classList.contains('kit-lock')&&getComputedStyle(document.querySelector('#smdKit')).zIndex==='880'`),'sheet is a full-screen layer and lifts the linked overlays');
- ok(await ev(`[...document.querySelectorAll('#smdKit .kit-add:not([data-kit-act="lcgadd"])')].every(b=>/Copy/.test(b.textContent))`),'standalone: every add action is Copy');
+ ok(await ev(`[...document.querySelectorAll('#smdKit .kit-add:not([data-kit-act="lcgadd"])')].every(b=>/copy/i.test(b.textContent))`),'standalone: every add action is Copy');
  ok(await ev(`!document.querySelector('#smdKit [data-kit-act^="inv:"]')&&!document.querySelector('#smdKit [data-kit-tool="immunisation"]')`),'standalone: no OPD-only investigation or immunisation shortcuts');
  await shot('sheet-obgyn-390');
 
@@ -77,6 +77,8 @@ try{
  ok(await until(`!!document.querySelector('#smdKit .kit-kicker')&&!document.querySelector('#smdKit .kit-thead')&&!document.querySelector('#smdKit .kit-c')`),'flag off (smd_kits_compact=0) restores the earlier layout');
  await ev(`localStorage.removeItem('smd_kits_compact');SMD_KITS.open({kit:'obgyn'});1`);
  await until(`!!document.querySelector('#smdKit .kit-thead')`);
+ // 200% zoom (the app's Display setting zooms <html>): the header wraps instead of squeezing the title to one letter a line.
+ ok(await ev(`(()=>{document.documentElement.style.zoom='2';const w=document.querySelector('#smdKit .kit-head-c h2').getBoundingClientRect().width;const c=document.querySelector('#smdKit .kit-sheet-body');const ov=c.scrollWidth-c.clientWidth;document.documentElement.style.zoom='';return w>120&&ov<=1})()`),'200% zoom: the kit title keeps its width and nothing scrolls sideways');
  await setF('dating','usgDate','2026-03-12','#smdKit'); await setF('dating','usgWeeks','11','#smdKit'); await setF('dating','usgDays','2','#smdKit');
  ok(await until(`/redate to the ultrasound EDD/.test(document.querySelector('#smdKit [data-kit-out="pregnancy-dating"]').textContent)`),'a 9-day LMP and scan difference at 11 weeks redates (ACOG)');
  ok(await ev(`!!document.querySelector('#smdKit [data-kit-f="dating:usgDays"]')`),'inputs survive the in-place update (no repaint)');
@@ -115,6 +117,8 @@ try{
  ok(await ev(`(()=>{const t=[...document.querySelectorAll('#smdOpdEmr .oe-tab')].map(b=>b.dataset.oeAct);return JSON.stringify(t.filter(x=>x!=='tab:immun'))===JSON.stringify(['tab:profile','tab:assess','tab:kit','tab:inv','tab:meds','tab:note','tab:protocol','tab:onco'])})()`),'tabs run in consult order: Profile, Assessment, Specialty, then Investigations and Medications');
  await click('#smdOpdEmr [data-oe-act="tab:kit"]');
  ok(await until(`!!document.querySelector('#smdOpdEmr .kit[data-kit-host="opd"]')`),'Specialty tab renders the kit with the OPD host');
+ // Dark mode in the OPD: the EMR keeps its light teal, so the kit takes the dark teal (links and legends were 2.37:1).
+ ok(await ev(`(()=>{document.body.classList.add('dark');const k=document.querySelector('#smdOpdEmr .kit');const v=getComputedStyle(k).getPropertyValue('--primary').trim().toLowerCase();document.body.classList.remove('dark');return v==='#3fc7b3'})()`),'dark OPD: kit text uses the dark-theme teal (7.57:1 on the card)');
  ok(await ev(`(()=>{const t=document.querySelector('#smdOpdEmr .oe-tabs'),on=t.querySelector('.oe-tab.on');const a=t.getBoundingClientRect(),b=on.getBoundingClientRect();return on.dataset.oeAct==='tab:kit'&&b.left>=a.left-1&&b.right<=a.right+1})()`),'the active Specialty tab stays in view in the tab strip');
  ok(await ev(`document.querySelector('#smdOpdEmr .kit-chip.on').dataset.kitAct==='kit:paediatrics'`),'"my specialty" is the default kit in the consult');
  ok(await ev(`[...document.querySelectorAll('#smdOpdEmr .kit-add:not(.kit-addq)')].every(b=>!b.disabled)`),'write mode with the assessment loaded: every Add is enabled');

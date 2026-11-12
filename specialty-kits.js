@@ -1261,7 +1261,7 @@
       '<div class="kit-ticks">' + rows + "</div>" +
       '<div class="kit-tickbar"><button type="button" class="kit-link" data-kit-act="invall">' + (allOn ? "Clear all" : "Select all " + list.length) + "</button>" +
       '<button type="button" class="kit-add kit-addq" data-kit-act="invadd"' + (n ? "" : " disabled") + ">" + ms(canQueue ? "playlist_add" : "content_copy") +
-      (canQueue ? "Add " + n + " to investigations" : "Copy " + n + " tests") + "</button></div></section>";
+      (!n && compactOn() ? (canQueue ? "Tick tests to add" : "Tick tests to copy") : canQueue ? "Add " + n + " to investigations" : "Copy " + n + " tests") + "</button></div></section>";
   }
   /* Protocols: Open reads it, Assign opens it with its instruction tick list so the ones that apply
    * land in this patient's case sheet (opd-emr.js protoAssign, flag smd_protocol_assign). */
@@ -1638,7 +1638,10 @@
     }
     if (cmd === "jump") {   // sticky result line: bring the full result into view
       var jo = btn.closest("[data-kit-root]").querySelector('[data-kit-out="' + arg + '"]');
-      if (jo) { try { jo.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { jo.scrollIntoView(); } }
+      if (jo) {
+        var calm = false; try { calm = G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        try { jo.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "center" }); } catch (e) { jo.scrollIntoView(); }
+      }
       return;
     }
     if (cmd === "dent") { var td = toolState(k, "odontogram"); td.primary = arg === "prim"; host.repaint(); return; }
