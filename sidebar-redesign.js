@@ -99,7 +99,8 @@
     },
     appearance: function () {
       // Opens the full Display & Accessibility sheet (font size, font family, theme, density…).
-      if (window.SMD_openDisplay) return SMD_openDisplay({ onClose: openSettingsPage });
+      // Opened from Settings, the page now stays underneath, so closing Display simply shows it again.
+      if (window.SMD_openDisplay) return SMD_openDisplay(document.getElementById("sbrSettings") ? {} : { onClose: openSettingsPage });
       if (window.SMD_openAppearance) return SMD_openAppearance();
       if (window.SB && SB.toggleTheme) return SB.toggleTheme();
       document.body.classList.toggle("dark");
@@ -113,6 +114,8 @@
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     mail: function () { closeSB(); if (window.SMD_MAIL && SMD_MAIL.open) SMD_MAIL.open(); else toast("Mail loading…"); },
+    // Owner-only hospital-add review lives in home.js; Settings had no handler, so the row did nothing.
+    hospadmin: function () { if (window.SMD_moreAct) SMD_moreAct("hospadmin"); else toast("Loading…"); },
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); },
     // Account, help and legal rows (2026-10-14, owner): they live in the sidebar now; home.js owns the handlers.
     subscription: function () { more("subscription"); },
@@ -242,6 +245,20 @@
       "body.dark #sbMenu[data-sbr] .sbr-note,body.v3-dark #sbMenu[data-sbr] .sbr-note{color:#94a3b8}",
       "body.dark #sbMenu[data-sbr] .sbr-adv button,body.v3-dark #sbMenu[data-sbr] .sbr-adv button{color:#f8fafc}",
       "body.dark #sbMenu[data-sbr] .sbr-status,body.v3-dark #sbMenu[data-sbr] .sbr-status{background:rgba(30,41,59,.5);border-color:rgba(51,65,85,.6);color:#2dd4bf}",
+      /* ── A row opened from Settings: the shared sheet becomes a full-screen page pushed from the right ── */
+      "#hvSheet.sbr-pushed{top:0!important;bottom:0!important;height:100%!important;max-height:none!important;border-radius:0!important;box-shadow:-8px 0 30px rgba(0,0,0,.12)!important;transform:translateX(100%)!important;transition:transform .32s cubic-bezier(.2,.8,.2,1)!important;overflow-y:auto}",
+      "#hvSheet.sbr-pushed.on{transform:none!important}",
+      // A page, not a pane of glass: solid like Settings itself, so the list underneath never shows through.
+      "#hvSheet.sbr-pushed{background:var(--paper,#f6f7f5)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}",
+      "body.dark #hvSheet.sbr-pushed,body.v3-dark #hvSheet.sbr-pushed{background:#0d1b26!important}",
+      "#hvSheet.sbr-pushed .hv-grab{display:none!important}",
+      "#hvSheet.sbr-pushed .hv-sheet-wrap{padding-top:calc(env(safe-area-inset-top) + 2px)!important}",
+      "body.sbr-set-open #hvScrim{background:transparent!important}",
+      ".sbr-push-back{display:inline-flex;align-items:center;gap:2px;height:44px;margin:0 0 2px -6px;padding:0 8px 0 2px;border:0;background:none;color:var(--teal,#0f766e);font:600 16px/1 var(--sans,system-ui);cursor:pointer}",
+      ".sbr-push-back .sbr-set-chev{font-size:28px;line-height:1;margin-top:-3px}",
+      ".sbr-push-back:active{opacity:.55}",
+      "body.dark .sbr-push-back,body.v3-dark .sbr-push-back{color:#8fe3c8}",
+      "@media(prefers-reduced-motion:reduce){#hvSheet.sbr-pushed{transition:none!important}}",
       /* ── Settings page (dedicated full-screen module) ── */
       ".sbr-set-ov{position:fixed;inset:0;z-index:100200;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;font-family:var(--sans,system-ui,-apple-system,sans-serif);animation:sbrSetIn .18s ease}",
       // The settings page had NO box-sizing rule, so every `width:100%` row with padding
@@ -366,27 +383,12 @@
       }
     } catch (e) {}
     // Offline drug database (NATIVE + PRO only) — restored under Advanced. Hidden on web where the
-    // plugin is a no-op stub (SMD_OFFLINEDB.open absent).
+    // plugin is a no-op stub (SMD_OFFLINEDB.open absent). A real row like every other (owner 2026-11-11:
+    // the old inline-styled button rendered with a broken icon and a clipped badge).
     try {
       if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) {
-        html += '<button data-sbr-act="offlinedb" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:none;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui)">' + svg("pills") +
+        html += '<button class="sbr-row" data-sbr-act="offlinedb">' + svg("pills") +
           '<span class="sbr-lbl" style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
-      }
-    } catch (e) {}
-    // Owner-only: the hello@maiknowledge.com mailbox (mail.js). Gated by SMD_MAIL.enabled(), which
-    // checks the owner list and the smd_mail flag; the server's ownerOK is the real gate.
-    try {
-      if (window.SMD_MAIL && SMD_MAIL.enabled()) {
-        html += '<button class="sbr-row" data-sbr-act="mail">' + svg("mail") +
-          '<span class="sbr-lbl" style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
-      }
-    } catch (e) {}
-    // Owner-only: review + approve/decline hospital-add requests.
-    try {
-      var _oe = ((window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || "").toLowerCase();
-      if (["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"].indexOf(_oe) >= 0) {
-        html += '<button class="sbr-row" data-sbr-act="hospadmin">' + svg("shield") +
-          '<span class="sbr-lbl" style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     html += '<div class="sbr-note">Clinical engine settings for this device.</div>';
@@ -770,12 +772,69 @@
       '<div class="sbr-note">Private beta access codes &amp; all research modules in Experimental Features above.</div>';
   }
 
+  /* Admin (owner 2026-11-11: "Mail, Hospital requests only for admin"): the owner tools have their own group at
+     the end, shown only to an owner account, instead of sitting inside Advanced with OWNER tags. */
+  function adminSectionHTML() {
+    if (!isOwner()) return "";
+    var rows = "";
+    try { if (window.SMD_MAIL && SMD_MAIL.enabled && SMD_MAIL.enabled()) rows += row("mail", "mail", "Mail"); } catch (e) {}
+    rows += row("hospadmin", "shield", "Hospital requests");
+    try { if (window.SMD_moreAct) rows += row("aictl", "lines", "AI Control Center"); } catch (e) {}
+    return '<div class="sbr-sec">Admin</div>' + rows;
+  }
+
+  /* Rows open INSIDE Settings (owner 2026-11-11: "profile should open in the same window rather than taking me
+     somewhere; all settings should be there"). Settings stays open underneath; whatever the row opens is raised
+     above it, and the shared sheet (Profile, Appearance, Hospital requests) becomes a full-screen page that slides in
+     from the right with "Settings" to go back. Closing it shows Settings exactly where it was. */
+  var PUSH = { profile: 1, account: 1, notifications: 1, appearance: 1, applewatch: 1, wearos: 1, offlinedb: 1, mail: 1, hospadmin: 1, aictl: 1, clinic: 1, workspace: 1 };
+  var raised = [];
+  function visibleFixed(n) {
+    try { var cs = getComputedStyle(n); return cs.position === "fixed" && cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity) > 0.05 && n.getClientRects().length; } catch (e) { return false; }
+  }
+  function raiseNew(before) {
+    var set = document.getElementById("sbrSettings"); if (!set) return;
+    var z = 100300;
+    [].forEach.call(document.body.children, function (n) {
+      if (n === set || n.id === "smdAzStrip" || n.tagName === "SCRIPT" || n.tagName === "STYLE") return;
+      if (before.indexOf(n) >= 0 && !(n.id === "hvSheet" || n.id === "hvScrim")) return;
+      if (!visibleFixed(n)) return;
+      if (raised.indexOf(n) < 0) { raised.push(n); n.setAttribute("data-sbr-z", n.style.zIndex || ""); }
+      n.style.zIndex = String(n.id === "hvScrim" ? z - 5 : z + raised.indexOf(n));
+    });
+    var sh = document.getElementById("hvSheet");
+    if (sh && sh.classList.contains("on") && raised.indexOf(sh) >= 0) {
+      sh.classList.add("sbr-pushed");
+      var w = sh.querySelector(".hv-sheet-wrap");
+      if (w && !w.querySelector(".sbr-push-back")) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "sbr-push-back"; b.setAttribute("aria-label", "Back to Settings");
+        b.innerHTML = '<span class="sbr-set-chev">‹</span><span>Settings</span>';
+        b.addEventListener("click", function () { var sc = document.getElementById("hvScrim"); if (sc) sc.click(); });
+        w.insertBefore(b, w.firstChild);
+      }
+    }
+  }
+  function lowerRaised() {
+    raised.forEach(function (n) { n.style.zIndex = n.getAttribute("data-sbr-z") || ""; n.removeAttribute("data-sbr-z"); n.classList.remove("sbr-pushed"); });
+    raised = [];
+  }
+  function pushFromSettings(a) {
+    var before = [].filter.call(document.body.children, visibleFixed);
+    // Marked before it opens, so it slides in from the right as a page rather than up as a sheet.
+    var sh = document.getElementById("hvSheet"); if (sh) { sh.setAttribute("data-own-motion", ""); if (!sh.classList.contains("on")) sh.classList.add("sbr-pushed"); }
+    try { ACT[a] && ACT[a](); } catch (x) {}
+    // Some destinations open after a tick (lazy loads, a closing sheet's animation): catch them as they appear.
+    [0, 80, 260, 700, 1500].forEach(function (t) { setTimeout(function () { raiseNew(before); }, t); });
+  }
+
   // ---- Settings page (dedicated full-screen module) ------------------------------------------------
   // All app settings live here now (not inline toggles in the sidebar): account/verification,
   // notifications, appearance, wearable, and the advanced + experimental controls (engine, image
   // engine, voice models, offline DB, owner tools). Opened from the sidebar's single "Settings" row.
   function closeSettingsPage() {
     closeExperimentalPage();
+    lowerRaised();
+    try { var hs = document.getElementById("hvSheet"); if (hs) hs.removeAttribute("data-own-motion"); } catch (e) {}
     var ov = document.getElementById("sbrSettings");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
     document.body.classList.remove("sbr-set-open");
@@ -810,6 +869,7 @@
         advBody() +
         '<div class="sbr-sec">Experimental</div>' +
         expSectionHTML() +
+        adminSectionHTML() +
       "</div>";
     document.body.classList.add("sbr-set-open");
     if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
@@ -845,6 +905,7 @@
         var a = r.getAttribute("data-sbr-act");
         if (a === "settings") return;
         if (a === "experimental") { openExperimentalPage(); return; }
+        if (PUSH[a]) { pushFromSettings(a); return; }
         closeSettingsPage();
         setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60);
       }

@@ -12278,3 +12278,7 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Not re-litigated: the ward list still goes to self-repair when a proven call returns nothing (2026-09-16),
   because GHIS answers [] to a session that has not landed. Details in `vault/modules/Connect Agent.md`.
 
+## 2026-11-12 Specialty kits: compact screen behind `smd_kits_compact` (default on)
+- Owner: "make it 10 better". Layout only: one-row kit header, one-line save note, sticky tool title with the live result, kit bar flush with the bottom edge. No change to what a kit writes or when.
+- Kept behind a flag (`?kitsui=0`) with recovery tag `kits-ui-pre-compact` until the owner approves on the phone; then the old header branch in `kitBody` can be deleted.
+- Not changed: three entry points (Specialty tab, Tools button, Home tile) still exist; consolidating them is the owner's call (vault note says "kept for now").

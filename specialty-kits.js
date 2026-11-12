@@ -31,6 +31,8 @@
   function num(v) { if (v === "" || v == null) return null; var n = parseFloat(String(v).replace(",", ".")); return isFinite(n) ? n : null; }
   function r2(x) { return Math.round(x * 100) / 100; }
   function flagOn() { try { return !G.SMD_KITS_FLAGS || G.SMD_KITS_FLAGS.on(); } catch (e) { return true; } }
+  // Compact kit screen (flag smd_kits_compact, default on): one-row header, sticky tool title with the live result.
+  function compactOn() { try { return !G.SMD_KITS_FLAGS || !G.SMD_KITS_FLAGS.compact || G.SMD_KITS_FLAGS.compact(); } catch (e) { return true; } }
 
   /* ================================ pure maths (node-tested) ================================ */
 
@@ -655,8 +657,10 @@
   var DUTY_LINE = "The treating doctor is responsible for every instruction used or recorded; StewardMD accepts no liability.";
 
   /* ======================================= rendering ======================================= */
-  function reviewNote(kit, host) {
+  function reviewNote(kit, host, compact) {
     var st = (kit.review && kit.review.status) || "ai_drafted";
+    if (compact && st !== "approved" && st !== "reviewed") return '<p class="kit-savenote" role="note">' + ms("info") + "<span>" +
+      (host && host.kind === "opd" ? "Adds editable text; saved when you save the assessment." : "Prepares text to copy and check; nothing is saved.") + "</span></p>";
     if (st === "approved" || st === "reviewed") return '<div class="kit-status ok" role="note">' + ms("verified") + "<span><strong>Clinically " + (st === "approved" ? "approved" : "reviewed") + "</strong>" + (kit.review.reviewer ? " by " + esc(kit.review.reviewer) : "") + ".</span></div>";
     return '<div class="kit-status" role="note">' + ms("info") + "<span>" +
       (host && host.kind === "opd" ? "It only adds text you can edit; nothing is saved until you save the assessment." : "It only prepares text for you to copy and check; nothing is saved.") + "</span></div>";
@@ -669,7 +673,7 @@
     var below = f.hint && (f.type === "select" || f.type === "check" || f.hint.length > 28);
     var hint = below ? '<small class="kit-hint">' + esc(f.hint) + "</small>" : "", ph = below ? "" : esc(f.hint || "");
     if (f.type === "check") return '<label class="kit-check"><input type="checkbox" data-kit-f="' + name + '"' + (val ? " checked" : "") + "><span>" + esc(f.label) + hint + "</span></label>";
-    if (f.type === "select") return '<label class="kit-field" for="' + id + '">' + lab + '<select id="' + id + '" class="kit-inp" data-kit-f="' + name + '"><option value=""></option>' +
+    if (f.type === "select") return '<label class="kit-field" for="' + id + '">' + lab + '<select id="' + id + '" class="kit-inp" data-kit-f="' + name + '"><option value="">' + esc(f.empty || "") + "</option>" +
       (f.opts || []).map(function (o, oi) { return '<option value="' + esc(o) + '"' + (String(o) === String(val) ? " selected" : "") + ">" + esc(f.optLabels ? f.optLabels[oi] : o) + "</option>"; }).join("") + "</select>" + hint + "</label>";
     if (f.type === "textarea") return micWrap(f, name, '<label class="kit-field wide" for="' + id + '">' + lab + '<textarea id="' + id + '" rows="2" class="kit-inp" data-kit-f="' + name + '" placeholder="' + ph + '">' + esc(val) + "</textarea>" + hint + "</label>", true);
     var type = f.type === "number" ? 'type="number" inputmode="decimal" step="any"' : f.type === "date" ? 'type="date"' : f.type === "datetime" ? 'type="datetime-local"' : 'type="text"';
@@ -965,10 +969,10 @@
       form: function (t) {
         var d = DATA("lund-browder"); if (!d) return '<p class="kit-muted">Reference data not loaded.</p>';
         var ai = burnsAge(t, d), fr = ["1/4", "1/2", "3/4", "All"];
-        return '<div class="kit-grid">' + fieldHtml({ id: "age", label: "Age column", type: "select", opts: d.ages.map(burnsAgeLabel) }, t.age, "burns") +
+        return '<div class="kit-grid">' + fieldHtml({ id: "age", label: "Age column", type: "select", opts: d.ages.map(burnsAgeLabel), empty: compactOn() ? "Choose age" : "" }, t.age, "burns") +
           fieldHtml({ id: "weight", label: "Weight", type: "number", unit: "kg" }, t.weight, "burns") + "</div>" +
           '<p class="kit-muted">For each region, how much has partial or full thickness burn (not simple redness).</p><div class="kit-grid">' +
-          d.regions.map(function (r) { return fieldHtml({ id: "r_" + r.id, label: r.label + (ai >= 0 ? " (" + r.percent[ai] + "%)" : ""), type: "select", opts: fr }, t["r_" + r.id], "burns"); }).join("") + "</div>";
+          d.regions.map(function (r) { return fieldHtml({ id: "r_" + r.id, label: r.label + (ai >= 0 ? " (" + r.percent[ai] + "%)" : ""), type: "select", opts: fr, empty: compactOn() ? "None" : "" }, t["r_" + r.id], "burns"); }).join("") + "</div>";
       },
       out: function (t) {
         var r = burnsCalc(t); if (!r) return '<p class="kit-muted">Choose the age column, then mark the burnt regions.</p>';
@@ -1181,6 +1185,43 @@
   function msAges() { return (BUNDLE && BUNDLE.data && BUNDLE.data.milestones && BUNDLE.data.milestones.ages) || []; }
   function msAt(age) { var a = msAges(); if (!a.length) return null; var m = a.filter(function (x) { return String(x.months) === String(age); })[0]; return m || a[0]; }
 
+  /* The one line a doctor scrolls back up for (compact screen): shown in the tool's sticky title while
+   * the inputs are being filled, so the result stays in view. Falls back to the tool's own text. */
+  var SUMS = {
+    "pregnancy-dating": function (t) { var r = dating(t); return r.edd ? "EDD " + fmtDate(r.edd) + (r.ok ? ", " + fmtGA(r.ga) : "") : ""; },
+    "growth-who": function (t) {
+      var r = TOOLS["growth-who"].compute(t); if (!r || !r.rows.length) return "";
+      return (r.sam ? "SAM; " : "") + r.rows.slice(0, 3).map(function (x) { return x.label.split("-for-").map(function (w) { return w.charAt(0).toUpperCase(); }).join("/") + " z " + x.z.toFixed(1); }).join(", ");
+    },
+    "la-dose": function (t) { var r = laCalc(t); return r ? "Max " + r.mg + " mg" + (r.ml != null ? " (" + r.ml + " mL of " + r.pct + "%)" : "") : ""; },
+    "burns-chart": function (t) { var r = burnsCalc(t); return r ? r.tbsa + "% TBSA" + (r.parkland != null ? ", Parkland " + r.parkland + " mL/24 h" : "") : ""; },
+    "ckd-grid": function (t) { var r = ckdCalc(t); return r ? "eGFR " + r.egfr + " (" + r.g + (r.a ? " " + r.a : "") + ")" + (r.a ? ", " + RISK_LABEL[r.risk].toLowerCase() + " risk" : "") : ""; },
+    "joint-chart": function (t) {
+      var r = jointCalc(t); if (r.das28esr != null) return "DAS28-ESR " + r.das28esr + " (" + activity(r.das28esr, DAS_BANDS).toLowerCase() + ")";
+      if (r.das28crp != null) return "DAS28-CRP " + r.das28crp + " (" + activity(r.das28crp, DAS_BANDS).toLowerCase() + ")";
+      if (r.cdai != null) return "CDAI " + r.cdai + " (" + activity(r.cdai, CDAI_BANDS).toLowerCase() + ")";
+      return r.tjc || r.sjc ? "Tender " + r.tjc + ", swollen " + r.sjc : "";
+    },
+    "odontogram": function (t) { var c = t.chart || {}; if (!Object.keys(c).some(function (n) { return c[n]; })) return ""; return (t.primary ? "dmft " : "DMFT ") + dmft(c, !!t.primary).total; },
+    "labour-care": function (t) { var e = lcgSorted(t); if (!DATA("lcg") || !e.length) return ""; var al = lcgAlerts(t); return e.length + " time points, " + (al.length ? al.length + " alert" + (al.length > 1 ? "s" : "") : "no alerts"); }
+  };
+  function toolSum(id, t) {
+    var f = SUMS[id], T = TOOLS[id], s = "";
+    try { s = f ? f(t) : (T && T.text ? T.text(t) : ""); } catch (e) { s = ""; }
+    s = String(s || "");
+    if (!f) { var i = s.indexOf(": "); if (i > 0 && i < 60) s = s.slice(i + 2); }
+    return s.replace(/\.$/, "");
+  }
+  function sumHtml(id, t) {
+    var s = toolSum(id, t);
+    return '<button type="button" class="kit-sum" data-kit-act="jump:' + id + '" data-kit-sum="' + id + '"' + (s ? "" : " hidden") + ' aria-label="Result: ' + esc(s) + '. Show the full result">' +
+      '<span>' + esc(s) + "</span>" + ms("south") + "</button>";
+  }
+  function setSum(rootEl, id, t) {
+    var b = rootEl && rootEl.querySelector('[data-kit-sum="' + id + '"]'); if (!b) return;
+    var s = toolSum(id, t); b.hidden = !s; b.querySelector("span").textContent = s; b.setAttribute("aria-label", "Result: " + s + ". Show the full result");
+  }
+
   function toolHtml(id, k, host) {
     var T = TOOLS[id]; if (!T) return "";
     if (T.opdOnly && host.kind !== "opd") return "";
@@ -1189,7 +1230,9 @@
       var ps = String((host.patient() || {}).sex || "");
       if (/^m/i.test(ps)) t.sex = "Male"; else if (/^f/i.test(ps)) t.sex = "Female";
     }
-    return '<section class="kit-card kit-tool" data-kit-tool="' + id + '"><h3>' + ms(T.icon) + esc(T.title) + "</h3>" + T.form(t) +
+    var title = "<h3>" + ms(T.icon) + esc(T.title) + "</h3>";
+    if (compactOn()) title = '<div class="kit-thead">' + title + (T.text ? sumHtml(id, t) : "") + "</div>";
+    return '<section class="kit-card kit-tool" data-kit-tool="' + id + '">' + title + T.form(t) +
       '<div class="kit-out" data-kit-out="' + id + '" aria-live="polite">' + T.out(t) + "</div>" +
       (T.text ? '<div class="kit-row">' + addBtn("tool:" + id, host, host.kind === "opd" || host.addToNote ? "Add to " + targetName(host, T.target) : "Copy") + "</div>" : "") + "</section>";
   }
@@ -1218,7 +1261,7 @@
       '<div class="kit-ticks">' + rows + "</div>" +
       '<div class="kit-tickbar"><button type="button" class="kit-link" data-kit-act="invall">' + (allOn ? "Clear all" : "Select all " + list.length) + "</button>" +
       '<button type="button" class="kit-add kit-addq" data-kit-act="invadd"' + (n ? "" : " disabled") + ">" + ms(canQueue ? "playlist_add" : "content_copy") +
-      (canQueue ? "Add " + n + " to investigations" : "Copy " + n + " tests") + "</button></div></section>";
+      (!n && compactOn() ? (canQueue ? "Tick tests to add" : "Tick tests to copy") : canQueue ? "Add " + n + " to investigations" : "Copy " + n + " tests") + "</button></div></section>";
   }
   /* Protocols: Open reads it, Assign opens it with its instruction tick list so the ones that apply
    * land in this patient's case sheet (opd-emr.js protoAssign, flag smd_protocol_assign). */
@@ -1251,10 +1294,18 @@
     if (!kit) return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + '<div class="kit-empty">No kit selected.</div>' + chips + "</div>";
     var blocked = host.kind === "opd" && !host.canWrite() ? '<div class="kit-status">' + ms("lock") + "<span>" + esc(writeNote(host)) + "</span></div>"
       : host.kind === "opd" && !host.ready() ? '<div class="kit-status">' + ms("hourglass_top") + "<span>" + esc(host.readyNote ? host.readyNote() : "Loading the assessment…") + "</span></div>" : "";
-    var head = '<div class="kit-head"><div><span class="kit-kicker">Specialty kit</span><h2>' + esc(kit.label) + "</h2></div>" +
-      (kit.id === mine ? '<span class="kit-mine">' + ms("star") + "My specialty</span>" : '<button type="button" class="kit-link" data-kit-act="mine:' + esc(kit.id) + '">Set as my specialty</button>') + "</div>";
+    var compact = compactOn();
+    var mineHtml = compact
+      ? (kit.id === mine ? '<span class="kit-mine kit-hstar" role="img" aria-label="My specialty" title="My specialty">' + ms("star") + "</span>"
+        : '<button type="button" class="kit-link kit-hbtn kit-hstar" data-kit-act="mine:' + esc(kit.id) + '" aria-label="Set as my specialty" title="Set as my specialty">' + ms("star") + "</button>")
+      : kit.id === mine ? '<span class="kit-mine">' + ms("star") + "My specialty</span>" : '<button type="button" class="kit-link" data-kit-act="mine:' + esc(kit.id) + '">Set as my specialty</button>';
+    var docsOn = !!(G.SMD_DOCS && G.SMD_DOCS.on && G.SMD_DOCS.on());
+    var head = compact
+      ? '<div class="kit-head kit-head-c"><h2>' + esc(kit.label) + '</h2><div class="kit-hacts">' + mineHtml +
+        (docsOn ? '<button type="button" class="kit-hbtn kit-docs" data-kit-act="docs" aria-label="' + (host.kind === "opd" ? "Certificate, referral letter, consent form or handout for this patient" : "Certificates, consent forms and handouts") + '">' + ms("description") + "Documents</button>" : "") + "</div></div>"
+      : '<div class="kit-head"><div><span class="kit-kicker">Specialty kit</span><h2>' + esc(kit.label) + "</h2></div>" + mineHtml + "</div>";
     var tools = (kit.tools || []).map(function (id) { return toolHtml(id, k, host); }).join("");
-    var docs = (G.SMD_DOCS && G.SMD_DOCS.on && G.SMD_DOCS.on()) ? '<button type="button" class="kit-pill kit-docs" data-kit-act="docs">' + ms("description") +
+    var docs = (!compact && docsOn) ? '<button type="button" class="kit-pill kit-docs" data-kit-act="docs">' + ms("description") +
       (host.kind === "opd" ? "Certificate, referral letter, consent form or handout for this patient" : "Certificates, consent forms and handouts") + "</button>" : "";
     var secs = (kit.sections || []).map(function (s) { return sectionHtml(kit, s, k, host); }).join("");
     var osets = (host.queueTests && (kit.orderSets || []).length) ? '<section class="kit-card"><h3>' + ms("playlist_add_check") + "Order sets</h3>" +
@@ -1276,7 +1327,7 @@
       '<p class="kit-duty">' + esc(DUTY_LINE) + "</p></section>";
     var share = shareHtml(kit, k, host);
     if (share) setTimeout(fillUnits, 0);
-    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + head + reviewNote(kit, host) + blocked + docs + tools + secs + adv + osets + share + inv + protos + calcs + src + chips + "</div>";
+    return '<div class="kit' + (compact ? " kit-c" : "") + '" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + host.kind + '">' + head + reviewNote(kit, host, compact) + blocked + docs + tools + secs + adv + osets + share + inv + protos + calcs + src + chips + "</div>";
   }
 
   /* ---- wave 2 (kits-share.js, flag smd_kits_share, default OFF): the hospital's own version of the kit,
@@ -1382,7 +1433,7 @@
     Array.prototype.forEach.call(D.querySelectorAll("[data-kit-root]"), function (rootEl) {
       var k = ks(rootEl.getAttribute("data-kit-key"));
       Array.prototype.forEach.call(rootEl.querySelectorAll("[data-kit-out]"), function (o) {
-        var id = o.getAttribute("data-kit-out"), T = TOOLS[id]; if (T) o.innerHTML = T.out(toolState(k, id));
+        var id = o.getAttribute("data-kit-out"), T = TOOLS[id]; if (T) { o.innerHTML = T.out(toolState(k, id)); setSum(rootEl, id, toolState(k, id)); }
       });
     });
   }
@@ -1449,8 +1500,9 @@
     if (toolId === "milestones" && fid.indexOf("done:") === 0) { t.done = t.done || {}; t.done[fid.slice(5)] = val; return; }
     if (TT.set) TT.set(t, fid, val); else t[fid] = val;
     if (TT.reform && TT.reform.indexOf(fid) >= 0) { hostFor(el).repaint(); return; }
-    var out = el.closest("[data-kit-root]").querySelector('[data-kit-out="' + toolId + '"]');
+    var rootEl = el.closest("[data-kit-root]"), out = rootEl.querySelector('[data-kit-out="' + toolId + '"]');
     if (out) out.innerHTML = TOOLS[toolId].out(t);
+    setSum(rootEl, toolId, t);
   }
   function secSets(sec, k) {
     var sets = {};
@@ -1583,6 +1635,14 @@
       var codes = TOOTH.map(function (x) { return x[0]; }), cur = t.chart[arg] || "", nx = codes[(codes.indexOf(cur) + 1) % codes.length];
       if (nx) t.chart[arg] = nx; else delete t.chart[arg];
       host.repaint(); return;
+    }
+    if (cmd === "jump") {   // sticky result line: bring the full result into view
+      var jo = btn.closest("[data-kit-root]").querySelector('[data-kit-out="' + arg + '"]');
+      if (jo) {
+        var calm = false; try { calm = G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        try { jo.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "center" }); } catch (e) { jo.scrollIntoView(); }
+      }
+      return;
     }
     if (cmd === "dent") { var td = toolState(k, "odontogram"); td.primary = arg === "prim"; host.repaint(); return; }
     if (cmd === "gchart") { toolState(k, "growth-who").chart = arg; var go = btn.closest("[data-kit-root]").querySelector('[data-kit-out="growth-who"]'); if (go) go.innerHTML = TOOLS["growth-who"].out(toolState(k, "growth-who")); return; }
