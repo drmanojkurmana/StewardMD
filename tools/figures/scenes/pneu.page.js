@@ -119,16 +119,11 @@ function initPanel() {
    ["res", "Resolution", "g-res", "Clearing of the filled sacs as infection is treated and debris is removed, so air returns."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const o = layers.over;
-  pill(o, "Airway", 58, 142, 62, 88, "Small airway leading air into the air sacs. Infection often starts around these airways.");
-  pill(o, "Bacteria", 196, 150, 238, 88, "Bacteria multiplying inside the air sacs. They trigger the neutrophil flood that fills the sac.");
-  pill(o, "Neutrophil exudate", 150, 235, 150, 288, "Neutrophils and fluid that have flooded into the air sac. The sac is filled instead of airy, so it cannot pass oxygen to blood.");
+  pill(o, "Filled sac", 160, 180, 160, 88, "A small airway leads air into the air sacs, and infection often starts there. Bacteria multiply inside the sacs and trigger a neutrophil flood. Neutrophils and fluid fill the sac instead of air, so it cannot pass oxygen to blood.");
   const pa = pill(o, "Antibiotic", 210, 180, 262, 288, "Antibiotic: kills the bacteria so exudate can clear and air can return in resolution."); pa.setAttribute("id", "p-abx"); pa.style.opacity = 0;
-  pill(o, "Bronchopneumonia", 453, 143, 405, 88, "Bronchopneumonia: patchy filling around small airways, with working lung between the patches.");
-  pill(o, "Lobar pneumonia", 520, 165, 548, 88, "Lobar pneumonia: the patches merge until a whole lobe is filled and solid.");
-  pill(o, "Red hepatisation", 490, 240, 480, 288, "Red hepatisation: a freshly filled lobe is red and firm like liver, before it clears in resolution.");
-  pill(o, "Pleura", 856, 150, 856, 88, "Pleura: the two thin layers wrapping the lung. Infection reaching the surface inflames them.");
-  pill(o, "Pleural fluid", 866, 262, 782, 293, "Pleural fluid: fluid collecting between the pleural layers beside inflamed lung. It can squeeze the lung and worsen breathing.");
-  pill(o, "Blood oxygen", 200, 386, 150, 430, "Blood leaving the lungs. Its oxygen follows how many sacs are still airy and working.");
+  pill(o, "How it spreads", 490, 170, 480, 88, "Bronchopneumonia is patchy filling around small airways, with working lung between the patches. The patches can merge until a whole lobe is solid. A freshly filled lobe is red and firm, like liver, before it clears.");
+  pill(o, "Pleura", 840, 200, 820, 88, "The pleura is the two thin layers wrapping the lung. Infection reaching the surface inflames them, and fluid between the layers can squeeze the lung and worsen breathing.");
+  pill(o, "Blood oxygen", 200, 386, 180, 430, "Blood leaving the lungs. Its oxygen follows how many sacs are still airy and working.");
   const po = pill(o, "Oxygen support", 880, 386, 812, 430, "Oxygen support: raises the oxygen in the air breathed in, lifting blood oxygen while the sacs clear."); po.setAttribute("id", "p-oxy"); po.style.opacity = 0;
   capEl = mk("text", { class: "pneu-cap", x: 30, y: 358 }, o); capEl.textContent = capText(0);
 }
