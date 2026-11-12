@@ -57,6 +57,8 @@ const armToasts = () => ev(`window.__toasts=[];if(!window.toast||!window.toast._
 const toastHas = (re) => until(`window.__toasts.some(t=>${re}.test(t))`);
 const as = (uid) => ev(`window.SMD_IDTOKEN=function(){return ${JSON.stringify(uid)}};1`);
 const topIs = (sel) => ev(`(()=>{const e=document.elementFromPoint(innerWidth/2,innerHeight/2);return !!(e&&e.closest(${JSON.stringify(sel)}))})()`);
+// Sheets slide in over 300 ms (a Web Animation): check a sheet that has just opened once it has settled.
+const topSoon = (sel) => until(`(()=>{const e=document.elementFromPoint(innerWidth/2,innerHeight/2);return !!(e&&e.closest(${JSON.stringify(sel)}))})()`, 3000);
 const text = (sel) => ev(`(document.querySelector(${JSON.stringify(sel)})||{}).textContent||''`);
 async function shot(name) { await sleep(250); await mkdir('/tmp/stewardmd-kxshare', { recursive: true }); const r = await call('Page.captureScreenshot', { format: 'png' }); await writeFile(`/tmp/stewardmd-kxshare/${name}.png`, Buffer.from(r.result.data, 'base64')); }
 const pickKit = async (root, kid) => { if (!await ev(`!!document.querySelector('${root} .kit-chips [data-kit-act="kit:${kid}"]')`)) { await click(`${root} [data-kit-act="picker"]`); await until(`!!document.querySelector('${root} [data-kit-picker] [data-kit-act="kit:${kid}"]')`); } await click(`${root} [data-kit-act="kit:${kid}"]`); return until(`document.querySelector('${root} .kit-chip.on')?.dataset.kitAct==='kit:${kid}'`); };
@@ -104,7 +106,7 @@ try {
   await setVal('#smdDocs [data-dl-f="reason"]', 'Severe pre-eclampsia at 34 weeks, BP 170/112'); await setVal('#smdDocs [data-dl-f="question"]', 'Please admit and plan delivery');
   await setVal('#smdDocs [data-dl-f="urgency"]', 'Urgent (within 24 hours)');
   await click('#smdDocs [data-dl-act="kxsend"]');
-  ok(await until(`document.querySelector('#smdShare.on')`) && await topIs('#smdShare'), 'Send to a colleague opens above Documents');
+  ok(await until(`document.querySelector('#smdShare.on')`) && await topSoon('#smdShare'), 'Send to a colleague opens above Documents');
   ok(/Lakshmi Devi/.test(await text('#smdShare')) && /Gravida: 2/.test(await text('#smdShare')), 'the compose view shows the patient and the kit summary it will send');
   await setVal('#sh_to', 'SMD-BBB222'); await armToasts(); await click('#smdShare [data-sh-act="send"]');
   ok(await toastHas(/Confirm the patient agreed/), 'consent must be confirmed');
@@ -243,7 +245,7 @@ try {
   await as('uA'); await ev(`OPDEMR.close();SMD_KITS.open({kit:'obgyn'});1`);
   await until(`/Edit City Hospital's version/.test(document.querySelector('#smdKit [data-kit-unit="obgyn"]')?.textContent||'')`);
   await click('#smdKit [data-kit-act="unitedit:0"]');
-  ok(await until(`document.querySelector('#smdShare.on #sh_notes')?.value==='PPH trolley is in labour room 2.'`) && await topIs('#smdShare'), 'the editor opens with the current version');
+  ok(await until(`document.querySelector('#smdShare.on #sh_notes')?.value==='PPH trolley is in labour room 2.'`) && await topSoon('#smdShare'), 'the editor opens with the current version');
   await setVal('#sh_notes', 'PPH trolley in labour room 2. Check it every morning.'); await armToasts(); await click('#smdShare [data-sh-act="publish"]');
   ok(await toastHas(/Give the reason for this version/), 'a reason is asked for');
   await setVal('#sh_reason', 'Unit meeting 20 September'); await armToasts(); await click('#smdShare [data-sh-act="publish"]');

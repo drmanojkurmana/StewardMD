@@ -9,7 +9,8 @@
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
   var DEFS = {
-    smd_specialty_kits: { type: "bool", def: true, query: "kits", desc: "Specialty kits (O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology, Psychiatry, Dental): OPD Specialty tab + Home tile. DEFAULT ON; every kit shown. Force off per device with ?kits=0." }
+    smd_specialty_kits: { type: "bool", def: true, query: "kits", desc: "Specialty kits (O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology, Psychiatry, Dental): OPD Specialty tab + Home tile. DEFAULT ON; every kit shown. Force off per device with ?kits=0." },
+    smd_kits_compact: { type: "bool", def: true, query: "kitsui", desc: "Compact kit screen (2026-11-12): one-row kit header, one-line save note, sticky tool title with the live result, kit bar flush with the bottom edge. DEFAULT ON; ?kitsui=0 restores the earlier layout." }
   };
 
   function raw(key) {
@@ -24,9 +25,10 @@
   function bool(key) { return raw(key) === "1"; }
   function set(key, on) { try { LS && LS.setItem(key, on ? "1" : "0"); } catch (e) {} }
   function on() { return bool("smd_specialty_kits"); }
+  function compact() { return bool("smd_kits_compact"); }
   function defs() { return DEFS; }
 
-  var API = { bool: bool, set: set, on: on, defs: defs, _version: 1 };
+  var API = { bool: bool, set: set, on: on, compact: compact, defs: defs, _version: 2 };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_KITS_FLAGS = API;
 })();

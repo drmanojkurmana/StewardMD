@@ -333,7 +333,7 @@ test("every kit renders for the OPD host and the standalone host without undefin
       assert.equal(html.includes("Investigations</h3>"), kit.investigations.length > 0);
       if (kit.investigations.length) {
         assert.equal((html.match(/data-kit-act="invtick:/g) || []).length, kit.investigations.length, kit.id + " tick per test");
-        assert.ok(html.includes(host.queueTests ? "Add 0 to investigations" : "Copy 0 tests"), kit.id + " add button");
+        assert.ok(html.includes(host.queueTests ? "Tick tests to add" : "Tick tests to copy") || html.includes(host.queueTests ? "Add 0 to investigations" : "Copy 0 tests"), kit.id + " add button");
       }
       assert.equal(html.includes("Calculators</h3>"), host.kind === "standalone" && kit.calculators.length > 0);
       assert.ok(!/pending clinical review|Draft kit/i.test(html), kit.id + " carries no draft / pending-review note");
