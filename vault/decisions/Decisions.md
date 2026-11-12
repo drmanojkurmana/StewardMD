@@ -12289,3 +12289,7 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Now (`sidebar-redesign.js`): a row pushes its page in from the right, opaque, in Settings' own background. Settings slides 30% left under a dim layer (`#sbrDim`). The nav bar has a round Back and a centred title; the page's own `.hv-sh-t` and Appearance's Done are hidden. Back, or a drag from the left 24 px (interactive, commits at 40% or a flick), reverses it. Experimental pushes the same way. One curve for all of it: 0.5s `cubic-bezier(.32,.72,0,1)`.
 - The edge drag is taken in the capture phase only while a pushed page shows, so swipe-back.js never acts on the same touch. Android's system back still reaches the round Back through swipe-back.js.
 - Test: `test/run-settings-push-ui.mjs` (dark and light).
+
+## 2026-11-13 Tab bar: no "last opened" line
+- Owner screenshot: a line sat above the Drugs icon while Home was highlighted ("when I click on drugs it comes there, when I click on maik it comes there").
+- tab-bar.js drew a 20px line under the last tab opened. The bar already marks Home with its pill, and the line was mispositioned on the floating bar. Removed; a line left from an older bundle is cleaned up on load. Re-tap to top now belongs to Home only (the other tabs are launchers). Kill switch `smd_tab_indicator=0` now turns off the Home re-tap.
