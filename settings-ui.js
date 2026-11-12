@@ -65,7 +65,8 @@
       applewatch: 'Manage your paired Apple Watch', wearos: 'Connect with your Wear OS companion',
       experimental: 'All optional tools, research features and beta access',
       offlinedb: 'Manage drug information available offline',
-      mail: 'Manage the support mailbox', hospadmin: 'Review hospital access requests'
+      mail: 'Manage the support mailbox', hospadmin: 'Review hospital access requests',
+      aictl: 'AI usage, limits and model switches'
     };
     Array.prototype.forEach.call(body.querySelectorAll('[data-sbr-act]'), function (button) {
       var key = button.getAttribute('data-sbr-act'), label = button.querySelector('.sbr-lbl');
@@ -110,6 +111,7 @@
       'Software Update': ['#34c759', '<path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 5v6h-6"/>', 'Keep StewardMD up to date on this device.'],
       'Advanced': ['#636366', '<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/>', 'Clinical engine settings for this device.'],
       'AI & voice': ['#5856d6', '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/>', 'Choose how images, dictation and MaiK answers are processed.'],
+      'Admin': ['#1c1c1e', '<path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>', 'Owner tools: mail, hospital requests and AI controls.'],
       'Experimental': ['#ff9500', '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/>', 'Optional tools, research features and beta access.']
     };
     function tileHtml(name) { var c = SECTION[name] || SECTION.Advanced; return '<span class="settings-tile" style="background:' + c[0] + '" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + c[1] + '</svg></span>'; }
