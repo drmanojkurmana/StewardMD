@@ -254,7 +254,7 @@
     // Fallback rows (a module/subject-level target with no item evidence) render under the plain
     // "Learn this module" label with the module name, after every evidenced row; they open the same
     // target as before, only the label changes.
-    function fbRow(act, attrs) { return row(act, attrs, "Learn this module", mt || "Revise this topic"); }
+    function fbRow(act, attrs, sub) { return row(act, attrs, "Learn this module", sub || mt || "Revise this topic"); }
     var rowsEv = "", rowsFb = "";
     links.forEach(function (l) {
       if (l.k !== "kb" && l.k !== "dr" && l.k !== "pr") return;
@@ -270,10 +270,10 @@
     var lessons = d.lessons || [];
     lessons.forEach(function (l) {
       var at = ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : "");
-      if (isFallback(l)) rowsFb += fbRow("l-open", at);
+      if (isFallback(l)) rowsFb += fbRow("l-open", at, l.sub);
       else rowsEv += row("l-open", at, "Lesson", "Lesson: " + (l.title || "Revise this topic"));
     });
-    if (!lessons.length && d.lesson) rowsFb += fbRow("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"');
+    if (!lessons.length && d.lesson) rowsFb += fbRow("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"', d.lesson.sub);
     if (d.cards) rowsEv += row("k-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"', "Flashcards", "Cards for this topic");
     var kbEv = links.filter(function (l) { return l.k === "kb" && !isFallback(l); });
     var cancerProto = null;
@@ -344,7 +344,7 @@
 
     function tag(t, l) {
       if (l.ev !== undefined) t.ev = l.ev;
-      t.fb = isFallback(l); t.mt = mt;
+      t.fb = isFallback(l); t.mt = l.sub || mt;
       return t;
     }
     kb.forEach(function (l) {
@@ -354,7 +354,7 @@
 
     var lsList = okLessons.slice();
     if (!lsList.length && lesson) {
-      lsList.push({ key: lesson.key, title: lesson.title || pretty(lesson.key), tier: "topic", step: "" });
+      lsList.push({ key: lesson.key, title: lesson.title || pretty(lesson.key), tier: "topic", step: "", sub: lesson.sub });
     }
     lsList.forEach(function (l) {
       var t = tag({
@@ -508,7 +508,7 @@
     nextLabel: nextLabel, shardLinks: shardLinks, lessonLinks: lessonLinks, relOf: relOf, mergeLinks: mergeLinks,
     body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf, isFallback: isFallback,
     kmSlot: kmSlot, kmKindLabel: kmKindLabel, kmTargetLabel: kmTargetLabel, kmTargets: kmTargets, titleRelevant: titleRelevant,
-    knowMoreHtml: knowMoreHtml, knowMoreSheetBodyHtml: knowMoreSheetBodyHtml };
+    knowMoreHtml: knowMoreHtml, knowMoreSheetBodyHtml: knowMoreSheetBodyHtml, ownLessonIn: ownLessonIn, routeFallbackLessons: routeFallbackLessons };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -568,6 +568,50 @@
         return !!(ms[key] || ms[mid]);
       }, function () { return true; });
     } catch (e) { return Promise.resolve(true); }
+  }
+  /* ownLesson(mid) -> { key, title } | null: the module's own lesson in the live lesson index (the lesson
+     filed under the module id, else the first lesson whose module is mid), the same rule Learn uses. */
+  function ownLesson(mid) {
+    if (!mid || !G.PREP_LESSONS || !G.PREP_LESSONS.index) return Promise.resolve(null);
+    try {
+      return G.PREP_LESSONS.index().then(function (ix) { return ownLessonIn(ix, mid); }, function () { return null; });
+    } catch (e) { return Promise.resolve(null); }
+  }
+  function ownLessonIn(ix, mid) {
+    var ms = (ix && ix.modules) || {}, keys = [], mine = {}, k;
+    for (k in ms) if (ms[k] && ms[k].module === mid) { keys.push(k); mine[k] = 1; }
+    keys.sort();
+    if (ms[mid]) { keys.unshift(mid); mine[mid] = 1; }
+    return keys.length ? { key: keys[0], title: ms[keys[0]].title || "", mine: mine } : null;
+  }
+  /* routeFallbackLessons(lessons, lesson, own) -> { lessons, lesson }. A "Learn this module" lesson row names
+     the module, so it must open the module's own lesson. The links index can hand a module that has its own
+     lesson the subject's rapid-review lesson (med-mixed) as its fallback; that row is re-pointed at the own
+     lesson (deduped against an evidenced row that already opens it). With no own lesson the fallback stays,
+     subtitled with its real title so the row says what it opens. */
+  function routeFallbackLessons(lessons, lesson, own, keep) {
+    var out = [], seen = {};
+    (lessons || []).forEach(function (l) { if (!isFallback(l)) { seen[l.key] = 1; out.push(l); } });
+    function fix(l) {
+      if (own && own.mine && own.mine[l.key]) return l;   // already one of this module's lessons
+      if (keep && keep[l.key]) { var k2 = {}; for (var q in l) k2[q] = l[q]; k2.sub = l.title || pretty(l.key); return k2; }
+      if (own && own.key) {
+        var r = { key: own.key, title: own.title || l.title, tier: "topic", c: l.c, step: own.key === l.key ? l.step : "" };
+        if (l.ev !== undefined) r.ev = l.ev;
+        return r;
+      }
+      var c = {}; for (var p in l) c[p] = l[p];
+      c.sub = l.title || pretty(l.key);
+      return c;
+    }
+    (lessons || []).forEach(function (l) {
+      if (!isFallback(l)) return;
+      var f = fix(l);
+      if (!seen[f.key]) { seen[f.key] = 1; out.push(f); }
+    });
+    var ls = lesson ? fix({ key: lesson.key, title: lesson.title, tier: "topic", step: "" }) : null;
+    if (ls && seen[ls.key]) ls = null;
+    return { lessons: out, lesson: ls };
   }
   function checkCards(mid) {
     if (!G.PREP_FLASH || !G.PREP_FLASH.index) return Promise.resolve(true);
@@ -788,9 +832,13 @@
       var itemCards = pipe.some(function (l) { return l.k === "cd"; });
       var wantCd = itemCards || !!(sh && sh.mod && sh.mod.cd);
       return Promise.all([Promise.all(checks), wantCd ? checkCards(mid) : false,
-        resolveRelated(H, sh ? relOf(sh, iid) : [])]).then(function (rr) {
+        resolveRelated(H, sh ? relOf(sh, iid) : []), ownLesson(mid)]).then(function (rr) {
         var okLessons = lessons.filter(function (l, i) { return rr[0][i]; });
         var lesson = (!okLessons.length && lsKeys[0] && rr[0][0]) ? { key: lsKeys[0] } : null;
+        var pipeLs = {};
+        pipe.forEach(function (l) { if (l.k === "ls") pipeLs[l.id] = 1; });
+        var routed = routeFallbackLessons(okLessons, lesson, rr[3], pipeLs);
+        okLessons = routed.lessons; lesson = routed.lesson;
         var cards = !!rr[1], related = rr[2] || [];
         var sel = isKm ? '.pn-km[data-i="' + iid + '"]' : '.pn-rx[data-i="' + iid + '"]';
         var updateEl = function (html, hide) {
