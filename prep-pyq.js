@@ -63,8 +63,10 @@
     Object.keys(ix.tags || {}).forEach(function (id) { if (ix.tags[id][0] === mid) n++; });
     return n;
   }
+  // A question that tests two subjects carries its second module in tt (owner 2026-11-13) and shows under both.
+  function onMod(it, mid) { return it.t === mid || !!(it.tt && it.tt.indexOf(mid) >= 0); }
   function bySubject(items) { var c = {}; items.forEach(function (it) { var s = it.subject || "unsorted"; c[s] = (c[s] || 0) + 1; }); return c; }
-  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
+  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject, onMod: onMod };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -248,13 +250,13 @@
   function modulePyqList(host, sid, mid) {
     return Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
-      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); }));
+      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return onMod(it, mid) && !it.bank && usable(it, hid, qual); }));
     });
   }
   function startModulePyq(host, sid, mid, kind) {
     Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
-      var own = r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); });
+      var own = r[0].filter(function (it) { return onMod(it, mid) && !it.bank && usable(it, hid, qual); });
       var bank = host.pool(r[1]).filter(function (it) { return tags[it.id]; });
       var list = bank.concat(own);
       if (!list.length) return host.toast("No previous-year questions to show here yet.");
