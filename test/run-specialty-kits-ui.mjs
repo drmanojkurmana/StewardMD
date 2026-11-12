@@ -28,6 +28,8 @@ const armToasts=()=>ev(`window.__toasts=[];if(!window.toast||!window.toast.__rec
 const vals=()=>ev(`JSON.stringify(OPDEMR._state().assessVals)`).then(JSON.parse);
 // Visual stacking: the element actually on top at the screen centre.
 const topIs=(sel)=>ev(`(()=>{const e=document.elementFromPoint(innerWidth/2,innerHeight/2);return !!(e&&e.closest(${JSON.stringify(sel)}))})()`);
+// Sheets slide in over 300 ms (a Web Animation), so a sheet that has just opened is checked once it has settled.
+const topSoon=(sel)=>until(`(()=>{const e=document.elementFromPoint(innerWidth/2,innerHeight/2);return !!(e&&e.closest(${JSON.stringify(sel)}))})()`,3000);
 // Pick a kit the way a user does: from the chip row, or from the All kits picker when it is not there.
 const pickKit=async(root,kid)=>{if(!await ev(`!!document.querySelector('${root} .kit-chips [data-kit-act="kit:${kid}"]')`)){await click(`${root} [data-kit-act="picker"]`);await until(`!!document.querySelector('${root} [data-kit-picker] [data-kit-act="kit:${kid}"]')`);}await click(`${root} [data-kit-act="kit:${kid}"]`);return until(`document.querySelector('${root} .kit-chip.on')?.dataset.kitAct==='kit:${kid}'`);};
 const outText=(root,tool)=>ev(`(document.querySelector('${root} [data-kit-out="${tool}"]')||{}).textContent||''`);
@@ -62,6 +64,19 @@ try{
  // Pregnancy dating computes in place and keeps focus while typing.
  await setF('dating','lmp','2026-01-01','#smdKit'); await setF('dating','asOf','2026-03-12','#smdKit');
  ok(await until(`/8 Oct 2026/.test(document.querySelector('#smdKit [data-kit-out="pregnancy-dating"]').textContent)&&/10\\+0 weeks/.test(document.querySelector('#smdKit [data-kit-out="pregnancy-dating"]').textContent)`),'dating tool shows EDD 8 Oct 2026 and 10+0 weeks');
+ // Compact screen (flag smd_kits_compact): the result sticks in the tool title, the header is one row,
+ // the kit bar sits flush with the bottom edge, and the first input is high on the screen.
+ ok(await ev(`(()=>{const b=document.querySelector('#smdKit [data-kit-sum="pregnancy-dating"]');return !!b&&!b.hidden&&b.querySelector('span').textContent==='EDD 8 Oct 2026, 10+0 weeks'})()`),'compact: the tool title carries the live result');
+ ok(await ev(`(()=>{const f=document.querySelector('#smdKit .kit-foot').getBoundingClientRect();return Math.abs(f.bottom-innerHeight)<=1})()`),'compact: the kit bar is flush with the bottom edge (no page showing under it)');
+ ok(await ev(`(()=>{const i=document.querySelector('#smdKit .kit-tool input').getBoundingClientRect();return i.top<300&&!document.querySelector('#smdKit .kit-kicker')&&!!document.querySelector('#smdKit .kit-head-c [aria-label="Set as my specialty"]')})()`),'compact: one-row header, first input in the top third (with the result line showing)');
+ await ev(`document.querySelector('#smdKit .kit-sheet-body').scrollTop=300;1`);
+ ok(await until(`(()=>{const h=document.querySelector('#smdKit .kit-thead').getBoundingClientRect(),b=document.querySelector('#smdKit .kit-sheet-body').getBoundingClientRect();return Math.abs(h.top-b.top)<=1})()`),'compact: the tool title sticks to the top while its inputs scroll');
+ await click('#smdKit [data-kit-act="jump:pregnancy-dating"]');
+ ok(await until(`(()=>{const o=document.querySelector('#smdKit [data-kit-out="pregnancy-dating"]').getBoundingClientRect();return o.top<innerHeight&&o.bottom>0})()`),'tapping the result line brings the full result into view');
+ await ev(`document.querySelector('#smdKit .kit-sheet-body').scrollTop=0;localStorage.setItem('smd_kits_compact','0');SMD_KITS.open({kit:'obgyn'});1`);
+ ok(await until(`!!document.querySelector('#smdKit .kit-kicker')&&!document.querySelector('#smdKit .kit-thead')&&!document.querySelector('#smdKit .kit-c')`),'flag off (smd_kits_compact=0) restores the earlier layout');
+ await ev(`localStorage.removeItem('smd_kits_compact');SMD_KITS.open({kit:'obgyn'});1`);
+ await until(`!!document.querySelector('#smdKit .kit-thead')`);
  await setF('dating','usgDate','2026-03-12','#smdKit'); await setF('dating','usgWeeks','11','#smdKit'); await setF('dating','usgDays','2','#smdKit');
  ok(await until(`/redate to the ultrasound EDD/.test(document.querySelector('#smdKit [data-kit-out="pregnancy-dating"]').textContent)`),'a 9-day LMP and scan difference at 11 weeks redates (ACOG)');
  ok(await ev(`!!document.querySelector('#smdKit [data-kit-f="dating:usgDays"]')`),'inputs survive the in-place update (no repaint)');
@@ -293,7 +308,7 @@ try{
  // Documents from the consult: above the OPD EMR, prefilled with the patient.
  await pickKit(R,'forensic');
  await click(`${R} [data-kit-act="docs"]`);
- ok(await until(`document.querySelector('#smdDocs.on')`)&&await topIs('#smdDocs'),'documents open above the consult');
+ ok(await until(`document.querySelector('#smdDocs.on')`)&&await topSoon('#smdDocs'),'documents open above the consult');
  await click('#smdDocs [data-dl-act="type:leave"]');
  ok(await until(`(document.querySelector('#smdDocs [data-dl-f="name"], #smdDocs #dl_name')||{}).value==='Kit Patient'`),'leave certificate is prefilled with the patient name');
  await click('#smdDocs [data-dl-act="preview"]');
@@ -352,7 +367,7 @@ try{
  ok(await ev(`!document.querySelector('#smdReview [data-rv-act="export"]').disabled&&/Export 1 decision/.test(document.querySelector('#smdReview [data-rv-act="export"]').textContent)`),'export is enabled with the count');
  await click('#smdReview [data-rv-act="sel:obgyn"]'); await until(`!!document.querySelector('#smdReview [data-rv-act="read"]')`);
  await click('#smdReview [data-rv-act="read"]');
- ok(await until(`document.querySelector('#smdKit.on')`)&&await topIs('#smdKit'),'Read it opens the kit above the review desk');
+ ok(await until(`document.querySelector('#smdKit.on')`)&&await topSoon('#smdKit'),'Read it opens the kit above the review desk');
  await click('#smdKit [data-kit-act="close"]');
  ok(await topIs('#smdReview'),'closing the kit returns to the review desk');
  ok(!/[–—]/.test(await ev(`document.querySelector('#smdReview').innerText`)),'review desk: no em or en dash on screen');
