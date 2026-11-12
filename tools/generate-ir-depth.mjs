@@ -70,7 +70,7 @@ for (const t of TOPUPS) {
   fs.writeFileSync(path.join(OV_DIR, t.id + ".json"), JSON.stringify({ topic: t.id, set: "maikir2", v: 1, items }, null, 2) + "\n");
 }
 let idx = JSON.parse(fs.readFileSync(path.join(LESSON_DIR, "index.json"), "utf8"));
-for (const m of M) idx.modules[m.id] = { title: m.title, minutes: 7, steps: m.steps.length, gen: "AI" };
+for (const m of M) idx.modules[m.id] = { title: m.title, minutes: 7, steps: m.steps.length, gen: "AI", module: m.id };
 fs.writeFileSync(path.join(LESSON_DIR, "index.json"), JSON.stringify(idx, null, 1) + "\n");
 let counts = JSON.parse(fs.readFileSync(path.join(ROOT, "prep/bank/overlay-counts.json"), "utf8"));
 counts.sets.maikir2 = counts.sets.maikir2 || {};

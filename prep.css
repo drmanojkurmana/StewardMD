@@ -1100,6 +1100,8 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 }
 /* Learn: a subject's lessons by module. */
 .pn-root .pn-lsn-sum { font-size: 14.5px; line-height: 1.5; text-wrap: pretty; }
+/* A lesson first added within 45 days. Dark-green chip on the title line; the row stays the control. */
+.pn-root .pn-newtag { display: inline-block; margin-left: 8px; padding: 0 6px; border-radius: var(--pn-r-xs); background: var(--pn-why-on, #16383E); color: var(--pn-why-accent, #42CDB5); font-size: 12px; font-weight: 700; letter-spacing: .02em; line-height: 18px; white-space: nowrap; vertical-align: 1px; }
 .pn-root .pn-lsn-mod { display: flex; flex-direction: column; gap: 8px; }
 
 /* Browse screens widen to 1040 px; the module list goes two a row. */

@@ -237,7 +237,7 @@ for (const m of M) {
   fs.writeFileSync(path.join(SUBJECT_DIR, m.id + ".json"), JSON.stringify({ topic: m.id, set: "maikbook2", v: 1, items }, null, 2) + "\n");
 }
 let idx = JSON.parse(fs.readFileSync(path.join(LESSON_DIR, "index.json"), "utf8"));
-for (const m of M) idx.modules[m.id] = { title: m.title, minutes: 6, steps: m.steps.length, gen: "AI" };
+for (const m of M) idx.modules[m.id] = { title: m.title, minutes: 6, steps: m.steps.length, gen: "AI", module: m.id };
 fs.writeFileSync(path.join(LESSON_DIR, "index.json"), JSON.stringify(idx, null, 2) + "\n");
 let counts = JSON.parse(fs.readFileSync(path.join(ROOT, "prep/bank/overlay-counts.json"), "utf8"));
 counts.sets.maikbook2["obstetrics-gynaecology"] = counts.sets.maikbook2["obstetrics-gynaecology"] || {};
