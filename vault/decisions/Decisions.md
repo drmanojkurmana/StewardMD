@@ -12280,3 +12280,6 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - scripts/minify-json.mjs: every bundled .json minified (11.4 MB, ~5,800 files), only when the parse result is identical. Kill switch: SMD_KEEP_JSON_PRETTY=1.
 - Removed kardia/probelab/assets/anatomy.bin.mesh.gz____v_01d19093a293713f080f, an unreferenced mirror artefact (the app requests anatomy.bin.mesh.gz?__v=...).
 - Not done (owner decision): getting under Apple's 200 MB cellular limit needs heavy learning media (CliniX media 51 MB, Echo Probe Lab 33 MB, PrepNucleus figures/lessons, Tokos) to download on first open and cache, the pattern kardiox-learn / atlas / prep bank already use.
+
+## 2026-11-12 CliniX practical pictures that showed the wrong thing were removed
+- 70 practical items (and 91 PrepNucleus lesson steps, 5 Image Library entries reusing the same files) showed a picture of something else. The files are deleted; each item keeps its `image.brief`, so it shows the placeholder and drops out of the picture spotter quiz until a correct, licensed picture is sourced. Pictures legitimately shared by the same instrument in two decks are kept and allow-listed in test/clinix-practical-images.test.mjs. Details in [[CliniX]] Gotchas.
