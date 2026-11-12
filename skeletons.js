@@ -50,10 +50,22 @@
     if (el.children.length > 2 || (wide && !isWideText(el.textContent))) return false;
     var cs = getComputedStyle(el);
     if (cs.display.indexOf("inline") === 0 || cs.position === "fixed") return false;
+    // A value beside its label in a row ("Hospital  Loading…" on the Profile page) is a field, not a placeholder
+    // block: no skeleton rows and no loader there (owner 2026-11-11: hearts appeared inside Settings > Profile).
+    if (isFieldValue(el)) return false;
     if (el.getBoundingClientRect().width < 160) return false;
     return !wide || (!!window.SMD_LOADER && aloneOnScreen(el));
   }
-  // A placeholder alone on its screen gets the 3D loader and a fact instead of rows; everything else keeps the rows.
+  function isFieldValue(el) {
+    var par = el.parentElement; if (!par) return false;
+    var pcs = getComputedStyle(par);
+    if (pcs.display.indexOf("flex") < 0 && pcs.display.indexOf("grid") < 0) return false;
+    if (pcs.display.indexOf("flex") >= 0 && pcs.flexDirection.indexOf("column") === 0) return false;
+    return par.textContent.replace(/\s+/g, "").length - el.textContent.replace(/\s+/g, "").length > 0;
+  }
+  // A placeholder alone on its screen gets the full-screen loader and a fact instead of rows; everything else keeps
+  // the rows. A screen holding SEVERAL placeholders is a form still filling in (Profile, a settings page), never an
+  // empty screen, so it never gets the loader.
   function aloneOnScreen(el) {
     var own = el.textContent.replace(/\s+/g, "").length, r = el, p;
     while ((p = r.parentElement) && p !== document.body) {
@@ -61,7 +73,16 @@
       if (t.length > 3000 || t.replace(/\s+/g, "").length - own > 160) break;
       r = p;
     }
+    if (r !== el && morePlaceholders(r, el)) return false;
     return r.getBoundingClientRect().height >= 280;
+  }
+  function morePlaceholders(root, el) {
+    var all = root.getElementsByTagName("*"), n = 0;
+    for (var i = 0; i < all.length && i < 300; i++) {
+      var x = all[i]; if (x === el || x.contains(el) || el.contains(x) || x.children.length) continue;
+      if (isPlaceholderText(x.textContent) && ++n >= 1) return true;
+    }
+    return false;
   }
   function mark(el) {
     var ld = null;
