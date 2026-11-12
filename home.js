@@ -4748,13 +4748,37 @@
       try { toast(msg); } catch (e) {}
       setTimeout(function () { try { location.reload(); } catch (e) {} }, 1000);
     };
+    var signOutAfterServerDelete = function () {
+      try { var b = document.getElementById("sessionSignOut"); if (b) b.click(); } catch (e) {}
+      finish("Your account and all data were deleted.");
+    };
+    // Server-side delete first: the web SDK's user.delete() needs a recent login, and its popup
+    // re-auth cannot open inside the native WebView, so on the phone the account used to survive.
+    var serverDelete = function () {
+      var getTok = window.SMD_IDTOKEN_REFRESH ? window.SMD_IDTOKEN_REFRESH(6000) : Promise.resolve(window.SMD_IDTOKEN ? window.SMD_IDTOKEN() : null);
+      return getTok.then(function (tok) {
+        if (!tok) return false;
+        return fetch((window.SMD_API_BASE || "") + "/api/account/delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok },
+          body: JSON.stringify({ confirm: "DELETE" })
+        }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { return !!(d && d.ok); });
+      }).catch(function () { return false; });
+    };
     var afterCases = function () {
+      if (email) {
+        serverDelete().then(function (ok) { if (ok) signOutAfterServerDelete(); else clientDelete(); });
+        return;
+      }
+      clientDelete();
+    };
+    var clientDelete = function () {
       try {
         var u = window.SMD_AUTH && SMD_AUTH.currentUser;
         if (u && u.delete) {
           var signOutFallback = function () {
             try { var b = document.getElementById("sessionSignOut"); if (b) b.click(); } catch (e) {}
-            finish("Your data was deleted and you've been signed out.");
+            finish("Your saved data was deleted and you were signed out. To finish removing the account, sign in and delete again, or email privacy@stewardmd.in.");
           };
           u.delete()
             .then(function () { finish("Your account and all data were deleted."); })

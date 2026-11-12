@@ -56,7 +56,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>StewardMD uses Face ID to unlock the app on this device, if you choose that instead of a PIN. No biometric data leaves your device.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>StewardMD uses the microphone for MaiK Scribe voice intake so you can dictate a patient’s vitals, labs, or clinical findings. Speech is transcribed on your device; only the resulting text is used.</string>
+	<string>StewardMD uses the microphone for MaiK Scribe voice intake so you can dictate a patient’s vitals, labs, or clinical findings. Speech is transcribed on your device when it can be; if it cannot, the recording is sent securely for transcription and is not kept. You review the text before anything is applied.</string>
 	<key>NSMotionUsageDescription</key>
 	<string>StewardMD uses device motion so you can shake the phone to report a problem, and so FundX can guide you to level and rotate the phone while capturing a retinal image. Motion data stays on your device.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
@@ -64,7 +64,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>StewardMD lets you pick an existing photo (e.g. a monitor or lab image) for AI-assisted reading of values. The image is processed for the analysis you request and is not stored on our servers.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>StewardMD uses on-device speech recognition to turn your dictation into text for MaiK Scribe. Audio stays on your device so only the transcribed text is used, and you review it before anything is applied.</string>
+	<string>StewardMD uses speech recognition to turn your dictation into text for MaiK Scribe. Recognition runs on your device where your language supports it; otherwise Apple’s speech service processes the audio. You review the text before anything is applied.</string>
 	<key>NSSupportsLiveActivities</key>
 	<true/>
 	<!-- Home Screen quick actions (long-press the icon). Delivered to SceneDelegate, NOT to

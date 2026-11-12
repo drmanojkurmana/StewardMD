@@ -372,6 +372,16 @@ export async function markPurged(env, uid, how) {
   return rec;
 }
 
+// Self-service account deletion (functions/api/account/delete.js): release the verified mobile number
+// and drop the lifecycle record itself (it holds the email, name and phone), so a deleted account
+// leaves no contact details behind and the lifecycle sweeps never email it again.
+export async function deleteLifecycle(env, uid) {
+  const kv = lcKv(env); if (!kv || !uid) return false;
+  const rec = await getLifecycle(env, uid);
+  if (rec && rec.phone) { try { await releasePhone(env, uid, rec.phone); } catch (e) {} }
+  try { await kv.delete(KEY(uid)); return true; } catch (e) { return false; }
+}
+
 // List uids whose entry passes `pred(metadata)` — filtered from list() metadata, no per-key get.
 // pred receives { firstSeen, upsellAt, verifiedAt }. Returns an array of uids.
 export async function listLifecycleUids(env, pred) {
