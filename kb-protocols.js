@@ -380,6 +380,7 @@
           if (window.KBFigure.isImage && window.KBFigure.isImage(f)) {
             toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'FigImg' + i + '">' + esc(f.title || f.id) + '</button>');
             var imgsrc = window.KBFigure.imgUrl(f.src, G.SMD_PREP_BANK_API || "/api/prep/bank/", G.SMD_API_BASE || "");
+            if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.publicMediaUrl) imgsrc = G.PREP_BANK_CLIENT.publicMediaUrl(imgsrc);
             return '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'FigImg' + i + '"><h2><span class="kbp-kind">Figure</span>' + esc(f.title || f.id) + '</h2>' +
               window.KBFigure.imageHTML(f, imgsrc) + '</section>';
           }
