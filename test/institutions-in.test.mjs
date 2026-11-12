@@ -170,7 +170,7 @@ test("the one form asks for the institution exactly once", () => {
   // Only the FIELDS list: ROLE_OPTS (the Role box choices, 2026-09-26) uses the same { key: } shape.
   const fields = src.slice(src.indexOf("var FIELDS = ["), src.indexOf("];", src.indexOf("var FIELDS = [")));
   const keys = [...fields.matchAll(/\{ key: "(\w+)"/g)].map((m) => m[1]);
-  assert.deepEqual(keys, ["role", "name", "phone", "state", "city", "hospital", "degree", "speciality"]);
+  assert.deepEqual(keys, ["role", "name", "gender", "phone", "state", "city", "hospital", "degree", "speciality"]);
   assert.equal(keys.filter((k) => k === "hospital").length, 1);
 });
 
