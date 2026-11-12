@@ -171,7 +171,9 @@ test('proveView: Gemini ranks the wrong call first, execution against the screen
   const sent = JSON.stringify(asked[0]);
   assert.ok(!/MR900001|TEST ALPHA|Paracetamol|abc/.test(sent), sent);
   assert.equal(asked[0].candidates[2].path, '/Doctor/Home/GetMedicines/');
-  assert.deepEqual(page.executed, [11, 12, 13], 'replayed in the brain order until one matched the screen');
+  assert.deepEqual(page.executed.slice(0, 3), [11, 12, 13], 'replayed in the brain order until one matched the screen');
+  // After the second-row check (prove.mjs crossCheck), the first patient's activation is sent again.
+  assert.deepEqual(page.executed.slice(3), [11], 'the first patient is activated again');
 
   assert.equal(view.proof.status, 'proven');
   assert.equal(view.proof.brain, true);
@@ -270,7 +272,9 @@ test('proveView takes the lab search list, not the whole visit page that also sh
   const brain = { async pickEndpoint() { return { ranked: [{ index: 0, role: 'data' }, { index: 1, role: 'data' }] }; } };
   const view = { resourceHint: 'labs', pathTemplate: HOST + '/Doctor/Home', rowsSelector: 'tr', headers: ['Test'] };
   await proveView({ client: page, view, brain, parents: [{ label: 'worklist', rows: rowsForChain(WL_JSON, 'application/json') }] });
-  assert.deepEqual(page.executed, [21, 22], 'every candidate is replayed, not only the first that carries the screen');
+  assert.deepEqual(page.executed.slice(0, 2), [21, 22], 'every candidate is replayed, not only the first that carries the screen');
+  // Anything after that is the second-row check putting the first row's prerequisites back.
+  assert.ok(page.executed.slice(2).every((s) => s === 21 || s === 22), JSON.stringify(page.executed));
   assert.equal(view.proof.status, 'proven');
   assert.equal(view.endpoints.find((e) => e.role === 'data').path.split('?')[0], '/Lab/Home/GetSearchPatientId');
 });

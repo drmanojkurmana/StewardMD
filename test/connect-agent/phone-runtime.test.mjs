@@ -265,6 +265,10 @@ test('readPatientDetails posts every proven patient-level prerequisite once, bef
 /* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
  * medicines in parallel from the one session; a doctor waits for the slowest, not the sum. */
 test('readPatientDetails issues the detail reads in parallel after the activation', async () => {
+  // Concurrency is under test here, not pacing: no start gap (adapter-runtime PACE).
+  const { PACE } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const gap = PACE.minGapMs; PACE.minGapMs = 0;
+  try {
   const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
   const started = [];
   let inFlight = 0, peak = 0;
@@ -289,6 +293,7 @@ test('readPatientDetails issues the detail reads in parallel after the activatio
   assert.equal(peak, 3, 'all three reads were in flight at once (peak ' + peak + '): ' + started.join(' | '));
   assert.deepEqual(secs.map((s) => s.resource), ['medications', 'labs', 'radiology'], 'sections keep their fixed order');
   assert.ok(secs.every((s) => s.rows.length === 1));
+  } finally { PACE.minGapMs = gap; }
 });
 
 /* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302 to
@@ -334,6 +339,10 @@ test('mapRow: a row carrying episodeId and bedName keeps them over mapped screen
  * the other, up to 15 round trips per resource per patient; the hand-built adapter's single session
  * carries concurrent calls (getOpdProfile). Rows are read a few at a time and keep their order. */
 test('readPatientDetails reads the detail chain a few rows at a time, in order', async () => {
+  // Concurrency is under test here, not pacing: no start gap (adapter-runtime PACE).
+  const { PACE } = await import('../../connect-agent/phone/adapter-runtime.mjs');
+  const gap = PACE.minGapMs; PACE.minGapMs = 0;
+  try {
   const { PAGE_TOKENS } = await import('../../connect-agent/phone/adapter-runtime.mjs');
   let inFlight = 0, peak = 0;
   const plugin = {
@@ -365,6 +374,7 @@ test('readPatientDetails reads the detail chain a few rows at a time, in order',
   assert.ok(peak >= 2, 'detail reads overlap (peak ' + peak + ')');
   assert.deepEqual(detail.rows.map((r) => r._rowIndex), [0, 1, 2, 3, 4, 5], 'rows keep the list order even when the first is slowest');
   assert.deepEqual(detail.rows.map((r) => [r._key, r.Value, r._of]), [1, 2, 3, 4, 5, 6].map((n) => ['R' + n, 'R' + n, 'Test ' + n]));
+  } finally { PACE.minGapMs = gap; }
 });
 
 

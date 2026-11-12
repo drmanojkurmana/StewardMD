@@ -16,6 +16,7 @@
 
 import { redactEndpoints, scrubForBrain, scrubExcerpt } from './deep-crawl.mjs';
 import { rowsFromJson, TOKEN_KEY, PAGE_SIZE_KEY, PAGE_START_KEY, PAGE_NUMBER_KEY, PATIENT_KEY, VISIT_KEY } from './adapter-runtime.mjs';
+import { guardsOn, isIdentityKey, normId, LIVE_VALUES_SRC, scrubConstants } from './guards.mjs';
 
 export const ROLES = Object.freeze(['data', 'prerequisite', 'lookup', 'ping', 'shell']);
 const WRITE_PATH = /save|update|insert|delete|remove|create|submit|approve|cancel|logout|logoff|signout/i;
@@ -622,11 +623,179 @@ export function specificity(hit, screenRowCount) {
   return ((hit && hit.o && hit.o.ratio) || 0) + fit - wholePage - size;
 }
 
+/* ---- pure: the second-row check ----------------------------------------------------------------- */
+
+/* TWO PATIENTS, NOT ONE (2026-11-12, after goodnight000/api-anything's two-run learning). A request
+ * proven on one patient proves that its answer carries that patient's screen. It does not prove the
+ * hospital reads the patient from the request: GHIS-style EMRs keep the current patient in the server
+ * session, and a field recorded as a constant can be the patient after all. So the proven call (and the
+ * prerequisites the page sent before it) is sent once more with a SECOND row's values in every field
+ * traced to that row's list: another patient from the ward list, or another order from a lab list. If
+ * the answer is the first one again, or names the first patient, the request is not about the row it
+ * is given, and it is not saved. The first row is activated again afterwards. */
+
+/** The request's own field values, as paramsOf reads them: { key: value }. */
+export function valuesOf(request) {
+  const out = {};
+  try { new URL(request.url).searchParams.forEach((v, k) => { if (!(k in out)) out[k] = v; }); } catch { /* no query */ }
+  const b = request.body;
+  if (typeof b === 'string' && b) {
+    if (b.trim()[0] === '{') { try { const j = JSON.parse(b); for (const k of Object.keys(j)) if (!(k in out) && (j[k] == null || typeof j[k] !== 'object')) out[k] = j[k] == null ? '' : String(j[k]); } catch { /* not json */ } }
+    else new URLSearchParams(b).forEach((v, k) => { if (!(k in out)) out[k] = v; });
+  }
+  return out;
+}
+
+/** The nearest parent list any of these requests' fields trace to (its label), or null. */
+export function pivotOf(paramSets, parents) {
+  for (const p of Array.isArray(parents) ? parents : []) {
+    if (!p || !p.label) continue;
+    if (paramSets.some((ps) => Object.values(ps || {}).some((src) => src && src.from === p.label))) return p.label;
+  }
+  return null;
+}
+
+function rowValue(row, src) {
+  if (!row || !src) return '';
+  if (Array.isArray(src.fields)) { const parts = src.fields.map((f) => String(row[f] == null ? '' : row[f]).trim()); return parts.every(Boolean) ? parts.join(src.join || '') : ''; }
+  return String(row[src.field] == null ? '' : row[src.field]).trim();
+}
+
+/**
+ * otherRows(rows, traced, max) -> up to `max` rows that fill every traced field and differ from the
+ * proven request in at least one of them. `traced` = [{ key, src, value }] over all the requests.
+ */
+export function otherRows(rows, traced, max = 2) {
+  const out = [];
+  if (!traced.length) return out;
+  for (const r of Array.isArray(rows) ? rows : []) {
+    const vals = traced.map((t) => rowValue(r, t.src));
+    if (vals.some((v) => !v)) continue;
+    if (vals.every((v, i) => v === String(traced[i].value))) continue;
+    out.push(r);
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
+/** substituted(request, params, label, row) -> { url, body }: every field traced to `label` takes the row's value. */
+export function substituted(request, params, label, row) {
+  const swap = {};
+  for (const k of Object.keys(params || {})) {
+    const src = params[k];
+    if (src && src.from === label) { const v = rowValue(row, src); if (v) swap[k] = v; }
+  }
+  let url = request.url;
+  try {
+    const u = new URL(request.url);
+    let touched = false;
+    for (const k of Object.keys(swap)) if (u.searchParams.has(k)) { u.searchParams.set(k, swap[k]); touched = true; }
+    if (touched) url = u.href;
+  } catch { /* keep the url */ }
+  let body = request.body == null ? null : String(request.body);
+  if (body) {
+    if (body.trim()[0] === '{') {
+      try {
+        const j = JSON.parse(body);
+        let touched = false;
+        for (const k of Object.keys(swap)) if (k in j && (j[k] == null || typeof j[k] !== 'object')) { j[k] = typeof j[k] === 'number' && /^-?\d+(\.\d+)?$/.test(swap[k]) ? Number(swap[k]) : swap[k]; touched = true; }
+        if (touched) body = JSON.stringify(j);
+      } catch { /* not json */ }
+    } else if (body.indexOf('=') >= 0) {
+      body = body.split('&').map((part) => {
+        const i = part.indexOf('=');
+        const k = i >= 0 ? decodeURIComponent(part.slice(0, i).replace(/\+/g, ' ')) : part;
+        return Object.prototype.hasOwnProperty.call(swap, k) ? part.slice(0, i) + '=' + encodeURIComponent(swap[k]) : part;
+      }).join('&');
+    }
+  }
+  return { url, body };
+}
+
+/** The identity values a set of rows names (guards.mjs isIdentityKey), folded. */
+export function identitiesIn(rows) {
+  const out = new Set();
+  for (const r of Array.isArray(rows) ? rows.slice(0, 200) : []) {
+    if (!r || typeof r !== 'object') continue;
+    for (const k of Object.keys(r)) { if (!isIdentityKey(k)) continue; const v = normId(r[k]); if (v.length >= 3 && /\d/.test(v)) out.add(v); }
+  }
+  return out;
+}
+
+/**
+ * crossVerdict({ first, second, firstRows, secondRows, otherPatient }) -> 'same-answer' |
+ * 'carries-first-patient' | 'differs' | 'none' ('none': the second row has nothing to compare).
+ */
+export function crossVerdict({ first, second, firstRows, secondRows, otherPatient }) {
+  const a = haystack(first && first.text, first && first.contentType);
+  const b = haystack(second && second.text, second && second.contentType);
+  if (Array.isArray(firstRows) && firstRows.length && a.length >= 8 && a === b) return 'same-answer';
+  if (otherPatient) {
+    const ida = identitiesIn(firstRows), idb = identitiesIn(secondRows);
+    if (ida.size && idb.size && [...idb].every((v) => ida.has(v))) return 'carries-first-patient';
+  }
+  if (!Array.isArray(secondRows) || !secondRows.length) return 'none';
+  return 'differs';
+}
+
 /* ---- the loop ----------------------------------------------------------------------------------- */
 
 async function evalJson(client, expression, fallback) {
   try { const r = await client.evaluate({ expression }); return JSON.parse(r && r.result != null ? r.result : 'null') ?? fallback; } catch { return fallback; }
 }
+
+/**
+ * crossCheck({ client, e, pre, parents, firstResp, firstRows }) -> { verdict, tried }
+ * verdict: 'differs' (the second row answered something else: the request is about its row),
+ * 'same-answer' / 'carries-first-patient' (it is not), 'inconclusive' (the second rows had nothing to
+ * compare) or 'skipped' (no field traces to a list, or the list has no second row). Whatever happens,
+ * the first row's own prerequisites are sent again at the end, so the page is left on the first row.
+ */
+export async function crossCheck({ client, e, pre = [], parents = [], firstResp, firstRows }) {
+  const tried = [];
+  const reqs = pre.concat([e]);
+  const paramSets = reqs.map((r) => paramsOf(r, parents));
+  const label = pivotOf(paramSets, parents);
+  if (!label) return { verdict: 'skipped', tried };
+  const parent = parents.find((p) => p && p.label === label) || { rows: [] };
+  const traced = [];
+  reqs.forEach((r, i) => {
+    const vals = valuesOf(r);
+    for (const k of Object.keys(paramSets[i])) {
+      const src = paramSets[i][k];
+      if (src && src.from === label && vals[k] != null) traced.push({ key: k, src, value: vals[k] });
+    }
+  });
+  const rows = otherRows(parent.rows, traced, 2);
+  if (!rows.length) return { verdict: 'skipped', tried };
+  const otherPatient = label === 'worklist';
+  let verdict = 'inconclusive';
+  try {
+    for (const row of rows) {
+      for (let i = 0; i < pre.length; i += 1) {
+        const s = substituted(pre[i], paramSets[i], label, row);
+        await evalJson(client, PROVE_SOURCES.execRequest({ method: pre[i].method, url: s.url, body: s.body, reqCt: pre[i].reqCt, xhr: pre[i].xhr }), null);
+      }
+      const s = substituted(e, paramSets[pre.length], label, row);
+      const resp = await evalJson(client, PROVE_SOURCES.execRequest({ method: e.method, url: s.url, body: s.body, reqCt: e.reqCt, xhr: e.xhr }), null);
+      const kind = responseKind(resp);
+      tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: 'cross-check', kind, hits: 0, ratio: 0 });
+      if (kind === 'login') break;
+      if (kind !== 'json' && kind !== 'html') continue;
+      const v = crossVerdict({ first: firstResp, second: resp, firstRows, secondRows: rowsForChain(resp.text, resp.contentType), otherPatient });
+      if (v === 'none') continue;
+      verdict = v;
+      break;
+    }
+  } finally {
+    /* By the recorded request itself, never by its buffer seq: the page observer records our own
+     * replays too, and re-sending a request moves its buffer entry to a new seq (discovery.mjs keep),
+     * so the old seq is gone by now (real browser, 2026-11-12). */
+    for (const p of pre) await evalJson(client, PROVE_SOURCES.execRequest({ method: p.method, url: p.url, body: p.body, reqCt: p.reqCt, xhr: p.xhr }), null);
+  }
+  return { verdict, tried };
+}
+const REFUSED = ['same-answer', 'carries-first-patient'];
 
 /**
  * proveView({ client, view, brain, since, label, parents, pageUrl }) -> { proven, trace }
@@ -635,7 +804,7 @@ async function evalJson(client, expression, fallback) {
  * unproven view keeps no endpoints (it is read from its page). `proven` carries the response text
  * and rows for the children to chain from; it never leaves the phone.
  */
-export async function proveView({ client, view, brain = null, since = -1, label = '', parents = [], pageUrl = null }) {
+export async function proveView({ client, view, brain = null, since = -1, label = '', parents = [], pageUrl = null, activation = [] }) {
   const trace = { tried: [], model: null, brain: false };
   const done = (status, extra = {}) => { view.proof = Object.assign({ status, tried: trace.tried.length, brain: trace.brain }, trace.model ? { model: trace.model } : {}, extra); delete view.endpoints; return { proven: null, trace }; };
   if (!view || !client) return { proven: null, trace };
@@ -655,6 +824,18 @@ export async function proveView({ client, view, brain = null, since = -1, label 
     return (!pageOrigin || u.origin === pageOrigin) && !WRITE_PATH.test(u.pathname) && e.status >= 200 && e.status < 400;
   }).slice(-12);
   if (!entries.length) return done('no-requests');
+  /* NO LIVE VALUE IN A STORED REQUEST. A constant that is a cookie, a stored value or a hidden token of
+   * this page (or looks like a key) is never uploaded as one (guards.mjs scrubConstants). */
+  const guarded = guardsOn();
+  const live = guarded ? await evalJson(client, LIVE_VALUES_SRC, []) : [];
+  const cleanParams = (p) => { const sp = safeParams(p); return guarded ? scrubConstants(sp, Array.isArray(live) ? live : []).params : sp; };
+  /* The second-row check for a chained detail accepted without screen values. */
+  const chainCheck = async (e, resp, rows) => {
+    if (!guarded) return 'skipped';
+    const cc = await crossCheck({ client, e, pre: [], parents, firstResp: resp, firstRows: rows });
+    trace.tried.push(...cc.tried);
+    return cc.verdict;
+  };
 
   const shown = screenRows(await evalJson(client, PROVE_SOURCES.screen(Object.assign({}, view, { narrative: isNarrativeDetail(view) })), []));
   let cells = consideredCells(shown.flat());
@@ -688,8 +869,10 @@ export async function proveView({ client, view, brain = null, since = -1, label 
       trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: 'data', kind, hits: 0, ratio: 0, chained: true });
       const [red] = redactEndpoints([{ method: e.method, url: e.url, bodyKeys: candidateStructure(e).bodyKeys, requestKind: /json/i.test(e.reqCt) ? 'json' : (e.body ? 'form' : undefined), xhr: e.xhr }], e.url);
       if (!red) continue;
-      view.endpoints = [Object.assign(red, { role: 'data', params: safeParams(p), proof: { kind, hits: 0, cells: 0, overlap: 0, rows: rows.length, chained: true } })];
-      view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: 0, hits: 0, cells: 0, kind, population: rows.length, chained: true }, trace.model ? { model: trace.model } : {});
+      const cross = await chainCheck(e, resp, rows);
+      if (REFUSED.includes(cross)) return done('same-answer', { crossCheck: cross });
+      view.endpoints = [Object.assign(red, { role: 'data', params: cleanParams(p), proof: { kind, hits: 0, cells: 0, overlap: 0, rows: rows.length, chained: true } })];
+      view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: 0, hits: 0, cells: 0, kind, population: rows.length, chained: true, crossCheck: cross }, trace.model ? { model: trace.model } : {});
       return { proven: { label: view.resourceHint, rows }, trace };
     }
   }
@@ -784,8 +967,10 @@ export async function proveView({ client, view, brain = null, since = -1, label 
         trace.tried.push({ method: e.method, path: candidateStructure(e).path.replace(/\d{3,}/g, '#'), role: 'data', kind, hits: 0, ratio: 0, chained: true });
         const [red] = redactEndpoints([{ method: e.method, url: e.url, bodyKeys: candidateStructure(e).bodyKeys, requestKind: /json/i.test(e.reqCt) ? 'json' : (e.body ? 'form' : undefined), xhr: e.xhr }], e.url);
         if (!red) continue;
-        view.endpoints = [Object.assign(red, { role: 'data', params: safeParams(p), proof: { kind, hits: 0, cells: 0, overlap: 0, rows: rows.length, chained: true } })];
-        view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: 0, hits: 0, cells: 0, kind, population: rows.length, chained: true }, trace.model ? { model: trace.model } : {});
+        const cross = await chainCheck(e, resp, rows);
+        if (REFUSED.includes(cross)) return done('same-answer', { crossCheck: cross });
+        view.endpoints = [Object.assign(red, { role: 'data', params: cleanParams(p), proof: { kind, hits: 0, cells: 0, overlap: 0, rows: rows.length, chained: true } })];
+        view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: 0, hits: 0, cells: 0, kind, population: rows.length, chained: true, crossCheck: cross }, trace.model ? { model: trace.model } : {});
         return { proven: { label: view.resourceHint, rows }, trace };
       }
     }
@@ -824,27 +1009,39 @@ export async function proveView({ client, view, brain = null, since = -1, label 
   const endpointOf = (e, role, proof) => {
     const [red] = redactEndpoints([{ method: e.method, url: e.url, bodyKeys: candidateStructure(e).bodyKeys, requestKind: /json/i.test(e.reqCt) ? 'json' : (e.body ? 'form' : undefined), xhr: e.xhr }], e.url);
     if (!red) return null;
-    return Object.assign(red, { role, params: safeParams(paramsOf(e, parents)), proof });
+    return Object.assign(red, { role, params: cleanParams(paramsOf(e, parents)), proof });
   };
   const eps = [];
+  const preEntries = [];
   for (const e of entries) {
     if (e.seq >= hit.e.seq || e.method !== 'POST') continue;
     // Patient-bound (its fields trace to a row) and not what the brain called a ping or a lookup.
     const role = roleOf.get(entries.indexOf(e));
     if (role === 'ping' || role === 'lookup' || !chained(paramsOf(e, parents))) continue;
     const ep = endpointOf(e, 'prerequisite', { kind: 'fired-before' });
-    if (ep) eps.push(ep);
+    if (ep) { eps.push(ep); preEntries.push(e); }
   }
   const dataRows = rowsForChain(hit.resp.text, hit.resp.contentType);
   const dataEp = endpointOf(hit.e, 'data', { kind: hit.kind, hits: hit.o.hits, cells: hit.o.cells, overlap: hit.o.ratio, rows: dataRows.length });
   if (!dataEp) return done('unproven');
   eps.push(dataEp);
+  /* THE SECOND ROW. The ward list is the population, not one patient's: it is never cross-checked. */
+  let cross = 'skipped';
+  if (guarded && String(view.resourceHint || '') !== 'worklist') {
+    /* A view with no prerequisite of its own is read, at runtime, after the adapter's activation
+     * (runtime.mjs readPatientDetails posts every proven activation first): the check does the same. */
+    const pre = preEntries.length ? preEntries : (Array.isArray(activation) ? activation : []);
+    const cc = await crossCheck({ client, e: hit.e, pre, parents, firstResp: hit.resp, firstRows: dataRows });
+    trace.tried.push(...cc.tried);
+    cross = cc.verdict;
+    if (REFUSED.includes(cross)) return done('same-answer', { crossCheck: cross });
+  }
   view.endpoints = eps.slice(-8);
   // LEARN the columns too: which response field the screen shows under each header, by value.
   const columns = learnColumns(view.headers, shown, dataRows);
   if (Object.keys(columns).length) view.columns = columns; else delete view.columns;
-  view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind, population: dataRows.length }, trace.model ? { model: trace.model } : {});
-  return { proven: { label: view.resourceHint, rows: dataRows }, trace };
+  view.proof = Object.assign({ status: 'proven', tried: trace.tried.length, brain: trace.brain, overlap: hit.o.ratio, hits: hit.o.hits, cells: hit.o.cells, kind: hit.kind, population: dataRows.length }, guarded ? { crossCheck: cross } : {}, trace.model ? { model: trace.model } : {});
+  return { proven: { label: view.resourceHint, rows: dataRows, activation: preEntries.filter((e) => Object.values(paramsOf(e, parents)).some((src) => src && src.from === 'worklist')) }, trace };
 }
 
 /**
@@ -856,6 +1053,8 @@ export async function proveView({ client, view, brain = null, since = -1, label 
 export function createProofBook({ brain = null } = {}) {
   const rowsBy = new Map();
   const trace = [];
+  // The page's own patient activation (POSTs traced to the ward list), as last proven: on the phone only.
+  let activation = [];
   return {
     trace,
     has: (resource) => rowsBy.has(resource),
@@ -867,12 +1066,13 @@ export function createProofBook({ brain = null } = {}) {
       let pageUrl = null;
       try { const cur = await client.currentUrl(); pageUrl = typeof cur === 'string' ? cur : cur && cur.url; } catch { pageUrl = null; }
       let out = { proven: null, trace: { tried: [] } };
-      try { out = await proveView({ client, view, brain, since, label, parents, pageUrl }); } catch { view.proof = { status: 'error', tried: 0, brain: false }; delete view.endpoints; }
+      try { out = await proveView({ client, view, brain, since, label, parents, pageUrl, activation }); } catch { view.proof = { status: 'error', tried: 0, brain: false }; delete view.endpoints; }
+      if (out.proven && Array.isArray(out.proven.activation) && out.proven.activation.length) activation = out.proven.activation;
       // Several proven lists of one kind (the doctor's own list and the ward-wide list): a field is
       // traced against all of their rows.
       if (out.proven) {
         const prev = rowsBy.get(view.resourceHint);
-        rowsBy.set(view.resourceHint, prev ? { label: prev.label, rows: prev.rows.concat(out.proven.rows).slice(0, 3000) } : out.proven);
+        rowsBy.set(view.resourceHint, prev ? { label: prev.label, rows: prev.rows.concat(out.proven.rows).slice(0, 3000) } : { label: out.proven.label, rows: out.proven.rows });
       }
       trace.push(Object.assign({ resource: view.resourceHint }, view.proof || {}, { attempts: out.trace.tried }));
       return view.proof || null;

@@ -180,12 +180,26 @@ function cleanProvenParams(raw) {
     else if (s.unmapped === true) out[k] = { unmapped: true };
     else if (["size", "start", "number"].indexOf(s.page) >= 0) out[k] = { page: s.page };
     else if (TODAY_FORMATS.indexOf(s.today) >= 0) out[k] = { today: s.today };
-    else if (typeof s.constant === "string" && /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/.test(s.constant) && !/\d{3,}/.test(s.constant)) out[k] = { constant: s.constant };
+    // A constant shaped like a key (a session value the page sent, guards.mjs randomLooking) is never
+    // stored: it degrades to untraced, so the runtime sends it empty rather than a stale credential.
+    else if (typeof s.constant === "string" && /^[A-Za-z0-9_][A-Za-z0-9_ .-]{0,31}$/.test(s.constant) && !/\d{3,}/.test(s.constant)) out[k] = keyShaped(s.constant) ? { unmapped: true } : { constant: s.constant };
     else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && fieldNameOk(s.field)) out[k] = { from: s.from, field: s.field };
     else if (typeof s.from === "string" && /^[a-z-]{1,32}$/.test(s.from) && Array.isArray(s.fields) && s.fields.length === 2 && s.fields.every(fieldNameOk) && /^[-_/|]$/.test(s.join)) out[k] = { from: s.from, fields: s.fields.slice(), join: s.join };
     else throw new OnboardError("invalid", "observedViews: endpoint params invalid");
   }
   return out;
+}
+/* Same rule as connect-agent/phone/guards.mjs randomLooking: 16+ characters, no space, letters with two
+ * or more digits and 3.5+ bits a character, or 24+ characters at 4.2+ bits. */
+export function keyShaped(v) {
+  const t = String(v == null ? "" : v);
+  if (t.length < 16 || /\s/.test(t)) return false;
+  const freq = {};
+  for (const ch of t) freq[ch] = (freq[ch] || 0) + 1;
+  let h = 0;
+  for (const ch of Object.keys(freq)) { const p = freq[ch] / t.length; h -= p * Math.log2(p); }
+  if (t.length >= 24 && h >= 4.2) return true;
+  return (t.match(/\d/g) || []).length >= 2 && (t.match(/[A-Za-z]/g) || []).length >= 4 && h >= 3.5;
 }
 function cleanProofCounts(raw, kinds, name) {
   if (!raw || typeof raw !== "object" || Array.isArray(raw)) throw new OnboardError("invalid", "observedViews: " + name + " invalid");
@@ -204,7 +218,7 @@ function cleanProofCounts(raw, kinds, name) {
 // Validates+strips body.observedViews (crawler-observed server-rendered views) for inferHtmlOperations.
 // Fail-closed: an out-of-shape entry throws "invalid" rather than silently dropping fields. Hostile keys
 // (__proto__/constructor/prototype) are already rejected on the whole body upstream of this call.
-function cleanObservedViews(raw) {
+export function cleanObservedViews(raw) {
   if (raw === undefined || raw === null) return [];
   if (!Array.isArray(raw)) throw new OnboardError("invalid", "observedViews must be an array");
   if (raw.length > 40) throw new OnboardError("invalid", "observedViews: too many entries");
@@ -336,8 +350,14 @@ function cleanObservedViews(raw) {
     }
     if (v.proof !== undefined) {
       const p = cleanProofCounts(v.proof, ["json", "html"], "proof");
-      if (["proven", "unproven", "no-requests", "no-screen-values", "signed-out", "error", "no-headers", "no-rows"].indexOf(v.proof.status) < 0) throw new OnboardError("invalid", "observedViews: proof status invalid");
+      // "same-answer": the phone's two-row check (prove.mjs crossCheck) found the request answers the same,
+      // or names the first patient, for a second row: it is not about the row it is given, never proven.
+      if (["proven", "unproven", "no-requests", "no-screen-values", "signed-out", "error", "no-headers", "no-rows", "same-answer"].indexOf(v.proof.status) < 0) throw new OnboardError("invalid", "observedViews: proof status invalid");
       p.status = v.proof.status;
+      if (v.proof.crossCheck !== undefined) {
+        if (["differs", "same-answer", "carries-first-patient", "inconclusive", "skipped"].indexOf(v.proof.crossCheck) < 0) throw new OnboardError("invalid", "observedViews: proof crossCheck invalid");
+        p.crossCheck = v.proof.crossCheck;
+      }
       if (v.proof.tried !== undefined) { if (!Number.isInteger(v.proof.tried) || v.proof.tried < 0 || v.proof.tried > 50) throw new OnboardError("invalid", "observedViews: proof tried invalid"); p.tried = v.proof.tried; }
       if (v.proof.brain !== undefined) { if (typeof v.proof.brain !== "boolean") throw new OnboardError("invalid", "observedViews: proof brain invalid"); p.brain = v.proof.brain; }
       if (v.proof.model !== undefined && v.proof.model !== null) { if (typeof v.proof.model !== "string" || !/^[\w.:\/-]{1,80}$/.test(v.proof.model)) throw new OnboardError("invalid", "observedViews: proof model invalid"); p.model = v.proof.model; }
@@ -376,6 +396,37 @@ function cleanProofTrace(raw) {
         ratio: Math.max(0, Math.min(1, Number(a.ratio) || 0)),
       })),
   }));
+}
+
+/* WHAT A REPAIR CHANGED, IN LINES AN OWNER CAN READ (2026-11-12, after goodnight000/api-anything's heal
+ * log). A self-repair files a new candidate; the owner deciding on it saw only "a corrected adapter".
+ * One line per change between the approved view and the repaired one: the page, each call (method and
+ * redacted path), each field's SOURCE KIND (never its value) and the columns. At most 12 lines of 100
+ * characters. Inputs are cleaned observedViews, so nothing here is PHI. */
+export function describeRepair(before, after) {
+  const lines = [];
+  const add = (l) => { if (lines.length < 12) lines.push(String(l).slice(0, 100)); };
+  const res = (after && after.resourceHint) || (before && before.resourceHint) || "view";
+  if (!before) { add(res + ": new screen (nothing was approved for it before)"); }
+  const pagePath = (v) => { try { return v && v.pathTemplate ? new URL(redactPathValues(v.pathTemplate)).pathname : ""; } catch { return ""; } };
+  if (before && pagePath(before) !== pagePath(after)) add(res + ": page " + (pagePath(before) || "?") + " -> " + (pagePath(after) || "?"));
+  const callOf = (v) => (Array.isArray(v && v.endpoints) ? v.endpoints : []).filter((e) => e && e.role === "data")[0] || null;
+  const sig = (e) => (e ? e.method + " " + String(e.path || "").split("?")[0] : "none");
+  const a = callOf(before), b = callOf(after);
+  if (sig(a) !== sig(b)) add(res + ": data call " + sig(a) + " -> " + sig(b));
+  const kind = (src) => !src ? "absent" : src.token ? "page token" : src.empty ? "empty" : src.unmapped ? "untraced" : src.constant !== undefined ? "constant" : src.page ? "paging" : src.today ? "today" : src.from ? "from " + src.from : "other";
+  const pa = (a && a.params) || {}, pb = (b && b.params) || {};
+  for (const k of Array.from(new Set(Object.keys(pa).concat(Object.keys(pb))))) {
+    const x = kind(pa[k]), y = kind(pb[k]);
+    if (x !== y) add(res + ": field " + k + ": " + x + " -> " + y);
+  }
+  const preCount = (v) => (Array.isArray(v && v.endpoints) ? v.endpoints : []).filter((e) => e && e.role === "prerequisite").length;
+  if (before && preCount(before) !== preCount(after)) add(res + ": activation calls " + preCount(before) + " -> " + preCount(after));
+  const ha = Array.isArray(before && before.headers) ? before.headers : [], hb = Array.isArray(after && after.headers) ? after.headers : [];
+  const gone = ha.filter((h) => hb.indexOf(h) < 0), came = hb.filter((h) => ha.indexOf(h) < 0);
+  if (before && (gone.length || came.length)) add(res + ": columns" + (came.length ? " +" + came.join(", +") : "") + (gone.length ? " -" + gone.join(", -") : ""));
+  if (!lines.length) add(res + ": the same request was learned again (nothing changed)");
+  return lines;
 }
 
 /* ENDPOINT-COMPLETE OR NOT COMPLETE (owner, 2026-09-16). Every routine clinical resource must be a
@@ -1259,6 +1310,8 @@ export async function onRequest(context) {
         guided: !!v.guided,
         verified: v.verified || null,
         endpoints: Array.isArray(v.endpoints) ? v.endpoints.length : 0,
+        // The phone's two-patient check (prove.mjs crossCheck): did a second row get its own answer.
+        crossCheck: v.proof && typeof v.proof.crossCheck === "string" ? v.proof.crossCheck : null,
       }));
       return jsonResponse({
         ok: true, id: version.id, state: version.lifecycle, deploymentId: version.deployment_id,
@@ -1267,6 +1320,7 @@ export async function onRequest(context) {
         requestedBy: (phoneState && phoneState.requestedBy) || null,
         requestedAt: (phoneState && phoneState.requestedAt) || null,
         pagesObserved: phoneState && Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents.length : 0,
+        repair: phoneState && phoneState.repairedFrom ? { from: phoneState.repairedFrom, changes: Array.isArray(phoneState.repairChanges) ? phoneState.repairChanges : [] } : null,
         views,
         proofTrace: phoneState && Array.isArray(phoneState.proofTrace) ? phoneState.proofTrace : [],
         completeness: adapterCompleteness(phoneState && phoneState.observedViews),
@@ -1347,6 +1401,9 @@ export async function onRequest(context) {
         throw new OnboardError("conflict", "no candidate manifest on this adapter");
       }
       view.guided = true;
+      const before = (Array.isArray(phoneState.observedViews) ? phoneState.observedViews : []).filter((v) => v && v.resourceHint === view.resourceHint)
+        .sort((x, y) => ((y.proof && y.proof.status === "proven") ? 1 : 0) - ((x.proof && x.proof.status === "proven") ? 1 : 0))[0] || null;
+      const repairChanges = describeRepair(before, view);
       const observedViews = (Array.isArray(phoneState.observedViews) ? phoneState.observedViews : [])
         .filter((v) => v && v.resourceHint !== view.resourceHint).concat([view]);
       const base = phoneState.manifest;
@@ -1391,11 +1448,11 @@ export async function onRequest(context) {
       await casJob(deps.db, tid, repairJob.id, repairJob.revision, {
         candidate_version_id: candidate.id,
         phone_state: JSON.stringify({
-          manifest, probes: [], offlineValidation, requestedBy, requestedAt: nowIso(), repairedFrom: versionId,
+          manifest, probes: [], offlineValidation, requestedBy, requestedAt: nowIso(), repairedFrom: versionId, repairChanges,
           observedEvents: Array.isArray(phoneState.observedEvents) ? phoneState.observedEvents : [], observedViews,
         }),
       });
-      return jsonResponse({ ok: true, candidateVersionId: candidate.id, state: candidate.lifecycle, parentVersionId: versionId, replay: observedViews });
+      return jsonResponse({ ok: true, candidateVersionId: candidate.id, state: candidate.lifecycle, parentVersionId: versionId, changes: repairChanges, replay: observedViews });
     }
 
     // POST /versions/:id/reject -- owner/admin only; revokes the candidate
