@@ -7,6 +7,7 @@
 // Reads are navigation + evaluate only; anything on the crawler's read-only SKIP list is never clicked.
 
 import { captureView } from './deep-crawl.mjs';
+import { guardsOn, guardSections, normId } from './guards.mjs';
 
 export const GIMSR_HOSTS = ['gimsrlogin.gitam.edu', 'ghis.gitam.edu'];
 
@@ -400,12 +401,28 @@ export async function readView({ plugin, origin, view, settleMs = 1500, maxWaitM
 /* ENDPOINT REPLAY FIRST. Once discovery recorded the data call a view makes, that call is the primary
  * path (issued inside the doctor's browser session by adapter-runtime.mjs); the rendered page is the
  * fallback for views whose call was never seen. `onRead` reports which path served each view. */
-async function replayFirst({ plugin, origin, view, patient, onRead }) {
+/* The whole answer, not just its rows: an empty one carries its shape (adapter-runtime answerShape), so
+ * "this patient has none" and "the hospital changed" stay apart. */
+async function replayAnswer({ plugin, origin, view, patient }) {
   const ar = await import('./adapter-runtime.mjs');
-  const out = await ar.executeView({ plugin, origin, view, patient });
-  if (out && out.rows.length) { if (onRead) onRead({ resource: view.resourceHint, via: 'endpoint', url: out.url, kind: out.kind }); return out.rows; }
-  return null;
+  return ar.executeView({ plugin, origin, view, patient });
 }
+
+/* ONE PATIENT AT A TIME PER BROWSER (2026-11-12). GHIS keeps the current patient in its server-side
+ * session: activation posts the patient, then the reads answer for whoever was activated last. Two
+ * patient reads interleaved in one browser (the doctor opens A, then B before A has landed) activate A,
+ * activate B, and A's labs come back as B's. Reads through one browser now queue. */
+const READ_LOCKS = new WeakMap();
+function withReadLock(plugin, fn) {
+  if (!guardsOn() || !plugin || typeof plugin !== 'object') return fn();
+  const prev = READ_LOCKS.get(plugin) || Promise.resolve();
+  const run = prev.then(fn, fn);
+  READ_LOCKS.set(plugin, run.then(() => {}, () => {}));
+  return run;
+}
+/* Who the hospital's session was last activated for, per browser. */
+const ACTIVATED = new WeakMap();
+function patientKey(p) { return normId(p && p.patientId) + '|' + normId(p && p.episodeId); }
 
 // The ward list. Throws with a reason the UI can show verbatim.
 export async function readWorklist({ plugin, origin, replay, settleMs, onRead, maxWaitMs }) {
@@ -419,9 +436,14 @@ export async function readWorklist({ plugin, origin, replay, settleMs, onRead, m
    * then the page. */
   const candidates = (Array.isArray(replay) ? replay : []).filter((v) => v && v.resourceHint === 'worklist' && !v.block && Array.isArray(v.endpoints) && v.endpoints.length)
     .sort((a, b) => viewRank(b) - viewRank(a));
+  /* The ward list keeps the owner's 2026-09-16 rule: a proven list that answers nothing goes to repair,
+   * even when the answer is an empty list, because GHIS answers [] to a session that has not landed. */
   for (const cand of candidates.length ? candidates : [view]) {
     let got = null;
-    try { got = await replayFirst({ plugin, origin, view: cand, patient: {}, onRead }); } catch (e) { if (e && e.name === 'NotSignedIn') throw e; got = null; }
+    try {
+      const ans = await replayAnswer({ plugin, origin, view: cand, patient: {} });
+      if (ans && ans.rows.length) { got = ans.rows; if (onRead) onRead({ resource: cand.resourceHint, via: 'endpoint', url: ans.url, kind: ans.kind }); }
+    } catch (e) { if (e && (e.name === 'NotSignedIn' || (guardsOn() && e.name === 'HospitalBusy'))) throw e; got = null; }
     if (got && mapRows(got).length) { rows = got; break; }
   }
   if (!rows) {
@@ -477,7 +499,11 @@ export function endpointCandidates(view, patient) {
   return out;
 }
 
-export async function readPatientDetails({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
+export function readPatientDetails(args) {
+  return withReadLock(args && args.plugin, () => readPatientDetailsNow(args));
+}
+
+async function readPatientDetailsNow({ plugin, origin, replay, patient, settleMs, maxWaitMs = 8000, onRead }) {
   /* NO HOSPITAL IS SPECIAL HERE. The views are exactly what discovery proved for this hospital; the
    * runtime never injects an endpoint it knows from elsewhere (owner, 2026-09-13: GHIS is the test,
    * not the target). What discovery did not prove is read from the page or reported missing. */
@@ -496,16 +522,24 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
   const afterActivation = (v) => (activated.size && Array.isArray(v.endpoints))
     ? Object.assign({}, v, { endpoints: v.endpoints.filter((e) => !(e && e.role === 'prerequisite' && activated.has(endpointKey(e)))) })
     : v;
+  let notActivated = false;
   if (activation.endpoints.length) {
     const ar = await import('./adapter-runtime.mjs');
     try {
       await ar.executeProven({ plugin, origin: resolveDataOrigin(activation.view, null, origin), view: { pathTemplate: activation.view.pathTemplate, resourceHint: 'patient', proof: { status: 'proven' }, endpoints: activation.endpoints }, patient });
+      if (plugin && typeof plugin === 'object') ACTIVATED.set(plugin, patientKey(patient));
     } catch (e) {
       /* An activation this patient's row cannot fill (UnscopedRequest), or one the hospital refused or
        * redirected: the reads still go out and answer for themselves. A session that is really gone
-       * refuses every read below, which is where it is said. */
+       * refuses every read below, which is where it is said.
+       * EXCEPT WHEN ANOTHER PATIENT IS STILL ACTIVE (2026-11-12). If this browser last activated someone
+       * else, the hospital's session still holds them, and every read below would answer with THEIR
+       * chart under this patient's name. Nothing is read. */
+      const last = plugin && typeof plugin === 'object' ? ACTIVATED.get(plugin) : undefined;
+      if (guardsOn() && last && last !== patientKey(patient)) notActivated = true;
     }
   }
+  if (notActivated) return DETAIL_RESOURCES.filter((r) => views[r]).map((r) => ({ resource: r, unreadable: 'not-activated' }));
   /* THE THREE READS RUN TOGETHER. The hand-built adapter's getOpdProfile issues labs, radiology and
    * medicines in parallel from its one session; the doctor waits for the slowest read, not the sum.
    * Each resource is one task; the sections come back in the fixed DETAIL_RESOURCES order. */
@@ -518,8 +552,12 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
      * (2026-09-15). The hand-built adapter never loads a page either. */
     if (!provenView(v)) { out.push({ resource: r, unreadable: 'not-proven' }); return out; }
     let replayed = null;
+    let ans = null;
     const vo = resolveDataOrigin(v, null, origin);
-    try { replayed = await replayFirst({ plugin, origin: vo, view: afterActivation(v), patient, onRead }); } catch (e) {
+    try {
+      ans = await replayAnswer({ plugin, origin: vo, view: afterActivation(v), patient });
+      if (ans && ans.rows.length) { replayed = ans.rows; if (onRead) onRead({ resource: v.resourceHint, via: 'endpoint', url: ans.url, kind: ans.kind }); }
+    } catch (e) {
       /* A REDIRECT FROM ONE CALL IS THAT CALL'S ANSWER. GHIS answers GetInitialAssessmentnew with a 302
        * to SSO in every session (the hand-built adapter notes it and reads the rest regardless). One
        * resource's login answer is recorded on that resource; the session is gone only when every
@@ -577,6 +615,9 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
       }
       return out;
     }
+    /* An answer that is not the proven screen at all is a changed hospital, never "none" (absent is
+     * not negative). */
+    if (guardsOn() && ans && ans.shape === 'no-structure') { out.push({ resource: r, unreadable: 'changed' }); return out; }
     // Proven, and this patient has none (no medicines charted): an empty answer, not a missing one.
     out.push(withRoles({ resource: r, rows: [], via: 'endpoint' }, v));
     return out;
@@ -588,7 +629,9 @@ export async function readPatientDetails({ plugin, origin, replay, patient, sett
     const ar = await import('./adapter-runtime.mjs');
     throw new ar.NotSignedIn(attempted[0].error);
   }
-  return sections;
+  /* NEVER SOMEONE ELSE'S DATA. A section whose rows name another patient in an identity column is
+   * dropped and reported, whatever proved its request (guards.mjs guardSections). */
+  return guardsOn() ? guardSections(sections, patient) : sections;
 }
 
 /** role -> screen header, from the brain's column roles the view recorded (view.fieldHints: header -> role). */

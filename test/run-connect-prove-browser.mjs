@@ -65,6 +65,14 @@ const LAB_TESTS = {
   770002: [{ TestName: "Creatinine", Result: "1.4", Units: "mg/dL", LowValue: "0.6", HighValue: "1.2" }],
   770003: [{ TestName: "Potassium", Result: "5.6", Units: "mmol/L", LowValue: "3.5", HighValue: "5.1" }],
 };
+const ALLERGIES = {
+  "MR900001-IP5550001": [{ Allergen: "Penicillin", Reaction: "Anaphylaxis" }, { Allergen: "Sulfonamide", Reaction: "Rash" }],
+  "MR900002-IP5550002": [{ Allergen: "Latex", Reaction: "Urticaria" }],
+};
+const VITALS = {
+  MR900001: [{ Vital: "Pulse", Reading: "112 bpm" }, { Vital: "Blood pressure", Reading: "92/58 mmHg" }],
+  MR900002: [{ Vital: "Pulse", Reading: "76 bpm" }, { Vital: "Blood pressure", Reading: "128/84 mmHg" }],
+};
 const LAB_SHELL = (mr) => '<div id="labhdr"><table><tr><th>TEST NAME (METHOD)</th><th>TEST NAME</th><th>RESULTS</th><th>BIOLOGICAL REFERENCE INTERVAL</th><th>UNITS</th></tr><tr><td><table><tr><td>Patient ID</td><td>:</td><td>' + mr + '</td></tr><tr><td>Patient name</td><td>:</td><td>' + (WARD.find((w) => w.MRNo === mr) || {}).PatientName + '</td></tr><tr><td>Visit ID</td><td>:</td><td>' + (WARD.find((w) => w.MRNo === mr) || {}).VisitNo + '</td></tr></table></td></tr></table></div>';
 const PAGE = `<!doctype html><html><body>
 <input type="hidden" name="__RequestVerificationToken" value="tok-abc">
@@ -72,6 +80,9 @@ const PAGE = `<!doctype html><html><body>
 <a href="#" id="tc">Treatment chart</a>
 <a href="#" id="lb">Labs</a>
 <a href="#" id="lr">Lab reports</a>
+<a href="#" id="al">Allergies</a>
+<a href="#" id="vt">Vitals</a>
+<div id="alBox"></div><div id="vtBox"></div>
 <div id="medsBox"></div>
 <div id="labsBox"></div>
 <div id="labForm" style="display:none"><select id="dselect"><option value="PatientID">PatientID</option></select> <input id="txtAuto" type="text"> <input type="hidden" id="hfAutoID"><input type="hidden" id="hfsearchpatientId"> <a href="#" id="btnLabSearch" onclick="SearchPatientId(); return false;"><i class="fa fa-search"></i></a>
@@ -81,7 +92,7 @@ var selected = null;
 function xhr(method, url, body, cb) { var x = new XMLHttpRequest(); x.open(method, url); x.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); if (body) x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); x.onload = function () { cb(x.responseText); }; x.send(body || null); }
 xhr('GET', '/Doctor/Home/GetIPWL?NursingStationId=&Type=IPWorkList&__RequestVerificationToken=tok-abc', null, function (t) {
   var rows = JSON.parse(t).data, tb = document.querySelector('#wl tbody');
-  rows.forEach(function (r) { var tr = document.createElement('tr'); tr.innerHTML = '<td>' + r.MRNo + '</td><td>' + r.VisitNo + '</td><td>' + r.PatientName + '</td><td>' + r.BedName + '</td>'; tr.onclick = function () { selected = r; }; tb.appendChild(tr); });
+  rows.forEach(function (r) { var tr = document.createElement('tr'); tr.innerHTML = '<td>' + r.MRNo + '</td><td>' + r.VisitNo + '</td><td>' + r.PatientName + '</td><td>' + r.BedName + '</td>'; tr.onclick = function () { selected = r; xhr('GET', '/Doctor/Home/OpenPatient?id=' + r.MRNo, null, function () {}); }; tb.appendChild(tr); });
   document.title = 'ready';
 });
 setInterval(function () { xhr('GET', '/Doctor/Home/DashboardUnit?type=docopdlist', null, function () {}); }, 100);
@@ -127,6 +138,27 @@ function PrintResult(rid, epi) {
     document.getElementById('divLabSaveResult').innerHTML = h + '</tbody></table>'; document.title = 'labresult';
   });
 }
+/* THE SESSION-PATIENT TRAP: the allergies call names the patient, but the server answers for whoever
+ * was ACTIVATED last and ignores the id (a GHIS-style server session). Proven on one patient it looks
+ * perfect; only the second-patient check can see it. */
+document.getElementById('al').onclick = function (e) {
+  e.preventDefault();
+  xhr('GET', '/Doctor/Home/GetAllergies?id=' + selected.MRNo, null, function (t) {
+    var rows = JSON.parse(t), h = '<table id="alTbl"><thead><tr><th>Allergen</th><th>Reaction</th></tr></thead><tbody>';
+    rows.forEach(function (r) { h += '<tr><td>' + r.Allergen + '</td><td>' + r.Reaction + '</td></tr>'; });
+    document.getElementById('alBox').innerHTML = h + '</tbody></table>'; document.title = 'allergies';
+  });
+};
+/* THE REAL TRAP: vitals answer for the patient the doctor last OPENED (a GET the page sends on row
+ * click, never a replayed activation) and ignore the id the call carries. */
+document.getElementById('vt').onclick = function (e) {
+  e.preventDefault();
+  xhr('GET', '/Doctor/Home/GetVitals?id=' + selected.MRNo, null, function (t) {
+    var rows = JSON.parse(t), h = '<table id="vtTbl"><thead><tr><th>Vital</th><th>Reading</th></tr></thead><tbody>';
+    rows.forEach(function (r) { h += '<tr><td>' + r.Vital + '</td><td>' + r.Reading + '</td></tr>'; });
+    document.getElementById('vtBox').innerHTML = h + '</tbody></table>'; document.title = 'vitals';
+  });
+};
 document.getElementById('tc').onclick = function (e) {
   e.preventDefault();
   var tok = document.querySelector('input[name=__RequestVerificationToken]').value;
@@ -141,6 +173,7 @@ document.getElementById('tc').onclick = function (e) {
 
 function startEmr() {
   const active = {};
+  const opened = {};
   const server = http.createServer((req, res) => {
     const u = new URL(req.url, "http://x");
     const sid = /sid=([\w-]+)/.exec(req.headers.cookie || "");
@@ -177,6 +210,11 @@ function startEmr() {
         res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(LAB_TESTS[p.get("Render_ID")] || []));
       }
       if (u.pathname === "/Lab/Home/GetResults") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(LABS[u.searchParams.get("id")] || [])); }
+      if (u.pathname === "/Doctor/Home/OpenPatient") { opened[sid[1]] = u.searchParams.get("id"); res.writeHead(200, { "Content-Type": "application/json" }); return res.end("{}"); }
+      if (u.pathname === "/Doctor/Home/GetVitals") { res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(VITALS[opened[sid[1]] || ""] || [])); }
+      if (u.pathname === "/Doctor/Home/GetAllergies") {
+        res.writeHead(200, { "Content-Type": "application/json" }); return res.end(JSON.stringify(ALLERGIES[active[sid[1]] || ""] || []));
+      }
       if (u.pathname === "/Doctor/Home/GetMedicines/") {
         const rec = active[sid[1]] || "";
         const rows = rec.split("-")[0] === u.searchParams.get("id") ? MEDS[rec] || [] : [];
@@ -222,7 +260,9 @@ async function waitFor(expr, ms = 8000) {
 
 async function main() {
   const emr = await startEmr();
-  const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${DBG}`, `--user-data-dir=${userDir}`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
+  // Chromium refuses to start sandboxed as root (a Linux container): only there is the sandbox dropped.
+  const rootArgs = typeof process.getuid === "function" && process.getuid() === 0 ? ["--no-sandbox"] : [];
+  const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${DBG}`, `--user-data-dir=${userDir}`, "--no-first-run", "--disable-gpu", ...rootArgs], { stdio: "ignore" });
   try {
     let ver; for (let t = 0; t < 60 && !ver; t++) { try { ver = await (await fetch(`http://localhost:${DBG}/json/version`)).json(); } catch { await sleep(200); } }
     ws = new WebSocket(ver.webSocketDebuggerUrl);
@@ -274,6 +314,24 @@ async function main() {
     ok(JSON.stringify(meds.endpoints.map((e) => [e.role, e.method, e.path])) === JSON.stringify([["prerequisite", "POST", "/Doctor/Home/Searchnew"], ["data", "GET", "/Doctor/Home/GetMedicines/?id"]]), "saved endpoints: activation then medicines " + JSON.stringify(meds.endpoints.map((e) => e.path)));
     ok(JSON.stringify(meds.endpoints[0].params.recordNo) === JSON.stringify({ from: "worklist", fields: ["MRNo", "VisitNo"], join: "-" }), "activation's record number traced to the ward list MR and visit columns");
     ok(!/MR9000|tok-abc|TEST|Paracetamol/.test(JSON.stringify([wl, meds])), "nothing identifying is in the saved views");
+    ok(meds.proof.crossCheck === "differs", "the medicines call answered patient two differently (two-patient check): " + meds.proof.crossCheck);
+    const stillOne = (await client.evaluate({ expression: "fetch('/Doctor/Home/GetMedicines/?id=MR900001',{credentials:'include'}).then(function(r){return r.text()})" })).result;
+    ok(/Paracetamol/.test(String(stillOne)), "after the check the hospital session is back on patient one");
+
+    // THE TRAP: a call that names the patient but is answered from the server session.
+    await client.evaluate({ expression: GUIDE_SOURCES.arm });
+    await client.evaluate({ expression: "document.getElementById('al').click(); 'ok'" });
+    ok(await waitFor("document.title==='allergies'"), "the allergies panel rendered for patient one");
+    const allergies = { resourceHint: "notes", pathTemplate: emr.origin + "/Doctor/Home", rowsSelector: "#alTbl tbody tr", headers: ["Allergen", "Reaction"] };
+    await book.prove({ client, view: allergies, label: "open Allergies" });
+    ok(allergies.proof.status === "proven" && allergies.proof.crossCheck === "differs", "a call answered from the activated patient passes once the check activates patient two first, as the runtime does: " + JSON.stringify(allergies.proof));
+
+    await client.evaluate({ expression: GUIDE_SOURCES.arm });
+    await client.evaluate({ expression: "document.getElementById('vt').click(); 'ok'" });
+    ok(await waitFor("document.title==='vitals'"), "the vitals panel rendered for patient one");
+    const vitals = { resourceHint: "notes", pathTemplate: emr.origin + "/Doctor/Home", rowsSelector: "#vtTbl tbody tr", headers: ["Vital", "Reading"] };
+    await book.prove({ client, view: vitals, label: "open Vitals" });
+    ok(vitals.proof.status === "same-answer" && vitals.proof.crossCheck === "same-answer" && !vitals.endpoints, "a call that ignores the patient it names is NOT saved: " + JSON.stringify(vitals.proof));
 
     // The adapter, replayed for the OTHER patient exactly as Ward Sync would.
     const patients = mapRows(rowsFromJson({ data: WARD }).map((r) => Object.assign({ "Patient ID": r.MRNo, "Patient name": r.PatientName }, r)));

@@ -12268,6 +12268,16 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 ## 2026-11-11 PrepNucleus Spotify player OFF by default (reverses 2026-10-31 "on for everyone")
 - Owner: the mini player appeared over the onboarding subject list. Now smd_prep_sound_spotify must be "1": the loader leaves the Spotify files out otherwise, and prep-sound-spotify.js stays inert. Turned on/off in PrepNucleus Settings > Sound (Beta) > Spotify player; On loads the files at once (PREP_LOADER.loadSpotify), Off pauses and hides the dock immediately. The dock never shows over the setup steps (.pl-ob).
 
+## 2026-11-12 Connect Agent safety guards (smd_connect_guards, default ON)
+- Owner asked to adopt what goodnight000/api-anything (MIT) does better: "never someone else's data", proof
+  with two examples, empty vs drift, no live credential in a stored request, per-site pacing, readable heals.
+  Ideas ported, no code or dependency taken (its runtime is Node + desktop Chrome; ours is the phone WebView,
+  and its shared catalog is incompatible with PHI).
+- Default ON because every check fails closed ("not read", with the reason) rather than showing a chart that
+  may be another patient's. Kill switch `smd_connect_guards = "0"`. Recovery tag `connect-guards-pre-2026-11-12`.
+- Not re-litigated: the ward list still goes to self-repair when a proven call returns nothing (2026-09-16),
+  because GHIS answers [] to a session that has not landed. Details in `vault/modules/Connect Agent.md`.
+
 ## 2026-11-12 Specialty kits: compact screen behind `smd_kits_compact` (default on)
 - Owner: "make it 10 better". Layout only: one-row kit header, one-line save note, sticky tool title with the live result, kit bar flush with the bottom edge. No change to what a kit writes or when.
 - Kept behind a flag (`?kitsui=0`) with recovery tag `kits-ui-pre-compact` until the owner approves on the phone; then the old header branch in `kitBody` can be deleted.

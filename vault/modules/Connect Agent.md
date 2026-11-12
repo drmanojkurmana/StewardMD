@@ -1,7 +1,7 @@
 ---
 tags: [module, connect]
 status: full stack implemented and tested locally; PHONE runner (Connect Hospital) live-proven on GHIS 2026-09-11/12 (doctor signs in, agent auto-builds a validated worklist+labs+meds adapter on the Pixel); explore-then-ask (exhaustive crawl, report blocks, guided asks, progress screen) built and tested 2026-09-12; never deployed to production, never activated
-flag: smd_connect_agent (client launcher, def:ON since 2026-09-12, ?connect_agent=0 hides), CONNECT_AGENT_FLAG (provisional, def:FALSE), CONNECT_BROWSER_SESSION_FLAG (provisional, def:FALSE), CONNECT_AGENT_AUTO_ACTIVATE_FLAG (provisional, def:FALSE)
+flag: smd_connect_agent (client launcher, def:ON since 2026-09-12, ?connect_agent=0 hides), smd_connect_guards (phone safety checks, def:ON since 2026-11-12, ?connect_guards=0 or localStorage "0" turns off), CONNECT_AGENT_FLAG (provisional, def:FALSE), CONNECT_BROWSER_SESSION_FLAG (provisional, def:FALSE), CONNECT_AGENT_AUTO_ACTIVATE_FLAG (provisional, def:FALSE)
 ---
 # Connect Agent
 
@@ -202,3 +202,47 @@ session does not have.
   `GHIS.goldAudit()` in the app answers the same proxy paths from the hand-built `/api/ghis` and from the
   adapter (via ghis-shim) for the same patients; report = counts per endpoint and field. Browser test:
   `node test/run-connect-prove-browser.mjs`.
+
+## Safety guards (2026-11-12, after goodnight000/api-anything)
+
+Flag `smd_connect_guards`, default ON, resolved in `connect-agent/phone/guards.mjs` (`?connect_guards=0` or
+localStorage `smd_connect_guards = "0"` turns them off; `setGuards()` is the test seam). Recovery tag
+`connect-guards-pre-2026-11-12`. Each check fails closed: the doctor sees "not read" and why, never a guess.
+
+- **Two-patient proof** (`prove.mjs crossCheck`). After a patient-scoped view is proven on patient one, the
+  data call (and the page's prerequisites before it, or the adapter's remembered activation when the view
+  has none of its own) is sent again with a SECOND row's values in every field traced to that row's list
+  (another ward patient; another order for a `-detail`). Same answer, or rows that name patient one again,
+  is `proof.status = "same-answer"` and nothing is saved. `proof.crossCheck` is `differs | same-answer |
+  carries-first-patient | inconclusive | skipped`; the server accepts it and the admin approval card shows
+  "second patient checked". The ward list is never cross-checked. The first row's prerequisites are re-sent
+  at the end, BY REQUEST, not by buffer seq (gotcha: the page observer records our own replays and moves
+  the entry to a new seq, so `PROVE_EXEC(seq)` finds nothing).
+- **Never another patient's rows** (`guards.mjs guardSections`, applied at the end of `readPatientDetails`).
+  A section whose rows carry an identity column (patient id, MRN, UHID, reg no; NOT visit/episode, NOT a
+  row id) naming someone else becomes `unreadable: 'other-patient'`.
+- **One patient at a time per browser** (`runtime.mjs withReadLock`). GHIS keeps the current patient in the
+  server session; two interleaved patient reads in one browser could cross charts. Reads queue.
+- **Activation must land.** If the activation POST fails and this browser last activated a DIFFERENT
+  patient, every section is `unreadable: 'not-activated'` (the session still holds the other patient).
+- **Empty vs changed** (`adapter-runtime.mjs answerShape`, `errorEnvelope`). An empty JSON list, a table
+  with the view's header row and no rows, or a "no records" line is "none". A JSON object with no list, a
+  JSON error object, a page without the view's table, a 404 is `unreadable: 'changed'`. A 5xx is
+  `ReadFailed`; 429/503 is `HospitalBusy`. The WARD LIST keeps the 2026-09-16 rule (empty -> repair),
+  because GHIS answers `[]` to a session that has not landed.
+- **No live value as a constant** (`guards.mjs scrubConstants`, `LIVE_VALUES_SRC`). Before a view is
+  saved, a `{constant}` equal to (or holding) a cookie, storage or hidden-token value of the page, or one
+  that looks like a key (16+ chars, letters with 2+ digits, 3.5+ bits/char), becomes `{token}` or
+  `{unmapped}`. The server applies the same shape rule (`keyShaped`) and stores such a constant as
+  `{unmapped}`.
+- **Pacing** (`adapter-runtime.mjs PACE`). In-page requests per browser start >= 100 ms apart (x0.7-1.3),
+  at most 4 in flight; a 429/503 pauses that browser for its Retry-After (5 s to 2 min, 30 s default)
+  and calls in the pause throw `HospitalBusy` without sending.
+- **Readable repair** (`describeRepair` in the doctor router). A self-repair stores `repairChanges` (page,
+  data call, each field's source KIND never its value, activation count, columns; max 12 lines) on the
+  candidate; `GET /versions/:id` returns `repair: { from, changes }` and the approval card lists them.
+- Tests: `test/connect-agent/guards.test.mjs`; the real-browser harness `test/run-connect-prove-browser.mjs`
+  now has a session-patient hospital (allergies answer for the ACTIVATED patient: passes because the check
+  activates patient two first; vitals answer for the patient last OPENED and ignore the id: refused).
+  Run it here with `CHROME=/opt/pw-browsers/chromium` (it adds `--no-sandbox` only when run as root).
+

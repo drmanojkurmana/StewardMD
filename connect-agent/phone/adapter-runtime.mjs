@@ -13,6 +13,7 @@
 // path once an endpoint is known.
 
 import { READ_ROWS, isGimsrOrigin, resolveDataOrigin } from './runtime.mjs';
+import { guardsOn } from './guards.mjs';
 
 export const TOKEN_KEY = /token|verification|csrf|xsrf|antiforgery|nonce/i;
 /* How long a page is given to settle after a move (the token inputs are server-rendered). */
@@ -51,7 +52,7 @@ export function fetchExpression(req) {
     'var init={method:req.method,credentials:"include",headers:req.headers,redirect:"manual"};' +
     'if(req.body!=null){init.body=req.body;if(!init.headers["Content-Type"])init.headers["Content-Type"]="application/x-www-form-urlencoded; charset=UTF-8";}' +
     'if(typeof AbortController==="function"){var ac=new AbortController();init.signal=ac.signal;setTimeout(function(){ac.abort();},req.timeoutMs);}' +
-    'return fetch(req.url,init).then(function(r){if(r.type==="opaqueredirect")return JSON.stringify({status:302,contentType:"",url:req.url,text:"",redirected:true});return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
+    'return fetch(req.url,init).then(function(r){if(r.type==="opaqueredirect")return JSON.stringify({status:302,contentType:"",url:req.url,text:"",redirected:true});return r.text().then(function(t){return JSON.stringify({status:r.status,contentType:r.headers.get("content-type")||"",retryAfter:r.headers.get("retry-after")||"",url:r.url,text:t.length>req.max?t.slice(0,req.max):t,truncated:t.length>req.max});});})' +
     '.catch(function(e){return JSON.stringify({status:0,contentType:"",url:req.url,text:"",error:String(e&&e.message||e),host:(typeof location!=="undefined"?location.host:"")});});})()';
 }
 
@@ -62,14 +63,69 @@ export function parseFetchExpression(expr) {
   try { return JSON.parse(m[1]); } catch { return null; }
 }
 
+/* ---- pacing ------------------------------------------------------------------------------------- */
+
+/* A HOSPITAL IS NOT A LOAD TEST (2026-11-12, after goodnight000/api-anything's per-site pacing). A ward
+ * read fans out (activation, six resources, a detail chain four wide); fired all at once it reads, to a
+ * hospital's firewall, like a scraper. Requests through one browser start at least `minGapMs` apart
+ * (times 0.7 to 1.3, so never a fixed beat), at most `maxConcurrent` are in flight, and a hospital that
+ * answers 429 or 503 is left alone for its Retry-After (5 s to 2 min, 30 s when it names none): calls in
+ * that window fail at once with HospitalBusy instead of adding to the load. Behind smd_connect_guards. */
+export const PACE = { minGapMs: 100, maxConcurrent: 4, coolMs: 30000, minCoolMs: 5000, maxCoolMs: 120000 };
+const GATES = new WeakMap();
+export class HospitalBusy extends Error { constructor(m, retryAfterMs) { super(m); this.name = 'HospitalBusy'; this.retryAfterMs = retryAfterMs || 0; } }
+function gateOf(plugin) {
+  if (!plugin || (typeof plugin !== 'object' && typeof plugin !== 'function')) return null;
+  let g = GATES.get(plugin);
+  if (!g) { g = { next: 0, active: 0, waiters: [], coolUntil: 0, coolWhy: '' }; GATES.set(plugin, g); }
+  return g;
+}
+/** Test seam and owner tool: the pacing state of one browser (cool-down end, requests in flight). */
+export function paceState(plugin) { const g = gateOf(plugin); return g ? { coolUntil: g.coolUntil, active: g.active, coolWhy: g.coolWhy } : null; }
+export function resetPace(plugin) { if (plugin && GATES.has(plugin)) GATES.delete(plugin); }
+function coolCheck(g) {
+  const left = g.coolUntil - Date.now();
+  if (left > 0) throw new HospitalBusy('the hospital asked for a pause (' + g.coolWhy + '); try again in ' + Math.ceil(left / 1000) + ' s', left);
+}
+async function acquire(g) {
+  coolCheck(g);
+  while (g.active >= PACE.maxConcurrent) await new Promise((r) => g.waiters.push(r));
+  coolCheck(g);
+  g.active += 1;
+  const now = Date.now();
+  const at = Math.max(now, g.next);
+  g.next = at + Math.round(PACE.minGapMs * (0.7 + Math.random() * 0.6));
+  if (at > now) await new Promise((r) => setTimeout(r, at - now));
+}
+function release(g) { g.active = Math.max(0, g.active - 1); const w = g.waiters.shift(); if (w) w(); }
+/** Retry-After as milliseconds: seconds or an HTTP date; NaN when absent or unreadable. */
+export function retryAfterMs(v, now = Date.now()) {
+  const s = String(v == null ? '' : v).trim();
+  if (!s) return NaN;
+  if (/^\d+$/.test(s)) return Number(s) * 1000;
+  const t = Date.parse(s);
+  return Number.isFinite(t) ? t - now : NaN;
+}
+function noteAnswer(g, out) {
+  if (!g || !out || (out.status !== 429 && out.status !== 503)) return;
+  const asked = retryAfterMs(out.retryAfter);
+  const ms = Math.max(PACE.minCoolMs, Math.min(PACE.maxCoolMs, Number.isFinite(asked) ? asked : PACE.coolMs));
+  g.coolUntil = Date.now() + ms;
+  g.coolWhy = 'HTTP ' + out.status;
+}
+
 /** fetchInPage(plugin, req) -> { status, contentType, url, text, error? }. Throws only if the bridge fails. */
 export async function fetchInPage(plugin, req) {
-  const res = await plugin.evaluate({ expression: fetchExpression(req) });
+  const g = guardsOn() ? gateOf(plugin) : null;
+  if (g) await acquire(g);
+  let res;
+  try { res = await plugin.evaluate({ expression: fetchExpression(req) }); } finally { if (g) release(g); }
   const raw = res && res.result;
   let out = null;
   try { out = JSON.parse(typeof raw === 'string' ? raw : JSON.stringify(raw)); } catch { out = null; }
   if (!out || typeof out !== 'object') throw new Error('the page returned no response for ' + (req.method || 'GET') + ' ' + req.url);
   if (out.error) throw new Error('request failed in the page: ' + out.error + ' (' + (req.method || 'GET') + ' ' + String(req.url || '').replace(/^https?:\/\/[^/]+/, '').replace(/\?.*$/, '') + (out.host ? ' from ' + out.host : '') + ')');
+  noteAnswer(g, out);
   return out;
 }
 
@@ -568,6 +624,7 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
     }
   }
   let out = null;
+  const guarded = guardsOn();
   for (const ep of eps) {
     const req = provenRequest(ep, { patient, parentRow, tokens: toks, now });
     const call = { method: req.method, url: base + req.url, body: req.body, headers: req.headers };
@@ -580,12 +637,72 @@ export async function executeProven({ plugin, origin, view, patient = null, pare
     const kind = classifyResponse(resp);
     if (kind === 'login') throw new NotSignedIn('not signed in: ' + hostOf(base) + ' answered its login page to ' + req.path);
     if (ep.role !== 'data') continue;
+    /* A SERVER'S FAILURE IS NOT AN ANSWER. A 500 page read as HTML gave zero rows and the drawer said
+     * "no medicines". With the guards on, the hospital's own failure or its request to slow down is
+     * the read's error, said as such. */
+    if (guarded && (resp.status === 429 || resp.status === 503)) throw new HospitalBusy('the hospital asked for a pause (HTTP ' + resp.status + ') at ' + req.path, retryAfterMs(resp.retryAfter));
+    if (guarded && resp.status >= 500) throw new ReadFailed('the hospital answered HTTP ' + resp.status + ' at ' + req.path);
     let rows = [];
     if (kind === 'json') { try { rows = rowsFromJson(JSON.parse(resp.text)); } catch { rows = []; } }
     else if (kind === 'html') rows = rowsFromHtml(resp.text, view, parseHtml);
-    out = { rows: applyColumns(view, rows), via: 'endpoint', url: req.path, kind, proven: true, method: req.method };
+    /* AN ERROR IN PLACE OF THE DATA IS NOT A ROW. {"error":"..."} flattened to one row of "data". */
+    if (guarded && kind === 'json' && errorEnvelope(resp.text)) rows = [];
+    out = { rows: applyColumns(view, rows), via: 'endpoint', url: req.path, kind, proven: true, method: req.method, shape: guarded && kind === 'json' && errorEnvelope(resp.text) ? 'no-structure' : answerShape({ kind, resp, rows, view }) };
   }
   return out || { rows: [], via: 'endpoint', url: '', kind: 'empty', proven: true };
+}
+
+/** A JSON object that only reports a failure: every key an error-ish word, no list anywhere. */
+export function errorEnvelope(text) {
+  let p;
+  try { p = JSON.parse(String(text || '').trim()); } catch { return false; }
+  if (!p || typeof p !== 'object' || Array.isArray(p)) return false;
+  const keys = Object.keys(p);
+  if (!keys.length || !keys.some((k) => /^(error|errors|exception|fault)$/i.test(k))) return false;
+  return keys.every((k) => /^(error|errors|exception|fault|message|msg|status|code|success|detail|details|title|statuscode|errorcode)$/i.test(k) && !Array.isArray(p[k]) || /^errors$/i.test(k));
+}
+
+export class ReadFailed extends Error { constructor(m) { super(m); this.name = 'ReadFailed'; } }
+
+/* EMPTY IS NOT THE SAME AS GONE (after api-anything's failure classifier: an empty list at the extract
+ * path is "no results", the extract path missing is drift). An answer with no rows is one of two
+ * things, and they must never look alike to the doctor:
+ *   'empty-list'    the structure is there with nothing in it: a JSON list that is empty, a table with
+ *                   the view's own header row and no data row, the hospital's "no records" line. This
+ *                   patient has none.
+ *   'no-structure'  the answer is not the screen discovery proved at all: a JSON object with no list, a
+ *                   page without the view's table, a 404. The hospital changed; "none" would be a lie.
+ * 'rows' when there are rows. */
+export function answerShape({ kind, resp, rows, view }) {
+  if (Array.isArray(rows) && rows.length) return 'rows';
+  const status = Number(resp && resp.status) || 0;
+  if (status === 404 || status === 410) return 'no-structure';
+  if (kind === 'empty') return 'empty-list';
+  const text = String((resp && resp.text) || '');
+  if (kind === 'json') {
+    let p;
+    try { p = JSON.parse(text.trim()); } catch { return 'no-structure'; }
+    if (typeof p === 'string') { try { p = JSON.parse(p); } catch { /* a plain string */ } }
+    if (Array.isArray(p)) return 'empty-list';
+    if (p && typeof p === 'object') {
+      for (const k of Object.keys(p)) {
+        const v = p[k];
+        if (Array.isArray(v)) return 'empty-list';
+        if (v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).some((kk) => Array.isArray(v[kk]))) return 'empty-list';
+      }
+      if (!Object.keys(p).length) return 'empty-list';
+    }
+    return 'no-structure';
+  }
+  const plain = text.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ');
+  if (/\bno\s+(data|records?|results?|matching records|entries|items)\b|\bnot\s+found\b|\bnothing\s+to\s+(show|display)\b/i.test(plain)) return 'empty-list';
+  const want = (view && Array.isArray(view.headers) ? view.headers : []).map(normLabel).filter(Boolean);
+  if (want.length) {
+    const labels = [...text.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/gi)].map((m) => normLabel(m[1].replace(/<[^>]*>/g, ' ')));
+    return labels.filter((l) => l && want.includes(l)).length >= Math.min(2, want.length) ? 'empty-list' : 'no-structure';
+  }
+  // A view with no recorded labels (a report block) cannot be told apart: kept as before, empty.
+  return 'empty-list';
 }
 
 /**
