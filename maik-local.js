@@ -745,7 +745,8 @@
 
   // ── model lifecycle ─────────────────────────────────────────────────────
   var _loadedPack = null;
-  // Who loaded the llama plugin last: "maik" (here) or "edge" (edge-router.js llamaAdapter).
+  // Who loaded the llama plugin last: "maik" (here) or another caller. StewardMD Edge's FunctionGemma
+  // ("edge") was the other one until 2026-11-13; the guard stays for any future second user of the plugin.
   function llamaHeldByOther() { try { var h = window.SMD_LLAMA_HOLDER; return !!h && h !== "maik"; } catch (e) { return false; } }
   function ensureLoaded(packId, loadOpts) {
     var L = llama(), M = models();
@@ -765,8 +766,8 @@
         .then(null, function () { return null; })
         .then(function () { return ensureLoaded(packId, loadOpts); });
     }
-    // SHARED PLUGIN: StewardMD Edge's FunctionGemma (edge-router.js llamaAdapter) loads into this same
-    // llama plugin and evicts our pack, while available().loaded still says true (ITS model is loaded).
+    // SHARED PLUGIN: another caller that loads into this same llama plugin evicts our pack, while
+    // available().loaded still says true (ITS model is loaded).
     if (_loadedPack && _engine !== "mlx" && llamaHeldByOther()) { _loadedPack = null; _warmed = null; }
     if (_loadedPack === packId) {
       // The plugin drops the model on app pause, so confirm it is still resident before answering.
@@ -2089,13 +2090,9 @@
     var L = llama();
     _loadedPack = null;
     _warmed = null;
-    // Whoever held the plugin (Edge too) has nothing loaded after this; Edge reloads on its next call.
-    var wasMaik = false;
-    try { wasMaik = window.SMD_LLAMA_HOLDER === "maik"; window.SMD_LLAMA_HOLDER = null; } catch (e) {}
-    // MaiK is idle and has let go: Edge may warm FunctionGemma back up (it checks its own rules).
-    var edgeWarm = function () { try { if (wasMaik && window.SMD_EDGE && SMD_EDGE.warmSoon) SMD_EDGE.warmSoon(); } catch (e) {} };
-    if (L && L.release) { try { return Promise.resolve(L.release()).then(function (r) { edgeWarm(); return r; }); } catch (e) {} }
-    edgeWarm();
+    // Whoever held the plugin has nothing loaded after this.
+    try { window.SMD_LLAMA_HOLDER = null; } catch (e) {}
+    if (L && L.release) { try { return Promise.resolve(L.release()); } catch (e) {} }
   }
 
   /* IDLE UNLOAD (owner, 2026-09-04): a 1 to 4 GB model must not sit resident, warming the phone and

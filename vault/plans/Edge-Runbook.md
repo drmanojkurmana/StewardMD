@@ -987,6 +987,7 @@ clinical order (a dosing or start/continue/titrate verb next to a drug); both ne
 key: the owner's call), so a 0.5 floor can catch the near-neighbour and unseen-form picks.
 
 ### 5f. Re-audit of the Cactus engine 4.1.0, 2026-11-13: ADOPTED (owner: "move and redo audit")
+**Superseded the same day:** the owner removed the Needle plugin and FunctionGemma; Edge is rules only ([[Decisions]] 2026-11-13). The audit below is the record.
 Cactus moved every engine binary out of `Cactus-Compute/needle3` (main `c95d25b4` now holds only weights,
 tokenizer and checkpoint) into `Cactus-Compute/cactus`: one engine for Needle 3 (text), Whistle (speech) and
 Mirage (vision). Audited: release `4.1.0`, repo revision `4e822c90`, `manifest.json` source commit `89a1c500`.

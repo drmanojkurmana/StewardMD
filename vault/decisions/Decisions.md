@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-13 · StewardMD Edge is rules only: Needle and FunctionGemma removed (owner: "Yes" to removal)
+
+**Decision.** Delete the `capacitor-needle` plugin and the FunctionGemma Edge engine; StewardMD Edge keeps only its Layer 0
+rules (exact calculator, tool, drug, KB page, ICD and scheme requests). No Settings engine choice. **Why.** Neither model
+reached users or passed the ship marks ([[Edge-Embed-Value-2026-11-13]]): Needle weights were never put on a phone, the base
+model never acted, tuned rounds failed on danger rows; FunctionGemma showed the wrong tool 7.7% of the time and cost
++575 MB. The rules give 65.5% coverage at 0.0% wrong on the frozen test set. **Trade-off.** A future router model needs
+a new plugin and a fresh bake-off; MaiK's "Phone is hot" footer went with the Needle device reading; the Cactus 4.1.0
+engine move earlier the same day is moot. **Status.** On branch; needs a store build (native change). Phones that
+downloaded FunctionGemma delete it once on first launch. Recovery point: `d8da38cb`. [[StewardMD Edge]]
+
 ## 2026-11-13 · Edge's Needle engine moves to Cactus 4.1.0 (owner: "move and redo audit")
 
 **Decision.** `capacitor-needle` links the Cactus engine 4.1.0 (`libcactus.a` + `cactus.h`, `Cactus-Compute/cactus`

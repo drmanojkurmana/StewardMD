@@ -207,7 +207,7 @@ function pred(a, b) {
   });
 }
 
-// Device bake-off rows (test/edge-bakeoff-device.mjs --file): the first N model rows of test (--split test3: the new set), each followed by
+// Device bake-off rows (for the device bake-off harness, removed 2026-11-13 with the Needle plugin): the first N model rows of test (--split test3: the new set), each followed by
 // its rotated copy (id ~r). Score: pred <device.jsonl> <device.jsonl> (both runs are in the one file).
 function bake(n, split) {
   const { E } = loadApp();

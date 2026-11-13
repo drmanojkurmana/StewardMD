@@ -6034,7 +6034,7 @@
       '<div class="maik-disc">' + MK.shield + '<span>' +
         ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
                                                                : "Grounded &middot; AI-generated, verify independently") +
-      '</span><span class="maik-hot" id="maikHot" role="status" aria-live="polite" hidden> &middot; Phone is hot. Answers may be slower.</span></div>' +
+      '</span></div>' +
       '</div>';
   }
   // ── MaiK "Aurora" styles: IMPLEMENTATION.md §1 verbatim, then a support block (retokenized to
@@ -6171,9 +6171,7 @@ body.dark #maikSheet{
 /* The one sentence telling the clinician to verify independently must clear WCAG AA:
    #64748b on --mk-soft was 4.43:1, so light theme gets its own darker ink (R5 #4). */
 .maik-disc span{font:600 11px/1.3 'Inter';color:#5a6b80}
-.maik-disc .maik-hot{color:#9a3412}
 body.dark #maikSheet .maik-disc span,body.v3-dark #maikSheet .maik-disc span{color:var(--mk-mut)}
-body.dark #maikSheet .maik-disc .maik-hot,body.v3-dark #maikSheet .maik-disc .maik-hot{color:#fbbf24}
 
 /* body (shared scroll area) — 56px bottom padding keeps the last bubble's chips and citations
    clear of the Live Doctor's strip above the composer (sprite is 44px tall + 9px hit inset),
@@ -9049,7 +9047,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (route.kind === "clinical" && !_skipEdge && !_maikFollowUp && window.SMD_EDGE && SMD_EDGE.enabled && SMD_EDGE.enabled()) {
         var _eq = q;
         SMD_EDGE.route(_eq, { patient_session_id: "maik-home" }).then(function (er) {
-          try { var _hot = document.getElementById("maikHot"); if (_hot) _hot.hidden = !(SMD_EDGE.hot && SMD_EDGE.hot()); } catch (e) {}
           var shown = false; try { shown = !!(er && maikEdgeRender(er, _eq)); } catch (e) { shown = false; }
           if (!shown) { _maikSkipEdge = true; maikSendRest(_eq, fromDrugAsk); }
         });

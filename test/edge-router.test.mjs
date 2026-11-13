@@ -86,7 +86,6 @@ test("engine.agree: a second call with the options rotated must pick the same op
   assert.notEqual(m.prompts[0].prompt, m.prompts[1].prompt, "options rotated");
   const first = mock(() => needleReply(1)); first.agree = true; E.setEngine(first);   // position bias: always "1"
   assert.equal(await E.route(q), null, "disagreement passes to the safe path");
-  assert.equal(E.needleAdapter({}, { agree: true }).agree, true);
 });
 
 test("option 0, out-of-range, wrong tool, low confidence, garbage: all pass through (null)", async () => {
@@ -164,46 +163,6 @@ test("ICD: naming the Search ICD tool never looks up the navigation words", () =
   assert.equal(E.rules("icd code for type 2 diabetes").kind, "icd");
 });
 
-test("llamaAdapter: per-call grammar limited to the options offered, greedy, parses {option}", async () => {
-  const calls = { load: [], gen: [], release: 0 };
-  const plugin = { load: (a) => { calls.load.push(a); return Promise.resolve({ loaded: true }); },
-    generate: (a) => { calls.gen.push(a); return Promise.resolve({ text: '{"option":2}' }); }, release: () => { calls.release++; return Promise.resolve(); } };
-  const eng = E.llamaAdapter(plugin, { modelPath: "/m/functiongemma.gguf" });
-  assert.equal(eng.available(), true);
-  assert.equal(E.llamaAdapter(plugin, {}).available(), false, "no model path, not available");
-  const r = await eng.complete({ prompt: "x\nOptions:\n1. a\n2. b\n3. c\n0. none of these", nOptions: 3 });
-  assert.deepEqual(r, { option: 2 });
-  assert.equal(calls.load[0].path, "/m/functiongemma.gguf");
-  assert.equal(calls.load[0].nThreadsBatch, 4, "prefill on the big cores only, not every core");
-  assert.equal(calls.gen[0].temperature, 0); assert.equal(calls.gen[0].stream, false);
-  assert.equal(calls.gen[0].grammar, 'root ::= "{\\"option\\":" [0-3] "}"', "only 0..3 can be produced");
-  assert.equal(E.optionFrom(r).option, 2);
-  await eng.release(); assert.equal(calls.release, 1);
-});
-
-test("llamaAdapter: FunctionGemma load args fit the +400 MB budget (small context, small batches, q8 KV)", async () => {
-  const load = [];
-  const plugin = { load: (a) => { load.push(a); return Promise.resolve({ loaded: true }); }, generate: () => Promise.resolve({ text: '{"option":1}' }) };
-  await E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" }).load();
-  assert.deepEqual(load[0], { path: "/m/fg.gguf", nCtx: 512, nBatch: 64, nUbatch: 64, nThreadsBatch: 4, kvQ8: true });
-});
-
-test("llamaAdapter: forced prefix + digit pick, confidence from the plugin, grammar kept as the fallback", async () => {
-  let reply = { text: '{"option":1}', p: 0.42 };
-  const gen = [];
-  const plugin = { load: () => Promise.resolve({ loaded: true }), generate: (a) => { gen.push(a); return Promise.resolve(reply); } };
-  const eng = E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" });
-  const r = await eng.complete({ prompt: "x\nOptions:\n1. a\n2. b\n0. none of these", nOptions: 2 });
-  assert.deepEqual(gen[0].pick, { prefix: '{"option":', choices: ["0", "1", "2"], suffix: "}" }, "same text as the llama-json target");
-  assert.equal(gen[0].grammar, 'root ::= "{\\"option\\":" [0-2] "}"', "an older plugin ignores pick and runs the grammar");
-  assert.deepEqual(r, { option: 1, confidence: 0.42 });
-  assert.deepEqual(E.optionFrom(r), { ok: true, option: 1, confidence: 0.42 }, "below the 0.5 floor, so the router passes");
-  reply = { text: '{"option":2}' };   // grammar fallback: no p, no confidence
-  assert.deepEqual(await eng.complete({ prompt: "y", nOptions: 2 }), { option: 2 });
-  await eng.complete({ prompt: "z", nOptions: 9 });
-  assert.equal(gen[2].pick.choices.length, 6, "never more digits than MAX_OPTIONS allows");
-});
-
 test("bakeoff: production runtime contract, one line per row, timeouts and garbage recorded as no option", async () => {
   const rows = [{ id: "a", prompt: "p1", n_options: 2 }, { id: "b", prompt: "slow", n_options: 2 }, { id: "c", prompt: "junk", n_options: 2 }];
   const eng = { available: () => true, load: () => Promise.resolve(), reset: () => Promise.resolve(), release: () => Promise.resolve(),
@@ -213,58 +172,6 @@ test("bakeoff: production runtime contract, one line per row, timeouts and garba
   assert.deepEqual([out[0].id, out[0].option, out[0].confidence, out[0].status], ["a", 2, 0.8, "ok"]);
   assert.equal(out[1].option, null); assert.equal(out[1].status, "timeout");
   assert.equal(out[2].option, null); assert.equal(out[2].status, "invalid:unparseable", "the slow row did not make the next one busy");
-});
-
-test("needleAdapter: configure (not init), tuned weights path, uncalibrated confidence dropped, kill only when killable", async () => {
-  const calls = [];
-  const plugin = { load: (a) => { calls.push(["load", a]); return Promise.resolve(); }, configure: (a) => { calls.push(["configure", JSON.parse(a.tools)[0].name]); return Promise.resolve(); },
-    complete: () => Promise.resolve({ json: JSON.stringify(needleReply(3, 0.42)) }), reset: () => Promise.resolve(), kill: () => Promise.resolve() };
-  const a = E.needleAdapter(plugin, { weightsPath: "/w/tuned.cact", calibrated: false, killable: false });
-  await a.load();
-  assert.deepEqual(calls, [["load", { path: "/w/tuned.cact" }], ["configure", "choose_option"]]);
-  const r = await a.complete({ prompt: "p" });
-  assert.equal(r.function_calls[0].arguments.option, 3); assert.equal(r.confidence, null, "uncalibrated: no confidence");
-  assert.equal(a.kill, undefined, "not killable: the runtime waits a stuck call out");
-  assert.equal(typeof E.needleAdapter(plugin, { killable: true }).kill, "function");
-  assert.equal(E.needleAdapter(plugin, {}).kill, undefined, "no Capacitor platform in Node: not android, not killable");
-});
-
-// Pixel 9, 2026-10-04: a loaded engine that only ever sees needle_complete never returns from its
-// ~49th-57th call (2 cores spinning for 10+ min); needle_reset does not prevent it, needle_init does.
-test("needleAdapter: every complete() starts from a fresh needle_init (configure), not just the first", async () => {
-  const calls = [];
-  const plugin = { load: () => { calls.push("load"); return Promise.resolve(); }, configure: () => { calls.push("configure"); return Promise.resolve(); },
-    complete: () => { calls.push("complete"); return Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) }); } };
-  const a = E.needleAdapter(plugin, {});
-  await a.load();
-  await a.complete({ prompt: "p1" }); await a.complete({ prompt: "p2" }); await a.complete({ prompt: "p3" });
-  assert.deepEqual(calls, ["load", "configure", "configure", "complete", "configure", "complete", "configure", "complete"]);
-});
-
-// Pixel 9, OTA v174: :edge died outside the runtime (low-memory killer; Needle.kill() by hand) and
-// restarted empty. Every later configure failed "needle_init: no model loaded" and Edge stayed dead
-// until the app restarted, because the runtime still believed loaded = true.
-test("needleAdapter + runtime: a restarted :edge with no weights reloads once and the call still runs", async () => {
-  let model = false, loads = 0, configures = 0;
-  const plugin = {
-    load: () => { loads++; model = true; return Promise.resolve({ rc: 0 }); },
-    configure: () => { configures++; if (!model) { const e = new Error("needle_init: no model loaded"); e.code = "ENGINE_ERROR"; return Promise.reject(e); } return Promise.resolve({ rc: 0 }); },
-    complete: () => Promise.resolve({ json: JSON.stringify(needleReply(1, 0.9)) })
-  };
-  const rt = globalThis.SMD_EDGE_RUNTIME.create({ engine: E.needleAdapter(plugin, { killable: true }) });
-  assert.equal((await rt.run({ prompt: "p1" })).status, "ok");
-  assert.equal(loads, 1);
-  model = false;                                      // process died and came back with no model
-  const r = await rt.run({ prompt: "p2" });
-  assert.equal(r.status, "ok", "reloaded and ran, not error");
-  assert.equal(r.result.function_calls[0].arguments.option, 1);
-  assert.equal(loads, 2);
-  assert.equal(rt.status().loaded, true);
-  // No loop: weights that never stick give one reload attempt, then the call gives up.
-  plugin.load = () => { loads++; return Promise.resolve({ rc: 0 }); };
-  model = false; const before = loads;
-  assert.equal((await rt.run({ prompt: "p3" })).status, "unavailable", "the reload itself fails: rules path");
-  assert.equal(loads - before, 1, "exactly one reload per call");
 });
 
 test("Layer 0 widened: an exactly named tool or generic drug, in any of the three languages, is a rules answer", async () => {
@@ -319,30 +226,13 @@ test("KB page: a navigation word plus exactly a disease name or alias is a rules
   } finally { delete globalThis.MaiKKB; delete globalThis.SMD_REASON; }
 });
 
-test("back-off (plan A0.5): low memory, MaiK generating or Whisper decoding skip the model; heat only warns", async () => {
+test("back-off (plan A0.5): MaiK generating or Whisper decoding skip a plugged-in model; rules unaffected", async () => {
   store.smd_edge = "1";
   const pick = (task) => needleReply(parseInt(task.prompt.split("\n").find((l) => /open: Antibiogram/.test(l)), 10));
   const ask = "show me the resistance patterns antibiogram";
-  let dev = {};
-  globalThis.Capacitor = { Plugins: { Needle: { available: () => Promise.resolve(dev) } } };
-  const reads = async (d) => { dev = d; await E.refreshDevice(); };
   const runs = async () => { const m = mock(pick); E.setEngine(m); const r = await E.route(ask); return { r, calls: m.prompts.length }; };
   try {
-    await reads({ thermal: 0, lowMemory: false, availMB: 900 });
     let o = await runs(); assert.equal(o.calls, 1); assert.equal(o.r && o.r.id, "antibiogram", "all clear: the model answers");
-    for (const t of [3, 4]) {
-      await reads({ thermal: t, lowMemory: false, availMB: 900, rendererGone: false }); o = await runs();
-      assert.equal(o.calls, 1, "owner 2026-10-04: a hot phone still runs the model"); assert.equal(E.hot(), true, "and MaiK shows the hot note");
-    }
-    await reads({ thermal: 0 }); assert.equal(E.hot(), false);
-    for (const d of [{ thermal: 0, lowMemory: true }, { lowMemory: false, availMB: 200 }, { rendererGone: true }]) {
-      await reads(d); o = await runs();
-      assert.equal(o.calls, 0, "skipped for " + JSON.stringify(d)); assert.equal(o.r, null, "the caller continues (rules / MaiK)");
-    }
-    await reads({ thermal: 0, lowMemory: false, availMB: 600, rendererGone: true });
-    assert.equal((await runs()).calls, 0, "renderer gone: Edge is off for the session even with memory and heat fine");
-    assert.equal(E.backoff().device.rendererGone, true);
-    await reads({ thermal: 2, lowMemory: false, availMB: 600, rendererGone: false }); assert.equal((await runs()).calls, 1, "MODERATE is not SEVERE");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: true, waiting: 0 }) };
     assert.equal((await runs()).calls, 0, "never during a MaiK generation");
     globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running: false, waiting: 2 }) };
@@ -351,37 +241,36 @@ test("back-off (plan A0.5): low memory, MaiK generating or Whisper decoding skip
     assert.equal((await runs()).calls, 0, "never during a Whisper decode");
     globalThis.SMD_NATIVE = { whisperBusy: () => false };
     assert.equal((await runs()).calls, 1);
-    assert.deepEqual(Object.keys(E.backoff()).sort(), ["device", "memoryOk", "othersBusy", "thermalOk"]);
+    // Device readings came from the Needle plugin, removed 2026-11-13: nothing reports memory or heat now.
+    assert.deepEqual(E.backoff(), { memoryOk: true, thermalOk: true, othersBusy: false });
     // Layer 0 (rules) is untouched by the back-off: an exact name still answers while busy.
     globalThis.SMD_NATIVE = { whisperBusy: () => true };
     const m = mock(pick); E.setEngine(m);
     const r0 = await E.route("open antibiogram");
     assert.equal(r0 && r0.source, "rules"); assert.equal(m.prompts.length, 0);
   } finally {
-    delete globalThis.Capacitor; delete globalThis.SMD_MAIK_LOCAL; delete globalThis.SMD_NATIVE;
-    await E.refreshDevice(); dev = {};
+    delete globalThis.SMD_MAIK_LOCAL; delete globalThis.SMD_NATIVE; E.setEngine(null);
   }
 });
 
-test("renderer gone before the first request (A0.5): the FIRST model-routed request already skips the model", async () => {
-  // A fresh SMD_EDGE, as after the activity recreate: no device reading taken yet.
+test("rules only in the app (owner 2026-11-13): no engine at load, no Needle or FunctionGemma, old choice cleared", async () => {
   const prev = globalThis.SMD_EDGE;
-  vm.runInThisContext(fs.readFileSync(path.join(ROOT, "edge-router.js"), "utf8"), { filename: "edge-router.js" });
-  const F = globalThis.SMD_EDGE;
-  store.smd_edge = "1";
-  globalThis.Capacitor = { Plugins: { Needle: { available: () => Promise.resolve({ thermal: 0, lowMemory: false, availMB: 1800, rendererGone: true }) } } };
+  store.smd_edge = "1"; store.smd_edge_engine = "needle";
+  globalThis.Capacitor = { isNativePlatform: () => true, getPlatform: () => "android", Plugins: { Needle: { available: () => Promise.resolve({}) }, Llama: {} } };
   try {
-    const m = mock(() => needleReply(1)); F.setEngine(m);
-    assert.equal(await F.route("show me the resistance patterns antibiogram"), null);
-    assert.equal(m.prompts.length, 0, "first request: no model call");
-    assert.equal(F.backoff().device.rendererGone, true);
+    vm.runInThisContext(fs.readFileSync(path.join(ROOT, "edge-router.js"), "utf8"), { filename: "edge-router.js" });
+    const F = globalThis.SMD_EDGE;
+    assert.equal(F.engineName(), null, "nothing builds an engine, even with a Needle plugin present");
+    assert.equal(F.available(), false);
+    assert.equal(store.smd_edge_engine, undefined, "the retired Settings choice is cleared");
+    for (const k of ["needleAdapter", "llamaAdapter", "engineChoice", "setEngineChoice", "autoEngine", "warmNow", "hot", "refreshDevice"]) assert.equal(F[k], undefined, k);
+    assert.equal(await F.route("show me the resistance patterns antibiogram"), null, "a model-only request passes to MaiK");
     const r = await F.route("antibiogram kholo");
-    assert.equal(r && r.source, "rules", "rules still answer"); assert.equal(m.prompts.length, 0);
+    assert.equal(r && r.source, "rules", "rules still answer");
   } finally {
     delete globalThis.Capacitor; globalThis.SMD_EDGE = prev;
   }
 });
-
 test("rules(): Layer 0 alone, synchronous, for MaiK to call before follow-up resolution", () => {
   store.smd_edge = "1";
   const r = E.rules("antibiogram kholo");
@@ -405,123 +294,6 @@ function nativeWith({ fgFile = false } = {}) {
   return calls;
 }
 function cleanNative() { delete globalThis.Capacitor; delete globalThis.SMD_MAIK_MODELS; delete globalThis.SMD_LLAMA_HOLDER; delete store.smd_edge_engine; E.setEngine(null); }
-
-test("engine choice: default is needle", () => {
-  delete store.smd_edge; delete store.smd_edge_engine; nativeWith();
-  try {
-    assert.equal(E.engineChoice(), "needle");
-    assert.equal(E.autoEngine().name, "needle");
-    store.smd_edge_engine = "nonsense";
-    assert.equal(E.engineChoice(), "needle", "an unknown value is the default");
-  } finally { cleanNative(); }
-});
-
-test("engine choice: functiongemma with no file on the phone gives no engine, and the rules still answer", async () => {
-  delete store.smd_edge; nativeWith({ fgFile: false });
-  try {
-    assert.equal(E.setEngineChoice("functiongemma"), "functiongemma");
-    assert.equal(E.autoEngine(), null);
-    assert.equal(E.engineName(), null); assert.equal(E.available(), false);
-    const r = await E.route("antibiogram kholo");
-    assert.equal(r && r.source, "rules"); assert.equal(r.id, "antibiogram");
-  } finally { cleanNative(); }
-});
-
-test("engine choice: functiongemma with the file gives the llama adapter on the downloaded path", async () => {
-  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
-  try {
-    E.setEngineChoice("functiongemma");
-    assert.equal(E.engineName(), "llama");
-    const r = await E.autoEngine().complete({ prompt: "x", nOptions: 2 });
-    assert.deepEqual(r, { option: 1, confidence: 0.9 });
-    assert.equal(calls.llamaLoad[0].path, "/data/maik-models/functiongemma-270m-it-q8_0.gguf");
-    assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "MaiK sees another holder and reloads its pack");
-  } finally { cleanNative(); }
-});
-
-test("engine choice: rules gives no engine", () => {
-  delete store.smd_edge; nativeWith({ fgFile: true });
-  try {
-    store.smd_edge_engine = "rules";
-    assert.equal(E.autoEngine(), null);
-    E.setEngineChoice("rules"); assert.equal(E.engineName(), null);
-  } finally { cleanNative(); }
-});
-
-test("setEngineChoice switches live, releasing the old engine", async () => {
-  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
-  try {
-    E.setEngineChoice("needle"); assert.equal(E.engineName(), "needle");
-    E.setEngineChoice("functiongemma"); assert.equal(E.engineName(), "llama");
-    await new Promise((r) => setTimeout(r, 0));
-    assert.equal(calls.needleRelease, 1, "Needle released on the switch");
-    E.setEngineChoice("rules"); assert.equal(E.engineName(), null);
-    E.setEngineChoice("needle"); assert.equal(E.engineName(), "needle");
-    assert.equal(store.smd_edge_engine, "needle");
-  } finally { cleanNative(); }
-});
-
-test("llamaAdapter never picks with, or releases, a model MaiK loaded", async () => {
-  const calls = { gen: 0, release: 0 };
-  let maikTakes = false;
-  const plugin = { load: () => { if (maikTakes) globalThis.SMD_LLAMA_HOLDER = "maik"; return Promise.resolve(); },
-    generate: () => { calls.gen++; return Promise.resolve({ text: '{"option":1}' }); }, release: () => { calls.release++; return Promise.resolve(); } };
-  try {
-    const eng = E.llamaAdapter(plugin, { modelPath: "/m/fg.gguf" });
-    maikTakes = true;   // MaiK loads its pack while ours is loading
-    await assert.rejects(eng.complete({ prompt: "x", nOptions: 2 }), /taken by MaiK/);
-    assert.equal(calls.gen, 0, "no pick with MaiK's model");
-    await eng.release(); assert.equal(calls.release, 0, "MaiK's pack is not unloaded");
-    maikTakes = false;
-    await eng.complete({ prompt: "x", nOptions: 2 }); assert.equal(calls.gen, 1, "reloads and picks once it holds the plugin");
-    globalThis.SMD_LLAMA_HOLDER = "maik";   // MaiK answered in between
-    await eng.complete({ prompt: "y", nOptions: 2 }); assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge", "reloaded, not reused");
-  } finally { delete globalThis.SMD_LLAMA_HOLDER; }
-});
-
-// Background warm-up (FunctionGemma only): the first iOS load is 17 s (Metal shader compile), past the
-// 8 s cold budget, so it is loaded + one throwaway pick at idle, outside any request.
-test("warm: FunctionGemma loads and picks once when idle; the next request finds it warm", async () => {
-  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
-  let gens = 0; globalThis.Capacitor.Plugins.Llama.generate = () => { gens++; return Promise.resolve({ text: '{"option":1}', p: 0.9 }); };
-  try {
-    E.setEngineChoice("functiongemma");
-    assert.equal(await E.warmNow(), true, "warmed");
-    assert.equal(calls.llamaLoad.length, 1); assert.equal(gens, 1, "one throwaway pick");
-    assert.equal(globalThis.SMD_LLAMA_HOLDER, "edge");
-    assert.equal(await E.warmNow(), false, "at most once: already resident");
-    assert.equal(calls.llamaLoad.length, 1);
-    const r = await E.route("show me the resistance patterns antibiogram");
-    assert.ok(r, "routed"); assert.equal(calls.llamaLoad.length, 1, "no reload on the first real request");
-  } finally { cleanNative(); }
-});
-
-test("warm: skipped while MaiK holds the plugin or is generating, runs once MaiK lets go", async () => {
-  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
-  let running = false; globalThis.SMD_MAIK_LOCAL = { queueState: () => ({ running, waiting: 0 }) };
-  try {
-    E.setEngineChoice("functiongemma");
-    globalThis.SMD_LLAMA_HOLDER = "maik";
-    assert.equal(await E.warmNow(), false, "MaiK holds the plugin");
-    assert.equal(globalThis.SMD_LLAMA_HOLDER, "maik", "MaiK's pack is never evicted");
-    globalThis.SMD_LLAMA_HOLDER = null; running = true;
-    assert.equal(await E.warmNow(), false, "MaiK queue running");
-    assert.equal(calls.llamaLoad.length, 0, "never loaded");
-    running = false;
-    assert.equal(await E.warmNow(), true, "warms once MaiK is idle and the holder is null");
-    assert.equal(calls.llamaLoad.length, 1);
-  } finally { delete globalThis.SMD_MAIK_LOCAL; cleanNative(); }
-});
-
-test("warm: never for needle or rules", async () => {
-  delete store.smd_edge; const calls = nativeWith({ fgFile: true });
-  let needleLoads = 0; globalThis.Capacitor.Plugins.Needle.load = () => { needleLoads++; return Promise.resolve(); };
-  try {
-    E.setEngineChoice("needle"); assert.equal(await E.warmNow(), false); assert.equal(needleLoads, 0);
-    E.setEngineChoice("rules"); assert.equal(await E.warmNow(), false);
-    assert.equal(calls.llamaLoad.length, 0);
-  } finally { cleanNative(); }
-});
 
 test("tool candidates the MaiK card cannot open are never offered", () => {
   delete store.smd_edge;

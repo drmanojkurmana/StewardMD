@@ -9,7 +9,7 @@ import PackageDescription
 // `.binaryTarget(name: "SpotifyiOS", path: "SpotifyiOS.xcframework")`, slices ios-arm64 +
 // ios-arm64_x86_64-simulator, framework floor iOS 12 — below this plugin's iOS 17 floor, so no
 // deployment-target change is needed). We therefore depend on the upstream package pinned to an
-// EXACT version instead of vendoring the xcframework the way capacitor-needle does: no binary is
+// EXACT version instead of vendoring the xcframework the way capacitor-needle did (removed 2026-11-13): no binary is
 // committed and no fetch script is required. Bump only after re-checking the new tag's
 // Package.swift, CHANGELOG and header surface (see NOTES-spotify-remote.md at the repo root).
 let package = Package(

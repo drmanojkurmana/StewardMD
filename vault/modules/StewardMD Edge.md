@@ -1,9 +1,22 @@
 ---
 tags: [module, ai, edge]
-status: built (JS + dataset); Needle linked into the app (package.json, 2026-10-03; flag still OFF; live on both phones). iPhone 2026-10-02: A0.2/A0.3 passed; A0.6 runbook marks passed but MISSED the plan's "no SEVERE" thermal mark (Serious from minute 2). 2026-10-03: FunctionGemma digit pick p95 37 ms (iPhone) / 171 ms (Pixel, unplugged); Needle Pixel p95 747 ms with the thread fix; back-off verified on the Pixel, simulated on the iPhone (real MaiK-busy and availMB with MaiK Lite verified 2026-10-03 evening; real Serious pending); owner options in [[Edge-Options-2026-10-02]]. Pixel 2026-10-03 22:30 round (edge8): renderer-gone PASS (first request after the recreate skips the model); Needle p95 797 ms, +123 MB PSS PASS; FunctionGemma pick p95 395 ms PASS but +575 MB PSS MISS (+400 budget); 30-min unplugged mixed session: no SEVERE (LIGHT max, skin 41 C), battery 100 -> 92%, app never died, Needle 127 ok / 22 timeout / 1 unavailable under MaiK load (MISS); iPhone with real MaiK Lite generation: back-off skips the engine (0 calls), rules answer, Edge resumes; availMB minimum 5,349 MB during an answer (PASS); real iPhone Serious still open (thermal stayed fair)
+status: RULES ONLY since 2026-11-13 (owner): Needle plugin and FunctionGemma engine removed, no model ships; Layer 0 rules answer (frozen test 65.5% coverage, 0.0% wrong). History of the model work below and in [[Edge-Runbook]].
 flag: smd_edge (default ON for all since 2026-10-04, owner; "0" turns it off)
 ---
 # StewardMD Edge
+
+## Rules only since 2026-11-13 (owner: "remove Needle and FunctionGemma")
+Why: no user ever had Needle weights (nothing put them on a phone), the base model never cleared its floor, the tuned
+rounds and base FunctionGemma failed the ship marks ([[Edge-Embed-Value-2026-11-13]]). Removed: `local-plugins/capacitor-needle`
+(package.json, Android gradle + `MainActivity.markRendererGone`, iOS CapApp-SPM), `needleAdapter`, `llamaAdapter`,
+the engine choice (`smd_edge_engine`, Settings "Edge engine" rows, picker "Engine:" line), FunctionGemma warm-up, the
+device back-off readings (memory, heat, renderer) and MaiK's "Phone is hot" footer, which read heat through Needle.
+Kept: Layer 0 rules, candidates, cards, `SMD_EDGE.setEngine` + `edge-runtime.js` + `bakeoff` (generic slot that tests
+and tooling drive with mocks), `grammarFor` (capacitor-llama grammar host test), scorer and research scripts.
+Migration: `edge-router.js` deletes `smd_edge_engine` at load; `maik-models.js retireEdgeFg()` deletes a downloaded
+FunctionGemma file (291 MB) once per install (`smd_edge_fg_retired`). Recovery: commit `d8da38cb` (before removal).
+`scripts/preflight.sh` step 3 now fails if a native project still references `capacitor-needle`.
+Everything below about engines, Needle and FunctionGemma is history.
 
 On-device request router and value extractor. Plan: [[Edge-Master-Plan]]. Evidence: [[Needle-Audit]].
 Real-use review and Needle vs EmbeddingGemma 2 search bench (2026-11-13): [[Edge-Embed-Value-2026-11-13]]. Short version:
@@ -90,7 +103,7 @@ Extraction gold set (45 rows): 45 exact, 0 unsafe.
 | On-device speech (A1.2) | `local-plugins/capacitor-community-speech-recognition` (Android + iOS), `native-bridge.js`, `voice.js`; flag `smd_speech_ondevice` | `start({onDevice: "off" \| "prefer" \| "require"})`, `available()` reports on-device support, a `recognitionMode` event reports what ran. Device-tested on both phones (2026-10-02). Android 13+ adds a per-language `onDeviceLanguage` (`checkRecognitionSupport`; Pixel: te-IN `no`) and reports the mode from `onReadyForSpeech`, so no "On-device" flash before a fallback (2026-10-03). |
 | JS adapters | `edge-router.js` | `needleAdapter(plugin, {weightsPath, calibrated, killable})`, `llamaAdapter(plugin, {modelPath})` (bake-off only: evicts MaiK's pack), `grammarFor(n)`, `bakeoff(rows, engine)`. |
 
-## Engine choice (owner, 2026-10-04)
+## Engine choice (owner, 2026-10-04; REMOVED 2026-11-13, history)
 Setting `smd_edge_engine`: `needle` (default), `functiongemma`, `rules` (no model; Layer 0 still answers).
 `smd_edge` "0" still turns Edge off. `SMD_EDGE.engineChoice()` / `setEngineChoice(v)` (switches at once,
 releases the old engine) / `engineName()`. UI: Settings > MaiK, "Edge engine" radio group under "Who

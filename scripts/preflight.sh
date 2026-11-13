@@ -5,8 +5,8 @@
 #      at PushNotificationsPlugin.register) because app/build.gradle only applies google-services when
 #      the file exists. This is the #1 thing to guard.
 #   2. Unresolved merge markers in web entry files -> broken JS/HTML shipped.
-#   3. Needle engine binaries not fetched (gitignored) -> Android link / iOS package resolution fails.
-#      Set PLATFORM=android or PLATFORM=ios to check only the platform being built.
+#   3. A native project still wiring in the removed Needle plugin (capacitor-needle, deleted 2026-11-13):
+#      a stale `cap sync` or an old checkout would fail the Android link / iOS package resolution.
 # Also runs the unit suite (skippable with RUN_TESTS=0 for a config-only check).
 # Exits non-zero on any hard failure so the build aborts.
 set -uo pipefail
@@ -34,28 +34,13 @@ else
   echo "  ok"
 fi
 
-echo "== preflight 3/4: Needle native engine fetched =="
-# The Needle plugin is linked into both apps, but its engine binaries are gitignored (fetch-needle.sh).
-# Android: CMake links libs/arm64-v8a/libneedle.a. iOS: Package.swift's binaryTarget is the xcframework
-# that make-xcframework.sh builds. PLATFORM=android|ios checks one; default checks both.
-NEEDLE=local-plugins/capacitor-needle
-if [ "${PLATFORM:-all}" != "ios" ]; then
-  if [ -f "$NEEDLE/android/libs/arm64-v8a/libneedle.a" ]; then
-    echo "  ok: $NEEDLE/android/libs/arm64-v8a/libneedle.a"
-  else
-    echo "  FAIL: $NEEDLE/android/libs/arm64-v8a/libneedle.a MISSING -> the Android native build will not link."
-    echo "        Run:  $NEEDLE/scripts/fetch-needle.sh"
-    fail=1
-  fi
-fi
-if [ "${PLATFORM:-all}" != "android" ]; then
-  if [ -d "$NEEDLE/ios/Frameworks/CNeedle.xcframework" ]; then
-    echo "  ok: $NEEDLE/ios/Frameworks/CNeedle.xcframework"
-  else
-    echo "  FAIL: $NEEDLE/ios/Frameworks/CNeedle.xcframework MISSING -> the iOS build will not resolve the Needle package."
-    echo "        Run:  $NEEDLE/scripts/fetch-needle.sh && $NEEDLE/scripts/make-xcframework.sh"
-    fail=1
-  fi
+echo "== preflight 3/4: removed Needle plugin not wired in =="
+if grep -n "capacitor-needle\|CapacitorNeedle" android/capacitor.settings.gradle android/app/capacitor.build.gradle ios/App/CapApp-SPM/Package.swift 2>/dev/null; then
+  echo "  FAIL: the Needle plugin was removed on 2026-11-13 but a native project still references it (above)."
+  echo "        Run:  npm install && npx cap sync"
+  fail=1
+else
+  echo "  ok"
 fi
 
 echo "== preflight 4/4: unit tests =="

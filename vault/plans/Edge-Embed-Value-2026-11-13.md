@@ -46,6 +46,10 @@ page), 54 no answer: it is the first step either way. Name match first, else the
 Cost on the CPU here: query embed ~20 ms for both. EmbeddingGemma 2 is a 210 MB download and ~0.5 GB resident
 with a 4-slot server (the phone build uses one 512-token context, so less; not measured on a phone).
 
+## Outcome (owner, same day)
+Needle and FunctionGemma were **removed**; StewardMD Edge is rules only ([[Decisions]] 2026-11-13, [[StewardMD Edge]]).
+EmbeddingGemma 2 stays parked (flag off, native embed unbuilt).
+
 ## Verdict
 - **Edge rules: yes, real use.** They are what users get from Edge today, offline and at 0 wrong on the frozen sets.
 - **Needle as a router: no real use today.** No user has its weights; the base model never acts; the tuned rounds

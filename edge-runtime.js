@@ -1,7 +1,8 @@
 /* edge-runtime.js — the StewardMD Edge runtime contract (vault/plans/Edge-Master-Plan.md section 4.2).
  * ---------------------------------------------------------------------------
- * Wraps ONE on-device engine (Needle via capacitor-needle, FunctionGemma via capacitor-llama, or a
- * test mock) behind the rules the engine itself cannot keep:
+ * Wraps ONE on-device engine behind the rules the engine itself cannot keep. No engine ships in the app
+ * since 2026-11-13 (Needle and FunctionGemma removed; Edge is rules only); tests and bake-off tooling
+ * plug in mocks, and a future engine would plug in here:
  *   - Queue: at most 1 running + 1 waiting. A new request replaces the waiting one (which resolves
  *     "superseded"); nothing queues behind it.
  *   - Deadline: a warm call that passes `deadlineMs` resolves "timeout" at once. If the engine can be

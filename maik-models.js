@@ -139,14 +139,12 @@
    * Sizes are exact (Hugging Face API, 2026-09-21). MaiK Lite (1.7B) and the 27B Bonsai packs
    * (different backbone vocabularies) carry none. */
   var DRAFT_GEMMA3 = { name: "gemma-3-270m-it-Q8_0.gguf", url: HF + "/unsloth/gemma-3-270m-it-GGUF/resolve/main/gemma-3-270m-it-Q8_0.gguf?download=true", bytes: 291546144 };
-  /* StewardMD Edge engine (owner, 2026-10-04): FunctionGemma 270M Q8_0, the picker behind the
-   * smd_edge_engine "functiongemma" choice (edge-router.js autoEngine). Not a MaiK pack: kept out of
-   * PACKS so it never shows in the model library or becomes the answering pack; pack(EDGE_FG_ID)
-   * resolves it so ensure/installed/pathFor/remove work unchanged. ggml-org revision pinned; the sha256
-   * is the one test/native-host/run.sh pins, re-hashed from a complete local copy on 2026-10-04.
-   * Gemma Terms of Use (as for the MedGemma packs): fetched from Hugging Face, never re-hosted. */
+  /* RETIRED 2026-11-13 (owner): FunctionGemma 270M Q8_0 was an optional StewardMD Edge picker. It failed the
+   * Edge ship marks and was removed with the engine choice (vault Edge-Embed-Value-2026-11-13). The entry stays
+   * ONLY so retireEdgeFg() can delete a copy a phone already downloaded (291 MB): pack() still resolves it
+   * for remove(), nothing offers or loads it, and it is out of the background-download resume list. */
   var EDGE_FG_ID = "edge-functiongemma";
-  var EDGE_FG = { label: "FunctionGemma (Edge)", actual: "FunctionGemma 270M Q8_0 (StewardMD Edge picker)", edge: true,
+  var EDGE_FG = { label: "FunctionGemma (Edge, retired)", actual: "FunctionGemma 270M Q8_0 (retired StewardMD Edge picker)", edge: true,
     files: [{ name: "functiongemma-270m-it-q8_0.gguf",
       url: HF + "/ggml-org/functiongemma-270m-it-GGUF/resolve/2566ce14aedfc14fdd0de955ba67346425e67126/functiongemma-270m-it-q8_0.gguf?download=true",
       bytes: 291557792, sha256: "83940d4dd9676710856f43523bed096164a595a96f6b34771610a03937de5270" }] };
@@ -922,7 +920,6 @@
     // one, and if it is not adopted here the UI reports it as absent and offers to start a second.
     var ids = Object.keys(PACKS);
     Object.keys(PACKS).forEach(function (b) { if (PACKS[b].vision) ids.push(b + VISION_SUFFIX); });
-    ids.push(EDGE_FG_ID);
     ids.push(EMBED_ID);   // the 210 MB search pack resumes the same way a chat pack does
     // MLX files too, but only where MLX is on: with the flag off nothing ever started one.
     if (mlxEnabled()) Object.keys(PACKS).forEach(function (b) { ids = ids.concat(mlxIdsOf(b)); });
@@ -1517,6 +1514,14 @@
     }, Promise.resolve());
   }
 
+  /* One-time cleanup of the retired FunctionGemma file (see EDGE_FG). Runs once per install on the phone:
+   * remove() cancels a running transfer, clears the markers and deletes the file (a missing file is fine). */
+  var KEY_FG_RETIRED = "smd_edge_fg_retired";
+  function retireEdgeFg() {
+    if (!isNative() || lget(KEY_FG_RETIRED) === "1") return Promise.resolve(false);
+    return remove(EDGE_FG_ID).then(function () { lset(KEY_FG_RETIRED, "1"); return true; }, function () { return false; });
+  }
+
   var API = {
     PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
     EMBED_ID: EMBED_ID, isEmbed: isEmbed, embedIds: embedIds, pack: pack,
@@ -1527,7 +1532,7 @@
     mlxMainIdOf: mlxMainIdOf, isMlxId: isMlxId, mlxBytes: mlxBytes, mlxInstalledCached: mlxInstalledCached,
     mlxReady: mlxReady, ensureMlx: ensureMlx, mlxBusy: mlxBusy, removeMlx: removeMlx, mlxPaths: mlxPaths,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
-    totalBytes: totalBytes, sizeLabel: sizeLabel, EDGE_FG_ID: EDGE_FG_ID,
+    totalBytes: totalBytes, sizeLabel: sizeLabel, retireEdgeFg: retireEdgeFg,
     installed: installed, installedCached: installedCached,
     packIds: packIds, ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
     state: state, subscribe: subscribe,
@@ -1544,6 +1549,8 @@
     window.SMD_MAIK_MODELS = API;
     // Deferred so it never competes with first paint.
     try { if (typeof setTimeout === "function") setTimeout(function () { resumeUiForBackgroundDownloads(); }, 3000); } catch (e) {}
+    // Free the retired FunctionGemma file once, well after first paint.
+    try { if (typeof setTimeout === "function") setTimeout(function () { retireEdgeFg().catch(function () {}); }, 8000); } catch (e) {}
     // A first device snapshot for the capability matcher, after the plugin bridge is up.
     try { if (typeof setTimeout === "function") setTimeout(function () { refreshDevice().catch(function () {}); }, 1500); } catch (e) {}
   }

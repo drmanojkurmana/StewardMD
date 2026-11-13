@@ -145,12 +145,6 @@
   // router (edge-router.js) that runs in it. With Edge off (smd_edge "0") the old name comes back.
   function edgeOn() { return lget("smd_edge") !== "0"; }
   function ragLabel() { return edgeOn() ? "MaiK Edge" : "KB only"; }
-  var EDGE_ENGINE_LABEL = { needle: "Needle", functiongemma: "FunctionGemma", rules: "Rules only" };
-  function edgeEngineLabel() {
-    var v = null;
-    try { var E = window.SMD_EDGE; v = (E && E.engineChoice) ? E.engineChoice() : lget("smd_edge_engine"); } catch (e) {}
-    return EDGE_ENGINE_LABEL[v] || "Needle";
-  }
   var RAG_SUB_EDGE = "On-device. Opens the right tool, calculator, drug or page instantly, and answers from the StewardMD Knowledge Base. Free, works offline. No AI writing.";
   var RAG_SUB_KB = "StewardMD knowledge base, cited. No tokens, works offline.";
 
@@ -844,39 +838,8 @@
       opt("local", "MaiK on this phone", pill("Free", "#dcfce7", "#166534") + " " + pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
-      edgeEngineHTML(opt) +
       (rt ? capsHTML() + modelRowHTML() : "") +
       '</div>';
-  }
-
-  /* EDGE ENGINE (owner, 2026-10-04): which on-device model StewardMD Edge uses to pick a tool
-   * (edge-router.js, setting smd_edge_engine). Same row style as "Who answers"; data-me-edge rows. */
-  function edgeEngineHTML(opt) {
-    var E = window.SMD_EDGE, M = window.SMD_MAIK_MODELS;
-    if (!E || !E.engineChoice || !E.enabled || !E.enabled()) return "";
-    var cur = E.engineChoice(), C = window.Capacitor, P = C && C.Plugins;
-    var native = !!(C && C.isNativePlatform && C.isNativePlatform());
-    var fid = (M && M.EDGE_FG_ID) || "edge-functiongemma";
-    var fgHave = !!(M && M.installedCached && M.installedCached(fid));
-    var st = (M && M.state) ? M.state(fid) : { frac: 0 };
-    var on = pill("On this phone", "#dcfce7", "#166534"), off = pill("Not on this phone", "#e2e8f0", "#334155");
-    var fgPill = fgHave ? on : st.downloading ? pill("Downloading " + (st.frac * 100).toFixed(0) + "%", "#fef3c7", "#92400e") : off;
-    function row(v, label, badge, desc, first) { return opt(v, label, badge, desc, first, false, cur === v, "data-me-edge"); }
-    var size = (M && M.sizeLabel) ? M.sizeLabel(fid) : "290 MB";
-    var dl = (!fgHave && native && P && P.Llama && M && M.ensure)
-      ? '<div class="me-edgedl" style="display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:0 2px">' +
-          '<span style="flex:1;min-width:0;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
-            '<span data-me-status="' + fid + '" aria-live="polite">' + (st.downloading ? (st.frac * 100).toFixed(1) + "% of " + size : "FunctionGemma is not on this phone · " + size) + '</span>' +
-            '<span data-me-bar="' + fid + '" style="display:block"></span></span>' +
-          '<button class="smd-nav-btn" data-me-edgedl="' + (st.downloading ? "pause" : "download") + '" style="margin:0;min-height:44px">' + (st.downloading ? "Pause" : "Download") + '</button>' +
-        '</div>'
-      : "";
-    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">Edge engine</div>' +
-      '<div role="radiogroup" aria-label="Edge engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
-        row("needle", "Needle", (native && P && P.Needle) ? on : off, "Small and fast. Declines when unsure.", true) +
-        row("functiongemma", "FunctionGemma", fgPill, "Picks more often, but can pick the wrong tool until trained. Unloads MaiK Lite while it runs.", false) +
-        row("rules", "Rules only", pill("Built in", "#dcfce7", "#166534"), "Exact names only. No model.", false) +
-      '</div>' + dl;
   }
 
   function levelPill(level) {
@@ -1405,25 +1368,6 @@
         rerender(b, root);
       });
     });
-    root.querySelectorAll("[data-me-edge]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var E = window.SMD_EDGE;
-        if (E && E.setEngineChoice) E.setEngineChoice(b.getAttribute("data-me-edge"));
-        rerender(b, root);
-      });
-    });
-    root.querySelectorAll("[data-me-edgedl]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var M = window.SMD_MAIK_MODELS, id = M && M.EDGE_FG_ID;
-        if (!id) return;
-        if (b.getAttribute("data-me-edgedl") === "pause") { if (M.cancel) M.cancel(id); return; }
-        var p = M.ensure(id, null);
-        rerender(b, root);             // flip to Pause at once
-        p.then(function () { toast("FunctionGemma is on this phone."); }, function (e) {
-          if (String((e && e.message) || e) !== "cancelled") toast("Download stopped. Tap Download to resume.");
-        });
-      });
-    });
     root.querySelectorAll("[data-me-pack]").forEach(function (b) {
       b.addEventListener("click", function () {
         var M = window.SMD_MAIK_MODELS;
@@ -1555,7 +1499,7 @@
   function options() {
     var out = [
       { id: "cloud", label: "MaiK Cloud", sub: "Our super specialist, grounded in the StewardMD KB. Uses AI tokens.", badge: "PRO", grade: "DM" },
-      { id: "rag", label: ragLabel(), sub: edgeOn() ? RAG_SUB_EDGE : RAG_SUB_KB, badge: "FREE", edgeEngine: edgeOn() ? edgeEngineLabel() : "" }
+      { id: "rag", label: ragLabel(), sub: edgeOn() ? RAG_SUB_EDGE : RAG_SUB_KB, badge: "FREE" }
     ];
     var M = window.SMD_MAIK_MODELS;
     if (M && M.PACKS && gateActive() && runtimeAvailable()) {
@@ -1794,10 +1738,6 @@
         '<span style="font:600 10.5px/1 var(--sans,system-ui);letter-spacing:.03em;text-transform:uppercase;color:var(--mk-mut,#5a7184)">' + label + '</span>' +
         '<span aria-hidden="true">' + segs + '</span></span>';
     }
-    // MaiK Edge row: which Edge engine runs, in the same muted line the packs use for their size.
-    function edgeLineHTML(o) {
-      return o.edgeEngine ? '<span style="display:block;margin-top:7px;font:500 11px/1.3 var(--sans,system-ui);color:var(--mk-mut,#5a7184)">Engine: ' + esc(o.edgeEngine) + ' · change in Settings, MaiK, Edge engine</span>' : "";
-    }
     function metersHTML(o) {
       if (!o.pack) return "";
       var M = window.SMD_MAIK_MODELS, c = null, size = "";
@@ -1820,7 +1760,7 @@
               (badge ? '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + badge + '</span>' : "") +
             '</span>' +
             '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
-            metersHTML(o) + edgeLineHTML(o) +
+            metersHTML(o) +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
           '</button>';
@@ -1947,7 +1887,7 @@
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,
     getPref: getPref, setPref: setPref, effective: effective,
     gateActive: gateActive, runtimeAvailable: runtimeAvailable, packInstalled: packInstalled, localReady: localReady,
-    kbOnlyNotice: kbOnlyNotice, ragLabel: ragLabel, edgeEngineLabel: edgeEngineLabel, route: route, install: install, activePack: activePack,
+    kbOnlyNotice: kbOnlyNotice, ragLabel: ragLabel, route: route, install: install, activePack: activePack,
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,

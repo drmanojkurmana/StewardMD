@@ -353,7 +353,9 @@ function load(env = {}) {
   ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
   ok("picker: Edge row is named MaiK Edge", opts[1].label === "MaiK Edge");
   ok("picker: Edge row says it opens tools and answers from the KB, no AI writing", /opens the right tool/i.test(opts[1].sub) && /Knowledge Base/.test(opts[1].sub) && /No AI writing/.test(opts[1].sub));
-  ok("picker: Edge row shows its engine (Needle by default)", opts[1].edgeEngine === "Needle");
+  ok("picker: Edge row has no engine line (rules only since 2026-11-13)", !("edgeEngine" in opts[1]));
+  ok("settings: no Edge engine choice, no Needle or FunctionGemma", !/Edge engine|data-me-edge|Needle|FunctionGemma/.test(E.settingsHTML()));
+  ok("no edgeEngineLabel export", typeof E.edgeEngineLabel === "undefined");
   ok("picker: no em-dash in the Edge row", !/—/.test(opts[1].label + opts[1].sub));
   ok("picker: cloud row is our super specialist, grounded, never a vendor name", /super specialist/i.test(opts[0].sub) && /grounded/i.test(opts[0].sub) && !/Gemini/.test(opts[0].sub));
   ok("picker: cloud row carries the DM grade", opts[0].grade === "DM");
@@ -461,8 +463,6 @@ function load(env = {}) {
   ok("edge off: footer does not name MaiK Edge", !/MaiK Edge/.test(E.discLabel()));
   ls.setItem("smd_edge", "1");
   ok("edge on again: MaiK Edge", E.chipLabel() === "MaiK Edge");
-  ls.setItem("smd_edge_engine", "functiongemma");
-  ok("edge engine label follows smd_edge_engine", E.edgeEngineLabel() === "FunctionGemma");
 }
 
 // adopt the pack once it finishes downloading

@@ -38,8 +38,9 @@ The architecture/knowledge lives in the Obsidian vault at **`vault/`** (git-trac
 - **Don't sweep up other sessions' work** — stage files explicitly; another session may be editing the repo.
 
 ## Native build gotcha (iOS)
-Before any native build run `local-plugins/capacitor-needle/scripts/fetch-needle.sh` (and
-`local-plugins/capacitor-needle/scripts/make-xcframework.sh` for iOS); the engine binaries are gitignored and `scripts/preflight.sh` fails without them.
+Run `scripts/preflight.sh` before any native build. (The Needle plugin and its fetch-needle.sh step were
+removed on 2026-11-13; StewardMD Edge is rules only. If a build still asks for `capacitor-needle`, re-run
+`npx cap sync` from a current checkout.)
 
 `xcodebuild -derivedDataPath` products land in a flat OR ECID-subfolder path. Always
 `find ios/DerivedData -name App.app`, verify the built `public/index.html` `?v=` token + a code marker

@@ -199,10 +199,10 @@ test("the reason reaches the clinician: opd-emr names busy, timeout and memory i
   assert.match(body, /_scribeCapToasted !== cm/, "a capability message is deduped per reason, not once per session");
 });
 
-// StewardMD Edge (smd_edge_engine "functiongemma") loads FunctionGemma into this same llama plugin and
-// evicts MaiK's pack; available().loaded still says true (FunctionGemma is loaded), so only the holder
-// marker can tell MaiK its pack is gone. Without the reload MaiK would answer with FunctionGemma.
-test("Edge's FunctionGemma evicting the pack makes the next MaiK call reload it", async () => {
+// Another caller loading into this same llama plugin evicts MaiK's pack; available().loaded still says true
+// (ITS model is loaded), so only the holder marker can tell MaiK its pack is gone. StewardMD Edge's
+// FunctionGemma was that caller until 2026-11-13 (removed); the guard stays for any future one.
+test("another caller evicting the pack makes the next MaiK call reload it", async () => {
   const { L, loads, win } = load();
   await L.translate("fever 3 days");
   assert.equal(loads.length, 1);
