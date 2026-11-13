@@ -99,3 +99,6 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   shows and the app is visible; a still frame under reduced motion or Low Power Mode (`SMD_POWER.low`). No WebGL2
   or no shader: the CSS light pools stay. The owner's flat light tricolour reference was tried first and dropped for
   this. Cache token th15.
+
+## Gotcha: flip class names (2026-11-13)
+The banner flip animation classes are `th-flipout` / `th-flipin`. They were `th-out` / `th-in`, but `.th-in` is also the India pill in the sheet (uppercase Inter), so for 300 ms after each flip the Pro face rendered in uppercase Inter. The pill rule is now scoped to `#thSheet .th-in`. Never put a bare `th-*` class on `#hrfBanner` that the sheet also uses.

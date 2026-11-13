@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th15";
+  var FLAG = "smd_today_history", VER = "th16";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -182,12 +182,12 @@
       return;
     }
     busy = true;
-    b.classList.remove("th-in"); void b.offsetWidth;
-    b.classList.add("th-out");
+    b.classList.remove("th-flipin"); void b.offsetWidth;
+    b.classList.add("th-flipout");
     setTimeout(function () {
       setShowing(b, toBack);
-      b.classList.remove("th-out"); void b.offsetWidth; b.classList.add("th-in");
-      setTimeout(function () { b.classList.remove("th-in"); busy = false; done(); }, 300);
+      b.classList.remove("th-flipout"); void b.offsetWidth; b.classList.add("th-flipin");
+      setTimeout(function () { b.classList.remove("th-flipin"); busy = false; done(); }, 300);
     }, 220);
   }
   function tick() {
