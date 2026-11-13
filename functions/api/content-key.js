@@ -73,7 +73,7 @@ export async function onRequest(context) {
   let appOk = false;
   try {
     const ac = await verifyAppCheck(request, env);
-    appOk = !!(ac && ac.ok);
+    appOk = !!ac && ac.ok !== false;   // _appcheck.js returns the token payload (or null)
   } catch (e) { appOk = false; }
   try {
     const tok = (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, "");

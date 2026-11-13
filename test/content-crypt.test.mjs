@@ -1,7 +1,7 @@
 /* content-crypt + encrypt-bundle round-trip tests (Security 4).
  * Run: node --test test/content-crypt.test.mjs
  */
-import { describe, it, before, after } from "node:test";
+import { describe, it, before, after, mock } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createCipheriv, randomBytes } from "node:crypto";
@@ -188,6 +188,10 @@ describe("GET /api/content-key auth", () => {
   let onRequest;
   before(async () => {
     // Dynamic import of the Pages Function.
+    // Real verifier contract: token payload or null. "valid" stands in for a signed App Check token.
+    mock.module("../functions/_appcheck.js", { namedExports: {
+      verifyAppCheck: async (r) => (r.headers.get("X-Firebase-AppCheck") === "valid" ? { sub: "app" } : null),
+    } });
     const mod = await import("../functions/api/content-key.js");
     onRequest = mod.onRequest;
   });
@@ -205,12 +209,11 @@ describe("GET /api/content-key auth", () => {
     assert.match(res.headers.get("Cache-Control") || "", /no-store/);
   });
 
-  it("returns key when App Check test gate passes", async () => {
-    globalThis.__SMD_TEST_APPCHECK_OK = true;
-    try {
+  it("returns key with a valid App Check token", async () => {
+    {
       const req = new Request("https://stewardmd.in/api/content-key", {
         method: "GET",
-        headers: { "X-Firebase-AppCheck": "dummy" },
+        headers: { "X-Firebase-AppCheck": "valid" },
       });
       const res = await onRequest({
         request: req,
@@ -222,17 +225,14 @@ describe("GET /api/content-key auth", () => {
       assert.equal(body.keyId, KEY_ID);
       assert.equal(body.key, KEY_B64);
       assert.match(res.headers.get("Cache-Control") || "", /private, no-store/);
-    } finally {
-      delete globalThis.__SMD_TEST_APPCHECK_OK;
     }
   });
 
   it("404s for unknown keyId", async () => {
-    globalThis.__SMD_TEST_APPCHECK_OK = true;
-    try {
+    {
       const req = new Request("https://stewardmd.in/api/content-key?keyId=nope", {
         method: "GET",
-        headers: { "X-Firebase-AppCheck": "dummy" },
+        headers: { "X-Firebase-AppCheck": "valid" },
       });
       const res = await onRequest({
         request: req,
@@ -240,8 +240,6 @@ describe("GET /api/content-key auth", () => {
         waitUntil() {},
       });
       assert.equal(res.status, 404);
-    } finally {
-      delete globalThis.__SMD_TEST_APPCHECK_OK;
     }
   });
 });
