@@ -1,11 +1,12 @@
 // swift-tools-version: 5.9
 import PackageDescription
 
-// StewardmdCapacitorNeedle — the Needle 3 router engine for StewardMD Edge (iOS side).
+// StewardmdCapacitorNeedle — the Needle 3 router for StewardMD Edge (iOS side), on the Cactus engine.
 //
-// CNeedle is a LOCAL xcframework built from the pinned upstream static libraries by
+// CNeedle is a LOCAL xcframework built from the pinned Cactus engine 4.1.0 static libraries by
 // scripts/make-xcframework.sh (it is not in git: run scripts/fetch-needle.sh first). The archive is
-// C++ against libc++ (std::__1) and libSystem only, hence the single extra linked library.
+// C++ against libc++ (std::__1) and libSystem only (no Accelerate or network frameworks), hence the
+// single extra linked library.
 // No process isolation on iOS: one serial queue and a token cap instead (gate A0.2). Device only:
 // the simulator slice is optional and unaudited.
 let package = Package(

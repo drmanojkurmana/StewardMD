@@ -6,13 +6,13 @@
 #   test/native-host/run.sh llama     the REAL llama_jni.cpp + LlamaEngine on this CPU with FunctionGemma,
 #                                     with and without the router grammar, and the forced prefix + digit pick
 #                                     (its tokens must be the llama-json target's: {"option": = 14937 4485 1083)
-#   test/native-host/run.sh needle    the REAL needle_jni.cpp + NeedleNative on this CPU with base Needle
+#   test/native-host/run.sh needle    the REAL needle_jni.cpp + NeedleNative on this CPU with base Needle (Cactus engine 4.1.0)
 #   test/native-host/run.sh all
 # LIMIT=60 (rows per model run; 0 = all 1,512). WORK=<dir> for downloads and builds (default /tmp/smd-native).
 #
 # `llama` also runs on macOS (arm64) with JAVA_HOME set.
 # Needs: ANDROID_HOME with ndk;27.2.12479018 and cmake;3.22.1, JDK 21, node, clang++-20 + libc++-20-dev
-# (the Needle archive is built against LLVM libc++). Run `node scripts/edge/export.mjs` first.
+# (the Cactus archive is built against LLVM libc++). Run `node scripts/edge/export.mjs` first.
 # Phone-only facts (real latency, memory, thermal, the :edge kill test) still come from the runbook gates.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"; HERE="$ROOT/test/native-host"
@@ -132,12 +132,12 @@ needle() {
   stubs; rows
   local N="$WORK/needle"; mkdir -p "$N"
   bash "$ROOT/local-plugins/capacitor-needle/scripts/fetch-needle.sh" >/dev/null   # header + base weights
-  # linux-x86_64 engine, pinned 2026-10-01; same needle.h as the audited android/ios one.
-  fetch "https://huggingface.co/Cactus-Compute/needle3/resolve/27c0a9a5b3ca835e0b7dbeaccf555df03dac493d/linux-x86_64/libneedle.a" "$N/libneedle.a" \
-    35581b09da9b012637718d74dfb03c6ca563839bd909f2602c1b96764a916566
+  # linux-x86_64 Cactus engine 4.1.0, the same release and cactus.h as the android/ios archives.
+  fetch "https://huggingface.co/Cactus-Compute/cactus/resolve/4e822c9036be2eb0e47ef556df32a818bb1572ef/releases/4.1.0/linux-x86_64/libcactus.a" "$N/libcactus.a" \
+    0c58951e0e4353a2a302621d714e19a3069b11c9f3e06b1409457f571cc900ec
   clang++-20 -std=c++17 -stdlib=libc++ -O2 -fPIC -shared -I"$ROOT/local-plugins/capacitor-needle/include" -I"$WORK/stub" $JINC \
     "$ROOT/local-plugins/capacitor-needle/android/src/main/cpp/needle_jni.cpp" "$HERE/hashshim.cpp" \
-    -Wl,--whole-archive "$N/libneedle.a" -Wl,--no-whole-archive "$WORK/stublib/liblog.a" \
+    -Wl,--whole-archive "$N/libcactus.a" -Wl,--no-whole-archive "$WORK/stublib/liblog.a" \
     -L/usr/lib/llvm-20/lib -Wl,-rpath,/usr/lib/llvm-20/lib -lc++abi -lpthread -lm -Wl,-z,defs -o "$N/libneedle_jni.so"
   rm -rf "$N/classes"; javac -d "$N/classes" "$HERE/NeedleHarness.java" "$ROOT/local-plugins/capacitor-needle/android/src/main/java/in/stewardmd/needle/NeedleNative.java"
   java -Djava.library.path="$N" -cp "$N/classes" in.stewardmd.needle.NeedleHarness "$ROOT/local-plugins/capacitor-needle/build/weights/needle3.cact" \

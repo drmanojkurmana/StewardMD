@@ -1,11 +1,13 @@
-/* needle_jni.cpp — JNI over the Needle 3 C API (needle.h), for capacitor-needle.
+/* needle_jni.cpp — JNI over the Cactus engine C API (cactus.h, engine 4.1.0), running Needle 3, for
+ * capacitor-needle. Until 2026-11-13 this was the standalone Needle 3 engine (needle.h, libneedle.a);
+ * Cactus merged Needle, Whistle and Mirage into one engine and renamed the calls needle_* -> cactus_*.
  *
  * Loaded ONLY inside the ":edge" service process (NeedleService), never in the app process: the
  * engine is process-global, not thread-safe, and has no cancel, so the only way to stop a stuck call
  * is to kill the process it runs in. A crash in the engine takes :edge down, not the WebView.
  *
  * Weights are mmap'd read-only and the mapping is kept for the life of the process: the .cact format
- * is read in place, and needle.h has no unload, so a mapping is never handed back while the engine
+ * is read in place, and cactus.h has no unload, so a mapping is never handed back while the engine
  * might still read it. A second load() maps the new file and keeps the old one (address space only).
  */
 #include <jni.h>
@@ -19,7 +21,7 @@
 #include <android/log.h>
 #include <sched.h>
 #include <cstdio>
-#include "needle.h"
+#include "cactus.h"
 
 #define LOG_TAG "NeedleJNI"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
@@ -55,21 +57,21 @@ std::string str(JNIEnv* env, jstring s) {
   return out;
 }
 void fail(const char* where) {
-  const char* e = needle_last_error();
+  const char* e = cactus_last_error();
   g_err = std::string(where) + (e && *e ? std::string(": ") + e : std::string());
   LOGE("%s", g_err.c_str());
 }
 }  // namespace
 
-/* How many threads the engine gets (Android only; needle.h has no thread setting).
- * Needle sizes its pool in Engine(): if fast_core_mask() finds >= 2 cores whose cpu_capacity is >= 75%
- * of the strongest, it uses min(that, 4) pinned threads; otherwise it falls back to
- * std::thread::hardware_concurrency(). Tensor G4 (Pixel 9) has ONE such core (X4), so the engine fell
- * back to 8 spinning threads over the efficiency cores, in a process whose cpuset cannot even use the
- * X4: 8.5-10 s per call instead of ~0.15 s on an iPhone (Edge-Runbook A0.2, 2026-10-02).
- * CMakeLists links with --wrap for that one symbol, so the fallback asks us instead: the cores THIS
- * process may run on whose capacity is at least half the strongest core's, capped at kMaxThreads.
- * Phones where the engine's own fast path applies never reach this function. */
+/* How many threads the engine gets (Android only). The engine sizes its pool once, when the text engine
+ * is built inside cactus_load: cactus_set_threads(n > 0) wins; otherwise it counts the cores in the
+ * process's affinity mask (or, if that fails, hardware_concurrency() + fast_core_mask()). Tensor G4
+ * (Pixel 9) has ONE big core, and the :edge process's cpuset cannot even use it: with engine 3.0.x's
+ * fallback the engine spun 8 threads over the efficiency cores, 8.5-10 s per call instead of ~0.15 s
+ * on an iPhone (Edge-Runbook A0.2, 2026-10-02). We used to answer that fallback through a linker
+ * --wrap; engine 4.1.0 has an official setter, so load() sets our count before cactus_load:
+ * the cores THIS process may run on whose capacity is at least half the strongest core's, capped
+ * at kMaxThreads. */
 namespace {
 constexpr int kMaxThreads = 4;     // calibration knob: the engine's own fast-path cap
 unsigned engine_threads() {
@@ -100,13 +102,6 @@ unsigned engine_threads() {
 
 extern "C" {
 
-// Reached only through -Wl,--wrap=_ZNSt6__ndk16thread20hardware_concurrencyEv (CMakeLists.txt).
-unsigned __wrap__ZNSt6__ndk16thread20hardware_concurrencyEv() {
-  static const unsigned n = engine_threads();
-  return n;
-}
-
-
 JNIEXPORT jint JNICALL
 Java_in_stewardmd_needle_NeedleNative_load(JNIEnv* env, jclass, jstring jpath) {
   std::lock_guard<std::mutex> lk(g_mu);
@@ -118,9 +113,18 @@ Java_in_stewardmd_needle_NeedleNative_load(JNIEnv* env, jclass, jstring jpath) {
   void* p = mmap(nullptr, (size_t) st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
   close(fd);                                       // the mapping outlives the descriptor
   if (p == MAP_FAILED) { g_err = "mmap failed: " + path; LOGE("%s", g_err.c_str()); return -1; }
-  const int rc = needle_load(static_cast<const unsigned char*>(p), (unsigned long long) st.st_size);
-  if (rc < 0) { munmap(p, (size_t) st.st_size); fail("needle_load"); return rc; }
+  static const int threads = (int) engine_threads();
+  cactus_set_threads(threads);                     // before cactus_load: the pool is sized when the engine is built
+  const int rc = cactus_load(static_cast<const unsigned char*>(p), (unsigned long long) st.st_size);
+  if (rc < 0) { munmap(p, (size_t) st.st_size); fail("cactus_load"); return rc; }
+  // One engine loads Needle, Whistle and Mirage archives alike: refuse anything without a text model,
+  // or the next cactus_init fails with a less useful message (a Mirage .cact reports CACTUS_VISION only).
+  if (!(cactus_models() & CACTUS_TEXT)) {
+    g_maps.emplace_back(p, (size_t) st.st_size);   // the engine may still hold it: keep the mapping
+    g_err = "not a Needle text model: " + path; LOGE("%s", g_err.c_str()); return -2;
+  }
   g_maps.emplace_back(p, (size_t) st.st_size);
+  g_err.clear();                                   // an earlier failed load must not read as this one's error
   LOGI("loaded %s (%lld bytes)", path.c_str(), (long long) st.st_size);
   return rc;
 }
@@ -129,10 +133,10 @@ JNIEXPORT jint JNICALL
 Java_in_stewardmd_needle_NeedleNative_configureBytes(JNIEnv* env, jclass, jbyteArray jsystem, jbyteArray jtools) {
   std::lock_guard<std::mutex> lk(g_mu);
   const std::string system = bytes(env, jsystem), tools = bytes(env, jtools);
-  // tool_index_path NULL: the router's single tool is declared statically (needle.h; the Python
-  // binding passes None the same way).
-  const int rc = needle_init(system.c_str(), tools.c_str(), nullptr);
-  if (rc < 0) fail("needle_init");
+  // tool_index_path NULL: the router's single tool is declared statically (the Python binding passes
+  // None the same way).
+  const int rc = cactus_init(system.c_str(), tools.c_str(), nullptr);
+  if (rc < 0) fail("cactus_init");
   return rc;
 }
 
@@ -145,11 +149,12 @@ Java_in_stewardmd_needle_NeedleNative_completeBytes(JNIEnv* env, jclass, jbyteAr
   // near free when it is resident. (mlock is not an option: RLIMIT_MEMLOCK is 64 KB for apps.)
   if (!g_maps.empty()) madvise(g_maps.back().first, g_maps.back().second, MADV_WILLNEED);
   std::vector<char> out(kOutCap, 0);
-  const int rc = needle_complete(text.c_str(), (int) maxTokens, out.data(), (int) out.size());
+  // pcm NULL, 0 samples: text in (the same call takes Whistle audio).
+  const int rc = cactus_complete(text.c_str(), nullptr, 0, (int) maxTokens, out.data(), (int) out.size());
   if (rc < 0) {
     // On failure the engine may leave its detail in the output buffer (the Python binding reads it).
     out.back() = 0;
-    g_err = std::string("needle_complete: ") + (out[0] ? out.data() : (needle_last_error() ? needle_last_error() : ""));
+    g_err = std::string("cactus_complete: ") + (out[0] ? out.data() : (cactus_last_error() ? cactus_last_error() : ""));
     LOGE("%s", g_err.c_str());
     return nullptr;
   }
@@ -160,7 +165,7 @@ Java_in_stewardmd_needle_NeedleNative_completeBytes(JNIEnv* env, jclass, jbyteAr
 JNIEXPORT void JNICALL
 Java_in_stewardmd_needle_NeedleNative_reset(JNIEnv*, jclass) {
   std::lock_guard<std::mutex> lk(g_mu);
-  needle_reset();
+  cactus_reset();
 }
 
 JNIEXPORT jbyteArray JNICALL

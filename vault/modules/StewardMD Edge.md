@@ -187,6 +187,13 @@ answers" (`maik-engine.js` `edgeEngineHTML`, `data-me-edge`, download `data-me-e
   engine 3.1.0 with Whistle speech added; same weights and licence, no network symbols, identical decisions
   on test and test3, same thread fallback (our wrap still needed) and the same init-less hang (call 56 on
   the Mac too), but 28% larger and `needle_complete` gained `pcm, samples` (ABI break). Pin NOT moved.
+- **Engine moved to Cactus 4.1.0 on 2026-11-13** (owner: "move and redo audit"; [[Edge-Runbook]] 5f). Cactus
+  now ships ONE engine (`libcactus.a`, `cactus.h`) for Needle, Whistle and Mirage from `Cactus-Compute/cactus`
+  release 4.1.0 (`4e822c90`); weights still from `Cactus-Compute/needle3` (same sha256). Calls are `cactus_*`
+  (`cactus_complete(text, nullptr, 0, max, out, cap)`). All 2,644 test/test3 envelopes byte-identical to the old
+  pin, same RAM, same init-less hang (keep init before every call). Android thread count is now
+  `cactus_set_threads(engine_threads())` before `cactus_load` (the `--wrap` is gone); `load()` refuses a
+  non-text `.cact`. Phone checks still open: iOS build, Pixel p95, :edge kill.
 - No engine is bundled. `SMD_EDGE.autoEngine()` uses `Capacitor.Plugins.Needle` on native when the
   plugin exists (Day 4 work). Until then only the rules layer answers.
 

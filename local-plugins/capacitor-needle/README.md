@@ -1,6 +1,9 @@
 # @stewardmd/capacitor-needle
 
-On-device [Needle 3](https://huggingface.co/Cactus-Compute/needle3) router engine for StewardMD Edge
+On-device [Needle 3](https://huggingface.co/Cactus-Compute/needle3) router for StewardMD Edge, running on
+the [Cactus engine 4.1.0](https://huggingface.co/Cactus-Compute/cactus) (`libcactus.a` + `cactus.h`) since
+2026-11-13; before that the standalone Needle engine (`libneedle.a` + `needle.h`). Re-audit:
+[`vault/plans/Edge-Runbook.md`](../../vault/plans/Edge-Runbook.md) 5f. The router
 (`edge-router.js`, flag `smd_edge`, default OFF). One fixed tool (`choose_option`), text in, one JSON
 tool call out. No network: the Android archive has no socket symbols (audited 2026-09-30).
 
@@ -24,13 +27,13 @@ and SwiftPM fail without them. Nothing calls the plugin while `smd_edge` is off.
 `configure`, not `init`: a Swift plugin cannot expose a method named `init`.
 
 ## Why it is built this way
-- **The engine is process-global, not thread-safe, and has no cancel** (`needle.h`). Android runs it
+- **The engine is process-global, not thread-safe, and has no cancel** (`cactus.h`). Android runs it
   in `android:process=":edge"` (`NeedleService`, Messenger IPC); `kill()` ends that process, the only
   way to stop a stuck call, and a crash there never takes the WebView down. Needle's own Python
   binding isolates the engine in a worker subprocess the same way. iOS gets no second process: one
   serial queue and a token cap, and the runtime waits a stuck call out ("busy").
 - **Weights are mmap'd and never unmapped**: `.cact` is read in place and there is no unload.
-- **16 KB pages (A0.1):** `libneedle.a` has no LOAD segments; our `libneedle_jni.so` is linked with
+- **16 KB pages (A0.1):** `libcactus.a` has no LOAD segments; our `libneedle_jni.so` is linked with
   `-z max-page-size=16384` and `ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON`.
 - **Same NDK and STL as capacitor-llama** (r27.2, `c++_shared`): the archive needs NDK libc++.
 
@@ -53,5 +56,10 @@ base model. Put it where `load()` looks, or pass `path`:
   check the flags with `--help`). Copy AFTER installing: every install makes a new container.
 
 ## Licence
-`cactus-needle` (the Python package) is Apache-2.0. **Confirm the licence of the prebuilt engine
-binaries and weights on the Hugging Face repo before any store build.**
+The engine release ships an Apache-2.0 `LICENSE` (fetched to `build/LICENSE-cactus`, sha256 pinned);
+the Hugging Face repos for the engine and the weights are tagged apache-2.0.
+
+## One engine, three models
+`cactus_load` takes a Needle, Whistle (speech) or Mirage (vision) `.cact`. `load()` refuses an archive
+without a text model (`cactus_models() & CACTUS_TEXT`), so a wrong file fails at load, not at the
+first call. Only Needle is used here; Mirage was evaluated and not adopted (vault `Mirage-Eval.md`).

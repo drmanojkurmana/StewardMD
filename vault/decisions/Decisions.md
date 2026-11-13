@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-13 · Edge's Needle engine moves to Cactus 4.1.0 (owner: "move and redo audit")
+
+**Decision.** `capacitor-needle` links the Cactus engine 4.1.0 (`libcactus.a` + `cactus.h`, `Cactus-Compute/cactus`
+`4e822c90`) instead of the standalone Needle engine pinned at `needle3` `27c0a9a5`. Same Needle 3 weights.
+**Why.** Cactus now publishes one engine for Needle, Whistle and Mirage and dropped the old binaries from the needle3
+main branch. Re-audit ([[Edge-Runbook]] 5f): all 2,644 frozen test/test3 envelopes byte-identical, same RAM, no
+network imports, Apache-2.0, Android build passes 16 KB / API 26 checks; the thread fix becomes the official
+`cactus_set_threads` instead of a linker `--wrap`. **Trade-off.** Engine archive +70% (speech and vision code we
+do not call); the init-less hang is still there (init before every call stays). **Status.** On branch; iOS build,
+Pixel p95 and the :edge kill test still need a phone. Revert = the commit's parent.
+
 ## 2026-11-13 · Cactus Mirage (on-device vision): evaluated, not adopted
 
 **Decision.** No Mirage plugin and no Scan-Meds change. **Why.** Container bench on 7 synthetic printed images

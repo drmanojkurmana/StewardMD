@@ -986,6 +986,37 @@ clinical order (a dosing or start/continue/titrate verb next to a drug); both ne
 "page asked for, page not offered -> none". (3) A calibrated confidence head (Cactus platform training, needs a
 key: the owner's call), so a 0.5 floor can catch the near-neighbour and unseen-form picks.
 
+### 5f. Re-audit of the Cactus engine 4.1.0, 2026-11-13: ADOPTED (owner: "move and redo audit")
+Cactus moved every engine binary out of `Cactus-Compute/needle3` (main `c95d25b4` now holds only weights,
+tokenizer and checkpoint) into `Cactus-Compute/cactus`: one engine for Needle 3 (text), Whistle (speech) and
+Mirage (vision). Audited: release `4.1.0`, repo revision `4e822c90`, `manifest.json` source commit `89a1c500`.
+Cloud container (x86-64, 4 vCPU, shared with other jobs), no phone.
+| Check | 27c0a9a5 (old pin, engine 3.0.x) | Cactus 4.1.0 | Verdict |
+|---|---|---|---|
+| Files vs release manifest | n/a | android-arm64 `libcactus.a` 2,822,672 B `ba543bb4...`, ios-arm64 1,965,216 B `c811cb28...`, ios-sim 2,022,136 B, linux-x86_64 2,856,720 B `0c58951e...`, `cactus.h` 1,721 B `9be7eb25...` (same bytes in every folder), `LICENSE` Apache-2.0 `cfc7749b...`: all match `manifest.json` | ok |
+| Weights | `needle3.cact` `c9d915ec...` | `needle3.cact` at needle3 `c95d25b4`: same sha256 | equal |
+| Header / ABI | `needle_load/init/complete(input,max,out,cap)/reset/last_error` | renamed `cactus_*`; `cactus_complete(input, pcm, samples, max, out, cap)`; new `cactus_models`, `cactus_set_threads`, `cactus_describe`, `cactus_embed(..pcm..)`, speech calls | **API break**: JNI, Swift, host harness changed |
+| Size (android-arm64) | 1.66 MB | 2.82 MB (+70%, speech + vision code we do not call); linked `libneedle_jni.so` 1.65 MB (NDK r27c, release) | worse, accepted |
+| Imports (`nm -u`, android) | 124 | 143: adds `cos sin sincos pow log10 hypotf strstr strtof strtol sched_yield __sched_cpucount __memset_chk` and two libc++ exception symbols. No socket/connect/getaddrinfo/curl/SSL/dlopen/exec; no URL or host string. Same file calls as the old pin (`fopen fread fwrite remove getrusage`); only `/sys/devices/system/cpu` paths. iOS: libSystem only (`sysctlbyname`, no frameworks) | equal |
+| Thread count | `fast_core_mask` + `hardware_concurrency()` fallback; our `--wrap` answered it | `needle_thread_count()`: `cactus_set_threads(n>0)` override, else affinity-mask count, else the old fallback. The JNI now calls `cactus_set_threads(engine_threads())` before `cactus_load` and the `--wrap` is gone | better: official API, same policy |
+| Wrong archive | n/a | `load()` checks `cactus_models() & CACTUS_TEXT`; a Mirage `.cact` is refused (`-2`, "not a Needle text model") and a Needle load after it works (host JNI run) | new guard |
+| Hang (init once, then only complete; first 150 test3 rows) | hangs at call 56 (5d) | **hangs at call 60** | not fixed upstream: keep init before every call (`edge9`) |
+| Base model, frozen `test` (1,141 model rows) | PASS, coverage 65.5%, wrong 0.0% | same | **all 1,141 engine envelopes byte-identical** (minus speed/RAM fields) |
+| Base model, `test3` (1,503 model rows) | PASS, coverage 35.3%, wrong 0.2% | same | **all 1,503 envelopes byte-identical** |
+| Peak RAM (engine field) | 97.2 / 96.8 MB | 97.2 / 97.1 MB | equal |
+| Host latency p50 (init + complete) | test 702 ms, test3 251 ms | test 317 ms, test3 306 ms | not comparable: the runs shared the CPU with other jobs; phone timing still to do |
+| Android build (plugin CMakeLists, NDK r27c, API 26, c++_shared, flexible pages) | links | builds; LOAD align `0x4000`; 152 imports, 0 unresolved at API 26; the 5 `Java_in_stewardmd_needle_NeedleNative_*` exports only; no network imports | ok |
+| Host JNI (real `needle_jni.cpp` + `NeedleNative`, 60 test rows) | ok | load/configure/complete/reset ok, missing file `-1`, Mirage file refused then Needle reloads | ok |
+
+**Decision: move to 4.1.0** (owner asked). Decisions and memory are unchanged, the thread fix is now an engine
+setting instead of a linker trick, and the pin follows where Cactus now publishes (the old needle3 binaries are
+no longer on its main branch). Cost: +70% engine size. Still open, needs a phone: iOS build (`swiftc` not
+available here; only Swift call sites changed), Pixel 9 p95 with `cactus_set_threads(3)`, and the :edge kill test.
+Repro: `node scripts/edge/needle-r2.mjs rows test|test3 > rows.tsv`; build `scripts/edge/needle-host.cpp` with
+`-I<dir with cactus.h>` against `linux-x86_64/libcactus.a` + `test/native-host/hashshim.cpp` (`clang++ -stdlib=libc++`);
+`node scripts/edge/needle-pred.mjs pred raw.jsonl > pred.jsonl`; `node scripts/edge/score.mjs --split test --pred pred.jsonl`.
+Recovery point: the parent of the commit that adopted 4.1.0 (`fetch-needle.sh` at 27c0a9a5 still downloads).
+
 ## 6. Bake-off (day 5)
 For each candidate (Needle depth N, FunctionGemma Q8_0, FunctionGemma Q4_K_M), on the 4 GB phone:
 ```sh

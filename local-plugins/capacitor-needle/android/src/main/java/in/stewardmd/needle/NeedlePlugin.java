@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *   available() · load({path?}) · configure({system, tools}) · complete({text, maxTokens}) -> {json, ms}
  *   reset() · kill() · release()
  * The engine lives in the ":edge" process (NeedleService); this class only talks to it over a
- * Messenger. kill() ends that process, which is the ONLY way to stop a call needle.h cannot cancel;
+ * Messenger. kill() ends that process, which is the ONLY way to stop a call cactus.h cannot cancel;
  * the next call binds a fresh process and must load() again (edge-runtime.js does that).
  */
 @CapacitorPlugin(name = "Needle")

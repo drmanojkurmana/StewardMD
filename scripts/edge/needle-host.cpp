@@ -4,7 +4,8 @@
 //   needle-host <weights.cact> <rows.tsv: id \t system \t tools \t prompt, "\n" escaped as \\n> > raw.jsonl
 // NEEDLE_INIT_ONCE=1: init once with the first row's prompt and tools, then only complete (the 2026-10-04
 // hang repro); each call then has a 60 s watchdog that exits with "HANG at call N".
-// Builds against both header revisions: 3.1.0 (f84005f8) added pcm/samples to needle_complete.
+// Builds against every header revision: 3.1.0 (f84005f8) added pcm/samples to needle_complete, and
+// Cactus 4.x renamed needle_* to cactus_* (an include dir holding cactus.h selects it).
 #include <chrono>
 #include <csignal>
 #include <cstdlib>
@@ -17,7 +18,18 @@
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#if __has_include("cactus.h")
+// Cactus engine 4.x (one engine for Needle, Whistle and Mirage; the plugin's engine since 2026-11-13).
+#include "cactus.h"
+#define NEEDLE_TEXT 1
+#define needle_load cactus_load
+#define needle_init cactus_init
+#define needle_complete cactus_complete
+#define needle_reset cactus_reset
+#define needle_last_error cactus_last_error
+#else
 #include "needle.h"
+#endif
 
 static std::string unescape(const std::string& s) {
   std::string o; o.reserve(s.size());

@@ -6,7 +6,8 @@ import CNeedle
 /// Capacitor.Plugins.Needle on iOS. Same JS contract as Android (edge-router.js needleAdapter):
 ///   available() · load({path?}) · configure({system, tools}) · complete({text, maxTokens}) -> {json, ms}
 ///   reset() · release()
-/// There is no kill(): iOS gives an app no second process, and needle.h has no cancel, so a stuck
+/// Engine: Cactus 4.1.0 (cactus.h; `import CNeedle` keeps its module name), which runs Needle 3.
+/// There is no kill(): iOS gives an app no second process, and cactus.h has no cancel, so a stuck
 /// call is waited out (edge-runtime.js reports "busy" until it returns). The serial queue keeps the
 /// process-global, non-thread-safe engine to one call at a time; the token cap bounds how long one
 /// call can run.
@@ -26,7 +27,7 @@ public class NeedlePlugin: CAPPlugin, CAPBridgedPlugin {
     private static let maxTokensCap = 128
     private static let outCap = 65536          // the Python binding's default buffer_size
     private let queue = DispatchQueue(label: "in.stewardmd.needle", qos: .userInitiated)
-    /// Every weights mapping, never unmapped: the .cact is read in place and needle.h has no unload.
+    /// Every weights mapping, never unmapped: the .cact is read in place and cactus.h has no unload.
     private var maps: [(UnsafeMutableRawPointer, Int)] = []
 
     private func defaultWeights() -> URL {
@@ -35,7 +36,7 @@ public class NeedlePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     private func lastError(_ fallback: String) -> String {
-        if let p = needle_last_error() { let s = String(cString: p); if !s.isEmpty { return s } }
+        if let p = cactus_last_error() { let s = String(cString: p); if !s.isEmpty { return s } }
         return fallback
     }
 
@@ -71,9 +72,11 @@ public class NeedlePlugin: CAPPlugin, CAPBridgedPlugin {
             let p = mmap(nil, len, PROT_READ, MAP_PRIVATE, fd, 0)
             close(fd)
             guard let base = p, base != UnsafeMutableRawPointer(bitPattern: -1) else { call.reject("mmap failed", "ENGINE_ERROR"); return }   // MAP_FAILED
-            let rc = needle_load(base.assumingMemoryBound(to: UInt8.self), UInt64(len))
-            if rc < 0 { munmap(base, len); call.reject(self.lastError("needle_load failed"), "ENGINE_ERROR"); return }
+            let rc = cactus_load(base.assumingMemoryBound(to: UInt8.self), UInt64(len))
+            if rc < 0 { munmap(base, len); call.reject(self.lastError("cactus_load failed"), "ENGINE_ERROR"); return }
             self.maps.append((base, len))
+            // One engine loads Needle, Whistle and Mirage archives alike: refuse one with no text model.
+            if cactus_models() & CACTUS_TEXT == 0 { call.reject("not a Needle text model: \(path)", "MODEL_MISSING"); return }
             call.resolve(["rc": Int(rc)])
         }
     }
@@ -84,8 +87,8 @@ public class NeedlePlugin: CAPPlugin, CAPBridgedPlugin {
         queue.async { [weak self] in
             guard let self else { return }
             // tool_index_path NULL: the router's single tool is declared statically.
-            let rc = needle_init(system, tools, nil)
-            if rc < 0 { call.reject(self.lastError("needle_init failed"), "ENGINE_ERROR"); return }
+            let rc = cactus_init(system, tools, nil)
+            if rc < 0 { call.reject(self.lastError("cactus_init failed"), "ENGINE_ERROR"); return }
             call.resolve(["rc": Int(rc)])
         }
     }
@@ -97,18 +100,19 @@ public class NeedlePlugin: CAPPlugin, CAPBridgedPlugin {
             guard let self else { return }
             var out = [CChar](repeating: 0, count: Self.outCap)
             let t0 = Date()
-            let rc = needle_complete(text, Int32(maxTokens), &out, Int32(out.count))
+            // pcm nil, 0 samples: text in (the same call takes Whistle audio).
+            let rc = cactus_complete(text, nil, 0, Int32(maxTokens), &out, Int32(out.count))
             out[out.count - 1] = 0
             let s = String(cString: out)
-            if rc < 0 { call.reject(s.isEmpty ? self.lastError("needle_complete failed") : s, "ENGINE_ERROR"); return }
+            if rc < 0 { call.reject(s.isEmpty ? self.lastError("cactus_complete failed") : s, "ENGINE_ERROR"); return }
             call.resolve(["json": s, "ms": Int(Date().timeIntervalSince(t0) * 1000)])
         }
     }
 
     @objc func reset(_ call: CAPPluginCall) {
-        queue.async { needle_reset(); call.resolve() }
+        queue.async { cactus_reset(); call.resolve() }
     }
 
-    /// Nothing to free (needle.h has no unload); kept so the JS contract is the same on both platforms.
+    /// Nothing to free (cactus.h has no unload); kept so the JS contract is the same on both platforms.
     @objc func release(_ call: CAPPluginCall) { call.resolve() }
 }
