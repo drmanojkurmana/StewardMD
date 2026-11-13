@@ -119,3 +119,31 @@ test("shipped pictures: only the day's chosen subject, WebP 480x360 under 40 KB,
   }
   assert.equal(days.size, files.length, "one picture per day");
 });
+
+test("banner flip classes never collide with sheet classes (uppercase Pro text bug)", () => {
+  const js = readFileSync(new URL("today-history.js", root), "utf8");
+  const css = readFileSync(new URL("today-history.css", root), "utf8");
+  const onBanner = new Set([...js.matchAll(/\bb\.classList\.(?:add|remove|toggle)\("([\w-]+)"/g)].map((m) => m[1]));
+  assert.ok(onBanner.has("th-flipin") && onBanner.has("th-flipout"));
+  for (const c of onBanner) {
+    const bare = new RegExp("(^|[},\\s])\\." + c + "(?![\\w-])[^{]*\\{", "m");
+    for (const line of css.split("\n")) {
+      if (bare.test(line)) assert.match(line, /hrf-banner/, "." + c + " is styled outside the banner: " + line.slice(0, 80));
+    }
+  }
+  assert.match(css, /#thSheet \.th-in\{/, "India pill is scoped to the sheet");
+});
+
+test("banner swipes to flip in both directions", () => {
+  const js = readFileSync(new URL("today-history.js", root), "utf8");
+  const css = readFileSync(new URL("today-history.css", root), "utf8");
+  assert.match(js, /function armSwipe\(b\)/);
+  assert.match(js, /rotate" \+ \(drag.ax === "x" \? "Y" : "X"\)/);
+  assert.match(css, /\.hrf-banner\[data-th-swipe\]\{touch-action:none/);
+});
+
+test("auto flip stays top to bottom (owner's call)", () => {
+  const css = readFileSync(new URL("today-history.css", root), "utf8");
+  assert.match(css, /@keyframes th-fold-out\{[^}]*rotateX/);
+  assert.match(css, /@keyframes th-fold-in\{[^}]*rotateX/);
+});

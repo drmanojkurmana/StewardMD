@@ -10,10 +10,13 @@
 #homeV2.rnav .rnav-greet .hrf-date[data-th]:focus-visible{outline:2px solid var(--th-gold);outline-offset:3px}
 
 /* ---- banner flip: fold to 90deg (0.22 s), swap faces, unfold (0.3 s) ---- */
-#homeV2#homeV2.rnav .hrf-banner.th-out{animation:th-fold-out .22s cubic-bezier(.55,0,.85,.35) both}
-#homeV2#homeV2.rnav .hrf-banner.th-in{animation:th-fold-in .3s cubic-bezier(.15,.75,.3,1.1) both}
+#homeV2#homeV2.rnav .hrf-banner.th-flipout{animation:th-fold-out .22s cubic-bezier(.55,0,.85,.35) both}
+#homeV2#homeV2.rnav .hrf-banner.th-flipin{animation:th-fold-in .3s cubic-bezier(.15,.75,.3,1.1) both}
 @keyframes th-fold-out{from{transform:perspective(900px) rotateX(0)}to{transform:perspective(900px) rotateX(90deg) scale(.98)}}
 @keyframes th-fold-in{from{transform:perspective(900px) rotateX(-90deg) scale(.98)}to{transform:perspective(900px) rotateX(0)}}
+/* swipe to flip (today-history.js armSwipe): sideways or top to bottom, under the finger. Every drag that starts
+   on the banner is a flip, so the page does not scroll from here; it scrolls from everywhere else. */
+#homeV2.rnav .hrf-banner[data-th-swipe]{touch-action:none;-webkit-user-select:none;user-select:none}
 #homeV2.rnav .hrf-banner.th-fade>*{transition:opacity .2s ease;opacity:0}
 
 /* the history face: same banner, its own words and picture. The banner never changes height. */
@@ -71,10 +74,10 @@
 #homeV2#homeV2.rnav .hrf-banner .th-face-art .a-hi{stroke:#ffd27a;stroke-width:2.6;filter:drop-shadow(0 0 5px rgba(255,190,90,.8))}
 #homeV2#homeV2.rnav .hrf-banner .th-face-art .a-glow{fill:rgba(143,240,210,.14);stroke-opacity:.6}
 /* the picture settles in a beat after the flip */
-#homeV2#homeV2.rnav .hrf-banner.th-in .th-face-pic{animation:th-pic .5s cubic-bezier(.2,.8,.2,1) .12s both}
+#homeV2#homeV2.rnav .hrf-banner.th-flipin .th-face-pic{animation:th-pic .5s cubic-bezier(.2,.8,.2,1) .12s both}
 @keyframes th-pic{from{opacity:0;transform:translateX(8px) scale(.94)}to{opacity:1;transform:none}}
 @media (max-width:360px){#homeV2#homeV2.rnav .hrf-banner .th-face-lg{display:none}#homeV2#homeV2.rnav .hrf-banner .th-face-sm{display:inline}#homeV2#homeV2.rnav .hrf-banner .th-face-txt{left:13px;right:28%}#homeV2#homeV2.rnav .hrf-banner .th-face-tt{font-size:16.5px}#homeV2#homeV2.rnav .hrf-banner .th-face-pic{width:30%}}
-@media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-banner.th-out,#homeV2#homeV2.rnav .hrf-banner.th-in,#homeV2#homeV2.rnav .hrf-banner.th-in .th-face-pic,#homeV2.rnav .hrf-banner.th-back .th-face::before{animation:none}#homeV2.rnav .hrf-banner.th-back .th-face::after{display:none}}
+@media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-banner.th-flipout,#homeV2#homeV2.rnav .hrf-banner.th-flipin,#homeV2#homeV2.rnav .hrf-banner.th-flipin .th-face-pic,#homeV2.rnav .hrf-banner.th-back .th-face::before{animation:none}#homeV2.rnav .hrf-banner.th-back .th-face::after{display:none}}
 
 /* ---- sheet ---- */
 #thSheet{--th-bg:#fbfaf6;--th-ink:#13212a;--th-muted:#5b6b78;--th-line:#e6e2d6;--th-yr:#8a6a1f;--th-tag-bg:#f3ecd9;--th-tag-ink:#6b5216;--th-acc:#0f766e;--th-in-bg:#e6f4ef;--th-in-ink:#0b5f4a}
@@ -109,7 +112,7 @@ body.dark #thSheet{--th-bg:#0f1a21;--th-ink:#e8eef2;--th-muted:#9aabb8;--th-line
 .th-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
 .th-cat,.th-sp{font:500 10.5px/1 var(--th-sans);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:6px}
 .th-cat{background:var(--th-tag-bg);color:var(--th-tag-ink)}
-.th-in{font:500 10.5px/1 var(--th-sans);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--th-in-bg);color:var(--th-in-ink)}
+#thSheet .th-in{font:500 10.5px/1 var(--th-sans);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--th-in-bg);color:var(--th-in-ink)}
 .th-sp{color:var(--th-muted);border:1px solid var(--th-line)}
 .th-tt{margin:0;font:600 18.5px/1.28 var(--th-title);font-variant-numeric:lining-nums;color:var(--th-ink);overflow-wrap:anywhere}
 .th-sm{margin:6px 0 0;font:400 14.5px/1.55 var(--th-sans);color:var(--th-ink);opacity:.86;overflow-wrap:anywhere}
