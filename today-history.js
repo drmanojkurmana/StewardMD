@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th18";
+  var FLAG = "smd_today_history", VER = "th19";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -202,15 +202,16 @@
     flip(b, !showing, function () { timer = setTimeout(tick, FACE_MS); });
   }
 
-  // Swipe to flip: the card turns about its vertical axis under the finger, swaps faces edge-on at
-  // 90 degrees, and on release finishes the turn (far or fast enough) or springs back. Vertical
-  // drags stay page scroll (touch-action: pan-y).
+  // Swipe to flip, in either direction: a sideways drag turns the card about its vertical axis, an
+  // up or down drag tumbles it top to bottom. It follows the finger, swaps faces edge-on at 90
+  // degrees, and on release finishes the turn (far or fast enough) or springs back. The banner owns
+  // every drag that starts on it (touch-action: none); the rest of the page scrolls as before.
   var drag = null, swallowUntil = 0;
   function dragPaint(b, a) {
     var over = Math.abs(a) >= 90, want = over ? !drag.from : drag.from;
     if (showing !== want) { if (want) pick = drag.pick; setShowing(b, want); }
     var shown = over ? a - (a > 0 ? 180 : -180) : a, s = Math.sin(Math.abs(a) * Math.PI / 180);
-    b.style.transform = "perspective(900px) rotateY(" + shown.toFixed(2) + "deg) scale(" + (1 - 0.03 * s).toFixed(4) + ")";
+    b.style.transform = "perspective(900px) rotate" + (drag.ax === "x" ? "Y" : "X") + "(" + shown.toFixed(2) + "deg) scale(" + (1 - 0.03 * s).toFixed(4) + ")";
     b.style.filter = "brightness(" + (1 - 0.32 * s).toFixed(3) + ")";
   }
   function dragEnd(b, commit) {
@@ -228,37 +229,42 @@
   function armSwipe(b) {
     if (b.getAttribute("data-th-swipe")) return;
     b.setAttribute("data-th-swipe", "1");
-    var x0 = 0, y0 = 0, id = -1, live = false, w = 1, lx = 0, lt = 0, vx = 0;
+    var x0 = 0, y0 = 0, id = -1, live = false, ax = "", span = 1, l = 0, lt = 0, v = 0;
     b.addEventListener("pointerdown", function (e) {
       if (drag || busy || !todays.length || (e.pointerType === "mouse" && e.button !== 0)) return;
-      id = e.pointerId; x0 = lx = e.clientX; y0 = e.clientY; lt = e.timeStamp; vx = 0; live = false;
-      w = b.getBoundingClientRect().width || 1;
+      id = e.pointerId; x0 = e.clientX; y0 = e.clientY; lt = e.timeStamp; v = 0; live = false; ax = "";
     });
     b.addEventListener("pointermove", function (e) {
       if (e.pointerId !== id) return;
       var dx = e.clientX - x0, dy = e.clientY - y0;
       if (!live) {
-        if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { id = -1; return; }   // a scroll, not a swipe
-        if (Math.abs(dx) < 8) return;
+        if (Math.max(Math.abs(dx), Math.abs(dy)) < 8) return;
+        ax = Math.abs(dx) >= Math.abs(dy) ? "x" : "y";               // the axis locks on the first 8 px
+        var r = b.getBoundingClientRect();
+        span = ax === "x" ? (r.width || 1) : Math.max(r.height * 1.5, 150);   // a short card needs a longer pull
+        l = ax === "x" ? x0 : y0;
         live = true; busy = true; clearTimeout(timer);
-        drag = { from: showing, pick: showing ? pick - 1 : pick, a: 0 };   // the event on show, or the one coming
+        drag = { from: showing, pick: showing ? pick - 1 : pick, a: 0, ax: ax };   // the event on show, or the one coming
         b.style.transition = "none";
         try { b.setPointerCapture(id); } catch (er) {}
       }
-      var dt = e.timeStamp - lt; if (dt > 0) vx = 0.7 * vx + 0.3 * ((e.clientX - lx) / dt);
-      lx = e.clientX; lt = e.timeStamp;
+      var p = ax === "x" ? e.clientX : e.clientY, dt = e.timeStamp - lt;
+      if (dt > 0) v = 0.7 * v + 0.3 * ((p - l) / dt);
+      l = p; lt = e.timeStamp;
       if (reduced()) return;
-      drag.a = Math.max(-180, Math.min(180, dx / w * 200)); dragPaint(b, drag.a);
+      // a drag down brings the top edge toward you, as if pulling the card over
+      var d = ax === "x" ? dx : dy;
+      drag.a = Math.max(-180, Math.min(180, d / span * 200)); dragPaint(b, drag.a);
     });
     function up(e) {
       if (e.pointerId !== id) return;
       id = -1;
       if (!live) return;
       live = false; swallowUntil = Date.now() + 400;
-      var dx = lx - x0, fast = Math.abs(vx) > 0.45 && (vx > 0) === (dx > 0);
+      var d = l - (ax === "x" ? x0 : y0), fast = Math.abs(v) > 0.45 && (v > 0) === (d > 0);
       if (reduced()) {
         drag = null; b.style.transition = "";
-        if (Math.abs(dx) > 40 || fast) flip(b, !showing, function () { timer = setTimeout(tick, FACE_MS); });
+        if (Math.abs(d) > 40 || fast) flip(b, !showing, function () { timer = setTimeout(tick, FACE_MS); });
         else { busy = false; timer = setTimeout(tick, FACE_MS); }
         return;
       }

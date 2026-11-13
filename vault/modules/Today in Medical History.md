@@ -105,3 +105,6 @@ The banner flip animation classes are `th-flipout` / `th-flipin`. They were `th-
 
 ## Swipe to flip (2026-11-13, th17)
 `armSwipe` in today-history.js: a horizontal drag turns the banner about its vertical axis under the finger (rotateY, darkening toward edge-on), swaps faces at 90 degrees, and on release finishes the turn when past 90 degrees or flicked (over 0.45 px/ms, past 20 degrees), else springs back. Vertical drags stay page scroll (`touch-action: pan-y`). The click after a swipe is swallowed so it does not open the sheet or the facts page. The swipe resets the 5 s auto timer. The auto flip stays top to bottom (rotateX): owner's call, 2026-11-13. Reduced motion: a swipe triggers the fade flip.
+
+## Swipe in both directions (2026-11-13, th19)
+Owner: the banner area flips on any swipe; the rest of the page scrolls. The axis locks on the first 8 px: sideways turns about the vertical axis (rotateY), up or down tumbles top to bottom (rotateX, a drag down brings the top edge toward you). The banner is `touch-action: none`, so a scroll cannot start on it. Vertical pull for a full turn is 1.5x the card height (min 150 px).

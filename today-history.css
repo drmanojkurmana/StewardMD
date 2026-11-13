@@ -14,8 +14,9 @@
 #homeV2#homeV2.rnav .hrf-banner.th-flipin{animation:th-fold-in .3s cubic-bezier(.15,.75,.3,1.1) both}
 @keyframes th-fold-out{from{transform:perspective(900px) rotateX(0)}to{transform:perspective(900px) rotateX(90deg) scale(.98)}}
 @keyframes th-fold-in{from{transform:perspective(900px) rotateX(-90deg) scale(.98)}to{transform:perspective(900px) rotateX(0)}}
-/* swipe to flip (today-history.js armSwipe) turns sideways under the finger; the auto flip stays top to bottom. Horizontal drags are ours, vertical ones still scroll */
-#homeV2.rnav .hrf-banner[data-th-swipe]{touch-action:pan-y;-webkit-user-select:none;user-select:none}
+/* swipe to flip (today-history.js armSwipe): sideways or top to bottom, under the finger. Every drag that starts
+   on the banner is a flip, so the page does not scroll from here; it scrolls from everywhere else. */
+#homeV2.rnav .hrf-banner[data-th-swipe]{touch-action:none;-webkit-user-select:none;user-select:none}
 #homeV2.rnav .hrf-banner.th-fade>*{transition:opacity .2s ease;opacity:0}
 
 /* the history face: same banner, its own words and picture. The banner never changes height. */

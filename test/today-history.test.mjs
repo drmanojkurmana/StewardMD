@@ -134,12 +134,12 @@ test("banner flip classes never collide with sheet classes (uppercase Pro text b
   assert.match(css, /#thSheet \.th-in\{/, "India pill is scoped to the sheet");
 });
 
-test("banner swipes to flip and keeps vertical scroll", () => {
+test("banner swipes to flip in both directions", () => {
   const js = readFileSync(new URL("today-history.js", root), "utf8");
   const css = readFileSync(new URL("today-history.css", root), "utf8");
   assert.match(js, /function armSwipe\(b\)/);
-  assert.match(js, /rotateY\(/);
-  assert.match(css, /\.hrf-banner\[data-th-swipe\]\{touch-action:pan-y/);
+  assert.match(js, /rotate" \+ \(drag.ax === "x" \? "Y" : "X"\)/);
+  assert.match(css, /\.hrf-banner\[data-th-swipe\]\{touch-action:none/);
 });
 
 test("auto flip stays top to bottom (owner's call)", () => {
