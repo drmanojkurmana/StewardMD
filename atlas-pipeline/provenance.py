@@ -150,6 +150,7 @@ SUBJECTS = [
     ("`ct-live-torso-*`", "s0108", "ct neck-thorax-abdomen-pelvis", "Siemens, 100 kVp"),
     ("`ct-live-neck-*`", "s0021", "ct neck", "46 y male, Siemens Sensation 64, 120 kVp, contrast-enhanced"),
     ("`ct-live-thorax-neck-*`", "s0897", "ct thorax-neck", "40 y female, Siemens Somatom Definition Flash, 80 kVp, unenhanced"),
+    ("`ct-live-body-*` + 3D Whole body", "s1045", "ct polytrauma", "62 y male, Siemens Somatom Force, 100 kVp, contrast-enhanced, skull vertex to mid-thigh"),
 ]
 
 

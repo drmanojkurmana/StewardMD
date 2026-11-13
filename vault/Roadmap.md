@@ -61,7 +61,18 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
       load time over cellular for the LOD default (~12 MB of the 19.6 MB LOD set for the default systems, from R2),
       frame rate with muscles ON, pinch/pan feel, the living-CT cut plane + slice slider.
-- [ ] **[[RadioAnatome]] living-torso images are NOT in radiological orientation** — the three
+- [x] **[[RadioAnatome 3D]] Immersive CT for chest and head-neck** — done 2026-11-12 with ONE whole-body subject
+      (s1045, skull vertex to mid-thigh) instead of meshing the neck and thorax-neck subjects.
+- [ ] **[[RadioAnatome 3D]] upload the whole-body chunks to R2** — `atlas/3d/body-*.bin.gz` (14 files) via `wrangler r2 object
+      put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote`. Phones fall back
+      to the committed copy on stewardmd.in meanwhile (after merge to main).
+- [ ] **Pages file headroom ~30** (guard raised to 19,600 on 2026-11-13): move RadioAnatome slice images to R2 or exclude
+      `data/antibiogram/sources` (build input only) before adding more static files.
+- [ ] **[[RadioAnatome]] radiologist review of `ct-live-body-*`** (Beta until `/validation` says verified), and run Immersive
+      on the iPhone + Pixel (frame rate with the 572k-triangle whole body, cellular load of ~7 MB).
+- [ ] **[[RadioAnatome 3D]] reference rows for the kind "live" structures** (thyroid, carotids, subclavian, brachiocephalic
+      vessels, SVC, trachea, right upper lobe, humerus, scapula, pulmonary vein) — read each FMA concept's element list.
+- [x] **[[RadioAnatome]] living-torso images are NOT in radiological orientation** — resolved 2026-09-25: `flipX` at display time (see RadioAnatome.md, `docs/radioanatome/ORIENTATION.md`). Original finding: the three
       `ct-live-torso-*` modules display the patient's right on the image's right (liver at column 205/277
       of the displayed coronal slab; `orient.to_display` keeps X unflipped for this RAS volume). Pins are
       unaffected and no side is asserted, but a radiologist expects the liver on the image LEFT. Decide with
@@ -69,7 +80,7 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       while registering the 3D cut planes; the Visible Human modules should be checked the same way.
 - [ ] **[[RadioAnatome 3D]] R2 upload in CI** — chunks are pushed to `stewardmd-models/atlas3d/` by hand
       (`wrangler r2 object put`) after each pipeline run; a Pages/Actions step should diff `manifest.json` sha256s.
-- [ ] **[[RadioAnatome 3D]] sheet drag** — reuse/extract atlas.js `bindSheetDrag` so the 3D sheet resizes by swipe (today: tap the handle).
+- [x] **[[RadioAnatome 3D]] sheet drag** — done: `sheetEl()` binds `ATLAS._bindSheetDrag` (found 2026-11-12).
 - [ ] **[[RadioAnatome 3D]] coverage** — 7 canonical structures have no BodyParts3D counterpart
       (cerebellar cortex/WM, corona radiata, nucleus accumbens, paranasal sinus, subarachnoid space,
       vertebral canal). LIVER/LUNG/lobes/HEART are now real surfaces on the living-CT body (torso only);

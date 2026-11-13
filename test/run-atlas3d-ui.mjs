@@ -67,6 +67,9 @@ try {
   ok(await ev(`return ATLAS3D.enabled();`) === true, "flag resolves ON from the query alias");
   await ev(`ATLAS.open(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdAtlas .atlas-3d-card')`), "RadioAnatome catalog shows the 3D Anatomy card");
+  // The catalog paints once and repaints ~130 ms later when its data lands, replacing the card
+  // element; a click on the first (now detached) card reaches no listener. Wait for the repaint.
+  await sleep(700);
   await ev(`document.querySelector('#smdAtlas .atlas-3d-card').click(); return 1;`);
   ok(await until(`return ATLAS3D.isOpen() && !!document.getElementById('a3dCanvas')`), "3D layer opens with a canvas");
   ok(await until(`var s=ATLAS3D._state; return !!s.data && !!s.gl;`, 30000), "manifest loaded and WebGL context created");
@@ -76,7 +79,7 @@ try {
   ok(await until(`return !!document.getElementById('a3dHint')`, 10000), "first open shows the gesture hint");
   ok(await ev(`var h=document.getElementById('a3dHint'), t=h.textContent; return h.querySelectorAll('li').length===4 && /Drag/.test(t) && /zoom/.test(t) && /Tap/.test(t) && /Double-tap/.test(t) && !!h.querySelector('button[data-a3d-act=hintok]') && h.getAttribute('role')==='dialog';`) === true, "hint names drag, zoom, tap, double-tap and has a Got it button");
   await shot("01-gesture-hint");
-  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2293, "2,293 meshes in the manifest (2,227 reference + 66 living CT)");
+  ok(await ev(`return ATLAS3D._state.data.parts.length;`) === 2408, "2,408 meshes in the manifest (2,227 reference + 66 living torso CT + 115 living whole body)");
   ok(await until(`var s=ATLAS3D._state; return !s.err && s.loaded>0 && Object.keys(s.loading).length===0 && Object.keys(s.chunks).length>=10;`, 120000), "default systems streamed and uploaded (no error)");
   const err = await ev(`return ATLAS3D._state.err;`);
   ok(!err, "no renderer error: " + (err || "none"));

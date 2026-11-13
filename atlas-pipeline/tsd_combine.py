@@ -33,7 +33,14 @@ BANDS = {
     "lung": (-1000, -400), "airway": (-1000, -300),
     "soft": (-30, 120), "organ": (0, 140), "vessel": (-20, 400),
     "muscle": (5, 110), "bone": (120, 2000), "fat": (-200, -20),
+    "brain": (0, 80), "bloodpool": (-30, 120),
 }
+# --contrast (an IV-contrast study, read from meta.csv / the image, decided per subject):
+# enhancing parenchyma and the cardiac blood pool are MEANT to be bright, so only those two
+# families widen. Measured on s1045 (polytrauma, aorta ~380 HU): kidneys 228-235, thyroid
+# 208, spleen 178, heart blood pool 221, left atrial appendage 233. Everything else keeps
+# its unenhanced band, so a mask that slipped onto bone or air is still caught.
+CONTRAST_BANDS = {"organ": (0, 300), "bloodpool": (-30, 450)}
 FAMILY = {
     "lung_upper_lobe_left": "lung", "lung_upper_lobe_right": "lung",
     "lung_middle_lobe_right": "lung", "lung_lower_lobe_left": "lung",
@@ -44,7 +51,7 @@ FAMILY = {
     "esophagus": "soft", "urinary_bladder": "soft", "prostate": "organ",
     "adrenal_gland_left": "organ", "adrenal_gland_right": "organ",
     "thyroid_gland": "organ", "spinal_cord": "soft",
-    "heart": "soft", "aorta": "vessel", "pulmonary_vein": "vessel",
+    "heart": "bloodpool", "aorta": "vessel", "pulmonary_vein": "vessel",
     "inferior_vena_cava": "vessel", "portal_vein_and_splenic_vein": "vessel",
     "superior_vena_cava": "vessel", "brachiocephalic_trunk": "vessel",
     "common_carotid_artery_left": "vessel", "common_carotid_artery_right": "vessel",
@@ -52,7 +59,7 @@ FAMILY = {
     "brachiocephalic_vein_left": "vessel", "brachiocephalic_vein_right": "vessel",
     "iliac_artery_left": "vessel", "iliac_artery_right": "vessel",
     "iliac_vena_left": "vessel", "iliac_vena_right": "vessel",
-    "atrial_appendage_left": "soft", "pulmonary_artery": "vessel",
+    "atrial_appendage_left": "bloodpool", "pulmonary_artery": "vessel", "brain": "brain",
     "autochthon_left": "muscle", "autochthon_right": "muscle",
     "iliopsoas_left": "muscle", "iliopsoas_right": "muscle",
     "gluteus_maximus_left": "muscle", "gluteus_maximus_right": "muscle",
@@ -87,7 +94,10 @@ def main():
     ap.add_argument("--out-report", required=True)
     ap.add_argument("--structures", required=True,
                     help="comma-separated mask stems, or ALL")
+    ap.add_argument("--contrast", action="store_true",
+                    help="IV-contrast study: widen only the enhancing-organ and blood-pool bands")
     a = ap.parse_args()
+    bands = dict(BANDS, **(CONTRAST_BANDS if a.contrast else {}))
 
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     from check_sources import require_clear
@@ -126,7 +136,7 @@ def main():
                              "reason": "no expected HU band declared; not admitted "
                                        "rather than guessed"})
             continue
-        lo, hi = BANDS[fam]
+        lo, hi = bands[fam]
         lab, k = ndimage.label(m)
         biggest = 0
         if k:
@@ -154,6 +164,7 @@ def main():
         "subject_dir": a.subject_dir,
         "volume_shape": list(vol.shape),
         "spacing_mm": [round(float(x), 3) for x in ct.header.get_zooms()[:3]],
+        "contrast_bands": bool(a.contrast),
         "kept": kept, "rejected": rejected,
         "_validation": "Each mask admitted only if the MEDIAN HU inside it falls in the "
                        "band expected for its tissue family, it clears a 150-voxel floor, "

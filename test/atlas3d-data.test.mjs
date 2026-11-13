@@ -35,13 +35,32 @@ ok("provenance doc lists every rejected mesh", provenance.rejected.every((r) => 
 
 // --- parts ---
 const parts = manifest.parts;
-const ref = parts.filter((p) => !p[10]), live = parts.filter((p) => p[10] === 1);
+const ref = parts.filter((p) => !p[10]), live = parts.filter((p) => p[10] === 1), body = parts.filter((p) => p[10] === 2);
 ok("2,227 BodyParts3D meshes shipped (2,234 upstream minus 7 exact duplicates)", ref.length === 2227 && provenance.rejected.length === 7);
-ok("66 living-CT surfaces appended after them (source flag 1): 38 organs/vessels/muscles, 27 bones, 1 body surface", live.length === 66 && parts.length === 2293 && live.every((p, k) => parts[2227 + k] === p));
+ok("66 living-CT surfaces appended after them (source flag 1): 38 organs/vessels/muscles, 27 bones, 1 body surface", live.length === 66 && live.every((p, k) => parts[2227 + k] === p));
 ok("every living-CT part has a torso region and a side only where sided; all but the body surface and costal cartilages name a canonical structure", live.every((p) => ["CHEST", "ABDOMEN", "PELVIS", "SPINE", "BODY"].includes(manifest.regions[p[4]]) && (p[11] === null || p[11] === "left" || p[11] === "right")) && live.filter((p) => !p[9]).map((p) => p[1]).sort().join("|") === "Body surface (skin)|Costal cartilages" && live.filter((p) => p[9]).every((p) => onto[p[9]]));
 ok("living skeleton: T10-L5 + S1 vertebrae, sacrum, lower ribs, hip bones, femurs on the bone canonicals", (() => { const sk = live.filter((p) => manifest.systems[p[3]].id === "skeletal"); const c = {}; sk.forEach((p) => { c[p[9] || "none"] = (c[p[9] || "none"] || 0) + 1; }); return sk.length === 27 && c.THORACIC_VERTEBRA === 3 && c.LUMBAR_VERTEBRA === 5 && c.SACRUM === 2 && c.RIB === 12 && c.HIP_BONE === 2 && c.FEMUR === 2 && c.none === 1; })());
 ok("the body surface is one integumentary part spanning the whole scan", (() => { const s = live.filter((p) => manifest.systems[p[3]].id === "integumentary"); return s.length === 1 && manifest.regions[s[0][4]] === "BODY" && (s[0][8][4] - s[0][8][1]) > 0.4; })());
-ok("sources: reference body + living CT", manifest.sources.length === 2 && manifest.sources[1].id === "live" && manifest.sources[1].modules.length === 3);
+ok("sources: reference body + living torso CT + living whole-body CT", manifest.sources.length === 3 && manifest.sources[1].id === "live" && manifest.sources[1].modules.length === 3 &&
+  manifest.sources[2].id === "body" && manifest.sources[2].modules.join() === "ct-live-body-axial,ct-live-body-coronal,ct-live-body-sagittal");
+
+// --- the whole body (s1045, body3d.py -> pack3d.mjs --prefix body- -> body_merge.py), part flag 2 ---
+ok("115 whole-body surfaces appended last (flag 2): 114 expert masks + the body surface", body.length === 115 && parts.length === 2227 + 66 + 115 && body.every((p, k) => parts[2293 + k] === p));
+ok("whole-body part ids are BODY_<mask stem>, sides only where sided, every canonical in the ontology",
+  body.every((p) => /^BODY_[A-Za-z0-9_]+$/.test(p[0]) && (p[11] === null || p[11] === "left" || p[11] === "right") && (!p[9] || onto[p[9]])) &&
+  body.filter((p) => !p[9]).map((p) => p[1]).sort().join("|") === "Body surface (skin)|Costal cartilages");
+ok("the whole body runs head to thigh: brain, skull, thyroid, heart, liver, bladder, femurs all present", ["BRAIN", "SKULL", "THYROID_GLAND", "HEART", "LIVER", "URINARY_BLADDER", "FEMUR"].every((k) => (manifest.canon[k].body || []).length));
+// 23 ribs, not 24: this scan's right 12th rib mask is a 182-voxel fragment under body3d.py's 400-voxel floor
+ok("whole-body skeleton: 23 ribs, C1-L5 + S1, skull, shoulder girdles, humeri, hips, femurs", (() => { const c = {}; body.filter((p) => manifest.systems[p[3]].id === "skeletal").forEach((p) => { c[p[9] || "none"] = (c[p[9] || "none"] || 0) + 1; }); return c.RIB === 23 && c.CERVICAL_VERTEBRA === 7 && c.THORACIC_VERTEBRA === 12 && c.LUMBAR_VERTEBRA === 5 && c.SACRUM === 2 && c.SKULL === 1 && c.CLAVICLE === 2 && c.SCAPULA === 2 && c.HUMERUS === 2 && c.HIP_BONE === 2 && c.FEMUR === 2 && c.STERNUM === 1; })());
+ok("canon[cid].body lists exactly the flag-2 parts of that structure (and sided lists their side)", Object.entries(manifest.canon).every(([cid, e]) => {
+  const mine = body.map((p) => parts.indexOf(p)).filter((i) => parts[i][9] === cid);
+  const listed = (e.body || []).slice().sort((a, b) => a - b);
+  return listed.join() === mine.join() && ["left", "right"].every((sd) => !e[sd] || !e[sd].body || e[sd].body.every((i) => parts[i][11] === sd && listed.includes(i)));
+}));
+ok("structures with no reference row yet are kind \"live\": body parts only, a note, and listed as pending in bp3d-map.json", Object.entries(manifest.canon).filter(([, e]) => e.kind === "live").every(([cid, e]) => e.body.length && !e.parts && !e.related && e.note && map._pending_3d[cid] && !map.structures[cid]) &&
+  Object.values(manifest.canon).filter((e) => e.kind === "live").length === 11);
+ok("whole-body chunks: flag 2, content-hashed names, never mixing systems", manifest.chunks.filter((c) => c.src === 2).length === 14 && manifest.chunks.filter((c) => c.src === 2).every((c) => c.url.startsWith("/atlas/3d/body-") && c.url.endsWith(`.${c.sha256.slice(0, 8)}.bin.gz`) && c.system));
+ok("whole-body frame: y from 0 (thighs) to the vertex, metres", manifest.body && manifest.body.frame.y_range[0] === 0 && Math.abs(manifest.body.frame.y_range[1] - 0.966) < 0.001 && body.every((p) => p[8][1] >= -0.01 && p[8][4] <= 0.98));
 ok("every rejection is an exact duplicate", provenance.rejected.every((r) => /exact duplicate/.test(r.reason)));
 const ids = new Set(parts.map((p) => p[0]));
 ok("part ids are unique", ids.size === parts.length);
@@ -63,6 +82,7 @@ const allChunks = manifest.chunks.concat(manifest.lod ? manifest.lod.chunks : []
 ok("every chunk file (full + LOD) is referenced and vice versa", files.length === allChunks.length && allChunks.every((c) => files.includes(c.url.split("/").pop())));
 ok("LOD set: 20 reference-body chunks at ~60% of the triangles", manifest.lod && manifest.lod.chunks.length === 20 && manifest.lod.stats.triangles < manifest.stats.triangles * 0.7);
 ok("living-CT chunks carry the source flag and never mix systems", manifest.chunks.filter((c) => c.src === 1).length === 13 && manifest.chunks.every((c) => c.system));
+ok("whole-body set stays under 8 MB gzipped (streamed per system on a phone)", manifest.chunks.filter((c) => c.src === 2).reduce((t, c) => t + c.gz, 0) < 8e6);
 // Re-uploading re-meshed bytes under an old filename broke every installed app on 2026-09-06
 // (its bundled manifest rejected the new sizes). Hashed names make that impossible.
 ok("living-CT chunk filenames carry their own content hash, so R2 objects are never overwritten",
@@ -90,12 +110,12 @@ for (const [ci, c] of manifest.chunks.entries()) {
 ok("chunk sha256 checksums match the manifest", shaOk);
 ok("chunk raw/gz sizes match the manifest", sizeOk);
 ok("every index is inside its chunk and every part's vertices carry its own part index", maxIdxOk);
-ok("triangle total matches stats", Math.round(triangles) === manifest.stats.triangles);
+ok("triangle total matches stats (reference + torso) plus the whole body's own stats", Math.round(triangles) === manifest.stats.triangles + manifest.body.stats.triangles);
 ok("full set under 40 MB and LOD set under 25 MB gzipped (streamed from R2 per system, never bundled)", manifest.stats.gz_bytes < 40e6 && manifest.lod.stats.gz < 25e6);
 // --- slice planes (living CT): every torso slice registered, on a monotonic line ---
 const planes = manifest.planes;
 const torsoSlices = (m) => JSON.parse(readFileSync(join(ROOT, "atlas", m, "atlas.json"), "utf8")).slices;
-ok("one registered plane per slice of each living-torso module", Object.keys(planes).length === 3 &&
+ok("one registered plane per slice of each living module (torso + whole body)", Object.keys(planes).length === 6 &&
   Object.entries(planes).every(([m, byI]) => Object.keys(byI).length === torsoSlices(m).length && torsoSlices(m).length >= 24));
 ok("planes are monotonic along their axis and carry a textured quad frame", Object.values(planes).every((m) => { const ks = Object.keys(m).map(Number).sort((a, b) => a - b); const pos = ks.map((k) => m[k].pos); const inc = pos.every((v, i) => !i || v > pos[i - 1]), dec = pos.every((v, i) => !i || v < pos[i - 1]); return (inc || dec) && ks.every((k) => m[k].tl && m[k].u && m[k].v && ["x", "y", "z"].includes(m[k].axis)); }));
 ok("living-CT parts sit inside the registered slab (axial plane range)", (() => { const ax = planes["ct-live-torso-axial"]; const ys = Object.values(ax).map((p) => p.pos); const lo = Math.min(...ys) - 0.05, hi = Math.max(...ys) + 0.05; return live.every((p) => p[8][1] >= lo && p[8][4] <= hi); })());

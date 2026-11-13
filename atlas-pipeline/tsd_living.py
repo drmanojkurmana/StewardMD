@@ -180,6 +180,9 @@ def main():
     ap.add_argument("--work", required=True, help="absolute path to atlas-pipeline/work")
     ap.add_argument("--labels", help="label mapping id (default <prefix>-axial)")
     ap.add_argument("--slices", type=int, default=48)
+    ap.add_argument("--axial-slices", type=int, default=0,
+                    help="axial stack size when it should differ from --slices (a whole body is 97 cm long)")
+    ap.add_argument("--contrast", action="store_true", help="IV-contrast study (passed to tsd_combine.py)")
     ap.add_argument("--title", default="")
     ap.add_argument("--write", action="store_true")
     a = ap.parse_args()
@@ -206,7 +209,8 @@ def main():
     rep = os.path.join(gdir, a.subject + "_report.json")
     if not os.path.exists(seg_src):
         subprocess.run([sys.executable, os.path.join(_HERE, "tsd_combine.py"), "--subject-dir", sub_dir,
-                        "--out-seg", seg_src, "--out-report", rep, "--structures", "ALL"], check=True)
+                        "--out-seg", seg_src, "--out-report", rep, "--structures", "ALL"] +
+                       (["--contrast"] if a.contrast else []), check=True)
     ct = np.asanyarray(nib.load(os.path.join(sub_dir, "ct.nii.gz")).dataobj).astype(np.int16)
     sg = np.asanyarray(nib.load(seg_src).dataobj).astype(np.uint16)
     # Keep only the labels this module shows. A mask mapped to null (skull, brain, ribs) would
@@ -256,7 +260,8 @@ def main():
         mid = "%s-%s" % (a.prefix, plane)
         out_dir = os.path.join(_REPO, "atlas", mid)
         vpath, spath = os.path.join(gdir, plane + ".nii.gz"), os.path.join(gdir, plane + "_seg.nii.gz")
-        stubs = extract_slices(vpath, out_dir, mid, a.slices, "soft-tissue", SOURCE, spath)
+        n_sl = a.axial_slices if (plane == "axial" and a.axial_slices) else a.slices
+        stubs = extract_slices(vpath, out_dir, mid, n_sl, "soft-tissue", SOURCE, spath)
         zooms = nib.load(vpath).header.get_zooms()[:3]
         pins = pins_from_segmentation(spath, stubs, mapping, (zooms[1], zooms[0]))
         atlas = assemble({"id": mid, "source": SOURCE, "source_label": credit, "cleared_on": "2026-08-17"},

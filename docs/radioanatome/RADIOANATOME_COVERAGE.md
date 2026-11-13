@@ -113,6 +113,6 @@ Full detail in LICENSE_MANIFEST.md, LICENSE_REQUIRED.md, DATA_PROVENANCE.md and 
 
 ## What would move these numbers most
 
-1. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies with a `no_pathology` metadata flag, of which three are used (torso s0108, neck s0021, thorax-neck s0897); `tsd_living.py` builds a new group from any of them. Abdomen-pelvis or pelvis studies would add pelvic organs at higher resolution.
+1. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies with a `no_pathology` metadata flag, of which four are used (torso s0108, neck s0021, thorax-neck s0897, whole body s1045 head to thigh, 2026-11-12); `tsd_living.py` builds a new group from any of them. Abdomen-pelvis or pelvis studies would add pelvic organs at higher resolution.
 2. **MRI body, free.** TotalSegmentator `total_mr` is Apache-2.0 and already CLEAR; the whole MRI musculoskeletal region is unattempted.
 

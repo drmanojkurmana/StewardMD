@@ -5,7 +5,7 @@
  * kept shipping, so no server code deployed. This test replays the Pages
  * build's exclusion list (scripts/pages-build.sh, the single source of
  * truth) over `git ls-files` and fails well before either cap: at most
- * 19,000 static files and at most 24 MiB per file.
+ * 19,600 static files and at most 24 MiB per file.
  * node --test test/pages-output.test.mjs */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -15,7 +15,9 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const MAX_FILES = 19000;
+// Raised from 19,000 to 19,600 by the owner on 2026-11-13 for the RadioAnatome whole body (19,569
+// files with it); Cloudflare's own cap is still 20,000. vault/decisions/Decisions.md.
+const MAX_FILES = 19600;
 const MAX_BYTES = 24 * 1024 * 1024;
 
 function pagesExclusions() {
@@ -35,7 +37,7 @@ function pagesOutputFiles() {
   });
 }
 
-test("pages output stays under 19,000 static files", () => {
+test("pages output stays under 19,600 static files", () => {
   const files = pagesOutputFiles();
   assert.ok(files.length <= MAX_FILES,
     `Pages output would ship ${files.length} static files (cap 20,000, guard ${MAX_FILES}). ` +
