@@ -5,6 +5,15 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-13 · Cactus Mirage (on-device vision): evaluated, not adopted
+
+**Decision.** No Mirage plugin and no Scan-Meds change. **Why.** Container bench on 7 synthetic printed images
+(`vault/plans/edge-data/mirage-bench/`): OCR dropped an abnormal potassium value and misread drug names
+("Vetformin", "40 me"); schema `extract` returned null for every frequency/route and invented "1000" mg for a
+500 mg order. No handwriting, no Indian languages, no published OCR benchmarks. It would also need the new unified
+Cactus 4.x engine, not our pinned `libneedle`. **Trade-off.** Keeps image to text on Apple Vision OCR + server
+`/vision`. **Status.** Closed; re-evaluate on a release with document benchmarks. Detail: [[Mirage-Eval]].
+
 ## 2026-11-04 · iPad shell: native iPad layout and hardware keyboard (owner: "work like native iPad app")
 
 **Decision.** A shell layer for large touch screens, `ipad-native.css` + `ipad-native.js`, scoped to `html.smd-tablet`
