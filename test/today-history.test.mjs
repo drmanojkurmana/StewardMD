@@ -15,7 +15,7 @@ const months = Object.fromEntries(Array.from({ length: 12 }, (_, i) => {
 test("curated: no deaths, none of the dropped ids, and most days still have something", () => {
   const all = Object.values(months).flatMap((m) => Object.values(m).flat());
   const drop = dropList();
-  assert.ok(drop.size > 100);
+  assert.ok(drop.size > 50);
   for (const e of all) {
     assert.doesNotMatch(e.t, DEATH, e.id);
     assert.ok(!drop.has(e.id), e.id);

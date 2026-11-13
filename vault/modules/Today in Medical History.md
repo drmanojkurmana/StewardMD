@@ -26,8 +26,8 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
   box shows (it did, first try).
 - Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE subject per day,
-  for the day's main event only (327 days). `scripts/history/image-prompts.mjs` writes three self-contained prompts,
-  `data/history/gemini/gemini-prompt-{1,2,3}-of-3.txt` (100, 100, 127: a Gemini task makes about 100 images), each
+  for the day's main event only (336 days). `scripts/history/image-prompts.mjs` writes three self-contained prompts,
+  `data/history/gemini/gemini-prompt-{1,2,3}-of-3.txt` (100, 100, 136: a Gemini task makes about 100 images), each
   asking for a ZIP of PNGs named `MM-DD-YYYY.png`. `scripts/history/import-images.sh <folder>` imports named files;
   `--part N <folder>` matches unnamed downloads to prompt N by save order. Both make 480x360 WebP and rebuild.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
@@ -39,10 +39,11 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
 
 ## Curation (owner, 2026-11-13: "remove useless or uninteresting data, less popular scientists; deaths are not celebrated")
 - `build-history.mjs` drops every death or passing (`DEATH` regex on the title) and every id in
-  `data/history/curation.txt` (110 by hand: obscure births, non-medical people, outbreaks and disasters, hoaxes,
-  routine regulatory notices). Delete a line there to bring an event back.
-- Result: 592 events on 327 days. **39 days have nothing** (they held only deaths or dropped items): the banner
-  simply does not flip that day, and the sheet says "Nothing to mark on this day". Fill them by adding sourced events.
+  `data/history/curation.txt` (62 obscure or non-medical births, plus one death the regex misses). Tragedies,
+  outbreaks, hoaxes and routine notices were dropped once and **restored by the owner**: they stay.
+- Result: 639 events on 336 days. **30 days have nothing** (only deaths or dropped births): the banner does not flip
+  that day, and the sheet says "Nothing to mark on this day".
+- Pictures: one per day, the day's main event; 336 subjects; Gemini prompts of 100, 100, 136.
 
 ## Files
 - `today-history.js`, `today-history.css` (loaded in index.html just before role-features.js).
