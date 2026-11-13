@@ -12367,3 +12367,8 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 Owner saw the PrepNucleus centre mark and corner lockup only after tapping a lesson image full screen. The lesson and
 PYQ figure markup never added the `image-watermark.js` overlay. It now does, on the picture's own box, same look as
 the viewer. Loader token prep144.
+
+## 2026-11-13 No system Copy / Look Up menu on reading text (iOS)
+Owner: selecting lesson text showed the iOS menu, which makes copying content easy; only the highlight palette should
+show. `SmdWebView` (MainViewController.swift) disables edit-menu actions unless the selection is editable. Native
+rebuild required. Android selection toolbar unchanged for now.

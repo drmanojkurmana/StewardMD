@@ -33,3 +33,10 @@ colour dots, a list of the page's highlights). For students in PrepNucleus Learn
   edit, remove, list, swipe guard, flag off; `SHOTS=<dir>`).
 - **Open:** not tried on iOS / Android WebViews (native selection menu placement next to ours, handle drags inside the
   lesson scroller). Sync of highlights across devices not built. MaiK answers, Clinical Protocols, Cards not opted in.
+
+## No system edit menu (owner 2026-11-13)
+Selecting reading text showed the iOS edit menu (Copy, Look Up, Translate, Search Web, Share) on top of the palette.
+CSS cannot hide it (`-webkit-touch-callout: none` is already on `html`). Native fix: `ios/App/App/MainViewController.swift`
+returns an `SmdWebView` whose `canPerformAction` offers nothing on read-only text and whose `buildMenu` drops the system
+groups; inside anything editable (Cut or Paste available) the menu is untouched. Needs a native rebuild, not OTA.
+Android still shows its selection toolbar (not done).
