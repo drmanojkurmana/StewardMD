@@ -80,3 +80,6 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
 
 ## Tests
 `test/today-history.test.mjs` (data), `test/run-today-history-ui.mjs` (real browser).
+- 2026-11-13 (owner): no India badge on the banner (the sheet keeps its India tag). Banner title is Bricolage
+  Grotesque 700 (the app's bundled display face, preloaded in index.html), not Manrope 800; a system serif was
+  rejected because Android would swap in Noto Serif. Cache token th12.
