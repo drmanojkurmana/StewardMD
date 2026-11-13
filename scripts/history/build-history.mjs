@@ -12,6 +12,12 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const SRC = join(ROOT, "data/history/source/medical-history-365.json");
 const SRC_IN = join(ROOT, "data/history/source/indian-medical-history.json");
+// Curation (data/history/curation.txt): deaths are not celebrated, and a hand-made list drops the rest.
+export const DEATH = /\b(death of|passing of|dies|died|passes away|fatality)\b/i;
+export function dropList(file = join(ROOT, "data/history/curation.txt")) {
+  if (!existsSync(file)) return new Set();
+  return new Set(readFileSync(file, "utf8").split("\n").map((l) => l.trim().split(/\s+/)[0]).filter((w) => /^\d\d-\d\d-\d{3,4}b?$/.test(w)));
+}
 const STOP = new Set(["birth", "death", "first", "india", "indian", "passing", "discovers", "established", "becomes", "founded", "medical", "hospital"]);
 const words = (t) => new Set(String(t).toLowerCase().normalize("NFD").replace(/[^a-z ]/g, " ").split(/\s+/).filter((w) => w.length >= 5 && !STOP.has(w)));
 export function sameEvent(a, b) {
@@ -32,7 +38,7 @@ export function clean(s) {
 // Each event gets an id, MM-DD-YYYY (a second event in the same year that day gets a "b"); its banner picture,
 // when one ships, is data/history/img/<id>.webp, so a picture can never land on the wrong event. Pictures are
 // holographic glow art on pure black (the app screen-blends them, so the black drops out on any theme).
-export function build(src, india = { days: [] }, has = (f) => existsSync(join(OUT, "img", f))) {
+export function build(src, india = { days: [] }, has = (f) => existsSync(join(OUT, "img", f)), drop = new Set()) {
   const byDay = {};
   for (const d of src.days) {
     const key = String(d.month).padStart(2, "0") + "-" + String(d.day).padStart(2, "0");
@@ -58,11 +64,14 @@ export function build(src, india = { days: [] }, has = (f) => existsSync(join(OU
         let id = key + "-" + e.year;
         if (used[id]) id += "b";
         used[id] = 1;
+        if (DEATH.test(e.title) || drop.has(id)) return null;
         const o = { id, y: e.year, t: clean(e.title), s: clean(e.summary), c: clean(e.category), sp: clean(e.specialty), u: e.sourceUrl };
         if (ind) o.in = 1;
         if (has(id + ".webp")) o.img = id + ".webp";
         return o;
-      });
+      })
+      .filter(Boolean);
+    if (!months[key.slice(0, 2)][key].length) delete months[key.slice(0, 2)][key];   // a day with nothing to mark
   }
   return months;
 }
@@ -70,12 +79,13 @@ export function build(src, india = { days: [] }, has = (f) => existsSync(join(OU
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const src = JSON.parse(readFileSync(SRC, "utf8"));
   const india = existsSync(SRC_IN) ? JSON.parse(readFileSync(SRC_IN, "utf8")) : { days: [] };
-  const months = build(src, india);
+  const months = build(src, india, undefined, dropList());
   mkdirSync(OUT, { recursive: true });
   let n = 0;
   for (const [mm, days] of Object.entries(months)) {
     writeFileSync(join(OUT, mm + ".json"), JSON.stringify(days) + "\n");
     n += Object.values(days).reduce((a, x) => a + x.length, 0);
   }
-  console.log("months", Object.keys(months).length, "events", n);
+  const days = Object.values(months).reduce((a, m) => a + Object.keys(m).length, 0);
+  console.log("months", Object.keys(months).length, "events", n, "days with events", days, "of 366");
 }

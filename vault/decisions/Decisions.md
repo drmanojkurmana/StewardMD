@@ -12278,3 +12278,4 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Data split per month (`data/history/MM.json`) so the app reads ~20 KB, not 400 KB. Content ai_drafted, pending review.
 - Reversible: `smd_today_history=0`. Recovery point: commit 0d7a8d7d (the branch before this change; tag pushes are refused here).
 - Same day: India dataset merged (211 events, India tag; India's version wins on a duplicate). Banner pictures: holographic glow art on black, screen-blended; one hand-picked subject per day, made in Gemini from `data/history/gemini/`.
+- Same day: curated. Deaths and passings never shown; 110 more dropped by hand (data/history/curation.txt). 39 days now have no event and the banner does not flip on them.

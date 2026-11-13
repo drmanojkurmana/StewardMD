@@ -26,8 +26,8 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
   box shows (it did, first try).
 - Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE hand-picked
-  subject per day (366; India's event where it reads well as a picture; never a face). `scripts/history/image-prompts.mjs`
-  turns it into `data/history/gemini/`: `1-START-HERE.md` (paste once), `batches.md` (37 batches of 10), and
+  subject per day that has an event (327; India's event where it reads well as a picture; never a face). `scripts/history/image-prompts.mjs`
+  turns it into `data/history/gemini/`: `1-START-HERE.md` (paste once), `batches.md` (33 batches of 10), `GEMINI-FULL-PROMPT.md` (both in one file), and
   `image-prompts.csv`. Gemini cannot zip images without code: the owner downloads each batch and uploads it here.
   `scripts/history/import-images.sh --batch N <folder>` names Gemini's random file names by save order; or pass a
   folder of files already named `MM-DD-YYYY.png`. Both convert to 480x360 WebP and rebuild the month files.
@@ -37,6 +37,13 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
 - The home date (`.hrf-date`) is a button that opens the same sheet at any time.
 - Pauses: banner off screen, app in background, sheet open. It returns to its front face quietly when it leaves the screen.
 - Reduced motion: faces swap with a short fade, no rotation.
+
+## Curation (owner, 2026-11-13: "remove useless or uninteresting data, less popular scientists; deaths are not celebrated")
+- `build-history.mjs` drops every death or passing (`DEATH` regex on the title) and every id in
+  `data/history/curation.txt` (110 by hand: obscure births, non-medical people, outbreaks and disasters, hoaxes,
+  routine regulatory notices). Delete a line there to bring an event back.
+- Result: 592 events on 327 days. **39 days have nothing** (they held only deaths or dropped items): the banner
+  simply does not flip that day, and the sheet says "Nothing to mark on this day". Fill them by adding sourced events.
 
 ## Files
 - `today-history.js`, `today-history.css` (loaded in index.html just before role-features.js).

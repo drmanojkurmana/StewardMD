@@ -1,8 +1,9 @@
-// Today in Medical History pictures: from data/history/image-subjects.txt (one hand-picked subject per day)
+// Today in Medical History pictures: from data/history/image-subjects.txt (one hand-picked subject for each day that has an event)
 // writes, under data/history/gemini/:
 //   1-START-HERE.md       the instruction to paste into Gemini once (style, rules, how to reply)
 //   batches.md            37 messages of 10 days each, to paste one after another
-//   image-prompts.csv     the same 366 rows as a table (file name, event, full prompt)
+//   image-prompts.csv     the same rows as a table (file name, event, full prompt)
+//   GEMINI-FULL-PROMPT.md the opening message and every batch in one file
 // Images come back as PNG/JPG; scripts/history/import-images.sh converts them to data/history/img/<id>.webp.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -74,6 +75,8 @@ Reply "Ready" now, and wait for Batch 1.
     for (const r of part) csv.push([r.file, r.key, r.y.replace("b", ""), q(title(r)), q(r.subject), q(STYLE + " Subject: " + r.subject + ".")].join(","));
   }
   writeFileSync(join(OUT, "batches.md"), md);
+  // everything in one file: the opening message, then every batch
+  writeFileSync(join(OUT, "GEMINI-FULL-PROMPT.md"), readFileSync(join(OUT, "1-START-HERE.md"), "utf8") + "\n" + md);
   writeFileSync(join(OUT, "image-prompts.csv"), csv.join("\n") + "\n");
   console.log("subjects", list.length, "batches", batches);
 }

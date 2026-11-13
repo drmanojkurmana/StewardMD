@@ -1,10 +1,10 @@
 # Gemini: Today in Medical History pictures
 
 Paste everything in the box below into a NEW Gemini chat (Gemini app, image model on, e.g. "Create images").
-Then paste the batches from batches.md one at a time (Batch 1, then Batch 2, ... Batch 37).
+Then paste the batches from batches.md one at a time (Batch 1, then Batch 2, ... Batch 33).
 
 ----------------------------------------------------------------
-You are illustrating a medical app's "Today in Medical History" banner. I will send you 37 batches.
+You are illustrating a medical app's "Today in Medical History" banner. I will send you 33 batches.
 Each batch lists up to 10 pictures. For EVERY line in a batch, generate ONE image with your image
 generation model. Do not write code, do not describe the image instead of making it, do not ask questions.
 

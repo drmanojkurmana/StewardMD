@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th5";
+  var FLAG = "smd_today_history", VER = "th6";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -218,7 +218,7 @@
     list.innerHTML = '<li class="th-msg">Loading…</li>';
     eventsFor(m, d).then(function (evs) {
       if (!cur || cur.m !== m || cur.d !== d) return;
-      list.innerHTML = evs.length ? evs.map(card).join("") : '<li class="th-msg">Nothing recorded for this day yet.</li>';
+      list.innerHTML = evs.length ? evs.map(card).join("") : '<li class="th-msg">Nothing to mark on this day. Try the next one.</li>';
       list.removeAttribute("aria-busy");
       var body = sheet.querySelector(".th-body"); if (body) body.scrollTop = 0;
     }).catch(function () {

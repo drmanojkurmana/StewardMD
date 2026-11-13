@@ -108,6 +108,9 @@ try {
   ok(await until(`[...document.querySelectorAll('#thSheet .th-ev')].some(li=>li.querySelector('.th-in')&&/1897/.test(li.innerText)&&/Secunderabad/.test(li.innerText))`, 5000), 'India event tagged India (Ross, Secunderabad, 1897)');
   ok(await ev(`[...document.querySelectorAll('#thSheet .th-yr')].filter(y=>y.textContent==='1897').length===1`), 'the world copy of the same event is not repeated');
   await sleep(400); await shot('05-sheet-india');
+  await ev(`SMD_todayHistory.open(1,8);1`);
+  ok(await until(`/Nothing to mark on this day/.test(document.getElementById('thSheet').innerText)`, 5000), 'a day with nothing left says so');
+  ok(await ev(`!/\\b(death of|passing of|dies)\\b/i.test(document.getElementById('thSheet').innerText)`), 'no deaths listed');
   // 6. Escape closes; focus goes back to the date.
   await call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
   await call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
