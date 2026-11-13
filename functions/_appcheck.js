@@ -22,19 +22,19 @@ function b64urlToString(s) { return new TextDecoder().decode(b64urlToBytes(s)); 
 let _mem = null;   // { map, exp }
 
 /** Test hook — drop the isolate cache between cases. */
-export function resetAppCheckJwksCache() { _mem = null; }
+export function resetAppCheckJwksCache() { _mem = null; _lastForced = 0; }
 
 function projectNumber(env) {
   const n = env && (env.FIREBASE_PROJECT_NUMBER || env.APPCHECK_PROJECT_NUMBER);
   return String(n || PROJECT_NUMBER_DEFAULT).trim();
 }
 
-async function getJwks() {
+async function getJwks(skipEdge) {
   const now = Date.now();
   if (_mem && now < _mem.exp) return _mem.map;
 
   const edge = typeof caches !== "undefined" && caches.default ? caches.default : null;
-  if (edge) {
+  if (edge && !skipEdge) {
     try {
       const hit = await edge.match(JWKS_URL);
       if (hit) {
@@ -75,8 +75,11 @@ function parseJwt(token) {
   } catch (e) { return null; }
 }
 
+let _lastForced = 0;
 async function signatureOk(jwt) {
-  const jwk = (await getJwks())[jwt.header.kid];
+  let jwk = (await getJwks())[jwt.header.kid];
+  // Google rotates App Check keys: an unknown kid refetches the JWKS, at most once a minute per isolate.
+  if (!jwk && Date.now() - _lastForced > 60000) { _lastForced = Date.now(); _mem = null; jwk = (await getJwks(true))[jwt.header.kid]; }
   if (!jwk) return false;
   try {
     const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
