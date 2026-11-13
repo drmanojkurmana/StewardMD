@@ -622,12 +622,20 @@
     if (!chunks.length) { done(); return; }
     next();
   }
-  function narrate() {
-    var s = store(), pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null, say = pageSay(), map = null;
-    if (step) {
-      var ss = stepSay(step);
-      map = alignSay(ss.tx, stepSentences(step.tx)).concat(ss.vis.map(function () { return HL_VIS; }));
-      say = ss.tx.concat(ss.vis);
+  /* What the page reads, and for each spoken piece the displayed sentence it lights (HL_VIS: the visual). */
+  function pageReading() {
+    var pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null;
+    if (!step) return { say: pageSay(), map: null };
+    var ss = stepSay(step);
+    return { say: ss.tx.concat(ss.vis), map: alignSay(ss.tx, stepSentences(step.tx)).concat(ss.vis.map(function () { return HL_VIS; })) };
+  }
+  /* from: a displayed sentence index, or HL_VIS for the visual; reading starts at the first spoken piece for it
+     (owner 2026-11-13: tap a line to replay it or read on from there). */
+  function narrate(from) {
+    var s = store(), pr = pageReading(), say = pr.say, map = pr.map, at = 0;
+    if (map && typeof from === "number" && Array.isArray(say)) {
+      for (var k = 0; k < map.length; k++) if (from === HL_VIS ? map[k] === HL_VIS : map[k] >= from) { at = k; break; }
+      if (at) { say = say.slice(at); map = map.slice(at); }
     }
     speak(say, s.lsp.r, function () {
       hlClear();
@@ -636,7 +644,23 @@
       L.playing = false; drawBar();
     }, map ? function (k) { hlSet(map[k]); } : null);
   }
-  function setPlaying(on) { L.playing = on && canSpeak(); stopVoice(); if (L.playing) naturalStart(narrate); drawBar(); }
+  function setPlaying(on) { L.playing = on && canSpeak(); stopVoice(); if (L.playing) naturalStart(function () { narrate(); }); drawBar(); }
+  // Tap a sentence (or the table / figure): read from there, playing or not.
+  function readFrom(from) {
+    if (!canSpeak()) return;
+    try { var sel = G.getSelection && G.getSelection(); if (sel && !sel.isCollapsed) return; } catch (e) {}   // selecting text to highlight is not a tap
+    L.playing = true; stopVoice(); drawBar();
+    naturalStart(function () { narrate(from); });
+  }
+  /* The natural voice renders the page's first sentence as soon as the page shows, so Play speaks at once instead of
+     waiting for the render (owner 2026-11-13: about 5 s). */
+  function primeVoice() {
+    try {
+      var V = G.PREP_VOICE; if (!V || !V.usable || !V.usable() || L.fin || !L.les) return;
+      var say = pageReading().say, first = Array.isArray(say) ? say[0] : sayChunks(say)[0];
+      if (first) V.prefetch(first);
+    } catch (e) {}
+  }
 
   /* ---------- drawing ---------- */
   function ico(n) { return host.ico(n); }
@@ -750,7 +774,9 @@
     if (!v) return "";
     var inner = v.kind === "figure" ? figureHtml(v) : v.kind === "table" ? tableHtml(v) : v.kind === "flow" ? flowHtml(v) : v.kind === "compare" ? compareHtml(v) : v.kind === "image" ? imageHtml(v, i) : "";
     if (!inner) return "";
-    return '<section class="pn-vis pn-vis-' + v.kind + '" aria-label="' + (v.kind === "image" ? (v.spot ? "Spot the sign" : v.marks ? "Labelled figure" : v.pair ? "Compare two images" : "Figure") : v.kind === "flow" ? "Flow diagram" : v.kind === "compare" ? "Comparison" : "Table") + '">' + inner + "</section>";
+    // A table, flow or figure is read aloud from its start when tapped (data-k -2 = HL_VIS); images keep their own taps.
+    var sayTap = v.kind === "table" || v.kind === "flow" || v.kind === "figure" ? ' data-act="l-say" data-k="-2"' : "";
+    return '<section class="pn-vis pn-vis-' + v.kind + '"' + sayTap + ' aria-label="' + (v.kind === "image" ? (v.spot ? "Spot the sign" : v.marks ? "Labelled figure" : v.pair ? "Compare two images" : "Figure") : v.kind === "flow" ? "Flow diagram" : v.kind === "compare" ? "Comparison" : "Table") + '">' + inner + "</section>";
   }
 
   /* ---------- interactive parts ----------
@@ -959,7 +985,7 @@
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
-        '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
+        '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-act="l-say" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
@@ -1004,7 +1030,7 @@
     var r = host.root && host.root(); if (!r) return;
     host.paint(L.fin ? finishHtml() : readerHtml() + (L.zoom ? zoomHtml() : ""), focus || (L.fin ? ".pn-lsn-fin" : L.zoom ? "[data-act=l-unzoom]" : null));
     L.dir = 0;
-    if (!L.fin) { bindSwipe(r.querySelector("#pnLsn")); bindIx(r); }
+    if (!L.fin) { bindSwipe(r.querySelector("#pnLsn")); bindIx(r); if (!L.playing) primeVoice(); }
     if (L.zoom) bindPinch(r.querySelector(".pn-zoom-sc"));
   }
   function bindIx(r) {
@@ -1072,7 +1098,7 @@
   function go(i, keepVoice) {
     L.dir = i > L.i ? 1 : -1; L.i = i; save();
     draw(L.dir > 0 ? "[data-act=l-next]" : "[data-act=l-prev]");
-    if (L.playing) { stopVoice(); naturalStart(narrate); } else if (!keepVoice) stopVoice();
+    if (L.playing) { stopVoice(); naturalStart(function () { narrate(); }); } else if (!keepVoice) { stopVoice(); primeVoice(); }
   }
   function next() {
     if (L.i < pages(L.les).length - 1) return go(L.i + 1);
@@ -1196,7 +1222,7 @@
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
-    try { if (G.PREP_VOICE && G.PREP_VOICE.available()) G.PREP_VOICE.init(); } catch (e) {}   // a voice downloaded before loads from the phone now
+    try { if (G.PREP_VOICE && G.PREP_VOICE.available()) { var vi = G.PREP_VOICE.init(); if (vi && vi.then) vi.then(function (ok) { if (ok && L.key === key && !L.playing) primeVoice(); }); } } catch (e) {}   // a voice downloaded before loads from the phone now, then renders the page's first sentence
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
@@ -1228,6 +1254,7 @@
     if (a === "l-next") return next();
     if (a === "l-prev") { if (L.i) go(L.i - 1); return; }
     if (a === "l-play") return setPlaying(!L.playing);
+    if (a === "l-say") return readFrom(+b.getAttribute("data-k") || 0);
     if (a === "l-speed") { var s = store(); s.lsp.r = nextSpeed(s.lsp.r); host.save(); if (L.playing) narrate(); return drawBar(); }
     if (a === "l-auto") { var s2 = store(); s2.lsp.au = s2.lsp.au ? 0 : 1; host.save(); return draw("[data-act=l-auto]"); }
     if (a === "l-zoom") {
@@ -1258,7 +1285,8 @@
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
     return false;
   }
-  function leave() { L.playing = false; L.zoom = null; stopVoice(); try { if (G.PREP_VOICE) G.PREP_VOICE.release(); } catch (e) {} }
+  // The voice stays loaded 2 minutes after leaving, so the next lesson's Play starts at once; then it is released.
+  function leave() { L.playing = false; L.zoom = null; stopVoice(); try { var V = G.PREP_VOICE; if (V) { if (V.idle) V.idle(120000); else V.release(); } } catch (e) {} }
   /* Taps on the interactive parts. Each updates its own part in place and keeps the focus on the control. */
   function ixAct(a, b) {
     var r = host.root && host.root(), p = page(), step = typeof p === "number" ? L.les.steps[p] : null, v = step && step.vis, ans = ansOf(L.i), k = +b.getAttribute("data-k");

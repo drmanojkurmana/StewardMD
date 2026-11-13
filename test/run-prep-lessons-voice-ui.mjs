@@ -21,9 +21,9 @@ const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-sh
 const FAKE = (o) => `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.SMD_PREP_ONBOARD=false;
   window.__tts=[]; window.SpeechSynthesisUtterance=function(t){this.text=t};
   Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__tts.push(u.text);setTimeout(function(){u.onend&&u.onend({})},300)},cancel:function(){}}});
-  var st="none", cb=null; window.__said=[]; window.__voice={ p:function(x){cb&&cb(x)}, done:null, fail:null };
-  window.__V={available:function(){return true},state:function(){return st},progress:function(){return 0},saved:function(){return ${!!o.saved}},unlock:function(){},init:function(){},
-    usable:function(){return st==="ready"},stop:function(){},release:function(){},prefetch:function(){},
+  var st=${o.ready ? '"ready"' : '"none"'}, cb=null; window.__pre=[]; window.__said=[]; window.__voice={ p:function(x){cb&&cb(x)}, done:null, fail:null };
+  window.__V={available:function(){return true},state:function(){return st},progress:function(){return 0},saved:function(){return ${!!o.saved}},unlock:function(){},init:function(){return Promise.resolve(st==="ready")},
+    usable:function(){return st==="ready"},stop:function(){},release:function(){},prefetch:function(t){window.__pre.push(t)},
     say:function(t){window.__said.push(t);if(${!!o.sayFail}&&window.__said.length===1)return Promise.reject(new Error("audio"));return new Promise(function(r){setTimeout(r,300)})},
     download:function(f){st="downloading";cb=f;return new Promise(function(r,j){window.__voice.done=function(){st="ready";r()};window.__voice.fail=function(){st="error";j(new Error("x"))}})}};
   Object.defineProperty(window,"PREP_VOICE",{configurable:true,get:function(){return window.__V},set:function(){}});`;
@@ -38,7 +38,7 @@ async function lesson(o) {
   await pg.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); document.body.classList.add("dark"); PREP.open({ subject: "surgery" }); });
   await jc("#smdPrep .pn-mod[data-m=sur-breast-cancer]"); await jc("#smdPrep [data-act=l-open]");
   await pg.waitForSelector("#smdPrep .pn-lsn-tx"); await pg.evaluate(() => document.getElementById("pnSetup")?.remove());
-  await jc("#smdPrep [data-act=l-play]");
+  if (!o.noPlay) await jc("#smdPrep [data-act=l-play]");
   return pg;
 }
 const shot = async (pg, n) => { if (process.env.SHOTS) await pg.screenshot({ path: join(process.env.SHOTS, "lesson-voice-" + n + ".png") }); };
@@ -72,6 +72,29 @@ try {
   pg = await lesson({ saved: true, sayFail: true }); await pg.evaluate(() => window.__voice.done()); await sleep(1500);
   const sf = await pg.evaluate(() => ({ tts: window.__tts.slice(), said: window.__said.slice(), on: window.PREP_LESSONS._l.playing }));
   ok(sf.tts.length === 1 && sf.tts[0] === sf.said[0] && sf.said.length >= 2 && sf.on, "a sentence the natural voice fails on is read by the phone voice, then the natural voice reads on");
+  await pg.context().close();
+  // owner 2026-11-13: Play started about 5 s late. A loaded voice renders the page's first sentence as soon as the page shows.
+  pg = await lesson({ ready: true, noPlay: true }); await sleep(500);
+  const pr = await pg.evaluate(() => ({ pre: window.__pre.slice(), first: (document.querySelector("#smdPrep .pn-lsn-tx .pn-sent") || {}).textContent || "" }));
+  ok(pr.pre.length >= 1 && pr.first && pr.pre[0].indexOf(pr.first.slice(0, 12)) === 0, "the first sentence is rendered before Play is tapped: " + JSON.stringify(pr.pre[0]));
+  // owner 2026-11-13: tap a line to replay it or read on from there.
+  const tap = await pg.evaluate(async () => {
+    const ss = document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent"); if (ss.length < 2) return { n: ss.length };
+    ss[1].click(); await new Promise((r) => setTimeout(r, 450));
+    const on = document.querySelector("#smdPrep .pn-sent.on"), playing = window.PREP_LESSONS._l.playing;
+    return { n: ss.length, said: window.__said.slice(), want: ss[1].textContent, lit: on && on.getAttribute("data-k"), playing };
+  });
+  ok(tap.n >= 2 && tap.said.length >= 1 && tap.said[0].indexOf(tap.want.split(" ").slice(0, 3).join(" ")) >= 0 && tap.lit === "1" && tap.playing,
+    "tapping the second sentence reads from it and lights it: " + JSON.stringify(tap.said[0]));
+  await shot(pg, "tap-line");
+  const tbl = await pg.evaluate(async () => {
+    let guard = 0;
+    while (!document.querySelector("#smdPrep .pn-vis[data-act=l-say]") && guard++ < 8) { const nx = document.querySelector("#smdPrep [data-act=l-next]"); if (!nx) break; nx.click(); await new Promise((r) => setTimeout(r, 350)); }
+    const v = document.querySelector("#smdPrep .pn-vis[data-act=l-say]"); if (!v) return null;
+    window.__said.length = 0; (v.querySelector("td,th,.pn-fn") || v).click(); await new Promise((r) => setTimeout(r, 450));
+    return { said: window.__said.slice(), lit: v.classList.contains("say") };
+  });
+  ok(!tbl || (tbl.said.length >= 1 && tbl.lit), "tapping a table or flow reads it from its start and lights it" + (tbl ? "" : " (no table in the fixture)"));
   await pg.context().close();
 } catch (e) { console.log("FAIL " + (e && e.stack || e)); fails++; }
 await browser.close(); serve.kill();

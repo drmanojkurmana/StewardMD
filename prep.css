@@ -1973,6 +1973,9 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 /* Read-along: the sentence being spoken in a lesson step. */
 .pn-root .pn-sent { border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-color 220ms ease; }
 .pn-root .pn-sent.on { background: var(--pn-pri-soft); }
+/* Tap a sentence, table or flow to read from there (owner 2026-11-13). The press shows on the line itself. */
+.pn-root .pn-sent[data-act], .pn-root .pn-vis[data-act] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.pn-root .pn-sent[data-act]:active { background: color-mix(in srgb, var(--pn-pri-soft) 70%, transparent); }
 .pn-root .pn-vis { transition: border-color 220ms ease; }
 .pn-root .pn-vis.say { border-color: var(--pn-pri); }
 @media (prefers-reduced-motion: reduce) { .pn-root .pn-sent, .pn-root .pn-vis { transition: none; } }

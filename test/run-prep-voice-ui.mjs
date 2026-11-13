@@ -69,6 +69,23 @@ try {
   // switched off
   pg = await page(() => { window.SMD_PREP_VOICE = false; });
   ok(await pg.evaluate(() => !window.PREP_VOICE.available()), "window.SMD_PREP_VOICE = false switches the voice off");
+  // owner 2026-11-13: Play started about 5 s late. The page's first sentence is rendered ahead, a Play tap's stop() does
+  // not throw that render away, and leaving a lesson keeps the model loaded a while (idle) instead of releasing it at once.
+  {
+    const q = await page();
+    const r = await q.evaluate(async () => {
+      const V = window.PREP_VOICE; V.unlock(); await V.download();
+      window.__said = []; V.prefetch("First line of the page."); V.stop();
+      await V.say("First line of the page.", 1);
+      const renders = window.__said.filter((t) => t === "First line of the page.").length;
+      window.__disposed = false; V.idle(150); const kept = V.ready() && !window.__disposed;
+      await new Promise((r) => setTimeout(r, 400));
+      return { renders, kept, gone: !!window.__disposed && V.state() === "none" };
+    });
+    ok(r.renders === 1, "a sentence rendered ahead is spoken from that render, even after stop() (rendered " + r.renders + " time)");
+    ok(r.kept && r.gone, "idle() keeps the model loaded, then releases it after the wait");
+    await q.context().close();
+  }
 } catch (e) { console.log("FAIL " + (e && e.stack || e)); fails++; }
 await browser.close(); serve.kill();
 console.log(fails ? "FAILED " + fails : "ALL PASS");

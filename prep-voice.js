@@ -8,8 +8,8 @@
  * file, without WebAssembly or workers, or on any failure the lesson speaks with the system voice.
  * window.SMD_PREP_VOICE = false switches it off (the UI tests do). Pure helpers load under node for tests.
  * API (window.PREP_VOICE): available(), state() none|downloading|loading|ready|error, progress() 0..1, error(), ready(),
- * usable(), rtf(), saved() (downloaded before), download(onProgress), init(), unlock(), say(text, rate) -> Promise (resolves when it has been
- * spoken), prefetch(text), stop(), release(), remove(). */
+ * usable(), rtf(), saved() (downloaded before), download(onProgress), init() -> Promise<bool ready>, unlock(), say(text, rate) -> Promise
+ * (resolves when it has been spoken), prefetch(text), stop(), idle(ms) (release after ms unless used again), release(), remove(). */
 (function (G) {
   "use strict";
   var SR = 24000, BASE = "/vendor/phonon-tts/", RTF_MAX = 1.3, RTF_KEY = "prep_voice_rtf_phonon", HAVE_KEY = "prep_voice_have_phonon";
@@ -29,7 +29,10 @@
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ---------- engine ---------- */
-  var st = { s: "none", p: 0, err: "", rtf: 0 }, lib = null, tts = null, boot = null, cbs = [], memo = {}, keys = [], ctl = null, audio = null, cur = null, tok = 0;
+  // memo[text] = { p: Promise<Float32Array>, c: AbortController|null, done, want }: each render has its own controller, so
+  // stop() cancels only the sentence being spoken and a page's pre-rendered first sentence survives the Play tap (owner
+  // 2026-11-13: Play waited about 5 s). idleT: the model stays loaded a while after a lesson closes (idle()).
+  var st = { s: "none", p: 0, err: "", rtf: 0 }, lib = null, tts = null, boot = null, cbs = [], memo = {}, keys = [], saying = null, pre = null, idleT = 0, audio = null, cur = null, tok = 0;
   function can() { return G.SMD_PREP_VOICE !== false && !!(G.WebAssembly && G.Worker && G.caches && G.Audio); }
   function tell() { for (var i = 0; i < cbs.length; i++) { try { cbs[i](st.p); } catch (e) {} } }
   function load() {
@@ -49,12 +52,20 @@
   }
   function synth(text) {
     if (memo[text]) return memo[text];
-    ctl = typeof G.AbortController === "function" ? new G.AbortController() : null;
-    var p = tts.synth(text, ctl ? { signal: ctl.signal } : {}).then(fadeIn);
-    memo[text] = p; keys.push(text);
-    if (keys.length > 10) delete memo[keys.shift()];
-    p.catch(function () { delete memo[text]; });
-    return p;
+    var c = typeof G.AbortController === "function" ? new G.AbortController() : null, e = { c: c, done: false, want: false };
+    e.p = tts.synth(text, c ? { signal: c.signal } : {}).then(fadeIn);
+    e.p.then(function () { e.done = true; }, function () { e.done = true; if (memo[text] === e) delete memo[text]; });
+    memo[text] = e; keys.push(text);
+    if (keys.length > 10) { var old = keys.shift(); if (memo[old] && !memo[old].want) delete memo[old]; }
+    return e;
+  }
+  function cancel(e) { if (e && !e.done) { try { if (e.c) e.c.abort(); } catch (x) {} } }
+  // Render ahead. A newer prefetch drops an older one nobody is waiting for (a page that was turned past).
+  function prefetch(text) {
+    if (st.s !== "ready" || !text) return;
+    if (pre && pre !== text && memo[pre] && !memo[pre].want && !memo[pre].done) { cancel(memo[pre]); delete memo[pre]; }
+    pre = text;
+    synth(text).p.catch(function () {});
   }
   // Seconds of work per second of speech, from one short phrase, kept on the phone.
   function bench() {
@@ -62,13 +73,14 @@
     try { old = parseFloat(G.localStorage.getItem(RTF_KEY)); } catch (e) {}
     if (old > 0) { st.rtf = old; return Promise.resolve(); }
     var t0 = Date.now();
-    return synth(phrase).then(function (a) {
+    return synth(phrase).p.then(function (a) {
       st.rtf = ((Date.now() - t0) / 1000) / (a.length / SR);
       try { G.localStorage.setItem(RTF_KEY, String(st.rtf)); } catch (e) {}
       delete memo[phrase];
     });
   }
   function download(onP) {
+    wake();
     if (!can()) { st.s = "error"; st.err = "unsupported"; return Promise.reject(new Error("unsupported")); }
     if (onP) cbs.push(onP);
     if (boot) return boot;
@@ -85,20 +97,38 @@
   }
   function saved() { try { return G.localStorage.getItem(HAVE_KEY) === "1"; } catch (e) { return false; } }
   // A voice downloaded before loads from the phone when a lesson opens.
+  // Returns a promise that settles when the voice is ready (or will not load), so the lesson can pre-render its first sentence.
   function init() {
-    if (!can() || boot || st.s !== "none") return;
-    if (saved()) { download().catch(function () {}); return; }
-    G.caches.keys().then(function (ks) { if (ks.some(function (k) { return /phonon/i.test(k); }) && st.s === "none") download().catch(function () {}); }, function () {});
+    wake();
+    if (!can()) return Promise.resolve(false);
+    if (boot) return boot.then(function () { return true; }, function () { return false; });
+    if (st.s !== "none") return Promise.resolve(st.s === "ready");
+    if (saved()) return download().then(function () { return true; }, function () { return false; });
+    return G.caches.keys().then(function (ks) {
+      if (ks.some(function (k) { return /phonon/i.test(k); }) && st.s === "none") return download().then(function () { return true; }, function () { return false; });
+      return false;
+    }, function () { return false; });
   }
+  // Leaving a lesson: keep the model loaded for ms (default 2 min) so the next lesson starts at once, then release it.
+  function wake() { if (idleT) { G.clearTimeout(idleT); idleT = 0; } }
+  function idle(ms) { stop(); wake(); idleT = G.setTimeout(function () { idleT = 0; release(); }, ms || 120000); }
   function unlock() {
     if (!audio) { audio = new G.Audio(); audio.preload = "auto"; }
     try { audio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAwF0AAICuAAACABAAZGF0YQAAAAA="; var pr = audio.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
   }
-  function stop() { tok++; try { if (audio) { audio.pause(); audio.removeAttribute("src"); } } catch (e) {} try { if (ctl) ctl.abort(); } catch (e) {} if (cur) { cur(); cur = null; } }
+  function stop() {
+    tok++;
+    try { if (audio) { audio.pause(); audio.removeAttribute("src"); } } catch (e) {}
+    if (saying) { var e = memo[saying]; if (e) { e.want = false; if (!e.done) { cancel(e); delete memo[saying]; } } saying = null; }
+    if (cur) { cur(); cur = null; }
+  }
   function say(text, rate) {
     if (st.s !== "ready") return Promise.reject(new Error("not ready"));
-    var my = ++tok;
-    return synth(text).then(function (wave) {
+    wake();
+    var my = ++tok, e = synth(text);
+    e.want = true; saying = text;
+    return e.p.then(function (wave) {
+      if (memo[text] === e) e.want = false;
       if (my !== tok) return;
       return new Promise(function (res, rej) {
         if (!audio) audio = new G.Audio();
@@ -114,7 +144,8 @@
   }
   function release() {
     stop();
-    var t = tts; tts = null; boot = null; memo = {}; keys = []; cbs = [];
+    wake();
+    var t = tts; tts = null; boot = null; memo = {}; keys = []; cbs = []; pre = null; saying = null;
     if (st.s === "ready" || st.s === "loading") st = { s: "none", p: 0, err: "", rtf: st.rtf };
     try { if (t && t.dispose) t.dispose(); } catch (e) {}
   }
@@ -125,7 +156,7 @@
   G.PREP_VOICE = {
     available: can, state: function () { return st.s; }, progress: function () { return st.p; }, error: function () { return st.err; },
     ready: function () { return st.s === "ready"; }, usable: function () { return st.s === "ready" && !(st.rtf > RTF_MAX); }, rtf: function () { return st.rtf || 0; },
-    download: download, init: init, saved: saved, unlock: unlock, say: say, prefetch: function (t) { if (st.s === "ready") synth(t).catch(function () {}); },
-    stop: stop, release: release, remove: remove, _pure: PURE
+    download: download, init: init, saved: saved, unlock: unlock, say: say, prefetch: prefetch,
+    stop: stop, idle: idle, release: release, remove: remove, _pure: PURE
   };
 })(typeof window !== "undefined" ? window : this);

@@ -319,13 +319,15 @@
     var m = e.target.closest && e.target.closest("mark.smd-hl");
     var s = G.getSelection && G.getSelection();
     // A drug name, link or control inside a highlight keeps its own tap.
-    if (m && e.target.closest("a,button,[data-act],.smd-drug,[role=button]")) m = null;
+    var ctl = m && e.target.closest("a,button,[data-act],.smd-drug,[role=button]");
+    if (ctl && m.contains(ctl)) m = null;
     if (m && (!s || s.isCollapsed)) {
       var root = rootOf(m); if (!root) return;
       var key = root.getAttribute("data-hl-key"), rec = recOf(key, m.getAttribute("data-hl-id")); if (!rec) return;
       cur = { root: root, key: key, id: rec.id, rect: markRect(root, rec.id) };
       drawPal(rec);
       place(cur.rect());
+      e.stopPropagation();   // the palette owns this tap (a lesson sentence under it would otherwise start reading)
       return;
     }
     if (cur && (!s || s.isCollapsed)) hide();

@@ -166,7 +166,15 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   later loads), and `navigator.storage.persist()` asks the phone not to evict the Cache API copy. A voice downloaded
   before loads when a lesson opens and is released when it closes. No model name or voice switch is shown anywhere.
   Read-along: the sentence being spoken is highlighted (`.pn-sent.on`), mapped from spoken pieces to displayed sentences
-  by `alignSay` (word overlap, monotonic). After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  by `alignSay` (word overlap, monotonic).
+  **Start without the wait (owner 2026-11-13, "takes 5 sec"):** each page's first spoken piece is rendered as soon as the
+  page shows (`primeVoice` -> `PREP_VOICE.prefetch`, also once `init()` resolves on open), every render has its own
+  AbortController so the Play tap's `stop()` cancels only the sentence being spoken (it used to abort the ahead-render),
+  and `leave()` calls `idle(120000)`: the model stays loaded 2 minutes, then is released (`release()` still frees it at
+  once). **Tap to read:** each `.pn-sent` and a table / flow / figure `.pn-vis` carry `data-act="l-say"` (`data-k`, -2 =
+  the visual); `readFrom(k)` starts reading at the first spoken piece mapped to it (`narrate(from)`), playing or not.
+  A tap on a text highlight opens its palette only (`text-highlight.js` stops that click). Tests:
+  `test/run-prep-lessons-voice-ui.mjs`, `test/run-prep-voice-ui.mjs`. Not timed on a phone. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
   real time and `usable()` is false, so the lesson uses the system voice rather than stall between sentences; the system voice is otherwise only the fallback when Phonon cannot load. Each
   sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
   the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.
