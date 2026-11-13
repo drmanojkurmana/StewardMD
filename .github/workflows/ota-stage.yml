@@ -34,6 +34,12 @@ jobs:
         run: npm install -g wrangler@4.107.0   # pinned to match .github/workflows/deploy-worker.yml
       - name: Build www/
         run: npm run build:www
+        env:
+          # Encrypt bundled kb/, data/, prep/{lessons,bank,nucleus360} JSON (tools/encrypt-bundle.mjs, PR #2469).
+          CONTENT_ENCRYPT: "1"
+          SMD_RELEASE: "1"
+          SMD_CONTENT_KEY: ${{ secrets.SMD_CONTENT_KEY }}
+          SMD_CONTENT_KEY_ID: ${{ secrets.SMD_CONTENT_KEY_ID }}
       - name: Stage to R2 (candidate only — does not go live)
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
