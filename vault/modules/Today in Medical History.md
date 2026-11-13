@@ -5,7 +5,9 @@ flag: localStorage smd_today_history (default ON; "0" or ?todayhistory=0 turns i
 ---
 # Today in Medical History
 
-Owner, 2026-11-13: a 366-day dataset (670 events, leap day included) and "today in medical history" on Home.
+Owner, 2026-11-13: a 366-day world dataset (670 events, leap day included) plus an India dataset (211 events on
+158 days, merged by `build-history.mjs`: `in:1`, an "India" tag in the sheet and on the banner; an India write-up
+replaces a world copy of the same event, 3 cases; 878 events in all) and "today in medical history" on Home.
 First built as a chip beside the home date; the owner then asked for the **Pro banner to flip** instead:
 history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mock-up set the history face layout.
 
@@ -23,9 +25,12 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   one amber highlight, on PURE BLACK. `.th-face-pic` has `mix-blend-mode: screen`, so the black disappears on every
   theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
   box shows (it did, first try).
-- Producing them: `scripts/history/image-prompts.mjs` writes `data/history/image-prompts.csv` (priority 1 = one
-  featured event per day, 366; priority 2 = the second event, 304, optional), each row a full prompt and its file
-  name. `scripts/history/import-images.sh <folder>` converts PNG/JPG to 480x360 WebP and rebuilds the month files.
+- Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE hand-picked
+  subject per day (366; India's event where it reads well as a picture; never a face). `scripts/history/image-prompts.mjs`
+  turns it into `data/history/gemini/`: `1-START-HERE.md` (paste once), `batches.md` (37 batches of 10), and
+  `image-prompts.csv`. Gemini cannot zip images without code: the owner downloads each batch and uploads it here.
+  `scripts/history/import-images.sh --batch N <folder>` names Gemini's random file names by save order; or pass a
+  folder of files already named `MM-DD-YYYY.png`. Both convert to 480x360 WebP and rebuild the month files.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.

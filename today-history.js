@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th4";
+  var FLAG = "smd_today_history", VER = "th5";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -89,7 +89,7 @@
       '<div class="th-face-txt">' +
         '<div class="th-face-ey">' + t.d + " " + MONTHS[t.m - 1].toUpperCase() + '<span class="th-dot" aria-hidden="true"></span><span class="th-face-lg">This day in medical history</span><span class="th-face-sm">This day in history</span></div>' +
         '<div class="th-face-tt">' + esc(e.t) + '</div>' +
-        '<div class="th-face-yr">' + CAL + esc(e.y) + '</div>' +
+        '<div class="th-face-yr">' + CAL + esc(e.y) + (e.in ? '<span class="th-face-in">India</span>' : '') + '</div>' +
         '<div class="th-face-sm-txt">' + esc(e.s) + '</div>' +
       '</div>' +
       '<div class="th-face-go">Tap to explore<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></div>';
@@ -182,7 +182,8 @@
     var t = todayKey();
     eventsFor(t.m, t.d).then(function (evs) {
       // the event with a picture leads; the rest keep their order
-      todays = (evs || []).slice().sort(function (a, b) { return (b.img ? 1 : 0) - (a.img ? 1 : 0); });
+      // the event with a picture leads, then India's; otherwise oldest first
+      todays = (evs || []).slice().sort(function (a, b) { return ((b.img ? 2 : 0) + (b.in ? 1 : 0)) - ((a.img ? 2 : 0) + (a.in ? 1 : 0)); });
       if (todays.length) timer = setTimeout(tick, FACE_MS);           // the front face gets its 5 s first
     }).catch(function () {});
     D.addEventListener("visibilitychange", function () {
@@ -199,7 +200,7 @@
     return '<li class="th-ev">' +
       '<div class="th-yr">' + esc(e.y) + '</div>' +
       '<div class="th-bd">' +
-        '<div class="th-tags"><span class="th-cat">' + esc(e.c) + '</span>' + (e.sp ? '<span class="th-sp">' + esc(e.sp) + '</span>' : '') + '</div>' +
+        '<div class="th-tags">' + (e.in ? '<span class="th-in">India</span>' : '') + '<span class="th-cat">' + esc(e.c) + '</span>' + (e.sp ? '<span class="th-sp">' + esc(e.sp) + '</span>' : '') + '</div>' +
         '<h3 class="th-tt">' + esc(e.t) + '</h3>' +
         '<p class="th-sm">' + esc(e.s) + '</p>' +
         (u ? '<a class="th-src" href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">Source: ' + esc(h) + '</a>' : '') +

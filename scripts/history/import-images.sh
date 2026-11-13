@@ -1,18 +1,27 @@
 #!/usr/bin/env bash
-# Today in Medical History: convert generated images (PNG/JPG/WEBP named MM-DD-YYYY.*) into the app's
-# banner pictures: 480x360 WebP on pure black, about 15-25 KB each, in data/history/img/. Then rebuilds the
-# month files so each event knows its picture.  Usage: scripts/history/import-images.sh <folder>
+# Today in Medical History: turn generated pictures into the app's banner images (480x360 WebP, about 15-25 KB,
+# pure black kept: the app screen-blends it away) in data/history/img/, then rebuild the month files.
+#   scripts/history/import-images.sh <folder>              files already named MM-DD-YYYY(.png/.jpg/.webp)
+#   scripts/history/import-images.sh --batch N <folder>    Gemini downloads with random names: matched to
+#                                                          Batch N of data/history/gemini/batches.md by the
+#                                                          order they were saved (oldest first)
 set -euo pipefail
-SRC="${1:?folder of images}"; ROOT="$(cd "$(dirname "$0")/../.." && pwd)"; OUT="$ROOT/data/history/img"
-mkdir -p "$OUT"; n=0; bad=0
-for f in "$SRC"/*.{png,PNG,jpg,JPG,jpeg,webp}; do
-  [ -f "$f" ] || continue
-  b="$(basename "${f%.*}")"
-  if ! [[ "$b" =~ ^[01][0-9]-[0-3][0-9]-[0-9]{3,4}$ ]]; then echo "skip (name is not MM-DD-YYYY): $f"; bad=$((bad+1)); continue; fi
-  # fit inside 480x360, pad with black (the app screen-blends it, so black disappears on every theme)
-  ffmpeg -y -loglevel error -i "$f" -vf "scale=480:360:force_original_aspect_ratio=decrease,pad=480:360:(ow-iw)/2:(oh-ih)/2:black,format=yuv420p" \
-    -c:v libwebp -quality 72 -compression_level 6 "$OUT/$b.webp"
-  n=$((n+1))
-done
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"; OUT="$ROOT/data/history/img"; BATCH=""
+if [ "${1:-}" = "--batch" ]; then BATCH="$2"; shift 2; fi
+SRC="${1:?folder of images}"; mkdir -p "$OUT"; n=0; bad=0
+conv() { ffmpeg -y -loglevel error -i "$1" -vf "scale=480:360:force_original_aspect_ratio=decrease,pad=480:360:(ow-iw)/2:(oh-ih)/2:black,format=yuv420p" -c:v libwebp -quality 72 -compression_level 6 "$OUT/$2.webp"; }
+if [ -n "$BATCH" ]; then
+  mapfile -t NAMES < <(grep -v '^#' "$ROOT/data/history/image-subjects.txt" | grep . | sed -n "$(( (BATCH-1)*10 + 1 )),$(( BATCH*10 ))p" | awk -F'|' '{print $1"-"$2}')
+  mapfile -t FILES < <(ls -tr "$SRC" | grep -iE '\.(png|jpe?g|webp)$')
+  if [ "${#FILES[@]}" -ne "${#NAMES[@]}" ]; then echo "batch $BATCH has ${#NAMES[@]} days but the folder has ${#FILES[@]} images"; exit 1; fi
+  for i in "${!FILES[@]}"; do conv "$SRC/${FILES[$i]}" "${NAMES[$i]}"; echo "${FILES[$i]} -> ${NAMES[$i]}.webp"; n=$((n+1)); done
+else
+  for f in "$SRC"/*.{png,PNG,jpg,JPG,jpeg,webp}; do
+    [ -f "$f" ] || continue
+    b="$(basename "${f%.*}")"
+    if ! [[ "$b" =~ ^[01][0-9]-[0-3][0-9]-[0-9]{3,4}b?$ ]]; then echo "skip (name is not MM-DD-YYYY): $f"; bad=$((bad+1)); continue; fi
+    conv "$f" "$b"; n=$((n+1))
+  done
+fi
 node "$ROOT/scripts/history/build-history.mjs"
-echo "imported $n, skipped $bad, total size: $(du -sh "$OUT" | cut -f1)"
+echo "imported $n, skipped $bad, total: $(du -sh "$OUT" | cut -f1)"

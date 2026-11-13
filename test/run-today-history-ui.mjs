@@ -104,6 +104,10 @@ try {
   ok(await until(`document.getElementById('thDate').textContent==='1 March'`, 3000), 'then 1 March');
   await ev(`SMD_todayHistory.open(1,1);1`); await click('#thSheet .th-step[data-step="-1"]');
   ok(await until(`document.getElementById('thDate').textContent==='31 December' && document.querySelectorAll('#thSheet .th-ev').length>0`, 5000), 'wraps 1 January back to 31 December');
+  await ev(`SMD_todayHistory.open(8,20);1`);
+  ok(await until(`[...document.querySelectorAll('#thSheet .th-ev')].some(li=>li.querySelector('.th-in')&&/1897/.test(li.innerText)&&/Secunderabad/.test(li.innerText))`, 5000), 'India event tagged India (Ross, Secunderabad, 1897)');
+  ok(await ev(`[...document.querySelectorAll('#thSheet .th-yr')].filter(y=>y.textContent==='1897').length===1`), 'the world copy of the same event is not repeated');
+  await sleep(400); await shot('05-sheet-india');
   // 6. Escape closes; focus goes back to the date.
   await call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
   await call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
