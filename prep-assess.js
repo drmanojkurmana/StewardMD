@@ -192,7 +192,10 @@
     /\bidentify (?:the|this) (?:instrument|structure|bone|specimen|lesion|device|tool|organ|pattern|appearance|sign)\b/i,
     /\b(?:shown|marked|indicated|pointed|labell?ed)(?: out)? (?:by|with) (?:an? |the )?(?:[a-z]+ )?arrows?\b|\barrow (?:head )?(?:points?|marks?|shows?)\b/i,
     /\b(?:marked|labell?ed)(?: as)? ['"(]?[A-Z]['")]?(?=[\s,.?]|$)|\blettered structure\b/,
-    /\bthe given (?:below |above )?(?:condition|lesion|rash|appearance|finding|sign|structure|procedure|technique|maneuver|manoeuvre)\b/i
+    /\bthe given (?:below |above )?(?:condition|lesion|rash|appearance|finding|sign|structure|procedure|technique|maneuver|manoeuvre)\b/i,
+    /* "You are shown an MLO view of the left breast" (tester 2026-11-12, Q-48J-SJ4-MA3) */
+    /\byou are (?:being )?shown\b/i,
+    /\b(?:is|are|you) shown (?:an?|the|this) (?:[a-z-]+ ){0,3}views?\b/i
   ];
   var IMG_GIVEN = /\b(?:is|are) (?:given|provided)\s*[.:]/i, IMG_NOUN = new RegExp("\\b" + IMG_N + "\\b", "i");
   function needsImage(it) {
