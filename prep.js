@@ -1633,6 +1633,12 @@
       var pid = st.pendId; st.pendId = null;
       if (pid && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(pid, HOST); }
       else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); if (opts.module) push(function () { renderModule(opts.subject, opts.module); }); }
+      // A lesson at one step (the Image Library's "Open the lesson"): home, its subject, then the lesson. Back walks out.
+      else if (opts && opts.lesson && opts.lesson.s && G.PREP_LESSONS && G.PREP_LESSONS.openAt) {
+        var lz = opts.lesson; st.stack = [renderHome];
+        if (subjectById(lz.s)) push(function () { renderSubject(lz.s); });
+        G.PREP_LESSONS.openAt(lz.s, lz.m, HOST, lz.key, lz.step);
+      }
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);

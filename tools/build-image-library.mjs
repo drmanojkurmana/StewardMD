@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { placement } from "../kb/tools/kb-placement.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -72,6 +73,8 @@ function normJoin(base, file) {
   for (const p of parts) { if (p === "..") out.pop(); else if (p && p !== ".") out.push(p); }
   return "/" + out.join("/");
 }
+const STOP = new Set(["the", "and", "of", "in", "with", "for", "to", "a", "an", "on", "by", "from", "its", "case", "long", "short"]);
+function words(t) { return new Set(String(t || "").toLowerCase().split(/[^a-z0-9]+/).filter((x) => x.length > 2 && !STOP.has(x))); }
 function readJSON(p) { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch { return null; } }
 function listJSON(dir) {
   try { return fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort(); } catch { return []; }
@@ -139,6 +142,43 @@ export function buildAll(root = ROOT) {
   }
   const subjectName = (id) => taxSubjects[id] || String(id || "General").replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 
+  /* Where every image can be read (owner 2026-11-13): the PrepNucleus lesson that shows it (opened for Pro) and the
+     Knowledge Library article that holds it (kb-placement.mjs: the shipped article, never a bare unbundled page).
+     Lessons reuse KB figure files, so both are keyed by the image URL. */
+  const P = placement(root);
+  const lessonBySrc = new Map(), articleBySrc = new Map();
+  for (const f of listJSON(path.join(root, "prep/lessons/v1"))) {
+    if (f === "index.json") continue;
+    const d = readJSON(path.join(root, "prep/lessons/v1", f));
+    if (!d || !Array.isArray(d.steps) || !d.module || !d.subject) continue;
+    d.steps.forEach((st, i) => {
+      const v = st && st.vis;
+      if (!v || v.kind !== "image" || !v.src) return;
+      const u = bankUrl(v.src);
+      if (!lessonBySrc.has(u)) lessonBySrc.set(u, []);
+      lessonBySrc.get(u).push({ ls: f.replace(/\.json$/, ""), lm: d.module, lsj: d.subject, lst: i, words: words(d.title) });
+    });
+  }
+  for (const dir of ["kb/diseases", "kb/reference"]) {
+    for (const f of listJSON(path.join(root, dir))) {
+      const d = readJSON(path.join(root, dir, f));
+      if (!d || !d.id || !Array.isArray(d.figures)) continue;
+      const t = P.target(d.id); if (!t) continue;
+      for (const fig of d.figures) if (fig && fig.type === "image" && fig.src) { const u = bankUrl(fig.src); if (!articleBySrc.has(u) || t === d.id) articleBySrc.set(u, t); }
+    }
+  }
+  // Several lessons can reuse one image: the one whose title shares most words with the image's title and caption.
+  const links = (u, text) => {
+    const o = {}, all = lessonBySrc.get(u) || [], ka = articleBySrc.get(u), w = words(text);
+    let ls = null, best = -1;
+    for (const l of all) { let n = 0; for (const x of l.words) if (w.has(x)) n++; if (n > best) { best = n; ls = l; } }
+    if (ls) { o.ls = ls.ls; o.lm = ls.lm; o.lsj = ls.lsj; o.lst = ls.lst; }
+    if (ka) { o.ka = ka; o.kn = clean(P.name(ka)); }
+    return o;
+  };
+  const push0 = push;
+  const pushL = (e) => push0(Object.assign(e, links(e.s, e.t + " " + e.c + " " + (e.rn || ""))));
+
   /* 1. Knowledge Library figures (kb/reference + kb/diseases figures[] type image) */
   for (const dir of ["kb/reference", "kb/diseases"]) {
     for (const f of listJSON(path.join(root, dir))) {
@@ -149,7 +189,7 @@ export function buildAll(root = ROOT) {
         if (!fig || fig.type !== "image" || !/^v\d{1,3}\/kb\/media\/[a-z0-9-]{2,80}\.webp$/.test(String(fig.src || ""))) continue;
         const cap = captionOf(fig);
         if (!cap) continue;
-        push({ s: bankUrl(fig.src), t: clean(fig.title) || clean(d.name), c: cap, a: clean(fig.alt),
+        pushL({ s: bankUrl(fig.src), t: clean(fig.title) || clean(d.name), c: cap, a: clean(fig.alt),
           ar: Number(fig.ar) || null, k: kindOf(fig.title + " " + cap, "Illustration"),
           o: originOf(fig.caption + " " + (fig.licence || "")), f: "Library", ri: d.id, rn: clean(d.name),
           cr: "", li: "", lk: "kb", sys: slugify(system), sysName: sysName(slugify(system), system) });
@@ -168,7 +208,7 @@ export function buildAll(root = ROOT) {
       if (!v || v.kind !== "image" || !v.src) return;
       const cap = captionOf(v);
       if (!cap) return;
-      push({ s: bankUrl(v.src), t: clean(d.title), c: cap, a: clean(v.alt), ar: Number(v.ar) || null,
+      pushL({ s: bankUrl(v.src), t: clean(d.title), c: cap, a: clean(v.alt), ar: Number(v.ar) || null,
         k: kindOf(cap, "Illustration"), o: originOf(cap), f: "Lessons", ri: d.module || f.replace(/\.json$/, ""),
         rn: clean(d.title), cr: "", li: "", lk: "lesson", sys: slugify(system), sysName: system, step: i });
     });

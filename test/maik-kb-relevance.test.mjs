@@ -204,7 +204,7 @@ const CASES = [
   ["hepatitis b treatment", /hepatitis b/i, 1],
   ["how to write a prescription", N],
   ["explain the frank starling law", N],
-  ["what is the henderson hasselbalch equation", N],
+  ["what is the henderson hasselbalch equation", /^acid_base_disorders_and_anion_gap\|/],   // 2026-11-13: the KB now has an article for this (was no notes)
   ["difference between sensitivity and specificity", N],
   ["what is a p value", N],
   ["how to insert a central line", N],
@@ -216,7 +216,7 @@ const CASES = [
   ["how to calculate creatinine clearance", N],
   ["mechanism of action of metformin", N],
   ["what is the capital of france", N],
-  ["what is the anion gap", N],
+  ["what is the anion gap", /^acid_base_disorders_and_anion_gap\|/],   // 2026-11-13: the KB now has an article for this (was no notes)
   ["how to interpret an abg", N],
   ["what is a normal heart rate", N],
   ["half life of digoxin", /digoxin/i, 1],
@@ -237,7 +237,7 @@ const CASES = [
   ["dose of ceftriaxone in meningitis", /mening/i],
   ["steroids in septic shock", /septic shock/i],
   ["when to intubate in guillain barre", /guillain/i],
-  ["insulin infusion rate in dka", /ketoacidosis/i],
+  ["insulin infusion rate in dka", /ketoacidosis|^insulin_types_regimens_dka/i],   // 2026-11-13: the sister article added with the KB rebuild covers this too
   ["red flags in headache", /headache/i, 1],
   ["workup of pyrexia of unknown origin", /unknown origin/i],
   ["management of acute asthma in children", /asthma/i],
@@ -248,7 +248,7 @@ const CASES = [
   ["treatment of scabies", /scabies/i],
   ["management of acute appendicitis", /appendicitis/i],
   ["diverticulitis antibiotics", /diverticul/i, 1],
-  ["acute otitis media treatment", /^acute_otitis_media\|/],
+  ["acute otitis media treatment", /^acute_otitis_media(_and_effusion)?\|/],   // 2026-11-13: the sister article added with the KB rebuild covers this too
   ["strep throat antibiotics", /pharyngitis/i, 1],
   ["influenza oseltamivir dose", /influenza/i],
   ["covid 19 treatment", /covid/i],
@@ -269,7 +269,7 @@ const CASES = [
   ["alcoholic hepatitis steroids", /alcoholic hepatitis/i, 1],
   ["cirrhosis ascites management", /cirrhosis/i],
   ["acute liver failure causes", /liver failure/i],
-  ["wilson disease treatment", /^wilsons_disease\|/],
+  ["wilson disease treatment", /^wilsons_disease\||\bwilson disease\b/i],   // 2026-11-13: the sister article added with the KB rebuild covers this too
   ["hemochromatosis", /h(a)?emochromatosis/i],
   ["pancreatitis fluids", /pancreatitis/i],
   ["ulcerative colitis flare", /ulcerative colitis/i, 1],
@@ -281,7 +281,7 @@ const CASES = [
   ["thalassemia transfusion", /thalass/i, 1],
   ["aplastic anemia", /aplastic/i],
   ["multiple myeloma treatment", /myeloma/i],
-  ["hodgkin lymphoma", /^hodgkin_lymphoma\|/],
+  ["hodgkin lymphoma", /^hodgkin_lymphoma(_reed_sternberg_and_staging)?\|/],   // 2026-11-13: the sister article added with the KB rebuild covers this too
   ["tumor lysis syndrome", /lysis/i, 1],
   ["hypercalcemia of malignancy", /hypercalc/i],
   ["addison disease", /adrenal|addison/i],
@@ -332,7 +332,7 @@ const CASES = [
   ["high potassium treatment", /hyperkal/i, 1],
   ["low sodium", /hyponat/i, 1],
   ["sugar control in icu", /diabet|hypoglyc|hyperglyc/i, 1],
-  ["insulin dose calculation", N],
+  ["insulin dose calculation", /^insulin_types_regimens_dka_hypoglycaemia\|/],   // 2026-11-13: the KB now has an article for this (was no notes)
   ["tell me about ebola", /ebola/i],
   ["what is kyasanur forest disease", /kyasanur/i],
   ["nipah virus", /nipah/i],
@@ -369,7 +369,7 @@ const CASES = [
   ["epididymitis treatment", /epididym/i, 1],
   ["necrotising pancreatitis antibiotics", /pancreatitis/i, 1],
   ["acute mesenteric ischemia", /mesenteric/i, 1],
-  ["small bowel obstruction management", /bowel obstruction/i, 1],
+  ["small bowel obstruction management", /bowel[ _]obstruction/i, 1],   // 2026-11-13: the sister article added with the KB rebuild covers this too
   ["perforated peptic ulcer", /peptic ulcer|perforat/i, 1],
   ["hepatorenal syndrome", /hepatorenal/i, 1],
   ["portal vein thrombosis", /portal vein/i, 1],
@@ -471,8 +471,10 @@ async function score(gate) {
     const g = (p.grounding || [])[0];
     const cls = !g ? (accept === N || noneOk ? "abstain" : "miss") : (ok(g.diseaseId, g.name) ? "correct" : "misroute");
     t[cls]++;
-    (p.grounding || []).forEach((x) => { if (!ok(x.diseaseId, x.name)) (x.knowledge || []).forEach((c) => { t.off += String(c.text || "").length; }); });
-    (p.retrieved || []).forEach((c) => { if (!ok(c.diseaseId)) t.off += String(c.text || "").length; });
+    const off0 = t.off, offIds = new Set();
+    (p.grounding || []).forEach((x) => { if (!ok(x.diseaseId, x.name)) (x.knowledge || []).forEach((c) => { t.off += String(c.text || "").length; offIds.add(x.diseaseId); }); });
+    (p.retrieved || []).forEach((c) => { if (!ok(c.diseaseId)) { t.off += String(c.text || "").length; offIds.add(c.diseaseId); } });
+    if (t.off > off0) (t.offQ = t.offQ || []).push(q + " -> " + [...offIds].join(", ") + " (" + (t.off - off0) + " chars)");
     if (cls === "miss" || cls === "misroute") t.bad.push(cls + ": " + q + " -> " + (g ? g.diseaseId + " (" + g.name + ")" : "no notes"));
   }
   delete LS.smd_kb_gate;
@@ -485,6 +487,7 @@ console.log("\nKB relevance benchmark: " + CASES.length + " standalone questions
 console.log(row("name (default)", nameGate));
 console.log(row("legacy (smd_kb_gate=0)", legacy));
 nameGate.bad.forEach((b) => console.log("  name gate " + b));
+(nameGate.offQ || []).forEach((b) => console.log("  name gate off-topic: " + b));
 
 test("name gate: every question gets the notes it asked for, or none", () => {
   assert.deepEqual(nameGate.bad, []);

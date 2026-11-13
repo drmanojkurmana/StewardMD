@@ -10,7 +10,8 @@
  *    kb/ai/ambig-abbrev.js (window.MAIK_AMBIG), plus initialisms built from each entry name.
  *  - Typos: tokens of 5+ characters that match no name/alias word are matched against the name/alias
  *    vocabulary at edit distance 1 (5 to 7 chars) or 2 (8+ chars). Transposition counts as one edit.
- *  - Ranking: exact name 1000 > exact alias 900 > name prefix 800 > alias prefix 650 > name words
+ *  - Ranking: exact name 1000 > exact alias 900 > name prefix 800 (reference article 780; a diagnostic name ending
+ *    with the phrase 790) > alias prefix 650 > name words
  *    (700 phrase, 600 all tokens) > alias words 520 > name-initialism 500 > typo 350 > partly body
  *    250 > body 100. Ties: core (non reference-only) entries first, then shorter name, then A-Z.
  *  - Built once (buildIndex), cached by the caller.
@@ -261,6 +262,7 @@
 
   /* ---- search ---------------------------------------------------------------------------- */
   function startsWith(s, p) { return s.lastIndexOf(p, 0) === 0; }
+  function endsWith(s, p) { return s.length >= p.length && s.indexOf(" " + p, s.length - p.length - 1) >= 0; }
   function hasWord(list, t) {
     for (var i = 0; i < list.length; i++) { var w = list[i]; if (w === t || (t.length >= 2 && startsWith(w, t))) return true; }
     return false;
@@ -312,7 +314,7 @@
     if (e.nameN === v || e.baseN === v) return 1000;
     if (e.aliasSet[v]) return 900;
     if (v.length >= 2) {
-      if (startsWith(e.nameN, v)) return 800;
+      if (startsWith(e.nameN, v)) return e.ref ? 780 : 800;
       for (var a = 0; a < e.aliasN.length; a++) if (v.length >= 3 && startsWith(e.aliasN[a], v)) return 650;
     }
     var allName = true, allNA = true, anyF = false, anyB = false, anyNA = false, t, i;
@@ -327,7 +329,11 @@
       if (inBody(e, t)) { anyB = true; continue; }
       return -1;   // gate: this token is nowhere in the entry
     }
-    if (allName) return e.nameN.indexOf(v) >= 0 ? 700 : 600;
+    // A diagnostic article whose name ENDS with the phrase, its head noun ("Acute Sinusitis (Rhinosinusitis)" for "sinusitis")
+    // (790) stays above a reference article that merely starts with it ("Sinusitis and Its Complications", 780), and
+    // below a diagnostic article that starts with it (800): the diagnostic page is the one a search for the condition
+    // means. Needed once the 2026-11-13 rebuild added ~600 reference articles with broad titles.
+    if (allName) return e.nameN.indexOf(v) >= 0 ? (!e.ref && endsWith(e.baseN, v) ? 790 : 700) : 600;
     if (allNA) return 520;
     if (anyF) return anyB ? 300 : 350;
     return anyNA ? 250 : 100;

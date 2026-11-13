@@ -467,7 +467,10 @@
       forms[id] = f; own[id] = o;
       f.forEach(function (t) { var l = first[t[0]] || (first[t[0]] = []); if (l.indexOf(id) < 0) l.push(id); });
     });
-    return (_gate = { forms: forms, first: first, own: own, known: words, words: Object.keys(words).filter(function (w) { return w.length >= 5; }) });
+    // A compound title ("Hodgkin Lymphoma: Reed-Sternberg Cells and Staging", "Acute Otitis Media and Otitis Media with
+    // Effusion") is an overview: on an equal-length hit the article named for the condition alone goes first.
+    var multi = {}; Object.keys(names).forEach(function (id) { multi[id] = /[:,;]|\s(and|with|&)\s/i.test(String(names[id])); });
+    return (_gate = { forms: forms, first: first, own: own, multi: multi, known: words, words: Object.keys(words).filter(function (w) { return w.length >= 5; }) });
   }
   function ownWord(w, own) {
     if (own[w]) return true;
@@ -503,11 +506,12 @@
     var raw = rawToks(question), qa = raw.map(foldTok), lex = [];
     (retrieved || []).forEach(function (r) { if (r && r.diseaseId && lex.indexOf(r.diseaseId) < 0) lex.push(r.diseaseId); });
     var topic = raw.filter(function (t, j) { return (t.length >= 3 || acro[t]) && !plainWord(qa[j]); }).join(" ") || String(question).trim();
-    function best(hits) {   // the longest name wins; a tie goes to the lexical retriever's order
-      var b = null;
+    function best(hits) {   // the longest name wins; a tie goes to a single-condition title, then the lexical retriever's order
+      var b = null, M = gateIndex().multi || {};
       Object.keys(hits).forEach(function (id) {
         var r = lex.indexOf(id); r = r < 0 ? 1e9 : r;
-        if (!b || hits[id] > b.s || (hits[id] === b.s && r < b.r)) b = { id: id, s: hits[id], r: r };
+        var m = M[id] ? 1 : 0;
+        if (!b || hits[id] > b.s || (hits[id] === b.s && (m < b.m || (m === b.m && r < b.r)))) b = { id: id, s: hits[id], r: r, m: m };
       });
       return b;
     }
