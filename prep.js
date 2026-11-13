@@ -570,6 +570,9 @@
      become tags. Old MedMCQA explanations use "*" as an inline bullet ("*Corkscrew ... *Represents ..."): legacyExp
      turns two or more of those into list lines and drops a lone leading one. */
   function escH(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  /* Strip per-user bank watermark zero-width marks (server embeds them in explanations). Use for TTS,
+   * search/figure matching and any compare; leave them in the HTML render so copy-paste still carries the mark. */
+  function stripWmMarks(s) { return String(s == null ? "" : s).replace(/[\u200b\u200c\u200d\u2060\ufeff]/g, ""); }
   function inlineMd(s) { return escH(s).replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, "<b>$1</b>").replace(/\*/g, ""); }
   function cellsOf(l) { return l.trim().replace(/^\|/, "").replace(/\|\s*$/, "").split("|").map(function (c) { return c.trim(); }); }
   var TBL_SEP = /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
@@ -2694,7 +2697,7 @@
   function figRowHtml(it) {
     var F = G.SMD_FIG;
     if (!F || !F.matchText || !it || it._gone) return "";
-    var txt = [it.q, (it.o || []).join(" "), it.exp, it.kp].join(" "), m = F.matchText(txt, 1)[0];
+    var txt = [it.q, (it.o || []).join(" "), stripWmMarks(it.exp), it.kp].join(" "), m = F.matchText(txt, 1)[0];
     return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open") + "</div>" : "";
   }
   function pearlHtml(it, xo) {
@@ -3952,7 +3955,7 @@
     ids.forEach(function (id) {
       var b = s.bm[id]; if (!b) return;
       var it = cache[id], sb = subjectById(b[0]), t = topicOf(b[0], b[1]), e = bmEntry(bmx, id), at = bma[id];
-      var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(it.exp, 300)) : "";
+      var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(stripWmMarks(it.exp), 300)) : "";
       var tgs = e ? e.tg.filter(function (tg) { return bmt[tg]; }) : [];
       aux[id] = { t: text.toLowerCase(), s: bmPlain(sb && sb.name).toLowerCase(), sid: b[0],
         tp: (t ? bmPlain(t.title) : bmPlain(b[1])).toLowerCase(), tid: b[1], tg: tgs,

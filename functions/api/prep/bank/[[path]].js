@@ -14,6 +14,9 @@
  * 6. Public paths: lessons and cards (v<n>/lessons/..., v<n>/cards/...), image-credits.json,
  *    and health probe stay public.
  * 7. Rollout safety: PREP_BANK_ENFORCE env var (default OFF = shadow logging; 1 = enforce).
+ * 8. Per-user watermark (WATERMARK_SECRET): gated JSON for a signed-in user gets invisible
+ *    zero-width marks + one whitespace variant in explanation fields only (_prep_watermark.js).
+ *    Missing secret -> unmarked + one log line; public / tool-token / image paths stay unmarked.
  */
 
 import { identify, sha256hex } from "../../../_usage.js";
@@ -32,6 +35,7 @@ import {
   signImagePath,
   resetBankGateMemory,
 } from "../../../_prep_bank_gate.js";
+import { watermarkJsonText } from "../../../_prep_watermark.js";
 
 // Re-export helpers for consumers and tests
 export {
@@ -133,48 +137,85 @@ export function bankPath(params) {
     : null;
 }
 
-async function serveR2Object(env, p, request, cacheControl) {
+function contentTypeFor(p, obj) {
+  if (/\.webp$/.test(p)) {
+    return obj && obj.httpMetadata && /^image\/(?:webp|jpeg|png)$/.test(obj.httpMetadata.contentType || "")
+      ? obj.httpMetadata.contentType
+      : "image/webp";
+  }
+  if (/\.svg$/.test(p)) return "image/svg+xml";
+  if (/\.i8$/.test(p)) return "application/octet-stream";
+  return "application/json; charset=utf-8";
+}
+
+async function getBankObject(env, p) {
   const bucket = env && env.PREP_BANK_R2;
   if (!bucket || !bucket.get) {
-    return new Response(JSON.stringify({ error: "bank-not-configured" }), {
-      status: 503,
-      headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
-    });
+    return {
+      error: new Response(JSON.stringify({ error: "bank-not-configured" }), {
+        status: 503,
+        headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+      }),
+    };
   }
-
-  let obj = null;
   try {
-    obj = await bucket.get(PREFIX + p);
+    const obj = await bucket.get(PREFIX + p);
+    if (!obj) return { error: notFound() };
+    return { obj };
   } catch (e) {
-    return new Response(JSON.stringify({ error: "bank-unavailable" }), {
-      status: 503,
-      headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Retry-After": "5" },
-    });
+    return {
+      error: new Response(JSON.stringify({ error: "bank-unavailable" }), {
+        status: 503,
+        headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Retry-After": "5" },
+      }),
+    };
   }
-  if (!obj) return notFound();
+}
 
+function bankResponseHeaders(p, obj, cacheControl) {
   const headers = new Headers({
-    // An image uploaded by an editor (functions/api/prep/fix.js) may be a JPEG or PNG stored under a .webp key: say what it is.
-    "Content-Type": /\.webp$/.test(p)
-      ? (obj.httpMetadata && /^image\/(?:webp|jpeg|png)$/.test(obj.httpMetadata.contentType || "") ? obj.httpMetadata.contentType : "image/webp")
-      : /\.svg$/.test(p)
-      ? "image/svg+xml"
-      : /\.i8$/.test(p)
-      ? "application/octet-stream"
-      : "application/json; charset=utf-8",
+    "Content-Type": contentTypeFor(p, obj),
     "Cache-Control": cacheControl,
     "X-Content-Type-Options": "nosniff",
   });
-
   if (/\.svg$/.test(p)) {
     headers.set("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; img-src data:");
   }
-  if (obj.httpEtag) headers.set("ETag", obj.httpEtag);
+  if (obj && obj.httpEtag) headers.set("ETag", obj.httpEtag);
   if (cacheControl.includes("private")) {
     headers.set("Vary", "Authorization, Origin");
   }
+  return headers;
+}
 
-  return withCors(request, new Response(obj.body, { status: 200, headers }));
+async function serveR2Object(env, p, request, cacheControl) {
+  const got = await getBankObject(env, p);
+  if (got.error) return got.error;
+  const { obj } = got;
+  return withCors(request, new Response(obj.body, { status: 200, headers: bankResponseHeaders(p, obj, cacheControl) }));
+}
+
+/* Gated JSON for a signed-in user: buffer, embed per-user watermark in explanation fields, re-emit.
+ * No extra KV/R2 reads. Missing secret -> unmarked body (logged once inside watermarkJsonText). */
+async function serveGatedJsonWatermarked(env, p, request, cacheControl, user) {
+  const got = await getBankObject(env, p);
+  if (got.error) return got.error;
+  const { obj } = got;
+  let raw = "";
+  try {
+    raw = typeof obj.text === "function" ? await obj.text() : await new Response(obj.body).text();
+  } catch (e) {
+    return withCors(request, new Response(obj.body, { status: 200, headers: bankResponseHeaders(p, obj, cacheControl) }));
+  }
+  const wm = await watermarkJsonText(raw, {
+    userId: user && user.id,
+    fileKey: p,
+    secret: env && env.WATERMARK_SECRET,
+  });
+  const headers = bankResponseHeaders(p, obj, cacheControl);
+  /* Body is per-user; never reuse a shared ETag for watermarked JSON. */
+  headers.delete("ETag");
+  return withCors(request, new Response(wm.text, { status: 200, headers }));
 }
 
 /* TOOLS CREDENTIAL (owner 2026-10-17: fix the 401 for CI `gaps` and prep-ids verify). A repo tool or CI job sends
@@ -316,8 +357,12 @@ export async function onRequestGet(ctx) {
     }
   }
 
-  // 7. Gated content delivery: strictly private, never public or immutable
+  // 7. Gated content delivery: strictly private, never public or immutable.
+  // Per-user watermark on gated JSON for a signed-in user (not images, not tool-token, not public).
   const cc = isImg ? "private, max-age=300" : "private, no-store";
+  if (!isImg && user && !user.guest && /\.json$/i.test(p)) {
+    return serveGatedJsonWatermarked(env, p, reqObj, cc, user);
+  }
   return serveR2Object(env, p, reqObj, cc);
 }
 

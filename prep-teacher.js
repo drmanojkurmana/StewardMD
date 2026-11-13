@@ -49,7 +49,8 @@
   var XL = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
   function xOf(item) { var x = item && item.x; return x && typeof x === "object" && typeof x.key === "string" && x.key.trim() ? x : null; }
   function plainMd(t) {
-    return str(t).replace(/\r\n?/g, "\n").split("\n").map(function (l) {
+    /* Strip per-user watermark zero-width marks before grounding Ask MaiK (compare/prompt text only). */
+    return str(t).replace(/[\u200b\u200c\u200d\u2060\ufeff]/g, "").replace(/\r\n?/g, "\n").split("\n").map(function (l) {
       l = l.trim();
       if (/^\|?\s*:?-{2,}/.test(l)) return "";                       // table rule
       if (/^\|.*\|$/.test(l)) l = l.replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); }).filter(Boolean).join(", ");
