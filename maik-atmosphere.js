@@ -328,6 +328,7 @@
     choiceLabel: function (theme) { return BG_SHORT[choice(theme)]; },
     choose: choose,
     PRESETS: PRESETS,
-    DEFAULT_CONFIG: DEFAULT_CONFIG
+    DEFAULT_CONFIG: DEFAULT_CONFIG,
+    SHADER: { VERT: VERT, FRAG: FRAG }   // the same Aurora on the Today in Medical History banner (today-history.js)
   };
 })();

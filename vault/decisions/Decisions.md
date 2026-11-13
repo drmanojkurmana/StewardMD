@@ -12353,3 +12353,12 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Several types share the count equally (the Mix rule over the chosen types); several repeat states or difficulties draw
   from the union. Number of questions, mode and timer stay single choice.
 - Stored as a comma list in the existing `type` / `seen` / `d` fields, so earlier saved choices need no migration.
+
+## 2026-11-13 Today in Medical History: the Pro banner flips (flag `smd_today_history`, default on)
+- Owner supplied a 366-day dataset; first a chip beside the home date, then the owner chose a flip of the Pro banner: history 5 s, front 5 s, repeating while the banner is on screen. Chip removed.
+- Data split per month (`data/history/MM.json`) so the app reads ~20 KB, not 400 KB. Content ai_drafted, pending review.
+- Reversible: `smd_today_history=0`. Recovery point: commit 0d7a8d7d (the branch before this change; tag pushes are refused here).
+- Same day: India dataset merged (211 events, India tag; India's version wins on a duplicate). Banner pictures: holographic glow art on black, screen-blended; one hand-picked subject per day, made in Gemini from `data/history/gemini/`.
+- Same day: curated. Deaths and passings never shown; 110 more dropped by hand (data/history/curation.txt). 39 days now have no event and the banner does not flip on them.
+- Same day, owner: tragedies, outbreaks, hoaxes and routine notices restored. Deaths and obscure births stay out. 639 events on 336 days.
+- Same day: 22 observance days added (World Health Day, National Doctors' Day ...); each leads its day and owns its picture.
