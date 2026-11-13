@@ -1,17 +1,13 @@
-// Today in Medical History pictures: from data/history/image-subjects.txt (one hand-picked subject for each day that has an event)
-// writes, under data/history/gemini/:
-//   1-START-HERE.md       the instruction to paste into Gemini once (style, rules, how to reply)
-//   batches.md            37 messages of 10 days each, to paste one after another
-//   image-prompts.csv     the same rows as a table (file name, event, full prompt)
-//   GEMINI-FULL-PROMPT.md the opening message and every batch in one file
-// Images come back as PNG/JPG; scripts/history/import-images.sh converts them to data/history/img/<id>.webp.
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+// Today in Medical History pictures: from data/history/image-subjects.txt (ONE hand-picked subject per day: the
+// day's main event) writes data/history/gemini/gemini-prompt-1-of-3.txt, -2-of-3, -3-of-3 (100, 100, the rest),
+// each a complete prompt to paste into Gemini, plus image-prompts.csv. The images come back named
+// MM-DD-YYYY.png; scripts/history/import-images.sh converts them to data/history/img/<id>.webp.
+import { readFileSync, writeFileSync, mkdirSync, unlinkSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const OUT = join(ROOT, "data/history/gemini");
-const PER = 10;
 
 export const STYLE =
   "Holographic medical illustration: glowing translucent line art, like an X-ray hologram. " +
@@ -38,45 +34,31 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   for (let m = 1; m <= 12; m++) Object.assign(ev, JSON.parse(readFileSync(join(ROOT, "data/history", String(m).padStart(2, "0") + ".json"), "utf8")));
   const title = (r) => ev[r.key].find((e) => e.id === r.key + "-" + r.y).t;
   mkdirSync(OUT, { recursive: true });
-  const batches = Math.ceil(list.length / PER);
+  for (const f of ["1-START-HERE.md", "batches.md", "GEMINI-FULL-PROMPT.md"]) { try { unlinkSync(join(OUT, f)); } catch (e) {} }
+  // Three self-contained prompts (a Gemini task makes up to about 100 images): 100, 100, the rest.
+  const parts = [list.slice(0, 100), list.slice(100, 200), list.slice(200)];
+  const label = (k) => +k.slice(3) + " " + MONTHS[+k.slice(0, 2) - 1];
+  const csv = [["prompt", "file", "date", "year", "event", "subject"].join(",")];
+  parts.forEach((part, pi) => {
+    let t = `Create ${part.length} images with your image generation model. Do not write code. Do not describe images instead of making them. Do not ask questions; make all ${part.length}.
 
-  writeFileSync(join(OUT, "1-START-HERE.md"), `# Gemini: Today in Medical History pictures
+This is part ${pi + 1} of 3 of a set for a medical app's "Today in Medical History" banner (${label(part[0].key)} to ${label(part[part.length - 1].key)}). One image per line below. Every image in all three parts must look like one consistent set.
 
-Paste everything in the box below into a NEW Gemini chat (Gemini app, image model on, e.g. "Create images").
-Then paste the batches from batches.md one at a time (Batch 1, then Batch 2, ... Batch ${batches}).
-
-----------------------------------------------------------------
-You are illustrating a medical app's "Today in Medical History" banner. I will send you ${batches} batches.
-Each batch lists up to ${PER} pictures. For EVERY line in a batch, generate ONE image with your image
-generation model. Do not write code, do not describe the image instead of making it, do not ask questions.
-
-Make the images in the order listed. Under each image write only its file name (for example 01-05-1896.png)
-so I can save it with that name. If you cannot fit the whole batch in one reply, stop after the last finished
-image and write "continue from N"; I will reply "continue".
-
-STYLE FOR EVERY IMAGE (never change it between images, they must look like one set):
+STYLE FOR EVERY IMAGE:
 ${STYLE}
 
-The "Subject" line says what to draw and where the single amber highlight goes. Draw the anatomy,
-instrument, organism, molecule or building it names; never a person's face or portrait.
-Reply "Ready" now, and wait for Batch 1.
-----------------------------------------------------------------
-`);
+Each line gives the file name, then what to draw and where the single amber highlight goes. Draw the anatomy, instrument, organism, molecule or building named; never a person's face or portrait.
 
-  let md = "# Batches (paste one at a time after the START-HERE message)\n";
-  const csv = [["file", "date", "year", "event", "subject", "prompt"].join(",")];
-  for (let b = 0; b < batches; b++) {
-    const part = list.slice(b * PER, b * PER + PER);
-    const first = part[0].key, last = part[part.length - 1].key;
-    const label = (k) => +k.slice(3) + " " + MONTHS[+k.slice(0, 2) - 1];
-    md += `\n## Batch ${b + 1} of ${batches} (${label(first)} to ${label(last)})\n\n\`\`\`\nBatch ${b + 1} of ${batches}. Generate these ${part.length} images, one per line, in this order, in the agreed style:\n`;
-    part.forEach((r, i) => { md += `${i + 1}. ${r.file}. Subject: ${r.subject}. (Event: ${title(r)}, ${r.y.replace("b", "")})\n`; });
-    md += "```\n";
-    for (const r of part) csv.push([r.file, r.key, r.y.replace("b", ""), q(title(r)), q(r.subject), q(STYLE + " Subject: " + r.subject + ".")].join(","));
-  }
-  writeFileSync(join(OUT, "batches.md"), md);
-  // everything in one file: the opening message, then every batch
-  writeFileSync(join(OUT, "GEMINI-FULL-PROMPT.md"), readFileSync(join(OUT, "1-START-HERE.md"), "utf8") + "\n" + md);
+OUTPUT: name every image exactly with its file name (for example ${part[0].file}) and give me all ${part.length} together in one ZIP file to download. If a ZIP is not possible, show them in the order listed with the file name under each.
+
+THE ${part.length} IMAGES:
+`;
+    part.forEach((r, i) => {
+      t += `${i + 1}. ${r.file}: ${r.subject}. (${title(r)}, ${r.y.replace("b", "")})\n`;
+      csv.push([pi + 1, r.file, r.key, r.y.replace("b", ""), q(title(r)), q(r.subject)].join(","));
+    });
+    writeFileSync(join(OUT, `gemini-prompt-${pi + 1}-of-3.txt`), t);
+  });
   writeFileSync(join(OUT, "image-prompts.csv"), csv.join("\n") + "\n");
-  console.log("subjects", list.length, "batches", batches);
+  console.log("subjects", list.length, "prompts", parts.map((p) => p.length).join("/"));
 }

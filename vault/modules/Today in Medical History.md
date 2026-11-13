@@ -25,12 +25,11 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   one amber highlight, on PURE BLACK. `.th-face-pic` has `mix-blend-mode: screen`, so the black disappears on every
   theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
   box shows (it did, first try).
-- Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE hand-picked
-  subject per day that has an event (327; India's event where it reads well as a picture; never a face). `scripts/history/image-prompts.mjs`
-  turns it into `data/history/gemini/`: `1-START-HERE.md` (paste once), `batches.md` (33 batches of 10), `GEMINI-FULL-PROMPT.md` (both in one file), and
-  `image-prompts.csv`. Gemini cannot zip images without code: the owner downloads each batch and uploads it here.
-  `scripts/history/import-images.sh --batch N <folder>` names Gemini's random file names by save order; or pass a
-  folder of files already named `MM-DD-YYYY.png`. Both convert to 480x360 WebP and rebuild the month files.
+- Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE subject per day,
+  for the day's main event only (327 days). `scripts/history/image-prompts.mjs` writes three self-contained prompts,
+  `data/history/gemini/gemini-prompt-{1,2,3}-of-3.txt` (100, 100, 127: a Gemini task makes about 100 images), each
+  asking for a ZIP of PNGs named `MM-DD-YYYY.png`. `scripts/history/import-images.sh <folder>` imports named files;
+  `--part N <folder>` matches unnamed downloads to prompt N by save order. Both make 480x360 WebP and rebuild.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.
