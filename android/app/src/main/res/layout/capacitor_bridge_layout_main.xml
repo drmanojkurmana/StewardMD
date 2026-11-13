@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Overrides Capacitor's own capacitor_bridge_layout_main (same name, the app's copy wins) so the bridge web view
+     is an SmdWebView: no system Copy / Share / Web search bar on read-only text (owner 2026-11-13). Keep the id
+     "webview": Bridge.java finds the web view by it. Otherwise identical to @capacitor/android 8.4.3's layout. -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.getcapacitor.BridgeActivity"
+    >
+
+    <in.stewardmd.app.SmdWebView
+        android:id="@+id/webview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

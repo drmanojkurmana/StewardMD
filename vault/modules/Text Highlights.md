@@ -39,4 +39,6 @@ Selecting reading text showed the iOS edit menu (Copy, Look Up, Translate, Searc
 CSS cannot hide it (`-webkit-touch-callout: none` is already on `html`). Native fix: `ios/App/App/MainViewController.swift`
 returns an `SmdWebView` whose `canPerformAction` offers nothing on read-only text and whose `buildMenu` drops the system
 groups; inside anything editable (Cut or Paste available) the menu is untouched. Needs a native rebuild, not OTA.
-Android still shows its selection toolbar (not done).
+Android (same day): `SmdWebView.java` (extends CapacitorWebView) wraps Chromium's action-mode callback and empties the
+menu unless it has Cut or Paste; app layout `res/layout/capacitor_bridge_layout_main.xml` overrides Capacitor's so the
+bridge uses it. Keep id `webview`. Native rebuild needed; check on a device that no empty bar shows.

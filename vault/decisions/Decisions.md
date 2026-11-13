@@ -12371,4 +12371,5 @@ the viewer. Loader token prep144.
 ## 2026-11-13 No system Copy / Look Up menu on reading text (iOS)
 Owner: selecting lesson text showed the iOS menu, which makes copying content easy; only the highlight palette should
 show. `SmdWebView` (MainViewController.swift) disables edit-menu actions unless the selection is editable. Native
-rebuild required. Android selection toolbar unchanged for now.
+rebuild required. Android same day: `SmdWebView.java` empties the selection bar menu on read-only text (layout
+override `capacitor_bridge_layout_main.xml`).
