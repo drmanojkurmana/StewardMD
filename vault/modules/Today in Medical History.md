@@ -81,5 +81,10 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
 ## Tests
 `test/today-history.test.mjs` (data), `test/run-today-history-ui.mjs` (real browser).
 - 2026-11-13 (owner): no India badge on the banner (the sheet keeps its India tag). Banner title is Bricolage
-  Grotesque 700 (the app's bundled display face, preloaded in index.html), not Manrope 800; a system serif was
-  rejected because Android would swap in Noto Serif. Cache token th12.
+  Grotesque 700 (superseded the same day, below). Cache token th12.
+- **Type spec (owner, 2026-11-13), banner AND sheet:** event title Playfair Display SemiBold (lining figures, or
+  the old-style 1 reads as I); date and category Inter Medium uppercase; year Merriweather 400; description Inter
+  Regular; CTA (Tap to explore, Source, Back to today) Inter SemiBold. Playfair (23 KB, weight 600) and
+  Merriweather (98 KB, variable) are Google Fonts OFL latin subsets in assets/fonts, @font-face in
+  today-history.css; Inter Variable is the app's own face. fit() re-runs after Playfair loads, otherwise it
+  measures the fallback title and leaves a 2-line summary under a 2-line title. Cache token th13.
