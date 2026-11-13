@@ -37,6 +37,8 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   enforced by the "shipped pictures" unit test). 148 still missing: prompts 100 + 48. Fetching a Gemini share link
   headlessly needs its gemini.gstatic.com scripts re-served as text/javascript (Chrome ORB blocks them through the
   proxy); then the ZIP chip in the reply downloads with a click.
+- 2026-11-13: third zip (old 127-image prompt) imported: 117 used, 10 skipped for displaced events. 307 of 338
+  days have a picture (4.5 MB); the last 31 (mostly observance days) are in gemini-prompt-1-of-1.txt.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.
