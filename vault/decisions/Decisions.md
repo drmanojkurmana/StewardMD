@@ -12276,4 +12276,4 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 ## 2026-11-13 Today in Medical History: the Pro banner flips (flag `smd_today_history`, default on)
 - Owner supplied a 366-day dataset; first a chip beside the home date, then the owner chose a flip of the Pro banner: history 5 s, front 5 s, repeating while the banner is on screen. Chip removed.
 - Data split per month (`data/history/MM.json`) so the app reads ~20 KB, not 400 KB. Content ai_drafted, pending review.
-- Reversible: `smd_today_history=0`. Recovery tag `today-history-pre`.
+- Reversible: `smd_today_history=0`. Recovery point: commit 0d7a8d7d (the branch before this change; tag pushes are refused here).
