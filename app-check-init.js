@@ -48,6 +48,23 @@
               window.firebase.appCheck && window.firebase.appCheck.CustomProvider);
   }
 
+  /* Fail-open token helper for native-ota.js (and any other API that wants App Check). Always
+   * exposed — even before activate — so a check that races init still resolves to null instead of
+   * throwing. Never rejects. */
+  function getAppCheckToken(forceRefresh) {
+    try {
+      var P = plugin();
+      if (!P || !P.getToken) return Promise.resolve(null);
+      return P.getToken({ forceRefresh: !!forceRefresh }).then(function (r) {
+        return (r && r.token) || null;
+      }, function () { return null; });
+    } catch (e) { return Promise.resolve(null); }
+  }
+  try {
+    window.SMD_APPCHECK = window.SMD_APPCHECK || {};
+    window.SMD_APPCHECK.getToken = getAppCheckToken;
+  } catch (e) {}
+
   var initStarted = false, activated = false;
 
   function start() {
@@ -81,7 +98,11 @@
         // Firestore or Auth call actually needs one.
         window.firebase.appCheck().activate(provider, false);
         activated = true;
-        try { window.SMD_APPCHECK = { active: true }; } catch (e) {}
+        try {
+          window.SMD_APPCHECK = window.SMD_APPCHECK || {};
+          window.SMD_APPCHECK.active = true;
+          window.SMD_APPCHECK.getToken = getAppCheckToken;
+        } catch (e) {}
         try { console.log("[app-check] active (native attestation bridged to JS SDK)"); } catch (e) {}
       })
       .catch(function (e) {
