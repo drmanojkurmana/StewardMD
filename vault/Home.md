@@ -74,6 +74,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Premium Motion]] — iOS-like layer: draggable sheets + depth, shared-element transitions, large
   titles, pull to refresh, picker haptics, skeletons, long-press previews, Live Activities; round 2: swipe
   actions, tab-bar hide + status-tap, A-Z scrubber, keyboard-aware, Undo cards, blur-up, launch morph, sounds. One kill switch each.
+- [[Today in Medical History]] - the home Pro banner flips to today's event and back every 5 s; tap for the day's sheet. Flag `smd_today_history` (default on)
 - [[Dynamic Notifications]] — every in-app notification (toast, foreground push, local) as a
   Dynamic Island card. Flag `smd_dyn_notify` (default on).
 - [[Widgets]] — iOS home-screen and Lock Screen widgets. Ask MaiK ships three surfaces the

@@ -1,0 +1,76 @@
+/* Today in Medical History (today-history.js). The home Pro banner flips to today's event and back
+   every 5 s; the sheet works in both themes (body.dark). */
+:root{--th-gold:#e8c67a;--th-gold-2:#f6e3b4;--th-cream:#fbf4e4}
+
+#homeV2.rnav .rnav-greet .hrf-date[data-th]{cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:6px}
+#homeV2.rnav .rnav-greet .hrf-date[data-th]:focus-visible{outline:2px solid var(--th-gold);outline-offset:3px}
+
+/* ---- banner flip: fold to 90deg, swap faces, unfold ---- */
+#homeV2#homeV2.rnav .hrf-banner.th-out{animation:th-fold-out .3s cubic-bezier(.55,0,.85,.35) both}
+#homeV2#homeV2.rnav .hrf-banner.th-in{animation:th-fold-in .46s cubic-bezier(.15,.75,.3,1.12) both}
+@keyframes th-fold-out{from{transform:perspective(900px) rotateX(0) scale(1)}to{transform:perspective(900px) rotateX(90deg) scale(.97)}}
+@keyframes th-fold-in{from{transform:perspective(900px) rotateX(-90deg) scale(.97)}to{transform:perspective(900px) rotateX(0) scale(1)}}
+#homeV2.rnav .hrf-banner.th-fade>*{transition:opacity .2s ease;opacity:0}
+
+/* the history face: deep ink with a gold rule, set in a book face */
+#homeV2.rnav .hrf-banner .th-face{display:none}
+#homeV2#homeV2.rnav .hrf-banner.th-back{background:linear-gradient(120deg,#0b2430 0%,#123a40 60%,#1b4a46 100%)}
+#homeV2.rnav .hrf-banner.th-back::after{opacity:0}
+#homeV2.rnav .hrf-banner.th-back>:not(.th-face){visibility:hidden}
+#homeV2.rnav .hrf-banner.th-back .th-face{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;gap:6px;
+  padding:12px 18px;border-radius:inherit;color:var(--th-cream);box-shadow:inset 0 0 0 1px rgba(232,198,122,.32);
+  background:radial-gradient(120% 90% at 100% 0%,rgba(232,198,122,.16),transparent 55%)}
+.th-face-ey{display:flex;align-items:center;gap:7px;min-width:0;font:700 10px/1.2 var(--rds-font,system-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase;color:var(--th-gold)}
+.th-face-lg,.th-face-sm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.th-face-sm{display:none}
+.th-face-dt{margin-left:auto;flex:none;letter-spacing:.06em;color:rgba(251,244,228,.75)}
+.th-glass{width:14px;height:14px;flex:none;fill:none;stroke:var(--th-gold);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.th-glass .th-sand{fill:var(--th-gold);stroke:none}
+.hrf-banner.th-back .th-glass{animation:th-turn .9s cubic-bezier(.65,0,.35,1) .35s 1 both}
+@keyframes th-turn{from{transform:rotate(0)}to{transform:rotate(180deg)}}
+.th-face-row{display:flex;align-items:baseline;gap:12px;min-width:0}
+.th-face-yr{flex:none;font:600 26px/1 ui-serif,"Iowan Old Style","New York",Georgia,serif;font-variant-numeric:lining-nums tabular-nums;color:var(--th-gold-2)}
+.th-face-tt{min-width:0;font:600 15px/1.25 ui-serif,"Iowan Old Style","New York",Georgia,serif;color:#fff;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.th-face-go{font:600 11.5px/1 var(--rds-font,system-ui,sans-serif);color:rgba(251,244,228,.7)}
+@media (max-width:360px){.th-face-lg{display:none}.th-face-sm{display:inline}.th-face-yr{font-size:22px}.th-face-tt{font-size:14px}#homeV2.rnav .hrf-banner.th-back .th-face{padding:10px 14px;gap:5px}}
+@media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-banner.th-out,#homeV2#homeV2.rnav .hrf-banner.th-in,.hrf-banner.th-back .th-glass{animation:none}}
+
+/* ---- sheet ---- */
+#thSheet{--th-bg:#fbfaf6;--th-ink:#13212a;--th-muted:#5b6b78;--th-line:#e6e2d6;--th-yr:#8a6a1f;--th-tag-bg:#f3ecd9;--th-tag-ink:#6b5216;--th-acc:#0f766e}
+body.dark #thSheet{--th-bg:#0f1a21;--th-ink:#e8eef2;--th-muted:#9aabb8;--th-line:#22323d;--th-yr:#e8c67a;--th-tag-bg:#2a2617;--th-tag-ink:#ecd59a;--th-acc:#5eead4}
+.th-scrim{position:fixed;inset:0;z-index:9000;background:rgba(6,14,20,.42);opacity:0;pointer-events:none;transition:opacity .28s ease}
+.th-scrim.on{opacity:1;pointer-events:auto}
+.th-sheet{position:fixed;left:0;right:0;bottom:0;z-index:9001;max-height:86vh;max-height:86dvh;display:flex;flex-direction:column;
+  background:var(--th-bg);color:var(--th-ink);border-radius:22px 22px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.22);
+  padding:0 0 env(safe-area-inset-bottom);transform:translateY(104%);visibility:hidden;
+  transition:transform .42s cubic-bezier(.2,.9,.25,1),visibility 0s linear .42s;
+  font-family:var(--rds-font,system-ui,-apple-system,"Segoe UI",sans-serif)}
+.th-sheet.on{transform:none;visibility:visible;transition:transform .42s cubic-bezier(.2,.9,.25,1),visibility 0s}
+@media (min-width:700px){.th-sheet{left:50%;right:auto;width:560px;margin-left:-280px}}
+.th-grab{width:38px;height:5px;border-radius:99px;background:var(--th-line);margin:8px auto 2px;flex:none}
+.th-head{display:flex;align-items:flex-start;gap:12px;padding:8px 16px 4px 20px;flex:none}
+.th-ttl{flex:1;min-width:0}
+.th-ey{font:600 12px/1.3 var(--rds-font,system-ui,sans-serif);letter-spacing:.06em;text-transform:uppercase;color:var(--th-yr)}
+.th-date{margin:3px 0 0;font:600 28px/1.15 ui-serif,"Iowan Old Style","New York",Georgia,serif;letter-spacing:-.01em;color:var(--th-ink);outline:none}
+.th-x,.th-step{flex:none;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;border:0;background:transparent;color:var(--th-muted);cursor:pointer}
+.th-x svg,.th-step svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.th-x:focus-visible,.th-step:focus-visible,.th-today:focus-visible,.th-src:focus-visible{outline:2px solid var(--th-acc);outline-offset:2px}
+.th-nav{display:flex;align-items:center;justify-content:space-between;padding:0 8px 6px 10px;border-bottom:1px solid var(--th-line);flex:none}
+.th-today{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--th-line);background:transparent;color:var(--th-acc);font:600 13px var(--rds-font,system-ui,sans-serif);cursor:pointer}
+.th-body{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:6px 20px 18px}
+.th-list{list-style:none;margin:0;padding:0}
+.th-ev{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--th-line)}
+.th-ev:last-child{border-bottom:0}
+.th-yr{font:600 22px/1.1 ui-serif,"Iowan Old Style","New York",Georgia,serif;font-variant-numeric:lining-nums tabular-nums;color:var(--th-yr);padding-top:2px}
+.th-bd{min-width:0}
+.th-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.th-cat,.th-sp{font:600 11.5px/1 var(--rds-font,system-ui,sans-serif);padding:5px 8px;border-radius:6px}
+.th-cat{background:var(--th-tag-bg);color:var(--th-tag-ink)}
+.th-sp{color:var(--th-muted);border:1px solid var(--th-line)}
+.th-tt{margin:0;font:700 16px/1.3 var(--rds-font,system-ui,sans-serif);color:var(--th-ink);overflow-wrap:anywhere}
+.th-sm{margin:6px 0 0;font:400 14.5px/1.5 var(--rds-font,system-ui,sans-serif);color:var(--th-ink);opacity:.86;overflow-wrap:anywhere}
+.th-src{display:inline-block;margin-top:8px;padding:4px 0;font:600 13px var(--rds-font,system-ui,sans-serif);color:var(--th-acc);text-decoration:none}
+.th-msg{padding:24px 0;color:var(--th-muted);font-size:14px}
+.th-foot{margin:6px 0 0;font-size:12px;line-height:1.4;color:var(--th-muted)}
+@media (max-width:360px){.th-ev{grid-template-columns:52px 1fr;gap:10px}.th-yr{font-size:19px}.th-body{padding:4px 16px 16px}}
+@media (prefers-reduced-motion:reduce){.th-sheet,.th-sheet.on,.th-scrim{transition:none}}
