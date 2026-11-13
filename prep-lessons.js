@@ -700,11 +700,17 @@
   function imgTag(src, alt, ar) {
     return '<img src="' + escH(imgSrc(src)) + '" alt="' + escH(alt) + '"' + (ar ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "") + ' loading="lazy" decoding="async" onerror="var C=window.PREP_BANK_CLIENT;C&&!(C.mediaFallback&&C.mediaFallback(this))&&C.resignImg&&C.resignImg(this)">';
   }
+  // The brand watermark (image-watermark.js) over a lesson figure, as on every other content image: inside PrepNucleus
+  // that is the faint centre mark plus the PrepNucleus lockup in the corner (image-viewer.css). Drawn over the image,
+  // never into it. Empty when image-watermark.js is not loaded or the owner switched it off.
+  function wmOv(src) { var W = G.SMD_WM; return W && W.html ? W.html(str(src)) : ""; }
+  // An image wrapped so the overlay sits on the picture's own box (not the letterbox around it).
+  function wmImg(src, alt, ar) { return '<span class="smd-wm-host pn-wmh"' + arVar(ar) + ">" + imgTag(src, alt, ar) + wmOv(src) + "</span>"; }
   function imageHtml(v, i) {
     if (v.spot) return spotHtml(v, i);
     if (v.marks) return marksHtml(v, i);
     if (v.pair) return pairHtml(v, i);
-    return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '">' + imgTag(v.src, v.alt, v.ar) + "</button>" +
+    return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '">' + wmImg(v.src, v.alt, v.ar) + "</button>" +
       '<figcaption><span class="pn-vzi" aria-hidden="true">' + ic("zoom") + "</span><span>" + escH(v.caption) + " Tap to enlarge.</span></figcaption></figure>";
   }
   // Interactive figure: a card here, the page itself opens full screen (figOpen) so it has room on a phone.
@@ -761,7 +767,7 @@
     var a = ansOf(i), sp = v.spot, b = sp.box;
     return '<figure class="pn-vfig pn-ix pn-spot' + (a.done ? " done" + (a.hit ? " hit" : "") : "") + '">' +
       '<div class="pn-ix-head">' + tag("target", "Spot the sign") + '<p class="pn-ix-q">' + escH(sp.q) + "</p></div>" +
-      '<div class="pn-ix-stage" data-spot="' + i + '"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) +
+      '<div class="pn-ix-stage smd-wm-host" data-spot="' + i + '"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + wmOv(v.src) +
       '<span class="pn-spot-box' + (b[1] < 0.14 ? " lo" : "") + '" style="left:' + pc(b[0]) + ";top:" + pc(b[1]) + ";width:" + pc(b[2]) + ";height:" + pc(b[3]) + '" aria-hidden="true"><b>' + escH(sp.label) + "</b></span>" +
       '<span class="pn-spot-ms">' + (a.miss || []).map(missHtml).join("") + "</span>" + zoomBtn("a", v.alt) + "</div>" +
       '<div class="pn-ix-fb" role="status" aria-live="polite">' + spotFb(sp, a) + "</div>" +
@@ -796,7 +802,7 @@
     return '<figure class="pn-vfig pn-ix pn-reveal' + (all ? " all" : "") + '">' +
       '<div class="pn-ix-head">' + tag("tagl", "Label it") + '<p class="pn-ix-q">Tap a number to name it.</p>' +
       '<button type="button" class="pn-ix-tog" data-act="l-marks" aria-pressed="' + all + '">' + (all ? "Hide all" : "Show all") + "</button></div>" +
-      '<div class="pn-ix-stage"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + v.marks.map(function (m, k) {
+      '<div class="pn-ix-stage smd-wm-host"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + wmOv(v.src) + v.marks.map(function (m, k) {
         var on = all || !!open[k];
         return '<button type="button" class="pn-mk' + (on ? " on" : "") + (m.x > 0.6 ? " l" : "") + '" style="left:' + pc(m.x) + ";top:" + pc(m.y) + '" data-act="l-mark" data-k="' + k + '" aria-expanded="' + on + '" aria-label="Point ' + (k + 1) + (on ? ": " + escH(m.label) : ", show its name") + '">' +
           "<i>" + (k + 1) + '</i><span class="pn-mk-l" aria-hidden="true">' + escH(m.label) + "</span></button>";
@@ -824,8 +830,8 @@
     if (sliderPair(v)) {
       var pos = a.pos == null ? 50 : a.pos;
       return '<figure class="pn-vfig pn-ix pn-pair sl">' + head +
-        '<div class="pn-ix-stage pn-cmp-sl" data-cmp="' + i + '" style="--pos:' + pos + "%" + (v.ar ? ";--ar:" + v.ar : "") + '">' + imgTag(p.src, p.alt || p.tag, p.ar) +
-        '<div class="pn-cmp-top" aria-hidden="true">' + imgTag(v.src, v.alt, v.ar) + "</div>" +
+        '<div class="pn-ix-stage pn-cmp-sl smd-wm-host" data-cmp="' + i + '" style="--pos:' + pos + "%" + (v.ar ? ";--ar:" + v.ar : "") + '">' + imgTag(p.src, p.alt || p.tag, p.ar) +
+        '<div class="pn-cmp-top" aria-hidden="true">' + imgTag(v.src, v.alt, v.ar) + "</div>" + wmOv(v.src) +
         '<span class="pn-cmp-h" aria-hidden="true"><i>' + svg(ICO.lr, 18) + "</i></span>" +
         '<span class="pn-cmp-t a" aria-hidden="true">' + escH(ta) + '</span><span class="pn-cmp-t b" aria-hidden="true">' + escH(p.tag) + "</span>" +
         '<input type="range" class="pn-cmp-r" min="0" max="100" step="1" value="' + pos + '" aria-label="Slide between ' + escH(ta) + " and " + escH(p.tag) + '" aria-valuetext="' + escH(cmpText(pos, ta, p.tag)) + '"></div>' +
@@ -833,7 +839,7 @@
           return '<button type="button" class="pn-chip' + (pos === x[0] ? " on" : "") + '" data-act="l-cmp" data-v="' + x[0] + '" aria-pressed="' + (pos === x[0]) + '">' + escH(x[1]) + "</button>";
         }).join("") + "</div>" + why + "<figcaption>" + escH(v.caption) + "</figcaption></figure>";
     }
-    var cell = function (z, src, alt, ar, t) { return '<button type="button" class="pn-cmp-cell" data-act="l-zoom" data-z="' + z + '" aria-label="Enlarge: ' + escH(t) + '"><span class="pn-cmp-t">' + escH(t) + "</span>" + imgTag(src, alt, ar) + "</button>"; };
+    var cell = function (z, src, alt, ar, t) { return '<button type="button" class="pn-cmp-cell" data-act="l-zoom" data-z="' + z + '" aria-label="Enlarge: ' + escH(t) + '"><span class="pn-cmp-t">' + escH(t) + "</span>" + wmImg(src, alt, ar) + "</button>"; };
     return '<figure class="pn-vfig pn-ix pn-pair">' + head + '<div class="pn-cmp2">' + cell("a", v.src, v.alt, v.ar, ta) + cell("b", p.src, p.alt || p.tag, p.ar, p.tag) + "</div>" +
       why + "<figcaption>" + escH(v.caption) + " Tap an image to enlarge.</figcaption></figure>";
   }

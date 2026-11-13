@@ -183,6 +183,11 @@ try {
   // ---- image and zoom
   await click("#smdPrep [data-act=l-next]"); await click("#smdPrep [data-act=l-prev]");
   ok(await until(`var i=document.querySelector("#smdPrep .pn-vimg img"); return !!i && i.complete && i.naturalWidth>0;`, 5000), "step 5 shows the diagram image (loaded)");
+  // The brand watermark sits on the lesson figure itself, not only in the full-screen viewer (owner 2026-11-13):
+  // inside PrepNucleus that is the faint centre mark plus the PrepNucleus lockup in the corner, on the picture's box.
+  ok(await ev(`var h=document.querySelector("#smdPrep .pn-vimg .smd-wm-host"); return !!h && !!h.querySelector("img") && !!h.querySelector(".smd-wm");`) === true, "the lesson figure carries the watermark overlay");
+  ok(await ev(`var w=document.querySelector("#smdPrep .pn-vimg .smd-wm"), b=w.querySelector(".smd-wm-big"), l=w.querySelector(".smd-wm-by"), s=w.querySelector(".smd-wm-sm"); return getComputedStyle(b).display==="flex" && getComputedStyle(l).display==="flex" && getComputedStyle(s).display==="none" && +getComputedStyle(b).opacity>0;`) === true, "it shows the PrepNucleus centre mark and corner lockup");
+  ok(await ev(`var i=document.querySelector("#smdPrep .pn-vimg img").getBoundingClientRect(), w=document.querySelector("#smdPrep .pn-vimg .smd-wm").getBoundingClientRect(), c=document.querySelector("#smdPrep .pn-vimg .smd-wm-by").getBoundingClientRect(); return Math.abs(i.left-w.left)<2 && Math.abs(i.top-w.top)<2 && Math.abs(i.width-w.width)<2 && Math.abs(i.height-w.height)<2 && c.right<=i.right && c.bottom<=i.bottom && c.width>20;`) === true, "the overlay covers the picture exactly and the lockup sits in its corner");
   await shot("step5-image");
   await click("#smdPrep [data-act=l-zoom]");
   // The lesson's enlarged image opens in the shared viewer (prep-viewer.js; gestures in test/run-prep-feel-ui.mjs).

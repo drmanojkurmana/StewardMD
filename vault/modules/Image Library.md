@@ -53,6 +53,10 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   Ophthalmós Learn row is a StewardMD-side edit to a synced file: its hash in
   `test/ophthalmos-sync.json` was regenerated here, and the same change must be
   ported to the Ophthalmós module repo before the next sync or it is overwritten.
+- **Lesson and PYQ figures carry it in-line (owner 2026-11-13):** before this only the full-screen viewer did.
+  `prep-lessons.js` wmImg/wmOv put the overlay on plain, spot, label and compare figures; `prep-pyq.js figure` on
+  question images. `.pn-wmh` hugs the picture (`--ar` from lesson data, or set on load for PYQ) so the corner lockup
+  never lands in a letterbox. Checked in `test/run-prep-lessons-ui.mjs` (step 5).
 - **Watermark (owner 2026-11-11):** `image-watermark.js` overlays carry two looks and `image-viewer.css` picks by
   ancestry: inside `#smdPrep` (PrepNucleus, exists only while open) or `.igl-overlay` (this library, grid and viewer) =
   one faint centre PrepNucleus mark + the "PrepNucleus | Powered by StewardMD" lockup in the bottom right corner;

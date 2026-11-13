@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 import Capacitor
 
 /**
@@ -14,8 +15,13 @@ import Capacitor
  *     splash paints it shows its own background, so it paints LaunchBackground (#FFFFFF light,
  *     #08302B dark, same color set as LaunchScreen.storyboard) instead of a white or black frame.
  *     UIColor(named:) is dynamic, so it follows a light/dark switch made while the app is running.
+ *  3. No system edit menu on reading text (owner 2026-11-13). The web view is an SmdWebView (below).
  */
 class MainViewController: CAPBridgeViewController {
+    override func webView(with frame: CGRect, configuration: WKWebViewConfiguration) -> WKWebView {
+        return SmdWebView(frame: frame, configuration: configuration)
+    }
+
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(SmdDevicePlugin())
         bridge?.registerPluginInstance(NfcPlugin())
@@ -23,6 +29,41 @@ class MainViewController: CAPBridgeViewController {
             webView?.backgroundColor = launchBackground
             webView?.scrollView.backgroundColor = launchBackground
         }
+    }
+}
+
+/**
+ * The app's web view. Owner 2026-11-13: selecting lesson or Knowledge Library text must offer only the app's own
+ * highlight palette (text-highlight.js), never the system menu (Copy, Look Up, Translate, Search Web, Share), which
+ * made copying the content one tap away. Selection itself stays, so highlighting works.
+ *
+ * WKWebView asks this view which actions its edit menu (and keyboard shortcuts such as Cmd+C) may offer. On read-only
+ * text the answer is none, so no menu appears. In something the user types into (a note, a search box) the menu is
+ * untouched: there Cut or Paste is available, which is how an editable selection is told apart.
+ */
+final class SmdWebView: WKWebView {
+    private static let cut = #selector(UIResponderStandardEditActions.cut(_:))
+    private static let paste = #selector(UIResponderStandardEditActions.paste(_:))
+
+    private func editing(_ sender: Any?) -> Bool {
+        return super.canPerformAction(SmdWebView.cut, withSender: sender)
+            || super.canPerformAction(SmdWebView.paste, withSender: sender)
+    }
+
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == SmdWebView.cut || action == SmdWebView.paste || editing(sender) {
+            return super.canPerformAction(action, withSender: sender)
+        }
+        return false
+    }
+
+    // iOS 16+ builds the edit menu from menus as well as actions: drop the system groups on read-only text.
+    override func buildMenu(with builder: UIMenuBuilder) {
+        super.buildMenu(with: builder)
+        guard builder.system == .context, !editing(nil) else { return }
+        var ids: [UIMenu.Identifier] = [.standardEdit, .lookup, .learn, .share, .find, .replace, .speech, .textStyle, .spelling]
+        if #available(iOS 18.0, *) { ids.append(.writingTools) }
+        ids.forEach { builder.remove(menu: $0) }
     }
 }
 
