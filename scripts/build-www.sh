@@ -379,6 +379,22 @@ if [ "${KB_ENCRYPT:-}" = "1" ]; then
   echo "  KB ENCRYPTED (SMD_KB_ENC=1, .enc only; plaintext KB dropped from www/)"
 fi
 
+# Content JSON encryption (Security 4 / SMDE1): AES-256-GCM in place under www/{kb,data,prep/lessons,
+# prep/bank,prep/nucleus360}. Release CI sets CONTENT_ENCRYPT=1 (or inherits it from KB_ENCRYPT=1) with
+# SMD_CONTENT_KEY + SMD_CONTENT_KEY_ID; local dev skips and ships plain JSON unless asked.
+if [ "${CONTENT_ENCRYPT:-}" = "1" ] || { [ "${KB_ENCRYPT:-}" = "1" ] && [ -n "${SMD_CONTENT_KEY:-}" ]; }; then
+  export CONTENT_ENCRYPT=1
+  [ -n "${SMD_CONTENT_KEY:-}" ] && [ -n "${SMD_CONTENT_KEY_ID:-}" ] || {
+    echo "  CONTENT_ENCRYPT=1 requires env SMD_CONTENT_KEY (base64 32B) and SMD_CONTENT_KEY_ID"; exit 1;
+  }
+  node "$ROOT/tools/encrypt-bundle.mjs" --root "$WWW" --require || { echo "  content encrypt FAILED"; exit 1; }
+  echo "  CONTENT JSON ENCRYPTED (SMDE1 under kb/ data/ prep/{lessons,bank,nucleus360})"
+elif [ -n "${CI:-}${GITHUB_ACTIONS:-}" ] && [ "${SMD_RELEASE:-}" = "1" ]; then
+  echo "  CONTENT ENCRYPT missing in CI release build (set CONTENT_ENCRYPT=1 + SMD_CONTENT_KEY + SMD_CONTENT_KEY_ID)"; exit 1
+else
+  echo "  content JSON left plain (set CONTENT_ENCRYPT=1 to encrypt)"
+fi
+
 # Connect EMR owner console (bundled so the owner-only in-app "Connect EMR" button in home.js opens it in-app).
 [ -f admin/connect-emr.html ] && cp admin/connect-emr.html "$WWW/connect-emr.html"
 

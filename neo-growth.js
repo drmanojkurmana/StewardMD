@@ -170,7 +170,11 @@
         o.innerHTML = S.tab === "birth" ? (gp ? birthOut(A, gp, d) : A.noData("a preterm size chart")) : S.tab === "pn" ? (gp ? pnOut(A, gp, d) : A.noData("a preterm growth chart")) : S.tab === "who" ? whoOut(A, d) : S.tab === "vel" ? (gp ? velOut(A, gp) : A.noData("growth velocity")) : S.tab === "ms" ? msOut(A, ms, d) : rxOut(A, rx);
       }
       paint();
-      if (S.tab === "who" && !WHO) fetch("/kb/growth/who-growth.json?v=" + ((G.SMD_KITS && G.SMD_KITS.GROWTH_V) || "g1")).then(function (r) { return r.json(); }).then(function (j) { WHO = j; paint(); }, function () { var o = el.querySelector("[data-gr-out]"); if (o) o.innerHTML = A.noData("WHO growth tables"); });
+      if (S.tab === "who" && !WHO) {
+        var whoUrl = "/kb/growth/who-growth.json?v=" + ((G.SMD_KITS && G.SMD_KITS.GROWTH_V) || "g1");
+        ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON) ? SMD_CONTENT.fetchJSON(whoUrl) : fetch(whoUrl).then(function (r) { return r.json(); }))
+          .then(function (j) { WHO = j; paint(); }, function () { var o = el.querySelector("[data-gr-out]"); if (o) o.innerHTML = A.noData("WHO growth tables"); });
+      }
       el.oninput = el.onchange = function (e) { var k = e.target.getAttribute && e.target.getAttribute("data-gr"); if (!k) return; S[k] = e.target.type === "checkbox" ? e.target.checked : e.target.value; paint(); };
       el.onclick = function (e) { var b = e.target.closest && e.target.closest("[data-gr-tab]"); if (b) { S.tab = b.getAttribute("data-gr-tab"); screen(el, A); } };
     });

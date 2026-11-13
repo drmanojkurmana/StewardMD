@@ -2421,7 +2421,10 @@
     st.guideline = id; st.graph = null; st.byId = {}; st.answers = {}; st.protocols = {};
     st.openedProtocol = null; st.selection = null; st.whyOpen = {}; st.showExcluded = false; st.view = "pathway"; st.rebaseId = null; st.superpowerModal = null;
     st.loading = true; st.error = null; paint();
-    G.fetch("/kb/oncotree/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; })
+    var graphUrl = "/kb/oncotree/" + encodeURIComponent(id) + ".json";
+    ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(graphUrl, { optional: true })
+      : G.fetch(graphUrl).then(function (r) { return r.ok ? r.json() : null; }))
       .then(function (graph) {
         if (!graph) throw new Error("navigator graph not found");
         st.graph = graph; st.byId = {}; asArr(graph.nodes).forEach(function (n) { st.byId[n.id] = n; });
@@ -2429,7 +2432,10 @@
         asArr(graph.nodes).forEach(function (n) { asArr(n.protocolRefs).forEach(function (r) { refs[r] = 1; }); });
         var ids = Object.keys(refs);
         return Promise.all(ids.map(function (id) {
-          return G.fetch("/kb/protocols/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+          var pUrl = "/kb/protocols/" + encodeURIComponent(id) + ".json";
+          return ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+            ? G.SMD_CONTENT.fetchJSON(pUrl, { optional: true })
+            : G.fetch(pUrl).then(function (r) { return r.ok ? r.json() : null; })).catch(function () { return null; });
         })).then(function (protos) {
           protos.forEach(function (p, i) { if (p) st.protocols[ids[i]] = p; });
           st.loaded = true; st.loading = false; prepopulate();

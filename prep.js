@@ -804,6 +804,9 @@
     if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && isBankUrl(url)) {
       return G.PREP_BANK_CLIENT.fetchBankJSON(url);
     }
+    if (G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON) {
+      return G.SMD_CONTENT.fetchJSON(url, { cache: "no-cache" });
+    }
     return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
   }
   function loadTax() { return st.tax ? Promise.resolve(st.tax) : getJSON(STATIC + "taxonomy.json").then(function (t) { return (st.tax = t); }); }

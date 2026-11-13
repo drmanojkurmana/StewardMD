@@ -2298,6 +2298,7 @@ window.openExternal = function (u) {
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
 <script src="/app-check-init.js?v=appcheck4" defer></script>
+<script src="/content-crypt.js?v=cc1" defer></script>
 <script src="/antibiogram-data.js?v=abgd1.a5e6e86a9e8f" defer></script>
 <!-- Antibiogram rules + store (v2): validation rules shared with the build, and the data layer that
      fetches kb/antibiogram/antibiogram.json. Must load before policy.js (profiles) and antibiogram.js. -->

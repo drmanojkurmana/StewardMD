@@ -1335,7 +1335,10 @@
     var pick = function (j) { return (j && (Array.isArray(j) ? j : j.protocols)) || []; };
     if (w.SMD_MAIK_PROTOCOLS) { _protoList = pick(w.SMD_MAIK_PROTOCOLS); return (_protoP = Promise.resolve(_protoList)); }
     if (typeof fetch !== "function") return Promise.resolve([]);
-    _protoP = fetch("/kb/clinical-protocols/index.json").then(function (r) { return r.ok ? r.json() : null; })
+    var protoUrl = "/kb/clinical-protocols/index.json";
+    _protoP = ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+      ? SMD_CONTENT.fetchJSON(protoUrl, { optional: true })
+      : fetch(protoUrl).then(function (r) { return r.ok ? r.json() : null; }))
       .then(pick).then(function (l) { _protoList = l; return l; }).catch(function () { _protoP = null; return []; });
     return _protoP;
   }
