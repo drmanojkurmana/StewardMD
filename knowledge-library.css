@@ -588,13 +588,15 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   position: relative;
   z-index: 2;
   justify-self: start;
-  min-width: max-content;
-  max-width: none;
+  /* Never reaches the centred "StewardMD Knowledge Base" title (owner 2026-11-13: "‹ Bicuspid aortic valve" ran
+     under it). A long previous title becomes "Back" in reasoning.js, like iOS; this cap is the guard for the rest. */
+  min-width: 0;
+  max-width: calc(50vw - 100px);
   min-height: 44px;
   height: auto;
   padding: 0 14px;
-  overflow: visible;
-  text-overflow: clip;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   border-radius: 999px !important;
   border: 1.5px solid #1d4e9a !important;

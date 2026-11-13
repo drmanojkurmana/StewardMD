@@ -4637,7 +4637,7 @@
       if (!b || !s || !window.DX || !DX.openRef) return;
       var from = s.opts || {};
       var cur = H0() && H0()[s.id] ? H0()[s.id].name : "";
-      DX.openRef(b.getAttribute("data-kbrel"), { standalone: true, from: from.from, backLabel: "‹ " + (cur.length > 24 ? cur.slice(0, 23) + "…" : cur || "Back"), onBack: function () { DX.openRef(s.id, from); } });
+      DX.openRef(b.getAttribute("data-kbrel"), { standalone: true, from: from.from, backLabel: "‹ " + (cur && cur.length <= 11 ? cur : "Back"), onBack: function () { DX.openRef(s.id, from); } });
     });
   }
   // Section chips: scroll the reader body (never the pinned panel) and mark the section in view.

@@ -81,14 +81,20 @@ try {
   ok(navToExp.sections.includes("Diagnostics"), "Has Diagnostics section");
 
   // Step 3: Back button in Experimental returns to Settings
-  const backNav = await J(`
+  await J(`
     var exp = document.getElementById("sbrExperimental");
     var backBtn = exp.querySelector("[data-sexp=close]");
     backBtn.click();
-    var expGone = !document.getElementById("sbrExperimental");
-    var setStillThere = !!document.getElementById("sbrSettings");
-    return JSON.stringify({ expGone: expGone, setStillThere: setStillThere });
+    return "1";
   `);
+  // Back slides the page out to the right (iOS push, 0.5s) before removing it.
+  await new Promise(r => setTimeout(r, 650));
+  const backNav = await J(`
+    var expGone = !document.getElementById("sbrExperimental");
+    var set = document.getElementById("sbrSettings");
+    return JSON.stringify({ expGone: expGone, setStillThere: !!set, settingsBack: !!set && !set.classList.contains("sbr-under") });
+  `);
+  ok(backNav.settingsBack, "Settings slides back into place (no longer under a page)");
   ok(backNav.expGone, "Back button closes #sbrExperimental");
   ok(backNav.setStillThere, "Settings overlay remains underneath");
 

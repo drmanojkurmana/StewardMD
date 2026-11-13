@@ -1,8 +1,7 @@
 /* StewardMD — tab bar indicator, re-tap to top, and status-bar tap to top (tab-bar.js).
  *
- * 1. The tab bar always stays put (hide-on-scroll was removed at the owner's request). A small indicator slides under the tab you last opened (the tabs are launchers, so "selected"
- *    means "last opened this session"), and tapping that same tab again while home is scrolled down
- *    scrolls home to the top instead of reopening it (the iOS re-tap convention).
+ * 1. The tab bar always stays put (hide-on-scroll was removed at the owner's request). Home's pill is the only
+ *    "current" mark; tapping Home while home is scrolled down scrolls it to the top (the iOS re-tap convention).
  * 2. Tap the status bar (iOS sends Capacitor's `statusTap` event; a tap in the top 20px of the web
  *    view is treated the same) and the topmost scrolling list smooth-scrolls to its top, the way
  *    every native iOS list does.
@@ -17,53 +16,24 @@
   function reduced() { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   window.SMD_TABBAR_SEAM = seam;
 
-  /* ---- 1b. sliding indicator + re-tap scrolls home to the top ---- */
+  /* ---- 1b. re-tap Home scrolls home to the top ----
+   * There used to be a small line that slid under the last tab opened (Drugs, MaiK...). The bar already marks Home
+   * with its pill, so after coming back from Drugs the phone showed two "current" tabs, and the line sat off the
+   * icon on the floating bar (owner 2026-11-13: "this bar... when I click on drugs it comes there"). iOS marks the
+   * current tab one way only, so the line is gone; Home, the only tab that is a place rather than a launcher,
+   * keeps the iOS re-tap: tapping it while home is scrolled down returns to the top. */
   if (!off("smd_tab_indicator")) {
-    var ind = null, sel = null, KEY = "smd_tab_sel";
-    var tabbar = function () { return document.querySelector(".rnav-tabbar"); };
-    var place = function (instant) {
-      var b = tabbar(); if (!b || !sel) return;
-      var t = b.querySelector('.rnav-tab[data-act="' + sel + '"]'); if (!t) return;
-      if (!ind || ind.parentNode !== b) {
-        ind = document.createElement("i"); ind.className = "rnav-tab-ind"; ind.setAttribute("aria-hidden", "true");
-        ind.style.cssText = "position:absolute;left:0;bottom:calc(env(safe-area-inset-bottom,0px) + 3px);width:20px;height:3px;border-radius:3px;" +
-          "background:var(--rds-primary,#0e6e63);pointer-events:none;opacity:0;will-change:transform";
-        if (getComputedStyle(b).position === "static") b.style.position = "relative";
-        b.appendChild(ind); instant = true;
-      }
-      // Layout offsets, not rects: immune to the sheet-depth scale and the hide-on-scroll translate.
-      var x = Math.round(t.offsetLeft + t.offsetWidth / 2 - 10);
-      var first = ind.style.opacity !== "1";
-      ind.style.transition = (instant || first || reduced()) ? "opacity .2s linear" : "transform .42s cubic-bezier(.32,1.25,.5,1)";
-      ind.style.transform = "translateX(" + x + "px)";
-      ind.style.opacity = "1";
-      var all = b.querySelectorAll(".rnav-tab");
-      for (var i = 0; i < all.length; i++) { if (all[i] === t) all[i].setAttribute("aria-current", "true"); else all[i].removeAttribute("aria-current"); }
-    };
-    try { sel = sessionStorage.getItem(KEY) || null; } catch (e) {}
+    try { sessionStorage.removeItem("smd_tab_sel"); } catch (e) {}
+    var stray = function () { var o = document.querySelectorAll(".rnav-tab-ind"); for (var i = 0; i < o.length; i++) o[i].remove(); };
+    stray();
     document.addEventListener("click", function (e) {
-      var t = e.target && e.target.closest && e.target.closest(".rnav-tab"); if (!t) return;
-      var k = t.getAttribute("data-act"); if (!k) return;
+      var t = e.target && e.target.closest && e.target.closest(".rnav-tab"); if (!t || t.getAttribute("data-act") !== "home") return;
       var m = document.querySelector("#homeV2 .v3-main");
-      if (k === sel && m && m.scrollTop > 60) {   // re-tap of the selected tab, home scrolled down: back to the top
-        e.stopPropagation(); e.preventDefault();
-        try { m.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" }); } catch (x) { m.scrollTop = 0; }
-        try { window.SMD_HAPTICS && SMD_HAPTICS.light(); } catch (x) {}
-        return;
-      }
-      sel = k; try { sessionStorage.setItem(KEY, k); } catch (x) {}
-      place(false);
+      if (!m || m.scrollTop <= 60) return;
+      e.stopPropagation(); e.preventDefault();
+      try { m.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" }); } catch (x) { m.scrollTop = 0; }
+      try { window.SMD_HAPTICS && SMD_HAPTICS.light(); } catch (x) {}
     }, true);
-    var again = function () { place(true); };
-    window.addEventListener("resize", again); window.addEventListener("orientationchange", again);
-    new MutationObserver(function (muts) {
-      if (!sel) return;
-      for (var i = 0; i < muts.length; i++) for (var j = 0; j < muts[i].addedNodes.length; j++) {
-        var n = muts[i].addedNodes[j];
-        if (n.nodeType === 1 && (n.classList.contains("rnav-tabbar") || (n.querySelector && n.querySelector(".rnav-tabbar")))) { requestAnimationFrame(again); return; }
-      }
-    }).observe(document.documentElement, { childList: true, subtree: true });
-    if (sel) { var tries = 0; (function w() { if (tabbar()) again(); else if (++tries < 40) setTimeout(w, 250); })(); }
   }
 
   /* ---- 2. status-bar tap -> scroll to top ---- */

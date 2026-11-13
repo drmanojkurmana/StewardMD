@@ -187,6 +187,31 @@
     try { if (G.open && G.open(url, "_blank")) return true; } catch (x) {}
     return false;
   }
+  /* Every image says where to read about it (owner 2026-11-13): its PrepNucleus lesson, opened at the step that shows
+     it, for Pro; without Pro that button asks to subscribe, and "Read the article" opens the Knowledge Library article
+     that holds the image (the builder only names an article the app ships, never a bare page). */
+  function isPro() { try { return !!(G.SMD_PRO && G.SMD_PRO.isProSync && G.SMD_PRO.isProSync()); } catch (x) { return false; } }
+  function openLesson(e) {
+    if (!isPro()) {
+      try { if (G.SMD_PRO && G.SMD_PRO.openPaywall) { G.SMD_PRO.openPaywall("lessons"); return; } } catch (x) {}
+      try { if (G.toast) G.toast("Lessons are part of StewardMD Pro"); } catch (x) {}
+      return;
+    }
+    try { if (G.PREP && G.PREP.open) { close(); G.PREP.open({ lesson: { s: e.lsj, m: e.lm, key: e.ls, step: e.lst } }); return; } } catch (x) {}
+    openRef(e);
+  }
+  function openArticle(e) {
+    if (!e.ka || !(G.SMD_KB && G.SMD_KB.open)) return openRef(e);
+    close(); G.SMD_KB.open(e.ka);
+    // Bring the figure into view once the article has drawn it (figures load with the page's v2 data).
+    var file = String(e.s || "").split("/").pop(), tries = 0;
+    (function find() {
+      var ov = document.getElementById("dxOverlay"), img = null;
+      if (ov && file) img = [].filter.call(ov.querySelectorAll("img"), function (i) { return String(i.getAttribute("src") || "").indexOf(file) >= 0 && i.getClientRects().length; })[0];
+      if (img) { try { img.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (x) { img.scrollIntoView(); } return; }
+      if (++tries < 25) setTimeout(find, 200);
+    })();
+  }
   function openRef(e) {
     try {
       if (e.lk === "kb" && G.SMD_KB && G.SMD_KB.open) { close(); G.SMD_KB.open(e.ri); return; }
@@ -199,6 +224,13 @@
     try { if (G.toast) G.toast("Open it from " + (e.f || "its module") + ": " + (e.rn || e.t)); } catch (x) {}
   }
 
+  function viewerLinks(e) {
+    var out = "";
+    if (e.ls) out += '<button type="button" class="igl-vlink" data-igl="vlesson">Open the lesson' + (isPro() ? "" : ' <span class="igl-pro">Pro</span>') + "</button>";
+    if (e.ka) out += '<button type="button" class="igl-vlink' + (e.ls ? " igl-vlink2" : "") + '" data-igl="varticle">Read the article</button>';
+    if (!out) out = '<button type="button" class="igl-vlink" data-igl="vlink">' + esc(LINK_LABEL[e.lk] || "Open where it is from") + "</button>";
+    return '<div class="igl-vlinks">' + out + "</div>";
+  }
   function paintViewer() {
     var v = root().querySelector(".igl-viewer"), e = S.list[S.vi];
     if (!e) { v.hidden = true; return; }
@@ -212,9 +244,8 @@
       (G.SMD_IMGZOOM ? '<button type="button" class="igl-vnav" data-igl="vreport" aria-label="Report this image">Report</button>' : "") + '</div>' +
       '<div class="igl-vstage"><img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false"></div>' +
       '<div class="igl-vmeta"><h2>' + esc(e.t) + '</h2><p class="igl-vcap">' + esc(e.c) + "</p>" +
-      '<p class="igl-vfrom">From ' + esc(e.f) + (e.rn && e.rn !== e.t ? ": " + esc(e.rn) : "") + " · " + esc(e.k) + "</p>" +
-      (credit ? '<p class="igl-vcredit">' + esc(credit) + "</p>" : "") +
-      '<button type="button" class="igl-vlink" data-igl="vlink">' + esc(LINK_LABEL[e.lk] || "Open where it is from") + "</button></div>";
+      '<p class="igl-vfrom">From ' + esc(e.f) + (e.rn && e.rn !== e.t ? ": " + esc(e.lk === "kb" && e.kn ? e.kn : e.rn) : "") + " · " + esc(e.k) + "</p>" +
+      (credit ? '<p class="igl-vcredit">' + esc(credit) + "</p>" : "") + viewerLinks(e) + "</div>";
     bindViewerTouch(v);
   }
   function bindViewerTouch(v) {
@@ -269,6 +300,8 @@
     if (a === "vprev") { stepViewer(-1); return; }
     if (a === "vnext") { stepViewer(1); return; }
     if (a === "vlink") { openRef(S.list[S.vi]); return; }
+    if (a === "vlesson") { openLesson(S.list[S.vi]); return; }
+    if (a === "varticle") { openArticle(S.list[S.vi]); return; }
     // Report (image-zoom.js): a correction, a copyright concern or a better image, checked by an admin.
     if (a === "vreport") { var re = S.list[S.vi]; if (re && G.SMD_IMGZOOM) G.SMD_IMGZOOM.report({ src: /^https:/.test(re.s) ? re.s : String(re.s || ""), title: re.t, where: "Image Library: " + (S.name || "") }); return; }
   }
