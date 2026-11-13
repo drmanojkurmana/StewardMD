@@ -15,13 +15,9 @@ export function clean(s) {
   return String(s || "").replace(/\s*—\s*/g, ", ").replace(/\s*–\s*/g, "-").replace(/\s+/g, " ").trim();
 }
 
-// Banner pictures (optional): data/history/img/MM-DD.webp for the day, MM-DD-2.webp for its second event.
-// An event with no picture of its own shows the day's picture, else the app draws its category.
-function imgFor(key, i, has) {
-  if (i > 0 && has(key + "-" + (i + 1) + ".webp")) return key + "-" + (i + 1) + ".webp";
-  return has(key + ".webp") ? key + ".webp" : undefined;
-}
-
+// Banner pictures (optional): data/history/img/MM-DD-YYYY.webp, matched to the event by date AND year, so a
+// picture can never land on the wrong event. Holographic glow art on pure black (the app screen-blends it, so the
+// black drops out on any theme). An event with no picture shows its category's line drawing.
 export function build(src, has = (f) => existsSync(join(OUT, "img", f))) {
   const months = {};
   for (const d of src.days) {
@@ -31,7 +27,7 @@ export function build(src, has = (f) => existsSync(join(OUT, "img", f))) {
     (months[mm] ||= {})[key] = d.events
       .map((e) => ({ y: e.year, t: clean(e.title), s: clean(e.summary), c: clean(e.category), sp: clean(e.specialty), u: e.sourceUrl }))
       .sort((a, b) => a.y - b.y)
-      .map((e, i) => { const img = imgFor(key, i, has); return img ? { ...e, img } : e; });
+      .map((e) => { const f = key + "-" + e.y + ".webp"; return has(f) ? { ...e, img: f } : e; });
   }
   return months;
 }

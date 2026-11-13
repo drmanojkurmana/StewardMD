@@ -16,7 +16,7 @@
 #homeV2.rnav .hrf-banner .th-face{display:none}
 #homeV2.rnav .hrf-banner.th-back::after{opacity:0}
 #homeV2.rnav .hrf-banner.th-back>:not(.th-face){visibility:hidden}
-#homeV2.rnav .hrf-banner.th-back .th-face{position:absolute;inset:0;z-index:3;display:block;border-radius:inherit;overflow:hidden;color:#fff;
+#homeV2.rnav .hrf-banner.th-back .th-face{position:absolute;inset:0;z-index:auto;display:block;border-radius:inherit;overflow:hidden;color:#fff;
   box-shadow:inset 0 0 0 1px rgba(143,240,210,.28);
   background:radial-gradient(70% 120% at 88% 60%,rgba(143,240,210,.20),transparent 62%),linear-gradient(100deg,rgba(0,0,0,.16),transparent 60%)}
 #homeV2#homeV2.rnav .hrf-banner .th-face-txt{position:absolute;left:16px;top:10px;bottom:10px;right:30%;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
@@ -33,8 +33,8 @@
 #homeV2#homeV2.rnav .hrf-banner .th-face-go{position:absolute;right:12px;bottom:9px;display:flex;align-items:center;gap:2px;font:600 11px/1 var(--rds-font,system-ui,sans-serif);color:#fff;
   text-shadow:0 1px 2px rgba(0,0,0,.35)}
 #homeV2#homeV2.rnav .hrf-banner .th-face-go svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-#homeV2#homeV2.rnav .hrf-banner .th-face-pic{position:absolute;right:-4px;top:24px;bottom:16px;width:34%;display:grid;place-items:center;pointer-events:none}
-#homeV2#homeV2.rnav .hrf-banner .th-face-img{width:100%;height:100%;object-fit:contain;object-position:right center;filter:drop-shadow(0 6px 14px rgba(0,0,0,.3))}
+#homeV2#homeV2.rnav .hrf-banner .th-face-pic{mix-blend-mode:screen;position:absolute;right:-4px;top:24px;bottom:16px;width:34%;display:grid;place-items:center;pointer-events:none}
+#homeV2#homeV2.rnav .hrf-banner .th-face-img{width:100%;height:100%;object-fit:contain;object-position:right center}
 #homeV2#homeV2.rnav .hrf-banner .th-face-art{width:92%;height:92%;fill:none;stroke:rgba(190,250,230,.78);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
   filter:drop-shadow(0 0 6px rgba(143,240,210,.45))}
 #homeV2#homeV2.rnav .hrf-banner .th-face-art .a-ring{stroke-opacity:.4;stroke-dasharray:3 4}

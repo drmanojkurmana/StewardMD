@@ -16,10 +16,16 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   title (up to 2 lines), calendar icon + year, the summary (2 lines, or 1 when the title takes 2: `fit()`), a picture
   on the right and "Tap to explore". Days with two events alternate. **The banner never changes height** (a taller
   back would shove the whole page down every 5 s); the full text is in the sheet.
-- Picture: `data/history/img/MM-DD.webp` (day) or `MM-DD-2.webp` (second event) when present; the build writes
-  `img` into the month file only for files that exist (no 404s). Otherwise a line drawing per category (7: Pioneer,
-  Discovery, Nobel & Award, Public Health, Surgery, Vaccine & Drug, Institution), `ART` in today-history.js.
-  No per-day images yet; the owner offered to supply all 366.
+- Picture: `data/history/img/MM-DD-YYYY.webp`, matched to the event by date AND year (never the wrong event);
+  the build writes `img` into the month file only for files that exist (no 404s), and the banner leads with the
+  event that has one. Otherwise a line drawing per category (`ART` in today-history.js).
+- **Image style (owner, 2026-11-13): "holographic medical illustration"**: glowing mint/cyan translucent line art,
+  one amber highlight, on PURE BLACK. `.th-face-pic` has `mix-blend-mode: screen`, so the black disappears on every
+  theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
+  box shows (it did, first try).
+- Producing them: `scripts/history/image-prompts.mjs` writes `data/history/image-prompts.csv` (priority 1 = one
+  featured event per day, 366; priority 2 = the second event, 304, optional), each row a full prompt and its file
+  name. `scripts/history/import-images.sh <folder>` converts PNG/JPG to 480x360 WebP and rebuilds the month files.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.

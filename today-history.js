@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th3";
+  var FLAG = "smd_today_history", VER = "th4";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -181,7 +181,8 @@
     setInterval(armDate, 1000); armDate();
     var t = todayKey();
     eventsFor(t.m, t.d).then(function (evs) {
-      todays = evs || [];
+      // the event with a picture leads; the rest keep their order
+      todays = (evs || []).slice().sort(function (a, b) { return (b.img ? 1 : 0) - (a.img ? 1 : 0); });
       if (todays.length) timer = setTimeout(tick, FACE_MS);           // the front face gets its 5 s first
     }).catch(function () {});
     D.addEventListener("visibilitychange", function () {
