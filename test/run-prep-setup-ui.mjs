@@ -132,7 +132,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{["smd_prep_v1","smd_prep_setup","smd_prep_c_caps"].forEach(function(k){localStorage.removeItem(k);});}catch(e){} indexedDB.deleteDatabase("prep-gen"); indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open({ subject: "anatomy" }); return 1;`);
   ok(await until(`return !!window.PREP_SETUP && !!document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus]');`, 20000), "prep-setup.js loads with PrepNucleus; the subject lists its modules");
-  ok(await ev(`return PREP_LOADER.V === "prep64" && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prep31, prep-setup.js after prep.js, prep-setup.css");
+  ok(await ev(`return /^prep\\d+$/.test(PREP_LOADER.V) && PREP_LOADER.JS.indexOf("prep-setup.js") > PREP_LOADER.JS.indexOf("prep.js") && !!document.querySelector('link[data-prep="prep-setup.css"]');`) === true, "loader: prepNN, prep-setup.js after prep.js, prep-setup.css");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=su-subject][data-s=anatomy]');`, 5000), "the subject screen has Practise Anatomy");
 
   // ---- module: opening it asks how to practise (mode sheet, 2026-10-10); Practise opens it again
@@ -165,12 +165,28 @@ try {
   await click('#pnSetup [data-act=su-d][data-v="3"]');
   const hardImg = await ev(`return [0,5,10,15,20,25,30,35].filter(function(i){return i%3===2;}).length;`);
   ok(new RegExp("^" + hardImg + "\\s*questions?").test(await text("#suStatus")), "Image-based and Hard: " + await text("#suStatus"));
-  ok(await ev(`var b=document.querySelector('#pnSetup [data-act=su-seen][data-v=bm]'); return b.disabled && b.getAttribute("aria-checked")==="false";`) === true, "an option with 0 questions (Bookmarked) is disabled");
+  ok(await ev(`var b=document.querySelector('#pnSetup [data-act=su-seen][data-v=bm]'); return b.disabled && b.getAttribute("aria-pressed")==="false";`) === true, "an option with 0 questions (Bookmarked) is disabled");
   await click('#pnSetup [data-act=su-seen][data-v=bm]');
   ok(new RegExp("^" + hardImg + "\\s*questions?").test(await text("#suStatus")) && await ev(`return document.getElementById("suGo").disabled;`) === false, "tapping it changes nothing; Start stays on: " + await text("#suStatus"));
   await shots("sheet-empty");
   await click('#pnSetup [data-act=su-seen][data-v=new]');
   await click('#pnSetup [data-act=su-d][data-v=mix]');
+  // Several chips at once (owner 2026-11-13): Image-based + Clinical scenario keeps either; the last one out returns to All.
+  await click('#pnSetup [data-act=su-type][data-v=case]');
+  const pressed = (k) => ev(`return [].slice.call(document.querySelectorAll('#pnSetup [data-act=su-${k}][aria-pressed=true]')).map(function(b){return b.getAttribute("data-v");}).join(",");`);
+  ok(await pressed("type") === "img,case" && await ev(`var S=PREP_SETUP._st(); return PREP_SETUP._pure.counts(S.lists, S.sel, S.ctx).total;`) === 24, "two type chips on: 8 + 16 = 24: " + await pressed("type") + " " + await text("#suStatus"));
+  ok(/One or more/.test(await text("#pnSetup .su-g-type .su-h")), "the row says one or more");
+  await click('#pnSetup [data-act=su-d][data-v="1"]'); await click('#pnSetup [data-act=su-d][data-v="3"]');
+  ok(await pressed("d") === "1,3", "two difficulty chips on: " + await pressed("d"));
+  if (SHOTS) { await ev(`document.querySelector("#pnSetup .su-g-type").scrollIntoView({block:"start"}); return 1;`); await shots("sheet-multi"); }
+  ok(/Image-based or clinical scenario/.test(await text("#pnSetup .su-more small")) && /easy or hard/i.test(await text("#pnSetup .su-more small")), "the filter row names them: " + await text("#pnSetup .su-more small"));
+  await click('#pnSetup [data-act=su-d][data-v=mix]');
+  ok(await pressed("d") === "mix", "Mix alone clears the difficulty chips");
+  await click('#pnSetup [data-act=su-type][data-v=case]');
+  ok(await pressed("type") === "img", "tapping an on chip turns it off");
+  await click('#pnSetup [data-act=su-type][data-v=img]');
+  ok(await pressed("type") === "all", "the last chip off returns the row to All");
+  await click('#pnSetup [data-act=su-type][data-v=img]');
   await click('#pnSetup [data-act=su-n][data-v="10"]');
   ok(/^8 questions/.test(await text("#suStatus")) && /Only 8 questions match/.test(await screenText()), "count capped by the pool, said in words");
   await click('#pnSetup [data-act=su-dec]');
@@ -244,7 +260,7 @@ try {
   // remembered: the sheet opens on the same choice
   await click('#smdPrep [data-act=start][data-k=study]');
   ok(await until(sheetOpen, 5000), "sheet again");
-  ok(await ev(`return ["su-type=img","su-seen=new","su-n=10","su-timer=q","su-mode=exam"].every(function(k){var p=k.split("="); var b=document.querySelector('#pnSetup [data-act="'+p[0]+'"][data-v="'+p[1]+'"]'); return b && b.getAttribute("aria-checked")==="true";}) && document.querySelector('#pnSetup .su-qsrow .su-sv').textContent === "30 s";`) === true, "the last choice is remembered (filters for the module, mode and timer for the device)");
+  ok(await ev(`return ["su-type=img","su-seen=new","su-n=10","su-timer=q","su-mode=exam"].every(function(k){var p=k.split("="); var b=document.querySelector('#pnSetup [data-act="'+p[0]+'"][data-v="'+p[1]+'"]'); return b && (b.getAttribute("aria-checked")==="true" || b.getAttribute("aria-pressed")==="true");}) && document.querySelector('#pnSetup .su-qsrow .su-sv').textContent === "30 s";`) === true, "the last choice is remembered (filters for the module, mode and timer for the device)");
   // back closes the sheet first
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !document.getElementById("pnSetup") && !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 3000), "back closes the sheet and stays on the module");

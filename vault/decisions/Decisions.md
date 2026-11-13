@@ -12345,3 +12345,11 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - MaiK name gate (`kb/ai/steward-ai.browser.js`): on an equal-length name hit, an article titled for the condition alone beats a compound overview ("Hodgkin's Lymphoma" over "Hodgkin Lymphoma: Reed-Sternberg Cells and Staging"). Benchmark `test/maik-kb-relevance.test.mjs`: 327 correct, 0 miss, 0 mis-route, 0 off-topic; three questions that used to get no notes (anion gap, Henderson-Hasselbalch, insulin dose) now get the new articles, and five cases accept the new sister article.
 - `kb/tools/kb-placement.mjs` (shared by `build-kb-v2.mjs` and the Image Library builder): an unbundled article's figures go on the shipped article on the same topic; with everything bundled it places nothing, and it stays as the guard for the next gap.
 - Image Library viewer: "Open the lesson" (the lesson whose title best matches the image, at that step; `PREP.open({ lesson })` -> `PREP_LESSONS.openAt`) for Pro, the paywall without Pro; "Read the article" opens the Knowledge Library article and scrolls to the figure. Test: `test/run-imglib-links-ui.mjs`.
+
+## 2026-11-13 PrepNucleus practise sheet: several chips per filter row
+- Owner: "allow to select multiple chips" (screenshot of Question type and New or repeat).
+- Question type, New or repeat and Difficulty are multi-select: All or Mix stands alone, specific chips combine as "any of".
+  Difficulty followed for consistency (same chip row, same expectation).
+- Several types share the count equally (the Mix rule over the chosen types); several repeat states or difficulties draw
+  from the union. Number of questions, mode and timer stay single choice.
+- Stored as a comma list in the existing `type` / `seen` / `d` fields, so earlier saved choices need no migration.
