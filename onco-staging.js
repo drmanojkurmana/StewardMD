@@ -102,7 +102,10 @@
 
   function loadIndex() {
     if (stg.loaded || !G.fetch) return Promise.resolve(stg.index);
-    return G.fetch("/kb/onco/staging/index.json?v=op7").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    var idxUrl = "/kb/onco/staging/index.json?v=op7";
+    return ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(idxUrl, { optional: true })
+      : G.fetch(idxUrl).then(function (r) { return (r && r.ok) ? r.json() : null; }))
       .then(function (j) {
         if (j) { stg.index = (j.sites || []); stg.gapMessage = j.gapMessage || GAP_MESSAGE; stg.loaded = true; }
         return stg.index;
@@ -111,7 +114,10 @@
   function loadSiteFile(entry) {
     if (!entry || entry.status !== "scaffold" || !entry.file || !G.fetch) return Promise.resolve(null);
     if (stg.files[entry.id]) return Promise.resolve(stg.files[entry.id]);
-    return G.fetch("/kb/onco/staging/" + entry.file + "?v=op7").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    var siteUrl = "/kb/onco/staging/" + entry.file + "?v=op7";
+    return ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(siteUrl, { optional: true })
+      : G.fetch(siteUrl).then(function (r) { return (r && r.ok) ? r.json() : null; }))
       .then(function (j) { if (j) stg.files[entry.id] = j; return j; }).catch(function () { return null; });
   }
   function indexEntry(id) { for (var i = 0; i < stg.index.length; i++) if (stg.index[i].id === id) return stg.index[i]; return null; }

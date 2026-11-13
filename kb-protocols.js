@@ -120,7 +120,11 @@
   var st = { index: null, loading: false, error: "", q: "", subject: "all", basis: "all", view: "list", openId: null, cache: {}, listScroll: 0, pending: null, nav: 0 };
 
   function getJSON(path) {
-    return fetch(BASE + path + "?v=" + encodeURIComponent(CONTENT_V)).then(function (r) {
+    var url = BASE + path + "?v=" + encodeURIComponent(CONTENT_V);
+    if (window.SMD_CONTENT && window.SMD_CONTENT.fetchJSON) {
+      return window.SMD_CONTENT.fetchJSON(url);
+    }
+    return fetch(url).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     });

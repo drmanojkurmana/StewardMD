@@ -336,11 +336,21 @@
     }).then(function (bundle) {
         phase = "restart"; say(100);
         cleanup();
-        var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
-        return applied.then(function () {
-          setMyVersion(pending.version);
-          return { ok: true, immediate: immediate !== false, delta: mode === "delta" };
-        }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
+        // Content-key rotation (Security 4): while still online, fetch + persist any key id the
+        // new bundle needs BEFORE set()/next() reloads into ciphertext the device cannot open.
+        var keyReady = Promise.resolve(true);
+        try {
+          if (window.SMD_CONTENT && typeof window.SMD_CONTENT.ensureKeyForOta === "function") {
+            keyReady = window.SMD_CONTENT.ensureKeyForOta(pending).then(function (ok) { return !!ok; }, function () { return false; });
+          }
+        } catch (e) { keyReady = Promise.resolve(false); }
+        return keyReady.then(function () {
+          var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
+          return applied.then(function () {
+            setMyVersion(pending.version);
+            return { ok: true, immediate: immediate !== false, delta: mode === "delta" };
+          }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
+        });
       }, function (e) {
         cleanup();
         return { ok: false, error: otaCode(e, "download-failed") };

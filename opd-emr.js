@@ -2363,13 +2363,18 @@
   function maybeLoadOncoProtocols(anyMode) {
     if (!oncoFlagOn() || (!st.writeOn && !anyMode) || st.oncoProtocolsLoaded) return;
     st.oncoProtocolsLoaded = true;
-    fetch("/kb/protocols/index.json")
-      .then(function (r) { return r.ok ? r.json() : null; })
+    var idxUrl = "/kb/protocols/index.json";
+    ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+      ? SMD_CONTENT.fetchJSON(idxUrl, { optional: true })
+      : fetch(idxUrl).then(function (r) { return r.ok ? r.json() : null; }))
       .then(function (manifest) {
         var list = (manifest && (manifest.protocols || manifest)) || [];
         var active = list.filter(oncoUsable);
         return Promise.all(active.map(function (p) {
-          return fetch("/kb/protocols/" + encodeURIComponent(p.id) + ".json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+          var pUrl = "/kb/protocols/" + encodeURIComponent(p.id) + ".json";
+          return ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+            ? SMD_CONTENT.fetchJSON(pUrl, { optional: true })
+            : fetch(pUrl).then(function (r) { return r.ok ? r.json() : null; })).catch(function () { return null; });
         }));
       })
       .then(function (templates) {
@@ -3914,8 +3919,10 @@
     var tries = [id, id.toUpperCase(), id.toLowerCase()].filter(function (x, i, a) { return a.indexOf(x) === i; });
     function attempt(i) {
       if (i >= tries.length) return Promise.resolve(null);
-      return fetch("/kb/treatments/" + encodeURIComponent(tries[i]) + ".json")
-        .then(function (r) { return r.ok ? r.json() : attempt(i + 1); })
+      var tUrl = "/kb/treatments/" + encodeURIComponent(tries[i]) + ".json";
+      return ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+        ? SMD_CONTENT.fetchJSON(tUrl, { optional: true }).then(function (j) { return j != null ? j : attempt(i + 1); })
+        : fetch(tUrl).then(function (r) { return r.ok ? r.json() : attempt(i + 1); }))
         .catch(function () { return attempt(i + 1); });
     }
     return attempt(0);
