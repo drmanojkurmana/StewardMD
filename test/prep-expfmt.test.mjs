@@ -97,7 +97,8 @@ test("preservation invariant: visible text equals the original on all 312", () =
 
 test("list/table path drops nothing: parsed bodies all appear verbatim", () => {
   const parsed = CORPUS.filter((c) => LF.parse(c.exp));
-  assert.ok(parsed.length >= 3, "parseable=" + parsed.length);
+  /* 2 since 2026-11-13: 0036cad0 ("RU-4865. Centchroman") parsed only by reading "65." as a label and dropping text. */
+  assert.ok(parsed.length >= 2, "parseable=" + parsed.length);
   for (const c of parsed) {
     const p = LF.parse(c.exp), h = LF.exp(c.exp);
     assert.ok(h, c.id + " renders");

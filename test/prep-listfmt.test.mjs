@@ -164,3 +164,14 @@ test("corpus: options and explanations never throw and never lose text", () => {
   }
   for (const e of CORPUS.ordinary_exps) assert.doesNotThrow(() => LF.exp(e.e));
 });
+
+/* Tester report 2026-11-13 (Q-CBA-BVF-JXP, rm-fe31f7e5d4e4): "less than 0.8." read the "8." as a label, cut statement 2
+   to "less than 0." and dropped statements 3 and 4. */
+test("decimal before a statement end is not a label, and no stem text is dropped", () => {
+  const q = "Regarding the Doppler criteria for portal hypertension, which of the following statements are correct?\n1. Portal vein diameter greater than 13 mm is a sign of portal hypertension.\n2. The hepatic artery RI in patients with portal hypertension is typically less than 0.8.\n3. Mean peak velocity in the portal vein is less than 10 cm/sec in portal hypertension.\n4. A portal hypertension index value less than 2.08 is consistent with established portal hypertension.";
+  const p = LF.parse(q);
+  assert.deepEqual(p.items.map((x) => x.label), ["1", "2", "3", "4"]);
+  assert.match(p.items[1].text, /less than 0\.8\.$/);
+  const out = unesc(LF.stem(q)).replace(/\s+/g, "");
+  for (const w of ["0.8", "10cm/sec", "2.08", "establishedportalhypertension"]) assert.ok(out.includes(w), w);
+});
