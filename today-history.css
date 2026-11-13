@@ -12,8 +12,11 @@
 /* ---- banner flip: fold to 90deg (0.22 s), swap faces, unfold (0.3 s) ---- */
 #homeV2#homeV2.rnav .hrf-banner.th-flipout{animation:th-fold-out .22s cubic-bezier(.55,0,.85,.35) both}
 #homeV2#homeV2.rnav .hrf-banner.th-flipin{animation:th-fold-in .3s cubic-bezier(.15,.75,.3,1.1) both}
-@keyframes th-fold-out{from{transform:perspective(900px) rotateX(0)}to{transform:perspective(900px) rotateX(90deg) scale(.98)}}
-@keyframes th-fold-in{from{transform:perspective(900px) rotateX(-90deg) scale(.98)}to{transform:perspective(900px) rotateX(0)}}
+/* the same turn as a swipe: about the vertical axis, darkening toward edge-on */
+@keyframes th-fold-out{from{transform:perspective(900px) rotateY(0);filter:brightness(1)}to{transform:perspective(900px) rotateY(90deg) scale(.97);filter:brightness(.68)}}
+@keyframes th-fold-in{from{transform:perspective(900px) rotateY(-90deg) scale(.97);filter:brightness(.68)}to{transform:perspective(900px) rotateY(0);filter:brightness(1)}}
+/* swipe to flip (today-history.js armSwipe): horizontal drags are ours, vertical ones still scroll */
+#homeV2.rnav .hrf-banner[data-th-swipe]{touch-action:pan-y;-webkit-user-select:none;user-select:none}
 #homeV2.rnav .hrf-banner.th-fade>*{transition:opacity .2s ease;opacity:0}
 
 /* the history face: same banner, its own words and picture. The banner never changes height. */

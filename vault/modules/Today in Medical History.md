@@ -102,3 +102,6 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
 
 ## Gotcha: flip class names (2026-11-13)
 The banner flip animation classes are `th-flipout` / `th-flipin`. They were `th-out` / `th-in`, but `.th-in` is also the India pill in the sheet (uppercase Inter), so for 300 ms after each flip the Pro face rendered in uppercase Inter. The pill rule is now scoped to `#thSheet .th-in`. Never put a bare `th-*` class on `#hrfBanner` that the sheet also uses.
+
+## Swipe to flip (2026-11-13, th17)
+`armSwipe` in today-history.js: a horizontal drag turns the banner about its vertical axis under the finger (rotateY, darkening toward edge-on), swaps faces at 90 degrees, and on release finishes the turn when past 90 degrees or flicked (over 0.45 px/ms, past 20 degrees), else springs back. Vertical drags stay page scroll (`touch-action: pan-y`). The click after a swipe is swallowed so it does not open the sheet or the facts page. The swipe resets the 5 s auto timer. The auto flip uses the same rotateY turn (it was rotateX). Reduced motion: a swipe triggers the fade flip.

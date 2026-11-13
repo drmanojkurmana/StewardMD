@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th16";
+  var FLAG = "smd_today_history", VER = "th17";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -202,6 +202,77 @@
     flip(b, !showing, function () { timer = setTimeout(tick, FACE_MS); });
   }
 
+  // Swipe to flip: the card turns about its vertical axis under the finger, swaps faces edge-on at
+  // 90 degrees, and on release finishes the turn (far or fast enough) or springs back. Vertical
+  // drags stay page scroll (touch-action: pan-y).
+  var drag = null, swallowUntil = 0;
+  function dragPaint(b, a) {
+    var over = Math.abs(a) >= 90, want = over ? !drag.from : drag.from;
+    if (showing !== want) { if (want) pick = drag.pick; setShowing(b, want); }
+    var shown = over ? a - (a > 0 ? 180 : -180) : a, s = Math.sin(Math.abs(a) * Math.PI / 180);
+    b.style.transform = "perspective(900px) rotateY(" + shown.toFixed(2) + "deg) scale(" + (1 - 0.03 * s).toFixed(4) + ")";
+    b.style.filter = "brightness(" + (1 - 0.32 * s).toFixed(3) + ")";
+  }
+  function dragEnd(b, commit) {
+    var d = drag, from = d.a, to = commit ? (d.a >= 0 ? 180 : -180) : 0;
+    var dur = Math.max(160, Math.min(420, Math.abs(to - from) * 2.6)), t0 = performance.now();
+    function step(now) {
+      var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      d.a = from + (to - from) * e; dragPaint(b, d.a);
+      if (k < 1) { requestAnimationFrame(step); return; }
+      b.style.transform = ""; b.style.filter = ""; b.style.transition = "";
+      drag = null; busy = false; clearTimeout(timer); timer = setTimeout(tick, FACE_MS);
+    }
+    requestAnimationFrame(step);
+  }
+  function armSwipe(b) {
+    if (b.getAttribute("data-th-swipe")) return;
+    b.setAttribute("data-th-swipe", "1");
+    var x0 = 0, y0 = 0, id = -1, live = false, w = 1, lx = 0, lt = 0, vx = 0;
+    b.addEventListener("pointerdown", function (e) {
+      if (drag || busy || !todays.length || (e.pointerType === "mouse" && e.button !== 0)) return;
+      id = e.pointerId; x0 = lx = e.clientX; y0 = e.clientY; lt = e.timeStamp; vx = 0; live = false;
+      w = b.getBoundingClientRect().width || 1;
+    });
+    b.addEventListener("pointermove", function (e) {
+      if (e.pointerId !== id) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      if (!live) {
+        if (Math.abs(dy) > 10 && Math.abs(dy) > Math.abs(dx)) { id = -1; return; }   // a scroll, not a swipe
+        if (Math.abs(dx) < 8) return;
+        live = true; busy = true; clearTimeout(timer);
+        drag = { from: showing, pick: showing ? pick - 1 : pick, a: 0 };   // the event on show, or the one coming
+        b.style.transition = "none";
+        try { b.setPointerCapture(id); } catch (er) {}
+      }
+      var dt = e.timeStamp - lt; if (dt > 0) vx = 0.7 * vx + 0.3 * ((e.clientX - lx) / dt);
+      lx = e.clientX; lt = e.timeStamp;
+      if (reduced()) return;
+      drag.a = Math.max(-180, Math.min(180, dx / w * 200)); dragPaint(b, drag.a);
+    });
+    function up(e) {
+      if (e.pointerId !== id) return;
+      id = -1;
+      if (!live) return;
+      live = false; swallowUntil = Date.now() + 400;
+      var dx = lx - x0, fast = Math.abs(vx) > 0.45 && (vx > 0) === (dx > 0);
+      if (reduced()) {
+        drag = null; b.style.transition = "";
+        if (Math.abs(dx) > 40 || fast) flip(b, !showing, function () { timer = setTimeout(tick, FACE_MS); });
+        else { busy = false; timer = setTimeout(tick, FACE_MS); }
+        return;
+      }
+      var commit = e.type !== "pointercancel" && (Math.abs(drag.a) >= 90 || (fast && Math.abs(drag.a) > 20));
+      dragEnd(b, commit);
+    }
+    b.addEventListener("pointerup", up);
+    b.addEventListener("pointercancel", up);
+  }
+  // a finished swipe is not a tap: keep it from opening the sheet or the facts page
+  W.addEventListener("click", function (e) {
+    if (Date.now() < swallowUntil && e.target && e.target.closest && e.target.closest("#hrfBanner")) { e.preventDefault(); e.stopPropagation(); }
+  }, true);
+
   // While history shows, a tap (or Enter/Space) on the banner opens the sheet, not the facts page.
   function onHistory(t) { var b = t && t.closest && t.closest("#hrfBanner"); return b && showing && b.classList.contains("th-back") ? b : null; }
   D.addEventListener("click", function (e) {
@@ -236,7 +307,7 @@
   });
 
   function start() {
-    setInterval(armDate, 1000); armDate();
+    setInterval(function () { armDate(); var b = banner(); if (b) armSwipe(b); }, 1000); armDate();
     var t = todayKey();
     eventsFor(t.m, t.d).then(function (evs) {
       // the event with a picture leads; the rest keep their order
