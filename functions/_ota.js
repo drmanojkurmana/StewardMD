@@ -140,6 +140,48 @@ export async function checkForDevice(r2, state = {}) {
 // One content-addressed file. `hash` is caller-validated (see the router) before this is called.
 export async function getFile(r2, hash, options) { return r2.get(K.file(hash), options); }
 
+// ---- signed file URLs (HMAC; the native updater cannot attach headers, so the query is the credential) ---
+// sig = hex(HMAC-SHA256(OTA_URL_SECRET, hash + "." + exp)); exp = now + 2h.
+export const FILE_URL_TTL_SEC = 2 * 3600;
+
+export async function hmacHex(secret, message) {
+  const key = await crypto.subtle.importKey(
+    "raw", new TextEncoder().encode(String(secret)),
+    { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
+  );
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(String(message)));
+  return Array.from(new Uint8Array(sig), (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+function timingSafeEqualHex(a, b) {
+  a = String(a || "").toLowerCase();
+  b = String(b || "").toLowerCase();
+  if (a.length !== b.length) return false;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return d === 0;
+}
+
+/** Build { exp, sig, query } for /api/ota/file/<hash>?<query>. Returns null when secret is unset. */
+export async function signFileQuery(secret, hash, nowSec) {
+  if (!secret) return null;
+  const exp = (Number.isFinite(nowSec) ? nowSec : Math.floor(Date.now() / 1000)) + FILE_URL_TTL_SEC;
+  const sig = await hmacHex(secret, String(hash) + "." + exp);
+  return { exp, sig, query: "exp=" + exp + "&sig=" + sig };
+}
+
+/** Verify ?exp=&sig= on a file download. reason: missing-sig | expired | bad-sig | no-secret */
+export async function verifyFileQuery(secret, hash, expRaw, sig, nowSec) {
+  if (!secret) return { ok: false, reason: "no-secret" };
+  if (sig == null || sig === "") return { ok: false, reason: "missing-sig" };
+  const exp = parseInt(expRaw, 10);
+  const now = Number.isFinite(nowSec) ? nowSec : Math.floor(Date.now() / 1000);
+  if (!Number.isFinite(exp) || exp <= now) return { ok: false, reason: "expired" };
+  const expected = await hmacHex(secret, String(hash) + "." + exp);
+  if (!timingSafeEqualHex(sig, expected)) return { ok: false, reason: "bad-sig" };
+  return { ok: true };
+}
+
 /* RESUMABLE DOWNLOADS. The bundle is ~48MB and the phone was served it as one un-resumable stream:
  * the route answered 200 with the whole body whatever Range was asked for, so any drop restarted from
  * zero and the updater reported "download failed" (owner's iPhone, 2026-09-18). Parses an HTTP Range

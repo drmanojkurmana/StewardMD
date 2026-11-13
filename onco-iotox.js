@@ -105,7 +105,10 @@
 
   function loadCatalog() {
     if (ix.loaded || !G.fetch) return Promise.resolve(ix.catalog);
-    return G.fetch("/kb/onco/iotox/catalog.json?v=op7").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    var catUrl = "/kb/onco/iotox/catalog.json?v=op7";
+    return ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(catUrl, { optional: true })
+      : G.fetch(catUrl).then(function (r) { return (r && r.ok) ? r.json() : null; }))
       .then(function (j) { if (j) { ix.catalog = j; ix.gapMessage = j.gapMessage || GAP_MESSAGE; ix.loaded = true; } return ix.catalog; })
       .catch(function () { return ix.catalog; });
   }

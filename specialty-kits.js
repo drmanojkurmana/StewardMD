@@ -536,14 +536,20 @@
   function loadKits() {
     if (BUNDLE) return Promise.resolve(BUNDLE);
     if (pendKits) return pendKits;
-    pendKits = fetch("/kb/specialty-kits/kits.json?v=" + encodeURIComponent(KITS_V)).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    var kitsUrl = "/kb/specialty-kits/kits.json?v=" + encodeURIComponent(KITS_V);
+    pendKits = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+      ? SMD_CONTENT.fetchJSON(kitsUrl)
+      : fetch(kitsUrl).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }))
       .then(function (b) { BUNDLE = b; pendKits = null; return b; }, function (e) { pendKits = null; throw e; });
     return pendKits;
   }
   function loadGrowth() {
     if (GROWTH) return Promise.resolve(GROWTH);
     if (pendGrowth) return pendGrowth;
-    pendGrowth = fetch("/kb/growth/who-growth.json?v=" + encodeURIComponent(GROWTH_V)).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    var growthUrl = "/kb/growth/who-growth.json?v=" + encodeURIComponent(GROWTH_V);
+    pendGrowth = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+      ? SMD_CONTENT.fetchJSON(growthUrl)
+      : fetch(growthUrl).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }))
       .then(function (g) { GROWTH = g; pendGrowth = null; return g; }, function (e) { pendGrowth = null; throw e; });
     return pendGrowth;
   }

@@ -31,8 +31,10 @@
   function load(id) {
     var b = bucketOf(id);
     if (!cache[b]) {
-      cache[b] = fetch("/kb/dist/v2/b" + pad2(b) + ".json?v=kbv23")
-        .then(function (r) { return r.ok ? r.json() : {}; })
+      var url = "/kb/dist/v2/b" + pad2(b) + ".json?v=kbv23";
+      cache[b] = ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+        ? SMD_CONTENT.fetchJSON(url, { optional: true }).then(function (j) { return j || {}; })
+        : fetch(url).then(function (r) { return r.ok ? r.json() : {}; }))
         .catch(function () { return {}; });
     }
     return cache[b].then(function (all) { return all[id] || null; });
@@ -201,8 +203,10 @@
     function hload(id) {
       var b = bucketOf(id);
       if (!hcache[b]) {
-        hcache[b] = fetch("/kb/dist/handouts/b" + pad2(b) + ".json?v=kbh1")
-          .then(function (r) { return r.ok ? r.json() : {}; })
+        var url = "/kb/dist/handouts/b" + pad2(b) + ".json?v=kbh1";
+        hcache[b] = ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+          ? SMD_CONTENT.fetchJSON(url, { optional: true }).then(function (j) { return j || {}; })
+          : fetch(url).then(function (r) { return r.ok ? r.json() : {}; }))
           .catch(function () { return {}; });
       }
       return hcache[b].then(function (all) { var x = all && all[id]; return x && typeof x === "object" ? x : null; });

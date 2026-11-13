@@ -69,7 +69,10 @@
     if (doc) return Promise.resolve(doc);
     if (pend) return pend;
     if (typeof fetch !== "function") return Promise.resolve(null);
-    pend = fetch(URL_ + "?v=" + VER).then(function (r) { if (!r.ok) throw new Error("adult ref " + r.status); return r.json(); })
+    var refUrl = URL_ + "?v=" + VER;
+    pend = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+      ? SMD_CONTENT.fetchJSON(refUrl)
+      : fetch(refUrl).then(function (r) { if (!r.ok) throw new Error("adult ref " + r.status); return r.json(); }))
       .then(function (j) { pend = null; return setDoc(j); }, function () { pend = null; return null; });
     return pend;
   }

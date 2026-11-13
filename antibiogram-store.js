@@ -21,7 +21,7 @@
  * ======================================================================================== */
 (function () {
   "use strict";
-  var ABG_V = "a5e6e86a9e8f";
+  var ABG_V = "666b82264199";
   var R = window.ABG_RULES;
   var ACT = { k: "keep", i: "intrinsic", h: "hide", x: "suppress", c: "caution" };
   var LOCAL_KEY = "smd_abg_local";
@@ -67,8 +67,10 @@
     if (DETAIL) return Promise.resolve(DETAIL[id] || null);
     if (!detailLoading) {
       if (typeof fetch !== "function") return Promise.resolve(null);
-      detailLoading = fetch("/kb/antibiogram/antibiogram-detail.json?v=" + encodeURIComponent(ABG_V))
-        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      var detailUrl = "/kb/antibiogram/antibiogram-detail.json?v=" + encodeURIComponent(ABG_V);
+      detailLoading = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+        ? SMD_CONTENT.fetchJSON(detailUrl)
+        : fetch(detailUrl).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }))
         .then(function (j) { DETAIL = (j && j.sources) || {}; return DETAIL; })
         .catch(function () { detailLoading = null; return null; });
     }
@@ -78,8 +80,10 @@
     if (B) return Promise.resolve(B);
     if (loading) return loading;
     if (typeof fetch !== "function") return Promise.reject(new Error("fetch unavailable"));
-    loading = fetch("/kb/antibiogram/antibiogram.json?v=" + encodeURIComponent(ABG_V))
-      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    var loadUrl = "/kb/antibiogram/antibiogram.json?v=" + encodeURIComponent(ABG_V);
+    loading = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+      ? SMD_CONTENT.fetchJSON(loadUrl)
+      : fetch(loadUrl).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }))
       .then(function (b) { B = expand(b); clearMemo(); addLocal(); fire(); return B; })
       .catch(function (e) { loading = null; throw e; });
     return loading;

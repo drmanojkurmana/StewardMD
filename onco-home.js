@@ -100,7 +100,10 @@
   function loadProtocols() {
     if (!G.fetch) { _protoLoaded = true; return; }
     try {
-      G.fetch("/kb/protocols/index.json").then(function (r) { return (r && r.ok) ? r.json() : null; })
+      var idxUrl = "/kb/protocols/index.json";
+      ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+        ? G.SMD_CONTENT.fetchJSON(idxUrl, { optional: true })
+        : G.fetch(idxUrl).then(function (r) { return (r && r.ok) ? r.json() : null; }))
         .then(function (j) { var all = (j && (j.protocols || j)) || []; if (!(all instanceof Array)) all = []; _protocols = all; })   // show the full library; each row carries a lifecycle/DRAFT badge, and the detail view is labelled reference-only (was filtered to non-experimental -> looked empty since 123/124 are experimental)
         .catch(function () {})
         .then(function () { _protoLoaded = true; renderResults(); });   // resolve any skeleton once the index arrives
@@ -372,8 +375,10 @@
   function loadProtoFull(id, cb) {
     if (_protoFull[id]) { cb(_protoFull[id]); return; }
     if (!G.fetch) { cb(null); return; }
-    G.fetch("/kb/protocols/" + encodeURIComponent(id) + ".json")
-      .then(function (r) { return (r && r.ok) ? r.json() : null; })
+    var protoUrl = "/kb/protocols/" + encodeURIComponent(id) + ".json";
+    ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(protoUrl, { optional: true })
+      : G.fetch(protoUrl).then(function (r) { return (r && r.ok) ? r.json() : null; }))
       .then(function (j) { if (j) _protoFull[id] = j; cb(j || null); })
       .catch(function () { cb(null); });
   }

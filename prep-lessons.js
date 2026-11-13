@@ -449,7 +449,12 @@
     ans: {}, sc: { ok: 0, n: 0, run: 0, best: 0 } };
   var host = null;
 
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+  function getJSON(url) {
+    if (window.SMD_CONTENT && window.SMD_CONTENT.fetchJSON) {
+      return window.SMD_CONTENT.fetchJSON(url, { cache: "no-cache" });
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
   // Generated lessons live in R2: /api/prep/bank/v1/lessons/... (the same API base as the bank, so tests can point it at fixtures).
   function api() { return ((host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/") + VER + "/lessons/"; }
   // The network copy, else the IndexedDB copy (offline); null when neither.

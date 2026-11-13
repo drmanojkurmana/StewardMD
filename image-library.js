@@ -49,6 +49,9 @@
   var S = null; /* { view, slug, name, items, shown, q, from, kind, origin, vi, scale } */
 
   function fetchJSON(url) {
+    if (window.SMD_CONTENT && window.SMD_CONTENT.fetchJSON) {
+      return window.SMD_CONTENT.fetchJSON(url);
+    }
     return G.fetch(url).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); });
   }
   function loadIndex() {

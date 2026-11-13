@@ -73,13 +73,38 @@
     setTimeout(function () { try { purgeOld(); } catch (e) {} }, 8000);
   })();
 
+  /* Headers for /api/ota/check: App Check (attested device) + Firebase ID token when signed in.
+   * Fail-open — missing either just omits that header so old builds and browsers keep working
+   * while OTA_ENFORCE is still off. */
+  function otaCheckHeaders() {
+    var appTok = Promise.resolve(null);
+    try {
+      if (window.SMD_APPCHECK && typeof window.SMD_APPCHECK.getToken === "function") {
+        appTok = window.SMD_APPCHECK.getToken().catch(function () { return null; });
+      }
+    } catch (e) {}
+    var idTok = Promise.resolve(null);
+    try {
+      var u = window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) idTok = u.getIdToken().catch(function () { return null; });
+    } catch (e) {}
+    return Promise.all([appTok, idTok]).then(function (pair) {
+      var h = {};
+      if (pair[0]) h["X-Firebase-AppCheck"] = pair[0];
+      if (pair[1]) h["Authorization"] = "Bearer " + pair[1];
+      return h;
+    }, function () { return {}; });
+  }
+
   function check() {
     if (!isNative() || !plugin()) return Promise.resolve({ status: "unavailable" });
     try { localStorage.setItem(LASTCHECK, String(Date.now())); } catch (e) {}
     return _truth.then(nativeBuild).then(function (build) {
       var v = myVersion();
       var url = API_BASE + "/api/ota/check?version=" + v + "&nativeBuild=" + build;
-      return fetch(url).then(function (r) { return r.json(); }).then(function (j) {
+      return otaCheckHeaders().then(function (headers) {
+        return fetch(url, { cache: "no-store", headers: headers });
+      }).then(function (r) { return r.json(); }).then(function (j) {
         if (!j || !j.ota) {
           // Server says no update. If it's specifically because the kill switch is on AND we are
           // currently running an OTA bundle (not the builtin), enforce it right here — a device
@@ -202,11 +227,22 @@
     if (!p.getMissingBundleFiles || !pending.zipUrl) return Promise.resolve(null);
     var origin = String(pending.zipUrl).replace(/\/api\/ota\/file\/[0-9a-fA-F]+.*$/, "");
     return _truth.then(nativeBuild).then(function (build) {
-      return fetch(API_BASE + "/api/ota/check?version=" + myVersion() + "&nativeBuild=" + build + "&files=1", { cache: "no-store" });
+      return otaCheckHeaders().then(function (headers) {
+        return fetch(API_BASE + "/api/ota/check?version=" + myVersion() + "&nativeBuild=" + build + "&files=1", { cache: "no-store", headers: headers });
+      });
     }).then(function (r) { return r.json(); }).then(function (j) {
       if (!j || !j.ota || !j.files || !j.files.length || String(j.version) !== String(pending.version)) return null;
       var size = {}, manifest = [];
-      j.files.forEach(function (f) { size[f.hash] = +f.size || 0; manifest.push({ file_name: f.path, file_hash: f.hash, download_url: origin + "/api/ota/file/" + f.hash }); });
+      // Prefer the server's download_url (carries ?exp=&sig= when OTA_URL_SECRET is set). The native
+      // updater fetches these URLs as-is and cannot add headers, so the query signature is the credential.
+      j.files.forEach(function (f) {
+        size[f.hash] = +f.size || 0;
+        manifest.push({
+          file_name: f.path,
+          file_hash: f.hash,
+          download_url: f.download_url || (origin + "/api/ota/file/" + f.hash)
+        });
+      });
       return Promise.resolve(p.getMissingBundleFiles({ manifest: manifest })).then(function (m) {
         var miss = (m && m.missing) || [], bytes = 0;
         miss.forEach(function (e) { bytes += size[e.file_hash] || 0; });
@@ -300,11 +336,21 @@
     }).then(function (bundle) {
         phase = "restart"; say(100);
         cleanup();
-        var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
-        return applied.then(function () {
-          setMyVersion(pending.version);
-          return { ok: true, immediate: immediate !== false, delta: mode === "delta" };
-        }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
+        // Content-key rotation (Security 4): while still online, fetch + persist any key id the
+        // new bundle needs BEFORE set()/next() reloads into ciphertext the device cannot open.
+        var keyReady = Promise.resolve(true);
+        try {
+          if (window.SMD_CONTENT && typeof window.SMD_CONTENT.ensureKeyForOta === "function") {
+            keyReady = window.SMD_CONTENT.ensureKeyForOta(pending).then(function (ok) { return !!ok; }, function () { return false; });
+          }
+        } catch (e) { keyReady = Promise.resolve(false); }
+        return keyReady.then(function () {
+          var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
+          return applied.then(function () {
+            setMyVersion(pending.version);
+            return { ok: true, immediate: immediate !== false, delta: mode === "delta" };
+          }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
+        });
       }, function (e) {
         cleanup();
         return { ok: false, error: otaCode(e, "download-failed") };
