@@ -343,6 +343,9 @@ if [ -f prep/taxonomy.json ]; then
     mkdir -p "$WWW/prep/figures" && cp prep/figures/*.html prep/figures/figures.json prep/figures/ANIMA-LICENSE.txt prep/figures/ANATOMY-LICENSE.txt "$WWW/prep/figures/"
     # Mechanism mastery (fig-viewer.js "Steps" sheet): Trigger, Target, Mechanism, Manifestation, Intervention per figure.
     [ -f prep/figures/mastery.json ] && cp prep/figures/mastery.json "$WWW/prep/figures/"
+    # One page per figure: the light twins are the dark pages with one attribute changed (about 42 MB). The dark
+    # page switches itself to light from the frame name fig-viewer.js gives it. SMD_KEEP_FIG_TWINS=1 ships both.
+    if [ "${SMD_KEEP_FIG_TWINS:-}" != "1" ]; then node "$ROOT/scripts/slim-figures.mjs" "$WWW" || { echo "  figure slim FAILED"; exit 1; }; fi
   fi
   # Cards (prep-flash.js): the committed pilot decks and their index (occlusion images come from prep/lessons/media).
   # A full generated set (prep/cards/gen) goes to R2, not here; tools/prep-cards.mjs work files never ship.
@@ -361,12 +364,33 @@ fi
 # the evidence the provenance test checks the packs against, not a runtime asset, and it lives outside
 # pglog/ precisely so this line cannot pick it up.
 
+# ── 4z. Learning content served from R2 on first view (owner 2026-11-12) ─────────────────────────────────────
+# SMD_REMOTE_MEDIA=1 leaves the bundled PrepNucleus lesson files and diagrams and the CliniX photos OUT of the app and
+# sets window.SMD_REMOTE_MEDIA_ON=1: prep-lessons.js then reads lessons from /api/prep/bank/app/prep/lessons/v1/ and
+# remote-media.js loads the pictures from /api/prep/bank/app/<same path>, signed-in only, kept on the phone after the
+# first view. ONLY build with it after tools/upload-app-media.mjs has put the same files on R2 (it prints a check),
+# otherwise those lessons and photos are missing from the app. Unset (default): everything ships as before.
+if [ "${SMD_REMOTE_MEDIA:-}" = "1" ]; then
+  find "$WWW/prep/lessons/v1" -name '*.json' ! -name 'index.json' -delete 2>/dev/null || true
+  find "$WWW/prep/lessons/media" -type f \( -name '*.svg' -o -name '*.webp' \) -delete 2>/dev/null || true
+  rm -rf "$WWW/clinix/media/practicals" "$WWW/clinix/media/skills"
+  grep -q "window.SMD_REMOTE_MEDIA_ON=0;" "$WWW/index.html" || { echo "  remote media: index.html has no SMD_REMOTE_MEDIA_ON flag"; exit 1; }
+  sed -i.bak 's/window\.SMD_REMOTE_MEDIA_ON=0;/window.SMD_REMOTE_MEDIA_ON=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
+  echo "  remote media: lessons, lesson diagrams and CliniX photos load from R2 (SMD_REMOTE_MEDIA_ON=1)"
+fi
+
 # ── 5a. No textbook citations or page numbers in the shipped bundle (copyright, owner 2026-09-24) ─────
 # Specific citations become the subject's standard-textbook line, page/chapter locators are removed;
 # the repo keeps its authoring provenance. Runs BEFORE encryption so the .enc blobs are clean too.
 # SMD_KEEP_SOURCES=1 skips it (internal/debug builds only).
 if [ "${SMD_KEEP_SOURCES:-}" != "1" ]; then
   node "$ROOT/scripts/sanitize-sources.mjs" "$WWW" || { echo "  source sanitize FAILED"; exit 1; }
+fi
+
+# ── 5b. Minify bundled JSON (whitespace only; the app reads every one with JSON.parse). The repo keeps the
+# pretty-printed sources. SMD_KEEP_JSON_PRETTY=1 skips it. ────────────────────────────────────────────────
+if [ "${SMD_KEEP_JSON_PRETTY:-}" != "1" ]; then
+  node "$ROOT/scripts/minify-json.mjs" "$WWW" || { echo "  json minify FAILED"; exit 1; }
 fi
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,

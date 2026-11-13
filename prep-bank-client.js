@@ -101,7 +101,8 @@
   }
 
   // Path classification
-  var STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp)|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
+  // Mirrors functions/_prep_bank_gate.js: a lesson and its pictures are gated (signed-in only); the lesson list is public.
+  var STUDY_RE = /^v\d{1,3}\/(?:lessons\/index\.json|cards\/(?:index|[a-z0-9-]{2,80})\.json|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
   var CREDITS_RE = /^image-credits\.json$/;
 
   function classifyBankPath(p) {

@@ -52,6 +52,10 @@ export function withCors(request, resp) {
 }
 
 export const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp)|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
+/* A lesson itself and its pictures (not the lesson list): signed-in only once PREP_LESSONS_GATED=1 (owner 2026-11-12).
+ * Behind a flag because app builds already on phones fetch these without app proof; the current client always signs
+ * them (prep-bank-client.js classifies them gated), so it works in both modes. */
+export const LESSON_GATED_RE = /^v\d{1,3}\/lessons\/(?:(?!index\.json$)[a-z0-9-]{2,80}\.json|media\/[a-z0-9-]{2,80}\.(?:svg|webp))$/;
 export const CREDITS_RE = /^image-credits\.json$/;
 
 export function classifyBankPath(p) {

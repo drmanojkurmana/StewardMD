@@ -82,7 +82,9 @@ try {
     await page.evaluate(() => document.querySelector(".db-fig").click());
     await page.waitForSelector(".smdfig iframe", { timeout: 5000 });
     const src = await page.evaluate(() => document.querySelector(".smdfig iframe").getAttribute("src"));
-    ok(dark ? !/-light/.test(src) : /-light\.html/.test(src), (dark ? "dark" : "light") + " build opens: " + src);
+    // The app bundle ships one page per figure (SMD_FIG_ONEFILE): light is the same page in a frame named smdfig-light.
+    const one = await page.evaluate(() => ({ on: window.SMD_FIG_ONEFILE === 1, name: document.querySelector(".smdfig iframe").name }));
+    ok(dark ? !/-light/.test(src) : (one.on ? (!/-light/.test(src) && one.name === "smdfig-light") : /-light\.html/.test(src)), (dark ? "dark" : "light") + " build opens: " + src);
     const fr = page.frames().find((f) => /beta-blockers/.test(f.url()));
     await fr.waitForFunction(() => document.querySelector("[data-readout]") && document.getElementById("drug"), null, { timeout: 10000 });
     const st = await fr.evaluate(() => ({ drug: document.getElementById("drug").value, ro: document.querySelector("[data-readout]").textContent, theme: document.body.getAttribute("data-theme") || document.documentElement.getAttribute("data-theme"), name: /Metoprolol/.test(document.body.innerText) }));

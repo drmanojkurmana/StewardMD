@@ -20,5 +20,13 @@ ok("upgrade (old + new present) → reload", swShouldReloadClients(["stewardmd-g
 ok("unrelated caches only → NO reload", swShouldReloadClients(["some-other-cache"], "stewardmd-gold299") === false);
 ok("null/garbage input → NO reload (safe)", swShouldReloadClients(null, "stewardmd-gold299") === false);
 
+const m2 = src.match(/function swStaleCaches\([^]*?\n}/);
+if (!m2) { console.log("✗ FAIL: swStaleCaches not found in sw.js"); process.exit(1); }
+const swStaleCaches = new Function(m2[0] + "; return swStaleCaches;")();
+const stale = swStaleCaches(["stewardmd-gold298", "stewardmd-gold299", "atlas2d-brain", "atlas3d-v1", "thorex-models", "smd-media-v1"], "stewardmd-gold299");
+ok("activate deletes only older stewardmd-* versions", JSON.stringify(stale) === JSON.stringify(["stewardmd-gold298"]));
+ok("activate keeps feature caches (atlas, models, R2 pictures)", !stale.some((k) => /^(atlas|thorex|smd-media)/.test(k)));
+ok("swStaleCaches(null) is empty", swStaleCaches(null, "x").length === 0);
+
 console.log(fail === 0 ? ("ALL " + pass + " PASS") : (pass + " pass / " + fail + " FAIL"));
 process.exit(fail ? 1 : 0);

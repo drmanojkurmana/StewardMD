@@ -12268,6 +12268,27 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 ## 2026-11-11 PrepNucleus Spotify player OFF by default (reverses 2026-10-31 "on for everyone")
 - Owner: the mini player appeared over the onboarding subject list. Now smd_prep_sound_spotify must be "1": the loader leaves the Spotify files out otherwise, and prep-sound-spotify.js stays inert. Turned on/off in PrepNucleus Settings > Sound (Beta) > Spotify player; On loads the files at once (PREP_LOADER.loadSpotify), Off pauses and hides the dock immediately. The dock never shows over the setup steps (.pl-ob).
 
+## 2026-11-12 Pre-store review: account deletion is server-side; privacy strings and manifest made accurate
+- Account deletion (Apple 5.1.1(v)): home.js doDeleteAccount now calls POST /api/account/delete (functions/api/account/delete.js) with the Firebase ID token and `{confirm:"DELETE"}`. The server runs purgeUserData, drops the lifecycle record (releases the phone index), then deleteUser. The web SDK's user.delete() needed a recent login and its popup re-auth cannot open in the native WebView, so on the phone the account survived while the app said it was deleted. The client path stays as the fallback, and its message now says the account was not fully removed. Tests: test/account-delete.test.mjs, test/run-account-delete-ui.mjs.
+- Not done (owner): Sign in with Apple token revocation on deletion (Apple REST revoke needs the .p8 key / client secret on the server).
+- Info.plist mic + speech strings no longer claim audio stays on the device: voice.js falls back to /api/ai/transcribe, and SFSpeechRecognizer uses Apple servers when no on-device model exists. PrivacyInfo.xcprivacy now lists every data type the code sends (name, phone, user/device id, health, photos, audio, support, user content, purchases, crash, interaction); match these in App Store Connect privacy labels.
+- prep.js OVERLAYS had 8 subjects listed twice; the second `"medicine": ["maiknuc1"]` replaced the first list, so medicine, anatomy, pathology, pharmacology, paediatrics, biochemistry, microbiology and physiology lost their earlier overlay sets while overlay-counts.json still counted them. Merged (test/prep-overlays-unique.test.mjs) and the cross-listed index rows rebuilt with tools/prep-crosslist-index.mjs.
+
+## 2026-11-12 App bundle slimmed at build time (no content or quality change)
+- Measured: www/ was 571 MB on disk, 266 MB compressed (the App Store download is compressed). Now 517 MB / 251 MB.
+- scripts/slim-figures.mjs: prep/figures/<name>-light.html was the dark page with one attribute changed (338 twins, 43 MB). The bundle ships the dark page only, with a one-line script that turns it light when its frame is named "smdfig-light"; fig-viewer.js names the frame and opens the dark page when window.SMD_FIG_ONEFILE=1 (set in www/index.html by the build). The repo keeps both builds, so the figure tooling and repo-served tests are unchanged. A light twin that differs in any other way fails the build. Kill switch: SMD_KEEP_FIG_TWINS=1.
+- scripts/minify-json.mjs: every bundled .json minified (11.4 MB, ~5,800 files), only when the parse result is identical. Kill switch: SMD_KEEP_JSON_PRETTY=1.
+- Removed kardia/probelab/assets/anatomy.bin.mesh.gz____v_01d19093a293713f080f, an unreferenced mirror artefact (the app requests anatomy.bin.mesh.gz?__v=...).
+- Not done (owner decision): getting under Apple's 200 MB cellular limit needs heavy learning media (CliniX media 51 MB, Echo Probe Lab 33 MB, PrepNucleus figures/lessons, Tokos) to download on first open and cache, the pattern kardiox-learn / atlas / prep bank already use.
+
+## 2026-11-12 CliniX practical pictures that showed the wrong thing were removed
+- 70 practical items (and 91 PrepNucleus lesson steps, 5 Image Library entries reusing the same files) showed a picture of something else. The files are deleted; each item keeps its `image.brief`, so it shows the placeholder and drops out of the picture spotter quiz until a correct, licensed picture is sourced. Pictures legitimately shared by the same instrument in two decks are kept and allow-listed in test/clinix-practical-images.test.mjs. Details in [[CliniX]] Gotchas.
+
+## 2026-11-12 Lessons and CliniX photos from R2 on first view, signed-in only
+- Owner chose "signed in only" (not phone or registration verification). Each lesson and picture is fetched when viewed, not in bulk, and kept on the phone, so a second view is instant, offline and free. Cost at the time: 10 M requests and 10 M R2 reads a month included, then $0.30 and $0.36 per million; egress free.
+- Rollout is staged and reversible: upload, `--check`, build with `SMD_REMOTE_MEDIA=1`, release, then `PREP_LESSONS_GATED=1` once app builds that fetch lessons without proof are gone. Details in [[PrepNucleus]] Lessons and [[Infra]].
+- Found while testing: the native boot script in index.html deleted EVERY Cache Storage cache on every launch, and sw.js deleted every non-current cache on activate. That wiped Atlas offline modules, on-device model files and the lesson voice model each time. Both now delete only `stewardmd-*` (the service worker's own versions).
+
 ## 2026-11-12 Connect Agent safety guards (smd_connect_guards, default ON)
 - Owner asked to adopt what goodnight000/api-anything (MIT) does better: "never someone else's data", proof
   with two examples, empty vs drift, no live credential in a stored request, per-site pacing, readable heals.
