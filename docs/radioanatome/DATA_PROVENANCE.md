@@ -1,6 +1,6 @@
 # Data provenance
 
-GENERATED on 2026-09-25.
+GENERATED on 2026-11-13.
 
 | dataset | licence | licence URL | redistribute? | derivatives? | used for |
 |---|---|---|---|---|---|
@@ -27,6 +27,7 @@ expert masks; no model was run. The same subject id is in each module's atlas.js
 | `ct-live-torso-*` | `s0108` | ct neck-thorax-abdomen-pelvis | no_pathology | Siemens, 100 kVp |
 | `ct-live-neck-*` | `s0021` | ct neck | no_pathology | 46 y male, Siemens Sensation 64, 120 kVp, contrast-enhanced |
 | `ct-live-thorax-neck-*` | `s0897` | ct thorax-neck | no_pathology | 40 y female, Siemens Somatom Definition Flash, 80 kVp, unenhanced |
+| `ct-live-body-*` + 3D Whole body | `s1045` | ct polytrauma | no_pathology | 62 y male, Siemens Somatom Force, 100 kVp, contrast-enhanced, skull vertex to mid-thigh |
 
 ## Notes per dataset
 

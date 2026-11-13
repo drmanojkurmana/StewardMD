@@ -61,9 +61,15 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] **[[RadioAnatome 3D]] device run** — browser-verified only (SwiftShader). Run on the iPhone + Pixel:
       load time over cellular for the LOD default (~12 MB of the 19.6 MB LOD set for the default systems, from R2),
       frame rate with muscles ON, pinch/pan feel, the living-CT cut plane + slice slider.
-- [ ] **[[RadioAnatome 3D]] Immersive CT for chest and head-neck** — only the torso (s0108, lower chest to pelvis) has a
-      3D body today. Mesh `ct-live-thorax-neck-*` (s0897) and `ct-live-neck-*` (s0021) with `live3d.py`, register their
-      planes, upload the hashed chunks to R2 FIRST, then add them as Immersive regions. Also: run it on the iPhone + Pixel.
+- [x] **[[RadioAnatome 3D]] Immersive CT for chest and head-neck** — done 2026-11-12 with ONE whole-body subject
+      (s1045, skull vertex to mid-thigh) instead of meshing the neck and thorax-neck subjects.
+- [ ] **[[RadioAnatome 3D]] upload the whole-body chunks to R2** — `atlas/3d/body-*.bin.gz` (14 files) via `wrangler r2 object
+      put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote`. Phones fall back
+      to the committed copy on stewardmd.in meanwhile (after merge to main).
+- [ ] **[[RadioAnatome]] radiologist review of `ct-live-body-*`** (Beta until `/validation` says verified), and run Immersive
+      on the iPhone + Pixel (frame rate with the 572k-triangle whole body, cellular load of ~7 MB).
+- [ ] **[[RadioAnatome 3D]] reference rows for the kind "live" structures** (thyroid, carotids, subclavian, brachiocephalic
+      vessels, SVC, trachea, right upper lobe, humerus, scapula, pulmonary vein) — read each FMA concept's element list.
 - [x] **[[RadioAnatome]] living-torso images are NOT in radiological orientation** — resolved 2026-09-25: `flipX` at display time (see RadioAnatome.md, `docs/radioanatome/ORIENTATION.md`). Original finding: the three
       `ct-live-torso-*` modules display the patient's right on the image's right (liver at column 205/277
       of the displayed coronal slab; `orient.to_display` keeps X unflipped for this RAS volume). Pins are

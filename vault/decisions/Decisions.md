@@ -12296,3 +12296,15 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
   the zoom factor (about 10 px in the test). `bindInput pos()` now divides it out, as `atlas.js stagePt()` does.
 - **Not done:** Chest-only and Head-and-neck regions. The neck and thorax-neck CT modules have no 3D meshes yet
   (`bp3d-map.json _pending_3d`), and new geometry has to be uploaded to R2 before a build names it (see [[RadioAnatome 3D]]).
+
+## 2026-11-12 RadioAnatome whole body, head to thigh: subject s1045, a third 3D source
+- **Ask:** owner, after Immersive CT shipped on the torso: "Build all parts, I need body top to bottom".
+- **Subject:** TotalSegmentator s1045 (CC BY 4.0, 'ct polytrauma', no_pathology, 62 y male, contrast), picked by MEASURED
+  coverage from the 18 no-pathology whole-body / polytrauma studies in meta.csv (masks fetched for six). Longest field
+  (97 cm, vertex to mid-thigh), arms down. NOT s1397, the PyVista "whole body male" sample 2Doctor uses: meta.csv flags it
+  "tumor, bones". No dataset subject covers the legs below mid-thigh with masks, so "bottom" is the thighs.
+- **Shape:** new module group `ct-live-body-*` (2D, Beta) + a third 3D source "Whole body" (part flag 2) added by
+  `body_merge.py` without touching the reference body or the radiologist-verified torso. Immersive CT now opens on it.
+- **HU check:** `tsd_combine.py --contrast` widens only enhancing parenchyma (to 300 HU) and the cardiac blood pool (to
+  450 HU), per subject; unenhanced bands unchanged, so no shipped module moved.
+- **Native fallback:** phones try R2, then the committed chunk on stewardmd.in, so a new body works before its R2 upload.

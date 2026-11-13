@@ -16,6 +16,20 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Pipeline:** `atlas-pipeline/bp3d-map.json` (HAND-CURATED canonical ↔ FMA mapping) → `atlas-pipeline/bp3d_import.py --src <human-atlas checkout> --write` → `atlas-pipeline/ontology.py --write` (merges `bp3d` + the `3D` modality into `ontology.json`). Living body: `atlas-pipeline/live3d.py --work atlas-pipeline/work/tsd --out <dir>` (marching cubes on the masks + slice-plane registration; needs the `.venv` with nibabel/scipy/skimage and the downloaded s0108 volumes) → `node atlas-pipeline/pack3d.mjs live --in <dir> --out atlas/3d --base 2227` (meshoptimizer simplify + pack) → `bp3d_import.py --write` picks up `live.json`. LOD: `node atlas-pipeline/pack3d.mjs lod --out atlas/3d` (writes `lod.json` + `*.lo.bin.gz`), then `bp3d_import.py --write`.
 - **Provenance / licence:** `HUMAN_ATLAS_PROVENANCE.md` (repo root) — upstream commit, checksums, rejects, modifications, the verbatim CC BY attribution
 - **Tests:** `test/atlas3d-data.test.mjs` (57) · `test/atlas3d-pure.test.mjs` (57) · `test/run-atlas3d-ui.mjs` (140, real headless WebGL via SwiftShader; serves on 8995; `CDP_PORT=<port>` picks the Chrome debug port and refuses a busy one, `SHOTS=<dir>` saves screenshots)
+- **Whole body source (2026-11-12):** third body, `"body"`, part flag 2, `canon[cid].body` (+ sided). 115 surfaces of
+  TotalSegmentator s1045 (no-pathology polytrauma, contrast, skull vertex to mid-thigh; s1397 rejected: meta.csv "tumor,
+  bones"). Chain: `tsd_living.py --subject s1045 --group live-body --prefix ct-live-body --contrast --axial-slices 96 --write`
+  → `living.py --group live-body --write` → `body3d.py` (marching cubes in `living.tsd_frame`, so planes and meshes
+  coincide by construction) → `MESHOPT_DIR=<dir with meshoptimizer> node pack3d.mjs live --in work/body3d --out atlas/3d
+  --base 2293 --prefix body- --json body.json --ratio 0.22` → `body_merge.py --base 2293 --write` (idempotent; proves
+  nothing outside the body moved; regenerates links). Does NOT need the Human Atlas checkout. 14 chunks, 7.1 MB gz,
+  572k triangles. Structures with no BodyParts3D row (thyroid, carotids, subclavian, brachiocephalic vessels, SVC,
+  trachea, right upper lobe, humerus, scapula, pulmonary vein) are canon kind `"live"` (body parts only) and stay in
+  `bp3d-map.json _pending_3d`. Frame y runs 0 (thighs) to 0.966 m (vertex); the shell fades only at the thigh cut
+  (`shellFade()` / `uShellY`).
+- **Native geometry fallback (2026-11-12):** `dataBases()` natively = R2, then `https://stewardmd.in/atlas/3d` (the
+  committed copy Pages serves). New chunks therefore load on phones once merged to main even before the R2 upload;
+  still upload them (`wrangler r2 object put stewardmd-models/atlas3d/<file> ... --remote` for every `body-*.bin.gz`).
 - **Immersive CT (2026-11-12):** `ATLAS3D.openImmersive()` / `open({immersive:true})`, flag `smd_atlas_imm` (default ON,
   `?immersive=0` kills it per device, needs `smd_atlas3d` too). Living body on top, `ct-live-torso-axial` underneath, one
   slider for both. `st.imm` holds its state. `clipPlane()` always cuts ABOVE an axial slice here (+y is superior), and
@@ -24,7 +38,10 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
   CT taps resolve to the nearest pin within 40 px (pins are points, not masks). Reads `atlas/<module>/atlas.json` +
   `modules.json` (both bundled by build-www). Tests: `test/atlas-imm.test.mjs` (27, pure + data contract),
   `test/run-atlas-imm-ui.mjs` (43, real WebGL + real touch on the CT, `CDP_PORT`/`BASE`/`SHOTS` like the 3D test).
-  Not copied from 2Doctor (decision 2026-11-12).
+  Not copied from 2Doctor (decision 2026-11-12). Opens on the WHOLE BODY (`IMM_MODULES`), chest level, with
+  Whole / Head / Neck / Chest / Abdomen / Pelvis chips (`immRegionSlices`: middle of the slices pinning brain, thyroid,
+  heart, kidney, bladder) and a camera that follows the cut (`st.imm.follow`, `immFollow()`); the torso version opens
+  from the Living CT tools (`immopen` carries `data-m`).
 - **Premium pass (2026-09-25):** WebGL context restore in place (plus a fresh canvas if never restored), per-chunk failure with Retry, byte progress, first-open gesture hint (`smd_atlas3d_hint`), X-ray slider + per-structure Fade, Undo, free Axial/Coronal/Sagittal cut plane, saved views (`smd_atlas3d_views`), snapshot/share with the CC BY credit drawn into the PNG (never in the DOM), Find it quiz, Taubin-smoothed living surfaces + fresnel skin.
 - **Status (2026-09-06):** built + RUN ON THE iPhone 15 Pro (build a3d8, iOS 27). Living body (66 parts: organs + skeleton + skin shell) streams in ~2 s from R2, 60 fps, cut planes register on the meshes, no JS errors. Reinstall after each web change: `build:www` → `cap copy ios` → rebuild `App` scheme → `devicectl uninstall` + `install` (wipes device-local data).
 
@@ -149,6 +166,9 @@ CT/MRI slice modules, so a structure links both ways between a 3D mesh and the s
 - **Canvas taps must divide out the Display zoom.** `home.js` zooms the whole document, so the canvas bounding rect is
   in zoomed px while `clientWidth` and the backing store are not. `bindInput pos()` scales by `rect.width/clientWidth`
   (fixed 2026-11-12; before that every pick landed off by the zoom factor).
+- **The whole body is heavy under SwiftShader.** A synchronous `readFrame` of the full body has taken ~30 s headless and a
+  camera glide many seconds; UI tests wait with long `settled()` timeouts. That is software GL, not a phone number.
+- **23 ribs on the whole body, not 24:** s1045's right 12th rib mask is a 182-voxel fragment under `body3d.py`'s 400-voxel floor.
 - **Two SwiftShader suites at once starve each other.** Running `run-atlas3d-ui.mjs` next to `run-atlas-ui.mjs` failed
   the 3D suite's first open; alone it was clean. Run the WebGL suites one at a time.
 - **Headless test needs SwiftShader flags** (`--use-angle=swiftshader --enable-unsafe-swiftshader`);
