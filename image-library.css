@@ -72,6 +72,10 @@ body.dark .igl-empty,body.dark .igl-loading{color:#c3cad2}
 .igl-vcap{font-size:15px;line-height:1.55;margin:0 0 8px;color:#e8e8e3}
 .igl-vfrom,.igl-vcredit{font-size:13px;line-height:1.45;margin:0 0 6px;color:#b9b9b2}
 .igl-vlink{min-height:48px;padding:10px 16px;margin-top:6px;border:0;border-radius:10px;background:#0f766e;color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+.igl-vlinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.igl-vlinks .igl-vlink{margin-top:0;display:inline-flex;align-items:center;gap:8px}
+.igl-vlink2{background:transparent;color:#5eead4;box-shadow:inset 0 0 0 1.5px rgba(94,234,212,.55)}
+.igl-pro{padding:2px 7px;border-radius:999px;background:rgba(255,255,255,.22);font-size:11px;font-weight:700;letter-spacing:.02em}
 button:active.igl-sys,button:active.igl-card{transform:scale(.98)}
 .igl-back:focus-visible,.igl-chip:focus-visible,.igl-sys:focus-visible,.igl-card:focus-visible,.igl-more:focus-visible,.igl-vnav:focus-visible,.igl-vclose:focus-visible,.igl-vlink:focus-visible,.igl-q:focus-visible{outline:3px solid #0f766e;outline-offset:2px}
 @media (min-width:600px){.igl-sysgrid{grid-template-columns:repeat(3,1fr)}.igl-grid{grid-template-columns:repeat(3,1fr)}}

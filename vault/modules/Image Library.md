@@ -61,3 +61,8 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   restores. Gotcha: `.igl-viewer` needs its `z-index: 5; isolation: isolate`; without it the grid's thumbnail
   overlays (z-index 1) painted through the viewer as a 5 x 3 grid of PrepNucleus marks over the image and caption
   panel on iPad. Tests: `test/image-report.test.mjs`, `test/run-image-report-ui.mjs`.
+- **Where to read (owner 2026-11-13):** each entry may carry `ls`/`lm`/`lsj`/`lst` (the PrepNucleus lesson that shows it,
+  best title match when several reuse the image) and `ka`/`kn` (the shipped KB article holding it, via
+  `kb/tools/kb-placement.mjs`). The viewer shows "Open the lesson" (Pro; paywall without) and "Read the article"
+  (opens `SMD_KB.open(ka)` and scrolls to the figure); entries with neither keep the old single link.
+  Test: `test/run-imglib-links-ui.mjs`. Larger entries leave a little less of each system's Commons budget.

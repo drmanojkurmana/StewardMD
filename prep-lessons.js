@@ -1326,5 +1326,7 @@
     });
   }
 
-  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
+  // A link from outside PrepNucleus (the Image Library, owner 2026-11-13): this lesson, at the step that shows the image.
+  function openAt(sid, mid, h, key, step) { L.jumpStep = step == null ? null : String(step); return open(sid, mid, h, key, true); }
+  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);
