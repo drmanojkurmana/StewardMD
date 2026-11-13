@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th14";
+  var FLAG = "smd_today_history", VER = "th15";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -108,17 +108,71 @@
     if (!f) { f = D.createElement("div"); f.className = "th-face"; f.setAttribute("aria-hidden", "true"); b.appendChild(f); }
     return f;
   }
+  // The MaiK Aurora (React Bits shader, exported by maik-atmosphere.js) behind the history face, at about a third
+  // of MaiK's speed. India's saffron, white and green when the headline is Indian; emerald otherwise. One WebGL
+  // context for the life of the page; it draws only while the face shows, the app is visible and motion is allowed,
+  // at most 30 frames a second. Without WebGL2 or the shader, the CSS light pools stay (today-history.css).
+  var AUR = { speed: 0.42, india: { c: ["#e8641c", "#e4e0d8", "#17803a"], blend: 0.62 }, base: { c: ["#0fa36f", "#8ff0d2", "#0e7490"], blend: 0.58 } };
+  var aur = null, reduceMq = W.matchMedia ? W.matchMedia("(prefers-reduced-motion: reduce)") : null;
+  function hexRgb(h) { var n = parseInt(h.slice(1), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; }
+  function auroraInit() {
+    if (aur !== null) return aur;
+    var sh = W.SMD_MAIK_ATMOSPHERE && W.SMD_MAIK_ATMOSPHERE.SHADER;
+    if (!sh) return false;   // maik-atmosphere.js not loaded yet: try again next flip
+    aur = false;
+    try {
+      var cv = D.createElement("canvas"); cv.className = "th-aurora"; cv.setAttribute("aria-hidden", "true");
+      var gl = cv.getContext("webgl2", { alpha: true, premultipliedAlpha: true, antialias: false });
+      if (!gl) return aur;
+      var comp = function (t, src) { var x = gl.createShader(t); gl.shaderSource(x, src); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) throw new Error("aurora"); return x; };
+      var pr = gl.createProgram(); gl.attachShader(pr, comp(gl.VERTEX_SHADER, sh.VERT)); gl.attachShader(pr, comp(gl.FRAGMENT_SHADER, sh.FRAG)); gl.linkProgram(pr);
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error("aurora");
+      gl.useProgram(pr);
+      var bf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      var pos = gl.getAttribLocation(pr, "position"); gl.enableVertexAttribArray(pos); gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+      var u = {}; ["uTime", "uAmplitude", "uBlend", "uResolution", "uLightMode", "uColorStops[0]"].forEach(function (n) { u[n] = gl.getUniformLocation(pr, n); });
+      gl.uniform1f(u.uAmplitude, 1.0); gl.uniform1f(u.uLightMode, 0); gl.clearColor(0, 0, 0, 0);
+      aur = { cv: cv, gl: gl, u: u, raf: 0, t: Math.random() * 40, last: 0, pal: AUR.base };
+    } catch (x) { aur = false; }
+    return aur;
+  }
+  function auroraPaint() {
+    var gl = aur.gl, u = aur.u, p = aur.pal;
+    gl.uniform1f(u.uTime, aur.t * AUR.speed); gl.uniform1f(u.uBlend, p.blend);
+    gl.uniform3fv(u["uColorStops[0]"], new Float32Array(hexRgb(p.c[0]).concat(hexRgb(p.c[1]), hexRgb(p.c[2]))));
+    gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  function auroraStill() { return (reduceMq && reduceMq.matches) || !!(W.SMD_POWER && W.SMD_POWER.low); }
+  function auroraFrame(ts) {
+    aur.raf = 0;
+    if (!showing || D.hidden || auroraStill() || !aur.cv.isConnected) return;
+    if (ts - aur.last >= 33) { aur.t += Math.min((ts - aur.last) / 1000, 0.1); aur.last = ts; auroraPaint(); }
+    aur.raf = requestAnimationFrame(auroraFrame);
+  }
+  function auroraAttach(f, india) {
+    if (!auroraInit()) return;
+    f.insertBefore(aur.cv, f.firstChild); f.classList.add("th-gl");
+    var dpr = Math.min(W.devicePixelRatio || 1, 1.5), w = Math.round((f.offsetWidth || 1) * dpr), h = Math.round((f.offsetHeight || 1) * dpr);
+    if (aur.cv.width !== w || aur.cv.height !== h) { aur.cv.width = w; aur.cv.height = h; aur.gl.viewport(0, 0, w, h); aur.gl.uniform2f(aur.u.uResolution, w, h); }
+    aur.pal = india ? AUR.india : AUR.base;
+    auroraPaint();
+    if (aur.raf) cancelAnimationFrame(aur.raf);
+    aur.raf = 0;
+    if (!auroraStill()) { aur.last = performance.now(); aur.raf = requestAnimationFrame(auroraFrame); }
+  }
+  function auroraStop() { if (aur && aur.raf) { cancelAnimationFrame(aur.raf); aur.raf = 0; } }
+
   function setShowing(b, on) {
     showing = on;
     b.classList.toggle("th-back", on);
     if (on) {
       var e = todays[pick % todays.length]; pick++;
-      var f = ensureFace(b); f.className = "th-face" + (e.in ? " th-india" : ""); f.innerHTML = face(e); fit(f);
+      var f = ensureFace(b); f.className = "th-face" + (e.in ? " th-india" : ""); f.innerHTML = face(e); fit(f); auroraAttach(f, !!e.in);
       // Playfair Display can land after the face is drawn; measure the title again once it has
       if (D.fonts && D.fonts.load) D.fonts.load("600 18px 'Playfair Display'").then(function () { fit(f); }, function () {});
       if (!frontLabel) frontLabel = b.getAttribute("aria-label") || "";
       b.setAttribute("aria-label", "This day in medical history, " + (e.ob ? "observed every year" : e.y) + ": " + e.t + ". Tap to explore");
-    } else if (frontLabel) b.setAttribute("aria-label", frontLabel);
+    } else { auroraStop(); if (frontLabel) b.setAttribute("aria-label", frontLabel); }
   }
   // Fold to the edge, swap faces at 90 degrees (nothing to see edge-on), unfold the other face.
   function flip(b, toBack, done) {

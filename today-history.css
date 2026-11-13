@@ -35,13 +35,18 @@
 #homeV2.rnav .hrf-banner.th-back .th-face::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;pointer-events:none;
   background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.10) 55%,transparent 100%);
   transform:translateX(-120%);animation:thSheen 2.2s cubic-bezier(.3,.6,.3,1) .45s 1 forwards}
-#homeV2.rnav .hrf-banner.th-back .th-face.th-india{box-shadow:inset 0 0 0 1px rgba(255,190,120,.30);
-  background:linear-gradient(118deg,#141a3a 0%,#0e1736 50%,#0a1f2e 100%)}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-india{box-shadow:inset 0 0 0 1px rgba(255,200,150,.26);
+  background:linear-gradient(118deg,#0e1428 0%,#0a1121 55%,#07170f 100%)}
 #homeV2.rnav .hrf-banner.th-back .th-face.th-india::before{
-  background:radial-gradient(36% 44% at 37% 39%,rgba(255,140,40,.62),transparent 72%),
-    radial-gradient(38% 46% at 63% 62%,rgba(22,150,60,.66),transparent 72%),
-    radial-gradient(16% 20% at 50% 50%,rgba(255,244,226,.10),transparent 70%)}
+  background:radial-gradient(36% 44% at 37% 39%,rgba(255,140,40,.55),transparent 72%),
+    radial-gradient(38% 46% at 63% 62%,rgba(22,150,60,.6),transparent 72%),
+    radial-gradient(16% 20% at 50% 50%,rgba(255,244,226,.12),transparent 70%)}
 #homeV2#homeV2.rnav .hrf-banner .th-face.th-india .th-face-ey{color:#ffd6a0}
+/* The MaiK Aurora (WebGL, today-history.js) replaces the CSS light pools when it runs, over a darker ground. */
+#homeV2.rnav .hrf-banner.th-back .th-face canvas.th-aurora{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-gl::before{display:none}
+#homeV2#homeV2.rnav .hrf-banner .th-face.th-gl .th-face-txt{text-shadow:0 1px 2px rgba(0,0,0,.42),0 0 14px rgba(0,0,0,.25)}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-gl:not(.th-india){background:linear-gradient(118deg,#01130d 0%,#022218 55%,#032c20 100%)}
 @keyframes thDrift{0%{transform:translate3d(-7%,-5%,0) rotate(-4deg)}100%{transform:translate3d(7%,5%,0) rotate(6deg)}}
 @keyframes thSheen{to{transform:translateX(260%)}}
 #homeV2#homeV2.rnav .hrf-banner .th-face-txt{position:absolute;left:16px;top:10px;bottom:10px;right:30%;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}

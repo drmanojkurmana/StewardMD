@@ -92,3 +92,10 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   `th-india` on `.th-face`): chakra-blue night with a saffron glow drifting into an India-green glow, cream eyebrow.
   Otherwise emerald with mint pools. `::before` light pools drift (transform only, 16 s alternate); `::after` sheen
   crosses once per flip. Both off under reduced motion. Cache token th14.
+- **Aurora (owner, 2026-11-13, replaces the CSS-only live gradient):** the history face runs the same React Bits
+  Aurora WebGL shader as the MaiK background (`SMD_MAIK_ATMOSPHERE.SHADER`, exported from maik-atmosphere.js) at
+  speed 0.42 (MaiK is 1.2 to 1.6), 30 fps cap, one WebGL2 context for the page. India headline: saffron, white,
+  green (#e8641c, #e4e0d8, #17803a) over a night ground; otherwise emerald, mint, teal. Draws only while the face
+  shows and the app is visible; a still frame under reduced motion or Low Power Mode (`SMD_POWER.low`). No WebGL2
+  or no shader: the CSS light pools stay. The owner's flat light tricolour reference was tried first and dropped for
+  this. Cache token th15.
