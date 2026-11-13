@@ -141,3 +141,9 @@ test("banner swipes to flip and keeps vertical scroll", () => {
   assert.match(js, /rotateY\(/);
   assert.match(css, /\.hrf-banner\[data-th-swipe\]\{touch-action:pan-y/);
 });
+
+test("auto flip stays top to bottom (owner's call)", () => {
+  const css = readFileSync(new URL("today-history.css", root), "utf8");
+  assert.match(css, /@keyframes th-fold-out\{[^}]*rotateX/);
+  assert.match(css, /@keyframes th-fold-in\{[^}]*rotateX/);
+});
