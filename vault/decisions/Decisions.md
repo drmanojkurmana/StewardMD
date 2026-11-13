@@ -12,7 +12,9 @@ Dated architectural calls + why. Newest first. Keep each short: **decision · wh
 ("Vetformin", "40 me"); schema `extract` returned null for every frequency/route and invented "1000" mg for a
 500 mg order. No handwriting, no Indian languages, no published OCR benchmarks. It would also need the new unified
 Cactus 4.x engine, not our pinned `libneedle`. **Trade-off.** Keeps image to text on Apple Vision OCR + server
-`/vision`. **Status.** Closed; re-evaluate on a release with document benchmarks. Detail: [[Mirage-Eval]].
+`/vision`. Also checked as an image-type gate for KardiQ X / ThoreX / SknX / FundX: 1/28 correct (7/28 by argmax),
+CXR read as "dress", fundus as "moon"; PHI text boxes and face detection already have on-device tools.
+**Status.** Closed; re-evaluate on a release with document benchmarks. Detail: [[Mirage-Eval]].
 
 ## 2026-11-04 · iPad shell: native iPad layout and hardware keyboard (owner: "work like native iPad app")
 

@@ -41,6 +41,12 @@ Wall time 0.7 to 1.9 s per image on the container CPU.
 3. No handwriting, no Indian languages, no published document benchmarks.
 4. Cost: a second engine generation to pin and audit, ABI churn already seen with needle3.
 
-## Possible narrow uses (not planned)
-Non-clinical image gating only, never values: "is this a prescription / strip / ECG / other", crop boxes for the
-existing OCR, or finding text regions to blur before an upload. Each would need its own bench first.
+## Other uses checked (2026-11-13): none fit
+| Idea | Where | Result |
+|---|---|---|
+| Image-type gate ("is this a CXR / skin / fundus / ECG / document?") before KardiQ X, ThoreX, SknX, FundX run or upload | 28 images: 5 CXR, 5 skin, 5 fundus, 6 ECG (3 real, 3 drawn), 2 documents, 5 everyday photos | `extract` value **1/28** (returns "-" for nearly everything). Argmax over the real choices **7/28**, about chance; every ECG and fundus wrong. Scene/objects: CXR = "dress", "shoe", "tank"; fundus = "moon", "light bulb", "citrus slice"; ECG on brown paper = "handwritten note" |
+| Text boxes for PHI redaction before upload | ThoreX `phiRedactToImage` | Already covered on both platforms by `SMD_NATIVE.ocr` (Apple Vision on iOS, ML Kit on Android), and Mirage missed a whole text value in the lab bench, which would leak PHI |
+| Face detection before the SknX cloud upload | `sknx-cloudvision.js` | Not tested further: MediaPipe vision is already bundled (FundX face landmarker), a better-proven option if this is ever wanted |
+| Captions / alt text for the Image Library | `image-library.js` | Images are already captioned, and Mirage mislabels medical images (above) |
+
+It is a general-scene model (street signs, objects, cats, coffee); medical images are outside what it knows.
