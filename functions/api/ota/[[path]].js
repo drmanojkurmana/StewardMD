@@ -25,6 +25,7 @@ import { verifyAppCheck } from "../../_appcheck.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
 import { cfgFlag, warmBillingCfg } from "../../_billingcfg.js";
 import * as OTA from "../../_ota.js";
+import { bump, readDay } from "../../_counters.js";
 
 const json = (obj, status = 200, extra = {}) => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", ...extra },
@@ -58,13 +59,15 @@ async function otaEnforced(env) {
 }
 
 /** App Check OR a verified Firebase ID token. Shadow: log + allow. Enforce: deny. No PII in logs. */
-async function gateCheckAuth(request, env, enforced) {
-  const app = await verifyAppCheck(request, env);
-  if (app) return true;
+async function checkAuthKind(request, env) {
+  if (await verifyAppCheck(request, env)) return "appcheck";
   const bearer = ((request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""));
   let uid = null;
   try { uid = bearer ? await verifyFirebaseToken(bearer, env) : null; } catch (e) { uid = null; }
-  if (uid) return true;
+  return uid ? "idtoken" : "none";
+}
+async function gateCheckAuth(request, env, enforced, kind) {
+  if (kind !== "none") return true;
   if (enforced) return false;
   console.warn("[ota-shadow] would-deny missing-auth");
   return true;
@@ -104,9 +107,14 @@ export async function onRequest(context) {
   if (method === "GET" && seg[0] === "check") {
     if (await checkThrottled(env, request)) return json({ error: "rate_limited" }, 429);
     const enforced = await otaEnforced(env);
-    if (!(await gateCheckAuth(request, env, enforced))) return json({ error: "unauthorized" }, 401);
     const url = new URL(request.url);
     const version = parseInt(url.searchParams.get("version") || "0", 10);
+    const kind = await checkAuthKind(request, env);
+    // Rollout gate for OTA_ENFORCE / bundle encryption: which app versions check in, and with what credential.
+    const day = new Date().toISOString().slice(0, 10);
+    const bumping = bump(env, day, { ["ota.auth." + (Number.isFinite(version) ? version : 0) + "." + kind]: 1 });
+    if (context.waitUntil) context.waitUntil(bumping); else await bumping;
+    if (!(await gateCheckAuth(request, env, enforced, kind))) return json({ error: "unauthorized" }, 401);
     const nativeBuild = parseInt(url.searchParams.get("nativeBuild") || "0", 10);
     const result = await OTA.checkForDevice(r2, { version, nativeBuild });
     // @capgo/capacitor-updater's download() fetches natively, outside the WebView — it needs an
@@ -217,6 +225,12 @@ export async function onRequest(context) {
   if (method === "GET" && seg[0] === "candidate") return json({ ok: true, candidate: await OTA.getCandidate(r2) });
   if (method === "GET" && seg[0] === "channel") return json({ ok: true, channel: await OTA.getChannel(r2), kill: await OTA.getKillState(r2) });
   if (method === "GET" && seg[0] === "history") return json({ ok: true, history: await OTA.getHistory(r2) });
+  // GET /api/ota/authstats?days=N -> { "<day>": { "ota.auth.<version>.<appcheck|idtoken|none>": n } }
+  if (method === "GET" && seg[0] === "authstats") {
+    const days = Math.min(14, Math.max(1, parseInt(new URL(request.url).searchParams.get("days") || "3", 10) || 3)), out = {};
+    for (let i = 0; i < days; i++) { const d = new Date(Date.now() - i * 864e5).toISOString().slice(0, 10); out[d] = (await readDay(env, d, "ota.auth.")) || {}; }
+    return json({ ok: true, stats: out });
+  }
 
   if (method === "POST" && seg[0] === "publish") {
     let b = {}; try { b = (await request.json()) || {}; } catch (e) {}
