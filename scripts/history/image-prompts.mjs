@@ -1,8 +1,10 @@
 // Today in Medical History pictures: from data/history/image-subjects.txt (ONE hand-picked subject per day: the
-// day's main event) writes data/history/gemini/gemini-prompt-1-of-3.txt, -2-of-3, -3-of-3 (100, 100, the rest),
-// each a complete prompt to paste into Gemini, plus image-prompts.csv. The images come back named
-// MM-DD-YYYY.png; scripts/history/import-images.sh converts them to data/history/img/<id>.webp.
-import { readFileSync, writeFileSync, mkdirSync, unlinkSync } from "node:fs";
+// day's main event) writes data/history/gemini/gemini-prompt-N-of-M.txt for the subjects that have NO picture yet
+// in data/history/img/, at most 100 per prompt (a Gemini task makes about 100 images), each a complete prompt to
+// paste into Gemini, plus image-prompts.csv (every subject, with its picture status). The images come back named
+// MM-DD-YYYY.png; scripts/history/import-images.sh converts them to data/history/img/<id>.webp. Run it again after
+// an import and the prompts shrink to what is still missing.
+import { readFileSync, writeFileSync, mkdirSync, unlinkSync, readdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -34,15 +36,20 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   for (let m = 1; m <= 12; m++) Object.assign(ev, JSON.parse(readFileSync(join(ROOT, "data/history", String(m).padStart(2, "0") + ".json"), "utf8")));
   const title = (r) => ev[r.key].find((e) => e.id === r.key + "-" + r.y).t;
   mkdirSync(OUT, { recursive: true });
-  for (const f of ["1-START-HERE.md", "batches.md", "GEMINI-FULL-PROMPT.md"]) { try { unlinkSync(join(OUT, f)); } catch (e) {} }
-  // Three self-contained prompts (a Gemini task makes up to about 100 images): 100, 100, the rest.
-  const parts = [list.slice(0, 100), list.slice(100, 200), list.slice(200)];
+  for (const f of readdirSync(OUT)) if (/^(gemini-prompt-.*\.txt|1-START-HERE\.md|batches\.md|GEMINI-FULL-PROMPT\.md)$/.test(f)) unlinkSync(join(OUT, f));
+  const has = (r) => existsSync(join(ROOT, "data/history/img", r.key + "-" + r.y + ".webp"));
+  const todo = list.filter((r) => !has(r));
+  // Self-contained prompts of at most 100 (a Gemini task makes up to about 100 images), for missing pictures only.
+  const parts = [];
+  for (let i = 0; i < todo.length; i += 100) parts.push(todo.slice(i, i + 100));
+  const M = parts.length;
   const label = (k) => +k.slice(3) + " " + MONTHS[+k.slice(0, 2) - 1];
   const csv = [["prompt", "file", "date", "year", "event", "subject"].join(",")];
+  list.filter(has).forEach((r) => csv.push(["done", r.file, r.key, r.y === "day" ? "every year" : r.y.replace("b", ""), q(title(r)), q(r.subject)].join(",")));
   parts.forEach((part, pi) => {
     let t = `Create ${part.length} images with your image generation model. Do not write code. Do not describe images instead of making them. Do not ask questions; make all ${part.length}.
 
-This is part ${pi + 1} of 3 of a set for a medical app's "Today in Medical History" banner (${label(part[0].key)} to ${label(part[part.length - 1].key)}). One image per line below. Every image in all three parts must look like one consistent set.
+This is part ${pi + 1} of ${M} of a set for a medical app's "Today in Medical History" banner (${label(part[0].key)} to ${label(part[part.length - 1].key)}). One image per line below. Every image must match the earlier images of this set exactly in style: one consistent set.
 
 STYLE FOR EVERY IMAGE:
 ${STYLE}
@@ -57,8 +64,8 @@ THE ${part.length} IMAGES:
       t += `${i + 1}. ${r.file}: ${r.subject}. (${title(r)}, ${r.y === "day" ? "observed every year" : r.y.replace("b", "")})\n`;
       csv.push([pi + 1, r.file, r.key, r.y === "day" ? "every year" : r.y.replace("b", ""), q(title(r)), q(r.subject)].join(","));
     });
-    writeFileSync(join(OUT, `gemini-prompt-${pi + 1}-of-3.txt`), t);
+    writeFileSync(join(OUT, `gemini-prompt-${pi + 1}-of-${M}.txt`), t);
   });
   writeFileSync(join(OUT, "image-prompts.csv"), csv.join("\n") + "\n");
-  console.log("subjects", list.length, "prompts", parts.map((p) => p.length).join("/"));
+  console.log("subjects", list.length, "with pictures", list.length - todo.length, "prompts", parts.map((p) => p.length).join("/") || "none needed");
 }

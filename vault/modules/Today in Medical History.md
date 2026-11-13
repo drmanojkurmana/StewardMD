@@ -26,10 +26,17 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
   box shows (it did, first try).
 - Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE subject per day,
-  for the day's main event only (338 days). `scripts/history/image-prompts.mjs` writes three self-contained prompts,
-  `data/history/gemini/gemini-prompt-{1,2,3}-of-3.txt` (100, 100, 138: a Gemini task makes about 100 images), each
-  asking for a ZIP of PNGs named `MM-DD-YYYY.png`. `scripts/history/import-images.sh <folder>` imports named files;
-  `--part N <folder>` matches unnamed downloads to prompt N by save order. Both make 480x360 WebP and rebuild.
+  for the day's main event only (338 days). `scripts/history/image-prompts.mjs` writes self-contained prompts
+  `data/history/gemini/gemini-prompt-N-of-M.txt` for the subjects with NO picture yet, at most 100 each (a Gemini
+  task makes about 100), each asking for a ZIP of PNGs named `MM-DD-YYYY.png`; `image-prompts.csv` lists every
+  subject with its prompt or "done". `scripts/history/import-images.sh <folder>` imports named files;
+  `--part N <folder>` matches unnamed downloads to the list in prompt N by save order. Both make 480x360 WebP,
+  rebuild, and rewrite the prompts down to what is still missing.
+- 2026-11-13: first two Gemini zips imported (they came from the pre-observance prompts): 190 pictures, 2.9 MB.
+  10 of the 200 were for events an observance day has since displaced as headline; deleted (one picture per day,
+  enforced by the "shipped pictures" unit test). 148 still missing: prompts 100 + 48. Fetching a Gemini share link
+  headlessly needs its gemini.gstatic.com scripts re-served as text/javascript (Chrome ORB blocks them through the
+  proxy); then the ZIP chip in the reply downloads with a click.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.

@@ -100,3 +100,22 @@ test("picture subjects: one per day, each naming a real event", () => {
   }
   assert.equal(keys.size, Object.values(months).reduce((a, m) => a + Object.keys(m).length, 0));
 });
+
+test("shipped pictures: only the day's chosen subject, WebP 480x360 under 40 KB, linked in the month file", async () => {
+  const { readdirSync, statSync } = await import("node:fs");
+  const want = new Set(readFileSync(new URL("data/history/image-subjects.txt", root), "utf8").split("\n")
+    .filter((l) => l && !l.startsWith("#")).map((l) => { const [k, y] = l.split("|"); return k + "-" + y + ".webp"; }));
+  const dir = new URL("data/history/img/", root);
+  const files = readdirSync(dir).filter((f) => f.endsWith(".webp"));
+  const days = new Set();
+  for (const f of files) {
+    assert.ok(want.has(f), f + " is not a day's chosen picture subject");
+    days.add(f.slice(0, 5));
+    const b = readFileSync(new URL(f, dir));
+    assert.equal(b.toString("latin1", 8, 12), "WEBP", f);
+    assert.ok(statSync(new URL(f, dir)).size < 40000, f + " too big");
+    const ev = months[f.slice(0, 2)][f.slice(0, 5)].find((e) => e.id + ".webp" === f);
+    assert.ok(ev && ev.img === f, f + " not linked in its month file");
+  }
+  assert.equal(days.size, files.length, "one picture per day");
+});
