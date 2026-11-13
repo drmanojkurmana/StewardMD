@@ -29,7 +29,9 @@
   function breadcrumb(lesson, shareId) {
     var topic = humanise(lesson.module || lesson.title || "");
     var subj = humanise(lesson.subject || "");
-    return "Pearl #" + pearlId(lesson.module, shareId) + " · " + subj + (topic && topic !== subj ? " · " + topic : "");
+    // One code per lesson (owner 2026-11-14): with a lesson ID the reader shows that ID in the foot, so the crumb carries
+    // no second number; the PN- Pearl ID appears only when there is no lesson ID.
+    return "Pearl" + (shareId ? "" : " #" + pearlId(lesson.module, shareId)) + " · " + subj + (topic && topic !== subj ? " · " + topic : "");
   }
   function creditOf(vis) {
     if (!vis) return "StewardMD illustration";
