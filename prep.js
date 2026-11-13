@@ -1096,8 +1096,10 @@
           });
         }
         flagNoImage(items);
-        if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-        return items;
+        return holdBlocked(items, sid).then(function () {
+          if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+          return items;
+        });
       });
     });
   }
@@ -1168,9 +1170,11 @@
       return Promise.all((g.members || []).map(function (m) { return fixesFor(m[1]); })).then(function (fxs) {
         fxs.forEach(function (fx) { items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); }); });
         flagNoImage(items);
-        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-        writeBackXCounts(g, bankU, unionItems(ovs));
-        return items;
+        return holdBlocked(items, sid).then(function () {
+          if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+          writeBackXCounts(g, bankU, unionItems(ovs));
+          return items;
+        });
       });
     });
   }
@@ -1211,6 +1215,13 @@
   // Item-quality sidecar (tools/prep-quality.mjs): quality/index.json names the current per-subject files
   // (short cache); each subject file is immutable and cached like module files, so tests stay filtered
   // offline. Absent = {} (every visible item stays eligible, as before the sidecar existed).
+  /* Quality-blocked items (requires_review / rejected / retired, disputed key) are held at load, so every pool that reads
+     loadModule (practice, plans, custom, boss and play modes) skips them, not only the tests that pass the sidecar. */
+  function holdBlocked(items, sid) {
+    return loadQuality([sid]).then(function (q) {
+      (items || []).forEach(function (it) { if (it && !it.hold && qualBlocked(q[it.id])) it.hold = "quality"; });
+    }, function () {});
+  }
   function loadQuality(subs) {
     if (!st.qualIxP) st.qualIxP = getJSON(API + "quality/index.json").then(function (ix) { return ix && ix.subjects ? ix : null; }, function () { return null; });
     return st.qualIxP.then(function (ix) {

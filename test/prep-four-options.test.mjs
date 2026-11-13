@@ -41,3 +41,10 @@ test("four-option items are untouched", () => {
   const it = { o: ["a", "b", "c", "d"], a: 2 };
   assert.deepEqual(P.fourOptions(it), { o: ["a", "b", "c", "d"], a: 2 });
 });
+
+test("tester 2026-11-12 Q-48J-SJ4-MA3: 'You are shown an MLO view' needs a picture; narrative 'shown' does not", () => {
+  assert.equal(A.needsImage({ q: "You are shown an MLO view of the left breast. What is the MOST likely diagnosis?" }), true);
+  assert.equal(A.needsImage({ q: "You are shown two films from an ERCP in a 40-year-old woman." }), true);
+  assert.equal(A.needsImage({ q: "The patient was shown the X-ray report by the doctor. Next step?" }), false);
+  assert.equal(A.needsImage({ q: "Bat wing appearance on chest X-ray is seen in" }), false);
+});
