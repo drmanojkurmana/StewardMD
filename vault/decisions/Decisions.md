@@ -12308,3 +12308,10 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - **HU check:** `tsd_combine.py --contrast` widens only enhancing parenchyma (to 300 HU) and the cardiac blood pool (to
   450 HU), per subject; unenhanced bands unchanged, so no shipped module moved.
 - **Native fallback:** phones try R2, then the committed chunk on stewardmd.in, so a new body works before its R2 upload.
+
+## 2026-11-13 Pages file guard raised to 19,600 (owner)
+- The whole-body CT (`ct-live-body-*`, ~790 files) took the Pages output to 19,569 static files, over the 19,000 guard in
+  `test/pages-output.test.mjs` (Cloudflare's hard cap is 20,000). Offered: trim (hold back the coronal/sagittal stacks),
+  move the slice images to R2, or raise the guard. **Owner chose raising the guard to 19,600.**
+- Headroom is now ~30 files. The next sizeable asset set must go to R2 or into the `scripts/pages-build.sh` exclusion
+  list (`data/antibiogram/sources`, 108 build-input JSONs no runtime code fetches, is a ready candidate).

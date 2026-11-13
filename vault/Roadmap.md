@@ -66,6 +66,8 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] **[[RadioAnatome 3D]] upload the whole-body chunks to R2** — `atlas/3d/body-*.bin.gz` (14 files) via `wrangler r2 object
       put stewardmd-models/atlas3d/<file> --file atlas/3d/<file> --content-type application/gzip --remote`. Phones fall back
       to the committed copy on stewardmd.in meanwhile (after merge to main).
+- [ ] **Pages file headroom ~30** (guard raised to 19,600 on 2026-11-13): move RadioAnatome slice images to R2 or exclude
+      `data/antibiogram/sources` (build input only) before adding more static files.
 - [ ] **[[RadioAnatome]] radiologist review of `ct-live-body-*`** (Beta until `/validation` says verified), and run Immersive
       on the iPhone + Pixel (frame rate with the 572k-triangle whole body, cellular load of ~7 MB).
 - [ ] **[[RadioAnatome 3D]] reference rows for the kind "live" structures** (thyroid, carotids, subclavian, brachiocephalic
