@@ -205,7 +205,11 @@ async function serveGatedJsonWatermarked(env, p, request, cacheControl, user) {
   try {
     raw = typeof obj.text === "function" ? await obj.text() : await new Response(obj.body).text();
   } catch (e) {
-    return withCors(request, new Response(obj.body, { status: 200, headers: bankResponseHeaders(p, obj, cacheControl) }));
+    // The body stream is spent after a failed read: ask the client to retry instead of sending it again.
+    return new Response(JSON.stringify({ error: "bank-unavailable" }), {
+      status: 503,
+      headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Retry-After": "5" },
+    });
   }
   const wm = await watermarkJsonText(raw, {
     userId: user && user.id,
