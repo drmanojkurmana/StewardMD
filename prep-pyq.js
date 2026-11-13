@@ -11,12 +11,16 @@
    enlarge (tap again for 2.2x; back or Escape closes). */
 (function (G) {
   "use strict";
-  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "aiims-pg": "AIIMS PG", "neet-ss": "NEET-SS", usmle: "USMLE" };
+  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "aiims-pg": "AIIMS PG", "neet-ss": "NEET-SS", "ini-ss": "INI-SS", usmle: "USMLE" };
   // AIPGMEE was the all-India PG entrance before NEET-PG (2017 session onwards): its papers sit on the NEET-PG tab.
   // INI-CET papers (owner 2026-11-13) share the list; AIIMS PG (2019, May 2020) was INI-CET's forerunner.
-  var PG = { "neet-pg": 1, aipgmee: 1, "ini-cet": 1, "aiims-pg": 1 };
+  var PG = { "neet-pg": 1, aipgmee: 1, "ini-cet": 1, "aiims-pg": 1, "neet-ss": 1, "ini-ss": 1 };
+  // Papers screen tabs, one per exam family (owner 2026-11-13: NEET-SS and INI-SS joined NEET-PG and INI-CET).
+  var TABS = [["pg", "NEET-PG", { "neet-pg": 1, aipgmee: 1 }], ["inicet", "INI-CET", { "ini-cet": 1, "aiims-pg": 1 }], ["neetss", "NEET-SS", { "neet-ss": 1 }], ["iniss", "INI-SS", { "ini-ss": 1 }]];
+  function tabOf(exam) { for (var i = 0; i < TABS.length; i++) if (TABS[i][2][exam]) return TABS[i][0]; return "pg"; }
   // A paper's timed test follows its own exam's pattern (MOCKS: NEET-PG 200 Q / 210 min +4/-1, INI-CET 200 / 180 +1/-1/3).
-  function patternOf(p) { return p && (p.exam === "ini-cet" || p.exam === "aiims-pg") ? "ini-cet" : "neet-pg"; }
+  // shortcut: INI-SS has no pattern of its own in MOCKS yet, so it times like NEET-SS; add one when its pattern is set.
+  function patternOf(p) { var e = p && p.exam; return e === "ini-cet" || e === "aiims-pg" ? "ini-cet" : e === "neet-ss" || e === "ini-ss" ? "neet-ss" : "neet-pg"; }
 
   /* ================= pure ================= */
   // [exam, year, kind] or { exam, year, kind } -> one line per exam and kind: "Asked in NEET-PG 2025, 2024 (recall)".
@@ -69,7 +73,7 @@
   // A question that tests two subjects carries its second module in tt (owner 2026-11-13) and shows under both.
   function onMod(it, mid) { return it.t === mid || !!(it.tt && it.tt.indexOf(mid) >= 0); }
   function bySubject(items) { var c = {}; items.forEach(function (it) { var s = it.subject || "unsorted"; c[s] = (c[s] || 0) + 1; }); return c; }
-  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject, onMod: onMod, patternOf: patternOf };
+  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject, onMod: onMod, patternOf: patternOf, tabOf: tabOf };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -136,26 +140,30 @@
   // Home: one row in the Practise group (NEET-PG only: the papers we hold are NEET-PG).
   function homeRow(host) {
     warm(host);
-    return host.row("y-home", icon(), "Previous year papers", "NEET-PG and INI-CET recall papers by year, timed or practice");
+    return host.row("y-home", icon(), "Previous year papers", "NEET-PG, INI-CET, NEET-SS and INI-SS recall papers by year");
   }
 
-  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, AIPGMEE papers were not published either, and AIIMS does not publish INI-CET papers. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
+  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG or NEET-SS papers, AIPGMEE papers were not published either, and AIIMS does not publish INI-CET or INI-SS papers. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
   function renderPapers(host) {
     var esc = host.esc;
-    host.paint(host.bar("Previous year papers", "NEET-PG, INI-CET and AIIMS PG · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
+    host.paint(host.bar("Previous year papers", "Recall papers by exam and year", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
     Promise.all([loadIndex(host), loadItems(host), qualOf(host)]).then(function (r) {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       var ix = r[0], items = r[1], qual = r[2], hid = hiddenOf(host), years = {}, html = "";
-      ix.papers.filter(function (p) { return PG[p.exam]; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
+      var has = {}; ix.papers.forEach(function (p) { if (PG[p.exam]) has[tabOf(p.exam)] = 1; });
+      if (!has[P.tab]) P.tab = "pg";
+      var tabs = TABS.filter(function (t) { return has[t[0]]; });
+      var bar = tabs.length > 1 ? '<div class="pn-wrap pn-yq-tabs" role="group" aria-label="Exam">' + tabs.map(function (t) { var on = t[0] === P.tab; return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="y-tab" data-v="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>" : "";
+      ix.papers.filter(function (p) { return PG[p.exam] && tabOf(p.exam) === P.tab; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
       var ys = Object.keys(years).sort(function (a, b) { return b - a; });
-      if (!ys.length) { box.innerHTML = NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
+      if (!ys.length) { box.innerHTML = bar + NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
       ys.forEach(function (y) {
         html += '<h2 class="pn-sec">' + esc(y) + '</h2><div class="pn-group">' + years[y].map(function (p) {
           var list = paperItems(items, p.id), ok = list.filter(function (it) { return usable(it, hid, qual); }), img = ok.filter(function (it) { return it.img; }).length;
           return '<button type="button" class="pn-row pn-yq-row" data-act="y-paper" data-v="' + esc(p.id) + '"><span class="pn-ri" aria-hidden="true">' + icon() + '</span><span class="pn-rb"><b>' + esc(paperTitle(p)) + "</b><small>" + host.fmt(ok.length) + " questions" + (img ? " · " + img + " with images" : "") + '</small></span><span class="pn-yq-kind">' + (p.kind === "official" ? "Official" : "Recall") + "</span>" + host.ico("chev") + "</button>";
         }).join("") + "</div>";
       });
-      box.innerHTML = NOTE + html;
+      box.innerHTML = bar + NOTE + html;
     }, function () {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       box.innerHTML = NOTE + '<p class="pn-err" role="alert">Previous year papers need a connection the first time. Once opened they work offline.</p><button type="button" class="pn-btn" data-act="y-home-retry">Try again</button>';
@@ -352,6 +360,7 @@
     var v = b.getAttribute("data-v");
     if (a === "y-home") return host.push(function () { renderPapers(host); });
     if (a === "y-home-retry") return renderPapers(host);
+    if (a === "y-tab") { P.tab = v; return renderPapers(host); }
     if (a === "y-paper") return Promise.all([loadItems(host), qualOf(host)]).then(function (r) { host.push(function () { renderPaper(host, v, r[1]); }); }, function () { host.toast("The paper did not load. Check the connection and try again."); });
     if (a === "y-start") return startPaper(host, v, b.getAttribute("data-k"));
     if (a === "y-mf") { P.mf[b.getAttribute("data-m")] = v; var slot = host.root().querySelector("#pnPyqSlot"); return drawSlot(slot, b.getAttribute("data-s"), b.getAttribute("data-m"), moduleCount(P.ix, b.getAttribute("data-m")), host); }
