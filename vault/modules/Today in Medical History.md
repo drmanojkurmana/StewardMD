@@ -39,6 +39,8 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   proxy); then the ZIP chip in the reply downloads with a click.
 - 2026-11-13: third zip (old 127-image prompt) imported: 117 used, 10 skipped for displaced events. 307 of 338
   days have a picture (4.5 MB); the last 31 (mostly observance days) are in gemini-prompt-1-of-1.txt.
+- 2026-11-13: last 31 imported. ALL 338 days with events have their picture (5.0 MB). No prompts left; the
+  generator writes new ones only if image-subjects.txt gains a day without a picture.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.
