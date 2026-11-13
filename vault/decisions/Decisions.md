@@ -12362,3 +12362,8 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Same day: curated. Deaths and passings never shown; 110 more dropped by hand (data/history/curation.txt). 39 days now have no event and the banner does not flip on them.
 - Same day, owner: tragedies, outbreaks, hoaxes and routine notices restored. Deaths and obscure births stay out. 639 events on 336 days.
 - Same day: 22 observance days added (World Health Day, National Doctors' Day ...); each leads its day and owns its picture.
+
+## 2026-11-13 Lesson figures carry the watermark in-line
+Owner saw the PrepNucleus centre mark and corner lockup only after tapping a lesson image full screen. The lesson and
+PYQ figure markup never added the `image-watermark.js` overlay. It now does, on the picture's own box, same look as
+the viewer. Loader token prep144.

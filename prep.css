@@ -419,6 +419,11 @@ body.dark .pn-root .pn-sheet { box-shadow: none; }
 .pn-root .pn-vimg { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: var(--pn-r-md); overflow: hidden; background: #fff; transition: transform var(--pn-d-press) var(--pn-ease); }
 .pn-root .pn-vimg:active { transform: scale(.985); }
 .pn-root .pn-vimg img { display: block; width: 100%; height: auto; }
+/* The watermark host around a figure (prep-lessons.js wmImg, prep-pyq.js figure): the overlay sits on its box, so the
+   box hugs the picture. --ar is the image's width / height (from the lesson data, or set on load for a PYQ image). */
+.pn-root .pn-wmh { display: block; }
+.pn-root .pn-yq-fig .pn-wmh { width: min(100%, calc(60vh * var(--ar, 99))); }
+.pn-root .pn-yq-fig .pn-wmh img { width: 100%; max-height: 60vh; object-fit: contain; }
 body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: brightness(.94); }
 .pn-root .pn-vfig figcaption { display: flex; gap: 8px; align-items: flex-start; padding: 0 4px; font-size: 13px; line-height: 1.4; color: var(--pn-mut); }
 .pn-root .pn-vzi { flex: 0 0 auto; display: inline-flex; margin-top: 1px; color: var(--pn-pri); }
@@ -1165,6 +1170,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-lsn-step:has(> .pn-vis-image) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px; align-items: start; }
   .pn-root .pn-lsn-step > .pn-vis-image { position: sticky; top: 0; }
   .pn-root .pn-lsn-step > .pn-vis-image .pn-vimg img { width: 100%; max-height: calc(100cqh - 96px); object-fit: contain; }
+  .pn-root .pn-lsn-step > .pn-vis-image .pn-vimg .pn-wmh { width: min(100%, calc((100cqh - 96px) * var(--ar, 99))); margin: 0 auto; }
 }
 /* The narrowest windows (an iPad Slide Over pane at 320 px keeps zoom 1.0 now): the lesson bar fits without the
    waveform, so Next keeps its label. */
