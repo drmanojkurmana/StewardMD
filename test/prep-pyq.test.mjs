@@ -217,10 +217,10 @@ test("patternOf and titles: INI-CET and AIIMS PG papers time like INI-CET; sessi
   assert.equal(PY.paperTitle({ exam: "aiims-pg", year: 2019, session: "May" }), "AIIMS PG 2019 · May");
 });
 
-test("tabOf and patternOf: each exam has its papers tab; NEET-SS and INI-SS papers time like NEET-SS", () => {
+test("tabOf and patternOf: each exam has its papers tab; NEET-SS and INI-SS papers have their own patterns", () => {
   assert.deepEqual(["neet-pg", "aipgmee", "ini-cet", "aiims-pg", "neet-ss", "ini-ss"].map(PY.tabOf), ["pg", "pg", "inicet", "inicet", "neetss", "iniss"]);
   assert.equal(PY.patternOf({ exam: "neet-ss" }), "neet-ss");
-  assert.equal(PY.patternOf({ exam: "ini-ss" }), "neet-ss");
+  assert.equal(PY.patternOf({ exam: "ini-ss" }), "ini-ss");
   assert.equal(PY.paperTitle({ exam: "neet-ss", year: 2025, session: "Medical group" }), "NEET-SS 2025 · Medical group");
   assert.equal(PY.paperTitle({ exam: "ini-ss", year: 2026, session: "May" }), "INI-SS 2026 · May");
 });
