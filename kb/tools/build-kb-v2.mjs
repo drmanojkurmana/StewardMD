@@ -10,6 +10,7 @@
 import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, rmSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { placement } from "./kb-placement.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
@@ -59,6 +60,25 @@ function build() {
     }
   }
 
+  // Figures of an article the app does not bundle (added later with a PrepNucleus lesson batch) also go on the
+  // shipped article on the same topic, so the image is somewhere a reader can reach (kb-placement.mjs).
+  const P = placement(ROOT);
+  let placed = 0;
+  for (const [id, d] of P.docs) {
+    if (P.shipped.has(id)) continue;
+    const imgs = (d.figures || []).filter((f) => f && f.type === "image" && f.src);
+    const t = imgs.length ? P.target(id) : null;
+    if (!t) continue;
+    const b = buckets[bucketOf(t)];
+    if (!b[t]) { b[t] = entryFor(P.docs.get(t) || {}); n++; }
+    const have = new Set((b[t].figures || []).map((f) => f && f.src));
+    for (const f of imgs) {
+      if (have.has(f.src)) continue;
+      (b[t].figures = b[t].figures || []).push(Object.assign({}, f, { placedFrom: id }));
+      have.add(f.src); placed++;
+    }
+  }
+
   if (existsSync(OUT)) rmSync(OUT, { recursive: true });
   mkdirSync(OUT, { recursive: true });
   let maxBytes = 0;
@@ -67,7 +87,7 @@ function build() {
     maxBytes = Math.max(maxBytes, s.length);
     writeFileSync(join(OUT, "b" + String(i).padStart(2, "0") + ".json"), s);
   });
-  console.log(`kb v2: ${n} entries in ${BUCKETS} buckets, largest bucket ${(maxBytes / 1048576).toFixed(2)} MiB`);
+  console.log(`kb v2: ${n} entries in ${BUCKETS} buckets, ${placed} figures placed on shipped articles, largest bucket ${(maxBytes / 1048576).toFixed(2)} MiB`);
   return { n, maxBytes };
 }
 
