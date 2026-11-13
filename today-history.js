@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th2";
+  var FLAG = "smd_today_history", VER = "th3";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -46,11 +46,6 @@
   function eventsFor(m, d) { return loadMonth(m).then(function (j) { return (j && j[pad(m) + "-" + pad(d)]) || []; }); }
 
   /* ---- the flip ---- */
-  var ICON = '<svg class="th-glass" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
-    '<path d="M6 3h12M6 21h12"/>' +
-    '<path d="M7.5 3.5c0 4 4.5 5.5 4.5 8.5s-4.5 4.5-4.5 8.5M16.5 3.5c0 4-4.5 5.5-4.5 8.5s4.5 4.5 4.5 8.5"/>' +
-    '<path class="th-sand" d="M9.2 18.6c.9-1.4 1.9-2 2.8-2s1.9.6 2.8 2z"/></svg>';
-
   function dateEl() { return D.querySelector("#homeV2 .hrf-date"); }
   function banner() { return D.getElementById("hrfBanner"); }
   function todayKey() { var n = new Date(); return { m: n.getMonth() + 1, d: n.getDate() }; }
@@ -65,11 +60,46 @@
 
   var todays = [], pick = 0, showing = false, busy = false, timer = 0, frontLabel = "";
 
+  // Picture on the right of the history face: the day's own image when one ships (month file "img"),
+  // otherwise a line drawing for the event's category. Decorative: the words carry the meaning.
+  var ART = {
+    "Pioneer": '<ellipse cx="60" cy="50" rx="34" ry="42" class="a-ring"/><ellipse cx="60" cy="50" rx="28" ry="36"/>' +
+      '<path d="M60 26c-8 0-13 6-13 14 0 6 3 10 5 12-6 3-13 9-15 19M60 26c8 0 13 6 13 14 0 6-3 10-5 12 6 3 13 9 15 19"/><path d="M52 52c2 3 5 5 8 5s6-2 8-5"/>',
+    "Discovery": '<path d="M44 84h52M54 84c0-12 8-20 20-22"/><path d="M62 18l14 8-16 28-14-8z"/><path d="M58 50l-6 10M66 30l6-10 6 3-6 10"/>' +
+      '<circle cx="80" cy="58" r="6" class="a-glow"/><path d="M74 62c4 6 4 14-2 22"/><path d="M40 62h20"/>',
+    "Nobel & Award": '<circle cx="60" cy="56" r="22" class="a-glow"/><circle cx="60" cy="56" r="15"/><path d="M48 18l12 18 12-18M44 18h32"/>' +
+      '<path d="M30 70c-6-8-6-20 0-28M28 58l-6-2M28 48l-5-4M90 70c6-8 6-20 0-28M92 58l6-2M92 48l5-4"/><path d="M55 56l4 4 7-8"/>',
+    "Public Health": '<path d="M60 14l30 10v22c0 20-13 32-30 40-17-8-30-20-30-40V24z"/><path d="M60 34v28M46 48h28" class="a-hi"/>' +
+      '<circle cx="60" cy="48" r="20" class="a-glow"/>',
+    "Surgery": '<path d="M24 80l50-50c4-4 10-4 12 0 2 3 0 7-4 10L32 86z"/><path d="M68 36l10 10" class="a-hi"/>' +
+      '<path d="M96 80L56 40M92 84L52 44M52 44l-6-10 10 6"/><circle cx="76" cy="40" r="10" class="a-glow"/>',
+    "Vaccine & Drug": '<path d="M28 82l8-8M36 74l34-34 10 10-34 34z"/><path d="M66 36l8-8 12 12-8 8M80 22l12 12M48 62l6 6M56 54l6 6"/>' +
+      '<rect x="80" y="58" width="16" height="26" rx="4"/><path d="M80 66h16M84 54h8v4h-8z"/><circle cx="88" cy="74" r="8" class="a-glow"/>',
+    "Institution": '<path d="M24 40l36-20 36 20zM28 84h64M24 90h72"/><path d="M34 44v36M48 44v36M72 44v36M86 44v36"/>' +
+      '<path d="M54 84V62a6 6 0 0 1 12 0v22" class="a-hi"/><circle cx="60" cy="32" r="4"/>'
+  };
+  function art(e) {
+    if (e.img) return '<img class="th-face-img" src="/data/history/img/' + esc(e.img) + '" alt="" decoding="async">';
+    return '<svg class="th-face-art" viewBox="0 0 120 100" aria-hidden="true" focusable="false">' + (ART[e.c] || ART.Discovery) + '</svg>';
+  }
+  var CAL = '<svg class="th-cal" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2"/><path d="M2 7h12M5 1.5v3M11 1.5v3"/><path d="M5 10h1M8 10h1M11 10h1" class="c-dot"/></svg>';
   function face(e) {
     var t = todayKey();
-    return '<div class="th-face-ey">' + ICON + '<span class="th-face-lg">Today in medical history</span><span class="th-face-sm">On this day</span><span class="th-face-dt">' + t.d + " " + MONTHS[t.m - 1] + '</span></div>' +
-      '<div class="th-face-row"><span class="th-face-yr">' + esc(e.y) + '</span><span class="th-face-tt">' + esc(e.t) + '</span></div>' +
-      '<div class="th-face-go">Tap to read' + (todays.length > 1 ? ' · ' + todays.length + ' events today' : '') + '</div>';
+    return '<div class="th-face-pic">' + art(e) + '</div>' +
+      '<div class="th-face-txt">' +
+        '<div class="th-face-ey">' + t.d + " " + MONTHS[t.m - 1].toUpperCase() + '<span class="th-dot" aria-hidden="true"></span><span class="th-face-lg">This day in medical history</span><span class="th-face-sm">This day in history</span></div>' +
+        '<div class="th-face-tt">' + esc(e.t) + '</div>' +
+        '<div class="th-face-yr">' + CAL + esc(e.y) + '</div>' +
+        '<div class="th-face-sm-txt">' + esc(e.s) + '</div>' +
+      '</div>' +
+      '<div class="th-face-go">Tap to explore<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></div>';
+  }
+  // Long titles take two lines; the summary then gets one, else two. Nothing spills out of the banner.
+  function fit(f) {
+    var tt = f.querySelector(".th-face-tt"), sm = f.querySelector(".th-face-sm-txt");
+    if (!tt || !sm) return;
+    var lh = parseFloat(getComputedStyle(tt).lineHeight) || 20;
+    sm.style.webkitLineClamp = tt.offsetHeight > lh * 1.5 ? "1" : "2";   // offsetHeight: the banner may be mid-fold
   }
   function ensureFace(b) {
     var f = b.querySelector(".th-face");
@@ -81,9 +111,9 @@
     b.classList.toggle("th-back", on);
     if (on) {
       var e = todays[pick % todays.length]; pick++;
-      ensureFace(b).innerHTML = face(e);
+      var f = ensureFace(b); f.innerHTML = face(e); fit(f);
       if (!frontLabel) frontLabel = b.getAttribute("aria-label") || "";
-      b.setAttribute("aria-label", "Today in medical history, " + e.y + ": " + e.t + ". Open");
+      b.setAttribute("aria-label", "This day in medical history, " + e.y + ": " + e.t + ". Tap to explore");
     } else if (frontLabel) b.setAttribute("aria-label", frontLabel);
   }
   // Fold to the edge, swap faces at 90 degrees (nothing to see edge-on), unfold the other face.
@@ -99,8 +129,8 @@
     setTimeout(function () {
       setShowing(b, toBack);
       b.classList.remove("th-out"); void b.offsetWidth; b.classList.add("th-in");
-      setTimeout(function () { b.classList.remove("th-in"); busy = false; done(); }, 460);
-    }, 300);
+      setTimeout(function () { b.classList.remove("th-in"); busy = false; done(); }, 300);
+    }, 220);
   }
   function tick() {
     clearTimeout(timer);

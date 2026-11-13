@@ -33,6 +33,14 @@ test("events are complete, oldest first, https sources, no em-dash", () => {
   }
 });
 
+test("pictures: the day's file, and a second event's own file when present", () => {
+  const has = (f) => ["01-01.webp", "01-02-2.webp"].includes(f);
+  const m = build(src, has)["01"];
+  assert.ok(m["01-01"].every((e) => e.img === "01-01.webp"));
+  assert.equal(m["01-02"][0].img, undefined);
+  if (m["01-02"].length > 1) assert.equal(m["01-02"][1].img, "01-02-2.webp");
+});
+
 test("clean turns em-dash breaks into commas", () => {
   assert.equal(clean("a mold—anticipating penicillin—was born"), "a mold, anticipating penicillin, was born");
 });

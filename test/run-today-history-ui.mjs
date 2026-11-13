@@ -62,11 +62,14 @@ try {
   ok(await ev(`!document.getElementById('hrfBanner').classList.contains('th-back')`), 'front face first');
   ok(await backOn(6000), 'flips to history after about 5 s');
   await sleep(1200); await shot('01-banner-back-390');
-  ok(await ev(`/Today in medical history/i.test(document.querySelector('#hrfBanner .th-face').innerText)`), 'history face shows the label');
-  ok(await ev(`document.querySelector('#hrfBanner .th-face').innerText.includes(${JSON.stringify(today)}.split(' ')[0])`), 'history face shows today');
+  ok(await ev(`/This day in medical history/i.test(document.querySelector('#hrfBanner .th-face').innerText)`), 'history face shows the label');
+  ok(await ev(`document.querySelector('#hrfBanner .th-face').innerText.toUpperCase().includes(${JSON.stringify(today.toUpperCase())})`), 'history face shows today');
   ok(await ev(`Math.abs(document.getElementById('hrfBanner').getBoundingClientRect().height-${h0})<1`), 'banner keeps its height');
-  ok(await ev(`(()=>{const t=document.querySelector('#hrfBanner .th-face-tt');return t.scrollHeight<=t.clientHeight+2})()`), 'title clamps inside the banner');
-  ok(await ev(`/^Today in medical history, [0-9]{4}: /.test(document.getElementById('hrfBanner').getAttribute('aria-label'))`), 'banner name follows the face');
+  const inside = `(()=>{const b=document.getElementById('hrfBanner').getBoundingClientRect();return [...document.querySelectorAll('#hrfBanner .th-face-txt>*,#hrfBanner .th-face-go')].every(n=>{const q=n.getBoundingClientRect();return q.top>=b.top-1&&q.bottom<=b.bottom+1&&q.right<=b.right+1&&q.left>=b.left-1})})()`;
+  ok(await ev(inside), 'history text inside the banner');
+  ok(await ev(`(()=>{const t=document.querySelector('#hrfBanner .th-face-txt'),g=document.querySelector('#hrfBanner .th-face-go').getBoundingClientRect();return [...t.children].slice(1).every(n=>n.getBoundingClientRect().right<=g.left+1||n.getBoundingClientRect().bottom<=g.top+1)})()`), 'Tap to explore clear of the text');
+  ok(await ev(`!!document.querySelector('#hrfBanner .th-face-art, #hrfBanner .th-face-img')`), 'face has a picture');
+  ok(await ev(`/^This day in medical history, [0-9]{4}: /.test(document.getElementById('hrfBanner').getAttribute('aria-label'))`), 'banner name follows the face');
   ok(await ev(`document.documentElement.scrollWidth<=innerWidth`), 'no sideways scroll');
   // 2. It flips back after 5 s, and again after 5 more.
   const t0 = Date.now();
@@ -127,7 +130,7 @@ try {
   await size(320, 640); await boot('');
   ok(await backOn(9000), 'flips at 320');
   await sleep(1200); await shot('04-banner-back-320');
-  ok(await ev(`(()=>{const f=document.querySelector('#hrfBanner .th-face'),r=f.getBoundingClientRect();return [...f.querySelectorAll('*')].every(n=>{const q=n.getBoundingClientRect();return q.right<=r.right+1&&q.bottom<=r.bottom+1})})()`), 'history face content inside the banner at 320');
+  ok(await ev(inside), 'history text inside the banner at 320');
   ok(await ev(`document.documentElement.scrollWidth<=innerWidth`), 'no sideways scroll at 320');
   await size(390, 844);
 

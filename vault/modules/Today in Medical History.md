@@ -7,13 +7,19 @@ flag: localStorage smd_today_history (default ON; "0" or ?todayhistory=0 turns i
 
 Owner, 2026-11-13: a 366-day dataset (670 events, leap day included) and "today in medical history" on Home.
 First built as a chip beside the home date; the owner then asked for the **Pro banner to flip** instead:
-history for 5 s, back for 5 s, repeat. The chip was removed.
+history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mock-up set the history face layout.
 
 ## What the doctor sees
-- The Pro banner (`#hrfBanner`) shows its own face for 5 s, folds on its horizontal axis (split-flap style,
-  `rotateX` with perspective, 300 ms out / 460 ms in), and shows a dark ink face with a gold rule: hourglass,
-  "Today in medical history", the date, the year in a book face and the event title (2-line clamp), "Tap to read".
-  Days with two events alternate. 5 s later it folds back. Repeats.
+- The Pro banner (`#hrfBanner`) shows its own face for 5 s, then folds on its horizontal axis (`rotateX`, 0.22 s
+  out, 0.3 s in, about 0.5 s per flip, the owner's mock-up timing) to the history face, holds 5 s, folds back. Repeats.
+- History face (owner mock-up 2026-11-13): same teal banner; "13 NOVEMBER . THIS DAY IN MEDICAL HISTORY", the
+  title (up to 2 lines), calendar icon + year, the summary (2 lines, or 1 when the title takes 2: `fit()`), a picture
+  on the right and "Tap to explore". Days with two events alternate. **The banner never changes height** (a taller
+  back would shove the whole page down every 5 s); the full text is in the sheet.
+- Picture: `data/history/img/MM-DD.webp` (day) or `MM-DD-2.webp` (second event) when present; the build writes
+  `img` into the month file only for files that exist (no 404s). Otherwise a line drawing per category (7: Pioneer,
+  Discovery, Nobel & Award, Public Health, Surgery, Vaccine & Drug, Institution), `ART` in today-history.js.
+  No per-day images yet; the owner offered to supply all 366.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
   source link), previous/next day (navigates inside a leap year, so 29 February is reachable), Back to today.
   Tap while the front shows: the facts page, as before.

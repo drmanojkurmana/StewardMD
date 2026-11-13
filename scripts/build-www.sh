@@ -127,6 +127,7 @@ if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data
 if [ -d data/ref ]; then mkdir -p "$WWW/data/ref"; cp data/ref/*.json "$WWW/data/ref/"; fi
 # Today in Medical History (today-history.js fetches /data/history/MM.json). source/ is the raw input, not shipped.
 if [ -d data/history ]; then mkdir -p "$WWW/data/history"; cp data/history/*.json "$WWW/data/history/"; fi
+if [ -d data/history/img ]; then mkdir -p "$WWW/data/history/img"; cp data/history/img/*.webp "$WWW/data/history/img/" 2>/dev/null || true; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 # FDA-label monographs for drugs with no bundled record (scripts/build-fda-monographs.py): one small JSON per
 # drug, fetched by offline-clinical.js when that drug is opened. Not in the bundle, so startup stays small.
