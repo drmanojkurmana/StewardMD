@@ -258,3 +258,45 @@ test("deck image step: image and nearby text sent; image saved only with a quest
   assert.deepEqual(items[0].img, [data]); assert.equal(items[1].img, undefined);
   assert.equal(PC.imgB64("data:image/gif;base64,AAAA"), null);
 });
+
+test("several chips in a row (owner 2026-11-13): union filter, toggles, All/Mix stand alone, saved and named", () => {
+  const L = pool(), ctx = ctxFor(L), all = L.flat();
+  // normSel keeps the row's order, drops unknown values and a stray All/Mix beside specific chips.
+  assert.equal(S.normSel({ type: "case,img" }).type, "img,case");
+  assert.equal(S.normSel({ type: "img,bogus,all" }).type, "img");
+  assert.equal(S.normSel({ type: "bogus" }).type, "all");
+  assert.equal(S.normSel({ seen: "wrong,new" }).seen, "new,wrong");
+  assert.equal(S.normSel({ d: "4,1" }).d, "1,4");
+  // Toggle: from All a chip starts a set; chips add and remove; the last one out returns the open choice; All/Mix alone.
+  assert.equal(S.toggle(S.TYPES, "all", "img", "all"), "img");
+  assert.equal(S.toggle(S.TYPES, "img", "case", "all"), "img,case");
+  assert.equal(S.toggle(S.TYPES, "img,case", "img", "all"), "case");
+  assert.equal(S.toggle(S.TYPES, "case", "case", "mix"), "mix");
+  assert.equal(S.toggle(S.TYPES, "img,case", "all", "all"), "all");
+  assert.equal(S.toggle(S.SEENS, "mix", "new", "mix"), "new");
+  assert.equal(S.toggle(S.SEENS, "new", "wrong", "mix"), "new,wrong");
+  // Filter: a question passes when it matches any chosen chip; counts per chip are unchanged; total is the union.
+  const two = S.normSel({ type: "img,case", seen: "all", d: "mix" });
+  const c = S.counts(L, two, ctx);
+  assert.equal(c.total, all.filter((x) => ["img", "case"].includes(S.typeOf(x))).length);
+  assert.equal(c.type.img + c.type.case, c.total);
+  const nw = S.normSel({ type: "all", seen: "new,wrong", d: "mix" });
+  const cn = S.counts(L, nw, ctx);
+  assert.equal(cn.total, all.filter((x) => S.seenMatch(x, "new", ctx) || S.seenMatch(x, "wrong", ctx)).length);
+  assert.ok(cn.total < 60 && cn.total >= Math.max(cn.seen.new, cn.seen.wrong));
+  const dd = S.counts(L, S.normSel({ type: "all", seen: "all", d: "1,3" }), ctx);
+  assert.equal(dd.total, dd.d["1"] + dd.d["3"]);
+  // Draw: only chosen kinds, and two types share the count equally (as Mix does among all three).
+  const r = S.draw(L, { type: "img,case", seen: "all", d: "mix", n: 12 }, ctx, seq(11));
+  assert.equal(r.length, 12);
+  assert.ok(r.every((x) => ["img", "case"].includes(S.typeOf(x))));
+  assert.equal(r.filter((x) => S.typeOf(x) === "img").length, 6);
+  const s2 = S.draw(L, { type: "all", seen: "new,wrong", d: "1,3", n: 60 }, ctx, seq(12));
+  assert.ok(s2.length > 0 && s2.every((x) => (S.seenMatch(x, "new", ctx) || S.seenMatch(x, "wrong", ctx)) && (x.d === 1 || x.d === 3)));
+  // Named in the summary and the empty-pool hint.
+  assert.match(S.summary({ type: "img,case", seen: "new,wrong", d: "1,3", n: 20 }), /image-based or clinical scenario · new or incorrect before · easy or hard/);
+  // A remembered set survives remember/recall.
+  const m = S.remember({}, "module", "m1", { type: "img,line", seen: "new,bm", d: "2,4" });
+  const back = S.recall(m, "module", "m1");
+  assert.equal(back.type, "img,line"); assert.equal(back.seen, "new,bm"); assert.equal(back.d, "2,4");
+});
