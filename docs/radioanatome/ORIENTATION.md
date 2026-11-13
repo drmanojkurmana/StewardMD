@@ -87,6 +87,15 @@ module's own shipped pins, so the doc cannot drift from the data.
    anterior-left with no flip. `living.py --group live-neck --group live-thorax-neck` proves the
    re-indexing voxel for voxel and prints the mask centroids.
 
+6. **Whole body `ct-live-body-*` (s1045, 2026-11-12)** is re-indexed by `tsd_living.py` exactly like
+   the neck groups, axes MEASURED from its own masks: C2 vs T4 on source axis 2 (+index superior),
+   trachea vs spinal cord on axis 1 (+index anterior), and four left/right landmarks that all agree
+   on axis 0 (+index = patient RIGHT): descending aorta 146.8 vs cord 159.0 over 165 shared levels,
+   SVC 182.8 vs 162.2, brachiocephalic trunk 168.7 to 177.1, heart 148.6 vs 159.4. The liver and
+   spleen masks agree independently (x 0.72 vs 0.28 of the stored axial). Stored in the torso
+   convention, so axial and coronal get `flipX` and R/L, the sagittal is anterior-left with no flip.
+   `living.py --group live-body` proves the re-indexing voxel for voxel.
+
 ## Per-module table
 
 | module | flipX | flipY | left | right | top | bottom | pin check | evidence |
@@ -100,6 +109,9 @@ module's own shipped pins, so the doc cannot drift from the data.
 | `ct-live-thorax-neck-axial` | yes | no | R | L | A | P | liver.x > spleen.x; superior-vena-cava.x > aorta.x; trachea.y < spinal-cord.y | Finding 5. Masks: liver x 0.63 vs spleen 0.19; SVC 0.56 vs aorta 0.48; trachea y 0.49 vs spinal cord 0.60 |
 | `ct-live-thorax-neck-coronal` | yes | no | R | L | S | I | liver.x > spleen.x; thyroid-gland.y < heart.y | Finding 5. Masks: liver x 0.63 vs spleen 0.19; thyroid y 0.26 vs heart 0.67 |
 | `ct-live-thorax-neck-sagittal` | no | no | A | P | S | I | trachea.x < spinal-cord.x; thyroid-gland.y < heart.y | Finding 5. Masks: trachea x 0.49 vs spinal cord 0.61, heart 0.34; thyroid y 0.26 vs heart 0.67 |
+| `ct-live-body-axial` | yes | no | R | L | A | P | liver.x > spleen.x; superior-vena-cava.x > aorta.x; trachea.y < spinal-cord.y | Finding 6. Masks: liver x 0.72 vs spleen 0.28; SVC 0.61 vs aorta 0.52; trachea y 0.55 vs spinal cord 0.76 |
+| `ct-live-body-coronal` | yes | no | R | L | S | I | liver.x > spleen.x; brain.y < urinary-bladder.y | Finding 6. Masks: liver x 0.71 vs spleen 0.28; brain y 0.10 vs bladder 0.88 |
+| `ct-live-body-sagittal` | no | no | A | P | S | I | trachea.x < spinal-cord.x; brain.y < urinary-bladder.y | Finding 6. Masks: trachea x 0.57 vs spinal cord 0.73; brain y 0.10 vs bladder 0.88 |
 | `mri-brain-axial` | yes | no | R | L | A | P | caudate-nucleus.y < cerebellar-cortex.y | Masks: caudate y 0.40 vs cerebellar cortex 0.70; orbits at the top edge. R/L: header, consistent with anatomy on A/P and S/I (finding 3) |
 | `mri-brain-coronal` | yes | no | R | L | S | I | cerebral-white-matter.y < brainstem.y | Masks: cerebral cortex y 0.42 vs brainstem 0.69, cerebellar cortex 0.72. R/L: header, consistent with anatomy on A/P and S/I (finding 3) |
 | `mri-brain-sagittal` | no | no | A | P | S | I | caudate-nucleus.x < cerebellar-cortex.x; cerebral-white-matter.y < brainstem.y | Masks: caudate x 0.40 vs cerebellar cortex 0.70; face on the left |

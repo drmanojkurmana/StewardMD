@@ -11,6 +11,7 @@
  *          (<system>-N.lo.bin.gz, ~40% of the triangles, 0.4% error bound) + lod.json.
  *
  * Usage:  node pack3d.mjs live --in work/live3d --out atlas/3d --base 2227
+ *         node pack3d.mjs live --in work/body3d --out atlas/3d --base 2293 --prefix body- --json body.json
  *         node pack3d.mjs lod  --out atlas/3d
  * meshoptimizer is resolved from MESHOPT_DIR (a directory with node_modules/meshoptimizer).
  */
@@ -96,7 +97,7 @@ if (mode === "live") {
   const base = +opt("base", 0);
   const meta = JSON.parse(fs.readFileSync(path.join(IN, "live3d.json"), "utf8"));
   const bin = fs.readFileSync(path.join(IN, "parts.bin"));
-  const packer = new Packer("live-");
+  const packer = new Packer(opt("prefix", "live-"));      // body3d.py's whole body packs as body-
   const parts = [];
   let srcTris = 0, tris = 0, maxErr = 0;
   // group by system so a chunk never mixes systems (the viewer colours per chunk)
@@ -114,7 +115,7 @@ if (mode === "live") {
     parts.push({ id: p.id, name: p.name, stem: p.stem, sid: p.sid, canon: p.canon, side: p.side, system: p.system, region: p.region, bounds: p.bounds.map((v) => +v.toFixed(5)), ...loc, tris: s.idx.length / 3 });
   }
   packer.flush(); packer.write();
-  fs.writeFileSync(path.join(OUT, "live.json"), JSON.stringify({ frame: meta.frame, source: meta.source, planes: meta.planes, parts, chunks: packer.chunks, stats: { parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: maxErr, gz: packer.chunks.reduce((s, c) => s + c.gz, 0) } }));
+  fs.writeFileSync(path.join(OUT, opt("json", "live.json")), JSON.stringify({ frame: meta.frame, source: meta.source, planes: meta.planes, parts, chunks: packer.chunks, stats: { parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: maxErr, gz: packer.chunks.reduce((s, c) => s + c.gz, 0) } }));
   console.log(JSON.stringify({ parts: parts.length, sourceTriangles: srcTris, triangles: tris, maxError: +maxErr.toFixed(4), chunks: packer.chunks.length, gzMB: +(packer.chunks.reduce((s, c) => s + c.gz, 0) / 1e6).toFixed(1) }));
 } else if (mode === "lod") {
   const manifest = JSON.parse(fs.readFileSync(path.join(OUT, "manifest.json"), "utf8"));

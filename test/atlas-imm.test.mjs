@@ -14,7 +14,19 @@ const json = (p) => JSON.parse(readFileSync(join(ROOT, p), "utf8"));
 let pass = 0, fail = 0;
 const ok = (n, c) => { if (c) pass++; else { fail++; console.log("x FAIL:", n); } };
 
-ok("immersive helpers exported", ["immShownX", "immNearestPin", "immNearestSlice", "immPlaceLabels", "immWindowUrl"].every((k) => typeof P[k] === "function"));
+ok("immersive helpers exported", ["immShownX", "immNearestPin", "immNearestSlice", "immPlaceLabels", "immWindowUrl", "immRegionSlices"].every((k) => typeof P[k] === "function"));
+
+// --- whole-body region chips jump to the middle of their anchor's run of slices ---
+const RS = [{ i: 1, pins: [{ s: "brain" }] }, { i: 2, pins: [{ s: "brain" }] }, { i: 3, pins: [{ s: "brain" }, { s: "heart" }] }, { i: 4, pins: [{ s: "heart" }] }, { i: 5, pins: [] }];
+const regs = P.immRegionSlices(RS, [["head", "Head", "brain"], ["chest", "Chest", "heart"], ["pelvis", "Pelvis", "urinary-bladder"]]);
+ok("immRegionSlices: middle of each run, absent anchors dropped", JSON.stringify(regs) === JSON.stringify([{ id: "head", label: "Head", i: 2 }, { id: "chest", label: "Chest", i: 3 }]));
+
+// --- native geometry fallback: R2 first, then the committed copy on the API host ---
+const modN = { exports: {} };
+new Function("window", "document", "module", SRC)({ addEventListener() {}, SMD_IS_NATIVE: true, localStorage: { getItem() { return null; } } }, undefined, modN);
+const nb = modN.exports.dataBases();
+ok("native: R2 first, the API host's committed copy last (new bodies load before an R2 upload)", nb.join() === "https://models.stewardmd.in/atlas3d,https://stewardmd.in/atlas/3d");
+ok("native fallback maps chunk paths onto the API host", modN.exports.dataUrl("/atlas/3d/body-skeletal-10.01c457d3.bin.gz", nb[1]) === "https://stewardmd.in/atlas/3d/body-skeletal-10.01c457d3.bin.gz");
 
 // --- display flip is its own inverse (a tap on the mirrored image maps back to the stored pin) ---
 ok("immShownX mirrors only when flipped", P.immShownX(30, true) === 70 && P.immShownX(30, false) === 30);
@@ -61,10 +73,20 @@ const noLive = [...pinned].filter((s) => { const e = man.canon[P.canonicalOf(s)]
 ok("every pinned CT structure has a living-CT surface to highlight (missing: " + noLive.join(", ") + ")", noLive.length === 0);
 const noDef = [...pinned].filter((s) => !(atlas.structures[s] && atlas.structures[s].name && atlas.structures[s].category && atlas.categories[atlas.structures[s].category]));
 ok("every pinned structure has a name and a category colour (missing: " + noDef.join(", ") + ")", noDef.length === 0);
+// --- the whole body (default Immersive module) pairs with the "body" 3D source the same way ---
+const BMOD = "ct-live-body-axial", batlas = json(`atlas/${BMOD}/atlas.json`), bmeta = (mods.modules || mods).find((m) => m.id === BMOD);
+ok("whole body: 96 axial slices, one registered plane each, textured with its own image", batlas.slices.length === 96 && batlas.slices.every((s, k) => s.i === k + 1 && man.planes[BMOD][String(s.i)] && man.planes[BMOD][String(s.i)].img === s.img && man.planes[BMOD][String(s.i)].axis === "y"));
+ok("whole body: planes descend from the vertex (slice 1 most superior)", batlas.slices.every((s, k) => k === 0 || man.planes[BMOD][String(s.i)].pos < man.planes[BMOD][String(s.i - 1)].pos));
+ok("whole body: radiological display like the torso (flipX, R/L, A/P)", bmeta.flipX === true && bmeta.orient.left === "R" && bmeta.orient.top === "A" && bmeta.windows.length === 3);
+const bpinned = new Set(); batlas.slices.forEach((s) => s.pins.forEach((p) => bpinned.add(p.s)));
+const bNoBody = [...bpinned].filter((s) => { const e = man.canon[P.canonicalOf(s)]; return !e || !(e.body && e.body.length); });
+ok("every pinned whole-body structure has a whole-body surface to highlight (missing: " + bNoBody.join(", ") + ")", bNoBody.length === 0);
+const bRegions = P.immRegionSlices(batlas.slices, [["head", "Head", "brain"], ["neck", "Neck", "thyroid-gland"], ["chest", "Chest", "heart"], ["abdomen", "Abdomen", "kidney"], ["pelvis", "Pelvis", "urinary-bladder"]]);
+ok("whole body: all five regions found, head to pelvis in slice order", bRegions.map((r) => r.id).join() === "head,neck,chest,abdomen,pelvis" && bRegions.every((r, k) => !k || r.i > bRegions[k - 1].i));
 // the windowed images the view switches to must exist for every slice
 import("node:fs").then(({ existsSync }) => {
   const missing = [];
-  meta.windows.slice(1).forEach((w) => atlas.slices.forEach((s) => { const f = join(ROOT, P.immWindowUrl(s.img, w.id)); if (!existsSync(f)) missing.push(f); }));
+  [[meta, atlas], [bmeta, batlas]].forEach(([mt, at]) => mt.windows.slice(1).forEach((w) => at.slices.forEach((s) => { const f = join(ROOT, P.immWindowUrl(s.img, w.id)); if (!existsSync(f)) missing.push(f); })));
   ok("every slice has every windowed image (" + missing.length + " missing)", missing.length === 0);
 
   // --- the entry points exist and the www bundle carries what the view reads ---

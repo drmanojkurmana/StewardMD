@@ -36,6 +36,7 @@
   var MANIFEST_URL = "/atlas/3d/manifest.json", INDEX_URL = "/atlas/3d/index.json";
   var STATE_W = 64;                       // 64x64 state texture = 4096 part slots
   var R2_BASE = "https://models.stewardmd.in/atlas3d";
+  var PAGES_BASE = "https://stewardmd.in/atlas/3d";
   var CACHE_NAME = "atlas3d-v1";
   var VIEWS = [{ id: "3q", yaw: 0.45, pitch: 0.12 }, { id: "front", yaw: 0, pitch: 0.02 }, { id: "side", yaw: Math.PI / 2, pitch: 0.02 }, { id: "back", yaw: Math.PI, pitch: 0.02 }, { id: "top", yaw: 0, pitch: 1.35 }];
   var DEFAULT_OFF = { muscular: 1, integumentary: 1 };   // heavy / occluding: opt-in layers
@@ -61,7 +62,11 @@
   // names the structure on both). Flag smd_atlas_imm, default ON like the 3D layer it lives in;
   // ?immersive=0 or localStorage smd_atlas_imm=0 hides its entry points on one device.
   var IMM_KEY = "smd_atlas_imm", IMM_QUERY = "immersive", IMM_DEFAULT_ON = true;
-  var IMM_MODULE = "ct-live-torso-axial";      // the slice stack the living body was meshed from
+  // the axial stack each living body was meshed from; the whole body is the default view
+  var IMM_MODULES = { body: "ct-live-body-axial", live: "ct-live-torso-axial" };
+  // whole-body levels: each region jumps to the middle of the slices that pin its anchor
+  var IMM_REGIONS = [["head", "Head", "brain"], ["neck", "Neck", "thyroid-gland"], ["chest", "Chest", "heart"],
+    ["abdomen", "Abdomen", "kidney"], ["pelvis", "Pelvis", "urinary-bladder"]];
   function immEnabled() { return enabled() && flagOn(IMM_KEY, IMM_QUERY, IMM_DEFAULT_ON); }
 
   /* ---------- pure helpers (exported for tests) ---------- */
@@ -103,6 +108,16 @@
     });
     return kept;
   }
+  // The slice each region chip jumps to: the middle of the run of slices that pin its anchor
+  // structure (in slice order). Regions whose anchor is not pinned anywhere are left out.
+  function immRegionSlices(slices, regions) {
+    var out = [];
+    (regions || []).forEach(function (r) {
+      var hits = (slices || []).filter(function (s) { return (s.pins || []).some(function (p) { return p.s === r[2]; }); }).map(function (s) { return s.i; });
+      if (hits.length) out.push({ id: r[0], label: r[1], i: hits[Math.floor((hits.length - 1) / 2)] });
+    });
+    return out;
+  }
   // Windowed variants live beside the slice (same rule as atlas.js windowUrl).
   function immWindowUrl(img, win) { return win ? String(img == null ? "" : img).replace(/\/([^/]+)$/, "/w/" + win + "/$1") : img; }
 
@@ -131,7 +146,7 @@
       systems: m.systems || [], regions: m.regions || [], canon: canon, fmaToCanon: fmaToCanon,
       links: m.links || {}, explain: m.explain || {}, chunks: m.chunks || [], byId: byId,
       source: m.source || {}, sources: m.sources || [{ id: "bp3d", name: "Reference body", short: "Reference" }],
-      planes: m.planes || {}, lod: m.lod || null, live: m.live || null
+      planes: m.planes || {}, lod: m.lod || null, live: m.live || null, body: m.body || null
     };
   }
 
@@ -283,15 +298,15 @@
       return idxs.length > 0 && idxs.every(isVis);
     }).sort();
   }
-  function quizParts(e, want) { return want === 1 ? (e.live || []) : (e.coverage === "full" ? (e.parts || []) : []); }
+  function quizParts(e, want) { return want === 1 ? (e.live || []) : want === 2 ? (e.body || []) : (e.coverage === "full" ? (e.parts || []) : []); }
   function fileSlug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 48) || "view"; }
   // CC BY 4.0 credit burned into an exported image (a redistribution), per body. Reference: the
   // licence-mandated string, verbatim. Living CT: built from the source fields the pipeline wrote
   // into live.json (dataset, licence, doi), never a hand-written paraphrase.
   var BP3D_ATTRIBUTION = "BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International";
   function creditLine(d, src) {
-    if (src === "live") {
-      var s = (d && d.live && d.live.source) || {};
+    if (src === "live" || src === "body") {
+      var s = (d && d[src] && d[src].source) || {};
       return [s.dataset, s.licence, s.doi ? "doi:" + s.doi : ""].filter(Boolean).join(", ");
     }
     return (d && d.source && d.source.attribution) || BP3D_ATTRIBUTION;
@@ -368,6 +383,10 @@
     var native = false; try { native = !!G.SMD_IS_NATIVE; } catch (e2) {}
     if (!native) out.push("");          // a dev checkout that ran the pipeline serves its own chunks
     out.push(R2_BASE);
+    // Last resort, natively: the chunks are also committed and Pages serves them from the API
+    // host, so geometry that has not been uploaded to R2 yet (a new body) still loads. A host
+    // that answers with its index.html instead is rejected by loadChunk's looksLikeChunk().
+    if (native) out.push(PAGES_BASE);
     return out;
   }
   // Chunk URLs are "/atlas/3d/<file>"; R2 keys are "atlas3d/<file>", so a non-empty base
@@ -440,9 +459,9 @@
   // living-CT chunks (src 1) have one level only. Chunks are keyed by id so sets can coexist.
   function chunkSet() {
     var d = st.data;
-    var full = d.chunks.filter(function (c) { return !c.src; }), live = d.chunks.filter(function (c) { return c.src === 1; });
+    var full = d.chunks.filter(function (c) { return !c.src; }), living_ = d.chunks.filter(function (c) { return c.src >= 1; });
     var ref = (st.lod && d.lod && d.lod.chunks && d.lod.chunks.length) ? d.lod.chunks.map(function (c) { return Object.assign({}, c, { lod: true }); }) : full;
-    return ref.concat(live.map(function (c) { return Object.assign({}, c, { src: 1 }); }));
+    return ref.concat(living_);
   }
   // Fetch through the shared on-device model cache when it is present (Cache API, else
   // IndexedDB): the second open of the 3D layer costs no network and works offline. Bytes are
@@ -513,14 +532,24 @@
     });
     return st.loading[key];
   }
-  function srcIndex() { return st.src === "live" ? 1 : 0; }
+  // Three bodies share the ontology: the reference body (part flag 0), the living torso CT
+  // (flag 1, canon[cid].live) and the living whole-body CT (flag 2, canon[cid].body).
+  var SRC_IX = { bp3d: 0, live: 1, body: 2 }, SRC_KEY = { 1: "live", 2: "body" };
+  function srcIndex() { return SRC_IX[st.src] || 0; }
+  function living() { return srcIndex() > 0; }
+  function canonKey(src) { return SRC_KEY[typeof src === "number" ? src : SRC_IX[src]] || null; }
+  // the source whose registered planes include CT module m (the whole-body modules belong to "body")
+  function planeSrc(m) {
+    var hit = ((st.data && st.data.sources) || []).filter(function (x) { return (x.modules || []).indexOf(m) >= 0; })[0];
+    return hit ? hit.id : "live";
+  }
   function neededChunks() {
     var d = st.data, need = [];
     var sysNeeded = {};
     d.systems.forEach(function (s) { if (st.visible[s.id]) sysNeeded[s.id] = 1; });
     st.sel.forEach(function (i) { sysNeeded[d.systems[d.parts[i].sys].id] = 1; });
     var want = srcIndex();
-    if (want === 1 && st.shell) sysNeeded.integumentary = 1;
+    if (want >= 1 && st.shell) sysNeeded.integumentary = 1;
     // failed chunks wait for the Retry button instead of being re-fetched on every tap
     chunkSet().forEach(function (c) { if ((c.src || 0) === want && sysNeeded[c.system] && !st.chunks[c.id] && !st.failed[c.id]) need.push(c); });
     return need;
@@ -558,7 +587,7 @@
     "precision mediump float;",
     "varying vec3 vN; varying vec3 vP; varying vec3 vState; varying float vFade;",
     "uniform vec3 uColor; uniform vec3 uEye; uniform vec3 uBg; uniform vec3 uSel; uniform float uPass; uniform float uGhost; uniform vec4 uClip; uniform float uClipOn;",
-    "uniform float uClipSel; uniform float uOthers;",
+    "uniform float uClipSel; uniform float uOthers; uniform vec4 uShellY;",
     "void main(){",
     " if (vState.r < 0.5) discard;",
     " bool sel = vState.g > 0.5; bool fade = vFade > 0.5 && !sel;",
@@ -592,7 +621,7 @@
     "   a = uGhost * (0.42 + 1.7 * fres);",
     // the outline fades out over the last ~4 cm at the scan's cut top/bottom (y 0.62 .. 1.058 m
     // in live.json's frame), so the shell reads as a body and not a sawn-off tube.
-    "   a *= smoothstep(0.62, 0.665, vP.y) * (1.0 - smoothstep(1.01, 1.058, vP.y));",
+    "   a *= mix(1.0, smoothstep(uShellY.x, uShellY.x + 0.045, vP.y), uShellY.z) * (1.0 - uShellY.w * smoothstep(uShellY.y - 0.048, uShellY.y, vP.y));",
     " }",
     " gl_FragColor = vec4(c, a);",
     "}"].join("\n");
@@ -617,7 +646,7 @@
     gl.linkProgram(p);
     if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error("link: " + gl.getProgramInfoLog(p));
     var u = {};
-    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uClipSel", "uOthers", "uTex", "uAlpha"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
+    ["uVP", "uOffset", "uState", "uColor", "uEye", "uBg", "uSel", "uPass", "uGhost", "uClip", "uClipOn", "uClipSel", "uOthers", "uTex", "uAlpha", "uShellY"].forEach(function (n) { u[n] = gl.getUniformLocation(p, n); });
     return { p: p, u: u };
   }
 
@@ -726,7 +755,7 @@
     var ri = st.region ? d.regions.indexOf(st.region) : -1, want = srcIndex();
     for (var i = 0; i < d.parts.length; i++) {
       var p = d.parts[i], o = i * 4;
-      var sysId = d.systems[p.sys].id, shell = p.src === 1 && sysId === "integumentary";
+      var sysId = d.systems[p.sys].id, shell = p.src >= 1 && sysId === "integumentary";
       var vis = st.visible[sysId] && !st.hidden[i] && p.src === want;
       if (ri >= 0 && p.reg !== ri) vis = false;
       if (selSet[i] && p.src === want) vis = true;
@@ -734,7 +763,7 @@
       // The living body's skin is a faint outline drawn in its own pass, never a solid layer:
       // it is what makes the organs read as a patient. Shown whenever the source is live
       // and the outline switch is on, regardless of region or isolate.
-      if (shell) vis = want === 1 && st.shell && !st.hidden[i];
+      if (shell) vis = p.src === want && st.shell && !st.hidden[i];
       buf[o] = vis ? 255 : 0;
       buf[o + 1] = selSet[i] && !shell ? 255 : 0;
       buf[o + 2] = shell ? 128 : (hasSel && !selSet[i] && !st.isolate ? 255 : 0);
@@ -772,6 +801,7 @@
       // kidney standing above the cut instead of a label over an empty slice.
       gl.uniform1f(prog.u.uClipSel, planeInfo() ? 1 : 0);
       gl.uniform1f(prog.u.uOthers, st._othersOpaque ? 1 : 0);
+      gl.uniform4fv(prog.u.uShellY, new Float32Array(shellFade()));
       gl.uniform3fv(prog.u.uEye, new Float32Array(eye));
       gl.uniform3f(prog.u.uBg, 0.07, 0.08, 0.09);
       gl.uniform3fv(prog.u.uSel, new Float32Array(SEL_TINT));
@@ -792,6 +822,12 @@
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, c.ib);
       gl.drawElements(gl.TRIANGLES, c.n, gl.UNSIGNED_INT, 0);
     });
+  }
+  // Where the body outline fades out: the scan's cut ends (y lo/hi, and whether each end is cut).
+  // The torso (s0108) is cut at both ends at 0.62 / 1.058 m; the whole body only at the thighs.
+  function shellFade() {
+    if (st.src === "body") { var yr = (st.data && st.data.body && st.data.body.frame && st.data.body.frame.y_range) || [0, 1]; return [yr[0], yr[1], 1, 0]; }
+    return [0.62, 1.058, 1, 1];
   }
   function render() {
     var R = st.gl; if (!R || !st.canvas) return;
@@ -825,7 +861,7 @@
       drawScene(R.main, false, 3);
       gl.enable(gl.DEPTH_TEST); gl.depthMask(true); gl.disable(gl.BLEND);
     }
-    if (st.src === "live" && st.shell) {
+    if (living() && st.shell) {
       // pass 4: the body outline, translucent, depth-tested (the far skin stays behind organs)
       gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
       drawScene(R.main, false, 4);
@@ -972,7 +1008,7 @@
     var d = st.data;
     if (!m || !d.planes[m] || !d.planes[m][String(i)]) { st.plane = null; paintBar(); invalidate(); return false; }
     st.plane = { m: m, i: +i, n: Object.keys(d.planes[m]).length, ready: false };
-    if (st.src !== "live") setSource("live", { keepSel: true });
+    if (st.src !== planeSrc(m)) setSource(planeSrc(m), { keepSel: true });
     loadSliceTexture();
     paintBar();
     if (st.imm) { paintImm(); invalidate(); return true; }
@@ -1000,7 +1036,7 @@
     if (st.src === id) return;
     st.src = id;
     if (!(opts && opts.keepSel)) { st.sel = []; st.subject = null; closeSheet(); }
-    if (id !== "live") st.plane = null;
+    if (st.plane && planeSrc(st.plane.m) !== id) st.plane = null;
     st.region = "";
     liveDefaults();
     applyState(); paintChips(); paintBar(); ensureChunks();
@@ -1010,7 +1046,7 @@
   // On the living body the small bowel and colon wrap every other organ from any anterior
   // angle (they are real, and huge); hide them until asked, the way the reference body hides
   // muscles and skin. Selecting COLON or SMALL_BOWEL still shows them (selection wins).
-  var LIVE_BOWEL = ["LIVE_small_bowel", "LIVE_colon", "LIVE_duodenum"];
+  var LIVE_BOWEL = ["LIVE_small_bowel", "LIVE_colon", "LIVE_duodenum", "BODY_small_bowel", "BODY_colon", "BODY_duodenum"];
   function liveDefaults() {
     var d = st.data; if (!d) return;
     LIVE_BOWEL.forEach(function (id) {
@@ -1174,7 +1210,8 @@
       // Immersive CT names STRUCTURES, the unit the CT pins use: a tap on one kidney selects both,
       // so the 3D highlight and the pins on the slice always agree.
       var cid = canonOfPart(st.data, i), ce = cid && st.data.canon[cid];
-      if (ce && ce.live && ce.live.length) { select(ce.live, { kind: "canon", cid: cid }, { noFocus: true }); return; }
+      var own = ce && ce[canonKey(st.src)];
+      if (own && own.length) { select(own, { kind: "canon", cid: cid }, { noFocus: true }); return; }
       select([i], { kind: "part", i: i }, { noFocus: true });
       return;
     }
@@ -1195,17 +1232,24 @@
     invalidate();
   }
   function partsForCanon(e, prefer) {
-    // "live" wins when it exists and the caller (a living-torso module) asked for it, or when
-    // the viewer is already on the living body; otherwise the reference meshes.
-    var live = e.live || [], ref = e.parts || e.related || [];
-    if (prefer === "live" && live.length) return { src: "live", idxs: live };
+    // A living source wins when the caller (a living CT module) asked for it, or when the viewer
+    // is already on that body; otherwise the reference meshes. Structures with no reference row
+    // yet (kind "live": thyroid, carotids, humerus...) exist only on the living bodies.
+    var live = e.live || [], body = e.body || [], ref = e.parts || e.related || [];
+    function own(src) { return src === "live" ? live : src === "body" ? body : ref; }
+    if ((prefer === "live" || prefer === "body") && own(prefer).length) return { src: prefer, idxs: own(prefer) };
     // A structure the reference body only has "related" pieces for (liver, lungs, lobes) IS
-    // a real surface on the living body: that is the whole reason the second source exists.
-    if (e.kind === "related" && live.length && prefer !== "bp3d") return { src: "live", idxs: live };
+    // a real surface on the living bodies: that is the whole reason they exist.
+    if (e.kind === "related" && prefer !== "bp3d") {
+      if (living() && own(st.src).length) return { src: st.src, idxs: own(st.src) };
+      if (live.length) return { src: "live", idxs: live };
+      if (body.length) return { src: "body", idxs: body };
+    }
     if (prefer === "bp3d" && ref.length) return { src: "bp3d", idxs: ref };
-    if (st.src === "live" && live.length) return { src: "live", idxs: live };
+    if (living() && own(st.src).length) return { src: st.src, idxs: own(st.src) };
     if (ref.length) return { src: "bp3d", idxs: ref };
     if (live.length) return { src: "live", idxs: live };
+    if (body.length) return { src: "body", idxs: body };
     return { src: st.src, idxs: [] };
   }
   function selectCanon(cid, opts) {
@@ -1296,11 +1340,11 @@
     var rs = [""].concat(st.data.regions.filter(function (r) { return r !== "BODY" && present[r]; }));
     el.innerHTML = rs.map(function (r) {
       // the living body is one patient's scan (lower chest to hips), never a whole body
-      return '<button class="atlas-chip' + (st.region === r ? " on" : "") + '" data-a3d-act="region" data-r="' + esc(r) + '">' + esc(r ? regionLabel(r) : (st.src === "live" ? "Whole scan" : "Whole body")) + "</button>";
+      return '<button class="atlas-chip' + (st.region === r ? " on" : "") + '" data-a3d-act="region" data-r="' + esc(r) + '">' + esc(r ? regionLabel(r) : (living() ? "Whole scan" : "Whole body")) + "</button>";
     }).join("");
     var sub = G.document.getElementById("a3dSub");
     var srcName = (st.data.sources.filter(function (s) { return s.id === st.src; })[0] || {}).name || "";
-    if (sub) sub.textContent = (st.region ? regionLabel(st.region) + " · " : "") + (st.src === "live" ? "Living-patient CT" : "BodyParts3D reference body");
+    if (sub) sub.textContent = (st.region ? regionLabel(st.region) + " · " : "") + (st.src === "body" ? "Whole-body living CT" : st.src === "live" ? "Living-patient CT" : "BodyParts3D reference body");
   }
   function paintBar() {
     var el = G.document.getElementById("a3dBar"); if (!el || !st.data) return;
@@ -1312,8 +1356,8 @@
     var xr = Math.round((1 - ghostAlpha(st.sel.length > 0 && !st.isolate, st.xray)) * 100);
     el.innerHTML = sliceRow + clipRowHtml() +
       '<div class="a3d-tools">' +
-        (st.src === "live" && defaultPlaneModule() ? '<button class="a3d-btn' + on(pl) + '" data-a3d-act="ctslice"' + pr(!!pl) + ' aria-label="Show a CT slice through the body">CT slice</button>' : "") +
-        (st.src === "live" && immEnabled() && st.data.planes[IMM_MODULE] ? '<button class="a3d-btn" data-a3d-act="immopen" aria-label="Immersive CT: the body and its CT on one screen">Immersive</button>' : "") +
+        (living() && defaultPlaneModule() ? '<button class="a3d-btn' + on(pl) + '" data-a3d-act="ctslice"' + pr(!!pl) + ' aria-label="Show a CT slice through the body">CT slice</button>' : "") +
+        (living() && immEnabled() && st.data.planes[IMM_MODULES[st.src]] ? '<button class="a3d-btn" data-a3d-act="immopen" data-m="' + IMM_MODULES[st.src] + '" aria-label="Immersive CT: the body and its CT on one screen">Immersive</button>' : "") +
         (st.hist.length ? '<button class="a3d-btn accent" data-a3d-act="undo" aria-label="Undo the last hide, fade or isolate">Undo</button>' : "") +
         (hidden || faded ? '<button class="a3d-btn" data-a3d-act="unhide" aria-label="Show all hidden and faded structures">Show all ' + (hidden + faded) + "</button>" : "") +
         '<button class="a3d-btn" data-a3d-act="systems" aria-label="Layers and saved views">' + (ico("layers") || "") + "Layers</button>" +
@@ -1340,7 +1384,7 @@
     }).join("") + "</div>";
   }
   function defaultPlaneModule() {
-    var ks = Object.keys(st.data.planes);
+    var ks = Object.keys(st.data.planes).filter(function (m) { return planeSrc(m) === st.src; });
     return ks.filter(function (m) { return (st.data.planes[m]["1"] || {}).axis === "y"; })[0] || ks[0];
   }
   function midSlice(m) { return Math.ceil(Object.keys(st.data.planes[m]).length / 2); }
@@ -1482,7 +1526,7 @@
       ctx.fillStyle = "#fff"; ctx.textBaseline = "middle"; ctx.fillText(name, pad * 2, f.h - pad * 1.5 - fs * 0.8);
     }
     var d = new Date(), stamp = d.getFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + ("0" + d.getDate()).slice(-2) + "-" + ("0" + d.getHours()).slice(-2) + ("0" + d.getMinutes()).slice(-2);
-    var fname = "radioanatome-3d-" + fileSlug(name || (st.src === "live" ? "living-ct" : "reference-body")) + "-" + stamp + ".png";
+    var fname = "radioanatome-3d-" + fileSlug(name || (st.src === "body" ? "whole-body-ct" : st.src === "live" ? "living-ct" : "reference-body")) + "-" + stamp + ".png";
     return new Promise(function (res, rej) {
       cv.toBlob(function (b) { if (b) res({ blob: b, name: fname, title: name || "3D Anatomy", credit: credit, lines: lines.length, bandH: bandH }); else rej(new Error("The image could not be encoded.")); }, "image/png");
     });
@@ -1666,12 +1710,12 @@
       if (ce && ce.kind === "related") note = '<p class="atlas-prose atlas-notice">' + esc(ce.note || "") + "</p>";
       else if (ce && ce.coverage === "partial" && ce.note) note = '<p class="atlas-prose atlas-notice">' + esc(ce.note) + "</p>";
       var srcNote = "";
-      if (ce && ce.live && ce.live.length)
-        srcNote = '<p class="atlas-prose a3d-srcnote">' + (st.src === "live"
-          ? "Living-patient surface: meshed from the same CT the torso slices are cut from."
-          : "Also available as a living-patient surface: switch to Living CT or tap Show in 3D on a torso row.") + "</p>";
+      if (ce && ((ce.live && ce.live.length) || (ce.body && ce.body.length)))
+        srcNote = '<p class="atlas-prose a3d-srcnote">' + (living() && ce[canonKey(st.src)] && ce[canonKey(st.src)].length
+          ? (st.src === "body" ? "Living-patient surface: meshed from the same CT the whole-body slices are cut from." : "Living-patient surface: meshed from the same CT the torso slices are cut from.")
+          : "Also available as a living-patient surface: switch to Living CT or Whole body, or tap Show in 3D on a living CT row.") + "</p>";
       var rel = "";
-      if (ce && ce.related && ce.related.length && !(s.kind === "part") && st.src !== "live")
+      if (ce && ce.related && ce.related.length && !(s.kind === "part") && !living())
         rel = '<button class="a3d-link" data-a3d-act="related" data-c="' + esc(cid) + '"><b>3D</b><span>Show related structures</span><small>' + ce.related.length + " meshes</small></button>";
       var lat = "";
       if (ce && (ce.left || ce.right))
@@ -1680,7 +1724,7 @@
           '<button class="atlas-pill" data-a3d-act="side" data-c="' + esc(cid) + '" data-side="both">Both</button></div>';
       body = (cid ? '<div class="a3d-canon">RadioAnatome structure: <b>' + esc((ce && ce.name) || cid) + "</b></div>" : "") +
         (rows ? '<div class="a3d-links">' + rows + "</div>" : '<div class="atlas-empty">' + (cid ? "Not labelled in any CT or MRI module yet." : "No matching RadioAnatome structure. Search the CT and MRI modules by name instead.") + "</div>") +
-        srcNote + (st.src === "live" && ce && ce.kind === "related" ? "" : note) + rel + lat;
+        srcNote + (living() && ce && (ce.kind === "related" || ce.kind === "live") ? "" : note) + rel + lat;
     } else if (tab === "hierarchy") {
       var cs = s.kind === "part" ? (d.conceptsOfPart[s.i] || []) : s.kind === "concept" ? [d.conceptById[s.id]] : [];
       cs = cs.slice().sort(function (a, b) { return a.parts.length - b.parts.length; });
@@ -1697,7 +1741,7 @@
       '<h2 class="atlas-sheet-ttl">' + esc(title) + "</h2>" +
       '<div class="atlas-pills">' +
         (sysId ? '<span class="atlas-pill cat"><i style="background:' + esc(sysId.color) + '"></i>' + esc(sysId.name) + "</span>" : "") +
-        (st.src === "live" ? '<span class="atlas-pill live">Living CT</span>' : "") +
+        (living() ? '<span class="atlas-pill live">' + (st.src === "body" ? "Whole body CT" : "Living CT") + "</span>" : "") +
         (region ? '<span class="atlas-pill">' + esc(regionLabel(region)) + "</span>" : "") +
         (fma ? '<span class="atlas-pill mono">' + esc(fma) + "</span>" : "") +
         '<button class="atlas-pill' + (st.isolate ? " on" : "") + '" data-a3d-act="isolate" aria-pressed="' + (st.isolate ? "true" : "false") + '">Isolate</button>' +
@@ -1744,7 +1788,8 @@
     if (!t || t.tagName === "INPUT") return;
     var act = t.getAttribute("data-a3d-act"), d = st.data;
     if (act === "close") { close(); return; }
-    if (act === "immopen") { close(); open({ immersive: true }); return; }
+    if (act === "immopen") { var im = t.getAttribute("data-m"); close(); open({ immersive: true, module: im }); return; }
+    if (act === "immregion") { immRegion(t.getAttribute("data-r")); return; }
     if (act === "immplay") { immPlay(!(st.imm && st.imm.play)); return; }
     if (act === "immwin" && st.imm) { st.imm.win = t.getAttribute("data-w") || null; loadSliceTexture(); paintImm(); return; }
     if (act === "immgo") { immPlay(false); immGo(+t.getAttribute("data-i")); return; }
@@ -1762,7 +1807,7 @@
     if (act === "reset") {
       quizEnd();
       st.region = ""; st.isolate = false; st.hidden = {}; st.faded = {}; st.xray = null; st.clip = null; st.hist = []; st.explodeTarget = 0;
-      liveDefaults(); select([], null); applyState(); paintChips(); paintBar(); if (st.src === "live") focusSource(); else resetCamera(); return;
+      liveDefaults(); select([], null); applyState(); paintChips(); paintBar(); if (living()) focusSource(); else resetCamera(); return;
     }
     if (act === "tab") { st._tab = t.getAttribute("data-tab"); openSheet(); return; }
     if (act === "view") { cycleView(); return; }
@@ -1793,8 +1838,8 @@
     if (act === "related") { var ce = d.canon[t.getAttribute("data-c")]; if (ce && ce.related) select(ce.related, { kind: "canon", cid: t.getAttribute("data-c") }); return; }
     if (act === "side") {
       var cid = t.getAttribute("data-c"), side = t.getAttribute("data-side"), en = d.canon[cid]; if (!en) return;
-      var live = st.src === "live";
-      var idxs = side === "both" ? (live ? (en.live || []) : (en.parts || en.related || [])) : ((en[side] && (live ? en[side].live : en[side].parts)) || []);
+      var lk = canonKey(st.src);
+      var idxs = side === "both" ? (lk ? (en[lk] || []) : (en.parts || en.related || [])) : ((en[side] && (lk ? en[side][lk] : en[side].parts)) || []);
       if (idxs.length) select(idxs, { kind: "canon", cid: cid });
       return;
     }
@@ -1838,26 +1883,27 @@
   // The same living patient twice: the meshed body on top, its axial CT underneath. Both are
   // the files RadioAnatome already ships (atlas/ct-live-torso-axial + the live 3D chunks); the
   // 3D cut plane is the registered plane of the slice on show, so the two cannot disagree.
-  var _immP = null;
+  var _immP = {};
   function immFetchJson(u) { return G.fetch(u).then(function (r) { if (!r || !r.ok) throw new Error("http " + u); return r.json(); }); }
-  function loadImmData() {
-    if (_immP) return _immP;
+  function loadImmData(mid) {
+    if (_immP[mid]) return _immP[mid];
     var cat = (G.ATLAS && G.ATLAS._state && G.ATLAS._state.catalog) || null;
     var metaP = cat && cat.modules ? Promise.resolve(cat) : immFetchJson("/atlas/modules.json");
-    _immP = Promise.all([immFetchJson("/atlas/" + IMM_MODULE + "/atlas.json"), metaP]).then(function (r) {
+    var p = _immP[mid] = Promise.all([immFetchJson("/atlas/" + mid + "/atlas.json"), metaP]).then(function (r) {
       var mods = (r[1] && (r[1].modules || r[1])) || [];
-      var meta = (mods.filter ? mods.filter(function (m) { return m.id === IMM_MODULE; })[0] : null) || {};
+      var meta = (mods.filter ? mods.filter(function (m) { return m.id === mid; })[0] : null) || {};
       return { atlas: r[0], meta: meta };
     });
-    _immP.catch(function () { _immP = null; });
-    return _immP;
+    p.catch(function () { if (_immP[mid] === p) delete _immP[mid]; });
+    return p;
   }
   function immAbove() { return st.imm ? st.imm.above : 0; }
   function immShellHtml() {
     return '<div class="atlas-top">' +
         '<button class="atlas-back" data-a3d-act="close" aria-label="Back">‹</button>' +
-        '<span class="atlas-hd"><span class="atlas-ttl">Immersive CT</span><span class="atlas-sub" id="a3dSub">Living-patient CT · lower chest to pelvis</span></span>' +
+        '<span class="atlas-hd"><span class="atlas-ttl">Immersive CT</span><span class="atlas-sub" id="a3dSub"></span></span>' +
         '<button class="atlas-info" data-a3d-act="info" aria-label="About the 3D anatomy">' + (ico("info") || "i") + "</button></div>" +
+      '<div class="a3d-chips a3d-imm-regions" id="a3dImmRegions" role="group" aria-label="Jump to a body region" hidden></div>' +
       '<div class="a3d-imm" id="a3dImm">' +
         '<section class="a3d-imm-3d" aria-label="3D body">' +
           '<div class="a3d-imm-cap"><b>3D body</b><small>Drag to rotate · pinch to zoom · tap to name</small></div>' +
@@ -1891,18 +1937,59 @@
     var a = st.imm.atlas, s = a.structures[sid], c = s && a.categories[s.category];
     return (c && c.color) || "#43d9c6";
   }
-  function immCamera() {
-    var idxs = st.data.parts.filter(function (p) { return p.src === 1; }).map(function (p) { return p.i; });
-    var b = unionBounds(st.data, idxs); if (!b) return;
-    var aspect = st.canvas ? st.canvas.width / Math.max(1, st.canvas.height) : 1;
+  function immBounds() {
+    var want = srcIndex(), idxs = st.data.parts.filter(function (p) { return p.src === want; }).map(function (p) { return p.i; });
+    return unionBounds(st.data, idxs);
+  }
+  // The whole body is ~1 m tall in a ~300 px stage, so it is framed one region at a time and the
+  // camera then FOLLOWS the cut as the slice moves (target height = the plane's level, the user's
+  // own yaw, pitch and zoom kept). "Whole" frames the full body and stops following.
+  function immCamera(whole) {
+    var b = immBounds(); if (!b) return;
+    var aspect = st.canvas ? st.canvas.width / Math.max(1, st.canvas.height) : 1, p = planeInfo();
     // three-quarter view from above the patient's front: the slice face and the body below it
     // both read, and the ghost above sits behind the slice rather than over it
-    st.camTo = { target: center(b), yaw: 0.55, pitch: 0.42, dist: fitDistance(b, 34, aspect) * 0.74 };
+    if (whole || !st.imm.follow || !p) {
+      st.camTo = { target: center(b), yaw: 0.55, pitch: st.imm.follow ? 0.42 : 0.3, dist: fitDistance(b, 34, aspect) * (st.src === "body" ? 0.92 : 0.74) };
+    } else {
+      var half = 0.2, rb = [b[0], p.pos - half, b[2], b[3], p.pos + half, b[5]], c = center(b);
+      st.camTo = { target: [c[0], p.pos, c[2]], yaw: 0.55, pitch: 0.42, dist: fitDistance(rb, 34, aspect) * 0.95 };
+    }
     schedule();
+  }
+  function immFollow() {
+    var p = planeInfo(); if (!st.imm || !st.imm.follow || !p) return;
+    var base = st.camTo || st.cam;
+    st.camTo = { target: [base.target[0], p.pos, base.target[2]], yaw: st.cam.yaw, pitch: st.cam.pitch, dist: st.cam.dist };
+    schedule();
+  }
+  function paintImmRegions() {
+    var el = G.document.getElementById("a3dImmRegions"); if (!el || !st.imm) return;
+    var rs = st.imm.regions || [];
+    if (rs.length < 2) { el.hidden = true; return; }
+    el.hidden = false;
+    var cur = null;
+    if (st.imm.follow && st.plane) rs.forEach(function (r) { if (!cur || Math.abs(r.i - st.plane.i) < Math.abs(cur.i - st.plane.i)) cur = r; });
+    el.innerHTML = '<button class="atlas-chip' + (st.imm.follow ? "" : " on") + '" data-a3d-act="immregion" data-r="" aria-pressed="' + (!st.imm.follow) + '">Whole</button>' +
+      rs.map(function (r) {
+        var on = cur && cur.id === r.id;
+        return '<button class="atlas-chip' + (on ? " on" : "") + '" data-a3d-act="immregion" data-r="' + esc(r.id) + '" aria-pressed="' + !!on + '">' + esc(r.label) + "</button>";
+      }).join("");
   }
   function paintImm() {
     if (!st.imm || !G.document) return;
-    paintImmCt(); paintImmInfo(); paintImmBar();
+    paintImmCt(); paintImmInfo(); paintImmBar(); paintImmRegions();
+  }
+  // A label's pill width: the text measured in the label's own font (11px, weight 600) plus the
+  // 7 px side padding, so a long name ("Upper lobe of right lung") is placed at its real size.
+  var _lblCtx = null;
+  function immLabelW(text, host) {
+    try {
+      if (!_lblCtx) _lblCtx = G.document.createElement("canvas").getContext("2d");
+      var fam = (G.getComputedStyle && host && G.getComputedStyle(host).fontFamily) || "sans-serif";
+      _lblCtx.font = "600 11px " + fam;
+      return Math.ceil(_lblCtx.measureText(text).width) + 16;
+    } catch (e) { return Math.round(text.length * 6.9 + 16); }
   }
   function paintImmCt() {
     var s = immSlice(), meta = st.imm.meta || {}, flip = !!meta.flipX;
@@ -1935,7 +2022,7 @@
       var nm = (a.structures[q.p.s] || {}).name || q.p.s;
       // a bilateral structure is pinned twice; label it once, on its first pin
       q.label = seen[q.p.s] ? "" : nm; seen[q.p.s] = 1;
-      items.push({ x: immShownX(q.p.x, flip) / 100 * w, y: q.p.y / 100 * h, w: q.label ? Math.round(q.label.length * 6.9 + 16) : 0, h: q.label ? 20 : 0, k: k });
+      items.push({ x: immShownX(q.p.x, flip) / 100 * w, y: q.p.y / 100 * h, w: q.label ? immLabelW(q.label, pinsEl) : 0, h: q.label ? 20 : 0, k: k });
     });
     var lab = items.filter(function (it) { return it.w; }), keep = {};
     immPlaceLabels(lab, w, h).forEach(function (i) { keep[lab[i].k] = lab[i]; });
@@ -1999,7 +2086,7 @@
   function immGo(i) {
     if (!st.imm || !st.plane) return;
     var n = st.plane.n; i = Math.max(1, Math.min(n, Math.round(i)));
-    if (i !== st.plane.i) setPlane(IMM_MODULE, i, { noFocus: true });
+    if (i !== st.plane.i) { setPlane(st.imm.m, i, { noFocus: true }); immFollow(); }
   }
   function immPlay(on) {
     if (!st.imm) return;
@@ -2020,17 +2107,37 @@
     var hit = immNearestPin(s.pins, x, fy, box.clientWidth, box.clientHeight, 40);
     if (!hit) { st.imm.miss = true; select([], null); st.imm.miss = false; return; }
     var cid = canonicalOf(hit.s), ce = st.data.canon[cid];
-    if (ce && ce.live && ce.live.length) select(ce.live, { kind: "canon", cid: cid }, { noFocus: true });
+    var own2 = ce && ce[canonKey(st.src)];
+    if (own2 && own2.length) select(own2, { kind: "canon", cid: cid }, { noFocus: true });
     else { st.subject = { kind: "canon", cid: cid }; st.sel = []; applyState(); paintImm(); invalidate(); }
   }
-  function startImmersive(d) {
-    if (!d.planes[IMM_MODULE]) { st.err = "Immersive CT needs the living-CT body, which this build does not have."; paintProgress(); return; }
-    setSource("live", { keepCam: true });
-    loadImmData().then(function (x) {
-      if (!st.imm || !isOpen()) return;
+  function immRegion(id) {
+    if (!st.imm) return;
+    immPlay(false);
+    if (!id) { st.imm.follow = false; immCamera(true); paintImmRegions(); return; }
+    var r = (st.imm.regions || []).filter(function (x) { return x.id === id; })[0]; if (!r) return;
+    st.imm.follow = true;
+    if (r.i !== st.plane.i) setPlane(st.imm.m, r.i, { noFocus: true });
+    immCamera(false); paintImm();
+  }
+  function startImmersive(d, mid) {
+    // the whole body when this build has it, the torso otherwise (or when asked for by module)
+    var m = mid && d.planes[mid] ? mid : (d.planes[IMM_MODULES.body] ? IMM_MODULES.body : IMM_MODULES.live);
+    if (!d.planes[m]) { st.err = "Immersive CT needs a living-CT body, which this build does not have."; paintProgress(); return; }
+    st.imm.m = m;
+    var src = planeSrc(m);
+    st.imm.follow = src === "body";
+    var sub = G.document.getElementById("a3dSub");
+    if (sub) sub.textContent = src === "body" ? "Living-patient CT · head to thigh" : "Living-patient CT · lower chest to pelvis";
+    setSource(src, { keepCam: true });
+    loadImmData(m).then(function (x) {
+      if (!st.imm || !isOpen() || st.imm.m !== m) return;
       st.imm.atlas = x.atlas; st.imm.meta = x.meta;
-      setPlane(IMM_MODULE, Math.round(midSlice(IMM_MODULE) * 0.75), { noFocus: true });   // upper abdomen: liver, stomach, kidneys, spleen
-      immCamera(); paintImm();
+      st.imm.regions = src === "body" ? immRegionSlices(x.atlas.slices, IMM_REGIONS) : [];
+      var chest = st.imm.regions.filter(function (r) { return r.id === "chest"; })[0];
+      // whole body: open on the chest (heart, lungs, great vessels); torso: the upper abdomen
+      setPlane(m, chest ? chest.i : Math.round(midSlice(m) * 0.75), { noFocus: true });
+      immCamera(false); paintImm();
     }).catch(function () {
       var w = G.document.getElementById("a3dCtWait"); if (w) { w.hidden = false; w.textContent = "The CT could not load. Check the connection and open it again."; }
     });
@@ -2070,18 +2177,18 @@
       paintChips(); paintBar();
       applyState();
       if (st.imm) {
-        startImmersive(d);
+        startImmersive(d, opts.module);
         ensureChunks().then(function () { paintProgress(); settleFrames(); });
         invalidate();
         return;
       }
       // Opened from a living-torso slice: land on the living body with THAT slice as the cut.
       var fromLive = opts.from && d.planes[opts.from.m] && d.planes[opts.from.m][String(opts.from.i)];
-      if (opts.src === "live" || fromLive) setSource("live", { keepCam: true });
-      if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: !!fromLive, prefer: fromLive ? "live" : opts.src });
+      if (opts.src === "live" || opts.src === "body" || fromLive) setSource(fromLive ? planeSrc(opts.from.m) : opts.src, { keepCam: true });
+      if (opts.canon && d.canon[opts.canon]) selectCanon(opts.canon, { noFocus: !!fromLive, prefer: fromLive ? planeSrc(opts.from.m) : opts.src });
       else if (opts.region) setRegion(opts.region);
       if (fromLive) setPlane(opts.from.m, opts.from.i);
-      else if (!opts.canon && st.src === "live") focusSource();
+      else if (!opts.canon && living()) focusSource();
       if (opts.partId != null && d.byId[opts.partId] != null) select([d.byId[opts.partId]], { kind: "part", i: d.byId[opts.partId] });
       ensureChunks().then(function () { paintProgress(); if (st.sel.length && !st.plane) focusOn(st.sel, { pad: 1.25 }); invalidate(); });
       invalidate();
@@ -2123,7 +2230,7 @@
   G.ATLAS3D = G.ATLAS3D || {};
   G.ATLAS3D.enabled = enabled;
   G.ATLAS3D.immEnabled = immEnabled;
-  G.ATLAS3D.openImmersive = function () { if (isOpen()) close(); open({ immersive: true }); };
+  G.ATLAS3D.openImmersive = function (mid) { if (isOpen()) close(); open({ immersive: true, module: mid }); };
   G.ATLAS3D.open = open;
   G.ATLAS3D.close = close;
   G.ATLAS3D.isOpen = isOpen;
@@ -2151,7 +2258,7 @@
     looksLikeChunk: looksLikeChunk, dataBases: dataBases, dataUrl: dataUrl,
     ghostAlpha: ghostAlpha, freeClip: freeClip, layerSnap: layerSnap, pushHist: pushHist, progressLabel: progressLabel,
     serializeView: serializeView, restoreView: restoreView, quizPool: quizPool, fileSlug: fileSlug, creditLine: creditLine, wrapLines: wrapLines,
-    immShownX: immShownX, immNearestPin: immNearestPin, immNearestSlice: immNearestSlice, immPlaceLabels: immPlaceLabels, immWindowUrl: immWindowUrl
+    immRegionSlices: immRegionSlices, immShownX: immShownX, immNearestPin: immNearestPin, immNearestSlice: immNearestSlice, immPlaceLabels: immPlaceLabels, immWindowUrl: immWindowUrl
   };
   G.ATLAS3D._version = "1.0";
 

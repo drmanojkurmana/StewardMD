@@ -75,11 +75,15 @@ try {
   ok(await until(`return ATLAS3D.isOpen() && document.getElementById('smdAtlas3d').classList.contains('a3d-immersive') && !!document.getElementById('a3dCanvas') && !!document.getElementById('a3dCtBox')`), "tapping the card opens Immersive CT (3D canvas + CT panel)");
   ok(await settled(), "living body streamed, CT data loaded, slice texture on the cut plane");
   const st0 = await evj(`var s=ATLAS3D._state; return JSON.stringify({src:s.src, m:s.plane.m, i:s.plane.i, n:s.plane.n, err:s.err, hint:!!document.getElementById('a3dHint'), sheet:!!(document.getElementById('a3dSheet')||{}).classList && document.getElementById('a3dSheet').classList.contains('on')});`);
-  ok(st0.src === "live" && st0.m === "ct-live-torso-axial" && st0.n === 48 && st0.i === 18 && !st0.err, "on the living-CT body at axial slice 18 of 48: " + JSON.stringify(st0));
+  // the whole body (s1045) is the default; it opens on the chest, the middle of the slices that pin the heart
+  ok(st0.src === "body" && st0.m === "ct-live-body-axial" && st0.n === 96 && st0.i === 45 && !st0.err, "on the whole-body living CT at axial slice 45 of 96 (chest): " + JSON.stringify(st0));
+  ok(await ev(`return document.getElementById('a3dSub').textContent==='Living-patient CT · head to thigh';`) === true, "header says head to thigh");
+  ok(await ev(`var c=[].slice.call(document.querySelectorAll('#a3dImmRegions .atlas-chip')).map(function(b){return b.textContent+(b.classList.contains('on')?'*':'');}).join(','); return c==='Whole,Head,Neck,Chest*,Abdomen,Pelvis';`) === true, "region chips Whole, Head, Neck, Chest (on), Abdomen, Pelvis");
+  ok(await ev(`var e=document.getElementById('a3dImmRegions'), b=e.lastElementChild.getBoundingClientRect(), a=e.firstElementChild.getBoundingClientRect(); return Math.abs(a.top-b.top)<1;`) === true, "region chips stay on one scrolling row");
   ok(!st0.hint, "no first-open gesture hint over the CT");
-  ok(await until(`var i=document.getElementById('a3dCtImg'); return i.complete && i.naturalWidth>0 && /ct-live-torso-axial\\/v2\\/018\\.webp$/.test(i.getAttribute('src')) && document.getElementById('a3dCtWait').hidden;`, 20000), "axial CT image 018 loaded, wait note gone");
+  ok(await until(`var i=document.getElementById('a3dCtImg'); return i.complete && i.naturalWidth>0 && /ct-live-body-axial\\/045\\.webp$/.test(i.getAttribute('src')) && document.getElementById('a3dCtWait').hidden;`, 20000), "axial CT image 045 loaded, wait note gone");
   ok(await ev(`return ['a3dEdT','a3dEdB','a3dEdL','a3dEdR'].map(function(k){return document.getElementById(k).textContent;}).join('')==='APRL' && document.getElementById('a3dCtImg').classList.contains('flip');`) === true, "radiological display: image mirrored, edge letters A/P/R/L from modules.json");
-  ok(await ev(`return document.getElementById('a3dImmLvl').textContent==='Slice 18 of 48' && document.querySelector('[data-a3d-act=immslice]').value==='18';`) === true, "level caption and slider agree");
+  ok(await ev(`return document.getElementById('a3dImmLvl').textContent==='Slice 45 of 96' && document.querySelector('[data-a3d-act=immslice]').value==='45';`) === true, "level caption and slider agree");
   const s0 = await sig();
   ok(!!s0 && s0.lit > 200, "3D frame shows the body (" + (s0 && s0.lit) + " lit samples)");
   ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth && document.getElementById('a3dImm').scrollWidth <= document.getElementById('a3dImm').clientWidth;`) === true, "no sideways scroll at 390 px");
@@ -93,16 +97,16 @@ try {
     for (var i=0;i<L.length;i++){ var a=L[i]; if (a.left < box.left-1 || a.right > box.right+1 || a.top < box.top-1) return false; for (var j=i+1;j<L.length;j++){ var b=L[j]; if (a.left<b.right-1 && a.right>b.left+1 && a.top<b.bottom-1 && a.bottom>b.top+1) return false; } } return true;`) === true, "labels stay inside the CT and never overlap");
   await shot("imm-02-all-labels");
   await ev(`document.querySelector('[data-a3d-act=immall]').click(); return 1;`);
-  // pick the liver pin on this slice (it is pinned on 018) and tap where it is DRAWN, so the flip is exercised
-  const liverIdx = await ev(`var s=ATLAS3D._state, p=s.imm.atlas.slices[s.plane.i-1].pins; for (var k=0;k<p.length;k++) if (p[k].s==='liver') return k; return -1;`);
-  ok(liverIdx >= 0, "slice 18 pins the liver");
+  // pick the heart pin on this slice and tap where it is DRAWN, so the display flip is exercised
+  const liverIdx = await ev(`var s=ATLAS3D._state, p=s.imm.atlas.slices[s.plane.i-1].pins; for (var k=0;k<p.length;k++) if (p[k].s==='heart') return k; return -1;`);
+  ok(liverIdx >= 0, "slice 45 pins the heart");
   const lp = await evj(`var s=ATLAS3D._state, p=s.imm.atlas.slices[s.plane.i-1].pins[${liverIdx}], b=document.getElementById('a3dCtBox').getBoundingClientRect(); return JSON.stringify({x: b.left + (100-p.x)/100*b.width, y: b.top + p.y/100*b.height});`);
   await tap(lp.x, lp.y);
-  ok(await until(`var s=ATLAS3D._state; return !!s.subject && s.subject.cid==='LIVER' && s.sel.length>0 && s.src==='live';`, 5000), "tap on the liver pin (mirrored image) selects LIVER on the living body");
-  ok(await ev(`return /Liver/.test(document.querySelector('.a3d-imm-sel h3').textContent) && !!document.querySelector('.a3d-imm-def') && document.querySelectorAll('#a3dCtPins .a3d-ct-pin.on').length>=1 && /Liver/.test(document.querySelector('#a3dCtPins .a3d-ct-lbl.on').textContent);`) === true, "name, definition and the highlighted pin + label show under the slice");
+  ok(await until(`var s=ATLAS3D._state; return !!s.subject && s.subject.cid==='HEART' && s.sel.length>0 && s.src==='body';`, 5000), "tap on the heart pin (mirrored image) selects HEART on the whole body");
+  ok(await ev(`return /Heart/.test(document.querySelector('.a3d-imm-sel h3').textContent) && !!document.querySelector('.a3d-imm-def') && document.querySelectorAll('#a3dCtPins .a3d-ct-pin.on').length>=1 && /Heart/.test(document.querySelector('#a3dCtPins .a3d-ct-lbl.on').textContent);`) === true, "name, definition and the highlighted pin + label show under the slice");
   ok(await ev(`var sh=document.getElementById('a3dSheet'); return !sh || !sh.classList.contains('on');`) === true, "no sheet covers the CT on selection");
-  ok(await ev(`var s=ATLAS3D._state, live=s.data.canon.LIVER.live; return live.every(function(i){return s.sel.indexOf(i)>=0;});`) === true, "the 3D selection is exactly the living-CT liver surface");
-  await shot("imm-03-liver");
+  ok(await ev(`var s=ATLAS3D._state, b=s.data.canon.HEART.body; return b.length===2 && b.length===s.sel.length && b.every(function(i){return s.sel.indexOf(i)>=0;});`) === true, "the 3D selection is the whole-body heart (heart + left atrial appendage surfaces)");
+  await shot("imm-03-heart");
 
   // ---- tap an empty corner: nothing selected, an honest hint ----
   const bx = await evj(`var e=document.getElementById('a3dCtBox'); e.scrollIntoView({block:'center', behavior:'instant'}); var b=e.getBoundingClientRect(); return JSON.stringify({x:b.left+6, y:b.bottom-6});`);
@@ -110,11 +114,13 @@ try {
   ok(await until(`var s=ATLAS3D._state; return !s.subject && /No labelled structure/.test(document.getElementById('a3dImmInfo').textContent);`, 5000), "a tap far from every pin clears the selection and says why");
 
   // ---- slider moves the CT and the 3D cut together ----
-  const posA = await ev(`return ATLAS3D._state.data.planes['ct-live-torso-axial']['18'].pos;`);
-  await ev(`var r=document.querySelector('[data-a3d-act=immslice]'); r.value='30'; r.dispatchEvent(new Event('input',{bubbles:true})); return 1;`);
-  ok(await until(`var s=ATLAS3D._state; return s.plane.i===30 && /v2\\/030\\.webp$/.test(document.getElementById('a3dCtImg').getAttribute('src')) && document.getElementById('a3dImmLvl').textContent==='Slice 30 of 48';`, 5000), "slider to 30: CT image, caption and 3D plane all on slice 30");
-  ok(await ev(`return ATLAS3D._state.data.planes['ct-live-torso-axial']['30'].pos < ${posA};`) === true, "the 3D cut moved inferior (lower y) as the slice number rose");
-  ok(await settled(30000), "slice 30 texture uploaded to the cut plane");
+  const posA = await ev(`return ATLAS3D._state.data.planes['ct-live-body-axial']['45'].pos;`);
+  await ev(`var r=document.querySelector('[data-a3d-act=immslice]'); r.value='70'; r.dispatchEvent(new Event('input',{bubbles:true})); return 1;`);
+  ok(await until(`var s=ATLAS3D._state; return s.plane.i===70 && /ct-live-body-axial\\/070\\.webp$/.test(document.getElementById('a3dCtImg').getAttribute('src')) && document.getElementById('a3dImmLvl').textContent==='Slice 70 of 96';`, 5000), "slider to 70: CT image, caption and 3D plane all on slice 70");
+  ok(await ev(`return ATLAS3D._state.data.planes['ct-live-body-axial']['70'].pos < ${posA};`) === true, "the 3D cut moved inferior (lower y) as the slice number rose");
+  ok(await settled(150000), "slice 70 texture uploaded to the cut plane (the camera glides after the cut first)");
+  ok(await ev(`var s=ATLAS3D._state; return Math.abs(s.cam.target[1] - s.data.planes['ct-live-body-axial']['70'].pos) < 1e-3;`) === true, "the camera followed the cut down the body (target height = the slice level)");
+  ok(await ev(`return document.querySelector('#a3dImmRegions .atlas-chip.on').textContent==='Abdomen';`) === true, "the region chip follows the level (Abdomen)");
 
   // ---- "Above the slice" draws the cut-away half ----
   await ev(`var r=document.querySelector('[data-a3d-act=immabove]'); r.value='0'; r.dispatchEvent(new Event('input',{bubbles:true})); return 1;`);
@@ -137,11 +143,11 @@ try {
   await tap(cv.x, cv.y);
   ok(await until(`var s=ATLAS3D._state; return !!s.subject && !!document.querySelector('.a3d-imm-sel h3');`, 8000), "a real touch on the 3D body names the structure the GPU pick found: " + await ev(`var s=ATLAS3D._state; return s.subject ? JSON.stringify(s.subject) : 'none';`));
   ok(await ev(`var s=ATLAS3D._state; return s.sel.indexOf(${hit}) >= 0;`) === true, "…and the picked part " + hit + " is in the selection (the tap landed where it was aimed)");
-  ok(await ev(`var s=ATLAS3D._state, d=s.data; if (s.subject.kind!=='canon') return true; var live=d.canon[s.subject.cid].live; return live.every(function(i){return s.sel.indexOf(i)>=0;});`) === true, "a 3D tap selects the whole structure (both kidneys, not one), matching the CT pins");
+  ok(await ev(`var s=ATLAS3D._state, d=s.data; if (s.subject.kind!=='canon') return true; var own=d.canon[s.subject.cid][s.src==='body'?'body':'live']; return own.length>0 && own.every(function(i){return s.sel.indexOf(i)>=0;});`) === true, "a 3D tap selects the whole structure (both kidneys, not one), matching the CT pins");
 
   // ---- a structure not on this slice offers the nearest slice that has it ----
-  await ev(`ATLAS3D._state.imm && ATLAS3D._select(ATLAS3D._state.data.canon.PROSTATE.live, {kind:'canon', cid:'PROSTATE'}, {noFocus:true}); return 1;`);
-  ok(await until(`return !!document.querySelector('[data-a3d-act=immgo]');`, 3000), "PROSTATE (not on slice 30) offers Go to slice N");
+  await ev(`ATLAS3D._state.imm && ATLAS3D._select(ATLAS3D._state.data.canon.PROSTATE.body, {kind:'canon', cid:'PROSTATE'}, {noFocus:true}); return 1;`);
+  ok(await until(`return !!document.querySelector('[data-a3d-act=immgo]');`, 3000), "PROSTATE (not on slice 70) offers Go to slice N");
   const goI = await ev(`return +document.querySelector('[data-a3d-act=immgo]').getAttribute('data-i');`);
   const go = await pinXY("[data-a3d-act=immgo]");
   await tap(go.x, go.y);
@@ -164,6 +170,16 @@ try {
   await tap(play2.x, play2.y);
   const iStop = await ev(`return ATLAS3D._state.plane.i;`); await sleep(900);
   ok(await ev(`return ATLAS3D._state.plane.i===${iStop} && !ATLAS3D._state.imm.play;`) === true, "Pause stops it at slice " + iStop);
+  // ---- region chips ----
+  const head = await pinXY("#a3dImmRegions [data-r=head]");
+  await tap(head.x, head.y);
+  ok(await until(`var s=ATLAS3D._state; return s.plane.i===9 && /ct-live-body-axial\\/009\\.webp$/.test(document.getElementById('a3dCtImg').getAttribute('src')) && document.querySelector('#a3dImmRegions .atlas-chip.on').textContent==='Head';`, 8000), "Head jumps to slice 9 (brain) and lights the chip");
+  ok(await settled(60000) && await ev(`var s=ATLAS3D._state; return Math.abs(s.cam.target[1] - s.data.planes['ct-live-body-axial']['9'].pos) < 1e-3;`) === true, "the camera framed the head level");
+  ok(await ev(`return ATLAS3D._state.imm.atlas.slices[8].pins.some(function(p){return p.s==='brain';});`) === true, "slice 9 pins the brain");
+  await shot("imm-05-head");
+  const whole = await pinXY("#a3dImmRegions [data-r='']");
+  await tap(whole.x, whole.y);
+  ok(await until(`var s=ATLAS3D._state; return s.imm.follow===false && s.plane.i===9 && document.querySelector('#a3dImmRegions .atlas-chip.on').textContent==='Whole';`, 5000), "Whole frames the full body without moving the slice");
   await ev(`document.querySelector('[data-a3d-act=immplay]').click(); return 1;`);
   await ev(`ATLAS.back(); return 1;`);
   ok(await until(`return !ATLAS3D.isOpen() && ATLAS.isOpen() && !!document.querySelector('#smdAtlas .atlas-3d-card.imm');`, 5000), "Back closes Immersive CT onto the RadioAnatome catalog");
@@ -173,8 +189,17 @@ try {
   await ev(`ATLAS3D.open({src:'live'}); return 1;`);
   ok(await until(`return !!document.querySelector('#a3dBar [data-a3d-act=immopen]')`, 30000), "the 3D layer's Living CT tools offer Immersive");
   await ev(`document.querySelector('#a3dBar [data-a3d-act=immopen]').click(); return 1;`);
-  ok(await until(`var s=ATLAS3D._state; return ATLAS3D.isOpen() && !!s.imm && !!s.plane && s.plane.m==='ct-live-torso-axial';`, 30000), "…and it opens Immersive CT on the same body");
+  ok(await until(`var s=ATLAS3D._state; return ATLAS3D.isOpen() && !!s.imm && !!s.plane && s.plane.m==='ct-live-torso-axial' && s.src==='live' && s.plane.n===48;`, 30000), "…and it opens Immersive CT on the same (torso) body");
+  ok(await until(`return document.getElementById('a3dImmRegions').hidden===true && document.getElementById('a3dSub').textContent==='Living-patient CT · lower chest to pelvis';`, 10000), "the torso has no region chips and says lower chest to pelvis");
   ok(await settled(), "and it renders after the switch");
+  await ev(`ATLAS3D.close(); return 1;`);
+
+  // ---- the whole body as a 3D source, and a whole-body CT row deep-linking into it ----
+  await ev(`ATLAS3D.open({src:'body'}); return 1;`);
+  ok(await until(`var s=ATLAS3D._state; return s.src==='body' && [].slice.call(document.querySelectorAll('#a3dSrc .a3d-srcbtn')).map(function(b){return b.textContent;}).join('|')==='Reference|Living CT|Whole body' && !!document.querySelector('#a3dBar [data-a3d-act=immopen][data-m="ct-live-body-axial"]');`, 30000), "3D sources: Reference, Living CT, Whole body; the whole body offers its own Immersive");
+  await ev(`ATLAS3D.close(); ATLAS3D.open({canon:'THYROID_GLAND', from:{m:'ct-live-body-axial', i:27}}); return 1;`);
+  ok(await until(`var s=ATLAS3D._state, b=s.data && s.data.canon.THYROID_GLAND.body; return s.src==='body' && !!s.plane && s.plane.m==='ct-live-body-axial' && s.plane.i===27 && !!b && b.length===1 && s.sel.length===1 && s.sel[0]===b[0];`, 30000), "a whole-body CT row (thyroid, slice 27) opens 3D on the whole body, cut at that slice, thyroid selected");
+  await until(`return Object.keys(ATLAS3D._state.loading).length===0;`, 90000);
   await ev(`ATLAS3D.close(); return 1;`);
 
   // ---- flag off ----

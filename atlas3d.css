@@ -205,6 +205,9 @@
 /* ---------- Immersive CT: the living body and its axial CT on one screen ---------- */
 .atlas-3d-card.imm { margin-top: 4px; }
 .atlas-3d-card.imm i { background: #ffd27a; color: #2a1d00; font-size: 14px; }
+.a3d-imm-regions { flex-wrap: nowrap; }
+.a3d-imm-regions[hidden] { display: none; }
+.a3d-imm-regions .atlas-chip { flex: 0 0 auto; }
 .a3d-imm { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
 .a3d-imm-cap { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 8px 12px 6px; }
 .a3d-imm-cap b { color: #eee; font-size: 13px; font-weight: 700; }
