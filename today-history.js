@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th20";
+  var FLAG = "smd_today_history", VER = "th21";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -93,8 +93,7 @@
         '<div class="th-face-tt">' + esc(e.t) + '</div>' +
         '<div class="th-face-yr">' + CAL + (e.ob ? "Observed every year" : esc(e.y)) + '</div>' +
         '<div class="th-face-sm-txt">' + esc(e.s) + '</div>' +
-      '</div>' +
-      '<div class="th-face-go">Tap to explore<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></div>';
+      '</div>';
   }
   // Long titles take two lines; the summary then gets one, else two. Nothing spills out of the banner.
   function fit(f) {

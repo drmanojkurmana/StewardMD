@@ -65,9 +65,10 @@ try {
   ok(await ev(`/This day in medical history/i.test(document.querySelector('#hrfBanner .th-face').innerText)`), 'history face shows the label');
   ok(await ev(`document.querySelector('#hrfBanner .th-face').innerText.toUpperCase().includes(${JSON.stringify(today.toUpperCase())})`), 'history face shows today');
   ok(await ev(`Math.abs(document.getElementById('hrfBanner').getBoundingClientRect().height-${h0})<1`), 'banner keeps its height');
-  const inside = `(()=>{const b=document.getElementById('hrfBanner').getBoundingClientRect();return [...document.querySelectorAll('#hrfBanner .th-face-txt>*,#hrfBanner .th-face-go')].every(n=>{const q=n.getBoundingClientRect();return q.top>=b.top-1&&q.bottom<=b.bottom+1&&q.right<=b.right+1&&q.left>=b.left-1})})()`;
+  const inside = `(()=>{const b=document.getElementById('hrfBanner').getBoundingClientRect();return [...document.querySelectorAll('#hrfBanner .th-face-txt>*,#hrfBanner .th-face-pic')].every(n=>{const q=n.getBoundingClientRect();return q.top>=b.top-1&&q.bottom<=b.bottom+1&&q.right<=b.right+1&&q.left>=b.left-1})})()`;
   ok(await ev(inside), 'history text inside the banner');
-  ok(await ev(`(()=>{const t=document.querySelector('#hrfBanner .th-face-txt'),g=document.querySelector('#hrfBanner .th-face-go').getBoundingClientRect();return [...t.children].slice(1).every(n=>n.getBoundingClientRect().right<=g.left+1||n.getBoundingClientRect().bottom<=g.top+1)})()`), 'Tap to explore clear of the text');
+  ok(await ev(`(()=>{const p=document.querySelector('#hrfBanner .th-face-pic').getBoundingClientRect();return [...document.querySelector('#hrfBanner .th-face-txt').children].slice(1).every(n=>n.getBoundingClientRect().right<=p.left+1)})()`), 'picture clear of the text (the eyebrow runs over the top of the picture on purpose)');
+  ok(await ev(`!document.querySelector('#hrfBanner .th-face-go')`), 'no Tap to explore on the face');
   ok(await ev(`!!document.querySelector('#hrfBanner .th-face-art, #hrfBanner .th-face-img')`), 'face has a picture');
   ok(await ev(`/^This day in medical history, [0-9]{4}: /.test(document.getElementById('hrfBanner').getAttribute('aria-label'))`), 'banner name follows the face');
   ok(await ev(`document.documentElement.scrollWidth<=innerWidth`), 'no sideways scroll');
