@@ -6,6 +6,8 @@ flag: smd_edge (default ON for all since 2026-10-04, owner; "0" turns it off)
 # StewardMD Edge
 
 On-device request router and value extractor. Plan: [[Edge-Master-Plan]]. Evidence: [[Needle-Audit]].
+Real-use review and Needle vs EmbeddingGemma 2 search bench (2026-11-13): [[Edge-Embed-Value-2026-11-13]]. Short version:
+the rules layer is what users get; Needle weights never reach a phone; Needle embeddings find 1/70 diseases.
 
 ## What exists (2026-10-01 sprint)
 | File | Global | Job |
