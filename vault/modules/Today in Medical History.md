@@ -26,8 +26,8 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   theme. `.th-face` must stay `z-index:auto` (no stacking context) or the blend only sees transparency and the black
   box shows (it did, first try).
 - Producing them (owner chose Gemini's image model): `data/history/image-subjects.txt` holds ONE subject per day,
-  for the day's main event only (336 days). `scripts/history/image-prompts.mjs` writes three self-contained prompts,
-  `data/history/gemini/gemini-prompt-{1,2,3}-of-3.txt` (100, 100, 136: a Gemini task makes about 100 images), each
+  for the day's main event only (338 days). `scripts/history/image-prompts.mjs` writes three self-contained prompts,
+  `data/history/gemini/gemini-prompt-{1,2,3}-of-3.txt` (100, 100, 138: a Gemini task makes about 100 images), each
   asking for a ZIP of PNGs named `MM-DD-YYYY.png`. `scripts/history/import-images.sh <folder>` imports named files;
   `--part N <folder>` matches unnamed downloads to prompt N by save order. Both make 480x360 WebP and rebuild.
 - Tap while history shows: a bottom sheet with all of today's events (year, category, specialty, title, summary,
@@ -43,7 +43,14 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   outbreaks, hoaxes and routine notices were dropped once and **restored by the owner**: they stay.
 - Result: 639 events on 336 days. **30 days have nothing** (only deaths or dropped births): the banner does not flip
   that day, and the sheet says "Nothing to mark on this day".
-- Pictures: one per day, the day's main event; 336 subjects; Gemini prompts of 100, 100, 136.
+- Pictures: one per day, the day's main event; 338 subjects; Gemini prompts of 100, 100, 138.
+
+## Observance days (owner, 2026-11-13)
+- `data/history/source/observances.json`: 22 recurring days (10 clinician/profession days, 12 public health days;
+  6 marked India). Merged by `build-history.mjs` with id `MM-DD-day`, `ob:1`, no year, category "Observance".
+- An observance **leads its day** (first in the sheet, on a tinted card, "Every year" in the year column; first on
+  the banner, "Observed every year" in the year row) and **owns the day's picture** (`MM-DD-day.webp`).
+- World Physiotherapy Day (8 Sep) and World Stroke Day (29 Oct) fill days that were empty: 661 entries on 338 days.
 
 ## Files
 - `today-history.js`, `today-history.css` (loaded in index.html just before role-features.js).

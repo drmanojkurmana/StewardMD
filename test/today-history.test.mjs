@@ -7,6 +7,7 @@ import { build, clean, sameEvent, dropList, DEATH } from "../scripts/history/bui
 const root = new URL("../", import.meta.url);
 const src = JSON.parse(readFileSync(new URL("data/history/source/medical-history-365.json", root), "utf8"));
 const india = JSON.parse(readFileSync(new URL("data/history/source/indian-medical-history.json", root), "utf8"));
+const obs = JSON.parse(readFileSync(new URL("data/history/source/observances.json", root), "utf8"));
 const months = Object.fromEntries(Array.from({ length: 12 }, (_, i) => {
   const mm = String(i + 1).padStart(2, "0");
   return [mm, JSON.parse(readFileSync(new URL(`data/history/${mm}.json`, root), "utf8"))];
@@ -27,16 +28,19 @@ test("curated: no deaths, none of the dropped ids, and most days still have some
 });
 
 test("month files are current with the source (rerun build-history.mjs)", () => {
-  assert.deepEqual(build(src, india, undefined, dropList()), months);
+  const built = build(src, india, undefined, dropList(), obs);
+  for (const m of Object.keys(built)) built[m] = Object.fromEntries(Object.entries(built[m]).sort());
+  assert.deepEqual(built, months);
 });
 
 test("events are complete, oldest first, https sources, no em-dash", () => {
   for (const m of Object.values(months)) for (const evs of Object.values(m)) {
     evs.forEach((e, i) => {
-      assert.ok(Number.isInteger(e.y) && e.t && e.s && e.c, JSON.stringify(e));
-      assert.match(e.u, /^https:\/\//);
+      assert.ok((e.ob ? e.y === undefined : Number.isInteger(e.y)) && e.t && e.s && e.c, JSON.stringify(e));
+      if (!e.ob) assert.match(e.u, /^https:\/\//);
       assert.doesNotMatch(e.t + e.s + e.c + e.sp, /—/);
-      if (i) assert.ok(evs[i - 1].y <= e.y);
+      if (i && !evs[i - 1].ob) assert.ok(evs[i - 1].y <= e.y);
+      if (e.ob) assert.equal(i, 0, "an observance leads its day");
       assert.ok(e.in === undefined || e.in === 1);
     });
   }
@@ -54,7 +58,7 @@ test("ids are unique within a day, and a same-year pair is told apart", () => {
   for (const m of Object.values(months)) for (const [key, evs] of Object.entries(m)) {
     const ids = evs.map((e) => e.id);
     assert.equal(new Set(ids).size, ids.length, key);
-    for (const id of ids) assert.match(id, new RegExp("^" + key + "-\\d{3,4}b?$"));
+    for (const id of ids) assert.match(id, new RegExp("^" + key + "-(\\d{3,4}b?|day)$"));
   }
   assert.ok(months["11"]["11-26"].some((e) => /b$/.test(e.id)));   // Covishield billion, same year as Omicron
 });
@@ -67,6 +71,17 @@ test("India events merged; a repeat of a world event replaces it", () => {
   assert.ok(months["08"]["08-20"].find((e) => e.y === 1897).in);
   assert.ok(sameEvent({ year: 1887, title: "Passing of Dr. Anandi Gopal Joshi" }, { year: 1887, title: "Death of Pioneer Physician Anandibai Gopal Joshi" }));
   assert.ok(!sameEvent({ year: 2021, title: "Serum Institute of India Passes 1 Billion COVISHIELD Dose Milestone" }, { year: 2021, title: "WHO Designates Omicron as a SARS-CoV-2 Variant of Concern" }));
+});
+
+test("22 observance days, each leading its day, with its picture subject", () => {
+  const all = Object.values(months).flatMap((m) => Object.values(m).flat());
+  const ob = all.filter((e) => e.ob);
+  assert.equal(ob.length, 22);
+  assert.equal(months["07"]["07-01"][0].t, "National Doctors' Day (India)");
+  assert.ok(months["07"]["07-01"][0].in);
+  assert.ok(months["09"]["09-08"][0].ob, "World Physiotherapy Day fills a day that was empty");
+  const subj = readFileSync(new URL("data/history/image-subjects.txt", root), "utf8");
+  for (const e of ob) assert.ok(subj.includes(e.id.slice(0, 5) + "|day|"), e.id);
 });
 
 test("clean turns em-dash breaks into commas", () => {

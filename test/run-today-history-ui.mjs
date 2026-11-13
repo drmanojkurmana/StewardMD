@@ -111,6 +111,9 @@ try {
   await ev(`SMD_todayHistory.open(1,8);1`);
   ok(await until(`/Nothing to mark on this day/.test(document.getElementById('thSheet').innerText)`, 5000), 'a day with nothing left says so');
   ok(await ev(`!/\\b(death of|passing of|dies)\\b/i.test(document.getElementById('thSheet').innerText)`), 'no deaths listed');
+  await ev(`SMD_todayHistory.open(7,1);1`);
+  ok(await until(`(()=>{const f=document.querySelector('#thSheet .th-ev');return !!f&&f.classList.contains('th-ev-ob')&&/Every\\s*year/.test(f.querySelector('.th-yr').innerText)&&/National Doctors' Day/.test(f.innerText)&&!!f.querySelector('.th-in')})()`, 5000), 'observance leads 1 July, marked every year, India tag');
+  await sleep(400); await shot('06-sheet-observance');
   // 6. Escape closes; focus goes back to the date.
   await call('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
   await call('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });

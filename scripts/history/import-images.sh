@@ -19,7 +19,7 @@ else
   for f in "$SRC"/*.{png,PNG,jpg,JPG,jpeg,webp}; do
     [ -f "$f" ] || continue
     b="$(basename "${f%.*}")"
-    if ! [[ "$b" =~ ^[01][0-9]-[0-3][0-9]-[0-9]{3,4}b?$ ]]; then echo "skip (name is not MM-DD-YYYY): $f"; bad=$((bad+1)); continue; fi
+    if ! [[ "$b" =~ ^[01][0-9]-[0-3][0-9]-([0-9]{3,4}b?|day)$ ]]; then echo "skip (name is not MM-DD-YYYY): $f"; bad=$((bad+1)); continue; fi
     conv "$f" "$b"; n=$((n+1))
   done
 fi

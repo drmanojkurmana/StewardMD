@@ -54,8 +54,8 @@ OUTPUT: name every image exactly with its file name (for example ${part[0].file}
 THE ${part.length} IMAGES:
 `;
     part.forEach((r, i) => {
-      t += `${i + 1}. ${r.file}: ${r.subject}. (${title(r)}, ${r.y.replace("b", "")})\n`;
-      csv.push([pi + 1, r.file, r.key, r.y.replace("b", ""), q(title(r)), q(r.subject)].join(","));
+      t += `${i + 1}. ${r.file}: ${r.subject}. (${title(r)}, ${r.y === "day" ? "observed every year" : r.y.replace("b", "")})\n`;
+      csv.push([pi + 1, r.file, r.key, r.y === "day" ? "every year" : r.y.replace("b", ""), q(title(r)), q(r.subject)].join(","));
     });
     writeFileSync(join(OUT, `gemini-prompt-${pi + 1}-of-3.txt`), t);
   });

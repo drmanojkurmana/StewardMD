@@ -12,6 +12,9 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const SRC = join(ROOT, "data/history/source/medical-history-365.json");
 const SRC_IN = join(ROOT, "data/history/source/indian-medical-history.json");
+// Observance days (World Health Day, National Doctors' Day ...): recur every year, so no year. Each becomes its
+// day's headline (first in the list, first on the banner) and owns the day's picture: id MM-DD-day.
+const SRC_OB = join(ROOT, "data/history/source/observances.json");
 // Curation (data/history/curation.txt): deaths are not celebrated, and a hand-made list drops the rest.
 export const DEATH = /\b(death of|passing of|dies|died|passes away|fatality)\b/i;
 export function dropList(file = join(ROOT, "data/history/curation.txt")) {
@@ -38,7 +41,7 @@ export function clean(s) {
 // Each event gets an id, MM-DD-YYYY (a second event in the same year that day gets a "b"); its banner picture,
 // when one ships, is data/history/img/<id>.webp, so a picture can never land on the wrong event. Pictures are
 // holographic glow art on pure black (the app screen-blends them, so the black drops out on any theme).
-export function build(src, india = { days: [] }, has = (f) => existsSync(join(OUT, "img", f)), drop = new Set()) {
+export function build(src, india = { days: [] }, has = (f) => existsSync(join(OUT, "img", f)), drop = new Set(), obs = { days: [] }) {
   const byDay = {};
   for (const d of src.days) {
     const key = String(d.month).padStart(2, "0") + "-" + String(d.day).padStart(2, "0");
@@ -73,13 +76,24 @@ export function build(src, india = { days: [] }, has = (f) => existsSync(join(OU
       .filter(Boolean);
     if (!months[key.slice(0, 2)][key].length) delete months[key.slice(0, 2)][key];   // a day with nothing to mark
   }
+  for (const d of obs.days) {
+    if (!/^\d\d-\d\d$/.test(d.date)) throw new Error("observance date " + d.date);
+    const id = d.date + "-day";
+    const o = { id, ob: 1, t: clean(d.title), s: clean(d.summary), c: "Observance", sp: clean(d.scope) };
+    if (d.india) o.in = 1;
+    if (has(id + ".webp")) o.img = id + ".webp";
+    const day = ((months[d.date.slice(0, 2)] ||= {})[d.date] ||= []);
+    day.unshift(o);
+  }
   return months;
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const src = JSON.parse(readFileSync(SRC, "utf8"));
   const india = existsSync(SRC_IN) ? JSON.parse(readFileSync(SRC_IN, "utf8")) : { days: [] };
-  const months = build(src, india, undefined, dropList());
+  const obs = existsSync(SRC_OB) ? JSON.parse(readFileSync(SRC_OB, "utf8")) : { days: [] };
+  const months = build(src, india, undefined, dropList(), obs);
+  for (const m of Object.keys(months)) months[m] = Object.fromEntries(Object.entries(months[m]).sort());
   mkdirSync(OUT, { recursive: true });
   let n = 0;
   for (const [mm, days] of Object.entries(months)) {

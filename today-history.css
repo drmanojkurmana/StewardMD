@@ -74,6 +74,8 @@ body.dark #thSheet{--th-bg:#0f1a21;--th-ink:#e8eef2;--th-muted:#9aabb8;--th-line
 .th-ev{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--th-line)}
 .th-ev:last-child{border-bottom:0}
 .th-yr{font:600 22px/1.1 ui-serif,"Iowan Old Style","New York",Georgia,serif;font-variant-numeric:lining-nums tabular-nums;color:var(--th-yr);padding-top:2px}
+.th-yr-ob{font-size:14px;line-height:1.15;font-style:italic;padding-top:4px}
+.th-ev.th-ev-ob{background:var(--th-tag-bg);margin:8px -12px 0;padding:16px 12px;border-radius:12px;border-bottom:0}
 .th-bd{min-width:0}
 .th-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
 .th-cat,.th-sp{font:600 11.5px/1 var(--rds-font,system-ui,sans-serif);padding:5px 8px;border-radius:6px}

@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th7";
+  var FLAG = "smd_today_history", VER = "th8";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -75,6 +75,8 @@
       '<path d="M96 80L56 40M92 84L52 44M52 44l-6-10 10 6"/><circle cx="76" cy="40" r="10" class="a-glow"/>',
     "Vaccine & Drug": '<path d="M28 82l8-8M36 74l34-34 10 10-34 34z"/><path d="M66 36l8-8 12 12-8 8M80 22l12 12M48 62l6 6M56 54l6 6"/>' +
       '<rect x="80" y="58" width="16" height="26" rx="4"/><path d="M80 66h16M84 54h8v4h-8z"/><circle cx="88" cy="74" r="8" class="a-glow"/>',
+    "Observance": '<circle cx="60" cy="40" r="22" class="a-glow"/><circle cx="60" cy="40" r="14"/><path d="M48 58l-10 30 12-6 6 12 6-20M72 58l10 30-12-6-6 12-6-20"/>' +
+      '<path d="M60 31l3 6 6 1-4.5 4 1 6.5-5.5-3-5.5 3 1-6.5L51 38l6-1z" class="a-hi"/>',
     "Institution": '<path d="M24 40l36-20 36 20zM28 84h64M24 90h72"/><path d="M34 44v36M48 44v36M72 44v36M86 44v36"/>' +
       '<path d="M54 84V62a6 6 0 0 1 12 0v22" class="a-hi"/><circle cx="60" cy="32" r="4"/>'
   };
@@ -89,7 +91,7 @@
       '<div class="th-face-txt">' +
         '<div class="th-face-ey">' + t.d + " " + MONTHS[t.m - 1].toUpperCase() + '<span class="th-dot" aria-hidden="true"></span><span class="th-face-lg">This day in medical history</span><span class="th-face-sm">This day in history</span></div>' +
         '<div class="th-face-tt">' + esc(e.t) + '</div>' +
-        '<div class="th-face-yr">' + CAL + esc(e.y) + (e.in ? '<span class="th-face-in">India</span>' : '') + '</div>' +
+        '<div class="th-face-yr">' + CAL + (e.ob ? "Observed every year" : esc(e.y)) + (e.in ? '<span class="th-face-in">India</span>' : '') + '</div>' +
         '<div class="th-face-sm-txt">' + esc(e.s) + '</div>' +
       '</div>' +
       '<div class="th-face-go">Tap to explore<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></div>';
@@ -113,7 +115,7 @@
       var e = todays[pick % todays.length]; pick++;
       var f = ensureFace(b); f.innerHTML = face(e); fit(f);
       if (!frontLabel) frontLabel = b.getAttribute("aria-label") || "";
-      b.setAttribute("aria-label", "This day in medical history, " + e.y + ": " + e.t + ". Tap to explore");
+      b.setAttribute("aria-label", "This day in medical history, " + (e.ob ? "observed every year" : e.y) + ": " + e.t + ". Tap to explore");
     } else if (frontLabel) b.setAttribute("aria-label", frontLabel);
   }
   // Fold to the edge, swap faces at 90 degrees (nothing to see edge-on), unfold the other face.
@@ -183,7 +185,8 @@
     eventsFor(t.m, t.d).then(function (evs) {
       // the event with a picture leads; the rest keep their order
       // the event with a picture leads, then India's; otherwise oldest first
-      todays = (evs || []).slice().sort(function (a, b) { return ((b.img ? 2 : 0) + (b.in ? 1 : 0)) - ((a.img ? 2 : 0) + (a.in ? 1 : 0)); });
+      // an observance day leads, then the event with a picture, then India's; otherwise oldest first
+      todays = (evs || []).slice().sort(function (a, b) { return ((b.ob ? 4 : 0) + (b.img ? 2 : 0) + (b.in ? 1 : 0)) - ((a.ob ? 4 : 0) + (a.img ? 2 : 0) + (a.in ? 1 : 0)); });
       if (todays.length) timer = setTimeout(tick, FACE_MS);           // the front face gets its 5 s first
     }).catch(function () {});
     D.addEventListener("visibilitychange", function () {
@@ -197,8 +200,8 @@
 
   function card(e) {
     var u = safeUrl(e.u), h = u ? hostLabel(u) : "";
-    return '<li class="th-ev">' +
-      '<div class="th-yr">' + esc(e.y) + '</div>' +
+    return '<li class="th-ev' + (e.ob ? ' th-ev-ob' : '') + '">' +
+      '<div class="th-yr' + (e.ob ? ' th-yr-ob' : '') + '">' + (e.ob ? "Every<br>year" : esc(e.y)) + '</div>' +
       '<div class="th-bd">' +
         '<div class="th-tags">' + (e.in ? '<span class="th-in">India</span>' : '') + '<span class="th-cat">' + esc(e.c) + '</span>' + (e.sp ? '<span class="th-sp">' + esc(e.sp) + '</span>' : '') + '</div>' +
         '<h3 class="th-tt">' + esc(e.t) + '</h3>' +
