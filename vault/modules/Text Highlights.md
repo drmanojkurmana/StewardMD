@@ -42,3 +42,7 @@ groups; inside anything editable (Cut or Paste available) the menu is untouched.
 Android (same day): `SmdWebView.java` (extends CapacitorWebView) wraps Chromium's action-mode callback and empties the
 menu unless it has Cut or Paste; app layout `res/layout/capacitor_bridge_layout_main.xml` overrides Capacitor's so the
 bridge uses it. Keep id `webview`. Native rebuild needed; check on a device that no empty bar shows.
+iOS follow-up (same day): the owner's new build still showed the menu. Current WebKit (BrowserEngineKit text
+interaction) presents it through its own `UIEditMenuInteraction`, which does not ask `canPerformAction`. `SmdWebView`
+now gives every edit menu interaction in the web content an `EditMenuGate` delegate (on each touch, via `hitTest`)
+that returns no menu on read-only text and forwards everything else to the original delegate.

@@ -45,7 +45,7 @@ final class SmdWebView: WKWebView {
     private static let cut = #selector(UIResponderStandardEditActions.cut(_:))
     private static let paste = #selector(UIResponderStandardEditActions.paste(_:))
 
-    private func editing(_ sender: Any?) -> Bool {
+    fileprivate func editing(_ sender: Any?) -> Bool {
         return super.canPerformAction(SmdWebView.cut, withSender: sender)
             || super.canPerformAction(SmdWebView.paste, withSender: sender)
     }
@@ -57,6 +57,36 @@ final class SmdWebView: WKWebView {
         return false
     }
 
+    // The owner's new build still showed the menu (2026-11-13): current WebKit presents a text selection's menu through
+    // its own UIEditMenuInteraction (BrowserEngineKit text interaction), which does not ask canPerformAction above. So
+    // every edit menu interaction in the web content gets an EditMenuGate as its delegate: it answers "no menu" on
+    // read-only text and hands everything else to the delegate it replaced. The interactions are created lazily, so they
+    // are looked for on each touch (cheap: a few levels of views, each interaction patched once).
+    private let gated = NSHashTable<UIEditMenuInteraction>.weakObjects()
+    private var gates: [EditMenuGate] = []
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        gateEditMenus()
+        return super.hitTest(point, with: event)
+    }
+
+    private func gateEditMenus() {
+        var views: [UIView] = [self, scrollView]
+        var level: [UIView] = scrollView.subviews
+        for _ in 0..<3 { views.append(contentsOf: level); level = level.flatMap { $0.subviews } }
+        gates.removeAll { $0.interaction == nil }
+        for v in views {
+            for case let i as UIEditMenuInteraction in v.interactions where !gated.contains(i) {
+                gated.add(i)
+                if i.delegate is EditMenuGate { continue }
+                let gate = EditMenuGate(web: self, original: i.delegate)
+                gate.interaction = i
+                gates.append(gate)   // the interaction holds its delegate weakly
+                i.delegate = gate
+            }
+        }
+    }
+
     // iOS 16+ builds the edit menu from menus as well as actions: drop the system groups on read-only text.
     override func buildMenu(with builder: UIMenuBuilder) {
         super.buildMenu(with: builder)
@@ -64,6 +94,37 @@ final class SmdWebView: WKWebView {
         var ids: [UIMenu.Identifier] = [.standardEdit, .lookup, .learn, .share, .find, .replace, .speech, .textStyle, .spelling]
         if #available(iOS 18.0, *) { ids.append(.writingTools) }
         ids.forEach { builder.remove(menu: $0) }
+    }
+}
+
+/// Delegate for an edit menu interaction in the web content: no menu on read-only text, otherwise exactly what the
+/// original delegate (UIKit's or WebKit's text interaction) would do. Every other delegate call is forwarded to it.
+final class EditMenuGate: NSObject, UIEditMenuInteractionDelegate {
+    weak var web: SmdWebView?
+    weak var original: UIEditMenuInteractionDelegate?
+    weak var interaction: UIEditMenuInteraction?
+
+    init(web: SmdWebView, original: UIEditMenuInteractionDelegate?) {
+        self.web = web
+        self.original = original
+        super.init()
+    }
+
+    override func responds(to aSelector: Selector!) -> Bool {
+        return super.responds(to: aSelector) || (original?.responds(to: aSelector) ?? false)
+    }
+
+    override func forwardingTarget(for aSelector: Selector!) -> Any? {
+        return original
+    }
+
+    func editMenuInteraction(_ interaction: UIEditMenuInteraction, menuFor configuration: UIEditMenuConfiguration,
+                             suggestedActions: [UIMenuElement]) -> UIMenu? {
+        guard let web = web, web.editing(nil) else { return nil }
+        if let o = original, let answer = o.editMenuInteraction?(interaction, menuFor: configuration, suggestedActions: suggestedActions) {
+            return answer
+        }
+        return UIMenu(children: suggestedActions)
     }
 }
 
