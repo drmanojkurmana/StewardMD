@@ -19,8 +19,11 @@
   var TABS = [["pg", "NEET-PG", { "neet-pg": 1, aipgmee: 1 }], ["inicet", "INI-CET", { "ini-cet": 1, "aiims-pg": 1 }], ["neetss", "NEET-SS", { "neet-ss": 1 }], ["iniss", "INI-SS", { "ini-ss": 1 }]];
   function tabOf(exam) { for (var i = 0; i < TABS.length; i++) if (TABS[i][2][exam]) return TABS[i][0]; return "pg"; }
   // A paper's timed test follows its own exam's pattern (MOCKS: NEET-PG 200 Q / 210 min +4/-1, INI-CET 200 / 180 +1/-1/3).
-  // shortcut: INI-SS has no pattern of its own in MOCKS yet, so it times like NEET-SS; add one when its pattern is set.
-  function patternOf(p) { var e = p && p.exam; return e === "ini-cet" || e === "aiims-pg" ? "ini-cet" : e === "neet-ss" || e === "ini-ss" ? "neet-ss" : "neet-pg"; }
+  // INI-SS: 80 Q / 90 min, +1 and -1/3 (owner 2026-11-13); MOCKS has no INI-SS list, so its pattern lives here.
+  var INI_SS = { id: "ini-ss", label: "INI-SS pattern", n: 80, min: 90, plus: 1, minus: 1 / 3 };
+  function patternOf(p) { var e = p && p.exam; return e === "ini-cet" || e === "aiims-pg" ? "ini-cet" : e === "ini-ss" ? "ini-ss" : e === "neet-ss" ? "neet-ss" : "neet-pg"; }
+  // Recall subjects with no app subject of their own (owner 2026-11-13), shown by name instead of "Not sorted yet".
+  var EXTRA_SUBJ = { "general-paediatrics-feeder": "General Pediatrics Feeder PYQ" };
 
   /* ================= pure ================= */
   // [exam, year, kind] or { exam, year, kind } -> one line per exam and kind: "Asked in NEET-PG 2025, 2024 (recall)".
@@ -135,7 +138,7 @@
   };
   function svg(n, size) { return '<svg viewBox="0 0 24 24" width="' + (size || 20) + '" height="' + (size || 20) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
   function icon() { return svg("papers"); }
-  function mockFor(host, exam) { return host.mockOf(exam, exam); }
+  function mockFor(host, exam) { return exam === "ini-ss" ? INI_SS : host.mockOf(exam, exam); }
 
   // Home: one row in the Practise group (NEET-PG only: the papers we hold are NEET-PG).
   function homeRow(host) {
@@ -189,8 +192,8 @@
       var sb = host.subjectById(sid);
       // With the practice setup sheet each subject row opens it for that subject's questions in this paper.
       var su = G.PREP_SETUP && G.PREP_SETUP.enabled();
-      return (su ? '<li><button type="button" class="pn-yq-subb" data-act="y-ssub" data-v="' + esc(pid) + '" data-s="' + esc(sid) + '" aria-label="Practise ' + (sb ? host.tx(sb.name) : "questions not sorted yet") + ' from this paper">' : "<li>") + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
-        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span>" + (su ? "</button>" : "") + "</li>";
+      return (su ? '<li><button type="button" class="pn-yq-subb" data-act="y-ssub" data-v="' + esc(pid) + '" data-s="' + esc(sid) + '" aria-label="Practise ' + (sb ? host.tx(sb.name) : EXTRA_SUBJ[sid] || "questions not sorted yet") + ' from this paper">' : "<li>") + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
+        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : EXTRA_SUBJ[sid] || "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span>" + (su ? "</button>" : "") + "</li>";
     }).join("");
     host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel pn-modp pn-yqp" style="--h:262">' +
       '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall" + (tOnly ? " · a topic set, not a single paper" : "") + "</p>" +
@@ -247,7 +250,7 @@
   function setupPaper(host, pid, sid) {
     var p = null; (P.ix ? P.ix.papers : []).forEach(function (x) { if (x.id === pid) p = x; });
     if (!p || !P.items) return;
-    var sb = sid ? host.subjectById(sid) : null, title = paperTitle(p) + " (recall)", sname = sid ? (sb ? host.tx(sb.name) : "Not sorted yet") : "";
+    var sb = sid ? host.subjectById(sid) : null, title = paperTitle(p) + " (recall)", sname = sid ? (sb ? host.tx(sb.name) : EXTRA_SUBJ[sid] || "Not sorted yet") : "";
     return G.PREP_SETUP.open({ kind: "pyq", id: pid + (sid ? "/" + sid : ""), title: paperTitle(p), sub: sid ? sname : "Recall paper", hue: sb ? host.subjHue(sid) : 262,
       load: function () { var hid = hiddenOf(host); return qualOf(host).then(function (qual) { return [paperItems(P.items, pid).filter(function (it) { return usable(it, hid, qual) && (!sid || (it.subject || "unsorted") === sid); })]; }); },
       start: function (list, mode, ro) { setupRun(host, list, mode, sid ? sname + " \u00b7 " + title : title, ro); } }, host);
