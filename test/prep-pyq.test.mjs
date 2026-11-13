@@ -209,6 +209,14 @@ test("onMod: a question shows under its module and under a second subject's modu
   assert.equal(PY.onMod({}, "med-arrhythmias"), false);
 });
 
+test("patternOf and titles: INI-CET and AIIMS PG papers time like INI-CET; sessions show by name", () => {
+  assert.equal(PY.patternOf({ exam: "ini-cet" }), "ini-cet");
+  assert.equal(PY.patternOf({ exam: "aiims-pg" }), "ini-cet");
+  assert.equal(PY.patternOf({ exam: "neet-pg" }), "neet-pg");
+  assert.equal(PY.paperTitle({ exam: "ini-cet", year: 2025, session: "November" }), "INI-CET 2025 · November");
+  assert.equal(PY.paperTitle({ exam: "aiims-pg", year: 2019, session: "May" }), "AIIMS PG 2019 · May");
+});
+
 test("app pure: recall labels, paper titles, the NEET-PG pattern, paper order, module counts", () => {
   assert.deepEqual(PY.tagLabel([["neet-pg", 2024, "recall"], ["neet-pg", 2025, "recall"], ["neet-pg", 2025, "recall"]]), ["Asked in NEET-PG 2025, 2024 (recall)"]);
   assert.deepEqual(PY.tagLabel([{ exam: "neet-pg", year: 2023, kind: "official" }]), ["Asked in NEET-PG 2023"]);
