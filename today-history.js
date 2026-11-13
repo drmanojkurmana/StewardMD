@@ -12,7 +12,7 @@
 (function () {
   "use strict";
   var W = window, D = document;
-  var FLAG = "smd_today_history", VER = "th13";
+  var FLAG = "smd_today_history", VER = "th14";
   var FACE_MS = 5000;
   var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var HOSTS = { "litfl.com": "LITFL", "en.wikipedia.org": "Wikipedia", "www.britannica.com": "Britannica", "www.cdc.gov": "CDC",
@@ -113,7 +113,7 @@
     b.classList.toggle("th-back", on);
     if (on) {
       var e = todays[pick % todays.length]; pick++;
-      var f = ensureFace(b); f.innerHTML = face(e); fit(f);
+      var f = ensureFace(b); f.className = "th-face" + (e.in ? " th-india" : ""); f.innerHTML = face(e); fit(f);
       // Playfair Display can land after the face is drawn; measure the title again once it has
       if (D.fonts && D.fonts.load) D.fonts.load("600 18px 'Playfair Display'").then(function () { fit(f); }, function () {});
       if (!frontLabel) frontLabel = b.getAttribute("aria-label") || "";

@@ -22,7 +22,28 @@
 #homeV2.rnav .hrf-banner.th-back>:not(.th-face){visibility:hidden}
 #homeV2.rnav .hrf-banner.th-back .th-face{position:absolute;inset:0;z-index:auto;display:block;border-radius:inherit;overflow:hidden;color:#fff;
   box-shadow:inset 0 0 0 1px rgba(143,240,210,.28);
-  background:radial-gradient(70% 120% at 88% 60%,rgba(143,240,210,.20),transparent 62%),linear-gradient(100deg,rgba(0,0,0,.16),transparent 60%)}
+  background:linear-gradient(118deg,#021f18 0%,#04412f 46%,#076247 78%,#0a7a58 100%)}
+/* Live gradient (owner, 2026-11-13): the face has its own ground. Emerald by default; deep chakra-blue night with a
+   saffron glow and an India-green glow when the day's headline is Indian. Soft light pools drift on the compositor
+   (transform only) while the face shows; one sheen crosses as it arrives. Text and picture sit above (positioned
+   later in the face), and the picture's screen blend still sees this ground, so its black melts into it. */
+#homeV2.rnav .hrf-banner.th-back .th-face::before{content:"";position:absolute;inset:-45%;pointer-events:none;
+  background:radial-gradient(28% 34% at 30% 34%,rgba(52,211,153,.42),transparent 70%),
+    radial-gradient(30% 38% at 70% 66%,rgba(143,240,210,.26),transparent 70%),
+    radial-gradient(24% 30% at 58% 28%,rgba(16,185,129,.22),transparent 70%);
+  animation:thDrift 16s ease-in-out infinite alternate;will-change:transform}
+#homeV2.rnav .hrf-banner.th-back .th-face::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;pointer-events:none;
+  background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.10) 55%,transparent 100%);
+  transform:translateX(-120%);animation:thSheen 2.2s cubic-bezier(.3,.6,.3,1) .45s 1 forwards}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-india{box-shadow:inset 0 0 0 1px rgba(255,190,120,.30);
+  background:linear-gradient(118deg,#141a3a 0%,#0e1736 50%,#0a1f2e 100%)}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-india::before{
+  background:radial-gradient(36% 44% at 37% 39%,rgba(255,140,40,.62),transparent 72%),
+    radial-gradient(38% 46% at 63% 62%,rgba(22,150,60,.66),transparent 72%),
+    radial-gradient(16% 20% at 50% 50%,rgba(255,244,226,.10),transparent 70%)}
+#homeV2#homeV2.rnav .hrf-banner .th-face.th-india .th-face-ey{color:#ffd6a0}
+@keyframes thDrift{0%{transform:translate3d(-7%,-5%,0) rotate(-4deg)}100%{transform:translate3d(7%,5%,0) rotate(6deg)}}
+@keyframes thSheen{to{transform:translateX(260%)}}
 #homeV2#homeV2.rnav .hrf-banner .th-face-txt{position:absolute;left:16px;top:10px;bottom:10px;right:30%;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
 #homeV2#homeV2.rnav .hrf-banner .th-face-txt>*{flex:none;margin:0}
 #homeV2#homeV2.rnav .hrf-banner .th-face-ey{margin-right:-36%!important;display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;font:500 10px/1.3 var(--th-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--hrf-mint,#8ff0d2)}
@@ -48,7 +69,7 @@
 #homeV2#homeV2.rnav .hrf-banner.th-in .th-face-pic{animation:th-pic .5s cubic-bezier(.2,.8,.2,1) .12s both}
 @keyframes th-pic{from{opacity:0;transform:translateX(8px) scale(.94)}to{opacity:1;transform:none}}
 @media (max-width:360px){#homeV2#homeV2.rnav .hrf-banner .th-face-lg{display:none}#homeV2#homeV2.rnav .hrf-banner .th-face-sm{display:inline}#homeV2#homeV2.rnav .hrf-banner .th-face-txt{left:13px;right:28%}#homeV2#homeV2.rnav .hrf-banner .th-face-tt{font-size:16.5px}#homeV2#homeV2.rnav .hrf-banner .th-face-pic{width:30%}}
-@media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-banner.th-out,#homeV2#homeV2.rnav .hrf-banner.th-in,#homeV2#homeV2.rnav .hrf-banner.th-in .th-face-pic{animation:none}}
+@media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-banner.th-out,#homeV2#homeV2.rnav .hrf-banner.th-in,#homeV2#homeV2.rnav .hrf-banner.th-in .th-face-pic,#homeV2.rnav .hrf-banner.th-back .th-face::before{animation:none}#homeV2.rnav .hrf-banner.th-back .th-face::after{display:none}}
 
 /* ---- sheet ---- */
 #thSheet{--th-bg:#fbfaf6;--th-ink:#13212a;--th-muted:#5b6b78;--th-line:#e6e2d6;--th-yr:#8a6a1f;--th-tag-bg:#f3ecd9;--th-tag-ink:#6b5216;--th-acc:#0f766e;--th-in-bg:#e6f4ef;--th-in-ink:#0b5f4a}

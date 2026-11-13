@@ -88,3 +88,7 @@ history for 5 s, back for 5 s, repeat. The chip was removed. Then the owner's mo
   Merriweather (98 KB, variable) are Google Fonts OFL latin subsets in assets/fonts, @font-face in
   today-history.css; Inter Variable is the app's own face. fit() re-runs after Playfair loads, otherwise it
   measures the fallback title and leaves a 2-line summary under a 2-line title. Cache token th13.
+- **Live gradient (owner, 2026-11-13):** the history face has its own ground. Indian headline (`e.in`, class
+  `th-india` on `.th-face`): chakra-blue night with a saffron glow drifting into an India-green glow, cream eyebrow.
+  Otherwise emerald with mint pools. `::before` light pools drift (transform only, 16 s alternate); `::after` sheen
+  crosses once per flip. Both off under reduced motion. Cache token th14.
