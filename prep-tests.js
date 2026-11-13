@@ -561,7 +561,7 @@
   function fxOverlays(sid, mid, sets) {
     return Promise.all((sets || []).map(function (set) {
       var u = H.bankApi + "overlay/" + set + "/" + sid + "/" + mid + ".json";
-      if (!P.fxm[u]) P.fxm[u] = H.getJSON(u).then(function (j) { return j.items || []; }, function () { return []; });
+      if (!P.fxm[u]) P.fxm[u] = H.getJSON(u).then(function (j) { return (j.items || []).map(function (it) { return A.fourOptions ? A.fourOptions(it) : it; }); }, function () { return []; });
       return P.fxm[u];
     })).then(function (rs) {
       var out = [], seen = {};
