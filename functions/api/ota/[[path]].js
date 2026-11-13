@@ -1,8 +1,11 @@
-/* StewardMD OTA update system — HTTP surface, PHASE 1.
+/* StewardMD OTA update system — HTTP surface.
  *
- *   Device-facing, PUBLIC, no auth (harmless if polled — worst case leaks "is there an update"):
- *     GET /api/ota/check?version=N&nativeBuild=N   → { ota:false } | { ota:true, version, files }
- *     GET /api/ota/file/<sha256>                   → the one content-addressed file, immutable-cached
+ *   Device-facing (gated by App Check or Firebase ID token when OTA_ENFORCE=1; signed file URLs):
+ *     GET /api/ota/check?version=N&nativeBuild=N[&files=1]
+ *         → { ota:false } | { ota:true, version, zipUrl, zipHash, zipSize, files? }
+ *         zipUrl / files[].download_url carry ?exp=&sig= HMAC (OTA_URL_SECRET, 2h TTL)
+ *     GET /api/ota/file/<sha256>?exp=&sig=  → content-addressed file (sig required when enforce ON)
+ *     GET /api/ota/probe?n=N               → public speed-probe filler (no content)
  *
  *   Admin console, OWNER-gated (same ownerOK() every other admin surface uses):
  *     GET  /api/ota/candidate   → the latest build staged by CI from a push to main (or null)
@@ -12,13 +15,15 @@
  *     POST /api/ota/rollback    { toVersion }               → republish an old version (new version #)
  *     POST /api/ota/kill        { on: true|false }          → the kill switch (no redeploy needed)
  *
- * PHASE 1 SCOPE: this is the complete control plane, exercised end to end from the admin console.
- * Nothing in the shipped app calls /api/ota/check yet — that is Phase 2's job, once the exact
- * @capgo/capacitor-updater wire contract is pinned down against the version actually installed.
- * Building that guess now, before a client exists to hold it to account, is how a format mismatch
- * would go unnoticed until the one time it matters.
+ * Rollout: OTA_ENFORCE (KV billing:cfg flags via warmBillingCfg/cfgFlag, env fallback). Default OFF =
+ * shadow — unsigned/unauthenticated still works, logs `[ota-shadow] would-deny <reason>` with no PII.
+ * ON after the new client is live: /check needs App Check OR ID token; /file needs a valid sig.
+ * NEVER break OTA delivery: if OTA_URL_SECRET is unset, file gating fail-opens even when enforce is on.
  */
 import { ownerOK, emailFromToken } from "../../_adminauth.js";
+import { verifyAppCheck } from "../../_appcheck.js";
+import { verifyFirebaseToken } from "../../_fbauth.js";
+import { cfgFlag, warmBillingCfg } from "../../_billingcfg.js";
 import * as OTA from "../../_ota.js";
 
 const json = (obj, status = 200, extra = {}) => new Response(JSON.stringify(obj), {
@@ -26,6 +31,7 @@ const json = (obj, status = 200, extra = {}) => new Response(JSON.stringify(obj)
 });
 const HASH_RE = /^[0-9a-f]{64}$/;   // sha256, lowercase hex — reject anything else before it reaches R2
 const PROBE_FILL = new Uint8Array(1572864).fill(97);   // "a" x 1.5 MB, the speed-probe body (sliced per request)
+const CORS_HEADERS = "Range, Content-Type, Authorization, X-Firebase-AppCheck";
 
 // Per-IP throttle on the public check endpoint — hygiene, not a hard requirement (R2 egress is
 // free and the response carries nothing sensitive), mirrors the pattern in hospital-request.
@@ -46,6 +52,47 @@ function whoIs(request) {
   return "owner";
 }
 
+async function otaEnforced(env) {
+  try { await warmBillingCfg(env && env.MAIK_KV); } catch (e) {}
+  return String(cfgFlag(env, "OTA_ENFORCE")) === "1";
+}
+
+/** App Check OR a verified Firebase ID token. Shadow: log + allow. Enforce: deny. No PII in logs. */
+async function gateCheckAuth(request, env, enforced) {
+  const app = await verifyAppCheck(request, env);
+  if (app) return true;
+  const bearer = ((request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""));
+  let uid = null;
+  try { uid = bearer ? await verifyFirebaseToken(bearer, env) : null; } catch (e) { uid = null; }
+  if (uid) return true;
+  if (enforced) return false;
+  console.warn("[ota-shadow] would-deny missing-auth");
+  return true;
+}
+
+/**
+ * Signed file URL gate. Missing OTA_URL_SECRET never 403s (would brick OTA); enforce + secret +
+ * bad/missing/expired sig → deny. Shadow logs would-deny and still serves.
+ */
+async function gateFileSig(env, hash, url, enforced) {
+  const secret = env && env.OTA_URL_SECRET;
+  if (!secret) {
+    if (enforced) console.warn("[ota-shadow] would-deny missing-secret");
+    return true;
+  }
+  const v = await OTA.verifyFileQuery(secret, hash, url.searchParams.get("exp"), url.searchParams.get("sig"));
+  if (v.ok) return true;
+  if (enforced) return false;
+  console.warn("[ota-shadow] would-deny " + v.reason);
+  return true;
+}
+
+async function absoluteFileUrl(request, hash, env) {
+  const base = new URL(request.url).origin + "/api/ota/file/" + hash;
+  const signed = await OTA.signFileQuery(env && env.OTA_URL_SECRET, hash);
+  return signed ? (base + "?" + signed.query) : base;
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
   const seg = Array.isArray(params.path) ? params.path : (params.path ? [params.path] : []);
@@ -53,19 +100,32 @@ export async function onRequest(context) {
   const r2 = env.OTA_R2;
   if (!r2) return json({ error: "ota-unavailable" }, 503);
 
-  // ---- device-facing, public ----
+  // ---- device-facing ----
   if (method === "GET" && seg[0] === "check") {
     if (await checkThrottled(env, request)) return json({ error: "rate_limited" }, 429);
+    const enforced = await otaEnforced(env);
+    if (!(await gateCheckAuth(request, env, enforced))) return json({ error: "unauthorized" }, 401);
     const url = new URL(request.url);
     const version = parseInt(url.searchParams.get("version") || "0", 10);
     const nativeBuild = parseInt(url.searchParams.get("nativeBuild") || "0", 10);
     const result = await OTA.checkForDevice(r2, { version, nativeBuild });
     // @capgo/capacitor-updater's download() fetches natively, outside the WebView — it needs an
     // ABSOLUTE url, which only the router (not _ota.js) can construct from the live request.
-    if (result.ota && result.zipHash) result.zipUrl = new URL(request.url).origin + "/api/ota/file/" + result.zipHash;
+    // When OTA_URL_SECRET is set, zipUrl / download_url carry ?exp=&sig= (native updater cannot add headers).
+    if (result.ota && result.zipHash) result.zipUrl = await absoluteFileUrl(request, result.zipHash, env);
     // files[] (every www file with its hash, ~150KB of JSON) is only for the delta install, which asks for it with
     // files=1 at the moment of installing. Every other check (launch, resume) just needs to know "is there an update".
-    if (result.ota && url.searchParams.get("files") !== "1") delete result.files;
+    if (result.ota && url.searchParams.get("files") === "1" && Array.isArray(result.files)) {
+      const origin = new URL(request.url).origin;
+      const secret = env && env.OTA_URL_SECRET;
+      result.files = await Promise.all(result.files.map(async (f) => {
+        const base = origin + "/api/ota/file/" + f.hash;
+        const signed = await OTA.signFileQuery(secret, f.hash);
+        return { path: f.path, hash: f.hash, size: f.size, download_url: signed ? (base + "?" + signed.query) : base };
+      }));
+    } else if (result.ota) {
+      delete result.files;
+    }
     return json(result, 200, { "Cache-Control": "no-store" });   // never let an edge/browser cache "is there an update"
   }
   /* SPEED PROBE for the download card. A plain-text body of n ASCII bytes (1 KB to 1.5 MB, no-store, no R2, no KV): the app
@@ -73,7 +133,7 @@ export async function onRequest(context) {
    * time a ranged piece of the zip itself, which needs a CORS preflight and a binary body and measured nothing on some
    * devices (owner, 2026-10-16: the card sat at 0.0 MB). Public and harmless: the content is constant filler. */
   if (seg[0] === "probe") {
-    const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS", "Access-Control-Allow-Headers": "Range, Content-Type", "Access-Control-Max-Age": "86400" };
+    const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS", "Access-Control-Allow-Headers": CORS_HEADERS, "Access-Control-Max-Age": "86400" };
     if (method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
     if (method === "GET" || method === "HEAD") {
       const n = Math.max(1024, Math.min(1572864, parseInt(new URL(request.url).searchParams.get("n") || "393216", 10) || 393216));
@@ -81,11 +141,14 @@ export async function onRequest(context) {
     }
   }
   if (method === "OPTIONS" && (seg[0] === "file" || seg[0] === "check")) {
-    return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS", "Access-Control-Allow-Headers": "Range, Content-Type", "Access-Control-Max-Age": "86400" } });
+    return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS", "Access-Control-Allow-Headers": CORS_HEADERS, "Access-Control-Max-Age": "86400" } });
   }
   if (method === "GET" && seg[0] === "file" && seg[1]) {
     const hash = String(seg[1]).toLowerCase();
     if (!HASH_RE.test(hash)) return json({ error: "bad-hash" }, 400);
+    const enforced = await otaEnforced(env);
+    const fileUrl = new URL(request.url);
+    if (!(await gateFileSig(env, hash, fileUrl, enforced))) return json({ error: "forbidden" }, 403);
     /* RESUMABLE. A ~48MB bundle served as one un-resumable stream meant any drop restarted from zero
      * and the phone reported "download failed" (owner's iPhone, 2026-09-18). A Range request is now
      * answered 206 from R2, and Accept-Ranges is always advertised so the updater knows it may resume. */

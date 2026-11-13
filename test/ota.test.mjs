@@ -216,7 +216,7 @@ test("router sends the per-file list only when asked (files=1) - ~150KB of JSON 
   assert.equal(plain.ota, true);
   assert.equal(plain.files, undefined, "a plain check carries no file list");
   const full = await (await onRequest({ request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7&files=1"), env, params: { path: ["check"] } })).json();
-  assert.deepEqual(full.files, [{ path: "a.js", hash: "h1", size: 5 }], "files=1 returns path, hash and size for the delta install");
+  assert.deepEqual(full.files, [{ path: "a.js", hash: "h1", size: 5, download_url: "https://stewardmd.in/api/ota/file/h1" }], "files=1 returns path, hash, size and download_url for the delta install");
 });
 test("router never caches the check response — an edge/browser cache saying 'no update' forever would be its own silent staleness bug", async () => {
   const { env, r2 } = fakeR2Env();
@@ -264,4 +264,192 @@ test("getFile fetches the exact content-addressed key, nothing else", async () =
   const obj = await OTA.getFile(r2, "deadbeef");
   assert.equal(await obj.text(), "file-bytes");
   assert.equal(await OTA.getFile(r2, "not-there"), null);
+});
+
+// ---- OTA lock: App Check / ID token gate + signed file URLs (sec-ota-lock) ----------------
+const OTA_SECRET = "test-ota-url-secret-fixture-do-not-use-in-prod";
+const HASH64 = "c".repeat(64);
+
+async function primeChannel(env, r2, files) {
+  await r2.put("ota/candidate.json", JSON.stringify({ commit: "lock1", manifestKey: "ota/manifests/lock1.json" }));
+  await r2.put("ota/manifests/lock1.json", JSON.stringify({
+    commit: "lock1", zipHash: HASH64, zipSize: 42,
+    files: files || [{ path: "x.js", hash: HASH64, size: 42 }],
+  }));
+  await OTA.publish(r2, { by: "owner@x.com" });
+  await r2.put("ota/files/" + HASH64, "locked-bytes");
+}
+
+function captureWarn() {
+  const lines = [];
+  const orig = console.warn;
+  console.warn = (...a) => { lines.push(a.map(String).join(" ")); };
+  return {
+    lines,
+    restore() { console.warn = orig; },
+    shadow() { return lines.filter((l) => l.indexOf("[ota-shadow] would-deny") >= 0); },
+  };
+}
+
+test("signFileQuery / verifyFileQuery: round-trip, expired and bad sig rejected", async () => {
+  const now = Math.floor(Date.now() / 1000);
+  const q = await OTA.signFileQuery(OTA_SECRET, HASH64, now);
+  assert.ok(q && q.exp === now + OTA.FILE_URL_TTL_SEC && q.sig && q.query.indexOf("exp=") === 0);
+  assert.equal((await OTA.verifyFileQuery(OTA_SECRET, HASH64, q.exp, q.sig, now)).ok, true);
+  assert.equal((await OTA.verifyFileQuery(OTA_SECRET, HASH64, q.exp, q.sig, q.exp + 1)).reason, "expired");
+  assert.equal((await OTA.verifyFileQuery(OTA_SECRET, HASH64, q.exp, "deadbeef", now)).reason, "bad-sig");
+  assert.equal((await OTA.verifyFileQuery(OTA_SECRET, HASH64, q.exp, "", now)).reason, "missing-sig");
+  assert.equal((await OTA.verifyFileQuery(null, HASH64, q.exp, q.sig, now)).reason, "no-secret");
+  assert.equal(await OTA.signFileQuery(null, HASH64, now), null);
+});
+
+test("shadow (OTA_ENFORCE off): check without token still serves; file without sig still serves and logs would-deny when secret is set", async () => {
+  const { env, r2 } = fakeR2Env();
+  env.OTA_URL_SECRET = OTA_SECRET;
+  await primeChannel(env, r2);
+  const w = captureWarn();
+  try {
+    const check = await onRequest({
+      request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7"),
+      env, params: { path: ["check"] },
+    });
+    assert.equal(check.status, 200);
+    const body = await check.json();
+    assert.equal(body.ota, true);
+    assert.match(body.zipUrl, /\?exp=\d+&sig=[0-9a-f]+$/, "secret set → signed zipUrl even in shadow");
+    assert.ok(w.shadow().some((l) => /missing-auth/.test(l)), "shadow logs would-deny missing-auth: " + JSON.stringify(w.shadow()));
+
+    const bare = await onRequest({
+      request: new Request("https://stewardmd.in/api/ota/file/" + HASH64),
+      env, params: { path: ["file", HASH64] },
+    });
+    assert.equal(bare.status, 200, "shadow still serves unsigned file");
+    assert.equal(await bare.text(), "locked-bytes");
+    assert.ok(w.shadow().some((l) => /missing-sig/.test(l)), "shadow logs would-deny missing-sig");
+  } finally { w.restore(); }
+});
+
+test("shadow without secret: unsigned URLs, no file gate", async () => {
+  const { env, r2 } = fakeR2Env();
+  await primeChannel(env, r2);
+  const w = captureWarn();
+  try {
+    const body = await (await onRequest({
+      request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7"),
+      env, params: { path: ["check"] },
+    })).json();
+    assert.equal(body.zipUrl, "https://stewardmd.in/api/ota/file/" + HASH64, "no secret → unsigned");
+    const file = await onRequest({
+      request: new Request("https://stewardmd.in/api/ota/file/" + HASH64),
+      env, params: { path: ["file", HASH64] },
+    });
+    assert.equal(file.status, 200);
+  } finally { w.restore(); }
+});
+
+test("enforce ON: /check without App Check and without ID token → 401", async () => {
+  const { env, r2 } = fakeR2Env();
+  env.OTA_ENFORCE = "1";
+  env.OTA_URL_SECRET = OTA_SECRET;
+  await primeChannel(env, r2);
+  const res = await onRequest({
+    request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7"),
+    env, params: { path: ["check"] },
+  });
+  assert.equal(res.status, 401);
+  assert.equal((await res.json()).error, "unauthorized");
+});
+
+test("enforce ON: /file with bad or expired sig → 403; valid sig serves", async () => {
+  const { env, r2 } = fakeR2Env();
+  env.OTA_ENFORCE = "1";
+  env.OTA_URL_SECRET = OTA_SECRET;
+  await primeChannel(env, r2);
+  const now = Math.floor(Date.now() / 1000);
+  const good = await OTA.signFileQuery(OTA_SECRET, HASH64, now);
+
+  const missing = await onRequest({
+    request: new Request("https://stewardmd.in/api/ota/file/" + HASH64),
+    env, params: { path: ["file", HASH64] },
+  });
+  assert.equal(missing.status, 403);
+
+  const bad = await onRequest({
+    request: new Request("https://stewardmd.in/api/ota/file/" + HASH64 + "?exp=" + good.exp + "&sig=00"),
+    env, params: { path: ["file", HASH64] },
+  });
+  assert.equal(bad.status, 403);
+
+  const expired = await onRequest({
+    request: new Request("https://stewardmd.in/api/ota/file/" + HASH64 + "?exp=" + (now - 10) + "&sig=" + good.sig),
+    env, params: { path: ["file", HASH64] },
+  });
+  assert.equal(expired.status, 403);
+
+  const ok = await onRequest({
+    request: new Request("https://stewardmd.in/api/ota/file/" + HASH64 + "?" + good.query),
+    env, params: { path: ["file", HASH64] },
+  });
+  assert.equal(ok.status, 200);
+  assert.equal(await ok.text(), "locked-bytes");
+});
+
+test("enforce ON: valid Firebase ID token unlocks /check; manifest download_url carries sig/exp", async () => {
+  // Mint a Firebase ID token against a stub JWKS (same shape as test/cf-access-verify.test.mjs).
+  const b64u = (buf) => Buffer.from(buf).toString("base64url");
+  const kp = await crypto.subtle.generateKey(
+    { name: "RSASSA-PKCS1-v1_5", modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: "SHA-256" },
+    true, ["sign", "verify"]
+  );
+  const pub = await crypto.subtle.exportKey("jwk", kp.publicKey);
+  const jwk = Object.assign({}, pub, { kid: "ota-f1", alg: "RS256", use: "sig" });
+  const now = Math.floor(Date.now() / 1000);
+  const h = b64u(JSON.stringify({ alg: "RS256", kid: "ota-f1", typ: "JWT" }));
+  const p = b64u(JSON.stringify({
+    aud: "stewardmd-498ec", iss: "https://securetoken.google.com/stewardmd-498ec",
+    sub: "ota-user-1", iat: now, exp: now + 600, email: "doc@example.com",
+  }));
+  const idTok = h + "." + p + "." + b64u(await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5", kp.privateKey, new TextEncoder().encode(h + "." + p)
+  ));
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (u, i) => {
+    if (String(u).indexOf("securetoken@system.gserviceaccount.com") >= 0) {
+      return new Response(JSON.stringify({ keys: [jwk] }));
+    }
+    return realFetch(u, i);
+  };
+  try {
+    const { env, r2 } = fakeR2Env();
+    env.OTA_ENFORCE = "1";
+    env.OTA_URL_SECRET = OTA_SECRET;
+    await primeChannel(env, r2, [{ path: "a.js", hash: HASH64, size: 42 }]);
+    const res = await onRequest({
+      request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7&files=1", {
+        headers: { Authorization: "Bearer " + idTok },
+      }),
+      env, params: { path: ["check"] },
+    });
+    assert.equal(res.status, 200);
+    const body = await res.json();
+    assert.equal(body.ota, true);
+    assert.match(body.zipUrl, new RegExp("/api/ota/file/" + HASH64 + "\\?exp=\\d+&sig=[0-9a-f]+$"));
+    assert.ok(Array.isArray(body.files) && body.files.length === 1);
+    assert.match(body.files[0].download_url, /\?exp=\d+&sig=[0-9a-f]+$/);
+    assert.equal(body.files[0].path, "a.js");
+    assert.equal(body.files[0].hash, HASH64);
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});
+
+test("probe stays public (no auth, no sig) under enforce", async () => {
+  const { env } = fakeR2Env();
+  env.OTA_ENFORCE = "1";
+  const res = await onRequest({
+    request: new Request("https://stewardmd.in/api/ota/probe?n=1024"),
+    env, params: { path: ["probe"] },
+  });
+  assert.equal(res.status, 200);
+  assert.equal((await res.text()).length, 1024);
 });
