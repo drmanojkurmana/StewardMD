@@ -53,6 +53,10 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   Ophthalmós Learn row is a StewardMD-side edit to a synced file: its hash in
   `test/ophthalmos-sync.json` was regenerated here, and the same change must be
   ported to the Ophthalmós module repo before the next sync or it is overwritten.
+- **Lesson and PYQ figures carry it in-line (owner 2026-11-13):** before this only the full-screen viewer did.
+  `prep-lessons.js` wmImg/wmOv put the overlay on plain, spot, label and compare figures; `prep-pyq.js figure` on
+  question images. `.pn-wmh` hugs the picture (`--ar` from lesson data, or set on load for PYQ) so the corner lockup
+  never lands in a letterbox. Checked in `test/run-prep-lessons-ui.mjs` (step 5).
 - **Watermark (owner 2026-11-11):** `image-watermark.js` overlays carry two looks and `image-viewer.css` picks by
   ancestry: inside `#smdPrep` (PrepNucleus, exists only while open) or `.igl-overlay` (this library, grid and viewer) =
   one faint centre PrepNucleus mark + the "PrepNucleus | Powered by StewardMD" lockup in the bottom right corner;
@@ -61,3 +65,8 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   restores. Gotcha: `.igl-viewer` needs its `z-index: 5; isolation: isolate`; without it the grid's thumbnail
   overlays (z-index 1) painted through the viewer as a 5 x 3 grid of PrepNucleus marks over the image and caption
   panel on iPad. Tests: `test/image-report.test.mjs`, `test/run-image-report-ui.mjs`.
+- **Where to read (owner 2026-11-13):** each entry may carry `ls`/`lm`/`lsj`/`lst` (the PrepNucleus lesson that shows it,
+  best title match when several reuse the image) and `ka`/`kn` (the shipped KB article holding it, via
+  `kb/tools/kb-placement.mjs`). The viewer shows "Open the lesson" (Pro; paywall without) and "Read the article"
+  (opens `SMD_KB.open(ka)` and scrolls to the figure); entries with neither keep the old single link.
+  Test: `test/run-imglib-links-ui.mjs`. Larger entries leave a little less of each system's Commons budget.

@@ -125,6 +125,9 @@ if [ -d assets/vendor ]; then mkdir -p "$WWW/assets/vendor"; cp -R assets/vendor
 if [ -d data/neo ]; then mkdir -p "$WWW/data/neo"; cp data/neo/*.json "$WWW/data/neo/"; fi
 # Adult normal values (adult-ref.js fetches /data/ref/adult-ref-values.json).
 if [ -d data/ref ]; then mkdir -p "$WWW/data/ref"; cp data/ref/*.json "$WWW/data/ref/"; fi
+# Today in Medical History (today-history.js fetches /data/history/MM.json). source/ is the raw input, not shipped.
+if [ -d data/history ]; then mkdir -p "$WWW/data/history"; cp data/history/*.json "$WWW/data/history/"; fi
+if [ -d data/history/img ]; then mkdir -p "$WWW/data/history/img"; cp data/history/img/*.webp "$WWW/data/history/img/" 2>/dev/null || true; fi
 [ -f data/clinical-index.js ] && cp data/clinical-index.js "$WWW/"
 # FDA-label monographs for drugs with no bundled record (scripts/build-fda-monographs.py): one small JSON per
 # drug, fetched by offline-clinical.js when that drug is opened. Not in the bundle, so startup stays small.
@@ -333,6 +336,9 @@ if [ -f prep/taxonomy.json ]; then
   # Natural lesson voice (prep-voice.js): nothing to copy here. The runtime ships from vendor/phonon-tts (copied with vendor/), the
   # 64.5 MB model is not bundled: the app downloads it from Hugging Face on the first tap of Play.
   # Interactive figures (fig-viewer.js): self-contained pages built with the Anima kit (MIT), dark + light, with their licence.
+  # Guided tour helpers (fig-guide.js, loaded beside fig-viewer.js). The root *.js loop already copies it;
+  # this keeps the file if that loop ever gains an exclude.
+  [ -f fig-guide.js ] && cp fig-guide.js "$WWW/"
   if [ -d prep/figures ]; then
     mkdir -p "$WWW/prep/figures" && cp prep/figures/*.html prep/figures/figures.json prep/figures/ANIMA-LICENSE.txt prep/figures/ANATOMY-LICENSE.txt "$WWW/prep/figures/"
     # Mechanism mastery (fig-viewer.js "Steps" sheet): Trigger, Target, Mechanism, Manifestation, Intervention per figure.
@@ -398,6 +404,22 @@ if [ "${KB_ENCRYPT:-}" = "1" ]; then
   for f in $KBENC; do rm -f "$WWW/$f"; done   # ship ONLY the .enc; the plaintext KB never reaches the bundle
   [ -f "$WWW/index.html" ] && sed -i.bak 's/window\.SMD_KB_ENC=0;/window.SMD_KB_ENC=1;/' "$WWW/index.html" && rm -f "$WWW/index.html.bak"
   echo "  KB ENCRYPTED (SMD_KB_ENC=1, .enc only; plaintext KB dropped from www/)"
+fi
+
+# Content JSON encryption (Security 4 / SMDE1): AES-256-GCM in place under www/{kb,data,prep/lessons,
+# prep/bank,prep/nucleus360}. Release CI sets CONTENT_ENCRYPT=1 (or inherits it from KB_ENCRYPT=1) with
+# SMD_CONTENT_KEY + SMD_CONTENT_KEY_ID; local dev skips and ships plain JSON unless asked.
+if [ "${CONTENT_ENCRYPT:-}" = "1" ] || { [ "${KB_ENCRYPT:-}" = "1" ] && [ -n "${SMD_CONTENT_KEY:-}" ]; }; then
+  export CONTENT_ENCRYPT=1
+  [ -n "${SMD_CONTENT_KEY:-}" ] && [ -n "${SMD_CONTENT_KEY_ID:-}" ] || {
+    echo "  CONTENT_ENCRYPT=1 requires env SMD_CONTENT_KEY (base64 32B) and SMD_CONTENT_KEY_ID"; exit 1;
+  }
+  node "$ROOT/tools/encrypt-bundle.mjs" --root "$WWW" --require || { echo "  content encrypt FAILED"; exit 1; }
+  echo "  CONTENT JSON ENCRYPTED (SMDE1 under kb/ data/ prep/{lessons,bank,nucleus360})"
+elif [ -n "${CI:-}${GITHUB_ACTIONS:-}" ] && [ "${SMD_RELEASE:-}" = "1" ]; then
+  echo "  CONTENT ENCRYPT missing in CI release build (set CONTENT_ENCRYPT=1 + SMD_CONTENT_KEY + SMD_CONTENT_KEY_ID)"; exit 1
+else
+  echo "  content JSON left plain (set CONTENT_ENCRYPT=1 to encrypt)"
 fi
 
 # Connect EMR owner console (bundled so the owner-only in-app "Connect EMR" button in home.js opens it in-app).

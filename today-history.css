@@ -1,0 +1,123 @@
+/* Today in Medical History (today-history.js). The home Pro banner flips to today's event and back
+   every 5 s; the sheet works in both themes (body.dark). */
+/* Owner's type spec (2026-11-13): event title Playfair Display SemiBold; date and category Inter Medium uppercase;
+   year Merriweather; description Inter Regular; CTA Inter SemiBold. Inter Variable is the app's own @font-face. */
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:swap;src:url(/assets/fonts/playfair-display-latin.woff2) format('woff2')}
+@font-face{font-family:'Merriweather';font-style:normal;font-weight:300 900;font-display:swap;src:url(/assets/fonts/merriweather-latin.woff2) format('woff2')}
+:root{--th-sans:'Inter Variable','Inter',system-ui,sans-serif;--th-title:'Playfair Display',Georgia,serif;--th-year:'Merriweather',Georgia,serif;--th-gold:#e8c67a;--th-gold-2:#f6e3b4;--th-cream:#fbf4e4}
+
+#homeV2.rnav .rnav-greet .hrf-date[data-th]{cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:6px}
+#homeV2.rnav .rnav-greet .hrf-date[data-th]:focus-visible{outline:2px solid var(--th-gold);outline-offset:3px}
+
+/* ---- banner flip: fold to 90deg (0.22 s), swap faces, unfold (0.3 s) ---- */
+#homeV2#homeV2.rnav .hrf-banner.th-flipout{animation:th-fold-out .22s cubic-bezier(.55,0,.85,.35) both}
+#homeV2#homeV2.rnav .hrf-banner.th-flipin{animation:th-fold-in .3s cubic-bezier(.15,.75,.3,1.1) both}
+@keyframes th-fold-out{from{transform:perspective(900px) rotateX(0)}to{transform:perspective(900px) rotateX(90deg) scale(.98)}}
+@keyframes th-fold-in{from{transform:perspective(900px) rotateX(-90deg) scale(.98)}to{transform:perspective(900px) rotateX(0)}}
+/* swipe to flip (today-history.js armSwipe): sideways or top to bottom, under the finger. Every drag that starts
+   on the banner is a flip, so the page does not scroll from here; it scrolls from everywhere else. */
+#homeV2.rnav .hrf-banner[data-th-swipe]{touch-action:none;-webkit-user-select:none;user-select:none}
+#homeV2.rnav .hrf-banner.th-fade>*{transition:opacity .2s ease;opacity:0}
+
+/* the history face: same banner, its own words and picture. The banner never changes height. */
+#homeV2.rnav .hrf-banner .th-face{display:none}
+#homeV2.rnav .hrf-banner.th-back::after{opacity:0}
+#homeV2.rnav .hrf-banner.th-back>:not(.th-face){visibility:hidden}
+#homeV2.rnav .hrf-banner.th-back .th-face{position:absolute;inset:0;z-index:auto;display:block;border-radius:inherit;overflow:hidden;color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(143,240,210,.28);
+  background:linear-gradient(118deg,#021f18 0%,#04412f 46%,#076247 78%,#0a7a58 100%)}
+/* Live gradient (owner, 2026-11-13): the face has its own ground. Emerald by default; deep chakra-blue night with a
+   saffron glow and an India-green glow when the day's headline is Indian. Soft light pools drift on the compositor
+   (transform only) while the face shows; one sheen crosses as it arrives. Text and picture sit above (positioned
+   later in the face), and the picture's screen blend still sees this ground, so its black melts into it. */
+#homeV2.rnav .hrf-banner.th-back .th-face::before{content:"";position:absolute;inset:-45%;pointer-events:none;
+  background:radial-gradient(28% 34% at 30% 34%,rgba(52,211,153,.42),transparent 70%),
+    radial-gradient(30% 38% at 70% 66%,rgba(143,240,210,.26),transparent 70%),
+    radial-gradient(24% 30% at 58% 28%,rgba(16,185,129,.22),transparent 70%);
+  animation:thDrift 16s ease-in-out infinite alternate;will-change:transform}
+#homeV2.rnav .hrf-banner.th-back .th-face::after{content:"";position:absolute;top:0;bottom:0;left:0;width:55%;pointer-events:none;
+  background:linear-gradient(100deg,transparent 0%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.10) 55%,transparent 100%);
+  transform:translateX(-120%);animation:thSheen 2.2s cubic-bezier(.3,.6,.3,1) .45s 1 forwards}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-india{box-shadow:inset 0 0 0 1px rgba(255,200,150,.26);
+  background:linear-gradient(118deg,#0e1428 0%,#0a1121 55%,#07170f 100%)}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-india::before{
+  background:radial-gradient(36% 44% at 37% 39%,rgba(255,140,40,.55),transparent 72%),
+    radial-gradient(38% 46% at 63% 62%,rgba(22,150,60,.6),transparent 72%),
+    radial-gradient(16% 20% at 50% 50%,rgba(255,244,226,.12),transparent 70%)}
+#homeV2#homeV2.rnav .hrf-banner .th-face.th-india .th-face-ey{color:#ffd6a0}
+/* The MaiK Aurora (WebGL, today-history.js) replaces the CSS light pools when it runs, over a darker ground. */
+#homeV2.rnav .hrf-banner.th-back .th-face canvas.th-aurora{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-gl::before{display:none}
+#homeV2#homeV2.rnav .hrf-banner .th-face.th-gl .th-face-txt{text-shadow:0 1px 2px rgba(0,0,0,.42),0 0 14px rgba(0,0,0,.25)}
+#homeV2.rnav .hrf-banner.th-back .th-face.th-gl:not(.th-india){background:linear-gradient(118deg,#01130d 0%,#022218 55%,#032c20 100%)}
+@keyframes thDrift{0%{transform:translate3d(-7%,-5%,0) rotate(-4deg)}100%{transform:translate3d(7%,5%,0) rotate(6deg)}}
+@keyframes thSheen{to{transform:translateX(260%)}}
+#homeV2#homeV2.rnav .hrf-banner .th-face-txt{position:absolute;left:16px;top:10px;bottom:10px;right:30%;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
+#homeV2#homeV2.rnav .hrf-banner .th-face-txt>*{flex:none;margin:0}
+#homeV2#homeV2.rnav .hrf-banner .th-face-ey{margin-right:-36%!important;display:flex;align-items:center;gap:6px;min-width:0;white-space:nowrap;font:500 10px/1.3 var(--th-sans);letter-spacing:.08em;text-transform:uppercase;color:var(--hrf-mint,#8ff0d2)}
+#homeV2#homeV2.rnav .hrf-banner .th-dot{width:3px;height:3px;border-radius:50%;background:currentColor;flex:none;opacity:.8}
+#homeV2#homeV2.rnav .hrf-banner .th-face-lg,#homeV2#homeV2.rnav .hrf-banner .th-face-sm{overflow:hidden;text-overflow:ellipsis}#homeV2#homeV2.rnav .hrf-banner .th-face-sm{display:none}
+#homeV2#homeV2.rnav .hrf-banner .th-face-tt{font:600 18px/1.16 var(--th-title);letter-spacing:0;font-variant-numeric:lining-nums;color:#fff;margin-top:3px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+#homeV2#homeV2.rnav .hrf-banner .th-face-yr{display:flex;align-items:center;gap:5px;font:400 12px/1.3 var(--th-year);font-variant-numeric:lining-nums tabular-nums;color:rgba(255,255,255,.92)}
+#homeV2#homeV2.rnav .hrf-banner .th-cal{width:12px;height:12px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round}
+#homeV2#homeV2.rnav .hrf-banner .th-face-sm-txt{font:400 11.5px/1.38 var(--th-sans);color:rgba(255,255,255,.86);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#homeV2#homeV2.rnav .hrf-banner .th-face-go{position:absolute;right:12px;bottom:9px;display:flex;align-items:center;gap:2px;font:600 11px/1 var(--th-sans);color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.35)}
+#homeV2#homeV2.rnav .hrf-banner .th-face-go svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#homeV2#homeV2.rnav .hrf-banner .th-face-pic{mix-blend-mode:screen;position:absolute;right:-4px;top:24px;bottom:16px;width:34%;display:grid;place-items:center;pointer-events:none}
+#homeV2#homeV2.rnav .hrf-banner .th-face-img{width:100%;height:100%;object-fit:contain;object-position:right center}
+#homeV2#homeV2.rnav .hrf-banner .th-face-art{width:92%;height:92%;fill:none;stroke:rgba(190,250,230,.78);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 6px rgba(143,240,210,.45))}
+#homeV2#homeV2.rnav .hrf-banner .th-face-art .a-ring{stroke-opacity:.4;stroke-dasharray:3 4}
+#homeV2#homeV2.rnav .hrf-banner .th-face-art .a-hi{stroke:#ffd27a;stroke-width:2.6;filter:drop-shadow(0 0 5px rgba(255,190,90,.8))}
+#homeV2#homeV2.rnav .hrf-banner .th-face-art .a-glow{fill:rgba(143,240,210,.14);stroke-opacity:.6}
+/* the picture settles in a beat after the flip */
+#homeV2#homeV2.rnav .hrf-banner.th-flipin .th-face-pic{animation:th-pic .5s cubic-bezier(.2,.8,.2,1) .12s both}
+@keyframes th-pic{from{opacity:0;transform:translateX(8px) scale(.94)}to{opacity:1;transform:none}}
+@media (max-width:360px){#homeV2#homeV2.rnav .hrf-banner .th-face-lg{display:none}#homeV2#homeV2.rnav .hrf-banner .th-face-sm{display:inline}#homeV2#homeV2.rnav .hrf-banner .th-face-txt{left:13px;right:28%}#homeV2#homeV2.rnav .hrf-banner .th-face-tt{font-size:16.5px}#homeV2#homeV2.rnav .hrf-banner .th-face-pic{width:30%}}
+@media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-banner.th-flipout,#homeV2#homeV2.rnav .hrf-banner.th-flipin,#homeV2#homeV2.rnav .hrf-banner.th-flipin .th-face-pic,#homeV2.rnav .hrf-banner.th-back .th-face::before{animation:none}#homeV2.rnav .hrf-banner.th-back .th-face::after{display:none}}
+
+/* ---- sheet ---- */
+#thSheet{--th-bg:#fbfaf6;--th-ink:#13212a;--th-muted:#5b6b78;--th-line:#e6e2d6;--th-yr:#8a6a1f;--th-tag-bg:#f3ecd9;--th-tag-ink:#6b5216;--th-acc:#0f766e;--th-in-bg:#e6f4ef;--th-in-ink:#0b5f4a}
+body.dark #thSheet{--th-bg:#0f1a21;--th-ink:#e8eef2;--th-muted:#9aabb8;--th-line:#22323d;--th-yr:#e8c67a;--th-tag-bg:#2a2617;--th-tag-ink:#ecd59a;--th-acc:#5eead4;--th-in-bg:#12332c;--th-in-ink:#8ff0d2}
+.th-scrim{position:fixed;inset:0;z-index:9000;background:rgba(6,14,20,.42);opacity:0;pointer-events:none;transition:opacity .28s ease}
+.th-scrim.on{opacity:1;pointer-events:auto}
+.th-sheet{position:fixed;left:0;right:0;bottom:0;z-index:9001;max-height:86vh;max-height:86dvh;display:flex;flex-direction:column;
+  background:var(--th-bg);color:var(--th-ink);border-radius:22px 22px 0 0;box-shadow:0 -12px 40px rgba(0,0,0,.22);
+  padding:0 0 env(safe-area-inset-bottom);transform:translateY(104%);visibility:hidden;
+  transition:transform .42s cubic-bezier(.2,.9,.25,1),visibility 0s linear .42s;
+  font-family:var(--th-sans)}
+.th-sheet.on{transform:none;visibility:visible;transition:transform .42s cubic-bezier(.2,.9,.25,1),visibility 0s}
+@media (min-width:700px){.th-sheet{left:50%;right:auto;width:560px;margin-left:-280px}}
+.th-grab{width:38px;height:5px;border-radius:99px;background:var(--th-line);margin:8px auto 2px;flex:none}
+.th-head{display:flex;align-items:flex-start;gap:12px;padding:8px 16px 4px 20px;flex:none}
+.th-ttl{flex:1;min-width:0}
+.th-ey{font:500 12px/1.3 var(--th-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--th-yr)}
+.th-date{margin:3px 0 0;font:600 30px/1.15 var(--th-title);letter-spacing:0;font-variant-numeric:lining-nums;color:var(--th-ink);outline:none}
+.th-x,.th-step{flex:none;display:inline-grid;place-items:center;width:44px;height:44px;border-radius:999px;border:0;background:transparent;color:var(--th-muted);cursor:pointer}
+.th-x svg,.th-step svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.th-x:focus-visible,.th-step:focus-visible,.th-today:focus-visible,.th-src:focus-visible{outline:2px solid var(--th-acc);outline-offset:2px}
+.th-nav{display:flex;align-items:center;justify-content:space-between;padding:0 8px 6px 10px;border-bottom:1px solid var(--th-line);flex:none}
+.th-today{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--th-line);background:transparent;color:var(--th-acc);font:600 13px var(--th-sans);cursor:pointer}
+.th-body{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:6px 20px 18px}
+.th-list{list-style:none;margin:0;padding:0}
+.th-ev{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--th-line)}
+.th-ev:last-child{border-bottom:0}
+.th-yr{font:400 21px/1.1 var(--th-year);font-variant-numeric:lining-nums tabular-nums;color:var(--th-yr);padding-top:2px}
+.th-yr-ob{font-size:13px;line-height:1.25;padding-top:4px}
+.th-ev.th-ev-ob{background:var(--th-tag-bg);margin:8px -12px 0;padding:16px 12px;border-radius:12px;border-bottom:0}
+.th-bd{min-width:0}
+.th-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.th-cat,.th-sp{font:500 10.5px/1 var(--th-sans);letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border-radius:6px}
+.th-cat{background:var(--th-tag-bg);color:var(--th-tag-ink)}
+#thSheet .th-in{font:500 10.5px/1 var(--th-sans);letter-spacing:.06em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:var(--th-in-bg);color:var(--th-in-ink)}
+.th-sp{color:var(--th-muted);border:1px solid var(--th-line)}
+.th-tt{margin:0;font:600 18.5px/1.28 var(--th-title);font-variant-numeric:lining-nums;color:var(--th-ink);overflow-wrap:anywhere}
+.th-sm{margin:6px 0 0;font:400 14.5px/1.55 var(--th-sans);color:var(--th-ink);opacity:.86;overflow-wrap:anywhere}
+.th-src{display:inline-block;margin-top:8px;padding:4px 0;font:600 13px var(--th-sans);color:var(--th-acc);text-decoration:none}
+.th-msg{padding:24px 0;color:var(--th-muted);font-size:14px}
+.th-foot{margin:6px 0 0;font-size:12px;line-height:1.4;color:var(--th-muted)}
+@media (max-width:360px){.th-ev{grid-template-columns:52px 1fr;gap:10px}.th-yr{font-size:18px}.th-body{padding:4px 16px 16px}}
+@media (prefers-reduced-motion:reduce){.th-sheet,.th-sheet.on,.th-scrim{transition:none}}

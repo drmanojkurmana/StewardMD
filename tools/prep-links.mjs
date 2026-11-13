@@ -184,11 +184,14 @@ export function drugLexicon(root = ROOT) {
    kept as acronyms and only match upper case in the original text. A phrase that two targets of the same kind share
    is dropped (it cannot say which article is meant). */
 export function phrases(docs, kind) {
-  const seen = new Map(), out = [];
+  const seen = new Map(), owners = new Map(), out = [];
   for (const d of docs) {
     const names = new Map();
     for (const v of variants(d.name)) names.set(v, 0);
-    for (const a of d.aliases || []) for (const v of variants(a)) if (!names.has(v)) names.set(v, 1);
+    // An overview article with a compound title ("Cervical and Uterine Pathology: HPV, Carcinoma and Leiomyoma") lists
+    // its subtopics as aliases ("Cervical carcinoma FIGO"); those name other articles' conditions, so only its title counts.
+    const overview = /[:,]/.test(String(d.name || ""));
+    if (!overview) for (const a of d.aliases || []) for (const v of variants(a)) if (!names.has(v)) names.set(v, 1);
     const nameW = new Set(); for (const v of variants(d.name)) for (const x of words(v)) if (x.length >= 5 && !GENERIC.has(x)) nameW.add(x);
     for (const [n, isAlias] of names) {
       const acr = /^[A-Z][A-Z0-9]{2,5}$/.test(n.trim());
@@ -203,12 +206,17 @@ export function phrases(docs, kind) {
       if (isAlias && !acr && w.length === 1 && !(w[0].length >= 7 && DISEASE_WORD.test(w[0]) && !nameW.has(w[0]))) continue;
       if (isAlias && !acr && kind === "pr" && !w.some((x) => nameW.has(x))) continue;
       const key = (acr ? "A:" : "") + w.join(" ");
-      if (seen.has(key)) { if (seen.get(key) !== d.id) seen.set(key, null); continue; }
+      // One article whose own NAME is the phrase keeps it against articles that only list it as an alias ("cervical
+      // cancer" is the Cervical Cancer article, not the Gynecologic Malignancies overview that aliases it).
+      if (!isAlias) owners.set(key, owners.has(key) && owners.get(key) !== d.id ? null : d.id);
+      if (seen.has(key)) { if (seen.get(key) !== d.id) seen.set(key, null); if (!isAlias) out.push({ w, k: kind, id: d.id, title: d.name, acr, key }); continue; }
       seen.set(key, d.id);
       out.push({ w, k: kind, id: d.id, title: d.name, acr, key });
     }
   }
-  return out.filter((p) => seen.get(p.key) === p.id);
+  const keep = (p) => { const o = owners.get(p.key); return o !== undefined ? o === p.id : seen.get(p.key) === p.id; };
+  const done = new Set();
+  return out.filter((p) => { if (!keep(p) || done.has(p.key)) return false; done.add(p.key); return true; });
 }
 const DISEASE_WORD = /(itis|oma|omas|osis|oses|iasis|emia|aemia|penia|pathy|plasia|trophy|algia|ectasis|cele|rrhea|rrhoea|uria|megaly|sclerosis|ism|philia|ptosis|lepsy|plegia)$/;
 const GENERIC_PHRASE = new Set(["squamous cell carcinoma", "adenocarcinoma", "small cell carcinoma", "large cell carcinoma", "transitional cell carcinoma", "carcinoma in situ", "metastasis", "metastases", "basal cell", "cell carcinoma", "skin cancer", "heart disease", "lung disease", "liver disease", "kidney disease", "renal disease", "eye disease", "bone disease", "blood disorder", "high blood pressure", "low blood pressure"]);

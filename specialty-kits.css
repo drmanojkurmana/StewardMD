@@ -159,8 +159,8 @@ html.oe-kit-calc .icd-overlay { z-index: 12015; }
 .kit .kit-bz { fill: color-mix(in srgb, var(--primary) 6%, var(--sc-lowest)); stroke: var(--outline-variant); stroke-width: 1.2; cursor: pointer; }
 .kit .kit-bz:hover, .kit .kit-bz:focus { stroke: var(--primary); outline: none; }
 .kit .kit-bz.on { fill: color-mix(in srgb, var(--error) 22%, var(--sc-lowest)); stroke: var(--error); }
-.kit .kit-bzn { fill: var(--error); font: 800 9px var(--q-sans); pointer-events: none; }
-.kit .kit-bzl { fill: var(--secondary); font: 700 9px var(--q-sans); }
+.kit .kit-bzn { fill: var(--error); font: 800 10px var(--q-sans); pointer-events: none; }
+.kit .kit-bzl { fill: var(--secondary); font: 700 10px var(--q-sans); }
 .kit .kit-lcg { font-size: 12.5px; }
 .kit .kit-lcg th { white-space: nowrap; }
 .kit .kit-lcg td { text-align: center; min-width: 48px; }
@@ -236,3 +236,66 @@ body.dark .kit .kit-foot { background: var(--sc-lowest); }
 #smdKitHost .kit-hfoot { display: flex; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--outline-variant); }
 #smdKitHost .kit-hexport { flex: 1 1 0; min-height: 48px; border: 0; border-radius: 12px; background: var(--primary); color: var(--on-primary); font: 700 15px var(--q-sans); display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; }
 #smdKitHost .kit-hexport.ghost { background: var(--sc-high); color: var(--on-surface); }
+
+/* ---- Compact kit screen (flag smd_kits_compact, default on, 2026-11-12) ------------------------
+ * The first input used to start below a kicker, a title row, an amber box and a Documents button
+ * (about 250 px of a 844 px phone). Now: one header row with two small actions, a one-line save note,
+ * and each tool's title sticks while its inputs scroll, carrying the live result. */
+/* Scrollers that hold a kit say how much padding they have, so sticky parts can sit flush with the edge
+   (Chrome and WebKit stop a sticky box at the padding edge, which left page content showing under the bar). */
+:is(#smdKit, #smdKitHost) .kit-sheet-body { --kit-pt: 12px; --kit-pb: calc(28px + env(safe-area-inset-bottom, 0px)); }
+#smdOpdEmr .oe-canvas { --kit-pt: 20px; --kit-pb: calc(24px + env(safe-area-inset-bottom, 0px)); }
+#smdOpdEmr .oe-toolsheet-b { --kit-pt: 0px; --kit-pb: 16px; }
+.kit.kit-c .kit-foot { bottom: calc(-1 * var(--kit-pb, 0px)); margin-bottom: calc(-1 * var(--kit-pb, 0px)); }
+#smdOpdEmr .oe-toolsheet-b .kit.kit-c .kit-foot, #smdKitHost .kit.kit-c .kit-foot { padding-bottom: 8px; }
+/* The chip row scrolls sideways: fade the right edge so a cut-off chip reads as "more this way". */
+.kit.kit-c .kit-chips { padding-right: 28px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 28px), transparent); }
+
+.kit .kit-head-c { align-items: center; flex-wrap: wrap; gap: 8px; }
+.kit .kit-head-c h2 { flex: 1 1 10ch; min-width: min(10ch, 100%); overflow-wrap: normal; hyphens: auto; margin: 0; font: 750 20px/1.2 var(--q-sans); text-wrap: balance; }
+.kit .kit-hacts { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; }
+.kit .kit-hbtn { display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 4px 10px; border: 1px solid var(--outline-variant); border-radius: 10px; background: var(--sc-lowest); color: var(--on-surface); font: 600 13px var(--q-sans); white-space: nowrap; cursor: pointer; }
+.kit .kit-hbtn .kit-ic { font-size: 18px; color: var(--primary); }
+.kit .kit-hbtn.kit-link { color: var(--primary); }
+.kit .kit-hstar { justify-content: center; width: 40px; min-height: 40px; padding: 0; }
+.kit .kit-head-c .kit-mine.kit-hstar { display: inline-flex; align-items: center; border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--outline-variant)); border-radius: 10px; background: color-mix(in srgb, var(--primary) 10%, var(--sc-lowest)); }
+.kit .kit-head-c .kit-mine .kit-ic { font-size: 20px; }
+/* 40 px controls get a 44 px+ hit area without growing the row. */
+.kit .kit-hbtn { position: relative; }
+.kit .kit-hbtn::after { content: ""; position: absolute; inset: -4px -2px; }
+.kit .kit-savenote { display: flex; align-items: flex-start; gap: 6px; margin: -4px 0 0; color: var(--on-surface-variant); font: 500 12.5px/1.45 var(--q-sans); }
+.kit .kit-savenote .kit-ic { font-size: 16px; margin-top: 1px; color: var(--kit-amber); }
+
+/* Sticky tool title with the live result. Covers the card's own padding so inputs pass under it cleanly. */
+.kit.kit-c .kit-thead { position: sticky; top: calc(-1 * var(--kit-pt, 0px)); z-index: 2; display: flex; flex-direction: column; gap: 6px; margin: -14px -14px 0; padding: 12px 14px 8px; border-radius: 16px 16px 0 0; background: var(--sc-lowest); box-shadow: 0 1px 0 var(--sc-high); }
+.kit .kit-sum { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 40px; padding: 6px 10px 6px 12px; border: 0; border-radius: 10px; background: color-mix(in srgb, var(--primary) 10%, var(--sc-lowest)); color: var(--primary); font: 700 14.5px/1.3 var(--q-sans); font-variant-numeric: tabular-nums; text-align: left; cursor: pointer; }
+.kit .kit-sum[hidden] { display: none; }
+.kit .kit-sum span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kit .kit-sum .kit-ic { flex: 0 0 auto; font-size: 18px; opacity: .8; }
+@media (max-width: 380px) { .kit.kit-c .kit-thead { margin: -12px -12px 0; padding: 10px 12px 8px; } }
+@media (prefers-reduced-motion: no-preference) { .kit .kit-sum { transition: background-color .15s ease-out; } .kit .kit-sum:active { background: color-mix(in srgb, var(--primary) 18%, var(--sc-lowest)); } }
+/* The legal line: 9.5 px was below a comfortable reading size on a phone. */
+.kit.kit-c .kit-duty { font-size: 12px; opacity: .85; }
+
+/* ---- Accessibility pass (2026-11-12; measured at 390 px across all 26 kits, light and dark) -------
+ * Not behind the compact flag: these are fixes, not layout choices. */
+/* Dark OPD: the EMR keeps its light teal (#00685f) in dark mode, which put kit links, legends, source links,
+   the Assign pill and the result line at 2.37:1 on the dark card. The kit takes the dark teal the Home sheet
+   already uses: #3fc7b3 on #1f2325 = 7.57:1; button text #04322c on #3fc7b3 = 6.70:1. */
+body.dark #smdOpdEmr .kit { --primary: #3fc7b3; --on-primary: #04322c; }
+/* A visible, themed focus ring for keyboard and switch users (the browser default was near-black, lost on dark). */
+.kit :is(button, a[href], summary, input[type="checkbox"], input[type="radio"]):focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.kit .kit-inp:focus-visible { border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 30%, transparent); }
+/* Text floor: nothing readable under 12 px (units, hints, table heads, jaw labels, tooth numbers, legal line). */
+.kit .kit-fl small { font-size: 12px; }
+.kit .kit-hint { font-size: 12.5px; }
+.kit .kit-table th, .kit .kit-jaw-label { font-size: 12px; }
+.kit .kit-tooth small { font-size: 12px; }
+.kit .kit-duty { font-size: 12px; }
+/* Tap targets: the field mic stays 36 px to sit inside the text box, with a 44 px hit area; source links
+   get a full-height row instead of a 15 px line of text. */
+.kit .kit-mic::after { content: ""; position: absolute; inset: -4px; }
+.kit .kit-src a { display: inline-block; padding: 13px 0 12px; }
+/* Sticky parts must not cover the field that has focus (WCAG 2.4.11): leave room for the kit bar and a tool title. */
+:is(#smdKit, #smdKitHost) .kit-sheet-body, #smdOpdEmr .oe-canvas:has(.kit), #smdOpdEmr .oe-toolsheet-b { scroll-padding: 120px 0 80px; }
+@media (prefers-reduced-motion: reduce) { :is(#smdKit, #smdKitHost) .kit-sheet-body, #smdOpdEmr .oe-canvas { scroll-behavior: auto; } }

@@ -190,7 +190,7 @@
   function markLevels(items) { (items || []).forEach(function (it) { if (it && it.vh === true) it.d = 4; }); return items; }
   // A stem that reads a picture the item does not carry ("The radiograph of skull is suggestive of") is flagged, so no
   // test, practice or Nucleus360 set shows an unanswerable question (owner 2026-11-08). Run after fixes: a fix can add the image.
-  function flagNoImage(items) { (items || []).forEach(function (it) { if (ASSESS && ASSESS.needsImage && ASSESS.needsImage(it) && !(it.flags && it.flags.indexOf("img-missing") >= 0)) it.flags = (it.flags || []).concat("img-missing"); }); return items; }
+  function flagNoImage(items) { (items || []).forEach(function (it) { if (ASSESS && ASSESS.fourOptions) ASSESS.fourOptions(it); if (ASSESS && ASSESS.needsImage && ASSESS.needsImage(it) && !(it.flags && it.flags.indexOf("img-missing") >= 0)) it.flags = (it.flags || []).concat("img-missing"); }); return items; }
   function shuffle(a, rnd) { rnd = rnd || Math.random; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   // Custom module: n questions from the given items, optionally one difficulty, spread across modules and,
   // since topic-diverse selection, across concepts too: each module pool is concept-ordered first, then round-robin
@@ -570,6 +570,9 @@
      become tags. Old MedMCQA explanations use "*" as an inline bullet ("*Corkscrew ... *Represents ..."): legacyExp
      turns two or more of those into list lines and drops a lone leading one. */
   function escH(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  /* Strip per-user bank watermark zero-width marks (server embeds them in explanations). Use for TTS,
+   * search/figure matching and any compare; leave them in the HTML render so copy-paste still carries the mark. */
+  function stripWmMarks(s) { return String(s == null ? "" : s).replace(/[\u200b\u200c\u200d\u2060\ufeff]/g, ""); }
   function inlineMd(s) { return escH(s).replace(/\*\*(?=\S)([^*]*?\S)\*\*/g, "<b>$1</b>").replace(/\*/g, ""); }
   function cellsOf(l) { return l.trim().replace(/^\|/, "").replace(/\|\s*$/, "").split("|").map(function (c) { return c.trim(); }); }
   var TBL_SEP = /^\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)*\|?\s*$/;
@@ -803,6 +806,9 @@
   function getJSON(url) {
     if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && isBankUrl(url)) {
       return G.PREP_BANK_CLIENT.fetchBankJSON(url);
+    }
+    if (G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON) {
+      return G.SMD_CONTENT.fetchJSON(url, { cache: "no-cache" });
     }
     return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
   }
@@ -1090,8 +1096,10 @@
           });
         }
         flagNoImage(items);
-        if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-        return items;
+        return holdBlocked(items, sid).then(function () {
+          if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+          return items;
+        });
       });
     });
   }
@@ -1162,9 +1170,11 @@
       return Promise.all((g.members || []).map(function (m) { return fixesFor(m[1]); })).then(function (fxs) {
         fxs.forEach(function (fx) { items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); }); });
         flagNoImage(items);
-        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-        writeBackXCounts(g, bankU, unionItems(ovs));
-        return items;
+        return holdBlocked(items, sid).then(function () {
+          if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+          writeBackXCounts(g, bankU, unionItems(ovs));
+          return items;
+        });
       });
     });
   }
@@ -1205,6 +1215,13 @@
   // Item-quality sidecar (tools/prep-quality.mjs): quality/index.json names the current per-subject files
   // (short cache); each subject file is immutable and cached like module files, so tests stay filtered
   // offline. Absent = {} (every visible item stays eligible, as before the sidecar existed).
+  /* Quality-blocked items (requires_review / rejected / retired, disputed key) are held at load, so every pool that reads
+     loadModule (practice, plans, custom, boss and play modes) skips them, not only the tests that pass the sidecar. */
+  function holdBlocked(items, sid) {
+    return loadQuality([sid]).then(function (q) {
+      (items || []).forEach(function (it) { if (it && !it.hold && qualBlocked(q[it.id])) it.hold = "quality"; });
+    }, function () {});
+  }
   function loadQuality(subs) {
     if (!st.qualIxP) st.qualIxP = getJSON(API + "quality/index.json").then(function (ix) { return ix && ix.subjects ? ix : null; }, function () { return null; });
     return st.qualIxP.then(function (ix) {
@@ -1633,6 +1650,12 @@
       var pid = st.pendId; st.pendId = null;
       if (pid && G.PREP_IDS) { push(renderHome); G.PREP_IDS.open(pid, HOST); }
       else if (opts && opts.subject && subjectById(opts.subject)) { st.stack = [renderHome]; push(function () { renderSubject(opts.subject); }); if (opts.module) push(function () { renderModule(opts.subject, opts.module); }); }
+      // A lesson at one step (the Image Library's "Open the lesson"): home, its subject, then the lesson. Back walks out.
+      else if (opts && opts.lesson && opts.lesson.s && G.PREP_LESSONS && G.PREP_LESSONS.openAt) {
+        var lz = opts.lesson; st.stack = [renderHome];
+        if (subjectById(lz.s)) push(function () { renderSubject(lz.s); });
+        G.PREP_LESSONS.openAt(lz.s, lz.m, HOST, lz.key, lz.step);
+      }
       else if (opts && opts.mode === "mistakes") { st.stack = [renderHome]; mf.tag = "all"; push(renderMistakes); }
       else if (opts && opts.mode === "plan") { st.stack = [renderHome]; renderHome(); startPlan(); }
       else if (opts && opts.query) openQuery(opts);
@@ -2694,7 +2717,7 @@
   function figRowHtml(it) {
     var F = G.SMD_FIG;
     if (!F || !F.matchText || !it || it._gone) return "";
-    var txt = [it.q, (it.o || []).join(" "), it.exp, it.kp].join(" "), m = F.matchText(txt, 1)[0];
+    var txt = [it.q, (it.o || []).join(" "), stripWmMarks(it.exp), it.kp].join(" "), m = F.matchText(txt, 1)[0];
     return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open") + "</div>" : "";
   }
   function pearlHtml(it, xo) {
@@ -3952,7 +3975,7 @@
     ids.forEach(function (id) {
       var b = s.bm[id]; if (!b) return;
       var it = cache[id], sb = subjectById(b[0]), t = topicOf(b[0], b[1]), e = bmEntry(bmx, id), at = bma[id];
-      var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(it.exp, 300)) : "";
+      var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(stripWmMarks(it.exp), 300)) : "";
       var tgs = e ? e.tg.filter(function (tg) { return bmt[tg]; }) : [];
       aux[id] = { t: text.toLowerCase(), s: bmPlain(sb && sb.name).toLowerCase(), sid: b[0],
         tp: (t ? bmPlain(t.title) : bmPlain(b[1])).toLowerCase(), tid: b[1], tg: tgs,

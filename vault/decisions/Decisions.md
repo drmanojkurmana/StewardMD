@@ -12288,3 +12288,109 @@ rendered outside `#smdPrep` / `.igl-overlay` always gets the StewardMD look.
 - Owner chose "signed in only" (not phone or registration verification). Each lesson and picture is fetched when viewed, not in bulk, and kept on the phone, so a second view is instant, offline and free. Cost at the time: 10 M requests and 10 M R2 reads a month included, then $0.30 and $0.36 per million; egress free.
 - Rollout is staged and reversible: upload, `--check`, build with `SMD_REMOTE_MEDIA=1`, release, then `PREP_LESSONS_GATED=1` once app builds that fetch lessons without proof are gone. Details in [[PrepNucleus]] Lessons and [[Infra]].
 - Found while testing: the native boot script in index.html deleted EVERY Cache Storage cache on every launch, and sw.js deleted every non-current cache on activate. That wiped Atlas offline modules, on-device model files and the lesson voice model each time. Both now delete only `stewardmd-*` (the service worker's own versions).
+
+## 2026-11-12 Connect Agent safety guards (smd_connect_guards, default ON)
+- Owner asked to adopt what goodnight000/api-anything (MIT) does better: "never someone else's data", proof
+  with two examples, empty vs drift, no live credential in a stored request, per-site pacing, readable heals.
+  Ideas ported, no code or dependency taken (its runtime is Node + desktop Chrome; ours is the phone WebView,
+  and its shared catalog is incompatible with PHI).
+- Default ON because every check fails closed ("not read", with the reason) rather than showing a chart that
+  may be another patient's. Kill switch `smd_connect_guards = "0"`. Recovery tag `connect-guards-pre-2026-11-12`.
+- Not re-litigated: the ward list still goes to self-repair when a proven call returns nothing (2026-09-16),
+  because GHIS answers [] to a session that has not landed. Details in `vault/modules/Connect Agent.md`.
+
+## 2026-11-12 Specialty kits: compact screen behind `smd_kits_compact` (default on)
+- Owner: "make it 10 better". Layout only: one-row kit header, one-line save note, sticky tool title with the live result, kit bar flush with the bottom edge. No change to what a kit writes or when.
+- Kept behind a flag (`?kitsui=0`) with recovery tag `kits-ui-pre-compact` until the owner approves on the phone; then the old header branch in `kitBody` can be deleted.
+- Not changed: three entry points (Specialty tab, Tools button, Home tile) still exist; consolidating them is the owner's call (vault note says "kept for now").
+
+## 2026-11-12 RadioAnatome Immersive CT: built from our own scan, not copied from 2Doctor
+- **Ask:** owner pointed at 2Doctor's "Immersive radiology" page (2doctor.ai/#radiologia: a 3D view of one CT with the
+  axial slice drawn through it, plus a tappable axial CT) and asked to crawl it and integrate it, then to "use their already
+  made one".
+- **Decision:** none of 2Doctor's code or files are in the app. A Copyright License PDF was supplied, but it had no
+  effective date, no licensor address and a licensor title that is not a role ("Edwig"), and it was signed the same day.
+  It could not be verified, so it was not treated as clearance and is not in the repo. Their own sources file shows
+  their data is TotalSegmentator s1397 (CC BY 4.0) prepared by a third party. Their viewer is three.js plus their own
+  app shell, which cannot run in our ES5 bundle. RadioAnatome already shipped the same kind of material: TotalSegmentator
+  living CT s0108 with expert masks, the 3D living body meshed from it, and 72 registered slice planes. So only the
+  layout was new.
+- **Built:** "Immersive CT" inside the 3D layer (`atlas3d.js` `openImmersive`): the living body on top, its own
+  axial CT (`ct-live-torso-axial`, 48 slices) underneath. The 3D cut follows the slice, and the anatomy above the slice
+  draws as an adjustable see-through ghost (render pass 5). A tap on a CT pin or on the 3D body names the structure on
+  both sides. A structure not on the slice offers "Go to slice N". Also: cine, Soft tissue/Lung/Bone windows (the 3D
+  texture follows), Show all labels with no overlaps. Entry: a catalog card under "3D Anatomy" and an "Immersive"
+  button on the Living CT tools.
+- **Flag:** `smd_atlas_imm`, default ON like the 3D layer it lives in; `?immersive=0` / localStorage `0` hides it on
+  one device. Recovery point: commit `15a0af15` (main before this change).
+- **Bug fixed on the way:** 3D canvas taps ignored the Display zoom (`documentElement.style.zoom`), so picks landed off by
+  the zoom factor (about 10 px in the test). `bindInput pos()` now divides it out, as `atlas.js stagePt()` does.
+- **Not done:** Chest-only and Head-and-neck regions. The neck and thorax-neck CT modules have no 3D meshes yet
+  (`bp3d-map.json _pending_3d`), and new geometry has to be uploaded to R2 before a build names it (see [[RadioAnatome 3D]]).
+
+## 2026-11-12 RadioAnatome whole body, head to thigh: subject s1045, a third 3D source
+- **Ask:** owner, after Immersive CT shipped on the torso: "Build all parts, I need body top to bottom".
+- **Subject:** TotalSegmentator s1045 (CC BY 4.0, 'ct polytrauma', no_pathology, 62 y male, contrast), picked by MEASURED
+  coverage from the 18 no-pathology whole-body / polytrauma studies in meta.csv (masks fetched for six). Longest field
+  (97 cm, vertex to mid-thigh), arms down. NOT s1397, the PyVista "whole body male" sample 2Doctor uses: meta.csv flags it
+  "tumor, bones". No dataset subject covers the legs below mid-thigh with masks, so "bottom" is the thighs.
+- **Shape:** new module group `ct-live-body-*` (2D, Beta) + a third 3D source "Whole body" (part flag 2) added by
+  `body_merge.py` without touching the reference body or the radiologist-verified torso. Immersive CT now opens on it.
+- **HU check:** `tsd_combine.py --contrast` widens only enhancing parenchyma (to 300 HU) and the cardiac blood pool (to
+  450 HU), per subject; unenhanced bands unchanged, so no shipped module moved.
+- **Native fallback:** phones try R2, then the committed chunk on stewardmd.in, so a new body works before its R2 upload.
+
+## 2026-11-13 Pages file guard raised to 19,600 (owner)
+- The whole-body CT (`ct-live-body-*`, ~790 files) took the Pages output to 19,569 static files, over the 19,000 guard in
+  `test/pages-output.test.mjs` (Cloudflare's hard cap is 20,000). Offered: trim (hold back the coronal/sagittal stacks),
+  move the slice images to R2, or raise the guard. **Owner chose raising the guard to 19,600.**
+- Headroom is now ~30 files. The next sizeable asset set must go to R2 or into the `scripts/pages-build.sh` exclusion
+  list (`data/antibiogram/sources`, 108 build-input JSONs no runtime code fetches, is a ready candidate).
+
+## 2026-11-13 Settings is an iOS navigation stack
+- Owner sent a recording of iOS Settings: "this is how it should behave", with a screenshot of Profile and Settings showing through each other.
+- Cause of the overlap: syndromes-motion.js staggers `#hvSheet` children from opacity 0, so Profile's rows faded in over a fully visible Settings. A second bug: adding `sbr-pushed` was itself transitioned, so the page arrived diagonally from below.
+- Now (`sidebar-redesign.js`): a row pushes its page in from the right, opaque, in Settings' own background. Settings slides 30% left under a dim layer (`#sbrDim`). The nav bar has a round Back and a centred title; the page's own `.hv-sh-t` and Appearance's Done are hidden. Back, or a drag from the left 24 px (interactive, commits at 40% or a flick), reverses it. Experimental pushes the same way. One curve for all of it: 0.5s `cubic-bezier(.32,.72,0,1)`.
+- The edge drag is taken in the capture phase only while a pushed page shows, so swipe-back.js never acts on the same touch. Android's system back still reaches the round Back through swipe-back.js.
+- Test: `test/run-settings-push-ui.mjs` (dark and light).
+
+## 2026-11-13 Tab bar: no "last opened" line
+- Owner screenshot: a line sat above the Drugs icon while Home was highlighted ("when I click on drugs it comes there, when I click on maik it comes there").
+- tab-bar.js drew a 20px line under the last tab opened. The bar already marks Home with its pill, and the line was mispositioned on the floating bar. Removed; a line left from an older bundle is cleaned up on load. Re-tap to top now belongs to Home only (the other tabs are launchers). Kill switch `smd_tab_indicator=0` now turns off the Home re-tap.
+
+## 2026-11-13 KB rebuilt with the unbundled reference articles; Image Library links to lessons and articles
+- Owner: "Read the article" took them to a bare page (`acute_coronary_syndrome_long_case`, raw id as the title). Cause: `kb.enrichment*.js` was last built before ~590 reference articles arrived with PrepNucleus lesson batches; 403 of them have figures in the Image Library. Owner approved adding them ("yes please add if KB doesn't have it").
+- Rebuilt `kb/dist/kb.enrichment*.js` (`kb/tools/build-kb-enrichment.mjs`): 592 added, none removed or changed; 22.2 + 21.0 MB, under the 25 MiB Pages limit.
+- Known quality debt: about 200 of the added articles are AI-drafted in a compressed, sometimes garbled style (ACS Long Case, Asthma Long Case). They need a rewrite pass.
+- Side effects handled: kb-search ranks a reference article's name prefix at 780 and a diagnostic name ending with the query at 790 ("sinusitis" still opens Acute Sinusitis, "tumour" still finds tumour lysis syndrome). `tools/prep-links.mjs`: a phrase that is one article's own name beats another's alias, and compound-title overview articles contribute only their title (their aliases are subtopics).
+- MaiK name gate (`kb/ai/steward-ai.browser.js`): on an equal-length name hit, an article titled for the condition alone beats a compound overview ("Hodgkin's Lymphoma" over "Hodgkin Lymphoma: Reed-Sternberg Cells and Staging"). Benchmark `test/maik-kb-relevance.test.mjs`: 327 correct, 0 miss, 0 mis-route, 0 off-topic; three questions that used to get no notes (anion gap, Henderson-Hasselbalch, insulin dose) now get the new articles, and five cases accept the new sister article.
+- `kb/tools/kb-placement.mjs` (shared by `build-kb-v2.mjs` and the Image Library builder): an unbundled article's figures go on the shipped article on the same topic; with everything bundled it places nothing, and it stays as the guard for the next gap.
+- Image Library viewer: "Open the lesson" (the lesson whose title best matches the image, at that step; `PREP.open({ lesson })` -> `PREP_LESSONS.openAt`) for Pro, the paywall without Pro; "Read the article" opens the Knowledge Library article and scrolls to the figure. Test: `test/run-imglib-links-ui.mjs`.
+
+## 2026-11-13 PrepNucleus practise sheet: several chips per filter row
+- Owner: "allow to select multiple chips" (screenshot of Question type and New or repeat).
+- Question type, New or repeat and Difficulty are multi-select: All or Mix stands alone, specific chips combine as "any of".
+  Difficulty followed for consistency (same chip row, same expectation).
+- Several types share the count equally (the Mix rule over the chosen types); several repeat states or difficulties draw
+  from the union. Number of questions, mode and timer stay single choice.
+- Stored as a comma list in the existing `type` / `seen` / `d` fields, so earlier saved choices need no migration.
+
+## 2026-11-13 Today in Medical History: the Pro banner flips (flag `smd_today_history`, default on)
+- Owner supplied a 366-day dataset; first a chip beside the home date, then the owner chose a flip of the Pro banner: history 5 s, front 5 s, repeating while the banner is on screen. Chip removed.
+- Data split per month (`data/history/MM.json`) so the app reads ~20 KB, not 400 KB. Content ai_drafted, pending review.
+- Reversible: `smd_today_history=0`. Recovery point: commit 0d7a8d7d (the branch before this change; tag pushes are refused here).
+- Same day: India dataset merged (211 events, India tag; India's version wins on a duplicate). Banner pictures: holographic glow art on black, screen-blended; one hand-picked subject per day, made in Gemini from `data/history/gemini/`.
+- Same day: curated. Deaths and passings never shown; 110 more dropped by hand (data/history/curation.txt). 39 days now have no event and the banner does not flip on them.
+- Same day, owner: tragedies, outbreaks, hoaxes and routine notices restored. Deaths and obscure births stay out. 639 events on 336 days.
+- Same day: 22 observance days added (World Health Day, National Doctors' Day ...); each leads its day and owns its picture.
+
+## 2026-11-13 Lesson figures carry the watermark in-line
+Owner saw the PrepNucleus centre mark and corner lockup only after tapping a lesson image full screen. The lesson and
+PYQ figure markup never added the `image-watermark.js` overlay. It now does, on the picture's own box, same look as
+the viewer. Loader token prep144.
+
+## 2026-11-13 No system Copy / Look Up menu on reading text (iOS)
+Owner: selecting lesson text showed the iOS menu, which makes copying content easy; only the highlight palette should
+show. `SmdWebView` (MainViewController.swift) disables edit-menu actions unless the selection is editable. Native
+rebuild required. Android same day: `SmdWebView.java` empties the selection bar menu on read-only text (layout
+override `capacitor_bridge_layout_main.xml`).

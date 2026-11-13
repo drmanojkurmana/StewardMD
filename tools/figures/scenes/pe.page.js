@@ -110,18 +110,12 @@ function initPanel() {
    ["bp", "Pressure", "g-good", "Systemic blood pressure. Falls when the strained right heart cannot fill the left side; fluids and oxygen support it."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const o = layers.over;
-  pill(o, "Leg vein", 100, 150, 78, 92, "Deep leg vein. Blood flows up toward the heart. Slow flow lets a clot form on the wall.");
-  pill(o, "DVT clot", 168, 240, 202, 92, "Leg clot (deep vein thrombosis). Pieces can break off and travel with the blood to the lungs. An anticoagulant stops it growing.");
+  pill(o, "Leg clot", 140, 190, 150, 92, "Deep leg vein blood flows up toward the heart. Slow flow lets a clot form on the wall. Pieces of that clot can break off and travel to the lungs. An anticoagulant stops it growing.");
   const pa = pill(o, "Anticoagulant", 112, 205, 112, 148, "Anticoagulant: stops the clot growing and stops new clots forming. It does not dissolve clot quickly."); pa.setAttribute("id", "p-ac"); pa.style.opacity = 0;
-  pill(o, "Healthy lung", 390, 120, 340, 100, "Healthy lung. Air reaches the sacs and blood in the wall vessels picks up oxygen.");
-  pill(o, "Open flow", 350, 241, 340, 284, "Branch that stays open. Blood keeps flowing and the lung keeps exchanging gas.");
-  pill(o, "Embolus", EX, 241, 458, 188, "Embolus: a travelled clot wedged in the lung artery. Blood cannot pass, so the lung beyond gets air but no blood.");
-  pill(o, "Dead space", 575, 130, 560, 102, "Dead space: lung that is ventilated but not perfused. The air here is wasted and blood oxygen falls.");
+  pill(o, "Open lung", 370, 180, 340, 110, "In healthy lung, air reaches the sacs and blood in the wall vessels picks up oxygen. A branch that stays open keeps exchanging gas.");
+  pill(o, "Embolus", EX, 200, 500, 150, "A travelled clot wedged in the lung artery. Blood cannot pass, so the lung beyond gets air but no blood. That dead space wastes the air and blood oxygen falls.");
   const pl = pill(o, "Clot buster", 470, 241, 440, 284, "Clot-dissolving drug: breaks the embolus up and reopens flow. Reserved for a large blocking clot."); pl.setAttribute("id", "p-ly"); pl.style.opacity = 0;
-  pill(o, "Blocked flow", 580, 241, 580, 284, "Blocked branch. No blood reaches the lung beyond the embolus, so its air is wasted.");
-  pill(o, "Right ventricle", 735, 245, 724, 92, "Right ventricle: pumps blood into the lung artery. Against the blockage its pressure rises and it dilates.");
-  pill(o, "Septum", 758, 240, 830, 92, "Septum: the wall between the ventricles. High right sided pressure bows it toward the left.");
-  pill(o, "Left ventricle", 807, 258, 890, 120, "Left ventricle: filled by blood from the lungs. When flow through the lungs falls, less blood leaves for the body.");
+  pill(o, "Right heart strain", 780, 220, 800, 92, "The right ventricle pumps into the lung artery. Against the blockage its pressure rises, it dilates, and the septum bows toward the left. The left ventricle then fills with less blood, so less leaves for the body.");
   pill(o, "Body blood", 200, 366, 200, 418, "Blood to the body. Its oxygen follows what the lungs manage to add.");
   const ps = pill(o, "Oxygen", 880, 410, 808, 418, "Oxygen with careful fluids: lifts blood oxygen and supports output while the clot clears."); ps.setAttribute("id", "p-sup"); ps.style.opacity = 0;
   capEl = mk("text", { class: "pe-cap", x: 30, y: 444 }, o); capEl.textContent = capText(0, level);

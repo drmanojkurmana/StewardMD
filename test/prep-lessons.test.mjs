@@ -103,7 +103,7 @@ test("sample lesson: drawable, hand-written, 3 quiz ids, every visual kind, in t
   assert.equal(SAMPLE.quiz.length, 3);
   assert.deepEqual([...new Set(SAMPLE.steps.map((s) => s.vis && s.vis.kind))].sort(), ["compare", "flow", "image", "table"]);
   const ix = JSON.parse(fs.readFileSync(join(ROOT, "prep/lessons/v1/index.json"), "utf8"));
-  assert.deepEqual(ix.modules["sur-breast-cancer"], { title: SAMPLE.title, minutes: SAMPLE.minutes, steps: SAMPLE.steps.length, gen: "hand" });
+  assert.deepEqual(ix.modules["sur-breast-cancer"], { title: SAMPLE.title, minutes: SAMPLE.minutes, steps: SAMPLE.steps.length, gen: "hand", module: SAMPLE.module });
   for (const s of SAMPLE.steps) if (s.vis && s.vis.kind === "image") assert.ok(fs.existsSync(join(ROOT, s.vis.src)), s.vis.src);
   assert.ok(!/[–—]/.test(JSON.stringify(SAMPLE)), "no em or en dash in app text");
 });
@@ -389,4 +389,39 @@ test("narration covers the page in every bundled lesson: each word of the displa
   }
   assert.ok(steps > 1000, "lessons read: " + steps);
   assert.equal(low, 0, low + " steps where the voice drops over a tenth of the displayed words");
+});
+
+test("isNew: a lesson is new on the day it was added and for 45 days after, then not", () => {
+  const today = new Date(2026, 10, 13, 12, 0, 0);
+  const shift = (n) => {
+    const d = new Date(today);
+    d.setDate(d.getDate() - n);
+    const y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+    return y + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+  };
+  assert.equal(P.isNew({ added: shift(0) }, today), true);
+  assert.equal(P.isNew({ added: shift(45) }, today), true);
+  assert.equal(P.isNew({ added: shift(46) }, today), false);
+  assert.equal(P.isNew({ added: shift(-1) }, today), false);
+  assert.equal(P.isNew({}, today), false);
+  assert.equal(P.isNew({ added: "2026/11/13" }, today), false);
+  assert.equal(P.isNew(null, today), false);
+});
+
+test("buildIndex keys each lesson file and copies module from the file", () => {
+  const dir = fs.mkdtempSync(join(os.tmpdir(), "lsn-ix-"));
+  const a = structuredClone(SAMPLE);
+  const b = structuredClone(SAMPLE);
+  b.module = a.module;
+  fs.writeFileSync(join(dir, "sur-breast-cancer.json"), JSON.stringify(a));
+  fs.writeFileSync(join(dir, "sur-breast-cancer-b.json"), JSON.stringify(b));
+  fs.writeFileSync(join(dir, "index.json"), JSON.stringify({ v: 1, modules: { "sur-breast-cancer": { title: "old", minutes: 1, steps: 1, gen: "AI", added: "2026-11-08", set: "keep", r: 2 } } }));
+  const ix = G.buildIndex(dir);
+  assert.equal(Object.keys(ix.modules).length, 2);
+  assert.equal(ix.modules["sur-breast-cancer"].module, a.module);
+  assert.equal(ix.modules["sur-breast-cancer-b"].module, a.module);
+  assert.equal(ix.modules["sur-breast-cancer"].added, "2026-11-08");
+  assert.equal(ix.modules["sur-breast-cancer"].set, "keep");
+  assert.equal(ix.modules["sur-breast-cancer"].r, 2);
+  fs.rmSync(dir, { recursive: true, force: true });
 });

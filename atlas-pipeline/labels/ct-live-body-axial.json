@@ -1,0 +1,562 @@
+{
+ "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+ "_definitions": "Existing structures reuse the definitions already in this repo (Gray's Anatomy 1918, PD-US). Brain, humerus, scapula and pulmonary vein carry original one-sentence definitions written for this atlas in the same style.",
+ "_definitions_short": "Gray's Anatomy 1918 (public domain) and original definitions written for this atlas",
+ "_geometry": "EXPERT MASKS SUPPLIED WITH THE DATASET - no segmentation model was run. Subject s1045 of the TotalSegmentator dataset v2.0.1 (Zenodo 10047292), CC BY 4.0: a LIVING patient, study type 'ct polytrauma', pathology field 'no_pathology', age 62, male, Siemens Somatom Force, 100 kVp, intravenous contrast (aorta median about 380 HU), resampled to 1.5 mm isotropic by the dataset authors. 645 axial levels from the skull vertex to mid-thigh, arms at the sides. Masks were drawn and reviewed by the dataset's authors, not by us.",
+ "_why_this_subject": "Chosen from the 18 no_pathology whole-body / polytrauma studies in meta.csv by MEASURED coverage (brain, skull, femur, humerus, bladder and aorta masks fetched for six candidates): s1045 has the longest field (97 cm, vertex to mid-thigh, both femurs present), IV contrast, and the arms down so the head is unobstructed. s1397, the PyVista 'whole body male' sample, was rejected: meta.csv flags it 'tumor, bones'.",
+ "_region": "Whole body",
+ "_student_notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a trauma CT, not a certified normal. Scanned with intravenous contrast, so arteries and veins are bright. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy.",
+ "_why_bone_kept": "Bones are pinned throughout: they are the landmarks a student uses to find the level from head to thigh. Vertebral levels collapse to cervical / thoracic / lumbar ids and ribs to one id, because the atlas names no level anywhere.",
+ "_why_no_sides": "Sides are COLLAPSED (kidney_left and kidney_right are both 'kidney'), as in every other RadioAnatome module: a bilateral structure highlights on both sides together. The 3D layer keeps the sides.",
+ "_absent_from_dataset": "TotalSegmentator v2.0.1 has no larynx, pharynx, internal jugular vein, individual brain structures, facial bones or thigh muscles below the gluteals, so those stay unlabelled. Left atrial appendage, costal cartilages and kidney cysts carry no pin (the heart pin covers the appendage; the cartilage is a thin strip; this subject has no cysts).",
+ "_why_caps": "A whole-body level crosses many paired bones and ribs at once; the largest cross-sections are kept so identical labels do not saturate the gutters.",
+ "categories": {
+  "viscus": {
+   "label": "Viscus",
+   "color": "#ffd479"
+  },
+  "gi-tract": {
+   "label": "GI tract",
+   "color": "#c9a06a"
+  },
+  "vessel-artery": {
+   "label": "Artery",
+   "color": "#ff8080"
+  },
+  "vessel-vein": {
+   "label": "Vein",
+   "color": "#8fb8ff"
+  },
+  "urinary": {
+   "label": "Urinary",
+   "color": "#7fd9e8"
+  },
+  "airway": {
+   "label": "Airway",
+   "color": "#7ee081"
+  },
+  "muscle": {
+   "label": "Muscle",
+   "color": "#e0a0c0"
+  },
+  "csf": {
+   "label": "Cord",
+   "color": "#b0c4de"
+  },
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  },
+  "mixed": {
+   "label": "Mixed grey and white",
+   "color": "#b9a8c9"
+  }
+ },
+ "structures": {
+  "adrenal-gland": {
+   "name": "Adrenal gland",
+   "category": "viscus",
+   "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys."
+  },
+  "aorta": {
+   "name": "Aorta",
+   "category": "vessel-artery",
+   "definition": "The aorta is the main arterial trunk, conveying blood from the left ventricle to the body."
+  },
+  "autochthonous-back-muscle": {
+   "name": "Deep back muscles",
+   "category": "muscle",
+   "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+  },
+  "brachiocephalic-trunk": {
+   "name": "Brachiocephalic trunk",
+   "category": "vessel-artery",
+   "definition": "The brachiocephalic trunk is the first and largest branch of the aortic arch, ascending to the right of the trachea to divide into the right common carotid and right subclavian arteries."
+  },
+  "brachiocephalic-vein": {
+   "name": "Brachiocephalic vein",
+   "category": "vessel-vein",
+   "definition": "The brachiocephalic veins form behind the sternal ends of the clavicles from the internal jugular and subclavian veins and unite to form the superior vena cava."
+  },
+  "brain": {
+   "name": "Brain",
+   "category": "mixed",
+   "definition": "The brain is the part of the central nervous system enclosed by the skull, made up of the cerebrum, the cerebellum and the brainstem."
+  },
+  "cervical-vertebra": {
+   "name": "Cervical vertebra",
+   "category": "bone",
+   "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes."
+  },
+  "clavicle": {
+   "name": "Clavicle",
+   "category": "bone",
+   "definition": "The clavicle forms the anterior portion of the shoulder girdle."
+  },
+  "colon": {
+   "name": "Colon",
+   "category": "gi-tract",
+   "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli."
+  },
+  "common-carotid-artery": {
+   "name": "Common carotid artery",
+   "category": "vessel-artery",
+   "definition": "The common carotid arteries ascend in the neck within the carotid sheath beside the trachea and larynx, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+  },
+  "duodenum": {
+   "name": "Duodenum",
+   "category": "gi-tract",
+   "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas."
+  },
+  "esophagus": {
+   "name": "Oesophagus",
+   "category": "gi-tract",
+   "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+  },
+  "femur": {
+   "name": "Femur",
+   "category": "bone",
+   "definition": "The femur is the longest and strongest bone in the skeleton."
+  },
+  "gallbladder": {
+   "name": "Gallbladder",
+   "category": "gi-tract",
+   "definition": "The gallbladder is a pear-shaped reservoir for bile lodged in a fossa on the under surface of the liver."
+  },
+  "gluteal-muscle": {
+   "name": "Gluteal muscles",
+   "category": "muscle",
+   "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint."
+  },
+  "heart": {
+   "name": "Heart",
+   "category": "viscus",
+   "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+  },
+  "hip-bone": {
+   "name": "Hip bone",
+   "category": "bone",
+   "definition": "The hip bone is a large flattened irregular bone formed by the ilium, ischium and pubis."
+  },
+  "humerus": {
+   "name": "Humerus",
+   "category": "bone",
+   "definition": "The humerus is the longest bone of the upper limb, meeting the scapula at the shoulder and the radius and ulna at the elbow."
+  },
+  "iliac-artery": {
+   "name": "Iliac artery",
+   "category": "vessel-artery",
+   "definition": "The common iliac arteries arise from the aortic bifurcation and divide into external and internal iliac arteries."
+  },
+  "iliac-vein": {
+   "name": "Iliac vein",
+   "category": "vessel-vein",
+   "definition": "The common iliac veins unite to form the inferior vena cava."
+  },
+  "iliopsoas": {
+   "name": "Iliopsoas",
+   "category": "muscle",
+   "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip."
+  },
+  "inferior-vena-cava": {
+   "name": "Inferior vena cava",
+   "category": "vessel-vein",
+   "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium."
+  },
+  "kidney": {
+   "name": "Kidney",
+   "category": "urinary",
+   "definition": "The kidneys are situated in the posterior part of the abdomen, one on either side of the vertebral column, behind the peritoneum."
+  },
+  "liver": {
+   "name": "Liver",
+   "category": "viscus",
+   "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium."
+  },
+  "lower-lobe-left": {
+   "name": "Lower lobe of left lung",
+   "category": "airway",
+   "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+  },
+  "lower-lobe-right": {
+   "name": "Lower lobe of right lung",
+   "category": "airway",
+   "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+  },
+  "lumbar-vertebra": {
+   "name": "Lumbar vertebra",
+   "category": "bone",
+   "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column."
+  },
+  "middle-lobe-right": {
+   "name": "Middle lobe of right lung",
+   "category": "airway",
+   "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+  },
+  "pancreas": {
+   "name": "Pancreas",
+   "category": "viscus",
+   "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach."
+  },
+  "portal-vein": {
+   "name": "Portal and splenic veins",
+   "category": "vessel-vein",
+   "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver."
+  },
+  "prostate": {
+   "name": "Prostate",
+   "category": "urinary",
+   "definition": "The prostate is a firm glandular body surrounding the commencement of the male urethra."
+  },
+  "pulmonary-vein": {
+   "name": "Pulmonary vein",
+   "category": "vessel-vein",
+   "definition": "The pulmonary veins carry oxygenated blood from the lungs to the left atrium of the heart."
+  },
+  "rib": {
+   "name": "Rib",
+   "category": "bone",
+   "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton. They are twelve in number on either side, articulating behind with the vertebral column."
+  },
+  "sacrum": {
+   "name": "Sacrum",
+   "category": "bone",
+   "definition": "The sacrum is a large triangular bone formed by the union of five vertebrae, wedged between the two hip bones."
+  },
+  "scapula": {
+   "name": "Scapula",
+   "category": "bone",
+   "definition": "The scapula is a flat triangular bone on the back of the chest wall that carries the socket of the shoulder joint."
+  },
+  "skull": {
+   "name": "Skull",
+   "category": "bone",
+   "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint."
+  },
+  "small-bowel": {
+   "name": "Small bowel",
+   "category": "gi-tract",
+   "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery."
+  },
+  "spinal-cord": {
+   "name": "Spinal cord",
+   "category": "csf",
+   "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+  },
+  "spleen": {
+   "name": "Spleen",
+   "category": "viscus",
+   "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm."
+  },
+  "sternum": {
+   "name": "Sternum",
+   "category": "bone",
+   "definition": "The sternum is a flat narrow bone forming the middle of the anterior thoracic wall."
+  },
+  "stomach": {
+   "name": "Stomach",
+   "category": "gi-tract",
+   "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum."
+  },
+  "subclavian-artery": {
+   "name": "Subclavian artery",
+   "category": "vessel-artery",
+   "definition": "The subclavian arteries arch over the apex of each lung to supply the upper limb, the right arising from the brachiocephalic trunk and the left from the aortic arch."
+  },
+  "superior-vena-cava": {
+   "name": "Superior vena cava",
+   "category": "vessel-vein",
+   "definition": "The superior vena cava returns blood from the head, neck and upper limbs to the right atrium, formed by the union of the two brachiocephalic veins."
+  },
+  "thoracic-vertebra": {
+   "name": "Thoracic vertebra",
+   "category": "bone",
+   "definition": "The thoracic vertebrae are distinguished by costal facets on the sides of their bodies."
+  },
+  "thyroid-gland": {
+   "name": "Thyroid gland",
+   "category": "viscus",
+   "definition": "The thyroid gland is a vascular endocrine gland of two lateral lobes joined by an isthmus, clasping the front and sides of the upper trachea."
+  },
+  "trachea": {
+   "name": "Trachea",
+   "category": "airway",
+   "definition": "The trachea is a tube of incomplete cartilaginous rings and membrane that descends from the lower border of the larynx to divide into the two main bronchi in the thorax."
+  },
+  "upper-lobe-left": {
+   "name": "Upper lobe of left lung",
+   "category": "airway",
+   "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+  },
+  "upper-lobe-right": {
+   "name": "Upper lobe of right lung",
+   "category": "airway",
+   "definition": "The upper lobe of the right lung lies above the horizontal fissure and in front of the upper part of the oblique fissure."
+  },
+  "urinary-bladder": {
+   "name": "Urinary bladder",
+   "category": "urinary",
+   "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis."
+  }
+ },
+ "model_values": {
+  "1": "spleen",
+  "2": "kidney_right",
+  "3": "kidney_left",
+  "4": "gallbladder",
+  "5": "liver",
+  "6": "stomach",
+  "7": "pancreas",
+  "8": "adrenal_gland_right",
+  "9": "adrenal_gland_left",
+  "10": "lung_upper_lobe_left",
+  "11": "lung_lower_lobe_left",
+  "12": "lung_upper_lobe_right",
+  "13": "lung_middle_lobe_right",
+  "14": "lung_lower_lobe_right",
+  "15": "esophagus",
+  "16": "trachea",
+  "17": "thyroid_gland",
+  "18": "small_bowel",
+  "19": "duodenum",
+  "20": "colon",
+  "21": "urinary_bladder",
+  "22": "prostate",
+  "23": "kidney_cyst_left",
+  "24": "kidney_cyst_right",
+  "25": "sacrum",
+  "26": "vertebrae_S1",
+  "27": "vertebrae_L5",
+  "28": "vertebrae_L4",
+  "29": "vertebrae_L3",
+  "30": "vertebrae_L2",
+  "31": "vertebrae_L1",
+  "32": "vertebrae_T12",
+  "33": "vertebrae_T11",
+  "34": "vertebrae_T10",
+  "35": "vertebrae_T9",
+  "36": "vertebrae_T8",
+  "37": "vertebrae_T7",
+  "38": "vertebrae_T6",
+  "39": "vertebrae_T5",
+  "40": "vertebrae_T4",
+  "41": "vertebrae_T3",
+  "42": "vertebrae_T2",
+  "43": "vertebrae_T1",
+  "44": "vertebrae_C7",
+  "45": "vertebrae_C6",
+  "46": "vertebrae_C5",
+  "47": "vertebrae_C4",
+  "48": "vertebrae_C3",
+  "49": "vertebrae_C2",
+  "50": "vertebrae_C1",
+  "51": "heart",
+  "52": "aorta",
+  "53": "pulmonary_vein",
+  "54": "brachiocephalic_trunk",
+  "55": "subclavian_artery_right",
+  "56": "subclavian_artery_left",
+  "57": "common_carotid_artery_right",
+  "58": "common_carotid_artery_left",
+  "59": "brachiocephalic_vein_left",
+  "60": "brachiocephalic_vein_right",
+  "61": "atrial_appendage_left",
+  "62": "superior_vena_cava",
+  "63": "inferior_vena_cava",
+  "64": "portal_vein_and_splenic_vein",
+  "65": "iliac_artery_left",
+  "66": "iliac_artery_right",
+  "67": "iliac_vena_left",
+  "68": "iliac_vena_right",
+  "69": "humerus_left",
+  "70": "humerus_right",
+  "71": "scapula_left",
+  "72": "scapula_right",
+  "73": "clavicula_left",
+  "74": "clavicula_right",
+  "75": "femur_left",
+  "76": "femur_right",
+  "77": "hip_left",
+  "78": "hip_right",
+  "79": "spinal_cord",
+  "80": "gluteus_maximus_left",
+  "81": "gluteus_maximus_right",
+  "82": "gluteus_medius_left",
+  "83": "gluteus_medius_right",
+  "84": "gluteus_minimus_left",
+  "85": "gluteus_minimus_right",
+  "86": "autochthon_left",
+  "87": "autochthon_right",
+  "88": "iliopsoas_left",
+  "89": "iliopsoas_right",
+  "90": "brain",
+  "91": "skull",
+  "92": "rib_left_1",
+  "93": "rib_left_2",
+  "94": "rib_left_3",
+  "95": "rib_left_4",
+  "96": "rib_left_5",
+  "97": "rib_left_6",
+  "98": "rib_left_7",
+  "99": "rib_left_8",
+  "100": "rib_left_9",
+  "101": "rib_left_10",
+  "102": "rib_left_11",
+  "103": "rib_left_12",
+  "104": "rib_right_1",
+  "105": "rib_right_2",
+  "106": "rib_right_3",
+  "107": "rib_right_4",
+  "108": "rib_right_5",
+  "109": "rib_right_6",
+  "110": "rib_right_7",
+  "111": "rib_right_8",
+  "112": "rib_right_9",
+  "113": "rib_right_10",
+  "114": "rib_right_11",
+  "115": "rib_right_12",
+  "116": "sternum",
+  "117": "costal_cartilages"
+ },
+ "model_labels": {
+  "adrenal_gland_left": "adrenal-gland",
+  "adrenal_gland_right": "adrenal-gland",
+  "aorta": "aorta",
+  "atrial_appendage_left": null,
+  "autochthon_left": "autochthonous-back-muscle",
+  "autochthon_right": "autochthonous-back-muscle",
+  "brachiocephalic_trunk": "brachiocephalic-trunk",
+  "brachiocephalic_vein_left": "brachiocephalic-vein",
+  "brachiocephalic_vein_right": "brachiocephalic-vein",
+  "brain": "brain",
+  "clavicula_left": "clavicle",
+  "clavicula_right": "clavicle",
+  "colon": "colon",
+  "common_carotid_artery_left": "common-carotid-artery",
+  "common_carotid_artery_right": "common-carotid-artery",
+  "costal_cartilages": null,
+  "duodenum": "duodenum",
+  "esophagus": "esophagus",
+  "femur_left": "femur",
+  "femur_right": "femur",
+  "gallbladder": "gallbladder",
+  "gluteus_maximus_left": "gluteal-muscle",
+  "gluteus_maximus_right": "gluteal-muscle",
+  "gluteus_medius_left": "gluteal-muscle",
+  "gluteus_medius_right": "gluteal-muscle",
+  "gluteus_minimus_left": "gluteal-muscle",
+  "gluteus_minimus_right": "gluteal-muscle",
+  "heart": "heart",
+  "hip_left": "hip-bone",
+  "hip_right": "hip-bone",
+  "humerus_left": "humerus",
+  "humerus_right": "humerus",
+  "iliac_artery_left": "iliac-artery",
+  "iliac_artery_right": "iliac-artery",
+  "iliac_vena_left": "iliac-vein",
+  "iliac_vena_right": "iliac-vein",
+  "iliopsoas_left": "iliopsoas",
+  "iliopsoas_right": "iliopsoas",
+  "inferior_vena_cava": "inferior-vena-cava",
+  "kidney_cyst_left": null,
+  "kidney_cyst_right": null,
+  "kidney_left": "kidney",
+  "kidney_right": "kidney",
+  "liver": "liver",
+  "lung_lower_lobe_left": "lower-lobe-left",
+  "lung_lower_lobe_right": "lower-lobe-right",
+  "lung_middle_lobe_right": "middle-lobe-right",
+  "lung_upper_lobe_left": "upper-lobe-left",
+  "lung_upper_lobe_right": "upper-lobe-right",
+  "pancreas": "pancreas",
+  "portal_vein_and_splenic_vein": "portal-vein",
+  "prostate": "prostate",
+  "pulmonary_vein": "pulmonary-vein",
+  "rib_left_1": "rib",
+  "rib_left_10": "rib",
+  "rib_left_11": "rib",
+  "rib_left_12": "rib",
+  "rib_left_2": "rib",
+  "rib_left_3": "rib",
+  "rib_left_4": "rib",
+  "rib_left_5": "rib",
+  "rib_left_6": "rib",
+  "rib_left_7": "rib",
+  "rib_left_8": "rib",
+  "rib_left_9": "rib",
+  "rib_right_1": "rib",
+  "rib_right_10": "rib",
+  "rib_right_11": "rib",
+  "rib_right_12": "rib",
+  "rib_right_2": "rib",
+  "rib_right_3": "rib",
+  "rib_right_4": "rib",
+  "rib_right_5": "rib",
+  "rib_right_6": "rib",
+  "rib_right_7": "rib",
+  "rib_right_8": "rib",
+  "rib_right_9": "rib",
+  "sacrum": "sacrum",
+  "scapula_left": "scapula",
+  "scapula_right": "scapula",
+  "skull": "skull",
+  "small_bowel": "small-bowel",
+  "spinal_cord": "spinal-cord",
+  "spleen": "spleen",
+  "sternum": "sternum",
+  "stomach": "stomach",
+  "subclavian_artery_left": "subclavian-artery",
+  "subclavian_artery_right": "subclavian-artery",
+  "superior_vena_cava": "superior-vena-cava",
+  "thyroid_gland": "thyroid-gland",
+  "trachea": "trachea",
+  "urinary_bladder": "urinary-bladder",
+  "vertebrae_C1": "cervical-vertebra",
+  "vertebrae_C2": "cervical-vertebra",
+  "vertebrae_C3": "cervical-vertebra",
+  "vertebrae_C4": "cervical-vertebra",
+  "vertebrae_C5": "cervical-vertebra",
+  "vertebrae_C6": "cervical-vertebra",
+  "vertebrae_C7": "cervical-vertebra",
+  "vertebrae_L1": "lumbar-vertebra",
+  "vertebrae_L2": "lumbar-vertebra",
+  "vertebrae_L3": "lumbar-vertebra",
+  "vertebrae_L4": "lumbar-vertebra",
+  "vertebrae_L5": "lumbar-vertebra",
+  "vertebrae_S1": "sacrum",
+  "vertebrae_T1": "thoracic-vertebra",
+  "vertebrae_T10": "thoracic-vertebra",
+  "vertebrae_T11": "thoracic-vertebra",
+  "vertebrae_T12": "thoracic-vertebra",
+  "vertebrae_T2": "thoracic-vertebra",
+  "vertebrae_T3": "thoracic-vertebra",
+  "vertebrae_T4": "thoracic-vertebra",
+  "vertebrae_T5": "thoracic-vertebra",
+  "vertebrae_T6": "thoracic-vertebra",
+  "vertebrae_T7": "thoracic-vertebra",
+  "vertebrae_T8": "thoracic-vertebra",
+  "vertebrae_T9": "thoracic-vertebra"
+ },
+ "max_pins_per_slice": {
+  "cervical-vertebra": 2,
+  "thoracic-vertebra": 2,
+  "common-carotid-artery": 2,
+  "subclavian-artery": 2,
+  "brachiocephalic-vein": 2,
+  "clavicle": 2,
+  "autochthonous-back-muscle": 2,
+  "rib": 2,
+  "lumbar-vertebra": 2,
+  "hip-bone": 2,
+  "femur": 2,
+  "humerus": 2,
+  "scapula": 2,
+  "gluteal-muscle": 2,
+  "kidney": 2,
+  "iliopsoas": 2,
+  "iliac-artery": 2,
+  "iliac-vein": 2,
+  "adrenal-gland": 2,
+  "sacrum": 2
+ }
+}

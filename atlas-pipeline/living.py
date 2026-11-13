@@ -86,17 +86,22 @@ _TSD_GROUPS = {
                   [[1, 0, 0, 0], [0, 0, -1, 170], [0, -1, 0, 217]], [[0, 0, 1, 0], [-1, 0, 0, 170], [0, -1, 0, 217]]),
     "live-thorax-neck": ("ct-live-thorax-neck", [[1, 0, 0, 7], [0, 1, 0, 10], [0, 0, 1, 0]],
                          [[1, 0, 0, 7], [0, 0, -1, 189], [0, -1, 0, 262]], [[0, 0, 1, 7], [-1, 0, 0, 188], [0, -1, 0, 262]]),
+    # live-body (s1045, 2026-11-12): the field is the whole volume (no crop), skull vertex to mid-thigh
+    "live-body": ("ct-live-body", [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0]],
+                  [[1, 0, 0, 0], [0, 0, -1, 204], [0, -1, 0, 644]], [[0, 0, 1, 0], [-1, 0, 0, 204], [0, -1, 0, 644]]),
 }
 for _g, (_pre, _ax, _co, _sa) in _TSD_GROUPS.items():
     for _plane, _M in (("axial", _ax), ("coronal", _co), ("sagittal", _sa)):
         MODULES["%s-%s" % (_pre, _plane)] = dict(group=_g, plane=_plane, vol="tsd/%s/%s.nii.gz" % (_g, _plane),
                                                   seg="tsd/%s/%s_seg.nii.gz" % (_g, _plane), window="soft-tissue", M=_M)
 SOURCE = {"live-torso": "totalsegmentator-dataset", "live-brain": "openneuro-cc0",
-          "live-neck": "totalsegmentator-dataset", "live-thorax-neck": "totalsegmentator-dataset"}
+          "live-neck": "totalsegmentator-dataset", "live-thorax-neck": "totalsegmentator-dataset",
+          "live-body": "totalsegmentator-dataset"}
 ORIG = {"live-torso": ("tsd/live_vol.nii.gz", "tsd/live_seg.nii.gz"),
         "live-brain": ("brain/br_vol.nii.gz", "brain/br_seg.nii.gz"),
         "live-neck": ("tsd/live-neck/vol.nii.gz", "tsd/live-neck/vol_seg.nii.gz"),
-        "live-thorax-neck": ("tsd/live-thorax-neck/vol.nii.gz", "tsd/live-thorax-neck/vol_seg.nii.gz")}
+        "live-thorax-neck": ("tsd/live-thorax-neck/vol.nii.gz", "tsd/live-thorax-neck/vol_seg.nii.gz"),
+        "live-body": ("tsd/live-body/vol.nii.gz", "tsd/live-body/vol_seg.nii.gz")}
 WINDOWS = [{"id": "soft", "label": "Soft tissue"}, {"id": "lung", "label": "Lung"}, {"id": "bone", "label": "Bone"}]
 EXTRA_WINDOWS = {"lung": "lung", "bone": "bone"}          # window id -> slices.WINDOWS key
 PLANE_AXIS = {"axial": 1, "coronal": 2, "sagittal": 0}    # frame axis normal to each plane
@@ -349,6 +354,8 @@ EVIDENCE = {
     "live-thorax-neck": {"trachea": [16], "spinal cord": [79], "thyroid gland": [17], "aorta": [52],
                          "superior vena cava": [62], "heart": [51], "liver": [5], "spleen": [1],
                          "cervical vertebrae": [44, 45, 46, 47, 48, 49, 50]},
+    "live-body": {"trachea": [16], "spinal cord": [79], "liver": [5], "spleen": [1], "heart": [51],
+                  "aorta": [52], "superior vena cava": [62], "urinary bladder": [21], "brain": [90]},
     "live-brain": {"caudate": [11, 50], "cerebellar cortex": [8, 47], "brainstem": [16],
                    "cerebral cortex": [3, 42], "hemisphere labelled LEFT": [2, 3], "hemisphere labelled RIGHT": [41, 42]},
 }
@@ -389,6 +396,16 @@ def windows(work, mid, picks, stack, ref_dims):
             if Image.open(os.path.join(out, "%03d.webp" % n)).size != ref_dims[n - 1]:
                 raise SystemExit("%s: %s window slice %d has different dimensions" % (mid, wid, n))
     print("  windows  %-24s soft reproduced through the picks path; lung + bone rendered in %s/w, dims match" % (mid, stack))
+
+
+def group_planes(info, mids):
+    """torso_planes for any module ids (the whole-body group's 3D body uses tsd_frame)."""
+    out = {}
+    for mid in mids:
+        ax = PLANE_AXIS[MODULES[mid]["plane"]]
+        out[mid] = {str(s["i"]): {"axis": "xyz"[ax], "pos": s["q"][ax], "tl": s["q"][0:3], "u": s["q"][3:6],
+                                  "v": s["q"][6:9], "k": s["k"], "img": s["img"]} for s in info[mid]["slices"]}
+    return out
 
 
 def torso_planes(info):

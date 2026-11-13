@@ -381,7 +381,43 @@
     });
   }
 
+  /* PUBLIC MEDIA (owner 2026-11-11, Cloudflare bill): lesson and KB figures are public, immutable images. They load
+   * from the R2 bucket stewardmd-public-media at media.stewardmd.in (cached at Cloudflare's edge: no Pages Function,
+   * KV read or bank R2 read per view) instead of /api/prep/bank/. Only v<n>/lessons/media and v<n>/kb/media move;
+   * every gated file (MCQs, PYQ, radiology, MaiK images) stays behind the bank gate. A figure that is not on the media
+   * host yet (uploaded since the last sync) falls back to the bank URL once, on its load error.
+   * Kill switch: window.SMD_PUBLIC_MEDIA = "" sends everything back through the bank. */
+  var MEDIA_DEFAULT = "https://media.stewardmd.in/";
+  var PUBLIC_MEDIA_RE = /^v\d{1,3}\/(?:lessons\/media\/[a-z0-9-]{2,80}\.(?:webp|svg)|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
+  function mediaBase() {
+    var b = G.SMD_PUBLIC_MEDIA;
+    if (b === "" || b === false) return "";
+    return String(b || MEDIA_DEFAULT).replace(/\/?$/, "/");
+  }
+  /* publicMediaUrl(u) -> the media.stewardmd.in URL for a public lesson/KB figure bank URL, else u unchanged. */
+  function publicMediaUrl(u) {
+    var base = mediaBase(), s = String(u || "");
+    if (!base || s.indexOf("/api/prep/bank/") < 0) return u;
+    var p = extractBankPath(stripSigned(s));
+    return PUBLIC_MEDIA_RE.test(p) ? base + p : u;
+  }
+  /* mediaFallback(img) -> true when img was a media-host figure and now points at the bank URL instead (once). */
+  function mediaFallback(el) {
+    var base = mediaBase(), src = "";
+    try { src = (el.getAttribute && el.getAttribute("src")) || el.src || ""; } catch (e) {}
+    if (!base || src.indexOf(base) !== 0 || el._smdMediaFallback) return false;
+    el._smdMediaFallback = 1;
+    var api = String(G.SMD_PREP_BANK_API || "/api/prep/bank/").replace(/\/?$/, "/");
+    var u = api + src.slice(base.length);
+    if (u.charAt(0) === "/" && G.SMD_API_BASE) u = G.SMD_API_BASE + u;
+    try { if (el.setAttribute) el.setAttribute("src", u); } catch (e) {}
+    try { el.src = u; } catch (e) {}
+    return true;
+  }
+
   var CLIENT = {
+    publicMediaUrl: publicMediaUrl,
+    mediaFallback: mediaFallback,
     classifyBankPath: classifyBankPath,
     isGatedPath: isGatedPath,
     isImagePath: isImagePath,
@@ -401,7 +437,7 @@
     if (G.document && G.document.addEventListener) {
       G.document.addEventListener("error", function (e) {
         var t = e && e.target;
-        if (t && t.tagName === "IMG") resignImg(t);
+        if (t && t.tagName === "IMG" && !mediaFallback(t)) resignImg(t);
       }, true);
     }
   } catch (e) {}

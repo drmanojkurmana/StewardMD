@@ -260,6 +260,26 @@
   }
   /* moduleOf(key, meta) -> the module a lesson belongs to. */
   function moduleOf(key, meta) { return (meta && meta.module) || key; }
+  /* Local calendar day, so a lesson added late in the evening is still that day. */
+  function isoDay(d) {
+    var y = d.getFullYear(), m = d.getMonth() + 1, day = d.getDate();
+    return y + "-" + (m < 10 ? "0" : "") + m + "-" + (day < 10 ? "0" : "") + day;
+  }
+  function dayNum(iso) { var p = String(iso).split("-"); return Date.UTC(+p[0], +p[1] - 1, +p[2]); }
+  /* isNew(meta, today) -> true when meta.added is a YYYY-MM-DD within the last 45 days, inclusive. */
+  function isNew(meta, today) {
+    var a = meta && meta.added;
+    if (!a || !/^\d{4}-\d{2}-\d{2}$/.test(String(a))) return false;
+    var t = today instanceof Date ? today : new Date();
+    var diff = Math.round((dayNum(isoDay(t)) - dayNum(a)) / 86400000);
+    return diff >= 0 && diff <= 45;
+  }
+  function newTag(meta) { return isNew(meta) ? '<span class="pn-newtag">New</span>' : ""; }
+  function countNew(list, today) {
+    var n = 0;
+    (list || []).forEach(function (x) { if (isNew(x[1], today)) n++; });
+    return n;
+  }
   /* imgUrl(src, bankApi, apiBase) -> where an image step loads from. "api/prep/bank/..." goes through the bank API base
      (tests point it at fixtures); a root path on native gets the API origin (the app runs at https://localhost and
      only stewardmd.in/api is served). */
@@ -417,7 +437,7 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, groups: groups, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, groups: groups, moduleOf: moduleOf, isNew: isNew, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
     XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, visSay: visSay, stepSay: stepSay, stepSentences: stepSentences, alignSay: alignSay, voiceScore: voiceScore, bestVoice: bestVoice };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -429,7 +449,12 @@
     ans: {}, sc: { ok: 0, n: 0, run: 0, best: 0 } };
   var host = null;
 
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+  function getJSON(url) {
+    if (window.SMD_CONTENT && window.SMD_CONTENT.fetchJSON) {
+      return window.SMD_CONTENT.fetchJSON(url, { cache: "no-cache" });
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
   // A lesson file on the bank is signed-in only (owner 2026-11-12): it goes through the bank client, which adds the app
   // proof. Without the client (tests, an old shell) it is a plain fetch, which the server still answers in shadow mode.
   function bankJSON(url) { var C = G.PREP_BANK_CLIENT; return C && C.fetchBankJSON ? C.fetchBankJSON(url) : getJSON(url); }
@@ -670,7 +695,10 @@
     var u;
     if (/^v\d{1,3}\//.test(str(src).replace(/^\/+/, ""))) { u = lessonImgUrl(src, api); u = u.charAt(0) === "/" && base ? base + u : u; }
     else u = imgUrl(src, api, base);
-    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.signImageUrl) return G.PREP_BANK_CLIENT.signImageUrl(u);
+    var C = G.PREP_BANK_CLIENT;
+    // Public lesson figures load from media.stewardmd.in (edge-cached, no bank request); gated images are signed.
+    if (C && C.publicMediaUrl) { var m = C.publicMediaUrl(u); if (m !== u) return m; }
+    if (C && C.signImageUrl) return C.signImageUrl(u);
     return u;
   }
   // Every figure of a lesson is fetched when it opens (not only as the reader reaches it), so a lesson opened once
@@ -682,17 +710,23 @@
       try { lessonImages(les).forEach(function (src) { var k = RM.key(imgSrc(src), { remoteBundle: G.SMD_REMOTE_MEDIA_ON === 1, isGated: function (p) { var C = G.PREP_BANK_CLIENT; return C && C.isGatedPath ? C.isGatedPath(p) : /^v\d{1,3}\/lessons\/media\//.test(p); } }); if (k) RM.load(k).then(null, function () {}); }); } catch (e) {}
       return;
     }
-    try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.onerror = function () { if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg) G.PREP_BANK_CLIENT.resignImg(im, imgSrc(src)); }; im.src = imgSrc(src); }); } catch (e) {}
+    try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.onerror = function () { var C = G.PREP_BANK_CLIENT; if (C && C.mediaFallback && C.mediaFallback(im)) return; if (C && C.resignImg) C.resignImg(im, imgSrc(src)); }; im.src = imgSrc(src); }); } catch (e) {}
   }
   // width and height from the image's shape reserve its box before it loads (no jump under the text).
   function imgTag(src, alt, ar) {
-    return '<img src="' + escH(imgSrc(src)) + '" alt="' + escH(alt) + '"' + (ar ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "") + ' loading="lazy" decoding="async" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)">';
+    return '<img src="' + escH(imgSrc(src)) + '" alt="' + escH(alt) + '"' + (ar ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "") + ' loading="lazy" decoding="async" onerror="var C=window.PREP_BANK_CLIENT;C&&!(C.mediaFallback&&C.mediaFallback(this))&&C.resignImg&&C.resignImg(this)">';
   }
+  // The brand watermark (image-watermark.js) over a lesson figure, as on every other content image: inside PrepNucleus
+  // that is the faint centre mark plus the PrepNucleus lockup in the corner (image-viewer.css). Drawn over the image,
+  // never into it. Empty when image-watermark.js is not loaded or the owner switched it off.
+  function wmOv(src) { var W = G.SMD_WM; return W && W.html ? W.html(str(src)) : ""; }
+  // An image wrapped so the overlay sits on the picture's own box (not the letterbox around it).
+  function wmImg(src, alt, ar) { return '<span class="smd-wm-host pn-wmh"' + arVar(ar) + ">" + imgTag(src, alt, ar) + wmOv(src) + "</span>"; }
   function imageHtml(v, i) {
     if (v.spot) return spotHtml(v, i);
     if (v.marks) return marksHtml(v, i);
     if (v.pair) return pairHtml(v, i);
-    return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '">' + imgTag(v.src, v.alt, v.ar) + "</button>" +
+    return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '">' + wmImg(v.src, v.alt, v.ar) + "</button>" +
       '<figcaption><span class="pn-vzi" aria-hidden="true">' + ic("zoom") + "</span><span>" + escH(v.caption) + " Tap to enlarge.</span></figcaption></figure>";
   }
   // Interactive figure: a card here, the page itself opens full screen (figOpen) so it has room on a phone.
@@ -749,7 +783,7 @@
     var a = ansOf(i), sp = v.spot, b = sp.box;
     return '<figure class="pn-vfig pn-ix pn-spot' + (a.done ? " done" + (a.hit ? " hit" : "") : "") + '">' +
       '<div class="pn-ix-head">' + tag("target", "Spot the sign") + '<p class="pn-ix-q">' + escH(sp.q) + "</p></div>" +
-      '<div class="pn-ix-stage" data-spot="' + i + '"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) +
+      '<div class="pn-ix-stage smd-wm-host" data-spot="' + i + '"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + wmOv(v.src) +
       '<span class="pn-spot-box' + (b[1] < 0.14 ? " lo" : "") + '" style="left:' + pc(b[0]) + ";top:" + pc(b[1]) + ";width:" + pc(b[2]) + ";height:" + pc(b[3]) + '" aria-hidden="true"><b>' + escH(sp.label) + "</b></span>" +
       '<span class="pn-spot-ms">' + (a.miss || []).map(missHtml).join("") + "</span>" + zoomBtn("a", v.alt) + "</div>" +
       '<div class="pn-ix-fb" role="status" aria-live="polite">' + spotFb(sp, a) + "</div>" +
@@ -784,7 +818,7 @@
     return '<figure class="pn-vfig pn-ix pn-reveal' + (all ? " all" : "") + '">' +
       '<div class="pn-ix-head">' + tag("tagl", "Label it") + '<p class="pn-ix-q">Tap a number to name it.</p>' +
       '<button type="button" class="pn-ix-tog" data-act="l-marks" aria-pressed="' + all + '">' + (all ? "Hide all" : "Show all") + "</button></div>" +
-      '<div class="pn-ix-stage"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + v.marks.map(function (m, k) {
+      '<div class="pn-ix-stage smd-wm-host"' + arVar(v.ar) + ">" + imgTag(v.src, v.alt, v.ar) + wmOv(v.src) + v.marks.map(function (m, k) {
         var on = all || !!open[k];
         return '<button type="button" class="pn-mk' + (on ? " on" : "") + (m.x > 0.6 ? " l" : "") + '" style="left:' + pc(m.x) + ";top:" + pc(m.y) + '" data-act="l-mark" data-k="' + k + '" aria-expanded="' + on + '" aria-label="Point ' + (k + 1) + (on ? ": " + escH(m.label) : ", show its name") + '">' +
           "<i>" + (k + 1) + '</i><span class="pn-mk-l" aria-hidden="true">' + escH(m.label) + "</span></button>";
@@ -812,8 +846,8 @@
     if (sliderPair(v)) {
       var pos = a.pos == null ? 50 : a.pos;
       return '<figure class="pn-vfig pn-ix pn-pair sl">' + head +
-        '<div class="pn-ix-stage pn-cmp-sl" data-cmp="' + i + '" style="--pos:' + pos + "%" + (v.ar ? ";--ar:" + v.ar : "") + '">' + imgTag(p.src, p.alt || p.tag, p.ar) +
-        '<div class="pn-cmp-top" aria-hidden="true">' + imgTag(v.src, v.alt, v.ar) + "</div>" +
+        '<div class="pn-ix-stage pn-cmp-sl smd-wm-host" data-cmp="' + i + '" style="--pos:' + pos + "%" + (v.ar ? ";--ar:" + v.ar : "") + '">' + imgTag(p.src, p.alt || p.tag, p.ar) +
+        '<div class="pn-cmp-top" aria-hidden="true">' + imgTag(v.src, v.alt, v.ar) + "</div>" + wmOv(v.src) +
         '<span class="pn-cmp-h" aria-hidden="true"><i>' + svg(ICO.lr, 18) + "</i></span>" +
         '<span class="pn-cmp-t a" aria-hidden="true">' + escH(ta) + '</span><span class="pn-cmp-t b" aria-hidden="true">' + escH(p.tag) + "</span>" +
         '<input type="range" class="pn-cmp-r" min="0" max="100" step="1" value="' + pos + '" aria-label="Slide between ' + escH(ta) + " and " + escH(p.tag) + '" aria-valuetext="' + escH(cmpText(pos, ta, p.tag)) + '"></div>' +
@@ -821,7 +855,7 @@
           return '<button type="button" class="pn-chip' + (pos === x[0] ? " on" : "") + '" data-act="l-cmp" data-v="' + x[0] + '" aria-pressed="' + (pos === x[0]) + '">' + escH(x[1]) + "</button>";
         }).join("") + "</div>" + why + "<figcaption>" + escH(v.caption) + "</figcaption></figure>";
     }
-    var cell = function (z, src, alt, ar, t) { return '<button type="button" class="pn-cmp-cell" data-act="l-zoom" data-z="' + z + '" aria-label="Enlarge: ' + escH(t) + '"><span class="pn-cmp-t">' + escH(t) + "</span>" + imgTag(src, alt, ar) + "</button>"; };
+    var cell = function (z, src, alt, ar, t) { return '<button type="button" class="pn-cmp-cell" data-act="l-zoom" data-z="' + z + '" aria-label="Enlarge: ' + escH(t) + '"><span class="pn-cmp-t">' + escH(t) + "</span>" + wmImg(src, alt, ar) + "</button>"; };
     return '<figure class="pn-vfig pn-ix pn-pair">' + head + '<div class="pn-cmp2">' + cell("a", v.src, v.alt, v.ar, ta) + cell("b", p.src, p.alt || p.tag, p.ar, p.tag) + "</div>" +
       why + "<figcaption>" + escH(v.caption) + " Tap an image to enlarge.</figcaption></figure>";
   }
@@ -957,7 +991,7 @@
   function zoomHtml() {
     var z = L.zoom;
     return '<div class="pn-zoom" role="dialog" aria-modal="true" aria-label="Image, enlarged" id="pnZoom"><div class="pn-zoom-top"><p>' + escH(z.caption) + '</p><button type="button" class="pn-ib" data-act="l-unzoom" aria-label="Close image">' + ic("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(z.src)) + '" alt="' + escH(z.alt) + '" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(z.src)) + '" alt="' + escH(z.alt) + '" onerror="var C=window.PREP_BANK_CLIENT;C&&!(C.mediaFallback&&C.mediaFallback(this))&&C.resignImg&&C.resignImg(this)"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
   }
   function zoomOf(z) {
     var p = page(), v = typeof p === "number" && L.les.steps[p].vis;
@@ -1080,7 +1114,7 @@
   }
   function rowHtml(sid, mid, key, meta, s, label) {
     return '<button type="button" class="pn-row" data-act="l-open" data-s="' + escH(sid) + '" data-m="' + escH(mid) + '" data-l="' + escH(key) + '"><span class="pn-ri" aria-hidden="true">' + ic("book") +
-      '</span><span class="pn-rb"><b>' + escH(label) + "</b><small>" + escH(entrySub(key, meta, s)) + "</small></span>" + ico("chev") + "</button>";
+      '</span><span class="pn-rb"><b>' + escH(label) + newTag(meta) + "</b><small>" + escH(entrySub(key, meta, s)) + "</small></span>" + ico("chev") + "</button>";
   }
   var SHOW = 3;
   /* The module's lessons: one row reads "Lesson"; several are listed by title, the first 3 then "Show all". */
@@ -1107,13 +1141,13 @@
     host = h;
     if (!wrap) return;
     index().then(function (ix) {
-      var sb = host.subjectById ? host.subjectById(sid) : null, mods = subjectLessons(ix, topics, sb && sb.sections), n = 0;
-      mods.forEach(function (m) { n += m.list.length; });
+      var sb = host.subjectById ? host.subjectById(sid) : null, mods = subjectLessons(ix, topics, sb && sb.sections), n = 0, nn = 0;
+      mods.forEach(function (m) { n += m.list.length; nn += countNew(m.list); });
       if (!n || !wrap.isConnected) return;
       if (wrap.querySelector("[data-act=l-subject]")) { wrap.hidden = false; return; }
       var b = G.document.createElement("button");
       b.type = "button"; b.__pnKeep = 1; b.className = "pn-btn pn-sublearn"; b.setAttribute("data-act", "l-subject"); b.setAttribute("data-s", sid);
-      b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + "</span>";
+      b.innerHTML = ic("book") + '<span class="pn-sl-t">Learn</span><span class="pn-sl-n">' + n + (n === 1 ? " lesson" : " lessons") + (nn ? " · " + nn + " new" : "") + "</span>";
       var last = wrap.querySelector(".su-lastb");
       wrap.insertBefore(b, last || null);
       wrap.hidden = false;
@@ -1136,10 +1170,10 @@
       var ixs = host.ix ? host.ix() : {}, topics = (ixs[sid] && ixs[sid].topics) || [], sb = host.subjectById(sid), name = sb ? host.tx(sb.name) : "";
       index().then(function (ix) {
         if (host.stackTop() !== view) return;
-        var mods = subjectLessons(ix, topics, sb && sb.sections), s = store(), n = 0, done = 0;
-        mods.forEach(function (m) { m.list.forEach(function (x) { n++; if (s.ls[x[0]] && s.ls[x[0]].done) done++; }); });
+        var mods = subjectLessons(ix, topics, sb && sb.sections), s = store(), n = 0, done = 0, nn = 0;
+        mods.forEach(function (m) { m.list.forEach(function (x) { n++; if (isNew(x[1])) nn++; if (s.ls[x[0]] && s.ls[x[0]].done) done++; }); });
         host.paint(host.bar("Learn", escH(name), "back") + '<div class="pn-body pn-lsn-all">' +
-          (n ? '<p class="pn-mut pn-lsn-sum">' + n + (n === 1 ? " lesson" : " lessons") + " in " + mods.length + (mods.length === 1 ? " module" : " modules") + (done ? ", " + done + " finished" : "") + ". Each is a few short steps you can listen to, then quick questions.</p>" : '<p class="pn-empty">No lessons for this subject yet.</p>') +
+          (n ? '<p class="pn-mut pn-lsn-sum">' + n + (n === 1 ? " lesson" : " lessons") + " in " + mods.length + (mods.length === 1 ? " module" : " modules") + (nn ? ", " + nn + " new" : "") + (done ? ", " + done + " finished" : "") + ". Each is a few short steps you can listen to, then quick questions.</p>" : '<p class="pn-empty">No lessons for this subject yet.</p>') +
           groups(mods).map(function (g) {
             // One heading per system (taxonomy section) with all its lessons; a module outside every section keeps its own heading.
             return '<section class="pn-lsn-mod"><h2 class="pn-sec">' + host.tx(g.title) + (g.n > 1 ? ' <small class="pn-mut">' + g.n + " lessons</small>" : "") + '</h2><div class="pn-group">' + g.mods.map(function (m) { return m.list.map(function (x) { return rowHtml(sid, m.mid, x[0], x[1], s, x[1].title || host.tx(m.topic.title) || "Lesson"); }).join(""); }).join("") + "</div></section>";
@@ -1314,5 +1348,7 @@
     });
   }
 
-  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
+  // A link from outside PrepNucleus (the Image Library, owner 2026-11-13): this lesson, at the step that shows the image.
+  function openAt(sid, mid, h, key, step) { L.jumpStep = step == null ? null : String(step); return open(sid, mid, h, key, true); }
+  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);

@@ -152,6 +152,32 @@
     if (n < 2) return false;
     return it.o.filter(function (o) { return COMBO.test(String(o)); }).length >= 3;
   }
+  /* Owner 2026-11-13: every question shows exactly four options. A five-option item (MaiK single-best-answer overlays) drops its
+     last distractor, with the per-option reasons and lettered "others" kept in step; the key never changes. One whose text
+     names an option letter or whose options lean on each other ("all of the above") cannot be cut safely: it is hidden.
+     Items tagged for a best-of-five exam (MRCP, MRCS, PLAB, AMC, MCCQE) keep five: that is the real paper's format. */
+  var LETTERS = "ABCDE", BEST_OF_FIVE = /^(?:mrcp|mrcs|plab|amc|mccqe)/;
+  function bestOfFive(it) { return !!(it && it.ex && it.ex.some && it.ex.some(function (e) { return BEST_OF_FIVE.test(String(e)); })); }
+  function fourOptions(it) {
+    if (!it || !it.o || it.o.length <= 4 || bestOfFive(it)) return it;
+    var n = it.o.length, refs = /\b(?:[Oo]ption|[Cc]hoice|[Aa]nswer)\s*\(?[A-E]\)?(?![a-z])|\([A-E]\)/;
+    var x = it.x || {}, text = [it.exp, it.kp, x.key].join(" ");
+    if (n !== 5 || typeof it.a !== "number" || it.a < 0 || it.a > 4 || refs.test(text) ||
+        it.o.some(function (s) { return /all of the above|none of the above|both (?:a|b)\b|\b[a-e] and [a-e]\b/i.test(String(s)); })) {
+      if (!(it.flags && it.flags.indexOf("opt-count") >= 0)) it.flags = (it.flags || []).concat("opt-count");
+      return it;
+    }
+    var drop = it.a === 4 ? 3 : 4, keep = function (_, i) { return i !== drop; };
+    it.o = it.o.filter(keep);
+    if (it.r && it.r.length === 5) it.r = it.r.filter(keep);
+    if (it.a > drop) it.a--;
+    if (x.others && typeof x.others === "object") {
+      var o2 = {};
+      for (var i = 0, j = 0; i < 5; i++) { if (i === drop) continue; if (x.others[LETTERS[i]] != null) o2[LETTERS[j]] = x.others[LETTERS[i]]; j++; }
+      x.others = o2;
+    }
+    return it;
+  }
   function hasImage(it) { return !!(it && ((it.img && it.img.length) || it.stack)); }
   /* needsImage(it): the stem reads a picture the item does not carry ("The radiograph of skull is suggestive of which",
      "ECG shown below", "instrument marked A"); such an item can never be answered (owner 2026-11-08). Tuned on all
@@ -166,7 +192,10 @@
     /\bidentify (?:the|this) (?:instrument|structure|bone|specimen|lesion|device|tool|organ|pattern|appearance|sign)\b/i,
     /\b(?:shown|marked|indicated|pointed|labell?ed)(?: out)? (?:by|with) (?:an? |the )?(?:[a-z]+ )?arrows?\b|\barrow (?:head )?(?:points?|marks?|shows?)\b/i,
     /\b(?:marked|labell?ed)(?: as)? ['"(]?[A-Z]['")]?(?=[\s,.?]|$)|\blettered structure\b/,
-    /\bthe given (?:below |above )?(?:condition|lesion|rash|appearance|finding|sign|structure|procedure|technique|maneuver|manoeuvre)\b/i
+    /\bthe given (?:below |above )?(?:condition|lesion|rash|appearance|finding|sign|structure|procedure|technique|maneuver|manoeuvre)\b/i,
+    /* "You are shown an MLO view of the left breast" (tester 2026-11-12, Q-48J-SJ4-MA3) */
+    /\byou are (?:being )?shown\b/i,
+    /\b(?:is|are|you) shown (?:an?|the|this) (?:[a-z-]+ ){0,3}views?\b/i
   ];
   var IMG_GIVEN = /\b(?:is|are) (?:given|provided)\s*[.:]/i, IMG_NOUN = new RegExp("\\b" + IMG_N + "\\b", "i");
   function needsImage(it) {
@@ -196,6 +225,7 @@
   function eligible(it, ctx, type) {
     ctx = ctx || {};
     if (!it || it.id == null || !it.o || !(it.o.length >= 2) || typeof it.a !== "number") return "malformed";
+    if (it.o.length > 4 && !bestOfFive(it)) return "five-options";   // owner 2026-11-13: four options only (fourOptions trims the safe ones on load)
     if (it.flags && it.flags.length) return "flagged";
     if (ctx.hidden && ctx.hidden[it.id]) return "withdrawn";
     if (ctx.exclude && ctx.exclude[it.id]) return "excluded";
@@ -587,7 +617,7 @@
 
   var API = { RANK_MIN_N: RANK_MIN_N, CLOCK_BACK_MS: CLOCK_BACK_MS, SAVE_EVERY_MS: SAVE_EVERY_MS, TYPES: TYPES,
     profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf, bankStatus: bankStatus,
-    rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, needsImage: needsImage, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
+    rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, needsImage: needsImage, fourOptions: fourOptions, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
     blueprint: blueprint, apportion: apportion, assemble: assemble, targetLevel: targetLevel,
     scNew: scNew, scLeft: scLeft, scStart: scStart, scCharge: scCharge, scResume: scResume, scClose: scClose,
     score: score, result: result, nextActions: nextActions, ownTrend: ownTrend, rankShown: rankShown, streaks: streaks, summary: summary, SUMMARY_MAX_BYTES: SUMMARY_MAX_BYTES,

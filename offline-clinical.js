@@ -196,8 +196,10 @@
       var slug = slugFor(key);
       if (!slug) return null;
       if (_labelCache[slug] !== undefined) return _labelCache[slug];
-      return fetch("/data/fda-labels/" + slug + ".json?v=" + LABEL_VER)
-        .then(function (r) { return r.ok ? r.json() : null; })
+      var labelUrl = "/data/fda-labels/" + slug + ".json?v=" + LABEL_VER;
+      return ((window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+        ? SMD_CONTENT.fetchJSON(labelUrl, { optional: true })
+        : fetch(labelUrl).then(function (r) { return r.ok ? r.json() : null; }))
         .then(function (rec) { _labelCache[slug] = rec && rec.generic ? rec : null; return _labelCache[slug]; })
         .catch(function () { return null; });
     }).catch(function () { return null; });

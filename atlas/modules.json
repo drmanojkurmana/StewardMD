@@ -803,6 +803,119 @@
     "top": "S",
     "bottom": "I"
    }
+  },
+  {
+   "id": "ct-live-body-axial",
+   "title": "Whole body - CT",
+   "subtitle": "Axial - living patient",
+   "region": "Whole body",
+   "modality": "CT",
+   "slices": 96,
+   "thumb": "/atlas/ct-live-body-axial/t/049.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a trauma CT, not a certified normal. Scanned with intravenous contrast, so arteries and veins are bright. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen and descending aorta on the left, superior vena cava on the right).",
+   "group": "live-body",
+   "plane": "axial",
+   "mm": [
+    448.5,
+    307.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "A",
+    "bottom": "P"
+   }
+  },
+  {
+   "id": "ct-live-body-coronal",
+   "title": "Whole body - CT",
+   "subtitle": "Coronal - living patient",
+   "region": "Whole body",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-body-coronal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a trauma CT, not a certified normal. Scanned with intravenous contrast, so arteries and veins are bright. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen and descending aorta on the left, superior vena cava on the right).",
+   "group": "live-body",
+   "plane": "coronal",
+   "mm": [
+    448.5,
+    967.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "flipX": true,
+   "orient": {
+    "left": "R",
+    "right": "L",
+    "top": "S",
+    "bottom": "I"
+   }
+  },
+  {
+   "id": "ct-live-body-sagittal",
+   "title": "Whole body - CT",
+   "subtitle": "Sagittal - living patient",
+   "region": "Whole body",
+   "modality": "CT",
+   "slices": 48,
+   "thumb": "/atlas/ct-live-body-sagittal/t/025.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a trauma CT, not a certified normal. Scanned with intravenous contrast, so arteries and veins are bright. Labels are the dataset's own expert segmentations; no model was run. Structure labels do not name a side; the R and L edge markers come from this scan's own anatomy (liver on the patient's right, spleen and descending aorta on the left, superior vena cava on the right).",
+   "group": "live-body",
+   "plane": "sagittal",
+   "mm": [
+    307.5,
+    967.5
+   ],
+   "windows": [
+    {
+     "id": "soft",
+     "label": "Soft tissue"
+    },
+    {
+     "id": "lung",
+     "label": "Lung"
+    },
+    {
+     "id": "bone",
+     "label": "Bone"
+    }
+   ],
+   "orient": {
+    "left": "A",
+    "right": "P",
+    "top": "S",
+    "bottom": "I"
+   }
   }
  ]
 }

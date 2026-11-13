@@ -35,6 +35,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# data/history (Today in Medical History: 12 month files + 338 banner pictures) is read only from the app's own
+# www/ bundle (build-www.sh) and reaches phones by OTA from R2 (ota-stage.mjs), never from Pages.
+
 rm -rf \
   test docs vault android ios \
   worker prep-arena-worker voice-worker \
@@ -43,7 +46,8 @@ rm -rf \
   bench backend tools \
   local-plugins Packages atlas-pipeline scrollcraft \
   store-assets voice-service voice-benchmark \
-  prompts infra qa-report archive .fleet-reports .github .planning .claude
+  prompts infra qa-report archive .fleet-reports .github .planning .claude \
+  data/history
 
 # Pages rejects an output directory with broken symlinks ("build output directory contains links to files that
 # can't be accessed", build log 2026-10-14 20:16Z). npm clean-install links file: dependencies such as

@@ -11,9 +11,19 @@
    enlarge (tap again for 2.2x; back or Escape closes). */
 (function (G) {
   "use strict";
-  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "neet-ss": "NEET-SS", usmle: "USMLE" };
+  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "aiims-pg": "AIIMS PG", "neet-ss": "NEET-SS", "ini-ss": "INI-SS", usmle: "USMLE" };
   // AIPGMEE was the all-India PG entrance before NEET-PG (2017 session onwards): its papers sit on the NEET-PG tab.
-  var PG = { "neet-pg": 1, aipgmee: 1 };
+  // INI-CET papers (owner 2026-11-13) share the list; AIIMS PG (2019, May 2020) was INI-CET's forerunner.
+  var PG = { "neet-pg": 1, aipgmee: 1, "ini-cet": 1, "aiims-pg": 1, "neet-ss": 1, "ini-ss": 1 };
+  // Papers screen tabs, one per exam family (owner 2026-11-13: NEET-SS and INI-SS joined NEET-PG and INI-CET).
+  var TABS = [["pg", "NEET-PG", { "neet-pg": 1, aipgmee: 1 }], ["inicet", "INI-CET", { "ini-cet": 1, "aiims-pg": 1 }], ["neetss", "NEET-SS", { "neet-ss": 1 }], ["iniss", "INI-SS", { "ini-ss": 1 }]];
+  function tabOf(exam) { for (var i = 0; i < TABS.length; i++) if (TABS[i][2][exam]) return TABS[i][0]; return "pg"; }
+  // A paper's timed test follows its own exam's pattern (MOCKS: NEET-PG 200 Q / 210 min +4/-1, INI-CET 200 / 180 +1/-1/3).
+  // INI-SS: 80 Q / 90 min, +1 and -1/3 (owner 2026-11-13); MOCKS has no INI-SS list, so its pattern lives here.
+  var INI_SS = { id: "ini-ss", label: "INI-SS pattern", n: 80, min: 90, plus: 1, minus: 1 / 3 };
+  function patternOf(p) { var e = p && p.exam; return e === "ini-cet" || e === "aiims-pg" ? "ini-cet" : e === "ini-ss" ? "ini-ss" : e === "neet-ss" ? "neet-ss" : "neet-pg"; }
+  // Recall subjects with no app subject of their own (owner 2026-11-13), shown by name instead of "Not sorted yet".
+  var EXTRA_SUBJ = { "general-paediatrics-feeder": "General Pediatrics Feeder PYQ" };
 
   /* ================= pure ================= */
   // [exam, year, kind] or { exam, year, kind } -> one line per exam and kind: "Asked in NEET-PG 2025, 2024 (recall)".
@@ -63,8 +73,10 @@
     Object.keys(ix.tags || {}).forEach(function (id) { if (ix.tags[id][0] === mid) n++; });
     return n;
   }
+  // A question that tests two subjects carries its second module in tt (owner 2026-11-13) and shows under both.
+  function onMod(it, mid) { return it.t === mid || !!(it.tt && it.tt.indexOf(mid) >= 0); }
   function bySubject(items) { var c = {}; items.forEach(function (it) { var s = it.subject || "unsorted"; c[s] = (c[s] || 0) + 1; }); return c; }
-  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
+  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject, onMod: onMod, patternOf: patternOf, tabOf: tabOf };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -126,31 +138,35 @@
   };
   function svg(n, size) { return '<svg viewBox="0 0 24 24" width="' + (size || 20) + '" height="' + (size || 20) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
   function icon() { return svg("papers"); }
-  function mockFor(host, exam) { return host.mockOf(exam, exam); }
+  function mockFor(host, exam) { return exam === "ini-ss" ? INI_SS : host.mockOf(exam, exam); }
 
   // Home: one row in the Practise group (NEET-PG only: the papers we hold are NEET-PG).
   function homeRow(host) {
     warm(host);
-    return host.row("y-home", icon(), "Previous year papers", "NEET-PG recall papers by year, timed or practice");
+    return host.row("y-home", icon(), "Previous year papers", "NEET-PG, INI-CET, NEET-SS and INI-SS recall papers by year");
   }
 
-  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, and AIPGMEE papers were not published either. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
+  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG or NEET-SS papers, AIPGMEE papers were not published either, and AIIMS does not publish INI-CET or INI-SS papers. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
   function renderPapers(host) {
     var esc = host.esc;
-    host.paint(host.bar("Previous year papers", "NEET-PG and AIPGMEE · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
+    host.paint(host.bar("Previous year papers", "Recall papers by exam and year", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
     Promise.all([loadIndex(host), loadItems(host), qualOf(host)]).then(function (r) {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       var ix = r[0], items = r[1], qual = r[2], hid = hiddenOf(host), years = {}, html = "";
-      ix.papers.filter(function (p) { return PG[p.exam]; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
+      var has = {}; ix.papers.forEach(function (p) { if (PG[p.exam]) has[tabOf(p.exam)] = 1; });
+      if (!has[P.tab]) P.tab = "pg";
+      var tabs = TABS.filter(function (t) { return has[t[0]]; });
+      var bar = tabs.length > 1 ? '<div class="pn-wrap pn-yq-tabs" role="group" aria-label="Exam">' + tabs.map(function (t) { var on = t[0] === P.tab; return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="y-tab" data-v="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>" : "";
+      ix.papers.filter(function (p) { return PG[p.exam] && tabOf(p.exam) === P.tab; }).forEach(function (p) { (years[p.year] = years[p.year] || []).push(p); });
       var ys = Object.keys(years).sort(function (a, b) { return b - a; });
-      if (!ys.length) { box.innerHTML = NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
+      if (!ys.length) { box.innerHTML = bar + NOTE + '<p class="pn-empty">No previous year papers for this exam yet.</p>'; return; }
       ys.forEach(function (y) {
         html += '<h2 class="pn-sec">' + esc(y) + '</h2><div class="pn-group">' + years[y].map(function (p) {
           var list = paperItems(items, p.id), ok = list.filter(function (it) { return usable(it, hid, qual); }), img = ok.filter(function (it) { return it.img; }).length;
           return '<button type="button" class="pn-row pn-yq-row" data-act="y-paper" data-v="' + esc(p.id) + '"><span class="pn-ri" aria-hidden="true">' + icon() + '</span><span class="pn-rb"><b>' + esc(paperTitle(p)) + "</b><small>" + host.fmt(ok.length) + " questions" + (img ? " · " + img + " with images" : "") + '</small></span><span class="pn-yq-kind">' + (p.kind === "official" ? "Official" : "Recall") + "</span>" + host.ico("chev") + "</button>";
         }).join("") + "</div>";
       });
-      box.innerHTML = NOTE + html;
+      box.innerHTML = bar + NOTE + html;
     }, function () {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       box.innerHTML = NOTE + '<p class="pn-err" role="alert">Previous year papers need a connection the first time. Once opened they work offline.</p><button type="button" class="pn-btn" data-act="y-home-retry">Try again</button>';
@@ -169,15 +185,15 @@
     var tOnly = topicOnly(p);
     var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid, qual); });
     // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
-    var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
+    var held = list.length - ok.length, mock = mockFor(host, patternOf(p)), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
     // Round 6: each subject row carries its icon tile and a bar for its share of the paper.
     var top = 0; Object.keys(subj).forEach(function (k) { if (subj[k] > top) top = subj[k]; });
     var subs = Object.keys(subj).sort(function (a, b) { return subj[b] - subj[a]; }).map(function (sid) {
       var sb = host.subjectById(sid);
       // With the practice setup sheet each subject row opens it for that subject's questions in this paper.
       var su = G.PREP_SETUP && G.PREP_SETUP.enabled();
-      return (su ? '<li><button type="button" class="pn-yq-subb" data-act="y-ssub" data-v="' + esc(pid) + '" data-s="' + esc(sid) + '" aria-label="Practise ' + (sb ? host.tx(sb.name) : "questions not sorted yet") + ' from this paper">' : "<li>") + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
-        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span>" + (su ? "</button>" : "") + "</li>";
+      return (su ? '<li><button type="button" class="pn-yq-subb" data-act="y-ssub" data-v="' + esc(pid) + '" data-s="' + esc(sid) + '" aria-label="Practise ' + (sb ? host.tx(sb.name) : EXTRA_SUBJ[sid] || "questions not sorted yet") + ' from this paper">' : "<li>") + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
+        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : EXTRA_SUBJ[sid] || "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span>" + (su ? "</button>" : "") + "</li>";
     }).join("");
     host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel pn-modp pn-yqp" style="--h:262">' +
       '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall" + (tOnly ? " · a topic set, not a single paper" : "") + "</p>" +
@@ -195,7 +211,7 @@
       if (kind === "exam" && topicOnly(p)) kind = "study";
       var title = paperTitle(p) + " (recall)";
       if (kind === "exam") {
-        var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
+        var mock = mockFor(host, patternOf(p)), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
         return host.run(pick, "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } });
       }
       host.run(ok.slice(), "study", title);
@@ -218,7 +234,7 @@
     slot.innerHTML = '<div class="pn-wrap pn-yq-chips" role="group" aria-label="Show questions">' +
       '<button type="button" class="pn-chip' + (on ? "" : " on") + '" aria-pressed="' + !on + '" data-act="y-mf" data-v="all" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">All questions</button>' +
       '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="y-mf" data-v="pyq" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">PYQ · ' + n + "</button></div>" +
-      (on ? '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG, from recall papers</p>' +
+      (on ? '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG and INI-CET, from recall papers</p>' +
         '<button type="button" class="pn-btn pri" data-act="y-mstart" data-k="study" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("play") + " Practice PYQs</button>" +
         '<button type="button" class="pn-btn" data-act="y-mstart" data-k="exam" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("clock") + " Timed test of PYQs</button></section>" : "");
   }
@@ -234,7 +250,7 @@
   function setupPaper(host, pid, sid) {
     var p = null; (P.ix ? P.ix.papers : []).forEach(function (x) { if (x.id === pid) p = x; });
     if (!p || !P.items) return;
-    var sb = sid ? host.subjectById(sid) : null, title = paperTitle(p) + " (recall)", sname = sid ? (sb ? host.tx(sb.name) : "Not sorted yet") : "";
+    var sb = sid ? host.subjectById(sid) : null, title = paperTitle(p) + " (recall)", sname = sid ? (sb ? host.tx(sb.name) : EXTRA_SUBJ[sid] || "Not sorted yet") : "";
     return G.PREP_SETUP.open({ kind: "pyq", id: pid + (sid ? "/" + sid : ""), title: paperTitle(p), sub: sid ? sname : "Recall paper", hue: sb ? host.subjHue(sid) : 262,
       load: function () { var hid = hiddenOf(host); return qualOf(host).then(function (qual) { return [paperItems(P.items, pid).filter(function (it) { return usable(it, hid, qual) && (!sid || (it.subject || "unsorted") === sid); })]; }); },
       start: function (list, mode, ro) { setupRun(host, list, mode, sid ? sname + " \u00b7 " + title : title, ro); } }, host);
@@ -248,13 +264,13 @@
   function modulePyqList(host, sid, mid) {
     return Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
-      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); }));
+      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return onMod(it, mid) && !it.bank && usable(it, hid, qual); }));
     });
   }
   function startModulePyq(host, sid, mid, kind) {
     Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
-      var own = r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); });
+      var own = r[0].filter(function (it) { return onMod(it, mid) && !it.bank && usable(it, hid, qual); });
       var bank = host.pool(r[1]).filter(function (it) { return tags[it.id]; });
       var list = bank.concat(own);
       if (!list.length) return host.toast("No previous-year questions to show here yet.");
@@ -298,8 +314,10 @@
     if (!it.img || !it.img.length || !P.host) return "";
     if ((it.imgPlace === "exp" ? "exp" : "stem") !== (where || "stem")) return "";
     var e = P.host.esc, of = where === "exp" ? "this explanation" : "this question";
+    var W = (typeof window !== "undefined" ? window : globalThis).SMD_WM;   // brand watermark overlay (image-watermark.js)
     var figs = it.img.map(function (f, k) {
-      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></button>' +
+      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><span class="smd-wm-host pn-wmh"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async" onload="this.naturalHeight&&this.parentNode.style.setProperty(\'--ar\',this.naturalWidth/this.naturalHeight)" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)">' +
+        (W && W.html ? W.html(String(f)) : "") + "</span></button>" +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + '</span><span>Tap to enlarge.</span></figcaption></figure>';
     }).join("");
     return figs;
@@ -345,6 +363,7 @@
     var v = b.getAttribute("data-v");
     if (a === "y-home") return host.push(function () { renderPapers(host); });
     if (a === "y-home-retry") return renderPapers(host);
+    if (a === "y-tab") { P.tab = v; return renderPapers(host); }
     if (a === "y-paper") return Promise.all([loadItems(host), qualOf(host)]).then(function (r) { host.push(function () { renderPaper(host, v, r[1]); }); }, function () { host.toast("The paper did not load. Check the connection and try again."); });
     if (a === "y-start") return startPaper(host, v, b.getAttribute("data-k"));
     if (a === "y-mf") { P.mf[b.getAttribute("data-m")] = v; var slot = host.root().querySelector("#pnPyqSlot"); return drawSlot(slot, b.getAttribute("data-s"), b.getAttribute("data-m"), moduleCount(P.ix, b.getAttribute("data-m")), host); }

@@ -35,7 +35,8 @@
     return { item: it, o: opts, a: opts.indexOf(it.dx), day: day };
   }
   // The first sentence of an explanation, for the feed and voice mode.
-  function firstSentence(t, max) { t = String(t || "").replace(/\s+/g, " ").trim(); var m = /^.*?[.!?](\s|$)/.exec(t); return (m ? m[0] : t).trim().slice(0, max || 220); }
+  // Strip per-user watermark zero-width marks so TTS/compare never see them (marks stay in the stored/HTML text).
+  function firstSentence(t, max) { t = String(t || "").replace(/[\u200b\u200c\u200d\u2060\ufeff]/g, "").replace(/\s+/g, " ").trim(); var m = /^.*?[.!?](\s|$)/.exec(t); return (m ? m[0] : t).trim().slice(0, max || 220); }
   function uniq(a) { var seen = {}, o = []; a.forEach(function (x) { if (x && !seen[x]) { seen[x] = 1; o.push(x); } }); return o; }
   // The IST day "YYYY-MM-DD" of a time (the server's day for the board).
   function istDay(t) { return new Date(t + 5.5 * 3600e3).toISOString().slice(0, 10); }

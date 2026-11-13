@@ -184,11 +184,10 @@ const art = items.map((i) => i.svg).join("");
 /* ---- labels: small pills tied to a part by a short leader ---- */
 const LAB = [
   ["Arterial line", [24, 40, 60], [-58, -6], "Arterial line: blood from the arm to the dialyser. It is called arterial because blood leaves the patient, not because of the vessel it comes from."],
-  ["Venous line", [92, 40, 16], [0, 26], "Venous line: cleaned blood going back to the patient's vein. Pressure here is watched, because a rise can mean a clot or a kinked line."],
+  ["Venous line", [92, 40, 16], [0, 26], "Venous line: cleaned blood going back to the patient's vein. An air trap and detector sit on this line. Pressure here is watched, because a rise can mean a clot or a kinked line."],
   ["Blood pump", [ROTOR[0], ROTOR[1], ROTOR[2] - 12], [0, 36], "Blood pump. It sets how fast blood goes through the circuit."],
   ["Heparin", [HEPC[0] + 36, HEPC[1], HEPC[2]], [-46, 34], "Heparin syringe pump: a slow drip of anticoagulant into the circuit."],
   ["Dialyser", [DLY.x + DLY.R, DLY.y, 50], [40, 0], "Hollow-fibre dialyser: where blood and dialysate meet across the membrane."],
-  ["Air trap", [CH[0], CH[1], CH[2] + 32], [32, -14], "Air trap and air detector on the venous line."],
   ["Saline", [POLE[0], POLE[1], 98], [30, -4], "Saline bag: primes the circuit and can top up blood volume."],
   ["Fistula", [NEEDLE_A[0] + 10, NEEDLE_A[1] + 2, 52], [-12, 34], "The AV fistula: the access to the blood."],
   ["Dialysate out", [112, 8, 22], [64, 30], "Used dialysate, carrying urea, potassium and extra water, back to the machine and on to drain."],

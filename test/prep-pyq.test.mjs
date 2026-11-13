@@ -202,6 +202,29 @@ test("paid stages: requests never carry the key to the solver, explanation gates
   fs.rmSync(root, { recursive: true, force: true });
 });
 
+test("onMod: a question shows under its module and under a second subject's module (tt)", () => {
+  assert.equal(PY.onMod({ t: "med-arrhythmias" }, "med-arrhythmias"), true);
+  assert.equal(PY.onMod({ t: "med-arrhythmias", tt: ["phm-antiarrhythmics"] }, "phm-antiarrhythmics"), true);
+  assert.equal(PY.onMod({ t: "med-arrhythmias" }, "phm-antiarrhythmics"), false);
+  assert.equal(PY.onMod({}, "med-arrhythmias"), false);
+});
+
+test("patternOf and titles: INI-CET and AIIMS PG papers time like INI-CET; sessions show by name", () => {
+  assert.equal(PY.patternOf({ exam: "ini-cet" }), "ini-cet");
+  assert.equal(PY.patternOf({ exam: "aiims-pg" }), "ini-cet");
+  assert.equal(PY.patternOf({ exam: "neet-pg" }), "neet-pg");
+  assert.equal(PY.paperTitle({ exam: "ini-cet", year: 2025, session: "November" }), "INI-CET 2025 · November");
+  assert.equal(PY.paperTitle({ exam: "aiims-pg", year: 2019, session: "May" }), "AIIMS PG 2019 · May");
+});
+
+test("tabOf and patternOf: each exam has its papers tab; NEET-SS and INI-SS papers have their own patterns", () => {
+  assert.deepEqual(["neet-pg", "aipgmee", "ini-cet", "aiims-pg", "neet-ss", "ini-ss"].map(PY.tabOf), ["pg", "pg", "inicet", "inicet", "neetss", "iniss"]);
+  assert.equal(PY.patternOf({ exam: "neet-ss" }), "neet-ss");
+  assert.equal(PY.patternOf({ exam: "ini-ss" }), "ini-ss");
+  assert.equal(PY.paperTitle({ exam: "neet-ss", year: 2025, session: "Medical group" }), "NEET-SS 2025 · Medical group");
+  assert.equal(PY.paperTitle({ exam: "ini-ss", year: 2026, session: "May" }), "INI-SS 2026 · May");
+});
+
 test("app pure: recall labels, paper titles, the NEET-PG pattern, paper order, module counts", () => {
   assert.deepEqual(PY.tagLabel([["neet-pg", 2024, "recall"], ["neet-pg", 2025, "recall"], ["neet-pg", 2025, "recall"]]), ["Asked in NEET-PG 2025, 2024 (recall)"]);
   assert.deepEqual(PY.tagLabel([{ exam: "neet-pg", year: 2023, kind: "official" }]), ["Asked in NEET-PG 2023"]);

@@ -301,7 +301,8 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     ".smdc{flex:none;min-width:0;margin:0 0 6px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.smdc>*{min-width:0}.smdc-t{grid-column:1/3;padding:3px}.smdc-t button{min-height:34px;font-size:14px}" +
     ".smdc-r{padding:6px 12px;font-size:13px;gap:1px;border-top:1px solid var(--anatomy-faint)}.smdc-r b{font-size:10px}" +
     "@media (max-width:640px){.smdc{grid-template-columns:1fr}.smdc-t{grid-column:1}}" +
-    ".smd-why{flex:0 0 auto;max-height:28vh;overflow:auto;margin:0 0 6px;-webkit-mask-image:linear-gradient(#000 calc(100% - 22px),transparent);mask-image:linear-gradient(#000 calc(100% - 22px),transparent);padding-bottom:16px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
+    "body{--w-t:#f2b84b;--w-g:#6aa7ff;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light']{--w-t:#9a6200;--w-g:#1f5fbf;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
+    ".smd-why{flex:0 0 auto;max-height:28vh;overflow:auto;margin:0 0 6px;-webkit-mask-image:linear-gradient(#000 calc(100% - 22px),transparent);mask-image:linear-gradient(#000 calc(100% - 22px),transparent);padding-bottom:16px;display:grid;gap:3px;--w-t:#f2b84b;--w-g:#6aa7ff;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-g:#1f5fbf;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
     ".smd-why p{margin:0;padding:4px 10px;border-left:4px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 11%,transparent);font:13px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
     ".smd-why b{font:700 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-right:6px}.smd-why mark{background:none;color:var(--anatomy-strong);font-weight:700}" +
     "@media (min-width:900px){.smd-why p{font-size:14px}}" +
@@ -324,23 +325,172 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     ".smd-help{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45)}" +
     ".smd-help div{max-width:340px;margin:16px;padding:18px 20px;border-radius:18px;background:var(--anatomy-card);color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint),0 12px 40px rgba(0,0,0,.4);font:15px/1.45 system-ui,-apple-system,sans-serif}" +
     ".smd-help b{display:block;font-size:17px;margin-bottom:8px}.smd-help ol{margin:0 0 12px;padding-left:20px}.smd-help li{margin:4px 0}" +
-    ".smd-help button{width:100%;min-height:44px;border:0;border-radius:12px;background:var(--k-mid,#4fb3ff);color:#04121c;font:700 15px system-ui}";
+    ".smd-help button{width:100%;min-height:44px;border:0;border-radius:12px;background:var(--k-mid,#4fb3ff);color:#04121c;font:700 15px system-ui}" +
+    ".smd-help button+button{margin-top:8px}.smd-help .smd-help-go{background:transparent;color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint)}" +
+    ".smd-mode{display:flex;flex:none;gap:4px;margin:0 0 8px;padding:3px;border-radius:12px;background:color-mix(in srgb,var(--anatomy-faint) 70%,transparent)}" +
+    ".smd-mode button{flex:1;min-height:44px;min-width:44px;border:0;border-radius:10px;background:transparent;color:var(--anatomy-text);font:600 15px system-ui,-apple-system,sans-serif;cursor:pointer}" +
+    ".smd-mode button[aria-pressed='true']{background:var(--anatomy-top);color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint)}" +
+    ".smd-mode button[hidden]{display:none}" +
+    ".smd-guide{flex:none;margin:0 0 8px;padding:8px 10px 10px;border-left:4px solid var(--c);border-radius:8px;background:color-mix(in srgb,var(--c) 11%,transparent)}" +
+    ".smd-guide[hidden]{display:none}.smd-why[hidden]{display:none}" +
+    ".smd-guide-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 4px}" +
+    ".smd-guide-k{font:700 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:var(--c)}" +
+    ".smd-guide-n{font:600 12px system-ui;color:var(--anatomy-muted)}" +
+    ".smd-guide-s{margin:0 0 8px;font:15px/1.4 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
+    ".smd-guide-s mark{background:none;color:var(--anatomy-strong);font-weight:700}" +
+    ".smd-guide-nav{display:flex;gap:8px}.smd-guide-nav button{flex:1;min-height:44px;min-width:44px;border:0;border-radius:12px;background:var(--anatomy-card);color:var(--anatomy-strong);font:700 15px system-ui;box-shadow:0 0 0 1px var(--anatomy-faint);cursor:pointer}" +
+    ".smd-guide-nav button:disabled{opacity:.38}" +
+    ".smd-dim{opacity:.28!important}.smd-keep{opacity:1!important;animation:smd-glow 1.8s ease-in-out infinite}" +
+    "@keyframes smd-glow{0%,100%{filter:drop-shadow(0 0 .6px var(--smd-c,#fff))}50%{filter:drop-shadow(0 0 5px var(--smd-c,#fff))}}" +
+    "@media (prefers-reduced-motion:reduce){.smd-keep{animation:none;filter:drop-shadow(0 0 2px var(--smd-c,#fff))}}" +
+    ".smd-gbar{margin:0;padding:1px 2px 0;font:11.5px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-muted)}";
+  function guideApi() { return G.SMD_FIGGUIDE || null; }
+  /* Some hosts load fig-viewer.js without fig-guide.js. Pull the helpers in, once, so the tour can still be built. */
+  var guideP = null;
+  function guideReady() {
+    var g = guideApi(); if (g) return Promise.resolve(g);
+    if (guideP) return guideP;
+    guideP = new Promise(function (ok) {
+      var s = D.createElement("script"); s.src = "/fig-guide.js";
+      s.onload = function () { ok(guideApi()); };
+      s.onerror = function () { ok(null); };
+      (D.head || D.documentElement).appendChild(s);
+    });
+    return guideP;
+  }
+  function markTerms(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<mark>$1</mark>"); }
+  function firstLocal(t) { t = String(t || ""); var i = t.search(/[.!?](\s|$)/); return i > 0 ? t.slice(0, i + 1) : t; }
+  function plainLine(t) {
+    var g = guideApi(), s = g && g.firstSentence ? g.firstSentence(t) : firstLocal(t);
+    if (g && g.gloss) s = g.gloss(s);
+    return markTerms(s);
+  }
   /* "What is happening": the figure's Mechanism mastery entry, one short colour coded line each, with the treatment line shown when a treatment is on. */
   function explain(doc, win, dock) {
     var id = (String(win.location.pathname).match(/\/([a-z0-9-]+?)(?:-light)?\.html$/) || [])[1]; if (!id) return;
-    msReady().then(function (all) {
-      var m = all[id]; if (!m || !doc.body) return;
-      function first(t) { t = String(t || ""); var i = t.search(/[.!?](\s|$)/); return i > 0 ? t.slice(0, i + 1) : t; }
-      function fm(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<mark>$1</mark>"); }
+    Promise.all([guideReady(), msReady()]).then(function (got) {
+      var all = got[1] || {}, m = all[id]; if (!m || !doc.body) return;
       var box = doc.createElement("div"); box.className = "smd-why"; box.setAttribute("aria-label", "What is happening");
-      box.innerHTML = [["trigger", "Cause", "--w-t"], ["mechanism", "What it does", "--w-m"], ["manifestation", "Result", "--w-f"]].map(function (r) { return '<p style="--c:var(' + r[2] + ')"><b>' + r[1] + "</b>" + fm(first(m[r[0]])) + "</p>"; }).join("") +
-        '<p class="smd-why-i" style="--c:var(--w-i)" hidden><b>Treatment</b>' + fm(first(m.intervention)) + "</p>" +
-        (m.adverse ? '<p class="smd-why-i smd-why-a" style="--c:var(--w-a)" hidden><b>Side effects</b>' + fm(first(m.adverse)) + "</p>" : "");
-      dock.insertBefore(box, dock.firstChild);
+      box.innerHTML = [["trigger", "Cause", "--w-t"], ["mechanism", "What it does", "--w-m"], ["manifestation", "Result", "--w-f"]].map(function (r) { return '<p style="--c:var(' + r[2] + ')"><b>' + r[1] + "</b>" + plainLine(m[r[0]]) + "</p>"; }).join("") +
+        '<p class="smd-why-i" style="--c:var(--w-i)" hidden><b>Treatment</b>' + plainLine(m.intervention) + "</p>" +
+        (m.adverse ? '<p class="smd-why-i smd-why-a" style="--c:var(--w-a)" hidden><b>Side effects</b>' + plainLine(m.adverse) + "</p>" : "");
+      var ctl = dock.querySelector(".dr-controls");
+      if (ctl) dock.insertBefore(box, ctl); else dock.appendChild(box);
+      if (dock.getAttribute("data-mode") === "learn") box.hidden = true;
       var sel = doc.getElementById("drug"), tis = box.querySelectorAll(".smd-why-i");
       function sync() { var on = !!(sel && sel.value !== "0"); Array.prototype.forEach.call(tis, function (t) { t.hidden = !on; }); }
       if (sel) { sel.addEventListener("change", sync); sync(); }
     });
+  }
+  /* Learn mode: dim the stage to about .28 and keep matched .hot parts, their leader lines, and matching labels. */
+  function clearSpot(doc) {
+    Array.prototype.forEach.call(doc.querySelectorAll(".smd-dim, .smd-keep, [data-smd-hold]"), function (n) {
+      n.classList.remove("smd-dim"); n.classList.remove("smd-keep"); n.removeAttribute("data-smd-hold");
+      try { n.style.removeProperty("--smd-c"); } catch (e) {}
+    });
+  }
+  function spotlight(doc, terms, color) {
+    clearSpot(doc);
+    var g = guideApi(); if (!g || !terms || !terms.length) return;
+    var svg = doc.querySelector("svg.dr-fig, svg.iso-svg"); if (!svg) return;
+    var keeps = [];
+    function keep(el) { if (el && keeps.indexOf(el) < 0) keeps.push(el); }
+    Array.prototype.forEach.call(svg.querySelectorAll(".hot"), function (el) {
+      if (g.termHits(terms, el.getAttribute("data-info") || "") || g.termHits(terms, el.textContent || "")) keep(el);
+    });
+    Array.prototype.forEach.call(svg.querySelectorAll("text"), function (el) {
+      if (el.closest && el.closest(".hot")) return;
+      if (!g.termHits(terms, el.textContent || "")) return;
+      keep(el);
+      var p = el.parentNode; if (!p) return;
+      Array.prototype.forEach.call(p.children, function (c) {
+        if (/(^|\s)(dr-leader|dr-dot)(\s|$)/.test(c.getAttribute("class") || "")) keep(c);
+      });
+    });
+    if (!keeps.length) return;
+    keeps.forEach(function (el) {
+      el.classList.add("smd-keep");
+      try { el.style.setProperty("--smd-c", "var(" + color + ")"); } catch (e) {}
+      var p = el.parentNode;
+      while (p && p !== svg) { p.setAttribute("data-smd-hold", "1"); p = p.parentNode; }
+    });
+    function walk(node) {
+      if (!node || node.nodeType !== 1 || node.classList.contains("smd-keep")) return;
+      if (node.getAttribute("data-smd-hold")) { Array.prototype.forEach.call(node.children, walk); return; }
+      node.classList.add("smd-dim");
+    }
+    Array.prototype.forEach.call(svg.children, walk);
+  }
+  /* Same change event compare() uses, so the scene and the with/without rows both update. */
+  function setDrug(doc, on) {
+    var sel = doc.getElementById("drug"); if (!sel || !sel.options || sel.options.length < 2 || !doc.defaultView) return;
+    var next = "0", i;
+    if (on) { for (i = 0; i < sel.options.length; i++) if (String(sel.options[i].value) !== "0") { next = String(sel.options[i].value); break; } if (next === "0") return; }
+    if (String(sel.value) === next) return;
+    sel.value = next;
+    try { sel.dispatchEvent(new doc.defaultView.Event("change", { bubbles: true })); } catch (e) {}
+  }
+  function savedMode() { try { return G.localStorage.getItem("smdFigMode") === "learn" ? "learn" : "explore"; } catch (e) { return "explore"; } }
+  function storeMode(v) { try { G.localStorage.setItem("smdFigMode", v === "learn" ? "learn" : "explore"); } catch (e) {} }
+  /* Learn | Explore in the dock, and the 4 to 6 step tour from the mastery entry. */
+  function guided(doc, win, dock) {
+    var bar = doc.createElement("div"); bar.className = "smd-mode"; bar.setAttribute("role", "group"); bar.setAttribute("aria-label", "Learn or explore");
+    bar.innerHTML = '<button type="button" data-mode="learn">Learn</button><button type="button" data-mode="explore">Explore</button>';
+    var card = doc.createElement("div"); card.className = "smd-guide"; card.hidden = true;
+    card.innerHTML = '<p class="smd-guide-h"><b class="smd-guide-k"></b><span class="smd-guide-n"></span></p><p class="smd-guide-s"></p><div class="smd-guide-nav"><button type="button" class="smd-back">Back</button><button type="button" class="smd-next">Next</button></div>';
+    dock.insertBefore(card, dock.firstChild); dock.insertBefore(bar, card);
+    var learnBtn = bar.querySelector('[data-mode="learn"]'), expBtn = bar.querySelector('[data-mode="explore"]');
+    var steps = [], idx = 0, mode = savedMode(), known = false;
+    function render() {
+      if (mode !== "learn" || !steps.length) { card.hidden = true; clearSpot(doc); return; }
+      var s = steps[idx];
+      card.hidden = false; card.style.setProperty("--c", "var(" + s.color + ")");
+      card.querySelector(".smd-guide-k").textContent = s.label;
+      card.querySelector(".smd-guide-n").textContent = (idx + 1) + " of " + steps.length;
+      card.querySelector(".smd-guide-s").innerHTML = markTerms(s.sentence);
+      card.querySelector(".smd-back").disabled = idx === 0;
+      card.querySelector(".smd-next").disabled = idx === steps.length - 1;
+      if (s.drug === "off") setDrug(doc, false); else if (s.drug === "on") setDrug(doc, true);
+      spotlight(doc, s.terms, s.color);
+    }
+    function paint() {
+      var learn = mode === "learn";
+      dock.setAttribute("data-mode", mode);
+      learnBtn.setAttribute("aria-pressed", learn ? "true" : "false");
+      expBtn.setAttribute("aria-pressed", learn ? "false" : "true");
+      var why = dock.querySelector(".smd-why"); if (why) why.hidden = learn;
+      if (!learn) { card.hidden = true; clearSpot(doc); return; }
+      render();
+    }
+    function setMode(next) {
+      if (next === "learn" && known && !steps.length) return;
+      var learn = next === "learn"; if (learn && mode !== "learn") idx = 0; mode = learn ? "learn" : "explore"; storeMode(mode); paint();
+    }
+    learnBtn.addEventListener("click", function () { setMode("learn"); });
+    expBtn.addEventListener("click", function () { setMode("explore"); });
+    card.querySelector(".smd-back").addEventListener("click", function () { if (idx > 0) { idx--; render(); } });
+    card.querySelector(".smd-next").addEventListener("click", function () { if (idx < steps.length - 1) { idx++; render(); } });
+    win.__smdStartLearn = function () { setMode("learn"); };
+    paint();
+    var id = (String(win.location.pathname).match(/\/([a-z0-9-]+?)(?:-light)?\.html$/) || [])[1] || "";
+    /* Mastery and the guide helpers can arrive after Learn is pressed. Paint again when they do. */
+    Promise.all([guideReady(), msReady()]).then(function (got) {
+      if (!doc.body) return;
+      var api = got[0], all = got[1] || {};
+      steps = api ? api.stepsFrom(id && all[id] ? all[id] : null) : [];
+      known = true;
+      if (!steps.length) { learnBtn.hidden = true; if (mode === "learn") mode = "explore"; }
+      else learnBtn.hidden = false;
+      paint();
+    });
+  }
+  function gaugeLegend(doc) {
+    if (!doc.querySelector(".dr-g-fill, .dr-g-tr") || doc.querySelector(".smd-gbar")) return;
+    var g = guideApi(), line = doc.createElement("p"); line.className = "smd-gbar";
+    line.textContent = (g && g.GAUGE_LINE) || "Bars show how much: higher means more of that.";
+    var host = doc.querySelector(".iso-legend");
+    if (host) host.insertBefore(line, host.firstChild);
+    else { var fig = doc.querySelector(".iso-figure"); if (fig) fig.appendChild(line); }
   }
   function layout(doc, win) {
     var st = doc.createElement("style"); st.id = "smdLayoutCss"; st.textContent = LAY_CSS; doc.body.appendChild(st);
@@ -349,7 +499,9 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     var dock = doc.createElement("div"); dock.className = "smd-dock";
     ctl.parentNode.insertBefore(dock, ctl);
     [ctl, stat, info].forEach(function (n) { if (n) dock.appendChild(n); });
+    try { guided(doc, win, dock); } catch (e) {}
     try { explain(doc, win, dock); } catch (e) {}
+    try { gaugeLegend(doc); } catch (e) {}
     var cap = doc.querySelector(".iso-caption"), foot = doc.createElement("div"); foot.className = "smd-foot";
     foot.appendChild(doc.createTextNode(((cap && cap.textContent) || "Schematic, not to scale.") + " Best experienced on iPad. "));
     if (src) foot.appendChild(src);
@@ -359,8 +511,10 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     var KEY = "smdFigHelp", seen = false; try { seen = G.localStorage.getItem(KEY) === "1"; } catch (e) {}
     if (!seen) {
       var h = doc.createElement("div"); h.className = "smd-help";
-      h.innerHTML = "<div><b>How to use this figure</b><ol><li>Drag the slider to make the disease worse or milder.</li><li>Pick a treatment and watch what changes.</li><li>Tap any label to read what it is.</li></ol><button type=\"button\">Got it</button></div>";
-      h.querySelector("button").addEventListener("click", function () { h.remove(); try { G.localStorage.setItem(KEY, "1"); } catch (e) {} });
+      h.innerHTML = "<div><b>How to use this figure</b><ol><li>Drag the slider to make the disease worse or milder.</li><li>Pick a treatment and watch what changes.</li><li>Tap any label to read what it is.</li></ol><button type=\"button\" class=\"smd-help-ok\">Got it</button><button type=\"button\" class=\"smd-help-go\">Start guided tour</button></div>";
+      function dismiss() { h.remove(); try { G.localStorage.setItem(KEY, "1"); } catch (e) {} }
+      h.querySelector(".smd-help-ok").addEventListener("click", dismiss);
+      h.querySelector(".smd-help-go").addEventListener("click", function () { dismiss(); try { if (win.__smdStartLearn) win.__smdStartLearn(); } catch (e) {} });
       doc.body.appendChild(h);
     }
   }

@@ -48,7 +48,8 @@ for (const l of wave4aLessons) {
     title: l.title,
     minutes: l.minutes,
     steps: l.steps.length,
-    gen: l.gen
+    gen: l.gen,
+    module: l.module
   };
   totalNewSteps += l.steps.length;
   console.log(`OK: wrote lesson ${l.module} (${l.steps.length} steps)`);

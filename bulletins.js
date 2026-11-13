@@ -123,8 +123,14 @@
   function loadIndia() {
     if (IND.loading || !G.fetch) return;
     IND.loading = true;
-    G.fetch("/data/india/nlem2022.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { if (d) IND.nlem = prepNlem(d); }, function () {});
-    G.fetch("/data/india/janaushadhi.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+    ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON("/data/india/nlem2022.json", { optional: true })
+      : G.fetch("/data/india/nlem2022.json").then(function (r) { return r.ok ? r.json() : null; }))
+      .then(function (d) { if (d) IND.nlem = prepNlem(d); }, function () {});
+    ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON("/data/india/janaushadhi.json", { optional: true })
+      : G.fetch("/data/india/janaushadhi.json").then(function (r) { return r.ok ? r.json() : null; }))
+      .then(function (d) {
       if (d && Array.isArray(d.products)) { IND.ja = d.products; IND.jaDate = d.fetched || ""; }
     }, function () {});
   }

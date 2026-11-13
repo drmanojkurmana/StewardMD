@@ -85,6 +85,10 @@ bucket_name = "stewardmd-followcare-media"
 # the shipped app calls /api/ota/check yet; this binding only serves the admin console + CI staging.
 [[r2_buckets]]
 binding = "OTA_R2"
+# OTA_URL_SECRET (Pages secret, not a var): HMAC key for /api/ota/file/<hash>?exp=&sig= URLs.
+#   wrangler pages secret put OTA_URL_SECRET
+# Set BEFORE flipping OTA_ENFORCE=1 (KV billing:cfg flags or env). See briefs/sec-ota-lock/REPORT.md.
+# FIREBASE_PROJECT_NUMBER (optional): App Check iss/aud; defaults to 911280405587 (GCM_SENDER_ID in GoogleService-Info.plist).
 bucket_name = "stewardmd-offline"
 
 # R2 — WardSynQ scheduled backups (functions/_wardsynq/backup-destinations.js, "WardSynQ platform storage").
@@ -180,12 +184,6 @@ CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each (bey
 FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399 for the whole year (first 500)
 # ── Per-user daily AI COST cap (₹/day) by role. Read by functions/_credits.js. INERT unless AI_COST_CAP_ON="1".
 AI_DAILY_COST_CAP_INR = "0.5"        # Free default
-AI_COST_CAP_STUDENT = "5"            # trainee: GST-net ₹169 rev → ₹5/day keeps worst-case margin non-negative
-AI_COST_CAP_RESIDENT = "5"
-AI_COST_CAP_CO_RESIDENT = "6"        # POOLED across the 2 accounts
-AI_COST_CAP_INTERN = "5"
-AI_COST_CAP_PHYSICIAN = "10"         # Pro (worst-case ~41% margin after GST)
-AI_COST_CAP_PHYSICIAN_PRO = "25"     # Physician Pro (worst-case ~41%)
 CREDIT_CONVERSION = "0.5"            # buy ₹50 credits → ₹25 of AI allowance
 # ── Founding-Doctor fixed annual AI pool (₹): ₹120 grant + one ₹120 auto-refill = ₹240/yr ceiling.
 FOUNDING_AI_GRANT_INR = "120"
@@ -256,12 +254,6 @@ ONCO_ADDON_MONTHLY = "8900"          # Physician Onco +₹89/mo
 CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each
 FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399/year (first 500)
 AI_DAILY_COST_CAP_INR = "0.5"        # Free default (₹/day)
-AI_COST_CAP_STUDENT = "5"
-AI_COST_CAP_RESIDENT = "5"
-AI_COST_CAP_CO_RESIDENT = "6"        # POOLED across the 2 accounts
-AI_COST_CAP_INTERN = "5"
-AI_COST_CAP_PHYSICIAN = "10"         # Pro
-AI_COST_CAP_PHYSICIAN_PRO = "25"     # Physician Pro
 CREDIT_CONVERSION = "0.5"            # ₹50 → ₹25 of AI
 FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120 refill = ₹240/yr ceiling
 FOUNDING_AI_REFILL_INR = "120"
@@ -339,6 +331,10 @@ bucket_name = "stewardmd-followcare-media"
 
 [[env.production.r2_buckets]]
 binding = "OTA_R2"
+# OTA_URL_SECRET (Pages secret, not a var): HMAC key for /api/ota/file/<hash>?exp=&sig= URLs.
+#   wrangler pages secret put OTA_URL_SECRET
+# Set BEFORE flipping OTA_ENFORCE=1 (KV billing:cfg flags or env). See briefs/sec-ota-lock/REPORT.md.
+# FIREBASE_PROJECT_NUMBER (optional): App Check iss/aud; defaults to 911280405587 (GCM_SENDER_ID in GoogleService-Info.plist).
 bucket_name = "stewardmd-offline"
 
 [[env.production.r2_buckets]]

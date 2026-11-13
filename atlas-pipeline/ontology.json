@@ -63,6 +63,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -148,6 +151,9 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -200,6 +206,9 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -250,6 +259,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -284,6 +296,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -301,23 +316,31 @@
       ],
       "modality": [
         "3D",
+        "CT",
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
       "region": "HEAD",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "mri-brain-axial",
         "mri-brain-coronal",
         "mri-brain-sagittal"
       ],
-      "definition": null,
+      "definition": "The brain is the part of the central nervous system enclosed by the skull, made up of the cerebrum, the cerebellum and the brainstem.",
       "bp3d": {
         "kind": "concept",
         "fma": "FMA50801",
@@ -655,6 +678,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -703,6 +729,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -751,6 +780,9 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -797,6 +829,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -898,6 +933,9 @@
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
         "ct-abdomen-coronal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -937,6 +975,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -974,9 +1015,11 @@
       "region": "LOWER_LIMB",
       "source_model": [
         "classical",
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -988,6 +1031,9 @@
         "ct-knee-axial",
         "ct-knee-coronal",
         "ct-knee-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-pelvis-axial",
         "ct-pelvis-coronal",
         "ct-pelvis-sagittal"
@@ -1217,6 +1263,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1304,6 +1353,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1462,6 +1514,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -1540,9 +1595,11 @@
       "laterality": "NONE_ASSERTED",
       "region": "PELVIS",
       "source_model": [
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -1551,6 +1608,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-pelvis-axial",
         "ct-pelvis-coronal",
         "ct-pelvis-sagittal",
@@ -1567,6 +1627,37 @@
         "right": "FMA16586",
         "note": null
       }
+    },
+    "HUMERUS": {
+      "canonical_id": "HUMERUS",
+      "display_name": "Humerus",
+      "aliases": [
+        "humerus",
+        "humerus_left",
+        "humerus_right"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "UPPER_LIMB",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal"
+      ],
+      "definition": "The humerus is the longest bone of the upper limb, meeting the scapula at the shoulder and the radius and ulna at the elbow."
     },
     "ILIAC_ARTERY": {
       "canonical_id": "ILIAC_ARTERY",
@@ -1594,6 +1685,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1639,6 +1733,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1689,6 +1786,9 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1732,6 +1832,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-thorax-neck-axial",
         "ct-live-thorax-neck-coronal",
         "ct-live-thorax-neck-sagittal",
@@ -1842,6 +1945,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -1924,6 +2030,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-thorax-neck-axial",
         "ct-live-thorax-neck-coronal",
         "ct-live-thorax-neck-sagittal",
@@ -2007,6 +2116,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -2054,6 +2166,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -2095,9 +2210,11 @@
       "laterality": "NONE_ASSERTED",
       "region": "SPINE",
       "source_model": [
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -2109,6 +2226,9 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
@@ -2229,6 +2349,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -2374,6 +2497,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2562,6 +2688,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2601,6 +2730,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2615,6 +2747,36 @@
         "right": null,
         "note": null
       }
+    },
+    "PULMONARY_VEIN": {
+      "canonical_id": "PULMONARY_VEIN",
+      "display_name": "Pulmonary vein",
+      "aliases": [
+        "pulmonary-vein",
+        "pulmonary_vein"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "CHEST",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal"
+      ],
+      "definition": "The pulmonary veins carry oxygenated blood from the lungs to the left atrium of the heart."
     },
     "PUTAMEN": {
       "canonical_id": "PUTAMEN",
@@ -2696,9 +2858,11 @@
       "region": "CHEST",
       "source_model": [
         "classical",
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -2707,6 +2871,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-thorax-axial",
         "ct-thorax-coronal",
         "ct-thorax-sagittal",
@@ -2738,9 +2905,11 @@
       "laterality": "NONE_ASSERTED",
       "region": "PELVIS",
       "source_model": [
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -2749,6 +2918,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-pelvis-axial",
         "ct-pelvis-coronal",
         "ct-pelvis-sagittal",
@@ -2764,6 +2936,37 @@
         "right": null,
         "note": null
       }
+    },
+    "SCAPULA": {
+      "canonical_id": "SCAPULA",
+      "display_name": "Scapula",
+      "aliases": [
+        "scapula",
+        "scapula_left",
+        "scapula_right"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "UPPER_LIMB",
+      "source_model": [
+        "expert-masks-supplied"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal"
+      ],
+      "definition": "The scapula is a flat triangular bone on the back of the chest wall that carries the socket of the shoulder joint."
     },
     "SKELETON": {
       "canonical_id": "SKELETON",
@@ -2812,9 +3015,11 @@
       "region": "HEAD",
       "source_model": [
         "classical",
+        "expert-masks-supplied",
         "totalsegmentator-total"
       ],
       "source_dataset": [
+        "totalsegmentator-dataset",
         "visible-human"
       ],
       "licence": [
@@ -2826,6 +3031,9 @@
         "ct-head-axial",
         "ct-head-coronal",
         "ct-head-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-wholebody-axial",
         "ct-wholebody-coronal"
       ],
@@ -2870,6 +3078,9 @@
         "ct-abdomen-axial",
         "ct-abdomen-coronal",
         "ct-abdomen-sagittal",
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"
@@ -2913,6 +3124,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -2958,6 +3172,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-thorax-neck-axial",
         "ct-live-thorax-neck-coronal",
         "ct-live-thorax-neck-sagittal",
@@ -3003,6 +3220,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3050,6 +3270,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-thorax-neck-axial",
         "ct-live-thorax-neck-coronal",
         "ct-live-thorax-neck-sagittal",
@@ -3125,6 +3348,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3158,6 +3384,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3433,6 +3662,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3514,6 +3746,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3622,6 +3857,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3655,6 +3893,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3702,6 +3943,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-neck-axial",
         "ct-live-neck-coronal",
         "ct-live-neck-sagittal",
@@ -3736,6 +3980,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-live-body-axial",
+        "ct-live-body-coronal",
+        "ct-live-body-sagittal",
         "ct-live-torso-axial",
         "ct-live-torso-coronal",
         "ct-live-torso-sagittal"

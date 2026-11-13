@@ -99,7 +99,8 @@
     },
     appearance: function () {
       // Opens the full Display & Accessibility sheet (font size, font family, theme, density…).
-      if (window.SMD_openDisplay) return SMD_openDisplay({ onClose: openSettingsPage });
+      // Opened from Settings, the page now stays underneath, so closing Display simply shows it again.
+      if (window.SMD_openDisplay) return SMD_openDisplay(document.getElementById("sbrSettings") ? {} : { onClose: openSettingsPage });
       if (window.SMD_openAppearance) return SMD_openAppearance();
       if (window.SB && SB.toggleTheme) return SB.toggleTheme();
       document.body.classList.toggle("dark");
@@ -113,6 +114,8 @@
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     mail: function () { closeSB(); if (window.SMD_MAIL && SMD_MAIL.open) SMD_MAIL.open(); else toast("Mail loading…"); },
+    // Owner-only hospital-add review lives in home.js; Settings had no handler, so the row did nothing.
+    hospadmin: function () { if (window.SMD_moreAct) SMD_moreAct("hospadmin"); else toast("Loading…"); },
     workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); },
     // Account, help and legal rows (2026-10-14, owner): they live in the sidebar now; home.js owns the handlers.
     subscription: function () { more("subscription"); },
@@ -242,6 +245,44 @@
       "body.dark #sbMenu[data-sbr] .sbr-note,body.v3-dark #sbMenu[data-sbr] .sbr-note{color:#94a3b8}",
       "body.dark #sbMenu[data-sbr] .sbr-adv button,body.v3-dark #sbMenu[data-sbr] .sbr-adv button{color:#f8fafc}",
       "body.dark #sbMenu[data-sbr] .sbr-status,body.v3-dark #sbMenu[data-sbr] .sbr-status{background:rgba(30,41,59,.5);border-color:rgba(51,65,85,.6);color:#2dd4bf}",
+      /* ── iOS navigation stack (owner 2026-11-13, a screen recording of iOS Settings: "this is how it should behave").
+      A row pushes its page in from the right, fully opaque. Settings slides a third of the way left and dims
+      underneath. A round Back button and a centred title head the page; Back, or a drag from the left edge,
+      runs the same motion in reverse. ── */
+      "#sbrSettings,#sbrSettings.sbr-set-ov{transition:transform .5s cubic-bezier(.32,.72,0,1)}",
+      "#sbrSettings.sbr-under{transform:translateX(-30%);pointer-events:none}",
+      ".sbr-dim{position:fixed;inset:0;z-index:100260;background:rgba(0,0,0,.14);opacity:0;pointer-events:none;transition:opacity .5s cubic-bezier(.32,.72,0,1)}",
+      ".sbr-dim.on{opacity:1}",
+      "body.dark .sbr-dim,body.v3-dark .sbr-dim{background:rgba(0,0,0,.5)}",
+      "html body #hvSheet#hvSheet.sbr-pushed{top:0!important;bottom:0!important;left:0!important;right:0!important;width:100%!important;max-width:none!important;height:100%!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important;background:var(--sbr-push-bg,var(--paper,#f6f7f5))!important;color:var(--sbr-push-ink,inherit);-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:-12px 0 40px -14px rgba(0,0,0,.4)!important;opacity:1!important;animation:none!important;transform:translateX(100%)!important;transition:transform .5s cubic-bezier(.32,.72,0,1)!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain}",
+      "html body #hvSheet#hvSheet.sbr-pushed.on{transform:none!important}",
+      // Rows show at once: the page arrives as one opaque sheet. A per-row fade (syndromes-motion's stagger) is what let Settings show through the text in the owner's screenshot.
+      "html body #hvSheet#hvSheet.sbr-pushed .hv-sheet-wrap,html body #hvSheet#hvSheet.sbr-pushed .hv-sheet-wrap>*{opacity:1!important;animation:none!important}",
+      "html body #hvSheet#hvSheet.sbr-pushed .hv-sheet-wrap>*{transform:none!important}",
+      "html body #hvSheet#hvSheet.sbr-pushed .hv-sheet-wrap{padding-top:4px!important;margin-top:0!important}",
+      "html body #hvSheet#hvSheet.sbr-pushed .hv-grab,html body #hvSheet#hvSheet.sbr-pushed .settings-done,html body #hvSheet#hvSheet.sbr-pushed .sbr-nav-src{display:none!important}",
+      ".sbr-nav{position:sticky;top:0;z-index:6;display:flex;align-items:flex-end;justify-content:center;box-sizing:border-box;min-height:calc(env(safe-area-inset-top,0px) + 58px);padding:calc(env(safe-area-inset-top,0px) + 7px) 68px 7px;margin:0;background:transparent;transition:background-color .2s ease,box-shadow .2s ease}",
+      ".sbr-nav.is-scrolled{background:color-mix(in srgb,var(--sbr-push-bg,#f2f2f7) 80%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 .5px 0 rgba(60,60,67,.29)}",
+      "body.dark .sbr-nav.is-scrolled,body.v3-dark .sbr-nav.is-scrolled{box-shadow:0 .5px 0 rgba(84,84,88,.65)}",
+      ".sbr-nav-t{min-width:0;max-width:100%;height:44px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:600 17px/44px -apple-system,BlinkMacSystemFont,'SF Pro Text',var(--sans,system-ui),sans-serif;letter-spacing:-.01em;color:var(--sbr-push-ink,#000)}",
+      // One round Back button for every page in the stack, the iOS 26 shape from the recording.
+      ".sbr-round-back{display:inline-flex;align-items:center;justify-content:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;margin:0;padding:0;border:0;border-radius:50%;background:rgba(120,120,128,.16);color:var(--st-ink,#000);box-shadow:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .12s ease-out,background-color .12s ease-out}",
+      ".sbr-round-back:active{transform:scale(.9);background:rgba(120,120,128,.28)}",
+      // Opening a page moves focus to its Back for screen readers; on a touch screen that must not draw a ring.
+      "@media(hover:none){.sbr-round-back:focus{outline:none}}",
+      ".sbr-round-back:focus:not(:focus-visible){outline:none}",
+      ".sbr-round-back svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-left:-2px}",
+      "body.dark .sbr-round-back,body.v3-dark .sbr-round-back{background:rgba(118,118,128,.3);color:#fff}",
+      ".sbr-nav .sbr-round-back{position:absolute;left:12px;bottom:7px}",
+      ".sbr-vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}",
+      // Settings and Experimental use the same round Back. The Experimental title centres like an iOS nav bar.
+      "html body :is(#sbrSettings,#sbrExperimental) .sbr-set-head .sbr-set-back.sbr-round-back{width:44px;min-width:44px;height:44px;padding:0;border-radius:50%;background:rgba(120,120,128,.16);color:var(--st-ink,var(--ink,#14202b))}",
+      "html body:is(.dark,.v3-dark) :is(#sbrSettings,#sbrExperimental) .sbr-set-head .sbr-set-back.sbr-round-back{background:rgba(118,118,128,.3);color:#fff}",
+      ".sbr-exp-ov .sbr-set-head{position:sticky;justify-content:flex-start;min-height:calc(env(safe-area-inset-top,0px) + 58px);padding:calc(env(safe-area-inset-top,0px) + 7px) 12px 7px;border-bottom:0}",
+      ".sbr-exp-ov .sbr-set-head h2{position:absolute;left:68px;right:68px;bottom:7px;height:44px;line-height:44px;text-align:center;font-size:17px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".sbr-set-ov.sbr-exp-ov{animation:none;transform:translateX(100%);transition:transform .5s cubic-bezier(.32,.72,0,1);box-shadow:-12px 0 40px -14px rgba(0,0,0,.4)}",
+      ".sbr-set-ov.sbr-exp-ov.in{transform:none}",
+      "@media(prefers-reduced-motion:reduce){#sbrSettings,#sbrSettings.sbr-set-ov,.sbr-dim,.sbr-set-ov.sbr-exp-ov,html body #hvSheet#hvSheet.sbr-pushed{transition:none!important}}",
       /* ── Settings page (dedicated full-screen module) ── */
       ".sbr-set-ov{position:fixed;inset:0;z-index:100200;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;font-family:var(--sans,system-ui,-apple-system,sans-serif);animation:sbrSetIn .18s ease}",
       // The settings page had NO box-sizing rule, so every `width:100%` row with padding
@@ -280,7 +321,7 @@
       ".sbr-set-ov .sbr-sw.on>span{left:19px}",
       ".sbr-set-ov .sbr-note{font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:6px 4px}",
       /* ── Experimental section & subpage styling ── */
-      ".sbr-set-ov.sbr-exp-ov{z-index:100250}",
+      ".sbr-set-ov.sbr-exp-ov{z-index:100280}",
       "#xaGate{z-index:100300!important}",
       ".sbr-badge-beta{background:#fef3c7!important;color:#92400e!important;border:1px solid rgba(245,158,11,.3)!important}",
       "body.dark .sbr-badge-beta{background:rgba(245,158,11,.18)!important;color:#fbbf24!important;border-color:rgba(245,158,11,.3)!important}",
@@ -366,27 +407,12 @@
       }
     } catch (e) {}
     // Offline drug database (NATIVE + PRO only) — restored under Advanced. Hidden on web where the
-    // plugin is a no-op stub (SMD_OFFLINEDB.open absent).
+    // plugin is a no-op stub (SMD_OFFLINEDB.open absent). A real row like every other (owner 2026-11-11:
+    // the old inline-styled button rendered with a broken icon and a clipped badge).
     try {
       if (window.SMD_OFFLINEDB && SMD_OFFLINEDB.open) {
-        html += '<button data-sbr-act="offlinedb" style="display:flex;align-items:center;gap:10px;width:100%;padding:9px 0;border:none;background:none;cursor:pointer;text-align:left;color:var(--ink,#14202b);font:600 13px/1.3 var(--sans,system-ui)">' + svg("pills") +
+        html += '<button class="sbr-row" data-sbr-act="offlinedb">' + svg("pills") +
           '<span class="sbr-lbl" style="flex:1">Offline Drug Database</span><span class="sbr-badge">PRO</span></button>';
-      }
-    } catch (e) {}
-    // Owner-only: the hello@maiknowledge.com mailbox (mail.js). Gated by SMD_MAIL.enabled(), which
-    // checks the owner list and the smd_mail flag; the server's ownerOK is the real gate.
-    try {
-      if (window.SMD_MAIL && SMD_MAIL.enabled()) {
-        html += '<button class="sbr-row" data-sbr-act="mail">' + svg("mail") +
-          '<span class="sbr-lbl" style="flex:1">Mail</span><span class="sbr-badge">OWNER</span></button>';
-      }
-    } catch (e) {}
-    // Owner-only: review + approve/decline hospital-add requests.
-    try {
-      var _oe = ((window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.email) || "").toLowerCase();
-      if (["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"].indexOf(_oe) >= 0) {
-        html += '<button class="sbr-row" data-sbr-act="hospadmin">' + svg("shield") +
-          '<span class="sbr-lbl" style="flex:1">Hospital requests</span><span class="sbr-badge">OWNER</span></button>';
       }
     } catch (e) {}
     html += '<div class="sbr-note">Clinical engine settings for this device.</div>';
@@ -685,6 +711,7 @@
   function closeExperimentalPage() {
     var ov = document.getElementById("sbrExperimental");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+    if (ov) { var hs = document.getElementById("hvSheet"); if (!(hs && hs.classList.contains("sbr-pushed") && hs.classList.contains("on"))) setUnder(false); }
     if (ov && experimentalOpener && experimentalOpener.isConnected) experimentalOpener.focus({ preventScroll: true });
     if (!document.getElementById("sbrSettings")) {
       document.body.classList.remove("sbr-set-open");
@@ -700,12 +727,14 @@
     ov.className = "sbr-set-ov sbr-exp-ov";
     document.body.appendChild(ov);
     ov.innerHTML =
-      '<header class="sbr-set-head"><button class="sbr-set-back" data-sexp="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Settings</span></button><h2>Experimental</h2></header>' +
+      '<header class="sbr-set-head"><button class="sbr-set-back sbr-round-back" data-sexp="close" aria-label="Back to Settings">' + CHEV_L + '</button><h2>Experimental</h2></header>' +
       '<div class="sbr-set-body">' +
         expBodyHTML() +
       '</div>';
     document.body.classList.add("sbr-set-open");
     if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
+    if (document.getElementById("sbrSettings")) { void ov.offsetWidth; ov.classList.add("in"); setUnder(true); edgeSwipe(); }
+    else ov.classList.add("in");
 
     try {
       if (window.SMD_XACCESS && SMD_XACCESS.onChange) {
@@ -717,7 +746,7 @@
       var t = e.target;
       if (!t || !t.closest) return;
       if (t.closest("[data-sexp=close]")) {
-        closeExperimentalPage();
+        popExperimental();
         return;
       }
       var xaBtn = t.closest("[data-xa-open]");
@@ -770,12 +799,235 @@
       '<div class="sbr-note">Private beta access codes &amp; all research modules in Experimental Features above.</div>';
   }
 
+  /* Admin (owner 2026-11-11: "Mail, Hospital requests only for admin"): the owner tools have their own group at
+     the end, shown only to an owner account, instead of sitting inside Advanced with OWNER tags. */
+  function adminSectionHTML() {
+    if (!isOwner()) return "";
+    var rows = "";
+    try { if (window.SMD_MAIL && SMD_MAIL.enabled && SMD_MAIL.enabled()) rows += row("mail", "mail", "Mail"); } catch (e) {}
+    rows += row("hospadmin", "shield", "Hospital requests");
+    try { if (window.SMD_moreAct) rows += row("aictl", "lines", "AI Control Center"); } catch (e) {}
+    return '<div class="sbr-sec">Admin</div>' + rows;
+  }
+
+  /* Rows open INSIDE Settings (owner 2026-11-11: "profile should open in the same window rather than taking me
+     somewhere; all settings should be there"). Settings stays open underneath; whatever the row opens is raised
+     above it, and the shared sheet (Profile, Appearance, Hospital requests) becomes a full-screen page that slides in
+     from the right with "Settings" to go back. Closing it shows Settings exactly where it was. */
+  var PUSH = { profile: 1, account: 1, notifications: 1, appearance: 1, applewatch: 1, wearos: 1, offlinedb: 1, mail: 1, hospadmin: 1, aictl: 1, clinic: 1, workspace: 1 };
+  var CHEV_L = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+  var raised = [], pushWatch = null, sheetObs = null, cleanupT = null;
+  function visibleFixed(n) {
+    try { var cs = getComputedStyle(n); return cs.position === "fixed" && cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity) > 0.05 && n.getClientRects().length; } catch (e) { return false; }
+  }
+  function dimEl() {
+    var d = document.getElementById("sbrDim");
+    if (!d) { d = document.createElement("div"); d.id = "sbrDim"; d.className = "sbr-dim"; d.setAttribute("aria-hidden", "true"); document.body.appendChild(d); }
+    return d;
+  }
+  // Settings steps back under the page that covers it (and returns when that page goes).
+  function setUnder(on) {
+    var set = document.getElementById("sbrSettings"); if (!set) return;
+    set.classList.toggle("sbr-under", !!on);
+    if (on) set.setAttribute("aria-hidden", "true"); else set.removeAttribute("aria-hidden");
+    var d = dimEl(); if (on) void d.offsetWidth; d.classList.toggle("on", !!on);
+  }
+  // The pushed page wears Settings' own background, so the two read as one app, not a sheet over a list.
+  function paintVars(sh) {
+    var set = document.getElementById("sbrSettings"); if (!set || !sh) return;
+    try {
+      var cs = getComputedStyle(set), bg = cs.backgroundColor;
+      if (!bg || bg === "transparent" || /rgba\([^)]*,\s*0\)$/.test(bg)) bg = "";
+      if (bg) sh.style.setProperty("--sbr-push-bg", bg);
+      sh.style.setProperty("--sbr-push-ink", cs.color || "");
+    } catch (e) {}
+  }
+  // iOS nav bar: round Back on the left, the page's title centred. The page's own title row is hidden, not removed.
+  function ensureNav(sh) {
+    if (!sh || !sh.classList.contains("sbr-pushed")) return;
+    var nav = sh.querySelector(":scope > .sbr-nav");
+    var t = sh.querySelector(".hv-sheet-wrap > .hv-sh-t");
+    if (t) t.classList.add("sbr-nav-src");
+    var title = t ? String(t.textContent || "").replace(/\s+/g, " ").trim() : "";
+    if (!nav) {
+      nav = document.createElement("div"); nav.className = "sbr-nav";
+      nav.innerHTML = '<button type="button" class="sbr-round-back sbr-push-back" aria-label="Back to Settings">' + CHEV_L + '</button><div class="sbr-nav-t" role="heading" aria-level="1"></div>';
+      nav.firstChild.addEventListener("click", function () { popSheet(); });
+      sh.insertBefore(nav, sh.firstChild);
+    }
+    var nt = nav.querySelector(".sbr-nav-t"); if (nt.textContent !== title) nt.textContent = title;
+    nav.classList.toggle("is-scrolled", sh.scrollTop > 4);
+  }
+  function onSheetScroll() { var sh = document.getElementById("hvSheet"), nav = sh && sh.querySelector(":scope > .sbr-nav"); if (nav) nav.classList.toggle("is-scrolled", sh.scrollTop > 4); }
+  function watchSheet(sh) {
+    if (sheetObs || !sh || typeof MutationObserver === "undefined") return;
+    sh.addEventListener("scroll", onSheetScroll, { passive: true });
+    sheetObs = new MutationObserver(function () {
+      if (!sh.classList.contains("sbr-pushed")) return;
+      if (sh.classList.contains("on")) { if (cleanupT) { clearTimeout(cleanupT); cleanupT = null; } setUnder(true); ensureNav(sh); }
+      else if (!cleanupT) {
+        // Closed (Back, a Done inside, a save): Settings comes back while the page slides out to the right.
+        setUnder(false);
+        cleanupT = setTimeout(function () { cleanupT = null; if (!sh.classList.contains("on")) unpushSheet(sh); }, 560);
+      }
+    });
+    sheetObs.observe(sh, { attributes: true, attributeFilter: ["class"], childList: true });
+  }
+  function unpushSheet(sh) {
+    if (!sh) return;
+    sh.style.setProperty("transition", "none", "important");
+    sh.classList.remove("sbr-pushed"); sh.removeAttribute("data-own-motion");
+    void sh.offsetWidth; sh.style.removeProperty("transition");
+    sh.style.removeProperty("--sbr-push-bg"); sh.style.removeProperty("--sbr-push-ink");
+    var nav = sh.querySelector(":scope > .sbr-nav"); if (nav) nav.remove();
+    var i = raised.indexOf(sh); if (i >= 0) { sh.style.zIndex = sh.getAttribute("data-sbr-z") || ""; sh.removeAttribute("data-sbr-z"); raised.splice(i, 1); }
+    var sc = document.getElementById("hvScrim"), j = raised.indexOf(sc);
+    if (sc && j >= 0) { sc.style.zIndex = sc.getAttribute("data-sbr-z") || ""; sc.removeAttribute("data-sbr-z"); raised.splice(j, 1); }
+  }
+  function popSheet() {
+    var sc = document.getElementById("hvScrim");
+    if (sc) sc.click();
+    else { var sh = document.getElementById("hvSheet"); if (sh) sh.classList.remove("on"); }
+  }
+  function raiseNew(before) {
+    var set = document.getElementById("sbrSettings"); if (!set) return;
+    var z = 100300;
+    [].forEach.call(document.body.children, function (n) {
+      if (n === set || n.id === "sbrDim" || n.id === "smdAzStrip" || n.tagName === "SCRIPT" || n.tagName === "STYLE") return;
+      if (before.indexOf(n) >= 0 && !(n.id === "hvSheet" || n.id === "hvScrim")) return;
+      if (!visibleFixed(n)) return;
+      if (raised.indexOf(n) < 0) { raised.push(n); n.setAttribute("data-sbr-z", n.style.zIndex || ""); }
+      n.style.zIndex = String(n.id === "hvScrim" ? z - 5 : z + raised.indexOf(n));
+    });
+    var sh = document.getElementById("hvSheet");
+    if (sh && sh.classList.contains("on") && sh.classList.contains("sbr-pushed")) ensureNav(sh);
+    // Something other than the sheet opened (Apple Watch, Mail, Clinic...): Settings still steps back under it.
+    if (raised.some(function (n) { return n.id !== "hvScrim" && n.id !== "hvSheet"; })) { setUnder(true); watchOthers(); }
+  }
+  function watchOthers() {
+    if (pushWatch) return;
+    pushWatch = setInterval(function () {
+      var others = raised.filter(function (n) { return n.id !== "hvScrim" && n.id !== "hvSheet"; });
+      if (!document.getElementById("sbrSettings")) { clearInterval(pushWatch); pushWatch = null; return; }
+      if (others.length && !others.some(function (n) { return n.isConnected && visibleFixed(n); })) {
+        others.forEach(function (n) { if (n.isConnected) { n.style.zIndex = n.getAttribute("data-sbr-z") || ""; n.removeAttribute("data-sbr-z"); } raised.splice(raised.indexOf(n), 1); });
+        var sh = document.getElementById("hvSheet");
+        if (!(sh && sh.classList.contains("on") && sh.classList.contains("sbr-pushed"))) setUnder(false);
+        clearInterval(pushWatch); pushWatch = null;
+      }
+    }, 300);
+  }
+  function lowerRaised() {
+    raised.forEach(function (n) { n.style.zIndex = n.getAttribute("data-sbr-z") || ""; n.removeAttribute("data-sbr-z"); });
+    raised = [];
+    if (pushWatch) { clearInterval(pushWatch); pushWatch = null; }
+    if (cleanupT) { clearTimeout(cleanupT); cleanupT = null; }
+    unpushSheet(document.getElementById("hvSheet"));
+    var d = document.getElementById("sbrDim"); if (d) d.remove();
+  }
+  function pushFromSettings(a) {
+    var before = [].filter.call(document.body.children, visibleFixed);
+    var sh = document.getElementById("hvSheet");
+    if (sh && !sh.classList.contains("on")) {
+      // Marked, painted and parked off the right edge BEFORE it opens, so it slides in as a page, not up as a sheet.
+      // Parked with transitions off: otherwise the jump from the sheet's resting place (below the screen) to the
+      // right edge is itself animated, and the page arrives diagonally from the bottom.
+      sh.style.setProperty("transition", "none", "important");
+      sh.setAttribute("data-own-motion", ""); sh.classList.add("sbr-pushed"); paintVars(sh); watchSheet(sh);
+      void sh.offsetWidth;
+      sh.style.removeProperty("transition");
+    }
+    try { ACT[a] && ACT[a](); } catch (x) {}
+    if (sh && sh.classList.contains("on") && sh.classList.contains("sbr-pushed")) { ensureNav(sh); setUnder(true); }
+    // Some destinations open after a tick (lazy loads, a closing sheet's animation): catch them as they appear.
+    raiseNew(before);
+    [80, 260, 700, 1500].forEach(function (t) { setTimeout(function () { raiseNew(before); }, t); });
+    // A row whose page never opened (a toast instead) leaves the sheet parked: put it back.
+    setTimeout(function () { if (sh && sh.classList.contains("sbr-pushed") && !sh.classList.contains("on")) unpushSheet(sh); }, 1600);
+  }
+
+  /* Interactive back: a drag that starts at the left edge pulls the page off to the right while Settings slides back
+     into place under the finger, as in iOS. Release past 40% of the width (or a quick flick) completes it; anything
+     less springs the page back. swipe-back.js runs the app-wide gesture; this one takes the touch only while a pushed
+     page is showing, so the two never act on the same drag. */
+  var EDGE = 24;
+  function pushedTop() {
+    var sh = document.getElementById("hvSheet");
+    if (sh && sh.classList.contains("sbr-pushed") && sh.classList.contains("on")) return { el: sh, back: popSheet };
+    var ex = document.getElementById("sbrExperimental");
+    if (ex && ex.classList.contains("in")) return { el: ex, back: popExperimental };
+    return null;
+  }
+  function edgeSwipe() {
+    if (window.__sbrEdge) return; window.__sbrEdge = true;
+    var g = null;
+    function setT(el, v) { if (v == null) { el.style.removeProperty("transform"); el.style.removeProperty("transition"); } else { el.style.setProperty("transform", v, "important"); el.style.setProperty("transition", "none", "important"); } }
+    function frame(p) {
+      var w = innerWidth, set = document.getElementById("sbrSettings"), d = document.getElementById("sbrDim");
+      setT(g.top.el, "translateX(" + Math.round(p * w) + "px)");
+      if (set) setT(set, "translateX(" + (-30 * (1 - p)).toFixed(2) + "%)");
+      if (d) { d.style.setProperty("opacity", String(1 - p), "important"); d.style.setProperty("transition", "none", "important"); }
+    }
+    function release(done) {
+      var t = g.top, set = document.getElementById("sbrSettings"), d = document.getElementById("sbrDim");
+      [t.el, set, d].forEach(function (el) { if (el) { el.style.removeProperty("transition"); } });
+      // Let the class transitions run from where the finger left them.
+      requestAnimationFrame(function () {
+        [t.el, set].forEach(function (el) { if (el) el.style.removeProperty("transform"); });
+        if (d) d.style.removeProperty("opacity");
+        if (done) t.back();
+      });
+    }
+    window.addEventListener("touchstart", function (e) {
+      g = null;
+      if (e.touches.length !== 1) return;
+      var x = e.touches[0].clientX, top = pushedTop();
+      if (!top || x > EDGE) return;
+      g = { top: top, x0: x, y0: e.touches[0].clientY, lx: x, lt: Date.now(), vx: 0, on: false };
+      e.stopPropagation();
+    }, { capture: true, passive: true });
+    window.addEventListener("touchmove", function (e) {
+      if (!g) return;
+      var t = e.touches[0], dx = t.clientX - g.x0, dy = t.clientY - g.y0;
+      e.stopPropagation();
+      if (!g.on) {
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if (dx <= 0 || Math.abs(dy) > Math.abs(dx)) { g = null; return; }
+        g.on = true;
+      }
+      var now = Date.now(); if (now > g.lt) { g.vx = g.vx * 0.6 + ((t.clientX - g.lx) / (now - g.lt)) * 0.4; g.lx = t.clientX; g.lt = now; }
+      frame(Math.max(0, Math.min(1, dx / innerWidth)));
+      if (e.cancelable) e.preventDefault();
+    }, { capture: true, passive: false });
+    function end(e, cancelled) {
+      if (!g) return;
+      e.stopPropagation();
+      if (g.on) {
+        var t = e.changedTouches && e.changedTouches[0], dx = t ? t.clientX - g.x0 : 0;
+        release(!cancelled && g.vx > -0.3 && (dx >= innerWidth * 0.4 || (g.vx > 0.35 && dx >= 24)));
+      }
+      g = null;
+    }
+    window.addEventListener("touchend", function (e) { end(e, false); }, { capture: true, passive: true });
+    window.addEventListener("touchcancel", function (e) { end(e, true); }, { capture: true, passive: true });
+  }
+
+  // Experimental pushes the same way: in from the right over Settings, out to the right on Back.
+  function popExperimental() {
+    var ov = document.getElementById("sbrExperimental");
+    if (!ov || !ov.classList.contains("in")) { closeExperimentalPage(); return; }
+    ov.classList.remove("in"); setUnder(false);
+    setTimeout(function () { if (ov.isConnected && !ov.classList.contains("in")) closeExperimentalPage(); }, 520);
+  }
+
   // ---- Settings page (dedicated full-screen module) ------------------------------------------------
   // All app settings live here now (not inline toggles in the sidebar): account/verification,
   // notifications, appearance, wearable, and the advanced + experimental controls (engine, image
   // engine, voice models, offline DB, owner tools). Opened from the sidebar's single "Settings" row.
   function closeSettingsPage() {
     closeExperimentalPage();
+    lowerRaised();
+    try { var hs = document.getElementById("hvSheet"); if (hs) hs.removeAttribute("data-own-motion"); } catch (e) {}
     var ov = document.getElementById("sbrSettings");
     if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
     document.body.classList.remove("sbr-set-open");
@@ -792,7 +1044,7 @@
     settingsOpener = document.activeElement;
     var ov = document.createElement("div"); ov.id = "sbrSettings"; ov.className = "sbr-set-ov"; document.body.appendChild(ov);
     ov.innerHTML =
-      '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
+      '<header class="sbr-set-head"><button class="sbr-set-back sbr-round-back" data-sset="close" aria-label="Back">' + CHEV_L + '</button><h2>Settings</h2></header>' +
       '<div class="sbr-set-body">' +
         '<div class="sbr-sec">Account</div>' +
         /* ONE Profile (smd_profile_hub): Profile & StewardMD ID and Account & Verification were two rows
@@ -810,9 +1062,11 @@
         advBody() +
         '<div class="sbr-sec">Experimental</div>' +
         expSectionHTML() +
+        adminSectionHTML() +
       "</div>";
     document.body.classList.add("sbr-set-open");
     if (window.SMD_SETTINGS_UI) SMD_SETTINGS_UI.enhance(ov);
+    edgeSwipe();
     // let the Image Engine + Voice wire their controls inside the page (same seams as the old block)
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
@@ -845,6 +1099,7 @@
         var a = r.getAttribute("data-sbr-act");
         if (a === "settings") return;
         if (a === "experimental") { openExperimentalPage(); return; }
+        if (PUSH[a]) { pushFromSettings(a); return; }
         closeSettingsPage();
         setTimeout(function () { try { ACT[a] && ACT[a](); } catch (x) {} }, 60);
       }

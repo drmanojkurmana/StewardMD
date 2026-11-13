@@ -33,3 +33,16 @@ colour dots, a list of the page's highlights). For students in PrepNucleus Learn
   edit, remove, list, swipe guard, flag off; `SHOTS=<dir>`).
 - **Open:** not tried on iOS / Android WebViews (native selection menu placement next to ours, handle drags inside the
   lesson scroller). Sync of highlights across devices not built. MaiK answers, Clinical Protocols, Cards not opted in.
+
+## No system edit menu (owner 2026-11-13)
+Selecting reading text showed the iOS edit menu (Copy, Look Up, Translate, Search Web, Share) on top of the palette.
+CSS cannot hide it (`-webkit-touch-callout: none` is already on `html`). Native fix: `ios/App/App/MainViewController.swift`
+returns an `SmdWebView` whose `canPerformAction` offers nothing on read-only text and whose `buildMenu` drops the system
+groups; inside anything editable (Cut or Paste available) the menu is untouched. Needs a native rebuild, not OTA.
+Android (same day): `SmdWebView.java` (extends CapacitorWebView) wraps Chromium's action-mode callback and empties the
+menu unless it has Cut or Paste; app layout `res/layout/capacitor_bridge_layout_main.xml` overrides Capacitor's so the
+bridge uses it. Keep id `webview`. Native rebuild needed; check on a device that no empty bar shows.
+iOS follow-up (same day): the owner's new build still showed the menu. Current WebKit (BrowserEngineKit text
+interaction) presents it through its own `UIEditMenuInteraction`, which does not ask `canPerformAction`. `SmdWebView`
+now gives every edit menu interaction in the web content an `EditMenuGate` delegate (on each touch, via `hitTest`)
+that returns no menu on read-only text and forwards everything else to the original delegate.

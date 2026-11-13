@@ -79,6 +79,8 @@
           var at = m.index;
           /* A digit glued to a letter (T1., N2.) is staging, not a list. */
           if (/[A-Za-z]/.test(t.charAt(at - 1))) continue;
+          /* Tail of a decimal or longer number ("less than 0.8.", "108. ") is not a label. */
+          if (/\d/.test(t.charAt(at - 1)) || (t.charAt(at - 1) === "." && /\d/.test(t.charAt(at - 2)))) continue;
           out.push({ at: at, end: at + m[0].length, key: String(parseInt(m[1], 10)), disp: m[1].replace(/^0+/, "") + ")" });
         }
         return out;
@@ -141,6 +143,9 @@
       /* A run whose first label is glued to a word ("atresia. He has ... thumb. Renal ..." gives a, b) is
          ambiguous with sentence punctuation: it needs at least 3 labels, which prose never forms by accident. */
       if (/[A-Za-z0-9]/.test(t.charAt(items[0].at - 1)) && items.length < 3) continue;
+      /* The last item runs to the end of the text: a stray label-lookalike after the run must never drop words. */
+      var last = items[items.length - 1];
+      last.text = trim(t.slice(last.end));
       return { style: style, ol: st.ol, seq: st.seq, items: items, lead: trim(t.slice(0, items[0].at)) };
     }
     return null;

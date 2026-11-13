@@ -9,6 +9,8 @@
      New or repeat   New / Incorrect before / Bookmarked / Due for review / With my note / Marked in tests / All / Mix
                      (the last two from prep-tools.js: store qn and mk; they show only when the pool has such items)
      Difficulty      Easy / Moderate / Hard / Very hard / Mix (item.d 1, 2, 3, 4; Mix keeps the pool's own spread)
+     The type, repeat and difficulty rows take several chips at once (owner 2026-11-13): "Image-based" + "Clinical
+     scenario" keeps a question of either kind; All or Mix stands alone. Several types share the count equally, as Mix.
      Mode            Learning Mode (each answer explained before the next) / Test Mode (marked at the end); two cards
      Timer           A switch, on by default; Each question (60 s by default, 30, 45, 60 to 100 s) or Whole set (exam
                      pace, 1 min a question, or minutes). At 0 a Test Mode question is left unanswered and the test moves
@@ -86,6 +88,7 @@
   }
   function seenMatch(it, v, ctx) {
     if (v === "all" || v === "mix") return true;
+    if (String(v).indexOf(",") >= 0) return vals(v).some(function (x) { return seenMatch(it, x, ctx); });
     var c = cardOf(it, ctx);
     if (v === "new") return !c;
     if (v === "due") return !!c && c[3] <= ctx.today;
@@ -108,6 +111,28 @@
   var TIMERS = [["off", "Off"], ["q", "Each question"], ["set", "Whole set"]], QSECS = [30, 45, 60, 70, 80, 90, 100], QS_DEF = 60, QS_MAX = 100, LOW = 0.2;
   var DEFAULTS = { type: "all", seen: "mix", d: "mix", n: 20, mode: "study", timer: "q", qs: QS_DEF, mins: 0 };
   function pickOf(list, v, d) { for (var i = 0; i < list.length; i++) if (String(list[i][0]) === String(v)) return String(v); return d; }
+  /* Several chips in a row (owner 2026-11-13, "allow to select multiple chips"): type, repeat and difficulty each take
+     All / Mix (the row left open, one alone) or any set of the specific options, saved as "img,case" in the row's order.
+     A question passes the row when it matches any chosen option. Nothing valid: the row's default. */
+  var OPEN = { all: 1, mix: 1 };
+  function vals(v) { return String(v == null ? "" : v).split(",").filter(Boolean); }
+  function pickMulti(list, v, d) {
+    var got = vals(v), open = null, out = [];
+    got.forEach(function (x) { if (OPEN[x] && pickOf(list, x, null) != null) open = open || x; });
+    list.forEach(function (o) { var k = String(o[0]); if (!OPEN[k] && got.indexOf(k) >= 0) out.push(k); });
+    return out.length ? out.join(",") : open || d;
+  }
+  function has(v, k) { return vals(v).indexOf(String(k)) >= 0; }
+  // Tap a chip: All or Mix alone; a specific option from All or Mix starts a new set, otherwise it toggles in or out.
+  // The last one out gives the row back its open choice (prev: the open choice it had before).
+  function toggle(list, cur, v, prev) {
+    v = String(v);
+    if (OPEN[v]) return v;
+    if (OPEN[cur]) return v;
+    var got = vals(cur), i = got.indexOf(v);
+    if (i >= 0) got.splice(i, 1); else got.push(v);
+    return got.length ? pickMulti(list, got.join(","), prev) : prev;
+  }
   // The nearest stepper value (ties go up); not a number or outside 10 to 600 s: the default.
   function snapQs(x) {
     x = Math.round(+x);
@@ -122,7 +147,7 @@
     sel = sel || {};
     var n = Math.round(+sel.n);
     var mins = Math.round(+sel.mins);
-    return { type: pickOf(TYPES, sel.type, DEFAULTS.type), seen: pickOf(SEENS, sel.seen, DEFAULTS.seen), d: pickOf(DIFFS, sel.d, DEFAULTS.d),
+    return { type: pickMulti(TYPES, sel.type, DEFAULTS.type), seen: pickMulti(SEENS, sel.seen, DEFAULTS.seen), d: pickMulti(DIFFS, sel.d, DEFAULTS.d),
       n: n >= 1 && n <= N_MAX ? n : DEFAULTS.n, mode: sel.mode === "exam" ? "exam" : "study", timer: pickOf(TIMERS, sel.timer, DEFAULTS.timer),
       qs: sel.qs == null ? QS_DEF : snapQs(sel.qs), mins: mins >= 1 && mins <= 600 ? mins : 0, v: 2 };
   }
@@ -155,9 +180,9 @@
   function summary(sel) {
     sel = normSel(sel);
     var parts = [sel.n + (sel.n === 1 ? " question" : " questions")], t = timerOf(sel);
-    if (sel.type !== "all") parts.push(sel.type === "mix" ? "mixed types" : LABEL.type[sel.type]);
-    if (sel.seen !== "all" && sel.seen !== "mix") parts.push(LABEL.seen[sel.seen]);
-    if (sel.d !== "mix") parts.push(LABEL.d[sel.d]);
+    if (sel.type !== "all") parts.push(sel.type === "mix" ? "mixed types" : labels("type", sel.type));
+    if (sel.seen !== "all" && sel.seen !== "mix") parts.push(labels("seen", sel.seen));
+    if (sel.d !== "mix") parts.push(labels("d", sel.d));
     var m = sel.mode === "exam" ? "test mode" : "learning mode";
     if (t === "q") m += ", " + sel.qs + " s a question"; else if (t === "set") m += ", " + (sel.mins ? sel.mins + " min" : "1 min a question"); else m += ", no timer";
     parts.push(m);
@@ -165,14 +190,15 @@
   }
   // Does the item pass every row (skip: a row left out, for that row's own counts).
   function keep(it, sel, ctx, skip) {
-    if (skip !== "type" && sel.type !== "all" && sel.type !== "mix" && typeOf(it) !== sel.type) return false;
+    if (skip !== "type" && sel.type !== "all" && sel.type !== "mix" && !has(sel.type, typeOf(it))) return false;
     if (skip !== "seen" && !seenMatch(it, sel.seen, ctx)) return false;
-    if (skip !== "d" && sel.d !== "mix" && String(dOf(it)) !== sel.d) return false;
+    if (skip !== "d" && sel.d !== "mix" && !has(sel.d, dOf(it))) return false;
     return true;
   }
   function flat(lists) { var out = []; (lists || []).forEach(function (l) { out = out.concat(l || []); }); return out; }
   /* counts(lists, sel, ctx) -> { total, type: { all, img, ... }, seen: {...}, d: {...} }: the pool each option would
-     leave with the other rows as chosen. All and Mix leave their row open, so they share a count. */
+     leave with the other rows as chosen. All and Mix leave their row open, so they share a count. A row's own choice
+     (one chip or several) leaves the total. */
   function counts(lists, sel, ctx) {
     var items = flat(lists), out = { total: 0, type: {}, seen: {}, d: {} };
     TYPES.forEach(function (t) { out.type[t[0]] = 0; }); SEENS.forEach(function (t) { out.seen[t[0]] = 0; }); DIFFS.forEach(function (t) { out.d[t[0]] = 0; });
@@ -274,13 +300,15 @@
     var L = (lists || []).map(function (l) { return (l || []).filter(function (it) { return keep(it, sel, ctx); }); }).filter(function (l) { return l.length; });
     var dims = [];
     if (sel.seen === "mix") dims.push("seen");
-    if (sel.type === "mix") dims.push("type");
+    if (sel.type === "mix" || vals(sel.type).length > 1) dims.push("type");   // several types: equal shares of the chosen ones
     if (sel.d === "mix") dims.push("d");
     var flat = [];
     L.forEach(function (l) { flat = flat.concat(l); });
     return core().diverseOrder(diversifySwap(pick(L, sel.n, dims, ctx, rnd), flat, ctx, rnd), rnd);
   }
   var LABEL = { type: { img: "image-based", "case": "clinical scenario", line: "one-liner" }, seen: { "new": "new", wrong: "incorrect before", bm: "bookmarked", due: "due for review", nt: "with your note", mk: "marked in tests" }, d: { 1: "easy", 2: "moderate", 3: "hard", 4: "very hard" } };
+  // "image-based or clinical scenario"
+  function labels(k, v) { return vals(v).map(function (x) { return LABEL[k][x] || x; }).join(" or "); }
   var RELAX = { type: "Question type: All", seen: "New or repeat: All", d: "Difficulty: Mix" };
   /* An empty pool: which one row to open up, the one that frees the most questions. { msg, dim } or null when the
      scope itself has nothing. */
@@ -294,7 +322,7 @@
       if (n && (!best || n > best.n)) best = { dim: x[0], n: n };
     });
     if (!best) return flat(lists).length ? { dim: null, msg: "No question here fits these choices together. Set every row to All or Mix." } : { dim: null, msg: "This set has no questions to practise yet." };
-    var what = LABEL[best.dim][sel[best.dim]] || "";
+    var what = labels(best.dim, sel[best.dim]);
     return { dim: best.dim, n: best.n, msg: "No " + what + " questions match. Choose " + RELAX[best.dim] + " for " + best.n + (best.n === 1 ? " question." : " questions.") };
   }
   /* fit(lists, sel, ctx) -> { sel, moved: [rows] }: a choice that leaves no question (a remembered "Incorrect before" with
@@ -310,7 +338,7 @@
     [["seen", "all"], ["type", "all"], ["d", "mix"]].forEach(function (x) {
       var k = x[0];
       if (rows[k] === false || out[k] === x[1] || (k !== "d" && out[k] === "mix")) return;
-      if (!counts(lists, out, ctx)[k][out[k]]) { out[k] = x[1]; moved.push(k); }
+      if (!counts(lists, out, ctx).total) { out[k] = x[1]; moved.push(k); }
     });
     return { sel: out, moved: moved };
   }
@@ -338,7 +366,7 @@
   function hasLast(map, kind, id) { map = map || {}; return !!((id && map[kind + ":" + id]) || map[kind]); }
 
   var PURE = { CASE_MIN: CASE_MIN, LONG_WORDS: LONG_WORDS, MID_WORDS: MID_WORDS, stemScore: stemScore, stemKind: stemKind, kindOf: kindOf, hasImg: hasImg, typeOf: typeOf, dOf: dOf,
-    wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, bucketOf: bucketOf, diversifySwap: diversifySwap, relaxHint: relaxHint, fit: fit,
+    wrongBefore: wrongBefore, seenOf: seenOf, vals: vals, has: has, toggle: toggle, labels: labels, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, bucketOf: bucketOf, diversifySwap: diversifySwap, relaxHint: relaxHint, fit: fit,
     remember: remember, recall: recall, hasLast: hasLast, migrate: migrate, snapQs: snapQs, stepQs: stepQs, lowAt: lowAt, timerOf: timerOf, runOpts: runOpts, summary: summary, TIMERS: TIMERS, QSECS: QSECS, QS_DEF: QS_DEF, QS_MAX: QS_MAX, LOW: LOW, TYPES: TYPES, SEENS: SEENS, DIFFS: DIFFS, COUNTS: COUNTS, N_MAX: N_MAX, DEFAULTS: DEFAULTS };
   if (isNode) { module.exports = PURE; return; }
 
@@ -401,11 +429,14 @@
     return !!el;
   }
   function fmt(n) { return S && S.host ? S.host.fmt(n) : String(n); }
-  function seg(act, label, opts, v, cnt) {
-    return '<div class="su-chips" role="radiogroup" aria-label="' + label + '">' + opts.map(function (o) {
+  /* multi: a filter row where several chips can be on (owner 2026-11-13). It is a group of toggle buttons (aria-pressed),
+     each its own tab stop; a single-choice row stays a radio group with one tab stop and arrow keys. */
+  function seg(act, label, opts, v, cnt, multi) {
+    return '<div class="su-chips' + (multi ? " su-multi" : "") + '" role="' + (multi ? "group" : "radiogroup") + '" aria-label="' + label + '">' + opts.map(function (o) {
       // An option that would leave no question cannot be chosen: it reads as off and does nothing (owner 2026-10-09).
-      var on = String(o[0]) === String(v), c = cnt ? cnt[o[0]] : null, off = c === 0 && !on;
-      return '<button type="button" class="su-chip' + (on ? " on" : "") + (c === 0 ? " zero" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="' + act + '" data-v="' + o[0] + '"' + (off ? " disabled" : "") + "><span>" + o[1] + "</span>" +
+      var on = multi ? has(v, o[0]) : String(o[0]) === String(v), c = cnt ? cnt[o[0]] : null, off = c === 0 && !on;
+      var state = multi ? 'aria-pressed="' + on + '"' : 'role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '"';
+      return '<button type="button" class="su-chip' + (on ? " on" : "") + (c === 0 ? " zero" : "") + '" ' + state + ' data-act="' + act + '" data-v="' + o[0] + '"' + (off ? " disabled" : "") + "><span>" + o[1] + "</span>" +
         (c != null ? '<b class="su-n">' + fmt(c) + '<span class="su-vh">' + (c === 1 ? " question" : " questions") + "</span></b>" : "") + "</button>";
     }).join("") + "</div>";
   }
@@ -455,13 +486,13 @@
     }
     return html + "</section>";
   }
-  function grp(k, title, body) { return '<section class="su-grp su-g-' + k + '"><h3 class="su-h"><span class="pl-sic" aria-hidden="true">' + svg(k) + "</span>" + title + "</h3>" + body + "</section>"; }
+  function grp(k, title, body, note) { return '<section class="su-grp su-g-' + k + '"><h3 class="su-h"><span class="pl-sic" aria-hidden="true">' + svg(k) + "</span>" + title + (note ? '<small class="su-hn">' + note + "</small>" : "") + "</h3>" + body + "</section>"; }
   // The filters a student changes now and then sit behind one row that says what they are set to.
   function filtSummary(sel, rows) {
     var p = [];
-    if (rows.type !== false) p.push(sel.type === "all" ? "All types" : sel.type === "mix" ? "Mixed types" : cap(LABEL.type[sel.type]));
-    if (rows.seen !== false) p.push(sel.seen === "all" ? "New and seen" : sel.seen === "mix" ? "New and repeat mix" : cap(LABEL.seen[sel.seen]));
-    p.push(sel.d === "mix" ? "Any difficulty" : cap(LABEL.d[sel.d]));
+    if (rows.type !== false) p.push(sel.type === "all" ? "All types" : sel.type === "mix" ? "Mixed types" : cap(labels("type", sel.type)));
+    if (rows.seen !== false) p.push(sel.seen === "all" ? "New and seen" : sel.seen === "mix" ? "New and repeat mix" : cap(labels("seen", sel.seen)));
+    p.push(sel.d === "mix" ? "Any difficulty" : cap(labels("d", sel.d)));
     return p.join(" · ");
   }
   function cap(x) { x = String(x || ""); return x.charAt(0).toUpperCase() + x.slice(1); }
@@ -483,9 +514,9 @@
           (total && sel.n > total ? '<p class="pn-mut pn-small su-capn">Only ' + fmt(total) + (total === 1 ? " question matches" : " questions match") + ", so the set has " + fmt(total) + ".</p>" : "")) +
         '<button type="button" class="su-more" data-act="su-more" aria-expanded="' + !!S.more + '" aria-controls="suFilt"><span class="su-mt"><b>Filter questions</b><small>' + esc(filtSummary(sel, rows)) + '</small></span><span class="su-mchev" aria-hidden="true">' + svg("chev") + "</span></button>" +
         '<div class="su-filt" id="suFilt"' + (S.more ? "" : " hidden") + ">" + (S.more ?
-          (rows.type === false ? "" : grp("type", "Question type", seg("su-type", "Question type", TYPES, sel.type, c.type))) +
-          (rows.seen === false ? "" : grp("seen", "New or repeat", seg("su-seen", "New or repeat", SEENS.filter(function (o) { return !((o[0] === "nt" || o[0] === "mk") && !c.seen[o[0]] && sel.seen !== o[0]); }), sel.seen, c.seen))) +
-          grp("d", "Difficulty", seg("su-d", "Difficulty", DIFFS, sel.d, c.d)) : "") + "</div>";
+          (rows.type === false ? "" : grp("type", "Question type", seg("su-type", "Question type", TYPES, sel.type, c.type, true), "One or more")) +
+          (rows.seen === false ? "" : grp("seen", "New or repeat", seg("su-seen", "New or repeat", SEENS.filter(function (o) { return !((o[0] === "nt" || o[0] === "mk") && !c.seen[o[0]] && !has(sel.seen, o[0])); }), sel.seen, c.seen, true), "One or more")) +
+          grp("d", "Difficulty", seg("su-d", "Difficulty", DIFFS, sel.d, c.d, true), "One or more") : "") + "</div>";
       S.n = n;
     }
     var body = modesHtml(sel) + timerHtml(sel, S.n || sel.n) + '<div class="su-qs">' + qs + "</div>";
@@ -548,9 +579,13 @@
   }
   function act_(a, b) {
     var v = b.getAttribute("data-v"), sel = S.sel;
-    if (a === "su-type") sel.type = v;
-    else if (a === "su-seen") sel.seen = v;
-    else if (a === "su-d") sel.d = v;
+    if (a === "su-type" || a === "su-seen" || a === "su-d") {
+      // The open choice (All or Mix) a row had before its first chip is what it returns to when the last chip goes.
+      var k = a.slice(3), list = k === "type" ? TYPES : k === "seen" ? SEENS : DIFFS;
+      S.open = S.open || {};
+      if (OPEN[sel[k]]) S.open[k] = sel[k];
+      sel[k] = toggle(list, sel[k], v, S.open[k] || DEFAULTS[k]);
+    }
     else if (a === "su-mode") sel.mode = v;
     else if (a === "su-ton") { if (sel.timer === "off") sel.timer = S.tk || "q"; else { S.tk = sel.timer; sel.timer = "off"; } draw_(); return refocus(a); }
     else if (a === "su-more") { S.more = !S.more; draw_(); return refocus(a); }
@@ -577,6 +612,7 @@
     if (!S) return;
     var t = e.target, k = e.key;
     if (!t || !t.classList || !(t.classList.contains("su-chip") || t.classList.contains("su-mc"))) return;
+    if (t.parentNode && t.parentNode.getAttribute("role") !== "radiogroup") return;   // a multi row: Tab between chips, Space toggles
     var step = k === "ArrowRight" || k === "ArrowDown" ? 1 : k === "ArrowLeft" || k === "ArrowUp" ? -1 : 0;
     if (!step) return;
     e.preventDefault();

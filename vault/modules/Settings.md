@@ -66,3 +66,12 @@ Home never takes Auto fit's small-phone shrink (`homeBaseD`: at least 1.0, never
 restart look (0.95 + Compact on a 393 px iPhone) squashed the tiles and banner; 100% + Default is the wanted look.
 "Reset to defaults" now runs Auto fit at once (it left 100% and Default density until relaunch).
 Audit note: outside Home, Density only changes Settings rows (`settings-ui.css`), so it does very little on its own.
+
+## Navigation (2026-11-13)
+Rows open inside Settings as an iOS push (`PUSH` map, `pushFromSettings` in `sidebar-redesign.js`). The shared `#hvSheet` gets
+`sbr-pushed` (parked off the right edge with transitions off, then `.on` slides it in); `#sbrSettings.sbr-under` slides 30% left
+and `#sbrDim` dims it. `ensureNav` adds the `.sbr-nav` bar (round Back, centred title) and re-adds it if the sheet re-renders.
+Closing the sheet by any route (Back, edge drag, a Done or save inside) is caught by a MutationObserver that slides Settings back
+and un-pushes the sheet after the animation. Overlays that are not the sheet (Apple Watch, Mail, Clinic) are raised above
+Settings and Settings steps under them; a poll restores it when they close. Gotcha: rows inside the pushed sheet are forced to
+`opacity:1` because page-level fade-ins let Settings show through. Test: `test/run-settings-push-ui.mjs`.

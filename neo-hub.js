@@ -34,7 +34,10 @@
   function data(name) {
     if (cache[name]) return Promise.resolve(cache[name]);
     if (pend[name]) return pend[name];
-    pend[name] = fetch("/data/neo/" + name + ".json?v=" + VER).then(function (r) { if (!r.ok) throw new Error(name + " " + r.status); return r.json(); })
+    var dataUrl = "/data/neo/" + name + ".json?v=" + VER;
+    pend[name] = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+      ? SMD_CONTENT.fetchJSON(dataUrl)
+      : fetch(dataUrl).then(function (r) { if (!r.ok) throw new Error(name + " " + r.status); return r.json(); }))
       .then(function (j) { cache[name] = j; delete pend[name]; return j; }, function (e) { delete pend[name]; throw e; });
     return pend[name];
   }

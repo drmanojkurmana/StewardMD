@@ -4637,7 +4637,7 @@
       if (!b || !s || !window.DX || !DX.openRef) return;
       var from = s.opts || {};
       var cur = H0() && H0()[s.id] ? H0()[s.id].name : "";
-      DX.openRef(b.getAttribute("data-kbrel"), { standalone: true, from: from.from, backLabel: "‹ " + (cur.length > 24 ? cur.slice(0, 23) + "…" : cur || "Back"), onBack: function () { DX.openRef(s.id, from); } });
+      DX.openRef(b.getAttribute("data-kbrel"), { standalone: true, from: from.from, backLabel: "‹ " + (cur && cur.length <= 11 ? cur : "Back"), onBack: function () { DX.openRef(s.id, from); } });
     });
   }
   // Section chips: scroll the reader body (never the pinned panel) and mark the section in view.
@@ -8737,9 +8737,14 @@
   function smdTbLoad() {
     if (_tbData) return Promise.resolve(_tbData);
     if (_tbLoad) return _tbLoad;
+    function tbFetch(url) {
+      return (window.SMD_CONTENT && SMD_CONTENT.fetchJSON)
+        ? SMD_CONTENT.fetchJSON(url)
+        : fetch(url).then(function (r) { return r.json(); });
+    }
     _tbLoad = Promise.all([
-      fetch("/kb/treatments/tb_dr_regimens.json").then(function (r) { return r.json(); }),
-      fetch("/kb/treatments/tb_drugs.json").then(function (r) { return r.json(); })
+      tbFetch("/kb/treatments/tb_dr_regimens.json"),
+      tbFetch("/kb/treatments/tb_drugs.json")
     ]).then(function (a) { _tbData = { reg: a[0], drugs: a[1] }; return _tbData; }).catch(function () { _tbLoad = null; return null; });
     return _tbLoad;
   }

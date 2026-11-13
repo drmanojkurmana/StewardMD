@@ -125,16 +125,14 @@ function initPanel() {
   });
 
   const ox = layers.over;
-  pill(ox, "Weekly pen", 124, 118, 95, 68, "Pre-filled weekly pen delivering a long-acting incretin receptor agonist subcutaneously.");
-  pill(ox, "Subcutaneous depot", 152, 174, 175, 215, "Subcutaneous depot from which the fatty-acid acylated drug slowly enters capillaries over days.");
+  pill(ox, "Pen and depot", 152, 174, 120, 68, "A prefilled weekly pen leaves a subcutaneous depot. From that depot the drug slowly enters capillaries over days.");
   pill(ox, "Gut L and K cells", 104, 332, 95, 415, "Intestinal endocrine cells: L cells secrete GLP-1 and K cells secrete GIP in response to nutrients.");
-  pill(ox, "DPP-4 enzyme", 225, 310, 230, 415, "Dipeptidyl peptidase-4 cleaves native GLP-1 and GIP within 2 to 3 minutes, limiting their natural duration.");
-  pill(ox, "Albumin bound", 180, 298, 235, 275, "Semaglutide and tirzepatide carry a fatty acid diacid tail that binds albumin, shielding them from DPP-4.");
-  pill(ox, "Pancreatic islet", 405, 125, 385, 68, "Beta cells produce insulin and alpha cells produce glucagon; incretins enhance glucose-dependent insulin release.");
-  pill(ox, "GLP-1 & GIP receptors", 585, 125, 585, 68, "Semaglutide binds GLP-1 receptors; tirzepatide is a dual agonist binding both GLP-1 and GIP receptors.");
+  pill(ox, "DPP-4 enzyme", 225, 310, 230, 415, "Dipeptidyl peptidase-4 cleaves native GLP-1 and GIP within minutes, limiting their natural duration.");
+  pill(ox, "Albumin bound", 180, 298, 235, 275, "Semaglutide and tirzepatide carry a fatty acid tail that binds albumin. That shield keeps DPP-4 from cutting them, so they stay in the blood on the way to their targets.");
+  pill(ox, "Pancreatic islet", 405, 125, 385, 68, "Beta cells produce insulin and alpha cells produce glucagon. Incretins enhance glucose dependent insulin release.");
+  pill(ox, "GLP-1 and GIP", 585, 125, 585, 68, "Semaglutide binds GLP-1 receptors. Tirzepatide is a dual agonist and binds both GLP-1 and GIP receptors.");
   pill(ox, "Hypothalamus", 800, 135, 805, 68, "Hypothalamic appetite centers receive incretin signals that increase satiety and reduce hunger drive.");
-  pill(ox, "Central vessel", 480, 250, 480, 280, "Glossy systemic bloodstream carrying circulating incretins, red blood cells and glucose to target organs.");
-  pill(ox, "Stomach & pylorus", 825, 365, 810, 415, "Gastric emptying through the pyloric sphincter slows under GLP-1 agonism, smoothing postprandial glucose.");
+  pill(ox, "Stomach", 825, 365, 810, 415, "Gastric emptying through the pyloric sphincter slows under GLP-1 agonism, smoothing the rise in blood sugar after a meal.");
 }
 
 /* ---- ad mode setup ---- */

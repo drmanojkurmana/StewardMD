@@ -662,6 +662,11 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   `due - last == 1` (a miss is rescheduled for the next day).
 - Draw: `customDraw` (prep.js) is the only picker; a Mix splits the count first (type thirds; repeat 50% new, 30% due,
   20% incorrect, short groups refilled; difficulty in proportion to the pool). Empty pool: `relaxHint` names the row.
+- Multi-select filter rows (2026-11-13, `?v=prep143`): Question type, New or repeat and Difficulty each take All or Mix
+  alone, or any set of specific chips (saved as `"img,case"`, `"new,wrong"`, `"1,3"` in row order; `normSel` ->
+  `pickMulti`). A question passes a row when it matches any chosen chip. Chips are `aria-pressed` toggles (a radio
+  group stays for count, mode and timer). Tapping the last chip off returns the row to the All/Mix it had before.
+  Two or more types are drawn in equal shares (as Mix). Old single-value saves read unchanged.
 - Remembered per scope in localStorage `smd_prep_setup` (`kind:id`, then `kind`, 40 kept). "Start with last settings"
   (`su-last`, `PREP_SETUP.quick`) starts a module, subject, bookmarks or mistakes set in one tap; decks and PYQ open the
   sheet already set to the last choice.
