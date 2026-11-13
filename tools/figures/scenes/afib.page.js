@@ -91,17 +91,11 @@ function init() {
 }
 function initPanel() {
   const o = L.over;
-  pill(o, "PV triggers", 270, 140, 400, 66, "Pulmonary vein triggers: rapid extra beats from muscle sleeves around the lung veins. These starts often set off atrial fibrillation.");
-  pill(o, "Re-entry", 240, 195, 82, 160, "Re-entry: many small wandering circuits in the atria. The wavefront breaks up, so the atria quiver instead of beating together.");
-  pill(o, "Appendage clot", APP[0], APP[1], 95, 120, "Left atrial appendage: a small pouch where blood swirls slowly in atrial fibrillation. Slow blood there can form a clot.");
-  pill(o, "AV node", AV[0], AV[1], 478, 180, "AV node filter: the AV node is bombarded by atrial signals and lets only some through, at uneven gaps. That is why the pulse is uneven.");
-  pill(o, "Atria", 340, 200, 452, 132, "Atria: the upper chambers. In fibrillation they quiver fast and chaotically instead of squeezing together.");
-  pill(o, "Ventricles", VEN[0], VEN[1], 120, 392, "Ventricles: the lower pumping chambers. They follow the uneven signals that pass the AV node, so the pulse is fast and uneven.");
-  pill(o, "Stasis", 172, 244, 300, 392, "Stasis: blood that barely moves in the quivering atrium and pouch. Slow flow helps a clot form.");
-  pill(o, "No P waves", 640, 162, 720, 275, "On the ECG there is no clear P wave before each beat, because the atria are not beating in order.");
-  pill(o, "Irregular QRS", 800, 150, 850, 275, "Beats arrive at uneven gaps, with a wavy baseline between them.");
-  pill(o, "Embolus", 520, 277, 608, 275, "A piece of pouch clot can leave with the blood flow and travel to the brain.");
-  pill(o, "Stroke", BRN[0] + 14, BRN[1] - 6, 888, 330, "If the piece blocks a brain artery it causes a stroke. Anticoagulation lowers this risk.");
+  pill(o, "Triggers and circuits", 270, 160, 220, 66, "Pulmonary vein triggers are rapid extra beats from muscle sleeves around the lung veins. These starts often set off atrial fibrillation. The wave then breaks into many small wandering circuits, so the atria quiver instead of squeezing together.");
+  pill(o, "Pouch and stasis", APP[0], APP[1], 130, 150, "The left atrial appendage is a pouch where blood swirls slowly in atrial fibrillation. Stasis, blood that barely moves in the quivering atrium and pouch, helps a clot form there.");
+  pill(o, "AV node filter", AV[0], AV[1], 470, 170, "The AV node is bombarded by atrial signals and lets only some through, at uneven gaps. The ventricles follow those signals, so the pulse is fast and uneven.");
+  pill(o, "ECG pattern", 740, 160, 780, 250, "There is no clear P wave before each beat, because the atria are not beating in order. Beats arrive at uneven gaps, with a wavy baseline between them.");
+  pill(o, "Clot to the brain", 640, 290, 760, 340, "A piece of pouch clot can leave with the blood and block a brain artery, which causes a stroke. Anticoagulation lowers this risk.");
   const pr = pill(o, "Rate control", AV[0], AV[1], 740, 408, "Rate control plugs the AV node. Watch the plugs sit on the node while fewer pulses reach the ventricles."); pr.setAttribute("id", "p-rate"); pr.style.opacity = 0;
   const ph = pill(o, "Rhythm control", SAN[0], SAN[1], 740, 408, "Rhythm control calms the vein triggers and restores one orderly wave from the natural pacemaker."); ph.setAttribute("id", "p-rhythm"); ph.style.opacity = 0;
   const pc = pill(o, "Anticoagulation", APP[0], APP[1], 740, 408, "Anticoagulation sends trappers that swarm the clot, so less breaks off to the brain. The rhythm is unchanged."); pc.setAttribute("id", "p-coag"); pc.style.opacity = 0;

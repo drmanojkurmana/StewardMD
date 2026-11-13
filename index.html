@@ -2298,11 +2298,12 @@ window.openExternal = function (u) {
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
 <script src="/app-check-init.js?v=appcheck4" defer></script>
-<script src="/antibiogram-data.js?v=abgd1.a5e6e86a9e8f" defer></script>
+<script src="/content-crypt.js?v=cc1" defer></script>
+<script src="/antibiogram-data.js?v=abgd1.666b82264199" defer></script>
 <!-- Antibiogram rules + store (v2): validation rules shared with the build, and the data layer that
      fetches kb/antibiogram/antibiogram.json. Must load before policy.js (profiles) and antibiogram.js. -->
-<script src="/antibiogram-rules.js?v=abgr2.a5e6e86a9e8f" defer></script>
-<script src="/antibiogram-store.js?v=abgs1.a5e6e86a9e8f" defer></script>
+<script src="/antibiogram-rules.js?v=abgr2.666b82264199" defer></script>
+<script src="/antibiogram-store.js?v=abgs1.666b82264199" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
 <script src="/account.js?v=gold365-pronotice1-thread-vclaim1-proevt1-boot1-wsqfu3-tier1-gate1-energy1-roles1" defer></script>
@@ -2398,7 +2399,8 @@ window.openExternal = function (u) {
 <script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1-pf2"></script>
 <script defer src="/ghis-meds.js?v=gold364"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
-<script src="/fig-viewer.js?v=fig17" defer></script>
+<script src="/fig-guide.js?v=fig18" defer></script>
+<script src="/fig-viewer.js?v=fig18" defer></script>
 <script src="/ilearn.js?v=il1" defer></script>
 <script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1-dbclean3-dbhead4" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
@@ -3335,7 +3337,7 @@ window.openExternal = function (u) {
 <script src="/tokos-loader.js?v=tok14" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
-<script src="/prep-loader.js?v=prep140" defer></script>
+<script src="/prep-loader.js?v=prep142" defer></script>
 <!-- Anaesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
 <script src="/narke-loader.js?v=nrk13" defer></script>
 <!-- Kardia (Echo + ECG learning): only the loader at boot; the engine and Kardia files load on first open (kardia-loader.js).

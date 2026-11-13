@@ -244,7 +244,7 @@ for (const m of M) {
 }
 const ixPath = path.join(ROOT, "prep/lessons/v1/index.json");
 const ix = JSON.parse(fs.readFileSync(ixPath, "utf8"));
-for (const m of M) ix.modules[m.id] = { title: m.title, minutes: 6, steps: m.steps.length, gen: "AI" };
+for (const m of M) ix.modules[m.id] = { title: m.title, minutes: 6, steps: m.steps.length, gen: "AI", module: m.id };
 fs.writeFileSync(ixPath, JSON.stringify(ix, null, 1));
 const ocPath = path.join(ROOT, "prep/bank/overlay-counts.json");
 const oc = JSON.parse(fs.readFileSync(ocPath, "utf8"));

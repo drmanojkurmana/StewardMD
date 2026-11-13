@@ -93,19 +93,12 @@ function initPanel() {
   [["med", "Mediators", "g-hist", "Histamine and other mediators released when allergen cross-links IgE on mast cells."], ["air", "Airway", "g-bad", "How narrow the bronchiole is. Mediators contract its smooth muscle and add mucus: bronchospasm."], ["lar", "Larynx", "g-bad", "Swelling of the laryngeal folds (laryngeal oedema). It narrows the upper airway and can block it."], ["vaso", "Vessels", "g-fl", "Blood vessels dilate and leak plasma, so circulating volume and blood pressure fall."], ["bp", "Pressure", "g-good", "Blood pressure. It falls as vessels dilate and leak, and rises again with adrenaline or fluids."], ["br", "Breathing", "g-bad", "Breathing difficulty from the narrowed bronchiole plus the swollen larynx together."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Allergen", 92, 138, 92, 94, "Allergen: the trigger (for example a food, drug or sting venom). In a sensitised person it meets IgE already fixed on mast cells.");
-  pill(ox, "IgE on mast cell", 208, 200, 258, 150, "IgE antibodies sit on high-affinity receptors on the mast cell surface. When allergen cross-links two neighbouring IgE molecules, the cell is switched on.");
-  pill(ox, "Mast cell", 145, 268, 108, 332, "Mast cell: a tissue sentinel packed with granules of histamine and other mediators. Cross-linked IgE makes it degranulate within minutes.");
-  pill(ox, "Mediators", 282, 252, 332, 286, "Histamine, prostaglandins, leukotrienes and other mediators. They travel to airways, larynx, skin and blood vessels and act within minutes.");
-  pill(ox, "Lung", 560, 150, 628, 112, "Lung: the bronchiole in the middle is a small airway. Mediators reaching it make its muscle squeeze shut.");
-  pill(ox, "Bronchiole", 505, 187, 505, 96, "Bronchiole in cross section inside the lung. The ring is smooth muscle around the air passage in the middle.");
-  pill(ox, "Narrowed airway", 505, 245, 505, 372, "Bronchospasm: airway smooth muscle contracts and mucus collects, so air struggles to move, especially out. This causes wheeze.");
-  pill(ox, "Larynx", 765, 122, 765, 94, "Larynx: the voice-box at the top of the windpipe. Air passes between the folds to reach the lungs.");
-  pill(ox, "Swollen folds", 800, 178, 880, 176, "Laryngeal oedema: mediator-driven fluid swells the laryngeal folds. The opening shrinks, causing hoarseness and stridor, and it can obstruct completely.");
-  pill(ox, "Heart", 630, 400, 606, 290, "Heart: it pumps blood into the vessel. When vessels widen and leak, less blood returns and pressure falls.");
-  pill(ox, "Blood vessel", 810, 344, 810, 300, "A blood vessel leaving the heart. Mediators relax its muscle so it widens, and loosen its lining so plasma leaks out.");
-  pill(ox, "Dilated vessel", 800, 384, 800, 428, "Vasodilation plus leak: the vessel widens and loses plasma. Less volume returning to the heart means falling blood pressure and shock.");
-  pill(ox, "Treatment", 300, 360, 318, 404, "Treatment enters from here. Adrenaline docks on vessel and airway docking points, antihistamine covers histamine docking points, and fluids refill the vessel.");
+  pill(ox, "Mast cell trigger", 160, 200, 170, 96, "An allergen such as a food, a drug or sting venom meets IgE already fixed on the mast cell. IgE sits on high affinity receptors. When allergen cross links two neighbouring IgE molecules, the mast cell degranulates within minutes.");
+  pill(ox, "Mediators", 282, 252, 360, 280, "Histamine, prostaglandins, leukotrienes and other mediators. They travel to airways, the larynx, skin and blood vessels and act within minutes.");
+  pill(ox, "Airway", 505, 200, 560, 96, "The bronchiole in the lung is a small airway with smooth muscle around the air passage. Mediators make that muscle contract and mucus collect, so air struggles to move, especially out. This causes wheeze.");
+  pill(ox, "Larynx", 780, 150, 820, 96, "The larynx is the voice box at the top of the windpipe. Mediator driven fluid swells the folds, the opening shrinks, and the result is hoarseness, stridor, or a complete block.");
+  pill(ox, "Vessels and shock", 760, 370, 700, 420, "The heart pumps blood into the vessel. Mediators relax vessel muscle so it widens, and loosen the lining so plasma leaks out. Less volume returns to the heart, so blood pressure falls and shock follows.");
+  pill(ox, "Treatment", 300, 360, 240, 400, "Treatment enters from here. Adrenaline docks on vessel and airway docking points, antihistamine covers histamine docking points, and fluids refill the vessel.");
   capEl = mk("text", { class: "an-cap", x: 30, y: 434 }, ox); capEl.textContent = capText(0, 1);
 }
 const sm = { a: 0.4, M: 0.3, Air: 0.2, Lar: 0.15, Vaso: 0.2, BP: 0.8, Breath: 0.2, adr: 0, ahs: 0, flu: 0 };

@@ -16,8 +16,10 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..");
 const PORT = 9457, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/agent-approval-chrome-" + process.pid;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+// Chromium refuses to start sandboxed as root (a Linux container): only there is the sandbox dropped.
+const rootArgs = typeof process.getuid === "function" && process.getuid() === 0 ? ["--no-sandbox"] : [];
 const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`,
-  "--no-first-run", "--disable-gpu", "--mute-audio", "--allow-file-access-from-files"], { stdio: "ignore" });
+  "--no-first-run", "--disable-gpu", "--mute-audio", "--allow-file-access-from-files", ...rootArgs], { stdio: "ignore" });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let msgId = 1; const pending = new Map(); let ws, sessionId;
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
@@ -34,8 +36,9 @@ const VERSION = {
   validation: { ok: true, issues: [] },
   views: [
     { resource: "worklist", path: "/Doctor/Home", columns: ["Patient ID", "Patient name", "Age"], guided: false },
-    { resource: "medications", path: "/Doctor/Treatment", columns: ["Drug", "Dose", "Route"], guided: true },
+    { resource: "medications", path: "/Doctor/Treatment", columns: ["Drug", "Dose", "Route"], guided: true, crossCheck: "differs" },
   ],
+  repair: { from: "ver-0", changes: ["worklist: data call GET /GetIPWL -> POST /GetWard", "worklist: columns +Ward -Bed"] },
   operations: [
     { opId: "list_worklist", type: "list_worklist", resource: "worklist", method: "GET", pathTemplate: "/Doctor/Home" },
     { opId: "list_medications", type: "list_medications", resource: "medications", method: "GET", pathTemplate: "/Doctor/Home" },
@@ -95,6 +98,10 @@ try {
     "each screen shows its path and the columns the agent saw, never patient data");
   ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("shown by the doctor") >= 0;`) === true,
     "a screen the doctor had to point out is marked as such");
+  ok(await ev(`return document.getElementById("agentPending").innerText.indexOf("second patient checked") >= 0;`) === true,
+    "a screen that passed the two-patient check says so");
+  ok(await ev(`var t=document.getElementById("agentPending").innerText; return t.indexOf("What changed") >= 0 && t.indexOf("GET /GetIPWL -> POST /GetWard") >= 0 && t.indexOf("+Ward -Bed") >= 0;`) === true,
+    "a repair lists what it changed");
   ok(await waitFor(`return !!(${APPROVE_BTN});`, 4000), "an Approve button is offered");
   ok(await ev(`return !!(${REJECT_BTN});`) === true, "a Reject button is offered");
 

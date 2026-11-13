@@ -62,15 +62,11 @@ function init() {
   const freeStream = () => streams.find((p) => !p.on);
   /* labels */
   const o = L.over;
-  pill(o, "Cerebral artery", 110, 200, 140, 92, "A cerebral artery carrying blood to one brain territory. Block it and that territory is starved.");
-  pill(o, "Embolus", 220, 224, 235, 92, "An embolus: a clot fragment that travels in the blood, often from the heart, and lodges in a narrower artery.");
-  pill(o, "Plaque", 430, 244, 300, 92, "A fatty plaque in the artery wall. A clot forming here in place is a thrombotic stroke.");
-  pill(o, "Clot", CLOTX, 206, 500, 92, "A clot of platelets and fibrin blocking the artery. Flow beyond it falls or stops.");
-  pill(o, "Core", COREX, 180, 580, 92, "The ischaemic core: tissue with almost no flow that dies quickly and cannot be recovered.");
-  pill(o, "Penumbra", 668, 192, 660, 92, "The penumbra: tissue around the core that is barely perfused, not working but still alive and salvageable if flow returns.");
-  pill(o, "Neurone", 795, 172, 860, 92, "A brain cell. Starved neurones fail, release glutamate and, in the core, die.");
-  pill(o, "Heart", 170, 340, 250, 340, "The heart is a common source of emboli, for example when clot forms in a fibrillating atrium.");
-  pill(o, "Glutamate", 700, 270, 640, 395, "Glutamate released by starved neurones overexcites neighbours and drives cell death in the penumbra.");
+  pill(o, "Blocked artery", 280, 210, 200, 92, "A cerebral artery carries blood to one brain territory. A clot of platelets and fibrin can block it, so flow beyond falls or stops and that territory is starved.");
+  pill(o, "Embolus", 200, 250, 160, 300, "An embolus is a clot fragment that travels in the blood, often from the heart when clot forms in a fibrillating atrium, and lodges in a narrower artery.");
+  pill(o, "Plaque", 430, 244, 460, 170, "A fatty plaque in the artery wall. A clot forming here in place is a thrombotic stroke.");
+  pill(o, "Core", COREX, 180, 640, 92, "The ischaemic core is tissue with almost no flow. It dies quickly and cannot be recovered. Starved neurones there fail, release glutamate and die.");
+  pill(o, "Penumbra", 720, 230, 800, 170, "The penumbra is tissue around the core that is barely perfused, not working but still alive if flow returns. Glutamate from starved neurones overexcites neighbours and drives cell death here.");
   const cp = pill(o, "Catheter", 200, 218, 330, 300, "Thrombectomy: a catheter passed into the artery traps the clot and pulls it out, reopening the vessel."); cp.setAttribute("id", "st-cath-pill"); cp.style.opacity = 0;
   const lp = pill(o, "Thrombolysis", 150, 218, 420, 330, "Thrombolysis: a clot dissolving drug that breaks the clot apart so flow can return."); lp.setAttribute("id", "st-lys-pill"); lp.style.opacity = 0;
   const ap = pill(o, "Antiplatelet", 350, 218, 550, 340, "An antiplatelet drug coats platelets so they stop piling onto the clot. On its own it does not reopen a blocked artery."); ap.setAttribute("id", "st-ap-pill"); ap.style.opacity = 0;

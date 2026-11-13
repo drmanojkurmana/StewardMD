@@ -1732,7 +1732,10 @@
     }
     if (protocolOrId && typeof protocolOrId === "object") return start(protocolOrId, patient, opts);
     if (!G.fetch) return;
-    G.fetch("/kb/protocols/" + encodeURIComponent(protocolOrId) + ".json").then(function (r) { return r.ok ? r.json() : null; })
+    var protoUrl = "/kb/protocols/" + encodeURIComponent(protocolOrId) + ".json";
+    ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(protoUrl, { optional: true })
+      : G.fetch(protoUrl).then(function (r) { return r.ok ? r.json() : null; }))
       .then(function (p) { if (p) start(p, patient, opts); else if (G.toast) G.toast("Protocol not found: " + protocolOrId); })
       .catch(function () { if (G.toast) G.toast("Could not load protocol."); });
   }

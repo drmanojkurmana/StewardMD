@@ -63,17 +63,12 @@ function initOver() {
   [["act", "T-cell activation", "g-cyt", "How strongly recipient T cells have been switched on against the donor tissue."], ["ab", "Donor antibodies", "g-eos", "Antibodies made by B cells that bind donor tissue, especially graft blood vessels."], ["dm", "Graft damage", "g-bad", "Injury to the graft from killer T cells, antibodies, complement and macrophages."], ["fn", "Graft function", "g-good", "How well the graft still works."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i], y0 + 2, h + 4, 20, cls, name, tip); });
   const O = L.over;
-  pill(O, "Donor kidney cells", 175, 340, 170, 418, "Donor kidney cells. Their surface carries donor MHC (HLA) molecules, which differ from the recipient's. This difference is what the recipient immune system reacts to.");
-  pill(O, "Graft vessels", 52, 108, 64, 86, "The lining of the graft's blood vessels is the first surface that antibodies reach. Complement proteins switch on where antibodies bind and punch holes in these cells (the red rings).");
-  pill(O, "Donor DC", 246, 96, 272, 54, "A donor dendritic cell that came with the graft (a passenger cell). It can carry intact donor MHC to a recipient lymph node.");
-  pill(O, "CD4 T cell", SITE.cd4a[0], SITE.cd4a[1] + 18, SITE.cd4a[0] + 40, SITE.cd4a[1] + 58, "CD4 helper T cell. It needs signal 1 (its receptor meeting MHC with peptide) and signal 2 (CD28 meeting B7) to switch on, then makes IL-2 and divides.");
-  pill(O, "CD8 T cell", SITE.cd8a[0], SITE.cd8a[1] + 18, SITE.cd8a[0] - 22, SITE.cd8a[1] + 62, "CD8 cytotoxic T cell. Once activated it travels to the graft and kills cells that carry donor MHC.");
-  pill(O, "Direct pathway", 600, 160, 610, 118, "Direct pathway: donor dendritic cells show intact donor MHC to recipient T cells. It dominates early acute rejection.");
-  pill(O, "Recipient APC", SITE.apc[0] - 16, SITE.apc[1] + 14, SITE.apc[0] - 60, SITE.apc[1] + 62, "Recipient antigen-presenting cell. It takes up donor proteins shed from the graft, cuts them into peptides and shows them on its own MHC class II.");
-  pill(O, "Indirect pathway", 860, 140, 870, 100, "Indirect pathway: recipient cells show pieces of donor proteins on recipient MHC. It drives antibody help and later, chronic rejection.");
-  pill(O, "B cell", SITE.b[0] - 16, SITE.b[1] + 12, SITE.b[0] - 58, SITE.b[1] + 40, "B cell. With help from the CD4 T cell it becomes a plasma cell and makes antibodies against donor proteins.");
-  pill(O, "Antibodies", 560, 418, 580, 396, "Donor-specific antibodies travel in the blood and bind the graft's vessel lining.");
-  pill(O, "Killer T cell", 310, 345, 330, 392, "Activated CD8 T cells reach the graft, release perforin and granzymes and kill donor cells.");
+  pill(O, "Graft surface", 140, 250, 150, 418, "Donor kidney cells carry donor MHC (HLA) that differs from the recipient, and that difference is what the immune system reacts to. Antibodies reach the graft vessel lining first. Complement switches on where they bind and punches holes in these cells.");
+  pill(O, "Direct pathway", 420, 110, 400, 58, "A donor dendritic cell that came with the graft carries intact donor MHC to a recipient lymph node and shows it to recipient T cells. This direct pathway dominates early acute rejection.");
+  pill(O, "Helper T cell", SITE.cd4a[0], SITE.cd4a[1], 620, 300, "The CD4 helper T cell needs signal 1 (its receptor meeting MHC with peptide) and signal 2 (CD28 meeting B7) to switch on, then makes IL-2 and divides. That help lets a B cell become a plasma cell.");
+  pill(O, "Indirect pathway", 820, 140, 800, 100, "A recipient antigen presenting cell takes up donor proteins shed from the graft, cuts them into peptides and shows them on its own MHC class II. This indirect pathway drives antibody help and later, chronic rejection.");
+  pill(O, "Killer T cell", 280, 340, 250, 392, "A CD8 cytotoxic T cell, once activated, travels to the graft, releases perforin and granzymes and kills cells that carry donor MHC.");
+  pill(O, "Antibodies", 700, 400, 720, 430, "With help from the CD4 T cell the B cell makes antibodies against donor proteins. Those antibodies travel in the blood and bind the graft vessel lining.");
   blockMark("cni", 604, 266, "no IL-2", "Calcineurin inhibitor: after signal 1, calcineurin switches on the IL-2 gene. Blocking it means the T cell makes little IL-2.");
   blockMark("cos", 548, 190, "CD28 blocked", "Costimulation blocker: it binds B7 on the antigen-presenting cell so CD28 on the T cell gets no signal 2. The T cell is left unresponsive.");
   blockMark("il2r", 598, 214, "IL-2 receptor", "Anti-IL-2 receptor antibody: it covers the IL-2 receptor on activated T cells so IL-2 cannot drive them to divide.");

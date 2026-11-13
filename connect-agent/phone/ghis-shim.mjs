@@ -468,6 +468,12 @@ export function notRead(sections, resource, label) {
   const detail = failed ? ' (' + String(failed.error).replace(/\d{3,}/g, '#').slice(0, 140) + ')' : '';
   const why = own.some((s) => s.unreadable === 'not-scoped')
     ? 'the agent never learned which field carries the patient, so the request could not be limited to this patient.'
+    : own.some((s) => s.unreadable === 'other-patient')
+      ? 'the hospital answered with rows for a different patient, so nothing was shown. Open this patient again; if it repeats, run Connect Hospital again.'
+    : own.some((s) => s.unreadable === 'not-activated')
+      ? 'the hospital did not switch to this patient, so its answer could belong to the patient opened before. Open this patient again.'
+    : own.some((s) => s.unreadable === 'changed')
+      ? 'the hospital answered with a different screen than the one the agent learned. Run Connect Hospital again to teach it.'
     : failed ? 'the hospital did not answer' + detail + '.' : 'the agent never learned this screen for this hospital. Run Connect Hospital again to teach it.';
   return { unreadable: label + ' were not read: ' + why };
 }

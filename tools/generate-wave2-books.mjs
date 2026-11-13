@@ -905,7 +905,8 @@ for (const l of wave2Lessons) {
       title: l.title,
       minutes: l.minutes,
       steps: l.steps.length,
-      gen: l.gen
+      gen: l.gen,
+      module: l.module
     };
     console.log(`OK: wrote lesson ${l.module} (${l.steps.length} steps)`);
     lessonWritten++;

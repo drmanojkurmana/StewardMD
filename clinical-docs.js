@@ -148,7 +148,10 @@
   var S = { type: "", vals: {}, lang: "en", consentId: "", adviceSel: {}, advQ: "", kitId: "", ctx: null, regNo: "", handover: [] };
   function load() {
     if (BUNDLE) return Promise.resolve(BUNDLE); if (pend) return pend;
-    pend = fetch("/kb/documents/documents.json?v=" + encodeURIComponent(DOCS_V)).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+    var docsUrl = "/kb/documents/documents.json?v=" + encodeURIComponent(DOCS_V);
+    pend = (window.SMD_CONTENT && SMD_CONTENT.fetchJSON
+      ? SMD_CONTENT.fetchJSON(docsUrl)
+      : fetch(docsUrl).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }))
       .then(function (b) { BUNDLE = b; pend = null; return b; }, function (e) { pend = null; throw e; });
     return pend;
   }

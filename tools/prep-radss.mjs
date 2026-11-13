@@ -647,7 +647,7 @@ function lessonsout() {
     const les = { ...s.lesson, quiz: pickQuizIds(items) };
     const p = LP.checkLesson(les); if (p.length) { console.log("skip", mid, p.join("; ")); continue; }
     w(path.join(outD, mid + ".json"), les);
-    ix.modules[mid] = { title: les.title, minutes: les.minutes, steps: les.steps.length };
+    ix.modules[mid] = { title: les.title, minutes: les.minutes, steps: les.steps.length, module: les.module || mid };
   }
   w(path.join(DIR, "out", "lessons-index-add.json"), ix);
   console.log("lessons out", Object.keys(ix.modules).length, "->", outD);
@@ -666,7 +666,7 @@ function lessonfix() {
     les.minutes = Math.max(5, Math.min(10, Math.round(les.steps.length * 1.2)));
     const bad = LP.checkLesson(les);
     if (les.steps.length < 4 || bad.length) { fs.rmSync(lf); delete ix.modules[r.module]; console.log("withdrawn", r.module, bad.join("; ")); continue; }
-    w(lf, les); ix.modules[r.module] = { title: les.title, minutes: les.minutes, steps: les.steps.length };
+    w(lf, les); ix.modules[r.module] = { title: les.title, minutes: les.minutes, steps: les.steps.length, module: les.module || r.module };
     console.log("fixed", r.module, "dropped steps", [...drop].map((k) => k + 1).join(","));
   }
   w(ixF, ix);

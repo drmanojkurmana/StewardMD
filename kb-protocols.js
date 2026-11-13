@@ -120,7 +120,11 @@
   var st = { index: null, loading: false, error: "", q: "", subject: "all", basis: "all", view: "list", openId: null, cache: {}, listScroll: 0, pending: null, nav: 0 };
 
   function getJSON(path) {
-    return fetch(BASE + path + "?v=" + encodeURIComponent(CONTENT_V)).then(function (r) {
+    var url = BASE + path + "?v=" + encodeURIComponent(CONTENT_V);
+    if (window.SMD_CONTENT && window.SMD_CONTENT.fetchJSON) {
+      return window.SMD_CONTENT.fetchJSON(url);
+    }
+    return fetch(url).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
     });
@@ -380,6 +384,7 @@
           if (window.KBFigure.isImage && window.KBFigure.isImage(f)) {
             toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'FigImg' + i + '">' + esc(f.title || f.id) + '</button>');
             var imgsrc = window.KBFigure.imgUrl(f.src, G.SMD_PREP_BANK_API || "/api/prep/bank/", G.SMD_API_BASE || "");
+            if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.publicMediaUrl) imgsrc = G.PREP_BANK_CLIENT.publicMediaUrl(imgsrc);
             return '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'FigImg' + i + '"><h2><span class="kbp-kind">Figure</span>' + esc(f.title || f.id) + '</h2>' +
               window.KBFigure.imageHTML(f, imgsrc) + '</section>';
           }

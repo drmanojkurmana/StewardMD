@@ -1193,6 +1193,7 @@
           (v.path? ' <code>'+esc(v.path)+'</code>' : '')+
           (v.columns && v.columns.length ? ' <span class="hint">columns: '+esc(v.columns.join(", "))+'</span>' : '')+
           (v.guided ? ' <span class="hint">(shown by the doctor)</span>' : '')+
+          (v.crossCheck==="differs" ? ' <span class="st verified">second patient checked</span>' : v.crossCheck==="inconclusive" ? ' <span class="hint">second patient had nothing to compare</span>' : '')+
           (v.verified ? (v.verified.ok ? ' <span class="st verified">'+esc(v.verified.rows)+' rows read via '+esc(v.verified.via)+'</span>' : ' <span class="st pending">not proven'+(v.verified.reason? ': '+esc(v.verified.reason) : '')+'</span>') : ' <span class="hint">not checked</span>')+'</li>';
       }).join("");
       box.querySelector(".hint").innerHTML=
@@ -1201,6 +1202,7 @@
         '<div style="margin-top:4px"><b>Safety checks:</b> '+verdict+'</div>'+
         ((val && !val.ok && (val.issues||[]).length) ? '<ul style="margin:4px 0 0 18px">'+(val.issues||[]).map(function(i){return '<li>'+esc(typeof i==="string"?i:(i.message||i.code||JSON.stringify(i)))+'</li>';}).join("")+'</ul>' : '')+
         '<div style="margin-top:4px"><b>Pages the agent read:</b> '+esc(x.d.pagesObserved||0)+'</div>'+
+        ((x.d.repair && (x.d.repair.changes||[]).length) ? '<div style="margin-top:4px"><b>Repair of the approved adapter. What changed:</b><ul style="margin:4px 0 0 18px">'+x.d.repair.changes.map(function(l){return '<li><code>'+esc(l)+'</code></li>';}).join("")+'</ul></div>' : '')+
         (viewRows? '<details style="margin-top:6px"><summary>What it found, screen by screen</summary><ul style="margin:6px 0 0 18px">'+viewRows+'</ul></details>' : '')+
         '<div style="margin-top:6px">Read-only. The agent cannot order, prescribe or change any record.</div>';
       var row=mkEl("div","row"); row.style.cssText="margin-top:10px;gap:8px";

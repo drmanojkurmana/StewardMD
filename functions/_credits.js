@@ -99,12 +99,22 @@ export async function grantFoundingPool(env, store, id) {
   return { balance: rec.balance, plan: "founding" };
 }
 
+/* Per-role daily rupee caps (were [vars] in wrangler.toml; moved here 2026-11-13 because Pages allows at most 128
+ * text bindings). KV billing:cfg flags or env AI_COST_CAP_<ROLE> still override. Inert unless AI_COST_CAP_ON="1". */
+export const ROLE_COST_CAP_DEFAULT = {
+  AI_COST_CAP_STUDENT: "5", AI_COST_CAP_RESIDENT: "5", AI_COST_CAP_CO_RESIDENT: "6",   // co-resident is pooled across 2 accounts
+  AI_COST_CAP_INTERN: "5", AI_COST_CAP_PHYSICIAN: "10", AI_COST_CAP_PHYSICIAN_PRO: "25",
+};
 // Resolve a user's daily rupee cap: per-user KV override > env per-role > env global > 0 (unlimited).
 export async function dailyCostCap(env, store, email, role) {
   if (store && email) {
     try { const raw = await store.get("ai:costcap:" + String(email).toLowerCase()); if (raw != null && raw !== "") { const v = Number(raw); if (Number.isFinite(v) && v >= 0) return v; } } catch (e) {}
   }
-  if (role) { const rv = Number(cfgFlag(env, "AI_COST_CAP_" + String(role).toUpperCase())); if (Number.isFinite(rv) && rv >= 0) return rv; }
+  if (role) {
+    const name = "AI_COST_CAP_" + String(role).toUpperCase(), set = cfgFlag(env, name);
+    const rv = Number(set != null && set !== "" ? set : ROLE_COST_CAP_DEFAULT[name]);
+    if (Number.isFinite(rv) && rv >= 0) return rv;
+  }
   const gv = Number(cfgFlag(env, "AI_DAILY_COST_CAP_INR"));
   return Number.isFinite(gv) && gv >= 0 ? gv : 0;   // 0 = unlimited
 }

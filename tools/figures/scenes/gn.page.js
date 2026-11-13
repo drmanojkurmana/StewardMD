@@ -148,19 +148,13 @@ function initPanel() {
   [["inj", "Injury", "g-bad", "How inflamed and damaged the glomerular capillary wall is."], ["comp", "Complement", "g-comp", "Complement activated by deposits or antibody. It recruits neutrophils and injures the wall."], ["neut", "Neutrophils", "g-neu", "Neutrophils drawn into the tuft by complement. They release enzymes that damage the filter."], ["prot", "Protein leak", "g-prot", "Protein escaping through the damaged wall or a failed podocyte into the urine."], ["haem", "Blood in urine", "g-bad", "Red cells escaping through the damaged wall. A hallmark of nephritic injury."], ["gfr", "Filtration", "g-good", "How well the glomerulus filters. It falls as injury and crescents block the filter."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Immune deposits", 262, 156, 135, 92, "Immune complexes trapped in the capillary wall, as in post-infectious disease. They activate complement.");
-  pill(ox, "Complement", 352, 162, 285, 92, "Complement activated on the deposit or antibody. Its fragments recruit neutrophils and punch holes in cells.");
+  pill(ox, "Deposits and attack", 280, 180, 160, 92, "Immune complexes trapped in the capillary wall, as in post-infectious disease, activate complement. Complement fragments recruit neutrophils and punch holes in cells. Neutrophils then crowd into the capillaries and damage the wall.");
   pill(ox, "IgA in mesangium", CX, CY, 415, 92, "IgA deposits in the mesangium, the central stalk of the tuft, in IgA nephropathy. Injury is slower and episodes of blood are common.");
-  pill(ox, "GBM injury", 398, 168, 545, 92, "Antibody binding along the glomerular basement membrane in anti-GBM disease, or pauci-immune injury with few deposits. Both can destroy the tuft fast.");
-  pill(ox, "Crescent", 352, 138, 675, 92, "A crescent of proliferating cells and fibrin filling Bowman space. It crushes the tuft and filtration falls rapidly.");
-  pill(ox, "Neutrophil", 282, 272, 135, 180, "Neutrophils recruited by complement crowd into the capillaries and damage the wall.");
-  pill(ox, "Podocyte", 404, 178, 555, 165, "Podocyte: the cell wrapping the capillary with foot processes and a slit diaphragm. When it fails, protein leaks heavily and the picture is nephrotic, not nephritic.");
-  pill(ox, "Bowman capsule", 232, 322, 135, 390, "Bowman capsule: the cup around the tuft. Filtrate, and in disease red cells and protein, collect in its space and enter the tubule.");
-  pill(ox, "Protein leak", 640, 238, 690, 155, "Protein that has crossed the damaged filter flowing down the tubule. Heavy in podocyte disease.");
-  pill(ox, "Blood in urine", 790, 252, 765, 118, "Red cells in the tubule and urine (haematuria), often with casts. Blood with little protein suggests nephritic injury.");
-  pill(ox, "Filtration falls", 620, 344, 620, 300, "Filtration falls as inflamed and crescent-blocked glomeruli stop filtering. Waste and salt and water build up.");
-  pill(ox, "Fluid and pressure", 800, 362, 815, 300, "Salt and water are retained as filtration falls, causing oedema and raising blood pressure. The arrow rises with pressure.");
-  pill(ox, "Kidney", 890, 105, 878, 58, "Kidney: this scene magnifies one glomerulus from the kidney cortex, where blood is first filtered.");
+  pill(ox, "GBM injury", 398, 168, 560, 92, "Antibody binding along the glomerular basement membrane in anti-GBM disease, or pauci-immune injury with few deposits. Both can destroy the tuft fast.");
+  pill(ox, "Crescent", 352, 138, 720, 92, "A crescent of proliferating cells and fibrin filling Bowman space. It crushes the tuft and filtration falls rapidly.");
+  pill(ox, "Podocyte leak", 520, 210, 640, 160, "The podocyte wraps the capillary with foot processes and a slit diaphragm. When it fails, protein leaks heavily and the picture is nephrotic, not nephritic. That protein flows down the tubule.");
+  pill(ox, "Blood in urine", 760, 250, 800, 150, "Bowman capsule is the cup around the tuft. Filtrate, and in disease red cells and protein, collect there and enter the tubule. Red cells in the urine, often with casts and little protein, suggest nephritic injury.");
+  pill(ox, "Filtration falls", 700, 350, 720, 310, "Filtration falls as inflamed and crescent-blocked glomeruli stop filtering. Waste builds up, and retained salt and water cause oedema and raise blood pressure.");
   pill(ox, "Steroid", 70, 238, 70, 300, "Steroid tablets ride the blood in, sit on deposits and immune cells, and switch the attack off.");
   capEl = mk("text", { class: "gn-cap", x: 30, y: 424 }, ox); capEl.textContent = capText(level, drug);
 }

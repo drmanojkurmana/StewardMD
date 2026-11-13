@@ -287,7 +287,7 @@ for (const m of N) {
   writeOverlay(m.id, m.mcqs, G.length + N.indexOf(m));
 }
 let idx = JSON.parse(fs.readFileSync(path.join(LESSON_DIR, "index.json"), "utf8"));
-for (const m of N) idx.modules[m.id] = { title: m.title, minutes: m.steps.length + 2, steps: m.steps.length, gen: "AI" };
+for (const m of N) idx.modules[m.id] = { title: m.title, minutes: m.steps.length + 2, steps: m.steps.length, gen: "AI", module: m.id };
 fs.writeFileSync(path.join(LESSON_DIR, "index.json"), JSON.stringify(idx, null, 1) + "\n");
 let counts = JSON.parse(fs.readFileSync(path.join(ROOT, "prep/bank/overlay-counts.json"), "utf8"));
 counts.sets.maikbook2[SUBJECT] = counts.sets.maikbook2[SUBJECT] || {};

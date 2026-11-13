@@ -108,7 +108,10 @@
 
   function loadCatalog() {
     if (cx.loaded || !G.fetch) return Promise.resolve(cx.catalog);
-    return G.fetch("/kb/onco/ctcae/catalog.json?v=op7").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    var catUrl = "/kb/onco/ctcae/catalog.json?v=op7";
+    return ((G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON)
+      ? G.SMD_CONTENT.fetchJSON(catUrl, { optional: true })
+      : G.fetch(catUrl).then(function (r) { return (r && r.ok) ? r.json() : null; }))
       .then(function (j) {
         if (j) { cx.catalog = j; cx.gapMessage = j.gapMessage || GAP_MESSAGE; cx.loaded = true; if (!cx.version && j.versions && j.versions[0]) cx.version = j.versions[0].version; }
         return cx.catalog;

@@ -11,9 +11,12 @@
    enlarge (tap again for 2.2x; back or Escape closes). */
 (function (G) {
   "use strict";
-  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "neet-ss": "NEET-SS", usmle: "USMLE" };
+  var EXAM_LABEL = { "neet-pg": "NEET-PG", aipgmee: "AIPGMEE", "ini-cet": "INI-CET", "aiims-pg": "AIIMS PG", "neet-ss": "NEET-SS", usmle: "USMLE" };
   // AIPGMEE was the all-India PG entrance before NEET-PG (2017 session onwards): its papers sit on the NEET-PG tab.
-  var PG = { "neet-pg": 1, aipgmee: 1 };
+  // INI-CET papers (owner 2026-11-13) share the list; AIIMS PG (2019, May 2020) was INI-CET's forerunner.
+  var PG = { "neet-pg": 1, aipgmee: 1, "ini-cet": 1, "aiims-pg": 1 };
+  // A paper's timed test follows its own exam's pattern (MOCKS: NEET-PG 200 Q / 210 min +4/-1, INI-CET 200 / 180 +1/-1/3).
+  function patternOf(p) { return p && (p.exam === "ini-cet" || p.exam === "aiims-pg") ? "ini-cet" : "neet-pg"; }
 
   /* ================= pure ================= */
   // [exam, year, kind] or { exam, year, kind } -> one line per exam and kind: "Asked in NEET-PG 2025, 2024 (recall)".
@@ -63,8 +66,10 @@
     Object.keys(ix.tags || {}).forEach(function (id) { if (ix.tags[id][0] === mid) n++; });
     return n;
   }
+  // A question that tests two subjects carries its second module in tt (owner 2026-11-13) and shows under both.
+  function onMod(it, mid) { return it.t === mid || !!(it.tt && it.tt.indexOf(mid) >= 0); }
   function bySubject(items) { var c = {}; items.forEach(function (it) { var s = it.subject || "unsorted"; c[s] = (c[s] || 0) + 1; }); return c; }
-  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject };
+  var PURE = { tagLabel: tagLabel, paperTitle: paperTitle, paperScheme: paperScheme, usable: usable, qualBlocked: qualBlocked, paperItems: paperItems, moduleCount: moduleCount, bySubject: bySubject, onMod: onMod, patternOf: patternOf };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -131,13 +136,13 @@
   // Home: one row in the Practise group (NEET-PG only: the papers we hold are NEET-PG).
   function homeRow(host) {
     warm(host);
-    return host.row("y-home", icon(), "Previous year papers", "NEET-PG recall papers by year, timed or practice");
+    return host.row("y-home", icon(), "Previous year papers", "NEET-PG and INI-CET recall papers by year, timed or practice");
   }
 
-  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, and AIPGMEE papers were not published either. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
+  var NOTE = '<section class="pn-yq-note" aria-label="About these papers"><span class="pn-yq-ni">' + svg("info", 18) + "</span><p><b>Recall papers, not official ones.</b> NBEMS does not publish NEET-PG papers, AIPGMEE papers were not published either, and AIIMS does not publish INI-CET papers. These were put together from memory after each exam, so wording and options can differ from the real paper. Questions whose answer key is unclear or whose image is missing are held back.</p></section>";
   function renderPapers(host) {
     var esc = host.esc;
-    host.paint(host.bar("Previous year papers", "NEET-PG and AIPGMEE · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
+    host.paint(host.bar("Previous year papers", "NEET-PG, INI-CET and AIIMS PG · recall", "back") + '<div class="pn-body" id="pnYq">' + NOTE + '<p class="pn-load" role="status">Loading papers…</p></div>');
     Promise.all([loadIndex(host), loadItems(host), qualOf(host)]).then(function (r) {
       var box = host.root() && host.root().querySelector("#pnYq"); if (!box) return;
       var ix = r[0], items = r[1], qual = r[2], hid = hiddenOf(host), years = {}, html = "";
@@ -169,7 +174,7 @@
     var tOnly = topicOnly(p);
     var list = paperItems(P.items, pid), hid = hiddenOf(host), ok = list.filter(function (it) { return usable(it, hid, qual); });
     // a compilation bigger than the real paper is timed as one real-size paper drawn at random from it
-    var held = list.length - ok.length, mock = mockFor(host, "neet-pg"), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
+    var held = list.length - ok.length, mock = mockFor(host, patternOf(p)), tn = Math.min(ok.length, mock.n), sc = paperScheme(mock, tn), subj = bySubject(ok);
     // Round 6: each subject row carries its icon tile and a bar for its share of the paper.
     var top = 0; Object.keys(subj).forEach(function (k) { if (subj[k] > top) top = subj[k]; });
     var subs = Object.keys(subj).sort(function (a, b) { return subj[b] - subj[a]; }).map(function (sid) {
@@ -195,7 +200,7 @@
       if (kind === "exam" && topicOnly(p)) kind = "study";
       var title = paperTitle(p) + " (recall)";
       if (kind === "exam") {
-        var mock = mockFor(host, "neet-pg"), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
+        var mock = mockFor(host, patternOf(p)), pick = ok.length > mock.n ? host.shuffle(ok.slice()).slice(0, mock.n) : ok.slice(), sc = paperScheme(mock, pick.length);
         return host.run(pick, "exam", title, { limit: sc.limit, scheme: { plus: sc.plus, minus: sc.minus, label: sc.label } });
       }
       host.run(ok.slice(), "study", title);
@@ -218,7 +223,7 @@
     slot.innerHTML = '<div class="pn-wrap pn-yq-chips" role="group" aria-label="Show questions">' +
       '<button type="button" class="pn-chip' + (on ? "" : " on") + '" aria-pressed="' + !on + '" data-act="y-mf" data-v="all" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">All questions</button>' +
       '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="y-mf" data-v="pyq" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">PYQ · ' + n + "</button></div>" +
-      (on ? '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG, from recall papers</p>' +
+      (on ? '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + n + ' PYQs</p><p class="pn-mut">Asked in NEET-PG and INI-CET, from recall papers</p>' +
         '<button type="button" class="pn-btn pri" data-act="y-mstart" data-k="study" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("play") + " Practice PYQs</button>" +
         '<button type="button" class="pn-btn" data-act="y-mstart" data-k="exam" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("clock") + " Timed test of PYQs</button></section>" : "");
   }
@@ -248,13 +253,13 @@
   function modulePyqList(host, sid, mid) {
     return Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
-      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); }));
+      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return onMod(it, mid) && !it.bank && usable(it, hid, qual); }));
     });
   }
   function startModulePyq(host, sid, mid, kind) {
     Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; }), qualOf(host)]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {}, qual = r[2];
-      var own = r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid, qual); });
+      var own = r[0].filter(function (it) { return onMod(it, mid) && !it.bank && usable(it, hid, qual); });
       var bank = host.pool(r[1]).filter(function (it) { return tags[it.id]; });
       var list = bank.concat(own);
       if (!list.length) return host.toast("No previous-year questions to show here yet.");

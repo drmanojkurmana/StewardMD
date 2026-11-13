@@ -416,10 +416,18 @@ export function estimate(ground, mod, model) {
 // ---- index -------------------------------------------------------------------------------------------------------
 export function buildIndex(outDir) {
   const modules = {};
+  let prev = {};
+  try { prev = JSON.parse(fs.readFileSync(path.join(outDir, "index.json"), "utf8")).modules || {}; } catch (e) { prev = {}; }
   for (const f of fs.readdirSync(outDir).filter((x) => x.endsWith(".json") && x !== "index.json").sort()) {
+    const key = path.basename(f, ".json");
     const l = JSON.parse(fs.readFileSync(path.join(outDir, f), "utf8"));
     if (LP.checkLesson(l).length) continue;
-    modules[l.module] = { title: l.title, minutes: l.minutes, steps: l.steps.length, gen: l.gen };
+    const old = prev[key] || {};
+    const row = { title: l.title, minutes: l.minutes, steps: l.steps.length, gen: l.gen, module: l.module || key };
+    if (l.set || old.set) row.set = l.set || old.set;
+    if (old.added) row.added = old.added;
+    if (old.r) row.r = old.r;
+    modules[key] = row;
   }
   const ix = { v: 1, modules };
   fs.writeFileSync(path.join(outDir, "index.json"), JSON.stringify(ix, null, 1) + "\n");
