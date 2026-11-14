@@ -10554,7 +10554,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (!hc) { el.removeAttribute("data-home-color"); if (st) st.remove(); return; }
     el.setAttribute("data-home-color", hc);
     if (!st) { st = document.createElement("style"); st.id = "hrfHomeColor"; document.head.appendChild(st); }
-    st.textContent = "html[data-home-color] #homeV2#homeV2.rnav{--sphere-mid:" + hc + ";--sphere-base:color-mix(in srgb," + hc + " 55%,#000);--sphere-hi:color-mix(in srgb," + hc + " 62%,#fff);--sphere-glow:color-mix(in srgb," + hc + " 45%,transparent);--teal:" + hc + ";--rds-primary:" + hc + "}";
+    st.textContent = "html[data-home-color] #homeV2#homeV2.rnav{--sphere-mid:" + hc + ";--sphere-base:color-mix(in srgb," + hc + " 55%,#000);--sphere-hi:color-mix(in srgb," + hc + " 62%,#fff);--sphere-glow:color-mix(in srgb," + hc + " 45%,transparent);--teal:" + hc + ";--rds-primary:" + hc + "}html[data-home-color]{--sbr-acc:" + hc + "}";   // the drawer follows it too (sidebar-redesign.js)
   }
   function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
   function applyD() {

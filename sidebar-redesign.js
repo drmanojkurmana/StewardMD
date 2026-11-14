@@ -245,6 +245,33 @@
       "body.dark #sbMenu[data-sbr] .sbr-note,body.v3-dark #sbMenu[data-sbr] .sbr-note{color:#94a3b8}",
       "body.dark #sbMenu[data-sbr] .sbr-adv button,body.v3-dark #sbMenu[data-sbr] .sbr-adv button{color:#f8fafc}",
       "body.dark #sbMenu[data-sbr] .sbr-status,body.v3-dark #sbMenu[data-sbr] .sbr-status{background:rgba(30,41,59,.5);border-color:rgba(51,65,85,.6);color:#2dd4bf}",
+      /* ── Follow the Settings theme (owner 2026-11-14: "Theme changed, still green here"). The drawer hard-coded the
+      Classic green for section titles, icons, chevrons, switches, badges and the account button. Every non-Classic
+      theme (and a custom home colour) now sets --sbr-acc and the drawer draws its accent from it; Classic keeps
+      the green exactly as before. Blue matches the navy the home screen shows for it. ── */
+      'html[data-theme="blue"]{--sbr-acc:#262e9a}',
+      'html[data-theme="ocean"]{--sbr-acc:#0a7d8c}',
+      'html[data-theme="tiranga"]{--sbr-acc:#1a7a41}',
+      'html[data-theme="amber"]{--sbr-acc:#a86412}',
+      'html[data-theme="slate"]{--sbr-acc:#3d5166}',
+      'html[data-theme="contrast"]{--sbr-acc:#00463d}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]){--sbr-acc-d:color-mix(in srgb,var(--sbr-acc,#0e6e63) 55%,#fff)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbDrawer{background:color-mix(in srgb,var(--sbr-acc,#0e6e63) 7%,rgba(240,242,246,.74))!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbDrawer .sb-head{border-bottom-color:color-mix(in srgb,var(--sbr-acc,#0e6e63) 14%,transparent)!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-sec,html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-ic,html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-chev,html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbDrawer .smd-sba-hosp{color:var(--sbr-acc,#0e6e63)!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbDrawer .smd-sba-ph{background:var(--sbr-acc,#0e6e63)!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-row:hover{background:color-mix(in srgb,var(--sbr-acc,#0e6e63) 9%,transparent)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-sw.on{background:var(--sbr-acc,#0e6e63)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-badge{background:color-mix(in srgb,var(--sbr-acc,#0e6e63) 14%,transparent);color:var(--sbr-acc,#0e6e63)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbMenu[data-sbr] .sbr-status{color:var(--sbr-acc,#0e6e63)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbDrawer .smd-sba{box-shadow:0 8px 22px -12px color-mix(in srgb,var(--sbr-acc,#0e6e63) 45%,transparent)!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #sbDrawer .smd-sba-btn{background:color-mix(in srgb,var(--sbr-acc,#0e6e63) 12%,transparent)!important;color:var(--sbr-acc,#0e6e63)!important;border:1px solid color-mix(in srgb,var(--sbr-acc,#0e6e63) 28%,transparent)!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbDrawer{background:color-mix(in srgb,var(--sbr-acc,#0e6e63) 10%,rgba(15,23,42,.92))!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbMenu[data-sbr] .sbr-sec,html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbMenu[data-sbr] .sbr-ic,html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbDrawer .smd-sba-hosp,html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbMenu[data-sbr] .sbr-status{color:var(--sbr-acc-d)!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbMenu[data-sbr] .sbr-chev{color:#94a3b8!important}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbMenu[data-sbr] .sbr-sw.on{background:color-mix(in srgb,var(--sbr-acc,#0e6e63) 75%,#fff)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbMenu[data-sbr] .sbr-badge{background:color-mix(in srgb,var(--sbr-acc-d) 22%,transparent);color:var(--sbr-acc-d)}',
+      'html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:is(.dark,.v3-dark) #sbDrawer .smd-sba-btn{background:color-mix(in srgb,var(--sbr-acc-d) 18%,transparent)!important;color:var(--sbr-acc-d)!important;border-color:color-mix(in srgb,var(--sbr-acc-d) 40%,transparent)!important}',
       /* ── iOS navigation stack (owner 2026-11-13, a screen recording of iOS Settings: "this is how it should behave").
       A row pushes its page in from the right, fully opaque. Settings slides a third of the way left and dims
       underneath. A round Back button and a centred title head the page; Back, or a drag from the left edge,
