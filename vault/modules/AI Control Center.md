@@ -68,6 +68,27 @@ rollback: [[Enable-AI-Cost-Cap]].
 cost (75% payout). A raw rupee top-up via `addCredits` still uses `CREDIT_CONVERSION` (50%). Owner to
 confirm the packs' margin before launch — see [[Decisions]].
 
+## Runware provider (2026-11-14, Vertex credits exhausted)
+Shared transport `functions/_runware.js`. Shapes live-checked 2026-11-14 (curl + the module against the real API).
+- Text + images: OpenAI-compatible `https://api.runware.ai/v1/chat/completions`, images as `image_url` data-URI parts,
+  `max_completion_tokens` (OpenAI models reject `max_tokens`), `reasoning_effort: "none"` (`RUNWARE_REASONING`, "off"
+  omits it). Streams as OpenAI SSE; `_sse_parse.js` reads both formats. Default model **GPT-6 Luna**
+  (`openai:gpt@6-luna`, $0.10 in / $0.50 out per 1M; owner: cheapest model). Override: `RUNWARE_MODEL`, or a caller's AIR id.
+- Audio / PDF: native task API `POST https://api.runware.ai/v1`, `taskType: "textInference"`, raw base64 in
+  `inputs.audios` / `inputs.documents`; WebM goes in `inputs.videos` (Runware sniffs it as video/webm and refuses it as
+  audio). Model **Gemini 3.1 Flash Lite** (`google:gemini@3.1-flash-lite`, $0.25 / $1.50): Luna has no audio and is
+  compatible-only. Override: `RUNWARE_NATIVE_MODEL`. Reply `data[0].{text, finishReason, usage.promptTokens...}`.
+- Google model names (`gemini-2.5-flash`...) are NOT mapped: Runware has no Gemini 2.x; 3.5 Flash Lite / 3.6 Flash are
+  chat-only. Metering of unknown models falls back to the 3.1 Flash Lite rate (over-counts Luna, safe side).
+Order: `AI_PROVIDER=runware` puts Runware first everywhere; otherwise (key set) it is the last fallback.
+Wired into: `callGemini` (MaiK, Ask, Scribe/transcribe audio, vision/OCR, ThoreX, Onco, SknX, FollowCare, digest, summary),
+PrepNucleus (its `providers:["vertex"]` pin now gets Runware added), FundX (`_fundx_ai.js` provider `runware`, honours
+`FUNDX_AI_PROVIDER`), verify-doctor (fallback after the AI Studio key; `VERIFY_RUNWARE_MODEL` takes an AIR id).
+Not wired, on purpose: KB embeddings (`api/retrieve`, Runware has no embeddings; client degrades to lexical),
+WardSynQ gateway + Connect agent (per-hospital approved provider registry, flags OFF). voice-worker never used Vertex
+(Sarvam + AI Studio key). Retention: Runware never trains on API data; its ZDR does not cover Gemini or GPT text models.
+Test: `test/ai-runware-provider.test.mjs`. Privacy policy names Runware as an AI processor.
+
 ## Runtime-editable knobs (no redeploy, KV-backed, owner console)
 | knob | KV key | fallback |
 |---|---|---|

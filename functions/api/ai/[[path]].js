@@ -34,6 +34,7 @@
 // AI transport config. Selection ONLY via env.AI_PROVIDER ("vertex" [primary, default]
 // | "developer"). Model via env.GEMINI_MODEL (default MODEL_HARD_DEFAULT, gemini-3.1-flash-lite; a retiring
 // model named there is ignored, see envModel in _ai_usage.js).
+import { runwareAvailable, runwareKey, runwareGenerate, runwareStreamFetch, runwareToGemini, needsNative } from "../../_runware.js";
 import MaiKScope from "../../../kb/ai/maik-scope.js"; // shared clinician-only Intent Firewall (CJS UMD, default import)
 
 const DEV_HOST = "https://generativelanguage.googleapis.com/v1beta/models";
@@ -428,7 +429,35 @@ const vertexProvider = {
   }
 };
 
-const PROVIDERS = { vertex: vertexProvider, developer: developerProvider };
+/* ---- Runware (owner, 2026-11-14: Vertex credits ran out, Runware credits are available). Text and
+ *      images on GPT-6 Luna via Chat Completions (cheapest, owner 2026-11-14); audio/PDF on Gemini 3.1 Flash
+ *      Lite via the native task API. Models: RUNWARE_MODEL / RUNWARE_NATIVE_MODEL.
+ *      Transport + translation in functions/_runware.js; replies come back in Gemini's shape, so
+ *      parseCandidates, finish-reason handling and usage metering are unchanged. Off unless
+ *      RUNWARE_API_KEY is set. ---- */
+function runwareOpts(env, maxTokens, o) {
+  return { model: modelFor(env, o), system: o.system, temperature: o.temperature, maxTokens: maxTokens || 1024, json: !!(o.json || o.schema) };
+}
+const runwareProvider = {
+  name: "runware",
+  available: function (env) { return runwareAvailable(env); },
+  generate: async function (env, parts, maxTokens, opts) {
+    const o = opts || {};
+    const r = await runwareGenerate(env, parts, Object.assign(runwareOpts(env, maxTokens, o), { timeoutMs: o.timeoutMs || aiTimeoutMs(env) }));
+    const _t = parseCandidates(r.data, r.status, o.meta);
+    if (o.meta) o.meta.model = r.model;
+    return _t;
+  },
+  // Text only (OpenAI SSE; functions/_sse_parse.js reads it). A media request is not streamed here.
+  streamFetch: function (env, parts, maxTokens, opts) {
+    const o = opts || {};
+    if (needsNative(parts)) return Promise.resolve(new Response(null, { status: 415 }));
+    return runwareStreamFetch(env, parts, Object.assign(runwareOpts(env, maxTokens, o), { signal: o.signal }));
+  }
+};
+export { runwareToGemini };
+
+const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, runware: runwareProvider };
 
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
@@ -550,13 +579,23 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
 }
 function providerOrder(env, opts) {
   // opts.providers pins the list (PrepNucleus is Vertex-only, so its labels reach Cloud Billing).
-  if (opts && Array.isArray(opts.providers) && opts.providers.length) return opts.providers.filter(function (n) { return n === "vertex" || n === "developer"; });
+  // With a Runware key set, Runware follows the pin (first under AI_PROVIDER=runware), so a pinned
+  // caller still answers while Vertex is out of credit. Runware calls carry no billing labels.
+  if (opts && Array.isArray(opts.providers) && opts.providers.length) {
+    const pin = opts.providers.filter(function (n) { return n === "vertex" || n === "developer"; });
+    if (!runwareKey(env)) return pin;
+    return String(env.AI_PROVIDER || "").toLowerCase() === "runware" ? ["runware"].concat(pin) : pin.concat(["runware"]);
+  }
   // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
   // AI_PROVIDER=vertex (default) -> Vertex then Developer; any other value -> Developer then Vertex.
+  // AI_PROVIDER=runware -> Runware first, Google after. Otherwise Runware, when its key is set, is the
+  // last resort after both Google providers (owner, 2026-11-14).
   const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
-  return sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
+  if (sel === "runware") return ["runware", "vertex", "developer"];
+  const base = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
+  return runwareKey(env) ? base.concat(["runware"]) : base;
 }
-function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
+function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env) || PROVIDERS.runware.available(env); }
 
 let _lastFailover = null;
 // provider -> ISO time of its last SUCCESSFUL generation in this isolate. /health reports it next to
@@ -1277,7 +1316,7 @@ export async function onRequest(context) {
     }
   } catch (e) {}
 
-  if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
+  if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), runware: PROVIDERS.runware.available(env), model: modelId(env) });
 
   // Admin diagnostics (aggregate usage; no PHI). Gated by UPDATES_ADMIN_TOKEN.
   if (seg === "admin") {
@@ -1640,6 +1679,8 @@ export async function onRequest(context) {
       vertex_mode: vertexKey(env) ? "api-key (express mode)" : (vertexProjectReady(env) ? "project (service account)" : null),
       developer_status: dAvail ? (_lastSuccess.developer ? "healthy" : "configured") : "not_configured",
       developer_configured: dAvail, developer_last_success: _lastSuccess.developer || null,
+      runware_status: PROVIDERS.runware.available(env) ? (_lastSuccess.runware ? "healthy" : "configured") : "not_configured",
+      runware_last_success: _lastSuccess.runware || null,
       last_success_scope: "this isolate",
       authentication: vertexKey(env) ? "API key (Vertex express mode)" : !vertexProjectReady(env) ? "none"
         : (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT")

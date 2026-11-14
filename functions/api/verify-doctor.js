@@ -32,6 +32,8 @@ import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, au
 import { gatherReviewContact, contactHtml, escHtml } from "../_review_contact.js";
 import { nmcQuery } from "./_nmc.js";
 import { doApprove } from "./verifications/[[path]].js";
+import { runwareAvailable, runwareGenerate } from "../_runware.js";
+import { ACCURATE_MODEL } from "../_ai_usage.js";
 // Re-exported: test/verify-cert-recognition.test.mjs imports these from here.
 export { regCandidates, nmcNameOf };
 
@@ -198,7 +200,10 @@ async function geminiExtract(env, imageB64, mime, mode) {
   const model = env.VERIFY_GEMINI_MODEL || GEMINI_MODEL_DEFAULT;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${env.GEMINI_API_KEY}`;
   let res, data = {}, text = "", httpOk = false;
-  try {
+  // Runware (2026-11-14): first under AI_PROVIDER=runware, otherwise the fallback when the Gemini key
+  // returns nothing. The certificate image goes through Runware's native task API.
+  const rwFirst = runwareAvailable(env) && String(env.AI_PROVIDER || "").toLowerCase() === "runware";
+  if (!rwFirst) try {
     res = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -216,6 +221,16 @@ async function geminiExtract(env, imageB64, mime, mode) {
     if (!text) console.warn("[verify] gemini empty text; finishReason:", data?.candidates?.[0]?.finishReason, "promptFeedback:", JSON.stringify(data?.promptFeedback || {}).slice(0, 200));
   } catch (e) {
     console.warn("[verify] gemini fetch threw:", String(e && e.message || e));
+  }
+  if (!text && runwareAvailable(env)) {
+    try {
+      const r = await runwareGenerate(env, [{ text: prompt }, { inline_data: { mime_type: mime || "image/jpeg", data: imageB64 } }],
+        { model: env.VERIFY_RUNWARE_MODEL || ACCURATE_MODEL, temperature: 0, maxTokens: 1024, json: true, timeoutMs: 20000 });
+      const c = r.data && r.data.candidates && r.data.candidates[0];
+      text = (c && c.content && c.content.parts && c.content.parts[0] && c.content.parts[0].text) || "";
+      httpOk = r.status < 400 && !!text;
+      if (!text) console.warn("[verify] runware HTTP", r.status, "empty text");
+    } catch (e) { console.warn("[verify] runware threw:", String(e && e.message || e)); }
   }
   console.log("[verify] gemini raw text:", String(text).slice(0, 400));
   let p; try { p = JSON.parse(text); } catch (e) { const m = text.match(/\{[\s\S]*\}/); p = m ? (function(){ try { return JSON.parse(m[0]); } catch (_) { return {}; } })() : {}; }
