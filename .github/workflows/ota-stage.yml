@@ -24,7 +24,10 @@ jobs:
     # ~10-15 min on its own, before checkout/build. Every push to main timed out here 3 times
     # tonight. Generous margin for the cold case; a warm run (most files already known/deduped)
     # finishes in well under a minute regardless.
-    timeout-minutes: 30
+    # 2026-11-14: a 2,921-new-file build (about 40 files a minute) was cut off at 30 min three pushes in a row, so the
+    # candidate fell behind main. known-hashes.json is saved every 100 files, so a long run resumes, but only if it is
+    # given the time to finish.
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
