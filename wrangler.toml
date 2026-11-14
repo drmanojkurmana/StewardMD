@@ -221,7 +221,7 @@ compatibility_date = "2026-06-28"
 # PrepNucleus MaiK modules (functions/_prep-qgen.js) set NO vars here on purpose: production is at Cloudflare's limit
 # of 128 text bindings (vars + secrets; 133 failed the 640190c deploy). The secret ANTHROPIC_API_KEY switches it on;
 # code defaults: 3 modules a day, 30 questions a module, $5 a day for all students, Author = drmanojkurmana@gmail.com.
-AI_PROVIDER = "vertex"      # Vertex main (VERTEX_API_KEY), Gemini key = fallback (owner, 2026-09-24). NOT "azure" (slow, MaiK-only). Named envs don't inherit top-level [vars], so it must be set here too.
+AI_PROVIDER = "runware"     # Runware first (secret RUNWARE_API_KEY), Vertex/Gemini key after: Vertex credits exhausted (owner, 2026-11-14). Back to "vertex" when Vertex is funded. NOT "azure". Named envs don't inherit top-level [vars], so it must be set here too.
 MAIK_AI_TIMEOUT_MS = "22000"   # hard per-request ceiling so MaiK fails fast instead of buffering ~100s through a provider chain
 FOLLOWCARE_RETENTION_DAYS = "7"
 AI_ABUSE_REQ_THRESHOLD = "150"
