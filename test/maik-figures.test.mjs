@@ -204,3 +204,58 @@ test("findFigures skips case reports and unusual-site metastasis papers before r
     assert.deepEqual(r._debug.filter((d) => d.skip).map((d) => d.skip), ["case-report", "case-report", "case-report"].slice(0, 3));
   } finally { global.fetch = realFetch; }
 });
+
+// ---- 2026-11-14: "how to treat organophosphate poisoning" showed a review's literature-search table ----
+const OP_PAGE = "https://pmc.ncbi.nlm.nih.gov/articles/PMC42/";
+const OP_SEARCH_TABLE = '<title>Clinical features of organophosphate poisoning: a review</title><figure><img src="/b/op-t001.jpg" alt="Table 1" width="900"><figcaption>Search strategy: search term(s) and number of articles retrieved for organophosphate poisoning</figcaption></figure>';
+const OP_PRISMA = '<figure><img src="/b/op-g0001.jpg" alt="Figure 1" width="900"><figcaption>PRISMA flow diagram of the study selection for organophosphate poisoning trials</figcaption></figure>';
+const OP_ALGO = '<figure><img src="/b/op-g0002.jpg" alt="Figure 2" width="900"><figcaption>Algorithm for the management of organophosphate poisoning: atropine titration and pralidoxime</figcaption></figure>';
+const OP_DX = '<figure><img src="/b/op-g0003.jpg" alt="Figure 3" width="900"><figcaption>Diagnostic approach to suspected organophosphate poisoning</figcaption></figure>';
+
+test("a literature-search table or a PRISMA chart is never a figure", () => {
+  assert.equal(pickFigure(OP_SEARCH_TABLE, OP_PAGE, "organophosphate poisoning"), null);
+  assert.equal(pickFigure('<title>Organophosphate poisoning review</title>' + OP_PRISMA, OP_PAGE, "organophosphate poisoning"), null);
+  const f = pickFigure(OP_SEARCH_TABLE + OP_PRISMA + OP_ALGO, OP_PAGE, "organophosphate poisoning");
+  assert.match(f.img, /op-g0002\.jpg$/);
+  assert.match(f.caption, /^Algorithm for the management/, "the figure's own caption travels with it");
+});
+
+test("intent: a treatment question gets the management figure, a diagnostic one the workup figure", () => {
+  const html = '<title>Organophosphate poisoning</title>' + OP_DX + OP_ALGO;
+  assert.match(pickFigure(html, OP_PAGE, "organophosphate poisoning", { intent: "manage" }).img, /op-g0002\.jpg$/);
+  assert.match(pickFigure(html, OP_PAGE, "organophosphate poisoning", { intent: "workup" }).img, /op-g0003\.jpg$/);
+});
+
+test("findFigures: intent words the flowchart search; pages that refuse a plain read are rendered by TinyFish Fetch", async () => {
+  const realFetch = global.fetch, searches = [], posts = [];
+  const blocked = "https://www.aafp.org/pubs/afp/issues/2020/0101/p1.html";
+  global.fetch = async (url, init) => {
+    const u = String(url);
+    if (u.startsWith("https://api.search.tinyfish.ai")) { searches.push(new URL(u).searchParams.get("query")); return { ok: true, json: async () => ({ results: [{ title: "Organophosphate poisoning", url: blocked, snippet: "s" }] }) }; }
+    if (u === "https://api.fetch.tinyfish.ai") {
+      const body = JSON.parse(init.body); posts.push(body);
+      return { ok: true, json: async () => ({ results: [{ url: blocked, final_url: blocked, title: "Organophosphate poisoning", text: OP_ALGO.replace("/b/", "https://www.aafp.org/b/"), image_links: [] }], errors: [] }) };
+    }
+    return { ok: false, status: 403, headers: { get: () => "text/html" }, text: async () => "" };
+  };
+  try {
+    const r = await findFigures({ TINYFISH_API_KEY: "k" }, "organophosphate poisoning", 3, { intent: "manage", debug: true });
+    assert.deepEqual(searches.slice(0, 2), ["organophosphate poisoning management algorithm", "organophosphate poisoning"]);
+    assert.equal(posts.length, 1); assert.deepEqual(posts[0].urls, [blocked]); assert.equal(posts[0].format, "html"); assert.equal(posts[0].image_links, true);
+    assert.equal(r.length, 1); assert.match(r[0].img, /op-g0002\.jpg$/); assert.match(r[0].caption, /management/);
+  } finally { global.fetch = realFetch; }
+});
+
+test("findFigures: a page that reads fine never costs a render call", async () => {
+  const realFetch = global.fetch; let posts = 0;
+  global.fetch = async (url) => {
+    const u = String(url);
+    if (u.startsWith("https://api.search.tinyfish.ai")) return { ok: true, json: async () => ({ results: [{ title: "OP", url: OP_PAGE, snippet: "s" }] }) };
+    if (u === "https://api.fetch.tinyfish.ai") { posts++; return { ok: true, json: async () => ({ results: [] }) }; }
+    return { ok: true, status: 200, headers: { get: () => "text/html" }, text: async () => '<title>Organophosphate poisoning</title>' + OP_ALGO };
+  };
+  try {
+    const r = await findFigures({ TINYFISH_API_KEY: "k" }, "organophosphate poisoning", 3, { intent: "manage" });
+    assert.equal(r.length, 1); assert.equal(posts, 0);
+  } finally { global.fetch = realFetch; }
+});

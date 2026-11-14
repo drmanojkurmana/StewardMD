@@ -58,8 +58,8 @@ try {
   await ev(`document.querySelector('[data-conv="old1"]').click(); return 1;`); await sleep(500);
   ok(/amlodipine 5 mg/.test(await ev(`return document.getElementById("maikBody").textContent`)), "an old inline conversation still opens");
   // T30: actions above the rating
-  const order = await ev(`var f = document.querySelector("#maikBody .maik-fb"), a = f.querySelector(".maik-acts").getBoundingClientRect(), y = f.querySelector(".maik-fb > .maik-fb-b:not(.maik-act)").getBoundingClientRect(); return a.top < y.top;`);
-  ok(order === true, "Copy, Regenerate and Edit sit above Was-this-helpful and Yes/No");
+  const order = await ev(`var f = document.querySelector("#maikBody .maik-fb"), a = f.querySelector(".maik-acts").getBoundingClientRect(), y = f.querySelector(".maik-fb > .maik-fb-b:not(.maik-act)").getBoundingClientRect(); return Math.abs(a.top - y.top) < 2 && a.right <= y.left && !!f.querySelector(".maik-acts .maik-ib");`);
+  ok(order === true, "actions first, rating last, on one icon row (an old saved answer is upgraded to icons)");
   // T65: No on a reopened answer asks why
   await ev(`var n = [].slice.call(document.querySelectorAll("#maikBody .maik-fb > .maik-fb-b")).filter(function (b) { return b.textContent.trim() === "No"; })[0]; n.click(); return 1;`); await sleep(300);
   ok(await ev(`return !!document.querySelector("#maikBody .maik-fb-reason")`) === true, "No on a reopened answer asks why");

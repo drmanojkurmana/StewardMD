@@ -559,3 +559,32 @@ per day, reset every night ... no mention of Gemini anywhere."
   privacy blurb (`index.html`), `privacy.html`, `terms.html`, `privacy-config.js` (now "Google Cloud Vertex AI": the processor stays
   disclosed, as the privacy policy requires). Internal names (provider ids, `model` metadata inside prep JSON) are not shown.
 - Tests: `test/run-aiusage-ui.mjs` (rewritten), `test/maik-pro-daily-tokens.test.mjs`, `test/ai-budget-tiers.test.mjs`.
+
+## Sheet motion, calmer answer footer, figures that match the question (2026-11-14)
+Owner screenshots: the sheet slid up square-edged, the footer under an answer was "so overwhelming" (5
+wrapped refine chips, a filled Rx chip, Research, a 4-button text row, "Was this helpful? Yes No"), and
+"how to treat organophosphate poisoning" showed a PMC review's literature-search table where Gemini
+showed the management algorithm.
+- **Motion**: `#maikSheet` and `#maikScrim` carry `data-own-motion`, so `dialog-motion.js` leaves them
+  alone; the motion is CSS in `maik-polish.css`. Open: transform .52s `cubic-bezier(.32,.72,0,1)` (iOS
+  sheet curve), top corners 28px while travelling, squaring off at .3s. Close: .34s accelerating, corners
+  round again; `close()` removes the node at 380ms and destroys the aurora only then (it used to go white
+  at the start of the slide). `void sheet.offsetHeight` before `.on` so the roll-up always transitions.
+  Header drag rounds the corners with the drag and, on release, the CSS transition carries it from the
+  finger. Reduced motion: an opacity fade. Headless screenshots land late; pause
+  `getAnimations()` at a `currentTime` to see a frame.
+- **Footer**: refine chips are one sideways-scrolling line (edge fade), wrapping again only while a
+  factor is typed (`:has([data-maik-inline])`). Rx + Research share `.maik-next` (quiet outline pills;
+  Send stays the only filled control); Rx says "Prescribe from this" on a treatment answer. Actions are
+  icons (`maikActIcon`, `MAIK_ACT_IC`): copy, regenerate, edit, save, then thumbs; the word stays as
+  `.maik-sr` text so `maikRewire()` (matches on the label) works unchanged, and it upgrades old saved
+  threads' word buttons to icons. "Was this helpful?" is gone; `.maik-fb-q` only speaks after a vote.
+- **Figures** (`functions/_figures.js`): `NOT_CLINICAL` drops search-strategy / PRISMA / study-flow /
+  baseline / forest-plot figures before scoring. The client sends `intent=manage|workup` from the
+  question (`maikFigIntent`); the server searches "<topic> management algorithm" / "diagnostic algorithm"
+  and adds +3 to a figure whose text matches. Each figure now carries its own `caption`, shown in italics
+  under the picture. When no diagram came from plain reads and some pages refused (403, non-HTML, error,
+  zero `<img>`), ONE TinyFish Fetch call renders those pages (`format:"html"`, `image_links:true`) and
+  they are re-picked. TinyFish has no image search (docs, 2026-11-14). The phone also drops any figure
+  under 240 x 140 real pixels (site badges, icons).
+Tests: `test/maik-figures.test.mjs` (+4), `run-maik-convo-fixes-ui.mjs`, `run-maik-audit-b-ui.mjs`.

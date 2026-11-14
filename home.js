@@ -6719,8 +6719,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var old = document.getElementById("maikSheet");
     if (old) { if (old._maikAtmosphere) old._maikAtmosphere.destroy(); var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
-    var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
-    var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
+    // MaiK animates itself (owner, 2026-11-14: "round edges, rolling up on click and rolling down on
+    // close, fast natural premium"): CSS transitions in maik-polish.css, so the shared dialog-motion.js
+    // spring stays off these two (data-own-motion).
+    var scrim = document.createElement("div"); scrim.id = "maikScrim"; scrim.setAttribute("data-own-motion", ""); document.body.appendChild(scrim);
+    var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("data-own-motion", ""); sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask Maik");
     sheet.classList.add("maik-polished");
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
@@ -6733,6 +6736,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.warmIfLocal) SMD_MAIK_ENGINE.warmIfLocal(); } catch (e) {}
     maikBuddyMount();          // the resident: present from the moment MaiK opens
     requestAnimationFrame(function () {
+      void sheet.offsetHeight;   // commit the closed state first, so the roll-up always transitions
       scrim.classList.add("on"); sheet.classList.add("on");
       // Motion One spring: stagger the sheet content in on open (mk2 + Motion present, reduced-motion respected)
       try {
@@ -6912,9 +6916,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Release the on-device model shortly after close (after any in-flight answer finishes; the
       // release never cuts a running generation), so it stops holding memory and heating the phone.
       try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.sheetClosed) SMD_MAIK_LOCAL.sheetClosed(); } catch (e) {}
-      if (sheet._maikAtmosphere) sheet._maikAtmosphere.destroy();
       maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
-      sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
+      // Rolls down (maik-polish.css: 340 ms, accelerating out), then leaves the DOM. The aurora goes
+      // with it, after the slide, so the sheet does not turn plain white as it leaves.
+      sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open");
+      setTimeout(function () { try { if (sheet._maikAtmosphere) sheet._maikAtmosphere.destroy(); } catch (e) {} sheet.remove(); scrim.remove(); }, 380);
     }
     function scroll(smooth) {
       if (!body) return;
@@ -7370,7 +7376,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }).catch(function () { if (_stopped) return; _fsResumeW(); _webFail(); });
     }
     function maikWebChipEl(q) {
-      var rb = document.createElement("button"); rb.className = "maik-chip maik-webchip"; rb.style.marginTop = "8px"; rb.innerHTML = svg("search", "smd-ico") + " Research";
+      var rb = document.createElement("button"); rb.className = "maik-chip maik-webchip"; rb.innerHTML = svg("search", "smd-ico") + " Research";
       rb.setAttribute("data-maik-web", q);   // delegated body listener: survives a reopened thread
       return rb;
     }
@@ -7842,19 +7848,55 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       document.body.appendChild(ov); document.body.classList.add("maik-lb-on");
       try { ov.querySelector(".maik-lb-x").focus(); } catch (e) {}
     }
+    // One row for the answer's next steps (prescription, research), created on first use.
+    function _maikNextRow(host) {
+      var r = host.querySelector(":scope > .maik-next");
+      if (!r) { r = document.createElement("div"); r.className = "maik-next"; host.appendChild(r); }
+      return r;
+    }
+    /* Answer actions as icons (owner, 2026-11-14: "this buttons and etc is so overwhelming below the
+     * AI answer"). One quiet row, like every assistant the doctor already uses: copy, regenerate,
+     * edit, save, then helpful / not helpful. The word stays in the button as screen-reader text, so
+     * maikRewire() (which matches on the label) keeps working on new and saved threads alike. */
+    var MAIK_ACT_IC = {
+      Copy: '<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+      Regenerate: '<path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"/><path d="M21 3v5h-5"/>',
+      Edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+      Save: '<path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>',
+      Yes: '<path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/>',
+      No: '<path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/>',
+      done: '<path d="M20 6 9 17l-5-5"/>'
+    };
+    var MAIK_ACT_ARIA = { Copy: "Copy answer", Regenerate: "Regenerate answer", Edit: "Edit question", Save: "Save answer", Yes: "Helpful", No: "Not helpful" };
+    function maikActIcon(b, label, doneText) {
+      var ic = MAIK_ACT_IC[doneText ? "done" : label]; if (!ic) return false;
+      b.classList.add("maik-ib");
+      b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ic + '</svg><span class="maik-sr">' + maikEscH(doneText || label) + '</span>';
+      b.setAttribute("aria-label", doneText || MAIK_ACT_ARIA[label] || label);
+      return true;
+    }
     function maikFiguresOn() { try { return localStorage.getItem("smd_maik_figures") !== "0"; } catch (e) { return true; } }
     // Each /figures call is a web search plus up to 9 page reads, and every follow-up on the same topic
     // used to repeat it and stack an identical strip (audit section 7). One search per topic per session
     // (the result list only, in memory), and one strip per topic per thread.
     var _maikFigMemo = {};
-    function maikFiguresStrip(bubble, topic) {
+    // What the question asks for, so the figure matches it (owner, 2026-11-14: "how to treat OP
+    // poisoning" showed a review's literature-search table; Gemini showed the management algorithm).
+    function maikFigIntent(q) {
+      var s = maikNorm(q || "");
+      if (/\b(treat|treatment|treating|manage|management|managing|therapy|antidote|regimen|dose|dosing|protocol|resuscitat\w*)\b/.test(s)) return "manage";
+      if (/\b(diagnos\w*|work ?up|workup|evaluat\w*|investigat\w*|approach|criteria|differential)\b/.test(s)) return "workup";
+      return "";
+    }
+    function maikFiguresStrip(bubble, topic, question) {
       if (!maikFiguresOn() || !topic || !(window.SMD_AI && SMD_AI.figures)) return;
       if (typeof navigator !== "undefined" && navigator.onLine === false) return;
       var E = window.SMD_MAIK_ENGINE; if (E && E.effective && E.effective() !== "cloud") return;   // never on device / KB-only
-      var fkey = maikNorm(String(topic)).slice(0, 200);
+      var intent = maikFigIntent(question || topic);
+      var fkey = maikNorm(String(topic)).slice(0, 200) + (intent ? "|" + intent : "");
       var shown = function () { var lb = document.getElementById("maikBody"), all = lb ? lb.querySelectorAll(".maik-figs") : []; for (var i = 0; i < all.length; i++) if (all[i].getAttribute("data-topic") === fkey) return true; return false; };
       if (shown()) return;
-      var fp = _maikFigMemo[fkey] || (_maikFigMemo[fkey] = SMD_AI.figures(String(topic).slice(0, 200)).then(function (res) { if (!res || res.error) delete _maikFigMemo[fkey]; return res; }, function (e) { delete _maikFigMemo[fkey]; throw e; }));
+      var fp = _maikFigMemo[fkey] || (_maikFigMemo[fkey] = SMD_AI.figures(String(topic).slice(0, 200), intent).then(function (res) { if (!res || res.error) delete _maikFigMemo[fkey]; return res; }, function (e) { delete _maikFigMemo[fkey]; throw e; }));
       fp.then(function (res) {
         var figs = (res && res.figures) || [];
         if (!figs.length || !bubble || !bubble.isConnected || shown()) return;
@@ -7862,7 +7904,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // Tap opens the figure FULL SIZE in a lightbox; tapping it there goes to the source page
           // (owner, 2026-09-19). A flowchart must not be cropped, so the card letterboxes it.
           return '<button type="button" class="maik-fig" data-fig-img="' + maikEscH(f.img) + '" data-fig-page="' + maikEscH(f.page) + '" data-fig-site="' + maikEscH(f.site || "") + '" data-fig-title="' + maikEscH(f.title || "") + '">' +
-            '<img src="' + maikEscH(f.img) + '" alt="' + maikEscH(f.title || f.site || "") + '" loading="lazy" referrerpolicy="no-referrer">' +
+            '<img src="' + maikEscH(f.img) + '" alt="' + maikEscH(f.caption || f.title || f.site || "") + '" loading="lazy" referrerpolicy="no-referrer">' +
+            (f.caption ? '<span class="maik-fig-desc">' + maikEscH(String(f.caption).slice(0, 140)) + '</span>' : '') +
             '<span class="maik-fig-cap"><b>' + maikEscH(f.site || "") + '</b> ' + maikEscH((f.title || "").slice(0, 80)) + '</span></button>';
         }).join("");
         if (!cards) return;
@@ -7871,7 +7914,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         // Figure taps are handled by the delegated body listener, so they work in a reopened thread.
         // A hotlink the source blocks removes its own card; an empty strip removes itself.
         strip.querySelectorAll("img").forEach(function (im) {
-          im.addEventListener("error", function () { var a = im.closest(".maik-fig"); if (a) a.remove(); if (!strip.querySelector(".maik-fig")) strip.remove(); _persist(); });
+          var drop = function () { var a = im.closest(".maik-fig"); if (a) a.remove(); if (!strip.querySelector(".maik-fig")) strip.remove(); else strip.classList.toggle("one", strip.querySelectorAll(".maik-fig").length === 1); _persist(); };
+          im.addEventListener("error", drop);
+          // A site badge or icon is not a figure: anything under 240 x 140 real pixels goes.
+          im.addEventListener("load", function () { if (im.naturalWidth && (im.naturalWidth < 240 || im.naturalHeight < 140)) drop(); });
         });
         var before = bubble.querySelector(".maik-refine, .maik-followups");
         bubble.insertBefore(strip, before || null);
@@ -8110,7 +8156,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // it (SMD_AI.figures -> /api/ai/figures -> TinyFish). The image is loaded by the phone straight
       // from the source site: nothing hosted, cached or regenerated by us. Hidden when nothing fits,
       // and any image that fails to load removes its own card, so a broken hotlink never shows.
-      try { maikFiguresStrip(think, topicLabel || question); } catch (e) {}
+      try { maikFiguresStrip(think, topicLabel || question, question); } catch (e) {}
       var chipsHTML = maikFollowupsHTML(pkg, question, assume);
       if (chipsHTML) think.insertAdjacentHTML("beforeend", chipsHTML);
       // Phase 4 — contextual "open in app" tool chips (interactions / calculators / Drug Index).
@@ -8128,16 +8174,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var _isTx = (pkg && pkg.treatment && pkg.treatment.default) || /\b(treat|treatment|treating|manage|management|therapy|regimen|prescri|\brx\b|antibiotic|antibiotics|first[- ]?line|dose|dosing)\b/.test(maikNorm(question || ""));
           var _rxc = document.createElement("button");
           _rxc.className = "maik-chip maik-rx";
-          _rxc.style.cssText = "margin-top:10px;background:#0e6e63;color:#fff;border-color:#0e6e63;font-weight:700";
-          _rxc.textContent = "℞ Create prescription" + (_isTx ? " (pre-fill from this)" : "");
+          // Owner, 2026-11-14: the footer under an answer was overwhelming. Prescription and Research
+          // now share one quiet row; the pre-fill is said once, in the label, not in brackets.
+          _rxc.textContent = _isTx ? "℞ Prescribe from this" : "℞ Create prescription";
+          if (_isTx) _rxc.setAttribute("aria-label", "Create prescription, pre-filled from this answer");
           _rxc.addEventListener("click", function () { try { SMD_RX.open({ topic: topicLabel || question, pkg: pkg, answerText: md }); } catch (e) {} });
-          think.appendChild(_rxc);
+          _maikNextRow(think).appendChild(_rxc);
         }
       } catch (e) {}
       // Phase 5 — live evidence: a subtle "Search latest evidence" chip (guideline/PubMed retrieval,
       // opt-in per tap) on every grounded answer, so the clinician can reach current literature the
       // static KB may not carry. Live-only (after cache write), mirrors the Rx chip.
-      try { if (!active) think.appendChild(maikWebChipEl(question)); } catch (e) {}
+      try { if (!active) _maikNextRow(think).appendChild(maikWebChipEl(question)); } catch (e) {}
       // Phase 3 (deep) — optional grounding advisory. Fire-and-forget; double-gated (client flag +
       // server MAIK_VERIFY), so this is a no-op unless deliberately enabled. Never blocks the answer.
       try {
@@ -8606,9 +8654,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             try {
               if (!host || host.querySelector(".maik-fb")) return;
               var w = document.createElement("div"); w.className = "maik-fb";
-              var q = document.createElement("span"); q.className = "maik-fb-q"; q.textContent = "Was this helpful?"; w.appendChild(q);
+              // The question is the thumbs themselves now; this line only speaks after a vote.
+              var q = document.createElement("span"); q.className = "maik-fb-q"; q.setAttribute("aria-live", "polite"); w.appendChild(q);
               function mk(label, kind) {
-                var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; b.textContent = label; b.setAttribute("aria-label", label + ": was this answer helpful?");
+                var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b"; maikActIcon(b, label);
                 b.addEventListener("click", function () {
                   try { if (window.SMD_track) SMD_track(kind === "up" ? "maik_feedback_up" : "maik_feedback_down"); } catch (e) {}
                   maikBuddyCue(kind === "up" ? "rate-yes" : "rate-no");
@@ -8650,13 +8699,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               // Owner, 2026-09-19: "Copy doesn't feel like a button, no feedback." Every action button
               // now confirms in place (label swaps for 1.2 s) on top of the CSS press state.
               function act(label, fn) {
-                var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b maik-act"; b.textContent = label;
+                var b = document.createElement("button"); b.type = "button"; b.className = "maik-fb-b maik-act"; maikActIcon(b, label);
                 b.addEventListener("click", function (e) {
                   fn(e);
                   if (b.dataset.busy) return;
-                  b.dataset.busy = "1"; var was = b.textContent;
-                  b.textContent = (label === "Copy" ? "Copied ✓" : label + " ✓"); b.classList.add("done");
-                  setTimeout(function () { b.textContent = was; b.classList.remove("done"); delete b.dataset.busy; }, 1200);
+                  b.dataset.busy = "1";
+                  maikActIcon(b, label, label === "Copy" ? "Copied" : label === "Edit" ? "Editing" : "Done"); b.classList.add("done");
+                  setTimeout(function () { maikActIcon(b, label); b.classList.remove("done"); delete b.dataset.busy; }, 1200);
                   try { if (navigator.vibrate) navigator.vibrate(8); } catch (e2) {}
                 });
                 return b;
@@ -8682,7 +8731,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                 runClinical(question, retrieval, depth, active, topicLabel);
               }));
               acts.appendChild(act("Edit", function () { try { qEl.value = userQ; qEl.focus(); qEl.setSelectionRange(qEl.value.length, qEl.value.length); } catch (e) {} }));
-              var svB = document.createElement("button"); svB.type = "button"; svB.className = "maik-fb-b maik-act"; svB.textContent = "Save";
+              var svB = document.createElement("button"); svB.type = "button"; svB.className = "maik-fb-b maik-act"; maikActIcon(svB, "Save");
               svB.addEventListener("click", function () { maikSaveAnswerUI(host, userQ, topicLabel, svB); });
               acts.appendChild(svB);
               w.appendChild(acts);
@@ -9147,7 +9196,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         list.unshift({ id: "s" + Date.now().toString(36), topic: t, q: String(q || "").slice(0, 500), html: cl.innerHTML, ts: Date.now() });
         if (!maikSavedStore(list)) { try { toast("Couldn’t save: this device’s storage is full."); } catch (e) {} return; }
         done();
-        if (btn) { btn.textContent = "Saved ✓"; btn.classList.add("done"); }
+        if (btn) { if (!maikActIcon(btn, "Save", "Saved")) btn.textContent = "Saved ✓"; btn.classList.add("done"); }
         try { toast("Saved to " + t); } catch (e) {}
       }
       row.querySelector(".maik-save-ok").addEventListener("click", save);
@@ -9157,8 +9206,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikRewire(host, q) {
       var rx = host.querySelector(".maik-rx");
       if (rx) rx.addEventListener("click", function () { try { SMD_RX.open({ topic: q, answerText: maikAnswerText(host) }); } catch (e) {} });
+      Array.prototype.forEach.call(host.querySelectorAll(".maik-fb-q"), function (s) { if (/^Was this helpful\?$/.test(s.textContent.trim())) s.textContent = ""; });
       Array.prototype.forEach.call(host.querySelectorAll(".maik-fb-b"), function (b) {
         var label = b.textContent.trim();
+        // A thread saved before the icon row (2026-11-14) still has word buttons: give it the icons.
+        if (!b.classList.contains("maik-ib") && MAIK_ACT_IC[label] && label !== "done") maikActIcon(b, label);
+        if (label === "Saved ✓" || label === "Saved") maikActIcon(b, "Save", "Saved");
         b.addEventListener("click", function () {
           if (label === "Copy") {
             var txt = maikAnswerText(host), ok = function () { try { toast("Copied"); } catch (e) {} };
@@ -9534,11 +9587,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (!drag || !e.touches || !e.touches.length) return;
         dy = e.touches[0].clientY - sy;
         sheet.style.transform = dy > 0 ? "translateY(" + dy + "px)" : "";
+        // The top corners round as the sheet lifts off the screen edge, like a card being pulled down.
+        var rr = dy > 0 ? Math.min(28, Math.round(dy / 3)) + "px" : "";
+        sheet.style.borderTopLeftRadius = rr; sheet.style.borderTopRightRadius = rr;
       }
       // Past the threshold: leave the transform at its dragged offset and let dialog-motion.js's
       // Motion-driven close (#maikSheet is in its SEL) carry it the rest of the way down — one
       // continuous slide, not a snap back to open followed by a separate close animation.
-      function end() { if (!drag) return; drag = false; sheet.style.transition = ""; var far = dy > 90; if (far) close(); else sheet.style.transform = ""; }
+      // The sheet owns its motion (data-own-motion, maik-polish.css): clearing the inline offset lets the
+      // CSS transition carry it from where the finger let go, down to closed or back up to open.
+      function end() { if (!drag) return; drag = false; sheet.style.transition = ""; sheet.style.borderTopLeftRadius = ""; sheet.style.borderTopRightRadius = ""; var far = dy > 90; sheet.style.transform = ""; if (far) close(); }
       [_grab, hd].forEach(function (el) {
         if (!el) return;
         el.addEventListener("touchstart", start, { passive: true });

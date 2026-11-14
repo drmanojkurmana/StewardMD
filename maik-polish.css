@@ -174,3 +174,63 @@ html body #maikSheet.maik-polished #maikClose{box-shadow:inset 0 1px 0 rgba(255,
 /* iPad landscape (owner 2026-10-16, iPad pass): the transcript and the composer spanned 1,366 px, the question box was
    1,324 px wide and your messages sat 300 px from MaiK's. A centred 800 px reading column, like the empty state. */
 @media(min-width:700px){html body #maikSheet.maik-polished .maik-body{padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 960px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 960px)/2))}html body #maikSheet.maik-polished .maik-cmp{padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 960px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 960px)/2))}}
+
+/* ── Sheet motion (owner, 2026-11-14: "round edges, rolling up on click and rolling down on close;
+   fast, natural, premium"). MaiK owns its motion (data-own-motion keeps dialog-motion.js off it).
+   Opens on the iOS sheet curve; the top corners stay round while it travels and square off only as
+   it lands, so it reads as a card rising to fill the screen. Closes faster, accelerating away, with
+   the corners rounding again as it leaves. Transform and radius only: compositor-friendly. */
+html body #maikScrim{background:rgba(8,12,20,.42);transition:opacity .28s cubic-bezier(.4,0,1,1)}
+html body #maikScrim.on{transition:opacity .42s cubic-bezier(.32,.72,0,1)}
+html body #maikSheet.maik-polished{border-top-left-radius:28px;border-top-right-radius:28px;transform:translate3d(0,100%,0);
+  transition:transform .34s cubic-bezier(.4,0,.9,.6),border-radius .16s ease-out;box-shadow:0 -10px 40px -12px rgba(0,0,0,.35)}
+html body #maikSheet.maik-polished.on{border-top-left-radius:0;border-top-right-radius:0;transform:translate3d(0,0,0);
+  transition:transform .52s cubic-bezier(.32,.72,0,1),border-radius .22s cubic-bezier(.32,.72,0,1) .3s,box-shadow .3s ease .3s;box-shadow:none}
+@media (prefers-reduced-motion:reduce){
+  html body #maikSheet.maik-polished,html body #maikSheet.maik-polished.on{transition:opacity .2s ease;border-radius:0}
+  html body #maikSheet.maik-polished{transform:none;opacity:0}
+  html body #maikSheet.maik-polished.on{opacity:1}
+}
+
+/* ── After the answer, calmer (owner, 2026-11-14: "this buttons and etc is so overwhelming"). ──
+   1. Refine chips: one line that scrolls sideways (fades at the edge) instead of four wrapped rows.
+      Once a factor is being typed, the row wraps again so the field has room. */
+html body #maikSheet.maik-polished .maik-refine{margin-top:16px}
+html body #maikSheet.maik-polished .maik-refine-lbl{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.01em;color:var(--mk-mut)}
+html body #maikSheet.maik-polished :is(.maik-refine,.maik-b) > .maik-followups{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:1px 24px 1px 0;margin-top:0;
+  -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+html body #maikSheet.maik-polished :is(.maik-refine,.maik-b) > .maik-followups::-webkit-scrollbar{display:none}
+html body #maikSheet.maik-polished :is(.maik-refine,.maik-b) > .maik-followups > .maik-fu{flex:0 0 auto;white-space:nowrap;min-height:36px;margin:0;padding:7px 14px;border-radius:18px;font-size:14px;line-height:20px}
+html body #maikSheet.maik-polished .maik-refine:has([data-maik-inline]) > .maik-followups{flex-wrap:wrap;overflow:visible;-webkit-mask-image:none;mask-image:none;padding-right:0}
+html body #maikSheet.maik-polished .maik-refine [data-maik-inline]{flex:1 1 100%}
+html body #maikSheet.maik-polished .maik-b > .maik-followups{margin-top:10px}
+/* 2. Prescription and Research: one row of two quiet outline pills. Send stays the only filled control. */
+html body #maikSheet.maik-polished .maik-next{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+html body #maikSheet.maik-polished .maik-next > .maik-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;margin:0;padding:7px 14px;border-radius:18px;font-size:14px;font-weight:600;line-height:20px;box-shadow:none}
+html body #maikSheet.maik-polished .maik-next > .maik-chip{background:transparent!important;border:1px solid var(--mk-ctl-bd)!important;color:var(--mk-ink)!important;font-weight:500!important}
+html body #maikSheet.maik-polished .maik-next > .maik-webchip svg{width:16px;height:16px}
+html body #maikSheet.maik-polished .maik-next > .maik-chip:active{transform:scale(.97)}
+/* 3. Actions: icons only, one row, no rule above. Copy, regenerate, edit, save on the left; helpful /
+   not helpful on the right. 44px targets, 20px glyphs, the answer's muted ink; the first icon's
+   glyph sits on the text's left edge. A confirmed action turns teal for a moment. */
+html body #maikSheet.maik-polished .maik-fb{display:flex;flex-wrap:wrap;align-items:center;gap:0;margin-top:10px;padding-top:0;border-top:0}
+html body #maikSheet.maik-polished .maik-fb > .maik-acts{display:flex;gap:0;margin:0 auto 0 -12px;order:0}
+html body #maikSheet.maik-polished .maik-fb-q{order:1;font-size:12.5px;line-height:1.4;color:var(--mk-mut);padding:0 4px}
+html body #maikSheet.maik-polished .maik-fb-q:empty{display:none}
+html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act){order:2}
+html body #maikSheet.maik-polished .maik-fb > .maik-fb-b:not(.maik-act):last-of-type{margin-right:-12px}
+html body #maikSheet.maik-polished .maik-fb :is(.maik-fb-reason,.maik-fb-reasonrow,.maik-save-row){order:3;flex:1 1 100%}
+html body #maikSheet.maik-polished .maik-fb .maik-ib{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;border:0;border-radius:22px;background:transparent;color:var(--mk-mut);box-shadow:none;transition:background-color .15s ease,color .15s ease,transform .12s ease;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+html body #maikSheet.maik-polished .maik-fb .maik-ib:active{transform:scale(.9);background:var(--mk-ctl-bg)}
+html body #maikSheet.maik-polished .maik-fb .maik-ib.done{color:var(--mk-teal)}
+html body #maikSheet.maik-polished .maik-fb .maik-ib svg{width:20px;height:20px;flex:none}
+html body #maikSheet.maik-polished .maik-fb .maik-ib:focus-visible{outline:2px solid var(--mk-teal)!important;outline-offset:-2px!important}
+html body #maikSheet .maik-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media (prefers-reduced-motion:reduce){html body #maikSheet.maik-polished .maik-fb .maik-ib{transition:none}html body #maikSheet.maik-polished .maik-fb .maik-ib:active{transform:none}}
+/* 4. Figures read like a search result: the picture, what it shows, then where it is from. */
+html body #maikSheet.maik-polished .maik-figs{margin-top:16px;padding-top:0;border-top:0}
+html body #maikSheet.maik-polished .maik-figs-h{margin-bottom:8px;font-size:12px;font-weight:600;color:var(--mk-mut)}
+html body #maikSheet.maik-polished .maik-fig{border-radius:16px;background:var(--mk-bg)}
+html body #maikSheet.maik-polished .maik-fig img{background:#fff}
+html body #maikSheet.maik-polished .maik-fig-desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:8px 12px 0;font-size:13px;line-height:1.4;font-style:italic;color:var(--mk-ink)}
+html body #maikSheet.maik-polished .maik-fig-cap{padding:6px 12px 10px;border-top:0;font-size:12px}

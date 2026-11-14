@@ -79,8 +79,11 @@ try {
   await ev(`document.getElementById("maikQ").value=""; return 1;`);
   await shot("answer");
   await call("Emulation.setDeviceMetricsOverride", { width: 320, height: 700, deviceScaleFactor: 2, mobile: true }); await sleep(300);
-  ok(await ev(`var a=[].slice.call(document.querySelectorAll("#maikBody .maik-acts .maik-act")); return a.length===4 && a.every(function(b){var r=document.createRange(); r.selectNodeContents(b); return b.scrollWidth<=b.clientWidth+1 && r.getClientRects().length===1;});`) === true, "320px: all four actions show their label on one line (2 x 2), none broken mid-word");
-  console.log("   320px actions: " + await ev(`return JSON.stringify([].slice.call(document.querySelectorAll("#maikBody .maik-acts .maik-act")).map(function(b){var r=document.createRange(); r.selectNodeContents(b); return [b.textContent,b.clientWidth,b.scrollWidth,r.getClientRects().length,b.offsetTop];}));`));
+  // 2026-11-14: the actions are one row of icons (owner: "so overwhelming"). At 320px all six (four
+  // actions + helpful / not helpful) sit on ONE line, are 44px targets, carry an accessible name, and stay
+  // inside the answer.
+  ok(await ev(`var b=document.querySelector("#maikBody .maik-b.ai:last-of-type .maik-fb")||document.querySelector("#maikBody .maik-fb"); var a=[].slice.call(b.querySelectorAll(".maik-ib")); var host=b.parentElement.getBoundingClientRect(); var tops=a.map(function(x){return Math.round(x.getBoundingClientRect().top);}); return a.length===6 && tops.every(function(t){return Math.abs(t-tops[0])<2;}) && a.every(function(x){var r=x.getBoundingClientRect(); return x.offsetWidth>=44&&x.offsetHeight>=44&&!!x.getAttribute("aria-label")&&r.right<=host.right+13&&r.left>=host.left-13;});`) === true, "320px: copy, regenerate, edit, save, helpful, not helpful: one row of named 44px icons inside the answer");
+  console.log("   320px actions: " + await ev(`return JSON.stringify([].slice.call(document.querySelectorAll("#maikBody .maik-fb .maik-ib")).map(function(b){var r=b.getBoundingClientRect(); return [b.getAttribute("aria-label"),Math.round(r.left),Math.round(r.top),Math.round(r.width)];}));`));
   await ev(`var f=document.querySelector("#maikBody .maik-fb"); f.scrollIntoView({block:"center"}); return 1;`); await sleep(200);
   await shot("answer-320");
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true }); await sleep(300);

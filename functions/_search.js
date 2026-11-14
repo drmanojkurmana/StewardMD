@@ -97,7 +97,8 @@ export async function tinyfishFetch(env, urls, opts) {
   if (!key || !list.length) return { results: [], errors: [{ error: key ? "no-urls" : "no-key" }] };
   opts = opts || {};
   try {
-    const body = { urls: list, format: "markdown" };
+    const body = { urls: list, format: opts.format === "html" ? "html" : "markdown" };
+    if (opts.imageLinks) body.image_links = true;
     if (opts.ttl != null) body.ttl = opts.ttl;
     if (opts.perUrlTimeoutMs) body.per_url_timeout_ms = opts.perUrlTimeoutMs;
     const r = await fetchWithTimeout("https://api.fetch.tinyfish.ai", {
@@ -108,7 +109,8 @@ export async function tinyfishFetch(env, urls, opts) {
     const results = ((j && j.results) || []).map((x) => ({
       url: String(x.url || ""), final_url: String(x.final_url || x.url || ""), title: String(x.title || ""),
       text: typeof x.text === "string" ? x.text : (x.text ? JSON.stringify(x.text) : ""), published_date: x.published_date || null,
-    })).filter((x) => x.text);
+      image_links: Array.isArray(x.image_links) ? x.image_links.filter((u) => /^https:\/\//i.test(String(u))).slice(0, 200) : [],
+    })).filter((x) => x.text || x.image_links.length);
     return { results, errors: (j && j.errors) || [] };
   } catch (e) { return { results: [], errors: [{ error: String((e && e.message) || e).slice(0, 80) }] }; }
 }

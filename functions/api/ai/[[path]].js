@@ -1710,7 +1710,8 @@ export async function onRequest(context) {
       if (!_fl.ok) return json({ figures: [], limited: true });
     } catch (e) { /* fail-open */ }
     let figures = [];
-    try { figures = await findFigures(env, fq, 3, { debug: fdebug }); } catch (e) { figures = []; }
+    const fintent = /^(manage|workup)$/.test(fu.searchParams.get("intent") || "") ? fu.searchParams.get("intent") : "";
+    try { figures = await findFigures(env, fq, 3, { debug: fdebug, intent: fintent }); } catch (e) { figures = []; }
     return json(fdebug ? { figures: figures, debug: figures._debug || [] } : { figures: figures });
   }
 

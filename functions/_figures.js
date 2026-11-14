@@ -10,12 +10,12 @@
  * renders without a strip, exactly as before.
  */
 import { fetchWithTimeout } from "./_fetch.js";
-import { tinyfishSearch, isTrustedUrl } from "./_search.js";
+import { tinyfishSearch, tinyfishFetch, isTrustedUrl } from "./_search.js";
 
 const PAGE_BYTES = 400 * 1024;
 // Live check 2026-09-18: NCBI's <noscript> stat beacon (/stat?jsdisabled=...) and Drupal "styles"
 // stock photos (diabetes.org "co-worker giving a high five", IDSA branding photo) were being picked.
-const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\.|\/stat\?|jsdisabled|\/styles\/|stock|hero|branding|program_card|placeholder/i;
+const JUNK = /logo|icon|sprite|avatar|badge|banner|button|pixel|tracking|spacer|arrow|social|share|\.svg(\?|$)|\.gif(\?|$)|1x1|blank\.|\/stat\?|jsdisabled|\/styles\/|stock|hero|branding|program_card|placeholder|favicon|apple-touch|site-?icon|cropped-/i;
 // Journal figure file names: AAFP "p747-f2-jpg.jpg", PMC "fped-09-780356-g0001.jpg".
 const FIGURE_HINT = /algorithm|flowchart|flow-chart|figure|fig[-_]?\d|[-_][ft]\d{1,2}[-_.]|[-_]g\d{3,}\b|chart|diagram|pathway|criteria|table|schema|ecg|ekg|xray|x-ray|ct-|mri|scan/i;
 // Not worth a page read for FIGURES (production trace, 2026-09-18): UpToDate is paywalled and
@@ -34,6 +34,17 @@ const DIAGRAM = /algorithm|flow\s?-?chart|pathway|approach to|work-?up|decision|
 // figure answers ("AJCC breast staging" -> a breast case report matches "breast"; only ajcc/staging discriminate).
 const GENERIC = /^(?:breast|carcinoma|cancer|tumou?r|neoplasm|disease|syndrome|patients?|clinical|case|cases|study|review|adult|acute|chronic)$/i;
 // Case reports and unusual-site metastasis papers carry study tables, never the reference figure.
+// A study's own bookkeeping, never a clinical figure (owner, 2026-11-14: an organophosphate answer showed
+// a PMC review's literature-search table, "Search term(s) / Number of articles"). PRISMA and study-flow
+// charts match DIAGRAM ("flow diagram"), so they are named here and dropped before scoring.
+const NOT_CLINICAL = /search (?:strategy|strategies|terms?|string)|literature search|database search|number of (?:articles|studies|records|citations|publications)|articles? (?:retrieved|included|excluded|screened)|records? (?:identified|screened)|prisma|study (?:selection|flow|characteristics|design)|flow ?(?:chart|diagram) of (?:the )?(?:study|studies|literature|search|article|inclusion)|selection process|baseline characteristics|demographic|characteristics of (?:the )?(?:included|patients|participants|studies)|inclusion and exclusion|risk of bias|quality assessment|forest plot|funnel plot|kaplan|survival curve|meta-?analysis|odds ratio|hazard ratio|sensitivity analysis|bibliometric|author contributions/i;
+// What the question asks for: a treatment question wants the management figure, a diagnostic one the
+// workup figure. Sent by the client as intent=manage | workup; anything else is ignored.
+const INTENT = {
+  manage: { q: "management algorithm", re: /manag|treat|therap|antidote|resuscitat|regimen|dos(?:e|ing)|protocol|algorithm|step-?wise/i },
+  workup: { q: "diagnostic algorithm", re: /diagnos|work-?up|evaluat|approach to|investigat|criteria|differential|algorithm/i }
+};
+
 function isCaseReport(title, topic) {
   const t = String(title || "");
   if (/case report|\ba case of\b|\bcase series\b/i.test(t)) return true;
@@ -63,6 +74,7 @@ export function pickFigure(html, pageUrl, topic, opts) {
   const tm = /<title\b[^>]*>([\s\S]*?)<\/title>/i.exec(h);
   const pageTitle = ((opts && opts.pageTitle) || "") + " " + (tm ? tm[1] : "");
   const hit = (s) => toks.reduce((n, t) => n + (String(s || "").toLowerCase().includes(t) ? 1 : 0), 0);
+  const want = opts && INTENT[opts.intent] ? INTENT[opts.intent].re : null;
   let best = null, bestDiagram = null;
   const re = /<img\b[^>]*>/gi;
   let m;
@@ -90,13 +102,16 @@ export function pickFigure(html, pageUrl, topic, opts) {
     if (toks.length && !hit(about) && !(need.length ? need : toks).some((t) => pageTitle.toLowerCase().includes(t))) continue;
     // When the query has discriminating words, one must appear in the page title or this figure's text.
     if (need.length && !need.some((t) => (pageTitle + " " + about).toLowerCase().includes(t))) continue;
+    if (NOT_CLINICAL.test(alt + " " + title + " " + caption)) continue;
     let score = own;
+    if (want && want.test(alt + " " + title + " " + caption)) score += 3;   // the figure answers what was asked
     score += hit(before);
     if (/<figure\b/i.test(before) && !/<\/figure>/i.test(before)) score += 2;
     if (w >= 400 || hh >= 300) score += 1;
     if (score <= 0) continue;
     const diagram = DIAGRAM.test(alt + " " + title + " " + src + " " + caption);
-    const c = { img: src, alt: (alt || title || "").slice(0, 160), score, diagram };
+    const cap = String((/figure|^\s*fig|^\s*(?:table|image)\s*\d/i.test(alt) || !alt ? caption : alt) || "").replace(/&nbsp;|&#160;/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
+    const c = { img: src, alt: (alt || title || "").slice(0, 160), caption: cap.slice(0, 160), score, diagram };
     if (!best || score > best.score) best = c;
     if (diagram && (!bestDiagram || score > bestDiagram.score)) bestDiagram = c;
   }
@@ -139,7 +154,8 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
   // "<topic> algorithm" runs beside the plain topic (2026-09-27), so pages built around a workup or
   // management flowchart get read; the plain search fills the other reads and the photo fallback.
   const search = (query) => Promise.resolve().then(() => tinyfishSearch(env, query)).catch(() => []);
-  const [algo, plain] = await Promise.all([search(q + " algorithm"), search(q)]);
+  const intent = INTENT[opts.intent] ? opts.intent : "";
+  const [algo, plain] = await Promise.all([search(q + " " + (intent ? INTENT[intent].q : "algorithm")), search(q)]);
   sift(algo, 3); sift(plain, 5); sift(algo, 5);
   if (!eligible.length) {
     const pages = await search(q + " review article");
@@ -171,14 +187,35 @@ export async function findFigures(env, topic, max = 3, opts = {}) {
       if (!r.ok || !/text\/html/i.test(d.type)) return null;
       const html = (await r.text()).slice(0, PAGE_BYTES);
       d.bytes = html.length; d.imgs = (html.match(/<img\b/gi) || []).length;
-      const f = pickFigure(html, p.url, q, { pageTitle: p.title });
+      const f = pickFigure(html, p.url, q, { pageTitle: p.title, intent });
       d.pick = f ? f.img : null;
-      return f ? { img: f.img, page: p.url, site: host.replace(/^www\./, ""), title: String(p.title || f.alt || host).slice(0, 160), score: f.score, diagram: f.diagram } : null;
-    } catch (e) { d.error = String((e && e.message) || e).slice(0, 80); return null; }
+      return f ? card(f, p, host) : null;
+    } catch (e) { d.error = String((e && e.message) || e).slice(0, 80); d.blocked = true; return null; }
   }));
+  function card(f, p, host) {
+    return { img: f.img, page: p.url, site: host.replace(/^www\./, ""), title: String(p.title || f.alt || host).slice(0, 160), caption: f.caption || "", score: f.score, diagram: f.diagram };
+  }
+  // No workup/management figure from the plain reads, and some pages refused us (bot wall, 403, a page
+  // drawn by script): ask TinyFish Fetch, which renders the page like a browser, for those pages only,
+  // and pick from its HTML plus the page's <img> list. One call, free tier; failure changes nothing.
+  if (!found.some((f) => f && f.diagram)) {
+    const retry = eligible.filter(({ d }, i) => !found[i] && (d.blocked || (d.status && d.status >= 400) || (d.type && !/text\/html/i.test(d.type)) || d.imgs === 0)).slice(0, 4);
+    if (retry.length) {
+      const rendered = await tinyfishFetch(env, retry.map(({ p }) => p.url), { format: "html", imageLinks: true, timeoutMs: 12000, perUrlTimeoutMs: 10000 });
+      for (const r of rendered.results || []) {
+        const hit = retry.find(({ p }) => p.url === r.url || p.url === r.final_url);
+        if (!hit) continue;
+        const imgs = (r.image_links || []).map((u) => '<img src="' + String(u).replace(/"/g, "&quot;") + '">').join("");
+        const f = pickFigure(String(r.text || "") + imgs, r.final_url || hit.p.url, q, { pageTitle: hit.p.title || r.title, intent });
+        hit.d.rendered = f ? f.img : "none";
+        if (f) found.push(card(f, hit.p, new URL(hit.p.url).hostname));
+      }
+    }
+  }
   // Diagrams only when there are any; photographs are the fallback, never mixed in beside them.
   const hits = found.filter(Boolean), diagrams = hits.filter((f) => f.diagram);
-  const out = (diagrams.length ? diagrams : hits).sort((a, b) => b.score - a.score).slice(0, max).map(({ score, diagram, ...rest }) => rest);
+  const seenImg = new Set();
+  const out = (diagrams.length ? diagrams : hits).filter((f) => !seenImg.has(f.img) && seenImg.add(f.img)).sort((a, b) => b.score - a.score).slice(0, max).map(({ score, diagram, ...rest }) => rest);
   if (opts.debug) out._debug = debug;
   return out;
 }
