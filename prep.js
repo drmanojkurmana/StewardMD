@@ -1619,6 +1619,8 @@
     try { if (G.PREP_MOTION) G.PREP_MOTION.attach(root); } catch (e) {}
     try { if (G.PREP_TIDE) G.PREP_TIDE.attach(root); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.attach(root, HOST); } catch (e) {}
+    // The lesson voice (Phonon 31M) loads the moment PrepNucleus opens, so a lesson's Play speaks at once (owner 2026-11-14).
+    try { if (G.PREP_LESSONS && G.PREP_LESSONS.warmVoice) G.PREP_LESSONS.warmVoice(); } catch (e) {}
     root.addEventListener("click", onClick);
     root.addEventListener("error", function (e) {
       var t = e && e.target;

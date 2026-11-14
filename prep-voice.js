@@ -9,7 +9,7 @@
  * window.SMD_PREP_VOICE = false switches it off (the UI tests do). Pure helpers load under node for tests.
  * API (window.PREP_VOICE): available(), state() none|downloading|loading|ready|error, progress() 0..1, error(), ready(),
  * usable(), rtf(), saved() (downloaded before), download(onProgress), init() -> Promise<bool ready>, unlock(), say(text, rate) -> Promise
- * (resolves when it has been spoken), prefetch(text), stop(), idle(ms) (release after ms unless used again), release(), remove(). */
+ * (resolves when it has been spoken), prefetch(text), stop(), idle(ms, soft) (release after ms unless used again; soft keeps playing speech), release(), remove(). */
 (function (G) {
   "use strict";
   var SR = 24000, BASE = "/vendor/phonon-tts/", RTF_MAX = 1.3, RTF_KEY = "prep_voice_rtf_phonon", HAVE_KEY = "prep_voice_have_phonon";
@@ -111,7 +111,8 @@
   }
   // Leaving a lesson: keep the model loaded for ms (default 2 min) so the next lesson starts at once, then release it.
   function wake() { if (idleT) { G.clearTimeout(idleT); idleT = 0; } }
-  function idle(ms) { stop(); wake(); idleT = G.setTimeout(function () { idleT = 0; release(); }, ms || 120000); }
+  // soft: only arm the timer (a warm-up), never cut speech that is playing now. Any later say() or init() disarms it.
+  function idle(ms, soft) { if (!soft) stop(); wake(); idleT = G.setTimeout(function () { idleT = 0; release(); }, ms || 120000); }
   function unlock() {
     if (!audio) { audio = new G.Audio(); audio.preload = "auto"; }
     try { audio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAwF0AAICuAAACABAAZGF0YQAAAAA="; var pr = audio.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}

@@ -22,7 +22,7 @@ const FAKE = (o) => `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"
   window.__tts=[]; window.SpeechSynthesisUtterance=function(t){this.text=t};
   Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__tts.push(u.text);setTimeout(function(){u.onend&&u.onend({})},300)},cancel:function(){}}});
   var st=${o.ready ? '"ready"' : '"none"'}, cb=null; window.__pre=[]; window.__said=[]; window.__voice={ p:function(x){cb&&cb(x)}, done:null, fail:null };
-  window.__V={available:function(){return true},state:function(){return st},progress:function(){return 0},saved:function(){return ${!!o.saved}},unlock:function(){},init:function(){return Promise.resolve(st==="ready")},
+  window.__V={available:function(){return true},state:function(){return st},progress:function(){return 0},saved:function(){return ${!!o.saved}},unlock:function(){},init:function(){window.__init=(window.__init||0)+1;return Promise.resolve(st==="ready")},idle:function(ms){window.__idle=ms},
     usable:function(){return st==="ready"},stop:function(){},release:function(){},prefetch:function(t){window.__pre.push(t)},
     say:function(t){window.__said.push(t);if(${!!o.sayFail}&&window.__said.length===1)return Promise.reject(new Error("audio"));return new Promise(function(r){setTimeout(r,300)})},
     download:function(f){st="downloading";cb=f;return new Promise(function(r,j){window.__voice.done=function(){st="ready";r()};window.__voice.fail=function(){st="error";j(new Error("x"))}})}};
@@ -36,7 +36,9 @@ async function lesson(o) {
   await pg.goto(BASE + "?prep=1"); await pg.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
   const jc = async (s) => { await pg.waitForSelector(s, { state: "attached" }); await pg.evaluate((s) => document.querySelector(s).click(), s); };
   await pg.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); document.body.classList.add("dark"); PREP.open({ subject: "surgery" }); });
-  await jc("#smdPrep .pn-mod[data-m=sur-breast-cancer]"); await jc("#smdPrep [data-act=l-open]");
+  await jc("#smdPrep .pn-mod[data-m=sur-breast-cancer]");
+  if (o.listOnly) return pg;
+  await jc("#smdPrep [data-act=l-open]");
   await pg.waitForSelector("#smdPrep .pn-lsn-tx"); await pg.evaluate(() => document.getElementById("pnSetup")?.remove());
   if (!o.noPlay) await jc("#smdPrep [data-act=l-play]");
   return pg;
@@ -72,6 +74,12 @@ try {
   pg = await lesson({ saved: true, sayFail: true }); await pg.evaluate(() => window.__voice.done()); await sleep(1500);
   const sf = await pg.evaluate(() => ({ tts: window.__tts.slice(), said: window.__said.slice(), on: window.PREP_LESSONS._l.playing }));
   ok(sf.tts.length === 1 && sf.tts[0] === sf.said[0] && sf.said.length >= 2 && sf.on, "a sentence the natural voice fails on is read by the phone voice, then the natural voice reads on");
+  await pg.context().close();
+  // owner 2026-11-14: the voice loads the moment Learn opens, before any lesson is picked.
+  pg = await lesson({ ready: true, listOnly: true }); await sleep(400);
+  const lw = await pg.evaluate(() => ({ init: window.__init || 0, idle: window.__idle || 0, lesson: !!document.querySelector("#smdPrep .pn-lsn-tx") }));
+  ok(lw.init >= 1 && !lw.lesson, "opening Learn starts loading the saved voice before a lesson is opened (init x" + lw.init + ")");
+  ok(lw.idle === 600000, "and, while no lesson is open, it is released after 10 unused minutes");
   await pg.context().close();
   // owner 2026-11-13: Play started about 5 s late. A loaded voice renders the page's first sentence as soon as the page shows.
   pg = await lesson({ ready: true, noPlay: true }); await sleep(500);

@@ -273,6 +273,7 @@
   var lx = { counts: null, exam: "" };
   function learnView() {
     var s = host.store(), ex = host.exam(), subs = host.subjectsOf(s.exam), P = G.PREP_LESSONS && G.PREP_LESSONS._pure;
+    try { if (G.PREP_LESSONS && G.PREP_LESSONS.warmVoice) G.PREP_LESSONS.warmVoice(); } catch (e) {}   // the voice loads as Learn opens
     draw(s, ex, subs, lx.exam === s.exam ? lx.counts : null, lx.cont);
     Promise.all([G.PREP_LESSONS.index()].concat(subs.map(function (sb) { return host.loadIndex(sb.id).then(null, function () { return null; }); }))).then(function (res) {
       if (host.stackTop() !== learnView) return;

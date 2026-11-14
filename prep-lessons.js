@@ -1195,9 +1195,20 @@
     });
     return out;
   }
+  /* The voice loads the moment Learn opens (owner 2026-11-14), not when a lesson does: a voice saved on the phone starts
+     loading here, so by the time a lesson is picked it is ready and Play speaks at once. Only a voice downloaded before
+     loads; the one-time 65 MB download still waits for the first Play. Unused for 10 minutes, it is released. */
+  function warmVoice() {
+    try {
+      var V = G.PREP_VOICE; if (!V || !V.available || !V.available() || !V.init) return;
+      var p = V.init();
+      if (p && p.then) p.then(function (ok) { if (ok && !(L.les && host && host.stackTop && host.stackTop() === L.view) && V.idle) V.idle(600000, true); });
+    } catch (e) {}
+  }
   /* openSubject(sid, h): the subject's lessons, grouped by system (taxonomy section), in module order. */
   function openSubject(sid, h) {
     host = h;
+    warmVoice();
     var view = function () {
       var ixs = host.ix ? host.ix() : {}, topics = (ixs[sid] && ixs[sid].topics) || [], sb = host.subjectById(sid), name = sb ? host.tx(sb.name) : "";
       index().then(function (ix) {
@@ -1384,5 +1395,5 @@
 
   // A link from outside PrepNucleus (the Image Library, owner 2026-11-13): this lesson, at the step that shows the image.
   function openAt(sid, mid, h, key, step) { L.jumpStep = step == null ? null : String(step); return open(sid, mid, h, key, true); }
-  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
+  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, warmVoice: warmVoice, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);
