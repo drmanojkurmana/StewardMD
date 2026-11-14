@@ -17,7 +17,8 @@ test("isPearl only with table/figure/compare", () => {
 });
 test("breadcrumb header footer table escape", () => {
   const l = { module: "perineal-body", subject: "anatomy", title: "Perineal <Body>", steps: [] };
-  assert.match(P.breadcrumb(l, "L-4FDN-0V2R-A"), /^Pearl #PN-4FDN · Anatomy · Perineal Body$/);
+  assert.match(P.breadcrumb(l, "L-4FDN-0V2R-A"), /^Pearl · Anatomy · Perineal Body$/);   // one code: the lesson ID shows in the foot
+  assert.match(P.breadcrumb(l), /^Pearl #PN-[0-9A-HJKMNP-TV-Z]{4} · Anatomy · Perineal Body$/);
   assert.match(P.headerHtml(l, "L-4FDN-0V2R-A"), /&lt;Body&gt;/);
   assert.match(P.footerHtml(l, "L-4FDN-0V2R-A"), /data-pearl-copy="PN-4FDN"/);
   assert.match(P.footerHtml(l, "L-4FDN-0V2R-A"), /data-act="id-share" data-v="L-4FDN-0V2R-A"/);

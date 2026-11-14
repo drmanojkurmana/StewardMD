@@ -12394,3 +12394,10 @@ Owner: selecting lesson text showed the iOS menu, which makes copying content ea
 show. `SmdWebView` (MainViewController.swift) disables edit-menu actions unless the selection is editable. Native
 rebuild required. Android same day: `SmdWebView.java` empties the selection bar menu on read-only text (layout
 override `capacitor_bridge_layout_main.xml`).
+
+## 2026-11-14 One code and one foot per lesson
+Owner: a Pearl lesson showed two codes (Pearl ID PN-XXXX inside the card, lesson ID L-XXX-XXX-XXX under it) and the
+two rows did not line up. The Pearl ID was only the first four characters of the lesson ID. Now the lesson ID is the
+only code (the PN- Pearl ID and the "Pearl #" crumb number show only when there is no lesson ID), and every lesson
+has one foot under the card (prep-lessons.js footHtml): Report / Share / Bookmark on the card's width, the ID chip
+centred under them. Loader token prep148.
