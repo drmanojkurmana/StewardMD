@@ -81,18 +81,25 @@ final class SmdWebView: WKWebView {
                 if i.delegate is EditMenuGate { continue }
                 let gate = EditMenuGate(web: self, original: i.delegate)
                 gate.interaction = i
-                gates.append(gate)   // the interaction holds its delegate weakly
-                i.delegate = gate
+                if install(gate, on: i) { gates.append(gate) }   // the interaction holds its delegate weakly
             }
         }
+    }
+
+    // UIEditMenuInteraction.delegate is read-only (only init(delegate:) sets it), and WebKit creates its interactions
+    // itself, so the gate goes in through the ivar. Skipped, never a crash, when this iOS has no such ivar: the menu
+    // then simply stays (the canPerformAction / buildMenu overrides still apply).
+    private func install(_ gate: EditMenuGate, on i: UIEditMenuInteraction) -> Bool {
+        guard class_getInstanceVariable(UIEditMenuInteraction.self, "_delegate") != nil else { return false }
+        i.setValue(gate, forKey: "delegate")
+        return true
     }
 
     // iOS 16+ builds the edit menu from menus as well as actions: drop the system groups on read-only text.
     override func buildMenu(with builder: UIMenuBuilder) {
         super.buildMenu(with: builder)
         guard builder.system == .context, !editing(nil) else { return }
-        var ids: [UIMenu.Identifier] = [.standardEdit, .lookup, .learn, .share, .find, .replace, .speech, .textStyle, .spelling]
-        if #available(iOS 18.0, *) { ids.append(.writingTools) }
+        let ids: [UIMenu.Identifier] = [.standardEdit, .lookup, .learn, .share, .find, .replace, .speech, .textStyle, .spelling]
         ids.forEach { builder.remove(menu: $0) }
     }
 }

@@ -46,3 +46,7 @@ iOS follow-up (same day): the owner's new build still showed the menu. Current W
 interaction) presents it through its own `UIEditMenuInteraction`, which does not ask `canPerformAction`. `SmdWebView`
 now gives every edit menu interaction in the web content an `EditMenuGate` delegate (on each touch, via `hitTest`)
 that returns no menu on read-only text and forwards everything else to the original delegate.
+Compile fix (2026-11-14): `UIEditMenuInteraction.delegate` is read-only (iOS 16+), so `i.delegate = gate` never compiled and
+broke every iOS build of main (Xcode 27.2). The gate is now set through the `_delegate` ivar (KVC), skipped when the ivar
+is absent; `UIMenu.Identifier.writingTools` does not exist and was removed. Checked on the iPhone 18 Pro simulator: a long
+press selects the word and no system menu appears. Still to check on a real iPhone, and in a field you type into.
