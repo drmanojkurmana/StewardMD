@@ -2094,3 +2094,7 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pn-why-chip { transition: none; }
 }
+/* Lesson text is selectable for highlighting (owner, 2026-11-14). Each sentence is a tap target (data-act="l-say"), and
+   native-feel.css makes every [data-act] user-select:none, so a long-press could only select the spaces BETWEEN
+   sentences: the striped, broken selection. The sentences, their bold terms and highlights are text again. */
+.pn-root .pn-lsn-tx, .pn-root .pn-lsn-tx .pn-sent, .pn-root .pn-lsn-tx .pn-sent * { -webkit-user-select: text !important; user-select: text !important; -webkit-touch-callout: none; }
