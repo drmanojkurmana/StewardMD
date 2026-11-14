@@ -220,6 +220,13 @@ try {
   // ---- finish
   for (let i = 0; i < 3; i++) await click("#smdPrep [data-act=l-next]");
   ok(await step() === "Step 8 of 8" && /Finish/.test(await ev(`return document.querySelector("#smdPrep [data-act=l-next]").textContent;`)), "the last step's button says Finish");
+  // One lesson foot (owner 2026-11-14): Report / Share / Bookmark and the lesson's one ID chip, together under the card,
+  // aligned to the same width; no second "Pearl ID" code.
+  ok(await ev(`var f=document.querySelectorAll("#smdPrep .pn-lsn-foot"); return f.length===1 && !f[0].closest(".pn-lsn-step") && !!f[0].querySelector(".pn-act-row") && f[0].querySelectorAll(".pi-chip").length===1;`) === true, "the lesson foot sits under the card: actions and one ID chip");
+  ok(await ev(`var t=document.querySelector("#smdPrep #pnLsn").textContent; return !/Pearl ID|PN-[0-9A-Z]{4}/.test(t) && document.querySelectorAll("#smdPrep .pi-chip").length===1;`) === true, "only one code on the page (the lesson ID), no Pearl ID");
+  ok(await until(`var r=document.querySelector("#smdPrep .pn-lsn-foot .pn-act-row").getBoundingClientRect(), c=document.querySelector("#smdPrep .pn-lsn-foot .pi-chip").getBoundingClientRect(), a=document.querySelector("#smdPrep .pn-lsn-step").getBoundingClientRect(); return Math.abs(r.left-a.left)<2 && Math.abs(r.right-a.right)<2 && c.top>=r.bottom && Math.abs((c.left+c.right)/2-(r.left+r.right)/2)<2;`, 3000), "actions span the card's width; the ID chip is centred under them");
+  await ev(`document.querySelector("#smdPrep .pn-lsn-foot").scrollIntoView({block:"end"}); return 1;`);
+  await shot("last-step-foot");
   await shot("step8-compare");
   await click("#smdPrep [data-act=l-next]");
   ok(await until(`return !!document.querySelector("#smdPrep .pn-lsn-fin");`, 3000), "Finish shows the finish screen");

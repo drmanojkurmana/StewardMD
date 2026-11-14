@@ -34,6 +34,10 @@
 body.dark .pn-root .pi-chip.pi-done .pi-chip-v { color: var(--pn-pri); }
 .pn-root .pn-run .pi-chip { display: flex; width: max-content; margin-left: auto; margin-right: auto; }
 .pn-root .pn-lsn .pi-chip { display: flex; width: max-content; margin: 18px auto 0; }
+/* The lesson foot (prep-lessons.js footHtml): actions, then the one ID chip, on the step's width, under the card. */
+.pn-root .pn-lsn .pn-lsn-foot { display: flex; flex-direction: column; gap: 12px; margin: 4px 0 0; }
+.pn-root .pn-lsn .pn-lsn-foot .pn-act-row { margin: 0; }
+.pn-root .pn-lsn .pn-lsn-foot .pi-chip { margin: 0 auto; }
 
 /* Go to ID */
 .pn-root .pi-form { display: flex; flex-direction: column; gap: 10px; }

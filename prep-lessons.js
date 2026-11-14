@@ -970,24 +970,30 @@
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
-  /* Foot row for lessons that are not Pearls (Pearls carry the same row inside their card):
-   * the shared filled pills (prep-action-row.js) + the lesson ID chip as one quiet metadata line. */
-  function footHtml(lid, isP) {
-    var A = G.PREP_ACTION; if (!A || !A.actionRowHtml || isP) return "";
-    var s = store();
-    return A.actionRowHtml({ shareId: lid || undefined, bookmarked: !!(s.lpbm && s.lpbm[L.key]) });
+  /* The lesson foot, one layout for every lesson (owner 2026-11-14): Report / Share / Bookmark (prep-action-row.js)
+   * and, under them, the lesson's one ID chip, both under the step card and on the same width. A plain lesson shows it
+   * on every page, a Pearl on its last step. The lesson ID is the only code: a Pearl's own "Pearl ID" was the first
+   * four characters of it, so it is shown only when there is no lesson ID (prep-pearl.js footerHtml, PREP_IDS absent). */
+  function footHtml(lid, isP, last) {
+    var A = G.PREP_ACTION, s = store(), bm = !!(s.lpbm && s.lpbm[L.key]), row = "";
+    var IDS = G.PREP_IDS, chip = lid && IDS ? IDS.chip(lid) : "";
+    if (isP) {
+      if (!last) return "";
+      row = lid || !G.PREP_PEARL ? (A && A.actionRowHtml ? A.actionRowHtml({ pearl: true, shareId: lid || undefined, bookmarked: bm }) : "") : G.PREP_PEARL.footerHtml(L.les, null, bm);
+    } else if (A && A.actionRowHtml) row = A.actionRowHtml({ shareId: lid || undefined, bookmarked: bm });
+    return row || chip ? '<footer class="pn-lsn-foot">' + row + chip + "</footer>" : "";
   }
   function readerHtml() {
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
     var anim = L.dir ? (L.dir > 0 ? " fwd" : " rev") : "";
     var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
-    var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
+    var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null;
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
         '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-act="l-say" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
-        (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
+        "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
     // Share IDs (prep-ids.js): share in the bar, the lesson's ID at the foot of the page (tap copies).
     var IDS = G.PREP_IDS, lid = IDS ? IDS.ofLesson(L.key) : null, shareB = lid ? IDS.shareBtn(lid, "Share this lesson") : "";
@@ -996,7 +1002,7 @@
       pg.map(function (x, k) { var ix = typeof x !== "number" || interactive(les.steps[x]); return "<i" + (k <= L.i || ix ? ' class="' + (k <= L.i ? "on" : "") + (k === L.i ? " cur" : "") + (ix ? " ix" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn">' + body +
       (L.i === 0 && canSpeak() ? '<p class="pn-note">Narration uses this device\'s own voice.</p>' : "") +
-      footHtml(lid, isP) + (lid ? IDS.chip(lid) : "") + "</div>" + barHtml();
+      footHtml(lid, isP, L.i === n - 1) + "</div>" + barHtml();
   }
   function finishHtml() {
     var les = L.les, s = store(), total = 0;
