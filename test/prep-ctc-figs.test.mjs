@@ -5,6 +5,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
+import { mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const TOOL = fileURLToPath(new URL("../tools/prep-ctc-figs.py", import.meta.url));
@@ -42,7 +45,9 @@ nb, info = F.margin_box(im, [], [300, 202, 600, 498])
 out["clean"] = {"box": nb, "grow": info["grow"]}
 print(json.dumps(out))
 `;
-const run = () => JSON.parse(execFileSync("python3", ["-P", "-c", PY, TOOL], { encoding: "utf8" }));
+// Run from an empty temp dir, not the repo: with -c Python puts the cwd on sys.path, so a planted json.py would run.
+// (-P does the same but needs Python 3.11; this works on every version.)
+const run = () => JSON.parse(execFileSync("python3", ["-c", PY, TOOL], { encoding: "utf8", cwd: mkdtempSync(join(tmpdir(), "ctc-figs-")) }));
 
 test("margin: a cut label is taken in whole and padded", { skip: !havePIL && "python3 without Pillow" }, () => {
   const r = run();
