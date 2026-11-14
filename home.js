@@ -3023,6 +3023,7 @@
     try { mountKuChip(root); } catch (e) {}   // KU: header chip (both header variants)
     try { wireHrfMenu(root); } catch (e) {}
     try { mountPrivacyToggle(root); } catch (e) {}   // B2 privacy mode: one tap masks patient identifiers on screen
+    try { hrfInlineOnTablet(root); } catch (e) {}
 
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
@@ -3196,10 +3197,21 @@
   function wireHrfMenu(root) {
     if (root.__hrfMenu) return; root.__hrfMenu = true;
     function set(open) { var m = root.querySelector("#hrfMenu"), b = root.querySelector("#hrfMore"); if (!m || !b) return; m.hidden = !open; b.setAttribute("aria-expanded", String(open)); }
-    function isOpen() { var m = root.querySelector("#hrfMenu"); return !!m && !m.hidden; }
+    function isOpen() { var m = root.querySelector("#hrfMenu"); return !!m && !m.hidden && !m.classList.contains("hrf-inline"); }   // iPad: in the header, never "open"
     root.addEventListener("click", function (e) { if (e.target.closest("#hrfMore")) set(!isOpen()); else if (isOpen()) set(false); });
     root.addEventListener("keydown", function (e) { if (e.key === "Escape" && isOpen()) { set(false); var b = root.querySelector("#hrfMore"); if (b) b.focus(); } });
     root.addEventListener("scroll", function () { if (isOpen()) set(false); }, true);
+  }
+  // iPad (owner, 2026-11-14: "in ipad all buttons can stay out not inside the menu"): a tablet header has
+  // room, so theme, notifications and privacy sit in the header as icon buttons and "..." goes away.
+  // The phone keeps the single "..." menu. html.smd-tablet is set before first paint (index.html).
+  function hrfInlineOnTablet(root) {
+    if (!document.documentElement.classList.contains("smd-tablet")) return;
+    var hdr = root.querySelector(".hrf-head"), menu = root.querySelector("#hrfMenu"), more = root.querySelector("#hrfMore");
+    if (!hdr || !menu || !more) return;
+    if (menu.parentNode !== hdr) hdr.insertBefore(menu, more);
+    menu.classList.add("hrf-inline"); menu.hidden = false; menu.removeAttribute("role");
+    more.hidden = true;
   }
   function mountPrivacyToggle(root) {
     var P = window.SMD_PRIVACY_MODE;

@@ -1380,3 +1380,14 @@ html #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{font-weight:700}
   #homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{padding:5px 7px}
 }
 #homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{margin-left:auto}
+/* Header: the Knowledge Units chip sits right beside Search (owner, 2026-11-14). The chip and Search
+   both had margin-left:auto, so the free space was split and the chip floated mid-header (worst on
+   iPad). When the chip shows, it alone takes the auto margin and Search follows it. */
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku:not([style*="none"]) ~ [data-act="search"]{margin-left:2px}
+/* iPad: the menu's buttons live in the header (hrfInlineOnTablet in home.js), white icons like Search. */
+#homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline{position:static;display:flex;flex-direction:row;align-items:center;gap:0;width:auto;padding:0;border-radius:0;background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;animation:none}
+#homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline .rds-icon-btn{width:38px;min-width:38px;height:38px;padding:0;justify-content:center;border-radius:19px;color:#fff;background:transparent}
+#homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline .rds-icon-btn .rds-icon{color:#fff}
+#homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline .rds-icon-btn::before{content:none!important}
+#homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline .rds-icon-btn:active{background:rgba(255,255,255,.14)}
+#homeV2#homeV2#homeV2.rnav .hrf-head #hrfMore[hidden]{display:none}
