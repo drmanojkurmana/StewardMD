@@ -68,6 +68,16 @@ rollback: [[Enable-AI-Cost-Cap]].
 cost (75% payout). A raw rupee top-up via `addCredits` still uses `CREDIT_CONVERSION` (50%). Owner to
 confirm the packs' margin before launch — see [[Decisions]].
 
+## Runware provider (2026-11-14, Vertex credits exhausted)
+`runwareProvider` in `functions/api/ai/[[path]].js`: OpenAI-compatible `https://api.runware.ai/v1/chat/completions`,
+Bearer `RUNWARE_API_KEY` (Cloudflare secret). Request built from the same `genBody`, reply translated back to Gemini shape,
+so metering/finish-reason code is unchanged; `_sse_parse.js` reads OpenAI SSE frames too. Model: `gemini-X` -> `google:gemini@X`,
+or `RUNWARE_MODEL` pins one AIR id. Order: `AI_PROVIDER=runware` -> runware, vertex, developer; otherwise runware (key set) is
+last resort. Images go as `image_url` data URLs (unverified on Runware); audio fails over to Google. Covers every `callGemini`
+caller (MaiK, ThoreX, Onco, SknX, FollowCare, digest, summary). NOT covered: FundX (`_fundx_ai.js`), embeddings
+(`api/retrieve`), PrepNucleus (pinned to vertex), WardSynQ gateway, Connect agent, verify-doctor, voice-worker.
+Test: `test/ai-runware-provider.test.mjs`. Privacy text still names Google Vertex as processor: update before relying on it.
+
 ## Runtime-editable knobs (no redeploy, KV-backed, owner console)
 | knob | KV key | fallback |
 |---|---|---|

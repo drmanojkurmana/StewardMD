@@ -428,7 +428,85 @@ const vertexProvider = {
   }
 };
 
-const PROVIDERS = { vertex: vertexProvider, developer: developerProvider };
+/* ---- Runware — OpenAI-compatible Chat Completions (owner, 2026-11-14: Vertex credits ran out, Runware
+ *      credits are available). Same Gemini models, served through Runware's AIR ids. The call is built from
+ *      the SAME genBody the Google providers send, then translated, and the reply is translated back into
+ *      Gemini's shape, so parseCandidates, finish-reason handling and usage metering are unchanged.
+ *      Key: RUNWARE_API_KEY (Cloudflare secret, never in the repo). Off unless the key is set. ---- */
+const RUNWARE_URL = "https://api.runware.ai/v1/chat/completions";
+function runwareKey(env) { return String((env && env.RUNWARE_API_KEY) || "").trim(); }
+/* gemini-3.1-flash-lite -> google:gemini@3.1-flash-lite. RUNWARE_MODEL pins one AIR id for every call;
+ * an id that already looks like an AIR id (has ":" and "@") is passed through. */
+function runwareModel(env, opts) {
+  const pin = String((env && env.RUNWARE_MODEL) || "").trim();
+  if (pin) return pin;
+  const m = String(modelFor(env, opts) || "");
+  if (m.indexOf(":") > 0 && m.indexOf("@") > 0) return m;
+  const g = /^gemini-(.+)$/.exec(m);
+  return g ? "google:gemini@" + g[1] : m;
+}
+function runwareBody(parts, maxTokens, opts, stream) {
+  const o = opts || {};
+  const g = genBody(parts, maxTokens, o);
+  const content = [];
+  for (const p of (g.contents[0].parts || [])) {
+    if (p && typeof p.text === "string") { content.push({ type: "text", text: p.text }); continue; }
+    const inl = p && (p.inline_data || p.inlineData);
+    const mime = inl && String(inl.mime_type || inl.mimeType || "");
+    if (inl && mime.indexOf("image/") === 0) { content.push({ type: "image_url", image_url: { url: "data:" + mime + ";base64," + inl.data } }); continue; }
+    // Audio / other media: not part of the Chat Completions contract here. A non-400 error, so the
+    // caller fails over to a Google provider instead of failing the request outright.
+    const e = new Error("runware: unsupported part " + (mime || "unknown")); e.status = 415; throw e;
+  }
+  const messages = [];
+  if (g.systemInstruction) messages.push({ role: "system", content: g.systemInstruction.parts.map(function (x) { return x.text || ""; }).join("") });
+  messages.push({ role: "user", content: content.length === 1 && content[0].type === "text" ? content[0].text : content });
+  const b = { messages: messages, temperature: g.generationConfig.temperature, max_tokens: g.generationConfig.maxOutputTokens };
+  if (o.json || o.schema) b.response_format = { type: "json_object" };
+  if (stream) { b.stream = true; b.stream_options = { include_usage: true }; }
+  return b;
+}
+const RW_FINISH = { stop: "STOP", length: "MAX_TOKENS", content_filter: "SAFETY", tool_calls: "STOP" };
+export function runwareUsage(u) {
+  if (!u) return null;
+  const d = u.completion_tokens_details || {};
+  return { promptTokenCount: u.prompt_tokens || 0, candidatesTokenCount: u.completion_tokens || 0,
+           thoughtsTokenCount: d.reasoning_tokens || 0, totalTokenCount: u.total_tokens || 0,
+           cachedContentTokenCount: (u.prompt_tokens_details && u.prompt_tokens_details.cached_tokens) || 0 };
+}
+/* OpenAI reply -> Gemini reply. Errors keep { error: { message } } so parseCandidates throws the usual way. */
+export function runwareToGemini(data) {
+  if (!data || typeof data !== "object") return data;
+  if (data.error || (Array.isArray(data.errors) && data.errors.length)) {
+    const er = data.error || data.errors[0] || {};
+    return { error: { message: String(er.message || er.code || "runware error") } };
+  }
+  const ch = data.choices && data.choices[0];
+  if (!ch) return { candidates: [], usageMetadata: runwareUsage(data.usage) };
+  const msg = ch.message || {};
+  const text = typeof msg.content === "string" ? msg.content : Array.isArray(msg.content) ? msg.content.map(function (x) { return (x && x.text) || ""; }).join("") : "";
+  return { candidates: [{ content: { parts: [{ text: text }] }, finishReason: RW_FINISH[ch.finish_reason] || String(ch.finish_reason || "").toUpperCase() }], usageMetadata: runwareUsage(data.usage) };
+}
+const runwareProvider = {
+  name: "runware",
+  available: function (env) { return !!runwareKey(env); },
+  generate: async function (env, parts, maxTokens, opts) {
+    const o = opts || {};
+    const jr = await fetchJsonWithTimeout(RUNWARE_URL, { method: "POST", headers: { "Authorization": "Bearer " + runwareKey(env), "Content-Type": "application/json" },
+      body: JSON.stringify(Object.assign({ model: runwareModel(env, o) }, runwareBody(parts, maxTokens, o, false))) }, o.timeoutMs || aiTimeoutMs(env));
+    const _t = parseCandidates(runwareToGemini(jr.data), jr.status, o.meta);
+    if (o.meta) o.meta.model = runwareModel(env, o);
+    return _t;
+  },
+  // OpenAI-format SSE; functions/_sse_parse.js reads both Gemini and OpenAI frames.
+  streamFetch: function (env, parts, maxTokens, opts) {
+    const o = opts || {};
+    return fetch(RUNWARE_URL, { method: "POST", headers: { "Authorization": "Bearer " + runwareKey(env), "Content-Type": "application/json" },
+      body: JSON.stringify(Object.assign({ model: runwareModel(env, o) }, runwareBody(parts, maxTokens, o, true))), signal: o.signal });
+  }
+};
+
+const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, runware: runwareProvider };
 
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
@@ -553,10 +631,14 @@ function providerOrder(env, opts) {
   if (opts && Array.isArray(opts.providers) && opts.providers.length) return opts.providers.filter(function (n) { return n === "vertex" || n === "developer"; });
   // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
   // AI_PROVIDER=vertex (default) -> Vertex then Developer; any other value -> Developer then Vertex.
+  // AI_PROVIDER=runware -> Runware first, Google after. Otherwise Runware, when its key is set, is the
+  // last resort after both Google providers (owner, 2026-11-14).
   const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
-  return sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
+  if (sel === "runware") return ["runware", "vertex", "developer"];
+  const base = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
+  return runwareKey(env) ? base.concat(["runware"]) : base;
 }
-function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
+function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env) || PROVIDERS.runware.available(env); }
 
 let _lastFailover = null;
 // provider -> ISO time of its last SUCCESSFUL generation in this isolate. /health reports it next to
@@ -1277,7 +1359,7 @@ export async function onRequest(context) {
     }
   } catch (e) {}
 
-  if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
+  if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), runware: PROVIDERS.runware.available(env), model: modelId(env) });
 
   // Admin diagnostics (aggregate usage; no PHI). Gated by UPDATES_ADMIN_TOKEN.
   if (seg === "admin") {
@@ -1640,6 +1722,8 @@ export async function onRequest(context) {
       vertex_mode: vertexKey(env) ? "api-key (express mode)" : (vertexProjectReady(env) ? "project (service account)" : null),
       developer_status: dAvail ? (_lastSuccess.developer ? "healthy" : "configured") : "not_configured",
       developer_configured: dAvail, developer_last_success: _lastSuccess.developer || null,
+      runware_status: PROVIDERS.runware.available(env) ? (_lastSuccess.runware ? "healthy" : "configured") : "not_configured",
+      runware_last_success: _lastSuccess.runware || null,
       last_success_scope: "this isolate",
       authentication: vertexKey(env) ? "API key (Vertex express mode)" : !vertexProjectReady(env) ? "none"
         : (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT")

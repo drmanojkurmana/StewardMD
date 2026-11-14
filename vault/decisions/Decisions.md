@@ -12401,3 +12401,9 @@ two rows did not line up. The Pearl ID was only the first four characters of the
 only code (the PN- Pearl ID and the "Pearl #" crumb number show only when there is no lesson ID), and every lesson
 has one foot under the card (prep-lessons.js footHtml): Report / Share / Bookmark on the card's width, the ID chip
 centred under them. Loader token prep148.
+
+## 2026-11-14 Runware as an AI provider (Vertex credits exhausted)
+Owner: Vertex credits are done; use the Runware key (USD 200+ credit). Decision: add Runware as a third provider in the
+shared `callGemini` transport, same Gemini models via AIR ids, off unless `RUNWARE_API_KEY` is set, first only with
+`AI_PROVIDER=runware`. Reversible by unsetting the env. Open: privacy policy/processor disclosure, Runware ZDR for Gemini,
+FundX/embeddings/PrepNucleus still Google-only. See [[AI Control Center]].

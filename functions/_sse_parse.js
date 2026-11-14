@@ -28,7 +28,13 @@ function frameJson(frame) {
  * chunk (earlier chunks may carry partial counts; the caller keeps the last one it sees). */
 export function sseFrameUsage(frame) {
   const j = frameJson(frame);
-  return (j && j.usageMetadata) || null;
+  if (j && j.usageMetadata) return j.usageMetadata;
+  // OpenAI-format stream (Runware): usage rides the last chunk when stream_options.include_usage is set.
+  const u = j && j.usage;
+  if (!u) return null;
+  return { promptTokenCount: u.prompt_tokens || 0, candidatesTokenCount: u.completion_tokens || 0,
+           thoughtsTokenCount: (u.completion_tokens_details && u.completion_tokens_details.reasoning_tokens) || 0,
+           totalTokenCount: u.total_tokens || 0 };
 }
 
 /* Extract the generated text from one Gemini SSE frame. Returns "" for keep-alives, comments,
@@ -43,6 +49,11 @@ export function sseFrameText(frame) {
   if (!data || data === "[DONE]") return "";
   let j;
   try { j = JSON.parse(data); } catch (e) { return ""; }
+  // OpenAI-format chunk (Runware): choices[0].delta.content. reasoning_content is never shown.
+  if (j && Array.isArray(j.choices)) {
+    const d = j.choices[0] && j.choices[0].delta;
+    return d && typeof d.content === "string" ? d.content : "";
+  }
   const cand = j.candidates && j.candidates[0];
   const parts = cand && cand.content && cand.content.parts;
   return parts ? parts.map((p) => p.text || "").join("") : "";
