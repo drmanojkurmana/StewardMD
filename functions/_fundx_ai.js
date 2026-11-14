@@ -185,8 +185,8 @@ const cerebrasProvider = {
     }, timeoutMs(env));
   }
 };
-// Runware (2026-11-14, Vertex credits exhausted): the same Gemini model via functions/_runware.js; the
-// fundus image goes through Runware's native task API (inputs.images). JSON output, temperature 0.1.
+// Runware (2026-11-14, Vertex credits exhausted) via functions/_runware.js: the fundus image goes to
+// GPT-6 Luna (RUNWARE_MODEL) as a Chat Completions image_url part. JSON output, temperature 0.1.
 const runwareProvider = {
   name: "runware", modalities: ["vision", "text"],
   available: (env) => runwareAvailable(env),

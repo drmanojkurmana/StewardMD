@@ -34,7 +34,7 @@
 // AI transport config. Selection ONLY via env.AI_PROVIDER ("vertex" [primary, default]
 // | "developer"). Model via env.GEMINI_MODEL (default MODEL_HARD_DEFAULT, gemini-3.1-flash-lite; a retiring
 // model named there is ignored, see envModel in _ai_usage.js).
-import { runwareAvailable, runwareKey, runwareGenerate, runwareStreamFetch, runwareToGemini, hasMedia } from "../../_runware.js";
+import { runwareAvailable, runwareKey, runwareGenerate, runwareStreamFetch, runwareToGemini, needsNative } from "../../_runware.js";
 import MaiKScope from "../../../kb/ai/maik-scope.js"; // shared clinician-only Intent Firewall (CJS UMD, default import)
 
 const DEV_HOST = "https://generativelanguage.googleapis.com/v1beta/models";
@@ -429,8 +429,9 @@ const vertexProvider = {
   }
 };
 
-/* ---- Runware (owner, 2026-11-14: Vertex credits ran out, Runware credits are available). Same Gemini
- *      models through Runware's AIR ids; text via Chat Completions, image/audio via the native task API.
+/* ---- Runware (owner, 2026-11-14: Vertex credits ran out, Runware credits are available). Text and
+ *      images on GPT-6 Luna via Chat Completions (cheapest, owner 2026-11-14); audio/PDF on Gemini 3.1 Flash
+ *      Lite via the native task API. Models: RUNWARE_MODEL / RUNWARE_NATIVE_MODEL.
  *      Transport + translation in functions/_runware.js; replies come back in Gemini's shape, so
  *      parseCandidates, finish-reason handling and usage metering are unchanged. Off unless
  *      RUNWARE_API_KEY is set. ---- */
@@ -450,7 +451,7 @@ const runwareProvider = {
   // Text only (OpenAI SSE; functions/_sse_parse.js reads it). A media request is not streamed here.
   streamFetch: function (env, parts, maxTokens, opts) {
     const o = opts || {};
-    if (hasMedia(parts)) return Promise.resolve(new Response(null, { status: 415 }));
+    if (needsNative(parts)) return Promise.resolve(new Response(null, { status: 415 }));
     return runwareStreamFetch(env, parts, Object.assign(runwareOpts(env, maxTokens, o), { signal: o.signal }));
   }
 };

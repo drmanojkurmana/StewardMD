@@ -12409,3 +12409,6 @@ shared `callGemini` transport, same Gemini models via AIR ids, off unless `RUNWA
 FundX/embeddings/PrepNucleus still Google-only. See [[AI Control Center]].
 - Extended same day (owner: "Runware has all models as google, why not"): image/audio go through Runware's native task API;
   FundX, PrepNucleus and verify-doctor now include Runware. Embeddings and WardSynQ/Connect stay Google-only (see note).
+- Live-checked same day; owner: "use the cheapest model". Text and images on GPT-6 Luna ($0.10/$0.50 per 1M, about 3x
+  cheaper than Gemini 3.1 Flash Lite, answers checked); audio/PDF on Gemini 3.1 Flash Lite (Luna cannot hear audio).
+  Gemma 4 31B is slightly cheaper on output but weaker for clinical answers, so not chosen.

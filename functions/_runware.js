@@ -1,12 +1,16 @@
 /* _runware.js — Runware transport shared by every AI path that used Google directly (owner, 2026-11-14:
  * Vertex credits exhausted, Runware credits available). Same Gemini models, Runware AIR ids.
  *
- * Two Runware surfaces:
- *  - TEXT: OpenAI-compatible Chat Completions (https://api.runware.ai/v1/chat/completions), streaming as
- *    OpenAI SSE. Documented with examples.
- *  - MEDIA (image / audio / pdf): Runware's native task API (POST https://api.runware.ai/v1, taskType
- *    "textInference"), whose model schema documents inputs.images / inputs.audios / inputs.documents.
- *    Chat Completions does not document media parts, so media never goes there.
+ * Two Runware surfaces (shapes checked against the live API, 2026-11-14):
+ *  - TEXT + IMAGE: OpenAI-compatible Chat Completions (https://api.runware.ai/v1/chat/completions),
+ *    streaming as OpenAI SSE. Images ride as image_url parts (data URI). Default model GPT-6 Luna
+ *    (openai:gpt@6-luna, $0.10 in / $0.50 out per 1M tokens): the cheapest strong model on Runware
+ *    (owner: cheapest model). It is "compatible-only": the native API rejects it.
+ *  - AUDIO / PDF: Runware's native task API (POST https://api.runware.ai/v1, taskType "textInference",
+ *    inputs.audios / inputs.documents as raw base64). Luna cannot hear audio, so these go to Gemini 3.1
+ *    Flash Lite ($0.25 / $1.50), the cheapest model the native API accepts with audio.
+ *    Runware has no Gemini 2.x and no native Gemini 3.5 Flash Lite / 3.6 Flash, so the callers' Google
+ *    model names are not mapped; only an explicit AIR id ("vendor:name@ver") from a caller is used.
  * Replies are returned in Gemini's shape so callers keep one parser. Key: RUNWARE_API_KEY (Cloudflare
  * secret, never in the repo). Nothing here logs content. */
 
@@ -16,15 +20,24 @@ export const RUNWARE_TASK_URL = "https://api.runware.ai/v1";
 export function runwareKey(env) { return String((env && env.RUNWARE_API_KEY) || "").trim(); }
 export function runwareAvailable(env) { return !!runwareKey(env); }
 
-/* gemini-3.1-flash-lite -> google:gemini@3.1-flash-lite. RUNWARE_MODEL pins one AIR id for every call;
- * an id that already looks like an AIR id (has ":" and "@") is passed through. */
-export function runwareModel(env, model) {
-  const pin = String((env && env.RUNWARE_MODEL) || "").trim();
+export const RUNWARE_DEFAULT_MODEL = "openai:gpt@6-luna";
+export const RUNWARE_DEFAULT_NATIVE_MODEL = "google:gemini@3.1-flash-lite";
+function isAir(m) { return m.indexOf(":") > 0 && m.indexOf("@") > 0; }
+/* Text/image calls: RUNWARE_MODEL, else the caller's AIR id, else GPT-6 Luna. Audio/PDF calls (native):
+ * RUNWARE_NATIVE_MODEL, else Gemini 3.1 Flash Lite. A Google model name (gemini-2.5-flash) is ignored. */
+export function runwareModel(env, model, native) {
+  const pin = String((env && env[native ? "RUNWARE_NATIVE_MODEL" : "RUNWARE_MODEL"]) || "").trim();
   if (pin) return pin;
   const m = String(model || "");
-  if (m.indexOf(":") > 0 && m.indexOf("@") > 0) return m;
-  const g = /^gemini-(.+)$/.exec(m);
-  return g ? "google:gemini@" + g[1] : m;
+  if (!native && isAir(m)) return m;
+  return native ? RUNWARE_DEFAULT_NATIVE_MODEL : RUNWARE_DEFAULT_MODEL;
+}
+/* reasoning_effort for Chat Completions: "none" by default (hidden reasoning is billed as output and
+ * eats max_completion_tokens; Luna and Gemini both accept "none"). RUNWARE_REASONING overrides; "off"
+ * omits the field for a pinned model that rejects it. */
+function reasoningEffort(env) {
+  const r = String((env && env.RUNWARE_REASONING) || "").trim().toLowerCase();
+  return r === "off" ? "" : (r || "none");
 }
 
 function partMedia(p) {
@@ -33,14 +46,28 @@ function partMedia(p) {
   return { mime: String(inl.mime_type || inl.mimeType || ""), data: String(inl.data || "") };
 }
 export function hasMedia(parts) { return (parts || []).some(function (p) { return !!partMedia(p); }); }
+/* Audio or a document (PDF): only the native task API takes these. Images do not need it. */
+export function needsNative(parts) {
+  return (parts || []).some(function (p) { const m = partMedia(p); return !!m && m.mime.indexOf("image/") !== 0; });
+}
 
-/* Chat Completions body from Gemini-style inputs. Text parts only. */
+/* Chat Completions body from Gemini-style inputs. Text parts, plus images as image_url parts. */
 export function chatBody(model, parts, o) {
-  const text = (parts || []).map(function (p) { return (p && typeof p.text === "string") ? p.text : ""; }).join("\n\n");
+  const text = [], images = [];
+  for (const p of (parts || [])) {
+    if (p && typeof p.text === "string") { text.push(p.text); continue; }
+    const m = partMedia(p);
+    if (m && m.mime.indexOf("image/") === 0) images.push("data:" + m.mime + ";base64," + m.data);
+  }
   const messages = [];
   if (o.system) messages.push({ role: "system", content: String(o.system) });
-  messages.push({ role: "user", content: text });
-  const b = { model: model, messages: messages, temperature: typeof o.temperature === "number" ? o.temperature : 0.2, max_tokens: o.maxTokens || 1024 };
+  const t = text.join("\n\n");
+  messages.push({ role: "user", content: images.length
+    ? [{ type: "text", text: t || "." }].concat(images.map(function (u) { return { type: "image_url", image_url: { url: u } }; }))
+    : t });
+  // max_completion_tokens: OpenAI models reject max_tokens; Gemini accepts both (live-checked).
+  const b = { model: model, messages: messages, temperature: typeof o.temperature === "number" ? o.temperature : 0.2, max_completion_tokens: o.maxTokens || 1024 };
+  if (o.reasoning) b.reasoning_effort = o.reasoning;
   if (o.json) b.response_format = { type: "json_object" };
   if (o.stream) { b.stream = true; b.stream_options = { include_usage: true }; }
   return b;
@@ -50,13 +77,16 @@ export function chatBody(model, parts, o) {
  * inputs.images (data URI) / inputs.audios / inputs.documents (base64). thinkingLevel "minimal": the
  * Google paths send thinkingBudget 0 for the same reason (hidden thinking eats the output budget). */
 export function nativeTask(model, parts, o, uuid) {
-  const text = [], images = [], audios = [], docs = [];
+  const text = [], images = [], audios = [], videos = [], docs = [];
   for (const p of (parts || [])) {
     if (p && typeof p.text === "string") { text.push(p.text); continue; }
     const m = partMedia(p);
     if (!m) continue;
     if (m.mime.indexOf("image/") === 0) images.push("data:" + m.mime + ";base64," + m.data);
-    else if (m.mime.indexOf("audio/") === 0 || m.mime.indexOf("video/webm") === 0) audios.push(m.data);
+    // WebM (Android WebView dictation) is sniffed as video/webm and refused in inputs.audios; as a
+    // video Gemini transcribes its audio track at the same token cost (live-checked 2026-11-14).
+    else if (m.mime.indexOf("webm") >= 0) videos.push(m.data);
+    else if (m.mime.indexOf("audio/") === 0) audios.push(m.data);
     else docs.push(m.data);
   }
   const t = { taskType: "textInference", taskUUID: uuid, model: model, messages: [{ role: "user", content: text.join("\n\n") || "." }],
@@ -67,6 +97,7 @@ export function nativeTask(model, parts, o, uuid) {
   const inputs = {};
   if (images.length) inputs.images = images;
   if (audios.length) inputs.audios = audios;
+  if (videos.length) inputs.videos = videos;
   if (docs.length) inputs.documents = docs;
   if (Object.keys(inputs).length) t.inputs = inputs;
   return t;
@@ -122,10 +153,10 @@ function uuid() {
  * Returns { status, data } with data already in Gemini's shape. Throws only on network/abort. */
 export async function runwareGenerate(env, parts, o, fetchImpl) {
   const f = fetchImpl || fetch;
-  const model = runwareModel(env, o.model);
-  const media = hasMedia(parts);
+  const media = needsNative(parts);
+  const model = runwareModel(env, o.model, media);
   const url = media ? RUNWARE_TASK_URL : RUNWARE_CHAT_URL;
-  const body = media ? [nativeTask(model, parts, o, uuid())] : chatBody(model, parts, o);
+  const body = media ? [nativeTask(model, parts, o, uuid())] : chatBody(model, parts, Object.assign({}, o, { reasoning: reasoningEffort(env) }));
   let ctl = null, tm = null;
   if (!o.signal && o.timeoutMs) { ctl = new AbortController(); tm = setTimeout(function () { try { ctl.abort(); } catch (e) {} }, o.timeoutMs); }
   try {
@@ -139,8 +170,8 @@ export async function runwareGenerate(env, parts, o, fetchImpl) {
   } finally { if (tm) clearTimeout(tm); }
 }
 
-/* Streaming (text only): the raw upstream Response, OpenAI SSE. functions/_sse_parse.js reads it. */
+/* Streaming (text and image): the raw upstream Response, OpenAI SSE. functions/_sse_parse.js reads it. */
 export function runwareStreamFetch(env, parts, o) {
   return fetch(RUNWARE_CHAT_URL, { method: "POST", headers: { "Authorization": "Bearer " + runwareKey(env), "Content-Type": "application/json" },
-    body: JSON.stringify(chatBody(runwareModel(env, o.model), parts, Object.assign({}, o, { stream: true }))), signal: o.signal });
+    body: JSON.stringify(chatBody(runwareModel(env, o.model, false), parts, Object.assign({}, o, { stream: true, reasoning: reasoningEffort(env) }))), signal: o.signal });
 }
