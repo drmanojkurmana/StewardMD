@@ -32,6 +32,8 @@ const J = async (e) => { const v = await ev(e); try { return JSON.parse(v); } ca
 
 const BOOT = `
   window.__calls = []; window.__dlCbs = []; window.__probes = 0; window.__checks = []; window.__missing = 2; window.__failDelta = false;
+  // Delta is opt-in since 2026-11-14 (the pre-scan hashed 574 MB before a byte moved); this suite tests it, so it opts in.
+  try { if (localStorage.getItem("__deltaOff") !== "1") localStorage.setItem("smd_ota_delta", "1"); } catch (e) {}
   var FILES = []; for (var i = 0; i < 10; i++) FILES.push({ path: "f" + i + ".js", hash: "h" + i, size: (i < 2 ? 5 : 1) * 1048576 });
   var FAKE_UPDATER = {
     notifyAppReady: function () { return Promise.resolve({}); },
@@ -135,6 +137,13 @@ try {
   await sleep(1500);
   const old = await J(`var d = window.__calls.filter(function (x) { return x[0] === "download"; }); return JSON.stringify({ n: d.length, o: d[0][1], asked: window.__calls.some(function (x) { return x[0] === "missing"; }) });`);
   ok(old.n === 1 && old.o.manifest === undefined && old.asked === false, "an older plugin build without getMissingBundleFiles uses the zip");
+  await ev(`window.__finishDownload(); return 1;`);
+
+  // ---- default (no opt-in): straight to the single download, no file scan, no per-file list ----
+  await ev(startCard("localStorage.removeItem('smd_ota_delta'); window.__checks = [];"));
+  await sleep(1500);
+  const def = await J(`var d = window.__calls.filter(function (x) { return x[0] === "download"; }); return JSON.stringify({ n: d.length, o: d[0][1], asked: window.__calls.some(function (x) { return x[0] === "missing"; }), files1: window.__checks.some(function (u) { return u.indexOf("files=1") !== -1; }) });`);
+  ok(def.n === 1 && def.o.manifest === undefined && def.o.checksum === "ab12" && def.asked === false && def.files1 === false, "by default the update is ONE download: no file scan, no per-file list (" + JSON.stringify(def) + ")");
   await ev(`window.__finishDownload(); return 1;`);
 } catch (e) { console.log("❌ harness: " + (e && e.stack || e)); fails++; }
 finally { try { chrome.kill(); } catch {} try { serveProc && serveProc.kill(); } catch {} }

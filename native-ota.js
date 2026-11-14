@@ -330,7 +330,15 @@
     try {
       if (onProgress && p.addListener) p.addListener("download", onEvent).then(function (h) { offDl = h; });
     } catch (e) {}
-    return planDelta(p, pending).then(function (pl) {
+    /* SINGLE DOWNLOAD BY DEFAULT (owner, 2026-11-14: "update download takes hours to start ... 235 MB from R2
+     * takes 5 s on my network, here 10 min"). The delta path is slow on THIS app before a byte moves:
+     * getMissingBundleFiles sha256-hashes every installed file (about 11,900 files, 574 MB) serially at utility
+     * priority, the check with files=1 signs one URL per file on the server, and download() then re-hashes
+     * every installed file again and fetches each missing file as its own request. The zip is ONE request at
+     * full link speed from the edge-cached R2 object, then one unzip. Delta stays available for testing with
+     * localStorage smd_ota_delta = "1". */
+    var wantDelta = false; try { wantDelta = localStorage.getItem("smd_ota_delta") === "1"; } catch (e) {}
+    return (wantDelta ? planDelta(p, pending) : Promise.resolve(null)).then(function (pl) {
       if (pl && pl.missingN < pl.files) {   // some files reusable: the delta path is a real saving
         plan = pl; mode = "delta";
         meter = onProgress ? makeMeter(plan.bytes, true) : null;

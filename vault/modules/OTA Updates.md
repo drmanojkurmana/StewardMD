@@ -223,3 +223,13 @@ Owner, iPad: a full-width slab over the tools reading "Starting...", then "0.0 o
   with the percent; "Later" becomes "Hide" (the download continues). The background check now passes
   `zipSize`, so the zip path has a total and its speed probe runs from the banner too.
 - `run-native-ota-ui.mjs` has 5 failures that predate this (same on main without the change).
+
+## Single download by default (2026-11-14)
+Owner: "update download takes hours to start ... 235 MB from R2 takes 5 s on my network, here 10 min".
+The delta path cost minutes before a byte moved: `getMissingBundleFiles` sha256-hashes every installed file
+(~11,900 files, 574 MB in www/) serially at `.utility` QoS (CapacitorUpdaterPlugin.swift), the files=1 check
+signs one URL per file on the server, and `downloadManifest` re-hashes each installed file again before
+fetching each missing file as its own request (8-16 at a time). `install()` now goes straight to the zip:
+one request from the edge-cached R2 object, then one unzip. Delta is opt-in (`localStorage smd_ota_delta =
+"1"`) and `run-ota-delta-ui.mjs` opts in, plus a check that the default asks for no scan and no file list.
+Trade-off: iOS reports no bytes during a zip download, so the card's MB figure is the speed-probe estimate.
