@@ -12407,3 +12407,5 @@ Owner: Vertex credits are done; use the Runware key (USD 200+ credit). Decision:
 shared `callGemini` transport, same Gemini models via AIR ids, off unless `RUNWARE_API_KEY` is set, first only with
 `AI_PROVIDER=runware`. Reversible by unsetting the env. Open: privacy policy/processor disclosure, Runware ZDR for Gemini,
 FundX/embeddings/PrepNucleus still Google-only. See [[AI Control Center]].
+- Extended same day (owner: "Runware has all models as google, why not"): image/audio go through Runware's native task API;
+  FundX, PrepNucleus and verify-doctor now include Runware. Embeddings and WardSynQ/Connect stay Google-only (see note).

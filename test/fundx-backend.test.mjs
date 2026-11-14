@@ -49,7 +49,7 @@ ok("router: FUNDX_PRIMARY override puts primary first", AI.routeOrder({ FUNDX_PR
 ok("router: developer primary is DROPPED in production", AI.routeOrder({ FUNDX_PRIMARY: "developer" }, "clinical").indexOf("developer") < 0);
 ok("router: developer primary honored in dev", AI.routeOrder({ FUNDX_PRIMARY: "developer", FUNDX_ENV: "development" }, "clinical")[0] === "developer");
 ok("router: primary + secondary then base fallback (deduped)", (function () { const o = AI.routeOrder({ FUNDX_PRIMARY: "cerebras", FUNDX_SECONDARY: "vertex" }, "clinical"); return o[0] === "cerebras" && o[1] === "vertex" && new Set(o).size === o.length; })());
-ok("capabilities: all providers, structured JSON, no streaming", AI.capabilities({}).length === 3 && AI.capabilities({}).every((c) => c.structuredJson === true && c.streaming === false));
+ok("capabilities: all providers, structured JSON, no streaming", AI.capabilities({}).length === 4 && AI.capabilities({}).every((c) => c.structuredJson === true && c.streaming === false));
 ok("capabilities: only vision-capable providers expose imageInput", AI.capabilities({}).find((c) => c.name === "cerebras").imageInput === false && AI.capabilities({}).find((c) => c.name === "vertex").imageInput === true);
 ok("cost: estTokens ~ chars/4", AI.estTokens("abcd".repeat(25)) === 25);
 ok("cost: estCostUsd non-negative + provider-specific", AI.estCostUsd("vertex", 1000, 1000, {}) > 0 && AI.estCostUsd("cerebras", 1000, 1000, {}) !== AI.estCostUsd("vertex", 1000, 1000, {}));

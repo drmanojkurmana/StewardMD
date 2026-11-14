@@ -16,6 +16,7 @@
  */
 
 import { ACCURATE_MODEL, envModel } from "./_ai_usage.js";
+import { runwareAvailable, runwareGenerate } from "./_runware.js";
 
 // Image reading stays on ACCURATE_MODEL (gemini-3.5-flash-lite, priced like the old gemini-2.5-flash),
 // never the cheap text default. Every 2.5 model retires on Vertex on 2026-10-16.
@@ -184,7 +185,27 @@ const cerebrasProvider = {
     }, timeoutMs(env));
   }
 };
-export const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, cerebras: cerebrasProvider };
+// Runware (2026-11-14, Vertex credits exhausted): the same Gemini model via functions/_runware.js; the
+// fundus image goes through Runware's native task API (inputs.images). JSON output, temperature 0.1.
+const runwareProvider = {
+  name: "runware", modalities: ["vision", "text"],
+  available: (env) => runwareAvailable(env),
+  generate: async (env, req, opts) => {
+    const parts = [{ text: req.user }];
+    if (req.imageDataUrl) { const im = splitDataUrl(req.imageDataUrl); parts.push({ inlineData: { mimeType: im.mimeType, data: im.data } }); }
+    const r = await runwareGenerate(env, parts, { model: modelId(env), system: req.system, temperature: 0.1, maxTokens: (opts && opts.maxTokens) || 1024, json: true, timeoutMs: timeoutMs(env) });
+    if (r.status >= 400 || (r.data && r.data.error)) throw new Error("runware HTTP " + r.status);
+    return geminiText(r.data);
+  }
+};
+export const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, cerebras: cerebrasProvider, runware: runwareProvider };
+// Runware joins every order once its key is set: first under FUNDX_AI_PROVIDER / AI_PROVIDER = runware,
+// otherwise last.
+function withRunware(order, env) {
+  if (!runwareAvailable(env)) return order;
+  const sel = String((env && (env.FUNDX_AI_PROVIDER || env.AI_PROVIDER)) || "").toLowerCase();
+  return sel === "runware" ? ["runware"].concat(order) : order.concat(["runware"]);
+}
 
 // Selection: Vertex primary → developer failover (vision); clinical honours FUNDX_CLINICAL_PROVIDER.
 // Priority: Vertex (primary) → Developer (DEV-ONLY, filtered in production) → Cerebras
@@ -193,13 +214,13 @@ function dropDevInProd(order, env) { return isProduction(env) ? order.filter((p)
 export function visionOrder(env) {
   const p = String((env && env.FUNDX_VISION_PROVIDER) || (env && env.FUNDX_AI_PROVIDER) || "vertex").toLowerCase();
   if (p === "developer" && !isProduction(env)) return ["developer"];
-  return dropDevInProd(["vertex", "developer"], env);          // prod → ["vertex"]
+  return withRunware(dropDevInProd(["vertex", "developer"], env), env);          // prod → ["vertex"]
 }
 export function clinicalOrder(env) {
   const p = String((env && env.FUNDX_CLINICAL_PROVIDER) || (env && env.FUNDX_AI_PROVIDER) || "vertex").toLowerCase();
-  if (p === "cerebras") return dropDevInProd(["cerebras", "vertex", "developer"], env);   // explicit manual override
+  if (p === "cerebras") return withRunware(dropDevInProd(["cerebras", "vertex", "developer"], env), env);   // explicit manual override
   if (p === "developer" && !isProduction(env)) return ["developer"];
-  return dropDevInProd(["vertex", "developer", "cerebras"], env);   // prod → ["vertex","cerebras"] (Cerebras LAST)
+  return withRunware(dropDevInProd(["vertex", "developer", "cerebras"], env), env);   // prod → ["vertex","cerebras"] (Cerebras LAST)
 }
 
 /* ---------- pure helpers (validation / prompts / extraction / normalization) ---------- */

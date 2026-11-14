@@ -34,6 +34,7 @@
 // AI transport config. Selection ONLY via env.AI_PROVIDER ("vertex" [primary, default]
 // | "developer"). Model via env.GEMINI_MODEL (default MODEL_HARD_DEFAULT, gemini-3.1-flash-lite; a retiring
 // model named there is ignored, see envModel in _ai_usage.js).
+import { runwareAvailable, runwareKey, runwareGenerate, runwareStreamFetch, runwareToGemini, hasMedia } from "../../_runware.js";
 import MaiKScope from "../../../kb/ai/maik-scope.js"; // shared clinician-only Intent Firewall (CJS UMD, default import)
 
 const DEV_HOST = "https://generativelanguage.googleapis.com/v1beta/models";
@@ -428,83 +429,32 @@ const vertexProvider = {
   }
 };
 
-/* ---- Runware — OpenAI-compatible Chat Completions (owner, 2026-11-14: Vertex credits ran out, Runware
- *      credits are available). Same Gemini models, served through Runware's AIR ids. The call is built from
- *      the SAME genBody the Google providers send, then translated, and the reply is translated back into
- *      Gemini's shape, so parseCandidates, finish-reason handling and usage metering are unchanged.
- *      Key: RUNWARE_API_KEY (Cloudflare secret, never in the repo). Off unless the key is set. ---- */
-const RUNWARE_URL = "https://api.runware.ai/v1/chat/completions";
-function runwareKey(env) { return String((env && env.RUNWARE_API_KEY) || "").trim(); }
-/* gemini-3.1-flash-lite -> google:gemini@3.1-flash-lite. RUNWARE_MODEL pins one AIR id for every call;
- * an id that already looks like an AIR id (has ":" and "@") is passed through. */
-function runwareModel(env, opts) {
-  const pin = String((env && env.RUNWARE_MODEL) || "").trim();
-  if (pin) return pin;
-  const m = String(modelFor(env, opts) || "");
-  if (m.indexOf(":") > 0 && m.indexOf("@") > 0) return m;
-  const g = /^gemini-(.+)$/.exec(m);
-  return g ? "google:gemini@" + g[1] : m;
-}
-function runwareBody(parts, maxTokens, opts, stream) {
-  const o = opts || {};
-  const g = genBody(parts, maxTokens, o);
-  const content = [];
-  for (const p of (g.contents[0].parts || [])) {
-    if (p && typeof p.text === "string") { content.push({ type: "text", text: p.text }); continue; }
-    const inl = p && (p.inline_data || p.inlineData);
-    const mime = inl && String(inl.mime_type || inl.mimeType || "");
-    if (inl && mime.indexOf("image/") === 0) { content.push({ type: "image_url", image_url: { url: "data:" + mime + ";base64," + inl.data } }); continue; }
-    // Audio / other media: not part of the Chat Completions contract here. A non-400 error, so the
-    // caller fails over to a Google provider instead of failing the request outright.
-    const e = new Error("runware: unsupported part " + (mime || "unknown")); e.status = 415; throw e;
-  }
-  const messages = [];
-  if (g.systemInstruction) messages.push({ role: "system", content: g.systemInstruction.parts.map(function (x) { return x.text || ""; }).join("") });
-  messages.push({ role: "user", content: content.length === 1 && content[0].type === "text" ? content[0].text : content });
-  const b = { messages: messages, temperature: g.generationConfig.temperature, max_tokens: g.generationConfig.maxOutputTokens };
-  if (o.json || o.schema) b.response_format = { type: "json_object" };
-  if (stream) { b.stream = true; b.stream_options = { include_usage: true }; }
-  return b;
-}
-const RW_FINISH = { stop: "STOP", length: "MAX_TOKENS", content_filter: "SAFETY", tool_calls: "STOP" };
-export function runwareUsage(u) {
-  if (!u) return null;
-  const d = u.completion_tokens_details || {};
-  return { promptTokenCount: u.prompt_tokens || 0, candidatesTokenCount: u.completion_tokens || 0,
-           thoughtsTokenCount: d.reasoning_tokens || 0, totalTokenCount: u.total_tokens || 0,
-           cachedContentTokenCount: (u.prompt_tokens_details && u.prompt_tokens_details.cached_tokens) || 0 };
-}
-/* OpenAI reply -> Gemini reply. Errors keep { error: { message } } so parseCandidates throws the usual way. */
-export function runwareToGemini(data) {
-  if (!data || typeof data !== "object") return data;
-  if (data.error || (Array.isArray(data.errors) && data.errors.length)) {
-    const er = data.error || data.errors[0] || {};
-    return { error: { message: String(er.message || er.code || "runware error") } };
-  }
-  const ch = data.choices && data.choices[0];
-  if (!ch) return { candidates: [], usageMetadata: runwareUsage(data.usage) };
-  const msg = ch.message || {};
-  const text = typeof msg.content === "string" ? msg.content : Array.isArray(msg.content) ? msg.content.map(function (x) { return (x && x.text) || ""; }).join("") : "";
-  return { candidates: [{ content: { parts: [{ text: text }] }, finishReason: RW_FINISH[ch.finish_reason] || String(ch.finish_reason || "").toUpperCase() }], usageMetadata: runwareUsage(data.usage) };
+/* ---- Runware (owner, 2026-11-14: Vertex credits ran out, Runware credits are available). Same Gemini
+ *      models through Runware's AIR ids; text via Chat Completions, image/audio via the native task API.
+ *      Transport + translation in functions/_runware.js; replies come back in Gemini's shape, so
+ *      parseCandidates, finish-reason handling and usage metering are unchanged. Off unless
+ *      RUNWARE_API_KEY is set. ---- */
+function runwareOpts(env, maxTokens, o) {
+  return { model: modelFor(env, o), system: o.system, temperature: o.temperature, maxTokens: maxTokens || 1024, json: !!(o.json || o.schema) };
 }
 const runwareProvider = {
   name: "runware",
-  available: function (env) { return !!runwareKey(env); },
+  available: function (env) { return runwareAvailable(env); },
   generate: async function (env, parts, maxTokens, opts) {
     const o = opts || {};
-    const jr = await fetchJsonWithTimeout(RUNWARE_URL, { method: "POST", headers: { "Authorization": "Bearer " + runwareKey(env), "Content-Type": "application/json" },
-      body: JSON.stringify(Object.assign({ model: runwareModel(env, o) }, runwareBody(parts, maxTokens, o, false))) }, o.timeoutMs || aiTimeoutMs(env));
-    const _t = parseCandidates(runwareToGemini(jr.data), jr.status, o.meta);
-    if (o.meta) o.meta.model = runwareModel(env, o);
+    const r = await runwareGenerate(env, parts, Object.assign(runwareOpts(env, maxTokens, o), { timeoutMs: o.timeoutMs || aiTimeoutMs(env) }));
+    const _t = parseCandidates(r.data, r.status, o.meta);
+    if (o.meta) o.meta.model = r.model;
     return _t;
   },
-  // OpenAI-format SSE; functions/_sse_parse.js reads both Gemini and OpenAI frames.
+  // Text only (OpenAI SSE; functions/_sse_parse.js reads it). A media request is not streamed here.
   streamFetch: function (env, parts, maxTokens, opts) {
     const o = opts || {};
-    return fetch(RUNWARE_URL, { method: "POST", headers: { "Authorization": "Bearer " + runwareKey(env), "Content-Type": "application/json" },
-      body: JSON.stringify(Object.assign({ model: runwareModel(env, o) }, runwareBody(parts, maxTokens, o, true))), signal: o.signal });
+    if (hasMedia(parts)) return Promise.resolve(new Response(null, { status: 415 }));
+    return runwareStreamFetch(env, parts, Object.assign(runwareOpts(env, maxTokens, o), { signal: o.signal }));
   }
 };
+export { runwareToGemini };
 
 const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, runware: runwareProvider };
 
@@ -628,7 +578,13 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
 }
 function providerOrder(env, opts) {
   // opts.providers pins the list (PrepNucleus is Vertex-only, so its labels reach Cloud Billing).
-  if (opts && Array.isArray(opts.providers) && opts.providers.length) return opts.providers.filter(function (n) { return n === "vertex" || n === "developer"; });
+  // With a Runware key set, Runware follows the pin (first under AI_PROVIDER=runware), so a pinned
+  // caller still answers while Vertex is out of credit. Runware calls carry no billing labels.
+  if (opts && Array.isArray(opts.providers) && opts.providers.length) {
+    const pin = opts.providers.filter(function (n) { return n === "vertex" || n === "developer"; });
+    if (!runwareKey(env)) return pin;
+    return String(env.AI_PROVIDER || "").toLowerCase() === "runware" ? ["runware"].concat(pin) : pin.concat(["runware"]);
+  }
   // Owner, 2026-09-24: Vertex is the main provider and the Gemini (AI Studio) key is the fallback.
   // AI_PROVIDER=vertex (default) -> Vertex then Developer; any other value -> Developer then Vertex.
   // AI_PROVIDER=runware -> Runware first, Google after. Otherwise Runware, when its key is set, is the

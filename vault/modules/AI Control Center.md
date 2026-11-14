@@ -69,13 +69,18 @@ cost (75% payout). A raw rupee top-up via `addCredits` still uses `CREDIT_CONVER
 confirm the packs' margin before launch — see [[Decisions]].
 
 ## Runware provider (2026-11-14, Vertex credits exhausted)
-`runwareProvider` in `functions/api/ai/[[path]].js`: OpenAI-compatible `https://api.runware.ai/v1/chat/completions`,
-Bearer `RUNWARE_API_KEY` (Cloudflare secret). Request built from the same `genBody`, reply translated back to Gemini shape,
-so metering/finish-reason code is unchanged; `_sse_parse.js` reads OpenAI SSE frames too. Model: `gemini-X` -> `google:gemini@X`,
-or `RUNWARE_MODEL` pins one AIR id. Order: `AI_PROVIDER=runware` -> runware, vertex, developer; otherwise runware (key set) is
-last resort. Images go as `image_url` data URLs (unverified on Runware); audio fails over to Google. Covers every `callGemini`
-caller (MaiK, ThoreX, Onco, SknX, FollowCare, digest, summary). NOT covered: FundX (`_fundx_ai.js`), embeddings
-(`api/retrieve`), PrepNucleus (pinned to vertex), WardSynQ gateway, Connect agent, verify-doctor, voice-worker.
+Shared transport `functions/_runware.js`. Text: OpenAI-compatible `https://api.runware.ai/v1/chat/completions` (streams as
+OpenAI SSE; `_sse_parse.js` reads both formats). Image/audio/pdf: native task API `POST https://api.runware.ai/v1`,
+`taskType: "textInference"`, `inputs.images` (data URI) / `inputs.audios` / `inputs.documents` (base64),
+`settings.thinkingLevel: "minimal"`. Replies are translated to Gemini's shape. Bearer `RUNWARE_API_KEY` (Cloudflare secret).
+Model: `gemini-X` -> `google:gemini@X`; `RUNWARE_MODEL` pins one AIR id for all calls.
+Order: `AI_PROVIDER=runware` puts Runware first everywhere; otherwise (key set) it is the last fallback.
+Wired into: `callGemini` (MaiK, Ask, Scribe/transcribe audio, vision/OCR, ThoreX, Onco, SknX, FollowCare, digest, summary),
+PrepNucleus (its `providers:["vertex"]` pin now gets Runware added), FundX (`_fundx_ai.js` provider `runware`, honours
+`FUNDX_AI_PROVIDER`), verify-doctor (fallback after the AI Studio key, model `VERIFY_RUNWARE_MODEL` or `ACCURATE_MODEL`).
+Not wired, on purpose: KB embeddings (`api/retrieve`, Runware has no embeddings; client degrades to lexical),
+WardSynQ gateway + Connect agent (per-hospital approved provider registry, flags OFF). voice-worker never used Vertex
+(Sarvam + AI Studio key). Native-API media and the AIR ids are from Runware docs, not yet confirmed by a live call.
 Test: `test/ai-runware-provider.test.mjs`. Privacy text still names Google Vertex as processor: update before relying on it.
 
 ## Runtime-editable knobs (no redeploy, KV-backed, owner console)
