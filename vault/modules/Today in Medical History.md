@@ -108,3 +108,6 @@ The banner flip animation classes are `th-flipout` / `th-flipin`. They were `th-
 
 ## Swipe in both directions (2026-11-13, th19)
 Owner: the banner area flips on any swipe; the rest of the page scrolls. The axis locks on the first 8 px: sideways turns about the vertical axis (rotateY), up or down tumbles top to bottom (rotateX, a drag down brings the top edge toward you). The banner is `touch-action: none`, so a scroll cannot start on it. Vertical pull for a full turn is 1.5x the card height (min 150 px).
+
+## No CTA on the face (2026-11-13, th21)
+Owner removed "Tap to explore". The whole banner is the tap target (aria-label still says so). The picture is centred top to bottom in the right column (10 px padding, like the text), and the text stops before it.
