@@ -130,8 +130,11 @@
    * 1 to 69 band, 70 = file landed on iOS) the meter switches to those and drops the "about". No traffic is spent when
    * nobody is watching (the silent auto-update path passes no onProgress). */
   function makeMeter(total, delta) {
-    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [], t0 = Date.now(), samples = 0, err = "", xb = 0, xt = Date.now();
+    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [], t0 = Date.now(), samples = 0, err = "", xb = 0, xt = Date.now(), fileFrac = null;
     var m = {
+      // Delta mode: the fraction of ALL manifest files the plugin has finished (copied from the device or
+      // downloaded). It is the one figure the plugin reports exactly, so the bar follows it.
+      files: function (frac) { if (frac >= 0 && frac <= 1) fileFrac = Math.max(fileFrac || 0, frac); },
       sample: function (bytes, ms) {
         if (!(bytes > 0 && ms > 0)) return;
         var s = bytes * 1000 / ms; speed = speed ? speed * 0.6 + s * 0.4 : s; lastOk = Date.now(); samples++; err = "";
@@ -158,7 +161,7 @@
         var sp = stalled ? 0 : speed;
         return { bytes: bytes, total: total, pct: total ? Math.min(100, Math.round(bytes * 100 / total)) : 0, speed: sp,
           eta: sp > 0 && total ? Math.max(0, (total - bytes) / sp) : null, est: exact == null,
-          phase: stalled ? "waiting" : phase, history: hist.slice(), samples: samples, err: err, elapsed: Math.max(0, now - t0), delta: !!delta };
+          phase: stalled ? "waiting" : phase, history: hist.slice(), samples: samples, err: err, elapsed: Math.max(0, now - t0), delta: !!delta, fileFrac: fileFrac };
       }
     };
     return m;
@@ -210,7 +213,8 @@
   }
   function fmtMB(b) { return (Math.round(b / 104857.6) / 10).toFixed(1); }
   function fmtSpeed(b) { return b >= 1048576 ? (Math.round(b / 104857.6) / 10).toFixed(1) + " MB/s" : Math.round(b / 1024) + " KB/s"; }
-  function fmtEta(s) { if (s == null) return "working it out"; if (s < 90) return "about " + Math.max(1, Math.round(s)) + " s left"; return "about " + Math.round(s / 60) + " min left"; }
+  function fmtInt(n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  function fmtEta(s) { if (s == null) return "downloading"; if (s < 90) return "about " + Math.max(1, Math.round(s)) + " s left"; return "about " + Math.round(s / 60) + " min left"; }
 
   // install(pending, onProgress): downloads + applies. `immediate` (default true) reloads right
   // away via set() — the right choice for an explicit tap ("Update now" / "Download & install").
@@ -274,7 +278,7 @@
         : phase === "install" ? "Installing\u2026"
         : "Restarting to finish\u2026";
       var info = null;
-      if (meter) { info = meter.read(Date.now(), phase); if (mode === "delta") { info.full = pending.zipSize || 0; info.files = plan.missingN; info.reused = plan.reused; } }
+      if (meter) { info = meter.read(Date.now(), phase); if (mode === "delta") { info.full = pending.zipSize || 0; info.files = plan.missingN; info.reused = plan.reused; info.allFiles = plan.files; } }
       try { onProgress(pct, label, info); } catch (e) {}
     }
     function useZip() {
@@ -289,6 +293,7 @@
         // iOS: 10..70 over ALL manifest files (reused ones count). Android: percent of files, 10..70 clamp, so 70 can
         // arrive early and means nothing; there only the download() promise ends the phase.
         var done = ios ? (pct - 10) / 60 : pct / 100;
+        if (meter && pct > 0) meter.files(Math.max(0, Math.min(1, done)));
         if (meter && plan && pct > 0 && pct < 70 && plan.missingN > 0) meter.real(Math.max(0, done * plan.files - plan.reused) / plan.missingN);
         if (ios && pct >= 70 && phase === "download") phase = "install";
       } else {
@@ -368,7 +373,9 @@
       "body.dark .otp,body.v3-dark .otp{--otp-acc:#2dd4bf;--otp-bg:rgba(45,212,191,.14);--otp-mut:#9db5ae;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}" +
       ".otp-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.otp-ph{font:700 14px/1.2 inherit}.otp-pc{font:700 20px/1 inherit;font-variant-numeric:tabular-nums;color:var(--otp-acc)}" +
       ".otp-bar{position:relative;height:12px;margin:10px 0 8px;border-radius:7px;background:var(--otp-bg);overflow:hidden}" +
-      ".otp-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:7px;background:var(--otp-acc);transition:width .6s ease}" +
+      ".otp-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:7px;background:var(--otp-acc);transition:width 1s linear;overflow:hidden}" +
+      ".otp-bar.live i::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:translateX(-100%);animation:otp-shine 1.4s ease-in-out infinite}" +
+      "@keyframes otp-shine{to{transform:translateX(100%)}}" +
       ".otp-bar.wait i{opacity:.55}" +
       ".otp-bar.ind i{width:40%;animation:otp-ind 1.1s ease-in-out infinite alternate}" +
       "@keyframes otp-ind{from{left:0}to{left:60%}}" +
@@ -378,7 +385,7 @@
       ".otp-note{margin:8px 0 0;font:500 11.5px/1.4 inherit;color:var(--otp-mut)}" +
       ".otp.compact{margin:6px 0 0;padding:0;background:none;border:0}.otp.compact .otp-bar{height:6px;margin:6px 0 4px;background:rgba(255,255,255,.25)}.otp.compact .otp-bar i{background:#fff}" +
       ".otp.compact .otp-row{font-size:11.5px}.otp.compact .otp-row span:last-child{color:rgba(255,255,255,.85)}" +
-      "@media(prefers-reduced-motion:reduce){.otp-bar i{transition:none}.otp-bar.ind i{animation:none}}";
+      "@media(prefers-reduced-motion:reduce){.otp-bar i{transition:none}.otp-bar.ind i,.otp-bar.live i::after{animation:none}}";
     (document.head || document.documentElement).appendChild(s);
   }
   function sparkSvg(hist) {
@@ -405,6 +412,13 @@
         if (!info) return;
         var bar = q(".otp-bar"), ph = q(".otp-ph");
         var noSample = info.phase === "download" && info.samples === 0 && info.est;
+        // Delta: the bar is the share of MISSING bytes that has landed (90% of files done can still be half the
+        // data). Until the first missing byte lands (the plugin is first copying files the device already has),
+        // the bar runs its moving stripe and the line counts the files the plugin reports, so it is never a
+        // frozen "0.0 MB" (owner, 2026-11-14, iPad).
+        var ff = info.delta && info.phase === "download" ? info.fileFrac : null;
+        var preDelta = info.delta && info.phase === "download" && !(info.bytes >= 52429);   // 0.05 MB: below what the card can show
+        var shown = info.pct;
         if (info.phase === "install") { ph.textContent = "Installing"; q(".otp-mb").textContent = fmtMB(info.total) + " MB downloaded"; q(".otp-sp").textContent = "verifying and unpacking"; }
         else if (info.phase === "restart") { ph.textContent = "Restarting"; q(".otp-mb").textContent = "Update ready"; q(".otp-sp").textContent = "reopening the app"; }
         else if (info.phase === "waiting") { ph.textContent = "Waiting for the network"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = "no data coming through"; }
@@ -417,17 +431,24 @@
         }
         else {
           ph.textContent = info.delta ? "Downloading changes" : "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta);
+          if (preDelta) {
+            var all = info.allFiles || 0, doneN = ff != null ? Math.min(all, Math.round(ff * all)) : 0;
+            q(".otp-sp").textContent = doneN > 0 ? "reusing " + fmtInt(doneN) + " of " + fmtInt(all) + " files on this device" : "starting · " + Math.round(info.elapsed / 1000) + " s";
+          }
           // Delta install: say plainly that this is only what changed, and how it compares with the whole app.
           var nt = q(".otp-note");
           if (nt && info.delta && !nt.getAttribute("data-d")) { nt.setAttribute("data-d", "1"); nt.setAttribute("data-o", nt.textContent); nt.textContent = "Only what changed since your version is downloaded: " + info.files + " file" + (info.files === 1 ? "" : "s") + ", " + fmtMB(info.total) + " MB instead of the full " + fmtMB(info.full) + " MB. Keep the app open."; }
           // Fell back to the whole zip: the "only what changed" note is no longer true, so put the original note back.
           else if (nt && !info.delta && nt.getAttribute("data-d")) { nt.textContent = nt.getAttribute("data-o") || ""; nt.removeAttribute("data-d"); nt.removeAttribute("data-o"); }
         }
-        q(".otp-pc").textContent = noSample ? "" : info.pct + "%";
+        q(".otp-pc").textContent = noSample ? "" : shown + "%";
+        if (el.__pct) el.__pct(noSample ? null : shown);
         bar.classList.toggle("wait", info.phase === "waiting");
-        bar.classList.toggle("ind", !!noSample);
-        bar.firstChild.style.width = noSample ? "40%" : info.pct + "%";
-        if (noSample) { try { bar.removeAttribute("aria-valuenow"); } catch (e) {} bar.setAttribute("aria-valuetext", "Downloading update, speed not available"); } else { bar.setAttribute("aria-valuenow", String(info.pct)); bar.setAttribute("aria-valuetext", info.phase === "download" && info.est ? "about " + info.pct + " percent, estimated" : info.pct + " percent"); }
+        bar.classList.toggle("ind", !!(noSample || preDelta));
+        bar.classList.toggle("live", info.phase === "download" && !noSample && !preDelta);
+        bar.firstChild.style.width = noSample || preDelta ? "40%" : shown + "%";
+        if (preDelta) bar.setAttribute("aria-valuetext", "Preparing the update");
+        if (noSample) { try { bar.removeAttribute("aria-valuenow"); } catch (e) {} bar.setAttribute("aria-valuetext", "Downloading update, speed not available"); } else { bar.setAttribute("aria-valuenow", String(shown)); bar.setAttribute("aria-valuetext", info.phase === "download" && info.est ? "about " + shown + " percent, estimated" : shown + " percent"); }
         if (!compact) { var g = q(".otp-gr"); if (g) g.innerHTML = sparkSvg(info.history || []); }
         var now = Date.now(); if (now - lastAnn > 15000) { lastAnn = now; try { el.firstChild.setAttribute("aria-live", "polite"); setTimeout(function () { try { el.firstChild.setAttribute("aria-live", "off"); } catch (e) {} }, 1200); } catch (e) {} }
       },
@@ -519,19 +540,33 @@
     if (document.getElementById("smdOtaCss")) return;
     var s = document.createElement("style"); s.id = "smdOtaCss";
     s.textContent =
-      "#smdOtaBanner{position:fixed;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:100060;" +
-      "background:#0A554D;color:#fff;border-radius:12px;padding:12px 14px;display:flex;align-items:center;gap:12px;" +
-      "box-shadow:0 8px 24px rgba(10,85,77,.35);font-family:var(--sans,-apple-system,system-ui,sans-serif);" +
-      "opacity:0;transform:translateY(12px);transition:opacity .2s,transform .2s;pointer-events:none}" +
-      "#smdOtaBanner.on{opacity:1;transform:translateY(0);pointer-events:auto}" +
-      "#smdOtaBanner .ic{font-size:18px;flex:0 0 auto}" +
+      /* Owner, 2026-11-14 (iPad screenshot: a full-width slab over the tools, "0.0 of 132.5 MB, working it
+       * out"): a compact floating card, centred, never wider than 440 px, lifted clear of the tab bar. The
+       * icon becomes a progress ring while it downloads; the percent sits beside the title. */
+      "@property --otp-p{syntax:'<number>';inherits:false;initial-value:0}" +
+      "#smdOtaBanner{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));z-index:100060;width:min(440px,calc(100% - 24px));box-sizing:border-box;" +
+      "background:linear-gradient(160deg,#0d6358,#0A4D46);color:#fff;border-radius:20px;padding:12px 12px 12px 14px;display:flex;align-items:center;gap:12px;" +
+      "border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 40px -14px rgba(4,40,36,.55),0 2px 6px rgba(4,40,36,.18);font-family:var(--sans,-apple-system,system-ui,sans-serif);" +
+      "opacity:0;transform:translate(-50%,16px) scale(.98);transition:opacity .22s ease,transform .32s cubic-bezier(.32,.72,0,1);pointer-events:none}" +
+      "body:has(.rnav-tabbar) #smdOtaBanner{bottom:calc(env(safe-area-inset-bottom) + 92px)}" +
+      "#smdOtaBanner.on{opacity:1;transform:translate(-50%,0) scale(1);pointer-events:auto}" +
+      "#smdOtaBanner .ic{position:relative;flex:0 0 40px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;--otp-p:0;" +
+      "background:conic-gradient(#7ee8d6 calc(var(--otp-p)*1%),rgba(255,255,255,.16) 0);transition:--otp-p 1s linear}" +
+      "#smdOtaBanner .ic::before{content:'';position:absolute;inset:3px;border-radius:50%;background:#0b5850}" +
+      "#smdOtaBanner .ic svg{position:relative;width:20px;height:20px}" +
       "#smdOtaBanner .tx{flex:1;min-width:0}" +
-      "#smdOtaBanner b{display:block;font:700 14px/1.2 inherit}" +
-      "#smdOtaBanner .sub{display:block;font:500 12px/1.3 inherit;opacity:.85;margin-top:1px}" +
-      "#smdOtaBanner button{border:none;border-radius:8px;font:700 12.5px inherit;padding:9px 13px;cursor:pointer;flex:0 0 auto}" +
+      "#smdOtaBanner .tt{display:flex;align-items:baseline;justify-content:space-between;gap:8px}" +
+      "#smdOtaBanner b{display:block;font:650 14.5px/1.25 inherit;letter-spacing:-.005em}" +
+      "#smdOtaBanner .pc{font:650 14px/1 inherit;font-variant-numeric:tabular-nums;color:#a8f0e3}" +
+      "#smdOtaBanner .sub{display:block;font:500 12px/1.35 inherit;opacity:.82;margin-top:2px}" +
+      "#smdOtaBanner button{border:none;border-radius:999px;font:650 13px inherit;min-height:36px;padding:0 15px;cursor:pointer;flex:0 0 auto;-webkit-tap-highlight-color:transparent}" +
       "#smdOtaBanner .go{background:#fff;color:#0A554D}" +
-      "#smdOtaBanner .later{background:none;color:#fff;opacity:.8;padding:9px 8px}" +
-      "@media(prefers-reduced-motion:reduce){#smdOtaBanner{transition:none}}";
+      "#smdOtaBanner .go:active,#smdOtaBanner .later:active{transform:scale(.96)}" +
+      "#smdOtaBanner .later{background:none;color:#fff;opacity:.8;padding:0 10px}" +
+      "#smdOtaBanner.busy .go{display:none}" +
+      "#smdOtaBanner .otp.compact .otp-bar{height:5px;margin:8px 0 5px;border-radius:3px}" +
+      "#smdOtaBanner .otp.compact .otp-row{font-size:11.5px;opacity:.92}" +
+      "@media(prefers-reduced-motion:reduce){#smdOtaBanner,#smdOtaBanner .ic{transition:none}}";
     document.head.appendChild(s);
   }
   function showBanner(pending) {
@@ -563,15 +598,23 @@
     injectCSS();
     if (!_bannerEl) {
       _bannerEl = document.createElement("div"); _bannerEl.id = "smdOtaBanner";
-      _bannerEl.innerHTML = '<span class="ic">↻</span><span class="tx"><b>Update ready</b><span class="sub">Takes effect on next reopen</span></span>' +
+      _bannerEl.setAttribute("role", "status");
+      _bannerEl.innerHTML = '<span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7.5 10.5 4.5 4.5 4.5-4.5"/><path d="M5 19.5h14"/></svg></span>' +
+        '<span class="tx"><span class="tt"><b>Update ready</b><span class="pc"></span></span><span class="sub">New version, ready to install</span></span>' +
         '<button class="later" type="button">Later</button><button class="go" type="button">Update now</button>';
       document.body.appendChild(_bannerEl);
       _bannerEl.querySelector(".later").addEventListener("click", hideBanner);
       _bannerEl.querySelector(".go").addEventListener("click", function () {
         var btn = _bannerEl.querySelector(".go"); btn.textContent = "Updating…"; btn.disabled = true;
+        // While it downloads: the title says so, the ring and the percent follow the bar, and Later becomes Hide
+        // (the download carries on; the app reopens itself when it is done).
+        _bannerEl.classList.add("busy"); _bannerEl.querySelector("b").textContent = "Updating StewardMD";
+        var lat = _bannerEl.querySelector(".later"); lat.textContent = "Hide";
         // Compact meter under the banner text while it downloads.
         var sub = _bannerEl.querySelector(".sub"), host = _bannerEl.querySelector(".otp-host");
         if (!host) { host = document.createElement("span"); host.className = "otp-host"; host.style.display = "block"; sub.parentNode.appendChild(host); }
+        var ring = _bannerEl.querySelector(".ic"), pcEl = _bannerEl.querySelector(".pc");
+        host.__pct = function (v) { pcEl.textContent = v == null ? "" : v + "%"; ring.style.setProperty("--otp-p", v == null ? 0 : v); };
         var pu = progressUI(host, { compact: true }); sub.style.display = "none";
         // set() itself reloads the WebView on success — nothing left to do here but handle failure.
         // Phrase it from the failure CODE (same vocabulary as the Settings screen): a connection
@@ -580,6 +623,7 @@
           if (!res.ok) {
             pu.fail(); sub.style.display = "";
             btn.textContent = "Update now"; btn.disabled = false;
+            _bannerEl.classList.remove("busy"); _bannerEl.querySelector("b").textContent = "Update ready"; lat.textContent = "Later"; host.__pct(null);
             var code = res && res.error;
             toast(code === "network" ? "Download failed — check connection and try again" :
               code === "storage" ? "Not enough space to download the update" :
@@ -608,7 +652,7 @@
   }
   function backgroundCheck() {
     if (!isNative() || !plugin() || !dueForBackgroundCheck()) return;
-    check().then(function (r) { if (r && r.status === "available") maybeAutoApply({ version: r.version, zipUrl: r.zipUrl, zipHash: r.zipHash }); });
+    check().then(function (r) { if (r && r.status === "available") maybeAutoApply({ version: r.version, zipUrl: r.zipUrl, zipHash: r.zipHash, zipSize: r.zipSize || 0 }); });
   }
 
   try {

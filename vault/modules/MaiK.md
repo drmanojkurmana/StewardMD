@@ -593,3 +593,6 @@ Tests: `test/maik-figures.test.mjs` (+4), `run-maik-convo-fixes-ui.mjs`, `run-ma
   three rows read as stacked cards with uneven seams. On the phone the group now carries the material
   once and the rows are flat with an inset hairline (`:not(#_)` + !important to outrank the themes);
   iPad keeps its three-column cards.
+- **Welcome icons** (same day, "AI slop icons"): the tinted tiles with a pulse line, a generic book and a
+  paperclip-looking pill are now drawn line icons in the accent with no tile: stethoscope (assess), open
+  book with text lines (cited answer), capsule (Drug Index). `MK.cAssess / cKnow / cDrug` in home.js.

@@ -207,3 +207,19 @@ downloads only the rest (32 at a time), and emits a real event per finished file
 - Granularity is the file: a changed 20 MB wasm file is downloaded whole. Savings depend on the phone's built-in bundle and earlier OTA bundles
   matching the new one; a phone on an old native build with a very different `www/` reuses little and uses the zip.
 - NOT verified on a real device yet. Tests: `test/run-ota-delta-ui.mjs` (fake plugin), `test/ota.test.mjs` (files=1 router case).
+
+## Update card: compact, live, honest (2026-11-14)
+Owner, iPad: a full-width slab over the tools reading "Starting...", then "0.0 of 132.5 MB, working it out".
+- **Why it sat at 0**: in delta mode the bar is the share of MISSING bytes that landed, derived from the
+  plugin's per-file events (iOS `downloadManifest` emits 10..70 per finished file, reused and downloaded
+  alike, from a concurrent queue). While the plugin is still copying files the device already has, that
+  derivation stays at 0. The meter now also keeps `fileFrac` (exact share of ALL files done) and the card
+  says "reusing N of M files on this device" with a moving stripe until 0.05 MB of missing data has landed,
+  then the normal "X of Y MB", speed and ETA. The bar stays on bytes on purpose: 90% of files can be half
+  the data (`run-ota-delta-ui.mjs` pins 50%). "working it out" is gone ("downloading" when no ETA yet).
+- **Motion**: the bar glides (`width 1s linear`, matching the 1 s tick) with a shine while bytes flow.
+- **Banner**: floating card, max 440px, centred, lifted above the tab bar when one is on screen; the icon
+  is a progress ring (`--otp-p`, registered with @property so it animates); title "Updating StewardMD"
+  with the percent; "Later" becomes "Hide" (the download continues). The background check now passes
+  `zipSize`, so the zip path has a total and its speed probe runs from the banner too.
+- `run-native-ota-ui.mjs` has 5 failures that predate this (same on main without the change).

@@ -5976,9 +5976,12 @@
     send: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>',
     export: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M20 15v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-4"/></svg>',
     copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>',
-    cAssess: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>',
-    cKnow: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
-    cDrug: '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5 3 21"/><path d="M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/></svg>'
+    // Welcome rows (owner, 2026-11-14: "fix this AI slop icons"): drawn for what each row does, not a
+    // pulse line, a generic book and a paperclip-looking pill. Stethoscope = assess the patient; an open
+    // book with lines of text = a cited answer; a capsule = the Drug Index.
+    cAssess: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3H5v5a4 4 0 0 0 8 0V3h-1"/><path d="M9 12v2.5a5.5 5.5 0 0 0 11 0V13"/><circle cx="20" cy="11" r="2"/></svg>',
+    cKnow: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 5.5c3-1 6-1 9.5 1 3.5-2 6.5-2 9.5-1v13c-3-1-6-1-9.5 1-3.5-2-6.5-2-9.5-1Z"/><path d="M12 6.5v13"/><path d="M15 10h3.5M15 13h2.5M5.5 10H9M5.5 13H8"/></svg>',
+    cDrug: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="8.5" width="19" height="7" rx="3.5" transform="rotate(-35 12 12)"/><path d="M10 9.1 14 14.9"/></svg>'
   };
   // §3 sheet shell — markup verbatim from IMPLEMENTATION.md (kept the app's extract label so it
   // stays consistent with the extract handler's own text; #maikClose replaces the old #maikX id).

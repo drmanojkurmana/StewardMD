@@ -245,6 +245,9 @@ html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-ca
   background:color-mix(in srgb,var(--mk-bg) 74%,transparent)!important;-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
   box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 32px -16px rgba(15,23,42,.28)!important}
 html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card{position:relative;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;transform:none}
-html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card+.maik-card::before{content:"";position:absolute;top:0;left:66px;right:0;height:1px;background:color-mix(in srgb,var(--mk-ink) 9%,transparent)}
+html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card+.maik-card::before{content:"";position:absolute;top:0;left:56px;right:0;height:1px;background:color-mix(in srgb,var(--mk-ink) 9%,transparent)}
 html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card:active{background:color-mix(in srgb,var(--mk-ink) 6%,transparent)!important;transform:none}
 @media(prefers-reduced-transparency:reduce){html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--mk-bg)!important}}
+/* Welcome icons: drawn line icons in the accent, no tinted tile (owner, 2026-11-14: "AI slop icons"). */
+html body #maikSheet.maik-polished:not(#_) .maik-card .maik-card-ic{width:26px;height:26px;flex:0 0 26px;border-radius:0;background:none!important;box-shadow:none!important;color:var(--mk-teal)}
+html body #maikSheet.maik-polished:not(#_) .maik-card .maik-card-ic svg{width:24px;height:24px}
