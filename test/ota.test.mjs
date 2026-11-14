@@ -453,3 +453,15 @@ test("probe stays public (no auth, no sig) under enforce", async () => {
   assert.equal(res.status, 200);
   assert.equal((await res.text()).length, 1024);
 });
+test("every /check is counted by app version and credential (rollout gate for OTA_ENFORCE)", async () => {
+  const { env, r2 } = fakeR2Env();
+  await r2.put("ota/candidate.json", JSON.stringify({ commit: "abc123", manifestKey: "ota/manifests/abc123.json" }));
+  await r2.put("ota/manifests/abc123.json", JSON.stringify({ commit: "abc123", zipHash: "feedface", zipSize: 99, files: [] }));
+  await OTA.publish(r2, { by: "owner@x.com" });
+  const rows = [];
+  env.UPDATES_DB = { prepare: (sql) => ({ bind: (...a) => ({ sql, a }) }), batch: async (st) => { st.forEach((s) => { if (/ai_counters \(day, k, n\)/.test(s.sql)) rows.push(s.a[1]); }); return []; } };
+  const pending = [];
+  await onRequest({ request: new Request("https://stewardmd.in/api/ota/check?version=694&nativeBuild=7"), env, params: { path: ["check"] }, waitUntil: (p) => pending.push(p) });
+  await Promise.all(pending);
+  assert.deepEqual(rows, ["ota.auth.694.none"]);
+});
