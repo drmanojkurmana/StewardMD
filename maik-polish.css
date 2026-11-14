@@ -234,3 +234,17 @@ html body #maikSheet.maik-polished .maik-fig{border-radius:16px;background:var(-
 html body #maikSheet.maik-polished .maik-fig img{background:#fff}
 html body #maikSheet.maik-polished .maik-fig-desc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:8px 12px 0;font-size:13px;line-height:1.4;font-style:italic;color:var(--mk-ink)}
 html body #maikSheet.maik-polished .maik-fig-cap{padding:6px 12px 10px;border-top:0;font-size:12px}
+
+/* ── Welcome list: ONE grouped surface, not cards inside a card (owner markup, 2026-11-14). Every
+   appearance theme (appearance.css: liquid, frosted, tinted3d, blend) paints each .maik-card as its own
+   glass card with a shadow, with !important, inside the already-grouped .maik-cards, so the three rows
+   read as stacked cards with uneven seams. On the phone the group carries the material once; rows are
+   flat, divided by an inset hairline that starts at the text, like an iOS grouped list. iPad keeps its
+   three-column cards (ipad-knowledge.css). */
+html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards{gap:0!important;padding:0!important;border:1px solid color-mix(in srgb,var(--mk-ink) 10%,transparent)!important;border-radius:22px!important;overflow:hidden!important;
+  background:color-mix(in srgb,var(--mk-bg) 74%,transparent)!important;-webkit-backdrop-filter:blur(20px) saturate(160%);backdrop-filter:blur(20px) saturate(160%);
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 32px -16px rgba(15,23,42,.28)!important}
+html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card{position:relative;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;transform:none}
+html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card+.maik-card::before{content:"";position:absolute;top:0;left:66px;right:0;height:1px;background:color-mix(in srgb,var(--mk-ink) 9%,transparent)}
+html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards .maik-card:active{background:color-mix(in srgb,var(--mk-ink) 6%,transparent)!important;transform:none}
+@media(prefers-reduced-transparency:reduce){html:not(.smd-tablet) body #maikSheet.maik-polished:not(#_) .maik-empty .maik-cards{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--mk-bg)!important}}

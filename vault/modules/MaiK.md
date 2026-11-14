@@ -588,3 +588,8 @@ showed the management algorithm.
   they are re-picked. TinyFish has no image search (docs, 2026-11-14). The phone also drops any figure
   under 240 x 140 real pixels (site badges, icons).
 Tests: `test/maik-figures.test.mjs` (+4), `run-maik-convo-fixes-ui.mjs`, `run-maik-audit-b-ui.mjs`.
+- **Welcome list** (same day, owner markup): `appearance.css` paints every `.maik-card` as its own glass
+  card with !important (liquid / frosted / tinted3d / blend) inside the grouped `.maik-cards`, so the
+  three rows read as stacked cards with uneven seams. On the phone the group now carries the material
+  once and the rows are flat with an inset hairline (`:not(#_)` + !important to outrank the themes);
+  iPad keeps its three-column cards.
