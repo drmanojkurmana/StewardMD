@@ -149,7 +149,14 @@
       ".smd-sk{border-radius:18px;margin-bottom:12px;background:linear-gradient(90deg,var(--e-track) 0,rgba(255,255,255,.35) 50%,var(--e-track) 100%) 0 0/200% 100%;animation:smdSk 1.2s linear infinite}",
       "@keyframes smdSk{to{background-position:-200% 0}}",
       ".smd-eng.drag{transition:none}",
-      "@media (prefers-reduced-motion:reduce){.smd-ring circle.fg,.smd-bar>i{transition:none}.smd-sk{animation:none}}"
+      "@media (prefers-reduced-motion:reduce){.smd-ring circle.fg,.smd-bar>i{transition:none}.smd-sk{animation:none}}",
+      /* Follow the Settings theme (owner 2026-11-14: Clinical Progress stayed green under Clinical Blue). The accent comes
+         from --sbr-acc, which the theme (sidebar-redesign.js) or a custom home colour sets; Classic keeps the green. */
+      "html:is([data-theme]:not([data-theme=\"classic\"]),[data-home-color]) .smd-eng{--e-teal:var(--sbr-acc,#0E6A5F);--e-teal-d:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 72%,#000);--e-tint:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 11%,#fff);--e-bg:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 4%,#f4f5f7);--e-line:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 12%,transparent)}",
+      "html:is([data-theme]:not([data-theme=\"classic\"]),[data-home-color]) body.dark .smd-eng{--e-teal:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 60%,#fff);--e-teal-d:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 35%,#fff);--e-tint:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 22%,transparent);--e-bg:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 8%,#07090c);--e-card:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 9%,#101318);--e-line:rgba(255,255,255,.08)}",
+      "html:is([data-theme]:not([data-theme=\"classic\"]),[data-home-color]) .smd-hero{background:radial-gradient(120% 140% at 100% 0%,color-mix(in srgb,var(--sbr-acc,#0E6A5F) 30%,transparent) 0,transparent 55%),linear-gradient(150deg,var(--sbr-acc,#0E6A5F) 0%,color-mix(in srgb,var(--sbr-acc,#0E6A5F) 60%,#000) 100%);box-shadow:0 10px 26px -12px color-mix(in srgb,var(--sbr-acc,#0E6A5F) 60%,transparent)}",
+      "html:is([data-theme]:not([data-theme=\"classic\"]),[data-home-color]) .smd-hero .smd-muted{color:rgba(255,255,255,.78)}",
+      "html:is([data-theme]:not([data-theme=\"classic\"]),[data-home-color]) .smd-hstats .n .smd-ico,html:is([data-theme]:not([data-theme=\"classic\"]),[data-home-color]) .smd-ring circle[stroke=\"#8fe3c8\"]{color:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 40%,#fff);stroke:color-mix(in srgb,var(--sbr-acc,#0E6A5F) 40%,#fff)}",
     ].join("");
     document.head.appendChild(s);
   }
