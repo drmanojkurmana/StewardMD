@@ -45,6 +45,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
   `smd_ophthalmos` default ON (kill switch "0"): clinics, 3,035-question bank, notes, retinoscopy and neuro simulators, calculators; images on R2; content ai_drafted pending sign-off
 - [[Tokós]]: OBGYN CTG reading trainer (12 real CTU-UHB traces, FIGO checklist, calipers); flag `smd_tokos` default OFF; content ai_drafted pending obstetrician review
 - [[PrepNucleus]]: exam question bank (NEET-PG / INI-CET, NEET-SS, USMLE), about 1,750 modules, FSRS; flag `smd_prep` default OFF
+- [[Study Studio]]: PDF library, viewer and pen inside PrepNucleus (phase A1 to A3); flag `smd_study` default OFF, needs `smd_prep`
 - [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)
 - [[SURGX]] — SURGˣ Surgical Intelligence: notes, protocols, procedures, evidence, cases (flag ON for testers, content pending R1)
 - [[WardSynQ]] — the Clinical OS built inside this repo: canonical clinical model, event bus, safety
