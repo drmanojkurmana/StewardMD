@@ -18,7 +18,7 @@
       if (!prepOn) return false;
       var q = (String(search || "").match(/[?&]study=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return get("smd_study") === "1";
+      return get("smd_study") !== "0";   // default ON (owner 2026-11-15, app not public yet)
     } catch (e) { return false; }
   }
   // Pointer position in a box (CSS px rect) to 0..1, and back.

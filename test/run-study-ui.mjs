@@ -58,7 +58,7 @@ async function boot(q) {
 }
 
 /* ---- flag off: no row ---- */
-await boot("prep=1");
+await boot("prep=1&study=0");
 await page.waitForTimeout(500);
 ok(await page.locator('#smdPrep .pnv-tab[data-tab="study"]').count() === 0, "flag off: no Study tab");
 ok(await page.evaluate(() => !window.STUDY && !document.querySelector('script[src^="/study.js"]')), "flag off: study.js is not even loaded");

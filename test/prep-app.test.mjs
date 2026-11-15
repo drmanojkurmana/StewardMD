@@ -190,12 +190,22 @@ test("loader: ON by default (owner 2026-10-06); smd_prep=0 or ?prep=0 turns it o
 });
 
 test("loader: first open injects the stylesheet and scripts in order at one token", () => {
-  const on = loaderIn("?prep=1&spotify=0", {});   // the base list; Spotify (on by default) is covered below
+  const on = loaderIn("?prep=1&spotify=0&study=0", {});   // the base list; Spotify and Study Studio are covered below
   on.win.PREP.open();
   const L = on.win.PREP_LOADER;
   assert.deepEqual(on.added.map((e) => e.href || e.src), [...L.CSS, ...L.JS].map((f) => "/" + f + "?v=" + L.V));
   assert.ok(on.added.filter((e) => e.tag === "script").every((e) => e.async === false));
   assert.ok(L.JS.indexOf("specialty-core.js") < L.JS.indexOf("prep.js"));
+});
+
+test("loader: Study Studio is ON by default (owner 2026-11-15); ?study=0 keeps its files from loading", () => {
+  const on = loaderIn("?prep=1&spotify=0", {});
+  on.win.PREP.open();
+  const got = on.added.map((e) => e.href || e.src);
+  assert.ok(got.some((u) => /\/study\.js\?/.test(u)) && got.some((u) => /\/study\.css\?/.test(u)));
+  const off = loaderIn("?prep=1&spotify=0&study=0", {});
+  off.win.PREP.open();
+  assert.ok(!off.added.some((e) => /\/study\./.test(e.href || e.src || "")));
 });
 
 test("loader: Spotify is OFF by default (owner 2026-11-11); ?spotify=1 or the Settings switch loads it", () => {

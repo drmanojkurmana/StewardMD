@@ -9,7 +9,8 @@ const S = createRequire(import.meta.url)("../study.js");
 
 test("flag: default off, needs prep, ?study overrides storage", () => {
   const ls = (v) => (k) => (k === "smd_study" ? v : null);
-  assert.equal(S.enabled("", ls(null), true), false);
+  assert.equal(S.enabled("", ls(null), true), true);   // default ON
+  assert.equal(S.enabled("", ls("0"), true), false);
   assert.equal(S.enabled("", ls("1"), true), true);
   assert.equal(S.enabled("", ls("1"), false), false);
   assert.equal(S.enabled("?study=1", ls(null), true), true);
