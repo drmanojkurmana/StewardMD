@@ -281,6 +281,7 @@ await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 })
 ok(await page.evaluate(() => document.querySelector(".st-tl").classList.contains("smd-books-keep") && document.querySelector(".st-tl").classList.contains("smd-emo-keep")), "viewer: the text layer keeps smd-books-keep smd-emo-keep");
 await page.click('[data-act="st-more"]');
 await page.fill("#stRange", "2");
+ok((await page.locator('[data-act="st-make"]').count()) === 1 && /Make deck/.test(await page.locator('[data-act="st-make"]').innerText()), "Make deck: one button (Layer C makes questions and cards together)");
 await page.locator('[data-act="st-make"]').first().click();
 await page.waitForSelector("#stSheet");
 ok(/Sign in to make a deck/.test(await page.locator("#stSheet").innerText()) && gen.length === 0, "Make cards: signed out shows Layer C's sign-in message, nothing sent");

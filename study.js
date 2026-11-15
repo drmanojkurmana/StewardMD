@@ -69,7 +69,7 @@
     a = Math.max(0, i - r); b = Math.min(t.length, i + k.length + r);
     return { pre: (a ? "..." : "") + t.slice(a, i), hit: t.slice(i, i + k.length), post: t.slice(i + k.length, b) + (b < t.length ? "..." : "") };
   }
-  // Pages for Make cards: the typed range ("3-5, 9", Layer C's own parser and 60-page cap) or, left empty, the page on screen.
+  // Pages for Make deck: the typed range ("3-5, 9", Layer C's own parser and 60-page cap) or, left empty, the page on screen.
   function pageSel(spec, cur, total, SR) {
     if (!String(spec || "").trim()) return { pages: [cur] };
     var r = SR.selFromSpec(spec, total);
@@ -557,7 +557,7 @@
   function studyBar(d) {
     var b = function (act, label) { return '<button type="button" class="st-b" data-act="' + act + '">' + label + "</button>"; };
     return '<div class="st-tb" id="stTb2" role="toolbar" aria-label="Study and share" hidden>' + (d.kind === "nb" ? "" :
-      '<label class="st-pj">Pages <input id="stRange" type="text" placeholder="this page" aria-label="Pages to use, like 3-5"></label>' + b("st-make", "Make cards") + b("st-make", "Make MCQs") + b("st-explain", "Explain") + '<span class="st-sep"></span>' + b("st-orig", "Share original")) + b("st-flat", d.kind === "nb" ? "Notebook to PDF" : "Share flattened") + "</div>";
+      '<label class="st-pj">Pages <input id="stRange" type="text" placeholder="this page" aria-label="Pages to use, like 3-5"></label>' + b("st-make", "Make deck") + b("st-explain", "Explain") + '<span class="st-sep"></span>' + b("st-orig", "Share original")) + b("st-flat", d.kind === "nb" ? "Notebook to PDF" : "Share flattened") + "</div>";
   }
   function startViewer(d, pdf, strokes, undoRec, goto) {
     var root = host.root(), sc = root && root.querySelector("#stSc"), box = root && root.querySelector("#stPages");
