@@ -118,3 +118,64 @@ test("A7 source ref: items and cards made from a Study Studio document carry std
   assert.deepEqual(C.toStored(it, f, "deck1", { doc: "abc", name: "N", exam: "neet-pg" }).src, { doc: "abc", name: "N", p: [4], h: "H", sn: [2] });
   assert.equal(C.toCard({ id: "f1", cq: "c", ft: "t", p: [4], h: "H", sn: [2] }, "deck1", { doc: "abc", name: "N", std: "doc-id" }).src.std, "doc-id");
 });
+
+/* ---- A8: backup file (fflate, stored not compressed), verify before restore, restore plan ---- */
+import { createHash } from "node:crypto";
+const F = req("../fflate.min.js");
+const shaN = async (b) => createHash("sha256").update(b).digest("hex");
+const enc = (o) => F.strToU8(JSON.stringify(o));
+async function makeBackup(mut) {
+  const pdf = new Uint8Array(3000).map((_, i) => (i * 7 + 3) & 255), h = await shaN(pdf), ent = {};
+  const d1 = { doc: { id: "d1", title: "A", sha256: h, kind: undefined }, strokes: [{ id: "s1" }, { id: "s2" }], undo: null, ptext: [{ id: "d1:1:pdf" }], index: null };
+  const n1 = { doc: { id: "n1", title: "N", kind: "nb" }, strokes: [{ id: "s3" }], undo: null, ptext: [], index: null };
+  ent["folders.json"] = enc([{ id: "f1", name: "F" }]); ent["docs/d1.json"] = enc(d1); ent["docs/n1.json"] = enc(n1); ent["files/d1.pdf"] = pdf;
+  const man = { format: "stewardmd-study-backup", v: 1, created: 1, counts: { docs: 2, folders: 1, strokes: 3, ptext: 1, files: 1 }, files: [] };
+  for (const n of Object.keys(ent)) man.files.push({ name: n, sha256: await shaN(ent[n]), bytes: ent[n].length });
+  ent["manifest.json"] = enc(man);
+  if (mut) await mut(ent, man);
+  return { ent, pdf };
+}
+function zipOf(ent) {   // the streaming writer the app uses: ZipPassThrough = stored, no compression
+  const chunks = []; let done = false;
+  const z = new F.Zip((e, c, fin) => { if (e) throw e; chunks.push(c); if (fin) done = true; });
+  for (const n of Object.keys(ent)) { const f = new F.ZipPassThrough(n); z.add(f); f.push(ent[n], true); }
+  z.end();
+  assert.equal(done, true);
+  return Buffer.concat(chunks);
+}
+test("A8 zip: the streaming writer round trips every file, stored without compression", async () => {
+  const { ent } = await makeBackup(), zip = zipOf(ent), back = F.unzipSync(new Uint8Array(zip));
+  assert.deepEqual(Object.keys(back).sort(), Object.keys(ent).sort());
+  for (const n of Object.keys(ent)) assert.deepEqual(Buffer.from(back[n]), Buffer.from(ent[n]));
+  assert.ok(zip.length >= Object.values(ent).reduce((a, b) => a + b.length, 0), "stored: never smaller than the data");
+});
+test("A8 backup verify: a good backup passes with its records", async () => {
+  const { ent } = await makeBackup(), v = await S.verifyBackup(F.unzipSync(new Uint8Array(zipOf(ent))), shaN);
+  assert.equal(v.ok, true); assert.equal(v.recs.length, 2); assert.equal(v.folders.length, 1);
+});
+test("A8 backup verify: a tampered byte inside the zip is refused (sha256 mismatch)", async () => {
+  const { ent, pdf } = await makeBackup(), zip = zipOf(ent), at = zip.indexOf(Buffer.from(pdf.slice(0, 64)));
+  assert.ok(at > 0); zip[at + 10] ^= 1;
+  const v = await S.verifyBackup(F.unzipSync(new Uint8Array(zip)), shaN);
+  assert.equal(v.ok, false); assert.match(v.error, /checksum/);
+});
+test("A8 backup verify: wrong record count, wrong size, extra file, missing manifest, record vs file sha", async () => {
+  let v = await S.verifyBackup((await makeBackup((e, m) => { m.counts.strokes = 4; e["manifest.json"] = enc(m); })).ent, shaN);
+  assert.equal(v.ok, false); assert.match(v.error, /record counts/);
+  v = await S.verifyBackup((await makeBackup((e, m) => { m.files[3].bytes = 5; e["manifest.json"] = enc(m); })).ent, shaN);
+  assert.match(v.error, /wrong size/);
+  v = await S.verifyBackup((await makeBackup((e) => { e["files/x.pdf"] = new Uint8Array(3); })).ent, shaN);
+  assert.match(v.error, /file list/);
+  v = await S.verifyBackup((await makeBackup((e) => { delete e["manifest.json"]; })).ent, shaN);
+  assert.match(v.error, /not a Study Studio backup/);
+  v = await S.verifyBackup((await makeBackup(async (e, m) => { const r = JSON.parse(new TextDecoder().decode(e["docs/d1.json"])); r.doc.sha256 = "0".repeat(64); e["docs/d1.json"] = enc(r); m.files.find((f) => f.name === "docs/d1.json").sha256 = await shaN(e["docs/d1.json"]); m.files.find((f) => f.name === "docs/d1.json").bytes = e["docs/d1.json"].length; e["manifest.json"] = enc(m); })).ent, shaN);
+  assert.match(v.error, /does not match its file/);
+});
+test("A8 restore plan: skip by id or sha256, add the rest, never touch what exists", () => {
+  const have = [{ id: "d1", sha256: "aa" }, { id: "n1" }, { id: "x", sha256: "bb" }];
+  const recs = [{ doc: { id: "d1", sha256: "aa" } }, { doc: { id: "d2", sha256: "bb" } }, { doc: { id: "d3", sha256: "cc" } }, { doc: { id: "n1", kind: "nb" } }, { doc: { id: "n2", kind: "nb" } }];
+  const p = S.restorePlan(have, recs);
+  assert.deepEqual(p.add.map((r) => r.doc.id), ["d3", "n2"]);
+  assert.deepEqual(p.skip.map((r) => r.doc.id), ["d1", "d2", "n1"]);
+  assert.deepEqual(have.map((d) => d.id), ["d1", "n1", "x"]);
+});

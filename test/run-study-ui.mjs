@@ -8,6 +8,7 @@
 import { spawn } from "node:child_process";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { setTimeout as sleep } from "node:timers/promises";
@@ -324,6 +325,64 @@ await page.waitForSelector("#stSheet");
 ok(/offline/.test(await page.locator("#stSheet").innerText()) && await page.locator("#stSheetOk").count() === 0 && teach.length === 1, "Explain: offline says so and sends nothing");
 await ctx.setOffline(false);
 await page.click('[data-act="st-scancel"]');
+
+/* ---- A8: share original, flattened export, notebook to PDF, back up, wipe, restore ---- */
+const FF = createRequire(import.meta.url)("../fflate.min.js");
+const shaOf = (b) => createHash("sha256").update(b).digest("hex");
+const dl = async (click) => { const [d] = await Promise.all([page.waitForEvent("download", { timeout: 60000 }), click()]); return { name: d.suggestedFilename(), buf: readFileSync(await d.path()) }; };
+await boot("prep=1&study=1");
+await openLib();
+const fixtureDoc = (await idbAll("docs")).find((d) => d.title === "fixture");
+await page.locator(".st-doc", { hasText: "fixture" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
+await page.click('[data-act="st-more"]');
+let out = await dl(() => page.click('[data-act="st-orig"]'));
+ok(out.name === "fixture.pdf" && shaOf(out.buf) === SHA, "share original: the file is byte-identical to the stored original");
+out = await dl(() => page.click('[data-act="st-flat"]'));
+ok(out.name === "fixture (flattened).pdf" && out.buf.slice(0, 5).toString() === "%PDF-" && pagesIn(out.buf) === 2 && shaOf(out.buf) !== SHA, "flattened export: named (flattened), 2 pages, differs from the original");
+ok(shaOf(await fileBytes(fixtureDoc.id)) === SHA, "flattened export: the stored original's sha256 is unchanged");
+await page.click('#smdPrep [data-act="back"]');
+await page.waitForSelector("#stLib");
+await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
+await page.click('[data-act="st-more"]');
+out = await dl(() => page.click('[data-act="st-flat"]'));
+ok(out.name === "Ward notes.pdf" && pagesIn(out.buf) === 1, "notebook to PDF: one page per notebook page");
+await page.click('#smdPrep [data-act="back"]');
+await page.waitForSelector("#stLib");
+/* back up */
+await idb("folders", 'o.put({ id: "f1", name: "Ward" })');
+const snap = async () => {
+  const docs = await idbAll("docs"), strokes = await idbAll("strokes"), per = {}, shas = {};
+  strokes.forEach((x) => { const k = x.doc + ":" + x.page + (x.gone ? "g" : ""); per[k] = (per[k] || 0) + 1; });
+  for (const d of docs) if (d.kind !== "nb") shas[d.id] = shaOf(await fileBytes(d.id));
+  return { docs: docs.map((d) => d.id).sort(), per, shas, folders: (await idbAll("folders")).length, n: docs.length, st: strokes.length };
+};
+const before = await snap();
+const bk = await dl(() => page.click('[data-act="st-backup"]'));
+const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
+const nPdf = Object.keys(before.shas).length;
+ok(/^StewardMD Study backup \d{4}-\d\d-\d\d\.zip$/.test(bk.name) && zman.counts.docs === before.n && zman.counts.strokes === before.st && zman.counts.files === nPdf && zman.counts.folders === 1 && zman.files.length === Object.keys(zmap).length - 1, "backup: one zip with the manifest counts (documents, strokes, originals, folders) and a sha256 per file");
+ok(Object.keys(before.shas).every((id) => Buffer.from(zmap["files/" + id + ".pdf"]).equals(Buffer.from(Object.keys(zmap).length ? zmap["files/" + id + ".pdf"] : [])) && shaOf(Buffer.from(zmap["files/" + id + ".pdf"])) === before.shas[id]) && shaOf(Buffer.from(zmap["files/" + fixtureDoc.id + ".pdf"])) === SHA, "backup: every original in the zip is byte-identical to the stored one");
+/* wipe: fresh page, delete the study database (records and stored originals) */
+await boot("prep=1&study=1");
+await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
+await openLib();
+const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index"].map((x) => idbAll(x)))).every((a) => a.length === 0);
+ok(await zeroAll(), "wipe: the study database is empty");
+const tamper = (fn) => { const m = FF.unzipSync(new Uint8Array(bk.buf)); fn(m); return Buffer.from(FF.zipSync(m, { level: 0 })); };
+const restore = async (buf) => { await page.setInputFiles("#stRestoreF", { name: "b.zip", mimeType: "application/zip", buffer: buf }); await page.waitForFunction(() => /Restored|Nothing was restored/.test(document.querySelector("#stBk").textContent), null, { timeout: 60000 }); const t = await page.locator("#stBk").innerText(); await page.evaluate(() => { document.querySelector("#stBk").textContent = ""; }); return t; };
+let msg = await restore(tamper((m) => { const k = Object.keys(m).find((x) => /^files\//.test(x)); const b = Uint8Array.from(m[k]); b[b.length >> 1] ^= 1; m[k] = b; }));
+ok(/Nothing was restored/.test(msg) && /checksum/.test(msg) && await zeroAll(), "tampered backup: refused with a clear message and nothing written");
+msg = await restore(tamper((m) => { const j = JSON.parse(Buffer.from(m["manifest.json"]).toString()); j.counts.strokes += 1; m["manifest.json"] = FF.strToU8(JSON.stringify(j)); }));
+ok(/Nothing was restored/.test(msg) && /record counts/.test(msg) && await zeroAll(), "wrong record count: refused and nothing written");
+msg = await restore(bk.buf);
+const after = await snap();
+ok(new RegExp("Restored " + before.n + " documents with " + before.st + " strokes\\. Skipped 0").test(msg), "restore: reports the counts restored and skipped");
+ok(after.n === before.n && JSON.stringify(after.docs) === JSON.stringify(before.docs) && JSON.stringify(after.per) === JSON.stringify(before.per) && after.folders === 1, "restore: document count, folders and strokes per page match the library that was backed up");
+ok(JSON.stringify(after.shas) === JSON.stringify(before.shas) && after.shas[fixtureDoc.id] === SHA, "restore: every original's sha256 matches (stored bytes identical)");
+msg = await restore(bk.buf);
+ok(new RegExp("Restored 0 documents with 0 strokes\\. Skipped " + before.n).test(msg) && (await snap()).n === before.n, "restore again: documents already present (by sha256 or id) are skipped, nothing duplicated");
 
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 

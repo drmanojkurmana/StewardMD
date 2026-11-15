@@ -1,4 +1,4 @@
-/* PrepNucleus Study Studio (phase A1 to A7): a PDF library, notebooks, a viewer, a pen and search. window.STUDY. ES5. Loaded by
+/* PrepNucleus Study Studio (phase A1 to A8): a PDF library, notebooks, a viewer, a pen and search. window.STUDY. ES5. Loaded by
    prep-loader.js only when flag smd_study is on; draws through PREP._host. prep.js forwards every data-act starting
    "st-" here and asks back() first. Plan: vault/plans/PrepNucleus-StudyStudio.md, note: vault/modules/Study Studio.md.
    Flag smd_study, default OFF, needs smd_prep: localStorage "1" or ?study=1 on, "0" or ?study=0 off.
@@ -75,9 +75,54 @@
     var r = SR.selFromSpec(spec, total);
     return r.error ? { error: r.error } : { pages: r.sel };
   }
+  // Backup file (A8): a zip, stored without compression. manifest.json { format, v, created, counts, files: [{ name, sha256, bytes }] },
+  // folders.json, docs/<id>.json { doc, strokes, undo, ptext, index } and files/<id>.pdf (the original, byte for byte).
+  var BK = "stewardmd-study-backup";
+  // entries: { name: Uint8Array } from the unzip; sha(bytes) -> Promise(hex). Resolves { ok: true, man, folders, recs } or { ok: false, error }.
+  // Nothing is written by this: restore calls it first and stops on the first problem.
+  function verifyBackup(ent, sha) {
+    var bad = function (m) { return { ok: false, error: m }; }, dec = function (n) { return JSON.parse(new TextDecoder().decode(ent[n])); }, man, names, listed = {};
+    try { man = dec("manifest.json"); } catch (e) { return Promise.resolve(bad("This is not a Study Studio backup.")); }
+    if (!man || man.format !== BK || man.v !== 1 || !Array.isArray(man.files) || !man.counts) return Promise.resolve(bad("This is not a Study Studio backup."));
+    names = Object.keys(ent).filter(function (n) { return n !== "manifest.json"; });
+    man.files.forEach(function (f) { listed[f.name] = f; });
+    if (names.length !== man.files.length || names.some(function (n) { return !listed[n]; })) return Promise.resolve(bad("The backup's file list does not match what is inside it."));
+    return man.files.reduce(function (p, f) {
+      return p.then(function (err) {
+        if (err) return err;
+        var b = ent[f.name];
+        if (b.length !== f.bytes) return "A file in the backup is damaged (wrong size).";
+        return sha(b).then(function (h) { return h === f.sha256 ? null : "A file in the backup is damaged (checksum mismatch)."; });
+      });
+    }, Promise.resolve(null)).then(function (err) {
+      if (err) return bad(err);
+      var recs = [], folders, c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0 }, i, r, k;
+      try {
+        folders = dec("folders.json"); c.folders = folders.length;
+        names.forEach(function (n) {
+          if (/^docs\//.test(n)) { r = dec(n); recs.push(r); c.docs++; c.strokes += r.strokes.length; c.ptext += r.ptext.length; if (!/^[a-z0-9]+$/.test(r.doc.id) || n !== "docs/" + r.doc.id + ".json") throw new Error("id"); }
+          else if (/^files\//.test(n)) c.files++;
+        });
+      } catch (e) { return bad("The backup could not be read."); }
+      for (k in c) if (man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it.");
+      for (i = 0; i < recs.length; i++) {
+        r = recs[i].doc;
+        if (r.kind !== "nb" && !(listed["files/" + r.id + ".pdf"] && listed["files/" + r.id + ".pdf"].sha256 === r.sha256)) return bad("A document in the backup does not match its file.");
+      }
+      return { ok: true, man: man, folders: folders, recs: recs };
+    });
+  }
+  // Restore never overwrites: a document is skipped when its id or its sha256 is already in the library.
+  function restorePlan(docs, recs) {
+    var ids = {}, shas = {}, add = [], skip = [];
+    docs.forEach(function (d) { ids[d.id] = 1; if (d.sha256) shas[d.sha256] = 1; });
+    recs.forEach(function (r) { (ids[r.doc.id] || (r.doc.sha256 && shas[r.doc.sha256]) ? skip : add).push(r); });
+    return { add: add, skip: skip };
+  }
+
   function ixLabel(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }
 
-  var PURE = { pageSel: pageSel, moveItem: moveItem, bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs, hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, r4: r4 };
+  var PURE = { BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem, bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs, hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, r4: r4 };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -307,6 +352,8 @@
       '<button type="button" class="pn-btn" data-act="st-photos">' + h.ico("plus") + ' Import photos as PDF</button>' +
       '<input type="file" id="stPhotos" accept="image/*" multiple hidden>' +
       '<button type="button" class="pn-btn" data-act="st-newnb">' + h.ico("plus") + ' New notebook</button>' +
+      '<div class="st-acts"><button type="button" class="pn-btn sm" data-act="st-backup">Back up library</button><button type="button" class="pn-btn sm" data-act="st-restore">Restore</button></div>' +
+      '<input type="file" id="stRestoreF" accept=".zip,application/zip" hidden><p class="pn-note" id="stBk" role="status"></p>' +
       '<div class="st-new" id="stNew" hidden><input id="stNbT" maxlength="120" placeholder="Notebook title" aria-label="Notebook title">' +
       '<select id="stNbS" aria-label="Page style"><option value="blank">Blank</option><option value="ruled" selected>Ruled</option><option value="grid">Grid</option><option value="cornell">Cornell</option></select>' +
       '<select id="stNbZ" aria-label="Page size"><option value="a4">A4</option><option value="phone">Phone</option></select>' +
@@ -319,6 +366,11 @@
     f.addEventListener("change", function () {
       var file = f.files && f.files[0]; if (!file) return;
       file.arrayBuffer().then(function (ab) { f.value = ""; return importFile(new Uint8Array(ab), file.name); });
+    });
+    var rf = h.root().querySelector("#stRestoreF");
+    rf.addEventListener("change", function () {
+      var file = rf.files && rf.files[0]; if (!file) return;
+      file.arrayBuffer().then(function (ab) { rf.value = ""; return restoreBytes(new Uint8Array(ab)); });
     });
     var ph = h.root().querySelector("#stPhotos");
     ph.addEventListener("change", function () {
@@ -505,7 +557,7 @@
   function studyBar(d) {
     var b = function (act, label) { return '<button type="button" class="st-b" data-act="' + act + '">' + label + "</button>"; };
     return '<div class="st-tb" id="stTb2" role="toolbar" aria-label="Study and share" hidden>' + (d.kind === "nb" ? "" :
-      '<label class="st-pj">Pages <input id="stRange" type="text" placeholder="this page" aria-label="Pages to use, like 3-5"></label>' + b("st-make", "Make cards") + b("st-make", "Make MCQs") + b("st-explain", "Explain") + '<span class="st-sep"></span>') + "</div>";
+      '<label class="st-pj">Pages <input id="stRange" type="text" placeholder="this page" aria-label="Pages to use, like 3-5"></label>' + b("st-make", "Make cards") + b("st-make", "Make MCQs") + b("st-explain", "Explain") + '<span class="st-sep"></span>' + b("st-orig", "Share original")) + b("st-flat", d.kind === "nb" ? "Notebook to PDF" : "Share flattened") + "</div>";
   }
   function startViewer(d, pdf, strokes, undoRec, goto) {
     var root = host.root(), sc = root && root.querySelector("#stSc"), box = root && root.querySelector("#stPages");
@@ -698,6 +750,147 @@
     syncTb(); saveStack();
   }
 
+  /* ---- export and backup (A8) ---- */
+  function safeName(t) { return String(t || "").replace(/[\u0000-\u001f\\/:*?"<>|]+/g, " ").replace(/\s+/g, " ").trim().slice(0, 80) || "Study"; }
+  function saveBlob(blob, name) {
+    var a = D.createElement("a"), u = G.URL.createObjectURL(blob);
+    a.href = u; a.download = name; D.body.appendChild(a); a.click(); D.body.removeChild(a);
+    G.setTimeout(function () { G.URL.revokeObjectURL(u); }, 40000);
+  }
+  // The share sheet needs the native shell and Filesystem; without them (a headless test) the file is downloaded.
+  function shareReady() { var N = G.SMD_NATIVE; return G.SMD_IS_NATIVE && fsPlugin() && N && N.share ? N : null; }
+  function shareErr(e) { if (!/cancel/i.test(String(e && (e.message || e)))) host.toast("Sharing did not work. Try again."); }
+  // Print is whatever the share sheet offers for a PDF on that phone; there is no separate print button.
+  function shareFile(name, bytes, mime) {
+    var N = shareReady(), fs = fsPlugin();
+    if (!N) { saveBlob(new Blob([bytes], { type: mime }), name); return Promise.resolve(); }
+    return fs.writeFile({ path: "study-out/" + name, data: b64(bytes), directory: "CACHE", recursive: true }).then(function (r) { return N.share({ title: name, files: [r.uri], dialogTitle: "Share or print" }); }).then(null, shareErr);
+  }
+  function shareOriginal() {
+    var d = V && V.doc; if (!d || V.nb) return;
+    loadOriginal(d).then(function (bytes) { return shareFile(safeName(d.title) + ".pdf", bytes, "application/pdf"); }, function () { host.toast("The original could not be read."); });
+  }
+  // Each page drawn (pdf.js, or the notebook's ruling) with its live strokes on top, one JPEG a page, into a new PDF. The stored original is only read.
+  // shortcut: the whole PDF is built in memory; fine for study notes, upgrade (stream pages) if people flatten very long books.
+  function flatten() {
+    var d = V && V.doc; if (!d) return;
+    var pdf = V.pdf, strokes = V.strokes.filter(function (s) { return !s.gone; }), n = V.n, name = safeName(d.title) + (V.nb ? "" : " (flattened)") + ".pdf";
+    host.toast("Preparing the PDF...");
+    jspdf().then(function (J) {
+      var doc = null, i = 1;
+      function next() {
+        if (i > n) return;
+        var k = i++;
+        return (pdf ? pdf.getPage(k) : Promise.resolve(null)).then(function (pg) {
+          var v1 = pg ? pg.getViewport({ scale: 1 }) : { width: 595.28, height: 595.28 * (d.ratio || 1.414) }, sc = Math.min(3, 1600 / v1.width), cw = Math.floor(v1.width * sc), ch = Math.floor(v1.height * sc), c = D.createElement("canvas"), x;
+          c.width = cw; c.height = ch; x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, cw, ch);
+          return (pg ? pg.render({ canvasContext: x, viewport: pg.getViewport({ scale: sc }) }).promise.then(function () { pg.cleanup(); }) : Promise.resolve(drawBg(x, d.style, d.ratio, cw))).then(function () {
+            var id = pdf ? k : d.ord[k - 1], o = v1.height >= v1.width ? "p" : "l";
+            strokes.forEach(function (s) { if (s.page === id) drawStroke(x, s, cw, ch, 1); });
+            if (!doc) doc = new J({ unit: "pt", format: [v1.width, v1.height], orientation: o, compress: true }); else doc.addPage([v1.width, v1.height], o);
+            doc.addImage(c.toDataURL("image/jpeg", 0.85), "JPEG", 0, 0, v1.width, v1.height); c.width = 0;
+          }).then(next);
+        });
+      }
+      return next().then(function () { return shareFile(name, new Uint8Array(doc.output("arraybuffer")), "application/pdf"); });
+    }).then(null, function () { host.toast("The PDF could not be made."); });
+  }
+
+  function bk(msg) { var e = host && host.root() && host.root().querySelector("#stBk"); if (e) e.textContent = msg; else if (host) host.toast(msg); }
+  function putAll(store, arr) {
+    if (!arr.length) return Promise.resolve();
+    return db().then(function (d) {
+      return new Promise(function (res, rej) {
+        var t = d.transaction(store, "readwrite"), o = t.objectStore(store);
+        arr.forEach(function (v) { o.put(v); });
+        t.oncomplete = function () { res(); }; t.onerror = t.onabort = function () { rej(t.error); };
+      });
+    });
+  }
+  // One zip, file by file: each original is read and written (through Filesystem where there is one) before the next, so only one PDF is in memory.
+  function backup() {
+    var F = G.fflate, name = "StewardMD Study backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
+    var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0 }, files: [] };
+    if (!(F && F.Zip && F.ZipPassThrough)) return bk("Backup is not available in this build.");
+    // shortcut: no compression (ZipPassThrough), upgrade if backups get too large
+    var z = new F.Zip(function (e, chunk) {
+      if (e) { err = e; return; }
+      if (!fs) { parts.push(chunk); return; }
+      var i = n++, data = b64(chunk), p = "study-out/" + name;
+      chain = chain.then(function () { return i ? fs.appendFile({ path: p, data: data, directory: "CACHE" }) : fs.writeFile({ path: p, data: data, directory: "CACHE", recursive: true }).then(function (r) { uri = r.uri; }); });
+    });
+    var add = function (fname, bytes, listed) {
+      var f = new F.ZipPassThrough(fname); z.add(f); f.push(bytes, true);
+      if (!listed) return chain;
+      return sha256(bytes).then(function (h) { man.files.push({ name: fname, sha256: h, bytes: bytes.length }); return chain; });
+    };
+    var json = function (o) { return F.strToU8(JSON.stringify(o)); };
+    bk("Backing up...");
+    Promise.all([all("docs"), all("folders")]).then(function (r) {
+      man.counts.folders = r[1].length;
+      return add("folders.json", json(r[1]), true).then(function () {
+        return r[0].reduce(function (p, d) {
+          return p.then(function () {
+            return Promise.all([strokesOf(d.id), get("undo", d.id), textOf(d.id), get("index", d.id)]).then(function (x) {
+              man.counts.docs++; man.counts.strokes += x[0].length; man.counts.ptext += x[2].length;
+              return add("docs/" + d.id + ".json", json({ doc: d, strokes: x[0], undo: x[1] || null, ptext: x[2], index: x[3] || null }), true);
+            }).then(function () {
+              if (d.kind === "nb") return;
+              return loadOriginal(d).then(function (bytes) { man.counts.files++; return add("files/" + d.id + ".pdf", bytes, true); });
+            });
+          });
+        }, Promise.resolve());
+      });
+    }).then(function () {
+      return add("manifest.json", json(man), false);
+    }).then(function () {
+      z.end();
+      return chain;
+    }).then(function () {
+      if (err) throw err;
+      if (!fs) { saveBlob(new Blob(parts, { type: "application/zip" }), name); return; }
+      return nat.share({ title: name, files: [uri], dialogTitle: "Save the backup" }).then(null, shareErr).then(function () { try { fs.deleteFile({ path: uri }).then(null, function () {}); } catch (e) {} });
+    }).then(function () { bk("Backup made: " + man.counts.docs + (man.counts.docs === 1 ? " document, " : " documents, ") + man.counts.strokes + " strokes."); }, function () { bk("The backup could not be made."); });
+  }
+  function pickBackup() {
+    var N = G.SMD_NATIVE, viaInput = function () { var f = host.root() && host.root().querySelector("#stRestoreF"); if (f) f.click(); };
+    if (!(N && N.pickFile)) return viaInput();
+    N.pickFile({ types: ["application/zip", "application/x-zip-compressed", "application/octet-stream"] }).then(function (blob) {
+      return blob.arrayBuffer().then(function (ab) { return restoreBytes(new Uint8Array(ab)); });
+    }, viaInput);
+  }
+  // Everything is checked (every sha256, every count) before the first write; a failed check writes nothing. Existing documents are never touched.
+  // shortcut: the whole backup file is read into memory on restore; upgrade to a streaming reader if backups pass a few hundred MB.
+  function restoreBytes(bytes) {
+    var F = G.fflate, ent;
+    try { ent = F.unzipSync(bytes); } catch (e) { return bk("Nothing was restored. That file is not a Study Studio backup."); }
+    bk("Checking the backup...");
+    return verifyBackup(ent, sha256).then(function (v) {
+      if (!v.ok) return bk("Nothing was restored. " + v.error);
+      return Promise.all([all("docs"), all("folders")]).then(function (h) {
+        var plan = restorePlan(h[0], v.recs), have = {}, strokes = 0;
+        h[1].forEach(function (f) { have[f.id] = 1; });
+        return putAll("folders", v.folders.filter(function (f) { return !have[f.id]; })).then(function () {
+          return plan.add.reduce(function (p, r) {
+            return p.then(function () {
+              var d = r.doc, w = d.kind === "nb" ? Promise.resolve(d.store) : saveOriginal(d.id, ent["files/" + d.id + ".pdf"]);
+              // The document record goes in last, so a document is listed only once everything it needs is stored.
+              return w.then(function (where) { if (d.kind !== "nb") d.store = where; return putAll("strokes", r.strokes); })
+                .then(function () { return putAll("ptext", r.ptext); })
+                .then(function () { return r.undo ? put("undo", r.undo) : null; })
+                .then(function () { return r.index ? put("index", r.index) : null; })
+                .then(function () { strokes += r.strokes.length; return put("docs", d); });
+            });
+          }, Promise.resolve());
+        }).then(function () {
+          bk("Restored " + plan.add.length + (plan.add.length === 1 ? " document" : " documents") + " with " + strokes + " strokes. Skipped " + plan.skip.length + " already in the library. Nothing existing was changed.");
+          if (onTop("#stLib")) fillLib();
+          kick();
+        });
+      });
+    }).then(null, function () { bk("The restore stopped part way. Run it again: documents already restored are skipped."); });
+  }
+
   /* ---- study link (A7) ---- */
   // A sheet over the screen for the notices that must be accepted before anything is sent. Its text may hold the student's
   // own PDF text, so it keeps "page N" as written (emoji-icons.js).
@@ -784,6 +977,8 @@
     if (a === "st-home") return h.push(renderLib);
     if (a === "st-import") return pickPdf();
     if (a === "st-photos") return pickPhotos();
+    if (a === "st-backup") return backup();
+    if (a === "st-restore") return pickBackup();
     if (a === "st-sok") { var so = sheetOk; closeSheet(); return so && so(); }
     if (a === "st-scancel") return closeSheet();
     if (a === "st-src") {
@@ -808,6 +1003,8 @@
     if (!V) return;
     if (a === "st-more") { var tb2 = h.root().querySelector("#stTb2"); tb2.hidden = !tb2.hidden; return; }
     if (a === "st-make") return makeDeck();
+    if (a === "st-orig") return shareOriginal();
+    if (a === "st-flat") return flatten();
     if (a === "st-explain") return explain();
     if (a === "st-tool") { var t = el.getAttribute("data-v"); V.tool = V.tool === t ? null : t; return syncTb(); }
     if (a === "st-color") { V.ci = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
