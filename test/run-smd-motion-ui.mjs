@@ -4,6 +4,9 @@
  * spring easing) and shrinks back into it on close; with no source it rises; a screen swapped in after a Back tap
  * slides in from the left, a forward one from the right, and its rows settle one after another; reduced motion and
  * smd_motion3 = "0" fall back (no clip, the old 16 px rise). Screenshots mid-motion: SHOTS=<dir>.
+ * Shared elements (owner 2026-11-15): the morph starts and ends on the card's EXACT rect (no scale, no page fade) with
+ * the card's face riding over it; a dropdown and a floating dialog grow out of the button that opened them and go back
+ * into it; with no button a dialog rises from the bottom edge.
  * USAGE: node test/run-smd-motion-ui.mjs
  */
 import { spawn } from "node:child_process";
@@ -37,6 +40,10 @@ let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
+// Two inset() clips within a pixel of each other (rects carry sub-pixel noise under the text-size zoom).
+const nums = (c) => (String(c).match(/-?\d+(\.\d+)?/g) || []).map(Number);
+const sameClip = (a, b) => { const x = nums(a), y = nums(b); return x.length === y.length && x.length > 0 && x.every((v, i) => Math.abs(v - y[i]) <= 1); };
+const nearAt = (tr) => { const n = nums(tr); return n.length >= 3 && Math.abs(n[0] - 30) <= 1 && Math.abs(n[1] - 420) <= 1 && Math.abs(n[2] - 1) < 0.02; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 async function shot(name) { if (!SHOTS) return; const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result) writeFileSync(join(SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); }
 // A real tap: pointerdown then click, at the element's centre.
@@ -71,11 +78,15 @@ try {
   // 1. Open from a tile: the page grows out of it.
   await tap("#mxTile");
   await sleep(30);
-  const want = await ev(`var r=document.getElementById("mxTile").getBoundingClientRect(); return "inset("+Math.round(r.top)+"px "+Math.round(innerWidth-r.right)+"px "+Math.round(innerHeight-r.bottom)+"px "+Math.round(r.left)+"px round 20px)";`);
+  // In the page's CSS px: the text-size setting zooms <html>, so a screen rect is divided by the zoom (z).
+  const want = await ev(`var t=document.getElementById("mxTile"), r=t.getBoundingClientRect(), z=r.width/t.offsetWidth; return "inset("+Math.round(r.top/z)+"px "+Math.round((innerWidth-r.right)/z)+"px "+Math.round((innerHeight-r.bottom)/z)+"px "+Math.round(r.left/z)+"px round 20px)";`);
   const op = JSON.parse(await anim("#mxPage"));
-  ok(op.clip === want && /scale\(0\.96\)/.test(op.tr) && /^linear\(/.test(op.ease), "the page grows out of the tapped tile on the open spring: " + JSON.stringify(op));
-  for (const f of [0.08, 0.2, 0.4]) {
-    await ev(`document.getAnimations().forEach(function(a){ if(a.effect&&a.effect.target&&a.effect.target.id==="mxPage"){ a.pause(); a.currentTime=a.effect.getTiming().duration*${f}; } }); return 1;`);
+  ok(sameClip(op.clip, want) && !op.tr && /^linear\(/.test(op.ease) && op.dur >= 200 && op.dur <= 320, "the page grows out of the tile's EXACT rect and radius on a 200-320 ms spring: " + JSON.stringify(op));
+  ok(await ev(`return !document.getElementById("mxPage").getAnimations().some(function(a){ return a.effect.getKeyframes().some(function(f){ return f.opacity != null; }); });`) === true, "the page itself never fades");
+  const fc = JSON.parse(await ev(`var h=[].slice.call(document.querySelectorAll("body > [data-pm-ghost]")).filter(function(x){ return /Tile/.test(x.textContent); })[0]; if(!h) return "{}"; var c=h.lastElementChild, k=c.getAnimations().filter(function(a){ return a.effect.getKeyframes().some(function(f){ return f.transform; }); })[0].effect.getKeyframes(), hk=h.getAnimations()[0].effect.getKeyframes(); return JSON.stringify({from:k[0].transform, bg:h.firstElementChild.style.backgroundColor, clip:hk[0].clipPath, z:h.style.zIndex, fades:c.getAnimations().some(function(a){ return a.effect.getKeyframes()[0].opacity==1; })});`));
+  ok(nearAt(fc.from) && fc.bg === "rgb(14, 110, 99)" && sameClip(fc.clip, want) && fc.z === "950" && fc.fades, "the card's own face starts on the card and hands over to the page: " + JSON.stringify(fc));
+  for (const f of [0.08, 0.2, 0.4, 0.7]) {
+    await ev(`document.getAnimations().forEach(function(a){ var t=a.effect&&a.effect.target; if(t&&(t.id==="mxPage"||t.closest("[data-pm-ghost]"))){ a.pause(); var tm=a.effect.getTiming(); a.currentTime=318*${f}; } }); return 1;`);
     await sleep(80); await shot("mx-open-" + Math.round(f * 100));
   }
   await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); return 1;`);
@@ -98,8 +109,11 @@ try {
   // 3. Close: back into the tile.
   await ev(`document.getElementById("mxPage").remove(); return 1;`);
   await sleep(30);
-  const cl = JSON.parse(await ev(`var g=document.querySelector("body > [data-pm-ghost]"); if(!g) return JSON.stringify({}); var a=g.getAnimations().filter(function(x){ return x.effect.getKeyframes().some(function(f){ return f.clipPath; }); })[0]; if(!a) return JSON.stringify({none:1, n:g.getAnimations().length}); var k=a.effect.getKeyframes(); return JSON.stringify({clip:k[k.length-1].clipPath, op:k[k.length-1].opacity, origin:g.style.transformOrigin});`));
-  ok(cl.clip === want && String(cl.op) === "0" && /^\d+px \d+px$/.test(cl.origin), "closing shrinks it back into the tile: " + JSON.stringify(cl));
+  if (SHOTS) { await ev(`document.getAnimations().forEach(function(a){ var t=a.effect&&a.effect.target; if(t&&t.closest&&t.closest("[data-pm-ghost]")){ a.pause(); a.currentTime=318*0.75; } }); return 1;`); await sleep(60); await shot("mx-close-75"); await ev(`document.getAnimations().forEach(function(a){ if(a.playState==="paused") a.play(); }); return 1;`); }
+  const cl = JSON.parse(await ev(`var g=[].slice.call(document.querySelectorAll("body > [data-pm-ghost]")).filter(function(x){ return /Screen/.test(x.textContent); })[0]; if(!g) return JSON.stringify({}); var a=g.getAnimations().filter(function(x){ return x.effect.getKeyframes().some(function(f){ return f.clipPath; }); })[0]; if(!a) return JSON.stringify({none:1, n:g.getAnimations().length}); var k=a.effect.getKeyframes(); return JSON.stringify({clip:k[k.length-1].clipPath, op:k[k.length-1].opacity, origin:g.style.transformOrigin});`));
+  ok(sameClip(cl.clip, want) && cl.op == null, "closing shrinks it back into the tile's exact rect, solid, no fade: " + JSON.stringify(cl));
+  const cf = JSON.parse(await ev(`var h=[].slice.call(document.querySelectorAll("body > [data-pm-ghost]")).filter(function(x){ return /^Tile$/.test(x.textContent.trim()); })[0]; if(!h) return "{}"; var c=h.lastElementChild, k=c.getAnimations().filter(function(a){ return a.effect.getKeyframes().some(function(f){ return f.transform; }); })[0].effect.getKeyframes(); return JSON.stringify({to:k[k.length-1].transform, back:c.getAnimations().some(function(a){ var f=a.effect.getKeyframes(); return f[0].opacity==0 && f[f.length-1].opacity==1; })});`));
+  ok(nearAt(cf.to) && cf.back, "the card's face comes back and lands exactly on the card: " + JSON.stringify(cf));
   await sleep(500);
   ok(await ev(`return !document.querySelector("[data-pm-ghost]");`) === true, "the closing copy is gone after the exit");
 
@@ -109,6 +123,48 @@ try {
   const rs = JSON.parse(await anim("#mxPage"));
   ok(!rs.clip && /translateY\(844px\)/.test(rs.tr) && rs.op == null, "a page opened with no tap slides up from the bottom edge, no fade: " + JSON.stringify(rs));
   await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); document.getElementById("mxPage").remove(); return 1;`);
+  await sleep(600);
+
+  // 6. A dropdown grows out of the button that opened it, and goes back into it.
+  await ev(`var b=document.createElement("button"); b.id="mxMenuBtn"; b.textContent="More"; b.style.cssText="position:fixed;left:316px;top:96px;width:44px;height:44px;z-index:900";
+    var m=document.createElement("div"); m.id="mxMenu"; m.className="mx-dropdown"; m.hidden=true; m.style.cssText="position:fixed;right:10px;top:150px;width:200px;height:160px;z-index:901;background:#fff;border-radius:16px"; m.innerHTML="<div>One</div><div>Two</div>";
+    b.onclick=function(){ m.hidden=!m.hidden; }; document.body.appendChild(b); document.body.appendChild(m); return 1;`);
+  await sleep(100);
+  const ORG = await ev(`var b=document.getElementById("mxMenuBtn").getBoundingClientRect(), m=document.getElementById("mxMenu"); m.hidden=false; var r=m.getBoundingClientRect(), z=r.width/m.offsetWidth; m.hidden=true; return Math.round((b.left+b.width/2-r.left)/z)+"px "+Math.round((b.top+b.height/2-r.top)/z)+"px";`);
+  await sleep(50);
+  await tap("#mxMenuBtn"); await sleep(30);
+  if (SHOTS) { await ev(`document.getElementById("mxMenu").getAnimations().forEach(function(a){ a.pause(); a.currentTime=60; }); return 1;`); await sleep(60); await shot("mx-menu-60ms"); }
+  const mi = JSON.parse(await ev(`var m=document.getElementById("mxMenu"), a=m.getAnimations().filter(function(x){ return x.effect.getKeyframes().some(function(f){ return f.scale; }); })[0]; if(!a) return "{}"; var k=a.effect.getKeyframes(); return JSON.stringify({from:k[0].scale, origin:m.style.transformOrigin, ease:a.effect.getTiming().easing, dur:a.effect.getTiming().duration});`));
+  ok(mi.from === "0.2" && mi.origin === ORG && /^linear\(/.test(mi.ease) && mi.dur <= 320, "the menu grows out of its button's centre on a spring: " + JSON.stringify(mi));
+  await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); return 1;`);
+  await sleep(50);
+  await tap("#mxMenuBtn"); await sleep(30);
+  const mo = JSON.parse(await ev(`var m=document.getElementById("mxMenu"), a=m.getAnimations().filter(function(x){ return x.effect.getKeyframes().some(function(f){ return f.scale; }); })[0]; return JSON.stringify({hidden:m.hidden, vis:m.getClientRects().length>0, to:a?a.effect.getKeyframes().slice(-1)[0].scale:null, origin:m.style.transformOrigin});`));
+  ok(mo.hidden && mo.vis && mo.to === "0.2" && mo.origin === ORG, "closing, it stays on screen and shrinks back into the button: " + JSON.stringify(mo));
+  await sleep(450);
+  ok(await ev(`var m=document.getElementById("mxMenu"); return m.hidden && !m.getClientRects().length && !m.style.display && !m.style.transformOrigin;`) === true, "after the exit the menu is hidden again and its inline style is as it was");
+  // Removed instead of hidden: an inert copy goes back into the button.
+  await tap("#mxMenuBtn"); await sleep(30);
+  await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); document.getElementById("mxMenu").remove(); return 1;`);
+  await sleep(30);
+  ok(await ev(`var g=[].slice.call(document.querySelectorAll(".mx-dropdown[data-pm-ghost]"))[0]; return !!g && g.getAnimations().some(function(a){ return a.effect.getKeyframes().slice(-1)[0].scale==="0.2"; });`) === true, "a removed menu leaves a copy that shrinks back into the button");
+  await sleep(450);
+  ok(await ev(`return !document.querySelector(".mx-dropdown");`) === true, "the copy is gone after the exit");
+
+  // 7. A floating dialog grows out of its button; one opened by code rises from the bottom edge.
+  await ev(`var d=document.createElement("div"); d.id="mxDlg"; d.className="smd-dialog"; d.style.cssText="position:fixed;left:45px;top:300px;width:300px;height:200px;z-index:950;background:#fff;display:none"; d.innerHTML="<p>Sure?</p>";
+    var st=document.createElement("style"); st.textContent="#mxDlg.on{display:block!important}"; document.head.appendChild(st); document.body.appendChild(d);
+    var b=document.getElementById("mxMenuBtn"); b.onclick=function(){ d.classList.add("on"); }; return 1;`);
+  await sleep(100);
+  await tap("#mxMenuBtn"); await sleep(40);
+  const dl = JSON.parse(await ev(`var d=document.getElementById("mxDlg"), a=d.getAnimations().filter(function(x){ return x.effect.getKeyframes().some(function(f){ return f.scale; }); })[0]; return JSON.stringify({from:a?a.effect.getKeyframes()[0].scale:null, origin:d.style.transformOrigin});`));
+  ok(dl.from === "0.2" && dl.origin === "293px -182px", "a dialog grows out of the button that opened it: " + JSON.stringify(dl));
+  await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); document.getElementById("mxDlg").classList.remove("on"); return 1;`);
+  await sleep(1000);
+  await ev(`document.getElementById("mxDlg").classList.add("on"); return 1;`); await sleep(40);
+  const dr = await ev(`var d=document.getElementById("mxDlg"), a=d.getAnimations().filter(function(x){ return x.effect.getKeyframes().some(function(f){ return f.translate; }); })[0]; return a ? a.effect.getKeyframes()[0].translate : "none";`);
+  ok(/^0px 5\d\dpx$/.test(dr), "with no button it rises from the bottom edge, not from nowhere: " + dr);
+  await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); var d=document.getElementById("mxDlg"); d.classList.remove("on"); return 1;`);
   await sleep(600);
 
   // 5. Reduced motion: nothing animates; switch off: the earlier motion.

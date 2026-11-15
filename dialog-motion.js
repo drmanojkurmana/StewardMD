@@ -64,7 +64,28 @@
   // opening (seen on the antibiogram source sheet).
   var famOf = new WeakMap();
 
+  /* A floating dialog (the "modal" family) comes out of the button that opened it and goes back into it (owner
+     2026-11-15: "every UI element that appears should have a clear origin"). With no button it rises from the bottom
+     edge. Shared springs from smd-motion.js (window.SMD_MOTION); without it, the Motion scale below. */
+  var popFrom = new WeakMap();
+  function SMv() { var m = window.SMD_MOTION; return m && m.on && m.on() && m.popIn ? m : null; }
+  function popInModal(el) {
+    var m = SMv(); if (!m) return false;
+    el.style.transition = "none";
+    var o = m.popIn(el, m.source());
+    if (o) { popFrom.set(el, o.origin); return true; }
+    popFrom.set(el, "");
+    return !!m.riseFromEdge(el);
+  }
+  function popOutModal(el) {
+    var m = SMv(); if (!m || !popFrom.has(el)) return false;
+    var o = popFrom.get(el); popFrom.delete(el);
+    el.style.transition = "none";
+    if (o) m.popOut(el); else m.sinkToEdge(el);
+    return true;
+  }
   function animateIn(el) {
+    if (familyOf(el) === "modal" && popInModal(el)) { famOf.set(el, "modal"); return; }
     // Only run when Motion is READY — otherwise priming to hidden with no animator would leave the
     // dialog invisible. Not ready: let the app's own CSS show this one, and warm Motion for the next.
     if (!(window.Motion && window.Motion.animate)) { withMotion(function () {}); return; }
@@ -80,6 +101,7 @@
     setTimeout(settle, 700);   // safety: never leave the dialog stuck in its primed/animating state
   }
   function animateOut(el) {
+    if (popOutModal(el)) return;
     if (!(window.Motion && window.Motion.animate)) return;   // Motion gone: app's removal handles it
     var f = F[famOf.get(el) || familyOf(el)];
     el.style.transition = "none";

@@ -17,6 +17,8 @@
  * all or a CSS animation), nor a copy-exit to a node it removes itself. Not the splash / intro / sign-in gates, nor anything dialog-motion.js owns.
  * No-op under prefers-reduced-motion. Kill switch: localStorage smd_page_motion = "0".
  *
+ * Shared element (owner 2026-11-15): the morph starts and ends at the card's EXACT rect and radius with no fade on the
+ * page; the card's own face rides over the growing shape and hands over to the page (smd-motion.js morphIn/morphOut).
  * Motion 3 (owner 2026-10-31, smd-motion.js, switch smd_motion3 = "0" for the motion above): a page opened from a tile
  * or row GROWS OUT OF IT (the container transform: clipped from the tile's rect to the full screen on a spring) and
  * shrinks back into it on close when the tile is still there; a page with no source rises on the open spring and
@@ -88,10 +90,11 @@
   // The close: back into the tile it came from when that tile is still on screen where it was, else a sink.
   function outFor(el, i) {
     var m = SM(); if (!m) return { kf: K_OUT, o: OUT };
-    var src = i && i.src, e = m.ease("close");
+    var src = i && i.src;
     if (src && src.el && src.el.isConnected) {
       var r = src.el.getBoundingClientRect();
-      if (r.width > 8 && Math.abs(r.left - src.left) < 2 && Math.abs(r.top - src.top) < 2) { var mo = m.morphOutKf(el, src); return { kf: mo.kf, o: { duration: 260, easing: e.easing, fill: "forwards" }, origin: mo.origin }; }
+      // Back into the card's exact rect, with the card's face handed back over it (smd-motion.js morphOut).
+      if (r.width > 8 && Math.abs(r.left - src.left) < 2 && Math.abs(r.top - src.top) < 2) return m.morphOut(el, src);
     }
     var sk = m.sinkKf();   // no tile to go back to: the page slides down off the bottom edge
     return { kf: sk.kf, o: sk.o };
@@ -112,6 +115,7 @@
     if (!big(el)) { restore(); return; }
     var x = outFor(el, i), oo = el.style.transformOrigin; if (x.origin) el.style.transformOrigin = x.origin;
     var a; try { a = el.animate(x.kf, x.o); } catch (e) { el.style.transformOrigin = oo; restore(); return; }
+    if (x.face) try { x.face(el); } catch (e) {}
     var finished = false;
     function done() {
       if (finished) return; finished = true;
@@ -139,8 +143,9 @@
     g.setAttribute("inert", ""); g.setAttribute("aria-hidden", "true"); g.setAttribute("data-pm-ghost", "");
     g.style.pointerEvents = "none";
     try { parent.insertBefore(g, next && next.parentNode === parent ? next : null); } catch (e) { return; }
-    var x = outFor(node, st); if (x.origin) g.style.transformOrigin = x.origin;
+    var x = outFor(g, st); if (x.origin) g.style.transformOrigin = x.origin;   // measured on the copy: it is on screen
     var a; try { a = g.animate(x.kf, x.o); } catch (e) { if (g.parentNode) g.parentNode.removeChild(g); return; }
+    if (x.face) try { x.face(g); } catch (e) {}
     function gone() { try { if (g.parentNode) g.parentNode.removeChild(g); } catch (e) {} }
     a.onfinish = gone; setTimeout(gone, 700);
   }
