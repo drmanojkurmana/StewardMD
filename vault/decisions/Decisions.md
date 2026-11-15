@@ -12412,3 +12412,14 @@ FundX/embeddings/PrepNucleus still Google-only. See [[AI Control Center]].
 - Live-checked same day; owner: "use the cheapest model". Text and images on GPT-6 Luna ($0.10/$0.50 per 1M, about 3x
   cheaper than Gemini 3.1 Flash Lite, answers checked); audio/PDF on Gemini 3.1 Flash Lite (Luna cannot hear audio).
   Gemma 4 31B is slightly cheaper on output but weaker for clinical answers, so not chosen.
+
+## 2026-11-15 Study Studio: Phase A / Phase B, WebView-first ink
+- Owner asked to rewrite the "Study Studio Master Plan v1.0" into Phase A (most important) and Phase B (rest), and to start
+  Phase A. Plan: [[plans/PrepNucleus-StudyStudio]].
+- Flag `smd_study`, default OFF, needs `smd_prep`. Entry is a PrepNucleus row.
+- Ink is a canvas overlay with Pointer Events over pdf.js, not native. Native PencilKit / Android ink is built only if the
+  A3 latency gate fails on a real iPad + Pencil or S Pen device. Reason: pdf.js, OCR, jsPDF, share and Layer C already
+  live in the WebView; a native ink engine on two platforms is the most expensive item in the source plan.
+- Originals via `@capacitor/filesystem`, never modified; strokes per page in IndexedDB `study`, page-relative, saved per stroke.
+- The only new native code in Phase A is a document-camera plugin (VisionKit / ML Kit Document Scanner).
+- No new AI service: cards and MCQs through Layer C, "Explain" through `/api/ai` with a cloud notice.
