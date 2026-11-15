@@ -1584,6 +1584,7 @@
     if (G.PREP_SETUP && G.PREP_SETUP.back()) return true;   // the practice setup sheet (prep-setup.js)
     // Arena: a sheet closes first; a live battle asks before it is left.
     if (G.PREP_ARENA && G.PREP_ARENA.back && G.PREP_ARENA.back()) return true;
+    if (G.STUDY && G.STUDY.back()) return true;
     if (G.PREP_FLASH && G.PREP_FLASH.back()) return true;
     // Lessons: a zoomed image closes first; leaving the reader stops the narration.
     if (G.PREP_LESSONS && G.PREP_LESSONS.back()) return true;
@@ -1699,6 +1700,7 @@
     try { if (G.PREP_RAD) G.PREP_RAD.leave(); } catch (e) {}
     try { if (G.PREP_PLAN) G.PREP_PLAN.leave(); } catch (e) {}
     try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
+    try { if (G.STUDY) G.STUDY.leave(); } catch (e) {}
     try { if (G.PREP_SETUP) G.PREP_SETUP.leave(); } catch (e) {}
     try { if (G.PREP_ASK) G.PREP_ASK.leave(); } catch (e) {}
     try { if (G.PREP_IDS) G.PREP_IDS.leave(); } catch (e) {}
@@ -2070,6 +2072,7 @@
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
+      (G.STUDY ? G.STUDY.homeRow(HOST) : "") +
       "</div>" +
       (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
       (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
@@ -2653,7 +2656,7 @@
   // Owner rule (2026-10-07): no authorship or source line on questions; content credits live in the Terms and Privacy pages.
   // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
   function provLine(it) { return it._py && G.PREP_PYQ ? G.PREP_PYQ.prov(it) : ""; }
-  function provHtml(it) { var l = provLine(it); return l ? '<p class="pn-prov">' + l + "</p>" : ""; }
+  function provHtml(it) { var l = provLine(it), sl = G.PREP_C && G.PREP_C.srcLink ? G.PREP_C.srcLink(it) : ""; return (l ? '<p class="pn-prov">' + l + "</p>" : "") + sl; }
   function outdatedHtml(it) { return isOutdated(it) ? '<p class="pn-guide">Guideline changed, check current version.</p>' : ""; }
   /* Round 3 focus mode. The progress strip: one segment per question up to 30 (right, wrong or answered, the current one
      lit), a plain fill beyond that. The streak counts right answers in a row in this set, ending at the current question. */
@@ -4678,6 +4681,8 @@
     if (a.indexOf("su-") === 0 && G.PREP_SETUP) return G.PREP_SETUP.act(a, b, HOST);
     // Layer C (prep-create.js and friends) owns every data-act starting "c-".
     if (a.indexOf("c-") === 0 && G.PREP_C && G.PREP_C.act) return G.PREP_C.act(a, b, HOST);
+    // Study Studio (study.js) owns every data-act starting "st-".
+    if (a.indexOf("st-") === 0 && G.STUDY) return G.STUDY.act(a, b, HOST);
     // Arena and My stats (prep-arena.js) own every data-act starting "a-".
     if (a.indexOf("a-") === 0 && G.PREP_ARENA && G.PREP_ARENA.act) return G.PREP_ARENA.act(a, b, HOST);
     // Lessons (prep-lessons.js) own every data-act starting "l-".

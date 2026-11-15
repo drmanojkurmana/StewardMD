@@ -12412,3 +12412,22 @@ FundX/embeddings/PrepNucleus still Google-only. See [[AI Control Center]].
 - Live-checked same day; owner: "use the cheapest model". Text and images on GPT-6 Luna ($0.10/$0.50 per 1M, about 3x
   cheaper than Gemini 3.1 Flash Lite, answers checked); audio/PDF on Gemini 3.1 Flash Lite (Luna cannot hear audio).
   Gemma 4 31B is slightly cheaper on output but weaker for clinical answers, so not chosen.
+
+## 2026-11-15 Study Studio: Phase A / Phase B, WebView-first ink
+- Owner asked to rewrite the "Study Studio Master Plan v1.0" into Phase A (most important) and Phase B (rest), and to start
+  Phase A. Plan: [[plans/PrepNucleus-StudyStudio]].
+- Flag `smd_study`, default OFF, needs `smd_prep`. Entry is a PrepNucleus row.
+- Ink is a canvas overlay with Pointer Events over pdf.js, not native. Native PencilKit / Android ink is built only if the
+  A3 latency gate fails on a real iPad + Pencil or S Pen device. Reason: pdf.js, OCR, jsPDF, share and Layer C already
+  live in the WebView; a native ink engine on two platforms is the most expensive item in the source plan.
+- Originals via `@capacitor/filesystem`, never modified; strokes per page in IndexedDB `study`, page-relative, saved per stroke.
+- The only new native code in Phase A is a document-camera plugin (VisionKit / ML Kit Document Scanner).
+- No new AI service: cards and MCQs through Layer C, "Explain" through `/api/ai` with a cloud notice.
+
+## 2026-11-15 Study Studio A5, A7, A8: scan wiring, study link, backup format
+- **Scan and photos (A5):** pages become one jsPDF PDF stored exactly like an import (original, sha256, thumbnail); the scanner's cache JPEGs are deleted; OCR runs in the background (3 pages, 30 ms pause, like the A6 indexer) through `SMD_NATIVE.ocr` into `setPageText`. Shortcut: OCR progress is not saved, an app kill leaves later pages without OCR text. The Scan button is inserted only after `DocScan.isAvailable()` says true.
+- **Study link (A7):** no new route and no second generator. `PREP_C.fromStudy` (prep-create.js) takes the chosen pages' text and joins the existing flow at its review step (sign-in, scrub, caps, job). A source ref gains `std` (the Study Studio document id) only for decks made this way; `PREP_C.srcLink` draws the "Open in Study Studio" button on cards (prep-cards.js) and answered questions (`provHtml` in prep.js). "Make cards" and "Make MCQs" start the same Layer C deck, which always makes questions and flashcards together; Layer C has no cards-only run. "Explain" goes through `/api/ai/prep-teach` (kind chat, base step), sends only the selected text (at most 1,500 characters) after a confirm tap, and says so when offline.
+- **Zip format (A8):** reuse `fflate.min.js` (already in the repo and loaded by index.html), streaming `Zip` + `ZipPassThrough` = STORE, no compression (`shortcut:` upgrade if backups get too large). No own zip writer, so no own CRC32.
+- **Backup layout:** `manifest.json` `{ format: "stewardmd-study-backup", v: 1, created, counts: { docs, folders, strokes, ptext, files }, files: [{ name, sha256, bytes }] }` (lists every other file), `folders.json`, `docs/<id>.json` `{ doc, strokes, undo, ptext, index }`, `files/<id>.pdf` (original bytes). Written file by file through Filesystem (CACHE) where native, then the share sheet.
+- **Restore:** read the whole file, check every sha256, size and count, and that each PDF record matches its file, BEFORE the first write; one failure aborts with no writes. A document is skipped when its id or sha256 is already present; nothing existing is overwritten or deleted. The document record is written last. Shortcut: the whole backup is read into memory.
+- **Print:** no separate Print button; the share sheet is the print path (the phone decides whether it offers Print).

@@ -238,6 +238,8 @@
     return true;
   }
   var PROVS = { AI: 1, LIC: 1, SMD: 1, USR: 1, PUB: 1 };
+  // The source ref kept on every item and card. std (only for a deck made from Study Studio) is that document's id, so the page can be opened.
+  function srcRef(ctx, p, h, sn) { var r = { doc: ctx.doc, name: ctx.name, p: p, h: h, sn: sn }; if (ctx.std) r.std = ctx.std; return r; }
   /* A reviewed item (6.4) -> the stored item for the shared runner, or null when it is not a usable question. */
   function toStored(it, f, deckId, ctx) {
     if (!it || typeof it.q !== "string" || !it.q.trim() || !it.o || it.o.length !== 4) return null;
@@ -250,14 +252,14 @@
       id: typeof it.id === "string" && it.id ? it.id : "q_" + DK.sha12(deckId + fid + norm(it.q)),
       q: it.q, o: it.o.slice(0, 4), a: a, exp: String(it.exp || (r && r[a]) || ""), t: (f && f.sec) || it.t || "sec-0",
       d: it.d === 1 || it.d === 3 ? it.d : 2, r: r, kp: it.kp ? String(it.kp) : "", et: it.et && it.et.length === 4 ? it.et : null, cog: it.cog || null, fid: fid,
-      src: { doc: ctx.doc, name: ctx.name, p: f ? f.p : [], h: f ? f.h : "", sn: f ? f.sn : [] },
+      src: srcRef(ctx, f ? f.p : [], f ? f.h : "", f ? f.sn : []),
       prov: PROVS[it.prov] ? it.prov : "USR", gen: "AI", ex: [ctx.exam], pv: it.pv || ctx.pv || PV, mv: it.mv || ctx.model || MODEL,
       rv: it.rv || null, deckId: deckId, _s: "deck", _m: "deck-" + deckId
     };
   }
   // One flashcard per fact (6.5): front = the fact's question, back = the fact.
   function toCard(f, deckId, ctx) {
-    return { id: "c_" + DK.sha12(deckId + f.id), fid: f.id, front: f.cq, back: f.ft, src: { doc: ctx.doc, name: ctx.name, p: f.p, h: f.h, sn: f.sn }, prov: "AI", deckId: deckId };
+    return { id: "c_" + DK.sha12(deckId + f.id), fid: f.id, front: f.cq, back: f.ft, src: srcRef(ctx, f.p, f.h, f.sn), prov: "AI", deckId: deckId };
   }
   // Gate 12 on the phone: token Jaccard >= 0.6 against the stems already saved in the deck.
   function tokens(s) { var o = {}; (norm(s).match(/[a-z0-9]{3,}/g) || []).forEach(function (w) { o[w] = 1; }); return o; }
@@ -1159,13 +1161,14 @@
         var m = DK.newManifest({ id: id, title: title, exam: exam, profileV: prof.v || 1, pv: PV, model: MODEL, source: { type: src.kind, name: src.name, pages: SR.pageSpan(src.pages), sha: sha } });
         m.diff = diff;
         if (src.ocr) m.source.ocr = src.ocr;
+        if (src.study) m.source.std = src.study;
         if (src.skipped) m.source.skipped = src.skipped;
         if (src.pages && src.pages.length) m.source.sel = SR.selSpec(src.pages);
         start(host, newJob({ m: m, sents: doc.sents, sections: doc.sections, facts: [], items: [], saved: false, target: TARGET, profile: prof, ctx: ctxOf(m), imgs: src.imgs }), true);
       });
     }).then(null, function () { createError(host, MSG.storage); });
   }
-  function ctxOf(m) { return { doc: m.source.sha.slice(0, 12), name: m.source.name || m.title, exam: m.exam, pv: m.pv, model: m.model }; }
+  function ctxOf(m) { return { doc: m.source.sha.slice(0, 12), name: m.source.name || m.title, std: m.source.std || "", exam: m.exam, pv: m.pv, model: m.model }; }
   /* "Make 10 more" and "Continue": the deck's sentences (when this phone has them), facts and questions, its images
      still waiting, and the round saved in the manifest when one was cut off. */
   function startMore(host, deckId, fromCreate, imgs) {
@@ -1199,6 +1202,28 @@
       else if (onTop("#pcDeckView", host) || onTop("#pcDecksView", host)) host.rerender();
       if (!onTop("#pcProgView", host)) host.toast(res.ok ? res.accepted + " new questions are ready in " + j.m.title + "." : res.message);
     });
+  }
+
+  /* Study Studio (study.js, row A7) hands over the text of the pages the student chose: o = { id (the Study Studio document id),
+     name, title, pages: [{ p, lines: [{ tx, size, ocr? }] }] }. From here it is the same flow as a PDF picked in this module:
+     the sign-in check, the personal-details check (review), the caps, the job. Every item keeps src.std = o.id so srcLink can open that page. */
+  function fromStudy(host, o) {
+    if (job && !jobResult) return host.toast("A deck is being made. Wait for it to finish first.");
+    if (!user()) return host.toast(MSG["sign-in"]);
+    var fc = SR.fitChars(o.pages, SR.CHARS_CAP), pages = fc.pages.map(function (x) { return x.p; }), note0 = "";
+    var chk = SR.capCheck(SR.docFromPdfPages(fc.pages.map(function (x) { return { p: x.p, ocr: !!x.ocr, lines: x.lines }; }), o.title), pages.length);
+    if (chk.error) return host.toast(chk.error);
+    if (fc.dropped) note0 = "Using " + pages.length + " of the " + o.pages.length + " pages: the text was too long for one deck.";
+    resetCreate(host);
+    review(host, { kind: "pdf", raw: fc.pages, title: o.title || "", name: o.name || "", pages: pages, scanned: [], ocr: fc.pages.filter(function (x) { return x.ocr; }).length, skipped: 0, note: note0, study: o.id });
+  }
+  /* The button on a card or an answered question made from a Study Studio document: opens that page. Empty for any other item,
+     and when Study Studio is off. No page number in the text (emoji-icons.js rewrites "page N"). */
+  function srcLink(it) {
+    var s = it && it.src, S = G.STUDY;
+    if (!s || !s.std || !S || !S.on()) return "";
+    var e = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    return '<button type="button" class="pn-btn sm" data-act="st-src" data-doc="' + e(s.std) + '" data-p="' + (+(s.p && s.p[0]) || 1) + '">Open in Study Studio</button>';
   }
 
   /* ---------- progress: real counts only (questions that passed every check), no made-up percentage ---------- */
@@ -1361,5 +1386,5 @@
     if (a === "c-imgskip") return imagesChosen(host, false);
   }
 
-  G.PREP_C = { act: act, cfg: cfg, _pure: PURE, _cs: cs, _job: function () { return { job: job, result: jobResult }; }, _pg: pg };
+  G.PREP_C = { act: act, cfg: cfg, fromStudy: fromStudy, srcLink: srcLink, _pure: PURE, _cs: cs, _job: function () { return { job: job, result: jobResult }; }, _pg: pg };
 })(typeof window !== "undefined" ? window : this);

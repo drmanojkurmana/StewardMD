@@ -58,7 +58,7 @@
     var c = ss.list[ss.i];
     host.paint(host.bar("Flashcards", "Card " + (ss.i + 1) + " of " + ss.list.length, "back") + '<div class="pn-body" id="pcCardsView">' +
       '<section class="pn-panel pc-card" aria-label="Card ' + (ss.i + 1) + '"><p class="pc-front">' + esc(c.front) + "</p>" +
-      (ss.shown ? '<div class="pc-back" id="pcBack" tabindex="-1"><p>' + esc(c.back) + "</p></div>" : "") + "</section>" +
+      (ss.shown ? '<div class="pc-back" id="pcBack" tabindex="-1"><p>' + esc(c.back) + "</p>" + (G.PREP_C && G.PREP_C.srcLink ? G.PREP_C.srcLink(c) : "") + "</div>" : "") + "</section>" +
       (ss.shown ? '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="c-kno">I did not</button><button type="button" class="pn-btn pri" data-act="c-kyes">I knew it</button></div>' :
         '<button type="button" class="pn-btn pri" data-act="c-kflip" id="pcFlip">Show answer</button>') +
       '<p class="pn-mut pn-small">' + esc(title) + "</p></div>", ss.shown ? "#pcBack" : "#pcFlip");
