@@ -33,7 +33,7 @@
    boss battles, quick fire, voice mode, focus room, Wrapped, seasons, mnemonic lab, streak freezes; flag smd_prep_play, optional). */
 (function (G) {
   "use strict";
-  var V = "prep156";
+  var V = "prep157";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
   var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css", "prep-play.css"];
   var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-voice.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-pyqss.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js", "prep-play.js"];
@@ -56,8 +56,8 @@
     SPOTIFY_CSS.forEach(css);
     return SPOTIFY_JS.reduce(function (p, f) { return p.then(function () { return js(f); }); }, Promise.resolve());
   }
-  // Study Studio (flag smd_study, default OFF, requires smd_prep): lazy like Sound; no study file downloads while off.
-  function studyOn() { try { var q = (G.location.search.match(/[?&]study=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_study") === "1"; } catch (e) { return false; } }
+  // Study Studio (flag smd_study, default ON since 2026-11-15 like smd_prep, requires smd_prep; "0" turns it off): lazy like Sound; no study file downloads while off.
+  function studyOn() { try { var q = (G.location.search.match(/[?&]study=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_study") !== "0"; } catch (e) { return false; } }
   var loading = null;
 
   function enabled() {
