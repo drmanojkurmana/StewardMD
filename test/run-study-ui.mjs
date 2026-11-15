@@ -1,4 +1,4 @@
-/* Study Studio (A1 to A3) in the REAL app bundle, headless Chromium through Playwright.
+/* Study Studio (A1 to A8) in the REAL app bundle, headless Chromium through Playwright.
  * What must hold: with the flag off there is no Study Studio row; with ?prep=1&study=1 the row shows; a PDF imported
  * through the file input is listed with its page count and thumbnail; the stored original's sha256 equals the fixture's
  * (and the metadata's); two synthetic pen strokes (Pointer Events, pressure) are saved one record each; undo hides one,
@@ -208,6 +208,59 @@ await page.fill("#stQ", "zebra");
 await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stRes").innerText));
 ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stRes").innerText()), "search: results say which pages are not yet indexed");
 await idb("docs", 'o.delete("bad")');
+
+/* ---- A5: photos to PDF (stubbed OCR), scan (stubbed plugin), cancel, pickImage ---- */
+const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction(store).objectStore(store).getAll(); q.onsuccess = () => { r.result.close(); res(q.result); }; }; }), store);
+const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
+const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
+const openLib = async () => { await page.click('#smdPrep [data-act="st-home"]'); await page.waitForSelector("#stLib"); };
+await boot("prep=1&study=1");
+await openLib();
+const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));
+await page.evaluate(() => { window.__ocrN = 0; window.SMD_NATIVE = { ocr: async () => ({ text: "quokka scan line " + (++window.__ocrN) }) }; });
+const docsBefore = (await idbAll("docs")).length;
+await page.setInputFiles("#stPhotos", jpegs.map((b, i) => ({ name: `p${i}.jpg`, mimeType: "image/jpeg", buffer: Buffer.from(b, "base64") })));
+await page.waitForFunction((n) => document.querySelectorAll(".st-doc").length > n && /Photos[\s\S]*3 pages/.test(document.querySelector("#stList").innerText), docsBefore, { timeout: 30000 });
+const photoDoc = (await idbAll("docs")).find((d) => /^Photos /.test(d.title));
+const photoPdf = await fileBytes(photoDoc.id);
+ok(photoDoc.pageCount === 3 && photoPdf.slice(0, 5).toString() === "%PDF-" && pagesIn(photoPdf) === 3 && createHash("sha256").update(photoPdf).digest("hex") === photoDoc.sha256, "photos: 3 images become one 3-page PDF stored like an import (sha256 kept)");
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => { r.result.close(); res(q.result.filter((x) => x.src === "ocr").length === 3); }; }; }), null, { timeout: 20000 });
+await page.fill("#stQ", "quokka");
+await page.waitForFunction(() => document.querySelectorAll(".st-hit").length === 3, null, { timeout: 10000 });
+ok(/Page 1/.test(await page.locator(".st-hit").first().innerText()), "photos: OCR text (stubbed, 3 pages) is found by search, one hit per page");
+await page.fill("#stQ", "");
+/* scan: no button while the plugin says unavailable */
+await page.evaluate((b) => {
+  window.__del = []; window.__scanRes = "ok";
+  window.Capacitor = { Plugins: {
+    DocScan: { isAvailable: async () => ({ available: window.__avail === true }), scan: async () => { if (window.__scanRes === "cancel") { const e = new Error("cancelled"); e.code = "cancelled"; throw e; } return { pages: [{ path: "/cache/a.jpg", width: 300, height: 400 }, { path: "file:///cache/b.jpg", width: 300, height: 400 }] }; } },
+    Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
+  window.__avail = false;
+}, jpegs[0]);
+await page.click('#smdPrep [data-act="back"]'); await openLib(); await page.waitForTimeout(400);
+ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button while isAvailable is false");
+await page.evaluate(() => { window.__avail = true; });
+await page.click('#smdPrep [data-act="back"]'); await openLib();
+await page.waitForSelector('[data-act="st-scan"]', { timeout: 5000 });
+ok(true, "scan: the Scan button shows once isAvailable is true");
+const nDocs = (await idbAll("docs")).length;
+await page.evaluate(() => { window.__scanRes = "cancel"; });
+await page.click('[data-act="st-scan"]'); await page.waitForTimeout(700);
+ok((await idbAll("docs")).length === nDocs && await page.evaluate(() => window.__del.length) === 0, "scan: cancel returns quietly, nothing added");
+await page.evaluate(() => { window.__scanRes = "ok"; });
+await page.click('[data-act="st-scan"]');
+await page.waitForFunction((n) => document.querySelectorAll(".st-doc").length > n, nDocs, { timeout: 30000 });
+const scanDoc = (await idbAll("docs")).find((d) => /^Scan /.test(d.title));
+ok(scanDoc.pageCount === 2 && pagesIn(await fileBytes(scanDoc.id)) === 2, "scan: two pages become one 2-page PDF in the library");
+ok(await page.evaluate(() => JSON.stringify(window.__del)) === JSON.stringify(["file:///cache/a.jpg", "file:///cache/b.jpg"]), "scan: the cache JPEGs are deleted");
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => { r.result.close(); res(q.result.filter((x) => x.src === "ocr").length === 5); }; }; }), null, { timeout: 20000 });
+ok(true, "scan: OCR ran in the background for both pages");
+/* pickImage path: one photo, "add another" answered no */
+await page.evaluate((b) => { window.confirm = () => false; window.SMD_NATIVE.pickImage = async () => "data:image/jpeg;base64," + b; }, jpegs[1]);
+await page.click('[data-act="st-photos"]');
+await page.waitForFunction(() => /Photos[\s\S]*1 page\b/.test(document.querySelector("#stList").innerText), null, { timeout: 30000 });
+ok(true, "photos: pickImage path (native bridge) builds a 1-page PDF");
+await page.evaluate(() => { window.confirm = () => true; delete window.Capacitor; });
 
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 

@@ -1,4 +1,4 @@
-/* PrepNucleus Study Studio (phase A1 to A4 and A6): a PDF library, notebooks, a viewer, a pen and search. window.STUDY. ES5. Loaded by
+/* PrepNucleus Study Studio (phase A1 to A6): a PDF library, notebooks, a viewer, a pen and search. window.STUDY. ES5. Loaded by
    prep-loader.js only when flag smd_study is on; draws through PREP._host. prep.js forwards every data-act starting
    "st-" here and asks back() first. Plan: vault/plans/PrepNucleus-StudyStudio.md, note: vault/modules/Study Studio.md.
    Flag smd_study, default OFF, needs smd_prep: localStorage "1" or ?study=1 on, "0" or ?study=0 off.
@@ -7,6 +7,7 @@
    ptext (one record per page and source, "pdf" or "ocr": the search index), index (pages of each PDF indexed so far).
    A notebook is a docs record with kind "nb" and no PDF: ord lists its stable page ids in order, a stroke's page is that id.
    The original PDF is never modified: it is written once at import and only read afterwards.
+   A scan or a set of photos becomes one jsPDF PDF stored like an import; on-device OCR text goes in through setPageText.
    Pure helpers (page-relative maths, eraser hit test, undo/redo stack) load under node. */
 (function (G) {
   "use strict";
@@ -184,12 +185,121 @@
   }
   function onTop(sel) { return !!(host && host.root() && host.root().querySelector(sel)); }
 
+  /* ---- scan and photos (A5) ---- */
+  // Pages arrive as JPEG data URLs ({ data, w, h }), become one PDF, and are stored like an imported PDF.
+  var jsP = null;
+  function jspdf() {
+    var J = (G.jspdf && G.jspdf.jsPDF) || G.jsPDF;
+    if (J) return Promise.resolve(J);
+    if (jsP) return jsP;
+    jsP = new Promise(function (res, rej) {
+      var s = D.createElement("script"), bad = function () { jsP = null; rej(new Error("pdf-load")); };
+      s.src = "/vendor-jspdf.js?v=1";   // the URL native-bridge.js loads, so one cached copy
+      s.onload = function () { var K = (G.jspdf && G.jspdf.jsPDF) || G.jsPDF; if (K) res(K); else bad(); };
+      s.onerror = bad;
+      D.head.appendChild(s);
+    });
+    return jsP;
+  }
+  function buildPdf(shots) {
+    return jspdf().then(function (J) {
+      var doc = null;
+      shots.forEach(function (s) {
+        var w = 595.28, h = w * s.h / s.w, o = h >= w ? "p" : "l";   // A4 width, height from the picture's own shape
+        if (!doc) doc = new J({ unit: "pt", format: [w, h], orientation: o, compress: true }); else doc.addPage([w, h], o);
+        doc.addImage(s.data, "JPEG", 0, 0, w, h);
+      });
+      return new Uint8Array(doc.output("arraybuffer"));
+    });
+  }
+  function stamp() { var n = new Date(), p = function (x) { return (x < 10 ? "0" : "") + x; }; return n.getFullYear() + "-" + p(n.getMonth() + 1) + "-" + p(n.getDate()) + " " + p(n.getHours()) + ":" + p(n.getMinutes()); }
+  function wait(ms) { return new Promise(function (r) { G.setTimeout(r, ms); }); }
+  // OCR in the background, three pages then a pause (as the A6 indexer). shortcut: not resumable, an app kill mid-way leaves
+  // the later pages without OCR text; upgrade by saving progress like the "index" store if scans get long.
+  function ocrShots(id, shots) {
+    var N = G.SMD_NATIVE, n = 0;
+    if (!(N && N.ocr)) return;
+    function batch() {
+      if (n >= shots.length) return;
+      return get("docs", id).then(function (cur) {
+        if (!cur) return;
+        var end = Math.min(n + 3, shots.length), t = [], i;
+        for (i = n; i < end; i++) t.push((function (k) {
+          return N.ocr(shots[k].data).then(function (r) { shots[k] = null; return setPageText(id, k + 1, r && r.text); }, function () { shots[k] = null; });
+        })(i));
+        return Promise.all(t).then(function () { n = end; return wait(30); }).then(batch);
+      });
+    }
+    batch().then(function () {
+      var root = host && host.root(), qi = root && root.querySelector("#stQ");
+      if (qi && qi.value) runSearch(qi.value);
+    }, function () {});
+  }
+  function shotsToDoc(shots, title) {
+    host.toast("Building the PDF...");
+    return buildPdf(shots).then(function (bytes) { return importBytes(bytes, title); }).then(function (meta) {
+      host.toast("Added " + shots.length + (shots.length === 1 ? " page." : " pages."));
+      if (onTop("#stLib")) fillLib();
+      kick(); ocrShots(meta.id, shots);
+    });
+  }
+  function readUrl(f) { return new Promise(function (res, rej) { var r = new G.FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(f); }); }
+  // A photo is redrawn as a JPEG at most 2000 px on its long side (also applies the camera's rotation).
+  function normPhoto(url) {
+    return new Promise(function (res, rej) {
+      var im = new G.Image();
+      im.onload = function () {
+        var k = Math.min(1, 2000 / Math.max(im.naturalWidth, im.naturalHeight)), c = D.createElement("canvas"), x;
+        c.width = Math.max(1, Math.round(im.naturalWidth * k)); c.height = Math.max(1, Math.round(im.naturalHeight * k));
+        x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height);
+        var out = { data: c.toDataURL("image/jpeg", 0.85), w: c.width, h: c.height }; c.width = 0; res(out);
+      };
+      im.onerror = function () { rej(new Error("image")); };
+      im.src = url;
+    });
+  }
+  function importPhotos(urls) {
+    var shots = [];
+    if (!urls.length) return Promise.resolve();
+    return urls.reduce(function (p, u) { return p.then(function () { return normPhoto(u).then(function (s) { shots.push(s); }); }); }, Promise.resolve())
+      .then(function () { return shotsToDoc(shots, "Photos " + stamp()); }).then(null, function () { host.toast("Those photos could not be added."); });
+  }
+  function pickPhotos() {
+    var N = G.SMD_NATIVE, urls = [];
+    if (!(N && N.pickImage)) { var f = host.root() && host.root().querySelector("#stPhotos"); if (f) f.click(); return; }
+    // The bridge picks one photo a call, so ask after each one whether to add another.
+    (function more() {
+      N.pickImage().then(function (u) { urls.push(u); return urls.length < 30 && G.confirm("Add another photo to this PDF?") ? more() : importPhotos(urls); }, function () { importPhotos(urls); });
+    })();
+  }
+  function scanner() {
+    try { var P = G.Capacitor && G.Capacitor.Plugins, S = P && P.DocScan; return S && S.scan && S.isAvailable && P.Filesystem && P.Filesystem.readFile ? S : null; } catch (e) { return null; }
+  }
+  function doScan() {
+    var S = scanner(), fs = S && G.Capacitor.Plugins.Filesystem, got = [], uri = function (p) { return /^file:/.test(p) ? p : "file://" + p; };
+    if (!S) return;
+    S.scan({ maxPages: 30 }).then(function (r) {
+      var shots = [];
+      got = (r && r.pages) || [];
+      return got.reduce(function (p, pg) {
+        return p.then(function () { return fs.readFile({ path: uri(pg.path) }).then(function (f) { shots.push({ data: "data:image/jpeg;base64," + f.data, w: pg.width || 1, h: pg.height || 1.414 }); }); });
+      }, Promise.resolve()).then(function () { if (shots.length) return shotsToDoc(shots, "Scan " + stamp()); });
+    }).then(null, function (e) {
+      var c = e && e.code;
+      if (c !== "cancelled") host.toast(c === "unavailable" ? "Scanning is not available on this phone." : c === "busy" ? "A scan is already open." : "The scan could not be saved. Try again.");
+    }).then(function () {
+      got.forEach(function (pg) { try { fs.deleteFile({ path: uri(pg.path) }).then(null, function () {}); } catch (e) {} });   // the cache JPEGs go whatever happened
+    });
+  }
+
   function renderLib() {
     closeViewer();
     var h = host;
     h.paint(h.bar("Study Studio", "Read and write on your PDFs", "back") + '<div class="pn-body st-lib" id="stLib">' +
       '<button type="button" class="pn-btn pri" data-act="st-import">' + h.ico("plus") + ' Import a PDF</button>' +
       '<input type="file" id="stFile" accept="application/pdf" hidden>' +
+      '<button type="button" class="pn-btn" data-act="st-photos">' + h.ico("plus") + ' Import photos as PDF</button>' +
+      '<input type="file" id="stPhotos" accept="image/*" multiple hidden>' +
       '<button type="button" class="pn-btn" data-act="st-newnb">' + h.ico("plus") + ' New notebook</button>' +
       '<div class="st-new" id="stNew" hidden><input id="stNbT" maxlength="120" placeholder="Notebook title" aria-label="Notebook title">' +
       '<select id="stNbS" aria-label="Page style"><option value="blank">Blank</option><option value="ruled" selected>Ruled</option><option value="grid">Grid</option><option value="cornell">Cornell</option></select>' +
@@ -204,6 +314,17 @@
       var file = f.files && f.files[0]; if (!file) return;
       file.arrayBuffer().then(function (ab) { f.value = ""; return importFile(new Uint8Array(ab), file.name); });
     });
+    var ph = h.root().querySelector("#stPhotos");
+    ph.addEventListener("change", function () {
+      var fl = Array.prototype.slice.call(ph.files || []); ph.value = "";
+      Promise.all(fl.map(readUrl)).then(importPhotos, function () { host.toast("Those photos could not be added."); });
+    });
+    // Scan only where the phone can: no DocScan plugin, or isAvailable false, means no button at all.
+    var sc = scanner();
+    if (sc) sc.isAvailable().then(function (r) {
+      var root = host.root(), at = root && root.querySelector('[data-act="st-import"]');
+      if (r && r.available && at && !root.querySelector('[data-act="st-scan"]')) at.insertAdjacentHTML("afterend", '<button type="button" class="pn-btn" data-act="st-scan">' + host.ico("plus") + " Scan</button>");
+    }, function () {});
     h.root().querySelector("#stList").addEventListener("change", function (e) {
       var s = e.target.closest && e.target.closest("select[data-id]"); if (!s) return;
       get("docs", s.getAttribute("data-id")).then(function (d) { d.folderId = s.value || null; return put("docs", d); }).then(fillLib);
@@ -547,6 +668,8 @@
     host = h;
     if (a === "st-home") return h.push(renderLib);
     if (a === "st-import") return pickPdf();
+    if (a === "st-photos") return pickPhotos();
+    if (a === "st-scan") return doScan();
     if (a === "st-filter") { lib.filter = el.getAttribute("data-v"); return fillLib(); }
     if (a === "st-newfolder") { var nm = G.prompt("Folder name"); if (nm && nm.trim()) put("folders", { id: uid(), name: nm.trim().slice(0, 40) }).then(fillLib); return; }
     if (a === "st-delfolder") {
