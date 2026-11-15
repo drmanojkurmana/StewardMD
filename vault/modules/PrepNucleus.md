@@ -11,6 +11,7 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
   or `?prep=0` off. The same rule lives in `prep-loader.js` (`enabled`) and `home.js` (`eligible`).
 - **Arena flag:** `smd_prep_arena`, default **OFF** (needs `smd_prep` too). `localStorage.smd_prep_arena = "1"` or
   `?arena=1` shows the Compete section; `"0"` or `?arena=0` hides it. Rule in `prep-arena.js` (`enabled`).
+- **Study Studio flag:** `smd_study`, default **OFF** (needs `smd_prep`), `?study=1`; PDF library, viewer and pen. See [[Study Studio]].
 - **Status (2026-10-06):** bank v1 (147,310 questions, Gemini-mapped, key-screened: about 16.6k disputed keys flagged)
   uploaded to R2 `stewardmd-offline/prep-bank/`; Phase 0 passed (98% seeded-key catch, temperatures set; billing
   reconciliation pending); Layer B pilot run; full fill and phone tests pending. Doctor grading deferred by the owner
