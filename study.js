@@ -974,7 +974,6 @@
   function docIdOf(el) { return el.getAttribute("data-id"); }
   function act(a, el, h) {
     host = h;
-    if (a === "st-home") return h.push(renderLib);
     if (a === "st-import") return pickPdf();
     if (a === "st-photos") return pickPhotos();
     if (a === "st-backup") return backup();
@@ -1018,11 +1017,9 @@
   function back() { return false; }
   function leave() { closeViewer(); }
 
-  // The row on the PrepNucleus home: only with the flag on.
-  function homeRow(h) {
-    host = h;
-    return on() ? h.row("st-home", h.ico("deck"), "Study Studio", "Read and write on your own PDFs") : "";
-  }
+  // Called on every PrepNucleus home paint, so the host is set before the Study tab (prep-nav.js) opens the library.
+  // The entry is that tab now (owner 2026-11-15), not a home row.
+  function homeRow(h) { host = h; return ""; }
 
-  G.STUDY = { on: on, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; } };
+  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; } };
 })(typeof window !== "undefined" ? window : this);

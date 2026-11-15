@@ -60,15 +60,15 @@ async function boot(q) {
 /* ---- flag off: no row ---- */
 await boot("prep=1");
 await page.waitForTimeout(500);
-ok(await page.locator('#smdPrep [data-act="st-home"]').count() === 0, "flag off: no Study Studio row");
+ok(await page.locator('#smdPrep .pnv-tab[data-tab="study"]').count() === 0, "flag off: no Study tab");
 ok(await page.evaluate(() => !window.STUDY && !document.querySelector('script[src^="/study.js"]')), "flag off: study.js is not even loaded");
 
 /* ---- flag on: import ---- */
 await boot("prep=1&study=1");
-await page.waitForSelector('#smdPrep [data-act="st-home"]', { timeout: 20000 });
-ok(true, "flag on: the Study Studio row shows");
+await page.waitForSelector('#smdPrep .pnv-tab[data-tab="study"]', { timeout: 20000 });
+ok(true, "flag on: the Study tab shows");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
 ok(/No PDFs yet/.test(await page.locator("#stList").innerText()), "library: empty state");
 await page.setInputFiles("#stFile", { name: "fixture.pdf", mimeType: "application/pdf", buffer: PDF });
@@ -100,7 +100,7 @@ await page.waitForTimeout(500);   // autosave settles
 
 /* ---- reload: strokes intact, original unchanged ---- */
 await boot("prep=1&study=1");
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
 await page.click(".st-open");
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
@@ -132,7 +132,7 @@ ok(await live() === 2, "undo of an erase restores the stroke");
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
 await page.click('[data-act="st-newnb"]');
 await page.fill("#stNbT", "Ward notes"); await page.selectOption("#stNbS", "ruled"); await page.selectOption("#stNbZ", "a4");
@@ -153,7 +153,7 @@ await page.waitForFunction(() => STUDY._state() && JSON.stringify(STUDY._state()
 ok(true, "notebook: page 2 moved up");
 await page.waitForTimeout(300);
 await boot("prep=1&study=1");
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
 ok(await page.evaluate(() => /Notebook, 2 pages/.test(document.querySelector("#stList").innerText) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
@@ -170,7 +170,7 @@ ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "
 
 /* ---- A6 search ---- */
 await boot("prep=1&study=1");
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("index").objectStore("index").getAll(); q.onsuccess = () => res(q.result.length === 1 && q.result[0].done === 2); }; }), null, { timeout: 20000 });
 ok(await page.evaluate(() => document.querySelector(".st-ix").textContent === ""), "search: fully indexed PDF shows no Indexing label");
@@ -195,13 +195,13 @@ ok(true, "search: tapping the result opens the PDF at page 2");
 const idb = (store, fn) => page.evaluate(([store, fn]) => new Promise((r) => { const q = indexedDB.open("study"); q.onsuccess = () => { const t = q.result.transaction(store, "readwrite"); new Function("o", fn)(t.objectStore(store)); t.oncomplete = r; }; }), [store, fn]);
 await idb("index", "o.clear()"); await idb("ptext", "o.clear()");
 await boot("prep=1&study=1");
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => res(q.result.length === 2); }; }), null, { timeout: 20000 });
 ok(true, "search: an unindexed PDF is indexed again after a reload (resume)");
 /* a PDF that cannot be indexed stays labelled, and results say pages are not indexed */
 await idb("docs", 'o.put({ id: "bad", title: "Broken scan", pageCount: 5, kind: "pdf", store: "idb", created: 1, lastOpened: 0, favourite: false, folderId: null })');
 await boot("prep=1&study=1");
-await page.click('#smdPrep [data-act="st-home"]');
+await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector('[data-ix="bad"]');
 await page.waitForTimeout(800);
 ok(await page.locator('[data-ix="bad"]').innerText() === "Indexing, 0 of 5 pages", "library: partly indexed PDF shows Indexing, n of m pages");
@@ -214,7 +214,7 @@ await idb("docs", 'o.delete("bad")');
 const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction(store).objectStore(store).getAll(); q.onsuccess = () => { r.result.close(); res(q.result); }; }; }), store);
 const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
 const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
-const openLib = async () => { await page.click('#smdPrep [data-act="st-home"]'); await page.waitForSelector("#stLib"); };
+const openLib = async () => { await page.click('#smdPrep .pnv-tab[data-tab="study"]'); await page.waitForSelector("#stLib"); };
 await boot("prep=1&study=1");
 await openLib();
 const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));

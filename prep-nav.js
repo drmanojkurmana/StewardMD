@@ -5,6 +5,7 @@
      Home  - the home screen (plan, question of the day, practice rows, subjects).
      Learn - every lesson, by subject (prep-lessons.js; the tab is left out when that file is missing). Lessons were
              reachable only from inside a subject; this is the first place that lists them all.
+     Study - Study Studio's library (study.js; only while smd_study is on): your PDFs, notebooks and scans.
      Tests - mock exams (renderMocks) with the previous year papers row on top for NEET-PG.
      You   - the menu (renderMenu: exam and plan, Pro, downloads, stats, bookmarks, mistakes, friends).
    Navigation: a tab resets the stack to [home] or [home, tab root], so Android back from a tab goes home and back from
@@ -38,20 +39,22 @@
     home: '<path class="f" d="M3.5 10.4L12 3.6l8.5 6.8V19.5a1.5 1.5 0 0 1-1.5 1.5h-4v-6h-6v6H5a1.5 1.5 0 0 1-1.5-1.5z"/>',
     learn: '<path class="f" d="M12 6.2C9.6 4.6 6.4 4.2 3 5v13.6c3.4-.8 6.6-.4 9 1.2 2.4-1.6 5.6-2 9-1.2V5c-3.4-.8-6.6-.4-9 1.2z"/><path d="M12 6.2v13.6"/>',
     tests: '<circle class="f" cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.6M9.6 2.8h4.8M12 2.8v3.2M18.2 6.6l1.4-1.4"/>',
+    study: '<rect class="f" x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v18M12 8h4M12 12h4"/>',
     you: '<circle class="f" cx="12" cy="8" r="4"/><path class="f" d="M4.5 20.5a7.5 7.5 0 0 1 15 0z"/>'
   };
   var TABS = [
     { id: "home", label: "Home" },
     { id: "learn", label: "Learn" },
+    { id: "study", label: "Study" },
     { id: "tests", label: "Tests" },
     { id: "you", label: "You" }
   ];
   // Browse screens: the scrolling body (#smdPrep > .pn-body) matches one of these, or holds the module panel.
-  var SCREENS = "#pnHome, #pnLearn, .pn-menu, .pn-mocks, #pnSub, .pn-lsn-all, #pnYq, .pn-mtl, .pn-bml, .pn-dll";
+  var SCREENS = "#pnHome, #pnLearn, #stLib, .pn-menu, .pn-mocks, #pnSub, .pn-lsn-all, #pnYq, .pn-mtl, .pn-bml, .pn-dll";
   var KB = 'input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]), textarea, select, [contenteditable=""], [contenteditable="true"]';
 
   /* ---------- pure ---------- */
-  function tabsFor(hasLearn) { return TABS.filter(function (t) { return t.id !== "learn" || hasLearn; }); }
+  function tabsFor(hasLearn, hasStudy) { return TABS.filter(function (t) { return (t.id !== "learn" || hasLearn) && (t.id !== "study" || hasStudy === true); }); }
   // ids: for each stack entry, the tab it is the root of (or null), bottom first. The current tab is the nearest root.
   function tabOf(ids) { for (var i = ids.length - 1; i >= 0; i--) if (ids[i]) return ids[i]; return "home"; }
   // s: { screen, sheet, viewer, keyboard }: shown on a browse screen with nothing over it.
@@ -105,13 +108,15 @@
   function esc(s) { return host && host.esc ? host.esc(s) : String(s); }
   function svg(id) { return '<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + ICONS[id] + "</svg>"; }
   function hasLearn() { return !!(G.PREP_LESSONS && G.PREP_LESSONS.openSubject && G.PREP_LESSONS.index); }
+  function hasStudy() { try { return !!(G.STUDY && G.STUDY.lib && G.STUDY.on()); } catch (e) { return false; } }
   function rootFn(id) {
     var sc = (host && host.screens) || {};
-    return id === "home" ? host.home : id === "tests" ? sc.mocks : id === "you" ? sc.menu : id === "learn" ? learnView : null;
+    return id === "home" ? host.home : id === "tests" ? sc.mocks : id === "you" ? sc.menu : id === "learn" ? learnView : id === "study" ? (G.STUDY && G.STUDY.lib) || null : null;
   }
   function idOfFn(fn) {
     if (!fn || !host) return null;
     if (fn === learnView) return "learn";
+    if (G.STUDY && fn === G.STUDY.lib) return "study";
     var sc = host.screens || {};
     return fn === sc.mocks ? "tests" : fn === sc.menu ? "you" : fn === host.home ? "home" : null;
   }
@@ -123,7 +128,7 @@
     el.className = "pnv pnv-off";
     el.setAttribute("aria-label", "PrepNucleus");
     el.__pnKeep = 1;   // PREP_DOM.patch walks past it
-    var list = tabsFor(hasLearn());
+    var list = tabsFor(hasLearn(), hasStudy());
     el.style.setProperty("--n", list.length);
     el.innerHTML = '<svg class="pnv-defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="pnvLens" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" x="0" y="0" width="360" height="64" color-interpolation-filters="sRGB">' +
       '<feImage id="pnvMap" x="0" y="0" width="360" height="64" preserveAspectRatio="none" result="m"/>' +
@@ -197,7 +202,7 @@
     var sheet = !!root.querySelector(":scope > .pn-sheet-wrap, :scope > .pn-zoom, :scope > .pv, :scope > [aria-modal=\"true\"]");
     var viewer = !!(G.PREP_VIEWER && G.PREP_VIEWER.isOpen && G.PREP_VIEWER.isOpen());
     var show = showOn({ screen: screen, sheet: sheet, viewer: viewer, keyboard: kb });
-    var list = tabsFor(hasLearn()), i = 0;
+    var list = tabsFor(hasLearn(), hasStudy()), i = 0;
     list.forEach(function (t, k) { if (t.id === cur) i = k; });
     tabs.forEach(function (t, k) {
       var on = k === i;

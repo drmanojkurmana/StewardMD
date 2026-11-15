@@ -13,6 +13,8 @@ const css = fs.readFileSync(join(ROOT, "prep-nav.css"), "utf8");
 test("tabs: Home, Learn, Tests, You; Learn only with lessons", () => {
   assert.deepEqual(P.tabsFor(true).map((t) => t.label), ["Home", "Learn", "Tests", "You"]);
   assert.deepEqual(P.tabsFor(false).map((t) => t.id), ["home", "tests", "you"]);
+  assert.deepEqual(P.tabsFor(true, true).map((t) => t.label), ["Home", "Learn", "Study", "Tests", "You"]);
+  assert.deepEqual(P.tabsFor(false, true).map((t) => t.id), ["home", "study", "tests", "you"]);
 });
 
 test("current tab is the nearest tab root down the stack", () => {

@@ -3,8 +3,8 @@
 A PDF library, viewer, pen, notebooks, search, scan, study link and export / backup inside PrepNucleus (phase A1 to A8 of [[plans/PrepNucleus-StudyStudio]]). Part of [[PrepNucleus]].
 
 - **Flag + default:** `smd_study`, default **OFF**, needs `smd_prep`. `localStorage.smd_study = "1"` or `?study=1` on, `"0"` or `?study=0` off. Rule in `study.js` (`enabled`) and `prep-loader.js` (`studyOn`, which also keeps `study.js` / `study.css` from downloading while off).
-- **Entry point:** a "Study Studio" row on the PrepNucleus home (`homeRow`, `data-act="st-home"`), shown only with the flag on.
-- **Status (2026-11-15):** A1 to A8 built and tested in a headless browser (stubbed scanner, OCR, network). Loader token prep155. NOT passed (only the owner can): A3 latency gate (iPad + Apple Pencil, Samsung S Pen), 1,000-page open under 2 s on a mid Android phone, force-quit mid-stroke, A6 gate (page 742 of 1,000), A4 force-quit, **A5** 10-page scan on both platforms with OCR text found by search, **A7** on a phone (Make cards, Explain, tapping a card or answer opens its page), **A8** back up, uninstall, reinstall, restore (same count, strokes, checksums) and the share sheet itself.
+- **Entry point:** a fifth "Study" tab in the PrepNucleus bottom bar (`prep-nav.js`, root `STUDY.lib`), shown only with the flag on (owner 2026-11-15: replaced the home row).
+- **Status (2026-11-15):** A1 to A8 built and tested in a headless browser (stubbed scanner, OCR, network). Loader token prep156. NOT passed (only the owner can): A3 latency gate (iPad + Apple Pencil, Samsung S Pen), 1,000-page open under 2 s on a mid Android phone, force-quit mid-stroke, A6 gate (page 742 of 1,000), A4 force-quit, **A5** 10-page scan on both platforms with OCR text found by search, **A7** on a phone (Make cards, Explain, tapping a card or answer opens its page), **A8** back up, uninstall, reinstall, restore (same count, strokes, checksums) and the share sheet itself.
 
 ## Files
 - `study.js` (`window.STUDY`, ES5 IIFE; pure helpers load under node), `study.css` (`.st-*`). Loaded last by `prep-loader.js`, optional.
