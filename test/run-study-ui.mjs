@@ -128,6 +128,87 @@ await page.evaluate(() => {
 ok(await live() === 1, "eraser removes the whole stroke it touches");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 2, "undo of an erase restores the stroke");
+
+/* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
+await boot("prep=1&study=1");
+await page.click('#smdPrep [data-act="st-home"]');
+await page.waitForSelector("#stLib");
+await page.click('[data-act="st-newnb"]');
+await page.fill("#stNbT", "Ward notes"); await page.selectOption("#stNbS", "ruled"); await page.selectOption("#stNbZ", "a4");
+await page.click('[data-act="st-mknb"]');
+await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
+ok(await page.evaluate(() => { const s = STUDY._state(); return !!s.nb && s.pdf === null && s.nb.style === "ruled" && s.n === 1; }), "notebook: opens with one page and no PDF");
+ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let ink = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 250) ink++; return ink > 200; }), "notebook: ruled lines are drawn on the page");
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await stroke(0.3);
+await page.waitForTimeout(300);
+await page.click('[data-act="st-addpg"]');
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 2 && STUDY._state().pg[2], null, { timeout: 10000 });
+ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1,2]", "notebook: page added after the current one");
+await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
+await page.waitForFunction(() => STUDY._state().sc.scrollTop > 100);
+await page.click('[data-act="st-up"]');
+await page.waitForFunction(() => STUDY._state() && JSON.stringify(STUDY._state().nb.ord) === "[2,1]", null, { timeout: 10000 });
+ok(true, "notebook: page 2 moved up");
+await page.waitForTimeout(300);
+await boot("prep=1&study=1");
+await page.click('#smdPrep [data-act="st-home"]');
+await page.waitForSelector(".st-doc");
+ok(await page.evaluate(() => /Notebook, 2 pages/.test(document.querySelector("#stList").innerText) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
+await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-ov");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().strokes.length === 1, null, { timeout: 10000 });
+ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[2,1]", "after reload: notebook page order intact");
+await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
+await page.waitForFunction(() => { const c = document.querySelector('.st-ov[data-n="2"]'); if (!c) return false; const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 4) if (d[i]) return true; return false; }, null, { timeout: 10000 });
+ok(true, "after reload: the stroke is on the page it was drawn on (now second)");
+await page.fill("#stPage", "1"); await page.click('[data-act="st-go"]');
+await page.click('[data-act="st-delpg"]');
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 1, null, { timeout: 10000 });
+ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "notebook: page deleted after confirm");
+
+/* ---- A6 search ---- */
+await boot("prep=1&study=1");
+await page.click('#smdPrep [data-act="st-home"]');
+await page.waitForSelector(".st-doc");
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("index").objectStore("index").getAll(); q.onsuccess = () => res(q.result.length === 1 && q.result[0].done === 2); }; }), null, { timeout: 20000 });
+ok(await page.evaluate(() => document.querySelector(".st-ix").textContent === ""), "search: fully indexed PDF shows no Indexing label");
+await page.fill("#stQ", "TWO");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+const hit = await page.locator(".st-hit").first().innerText();
+ok(/Page 2/.test(hit) && /fixture/.test(hit) && await page.locator(".st-hit mark").first().innerText() === "two", "search: result shows document, page 2 and the highlighted match (case-insensitive)");
+ok(await page.locator(".st-hit").count() === 1, "search: one result only, for page 2");
+await page.fill("#stQ", "Ward");
+await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stRes").innerText));
+ok(true, "search: notebook titles are searched");
+await page.fill("#stQ", "zebra");
+await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stRes").innerText));
+ok(true, "search: absent word gives a clear empty state");
+await page.fill("#stQ", "two");
+await page.waitForSelector(".st-hit");
+await page.click(".st-hit");
+await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
+await page.waitForFunction(() => document.querySelector("#stPage").value === "2" && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
+ok(true, "search: tapping the result opens the PDF at page 2");
+/* resume after reload: wipe the index, open the library again, the PDF is indexed again from page 1 */
+const idb = (store, fn) => page.evaluate(([store, fn]) => new Promise((r) => { const q = indexedDB.open("study"); q.onsuccess = () => { const t = q.result.transaction(store, "readwrite"); new Function("o", fn)(t.objectStore(store)); t.oncomplete = r; }; }), [store, fn]);
+await idb("index", "o.clear()"); await idb("ptext", "o.clear()");
+await boot("prep=1&study=1");
+await page.click('#smdPrep [data-act="st-home"]');
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => res(q.result.length === 2); }; }), null, { timeout: 20000 });
+ok(true, "search: an unindexed PDF is indexed again after a reload (resume)");
+/* a PDF that cannot be indexed stays labelled, and results say pages are not indexed */
+await idb("docs", 'o.put({ id: "bad", title: "Broken scan", pageCount: 5, kind: "pdf", store: "idb", created: 1, lastOpened: 0, favourite: false, folderId: null })');
+await boot("prep=1&study=1");
+await page.click('#smdPrep [data-act="st-home"]');
+await page.waitForSelector('[data-ix="bad"]');
+await page.waitForTimeout(800);
+ok(await page.locator('[data-ix="bad"]').innerText() === "Indexing, 0 of 5 pages", "library: partly indexed PDF shows Indexing, n of m pages");
+await page.fill("#stQ", "zebra");
+await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stRes").innerText));
+ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stRes").innerText()), "search: results say which pages are not yet indexed");
+await idb("docs", 'o.delete("bad")');
+
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 
 await browser.close(); if (serveProc) serveProc.kill();

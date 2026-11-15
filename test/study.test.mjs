@@ -64,3 +64,37 @@ test("pressure: pen value kept, 0 or other pointer types fall back to 0.5", () =
   assert.equal(S.pressure({ pointerType: "mouse", pressure: 0.5 }), 0.5);
   assert.equal(S.pressure({}), 0.5);
 });
+
+test("page order: move up and down, ends stay put, input not mutated", () => {
+  const a = [1, 2, 3];
+  assert.deepEqual(S.moveItem(a, 1, -1), [2, 1, 3]);
+  assert.deepEqual(S.moveItem(a, 1, 1), [1, 3, 2]);
+  assert.deepEqual(S.moveItem(a, 0, -1), [1, 2, 3]);
+  assert.deepEqual(S.moveItem(a, 2, 1), [1, 2, 3]);
+  assert.deepEqual(a, [1, 2, 3]);
+});
+
+test("page backgrounds: blank empty, ruled rows, grid squares, Cornell margin and summary", () => {
+  assert.equal(S.bgLines("blank", 1.414).length, 0);
+  const ruled = S.bgLines("ruled", 1.414);
+  assert.ok(ruled.length > 20 && ruled.every((l) => l[1] === l[3] && l[3] < 1.414 && l[0] === 0 && l[2] === 1));
+  const grid = S.bgLines("grid", 2), cols = grid.filter((l) => l[0] === l[2]), rows = grid.filter((l) => l[1] === l[3]);
+  assert.ok(cols.length === 19 && rows.length > 30 && cols.every((l) => l[3] === 2));
+  const c = S.bgLines("cornell", 1.414);
+  assert.ok(c.some((l) => l[0] === 0.3 && l[2] === 0.3) && c.some((l) => l[1] === 1.414 * 0.8 && l[3] === 1.414 * 0.8));
+  assert.ok(c.every((l) => l[1] <= 1.414 * 0.8 + 1e-9));
+});
+
+test("snippet: case-insensitive, highlight split, ellipsis at cut ends, no match is null", () => {
+  assert.deepEqual(S.snip("Page two body text", "TWO", 40), { pre: "Page ", hit: "two", post: " body text" });
+  const long = "a".repeat(100) + "needle" + "b".repeat(100), r = S.snip(long, "needle", 10);
+  assert.deepEqual([r.pre, r.hit, r.post], ["..." + "a".repeat(10), "needle", "b".repeat(10) + "..."]);
+  assert.equal(S.snip("abc", "zz", 5), null);
+  assert.equal(S.snip("abc", "", 5), null);
+});
+
+test("indexing label: shown until every page is done", () => {
+  assert.equal(S.ixLabel(3, 20), "Indexing, 3 of 20 pages");
+  assert.equal(S.ixLabel(0, 2), "Indexing, 0 of 2 pages");
+  assert.equal(S.ixLabel(20, 20), "");
+});
