@@ -1,0 +1,22 @@
+{
+  "name": "@stewardmd/capacitor-doc-scan",
+  "version": "1.0.0",
+  "description": "Document camera scan. iOS: VisionKit VNDocumentCameraViewController. Android: Google ML Kit Document Scanner (via Google Play services). Pages are returned as JPEG files in the app cache directory.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "android/src/main",
+    "android/build.gradle",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}
