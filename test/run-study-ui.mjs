@@ -22,15 +22,15 @@ try { await fetch(BASE); } catch {
   for (let i = 0; i < 30; i++) { try { await fetch(BASE); break; } catch { await sleep(200); } }
 }
 
-/* A tiny two-page PDF with text. */
-function makePdf() {
-  const pages = ["Page one body text", "Page two body text"], objs = [];
+/* A tiny PDF with one line of text per page. */
+function makePdf(pages = ["Page one body text", "Page two body text"]) {
+  const objs = [], n = pages.length, font = 3 + 2 * n;
   objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
-  objs[2] = "<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>";
-  objs[7] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
+  objs[2] = `<< /Type /Pages /Kids [${pages.map((_, k) => `${3 + 2 * k} 0 R`).join(" ")}] /Count ${n} >>`;
+  objs[font] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
   pages.forEach((t, k) => {
-    const po = 3 + 2 * k, stream = `BT /F1 18 Tf 50 780 Td (${t}) Tj ET`;
-    objs[po] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 7 0 R >> >> /Contents ${po + 1} 0 R >>`;
+    const po = 3 + 2 * k, stream = (t.match(/.{1,90}(?:\s|$)/g) || [t]).map((l, i) => `BT /F1 9 Tf 20 ${780 - 14 * i} Td (${l.trim()}) Tj ET`).join("\n");
+    objs[po] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font} 0 R >> >> /Contents ${po + 1} 0 R >>`;
     objs[po + 1] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
   });
   let out = "%PDF-1.4\n"; const offs = [];
@@ -261,6 +261,69 @@ await page.click('[data-act="st-photos"]');
 await page.waitForFunction(() => /Photos[\s\S]*1 page\b/.test(document.querySelector("#stList").innerText), null, { timeout: 30000 });
 ok(true, "photos: pickImage path (native bridge) builds a 1-page PDF");
 await page.evaluate(() => { window.confirm = () => true; delete window.Capacitor; });
+
+/* ---- A7: Make cards hands page text + page refs to Layer C; every item opens its source page; Explain asks first ---- */
+const LONG = "The cardiac cycle has two phases called systole and diastole. During systole the ventricles contract and eject blood into the aorta and the pulmonary artery. During diastole the ventricles relax and fill with blood from the atria. The first heart sound is caused by closure of the atrioventricular valves. The second heart sound is caused by closure of the semilunar valves.";
+const PDF2 = makePdf(["Unrelated first page about renal tubules and nephrons that must never be sent to anyone.", LONG, "Third page marker text"]);
+const gen = [], teach = [];
+await page.route("**/api/ai/prep-generate", (route) => { const b = JSON.parse(route.request().postData()); gen.push(b);
+  route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(b.op === "facts" ? { facts: [{ fid: "f1", ft: "Systole is ventricular contraction.", cq: "What is systole?", sn: [b.chunk.sents[0].n], fk: "recall" }] } : { items: [], rejected: [] }) }); });
+await page.route("**/api/ai/prep-teach", (route) => { teach.push(JSON.parse(route.request().postData())); route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ text: "Stub explanation of the passage." }) }); });
+await boot("prep=1&study=1");
+await openLib();
+await page.evaluate(() => { PREP_C.cfg.gap = 0; window.SMD_AUTH = { currentUser: null }; });
+await page.setInputFiles("#stFile", { name: "link.pdf", mimeType: "application/pdf", buffer: PDF2 });
+await page.waitForSelector('.st-doc:has-text("link")', { timeout: 20000 });
+const linkDoc = (await idbAll("docs")).find((d) => d.title === "link");
+await page.locator(".st-doc", { hasText: "link" }).locator(".st-open").click();
+await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 });
+ok(await page.evaluate(() => document.querySelector(".st-tl").classList.contains("smd-books-keep") && document.querySelector(".st-tl").classList.contains("smd-emo-keep")), "viewer: the text layer keeps smd-books-keep smd-emo-keep");
+await page.click('[data-act="st-more"]');
+await page.fill("#stRange", "2");
+await page.locator('[data-act="st-make"]').first().click();
+await page.waitForSelector("#stSheet");
+ok(/Sign in to make a deck/.test(await page.locator("#stSheet").innerText()) && gen.length === 0, "Make cards: signed out shows Layer C's sign-in message, nothing sent");
+await page.click('[data-act="st-scancel"]');
+await page.evaluate(() => { window.SMD_AUTH = { currentUser: { uid: "u1", getIdToken: async () => "tok" } }; });
+await page.locator('[data-act="st-make"]').first().click();
+await page.waitForSelector("#stSheetOk");
+const sheetTxt = await page.locator("#stSheet").innerText();
+ok(/will be sent/.test(sheetTxt) && /PDF file is never sent/.test(sheetTxt) && /2/.test(sheetTxt) && gen.length === 0, "Make cards: the cloud notice is shown and nothing is sent before the tap");
+await page.click("#stSheetOk");
+await page.waitForFunction(() => PREP_C._job().result, null, { timeout: 30000 });
+const sentAll = JSON.stringify(gen);
+ok(gen.length >= 1 && gen[0].op === "facts" && gen[0].chunk.sents.length >= 3 && gen[0].chunk.sents.every((x) => x.p === 2) && /cardiac cycle/.test(sentAll), "Make cards: Layer C's facts request carries the selected page's text with page 2 refs");
+ok(!/renal tubules|Third page marker/.test(sentAll) && !/JVBER|%PDF/.test(sentAll) && sentAll.length < 20000, "Make cards: only the selected page's text is sent, never the PDF file or other pages");
+const made = await page.evaluate(async () => { const j = PREP_C._job().job, c = await PREP_DECKS.cards(j.deckId), d = await PREP_DECKS.getDeck(j.deckId); return { src: c[0] && c[0].src, std: d.source.std }; });
+ok(made.src && made.src.std === linkDoc.id && made.src.p[0] === 2 && made.std === linkDoc.id, "Make cards: the card's source ref points back to the Study Studio document id and page 2");
+/* the card opens its source page */
+await page.evaluate(async () => { const j = PREP_C._job().job; PREP_CARDS.start(PREP._host, await PREP_DECKS.getDeck(j.deckId), await PREP_DECKS.cards(j.deckId)); });
+await page.click('[data-act="c-kflip"]');
+await page.click('[data-act="st-src"]');
+await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
+await page.waitForFunction(() => document.querySelector("#stPage").value === "2" && STUDY._state().id !== undefined && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
+ok(await page.evaluate((id) => STUDY._state().id === id, linkDoc.id), "a card made from the document opens that document at page 2");
+ok(await page.evaluate((id) => { const l = PREP_C.srcLink({ src: { std: id, p: [2] } }); return /data-act="st-src"/.test(l) && !/[Pp]age/.test(l) && PREP_C.srcLink({ src: { p: [2] } }) === "" && PREP_C.srcLink({}) === ""; }, linkDoc.id), "an answered question made from the document gets the same Open in Study Studio link (srcLink, used by prep.js); other items none");
+/* Explain: nothing is sent until the confirm tap; text and source shown; offline says so */
+await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 });
+await page.evaluate(() => { const sp = document.querySelector('.st-pg[data-n="2"] .st-tl span'), r = document.createRange(); r.selectNodeContents(sp); const s = getSelection(); s.removeAllRanges(); s.addRange(r); });
+await page.waitForFunction(() => STUDY._state().sel && STUDY._state().sel.page === 2, null, { timeout: 5000 });
+await page.click('[data-act="st-more"]');
+await page.click('[data-act="st-explain"]');
+await page.waitForSelector("#stSheetOk");
+ok(/will be sent to the AI/.test(await page.locator("#stSheet").innerText()) && /cardiac cycle/.test(await page.locator(".st-bq").innerText()) && teach.length === 0, "Explain: the confirm sheet names what is sent; nothing sent before the tap");
+await page.click("#stSheetOk");
+await page.waitForFunction(() => /Stub explanation/.test(document.querySelector("#stSheet").innerText), null, { timeout: 10000 });
+const ans = await page.locator("#stSheet").innerText();
+ok(teach.length === 1 && teach[0].kind === "chat" && /cardiac cycle/.test(teach[0].ground) && !/JVBER/.test(JSON.stringify(teach[0])), "Explain: after the tap one request goes to the existing prep-teach route with the selected text");
+ok(/From link, page 2/.test(ans), "Explain: the answer shows the document name and page it came from");
+await page.click('[data-act="st-scancel"]');
+await ctx.setOffline(true);
+await page.click('[data-act="st-explain"]');
+await page.waitForSelector("#stSheet");
+ok(/offline/.test(await page.locator("#stSheet").innerText()) && await page.locator("#stSheetOk").count() === 0 && teach.length === 1, "Explain: offline says so and sends nothing");
+await ctx.setOffline(false);
+await page.click('[data-act="st-scancel"]');
 
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 

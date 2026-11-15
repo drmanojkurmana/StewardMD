@@ -98,3 +98,23 @@ test("indexing label: shown until every page is done", () => {
   assert.equal(S.ixLabel(0, 2), "Indexing, 0 of 2 pages");
   assert.equal(S.ixLabel(20, 20), "");
 });
+
+const req = createRequire(import.meta.url);
+test("A7 page range: empty is the page on screen, typed ranges use Layer C's parser and cap", () => {
+  const SR = req("../prep-source.js");
+  assert.deepEqual(S.pageSel("", 7, 20, SR), { pages: [7] });
+  assert.deepEqual(S.pageSel("  ", 3, 20, SR), { pages: [3] });
+  assert.deepEqual(S.pageSel("3-5, 9", 1, 20, SR), { pages: [3, 4, 5, 9] });
+  assert.match(S.pageSel("abc", 1, 20, SR).error, /Write pages like/);
+  assert.match(S.pageSel("30", 1, 20, SR).error, /has 20 pages/);
+  assert.match(S.pageSel("1-61", 1, 100, SR).error, /60 pages/);
+});
+
+test("A7 source ref: items and cards made from a Study Studio document carry std, others are unchanged", () => {
+  const C = req("../prep-create.js");
+  const it = { q: "Q?", o: ["a", "b", "c", "d"], a: 1, exp: "e", prov: "AI" }, f = { id: "f1", sec: "sec-0", p: [4], h: "H", sn: [2] };
+  const withStd = C.toStored(it, f, "deck1", { doc: "abc", name: "N", std: "doc-id", exam: "neet-pg" });
+  assert.deepEqual(withStd.src, { doc: "abc", name: "N", p: [4], h: "H", sn: [2], std: "doc-id" });
+  assert.deepEqual(C.toStored(it, f, "deck1", { doc: "abc", name: "N", exam: "neet-pg" }).src, { doc: "abc", name: "N", p: [4], h: "H", sn: [2] });
+  assert.equal(C.toCard({ id: "f1", cq: "c", ft: "t", p: [4], h: "H", sn: [2] }, "deck1", { doc: "abc", name: "N", std: "doc-id" }).src.std, "doc-id");
+});

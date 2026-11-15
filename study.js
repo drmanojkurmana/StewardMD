@@ -1,4 +1,4 @@
-/* PrepNucleus Study Studio (phase A1 to A6): a PDF library, notebooks, a viewer, a pen and search. window.STUDY. ES5. Loaded by
+/* PrepNucleus Study Studio (phase A1 to A7): a PDF library, notebooks, a viewer, a pen and search. window.STUDY. ES5. Loaded by
    prep-loader.js only when flag smd_study is on; draws through PREP._host. prep.js forwards every data-act starting
    "st-" here and asks back() first. Plan: vault/plans/PrepNucleus-StudyStudio.md, note: vault/modules/Study Studio.md.
    Flag smd_study, default OFF, needs smd_prep: localStorage "1" or ?study=1 on, "0" or ?study=0 off.
@@ -69,9 +69,15 @@
     a = Math.max(0, i - r); b = Math.min(t.length, i + k.length + r);
     return { pre: (a ? "..." : "") + t.slice(a, i), hit: t.slice(i, i + k.length), post: t.slice(i + k.length, b) + (b < t.length ? "..." : "") };
   }
+  // Pages for Make cards: the typed range ("3-5, 9", Layer C's own parser and 60-page cap) or, left empty, the page on screen.
+  function pageSel(spec, cur, total, SR) {
+    if (!String(spec || "").trim()) return { pages: [cur] };
+    var r = SR.selFromSpec(spec, total);
+    return r.error ? { error: r.error } : { pages: r.sel };
+  }
   function ixLabel(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }
 
-  var PURE = { moveItem: moveItem, bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs, hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, r4: r4 };
+  var PURE = { pageSel: pageSel, moveItem: moveItem, bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs, hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, r4: r4 };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -470,6 +476,7 @@
   function closeViewer() {
     if (!V) return;
     try { V.io.disconnect(); } catch (e) {}
+    if (V.onSel) D.removeEventListener("selectionchange", onSel);
     Object.keys(V.pg).forEach(function (n) { freePage(+n); });
     try { V.pdf.destroy(); } catch (e) {}
     V = null;
@@ -491,14 +498,21 @@
       '<span class="st-sep"></span>' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-b st-c" data-act="st-color" data-v="' + i + '" aria-label="Colour ' + (i + 1) + '" style="--c:' + COLORS[i] + '"></button>'; }).join("") +
       '<span class="st-sep"></span>' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-b st-w" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + (i + 1) * 2 + 'px"></i></button>'; }).join("") +
       '<span class="st-sep"></span>' + b("st-undo", "Undo", null, " id=stUndo") + b("st-redo", "Redo", null, " id=stRedo") +
-      '<span class="st-sep"></span><label class="st-pj">Page <input id="stPage" type="number" inputmode="numeric" min="1" max="' + d.pageCount + '" value="1"> of ' + d.pageCount + "</label>" + b("st-go", "Go") + b("st-zoom", "-", "-", ' aria-label="Zoom out"') + b("st-zoom", "+", "+", ' aria-label="Zoom in"') +
-      (d.kind === "nb" ? '<span class="st-sep"></span>' + b("st-addpg", "+ Page") + b("st-delpg", "Delete page") + b("st-up", "Page up") + b("st-dn", "Page down") : "") + "</div>";
+      '<span class="st-sep"></span><label class="st-pj">Page <input id="stPage" type="number" inputmode="numeric" min="1" max="' + d.pageCount + '" value="1"> of ' + d.pageCount + "</label>" + b("st-go", "Go") + b("st-zoom", "-", "-", ' aria-label="Zoom out"') + b("st-zoom", "+", "+", ' aria-label="Zoom in"') + b("st-more", "More") +
+      (d.kind === "nb" ? '<span class="st-sep"></span>' + b("st-addpg", "+ Page") + b("st-delpg", "Delete page") + b("st-up", "Page up") + b("st-dn", "Page down") : "") + "</div>" + studyBar(d);
+  }
+  // The second row (behind "More"): make cards from pages, explain a selection, share and export.
+  function studyBar(d) {
+    var b = function (act, label) { return '<button type="button" class="st-b" data-act="' + act + '">' + label + "</button>"; };
+    return '<div class="st-tb" id="stTb2" role="toolbar" aria-label="Study and share" hidden>' + (d.kind === "nb" ? "" :
+      '<label class="st-pj">Pages <input id="stRange" type="text" placeholder="this page" aria-label="Pages to use, like 3-5"></label>' + b("st-make", "Make cards") + b("st-make", "Make MCQs") + b("st-explain", "Explain") + '<span class="st-sep"></span>') + "</div>";
   }
   function startViewer(d, pdf, strokes, undoRec, goto) {
     var root = host.root(), sc = root && root.querySelector("#stSc"), box = root && root.querySelector("#stPages");
     if (!sc) { try { pdf.destroy(); } catch (e) {} return; }
     closeViewer();
-    V = { id: d.id, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto };
+    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto };
+    V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
     syncTb();
@@ -545,7 +559,9 @@
       bindInk(ov, n); redraw(n);
       if (!page) return drawBg(cv.getContext("2d"), V.nb.style, V.ratio, cv.width);
       p.task = page.render({ canvasContext: cv.getContext("2d"), viewport: vp });
-      p.task.promise.then(function () { page.cleanup(); }, function () {});
+      p.task.promise.then(function () {
+        return !V || V.pg[n] !== p || p.gen !== gen ? null : textLayer(page, p, cw / v1.width);
+      }).then(function () { page.cleanup(); }, function () {});
     });
   }
   function freePage(n) {
@@ -553,8 +569,28 @@
     p.on = false; p.gen++;
     try { if (p.task) p.task.cancel(); } catch (e) {}
     p.task = null;
-    [p.cv, p.ov].forEach(function (c) { if (c) { c.width = 0; c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
-    p.cv = p.ov = null;
+    [p.cv, p.tl, p.ov].forEach(function (c) { if (c) { c.width = 0; c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
+    p.cv = p.tl = p.ov = null;
+  }
+  // The pdf.js text layer: transparent text above the page and below the ink, so a long press selects words (for Explain).
+  function textLayer(page, p, k) {
+    var L = G.pdfjsLib;
+    if (!L || !L.renderTextLayer || !p.cv) return Promise.resolve();
+    return page.getTextContent().then(function (tc) {
+      if (!p.cv || !p.ov) return;
+      var tl = D.createElement("div");
+      tl.className = "st-tl smd-books-keep smd-emo-keep"; tl.style.setProperty("--scale-factor", String(k));
+      p.el.insertBefore(tl, p.ov); p.tl = tl;
+      return L.renderTextLayer({ textContentSource: tc, container: tl, viewport: page.getViewport({ scale: k }), textDivs: [] }).promise;
+    }).then(null, function () {});
+  }
+  // Remember the last non-empty selection made inside a text layer: a tap on a toolbar button can collapse the live one.
+  function onSel() {
+    if (!V) return;
+    var s = G.getSelection && G.getSelection(), t = s ? String(s).replace(/\s+/g, " ").trim() : "", el = s && s.anchorNode, pg;
+    el = el && (el.nodeType === 1 ? el : el.parentNode);
+    pg = t && el && el.closest && el.closest(".st-tl") && el.closest(".st-pg");
+    if (pg) V.sel = { page: +pg.getAttribute("data-n"), text: t };
   }
   function setZoom(z) {
     z = Math.max(0.5, Math.min(4, z)); if (!V || z === V.z) return;
@@ -662,6 +698,85 @@
     syncTb(); saveStack();
   }
 
+  /* ---- study link (A7) ---- */
+  // A sheet over the screen for the notices that must be accepted before anything is sent. Its text may hold the student's
+  // own PDF text, so it keeps "page N" as written (emoji-icons.js).
+  var sheetOk = null;
+  function closeSheet() { var r = host && host.root(), e = r && r.querySelector("#stSheet"); if (e) e.parentNode.removeChild(e); sheetOk = null; }
+  function sheet(html, ok, label) {
+    closeSheet();
+    var e = D.createElement("div");
+    e.id = "stSheet"; e.className = "st-sheet"; e.setAttribute("role", "dialog"); e.setAttribute("aria-modal", "true");
+    e.innerHTML = '<div class="st-sh smd-books-keep smd-emo-keep">' + html + '<div class="st-acts">' + (ok ? '<button type="button" class="pn-btn pri" data-act="st-sok" id="stSheetOk">' + label + "</button>" : "") +
+      '<button type="button" class="pn-btn" data-act="st-scancel">' + (ok ? "Cancel" : "Close") + "</button></div></div>";
+    host.root().appendChild(e); sheetOk = ok || null;
+  }
+  function signedIn() { var a = G.SMD_AUTH; return !!(a && a.currentUser); }
+  // The text of the chosen pages as Layer C lines: the pdf.js text layer, or the OCR text kept for a scanned page.
+  function pagesText(pdf, id, pages) {
+    var SR = G.PREP_SRC;
+    return textOf(id).then(function (rows) {
+      var ocr = {};
+      rows.forEach(function (x) { if (x.src === "ocr" && x.text) ocr[x.page] = x.text; });
+      return pages.reduce(function (pr, n) {
+        return pr.then(function (out) {
+          return pdf.getPage(n).then(function (pg) {
+            return pg.getTextContent().then(function (tc) {
+              pg.cleanup();
+              var lines = SR.itemsToLines(tc.items);
+              if (!lines.length && ocr[n]) lines = ocr[n].split(/\n+/).map(function (t) { return { tx: t.replace(/\s+/g, " ").trim(), size: 0, ocr: true }; }).filter(function (l) { return l.tx; });
+              if (lines.length) out.push({ p: n, ocr: !!lines[0].ocr, lines: lines });
+              return out;
+            });
+          });
+        });
+      }, Promise.resolve([]));
+    });
+  }
+  function makeDeck() {
+    var SR = G.PREP_SRC, C = G.PREP_C;
+    if (!V || V.nb) return;
+    if (!(SR && C && C.fromStudy)) return host.toast("Cards and questions are not available here.");
+    var inp = host.root().querySelector("#stRange"), r = pageSel(inp && inp.value, V.cur || 1, V.n, SR), pdf = V.pdf, id = V.id, title = V.title, esc = host.esc;
+    if (r.error) return host.toast(r.error);
+    if (!signedIn()) return sheet("<p>" + esc(C._pure.MSG["sign-in"]) + "</p>");
+    sheet("<h2>Make flashcards and questions</h2><p>The text of pages " + esc(SR.selSpec(r.pages)) + " of " + esc(title) + " will be sent to our server to write them. The PDF file is never sent. " +
+      "Names, phone numbers and ID numbers are looked for and removed first.</p><p>Use your own notes or material you may use for study. It uses MaiK Tokens from your account.</p>", function () {
+      host.toast("Reading the pages...");
+      pagesText(pdf, id, r.pages).then(function (pages) {
+        if (!pages.length) return host.toast("No readable text on these pages yet. A scan is read in the background; try again in a moment.");
+        C.fromStudy(host, { id: id, name: title, title: title, pages: pages });
+      }, function () { host.toast("Those pages could not be read."); });
+    }, "Send and make");
+  }
+  // One online call through the route Ask MaiK already uses (/api/ai/prep-teach, kind chat). Resolves { text } or { error }; never rejects.
+  function askAi(text) {
+    var u = G.SMD_AUTH && G.SMD_AUTH.currentUser, bad = function (t) { return { error: t }; };
+    return Promise.resolve(u.getIdToken()).then(function (tok) {
+      return G.fetch((G.SMD_API_BASE || "") + "/api/ai/prep-teach", { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + tok },
+        body: JSON.stringify({ kind: "chat", base: "step", ground: text, turn: 1, messages: [{ r: "u", t: "Explain this passage clearly, in plain words, for a medical exam student." }] }) });
+    }).then(function (r) {
+      return r.json().then(null, function () { return {}; }).then(function (j) {
+        if (r.status === 200 && j && j.text) return { text: String(j.text) };
+        return bad(r.status === 401 ? "Sign in to use Explain." : r.status === 429 ? "Your AI limit is reached for now. Try again later." : "Explain could not answer just now. Try again.");
+      });
+    }, function () { return bad("Explain could not reach the server. Check your connection."); });
+  }
+  function explain() {
+    var s = V && V.sel, esc = host.esc, title = V && V.title;
+    if (!s || !s.text) return host.toast("Select some text on a PDF page first.");
+    var text = s.text.slice(0, 1500), pn = s.page;
+    if (G.navigator.onLine === false) return sheet("<p>You are offline. Explain needs a connection, so nothing was sent.</p>");
+    if (!signedIn()) return sheet("<p>Sign in to use Explain. It is answered on our server.</p>");
+    sheet("<h2>Explain this text</h2><p>The selected text will be sent to the AI to be explained. The PDF file is not sent.</p><blockquote class=\"st-bq\">" + esc(text) + "</blockquote>" +
+      (s.text.length > 1500 ? "<p>Only the first 1,500 characters are sent.</p>" : ""), function () {
+      sheet('<p role="status">Explaining...</p>');
+      askAi(text).then(function (r) {
+        sheet('<p class="st-from">From <b>' + esc(title) + "</b>, page " + pn + "</p>" + (r.text ? '<p class="st-ans">' + esc(r.text) + "</p>" : "<p>" + esc(r.error) + "</p>"));
+      });
+    }, "Send and explain");
+  }
+
   /* ---- actions ---- */
   function docIdOf(el) { return el.getAttribute("data-id"); }
   function act(a, el, h) {
@@ -669,6 +784,12 @@
     if (a === "st-home") return h.push(renderLib);
     if (a === "st-import") return pickPdf();
     if (a === "st-photos") return pickPhotos();
+    if (a === "st-sok") { var so = sheetOk; closeSheet(); return so && so(); }
+    if (a === "st-scancel") return closeSheet();
+    if (a === "st-src") {
+      var sd = el.getAttribute("data-doc"), sp = parseInt(el.getAttribute("data-p"), 10) || 1;
+      return get("docs", sd).then(function (d) { if (!d) return h.toast("That document is not in your Study Studio library any more."); h.push(function () { renderViewer(sd, sp); }); });
+    }
     if (a === "st-scan") return doScan();
     if (a === "st-filter") { lib.filter = el.getAttribute("data-v"); return fillLib(); }
     if (a === "st-newfolder") { var nm = G.prompt("Folder name"); if (nm && nm.trim()) put("folders", { id: uid(), name: nm.trim().slice(0, 40) }).then(fillLib); return; }
@@ -685,6 +806,9 @@
     if (a === "st-rename") return get("docs", docIdOf(el)).then(function (d) { var t = G.prompt("Rename", d.title); if (t && t.trim()) { d.title = t.trim().slice(0, 120); return put("docs", d).then(fillLib); } });
     if (a === "st-delete") { if (G.confirm("Delete this PDF and your pen strokes on it? This cannot be undone.")) removeDoc(docIdOf(el)).then(fillLib); return; }
     if (!V) return;
+    if (a === "st-more") { var tb2 = h.root().querySelector("#stTb2"); tb2.hidden = !tb2.hidden; return; }
+    if (a === "st-make") return makeDeck();
+    if (a === "st-explain") return explain();
     if (a === "st-tool") { var t = el.getAttribute("data-v"); V.tool = V.tool === t ? null : t; return syncTb(); }
     if (a === "st-color") { V.ci = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
     if (a === "st-width") { V.wi = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }

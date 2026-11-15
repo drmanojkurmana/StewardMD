@@ -2656,7 +2656,7 @@
   // Owner rule (2026-10-07): no authorship or source line on questions; content credits live in the Terms and Privacy pages.
   // A previous-year question still names its paper (exam, year, memory-based recall), which is the paper type, not the origin.
   function provLine(it) { return it._py && G.PREP_PYQ ? G.PREP_PYQ.prov(it) : ""; }
-  function provHtml(it) { var l = provLine(it); return l ? '<p class="pn-prov">' + l + "</p>" : ""; }
+  function provHtml(it) { var l = provLine(it), sl = G.PREP_C && G.PREP_C.srcLink ? G.PREP_C.srcLink(it) : ""; return (l ? '<p class="pn-prov">' + l + "</p>" : "") + sl; }
   function outdatedHtml(it) { return isOutdated(it) ? '<p class="pn-guide">Guideline changed, check current version.</p>' : ""; }
   /* Round 3 focus mode. The progress strip: one segment per question up to 30 (right, wrong or answered, the current one
      lit), a plain fill beyond that. The streak counts right answers in a row in this set, ending at the current question. */
