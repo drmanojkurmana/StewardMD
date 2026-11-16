@@ -1,77 +1,122 @@
 {
-  "checks": {
-    "dropped": 0,
-    "itemN": 10,
-    "kbWords": 0,
-    "numbers": true,
-    "redone": 0,
-    "shape": true,
-    "verbatim": true,
-    "verify": true,
-    "dashes": true,
-    "drugs": true
+ "checks": {
+  "dropped": 0,
+  "itemN": 10,
+  "kbWords": 0,
+  "numbers": true,
+  "redone": 0,
+  "shape": true,
+  "verbatim": true,
+  "verify": true,
+  "dashes": true,
+  "drugs": true
+ },
+ "gen": "AI",
+ "minutes": 6,
+ "model": "muse-wonder (local authoring, no external API)",
+ "module": "med-leprosy",
+ "quiz": [
+  "bk2-med-831",
+  "bk2-med-832",
+  "bk2-med-833",
+  "bk2-med-834",
+  "bk2-med-835",
+  "bk2-med-836",
+  "bk2-med-837",
+  "bk2-med-838",
+  "bk2-med-839",
+  "bk2-med-840"
+ ],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "run": "books2-lon9",
+ "src": [],
+ "steps": [
+  {
+   "say": "Ask whether any pale skin patch has lost feeling, because a numb and dry patch that does not itch suggests leprosy. Ask about thickened nerves that feel tender, lumps on the face or earlobes, and eyebrows that have thinned or fallen out. Record painless burns and ulcers on the hands and feet, since these reveal neglected nerve damage. Ask about sudden red and painful skin lesions with fever, because these mark a lepra reaction that needs urgent steroids. Finally, record household contacts and years of close exposure, as both are telling.",
+   "tx": "Ask about pale patches that feel numb and stay dry without itching, since **sensory loss** in a skin patch points toward leprosy. Ask about thickened painful nerves, nodules on the face and earlobes, loss of eyebrows, painless burns and ulcers of the hands and feet, and sudden red swollen lesions with fever that mark a **lepra reaction**. Record household contacts, years of nasal exposure, and any **claw hand** or foot drop that signals neglected nerve damage.",
+   "vis": null
   },
-  "gen": "AI",
-  "minutes": 6,
-  "model": "muse-wonder (local authoring, no external API)",
-  "module": "med-leprosy",
-  "quiz": [
-    "bk2-med-831",
-    "bk2-med-832",
-    "bk2-med-833",
-    "bk2-med-834",
-    "bk2-med-835",
-    "bk2-med-836",
-    "bk2-med-837",
-    "bk2-med-838",
-    "bk2-med-839",
-    "bk2-med-840"
-  ],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "run": "books2-lon9",
-  "src": [],
-  "steps": [
-    {
-      "say": "Ask whether any pale skin patch has lost feeling, because a numb and dry patch that does not itch suggests leprosy. Ask about thickened nerves that feel tender, lumps on the face or earlobes, and eyebrows that have thinned or fallen out. Record painless burns and ulcers on the hands and feet, since these reveal neglected nerve damage. Ask about sudden red and painful skin lesions with fever, because these mark a lepra reaction that needs urgent steroids. Finally, record household contacts and years of close exposure, as both are telling.",
-      "tx": "Ask about pale patches that feel numb and stay dry without itching, since **sensory loss** in a skin patch points toward leprosy. Ask about thickened painful nerves, nodules on the face and earlobes, loss of eyebrows, painless burns and ulcers of the hands and feet, and sudden red swollen lesions with fever that mark a **lepra reaction**. Record household contacts, years of nasal exposure, and any **claw hand** or foot drop that signals neglected nerve damage.",
-      "vis": null
-    },
-    {
-      "say": "Map sensation over every patch with light touch, pinprick and temperature, because a patch that cannot feel is the hallmark of leprosy. Palpate the ulnar, median and peroneal nerves for thickened cords that roll under the finger. Look for a leonine face with earlobe nodules, loss of eyebrows, clawing of the fingers, foot drop, and painless ulcers on the sole. Shield the eyes when the lids fail to close, because an exposed cornea can ulcerate and blind the patient.",
-      "tx": "Test light touch, pinprick and temperature over every patch and map the **anaesthetic area**, since loss of feeling is the bedside hallmark. Palpate the ulnar, median and peroneal nerves for thickened cords, and look for **leonine facies** with earlobe nodules and loss of eyebrows. Check for claw hand, foot drop, painless sole ulcers and tender red nodules of **erythema nodosum leprosum**, and shield the eyes when lagophthalmos threatens the cornea.",
-      "vis": {
-        "alt": "A composite image showing diverse clinical signs of leprosy, including skin patches, thickened nerves, leonine facies, madarosis, nodules, claw hand, trophic ulcer, and ENL.",
-        "ar": 1.8349,
-        "caption": "Clinical spectrum of leprosy: from tuberculoid patches to lepromatous facies and complications",
-        "kind": "image",
-        "src": "v1/lessons/media/med-leprosy-fig1.webp"
-      }
-    },
-    {
-      "say": "Order a slit skin smear from the earlobes and the active edge of a patch, and read the bacterial index to confirm multibacillary disease. Biopsy the edge of the patch to show granulomas that invade nerves, and use the lepromin test to support the tuberculoid pole. Classify the spectrum from TT to LL, grade disability of the hands, feet and eyes, and screen every household contact. Keep vitiligo, sarcoidosis, syringomyelia and diabetic neuropathy in the differential diagnosis.",
-      "tx": "Order a **slit skin smear** from earlobes and active edges and read the **bacterial index**, since a high load confirms multibacillary disease. Biopsy the patch edge to show granulomas and nerve involvement, and use the lepromin test to support the tuberculoid pole late in disease. Classify the spectrum from TT to LL, grade disability of hands, feet and eyes, screen household contacts, and separate vitiligo, sarcoidosis, syringomyelia and diabetic neuropathy.",
-      "vis": null
-    },
-    {
-      "say": "Study the smear and notice the dense red rods packed into round globi against the blue background cells. These are acid fast bacilli, and such a heavy load gives a very high bacterial index on the indicator scale. For the exam, link packed globi with the lepromatous pole, prolonged multidrug therapy, and infectivity that fades once treatment has started.",
-      "tx": "The smear shows **acid fast bacilli** packed in red globi against a blue cellular background, the classic picture of multibacillary leprosy. A very high **bacterial index** means more than a hundred bacilli in every field, as the indicator scale confirms. For the exam, link dense globi with the **lepromatous pole**, prolonged multidrug therapy, and infectivity that fades once treatment starts.",
-      "vis": {
-        "alt": "High power smear with dense red rod clusters in globi, blue background cells, bacterial index scale.",
-        "ar": 1.3393,
-        "caption": "Microscopy of red acid fast bacilli packed in globi. Illustration: StewardMD original.",
-        "kind": "image",
-        "src": "v1/lessons/media/med-leprosy-gen1.webp"
-      }
-    },
-    {
-      "say": "Start multidrug therapy with dapsone, rifampicin and clofazimine for the months the tier requires, and add urgent steroids for a reversal reaction or neuritis. Reserve thalidomide for severe erythema nodosum leprosum under strict contraception, and rest and graft trophic ulcers. Splint the clawed hand, protect eyes that fail to close, give single dose rifampicin to household contacts, and counsel that cure removes infectivity.",
-      "tx": "Treat with **multidrug therapy** using dapsone, rifampicin and clofazimine for the months the tier requires, and add urgent steroids for **reversal reactions** and neuritis. Reserve thalidomide for severe erythema nodosum leprosum under strict contraception, rest and graft **trophic ulcers**, splint the hand, protect the eyes, and give single dose rifampicin to household contacts while counselling that cure removes infectivity.",
-      "vis": null
-    }
-  ],
-  "subject": "medicine",
-  "title": "Leprosy: tuberculoid to lepromatous spectrum and reactions",
-  "v": 1
+  {
+   "say": "Map sensation over every patch with light touch, pinprick and temperature, because a patch that cannot feel is the hallmark of leprosy. Palpate the ulnar, median and peroneal nerves for thickened cords that roll under the finger. Look for a leonine face with earlobe nodules, loss of eyebrows, clawing of the fingers, foot drop, and painless ulcers on the sole. Shield the eyes when the lids fail to close, because an exposed cornea can ulcerate and blind the patient.",
+   "tx": "Test light touch, pinprick and temperature over every patch and map the **anaesthetic area**, since loss of feeling is the bedside hallmark. Palpate the ulnar, median and peroneal nerves for thickened cords, and look for **leonine facies** with earlobe nodules and loss of eyebrows. Check for claw hand, foot drop, painless sole ulcers and tender red nodules of **erythema nodosum leprosum**, and shield the eyes when lagophthalmos threatens the cornea.",
+   "vis": {
+    "alt": "A composite image showing diverse clinical signs of leprosy, including skin patches, thickened nerves, leonine facies, madarosis, nodules, claw hand, trophic ulcer, and ENL.",
+    "ar": 1.8349,
+    "caption": "Clinical spectrum of leprosy: from tuberculoid patches to lepromatous facies and complications",
+    "kind": "image",
+    "src": "v1/lessons/media/med-leprosy-fig1.webp"
+   }
+  },
+  {
+   "say": "Order a slit skin smear from the earlobes and the active edge of a patch, and read the bacterial index to confirm multibacillary disease. Biopsy the edge of the patch to show granulomas that invade nerves, and use the lepromin test to support the tuberculoid pole. Classify the spectrum from TT to LL, grade disability of the hands, feet and eyes, and screen every household contact. Keep vitiligo, sarcoidosis, syringomyelia and diabetic neuropathy in the differential diagnosis.",
+   "tx": "Order a **slit skin smear** from earlobes and active edges and read the **bacterial index**, since a high load confirms multibacillary disease. Biopsy the patch edge to show granulomas and nerve involvement, and use the lepromin test to support the tuberculoid pole late in disease. Classify the spectrum from TT to LL, grade disability of hands, feet and eyes, screen household contacts, and separate vitiligo, sarcoidosis, syringomyelia and diabetic neuropathy.",
+   "vis": null
+  },
+  {
+   "say": "Study the smear and notice the dense red rods packed into round globi against the blue background cells. These are acid fast bacilli, and such a heavy load gives a very high bacterial index on the indicator scale. For the exam, link packed globi with the lepromatous pole, prolonged multidrug therapy, and infectivity that fades once treatment has started.",
+   "tx": "The smear shows **acid fast bacilli** packed in red globi against a blue cellular background, the classic picture of multibacillary leprosy. A very high **bacterial index** means more than a hundred bacilli in every field, as the indicator scale confirms. For the exam, link dense globi with the **lepromatous pole**, prolonged multidrug therapy, and infectivity that fades once treatment starts.",
+   "vis": {
+    "alt": "High power smear with dense red rod clusters in globi, blue background cells, bacterial index scale.",
+    "ar": 1.3393,
+    "caption": "Microscopy of red acid fast bacilli packed in globi. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/med-leprosy-gen1.webp"
+   }
+  },
+  {
+   "say": "Start multidrug therapy with dapsone, rifampicin and clofazimine for the months the tier requires, and add urgent steroids for a reversal reaction or neuritis. Reserve thalidomide for severe erythema nodosum leprosum under strict contraception, and rest and graft trophic ulcers. Splint the clawed hand, protect eyes that fail to close, give single dose rifampicin to household contacts, and counsel that cure removes infectivity.",
+   "tx": "Treat with **multidrug therapy** using dapsone, rifampicin and clofazimine for the months the tier requires, and add urgent steroids for **reversal reactions** and neuritis. Reserve thalidomide for severe erythema nodosum leprosum under strict contraception, rest and graft **trophic ulcers**, splint the hand, protect the eyes, and give single dose rifampicin to household contacts while counselling that cure removes infectivity.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: A numb pale patch that stays dry without itching is leprosy until proved otherwise at the bedside. Test light touch, pinprick and temperature, then palpate ulnar, median and peroneal nerves for thickened cords. Slit skin smear bacterial index separates multibacillary disease with packed acid fast globi from the tuberculoid pole. Multidrug therapy cures and removes infectivity, while steroids protect nerves during reversal reactions and neuritis.",
+   "say": "High-yield for the exam: A numb pale patch that stays dry without itching is leprosy until proved otherwise at the bedside. Test light touch, pinprick and temperature, then palpate ulnar, median and peroneal nerves for thickened cords. Slit skin smear bacterial index separates multibacillary disease with packed acid fast globi from the tuberculoid pole. Multidrug therapy cures and removes infectivity, while steroids protect nerves during reversal reactions and neuritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Cardinal patch clue",
+      "Pale patch with sensory loss"
+     ],
+     [
+      "Bedside sensation tests",
+      "Light touch, pinprick and temperature"
+     ],
+     [
+      "Nerves to palpate",
+      "Ulnar, median and peroneal nerves"
+     ],
+     [
+      "Lepromatous face signs",
+      "Leonine facies, earlobe nodules, eyebrow loss"
+     ],
+     [
+      "Smear test used",
+      "Slit skin smear, bacterial index"
+     ],
+     [
+      "Multibacillary smear picture",
+      "Acid fast bacilli packed in globi"
+     ],
+     [
+      "Curative treatment base",
+      "Multidrug therapy with three drugs"
+     ],
+     [
+      "Reaction nerve protection",
+      "Urgent steroids for reversal neuritis"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "medicine",
+ "title": "Leprosy: tuberculoid to lepromatous spectrum and reactions",
+ "v": 1
 }
