@@ -23,12 +23,37 @@
     "kind": "flow",
     "title": "Red cell antioxidant chain",
     "nodes": [
-     {"id": "nad", "label": "Shunt NADPH"},
-     {"id": "gsh", "label": "Reduced glutathione"},
-     {"id": "per", "label": "Peroxide neutralised"},
-     {"id": "fail", "label": "Failure: Heinz bodies, haemolysis"}
+     {
+      "id": "nad",
+      "label": "Shunt NADPH"
+     },
+     {
+      "id": "gsh",
+      "label": "Reduced glutathione"
+     },
+     {
+      "id": "per",
+      "label": "Peroxide neutralised"
+     },
+     {
+      "id": "fail",
+      "label": "Failure: Heinz bodies, haemolysis"
+     }
     ],
-    "edges": [["nad", "gsh"], ["gsh", "per"], ["nad", "fail"]]
+    "edges": [
+     [
+      "nad",
+      "gsh"
+     ],
+     [
+      "gsh",
+      "per"
+     ],
+     [
+      "nad",
+      "fail"
+     ]
+    ]
    }
   },
   {
@@ -36,12 +61,27 @@
    "say": "Primaquine, rasburicase, methylene blue, nitrofurantoin, sulfonamides and fava beans trigger attacks. Infection is the commonest trigger in children. Families need the avoid list in writing after a first crisis.",
    "vis": {
     "kind": "table",
-    "cols": ["Category", "Examples to avoid or use cautiously"],
+    "cols": [
+     "Category",
+     "Examples to avoid or use cautiously"
+    ],
     "rows": [
-     ["Antimalarial and urate drugs", "Primaquine, rasburicase"],
-     ["Antimicrobials", "Nitrofurantoin, sulfonamides, chloramphenicol caution"],
-     ["Foods and chemicals", "Fava beans, naphthalene, henna"],
-     ["Dyes as drugs", "Methylene blue (needs NADPH to work)"]
+     [
+      "Antimalarial and urate drugs",
+      "Primaquine, rasburicase"
+     ],
+     [
+      "Antimicrobials",
+      "Nitrofurantoin, sulfonamides, chloramphenicol caution"
+     ],
+     [
+      "Foods and chemicals",
+      "Fava beans, naphthalene, henna"
+     ],
+     [
+      "Dyes as drugs",
+      "Methylene blue (needs NADPH to work)"
+     ]
     ]
    }
   },
@@ -50,8 +90,21 @@
    "say": "The Mediterranean variant leaves under ten percent activity with severe jaundice, while African A minus is milder. Female heterozygotes mosaic by lyonisation range widely. Malaria selection maintains these alleles historically.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Mediterranean variant", "points": ["Very low activity", "Favism, severe neonatal jaundice", "Chronic haemolysis rare"]},
-    "right": {"title": "African A minus variant", "points": ["Moderate activity", "Drug timed episodes", "Self limited as young cells survive"]
+    "left": {
+     "title": "Mediterranean variant",
+     "points": [
+      "Very low activity",
+      "Favism, severe neonatal jaundice",
+      "Chronic haemolysis rare"
+     ]
+    },
+    "right": {
+     "title": "African A minus variant",
+     "points": [
+      "Moderate activity",
+      "Drug timed episodes",
+      "Self limited as young cells survive"
+     ]
     }
    }
   },
@@ -65,12 +118,72 @@
    "say": "Care stops the oxidant, hydrates, monitors, and transfuses for symptomatic anaemia. Chronic variants need folate and iron monitoring. Every drug chart must flag G6PD deficiency, because the next oxidant prescription is preventable.",
    "vis": {
     "kind": "table",
-    "cols": ["Action", "Timing"],
+    "cols": [
+     "Action",
+     "Timing"
+    ],
     "rows": [
-     ["Stop oxidant, treat infection", "Immediately"],
-     ["Hydrate, watch haemoglobin and kidneys", "First 48 hours"],
-     ["Repeat enzyme assay", "About 3 months later"],
-     ["Alert card and family screening", "Before discharge"]
+     [
+      "Stop oxidant, treat infection",
+      "Immediately"
+     ],
+     [
+      "Hydrate, watch haemoglobin and kidneys",
+      "First 48 hours"
+     ],
+     [
+      "Repeat enzyme assay",
+      "About 3 months later"
+     ],
+     [
+      "Alert card and family screening",
+      "Before discharge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Glucose-6-phosphate dehydrogenase catalyses the rate-limiting step of the pentose phosphate pathway, generating NADPH required to maintain reduced glutathione for erythrocyte antioxidant defense. G6PD deficiency is an X-linked recessive disorder triggered by oxidative stress from fava beans, infection, primaquine, or sulfonamides. Peripheral blood smear displays Heinz bodies made of precipitated oxidized haemoglobin and bite cells produced when splenic macrophages excise these inclusions.",
+   "say": "Glucose-6-phosphate dehydrogenase catalyses the rate-limiting step of the pentose phosphate pathway, generating NADPH required to maintain reduced glutathione for erythrocyte antioxidant defense. G6PD deficiency is an X-linked recessive disorder triggered by oxidative stress from fava beans, infection, primaquine, or sulfonamides. Peripheral blood smear displays Heinz bodies made of precipitated oxidized haemoglobin and bite cells produced when splenic macrophages excise these inclusions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate-limiting enzyme",
+      "Glucose-6-phosphate dehydrogenase producing NADPH in oxidative pathway"
+     ],
+     [
+      "NADPH vital function",
+      "Reduces glutathione via glutathione reductase protecting against hydrogen peroxide"
+     ],
+     [
+      "Inheritance pattern",
+      "X-linked recessive inheritance affecting predominantly male individuals"
+     ],
+     [
+      "Classic triggers",
+      "Infections, fava beans, dapsone, primaquine, and sulfonamide medications"
+     ],
+     [
+      "Peripheral smear inclusions",
+      "Heinz bodies composed of insoluble denatured globin chains"
+     ],
+     [
+      "Characteristic RBC morphology",
+      "Degmacytes or bite cells formed by splenic macrophage phagocytosis"
+     ],
+     [
+      "Timing of enzyme assay",
+      "Test enzyme levels weeks after acute haemolytic crisis resolves"
+     ],
+     [
+      "Non-oxidative pathway enzyme",
+      "Transketolase requires thiamine pyrophosphate to interconvert phosphorylated sugars"
+     ]
     ]
    }
   }

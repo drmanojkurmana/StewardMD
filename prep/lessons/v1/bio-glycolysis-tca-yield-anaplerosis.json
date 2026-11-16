@@ -10,11 +10,27 @@
    "say": "Modern values credit each mitochondrial NADH with about two and a half ATP and each FADH2 with about one and a half ATP. Older teaching used three and two, giving thirty six or thirty eight ATP per glucose. You should state which shuttle assumption sits behind your total.",
    "vis": {
     "kind": "table",
-    "cols": ["Carrier", "Modern ATP", "Older ATP"],
+    "cols": [
+     "Carrier",
+     "Modern ATP",
+     "Older ATP"
+    ],
     "rows": [
-     ["Mitochondrial NADH", "2.5", "3"],
-     ["FADH2 (complex II entry)", "1.5", "2"],
-     ["GTP from TCA", "1", "1"]
+     [
+      "Mitochondrial NADH",
+      "2.5",
+      "3"
+     ],
+     [
+      "FADH2 (complex II entry)",
+      "1.5",
+      "2"
+     ],
+     [
+      "GTP from TCA",
+      "1",
+      "1"
+     ]
     ]
    }
   },
@@ -23,8 +39,21 @@
    "say": "Cytosolic NADH cannot cross the inner membrane, so two shuttles smuggle its electrons inward at different prices. The glycerol phosphate shuttle yields one and a half ATP each, while the malate aspartate shuttle yields two and a half each. One glucose therefore totals thirty or thirty two ATP by modern counting.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Glycerol phosphate shuttle (30 total)", "points": ["Muscle and brain favour speed", "Electrons enter as FADH2", "Cytosolic NADH worth 1.5 ATP"]},
-    "right": {"title": "Malate-aspartate shuttle (32 total)", "points": ["Liver and heart favour yield", "Electrons enter as NADH", "Cytosolic NADH worth 2.5 ATP"]
+    "left": {
+     "title": "Glycerol phosphate shuttle (30 total)",
+     "points": [
+      "Muscle and brain favour speed",
+      "Electrons enter as FADH2",
+      "Cytosolic NADH worth 1.5 ATP"
+     ]
+    },
+    "right": {
+     "title": "Malate-aspartate shuttle (32 total)",
+     "points": [
+      "Liver and heart favour yield",
+      "Electrons enter as NADH",
+      "Cytosolic NADH worth 2.5 ATP"
+     ]
     }
    }
   },
@@ -33,12 +62,27 @@
    "say": "One glucose gives four ATP at substrate level, net two after investment, plus ten NADH and two FADH2 across cytosol, dehydrogenase and cycle. Per acetyl-CoA the yield is about ten ATP. Anaerobic tissues keep only the net two ATP, explaining their voracious glucose appetite.",
    "vis": {
     "kind": "table",
-    "cols": ["Stage (per glucose)", "ATP or carriers"],
+    "cols": [
+     "Stage (per glucose)",
+     "ATP or carriers"
+    ],
     "rows": [
-     ["Glycolysis substrate level", "Net 2 ATP"],
-     ["Cytosolic NADH (2)", "3 or 5 ATP by shuttle"],
-     ["PDH NADH (2)", "5 ATP"],
-     ["TCA (2 turns)", "20 ATP (includes 2 GTP)"]
+     [
+      "Glycolysis substrate level",
+      "Net 2 ATP"
+     ],
+     [
+      "Cytosolic NADH (2)",
+      "3 or 5 ATP by shuttle"
+     ],
+     [
+      "PDH NADH (2)",
+      "5 ATP"
+     ],
+     [
+      "TCA (2 turns)",
+      "20 ATP (includes 2 GTP)"
+     ]
     ]
    }
   },
@@ -49,12 +93,37 @@
     "kind": "flow",
     "title": "Main anaplerotic refills",
     "nodes": [
-     {"id": "pyr", "label": "Pyruvate"},
-     {"id": "oaa", "label": "Oxaloacetate refilled"},
-     {"id": "glu", "label": "Glutamate to alpha-KG"},
-     {"id": "pro", "label": "Propionyl-CoA to succinyl-CoA"}
+     {
+      "id": "pyr",
+      "label": "Pyruvate"
+     },
+     {
+      "id": "oaa",
+      "label": "Oxaloacetate refilled"
+     },
+     {
+      "id": "glu",
+      "label": "Glutamate to alpha-KG"
+     },
+     {
+      "id": "pro",
+      "label": "Propionyl-CoA to succinyl-CoA"
+     }
     ],
-    "edges": [["pyr", "oaa"], ["glu", "oaa"], ["pro", "oaa"]]
+    "edges": [
+     [
+      "pyr",
+      "oaa"
+     ],
+     [
+      "glu",
+      "oaa"
+     ],
+     [
+      "pro",
+      "oaa"
+     ]
+    ]
    }
   },
   {
@@ -67,9 +136,63 @@
    "say": "Exports are called cataplerosis. Citrate leaves in the fed state to donate acetyl groups for fat synthesis, while malate leaves during glucose production to deliver reducing power. Balanced flows keep the oxaloacetate pool constant while traffic moves both ways.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Anaplerosis (refill)", "points": ["Pyruvate to oxaloacetate", "Glutamate to alpha-KG", "Propionate to succinyl-CoA"]},
-    "right": {"title": "Cataplerosis (export)", "points": ["Citrate for fat synthesis", "Malate for gluconeogenesis", "Succinyl-CoA for heme"]
+    "left": {
+     "title": "Anaplerosis (refill)",
+     "points": [
+      "Pyruvate to oxaloacetate",
+      "Glutamate to alpha-KG",
+      "Propionate to succinyl-CoA"
+     ]
+    },
+    "right": {
+     "title": "Cataplerosis (export)",
+     "points": [
+      "Citrate for fat synthesis",
+      "Malate for gluconeogenesis",
+      "Succinyl-CoA for heme"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Complete oxidation of one glucose molecule yields thirty to thirty-two ATP depending on the shuttle system used. The malate-aspartate shuttle yields about 2.5 ATP per cytosolic NADH in liver and heart, whereas the glycerol 3-phosphate shuttle yields about 1.5 ATP via FADH2 in muscle and brain. Pyruvate carboxylase is the primary anaplerotic enzyme refilling oxaloacetate, requiring biotin and activated by acetyl-CoA.",
+   "say": "Complete oxidation of one glucose molecule yields thirty to thirty-two ATP depending on the shuttle system used. The malate-aspartate shuttle yields about 2.5 ATP per cytosolic NADH in liver and heart, whereas the glycerol 3-phosphate shuttle yields about 1.5 ATP via FADH2 in muscle and brain. Pyruvate carboxylase is the primary anaplerotic enzyme refilling oxaloacetate, requiring biotin and activated by acetyl-CoA.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Total net ATP yield",
+      "Thirty to thirty-two ATP per molecule of glucose oxidized"
+     ],
+     [
+      "Malate-aspartate shuttle",
+      "Transfers electrons to mitochondrial NADH generating 2.5 ATP"
+     ],
+     [
+      "Glycerol phosphate shuttle",
+      "Transfers electrons to mitochondrial FADH2 generating 1.5 ATP"
+     ],
+     [
+      "Major anaplerotic enzyme",
+      "Pyruvate carboxylase refilling oxaloacetate from pyruvate"
+     ],
+     [
+      "Pyruvate carboxylase cofactor",
+      "Requires biotin and is allosterically activated by acetyl-CoA"
+     ],
+     [
+      "Cataplerosis exports",
+      "Citrate leaves mitochondria for cytosolic fatty acid synthesis"
+     ],
+     [
+      "Heme precursor export",
+      "Succinyl-CoA exits TCA cycle for porphyrin synthesis pathway"
+     ]
+    ]
    }
   }
  ],
