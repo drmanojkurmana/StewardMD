@@ -179,7 +179,7 @@
   var CAP = 200;
   function newStack(o) { return { u: (o && o.u) || [], r: (o && o.r) || [] }; }
   function push(st, op) { st.u.push(op); if (st.u.length > CAP) st.u.shift(); st.r = []; return st; }
-  function opIds(op) { return op.t === "add" ? [op.id] : op.ids; }
+  function opIds(op) { if (op.t === "add") return [op.id]; if (op.t === "split") return (op.orig || []).concat(op.pieces || []); return op.ids; }
   // gone value each id of op takes when the op is undone (undoing true) or applied again.
   function goneAfter(op, undoing) { return op.t === "add" ? !!undoing : !undoing; }
   function undo(st) { var op = st.u.pop(); if (!op) return null; st.r.push(op); return { op: op, gone: goneAfter(op, true) }; }
@@ -1090,13 +1090,21 @@
   function toolbarHtml(d) {
     var b = function (act, label, v, extra) { return '<button type="button" class="st-b" data-act="' + act + '"' + (v != null ? ' data-v="' + v + '"' : "") + (extra || "") + ">" + label + "</button>"; };
     var cp = V ? (V.cur || 1) : 1;
+    // Phase 1 toolbar order: zoom window, pen, eraser, highlighter, shapes, lasso, elements, image, camera, text, typing, laser.
+    // Later-phase slots (shapes/elements/image/camera/text/typing/laser) stay hidden until those phases ship.
+    var inkIco = (G.STUDY_INK && G.STUDY_INK.ICONS) || {};
+    var hiddenSlot = function (label, ico) { return '<button type="button" class="st-b st-slot-future" hidden title="' + label + '" aria-label="' + label + '">' + (ico || ICO.more) + "</button>"; };
     return '<div class="st-tb" id="stTb" role="toolbar" aria-label="Pen tools">' +
       '<div class="st-tb-group">' +
         '<div class="st-tb-tools">' +
+          b("st-page-sheet", inkIco.zoom || ICO.grid, null, ' title="Zoom window and pages" aria-label="Zoom window and pages"') +
           b("st-tool", ICO.pen, "pen", ' title="Pen" aria-label="Pen"') +
-          b("st-tool", ICO.hl, "hl", ' title="Marker" aria-label="Marker"') +
           b("st-tool", ICO.er, "er", ' title="Eraser" aria-label="Eraser"') +
+          b("st-tool", ICO.hl, "hl", ' title="Highlighter" aria-label="Highlighter"') +
+          hiddenSlot("Shapes", inkIco.shapes) +
           b("st-tool", ICO.lasso, "lasso", ' title="Lasso select" aria-label="Lasso select"') +
+          hiddenSlot("Elements", inkIco.elements) + hiddenSlot("Image", inkIco.image) + hiddenSlot("Camera", inkIco.camera) +
+          hiddenSlot("Text", inkIco.text) + hiddenSlot("Typing", inkIco.typing) + hiddenSlot("Laser", inkIco.laser) +
         '</div>' +
       '</div>' +
       '<div class="st-tb-group st-tb-history">' +
@@ -1117,6 +1125,7 @@
   }
 
   function colorStripHtml() {
+    if (G.STUDY_INK) return '<div id="stInkCtx" class="st-ink-ctx"></div>';
     var isHl = V && V.tool === "hl", pal = isHl ? HCOLORS : COLORS;
     var cIdx = V ? V.ci : 0;
     var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#42cdb5");
@@ -1146,7 +1155,7 @@
     // smd_study_scribble is ignored so old ONs are reset; only smd_study_scribble2 === "1" turns it on.
     var scrPref = false;
     try { scrPref = G.localStorage.getItem("smd_study_scribble2") === "1"; } catch (e) {}
-    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null };
+    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
@@ -1210,6 +1219,8 @@
       cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.className = "st-cv";
       ov.width = Math.floor(cw * dpr); ov.height = Math.floor(ch * dpr); ov.className = "st-ov"; ov.setAttribute("data-n", n);
       p.cv = cv; p.ov = ov; p.el.appendChild(cv); p.el.appendChild(ov);
+      // Phase 1 live layer: predicted points + eraser cursor only; committed ink stays on ov.
+      if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; p.live = lv; p.el.appendChild(lv); }
       bindInk(ov, n); redraw(n);
       if (!page) return drawBg(cv.getContext("2d"), V.nb.style, V.ratio, cv.width);
       p.task = page.render({ canvasContext: cv.getContext("2d"), viewport: vp });
@@ -1224,8 +1235,8 @@
     p.on = false; p.gen++;
     try { if (p.task) p.task.cancel(); } catch (e) {}
     p.task = null;
-    [p.cv, p.tl, p.ov].forEach(function (c) { if (c) { c.width = 0; c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
-    p.cv = p.tl = p.ov = null;
+    [p.cv, p.tl, p.ov, p.live].forEach(function (c) { if (c) { c.width = 0; c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
+    p.cv = p.tl = p.ov = p.live = null;
   }
 
   function textLayer(page, p, k) {
@@ -1268,6 +1279,8 @@
   /* ---- ink ---- */
   function penW(s, W, p) { return s.tool === "hl" ? s.w * W * HMUL : s.w * W * (0.5 + p); }
   function drawStroke(ctx, s, W, H, dpr, isSel) {
+    // Phase 1 hook: styled strokes render via study-ink.js; old strokes keep the legacy renderer below.
+    if (G.STUDY_INK && G.STUDY_INK.drawStroke(ctx, s, W, H, dpr, isSel)) return;
     var p = s.pts, i;
     ctx.save(); ctx.scale(dpr, dpr); ctx.lineCap = "round"; ctx.lineJoin = "round";
     ctx.strokeStyle = isSel ? "#42cdb5" : s.color;
@@ -1290,11 +1303,12 @@
     var p = V && V.pg[n]; if (!p || !p.ov) return;
     var ctx = p.ov.getContext("2d"), dpr = p.ov.width / (p.el.clientWidth || 1), W = p.el.clientWidth, H = p.el.clientHeight;
     ctx.clearRect(0, 0, p.ov.width, p.ov.height);
-    V.strokes.forEach(function (s) {
-      if (s.page === pid(n) && !s.gone) {
-        var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
-        drawStroke(ctx, s, W, H, dpr, isSel);
-      }
+    // Highlighter renders under pen ink and text-layer content visually (multiply on the overlay).
+    var ordered = V.strokes.filter(function (s) { return s.page === pid(n) && !s.gone; });
+    ordered.sort(function (a, b) { return (a.tool === "hl" ? 0 : 1) - (b.tool === "hl" ? 0 : 1); });
+    ordered.forEach(function (s) {
+      var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
+      drawStroke(ctx, s, W, H, dpr, isSel);
     });
     if (live) drawStroke(ctx, live, W, H, dpr);
     if (lassoLoop && lassoLoop.length > 1) {
@@ -1367,11 +1381,42 @@
     var zm = root.querySelector("#stZoomLabel");
     if (zm) zm.textContent = Math.round((V.z || 1) * 100) + "%";
     V.box.classList.toggle("st-ink", !!V.tool);
+    // Phase 1 hook: refresh the ink context strip for the active tool.
+    if (G.STUDY_INK) { try { G.STUDY_INK.syncStrip(inkApi(V.cur || 1, null)); } catch (e) {} }
   }
 
   function saveStack() { return put("undo", { doc: V.id, u: V.stack.u, r: V.stack.r }); }
 
+  /* ---- Phase 1 ink hooks (study-ink.js) ---- */
+  function clearPageInk() {
+    if (!V) return;
+    var pageId = pid(V.cur || 1), ids = [];
+    V.strokes.forEach(function (s) { if (s.page === pageId && !s.gone) { s.gone = true; ids.push(s.id); put("strokes", s); } });
+    if (!ids.length) { if (host) host.toast("This page is already clear."); return; }
+    push(V.stack, { t: "del", ids: ids }); syncTb(); saveStack(); redraw(V.cur || 1);
+    if (host) host.toast("Page cleared. Undo brings it back.");
+  }
+  function inkApi(n, ov) {
+    return {
+      getV: function () { return V; }, root: function () { return host && host.root(); }, n: n, ov: ov,
+      pid: pid, uid: uid, toRel: toRel, pressureOf: pressure,
+      putStroke: function (s) { return put("strokes", s); },
+      pushOp: function (op) { push(V.stack, op); }, saveStack: saveStack, syncTb: syncTb,
+      redraw: function (nn, live, loop) { redraw(nn == null ? n : nn, live, loop); },
+      lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
+      removeLassoBar: removeLassoBar, showLassoBar: showLassoBar, showEraseToast: showEraseToast,
+      isPenSeen: function () { return penSeen; }, setPenSeen: function () { penSeen = true; },
+      clearPage: clearPageInk
+    };
+  }
+  // Pencil double-tap (1.18): no web hook exists for Apple Pencil double-tap; a native
+  // PencilInteraction bridge would call STUDY._inkDblTap() to switch pen and eraser. TODO: native build.
+  G.STUDY_INK_DBLTAP_TODO = "native PencilInteraction bridge needed";
   function bindInk(ov, n) {
+    if (G.STUDY_INK && G.STUDY_INK.bindInk) { G.STUDY_INK.bindInk(inkApi(n, ov), ov, n); return; }
+    bindInkLegacy(ov, n);
+  }
+  function bindInkLegacy(ov, n) {
     var cur = null, pan = null, erased = null, lassoPts = null;
     var pos = function (e) { var r = ov.getBoundingClientRect(); return toRel(e.clientX, e.clientY, r); };
     var sample = function (e) { var a = pos(e); return [r4(a[0]), r4(a[1]), r4(pressure(e))]; };
@@ -1477,6 +1522,14 @@
 
   function flipOp(r) {
     var pages = {};
+    if (r.op.t === "split") {
+      // Undo of a split/erase gesture: originals come back, pieces go. Redo reverses it.
+      var isUndo = flipOp._undoing === true;
+      (r.op.orig || []).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = isUndo ? false : true; pages[s.page] = 1; put("strokes", s); } }); });
+      (r.op.pieces || []).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = isUndo ? true : false; pages[s.page] = 1; put("strokes", s); } }); });
+      Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
+      syncTb(); saveStack(); return;
+    }
     opIds(r.op).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = r.gone; pages[s.page] = 1; put("strokes", s); } }); });
     Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
     syncTb(); saveStack();
@@ -1882,11 +1935,22 @@
       });
       return;
     }
-    if (a === "st-tool") { var t = el.getAttribute("data-v"); V.tool = V.tool === t ? null : t; if (V.lasso) { V.lasso = null; removeLassoBar(); } return syncTb(); }
+    if (a === "st-tool") {
+      var t = el.getAttribute("data-v");
+      // Phase 1: tapping the active pen/highlighter/eraser again opens its settings popover.
+      if (V.tool === t && G.STUDY_INK && (t === "pen" || t === "hl" || t === "er")) { G.STUDY_INK.popover(inkApi(V.cur || 1, null), t); return syncTb(); }
+      if (V.tool && V.tool !== "er" && t === "er") V.prevTool = V.tool;
+      if (t !== "er" && V.tool !== t) V.prevTool = V.tool;
+      V.tool = V.tool === t ? null : t;
+      if (G.STUDY_INK) G.STUDY_INK.closePopover(inkApi(V.cur || 1, null));
+      if (V.lasso) { V.lasso = null; removeLassoBar(); }
+      return syncTb();
+    }
+    if (a === "st-ink-clear") { if (G.STUDY_INK) G.STUDY_INK.closePopover(inkApi(V.cur || 1, null)); return clearPageInk(); }
     if (a === "st-color") { V.ci = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
     if (a === "st-width") { V.wi = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
-    if (a === "st-undo") { var u = undo(V.stack); return u && flipOp(u); }
-    if (a === "st-redo") { var r = redo(V.stack); return r && flipOp(r); }
+    if (a === "st-undo") { var u = undo(V.stack); if (u) { flipOp._undoing = true; flipOp(u); flipOp._undoing = false; } return; }
+    if (a === "st-redo") { var r = redo(V.stack); if (r) { flipOp._undoing = false; flipOp(r); } return; }
     if (a === "st-erase-undo") {
       var et = host.root().querySelector("#stEraseToast");
       if (et && et._stEraseIds) { undoErase(et._stEraseIds); removeEraseToast(); }
@@ -1924,5 +1988,6 @@
   function leave() { closeViewer(); }
   function homeRow(h) { host = h; return ""; }
 
-  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; } };
+  function inkDblTap() { if (!V) return; V.tool = V.tool === "er" ? (V.prevTool || "pen") : "er"; syncTb(); }
+  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; }, _inkDblTap: inkDblTap, _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; } };
 })(typeof window !== "undefined" ? window : this);
