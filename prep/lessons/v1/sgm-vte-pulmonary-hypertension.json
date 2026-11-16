@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-vte-pulmonary-hypertension",
+ "subject": "ss-general-medicine",
+ "title": "Venous Thromboembolism and Pulmonary Hypertension",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Venous thromboembolism (clot in veins with travel to lung) covers deep vein thrombosis and pulmonary embolism. Pulmonary hypertension means mean pulmonary arterial pressure above **20 mmHg** at rest with pulmonary vascular resistance above **2 Wood units**. Venous disease is common after surgery, immobility and cancer, while hypertension needs right heart catheterisation for confirmation and grading.",
+   "say": "Venous thromboembolism is clot in veins that may reach the lung and it includes deep vein thrombosis and pulmonary embolism. Pulmonary hypertension is increased pulmonary arterial pressure and it is defined by mean pressure above twenty millimetres of mercury. Pulmonary vascular resistance above two Wood units is also required by definition for the diagnosis. Right heart catheterisation is needed for confirmation and grading of severity.",
+   "vis": null
+  },
+  {
+   "tx": "**Virchow triad** (stasis plus vessel injury plus hypercoagulability) explains vein clot formation. Transient risks are surgery, trauma, long hospital stay, pregnancy and oestrogen use, while persistent risks are cancer, antiphospholipid syndrome and recurrent unprovoked events. Pulmonary hypertension groups are arterial, left heart disease, lung disease with hypoxia, chronic thromboembolic disease and unclear or multifactorial causes.",
+   "say": "Virchow triad explains clot formation and it includes stasis and vessel injury and hypercoagulability. Transient risks include surgery and trauma and pregnancy while persistent risks include cancer and antiphospholipid syndrome. Pulmonary hypertension is classified into five groups and they include arterial disease and left heart disease. Lung disease and chronic thromboembolic disease and multifactorial causes are also recognised groups.",
+   "vis": null
+  },
+  {
+   "tx": "Stasis lets activated clotting factors accumulate near valves, and **thrombin** generates fibrin that stabilises the thrombus. Embolism then obstructs pulmonary arteries, causing ventilation perfusion mismatch and right ventricular strain. In hypertension, hypoxia and remodelling raise pulmonary vascular resistance, so the right ventricle faces afterload it cannot sustain against rising pressure.",
+   "say": "Stasis allows clotting factors to accumulate and thrombin then forms fibrin that stabilises the thrombus. Embolism blocks pulmonary arteries and it causes ventilation perfusion mismatch with right ventricular strain. In pulmonary hypertension, hypoxia and vascular remodelling increase resistance and pressure. The right ventricle then faces afterload and it compensates for a limited period before failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Virchow factors"
+     },
+     {
+      "id": "b",
+      "label": "Thrombus forms"
+     },
+     {
+      "id": "c",
+      "label": "Embolism to lung"
+     },
+     {
+      "id": "d",
+      "label": "Right heart strain"
+     },
+     {
+      "id": "e",
+      "label": "Failure or shock"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Deep vein thrombosis** often shows unilateral calf swelling and tenderness, while pulmonary embolism gives breathlessness, pleuritic pain and tachycardia. Massive embolism (haemodynamic collapse) is marked by shock and obstructive signs. Pulmonary hypertension presents with exertional breathlessness, oedema and a loud pulmonary component of second sound, with right ventricular heave and raised jugular venous pressure.",
+   "say": "Deep vein thrombosis is suggested by unilateral calf swelling and pain but the sign is not highly specific. Pulmonary embolism is suggested by breathlessness and pleuritic pain and fast heart rate. Massive embolism presents with shock and it is an emergency needing urgent reperfusion. Pulmonary hypertension presents with exertional breathlessness and oedema and loud pulmonary sound with right ventricular heave.",
+   "vis": null
+  },
+  {
+   "tx": "Clinical likelihood uses **Wells score** (pretest probability tool), and D dimer (fibrin breakdown product) excludes disease when low with low or moderate probability. Computed tomography pulmonary angiography (contrast lung angiogram) is the usual confirmatory test, with ventilation perfusion scanning as an alternative. Echocardiogram and troponin and natriuretic peptides grade strain, while right heart catheterisation is the **gold standard** for hypertension.",
+   "say": "Wells score is used for pretest probability and D dimer helps to exclude disease when negative and probability is low. Computed tomography pulmonary angiography is the usual confirmatory test and ventilation perfusion scanning is an alternative. Echocardiogram and troponin and natriuretic peptides help to grade strain and risk. Right heart catheterisation is the gold standard for pulmonary hypertension and management decisions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Purpose",
+     "Threshold or role"
+    ],
+    "rows": [
+     [
+      "Wells score",
+      "Pretest probability",
+      "Guides D dimer or imaging"
+     ],
+     [
+      "D dimer",
+      "Exclusion test",
+      "Normal value excludes low risk"
+     ],
+     [
+      "CT pulmonary angiography",
+      "Confirm embolism",
+      "Reference imaging test"
+     ],
+     [
+      "Ventilation perfusion scan",
+      "Alternative imaging",
+      "Preferred in pregnancy"
+     ],
+     [
+      "Right catheterisation",
+      "Hypertension standard",
+      "Mean pressure and resistance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anticoagulation (clot prevention therapy) is first line for venous disease. Apixaban (direct factor Xa inhibitor) **10 mg** twice daily for 7 days then **5 mg** twice daily, or rivaroxaban **15 mg** twice daily for 21 days then **20 mg** daily, need no parenteral lead in. Low molecular weight heparin leads in pregnancy, with warfarin (vitamin K antagonist) reserved for refractory cases and antiphospholipid syndrome.",
+   "say": "Anticoagulation is the main treatment for venous thromboembolism and it should be started promptly in high suspicion cases. Apixaban is given at high dose for seven days and then at standard dose for the remaining course. Rivaroxaban follows a similar stepwise course and it needs no bridging heparin for many patients. Heparin is preferred in pregnancy and warfarin is reserved for special cases.",
+   "vis": null
+  },
+  {
+   "tx": "Pulmonary hypertension therapy targets oxygenation, congestion and pulmonary vascular disease. **Calcium channel blocker** (vascular relaxant) responders, endothelin receptor antagonists such as ambrisentan, phosphodiesterase inhibitors such as sildenafil, and prostacyclin pathway agents form stepwise options. Guidelines favour early combination therapy in high risk disease, with oxygen, diuretics and anticoagulation in selected phenotypes.",
+   "say": "Oxygen and diuretics are used for symptoms and congestion in pulmonary hypertension and they improve quality of life. Calcium channel blockers help only in reactive patients and response testing is needed before use. Endothelin antagonists and sildenafil and prostacyclin agents reduce symptoms and hospitalisation. Early combination therapy is advised in high risk disease by recent European guidance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Venous therapy",
+     "points": [
+      "Apixaban or rivaroxaban first",
+      "Heparin in pregnancy",
+      "Three months if provoked",
+      "Reperfusion if massive shock"
+     ]
+    },
+    "right": {
+     "title": "Hypertension therapy",
+     "points": [
+      "Oxygen and diuretics base",
+      "Calcium blocker if reactive",
+      "Sildenafil and ambrisentan",
+      "Prostacyclin in severe disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chronic thromboembolic pulmonary hypertension** (right heart failure from unresolved clot) is the mechanical complication of embolism, and post thrombotic syndrome (chronic leg pain and swelling) follows deep vein disease. Bleeding on anticoagulation, right ventricular failure with syncope, and recurrence after stopping therapy are competing hazards needing balanced counselling and follow up.",
+   "say": "Chronic thromboembolic hypertension is a late complication of embolism and it causes progressive right heart failure. Post thrombotic syndrome causes chronic leg pain and swelling after deep vein disease. Bleeding on anticoagulation is an important competing hazard and it needs careful monitoring. Recurrence risk persists after stopping therapy in unprovoked and cancer associated disease.",
+   "vis": null
+  },
+  {
+   "tx": "Pulmonary embolism carries high early mortality in shock and in older patients, and **simplified PESI** (clinical severity score) identifies low risk cases for early discharge. Hypertension prognosis follows functional class, 6 minute walk distance, natriuretic peptides and cardiac index. Effective anticoagulation and targeted therapy improve survival, while persistent pulmonary vascular resistance predicts late right ventricular failure.",
+   "say": "Pulmonary embolism has high early mortality in shock and simplified PESI helps to identify low risk patients. Hypertension prognosis follows functional class and walk distance and peptide levels. Cardiac index and right atrial pressure add prognostic value in invasive assessment. Effective therapy improves survival but persistent resistance predicts late failure and death.",
+   "vis": null
+  },
+  {
+   "tx": "**ESC 2023** (European Society of Cardiology, 2023 embolism guidance) replaced submassive terminology with intermediate risk classes, and CHEST 2021 (chest medicine guidance) standardised duration of therapy. Examination traps are using comparison of Wells cutoffs across versions, relying on D dimer in high probability cases, and treating D dimer alone as diagnostic rather than as an exclusion test with clinical probability.",
+   "say": "European guidance updated the classification of pulmonary embolism and it removed the confusing submassive terminology. Chest guidance standardised duration decisions for provoked and unprovoked disease. D dimer alone is not diagnostic and it should be used only with clinical probability. High probability is an indication for imaging and for starting therapy when delay is expected.",
+   "vis": null
+  },
+  {
+   "tx": "The table gathers the most asked thresholds, first line anticoagulants, gold standard tests and named classifications in one view. **Wells score** and **D dimer** roles, imaging standards, apixaban escalation and hypertension cutoffs repay rapid revision before the examination hall with high confidence.",
+   "say": "This summary gathers high yield thresholds and first line drugs and gold standard tests for revision. Wells score and D dimer guide exclusion and computed tomography angiography confirms embolism. Apixaban and rivaroxaban are first line with heparin in pregnancy. Mean pulmonary pressure and resistance define hypertension and catheterisation confirms the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Hypertension definition",
+      "Mean pressure above twenty with resistance above two"
+     ],
+     [
+      "First line anticoagulant",
+      "Apixaban and rivaroxaban without bridging"
+     ],
+     [
+      "Gold standard embolism test",
+      "Computed tomography pulmonary angiography"
+     ],
+     [
+      "Gold standard hypertension test",
+      "Right heart catheterisation"
+     ],
+     [
+      "Low risk discharge tool",
+      "Simplified PESI clinical score"
+     ],
+     [
+      "D dimer role",
+      "Exclusion when negative and probability low"
+     ],
+     [
+      "Venous duration provoked",
+      "Three months with review"
+     ],
+     [
+      "Mechanical complication",
+      "Chronic thromboembolic hypertension"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

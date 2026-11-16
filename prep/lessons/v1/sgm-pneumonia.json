@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sgm-pneumonia",
+ "subject": "ss-general-medicine",
+ "title": "Pneumonia: CAP and HAP essentials",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Pneumonia** (acute infection of lung parenchyma with alveolar filling) is defined by new lung infiltrate plus fever, cough or raised white cells. **Community acquired pneumonia** (CAP, acquired outside hospital or within 48 hours of admission) and **hospital acquired pneumonia** (HAP, onset 48 hours after admission) differ in organisms and risk. About 1 in 10 hospitalised CAP patients needs intensive care, and severe CAP mortality reaches 15%.",
+   "say": "Pneumonia is an acute infection of the lung tissue that fills air spaces with fluid and pus. Clinicians define pneumonia by a new lung infiltrate together with fever, cough or raised white cell count. Community acquired pneumonia is acquired outside hospital or within two days of admission. Hospital acquired pneumonia starts at least two days after admission. About ten percent of hospitalised patients need intensive care and severe cases carry high mortality.",
+   "vis": null
+  },
+  {
+   "tx": "**Streptococcus pneumoniae** (pneumococcus, most common CAP cause) leads in typical CAP, with **Haemophilus influenzae** and **Staphylococcus aureus** also seen. Atypical cover includes **Mycoplasma pneumoniae**, **Legionella** and **Chlamydia psittaci**. Risk factors include age over 65 years, smoking, **chronic obstructive pulmonary disease** (COPD), alcohol use, diabetes and prior influenza. HAP favours gram negative bacilli, **Pseudomonas aeruginosa** and **methicillin resistant Staphylococcus aureus** (MRSA).",
+   "say": "Streptococcus pneumoniae is the most common cause of typical community acquired pneumonia. Haemophilus influenzae and Staphylococcus aureus are also common causes. Atypical organisms are Mycoplasma, Legionella and Chlamydia and they are important causes. Risk factors include age over sixty five years, smoking, chronic obstructive pulmonary disease, alcohol use and diabetes and they increase risk. Hospital acquired pneumonia tends to involve gram negative bacilli, Pseudomonas and methicillin resistant Staphylococcus aureus and it is more severe. Clinicians should assess local resistance patterns before choosing therapy and they must choose carefully.",
+   "vis": null
+  },
+  {
+   "tx": "**Consolidation** (fluid and pus filling alveoli) creates intrapulmonary shunt and ventilation perfusion mismatch, which explains hypoxaemia resistant to oxygen. Interstitial and alveolar exudate raises respiratory rate and work of breathing. Cytokine release in **systemic inflammatory response** drives fever, tachycardia and raised acute phase reactants. Local inflammation and pleural stretch produce **pleuritic chest pain** that worsens on inspiration and cough.",
+   "say": "Consolidation is fluid and pus filling the alveoli and it creates shunt that causes oxygen resistant hypoxaemia. Interstitial exudate raises respiratory rate and increases the work of breathing. Cytokine release in systemic inflammation causes fever, tachycardia and raised acute phase markers. Pleural inflammation stretches the pleura and it produces pleuritic pain on inspiration and cough. These mechanisms help explain the cardinal signs seen at the bedside.",
+   "vis": null
+  },
+  {
+   "tx": "Patients present with **productive cough** (cough with pus), fever, dyspnoea and **pleuritic chest pain** (sharp pain on breathing). Tachypnoea above 30 breaths/min, tachycardia and hypoxaemia indicate severity. Examination finds **lobar consolidation signs**: dullness to percussion, bronchial breathing, increased vocal resonance, crackles and pleural rub if effusion is present. **Rusty sputum** (orange brown expectoration) and rigors classic for pneumococcal pneumonia, while gradual onset suggests atypical infection.",
+   "say": "Patients present with productive cough, fever, breathlessness and sharp pain on breathing. Tachypnoea above thirty breaths per minute with tachycardia and low oxygen indicates severe disease. Examination reveals lobar consolidation signs with dullness, bronchial breathing and crackles. Rusty sputum with rigors should make clinicians think of pneumococcal pneumonia. Gradual onset with dry cough should suggest atypical infection instead.",
+   "vis": null
+  },
+  {
+   "tx": "**Chest radiography** (X ray) is the first test and shows lobar consolidation with air bronchograms and often pleural effusion. **Blood cultures** (before antibiotics) and **sputum Gram stain and culture** support aetiology, but sensitivity is low in treated patients. **Computed tomography** (CT) chest clarifies effusion, cavitation or alternative diagnoses. **Bronchoscopy with bronchoalveolar lavage** (BAL fluid analysis) remains the most sensitive microbiological gold standard for non resolving or immunocompromised pneumonia.",
+   "say": "Chest radiography is the first test and it shows lobar consolidation with air bronchograms and effusion. Blood cultures taken before antibiotics and sputum Gram stain support the cause but sensitivity remains low after treatment. Computed tomography clarifies effusion, cavitation or an alternative diagnosis when the picture is unclear. Bronchoscopy with lavage remains the most sensitive test for non resolving or immunocompromised pneumonia. Clinicians should send cultures early before starting antibiotics whenever possible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Chest X ray",
+      "First test, lobar consolidation"
+     ],
+     [
+      "Blood and sputum cultures",
+      "Before antibiotics, aetiology"
+     ],
+     [
+      "CT chest",
+      "Effusion, cavitation, alternative diagnosis"
+     ],
+     [
+      "Bronchoscopy with BAL",
+      "Gold standard in nonresolving pneumonia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Outpatient CAP receives high dose oral **amoxicillin** 1 g 3 times daily for 5 days. Inpatient non severe CAP needs intravenous **ceftriaxone** 1 to 2 g daily plus **azithromycin** 500 mg daily. Severe CAP requires broad beta lactam and macrolide or respiratory fluoroquinolone. HAP needs **piperacillin tazobactam** 4.5 g every 6 hours plus MRSA cover when risk exists. **CURB65** (confusion, urea, respiratory rate, blood pressure, age) guides site of care.",
+   "say": "Outpatient community acquired pneumonia receives amoxicillin one gram three times daily for five days. Inpatient cases need intravenous ceftriaxone one to two grams daily plus azithromycin five hundred milligrams daily. Severe pneumonia requires a broad beta lactam with a macrolide or fluoroquinolone. Hospital acquired pneumonia needs piperacillin tazobactam four point five grams every six hours with MRSA cover when indicated. The CURB sixty five score guides the choice between home, ward and intensive care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess CURB score"
+     },
+     {
+      "id": "b",
+      "label": "Choose site of care"
+     },
+     {
+      "id": "c",
+      "label": "Start empiric therapy"
+     },
+     {
+      "id": "d",
+      "label": "Reassess response"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**American Thoracic Society and Infectious Diseases Society of America 2019 CAP guideline** (ATS IDSA 2019) prefers short courses of at least 5 days with afebrile for 48 hours and clinical stability. Routine **anaerobic cover** for aspiration is not recommended without abscess or empyema. **ATS 2016 HAP guideline** de emphasizes routine vancomycin without MRSA risk and limits empiric fluoroquinolone. Indian Council of Medical Research stewardship advises early de escalation.",
+   "say": "The American Thoracic Society and Infectious Diseases Society twenty nineteen guideline is a short course guideline and it requires at least five days. Patients should remain afebrile for two days and reach clinical stability before stopping therapy. Routine anaerobic cover for aspiration is not recommended without abscess or empyema. The twenty sixteen hospital acquired pneumonia guideline is restrictive and it limits empiric vancomycin and fluoroquinolone use when MRSA risk is low. Early de escalation remains essential for good stewardship.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **parapneumonic effusion** (pleural fluid from pneumonia) progressing to **empyema** (pus in pleural space) needing drainage. **Lung abscess** (cavity with air fluid level) and **bacteraemia** indicate invasive disease. **Acute respiratory distress syndrome** (ARDS, severe hypoxaemia with bilateral infiltrates) and **septic shock** drive mortality. Prognosis worsens with age, multilobar infiltrate, low oxygen and confusion. Most uncomplicated CAP resolves in 2 to 3 weeks with follow up radiograph at 6 weeks for older smokers.",
+   "say": "Complications include parapneumonic effusion that can progress to empyema requiring drainage. Lung abscess with an air fluid level and bacteraemia are signs of invasive disease. Acute respiratory distress syndrome and septic shock are the leading causes of death. Prognosis worsens with older age, multilobar infiltrate, low oxygen and confusion. Most uncomplicated pneumonia resolves in two to three weeks and follow up radiography occurs at six weeks in older smokers.",
+   "vis": null
+  },
+  {
+   "tx": "Examiners test distinction between pneumonia and **cardiogenic pulmonary oedema** (fluid overload, raised wedge pressure) where natriuretic peptide is elevated and air bronchograms are absent. **Viral pneumonia** (influenza, respiratory syncytial virus) favours an interstitial pattern without lobar consolidation. **Aspiration pneumonia** (inhaled gastric contents, lower lobes) needs different empiric therapy. **Multilobar infiltrate** (involvement of multiple lobes) predicts intensive care need, while an isolated effusion without fever suggests malignancy or heart failure.",
+   "say": "Examiners test the distinction between pneumonia and cardiogenic pulmonary oedema with elevated natriuretic peptide and absent bronchograms is important. Viral pneumonia is an interstitial pattern without lobar consolidation. Aspiration pneumonia involves inhaled gastric contents in the lower lobes and needs different therapy. Multilobar infiltrate predicts intensive care need and it is a severity marker. An isolated effusion without fever should suggest malignancy or heart failure rather than infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pneumonia",
+     "points": [
+      "Fever, productive cough",
+      "Lobar consolidation",
+      "Air bronchograms",
+      "Effusion may be present"
+     ]
+    },
+    "right": {
+     "title": "Cardiogenic oedema",
+     "points": [
+      "Orthopnoea, pink frothy sputum",
+      "Diffuse interstitial edema",
+      "No air bronchograms",
+      "Elevated natriuretic peptide"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **pneumonia severity index** (PSI, 20-point score) uses age, vitals and comorbidities to estimate mortality, while **CURB65** (5-point bedside score) is preferred for rapid ward decisions. A CURB score of 0 suggests home care, three or more suggests intensive care review. **Major severity criteria** (septic shock needing vasopressors, respiratory failure needing ventilation) define severe pneumonia. Minor criteria include tachypnoea, confusion, leucopenia and multilobar infiltrates.",
+   "say": "The pneumonia severity index is based on age, vitals and comorbidities and it can estimate mortality. The CURB sixty five score helps clinicians make rapid ward decisions and it is bedside friendly. A score of zero suggests home care and three or more suggests intensive care review. Major criteria include septic shock needing vasopressors and respiratory failure needing ventilation and they have high mortality. Minor criteria include tachypnoea, confusion, low white cells and multilobar infiltrates and they increase risk. Scores should support rather than replace clinical judgement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Calculate score"
+     },
+     {
+      "id": "b",
+      "label": "Major criteria present"
+     },
+     {
+      "id": "c",
+      "label": "ICU if present"
+     },
+     {
+      "id": "d",
+      "label": "Ward if absent"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield patterns are **CURB65** scoring, classic **lobar consolidation signs**, organism clues and first line regimens. Remember severe pneumonia thresholds, short course principles and empyema drainage indications. These numbers and choices decide most multiple choice stems. A quick table below collects scores, doses, organisms and gold standard tests for revision.",
+   "say": "High yield patterns include CURB scoring, classic consolidation signs, organism clues and first line regimens. Clinicians should remember severe pneumonia thresholds, short course principles and empyema drainage indications. These numbers and choices decide most multiple choice stems. The table below collects scores, doses, organisms and gold standard tests for quick revision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "CURB zero to one",
+      "Home care"
+     ],
+     [
+      "CURB two",
+      "Ward care"
+     ],
+     [
+      "CURB three or more",
+      "ICU review"
+     ],
+     [
+      "Amoxicillin",
+      "One gram eight hourly five days"
+     ],
+     [
+      "Ceftriaxone",
+      "One to two grams daily"
+     ],
+     [
+      "Empyema",
+      "Needs drainage"
+     ],
+     [
+      "Gold standard BAL",
+      "Non resolving pneumonia"
+     ],
+     [
+      "Major criteria",
+      "Vasopressors or ventilation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

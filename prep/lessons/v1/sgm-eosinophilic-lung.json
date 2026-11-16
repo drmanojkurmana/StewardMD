@@ -1,0 +1,196 @@
+{
+ "v": 1,
+ "module": "sgm-eosinophilic-lung",
+ "subject": "ss-general-medicine",
+ "title": "Eosinophilic lung disease, aspergillosis and alveolar haemorrhage",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Eosinophilic lung disease means lung disease with **blood eosinophilia** (raised eosinophil count) plus lung involvement. Blood eosinophils are normally below 500 cells/µL, and a count above 1500 cells/µL defines marked eosinophilia. **Bronchoalveolar lavage** (fluid washed from small airways) with more than 25% eosinophils supports pulmonary eosinophilia.",
+   "say": "Blood eosinophils are normally fewer than five hundred cells per microlitre, and a count above fifteen hundred cells per microlitre defines marked eosinophilia. Lung disease with eosinophil activity in the airways is called eosinophilic lung disease. A lavage fluid sample with more than twenty five percent eosinophils can confirm eosinophilic lung disease. The diagnosis also needs exclusion of parasitic and drug causes.",
+   "vis": null
+  },
+  {
+   "tx": "Pulmonary eosinophilia has simple, allergic, systemic and idiopathic forms. Simple eosinophilia (**Loffler syndrome**, a brief allergic reaction after parasites or drugs) clears in weeks. **Allergic bronchopulmonary aspergillosis** (ABPA, a type 2 response to inhaled Aspergillus fungus) is the allergic form. **EGPA** and **CEP** (idiopathic eosinophilic lung disease) complete the main clinical groups.",
+   "say": "Simple eosinophilic pneumonia is a brief reaction after parasites or drugs, and it resolves within weeks. Allergic bronchopulmonary aspergillosis is the allergic form, and it is driven by a type two response to inhaled Aspergillus fungus. Eosinophilic granulomatosis with polyangiitis is the vasculitic form, and asthma with nerve involvement is the key clue. Chronic eosinophilic pneumonia is idiopathic, and peripheral opacities that persist for weeks are the key clue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Examples",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Simple (Loffler)",
+      "Drugs, parasites",
+      "Resolves in weeks"
+     ],
+     [
+      "Allergic (ABPA)",
+      "Aspergillus fungus",
+      "Mucus plugs and bronchiectasis"
+     ],
+     [
+      "Vasculitic (EGPA)",
+      "Nerve and skin vasculitis",
+      "Mononeuritis with asthma"
+     ],
+     [
+      "Chronic eosinophilic pneumonia",
+      "Idiopathic",
+      "Peripheral opacities for weeks"
+     ],
+     [
+      "Acute eosinophilic pneumonia",
+      "Dusts, smoking change",
+      "Acute fever with respiratory failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ABPA** is an allergic response where Aspergillus fungus colonises airway mucus in an asthmatic patient. The **ISHAM criteria** (International Society for Human and Animal Mycology) need total immunoglobulin E above 1000 IU/mL plus Aspergillus specific immunoglobulin E or skin prick reactivity. **Central bronchiectasis** (dilatation of central airways) with mucus plugs and fleeting opacities completes the picture, and eosinophils exceed 500 cells/µL.",
+   "say": "ABPA is an allergic response where inhaled Aspergillus fungus colonises airway mucus in patients who already have asthma. The international criteria need total immunoglobulin E above one thousand units per millilitre plus Aspergillus specific immunoglobulin E. The picture has central bronchiectasis with mucus plugs and fleeting opacities. Blood eosinophils are above five hundred cells per microlitre in most patients during active disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Invasive aspergillosis** occurs in neutropenic or steroid treated patients and shows a **halo sign** (ring of ground glass) on computed tomography (CT, cross sectional imaging). **Galactomannan** (a fungal cell wall sugar) above 0.5 in serum or bronchoalveolar lavage aids diagnosis. **Chronic pulmonary aspergillosis** forms cavities with a fungal ball (aspergilloma, a mass of hyphae) and is a late complication after tuberculosis.",
+   "say": "Invasive aspergillosis occurs in patients with neutropenia or prolonged steroid treatment, and mortality is high without therapy. A halo sign on cross sectional imaging suggests invasive disease in the right host. Serum galactomannan above zero point five can confirm invasive disease when imaging is typical. Bronchoscopy with biopsy is required when the diagnosis is uncertain, and antifungal therapy should start early.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect invasive disease"
+     },
+     {
+      "id": "b",
+      "label": "CT halo sign"
+     },
+     {
+      "id": "c",
+      "label": "Galactomannan test"
+     },
+     {
+      "id": "d",
+      "label": "Bronchoscopy biopsy"
+     },
+     {
+      "id": "e",
+      "label": "Start antifungal therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diffuse alveolar haemorrhage** (bleeding into alveoli, the air sacs) presents with haemoptysis, falling haemoglobin (oxygen carrying protein) and diffuse infiltrates. **Goodpasture disease** (anti basement membrane antibodies) causes renal failure with haemorrhage. Granulomatosis with polyangiitis (GPA, a necrotising vasculitis) and systemic lupus erythematosus (SLE, an autoimmune disease) are major causes, and rapidly rising creatinine points to **capillaritis**.",
+   "say": "Diffuse alveolar haemorrhage is bleeding into the air sacs, and haemoptysis with falling haemoglobin is the classic presentation. Goodpasture disease involves anti basement membrane antibodies, and renal failure with lung haemorrhage is the classic picture. Granulomatosis with polyangiitis and systemic lupus erythematosus are other major causes to exclude. Rapidly rising creatinine suggests capillaritis of the kidney, and urgent immunosuppression is required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Goodpasture disease",
+     "points": [
+      "Anti basement membrane antibodies",
+      "Kidney failure plus lung haemorrhage",
+      "Linear immunoglobulin G on biopsy"
+     ]
+    },
+    "right": {
+     "title": "Granulomatosis with polyangiitis",
+     "points": [
+      "ANCA antibodies (c-ANCA/PR3)",
+      "Upper airway destruction with sinusitis",
+      "Pauci immune crescentic glomerulonephritis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Type 2 helper T cells release interleukin 5 (IL 5, an eosinophil growth factor) and interleukin 13 (IL 13, a mucus signal). **IL 5** prolongs eosinophil survival, so eosinophils infiltrate airways and release toxic granules that damage epithelium (airway lining). Aspergillus hyphae trigger **immunoglobulin E** (IgE) sensitisation, and immune complex deposition injures small vessel walls in capillaritis, explaining haemoptysis and renal injury.",
+   "say": "Type two helper cells release interleukin five and interleukin thirteen in susceptible hosts, and eosinophil survival is prolonged in the airways. Eosinophils infiltrate the airway lining and damage the epithelium, and that injury produces wheeze and mucus plugging. Aspergillus hyphae trigger immunoglobulin E sensitisation, and the resulting immune response causes damage to airway walls. Small vessel injury produces haemoptysis, and rapidly rising creatinine signals kidney involvement.",
+   "vis": null
+  },
+  {
+   "tx": "**CEP** presents subacutely with cough, dyspnoea (breathlessness), fever, night sweats and weight loss over weeks. **EGPA** adds purpura (purple skin spots), mononeuritis (single nerve palsy) and sinus disease. **Acute eosinophilic pneumonia** presents within days of smoke or dust exposure with high fever and **hypoxaemia** (low blood oxygen) that may need ventilation. Peripheral eosinophils may be normal in acute disease.",
+   "say": "Chronic eosinophilic pneumonia presents subacutely with cough, breathlessness, fever, night sweats and weight loss over weeks. Eosinophilic granulomatosis with polyangiitis can cause purple skin spots, single nerve palsy and sinus disease. Acute eosinophilic pneumonia presents within days of smoke or dust exposure with high fever and low blood oxygen. Ventilation is required in severe cases, and peripheral eosinophils are often normal at presentation.",
+   "vis": null
+  },
+  {
+   "tx": "First tests are full blood count with eosinophils, total and Aspergillus specific immunoglobulin E, sputum culture and chest **computed tomography** (CT, cross sectional imaging). High resolution CT shows ground glass opacities, consolidations and bronchiectasis. **Bronchoalveolar lavage** with more than 25% eosinophils is supportive, and **lung biopsy** showing eosinophil infiltration remains the gold standard test.",
+   "say": "The first tests are a full blood count with eosinophils, immunoglobulin E levels, sputum culture and chest imaging. High resolution imaging can show ground glass opacities, consolidations and bronchiectasis in most patients. Lavage fluid with more than twenty five percent eosinophils can confirm pulmonary eosinophilia. Lung biopsy with eosinophil infiltration is the gold standard test, and it is required when the diagnosis is uncertain.",
+   "vis": null
+  },
+  {
+   "tx": "**Prednisolone** (a glucocorticoid) 40 to 60 mg daily is first line for chronic and acute eosinophilic pneumonia, tapered over weeks. ABPA needs prednisolone 0.5 mg/kg plus **itraconazole** 200 mg twice daily for 16 weeks. Invasive aspergillosis needs **voriconazole** 6 mg/kg twice daily for at least 6 weeks. Maintenance steroids and azole antifungals prevent relapse, as ISHAM advises.",
+   "say": "Prednisolone at forty to sixty milligrams daily is the first line treatment for chronic and acute eosinophilic pneumonia, and it is tapered over weeks. ABPA is treated with prednisolone plus itraconazole at two hundred milligrams twice daily for sixteen weeks. Invasive aspergillosis is treated with voriconazole at six milligrams per kilogram twice daily. Therapy is required for at least six weeks, and maintenance azoles prevent relapse.",
+   "vis": null
+  },
+  {
+   "tx": "Untreated invasive aspergillosis is almost uniformly fatal, and disseminated disease (spread beyond lungs) occurs in stem cell transplant recipients. **CEP** relapses in more than half of patients, so long steroid tapers are needed. ABPA causes permanent bronchiectasis and fibrosis (scarring). Exam trap: blood eosinophils can be normal in acute eosinophilic pneumonia, and a **fungal ball** in a cavity needs surgery only when haemoptysis recurs.",
+   "say": "Untreated invasive aspergillosis is almost uniformly fatal, and mortality is very high without prompt therapy. Chronic eosinophilic pneumonia relapses in more than half of patients, so long steroid tapers are needed. ABPA causes permanent bronchiectasis and lung scarring, and lung function declines over time. Blood eosinophils can be normal in acute eosinophilic pneumonia, and a fungal ball needs surgery only when haemoptysis recurs.",
+   "vis": null
+  },
+  {
+   "tx": "High yield numbers: blood eosinophils normal below 500 cells/µL and marked eosinophilia above 1500. Lavage eosinophils above 25% support diagnosis. ABPA needs total IgE above 1000 IU/mL. **Voriconazole** remains the invasive aspergillosis drug, **prednisolone** 40 to 60 mg daily treats eosinophilic pneumonia, and alveolar haemorrhage needs urgent immunosuppression with **plasmapheresis** in Goodpasture disease.",
+   "say": "Blood eosinophils are normal below five hundred cells per microlitre, and marked eosinophilia is above fifteen hundred. Lavage eosinophils above twenty five percent can confirm pulmonary eosinophilia. Voriconazole is the first line drug for invasive aspergillosis, and prednisolone at forty to sixty milligrams daily treats eosinophilic pneumonia. Alveolar haemorrhage needs urgent immunosuppression, and plasmapheresis is required in Goodpasture disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield point",
+     "Value or rule"
+    ],
+    "rows": [
+     [
+      "Normal blood eosinophils",
+      "Below 500 cells per microlitre"
+     ],
+     [
+      "Marked eosinophilia",
+      "Above 1500 cells per microlitre"
+     ],
+     [
+      "Lavage eosinophils",
+      "Above 25 percent"
+     ],
+     [
+      "ABPA IgE threshold",
+      "Above 1000 IU per millilitre"
+     ],
+     [
+      "Voriconazole role",
+      "First line invasive aspergillosis"
+     ],
+     [
+      "Prednisolone dose",
+      "40 to 60 mg daily"
+     ],
+     [
+      "Goodpasture therapy",
+      "Plasmapheresis plus immunosuppression"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "sgm-oesophagus",
+ "subject": "ss-general-medicine",
+ "title": "Oesophageal disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "The oesophagus (the food pipe) has four wall layers: mucosa, submucosa, muscularis and adventitia. It has no serosa, so perforation spreads into the mediastinum quickly. **Achalasia** (a failure of lower sphincter relaxation) is the classic motility disorder, affecting about 1 in 100000 people yearly. **Barrett oesophagus** (intestinal metaplasia above the gastro-oesophageal junction) is the key premalignant lesion after chronic reflux. It measures about 25 cm in adults, begins about 15 cm from the incisors, and cancers are usually squamous above and adenocarcinoma below.",
+   "say": "The oesophagus is the muscular tube that carries food from the throat toward the stomach. It has four wall layers, but it has no serosa, so a tear can spread into the mediastinum rather fast. Achalasia is a motility disorder in which the lower sphincter fails to relax, and about one in a hundred thousand people develops it each year. Barrett oesophagus is a metaplastic change above the junction, and it is the main premalignant lesion after long reflux. The tube measures about twenty five centimetres and starts about fifteen centimetres from the incisors.",
+   "vis": null
+  },
+  {
+   "tx": "Reflux disease is caused by a transient or weak **lower oesophageal sphincter** (the valve at the stomach entry), hiatus hernia, delayed gastric emptying, obesity and late meals. **Eosinophilic oesophagitis** (allergic inflammation of the squamous mucosa) has risen with atopy, male sex and young age. **Candida oesophagitis** appears with immunosuppression, diabetes, inhaled steroids and broad spectrum antibiotics. Corrosive ingestion, pills lodged on mucosa, and radiation cause strictures. Alcohol, smoking, hot drinks and nitrosamines raise squamous **cancer** risk, while reflux and obesity raise adenocarcinoma risk.",
+   "say": "Reflux disease is caused by a weak valve at the stomach entry, a hiatus hernia, obesity and late meals. Eosinophilic oesophagitis is an allergic inflammation in young men with atopy, and it has risen across countries. Candida oesophagitis appears when immunity is weak, when sugar is high, or after inhaled steroids. Pills lodged on mucosa and corrosives can cause strictures after injury. Alcohol and smoking raise squamous cancer risk, while reflux and obesity raise adenocarcinoma risk in the lower tube.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Squamous cancer risk",
+     "points": [
+      "Alcohol and smoking",
+      "Hot drinks and nitrosamines",
+      "Upper and middle oesophagus",
+      "Long standing achalasia"
+     ]
+    },
+    "right": {
+     "title": "Adenocarcinoma risk",
+     "points": [
+      "Chronic reflux and Barrett change",
+      "Obesity and hiatus hernia",
+      "Lower oesophagus",
+      "Age under fifty rising"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acid exposure is normally guarded by the **lower oesophageal sphincter** (the valve), salivary bicarbonate, primary peristalsis that strips the bolus, and gravity. When the valve relaxes transiently, acid rises and injures squamous mucosa, giving heartburn and regurgitation. In achalasia, nitric oxide neurons are lost, the sphincter fails to relax, and aperistalsis lets food stagnate with fermentation and weight loss. In **Barrett oesophagus** (intestinal metaplasia), chronic acid injury replaces squamous cells with columnar cells that can progress to dysplasia and adenocarcinoma. This explains both classic symptoms.",
+   "say": "Acid is normally guarded by the valve, by saliva, and by a muscular sweep that strips the bolus downward. When the valve relaxes transiently, acid rises and it causes heartburn with regurgitation. In achalasia the sphincter fails to relax, so food stagnates and fermentation causes weight loss. In Barrett change, long acid injury replaces squamous cells with columnar cells that can progress. This pathway explains why reflux gives heartburn and why achalasia gives dysphagia to both solids and liquids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Weak valve or hernia"
+     },
+     {
+      "id": "b",
+      "label": "Acid exposure rises"
+     },
+     {
+      "id": "c",
+      "label": "Mucosal injury"
+     },
+     {
+      "id": "d",
+      "label": "Heartburn and erosion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic **dysphagia** (difficulty in swallowing) in achalasia affects solids and liquids from the start, with regurgitation of bland undigested food at night. **Reflux** gives heartburn after meals, worse when supine, with sour regurgitation and relief by antacids. Eosinophilic oesophagitis presents with food impaction in young atopic men. Corrosive injury causes odynophagia (painful swallowing) with drooling and stridor in severe cases. Malignancy gives progressive dysphagia first to solids then to liquids, with weight loss, anorexia and left supraclavicular node enlargement. Acute food bolus impaction needs urgent endoscopy.",
+   "say": "Dysphagia in achalasia affects solids and liquids from the start, and patients have bland regurgitation at night. Reflux gives heartburn after meals, worse when the patient is supine, with sour regurgitation. Eosinophilic oesophagitis presents with food impaction in young atopic men. Corrosive injury causes painful swallowing with drooling in severe cases. Malignancy gives progressive dysphagia that starts with solids and later involves liquids, along with weight loss and an enlarged node.",
+   "vis": null
+  },
+  {
+   "tx": "**Schatzki ring** (a thin mucosal ring at the squamocolumnar junction) causes episodic dysphagia to solids, often with a steak dinner. **Zenker diverticulum** (a pharyngeal pouch above the cricopharyngeus) gives halitosis, gurgling and regurgitation of undigested food. **Oesophageal varices** (dilated submucosal veins in portal hypertension) bleed in large volume. **Boerhaave syndrome** (spontaneous rupture after vomiting) gives chest pain with subcutaneous emphysema. **Mallory Weiss tear** (a mucosal laceration at the cardia) follows forceful vomiting. Pill oesophagitis gives acute retrosternal pain after doxycycline or bisphosphonates.",
+   "say": "Schatzki ring is a thin mucosal ring that causes episodic dysphagia to solids, often with a steak dinner. Zenker diverticulum is a pharyngeal pouch that gives halitosis and gurgling after meals. Oesophageal varices are dilated veins that bleed in large volume when portal pressure rises. Boerhaave syndrome is spontaneous rupture after vomiting, and it gives chest pain with emphysema. A mucosal tear at the cardia follows forceful vomiting and it also causes bleeding.",
+   "vis": null
+  },
+  {
+   "tx": "First test for reflux is response to a **proton pump inhibitor** (acid suppressing drug) trial, but alarm features need urgent endoscopy. **Upper gastrointestinal endoscopy** (flexible scope inspection) is the gold standard for Barrett, eosinophilic disease, strictures and cancer, with biopsies taken from the mid oesophagus. Barium swallow shows rings, pouches and strictures well. **High resolution manometry** (pressure catheter study) is the gold standard for motility disorders and confirms achalasia and absent contractility. Endoscopic ultrasound stages cancers. Eosinophils on biopsy, at least 15 per high power field, confirms eosinophilic oesophagitis.",
+   "say": "A proton pump inhibitor trial is the first test for typical reflux without alarm features. Upper endoscopy is the gold standard, and it helps diagnose Barrett change, eosinophilic disease and cancer. Biopsies from the mid oesophagus confirm eosinophilic disease with many eosinophils. Barium swallow is useful for rings, pouches and strictures. High resolution manometry is the gold standard for motility disorders, and it gives pressure patterns that confirm achalasia patterns.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Endoscopy with biopsies",
+      "Gold standard for mucosal disease"
+     ],
+     [
+      "High resolution manometry",
+      "Gold standard for motility disorders"
+     ],
+     [
+      "Barium swallow",
+      "Rings, pouches, strictures"
+     ],
+     [
+      "PPI trial",
+      "First test for typical reflux"
+     ],
+     [
+      "Endoscopic ultrasound",
+      "Staging of cancers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line for reflux is lifestyle change plus a **proton pump inhibitor** (acid suppressing drug) such as omeprazole 20 mg daily for 4 to 8 weeks, doubled if needed. Achalasia management is **pneumatic dilatation** (balloon stretching of the sphincter), Heller myotomy, or peroral endoscopic myotomy, with calcium channel blockers only for poor candidates. Eosinophilic disease is treated with swallowed topical fluticasone and milk avoidance. Variceal bleeding is managed with octreotide, terlipressin, endoscopic band ligation and nonselective beta blockers. Antacids and prokinetics are adjuncts, not first line.",
+   "say": "First line for reflux is lifestyle change plus a proton pump inhibitor like omeprazole twenty milligrams daily. The drug is given for four to eight weeks, and the dose is doubled when needed. Achalasia is treated with balloon dilatation or myotomy, and calcium channel blockers help only poor candidates. Eosinophilic disease is treated with swallowed topical steroids and milk avoidance. Variceal bleeding requires octreotide with band ligation, and nonselective beta blockers prevent recurrence later.",
+   "vis": null
+  },
+  {
+   "tx": "Recent guidance has moved toward objective testing. The **Lyon 2.0 consensus** (2024 reflux criteria) requires ambulatory pH testing for inconclusive cases rather than blind long term acid suppression. The ACG 2022 Barrett guideline recommends **endoscopic surveillance** (scheduled repeat scope) every 3 to 5 years for non dysplastic Barrett, radiofrequency ablation for dysplasia, and proton pump inhibitors indefinitely. For eosinophilic oesophagitis, dupilumab is now approved for patients refractory to swallowed steroids. For achalasia, peroral endoscopic myotomy is increasingly preferred for spastic types.",
+   "say": "Recent guidance has moved toward objective testing rather than blind long acid suppression. The Lyon consensus of twenty twenty four requires pH testing for inconclusive reflux cases. The American guideline for Barrett disease says that surveillance is repeated every three to five years. Radiofrequency ablation is the treatment for dysplasia, and proton pump inhibitors are given indefinitely. For eosinophilic disease, dupilumab is now approved when swallowed steroids fail to help.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Heartburn without alarm"
+     },
+     {
+      "id": "b",
+      "label": "PPI trial 8 weeks"
+     },
+     {
+      "id": "c",
+      "label": "Response yes"
+     },
+     {
+      "id": "d",
+      "label": "pH and manometry"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications of reflux include erosive oesophagitis, ulcers, strictures, Barrett change and adenocarcinoma. Achalasia can cause aspiration pneumonia, megaoesophagus and squamous cancer. **Variceal bleeding** (bleeding from dilated veins) can be fatal and accounts for up to 40% of deaths in decompensated cirrhosis. Corrosive strictures need dilatation. **Boerhaave syndrome** (spontaneous rupture) has mortality up to 30% if diagnosis is delayed beyond 24 hours. Prognosis is good in reflux, guarded in Barrett with dysplasia, and poor in advanced squamous cancer.",
+   "say": "Complications of reflux are erosions, ulcers, strictures and Barrett change with cancer risk. Achalasia can cause aspiration pneumonia and a dilated megaoesophagus over time. Variceal bleeding can be fatal and accounts for a large share of deaths in cirrhosis. Corrosive strictures often need repeated dilatation for swallowing. Prognosis is good in reflux, guarded in dysplastic Barrett change, and poor in advanced squamous cancer cases.",
+   "vis": null
+  },
+  {
+   "tx": "Examination traps decide marks. Dysphagia to solids and liquids from the onset points to **achalasia** (motility failure), whereas progressive dysphagia starting with solids points to a mechanical cause such as a stricture. odynophagia points to infection or pills, not reflux alone. Birds beak on barium swallow is classic for achalasia. **Manometry** (pressure study), not barium, is the gold standard for motility disorders. Barrett oesophagus is intestinal metaplasia, not squamous metaplasia. Chest pain after vomiting with emphysema means Boerhaave rupture, a surgical emergency needing rapid diagnosis.",
+   "say": "Dysphagia to solids and liquids from the onset points to motility failure rather than stricture. Progressive dysphagia that starts with solids points to a mechanical cause instead. Painful swallowing points to infection or pill injury, not to reflux alone. Birds beak on barium swallow is classic for achalasia and it is a favourite trap. Manometry is the gold standard for motility disorders, and Barrett change is intestinal metaplasia by definition.",
+   "vis": null
+  },
+  {
+   "tx": "This step collects the most asked **numbers, drugs, tests and signs** from the whole module, so keep them as a memory grid. Achalasia affects about 1 in 100000 yearly, oesophagus measures about 25 cm, eosinophilic disease needs 15 eosinophils per high power field, omeprazole is 20 mg, surveillance is every 3 to 5 years, and confirmation of motility disease is by manometry. Hold the three syndromic pairs together in mind: valve failure with heartburn, relaxation failure with liquids also involved, and wall injury with painful swallowing.",
+   "say": "Keep these numbers, drugs, tests and signs together in memory. Achalasia affects about one in a hundred thousand yearly, and eosinophilic disease needs fifteen eosinophils per field. Omeprazole is twenty milligrams daily, and surveillance is every three to five years. Manometry confirms motility disorders, and birds beak points to achalasia. Heartburn points to valve failure, while painful swallowing points to wall injury or infection safely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "Length of oesophagus",
+      "About 25 cm, starts 15 cm from incisors"
+     ],
+     [
+      "Achalasia incidence",
+      "About 1 in 100000 per year"
+     ],
+     [
+      "Eosinophilic oesophagitis biopsy",
+      "At least 15 eosinophils per high power field"
+     ],
+     [
+      "First line reflux drug",
+      "Omeprazole 20 mg daily for 4 to 8 weeks"
+     ],
+     [
+      "Barrett surveillance",
+      "Every 3 to 5 years if non dysplastic"
+     ],
+     [
+      "Gold standard motility test",
+      "High resolution manometry"
+     ],
+     [
+      "Classic radiology sign",
+      "Birds beak in achalasia"
+     ],
+     [
+      "Premalignant lesion",
+      "Barrett intestinal metaplasia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

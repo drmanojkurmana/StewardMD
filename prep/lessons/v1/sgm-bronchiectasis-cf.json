@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-bronchiectasis-cf",
+ "subject": "ss-general-medicine",
+ "title": "Bronchiectasis and Cystic Fibrosis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Bronchiectasis** (permanent bronchial dilatation with impaired clearance) is the structural triad of dilated airways, wall thickening and mucus plugs. **Cystic fibrosis** (CFTR chloride channel disease) is the commonest autosomal recessive disorder in Northern Europeans, caused by **CFTR gene** (chromosome 7) mutation. **Traction bronchiectasis** (airways pulled by fibrosis) and **post tuberculous bronchiectasis** (after tuberculosis) dominate in India. **Cystic fibrosis related diabetes** (pancreatic destruction) affects most adults.",
+   "say": "Bronchiectasis means permanent widening of breathing tubes with poor mucus clearance. Cystic fibrosis is the commonest inherited disease in Northern Europeans and comes from a faulty chloride channel gene on chromosome seven. Pulled airways from lung scarring and old tuberculosis are major Indian causes. Most adults with cystic fibrosis develop diabetes from a damaged pancreas.",
+   "vis": null
+  },
+  {
+   "tx": "Post tuberculosis, prior pneumonia, allergic bronchopulmonary aspergillosis and immunodeficiency cause most non cystic fibrosis bronchiectasis. **Primary ciliary dyskinesia** (immotile cilia) causes sinusitis, situs inversus and neonatal distress. **Allergic bronchopulmonary aspergillosis** (ABPA, fungal allergy in asthma) shows fleeting opacities and high immunoglobulin E. **Hypogammaglobulinaemia** (low antibodies) predisposes to recurrent sinopulmonary infections. Cystic fibrosis patients also develop **nasal polyps** (benign growths) and **congenital bilateral absence of vas deferens** in men.",
+   "say": "Old tuberculosis and severe pneumonia and fungal allergy and low antibody levels cause most non cystic fibrosis bronchiectasis. Immotile cilia cause sinus disease with mirrored organs and breathing trouble from birth. Fungal allergy in asthma shows fleeting shadows and very high immunoglobulin E. Low antibody levels lead to repeated sinus and lung infections. Cystic fibrosis men often lack the vas deferens from birth.",
+   "vis": null
+  },
+  {
+   "tx": "Defective CFTR chloride secretion dehydrates airway surface liquid, so **mucus stasis** (thick stagnant mucus) obstructs small airways and invites bacterial colonisation. Chronic neutrophilic inflammation digests bronchial walls, producing **saccular dilatation** (pouch like widening). Thick secretions also obstruct pancreatic ducts, causing **pancreatic insufficiency** (enzyme deficiency) and malabsorption. College examinations link **Pseudomonas aeruginosa** (colonising bacteria) and inverted sweat chloride above **60 mmol per litre** to the diagnosis.",
+   "say": "The faulty chloride channel leaves airway fluid dehydrated, so mucus becomes thick and stagnant. Bacteria colonise the stuck mucus and inflammation digests the airway walls into pouches. The same thick secretions block pancreatic ducts and cause malabsorption. Pseudomonas colonisation and a high sweat chloride above sixty are classic diagnostic links.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CFTR defect"
+     },
+     {
+      "id": "b",
+      "label": "Dehydrated mucus"
+     },
+     {
+      "id": "c",
+      "label": "Bacterial colonisation"
+     },
+     {
+      "id": "d",
+      "label": "Wall digestion"
+     },
+     {
+      "id": "e",
+      "label": "Permanent dilatation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic productive cough with foul green sputum, recurrent chest infections and haemoptysis are typical. **Clubbing** (finger nail changes) and **coarse crackles** (persistent chest rattles) persist between exacerbations. **Finger in glove appearance** (central bronchiectasis opacities) on chest radiograph is a classic sign. Cystic fibrosis adds **steatorrhoea** (fatty diarrhoea), failure to thrive and distal intestinal obstruction. **Pneumothorax** (collapsed lung) complicates advanced cystic fibrosis.",
+   "say": "Chronic cough with foul green sputum and repeated chest infections and coughing blood are typical. Clubbed fingers and coarse chest rattles persist even between flareups. Central finger in glove shadows on chest X ray are classic. Cystic fibrosis adds fatty diarrhoea and poor weight gain and blocked gut. Collapsed lung can complicate advanced disease.",
+   "vis": null
+  },
+  {
+   "tx": "**High resolution computed tomography** (thin slice chest scan) is the gold standard showing signet ring sign and tram track airways. **Sweat chloride test** (sweat salt measurement) above 60 mmol per litre confirms cystic fibrosis, while **CFTR genotyping** (gene mutation testing) is definitive in borderline cases. **Sputum culture** (mucus growth test) tracks Pseudomonas and Staphylococcus aureus colonisation. **Nasal potential difference** (airway voltage test) helps when sweat testing is equivocal.",
+   "say": "Thin slice chest scanning is the gold standard for bronchiectasis. Sweat salt above sixty confirms cystic fibrosis, while gene testing is definitive in borderline cases. Sputum cultures track colonising bacteria. Nasal voltage testing helps when sweat testing is unclear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "High resolution CT chest",
+      "Gold standard",
+      "Signet ring and tram track"
+     ],
+     [
+      "Sweat chloride",
+      "Cystic fibrosis confirm",
+      "Above 60 mmol per litre"
+     ],
+     [
+      "Sputum culture",
+      "Colonisation tracking",
+      "Pseudomonas and Staph aureus"
+     ],
+     [
+      "CFTR genotyping",
+      "Definitive genetics",
+      "Borderline sweat results"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Airway clearance** (physiotherapy and devices) is the backbone for bronchiectasis. Exacerbations need **antibiotics** guided by culture, with **inhaled tobramycin** (airway antibiotic) for chronic Pseudomonas colonisation. **Long term macrolides** (azithromycin) reduce exacerbations in selected patients. Cystic fibrosis care adds **pancreatic enzymes** (replacement tablets with meals), **CFTR modulators** (lumacaftor ivacaftor compounds) for eligible genotypes, and salt replacement. **Lung transplantation** (organ replacement) is endstage therapy.",
+   "say": "Chest physiotherapy and airway clearance devices form the backbone of bronchiectasis care. Flareups need antibiotics guided by culture, and inhaled antibiotic helps chronic Pseudomonas colonisation. Long term macrolide tablets reduce exacerbations in selected patients. Cystic fibrosis also needs pancreatic enzymes with meals and newer channel modulator tablets for eligible mutations. Endstage disease is treated by lung transplantation.",
+   "vis": null
+  },
+  {
+   "tx": "Severe haemoptysis needs **bronchial artery embolisation** (clot blocked artery coil) rather than surgery where possible. **Lobectomy** (removal of lung lobe) is curative for localised single lobe bronchiectasis with focal disease. Allergic bronchopulmonary aspergillosis responds to systemic steroids and antifungals. Primary ciliary dyskinesia families need genetic counselling and fertility advice. **Pulmonary hypertension** (high lung pressure) with cor pulmonale marks advanced disease and poor survival.",
+   "say": "Heavy coughing of blood is treated by blocking the bronchial artery with coils when possible. Removing one diseased lobe can cure localised single lobe disease. Fungal allergy responds to steroids and antifungal tablets. Families with immotile cilia need genetic counselling. High lung pressure with right heart failure signals advanced disease with poor survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non cystic bronchiectasis",
+     "points": [
+      "Post tuberculosis common",
+      "Sweat chloride normal",
+      "Localised disease curable",
+      "Airway clearance first line"
+     ]
+    },
+    "right": {
+     "title": "Cystic fibrosis disease",
+     "points": [
+      "CFTR mutation positive",
+      "Sweat chloride above 60",
+      "Pancreatic failure common",
+      "Modulator tablets eligible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Massive haemoptysis, respiratory failure and pulmonary hypertension dominate mortality. Recurrent Pseudomonas colonisation predicts faster decline and higher mortality. **Lung transplantation** (organ replacement) survival is limited by chronic rejection and infection. Cystic fibrosis median survival now exceeds 50 years in many registries with modulator therapy, a dramatic improvement from historical medians. Early diagnosis through newborn screening improves nutrition and lung outcomes.",
+   "say": "Heavy bleeding and breathing failure and high lung pressure dominate mortality. Chronic Pseudomonas colonisation predicts faster decline. Transplanted lungs survive limited years due to rejection and infection. Cystic fibrosis survival now exceeds fifty years with modulator therapy, a huge improvement from the past. Early newborn screening improves nutrition and lung health.",
+   "vis": null
+  },
+  {
+   "tx": "Bronchiectasis severity index uses age, lung function, exacerbations and colonisation to stratify risk. In cystic fibrosis, **forced expiratory volume** decline of more than 3% per year predicts poor outcome. **Pseudomonas free survival** and **chronic Pseudomonas definition** (positive cultures over 6 months) are prognostic markers. Annual lung function, sputum cultures and glucose screening are mandatory follow up. Surgical referral should not be delayed for localised disease with recurrent infections.",
+   "say": "The bronchiectasis severity index combines age and lung function and flareups and colonisation to grade risk. In cystic fibrosis, fast yearly decline in breathing tests predicts poor outcome. Chronic Pseudomonas colonisation over six months is a clear prognostic marker. Yearly breathing tests, sputum cultures and diabetes screening are mandatory. Localised disease with repeated infections needs early surgical opinion.",
+   "vis": null
+  },
+  {
+   "tx": "Indian examiners emphasise post tuberculous bronchiectasis, finger in glove shadows and high resolution scan gold standards. Cystic fibrosis traps are normal sweat chloride in rare mutations, infertility in men from absent vas deferens, and distal intestinal obstruction in neonates. **Radiation** and newer **triple modulator combinations** (elexacaftor tezacaftor ivacaftor) have transformed eligible disease. Never miss immunodeficiency in young patients with recurrent sinus and lung infections.",
+   "say": "Indian examiners stress post tuberculosis bronchiectasis and finger in glove shadows and scan gold standards. Traps include normal sweat tests in rare mutations, infertility in men from absent vas deferens, and neonatal gut blockage. New triple modulator combinations have transformed eligible cystic fibrosis. Recurrent sinus and lung infections in the young should always raise suspicion of low antibodies.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers scan signs, sweat thresholds, colonisation prognostication and modulator eligibility. **High resolution scan** gold standards and **sweat chloride** cutoffs are the most asked points. Chronic **Pseudomonas colonisation** and **lung transplantation** indications are favourite viva themes. Post tuberculosis origin remains the commonest Indian vignette.",
+   "say": "This table gathers the scan signs and sweat thresholds and colonisation prognostication and modulator details. High resolution scan findings and sweat chloride cutoffs are the most asked points. Chronic Pseudomonas colonisation and transplant indications are favourite viva themes. Post tuberculosis origin is the commonest Indian vignette.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Gold standard scan",
+      "High resolution CT chest"
+     ],
+     [
+      "Classic scan signs",
+      "Signet ring and tram track"
+     ],
+     [
+      "Sweat chloride cutoff",
+      "Above 60 mmol per litre"
+     ],
+     [
+      "Colonial prognostic marker",
+      "Chronic Pseudomonas colonisation"
+     ],
+     [
+      "Fungal allergy test",
+      "High immunoglobulin E in ABPA"
+     ],
+     [
+      "CF gene locus",
+      "Chromosome 7 CFTR"
+     ],
+     [
+      "Curative surgery",
+      "Lobectomy for single lobe disease"
+     ],
+     [
+      "Eligible CF advance",
+      "Triple modulator tablets"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
