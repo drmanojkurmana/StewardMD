@@ -1,223 +1,264 @@
 {
- "v": 1,
- "module": "snp-transplant-infections",
- "title": "Infections after kidney transplantation",
- "minutes": 8,
- "gen": "AI",
- "steps": [
-  {
-   "tx": "Infectious vulnerability following kidney transplantation follows the **Fishman timeline**: Month **1** is dominated by nosocomial wound and surgical complications; Months **1** to **6** feature opportunistic viral and fungal pathogens; and beyond Month **6**, patients experience community-acquired pneumonia or chronic viral complications.",
-   "say": "Infectious vulnerability following kidney transplantation follows the Fishman timeline: Month 1 is dominated by nosocomial wound and surgical complications; Months 1 to 6 feature opportunistic viral and fungal pathogens; and beyond Month 6, patients experience community-acquired pneumonia or chronic viral complications.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-transplant-infections-fig1.webp",
-    "alt": "Infection timeline after renal transplant with prophylaxis",
-    "caption": "Post-transplantation timeline of opportunistic infections and prophylaxis (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "Primary **Cytomegalovirus** (**CMV**) infection presents the highest clinical risk in **CMV seronegative recipients** receiving kidneys from **CMV seropositive donors** (D+/R-). Without universal prophylaxis, patients develop severe invasive CMV disease, allograft endothelial injury, opportunistic superinfections, and heightened rates of acute cellular allograft rejection.",
-   "say": "Primary Cytomegalovirus infection presents the highest clinical risk in CMV seronegative recipients receiving kidneys from CMV seropositive donors. Without universal prophylaxis, patients develop severe invasive CMV disease, allograft endothelial injury, opportunistic superinfections, and heightened rates of acute cellular allograft rejection.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "High-Risk CMV Pair (D+/R-)",
-     "points": [
-      "Donor positive / Recipient negative serology",
-      "Lacks host pre-existing CMV-specific memory",
-      "Mandates universal valganciclovir prophylaxis",
-      "Minimum 6-month prophylactic course",
-      "Key criteria: mismatch",
-      "Key criteria: 900"
-     ]
+  "v": 1,
+  "module": "snp-transplant-infections",
+  "title": "Infections after kidney transplantation",
+  "minutes": 8,
+  "gen": "AI",
+  "steps": [
+    {
+      "tx": "Infectious vulnerability following kidney transplantation follows the **Fishman timeline**: Month **1** is dominated by nosocomial wound and surgical complications; Months **1** to **6** feature opportunistic viral and fungal pathogens; and beyond Month **6**, patients experience community-acquired pneumonia or chronic viral complications.",
+      "say": "Infectious vulnerability following kidney transplantation follows the Fishman timeline: Month 1 is dominated by nosocomial wound and surgical complications; Months 1 to 6 feature opportunistic viral and fungal pathogens; and beyond Month 6, patients experience community-acquired pneumonia or chronic viral complications.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-transplant-infections-fig1.webp",
+        "alt": "Infection timeline after renal transplant with prophylaxis",
+        "caption": "Post-transplantation timeline of opportunistic infections and prophylaxis (StewardMD).",
+        "ar": 1.7778
+      }
     },
-    "right": {
-     "title": "Moderate-Risk CMV Pair (R+)",
-     "points": [
-      "Recipient seropositive prior to surgery",
-      "Host retains memory T-cell immunity",
-      "Risk of viral reactivation or superinfection",
-      "3-month prophylaxis or preemptive surveillance"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Universal pharmacological prophylaxis against CMV utilizes oral **valganciclovir** (dose-adjusted for renal function), routinely continued for **6** months in high-risk **D+/R-** pairs and **3** months in CMV-seropositive recipients. For confirmed invasive tissue disease, intravenous **ganciclovir** remains the definitive first-line therapeutic agent across transplant centers.",
-   "say": "Universal pharmacological prophylaxis against CMV utilizes oral valganciclovir continued for 6 months in high-risk D+/R- pairs and 3 months in CMV-seropositive recipients. For confirmed invasive tissue disease, intravenous ganciclovir remains the definitive first-line therapeutic agent.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Clinical Sequence",
-     "points": [
-      "CMV high-risk mismatch (D+/R-)",
-      "Oral valganciclovir for 6 months post-transplant",
-      "Switch to IV ganciclovir if breakthrough tissue disease"
-     ]
+    {
+      "tx": "Primary **Cytomegalovirus** (**CMV**) infection presents the highest clinical risk in **CMV seronegative recipients** receiving kidneys from **CMV seropositive donors** (D+/R-). Without universal prophylaxis, patients develop severe invasive CMV disease, allograft endothelial injury, opportunistic superinfections, and heightened rates of acute cellular allograft rejection.",
+      "say": "Primary Cytomegalovirus infection presents the highest clinical risk in CMV seronegative recipients receiving kidneys from CMV seropositive donors. Without universal prophylaxis, patients develop severe invasive CMV disease, allograft endothelial injury, opportunistic superinfections, and heightened rates of acute cellular allograft rejection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High-Risk CMV Pair (D+/R-)",
+          "points": [
+            "Donor positive / Recipient negative serology",
+            "Lacks host pre-existing CMV-specific memory",
+            "Mandates universal valganciclovir prophylaxis",
+            "Minimum 6-month prophylactic course",
+            "Key criteria: mismatch",
+            "Key criteria: 900"
+          ]
+        },
+        "right": {
+          "title": "Moderate-Risk CMV Pair (R+)",
+          "points": [
+            "Recipient seropositive prior to surgery",
+            "Host retains memory T-cell immunity",
+            "Risk of viral reactivation or superinfection",
+            "3-month prophylaxis or preemptive surveillance"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Diagnostic Features",
-     "points": [
-      "Letermovir",
-      "maribavir",
-      "UL97",
-      "resistant CMV",
-      "97"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Reactivation of latent **BK polyomavirus** (**BKPyV**) in renal allografts produces asymptomatic **viruria**, progressing to sustained **viremia** and destructive interstitial allograft nephritis. Routine prospective monthly screening using plasma **quantitative PCR** enables early detection of viral replication, prompting stepwise immunosuppression reduction before irreversible nephron loss occurs.",
-   "say": "Reactivation of latent BK polyomavirus in renal allografts produces asymptomatic viruria, progressing to sustained viremia and destructive interstitial allograft nephritis. Routine prospective monthly screening using plasma quantitative PCR enables early detection of viral replication, prompting stepwise immunosuppression reduction before irreversible nephron loss occurs.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Clinical Sequence",
-     "points": [
-      "Urinary BK viruria > 10^7 copies/mL",
-      "Sustained BK viremia > 10^4 copies/mL",
-      "Stepwise reduction of maintenance immunosuppression"
-     ]
+    {
+      "tx": "Universal pharmacological prophylaxis against CMV utilizes oral **valganciclovir** (dose-adjusted for renal function), routinely continued for **6** months in high-risk **D+/R-** pairs and **3** months in CMV-seropositive recipients. For confirmed invasive tissue disease, intravenous **ganciclovir** remains the definitive first-line therapeutic agent across transplant centers.",
+      "say": "Universal pharmacological prophylaxis against CMV utilizes oral valganciclovir continued for 6 months in high-risk D+/R- pairs and 3 months in CMV-seropositive recipients. For confirmed invasive tissue disease, intravenous ganciclovir remains the definitive first-line therapeutic agent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical Sequence",
+          "points": [
+            "CMV high-risk mismatch (D+/R-)",
+            "Oral valganciclovir for 6 months post-transplant",
+            "Switch to IV ganciclovir if breakthrough tissue disease"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic Features",
+          "points": [
+            "Letermovir",
+            "maribavir",
+            "UL97",
+            "resistant CMV",
+            "97"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Diagnostic Features",
-     "points": [
-      "Pneumocystis jirovecii",
-      "PJP",
-      "trimethoprim-sulfamethoxazole",
-      "80",
-      "400",
-      "Surveillance duration spanning 6 to 12 months"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Definitive diagnosis of **BK virus nephropathy** requires allograft biopsy demonstrating viral cytopathic changes: enlarged tubular epithelial nuclei with basophilic **ground-glass viral inclusions**. Confirmatory diagnostic immunoperoxidase staining reveals intense nuclear expression of the **SV40 large T antigen** cross-reacting with BK polyomavirus capsids.",
-   "say": "Definitive diagnosis of BK virus nephropathy requires allograft biopsy demonstrating viral cytopathic changes: enlarged tubular epithelial nuclei with basophilic ground-glass viral inclusions. Confirmatory diagnostic immunoperoxidase staining reveals intense nuclear expression of the SV40 large T antigen cross-reacting with BK polyomavirus capsids.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/bk-virus-nephropathy-fig1.webp",
-    "alt": "BK virus nephropathy with ground-glass nuclear inclusions",
-    "caption": "Tubular cells with ground-glass nuclear inclusions that stain for SV40 large T antigen (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "All solid organ transplant recipients require universal antimicrobial prophylaxis against **Pneumocystis jirovecii pneumonia** (**PJP**) using daily single-strength oral **trimethoprim-sulfamethoxazole** for **3** to **6** months. This cost-effective regimen provides simultaneous secondary prophylaxis against bacterial urinary tract infections, systemic listeriosis, and pulmonary nocardiosis.",
-   "say": "All solid organ transplant recipients require universal antimicrobial prophylaxis against Pneumocystis jirovecii pneumonia using daily single-strength oral trimethoprim-sulfamethoxazole for 3 to 6 months. This regimen provides simultaneous secondary prophylaxis against urinary tract infections, listeriosis, and nocardiosis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "First-Line Prophylaxis",
-     "points": [
-      "Trimethoprim-sulfamethoxazole single-strength",
-      "Administer daily for 3 to 6 months",
-      "Covers Pneumocystis, Toxoplasma, and Nocardia",
-      "Reduces post-transplant bacterial cystitis",
-      "Key criteria: Tuberculosis",
-      "Key criteria: rifabutin"
-     ]
+    {
+      "tx": "Reactivation of latent **BK polyomavirus** (**BKPyV**) in renal allografts produces asymptomatic **viruria**, progressing to sustained **viremia** and destructive interstitial allograft nephritis. Routine prospective monthly screening using plasma **quantitative PCR** enables early detection of viral replication, prompting stepwise immunosuppression reduction before irreversible nephron loss occurs.",
+      "say": "Reactivation of latent BK polyomavirus in renal allografts produces asymptomatic viruria, progressing to sustained viremia and destructive interstitial allograft nephritis. Routine prospective monthly screening using plasma quantitative PCR enables early detection of viral replication, prompting stepwise immunosuppression reduction before irreversible nephron loss occurs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical Sequence",
+          "points": [
+            "Urinary BK viruria > 10^7 copies/mL",
+            "Sustained BK viremia > 10^4 copies/mL",
+            "Stepwise reduction of maintenance immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic Features",
+          "points": [
+            "Pneumocystis jirovecii",
+            "PJP",
+            "trimethoprim-sulfamethoxazole",
+            "80",
+            "400",
+            "Surveillance duration spanning 6 to 12 months"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Alternative Regimens in Sulfa Allergy",
-     "points": [
-      "Inhaled pentamidine 300 mg monthly",
-      "Oral atovaquone 1500 mg daily suspension",
-      "Oral dapsone (requires G6PD screening)",
-      "Lacks antibacterial co-protection",
-      "Diagnostic: extrapulmonary",
-      "Diagnostic: miliary"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Life-threatening opportunistic **invasive fungal infections** (**Aspergillus fumigatus**, **Cryptococcus neoformans**, Mucorales) occur during periods of intensified antirejection immunosuppression. Triazole antifungals (**voriconazole**, posaconazole) are potent competitive inhibitors of hepatic microsomal **CYP3A4**, precipitating massive, dangerous elevations in therapeutic whole blood tacrolimus and cyclosporine concentrations.",
-   "say": "Life-threatening invasive fungal infections occur during periods of intensified antirejection immunosuppression. Triazole antifungals are potent inhibitors of hepatic CYP3A4, precipitating massive, dangerous elevations in blood tacrolimus and cyclosporine concentrations.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Fungal Pathogen",
-     "Clinical Syndrome",
-     "Pharmacokinetic Consideration"
-    ],
-    "rows": [
-     [
-      "Aspergillus fumigatus",
-      "Angioinvasive pulmonary cavitation",
-      "Voriconazole inhibits CYP3A4 (drop tacrolimus dose 75%)"
-     ],
-     [
-      "Cryptococcus neoformans",
-      "Subacute meningoencephalitis",
-      "Fluconazole maintenance inhibits CNI metabolism"
-     ],
-     [
-      "Mucorales species",
-      "Rhino-orbital-cerebral invasion",
-      "Requires urgent surgical debridement and amphotericin B"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Administration of **live attenuated vaccines** (including **MMR**, **varicella**, **yellow fever**, and oral polio vaccine) is strictly **contraindicated** in kidney transplant recipients on maintenance immunosuppression. Due to impaired cell-mediated immunity, live viral strains can replicate unchecked, precipitating fulminant, fatal disseminated vaccine-strain infection.",
-   "say": "Administration of live attenuated vaccines including MMR, varicella, yellow fever, and oral polio vaccine is strictly contraindicated in kidney transplant recipients on maintenance immunosuppression. Due to impaired cell-mediated immunity, live viral strains can replicate unchecked, precipitating fulminant, fatal disseminated vaccine-strain infection.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Strictly Contraindicated Vaccines",
-     "points": [
-      "Measles, mumps, and rubella (MMR)",
-      "Varicella-zoster live vaccine",
-      "Yellow fever vaccine",
-      "Oral polio and live BCG vaccines"
-     ]
+    {
+      "tx": "Definitive diagnosis of **BK virus nephropathy** requires allograft biopsy demonstrating viral cytopathic changes: enlarged tubular epithelial nuclei with basophilic **ground-glass viral inclusions**. Confirmatory diagnostic immunoperoxidase staining reveals intense nuclear expression of the **SV40 large T antigen** cross-reacting with BK polyomavirus capsids.",
+      "say": "Definitive diagnosis of BK virus nephropathy requires allograft biopsy demonstrating viral cytopathic changes: enlarged tubular epithelial nuclei with basophilic ground-glass viral inclusions. Confirmatory diagnostic immunoperoxidase staining reveals intense nuclear expression of the SV40 large T antigen cross-reacting with BK polyomavirus capsids.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bk-virus-nephropathy-fig1.webp",
+        "alt": "BK virus nephropathy with ground-glass nuclear inclusions",
+        "caption": "Tubular cells with ground-glass nuclear inclusions that stain for SV40 large T antigen (StewardMD).",
+        "ar": 1.7778
+      }
     },
-    "right": {
-     "title": "Recommended Inactivated Vaccines",
-     "points": [
-      "Inactivated influenza annually",
-      "Recombinant zoster vaccine (Shingrix)",
-      "Pneumococcal conjugate / polysaccharide series",
-      "Inactivated SARS-CoV-2 and Hepatitis B vaccines"
-     ]
+    {
+      "tx": "All solid organ transplant recipients require universal antimicrobial prophylaxis against **Pneumocystis jirovecii pneumonia** (**PJP**) using daily single-strength oral **trimethoprim-sulfamethoxazole** for **3** to **6** months. This cost-effective regimen provides simultaneous secondary prophylaxis against bacterial urinary tract infections, systemic listeriosis, and pulmonary nocardiosis.",
+      "say": "All solid organ transplant recipients require universal antimicrobial prophylaxis against Pneumocystis jirovecii pneumonia using daily single-strength oral trimethoprim-sulfamethoxazole for 3 to 6 months. This regimen provides simultaneous secondary prophylaxis against urinary tract infections, listeriosis, and nocardiosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First-Line Prophylaxis",
+          "points": [
+            "Trimethoprim-sulfamethoxazole single-strength",
+            "Administer daily for 3 to 6 months",
+            "Covers Pneumocystis, Toxoplasma, and Nocardia",
+            "Reduces post-transplant bacterial cystitis",
+            "Key criteria: Tuberculosis",
+            "Key criteria: rifabutin"
+          ]
+        },
+        "right": {
+          "title": "Alternative Regimens in Sulfa Allergy",
+          "points": [
+            "Inhaled pentamidine 300 mg monthly",
+            "Oral atovaquone 1500 mg daily suspension",
+            "Oral dapsone (requires G6PD screening)",
+            "Lacks antibacterial co-protection",
+            "Diagnostic: extrapulmonary",
+            "Diagnostic: miliary"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Life-threatening opportunistic **invasive fungal infections** (**Aspergillus fumigatus**, **Cryptococcus neoformans**, Mucorales) occur during periods of intensified antirejection immunosuppression. Triazole antifungals (**voriconazole**, posaconazole) are potent competitive inhibitors of hepatic microsomal **CYP3A4**, precipitating massive, dangerous elevations in therapeutic whole blood tacrolimus and cyclosporine concentrations.",
+      "say": "Life-threatening invasive fungal infections occur during periods of intensified antirejection immunosuppression. Triazole antifungals are potent inhibitors of hepatic CYP3A4, precipitating massive, dangerous elevations in blood tacrolimus and cyclosporine concentrations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fungal Pathogen",
+          "Clinical Syndrome",
+          "Pharmacokinetic Consideration"
+        ],
+        "rows": [
+          [
+            "Aspergillus fumigatus",
+            "Angioinvasive pulmonary cavitation",
+            "Voriconazole inhibits CYP3A4 (drop tacrolimus dose 75%)"
+          ],
+          [
+            "Cryptococcus neoformans",
+            "Subacute meningoencephalitis",
+            "Fluconazole maintenance inhibits CNI metabolism"
+          ],
+          [
+            "Mucorales species",
+            "Rhino-orbital-cerebral invasion",
+            "Requires urgent surgical debridement and amphotericin B"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Administration of **live attenuated vaccines** (including **MMR**, **varicella**, **yellow fever**, and oral polio vaccine) is strictly **contraindicated** in kidney transplant recipients on maintenance immunosuppression. Due to impaired cell-mediated immunity, live viral strains can replicate unchecked, precipitating fulminant, fatal disseminated vaccine-strain infection.",
+      "say": "Administration of live attenuated vaccines including MMR, varicella, yellow fever, and oral polio vaccine is strictly contraindicated in kidney transplant recipients on maintenance immunosuppression. Due to impaired cell-mediated immunity, live viral strains can replicate unchecked, precipitating fulminant, fatal disseminated vaccine-strain infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Strictly Contraindicated Vaccines",
+          "points": [
+            "Measles, mumps, and rubella (MMR)",
+            "Varicella-zoster live vaccine",
+            "Yellow fever vaccine",
+            "Oral polio and live BCG vaccines"
+          ]
+        },
+        "right": {
+          "title": "Recommended Inactivated Vaccines",
+          "points": [
+            "Inactivated influenza annually",
+            "Recombinant zoster vaccine (Shingrix)",
+            "Pneumococcal conjugate / polysaccharide series",
+            "Inactivated SARS-CoV-2 and Hepatitis B vaccines"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Post-transplant lymphoproliferative disorder** (**PTLD**) is driven mainly by **Epstein-Barr virus** (**EBV**). The highest risk is an EBV-seronegative recipient of an EBV-seropositive kidney. The growth is usually a B-cell lymphoproliferative clone. Reducing immunosuppression is the first treatment, and rituximab is added when the cells express CD20.",
+      "say": "Post-transplant lymphoproliferative disorder is usually driven by Epstein-Barr virus. The highest risk is a recipient who has never met the virus and receives a kidney from a donor who has. Reducing immunosuppression is the first treatment, and rituximab is added when the B cells express CD20.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "Practice"
+        ],
+        "rows": [
+          [
+            "Cause",
+            "Epstein-Barr virus driving a B-cell clone"
+          ],
+          [
+            "Highest risk",
+            "EBV-seronegative recipient, EBV-seropositive donor"
+          ],
+          [
+            "First treatment",
+            "Reduce immunosuppression, then rituximab if CD20 is present"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Kidney transplant infection questions test the Fishman timeline, CMV mismatch risk, and opportunistic prophylaxis protocols. First month infections mirror surgical nosocomial complications. Months one to six feature opportunistic viral and fungal pathogens, where donor-positive recipient-negative carries highest CMV risk. Valganciclovir provides CMV prophylaxis, and trimethoprim-sulfamethoxazole prevents Pneumocystis jirovecii pneumonia and urinary tract infections.",
+      "say": "High-yield for the exam: Kidney transplant infection questions test the Fishman timeline, CMV mismatch risk, and opportunistic prophylaxis protocols. First month infections mirror surgical nosocomial complications. Months one to six feature opportunistic viral and fungal pathogens, where donor-positive recipient-negative carries highest CMV risk. Valganciclovir provides CMV prophylaxis, and trimethoprim-sulfamethoxazole prevents Pneumocystis jirovecii pneumonia and urinary tract infections.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Fishman month 1",
+            "Wound infections, catheter-related bacteremia, anastomotic leaks, and hospital pneumonia"
+          ],
+          [
+            "Fishman months 1 to 6",
+            "Opportunistic CMV, BK virus, EBV, PJP, and Listeria infections emerge"
+          ],
+          [
+            "Highest CMV risk",
+            "Donor positive and recipient negative mismatch serology carries highest vulnerability"
+          ],
+          [
+            "CMV prophylaxis",
+            "Oral valganciclovir administered daily for 3 to 6 months post-transplant"
+          ],
+          [
+            "PJP prophylaxis",
+            "Low-dose TMP-SMX daily for 6 months prevents Pneumocystis and toxoplasmosis"
+          ],
+          [
+            "BK viremia",
+            "Screen with plasma PCR; manage by reducing calcineurin inhibitor immunosuppression"
+          ],
+          [
+            "Late infections (>6 mo)",
+            "Community-acquired respiratory pathogens in stable patients; opportunistic in chronic rejection"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Post-transplant lymphoproliferative disorder** (**PTLD**) is driven mainly by **Epstein-Barr virus** (**EBV**). The highest risk is an EBV-seronegative recipient of an EBV-seropositive kidney. The growth is usually a B-cell lymphoproliferative clone. Reducing immunosuppression is the first treatment, and rituximab is added when the cells express CD20.",
-   "say": "Post-transplant lymphoproliferative disorder is usually driven by Epstein-Barr virus. The highest risk is a recipient who has never met the virus and receives a kidney from a donor who has. Reducing immunosuppression is the first treatment, and rituximab is added when the B cells express CD20.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Point",
-     "Practice"
-    ],
-    "rows": [
-     [
-      "Cause",
-      "Epstein-Barr virus driving a B-cell clone"
-     ],
-     [
-      "Highest risk",
-      "EBV-seronegative recipient, EBV-seropositive donor"
-     ],
-     [
-      "First treatment",
-      "Reduce immunosuppression, then rituximab if CD20 is present"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "refs": [
-  "Comprehensive Clinical Nephrology 7e Ch. 87",
-  "Brenner and Rector The Kidney 11e Ch. 55",
-  "AST Infectious Diseases Community of Practice Guidelines"
- ]
+  ],
+  "quiz": [],
+  "refs": [
+    "Comprehensive Clinical Nephrology 7e Ch. 87",
+    "Brenner and Rector The Kidney 11e Ch. 55",
+    "AST Infectious Diseases Community of Practice Guidelines"
+  ]
 }

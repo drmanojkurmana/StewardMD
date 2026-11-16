@@ -1,219 +1,260 @@
 {
- "v": 1,
- "module": "snp-vascular-access",
- "title": "Vascular access for haemodialysis",
- "minutes": 8,
- "gen": "AI",
- "steps": [
-  {
-   "tx": "Native **arteriovenous fistula** (AVF) is the preferred permanent vascular access due to superior long-term primary patency and lowest infection, hospitalization, and mortality rates compared to AV grafts and central venous catheters. The image is arteriovenous fistula configurations and maturation criteria.",
-   "say": "Native arteriovenous fistula (AVF) is the preferred permanent vascular access due to superior long-term primary patency and lowest infection, hospitalization, and mortality rates compared to AV grafts and central venous catheters. The image is arteriovenous fistula configurations and maturation criteria.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-vascular-access-fig1.webp",
-    "alt": "Arteriovenous fistula configurations and maturation criteria",
-    "caption": "Anatomical configurations of radiocephalic and brachiocephalic AV fistulas (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "The '**Rule of 6s**' assesses AVF maturation at 6 weeks post-creation: blood flow > 600 mL/min, vein diameter >= 6 mm, depth <= 6 mm beneath the skin surface, and straight cannulation length >= 6 cm. The first step is Surgical AVF creation.",
-   "say": "The 'Rule of 6s' assesses AVF maturation at 6 weeks post-creation: blood flow greater than 600 mL/min, vein diameter at least 6 mm, depth at most 6 mm beneath the skin surface, and straight cannulation length at least 6 cm. The first step is Surgical AVF creation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "r1",
-      "label": "Surgical AVF creation"
-     },
-     {
-      "id": "r2",
-      "label": "Evaluate at 6 weeks post-surgery"
-     },
-     {
-      "id": "r3",
-      "label": "Confirm flow > 600 mL/min and diameter >= 6 mm"
-     },
-     {
-      "id": "r4",
-      "label": "Safe initial two-needle cannulation"
-     }
-    ],
-    "edges": [
-     [
-      "r1",
-      "r2"
-     ],
-     [
-      "r2",
-      "r3"
-     ],
-     [
-      "r3",
-      "r4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Radiocephalic (**Brescia-Cimino**) fistula at the wrist is the preferred first-line anatomical configuration, followed by brachiocephalic fistula at the elbow and brachiobasilic transposition fistula in the upper arm. The paired value for Radiocephalic (Brescia-Cimino) is Radial artery to cephalic vein at wrist.",
-   "say": "Radiocephalic (Brescia-Cimino) fistula at the wrist is the preferred first-line anatomical configuration, followed by brachiocephalic fistula at the elbow and brachiobasilic transposition fistula in the upper arm. The paired value for Radiocephalic (Brescia-Cimino) is Radial artery to cephalic vein at wrist.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Fistula Configuration",
-     "Anastomosis Site",
-     "Key Clinical Features"
-    ],
-    "rows": [
-     [
-      "Radiocephalic (Brescia-Cimino)",
-      "Radial artery to cephalic vein at wrist",
-      "Preserves proximal veins; lowest steal risk"
-     ],
-     [
-      "Brachiocephalic",
-      "Brachial artery to cephalic vein at antecubital fossa",
-      "Higher blood flow; rapid maturation"
-     ],
-     [
-      "Transposed Brachiobasilic",
-      "Brachial artery to basilic vein transposed superficially",
-      "Requires extensive two-stage surgical elevation"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Dialysis access steal syndrome** (DASS) manifests as digital coldness, pain during hemodialysis, paresthesias, or distal tissue gangrene due to arterial flow diversion into the low-resistance venous circuit, diagnosed by digital-brachial index (DBI) < 0.6. One side is Mild Steal, and the other side is Severe Steal (DASS).",
-   "say": "Dialysis access steal syndrome (DASS) manifests as digital coldness, pain during hemodialysis, paresthesias, or distal tissue gangrene due to arterial flow diversion into the low-resistance venous circuit, diagnosed by digital-brachial index (DBI) less than 0 point 6. One side is Mild Steal, and the other side is Severe Steal (DASS).",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Mild Steal",
-     "points": [
-      "Digital-brachial index 0.6 to 0.8",
-      "Mild cool hand during dialysis",
-      "Managed with hand exercises and warmth"
-     ]
+  "v": 1,
+  "module": "snp-vascular-access",
+  "title": "Vascular access for haemodialysis",
+  "minutes": 8,
+  "gen": "AI",
+  "steps": [
+    {
+      "tx": "Native **arteriovenous fistula** (AVF) is the preferred permanent vascular access due to superior long-term primary patency and lowest infection, hospitalization, and mortality rates compared to AV grafts and central venous catheters. The image is arteriovenous fistula configurations and maturation criteria.",
+      "say": "Native arteriovenous fistula (AVF) is the preferred permanent vascular access due to superior long-term primary patency and lowest infection, hospitalization, and mortality rates compared to AV grafts and central venous catheters. The image is arteriovenous fistula configurations and maturation criteria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-vascular-access-fig1.webp",
+        "alt": "Arteriovenous fistula configurations and maturation criteria",
+        "caption": "Anatomical configurations of radiocephalic and brachiocephalic AV fistulas (StewardMD).",
+        "ar": 1.7778
+      }
     },
-    "right": {
-     "title": "Severe Steal (DASS)",
-     "points": [
-      "Digital-brachial index < 0.6",
-      "Rest pain, paresthesias, tissue necrosis",
-      "Mandates urgent surgical revascularization"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**DRIL procedure** (Distal Revascularization and Interval Ligation) is the definitive surgical management of severe access-induced ischemia, creating a bypass graft to the distal artery and ligating the native artery immediately distal to the fistula anastomosis. The first step is Severe hand ischemia and tissue threat.",
-   "say": "DRIL procedure (Distal Revascularization and Interval Ligation) is the definitive surgical management of severe access-induced ischemia, creating a bypass graft to the distal artery and ligating the native artery immediately distal to the fistula anastomosis. The first step is Severe hand ischemia and tissue threat.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "d1",
-      "label": "Severe hand ischemia and tissue threat"
-     },
-     {
-      "id": "d2",
-      "label": "Native artery ligated just distal to AVF anastomosis"
-     },
-     {
-      "id": "d3",
-      "label": "Saphenous vein bypass jumped from proximal artery to distal artery"
-     },
-     {
-      "id": "d4",
-      "label": "DRIL procedure restores hand perfusion without access loss"
-     }
-    ],
-    "edges": [
-     [
-      "d1",
-      "d2"
-     ],
-     [
-      "d2",
-      "d3"
-     ],
-     [
-      "d3",
-      "d4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Arteriovenous graft** (AVG, typically expanded polytetrafluoroethylene, ePTFE) has higher primary failure rates than AVF and is prone to thrombosis secondary to neointimal venous anastomotic stenosis driven by turbulent shear stress and smooth muscle proliferation. The image is venous anatomy and central venous access placement.",
-   "say": "Arteriovenous graft (AVG, typically expanded polytetrafluoroethylene, ePTFE) has higher primary failure rates than AVF and is prone to thrombosis secondary to neointimal venous anastomotic stenosis driven by turbulent shear stress and smooth muscle proliferation. The image is venous anatomy and central venous access placement.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/sva-venous-varicose-access-lymphoedema-fig1.webp",
-    "alt": "Venous anatomy and central venous access placement",
-    "caption": "Subcutaneous tunneling and Dacron cuff positioning in central venous dialysis catheters (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "Catheter-related bloodstream infection (**CRBSI**) in a tunneled cuffed catheter in the internal jugular vein requires empirical systemic broad-spectrum antibiotics covering Staphylococcus aureus (vancomycin) and Gram-negative bacilli (cefepime or aminoglycoside), with catheter removal indicated for tunnel infection, septic shock, or metastatic complications.",
-   "say": "Catheter-related bloodstream infection (CRBSI) in a tunneled cuffed catheter in the internal jugular vein requires empirical systemic broad-spectrum antibiotics covering Staphylococcus aureus (vancomycin) and Gram-negative bacilli (cefepime or aminoglycoside), with catheter removal indicated for tunnel infection, septic shock, or metastatic complications.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Catheter Access Route",
-     "Complication Profile",
-     "Preferred Use"
-    ],
-    "rows": [
-     [
-      "Right internal jugular",
-      "Lowest stenosis, direct straight atrial path",
-      "Gold-standard central venous catheter route"
-     ],
-     [
-      "Subclavian vein",
-      "Severe stenosis destroying ipsilateral arm",
-      "Strictly contraindicated for dialysis catheters"
-     ],
-     [
-      "Femoral vein",
-      "High infection and deep vein thrombosis rate",
-      "Temporary bedbound emergency access only"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Subclavian vein** catheterization is strictly avoided for hemodialysis vascular access due to a 30% to 50% incidence of severe subclavian venous stenosis that permanently precludes ipsilateral arm AVF or AVG creation. One side is Clinical Hallmarks, and the other side is Endovascular Management.",
-   "say": "Subclavian vein catheterization is strictly avoided for hemodialysis vascular access due to a 30% to 50% incidence of severe subclavian venous stenosis that permanently precludes ipsilateral arm AVF or AVG creation. One side is Clinical Hallmarks, and the other side is Endovascular Management.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Clinical Hallmarks",
-     "points": [
-      "Stenosis in 30% to 50% with prior catheters",
-      "Massive unilateral limb edema and pain",
-      "Tortuous collateral chest wall veins"
-     ]
+    {
+      "tx": "The '**Rule of 6s**' assesses AVF maturation at 6 weeks post-creation: blood flow > 600 mL/min, vein diameter >= 6 mm, depth <= 6 mm beneath the skin surface, and straight cannulation length >= 6 cm. The first step is Surgical AVF creation.",
+      "say": "The 'Rule of 6s' assesses AVF maturation at 6 weeks post-creation: blood flow greater than 600 mL/min, vein diameter at least 6 mm, depth at most 6 mm beneath the skin surface, and straight cannulation length at least 6 cm. The first step is Surgical AVF creation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "r1",
+            "label": "Surgical AVF creation"
+          },
+          {
+            "id": "r2",
+            "label": "Evaluate at 6 weeks post-surgery"
+          },
+          {
+            "id": "r3",
+            "label": "Confirm flow > 600 mL/min and diameter >= 6 mm"
+          },
+          {
+            "id": "r4",
+            "label": "Safe initial two-needle cannulation"
+          }
+        ],
+        "edges": [
+          [
+            "r1",
+            "r2"
+          ],
+          [
+            "r2",
+            "r3"
+          ],
+          [
+            "r3",
+            "r4"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Endovascular Management",
-     "points": [
-      "High-pressure balloon angioplasty first-line",
-      "Covered stent for elastic vessel recoil",
-      "Avoid bare-metal stents at thoracic outlet"
-     ]
+    {
+      "tx": "Radiocephalic (**Brescia-Cimino**) fistula at the wrist is the preferred first-line anatomical configuration, followed by brachiocephalic fistula at the elbow and brachiobasilic transposition fistula in the upper arm. The paired value for Radiocephalic (Brescia-Cimino) is Radial artery to cephalic vein at wrist.",
+      "say": "Radiocephalic (Brescia-Cimino) fistula at the wrist is the preferred first-line anatomical configuration, followed by brachiocephalic fistula at the elbow and brachiobasilic transposition fistula in the upper arm. The paired value for Radiocephalic (Brescia-Cimino) is Radial artery to cephalic vein at wrist.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fistula Configuration",
+          "Anastomosis Site",
+          "Key Clinical Features"
+        ],
+        "rows": [
+          [
+            "Radiocephalic (Brescia-Cimino)",
+            "Radial artery to cephalic vein at wrist",
+            "Preserves proximal veins; lowest steal risk"
+          ],
+          [
+            "Brachiocephalic",
+            "Brachial artery to cephalic vein at antecubital fossa",
+            "Higher blood flow; rapid maturation"
+          ],
+          [
+            "Transposed Brachiobasilic",
+            "Brachial artery to basilic vein transposed superficially",
+            "Requires extensive two-stage surgical elevation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dialysis access steal syndrome** (DASS) manifests as digital coldness, pain during hemodialysis, paresthesias, or distal tissue gangrene due to arterial flow diversion into the low-resistance venous circuit, diagnosed by digital-brachial index (DBI) < 0.6. One side is Mild Steal, and the other side is Severe Steal (DASS).",
+      "say": "Dialysis access steal syndrome (DASS) manifests as digital coldness, pain during hemodialysis, paresthesias, or distal tissue gangrene due to arterial flow diversion into the low-resistance venous circuit, diagnosed by digital-brachial index (DBI) less than 0 point 6. One side is Mild Steal, and the other side is Severe Steal (DASS).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mild Steal",
+          "points": [
+            "Digital-brachial index 0.6 to 0.8",
+            "Mild cool hand during dialysis",
+            "Managed with hand exercises and warmth"
+          ]
+        },
+        "right": {
+          "title": "Severe Steal (DASS)",
+          "points": [
+            "Digital-brachial index < 0.6",
+            "Rest pain, paresthesias, tissue necrosis",
+            "Mandates urgent surgical revascularization"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**DRIL procedure** (Distal Revascularization and Interval Ligation) is the definitive surgical management of severe access-induced ischemia, creating a bypass graft to the distal artery and ligating the native artery immediately distal to the fistula anastomosis. The first step is Severe hand ischemia and tissue threat.",
+      "say": "DRIL procedure (Distal Revascularization and Interval Ligation) is the definitive surgical management of severe access-induced ischemia, creating a bypass graft to the distal artery and ligating the native artery immediately distal to the fistula anastomosis. The first step is Severe hand ischemia and tissue threat.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Severe hand ischemia and tissue threat"
+          },
+          {
+            "id": "d2",
+            "label": "Native artery ligated just distal to AVF anastomosis"
+          },
+          {
+            "id": "d3",
+            "label": "Saphenous vein bypass jumped from proximal artery to distal artery"
+          },
+          {
+            "id": "d4",
+            "label": "DRIL procedure restores hand perfusion without access loss"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2"
+          ],
+          [
+            "d2",
+            "d3"
+          ],
+          [
+            "d3",
+            "d4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Arteriovenous graft** (AVG, typically expanded polytetrafluoroethylene, ePTFE) has higher primary failure rates than AVF and is prone to thrombosis secondary to neointimal venous anastomotic stenosis driven by turbulent shear stress and smooth muscle proliferation. The image is venous anatomy and central venous access placement.",
+      "say": "Arteriovenous graft (AVG, typically expanded polytetrafluoroethylene, ePTFE) has higher primary failure rates than AVF and is prone to thrombosis secondary to neointimal venous anastomotic stenosis driven by turbulent shear stress and smooth muscle proliferation. The image is venous anatomy and central venous access placement.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sva-venous-varicose-access-lymphoedema-fig1.webp",
+        "alt": "Venous anatomy and central venous access placement",
+        "caption": "Subcutaneous tunneling and Dacron cuff positioning in central venous dialysis catheters (StewardMD).",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Catheter-related bloodstream infection (**CRBSI**) in a tunneled cuffed catheter in the internal jugular vein requires empirical systemic broad-spectrum antibiotics covering Staphylococcus aureus (vancomycin) and Gram-negative bacilli (cefepime or aminoglycoside), with catheter removal indicated for tunnel infection, septic shock, or metastatic complications.",
+      "say": "Catheter-related bloodstream infection (CRBSI) in a tunneled cuffed catheter in the internal jugular vein requires empirical systemic broad-spectrum antibiotics covering Staphylococcus aureus (vancomycin) and Gram-negative bacilli (cefepime or aminoglycoside), with catheter removal indicated for tunnel infection, septic shock, or metastatic complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Catheter Access Route",
+          "Complication Profile",
+          "Preferred Use"
+        ],
+        "rows": [
+          [
+            "Right internal jugular",
+            "Lowest stenosis, direct straight atrial path",
+            "Gold-standard central venous catheter route"
+          ],
+          [
+            "Subclavian vein",
+            "Severe stenosis destroying ipsilateral arm",
+            "Strictly contraindicated for dialysis catheters"
+          ],
+          [
+            "Femoral vein",
+            "High infection and deep vein thrombosis rate",
+            "Temporary bedbound emergency access only"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Subclavian vein** catheterization is strictly avoided for hemodialysis vascular access due to a 30% to 50% incidence of severe subclavian venous stenosis that permanently precludes ipsilateral arm AVF or AVG creation. One side is Clinical Hallmarks, and the other side is Endovascular Management.",
+      "say": "Subclavian vein catheterization is strictly avoided for hemodialysis vascular access due to a 30% to 50% incidence of severe subclavian venous stenosis that permanently precludes ipsilateral arm AVF or AVG creation. One side is Clinical Hallmarks, and the other side is Endovascular Management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical Hallmarks",
+          "points": [
+            "Stenosis in 30% to 50% with prior catheters",
+            "Massive unilateral limb edema and pain",
+            "Tortuous collateral chest wall veins"
+          ]
+        },
+        "right": {
+          "title": "Endovascular Management",
+          "points": [
+            "High-pressure balloon angioplasty first-line",
+            "Covered stent for elastic vessel recoil",
+            "Avoid bare-metal stents at thoracic outlet"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Hemodialysis vascular access questions test arteriovenous fistula configurations, the Rule of 6s maturation criteria, and arterial steal syndrome. Radiocephalic Cimino-Brescia fistula remains first-choice access. Fistula maturation requires blood flow exceeding 600 mL/min, diameter over 6 mm, and depth under 6 mm at six weeks. Arterial steal syndrome presents with cold, painful, ischemic fingers during dialysis sessions.",
+      "say": "High-yield for the exam: Hemodialysis vascular access questions test arteriovenous fistula configurations, the Rule of 6s maturation criteria, and arterial steal syndrome. Radiocephalic Cimino-Brescia fistula remains first-choice access. Fistula maturation requires blood flow exceeding 600 mL/min, diameter over 6 mm, and depth under 6 mm at six weeks. Arterial steal syndrome presents with cold, painful, ischemic fingers during dialysis sessions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "First-line access",
+            "Radiocephalic (Cimino-Brescia) native arteriovenous fistula at the wrist"
+          ],
+          [
+            "Second-line access",
+            "Brachiocephalic fistula at elbow, followed by transposed brachiobasilic fistula"
+          ],
+          [
+            "Rule of 6s maturation",
+            "Flow 600 mL/min, diameter 6 mm, and depth 6 mm"
+          ],
+          [
+            "Access thrill/bruit",
+            "Continuous soft low-pitched murmur indicates patent low-resistance venous outflow"
+          ],
+          [
+            "Vascular steal syndrome",
+            "Cold ischemic hand during dialysis; requires surgical banding or DRIL procedure"
+          ],
+          [
+            "Central venous stenosis",
+            "Ipsilateral arm and facial edema from prior subclavian venous catheter"
+          ],
+          [
+            "Catheter-related bacteremia",
+            "Staphylococcus aureus infection; remove catheter if metastatic seeding or shock"
+          ]
+        ]
+      }
     }
-   }
-  }
- ],
- "quiz": [],
- "refs": [
-  "Comprehensive Clinical Nephrology 7e Ch. 77",
-  "KDOQI Clinical Practice Guideline for Vascular Access 2019",
-  "Harrison Principles of Internal Medicine 22e Ch. 314"
- ]
+  ],
+  "quiz": [],
+  "refs": [
+    "Comprehensive Clinical Nephrology 7e Ch. 77",
+    "KDOQI Clinical Practice Guideline for Vascular Access 2019",
+    "Harrison Principles of Internal Medicine 22e Ch. 314"
+  ]
 }
