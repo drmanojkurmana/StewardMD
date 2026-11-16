@@ -1043,6 +1043,7 @@
 
   /* ---- toggle fav ---- */
   function toggleFavCurrent(){
+    removeSheet("stP3MoreSheet");
     var v=V(); if(!v) return;
     ensureDocMeta(v.doc);
     var key=curPageKey()||String(v.cur||1);

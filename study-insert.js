@@ -1318,6 +1318,7 @@
     } catch (e) {}
 
     if (S().host()) S().host().toast("Saved '" + name + "' to Elements!");
+    if (G.STUDY_SELECT && G.STUDY_SELECT.removePanels) G.STUDY_SELECT.removePanels(S().host() && S().host().root());
   }
 
   /* ---- Sync Toolbar & Options ---- */

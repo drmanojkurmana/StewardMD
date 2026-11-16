@@ -151,12 +151,14 @@ ok(await page.evaluate(() => !!document.querySelector("#stLassoBar")), "lasso: d
 ok(await page.locator('[data-act="st-lasso-ai-explain"]').count() === 1, "lasso: AI Explain chip is visible");
 ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso: AI Key summary chip is visible");
 ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
-ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element button is visible");
+await page.click('[data-act="st-lasso-more"]');   // polish: Save as element lives in the selection More menu
+ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element is in the selection More menu");
 await page.click('[data-act="st-lasso-ai-explain"]');
 await page.waitForSelector("#stSheet", { timeout: 5000 });
 ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
 await page.click('[data-act="st-scancel"]');
 await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+if (!(await page.locator('[data-act="st-lasso-save-elem"]:visible').count())) await page.click('[data-act="st-lasso-more"]');
 await page.click('[data-act="st-lasso-save-elem"]');
 const savedElems = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_elements") || "[]"));
 ok(savedElems.length === 1 && savedElems[0].name === "Custom Element", "lasso: selection saved as custom element in local storage");
@@ -393,7 +395,10 @@ await lassoRect(0.1, 0.64, 0.9, 0.78);
 await page.waitForSelector("#stLassoBar");
 ok(/1 item/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso settings: highlighter excluded after toggle");
 await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');   // restore
-ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && await page.locator('[data-act="st-lasso-resize"]').count() === 1 && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
+await page.click('[data-act="st-lasso-more"]');
+const hasResize = await page.locator('[data-act="st-lasso-resize"]').count() === 1;
+await page.click('#stSelMore [data-sel-close]');
+ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && hasResize && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
 /* move: drag inside the box, one undo step */
 const beforeMove = await bboxOfSel();
 const uBeforeMove = await page.evaluate(() => STUDY._state().stack.u.length);
@@ -521,7 +526,8 @@ if (await page.locator("#stLassoBar").count()) {
   await page.click('[data-act="st-lasso-conv"]');
   await page.waitForSelector("#stSelConv");
   ok(/on-device|Server preview/.test(await page.locator("#stSelConv").innerText()), "P2 convert: clearly labelled server stub");
-  await page.click('[data-act="st-lasso-done"]');
+  if (await page.locator('[data-act="st-lasso-done"]').count()) await page.click('[data-act="st-lasso-done"]');
+  else if (await page.locator('#stSelConv [data-sel-close]').count()) await page.click('#stSelConv [data-sel-close]');
 }
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
@@ -638,10 +644,10 @@ await page.evaluate((b) => {
     Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
   window.__avail = false;
 }, jpegs[0]);
-await page.click('#smdPrep [data-act="back"]'); await openLib(); await page.waitForTimeout(400);
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib(); await page.waitForTimeout(400);
 ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button while isAvailable is false");
 await page.evaluate(() => { window.__avail = true; });
-await page.click('#smdPrep [data-act="back"]'); await openLib();
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib();
 await page.waitForSelector('[data-act="st-scan"]', { timeout: 5000 });
 ok(true, "scan: the Scan button shows once isAvailable is true");
 const nDocs = (await idbAll("docs")).length;
@@ -742,14 +748,14 @@ ok(out.name === "fixture.pdf" && shaOf(out.buf) === SHA, "share original: the fi
 out = await dl(() => page.click('[data-act="st-flat"]'));
 ok(out.name === "fixture (flattened).pdf" && out.buf.slice(0, 5).toString() === "%PDF-" && pagesIn(out.buf) === 2 && shaOf(out.buf) !== SHA, "flattened export: named (flattened), 2 pages, differs from the original");
 ok(shaOf(await fileBytes(fixtureDoc.id)) === SHA, "flattened export: the stored original's sha256 is unchanged");
-await page.click('#smdPrep [data-act="back"]');
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
 await page.waitForSelector("#stLib");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
 await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 out = await dl(() => page.click('[data-act="st-flat"]'));
 ok(out.name === "Ward notes.pdf" && pagesIn(out.buf) === 1, "notebook to PDF: one page per notebook page");
-await page.click('#smdPrep [data-act="back"]');
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
 await page.waitForSelector("#stLib");
 /* back up */
 await idb("folders", 'o.put({ id: "f1", name: "Ward" })');
@@ -850,7 +856,13 @@ await page.click("#stP3MoreSheet [data-act='st-p3-outline']");
 await page.waitForTimeout(400);
 ok(await page.evaluate(() => (STUDY._state().doc.outlines||[]).some(o=>o.title==="Clinical Notes")), "P3 3.9: Add Page to Outline adds user entry");
 /* Favorites: star page, check empty state then jump */
-await page.click("#stP3Top [data-act='st-p3-fav']");
+if (await page.locator("#stP3Top [data-act='st-p3-fav']:visible").count()) {
+  await page.click("#stP3Top [data-act='st-p3-fav']");
+} else {
+  await page.click("#stP3Top [data-act='st-p3-more']");
+  await page.waitForSelector("#stP3MoreSheet");
+  await page.click("#stP3MoreSheet [data-act='st-p3-fav']");
+}
 await page.waitForTimeout(300);
 ok(await page.evaluate(() => Object.keys(STUDY._state().doc.favPages||{}).length>0), "P3 3.8: Bookmark star stores favPages");
 await page.click("#stP3Top [data-act='st-p3-grid']");
