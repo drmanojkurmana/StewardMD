@@ -10,12 +10,32 @@
    "say": "Glycogen intensifies amylopectin branching for simultaneous enzyme attack from thousands of ends. Amylases cut internal alpha bonds only, leaving dextrins for brush border finishing enzymes.",
    "vis": {
     "kind": "table",
-    "cols": ["Polymer", "Bonds and branching", "Job and iodine"],
+    "cols": [
+     "Polymer",
+     "Bonds and branching",
+     "Job and iodine"
+    ],
     "rows": [
-     ["Amylose", "Alpha-1,4, unbranched helix", "Plant storage, iodine blue black"],
-     ["Amylopectin", "Alpha-1,4 plus 1,6 every 24 to 30", "Plant storage, iodine red brown"],
-     ["Glycogen", "Alpha-1,4 plus 1,6 every 8 to 12", "Animal storage, rapid mobilisation"],
-     ["Cellulose", "Beta-1,4, straight ribbons H-bonded", "Plant structure, human fibre"]
+     [
+      "Amylose",
+      "Alpha-1,4, unbranched helix",
+      "Plant storage, iodine blue black"
+     ],
+     [
+      "Amylopectin",
+      "Alpha-1,4 plus 1,6 every 24 to 30",
+      "Plant storage, iodine red brown"
+     ],
+     [
+      "Glycogen",
+      "Alpha-1,4 plus 1,6 every 8 to 12",
+      "Animal storage, rapid mobilisation"
+     ],
+     [
+      "Cellulose",
+      "Beta-1,4, straight ribbons H-bonded",
+      "Plant structure, human fibre"
+     ]
     ]
    }
   },
@@ -24,8 +44,21 @@
    "say": "Cellulose resists human enzymes while bacteria ferment a fraction to short chain fatty acids. Soluble fibres blunt glucose and cholesterol absorption, and inulin historically tests filtration ideally.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Insoluble fibre (cellulose, lignin)", "points": ["Stool bulk, transit faster", "Limited fermentation", "Constipation and diverticular protection"]},
-    "right": {"title": "Soluble fibre (beta-glucan, pectin)", "points": ["Viscous gels slow absorption", "Fermented to short chain acids", "Glucose and cholesterol blunted"]
+    "left": {
+     "title": "Insoluble fibre (cellulose, lignin)",
+     "points": [
+      "Stool bulk, transit faster",
+      "Limited fermentation",
+      "Constipation and diverticular protection"
+     ]
+    },
+    "right": {
+     "title": "Soluble fibre (beta-glucan, pectin)",
+     "points": [
+      "Viscous gels slow absorption",
+      "Fermented to short chain acids",
+      "Glucose and cholesterol blunted"
+     ]
     }
    }
   },
@@ -45,13 +78,37 @@
    "say": "Proteoglycans bottle brush core proteins with dozens of GAG chains bearing cartilage load. Heparin chain length determines antithrombin versus Xa selectivity in daily prescribing pharmacology.",
    "vis": {
     "kind": "table",
-    "cols": ["GAG", "Sulfated?", "Signature place or job"],
+    "cols": [
+     "GAG",
+     "Sulfated?",
+     "Signature place or job"
+    ],
     "rows": [
-     ["Hyaluronic acid", "No (exception), no core protein", "Synovial lubricant, vitreous, migration"],
-     ["Heparin", "Most heavily", "Mast cells, anticoagulant drug"],
-     ["Chondroitin sulfate", "Yes", "Cartilage compression resistance"],
-     ["Dermatan sulfate", "Yes", "Skin, vessels, valves (Hurler/Hunter storage)"],
-     ["Keratan sulfate", "Yes", "Cornea transparency, cartilage"]
+     [
+      "Hyaluronic acid",
+      "No (exception), no core protein",
+      "Synovial lubricant, vitreous, migration"
+     ],
+     [
+      "Heparin",
+      "Most heavily",
+      "Mast cells, anticoagulant drug"
+     ],
+     [
+      "Chondroitin sulfate",
+      "Yes",
+      "Cartilage compression resistance"
+     ],
+     [
+      "Dermatan sulfate",
+      "Yes",
+      "Skin, vessels, valves (Hurler/Hunter storage)"
+     ],
+     [
+      "Keratan sulfate",
+      "Yes",
+      "Cornea transparency, cartilage"
+     ]
     ]
    }
   },
@@ -67,11 +124,74 @@
     "kind": "flow",
     "title": "Carbohydrate grammar reused",
     "nodes": [
-     {"id": "gram", "label": "Anomers, bonds, branches, charge"},
-     {"id": "met", "label": "Glycogen and glycolysis stems"},
-     {"id": "store", "label": "Storage and anticoagulant stems"}
+     {
+      "id": "gram",
+      "label": "Anomers, bonds, branches, charge"
+     },
+     {
+      "id": "met",
+      "label": "Glycogen and glycolysis stems"
+     },
+     {
+      "id": "store",
+      "label": "Storage and anticoagulant stems"
+     }
     ],
-    "edges": [["gram", "met"], ["gram", "store"]]
+    "edges": [
+     [
+      "gram",
+      "met"
+     ],
+     [
+      "gram",
+      "store"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Glycosaminoglycans consist of unbranched repeating disaccharide units comprising an amino sugar and an acidic uronic acid. Hyaluronic acid is uniquely non-sulfated and synthesised without a protein core. Mucopolysaccharidosis Type I (Hurler syndrome) involves alpha-L-iduronidase deficiency with corneal clouding, whereas Type II (Hunter syndrome) is an X-linked recessive disorder without corneal opacity.",
+   "say": "High-yield for the exam: Glycosaminoglycans consist of unbranched repeating disaccharide units comprising an amino sugar and an acidic uronic acid. Hyaluronic acid is uniquely non-sulfated and synthesised without a protein core. Mucopolysaccharidosis Type I Hurler syndrome involves alpha-L-iduronidase deficiency with corneal clouding, whereas Type II Hunter syndrome is an X-linked recessive disorder without corneal opacity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Hyaluronic acid distinction",
+      "Only non-sulfated glycosaminoglycan, lacks core protein linkage, located in synovial fluid"
+     ],
+     [
+      "Heparin negative charge",
+      "Highest negative charge density of any macromolecule in human body"
+     ],
+     [
+      "Heparan sulfate role",
+      "Constituent of basement membranes, particularly renal glomerular filtration barrier"
+     ],
+     [
+      "Hurler syndrome defect",
+      "Alpha-L-iduronidase deficiency leading to heparan and dermatan sulfate accumulation"
+     ],
+     [
+      "Hurler clinical features",
+      "Coarse facial features, dysostosis multiplex, severe hepatosplenomegaly, and corneal clouding"
+     ],
+     [
+      "Hunter syndrome genetics",
+      "X-linked recessive inheritance caused by iduronate-2-sulfatase enzyme deficiency"
+     ],
+     [
+      "Hunter clinical distinction",
+      "Aggressive behavior, clear corneas without clouding, pebble-like skin papules"
+     ],
+     [
+      "Starch structure bonds",
+      "Amylose contains alpha-1,4 bonds; amylopectin adds alpha-1,6 branch points"
+     ]
+    ]
    }
   }
  ],
