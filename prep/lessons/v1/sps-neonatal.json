@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "sps-neonatal",
+ "subject": "ss-paediatric-surgery",
+ "title": "Neonatal surgery: atresias, Hirschsprung disease and anorectal anomalies",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e",
+  "Ashcraft Pediatric Surgery",
+  "American Pediatric Surgical Association guidance"
+ ],
+ "steps": [
+  {
+   "tx": "**Oesophageal atresia** with tracheo oesophageal fistula presents with excess salivation and choking on first feed. Upper pouch gas with gas in stomach and bowel on radiograph confirms fistula anatomy. Repair through thoracotomy or thoracoscopy separates airway from oesophagus while preserving long gap options.",
+   "say": "Oesophageal atresia with tracheo oesophageal fistula presents with excess salivation and choking on the first feed. Upper pouch gas with gas in stomach and bowel on radiograph confirms fistula anatomy. Repair separates airway from oesophagus while preserving long gap options.",
+   "vis": {
+    "cols": ["Sign", "Meaning", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Choking on feed", "Fistula present", "Upright nursing"],
+     ["Bowel gas seen", "Gas enters gut", "Thoracic repair"],
+     ["Upper pouch air", "Atresia confirmed", "Gap assessment"]
+    ]
+   }
+  },
+  {
+   "tx": "**Duodenal atresia** shows double bubble with polyhydramnios history and vomiting of bile from birth. Down syndrome associates strongly, so karyotype and cardiac screening accompany surgical planning before repair. Duodenoduodenostomy corrects obstruction even when malrotation coexists with accessory bands in the abdomen.",
+   "say": "Duodenal atresia shows double bubble with polyhydramnios history and vomiting of bile. Down syndrome associates strongly, so karyotype and cardiac screening accompany surgical planning. Duodenoduodenostomy corrects obstruction even when malrotation coexists.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "a1", "label": "Bile vomiting"}, {"id": "a2", "label": "Double bubble"}, {"id": "a3", "label": "Cardiac screen"}, {"id": "a4", "label": "Duodenoduodenostomy"}, {"id": "a5", "label": "Feed resumed"}],
+    "edges": [["a1", "a2"], ["a2", "a3"], ["a3", "a4"], ["a4", "a5"]]
+   }
+  },
+  {
+   "tx": "**Malrotation with midgut volvulus** is a surgical emergency with bilious vomiting and catastrophic bowel loss without rapid detorsion in neonates. Barium study shows duodenojejunal junction on the right with whirlpool sign on cross section. Ladd procedure divides bands and fixes bowel to prevent recurrence with wide mesenteric base.",
+   "say": "Malrotation with midgut volvulus is a surgical emergency with bilious vomiting and catastrophic bowel loss without rapid detorsion. Barium study shows the duodenojejunal junction on the right with whirlpool sign. Ladd procedure divides bands and fixes bowel to prevent recurrence.",
+   "vis": {
+    "cols": ["Age", "Symptom", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Neonatal", "Bilious vomiting", "Emergency operation"],
+     ["Infant", "Pain and distension", "Detorsion urgently"],
+     ["Older child", "Intermittent pain", "Elective Ladd plan"]
+    ]
+   }
+  },
+  {
+   "tx": "**Jejunal and ileal atresia** presents like duodenal atresia with triple bubble pattern and bile vomiting throughout newborn days. Radiograph distinguishes triple bubble from double bubble in exam questions with proximal distended loops. Resection with primary anastomosis restores continuity once proximal distension settles after decompression.",
+   "say": "Jejunal and ileal atresia presents like duodenal atresia with triple bubble pattern and bile vomiting. Radiograph distinguishes triple bubble from double bubble in exam questions. Resection with primary anastomosis restores continuity once proximal distension settles.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Duodenal atresia", "points": ["Double bubble", "Early upper block", "Down syndrome link", "Duodenoduodenostomy"]},
+    "right": {"title": "Jejunal atresia", "points": ["Triple bubble", "Mid gut block", "Intrinsic web", "Resection anastomosis"]}
+   }
+  },
+  {
+   "tx": "**Hirschsprung disease** from aganglionic rectum causes delayed meconium, distension and enterocolitis risk in newborn infants. Rectal suction biopsy with absent ganglion cells provides gold standard histology for diagnosis. Pull through surgery removes aganglionic bowel and restores continence in most children with diligent care.",
+   "say": "Hirschsprung disease from aganglionic rectum causes delayed meconium, distension and enterocolitis risk. Rectal suction biopsy with absent ganglion cells provides gold standard histology. Pull through surgery removes aganglionic bowel and restores continence in most children.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "h1", "label": "Delayed meconium"}, {"id": "h2", "label": "Stool decompression"}, {"id": "h3", "label": "Suction biopsy"}, {"id": "h4", "label": "Pull through"}, {"id": "h5", "label": "Continence"}],
+    "edges": [["h1", "h2"], ["h2", "h3"], ["h3", "h4"], ["h4", "h5"]]
+   }
+  },
+  {
+   "tx": "**Imperforate anus** with anorectal malformation lacks anal opening and often shows fistula to perineum or urinary tract in newborns. Colostomy decompresses neonates with high anomalies before definitive repair in later weeks. Posterior sagittal anorectoplasty reconstructs anatomy with continence potential through careful pelvic dissection.",
+   "say": "Imperforate anus with anorectal malformation lacks an anal opening and often shows fistula to perineum or urinary tract. Colostomy decompresses neonates with high anomalies before definitive repair. Posterior sagittal anorectoplasty reconstructs anatomy with continence potential.",
+   "vis": {
+    "cols": ["Type", "Fistula", "Staging"],
+    "kind": "table",
+    "rows": [
+     ["Low anomaly", "Perineal fistula", "Direct repair"],
+     ["High anomaly", "Urinary fistula", "Colostomy first"],
+     ["Cloacal anomaly", "Common channel", "Multistage care"]
+    ]
+   }
+  },
+  {
+   "tx": "**Necrotising enterocolitis** follows preterm gut ischaemia with pneumatosis and portal venous gas in tiny infants. Serial radiographs stratify medical from surgical disease, with pneumoperitoneum mandating operation for perforation. Stenting with drainage now helps selected extremely preterm infants with perforation as bridge therapy.",
+   "say": "Necrotising enterocolitis follows preterm gut ischaemia with pneumatosis and portal venous gas. Serial radiographs stratify medical from surgical disease, with pneumoperitoneum mandating operation. Stenting with drainage now helps selected extremely preterm infants with perforation.",
+   "vis": {
+    "cols": ["Sign", "Stage", "Care"],
+    "kind": "table",
+    "rows": [
+     ["Pneumatosis", "Moderate disease", "Fasting and antibiotics"],
+     ["Portal gas", "Advanced disease", "Close monitoring"],
+     ["Pneumoperitoneum", "Perforation", "Operation or drain"]
+    ]
+   }
+  },
+  {
+   "tx": "**Choanal atresia** blocks nasal airflow and presents with cyanosis relieved by crying during mouth breathing. Bilateral disease needs prompt airway and feeding care with surgical puncture for patency. Computed tomography of posterior nares confirms bony or mixed atresia before repair with stent care.",
+   "say": "Choanal atresia blocks nasal airflow and presents with cyanosis relieved by crying. Bilateral disease needs prompt airway and feeding care with surgical puncture. Computed tomography of posterior nares confirms bony or mixed atresia before repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "n1", "label": "Nasal block"}, {"id": "n2", "label": "Crying relieves"}, {"id": "n3", "label": "Feeding airway"}, {"id": "n4", "label": "CT confirms"}, {"id": "n5", "label": "Transnasal puncture"}],
+    "edges": [["n1", "n2"], ["n2", "n3"], ["n3", "n4"], ["n4", "n5"]]
+   }
+  },
+  {
+   "tx": "**Complications** include anastomotic leak after atresia repair, long term dysphagia and enterocolitis after pull through operation. Cardiac and renal anomalies accompany many neonatal surgical diseases through VACTERL association with wide spectrum. Thorough screening for cardiac, renal and vertebral anomalies prevents missed coexisting lesions in every newborn.",
+   "say": "Complications include anastomotic leak after atresia repair, long term dysphagia and enterocolitis after pull through. Cardiac and renal anomalies accompany many neonatal surgical diseases through VACTERL association. Thorough screening for cardiac, renal and vertebral anomalies prevents missed lesions.",
+   "vis": {
+    "cols": ["Operation", "Complication", "Watch for"],
+    "kind": "table",
+    "rows": [
+     ["Fistula repair", "Leak", "Sepsis and drain fluid"],
+     ["Pull through", "Enterocolitis", "Fever and distension"],
+     ["Colostomy", "Prolapse", "Stoma inspection"]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam table** pairs atresia levels with bubble counts, volvulus with whirlpool sign, Hirschsprung disease with suction biopsy, and imperforate anus with posterior sagittal repair. Choanal atresia relieves with crying and necrotising enterocolitis perforates with free gas. Each row gives the sign, gold standard test and first operation.",
+   "say": "The exam table pairs atresia levels with bubble counts, volvulus with whirlpool sign, Hirschsprung disease with suction biopsy, and imperforate anus with posterior sagittal repair. Choanal atresia relieves with crying and necrotising enterocolitis perforates with free gas. Each row gives the sign, gold standard test and first operation.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or test"],
+    "kind": "table",
+    "rows": [
+     ["Oesophageal", "Fistula sign", "Bowel gas on film"],
+     ["Duodenal", "Bubble count", "Double bubble"],
+     ["Jejunal", "Bubble count", "Triple bubble"],
+     ["Volvulus", "Imaging sign", "Whirlpool sign"],
+     ["Hirschsprung", "Gold standard", "Suction biopsy"],
+     ["Anorectal", "Repair name", "Posterior sagittal"],
+     ["Choanal", "Relief sign", "Crying relieves"],
+     ["Perforation", "Film sign", "Free gas"]
+    ]
+   }
+  }
+ ]
+}

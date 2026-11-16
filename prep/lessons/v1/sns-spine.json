@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "sns-spine",
+ "subject": "ss-neurosurgery",
+ "title": "Spine surgery: trauma stability, infection, tumours and compression syndromes",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e spinal disorders sections", "AO Spine trauma classification and NICE low back pain guidance"],
+ "steps": [
+  {
+   "tx": "**Denis three column model** (anterior, middle, posterior spinal support) judges instability from the middle column. **Burst fracture** (vertebral body shattering into the canal) threatens the cord through retropulsion. **Magnetic resonance imaging** (MRI) of the cord shows contusion, oedema and compression severity clearly.",
+   "say": "The Denis three column model assesses instability from the middle column. Burst fracture breaks the vertebral body into the canal and threatens the cord. Magnetic resonance imaging shows cord contusion, oedema and compression severity.",
+   "vis": {"kind": "table", "cols": ["Fracture", "Mechanism", "Stability"], "rows": [["Compression", "Anterior wedging", "Often stable, brace"], ["Burst", "Body shatters, middle column", "Unstable, decompress"], ["Dislocation", "Ligament failure", "Unstable, reduce, fix"]]}
+  },
+  {
+   "tx": "**AO Spine classification** (fracture morphology with neurology and modifiers) standardises reporting and operative choice across centres. **Neurological deficit with instability** requires urgent decompression and stabilisation without waiting days. **Thoracolumbar injury classification** (TLICS) scores morphology, posterior ligament integrity and neurology to decide operation finally.",
+   "say": "The AO Spine classification standardises fracture reporting and operative choice. Neurological deficit with instability requires urgent decompression and stabilisation. The thoracolumbar score reflects morphology, ligament integrity and neurology.",
+   "vis": {"kind": "flow", "nodes": [{"id": "fract", "label": "Thoracolumbar fracture"}, {"id": "tlics", "label": "Thoracolumbar score"}, {"id": "low", "label": "Low: brace"}, {"id": "high", "label": "High: decompress fix"}], "edges": [["fract", "tlics"], ["tlics", "low"], ["tlics", "high"]]}
+  },
+  {
+   "tx": "**Ankylosing spondylitis** (axial spondyloarthritis, fused spinal disease) fractures like fractured chalk with white stick lesions across ankylosed segments. Minor trauma causes unstable three column injuries and epidural bleeding inside the canal. **Whole spine imaging** (cervical to sacrum) finds noncontiguous fractures in **ten** percent of cases.",
+   "say": "Ankylosing spondylitis fractures like fractured chalk with white stick lesions across ankylosed segments. Minor trauma causes unstable three column injuries and epidural bleeding. Whole spine imaging finds noncontiguous fractures in ten percent of cases.",
+   "vis": {"kind": "table", "cols": ["Feature", "Point", "Action"], "rows": [["Mechanism", "Minor trauma, major fracture", "Respect the fused spine"], ["Levels", "Noncontiguous ten percent", "Image whole spine"], ["Bleed", "Epidural haematoma", "Watch neurology"]]}
+  },
+  {
+   "tx": "**Pott disease** (spinal tuberculosis, TB of spine) destroys two adjacent vertebral bodies with paravertebral abscess sparing the disc early in course. **Gibbus deformity** (angular kyphosis, sharp hunch) signals advanced collapse with instability. **Biopsy including culture** (tissue diagnosis) beats empirical therapy when the organism is unknown still.",
+   "say": "Pott disease destroys two adjacent vertebral bodies with paravertebral abscess sparing the disc early. Gibbus deformity means angular kyphosis and signals advanced collapse. Biopsy with culture beats empirical therapy when the organism is unknown.",
+   "vis": {"kind": "compare", "left": {"title": "Tuberculosis", "points": ["Two bodies, disc spared early", "Paravertebral abscess", "Gibbus kyphosis"]}, "right": {"title": "Bacterial discitis", "points": ["Disc involved first", "Rapid destruction", "Staphylococcal commonest"]}}
+  },
+  {
+   "tx": "**Spondylodiscitis** (disc space infection) shows disc height loss with endplate erosion and soft tissue swelling. **Blood cultures** grow in **thirty** to **sixty** percent before antibiotics start. **Four drug antitubercular therapy** runs for **nine** to **twelve** months in spinal tuberculosis with surgical decompression for deficit.",
+   "say": "Spondylodiscitis shows disc height loss with endplate erosion and soft tissue swelling. Blood cultures grow in thirty to sixty percent before antibiotics start. Antitubercular therapy runs nine to twelve months in spinal tuberculosis with surgery for deficit.",
+   "vis": {"kind": "flow", "nodes": [{"id": "pain", "label": "Back pain, fever"}, {"id": "blood", "label": "Blood cultures first"}, {"id": "mri", "label": "MRI with contrast"}, {"id": "abs", "label": "Drain abscess if needed"}], "edges": [["pain", "blood"], ["blood", "mri"], ["mri", "abs"]]}
+  },
+  {
+   "tx": "**Cauda equina syndrome** (saddle anaesthesia, bladder, bowel and sexual failure) demands emergency **magnetic resonance imaging** (MRI) within hours. **Saddle numbness** plus urinary retention should never wait for routine slots. **Decompression under twenty four hours** (emergency surgery) protects bladder recovery better than delay.",
+   "say": "Cauda equina syndrome causes saddle anaesthesia with bladder, bowel and sexual failure. It demands emergency magnetic resonance imaging within hours. Saddle numbness plus urinary retention should never wait for routine slots.",
+   "vis": {"kind": "table", "cols": ["Clue", "Meaning", "Urgency"], "rows": [["Saddle anaesthesia", "Sacral root compression", "Same day imaging"], ["Urinary retention", "Bladder failure", "Emergency surgery"], ["Anal laxity", "Sphincter involvement", "Do not delay"]]}
+  },
+  {
+   "tx": "**Cervical spondylotic myelopathy** (cord compression from discs and ligaments) presents with hand clumsiness and **hyperreflexia** with gait failure. **Babinski sign** (upgoing plantar) and gait stiffness indicate cord, not root, disease. **Anterior corpectomy** or **laminoplasty** (posterior widening) decompresses by level and alignment.",
+   "say": "Cervical spondylotic myelopathy presents with hand clumsiness and hyperreflexia. Babinski sign and gait stiffness indicate cord, not root, disease. Anterior corpectomy or posterior laminoplasty helps compression by level and alignment.",
+   "vis": {"kind": "compare", "left": {"title": "Root disease", "points": ["Single dermatome pain", "Weakness, lost reflex", "Pain dominated"]}, "right": {"title": "Cord disease", "points": ["Hand clumsiness", "Brisk reflexes, Babinski", "Gait stiffness"]}}
+  },
+  {
+   "tx": "**Spinal tumours** split into intramedullary (inside cord), intradural extramedullary (meningioma, schwannoma) and extradural (metastasis) groups anatomically. **Ependymoma** (central cord tumour) and **astrocytoma** (eccentric, paediatric) fill the cord tissue. **Metastasis** (lytic vertebral deposit) causes cord compression through fracture and mass effect.",
+   "say": "Spinal tumours split into inside the cord, lining compression and extradural types. Ependymoma grows centrally while astrocytoma grows eccentrically. Metastasis causes compression through fracture and mass effect.",
+   "vis": {"kind": "table", "cols": ["Type", "Examples", "Key feature"], "rows": [["Intramedullary", "Ependymoma, astrocytoma", "Inside cord, surgery"], ["Extramedullary", "Meningioma, schwannoma", "Dural based, resectable"], ["Extradural", "Metastasis, lymphoma", "Bone disease, radiotherapy"]]}
+  },
+  {
+   "tx": "**Metastatic cord compression** (malignant cord compression) needs steroids within hours and whole spine MRI without delay. **Emergency radiotherapy** or decompression within **twenty four** hours is the single proven window for walking preservation. **Spinal instability neoplastic score** (SINS) assesses fracture risk in metastatic spines.",
+   "say": "Metastatic cord compression needs steroids within hours and whole spine magnetic resonance imaging without delay. Emergency radiotherapy or decompression within twenty four hours preserves walking best. The neoplastic instability score assesses fracture risk.",
+   "vis": {"kind": "flow", "nodes": [{"id": "pain", "label": "Back pain, cancer history"}, {"id": "steroid", "label": "Steroids at once"}, {"id": "mri", "label": "Whole spine MRI"}, {"id": "treat", "label": "Radiotherapy or decompress"}], "edges": [["pain", "steroid"], ["steroid", "mri"], ["mri", "treat"]]}
+  },
+  {
+   "tx": "High yield for the exam: **middle column** failure means instability, noncontiguous fracture reaches ten percent in ankylosed spines, Pott disease spares the disc early, cauda equina needs imaging within hours with surgery under twenty four hours, malignant compression needs steroids first, ependymoma sits centrally, and spinal tuberculosis therapy runs nine to twelve months.",
+   "say": "Middle column failure means instability, noncontiguous fracture reaches ten percent in ankylosed spines, Pott disease spares the disc early, cauda equina needs imaging within hours with surgery under twenty four hours, malignant compression needs steroids first, ependymoma sits centrally, and spinal tuberculosis therapy runs nine to twelve months.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Denis", "Middle column equals stability"], ["Noncontiguous", "Ten percent"], ["Pott", "Disc spared early"], ["Cauda equina", "Imaging urgent, surgery under twenty four hours"], ["Malignant compression", "Steroids at once"], ["Ependymoma", "Central cord"], ["Tuberculosis therapy", "Nine to twelve months"], ["Neoplastic score", "Instability score"]] }
+  }
+ ]
+}

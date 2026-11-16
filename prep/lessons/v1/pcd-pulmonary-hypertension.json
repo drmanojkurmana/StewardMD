@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "pcd-pulmonary-hypertension",
+ "subject": "ss-paediatric-cardiology",
+ "title": "Paediatric pulmonary hypertension and heart failure: pressures and pumps",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22e",
+  "American Heart Association pulmonary hypertension guidance",
+  "European Society of Cardiology pulmonary guidance"
+ ],
+ "steps": [
+  {
+   "tx": "**Pulmonary hypertension** in children means mean pulmonary arterial pressure above 20 mm mercury on right heart catheterisation. Pulmonary vascular resistance above 3 Wood units separates precapillary disease from left heart congestion. Echocardiogram suggests pressure through tricuspid regurgitation velocity before catheterisation.",
+   "say": "Pulmonary hypertension in children means mean pulmonary arterial pressure above 20 millimetres of mercury on right heart catheterisation. Vascular resistance above 3 Wood units separates precapillary disease from left heart congestion. Echocardiogram suggests pressure through regurgitation velocity before catheterisation.",
+   "vis": {
+    "cols": ["Test", "Cutoff", "Role"],
+    "kind": "table",
+    "rows": [
+     ["Catheter", "Above 20 mm mercury", "Gold standard"],
+     ["Resistance", "Above 3 Wood units", "Precapillary label"],
+     ["Echo velocity", "Above 3.4 metres", "Screening clue"]
+    ]
+   }
+  },
+  {
+   "tx": "**Classification** groups disease into idiopathic, congenital heart disease, lung disease, thrombotic and multifactorial patterns for children. Pulmonary hypertension with congenital heart disease often reflects septal defects with pulmonary overcirculation and shear stress. Lung disease with hypoxia drives resistance through vasoconstriction and vascular remodelling over time.",
+   "say": "Classification groups disease into idiopathic, congenital heart disease, lung disease, thrombotic and multifactorial patterns. Hypertension with congenital heart disease often reflects septal defects with pulmonary overcirculation. Lung disease with hypoxia drives resistance through vasoconstriction and remodelling.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Precapillary", "points": ["Lungs resist flow", "Idiopathic group", "Defect related", "High resistance"]},
+    "right": {"title": "Postcapillary", "points": ["Left heart backs up", "Venous pressure high", "Mitral disease", "Treat left cause"]}
+   }
+  },
+  {
+   "tx": "**Eisenmenger syndrome** develops when chronic left to right shunt remodels pulmonary vessels beyond repair in childhood. Right to left shunting then causes cyanosis with polycythaemia and clubbing as defects reverse. Vasodilator challenge on catheterisation tests reversibility before defect closure is considered for surgery.",
+   "say": "Eisenmenger syndrome develops when chronic left to right shunt remodels pulmonary vessels beyond repair. Right to left shunting then causes cyanosis with polycythaemia and clubbing. Vasodilator challenge on catheterisation tests reversibility before defect closure is considered.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "e1", "label": "Shunt longstanding"}, {"id": "e2", "label": "Vessels remodel"}, {"id": "e3", "label": "Right to left shunt"}, {"id": "e4", "label": "Challenge testing"}, {"id": "e5", "label": "Closure decision"}],
+    "edges": [["e1", "e2"], ["e2", "e3"], ["e3", "e4"], ["e4", "e5"]]
+   }
+  },
+  {
+   "tx": "**Targeted therapy** uses prostacyclin analogues, endothelin blockers and phosphodiesterase inhibitors by severity and risk class. Sildenafil and bosentan provide oral options for moderate disease in children with stable haemodynamics. Intravenous prostacyclin suits severe disease with right ventricular failure and poor functional class needing hospital care.",
+   "say": "Targeted therapy uses prostacyclin analogues, endothelin blockers and phosphodiesterase inhibitors by severity. Sildenafil and bosentan provide oral options for moderate disease in children. Intravenous prostacyclin suits severe disease with right ventricular failure.",
+   "vis": {
+    "cols": ["Class", "Drug", "Route"],
+    "kind": "table",
+    "rows": [
+     ["Prostacyclin", "Iloprost or epoprostenol", "Inhaled or intravenous"],
+     ["Endothelin blocker", "Bosentan", "Oral daily"],
+     ["Phosphodiesterase", "Sildenafil", "Oral daily"]
+    ]
+   }
+  },
+  {
+   "tx": "**Bosentan hepatotoxicity** needs monthly liver monitoring with dose limits in most children receiving therapy. Sildenafil dosing adjusts by weight and avoids nitrate combinations that drop systemic pressure dangerously. Prostacyclin needs continuous infusion care because rebound and infection risks are real in long term use.",
+   "say": "Bosentan hepatotoxicity needs monthly liver monitoring with dose limits in most children. Sildenafil dosing adjusts by weight and avoids nitrate combinations that drop systemic pressure. Prostacyclin needs continuous infusion care because rebound and infection risks are real.",
+   "vis": {
+    "cols": ["Drug", "Monitoring", "Caution"],
+    "kind": "table",
+    "rows": [
+     ["Bosentan", "Liver tests monthly", "Dose ceiling"],
+     ["Sildenafil", "Pressure checks", "No nitrates"],
+     ["Prostacyclin", "Infusion watch", "Rebound on stop"]
+    ]
+   }
+  },
+  {
+   "tx": "**Heart failure** in infants causes tachypnoea, poor weight gain and hepatomegaly from volume overload and low output. Diuretics relieve congestion while digoxin improves contractility in systolic failure with reduced squeeze. Ventricular septal defect and coeliac disease can both present with similar failure patterns requiring echo.",
+   "say": "Heart failure in infants causes tachypnoea, poor weight gain and hepatomegaly from volume overload. Diuretics relieve congestion while digoxin improves contractility in systolic failure. Ventricular septal defect and coeliac disease can both present with similar failure patterns.",
+   "vis": {
+    "cols": ["Sign", "Cause", "Treatment"],
+    "kind": "table",
+    "rows": [
+     ["Hepatomegaly", "Venous congestion", "Diuretics"],
+     ["Poor feeding", "Low output", "Feeding support"],
+     ["Tachypnoea", "Pulmonary oedema", "Oxygen and diuretics"]
+    ]
+   }
+  },
+  {
+   "tx": "**Diuretic strategy** starts with furosemide for congestive symptoms, then adds afterload reduction once stable and euvolaemic. Captopril reduces systemic resistance in left to right shunts with failure and improves symptoms. Fluid and salt restriction complement drug therapy during decompensation with daily weights.",
+   "say": "Diuretic strategy starts with furosemide for congestive symptoms, then adds afterload reduction once stable. Captopril reduces systemic resistance in left to right shunts with failure. Fluid and salt restriction complement drug therapy during decompensation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "p1", "label": "Congestion signs"}, {"id": "p2", "label": "Furosemide start"}, {"id": "p3", "label": "Add captopril"}, {"id": "p4", "label": "Monitor kidneys"}, {"id": "p5", "label": "Correct lesion"}],
+    "edges": [["p1", "p2"], ["p2", "p3"], ["p3", "p4"], ["p4", "p5"]]
+   }
+  },
+  {
+   "tx": "**Right heart failure** from hypertension shows hepatomegaly, ascites and peripheral oedema with low output in children. Diuretic care must preserve cardiac output because overdiuresis collapses preload and worsens fatigue. Pulmonary vasodilators improve right ventricular afterload once congestion is controlled carefully.",
+   "say": "Right heart failure from hypertension shows hepatomegaly, ascites and peripheral oedema with low output. Diuretic care must preserve cardiac output because overdiuresis collapses preload. Pulmonary vasodilators improve right ventricular afterload once congestion is controlled.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Left failure", "points": ["Lung congestion", "Tachypnoea high", "Furosemide helps", "Afterload reduction"]},
+    "right": {"title": "Right failure", "points": ["Liver congestion", "Ascites present", "Preload sensitive", "Vasodilator added"]}
+   }
+  },
+  {
+   "tx": "**Prognosis** worsens with raised resistance, falling cardiac index and functional class deterioration over years. Six minute walk distance tracks response to targeted therapy in older children with regular testing. Eisenmenger physiology carries poor survival once cyanosis and polycythaemia dominate the clinical picture.",
+   "say": "Prognosis worsens with raised resistance, falling cardiac index and functional class deterioration. Six minute walk distance tracks response to targeted therapy in older children. Eisenmenger physiology carries poor survival once cyanosis and polycythaemia dominate.",
+   "vis": {
+    "cols": ["Marker", "Direction", "Meaning"],
+    "kind": "table",
+    "rows": [
+     ["Resistance", "Rising", "Worsening disease"],
+     ["Walk distance", "Falling", "Functional decline"],
+     ["Saturation", "Falling", "Eisenmenger closer"]
+    ]
+   }
+  },
+  {
+   "tx": "**Final table** locks pressure cutoff, resistance cutoff, catheter as gold standard, and drugs by class: sildenafil and bosentan orally, prostacyclin for severe disease, furosemide for congestion and captopril for afterload. Avoid nitrates with sildenafil and watch liver tests with bosentan.",
+   "say": "The final table locks pressure cutoff, resistance cutoff, catheter as gold standard, and drugs by class. Sildenafil and bosentan serve orally, prostacyclin suits severe disease, furosemide helps congestion and captopril reduces afterload. Avoid nitrates with sildenafil and watch liver tests with bosentan.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or drug"],
+    "kind": "table",
+    "rows": [
+     ["Hypertension", "Pressure cutoff", "20 mm mercury"],
+     ["Resistance", "Cutoff", "3 Wood units"],
+     ["Gold standard", "Test", "Catheterisation"],
+     ["Eisenmenger", "Shunt direction", "Right to left"],
+     ["Moderate disease", "Oral drugs", "Sildenafil or bosentan"],
+     ["Severe disease", "Infusion", "Prostacyclin"],
+     ["Failure", "Congestion drug", "Furosemide"],
+     ["Interaction", "Avoid with sildenafil", "Nitrates"]
+    ]
+   }
+  }
+ ]
+}

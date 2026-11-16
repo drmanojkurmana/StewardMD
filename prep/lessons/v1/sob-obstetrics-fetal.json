@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "sob-obstetrics-fetal",
+ "subject": "ss-obg",
+ "title": "Maternal fetal medicine: placenta, growth and fetal surveillance",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Williams Obstetrics 25e",
+  "ACOG Practice Bulletins on placenta accreta spectrum and fetal growth",
+  "SMFM Consult Series on fetal surveillance"
+ ],
+ "steps": [
+  {
+   "tx": "**Placenta accreta spectrum** (abnormal placental invasion) means villous tissue attaches directly to myometrium without decidual barrier. Antenatal diagnosis rests on ultrasound with lacunae, bridging vessels and loss of clear zone, often in women with prior caesarean section. Planned delivery by caesarean hysterectomy at a centre prevents catastrophic bleeding.",
+   "say": "Placenta accreta spectrum describes placenta that attaches directly to the uterine muscle because the decidual barrier is missing. Ultrasound shows lacunae and bridging vessels, and previous caesarean section is the strongest risk factor. Planned caesarean hysterectomy at an experienced centre prepares the team for major bleeding.",
+   "vis": {
+    "cols": ["Finding", "Meaning", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Prior caesarean plus anterior placenta", "High risk of accreta", "Tertiary centre referral"],
+     ["Lacunae and bridging vessels", "Deep invasion likely", "Planned caesarean hysterectomy"],
+     ["Bladder wall invasion", "Percreta pattern", "Multidisciplinary planning"]
+    ]
+   }
+  },
+  {
+   "tx": "**Fetal growth restriction** (FGR) means estimated weight below the tenth centile with evidence of placental dysfunction. Early severe disease often reflects abnormal uterine artery Doppler and impaired spiral artery remodelling. Surveillance combines serial biometry every three weeks with umbilical artery Doppler, since Doppler changes precede weight fall.",
+   "say": "Fetal growth restriction means the estimated weight falls below the tenth centile and the placenta is not supplying the fetus well. Early severe disease usually follows abnormal uterine artery flow from poor spiral artery remodelling. Serial biometry with umbilical artery Doppler detects trouble before the weight drops further.",
+   "vis": {
+    "cols": ["Feature", "Early onset", "Late onset"],
+    "kind": "table",
+    "rows": [
+     ["Onset", "Under 32 weeks often", "After 34 weeks often"],
+     ["Doppler", "Umbilical artery abnormal early", "Often normal"],
+     ["Course", "Tends to worsen quickly", "Often slower fall"]
+    ]
+   }
+  },
+  {
+   "tx": "**Umbilical artery Doppler** measures placental resistance, and absent or reversed end diastolic flow signals severe vascular compromise. Management balances delivery timing against prematurity: absent flow usually prompts delivery after steroids once 34 weeks passes, while reversed flow favours earlier delivery. Fetal heart tracings complement Doppler at each visit.",
+   "say": "Umbilical artery Doppler measures resistance in the placental vessels and absent or reversed end diastolic flow means severe compromise. The delivery plan must balance fetal lung maturity against a failing placenta. Steroids usually precede delivery once the late preterm weeks are reached, and reversed flow pushes delivery earlier.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "d1", "label": "Doppler normal"}, {"id": "d2", "label": "Absent flow"}, {"id": "d3", "label": "Reversed flow"}, {"id": "d4", "label": "Deliver by week"}, {"id": "d5", "label": "Continue surveillance"}],
+    "edges": [["d1", "d5"], ["d1", "d2"], ["d2", "d4"], ["d3", "d4"], ["d5", "d4"]]
+   }
+  },
+  {
+   "tx": "**Intrahepatic cholestasis of pregnancy** (ICP) presents with pruritus of palms and soles, often worse at night, plus raised serum bile acids. Fetal risk rises with bile acid levels, especially above 100 micromol per litre, so serial testing guides delivery near 37 weeks. Ursodeoxycholic acid improves itching, though fetal outcomes still depend on timely delivery.",
+   "say": "Intrahepatic cholestasis presents with intense itching of the palms and soles that often worsens at night, and serum bile acids confirm the diagnosis. Fetal risk climbs sharply when levels exceed 100 micromol per litre. Ursodeoxycholic acid relieves itching, but delivery near 37 weeks remains the main protection.",
+   "vis": {
+    "cols": ["Bile acids", "Label", "Delivery plan"],
+    "kind": "table",
+    "rows": [
+     ["10 to 40", "Mild disease", "Antenatal surveillance"],
+     ["40 to 100", "Moderate disease", "Consider delivery near 37 weeks"],
+     ["Above 100", "High fetal risk", "Deliver near 37 weeks"]
+    ]
+   }
+  },
+  {
+   "tx": "**Preeclampsia** after 20 weeks with proteinuria or end organ features arises from malplacentation and antiangiogenic imbalance. Severe features include platelets below 100 thousand, transaminases twice normal, creatinine above 1.1 or pulmonary oedema. Magnesium sulphate prevents eclampsia, while delivery remains the only cure once severe disease declares itself.",
+   "say": "Preeclampsia appears after 20 weeks with proteinuria or new organ dysfunction from an antiangiogenic placenta. Severe disease shows low platelets, raised liver enzymes, renal failure or pulmonary oedema. Magnesium sulphate prevents seizures, yet delivery is the only definitive treatment once severe features develop.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Without severe features", "points": ["Blood pressure raised", "Proteinuria present", "Weekly surveillance", "Deliver by 37 weeks"]},
+    "right": {"title": "With severe features", "points": ["Platelets low", "Liver enzymes raised", "Magnesium sulphate", "Deliver promptly"]}
+   }
+  },
+  {
+   "tx": "**Twin pregnancy** needs chorionicity assignment in the first trimester, since monochorionic twins share one placenta and need fortnightly growth scans. Twin to twin transfusion syndrome complicates about 10 percent of monochorionic pairs through unbalanced vascular anastomoses. Selective growth restriction and single fetal demise also cluster in monochorionic gestation.",
+   "say": "Twin pregnancy requires chorionicity to be decided in the first trimester because monochorionic twins share one placenta and face special risks. Twin to twin transfusion complicates about 10 percent of monochorionic pairs. These twins need fortnightly scans to catch selective growth restriction and discordant growth.",
+   "vis": {
+    "cols": ["Type", "Placenta", "Scans"],
+    "kind": "table",
+    "rows": [
+     ["Dichorionic", "Two placentas", "Every three to four weeks"],
+     ["Monochorionic", "One placenta", "Every two weeks"],
+     ["Triple", "Shared or separate", "Weekly from mid trimester"]
+    ]
+   }
+  },
+  {
+   "tx": "**Fetal anaemia** from parvovirus B19 or fetomaternal haemorrhage causes hydrops through high output failure and extramedullary haematopoiesis. Middle cerebral artery peak systolic velocity above 1.5 multiples of median predicts moderate anaemia and selects fetuses for cordocentesis. Intrauterine transfusion corrects haemoglobin until delivery becomes safer than repeat puncture.",
+   "say": "Fetal anaemia from parvovirus B19 or fetomaternal bleeding drives hydrops through high output cardiac failure. Middle cerebral artery peak systolic velocity above 1.5 multiples of the median predicts anaemia and triggers cordocentesis. Intrauterine transfusion can correct the anaemia until delivery takes over.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "a1", "label": "MCA velocity rises"}, {"id": "a2", "label": "Hydrops appears"}, {"id": "a3", "label": "Cordocentesis"}, {"id": "a4", "label": "Transfusion"}, {"id": "a5", "label": "Deliver"}],
+    "edges": [["a1", "a3"], ["a2", "a3"], ["a3", "a4"], ["a4", "a5"]]
+   }
+  },
+  {
+   "tx": "**Preterm labour** surveillance uses cervical length at 18 to 22 weeks, where length under 25 mm flags risk of early delivery. Progesterone supplementation and cervical cerclage suit different risk profiles and should not be combined casually. Antenatal steroids improve preterm lung maturity, while magnesium sulphate offers fetal neuroprotection before 32 weeks.",
+   "say": "Cervical length measured at 18 to 22 weeks predicts preterm birth when it falls below 25 millimetres. Progesterone helps some women and cerclage helps others, but combining them needs clear indication. Antenatal steroids mature fetal lungs, and magnesium sulphate protects the preterm brain before 32 weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Progesterone favours", "points": ["History of preterm birth", "Short cervix on scan", "Oral or vaginal route", "Start by mid gestation"]},
+    "right": {"title": "Cerclage favours", "points": ["Cervical insufficiency", "Painless dilatation", "Early second trimester", "Exclude labour and infection"]}
+   }
+  },
+  {
+   "tx": "**Amniotic fluid** disorders include oligohydramnios from placental failure or ruptured membranes, and polyhydramnios from fetal anomalies such as duodenal atresia. Post term assessment adds amniotic fluid index with non stress testing, since a reduced index raises caesarean rate for distress. Fluid assessment therefore steers both the delivery date and the intrapartum vigilance level.",
+   "say": "Amniotic fluid disorders include oligohydramnios from placental failure or ruptured membranes, and polyhydramnios from fetal anomalies such as duodenal atresia. Post term care depends on amniotic fluid index with non stress testing. Lower fluid levels raise the caesarean rate for fetal distress during labour.",
+   "vis": {
+    "cols": ["Fluid", "Common cause", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Reduced", "Placental failure", "Delivery planning"],
+     ["Excess", "Duodenal atresia", "Anomaly scan review"],
+     ["Post term reduced", "Failing placenta", "Induction decision"]
+    ]
+   }
+  },
+  {
+   "tx": "**Fetal surveillance** combines cardiotocography (CTG) with biophysical profile scoring to time delivery safely. A reactive trace with accelerations reassures, while recurrent late decelerations with reduced variability warn of acidosis. The last step collects exam favourites: accreta, growth restriction, cholestasis, preeclampsia, twins, anaemia, preterm risk, fluid disorders and surveillance thresholds.",
+   "say": "Cardiotocography with biophysical profile scoring times delivery by balancing fetal maturity against placental failure. Reactive traces reassure, while recurrent late decelerations warn of acidosis. The final table gathers the most asked thresholds for accreta, growth restriction, cholestasis, preeclampsia, twins, anaemia and preterm risk.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or test"],
+    "kind": "table",
+    "rows": [
+     ["Accreta", "Best risk marker", "Prior caesarean plus low placenta"],
+     ["Growth restriction", "Doppler predictor", "Absent or reversed flow"],
+     ["Cholestasis", "Delivery trigger", "Bile acids above 100"],
+     ["Preeclampsia", "Severe platelet cutoff", "100 thousand per microlitre"],
+     ["Twins", "Transfusion risk", "About 10 percent monochorionic"],
+     ["Anaemia", "Doppler trigger", "MCA above 1.5 multiples"],
+     ["Preterm risk", "Cervix cutoff", "Under 25 mm"],
+     ["Surveillance", "Reassuring trace", "Reactive CTG"]
+    ]
+   }
+  }
+ ]
+}

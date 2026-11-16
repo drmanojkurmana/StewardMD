@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "sob-labour-delivery",
+ "subject": "ss-obg",
+ "title": "Labour, delivery and puerperium: progress, haemorrhage and recovery",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Williams Obstetrics 25e",
+  "ACOG Practice Bulletins on labour management and postpartum haemorrhage",
+  "WHO recommendations on postpartum haemorrhage prevention"
+ ],
+ "steps": [
+  {
+   "tx": "**Partogram** plots cervical dilatation against time, with the alert line starting at 4 cm and the action line set 4 hours to the right. Crossing the action line prompts reassessment of contractions, membrane status and fetal position before augmentation. Prolonged labour raises infection and fistula risk, especially without timely escalation.",
+   "say": "The partogram plots cervical dilatation against time, with the alert line starting at 4 centimetres and the action line set four hours to the right. Crossing the action line means reassessing contractions and fetal position before augmentation. Prolonged labour without escalation increases infection and fistula risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "p1", "label": "Dilatation 4 cm"}, {"id": "p2", "label": "Plot alert line"}, {"id": "p3", "label": "Cross action line"}, {"id": "p4", "label": "Reassess and act"}, {"id": "p5", "label": "Deliver vaginally"}],
+    "edges": [["p1", "p2"], ["p2", "p3"], ["p3", "p4"], ["p4", "p5"]]
+   }
+  },
+  {
+   "tx": "**Active management of third stage** means prophylactic oxytocin 10 IU intramuscular with controlled cord traction, cutting postpartum haemorrhage substantially. Uterine massage complements drug prophylaxis but cannot replace it. Retained placenta beyond 30 minutes needs manual removal under anaesthesia with antibiotic cover.",
+   "say": "Active management of the third stage means prophylactic oxytocin with controlled cord traction, and it cuts postpartum haemorrhage substantially. Uterine massage helps but cannot replace the drug. A retained placenta beyond 30 minutes needs manual removal under anaesthesia with antibiotic cover.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Active management", "points": ["Oxytocin at delivery", "Controlled cord traction", "Less bleeding", "Shorter third stage"]},
+    "right": {"title": "Expectant care", "points": ["Spontaneous placental birth", "More bleeding", "Longer waiting", "Avoided unless chosen"]}
+   }
+  },
+  {
+   "tx": "**Postpartum haemorrhage** is blood loss of 500 ml or more after vaginal birth, or 1000 ml after caesarean section, and usually comes from uterine atony. First line treatment is oxytocin infusion plus uterine massage, followed by methylergometrine and carboprost where contraindications allow. Tranexamic acid within 3 hours reduces death from bleeding.",
+   "say": "Postpartum haemorrhage means blood loss of 500 millilitres or more after vaginal birth, and most cases arise from uterine atony. Oxytocin infusion with massage is the first line, followed by ergometrine and carboprost where safe. Tranexamic acid given within three hours reduces death from bleeding.",
+   "vis": {
+    "cols": ["Step", "Action", "Reason"],
+    "kind": "table",
+    "rows": [
+     ["Massage", "Contract the uterus", "Stop atony bleeding"],
+     ["Oxytocin", "Infusion first line", "Sustained contraction"],
+     ["Second agents", "Ergometrine or carboprost", "Refractory atony"],
+     ["Surgery", "Conservative then hysterectomy", "Life saving control"]
+    ]
+   }
+  },
+  {
+   "tx": "**Shoulder dystocia** is impaction of anterior shoulder behind pubic symphysis after head delivery, signalled by turtle sign. McRoberts manoeuvre with suprapubic pressure resolves most cases without fetal clavicle fracture. Fetal risks include brachial plexus injury, while maternal risks include uterine rupture and postpartum haemorrhage.",
+   "say": "Shoulder dystocia is impaction of the anterior shoulder behind the pubic symphysis after the head delivers, signalled by the turtle sign. McRoberts manoeuvre with suprapubic pressure resolves most cases safely. Fetal plexus injury and maternal rupture are the feared complications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "s1", "label": "Head delivered"}, {"id": "s2", "label": "Turtle sign"}, {"id": "s3", "label": "McRoberts pressure"}, {"id": "s4", "label": "Internal manoeuvres"}, {"id": "s5", "label": "Clavicle fracture"}],
+    "edges": [["s1", "s2"], ["s2", "s3"], ["s3", "s4"], ["s4", "s5"]]
+   }
+  },
+  {
+   "tx": "**Obstructed labour** shows maternal exhaustion, Bandl ring formation and fetal distress when pelvis and fetus mismatch in active labour. Partogram delay with failed progress despite oxytocin suggests disproportion needing caesarean delivery for safety. Prolonged impaction risks vesicovaginal fistula, uterine rupture and neonatal asphyxia without timely operation.",
+   "say": "Obstructed labour shows maternal exhaustion, a Bandl ring and fetal distress when the pelvis and fetus mismatch. Partogram delay with failed progress despite oxytocin points to disproportion. Prolonged impaction risks vesicovaginal fistula, uterine rupture and neonatal asphyxia.",
+   "vis": {
+    "cols": ["Sign", "Meaning", "Decision"],
+    "kind": "table",
+    "rows": [
+     ["Bandl ring", "Lower segment stretch", "Caesarean delivery"],
+     ["Moulding and caput", "Head impaction", "Stop oxytocin"],
+     ["Fetal distress", "Asphyxia developing", "Urgent delivery"]
+    ]
+   }
+  },
+  {
+   "tx": "**Breech delivery** in term pregnancy is safest by planned caesarean section, since vaginal breech birth raises perinatal mortality. External cephalic version at 37 weeks reduces breech presentation when no contraindication exists. Footling breech with cord prolapse needs especially prompt delivery planning.",
+   "say": "Term breech presentation is safest by planned caesarean delivery because vaginal breech birth carries higher perinatal mortality. External cephalic version at 37 weeks reduces breech presentation when contraindications are absent. Footling breech with cord prolapse needs very prompt delivery planning.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Planned caesarean", "points": ["Safer for term breech", "Avoids head entrapment", "Needs timely scheduling", "Reduces cord prolapse risk"]},
+    "right": {"title": "Version first", "points": ["Attempt at 37 weeks", "Reduces breech rate", "Needs tocolysis ready", "Check after success"]}
+   }
+  },
+  {
+   "tx": "**Preterm and postterm** pathways diverge: preterm labour receives steroids and magnesium neuroprotection, while pregnancy beyond 42 weeks needs surveillance for placental failure and macrosomia. Induction at 41 weeks balances stillbirth risk against intervention harm. Fetal heart monitoring and fluid assessment guide the exact delivery day.",
+   "say": "Preterm labour receives steroids and magnesium neuroprotection, while pregnancy beyond 42 weeks needs surveillance for placental failure and macrosomia. Induction at 41 weeks balances stillbirth risk against the harm of intervention. Fetal monitoring and fluid assessment guide the exact delivery day.",
+   "vis": {
+    "cols": ["Timing", "Risk", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Preterm", "Prematurity", "Steroids and magnesium"],
+     ["41 weeks", "Stillbirth rise", "Consider induction"],
+     ["Beyond 42 weeks", "Failure and macrosomia", "Deliver with monitoring"]
+    ]
+   }
+  },
+  {
+   "tx": "**Puerperal sepsis** presents with fever above 38 C, foul lochia and uterine tenderness in the first days after birth. Group A streptococcus can cause rapid collapse even without dramatic local signs. Urgent broad spectrum antibiotics with fluids and source control save mothers from septic shock.",
+   "say": "Puerperal sepsis presents with fever, foul lochia and uterine tenderness in the days after birth. Group A streptococcus can cause rapid collapse without dramatic local signs. Urgent broad spectrum antibiotics with fluids and source control prevent septic shock.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "e1", "label": "Fever and foul lochia"}, {"id": "e2", "label": "Cultures taken"}, {"id": "e3", "label": "Antibiotics started"}, {"id": "e4", "label": "Scan for abscess"}, {"id": "e5", "label": "Drain collection"}],
+    "edges": [["e1", "e2"], ["e2", "e3"], ["e3", "e4"], ["e4", "e5"]]
+   }
+  },
+  {
+   "tx": "**Venous thromboembolism** peaks in the puerperium because pregnancy and caesarean delivery both raise clotting risk. Prophylactic heparin suits high risk women such as those with prior venous thrombosis or severe preeclampsia. Therapeutic heparin remains first line for established thrombosis throughout the recovery period.",
+   "say": "Venous thromboembolism peaks in the puerperium because pregnancy and caesarean delivery both raise clotting risk. Prophylactic heparin suits high risk women with prior thrombosis or severe disease. Therapeutic heparin stays first line for established thrombosis during recovery.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Prophylaxis", "points": ["Prior thrombosis", "Severe preeclampsia", "Caesarean plus obesity", "Short course heparin"]},
+    "right": {"title": "Treatment", "points": ["Confirmed thrombosis", "Weight based heparin", "Continue weeks", "Avoid warfarin early"]}
+   }
+  },
+  {
+   "tx": "**Recovery after delivery** includes uterine involution, lochia patterns and lactation success, all distorted by infection or retained products. Eclampsia and HELLP syndrome can appear after birth, so blood pressure checks continue into the puerperium. Final review pairs exam favourites: partogram lines, third stage drugs, haemorrhage timing, dystocia manoeuvres, breech plan, sepsis organism and clot prophylaxis.",
+   "say": "Recovery after delivery includes uterine involution, lochia patterns and lactation success, all disturbed by infection or retained products. Eclampsia and HELLP syndrome can appear after birth, so blood pressure checks continue. The final table gathers the most asked numbers for labour and puerperium care.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or drug"],
+    "kind": "table",
+    "rows": [
+     ["Partogram", "Action line offset", "4 hours after alert"],
+     ["Third stage", "Prophylaxis", "Oxytocin 10 IU"],
+     ["Haemorrhage", "Tranexamic window", "Within 3 hours"],
+     ["Dystocia", "First manoeuvre", "McRoberts pressure"],
+     ["Breech", "Planned delivery", "Caesarean safest"],
+     ["Sepsis", "Danger organism", "Group A streptococcus"],
+     ["Clot risk", "Prophylaxis drug", "Heparin"],
+     ["Retention", "Placenta limit", "30 minutes"]
+    ]
+   }
+  }
+ ]
+}

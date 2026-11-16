@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "spu-resp-failure",
+ "subject": "ss-pulmonology",
+ "title": "Respiratory failure types, oxygen targets and non-invasive ventilation rules",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e critical care volumes", "BTS NICE NIV guidance and ATS acute respiratory failure statements"],
+ "steps": [
+  {
+   "tx": "Acute **respiratory failure** (gas exchange failure) splits into hypoxaemic **type 1** with low oxygen only, hypercapnic **type 2** with raised CO2, and mixed **type 3** with diaphragmatic weakness. **Arterial blood gas** (ABG) patterns, not the ventilator settings, define the type. Type 2 failure responds fastest to non invasive ventilation.",
+   "say": "Respiratory failure splits into type one hypoxaemic failure with low oxygen only, type two hypercapnic failure with raised CO2 and type three with diaphragmatic weakness. Arterial blood gas patterns classify the type, not the ventilator settings. Type two failure improves fastest with non invasive ventilation.",
+   "vis": {"kind": "table", "cols": ["Type", "Oxygen", "CO2", "Driver"], "rows": [["Type 1", "Low", "Normal or low", "Shunt, pneumonia, PE"], ["Type 2", "Low or normal", "High", "COPD, obesity hypoventilation"], ["Type 3", "Low", "Variable", "Muscle weakness, paralysis"]]}
+  },
+  {
+   "tx": "**Oxygen** is a drug and uncontrolled delivery worsens hypercapnia by abolishing hypoxic vasoconstriction and raising dead space. Target saturation sits at **eighty eight** to **ninety two** percent in patients at risk of retention, versus **ninety four** to **ninety eight** percent in hypoxaemia only. Mask flow and venturi devices control the dose precisely.",
+   "say": "Oxygen is a drug and uncontrolled delivery worsens hypercapnia by abolishing hypoxic vasoconstriction and raising dead space. Target saturation sits at eighty eight to ninety two percent in patients at risk of retention, versus ninety four to ninety eight in hypoxaemia only. Venturi masks control the dose precisely.",
+   "vis": {"kind": "compare", "left": {"title": "Hypercapnia risk", "points": ["Target eighty eight to ninety two percent", "Venturi twenty eight percent start", "Blood gas at thirty to sixty minutes"]}, "right": {"title": "Hypoxaemia only", "points": ["Target ninety four to ninety eight percent", "Any device to reach target", "Still repeat blood gas"]}}
+  },
+  {
+   "tx": "**Non invasive ventilation** (NIV, mask pressure support without intubation) rests the respiratory muscles and unloads hypercapnia in **COPD exacerbation**. Indications include persistent CO2 over **forty five** mmHg with **pH** under **seven point three five** after one hour of medical therapy. Failure to improve in **one** to **two** hours warns of intubation need.",
+   "say": "Non invasive ventilation rests the respiratory muscles and unloads hypercapnia in COPD exacerbation. Indications include persistent CO2 over forty five with pH under seven point three five after medical therapy. Failure to improve within one to two hours warns that intubation is coming.",
+   "vis": {"kind": "flow", "nodes": [{"id": "copd", "label": "COPD exacerbation with acidosis"}, {"id": "meds", "label": "Nebulisers, steroids"}, {"id": "niv", "label": "NIV if pH low"}, {"id": "review", "label": "Blood gas in one to two hours"}], "edges": [["copd", "meds"], ["meds", "niv"], ["niv", "review"]]}
+  },
+  {
+   "tx": "NIV settings use **pressure support** (PS) above **expiratory positive airway pressure** (EPAP), commonly PS **ten** to **twenty** cm water with EPAP **five** cm water. Rising **inspiratory pressure** clears CO2 while EPAP splints airways in sleep apnoea overlap. Backup rate above **twelve** breaths per minute guards central apnoea during sleep.",
+   "say": "Non invasive ventilation settings pair pressure support above expiratory pressure, commonly support ten to twenty with expiratory five. Rising inspiratory pressure clears CO2 while expiratory pressure splints airways in sleep apnoea overlap. A backup rate above twelve prevents central apnoea in sleep.",
+   "vis": {"kind": "table", "cols": ["Setting", "Typical start", "Job"], "rows": [["Pressure support", "Ten to twenty cm water", "Ventilate, clear CO2"], ["EPAP", "Five cm water", "Prevent airway collapse"], ["Backup rate", "Over twelve per minute", "Cover central apnoeas"]]}
+  },
+  {
+   "tx": "**High flow nasal cannula** (HFNC, heated humidified high flow oxygen) washes out dead space and gives modest positive pressure. It helps hypoxaemic failure in pneumonia and acute coronary syndrome. Flow of **forty** to **sixty** litres per minute with inspired fraction titrated to saturation is the usual prescription.",
+   "say": "High flow nasal cannula washes out dead space and gives modest positive pressure. High flow therapy helps hypoxaemic failure in pneumonia and coronary syndrome. Flow of forty to sixty litres per minute with inspired fraction titrated to saturation is the usual prescription.",
+   "vis": {"kind": "table", "cols": ["Feature", "High flow", "NIV"], "rows": [["Main use", "Hypoxaemic failure", "Hypercapnic failure"], ["Flow", "Forty to sixty litres per minute", "Pressure based"], ["Pressure", "Small positive end pressure effect", "Substantial support"]]}
+  },
+  {
+   "tx": "**Acute respiratory distress syndrome** (ARDS, diffuse alveolar damage) meets Berlin criteria with **PaO2** over **FiO2** ratio under **three hundred** and bilateral infiltrates. **Lung protective ventilation** uses tidal volumes of **six** millilitres per kilogram predicted body weight. **Prone positioning** cuts mortality in severe disease with ratio under **one hundred fifty**.",
+   "say": "Acute respiratory distress syndrome meets Berlin criteria with rising ratio bilateral infiltrates. Lung protective ventilation uses tidal volumes of six millilitres per kilogram predicted body weight. Prone positioning cuts mortality in severe disease with the ratio under one hundred fifty.",
+   "vis": {"kind": "table", "cols": ["Severity", "PaO2 over FiO2", "PEEP strategy"], "rows": [["Mild", "Two hundred to three hundred", "Moderate PEEP"], ["Moderate", "One hundred to two hundred", "Higher PEEP ladder"], ["Severe", "Under one hundred", "Recruitment, prone"]]}
+  },
+  {
+   "tx": "**Acidosis** depletes respiratory compensation and **pH** under **seven point two five** signals failing ventilation in most settings. **Chronic compensation** raises bicarbonate and blunts symptoms, so acute on chronic cases swing quickly. **Bicarbonate** therapy never treats ventilation failure itself and narcotic removal or its antidote may reverse opioid driven hypoventilation.",
+   "say": "Acidosis depletes respiratory compensation and pH under seven point two five signals failing ventilation. Chronic compensation raises bicarbonate and blunts symptoms, so acute on chronic cases swing quickly. Bicarbonate therapy never treats ventilation failure itself and the antidote may reverse opioid driven hypoventilation.",
+   "vis": {"kind": "flow", "nodes": [{"id": "abg", "label": "Blood gas shows low pH"}, {"id": "cause", "label": "Find airway, drug, muscle cause"}, {"id": "vent", "label": "NIV or intubation"}, {"id": "recheck", "label": "Repeat blood gas hourly"}], "edges": [["abg", "cause"], ["cause", "vent"], ["vent", "recheck"]]}
+  },
+  {
+   "tx": "**Intubation** indications include failing NIV, inability to protect the airway, severe acidemia, shock and copious secretions. Non invasive trials must not delay intubation in pneumonia with frailty or altered consciousness. **Extubation** needs CO2 stable, pH normalised and a successful spontaneous breathing trial.",
+   "say": "Intubation indications include failing non invasive ventilation, inability to protect the airway, severe acidemia, shock and copious secretions. Non invasive trials must not delay intubation in pneumonia with frailty or altered consciousness. Extubation needs stable CO2, normalised pH and a successful breathing trial.",
+   "vis": {"kind": "table", "cols": ["Sign", "Decision", "Reason"], "rows": [["Failing NIV", "Intubate", "Deterioration accelerates"], ["Unprotected airway", "Intubate", "Aspiration risk"], ["Frail pneumonia", "Early intubation", "NIV delays rescue"]]}
+  },
+  {
+   "tx": "**Pulmonary embolism** (PE, clot in pulmonary arteries) causes type 1 failure through dead space and shunt. **Thrombolysis** suits shock or arrest, while anticoagulation covers stable disease. **Extracorporeal support** (ECMO, membrane oxygenation) bridges refractory hypoxaemia in selected centres with severe ratios.",
+   "say": "Pulmonary embolism causes type one failure through dead space and shunt. Thrombolysis is used for shock or arrest while anticoagulation covers stable disease. Extracorporeal membrane oxygenation bridges refractory hypoxaemia in selected centres with severe ratios.",
+   "vis": {"kind": "flow", "nodes": [{"id": "pe", "label": "PE with hypoxaemia"}, {"id": "shock", "label": "Shock present"}, {"id": "lysis", "label": "Thrombolyse"}, {"id": "bridge", "label": "Membrane oxygenation bridge in centre"}], "edges": [["pe", "shock"], ["shock", "lysis"], ["lysis", "bridge"]]}
+  },
+  {
+   "tx": "High yield for the exam: **NIV** suits COPD exacerbation with pH under seven point three five and CO2 over forty five, oxygen targets run eighty eight to ninety two percent when retention is at risk, ARDS volumes stay at six millilitres per kilogram, prone positioning helps severe **ARDS** under one hundred fifty ratio, opioid hypoventilation reverses with its antidote, and failing NIV must not delay intubation.",
+   "say": "Non invasive ventilation suits COPD exacerbation with pH under seven point three five and CO2 over forty five, oxygen targets run eighty eight to ninety two percent when retention is at risk, lung volumes stay at six millilitres per kilogram, prone positioning helps severe acute respiratory distress syndrome, opioid hypoventilation reverses with its antidote, and failing non invasive ventilation must not delay intubation.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["NIV trigger", "pH under seven point three five, CO2 over forty five"], ["Oxygen target", "Eighty eight to ninety two percent if retention risk"], ["ARDS volume", "Six millilitres per kilogram predicted weight"], ["Prone", "Severe, ratio under one hundred fifty"], ["Reversal", "Antidote for opioid drive failure"], ["High flow", "Forty to sixty litres per minute"], ["NIV settings", "Support ten to twenty, expiratory five"], ["Membrane oxygenation", "Refractory hypoxaemia bridge"]] }
+  }
+ ]
+}
