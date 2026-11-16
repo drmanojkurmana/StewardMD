@@ -1,213 +1,254 @@
 {
- "v": 1,
- "module": "spl-reconstructive",
- "subject": "ss-plastic-surgery",
- "title": "Principles of Flap Physiology and Classifications",
- "minutes": 8,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "The **reconstructive ladder** orders wound closure from the simplest method toward the most complex transfer. The surgeon starts with **primary closure** or healing by secondary intention and proceeds through skin grafts and local flaps. Regional flaps and **free tissue transfer** occupy the highest rungs. Modern practice often uses the reconstructive elevator and selects the best method directly.",
-   "say": "Every wound follows the same reconstructive ladder toward closure. The ladder starts with primary closure or secondary intention healing. Skin grafts follow before local and regional flaps appear. Free tissue transfer is the highest rung on the ladder. Modern surgeons take the elevator toward the best method directly.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Primary closure or healing by secondary intention"
-     },
-     {
-      "id": "b",
-      "label": "Skin graft: split or full thickness"
-     },
-     {
-      "id": "c",
-      "label": "Local and regional flap transposition"
-     },
-     {
-      "id": "d",
-      "label": "Microvascular free tissue transfer"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A **random pattern flap** lives entirely from the **dermal and subdermal plexus** without any named feeding vessel. Perfusion pressure falls across this fine network as distance from the base increases. A trunk flap therefore rarely exceeds a **length to width ratio** of two to one safely. A longer random flap risks necrosis of its tip.",
-   "say": "A random pattern flap has no named artery at all. The flap depends entirely on the fine subdermal plexus. Pressure fades as blood crosses that delicate network. Trunk flaps rarely exceed twice their width safely. A longer design causes necrosis of the tip.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/surg-prc-split-thickness-skin-grafting.webp",
-    "alt": "Split thickness skin grafting and dermal vascular plexus bed",
-    "caption": "Cutaneous vascular plexus and dermal perfusion in skin resurfacing. Credit: StewardMD.",
-    "ar": 1.33
-   }
-  },
-  {
-   "tx": "An **axial pattern flap** carries a named **arteriovenous vessel** that runs along the longitudinal axis of the flap. This dedicated vessel maintains high perfusion pressure toward the tip. The surgeon can therefore harvest a much longer flap without obeying fixed length to width ratios. Reliable venous return along the axis further protects the transferred tissue.",
-   "say": "An axial flap carries its own named artery along its length. Pressure remains high toward the tip throughout transfer. The surgeon takes a far longer flap safely afterward. The design ignores the ratio rule governing random flaps. Reliable venous return further protects transferred tissue.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Random Pattern Flap",
-     "points": [
-      "Subdermal plexus dependent",
-      "No named feeding pedicle",
-      "Ratio restricted to 2:1 on trunk"
-     ]
+  "v": 1,
+  "module": "spl-reconstructive",
+  "subject": "ss-plastic-surgery",
+  "title": "Principles of Flap Physiology and Classifications",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **reconstructive ladder** orders wound closure from the simplest method toward the most complex transfer. The surgeon starts with **primary closure** or healing by secondary intention and proceeds through skin grafts and local flaps. Regional flaps and **free tissue transfer** occupy the highest rungs. Modern practice often uses the reconstructive elevator and selects the best method directly.",
+      "say": "Every wound follows the same reconstructive ladder toward closure. The ladder starts with primary closure or secondary intention healing. Skin grafts follow before local and regional flaps appear. Free tissue transfer is the highest rung on the ladder. Modern surgeons take the elevator toward the best method directly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Primary closure or healing by secondary intention"
+          },
+          {
+            "id": "b",
+            "label": "Skin graft: split or full thickness"
+          },
+          {
+            "id": "c",
+            "label": "Local and regional flap transposition"
+          },
+          {
+            "id": "d",
+            "label": "Microvascular free tissue transfer"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Axial Pattern Flap",
-     "points": [
-      "Dedicated axial arteriovenous axis",
-      "Named vascular pedicle",
-      "Independent of fixed ratios"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The **Mathes and Nahai classification** groups muscle flaps into five patterns according to their vascular pedicles. A **Type I flap** receives one single pedicle, as in the tensor fasciae latae supplied by the lateral circumflex femoral system. The gastrocnemius supplied by the sural system shows the same single pedicle pattern. The pedicle pattern predicts which muscle survives elevation safely.",
-   "say": "Mathes and Nahai sorted muscle flaps by blood supply into five types. Type one muscles have a single pedicle alone. Tensor fasciae latae and gastrocnemius present this pattern clearly. The pedicle pattern is the main predictor of survival after elevation. Surgeons choose the harvest plan from this classification.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Classification",
-     "Pedicle Pattern",
-     "Representative Muscles"
-    ],
-    "rows": [
-     [
-      "Type I",
-      "Single vascular pedicle",
-      "Tensor fasciae latae, gastrocnemius"
-     ],
-     [
-      "Type II",
-      "Dominant pedicle plus minor pedicles",
-      "Gracilis, trapezius, soleus"
-     ],
-     [
-      "Type III",
-      "Two dominant vascular pedicles",
-      "Gluteus maximus, rectus abdominis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A **Type II muscle** has one dominant pedicle together with minor pedicles that the surgeon may divide during elevation. Gracilis, trapezius, and soleus illustrate this pattern in the table and image. A **Type III muscle** instead carries two dominant pedicles of similar calibre. Gluteus maximus and rectus abdominis survive on either dominant pedicle alone.",
-   "say": "Type two muscles carry one dominant pedicle plus minor pedicles. The surgeon divides the minor pedicles during elevation safely. Gracilis, trapezius, and soleus present this pattern clearly. Type three muscles carry two equal dominant pedicles instead. Rectus abdominis remains viable on either pedicle alone.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/surg-prc-full-thickness-skin-grafting.webp",
-    "alt": "Surgical soft tissue harvest and vascularised flap transfer",
-    "caption": "Reconstructive tissue transfer and recipient bed preparation. Credit: StewardMD.",
-    "ar": 1.33
-   }
-  },
-  {
-   "tx": "A **Type IV muscle** receives only segmental pedicles along its length, without any dominant vessel, as in sartorius and tibialis anterior. Dividing more than two segmental branches compromises perfusion of the muscle. A **Type V muscle** combines one dominant pedicle with secondary segmental pedicles. Latissimus dorsi and pectoralis major represent this favourable pattern.",
-   "say": "Type four muscles have only segmental pedicles along their length. Sartorius and tibialis anterior present this vulnerable pattern clearly. Dividing more than two segmental branches compromises perfusion seriously. Type five muscles have one dominant pedicle with segmental helpers. Latissimus dorsi is the best example of this favourable pattern.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Type",
-     "Vascular Pattern",
-     "Clinical Muscle Examples"
-    ],
-    "rows": [
-     [
-      "Type IV",
-      "Segmental pedicles only",
-      "Sartorius, tibialis anterior"
-     ],
-     [
-      "Type V",
-      "One dominant plus segmental pedicles",
-      "Latissimus dorsi, pectoralis major"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **surgical delay phenomenon** trains a flap to survive beyond its usual safe length before transfer. The surgeon makes partial incisions and leaves the flap in place for **ten to fourteen days**. Ischaemic stress during this interval permanently dilates the **choke vessels** between adjacent angiosomes. Definitive transfer then carries perfusion further than an untrained flap allows.",
-   "say": "Delay training increases flap survival before definitive transfer begins. The surgeon incises borders and leaves tissue in place temporarily. Ischaemic stress dilates choke vessels between adjacent territories permanently. Ten to fourteen days of training stretch the safe length. Definitive transfer then extends further than an untrained flap.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Initial surgical delay incision"
-     },
-     {
-      "id": "b",
-      "label": "Transient ischaemic stress and choke vessel dilation"
-     },
-     {
-      "id": "c",
-      "label": "Definitive flap transfer at 10 to 14 days"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Flap monitoring watches colour, capillary refill, turgor, and pinprick bleeding after inset. **Venous thrombosis** produces dusky cyanotic congestion with swelling of the flap. Capillary refill becomes brisk at under one second and pinprick yields rapid dark blood. This picture demands **immediate re exploration** because venous occlusion kills the flap quickly.",
-   "say": "The team watches flap colour, refill, turgor, and pinprick bleeding closely. Venous thrombosis makes the flap dusky and swollen quickly. Refill becomes brisk and pinprick gives dark rapid blood. This picture needs immediate return to theatre urgently. Delay loses the flap within hours afterward.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Arterial Occlusion",
-     "points": [
-      "Pallor and cool temperature",
-      "Delayed capillary refill over 2 seconds",
-      "Absence of bleeding on pinprick"
-     ]
+    {
+      "tx": "A **random pattern flap** lives entirely from the **dermal and subdermal plexus** without any named feeding vessel. Perfusion pressure falls across this fine network as distance from the base increases. A trunk flap therefore rarely exceeds a **length to width ratio** of two to one safely. A longer random flap risks necrosis of its tip.",
+      "say": "A random pattern flap has no named artery at all. The flap depends entirely on the fine subdermal plexus. Pressure fades as blood crosses that delicate network. Trunk flaps rarely exceed twice their width safely. A longer design causes necrosis of the tip.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-split-thickness-skin-grafting.webp",
+        "alt": "Split thickness skin grafting and dermal vascular plexus bed",
+        "caption": "Cutaneous vascular plexus and dermal perfusion in skin resurfacing. Credit: StewardMD.",
+        "ar": 1.33
+      }
     },
-    "right": {
-     "title": "Venous Occlusion",
-     "points": [
-      "Bluish purple congestion",
-      "Brisk capillary refill under 1 second",
-      "Rapid dark purple pinprick bleeding"
-     ]
+    {
+      "tx": "An **axial pattern flap** carries a named **arteriovenous vessel** that runs along the longitudinal axis of the flap. This dedicated vessel maintains high perfusion pressure toward the tip. The surgeon can therefore harvest a much longer flap without obeying fixed length to width ratios. Reliable venous return along the axis further protects the transferred tissue.",
+      "say": "An axial flap carries its own named artery along its length. Pressure remains high toward the tip throughout transfer. The surgeon takes a far longer flap safely afterward. The design ignores the ratio rule governing random flaps. Reliable venous return further protects transferred tissue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Random Pattern Flap",
+          "points": [
+            "Subdermal plexus dependent",
+            "No named feeding pedicle",
+            "Ratio restricted to 2:1 on trunk"
+          ]
+        },
+        "right": {
+          "title": "Axial Pattern Flap",
+          "points": [
+            "Dedicated axial arteriovenous axis",
+            "Named vascular pedicle",
+            "Independent of fixed ratios"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Mathes and Nahai classification** groups muscle flaps into five patterns according to their vascular pedicles. A **Type I flap** receives one single pedicle, as in the tensor fasciae latae supplied by the lateral circumflex femoral system. The gastrocnemius supplied by the sural system shows the same single pedicle pattern. The pedicle pattern predicts which muscle survives elevation safely.",
+      "say": "Mathes and Nahai sorted muscle flaps by blood supply into five types. Type one muscles have a single pedicle alone. Tensor fasciae latae and gastrocnemius present this pattern clearly. The pedicle pattern is the main predictor of survival after elevation. Surgeons choose the harvest plan from this classification.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification",
+          "Pedicle Pattern",
+          "Representative Muscles"
+        ],
+        "rows": [
+          [
+            "Type I",
+            "Single vascular pedicle",
+            "Tensor fasciae latae, gastrocnemius"
+          ],
+          [
+            "Type II",
+            "Dominant pedicle plus minor pedicles",
+            "Gracilis, trapezius, soleus"
+          ],
+          [
+            "Type III",
+            "Two dominant vascular pedicles",
+            "Gluteus maximus, rectus abdominis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A **Type II muscle** has one dominant pedicle together with minor pedicles that the surgeon may divide during elevation. Gracilis, trapezius, and soleus illustrate this pattern in the table and image. A **Type III muscle** instead carries two dominant pedicles of similar calibre. Gluteus maximus and rectus abdominis survive on either dominant pedicle alone.",
+      "say": "Type two muscles carry one dominant pedicle plus minor pedicles. The surgeon divides the minor pedicles during elevation safely. Gracilis, trapezius, and soleus present this pattern clearly. Type three muscles carry two equal dominant pedicles instead. Rectus abdominis remains viable on either pedicle alone.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-full-thickness-skin-grafting.webp",
+        "alt": "Surgical soft tissue harvest and vascularised flap transfer",
+        "caption": "Reconstructive tissue transfer and recipient bed preparation. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "A **Type IV muscle** receives only segmental pedicles along its length, without any dominant vessel, as in sartorius and tibialis anterior. Dividing more than two segmental branches compromises perfusion of the muscle. A **Type V muscle** combines one dominant pedicle with secondary segmental pedicles. Latissimus dorsi and pectoralis major represent this favourable pattern.",
+      "say": "Type four muscles have only segmental pedicles along their length. Sartorius and tibialis anterior present this vulnerable pattern clearly. Dividing more than two segmental branches compromises perfusion seriously. Type five muscles have one dominant pedicle with segmental helpers. Latissimus dorsi is the best example of this favourable pattern.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Vascular Pattern",
+          "Clinical Muscle Examples"
+        ],
+        "rows": [
+          [
+            "Type IV",
+            "Segmental pedicles only",
+            "Sartorius, tibialis anterior"
+          ],
+          [
+            "Type V",
+            "One dominant plus segmental pedicles",
+            "Latissimus dorsi, pectoralis major"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **surgical delay phenomenon** trains a flap to survive beyond its usual safe length before transfer. The surgeon makes partial incisions and leaves the flap in place for **ten to fourteen days**. Ischaemic stress during this interval permanently dilates the **choke vessels** between adjacent angiosomes. Definitive transfer then carries perfusion further than an untrained flap allows.",
+      "say": "Delay training increases flap survival before definitive transfer begins. The surgeon incises borders and leaves tissue in place temporarily. Ischaemic stress dilates choke vessels between adjacent territories permanently. Ten to fourteen days of training stretch the safe length. Definitive transfer then extends further than an untrained flap.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initial surgical delay incision"
+          },
+          {
+            "id": "b",
+            "label": "Transient ischaemic stress and choke vessel dilation"
+          },
+          {
+            "id": "c",
+            "label": "Definitive flap transfer at 10 to 14 days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Flap monitoring watches colour, capillary refill, turgor, and pinprick bleeding after inset. **Venous thrombosis** produces dusky cyanotic congestion with swelling of the flap. Capillary refill becomes brisk at under one second and pinprick yields rapid dark blood. This picture demands **immediate re exploration** because venous occlusion kills the flap quickly.",
+      "say": "The team watches flap colour, refill, turgor, and pinprick bleeding closely. Venous thrombosis makes the flap dusky and swollen quickly. Refill becomes brisk and pinprick gives dark rapid blood. This picture needs immediate return to theatre urgently. Delay loses the flap within hours afterward.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Arterial Occlusion",
+          "points": [
+            "Pallor and cool temperature",
+            "Delayed capillary refill over 2 seconds",
+            "Absence of bleeding on pinprick"
+          ]
+        },
+        "right": {
+          "title": "Venous Occlusion",
+          "points": [
+            "Bluish purple congestion",
+            "Brisk capillary refill under 1 second",
+            "Rapid dark purple pinprick bleeding"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "This operative view shows a **free flap** joined to recipient vessels through fine **microvascular anastomoses** while the perforator spares the underlying muscle. The flap survives only while arterial inflow and venous outflow remain patent after transfer. A **Doppler probe** checks the pedicle hourly during early monitoring. Early detection of thrombosis allows salvage before irreversible ischaemia destroys the flap.",
+      "say": "This operative view shows a free flap joined through microvascular anastomoses. The perforator design spares the underlying muscle during harvest. The flap survives only while inflow and outflow remain patent. A Doppler probe checks the pedicle hourly afterward. Early thrombosis detection allows salvage before irreversible damage.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/spl-reconstructive-gen1.webp",
+        "alt": "Operative illustration of free flap with microvascular anastomoses, Doppler probe, and muscle sparing labels.",
+        "caption": "Free flap illustration showing microvascular anastomoses and Doppler monitoring. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Flap physiology and reconstructive ladder questions test random versus axial blood supply, angiosome boundaries, and delay phenomenon mechanics. Random pattern flaps depend on dermal-subdermal plexuses with a 2:1 length-to-width ratio. Axial pattern flaps incorporate an anatomically defined direct cutaneous arteriovenous pedicle. Flap delay creates ischemic conditioning, dilating choke vessels between adjacent angiosomes and significantly increasing survival length.",
+      "say": "High-yield for the exam: Flap physiology and reconstructive ladder questions test random versus axial blood supply, angiosome boundaries, and delay phenomenon mechanics. Random pattern flaps depend on dermal-subdermal plexuses with a 2:1 length-to-width ratio. Axial pattern flaps incorporate an anatomically defined direct cutaneous arteriovenous pedicle. Flap delay creates ischemic conditioning, dilating choke vessels between adjacent angiosomes and significantly increasing survival length.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Reconstructive ladder",
+            "Secondary intention, primary closure, skin graft, local flap, free flap"
+          ],
+          [
+            "Random pattern limit",
+            "Subdermal plexus supply; safe length-to-width ratio limited to 2:1"
+          ],
+          [
+            "Axial pattern flap",
+            "Supplied by named direct cutaneous artery; unlimited length-to-width ratio"
+          ],
+          [
+            "Angiosome concept",
+            "Three-dimensional anatomic tissue block supplied by specific named source artery"
+          ],
+          [
+            "Choke vessel dilation",
+            "Delay phenomenon opens reduced-caliber choke vessels connecting adjacent angiosome territories"
+          ],
+          [
+            "Ischemic tolerance",
+            "Muscle tolerates 2-4 hours; skin tolerates 4-6 hours warm ischemia"
+          ],
+          [
+            "No-reflow phenomenon",
+            "Microvascular thrombosis and endothelial swelling following prolonged severe warm ischemia"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "This operative view shows a **free flap** joined to recipient vessels through fine **microvascular anastomoses** while the perforator spares the underlying muscle. The flap survives only while arterial inflow and venous outflow remain patent after transfer. A **Doppler probe** checks the pedicle hourly during early monitoring. Early detection of thrombosis allows salvage before irreversible ischaemia destroys the flap.",
-   "say": "This operative view shows a free flap joined through microvascular anastomoses. The perforator design spares the underlying muscle during harvest. The flap survives only while inflow and outflow remain patent. A Doppler probe checks the pedicle hourly afterward. Early thrombosis detection allows salvage before irreversible damage.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/spl-reconstructive-gen1.webp",
-    "alt": "Operative illustration of free flap with microvascular anastomoses, Doppler probe, and muscle sparing labels.",
-    "caption": "Free flap illustration showing microvascular anastomoses and Doppler monitoring. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  }
- ]
+  ]
 }
