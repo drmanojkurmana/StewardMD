@@ -13,13 +13,43 @@
    "say": "Milk provides high-quality protein, calcium and B vitamins, but it completely lacks iron and vitamin C. Babies fed cow milk without solids develop severe iron deficiency anaemia.",
    "vis": {
     "kind": "table",
-    "cols": ["Nutrient component", "Human breast milk (per 100 ml)", "Cow milk (per 100 ml)", "Buffalo milk (per 100 ml)"],
+    "cols": [
+     "Nutrient component",
+     "Human breast milk (per 100 ml)",
+     "Cow milk (per 100 ml)",
+     "Buffalo milk (per 100 ml)"
+    ],
     "rows": [
-     ["Water content", "87.5 g", "87.0 g", "81.0 g"],
-     ["Protein density", "1.1 g (rich in lactalbumin)", "3.2 g (rich in casein)", "4.3 g (dense curd tension)"],
-     ["Fat concentration", "3.5 g (rich in essential PUFA)", "3.5 to 4.0 g", "6.5 to 8.5 g (high caloric density)"],
-     ["Lactose sugar", "7.0 g (sweet, promotes lactobacillus)", "4.5 g", "5.0 g"],
-     ["Calcium content", "28 to 30 mg", "120 mg", "210 mg"]
+     [
+      "Water content",
+      "87.5 g",
+      "87.0 g",
+      "81.0 g"
+     ],
+     [
+      "Protein density",
+      "1.1 g (rich in lactalbumin)",
+      "3.2 g (rich in casein)",
+      "4.3 g (dense curd tension)"
+     ],
+     [
+      "Fat concentration",
+      "3.5 g (rich in essential PUFA)",
+      "3.5 to 4.0 g",
+      "6.5 to 8.5 g (high caloric density)"
+     ],
+     [
+      "Lactose sugar",
+      "7.0 g (sweet, promotes lactobacillus)",
+      "4.5 g",
+      "5.0 g"
+     ],
+     [
+      "Calcium content",
+      "28 to 30 mg",
+      "120 mg",
+      "210 mg"
+     ]
     ]
    }
   },
@@ -40,12 +70,32 @@
    "say": "Raw milk transmits bovine tuberculosis, brucellosis, Q fever, salmonella and listeria. Drinking unboiled dairy risks chronic fevers and dangerous intestinal infections.",
    "vis": {
     "kind": "table",
-    "cols": ["Infection category", "Pathogen transmitted", "Source of dairy contamination"],
+    "cols": [
+     "Infection category",
+     "Pathogen transmitted",
+     "Source of dairy contamination"
+    ],
     "rows": [
-     ["Bovine zoonoses", "Mycobacterium bovis, Brucella abortus, Coxiella", "Infected cow udder, mastitis, systemic bovine illness"],
-     ["Human handling contamination", "Salmonella typhi, Shigella, Hepatitis A", "Infected milkers, carriers, unwashed hands"],
-     ["Bacterial food poisoning", "Staphylococcus aureus, Bacillus cereus", "Milker skin boils, unsterilised milk cans"],
-     ["Environmental contamination", "Listeria monocytogenes, Campylobacter jejuni", "Farm manure, unpasteurised holding tanks"]
+     [
+      "Bovine zoonoses",
+      "Mycobacterium bovis, Brucella abortus, Coxiella",
+      "Infected cow udder, mastitis, systemic bovine illness"
+     ],
+     [
+      "Human handling contamination",
+      "Salmonella typhi, Shigella, Hepatitis A",
+      "Infected milkers, carriers, unwashed hands"
+     ],
+     [
+      "Bacterial food poisoning",
+      "Staphylococcus aureus, Bacillus cereus",
+      "Milker skin boils, unsterilised milk cans"
+     ],
+     [
+      "Environmental contamination",
+      "Listeria monocytogenes, Campylobacter jejuni",
+      "Farm manure, unpasteurised holding tanks"
+     ]
     ]
    }
   },
@@ -56,12 +106,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Raw milk pre-warmed and filtered"},
-     {"id": "b", "label": "Precise heat holding kills vegetative pathogens"},
-     {"id": "c", "label": "Immediate rapid chilling to < 5 degrees Celsius"},
-     {"id": "d", "label": "Sterile cold packaging in tamper-evident pouches"}
+     {
+      "id": "a",
+      "label": "Raw milk pre-warmed and filtered"
+     },
+     {
+      "id": "b",
+      "label": "Precise heat holding kills vegetative pathogens"
+     },
+     {
+      "id": "c",
+      "label": "Immediate rapid chilling to < 5 degrees Celsius"
+     },
+     {
+      "id": "d",
+      "label": "Sterile cold packaging in tamper-evident pouches"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,12 +145,32 @@
    "say": "The Holder batch method heats milk in a tank to sixty-three degrees Celsius, holds it there for thirty minutes, and chills it immediately. It is ideal for small local dairies.",
    "vis": {
     "kind": "table",
-    "cols": ["Operational parameter", "Holder method (LTLT)", "HTST continuous method"],
+    "cols": [
+     "Operational parameter",
+     "Holder method (LTLT)",
+     "HTST continuous method"
+    ],
     "rows": [
-     ["Heating temperature", "63 to 66 degrees C (145 to 150 F)", "72 degrees C (161 F) minimum"],
-     ["Holding duration", "Held for at least 30 minutes", "Held for at least 15 seconds"],
-     ["Cooling temperature", "Chilled immediately to < 5 degrees C", "Chilled immediately to < 4 degrees C"],
-     ["Processing style", "Batch processing in vats", "Continuous flow through plate exchangers"]
+     [
+      "Heating temperature",
+      "63 to 66 degrees C (145 to 150 F)",
+      "72 degrees C (161 F) minimum"
+     ],
+     [
+      "Holding duration",
+      "Held for at least 30 minutes",
+      "Held for at least 15 seconds"
+     ],
+     [
+      "Cooling temperature",
+      "Chilled immediately to < 5 degrees C",
+      "Chilled immediately to < 4 degrees C"
+     ],
+     [
+      "Processing style",
+      "Batch processing in vats",
+      "Continuous flow through plate exchangers"
+     ]
     ]
    }
   },
@@ -97,12 +192,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Continuous flow through heat exchanger plates"},
-     {"id": "b", "label": "Heated to 72 degrees C (161 F) for 15 seconds"},
-     {"id": "c", "label": "Flow diversion valve recirculates under-heated milk"},
-     {"id": "d", "label": "Regenerative rapid chilling to 4 degrees C"}
+     {
+      "id": "a",
+      "label": "Continuous flow through heat exchanger plates"
+     },
+     {
+      "id": "b",
+      "label": "Heated to 72 degrees C (161 F) for 15 seconds"
+     },
+     {
+      "id": "c",
+      "label": "Flow diversion valve recirculates under-heated milk"
+     },
+     {
+      "id": "d",
+      "label": "Regenerative rapid chilling to 4 degrees C"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -112,12 +232,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Alkaline phosphatase present in raw milk"},
-     {"id": "b", "label": "Pasteurisation heat denatures enzyme completely"},
-     {"id": "c", "label": "Add disodium phenyl phosphate substrate"},
-     {"id": "d", "label": "Colourless result confirms complete pasteurisation"}
+     {
+      "id": "a",
+      "label": "Alkaline phosphatase present in raw milk"
+     },
+     {
+      "id": "b",
+      "label": "Pasteurisation heat denatures enzyme completely"
+     },
+     {
+      "id": "c",
+      "label": "Add disodium phenyl phosphate substrate"
+     },
+     {
+      "id": "d",
+      "label": "Colourless result confirms complete pasteurisation"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -126,12 +271,32 @@
    "say": "Bacteria consume oxygen and bleach methylene blue dye. High-quality clean milk keeps its blue color for over five hours, whereas dirty milk bleaches the dye within two hours.",
    "vis": {
     "kind": "table",
-    "cols": ["Decolourisation time", "Milk quality grading", "Bacteriological interpretation"],
+    "cols": [
+     "Decolourisation time",
+     "Milk quality grading",
+     "Bacteriological interpretation"
+    ],
     "rows": [
-     ["5 hours or longer", "Class 1: Very good quality", "Minimal bacterial contamination (< 200,000/ml)"],
-     ["3 to 4 hours", "Class 2: Fair / Average quality", "Moderate bacterial load; acceptable for processing"],
-     ["1 to 2 hours", "Class 3: Poor quality", "Heavy contamination; unhygienic dairy handling"],
-     ["Under 30 minutes", "Class 4: Very poor quality", "Grossly spoiled milk; reject immediately"]
+     [
+      "5 hours or longer",
+      "Class 1: Very good quality",
+      "Minimal bacterial contamination (< 200,000/ml)"
+     ],
+     [
+      "3 to 4 hours",
+      "Class 2: Fair / Average quality",
+      "Moderate bacterial load; acceptable for processing"
+     ],
+     [
+      "1 to 2 hours",
+      "Class 3: Poor quality",
+      "Heavy contamination; unhygienic dairy handling"
+     ],
+     [
+      "Under 30 minutes",
+      "Class 4: Very poor quality",
+      "Grossly spoiled milk; reject immediately"
+     ]
     ]
    }
   },
@@ -143,11 +308,19 @@
     "kind": "compare",
     "left": {
      "title": "Egg white (Albumen)",
-     "points": ["Comprises 60% of total egg mass", "Pure protein (ovalbumin, lysozyme)", "Zero fat and zero cholesterol"]
+     "points": [
+      "Comprises 60% of total egg mass",
+      "Pure protein (ovalbumin, lysozyme)",
+      "Zero fat and zero cholesterol"
+     ]
     },
     "right": {
      "title": "Egg yolk (Vitellus)",
-     "points": ["Comprises 30% of total egg mass", "High fat and cholesterol (200 mg)", "Rich in vitamins A, D, B12 and choline"]
+     "points": [
+      "Comprises 30% of total egg mass",
+      "High fat and cholesterol (200 mg)",
+      "Rich in vitamins A, D, B12 and choline"
+     ]
     }
    }
   },
@@ -157,12 +330,77 @@
    "say": "Candling holds an egg over a light beam to check the air cell size and freshness. Always cook eggs until firm to kill Salmonella bacteria that can lurk inside raw yolks.",
    "vis": {
     "kind": "table",
-    "cols": ["Egg freshness test", "Fresh egg finding", "Stale / Spoiled egg finding"],
+    "cols": [
+     "Egg freshness test",
+     "Fresh egg finding",
+     "Stale / Spoiled egg finding"
+    ],
     "rows": [
-     ["Candling examination", "Tiny air cell (< 3 mm depth); central stable yolk", "Enlarged air cell (> 6 mm); movable displaced yolk"],
-     ["Water flotation test", "Sinks to bottom and lies flat on its side", "Stands upright or floats to surface (air expansion)"],
-     ["Cracked plate test", "Thick, raised albumen; rounded dome-shaped yolk", "Watery, spreading albumen; flattened broken yolk"],
-     ["Microbiological safety", "Absence of transovarian Salmonella", "Salmonella enteritidis risk; cook thoroughly"]
+     [
+      "Candling examination",
+      "Tiny air cell (< 3 mm depth); central stable yolk",
+      "Enlarged air cell (> 6 mm); movable displaced yolk"
+     ],
+     [
+      "Water flotation test",
+      "Sinks to bottom and lies flat on its side",
+      "Stands upright or floats to surface (air expansion)"
+     ],
+     [
+      "Cracked plate test",
+      "Thick, raised albumen; rounded dome-shaped yolk",
+      "Watery, spreading albumen; flattened broken yolk"
+     ],
+     [
+      "Microbiological safety",
+      "Absence of transovarian Salmonella",
+      "Salmonella enteritidis risk; cook thoroughly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Pasteurisation targets Coxiella burnetii and Mycobacterium tuberculosis, the most heat resistant non spore forming milk borne pathogens. The Holder method holds milk at 63 degrees Celsius for thirty minutes, while high temperature short time treatment uses 72 degrees Celsius for fifteen seconds. The phosphatase test verifies adequate heating, and animal milk remains deficient in iron and vitamin C.",
+   "say": "High-yield for the exam: Pasteurisation targets Coxiella burnetii and Mycobacterium tuberculosis, the most heat resistant non spore forming milk borne pathogens. The Holder method holds milk at 63 degrees Celsius for thirty minutes, while high temperature short time treatment uses 72 degrees Celsius for fifteen seconds. The phosphatase test verifies adequate heating, and animal milk remains deficient in iron and vitamin C.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Milk nutrients lacking",
+      "Iron and vitamin C are deficient"
+     ],
+     [
+      "Holder method figures",
+      "63 degrees Celsius held thirty minutes"
+     ],
+     [
+      "HTST method figures",
+      "72 degrees Celsius held fifteen seconds"
+     ],
+     [
+      "After heating step",
+      "Rapid cooling to below five degrees Celsius"
+     ],
+     [
+      "Phosphatase test logic",
+      "Enzyme destroyed only when heating adequate"
+     ],
+     [
+      "Methylene blue best grade",
+      "Blue colour retained five hours or longer"
+     ],
+     [
+      "Raw milk zoonoses",
+      "Bovine tuberculosis, brucellosis and Q fever"
+     ],
+     [
+      "Fresh egg candling",
+      "Air cell depth under three millimetres"
+     ]
     ]
    }
   }
