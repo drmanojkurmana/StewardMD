@@ -1,0 +1,165 @@
+{
+  "v": 1,
+  "module": "sso-gi",
+  "subject": "ss-surgical-oncology",
+  "title": "GI and HPB Oncology Surgery: Curative Resection Done Right",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": ["Sabiston Surgery 22nd edition"],
+  "steps": [
+    {
+      "tx": "**Gastric cancer** accounts for 5 percent of new malignancies with 13 to 15 percent of cases being **diffuse type** disease. Curative resection aims for an **R0 margin** with a D2 nodal clearance. Tumours larger than 4 cm and serosal invasion carry poor survival. Staging starts with **contrast CT** of chest, abdomen, and pelvis before any decision to operate.",
+      "say": "Gastric cancer needs a clear surgical plan from the start. It makes up a small share of new cancers worldwide. Diffuse type disease is an important subtype. Curative surgery aims for a clear margin with extended nodal clearance. Staging imaging comes before any decision to operate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resectable disease",
+          "points": ["No distant spread", "Clear margin achievable", "Node clearance possible"]
+        },
+        "right": {
+          "title": "Unresectable disease",
+          "points": ["Distant spread present", "Palliative planning first", "Chemotherapy controls symptoms"]
+        }
+      }
+    },
+    {
+      "tx": "Risk rises with **Helicobacter pylori** infection, salted fish diet, and **smoking** at 2 to 3 times baseline. Blood group A inheritance and gastric **polyps** add modest risk. **Hereditary diffuse gastric cancer** from CDH1 mutation strikes at 20 to 30 years. Family history plus pernicious anaemia raises risk 3 to 5 times in population studies.",
+      "say": "Risk factors cluster around infection and diet. Helicobacter pylori infection strongly raises gastric cancer risk. Smoking and salted fish also add risk. Blood group A and gastric polyps add modest risk. Hereditary diffuse disease from a cadherin mutation strikes young adults. Family history and pernicious anaemia matter too.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "hp", "label": "H pylori infection"},
+          {"id": "diet", "label": "Salted diet and smoking"},
+          {"id": "gene", "label": "CDH1 mutation"},
+          {"id": "risk", "label": "Rising gastric risk"}
+        ],
+        "edges": [["hp", "risk"], ["diet", "risk"], ["gene", "risk"]]
+      }
+    },
+    {
+      "tx": "**Intestinal type** cancer follows the Correa cascade from atrophic gastritis through metaplasia to dysplasia over 2 to 3 decades. **Diffuse type** arises from **E-cadherin loss** and infiltrates in linitis plastica pattern. Epstein-Barr virus drives 8 to 10 percent of proximal tumours. Microsatellite instability marks 15 to 20 percent of cases with better prognosis.",
+      "say": "Two biological pathways shape gastric cancer. Intestinal type disease follows a slow cascade from atrophic gastritis through metaplasia to dysplasia over decades. Diffuse type arises from cadherin loss and spreads into the wall. A virus drives some proximal tumours. Instability markers appear in a minority.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Type", "Pathway", "Pattern"],
+        "rows": [
+          ["Intestinal", "Correa cascade", "Gland forming mass"],
+          ["Diffuse", "Cadherin loss", "Linitis plastica"],
+          ["EBV driven", "Viral infection", "Proximal stomach"]
+        ]
+      }
+    },
+    {
+      "tx": "Most patients present with **epigastric pain**, early satiety, vomiting, and 5 to 10 kg weight loss. **Virchow node** left supraclavicular enlargement and **Krukenberg ovarian mass** suggest spread. **Blumer shelf** rectal content signals peritoneal disease. A malignant **jugular** lymphadenopathy on the left at level 1 is a late marker.",
+      "say": "Symptoms creep up as pain and early fullness. Vomiting and steady weight loss follow. A left supraclavicular node called Virchow node suggests spread. Ovarian deposits suggest peritoneal spread. Rectal shelf content also signals abdominal spread. Most patients present late with these signs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "pain", "label": "Epigastric pain"},
+          {"id": "loss", "label": "Weight loss 5 kg or more"},
+          {"id": "node", "label": "Virchow node"},
+          {"id": "stage", "label": "Peritoneal survey"}
+        ],
+        "edges": [["pain", "loss"], ["loss", "node"], ["node", "stage"]]
+      }
+    },
+    {
+      "tx": "**Upper GI endoscopy** with biopsy confirms adenocarcinoma in 95 percent of cases. **Endoscopic ultrasound** stages wall depth and peritumoural nodes at 2 to 3 mm resolution. Diagnostic **laparoscopy** finds peritoneal deposits in 30 percent of large tumours. Staging of 5 cm size needs marrow and PET imaging when spread is suspected.",
+      "say": "Endoscopy with biopsy confirms most gastric cancers. Endoscopic ultrasound maps wall depth and nearby nodes. Diagnostic laparoscopy finds peritoneal deposits in large tumours often. PET imaging surveys the body when spread is suspected. Together these tests stage disease before surgery.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Test", "Purpose", "Finding"],
+        "rows": [
+          ["Endoscopy", "Confirm cancer", "Biopsy positive"],
+          ["Endoscopic US", "Wall and nodes", "Depth mapped"],
+          ["Laparoscopy", "Peritoneal survey", "Deposits found"]
+        ]
+      }
+    },
+    {
+      "tx": "**Cholangiocarcinoma** at the hilum blocks bile flow in 55 to 65 percent of cases, causing painless jaundice. **Primary sclerosing cholangitis** and **Clonorchis** infection are proven precursors. **CA 19-9** rises beyond 100 units in 70 percent of advanced cases. **Bismuth-Corlette** types 1 to 4 describe hilar extent and guide resection plans.",
+      "say": "Hilar cholangiocarcinoma blocks bile flow and causes painless jaundice. It accounts for the majority of bile duct cancers. Sclerosing cholangitis and liver flukes are precursors. A blood marker rises in advanced disease. Classification types describe hilar extent and guide resection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Perihilar tumours",
+          "points": ["Painless jaundice dominates", "Bismuth type guides surgery", "Resection aims for R0"]
+        },
+        "right": {
+          "title": "Intrahepatic tumours",
+          "points": ["Mass on imaging first", "Often found incidentally", "Major hepatectomy is standard"]
+        }
+      }
+    },
+    {
+      "tx": "**Resectability** hinges on vascular involvement of the portal vein by 180 degrees or hepatic artery invasion. Bilateral biliary extension and future liver remnant under 30 percent rule out resection. **Contralateral lobe hypertrophy** after portal vein embolisation can raise remnant volume. Margins beyond 1 cm are ideal after major hepatectomy.",
+      "say": "Resectability turns on vessel involvement. Tumour wrapping arteries or portal vein by a wide angle blocks resection. Disease spreading to both lobes also blocks surgery. A small future liver remnant rules out resection. Embolisation can grow the remnant and convert borderline cases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "ct", "label": "Staging CT and MRI"},
+          {"id": "vessel", "label": "Vessel mapping"},
+          {"id": "remnant", "label": "Remnant over 30 percent"},
+          {"id": "resect", "label": "Resection possible"}
+        ],
+        "edges": [["ct", "vessel"], ["vessel", "remnant"], ["remnant", "resect"]]
+      }
+    },
+    {
+      "tx": "**Borderline pancreatic cancer** touches the superior mesenteric artery by 180 degrees or less. **Neoadjuvant therapy** with **folfirinox** shrinks tumours and selects biology before surgery. About 70 percent complete neoadjuvant therapy before exploration. A CA 19-9 drop below 82 units predicts better survival after resection.",
+      "say": "Pancreatic borderline disease touches the main artery by a limited angle. Neoadjuvant chemotherapy comes first in these patients. It shrinks the tumour and tests biology. Most patients complete the chemotherapy before exploration. A falling blood marker predicts better survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Initially resectable",
+          "points": ["Upfront surgery allowed", "Thin capsule invasion", "Margins still critical"]
+        },
+        "right": {
+          "title": "Borderline disease",
+          "points": ["Chemotherapy first", "Arterial wrap limited", "Whipple after response"]
+        }
+      }
+    },
+    {
+      "tx": "**D2 lymphadenectomy** clears perigastric, coeliac, and hepatoduodenal nodes along with splenic artery nodes. **Subtotal gastrectomy** preserves some stomach when margins of 5 cm are secured distally. **Roux-en-Y** reconstruction avoids bile reflux after distal resection. Perioperative **FLOT** improves survival by 5 to 10 percent over older regimens.",
+      "say": "Gastric surgery demands nodal clearance. D two dissection clears nodes around the stomach, coeliac axis, and liver. Subtotal resection preserves some stomach when margins are secure. Roux en Y reconstruction avoids bile reflux. Perioperative FLOT improves survival over older regimens.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "stage", "label": "Staging confirmed"},
+          {"id": "flot", "label": "Perioperative FLOT"},
+          {"id": "d2", "label": "D2 gastrectomy"},
+          {"id": "reconstruct", "label": "Roux-en-Y"}
+        ],
+        "edges": [["stage", "flot"], ["flot", "d2"], ["d2", "reconstruct"]]
+      }
+    },
+    {
+      "tx": "**Anastomotic leak** strikes 3 to 5 percent of gastrectomies and carries 10 to 20 percent mortality. **Dumping syndrome** follows in 15 to 20 percent with sweating and palpitations after meals. **Pancreatic fistula** complicates Whipple procedures in 10 to 15 percent of patients. **Chylous ascites** appears in 5 percent after extended nodal dissection.",
+      "say": "Complications decide recovery quality. Anastomotic leak strikes a small minority but carries high mortality. Dumping syndrome causes sweating and palpitations after meals. Pancreatic fistula complicates head resections often. Chylous ascites appears after extended nodal dissection.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Complication", "Rate", "After"],
+        "rows": [
+          ["Anastomotic leak", "3 to 5 percent", "Gastrectomy"],
+          ["Dumping syndrome", "15 to 20 percent", "Distal resection"],
+          ["Pancreatic fistula", "10 to 15 percent", "Whipple procedure"]
+        ]
+      }
+    },
+    {
+      "tx": "For the **exam**, quote **D2 dissection** as standard for gastric cancer and **5 cm margins** for subtotal resection. Resectability in hilar tumours fails with **180 degrees** of arterial wrap or a remnant below **30 percent**. Borderline pancreas gets **neoadjuvant therapy** first with **folfirinox**. Linitis plastica with **30 percent** peritoneal spread at laparoscopy is unresectable.",
+      "say": "High-yield for the exam hold the numbers. D two dissection is standard for gastric cancer. Five centimetres is the margin sought in subtotal resection. A future liver remnant below thirty percent blocks hilar resection. Borderline pancreatic tumours get chemotherapy first. Linitis plastica with half the abdomen involved cannot be resected.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Site", "Pivotal number"],
+        "rows": [
+          ["Gastric", "D2 dissection with 5 cm margins"],
+          ["Hilar", "Remnant above 30 percent"],
+          ["Pancreatic", "Borderline gets chemotherapy first"]
+        ]
+      }
+    }
+  ]
+}
