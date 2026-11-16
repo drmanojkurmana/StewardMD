@@ -21,12 +21,37 @@
    "say": "Competitive inhibition raises apparent Km with Vmax unchanged and is overcome by substrate. Statins, methotrexate and fomepizole in methanol poisoning power therapy through active site competition daily.",
    "vis": {
     "kind": "table",
-    "cols": ["Inhibition type", "Km apparent", "Vmax apparent", "Burk lines meet"],
+    "cols": [
+     "Inhibition type",
+     "Km apparent",
+     "Vmax apparent",
+     "Burk lines meet"
+    ],
     "rows": [
-     ["Competitive", "Increased", "Unchanged", "At y axis (same 1/Vmax)"],
-     ["Pure noncompetitive", "Unchanged", "Decreased", "At x axis (same -1/Km)"],
-     ["Uncompetitive", "Decreased", "Decreased", "Parallel (binds ES only)"],
-     ["Mixed", "Either direction", "Decreased", "Elsewhere (left of y axis)"]
+     [
+      "Competitive",
+      "Increased",
+      "Unchanged",
+      "At y axis (same 1/Vmax)"
+     ],
+     [
+      "Pure noncompetitive",
+      "Unchanged",
+      "Decreased",
+      "At x axis (same -1/Km)"
+     ],
+     [
+      "Uncompetitive",
+      "Decreased",
+      "Decreased",
+      "Parallel (binds ES only)"
+     ],
+     [
+      "Mixed",
+      "Either direction",
+      "Decreased",
+      "Elsewhere (left of y axis)"
+     ]
     ]
    }
   },
@@ -35,8 +60,21 @@
    "say": "Noncompetitive inhibitors lower Vmax from allosteric sites, while uncompetitive bind only the enzyme substrate complex. Irreversible inhibitors reduce enzyme number permanently until cellular resynthesis restores activity slowly.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Reversible (equilibrium governed)", "points": ["Washes out, dialysis or time reverses", "Km/Vmax patterns classify", "Most drugs live here"]},
-    "right": {"title": "Irreversible (covalent)", "points": ["Activity returns by resynthesis only", "Aspirin platelet 10 days; OP ageing", "Survivor enzymes kinetically normal"]
+    "left": {
+     "title": "Reversible (equilibrium governed)",
+     "points": [
+      "Washes out, dialysis or time reverses",
+      "Km/Vmax patterns classify",
+      "Most drugs live here"
+     ]
+    },
+    "right": {
+     "title": "Irreversible (covalent)",
+     "points": [
+      "Activity returns by resynthesis only",
+      "Aspirin platelet 10 days; OP ageing",
+      "Survivor enzymes kinetically normal"
+     ]
     }
    }
   },
@@ -50,12 +88,32 @@
    "say": "Feedback inhibition closes pathways at first committed steps to prevent intermediate waste economically. Allosteric activators integrate energy state faster than gene expression changes could ever respond physiologically.",
    "vis": {
     "kind": "table",
-    "cols": ["Competitive drug pair", "Enzyme contested", "Clinical theatre"],
+    "cols": [
+     "Competitive drug pair",
+     "Enzyme contested",
+     "Clinical theatre"
+    ],
     "rows": [
-     ["Statins versus HMG-CoA", "HMG-CoA reductase", "Cholesterol synthesis (prior module)"],
-     ["Methotrexate versus dihydrofolate", "Dihydrofolate reductase", "Cancer, rheumatoid, leucovorin rescue"],
-     ["Fomepizole versus methanol", "Alcohol dehydrogenase", "Methanol and ethylene glycol poisoning"],
-     ["Malonate versus succinate (teaching)", "Succinate dehydrogenase", "TCA classic, not a drug"]
+     [
+      "Statins versus HMG-CoA",
+      "HMG-CoA reductase",
+      "Cholesterol synthesis (prior module)"
+     ],
+     [
+      "Methotrexate versus dihydrofolate",
+      "Dihydrofolate reductase",
+      "Cancer, rheumatoid, leucovorin rescue"
+     ],
+     [
+      "Fomepizole versus methanol",
+      "Alcohol dehydrogenase",
+      "Methanol and ethylene glycol poisoning"
+     ],
+     [
+      "Malonate versus succinate (teaching)",
+      "Succinate dehydrogenase",
+      "TCA classic, not a drug"
+     ]
     ]
    }
   },
@@ -66,11 +124,74 @@
     "kind": "flow",
     "title": "Reading any inhibition plot",
     "nodes": [
-     {"id": "int", "label": "Compare intercepts (Vmax, Km)"},
-     {"id": "type", "label": "Name competitive, non, un or mixed"},
-     {"id": "drug", "label": "Anchor to one drug and rescue prediction"}
+     {
+      "id": "int",
+      "label": "Compare intercepts (Vmax, Km)"
+     },
+     {
+      "id": "type",
+      "label": "Name competitive, non, un or mixed"
+     },
+     {
+      "id": "drug",
+      "label": "Anchor to one drug and rescue prediction"
+     }
     ],
-    "edges": [["int", "type"], ["type", "drug"]]
+    "edges": [
+     [
+      "int",
+      "type"
+     ],
+     [
+      "type",
+      "drug"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Enzyme inhibition patterns are distinguished using Lineweaver-Burk double reciprocal plots. Competitive inhibitors compete directly for the active site, increasing apparent Km while leaving Vmax unchanged, with intersecting lines meeting on the y-axis. Non-competitive inhibitors bind allosteric sites with equal affinity for free enzyme and enzyme-substrate complex, reducing Vmax while leaving Km unchanged. Uncompetitive inhibitors bind exclusively to enzyme-substrate complexes, reducing both Km and Vmax.",
+   "say": "High-yield for the exam. Enzyme inhibition patterns are distinguished using Lineweaver-Burk double reciprocal plots. Competitive inhibitors compete directly for the active site, increasing apparent Km while leaving Vmax unchanged, with intersecting lines meeting on the y-axis. Non-competitive inhibitors bind allosteric sites with equal affinity for free enzyme and enzyme-substrate complex, reducing Vmax while leaving Km unchanged. Uncompetitive inhibitors bind exclusively to enzyme-substrate complexes, reducing both Km and Vmax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Competitive inhibition kinetics",
+      "Apparent Km increases while maximal velocity Vmax remains completely unchanged"
+     ],
+     [
+      "Lineweaver-Burk competitive plot",
+      "Plot lines intersect on the vertical y-axis at one over Vmax"
+     ],
+     [
+      "Non-competitive inhibition kinetics",
+      "Maximal velocity Vmax decreases while Michaelis constant Km remains unchanged"
+     ],
+     [
+      "Lineweaver-Burk non-competitive plot",
+      "Plot lines intersect on horizontal x-axis at minus one over Km"
+     ],
+     [
+      "Uncompetitive inhibition profile",
+      "Both Km and Vmax decrease proportionally producing strictly parallel lines"
+     ],
+     [
+      "Competitive drug prototype",
+      "Statins competitively inhibit 3-hydroxy-3-methylglutaryl-coenzyme A reductase"
+     ],
+     [
+      "Michaelis constant Km definition",
+      "Substrate concentration at which reaction velocity reaches half of maximal velocity"
+     ],
+     [
+      "Non-competitive toxin prototype",
+      "Lead non-competitively binds sulfhydryl groups of delta-aminolevulinic acid dehydratase"
+     ]
+    ]
    }
   }
  ],

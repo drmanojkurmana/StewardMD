@@ -10,12 +10,32 @@
    "say": "Aldoses and ketoses classify by carbonyl, almost all D configured. Glucose, mannose and galactose share one formula yet differ entirely by stereochemistry, the founding lesson here.",
    "vis": {
     "kind": "table",
-    "cols": ["Isomer term", "What differs", "Canonical example"],
+    "cols": [
+     "Isomer term",
+     "What differs",
+     "Canonical example"
+    ],
     "rows": [
-     ["Epimers", "One chiral centre", "Glucose/mannose (C2), glucose/galactose (C4)"],
-     ["Anomers", "Anomeric carbon (ring closure)", "Alpha versus beta glucose"],
-     ["Enantiomers", "Mirror image, all centres", "D versus L glucose"],
-     ["Aldose ketose isomers", "Carbonyl position, same formula", "Glucose versus fructose"]
+     [
+      "Epimers",
+      "One chiral centre",
+      "Glucose/mannose (C2), glucose/galactose (C4)"
+     ],
+     [
+      "Anomers",
+      "Anomeric carbon (ring closure)",
+      "Alpha versus beta glucose"
+     ],
+     [
+      "Enantiomers",
+      "Mirror image, all centres",
+      "D versus L glucose"
+     ],
+     [
+      "Aldose ketose isomers",
+      "Carbonyl position, same formula",
+      "Glucose versus fructose"
+     ]
     ]
    }
   },
@@ -24,8 +44,21 @@
    "say": "Ring closure creates the anomeric carbon whose alpha or beta hydroxyl interconverts by mutarotation. Bonds lock one anomer absolutely, so starch digests while cellulose resists with identical glucose units.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Alpha anomer (starch, glycogen)", "points": ["Bond down in Haworth D sugars", "Human amylases hydrolyse", "Storage and diet energy"]},
-    "right": {"title": "Beta anomer (cellulose, lactose)", "points": ["Bond up in Haworth D sugars", "Needs beta enzymes (lactase, cellulase absent)", "Fibre and milk sugar fates"]
+    "left": {
+     "title": "Alpha anomer (starch, glycogen)",
+     "points": [
+      "Bond down in Haworth D sugars",
+      "Human amylases hydrolyse",
+      "Storage and diet energy"
+     ]
+    },
+    "right": {
+     "title": "Beta anomer (cellulose, lactose)",
+     "points": [
+      "Bond up in Haworth D sugars",
+      "Needs beta enzymes (lactase, cellulase absent)",
+      "Fibre and milk sugar fates"
+     ]
     }
    }
   },
@@ -36,11 +69,29 @@
     "kind": "flow",
     "title": "Benedict logic at the bench",
     "nodes": [
-     {"id": "ur", "label": "Urine reduces Benedict (heated, brick red)"},
-     {"id": "ox", "label": "Glucose oxidase strip negative"},
-     {"id": "hunt", "label": "Hunt lactose, galactose, fructose, pentose"}
+     {
+      "id": "ur",
+      "label": "Urine reduces Benedict (heated, brick red)"
+     },
+     {
+      "id": "ox",
+      "label": "Glucose oxidase strip negative"
+     },
+     {
+      "id": "hunt",
+      "label": "Hunt lactose, galactose, fructose, pentose"
+     }
     ],
-    "edges": [["ur", "ox"], ["ox", "hunt"]]
+    "edges": [
+     [
+      "ur",
+      "ox"
+     ],
+     [
+      "ox",
+      "hunt"
+     ]
+    ]
    }
   },
   {
@@ -48,11 +99,27 @@
    "say": "Osazone reaction erases carbons one and two, so glucose, mannose and fructose share needle crystals. Lactose gives powder puff and maltose sunflower crystals, a perfect stereochemistry test historically.",
    "vis": {
     "kind": "table",
-    "cols": ["Sugar", "Osazone crystals", "Why"],
+    "cols": [
+     "Sugar",
+     "Osazone crystals",
+     "Why"
+    ],
     "rows": [
-     ["Glucose, mannose, fructose", "Needle (identical)", "Differ only at C1/C2, erased"],
-     ["Lactose", "Powder puff or cotton ball", "Galactose C4 difference preserved"],
-     ["Maltose", "Sunflower petals", "Two glucose units, C4 preserved"]
+     [
+      "Glucose, mannose, fructose",
+      "Needle (identical)",
+      "Differ only at C1/C2, erased"
+     ],
+     [
+      "Lactose",
+      "Powder puff or cotton ball",
+      "Galactose C4 difference preserved"
+     ],
+     [
+      "Maltose",
+      "Sunflower petals",
+      "Two glucose units, C4 preserved"
+     ]
     ]
    }
   },
@@ -66,9 +133,67 @@
    "say": "Invert sugar and Maillard glycation explain HbA1c, diabetic tissue chemistry and food browning together. Glycation needs only time and glucose concentration, which is why red cell lifespan sets the window.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Enzymatic glycosylation ( Golgi)", "points": ["Sequon directed, precise", "Builds functional glycans", "Reversible control by enzymes"]},
-    "right": {"title": "Non enzymatic glycation (Maillard)", "points": ["Concentration and time driven", "HbA1c and AGE injury", "Irreversible accumulation"]
+    "left": {
+     "title": "Enzymatic glycosylation ( Golgi)",
+     "points": [
+      "Sequon directed, precise",
+      "Builds functional glycans",
+      "Reversible control by enzymes"
+     ]
+    },
+    "right": {
+     "title": "Non enzymatic glycation (Maillard)",
+     "points": [
+      "Concentration and time driven",
+      "HbA1c and AGE injury",
+      "Irreversible accumulation"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Reducing sugars contain a free anomeric hemiacetal or hemiketal group capable of reducing cupric ions in alkaline Benedict and Fehling reagents to red cuprous oxide precipitate. All monosaccharides, along with maltose and lactose, are reducing sugars, whereas sucrose is non-reducing due to joined anomeric carbons. Reaction with phenylhydrazine forms distinctive osazone crystals, with glucose, fructose, and mannose producing identical needle-shaped broomstick crystals. Mutarotation represents spontaneous anomeric interconversion.",
+   "say": "High-yield for the exam. Reducing sugars contain a free anomeric hemiacetal or hemiketal group capable of reducing cupric ions in alkaline Benedict and Fehling reagents to red cuprous oxide precipitate. All monosaccharides, along with maltose and lactose, are reducing sugars, whereas sucrose is non-reducing due to joined anomeric carbons. Reaction with phenylhydrazine forms distinctive osazone crystals, with glucose, fructose, and mannose producing identical needle-shaped broomstick crystals. Mutarotation represents spontaneous anomeric interconversion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Benedict reduction principle",
+      "Free anomeric carbon reduces cupric ions to brick-red cuprous oxide"
+     ],
+     [
+      "Non-reducing disaccharide",
+      "Sucrose lacks free anomeric carbon because both participate in linkage"
+     ],
+     [
+      "Identical osazone crystals",
+      "Glucose, fructose, and mannose yield identical needle broomstick crystals"
+     ],
+     [
+      "Maltose osazone crystal shape",
+      "Sunflower petal or star shaped crystalline aggregates upon cooling"
+     ],
+     [
+      "Lactose osazone morphology",
+      "Cotton ball or powder puff shaped microscopic crystalline clusters"
+     ],
+     [
+      "Mutarotation definition",
+      "Spontaneous change in optical rotation until alpha and beta anomers equilibrate"
+     ],
+     [
+      "Glucuronic acid conjugation role",
+      "Hepatic glucuronidation of bilirubin and xenobiotics to increase water solubility"
+     ],
+     [
+      "Seliwanoff ketose test reaction",
+      "Resorcinol reagent rapidly produces cherry-red colour with ketoses like fructose"
+     ]
+    ]
    }
   }
  ],
