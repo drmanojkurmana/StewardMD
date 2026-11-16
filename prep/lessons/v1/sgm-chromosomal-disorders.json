@@ -1,110 +1,230 @@
 {
-  "v": 1,
-  "module": "sgm-chromosomal-disorders",
-  "subject": "ss-general-medicine",
-  "title": "Chromosomal and connective tissue disorders in adults",
-  "minutes": 11,
-  "steps": [
-    {
-      "tx": "**Down syndrome** (extra chromosome twenty one material) survives into adult medicine clinics worldwide. **Atrioventricular septal defect** (a common valve and septal opening) dominated childhood care, while adults face **hypothyroidism** (a sluggish thyroid) and **early Alzheimer dementia** (memory loss a decade earlier than usual). **Atlanto axial instability** (a loose neck joint) demands caution before airway instrumentation in theatre.",
-      "say": "Down syndrome can come from extra chromosome twenty one material and now accounts for many young adults in general medicine. The heart defect that dominated childhood care often needs repair, while adults develop thyroid failure and Alzheimer dementia earlier than usual. A loose neck joint called atlanto axial instability makes anaesthesia and airway handling delicate, and blood counts still carry a leukaemia risk across life.",
-      "vis": {
-        "kind": "table",
-        "cols": ["System", "Adult finding", "Surveillance"],
-        "rows": [
-          ["Heart", "AV septal defect", "Echo and ECG review"],
-          ["Thyroid", "Hypothyroidism common", "Yearly thyroid tests"],
-          ["Brain", "Early Alzheimer change", "Baseline cognition"],
-          ["Neck", "Atlanto axial instability", "Caution with neck flexion"]
-        ]
-      }
+ "v": 1,
+ "module": "sgm-chromosomal-disorders",
+ "subject": "ss-general-medicine",
+ "title": "Chromosomal and connective tissue disorders in adults",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Down syndrome** (extra chromosome 21 material) survives into adult medicine clinics worldwide. **Atrioventricular septal defect** (a common valve and septal opening) dominated childhood care, while adults face **hypothyroidism** (a sluggish thyroid) and **early Alzheimer dementia** (memory loss a decade earlier than usual). **Atlanto axial instability** (a loose neck joint) demands caution before airway instrumentation in theatre.",
+   "say": "Down syndrome can come from extra chromosome twenty one material and now accounts for many young adults in general medicine. The heart defect that dominated childhood care often needs repair, while adults develop thyroid failure and Alzheimer dementia earlier than usual. A loose neck joint called atlanto axial instability makes anaesthesia and airway handling delicate, and blood counts still carry a leukaemia risk across life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Adult finding",
+     "Surveillance"
+    ],
+    "rows": [
+     [
+      "Heart",
+      "AV septal defect",
+      "Echo and ECG review"
+     ],
+     [
+      "Thyroid",
+      "Hypothyroidism common",
+      "Yearly thyroid tests"
+     ],
+     [
+      "Brain",
+      "Early Alzheimer change",
+      "Baseline cognition"
+     ],
+     [
+      "Neck",
+      "Atlanto axial instability",
+      "Caution with neck flexion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Turner syndrome** (single X chromosome in females) presents in adults with **short stature** (height far below average) and **primary amenorrhoea** (never having periods). **Coarctation of the aorta** (a narrowing arch segment) and **bicuspid aortic valve** (a valve with 2 leaflets) demand cardiac imaging even when the patient feels well. **Hearing loss** (nerve deafness in adulthood) and **hypothyroidism** combine to make Turner a lifetime surveillance model.",
+   "say": "Turner syndrome is only one X chromosome in a female and often first reaches attention through short stature and absent periods. A narrowed aortic arch and a two leaflet aortic valve are common and may stay silent for years. Nerve deafness in adult life and thyroid failure can frequently complete the picture. Lifelong heart, hearing and hormone surveillance therefore defines good adult care.",
+   "vis": null
+  },
+  {
+   "tx": "**Klinefelter syndrome** (extra X in males written as 47,XXY) surfaces in adult clinics as **hypogonadism** (low testosterone from failing testes) and **gynaecomastia** (breast enlargement). **Hypergonadotrophic hypogonadism** (high pituitary drive with low testis output) is the laboratory signature. **Venous thromboembolism** (leg and lung clots) and **type 2 diabetes** (adult onset sugar disease) run higher than average and need direct attention.",
+   "say": "Klinefelter syndrome means forty seven chromosomes with an extra X in a male and often presents through infertility and low testosterone. Small firm testes and breast enlargement may be noticed only on direct examination. Blood tests show high pituitary drive with low testis output, which is called hypergonadotrophic hypogonadism. Blood clots and adult diabetes occur more often, so hormone therapy needs steady follow up.",
+   "vis": null
+  },
+  {
+   "tx": "**Edwards syndrome** (47 chromosomes with extra 18) and **Patau syndrome** (extra 13) rarely survive to adult wards. **Rocking bottom feet** (a football shaped sole) and **polydactyly** (extra digits) point toward Patau at birth, while **clenched hands** (fists with overlapping fingers) mark Edwards. **Karyotype** (the counted chromosome map from blood) confirms both, and counselling families centres on prognosis rather than repeated intervention.",
+   "say": "Two trisomies can rarely survive into adult medicine. Extra eighteen brings clenched fists with overlapping fingers and severe organ disease, while extra thirteen brings extra digits and a rocking bottom foot along with polydactyly. A counted chromosome map from blood confirms both diagnoses. Care in this setting centres on honest prognosis and family support rather than repeated organ repairs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Edwards pattern",
+     "points": [
+      "Extra chromosome eighteen",
+      "Clenched overlapping fists",
+      "Severe heart disease",
+      "Very poor survival"
+     ]
     },
-    {
-      "tx": "**Turner syndrome** (single X chromosome in females) presents in adults with **short stature** (height far below average) and **primary amenorrhoea** (never having periods). **Coarctation of the aorta** (a narrowing arch segment) and **bicuspid aortic valve** (a valve with two leaflets) demand cardiac imaging even when the patient feels well. **Hearing loss** (nerve deafness in adulthood) and **hypothyroidism** combine to make Turner a lifetime surveillance model.",
-      "say": "Turner syndrome is only one X chromosome in a female and often first reaches attention through short stature and absent periods. A narrowed aortic arch and a two leaflet aortic valve are common and may stay silent for years. Nerve deafness in adult life and thyroid failure can frequently complete the picture. Lifelong heart, hearing and hormone surveillance therefore defines good adult care.",
-      "vis": null
-    },
-    {
-      "tx": "**Klinefelter syndrome** (extra X in males written as forty seven XXY) surfaces in adult clinics as **hypogonadism** (low testosterone from failing testes) and **gynaecomastia** (breast enlargement). **Hypergonadotrophic hypogonadism** (high pituitary drive with low testis output) is the laboratory signature. **Venous thromboembolism** (leg and lung clots) and **type two diabetes** (adult onset sugar disease) run higher than average and need direct attention.",
-      "say": "Klinefelter syndrome means forty seven chromosomes with an extra X in a male and often presents through infertility and low testosterone. Small firm testes and breast enlargement may be noticed only on direct examination. Blood tests show high pituitary drive with low testis output, which is called hypergonadotrophic hypogonadism. Blood clots and adult diabetes occur more often, so hormone therapy needs steady follow up.",
-      "vis": null
-    },
-    {
-      "tx": "**Edwards syndrome** (forty seven chromosomes with extra eighteen) and **Patau syndrome** (extra thirteen) rarely survive to adult wards. **Rocking bottom feet** (a football shaped sole) and **polydactyly** (extra digits) point toward Patau at birth, while **clenched hands** (fists with overlapping fingers) mark Edwards. **Karyotype** (the counted chromosome map from blood) confirms both, and counselling families centres on prognosis rather than repeated intervention.",
-      "say": "Two trisomies can rarely survive into adult medicine. Extra eighteen brings clenched fists with overlapping fingers and severe organ disease, while extra thirteen brings extra digits and a rocking bottom foot along with polydactyly. A counted chromosome map from blood confirms both diagnoses. Care in this setting centres on honest prognosis and family support rather than repeated organ repairs.",
-      "vis": {
-        "kind": "compare",
-        "left": {"title": "Edwards pattern", "points": ["Extra chromosome eighteen", "Clenched overlapping fists", "Severe heart disease", "Very poor survival"]},
-        "right": {"title": "Patau pattern", "points": ["Extra chromosome thirteen", "Extra digits common", "Brain and organ defects", "Very poor survival"]}
-      }
-    },
-    {
-      "tx": "**Marfan syndrome** (fibrillin one defect weakening connective tissue) creates a tall adult with **arachnodactyly** (long spider fingers) and **lens dislocation** (the eye lens slipping from its centre). **Aortic root dilatation** (a widening of the heart outlet) is the lethal lesion and tracks growth on yearly imaging. **Wrist and thumb signs** (meeting over the knuckles and across the palm) link bedside habitus to life long cardiac danger.",
-      "say": "Marfan syndrome weakens connective tissue through a fibrillin defect and produces tall stature with long spider like fingers. The eye lens can slip from its centre, often upward and outward, and the aortic root widens silently. Yearly heart imaging tracks that widening because dissection is the main killer. Wrist and thumb signs connect habitus to danger and remain favourite clinical examination items.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Tall habitus noted"},
-          {"id": "b", "label": "Wrist thumb signs"},
-          {"id": "c", "label": "Echo aortic root"},
-          {"id": "d", "label": "Beta blocker started"},
-          {"id": "e", "label": "Surveillance yearly"}
-        ],
-        "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
-      }
-    },
-    {
-      "tx": "**Ehlers Danlos syndrome** (a group of collagen defects) varies from stretchy joints to fragile vessels. **Joint hypermobility** (extreme flexibility from loose ligaments) troubles the common type, while the **vascular type** (fragile thin walled arteries) ruptures organs without warning. **Beighton score** (a nine point joint flexibility count) grades laxity at the bedside, and **elastic skin** (skin that stretches far beyond normal limits) completes the skin to joint picture.",
-      "say": "Ehlers Danlos syndrome can group collagen defects whose effects range from stretchy joints to fragile vessels. The common type gives extreme flexibility and soft elastic skin, while the vascular type threatens artery and bowel rupture without warning. A nine point flexibility count called the Beighton score grades joint laxity at the bedside. Distinguishing these two types decides who needs surgery bans and close vascular surveillance.",
-      "vis": null
-    },
-    {
-      "tx": "**Osteogenesis imperfecta** (collagen type one failure) fills adult fracture clinics and dental chairs alike. **Blue sclerae** (blue tinted whites of the eyes) and **brittle bones** (fractures from trivial falls) mark the classic picture. **Dentinogenesis imperfecta** (weak tooth enamel with opalescent crowns) and **hearing loss** (middle ear fixation) join the systemic triad. **Bisphosphonate therapy** (bone building drugs) raises density and cuts fracture rates over years.",
-      "say": "Osteogenesis imperfecta comes from fragile collagen type one and produces bones that break with trivial falls. Blue tinted eye whites, weak opalescent tooth enamel, and hearing loss complete the classic systemic picture. Bisphosphonate therapy strengthens bone over years and reduces fracture frequency. Adult care adds dental protection, ear testing, and physiotherapy to prevent deformity and preserve mobility.",
-      "vis": null
-    },
-    {
-      "tx": "**Homocystinuria** (cystathionine synthase failure) mimics Marfan habitus yet carries extra dangers. **Lens dislocation** (the lens slipping downward) and **intellectual disability** (learning difficulty) overlap with Marfan, while **arterial thrombosis** (young strokes and infarcts) sets it apart. **Plasma homocysteine** (a blood amino acid level) confirms the defect, and **pyridoxine responsive patients** (those improving on vitamin B six) show the strongest response to simple treatment.",
-      "say": "Homocystinuria imitates Marfan habitus yet behaves quite differently. The lens slips downward rather than upward, learning difficulty is common, and young arterial clots occur with worrying frequency. A raised plasma homocysteine confirms the defect. Vitamin B six helps a responsive group, while methionine restriction and other therapy support the rest. Confusing this condition with Marfan is a deliberate exam trap.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Feature", "Marfan", "Homocystinuria"],
-        "rows": [
-          ["Lens slip direction", "Upward and outward", "Downward"],
-          ["Aortic risk", "Root dilatation", "Thrombosis young"],
-          ["Skeleton", "Tall with arachnodactyly", "Tall with kyphosis"],
-          ["Key blood test", "Fibrillin gene", "Homocysteine high"]
-        ]
-      }
-    },
-    {
-      "tx": "**Management principles** (lifelong organ surveillance rather than one time cure) govern chromosomal care in adults. **Cardiac imaging** (heart scans at set intervals) watches aortas, **thyroid function tests** (thyroid hormone levels) and **audiology** (hearing checks) cover common losses. **Hormone replacement** (testosterone or oestrogen by protocol) restores bone and comfort, while **genetic counselling** (explaining recurrence before pregnancy) respects family choices at every stage.",
-      "say": "Adult management is lifelong surveillance rather than a single cure. Heart imaging watches aortas and valves at set intervals, thyroid tests and hearing checks cover common failures, and hormone replacement protects bone and wellbeing. Explaining recurrence risk before pregnancy through genetic counselling respects family choices. Nurses and physiotherapists often help decide outcomes as much as any drug does.",
-      "vis": null
-    },
-    {
-      "tx": "**Prognosis** (expected life course with modern care) has brightened for many chromosomal conditions. **Cardiac surgery** (repair of childhood defects) and **beta blockade** (heart slowing drugs) have extended adult survival in Down and Marfan clinics. **Aortic dissection** (tearing of the aortic wall) still kills in Marfan when surveillance lapses. Early diagnosis, disciplined imaging, and honest fertility counselling therefore transform prognosis more than any single operation.",
-      "say": "Modern care has brightened prognosis for many chromosomal conditions. Timely heart surgery, steady blood pressure control, and disciplined imaging have extended adult survival in Down and Marfan clinics. Aortic tearing still kills when surveillance lapses, which is why yearly scans remain non negotiable. Early diagnosis and honest fertility counselling change the lifetime course more than any single operation does.",
-      "vis": null
-    },
-    {
-      "tx": "**High yield for the exam** pulls together karyotypes and classic signs. **Down forty seven plus twenty one** with AV septal defect, **Turner forty five X** with coarctation, **Klinefelter forty seven XXY** with high gonadotrophins, **Marfan** with upward lens slip and root dilatation, **homocystinuria** with downward slip and clots, **vascular Ehlers Danlos** with rupture, and **osteogenesis imperfecta** with blue sclerae form the core. **Karyotype** remains the universal confirm test.",
-      "say": "High yield for the exam can pull together karyotypes and classic signs. Down syndrome is forty seven plus twenty one with AV septal defect, Turner is forty five X with coarctation, Klinefelter is forty seven X X Y with high gonadotrophins, Marfan is upward lens slip with root dilatation, homocystinuria is downward slip with clots, vascular Ehlers Danlos is rupture risk, and osteogenesis imperfecta is blue sclerae. Karyotype confirms each one.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Condition", "Karyotype", "Classic adult sign"],
-        "rows": [
-          ["Down syndrome", "47 plus 21", "AV septal defect"],
-          ["Turner syndrome", "45 X", "Coarctation aorta"],
-          ["Klinefelter", "47 XXY", "Low testosterone"],
-          ["Marfan syndrome", "Normal count", "Upward lens slip"],
-          ["Homocystinuria", "Normal count", "Downward lens slip"],
-          ["Osteogenesis imperfecta", "Normal count", "Blue sclerae"],
-          ["Vascular Ehlers Danlos", "Normal count", "Arterial rupture"]
-        ]
-      }
+    "right": {
+     "title": "Patau pattern",
+     "points": [
+      "Extra chromosome thirteen",
+      "Extra digits common",
+      "Brain and organ defects",
+      "Very poor survival"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI"
+   }
+  },
+  {
+   "tx": "**Marfan syndrome** (fibrillin one defect weakening connective tissue) creates a tall adult with **arachnodactyly** (long spider fingers) and **lens dislocation** (the eye lens slipping from its centre). **Aortic root dilatation** (a widening of the heart outlet) is the lethal lesion and tracks growth on yearly imaging. **Wrist and thumb signs** (meeting over the knuckles and across the palm) link bedside habitus to life long cardiac danger.",
+   "say": "Marfan syndrome weakens connective tissue through a fibrillin defect and produces tall stature with long spider like fingers. The eye lens can slip from its centre, often upward and outward, and the aortic root widens silently. Yearly heart imaging tracks that widening because dissection is the main killer. Wrist and thumb signs connect habitus to danger and remain favourite clinical examination items.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tall habitus noted"
+     },
+     {
+      "id": "b",
+      "label": "Wrist thumb signs"
+     },
+     {
+      "id": "c",
+      "label": "Echo aortic root"
+     },
+     {
+      "id": "d",
+      "label": "Beta blocker started"
+     },
+     {
+      "id": "e",
+      "label": "Surveillance yearly"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ehlers Danlos syndrome** (a group of collagen defects) varies from stretchy joints to fragile vessels. **Joint hypermobility** (extreme flexibility from loose ligaments) troubles the common type, while the **vascular type** (fragile thin walled arteries) ruptures organs without warning. **Beighton score** (a nine point joint flexibility count) grades laxity at the bedside, and **elastic skin** (skin that stretches far beyond normal limits) completes the skin to joint picture.",
+   "say": "Ehlers Danlos syndrome can group collagen defects whose effects range from stretchy joints to fragile vessels. The common type gives extreme flexibility and soft elastic skin, while the vascular type threatens artery and bowel rupture without warning. A nine point flexibility count called the Beighton score grades joint laxity at the bedside. Distinguishing these two types decides who needs surgery bans and close vascular surveillance.",
+   "vis": null
+  },
+  {
+   "tx": "**Osteogenesis imperfecta** (collagen type 1 failure) fills adult fracture clinics and dental chairs alike. **Blue sclerae** (blue tinted whites of the eyes) and **brittle bones** (fractures from trivial falls) mark the classic picture. **Dentinogenesis imperfecta** (weak tooth enamel with opalescent crowns) and **hearing loss** (middle ear fixation) join the systemic triad. **Bisphosphonate therapy** (bone building drugs) raises density and cuts fracture rates over years.",
+   "say": "Osteogenesis imperfecta comes from fragile collagen type one and produces bones that break with trivial falls. Blue tinted eye whites, weak opalescent tooth enamel, and hearing loss complete the classic systemic picture. Bisphosphonate therapy strengthens bone over years and reduces fracture frequency. Adult care adds dental protection, ear testing, and physiotherapy to prevent deformity and preserve mobility.",
+   "vis": null
+  },
+  {
+   "tx": "**Homocystinuria** (cystathionine synthase failure) mimics Marfan habitus yet carries extra dangers. **Lens dislocation** (the lens slipping downward) and **intellectual disability** (learning difficulty) overlap with Marfan, while **arterial thrombosis** (young strokes and infarcts) sets it apart. **Plasma homocysteine** (a blood amino acid level) confirms the defect, and **pyridoxine responsive patients** (those improving on vitamin B six) show the strongest response to simple treatment.",
+   "say": "Homocystinuria imitates Marfan habitus yet behaves quite differently. The lens slips downward rather than upward, learning difficulty is common, and young arterial clots occur with worrying frequency. A raised plasma homocysteine confirms the defect. Vitamin B six helps a responsive group, while methionine restriction and other therapy support the rest. Confusing this condition with Marfan is a deliberate exam trap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Marfan",
+     "Homocystinuria"
+    ],
+    "rows": [
+     [
+      "Lens slip direction",
+      "Upward and outward",
+      "Downward"
+     ],
+     [
+      "Aortic risk",
+      "Root dilatation",
+      "Thrombosis young"
+     ],
+     [
+      "Skeleton",
+      "Tall with arachnodactyly",
+      "Tall with kyphosis"
+     ],
+     [
+      "Key blood test",
+      "Fibrillin gene",
+      "Homocysteine high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Management principles** (lifelong organ surveillance rather than one-time cure) govern chromosomal care in adults. **Cardiac imaging** (heart scans at set intervals) watches aortas, **thyroid function tests** (thyroid hormone levels) and **audiology** (hearing checks) cover common losses. **Hormone replacement** (testosterone or oestrogen by protocol) restores bone and comfort, while **genetic counselling** (explaining recurrence before pregnancy) respects family choices at every stage.",
+   "say": "Adult management is lifelong surveillance rather than a single cure. Heart imaging watches aortas and valves at set intervals, thyroid tests and hearing checks cover common failures, and hormone replacement protects bone and wellbeing. Explaining recurrence risk before pregnancy through genetic counselling respects family choices. Nurses and physiotherapists often help decide outcomes as much as any drug does.",
+   "vis": null
+  },
+  {
+   "tx": "**Prognosis** (expected life course with modern care) has brightened for many chromosomal conditions. **Cardiac surgery** (repair of childhood defects) and **beta blockade** (heart slowing drugs) have extended adult survival in Down and Marfan clinics. **Aortic dissection** (tearing of the aortic wall) still kills in Marfan when surveillance lapses. Early diagnosis, disciplined imaging, and honest fertility counselling therefore transform prognosis more than any single operation.",
+   "say": "Modern care has brightened prognosis for many chromosomal conditions. Timely heart surgery, steady blood pressure control, and disciplined imaging have extended adult survival in Down and Marfan clinics. Aortic tearing still kills when surveillance lapses, which is why yearly scans remain non negotiable. Early diagnosis and honest fertility counselling change the lifetime course more than any single operation does.",
+   "vis": null
+  },
+  {
+   "tx": "**High yield for the exam** pulls together karyotypes and classic signs. **Down 47,+21** with AV septal defect, **Turner 45,X** with coarctation, **Klinefelter 47,XXY** with high gonadotrophins, **Marfan** with upward lens slip and root dilatation, **homocystinuria** with downward slip and clots, **vascular Ehlers Danlos** with rupture, and **osteogenesis imperfecta** with blue sclerae form the core. **Karyotype** remains the universal confirm test.",
+   "say": "High yield for the exam can pull together karyotypes and classic signs. Down syndrome is forty seven plus twenty one with AV septal defect, Turner is forty five X with coarctation, Klinefelter is forty seven X X Y with high gonadotrophins, Marfan is upward lens slip with root dilatation, homocystinuria is downward slip with clots, vascular Ehlers Danlos is rupture risk, and osteogenesis imperfecta is blue sclerae. Karyotype confirms each one.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Karyotype",
+     "Classic adult sign"
+    ],
+    "rows": [
+     [
+      "Down syndrome",
+      "47 plus 21",
+      "AV septal defect"
+     ],
+     [
+      "Turner syndrome",
+      "45 X",
+      "Coarctation aorta"
+     ],
+     [
+      "Klinefelter",
+      "47 XXY",
+      "Low testosterone"
+     ],
+     [
+      "Marfan syndrome",
+      "Normal count",
+      "Upward lens slip"
+     ],
+     [
+      "Homocystinuria",
+      "Normal count",
+      "Downward lens slip"
+     ],
+     [
+      "Osteogenesis imperfecta",
+      "Normal count",
+      "Blue sclerae"
+     ],
+     [
+      "Vascular Ehlers Danlos",
+      "Normal count",
+      "Arterial rupture"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

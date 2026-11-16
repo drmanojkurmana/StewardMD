@@ -1,211 +1,211 @@
 {
-  "v": 1,
-  "module": "sgm-secondary-hypertension",
-  "subject": "ss-general-medicine",
-  "title": "Secondary hypertension",
-  "minutes": 11,
-  "steps": [
-    {
-      "tx": "**Secondary hypertension** (hypertension from an identifiable cause) is suspected below thirty years, resistant to three drugs, or with sudden accelerated rise and target organ damage. **Hypertension** (blood pressure persistently at or above one hundred forty over ninety millimetres of mercury) with an underlying lesion reverses when that lesion is corrected. **Resistant hypertension** (uncontrolled on three agents including a diuretic) needs cause hunting before adding a fourth drug.",
-      "say": "Secondary hypertension means hypertension from an identifiable cause. Suspect it below thirty years resistant to three drugs or with sudden accelerated rise. Hypertension means blood pressure persistently at or above one hundred forty over ninety millimetres of mercury. Resistant hypertension means uncontrolled on three agents including a diuretic.",
-      "vis": null
+ "v": 1,
+ "module": "sgm-secondary-hypertension",
+ "subject": "ss-general-medicine",
+ "title": "Secondary hypertension",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Secondary hypertension** (hypertension from an identifiable cause) is suspected below 30 years, resistant to 3 drugs, or with sudden accelerated rise and target organ damage. **Hypertension** (blood pressure persistently at or above 140 over 90 mmHg) with an underlying lesion reverses when that lesion is corrected. **Resistant hypertension** (uncontrolled on three agents including a diuretic) needs cause hunting before adding a fourth drug.",
+   "say": "Secondary hypertension means hypertension from an identifiable cause. Suspect it below thirty years resistant to three drugs or with sudden accelerated rise. Hypertension means blood pressure persistently at or above one hundred forty over ninety millimetres of mercury. Resistant hypertension means uncontrolled on three agents including a diuretic.",
+   "vis": null
+  },
+  {
+   "tx": "**Parenchymal renal disease** (kidney tissue disease such as glomerulonephritis) causes the commonest secondary form through sodium and volume excess, while **renovascular stenosis** (renal artery narrowing) drives renin excess from renal hypoperfusion. **Primary aldosteronism** (adrenal aldosterone excess) and **phaeochromocytoma** (adrenal medullary tumour) cause hormone driven hypertension. **Cushing syndrome** (cortisol excess) and **thyroid disease** complete the endocrine group.",
+   "say": "Parenchymal renal disease causes the commonest secondary hypertension through sodium and volume excess. Renovascular stenosis can drive renin excess from renal hypoperfusion. Primary aldosteronism and phaeochromocytoma cause hormone driven hypertension. Cushing syndrome with cortisol excess and thyroid disease complete the endocrine group.",
+   "vis": null
+  },
+  {
+   "tx": "**Obstructive sleep apnoea** (upper airway collapse during sleep) sustains hypertension through hypoxia and sympathetic surges, while **coarctation of aorta** (aortic narrowing) shows upper limb hypertension with weak femoral pulses. **Drugs** (nonsteroidal antiinflammatory drugs, steroids, oral contraceptives, stimulants and erythropoietin) cause reversible hypertension often missed in drug history. **Liquorice** (glycyrrhizin excess) blocks cortisol breakdown and mimics aldosteronism.",
+   "say": "Obstructive sleep apnoea can sustain hypertension through hypoxia and sympathetic surges. Coarctation of aorta can show upper limb hypertension with weak femoral pulses. Drugs such as nonsteroidal antiinflammatory drugs steroids contraceptives and stimulants cause reversible hypertension. Liquorice can block cortisol breakdown and it mimics aldosteronism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause group",
+     "Clue at bedside",
+     "First test"
+    ],
+    "rows": [
+     [
+      "Kidney parenchyma",
+      "Deranged creatinine and haematuria",
+      "Urinalysis and ultrasound"
+     ],
+     [
+      "Renovascular",
+      "Abdominal bruit and flash oedema",
+      "Doppler then CT angiography"
+     ],
+     [
+      "Aldosteronism",
+      "Hypokalaemia and weakness",
+      "Aldosterone to renin ratio"
+     ],
+     [
+      "Phaeochromocytoma",
+      "Paroxysmal headache and sweats",
+      "Plasma metanephrines"
+     ],
+     [
+      "Sleep apnoea",
+      "Loud snoring and daytime sleep",
+      "Sleep study"
+     ],
+     [
+      "Coarctation",
+      "Upper high lower low pressure",
+      "Four limb pressures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Aldosterone to renin ratio** (ARR, aldosterone divided by renin activity) is the first test for primary aldosteronism, with confirmatory suppression testing and **adrenal computed tomography** (adrenal scan) localising adenoma or hyperplasia. **Plasma metanephrines** (adrenal metabolite levels) screen for phaeochromocytoma before adrenal imaging. **Overnight dexamethasone suppression test** (steroid suppression test) screens for cortisol excess in Cushing syndrome.",
+   "say": "Aldosterone to renin ratio is the first test for primary aldosteronism. Confirmatory suppression testing and adrenal computed tomography localise adenoma or hyperplasia. Plasma metanephrines screen for phaeochromocytoma before imaging. Overnight dexamethasone suppression testing screens for cortisol excess in Cushing syndrome.",
+   "vis": null
+  },
+  {
+   "tx": "**Renal Doppler ultrasound** (renal artery flow scan) is the first test for renovascular disease, with **computed tomography angiography** (contrast CT of renal arteries) as the gold standard anatomy before stenting. **Kidney biopsy** (tissue sample under microscopy) is the gold standard for glomerular disease when serology is unclear. **Echocardiography** (ultrasound imaging of heart) detects left ventricular hypertrophy as a clue to chronicity and severity.",
+   "say": "Renal Doppler ultrasound is the first test for renovascular disease. Computed tomography angiography is the gold standard anatomy before stenting. Kidney biopsy is the gold standard for glomerular disease when serology is unclear. Echocardiography can detect left ventricular hypertrophy as a clue to chronicity and severity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First tests by clue",
+     "points": [
+      "Hypokalaemia: aldosterone renin ratio",
+      "Paroxysms: plasma metanephrines",
+      "Bruit: renal Doppler ultrasound",
+      "Short stature: four limb pressures"
+     ]
     },
-    {
-      "tx": "**Parenchymal renal disease** (kidney tissue disease such as glomerulonephritis) causes the commonest secondary form through sodium and volume excess, while **renovascular stenosis** (renal artery narrowing) drives renin excess from renal hypoperfusion. **Primary aldosteronism** (adrenal aldosterone excess) and **phaeochromocytoma** (adrenal medullary tumour) cause hormone driven hypertension. **Cushing syndrome** (cortisol excess) and **thyroid disease** complete the endocrine group.",
-      "say": "Parenchymal renal disease causes the commonest secondary hypertension through sodium and volume excess. Renovascular stenosis can drive renin excess from renal hypoperfusion. Primary aldosteronism and phaeochromocytoma cause hormone driven hypertension. Cushing syndrome with cortisol excess and thyroid disease complete the endocrine group.",
-      "vis": null
-    },
-    {
-      "tx": "**Obstructive sleep apnoea** (upper airway collapse during sleep) sustains hypertension through hypoxia and sympathetic surges, while **coarctation of aorta** (aortic narrowing) shows upper limb hypertension with weak femoral pulses. **Drugs** (nonsteroidal antiinflammatory drugs, steroids, oral contraceptives, stimulants and erythropoietin) cause reversible hypertension often missed in drug history. **Liquorice** (glycyrrhizin excess) blocks cortisol breakdown and mimics aldosteronism.",
-      "say": "Obstructive sleep apnoea can sustain hypertension through hypoxia and sympathetic surges. Coarctation of aorta can show upper limb hypertension with weak femoral pulses. Drugs such as nonsteroidal antiinflammatory drugs steroids contraceptives and stimulants cause reversible hypertension. Liquorice can block cortisol breakdown and it mimics aldosteronism.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Cause group",
-          "Clue at bedside",
-          "First test"
-        ],
-        "rows": [
-          [
-            "Kidney parenchyma",
-            "Deranged creatinine and haematuria",
-            "Urinalysis and ultrasound"
-          ],
-          [
-            "Renovascular",
-            "Abdominal bruit and flash oedema",
-            "Doppler then CT angiography"
-          ],
-          [
-            "Aldosteronism",
-            "Hypokalaemia and weakness",
-            "Aldosterone to renin ratio"
-          ],
-          [
-            "Phaeochromocytoma",
-            "Paroxysmal headache and sweats",
-            "Plasma metanephrines"
-          ],
-          [
-            "Sleep apnoea",
-            "Loud snoring and daytime sleep",
-            "Sleep study"
-          ],
-          [
-            "Coarctation",
-            "Upper high lower low pressure",
-            "Four limb pressures"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Aldosterone to renin ratio** (ARR, aldosterone divided by renin activity) is the first test for primary aldosteronism, with confirmatory suppression testing and **adrenal computed tomography** (adrenal scan) localising adenoma or hyperplasia. **Plasma metanephrines** (adrenal metabolite levels) screen for phaeochromocytoma before adrenal imaging. **Overnight dexamethasone suppression test** (steroid suppression test) screens for cortisol excess in Cushing syndrome.",
-      "say": "Aldosterone to renin ratio is the first test for primary aldosteronism. Confirmatory suppression testing and adrenal computed tomography localise adenoma or hyperplasia. Plasma metanephrines screen for phaeochromocytoma before imaging. Overnight dexamethasone suppression testing screens for cortisol excess in Cushing syndrome.",
-      "vis": null
-    },
-    {
-      "tx": "**Renal Doppler ultrasound** (renal artery flow scan) is the first test for renovascular disease, with **computed tomography angiography** (contrast CT of renal arteries) as the gold standard anatomy before stenting. **Kidney biopsy** (tissue sample under microscopy) is the gold standard for glomerular disease when serology is unclear. **Echocardiography** (ultrasound imaging of heart) detects left ventricular hypertrophy as a clue to chronicity and severity.",
-      "say": "Renal Doppler ultrasound is the first test for renovascular disease. Computed tomography angiography is the gold standard anatomy before stenting. Kidney biopsy is the gold standard for glomerular disease when serology is unclear. Echocardiography can detect left ventricular hypertrophy as a clue to chronicity and severity.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "First tests by clue",
-          "points": [
-            "Hypokalaemia: aldosterone renin ratio",
-            "Paroxysms: plasma metanephrines",
-            "Bruit: renal Doppler ultrasound",
-            "Short stature: four limb pressures"
-          ]
-        },
-        "right": {
-          "title": "Gold standard anatomy",
-          "points": [
-            "CT angiography for renal artery",
-            "Adrenal imaging after biochemistry",
-            "Kidney biopsy for glomerular disease",
-            "Sleep study confirms apnoea"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "**Paroxysmal hypertension** (sudden spikes with headache, palpitation and sweating) fits tumoral catecholamine release, while **Cushing habitus** (central obesity, purple striae and moon face) points to cortisol excess. **Renal bruit** (whooshing over flank) and **flash pulmonary oedema** (sudden lung fluid) suggest bilateral renal artery stenosis. **Four limb pressure difference** (arm higher than leg readings) reveals coarctation before imaging.",
-      "say": "Paroxysmal hypertension means sudden spikes with headache palpitation and sweating. Cushing habitus with central obesity purple striae and moon face points to cortisol excess. Renal bruit and flash pulmonary oedema suggest bilateral renal artery stenosis. Four limb pressure difference reveals coarctation before imaging.",
-      "vis": null
-    },
-    {
-      "tx": "**Mineralocorticoid receptor antagonist** (spironolactone or eplerenone) is first line for primary aldosteronism when no resectable adenoma exists, while **adrenalectomy** (surgical adrenal removal) cures adenoma disease. **Alpha blockade** (phenoxybenzamine or phentolamine) must precede beta blockade in phaeochromocytoma to avoid unopposed vasoconstriction, followed by tumour excision after volume expansion. **Continuous positive airway pressure** (CPAP, sleep airway splint) lowers sleep apnoea hypertension.",
-      "say": "Mineralocorticoid receptor antagonist such as spironolactone is first line for primary aldosteronism without a resectable adenoma. Adrenalectomy cures adenoma disease. Alpha blockade must precede beta blockade in phaeochromocytoma to avoid hypertensive crisis followed by tumour excision. Continuous positive airway pressure can lower sleep apnoea hypertension.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Screen biochemistry"
-          },
-          {
-            "id": "b",
-            "label": "Confirm suppression"
-          },
-          {
-            "id": "c",
-            "label": "Image gland or vessel"
-          },
-          {
-            "id": "d",
-            "label": "Drug or surgery"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "positive screen"
-          ],
-          [
-            "b",
-            "c",
-            "confirmed disease"
-          ],
-          [
-            "c",
-            "d",
-            "guided therapy"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Renal artery revascularisation** (stent or surgical bypass) is reserved for resistant hypertension with flash oedema or deteriorating kidney function, because stenting for stable disease alone lacks proven benefit. **Angiotensin converting enzyme inhibitor** (ACE inhibitor, renin system blocker) needs caution in bilateral stenosis where it precipitates acute kidney injury. **Statin and antiplatelet therapy** accompany atherosclerotic renovascular disease as for coronary disease.",
-      "say": "Renal artery revascularisation is reserved for resistant hypertension with flash oedema or deteriorating kidney function. Stenting for stable disease alone lacks proven benefit. Angiotensin converting enzyme inhibitor needs caution in bilateral stenosis where it precipitates acute kidney injury. Statin and antiplatelet therapy can accompany atherosclerotic renovascular disease.",
-      "vis": null
-    },
-    {
-      "tx": "**End organ damage** (heart, brain, kidney and eye injury from chronic hypertension) marks long standing disease and worsens prognosis if the cause remains untreated. **Aortic dissection** (tear in aortic wall) complicates severe coarctation hypertension during exertion, while **hyperkalaemia** (raised potassium) signals hyporeninaemic hypoaldosteronism in diabetics. **Cure rate** exceeds eighty percent after adrenalectomy for aldosteronoma, higher than after lifelong drugs.",
-      "say": "End organ damage to heart brain kidney and eye marks long standing disease and it worsens prognosis if the cause remains untreated. Aortic dissection complicates severe coarctation hypertension during exertion. Hyperkalaemia signals low renin low aldosterone states in diabetics. Cure rate can exceed eighty percent after adrenalectomy for aldosteronoma.",
-      "vis": null
-    },
-    {
-      "tx": "**Beta blocker before alpha blocker** in phaeochromocytoma precipitates hypertensive crisis through unopposed alpha vasoconstriction, while **alkaptonuria** (black urine with ochronosis) unrelated to adrenal disease confuses metanephrine assays rarely. **NSAID hypertension** (painkiller driven renal sodium retention) reverses within weeks of stopping the drug. Forgetting a **drug history** is the commonest single cause of missed secondary hypertension in young patients.",
-      "say": "Beta blocker before alpha blocker in phaeochromocytoma precipitates hypertensive crisis through unopposed vasoconstriction. Rare assay interference can confound metanephrine interpretation. Painkiller driven hypertension reverses within weeks of stopping nonsteroidal drugs. Forgetting the drug history is the commonest reason for missed secondary hypertension.",
-      "vis": null
-    },
-    {
-      "tx": "High-yield for the exam keeps cause, first test and definitive therapy linked. First-line drugs are **spironolactone** for aldosteronism and **alpha blockade before surgery** for phaeochromocytoma. Gold-standard anatomy is **CT angiography** for renal artery stenosis and **suppression testing** for hormonal excess. Thresholds are **one hundred forty over ninety**, **age below thirty**, **resistant to three drugs** and **aldosterone renin ratio** as the screen.",
-      "say": "High yield revision links cause first test and definitive therapy for secondary hypertension. Spironolactone is first line for aldosteronism without resectable adenoma. Alpha blockade must precede surgery for phaeochromocytoma. Computed tomography angiography is the gold standard for renal artery anatomy.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Disease",
-          "First test",
-          "Definitive therapy"
-        ],
-        "rows": [
-          [
-            "Aldosteronism",
-            "Aldosterone renin ratio",
-            "Spironolactone or adrenalectomy"
-          ],
-          [
-            "Phaeochromocytoma",
-            "Plasma metanephrines",
-            "Alpha block then surgery"
-          ],
-          [
-            "Renovascular",
-            "Doppler ultrasound",
-            "Stent only if resistant or flash oedema"
-          ],
-          [
-            "Sleep apnoea",
-            "Sleep study",
-            "CPAP therapy"
-          ],
-          [
-            "Coarctation",
-            "Four limb pressures",
-            "Surgical or catheter repair"
-          ],
-          [
-            "Kidney parenchyma",
-            "Urinalysis plus biopsy",
-            "Treat glomerular cause"
-          ],
-          [
-            "Drug induced",
-            "Drug history",
-            "Stop offending drug"
-          ],
-          [
-            "Thyroid or Cushing",
-            "Hormone suppression tests",
-            "Disease specific surgery or drugs"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Gold standard anatomy",
+     "points": [
+      "CT angiography for renal artery",
+      "Adrenal imaging after biochemistry",
+      "Kidney biopsy for glomerular disease",
+      "Sleep study confirms apnoea"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI"
+   }
+  },
+  {
+   "tx": "**Paroxysmal hypertension** (sudden spikes with headache, palpitation and sweating) fits tumoral catecholamine release, while **Cushing habitus** (central obesity, purple striae and moon face) points to cortisol excess. **Renal bruit** (whooshing over flank) and **flash pulmonary oedema** (sudden lung fluid) suggest bilateral renal artery stenosis. **Four limb pressure difference** (arm higher than leg readings) reveals coarctation before imaging.",
+   "say": "Paroxysmal hypertension means sudden spikes with headache palpitation and sweating. Cushing habitus with central obesity purple striae and moon face points to cortisol excess. Renal bruit and flash pulmonary oedema suggest bilateral renal artery stenosis. Four limb pressure difference reveals coarctation before imaging.",
+   "vis": null
+  },
+  {
+   "tx": "**Mineralocorticoid receptor antagonist** (spironolactone or eplerenone) is first line for primary aldosteronism when no resectable adenoma exists, while **adrenalectomy** (surgical adrenal removal) cures adenoma disease. **Alpha blockade** (phenoxybenzamine or phentolamine) must precede beta blockade in phaeochromocytoma to avoid unopposed vasoconstriction, followed by tumour excision after volume expansion. **Continuous positive airway pressure** (CPAP, sleep airway splint) lowers sleep apnoea hypertension.",
+   "say": "Mineralocorticoid receptor antagonist such as spironolactone is first line for primary aldosteronism without a resectable adenoma. Adrenalectomy cures adenoma disease. Alpha blockade must precede beta blockade in phaeochromocytoma to avoid hypertensive crisis followed by tumour excision. Continuous positive airway pressure can lower sleep apnoea hypertension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen biochemistry"
+     },
+     {
+      "id": "b",
+      "label": "Confirm suppression"
+     },
+     {
+      "id": "c",
+      "label": "Image gland or vessel"
+     },
+     {
+      "id": "d",
+      "label": "Drug or surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "positive screen"
+     ],
+     [
+      "b",
+      "c",
+      "confirmed disease"
+     ],
+     [
+      "c",
+      "d",
+      "guided therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal artery revascularisation** (stent or surgical bypass) is reserved for resistant hypertension with flash oedema or deteriorating kidney function, because stenting for stable disease alone lacks proven benefit. **Angiotensin converting enzyme inhibitor** (ACE inhibitor, renin system blocker) needs caution in bilateral stenosis where it precipitates acute kidney injury. **Statin and antiplatelet therapy** accompany atherosclerotic renovascular disease as for coronary disease.",
+   "say": "Renal artery revascularisation is reserved for resistant hypertension with flash oedema or deteriorating kidney function. Stenting for stable disease alone lacks proven benefit. Angiotensin converting enzyme inhibitor needs caution in bilateral stenosis where it precipitates acute kidney injury. Statin and antiplatelet therapy can accompany atherosclerotic renovascular disease.",
+   "vis": null
+  },
+  {
+   "tx": "**End organ damage** (heart, brain, kidney and eye injury from chronic hypertension) marks long standing disease and worsens prognosis if the cause remains untreated. **Aortic dissection** (tear in aortic wall) complicates severe coarctation hypertension during exertion, while **hyperkalaemia** (raised potassium) signals hyporeninaemic hypoaldosteronism in diabetics. **Cure rate** exceeds 80% after adrenalectomy for aldosteronoma, higher than after lifelong drugs.",
+   "say": "End organ damage to heart brain kidney and eye marks long standing disease and it worsens prognosis if the cause remains untreated. Aortic dissection complicates severe coarctation hypertension during exertion. Hyperkalaemia signals low renin low aldosterone states in diabetics. Cure rate can exceed eighty percent after adrenalectomy for aldosteronoma.",
+   "vis": null
+  },
+  {
+   "tx": "**Beta blocker before alpha blocker** in phaeochromocytoma precipitates hypertensive crisis through unopposed alpha vasoconstriction, while **alkaptonuria** (black urine with ochronosis) unrelated to adrenal disease confuses metanephrine assays rarely. **NSAID hypertension** (painkiller driven renal sodium retention) reverses within weeks of stopping the drug. Forgetting a **drug history** is the commonest single cause of missed secondary hypertension in young patients.",
+   "say": "Beta blocker before alpha blocker in phaeochromocytoma precipitates hypertensive crisis through unopposed vasoconstriction. Rare assay interference can confound metanephrine interpretation. Painkiller driven hypertension reverses within weeks of stopping nonsteroidal drugs. Forgetting the drug history is the commonest reason for missed secondary hypertension.",
+   "vis": null
+  },
+  {
+   "tx": "High-yield for the exam keeps cause, first test and definitive therapy linked. First-line drugs are **spironolactone** for aldosteronism and **alpha blockade before surgery** for phaeochromocytoma. Gold-standard anatomy is **CT angiography** for renal artery stenosis and **suppression testing** for hormonal excess. Thresholds are **140 over 90**, **age below 30**, **resistant to 3 drugs** and **aldosterone renin ratio** as the screen.",
+   "say": "High yield revision links cause first test and definitive therapy for secondary hypertension. Spironolactone is first line for aldosteronism without resectable adenoma. Alpha blockade must precede surgery for phaeochromocytoma. Computed tomography angiography is the gold standard for renal artery anatomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "First test",
+     "Definitive therapy"
+    ],
+    "rows": [
+     [
+      "Aldosteronism",
+      "Aldosterone renin ratio",
+      "Spironolactone or adrenalectomy"
+     ],
+     [
+      "Phaeochromocytoma",
+      "Plasma metanephrines",
+      "Alpha block then surgery"
+     ],
+     [
+      "Renovascular",
+      "Doppler ultrasound",
+      "Stent only if resistant or flash oedema"
+     ],
+     [
+      "Sleep apnoea",
+      "Sleep study",
+      "CPAP therapy"
+     ],
+     [
+      "Coarctation",
+      "Four limb pressures",
+      "Surgical or catheter repair"
+     ],
+     [
+      "Kidney parenchyma",
+      "Urinalysis plus biopsy",
+      "Treat glomerular cause"
+     ],
+     [
+      "Drug induced",
+      "Drug history",
+      "Stop offending drug"
+     ],
+     [
+      "Thyroid or Cushing",
+      "Hormone suppression tests",
+      "Disease specific surgery or drugs"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

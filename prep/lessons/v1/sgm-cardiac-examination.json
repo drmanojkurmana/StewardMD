@@ -1,238 +1,238 @@
 {
-  "v": 1,
-  "module": "sgm-cardiac-examination",
-  "subject": "ss-general-medicine",
-  "title": "Cardiac examination and murmurs",
-  "minutes": 11,
-  "steps": [
-    {
-      "tx": "Cardiovascular examination (heart and vessel examination) follows a fixed bedside sequence of **inspection**, **palpation**, **percussion** and **auscultation** to generate bedside signs before any monitor is attached. A normal routine spans 30 to 40 mmHg pulse pressure and apex beat displaced only beyond the sixth rib space. **First test** thinking starts here because signs direct the electrocardiogram and echocardiogram.",
-      "say": "Cardiovascular examination is the bedside assessment of the heart and blood vessels in a set order. You can inspect then palpate then percuss then auscultate to find signs at the bedside. Pulse pressure normally is around thirty to forty millimetres of mercury and the apex beat sits inside the sixth rib space. This order can guide which cardiac tests you order next.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Inspection"
-          },
-          {
-            "id": "b",
-            "label": "Palpation"
-          },
-          {
-            "id": "c",
-            "label": "Auscultation"
-          },
-          {
-            "id": "d",
-            "label": "Manoeuvres"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "look first"
-          ],
-          [
-            "b",
-            "c",
-            "feel and listen"
-          ],
-          [
-            "c",
-            "d",
-            "dynamic signs"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "sgm-cardiac-examination",
+ "subject": "ss-general-medicine",
+ "title": "Cardiac examination and murmurs",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Cardiovascular examination (heart and vessel examination) follows a fixed bedside sequence of **inspection**, **palpation**, **percussion** and **auscultation** to generate bedside signs before any monitor is attached. A normal routine spans 30 to 40 mmHg pulse pressure and apex beat displaced only beyond the sixth rib space. **First test** thinking starts here because signs direct the electrocardiogram and echocardiogram.",
+   "say": "Cardiovascular examination is the bedside assessment of the heart and blood vessels in a set order. You can inspect then palpate then percuss then auscultate to find signs at the bedside. Pulse pressure normally is around thirty to forty millimetres of mercury and the apex beat sits inside the sixth rib space. This order can guide which cardiac tests you order next.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inspection"
+     },
+     {
+      "id": "b",
+      "label": "Palpation"
+     },
+     {
+      "id": "c",
+      "label": "Auscultation"
+     },
+     {
+      "id": "d",
+      "label": "Manoeuvres"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "look first"
+     ],
+     [
+      "b",
+      "c",
+      "feel and listen"
+     ],
+     [
+      "c",
+      "d",
+      "dynamic signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Jugular venous pressure** (neck vein pressure from right heart pressure) is read with the right internal jugular vein while the patient reclines at 45 degrees. A visible column each beat with obliteration on gentle pressure means raised right atrial pressure, while absent collapse suggests raised central venous pressure. **Oedema** (fluid swelling of feet) and **cyanosis** (bluish skin) complete the inspection pattern.",
+   "say": "Jugular venous pressure is the neck vein pressure that reflects right heart pressure. With the patient reclined at forty five degrees you look for a visible column that moves with each heartbeat and disappears with gentle pressure. Oedema means fluid swelling of the feet and cyanosis means bluish discoloration of skin. These inspection findings can point toward right heart failure early.",
+   "vis": null
+  },
+  {
+   "tx": "**Apex beat** (the farthest leftward point of impulse felt on palpation) sits in the left fifth intercostal space at the midclavicular line and is displaced laterally in left ventricular enlargement. **Thrill** (a palpable murmur) marks a loud turbulent flow and localises the lesion, while **pulses** reveal rate, rhythm, volume and symmetry. Absent or paradoxical **pulsus alternans** (beatStrength variation) signals severe ventricular dysfunction.",
+   "say": "The apex beat is the farthest point of impulse you feel when you palpate the chest. It can normally sit in the left fifth intercostal space and move outward in left ventricular enlargement. A thrill is a palpable murmur that helps you localise the lesion. Pulses tell you rate rhythm volume and symmetry and alternating strength suggests severe pumping failure.",
+   "vis": null
+  },
+  {
+   "tx": "**First heart sound** (S1 from mitral and tricuspid closure at systole start) is loudest at the apex and best heard with the diaphragm, while **second heart sound** (S2 from aortic and pulmonary closure) is loudest at the base. **Split S2** (two audible components) splits physiologically on inspiration, whereas **split S1** (two components) is always pathological and implies bundle branch block. **S3 gallop** (mid diastolic extra sound) means a dilated ventricle.",
+   "say": "First heart sound can mark the start of systole and come from mitral and tricuspid valve closure. It is best heard at the apex with the diaphragm. Second heart sound can mark the end of systole and come from aortic and pulmonary valve closure at the base. Splitting of the second sound on inspiration is normal but splitting of the first sound is always abnormal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First heart sound",
+     "points": [
+      "Mitral and tricuspid closure",
+      "Best at apex with diaphragm",
+      "Split means bundle branch block",
+      "S3 gallop means dilated ventricle"
+     ]
     },
-    {
-      "tx": "**Jugular venous pressure** (neck vein pressure from right heart pressure) is read with the right internal jugular vein while the patient reclines at forty five degrees. A visible column each beat with obliteration on gentle pressure means raised right atrial pressure, while absent collapse suggests raised central venous pressure. **Oedema** (fluid swelling of feet) and **cyanosis** (bluish skin) complete the inspection pattern.",
-      "say": "Jugular venous pressure is the neck vein pressure that reflects right heart pressure. With the patient reclined at forty five degrees you look for a visible column that moves with each heartbeat and disappears with gentle pressure. Oedema means fluid swelling of the feet and cyanosis means bluish discoloration of skin. These inspection findings can point toward right heart failure early.",
-      "vis": null
-    },
-    {
-      "tx": "**Apex beat** (the farthest leftward point of impulse felt on palpation) sits in the left fifth intercostal space at the midclavicular line and is displaced laterally in left ventricular enlargement. **Thrill** (a palpable murmur) marks a loud turbulent flow and localises the lesion, while **pulses** reveal rate, rhythm, volume and symmetry. Absent or paradoxical **pulsus alternans** (beatStrength variation) signals severe ventricular dysfunction.",
-      "say": "The apex beat is the farthest point of impulse you feel when you palpate the chest. It can normally sit in the left fifth intercostal space and move outward in left ventricular enlargement. A thrill is a palpable murmur that helps you localise the lesion. Pulses tell you rate rhythm volume and symmetry and alternating strength suggests severe pumping failure.",
-      "vis": null
-    },
-    {
-      "tx": "**First heart sound** (S1 from mitral and tricuspid closure at systole start) is loudest at the apex and best heard with the diaphragm, while **second heart sound** (S2 from aortic and pulmonary closure) is loudest at the base. **Split S2** (two audible components) splits physiologically on inspiration, whereas **split S1** (two components) is always pathological and implies bundle branch block. **S3 gallop** (mid diastolic extra sound) means a dilated ventricle.",
-      "say": "First heart sound can mark the start of systole and come from mitral and tricuspid valve closure. It is best heard at the apex with the diaphragm. Second heart sound can mark the end of systole and come from aortic and pulmonary valve closure at the base. Splitting of the second sound on inspiration is normal but splitting of the first sound is always abnormal.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "First heart sound",
-          "points": [
-            "Mitral and tricuspid closure",
-            "Best at apex with diaphragm",
-            "Split means bundle branch block",
-            "S3 gallop means dilated ventricle"
-          ]
-        },
-        "right": {
-          "title": "Second heart sound",
-          "points": [
-            "Aortic and pulmonary closure",
-            "Best at base with diaphragm",
-            "Splits on inspiration normally",
-            "Wide split means pulmonary stenosis"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "**Timing** (when the murmur occurs within the cardiac cycle) decides systolic, diastolic or continuous classification before character is judged. **Shape** (rising, plateau or crescendo pattern), **radiation** (where the sound travels) and **grade** (one to six loudness scale) narrow the valve involved. **Precordium** (front of the chest over the heart) mapping with patient posture makes the timing reliable at the bedside.",
-      "say": "Timing means where the murmur falls inside the heart cycle and it comes first in classification. Shape can describe whether the sound rises falls or plateaus and radiation tells you where it travels. Grade can run from one to six on the loudness scale. Mapping the precordium which is the front of chest over the heart with posture helps you judge timing accurately.",
-      "vis": null
-    },
-    {
-      "tx": "**Systolic ejection murmur** (harsh crescendo at aortic area radiating to carotids) fits **aortic stenosis** (narrow aortic valve) with a slow rising pulse and syncope. **Pansystolic murmur** (uniform throughout systole at apex radiating to axilla) fits **mitral regurgitation** (leaky mitral valve). **Continuous machinery murmur** (systolic and diastolic) fits **patent ductus arteriosus** (persistent fetal channel between aorta and pulmonary artery).",
-      "say": "A systolic ejection murmur at the aortic area that radiates toward the carotids suggests aortic stenosis which is narrowing of the aortic valve. A pansystolic murmur at the apex radiating to the axilla suggests mitral regurgitation which is a leaky mitral valve. A continuous machinery murmur suggests patent ductus arteriosus which is a persistent fetal channel between aorta and pulmonary artery.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Murmur",
-          "Valve lesion",
-          "Best site and radiation"
-        ],
-        "rows": [
-          [
-            "Ejection systolic",
-            "Aortic stenosis",
-            "Right second space to carotids"
-          ],
-          [
-            "Pansystolic at apex",
-            "Mitral regurgitation",
-            "Apex to axilla"
-          ],
-          [
-            "Diastolic rumble",
-            "Mitral stenosis",
-            "Apex with bell held lateral"
-          ],
-          [
-            "Continuous machinery",
-            "Patent ductus",
-            "Left infraclavicular"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Mid diastolic rumble** (low pitched with opening snap) fits **mitral stenosis** (narrow mitral valve) with a tapping apex and loud first sound, while **early diastolic blowing murmur** fits **aortic regurgitation** (leaky aortic valve) with water hammer pulse. **Ejection click** (tick at base) fits bicuspid aortic valve or pulmonary stenosis. **Opening snap** (early diastolic snap) dates mitral stenosis severity by its proximity to second sound.",
-      "say": "A mid diastolic rumble with an opening snap suggests mitral stenosis which is narrowing of the mitral valve. An early diastolic blowing murmur suggests aortic regurgitation which is a leaky aortic valve with a water hammer pulse. An ejection click at the base suggests a bicuspid aortic valve. The closer the opening snap to the second sound the tighter the stenosis.",
-      "vis": null
-    },
-    {
-      "tx": "**Inspiratory manoeuvre** (hand grip or sustained squatting) raises afterload and intensifies left sided regurgitant murmurs, while **Valsalva strain** (bearing down) reduces preload and softens most murmurs except **hypertrophic obstructive cardiomyopathy** (thickened septum narrowing outflow) which gets louder. **Sitting forward in expiration** (leaning forward after breathing out) best exposes diastolic murmurs held with the diaphragm. These bedside tests separate flow from structural murmurs.",
-      "say": "Hand grip and squatting raise afterload and intensify left sided regurgitant murmurs. Valsalva strain means bearing down to reduce preload and it softens most murmurs except hypertrophic obstructive cardiomyopathy which gets louder. Sitting forward after breathing out best exposes diastolic murmurs when you listen with the diaphragm. These manoeuvres can separate flow murmurs from structural valve disease.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Hand grip and squat"
-          },
-          {
-            "id": "b",
-            "label": "Valsalva strain"
-          },
-          {
-            "id": "c",
-            "label": "Lean forward expire"
-          },
-          {
-            "id": "d",
-            "label": "Murmur louder or softer"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "d",
-            "left regurgitant louder"
-          ],
-          [
-            "b",
-            "d",
-            "most softer except outflow disease"
-          ],
-          [
-            "c",
-            "d",
-            "diastolic clearer"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Electrocardiogram** (ECG tracing of heart electricity) is the first test after the examination to confirm hypertrophy, conduction delay and ischaemia, while **echocardiography** (ultrasound imaging of valves and chambers) is the gold standard that grades stenosis and regurgitation and measures ejection fraction. **Chest radiograph** (chest X-ray) screens for cardiomegaly and pulmonary venous congestion. Examination signs predict which echo finding is most likely.",
-      "say": "Electrocardiogram records heart electricity and it is the first test after bedside examination to confirm hypertrophy and conduction delay. Echocardiography is ultrasound imaging of valves and chambers and it is the gold standard that grades stenosis and measures ejection fraction. A chest X ray can screen for heart enlargement and lung congestion. Signs predict the likely echo finding before you order it.",
-      "vis": null
-    },
-    {
-      "tx": "**Fixed split S2** (constant spacing through respiration) points to **atrial septal defect** (hole between atria) rather than valve disease, while **inspiratory augmentation** (louder on breathing in) exposes right sided murmurs. **Corrigan pulse** (collapsing water hammer pulse) plus **Austin Flint murmur** (mid diastolic rumble from aortic jet) clinch severe aortic regurgitation. **Murmurs louder after a premature beat** favour aortic stenosis over mitral disease.",
-      "say": "A fixed split second sound that does not vary with breathing points to atrial septal defect which is a hole between the atria. Louder murmurs on inspiration can expose right sided lesions. A collapsing water hammer pulse with a mid diastolic rumble clinches severe aortic regurgitation. Murmurs louder after a premature beat can favour aortic stenosis over mitral disease.",
-      "vis": null
-    },
-    {
-      "tx": "High-yield for the exam keeps bedside signs linked to lesions and confirmatory tests. First-line action is a systematic **inspection to auscultation** sequence with JVP and pulse checks. Gold-standard confirmation is **echocardiography** for every significant murmur. Named signs are **Graham Steell** (pulmonary regurgitation murmur of pulmonary hypertension), **Corrigan pulse**, **Austin Flint murmur** and **fixed split**.",
-      "say": "High yield revision can link each bedside sign to its lesion and confirmatory test. The first line approach is a systematic inspection to auscultation sequence with jugular venous pressure and pulse checks. Echocardiography is the gold standard for every significant murmur. Named signs can include Graham Steell murmur Corrigan pulse Austin Flint murmur and fixed split second sound.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Sign",
-          "Lesion",
-          "Test or treatment"
-        ],
-        "rows": [
-          [
-            "Ejection systolic to carotids",
-            "Aortic stenosis",
-            "Echo gold standard"
-          ],
-          [
-            "Pansystolic apex to axilla",
-            "Mitral regurgitation",
-            "First test ECG then echo"
-          ],
-          [
-            "Mid diastolic rumble",
-            "Mitral stenosis",
-            "Echo measures gradient"
-          ],
-          [
-            "Early diastolic blowing",
-            "Aortic regurgitation",
-            "Echo plus wide pulse pressure"
-          ],
-          [
-            "Continuous machinery",
-            "Patent ductus",
-            "Echo with bubble study"
-          ],
-          [
-            "Fixed split S2",
-            "Atrial septal defect",
-            "Echo with bubble study"
-          ],
-          [
-            "Corrigan pulse",
-            "Severe aortic regurgitation",
-            "Echo grades severity"
-          ],
-          [
-            "Graham Steell murmur",
-            "Pulmonary hypertension",
-            "Echo estimates pressure"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Second heart sound",
+     "points": [
+      "Aortic and pulmonary closure",
+      "Best at base with diaphragm",
+      "Splits on inspiration normally",
+      "Wide split means pulmonary stenosis"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI"
+   }
+  },
+  {
+   "tx": "**Timing** (when the murmur occurs within the cardiac cycle) decides systolic, diastolic or continuous classification before character is judged. **Shape** (rising, plateau or crescendo pattern), **radiation** (where the sound travels) and **grade** (1 to 6 loudness scale) narrow the valve involved. **Precordium** (front of the chest over the heart) mapping with patient posture makes the timing reliable at the bedside.",
+   "say": "Timing means where the murmur falls inside the heart cycle and it comes first in classification. Shape can describe whether the sound rises falls or plateaus and radiation tells you where it travels. Grade can run from one to six on the loudness scale. Mapping the precordium which is the front of chest over the heart with posture helps you judge timing accurately.",
+   "vis": null
+  },
+  {
+   "tx": "**Systolic ejection murmur** (harsh crescendo at aortic area radiating to carotids) fits **aortic stenosis** (narrow aortic valve) with a slow rising pulse and syncope. **Pansystolic murmur** (uniform throughout systole at apex radiating to axilla) fits **mitral regurgitation** (leaky mitral valve). **Continuous machinery murmur** (systolic and diastolic) fits **patent ductus arteriosus** (persistent fetal channel between aorta and pulmonary artery).",
+   "say": "A systolic ejection murmur at the aortic area that radiates toward the carotids suggests aortic stenosis which is narrowing of the aortic valve. A pansystolic murmur at the apex radiating to the axilla suggests mitral regurgitation which is a leaky mitral valve. A continuous machinery murmur suggests patent ductus arteriosus which is a persistent fetal channel between aorta and pulmonary artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Murmur",
+     "Valve lesion",
+     "Best site and radiation"
+    ],
+    "rows": [
+     [
+      "Ejection systolic",
+      "Aortic stenosis",
+      "Right second space to carotids"
+     ],
+     [
+      "Pansystolic at apex",
+      "Mitral regurgitation",
+      "Apex to axilla"
+     ],
+     [
+      "Diastolic rumble",
+      "Mitral stenosis",
+      "Apex with bell held lateral"
+     ],
+     [
+      "Continuous machinery",
+      "Patent ductus",
+      "Left infraclavicular"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mid diastolic rumble** (low pitched with opening snap) fits **mitral stenosis** (narrow mitral valve) with a tapping apex and loud first sound, while **early diastolic blowing murmur** fits **aortic regurgitation** (leaky aortic valve) with water hammer pulse. **Ejection click** (tick at base) fits bicuspid aortic valve or pulmonary stenosis. **Opening snap** (early diastolic snap) dates mitral stenosis severity by its proximity to second sound.",
+   "say": "A mid diastolic rumble with an opening snap suggests mitral stenosis which is narrowing of the mitral valve. An early diastolic blowing murmur suggests aortic regurgitation which is a leaky aortic valve with a water hammer pulse. An ejection click at the base suggests a bicuspid aortic valve. The closer the opening snap to the second sound the tighter the stenosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Inspiratory manoeuvre** (hand grip or sustained squatting) raises afterload and intensifies left sided regurgitant murmurs, while **Valsalva strain** (bearing down) reduces preload and softens most murmurs except **hypertrophic obstructive cardiomyopathy** (thickened septum narrowing outflow) which gets louder. **Sitting forward in expiration** (leaning forward after breathing out) best exposes diastolic murmurs held with the diaphragm. These bedside tests separate flow from structural murmurs.",
+   "say": "Hand grip and squatting raise afterload and intensify left sided regurgitant murmurs. Valsalva strain means bearing down to reduce preload and it softens most murmurs except hypertrophic obstructive cardiomyopathy which gets louder. Sitting forward after breathing out best exposes diastolic murmurs when you listen with the diaphragm. These manoeuvres can separate flow murmurs from structural valve disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hand grip and squat"
+     },
+     {
+      "id": "b",
+      "label": "Valsalva strain"
+     },
+     {
+      "id": "c",
+      "label": "Lean forward expire"
+     },
+     {
+      "id": "d",
+      "label": "Murmur louder or softer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d",
+      "left regurgitant louder"
+     ],
+     [
+      "b",
+      "d",
+      "most softer except outflow disease"
+     ],
+     [
+      "c",
+      "d",
+      "diastolic clearer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electrocardiogram** (ECG tracing of heart electricity) is the first test after the examination to confirm hypertrophy, conduction delay and ischaemia, while **echocardiography** (ultrasound imaging of valves and chambers) is the gold standard that grades stenosis and regurgitation and measures ejection fraction. **Chest radiograph** (chest X-ray) screens for cardiomegaly and pulmonary venous congestion. Examination signs predict which echo finding is most likely.",
+   "say": "Electrocardiogram records heart electricity and it is the first test after bedside examination to confirm hypertrophy and conduction delay. Echocardiography is ultrasound imaging of valves and chambers and it is the gold standard that grades stenosis and measures ejection fraction. A chest X ray can screen for heart enlargement and lung congestion. Signs predict the likely echo finding before you order it.",
+   "vis": null
+  },
+  {
+   "tx": "**Fixed split S2** (constant spacing through respiration) points to **atrial septal defect** (hole between atria) rather than valve disease, while **inspiratory augmentation** (louder on breathing in) exposes right sided murmurs. **Corrigan pulse** (collapsing water hammer pulse) plus **Austin Flint murmur** (mid diastolic rumble from aortic jet) clinch severe aortic regurgitation. **Murmurs louder after a premature beat** favour aortic stenosis over mitral disease.",
+   "say": "A fixed split second sound that does not vary with breathing points to atrial septal defect which is a hole between the atria. Louder murmurs on inspiration can expose right sided lesions. A collapsing water hammer pulse with a mid diastolic rumble clinches severe aortic regurgitation. Murmurs louder after a premature beat can favour aortic stenosis over mitral disease.",
+   "vis": null
+  },
+  {
+   "tx": "High-yield for the exam keeps bedside signs linked to lesions and confirmatory tests. First-line action is a systematic **inspection to auscultation** sequence with JVP and pulse checks. Gold-standard confirmation is **echocardiography** for every significant murmur. Named signs are **Graham Steell** (pulmonary regurgitation murmur of pulmonary hypertension), **Corrigan pulse**, **Austin Flint murmur** and **fixed split**.",
+   "say": "High yield revision can link each bedside sign to its lesion and confirmatory test. The first line approach is a systematic inspection to auscultation sequence with jugular venous pressure and pulse checks. Echocardiography is the gold standard for every significant murmur. Named signs can include Graham Steell murmur Corrigan pulse Austin Flint murmur and fixed split second sound.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Lesion",
+     "Test or treatment"
+    ],
+    "rows": [
+     [
+      "Ejection systolic to carotids",
+      "Aortic stenosis",
+      "Echo gold standard"
+     ],
+     [
+      "Pansystolic apex to axilla",
+      "Mitral regurgitation",
+      "First test ECG then echo"
+     ],
+     [
+      "Mid diastolic rumble",
+      "Mitral stenosis",
+      "Echo measures gradient"
+     ],
+     [
+      "Early diastolic blowing",
+      "Aortic regurgitation",
+      "Echo plus wide pulse pressure"
+     ],
+     [
+      "Continuous machinery",
+      "Patent ductus",
+      "Echo with bubble study"
+     ],
+     [
+      "Fixed split S2",
+      "Atrial septal defect",
+      "Echo with bubble study"
+     ],
+     [
+      "Corrigan pulse",
+      "Severe aortic regurgitation",
+      "Echo grades severity"
+     ],
+     [
+      "Graham Steell murmur",
+      "Pulmonary hypertension",
+      "Echo estimates pressure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

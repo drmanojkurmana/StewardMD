@@ -1,110 +1,227 @@
 {
-  "v": 1,
-  "module": "sgm-inheritance",
-  "subject": "ss-general-medicine",
-  "title": "Patterns of inheritance: reading pedigrees like a clinician",
-  "minutes": 11,
-  "steps": [
-    {
-      "tx": "**Mendelian inheritance** (gene traits passed in predictable ratios) divides into **autosomal dominant** (one copy suffices), **autosomal recessive** (two copies needed), and **X linked** (genes on the sex chromosome). **Penetrance** (the chance a gene carrier shows any disease) and **expressivity** (how severe the signs become) explain why identical genes produce different patients. **Pseudodominance** (recessive disease appearing in every generation during consanguinity) is a favourite trap.",
-      "say": "Mendelian inheritance means genes pass in ratios that a pedigree can reveal. One copy can be enough, two copies can be needed, or the gene can ride on the X chromosome. Two words matter in the exam hall, and you should know them well. Penetrance is the chance a carrier shows disease at all, while expressivity describes how severe the signs become once disease appears.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Pattern", "One copy enough", "Typical clue"],
-        "rows": [
-          ["Autosomal dominant", "Yes", "Every generation affected"],
-          ["Autosomal recessive", "No", "Skips generations"],
-          ["X linked recessive", "Males mostly", "Mother to son"],
-          ["Mitochondrial", "Mother only", "Variable severity"]
-        ]
-      }
+ "v": 1,
+ "module": "sgm-inheritance",
+ "subject": "ss-general-medicine",
+ "title": "Patterns of inheritance: reading pedigrees like a clinician",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Mendelian inheritance** (gene traits passed in predictable ratios) divides into **autosomal dominant** (one copy suffices), **autosomal recessive** (two copies needed), and **X linked** (genes on the sex chromosome). **Penetrance** (the chance a gene carrier shows any disease) and **expressivity** (how severe the signs become) explain why identical genes produce different patients. **Pseudodominance** (recessive disease appearing in every generation during consanguinity) is a favourite trap.",
+   "say": "Mendelian inheritance means genes pass in ratios that a pedigree can reveal. One copy can be enough, two copies can be needed, or the gene can ride on the X chromosome. Two words matter in the exam hall, and you should know them well. Penetrance is the chance a carrier shows disease at all, while expressivity describes how severe the signs become once disease appears.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "One copy enough",
+     "Typical clue"
+    ],
+    "rows": [
+     [
+      "Autosomal dominant",
+      "Yes",
+      "Every generation affected"
+     ],
+     [
+      "Autosomal recessive",
+      "No",
+      "Skips generations"
+     ],
+     [
+      "X linked recessive",
+      "Males mostly",
+      "Mother to son"
+     ],
+     [
+      "Mitochondrial",
+      "Mother only",
+      "Variable severity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autosomal dominant pedigrees** (vertical patterns where each generation shows disease) carry a **50% risk** (a 1 in 2 chance for each child) in most families. **Variable expressivity** (different severity in relatives) makes a mild parent transmit a severe disease to an affected child. **Marfan syndrome** (a fibrillin defect with tall stature and aortic dilatation) is the classic adult example repeatedly asked about inheritance.",
+   "say": "In autosomal dominant pedigrees the disease appears in every generation and marches vertically through the family. Each child of an affected parent carries about a fifty percent risk, independent of sex. Severity varies widely between relatives, so a mildly affected parent can transmit a severe form. Marfan syndrome with its tall habitus and aortic risk is the textbook adult example.",
+   "vis": null
+  },
+  {
+   "tx": "**Autosomal recessive pedigrees** (horizontal patterns often seen in consanguineous marriage) hide carriers completely. **Obligate carriers** (parents who must carry the gene because they have an affected child) face a **25% risk** (1 in 4 for each pregnancy). **Consanguinity** (marriage between close relatives) raises the load by unmasking rare recessive alleles, which is why endogamous communities feature in genetic questions.",
+   "say": "Autosomal recessive pedigrees look horizontal because healthy parents have sick children in one generation. Both parents are silent carriers and each pregnancy carries a twenty five percent risk. Close cousin marriage can raise that risk because relatives share the same rare alleles by descent. This pattern dominates counselling where consanguinity appears in the family story.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dominant pattern",
+     "points": [
+      "Every generation hit",
+      "Fifty percent risk",
+      "Two sexes equally",
+      "Mild parent severe child"
+     ]
     },
-    {
-      "tx": "**Autosomal dominant pedigrees** (vertical patterns where each generation shows disease) carry a **fifty percent risk** (a one in two chance for each child) in most families. **Variable expressivity** (different severity in relatives) makes a mild parent transmit a severe disease to an affected child. **Marfan syndrome** (a fibrillin defect with tall stature and aortic dilatation) is the classic adult example repeatedly asked about inheritance.",
-      "say": "In autosomal dominant pedigrees the disease appears in every generation and marches vertically through the family. Each child of an affected parent carries about a fifty percent risk, independent of sex. Severity varies widely between relatives, so a mildly affected parent can transmit a severe form. Marfan syndrome with its tall habitus and aortic risk is the textbook adult example.",
-      "vis": null
-    },
-    {
-      "tx": "**Autosomal recessive pedigrees** (horizontal patterns often seen in consanguineous marriage) hide carriers completely. **Obligate carriers** (parents who must carry the gene because they have an affected child) face a **twenty five percent risk** (one in four for each pregnancy). **Consanguinity** (marriage between close relatives) raises the load by unmasking rare recessive alleles, which is why endogamous communities feature in genetic questions.",
-      "say": "Autosomal recessive pedigrees look horizontal because healthy parents have sick children in one generation. Both parents are silent carriers and each pregnancy carries a twenty five percent risk. Close cousin marriage can raise that risk because relatives share the same rare alleles by descent. This pattern dominates counselling where consanguinity appears in the family story.",
-      "vis": {
-        "kind": "compare",
-        "left": {"title": "Dominant pattern", "points": ["Every generation hit", "Fifty percent risk", "Two sexes equally", "Mild parent severe child"]},
-        "right": {"title": "Recessive pattern", "points": ["Skips generations", "Twenty five percent risk", "Healthy parents sick child", "Consanguinity common"]}
-      }
-    },
-    {
-      "tx": "**X linked recessive transmission** (sons inheriting the faulty gene from carrier mothers) explains male predominance. **Haemophilia A** (factor eight deficiency with deep muscle bleeds) and **Duchenne dystrophy** (severe muscle wasting) pass from mother to son while daughters become carriers. **Lyonisation** (random inactivation of one X in females) rarely makes a carrier woman bleed enough to notice, though careful pedigree questions still expose her carrier state.",
-      "say": "X linked recessive disease hits sons because a boy has only one X chromosome and no spare copy to cover a fault. Carrier mothers pass the gene to half their sons, while daughters may become carriers themselves. Lyonisation, the random silencing of one X in females, usually protects carriers, though a few women bleed enough to present. Haemophilia and Duchenne dystrophy are the classic stories.",
-      "vis": null
-    },
-    {
-      "tx": "**X linked dominant inheritance** (father to daughter transmission) acts differently and is often confused. **Rett syndrome** (a neurodevelopmental disorder mostly in girls) and **hypophosphataemic rickets** (a phosphate wasting bone disease) show the route. **Male to male transmission never occurs** in X linked traits, so any pedigree showing father to son spread excludes the X chromosome at once.",
-      "say": "X linked dominant traits follow the opposite route through the family. Affected fathers pass the gene to every daughter and to no sons, while affected mothers pass it to half their children of both sexes. That single observation separates X linked from autosomal patterns. Male to male transmission never occurs through the X chromosome and instantly excludes it in a pedigree question.",
-      "vis": null
-    },
-    {
-      "tx": "**Mitochondrial inheritance** (passage of DNA through the egg only) creates a maternal line. **Leber hereditary optic neuropathy** (painless central vision loss in young men) and **MELAS** (mitochondrial encephalomyopathy with lactic acidosis) come from mothers alone. **Heteroplasmy** (a mixture of normal and faulty mitochondria) makes severity vary even between siblings, with high energy organs such as brain, muscle and retina suffering first.",
-      "say": "Mitochondrial DNA can pass only through the egg, so the disease marches down the maternal line alone. Fathers can never transmit it to their children. The percentage of faulty mitochondria in each tissue decides severity, which is called heteroplasmy. Energy hungry organs such as brain, muscle, retina and heart can suffer first, which explains the odd assortment of signs under one family name.",
-      "vis": null
-    },
-    {
-      "tx": "**Genomic imprinting** (chemical marks that switch a gene on or off by parental origin) rewrites textbook ratios. **Prader Willi syndrome** (a paternal deletion with obesity and hypogonadism) and **Angelman syndrome** (a maternal deletion with happy affect and severe learning delay) change sides when the deletion switches parents. **Uniparental disomy** (both copies from one parent) produces disease despite an apparently normal gene length.",
-      "say": "Genomic imprinting means a gene can be silenced depending on which parent contributed it. A deletion on the paternal copy causes one syndrome, while the same deletion on the maternal copy causes a different syndrome. Prader Willi and Angelman syndromes form that mirrored pair. The concept explains why two siblings can share a deletion yet look completely different on examination.",
-      "vis": null
-    },
-    {
-      "tx": "**Anticipation** (disease becoming earlier and more severe across generations) marks **trinucleotide repeat disorders** (extra copies of a three letter DNA code). **Huntington disease** (progressive chorea with dementia) worsens when a father transmits a longer repeat to his child. **Myotonic dystrophy** (muscle wasting with frontal balding) shows the same march across generations and explains child cases born to mildly affected mothers.",
-      "say": "Anticipation is when a disorder grows earlier and harsher in each new generation. Trinucleotide repeat disorders cause this because the repeating code stretches during transmission. Huntington disease and myotonic dystrophy are the prototypes. A mildly affected parent may have an affected child far earlier, and that family march is the clue the examiner expects the candidate to name.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Parent mildly affected"},
-          {"id": "b", "label": "Repeat lengthens"},
-          {"id": "c", "label": "Child earlier onset"},
-          {"id": "d", "label": "Grandchild severe"}
-        ],
-        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
-      }
-    },
-    {
-      "tx": "**Hardy Weinberg equilibrium** (the maths of gene frequencies in a large population) converts carrier odds into disease odds. **Carrier frequency** (how often a healthy person carries a recessive gene) is often high for common diseases, while **affected frequency** (how often the disease itself appears) stays low. **De novo mutations** (brand new DNA changes) explain dominant disease in children of unaffected parents, especially with advancing paternal age.",
-      "say": "The Hardy Weinberg equation links how often a gene appears in a population to how often the disease appears. A common carrier state can hide behind a rare disease because two carriers must meet. The arithmetic can allow clinicians to quote population risks from a single family. Fresh de novo mutations can show a different route, with new dominant disease in children of healthy parents.",
-      "vis": null
-    },
-    {
-      "tx": "**Pedigree drawing conventions** (symbols that turn a family story into a diagram) decide marks in viva and written papers. **Squares for males** (the male symbol) and **circles for females** (the female symbol) anchor every diagram, with vertical lines for descent and horizontal lines for partnerships. **Consanguinity loops** (double lines marking related partners) and **affected shading** (filled symbols for patients) together reveal the inheritance pattern at a glance.",
-      "say": "Pedigree drawing follows strict symbols that examiners expect without prompting. Squares represent males and circles represent females, with vertical lines showing descent. Double lines mark related partners, and filled symbols mark affected members. Slashes can note death or stillbirth, and arrows can point to the patient who first brought the family to attention. Clean symbols can decide marks faster than any clever remark.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Symbol", "Meaning", "Exam use"],
-        "rows": [
-          ["Square", "Male member", "Sex specific risk"],
-          ["Circle", "Female member", "Carrier mother"],
-          ["Filled symbol", "Affected person", "Pattern detection"],
-          ["Double line", "Consanguineous couple", "Recessive hint"],
-          ["Arrow", "Proband", "Index case"]
-        ]
-      }
-    },
-    {
-      "tx": "**High yield for the exam** gathers pattern signatures instead of definitions alone. **Fifty percent risk** in dominant and **twenty five percent risk** in recessive stay central, with **mitochondrial only from mother**, **X linked never father to son**, **imprinting flips by parent**, **anticipation with repeat diseases**, **Hardy Weinberg carrier math**, and **de novo dominant disease** completing the frame. **Haemophilia A**, **Marfan syndrome**, and **Huntington disease** are the anchor examples.",
-      "say": "High yield for the exam can gather pattern signatures instead of definitions alone. Remember the fifty percent risk in dominant pedigrees and the twenty five percent risk in recessive ones, mitochondrial passage only from the mother, no father to son spread through the X chromosome, imprinting that flips with parental origin, anticipation in repeat diseases, Hardy Weinberg carrier maths, and fresh dominant mutations in children of healthy parents.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Pattern", "Recurrence", "Anchor example"],
-        "rows": [
-          ["Autosomal dominant", "Fifty percent", "Marfan syndrome"],
-          ["Autosomal recessive", "Twenty five percent", "Cystic fibrosis"],
-          ["X recessive", "Half of sons", "Haemophilia A"],
-          ["Mitochondrial", "All children of mother", "MELAS syndrome"],
-          ["Imprinting", "Depends on parent", "Angelman syndrome"],
-          ["Anticipation", "Earlier each generation", "Huntington disease"],
-          ["De novo dominant", "Low but not zero", "Achondroplasia"]
-        ]
-      }
+    "right": {
+     "title": "Recessive pattern",
+     "points": [
+      "Skips generations",
+      "Twenty five percent risk",
+      "Healthy parents sick child",
+      "Consanguinity common"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI"
+   }
+  },
+  {
+   "tx": "**X linked recessive transmission** (sons inheriting the faulty gene from carrier mothers) explains male predominance. **Haemophilia A** (factor eight deficiency with deep muscle bleeds) and **Duchenne dystrophy** (severe muscle wasting) pass from mother to son while daughters become carriers. **Lyonisation** (random inactivation of one X in females) rarely makes a carrier woman bleed enough to notice, though careful pedigree questions still expose her carrier state.",
+   "say": "X linked recessive disease hits sons because a boy has only one X chromosome and no spare copy to cover a fault. Carrier mothers pass the gene to half their sons, while daughters may become carriers themselves. Lyonisation, the random silencing of one X in females, usually protects carriers, though a few women bleed enough to present. Haemophilia and Duchenne dystrophy are the classic stories.",
+   "vis": null
+  },
+  {
+   "tx": "**X linked dominant inheritance** (father to daughter transmission) acts differently and is often confused. **Rett syndrome** (a neurodevelopmental disorder mostly in girls) and **hypophosphataemic rickets** (a phosphate wasting bone disease) show the route. **Male to male transmission never occurs** in X linked traits, so any pedigree showing father to son spread excludes the X chromosome at once.",
+   "say": "X linked dominant traits follow the opposite route through the family. Affected fathers pass the gene to every daughter and to no sons, while affected mothers pass it to half their children of both sexes. That single observation separates X linked from autosomal patterns. Male to male transmission never occurs through the X chromosome and instantly excludes it in a pedigree question.",
+   "vis": null
+  },
+  {
+   "tx": "**Mitochondrial inheritance** (passage of DNA through the egg only) creates a maternal line. **Leber hereditary optic neuropathy** (painless central vision loss in young men) and **MELAS** (mitochondrial encephalomyopathy with lactic acidosis) come from mothers alone. **Heteroplasmy** (a mixture of normal and faulty mitochondria) makes severity vary even between siblings, with high energy organs such as brain, muscle and retina suffering first.",
+   "say": "Mitochondrial DNA can pass only through the egg, so the disease marches down the maternal line alone. Fathers can never transmit it to their children. The percentage of faulty mitochondria in each tissue decides severity, which is called heteroplasmy. Energy hungry organs such as brain, muscle, retina and heart can suffer first, which explains the odd assortment of signs under one family name.",
+   "vis": null
+  },
+  {
+   "tx": "**Genomic imprinting** (chemical marks that switch a gene on or off by parental origin) rewrites textbook ratios. **Prader Willi syndrome** (a paternal deletion with obesity and hypogonadism) and **Angelman syndrome** (a maternal deletion with happy affect and severe learning delay) change sides when the deletion switches parents. **Uniparental disomy** (both copies from one parent) produces disease despite an apparently normal gene length.",
+   "say": "Genomic imprinting means a gene can be silenced depending on which parent contributed it. A deletion on the paternal copy causes one syndrome, while the same deletion on the maternal copy causes a different syndrome. Prader Willi and Angelman syndromes form that mirrored pair. The concept explains why two siblings can share a deletion yet look completely different on examination.",
+   "vis": null
+  },
+  {
+   "tx": "**Anticipation** (disease becoming earlier and more severe across generations) marks **trinucleotide repeat disorders** (extra copies of a three letter DNA code). **Huntington disease** (progressive chorea with dementia) worsens when a father transmits a longer repeat to his child. **Myotonic dystrophy** (muscle wasting with frontal balding) shows the same march across generations and explains child cases born to mildly affected mothers.",
+   "say": "Anticipation is when a disorder grows earlier and harsher in each new generation. Trinucleotide repeat disorders cause this because the repeating code stretches during transmission. Huntington disease and myotonic dystrophy are the prototypes. A mildly affected parent may have an affected child far earlier, and that family march is the clue the examiner expects the candidate to name.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Parent mildly affected"
+     },
+     {
+      "id": "b",
+      "label": "Repeat lengthens"
+     },
+     {
+      "id": "c",
+      "label": "Child earlier onset"
+     },
+     {
+      "id": "d",
+      "label": "Grandchild severe"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hardy Weinberg equilibrium** (the maths of gene frequencies in a large population) converts carrier odds into disease odds. **Carrier frequency** (how often a healthy person carries a recessive gene) is often high for common diseases, while **affected frequency** (how often the disease itself appears) stays low. **De novo mutations** (brand new DNA changes) explain dominant disease in children of unaffected parents, especially with advancing paternal age.",
+   "say": "The Hardy Weinberg equation links how often a gene appears in a population to how often the disease appears. A common carrier state can hide behind a rare disease because two carriers must meet. The arithmetic can allow clinicians to quote population risks from a single family. Fresh de novo mutations can show a different route, with new dominant disease in children of healthy parents.",
+   "vis": null
+  },
+  {
+   "tx": "**Pedigree drawing conventions** (symbols that turn a family story into a diagram) decide marks in viva and written papers. **Squares for males** (the male symbol) and **circles for females** (the female symbol) anchor every diagram, with vertical lines for descent and horizontal lines for partnerships. **Consanguinity loops** (double lines marking related partners) and **affected shading** (filled symbols for patients) together reveal the inheritance pattern at a glance.",
+   "say": "Pedigree drawing follows strict symbols that examiners expect without prompting. Squares represent males and circles represent females, with vertical lines showing descent. Double lines mark related partners, and filled symbols mark affected members. Slashes can note death or stillbirth, and arrows can point to the patient who first brought the family to attention. Clean symbols can decide marks faster than any clever remark.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symbol",
+     "Meaning",
+     "Exam use"
+    ],
+    "rows": [
+     [
+      "Square",
+      "Male member",
+      "Sex specific risk"
+     ],
+     [
+      "Circle",
+      "Female member",
+      "Carrier mother"
+     ],
+     [
+      "Filled symbol",
+      "Affected person",
+      "Pattern detection"
+     ],
+     [
+      "Double line",
+      "Consanguineous couple",
+      "Recessive hint"
+     ],
+     [
+      "Arrow",
+      "Proband",
+      "Index case"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam** gathers pattern signatures instead of definitions alone. **50% risk** in dominant and **25% risk** in recessive stay central, with **mitochondrial only from mother**, **X linked never father to son**, **imprinting flips by parent**, **anticipation with repeat diseases**, **Hardy Weinberg carrier math**, and **de novo dominant disease** completing the frame. **Haemophilia A**, **Marfan syndrome**, and **Huntington disease** are the anchor examples.",
+   "say": "High yield for the exam can gather pattern signatures instead of definitions alone. Remember the fifty percent risk in dominant pedigrees and the twenty five percent risk in recessive ones, mitochondrial passage only from the mother, no father to son spread through the X chromosome, imprinting that flips with parental origin, anticipation in repeat diseases, Hardy Weinberg carrier maths, and fresh dominant mutations in children of healthy parents.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Recurrence",
+     "Anchor example"
+    ],
+    "rows": [
+     [
+      "Autosomal dominant",
+      "Fifty percent",
+      "Marfan syndrome"
+     ],
+     [
+      "Autosomal recessive",
+      "Twenty five percent",
+      "Cystic fibrosis"
+     ],
+     [
+      "X recessive",
+      "Half of sons",
+      "Haemophilia A"
+     ],
+     [
+      "Mitochondrial",
+      "All children of mother",
+      "MELAS syndrome"
+     ],
+     [
+      "Imprinting",
+      "Depends on parent",
+      "Angelman syndrome"
+     ],
+     [
+      "Anticipation",
+      "Earlier each generation",
+      "Huntington disease"
+     ],
+     [
+      "De novo dominant",
+      "Low but not zero",
+      "Achondroplasia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

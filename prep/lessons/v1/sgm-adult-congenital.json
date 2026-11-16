@@ -1,97 +1,169 @@
 {
-  "v": 1,
-  "module": "sgm-adult-congenital",
-  "subject": "ss-general-medicine",
-  "title": "Adult congenital heart disease",
-  "minutes": 11,
-  "steps": [
-    {
-      "tx": "**Adult congenital heart disease** (congenital lesions persisting into adult life) now comprises most congenital cardiology workload, since childhood repairs keep patients alive. Lesions range from **atrial septal defect** (hole between atria) and **ventricular septal defect** (hole between ventricles) to **tetralogy of Fallot** (four defects with overriding aorta). Survival to adulthood does not equal cure, so structured lifelong follow up with risk stratification prevents late presentations with failure or arrhythmia.",
-      "say": "Adult congenital heart disease means congenital lesions persisting into adult life, now comprising most congenital cardiology workload, since childhood repairs keep patients alive. Lesions range from atrial septal defect through ventricular septal defect to tetralogy of Fallot with four defects and overriding aorta. Survival to adulthood does not equal cure, so structured lifelong follow up with risk stratification prevents late presentations.",
-      "vis": null
-    },
-    {
-      "tx": "Causes are multifactorial genetic and environmental hits, with **chromosomal anomalies** (extra or missing genetic material) such as Down syndrome clustering with septal defects. **Marfan syndrome** (fibrillin disorder affecting aorta) and **Turner syndrome** (single X chromosome) predispose to aortopathy. Maternal diabetes, rubella infection, alcohol and certain drugs add acquired fetal risk. **Bicuspid aortic valve** (two leaflets instead of three) is the commonest congenital lesion overall, often silent until degeneration.",
-      "say": "Causes are multifactorial genetic and environmental hits, with chromosomal anomalies such as Down syndrome clustering with septal defects. Marfan syndrome, which is a fibrillin disorder affecting the aorta, and Turner syndrome predispose to aortopathy. Maternal diabetes, rubella, alcohol and certain drugs can add fetal risk. Bicuspid aortic valve, which has two leaflets instead of three, is the commonest congenital lesion overall.",
-      "vis": null
-    },
-    {
-      "tx": "Large left to right shunts cause **pulmonary overcirculation** (excess lung flow) with volume overload, while obstructive lesions cause pressure overload and **left ventricular hypertrophy** (muscle thickening). Cyanotic lesions steal blood past lungs, causing **hypoxaemia** (low blood oxygen) and secondary erythrocytosis. **Eisenmenger syndrome** (reversed shunt from pulmonary vascular disease) flips the circuit to right to left, marking irreversible biology and transforming management from closure to palliation.",
-      "say": "Large left to right shunts cause pulmonary overcirculation with volume overload, while obstructive lesions cause pressure overload and left ventricular muscle thickening. Cyanotic lesions steal blood past the lungs, causing low blood oxygen and secondary erythrocytosis. Eisenmenger syndrome, which is reversed shunt from pulmonary vascular disease, flips the circuit to right to left, marking irreversible biology.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Left to right shunt"},
-          {"id": "b", "label": "Pulmonary overcirculation"},
-          {"id": "c", "label": "Vascular resistance rises"},
-          {"id": "d", "label": "Eisenmenger reversal"}
-        ],
-        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
-      }
-    },
-    {
-      "tx": "Exertional dyspnoea, palpitations, chest pain and **presyncope** (near fainting) dominate presentations, with **cyanosis** (blue discolouration) and clubbing in longstanding right to left shunts. Murmurs reveal shunt location and obstruction severity. **Infective endocarditis** (valve infection) risk is high with prosthetic material and cyanosis. **Arrhythmias** (abnormal rhythms) cluster after atrial surgery and **Fontan circulation** (single ventricle palliation bypassing lungs), needing vigilance during adulthood.",
-      "say": "Exertional breathlessness, palpitations, chest pain and near fainting dominate presentations, with blue discolouration and clubbing in longstanding right to left shunts. Murmurs can reveal shunt location and obstruction severity. Infective endocarditis risk is high with prosthetic material and cyanosis. Arrhythmias cluster after atrial surgery and Fontan circulation, needing vigilance during adulthood.",
-      "vis": null
-    },
-    {
-      "tx": "**Cardiac magnetic resonance imaging** (MRI heart scan without radiation) is the gold standard for volumes, flow and late dysfunction after repair. **Echocardiography** (ultrasound heart scan) is the first test for valve and shunt assessment. **Cardiac catheterisation** (invasive pressure and oxygen measurement) defines pulmonary vascular resistance before closure decisions. **Cardiopulmonary exercise testing** (treadmill breathing assessment) quantifies functional capacity better than symptom history alone in adults.",
-      "say": "Cardiac magnetic resonance imaging is the gold standard for volumes, flow and late dysfunction after repair. Echocardiography is the first test for valve and shunt assessment. Cardiac catheterisation with invasive pressure and oxygen measurement can define pulmonary vascular resistance before closure decisions. Cardiopulmonary exercise testing quantifies functional capacity better than symptom history alone in adults.",
-      "vis": null
-    },
-    {
-      "tx": "Closure indications follow haemodynamics: **atrial septal defect** (ASD) with right volume overload or paradoxical embolism, and symptomatic **ventricular septal defect** (VSD) or **patent ductus arteriosus** (ductus left open) with left overload. **Transcatheter closure** (device via wires) suits most ASDs, while surgical repair suits complex anatomy. **European Society of Cardiology** (ESC) 2020 guidance advises closure only when pulmonary vascular resistance remains operable, never in Eisenmenger physiology.",
-      "say": "Closure indications follow haemodynamics. Atrial septal defect with right volume overload, and symptomatic ventricular septal defect or patent ductus arteriosus with left volume overload, are the classic cases. Transcatheter closure with devices can suit most atrial septal defects, while surgical repair can suit complex anatomy. European Society of Cardiology guidance from twenty twenty advises closure only when pulmonary vascular resistance remains operable.",
-      "vis": null
-    },
-    {
-      "tx": "Tetralogy of Fallot needs **right ventricular outflow repair** (relief of narrow outflow) with pulmonary valve management, often staged in childhood or single repair depending on anatomy. **Coarctation of the aorta** (narrowing of aorta after head vessels) is relieved by balloon or surgical repair, with surveillance for recoarctation and aneurysm. **American College of Cardiology, American Heart Association and Congenital Heart Surgeons** (ACC AHA CHSS) guidance stresses multidisciplinary decisions combining imaging, catheter data, surgical risk and patient preference for each lesion pattern.",
-      "say": "Tetralogy of Fallot needs right ventricular outflow repair with pulmonary valve management, often staged or as single repair depending on anatomy. Coarctation of the aorta, which is narrowing of the aorta after head vessels, is relieved by balloon or surgical repair, with surveillance for recoarctation and aneurysm. American guidance stresses multidisciplinary decisions combining imaging, catheter data, surgical risk and patient preference.",
-      "vis": null
-    },
-    {
-      "tx": "Eisenmenger disease is managed with **endothelin receptor antagonists** (drugs lowering lung vessel tone), oxygen, phlebotomy only when symptomatic hyperviscosity strikes, and transplantation referral. Avoid dehydration, pregnancy and high altitude in cyanotic Eisenmenger patients. **Endocarditis prophylaxis** (infection prevention around dental work) is required for prosthetic material or prior endocarditis, not for simple repaired septal defects under current rules.",
-      "say": "Eisenmenger disease is managed with endothelin receptor antagonists that lower lung vessel tone, oxygen, phlebotomy only when symptomatic hyperviscosity strikes, and transplantation referral. You should avoid dehydration, pregnancy and high altitude in Cyanotic Eisenmenger patients. Endocarditis prophylaxis around dental work is required for prosthetic material or prior endocarditis, not for simple repaired septal defects.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Lesion group", "Definitive approach", "Follow-up focus"],
-        "rows": [
-          ["Atrial septal defect", "Transcatheter device closure", "Right volumes, arrhythmia"],
-          ["Ventricular septal defect", "Surgical or device repair", "Left volumes, valve leaks"],
-          ["Patent ductus arteriosus", "Device closure", "Ductal recanalisation"],
-          ["Tetralogy of Fallot", "Outflow plus valve repair", "Right ventricular function"]
-        ]
-      }
-    },
-    {
-      "tx": "Late complications include **heart failure** (pump failure), **ventricular dysfunction** (weak chamber muscle), arrhythmias and sudden death, plus **aortopathy** (aortic dilatation) after coarctation repair. **Pregnancy** (gestation) with pulmonary hypertension or severe left obstruction carries high maternal risk and needs pre conception planning. Prognosis improves markedly with repair before irreversible pulmonary vascular disease, which is why early shunt assessment in childhood remains the highest value intervention overall.",
-      "say": "Late complications can include pump failure, weak chamber muscle, arrhythmias and sudden death, plus aortic dilatation after coarctation repair. Pregnancy with pulmonary hypertension or severe left obstruction carries high maternal risk and needs pre conception planning. Prognosis improves markedly with repair before irreversible pulmonary vascular disease, which is why early shunt assessment remains the highest value intervention.",
-      "vis": null
-    },
-    {
-      "tx": "Exam traps contrast **operable** shunts needing closure with Eisenmenger reversal where closure kills. **Atrial septal defect** (ASD) may present late with paradoxical embolism or right failure despite childhood silence. **Bicuspid aortic valve** (two leaflets) associates with ascending aortic dilatation that needs surveillance. Never attribute new breathlessness in repaired Fallot to asthma without checking right ventricular function and arrhythmia history first in adults.",
-      "say": "Examination traps contrast operable shunts needing closure with Eisenmenger reversal where closure kills. Atrial septal defect may present late with paradoxical embolism or right failure despite childhood silence. Bicuspid aortic valve associates with ascending aortic dilatation needing surveillance. Never attribute new breathlessness in repaired Fallot to asthma without checking right ventricular function and arrhythmia history first.",
-      "vis": null
-    },
-    {
-      "tx": "**High-yield for the exam**: quote ASD volume overload, VSD left overload, tetralogy four defects, Fallot outflow repair, gold standard cardiac magnetic resonance imaging, first test echocardiography, catheterisation for pulmonary resistance, Eisenmenger closure contraindication, Fontan arrhythmia risk, and lifelong surveillance. These lesion to test to treatment links answer most congenital question stems directly.",
-      "say": "High yield for the exam includes atrial septal defect volume overload, ventricular septal defect left overload, tetralogy of Fallot with four defects, Fallot outflow repair, cardiac magnetic resonance imaging as gold standard, echocardiography as first test, catheterisation for pulmonary resistance, Eisenmenger closure contraindication, Fontan arrhythmia risk and lifelong surveillance. These lesion to test to treatment links can answer most congenital question stems directly.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Item", "High-yield fact to quote"],
-        "rows": [
-          ["Atrial septal defect", "Right volume overload"],
-          ["Ventricular septal defect", "Left volume overload"],
-          ["Tetralogy of Fallot", "Four defects, outflow repair"],
-          ["Gold standard", "Cardiac magnetic resonance imaging"],
-          ["First test", "Echocardiography"],
-          ["Closure bar", "Eisenmenger physiology"],
-          ["Cyanosis cause", "Right to left shunt"],
-          ["Follow-up", "Lifelong, arrhythmia watch"]
-        ]
-      }
-    }
-  ],
-  "quiz": [],
-  "gen": "AI"
+ "v": 1,
+ "module": "sgm-adult-congenital",
+ "subject": "ss-general-medicine",
+ "title": "Adult congenital heart disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Adult congenital heart disease** (congenital lesions persisting into adult life) now comprises most congenital cardiology workload, since childhood repairs keep patients alive. Lesions range from **atrial septal defect** (hole between atria) and **ventricular septal defect** (hole between ventricles) to **tetralogy of Fallot** (four defects with overriding aorta). Survival to adulthood does not equal cure, so structured lifelong follow up with risk stratification prevents late presentations with failure or arrhythmia.",
+   "say": "Adult congenital heart disease means congenital lesions persisting into adult life, now comprising most congenital cardiology workload, since childhood repairs keep patients alive. Lesions range from atrial septal defect through ventricular septal defect to tetralogy of Fallot with four defects and overriding aorta. Survival to adulthood does not equal cure, so structured lifelong follow up with risk stratification prevents late presentations.",
+   "vis": null
+  },
+  {
+   "tx": "Causes are multifactorial genetic and environmental hits, with **chromosomal anomalies** (extra or missing genetic material) such as Down syndrome clustering with septal defects. **Marfan syndrome** (fibrillin disorder affecting aorta) and **Turner syndrome** (single X chromosome) predispose to aortopathy. Maternal diabetes, rubella infection, alcohol and certain drugs add acquired fetal risk. **Bicuspid aortic valve** (2 leaflets instead of three) is the commonest congenital lesion overall, often silent until degeneration.",
+   "say": "Causes are multifactorial genetic and environmental hits, with chromosomal anomalies such as Down syndrome clustering with septal defects. Marfan syndrome, which is a fibrillin disorder affecting the aorta, and Turner syndrome predispose to aortopathy. Maternal diabetes, rubella, alcohol and certain drugs can add fetal risk. Bicuspid aortic valve, which has two leaflets instead of three, is the commonest congenital lesion overall.",
+   "vis": null
+  },
+  {
+   "tx": "Large left to right shunts cause **pulmonary overcirculation** (excess lung flow) with volume overload, while obstructive lesions cause pressure overload and **left ventricular hypertrophy** (muscle thickening). Cyanotic lesions steal blood past lungs, causing **hypoxaemia** (low blood oxygen) and secondary erythrocytosis. **Eisenmenger syndrome** (reversed shunt from pulmonary vascular disease) flips the circuit to right to left, marking irreversible biology and transforming management from closure to palliation.",
+   "say": "Large left to right shunts cause pulmonary overcirculation with volume overload, while obstructive lesions cause pressure overload and left ventricular muscle thickening. Cyanotic lesions steal blood past the lungs, causing low blood oxygen and secondary erythrocytosis. Eisenmenger syndrome, which is reversed shunt from pulmonary vascular disease, flips the circuit to right to left, marking irreversible biology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Left to right shunt"
+     },
+     {
+      "id": "b",
+      "label": "Pulmonary overcirculation"
+     },
+     {
+      "id": "c",
+      "label": "Vascular resistance rises"
+     },
+     {
+      "id": "d",
+      "label": "Eisenmenger reversal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exertional dyspnoea, palpitations, chest pain and **presyncope** (near fainting) dominate presentations, with **cyanosis** (blue discolouration) and clubbing in longstanding right to left shunts. Murmurs reveal shunt location and obstruction severity. **Infective endocarditis** (valve infection) risk is high with prosthetic material and cyanosis. **Arrhythmias** (abnormal rhythms) cluster after atrial surgery and **Fontan circulation** (single ventricle palliation bypassing lungs), needing vigilance during adulthood.",
+   "say": "Exertional breathlessness, palpitations, chest pain and near fainting dominate presentations, with blue discolouration and clubbing in longstanding right to left shunts. Murmurs can reveal shunt location and obstruction severity. Infective endocarditis risk is high with prosthetic material and cyanosis. Arrhythmias cluster after atrial surgery and Fontan circulation, needing vigilance during adulthood.",
+   "vis": null
+  },
+  {
+   "tx": "**Cardiac magnetic resonance imaging** (MRI heart scan without radiation) is the gold standard for volumes, flow and late dysfunction after repair. **Echocardiography** (ultrasound heart scan) is the first test for valve and shunt assessment. **Cardiac catheterisation** (invasive pressure and oxygen measurement) defines pulmonary vascular resistance before closure decisions. **Cardiopulmonary exercise testing** (treadmill breathing assessment) quantifies functional capacity better than symptom history alone in adults.",
+   "say": "Cardiac magnetic resonance imaging is the gold standard for volumes, flow and late dysfunction after repair. Echocardiography is the first test for valve and shunt assessment. Cardiac catheterisation with invasive pressure and oxygen measurement can define pulmonary vascular resistance before closure decisions. Cardiopulmonary exercise testing quantifies functional capacity better than symptom history alone in adults.",
+   "vis": null
+  },
+  {
+   "tx": "Closure indications follow haemodynamics: **atrial septal defect** (ASD) with right volume overload or paradoxical embolism, and symptomatic **ventricular septal defect** (VSD) or **patent ductus arteriosus** (ductus left open) with left overload. **Transcatheter closure** (device via wires) suits most ASDs, while surgical repair suits complex anatomy. **European Society of Cardiology** (ESC) 2020 guidance advises closure only when pulmonary vascular resistance remains operable, never in Eisenmenger physiology.",
+   "say": "Closure indications follow haemodynamics. Atrial septal defect with right volume overload, and symptomatic ventricular septal defect or patent ductus arteriosus with left volume overload, are the classic cases. Transcatheter closure with devices can suit most atrial septal defects, while surgical repair can suit complex anatomy. European Society of Cardiology guidance from twenty twenty advises closure only when pulmonary vascular resistance remains operable.",
+   "vis": null
+  },
+  {
+   "tx": "Tetralogy of Fallot needs **right ventricular outflow repair** (relief of narrow outflow) with pulmonary valve management, often staged in childhood or single repair depending on anatomy. **Coarctation of the aorta** (narrowing of aorta after head vessels) is relieved by balloon or surgical repair, with surveillance for recoarctation and aneurysm. **American College of Cardiology, American Heart Association and Congenital Heart Surgeons** (ACC AHA CHSS) guidance stresses multidisciplinary decisions combining imaging, catheter data, surgical risk and patient preference for each lesion pattern.",
+   "say": "Tetralogy of Fallot needs right ventricular outflow repair with pulmonary valve management, often staged or as single repair depending on anatomy. Coarctation of the aorta, which is narrowing of the aorta after head vessels, is relieved by balloon or surgical repair, with surveillance for recoarctation and aneurysm. American guidance stresses multidisciplinary decisions combining imaging, catheter data, surgical risk and patient preference.",
+   "vis": null
+  },
+  {
+   "tx": "Eisenmenger disease is managed with **endothelin receptor antagonists** (drugs lowering lung vessel tone), oxygen, phlebotomy only when symptomatic hyperviscosity strikes, and transplantation referral. Avoid dehydration, pregnancy and high altitude in cyanotic Eisenmenger patients. **Endocarditis prophylaxis** (infection prevention around dental work) is required for prosthetic material or prior endocarditis, not for simple repaired septal defects under current rules.",
+   "say": "Eisenmenger disease is managed with endothelin receptor antagonists that lower lung vessel tone, oxygen, phlebotomy only when symptomatic hyperviscosity strikes, and transplantation referral. You should avoid dehydration, pregnancy and high altitude in Cyanotic Eisenmenger patients. Endocarditis prophylaxis around dental work is required for prosthetic material or prior endocarditis, not for simple repaired septal defects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion group",
+     "Definitive approach",
+     "Follow-up focus"
+    ],
+    "rows": [
+     [
+      "Atrial septal defect",
+      "Transcatheter device closure",
+      "Right volumes, arrhythmia"
+     ],
+     [
+      "Ventricular septal defect",
+      "Surgical or device repair",
+      "Left volumes, valve leaks"
+     ],
+     [
+      "Patent ductus arteriosus",
+      "Device closure",
+      "Ductal recanalisation"
+     ],
+     [
+      "Tetralogy of Fallot",
+      "Outflow plus valve repair",
+      "Right ventricular function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Late complications include **heart failure** (pump failure), **ventricular dysfunction** (weak chamber muscle), arrhythmias and sudden death, plus **aortopathy** (aortic dilatation) after coarctation repair. **Pregnancy** (gestation) with pulmonary hypertension or severe left obstruction carries high maternal risk and needs pre conception planning. Prognosis improves markedly with repair before irreversible pulmonary vascular disease, which is why early shunt assessment in childhood remains the highest value intervention overall.",
+   "say": "Late complications can include pump failure, weak chamber muscle, arrhythmias and sudden death, plus aortic dilatation after coarctation repair. Pregnancy with pulmonary hypertension or severe left obstruction carries high maternal risk and needs pre conception planning. Prognosis improves markedly with repair before irreversible pulmonary vascular disease, which is why early shunt assessment remains the highest value intervention.",
+   "vis": null
+  },
+  {
+   "tx": "Exam traps contrast **operable** shunts needing closure with Eisenmenger reversal where closure kills. **Atrial septal defect** (ASD) may present late with paradoxical embolism or right failure despite childhood silence. **Bicuspid aortic valve** (2 leaflets) associates with ascending aortic dilatation that needs surveillance. Never attribute new breathlessness in repaired Fallot to asthma without checking right ventricular function and arrhythmia history first in adults.",
+   "say": "Examination traps contrast operable shunts needing closure with Eisenmenger reversal where closure kills. Atrial septal defect may present late with paradoxical embolism or right failure despite childhood silence. Bicuspid aortic valve associates with ascending aortic dilatation needing surveillance. Never attribute new breathlessness in repaired Fallot to asthma without checking right ventricular function and arrhythmia history first.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: quote ASD volume overload, VSD left overload, tetralogy four defects, Fallot outflow repair, gold standard cardiac magnetic resonance imaging, first test echocardiography, catheterisation for pulmonary resistance, Eisenmenger closure contraindication, Fontan arrhythmia risk, and lifelong surveillance. These lesion to test to treatment links answer most congenital question stems directly.",
+   "say": "High yield for the exam includes atrial septal defect volume overload, ventricular septal defect left overload, tetralogy of Fallot with four defects, Fallot outflow repair, cardiac magnetic resonance imaging as gold standard, echocardiography as first test, catheterisation for pulmonary resistance, Eisenmenger closure contraindication, Fontan arrhythmia risk and lifelong surveillance. These lesion to test to treatment links can answer most congenital question stems directly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High-yield fact to quote"
+    ],
+    "rows": [
+     [
+      "Atrial septal defect",
+      "Right volume overload"
+     ],
+     [
+      "Ventricular septal defect",
+      "Left volume overload"
+     ],
+     [
+      "Tetralogy of Fallot",
+      "Four defects, outflow repair"
+     ],
+     [
+      "Gold standard",
+      "Cardiac magnetic resonance imaging"
+     ],
+     [
+      "First test",
+      "Echocardiography"
+     ],
+     [
+      "Closure bar",
+      "Eisenmenger physiology"
+     ],
+     [
+      "Cyanosis cause",
+      "Right to left shunt"
+     ],
+     [
+      "Follow-up",
+      "Lifelong, arrhythmia watch"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }

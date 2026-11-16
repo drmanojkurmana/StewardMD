@@ -1,97 +1,169 @@
 {
-  "v": 1,
-  "module": "sgm-endocarditis",
-  "subject": "ss-general-medicine",
-  "title": "Infective endocarditis",
-  "minutes": 11,
-  "steps": [
-    {
-      "tx": "**Infective endocarditis** (infection of the heart valves and inner lining) causes fever with **new murmurs** and embolic phenomena. Incidence is about 3 to 10 per 100000 people yearly. Mortality without treatment is extremely high, so **early diagnosis** and empiric therapy after cultures are critical. The revised **Duke criteria** (clinical and imaging criteria for definite disease) guide diagnosis when combined with blood cultures and echocardiography.",
-      "say": "Infective endocarditis means infection of the heart valves and the inner lining of the heart. It classically causes fever with new heart murmurs and embolic phenomena affecting distant organs. Incidence is only a few cases per one hundred thousand people each year. Mortality without treatment is extremely high, so early diagnosis and starting empiric therapy after cultures are critical. The revised Duke criteria combine clinical and imaging findings to confirm definite disease for your records.",
-      "vis": null
-    },
-    {
-      "tx": "Risk increases after **prosthetic valves**, prior endocarditis, **congenital heart disease** and **intravenous drug use**. Dental procedures, indwelling catheters, haemodialysis and skin infections provide portals of entry. **Staphylococcus aureus** (common skin bacterium) causes acute destructive disease even on normal valves, while **viridans streptococci** (mouth bacteria) cause subacute disease on damaged valves over weeks.",
-      "say": "Your risk can rise sharply after prosthetic heart valves, prior episodes of endocarditis, congenital heart disease and intravenous drug use. Dental procedures, indwelling catheters, haemodialysis and skin infections all provide portals of entry for bacteria. Staphylococcus aureus causes acute destructive disease even on normal valves. Viridans streptococci from the mouth cause subacute disease on damaged valves evolving over weeks.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Organism pattern", "Typical valve", "Course"],
-        "rows": [
-          ["Staphylococcus aureus", "Normal valves common", "Acute, rapid destruction"],
-          ["Viridans streptococci", "Damaged valves", "Subacute, weeks"],
-          ["Enterococcus species", "Older adults", "Subacute, gut source"],
-          ["Coxiella and Bartonella", "Culture negative cases", "Prolonged, needs serology"]
-        ]
-      }
-    },
-    {
-      "tx": "Bacteria survive transient **bacteraemia** (bacteria in blood) and adhere to damaged endothelium, forming **vegetations** (infected clumps on valves). Vegetations embolise to brain, spleen and kidneys, while valve destruction causes **regurgitation** (backwards flow). Persistent bacteraemia drives fever and immune complex formation, so joint pains, rashes and renal impairment emerge from both infection and immunity, not growth alone.",
-      "say": "Bacteria that enter the blood transiently can survive and cling to damaged heart lining, forming infected clumps called vegetations on the valves. These vegetations can break off and embolise to brain, spleen and kidneys. Valve destruction causes regurgitation, which is backwards flow of blood. Persistent bacteraemia can drive fever and immune complex formation, so joint pains, rashes and kidney problems emerge from both infection and immunity together.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Bacteraemia enters blood"},
-          {"id": "b", "label": "Adhesion to damaged valve"},
-          {"id": "c", "label": "Vegetation forms and grows"},
-          {"id": "d", "label": "Emboli plus regurgitation occur"}
-        ],
-        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
-      }
-    },
-    {
-      "tx": "Fever, chills and night sweats dominate the history, often with **new regurgitant murmurs** and **splinter haemorrhages** (thin blood lines under nails). Examination shows **Janeway lesions** (painless spots on palms and soles) from septic emboli and **Osler nodes** (painful tender nodules) from immune injury. **Roth spots** (retinal haemorrhages) and splenomegaly support systemic spread in prolonged fever.",
-      "say": "Fever with chills and night sweats dominates the history, often accompanied by new regurgitant murmurs and thin blood lines under the nails called splinter haemorrhages. Examination may reveal painless spots on palms and soles from septic emboli and painful tender nodules from immune injury. Retinal haemorrhages and an enlarged spleen both support systemic spread of infection in prolonged fever cases.",
-      "vis": null
-    },
-    {
-      "tx": "Obtain **three sets of blood cultures** (blood samples taken from separate sites) from separate venepuncture sites before antibiotics, spaced over time. **Transthoracic echocardiography** (sound wave heart scan through chest wall) is the first imaging test, but **transoesophageal echocardiography** (probe in oesophagus) is the gold standard with much higher sensitivity for vegetations, abscess and prosthetic valves when suspicion remains high.",
-      "say": "Always obtain three sets of blood cultures from separate venepuncture sites before starting antibiotics. Transthoracic echocardiography, which is a sound wave heart scan through the chest wall, is the first imaging test you order. However transoesophageal echocardiography, with its probe placed in the oesophagus, is the gold standard test with far higher sensitivity for vegetations, abscess and prosthetic valve disease when suspicion remains high.",
-      "vis": null
-    },
-    {
-      "tx": "After cultures, start empiric therapy for native valve disease: **vancomycin** (glycopeptide antibiotic) plus **ceftriaxone** (third generation cephalosporin) pending sensitivities, narrowed promptly by culture. For **methicillin sensitive Staphylococcus aureus** (drug sensitive staph), switch to **oxacillin** (penicillinase resistant penicillin) or cefazolin for six weeks. **European Society of Cardiology** (ESC) 2023 guidance stresses early multidisciplinary team care.",
-      "say": "After taking cultures, start empiric therapy for native valve disease with vancomycin plus ceftriaxone while sensitivities are pending. For methicillin sensitive Staphylococcus aureus, you should promptly switch to oxacillin or cefazolin for six weeks. The European Society of Cardiology guidance from twenty twenty three can stress early multidisciplinary team care with cardiology, infectious disease and surgeons together from the start.",
-      "vis": null
-    },
-    {
-      "tx": "Prosthetic valve endocarditis needs **rifampicin** (antibiotic for biofilms) added to vancomycin plus gentamicin, with longer courses and early surgical input. **Gentamicin** (aminoglycoside antibiotic) targets Gram positive synergy but has renal and auditory toxicity. **American Heart Association** (AHA) guidance warns against starting aminoglycosides reflexively in native valve staphylococcal disease because of kidney injury without survival benefit.",
-      "say": "Prosthetic valve endocarditis needs rifampicin added to vancomycin plus gentamicin, with longer courses and very early surgical input. Gentamicin is an aminoglycoside that helps synergy against Gram positive organisms but carries renal and auditory toxicity. The American Heart Association guidance warns against starting aminoglycosides reflexively in native valve staphylococcal disease because kidney injury occurs without survival benefit.",
-      "vis": null
-    },
-    {
-      "tx": "Surgery is urgent for **heart failure** (pump failure from valve destruction), **uncontrolled infection** (persistent bacteraemia, abscess or fistula) and **embolic risk** with large mobile vegetations above 10 mm. **American College of Cardiology, American Heart Association and Heart Failure Society** (ACC AHA HFSA) guidance lists hemodynamic instability as the strongest indication. Never delay indicated surgery waiting to finish antibiotics when these features are present.",
-      "say": "Urgent surgery is indicated for heart failure from valve destruction, uncontrolled infection with persistent bacteraemia or abscess, and embolic risk with large mobile vegetations above ten millimetres. Guidance from the American College of Cardiology and partner societies can list hemodynamic instability as the strongest indication of all. Never delay indicated surgery while waiting to finish antibiotic courses when these danger features are present.",
-      "vis": null
-    },
-    {
-      "tx": "Complications include **valve perforation** (hole through leaflet), perivalvular abscess, **myocardial infarction** (heart muscle death) from coronary emboli, meningitis and **glomerulonephritis** (kidney inflammation). Mortality remains 20 to 30 percent even with therapy, rising with heart failure and stroke. Avoid premature closure by repeating cultures and echocardiography when fever persists beyond five to seven days despite antibiotics.",
-      "say": "Complications can include leaflet perforation, perivalvular abscess, heart muscle death from coronary emboli, meningitis and kidney inflammation. Mortality remains twenty to thirty percent even with correct therapy and rises further with heart failure and stroke. Avoid premature closure by repeating blood cultures and echocardiography when fever persists beyond five to seven days despite antibiotics.",
-      "vis": null
-    },
-    {
-      "tx": "Exam traps test **Janeway versus Osler** patterns, so remember painless embolic spots differ from painful immune nodules. Do not start antibiotics before cultures unless septic shock forces it. **Native versus prosthetic** management differs fundamentally, and a normal **transthoracic scan** (chest wall ultrasound) never excludes disease when transoesophageal imaging is indicated by persistent suspicion or prosthetic material.",
-      "say": "Examination traps can test Janeway lesions against Osler nodes, so you should remember painless embolic spots differ sharply from painful immune nodules. You should not start antibiotics before blood cultures unless septic shock forces your hand immediately. Native versus prosthetic valve management differs fundamentally, and a normal chest wall ultrasound never excludes disease when transoesophageal imaging is indicated by persistent suspicion.",
-      "vis": null
-    },
-    {
-      "tx": "**High-yield for the exam**: memorise Duke criteria, three culture sets before antibiotics, gold standard transoesophageal scan, acute versus subacute organisms, Janeway painless versus Osler painful lesions, surgical triad of heart failure, uncontrolled infection and embolism, duration six weeks for native staphylococcal disease, and ESC 2023 team management. These numbers and distinctions recur in every endocarditis question stem.",
-      "say": "High yield for the exam includes the Duke criteria, three sets of cultures before antibiotics, the gold standard transoesophageal scan, acute versus subacute organisms, painless Janeway lesions versus painful Osler nodes, the surgical triad of heart failure and uncontrolled infection and embolism, six weeks duration for native staphylococcal disease and European Society of Cardiology team management. These numbers can recur in every endocarditis question.",
-      "vis": {
-        "kind": "table",
-        "cols": ["Item", "High-yield fact to quote"],
-        "rows": [
-          ["Cultures", "Three sets before antibiotics"],
-          ["First imaging", "Transthoracic echocardiography"],
-          ["Gold standard", "Transoesophageal echocardiography"],
-          ["Acute organism", "Staphylococcus aureus"],
-          ["Subacute organism", "Viridans streptococci"],
-          ["Painful lesions", "Osler nodes, immune injury"],
-          ["Painless lesions", "Janeway lesions, septic emboli"],
-          ["Surgery triggers", "Failure, uncontrolled infection, embolism"]
-        ]
-      }
-    }
-  ],
-  "quiz": [],
-  "gen": "AI"
+ "v": 1,
+ "module": "sgm-endocarditis",
+ "subject": "ss-general-medicine",
+ "title": "Infective endocarditis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Infective endocarditis** (infection of the heart valves and inner lining) causes fever with **new murmurs** and embolic phenomena. Incidence is about 3 to 10 per 100000 people yearly. Mortality without treatment is extremely high, so **early diagnosis** and empiric therapy after cultures are critical. The revised **Duke criteria** (clinical and imaging criteria for definite disease) guide diagnosis when combined with blood cultures and echocardiography.",
+   "say": "Infective endocarditis means infection of the heart valves and the inner lining of the heart. It classically causes fever with new heart murmurs and embolic phenomena affecting distant organs. Incidence is only a few cases per one hundred thousand people each year. Mortality without treatment is extremely high, so early diagnosis and starting empiric therapy after cultures are critical. The revised Duke criteria combine clinical and imaging findings to confirm definite disease for your records.",
+   "vis": null
+  },
+  {
+   "tx": "Risk increases after **prosthetic valves**, prior endocarditis, **congenital heart disease** and **intravenous drug use**. Dental procedures, indwelling catheters, haemodialysis and skin infections provide portals of entry. **Staphylococcus aureus** (common skin bacterium) causes acute destructive disease even on normal valves, while **viridans streptococci** (mouth bacteria) cause subacute disease on damaged valves over weeks.",
+   "say": "Your risk can rise sharply after prosthetic heart valves, prior episodes of endocarditis, congenital heart disease and intravenous drug use. Dental procedures, indwelling catheters, haemodialysis and skin infections all provide portals of entry for bacteria. Staphylococcus aureus causes acute destructive disease even on normal valves. Viridans streptococci from the mouth cause subacute disease on damaged valves evolving over weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism pattern",
+     "Typical valve",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Staphylococcus aureus",
+      "Normal valves common",
+      "Acute, rapid destruction"
+     ],
+     [
+      "Viridans streptococci",
+      "Damaged valves",
+      "Subacute, weeks"
+     ],
+     [
+      "Enterococcus species",
+      "Older adults",
+      "Subacute, gut source"
+     ],
+     [
+      "Coxiella and Bartonella",
+      "Culture negative cases",
+      "Prolonged, needs serology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bacteria survive transient **bacteraemia** (bacteria in blood) and adhere to damaged endothelium, forming **vegetations** (infected clumps on valves). Vegetations embolise to brain, spleen and kidneys, while valve destruction causes **regurgitation** (backwards flow). Persistent bacteraemia drives fever and immune complex formation, so joint pains, rashes and renal impairment emerge from both infection and immunity, not growth alone.",
+   "say": "Bacteria that enter the blood transiently can survive and cling to damaged heart lining, forming infected clumps called vegetations on the valves. These vegetations can break off and embolise to brain, spleen and kidneys. Valve destruction causes regurgitation, which is backwards flow of blood. Persistent bacteraemia can drive fever and immune complex formation, so joint pains, rashes and kidney problems emerge from both infection and immunity together.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bacteraemia enters blood"
+     },
+     {
+      "id": "b",
+      "label": "Adhesion to damaged valve"
+     },
+     {
+      "id": "c",
+      "label": "Vegetation forms and grows"
+     },
+     {
+      "id": "d",
+      "label": "Emboli plus regurgitation occur"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fever, chills and night sweats dominate the history, often with **new regurgitant murmurs** and **splinter haemorrhages** (thin blood lines under nails). Examination shows **Janeway lesions** (painless spots on palms and soles) from septic emboli and **Osler nodes** (painful tender nodules) from immune injury. **Roth spots** (retinal haemorrhages) and splenomegaly support systemic spread in prolonged fever.",
+   "say": "Fever with chills and night sweats dominates the history, often accompanied by new regurgitant murmurs and thin blood lines under the nails called splinter haemorrhages. Examination may reveal painless spots on palms and soles from septic emboli and painful tender nodules from immune injury. Retinal haemorrhages and an enlarged spleen both support systemic spread of infection in prolonged fever cases.",
+   "vis": null
+  },
+  {
+   "tx": "Obtain **3 sets of blood cultures** (blood samples taken from separate sites) from separate venepuncture sites before antibiotics, spaced over time. **Transthoracic echocardiography** (sound wave heart scan through chest wall) is the first imaging test, but **transoesophageal echocardiography** (probe in oesophagus) is the gold standard with much higher sensitivity for vegetations, abscess and prosthetic valves when suspicion remains high.",
+   "say": "Always obtain three sets of blood cultures from separate venepuncture sites before starting antibiotics. Transthoracic echocardiography, which is a sound wave heart scan through the chest wall, is the first imaging test you order. However transoesophageal echocardiography, with its probe placed in the oesophagus, is the gold standard test with far higher sensitivity for vegetations, abscess and prosthetic valve disease when suspicion remains high.",
+   "vis": null
+  },
+  {
+   "tx": "After cultures, start empiric therapy for native valve disease: **vancomycin** (glycopeptide antibiotic) plus **ceftriaxone** (third generation cephalosporin) pending sensitivities, narrowed promptly by culture. For **methicillin sensitive Staphylococcus aureus** (drug sensitive staph), switch to **oxacillin** (penicillinase resistant penicillin) or cefazolin for 6 weeks. **European Society of Cardiology** (ESC) 2023 guidance stresses early multidisciplinary team care.",
+   "say": "After taking cultures, start empiric therapy for native valve disease with vancomycin plus ceftriaxone while sensitivities are pending. For methicillin sensitive Staphylococcus aureus, you should promptly switch to oxacillin or cefazolin for six weeks. The European Society of Cardiology guidance from twenty twenty three can stress early multidisciplinary team care with cardiology, infectious disease and surgeons together from the start.",
+   "vis": null
+  },
+  {
+   "tx": "Prosthetic valve endocarditis needs **rifampicin** (antibiotic for biofilms) added to vancomycin plus gentamicin, with longer courses and early surgical input. **Gentamicin** (aminoglycoside antibiotic) targets Gram positive synergy but has renal and auditory toxicity. **American Heart Association** (AHA) guidance warns against starting aminoglycosides reflexively in native valve staphylococcal disease because of kidney injury without survival benefit.",
+   "say": "Prosthetic valve endocarditis needs rifampicin added to vancomycin plus gentamicin, with longer courses and very early surgical input. Gentamicin is an aminoglycoside that helps synergy against Gram positive organisms but carries renal and auditory toxicity. The American Heart Association guidance warns against starting aminoglycosides reflexively in native valve staphylococcal disease because kidney injury occurs without survival benefit.",
+   "vis": null
+  },
+  {
+   "tx": "Surgery is urgent for **heart failure** (pump failure from valve destruction), **uncontrolled infection** (persistent bacteraemia, abscess or fistula) and **embolic risk** with large mobile vegetations above 10 mm. **American College of Cardiology, American Heart Association and Heart Failure Society** (ACC AHA HFSA) guidance lists hemodynamic instability as the strongest indication. Never delay indicated surgery waiting to finish antibiotics when these features are present.",
+   "say": "Urgent surgery is indicated for heart failure from valve destruction, uncontrolled infection with persistent bacteraemia or abscess, and embolic risk with large mobile vegetations above ten millimetres. Guidance from the American College of Cardiology and partner societies can list hemodynamic instability as the strongest indication of all. Never delay indicated surgery while waiting to finish antibiotic courses when these danger features are present.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **valve perforation** (hole through leaflet), perivalvular abscess, **myocardial infarction** (heart muscle death) from coronary emboli, meningitis and **glomerulonephritis** (kidney inflammation). Mortality remains 20 to 30% even with therapy, rising with heart failure and stroke. Avoid premature closure by repeating cultures and echocardiography when fever persists beyond 5 to 7 days despite antibiotics.",
+   "say": "Complications can include leaflet perforation, perivalvular abscess, heart muscle death from coronary emboli, meningitis and kidney inflammation. Mortality remains twenty to thirty percent even with correct therapy and rises further with heart failure and stroke. Avoid premature closure by repeating blood cultures and echocardiography when fever persists beyond five to seven days despite antibiotics.",
+   "vis": null
+  },
+  {
+   "tx": "Exam traps test **Janeway versus Osler** patterns, so remember painless embolic spots differ from painful immune nodules. Do not start antibiotics before cultures unless septic shock forces it. **Native versus prosthetic** management differs fundamentally, and a normal **transthoracic scan** (chest wall ultrasound) never excludes disease when transoesophageal imaging is indicated by persistent suspicion or prosthetic material.",
+   "say": "Examination traps can test Janeway lesions against Osler nodes, so you should remember painless embolic spots differ sharply from painful immune nodules. You should not start antibiotics before blood cultures unless septic shock forces your hand immediately. Native versus prosthetic valve management differs fundamentally, and a normal chest wall ultrasound never excludes disease when transoesophageal imaging is indicated by persistent suspicion.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: memorise Duke criteria, three culture sets before antibiotics, gold standard transoesophageal scan, acute versus subacute organisms, Janeway painless versus Osler painful lesions, surgical triad of heart failure, uncontrolled infection and embolism, duration 6 weeks for native staphylococcal disease, and ESC 2023 team management. These numbers and distinctions recur in every endocarditis question stem.",
+   "say": "High yield for the exam includes the Duke criteria, three sets of cultures before antibiotics, the gold standard transoesophageal scan, acute versus subacute organisms, painless Janeway lesions versus painful Osler nodes, the surgical triad of heart failure and uncontrolled infection and embolism, six weeks duration for native staphylococcal disease and European Society of Cardiology team management. These numbers can recur in every endocarditis question.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High-yield fact to quote"
+    ],
+    "rows": [
+     [
+      "Cultures",
+      "Three sets before antibiotics"
+     ],
+     [
+      "First imaging",
+      "Transthoracic echocardiography"
+     ],
+     [
+      "Gold standard",
+      "Transoesophageal echocardiography"
+     ],
+     [
+      "Acute organism",
+      "Staphylococcus aureus"
+     ],
+     [
+      "Subacute organism",
+      "Viridans streptococci"
+     ],
+     [
+      "Painful lesions",
+      "Osler nodes, immune injury"
+     ],
+     [
+      "Painless lesions",
+      "Janeway lesions, septic emboli"
+     ],
+     [
+      "Surgery triggers",
+      "Failure, uncontrolled infection, embolism"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
 }
