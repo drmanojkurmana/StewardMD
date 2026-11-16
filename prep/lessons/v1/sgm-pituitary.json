@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-pituitary",
+ "subject": "ss-general-medicine",
+ "title": "Anterior Pituitary Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Anterior pituitary** (gland under hypothalamus) controls thyroid, adrenal, gonadal and growth axes. **Prolactinoma** (prolactin tumour) is the commonest pituitary tumour causing galactorrhoea and amenorrhoea. **Acromegaly** (growth hormone excess) causes coarse features and diabetes. **Cushing disease** (ACTH tumour) causes central obesity and hypertension. **Hypopituitarism** (pituitary failure) causes cortisol and thyroid deficiency.",
+   "say": "The anterior pituitary under the hypothalamus controls thyroid and adrenal and gonadal and growth axes and this is examined in viva examinations for revision. Prolactin tumour is the commonest pituitary tumour. Growth hormone excess causes coarse features and diabetes. ACTH tumour causes central obesity and hypertension and pituitary failure causes cortisol and thyroid deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "**Prolactinomas** (benign tumours) dominate pituitary practice. **Nonfunctioning adenomas** (silent tumours) present with mass effects. **Rathke cleft cysts** (developmental cysts) cause headaches and visual defects. **Lymphocytic hypophysitis** (autoimmune pituitary inflammation) follows pregnancy. **Sheehan syndrome** (postpartum necrosis) follows severe blood loss. **Iatrogenic hypopituitarism** follows radiotherapy and surgery.",
+   "say": "Benign prolactin tumours dominate pituitary practice and this is examined in viva examinations for revision. Silent tumours present with mass effects. Developmental cysts cause headaches and visual defects and autoimmune inflammation follows pregnancy and postpartum necrosis follows severe blood loss and radiotherapy causes failure.",
+   "vis": null
+  },
+  {
+   "tx": "Tumours compress the **optic chiasm** (crossing visual fibres) causing **bitemporal hemianopia** (outer field loss). **Cavernous sinus invasion** (side wall spread) causes ophthalmoplegia (eye movement palsy). **Hypothalamic compression** (upward growth) causes diabetes insipidus. **Dopamine suppression** (prolactin control) is lost in stalk compression causing hyperprolactinaemia. **Mass effect** (pressure symptoms) precedes hormone excess in large tumours.",
+   "say": "Tumours compress the crossing visual fibres and cause outer field loss. Side wall spread causes eye movement palsy. Upward growth causes diabetes insipidus and stalk compression loses dopamine suppression and raises prolactin and pressure symptoms precede hormone excess in large tumours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tumour growth"
+     },
+     {
+      "id": "b",
+      "label": "Chiasm compression"
+     },
+     {
+      "id": "c",
+      "label": "Bitemporal field loss"
+     },
+     {
+      "id": "d",
+      "label": "Hormone excess"
+     },
+     {
+      "id": "e",
+      "label": "Hypopituitarism"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Galactorrhoea** (milk leak) with amenorrhoea marks prolactinoma in women. **Acral enlargement** (coarsening face, enlarged hands) marks acromegaly. **Moon facies** (round face) with striae marks Cushing disease. **Bitemporal hemianopia** (outer vision loss) marks chiasmal compression. **Short stature** (growth failure) marks growth hormone deficiency in children. **Fatigue** (adrenal failure) marks hypopituitarism.",
+   "say": "Milk leak with absent periods marks prolactinoma in women and this is examined in viva examinations for revision. Enlarged hands mark acromegaly. Round face with striae marks Cushing disease and outer vision loss marks chiasmal compression and short stature marks growth deficiency in children and fatigue marks hypopituitarism.",
+   "vis": null
+  },
+  {
+   "tx": "**Prolactin level** (serum prolactin) with **visual fields** (perimetry) assesses prolactinoma and mass effects. **Magnetic resonance imaging** (MRI, pituitary scan) is the gold standard for adenoma size. **Insulin growth factor 1** (IGF 1, growth marker) assesses acromegaly activity. **Morning cortisol** (adrenal marker) screens hypopituitarism. **Thyroid function** (free T4) assesses secondary hypothyroidism. **Oral glucose tolerance** (GH suppression test) confirms acromegaly.",
+   "say": "Serum prolactin with visual fields assesses tumours and mass effects. MRI is the gold standard for adenoma size. IGF one assesses acromegaly activity and morning cortisol screens failure and free T4 assesses secondary hypothyroidism and glucose tolerance confirms acromegaly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Prolactin level",
+      "Prolactinoma",
+      "Galactorrhoea cause"
+     ],
+     [
+      "Visual fields",
+      "Mass effect",
+      "Bitemporal hemianopia"
+     ],
+     [
+      "MRI pituitary",
+      "Gold standard",
+      "Adenoma size"
+     ],
+     [
+      "IGF one",
+      "Acromegaly",
+      "Activity marker"
+     ],
+     [
+      "Glucose tolerance",
+      "GH suppression",
+      "Acromegaly confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cabergoline** (dopamine agonist) shrinks prolactinomas and normalises prolactin. **Octreotide** (somatostatin analogue) controls growth hormone excess. **Pegvisomant** (GH receptor blocker) treats acromegaly with rising IGF. **Transsphenoidal surgery** (nose route resection) cures Cushing disease and macroadenomas. **Radiotherapy** (focused radiation) treats residual tumours. **Hydrocortisone and thyroxine** replace deficiencies in hypopituitarism.",
+   "say": "Cabergoline shrinks prolactinomas and normalises prolactin. Octreotide controls growth hormone excess and this is examined in viva examinations for revision. Pegvisomant blocks the receptor and nose route surgery cures Cushing disease and focused radiation treats residual tumours and steroid and thyroxine replace deficiencies.",
+   "vis": null
+  },
+  {
+   "tx": "**Acromegaly** needs surgery first, then octreotide for persistence. **Cushing disease** needs transsphenoidal surgery with remission rates above 80 percent. **Prolactinoma macroadenoma** (large tumour) needs cabergoline before surgery. **Hypopituitarism** needs stepwise hormone replacement. **Diabetes insipidus** (vasopressin lack) needs desmopressin. **Visual field monitoring** (serial perimetry) is mandatory after diagnosis.",
+   "say": "Acromegaly needs surgery first, then octreotide for persistence. Cushing disease needs nose route surgery with high remission. Large prolactinomas need cabergoline before surgery and failure needs stepwise replacement and insipidus needs desmopressin and field monitoring is mandatory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical therapy",
+     "points": [
+      "Cabergoline prolactinoma",
+      "Octreotide acromegaly",
+      "Pegvisomant for raised IGF",
+      "Steroids thyroxine replace"
+     ]
+    },
+    "right": {
+     "title": "Surgical therapy",
+     "points": [
+      "Transsphenoidal first",
+      "Cushing remission high",
+      "Macroadenoma debulking",
+      "Radiotherapy residual"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Apoplexy** (bleeding tumour) presents with thunderclap headache and visual loss and needs urgent surgery. **Cerebrospinal fluid leak** (nose route complication) needs repair. **Hypopituitarism crisis** (adrenal failure) needs stress steroids. **SIADH** (water retention) follows pituitary injury. **Visual deterioration** (field loss progression) needs urgent decompression. Each needs emergency pathways, not routine follow up.",
+   "say": "Bleeding tumour presents with thunderclap headache and visual loss and needs urgent surgery. Fluid leak needs repair. Adrenal failure needs stress steroids and water retention follows pituitary injury and field deterioration needs urgent decompression.",
+   "vis": null
+  },
+  {
+   "tx": "**Prolactinomas have** excellent survival with cabergoline, with tumours shrinking in 80 percent. Acromegaly mortality is driven by cardiovascular and respiratory disease, improving with IGF control. Cushing disease mortality improves with remission. Hypopituitarism survival depends on replacement adherence. Sheehan syndrome needs lifelong replacement and counselling.",
+   "say": "Prolactinomas have excellent survival with cabergoline, with tumours shrinking in eighty percent. Acromegaly mortality is driven by heart and lung disease, improving with control. Cushing mortality improves with remission and failure survival depends on adherence and sheehan syndrome needs lifelong replacement.",
+   "vis": null
+  },
+  {
+   "tx": "Pituitary Society guidance stresses MRI gold standards, cabergoline first line and surgery for acromegaly. **IGF one targets** (age adjusted normalisation) guide acromegaly therapy. Examination traps include missing bitemporal hemianopia, calling stalk effect prolactinoma, and replacing thyroxine before steroids. **Growth hormone deficiency** (short stature) is a favourite paediatric vignette.",
+   "say": "Current guidance stresses MRI gold standards and cabergoline first line and surgery for acromegaly and this is examined in viva examinations for revision. Age adjusted targets guide therapy. Traps include missing field loss and misreading stalk effect and replacing thyroxine before steroids and short stature is a favourite paediatric vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers tumour types, field signs and first line drugs. Bitemporal hemianopia and cabergoline are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers tumour types and field signs and first line drugs for revision and this is examined in viva examinations for revision. Field loss and cabergoline are the most asked points and short stature is a favourite paediatric vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Commonest tumour",
+      "Prolactinoma"
+     ],
+     [
+      "Field defect",
+      "Bitemporal hemianopia"
+     ],
+     [
+      "Gold test",
+      "MRI pituitary"
+     ],
+     [
+      "Prolactinoma drug",
+      "Cabergoline"
+     ],
+     [
+      "Acromegaly drug",
+      "Octreotide"
+     ],
+     [
+      "Acromegaly confirm",
+      "Oral glucose tolerance"
+     ],
+     [
+      "Cushing surgery",
+      "Transsphenoidal"
+     ],
+     [
+      "Replacement order",
+      "Steroids before thyroxine"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

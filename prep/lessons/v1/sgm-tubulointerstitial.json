@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-tubulointerstitial",
+ "subject": "ss-general-medicine",
+ "title": "Tubulointerstitial Nephritis and Tubular Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Tubulointerstitial nephritis** (TIN, kidney support tissue inflammation) causes **sterile pyuria** (white cells without bacteria), **white cell casts** (cellular plugs) and mild proteinuria. **Acute interstitial nephritis** (AIN, allergic form) follows beta lactams and proton pump inhibitors with fever and rash. **Chronic interstitial nephritis** (analgesic nephropathy) follows chronic analgesic use with papillary necrosis. **Renal tubular acidosis** (tubule acid handling failure) causes non anion gap acidosis with hypokalaemia.",
+   "say": "Tubulointerstitial nephritis is inflammation of kidney support tissue with white cells without bacteria and white cell casts and mild protein in urine. The allergic form follows beta lactams and acid suppressants with fever and rash. Chronic form follows long analgesic use. Tubule acid handling failure causes acidosis with low potassium.",
+   "vis": null
+  },
+  {
+   "tx": "**Drug induced AIN** (allergic kidney injury) accounts for most acute cases in hospitalized patients. **Infection related interstitial nephritis** (leptospirosis, tuberculosis) is common in India. **Sarcoidosis interstitial disease** (granulomatous inflammation) causes hypercalcaemia with kidney injury. **Tubulointerstitial nephritis with uveitis** (TINU syndrome) links eye and kidney inflammation. **Analgesic nephropathy** (NSAID driven papillary necrosis) is the classic chronic form.",
+   "say": "Drugs account for most acute cases in hospitals and this is examined in viva examinations for revision. Infections like leptospirosis and tuberculosis are common in India. Granulomatous disease causes high calcium with kidney injury. Eye and kidney inflammation link together in TINU syndrome and painkiller driven papillary necrosis is the classic chronic form.",
+   "vis": null
+  },
+  {
+   "tx": "Hypersensitivity T cells infiltrate interstitium and damage tubules, causing **concentrating defect** (dilute urine) and **sodium wasting** (salt loss). **Proximal tubular dysfunction** (Fanconi like failure) wastes glucose, phosphate and amino acids. **Distal acidification failure** (type 1 RTA) causes normal gap acidosis with alkaline urine. **Potassium wasting** (diuresis driven loss) causes hypokalaemia. **Calcium handling failure** causes hypercalciuria and stones.",
+   "say": "Allergic T cells infiltrate support tissue and damage tubules, causing dilute urine and salt loss. Proximal failure wastes glucose and phosphate and amino acids and this is examined in viva examinations for revision. Distal failure causes normal gap acidosis with alkaline urine and potassium wasting causes low potassium and calcium wasting causes stones.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drug or infection"
+     },
+     {
+      "id": "b",
+      "label": "T cell infiltrate"
+     },
+     {
+      "id": "c",
+      "label": "Tubular dysfunction"
+     },
+     {
+      "id": "d",
+      "label": "Concentrating failure"
+     },
+     {
+      "id": "e",
+      "label": "Acidosis and wasting"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fever, rash, arthralgia and eosinophilia suggest allergy, while polyuria and nocturia reflect concentrating failure. **Sterile pyuria** (white cells without infection) with white cell casts favours interstitial disease. **Oedema and hypertension** are less prominent than glomerular disease. **Systemic eosinophilia** (blood allergy cells) with raised immunoglobulin E supports AIN. **Proteinuria** is mild, unlike nephrotic syndrome.",
+   "say": "Fever and rash and joint aches suggest allergy, while large urine volumes reflect concentrating failure. White cells without infection with white cell casts favour interstitial disease and this is examined in viva examinations for revision. Swelling and hypertension are less prominent than glomerular disease. Blood allergy cells support AIN and protein in urine is mild.",
+   "vis": null
+  },
+  {
+   "tx": "**Urine microscopy** (sediment examination) showing white cell casts is diagnostic. **Urine eosinophils** (allergy cells) have poor specificity but support the diagnosis. **Blood eosinophilia** (raised allergy cells) with raised immunoglobulin E supports hypersensitivity. **Kidney biopsy** (tissue sample) is the gold standard showing interstitial infiltrates. **Blood gas** (acidosis test) confirms tubular acidification failure.",
+   "say": "Microscopy showing white cell casts is diagnostic. Urine allergy cells support the diagnosis. Blood allergy cells with raised immunoglobulin E support hypersensitivity and biopsy is the gold standard and blood gas confirms acid handling failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Urine microscopy",
+      "Diagnosis",
+      "White cell casts"
+     ],
+     [
+      "Urine eosinophils",
+      "Support",
+      "Low specificity"
+     ],
+     [
+      "Blood eosinophilia",
+      "Support",
+      "Allergy clue"
+     ],
+     [
+      "Kidney biopsy",
+      "Gold standard",
+      "Interstitial infiltrates"
+     ],
+     [
+      "Blood gas",
+      "Acidosis check",
+      "Normal gap acidosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Drug withdrawal** (stopping culprit antibiotic or acid suppressant) is first line for acute interstitial nephritis. **Corticosteroids** (prednisolone) improve kidney recovery when started early. **Fluid correction** (volume repletion) treats prerenal overlap. **Analgesic cessation** (stopping chronic NSAIDs) prevents chronic progression. **Urinary tract infection treatment** (leptospirosis cover) treats infection related disease.",
+   "say": "Stopping the culprit drug is first line. Steroids improve recovery when started early and volume correction treats prerenal overlap and stopping chronic painkillers prevents progression and infection cover treats infection related disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Distal renal tubular acidosis** (type 1, low potassium, stones) needs alkali and potassium supplementation. **Proximal RTA** (type 2, Fanconi failure) needs electrolyte replacement and phosphate. **Bartter syndrome** (loop defect with hypokalaemia) and **Gitelman syndrome** (thiazide defect) are hereditary tubulopathies. **Ifosfamide induced Fanconi** (chemotherapy kidney failure) needs monitoring. **Liddle syndrome** (sodium channel excess) causes hypertension with hypokalaemia.",
+   "say": "Distal acidosis with low potassium and stones needs alkali and potassium. Proximal failure needs electrolytes and phosphate. Hereditary loop and thiazide defects cause potassium wasting and chemotherapy causes proximal failure and sodium channel excess causes hypertension with low potassium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 distal RTA",
+     "points": [
+      "Alkaline urine pH above 5.5",
+      "Hypokalaemia and stones",
+      "Alkali replacement",
+      "Hypercalciuria common"
+     ]
+    },
+    "right": {
+     "title": "Type 2 proximal RTA",
+     "points": [
+      "Acidic urine possible",
+      "Fanconi wasting",
+      "Phosphate replacement",
+      "Rickets in children"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Medullary sponge kidney** (cystic medulla with stones) is a common incidental tubulointerstitial disorder. **Analgesic nephropathy** (papillary necrosis) presents with renal colic and haematuria. **Obstructive nephropathy** (back pressure interstitial disease) reverses with relief. **Myeloma kidney** (light chain tubular injury) causes progressive failure. **Sickle cell nephropathy** (haematuria with concentrating failure) needs hydration.",
+   "say": "Cystic medulla with stones is a common incidental disorder. Papillary necrosis presents with colic and blood in urine. Back pressure disease reverses with relief and myeloma causes progressive failure and sickle disease needs hydration.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute interstitial** nephritis recovers fully if the drug is withdrawn early, while delayed withdrawal causes chronic scarring. Analgesic nephropathy progresses slowly to end stage kidney disease over decades. Hereditary tubulopathies need lifelong electrolyte replacement and growth monitoring. Myeloma kidney survival depends on haematological control. Medullary sponge disease has benign prognosis with stone prevention.",
+   "say": "Acute disease recovers fully if the drug is stopped early. Analgesic disease progresses slowly over decades and this is examined in viva examinations for revision. Hereditary diseases need lifelong replacement and myeloma survival depends on remission and sponge disease has benign prognosis with stone prevention.",
+   "vis": null
+  },
+  {
+   "tx": "Kidney Disease Improving Global Outcomes 2024 stresses drug stewardship, early biopsy and alkali therapy. **PPI induced AIN** (acid suppressant allergy) is an underrecognised Indian cause. Examination traps include missing sterile pyuria, calling white cell casts glomerular, and delaying steroid therapy in acute interstitial disease. **Urine eosinophils** specificity is a favourite viva trap.",
+   "say": "Current guidance stresses drug stewardship and early biopsy and alkali therapy and this is examined in viva examinations for revision. Acid suppressant allergy is an underrecognised Indian cause. Traps include missing sterile pyuria and delaying steroids and urine eosinophil specificity is a favourite viva trap.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers casts, biopsy patterns and acidosis types. White cell casts and sterile pyuria are the most asked points in theory and viva examinations. RTA types and analgesic papillary necrosis are favourite vignette themes. Regular revision of cutoffs and therapy choices before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers casts and biopsy patterns and acidosis types for revision and this is examined in viva examinations for revision. White cell casts and sterile pyuria are the most asked points and rTA types and papillary necrosis are favourite vignette themes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Diagnostic casts",
+      "White cell casts"
+     ],
+     [
+      "Allergy clue",
+      "Sterile pyuria"
+     ],
+     [
+      "Gold standard",
+      "Kidney biopsy"
+     ],
+     [
+      "RTA type 1 urine",
+      "Alkaline above 5.5"
+     ],
+     [
+      "RTA type 2 clue",
+      "Fanconi wasting"
+     ],
+     [
+      "Analgesic lesion",
+      "Papillary necrosis"
+     ],
+     [
+      "Common drug",
+      "PPI and beta lactams"
+     ],
+     [
+      "Eye kidney link",
+      "TINU syndrome"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

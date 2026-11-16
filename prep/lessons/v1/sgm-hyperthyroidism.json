@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-hyperthyroidism",
+ "subject": "ss-general-medicine",
+ "title": "Hyperthyroidism and Thyroiditis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hyperthyroidism** (thyroid hormone excess) affects 1 percent of adults, with **Graves disease** (autoimmune thyroid stimulation) as the leading cause. **Toxic multinodular goitre** (autonomous nodules) causes excess in older patients. **Toxic adenoma** (single hot nodule) causes focal autonomy. **Thyroiditis** (thyroid inflammation) causes transient thyrotoxicosis. **Iatrogenic thyrotoxicosis** (thyroxine overdose) is drug driven. **Thyroid storm** (severe decompensation) is fatal without treatment.",
+   "say": "Hyperthyroidism affects one percent of adults, with Graves disease as the leading cause. Autonomous nodules cause excess in older patients. Single hot nodules cause focal autonomy and inflammation causes transient excess and thyroxine overdose is drug driven and severe decompensation is fatal without treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Graves disease** (TSH receptor antibodies) shows diffuse goitre with ophthalmopathy and dermopathy. **Toxic multinodular goitre** (nodular autonomy) lacks eye signs. **Toxic adenoma** (solitary autonomy) shows suppressed TSH with hot nodule. **Painful thyroiditis** (silent thyroiditis) follows viral infection with neck pain. **Postpartum thyroiditis** (immune flare) follows delivery. **Amiodarone induced thyrotoxicosis** (iodine loaded drug) complicates cardiology therapy.",
+   "say": "TSH receptor antibodies are marked by diffuse goitre with eye and skin disease. Nodular autonomy lacks eye signs and this is examined in viva examinations for revision. Solitary autonomy is marked by suppressed TSH with hot nodule. Painful thyroiditis follows viral infection and immune flare follows delivery and iodine loaded drugs complicate cardiology therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**TSH receptor antibodies** (TRAb) stimulate thyroid growth and hormone production in Graves disease. **Autonomous nodules** (somatic mutations) produce hormone independent of TSH. **Thyroiditis** (gland destruction) releases stored hormone transiently. **Iodine excess** (Wolff Chaikoff escape) fuels hormone synthesis. **Sympathetic overdrive** (catecholamine sensitisation) causes tremor and tachycardia. **Bone turnover** (osteoclast activation) causes osteoporosis.",
+   "say": "Antibodies stimulate growth and hormone production in Graves disease and this is examined in viva examinations for revision. Somatic mutations produce hormone independent of TSH. Gland destruction releases stored hormone transiently and iodine excess fuels synthesis and catecholamine sensitisation causes tremor and fast heart and osteoclast activation causes bone loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antibody or autonomy"
+     },
+     {
+      "id": "b",
+      "label": "Hormone excess"
+     },
+     {
+      "id": "c",
+      "label": "Sympathetic overdrive"
+     },
+     {
+      "id": "d",
+      "label": "Bone turnover"
+     },
+     {
+      "id": "e",
+      "label": "Storm"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Weight loss** (hypermetabolism) with heat intolerance and tremor is classic. **Graves ophthalmopathy** (lid lag with exophthalmos) is the eye hallmark. **Pretibial myxoedema** (shin skin thickening) is the skin hallmark. **Thyroid storm** (fever, tachycardia, delirium) is the emergency. **Atrial fibrillation** (fast irregular rhythm) complicates elderly disease. **Proximal myopathy** (thigh weakness) marks chronic excess.",
+   "say": "Weight loss with heat intolerance and tremor is classic. Lid lag with eye protrusion is the eye hallmark. Shin skin thickening is the skin hallmark. Fever with fast heart and delirium is the emergency and fast irregular rhythm complicates elderly disease and thigh weakness marks chronic excess.",
+   "vis": null
+  },
+  {
+   "tx": "**TSH suppression** (low TSH) with **free T4 elevation** (high hormone) confirms hyperthyroidism. **TRAb antibodies** (receptor antibodies) confirm Graves disease. **Thyroid scintigraphy** (radioiodine uptake) shows diffuse high uptake in Graves and cold areas in thyroiditis. **Ultrasound Doppler** (vascularity scan) shows hypervascularity in Graves. **Thyroid function after radioiodine** (post therapy monitoring) guides hypothyroidism replacement.",
+   "say": "Low TSH with high free T4 confirms hyperthyroidism and this is examined in viva examinations for revision. Receptor antibodies confirm Graves disease and this is examined in viva examinations for revision. Radioiodine uptake is marked by diffuse high uptake in Graves and cold areas in thyroiditis and vascularity scan is marked by hypervascularity in Graves and post therapy monitoring guides replacement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "TSH free T4",
+      "Diagnosis",
+      "Suppressed TSH raised T4"
+     ],
+     [
+      "TRAb antibodies",
+      "Graves confirm",
+      "Receptor antibodies"
+     ],
+     [
+      "Scintigraphy",
+      "Uptake pattern",
+      "Diffuse high Graves"
+     ],
+     [
+      "Doppler ultrasound",
+      "Vascularity",
+      "Hypervascular Graves"
+     ],
+     [
+      "Post radioiodine TFT",
+      "Follow up",
+      "Hypothyroidism replacement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methimazole** (thionamide) is first line antithyroid drug for Graves disease. **Beta blockers** (propranolol) control tremor and tachycardia symptomatically. **Radioiodine ablation** (125I therapy) is definitive for Graves and toxic goitre. **Thyroidectomy** (gland removal) suits large goitres and pregnancy after second trimester. **Post ablation hypothyroidism** (thyroxine replacement) is expected and replaced. **Thyroid storm therapy** needs thionamide with iodine and beta blockade.",
+   "say": "Methimazole is first line antithyroid drug. Propranolol controls tremor and fast heart and this is examined in viva examinations for revision. Radioiodine ablation is definitive and gland removal suits large goitres and expected hypothyroidism is replaced and storm therapy needs thionamide with iodine and beta blockade.",
+   "vis": null
+  },
+  {
+   "tx": "**Painful thyroiditis** (subacute granulomatous disease) needs NSAIDs and steroids, not thionamides. **Postpartum thyroiditis** (immune flare) needs symptomatic beta blockade and thyroxine in hypothyroid phase. **Amiodarone thyrotoxicosis** (iodine loaded disease) needs steroids and beta blockade. **Neonatal thyrotoxicosis** (maternal antibody transfer) needs supportive care. **Thyroid storm** (Burch Wartofsky score above 45) needs intensive care.",
+   "say": "Painful thyroiditis needs NSAIDs and steroids, not thionamides. Postpartum flare needs symptomatic blockade and thyroxine in hypothyroid phase. Iodine loaded disease needs steroids and blockade and neonatal transfer needs supportive care and storm score above forty five needs intensive care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Graves disease",
+     "points": [
+      "TRAb positive",
+      "Eye skin signs",
+      "Methimazole first",
+      "Radioiodine definitive"
+     ]
+    },
+    "right": {
+     "title": "Thyroiditis thyrotoxicosis",
+     "points": [
+      "Painful or silent",
+      "No thionamide benefit",
+      "NSAIDs steroids",
+      "Self limited phases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Thyroid storm** (fever, delirium, tachycardia) is the emergency needing propranolol, propylthiouracil and iodine. **Agranulocytosis** (white cell crash) from thionamides needs drug cessation. **Hepatotoxicity** (liver injury) from propylthiouracil needs monitoring. **Graves orbitopathy** (eye disease) needs smoking cessation and steroids. **Osteoporosis** (bone loss) needs calcium and vitamin D. Each needs distinct monitoring, not uniform therapy.",
+   "say": "Fever with delirium and fast heart is the emergency needing propranolol and propylthiouracil and iodine. White cell crash needs drug cessation. Liver injury needs monitoring and eye disease needs smoking cessation and steroids and bone loss needs calcium and vitamin D.",
+   "vis": null
+  },
+  {
+   "tx": "**Graves disease** remission with methimazole is 40 percent at one year. Toxic goitre needs definitive therapy with radioiodine or surgery. Thyroid storm mortality exceeds 10 percent without treatment. Agranulocytosis mortality is low with prompt cessation. Orbitopathy disability improves with smoking cessation. Osteoporosis recovers partially with control.",
+   "say": "Graves remission with methimazole is forty percent at one year. Toxic goitre needs definitive therapy. Storm mortality exceeds ten percent without treatment and this is examined in viva examinations for revision. White cell crash mortality is low with prompt cessation and eye disability improves with smoking cessation and bone recovery is partial with control.",
+   "vis": null
+  },
+  {
+   "tx": "American Thyroid Association 2016 guidance stresses TRAb diagnosis, methimazole first line and radioiodine definitiveness. **Burch Wartofsky score** (storm grading) above 45 defines storm. Examination traps include giving thionamides in thyroiditis, missing TRAb in Graves disease, and omitting beta blockade for symptoms. **Lid lag** (eyelid delay) is a favourite viva sign.",
+   "say": "Current guidance stresses receptor antibody diagnosis and methimazole first line and radioiodine definitiveness and this is examined in viva examinations for revision. Storm grading above forty five defines storm. Traps include giving thionamides in thyroiditis and missing antibodies and omitting blockade and lid lag is a favourite viva sign.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers Graves markers, storm scores and first line drugs. TRAb positivity and Burch scores are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers Graves markers and storm scores and first line drugs for revision and this is examined in viva examinations for revision. Positivity and scores are the most asked points and lid lag is a favourite viva sign theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Graves antibody",
+      "TRAb positive"
+     ],
+     [
+      "Graves uptake",
+      "Diffuse high"
+     ],
+     [
+      "First drug",
+      "Methimazole"
+     ],
+     [
+      "Symptom drug",
+      "Propranolol"
+     ],
+     [
+      "Storm score",
+      "Above 45"
+     ],
+     [
+      "Storm treatment",
+      "Thionamide iodine blockade"
+     ],
+     [
+      "Thyroiditis therapy",
+      "NSAIDs steroids"
+     ],
+     [
+      "Agranulocytosis action",
+      "Stop drug"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

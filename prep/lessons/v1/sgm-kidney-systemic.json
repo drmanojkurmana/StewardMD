@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-kidney-systemic",
+ "subject": "ss-general-medicine",
+ "title": "Kidney in Systemic Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Kidney in systemic disease** (multisystem kidney injury) links sepsis, vasculitis, paraproteinaemia and liver failure to renal failure. **Sepsis associated AKI** (infection driven failure) is the commonest intensive care form worldwide. **Cardiorenal syndrome** (heart kidney cross talk) follows decompensated heart failure. **Hepatorenal syndrome** (liver driven failure) follows cirrhosis with splanchnic vasodilatation. **Myeloma kidney** (light chain cast nephropathy) is the paraprotein hallmark.",
+   "say": "Kidney in systemic disease links sepsis and vasculitis and paraproteinaemia and liver failure to renal failure. Sepsis driven failure is the commonest intensive care form worldwide. Heart kidney cross talk follows decompensated failure. Liver driven failure follows cirrhosis and light chain casts are the myeloma hallmark.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetic kidney disease** (diabetes driven scarring) is the commonest systemic renal disease globally. **Hypertensive nephrosclerosis** (pressure driven scarring) follows chronic hypertension. **ANCA vasculitis** (autoimmune vessel inflammation) causes crescentic disease. **Lupus nephritis** (autoimmune kidney inflammation) affects young women. **Multiple myeloma** (plasma cell cancer) causes light chain cast disease. **Scleroderma renal crisis** (vascular kidney crisis) causes malignant hypertension.",
+   "say": "Diabetes driven scarring is the commonest systemic renal disease globally. Pressure driven scarring follows chronic hypertension. Autoimmune vasculitis causes crescentic disease and autoimmune kidney inflammation affects young women and plasma cell cancer causes cast disease and vascular crisis causes malignant hypertension.",
+   "vis": null
+  },
+  {
+   "tx": "Sepsis causes **glomerular hypoperfusion** (afferent vasoconstriction) with acute tubular necrosis. Paraprotein **light chains** (filtered proteins) precipitate with Tamm Horsfall protein into obstructing casts. Amyloid **fibrils** (abnormal protein deposits) thicken glomerular membranes. Vasculitis causes **capillary rupture** (crescentic injury) with red cell casts. Scleroderma causes **intimal hyperplasia** (vessel thickening) with ischaemic failure.",
+   "say": "Sepsis causes low perfusion with tubule necrosis. Filtered light chains precipitate into obstructing casts. Amyloid fibrils thicken membranes and vasculitis ruptures capillaries with red cell casts and scleroderma thickens vessels with ischaemic failure and this is examined in viva examinations for revision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Systemic insult"
+     },
+     {
+      "id": "b",
+      "label": "Perfusion or deposits"
+     },
+     {
+      "id": "c",
+      "label": "Tubular or glomerular injury"
+     },
+     {
+      "id": "d",
+      "label": "AKI or CKD"
+     },
+     {
+      "id": "e",
+      "label": "Cause directed therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sepsis** presents with hypotension, oliguria and raised lactate. **Heart failure** presents with raised jugular pressure, oedema and cardiorenal oliguria. **Myeloma** presents with bone pain, anaemia and hypercalcaemia. **Vasculitis** presents with purpura, haematuria and pulmonary haemorrhage. **Scleroderma** presents with skin thickening and hypertensive crisis. **Amyloidosis** presents with macroglossia (large tongue) and cardiomyopathy.",
+   "say": "Sepsis presents with hypotension and oliguria and raised lactate. Heart failure presents with raised neck pressure and swelling. Myeloma presents with bone pain and anaemia and high calcium. Vasculitis presents with purpura and haematuria and lung bleeding and scleroderma presents with skin thickening and hypertensive crisis and amyloidosis presents with large tongue and heart disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Serum protein electrophoresis** (clonal protein test) with free light chains screens for myeloma. **ANCA and anti GBM antibodies** (vasculitis serology) guide biopsy urgency. **Complement levels** (C3 C4) pattern classify lupus and post streptococcal disease. **Kidney biopsy** (tissue sample) is the gold standard for all systemic renal disease. **Serum cryoglobulins** (cold precipitating proteins) screen for hepatitis C vasculitis.",
+   "say": "Clonal protein testing with free light chains screens for myeloma. Vasculitis serology guides biopsy urgency. Complement pattern classifies lupus disease and biopsy is the gold standard for all systemic renal disease and cold precipitating proteins screen for hepatitis C vasculitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Serum electrophoresis",
+      "Myeloma screen",
+      "Clonal protein"
+     ],
+     [
+      "ANCA anti GBM",
+      "Vasculitis guide",
+      "Crescentic disease"
+     ],
+     [
+      "Complement C3 C4",
+      "Classification",
+      "Lupus pattern"
+     ],
+     [
+      "Kidney biopsy",
+      "Gold standard",
+      "Classification"
+     ],
+     [
+      "Cryoglobulins",
+      "Hepatitis C link",
+      "Vasculitis screen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sepsis care** (source control, vasopressors) treats cardiorenal and sepsis AKI. **Heart failure therapy** (decongestion) improves cardiorenal syndrome despite creatinine rise. **Bortezomib** (proteasome inhibitor) with dexamethasone treats myeloma kidney. **Cyclophosphamide** (immunosuppressant) with steroids treats vasculitis and lupus. **ACE inhibitors** (blockers) treat scleroderma renal crisis and are started urgently.",
+   "say": "Source control with pressors treats sepsis failure and this is examined in viva examinations for revision. Decongestion improves heart kidney syndrome despite creatinine rise and this is examined in viva examinations for revision. Proteasome inhibitors treat myeloma kidney and cyclophosphamide with steroids treats vasculitis and aCE inhibitors are started urgently in scleroderma crisis.",
+   "vis": null
+  },
+  {
+   "tx": "**Lupus nephritis class IV** (diffuse proliferative disease) needs mycophenolate with steroids. **Amyloidosis chemotherapy** (daratumumab based) improves kidney survival. **Hepatorenal syndrome** needs albumin with terlipressin. **Scleroderma renal crisis** needs ACE inhibitors, not beta blockers. **Cooling avoidance** prevents cryoglobulinaemia flares. **Transfusion thresholds** need restraint in paraproteinaemia.",
+   "say": "Diffuse proliferative lupus needs mycophenolate with steroids. Amyloid chemotherapy improves kidney survival and this is examined in viva examinations for revision. Liver driven failure needs albumin with terlipressin and scleroderma crisis needs ACE inhibitors and cooling avoidance prevents flares and transfusion thresholds need restraint in paraproteinaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiorenal syndrome",
+     "points": [
+      "Decongestion first",
+      "Creatinine rise tolerated",
+      "Supports heart therapy",
+      "Avoid aggressive fluid"
+     ]
+    },
+    "right": {
+     "title": "Hepatorenal syndrome",
+     "points": [
+      "Albumin and terlipressin",
+      "Spontaneous bacterial peritonitis cover",
+      "Bridge to transplant",
+      "Avoid nephrotoxins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dialysis** (kidney replacement) is needed for refractory hyperkalaemia and overload in systemic disease. **Plasma exchange** (antibody removal) treats severe vasculitis and anti GBM disease. **Intravenous immunoglobulin** (antibody therapy) helps selected antibody diseases. **Infection** (pneumonia, sepsis) dominates mortality in systemic disease. **Cardiovascular disease** (heart attack) kills most diabetic systemic disease patients.",
+   "say": "Dialysis is needed for refractory potassium and overload. Antibody removal treats severe vasculitis and immunoglobulin helps selected antibody diseases and infection dominates mortality and heart disease kills most diabetic patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Sepsis AKI** mortality exceeds cardiorenal mortality, which depends on cardiac recovery. Myeloma kidney survival depends on haematological remission. Vasculitis survival improves with early immunosuppression. Scleroderma renal crisis survival improves dramatically with ACE inhibitors. Amyloidosis survival is the poorest without remission. Hepatorenal syndrome survival needs transplantation.",
+   "say": "Sepsis failure mortality exceeds cardiorenal mortality and this is examined in viva examinations for revision. Myeloma survival depends on remission and this is examined in viva examinations for revision. Vasculitis survival improves with early suppression and scleroderma survival improves dramatically with ACE inhibitors and amyloid survival is the poorest without remission and liver driven failure needs transplantation.",
+   "vis": null
+  },
+  {
+   "tx": "Kidney Disease Improving Global Outcomes 2024 stresses early biopsy, light chain screening and vasculitis induction. **SGLT2 inhibitors** (kidney protection) benefit diabetic and proteinuric disease. Examination traps include missing myeloma screening in elderly renal failure, delaying ACE inhibitors in scleroderma crisis, and calling cardiorenal rise treatment failure. **Macroglossia with nephrotic syndrome** (amyloid clue) is a favourite vignette.",
+   "say": "Current guidance stresses early biopsy and light chain screening and vasculitis induction. Kidney protection drugs benefit diabetic disease and this is examined in viva examinations for revision. Traps include missing myeloma screening and delaying ACE inhibitors in crisis and large tongue with nephrotic syndrome is a favourite vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers systemic patterns, serology and therapy choices. Light chain casts and ANCA patterns are the most asked points in theory and viva examinations. Hepatorenal triggers and cardiorenal tolerance are favourite vignette themes. Regular revision of cutoffs and therapy choices before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers systemic patterns and serology and therapy choices for revision and this is examined in viva examinations for revision. Light chain casts and ANCA patterns are the most asked points. Liver driven triggers and heart kidney tolerance are favourite vignette themes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Myeloma kidney lesion",
+      "Light chain casts"
+     ],
+     [
+      "Vasculitis biopsy",
+      "Crescentic disease"
+     ],
+     [
+      "Scleroderma action",
+      "ACE inhibitors urgently"
+     ],
+     [
+      "Hepatorenal therapy",
+      "Albumin plus terlipressin"
+     ],
+     [
+      "Cardiorenal tolerance",
+      "Creatinine rise accepted"
+     ],
+     [
+      "Lupus severe therapy",
+      "Mycophenolate plus steroids"
+     ],
+     [
+      "Amyloid clue",
+      "Macroglossia"
+     ],
+     [
+      "Serology first",
+      "ANCA and complement"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

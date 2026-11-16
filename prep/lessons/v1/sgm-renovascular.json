@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-renovascular",
+ "subject": "ss-general-medicine",
+ "title": "Renovascular Disease and Atheroembolic Kidney Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Renovascular disease** (kidney vessel narrowing) is usually **atherosclerotic renal artery stenosis** (ARAS, cholesterol plaque narrowing) in elderly hypertensives. **Fibromuscular dysplasia** (arterial wall dysplasia) affects young women with mid renal artery beading. **Atheroembolic kidney disease** (cholesterol emboli) follows catheterisation or anticoagulation. **Renal artery dissection** (torn artery wall) follows trauma. Blood pressure resistant to 3 drugs suggests renovascular disease.",
+   "say": "Renovascular disease is usually cholesterol plaque narrowing in elderly hypertensives. Arterial wall dysplasia affects young women with beading. Cholesterol emboli follow catheterisation and torn artery walls follow trauma and resistant hypertension suggests renovascular disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Atherosclerosis** (plaque) narrows renal ostia bilaterally in most elderly cases. **Fibromuscular dysplasia** (medial hyperplasia) beads the mid artery. **Cholesterol emboli** (plaque shards) lodge in small vessels after instrumentation. **Vasculitis** (Takayasu disease) narrows renal arteries in young patients. **Thrombotic occlusion** (clotted artery) causes infarction and flank pain.",
+   "say": "Plaque narrows ostia bilaterally in most elderly cases and this is examined in viva examinations for revision. Medial hyperplasia beads the mid artery and this is examined in viva examinations for revision. Plaque shards lodge in small vessels after instrumentation and vessel inflammation narrows arteries in young patients and clotted arteries cause infarction and flank pain.",
+   "vis": null
+  },
+  {
+   "tx": "Stenosis reduces perfusion pressure, activating **renin angiotensin system** (BP raising hormones) and causing **secondary hypertension** (pressure driven high BP). Reduced filtration causes **ischaemic nephropathy** (low flow scarring). Bilateral disease causes **flash pulmonary oedema** (sudden lung fluid). Cholesterol emboli cause **livedo reticularis** (mottled skin) with eosinophilia. Clotted arteries cause **renal infarction** (tissue death).",
+   "say": "Stenosis reduces perfusion and activates pressure raising hormones and causes secondary hypertension. Low flow scars the kidney and this is examined in viva examinations for revision. Bilateral disease causes sudden lung fluid and emboli cause mottled skin with allergy cells and clotted arteries cause tissue death.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Artery narrowing"
+     },
+     {
+      "id": "b",
+      "label": "Renin activation"
+     },
+     {
+      "id": "c",
+      "label": "Hypertension"
+     },
+     {
+      "id": "d",
+      "label": "Ischaemia"
+     },
+     {
+      "id": "e",
+      "label": "Flash oedema or failure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Resistant hypertension** (above 140 over 90 on 3 drugs including diuretic) is the hallmark. **Bruit** (abdominal whoosh) with asymmetric kidney size suggests unilateral stenosis. **Flash pulmonary oedema** (sudden lung fluid without heart disease) suggests bilateral disease. **AKI after ACE inhibitors** (creatinine rise on blockers) suggests bilateral or single kidney stenosis. **Livedo reticularis** (mottled skin) with blue toes suggests emboli.",
+   "say": "Above target on three drugs including diuretic is the hallmark. Abdominal whoosh with unequal kidney size suggests unilateral stenosis and this is examined in viva examinations for revision. Sudden lung fluid suggests bilateral disease and creatinine rise on blockers suggests bilateral or single kidney stenosis and mottled skin with blue toes suggests emboli.",
+   "vis": null
+  },
+  {
+   "tx": "**Doppler ultrasound** (flow scan) screens renal artery velocities. **Computed tomography angiography** (CTA, contrast vessel scan) is the gold standard for stenosis. **Duplex kidney size** (sonographic asymmetry) above 1.5 cm suggests chronic unilateral ischaemia. **Captopril renogram** (provocative scan) tests functional significance. **Catheter angiography** (invasive vessel imaging) confirms severe disease and allows stenting.",
+   "say": "Doppler screening measures artery velocities. Contrast vessel scanning is the gold standard for stenosis. Size asymmetry above one point five centimetres suggests chronic ischaemia and provocative scans test functional significance and invasive imaging confirms severe disease and allows stenting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Doppler ultrasound",
+      "Screening",
+      "Renal artery velocities"
+     ],
+     [
+      "CT angiography",
+      "Gold standard",
+      "Stenosis anatomy"
+     ],
+     [
+      "Kidney size asymmetry",
+      "Ischaemia clue",
+      "Above 1.5 cm difference"
+     ],
+     [
+      "Captopril renogram",
+      "Function test",
+      "Provocative ischaemia"
+     ],
+     [
+      "Catheter angiography",
+      "Confirm and treat",
+      "Stent delivery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Statins** (cholesterol reducers) and **aspirin** (antiplatelet) are first line for atherosclerotic disease. **ACE inhibitors** (blockers) need caution with bilateral disease. **Angioplasty with stenting** (balloon expansion) suits fibromuscular dysplasia and selected ostial disease. **Surgical revascularisation** (bypass) suits complex anatomy. **Anticoagulation withdrawal** (stopping heparin) prevents further emboli in atheroembolic disease.",
+   "say": "Statins and aspirin are first line for atherosclerotic disease. Blockers need caution with bilateral disease. Balloon expansion suits dysplasia and selected ostial disease and bypass suits complex anatomy and stopping heparin prevents further emboli.",
+   "vis": null
+  },
+  {
+   "tx": "**CORAL trial** (stent versus medical therapy) showed no kidney benefit from routine stenting in atherosclerotic disease. **Fibromuscular dysplasia** (young women) benefits from angioplasty without routine stents. **Flash oedema** (bilateral disease) benefits from revascularisation case by case. **Embolic disease** needs supportive care, not stenting. **Statin intensive therapy** (atorvastatin 80 mg) is mandatory for all atherosclerotic patients.",
+   "say": "The CORAL trial showed no kidney benefit from routine stenting in atherosclerotic disease. Young dysplasia benefits from balloon expansion without routine stents and this is examined in viva examinations for revision. Sudden lung fluid benefits from revascularisation case by case and this is examined in viva examinations for revision. Embolic disease needs supportive care and intensive statin is mandatory for all atherosclerotic patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical therapy",
+     "points": [
+      "Statin and aspirin",
+      "Blood pressure control",
+      "Smoking cessation",
+      "Default strategy"
+     ]
+    },
+    "right": {
+     "title": "Stent selected cases",
+     "points": [
+      "Dysplasia beading",
+      "Flash oedema bilateral",
+      "Ostial severe disease",
+      "CORAL guided selection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acute infarction** (clotted artery) presents with flank pain and raised lactate dehydrogenase. **Cholesterol emboli syndrome** (mottled skin, blue toes) worsens with anticoagulation. **Hypertensive emergency** (malignant pressure) needs urgent control. **Bilateral occlusion** needs emergent revascularisation. **Infected aneurysm** (mycotic sac) needs antibiotics and surgery. Each needs distinct pathways, not uniform stenting.",
+   "say": "Clotted artery presents with flank pain and raised enzyme. Mottled skin with blue toes worsens with anticoagulation. Malignant pressure needs urgent control and bilateral occlusion needs emergent revascularisation and infected aneurysms need antibiotics and surgery.",
+   "vis": null
+  },
+  {
+   "tx": "**Atherosclerotic renovascular** disease mortality is driven by cardiovascular disease, not kidney failure alone. Fibromuscular dysplasia has excellent prognosis after angioplasty. Atheroembolic disease mortality exceeds 70 percent in multiorgan cases. Flash oedema survivors need lifelong statin and antiplatelet therapy. Kidney function stabilises in most medically treated patients.",
+   "say": "Atherosclerotic disease mortality is driven by heart disease, not kidney failure alone. Dysplasia has excellent prognosis after balloon therapy. Embolic disease mortality exceeds seventy percent in multiorgan cases and this is examined in viva examinations for revision. Flash survivors need lifelong statin and antiplatelet therapy and kidney function stabilises in most medically treated patients.",
+   "vis": null
+  },
+  {
+   "tx": "European Society of Cardiology 2024 peripheral artery guidance stresses statins, antiplatelets and selective stenting. **Smoking cessation** (tobacco abstinence) is the strongest progression protector. Examination traps include stenting all atherosclerotic stenoses, continuing blockers through bilateral acute injury, and missing livedo as an embolic clue. **Asymmetric kidneys** (size difference) is a favourite viva marker.",
+   "say": "Current peripheral artery guidance stresses statins and antiplatelets and selective stenting. Tobacco abstinence is the strongest progression protector. Traps include stenting all stenoses and continuing blockers through bilateral injury and size asymmetry is a favourite viva marker.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers stenosis causes, gold tests and stent selection. CORAL neutrality and dysplasia benefit are the most asked points in theory and viva examinations. Regular revision of cutoffs and therapy choices before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers stenosis causes and gold tests and stent selection for revision. CORAL neutrality and dysplasia benefit are the most asked points and size asymmetry is a favourite viva marker theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Common cause elderly",
+      "Atherosclerotic stenosis"
+     ],
+     [
+      "Young women cause",
+      "Fibromuscular dysplasia"
+     ],
+     [
+      "Gold standard",
+      "CT angiography"
+     ],
+     [
+      "CORAL result",
+      "No routine stent benefit"
+     ],
+     [
+      "Dysplasia therapy",
+      "Angioplasty favoured"
+     ],
+     [
+      "Embolic skin clue",
+      "Livedo reticularis"
+     ],
+     [
+      "Size asymmetry",
+      "Above 1.5 cm"
+     ],
+     [
+      "Mandatory drug",
+      "Statin plus aspirin"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

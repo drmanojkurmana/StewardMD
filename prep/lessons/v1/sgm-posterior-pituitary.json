@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-posterior-pituitary",
+ "subject": "ss-general-medicine",
+ "title": "Arginine Vasopressin Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Arginine vasopressin** (AVP, antidiuretic hormone) controls free water excretion from posterior pituitary. **Central diabetes insipidus** (vasopressin lack) causes polyuria with dilute urine. **Nephrogenic diabetes insipidus** (vasopressin resistance) causes polyuria despite high hormone levels. **SIADH** (ADH excess retention) causes hyponatraemia with euvolemia. **Cerebral salt wasting** (volume depletion with natriuresis) mimics SIADH.",
+   "say": "Arginine vasopressin controls free water excretion from the posterior pituitary and this is examined in viva examinations for revision. Lack causes polyuria with dilute urine. Resistance causes polyuria despite high hormone levels and excess causes hyponatraemia with euvolemia and volume depletion mimics excess with natriuresis.",
+   "vis": null
+  },
+  {
+   "tx": "**Pituitary surgery** (transsphenoidal resection) and **head trauma** (basal fracture) are common central causes. **Central tumour** (craniopharyngioma) compresses vasopressin tracts. **Lithium therapy** (mood stabiliser) is the classic nephrogenic cause. **Hypercalcaemia** (high calcium) induces tubular resistance. **Hypokalaemia** (low potassium) also causes resistance. **Secretagogues** (SSRIs, carbamazepine) cause SIADH.",
+   "say": "Pituitary surgery and head trauma are common central causes. Central tumour compresses tracts. Lithium is the classic resistance cause and high calcium induces resistance and low potassium also causes resistance and sSRIs cause SIADH.",
+   "vis": null
+  },
+  {
+   "tx": "Vasopressin inserts **aquaporin two channels** (water pores) into collecting ducts, retaining water. Lack causes **free water loss** (dilute polyuria above 3 litres daily). Resistance prevents **osmolality concentration** (urine strengthening) despite ADH. Excess retains water and dilutes sodium. **Thirst compensation** (intact thirst) protects central disease patients with access to water. Triphasic response follows pituitary injury.",
+   "say": "Vasopressin inserts water pores into collecting ducts and retains water. Lack causes dilute polyuria above three litres daily. Resistance prevents urine strengthening despite ADH and excess retains water and dilutes sodium and thirst protects central disease patients and triphasic response follows injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vasopressin signal"
+     },
+     {
+      "id": "b",
+      "label": "Aquaporin insertion"
+     },
+     {
+      "id": "c",
+      "label": "Water retention"
+     },
+     {
+      "id": "d",
+      "label": "Concentrated urine"
+     },
+     {
+      "id": "e",
+      "label": "Sodium stability"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Massive polyuria** (above 3 litres daily) with polydipsia and nocturia dominates diabetes insipidus. **Nocturnal enuresis** (bed wetting) in children signals insipidus. **Dehydration** (dry mucosa) with hypernatraemia marks severe disease. **SIADH** is often asymptomatic with mild hyponatraemia. **Cerebral salt wasting** follows subarachnoid haemorrhage with hypovolaemia. **Dehydration with hypernatraemia** is the nephrogenic hallmark.",
+   "say": "Massive polyuria above three litres daily with polydipsia dominates. Bed wetting in children signals insipidus. Dry mucosa with hypernatraemia marks severe disease and sIADH is often asymptomatic and salt wasting follows brain bleeding with low volume and dehydration with hypernatraemia marks nephrogenic disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Serum osmolality** (blood concentration) with **urine osmolality** (urine concentration) classifies polyuria. **Water deprivation test** (supervised drying) is the gold standard distinguishing central, nephrogenic and primary polydipsia. **Desmopressin response** (urine concentration after DDAVP) confirms central disease. **Serum sodium** (high in insipidus, low in SIADH) guides therapy. **Volume assessment** (euvolemia versus depletion) separates SIADH from salt wasting.",
+   "say": "Serum and urine concentration tests classify polyuria. Supervised drying is the gold standard distinguishing central and resistance and primary polydipsia. Response to desmopressin confirms central disease and sodium guides therapy and volume assessment separates SIADH from salt wasting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Serum plus urine osmolality",
+      "Classification",
+      "Dilute versus concentrated"
+     ],
+     [
+      "Water deprivation test",
+      "Gold standard",
+      "Central nephrogenic polydipsia"
+     ],
+     [
+      "Desmopressin response",
+      "Central confirm",
+      "Concentrates after DDAVP"
+     ],
+     [
+      "Serum sodium",
+      "Therapy guide",
+      "High versus low"
+     ],
+     [
+      "Volume assessment",
+      "SIADH versus wasting",
+      "Euvolemia versus depletion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Desmopressin** (DDAVP, synthetic vasopressin) is first line for central diabetes insipidus. **Fluid restriction** (1 litre daily) is first line for SIADH. **Salt tablets** (sodium chloride) with urea augment water clearance in SIADH. **Lithium cessation** (mood stabiliser stop) reverses nephrogenic disease. **Thiazide diuretics** (paradoxical reduction) reduce urine output in nephrogenic disease.",
+   "say": "Desmopressin is first line for central disease. Fluid restriction is first line for SIADH. Salt tablets with urea augment clearance and stopping lithium reverses resistance and thiazides paradoxically reduce urine output in nephrogenic disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Cerebral salt wasting** needs volume repletion with fludrocortisone, opposite to SIADH restriction. **Hypertonic saline** (3 percent saline) treats symptomatic hyponatraemia with seizures. **Vasopressin antagonists** (tolvaptan) treat chronic SIADH with monitoring. **Intrathecal therapy** (intrathecal saline) is experimental for refractory disease. **Fluid mobilisation** (phlebotomy) treats overload in SIADH overlap.",
+   "say": "Salt wasting needs volume repletion, opposite to SIADH restriction. Hypertonic saline treats symptomatic disease with seizures and this is examined in viva examinations for revision. Antagonists treat chronic SIADH with monitoring and experimental intrathecal therapy treats refractory disease and blood removal treats overload overlap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central insipidus",
+     "points": [
+      "Desmopressin first line",
+      "Dilute polyuria",
+      "Responds to DDAVP",
+      "Thirst intact"
+     ]
+    },
+    "right": {
+     "title": "Nephrogenic insipidus",
+     "points": [
+      "Thiazides paradoxical",
+      "Resistant to DDAVP",
+      "Lithium cause",
+      "Low salt diet"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Osmotic demyelination** (rapid correction brain injury) threatens SIADH therapy. **Hyperkalaemia** (high potassium) complicates desmopressin therapy. **Hyponatraemia rebound** (rapid rise) needs clamp therapy. **Dehydration hypernatraemia** (severe insipidus) needs urgent water replacement. **Lithium toxicity** (long term accumulation) needs drug monitoring. Each needs correction discipline, not rapid shifts.",
+   "say": "Rapid correction brain injury threatens SIADH therapy and this is examined in viva examinations for revision. High potassium complicates desmopressin therapy and rapid rise needs clamp therapy and severe insipidus needs urgent water replacement and long term accumulation needs drug monitoring.",
+   "vis": null
+  },
+  {
+   "tx": "**Central insipidus** survival is good with desmopressin, with mortality driven by dehydration events. Nephrogenic disease survival depends on lithium management. SIADH survival depends on malignancy stage. Cerebral salt wasting survival depends on brain signal recovery. Osmotic demyelination mortality exceeds 30 percent once established.",
+   "say": "Central disease survival is good with desmopressin. Nephrogenic survival depends on lithium management and this is examined in viva examinations for revision. SIADH survival depends on malignancy stage and salt wasting survival depends on brain recovery and pontine injury mortality exceeds thirty percent.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2023 diabetes insipidus guidance stresses water deprivation gold standards and desmopressin first line. **Triphasic response** (polyuria oliguria polyuria) follows pituitary surgery. Examination traps include giving fluids in SIADH, missing lithium history, and rapid correction of chronic hyponatraemia. **Urine osmolality below 300** (dilute urine) is a classic insipidus marker.",
+   "say": "Current guidance stresses drying gold standards and desmopressin first line. Triphasic response follows pituitary surgery. Traps include giving fluids in SIADH and missing lithium history and rapid correction and below three hundred is a classic insipidus marker.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers osmolality cutoffs, deprivation test rules and DDAVP use. Water deprivation gold standards and desmopressin indications are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers osmolality cutoffs and deprivation test rules and desmopressin use for revision. Drying gold standards and desmopressin indications are the most asked points and triphasic response is a favourite vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Central drug",
+      "Desmopressin"
+     ],
+     [
+      "SIADH first line",
+      "Fluid restriction"
+     ],
+     [
+      "Gold test",
+      "Water deprivation"
+     ],
+     [
+      "Dilute cutoff",
+      "Below 300 osmolality"
+     ],
+     [
+      "Nephrogenic cause",
+      "Lithium"
+     ],
+     [
+      "Thiazide role",
+      "Paradoxical reduction"
+     ],
+     [
+      "Opposite therapy",
+      "Salt wasting needs fluids"
+     ],
+     [
+      "Correction limit",
+      "8 per day"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

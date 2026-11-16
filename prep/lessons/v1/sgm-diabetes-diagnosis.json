@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-diabetes-diagnosis",
+ "subject": "ss-general-medicine",
+ "title": "Diabetes Mellitus Classification and Diagnosis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Diabetes mellitus** (chronic hyperglycaemia) is defined by **fasting glucose above 126 mg per decilitre**, **random glucose above 200** with symptoms, or **HbA1c above 6.5 percent**. **Type 1 diabetes** (autoimmune beta cell loss) is insulin dependent. **Type 2 diabetes** (insulin resistance with relative failure) accounts for 90 percent. **Gestational diabetes** (pregnancy hyperglycaemia) needs screening at 24 to 28 weeks. **Sulfonylurea neonatal diabetes** (KCNJ11 mutation) is monogenic.",
+   "say": "Diabetes is defined by fasting glucose above one hundred twenty six, random above two hundred with symptoms, or HbA1c above six point five percent. Autoimmune beta cell loss is insulin dependent. Insulin resistance with relative failure accounts for ninety percent and this is examined in viva examinations for revision. Pregnancy hyperglycaemia needs screening at twenty four to twenty eight weeks. Monogenic neonatal disease is distinct.",
+   "vis": null
+  },
+  {
+   "tx": "**Autoimmune type 1** (anti GAD antibodies) dominates in children. **Type 2** (obesity linked insulin resistance) dominates in adults. **ModY** (maturity onset diabetes young) is autosomal dominant monogenic disease. **Pancreatic diabetes** (type 3c) follows pancreatitis and pancreatectomy. **Endocrinopathy diabetes** (Cushing, acromegaly) is secondary disease. **Drug induced diabetes** (steroids, thiazides) is reversible disease.",
+   "say": "Autoimmune disease dominates in children. Obesity linked resistance dominates in adults. Autosomal dominant monogenic disease is distinct and pancreatic disease follows inflammation and surgery and secondary disease follows hormonal excess and drug induced disease is reversible.",
+   "vis": null
+  },
+  {
+   "tx": "Autoimmune destruction reduces **beta cell mass** (insulin production) with ketosis tendency. Insulin resistance increases **hepatic glucose output** (liver production) with fasting hyperglycaemia. **Beta cell exhaustion** (glucotoxicity) reduces postprandial insulin. **Incretin dysfunction** (gut signal failure) impairs meal insulin. **Alpha cell failure** (glucagon excess) raises hepatic output further. **Amyloid deposition** (islet amyloid) progresses type 2 failure.",
+   "say": "Autoimmune destruction reduces insulin production with ketosis tendency. Resistance increases liver glucose output with fasting hyperglycaemia. Exhaustion reduces meal insulin and gut signal failure impairs meal insulin and glucagon excess raises liver output further and amyloid deposition progresses failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resistance or autoimmunity"
+     },
+     {
+      "id": "b",
+      "label": "Insulin insufficiency"
+     },
+     {
+      "id": "c",
+      "label": "Hyperglycaemia"
+     },
+     {
+      "id": "d",
+      "label": "Glycation"
+     },
+     {
+      "id": "e",
+      "label": "Microvascular injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polyuria** (large urine volumes) with **polydipsia** (thirst) and **polyphagia** (hunger) is classic. **Weight loss** (catabolism) with **ketoacidosis** (acid buildup) marks type 1 disease. **Fatigue** (tiredness) with **blurred vision** (lens swelling) marks type 2 disease. **Acanthosis nigricans** (dark skin folds) marks insulin resistance. **Slow wound healing** (impaired repair) is common. **Recurrent infections** (candidiasis) mark poor control.",
+   "say": "Large urine volumes with thirst and hunger are classic. Weight loss with acid buildup marks type one disease and this is examined in viva examinations for revision. Tiredness with blurred vision marks type two disease and dark skin folds mark resistance and slow wound healing is common and recurrent candidiasis marks poor control.",
+   "vis": null
+  },
+  {
+   "tx": "**Fasting plasma glucose** (overnight sample) above 126 confirms diabetes. **Two hour glucose** (post load sample) above 200 confirms diabetes. **HbA1c** (glycated haemoglobin) above 6.5 percent confirms diabetes. **GAD antibodies** (autoimmune markers) confirm type 1 disease. **C peptide** (endogenous insulin marker) distinguishes type 1 from type 2. **OGTT** (oral tolerance test) is the gold standard for gestational diabetes.",
+   "say": "Overnight sample above one hundred twenty six confirms diabetes. Post load above two hundred confirms diabetes. Glycated haemoglobin above six point five percent confirms diabetes. Autoimmune markers confirm type one disease and endogenous marker distinguishes type one from type two and oral tolerance test is the gold standard for gestational disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Fasting glucose",
+      "Diagnosis",
+      "Above 126 fasting"
+     ],
+     [
+      "Two hour glucose",
+      "Diagnosis",
+      "Above 200 post load"
+     ],
+     [
+      "HbA1c",
+      "Diagnosis",
+      "Above 6.5 percent"
+     ],
+     [
+      "GAD antibodies",
+      "Type 1 confirm",
+      "Autoimmune aetiology"
+     ],
+     [
+      "C peptide",
+      "Type distinguish",
+      "Low in type 1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lifestyle therapy** (diet, exercise, weight loss) is first line for type 2 disease. **Metformin** (insulin sensitiser) at 500 mg twice daily is first line drug. **Sulfonylureas** (insulin secretagogues) suit sulfonylurea responsive disease. **SGLT2 inhibitors** (kidney protection) protect in heart and kidney disease. **GLP1 agonists** (incretin mimetics) protect in cardiovascular disease. **Insulin** (replacement) is mandatory in type 1 disease.",
+   "say": "Diet and exercise and weight loss are first line for type two disease. Metformin twice daily is first line drug. Secretagogues suit responsive disease. Kidney protection drugs protect in heart and kidney disease and incretin mimetics protect in cardiovascular disease and replacement is mandatory in type one disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Gestational diabetes** needs insulin when diet fails. **MODY** (maturity onset young) needs sulfonylureas sensitively. **Neonatal diabetes** needs sulfonylureas after KCNJ11 testing. **Pancreatic diabetes** needs enzyme replacement with insulin. **Secondary diabetes** needs cause directed therapy. **Steroid diabetes** (drug induced) needs insulin during steroids.",
+   "say": "Pregnancy disease needs insulin when diet fails. Maturity onset disease needs sulfonylureas sensitively. Neonatal disease needs sulfonylureas after testing and pancreatic disease needs enzyme replacement with insulin and secondary disease needs cause directed therapy and steroid disease needs insulin during steroids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 diabetes",
+     "points": [
+      "Autoimmune GAD positive",
+      "Ketosis tendency",
+      "Insulin mandatory",
+      "C peptide low"
+     ]
+    },
+    "right": {
+     "title": "Type 2 diabetes",
+     "points": [
+      "Insulin resistance",
+      "Obesity linked",
+      "Metformin first",
+      "C peptide normal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ketoacidosis** (acid buildup) with vomiting and dehydration is the type 1 emergency. **Hyperosmolar state** (severe dehydration) is the type 2 emergency. **Hypoglycaemia** (low glucose) complicates insulin therapy. **Diabetic macular oedema** (retinal swelling) threatens vision. **Nephropathy** (kidney proteinuria) threatens function. **Neuropathy** (nerve pain) with foot ulcers needs care.",
+   "say": "Acid buildup with vomiting and dehydration is the type one emergency. Severe dehydration is the type two emergency. Low glucose complicates insulin therapy and retinal swelling threatens vision and kidney proteinuria threatens function and nerve pain with foot ulcers needs care.",
+   "vis": null
+  },
+  {
+   "tx": "**Type 1** diabetes mortality is driven by ketoacidosis and cardiovascular disease. Type 2 diabetes mortality doubles without control. Gestational disease increases future type 2 risk twofold. MODY survival is good with sulfonylureas. Neonatal disease survival improves with sulfonylureas. Pancreatic disease survival depends on cancer coexistance.",
+   "say": "Type one mortality is driven by ketoacidosis and heart disease. Type two mortality doubles without control and this is examined in viva examinations for revision. Pregnancy disease increases future type two risk twofold. Maturity onset survival is good with sulfonylureas and neonatal survival improves with sulfonylureas and pancreatic survival depends on cancer coexistance.",
+   "vis": null
+  },
+  {
+   "tx": "American Diabetes Association 2024 guidance stresses HbA1c diagnosis, metformin first line and SGLT2 kidney protection. **MODY sulfonylurea sensitivity** (low dose response) is a favourite examination rule. Traps include diagnosing from one elevated value without confirmation, missing GAD antibodies in adults, and calling gestational disease type 2. **HbA1c 6.5 percent** is the classic diagnostic vignette.",
+   "say": "Current guidance stresses glycated diagnosis and metformin first line and kidney protection. Sulfonylurea sensitivity is a favourite examination rule. Traps include single value diagnosis and missing antibodies in adults and misclassifying pregnancy disease and six point five percent is the classic vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers diagnostic cutoffs, antibody markers and first line drugs. Fasting and HbA1c cutoffs are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table gathers diagnostic cutoffs and antibody markers and first line drugs for revision and this is examined in viva examinations for revision. Fasting and glycated cutoffs are the most asked points and classic vignette is a favourite examination theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Fasting cutoff",
+      "Above 126 mg per decilitre"
+     ],
+     [
+      "Random cutoff",
+      "Above 200 with symptoms"
+     ],
+     [
+      "HbA1c cutoff",
+      "Above 6.5 percent"
+     ],
+     [
+      "Type 1 antibody",
+      "GAD positive"
+     ],
+     [
+      "Type 1 marker",
+      "C peptide low"
+     ],
+     [
+      "Type 2 first drug",
+      "Metformin"
+     ],
+     [
+      "Gestational screen",
+      "24 to 28 weeks"
+     ],
+     [
+      "MODY sensitivity",
+      "Sulfonylureas"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
