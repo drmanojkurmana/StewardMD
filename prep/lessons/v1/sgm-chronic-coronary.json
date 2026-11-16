@@ -1,0 +1,201 @@
+{
+  "v": 1,
+  "module": "sgm-chronic-coronary",
+  "subject": "ss-general-medicine",
+  "title": "Chronic coronary syndromes",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Chronic coronary syndrome** (CCS, long standing coronary artery narrowing causing exertional symptoms) replaces the old term stable angina in recent European Society of Cardiology guidance. Disease exists when epicardial stenosis exceeds seventy percent diameter or flow reserve drops below two. **Myocardial infarction** (heart muscle death from blocked flow) is excluded at rest when troponin stays normal and pain settles quickly.",
+      "say": "Chronic coronary syndrome means long standing coronary artery narrowing causing exertional symptoms. It can replace stable angina in recent European Society of Cardiology guidance. Disease is significant when epicardial stenosis exceeds seventy percent diameter or flow reserve falls below two. Heart muscle death is excluded at rest when troponin stays normal and pain settles quickly.",
+      "vis": null
+    },
+    {
+      "tx": "**Atherosclerosis** (fatty plaque inside arteries) drives most chronic disease through **dyslipidaemia** (abnormal cholesterol lipids), smoking, diabetes, hypertension and family history of premature disease. **Vasospasm** (artery spasm) and small vessel angina explain pain without tight epicardial narrowing. **Microvascular dysfunction** (tiny vessel disease) lowers coronary flow reserve and mimics epicardial stenosis on functional tests.",
+      "say": "Atherosclerosis is fatty plaque inside the arteries and it drives most chronic disease. Risk comes from dyslipidaemia smoking diabetes hypertension and family history of premature disease. Vasospasm and small vessel angina can explain pain without tight narrowing of large arteries. Microvascular dysfunction can lower coronary flow reserve and mimic large artery stenosis on functional tests.",
+      "vis": null
+    },
+    {
+      "tx": "**Plaque progression** (gradual cholesterol build up with fibrous cap) matters because events follow cap rupture or erosion more than the tightest stenosis. **Demand ischaemia** (oxygen need exceeding supply during exertion, anemia, tachycardia or thyrotoxicosis) triggers classic exertional pain without sudden blockage. **Coronary flow reserve** (maximal to resting flow ratio, normal above two point five) falls when either epicardial or microvascular disease limits supply.",
+      "say": "Plaque progression is gradual cholesterol build up with a fibrous cap over it. Heart events can follow cap rupture or erosion more than tightness of the narrowest point. Demand ischaemia means oxygen need exceeds supply during exertion anemia rapid heart rate or thyrotoxicosis. Coronary flow reserve is the maximal to resting flow ratio and normal values sit above two point five.",
+      "vis": null
+    },
+    {
+      "tx": "**Heberden angina** (central chest pressure provoked by effort or cold and relieved by rest or nitrates within minutes) remains the classic story, while **dyspnoea equivalent** (breathlessness as the main symptom) dominates in diabetics and elderly patients. **Canadian Cardiovascular Society class** (functional limitation grade one to four) grades how symptoms restrict activity. **Angina equivalent** pain referral to arm jaw or epigastrium misleads toward gallbladder disease.",
+      "say": "Heberden angina is central chest pressure provoked by effort or cold and relieved by rest or nitrates within minutes. Dyspnoea equivalent means breathlessness as the main symptom and it dominates in diabetics and elderly patients. Canadian Cardiovascular Society class can grade functional limitation from one to four. Referred pain to arm jaw or upper abdomen often misleads toward gallbladder disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CCS grade",
+          "Symptom pattern",
+          "Activity limit"
+        ],
+        "rows": [
+          [
+            "Grade one",
+            "Pain only on strenuous effort",
+            "Normal activity kept"
+          ],
+          [
+            "Grade two",
+            "Pain on ordinary effort",
+            "Slight limitation"
+          ],
+          [
+            "Grade three",
+            "Marked limitation",
+            "Pain on minimal effort"
+          ],
+          [
+            "Grade four",
+            "Pain at rest",
+            "Unable to work"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Resting electrocardiogram** (ECG tracing at rest) is the first test because pathological Q waves, bundle branch block or ST changes raise pretest odds, while **exercise stress test** (treadmill with ECG monitoring) is limited by low specificity. **Coronary computed tomography angiography** (CT scan of coronary arteries) suits low to intermediate risk with high negative predictive value. **Invasive coronary angiography** (catheter X-ray inside coronary arteries) remains the gold standard for anatomy before revascularisation.",
+      "say": "Resting electrocardiogram is the first test because pathological Q waves bundle branch block or ST changes raise pretest odds. Exercise stress testing has low specificity and it is limited in modern practice. Coronary computed tomography angiography suits low to intermediate risk with high negative predictive value. Invasive coronary angiography is the gold standard for anatomy before revascularisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Noninvasive first tests",
+          "points": [
+            "Resting ECG for every patient",
+            "CT angiography for low risk",
+            "Stress imaging for intermediate risk",
+            "Echocardiography for valve and function"
+          ]
+        },
+        "right": {
+          "title": "Invasive confirmation",
+          "points": [
+            "Coronary angiography is gold standard",
+            "Fractional flow reserve defines significance",
+            "Intravascular ultrasound guides stents",
+            "Physiology plus anatomy decides therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Functional testing** (stress echo, perfusion scan or stress cardiac magnetic resonance) shows whether narrowing actually limits flow and should be done when anatomy is uncertain. **Fractional flow reserve** (pressure ratio across stenosis, significant below zero point eight) turns an angiographic grey zone into a flow decision. **Coronary calcium score** (CT calcium burden) reclassifies risk in asymptomatic intermediate risk adults. **Troponin** (heart muscle protein) must stay normal for chronic disease labeling.",
+      "say": "Functional testing with stress echo perfusion scan or stress magnetic resonance shows whether narrowing truly limits flow. Fractional flow reserve is the pressure ratio across a stenosis and significant disease sits below zero point eight. Coronary calcium score can measure calcium burden and reclassify risk in intermediate risk adults. Troponin must stay normal for chronic disease labeling.",
+      "vis": null
+    },
+    {
+      "tx": "**Anti anginal therapy** (symptom relief) starts with **nitrates** (NO donors that dilate veins) for rapid relief and **beta blockers** (heart rate and contractility reducers) as first line for effort pain. **Calcium channel blockers** (vessel and rate controllers) add when beta blockers are insufficient or not tolerated. **Sublingual nitroglycerin** (rapid under tongue nitrate) is taken at pain onset with postural caution taught explicitly.",
+      "say": "Anti anginal therapy relieves symptoms through nitrates beta blockers and calcium channel blockers. Nitrates dilate veins and give rapid relief at pain onset with postural caution. Beta blockers reduce heart rate and contractility and they are first line for effort pain. Calcium channel blockers add when beta blockers are insufficient or not tolerated.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Risk workup"
+          },
+          {
+            "id": "b",
+            "label": "Add anti anginal"
+          },
+          {
+            "id": "c",
+            "label": "Add prognostic therapy"
+          },
+          {
+            "id": "d",
+            "label": "Assess revascularise"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "symptoms persist"
+          ],
+          [
+            "b",
+            "c",
+            "always added"
+          ],
+          [
+            "c",
+            "d",
+            "left main or reduced function"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Secondary prevention** (event prevention after diagnosis) uses **aspirin** (eighty to one hundred fifty milligrams daily) as lifelong antiplatelet therapy plus **high intensity statin** (atorvastatin seventy five to eighty milligrams) targeting low density lipoprotein below fifty five milligrams per decilitre. **Beta blocker** continues after infarction with reduced ejection fraction, while **angiotensin converting enzyme inhibitor** suits diabetes, hypertension or ejection fraction below forty percent. European Society of Cardiology and American College of Cardiology now emphasise early intensive lipid lowering.",
+      "say": "Secondary prevention starts with lifelong aspirin between eighty and one hundred fifty milligrams daily. High intensity statin such as atorvastatin seventy five to eighty milligrams should target low density lipoprotein below fifty five milligrams per decilitre. Beta blockers continue after infarction with reduced ejection fraction. Angiotensin converting enzyme inhibitors suit diabetes hypertension or ejection fraction below forty percent.",
+      "vis": null
+    },
+    {
+      "tx": "**Revascularisation** (restoring flow by stent or bypass) is offered for left main disease, multivessel disease with reduced ejection fraction, or refractory symptoms despite drugs. **Percutaneous coronary intervention** (PCI, catheter stent placement) and **coronary artery bypass grafting** (CABG, surgical bypass) differ by diabetes and anatomy, with bypass favoured in diabetics with multivessel disease. Risk scores such as **SYNTAX score** (angiographic complexity score) guide the heart team choice.",
+      "say": "Revascularisation restores flow by stent or bypass and it is offered for left main disease or refractory symptoms despite drugs. Percutaneous coronary intervention places a stent through a catheter while bypass surgery creates grafts. Bypass is favoured in diabetics with multivessel disease. SYNTAX score can measure angiographic complexity and it guides the heart team choice.",
+      "vis": null
+    },
+    {
+      "tx": "**Prognosis** (expected course) depends on ejection fraction, left main involvement, diabetes and kidney disease, with yearly mortality near one percent in preserved function and minimal symptoms. **In-stent restenosis** (narrowing inside a stent) and **graft failure** (blocked bypass) cause late recurrence, while sudden death clusters in reduced ejection fraction. **No revascularisation without symptoms or left main disease** avoids futile intervention when anatomy looks severe but flow is preserved.",
+      "say": "Prognosis can depend on ejection fraction left main involvement diabetes and kidney disease. Yearly mortality sits near one percent when function is preserved and symptoms are minimal. In stent restenosis and graft failure cause late recurrence while sudden death clusters in reduced ejection fraction. Avoid revascularisation when anatomy looks severe but flow reserve is preserved.",
+      "vis": null
+    },
+    {
+      "tx": "High-yield for the exam keeps first tests, gold standards and prognostic drugs together. First-line drugs are **aspirin** plus **high intensity statin** for every patient and **beta blocker** when ejection fraction is reduced. Gold-standard anatomy is **invasive coronary angiography** with **fractional flow reserve** below zero point eight defining significance. Thresholds to quote are **seventy percent** stenosis, **LDL below fifty five** and **CCS grades one to four**.",
+      "say": "High yield revision can link first tests gold standards and prognostic drugs for chronic coronary syndrome. First line drugs are lifelong aspirin plus high intensity statin for every patient. Beta blockers add benefit when ejection fraction is reduced. Invasive coronary angiography is the gold standard with fractional flow reserve below zero point eight defining significance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Decision",
+          "Standard",
+          "Cutoff to quote"
+        ],
+        "rows": [
+          [
+            "First test",
+            "Resting ECG",
+            "Then CT or stress test"
+          ],
+          [
+            "Gold standard",
+            "Invasive angiography",
+            "FFR below zero point eight"
+          ],
+          [
+            "Significant stenosis",
+            "Epicardial narrowing",
+            "Above seventy percent"
+          ],
+          [
+            "First line prevention",
+            "Aspirin plus statin",
+            "LDL below fifty five"
+          ],
+          [
+            "Anti anginal first line",
+            "Beta blocker",
+            "Add nitrate or calcium blocker"
+          ],
+          [
+            "Revascularise",
+            "Left main or reduced EF",
+            "Bypass favoured in diabetes"
+          ],
+          [
+            "Functional grade",
+            "CCS class",
+            "One to four"
+          ],
+          [
+            "Statin dose",
+            "Atorvastatin high intensity",
+            "Seventy five to eighty mg"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

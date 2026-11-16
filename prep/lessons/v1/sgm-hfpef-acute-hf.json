@@ -1,0 +1,112 @@
+{
+  "v": 1,
+  "module": "sgm-hfpef-acute-hf",
+  "subject": "ss-general-medicine",
+  "title": "HFpEF and acute heart failure",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**HFpEF [heart failure with preserved ejection fraction]** means breathlessness and fluid overload even though the left ventricle [main pumping chamber, LV] still squeezes with normal force, defined by an ejection fraction of fifty percent or more. About half of all heart failure cases are of this type, mostly in older hypertensive women with obesity and atrial fibrillation.",
+      "say": "Heart failure with preserved ejection fraction means the patient is breathless and fluid loaded although the main pumping chamber still squeezes normally. The ejection fraction is fifty percent or higher by definition and roughly half of every heart failure caseload fits this pattern in older people with high blood pressure excess weight and irregular heartbeat.",
+      "vis": null
+    },
+    {
+      "tx": "**Hypertension [high blood pressure]** and advancing age stiffen the small ventricle through collagen laid down in the wall, while obesity, diabetes, chronic kidney disease and atrial fibrillation [irregular atrial rhythm] further blunt relaxation. Reversible precipitants include uncontrolled hypertension, rapid heart rate, anaemia [low haemoglobin] and excess salt intake, together with coronary disease, cardiac amyloidosis [abnormal protein in heart muscle] and lung disease.",
+      "say": "Long standing high blood pressure and increasing age make the pumping chamber stiff as scar tissue accumulates in its wall. Excess weight diabetes kidney disease and an irregular atrial rhythm all impair relaxation further and sudden worsening is often triggered by uncontrolled pressure rapid rate anaemia or a salty meal.",
+      "vis": null
+    },
+    {
+      "tx": "Stiff myocardium [heart muscle] relaxes poorly so end diastolic pressure climbs while stroke volume stays nearly normal, raising pulmonary venous pressure and causing dyspnoea. Chronically, pulmonary congestion, raised jugular venous pressure [JVP, neck vein pressure] and peripheral oedema follow, and a **third heart sound [extra gallop from rapid filling of a stiff ventricle]** plus later fibrosis mark the transition to fixed failure.",
+      "say": "The stiff heart muscle relaxes slowly so filling pressure rises even though the volume pumped per beat remains almost normal. Rising pressure backs up into the lungs and neck veins causing breathlessness and ankle swelling over weeks and an extra gallop sound may be heard as blood fills the stiff chamber quickly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "a", "label": "Stiff ventricle" },
+          { "id": "b", "label": "Poor relaxation" },
+          { "id": "c", "label": "High filling pressure" },
+          { "id": "d", "label": "Pulmonary congestion" },
+          { "id": "e", "label": "Orthopnoea and edema" }
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+      }
+    },
+    {
+      "tx": "Tracked earliest by **exertional dyspnoea [breathlessness on effort]** progressing to orthopnoea [breathlessness lying flat] and paroxysmal nocturnal dyspnoea [night attacks of breathlessness], patients show raised JVP, basal crepitations [crackles at lung bases], hepatomegaly [enlarged liver] and a displaced apex [outermost palpable heartbeat]. Acute episodes may present as pulmonary edema [fluid in lungs] with pink frothy sputum and hypertension rather than collapse.",
+      "say": "Breathlessness on exertion is usually the first complaint and it progresses to inability to lie flat and attacks that wake the patient at night. Examination reveals raised neck vein pressure crackles at the lung bases an enlarged liver and the outermost heartbeat is best felt lateral to its usual site while severe episodes produce frothy pink sputum.",
+      "vis": null
+    },
+    {
+      "tx": "Order a **BNP [B-type natriuretic peptide, a stretch hormone]** or NT-proBNP with electrocardiogram [ECG, heart tracing] and chest X-ray as first tests, since a normal BNP makes heart failure unlikely. Transthoracic echocardiogram [heart ultrasound through chest, echo] confirms phenotype, while the **gold standard [definitive reference test]** remains cardiac catheterisation [pressure measurement inside heart] with left ventricular end diastolic pressure and invasively measured exercise filling pressure.",
+      "say": "Brain natriuretic peptide testing together with a heart tracing and chest radiograph forms the initial set of investigations because normal peptide levels argue strongly against heart failure. Heart ultrasound then defines the phenotype while catheter measurement of filling pressures including during exercise remains the definitive reference standard.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Test", "Role", "Key finding"],
+        "rows": [
+          ["BNP or NT-proBNP", "First test", "Elevated in congestion"],
+          ["ECG", "First test", "Ischemia or arrhythmia"],
+          ["Chest X-ray", "First test", "Pulmonary edema"],
+          ["Echocardiogram", "Phenotype", "Ejection fraction"],
+          ["Cardiac catheterisation", "Gold standard", "Filling pressures"]
+        ]
+      }
+    },
+    {
+      "tx": "In acute decompensated failure, give **loop diuretic** [furosemide, a water removing diuretic] intravenously, typically furosemide forty milligrams initially, titrated to urine output and creatinine, with oxygen, upright posture and nitrates for hypertensive pulmonary edema. Identify and treat the trigger first, including rate control for rapid atrial fibrillation, and avoid intravenous fluids that worsen congestion despite low output in some patients.",
+      "say": "Acute breathless pulmonary edema is treated with intravenous loop diuretic beginning at forty milligrams and adjusted according to urine output and kidney function. Oxygen upright sitting and vasodilator therapy suit hypertensive cases while the underlying trigger such as rapid rhythm must be found and corrected promptly.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Warm and wet", "points": ["Congested but perfused", "Diuretics first", "Observe urine output"] },
+        "right": { "title": "Cold and wet", "points": ["Congested with shock", "Inotropes needed", "Urgent ICU care"] }
+      }
+    },
+    {
+      "tx": "ESC [European Society of Cardiology] and ACC/AHA [American College of Cardiology with American Heart Association] guidance makes **SGLT2 inhibitors [sodium glucose cotransporter two blockers such as dapagliflozin]** first line in HFpEF, reducing hospitalisation, alongside diuretics for congestion and tight control of blood pressure, rate, diabetes and weight. Advanced disease warrants referral for heart transplantation [donor heart graft] or left ventricular assist device [LVAD, mechanical pump] at a specialist centre.",
+      "say": "Contemporary European and American guidelines place glucose cotransporter blockers first in preserved fraction failure because they lower hospital admission along with diuretic therapy and control of pressure rhythm diabetes and weight. Patients with refractory symptoms and declining pump function should be referred early for transplant or mechanical pump evaluation at a specialist centre.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Patient", "Add on therapy", "Goal"],
+        "rows": [
+          ["HFpEF", "SGLT2 inhibitor", "Prevent admission"],
+          ["HFrEF", "ARNI plus beta blocker", "Reduce mortality"],
+          ["HFrEF with LBBB", "Cardiac resynchronisation", "Improve synchrony"],
+          ["End stage", "Transplant or LVAD", "Durable support"]
+        ]
+      }
+    },
+    {
+      "tx": "During acute illness, worsening renal function [kidney injury from congestion], hyponatraemia [low sodium] and resistance to diuretics complicate management, while arrhythmias including **ventricular tachycardia [fast dangerous ventricular rhythm]**, thromboembolism [clot in heartbeat chambers] and cardiac amyloid infiltration [protein deposition in myocardium] precipitate collapse. Pulmonary hypertension [high lung artery pressure] and right ventricular failure [right pump failure] with hepatic congestion signal biventricular disease.",
+      "say": "Kidney injury low sodium and diuretic resistance commonly complicate acute management while dangerous fast rhythm clots inside the heart and amyloid infiltration can precipitate sudden collapse. Rising lung artery pressure with right side failure and liver congestion indicate that disease has involved both pumps.",
+      "vis": null
+    },
+    {
+      "tx": "Recurrent admissions themselves carry a grim marker, with about **one third [about thirty three percent]** of hospitalised patients readmitted within months and five year survival near fifty percent after first presentation. Persistent congestion, renal dysfunction, anaemia and low sodium each worsen prognosis, and repeated intolerance of guideline therapy despite specialist care identifies candidates for advanced heart failure services including transplant listing.",
+      "say": "Hospital admission itself marks serious disease since about one third of patients return within months and survival at five years is near fifty percent. Ongoing congestion kidney dysfunction anaemia and low sodium each worsen outlook and intolerance of standard therapy despite specialist care points toward transplant listing.",
+      "vis": null
+    },
+    {
+      "tx": "Attentive reading reveals classic traps. BNP can be falsely low in obesity and raised in renal failure or **pulmonary embolism** [lung artery clot], acute pulmonary edema is frequently hypertensive rather than low output in HFpEF, and chronic kidney injury markers may worsen transiently as congestion resolves. Do not label every breathless hypertensive elderly woman as asthma or chronic obstructive pulmonary disease without testing peptide, tracing and ultrasound.",
+      "say": "Peptide levels can be falsely low in obesity and falsely high in kidney failure or lung embolism so interpretation needs context. Acute pulmonary edema in preserved fraction disease is usually hypertensive rather than low output and breathlessness in these women is easily mislabelled as asthma without proper testing.",
+      "vis": null
+    },
+    {
+      "tx": "High yield for the exam collects the numbers and named markers below. An **ejection fraction** of fifty percent or more defines HFpEF, natriuretic peptide guides exclusion, echocardiogram phenotypes disease and catheter pressures remain definitive, SGLT2 inhibition leads chronic therapy and diuresis leads acute care with transplantation or mechanical support reserved for end stage failure.",
+      "say": "An ejection fraction of fifty percent or higher defines preserved pump failure while peptide testing helps exclude it. Ultrasound can define the subtype and catheter pressures can confirm it while acute care centers on diuresis and chronic care on cotransporter inhibition with transplant or mechanical support for end stage disease.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Item", "Exam point"],
+        "rows": [
+          ["Ejection fraction cutoff", "Fifty percent or more for HFpEF"],
+          ["First test", "BNP with ECG and chest X-ray"],
+          ["Gold standard", "Catheter filling pressures"],
+          ["Classic sign", "Third heart sound with raised JVP"],
+          ["Acute first line", "Intravenous furosemide"],
+          ["Chronic first line", "SGLT2 inhibitor"],
+          ["Advanced option", "Transplant or LVAD referral"],
+          ["Prognosis red flag", "Recurrent admission"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

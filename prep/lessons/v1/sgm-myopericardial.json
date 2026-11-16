@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "sgm-myopericardial",
+ "subject": "ss-general-medicine",
+ "title": "Myocarditis and pericardial disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Myocarditis [inflammation of the heart muscle]** is an inflammatory disease of the myocardium [heart muscle] with necrosis [death of muscle cells] and interstitial oedema [swelling between cells]. **Pericarditis [inflammation of the sac around the heart]** involves the visceral and parietal pericardium [the two layers of the sac]. Acute presentations affect about ten to fifteen per hundred thousand yearly in India.",
+   "say": "Myocarditis is inflammation of the heart muscle and it involves death of muscle cells with swelling between cells. Pericarditis is inflammation of the sac around the heart and it involves both layers of that sac. Acute cases occur at about ten to fifteen persons per hundred thousand each year in India. The definition is important for the examination and the numbers are asked often.",
+   "vis": null
+  },
+  {
+   "tx": "Viral infections cause most acute myocarditis, while bacterial, parasitic and autoimmune diseases contribute smaller shares. **Coxsackie B virus [common viral cause]** and adenovirus [respiratory virus] injure myocytes [heart muscle cells] directly, and immune mediated damage follows. **Giant cell myocarditis [aggressive immune form]** and eosinophilic myocarditis [allergy related inflammation] present with fulminant failure [rapid heart failure].",
+   "say": "Viral infections cause most acute myocarditis and bacterial parasitic and autoimmune diseases cause a smaller share. Coxsackie B virus and adenovirus cause direct injury to heart muscle cells and immune damage follows. Giant cell myocarditis and eosinophilic myocarditis cause fulminant heart failure in affected patients. The cause is viral in the majority and the immune form is severe.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Viral",
+      "Coxsackie B, adenovirus",
+      "Most common cause"
+     ],
+     [
+      "Autoimmune",
+      "Giant cell, eosinophilic",
+      "Fulminant course"
+     ],
+     [
+      "Bacterial",
+      "Diphtheria, sepsis",
+      "Rare cause"
+     ],
+     [
+      "Drug related",
+      "Chemo and hypersensitivity",
+      "Myocyte injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Young adults, children and men face higher risk after viral illness, while pregnancy, prior viral myocarditis [previous heart muscle infection] and systemic autoimmune disease also predispose. **Chest pain after viral illness [recent infection]** in a young person with no coronary risk factors strongly points away from myocardial infarction [heart attack from blocked artery]. **Flu like prodrome [recent viral sickness]** precedes cardiac symptoms by days to weeks.",
+   "say": "Young adults and children and men have higher risk after viral illness and pregnancy and systemic autoimmune disease also increase risk. Chest pain after a recent viral illness in a young person without coronary risk factors indicates that infarction is less likely. A flu like prodrome occurs days to weeks before cardiac symptoms appear. The history is helpful and the context is important.",
+   "vis": null
+  },
+  {
+   "tx": "Inflamed pericardial surfaces rub over each other, producing a scratchy sound, while fibrin [protein deposits] creates adhesions over time. **Fibrinous pericarditis [rough inflamed surfaces]** explains the pericardial friction rub [scratching sound heard with stethoscope] that varies with breathing. **Myocardial oedema [swelling of heart muscle]** reduces compliance [stiffness of muscle] and creates conduction delays. Immune injury impairs contractility and allows arrhythmias [abnormal rhythms] and heart block [conduction failure].",
+   "say": "Inflamed pericardial surfaces rub over each other and the result is a scratchy sound that changes with breathing. Fibrin deposits cause adhesions over time and the rub is a classic sign of fibrinous inflammation. Swelling of heart muscle reduces compliance and it causes conduction delays and abnormal rhythms. Immune injury impairs contraction and heart block can occur in severe disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Viral injury"
+     },
+     {
+      "id": "b",
+      "label": "Immune response"
+     },
+     {
+      "id": "c",
+      "label": "Oedema and necrosis"
+     },
+     {
+      "id": "d",
+      "label": "Rub and arrhythmia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients describe pleuritic chest pain [sharp pain worsening with breathing] that improves while leaning forward, and dyspnoea [breathlessness]. Examination reveals a pericardial friction rub [scratching sound], a low grade fever and tachycardia [fast heart rate]. **Diffuse ST elevation [widespread ECG change]** without territorial distribution and preserved coronary arteries separate pericarditis from infarction. Myocarditis more often presents with palpitations, heart block and signs of heart failure.",
+   "say": "Patients present with sharp chest pain that worsens with breathing and improves when leaning forward. Examination reveals a scratching friction rub and low grade fever and rapid heart rate in many cases. Diffuse elevation on the heart tracing without a territorial pattern indicates pericarditis rather than infarction. Myocarditis presents with palpitations and conduction defects and heart failure more often.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pericarditis",
+     "points": [
+      "Pleuritic pain, leaning forward",
+      "Friction rub present",
+      "Diffuse ST elevation"
+     ]
+    },
+    "right": {
+     "title": "Myocarditis",
+     "points": [
+      "Palpitations and heart block",
+      "Heart failure signs",
+      "Troponin rise, EF reduced"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Electrocardiogram [ECG, heart tracing] is the first test, showing diffuse ST elevation and PR depression [depressed segment], sinus tachycardia and conduction delays. **Troponin [heart muscle injury marker]** rises in myocarditis with chest pain, while C reactive protein [inflammation marker] rises in pericarditis. **Echocardiogram [heart ultrasound]** is essential, showing effusion [fluid around heart], wall motion abnormalities and reduced ejection fraction [pumping strength].",
+   "say": "The electrocardiogram is the first test and it shows diffuse elevation and depressed segments and rapid rhythm and conduction delays. Troponin increases in myocarditis with chest pain and C reactive protein increases in pericarditis with inflammation. Echocardiography is essential because it shows effusion and wall motion changes and reduced pumping strength. The first test is quick and the findings guide further workup.",
+   "vis": null
+  },
+  {
+   "tx": "**Cardiac magnetic resonance [heart MRI scan]** is the gold standard test [definitive imaging diagnosis] for myocarditis, showing oedema on T2 maps and late gadolinium enhancement [scar pattern] in subepicardial distribution. **Endomyocardial biopsy [sample of heart muscle]** remains highly specific but invasive and is reserved for fulminant or idiopathic cases. **Coronary angiography [artery imaging]** excludes infarction when doubt persists, especially with shock or severe pain.",
+   "say": "Cardiac magnetic resonance is the gold standard test for myocarditis because it shows oedema and scar patterns in detail. Endomyocardial biopsy remains highly specific but it is invasive and it is reserved for fulminant or unclear cases. Coronary angiography is indicated when doubt persists and it is especially helpful with shock or severe pain. The choice is guided by hemodynamic stability and clinical suspicion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Strength"
+    ],
+    "rows": [
+     [
+      "ECG",
+      "First test",
+      "Rapid screening"
+     ],
+     [
+      "Echocardiogram",
+      "Effusion and EF",
+      "Bedside assessment"
+     ],
+     [
+      "Cardiac MRI",
+      "Gold standard imaging",
+      "Tissue characterisation"
+     ],
+     [
+      "Biopsy",
+      "Specific but invasive",
+      "Definitive histology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment of acute pericarditis rests on high dose aspirin [pain reliever] or nonsteroidal anti inflammatory drugs [inflammation suppressing drugs] with colchicine [gout medicine] for three months. **Colchicine [microtubule inhibitor]** halves recurrence and improves remission, and add on gastroprotection [stomach protection] is advisable. **Physical rest [activity restriction]** and avoidance of strenuous exercise during active inflammation reduce adverse remodelling and arrhythmia risk.",
+   "say": "Treatment of acute pericarditis rests on high dose aspirin or nonsteroidal anti inflammatory drugs with colchicine for three months. Colchicine halves recurrence and it improves remission when added to standard therapy. Gastroprotection is advisable and physical rest reduces adverse remodelling. Activity restriction is important during active inflammation and it lowers arrhythmia risk.",
+   "vis": null
+  },
+  {
+   "tx": "European Society of Cardiology [ESC, European guideline body] and American Heart Association [AHA, American guideline body] recommend heart failure therapy, arrhythmia management and temporary exercise avoidance in myocarditis. **Guideline directed therapy [standard heart failure drugs]** includes angiotensin converting enzyme inhibitors [blood pressure drugs] and beta blockers [rate controlling drugs] when ejection fraction falls below forty percent. **Immunosuppression [immune suppressing treatment]** is reserved for giant cell or eosinophilic disease under specialist care.",
+   "say": "European and American guidelines provide heart failure therapy and arrhythmia management and temporary exercise avoidance in myocarditis. Guideline directed therapy includes angiotensin converting enzyme inhibitors and beta blockers when ejection fraction falls below forty percent. Immunosuppression is reserved for giant cell or eosinophilic disease under specialist supervision. The approach is selective and specialist care is required.",
+   "vis": null
+  },
+  {
+   "tx": "Fulminant myocarditis can progress to cardiogenic shock [heart pump failure], complete heart block [absent conduction] and sudden death within hours, while pericarditis can evolve to tamponade [fluid compressing heart]. **Cardiac tamponade [fluid compressing heart]** produces Beck triad [hypotension, muffled sounds, distended veins] with pulsus paradoxus [fall in pressure on breathing]. **Constrictive pericarditis [thickened sac restricting filling]** develops in chronic recurrent disease with dyspnoea and edema and pericardial knock sound.",
+   "say": "Fulminant myocarditis can progress to cardiogenic shock and complete heart block and sudden death within hours. Pericarditis can evolve to tamponade where fluid compresses the heart and causes low pressure and muffled sounds. Constrictive pericarditis develops in chronic recurrent disease and it causes breathlessness and edema. The complications are serious and early recognition is helpful.",
+   "vis": null
+  },
+  {
+   "tx": "Recognise classic vignettes and avoid traps that mislead. **Pulsus paradoxus [pressure fall on inspiration]** indicates tamponade, and **Kussmaul sign [venous distension on inspiration]** occurs in constriction but not tamponade. Sitting up and leaning forward relieves pericardial pain, colchicine prevents recurrence, cardiac magnetic resonance is the gold standard, and biopsy is unnecessary in uncomplicated pericarditis with clear response.",
+   "say": "Classic vignettes should be recognized and traps that mislead should be avoided with care. Pulsus paradoxus indicates tamponade and Kussmaul sign occurs in constriction but not in tamponade. Sitting up and leaning forward relieves pericardial pain and colchicine prevents recurrence in many patients. Cardiac magnetic resonance is the gold standard and biopsy is unnecessary in uncomplicated pericarditis with good response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Detail",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "First test",
+      "Electrocardiogram plus troponin",
+      "Rapid screening"
+     ],
+     [
+      "Gold standard imaging",
+      "Cardiac magnetic resonance",
+      "Tissue characterisation"
+     ],
+     [
+      "First line drug",
+      "NSAID plus colchicine",
+      "Prevents recurrence"
+     ],
+     [
+      "Classic sign",
+      "Friction rub and pulsus paradoxus",
+      "Tamponade clue"
+     ],
+     [
+      "Classic ECG",
+      "Diffuse ST elevation, PR depression",
+      "Pericarditis pattern"
+     ],
+     [
+      "Complication",
+      "Tamponade, constriction",
+      "Emergency recognition"
+     ],
+     [
+      "Guideline body",
+      "European Society of Cardiology",
+      "Recent guidance"
+     ],
+     [
+      "Exercise advice",
+      "Avoid strenuous exercise",
+      "During active disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

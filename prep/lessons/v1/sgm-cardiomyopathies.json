@@ -1,0 +1,110 @@
+{
+  "v": 1,
+  "module": "sgm-cardiomyopathies",
+  "subject": "ss-general-medicine",
+  "title": "Cardiomyopathies",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Cardiomyopathy [disease of heart muscle]** describes structural and functional abnormalities of the myocardium [heart muscle] presenting as ventricular dilatation, hypertrophy [thickening of wall] or restriction, classified by morphology into dilated, hypertrophic, restrictive, arrhythmogenic and unclassified types. Dilated disease accounts for about two thirds of cases, while hypertrophic cardiomyopathy [thickened ventricle] is the commonest inherited form.",
+      "say": "Cardiomyopathy means structural and functional disease of heart muscle and it is classified by shape into dilated hypertrophic restrictive and arrhythmogenic forms. Dilated disease forms roughly two thirds of cases while the thickened inherited form is the commonest genetic variety seen in young adults.",
+      "vis": null
+    },
+    {
+      "tx": "Genetic mutations [inherited gene changes] in **sarcomere** [contractile protein genes] cause hypertrophic and some dilated disease, whereas alcohol excess, peripartum [around childbirth] changes, viral myocarditis [viral inflammation of muscle], iron overload [haemochromatosis] and anthracyclines [chemotherapy drugs] injure or scar ventricular muscle. Familial clustering, consanguinity [related parents], sudden death at young age and neuromuscular diseases such as Duchenne muscular dystrophy raise suspicion.",
+      "say": "Inherited changes in contractile protein genes cause many familial forms while alcohol excess childbirth related injury viral inflammation of muscle iron overload and certain chemotherapy agents damage the heart directly. A family history of unexplained sudden death at a young age should always prompt careful evaluation of relatives.",
+      "vis": null
+    },
+    {
+      "tx": "Failed contraction and fibrotic [scar tissue] remodelling dilute the ventricle over time, while asymmetrical septal hypertrophy [thickened dividing wall] creates a dynamic outflow gradient worsened by dehydration, tachycardia and vasodilators. In restrictive physiology, amyloid and sarcoid deposits stiffen both ventricles without dilatation, and **arrhythmogenic cardiomyopathy [fibrofatty replacement causing abnormal rhythm]** exposes patients to re-entrant ventricular tachycardia from scarred muscle.",
+      "say": "Progressive scarring changes the muscle so contraction falters and the cavity enlarges while in thickened disease the narrowed outflow tract gradient worsens with dehydration rapid rate and vasodilator drugs. Deposition of abnormal protein or granulomatous tissue can stiffen the chambers without dilatation and fibrous scar in arrhythmogenic disease can set up dangerous re-entrant rhythm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "a", "label": "Muscle injury or mutation" },
+          { "id": "b", "label": "Scar and remodeling" },
+          { "id": "c", "label": "Ventricular dysfunction" },
+          { "id": "d", "label": "Arrhythmia or failure" }
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "Patients describe exertional dyspnoea, palpitations and **syncope** [fainting from brief loss of consciousness], sometimes angina [chest pain from increased demand] in hypertrophic disease with vigorous exercise. Examination finds a bifid carotid pulse, a fourth heart sound, a systolic murmur that increases on standing [dynamic outflow murmur], gallop rhythm in dilated disease and raised jugular venous pressure with edema once failure dominates the picture.",
+      "say": "Exertional breathlessness palpitations fainting and sometimes chest pain on effort bring patients to attention particularly in hypertrophic disease. Careful examination shows a bifid neck pulse extra heart sounds and a murmur that grows louder on standing while dilated disease presents with gallop rhythm and signs of congestion.",
+      "vis": null
+    },
+    {
+      "tx": "Begin with electrocardiogram [ECG, heart tracing], **echocardiogram [heart ultrasound]** and blood tests including iron studies, plus cardiac magnetic resonance [heart MRI scan] for tissue characterisation. The **gold standard test [definitive tissue diagnosis]** for storage disease is myocardial biopsy [sample of heart muscle] by right ventricular endomyocardial route, with genetic testing [DNA analysis] offered after counselling when a familial pattern is suspected.",
+      "say": "Heart tracing ultrasound and basic blood tests begin the workup and magnetic resonance imaging adds detailed tissue characterisation. Muscle biopsy taken from the right ventricle remains the definitive tissue diagnosis for storage disorders while DNA testing follows after genetic counselling in suspected familial cases.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Test", "Use", "Strength"],
+        "rows": [
+          ["ECG", "First test", "Hypertrophy and rhythm"],
+          ["Echocardiogram", "First test", "Wall thickness"],
+          ["Cardiac MRI", "Tissue mapping", "Scar and infiltration"],
+          ["Endomyocardial biopsy", "Gold standard", "Definitive diagnosis"]
+        ]
+      }
+    },
+    {
+      "tx": "**Beta blocker** [bisoprolol type drug] or verapamil [calcium channel blocker] is first line in symptomatic hypertrophic cardiomyopathy, with alcohol abstinence, chelation [iron removing therapy] in iron overload and immunomodulation [immune suppressing treatment] in selected inflammatory disease. Avoid digoxin [foxglove alkaloid] and diuretics in dynamic obstruction, and implantable cardioverter defibrillator [ICD, shock device] is advised when sudden death risk is high.",
+      "say": "Beta blocking agents or verapamil form the initial therapy for symptomatic thickened disease while abstinence chelation therapy and immune suppression address selected underlying causes. Digoxin and diuretics must be avoided in dynamic obstruction and a shock device is considered when sudden death risk is judged high.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Dilated cardiomyopathy", "points": ["Thin dilated ventricle", "Low ejection fraction", "Guideline heart failure therapy"] },
+        "right": { "title": "Hypertrophic cardiomyopathy", "points": ["Thickened septum", "Outflow gradient", "Beta blocker and device"] }
+      }
+    },
+    {
+      "tx": "ESC and ACC/AHA guidance endorses **mavacamten [myosin inhibitor for hypertrophic disease]** for symptomatic obstructive disease at specialist centres, plus alcohol septal ablation [catheter destruction of septal muscle] or surgical myectomy [surgical removal of thick muscle] for refractory gradient, alongside aggressive treatment of heart failure, atrial fibrillation and ventricular arrhythmia. Restrictive disease follows its cause such as chemotherapy for amyloid, while arrhythmogenic disease needs exercise restriction and rhythm therapy.",
+      "say": "European and American guidelines support a myosin inhibitor for symptomatic obstructive thickened disease at experienced centres along with catheter or surgical reduction of septal muscle when symptoms persist. Treatment of amyloid follows chemotherapy referral and arrhythmogenic disease requires restriction of strenuous exercise together with rhythm management.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Disease", "Specific therapy", "Effect"],
+        "rows": [
+          ["Obstructive HCM", "Mavacamten", "Lowers gradient"],
+          ["Refractory HCM", "Myectomy or ablation", "Relieves obstruction"],
+          ["Iron overload", "Chelation therapy", "Removes iron burden"],
+          ["Arrhythmogenic", "Exercise restriction", "Lowers arrhythmia"]
+        ]
+      }
+    },
+    {
+      "tx": "**Sudden cardiac death** [unexpected heart arrest] is the feared complication, especially in hypertrophic disease with family history, unexplained syncope, nonsustained ventricular tachycardia and thick walls above thirty millimetres. Heart failure, thromboembolism [clot formation], endarteritis [inflammation of inner vessel lining] from high gradients and conduction blocks [interrupted electrical conduction] with bradycardia [slow rhythm] further complicate the course in advanced stages.",
+      "say": "Unexpected arrest remains the most feared outcome especially with family history syncope or nonsustained fast rhythm and wall thickness above thirty millimetres. Heart failure clot formation and conduction blocks with slow rhythm can add further morbidity as disease advances over time.",
+      "vis": null
+    },
+    {
+      "tx": "Ventricular ejection fraction below forty percent, extensive scar on magnetic resonance imaging, rising hospital admissions and persistent symptoms despite therapy mark a poor trajectory toward **transplantation** [heart graft]. Regular rhythm surveillance, anticoagulation [blood thinning] for atrial fibrillation and family screening after a proband [first patient in family] reduce events, while competitive strenuous sports remain contraindicated in hypertrophic and arrhythmogenic disease.",
+      "say": "Ejection fraction below forty percent extensive scar on imaging and repeated admissions despite therapy signal progression toward graft consideration. Regular rhythm surveillance blood thinning for irregular rhythm and screening of relatives reduce events while vigorous competitive sports stay contraindicated in the thickened and arrhythmogenic forms.",
+      "vis": null
+    },
+    {
+      "tx": "Several distinctions trip candidates daily. Apical hypertrophic disease mimics acute coronary syndrome, **left bundle branch block** on tracing may signal dilated disease with poor outcome, and black patients with raised blood pressure can develop marked hypertrophy mistaken for hypertrophic cardiomyopathy. Remember that a murmur increasing on standing points toward obstruction, while a young athlete with syncope demands immediate cardiac evaluation before clearance.",
+      "say": "Apical hypertrophic disease can mimic acute coronary syndrome and bundle branch block on tracing often signals dilated disease with poor outcome. Marked hypertrophy from high blood pressure can imitate hypertrophic cardiomyopathy and any young athlete with syncope needs immediate cardiac evaluation before sports clearance is granted.",
+      "vis": null
+    },
+    {
+      "tx": "High yield for the exam gathers the morphology, tests and devices below. Dilated disease presents with low **ejection fraction** and gallop rhythm, hypertrophic disease with a murmur that grows louder on standing and wall thickness limits for sudden death risk, echocardiogram phenotypes disease, magnetic resonance maps scar, biopsy confirms storage disease and shock devices protect high risk patients.",
+      "say": "Dilated disease shows low pump function with gallop rhythm while thickened disease gives a murmur louder on standing and sudden death risk rises with marked wall thickness. Ultrasound phenotypes the disease magnetic imaging maps scar biopsy confirms storage disease and shock devices protect those at high arrest risk.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Item", "Exam point"],
+        "rows": [
+          ["Commonest inherited form", "Hypertrophic cardiomyopathy"],
+          ["Classic sign", "Murmur louder on standing"],
+          ["First test", "ECG with echocardiogram"],
+          ["Gold standard", "Endomyocardial biopsy"],
+          ["Sudden risk cutoff", "Wall thickness above thirty millimetres"],
+          ["Specific drug", "Mavacamten for obstruction"],
+          ["Device", "ICD for high risk"],
+          ["Contraindicated sport", "Vigorous competitive sports"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

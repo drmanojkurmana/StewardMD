@@ -1,0 +1,177 @@
+{
+  "v": 1,
+  "module": "sgm-acute-coronary",
+  "subject": "ss-general-medicine",
+  "title": "Acute coronary syndromes",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Acute coronary syndrome** (ACS, sudden plaque rupture with thrombosis and downstream ischaemia) covers unstable angina, non ST elevation myocardial infarction and ST elevation myocardial infarction as a spectrum. **Myocardial infarction** (heart muscle death) is defined by a rise and fall of troponin with ischaemic evidence. **ST elevation** (ST segment elevation on ECG) marks transmural injury and triggers emergency reperfusion rather than routine workup.",
+      "say": "Acute coronary syndrome is sudden plaque rupture with thrombosis and downstream ischaemia. It can cover unstable angina non ST elevation infarction and ST elevation infarction as one spectrum. Myocardial infarction means heart muscle death defined by a rise and fall of troponin with ischaemic evidence. ST elevation can mark transmural injury and it triggers emergency reperfusion.",
+      "vis": null
+    },
+    {
+      "tx": "**Plaque rupture** (fibrous cap tear exposing thrombogenic core) plus platelet activation creates an occlusive thrombus in ST elevation cases and a subocclusive thrombus in non ST elevation cases. **Coronary spasm** (sudden artery spasm) and embolism explain infarction with clean arteries in some patients. **Supply demand mismatch** (tachyarrhythmia, anemia or hypotension precipitating ischaemia) causes type two infarction without acute plaque rupture.",
+      "say": "Plaque rupture means a fibrous cap tear exposing a thrombogenic core. Platelet activation then creates an occlusive thrombus in ST elevation cases and a subocclusive thrombus in non ST elevation cases. Coronary spasm and embolism can explain infarction with clean arteries in some patients. Supply demand mismatch precipitated by rapid rhythm anemia or hypotension causes type two infarction.",
+      "vis": null
+    },
+    {
+      "tx": "**Crushing central chest pain** (heavy pressure radiating to arm jaw or back with sweating and vomiting) lasting beyond twenty minutes fits acute occlusion, while **angina equivalent** (dyspnoea, syncope or epigastric pain alone) dominates in diabetics and elderly patients. **Killip class** (bedside heart failure grade) and **cardiogenic shock** (pump failure with hypotension and organ hypoperfusion) stratify immediate risk. **Silent infarction** (painless muscle death) occurs in about one quarter of events.",
+      "say": "Crushing central chest pain with sweating and vomiting lasting beyond twenty minutes fits acute occlusion. Angina equivalent means dyspnoea syncope or upper abdominal pain alone and it dominates in diabetics and elderly patients. Killip class can grade bedside heart failure and cardiogenic shock is pump failure with hypotension. Silent infarction is painless muscle death.",
+      "vis": null
+    },
+    {
+      "tx": "**Twelve lead electrocardiogram** (ECG tracing of heart electricity) is the first test because ST elevation or new left bundle branch block mandates immediate reperfusion, while **high sensitivity troponin** (sensitive heart protein assay) confirms muscle death with a rise and fall pattern. **GRACE score** (risk score from age, vitals, ECG and troponin) predicts mortality and guides timing of angiography. **HEART score** (pain history, ECG, age, risk factors and troponin) supports early discharge when low.",
+      "say": "Twelve lead electrocardiogram is the first test because ST elevation or new bundle branch block mandates immediate reperfusion. High sensitivity troponin can confirm muscle death with a rise and fall pattern. GRACE score predicts mortality from age vitals ECG and troponin and it guides angiography timing. HEART score can combine history ECG age risk factors and troponin for early discharge.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ST elevation infarction",
+          "points": [
+            "Transmural injury on ECG",
+            "Immediate reperfusion needed",
+            "Door to balloon under ninety minutes",
+            "Mortality highest without PCI"
+          ]
+        },
+        "right": {
+          "title": "Non ST elevation infarction",
+          "points": [
+            "ST depression or T inversion",
+            "Troponin rise confirms death",
+            "Angiography within seventy two hours",
+            "Risk score sets urgency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Invasive coronary angiography** (catheter X-ray inside coronary arteries) is the gold standard that localises the culprit lesion and plans intervention, while **coronary computed tomography** is reserved for low risk chest pain without troponin rise. **Bedside echocardiography** (ultrasound imaging of heart chambers) at presentation shows wall motion abnormalities and mechanical complications. **Serial troponin** (repeat protein measurement at one to three hours) captures the early rise missed by a single sample.",
+      "say": "Invasive coronary angiography is the gold standard that localises the culprit lesion and plans intervention. Coronary computed tomography is reserved for low risk chest pain without troponin rise. Bedside echocardiography can show wall motion abnormalities and mechanical complications at presentation. Serial troponin captures an early rise missed by a single sample.",
+      "vis": null
+    },
+    {
+      "tx": "**Pain relief** (analgesia for ischaemic pain) begins with **oxygen** only when saturation falls below ninety percent, plus **morphine** (opioid analgesic) in small titrated doses and **nitrates** when blood pressure permits. **Aspirin** (three hundred milligrams loading) is given immediately after ECG confirmation, before angiography. **P2Y12 inhibitor** (ticagrelor or prasugrel loading) should not be given before anatomy is known when surgery may be needed.",
+      "say": "Pain relief begins with oxygen only when saturation falls below ninety percent plus small titrated morphine and nitrates when pressure permits. Aspirin three hundred milligrams loading is given immediately after ECG confirmation before angiography. P two Y twelve inhibitor loading should not precede anatomy knowledge when surgery may be needed. Early analgesia reduces sympathetic drive and oxygen demand.",
+      "vis": null
+    },
+    {
+      "tx": "**Primary percutaneous coronary intervention** (PCI, emergency catheter stent for ST elevation) is preferred with a door to balloon time below ninety minutes and door to first medical contact to wire below one hundred twenty minutes. **Fibrinolysis** (clot dissolving injection) is used when timely PCI is unavailable and symptoms began within twelve hours without bleeding risk. **Dual antiplatelet therapy** (aspirin plus P2Y12 inhibitor) plus **anticoagulation** (heparin or enoxaparin) follows reperfusion to prevent stent thrombosis.",
+      "say": "Primary percutaneous coronary intervention is emergency catheter stent placement for ST elevation. Door to balloon time should stay below ninety minutes. Fibrinolysis is clot dissolving injection used when timely intervention is unavailable and symptoms began within twelve hours without bleeding risk. Dual antiplatelet therapy plus heparin prevents acute stent thrombosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "First ECG and aspirin"
+          },
+          {
+            "id": "b",
+            "label": "PCI within ninety minutes"
+          },
+          {
+            "id": "c",
+            "label": "Fibrinolysis if PCI delayed"
+          },
+          {
+            "id": "d",
+            "label": "Dual therapy and statin"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "ST elevated"
+          ],
+          [
+            "a",
+            "c",
+            "PCI not available timely"
+          ],
+          [
+            "b",
+            "d",
+            "after reperfusion"
+          ],
+          [
+            "c",
+            "d",
+            "after lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Beta blocker** (rate and contractility reducer) is started early when there is no heart failure or bradycardia, while **high intensity statin** (atorvastatin eighty milligrams daily) is started regardless of cholesterol level. **Angiotensin converting enzyme inhibitor** suits reduced ejection fraction, diabetes or hypertension, and **mineralocorticoid antagonist** (spironolactone or eplerenone) adds after ejection fraction below forty percent with heart failure. Guidelines from the European Society of Cardiology stress twelve months of dual therapy after stenting.",
+      "say": "Beta blocker is started early when there is no heart failure or slow rate. High intensity statin such as atorvastatin eighty milligrams daily is started regardless of cholesterol level. Angiotensin converting enzyme inhibitor suits reduced ejection fraction diabetes or hypertension. Mineralocorticoid antagonists add when ejection fraction is below forty percent.",
+      "vis": null
+    },
+    {
+      "tx": "**Mechanical complications** (papillary rupture, ventricular septal defect and free wall rupture) present with new murmurs and sudden deterioration within days. **Arrhythmic complications** (ventricular fibrillation and complete heart block) cluster in the first twenty four hours, so continuous monitoring is mandatory. **Ventricular aneurysm** (thin scarred bulge) and **dressler syndrome** (autoimmune pericarditis days later) follow transmural injury, while recurrent infarction signals stent thrombosis.",
+      "say": "Mechanical complications can include papillary rupture ventricular septal defect and free wall rupture with new murmurs and sudden deterioration. Arrhythmic complications cluster in the first twenty four hours so continuous monitoring is mandatory. Ventricular aneurysm and Dressler syndrome can follow transmural injury. Recurrent infarction can often signal acute stent thrombosis.",
+      "vis": null
+    },
+    {
+      "tx": "**Type two infarction** (supply demand mismatch) is managed by treating tachyarrhythmia, anemia or hypoxia rather than immediate stenting. **Takotsubo syndrome** (stress cardiomyopathy with apical ballooning and clean arteries) mimics infarction after emotional stress and reverses over weeks. **Myocarditis** (heart muscle inflammation) also raises troponin with ST changes, so cardiac magnetic resonance helps when arteries are clean. Calling every troponin rise a plaque event misses these mimics.",
+      "say": "Type two infarction from supply demand mismatch is managed by treating rapid rhythm anemia or hypoxia rather than immediate stenting. Takotsubo syndrome means stress cardiomyopathy with apical ballooning and clean arteries after emotional stress. Myocarditis can also raise troponin with ST changes. Cardiac magnetic resonance helps when arteries look clean.",
+      "vis": null
+    },
+    {
+      "tx": "High-yield for the exam keeps ECG, troponin, reperfusion and secondary prevention as one bundle. First-line drugs are **aspirin three hundred milligrams** loading plus **P2Y12 inhibitor** after anatomy is known and **atorvastatin eighty milligrams**. Gold-standard anatomy is **invasive coronary angiography**. Numbers to quote are **ninety minutes** door to balloon, **twelve hours** for fibrinolysis, **troponin rise and fall** and **GRACE risk scoring**.",
+      "say": "High yield revision can bundle ECG troponin reperfusion and secondary prevention for acute coronary syndrome. First line drugs are aspirin three hundred milligrams loading plus P two Y twelve inhibitor after anatomy is known. Atorvastatin eighty milligrams should start regardless of cholesterol. Invasive coronary angiography is the gold standard with door to balloon time below ninety minutes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Action",
+          "Detail",
+          "Target"
+        ],
+        "rows": [
+          [
+            "First test",
+            "Twelve lead ECG",
+            "Immediate reperfusion if ST up"
+          ],
+          [
+            "Gold standard",
+            "Invasive angiography",
+            "Culprit lesion localised"
+          ],
+          [
+            "Aspirin loading",
+            "Three hundred mg",
+            "Give after ECG"
+          ],
+          [
+            "Statin",
+            "Atorvastatin eighty mg",
+            "Start immediately"
+          ],
+          [
+            "PCI target",
+            "Door to balloon",
+            "Under ninety minutes"
+          ],
+          [
+            "Fibrinolysis window",
+            "Symptom onset",
+            "Within twelve hours"
+          ],
+          [
+            "Risk score",
+            "GRACE",
+            "Guides angiography timing"
+          ],
+          [
+            "Dual therapy",
+            "Aspirin plus P2Y12",
+            "Twelve months post stent"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

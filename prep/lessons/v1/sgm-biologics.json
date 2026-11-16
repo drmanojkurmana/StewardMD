@@ -1,0 +1,119 @@
+{
+  "v": 1,
+  "module": "sgm-biologics",
+  "subject": "ss-general-medicine",
+  "title": "Biologics: monoclonal antibodies and small molecule inhibitors",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Biologics** (medicines made from living cells rather than simple chemicals) include **monoclonal antibodies** (laboratory made copies of one immune protein) and **fusion proteins** (two human proteins joined to block a signal). **Small molecule inhibitors** (oral drugs that block enzymes inside the cell) act on different targets. **Immunogenicity** (the host forming antibodies against the drug) shortens the life of many biologics in practice.",
+      "say": "Biologics are medicines grown in living cells rather than mixed in a flask. The biggest group is monoclonal antibodies, which are laboratory copies of a single immune protein that latch onto one chosen target. Fusion proteins can join two human pieces together to block a signal. Smaller oral inhibitors work inside the cell on enzymes, and the body can learn to reject protein drugs over time.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Class", "Given by", "Examples"],
+        "rows": [
+          ["Monoclonal antibody", "Intravenous or injection", "Rituximab, trastuzumab"],
+          ["Fusion protein", "Injection", "Etanercept, belimumab"],
+          ["Small molecule inhibitor", "Mouth, daily tablet", "Tofacitinib, imatinib"]
+        ]
+      }
+    },
+    {
+      "tx": "**Nomenclature** (the naming system for antibody drugs) hints at engineering and target. **Ridgeline** (the ending for most antibodies) marks a **monoclonal antibody** (a single target antibody), while **murab** and **ximab** mark older mouse and chimeric forms. **Humanised antibodies** (mostly human with animal tips) provoke less immune rejection, which is why fully human versions such as adalimumab cause fewer infusion reactions.",
+      "say": "Antibody names carry hidden clues about engineering. The ending m a b marks a monoclonal antibody, while older endings reveal mouse or mixed origins. Humanised versions keep only animal tips and provoke less rejection, which is why fully human antibodies are tolerated better. Reading the suffix quickly tells the examiner which generation of protein is being prescribed.",
+      "vis": null
+    },
+    {
+      "tx": "**Tumour necrosis factor inhibitors** (antibodies that neutralise a key inflammatory signal) transformed rheumatoid disease. **Infliximab** (a chimeric antibody given intravenously) and **adalimumab** (a fully human antibody given under the skin) both relieve pain and protect joints from erosion. **Etanercept** (a receptor fusion protein) shares the same target differently and carries a lower tuberculosis risk in most registries for Indian patients.",
+      "say": "Blocking tumour necrosis factor changed the life of patients with rheumatoid arthritis and inflammatory bowel disease. One agent is given intravenously as a mixed antibody, another is injected under the skin as a fully human antibody, and a third is a receptor fusion protein. Together they relieve pain and slow joint damage, but they share the risk of waking sleeping infections.",
+      "vis": {
+        "kind": "compare",
+        "left": {"title": "Infliximab pattern", "points": ["Intravenous infusion", "Chimeric antibody", "Faster onset", "Higher TB risk"]},
+        "right": {"title": "Adalimumab pattern", "points": ["Under skin injection", "Fully human antibody", "Home dosing possible", "Lower infusion reactions"]}
+      }
+    },
+    {
+      "tx": "**Pre biologic screening** (infection and safety testing before starting) is compulsory and often examined. **Tuberculosis screening** (chest imaging plus **interferon gamma release assay** (a blood test for hidden germs)) must precede anti tumour necrosis factor therapy. **Hepatitis B screening** (surface antigen and core antibody testing) guards against **reactivation** (the virus firing again) that can cause sudden liver failure during anti CD20 therapy.",
+      "say": "No biologic should start without infection screening. A chest image plus a blood test for hidden tuberculosis must be completed before anti tumour necrosis factor therapy, and latent infection needs treatment first. Hepatitis B surface antigen and core antibody testing before anti CD twenty therapy prevents sudden liver failure from viral reactivation. Skipping this workup is a classic clinical and exam error.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Biologic planned"},
+          {"id": "b", "label": "TB screening"},
+          {"id": "c", "label": "Hepatitis screen"},
+          {"id": "d", "label": "Vaccines updated"},
+          {"id": "e", "label": "Start biologic"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+      }
+    },
+    {
+      "tx": "**Rituximab** (an anti CD20 antibody that removes B cells) controls lymphoma, pemphigus and vasculitis. **CD20** (a protein present only on B cells) makes the target beautifully clean, sparing T cells and stem cells. **Infusion reactions** (fever, flushing and bronchospasm during the first drip) demand premedication and slow escalation, while **progressive multifocal leukoencephalopathy** (a JC virus brain infection) remains a rare but fatal late warning.",
+      "say": "Rituximab hunts a protein called CD twenty that sits only on B cells, so the kill pattern is narrow and clean. It can control lymphomas, pemphigus of the skin, and small vessel vasculitis. The first infusion often causes fever and flushing and needs premedication with slow escalation. A rare JC virus brain infection remains the feared late complication that every prescriber must know.",
+      "vis": null
+    },
+    {
+      "tx": "**Checkpoint inhibitors** (antibodies that release the immune brake on T cells) now dominate solid tumour care. **Anti PD one** (antibodies such as nivolumab that free the exhausted T cell) and **anti CTLA four** (antibodies such as ipilimumab that act earlier in immunity) produce **immune related adverse events** (autoimmune injury of gut, lung, liver or thyroid). **PD L1 testing** (a tissue stain predicting benefit) selects patients most likely to respond in lung and bladder cancers.",
+      "say": "Checkpoint inhibitors do not cause direct attack on the tumour. They release brakes called P D one and C T L A four that keep T cells exhausted, and the freed cells then attack cancer. The same freedom causes autoimmune injury of bowel, lung, liver, thyroid and skin. A tissue stain called P D L one helps predict who benefits most, shaping selection in lung and bladder cancers.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Checkpoint drug", "Target", "Classic immune injury"],
+        "rows": [
+          ["Nivolumab", "PD one", "Pneumonitis, colitis"],
+          ["Pembrolizumab", "PD one", "Thyroid failure"],
+          ["Ipilimumab", "CTLA four", "Hypophysitis"],
+          ["Atezolizumab", "PD L one", "Hepatitis"]
+        ]
+      }
+    },
+    {
+      "tx": "**Trastuzumab** (an anti HER2 antibody that blocks a growth receptor) and **bevacizumab** (an anti VEGF antibody that starves vessels) illustrate oncology biologics. **HER2 testing** (measuring receptor copies in breast cancer tissue) decides trastuzumab use and predicts cardiac strain. **VEGF** (vascular endothelial growth factor that builds new vessels) blockade raises blood pressure and impairs wound healing, so surgery must wait weeks after the last dose.",
+      "say": "Trastuzumab blocks a growth receptor called HER two and only helps tumours that carry many copies of it, so tissue testing comes first. It can strain the heart and needs ejection fraction checks before and during therapy. Bevacizumab blocks a vessel building factor and raises blood pressure, while poor wound healing forces a gap between the last dose and any major operation.",
+      "vis": null
+    },
+    {
+      "tx": "**Janus kinase inhibitors** (oral small molecules that block cytokine signalling inside the cell) compete with biologics in joints, gut and skin. **Tofacitinib** (a representative oral inhibitor) and **upadacitinib** (a selective alternative) carry **venous thromboembolism** (blood clots in leg or lung veins) warnings. **Herpes zoster screening** (asking about shingles before starting) and shingles vaccination reduce a risk that exceeds what biologics usually cause for Indian patients.",
+      "say": "Janus kinase inhibitors are tablets that block cytokine messages inside the cell, giving an oral rival to injected biologics for joints, gut and skin. They carry a clear warning about leg and lung blood clots and about shingles breaking out. Asking about past shingles and offering vaccination before starting is therefore a direct exam favourite that links mechanism to safety.",
+      "vis": null
+    },
+    {
+      "tx": "**Targeted cancer tablets** (small molecule kinase inhibitors) rewrote leukaemia and lung cancer survival. **Imatinib** (a BCR ABL blocking tablet) turned chronic myeloid leukaemia into a chronic disease, while **osimertinib** (an EGFR blocking tablet) controls lung cancers with the matching gene change. **T790M testing** (checking for a resistance change in tumour DNA) decides when to switch generations, and **liquid biopsy** (tumour DNA from blood) spares repeat lung biopsies.",
+      "say": "Small kinase blocking tablets transformed chronic myeloid leukaemia and lung cancer. Imatinib blocks a fused signal that drove the leukaemia and turned it into a long term condition. Osimertinib controls lung cancers carrying the matching gene change. Testing for a resistance change in tumour DNA, sometimes from blood alone, decides when to move to the next generation of tablets.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Driver mutation found"},
+          {"id": "b", "label": "Matched tablet started"},
+          {"id": "c", "label": "Progression on scan"},
+          {"id": "d", "label": "Resistance test"},
+          {"id": "e", "label": "Switch or continue"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+      }
+    },
+    {
+      "tx": "**ACR and EULAR guidance** (joint statements that steer biologic use in rheumatoid disease) shape Indian rheumatology practice. **Screening first, biologic second** (treating hidden infection before immunosuppression) and **early aggressive therapy** (starting strong treatment within months) remain firm principles. **Biosimilars** (copies of the original antibody made after patents expire) now widen access, provided cold chain storage keeps the protein stable during transport.",
+      "say": "Joint society guidance can steer biologic use in inflammatory arthritis toward three firm principles. Screen and treat hidden infection before starting, begin strong therapy early rather than waiting, and involve the patient in choosing between originator and biosimilar copies. Biosimilars have widened access in India, but they still demand strict cold storage because protein medicines spoil when the chain breaks.",
+      "vis": null
+    },
+    {
+      "tx": "**High yield for the exam** centres on screening and signature toxicities. **Tuberculosis screening** before anti tumour necrosis factor drugs, **hepatitis B screening** before rituximab, **infusion reactions** with first rituximab, **cardiac strain** with trastuzumab, **hypertension and poor healing** with bevacizumab, **colitis and pneumonitis** with checkpoint inhibitors, **clots and shingles** with Janus inhibitors, and **HER2 plus BCR ABL** testing for targeted tablets form the core. **Anti PD one** and **anti CD20** nomenclature complete the list.",
+      "say": "High yield for the exam centres on screening rules and signature toxicities. Remember tuberculosis screening before anti tumour necrosis factor drugs, hepatitis B screening before rituximab, infusion reactions on the first rituximab drip, cardiac strain with trastuzumab, hypertension and poor healing with bevacizumab, colitis and pneumonitis with checkpoint inhibitors, blood clots and shingles with Janus inhibitors, and HER two plus BCR A B L testing for targeted tablets.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Drug group", "Screen or signal", "Major toxicity"],
+        "rows": [
+          ["Anti TNF biologics", "TB test first", "Latent TB reactivation"],
+          ["Rituximab", "Hepatitis B test", "Infusion reaction"],
+          ["Trastuzumab", "HER2 positive tissue", "Heart failure"],
+          ["Bevacizumab", "Blood pressure check", "No wound healing"],
+          ["Checkpoint inhibitors", "PD L1 stain", "Autoimmune colitis"],
+          ["JAK inhibitors", "Shingles history", "Blood clots"],
+          ["Imatinib", "BCR ABL positive", "Fluid retention"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

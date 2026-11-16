@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "sgm-valvular",
+ "subject": "ss-general-medicine",
+ "title": "Valvular heart disease overview",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Valvular heart disease [disease of heart valves]** encompasses stenosis [narrowing] and regurgitation [leakage] of mitral, aortic, tricuspid and pulmonary valves. In India, rheumatic mitral stenosis [rheumatic narrowing of mitral valve] is the commonest chronic valve lesion, while degenerative calcific aortic stenosis [age related narrowing] dominates in industrialised populations. Point prevalence studies find rheumatic disease in about twenty five per ten thousand school children.",
+   "say": "Valvular heart disease is stenosis and regurgitation of mitral and aortic and tricuspid and pulmonary valves. In India rheumatic mitral stenosis is the commonest chronic valve lesion while degenerative calcific narrowing dominates in older Western populations. Point prevalence studies find rheumatic disease in about twenty five per ten thousand school children. The burden is high and early detection is important.",
+   "vis": null
+  },
+  {
+   "tx": "Rheumatic fever injures mitral and aortic valves, degenerative sclerosis [calcium deposition] and hypertension damage aortic leaflets, and infective endocarditis [infection of valves] destroys tissue with vegetations [bacterial clumps]. **Endocarditis [valve infection]** causes acute severe regurgitation, while **myxomatous degeneration [weakening of valve tissue]** allows prolapse [bulging leaflet] and chordal rupture. **Bicuspid aortic valve [valve with two leaflets instead of three]** predisposes to stenosis, regurgitation and aortopathy [aorta weakness].",
+   "say": "Rheumatic fever causes injury of mitral and aortic valves and degenerative sclerosis and hypertension damage aortic leaflets. Infective endocarditis causes vegetations and destroys tissue and acute severe leakage follows. Myxomatous degeneration weakens valve tissue and prolapse and chordal rupture can occur. Bicuspid aortic valve is associated with stenosis and regurgitation and aortic weakness in many patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aetiology",
+     "Valve affected",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Rheumatic fever",
+      "Mitral, aortic",
+      "Fibrosis and commissural fusion"
+     ],
+     [
+      "Degenerative calcification",
+      "Aortic",
+      "Calcium deposition"
+     ],
+     [
+      "Endocarditis",
+      "Any valve",
+      "Vegetation destruction"
+     ],
+     [
+      "Myxomatous prolapse",
+      "Mitral",
+      "Chordal rupture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk increases with prior rheumatic fever, older age, hypertension, bicuspid valve, Marfan syndrome [connective tissue disorder] and chronic kidney disease with hyperparathyroidism [calcium imbalance]. **Hypertension [high blood pressure]** accelerates aortic sclerosis, while **chronic kidney disease [long term kidney failure]** promotes annular calcification [calcium on valve ring]. Family history of bicuspid valve and early onset stenosis warns of congenital predisposition requiring screening of first degree relatives.",
+   "say": "Risk increases with prior rheumatic fever and older age and hypertension and bicuspid valve and connective tissue disorders. Hypertension accelerates aortic sclerosis and chronic kidney disease promotes annular calcification with calcium deposition. Family history of bicuspid valve warns of congenital predisposition and screening of relatives is helpful. The risk factors are common and they interact with age.",
+   "vis": null
+  },
+  {
+   "tx": "Stenosis obstructs inflow or outflow, so pressure builds behind the valve and flow velocity rises across a narrowed orifice [opening]. **Orifice narrowing [valve opening reduction]** explains high gradients and left atrial hypertension [raised chamber pressure] in mitral stenosis and left ventricular hypertrophy [thickened muscle] in aortic stenosis. **Pressure overload [increased pressure work]** causes concentric hypertrophy, while **volume overload [increased volume return]** from regurgitation dilates chambers and creates eccentric hypertrophy [stretched muscle].",
+   "say": "Stenosis obstructs flow and pressure builds behind the valve and velocity rises across a narrowed opening. Orifice narrowing explains high gradients and raised chamber pressure in mitral disease and thickened muscle in aortic disease. Pressure overload causes concentric hypertrophy and volume overload from leakage dilates chambers. The haemodynamic pattern determines chamber remodelling over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Valve lesion"
+     },
+     {
+      "id": "b",
+      "label": "Pressure or volume overload"
+     },
+     {
+      "id": "c",
+      "label": "Hypertrophy or dilatation"
+     },
+     {
+      "id": "d",
+      "label": "Failure or shock"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mitral stenosis produces exertional dyspnoea [breathlessness], orthopnoea [breathlessness lying flat], haemoptysis [coughing blood] and palpitations from atrial fibrillation [irregular rhythm]. Examination finds loud first heart sound, opening snap [clicking sound], diastolic murmur [rumbling in diastole] and tapping apex. **Edwardian pause [a pause after loud murmur]** and Corrigan sign [visible pulse waves] are historic but still asked, while pulmonary edema [fluid in lungs] marks acute decompensation. Aortic stenosis classically gives angina, syncope [fainting] and heart failure triad.",
+   "say": "Mitral stenosis produces exertional breathlessness and orthopnoea and haemoptysis and palpitations from irregular rhythm. Examination finds loud heart sounds and opening snap and diastolic murmur and tapping apex in affected patients. Old eponymous signs are still asked in examinations and pulmonary edema marks acute decompensation clearly. Aortic stenosis classically presents with chest pain and fainting and heart failure.",
+   "vis": null
+  },
+  {
+   "tx": "Mitral regurgitation [leaking mitral valve] causes fatigue, pulmonary edema and a pansystolic murmur [throughout contraction] radiating to axilla, while aortic regurgitation [leaking aortic valve] gives wide pulse pressure [difference between systolic and diastolic], Corrigan and Quincke signs [visible pulse pulsations] and high pitched diastolic murmur [flow sound in diastole]. **Pansystolic murmur [murmur throughout systole]** points to mitral or tricuspid leakage, and **Austin Flint murmur [diastolic rumble from jet]** indicates significant aortic regurgitation by striking the anterior mitral leaflet.",
+   "say": "Mitral regurgitation causes fatigue and pulmonary edema and a pansystolic murmur radiating to the axilla. Aortic regurgitation gives wide pulse pressure and visible pulse signs and high pitched diastolic murmur in affected patients. Pansystolic murmur points to mitral or tricuspid leakage and Austin Flint murmur indicates significant aortic regurgitation. The murmurs differ in timing and radiation and they are distinctive.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stenosis",
+     "points": [
+      "Diastolic or systolic murmur",
+      "Pressure overload",
+      "Triad of angina syncope failure"
+     ]
+    },
+    "right": {
+     "title": "Regurgitation",
+     "points": [
+      "Pansystolic or diastolic murmur",
+      "Volume overload",
+      "Wide pulse pressure in AR"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Echocardiogram [heart ultrasound]** is the first test and the gold standard for valve anatomy and haemodynamics, quantifying valve areas, gradients and regurgitant volumes [leaked volume measurement]. **Continuous wave Doppler [blood velocity measurement]** gives peak velocity and mean gradient, while **planimetry [area measurement by tracing]** estimates mitral valve area directly. **Electrocardiogram [ECG, heart tracing]** and chest radiograph [chest X ray] add chamber enlargement clues, lung congestion and calcified valves.",
+   "say": "Echocardiography is the first test and the gold standard for valve anatomy and haemodynamics and it quantifies areas and gradients and leaked volumes. Continuous wave Doppler gives peak velocity and mean gradient in affected patients. Planimetry estimates mitral valve area directly and it is useful in rheumatic disease. Electrocardiogram and chest radiograph provide chamber enlargement clues and congestion signs.",
+   "vis": null
+  },
+  {
+   "tx": "**Cardiac catheterisation [heart catheter test]** with Gorlin formula [valve area calculation] remains the invasive gold standard for discordant echo data, while **cardiac computed tomography [heart CT scan]** aids coronary assessment before intervention. **Exercise testing [treadmill assessment]** is limited in severe symptomatic stenosis, and **transoesophageal echo [probe in oesophagus]** visualises vegetations and prosthetic valves better than transthoracic echo. Blood cultures remain essential when endocarditis is suspected.",
+   "say": "Cardiac catheterisation with the Gorlin formula remains the invasive gold standard for discordant echo data. Cardiac computed tomography aids coronary assessment before intervention and it helps in surgical planning. Exercise testing is limited in severe symptomatic stenosis and it is used cautiously. Transoesophageal echocardiography visualises vegetations and prosthetic valves better than transthoracic imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Strength"
+    ],
+    "rows": [
+     [
+      "Echocardiogram",
+      "First test",
+      "Bedside haemodynamics"
+     ],
+     [
+      "Doppler",
+      "Velocity and gradient",
+      "Quantifies severity"
+     ],
+     [
+      "Cardiac CT",
+      "Coronary assessment",
+      "Pre intervention planning"
+     ],
+     [
+      "Catheterisation",
+      "Invasive gold standard",
+      "Discordant cases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "European Society of Cardiology [ESC, European guideline body] and American College of Cardiology [ACC, American guideline body] recommend intervention for symptomatic severe stenosis, with balloon mitral valvotomy [balloon opening of mitral valve] for favourable rheumatic anatomy. **Balloon valvotomy [catheter balloon opening]** suits young rheumatic patients without severe regurgitation or calcification, while **aortic valve replacement [surgical valve change]** and **transcatheter aortic valve implantation [catheter valve]** address calcific aortic disease. **Anticoagulation [blood thinning]** with vitamin K antagonists [blood thinning drugs] is required for atrial fibrillation with mitral stenosis.",
+   "say": "European and American guidelines provide intervention for symptomatic severe stenosis with balloon valvotomy for favourable rheumatic anatomy. Balloon valvotomy is appropriate for young rheumatic patients without severe regurgitation or calcification. Surgical replacement and transcatheter implantation are options for calcific aortic disease and they are effective. Anticoagulation with vitamin K antagonists is required for atrial fibrillation with mitral stenosis in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "Severe aortic stenosis progresses to angina, syncope and heart failure with annual mortality above twenty percent once symptoms appear, while severe mitral stenosis causes disability from pulmonary hypertension and right failure [right side pump failure]. **Infective endocarditis [valve infection]** with persistent fever, splinter haemorrhages [small bleeds under nails] and Janeway lesions [pain free palm spots] complicates both stenotic and regurgitant valves. **Anticoagulant need [requirement for blood thinning]** persists in mitral stenosis even with sinus rhythm when left atrial thrombus [clot in atrium] is present.",
+   "say": "Severe aortic stenosis progresses to chest pain and fainting and heart failure with high annual mortality once symptoms appear. Severe mitral stenosis causes disability from pulmonary hypertension and right heart failure over time. Infective endocarditis with persistent fever and haemorrhagic signs complicates both stenotic and regurgitant valves. Anticoagulation is required in mitral stenosis even with sinus rhythm when atrial thrombus is present.",
+   "vis": null
+  },
+  {
+   "tx": "Examine timing, radiation and associated signs to avoid traps that mislead candidates. **Ejection systolic murmur [crescendo decrescendo murmur]** radiates to carotids in aortic stenosis, while **holosystolic murmur [throughout systole]** radiates to axilla in mitral regurgitation. **Graham Steell murmur [pulmonary regurgitation murmur]** of pulmonary hypertension and **Carey Coombs murmur [diastolic rumble of acute carditis]** are frequently confused. Early intervention before irreversible pulmonary or ventricular damage improves long term survival.",
+   "say": "Timing and radiation and associated signs should be examined carefully to avoid traps that mislead candidates. Ejection systolic murmur radiates to carotids in aortic stenosis and holosystolic murmur radiates to axilla in mitral regurgitation. Graham Steell murmur and Carey Coombs murmur are frequently confused by students and they indicate different physiology. Early intervention before irreversible damage improves long term survival in many patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Detail",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "First test",
+      "Echocardiogram with Doppler",
+      "Valve area and gradient"
+     ],
+     [
+      "Gold standard anatomy",
+      "Cardiac catheterisation with Gorlin",
+      "Invasive accuracy"
+     ],
+     [
+      "Balloon valvotomy",
+      "Favourable rheumatic mitral stenosis",
+      "Young patients"
+     ],
+     [
+      "Aortic replacement",
+      "Symptomatic severe aortic stenosis",
+      "Angina syncope failure"
+     ],
+     [
+      "Classic murmur",
+      "Ejection systolic to carotid, holosystolic to axilla",
+      "Radiation clue"
+     ],
+     [
+      "Complication",
+      "Infective endocarditis, atrial fibrillation",
+      "Frequent triggers"
+     ],
+     [
+      "Guideline bodies",
+      "European Society of Cardiology, American College of Cardiology",
+      "Intervention thresholds"
+     ],
+     [
+      "Anticoagulation",
+      "Vitamin K antagonist in mitral stenosis with atrial fibrillation",
+      "Thrombus prevention"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
