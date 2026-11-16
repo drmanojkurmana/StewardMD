@@ -147,3 +147,30 @@ test("stickers library: contains required medical icons, arrows, and callouts as
     assert.ok(P.STICKERS[k].startsWith("<svg"));
   });
 });
+
+test("sticker labels: provides human-readable labels for all elements (no raw ids)", () => {
+  const expectedLabels = {
+    heart: "Heart",
+    lungs: "Lungs",
+    kidney: "Kidney",
+    pill: "Pill",
+    syringe: "Syringe",
+    ecg: "ECG",
+    arrowRight: "Arrow right",
+    arrowLeft: "Arrow left",
+    arrowCurved: "Curved arrow",
+    tick: "Tick",
+    cross: "Cross",
+    calloutSpeech: "Speech callout",
+    calloutThought: "Thought callout",
+    calloutBanner: "Box callout"
+  };
+
+  assert.ok(P.STICKER_LABELS, "STICKER_LABELS map must exist");
+  Object.keys(expectedLabels).forEach((k) => {
+    assert.equal(P.STICKER_LABELS[k], expectedLabels[k], "Label mismatch for " + k);
+    // Ensure no raw camelCase ids remain in the label
+    assert.ok(!P.STICKER_LABELS[k].includes("arrowR"));
+    assert.ok(!P.STICKER_LABELS[k].includes("calloutS"));
+  });
+});

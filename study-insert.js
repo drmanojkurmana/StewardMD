@@ -52,6 +52,23 @@
     calloutBanner: '<svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/></svg>'
   };
 
+  var STICKER_LABELS = {
+    heart: "Heart",
+    lungs: "Lungs",
+    kidney: "Kidney",
+    pill: "Pill",
+    syringe: "Syringe",
+    ecg: "ECG",
+    arrowRight: "Arrow right",
+    arrowLeft: "Arrow left",
+    arrowCurved: "Curved arrow",
+    tick: "Tick",
+    cross: "Cross",
+    calloutSpeech: "Speech callout",
+    calloutThought: "Thought callout",
+    calloutBanner: "Box callout"
+  };
+
   var INSERT_ICO = {
     crop: '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>',
     copy: '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
@@ -175,7 +192,8 @@
     FONTS: FONTS,
     FILLS: FILLS,
     BORDERS: BORDERS,
-    STICKERS: STICKERS
+    STICKERS: STICKERS,
+    STICKER_LABELS: STICKER_LABELS
   };
 
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) {
@@ -787,40 +805,40 @@
           '<h3>Text Style &amp; Font</h3>' +
           '<button type="button" class="pn-btn sm" data-act="st-fb-close-styles">Done</button>' +
         '</div>' +
-        '<div class="st-style-presets" style="display:flex;gap:6px;margin-bottom:12px;">' +
+        '<div class="st-style-presets" style="display:flex;gap:6px;margin-bottom:12px;" role="group" aria-label="Presets">' +
           ['title', 'h1', 'h2', 'body'].map(function (k) {
-            return '<button type="button" class="pn-btn sm' + (d.preset === k ? ' pri' : '') + '" data-act="st-set-preset" data-v="' + k + '">' + STYLES[k].label + '</button>';
+            return '<button type="button" class="st-ink-seg' + (d.preset === k ? ' on' : '') + '" data-act="st-set-preset" data-v="' + k + '" aria-pressed="' + (d.preset === k) + '">' + STYLES[k].label + '</button>';
           }).join("") +
         '</div>' +
         '<div class="st-style-row" style="margin-bottom:10px;">' +
-          '<label style="font-size:13px;display:block;margin-bottom:4px;">Font family</label>' +
-          '<div style="display:flex;gap:6px;">' +
+          '<label style="font-size:13px;display:block;margin-bottom:4px;color:var(--pn-sub,#94a3b8);">Font family</label>' +
+          '<div style="display:flex;gap:6px;" role="group" aria-label="Font family">' +
             ['sans', 'serif', 'mono'].map(function (f) {
-              return '<button type="button" class="pn-btn sm' + (d.font === f ? ' pri' : '') + '" data-act="st-set-font" data-v="' + f + '">' + (f === 'sans' ? 'Sans-Serif' : f === 'serif' ? 'Serif' : 'Mono') + '</button>';
+              return '<button type="button" class="st-ink-seg' + (d.font === f ? ' on' : '') + '" data-act="st-set-font" data-v="' + f + '" aria-pressed="' + (d.font === f) + '">' + (f === 'sans' ? 'Sans-Serif' : f === 'serif' ? 'Serif' : 'Mono') + '</button>';
             }).join("") +
           '</div>' +
         '</div>' +
         '<div class="st-style-row" style="margin-bottom:10px;">' +
-          '<label style="font-size:13px;display:block;margin-bottom:4px;">Alignment</label>' +
-          '<div style="display:flex;gap:6px;">' +
+          '<label style="font-size:13px;display:block;margin-bottom:4px;color:var(--pn-sub,#94a3b8);">Alignment</label>' +
+          '<div style="display:flex;gap:6px;" role="group" aria-label="Alignment">' +
             ['left', 'center', 'right'].map(function (al) {
-              return '<button type="button" class="pn-btn sm' + (d.align === al ? ' pri' : '') + '" data-act="st-set-align" data-v="' + al + '">' + al.charAt(0).toUpperCase() + al.slice(1) + '</button>';
+              return '<button type="button" class="st-ink-seg' + (d.align === al ? ' on' : '') + '" data-act="st-set-align" data-v="' + al + '" aria-pressed="' + (d.align === al) + '">' + al.charAt(0).toUpperCase() + al.slice(1) + '</button>';
             }).join("") +
           '</div>' +
         '</div>' +
         '<div class="st-style-row" style="margin-bottom:10px;">' +
-          '<label style="font-size:13px;display:block;margin-bottom:4px;">Box Fill</label>' +
-          '<div style="display:flex;gap:6px;">' +
+          '<label style="font-size:13px;display:block;margin-bottom:4px;color:var(--pn-sub,#94a3b8);">Box Fill</label>' +
+          '<div style="display:flex;gap:6px;" role="group" aria-label="Box Fill">' +
             FILLS.map(function (fi) {
-              return '<button type="button" class="pn-btn sm' + (d.fill === fi.val ? ' pri' : '') + '" data-act="st-set-fill" data-v="' + fi.val + '">' + fi.label + '</button>';
+              return '<button type="button" class="st-ink-seg' + (d.fill === fi.val ? ' on' : '') + '" data-act="st-set-fill" data-v="' + fi.val + '" aria-pressed="' + (d.fill === fi.val) + '">' + fi.label + '</button>';
             }).join("") +
           '</div>' +
         '</div>' +
         '<div class="st-style-row" style="margin-bottom:10px;">' +
-          '<label style="font-size:13px;display:block;margin-bottom:4px;">Box Border</label>' +
-          '<div style="display:flex;gap:6px;">' +
+          '<label style="font-size:13px;display:block;margin-bottom:4px;color:var(--pn-sub,#94a3b8);">Box Border</label>' +
+          '<div style="display:flex;gap:6px;" role="group" aria-label="Box Border">' +
             BORDERS.map(function (bo) {
-              return '<button type="button" class="pn-btn sm' + (d.border === bo.val ? ' pri' : '') + '" data-act="st-set-border" data-v="' + bo.val + '">' + bo.label + '</button>';
+              return '<button type="button" class="st-ink-seg' + (d.border === bo.val ? ' on' : '') + '" data-act="st-set-border" data-v="' + bo.val + '" aria-pressed="' + (d.border === bo.val) + '">' + bo.label + '</button>';
             }).join("") +
           '</div>' +
         '</div>' +
@@ -855,29 +873,32 @@
           '<button type="button" class="pn-btn sm" data-act="st-close-stickers">Done</button>' +
         '</div>' +
         '<div class="st-sticker-tabs">' +
-          '<h4 style="margin:8px 0 4px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);">Medical Line Icons</h4>' +
+          '<h4 style="margin:8px 0 6px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);font-weight:600;">Medical Line Icons</h4>' +
           '<div class="st-sticker-grid">' +
             ['heart', 'lungs', 'kidney', 'pill', 'syringe', 'ecg'].map(function (k) {
-              return '<button type="button" class="st-sticker-btn" data-act="st-insert-sticker" data-name="' + k + '" title="' + k + '">' + STICKERS[k] + '<span>' + k + '</span></button>';
+              var lbl = STICKER_LABELS[k] || k;
+              return '<button type="button" class="st-sticker-btn" data-act="st-insert-sticker" data-name="' + k + '" title="' + lbl + '" aria-label="' + lbl + '">' + STICKERS[k] + '<span>' + lbl + '</span></button>';
             }).join("") +
           '</div>' +
-          '<h4 style="margin:12px 0 4px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);">Arrows &amp; Marks</h4>' +
+          '<h4 style="margin:14px 0 6px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);font-weight:600;">Arrows &amp; Marks</h4>' +
           '<div class="st-sticker-grid">' +
             ['arrowRight', 'arrowLeft', 'arrowCurved', 'tick', 'cross'].map(function (k) {
-              return '<button type="button" class="st-sticker-btn" data-act="st-insert-sticker" data-name="' + k + '" title="' + k + '">' + STICKERS[k] + '<span>' + k + '</span></button>';
+              var lbl = STICKER_LABELS[k] || k;
+              return '<button type="button" class="st-sticker-btn" data-act="st-insert-sticker" data-name="' + k + '" title="' + lbl + '" aria-label="' + lbl + '">' + STICKERS[k] + '<span>' + lbl + '</span></button>';
             }).join("") +
           '</div>' +
-          '<h4 style="margin:12px 0 4px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);">Callouts</h4>' +
+          '<h4 style="margin:14px 0 6px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);font-weight:600;">Callouts</h4>' +
           '<div class="st-sticker-grid">' +
             ['calloutSpeech', 'calloutThought', 'calloutBanner'].map(function (k) {
-              return '<button type="button" class="st-sticker-btn" data-act="st-insert-sticker" data-name="' + k + '" title="' + k + '">' + STICKERS[k] + '<span>' + k + '</span></button>';
+              var lbl = STICKER_LABELS[k] || k;
+              return '<button type="button" class="st-sticker-btn" data-act="st-insert-sticker" data-name="' + k + '" title="' + lbl + '" aria-label="' + lbl + '">' + STICKERS[k] + '<span>' + lbl + '</span></button>';
             }).join("") +
           '</div>' +
           (userElems.length ?
-            '<h4 style="margin:12px 0 4px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);">My Saved Elements (' + userElems.length + ')</h4>' +
+            '<h4 style="margin:14px 0 6px 0;font-size:13px;color:var(--pn-km-mint,#42cdb5);font-weight:600;">My Saved Elements (' + userElems.length + ')</h4>' +
             '<div class="st-sticker-grid">' +
               userElems.map(function (ue, idx) {
-                return '<button type="button" class="st-sticker-btn" data-act="st-insert-saved-elem" data-idx="' + idx + '" title="' + ue.name + '">' + (ue.svg || STICKERS.calloutBanner) + '<span>' + ue.name + '</span></button>';
+                return '<button type="button" class="st-sticker-btn" data-act="st-insert-saved-elem" data-idx="' + idx + '" title="' + ue.name + '" aria-label="' + ue.name + '">' + (ue.svg || STICKERS.calloutBanner) + '<span>' + ue.name + '</span></button>';
               }).join("") +
             '</div>' : "") +
         '</div>' +
@@ -1309,21 +1330,21 @@
       insertOpt.hidden = false;
       insertOpt.innerHTML =
         '<div class="st-text-strip">' +
-          '<div class="st-fb-group">' +
+          '<div class="st-fb-group" role="group" aria-label="Text preset">' +
             ['title', 'h1', 'h2', 'body'].map(function (k) {
-              return '<button type="button" class="st-b st-w' + (curTextPreset === k ? ' on' : '') + '" data-act="st-tb-set-preset" data-v="' + k + '" style="font-size:12px;width:auto;padding:0 8px;">' + STYLES[k].label + '</button>';
+              return '<button type="button" class="st-ink-seg' + (curTextPreset === k ? ' on' : '') + '" data-act="st-tb-set-preset" data-v="' + k + '" aria-pressed="' + (curTextPreset === k) + '">' + STYLES[k].label + '</button>';
             }).join("") +
           '</div>' +
-          '<span class="st-sep"></span>' +
-          '<div class="st-fb-group">' +
+          '<span class="st-fb-sep"></span>' +
+          '<div class="st-fb-group" role="group" aria-label="Font family">' +
             ['sans', 'serif', 'mono'].map(function (f) {
-              return '<button type="button" class="st-b st-w' + (curFont === f ? ' on' : '') + '" data-act="st-tb-set-font" data-v="' + f + '" style="font-size:12px;width:auto;padding:0 8px;">' + (f === 'sans' ? 'Sans' : f === 'serif' ? 'Serif' : 'Mono') + '</button>';
+              return '<button type="button" class="st-ink-seg' + (curFont === f ? ' on' : '') + '" data-act="st-tb-set-font" data-v="' + f + '" aria-pressed="' + (curFont === f) + '">' + (f === 'sans' ? 'Sans' : f === 'serif' ? 'Serif' : 'Mono') + '</button>';
             }).join("") +
           '</div>' +
-          '<span class="st-sep"></span>' +
-          '<div class="st-fb-group">' +
+          '<span class="st-fb-sep"></span>' +
+          '<div class="st-fb-group" role="group" aria-label="Alignment">' +
             ['left', 'center', 'right'].map(function (al) {
-              return '<button type="button" class="st-b st-w' + (curAlign === al ? ' on' : '') + '" data-act="st-tb-set-align" data-v="' + al + '" style="font-size:12px;width:auto;padding:0 6px;">' + al.charAt(0).toUpperCase() + '</button>';
+              return '<button type="button" class="st-ink-seg' + (curAlign === al ? ' on' : '') + '" data-act="st-tb-set-align" data-v="' + al + '" aria-pressed="' + (curAlign === al) + '">' + al.charAt(0).toUpperCase() + '</button>';
             }).join("") +
           '</div>' +
         '</div>';
@@ -1346,8 +1367,8 @@
       insertOpt.innerHTML =
         '<div class="st-laser-strip">' +
           '<span style="font-size:12px;color:var(--pn-km-mint,#42cdb5);font-weight:600;">Laser Mode:</span>' +
-          '<button type="button" class="pn-btn sm' + (laserMode === 'trail' ? ' pri' : '') + '" data-act="st-laser-trail">Trail (1s fade)</button>' +
-          '<button type="button" class="pn-btn sm' + (laserMode === 'dot' ? ' pri' : '') + '" data-act="st-laser-dot">Dot</button>' +
+          '<button type="button" class="st-ink-seg' + (laserMode === 'trail' ? ' on' : '') + '" data-act="st-laser-trail" aria-pressed="' + (laserMode === 'trail') + '">Trail (1s fade)</button>' +
+          '<button type="button" class="st-ink-seg' + (laserMode === 'dot' ? ' on' : '') + '" data-act="st-laser-dot" aria-pressed="' + (laserMode === 'dot') + '">Dot</button>' +
         '</div>';
     } else {
       insertOpt.hidden = true;

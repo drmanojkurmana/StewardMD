@@ -1430,12 +1430,74 @@
 .pn-root .st-laser-strip {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   padding: 6px 12px;
   background: var(--pn-card, #0D1D23);
   border-bottom: 1px solid var(--pn-line, #1c333b);
-  flex-wrap: wrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-wrap: nowrap;
   z-index: 19;
+}
+
+.pn-root .st-text-strip::-webkit-scrollbar,
+.pn-root .st-insert-strip::-webkit-scrollbar,
+.pn-root .st-laser-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Segmented chips (consistent with Phase 1 .st-ink-seg) */
+.pn-root .st-ink-seg {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--pn-line, #1c333b);
+  background: var(--pn-s1, #12242B);
+  color: var(--pn-text, #E5E7EB);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform var(--pn-d-press, 120ms) var(--pn-ease), background-color 150ms ease, border-color 150ms ease;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.pn-root .st-ink-seg:hover {
+  background: var(--pn-s2, #162c34);
+}
+
+.pn-root .st-ink-seg:active {
+  transform: scale(0.96);
+}
+
+.pn-root .st-ink-seg.on {
+  border-color: var(--pn-km-mint, #42cdb5);
+  background: rgba(66, 205, 181, 0.16);
+  color: var(--pn-text, #E5E7EB);
+  font-weight: 600;
+}
+
+body.dark .pn-root .st-ink-seg.on {
+  color: #E5E7EB;
+  border-color: var(--pn-km-mint, #42cdb5);
+  background: rgba(66, 205, 181, 0.16);
+}
+
+body:not(.dark) .pn-root .st-ink-seg.on {
+  color: #071318;
+  border-color: var(--pn-km-mint, #42cdb5);
+  background: rgba(66, 205, 181, 0.16);
+}
+
+.pn-root .st-ink-seg:focus-visible {
+  outline: 2px solid var(--pn-km-mint, #42cdb5);
+  outline-offset: 2px;
 }
 
 /* Sticker Tray */
@@ -1446,14 +1508,14 @@
 
 .pn-root .st-sticker-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 8px;
   margin-bottom: 12px;
 }
 
 .pn-root .st-sticker-btn {
-  min-height: 64px;
-  min-width: 64px;
+  min-height: 72px;
+  min-width: 72px;
   background: var(--pn-s1, #12242B);
   border: 1px solid var(--pn-line, #1c333b);
   border-radius: 10px;
@@ -1464,22 +1526,30 @@
   gap: 4px;
   color: var(--pn-km-mint, #42cdb5);
   cursor: pointer;
-  padding: 6px;
+  padding: 8px 4px 6px 4px;
   box-sizing: border-box;
+  transition: transform var(--pn-d-press, 120ms) var(--pn-ease), background-color 150ms ease, border-color 150ms ease;
 }
 
 .pn-root .st-sticker-btn:hover {
-  background: #162c34;
+  background: var(--pn-s2, #162c34);
   border-color: var(--pn-km-mint, #42cdb5);
 }
 
+.pn-root .st-sticker-btn:active {
+  transform: scale(0.96);
+}
+
 .pn-root .st-sticker-btn span {
-  font-size: 10px;
+  font-size: 11px;
+  line-height: 1.2;
+  text-align: center;
   color: var(--pn-sub, #94A3B8);
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  overflow: visible;
+  text-overflow: clip;
 }
 
 /* Crop Overlay */
