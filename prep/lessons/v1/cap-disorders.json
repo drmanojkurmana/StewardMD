@@ -1,0 +1,322 @@
+{
+ "v": 1,
+ "module": "cap-disorders",
+ "subject": "ss-child-adolescent-psychiatry",
+ "title": "Adolescent psychiatry: mood, anxiety, conduct and tics",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22nd edition",
+  "Nelson Textbook of Pediatrics 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Adolescent psychiatric disorders** start before 18 years and affect 1 in 5 teens over 12 months. Anxiety leads at 25 percent, then mood at 15 percent in 1000 school surveys. **Functional harm** for 2 weeks in school or home marks true illness over brief worry. Early care within 4 weeks lifts recovery from 40 percent to 70 percent in 200 cases.",
+   "say": "Adolescent psychiatric disorders start before eighteen years and affect one in five teens over twelve months. Anxiety leads at twenty five percent, then mood at fifteen percent in one thousand school surveys. Functional harm for two weeks in school or home marks true illness over brief worry. Early care within four weeks lifts recovery from forty percent to seventy percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Rate",
+     "Window"
+    ],
+    "rows": [
+     [
+      "Anxiety",
+      "25 percent yearly",
+      "12 months"
+     ],
+     [
+      "Mood",
+      "15 percent yearly",
+      "Before 18 years"
+     ],
+     [
+      "Conduct",
+      "4 percent yearly",
+      "2 weeks harm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trauma** in 30 percent of 500 teens doubles risk of 2 disorders by age 16. Parental 2 depressions, 3 day school fights and 1 year of bullying raise risk 2 fold. **Substance** use by 15 years links to 5 times higher mood risk in 12 months. **Sleep** loss under 7 hours for 2 weeks worsens 1 year outcome in 60 percent.",
+   "say": "Trauma in thirty percent of five hundred teens doubles risk of two disorders by age sixteen. Parental two depressions, three day school fights and one year of bullying raise risk two fold. Substance use by fifteen years links to five times higher mood risk in twelve months. Sleep loss under seven hours for two weeks worsens one year outcome in sixty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ask trauma 1 year"
+     },
+     {
+      "id": "b",
+      "label": "Check family 2 illnesses"
+     },
+     {
+      "id": "c",
+      "label": "Screen mood 5 items"
+     },
+     {
+      "id": "d",
+      "label": "Test urine at 15 years"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Serotonin** dysregulation plus stress circuits drive **depression** and **anxiety** in 10 percent of 100 teens. **Dopamine** reward faults fuel 3 times higher substance use by 16 years. **Cortisol** rise for 4 weeks shrinks hippocampus volume by 5 percent in scans. Gene risk plus 2 environmental hits explain 50 percent of variance in 200 twin pairs.",
+   "say": "Serotonin dysregulation plus stress circuits drive depression and anxiety in ten percent of one hundred teens. Dopamine reward faults fuel three times higher substance use by sixteen years. Cortisol rise for four weeks shrinks hippocampus volume by five percent in scans. Gene risk plus two environmental hits explain half of variance in two hundred twin pairs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Depression circuit",
+     "points": [
+      "Serotonin low 2 weeks",
+      "Stress high 4 weeks",
+      "Sleep under 7 hours"
+     ]
+    },
+    "right": {
+     "title": "Anxiety circuit",
+     "points": [
+      "Serotonin dysregulated",
+      "Hippocampus minus 5 percent",
+      "Fear loop 6 months"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Depression** shows sad mood, 5 kg loss and 3 week anhedonia in 14 year olds. **Anxiety** shows 6 month worry, 2 panic attacks and school avoidance in 12 percent. **Conduct disorder** shows 3 acts of cruelty and 2 thefts in 6 months at 15 years. **Tourette** needs motor tics plus 1 vocal tic over 12 months in 1 percent.",
+   "say": "Depression shows sad mood, five kilograms loss and three week anhedonia in fourteen year olds. Anxiety shows six month worry, two panic attacks and school avoidance in twelve percent. Conduct disorder shows three acts of cruelty and two thefts in six months at fifteen years. Tourette needs motor tics plus one vocal tic over twelve months in one percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Duration",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Depression",
+      "2 weeks low",
+      "5 kg loss"
+     ],
+     [
+      "Anxiety",
+      "6 months worry",
+      "2 panic attacks"
+     ],
+     [
+      "Tourette",
+      "12 months tics",
+      "Motor plus vocal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PHQ-9A** scores 27 points and 10 or more flags depression in 15 year olds. **GAD-7** scores 21 points and 10 or more flags anxiety in 10 minutes. **Urine** drug screen catches 3 drugs for 2 days in 15 year olds. Chart **weight** weekly for 4 weeks because **Fluoxetine** 10 mg cuts appetite in 20 percent of 100 teens.",
+   "say": "PHQ nine A scores twenty seven points and ten or more flags depression in fifteen year olds. GAD seven scores twenty one points and ten or more flags anxiety in ten minutes. Urine drug screen catches three drugs for two days in fifteen year olds. Chart weight weekly for four weeks because Fluoxetine ten milligrams cuts appetite in twenty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PHQ-9A 10 minutes"
+     },
+     {
+      "id": "b",
+      "label": "GAD-7 5 minutes"
+     },
+     {
+      "id": "c",
+      "label": "Urine 2 day window"
+     },
+     {
+      "id": "d",
+      "label": "Weight 4 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fluoxetine** 10 to 20 mg daily is first line for 13 year olds with depression over 6 weeks. **CBT** 12 sessions lifts 60 percent by 3 months in 100 teens. **Sertraline** 50 mg suits 16 year olds with 2 anxiety drugs. Add **Melatonin** 3 mg for 4 weeks when sleep stays under 6 hours nightly in 30 percent.",
+   "say": "Fluoxetine ten to twenty milligrams daily is first line for thirteen year olds with depression over six weeks. CBT twelve sessions lifts sixty percent by three months in one hundred teens. Sertraline fifty milligrams suits sixteen year olds with anxiety. Add Melatonin three milligrams for four weeks when sleep stays under six hours nightly in thirty percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fluoxetine 10 mg",
+     "points": [
+      "First line under 18 years",
+      "Start 10 mg daily",
+      "6 weeks trial"
+     ]
+    },
+    "right": {
+     "title": "CBT 12 sessions",
+     "points": [
+      "60 percent improve",
+      "3 months course",
+      "No drug harm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Haloperidol** 0.5 to 2 mg helps Tourette tics over 8 weeks in 50 percent of boys. **Clonidine** 0.05 mg thrice daily aids 1 tic plus ADHD in 40 percent. **Pimozide** 2 mg works but needs ECG in 12 year olds for 1 year. Review 4 weekly for 8 weeks in 50 teens because 15 percent worsen on first drug choice.",
+   "say": "Haloperidol zero point five to two milligrams helps Tourette tics over eight weeks in half of boys. Clonidine zero point zero five milligrams thrice daily aids one tic plus ADHD in forty percent. Pimozide two milligrams works but needs ECG in twelve year olds for one year. Review four weekly for eight weeks because fifteen percent worsen on first drug choice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haloperidol 0.5 mg start"
+     },
+     {
+      "id": "b",
+      "label": "ECG at 1 week"
+     },
+     {
+      "id": "c",
+      "label": "Review 4 weekly"
+     },
+     {
+      "id": "d",
+      "label": "Switch if 8 weeks fail"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Suicide** risk in depressed teens 16 years reaches 8 percent over 12 months in 100 cases. **Substance use** doubles 1 year relapse to 40 percent in 3 months. **Conduct** harsh punishment raises 2 year arrest to 25 percent in 200 boys. Watch 1 week drug starts closely because 2 percent act on urges within 10 days.",
+   "say": "Suicide risk in depressed teens sixteen years reaches eight percent over twelve months in one hundred cases. Substance use doubles one year relapse to forty percent in three months. Conduct harsh punishment raises two year arrest to twenty five percent in two hundred boys. Watch one week drug starts closely because two percent act on urges within ten days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Harm",
+     "Rate",
+     "Guard"
+    ],
+    "rows": [
+     [
+      "Suicide 16 years",
+      "8 percent yearly",
+      "Weekly watch 1 week"
+     ],
+     [
+      "Relapse use",
+      "40 percent in 3 months",
+      "Test urine monthly"
+     ],
+     [
+      "Arrest conduct",
+      "25 percent in 2 years",
+      "Avoid harsh steps"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Conduct disorder** breaks rules with 3 cruel acts in 6 months at 14 years. **Oppositional defiant** shows 4 angry outbursts with argument but no 1 major cruelty. **Tics** under 12 months mark chronic tic disorder in 2 percent of 100 boys. **Tourette** adds 1 vocal tic over 12 months with 1 percent rate in 500 children.",
+   "say": "Conduct disorder breaks rules with three cruel acts in six months at fourteen years. Oppositional defiant shows four angry outbursts with argument but no one major cruelty. Tics under twelve months mark chronic tic disorder in two percent of one hundred boys. Tourette adds one vocal tic over twelve months with one percent rate in five hundred children.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conduct",
+     "points": [
+      "3 cruel acts 6 months",
+      "Theft 2 times",
+      "Rights broken"
+     ]
+    },
+    "right": {
+     "title": "Oppositional",
+     "points": [
+      "4 outbursts angry",
+      "Argument common",
+      "No cruelty"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield trim: start **Fluoxetine** 10 mg for 6 weeks in 13 year old depression with **CBT** 12 sessions. Screen mood with **PHQ-9A** 10 and anxiety with **GAD-7** 10 in 10 minutes. Use **Haloperidol** 0.5 mg for Tourette over 12 months with **Clonidine** 0.05 mg. Watch 1 week closely for 8 percent suicide risk over 12 months.",
+   "say": "High-yield for the exam, start Fluoxetine ten milligrams for six weeks in thirteen year old depression with twelve sessions of therapy. Screen mood with ten and anxiety with ten in ten minutes. Use Haloperidol for Tourette over twelve months with Clonidine. Watch one week closely for eight percent suicide risk over twelve months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Dose",
+     "Time"
+    ],
+    "rows": [
+     [
+      "Fluoxetine depression",
+      "10 mg daily",
+      "6 weeks trial"
+     ],
+     [
+      "PHQ-9A cutoff",
+      "10 or more",
+      "10 minutes"
+     ],
+     [
+      "Haloperidol tics",
+      "0.5 mg start",
+      "8 weeks review"
+     ],
+     [
+      "Suicide watch",
+      "8 percent yearly",
+      "Weekly 1 week"
+     ]
+    ]
+   }
+  }
+ ]
+}
