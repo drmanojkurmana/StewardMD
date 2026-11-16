@@ -77,6 +77,51 @@
    "tx": "**Mediastinal lines** on the frontal film place a mass before CT. Loss of the heart border silhouette means anterior, loss of the paravertebral line means posterior, and a mass seen through the heart shadow with borders intact sits in the posterior inferior compartment. The cervicothoracic sign adds the clavicle rule: a top border surviving above the clavicles cannot be anterior, pointing instead to neck or posterior origin.",
    "say": "Mediastinal lines on the frontal film place a mass before CT. Loss of the heart border means anterior, loss of the paravertebral line means posterior, and a mass seen through the heart with borders intact sits posteriorly. A top border surviving above the clavicles cannot be anterior either.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Which border is lost"}, {"id": "b", "label": "Heart border: anterior"}, {"id": "c", "label": "Paravertebral: posterior"}, {"id": "d", "label": "CT confirms compartment"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: Crazy paving is ground glass plus interlobular septal thickening. Pulmonary alveolar proteinosis is the classic examination cause, central and symmetric, treated by whole lung lavage, though oedema, haemorrhage and infection are commoner in practice. Lipoid pneumonia shows fat density after oil aspiration. Anterior mediastinal masses are the four Ts, and loss of the heart border places a mass anteriorly.",
+   "say": "High-yield for the exam: Crazy paving is ground glass plus interlobular septal thickening. Pulmonary alveolar proteinosis is the classic examination cause, central and symmetric, treated by whole lung lavage, though oedema, haemorrhage and infection are commoner in practice. Lipoid pneumonia shows fat density after oil aspiration. Anterior mediastinal masses are the four Ts, and loss of the heart border places a mass anteriorly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Crazy paving parts",
+      "Ground glass plus thick septa"
+     ],
+     [
+      "Exam classic",
+      "Pulmonary alveolar proteinosis"
+     ],
+     [
+      "Proteinosis spread",
+      "Central, spares apices"
+     ],
+     [
+      "Proteinosis treatment",
+      "Whole lung lavage"
+     ],
+     [
+      "Commoner causes",
+      "Oedema, bleed, infection"
+     ],
+     [
+      "Lipoid clue",
+      "Fat density after oil"
+     ],
+     [
+      "Four Ts",
+      "Thymoma, teratoma, thyroid, lymphoma"
+     ],
+     [
+      "Silhouette rule",
+      "Lost heart border means anterior"
+     ]
+    ]
+   }
   }
  ]
 }
