@@ -1,1 +1,340 @@
-{"gen": "AI", "minutes": 9, "module": "sne-mitochondrial-disorders", "quiz": [], "steps": [{"say": "Mitochondrial diseases starve tissues that burn most energy, so brain with muscle with eye with ear fail together. Inheritance is maternal because sperm contribute no mitochondria, and severity varies by heteroplasmy, the mix of good with bad genomes. Short stature with deafness with diabetes with drooping lids in one patient screams mitochondrial disease. Lactate rises in blood with spinal fluid when the chain fails.", "tx": "**Mitochondrial diseases** starve high energy tissues: brain, muscle, eye, ear fail together. **Maternal inheritance** with variable **heteroplasmy** decides severity. Short stature with deafness, diabetes and drooping lids in one patient screams mitochondrial disease. **Lactate** rises in blood and CSF; **ragged red fibres** mark muscle biopsy.", "vis": {"cols": ["Feature", "Mitochondrial", "Other"], "kind": "table", "rows": [["Inheritance", "Maternal only", "Fathers transmit too"], ["Organs", "Brain plus muscle plus ear", "One system"], ["Lactate", "Raised in fluids", "Normal"], ["Biopsy", "Ragged red fibres", "Specific other change"]]}}, {"say": "M E L A S strikes before forty with stroke like episodes that ignore vessel territories and leave migraines with seizures with deafness. Lactic acidosis with muscle weakness completes the picture, and the M T T L one mutation confirms most cases. Arginine given during attacks improves vessel flow and shrinks the lesions. Recurrent lessons that cross territories are M E L A S until proven otherwise.", "tx": "**MELAS** strikes before age forty with **stroke like episodes** crossing vessel territories, plus migraine, seizures and deafness. **Lactic acidosis** with weakness completes it; **MTTL1 mutation** confirms most. **Arginine** in attacks improves vessel flow and shrinks lesions. **Daily arginine** with coenzyme Q prevents recurrences.", "vis": {"cols": ["Stroke like", "MELAS", "True stroke"], "kind": "table", "rows": [["Territory", "Crosses vessels", "One vessel"], ["Age", "Young, migraines", "Vasculopath"], ["Lactate", "Raised", "Normal"], ["Treatment", "Arginine works", "Thrombolyse urgently"]]}}, {"say": "M E R R F jerks its patients with myoclonus that lightning cannot match, and muscle wasting with deafness with short stature follows. The M T T K mutation is the commonest cause, and ragged red fibres with excess mitochondria confirm the biopsy. Seizures are controlled with standard drugs except valproate, which poisons the chain further. Coenzyme Q with riboflavin supports energy while triggers are avoided.", "tx": "**MERRF** gives **myoclonus with epilepsy** (MTTK mutation) plus wasting, deafness and short stature. **Ragged red fibres** confirm biopsy. **Valproate is banned** as it poisons mitochondria further. **Coenzyme Q with riboflavin** supports energy. **Alcohol, smoking and fasting** are avoided as triggers.", "vis": {"cols": ["Syndrome", "Gene clue", "Hallmark"], "kind": "table", "rows": [["MELAS", "MTTL1", "Stroke like, arginine helps"], ["MERRF", "MTTK", "Myoclonus, valproate banned"], ["NARP", "Pigment, ataxia, neuropathy", "Maternal"]]}}, {"say": "Chronic progressive external ophthalmoplegia freezes the eyes over years, starting with drooping lids that no fatigue test explains. Single deletions of mitochondrial D N A cause most adult cases, and many stay purely ocular for decades. When pigmentary retina with heart block with high spinal fluid protein joins, the disease is called Kearns Sayre syndrome. A pacemaker saves lives once conduction fails.", "tx": "**CPEO** freezes gaze over years from bilateral **ptosis**; fatigue tests stay negative. Single **mtDNA deletions** cause most adult cases. **Kearns Sayre** adds pigmentary retina, **heart block** and raised CSF protein before age twenty. **Pacemaker** is placed once conduction fails; sudden death follows delay.", "vis": {"kind": "compare", "left": {"points": ["Eyes only, adult deletions, stable decades"], "title": "Pure CPEO"}, "right": {"points": ["Plus retina, heart block, young, pace early"], "title": "Kearns Sayre"}}}, {"say": "Leigh syndrome melts the infant brainstem with basal ganglia in the first two years, and feeding with breathing fails together. Lactic acidosis with symmetric brainstem lesions on resonance confirms the pattern, and many nuclear with mitochondrial genes cause it. Vitamin cocktail rescues the transporter defects, so it is tried early. Most cases progress despite the cocktail, and counselling guides the family.", "tx": "**Leigh syndrome** melts infant **brainstem and basal ganglia** before age two; feeding and breathing fail. **Lactic acidosis** with symmetric lesions confirms pattern. **Vitamin cocktail** is tried early and rescues transporter defects. **Many genes** cause it, nuclear and mitochondrial. **Counselling** guides families as most progress.", "vis": {"cols": ["Age", "Lesions", "Tried early"], "kind": "table", "rows": [["Infancy", "Brainstem, basal ganglia", "Vitamin cocktail"], ["Childhood", "Stroke like patches", "Arginine, coenzyme Q"], ["Adult eyes", "Ptosis, frozen gaze", "Watch, pace heart"]]}}, {"say": "Every multisystem case follows the same testing order, and maternal relatives are examined, not just asked. Lactate in blood with spinal fluid with muscle enzymes comes first, then resonance with spectroscopy shows the lactate peak. Muscle biopsy with respiratory chain assays with full mitochondrial sequencing closes the list. Fathers with their children are reassured, while maternal kin are screened and counselled.", "tx": "**Workup order** is fixed: **lactate** in blood and CSF first, then **MRI with spectroscopy** (lactate peak). **Muscle biopsy** with chain assays follows, then **mtDNA sequencing**. **Maternal relatives** are screened; paternal transmission never occurs. **Heteroplasmy** explains why severity varies within families.", "vis": {"edges": [["a", "b"], ["b", "c"], ["c", "d"]], "kind": "flow", "nodes": [{"id": "a", "label": "Lactate in blood and CSF"}, {"id": "b", "label": "MRI with lactate peak"}, {"id": "c", "label": "Muscle biopsy, chain assays"}, {"id": "d", "label": "mtDNA sequencing, counsel"}]}}, {"say": "No cocktail is curative in mitochondrial disease, but several moves change outcomes measurably. Arginine aborts M E L A S stroke like episodes, and pacemakers prevent Kearns Sayre deaths. Coenzyme Q with riboflavin supports most patients, while valproate with smoking with alcohol with fasting harms them. Deafness is aided early, diabetes is screened yearly, and pregnancy is planned with high dose folate support.", "tx": "**Arginine** aborts MELAS episodes; **pacemaker** prevents KSS death. **Coenzyme Q with riboflavin** with vitamin cocktail supports most patients daily. **Valproate, smoking, alcohol, fasting** are banned. **Hearing aids** with yearly **diabetes** screening protect function. **Pregnancy** is planned with specialist cover and trigger avoidance.", "vis": {"cols": ["Move", "Helps", "Rule"], "kind": "table", "rows": [["Arginine in attacks", "MELAS lesions", "Give early, repeat"], ["Pacemaker in KSS", "Heart block", "Never delay"], ["Avoid valproate", "All mito patients", "Poisons the chain"]]}}, {"say": "The fatal trap is thrombolysing a M E L A S stroke like episode, which crosses territories and needs arginine instead. The second trap is prescribing valproate for myoclonus, which deepens the energy failure. Missing heart block in Kearns Sayre kills suddenly, so annual E C G is mandatory. And calling ptosis myasthenia wastes years when fatigue tests stay negative and inheritance is maternal.", "tx": "**Exam traps:** MELAS lesions **cross territories**; thrombolysis harms, arginine helps. **Valproate** worsens all mito disease. **KSS needs annual ECG**; block kills suddenly. **Maternal inheritance** with deafness marks mito, not myasthenia. **Lactate raised** in fluids points to the chain, not to shock alone.", "vis": {"cols": ["Trap", "Truth", "Rule"], "kind": "table", "rows": [["Thrombolyse MELAS", "Crosses vessels", "Arginine, not lysis"], ["Valproate for jerks", "Poisons mitochondria", "Banned in mito"], ["Ptosis called MG", "Maternal, no fatigue", "Think CPEO"]]}}, {"say": "For the exam, the facts to lock in are maternal inheritance with heteroplasmy, lactate with ragged red fibres, M E L A S before forty with arginine rescue, valproate banned, Kearns Sayre triad with pacemaker, and Leigh in infants. Stroke like lesions that cross territories define M E L A S and ptosis without fatigue defines C P E O. Memorise the facts in this table exactly as written.", "tx": "**High yield for the exam:** **maternal inheritance** with heteroplasmy defines mito. **Lactate** with **ragged red fibres** confirms energy failure. **MELAS before forty** with arginine rescue; **valproate banned**. **KSS triad** (eyes, retina, block) needs pacemaker. **Leigh** melts the infant brainstem and basal ganglia before age two.", "vis": {"cols": ["Fact", "Detail", "Why it is asked"], "kind": "table", "rows": [["Inheritance", "Maternal only", "Fathers never transmit"], ["Marker", "Lactate raised", "Blood and CSF"], ["Biopsy mark", "Ragged red fibres", "Energy failure"], ["MELAS age", "Before forty", "Stroke like, arginine"], ["Banned drug", "Valproate", "Poisons chain"], ["KSS danger", "Heart block", "Pace, annual ECG"], ["Leigh age", "Infancy", "Brainstem melted"], ["CPEO clue", "Ptosis, no fatigue", "Versus myasthenia"]]}}], "title": "Mitochondrial Neurological Disorders", "v": 1}
+{
+ "gen": "AI",
+ "minutes": 9,
+ "module": "sne-mitochondrial-disorders",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Mitochondrial diseases starve tissues that burn most energy, so brain with muscle with eye with ear fail together. Inheritance is maternal because sperm contribute no mitochondria, and severity varies by heteroplasmy, the mix of good with bad genomes. Short stature with deafness with diabetes with drooping lids in one patient screams mitochondrial disease. Lactate rises in blood with spinal fluid when the chain fails.",
+   "tx": "**Mitochondrial diseases** starve high energy tissues: brain, muscle, eye, ear fail together. **Maternal inheritance** with variable **heteroplasmy** decides severity. Short stature with deafness, diabetes and drooping lids in one patient screams mitochondrial disease. **Lactate** rises in blood and CSF; **ragged red fibres** mark muscle biopsy.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Mitochondrial",
+     "Other"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Inheritance",
+      "Maternal only",
+      "Fathers transmit too"
+     ],
+     [
+      "Organs",
+      "Brain plus muscle plus ear",
+      "One system"
+     ],
+     [
+      "Lactate",
+      "Raised in fluids",
+      "Normal"
+     ],
+     [
+      "Biopsy",
+      "Ragged red fibres",
+      "Specific other change"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "M E L A S strikes before forty with stroke like episodes that ignore vessel territories and leave migraines with seizures with deafness. Lactic acidosis with muscle weakness completes the picture, and the M T T L one mutation confirms most cases. Arginine given during attacks improves vessel flow and shrinks the lesions. Recurrent lessons that cross territories are M E L A S until proven otherwise.",
+   "tx": "**MELAS** strikes before age 40 with **stroke like episodes** crossing vessel territories, plus migraine, seizures and deafness. **Lactic acidosis** with weakness completes it; **MTTL1 mutation** confirms most. **Arginine** in attacks improves vessel flow and shrinks lesions. **Daily arginine** with coenzyme Q prevents recurrences.",
+   "vis": {
+    "cols": [
+     "Stroke like",
+     "MELAS",
+     "True stroke"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Territory",
+      "Crosses vessels",
+      "One vessel"
+     ],
+     [
+      "Age",
+      "Young, migraines",
+      "Vasculopath"
+     ],
+     [
+      "Lactate",
+      "Raised",
+      "Normal"
+     ],
+     [
+      "Treatment",
+      "Arginine works",
+      "Thrombolyse urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "M E R R F jerks its patients with myoclonus that lightning cannot match, and muscle wasting with deafness with short stature follows. The M T T K mutation is the commonest cause, and ragged red fibres with excess mitochondria confirm the biopsy. Seizures are controlled with standard drugs except valproate, which poisons the chain further. Coenzyme Q with riboflavin supports energy while triggers are avoided.",
+   "tx": "**MERRF** gives **myoclonus with epilepsy** (MTTK mutation) plus wasting, deafness and short stature. **Ragged red fibres** confirm biopsy. **Valproate is banned** as it poisons mitochondria further. **Coenzyme Q with riboflavin** supports energy. **Alcohol, smoking and fasting** are avoided as triggers.",
+   "vis": {
+    "cols": [
+     "Syndrome",
+     "Gene clue",
+     "Hallmark"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "MELAS",
+      "MTTL1",
+      "Stroke like, arginine helps"
+     ],
+     [
+      "MERRF",
+      "MTTK",
+      "Myoclonus, valproate banned"
+     ],
+     [
+      "NARP",
+      "Pigment, ataxia, neuropathy",
+      "Maternal"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Chronic progressive external ophthalmoplegia freezes the eyes over years, starting with drooping lids that no fatigue test explains. Single deletions of mitochondrial D N A cause most adult cases, and many stay purely ocular for decades. When pigmentary retina with heart block with high spinal fluid protein joins, the disease is called Kearns Sayre syndrome. A pacemaker saves lives once conduction fails.",
+   "tx": "**CPEO** freezes gaze over years from bilateral **ptosis**; fatigue tests stay negative. Single **mtDNA deletions** cause most adult cases. **Kearns Sayre** adds pigmentary retina, **heart block** and raised CSF protein before age 20. **Pacemaker** is placed once conduction fails; sudden death follows delay.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Eyes only, adult deletions, stable decades"
+     ],
+     "title": "Pure CPEO"
+    },
+    "right": {
+     "points": [
+      "Plus retina, heart block, young, pace early"
+     ],
+     "title": "Kearns Sayre"
+    }
+   }
+  },
+  {
+   "say": "Leigh syndrome melts the infant brainstem with basal ganglia in the first two years, and feeding with breathing fails together. Lactic acidosis with symmetric brainstem lesions on resonance confirms the pattern, and many nuclear with mitochondrial genes cause it. Vitamin cocktail rescues the transporter defects, so it is tried early. Most cases progress despite the cocktail, and counselling guides the family.",
+   "tx": "**Leigh syndrome** melts infant **brainstem and basal ganglia** before age two; feeding and breathing fail. **Lactic acidosis** with symmetric lesions confirms pattern. **Vitamin cocktail** is tried early and rescues transporter defects. **Many genes** cause it, nuclear and mitochondrial. **Counselling** guides families as most progress.",
+   "vis": {
+    "cols": [
+     "Age",
+     "Lesions",
+     "Tried early"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Infancy",
+      "Brainstem, basal ganglia",
+      "Vitamin cocktail"
+     ],
+     [
+      "Childhood",
+      "Stroke like patches",
+      "Arginine, coenzyme Q"
+     ],
+     [
+      "Adult eyes",
+      "Ptosis, frozen gaze",
+      "Watch, pace heart"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Every multisystem case follows the same testing order, and maternal relatives are examined, not just asked. Lactate in blood with spinal fluid with muscle enzymes comes first, then resonance with spectroscopy shows the lactate peak. Muscle biopsy with respiratory chain assays with full mitochondrial sequencing closes the list. Fathers with their children are reassured, while maternal kin are screened and counselled.",
+   "tx": "**Workup order** is fixed: **lactate** in blood and CSF first, then **MRI with spectroscopy** (lactate peak). **Muscle biopsy** with chain assays follows, then **mtDNA sequencing**. **Maternal relatives** are screened; paternal transmission never occurs. **Heteroplasmy** explains why severity varies within families.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lactate in blood and CSF"
+     },
+     {
+      "id": "b",
+      "label": "MRI with lactate peak"
+     },
+     {
+      "id": "c",
+      "label": "Muscle biopsy, chain assays"
+     },
+     {
+      "id": "d",
+      "label": "mtDNA sequencing, counsel"
+     }
+    ]
+   }
+  },
+  {
+   "say": "No cocktail is curative in mitochondrial disease, but several moves change outcomes measurably. Arginine aborts M E L A S stroke like episodes, and pacemakers prevent Kearns Sayre deaths. Coenzyme Q with riboflavin supports most patients, while valproate with smoking with alcohol with fasting harms them. Deafness is aided early, diabetes is screened yearly, and pregnancy is planned with high dose folate support.",
+   "tx": "**Arginine** aborts MELAS episodes; **pacemaker** prevents KSS death. **Coenzyme Q with riboflavin** with vitamin cocktail supports most patients daily. **Valproate, smoking, alcohol, fasting** are banned. **Hearing aids** with yearly **diabetes** screening protect function. **Pregnancy** is planned with specialist cover and trigger avoidance.",
+   "vis": {
+    "cols": [
+     "Move",
+     "Helps",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Arginine in attacks",
+      "MELAS lesions",
+      "Give early, repeat"
+     ],
+     [
+      "Pacemaker in KSS",
+      "Heart block",
+      "Never delay"
+     ],
+     [
+      "Avoid valproate",
+      "All mito patients",
+      "Poisons the chain"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The fatal trap is thrombolysing a M E L A S stroke like episode, which crosses territories and needs arginine instead. The second trap is prescribing valproate for myoclonus, which deepens the energy failure. Missing heart block in Kearns Sayre kills suddenly, so annual E C G is mandatory. And calling ptosis myasthenia wastes years when fatigue tests stay negative and inheritance is maternal.",
+   "tx": "**Exam traps:** MELAS lesions **cross territories**; thrombolysis harms, arginine helps. **Valproate** worsens all mito disease. **KSS needs annual ECG**; block kills suddenly. **Maternal inheritance** with deafness marks mito, not myasthenia. **Lactate raised** in fluids points to the chain, not to shock alone.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Thrombolyse MELAS",
+      "Crosses vessels",
+      "Arginine, not lysis"
+     ],
+     [
+      "Valproate for jerks",
+      "Poisons mitochondria",
+      "Banned in mito"
+     ],
+     [
+      "Ptosis called MG",
+      "Maternal, no fatigue",
+      "Think CPEO"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** follows the syndrome: **Leigh** kills in infancy, **MELAS** recurs with each episode adding deficit, and **KSS** marches toward complete block. **LHON** blinds most eyes permanently with rare late recovery. **Pregnancy with delivery** is usually tolerated; **valproate, smoking and alcohol** are avoided lifelong. **Maternal relatives** need screening with counselling.",
+   "say": "Prognosis in mitochondrial disease depends on the syndrome, so give families a clear picture. Leigh syndrome is usually fatal in infancy. MELAS leaves a new deficit with every stroke-like episode. Kearns-Sayre progresses to complete heart block, so these children need regular cardiac checks. In Leber hereditary optic neuropathy, most eyes never recover useful vision. Maternal relatives should be screened and counselled.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Course",
+     "Counselling point"
+    ],
+    "rows": [
+     [
+      "Leigh",
+      "Fatal in infancy",
+      "Supportive care with family"
+     ],
+     [
+      "MELAS",
+      "Recurrent deficits per episode",
+      "Avoid fasting with illness"
+     ],
+     [
+      "KSS",
+      "Progressive conduction block",
+      "Yearly ECG with pacemaker plan"
+     ],
+     [
+      "LHON",
+      "Permanent visual loss mostly",
+      "Avoid smoke with alcohol"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "For the exam, the facts to lock in are maternal inheritance with heteroplasmy, lactate with ragged red fibres, M E L A S before forty with arginine rescue, valproate banned, Kearns Sayre triad with pacemaker, and Leigh in infants. Stroke like lesions that cross territories define M E L A S and ptosis without fatigue defines C P E O. Memorise the facts in this table exactly as written.",
+   "tx": "**High yield for the exam:** **maternal inheritance** with heteroplasmy defines mito. **Lactate** with **ragged red fibres** confirms energy failure. **MELAS before 40** with arginine rescue; **valproate banned**. **KSS triad** (eyes, retina, block) needs pacemaker. **Leigh** melts the infant brainstem and basal ganglia before age two.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Inheritance",
+      "Maternal only",
+      "Fathers never transmit"
+     ],
+     [
+      "Marker",
+      "Lactate raised",
+      "Blood and CSF"
+     ],
+     [
+      "Biopsy mark",
+      "Ragged red fibres",
+      "Energy failure"
+     ],
+     [
+      "MELAS age",
+      "Before forty",
+      "Stroke like, arginine"
+     ],
+     [
+      "Banned drug",
+      "Valproate",
+      "Poisons chain"
+     ],
+     [
+      "KSS danger",
+      "Heart block",
+      "Pace, annual ECG"
+     ],
+     [
+      "Leigh age",
+      "Infancy",
+      "Brainstem melted"
+     ],
+     [
+      "CPEO clue",
+      "Ptosis, no fatigue",
+      "Versus myasthenia"
+     ]
+    ]
+   }
+  }
+ ],
+ "title": "Mitochondrial Neurological Disorders",
+ "v": 1
+}
