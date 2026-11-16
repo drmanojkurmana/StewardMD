@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "hnc-skullbase-larynx",
+ "subject": "ss-head-neck-surgery",
+ "title": "Skull base, larynx and neck surgery: approaches and airway care",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22nd edition"],
+ "steps": [
+  {
+   "tx": "The skull base forms the floor of the cranium and separates the brain from the sinuses and nasal cavity. Lesions here threaten **cranial nerves 2 to 12** within a small bony area of 25 square centimetres. Chordomas and **jugular paragangliomas** are classic skull base tumours in adults. Management needs a joint ENT and neurosurgical team with imaging over 2 weeks.",
+   "say": "The skull base is the floor of the cranium above the sinuses. Many cranial nerves pass through a small area here. Chordomas and paragangliomas are classic tumours at this site. Care needs a joint ear nose and brain surgery team.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Site", "Common tumour", "Nerves at risk"],
+    "rows": [
+     ["Clivus", "Chordoma", "Nerves 6 and 12"],
+     ["Jugular foramen", "Paraganglioma", "Nerves 9, 10, 11"],
+     ["Skull base, lower part", "Meningioma", "Nerves 3 to 8"]
+    ]
+   }
+  },
+  {
+   "tx": "Skull base tumours grow slowly for 5 to 10 years before symptoms appear, because bone resists spread early. The **notochord remnant** gives rise to chordoma cells along the midline from clivus to sacrum. **Low grade** tumours still recur locally in 15 to 25 percent even after clear margins. Complete excision within 2 cm of vital nerves is often the safe limit.",
+   "say": "Skull base tumours grow slowly over many years before symptoms. Chordoma comes from remnants of early spinal cord tissue. Even slow growing tumours return locally in a quarter of cases. Safe excision near nerves has strict limits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Slow growth 5 to 10 years"},
+     {"id": "b", "label": "Bone resists spread"},
+     {"id": "c", "label": "Local recurrence 15 to 25 percent"},
+     {"id": "d", "label": "Limit excision near nerves"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Endoscopic endonasal surgery reaches the clivus and sphenoid through the **nostril** without external cuts, using a 4 mm telescope. Transfacial and **transmandibular** approaches still help for lateral skull base lesions with carotid involvement. Image guidance accuracy stays within 2 mm of the target during dissection. Operative time for endoscopic cases averages 4 to 6 hours in major centres.",
+   "say": "Endoscopic surgery reaches the skull base through the nostril. Wider facial approaches help when the carotid artery is involved. Image guidance keeps accuracy within two millimetres. Operating times average four to six hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Endoscopic approach", "points": ["Through nostril, no scar", "Best for clivus and sphenoid", "4 mm telescope"]},
+    "right": {"title": "Open approach", "points": ["For lateral skull base", "Better carotid control", "Longer recovery"]}
+   }
+  },
+  {
+   "tx": "Diplopia, nasal blockage and **hoarseness** lasting 12 weeks signal jugular foramen and laryngeal involvement. Glossopharyngeal and vagus palsies cause 9 percent to 12 percent of lower cranial nerve deficits. **Tympanic paragangliomas** present with pulsatile tinnitus in 70 percent and conductive hearing loss in 40 percent. Any lower cranial nerve palsy above 65 years needs neck imaging promptly.",
+   "say": "Double vision, nasal blockage and hoarseness lasting twelve weeks are warning signs. Lower cranial nerve palsies cause swallowing and voice problems. Middle ear paragangliomas cause ringing in most patients. Imaging is needed promptly for nerve palsies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Symptom", "Lesion clue", "Frequency"],
+    "rows": [
+     ["Pulsatile tinnitus", "Tympanic paraganglioma", "70 percent"],
+     ["Voice change", "Vagus involvement", "Near 60 percent"],
+     ["Diplopia", "Clival chordoma", "20 to 30 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "High resolution CT with 1 mm slices shows **bone erosion** around the jugular foramen before surgery. MRI with gadolinium maps dural contact and tumour soft tissue extent in 3 planes. **CT angiography** identifies carotid encasement beyond 270 degrees, which changes the surgical plan. Lumbar puncture is avoided when imaging shows raised pressure or midline shift.",
+   "say": "High resolution C T shows bone erosion before surgery. M R I maps soft tissue extent and dural contact. Angiography shows carotid encasement that changes the plan. Lumbar puncture is avoided when pressure is raised.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "CT 1 mm bone detail"},
+     {"id": "b", "label": "MRI gadolinium soft tissue"},
+     {"id": "c", "label": "CT angiography carotid"},
+     {"id": "d", "label": "Plan joint excision"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Partial laryngectomy preserves voice in selected T2 tumours with only 1 mobile cord and no fixation. **Supracricoid** resection keeps a safe 5 mm margin while saving the cricoid cartilage. Total laryngectomy removes the whole voice box and creates a permanent **stoma**, which needs 20 minutes daily breathing care. Excision beyond thyroid cartilage fixation raises local failure above 20 percent.",
+   "say": "Partial laryngectomy can preserve voice in selected early tumours. Total laryngectomy removes the voice box and makes a breathing hole. The margin must stay clear of cartilage fixation. Speech and breathing care need daily attention.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Partial laryngectomy", "points": ["Voice preserved", "For T2 with mobile cord", "5 mm margin"]},
+    "right": {"title": "Total laryngectomy", "points": ["Permanent stoma", "For fixed or large tumours", "No voice without prosthesis"]}
+   }
+  },
+  {
+   "tx": "Acute airway blockage needs **tracheostomy** under local anesthesia within 30 minutes when intubation fails. Adults need a 7 to 8 mm cuffed tube placed below the obstruction site. **Cricothyroidotomy** with a 14 gauge cannula buys 30 minutes before definitive airway control. Steroids with **Dexamethasone** 8 mg help oedema after burns or infections, but never delay the airway.",
+   "say": "Acute airway blockage needs tracheostomy within thirty minutes if intubation fails. An adult needs a seven to eight millimetre tube. A needle airway buys half an hour of time. Steroids help oedema but never delay securing the airway.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Action", "Size or dose"],
+    "rows": [
+     ["Blocked airway", "Tracheostomy", "Within 30 minutes"],
+     ["Intubation fails", "Cricothyroidotomy", "14 gauge cannula"],
+     ["Oedema", "Dexamethasone", "8 mg dose"]
+    ]
+   }
+  },
+  {
+   "tx": "Total thyroidectomy risks the **recurrent laryngeal nerve** in 1 to 2 percent of cases and the parathyroids in 5 to 8 percent. Checking parathyroid hormone within 6 hours predicts hypocalcemia with 90 percent accuracy. **Levothyroxine** 1.6 mcg per kg restores euthyroid levels after total removal. Graves disease with a 50 gram gland usually suits total surgery over repeated radioiodine.",
+   "say": "Total thyroid removal risks the voice nerve and parathyroid glands. A hormone check within six hours predicts low calcium. Thyroxine replacement is weight based after total removal. Large goitres suit surgery over repeated iodine therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Remove thyroid totally"},
+     {"id": "b", "label": "Check PTH at 6 hours"},
+     {"id": "c", "label": "Replace Levothyroxine 1.6 mcg per kg"},
+     {"id": "d", "label": "Monitor calcium weekly"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Post operative haematoma after neck surgery needs bedside release of sutures within 20 minutes to save the airway. **Chyle leak** after left neck dissection reaches 40 ml per hour in 3 percent of cases. Prolonged intubation beyond **72 hours** in the intensive care unit raises tracheal stenosis risk above 8 percent. Early physiotherapy for 15 minutes twice daily cuts shoulder stiffness markedly.",
+   "say": "Bleeding after neck surgery needs bedside suture release within twenty minutes. Chyle leak after left sided dissection is uncommon but serious. Long intubation beyond three days raises stenosis risk. Early physiotherapy prevents shoulder stiffness.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Problem", "Rate", "First action"],
+    "rows": [
+     ["Haematoma", "1 to 2 percent", "Release sutures in 20 minutes"],
+     ["Chyle leak", "3 percent", "Drain plus diet"],
+     ["Stenosis", "Above 8 percent", "Avoid 72 hour intubation"]
+    ]
+   }
+  },
+  {
+   "tx": "Total laryngectomy with a stoma of 18 mm diameter needs emergency care for **median dose** checks and tube changes. Tracheostomy tubes are changed after 7 days once the track matures in 7 to 10 days. **Voice prosthesis** with Candida valves restores speech in 80 percent of patients within 3 weeks. Airway emergency always precedes cancer staging whenever stridor has lasted more than 24 hours.",
+   "say": "High-yield for the exam remember the stoma size after total voice box removal. Tracheostomy tubes are changed after a week once the track matures. Valve prosthesis restores speech in most patients within three weeks. Airway emergency always comes before cancer staging.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Point", "Figure", "Use"],
+    "rows": [
+     ["Stoma diameter", "18 mm", "After total laryngectomy"],
+     ["First tube change", "7 days", "Track matures"],
+     ["Speech valve success", "80 percent", "Within 3 weeks"]
+    ]
+   }
+  }
+ ]
+}
