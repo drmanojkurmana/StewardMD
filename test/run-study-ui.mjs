@@ -113,10 +113,13 @@ const undoRec = await page.evaluate(() => STUDY._state().stack.u.length);
 ok(undoRec === 2, "the undo stack was restored from storage");
 
 /* ---- zoom and page jump ---- */
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => STUDY._state().sc.scrollTop > 100);
 ok(true, "page jump scrolls to page 2");
+await page.click('[data-act="st-more"]');
 await page.click('[data-act="st-zoom"][data-v="+"]');
+await page.click('[data-act="st-close-more"]');
 ok(await page.evaluate(() => STUDY._state().z === 1.25), "zoom in");
 /* ---- eraser: a touch on a stroke removes the whole stroke; undo restores it ---- */
 await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
@@ -129,6 +132,41 @@ await page.evaluate(() => {
 ok(await live() === 1, "eraser removes the whole stroke it touches");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 2, "undo of an erase restores the stroke");
+
+/* ---- lasso select: loop around stroke, delete selection, undo ---- */
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 11;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.1, 0.1);
+  fire("pointermove", 0.9, 0.1);
+  fire("pointermove", 0.9, 0.35);
+  fire("pointermove", 0.1, 0.35);
+  fire("pointermove", 0.1, 0.1);
+  fire("pointerup", 0.1, 0.1);
+});
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+ok(await page.evaluate(() => !!document.querySelector("#stLassoBar")), "lasso: draws loop and shows selection action bar");
+await page.click('[data-act="st-lasso-del"]');
+ok(await live() === 1, "lasso delete: deletes the selected stroke");
+await page.click('[data-act="st-undo"]');
+ok(await live() === 2, "undo of lasso delete restores the stroke");
+
+/* ---- scribble to erase: fast back-and-forth over a stroke erases it ---- */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 12;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.2);
+  for (let i = 0; i < 4; i++) {
+    fire("pointermove", 0.45, 0.2 + (i % 2 === 0 ? 0.01 : -0.01));
+    fire("pointermove", 0.25, 0.2 + (i % 2 === 0 ? -0.01 : 0.01));
+  }
+  fire("pointerup", 0.35, 0.2);
+});
+ok(await live() === 1, "scribble erase: fast back-and-forth over a stroke erases it");
+await page.click('[data-act="st-undo"]');
+ok(await live() === 2, "undo of scribble erase restores the stroke");
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
@@ -143,11 +181,14 @@ ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await stroke(0.3);
 await page.waitForTimeout(300);
+await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-addpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 2 && STUDY._state().pg[2], null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1,2]", "notebook: page added after the current one");
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => STUDY._state().sc.scrollTop > 100);
+await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-up"]');
 await page.waitForFunction(() => STUDY._state() && JSON.stringify(STUDY._state().nb.ord) === "[2,1]", null, { timeout: 10000 });
 ok(true, "notebook: page 2 moved up");
@@ -160,10 +201,13 @@ await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").cli
 await page.waitForSelector(".st-pg canvas.st-ov");
 await page.waitForFunction(() => STUDY._state() && STUDY._state().strokes.length === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[2,1]", "after reload: notebook page order intact");
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => { const c = document.querySelector('.st-ov[data-n="2"]'); if (!c) return false; const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 4) if (d[i]) return true; return false; }, null, { timeout: 10000 });
 ok(true, "after reload: the stroke is on the page it was drawn on (now second)");
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "1"); await page.click('[data-act="st-go"]');
+await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-delpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "notebook: page deleted after confirm");
@@ -189,7 +233,7 @@ await page.fill("#stQ", "two");
 await page.waitForSelector(".st-hit");
 await page.click(".st-hit");
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
-await page.waitForFunction(() => document.querySelector("#stPage").value === "2" && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
+await page.waitForFunction(() => (document.querySelector("#stCurP") ? document.querySelector("#stCurP").textContent === "2" : document.querySelector("#stTbPage").value === "2") && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
 ok(true, "search: tapping the result opens the PDF at page 2");
 /* resume after reload: wipe the index, open the library again, the PDF is indexed again from page 1 */
 const idb = (store, fn) => page.evaluate(([store, fn]) => new Promise((r) => { const q = indexedDB.open("study"); q.onsuccess = () => { const t = q.result.transaction(store, "readwrite"); new Function("o", fn)(t.objectStore(store)); t.oncomplete = r; }; }), [store, fn]);
@@ -303,7 +347,7 @@ await page.evaluate(async () => { const j = PREP_C._job().job; PREP_CARDS.start(
 await page.click('[data-act="c-kflip"]');
 await page.click('[data-act="st-src"]');
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
-await page.waitForFunction(() => document.querySelector("#stPage").value === "2" && STUDY._state().id !== undefined && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
+await page.waitForFunction(() => (document.querySelector("#stCurP") ? document.querySelector("#stCurP").textContent === "2" : document.querySelector("#stTbPage").value === "2") && STUDY._state().id !== undefined && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
 ok(await page.evaluate((id) => STUDY._state().id === id, linkDoc.id), "a card made from the document opens that document at page 2");
 ok(await page.evaluate((id) => { const l = PREP_C.srcLink({ src: { std: id, p: [2] } }); return /data-act="st-src"/.test(l) && !/[Pp]age/.test(l) && PREP_C.srcLink({ src: { p: [2] } }) === "" && PREP_C.srcLink({}) === ""; }, linkDoc.id), "an answered question made from the document gets the same Open in Study Studio link (srcLink, used by prep.js); other items none");
 /* Explain: nothing is sent until the confirm tap; text and source shown; offline says so */
