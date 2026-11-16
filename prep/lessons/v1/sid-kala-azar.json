@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sid-kala-azar",
+ "title": "Leishmaniasis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Kala-azar (visceral leishmaniasis)** kills without treatment; **Bihar with Jharkhand with Bengal** lead India. **Sandfly night bite** spreads L. donovani; **PKDL skin patches** after cure seed epidemics. **Fever with huge spleen with pancytopenia** marks it; **HIV coinfection** unlocks severe disease. **rK39 rapid test** diagnoses in the field; **splenic aspirate** proves but risks bleed. **Single-dose liposomal amphotericin 10 mg/kg** cures 96% in India.",
+   "say": "Kala-azar with visceral leishmaniasis was reported to kill without treatment, while Bihar with Jharkhand and Bengal led India. Sandfly night bite was reported to spread L donovani, while P K D L skin patches after cure seeded epidemics. Fever with huge spleen and pancytopenia was reported to mark it, while H I V coinfection unlocked severe disease. r K thirty nine rapid test was reported to diagnose in the field, while splenic aspirate proved but risked bleed. Single-dose liposomal amphotericin ten milligrams per kilo was reported to cure ninety six percent in India.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Sandfly bite",
+      "Night, Bihar",
+      "Nets, spray"
+     ],
+     [
+      "Fever, big spleen",
+      "Pancytopenia",
+      "Think VL"
+     ],
+     [
+      "rK39 RDT",
+      "Field test",
+      "Treat fast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prolonged fever with weight loss** with massive splenomegaly defines VL; **hepatomegaly is modest**. **Pancytopenia with hypergammaglobulinaemia** colours labs. **Post-kala-azar dermal nodules** erupt months after cure and infect sandflies. **HIV-VL relapses repeatedly**; **cryptococcal-like wasting** confuses. **Cutaneous ulcers with mucosal espundia** mark other species, not donovani. **Nocturnal sandfly peaks** guide net hours.",
+   "say": "Prolonged fever with weight loss and massive splenomegaly was reported to define V L, while hepatomegaly stayed modest. Pancytopenia with hypergammaglobulinaemia was reported to colour labs. Post-kala-azar dermal nodules were reported to erupt months after cure and infect sandflies. H I V-V L was reported to relapse repeatedly, while cryptococcal-like wasting confused. Cutaneous ulcers with mucosal espundia were reported to mark other species, not donovani. Nocturnal sandfly peaks were reported to guide net hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "VL",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Huge spleen",
+      "Fever months",
+      "Test rK39"
+     ],
+     [
+      "Pancytopenia",
+      "Plus high globulin",
+      "Marrow if unsure"
+     ],
+     [
+      "PKDL nodules",
+      "After cure",
+      "Reservoir"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**rK39 RDT with DAT** diagnose without labs; **splenic aspirate** is gold but bleeds. **Bone marrow is safer** but less sensitive. **HIV testing is mandatory** in every VL case. **PKDL needs slit-skin smear** with PCR. **Treatment failure is defined** by persistent parasites; **relapse follows HIV** within months. **Test of cure is clinical**; antibodies linger years. **Notify the elimination program** for every case.",
+   "say": "r K thirty nine R D T with D A T was reported to diagnose without labs, while splenic aspirate stayed gold but bled. Bone marrow was reported as safer but less sensitive. H I V testing was defined as mandatory in every V L case. P K D L was reported to need slit-skin smear with P C R. Treatment failure was defined by persistent parasites, while relapse was reported to follow H I V within months. Test of cure was reported as clinical, while antibodies lingered years. Notifying the elimination program was ordered for every case.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever plus big spleen"
+     },
+     {
+      "id": "b",
+      "label": "rK39 plus HIV test"
+     },
+     {
+      "id": "c",
+      "label": "Treat plus notify"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Single-dose liposomal amphotericin 10 mg/kg** leads India (96% cure); **FDA schedule 3 mg/kg days 1 to 5, 14 and 21** totals 21. **LAmB 5 mg/kg once with miltefosine 7 days or paromomycin 10 days** cures over 97%. **Antimonials 20 mg/kg for 28 to 30 days** fail half of Bihar (resistance). **HIV-VL needs 30 mg/kg total** (5 mg/kg days 1, 3, 5, 7, 9, 11) with **miltefosine 100 mg daily 14 days**. **ART rebuilds immunity** and cuts relapse.",
+   "say": "Liposomal amphotericin single dose ten milligrams per kilo was reported to lead India with ninety six percent cure, while F D A schedule days one to five, fourteen and twenty one totalled twenty one. L Am B five milligrams per kilo once with miltefosine seven days or paromomycin ten days was reported to cure over ninety seven percent. Antimonials for twenty eight to thirty days were reported to fail half of Bihar through resistance. H I V-V L was reported to need thirty milligrams per kilo total with miltefosine one hundred milligrams daily for fourteen days. A R T was reported to rebuild immunity and cut relapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Dose",
+     "When"
+    ],
+    "rows": [
+     [
+      "LAmB single",
+      "10 mg/kg once",
+      "India first"
+     ],
+     [
+      "LAmB plus miltefosine",
+      "5 mg/kg plus 7 days",
+      "Combos"
+     ],
+     [
+      "Antimonials",
+      "20 mg/kg 28 days",
+      "Bihar fails"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Miltefosine is oral and teratogenic**; contraception during and 3 months after is mandatory. **Paromomycin deafens kidneys** rarely; watch hearing with creatinine. **Amphotericin fevers with chills** need premedication; **hypokalaemia follows** infusions. **PKDL gets miltefosine 12 weeks** or LAmB courses. **Post-treatment Hb weekly** tracks recovery; **spleen shrinks slowly** over months. **Relapse with HIV** retreats with longer courses plus secondary prophylaxis.",
+   "say": "Miltefosine was reported as oral and teratogenic, while contraceptive cover during and five months after stayed mandatory. Paromomycin was reported to deafen kidneys rarely, so hearing with creatinine was watched. Amphotericin was reported to fever with chills needing premedication, while hypokalaemia followed infusions. P K D L was reported to get miltefosine twelve weeks or L Am B courses. Post-treatment H b weekly was reported to track recovery, while spleen shrank slowly over months. Relapse with H I V was reported to retreat with longer courses plus secondary prophylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Harm",
+     "Guard"
+    ],
+    "rows": [
+     [
+      "Miltefosine",
+      "Teratogenic",
+      "Contraceptive 5 months"
+     ],
+     [
+      "Paromomycin",
+      "Ear, kidney",
+      "Watch both"
+     ],
+     [
+      "Amphotericin",
+      "Fever, low K",
+      "Premedicate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oriental sore self-heals** leaving scars; **small lesions get intralesional antimony** till blanched. **Miltefosine 2.5 mg/kg for 28 days** cures most cutaneous disease. **Espundia eats the nose years later** after healed sores; it never heals alone. **Biopsy with PCR proves** sparse parasites. **Treat mucosal aggressively** with systemic drugs; **secondary bacteria kill** via aspiration. **Dapsone with allopurinol trials** stay unproven.",
+   "say": "Oriental sore was reported to self-heal leaving scars, while small lesions got intralesional antimony till blanched. Miltefosine two point five milligrams per kilo for twenty eight days was reported to cure most cutaneous disease. Espundia was reported to eat the nose years later after healed sores, while it never healed alone. Biopsy with P C R was reported to prove sparse parasites. Mucosal disease was reported to need aggressive systemic drugs, while secondary bacteria killed via aspiration. Dapsone with allopurinol trials were reported to stay unproven.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Sign",
+     "Treat"
+    ],
+    "rows": [
+     [
+      "Oriental sore",
+      "Self-heals, scars",
+      "Intralesional if small"
+     ],
+     [
+      "Espundia",
+      "Nose destroyed",
+      "Systemic drugs"
+     ],
+     [
+      "ML risk",
+      "Years after sore",
+      "Follow faces"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV-VL needs 30 mg/kg total LAmB** with miltefosine 100 mg daily 14 days in India; **ART halves deaths**. **Relapse is the rule without immunity**; **secondary prophylaxis** shields till counts recover. **Post-treatment review at 6 months** catches relapse with PKDL. **Elimination needs rK39 screening** with indoor spraying. **No HIV test means no cure plan**; test every case. **Old rK39 stays positive**; confirm fresh disease before retreating.",
+   "say": "H I V-V L was reported to need thirty milligrams per kilo total L Am B with miltefosine one hundred milligrams daily fourteen days in India, while A R T halved deaths. Relapse was reported as the rule without immunity, while secondary prophylaxis shielded till counts recovered. Post-treatment review at six months was reported to catch relapse with P K D L. Elimination was reported to need r K thirty nine screening with indoor spraying. No H I V test was reported to mean no cure plan, so every case was tested. Old r K thirty nine was reported to stay positive, so fresh disease was confirmed before retreating.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Rule",
+     "Act"
+    ],
+    "rows": [
+     [
+      "HIV-VL",
+      "30 mg/kg plus miltefosine",
+      "With ART"
+     ],
+     [
+      "Relapse",
+      "Prophylax till counts up",
+      "Review 6 months"
+     ],
+     [
+      "Old rK39",
+      "Stays positive",
+      "Confirm fresh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Indoor spraying with bed nets** breaks sandfly transmission; **PKDL cases treated** stop epidemics. **Elimination tracks fever-plus-spleen** with rK39 at primary care. **HIV testing with ART** halves VL deaths. **No vaccine exists**; control is vector plus case. **Post-treatment follow-up at 6 months** catches relapse and PKDL early. **Travel advice** covers Bihar belts in transmission season.",
+   "say": "Indoor spraying with bed nets was reported to break sandfly transmission, while treated P K D L cases stopped epidemics. Elimination was reported to track fever-plus-spleen with r K thirty nine at primary care. H I V testing with A R T was reported to halve V L deaths. No vaccine was reported to exist, while control stayed vector plus case. Post-treatment follow-up at six months was reported to catch relapse and P K D L early. Travel advice was reported to cover Bihar belts in transmission season.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Use",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Spray, nets",
+      "Break bite",
+      "Night biters"
+     ],
+     [
+      "rK39 primary care",
+      "Find fast",
+      "Treat at once"
+     ],
+     [
+      "6-month review",
+      "Catch relapse",
+      "PKDL watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** treating rK39-positive old cure as active VL misses other fevers; confirm fresh disease. **Antimonials in Bihar** fail half; LAmB leads. **Stopping at fever gone** misses relapse; follow 6 months. **Miltefosine in pregnancy** harms; test before prescribing. **Missing HIV** dooms cure; test every case. **PKDL left untreated** reseeds villages; treat all patches.",
+   "say": "For the exam, these traps were tabulated as requested. Treating r K thirty nine-positive old cure as active V L was reported to miss other fevers, while confirming fresh disease was advised. Antimonials in Bihar were reported to fail half, while L Am B led. Stopping at fever gone was reported to miss relapse, while following six months was advised. Miltefosine in pregnancy was reported to harm, so testing before prescribing was ordered. Missing H I V was reported to doom cure, so testing every case was ordered. P K D L left untreated was reported to reseed villages, so treating all patches was ordered.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Old rK39 positive",
+      "Not active",
+      "Confirm fresh"
+     ],
+     [
+      "Antimonials Bihar",
+      "Fail half",
+      "LAmB leads"
+     ],
+     [
+      "No HIV test",
+      "Dooms cure",
+      "Test all"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **fever with huge spleen with pancytopenia** marks VL; **rK39 diagnoses**. **Single-dose LAmB 10 mg/kg** cures 96% in India. **Antimonials 20 mg/kg 28 days** fail Bihar. **HIV-VL needs 30 mg/kg total** with miltefosine. **Miltefosine 12 weeks** treats PKDL; **contraception 5 months after**. **PKDL patches** reseed epidemics.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Fever with huge spleen and pancytopenia was reported to mark V L, while r K thirty nine diagnosed it. Single-dose L Am B ten milligrams per kilo was reported to cure ninety six percent in India. Antimonials twenty milligrams per kilo for twenty eight days were reported to fail Bihar. H I V-V L was reported to need thirty milligrams per kilo total with miltefosine. Miltefosine twelve weeks was reported to treat P K D L, with contraception five months after. P K D L patches were reported to reseed epidemics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Big spleen triad",
+      "Fever, pancytopenia",
+      "Classic"
+     ],
+     [
+      "LAmB 10 single",
+      "96 percent India",
+      "Dose asked"
+     ],
+     [
+      "Antimonials fail",
+      "Bihar resistance",
+      "Trap"
+     ],
+     [
+      "PKDL 12 weeks",
+      "Miltefosine",
+      "Duration"
+     ],
+     [
+      "Contraception 5 mo",
+      "After miltefosine",
+      "Safety"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

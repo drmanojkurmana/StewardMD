@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "sid-respiratory-id",
+ "title": "Respiratory tract infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hospital-acquired pneumonia** appears after **48 hours** of admission; ventilator-associated disease begins **48 hours** after ventilation starts. Only **about one-third** of colonised intubated patients progress, so colonisation alone is not pneumonia. Quantitative sampling rules: airway aspirate threshold **10 to the power 6**, protected brush **10 to the power 3**.",
+   "say": "Hospital acquired pneumonia appears after forty eight hours of admission. Ventilator associated pneumonia starts forty eight hours after ventilation starts. Only about one third of colonised intubated patients develop pneumonia. Culture thresholds differ by sample, with airway aspirate at ten to the power six and protected brush at ten to the power three.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pattern", "Onset", "Rule"],
+    "rows": [
+     ["HAP", "48 hours admission", "Hospital flora"],
+     ["VAP", "48 hours ventilation", "Biofilm risk"],
+     ["Colonised", "One third proceed", "Smear helps"]
+    ]
+   }
+  },
+  {
+   "tx": "Risk tracks prior antibiotics, the **endotracheal tube**, and **oropharyngeal colonisation**; Pseudomonas almost never infects untreated patients. Typical organisms include **Pseudomonas aeruginosa**, Klebsiella, Escherichia coli, MRSA and Acinetobacter. Nosocomial patterns show **bronchopneumonia**, unlike lobar community disease. The tube bypasses anti-aspiration defences and damages airway mucosa with each suction pass.",
+   "say": "Risk tracks prior antibiotics, the endotracheal tube and oropharyngeal colonisation. Pseudomonas almost never causes infection in patients without prior antibiotics. Typical organisms are Pseudomonas aeruginosa, Klebsiella, Escherichia coli, MRSA and Acinetobacter. Nosocomial patterns appear as bronchopneumonia, unlike lobar community disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Organism", "Group", "Note"],
+    "rows": [
+     ["Pseudomonas", "Gram-negative", "Prior antibiotics"],
+     ["MRSA", "Gram-positive", "Unit dependent"],
+     ["Acinetobacter", "Gram-negative", "Local antibiogram"]
+    ]
+   }
+  },
+  {
+   "tx": "Three steps drive disease: **oropharyngeal colonisation**, **aspiration** of organisms, and **compromised defences**. Tube biofilm shields bacteria from antibiotics and host killing; suction dislodges fragments that reinoculate the airway. Most intubated patients colonise transiently, but only a **large inoculum** overwhelms host defence.",
+   "say": "Three steps cause disease: oropharyngeal colonisation, aspiration of organisms, and compromised defences. Tube biofilm keeps bacteria safe from antibiotics and host killing. Suction can dislodge fragments that reinoculate the airway. Most intubated patients carry transient colonisation, but only a large inoculum causes pneumonia in a minority.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Colonise"},
+     {"id": "b", "label": "Aspirate"},
+     {"id": "c", "label": "Overwhelm"},
+     {"id": "d", "label": "Pneumonia"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Earliest warning is **worsening oxygenation**; fever, purulent secretions and new infiltrate complete the picture. Aspiration favours **dependent lung segments**, appearing over **days to weeks**, not hours. **Chemical pneumonitis** injures within hours and often needs no antibiotics. Serial oxygenation tracking detects pneumonia earlier than other findings and also monitors response to therapy.",
+   "say": "The earliest warning is worsening oxygenation. Fever, purulent secretions and new infiltrate form the picture. Aspiration targets dependent lung segments and appears over days to weeks, not hours. Chemical pneumonitis causes injury within hours and needs no antibiotics.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Chemical", "points": ["Hours", "Acid injury", "No antibiotics"]},
+    "right": {"title": "Bacterial", "points": ["Days to weeks", "Dependent segments", "Antibiotics needed"]}
+   }
+  },
+  {
+   "tx": "**Quantitative endotracheal aspirate or BAL culture** is the gold standard; sample before antibiotics for true yield. Absent bacteria on **Gram stain** argue against pneumonia. Chest X-ray confirms infiltrate, blood cultures seek spread, and **serial procalcitonin** guides duration. More distal sampling stays more specific and uses a lower colony count threshold for diagnosis.",
+   "say": "Quantitative endotracheal aspirate or BAL culture remains the gold standard for organism and count. Sampling before antibiotics gives true yield for the culture that follows. Absent bacteria on Gram stain argue against pneumonia being the cause here. Chest X-ray confirms infiltrate, blood cultures look for spread, and serial procalcitonin guides duration of therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Finds", "Role"],
+    "rows": [
+     ["Aspirate or BAL", "Organism", "Gold standard"],
+     ["Gram stain", "Bacteria absent", "Argues against"],
+     ["Procalcitonin", "Trend", "Duration guide"]
+    ]
+   }
+  },
+  {
+   "tx": "Empiric therapy pairs **piperacillin-tazobactam 4.5 g IV 6 to 8-hourly** for gram-negatives, with **vancomycin 15 to 20 mg per kg 8 to 12-hourly** when MRSA risk counts. High MDR risk allows **meropenem 1 to 2 g 8-hourly**; **cefepime 2 g 8-hourly** serves as alternative, with **linezolid 600 mg 12-hourly** for MRSA.",
+   "say": "Empiric therapy starts with piperacillin tazobactam four point five grams intravenously six to eight hourly. Vancomycin fifteen to twenty milligrams per kilogram eight to twelve hourly follows when MRSA risk counts. High MDR risk allows meropenem one to two grams eight hourly. Cefepime two grams eight hourly serves as alternative. Linezolid six hundred milligrams twelve hourly follows for MRSA.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Choice", "Dose", "When"],
+    "rows": [
+     ["Pip-taz", "4.5 g q6 to 8h", "First choice"],
+     ["Vancomycin", "15 to 20 mg/kg", "MRSA risk"],
+     ["Meropenem", "1 to 2 g q8h", "High MDR risk"],
+     ["Linezolid", "600 mg q12h", "MRSA alternative"]
+    ]
+   }
+  },
+  {
+   "tx": "**Healthcare-associated pneumonia category is abandoned**; judge resistance from recent hospitalisation and antibiotic exposure. Most courses last **7 days**, with reassessment at **48 to 72 hours** and de-escalation on culture. Routine carbapenem use is discouraged without clear risk. Daily clinical review supports early stopping when culture and response allow it.",
+   "say": "The healthcare associated pneumonia category is abandoned. Resistance comes from recent hospitalisation and antibiotic exposure. Most courses run seven days, with reassessment at forty eight to seventy two hours. De-escalation follows from culture results. Routine carbapenem use is discouraged without clear risk.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Course", "Span", "Rule"],
+    "rows": [
+     ["Most VAP", "7 days", "Reassess at 72h"],
+     ["Culture negative", "Stop", "If improving"],
+     ["HCAP term", "Gone", "Risk judged individually"]
+    ]
+   }
+  },
+  {
+   "tx": "Crude ventilator-associated mortality reaches **50 to 70 percent**, but attributable risk runs **5 to 10 percent** in recent cohorts. Complications include prolonged ventilation with longer ICU and hospital stays, necrotising pneumonia, empyema and bronchiectasis. MDR pathogens carry higher attributable mortality than susceptible ones in every cohort studied.",
+   "say": "Crude ventilator associated mortality is fifty to seventy percent. Attributable risk runs five to ten percent in recent cohorts. Complications are prolonged ventilation, necrotising pneumonia, empyema and bronchiectasis. MDR pathogens carry higher attributable mortality than susceptible ones.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Number", "Note"],
+    "rows": [
+     ["Crude mortality", "50 to 70 percent", "Underlying disease inflates"],
+     ["Attributable", "5 to 10 percent", "Recent cohorts"],
+     ["MDR higher", "Higher", "Than susceptible"]
+    ]
+   }
+  },
+  {
+   "tx": "**CAP clinical criteria overdiagnose VAP** through colonisation and alternative fever sources. Chest X-ray often **worsens early** in treatment, so clinical response leads. Counts above threshold during therapy mean **current antibiotics fail**. Routine anaerobic cover for aspiration needs abscess, necrosis or **poor dentition** only.",
+   "say": "CAP criteria diagnose VAP too often through colonisation and alternative fever sources. Chest X-ray often worsens early in treatment, so clinical response leads. Counts above threshold during therapy indicate failing antibiotics. Routine anaerobic cover for aspiration needs abscess, necrosis or poor dentition only.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Truth", "Do"],
+    "rows": [
+     ["Clinical criteria", "Overdiagnose", "Culture first"],
+     ["X-ray worsens", "Early phase", "Follow clinically"],
+     ["Threshold high on drug", "Resistance", "Change therapy"]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **48 hours** defines both HAP and VAP. **Endotracheal aspirate 10 to the power 6** versus **protected brush 10 to the power 3**. **Piperacillin-tazobactam 4.5 g** plus **vancomycin** covers early empiric needs; **7 days** bounds most courses.",
+   "say": "For the exam, hospital acquired and ventilator associated pneumonia appear after forty eight hours. Endotracheal aspirate threshold is ten to the power six, and protected brush threshold is ten to the power three. Piperacillin tazobactam four point five grams together with vancomycin starts empiric cover. Most courses run seven days.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Detail", "Why asked"],
+    "rows": [
+     ["48 hours", "HAP and VAP", "Definition"],
+     ["ETA 10^6", "Aspirate threshold", "Diagnosis"],
+     ["PSB 10^3", "Brush threshold", "Diagnosis"],
+     ["Pip-taz 4.5 g", "Empiric first", "Dose"],
+     ["Vancomycin", "15 to 20 mg/kg", "MRSA"],
+     ["7 days", "Most courses", "Duration"],
+     ["48 to 72h", "Reassess", "Review"],
+     ["50 to 70 crude", "Mortality", "Context"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

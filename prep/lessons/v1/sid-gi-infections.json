@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "sid-gi-infections",
+ "title": "Infectious diarrhoea and food poisoning",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Diarrhoea** means **3 or more loose stools** in **24 hours** shaping the container. **Acute** lasts **under 2 weeks**, **persistent 2 to 4 weeks**, **chronic beyond 4 weeks**. **Infective dose** spans wide: **10 to 100 organisms** of **Shigella or EHEC** infect, while **Cholera needs 10 to 8 growth**. **About 1.57 million deaths** yearly mark **acute diarrhoea burden** globally. **Blood group O** raises risk from **Cholera, Shigella, EHEC and norovirus**.",
+   "say": "Diarrhoea was defined as three or more loose stools in twenty four hours shaping the container in clinical practice. Acute disease was reported to last under two weeks, persistent disease from two to four weeks, and chronic disease beyond four weeks by duration. Infective dose was reported to span a wide range, with ten to one hundred organisms of Shigella or EHEC infecting, while Cholera needed far larger numbers after growth. About one point five seven million deaths were reported yearly from acute diarrhoea worldwide across regions. Blood group O was reported to raise risk from Cholera, Shigella, EHEC and norovirus in exposed people.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Duration", "Label", "Likely direction"],
+    "rows": [
+     ["Under 2 weeks", "Acute", "Infection likely"],
+     ["2 to 4 weeks", "Persistent", "Parasites, Cdiff workup"],
+     ["Beyond 4 weeks", "Chronic", "Noninfective shift"]
+    ]
+   }
+  },
+  {
+   "tx": "**Watery disease** comes from **ETEC, Cholera, viruses and preformed toxins**, without **fever or blood**. **Bloody disease** comes from **Shigella, Salmonella, Campylobacter, EHEC and Entamoeba**, with **fever and leukocytes**. **Preformed toxin food poisoning** from **Staph or Bacillus cereus** starts in **1 to 6 hours**. **Norovirus and rotavirus** cause **outbreaks with vomiting** and **short illness**. **Clostridioides difficile** follows **antibiotics**, dominating **hospital diarrhoea**. **Travellers disease** is mostly **ETEC and EAEC**, with **Campylobacter common in Asia**.",
+   "say": "Watery disease was reported to arise from ETEC, Cholera, viruses and preformed toxins, usually without fever or blood in stool. Bloody disease was reported to arise from Shigella, Salmonella, Campylobacter, EHEC and Entamoeba, often with fever and stool leukocytes in patients. Preformed toxin food poisoning from Staph or Bacillus cereus was reported to start within one to six hours after eating. Norovirus and rotavirus were reported to cause outbreaks with vomiting and short illness across many settings. Clostridioides difficile was reported to follow antibiotic exposure, dominating hospital diarrhoea in many centres. Travellers disease was reported to be mostly ETEC and EAEC, while Campylobacter stayed common across Asia in travellers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pattern", "Organisms", "Clue"],
+    "rows": [
+     ["Watery, no blood", "ETEC, Cholera, viruses", "No fecal leukocytes"],
+     ["Bloody, febrile", "Shigella, Salmonella", "Dysentery with fever"],
+     ["Vomiting under 6 hours", "Staph, Bacillus cereus", "Preformed toxin"]
+    ]
+   }
+  },
+  {
+   "tx": "**Noninflammatory disease** uses **cholera toxin** to raise **cyclic AMP**, driving **chloride secretion** with **watery flow**. **ETEC heat labile toxin** works the same way, while **heat stable toxin** raises **cyclic GMP**. **Inflammatory disease** uses **invasion or Shiga toxin** to ulcerate **colon or distal bowel**, giving **blood with leukocytes**. **Penetrating organisms** cross **intact mucosa**, multiply in **Peyer patches**, then cause **enteric fever**. **Acid, motility, mucus and flora** resist infection; losing any raises risk.",
+   "say": "Noninflammatory disease was reported to use cholera toxin to raise cyclic AMP, driving chloride secretion with watery flow in the small bowel. ETEC heat labile toxin was reported to work the same way, while heat stable toxin raised cyclic GMP across mucosa. Inflammatory disease was reported to use invasion or Shiga toxin to ulcerate colon and distal bowel, giving blood with leukocytes in stool. Penetrating organisms were reported to cross intact mucosa, multiply in Peyer patches, then cause enteric fever with fever and belly pain. Gastric acid, motility, mucus and resident flora were reported to resist infection, while losing any of them raised risk sharply in exposed people.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "a", "label": "Ingestion"}, {"id": "b", "label": "Adherence toxin"}, {"id": "c", "label": "Secretion rises"}, {"id": "d", "label": "Watery diarrhoea"}],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "**Rice water stools** flag **cholera-like secretion** with **rapid volume loss**. **Bloody mucoid stools** flag **large bowel ulceration** and **dysentery**. **Bloody stools without leukocytes** flag **Shiga toxin EHEC** and **HUS risk**. **Dehydration grades** by signs: **thirst, dry mouth** is mild, **skin tenting with sunken eyes** is moderate, **lethargy with weak pulse and shock** is severe. **Fever** signals **invasion** rather than **simple toxin disease**. **Bulky pale stools** suggest **malabsorptive small bowel disease**.\n",
+   "say": "Rice water stools were reported to flag cholera like secretion with rapid volume loss in many patients across outbreaks. Bloody mucoid stools were reported to flag large bowel ulceration and dysentery with fever and tenesmus. Bloody stools without leukocytes were reported to flag Shiga toxin EHEC and HUS risk in sick patients. Dehydration was reported to grade by signs, with thirst and dry mouth marking mild disease, skin tenting with sunken eyes marking moderate disease, and lethargy with weak pulse marking severe disease. Fever was reported to signal invasion rather than simple toxin disease in most cases. Bulky pale stools were reported to suggest malabsorptive small bowel disease in parasitic illness.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stool clue", "Means", "Act first"],
+    "rows": [
+     ["Rice water", "Cholera secretion", "Replace fluid fast"],
+     ["Bloody with leukocytes", "Invasion dysentery", "Fever workup"],
+     ["Bloody, no leukocytes", "Shiga toxin EHEC", "Avoid antibiotics"]
+    ]
+   }
+  },
+  {
+   "tx": "**First step** splits **watery from inflammatory** by **fecal leukocytes and lactoferrin**. **Stool culture** looks for **Salmonella, Shigella and Campylobacter** in **febrile inflammatory** cases. **Campylobacter needs 42 degree culture**, while **Cholera needs selective media**. **Bloody stools** need **sorbitol culture plus Shiga toxin testing** for **EHEC**. **Hospital diarrhoea** starts with **Cdiff toxin testing**, not **broad culture**. **Multiplex panels** are faster, but **CDC advises follow-up culture** for **susceptibility and typing**.",
+   "say": "The first step was ordered as splitting watery from inflammatory disease by fecal leukocytes and lactoferrin in every patient. Stool culture was ordered for Salmonella, Shigella and Campylobacter in febrile inflammatory cases across hospitals. Campylobacter was reported to need forty two degree culture, while Cholera needed selective media for isolation in labs. Bloody stools were reported to need sorbitol culture plus Shiga toxin testing for EHEC in sick patients. Hospital diarrhoea was ordered to start with Cdiff toxin testing, rather than broad culture in ward practice. Multiplex panels were reported as faster, while CDC advice stayed to follow up with culture for susceptibility and typing in outbreaks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Suspect", "Test", "Why"],
+    "rows": [
+     ["Febrile dysentery", "Stool culture trio", "Find Shigella group"],
+     ["Bloody stool", "Shiga toxin test", "Spot EHEC early"],
+     ["Hospital diarrhoea", "Cdiff toxin test", "Low yield culture"]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral rehydration salts** are **first priority**, since **glucose coupled sodium absorption** stays intact. **Severe dehydration** escalates to **intravenous fluids** with **electrolyte correction**. **Azithromycin** fits only **febrile inflammatory or travellers diarrhoea**, not **simple watery disease**. **Suspected EHEC** avoids **antibiotics and antimotility agents** because of **HUS risk**. **Loperamide** fits only **noninflammatory watery diarrhoea**, never **dysentery**. **Cdiff disease** needs **Vancomycin or Metronidazole** after **stopping the trigger antibiotic**.",
+   "say": "Oral rehydration salts were ordered as first priority, since glucose coupled sodium absorption stayed intact even during toxin secretion in patients. Severe dehydration was reported to escalate to intravenous fluids with electrolyte correction in hospital care. Azithromycin was reported to fit only febrile inflammatory or travellers diarrhoea, not simple watery disease in healthy adults. Suspected EHEC was reported to avoid antibiotics and antimotility agents because of HUS risk in children. Loperamide was reported to fit only noninflammatory watery diarrhoea, never dysentery with fever in sick patients. Cdiff disease was reported to need Vancomycin or Metronidazole after stopping the trigger antibiotic in wards.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Watery, afebrile", "points": ["Rehydrate first priority", "Loperamide if needed", "No routine antibiotic"]},
+    "right": {"title": "Febrile, bloody", "points": ["Culture before drug", "Azithromycin selected", "No antimotility agent"]}
+   }
+  },
+  {
+   "tx": "**Most cases resolve in days** without antibiotics when **watery and afebrile**. **Travellers diarrhoea** lasts **1 to 5 days**, while **C perfringens** rarely exceeds **24 hours**. **Staph and Bacillus cereus emetic** illness lasts **under 12 hours** with **prominent vomiting**. **Antibiotics add no benefit** in **viral toxin disease** and may **prolong carriage**. **Zinc helps children** with **diarrhoea**, reducing **duration and recurrence**. **Hand hygiene with food safety** prevents **outbreak spread** in homes and wards.",
+   "say": "Most cases were reported to resolve in days without antibiotics when diarrhoea stayed watery and afebrile in healthy adults. Travellers diarrhoea was reported to last one to five days, while C perfringens illness rarely exceeded twenty four hours in food borne outbreaks. Staph and Bacillus cereus emetic illness was reported to last under twelve hours with prominent vomiting and little fever. Antibiotics were reported to add no benefit in viral toxin disease, and they may prolong carriage in many patients. Zinc was reported to help children with diarrhoea, reducing duration and recurrence across trials. Hand hygiene with food safety was reported to prevent outbreak spread in homes and wards worldwide.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Illness", "Typical span", "Course"],
+    "rows": [
+     ["Travellers run", "1 to 5 days", "Self limited"],
+     ["C perfringens", "Under 24 hours", "Brief toxin run"],
+     ["Staph emetic", "Under 12 hours", "Vomiting dominant"]
+    ]
+   }
+  },
+  {
+   "tx": "**Dehydration kills** through **shock with kidney failure** if **fluids lag behind losses**. **Immunocompromised hosts** risk **persistent infection, bacteremia and spread** beyond the gut. **Shiga toxin** can trigger **hemolytic uremic syndrome** with **kidney injury**. **Campylobacter** can trigger **Guillain-Barre syndrome** weeks later. **Shigella, Salmonella, Campylobacter and Yersinia** can trigger **reactive arthritis**. **Postinfectious IBS** follows **about 10% of travellers disease**. **Recurrent childhood diarrhoea** drives **stunting, wasting and malnutrition**.",
+   "say": "Dehydration was reported to kill through shock with kidney failure if fluids lagged behind stool losses in sick patients. Immunocompromised hosts were reported to risk persistent infection, bacteremia and spread beyond the gut across many pathogens. Shiga toxin was reported to trigger hemolytic uremic syndrome with kidney injury in young children. Campylobacter was reported to trigger Guillain Barre syndrome weeks later after stool illness in many cases. Shigella, Salmonella, Campylobacter and Yersinia were reported to trigger reactive arthritis with joint pain after dysentery. Postinfectious IBS was reported to follow about ten percent of travellers disease in follow up studies. Recurrent childhood diarrhoea was reported to drive stunting, wasting and malnutrition in poor settings worldwide.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Aftermath", "Precursor", "Timing"],
+    "rows": [
+     ["HUS kidney injury", "Shiga toxin EHEC", "Days after dysentery"],
+     ["Guillain Barre", "Campylobacter", "Weeks after diarrhoea"],
+     ["Reactive arthritis", "Shigella group", "After stool illness"],
+     ["Postinfectious IBS", "Various bacteria", "Weeks to months"]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** **fecal leukocyte smear alone** misleads; **lactoferrin is more sensitive**. **Routine culture** cannot split **pathogenic E coli** from **normal flora**. **Broad culture in hospital** is **low yield**; test **Cdiff first**. **Antimotility agents** worsen **Shigella and Salmonella** and raise **bacteremia risk**. **Multiplex panels** detect **many organisms at once**, confusing choice. **Reheating fried rice** does not destroy **heat stable Bacillus cereus toxin**. **Malaria** also causes **fever with vomiting and diarrhoea** outside the gut.",
+   "say": "For the exam, these traps were listed as core lessons. Fecal leukocyte smear alone was reported to mislead, while lactoferrin stayed more sensitive in lab testing. Routine culture was reported as unable to split pathogenic E coli from normal flora in stool samples. Broad culture in hospital was reported as low yield, so Cdiff testing stayed first in ward practice. Antimotility agents were reported to worsen Shigella and Salmonella disease and raise bacteremia risk. Multiplex panels were reported to detect many organisms at once, confusing antibiotic choice. Reheating fried rice was reported as unable to destroy heat stable Bacillus cereus toxin in food. Malaria was reported to cause fever with vomiting and diarrhoea outside the gut in endemic areas.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Truth", "Rule"],
+    "rows": [
+     ["Smear only", "Misses cases", "Use lactoferrin"],
+     ["Culture every stool", "Low yield in hospital", "Cdiff test first"],
+     ["Reheat to fix", "Toxin survives heat", "Discard leftovers"],
+     ["Antimotility in dysentery", "Worsens invasion", "Avoid blatantly"]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **3 loose stools in 24 hours** defines diarrhoea, **under 2 weeks** is acute. **10 to 100 organisms** suffice for **Shigella**, while **Cholera needs growth**. **Rice water stools** mean **secretion**, **bloody with leukocytes** mean **invasion**. **Bloody without leukocytes** flags **EHEC with HUS risk**, so **avoid antibiotics there**. **ORS first**, **IV fluids for severe**, **Azithromycin for febrile inflammatory only**. **Cdiff follows antibiotics** and **dominates hospital disease**.",
+   "say": "For the exam, these high yield facts were tabulated as requested. Three loose stools in twenty four hours defined diarrhoea, while under two weeks marked acute disease in clinical practice. Ten to one hundred organisms were reported to suffice for Shigella infection, while Cholera needed growth in food before illness. Rice water stools were reported to mean secretion, while bloody stools with leukocytes meant invasion in stool microscopy. Bloody stools without leukocytes were reported to flag EHEC with HUS risk, so antibiotics were avoided there by guidelines. ORS stayed first, intravenous fluids covered severe disease, and Azithromycin covered febrile inflammatory disease only in selected patients. Cdiff disease was reported to follow antibiotics and dominate hospital diarrhoea in many centres.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Detail", "Why asked"],
+    "rows": [
+     ["3 stools, 24 hours", "Definition of diarrhoea", "Define disease"],
+     ["10 to 100", "Shigella dose", "Person to person"],
+     ["Rice water", "Secretion pattern", "Cholera clue"],
+     ["Bloody, no leukocytes", "EHEC, HUS risk", "Avoid antibiotics"],
+     ["ORS priority", "Fluids for severe", "Saves lives"],
+     ["Cdiff after antibiotics", "Hospital dominant", "Test first"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

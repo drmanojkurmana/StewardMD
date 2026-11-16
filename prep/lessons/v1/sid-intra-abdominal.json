@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "sid-intra-abdominal",
+ "title": "Intra-abdominal and hepatobiliary infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Secondary peritonitis** follows perforation of a viscus, while **primary peritonitis** seeds ascites through blood in cirrhosis. Ascitic fluid with **more than 250 PMN per microlitre** diagnoses spontaneous bacterial peritonitis. Fever appears in **80 percent**, disease strikes up to **10 percent** of cirrhotic patients, and recurrence reaches **70 percent** within a year.",
+   "say": "Secondary peritonitis follows perforation of a viscus. Primary peritonitis arises through blood seeding of ascites in cirrhosis. Ascitic fluid with more than two hundred fifty PMN per microlitre diagnoses spontaneous bacterial peritonitis. Fever appears in eighty percent of patients. Disease occurs in up to ten percent of cirrhotic patients. Recurrence occurs in seventy percent within one year.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Source", "Rule"],
+    "rows": [
+     ["Primary", "Ascites blood seeding", "PMN 250"],
+     ["Secondary", "Viscus perforation", "Mixed flora"],
+     ["Cirrhosis base", "Up to 10 percent", "Fever 80 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "Causes split by origin: **cirrhosis with ascites** for primary disease, and **appendix, ulcer, diverticulum** or ischaemic bowel for secondary disease. Biliary disease now seeds most **liver abscesses**, displacing ruptured appendix, while obstructing stones underlie **75 percent** of perinephric abscesses in modern series.",
+   "say": "Causes differ by origin into primary and secondary disease. Cirrhosis with ascites causes primary disease. Appendix, ulcer, diverticulum or ischaemic bowel causes secondary disease. Biliary disease forms most liver abscesses in current series. Obstructing stones are present in seventy five percent of perinephric abscesses in modern series.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cause", "Follows", "Clue"],
+    "rows": [
+     ["Cirrhosis ascites", "Primary", "Pain may hide"],
+     ["Viscus leak", "Secondary", "Mixed flora"],
+     ["Biliary disease", "Liver abscess", "ALP rises"]
+    ]
+   }
+  },
+  {
+   "tx": "A **breached barrier** lets bowel flora into sterile peritoneum; neutrophils arrive first, then mononuclear walls seal survivors into an **abscess**. **Bacteroides fragilis**, just **0.5 percent** of colonic flora, drives abscess localisation through its capsular polysaccharide. Gastric acid leaves chemical irritation, while colonic leak supplies heavy bacterial load.",
+   "say": "A breached barrier lets bowel flora into sterile peritoneum. Neutrophils come first, then mononuclear cells form walls around survivors inside an abscess. Bacteroides fragilis, just zero point five percent of colonic flora, causes abscess localisation through its capsular polysaccharide. Gastric acid leaves chemical irritation, while colonic leak carries heavy bacterial load.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Breach"},
+     {"id": "b", "label": "Peritonitis"},
+     {"id": "c", "label": "Wall off"},
+     {"id": "d", "label": "Abscess"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Secondary peritonitis brings rigid abdomen, guarding and free air; **spontaneous peritonitis** often hides pain, showing fever, encephalopathy, jaundice or **acute kidney injury**. **Liver abscess** may present as fever alone, especially in the elderly; **half of patients** lack classic signs altogether.",
+   "say": "Secondary peritonitis presents with rigid abdomen, guarding and free air. Spontaneous peritonitis often remains painless and causes fever, encephalopathy, jaundice or acute kidney injury. Liver abscess may present as fever alone, especially in the elderly. Half of patients have no classic signs altogether.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Secondary", "points": ["Rigid abdomen", "Free air", "Mixed flora"]},
+    "right": {"title": "Spontaneous", "points": ["Painless often", "Fever alone", "Single organism"]}
+   }
+  },
+  {
+   "tx": "**Diagnostic paracentesis** is the gold standard for ascites, with culture from the tap and ascitic **PMN above 250**. **Contrast-enhanced CT** localises abscess best, while chest X-ray detects pneumoperitoneum. **Alkaline phosphatase rises in 70 percent** of liver abscess, and **amebic serology exceeds 95 percent** sensitive.",
+   "say": "Diagnostic paracentesis is the gold standard for ascites, with culture from the tap and ascitic PMN above two hundred fifty. Contrast enhanced CT helps localise abscess best, and chest X-ray can reveal pneumoperitoneum. Alkaline phosphatase rises in seventy percent of liver abscess. Amebic serology has sensitivity over ninety five percent.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Finds", "Cutoff"],
+    "rows": [
+     ["Paracentesis", "PMN count", "250"],
+     ["CT", "Abscess map", "Best yield"],
+     ["ALP", "Liver abscess", "70 percent"],
+     ["Amebic serology", "Cyst", "95 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "Spontaneous peritonitis takes a **third-generation cephalosporin with intravenous albumin** to cut renal injury. Secondary disease lives or dies by **source control**: early surgery or drainage, not drug selection, drives survival. Antibiotics usually respond within **72 hours**; delayed therapy raises mortality.",
+   "say": "Spontaneous peritonitis takes a third-generation cephalosporin together with intravenous albumin to cut renal injury. Secondary disease depends on source control for outcome. Early surgery or drainage decides survival, and not drug selection. Patients usually improve within seventy two hours. Delayed therapy increases mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease", "Cover", "Saves"],
+    "rows": [
+     ["Spontaneous", "Cephalosporin plus albumin", "Renal protection"],
+     ["Secondary", "Antibiotics alone", "Source control"],
+     ["All", "Early therapy", "72 hours"]
+    ]
+   }
+  },
+  {
+   "tx": "After spontaneous peritonitis, give **secondary antibiotic prophylaxis** because recurrence nears **70 percent** within a year, and treat the underlying liver disease. Abscess care centres on **drainage plus antibiotics**, not prolonged broad therapy alone. CT with oral contrast localises best before intervention.",
+   "say": "After spontaneous peritonitis, give secondary antibiotic prophylaxis because recurrence nears seventy percent within one year. Treat the underlying liver disease at the same time. Abscess care relies on drainage plus antibiotics, and not on prolonged broad therapy alone. CT with oral contrast guides best before intervention.",
+   "vis": {
+    "kind": "table",
+    "cols": ["After", "Prevent", "Target"],
+    "rows": [
+     ["Spontaneous episode", "Secondary prophylaxis", "70 percent recurrence"],
+     ["Liver disease", "Treat cause", "Same course"],
+     ["Abscess", "Drainage", "Oral contrast CT"]
+    ]
+   }
+  },
+  {
+   "tx": "PBP mortality reaches **23 percent at 30 days** and **37 percent at 90 days**; pyogenic liver abscess averages **15 percent**. Splenic and perinephric abscesses kill when diagnosed late, and untreated **splenic abscess** already proves fatal in **37 percent** at autopsy in one series.",
+   "say": "Spontaneous peritonitis mortality is twenty three percent at thirty days and thirty seven percent at ninety days. Pyogenic liver abscess runs at fifteen percent mortality. Splenic and perinephric abscesses carry high mortality when diagnosed late. Untreated splenic abscess is already fatal in thirty seven percent at autopsy in one series.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease", "Mortality", "When"],
+    "rows": [
+     ["SBP 30 days", "23 percent", "Cirrhosis"],
+     ["SBP 90 days", "37 percent", "Late"],
+     ["Liver abscess", "15 percent", "Treated"]
+    ]
+   }
+  },
+  {
+   "tx": "The **250 PMN threshold** and **single-organism rule** apply only to spontaneous disease; mixed flora means secondary source. Fever with leukocytosis in pancreatitis does **not** equal infected necrosis. **Hypervirulent Klebsiella** seeds eye and lung alongside liver abscess, a signature worth memory.",
+   "say": "The two hundred fifty PMN threshold and single organism rule apply only to spontaneous disease. Mixed flora indicates secondary source. Fever with leukocytosis in pancreatitis does not equal infected necrosis. Hypervirulent Klebsiella involves eye and lung alongside liver abscess, a signature worth memory.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Truth", "Catches"],
+    "rows": [
+     ["PMN 250 always", "SBP only", "Mixed growth"],
+     ["Pancreatitis fever", "Inflammation", "Infected necrosis"],
+     ["Fever absent", "Liver possible", "Elderly clues"]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **PMN above 250** diagnoses spontaneous peritonitis; mixed flora means secondary source. **Third-generation cephalosporin plus albumin** treats spontaneous disease. **Source control** decides secondary outcome; **70 percent** recur within a year, and **alkaline phosphatase** clues liver abscess.",
+   "say": "For the exam, ascitic fluid PMN above two hundred fifty diagnoses spontaneous bacterial peritonitis. Mixed flora always indicates a secondary source. Spontaneous disease is treated with third generation cephalosporin plus albumin in most protocols. Source control decides secondary outcome in every case. Seventy percent recur within one year. Alkaline phosphatase suggests liver abscess and deserves recall.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Detail", "Why asked"],
+    "rows": [
+     ["PMN 250", "SBP diagnosis", "Gold test"],
+     ["Mixed flora", "Secondary source", "Rule"],
+     ["Cephalosporin plus albumin", "SBP treatment", "Renal protection"],
+     ["Source control", "Secondary survival", "Rule"],
+     ["70 percent", "Recurrence year", "Prophylaxis"],
+     ["ALP 70", "Liver clue", "Lab"],
+     ["80 percent", "Fever SBP", "Clinical"],
+     ["10 percent", "Cirrhosis SBP", "Risk"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sid-meningitis",
+ "title": "Bacterial meningitis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Bacterial meningitis kills within hours**; **fever with neck stiffness with altered sensorium** is the classic triad, often incomplete. **Pneumococcus leads adults**, meningococcus teens and epidemics, Hib unvaccinated kids, Listeria elderly and neonates. **Petechial purpura with shock** marks meningococcaemia; **Waterhouse-Friderichsen bleeds adrenals** in fulminant sepsis. **Kernig with Brudzinski** support, never exclude.",
+   "say": "Fever with neck stiffness and altered sensorium was reported to kill within hours as the classic triad, often incomplete. Pneumococcus was reported to lead adults, meningococcus teens and epidemics, Hib unvaccinated kids and Listeria elderly and neonates. Petechial purpura with shock was reported to mark meningococcaemia, while Waterhouse-Friderichsen was reported to bleed adrenals in fulminant sepsis. Kernig with Brudzinski were reported to support, never exclude.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bug",
+     "Victim",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Pneumococcus",
+      "Adults",
+      "Triad, coma"
+     ],
+     [
+      "Meningococcus",
+      "Teens, epidemics",
+      "Purpura, shock"
+     ],
+     [
+      "Listeria",
+      "Elderly, neonates",
+      "Rhombencephalitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Headache with photophobia and vomiting** opens most cases; **seizures in a third** warn cortex. **Bulging fontanelle in infants** replaces neck stiffness; **poor feeding with lethargy** is the neonatal triad. **Cranial nerve palsies** mark basilar disease (TB, crypto). **Rash that does not blanch** is meningococcaemia till proved otherwise. **Fever alone in asplenia** can be pneumococcal meningitis.",
+   "say": "Headache with photophobia and vomiting was reported to open most cases, while seizures in a third warned cortex. Bulging fontanelle in infants was reported to replace neck stiffness, while poor feeding with lethargy formed the neonatal triad. Cranial nerve palsies were reported to mark basilar disease as in T B and crypto. Rash that did not blanch was reported as meningococcaemia till proved otherwise. Fever alone in asplenia was reported to hide pneumococcal meningitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Means",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Triad present",
+      "Meningitis likely",
+      "LP at once"
+     ],
+     [
+      "Purpura",
+      "Meningococcus",
+      "Penicillin, isolate"
+     ],
+     [
+      "Bulging fontanelle",
+      "Infant pressure",
+      "Urgent tap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood cultures twice, then LP at once**; **opening pressure with cell count, protein and CSF-to-blood glucose** decides. **Neutrophils with low glucose (below 40 percent of blood) with high protein** marks bacterial. **Gram stain guides** the first hour; **PCR panels** catch partially treated cases. **CT first only** with focal signs, seizures, immunocompromise or papilloedema; **antibiotics before CT**, never after. **Lumbar puncture is unsafe** with coagulopathy or mass effect.",
+   "say": "Blood cultures twice then L P at once were ordered, while opening pressure with cell count, protein and C S F-to-blood glucose decided. Neutrophils with low glucose below forty percent of blood and high protein were reported to mark bacterial disease. Gram stain was reported to guide the first hour, while P C R panels caught partially treated cases. C T first only with focal signs, seizures, immunocompromise or papilloedema was advised, while antibiotics were given before C T, never after. Lumbar puncture was reported as unsafe with coagulopathy or mass effect.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever plus stiff neck"
+     },
+     {
+      "id": "b",
+      "label": "Cultures plus LP"
+     },
+     {
+      "id": "c",
+      "label": "Ceftriaxone plus vanco"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ceftriaxone 2 g 12-hourly plus vancomycin** covers 16 to 50 years; **add ampicillin 2 g 4-hourly past 50, in pregnancy or immunocompromise** for Listeria. **Dexamethasone 10 mg 6-hourly for 4 days**, first dose 20 minutes before or with antibiotics. **Add acyclovir where encephalitis features** (temporal signs, HSV risk) till PCR clears. **Meropenem 2 g 8-hourly** replaces ceftriaxone in beta-lactam allergy or neurosurgical cases. **Shunt infections add anti-pseudomonas** cover with neurosurgery.",
+   "say": "Ceftriaxone two grams twelve-hourly plus vancomycin was reported to cover sixteen to fifty years, while ampicillin two grams four-hourly past fifty, in pregnancy or immunocompromise was added for Listeria. Dexamethasone ten milligrams six-hourly for four days was reported, with the first dose twenty minutes before or with antibiotics. Acyclovir was added where encephalitis featured temporal signs or H S V risk till P C R cleared. Meropenem two grams eight-hourly was reported to replace ceftriaxone in beta-lactam allergy or neurosurgical cases. Shunt infections were reported to add anti-pseudomonal cover with neurosurgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Dose",
+     "Who"
+    ],
+    "rows": [
+     [
+      "Ceftriaxone plus vanco",
+      "2 g q12h",
+      "Age 16 to 50"
+     ],
+     [
+      "Add ampicillin",
+      "2 g q4h",
+      "Over 50, pregnant"
+     ],
+     [
+      "Dexamethasone",
+      "10 mg q6h 4 days",
+      "With first dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pneumococcus narrows to ceftriaxone alone** if susceptible, 10 to 14 days total. **Meningococcus takes penicillin or ceftriaxone 7 days** (5 if recovered fast); **household contacts get rifampicin, ciprofloxacin or ceftriaxone** prophylaxis. **Listeria takes ampicillin 21 days minimum**; stop steroids once known. **Gram-negatives take 21 days** with source removal. **Hib takes 7 to 10 days**; **vaccinate contacts** per schedule.",
+   "say": "Pneumococcus was reported to narrow to ceftriaxone alone if susceptible, for ten to fourteen days total. Meningococcus was reported to take penicillin or ceftriaxone for seven days, five if recovered fast, while household contacts got rifampicin, ciprofloxacin or ceftriaxone prophylaxis. Listeria was reported to take ampicillin for twenty one days minimum, while steroids were stopped once known. Gram-negatives were reported to take twenty one days with source removal. Hib was reported to take seven to ten days, while contacts were vaccinated per schedule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bug",
+     "Drug days",
+     "Contacts"
+    ],
+    "rows": [
+     [
+      "Pneumococcus",
+      "10 to 14",
+      "Vaccinate"
+     ],
+     [
+      "Meningococcus",
+      "7 (5 if well)",
+      "Prophylax all"
+     ],
+     [
+      "Listeria",
+      "21 plus",
+      "No prophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neonates get group B strep with E. coli**; **ampicillin plus cefotaxime or gentamicin** covers. **Elderly get Listeria**; add ampicillin by default. **Asplenia invites fulminant pneumococcus**; vaccinate electively. **Post-neurosurgery grows Gram-negatives with staph**; vancomycin with meropenem or cefepime leads. **CSF leak after trauma** seeds recurrent pneumococcus; repair the fistula.",
+   "say": "Neonates were reported to get group B strep with E coli, while ampicillin with cefotaxime covered. Elderly were reported to get Listeria, so ampicillin was added by default. Asplenia was reported to invite fulminant pneumococcus, so vaccinating electively was advised. Post-neurosurgery was reported to grow Gram-negatives with staph, while vancomycin with meropenem or cefepime led. C S F leak after trauma was reported to seed recurrent pneumococcus, so repairing the fistula was advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Host",
+     "Bugs",
+     "Cover"
+    ],
+    "rows": [
+     [
+      "Neonate",
+      "GBS, E. coli",
+      "Amp plus CTX"
+     ],
+     [
+      "Elderly",
+      "Listeria",
+      "Add ampicillin"
+     ],
+     [
+      "Neurosurgical",
+      "Gram-negatives",
+      "Vanco plus mero"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Deafness follows pneumococcal meningitis**; **audiometry before discharge** catches it. **Subdural effusions** complicate infant Hib disease. **Hyponatraemia (SIADH)** needs fluid restriction with sodium watch. **Hydrocephalus with infarcts** follows basilar disease. **Repeat LP only without improvement at 48 hours**; **no routine re-tap** before stopping in improvers. **Seizures need benzodiazepines**; prophylaxis unproven.",
+   "say": "Deafness was reported to follow pneumococcal meningitis, so audiometry before discharge was reported to catch it. Subdural effusions were reported to complicate infant Hib disease. Hyponatraemia with S I A D H was reported to need fluid restriction with sodium watch. Hydrocephalus with infarcts was reported to follow basilar disease. Repeat L P only without improvement at forty eight hours was advised, while routine re-tap before stopping in improvers was never advised. Seizures were reported to need benzodiazepines, while prophylaxis stayed unproven.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sequel",
+     "Check",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Deafness",
+      "Audiometry",
+      "Hearing aid"
+     ],
+     [
+      "Effusion kids",
+      "Watch",
+      "Drain if tense"
+     ],
+     [
+      "No better 48h",
+      "Repeat LP",
+      "Broaden"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hourly neuro obs with pupils** leads the first day; watch seizures, hyponatraemia and hydrocephalus. **Keep glucose with sodium normal**; avoid hypotonic fluids but never restrict the hypovolaemic. **ICU for coma, shock or status**; isolate meningococcus till 24 hours of antibiotics. **Repeat LP only without improvement at 48 hours**. **Venous thrombosis with subdural empyema** complicate silently; image deterioration.",
+   "say": "Hourly neuro obs with pupils was reported to lead the first day, while seizures, hyponatraemia and hydrocephalus were watched. Keeping glucose with sodium normal was advised, while hypotonic fluids were avoided but the hypovolaemic was never restricted. I C U for coma, shock or status was advised, while meningococcus was isolated till twenty four hours of antibiotics. Repeat L P only without improvement at forty eight hours was advised. Venous thrombosis with subdural empyema were reported to complicate silently, so deterioration was imaged.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Watch",
+     "Rule",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Neuro hourly",
+      "GCS, pupils",
+      "First day"
+     ],
+     [
+      "Sodium, glucose",
+      "Keep normal",
+      "No hypotonic"
+     ],
+     [
+      "Isolate meningococcus",
+      "24 hours of drugs",
+      "Then open"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** normal CT never rules out; LP decides. **Antibiotics after CT** kills; dose first. **Steroids after 12 hours** add harm without benefit. **Stopping vancomycin only on proven susceptibility**; never on guesswork. **Discharging without audiometry** misses deafness. **Meningococcal contacts without prophylaxis** seed the next case. **Treating viral CSF with antibacterials** wastes cover and selects resistance.",
+   "say": "For the exam, these traps were tabulated as requested. Normal C T was reported to never rule out, while L P decided. Antibiotics after C T were reported to kill, while dosing first was advised. Steroids after twelve hours were reported to add harm without benefit. Stopping vancomycin only on proven susceptibility was advised, never on guesswork. Discharging without audiometry was reported to miss deafness. Meningococcal contacts without prophylaxis were reported to seed the next case. Treating viral C S F with antibacterials was reported to waste cover and select resistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "CT then drugs",
+      "Kills",
+      "Dose first"
+     ],
+     [
+      "Steroids late",
+      "Harms",
+      "Within 12 hours"
+     ],
+     [
+      "No audiometry",
+      "Misses deafness",
+      "Test all"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **triad plus purpura** sorts bacterial; **Kernig supports**. **Cultures then LP**; **CT only if coma, focal or papilloedema**. **Ceftriaxone 2 g 12-hourly plus vanco** empirical; **add ampicillin 2 g 4-hourly past 50**. **Dexamethasone 10 mg 6-hourly 4 days** with first dose. **Meningococcus 7 days**; contacts get prophylaxis. **Audiometry before discharge** catches deafness.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Triad plus purpura was reported to sort bacterial, while Kernig supported. Cultures then L P were ordered, while C T only if coma, focal signs or papilloedema was advised. Ceftriaxone two grams twelve-hourly plus vanco was reported empirical, while ampicillin two grams four-hourly past fifty was added. Dexamethasone ten milligrams six-hourly for four days was ordered with the first dose. Meningococcus for seven days was reported, while contacts got prophylaxis. Audiometry before discharge was reported to catch deafness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Triad, purpura",
+      "Bacterial",
+      "Bedside"
+     ],
+     [
+      "2 g q12h plus vanco",
+      "Empirical",
+      "Dose asked"
+     ],
+     [
+      "Dexa 10 q6h 4 days",
+      "With dose one",
+      "Steroid rule"
+     ],
+     [
+      "Meningococcus 7 days",
+      "Prophylax contacts",
+      "Duration"
+     ],
+     [
+      "Audiometry",
+      "Before discharge",
+      "Sequel"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

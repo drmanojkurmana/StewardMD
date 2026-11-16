@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "module": "sid-skin-bone-joint",
+ "title": "Skin, soft tissue, bone and joint infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cellulitis and erysipelas** form non-purulent skin infection, **abscess** forms pus, and **necrotising fasciitis** destroys fascia fast. A **LRINEC score of 6 or more** suggests necrotising infection, with **8 or more** giving over **90 percent** positive predictive value. Even **5 days** of antibiotics need early reassessment when pain exceeds skin signs.",
+   "say": "Cellulitis and erysipelas form non-purulent skin infection. Abscess forms pus, and necrotising fasciitis destroys fascia fast. A LRINEC score of six or more suggests necrotising infection, with eight or more giving over ninety percent positive predictive value. Even five days of antibiotics need early reassessment when pain exceeds skin signs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Clues", "Rule"],
+    "rows": [
+     ["Cellulitis", "Poorly demarcated", "Beta-lactam"],
+     ["Erysipelas", "Sharp edge", "Same cover"],
+     ["Abscess", "Fluctuant pus", "Drain first"],
+     ["Necrotising", "Pain disproportionate", "Surgery now"]
+    ]
+   }
+  },
+  {
+   "tx": "Non-purulent disease follows **Streptococcus pyogenes**, while **abscess favours Staphylococcus aureus**, including MRSA. Deep or chronic wounds turn polymicrobial with gram-negatives and anaerobes, especially diabetic feet. Trauma, injection drug use, venous oedema, diabetes and immune compromise all raise risk, and **bilateral red legs are rarely cellulitis**.",
+   "say": "Non-purulent disease follows Streptococcus pyogenes, while abscess involves Staphylococcus aureus, including MRSA. Deep or chronic wounds carry gram-negative organisms and anaerobes, especially with diabetic foot ulceration. Trauma, injection drug use, venous oedema, diabetes and immune compromise all increase risk. Bilateral red legs are rarely cellulitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Non-purulent", "points": ["Streptococcus", "No pus", "Beta-lactam"]},
+    "right": {"title": "Purulent", "points": ["Staph aureus", "Pus present", "MRSA cover"]}
+   }
+  },
+  {
+   "tx": "Bacteria breach skin, spread laterally and provoke acute inflammation; pus walls off as **abscess** or tracks along deep fascia in **necrotising fasciitis**. Fascial thrombosis and toxin release drive rapid necrosis and septic shock. On bone and hardware, biofilm shields organisms from drugs and immunity, so devitalised bone and implants resist antibiotics alone.",
+   "say": "Bacteria breach skin, spread laterally and provoke acute inflammation. Pus remains walled off as abscess or extends along deep fascia in necrotising fasciitis. Fascial thrombosis and toxin release cause rapid necrosis and septic shock. On bone and hardware, organisms remain protected by biofilm, so devitalised bone and implants resist antibiotics alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Breach"},
+     {"id": "b", "label": "Spread"},
+     {"id": "c", "label": "Pus or fascia"},
+     {"id": "d", "label": "Shock"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "**Pain out of proportion** with dishwater exudate and bullae marks **necrotising fasciitis**, a surgical emergency. **Erysipelas** shows a bright raised plaque with a **sharply demarcated** edge, while **fluctuant tenderness** means pus. A **probe-to-bone wound** predicts osteomyelitis with **90 percent** positive predictive value in high-risk feet.",
+   "say": "Pain out of proportion with dishwater exudate and bullae indicates necrotising fasciitis. Erysipelas presents as a bright raised plaque with a sharply demarcated edge. Fluctuant tenderness indicates pus collection. A probe to bone wound suggests osteomyelitis with ninety percent positive predictive value in high-risk feet.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Points to", "Acts"],
+    "rows": [
+     ["Dishwater", "Necrotising", "Explore now"],
+     ["Sharp edge", "Erysipelas", "Beta-lactam"],
+     ["Probe to bone", "Osteomyelitis", "MRI, biopsy"]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood cultures before any antibiotics** and **pus culture** guide therapy; antibiotics first slash yield. **MRI is the gold standard** for osteomyelitis and vertebral disease, with **CRP raised in 100 percent** and **ESR in 98 percent** of vertebral cases. **Surgical exploration** diagnoses necrotising infection; do not wait for imaging when toxicity is high.",
+   "say": "Blood cultures before any antibiotics and pus culture guide therapy. Antibiotic pretreatment reduces culture yield. MRI is the gold standard for osteomyelitis and vertebral disease. CRP is raised in one hundred percent and ESR in ninety eight percent of vertebral cases. Surgical exploration diagnoses necrotising infection, so do not wait for imaging when toxicity is high.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Finds", "Role"],
+    "rows": [
+     ["Blood culture", "Bacteraemia", "Before antibiotics"],
+     ["MRI", "Bone change", "Gold standard"],
+     ["Explore", "Fascial necrosis", "Diagnostic"]
+    ]
+   }
+  },
+  {
+   "tx": "Mild cellulitis takes **cephalexin 500 mg 6-hourly** or **amoxicillin-clavulanate 625 mg 8-hourly**; moderate disease needs **cefazolin 1 g IV 8-hourly** or **ceftriaxone 1 g daily**. Severe disease combines **vancomycin with piperacillin-tazobactam 4.5 g 6 to 8-hourly**. Necrotising fasciitis adds **clindamycin 600 to 900 mg 8-hourly** plus immediate debridement.",
+   "say": "Mild cellulitis is treated with cephalexin five hundred milligrams six hourly, or amoxicillin clavulanate six hundred twenty five milligrams eight hourly. Moderate disease requires cefazolin one gram intravenously eight hourly, or ceftriaxone one gram daily. Severe disease requires vancomycin combined with piperacillin tazobactam four point five grams six to eight hourly. Necrotising fasciitis requires clindamycin six hundred to nine hundred milligrams eight hourly, plus immediate surgical debridement.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Grade", "Drug", "Dose"],
+    "rows": [
+     ["Mild", "Cephalexin", "500 mg q6h"],
+     ["Moderate", "Cefazolin", "1 g q8h"],
+     ["Severe", "Vanco plus pip-taz", "4.5 g q6 to 8h"],
+     ["Necrotising", "Clindamycin", "600 to 900 mg q8h"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cellulitis courses run 5 days**, extended only if improving slowly; MRSA abscess regimens run **5 to 10 days**. Oral MRSA options include **co-trimoxazole 160 over 800 mg twice daily** or **doxycycline 100 mg twice daily**. For vertebral osteomyelitis, **6 and 12 weeks** cured equally in trial data, so do not default to the longer course.",
+   "say": "Cellulitis courses run five days and extend only if improving slowly. MRSA abscess regimens run five to ten days. Oral MRSA options follow as co trimoxazole one hundred sixty over eight hundred milligrams twice daily, or doxycycline one hundred milligrams twice daily. For vertebral osteomyelitis, six and twelve weeks cured equally in trial data, so do not default to the longer course.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Course", "Span", "Rule"],
+    "rows": [
+     ["Cellulitis", "5 days", "Extend if slow"],
+     ["MRSA abscess", "5 to 10 days", "Oral options"],
+     ["Vertebral", "6 or 12 weeks", "Equal cure"]
+    ]
+   }
+  },
+  {
+   "tx": "Delay lets infection reach sepsis, organ failure and limb loss; chronic wounds progress from tibia, spine and joint into **septic arthritis** and **pyomyositis**. Vertebral disease causes neuro-deficit from epidural abscess in **about one-third** of cases. Early debridement and source control decide outcome more than drug choice alone.",
+   "say": "Delay lets infection reach sepsis, organ failure and limb loss. Chronic wounds extend from tibia, spine and joint into septic arthritis and pyomyositis. Vertebral disease causes neuro deficit from epidural abscess in about one third of cases. Early debridement and source control decide outcome more than drug choice alone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Danger", "How often", "Saves"],
+    "rows": [
+     ["Severe sepsis", "Occasionally", "Early surgery"],
+     ["Neuro deficit", "One third", "Urgent MRI"],
+     ["Chronic osteomyelitis", "Often", "Debridement"]
+    ]
+   }
+  },
+  {
+   "tx": "**Bilateral red legs are rarely cellulitis**; venous stasis mimics it. Do not add **routine MRSA cover** for simple non-purulent cellulitis. **Normal X-ray** never excludes acute osteomyelitis, and **antibiotics before cultures** in stable patients destroy yield. Bone scan within **1 year** of surgery misleads through remodelling.",
+   "say": "Bilateral red legs are rarely cellulitis because venous stasis can mimic it. Routine MRSA cover is unnecessary for simple non-purulent cellulitis. Normal X-ray does not exclude acute osteomyelitis. Antibiotics before cultures in stable patients reduce culture yield. Bone scan uptake within one year of surgery reflects remodelling, not infection.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Truth", "Do"],
+    "rows": [
+     ["Bilateral red legs", "Stasis mimic", "Do not label"],
+     ["Normal X-ray", "Acute disease", "Test further"],
+     ["Antibiotics first", "Yield falls", "Culture first"]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **cephalexin 500 mg 6-hourly** treats mild cellulitis; **ceftriaxone 1 g daily** covers moderate disease. **Clindamycin 600 to 900 mg 8-hourly** suppresses toxin in necrotising infection. **LRINEC 6 or more** flags necrotising fasciitis, **probe-to-bone** flags osteomyelitis, and **5 days** bounds cellulitis.",
+   "say": "For the exam, mild cellulitis is treated with cephalexin five hundred milligrams six hourly. Moderate disease requires ceftriaxone one gram daily. Clindamycin six hundred to nine hundred milligrams eight hourly reduces toxin in necrotising infection. A LRINEC score of six or more suggests necrotising fasciitis. Probe to bone suggests osteomyelitis, and cellulitis courses run five days.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Detail", "Why asked"],
+    "rows": [
+     ["Cephalexin", "500 mg q6h", "Mild cellulitis"],
+     ["Ceftriaxone", "1 g daily", "Moderate disease"],
+     ["Clindamycin", "600 to 900 mg", "Toxin suppression"],
+     ["LRINEC", "6 or more", "Necrotising flag"],
+     ["Probe to bone", "Predicts 90 percent", "Osteomyelitis"],
+     ["5 days", "Cellulitis span", "Duration"],
+     ["MRI", "Gold standard", "Osteomyelitis"],
+     ["CRP 100, ESR 98", "Vertebral cases", "Lab clue"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
