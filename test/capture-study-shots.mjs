@@ -17,9 +17,11 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const targetArg = process.argv[2] || "study-p4";
 const OUT_DIR = targetArg === "p1"
   ? join(HERE, "..", ".fleet-reports", "study-p1", "shots")
-  : targetArg.startsWith("study-")
-    ? join(HERE, "..", ".fleet-reports", targetArg)
-    : join(HERE, "..", ".fleet-reports", "study-ui", targetArg);
+  : targetArg === "p2"
+    ? join(HERE, "..", ".fleet-reports", "study-p2", "shots")
+    : targetArg.startsWith("study-")
+      ? join(HERE, "..", ".fleet-reports", targetArg)
+      : join(HERE, "..", ".fleet-reports", "study-ui", targetArg);
 mkdirSync(OUT_DIR, { recursive: true });
 
 const PORT = await freePort();
@@ -349,6 +351,37 @@ for (const dev of DEVICES) {
       console.log(`Saved ${tag}-p1-eraser-popover.png`);
     }
 
+    // 7c. Phase 2: lasso settings strip + selection with handles, selection menu, shapes strip
+    if (mode === "p2" && await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="lasso"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-lasso-settings.png`) });
+      console.log(`Saved ${tag}-p2-lasso-settings.png`);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect(), id = 3;
+        const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.1, 0.1); fire("pointermove", 0.9, 0.1); fire("pointermove", 0.9, 0.35); fire("pointermove", 0.1, 0.35); fire("pointermove", 0.1, 0.1); fire("pointerup", 0.1, 0.1);
+      });
+      await page.waitForSelector("#stLassoBar", { timeout: 5000 }).catch(() => {});
+      await sleep(200); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-selection.png`) });
+      console.log(`Saved ${tag}-p2-selection.png`);
+      if (await page.locator('[data-act="st-lasso-color"]').count()) {
+        await page.click('[data-act="st-lasso-color"]');
+        await page.waitForSelector("#stSelColor", { timeout: 5000 }).catch(() => {});
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-color.png`) });
+        console.log(`Saved ${tag}-p2-color.png`);
+      }
+      await page.click('[data-act="st-lasso-done"]');
+      await page.click('[data-act="st-tool"][data-v="shapes"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-shapes.png`) });
+      console.log(`Saved ${tag}-p2-shapes.png`);
+    }
+
     // 8. Page sheet
     if (await page.locator('[data-act="st-page-sheet"]').count()) {
       await page.click('[data-act="st-page-sheet"]');
@@ -404,6 +437,65 @@ for (const dev of DEVICES) {
   }
 }
 
+/* Phase 3: pages and navigation — extra captures to .fleet-reports/study-p3 */
+const P3_DIR = join(HERE, "..", ".fleet-reports", "study-p3");
+mkdirSync(P3_DIR, { recursive: true });
+for (const dev of DEVICES) {
+  for (const theme of THEMES) {
+    const ctx = await browser.newContext({ viewport: { width: dev.width, height: dev.height }, deviceScaleFactor: 2 });
+    const page = await ctx.newPage();
+    await page.route("**/api/**", r => r.fulfill({ status: 404, body: "{}" }));
+    await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = () => "Clinical Notes"; });
+    await page.goto(BASE + "?prep=1&study=1", { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
+    await page.evaluate(() => { ["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(k=>{const e=document.getElementById(k); if(e) e.remove();}); PREP.open(); });
+    await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row, .pnv-tab", { timeout: 30000 });
+    await page.evaluate((th)=>document.body.classList.toggle("dark", th==="dark"), theme);
+    await page.evaluate(() => new Promise(r=>{ const q=indexedDB.deleteDatabase("study"); q.onsuccess=q.onerror=q.onblocked=()=>r(); }));
+    await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+    await page.waitForSelector("#stLib");
+    /* create notebook */
+    if (await page.locator('[data-act="st-newnb"]').count()) {
+      await page.click('[data-act="st-newnb"]');
+      await page.fill("#stNbT", "P3 capture");
+      await page.click('[data-act="st-mknb"]');
+      await page.waitForSelector("#stPages", { timeout: 15000 });
+    }
+    await page.evaluate((th)=>document.body.classList.toggle("dark", th==="dark"), theme);
+    await sleep(250);
+    await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-editor-topbar.png`) });
+    /* Add Page popover */
+    if (await page.locator('[data-act="st-p3-add"]').count()) {
+      await page.click('[data-act="st-p3-add"]');
+      await page.waitForSelector("#stP3AddSheet", { timeout: 5000 }).catch(()=>{});
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-add-page.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3AddSheet")?.remove(); });
+    }
+    /* More menu */
+    if (await page.locator('[data-act="st-p3-more"]').count()) {
+      await page.click('[data-act="st-p3-more"]');
+      await page.waitForSelector("#stP3MoreSheet", { timeout: 5000 }).catch(()=>{});
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-more.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3MoreSheet")?.remove(); });
+    }
+    /* Navigator thumbnails */
+    if (await page.locator('[data-act="st-p3-grid"]').count()) {
+      await page.click('[data-act="st-p3-grid"]');
+      await page.waitForSelector("#stP3NavSheet", { timeout: 5000 }).catch(()=>{});
+      await sleep(300);
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-navigator.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3NavSheet")?.remove(); });
+      /* Favorites empty state */
+      await page.click('[data-act="st-p3-grid"]');
+      await page.waitForSelector("#stP3NavSheet", { timeout: 5000 }).catch(()=>{});
+      await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='favs']");
+      await sleep(200);
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-favorites-empty.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3NavSheet")?.remove(); });
+    }
+    await ctx.close();
+  }
+}
 await browser.close();
 serveProc.kill();
-console.log(`\nAll screenshots captured successfully into ${OUT_DIR}!`);
+console.log(`\nAll screenshots captured successfully into ${OUT_DIR} and ${P3_DIR}!`);
