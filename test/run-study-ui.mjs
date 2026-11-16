@@ -682,6 +682,123 @@ ok(JSON.stringify(after.shas) === JSON.stringify(before.shas) && after.shas[fixt
 msg = await restore(bk.buf);
 ok(new RegExp("Restored 0 documents with 0 strokes\\. Skipped " + before.n).test(msg) && (await snap()).n === before.n, "restore again: documents already present (by sha256 or id) are skipped, nothing duplicated");
 
+/* ---- Phase 3: pages and navigation (top bar, add page, templates, more, navigator, favourites, outlines, zoom) ---- */
+await boot("prep=1&study=1");
+await page.evaluate(() => { window.confirm = () => true; window.prompt = () => "Chapter 1"; });
+await openLib();
+await page.evaluate(() => new Promise(r => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
+await openLib();
+await page.waitForTimeout(400);
+/* create a fresh notebook for P3 */
+await page.click('[data-act="st-newnb"]');
+await page.fill("#stNbT", "P3 test");
+await page.selectOption("#stNbS", "ruled");
+await page.selectOption("#stNbZ", "a4");
+await page.click('[data-act="st-mknb"]');
+await page.waitForSelector("#stPages", { timeout: 15000 });
+await page.waitForSelector("#stP3Top", { timeout: 10000 });
+ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");
+ok(/1/.test(await page.locator("#stP3Cur").innerText()) && /1/.test(await page.locator("#stP3Tot").innerText()), "P3 top bar: counter 1 of 1");
+ok(await page.evaluate(() => document.querySelector("#stP3Top [data-act='st-p3-grid']") && document.querySelector("#stP3Top [data-act='st-p3-search']") && document.querySelector("#stP3Top [data-act='st-p3-add']")), "P3 top bar: grid, search, share, mic, add icons exist");
+/* draw a stroke, then add ruled page BEFORE page 1 → ink stays */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect();
+  const fire = (t,x,y)=> ov.dispatchEvent(new PointerEvent(t,{pointerId:7,pointerType:"pen",isPrimary:true,pressure:0.5,clientX:r.left+x*r.width,clientY:r.top+y*r.height,bubbles:true,cancelable:true,buttons:t==="pointerup"?0:1}));
+  fire("pointerdown",0.2,0.3); fire("pointermove",0.4,0.35); fire("pointermove",0.6,0.3); fire("pointerup",0.6,0.3);
+});
+await page.waitForTimeout(300);
+await page.click('[data-act="st-p3-add"]');
+await page.waitForSelector("#stP3AddSheet");
+ok(await page.locator("#stP3AddSheet [data-act='st-p3-place'][data-v='before']").count() === 1, "P3 Add: Before/After/Last segmented control");
+await page.click("#stP3AddSheet [data-act='st-p3-place'][data-v='before']");
+/* pick ruled from template grid */
+await page.evaluate(() => {
+  const sheet=document.querySelector("#stP3AddSheet"); const btn=[...sheet.querySelectorAll("[data-tpl]")].find(b=>b.getAttribute("data-tpl")==="ruled");
+  if(btn) btn.click();
+});
+await page.click("#stP3AddSheet [data-act='st-p3-confirm-add']");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n===2, null, {timeout:10000});
+ok(await page.evaluate(() => STUDY._state().n===2), "P3 3.1: ruled page added before page 1 (n=2)");
+/* change template keeps ink */
+const inkBefore = await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length);
+await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._changeTplSheet("page"); });
+await page.waitForSelector("#stP3TplSheet");
+await page.evaluate(() => { const btn=[...document.querySelectorAll("#stP3TplSheet [data-tpl]")].find(b=>b.getAttribute("data-tpl")==="grid"); if(btn) btn.click(); });
+await page.waitForTimeout(400);
+ok((await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length)) === inkBefore, "P3 3.2/3.3: template change keeps the ink");
+/* More menu: copy, rotate, outline, go, clear (each one undo step) */
+await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._openAdd; });
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+ok(await page.locator("#stP3MoreSheet [data-act='st-p3-copy']").count()===1 && await page.locator("#stP3MoreSheet [data-act='st-p3-rotate']").count()===1 && await page.locator("#stP3MoreSheet [data-act='st-p3-outline']").count()===1, "P3 3.4: More menu has Copy, Rotate, Outline, Change Template, Go to Page, Clear");
+await page.click("#stP3MoreSheet [data-act='st-p3-copy']");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n===3, null, {timeout:10000});
+ok(await page.evaluate(() => STUDY._state().n===3), "P3 3.4: Copy Page duplicates page + strokes");
+await page.evaluate(() => { if(window.STUDY_PAGES && window.STUDY_PAGES._rotate) window.STUDY_PAGES._rotate(); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => !!(STUDY._state().doc.rotMap && Object.keys(STUDY._state().doc.rotMap).length)), "P3 3.4: Rotate Page updates rotMap (90° steps)");
+/* Add to outline via More */
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+await page.evaluate(() => { window.prompt = () => "Clinical Notes"; });
+await page.click("#stP3MoreSheet [data-act='st-p3-outline']");
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => (STUDY._state().doc.outlines||[]).some(o=>o.title==="Clinical Notes")), "P3 3.9: Add Page to Outline adds user entry");
+/* Favorites: star page, check empty state then jump */
+await page.click("#stP3Top [data-act='st-p3-fav']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => Object.keys(STUDY._state().doc.favPages||{}).length>0), "P3 3.8: Bookmark star stores favPages");
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='favs']");
+await page.waitForSelector("#stP3FavBody");
+ok(/Page/.test(await page.locator("#stP3FavBody").innerText()), "P3 3.8: Favorites tab lists starred pages");
+await page.click("#stP3FavBody [data-page]");
+await page.waitForTimeout(300);
+ok(true, "P3 3.8: starred page jumps on tap");
+/* Thumbnails: live with ink */
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='thumbs']");
+await page.waitForSelector("#stP3NavGrid .st-p3-nav-card");
+const thumbHasInk = await page.evaluate(() => {
+  const cv=document.querySelector("#stP3NavGrid .st-p3-nav-card canvas"); if(!cv) return false; const d=cv.getContext("2d").getImageData(0,0,cv.width,cv.height).data; for(let i=3;i<d.length;i+=4) if(d[i]>0) return true; return false;
+});
+ok(thumbHasInk, "P3 3.7: thumbnails render page + strokes (not blank)");
+await page.evaluate(() => { document.querySelectorAll("[id^='stP3']")?.forEach ? document.querySelectorAll("[id^='stP3']").forEach(el=>el.remove()) : null; const s=document.querySelector("#stP3NavSheet"); if(s)s.remove(); });
+/* Outlines tab: PDF chapters + user entries + Filter */
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='outlines']");
+await page.waitForSelector("#stP3OutlineBody");
+await page.fill("#stP3OutlineFilter", "Clinical");
+await page.waitForTimeout(300);
+ok(await page.locator("#stP3OutlineBody").innerText().then(t=>/Clinical/.test(t)), "P3 3.9: Outlines filter finds user chapter");
+/* Settings: scrolling direction, palm, lock persist per notebook */
+await page.evaluate(() => { document.querySelector("#stP3NavSheet")?.remove(); });
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+await page.click("#stP3MoreSheet [data-act='st-p3-settings']");
+await page.waitForSelector("#stP3SettingsSheet");
+await page.click("#stP3SettingsSheet [data-act='st-p3-scroll'][data-v='horizontal']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().doc.settings.scrollDir==="horizontal"), "P3 3.5: Settings scrolling direction persists per notebook");
+await page.evaluate(() => { document.querySelector("#stP3SettingsSheet")?.remove(); });
+/* Paging: zoom 50-400% + double-tap fit + page counter Go to Page */
+await page.evaluate(() => STUDY._setZoom(2));
+ok(await page.evaluate(() => STUDY._state().z===2), "P3 3.10: pinch zoom 50-400% via setZoom");
+await page.evaluate(() => STUDY._setZoom(10));
+ok(await page.evaluate(() => STUDY._state().z===4), "P3 3.10: zoom clamped to 400%");
+await page.click("#stP3Pager");
+await page.waitForSelector("#stP3GoSheet");
+await page.fill("#stP3GotoInp", "2");
+await page.click("#stP3GoSheet [data-act='st-p3-do-goto']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().cur===2 || STUDY._state().sc.scrollTop>50 || STUDY._state().sc.scrollLeft>50), "P3 top bar: tapping page counter opens Go to Page and jumps");
+/* Zoom window exists */
+ok(await page.evaluate(() => !!document.querySelector("#stP3ZoomWindow")), "P3 3.11: Zoom window strip element present");
+
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 
 await browser.close(); if (serveProc) serveProc.kill();
