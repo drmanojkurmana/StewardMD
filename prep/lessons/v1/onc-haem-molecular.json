@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "onc-haem-molecular",
+ "subject": "ss-onco-pathology",
+ "title": "Haematolymphoid and molecular pathology: lymphomas and marrow",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22nd edition"],
+ "steps": [
+  {
+   "tx": "Lymphoma is a clonal **B or T cell** proliferation arising in nodes, marrow or extranodal sites in 6 per lakh people yearly. Reed Sternberg cells with CD30 and CD15 positivity define **Hodgkin lymphoma** in 10 percent of cases. B cell activation during antibody production supplies 70 percent of lymphomas in adults. Diagnosis needs excisional biopsy with architecture, ready in 5 to 7 days.",
+   "say": "Lymphoma is a clonal growth of B or T cells. Hodgkin lymphoma has special Reed Sternberg cells. B cell diseases form most lymphomas in adults. Diagnosis needs a whole node with architecture intact.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Hallmark cell", "Share"],
+    "rows": [
+     ["Hodgkin", "Reed Sternberg CD30, CD15", "10 percent"],
+     ["Diff use B cell", "Large blasts, CD20+", "30 percent"],
+     ["T cell", "TCL1, CD3+", "15 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic hepatitis C infection raises **marginal zone lymphoma** risk 2 to 3 fold through persistent antigen drive. Helicobacter pylori infection drives gastric **MALT lymphoma** in 35 percent of stomach lymphomas, curable with antibiotics. **Epstein Barr virus** immortalises B cells in post transplant lymphoproliferation after 12 months. Immunosuppression for 5 to 10 years is a strong lymphoma cofactor in transplantation.",
+   "say": "Chronic hepatitis C raises one lymphoma type risk. Stomach infection drives a lymphoma that antibiotics can cure. Epstein Barr virus drives early lymphomas after transplant. Long immunosuppression is a strong cofactor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Chronic infection"},
+     {"id": "b", "label": "Persistent antigen drive"},
+     {"id": "c", "label": "B cell clone expands"},
+     {"id": "d", "label": "Lymphoma emerges"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Germinal centre **B cells** carry the t(14;18) translocation that overexpresses Bcl2 and blocks cell death. MYC translocation t(8;14) drives Burkitt lymphoma with a 99 percent growth fraction and Ki67 near 100 percent. **Folliculin** mutation is not relevant here, while CCND1 rearrangement marks mantle cell lymphoma in 95 percent. Translocations are visible on karyotype in 65 percent of cases.",
+   "say": "Germinal centre cells carry a translocation that blocks cell death. Another translocation drives Burkitt lymphoma with near total proliferation. Mantle cell lymphoma has its own marker. These changes are visible on chromosome studies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Lymphoma", "Translocation", "Marker"],
+    "rows": [
+     ["Follicular", "t(14;18)", "Bcl2 high"],
+     ["Burkitt", "t(8;14)", "MYC, Ki67 100 percent"],
+     ["Mantle cell", "t(11;14)", "Cyclin D1"]
+    ]
+   }
+  },
+  {
+   "tx": "Indolent lymphomas grow over 5 to 10 years with painless nodes above 2 cm in 60 percent of patients. Night sweats above 38 degrees, weight loss of 10 percent and itching mark **B symptoms** in 30 percent. Acute presentation with 3 weeks of rapid node growth favours aggressive disease. **Lactate dehydrogenase** above 500 units per litre signals aggressive histology in 45 percent.",
+   "say": "Slow growing lymphomas present with painless nodes over many months. Fever sweats and weight loss mark advanced disease. Rapid growth over weeks favours aggressive forms. A high enzyme level signals aggressive histology.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Indolent", "Aggressive"],
+    "rows": [
+     ["Course", "5 to 10 years", "Weeks"],
+     ["B symptoms", "30 percent", "60 percent"],
+     ["LDH", "Normal", "Above 500 in 45 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "Excisional biopsy with **12 immunostains** classifies most lymphomas within 7 days in standard laboratories. Bone marrow biopsy with 2 cm length detects involvement in 20 percent of Hodgkin cases. **PET CT with FDG** achieves 88 percent sensitivity for staging in aggressive lymphomas. Gadolinium MRI helps when marrow disease is suspected but PET is unavailable.",
+   "say": "Whole node biopsy with immunostains classifies most lymphomas within a week. Marrow biopsy detects spread in a fifth of Hodgkin cases. P E T scanning is highly sensitive for staging. M R I helps when scanning is unavailable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Excise node fully"},
+     {"id": "b", "label": "Twelve stains, 7 days"},
+     {"id": "c", "label": "Marrow plus PET staging"},
+     {"id": "d", "label": "Start R CHOP protocol"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "**Rituximab** 375 mg per square metre added to CHOP improves cure in diffuse large B cell lymphoma by 15 percent. **ABVD** with Adriamycin and Bleomycin cures 85 percent of early Hodgkin disease in standard doses. Targeted **Ibrutinib** 420 mg daily suits relapsed marginal zone disease after 2 lines. Antiviral prophylaxis with Lamivudine cuts hepatitis reactivation in 60 percent of carriers.",
+   "say": "An antibody added to chemotherapy improves cure in large B cell lymphoma. A standard four drug regimen cures most early Hodgkin cases. A targeted tablet suits relapsed slow lymphoma. Hepatitis prophylaxis prevents dangerous reactivation.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Diffuse large B cell", "points": ["R CHOP with Rituximab", "Cure up 15 percent", "6 cycles standard"]},
+    "right": {"title": "Hodgkin lymphoma", "points": ["ABVD regimen", "85 percent early cure", "Bleomycin lung watched"]}
+   }
+  },
+  {
+   "tx": "Monoclonal gammopathy of undetermined significance shows M protein under **3 g per decilitre** with under 10 percent clonal plasma cells. Myeloma exceeds **3 g per decilitre** with over 10 percent clonal cells plus end organ damage. **Serum protein electrophoresis** with 20 microlitre samples detects M bands in 95 percent of cases. Free light chain ratio beyond 100 predicts progression in 12 percent within 5 years.",
+   "say": "A small monoclonal protein without organ damage is precursor disease. Myeloma has higher protein levels with organ damage. Electrophoresis detects the protein band in most cases. An extreme light chain ratio predicts progression.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Condition", "M protein", "Clonal cells"],
+    "rows": [
+     ["MGUS", "Under 3 g per decilitre", "Under 10 percent"],
+     ["Smouldering", "Above 3 g per decilitre", "Above 10 percent, no damage"],
+     ["Myeloma", "Variable", "Above 10 percent plus damage"]
+    ]
+   }
+  },
+  {
+   "tx": "Myelodysplastic syndromes arise in patients above **65 years** with cytopenias for 6 months or more. Del 5q deletion defines a subtype in 15 percent and responds to **Lenalidomide** 10 mg daily in 60 percent. Ring sideroblasts above 15 percent in marrow flag **SF3B1** mutation in MDS for prognosis. Cytogenetic risk scoring divides low risk from high risk disease with 25 percent transformation.",
+   "say": "Myelodysplastic syndromes affect older adults with low blood counts. One deletion subtype responds well to a targeted drug. Ring sideroblasts flag a gene mutation for prognosis. Cytogenetics separates low risk from high risk disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["MDS finding", "Frequency", "Drug clue"],
+    "rows": [
+     ["Del 5q", "15 percent", "Lenalidomide response"],
+     ["Ring sideroblasts 15 percent", "Common", "SF3B1 mutation"],
+     ["High risk", "25 percent transform", "Venetoclax plus Azacitidine"]
+    ]
+   }
+  },
+  {
+   "tx": "Complications include tumour lysis with potassium above **6.5 mmol per litre** in 5 percent after chemotherapy. Bleomycin lung injury appears in 10 percent at doses beyond 400 units cumulative. **Cytarabine** 3 g per square metre needs renal monitoring in 20 percent of elderly patients. **Growth factor** GCSF 5 mcg per kg speeds neutrophil recovery after 10 days of neutropenia.",
+   "say": "Tumour lysis raises potassium to dangerous levels after chemotherapy. Lung injury from one drug needs cumulative dose limits. High dose chemotherapy needs kidney monitoring. Growth factor speeds marrow recovery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Start chemotherapy"},
+     {"id": "b", "label": "Watch potassium above 6.5"},
+     {"id": "c", "label": "Monitor lungs, kidneys"},
+     {"id": "d", "label": "GCSF for neutropenia"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Burkitt lymphoma doubles in 24 to 48 hours with a Ki67 index near **100 percent** and needs urgent chemotherapy. MGUS progresses at 1 percent yearly, reaching 8 percent over 8 years of follow up. **Venetoclax** 400 mg daily with Azacitidine 75 mg per square metre extends survival in high risk MDS beyond 17 months. **Rituximab** maintenance for 2 years cuts relapse in follicular lymphoma by 40 percent.",
+   "say": "High-yield for the exam Burkitt lymphoma grows very fast with total proliferation. Precursor plasma cell disease progresses slowly at one percent yearly. New combinations extend survival in high risk marrow disease. Maintenance therapy cuts relapse in slow lymphomas.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease", "Speed", "Key drug"],
+    "rows": [
+     ["Burkitt", "Doubles in 24 to 48 hours", "Urgent chemotherapy"],
+     ["MGUS", "1 percent yearly", "Watchful follow up"],
+     ["High risk MDS", "Months", "Venetoclax 400 mg daily"]
+    ]
+   }
+  }
+ ]
+}

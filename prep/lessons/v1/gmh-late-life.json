@@ -1,0 +1,322 @@
+{
+ "v": 1,
+ "module": "gmh-late-life",
+ "subject": "ss-geriatric-mental-health",
+ "title": "Late-life psychiatry: depression, late psychosis and capacity",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22nd edition",
+  "Nelson Textbook of Pediatrics 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Late-life psychiatry** covers mental illness after 60 years with more physical comorbidity and 3 times suicide risk. About 15 percent of 100 elders show depression at 6 months follow up. **Geriatric depression** often hides behind pain, 5 drugs and bereavement in 2 years. Clear history from patient plus informant over 10 minutes best separates grief from illness.",
+   "say": "Late life psychiatry covers mental illness after sixty years with more physical comorbidity and three times suicide risk. About fifteen percent of one hundred elders show depression at six months follow up. Geriatric depression often hides behind pain, five drugs and bereavement in two years. Clear history from patient plus informant over ten minutes best separates grief from illness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Typical need",
+     "Time"
+    ],
+    "rows": [
+     [
+      "History",
+      "Patient and informant",
+      "10 minutes"
+     ],
+     [
+      "Physical check",
+      "4 organ systems",
+      "20 minutes"
+     ],
+     [
+      "Risk screen",
+      "Suicide and falls",
+      "5 minutes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vascular depression** follows small vessel disease and white matter change in 30 percent of 200 cases. Hypothyroid, 12 drug use, anaemia and 2 brain strokes drive onset after 65 years. **Bereavement** within 6 months doubles risk in widowers of 75 years. Treating 1 medical cause within 4 weeks often lifts mood as much as 2 drugs alone.",
+   "say": "Vascular depression follows small vessel disease and white matter change in thirty percent of two hundred cases. Hypothyroid, twelve drug use, anaemia and two brain strokes drive onset after sixty five years. Bereavement within six months doubles risk in widowers of seventy five years. Treating one medical cause within four weeks often lifts mood as much as two drugs alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen for depression"
+     },
+     {
+      "id": "b",
+      "label": "Check thyroid and B12"
+     },
+     {
+      "id": "c",
+      "label": "Review 5 drug causes"
+     },
+     {
+      "id": "d",
+      "label": "Treat cause for 4 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Late schizophrenia** starts after 40 years with paranoid delusions and hallucination in 5 percent of new cases. Sensory loss, isolation and 3 months stress bring onset at 68 years. **Dopamine** excess plus sensory change fuels voices heard as whispers in 1 ear. Brain **atrophy** on 1 scan may mimic disease, so 2 repeat scans 6 months apart help.",
+   "say": "Psychosis starting after forty years often with paranoid delusions and hallucination in five percent of new cases. Sensory loss, isolation and three months stress bring onset at sixty eight years. Dopamine excess plus sensory change fuels voices heard as whispers in one ear. Brain shrinkage on one scan may mimic disease, so two repeat scans six months apart help.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early psychosis",
+     "points": [
+      "Start near 20 years",
+      "Negative symptoms strong",
+      "Family history high"
+     ]
+    },
+    "right": {
+     "title": "Late psychosis",
+     "points": [
+      "Start after 40 years",
+      "Paranoid richer",
+      "Sensory loss common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Late onset depression** brings somatic worry, poor sleep for 3 weeks and 5 kg weight loss. Patients 72 years old voice 2 wishes for death with plans kept secret. **Anhedonia** and 1 slow response mark severity over tearfulness alone. Spotting 15 percent hidden suicide risk in 6 months needs 4 direct questions about intent and 7 day means.",
+   "say": "Depression starting late often brings somatic worry, poor sleep for three weeks and five kilograms weight loss. Patients seventy two years old voice two wishes for death with plans kept secret. Anhedonia and one slow response mark severity over tearfulness alone. Spotting fifteen percent hidden suicide risk in six months needs four direct questions about intent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Ask",
+     "Score"
+    ],
+    "rows": [
+     [
+      "Mood",
+      "Sad most days",
+      "2 weeks low"
+     ],
+     [
+      "Sleep",
+      "Early waking",
+      "3 weeks poor"
+     ],
+     [
+      "Risk",
+      "Death wish",
+      "Ask 4 questions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Capacity** means the ability to understand, retain, weigh 2 options and communicate over 1 decision. Assess 4 domains in 15 minutes with family present in 80 percent cases. Use **Mental Capacity Act** 2 stage test for 70 year olds facing hip surgery in 24 hours. Document verbatim the 3 key facts the patient repeats back correctly.",
+   "say": "Capacity means the ability to understand, retain, weigh two options and communicate over one decision. Assess four domains in fifteen minutes with family present in eighty percent cases. Use the two stage test for seventy year olds facing hip surgery in one day. Document verbatim the three key facts the patient repeats back correctly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Understand 3 facts"
+     },
+     {
+      "id": "b",
+      "label": "Retain 5 minutes"
+     },
+     {
+      "id": "c",
+      "label": "Weigh 2 choices"
+     },
+     {
+      "id": "d",
+      "label": "Communicate choice"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line **Sertraline** 50 mg daily and **Mirtazapine** 15 mg at night help 60 percent by 6 weeks. **Escitalopram** 10 mg suits 75 year olds with 2 cardiac drugs. Avoid **Paroxetine** 20 mg in 80 year olds because 12 percent get withdrawal. Review at 2 weeks, then 4 weekly checks for 8 weeks in 100 clinic visits.",
+   "say": "First line Sertraline fifty milligrams daily and Mirtazapine fifteen milligrams at night help sixty percent by six weeks. Escitalopram ten milligrams suits seventy five year olds with two cardiac drugs. Avoid Paroxetine in eighty year olds because twelve percent get withdrawal. Review at two weeks, then four weekly checks for eight weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mirtazapine 15 mg",
+     "points": [
+      "Sleep and appetite up",
+      "Weight gain 2 kg",
+      "Night dose helps"
+     ]
+    },
+    "right": {
+     "title": "Sertraline 50 mg",
+     "points": [
+      "Mood lifts slowly",
+      "Early waking less",
+      "Needs 6 weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Testamentary capacity** uses **Banks v Goodfellow** 4 limbs: estate, claims, nature of act and illness effect. Test in 30 minutes with 2 witnesses in 90 year olds writing 1 will. **Aripiprazole** 5 mg may clear 1 psychosis enough for assessment. Record estate value, 3 family claims and 1 diagnosis to survive court challenge in 5 years.",
+   "say": "Testamentary capacity uses four limbs covering estate, claims, nature of act and illness effect. Test in thirty minutes with two witnesses in ninety year olds writing one will. Aripiprazole five milligrams may clear one psychosis enough for assessment. Record estate value, three family claims and one diagnosis to survive court challenge in five years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "State estate value"
+     },
+     {
+      "id": "b",
+      "label": "Name 3 claimants"
+     },
+     {
+      "id": "c",
+      "label": "State nature of will"
+     },
+     {
+      "id": "d",
+      "label": "Two witnesses sign"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ECT** lifts melancholic depression in 70 percent within 4 sessions over 2 weeks. Suicide in elders 80 years reaches 15 per 100000 each year in 3 districts. **Elder abuse** hides in 10 percent needing 1 safe interview alone. Watch 6 weekly drug levels because 2 fold rise of **Lithium** 0.8 mmol predicts delirium in 1 day.",
+   "say": "ECT lifts melancholic depression in seventy percent within four sessions over two weeks. Suicide in elders eighty years reaches fifteen per one hundred thousand each year. Elder abuse hides in ten percent needing one safe interview alone. Watch six weekly drug levels because a two fold rise of Lithium predicts delirium in one day.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Number",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Suicide 80 years",
+      "15 per 100000",
+      "Ask 4 questions"
+     ],
+     [
+      "Abuse under 70",
+      "10 percent",
+      "Interview alone once"
+     ],
+     [
+      "Lithium rise",
+      "2 fold high",
+      "Check in 1 day"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pseudodementia** lifts 3 points on MoCA 30 within 4 weeks of antidepressants in 60 percent. **Early dementia** keeps near misses for 8 months with poor insight. **Donepezil** 10 mg helps true dementia but fails pseudodementia in 2 months. Ask 5 dont know answers and 2 week mood history to split the 2 states in 10 minutes.",
+   "say": "Pseudodementia lifts three points on MoCA within four weeks of antidepressants in sixty percent. Early dementia keeps near misses for eight months with poor insight. Donepezil ten milligrams helps true dementia but fails pseudodementia in two months. Ask five do not know answers and two week mood history to split the two states in ten minutes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudodementia",
+     "points": [
+      "Mood low 4 weeks",
+      "Score lifts 3 points",
+      "Lifts with drugs"
+     ]
+    },
+    "right": {
+     "title": "True dementia",
+     "points": [
+      "8 months decline",
+      "Near misses persist",
+      "Needs Donepezil"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield trim: treat **Sertraline** 50 mg or **Mirtazapine** 15 mg for 6 weeks in late depression. Test **capacity** over 4 domains in 15 minutes with 2 stage rule. Use **Banks v Goodfellow** 4 limbs for wills with 2 witnesses. Offer **ECT** for 70 percent melancholic cases within 2 weeks when drugs fail.",
+   "say": "High-yield for the exam, treat Sertraline fifty milligrams or Mirtazapine fifteen milligrams for six weeks in late depression. Test capacity over four domains in fifteen minutes with two stage rule. Use Banks versus Goodfellow four limbs for wills with two witnesses. Offer ECT for seventy percent melancholic cases within two weeks when drugs fail.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Standard",
+     "Number"
+    ],
+    "rows": [
+     [
+      "Depression drugs",
+      "Sertraline 50 mg",
+      "6 weeks trial"
+     ],
+     [
+      "Capacity",
+      "4 domains",
+      "15 minutes"
+     ],
+     [
+      "Will",
+      "Banks limbs",
+      "2 witnesses"
+     ],
+     [
+      "ECT response",
+      "70 percent",
+      "4 sessions"
+     ]
+    ]
+   }
+  }
+ ]
+}

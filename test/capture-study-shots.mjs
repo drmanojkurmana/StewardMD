@@ -15,7 +15,7 @@ const req = createRequire(import.meta.url);
 const { chromium } = req("playwright");
 const HERE = dirname(fileURLToPath(import.meta.url));
 const mode = process.argv[2] || "before";
-const OUT_DIR = join(HERE, "..", ".fleet-reports", "study-ui", mode);
+const OUT_DIR = mode === "p2" ? join(HERE, "..", ".fleet-reports", "study-p2", "shots") : mode === "p1" ? join(HERE, "..", ".fleet-reports", "study-p1", "shots") : join(HERE, "..", ".fleet-reports", "study-ui", mode);
 mkdirSync(OUT_DIR, { recursive: true });
 
 const PORT = await freePort();
@@ -180,6 +180,61 @@ for (const dev of DEVICES) {
     await setupTheme();
     await page.screenshot({ path: join(OUT_DIR, `${tag}-colour-width-popover.png`) });
     console.log(`Saved ${tag}-colour-width-popover.png`);
+
+    // 7b. Phase 1: pen settings popover (tap the active pen again), highlighter strip, eraser popover
+    if (await page.locator('[data-act="st-tool"][data-v="pen"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="pen"]');
+      await page.waitForSelector("#stInkPop", { timeout: 5000 }).catch(() => {});
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-pen-popover.png`) });
+      console.log(`Saved ${tag}-p1-pen-popover.png`);
+      await page.click('[data-act="st-tool"][data-v="pen"]');
+    }
+    if (await page.locator('[data-act="st-tool"][data-v="hl"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="hl"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-highlighter-strip.png`) });
+      console.log(`Saved ${tag}-p1-highlighter-strip.png`);
+    }
+    if (await page.locator('[data-act="st-tool"][data-v="er"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="er"]');
+      await page.click('[data-act="st-tool"][data-v="er"]');
+      await page.waitForSelector("#stInkPop", { timeout: 5000 }).catch(() => {});
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-eraser-popover.png`) });
+      console.log(`Saved ${tag}-p1-eraser-popover.png`);
+    }
+
+    // 7c. Phase 2: lasso settings strip + selection with handles, selection menu, shapes strip
+    if (mode === "p2" && await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="lasso"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-lasso-settings.png`) });
+      console.log(`Saved ${tag}-p2-lasso-settings.png`);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect(), id = 3;
+        const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.1, 0.1); fire("pointermove", 0.9, 0.1); fire("pointermove", 0.9, 0.35); fire("pointermove", 0.1, 0.35); fire("pointermove", 0.1, 0.1); fire("pointerup", 0.1, 0.1);
+      });
+      await page.waitForSelector("#stLassoBar", { timeout: 5000 }).catch(() => {});
+      await sleep(200); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-selection.png`) });
+      console.log(`Saved ${tag}-p2-selection.png`);
+      if (await page.locator('[data-act="st-lasso-color"]').count()) {
+        await page.click('[data-act="st-lasso-color"]');
+        await page.waitForSelector("#stSelColor", { timeout: 5000 }).catch(() => {});
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-color.png`) });
+        console.log(`Saved ${tag}-p2-color.png`);
+      }
+      await page.click('[data-act="st-lasso-done"]');
+      await page.click('[data-act="st-tool"][data-v="shapes"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-shapes.png`) });
+      console.log(`Saved ${tag}-p2-shapes.png`);
+    }
 
     // 8. Page sheet
     if (await page.locator('[data-act="st-page-sheet"]').count()) {
