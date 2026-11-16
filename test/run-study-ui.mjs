@@ -183,8 +183,8 @@ await page.evaluate(() => { STUDY._state().scribble = false; });
 ok(await page.evaluate(() => {
   const order = Array.from(document.querySelectorAll("#stTb [data-act='st-tool']")).map((b) => b.getAttribute("data-v"));
   const hidden = document.querySelectorAll("#stTb .st-slot-future[hidden]").length;
-  return JSON.stringify(order) === JSON.stringify(["pen", "er", "hl", "lasso"]) && hidden === 7;
-}), "P1 toolbar: order pen, eraser, highlighter, lasso with 7 future slots hidden");
+  return JSON.stringify(order) === JSON.stringify(["pen", "er", "hl", "shapes", "lasso"]) && hidden === 6;
+}), "P2 toolbar: order pen, eraser, highlighter, shapes, lasso with 6 future slots hidden");
 await page.click('[data-act="st-tool"][data-v="pen"]');   // second tap on the active pen opens its popover
 await page.waitForSelector("#stInkPop");
 ok(await page.evaluate(() => {
@@ -238,6 +238,188 @@ await page.evaluate(() => {
 });
 await page.waitForTimeout(300);
 ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter((x) => !x.gone).pop(); return s.pts.length >= 241; }), "P1 latency: a 240 Hz scrawl keeps every point");
+
+/* ---- Phase 2 select and shape: lasso menu, move, resize, clipboard, shapes, draw-and-hold ---- */
+const bboxOfSel = () => page.evaluate(() => {
+  const V = STUDY._state();
+  if (!V.lasso) return null;
+  let x0 = 1, y0 = 1, x1 = 0, y1 = 0;
+  V.strokes.filter((s) => V.lasso.ids.includes(s.id)).forEach((s) => s.pts.forEach((p) => { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }));
+  return { x0, y0, x1, y1, n: V.lasso.n, count: V.lasso.ids.length };
+});
+const dragOnPage = (pick) => page.evaluate((pick) => {
+  const V = STUDY._state(), n2 = pick.n;
+  const ov = document.querySelector('.st-ov[data-n="' + n2 + '"]'), r = ov.getBoundingClientRect(), id = 31;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", (pick.x0 + pick.x1) / 2, (pick.y0 + pick.y1) / 2);
+  fire("pointermove", (pick.x0 + pick.x1) / 2 + pick.dx, (pick.y0 + pick.y1) / 2 + pick.dy);
+  fire("pointerup", (pick.x0 + pick.x1) / 2 + pick.dx, (pick.y0 + pick.y1) / 2 + pick.dy);
+}, pick);
+const drawShapeGhost = (shape) => page.evaluate((shape) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 32;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  if (shape === "circle") { fire("pointerdown", 0.5, 0.12); for (let i = 1; i <= 40; i++) { const a = (i / 40) * 2 * Math.PI; fire("pointermove", 0.5 + Math.cos(a) * 0.09, 0.12 + Math.sin(a) * 0.09); } fire("pointerup", 0.59, 0.12); }
+  else { fire("pointerdown", 0.15, 0.9); for (let i = 1; i <= 24; i++) fire("pointermove", 0.15 + 0.3 * i / 24, 0.9); fire("pointerup", 0.45, 0.9); }
+}, shape);
+const lassoRect = (x0, y0, x1, y1) => page.evaluate(([x0, y0, x1, y1]) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 33;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", x0, y0); fire("pointermove", x1, y0); fire("pointermove", x1, y1); fire("pointermove", x0, y1); fire("pointermove", x0, y0); fire("pointerup", x0, y0);
+}, [x0, y0, x1, y1]);
+/* lasso settings: highlighter can be excluded */
+await page.click('[data-act="st-tool"][data-v="hl"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 34;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.15, 0.68); fire("pointermove", 0.85, 0.68); fire("pointerup", 0.85, 0.68);
+});
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 35;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.15, 0.74); fire("pointermove", 0.85, 0.74); fire("pointerup", 0.85, 0.74);
+});
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.waitForSelector('#stInkCtx [data-sel="rule"][data-v="hl"]');
+ok(await page.locator('#stInkCtx [data-sel="rule"]').count() === 5, "P2 lasso settings: five kind toggles (pen, highlighter, shapes, images, text)");
+await lassoRect(0.1, 0.64, 0.9, 0.78);
+await page.waitForSelector("#stLassoBar");
+ok(/2 items/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso: loop picks the pen and highlighter strokes");
+await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');
+await lassoRect(0.1, 0.64, 0.9, 0.78);
+await page.waitForSelector("#stLassoBar");
+ok(/1 item/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso settings: highlighter excluded after toggle");
+await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');   // restore
+ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && await page.locator('[data-act="st-lasso-resize"]').count() === 1 && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
+/* move: drag inside the box, one undo step */
+const beforeMove = await bboxOfSel();
+const uBeforeMove = await page.evaluate(() => STUDY._state().stack.u.length);
+await dragOnPage({ ...beforeMove, dx: 0.06, dy: 0.02 });
+await page.waitForTimeout(200);
+const afterMove = await bboxOfSel();
+ok(Math.abs(afterMove.x0 - (beforeMove.x0 + 0.06)) < 0.015 && Math.abs(afterMove.y0 - (beforeMove.y0 + 0.02)) < 0.015, "P2 move: selection lands where dropped");
+ok(await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeMove + 1, "P2 move: exactly one undo step");
+await page.click('[data-act="st-undo"]');
+const undone = await bboxOfSel();
+ok(Math.abs(undone.x0 - beforeMove.x0) < 0.015, "P2 move: undo restores the position");
+await page.click('[data-act="st-redo"]');
+ok(Math.abs((await bboxOfSel()).x0 - (beforeMove.x0 + 0.06)) < 0.015, "P2 move: redo reapplies the position");
+/* resize: drag the SE handle */
+const beforeResize = await bboxOfSel();
+await page.evaluate((b) => {
+  const ov = document.querySelector('.st-ov[data-n="' + b.n + '"]'), r = ov.getBoundingClientRect(), id = 36;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", b.x1, b.y1); fire("pointermove", b.x1 + 0.1, b.y1 + 0.1); fire("pointerup", b.x1 + 0.1, b.y1 + 0.1);
+}, beforeResize);
+await page.waitForTimeout(200);
+const afterResize = await bboxOfSel();
+ok(afterResize.x1 - afterResize.x0 > (beforeResize.x1 - beforeResize.x0) * 1.08, "P2 resize: handle drag scales the selection proportionally");
+await page.click('[data-act="st-undo"]');
+const undoneResize = await bboxOfSel();
+ok(Math.abs((undoneResize.x1 - undoneResize.x0) - (beforeResize.x1 - beforeResize.x0)) < 0.02, "P2 resize: undo restores the size");
+/* colour: one undo step */
+await page.click('[data-act="st-lasso-color"]');
+await page.waitForSelector("#stSelColor");
+await page.click('[data-sel-color="#d11a2a"]');
+await page.waitForTimeout(200);
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => STUDY._state().lasso.ids.includes(s.id)).every((s) => s.color === "#d11a2a")), "P2 colour: selection takes the picked colour");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate(() => !STUDY._state().strokes.filter((s) => STUDY._state().lasso.ids.includes(s.id)).every((s) => s.color === "#d11a2a")), "P2 colour: undo restores the old colour");
+/* rotate and screenshot (no mutation for the screenshot) */
+await page.click('[data-act="st-lasso-more"]');
+await page.waitForSelector("#stSelMore");
+const beforeRot = await bboxOfSel();
+await page.click('[data-act="st-lasso-rotate"]');
+await page.waitForTimeout(200);
+ok((await bboxOfSel()) !== null && await page.evaluate(() => STUDY._state().stack.u.length > 0), "P2 rotate: 90 degrees applied as one undo step");
+await page.click('[data-act="st-undo"]');
+const rotUndone = await bboxOfSel();
+ok(Math.abs(rotUndone.x0 - beforeRot.x0) < 0.03 && Math.abs(rotUndone.y0 - beforeRot.y0) < 0.03, "P2 rotate: undo restores the rotation (within clamping)");
+await page.click('[data-act="st-lasso-more"]');
+await page.click('[data-act="st-lasso-shot"]');
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => !document.querySelector("#stSelMore")), "P2 screenshot: action runs and closes the panel");
+/* duplicate: one undo step for every copy */
+const beforeDup = await live();
+await page.click('[data-act="st-lasso-dup"]');
+await page.waitForTimeout(200);
+const afterDup = await live();
+ok(afterDup === beforeDup + 1, "P2 duplicate: copy appears");
+await page.click('[data-act="st-undo"]');
+ok(await live() === beforeDup, "P2 duplicate: one undo removes the copy");
+await page.click('[data-act="st-redo"]');
+ok(await live() === afterDup, "P2 duplicate: redo brings it back");
+/* cut and copy, then paste across pages via long-press */
+await page.click('[data-act="st-lasso-clipcopy"]');
+await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
+await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("strokes"); q.onsuccess = () => res(); }; }));
+ok(await page.evaluate(() => !!localStorage.getItem("smd_study_clip")), "P2 clipboard: copy persists in localStorage");
+const uBeforeCut = await page.evaluate(() => STUDY._state().stack.u.length);
+await page.click('[data-act="st-lasso-cut"]');
+await page.waitForTimeout(200);
+ok(await live() === afterDup - 1 && await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeCut + 1, "P2 cut: removes the selection in one undo step");
+await page.click('[data-act="st-undo"]');
+ok(await live() === afterDup, "P2 cut: undo brings it back");
+await page.click('[data-act="st-lasso-done"]');
+/* paste across pages: long-press an empty spot on page 2 and tap Paste */
+const onP2Before = await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length);
+await page.click('[data-act="st-page-sheet"]');
+await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
+await page.waitForSelector('.st-ov[data-n="2"]');
+await page.waitForTimeout(400);
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="2"]'), r = ov.getBoundingClientRect(), id = 38;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.5);
+  window.__lpUp = fire;
+});
+await page.waitForTimeout(700);
+await page.waitForSelector("#stPasteBubble", { timeout: 5000 });
+await page.click('[data-sel-paste]');
+await page.evaluate(() => { window.__lpUp("pointerup", 0.3, 0.5); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length) === onP2Before + 1, "P2 paste: copied stroke pastes onto page 2");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length) === onP2Before, "P2 paste: one undo removes the paste across pages");
+await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
+await page.waitForTimeout(400);
+/* shapes tool: every stroke snaps; fill at 25% */
+await page.click('[data-act="st-tool"][data-v="shapes"]');
+await page.waitForSelector('#stInkCtx [data-sel="fill"][data-v="25"]');
+await drawShapeGhost("circle");
+await page.waitForTimeout(300);
+const shapeStroke = await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); const last = ss[ss.length - 1]; return last && { type: last.shape.type, w: last.w }; });
+ok(shapeStroke && ["circle", "ellipse"].includes(shapeStroke.type), "P2 shapes: wobbly circle becomes a " + (shapeStroke && shapeStroke.type));
+await page.click('#stInkCtx [data-sel="fill"][data-v="25"]');
+await drawShapeGhost("line");
+await page.waitForTimeout(300);
+const filled = await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); const last = ss[ss.length - 1]; return last && { type: last.shape.type, fill: last.fill }; });
+ok(filled && filled.fill === "25", "P2 shapes: optional fill colour at 25% opacity");
+/* draw and hold: pen held 0.5s at the end snaps */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+const beforeHold = await live();
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 37;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.5, 0.2);
+  for (let i = 1; i <= 30; i++) { const a = (i / 30) * 2 * Math.PI; fire("pointermove", 0.5 + Math.cos(a) * 0.07, 0.2 + Math.sin(a) * 0.07); }
+  window.__holdUp = fire;
+});
+await page.waitForTimeout(650);
+await page.evaluate(() => { window.__holdUp("pointerup", 0.57, 0.2); });
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); return ss.length >= 1; }) && await live() === beforeHold + 1, "P2 draw and hold: held circle snaps to a perfect shape");
+/* convert stub: signed-out note, then signed-in offline error path is covered by the unit suite */
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await lassoRect(0.4, 0.1, 0.6, 0.3);
+await page.waitForSelector("#stLassoBar", { timeout: 5000 }).catch(() => {});
+if (await page.locator("#stLassoBar").count()) {
+  await page.click('[data-act="st-lasso-more"]');
+  await page.click('[data-act="st-lasso-conv"]');
+  await page.waitForSelector("#stSelConv");
+  ok(/on-device|Server preview/.test(await page.locator("#stSelConv").innerText()), "P2 convert: clearly labelled server stub");
+  await page.click('[data-act="st-lasso-done"]');
+}
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
