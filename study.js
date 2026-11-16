@@ -38,6 +38,72 @@
     for (i = 1; i < p.length; i++) if (dist2(px, py, p[i - 1][0] * w, p[i - 1][1] * h, p[i][0] * w, p[i][1] * h) <= r2) return true;
     return false;
   }
+  // Point in polygon test (ray casting). poly: [[x, y], ...] in 0..1 coordinates.
+  function pointInPoly(px, py, poly) {
+    var inside = false, i, j = poly.length - 1;
+    for (i = 0; i < poly.length; i++) {
+      var xi = poly[i][0], yi = poly[i][1];
+      var xj = poly[j][0], yj = poly[j][1];
+      var intersect = ((yi > py) !== (yj > py)) && (px < (xj - xi) * (py - yi) / (yj - yi) + xi);
+      if (intersect) inside = !inside;
+      j = i;
+    }
+    return inside;
+  }
+  // Does a lasso loop enclose the stroke?
+  function lassoHit(s, poly) {
+    if (!s || !s.pts || !s.pts.length || !poly || poly.length < 3) return false;
+    var pts = s.pts, insideCount = 0;
+    for (var i = 0; i < pts.length; i++) {
+      if (pointInPoly(pts[i][0], pts[i][1], poly)) insideCount++;
+    }
+    return insideCount > pts.length * 0.45;
+  }
+  // Detects if a stroke is a fast back-and-forth scribble gesture
+  function isScribble(pts) {
+    if (!pts || pts.length < 8) return false;
+    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    var pathLen = 0;
+    for (var i = 0; i < pts.length; i++) {
+      var x = pts[i][0], y = pts[i][1];
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+      if (i > 0) {
+        var dx0 = x - pts[i - 1][0], dy0 = y - pts[i - 1][1];
+        pathLen += Math.sqrt(dx0 * dx0 + dy0 * dy0);
+      }
+    }
+    var bw = maxX - minX, bh = maxY - minY;
+    var diag = Math.sqrt(bw * bw + bh * bh);
+    if (diag < 0.005 || diag > 0.6) return false;
+    if (pathLen / diag < 2.2) return false;
+
+    var revsX = 0, revsY = 0;
+    var lastSignX = 0, lastSignY = 0;
+    var stepThreshold = diag * 0.06;
+    var accX = 0, accY = 0;
+    for (var j = 1; j < pts.length; j++) {
+      var dx = pts[j][0] - pts[j - 1][0];
+      var dy = pts[j][1] - pts[j - 1][1];
+      accX += dx;
+      accY += dy;
+      if (Math.abs(accX) >= stepThreshold) {
+        var sX = accX > 0 ? 1 : -1;
+        if (lastSignX !== 0 && sX !== lastSignX) revsX++;
+        lastSignX = sX;
+        accX = 0;
+      }
+      if (Math.abs(accY) >= stepThreshold) {
+        var sY = accY > 0 ? 1 : -1;
+        if (lastSignY !== 0 && sY !== lastSignY) revsY++;
+        lastSignY = sY;
+        accY = 0;
+      }
+    }
+    return (revsX >= 3 || revsY >= 3 || (revsX >= 2 && revsY >= 2));
+  }
   // Undo/redo: ops are { t: "add", id } or { t: "del", ids: [id] }. Strokes are never deleted, only flagged gone, so
   // an op is just ids and the stacks stay small enough to persist.
   var CAP = 200;
@@ -59,6 +125,7 @@
     var L = [], s = 0.05, y, x, end = style === "cornell" ? ratio * 0.8 : ratio;
     if (style === "ruled" || style === "cornell") for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]);
     if (style === "grid") { for (y = s; y < ratio; y += s) L.push([0, y, 1, y]); for (x = s; x < 1; x += s) L.push([x, 0, x, ratio]); }
+    if (style === "dotgrid" || style === "dots") { for (y = s * 2; y < ratio; y += s) for (x = s; x < 1; x += s) L.push([x, y, x + 0.0001, y]); }
     if (style === "cornell") { L.push([0.3, s * 2, 0.3, end]); L.push([0, end, 1, end]); }
     return L;
   }
@@ -122,13 +189,50 @@
 
   function ixLabel(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }
 
-  var PURE = { BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem, bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs, hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, r4: r4 };
+  var PURE = {
+    BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
+    bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
+    hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure,
+    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble
+  };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
   var D = G.document, host = null, V = null, penSeen = false, uidN = 0;
-  var COLORS = ["#111111", "#1a56db", "#d11a2a"], HCOLORS = ["#ffe14d", "#6fdc6f", "#ff8fc8"], WIDTHS = [0.0016, 0.0032, 0.0064], HMUL = 6;
+  var COLORS = ["#111111", "#1a56db", "#d11a2a", "#168038", "#7b1fa2", "#ea580c"];
+  var HCOLORS = ["#ffe14d", "#6fdc6f", "#ff8fc8", "#60a5fa", "#c084fc", "#fb923c"];
+  var WIDTHS = [0.0016, 0.0032, 0.0064], HMUL = 6;
   var lib = { filter: "all" };
+
+  var ICO = {
+    pen: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>',
+    hl: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h3l6-6"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>',
+    er: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>',
+    lasso: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M7 22a5 5 0 0 1-2-4"/><path d="M3.3 14A6.8 6.8 0 0 1 2 10c0-4.4 4.5-8 10-8s10 3.6 10 8-4.5 8-10 8a12 12 0 0 1-5-1"/><path d="M5 18a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>',
+    undo: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"/></svg>',
+    redo: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"/></svg>',
+    more: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>',
+    search: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>',
+    star: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    starFill: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    plus: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
+    book: '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>',
+    pdf: '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+    photos: '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+    scan: '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>',
+    sparkle: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>',
+    copy: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+    trash: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+    arrowUp: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>',
+    arrowDown: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+    check: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    palette: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.3c3.9 0 7-3.1 7-7 0-5.5-5.4-9.1-10-9.1z"/></svg>',
+    grid: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    minus: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    share: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>',
+    edit: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+    folder: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'
+  };
 
   function uid() { return Date.now().toString(36) + (++uidN).toString(36) + Math.random().toString(36).slice(2, 7); }
   function on() { try { return enabled(G.location.search, function (k) { return G.localStorage.getItem(k); }, !G.PREP_LOADER || G.PREP_LOADER.enabled()); } catch (e) { return false; } }
@@ -139,7 +243,6 @@
     if (dbP) return dbP;
     dbP = new Promise(function (res, rej) {
       var r = G.indexedDB.open("study", 2);
-      // Version 1: docs, files, folders, strokes, undo. Version 2 adds ptext and index. Each store is created only if missing.
       r.onupgradeneeded = function () {
         var d = r.result, mk = function (n, k) { return d.objectStoreNames.contains(n) ? null : d.createObjectStore(n, { keyPath: k }); }, s;
         mk("docs", "id"); mk("files", "id"); mk("folders", "id");
@@ -153,7 +256,6 @@
     });
     return dbP;
   }
-  // One request in one transaction; resolves with its result once the transaction is durable.
   function q(store, mode, fn) {
     return db().then(function (d) {
       return new Promise(function (res, rej) {
@@ -182,7 +284,6 @@
   function saveOriginal(id, bytes) {
     var fs = fsPlugin();
     if (fs) return fs.writeFile({ path: "study/" + id + ".pdf", data: b64(bytes), directory: "DATA", recursive: true }).then(function () { return "fs"; });
-    // shortcut: without Filesystem (no native shell) the original lives as an IndexedDB blob; the app always has the plugin.
     return put("files", { id: id, blob: new Blob([bytes], { type: "application/pdf" }) }).then(function () { return "idb"; });
   }
   function loadOriginal(d) {
@@ -190,7 +291,7 @@
     return get("files", d.id).then(function (f) { return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res(new Uint8Array(fr.result)); }; fr.onerror = rej; fr.readAsArrayBuffer(f.blob); }); });
   }
 
-  /* ---- pdf.js (the vendored copy prep-source.js loads) ---- */
+  /* ---- pdf.js ---- */
   var libP = null;
   function pdfjs() {
     if (G.pdfjsLib) { G.pdfjsLib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.js"; return Promise.resolve(G.pdfjsLib); }
@@ -204,7 +305,6 @@
     });
     return libP;
   }
-  // pdf.js hands the bytes to its worker, so it always gets a copy: the caller's array stays whole for sha and storage.
   function openPdf(bytes) { return pdfjs().then(function (L) { return L.getDocument({ data: bytes.slice() }).promise; }); }
 
   /* ---- library ---- */
@@ -218,7 +318,10 @@
       return pdf.getPage(1).then(function (p) {
         var v0 = p.getViewport({ scale: 1 }), sc = 160 / v0.width, v = p.getViewport({ scale: sc }), c = D.createElement("canvas");
         c.width = Math.ceil(v.width); c.height = Math.ceil(v.height);
-        return p.render({ canvasContext: c.getContext("2d"), viewport: v }).promise.then(function () { meta.thumb = c.toDataURL("image/jpeg", 0.7); pdf.destroy(); });
+        var ctx = c.getContext("2d");
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, c.width, c.height);
+        return p.render({ canvasContext: ctx, viewport: v }).promise.then(function () { meta.thumb = c.toDataURL("image/jpeg", 0.7); pdf.destroy(); });
       });
     }).then(function () { return saveOriginal(id, bytes); }).then(function (where) { meta.store = where; return put("docs", meta); }).then(function () { return meta; });
   }
@@ -237,7 +340,6 @@
   function onTop(sel) { return !!(host && host.root() && host.root().querySelector(sel)); }
 
   /* ---- scan and photos (A5) ---- */
-  // Pages arrive as JPEG data URLs ({ data, w, h }), become one PDF, and are stored like an imported PDF.
   var jsP = null;
   function jspdf() {
     var J = (G.jspdf && G.jspdf.jsPDF) || G.jsPDF;
@@ -245,7 +347,7 @@
     if (jsP) return jsP;
     jsP = new Promise(function (res, rej) {
       var s = D.createElement("script"), bad = function () { jsP = null; rej(new Error("pdf-load")); };
-      s.src = "/vendor-jspdf.js?v=1";   // the URL native-bridge.js loads, so one cached copy
+      s.src = "/vendor-jspdf.js?v=1";
       s.onload = function () { var K = (G.jspdf && G.jspdf.jsPDF) || G.jsPDF; if (K) res(K); else bad(); };
       s.onerror = bad;
       D.head.appendChild(s);
@@ -256,7 +358,7 @@
     return jspdf().then(function (J) {
       var doc = null;
       shots.forEach(function (s) {
-        var w = 595.28, h = w * s.h / s.w, o = h >= w ? "p" : "l";   // A4 width, height from the picture's own shape
+        var w = 595.28, h = w * s.h / s.w, o = h >= w ? "p" : "l";
         if (!doc) doc = new J({ unit: "pt", format: [w, h], orientation: o, compress: true }); else doc.addPage([w, h], o);
         doc.addImage(s.data, "JPEG", 0, 0, w, h);
       });
@@ -265,8 +367,6 @@
   }
   function stamp() { var n = new Date(), p = function (x) { return (x < 10 ? "0" : "") + x; }; return n.getFullYear() + "-" + p(n.getMonth() + 1) + "-" + p(n.getDate()) + " " + p(n.getHours()) + ":" + p(n.getMinutes()); }
   function wait(ms) { return new Promise(function (r) { G.setTimeout(r, ms); }); }
-  // OCR in the background, three pages then a pause (as the A6 indexer). shortcut: not resumable, an app kill mid-way leaves
-  // the later pages without OCR text; upgrade by saving progress like the "index" store if scans get long.
   function ocrShots(id, shots) {
     var N = G.SMD_NATIVE, n = 0;
     if (!(N && N.ocr)) return;
@@ -295,7 +395,6 @@
     });
   }
   function readUrl(f) { return new Promise(function (res, rej) { var r = new G.FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(f); }); }
-  // A photo is redrawn as a JPEG at most 2000 px on its long side (also applies the camera's rotation).
   function normPhoto(url) {
     return new Promise(function (res, rej) {
       var im = new G.Image();
@@ -318,7 +417,6 @@
   function pickPhotos() {
     var N = G.SMD_NATIVE, urls = [];
     if (!(N && N.pickImage)) { var f = host.root() && host.root().querySelector("#stPhotos"); if (f) f.click(); return; }
-    // The bridge picks one photo a call, so ask after each one whether to add another.
     (function more() {
       N.pickImage().then(function (u) { urls.push(u); return urls.length < 30 && G.confirm("Add another photo to this PDF?") ? more() : importPhotos(urls); }, function () { importPhotos(urls); });
     })();
@@ -339,7 +437,103 @@
       var c = e && e.code;
       if (c !== "cancelled") host.toast(c === "unavailable" ? "Scanning is not available on this phone." : c === "busy" ? "A scan is already open." : "The scan could not be saved. Try again.");
     }).then(function () {
-      got.forEach(function (pg) { try { fs.deleteFile({ path: uri(pg.path) }).then(null, function () {}); } catch (e) {} });   // the cache JPEGs go whatever happened
+      got.forEach(function (pg) { try { fs.deleteFile({ path: uri(pg.path) }).then(null, function () {}); } catch (e) {} });
+    });
+  }
+
+  function closeDocMenu() {
+    var m = host && host.root() && host.root().querySelector("#stDocMenuSheet");
+    if (m && m.parentNode) m.parentNode.removeChild(m);
+  }
+
+  function closeFolderSheet() {
+    var m = host && host.root() && host.root().querySelector("#stFolderSheet");
+    if (m && m.parentNode) m.parentNode.removeChild(m);
+  }
+
+  function showMoveFolderSheet(id) {
+    closeDocMenu();
+    closeFolderSheet();
+    Promise.all([get("docs", id), all("folders")]).then(function (r) {
+      var d = r[0], folders = r[1];
+      if (!d) return;
+      var esc = host.esc;
+      var el = D.createElement("div");
+      el.id = "stFolderSheet";
+      el.className = "st-sheet";
+      el.setAttribute("role", "dialog");
+      el.setAttribute("aria-modal", "true");
+      el.innerHTML = '<div class="st-sh st-doc-menu-sheet smd-books-keep smd-emo-keep">' +
+        '<div class="st-doc-menu-head">' +
+          '<div class="st-doc-menu-title">' +
+            '<h3>Move to folder</h3>' +
+            '<small>' + esc(d.title) + '</small>' +
+          '</div>' +
+          '<button type="button" class="pn-btn sm" data-act="st-close-foldersheet">Done</button>' +
+        '</div>' +
+        '<div class="st-doc-menu-items">' +
+          '<button type="button" class="st-menu-item' + (!d.folderId ? ' on' : '') + '" data-act="st-set-folder" data-id="' + d.id + '" data-folder="">' +
+            '<div class="st-menu-ico">' + ICO.folder + '</div>' +
+            '<div class="st-menu-txt"><strong>(No folder)</strong></div>' +
+          '</button>' +
+          folders.map(function (f) {
+            return '<button type="button" class="st-menu-item' + (d.folderId === f.id ? ' on' : '') + '" data-act="st-set-folder" data-id="' + d.id + '" data-folder="' + f.id + '">' +
+              '<div class="st-menu-ico">' + ICO.folder + '</div>' +
+              '<div class="st-menu-txt"><strong>' + esc(f.name) + '</strong></div>' +
+            '</button>';
+          }).join("") +
+          '<button type="button" class="st-menu-item" data-act="st-newfolder">' +
+            '<div class="st-menu-ico">' + ICO.plus + '</div>' +
+            '<div class="st-menu-txt"><strong>Create new folder</strong></div>' +
+          '</button>' +
+        '</div>' +
+      '</div>';
+      el.addEventListener("click", function (e) { if (e.target === el) closeFolderSheet(); });
+      host.root().appendChild(el);
+    });
+  }
+
+  function showDocMenu(id) {
+    closeDocMenu();
+    Promise.all([get("docs", id), all("folders")]).then(function (r) {
+      var d = r[0], folders = r[1];
+      if (!d) return;
+      var esc = host.esc, isNb = d.kind === "nb";
+      var fName = d.folderId && folders.reduce(function (a, f) { return f.id === d.folderId ? f.name : a; }, null);
+      var el = D.createElement("div");
+      el.id = "stDocMenuSheet";
+      el.className = "st-sheet";
+      el.setAttribute("role", "dialog");
+      el.setAttribute("aria-modal", "true");
+      el.innerHTML = '<div class="st-sh st-doc-menu-sheet smd-books-keep smd-emo-keep">' +
+        '<div class="st-doc-menu-head">' +
+          '<div class="st-doc-menu-title">' +
+            '<h3>' + esc(d.title) + '</h3>' +
+            '<small>' + (isNb ? "Notebook" : "PDF") + ' • ' + d.pageCount + (d.pageCount === 1 ? " page" : " pages") + (fName ? ' • ' + esc(fName) : '') + '</small>' +
+          '</div>' +
+          '<button type="button" class="pn-btn sm" data-act="st-close-docmenu">Done</button>' +
+        '</div>' +
+        '<div class="st-doc-menu-items">' +
+          '<button type="button" class="st-menu-item" data-act="st-fav" data-id="' + d.id + '">' +
+            '<div class="st-menu-ico">' + (d.favourite ? ICO.starFill : ICO.star) + '</div>' +
+            '<div class="st-menu-txt"><strong>' + (d.favourite ? "Remove from Favourites" : "Add to Favourites") + '</strong></div>' +
+          '</button>' +
+          '<button type="button" class="st-menu-item" data-act="st-rename" data-id="' + d.id + '">' +
+            '<div class="st-menu-ico">' + ICO.edit + '</div>' +
+            '<div class="st-menu-txt"><strong>Rename</strong></div>' +
+          '</button>' +
+          '<button type="button" class="st-menu-item" data-act="st-move-folder" data-id="' + d.id + '">' +
+            '<div class="st-menu-ico">' + ICO.folder + '</div>' +
+            '<div class="st-menu-txt"><strong>Move to folder</strong><small>' + (fName ? esc(fName) : "No folder") + '</small></div>' +
+          '</button>' +
+          '<button type="button" class="st-menu-item bad" data-act="st-delete" data-id="' + d.id + '">' +
+            '<div class="st-menu-ico">' + ICO.trash + '</div>' +
+            '<div class="st-menu-txt"><strong>Delete</strong><small>Permanently delete this document</small></div>' +
+          '</button>' +
+        '</div>' +
+      '</div>';
+      el.addEventListener("click", function (e) { if (e.target === el) closeDocMenu(); });
+      host.root().appendChild(el);
     });
   }
 
@@ -347,21 +541,53 @@
     closeViewer();
     var h = host;
     h.paint(h.bar("Study Studio", "Read and write on your PDFs", "back") + '<div class="pn-body st-lib" id="stLib">' +
-      '<button type="button" class="pn-btn pri" data-act="st-import">' + h.ico("plus") + ' Import a PDF</button>' +
+      '<div class="st-action-grid" id="stActionGrid">' +
+        '<button type="button" class="st-action-tile pri" data-act="st-newnb">' +
+          '<div class="st-action-ico">' + ICO.book + '</div>' +
+          '<div class="st-action-info"><strong>New notebook</strong></div>' +
+        '</button>' +
+        '<button type="button" class="st-action-tile" data-act="st-import">' +
+          '<div class="st-action-ico">' + ICO.pdf + '</div>' +
+          '<div class="st-action-info"><strong>Import PDF</strong></div>' +
+        '</button>' +
+        '<button type="button" class="st-action-tile" data-act="st-photos">' +
+          '<div class="st-action-ico">' + ICO.photos + '</div>' +
+          '<div class="st-action-info"><strong>Photos to PDF</strong></div>' +
+        '</button>' +
+      '</div>' +
       '<input type="file" id="stFile" accept="application/pdf" hidden>' +
-      '<button type="button" class="pn-btn" data-act="st-photos">' + h.ico("plus") + ' Import photos as PDF</button>' +
       '<input type="file" id="stPhotos" accept="image/*" multiple hidden>' +
-      '<button type="button" class="pn-btn" data-act="st-newnb">' + h.ico("plus") + ' New notebook</button>' +
-      '<div class="st-acts"><button type="button" class="pn-btn sm" data-act="st-backup">Back up library</button><button type="button" class="pn-btn sm" data-act="st-restore">Restore</button></div>' +
-      '<input type="file" id="stRestoreF" accept=".zip,application/zip" hidden><p class="pn-note" id="stBk" role="status"></p>' +
-      '<div class="st-new" id="stNew" hidden><input id="stNbT" maxlength="120" placeholder="Notebook title" aria-label="Notebook title">' +
-      '<select id="stNbS" aria-label="Page style"><option value="blank">Blank</option><option value="ruled" selected>Ruled</option><option value="grid">Grid</option><option value="cornell">Cornell</option></select>' +
-      '<select id="stNbZ" aria-label="Page size"><option value="a4">A4</option><option value="phone">Phone</option></select>' +
-      '<button type="button" class="pn-btn pri" data-act="st-mknb">Create</button></div>' +
-      '<input type="search" id="stQ" class="st-q" placeholder="Search titles and text" aria-label="Search your library" autocomplete="off">' +
+      '<div class="st-new" id="stNew" hidden>' +
+        '<div class="st-new-row">' +
+          '<input id="stNbT" maxlength="120" placeholder="Notebook title" aria-label="Notebook title">' +
+          '<select id="stNbS" aria-label="Page style">' +
+            '<option value="blank">Blank</option>' +
+            '<option value="ruled" selected>Ruled</option>' +
+            '<option value="grid">Grid</option>' +
+            '<option value="cornell">Cornell</option>' +
+            '<option value="dotgrid">Dot grid</option>' +
+          '</select>' +
+          '<select id="stNbZ" aria-label="Page size"><option value="a4">A4</option><option value="phone">Phone</option></select>' +
+          '<button type="button" class="pn-btn pri" data-act="st-mknb">Create</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="st-search-box">' +
+        '<span class="st-search-ico">' + ICO.search + '</span>' +
+        '<input type="search" id="stQ" class="st-q" placeholder="Search titles and text" aria-label="Search your library" autocomplete="off">' +
+      '</div>' +
       '<div id="stRes" class="smd-books-keep smd-emo-keep" aria-live="polite" hidden></div>' +
-      '<div class="st-chips" id="stChips"></div><div id="stList" aria-live="polite"></div>' +
-      '<p class="pn-note">PDFs stay on this phone. Your original file is never changed; pen strokes are saved beside it.</p></div>');
+      '<div class="st-chips" id="stChips"></div>' +
+      '<div id="stList" aria-live="polite"></div>' +
+      '<div class="st-backup-box">' +
+        '<div class="st-acts">' +
+          '<button type="button" class="pn-btn sm" data-act="st-backup">Back up library</button>' +
+          '<button type="button" class="pn-btn sm" data-act="st-restore">Restore</button>' +
+        '</div>' +
+        '<p class="pn-note" id="stBk" role="status" style="margin:0"></p>' +
+      '</div>' +
+      '<input type="file" id="stRestoreF" accept=".zip,application/zip" hidden>' +
+      '<p class="pn-note">PDFs stay on this phone. Your original file is never changed; pen strokes are saved beside it.</p>' +
+    '</div>');
     var f = h.root().querySelector("#stFile");
     f.addEventListener("change", function () {
       var file = f.files && f.files[0]; if (!file) return;
@@ -377,11 +603,17 @@
       var fl = Array.prototype.slice.call(ph.files || []); ph.value = "";
       Promise.all(fl.map(readUrl)).then(importPhotos, function () { host.toast("Those photos could not be added."); });
     });
-    // Scan only where the phone can: no DocScan plugin, or isAvailable false, means no button at all.
     var sc = scanner();
     if (sc) sc.isAvailable().then(function (r) {
-      var root = host.root(), at = root && root.querySelector('[data-act="st-import"]');
-      if (r && r.available && at && !root.querySelector('[data-act="st-scan"]')) at.insertAdjacentHTML("afterend", '<button type="button" class="pn-btn" data-act="st-scan">' + host.ico("plus") + " Scan</button>");
+      var root = host.root(), at = root && root.querySelector('[data-act="st-photos"]'), grid = root && root.querySelector("#stActionGrid");
+      if (r && r.available && at && !root.querySelector('[data-act="st-scan"]')) {
+        if (grid) grid.classList.add("has-scan");
+        at.insertAdjacentHTML("afterend",
+          '<button type="button" class="st-action-tile" data-act="st-scan">' +
+            '<div class="st-action-ico">' + ICO.scan + '</div>' +
+            '<div class="st-action-info"><strong>Scan</strong></div>' +
+          '</button>');
+      }
     }, function () {});
     h.root().querySelector("#stList").addEventListener("change", function (e) {
       var s = e.target.closest && e.target.closest("select[data-id]"); if (!s) return;
@@ -391,7 +623,9 @@
     qi.addEventListener("input", function () { G.clearTimeout(qt); qt = G.setTimeout(function () { runSearch(qi.value); }, 250); });
     fillLib(); kick();
   }
+
   function fillLib() {
+    closeDocMenu();
     Promise.all([all("docs"), all("folders"), all("index")]).then(function (r) {
       var ixd = {}; r[2].forEach(function (x) { ixd[x.doc] = x.done; });
       var root = host.root(), list = root && root.querySelector("#stList"); if (!list) return;
@@ -399,15 +633,42 @@
       if (f !== "all" && f !== "fav" && !folders.some(function (x) { return x.id === f; })) f = lib.filter = "all";
       var chip = function (v, label) { return '<button type="button" class="st-chip' + (f === v ? " on" : "") + '" data-act="st-filter" data-v="' + esc(v) + '">' + esc(label) + "</button>"; };
       root.querySelector("#stChips").innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
-        '<button type="button" class="st-chip" data-act="st-newfolder">+ Folder</button>' + (f !== "all" && f !== "fav" ? '<button type="button" class="st-chip" data-act="st-delfolder" data-v="' + esc(f) + '">Delete folder</button>' : "");
+        '<button type="button" class="st-chip" data-act="st-newfolder">' + ICO.plus + ' Folder</button>' + (f !== "all" && f !== "fav" ? '<button type="button" class="st-chip" data-act="st-delfolder" data-v="' + esc(f) + '">Delete folder</button>' : "");
       var shown = docs.filter(function (d) { return f === "all" || (f === "fav" ? d.favourite : d.folderId === f); });
-      if (!shown.length) { list.innerHTML = '<p class="pn-empty">' + (docs.length ? "Nothing here yet." : "No PDFs yet. Import one to read and write on it.") + "</p>"; return; }
+      if (!shown.length) {
+        list.innerHTML = '<div class="st-empty-box"><div class="st-empty-ico">' + ICO.book + '</div>' +
+          '<h3>' + (docs.length ? "Nothing in this folder" : "No PDFs yet") + '</h3>' +
+          '<p>' + (docs.length ? "Switch to Recent to view all your notes and files." : "Import a PDF, scan notes, or create a notebook to read and write on it.") + '</p>' +
+          '<p class="pn-empty" style="display:none">' + (docs.length ? "Nothing here yet." : "No PDFs yet. Import one to read and write on it.") + '</p>' +
+        '</div>';
+        return;
+      }
       list.innerHTML = shown.map(function (d) {
-        return '<div class="st-doc"><button type="button" class="st-open" data-act="st-open" data-id="' + d.id + '"><img class="st-th" alt="" src="' + (d.thumb || "") + '"><span class="st-tt"><b>' + esc(d.title) + "</b><small>" + (d.kind === "nb" ? "Notebook, " : "") + d.pageCount + (d.pageCount === 1 ? " page" : " pages") + '</small>' + (d.kind === "nb" ? "" : '<small class="st-ix" data-ix="' + d.id + '">' + ixLabel(ixd[d.id] || 0, d.pageCount) + "</small>") + "</span></button>" +
-          '<div class="st-acts"><button type="button" class="pn-btn sm" data-act="st-fav" data-id="' + d.id + '" aria-pressed="' + !!d.favourite + '">' + (d.favourite ? "Starred" : "Star") + "</button>" +
-          '<button type="button" class="pn-btn sm" data-act="st-rename" data-id="' + d.id + '">Rename</button>' +
-          '<select class="st-sel" data-id="' + d.id + '" aria-label="Folder"><option value="">No folder</option>' + folders.map(function (x) { return '<option value="' + x.id + '"' + (d.folderId === x.id ? " selected" : "") + ">" + esc(x.name) + "</option>"; }).join("") + "</select>" +
-          '<button type="button" class="pn-btn sm" data-act="st-delete" data-id="' + d.id + '">Delete</button></div></div>';
+        var isNb = d.kind === "nb";
+        var fName = d.folderId && folders.reduce(function (a, fl) { return fl.id === d.folderId ? fl.name : a; }, null);
+        return '<div class="st-doc" data-id="' + d.id + '">' +
+          '<button type="button" class="st-open" data-act="st-open" data-id="' + d.id + '">' +
+            '<div class="st-th-wrap">' +
+              (d.thumb ? '<img class="st-th" alt="" src="' + esc(d.thumb) + '" onerror="this.style.display=\'none\';if(this.nextElementSibling)this.nextElementSibling.style.display=\'flex\';">' : '') +
+              '<div class="st-th-placeholder" style="' + (d.thumb ? 'display:none;' : 'display:flex;') + '">' +
+                (isNb ? ICO.book : ICO.pdf) +
+              '</div>' +
+            '</div>' +
+            '<span class="st-tt">' +
+              '<b>' + esc(d.title) + '</b>' +
+              '<small>' + (isNb ? "Notebook, " : "") + d.pageCount + (d.pageCount === 1 ? " page" : " pages") + (fName ? ' • ' + esc(fName) : '') + '</small>' +
+              (isNb ? '' : '<small class="st-ix" data-ix="' + d.id + '">' + ixLabel(ixd[d.id] || 0, d.pageCount) + '</small>') +
+            '</span>' +
+          '</button>' +
+          '<div class="st-doc-actions">' +
+            '<button type="button" class="st-fav-btn' + (d.favourite ? ' on' : '') + '" data-act="st-fav" data-id="' + d.id + '" aria-pressed="' + !!d.favourite + '" aria-label="' + (d.favourite ? 'Starred' : 'Star') + '">' +
+              (d.favourite ? ICO.starFill : ICO.star) +
+            '</button>' +
+            '<button type="button" class="st-doc-menu-btn" data-act="st-doc-menu" data-id="' + d.id + '" title="More actions" aria-label="More actions">' +
+              ICO.more +
+            '</button>' +
+          '</div>' +
+        '</div>';
       }).join("");
     });
   }
@@ -430,10 +691,8 @@
     var meta = { id: uid(), title: String(title || "").trim().slice(0, 120) || "Notebook", kind: "nb", style: style, size: size, ratio: ratio, ord: [1], next: 2, pageCount: 1, created: Date.now(), lastOpened: 0, favourite: false, folderId: null, subject: null, thumb: c.toDataURL("image/jpeg", 0.7) };
     return put("docs", meta).then(function () { return meta; });
   }
-  // A notebook page is a page with no PDF behind it: strokes carry the page's stable id, V.nb.ord maps position to id.
   function pid(n) { return V.nb ? V.nb.ord[n - 1] : n; }
   function posOf(id) { return V.nb ? V.nb.ord.indexOf(id) + 1 : id; }
-  // Save the changed notebook and reopen it at page goto (the viewer is rebuilt from storage, the pen tool is kept).
   function reloadNb(goto) {
     var id = V.id, d = V.nb; d.pageCount = d.ord.length; carry = { tool: V.tool, ci: V.ci, wi: V.wi };
     return put("docs", d).then(function () { renderViewer(id, goto); });
@@ -445,17 +704,15 @@
     if (ord.length < 2) return host.toast("A notebook needs at least one page.");
     if (!G.confirm("Delete this page and what you drew on it? This cannot be undone.")) return;
     var gone = ord.splice(n - 1, 1)[0], dead = V.strokes.filter(function (s) { return s.page === gone; });
-    V.stack = newStack();   // shortcut: undo history is cleared when a page goes, so no undo step can point at a deleted stroke
+    V.stack = newStack();
     return Promise.all(dead.map(function (s) { return del("strokes", s.id); })).then(saveStack).then(function () { return reloadNb(Math.min(n, ord.length)); });
   }
 
   /* ---- search (A6) ---- */
-  // Index state: "index" {doc, done} counts the pages of a PDF whose text is stored; "ptext" holds one record per page and source.
   var ix = { run: false, again: false }, searchTok = 0;
   function purge(id) {
     return textOf(id).then(function (rows) { return Promise.all(rows.map(function (x) { return del("ptext", x.id); })); }).then(function () { return del("index", id); });
   }
-  // OCR hook for row A5: STUDY.setPageText(docId, page, text) stores the OCR text of one page; search reads it beside the PDF text.
   function setPageText(doc, page, text) { return put("ptext", { id: doc + ":" + page + ":ocr", doc: doc, page: page, src: "ocr", text: String(text || "") }); }
   function setIx(id, done, total) {
     var root = host && host.root(), el = root && root.querySelector('[data-ix="' + id + '"]');
@@ -473,7 +730,6 @@
   function indexDoc(d, from) {
     return loadOriginal(d).then(openPdf).then(function (pdf) {
       var n = from, fin = function () { try { pdf.destroy(); } catch (e) {} };
-      // Three pages, then a pause, so the UI stays responsive.
       function batch() {
         return get("docs", d.id).then(function (cur) {
           if (!cur) return purge(d.id);
@@ -487,7 +743,7 @@
         });
       }
       return batch().then(fin, fin);
-    }).catch(function () {});   // shortcut: a PDF that fails to index keeps its count and is tried again the next time the library opens
+    }).catch(function () {});
   }
   function kick() {
     if (ix.run) { ix.again = true; return; }
@@ -497,7 +753,6 @@
       return r[0].filter(function (d) { return d.kind !== "nb" && (done[d.id] || 0) < d.pageCount; }).reduce(function (p, d) { return p.then(function () { return indexDoc(d, done[d.id] || 0); }); }, Promise.resolve());
     }).then(function () { return null; }, function () { return null; }).then(function () { ix.run = false; if (ix.again) kick(); });
   }
-  // shortcut: the query is one phrase matched case-insensitively with indexOf; fine for study notes, upgrade if people want word-and matching.
   function runSearch(raw) {
     var root = host && host.root(), res = root && root.querySelector("#stRes"), qs = String(raw || "").trim(), tok = ++searchTok;
     if (!res) return;
@@ -525,50 +780,306 @@
   }
 
   /* ---- viewer ---- */
+  function closePageSheet() {
+    var s = host && host.root() && host.root().querySelector("#stPageSheet");
+    if (s && s.parentNode) s.parentNode.removeChild(s);
+  }
+  function closeMoreMenu() {
+    var m = host && host.root() && host.root().querySelector("#stMoreSheet");
+    if (m && m.parentNode) m.parentNode.removeChild(m);
+  }
+  function removeLassoBar() {
+    var b = host && host.root() && host.root().querySelector("#stLassoBar");
+    if (b && b.parentNode) b.parentNode.removeChild(b);
+  }
+  function showLassoBar() {
+    removeLassoBar();
+    if (!V || !V.lasso || !V.lasso.ids.length) return;
+    var div = D.createElement("div");
+    div.id = "stLassoBar";
+    div.className = "st-lasso-bar";
+    div.innerHTML = '<button type="button" class="pn-btn sm" data-act="st-lasso-copy">' + ICO.copy + ' Duplicate</button>' +
+      '<button type="button" class="pn-btn sm" data-act="st-lasso-color">' + ICO.palette + ' Recolour</button>' +
+      '<button type="button" class="pn-btn sm bad" data-act="st-lasso-del">' + ICO.trash + ' Delete</button>' +
+      '<button type="button" class="pn-btn sm" data-act="st-lasso-done">' + ICO.check + ' Done</button>';
+    host.root().appendChild(div);
+  }
+
+  function showPageSheet() {
+    closePageSheet();
+    closeMoreMenu();
+    if (!V) return;
+    var el = D.createElement("div");
+    el.id = "stPageSheet";
+    el.className = "st-sheet";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    var isNb = !!V.nb;
+    var cardsHtml = "";
+    for (var i = 1; i <= V.n; i++) {
+      var isCur = i === (V.cur || 1);
+      cardsHtml += '<div class="st-pg-card' + (isCur ? " cur" : "") + '" data-act="st-jump-page" data-page="' + i + '">' +
+        '<div class="st-pg-thumb" data-page="' + i + '">' +
+          '<canvas class="st-pg-cv" width="90" height="' + Math.round(90 * (V.ratio || 1.414)) + '"></canvas>' +
+          '<span class="st-pg-num">' + i + '</span>' +
+        '</div>' +
+        '<span class="st-pg-label">Page ' + i + '</span>' +
+      '</div>';
+    }
+    el.innerHTML = '<div class="st-sh smd-books-keep smd-emo-keep">' +
+      '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+        '<h2>Pages (' + (V.cur || 1) + ' of ' + V.n + ')</h2>' +
+        '<button type="button" class="pn-btn sm" data-act="st-close-pagesheet">Done</button>' +
+      '</div>' +
+      '<div class="st-pg-jump-row">' +
+        '<label class="st-pj">Go to page: <input id="stPage" type="number" min="1" max="' + V.n + '" value="' + (V.cur || 1) + '" aria-label="Page number"></label>' +
+        '<button type="button" class="pn-btn sm" data-act="st-go">Go</button>' +
+      '</div>' +
+      (isNb ?
+        '<div class="st-acts">' +
+          '<button type="button" class="pn-btn sm" data-act="st-addpg">' + ICO.plus + ' Add page</button>' +
+          '<button type="button" class="pn-btn sm" data-act="st-up">' + ICO.arrowUp + ' Move up</button>' +
+          '<button type="button" class="pn-btn sm" data-act="st-dn">' + ICO.arrowDown + ' Move down</button>' +
+          '<button type="button" class="pn-btn sm bad" data-act="st-delpg">' + ICO.trash + ' Delete page</button>' +
+        '</div>' : "") +
+      '<div class="st-pg-grid">' + cardsHtml + '</div>' +
+    '</div>';
+    el.addEventListener("click", function (e) { if (e.target === el) closePageSheet(); });
+    host.root().appendChild(el);
+    renderSheetThumbnails(el);
+  }
+
+  function renderSheetThumbnails(root) {
+    if (!V) return;
+    var cards = root.querySelectorAll(".st-pg-card");
+    Array.prototype.forEach.call(cards, function (card) {
+      var n = +card.getAttribute("data-page");
+      var cv = card.querySelector("canvas.st-pg-cv"), num = card.querySelector(".st-pg-num");
+      if (!cv) return;
+      var ctx = cv.getContext("2d"), cw = cv.width, ch = cv.height;
+      if (V.nb) {
+        drawBg(ctx, V.nb.style, V.ratio, cw);
+        var pageId = V.nb.ord[n - 1];
+        V.strokes.forEach(function (s) {
+          if (s.page === pageId && !s.gone) drawStroke(ctx, s, cw, ch, 1);
+        });
+        if (num) num.style.display = "none";
+      } else if (V.pdf) {
+        if (V.pg[n] && V.pg[n].cv) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, cw, ch);
+          ctx.drawImage(V.pg[n].cv, 0, 0, cw, ch);
+          V.strokes.forEach(function (s) {
+            if (s.page === n && !s.gone) drawStroke(ctx, s, cw, ch, 1);
+          });
+          if (num) num.style.display = "none";
+        } else {
+          V.pdf.getPage(n).then(function (page) {
+            var v0 = page.getViewport({ scale: 1 }), sc = cw / v0.width, vp = page.getViewport({ scale: sc });
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, cw, ch);
+            return page.render({ canvasContext: ctx, viewport: vp }).promise.then(function () {
+              page.cleanup();
+              V.strokes.forEach(function (s) {
+                if (s.page === n && !s.gone) drawStroke(ctx, s, cw, ch, 1);
+              });
+              if (num) num.style.display = "none";
+            });
+          }).catch(function () {});
+        }
+      }
+    });
+  }
+
+  function showMoreMenu() {
+    closeMoreMenu();
+    if (!V) return;
+    var d = V.doc, isNb = !!V.nb;
+    var el = D.createElement("div");
+    el.id = "stMoreSheet";
+    el.className = "st-sheet";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    el.innerHTML = '<div class="st-sh st-more-sheet smd-books-keep smd-emo-keep">' +
+      '<div class="st-more-head">' +
+        '<h3>Options</h3>' +
+        '<button type="button" class="pn-btn sm" data-act="st-close-more">Done</button>' +
+      '</div>' +
+      '<div class="st-more-sec">' +
+        '<div class="st-more-sec-title">Study AI</div>' +
+        (isNb ?
+          '<button type="button" class="st-menu-item" data-act="st-ai-summary">' +
+            '<div class="st-menu-ico">' + ICO.sparkle + '</div>' +
+            '<div class="st-menu-txt"><strong>Key summary</strong><small>Summarize page notes</small></div>' +
+          '</button>' :
+          '<div class="st-more-field">' +
+            '<label class="st-more-label">Pages range: <input id="stRange" class="st-range-input" type="text" placeholder="this page (e.g. 1-3)" aria-label="Pages to use"></label>' +
+          '</div>' +
+          '<button type="button" class="st-menu-item" data-act="st-make">' +
+            '<div class="st-menu-ico">' + ICO.sparkle + '</div>' +
+            '<div class="st-menu-txt"><strong>Make deck</strong><small>Generate cards and questions from selected pages</small></div>' +
+          '</button>' +
+          '<button type="button" class="st-menu-item" data-act="st-explain">' +
+            '<div class="st-menu-ico">' + ICO.sparkle + '</div>' +
+            '<div class="st-menu-txt"><strong>Explain</strong><small>AI explanation of selected text</small></div>' +
+          '</button>') +
+      '</div>' +
+      '<div class="st-more-sec">' +
+        '<div class="st-more-sec-title">Share and export</div>' +
+        (isNb ? "" :
+          '<button type="button" class="st-menu-item" data-act="st-orig">' +
+            '<div class="st-menu-ico">' + ICO.pdf + '</div>' +
+            '<div class="st-menu-txt"><strong>Share original</strong><small>Unannotated PDF</small></div>' +
+          '</button>') +
+        '<button type="button" class="st-menu-item" data-act="st-flat">' +
+          '<div class="st-menu-ico">' + ICO.share + '</div>' +
+          '<div class="st-menu-txt"><strong>' + (isNb ? "Notebook to PDF" : "Share flattened") + '</strong><small>' + (isNb ? "Export all notebook pages" : "Includes all handwriting and annotations") + '</small></div>' +
+        '</button>' +
+      '</div>' +
+      '<div class="st-more-sec">' +
+        '<div class="st-more-sec-title">View</div>' +
+        '<div class="st-more-row">' +
+          '<span>Zoom (<b id="stZoomLabel">' + Math.round((V.z || 1) * 100) + '%</b>)</span>' +
+          '<div class="st-zoom-group">' +
+            '<button type="button" class="pn-btn sm" data-act="st-zoom" data-v="-" aria-label="Zoom out">' + ICO.minus + ' Zoom out</button>' +
+            '<button type="button" class="pn-btn sm" data-act="st-zoom" data-v="+" aria-label="Zoom in">' + ICO.plus + ' Zoom in</button>' +
+          '</div>' +
+        '</div>' +
+        '<button type="button" class="st-menu-item" data-act="st-page-sheet">' +
+          '<div class="st-menu-ico">' + ICO.grid + '</div>' +
+          '<div class="st-menu-txt"><strong>Page overview</strong><small>Thumbnails and page management</small></div>' +
+        '</button>' +
+      '</div>' +
+      '<div class="st-more-sec">' +
+        '<div class="st-more-sec-title">Settings</div>' +
+        '<div class="st-more-row">' +
+          '<div><strong>Scribble erase</strong><small style="display:block;color:var(--pn-mut)">Fast back-and-forth stroke erases ink</small></div>' +
+          '<button type="button" class="pn-btn sm" data-act="st-toggle-scribble"><b id="stScribbleSt">' + (V.scribble === false ? "OFF" : "ON") + '</b></button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+    el.addEventListener("click", function (e) { if (e.target === el) closeMoreMenu(); });
+    host.root().appendChild(el);
+  }
+
+  function updateDocThumb() {
+    if (!V || !V.doc) return;
+    try {
+      var w = 160, h = Math.round(160 * V.ratio), c = D.createElement("canvas");
+      c.width = w; c.height = h;
+      var ctx = c.getContext("2d");
+      if (V.nb) {
+        drawBg(ctx, V.nb.style, V.ratio, w);
+        var p1 = V.nb.ord[0];
+        V.strokes.forEach(function (s) { if (s.page === p1 && !s.gone) drawStroke(ctx, s, w, h, 1); });
+        V.doc.thumb = c.toDataURL("image/jpeg", 0.7);
+        put("docs", V.doc);
+      } else if (V.pg[1] && V.pg[1].cv) {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, w, h);
+        ctx.drawImage(V.pg[1].cv, 0, 0, w, h);
+        V.strokes.forEach(function (s) { if (s.page === 1 && !s.gone) drawStroke(ctx, s, w, h, 1); });
+        V.doc.thumb = c.toDataURL("image/jpeg", 0.7);
+        put("docs", V.doc);
+      }
+    } catch (e) {}
+  }
+
   function closeViewer() {
     if (!V) return;
+    updateDocThumb();
+    removeLassoBar();
+    closePageSheet();
+    closeMoreMenu();
+    closeDocMenu();
+    closeFolderSheet();
     try { V.io.disconnect(); } catch (e) {}
     if (V.onSel) D.removeEventListener("selectionchange", onSel);
     Object.keys(V.pg).forEach(function (n) { freePage(+n); });
     try { V.pdf.destroy(); } catch (e) {}
     V = null;
   }
-  var carry = null;   // pen tool kept across a notebook reload
+  var carry = null;
   function renderViewer(id, goto) {
     var h = host;
     get("docs", id).then(function (d) {
       if (!d) return h.back();
       d.lastOpened = Date.now(); put("docs", d);
-      h.paint(h.bar(h.esc(d.title), d.pageCount + (d.pageCount === 1 ? " page" : " pages"), "back") + '<div class="pn-body st-body">' + toolbarHtml(d) + '<div class="st-sc" id="stSc"><div class="st-pages" id="stPages"></div></div></div>');
+      h.paint(h.bar(h.esc(d.title), d.pageCount + (d.pageCount === 1 ? " page" : " pages"), "back") +
+        '<div class="pn-body st-body">' +
+          toolbarHtml(d) +
+          '<div class="st-sc" id="stSc">' +
+            '<div class="st-pages" id="stPages"></div>' +
+          '</div>' +
+        '</div>');
       return Promise.all([d.kind === "nb" ? null : loadOriginal(d).then(openPdf), strokesOf(id), get("undo", id)]).then(function (r) { startViewer(d, r[0], r[1], r[2], goto); });
     }).catch(function () { h.toast("That PDF could not be opened."); });
   }
+
   function toolbarHtml(d) {
     var b = function (act, label, v, extra) { return '<button type="button" class="st-b" data-act="' + act + '"' + (v != null ? ' data-v="' + v + '"' : "") + (extra || "") + ">" + label + "</button>"; };
+    var cp = V ? (V.cur || 1) : 1;
     return '<div class="st-tb" id="stTb" role="toolbar" aria-label="Pen tools">' +
-      b("st-tool", "Pen", "pen") + b("st-tool", "Marker", "hl") + b("st-tool", "Eraser", "er") +
-      '<span class="st-sep"></span>' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-b st-c" data-act="st-color" data-v="' + i + '" aria-label="Colour ' + (i + 1) + '" style="--c:' + COLORS[i] + '"></button>'; }).join("") +
-      '<span class="st-sep"></span>' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-b st-w" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + (i + 1) * 2 + 'px"></i></button>'; }).join("") +
-      '<span class="st-sep"></span>' + b("st-undo", "Undo", null, " id=stUndo") + b("st-redo", "Redo", null, " id=stRedo") +
-      '<span class="st-sep"></span><label class="st-pj">Page <input id="stPage" type="number" inputmode="numeric" min="1" max="' + d.pageCount + '" value="1"> of ' + d.pageCount + "</label>" + b("st-go", "Go") + b("st-zoom", "-", "-", ' aria-label="Zoom out"') + b("st-zoom", "+", "+", ' aria-label="Zoom in"') + b("st-more", "More") +
-      (d.kind === "nb" ? '<span class="st-sep"></span>' + b("st-addpg", "+ Page") + b("st-delpg", "Delete page") + b("st-up", "Page up") + b("st-dn", "Page down") : "") + "</div>" + studyBar(d);
+      '<div class="st-tb-group">' +
+        '<div class="st-tb-tools">' +
+          b("st-tool", ICO.pen, "pen", ' title="Pen" aria-label="Pen"') +
+          b("st-tool", ICO.hl, "hl", ' title="Marker" aria-label="Marker"') +
+          b("st-tool", ICO.er, "er", ' title="Eraser" aria-label="Eraser"') +
+          b("st-tool", ICO.lasso, "lasso", ' title="Lasso select" aria-label="Lasso select"') +
+        '</div>' +
+      '</div>' +
+      '<div class="st-tb-group st-tb-history">' +
+        b("st-undo", ICO.undo, null, ' id="stUndo" title="Undo" aria-label="Undo" disabled') +
+        b("st-redo", ICO.redo, null, ' id="stRedo" title="Redo" aria-label="Redo" disabled') +
+      '</div>' +
+      '<div class="st-tb-group st-tb-page">' +
+        '<button type="button" class="st-b st-pj-btn" data-act="st-page-sheet" title="Thumbnails and pages" aria-label="Pages overview">' +
+          '<span id="stCurP">' + cp + '</span><span class="st-pj-slash"> / </span><span id="stTotP">' + d.pageCount + '</span>' +
+        '</button>' +
+        '<input id="stTbPage" type="hidden" value="' + cp + '">' +
+      '</div>' +
+      '<div class="st-tb-group st-tb-more">' +
+        b("st-more", ICO.more, null, ' title="More options" aria-label="More options"') +
+      '</div>' +
+    '</div>' +
+    colorStripHtml();
   }
-  // The second row (behind "More"): make cards from pages, explain a selection, share and export.
-  function studyBar(d) {
-    var b = function (act, label) { return '<button type="button" class="st-b" data-act="' + act + '">' + label + "</button>"; };
-    return '<div class="st-tb" id="stTb2" role="toolbar" aria-label="Study and share" hidden>' + (d.kind === "nb" ? "" :
-      '<label class="st-pj">Pages <input id="stRange" type="text" placeholder="this page" aria-label="Pages to use, like 3-5"></label>' + b("st-make", "Make deck") + b("st-explain", "Explain") + '<span class="st-sep"></span>' + b("st-orig", "Share original")) + b("st-flat", d.kind === "nb" ? "Notebook to PDF" : "Share flattened") + "</div>";
+
+  function colorStripHtml() {
+    var isHl = V && V.tool === "hl", pal = isHl ? HCOLORS : COLORS;
+    var cIdx = V ? V.ci : 0;
+    var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#42cdb5");
+    return '<div class="st-opt-strip" id="stToolOptions" ' + (V && (V.tool === "pen" || V.tool === "hl") ? "" : 'hidden') + '>' +
+      '<div class="st-colors-row">' +
+        pal.map(function (c, i) {
+          return '<button type="button" class="st-b st-c' + (cIdx === i ? ' on' : '') + '" data-act="st-color" data-v="' + i + '" aria-label="Colour ' + (i + 1) + '" style="--c:' + c + '"></button>';
+        }).join("") +
+        '<label class="st-c st-c-custom' + (cIdx === -1 ? ' on' : '') + '" title="Custom colour" aria-label="Custom colour" style="--c:' + custCol + '">' +
+          '<input type="color" id="stColorPicker" value="' + custCol + '" aria-label="Choose colour">' +
+        '</label>' +
+      '</div>' +
+      '<span class="st-sep"></span>' +
+      '<div class="st-widths-row">' +
+        [0, 1, 2].map(function (i) {
+          return '<button type="button" class="st-b st-w' + (V && V.wi === i ? ' on' : '') + '" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + ((i + 1) * 2 + 1) + 'px"></i></button>';
+        }).join("") +
+      '</div>' +
+    '</div>';
   }
+
   function startViewer(d, pdf, strokes, undoRec, goto) {
     var root = host.root(), sc = root && root.querySelector("#stSc"), box = root && root.querySelector("#stPages");
     if (!sc) { try { pdf.destroy(); } catch (e) {} return; }
     closeViewer();
-    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto };
+    var scrPref = true;
+    try { scrPref = G.localStorage.getItem("smd_study_scribble") !== "0"; } catch (e) {}
+    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
     syncTb();
   }
+
   function build() {
     var i, f = D.createDocumentFragment(), cw = V.baseW * V.z;
     for (i = 1; i <= V.n; i++) {
@@ -578,7 +1089,21 @@
       f.appendChild(el);
     }
     V.box.appendChild(f);
-    // Only pages within about 1.5 screens of the viewport hold canvases; the rest are empty boxes of the right size.
+
+    // AI Study Assistant box below pages (Ref 2)
+    var aiBox = D.createElement("div");
+    aiBox.className = "st-ai-box smd-books-keep smd-emo-keep";
+    aiBox.innerHTML = '<div class="st-ai-head">' +
+      '<div class="st-ai-title">' + ICO.sparkle + '<span>Study Assistant</span></div>' +
+      '<small>Generate study materials or explain concepts from this document</small>' +
+    '</div>' +
+    '<div class="st-ai-chips">' +
+      '<button type="button" class="st-ai-chip" data-act="st-ai-explain-page">' + ICO.sparkle + ' Explain this page</button>' +
+      (V.nb ? "" : '<button type="button" class="st-ai-chip" data-act="st-ai-make">' + ICO.book + ' Make flashcards &amp; questions</button>') +
+      '<button type="button" class="st-ai-chip" data-act="st-ai-summary">' + ICO.sparkle + ' Key summary</button>' +
+    '</div>';
+    V.box.appendChild(aiBox);
+
     V.io = new G.IntersectionObserver(function (es) {
       es.forEach(function (e) { var n = +e.target.getAttribute("data-n"); if (e.isIntersecting) renderPage(n); else freePage(n); });
     }, { root: V.sc, rootMargin: "150% 0px 150% 0px" });
@@ -589,20 +1114,24 @@
     V.sc.addEventListener("pointermove", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
     V.sc.addEventListener("pointerdown", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
   }
+
   function curPage() {
     if (!V) return;
     var y = V.sc.scrollTop + V.sc.clientHeight / 3, n = 1, i;
-    for (i = 1; i <= V.n; i++) { if (V.pg[i].el.offsetTop > y) break; n = i; }
+    for (i = 1; i <= V.n; i++) { if (V.pg[i] && V.pg[i].el.offsetTop > y) break; n = i; }
     V.cur = n;
     var inp = host.root() && host.root().querySelector("#stPage"); if (inp && D.activeElement !== inp) inp.value = n;
+    var tbP = host.root() && host.root().querySelector("#stTbPage"); if (tbP) tbP.value = n;
+    var curP = host.root() && host.root().querySelector("#stCurP"); if (curP) curP.textContent = n;
   }
+
   function renderPage(n) {
     var p = V && V.pg[n]; if (!p || p.on) return;
     p.on = true; var gen = ++p.gen, pdf = V.pdf;
     (pdf ? pdf.getPage(n) : Promise.resolve(null)).then(function (page) {
       if (!V || V.pdf !== pdf || V.pg[n] !== p || p.gen !== gen) return;
       var v1 = page ? page.getViewport({ scale: 1 }) : { width: 1, height: V.ratio }, cw = V.baseW * V.z, ch = cw * v1.height / v1.width, dpr = Math.min(G.devicePixelRatio || 1, 2);
-      var qf = Math.min(dpr, 4096 / cw); // canvas side stays under 4096 px even at 4x zoom
+      var qf = Math.min(dpr, 4096 / cw);
       p.ratio = v1.height / v1.width; p.el.style.height = ch + "px";
       var cv = D.createElement("canvas"), ov = D.createElement("canvas"), vp = page ? page.getViewport({ scale: (cw / v1.width) * qf }) : { width: cw * qf, height: ch * qf };
       cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.className = "st-cv";
@@ -616,6 +1145,7 @@
       }).then(function () { page.cleanup(); }, function () {});
     });
   }
+
   function freePage(n) {
     var p = V && V.pg[n]; if (!p || !p.on) return;
     p.on = false; p.gen++;
@@ -624,7 +1154,7 @@
     [p.cv, p.tl, p.ov].forEach(function (c) { if (c) { c.width = 0; c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
     p.cv = p.tl = p.ov = null;
   }
-  // The pdf.js text layer: transparent text above the page and below the ink, so a long press selects words (for Explain).
+
   function textLayer(page, p, k) {
     var L = G.pdfjsLib;
     if (!L || !L.renderTextLayer || !p.cv) return Promise.resolve();
@@ -636,7 +1166,7 @@
       return L.renderTextLayer({ textContentSource: tc, container: tl, viewport: page.getViewport({ scale: k }), textDivs: [] }).promise;
     }).then(null, function () {});
   }
-  // Remember the last non-empty selection made inside a text layer: a tap on a toolbar button can collapse the live one.
+
   function onSel() {
     if (!V) return;
     var s = G.getSelection && G.getSelection(), t = s ? String(s).replace(/\s+/g, " ").trim() : "", el = s && s.anchorNode, pg;
@@ -644,15 +1174,16 @@
     pg = t && el && el.closest && el.closest(".st-tl") && el.closest(".st-pg");
     if (pg) V.sel = { page: +pg.getAttribute("data-n"), text: t };
   }
+
   function setZoom(z) {
     z = Math.max(0.5, Math.min(4, z)); if (!V || z === V.z) return;
     var k = z / V.z, i, cw = V.baseW * z;
     V.sc.scrollTop *= k; V.sc.scrollLeft *= k; V.z = z;
     for (i = 1; i <= V.n; i++) { var p = V.pg[i]; p.el.style.width = cw + "px"; p.el.style.height = cw * p.ratio + "px"; }
-    // The canvases stretch while the fingers move; sharp ones are drawn once it settles.
     G.clearTimeout(V.zt);
     V.zt = G.setTimeout(function () { if (!V) return; Object.keys(V.pg).forEach(function (n) { if (V.pg[n].on) { freePage(+n); renderPage(+n); } }); }, 250);
   }
+
   function bindPinch() {
     var d0 = 0, z0 = 1;
     var span = function (t) { var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); };
@@ -663,9 +1194,11 @@
 
   /* ---- ink ---- */
   function penW(s, W, p) { return s.tool === "hl" ? s.w * W * HMUL : s.w * W * (0.5 + p); }
-  function drawStroke(ctx, s, W, H, dpr) {
+  function drawStroke(ctx, s, W, H, dpr, isSel) {
     var p = s.pts, i;
-    ctx.save(); ctx.scale(dpr, dpr); ctx.lineCap = "round"; ctx.lineJoin = "round"; ctx.strokeStyle = s.color;
+    ctx.save(); ctx.scale(dpr, dpr); ctx.lineCap = "round"; ctx.lineJoin = "round";
+    ctx.strokeStyle = isSel ? "#42cdb5" : s.color;
+    if (isSel) { ctx.shadowColor = "#42cdb5"; ctx.shadowBlur = 4; }
     if (s.tool === "hl") {
       ctx.globalAlpha = 0.35; ctx.lineWidth = penW(s, W, 0.5); ctx.beginPath();
       for (i = 0; i < p.length; i++) { if (i) ctx.lineTo(p[i][0] * W, p[i][1] * H); else ctx.moveTo(p[i][0] * W, p[i][1] * H); }
@@ -679,45 +1212,123 @@
     }
     ctx.restore();
   }
-  function redraw(n, live) {
+
+  function redraw(n, live, lassoLoop) {
     var p = V && V.pg[n]; if (!p || !p.ov) return;
     var ctx = p.ov.getContext("2d"), dpr = p.ov.width / (p.el.clientWidth || 1), W = p.el.clientWidth, H = p.el.clientHeight;
     ctx.clearRect(0, 0, p.ov.width, p.ov.height);
-    V.strokes.forEach(function (s) { if (s.page === pid(n) && !s.gone) drawStroke(ctx, s, W, H, dpr); });
+    V.strokes.forEach(function (s) {
+      if (s.page === pid(n) && !s.gone) {
+        var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
+        drawStroke(ctx, s, W, H, dpr, isSel);
+      }
+    });
     if (live) drawStroke(ctx, live, W, H, dpr);
+    if (lassoLoop && lassoLoop.length > 1) {
+      ctx.save();
+      ctx.scale(dpr, dpr);
+      ctx.strokeStyle = "#42cdb5";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      for (var k = 0; k < lassoLoop.length; k++) {
+        var lx = lassoLoop[k][0] * W, ly = lassoLoop[k][1] * H;
+        if (k === 0) ctx.moveTo(lx, ly); else ctx.lineTo(lx, ly);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
   }
+
+  function activeColor() {
+    if (!V) return COLORS[0];
+    if (V.ci === -1 && V.customColor) return V.customColor;
+    var pal = V.tool === "hl" ? HCOLORS : COLORS;
+    return pal[V.ci] || pal[0];
+  }
+
   function syncTb() {
     var root = host && host.root(); if (!root || !V) return;
-    Array.prototype.forEach.call(root.querySelectorAll("#stTb [data-act]"), function (b) {
-      var a = b.getAttribute("data-act"), v = b.getAttribute("data-v"), onb = (a === "st-tool" && v === V.tool) || (a === "st-color" && +v === V.ci) || (a === "st-width" && +v === V.wi);
-      b.classList.toggle("on", onb); if (a === "st-tool" || a === "st-color" || a === "st-width") b.setAttribute("aria-pressed", onb ? "true" : "false");
-      if (a === "st-color") b.style.setProperty("--c", (V.tool === "hl" ? HCOLORS : COLORS)[+v]);
+    Array.prototype.forEach.call(root.querySelectorAll("#stTb [data-act], #stMoreSheet [data-act], #stToolOptions [data-act]"), function (b) {
+      var a = b.getAttribute("data-act"), v = b.getAttribute("data-v");
+      var onb = (a === "st-tool" && v === V.tool) || (a === "st-color" && +v === V.ci) || (a === "st-width" && +v === V.wi);
+      b.classList.toggle("on", onb);
+      if (a === "st-tool" || a === "st-color" || a === "st-width") b.setAttribute("aria-pressed", onb ? "true" : "false");
       if (a === "st-undo") b.disabled = !V.stack.u.length;
       if (a === "st-redo") b.disabled = !V.stack.r.length;
     });
-    // touch-action none only while a drawing tool is active, so a finger scrolls the page the rest of the time.
+    var optStrip = root.querySelector("#stToolOptions");
+    if (optStrip) {
+      optStrip.hidden = !(V.tool === "pen" || V.tool === "hl");
+      var pal = V.tool === "hl" ? HCOLORS : COLORS;
+      Array.prototype.forEach.call(optStrip.querySelectorAll(".st-c[data-act='st-color']"), function (cBtn) {
+        var idx = +cBtn.getAttribute("data-v");
+        if (pal[idx]) cBtn.style.setProperty("--c", pal[idx]);
+      });
+      var custLbl = optStrip.querySelector(".st-c-custom");
+      if (custLbl) {
+        custLbl.classList.toggle("on", V.ci === -1);
+        if (V.customColor) custLbl.style.setProperty("--c", V.customColor);
+      }
+      var cp = optStrip.querySelector("#stColorPicker");
+      if (cp && !cp._bound) {
+        cp._bound = true;
+        var onCol = function (e) {
+          V.customColor = e.target.value;
+          V.ci = -1;
+          if (!V.tool) V.tool = "pen";
+          syncTb();
+        };
+        cp.addEventListener("input", onCol);
+        cp.addEventListener("change", onCol);
+      }
+    }
+    var scSt = root.querySelector("#stScribbleSt");
+    if (scSt) scSt.textContent = V.scribble === false ? "OFF" : "ON";
+    var curP = root.querySelector("#stCurP");
+    if (curP) curP.textContent = V.cur || 1;
+    var tbP = root.querySelector("#stTbPage");
+    if (tbP) tbP.value = V.cur || 1;
+    var inp = root.querySelector("#stPage");
+    if (inp && D.activeElement !== inp) inp.value = V.cur || 1;
+    var zm = root.querySelector("#stZoomLabel");
+    if (zm) zm.textContent = Math.round((V.z || 1) * 100) + "%";
     V.box.classList.toggle("st-ink", !!V.tool);
   }
+
   function saveStack() { return put("undo", { doc: V.id, u: V.stack.u, r: V.stack.r }); }
+
   function bindInk(ov, n) {
-    var cur = null, pan = null, erased = null;
+    var cur = null, pan = null, erased = null, lassoPts = null;
     var pos = function (e) { var r = ov.getBoundingClientRect(); return toRel(e.clientX, e.clientY, r); };
     var sample = function (e) { var a = pos(e); return [r4(a[0]), r4(a[1]), r4(pressure(e))]; };
     ov.addEventListener("pointerdown", function (e) {
       if (!V || !V.tool) return;
       if (e.pointerType === "pen") penSeen = true;
-      if (e.pointerType === "touch" && penSeen) { pan = { y: e.clientY, x: e.clientX }; return; }   // palm rejection: a finger scrolls, a pen draws
+      if (e.pointerType === "touch" && penSeen) { pan = { y: e.clientY, x: e.clientX }; return; }
       if (e.pointerType === "mouse" && e.button) return;
       try { ov.setPointerCapture(e.pointerId); } catch (x) {}
       if (V.tool === "er") { erased = []; eraseAt(e); return; }
+      if (V.tool === "lasso") {
+        lassoPts = [pos(e)];
+        removeLassoBar();
+        redraw(n, null, lassoPts);
+        e.preventDefault();
+        return;
+      }
       var pt = sample(e);
-      cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: (V.tool === "hl" ? HCOLORS : COLORS)[V.ci], w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now() };
+      cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now() };
       redraw(n, cur);
       e.preventDefault();
     });
     ov.addEventListener("pointermove", function (e) {
       if (pan) { V.sc.scrollTop -= e.clientY - pan.y; V.sc.scrollLeft -= e.clientX - pan.x; pan.y = e.clientY; pan.x = e.clientX; return; }
       if (erased) return eraseAt(e);
+      if (lassoPts) {
+        lassoPts.push(pos(e));
+        redraw(n, null, lassoPts);
+        return;
+      }
       if (!cur) return;
       var evs = e.getCoalescedEvents ? e.getCoalescedEvents() : null;
       if (!evs || !evs.length) evs = [e];
@@ -727,11 +1338,55 @@
     var end = function (e) {
       if (pan) { pan = null; return; }
       if (erased) { var ids = erased; erased = null; if (ids.length) { push(V.stack, { t: "del", ids: ids }); syncTb(); saveStack(); } return; }
+      if (lassoPts) {
+        var loop = lassoPts; lassoPts = null;
+        if (loop.length >= 3) {
+          var sel = [];
+          V.strokes.forEach(function (s) {
+            if (s.page === pid(n) && !s.gone && lassoHit(s, loop)) sel.push(s.id);
+          });
+          if (sel.length) {
+            V.lasso = { page: pid(n), ids: sel, n: n };
+            showLassoBar();
+          } else {
+            V.lasso = null;
+            removeLassoBar();
+          }
+        }
+        redraw(n);
+        return;
+      }
       if (!cur) return;
+
+      // Scribble-to-erase check (only when pen is active and scribble setting is on)
+      if (V.tool === "pen" && V.scribble !== false && isScribble(cur.pts)) {
+        var scPts = cur.pts, scIds = [];
+        var W = ov.clientWidth, H = ov.clientHeight;
+        V.strokes.forEach(function (s) {
+          if (s.page === pid(n) && !s.gone) {
+            for (var k = 0; k < scPts.length; k += 2) {
+              if (hit(s, scPts[k][0], scPts[k][1], 18, W, H)) {
+                s.gone = true;
+                scIds.push(s.id);
+                put("strokes", s);
+                break;
+              }
+            }
+          }
+        });
+        if (scIds.length) {
+          cur = null;
+          push(V.stack, { t: "del", ids: scIds });
+          syncTb();
+          saveStack();
+          redraw(n);
+          return;
+        }
+      }
+
       var s = cur; cur = null;
       V.strokes.push(s); push(V.stack, { t: "add", id: s.id }); syncTb();
       redraw(n);
-      // Autosave per stroke: the stroke and the stacks are written as it ends.
       put("strokes", s).then(saveStack);
     };
     ov.addEventListener("pointerup", end); ov.addEventListener("pointercancel", end);
@@ -743,6 +1398,7 @@
       if (hitAny) redraw(n);
     }
   }
+
   function flipOp(r) {
     var pages = {};
     opIds(r.op).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = r.gone; pages[s.page] = 1; put("strokes", s); } }); });
@@ -757,10 +1413,8 @@
     a.href = u; a.download = name; D.body.appendChild(a); a.click(); D.body.removeChild(a);
     G.setTimeout(function () { G.URL.revokeObjectURL(u); }, 40000);
   }
-  // The share sheet needs the native shell and Filesystem; without them (a headless test) the file is downloaded.
   function shareReady() { var N = G.SMD_NATIVE; return G.SMD_IS_NATIVE && fsPlugin() && N && N.share ? N : null; }
   function shareErr(e) { if (!/cancel/i.test(String(e && (e.message || e)))) host.toast("Sharing did not work. Try again."); }
-  // Print is whatever the share sheet offers for a PDF on that phone; there is no separate print button.
   function shareFile(name, bytes, mime) {
     var N = shareReady(), fs = fsPlugin();
     if (!N) { saveBlob(new Blob([bytes], { type: mime }), name); return Promise.resolve(); }
@@ -770,9 +1424,8 @@
     var d = V && V.doc; if (!d || V.nb) return;
     loadOriginal(d).then(function (bytes) { return shareFile(safeName(d.title) + ".pdf", bytes, "application/pdf"); }, function () { host.toast("The original could not be read."); });
   }
-  // Each page drawn (pdf.js, or the notebook's ruling) with its live strokes on top, one JPEG a page, into a new PDF. The stored original is only read.
-  // shortcut: the whole PDF is built in memory; fine for study notes, upgrade (stream pages) if people flatten very long books.
   function flatten() {
+    closeMoreMenu();
     var d = V && V.doc; if (!d) return;
     var pdf = V.pdf, strokes = V.strokes.filter(function (s) { return !s.gone; }), n = V.n, name = safeName(d.title) + (V.nb ? "" : " (flattened)") + ".pdf";
     host.toast("Preparing the PDF...");
@@ -807,12 +1460,10 @@
       });
     });
   }
-  // One zip, file by file: each original is read and written (through Filesystem where there is one) before the next, so only one PDF is in memory.
   function backup() {
     var F = G.fflate, name = "StewardMD Study backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
     var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0 }, files: [] };
     if (!(F && F.Zip && F.ZipPassThrough)) return bk("Backup is not available in this build.");
-    // shortcut: no compression (ZipPassThrough), upgrade if backups get too large
     var z = new F.Zip(function (e, chunk) {
       if (e) { err = e; return; }
       if (!fs) { parts.push(chunk); return; }
@@ -859,8 +1510,6 @@
       return blob.arrayBuffer().then(function (ab) { return restoreBytes(new Uint8Array(ab)); });
     }, viaInput);
   }
-  // Everything is checked (every sha256, every count) before the first write; a failed check writes nothing. Existing documents are never touched.
-  // shortcut: the whole backup file is read into memory on restore; upgrade to a streaming reader if backups pass a few hundred MB.
   function restoreBytes(bytes) {
     var F = G.fflate, ent;
     try { ent = F.unzipSync(bytes); } catch (e) { return bk("Nothing was restored. That file is not a Study Studio backup."); }
@@ -874,7 +1523,6 @@
           return plan.add.reduce(function (p, r) {
             return p.then(function () {
               var d = r.doc, w = d.kind === "nb" ? Promise.resolve(d.store) : saveOriginal(d.id, ent["files/" + d.id + ".pdf"]);
-              // The document record goes in last, so a document is listed only once everything it needs is stored.
               return w.then(function (where) { if (d.kind !== "nb") d.store = where; return putAll("strokes", r.strokes); })
                 .then(function () { return putAll("ptext", r.ptext); })
                 .then(function () { return r.undo ? put("undo", r.undo) : null; })
@@ -892,8 +1540,6 @@
   }
 
   /* ---- study link (A7) ---- */
-  // A sheet over the screen for the notices that must be accepted before anything is sent. Its text may hold the student's
-  // own PDF text, so it keeps "page N" as written (emoji-icons.js).
   var sheetOk = null;
   function closeSheet() { var r = host && host.root(), e = r && r.querySelector("#stSheet"); if (e) e.parentNode.removeChild(e); sheetOk = null; }
   function sheet(html, ok, label) {
@@ -905,7 +1551,6 @@
     host.root().appendChild(e); sheetOk = ok || null;
   }
   function signedIn() { var a = G.SMD_AUTH; return !!(a && a.currentUser); }
-  // The text of the chosen pages as Layer C lines: the pdf.js text layer, or the OCR text kept for a scanned page.
   function pagesText(pdf, id, pages) {
     var SR = G.PREP_SRC;
     return textOf(id).then(function (rows) {
@@ -913,6 +1558,12 @@
       rows.forEach(function (x) { if (x.src === "ocr" && x.text) ocr[x.page] = x.text; });
       return pages.reduce(function (pr, n) {
         return pr.then(function (out) {
+          if (!pdf) {
+            // Notebook: return stored OCR or text if present
+            var lines = ocr[n] ? ocr[n].split(/\n+/).map(function (t) { return { tx: t.replace(/\s+/g, " ").trim(), size: 0 }; }).filter(function (l) { return l.tx; }) : [];
+            if (lines.length) out.push({ p: n, ocr: true, lines: lines });
+            return out;
+          }
           return pdf.getPage(n).then(function (pg) {
             return pg.getTextContent().then(function (tc) {
               pg.cleanup();
@@ -942,7 +1593,6 @@
       }, function () { host.toast("Those pages could not be read."); });
     }, "Send and make");
   }
-  // One online call through the route Ask MaiK already uses (/api/ai/prep-teach, kind chat). Resolves { text } or { error }; never rejects.
   function askAi(text) {
     var u = G.SMD_AUTH && G.SMD_AUTH.currentUser, bad = function (t) { return { error: t }; };
     return Promise.resolve(u.getIdToken()).then(function (tok) {
@@ -996,29 +1646,146 @@
     if (a === "st-mknb") { var rt = h.root(); return makeNotebook(rt.querySelector("#stNbT").value, rt.querySelector("#stNbS").value, rt.querySelector("#stNbZ").value).then(function (m) { return h.push(function () { renderViewer(m.id); }); }); }
     if (a === "st-hit") { var hid = docIdOf(el), hp = parseInt(el.getAttribute("data-page"), 10) || 1; return h.push(function () { renderViewer(hid, hp); }); }
     if (a === "st-open") { var id = docIdOf(el); return h.push(function () { renderViewer(id); }); }
-    if (a === "st-fav") return get("docs", docIdOf(el)).then(function (d) { d.favourite = !d.favourite; return put("docs", d); }).then(fillLib);
-    if (a === "st-rename") return get("docs", docIdOf(el)).then(function (d) { var t = G.prompt("Rename", d.title); if (t && t.trim()) { d.title = t.trim().slice(0, 120); return put("docs", d).then(fillLib); } });
-    if (a === "st-delete") { if (G.confirm("Delete this PDF and your pen strokes on it? This cannot be undone.")) removeDoc(docIdOf(el)).then(fillLib); return; }
+    if (a === "st-fav") { closeDocMenu(); return get("docs", docIdOf(el)).then(function (d) { d.favourite = !d.favourite; return put("docs", d); }).then(fillLib); }
+    if (a === "st-rename") { closeDocMenu(); return get("docs", docIdOf(el)).then(function (d) { var t = G.prompt("Rename", d.title); if (t && t.trim()) { d.title = t.trim().slice(0, 120); return put("docs", d).then(fillLib); } }); }
+    if (a === "st-delete") { closeDocMenu(); if (G.confirm("Delete this PDF and your pen strokes on it? This cannot be undone.")) removeDoc(docIdOf(el)).then(fillLib); return; }
+    if (a === "st-doc-menu") return showDocMenu(docIdOf(el));
+    if (a === "st-close-docmenu") return closeDocMenu();
+    if (a === "st-move-folder") return showMoveFolderSheet(docIdOf(el));
+    if (a === "st-close-foldersheet") return closeFolderSheet();
+    if (a === "st-set-folder") {
+      var sId = docIdOf(el), sFid = el.getAttribute("data-folder") || null;
+      closeFolderSheet();
+      return get("docs", sId).then(function (d) {
+        if (d) { d.folderId = sFid; return put("docs", d); }
+      }).then(fillLib);
+    }
     if (!V) return;
-    if (a === "st-more") { var tb2 = h.root().querySelector("#stTb2"); tb2.hidden = !tb2.hidden; return; }
+    if (a === "st-more") return showMoreMenu();
+    if (a === "st-close-more") return closeMoreMenu();
     if (a === "st-make") return makeDeck();
     if (a === "st-orig") return shareOriginal();
     if (a === "st-flat") return flatten();
     if (a === "st-explain") return explain();
-    if (a === "st-tool") { var t = el.getAttribute("data-v"); V.tool = V.tool === t ? null : t; return syncTb(); }
+    if (a === "st-page-sheet") return showPageSheet();
+    if (a === "st-close-pagesheet") return closePageSheet();
+    if (a === "st-jump-page") {
+      var p = parseInt(el.getAttribute("data-page"), 10) || 1;
+      closePageSheet();
+      if (V && V.pg[p]) { V.sc.scrollTop = V.pg[p].el.offsetTop; curPage(); }
+      return;
+    }
+    if (a === "st-toggle-scribble") {
+      V.scribble = V.scribble === false;
+      try { G.localStorage.setItem("smd_study_scribble", V.scribble ? "1" : "0"); } catch (e) {}
+      var scSt = host.root().querySelector("#stScribbleSt");
+      if (scSt) scSt.textContent = V.scribble ? "ON" : "OFF";
+      host.toast("Scribble to erase: " + (V.scribble ? "ON" : "OFF"));
+      syncTb();
+      return;
+    }
+    if (a === "st-lasso-del") {
+      if (!V || !V.lasso) return;
+      var deadIds = V.lasso.ids, pgN = V.lasso.n;
+      V.strokes.forEach(function (s) {
+        if (deadIds.indexOf(s.id) !== -1) { s.gone = true; put("strokes", s); }
+      });
+      push(V.stack, { t: "del", ids: deadIds });
+      saveStack();
+      V.lasso = null;
+      removeLassoBar();
+      redraw(pgN);
+      syncTb();
+      host.toast("Deleted selection.");
+      return;
+    }
+    if (a === "st-lasso-color") {
+      if (!V || !V.lasso) return;
+      var cCol = (V.tool === "hl" ? HCOLORS : COLORS)[V.ci];
+      V.strokes.forEach(function (s) {
+        if (V.lasso.ids.indexOf(s.id) !== -1) { s.color = cCol; put("strokes", s); }
+      });
+      redraw(V.lasso.n);
+      host.toast("Recoloured.");
+      return;
+    }
+    if (a === "st-lasso-copy") {
+      if (!V || !V.lasso) return;
+      var newIds = [], copyPg = V.lasso.page, copyN = V.lasso.n;
+      V.strokes.forEach(function (s) {
+        if (V.lasso.ids.indexOf(s.id) !== -1) {
+          var copy = {
+            id: uid(), doc: V.id, page: s.page, tool: s.tool, color: s.color, w: s.w,
+            pts: s.pts.map(function (pt) { return [r4(Math.min(0.99, pt[0] + 0.03)), r4(Math.min(0.99, pt[1] + 0.03)), pt[2]]; }),
+            gone: false, t: Date.now()
+          };
+          V.strokes.push(copy);
+          newIds.push(copy.id);
+          put("strokes", copy);
+        }
+      });
+      newIds.forEach(function (nid) { push(V.stack, { t: "add", id: nid }); });
+      saveStack();
+      V.lasso = { page: copyPg, ids: newIds, n: copyN };
+      redraw(copyN);
+      host.toast("Duplicated.");
+      return;
+    }
+    if (a === "st-lasso-done") {
+      if (V) { var oldN = V.lasso && V.lasso.n; V.lasso = null; removeLassoBar(); if (oldN) redraw(oldN); }
+      return;
+    }
+    if (a === "st-ai-make") return makeDeck();
+    if (a === "st-ai-explain-page" || a === "st-ai-summary") {
+      if (!V) return;
+      var cp = V.cur || 1;
+      pagesText(V.pdf, V.id, [cp]).then(function (pgs) {
+        var txt = pgs[0] && pgs[0].lines ? pgs[0].lines.map(function (l) { return l.tx; }).join(" ") : "";
+        if (!txt.trim()) return host.toast("No readable text on this page yet.");
+        sheet('<h2>' + (a === "st-ai-summary" ? 'Summary' : 'Explanation') + '</h2><p>Sending page ' + cp + ' text to explain...</p>', function () {
+          sheet('<p role="status">Explaining...</p>');
+          askAi(txt.slice(0, 1500)).then(function (r) {
+            sheet('<p class="st-from">From <b>' + host.esc(V.title) + '</b>, page ' + cp + '</p>' + (r.text ? '<p class="st-ans">' + host.esc(r.text) + '</p>' : '<p>' + host.esc(r.error) + '</p>'));
+          });
+        }, "Send and explain");
+      });
+      return;
+    }
+    if (a === "st-tool") { var t = el.getAttribute("data-v"); V.tool = V.tool === t ? null : t; if (V.lasso) { V.lasso = null; removeLassoBar(); } return syncTb(); }
     if (a === "st-color") { V.ci = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
     if (a === "st-width") { V.wi = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
     if (a === "st-undo") { var u = undo(V.stack); return u && flipOp(u); }
     if (a === "st-redo") { var r = redo(V.stack); return r && flipOp(r); }
-    if (a === "st-go") { var inp = h.root().querySelector("#stPage"), n = Math.max(1, Math.min(V.n, parseInt(inp && inp.value, 10) || 1)); V.sc.scrollTop = V.pg[n].el.offsetTop; return; }
-    if (V.nb && (a === "st-addpg" || a === "st-delpg" || a === "st-up" || a === "st-dn")) return nbAct(a);
-    if (a === "st-zoom") return setZoom(V.z * (el.getAttribute("data-v") === "+" ? 1.25 : 0.8));
+    if (a === "st-go") {
+      var inp = h.root().querySelector("#stPage"), n = Math.max(1, Math.min(V.n, parseInt(inp && inp.value, 10) || 1));
+      closePageSheet();
+      if (V.pg[n]) { V.sc.scrollTop = V.pg[n].el.offsetTop; curPage(); }
+      return;
+    }
+    if (V.nb && (a === "st-addpg" || a === "st-delpg" || a === "st-up" || a === "st-dn")) {
+      closePageSheet();
+      return nbAct(a);
+    }
+    if (a === "st-zoom") {
+      var nz = V.z * (el.getAttribute("data-v") === "+" ? 1.25 : 0.8);
+      setZoom(nz);
+      var zl = host.root().querySelector("#stZoomLabel");
+      if (zl) zl.textContent = Math.round(V.z * 100) + "%";
+      return;
+    }
   }
-  function back() { return false; }
+  function back() {
+    var root = host && host.root();
+    if (root) {
+      var s = root.querySelector("#stMoreSheet, #stPageSheet, #stDocMenuSheet, #stFolderSheet");
+      if (s) {
+        closeMoreMenu(); closePageSheet(); closeDocMenu(); closeFolderSheet();
+        return true;
+      }
+    }
+    return false;
+  }
   function leave() { closeViewer(); }
-
-  // Called on every PrepNucleus home paint, so the host is set before the Study tab (prep-nav.js) opens the library.
-  // The entry is that tab now (owner 2026-11-15), not a home row.
   function homeRow(h) { host = h; return ""; }
 
   G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; } };

@@ -78,11 +78,12 @@ final class SmdWebView: WKWebView {
         for v in views {
             for case let i as UIEditMenuInteraction in v.interactions where !gated.contains(i) {
                 gated.add(i)
-                if i.delegate is EditMenuGate { continue }
+                // The SDK declares delegate get-only; patch only while UIKit still has the setter, else skip (no crash).
+                if i.delegate is EditMenuGate || !i.responds(to: EditMenuGate.setDelegate) { continue }
                 let gate = EditMenuGate(web: self, original: i.delegate)
                 gate.interaction = i
                 gates.append(gate)   // the interaction holds its delegate weakly
-                i.delegate = gate
+                _ = i.perform(EditMenuGate.setDelegate, with: gate)
             }
         }
     }
@@ -91,8 +92,7 @@ final class SmdWebView: WKWebView {
     override func buildMenu(with builder: UIMenuBuilder) {
         super.buildMenu(with: builder)
         guard builder.system == .context, !editing(nil) else { return }
-        var ids: [UIMenu.Identifier] = [.standardEdit, .lookup, .learn, .share, .find, .replace, .speech, .textStyle, .spelling]
-        if #available(iOS 18.0, *) { ids.append(.writingTools) }
+        let ids: [UIMenu.Identifier] = [.standardEdit, .lookup, .learn, .share, .find, .replace, .speech, .textStyle, .spelling]
         ids.forEach { builder.remove(menu: $0) }
     }
 }
@@ -100,6 +100,7 @@ final class SmdWebView: WKWebView {
 /// Delegate for an edit menu interaction in the web content: no menu on read-only text, otherwise exactly what the
 /// original delegate (UIKit's or WebKit's text interaction) would do. Every other delegate call is forwarded to it.
 final class EditMenuGate: NSObject, UIEditMenuInteractionDelegate {
+    static let setDelegate = NSSelectorFromString("setDelegate:")
     weak var web: SmdWebView?
     weak var original: UIEditMenuInteractionDelegate?
     weak var interaction: UIEditMenuInteraction?

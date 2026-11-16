@@ -83,6 +83,12 @@ project(':stewardmd-capacitor-prep-sound').projectDir = new File('../local-plugi
 include ':stewardmd-capacitor-prep-widgets'
 project(':stewardmd-capacitor-prep-widgets').projectDir = new File('../local-plugins/capacitor-prep-widgets/android')
 
+include ':stewardmd-capacitor-spotify-remote'
+project(':stewardmd-capacitor-spotify-remote').projectDir = new File('../local-plugins/capacitor-spotify-remote/android')
+
+include ':stewardmd-capacitor-doc-scan'
+project(':stewardmd-capacitor-doc-scan').projectDir = new File('../local-plugins/capacitor-doc-scan/android')
+
 include ':stewardmd-capacitor-vision-ocr'
 project(':stewardmd-capacitor-vision-ocr').projectDir = new File('../local-plugins/capacitor-vision-ocr/android')
 
