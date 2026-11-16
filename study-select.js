@@ -569,11 +569,18 @@
     if (!s || !s.shape) return false;
     ctx.save(); ctx.scale(dpr, dpr);
     ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.strokeStyle = isSel ? "#42cdb5" : s.color;
+    ctx.strokeStyle = isSel ? "#42cdb5" : (s.color || "#111111");
     ctx.lineWidth = Math.max(1, (s.w || 0.0032) * W * 1.4);
     shapePath(ctx, s.shape, W, H);
-    if (s.fill === "25") { ctx.fillStyle = hexA(s.color, 0.25); ctx.fill(); ctx.stroke(); }
-    else ctx.stroke();
+    if (s.fill === "25") {
+      ctx.save();
+      ctx.globalAlpha = 0.25;
+      ctx.fillStyle = s.color || "#111111";
+      ctx.fill();
+      ctx.restore();
+      shapePath(ctx, s.shape, W, H);
+    }
+    ctx.stroke();
     ctx.restore();
     return true;
   }
@@ -616,20 +623,18 @@
   function stripHtml(api) {
     var V = api.getV(), s = selOf(api);
     if (V.tool === "lasso") {
-      var labels = { pen: "Handwriting", hl: "Highlighter", shapes: "Shapes", images: "Images", text: "Text" };
+      var labels = { pen: "Ink", hl: "Highlighter", shapes: "Shapes", images: "Images", text: "Text" };
       return '<div class="st-sel-strip" role="group" aria-label="Lasso selects">' +
         ["pen", "hl", "shapes", "images", "text"].map(function (k) {
           var on = !!s.lasso[k];
-          return '<button type="button" class="st-sel-rule' + (on ? " on" : "") + '" data-sel="rule" data-v="' + k + '" aria-pressed="' + on + '">' + labels[k] + (on ? " on" : " off") + "</button>";
-        }).join("") +
-        '<span class="st-sel-hint">Lasso picks ink, shapes, text and images. Turn kinds off to leave them out.</span></div>';
+          return '<button type="button" class="st-sel-rule' + (on ? " on" : "") + '" data-sel="rule" data-v="' + k + '" aria-pressed="' + on + '">' + labels[k] + "</button>";
+        }).join("") + "</div>";
     }
     if (V.tool === "shapes") {
       return '<div class="st-sel-strip" role="group" aria-label="Shapes options">' +
-        '<button type="button" class="st-sel-rule' + (s.shapeFill === "none" ? " on" : "") + '" data-sel="fill" data-v="none" aria-pressed="' + (s.shapeFill === "none") + '">Outline only</button>' +
+        '<button type="button" class="st-sel-rule' + (s.shapeFill === "none" ? " on" : "") + '" data-sel="fill" data-v="none" aria-pressed="' + (s.shapeFill === "none") + '">Outline</button>' +
         '<button type="button" class="st-sel-rule' + (s.shapeFill === "25" ? " on" : "") + '" data-sel="fill" data-v="25" aria-pressed="' + (s.shapeFill === "25") + '">Fill 25%</button>' +
-        '<button type="button" class="st-sel-rule' + (s.drawSnap ? " on" : "") + '" data-sel="snap" aria-pressed="' + s.drawSnap + '">Draw and hold snap ' + (s.drawSnap ? "on" : "off") + "</button>" +
-        '<span class="st-sel-hint">Shapes tool snaps every stroke. With the pen, hold 0.5 s at the end to snap.</span></div>';
+        '<button type="button" class="st-sel-rule' + (s.drawSnap ? " on" : "") + '" data-sel="snap" aria-pressed="' + s.drawSnap + '">Snap</button></div>';
     }
     return "";
   }
@@ -672,7 +677,7 @@
   var PEN_COLORS = ["#111111", "#1a56db", "#d11a2a", "#168038", "#7b1fa2", "#ea580c", "#0e7490", "#b45309", "#be185d", "#334155", "#42cdb5", "#f5f0e6"];
   function removeLassoBar(api) {
     var r = api.root();
-    if (r) { var b = r.querySelector("#stLassoBar"); if (b && b.parentNode) b.parentNode.removeChild(b); }
+    if (r) { var b = r.querySelector("#stLassoBar"); if (b && b.parentNode) b.parentNode.removeChild(b); if (r.classList) r.classList.remove("st-lasso-on"); }
     removePanel(api);
     removePasteBubble(api);
   }
@@ -715,12 +720,32 @@
       btn("st-lasso-clipcopy", ICONS.copy, "Copy") +
       btn("st-lasso-del", ICONS.trash, "Delete") +
       btn("st-lasso-dup", ICONS.dup, "Duplicate") +
-      btn("st-lasso-resize", ICONS.resize, "Resize") +
       btn("st-lasso-color", ICONS.palette, "Color") +
-      btn("st-lasso-more", ICONS.more, "More") +
-      btn("st-lasso-done", ICONS.check, "Done");
-    api.root().appendChild(div);
+      btn("st-lasso-more", ICONS.more, "More");
+    var rootEl = api.root();
+    rootEl.appendChild(div);
+    if (rootEl.classList) rootEl.classList.add("st-lasso-on");
+    positionLassoBar(api, div);
     api.redraw(V.lasso.n);
+  }
+  function positionLassoBar(api, div) {
+    try {
+      var V = api.getV();
+      var bb = selBBoxNow(api);
+      var pg = V && V.pg && V.pg[V.lasso.n];
+      var el = pg && pg.el;
+      if (!bb || !el || !el.getBoundingClientRect) return;
+      var r = el.getBoundingClientRect();
+      var bw = div.offsetWidth || 320, bh = div.offsetHeight || 48;
+      var cx = r.left + ((bb.x0 + bb.x1) / 2) * r.width;
+      var left = Math.max(8, Math.min(cx - bw / 2, (G.innerWidth || 390) - bw - 8));
+      var top = r.top + bb.y0 * r.height - bh - 10;
+      if (top < 108) top = r.top + bb.y1 * r.height + 10;
+      div.style.left = left + "px";
+      div.style.top = top + "px";
+      div.style.bottom = "auto";
+      div.style.transform = "none";
+    } catch (e) {}
   }
   // ---- sub-panels: color, resize, more, convert ----
   function panel(api, id, html) {
@@ -774,9 +799,12 @@
   function showMorePanel(api) {
     removePanel(api);
     var html = '<div class="st-sel-panel-head"><b>More</b><button type="button" class="pn-btn sm" data-sel-close="1">Close</button></div>' +
-      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-rotate">' + ICONS.rotate + " Rotate 90 degrees</button>" +
+      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-resize">' + ICONS.resize + " Resize</button>" +
+      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-rotate">' + ICONS.rotate + " Rotate</button>" +
       '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-shot">' + ICONS.shot + " Take screenshot</button>" +
-      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-conv">Convert handwriting to text</button>';
+      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-conv">Convert to text</button>' +
+      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-save-elem">Save as element</button>' +
+      '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-done">' + ICONS.check + " Done</button>";
     var el = panel(api, "stSelMore", html);
     if (el) el.addEventListener("click", function (e) {
       var b = e.target;

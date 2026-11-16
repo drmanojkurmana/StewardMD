@@ -104,7 +104,12 @@
     trash: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
     image: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
     scan: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>',
-    pdf: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>'
+    pdf: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+    gotoIco: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M9 7h6M9 11h4"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2"/></svg>',
+    rotate: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>',
+    bookmark: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+    tpl: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
   };
 
   function ensureDocMeta(doc){
@@ -242,15 +247,15 @@
         '<div class="st-p3-top-group st-p3-left">' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-back" aria-label="Back to library">'+ICO.back+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-grid" aria-label="Open navigation">'+ICO.grid+'</button>' +
-          '<button type="button" class="st-p3-btn" data-act="st-p3-search" aria-label="Search">'+ICO.search+'</button>' +
-          '<button type="button" class="st-p3-btn" data-act="st-p3-share" aria-label="Share">'+ICO.share+'</button>' +
-          '<button type="button" class="st-p3-btn" data-act="st-p3-mic" aria-label="Microphone">'+ICO.mic+'</button>' +
+          '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-search" aria-label="Search">'+ICO.search+'</button>' +
+          '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-share" aria-label="Share">'+ICO.share+'</button>' +
+          '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-mic" aria-label="Microphone">'+ICO.mic+'</button>' +
         '</div>' +
         '<button type="button" class="st-p3-title" data-act="st-p3-title" aria-haspopup="menu" aria-label="Notebook options"><span class="st-p3-title-txt">'+title+'</span>'+ICO.chevD+'</button>' +
         '<div class="st-p3-top-group st-p3-right">' +
           '<button type="button" class="st-p3-btn" data-act="st-undo" id="stP3Undo" aria-label="Undo">'+ICO.undo+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-redo" id="stP3Redo" aria-label="Redo">'+ICO.redo+'</button>' +
-          '<button type="button" class="st-p3-btn" data-act="st-p3-fav" id="stP3Fav" aria-label="Star this page" aria-pressed="false">'+ICO.star+'</button>' +
+          '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-fav" id="stP3Fav" aria-label="Star this page" aria-pressed="false">'+ICO.star+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-add" aria-label="Add page">'+ICO.plus+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-close" aria-label="Close">'+ICO.x+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-more" aria-label="More options">'+ICO.more+'</button>' +
@@ -631,11 +636,16 @@
       '<div class="st-p3-more-head">'+thumbHtml+'<div><div class="st-p3-more-title">Page '+cur+'</div><small>'+esc(tplLabel(tplForPage(v.doc, pageKey||"")))+' • '+(v.nb?"Notebook":"PDF")+'</small></div></div>' +
       '<div class="st-p3-menu">' +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-copy">'+ICO.copy+'<div class="st-p3-menu-txt"><strong>Copy Page</strong><small>Duplicates page + strokes</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-rotate">'+ICO.image+'<div class="st-p3-menu-txt"><strong>Rotate Page</strong><small>90° steps</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-outline">'+ICO.copy+'<div class="st-p3-menu-txt"><strong>Add Page to Outline</strong><small>Bookmark this page</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-change-tpl">'+ICO.image+'<div class="st-p3-menu-txt"><strong>Change Template</strong><small>This page or all pages</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-go">'+ICO.search+'<div class="st-p3-menu-txt"><strong>Go to Page</strong><small>1–'+n+'</small></div></button>' +
-        '<button type="button" class="st-p3-menu-item" data-act="st-p3-settings">'+ICO.search+'<div class="st-p3-menu-txt"><strong>Settings</strong><small>Scroll, palm rejection, lock</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-p3-rotate">'+ICO.rotate+'<div class="st-p3-menu-txt"><strong>Rotate Page</strong><small>90° steps</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-p3-outline">'+ICO.bookmark+'<div class="st-p3-menu-txt"><strong>Add Page to Outline</strong><small>Bookmark this page</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-p3-change-tpl">'+ICO.tpl+'<div class="st-p3-menu-txt"><strong>Change Template</strong><small>This page or all pages</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-p3-go">'+ICO.gotoIco+'<div class="st-p3-menu-txt"><strong>Go to Page</strong><small>1–'+n+'</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-p3-settings">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Settings</strong><small>Scroll, palm rejection, lock</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-search">'+ICO.search+'<div class="st-p3-menu-txt"><strong>Search</strong><small>Find in this notebook</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-share">'+ICO.share+'<div class="st-p3-menu-txt"><strong>Share</strong><small>Share this notebook</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-mic">'+ICO.mic+'<div class="st-p3-menu-txt"><strong>Voice note</strong><small>Microphone</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-fav">'+ICO.star+'<div class="st-p3-menu-txt"><strong>Star page</strong><small>Bookmark this page</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-more">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Notebook options</strong><small>Study AI, share, zoom and settings</small></div></button>' +
         '<button type="button" class="st-p3-menu-item bad" data-act="st-p3-clear">'+ICO.trash+'<div class="st-p3-menu-txt"><strong>Clear Page</strong><small>Removes ink on this page</small></div></button>' +
       '</div>';
     var el=sheetEl("stP3MoreSheet", html);
@@ -719,7 +729,7 @@
     if(tab==="thumbs") body='<div class="st-p3-nav-grid" id="stP3NavGrid"></div>';
     else if(tab==="favs") body='<div id="stP3FavBody"></div>';
     else body='<div class="st-p3-outline-wrap"><div class="st-p3-filter"><input id="stP3OutlineFilter" placeholder="Filter outlines" aria-label="Filter outlines"></div><div id="stP3OutlineBody"></div></div>';
-    var html='<div class="st-p3-nav-head"><h3>Pages · '+tab+'</h3><div class="st-p3-nav-acts"><button type="button" class="pn-btn sm" data-act="st-p3-select-toggle">'+(navState.select?"Done":"Select")+'</button><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Close</button></div></div>'+tabs+body;
+    var html='<div class="st-p3-nav-head"><h3>Pages</h3><div class="st-p3-nav-acts"><button type="button" class="pn-btn sm" data-act="st-p3-select-toggle">'+(navState.select?"Done":"Select")+'</button><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Close</button></div></div>'+tabs+body;
     var el=sheetEl("stP3NavSheet", html);
     if(!el) return;
     /* bind tabs */

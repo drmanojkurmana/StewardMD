@@ -1,6 +1,7 @@
 /* Study Studio (study.js, study.css): premium mobile notes, PDF library & viewer.
    Uses PrepNucleus tokens (--pn-*) and palette (#071318 / #0D1D23 / #42CDB5).
-   All interactive targets >= 44px. No em-dash in app-facing copy. */
+   All interactive targets >= 44px. No em-dash in app-facing copy.
+   Radius scale: pills 999px, sheets 16px, cards 12px, chips 10px. One accent: #42CDB5. */
 
 /* Base & Library Layout */
 .pn-root .st-lib {
@@ -569,7 +570,7 @@
   flex-shrink: 0;
 }
 .pn-root .st-b:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 .pn-root .st-b.on {
   background: var(--pn-km-mint, #42cdb5);
@@ -583,11 +584,11 @@
   cursor: default;
 }
 .pn-root .st-tb-tools .st-b {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  border-radius: 18px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
   padding: 0;
 }
 .pn-root .st-tb-tools .st-b.on {
@@ -1737,3 +1738,37 @@ body:not(.dark) .pn-root .st-ink-seg.on {
 .pn-root .st-p3-btn:focus-visible,
 .pn-root .st-p3-tpl:focus-visible,
 .pn-root .st-p3-nav-card:focus-visible { outline:2px solid var(--pn-km-mint,#42cdb5); outline-offset:2px; }
+
+/* Polish pass: one top bar + one tool row, phone collapse, one selection pill. */
+.pn-root .st-tb { justify-content: center; overflow-x: auto; scrollbar-width: none; }
+.pn-root .st-tb::-webkit-scrollbar { display: none; }
+.pn-root .st-p3-phone-only { display: none; }
+@media (max-width: 560px) {
+  .pn-root .st-p3-collapse { display: none !important; }
+  .pn-root .st-p3-phone-only { display: flex; }
+  .pn-root .st-p3-title { max-width: 30vw; flex: 1 1 auto; justify-content: center; }
+  .pn-root .st-p3-title-txt { max-width: 16ch; }
+}
+.pn-root.st-lasso-on .st-item-bar { display: none !important; }
+.pn-root .st-lasso-bar {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 6px 8px;
+  border-radius: 16px;
+  max-width: calc(100vw - 16px);
+  box-sizing: border-box;
+}
+.pn-root .st-lasso-bar .st-lasso-actions,
+.pn-root .st-lasso-bar { flex-wrap: nowrap; }
+.pn-root .st-sel-btn { min-width: 44px; min-height: 44px; border-radius: 10px; }
+.pn-root .st-sel-btn:active, .pn-root .st-p3-btn:active, .pn-root .pn-btn:active { transform: scale(0.97); }
+.pn-root .st-item-bar .st-ib-btn { min-width: 44px; min-height: 44px; border-radius: 10px; }
+.pn-root .st-b:focus-visible, .pn-root .st-sel-btn:focus-visible, .pn-root .pn-btn:focus-visible,
+.pn-root .st-menu-item:focus-visible, .pn-root .st-p3-menu-item:focus-visible {
+  outline: 2px solid var(--pn-km-mint, #42cdb5); outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .st-lasso-bar, .pn-root .st-sel-panel, .pn-root .st-sh { animation: none !important; transition: none !important; }
+  .pn-root .st-b:active, .pn-root .pn-btn:active, .pn-root .st-p3-btn:active { transform: none !important; }
+}
