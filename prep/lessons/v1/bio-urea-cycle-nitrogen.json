@@ -10,11 +10,27 @@
    "say": "Transamination shuffles amino groups through ALT and AST without releasing free ammonia, needing pyridoxal phosphate. Lysine and threonine largely skip it. Leaked transaminases make this shuffle visible in laboratory practice.",
    "vis": {
     "kind": "table",
-    "cols": ["Reaction", "Enzyme (PLP)", "Direction in fasting"],
+    "cols": [
+     "Reaction",
+     "Enzyme (PLP)",
+     "Direction in fasting"
+    ],
     "rows": [
-     ["Alanine plus alpha-KG to pyruvate plus glutamate", "ALT", "Muscle exports alanine nitrogen"],
-     ["Aspartate plus alpha-KG to OAA plus glutamate", "AST", "Feeds urea aspartate nitrogen"],
-     ["Glutamate oxidative deamination", "GDH (not PLP)", "Releases free ammonia in liver"]
+     [
+      "Alanine plus alpha-KG to pyruvate plus glutamate",
+      "ALT",
+      "Muscle exports alanine nitrogen"
+     ],
+     [
+      "Aspartate plus alpha-KG to OAA plus glutamate",
+      "AST",
+      "Feeds urea aspartate nitrogen"
+     ],
+     [
+      "Glutamate oxidative deamination",
+      "GDH (not PLP)",
+      "Releases free ammonia in liver"
+     ]
     ]
    }
   },
@@ -25,12 +41,37 @@
     "kind": "flow",
     "title": "Nitrogen converges on glutamate",
     "nodes": [
-     {"id": "aa", "label": "Amino acids transaminate"},
-     {"id": "glu", "label": "Glutamate collects nitrogen"},
-     {"id": "nh3", "label": "GDH releases ammonia"},
-     {"id": "urea", "label": "Urea cycle disposes it"}
+     {
+      "id": "aa",
+      "label": "Amino acids transaminate"
+     },
+     {
+      "id": "glu",
+      "label": "Glutamate collects nitrogen"
+     },
+     {
+      "id": "nh3",
+      "label": "GDH releases ammonia"
+     },
+     {
+      "id": "urea",
+      "label": "Urea cycle disposes it"
+     }
     ],
-    "edges": [["aa", "glu"], ["glu", "nh3"], ["nh3", "urea"]]
+    "edges": [
+     [
+      "aa",
+      "glu"
+     ],
+     [
+      "glu",
+      "nh3"
+     ],
+     [
+      "nh3",
+      "urea"
+     ]
+    ]
    }
   },
   {
@@ -38,8 +79,21 @@
    "say": "Glutamine carries two nitrogens safely to liver and kidney, while alanine carries muscle nitrogen with glucose carbon. Glutaminase releases the nitrogen exactly where urea synthesis or acid excretion needs it.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Glutamine shuttle", "points": ["Two nitrogens per molecule", "Muscle and brain export form", "Kidney ammonia for acid excretion"]},
-    "right": {"title": "Alanine shuttle", "points": ["One nitrogen plus glucose carbon", "Muscle to liver (fasting)", "Nitrogen to urea, carbon to glucose"]
+    "left": {
+     "title": "Glutamine shuttle",
+     "points": [
+      "Two nitrogens per molecule",
+      "Muscle and brain export form",
+      "Kidney ammonia for acid excretion"
+     ]
+    },
+    "right": {
+     "title": "Alanine shuttle",
+     "points": [
+      "One nitrogen plus glucose carbon",
+      "Muscle to liver (fasting)",
+      "Nitrogen to urea, carbon to glucose"
+     ]
     }
    }
   },
@@ -64,11 +118,72 @@
    "say": "Amino groups converge on glutamate, glutamine and alanine ferry nitrogen safely, and brain pays first when disposal fails. The next lesson spends ATP to package those nitrogens into urea.",
    "vis": {
     "kind": "table",
-    "cols": ["Nitrogen form in blood", "Toxic?", "Destination"],
+    "cols": [
+     "Nitrogen form in blood",
+     "Toxic?",
+     "Destination"
+    ],
     "rows": [
-     ["Glutamine (high)", "Carrier, safe", "Liver urea, kidney acid handling"],
-     ["Alanine", "Carrier, safe", "Liver glucose plus urea"],
-     ["Free ammonia (high)", "Toxic, brain first", "Emergency: find the block"]
+     [
+      "Glutamine (high)",
+      "Carrier, safe",
+      "Liver urea, kidney acid handling"
+     ],
+     [
+      "Alanine",
+      "Carrier, safe",
+      "Liver glucose plus urea"
+     ],
+     [
+      "Free ammonia (high)",
+      "Toxic, brain first",
+      "Emergency: find the block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Transamination transfers amino groups from amino acids to alpha-ketoglutarate, forming glutamate, catalyzed by aminotransferases requiring pyridoxal phosphate (PLP). Glutamate dehydrogenase in liver mitochondria performs oxidative deamination of glutamate, releasing free ammonia and generating alpha-ketoglutarate with NADH or NADPH. Skeletal muscle transports excess nitrogen to the liver via the glucose-alanine cycle. Astrocytes detoxify cerebral ammonia by synthesizing glutamine via glutamine synthetase, but excessive intracellular glutamine causes osmotic astrocyte swelling and cerebral oedema in hyperammonaemia.",
+   "say": "Transamination transfers amino groups from amino acids to alpha-ketoglutarate, forming glutamate, catalyzed by aminotransferases requiring pyridoxal phosphate (PLP). Glutamate dehydrogenase in liver mitochondria performs oxidative deamination of glutamate, releasing free ammonia and generating alpha-ketoglutarate with NADH or NADPH. Skeletal muscle transports excess nitrogen to the liver via the glucose-alanine cycle. Astrocytes detoxify cerebral ammonia by synthesizing glutamine via glutamine synthetase, but excessive intracellular glutamine causes osmotic astrocyte swelling and cerebral oedema in hyperammonaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Transamination cofactor",
+      "Pyridoxal phosphate vitamin B6 acts as intermediate amino group carrier"
+     ],
+     [
+      "Aminotransferase clinical markers",
+      "Elevated ALT is specific for liver necrosis while AST reflects liver/cardiac injury"
+     ],
+     [
+      "Oxidative deamination enzyme",
+      "Glutamate dehydrogenase in mitochondrial matrix utilizes NAD+ or NADP+ uniquely"
+     ],
+     [
+      "Glucose-alanine cycle function",
+      "Transports muscle amino nitrogen as alanine to liver for urea conversion"
+     ],
+     [
+      "Glutamine synthetase reaction",
+      "Condenses ammonia with glutamate using ATP for safe nitrogen transport"
+     ],
+     [
+      "Hyperammonaemic brain toxicity",
+      "Glutamine accumulation causes astrocyte swelling and intracranial hypertension"
+     ],
+     [
+      "Renal ammoniagenesis",
+      "Glutaminase cleaves glutamine to glutamate and ammonia buffering urinary protons"
+     ],
+     [
+      "Carbamoyl phosphate synthetase I",
+      "Mitochondrial rate-limiting enzyme of urea cycle activated by N-acetylglutamate"
+     ]
     ]
    }
   }
