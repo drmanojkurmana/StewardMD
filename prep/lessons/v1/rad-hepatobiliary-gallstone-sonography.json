@@ -77,6 +77,47 @@
    "tx": "**Pancreatic pseudocyst** matures four or more weeks after pancreatitis into a round fluid collection with a fibrous wall and no epithelial lining, homogeneous near water density on CT. Unlike an abscess it holds no solid debris and little gas, and unlike a cystic tumour it follows a documented pancreatitis episode. Drainage waits for symptoms, infection or growth, and endoscopic routes now beat open surgery for most mature collections.",
    "say": "Pancreatic pseudocyst matures four or more weeks after pancreatitis into a round fluid collection with a fibrous wall and no epithelial lining. Unlike abscess it holds no solid debris, and unlike a cystic tumour it follows a documented pancreatitis episode. Drainage waits for symptoms, infection or growth.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Acute pancreatitis episode"}, {"id": "b", "label": "Fluid collection forms"}, {"id": "c", "label": "Wall matures after 4 weeks"}, {"id": "d", "label": "Drain only if symptomatic"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
-  }
+  },
+    {
+      "tx": "**High-yield for the exam**: A gallstone needs a bright focus, a clean shadow and dependent movement, while a polyp is fixed and shadowless. The wall echo shadow complex is a contracted gallbladder full of stones with no bile gap. Acute cholecystitis adds probe tenderness and wall thickening above 3 mm, a common bile duct above 6 mm suggests obstruction, and an abrupt double duct cutoff suggests a pancreatic head mass.",
+      "say": "A gallstone needs a bright focus, a clean shadow and dependent movement, while a polyp is fixed and shadowless. The wall echo shadow complex is a contracted gallbladder full of stones with no bile gap. Acute cholecystitis adds probe tenderness and wall thickening above 3 mm, a common bile duct above 6 mm suggests obstruction, and an abrupt double duct cutoff suggests a pancreatic head mass.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Stone triad",
+            "Bright focus, shadow, movement"
+          ],
+          [
+            "Gallbladder polyp",
+            "Fixed and shadowless"
+          ],
+          [
+            "Wall echo shadow",
+            "Contracted stone filled sac"
+          ],
+          [
+            "Sonographic Murphy",
+            "Probe tenderness over gallbladder"
+          ],
+          [
+            "Acute wall",
+            "Thickening above 3 mm"
+          ],
+          [
+            "Native duct",
+            "Above 6 mm suggests obstruction"
+          ],
+          [
+            "Double duct sign",
+            "Abrupt cutoff suggests head mass"
+          ]
+        ]
+      }
+    }
  ]
 }
