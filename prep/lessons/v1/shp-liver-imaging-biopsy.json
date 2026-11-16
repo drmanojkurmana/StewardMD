@@ -1,149 +1,190 @@
 {
- "v": 1,
- "module": "shp-liver-imaging-biopsy",
- "subject": "ss-hepatology",
- "title": "Liver imaging, elastography and biopsy: non-invasive staging to histology",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Non-invasive assessment of **liver fibrosis** starts with a simple blood-based score. The **FIB-4 index** combines age, AST, ALT and platelet count. A score below 1.3 makes advanced fibrosis unlikely, while a score of 2.67 or higher indicates moderate to high risk. Scores between these thresholds need a second-line test, most often **vibration-controlled transient elastography**, which measures liver stiffness in kilopascals.",
-   "say": "Non-invasive assessment of liver fibrosis starts with a simple blood-based score. The FIB-4 index combines age, AST, ALT and platelet count. A score below 1.3 makes advanced fibrosis unlikely, while a score of 2.67 or higher indicates moderate to high risk. Scores between these thresholds need a second-line test, most often vibration-controlled transient elastography, which measures liver stiffness in kilopascals.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "What it measures",
-     "Typical use"
-    ],
-    "rows": [
-     [
-      "FIB-4",
-      "Age, AST, ALT, platelets",
-      "First-line blood screen"
-     ],
-     [
-      "Transient elastography",
-      "Liver stiffness (kPa)",
-      "Second-line staging"
-     ],
-     [
-      "Controlled attenuation parameter",
-      "Hepatic steatosis (dB/m)",
-      "Fat grading alongside stiffness"
-     ],
-     [
-      "ELF test",
-      "Matrix turnover markers",
-      "Serum alternative to imaging"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Normal aminotransferases do not exclude **advanced fibrosis**. Many patients with MASLD have near-normal ALT yet significant histological disease, so enzymes alone must never be used to reassure. The **controlled attenuation parameter** quantifies steatosis, and shear wave elastography or MR elastography can stage fibrosis when transient elastography is unreliable, for example in obesity or ascites.",
-   "say": "Normal aminotransferases do not exclude advanced fibrosis. Many patients with MASLD have near-normal ALT yet significant histological disease, so enzymes alone must never be used to reassure. The controlled attenuation parameter quantifies steatosis, and shear wave elastography or MR elastography can stage fibrosis when transient elastography is unreliable, for example in obesity or ascites.",
-   "vis": null
-  },
-  {
-   "tx": "Imaging also helps with focal lesions. **LI-RADS** standardises the reporting of liver lesions in at-risk patients, typically cirrhosis or chronic hepatitis B. A lesion showing **arterial phase hyperenhancement** with washout on delayed phases, and size over 1 cm, is classified as a high-probability hepatocellular carcinoma. Such lesions can often be diagnosed without biopsy.",
-   "say": "Imaging also helps with focal lesions. LI-RADS standardises the reporting of liver lesions in at-risk patients, typically cirrhosis or chronic hepatitis B. A lesion showing arterial phase hyperenhancement with washout on delayed phases, and size over 1 cm, is classified as a high-probability hepatocellular carcinoma. Such lesions can often be diagnosed without biopsy.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Cirrhosis or at-risk liver"
-     },
-     {
-      "id": "b",
-      "label": "Lesion over 1 cm"
-     },
-     {
-      "id": "c",
-      "label": "Arterial hyperenhancement"
-     },
-     {
-      "id": "d",
-      "label": "Washout on delayed phase"
-     },
-     {
-      "id": "e",
-      "label": "LI-RADS 5 HCC"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The paired scans show bright **arterial** hyperenhancement on the left with darker **washout** plus a rim capsule on delayed imaging on the right. Callipers record a lesion larger than the one centimetre threshold used in at risk livers. This **capsule** pattern in cirrhosis or chronic hepatitis B gives high probability for hepatocellular carcinoma without need for biopsy.",
-   "say": "Read the two phases together. The lesion lights up bright in the arterial phase, then turns darker than liver with a rim in the later phase while callipers confirm size above the key threshold. In cirrhosis or chronic hepatitis B that combination means high probability hepatocellular carcinoma by standard reporting, so diagnosis often rests on imaging alone with surveillance for advanced fibrosis continuing.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/shp-liver-imaging-biopsy-gen1.webp",
-    "alt": "The image shows paired liver scans with arterial hyperenhancement on the left and washout plus capsule on the right.",
-    "caption": "Arterial enhancement with delayed washout and capsule, Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Interpret the histology carefully. **Lobular necro-inflammation** lies within the lobule away from portal tracts and reflects ongoing hepatocyte injury, while **interface hepatitis** affects the limiting plate. Both raise activity scores. Fibrosis stage, not steatosis or enzyme level, is the strongest predictor of liver-related death, so it guides surveillance and treatment decisions.",
-   "say": "Interpret the histology carefully. Lobular necro-inflammation lies within the lobule away from portal tracts and reflects ongoing hepatocyte injury, while interface hepatitis affects the limiting plate. Both raise activity scores. Fibrosis stage, not steatosis or enzyme level, is the strongest predictor of liver-related death, so it guides surveillance and treatment decisions.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/shp-liver-imaging-biopsy-fig1.webp",
-    "alt": "Microscopic liver biopsy showing interface hepatitis and lobular necro-inflammation, key for activity scoring.",
-    "caption": "Histology: interface hepatitis and lobular necro-inflammation. Image: Ed Uthman from Houston, TX, USA, CC BY 2.0, Wikimedia Commons.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Remember the **MASLD** definition: hepatic steatosis, absence of significant alcohol intake, and at least one cardiometabolic risk factor. Patients with advanced fibrosis need surveillance for **hepatocellular carcinoma** and varices, and cardiovascular risk reduction is a priority because it is the leading cause of death. Weight loss of at least 10 percent is needed for histological fibrosis regression.",
-   "say": "Remember the MASLD definition: hepatic steatosis, absence of significant alcohol intake, and at least one cardiometabolic risk factor. Patients with advanced fibrosis need surveillance for hepatocellular carcinoma and varices, and cardiovascular risk reduction is a priority because it is the leading cause of death. Weight loss of at least 10 percent is needed for histological fibrosis regression.",
-   "vis": null
+  "v": 1,
+  "module": "shp-liver-imaging-biopsy",
+  "subject": "ss-hepatology",
+  "title": "Liver imaging, elastography and biopsy: non-invasive staging to histology",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Non-invasive assessment of **liver fibrosis** starts with a simple blood-based score. The **FIB-4 index** combines age, AST, ALT and platelet count. A score below 1.3 makes advanced fibrosis unlikely, while a score of 2.67 or higher indicates moderate to high risk. Scores between these thresholds need a second-line test, most often **vibration-controlled transient elastography**, which measures liver stiffness in kilopascals.",
+      "say": "Non-invasive assessment of liver fibrosis starts with a simple blood-based score. The FIB-4 index combines age, AST, ALT and platelet count. A score below 1.3 makes advanced fibrosis unlikely, while a score of 2.67 or higher indicates moderate to high risk. Scores between these thresholds need a second-line test, most often vibration-controlled transient elastography, which measures liver stiffness in kilopascals.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "What it measures",
+          "Typical use"
+        ],
+        "rows": [
+          [
+            "FIB-4",
+            "Age, AST, ALT, platelets",
+            "First-line blood screen"
+          ],
+          [
+            "Transient elastography",
+            "Liver stiffness (kPa)",
+            "Second-line staging"
+          ],
+          [
+            "Controlled attenuation parameter",
+            "Hepatic steatosis (dB/m)",
+            "Fat grading alongside stiffness"
+          ],
+          [
+            "ELF test",
+            "Matrix turnover markers",
+            "Serum alternative to imaging"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Normal aminotransferases do not exclude **advanced fibrosis**. Many patients with MASLD have near-normal ALT yet significant histological disease, so enzymes alone must never be used to reassure. The **controlled attenuation parameter** quantifies steatosis, and shear wave elastography or MR elastography can stage fibrosis when transient elastography is unreliable, for example in obesity or ascites.",
+      "say": "Normal aminotransferases do not exclude advanced fibrosis. Many patients with MASLD have near-normal ALT yet significant histological disease, so enzymes alone must never be used to reassure. The controlled attenuation parameter quantifies steatosis, and shear wave elastography or MR elastography can stage fibrosis when transient elastography is unreliable, for example in obesity or ascites.",
+      "vis": null
+    },
+    {
+      "tx": "Imaging also helps with focal lesions. **LI-RADS** standardises the reporting of liver lesions in at-risk patients, typically cirrhosis or chronic hepatitis B. A lesion showing **arterial phase hyperenhancement** with washout on delayed phases, and size over 1 cm, is classified as a high-probability hepatocellular carcinoma. Such lesions can often be diagnosed without biopsy.",
+      "say": "Imaging also helps with focal lesions. LI-RADS standardises the reporting of liver lesions in at-risk patients, typically cirrhosis or chronic hepatitis B. A lesion showing arterial phase hyperenhancement with washout on delayed phases, and size over 1 cm, is classified as a high-probability hepatocellular carcinoma. Such lesions can often be diagnosed without biopsy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cirrhosis or at-risk liver"
+          },
+          {
+            "id": "b",
+            "label": "Lesion over 1 cm"
+          },
+          {
+            "id": "c",
+            "label": "Arterial hyperenhancement"
+          },
+          {
+            "id": "d",
+            "label": "Washout on delayed phase"
+          },
+          {
+            "id": "e",
+            "label": "LI-RADS 5 HCC"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The paired scans show bright **arterial** hyperenhancement on the left with darker **washout** plus a rim capsule on delayed imaging on the right. Callipers record a lesion larger than the one centimetre threshold used in at risk livers. This **capsule** pattern in cirrhosis or chronic hepatitis B gives high probability for hepatocellular carcinoma without need for biopsy.",
+      "say": "Read the two phases together. The lesion lights up bright in the arterial phase, then turns darker than liver with a rim in the later phase while callipers confirm size above the key threshold. In cirrhosis or chronic hepatitis B that combination means high probability hepatocellular carcinoma by standard reporting, so diagnosis often rests on imaging alone with surveillance for advanced fibrosis continuing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/shp-liver-imaging-biopsy-gen1.webp",
+        "alt": "The image shows paired liver scans with arterial hyperenhancement on the left and washout plus capsule on the right.",
+        "caption": "Arterial enhancement with delayed washout and capsule, Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Interpret the histology carefully. **Lobular necro-inflammation** lies within the lobule away from portal tracts and reflects ongoing hepatocyte injury, while **interface hepatitis** affects the limiting plate. Both raise activity scores. Fibrosis stage, not steatosis or enzyme level, is the strongest predictor of liver-related death, so it guides surveillance and treatment decisions.",
+      "say": "Interpret the histology carefully. Lobular necro-inflammation lies within the lobule away from portal tracts and reflects ongoing hepatocyte injury, while interface hepatitis affects the limiting plate. Both raise activity scores. Fibrosis stage, not steatosis or enzyme level, is the strongest predictor of liver-related death, so it guides surveillance and treatment decisions.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/shp-liver-imaging-biopsy-fig1.webp",
+        "alt": "Microscopic liver biopsy showing interface hepatitis and lobular necro-inflammation, key for activity scoring.",
+        "caption": "Histology: interface hepatitis and lobular necro-inflammation. Image: Ed Uthman from Houston, TX, USA, CC BY 2.0, Wikimedia Commons.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Remember the **MASLD** definition: hepatic steatosis, absence of significant alcohol intake, and at least one cardiometabolic risk factor. Patients with advanced fibrosis need surveillance for **hepatocellular carcinoma** and varices, and cardiovascular risk reduction is a priority because it is the leading cause of death. Weight loss of at least 10 percent is needed for histological fibrosis regression.",
+      "say": "Remember the MASLD definition: hepatic steatosis, absence of significant alcohol intake, and at least one cardiometabolic risk factor. Patients with advanced fibrosis need surveillance for hepatocellular carcinoma and varices, and cardiovascular risk reduction is a priority because it is the leading cause of death. Weight loss of at least 10 percent is needed for histological fibrosis regression.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam**: Hepatology imaging questions test non-invasive fibrosis scores, transient elastography cutoffs, and LI-RADS hepatocellular carcinoma diagnostic criteria. FIB-4 index triages advanced fibrosis risk in metabolic liver disease. Transient elastography liver stiffness under 8 kPa reliably rules out advanced fibrosis. Arterial hyperenhancement with venous washout on multiphase imaging establishes HCC without biopsy.",
+      "say": "High-yield for the exam: Hepatology imaging questions test non-invasive fibrosis scores, transient elastography cutoffs, and LI-RADS hepatocellular carcinoma diagnostic criteria. FIB-4 index triages advanced fibrosis risk in metabolic liver disease. Transient elastography liver stiffness under 8 kPa reliably rules out advanced fibrosis. Arterial hyperenhancement with venous washout on multiphase imaging establishes HCC without biopsy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "FIB-4 calculation",
+            "Calculated from age, AST, ALT, and platelet count"
+          ],
+          [
+            "Elastography ruling out",
+            "Stiffness under 8 kPa effectively excludes advanced cirrhosis"
+          ],
+          [
+            "Elastography ruling in",
+            "Stiffness over 12 to 15 kPa suggests compensated cirrhosis"
+          ],
+          [
+            "LI-RADS 5 criteria",
+            "Arterial phase hyperenhancement and venous portal phase washout"
+          ],
+          [
+            "Targeted biopsy role",
+            "Biopsy reserved for atypical lesions not fulfilling non-invasive criteria"
+          ],
+          [
+            "Percutaneous contraindication",
+            "Severe coagulopathy, marked ascites, or vascular hepatic tumor"
+          ],
+          [
+            "Transjugular biopsy",
+            "Allows safe core biopsy while measuring hepatic venous pressure gradient"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_27a88e326f44",
+    "q_1935f4808f0a",
+    "q_3911b9b7d42a"
+  ],
+  "src": [],
+  "refs": [
+    "Baveno VII consensus on portal hypertension",
+    "AASLD Practice Guidance on MASLD",
+    "EASL Clinical Practice Guidelines on non-invasive tests for liver disease",
+    "LI-RADS v2018 (American College of Radiology)"
+  ],
+  "gen": "AI",
+  "run": "links100",
+  "model": "claude-haiku-5-5",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 2,
+    "kbWords": 0,
+    "itemN": 93
   }
- ],
- "quiz": [
-  "q_27a88e326f44",
-  "q_1935f4808f0a",
-  "q_3911b9b7d42a"
- ],
- "src": [],
- "refs": [
-  "Baveno VII consensus on portal hypertension",
-  "AASLD Practice Guidance on MASLD",
-  "EASL Clinical Practice Guidelines on non-invasive tests for liver disease",
-  "LI-RADS v2018 (American College of Radiology)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 93
- }
 }

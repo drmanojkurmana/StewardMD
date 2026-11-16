@@ -1,214 +1,255 @@
 {
- "v": 1,
- "module": "sgm-immunology-basics",
- "subject": "ss-general-medicine",
- "title": "Basic and clinical immunology: key pathways, cytokines and regulation",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "The **innate immune system** responds within minutes to hours and uses pattern recognition receptors such as **Toll-like receptors** to detect microbial structures. Signalling through the adaptor IRAK-4 and NF-kappaB drives inflammatory cytokine release. Most TLR and IL-1 receptor pathways depend on IRAK-4, but TLR3 signalling remains intact in IRAK-4 deficiency, a point often tested in exams.",
-   "say": "The innate immune system responds within minutes to hours and uses pattern recognition receptors, such as Toll-like receptors, to detect microbial structures. Signalling through the adaptor IRAK-4 and NF-kappaB drives inflammatory cytokine release. Most TLR and IL-1 receptor pathways depend on IRAK-4, but TLR3 signalling remains intact in IRAK-4 deficiency, a point often tested in exams.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Pathway",
-     "Status in IRAK-4 deficiency"
-    ],
-    "rows": [
-     [
-      "IL-1 receptor",
-      "Impaired"
-     ],
-     [
-      "TLR4",
-      "Impaired"
-     ],
-     [
-      "TLR3",
-      "Preserved"
-     ],
-     [
-      "NF-kappaB via most TLRs",
-      "Impaired"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Cytokines** are classified by function. Pro-inflammatory cytokines such as **IL-1**, **IL-6**, **IL-17** and **IL-18** drive acute-phase responses, fever and neutrophilia. Regulatory cytokines such as **IL-10**, IL-37 and IL-38 suppress excessive inflammation. IL-1 paired with its receptor antagonist is the classic prototype of this balance. Pleiotropy means one cytokine acts on many cell types.",
-   "say": "Cytokines are classified by function. Pro-inflammatory cytokines, such as IL-1, IL-6, IL-17 and IL-18, drive acute-phase responses, fever and neutrophilia. Regulatory cytokines, such as IL-10, IL-37 and IL-38, suppress excessive inflammation. IL-1 paired with its receptor antagonist is the classic prototype of this balance. Pleiotropy means one cytokine acts on many cell types.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Pro-inflammatory",
-     "points": [
-      "IL-1",
-      "IL-6",
-      "IL-17",
-      "IL-18",
-      "Acute-phase response"
-     ]
+  "v": 1,
+  "module": "sgm-immunology-basics",
+  "subject": "ss-general-medicine",
+  "title": "Basic and clinical immunology: key pathways, cytokines and regulation",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "The **innate immune system** responds within minutes to hours and uses pattern recognition receptors such as **Toll-like receptors** to detect microbial structures. Signalling through the adaptor IRAK-4 and NF-kappaB drives inflammatory cytokine release. Most TLR and IL-1 receptor pathways depend on IRAK-4, but TLR3 signalling remains intact in IRAK-4 deficiency, a point often tested in exams.",
+      "say": "The innate immune system responds within minutes to hours and uses pattern recognition receptors, such as Toll-like receptors, to detect microbial structures. Signalling through the adaptor IRAK-4 and NF-kappaB drives inflammatory cytokine release. Most TLR and IL-1 receptor pathways depend on IRAK-4, but TLR3 signalling remains intact in IRAK-4 deficiency, a point often tested in exams.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathway",
+          "Status in IRAK-4 deficiency"
+        ],
+        "rows": [
+          [
+            "IL-1 receptor",
+            "Impaired"
+          ],
+          [
+            "TLR4",
+            "Impaired"
+          ],
+          [
+            "TLR3",
+            "Preserved"
+          ],
+          [
+            "NF-kappaB via most TLRs",
+            "Impaired"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Regulatory",
-     "points": [
-      "IL-10",
-      "IL-37",
-      "IL-38",
-      "Suppresses Th1 and Th17",
-      "Maintains peripheral tolerance"
-     ]
+    {
+      "tx": "**Cytokines** are classified by function. Pro-inflammatory cytokines such as **IL-1**, **IL-6**, **IL-17** and **IL-18** drive acute-phase responses, fever and neutrophilia. Regulatory cytokines such as **IL-10**, IL-37 and IL-38 suppress excessive inflammation. IL-1 paired with its receptor antagonist is the classic prototype of this balance. Pleiotropy means one cytokine acts on many cell types.",
+      "say": "Cytokines are classified by function. Pro-inflammatory cytokines, such as IL-1, IL-6, IL-17 and IL-18, drive acute-phase responses, fever and neutrophilia. Regulatory cytokines, such as IL-10, IL-37 and IL-38, suppress excessive inflammation. IL-1 paired with its receptor antagonist is the classic prototype of this balance. Pleiotropy means one cytokine acts on many cell types.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pro-inflammatory",
+          "points": [
+            "IL-1",
+            "IL-6",
+            "IL-17",
+            "IL-18",
+            "Acute-phase response"
+          ]
+        },
+        "right": {
+          "title": "Regulatory",
+          "points": [
+            "IL-10",
+            "IL-37",
+            "IL-38",
+            "Suppresses Th1 and Th17",
+            "Maintains peripheral tolerance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Regulatory T cells** depend on **IL-2** for survival, and IL-2 also drives effector T-cell proliferation. Loss of Treg function or impaired immune tolerance underlies many autoimmune states. Gain-of-function **STAT3** variants reduce Treg numbers and cause early-onset autoimmunity, whereas loss-of-function STAT3 variants impair **Th17** differentiation. **T helper subsets** are defined by their signature cytokines and transcription factors.",
+      "say": "Regulatory T cells depend on IL-2 for survival, and IL-2 also drives effector T-cell proliferation. Loss of Treg function or impaired immune tolerance underlies many autoimmune states. Gain-of-function STAT3 variants reduce Treg numbers and cause early-onset autoimmunity, whereas loss-of-function STAT3 variants impair Th17 differentiation. T helper subsets are defined by their signature cytokines and transcription factors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Defect",
+          "Main consequence"
+        ],
+        "rows": [
+          [
+            "STAT3 gain of function",
+            "Fewer Tregs, autoimmunity"
+          ],
+          [
+            "STAT3 loss of function",
+            "Impaired Th17 development"
+          ],
+          [
+            "STAT1 gain of function",
+            "Chronic mucocutaneous candidiasis"
+          ],
+          [
+            "IL-2 deficiency",
+            "Reduced Treg survival"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**NEMO** (IKBKG) deficiency causes **X-linked** anhidrotic ectodermal dysplasia with immunodeficiency. Ectodermal features are developmental and persist even after successful haematopoietic stem cell transplantation. Patients are prone to pyogenic bacteria, mycobacteria and opportunistic fungi. Management includes **immunoglobulin replacement** where antibody responses are poor, and antimicrobial prophylaxis. **Live attenuated vaccines**, particularly BCG, must be avoided because of disseminated disease risk.",
+      "say": "NEMO, encoded by IKBKG, deficiency causes X-linked anhidrotic ectodermal dysplasia with immunodeficiency. Ectodermal features are developmental and persist even after successful haematopoietic stem cell transplantation. Patients are prone to pyogenic bacteria, mycobacteria and opportunistic fungi. Management includes immunoglobulin replacement where antibody responses are poor, and antimicrobial prophylaxis. Live attenuated vaccines, particularly BCG, must be avoided because of disseminated disease risk.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sgm-immunology-basics-fig1.webp",
+        "alt": "Clinical image of a child with X-linked anhidrotic ectodermal dysplasia due to NEMO deficiency, showing sparse hair and abnormal teeth, illustrating immunodeficiency.",
+        "caption": "NEMO deficiency: ectodermal dysplasia and immunodeficiency. Image: Unknown, CC BY 2.0, Wikimedia Commons.",
+        "ar": 0.9293
+      }
+    },
+    {
+      "tx": "**Eosinophils** cause tissue damage mainly through granule proteins released after degranulation. **Major basic protein (MBP)** increases membrane permeability by disrupting the lipid bilayer. **IL-5** promotes eosinophil maturation and granule protein synthesis. MBP antagonises inhibitory M2 muscarinic receptors, enhancing bronchial hyperreactivity in asthma. Sputum MBP can identify asthma more sensitively than eosinophil counts alone, and tissue damage can occur even when few intact eosinophils remain.",
+      "say": "Eosinophils cause tissue damage mainly through granule proteins released after degranulation. Major basic protein, or MBP, increases membrane permeability by disrupting the lipid bilayer. IL-5 promotes eosinophil maturation and granule protein synthesis. MBP antagonises inhibitory M2 muscarinic receptors, enhancing bronchial hyperreactivity in asthma. Sputum MBP can identify asthma more sensitively than eosinophil counts alone, and tissue damage can occur even when few intact eosinophils remain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "IL-5"
+          },
+          {
+            "id": "b",
+            "label": "Eosinophil maturation"
+          },
+          {
+            "id": "c",
+            "label": "Granule release"
+          },
+          {
+            "id": "d",
+            "label": "MBP damages membranes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The image shows **eosinophils** showering **major basic protein** granules onto ciliated airway lining, where the coating injures cells and strips cilia. An IL 5 signal matures the attackers while the granule protein blocks calming M2 receptors on nerves, so acetylcholine release runs unchecked. The result is **bronchial hyperreactivity**, the twitchy airway tightening that marks asthma attacks.",
+      "say": "An attack cell hovers over the airway and rains grainy protein onto the delicate ciliated carpet, wounding it. A growth signal primes more attackers while the same protein jams the nerve brake, so the nerve spills extra trigger chemical onto muscle. The airway then grips too hard at small provocation, which is the hyperreactivity behind wheeze.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sgm-immunology-basics-gen1.webp",
+        "alt": "Attack cell raining granules onto ciliated airway lining beside a nerve ending driving muscle tightening.",
+        "caption": "Airway view of granule injury with nerve driven tightening, Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**Targeted biologics** block specific cytokines. **Tocilizumab** blocks the IL-6 receptor and is used in rheumatoid arthritis and in severe COVID-19 requiring mechanical ventilation on systemic corticosteroids. **Anakinra** blocks IL-1. **Secukinumab** targets IL-17 and raises the risk of tuberculosis and herpes zoster reactivation. **High-dose IL-2** is an established immunotherapy for metastatic renal cell carcinoma and melanoma despite significant toxicity.",
+      "say": "Targeted biologics block specific cytokines. Tocilizumab blocks the IL-6 receptor and is used in rheumatoid arthritis and in severe COVID-19 requiring mechanical ventilation on systemic corticosteroids. Anakinra blocks IL-1. Secukinumab targets IL-17 and raises the risk of tuberculosis and herpes zoster reactivation. High-dose IL-2 is an established immunotherapy for metastatic renal cell carcinoma and melanoma despite significant toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Target",
+          "Key point"
+        ],
+        "rows": [
+          [
+            "Tocilizumab",
+            "IL-6 receptor",
+            "RA, severe COVID-19"
+          ],
+          [
+            "Anakinra",
+            "IL-1 receptor",
+            "IL-1 blockade"
+          ],
+          [
+            "Secukinumab",
+            "IL-17A",
+            "TB and zoster risk"
+          ],
+          [
+            "High-dose IL-2",
+            "IL-2",
+            "Renal cell carcinoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Immunology questions test innate versus adaptive immunity mechanisms, key cytokine networks, and regulatory T-cell control. Interleukin-1, interleukin-6, and TNF-alpha drive acute systemic inflammatory responses. FoxP3-positive regulatory T cells depend on interleukin-2 to suppress autoreactive effector lymphocytes and maintain peripheral tolerance.",
+      "say": "High-yield for the exam: Immunology questions test innate versus adaptive immunity mechanisms, key cytokine networks, and regulatory T-cell control. Interleukin-1, interleukin-6, and TNF-alpha drive acute systemic inflammatory responses. FoxP3-positive regulatory T cells depend on interleukin-2 to suppress autoreactive effector lymphocytes and maintain peripheral tolerance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Innate immunity",
+            "Toll-like receptors recognize pathogen-associated molecular patterns"
+          ],
+          [
+            "Pro-inflammatory triad",
+            "IL-1, IL-6, and TNF-alpha drive acute phase response"
+          ],
+          [
+            "Interleukin-2",
+            "Drives T-cell proliferation and regulatory T-cell survival"
+          ],
+          [
+            "Interferon-gamma",
+            "Secreted by Th1 cells; activates macrophages for intracellular killing"
+          ],
+          [
+            "Interleukin-4 and 13",
+            "Secreted by Th2 cells; induce B-cell class switching to IgE"
+          ],
+          [
+            "Regulatory T cells",
+            "CD4+ CD25+ FoxP3+ phenotype prevents autoimmune pathology"
+          ],
+          [
+            "Complement MAC",
+            "C5b-9 complex lyses Neisseria; deficiency causes recurrent infections"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Regulatory T cells** depend on **IL-2** for survival, and IL-2 also drives effector T-cell proliferation. Loss of Treg function or impaired immune tolerance underlies many autoimmune states. Gain-of-function **STAT3** variants reduce Treg numbers and cause early-onset autoimmunity, whereas loss-of-function STAT3 variants impair **Th17** differentiation. **T helper subsets** are defined by their signature cytokines and transcription factors.",
-   "say": "Regulatory T cells depend on IL-2 for survival, and IL-2 also drives effector T-cell proliferation. Loss of Treg function or impaired immune tolerance underlies many autoimmune states. Gain-of-function STAT3 variants reduce Treg numbers and cause early-onset autoimmunity, whereas loss-of-function STAT3 variants impair Th17 differentiation. T helper subsets are defined by their signature cytokines and transcription factors.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Defect",
-     "Main consequence"
-    ],
-    "rows": [
-     [
-      "STAT3 gain of function",
-      "Fewer Tregs, autoimmunity"
-     ],
-     [
-      "STAT3 loss of function",
-      "Impaired Th17 development"
-     ],
-     [
-      "STAT1 gain of function",
-      "Chronic mucocutaneous candidiasis"
-     ],
-     [
-      "IL-2 deficiency",
-      "Reduced Treg survival"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**NEMO** (IKBKG) deficiency causes **X-linked** anhidrotic ectodermal dysplasia with immunodeficiency. Ectodermal features are developmental and persist even after successful haematopoietic stem cell transplantation. Patients are prone to pyogenic bacteria, mycobacteria and opportunistic fungi. Management includes **immunoglobulin replacement** where antibody responses are poor, and antimicrobial prophylaxis. **Live attenuated vaccines**, particularly BCG, must be avoided because of disseminated disease risk.",
-   "say": "NEMO, encoded by IKBKG, deficiency causes X-linked anhidrotic ectodermal dysplasia with immunodeficiency. Ectodermal features are developmental and persist even after successful haematopoietic stem cell transplantation. Patients are prone to pyogenic bacteria, mycobacteria and opportunistic fungi. Management includes immunoglobulin replacement where antibody responses are poor, and antimicrobial prophylaxis. Live attenuated vaccines, particularly BCG, must be avoided because of disseminated disease risk.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sgm-immunology-basics-fig1.webp",
-    "alt": "Clinical image of a child with X-linked anhidrotic ectodermal dysplasia due to NEMO deficiency, showing sparse hair and abnormal teeth, illustrating immunodeficiency.",
-    "caption": "NEMO deficiency: ectodermal dysplasia and immunodeficiency. Image: Unknown, CC BY 2.0, Wikimedia Commons.",
-    "ar": 0.9293
-   }
-  },
-  {
-   "tx": "**Eosinophils** cause tissue damage mainly through granule proteins released after degranulation. **Major basic protein (MBP)** increases membrane permeability by disrupting the lipid bilayer. **IL-5** promotes eosinophil maturation and granule protein synthesis. MBP antagonises inhibitory M2 muscarinic receptors, enhancing bronchial hyperreactivity in asthma. Sputum MBP can identify asthma more sensitively than eosinophil counts alone, and tissue damage can occur even when few intact eosinophils remain.",
-   "say": "Eosinophils cause tissue damage mainly through granule proteins released after degranulation. Major basic protein, or MBP, increases membrane permeability by disrupting the lipid bilayer. IL-5 promotes eosinophil maturation and granule protein synthesis. MBP antagonises inhibitory M2 muscarinic receptors, enhancing bronchial hyperreactivity in asthma. Sputum MBP can identify asthma more sensitively than eosinophil counts alone, and tissue damage can occur even when few intact eosinophils remain.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "IL-5"
-     },
-     {
-      "id": "b",
-      "label": "Eosinophil maturation"
-     },
-     {
-      "id": "c",
-      "label": "Granule release"
-     },
-     {
-      "id": "d",
-      "label": "MBP damages membranes"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The image shows **eosinophils** showering **major basic protein** granules onto ciliated airway lining, where the coating injures cells and strips cilia. An IL 5 signal matures the attackers while the granule protein blocks calming M2 receptors on nerves, so acetylcholine release runs unchecked. The result is **bronchial hyperreactivity**, the twitchy airway tightening that marks asthma attacks.",
-   "say": "An attack cell hovers over the airway and rains grainy protein onto the delicate ciliated carpet, wounding it. A growth signal primes more attackers while the same protein jams the nerve brake, so the nerve spills extra trigger chemical onto muscle. The airway then grips too hard at small provocation, which is the hyperreactivity behind wheeze.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sgm-immunology-basics-gen1.webp",
-    "alt": "Attack cell raining granules onto ciliated airway lining beside a nerve ending driving muscle tightening.",
-    "caption": "Airway view of granule injury with nerve driven tightening, Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "**Targeted biologics** block specific cytokines. **Tocilizumab** blocks the IL-6 receptor and is used in rheumatoid arthritis and in severe COVID-19 requiring mechanical ventilation on systemic corticosteroids. **Anakinra** blocks IL-1. **Secukinumab** targets IL-17 and raises the risk of tuberculosis and herpes zoster reactivation. **High-dose IL-2** is an established immunotherapy for metastatic renal cell carcinoma and melanoma despite significant toxicity.",
-   "say": "Targeted biologics block specific cytokines. Tocilizumab blocks the IL-6 receptor and is used in rheumatoid arthritis and in severe COVID-19 requiring mechanical ventilation on systemic corticosteroids. Anakinra blocks IL-1. Secukinumab targets IL-17 and raises the risk of tuberculosis and herpes zoster reactivation. High-dose IL-2 is an established immunotherapy for metastatic renal cell carcinoma and melanoma despite significant toxicity.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Agent",
-     "Target",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "Tocilizumab",
-      "IL-6 receptor",
-      "RA, severe COVID-19"
-     ],
-     [
-      "Anakinra",
-      "IL-1 receptor",
-      "IL-1 blockade"
-     ],
-     [
-      "Secukinumab",
-      "IL-17A",
-      "TB and zoster risk"
-     ],
-     [
-      "High-dose IL-2",
-      "IL-2",
-      "Renal cell carcinoma"
-     ]
-    ]
-   }
+  ],
+  "quiz": [
+    "q_b19e26d19ba4",
+    "q_eacba4ac134d",
+    "q_091e59c62e00"
+  ],
+  "src": [],
+  "refs": [
+    "Janeway's Immunobiology (Murphy K, Weaver C)",
+    "Abbas, Lichtman and Pillai: Cellular and Molecular Immunology"
+  ],
+  "gen": "AI",
+  "run": "links100",
+  "model": "claude-haiku-5-5",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
   }
- ],
- "quiz": [
-  "q_b19e26d19ba4",
-  "q_eacba4ac134d",
-  "q_091e59c62e00"
- ],
- "src": [],
- "refs": [
-  "Janeway's Immunobiology (Murphy K, Weaver C)",
-  "Abbas, Lichtman and Pillai: Cellular and Molecular Immunology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 25
- }
 }
