@@ -1,0 +1,356 @@
+{
+ "v": 1,
+ "module": "sgs-trauma",
+ "subject": "ss-general-surgery",
+ "title": "Trauma and emergency surgery: ATLS, solid organ injury and haemostatic resuscitation",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "The **primary survey** in trauma follows a fixed order of Airway, Breathing, Circulation, Disability and Exposure within 10 minutes. Airway control with **cervical spine protection** comes first, because 4 minutes without oxygen causes brain injury. A blocked airway kills faster than bleeding in every severely injured patient.",
+   "say": "The primary survey in trauma follows a fixed order of Airway, Breathing, Circulation, Disability and Exposure. Airway control with protection of the neck comes first, because four minutes without oxygen causes brain injury. A blocked airway kills faster than bleeding in every severely injured patient coming to the emergency.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway"
+     },
+     {
+      "id": "b",
+      "label": "Breathing"
+     },
+     {
+      "id": "c",
+      "label": "Circulation"
+     },
+     {
+      "id": "d",
+      "label": "Disability"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Secondary survey** happens only after the primary survey stabilises, and it needs a full **AMPLE** history of allergies, medicines, past illness and events. About 15 to 20 percent of trauma patients have injuries found only at this stage. A complete head to toe exam with 2.5 cm of scalp laceration checks often reveals hidden bleeding.",
+   "say": "The secondary survey happens only after the primary survey stabilises the patient. It needs a full AMPLE history of allergies, medicines, past illness and events. About fifteen to twenty percent of trauma patients have injuries found only at this stage. A complete exam often reveals hidden bleeding that earlier checks missed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Secondary step",
+     "Why it matters",
+     "Time"
+    ],
+    "rows": [
+     [
+      "AMPLE history",
+      "Guides drugs and allergy",
+      "2 minutes"
+     ],
+     [
+      "Head to toe exam",
+      "Finds missed injury",
+      "5 minutes"
+     ],
+     [
+      "Adjuncts",
+      "Xray and FAST",
+      "3 minutes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemorrhagic shock** classifies into four stages, and stage 3 starts when blood loss passes 30 percent of volume or 1500 mL. Heart rate rises above 120 beats per minute, and systolic pressure falls below 80 mmHg. A 70 kg adult classed as **Class II** shock has lost 750 to 1500 mL already.",
+   "say": "Haemorrhagic shock divides into four stages, and stage three starts when blood loss passes thirty percent of total volume. Heart rate rises above one hundred twenty beats per minute, and systolic pressure falls below eighty. A seventy kilogram adult in class two shock has already lost seven hundred fifty to one thousand five hundred milliliters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shock class",
+     "Blood loss",
+     "Heart rate"
+    ],
+    "rows": [
+     [
+      "Class I",
+      "Under 15 percent",
+      "Under 100"
+     ],
+     [
+      "Class II",
+      "15 to 30 percent",
+      "100 to 120"
+     ],
+     [
+      "Class III",
+      "30 to 40 percent",
+      "120 to 140"
+     ],
+     [
+      "Class IV",
+      "Over 40 percent",
+      "Over 140"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Solid organ injury** most often involves the spleen in 45 percent of cases, managed nonoperatively in 80 percent with stable vitals. **Liver injury** accounts for 35 percent and needs packing when bleeding persists after 30 minutes. A **fast scan** detects 5 mm of free fluid with 95 percent sensitivity in the resuscitation bay.",
+   "say": "Solid organ injury most often involves the spleen in forty five percent of cases, managed without operation in eighty percent when vitals stay stable. Liver injury accounts for thirty five percent and needs packing when bleeding persists after thirty minutes. Focused ultrasound detects small amounts of free fluid with very high sensitivity here.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spleen injury",
+     "points": [
+      "Most common organ",
+      "Nonoperative care usual",
+      "Needs ICU watch"
+     ]
+    },
+    "right": {
+     "title": "Liver injury",
+     "points": [
+      "Second most common",
+      "Packing for bleeding",
+      "Drain for bile"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Haemostatic resuscitation** balances blood, plasma and platelets in a 1 to 1 to 1 ratio within 30 minutes. **Tranexamic acid** 1 g given within 3 hours cuts mortality by 20 percent, and a second gram follows after 8 hours. Crystalloids stay under 1 litre, because excess fluid worsens coagulopathy and dilutional bleeding.",
+   "say": "Haemostatic resuscitation balances blood, plasma and platelets in a one to one to one ratio within thirty minutes. Tranexamic acid one gram given within three hours cuts mortality by twenty percent, and a second gram follows after eight hours. Excess crystalloid fluid worsens bleeding and dilutes clotting factors badly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Dose",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Tranexamic acid",
+      "1 g plus 1 g",
+      "Within 3 hours"
+     ],
+     [
+      "Blood",
+      "4 units pack",
+      "Within 30 min"
+     ],
+     [
+      "Plasma",
+      "4 units fresh",
+      "With blood"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tension pneumothorax** is a clinical diagnosis when one hemithorax hyperresonates and trachea shifts within 5 minutes. A **needle decompression** at the 5th intercostal space buys time before chest drain placement. Chest Xray confirms the drain position in 90 percent of cases within the hour.",
+   "say": "Tension pneumothorax is a clinical diagnosis when one side of chest hyperresonates and the windpipe shifts. Needle decompression at the fifth intercostal space buys time before chest drain placement. Chest X-ray confirms the drain position in ninety percent of cases within one hour in the emergency department today.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Hypoxia"
+     },
+     {
+      "id": "n2",
+      "label": "Trachea shift"
+     },
+     {
+      "id": "n3",
+      "label": "Needle release"
+     },
+     {
+      "id": "n4",
+      "label": "Chest drain"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pelvic fractures** bleed into the retroperitoneum and can lose 4 litres before vitals collapse, so a binder stabilises at 25 cm width. **Unstable pelvis** with systolic pressure under 80 needs a pelvic pack within 60 minutes. Bladder injury accompanies 10 percent of pelvic fractures and shows blood at the urethral meatus.",
+   "say": "Pelvic fractures bleed into the deep tissues and can lose four litres before vitals collapse. A pelvic binder stabilises the pelvis at about twenty five centimetres width. Unstable pelvis with low systolic pressure needs packing within sixty minutes. Bladder injury accompanies ten percent of pelvic fractures and shows blood at the passage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pelvic sign",
+     "Suggests",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Limb shortening",
+      "Displacement",
+      "Binder on"
+     ],
+     [
+      "Blood at meatus",
+      "Urethral injury",
+      "Catheter caution"
+     ],
+     [
+      "Open fracture",
+      "Contamination",
+      "Antibiotics early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypothermia** below 35 degrees worsens clotting, so warming fluids to 38 degrees and covering the patient prevents the lethal triad. The **lethal triad** of acidosis, hypothermia and coagulopathy kills 50 percent once established. Core temperature must be measured rectally, because bladder readings differ by 2.5 degrees in shock.",
+   "say": "Hypothermia below thirty five degrees worsens clotting, so warming fluids and covering the patient prevents the lethal triad. That triad of acidosis, low temperature and poor clotting kills fifty percent once established. Core temperature must be measured carefully, because bladder readings differ by about two and a half degrees in shock.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prevention",
+     "points": [
+      "Warm fluids",
+      "Cover patient",
+      "Stop heat loss"
+     ]
+    },
+    "right": {
+     "title": "Treatment",
+     "points": [
+      "Rewarm to 37",
+      "Correct calcium",
+      "Transfuse warm blood"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Focused assessment** with sonography for trauma scans four views and answers the question of free fluid in 3 minutes. A positive scan with unstable vitals sends the patient to **laparotomy** within 30 minutes. A negative scan with stable vitals allows CT imaging, which detects injury in 95 percent of cases.",
+   "say": "Focused assessment with sonography for trauma scans four views and answers the question of free fluid in three minutes. A positive scan with unstable vitals sends the patient to emergency operation within thirty minutes. A negative scan with stable vitals allows CT imaging, which detects injury in ninety five percent of cases here.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Scan"
+     },
+     {
+      "id": "f2",
+      "label": "Fluid?"
+     },
+     {
+      "id": "f3",
+      "label": "Unstable?"
+     },
+     {
+      "id": "f4",
+      "label": "Operate"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications after trauma include **acute respiratory distress syndrome** in 15 percent of major cases, and **abdominal compartment syndrome** when pressure exceeds 20 mmHg. **Fat embolism** appears 24 to 72 hours after long bone fracture with confusion and petechiae. Infection rates reach 20 percent in open fractures without early antibiotics within 3 hours.",
+   "say": "Complications after trauma include acute respiratory distress syndrome in fifteen percent of major cases. Abdominal compartment syndrome appears when pressure exceeds twenty millimeters of mercury. Fat embolism appears twenty four to seventy two hours after long bone fracture with confusion and skin spots in the chest area.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Complication",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "24 to 72 hours",
+      "Fat embolism",
+      "Confusion"
+     ],
+     [
+      "Days 3 to 5",
+      "ARDS",
+      "Hypoxia"
+     ],
+     [
+      "Week 1",
+      "Sepsis",
+      "Fever"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trauma bay** routine is airway first, breathing second and circulation third, each within 2 minutes. **Massive transfusion** pack of 4 to 4 to 4, plus tranexamic acid within 3 hours, saves the most lives. A primary survey finished in 10 minutes plus operation within 60 minutes gives the best survival.",
+   "say": "High-yield for the exam. Trauma bay routine is airway first, breathing second and circulation third, each within two minutes. Massive transfusion pack plus tranexamic acid within three hours saves the most lives. A primary survey finished in ten minutes plus operation within sixty minutes gives the best survival for the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Priority",
+     "Action",
+     "Time"
+    ],
+    "rows": [
+     [
+      "Airway",
+      "Clear and protect",
+      "2 minutes"
+     ],
+     [
+      "Breathing",
+      "Drain and oxygen",
+      "3 minutes"
+     ],
+     [
+      "Circulation",
+      "Blood and pack",
+      "5 minutes"
+     ]
+    ]
+   }
+  }
+ ]
+}

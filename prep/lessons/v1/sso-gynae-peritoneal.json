@@ -1,0 +1,164 @@
+{
+  "v": 1,
+  "module": "sso-gynae-peritoneal",
+  "subject": "ss-surgical-oncology",
+  "title": "Gynae Oncology and Peritoneal Disease: Debulking Is the Therapy",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": ["Williams Obstetrics 25th edition"],
+  "steps": [
+    {
+      "tx": "**Ovarian cancer** is the fifth leading cancer death in women with 13 to 15 percent of gynaecologic malignancies. **High-grade serous carcinoma** dominates at 70 percent of epithelial cases. **Optimal debulking** to 1 cm residual disease defines surgical success. Primary **debulking** suits fit patients, while interval surgery follows chemotherapy in advanced disease.",
+      "say": "Ovarian cancer punishes late presentation most. It ranks among the fatal gynaecologic cancers. High grade serous type dominates epithelial cases. Optimal debulking leaves less than a centimetre of residual disease. Primary surgery suits fit patients, with interval surgery after chemotherapy otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary debulking",
+          "points": ["Fit patient with low burden", "Chemo follows surgery", "No interval chemo needed"]
+        },
+        "right": {
+          "title": "Interval debulking",
+          "points": ["Three cycles of chemo first", "For bulky disease", "Interval surgery after response"]
+        }
+      }
+    },
+    {
+      "tx": "Risk rises with **nulliparity**, early menarche at 11 years, and late menopause beyond 55 years. **BRCA1** carriers face 44 percent lifetime risk versus 16 percent for BRCA2. **Endometriosis** doubles clear cell and endometrioid risk at 2 times baseline. **Risk-reducing salpingo-oophorectomy** at 35 to 40 years cuts risk by 80 to 90 percent.",
+      "say": "Reproductive history shapes ovarian risk clearly. Nulliparity and early cycles raise risk. Inherited gene one carriers face very high lifetime risk. Gene two carriers face lower but still high risk. Endometriosis doubles certain subtypes. Preventive surgery at thirty five cuts risk sharply.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "null", "label": "Nulliparity"},
+          {"id": "brca1", "label": "BRCA one mutation"},
+          {"id": "endo", "label": "Endometriosis"},
+          {"id": "risk", "label": "Ovarian cancer risk"}
+        ],
+        "edges": [["null", "risk"], ["brca1", "risk"], ["endo", "risk"]]
+      }
+    },
+    {
+      "tx": "High-grade serous cancer starts in the **fimbrial end** of the fallopian tube as microscopic **STIC** lesions. **TP53** mutation appears in 96 percent of cases at the earliest precursor stage. **Homologous recombination deficiency** in 50 percent confers platinum and PARP sensitivity. **CCNE1** amplification drives 20 percent of cases with chemoresistance and poor response.",
+      "say": "The tube is now seen as the origin site. Microscopic precursor lesions begin at the fimbrial end. A tumour suppressor gene mutates almost always. Repair deficiency appears in half of cases and predicts drug sensitivity. Amplification marks chemoresistant disease.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Finding", "Implication"],
+        "rows": [
+          ["Origin", "Fimbrial STIC", "Tube removal matters"],
+          ["TP53", "96 percent mutated", "Early event"],
+          ["Repair defect", "50 percent present", "PARP sensitivity"]
+        ]
+      }
+    },
+    {
+      "tx": "Abdominal distension with **early satiety** and palpable **pelvic mass** drives most referrals. **CA 125** rises beyond 35 units in 80 percent of advanced disease. **Ascites** exceeding 1 litre at presentation signals peritoneal spread in half of cases. **Sister Mary Joseph node** umbilical spread indicates stage 4 disease with poor prognosis.",
+      "say": "Bloating and early fullness bring most patients to care. A pelvic mass is palpable often. A blood marker rises in most advanced cases. Large ascites signals peritoneal spread. Umbilical spread indicates the most advanced category.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "bloat", "label": "Abdomen distended"},
+          {"id": "mass", "label": "Pelvic mass palpable"},
+          {"id": "ca125", "label": "CA 125 raised"},
+          {"id": "refer", "label": "Refer for staging"}
+        ],
+        "edges": [["bloat", "mass"], ["mass", "ca125"], ["ca125", "refer"]]
+      }
+    },
+    {
+      "tx": "**Transvaginal Doppler** shows solid cystic masses with papillary projections in 90 percent of malignant cases. **Contrast CT** maps omental cake and diaphragmatic deposits before surgery. **FDG PET** detects residual deposits under 1 cm missed on CT. **Thoracentesis** for 500 ml pleural fluid with malignant cells upstages to stage 4B disease.",
+      "say": "Doppler ultrasound raises cancer suspicion in most cases. CT maps omental and diaphragmatic deposits. PET imaging detects small residual deposits missed on CT. Malignant pleural fluid moves disease to the highest stage. Imaging decides primary versus interval surgery.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Test", "Purpose", "Finding"],
+        "rows": [
+          ["Transvaginal Doppler", "Suspect malignancy", "Solid or cystic mass"],
+          ["Contrast CT", "Map deposits", "Omental cake seen"],
+          ["Thoracentesis", "Stage disease", "Malignant fluid"]
+        ]
+      }
+    },
+    {
+      "tx": "**Maximal debulking** removes all visible disease including diaphragmatic stripping and splenectomy when needed. **Bowel resection** with anastomosis occurs in 30 percent of primary debulking cases. **Omentectomy** plus peritonectomy clears the most common deposit sites. Residual disease beyond 1 cm is **suboptimal** with survival halved compared with optimal surgery.",
+      "say": "Debulking is maximal disease removal. Bowel resection occurs in a minority of primary cases. Diaphragmatic stripping and spleen surgery occur when needed. Residual disease beyond a centimetre is suboptimal. Survival drops sharply when debulking stays suboptimal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Optimal debulking",
+          "points": ["Residual under one cm", "Survival clearly better", "Chemo works best here"]
+        },
+        "right": {
+          "title": "Suboptimal debulking",
+          "points": ["Residual over one cm", "Survival halved", "Think interval strategy"]
+        }
+      }
+    },
+    {
+      "tx": "**Carboplatin** with **paclitaxel** forms the backbone at 5 AUC and 175 mg per square metre doses. **Bevacizumab** adds benefit in high risk disease with 12 to 15 months maintenance. **Olaparib** maintenance for 2 years improves survival in BRCA carriers. **Neiraparib** maintenance suits homologous deficient tumours regardless of mutation status.",
+      "say": "Chemotherapy backbone pairs platinum with taxane. Bevacizumab helps high risk disease with maintenance. Olaparib helps carriers for two years of maintenance. Another PARP drug helps deficient tumours more broadly. Drug intolerance drives dose modification often.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "chemo", "label": "Carboplatin paclitaxel"},
+          {"id": "surgery", "label": "Debulking surgery"},
+          {"id": "beva", "label": "Bevacizumab if high risk"},
+          {"id": "parp", "label": "PARP maintenance"}
+        ],
+        "edges": [["chemo", "surgery"], ["surgery", "beva"], ["beva", "parp"]]
+      }
+    },
+    {
+      "tx": "**Pseudomyxoma peritonei** fills the abdomen with mucin from a ruptured appendix in 70 percent of cases. **Cytoreductive surgery** (CRS) plus **HIPEC** achieves 5 year survival of 70 to 80 percent. **Mitomycin-C** perfusion at 42 degrees for 90 minutes treats microscopic residual. **Appendectomy** at diagnosis removes the primary source even when normal in appearance.",
+      "say": "Pseudomyxoma fills the abdomen with mucin. A ruptured appendix is the source in most cases. Cytoreductive surgery with heated perfusion offers the best survival. Mitomycin perfusion lasts about ninety minutes. Appendectomy at diagnosis removes the source.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Element", "Detail", "Why it matters"],
+        "rows": [
+          ["CRS", "All visible disease removed", "Curative potential"],
+          ["HIPEC", "Mitomycin at 42 degrees", "Sterilises residual"],
+          ["Appendectomy", "At diagnosis", "Removes source"]
+        ]
+      }
+    },
+    {
+      "tx": "**HIPEC** principles rest on **heat** synergy raising drug penetration 2 to 3 times with hyperthermia at 42 degrees. **Cytoreduction** must reach complete removal with a PCI score under 20 for benefit. **Closed technique** perfusion maintains abdominal pressure and limits theatre exposure. Renal protection uses 20 ml per kg hydration during mitomycin perfusion.",
+      "say": "HIPEC principles start with heat synergy. Hyperthermia raises drug penetration several times over standard therapy. Cytoreduction must be complete for HIPEC to help. Closed perfusion limits exposure of theatre staff. Renal hydration protects the kidneys during mitomycin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HIPEC suited cases",
+          "points": ["PCI under twenty", "Complete cytoreduction", "Good performance status"]
+        },
+        "right": {
+          "title": "HIPEC unsuited cases",
+          "points": ["PCI over twenty five", "Residual disease left", "Poor performance status"]
+        }
+      }
+    },
+    {
+      "tx": "**Bowel leak** after debulking resection kills 5 to 8 percent of patients needing re-exploration. **Venous thromboembolism** strikes 10 percent without pharmacologic prophylaxis after major debulking. **Prolonged ileus** beyond 5 days affects 15 percent of multivisceral resections. **Platinum resistance** within 6 months of chemotherapy predicts near universal relapse.",
+      "say": "Complications threaten debulking benefit most. Bowel leak can prove fatal in a minority. Blood clots strike one in ten without prophylaxis. Prolonged gut stasis affects multivisceral cases often. Early platinum resistance predicts relapse almost always.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Complication", "Rate", "Response"],
+        "rows": [
+          ["Bowel leak", "5 to 8 percent", "Re-explore early"],
+          ["Venous thromboembolism", "10 percent", "Prophylaxis always"],
+          ["Prolonged ileus", "15 percent", "Beyond five days"]
+        ]
+      }
+    },
+    {
+      "tx": "For the **exam**, remember **1 cm** residual defines optimal debulking and pseudomyxoma needs **CRS plus HIPEC** for 70 to 80 percent 5 year survival. **CA 125** over 35 units with **ascites** over 1 litre suggests advanced disease. **BRCA1** carriers need risk-reducing surgery at **35 to 40 years**. Malignant pleural fluid is **4B disease** needing systemic therapy first.",
+      "say": "High-yield for the exam anchor the threshold. One centimetre defines optimal debulking quality. Pseudomyxoma needs cytoreduction with heated perfusion. Inherited gene one carriers need preventive surgery by thirty five. Malignant pleural fluid means systemic therapy first.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Topic", "Number to quote"],
+        "rows": [
+          ["Debulking", "1 cm maximum residual"],
+          ["Pseudomyxoma", "70 to 80 percent survival"],
+          ["BRCA1", "Preventive surgery at 35 to 40"]
+        ]
+      }
+    }
+  ]
+}
