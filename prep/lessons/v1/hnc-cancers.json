@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "hnc-cancers",
+ "subject": "ss-head-neck-surgery",
+ "title": "Head and neck cancers: sites, spread and neck surgery",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22nd edition"],
+ "steps": [
+  {
+   "tx": "Head and neck cancers begin as **squamous cell carcinoma** in the mucosal lining of the oral cavity, oropharynx, nasopharynx, larynx and hypopharynx. Up to 90 percent of tumours at these sites are squamous in type. Late presentation is common because early lesions stay painless for 6 to 8 weeks. A **neck node** is often the first sign that brings a patient to attention.",
+   "say": "Head and neck cancers begin in the lining of the mouth, throat and voice box. Up to ninety percent are squamous in type. Early lesions stay painless for many weeks so patients present late. A neck swelling is often the first clue.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Site group", "Most common type", "Typical age band"],
+    "rows": [
+     ["Oral cavity", "Squamous cell carcinoma", "55 to 70 years"],
+     ["Oropharynx", "Squamous, HPV linked subset", "45 to 65 years"],
+     ["Larynx", "Squamous cell carcinoma", "55 to 75 years"],
+     ["Nasopharynx", "Undifferentiated carcinoma", "30 to 50 years"]
+    ]
+   }
+  },
+  {
+   "tx": "Tobacco with **betel quid** chewing raises oral and pharyngeal cancer risk 5 to 8 fold in chronic users. Heavy alcohol use for more than 10 years multiplies the risk of laryngeal and hypopharyngeal tumours. Persistent **human papillomavirus 16** infection now drives 3 in 4 oropharyngeal cancers. Betel nut with tobacco alone explains a large share of cases in this region.",
+   "say": "Tobacco and betel quid chewing raise risk five to eight fold. Heavy alcohol use for more than ten years raises laryngeal and hypopharyngeal risk. Persistent H P V sixteen infection drives most oropharyngeal cancers today. Betel nut with tobacco is a major cause here.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Tobacco plus betel nut"},
+     {"id": "b", "label": "Chronic mucosal injury", "sub": "10 plus years"},
+     {"id": "c", "label": "Dysplasia develops"},
+     {"id": "d", "label": "Invasive carcinoma"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "HPV positive oropharyngeal cancers carry viral **E6 and E7 proteins** that disable the Rb and p53 pathways inside the tonsil cells. Loss of control over the cell cycle lets abnormal clones expand without normal repair. These tumours respond better to treatment than HPV negative cancers, with survival advantage of 20 to 30 percent at 5 years. Testing for **p16 protein** serves as a useful surrogate marker.",
+   "say": "H P V positive throat cancers make proteins that switch off key cell controls. This lets abnormal cells grow without normal limits. These patients live longer than H P V negative patients. P sixteen testing is a practical marker for the virus.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "HPV positive oropharynx", "points": ["Younger patient, less tobacco", "Better survival by 20 to 30 percent", "p16 positive"]},
+     "right": {"title": "HPV negative oropharynx", "points": ["Heavy tobacco and alcohol history", "Poorer survival", "p53 mutated"] }
+   }
+  },
+  {
+   "tx": "Nasopharyngeal carcinoma differs biologically because **Epstein Barr virus** drives most cases, including undifferentiated tumours in young adults aged 30 to 50. A lateral neck mass with a blocked nose and deafness points toward nasopharyngeal spread. Tumour enters the **skull base** early through the eustachian tube region. This site is treated mainly with radiotherapy rather than primary surgery.",
+   "say": "Nasopharyngeal cancer differs because Epstein Barr virus drives it. A neck mass with nose blockage and deafness suggests this site. The tumour reaches the skull base early. Radiotherapy is the main treatment here.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Nasopharynx", "Larynx"],
+    "rows": [
+     ["Key virus", "Epstein Barr virus", "Usually none"],
+     ["Early symptom", "Nose block, deafness", "Voice change"],
+     ["Main treatment", "Radiotherapy", "Surgery plus radiotherapy"]
+    ]
+   }
+  },
+  {
+   "tx": "Early oral cancers present as a **non healing ulcer** beyond 3 weeks, a white patch or a red patch on the tongue or cheek. Referred ear pain often means spread toward the tongue base. In the larynx, voice change lasting more than 3 weeks demands direct visualisation of the cords. **Flexible nasendoscopy** remains the key bedside tool to inspect the airway mucosa.",
+   "say": "Documented early signs include mouth ulcers that do not heal in three weeks. White or red patches in the mouth also need biopsy. Voice change beyond three weeks needs direct examination. Nasendoscopy lets the surgeon see the airway directly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Ulcer beyond 3 weeks"},
+     {"id": "b", "label": "Biopsy the lesion"},
+     {"id": "c", "label": "Stage with CECT plus PET"},
+     {"id": "d", "label": "Plan surgery or radiotherapy"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Contrast enhanced CT of the neck with **600 to 800 slices** review maps node size, central necrosis and bone erosion before surgery. FDG PET CT adds value in 15 to 20 percent of cases by finding second primaries and distant deposits. **CT guided FNAC** of a neck node may use 22 to 25 gauge needles and gives rapid cytology. Imaging never replaces a tissue diagnosis before treatment starts.",
+   "say": "Contrast C T maps node size and bone erosion before surgery. P E T scanning finds second cancers in about fifteen to twenty percent. Fine needle sampling gives a fast cytology answer. Imaging never replaces tissue diagnosis before treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Use", "Key detail"],
+    "rows": [
+     ["CECT neck", "Local and nodal spread", "Node size and necrosis"],
+     ["PET CT", "Distant disease, second primary", "15 to 20 percent yield"],
+     ["FNAC node", "Rapid cytology", "22 to 25 gauge needle"]
+    ]
+   }
+  },
+  {
+   "tx": "Early T1 and T2 oral cancers suit **wide local excision** with a 1 cm margin of normal tissue. Elective neck dissection is advised when nodal risk crosses 20 percent, as in T2 and T3 tongue tumours. **Erlotinib** and **Cetuximab** are not routine in early stage disease, while Cisplatin with radiotherapy is reserved for advanced cases. Organ preservation matters most in the larynx and hypopharynx.",
+   "say": "Early mouth cancers suit wide surgical excision with a clear margin. Neck dissection is advised when node risk is high. Targeted drugs are not routine in early disease. Chemotherapy with radiotherapy is for advanced disease only.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Selective neck dissection", "points": ["Spares non involved levels", "Keeps spinal accessory function", "For early nodal disease"]},
+    "right": {"title": "Radical neck dissection", "points": ["Removes all five levels", "Sacrifices sternomastoid and vein", "For bulky advanced nodes"]}
+   }
+  },
+  {
+   "tx": "A **metastatic neck node** without an obvious primary needs examination of the mouth, oropharynx, nasopharynx and larynx under anesthesia. PET CT finds the hidden primary in 25 to 35 percent of such cases. **Tonsillectomy** with tongue base mucosectomy is often performed as a blind search for an HPV driven source. Treating a node alone as the primary is rarely curative in the long term.",
+   "say": "A neck node without a clear primary needs full examination under anesthesia. P E T scanning finds the hidden primary in a third of cases. Tonsil removal with tongue base surgery helps find H P V sources. Treating the node alone is rarely curative.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Node without primary"},
+     {"id": "b", "label": "Examine under anesthesia"},
+     {"id": "c", "label": "PET CT for primary"},
+     {"id": "d", "label": "Tonsil plus tongue base search"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Complications after neck dissection include **chyle leak** in 2 to 5 percent of left sided procedures and shoulder weakness in 10 to 15 percent. Haematoma needs urgent evacuation within 6 hours to protect the airway. Complicated procedures raise **hypothyroidism** risk to 30 percent after radiotherapy. Dental care for 20 minutes daily and speech therapy cut long term morbidity in follow up clinics.",
+   "say": "After neck dissection, chyle leak occurs in a few left sided cases. Haematoma needs urgent evacuation to protect the airway. Radiotherapy raises lifetime thyroid failure risk. Dental care and speech therapy reduce long term problems.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Complication", "Timing", "Action"],
+    "rows": [
+     ["Chyle leak", "Day 1 to 3", "Drain plus diet control"],
+     ["Haematoma", "Within 6 hours", "Urgent evacuation"],
+     ["Hypothyroidism", "After radiotherapy", "Check TSH yearly"]
+    ]
+   }
+  },
+  {
+   "tx": "HPV positive oropharyngeal cancer with p16 positivity in 78 percent of cases carries better 5 year survival near 80 percent. **Any node level** can harbour metastasis, and levels 1 to 3 are the commonest group for oral tumours. Cisplatin at 100 mg per square metre remains the standard radiosensitiser for advanced disease. Remember that **voice change beyond 3 weeks** is a red flag needing urgent scope examination.",
+   "say": "High-yield for the exam the key lines are H P V positive throat cancers with p sixteen positivity and better survival. Remember neck node levels one to three for mouth tumours. Cisplatin with radiotherapy is standard for advanced disease. Voice change beyond three weeks needs urgent scope examination.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Exam point", "Fact", "Reason"],
+    "rows": [
+     ["HPV oropharynx", "p16 positive in 78 percent", "Better 5 year survival"],
+     ["Oral tongue nodes", "Levels 1 to 3 commonest", "Early elective dissection"],
+     ["Advanced disease", "Cisplatin 100 mg per square metre", "With radiotherapy"]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,317 @@
+{
+ "v": 1,
+ "module": "cap-development",
+ "subject": "ss-child-adolescent-psychiatry",
+ "title": "Development: milestones, autism, ADHD and intellectual disability",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22nd edition",
+  "Nelson Textbook of Pediatrics 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Neurodevelopment** means how a child gains motor, language and social skills in order over 5 years. Smile at 6 weeks, sit at 6 months and walk at 12 months in 95 percent. **Milestones** from 3 domains guide screening of 100 toddlers at 9 months. Delay beyond 2 standard steps needs assessment within 2 weeks in 20 percent of cases.",
+   "say": "Neurodevelopment means how a child gains motor, language and social skills in order over five years. Smile at six weeks, sit at six months and walk at twelve months in ninety five percent. Milestones from three domains guide screening of one hundred toddlers at nine months. Delay beyond two standard steps needs assessment within two weeks in twenty percent of cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Motor",
+     "Language"
+    ],
+    "rows": [
+     [
+      "6 weeks",
+      "Head control poor",
+      "Coo sounds"
+     ],
+     [
+      "6 months",
+      "Sit with support",
+      "Babbles 2 sounds"
+     ],
+     [
+      "12 months",
+      "Walk 5 steps",
+      "Says 2 words"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fragile X** with 200 repeats and **Down syndrome** trisomy 21 drive 10 percent of delays in 500 children. **Rett syndrome** follows 1 mutation with loss after 12 months in girls. Maternal 3 infections, alcohol in 2 percent and 4 weeks of prematurity raise risk. **Folate** 0.4 mg daily cuts neural tube defects by 70 percent in 1000 pregnancies.",
+   "say": "Fragile X with two hundred repeats and Down syndrome trisomy twenty one drive ten percent of delays in five hundred children. Rett syndrome follows one mutation with loss after twelve months in girls. Maternal three infections, alcohol in two percent and four weeks of prematurity raise risk. Folate zero point four milligrams daily cuts defects by seventy percent in one thousand pregnancies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hear concerns at 6 months"
+     },
+     {
+      "id": "b",
+      "label": "Karyotype at 9 months"
+     },
+     {
+      "id": "c",
+      "label": "MRI at 12 months"
+     },
+     {
+      "id": "d",
+      "label": "Refer for therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autism spectrum** alters synapses with 1 percent prevalence in 1000 children and 4 to 1 male excess. Genes plus prenatal 3 exposures shape 2 main brain circuits early. **Oxytocin** and 2 brain areas control eye contact by 6 months. **Chromosomal microarray** finds 15 percent diagnoses in 3 month testing for 2 year olds.",
+   "say": "Autism spectrum alters synapses with one percent prevalence in one thousand children and four to one male excess. Genes plus prenatal three exposures shape two main brain circuits early. Oxytocin and two brain areas control eye contact by six months. Chromosomal microarray finds fifteen percent diagnoses in three month testing for two year olds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanism",
+     "points": [
+      "Synaptic gene faults",
+      "Prenatal exposure 3",
+      "Brain 2 circuits"
+     ]
+    },
+    "right": {
+     "title": "Result",
+     "points": [
+      "1 percent children",
+      "Eye contact low",
+      "Male excess 4 to 1"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "DSM-5 requires **social communication** deficits plus 2 restricted patterns from 4 listed behaviours. Onset before 3 years with functional harm in 70 percent of cases. A 30 month boy shows 5 echolalia repeats and 1 hand flap routine daily. **MCHAT** at 18 months flags 2 of 20 items for referral in 80 percent sensitivity.",
+   "say": "DSM five requires social communication deficits plus two restricted patterns from four listed behaviours. Onset before three years with functional harm in seventy percent of cases. A thirty month boy shows five echolalia repeats and one hand flap routine daily. The screening check at eighteen months flags two of twenty items for referral with high sensitivity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Examples",
+     "Count"
+    ],
+    "rows": [
+     [
+      "Social",
+      "No pointing 18 months",
+      "2 deficits needed"
+     ],
+     [
+      "Restricted",
+      "Hand flap daily",
+      "2 patterns needed"
+     ],
+     [
+      "Onset",
+      "Before 3 years",
+      "Early onset"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bayley scales** at 24 months give motor and language scores for 100 referrals yearly. **IQ** below 70 defines intellectual disability with onset before 18 years. **Vineland** adaptive score below 70 plus 2 domain lows confirm cases in 4 weeks. Check hearing in 2 ears and vision in 1 visit because 8 percent of delays hide these faults.",
+   "say": "Bayley scales at twenty four months give motor and language scores for one hundred referrals yearly. IQ below seventy defines intellectual disability with onset before eighteen years. Vineland adaptive score below seventy plus two domain lows confirm cases in four weeks. Check hearing in two ears and vision in one visit because eight percent of delays hide these faults.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen 100 toddlers"
+     },
+     {
+      "id": "b",
+      "label": "Hearing plus vision"
+     },
+     {
+      "id": "c",
+      "label": "Bayley at 24 months"
+     },
+     {
+      "id": "d",
+      "label": "IQ under 70 check"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methylphenidate** 10 mg twice daily helps 70 percent of 7 year old ADHD cases by 4 weeks. **Atomoxetine** 40 mg daily suits boys with 2 tics and anxiety. **ADHD** needs 6 symptoms for 6 months in 2 settings for 50 percent of 8 year olds. Start 1 drug at 2.5 mg test dose then raise by 2.5 mg weekly to 30 mg.",
+   "say": "Methylphenidate ten milligrams twice daily helps seventy percent of seven year old ADHD cases by four weeks. Atomoxetine forty milligrams daily suits boys with two tics and anxiety. ADHD needs six symptoms for six months in two settings for half of eight year olds. Start one drug at two point five milligrams test dose then raise weekly to thirty milligrams.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Methylphenidate 10 mg",
+     "points": [
+      "Twice daily dose",
+      "Works in 2 weeks",
+      "Appetite down 15 percent"
+     ]
+    },
+    "right": {
+     "title": "Atomoxetine 40 mg",
+     "points": [
+      "Once daily dose",
+      "Slower 4 weeks",
+      "Tics safe"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**ABA** therapy gives 10 hours weekly for 12 months in 60 percent of autism toddlers. **Intellectual disability** needs 1 learning plan with 3 goals per 6 months for 4 year olds. **Speech** 30 minutes twice weekly lifts 2 word use in 50 percent by 1 year. **Risperidone** 0.25 mg curbs severe 5 times daily self injury in 30 percent.",
+   "say": "ABA therapy gives ten hours weekly for twelve months in sixty percent of autism toddlers. Intellectual disability needs one learning plan with three goals per six months for four year olds. Speech thirty minutes twice weekly lifts two word use in half by one year. Risperidone zero point two five milligrams curbs severe self injury in thirty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Set 3 goals"
+     },
+     {
+      "id": "b",
+      "label": "ABA 10 hours weekly"
+     },
+     {
+      "id": "c",
+      "label": "Speech twice weekly"
+     },
+     {
+      "id": "d",
+      "label": "Review in 12 months"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Epilepsy** strikes 20 percent of autism children in 100 cases by 10 years. **Sleep** trouble hits 60 percent with 3 night wakings for 2 years. **Self injury** in 10 percent needs 1 safety plan with 4 staff checks hourly. **Constipation** in 25 percent of 5 year olds worsens behaviour over 4 weeks untreated.",
+   "say": "Epilepsy strikes twenty percent of autism children in one hundred cases by ten years. Sleep trouble hits sixty percent with three night wakings for two years. Self injury in ten percent needs one safety plan with four staff checks hourly. Constipation in twenty five percent of five year olds worsens behaviour over four weeks untreated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Comorbidity",
+     "Rate",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Epilepsy",
+      "20 percent",
+      "EEG by 10 years"
+     ],
+     [
+      "Sleep trouble",
+      "60 percent",
+      "3 wakings nightly"
+     ],
+     [
+      "Self injury",
+      "10 percent",
+      "Hourly checks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autism** keeps social deficits with 2 restricted patterns and IQ often above 70 in 40 percent. **Intellectual disability** shows IQ below 70 with onset before 18 years in 5 percent. **ADHD** shows 6 symptoms for 6 months with onset before 12 years in 5 percent. Screen 100 children at 18 months with 2 tools to split the 3 groups fast.",
+   "say": "The autism pattern keeps social deficits with two restricted patterns and IQ often above seventy in forty percent. Intellectual disability shows IQ below seventy with onset before eighteen years in five percent. ADHD shows six symptoms for six months with onset before twelve years in five percent. Screen one hundred children at eighteen months with two tools to split the three groups fast.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autism",
+     "points": [
+      "Social deficit 2 patterns",
+      "Onset under 3 years",
+      "IQ often over 70"
+     ]
+    },
+    "right": {
+     "title": "ADHD and ID",
+     "points": [
+      "ADHD 6 symptoms 6 months",
+      "ID IQ under 70",
+      "Onset under 12 years"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield recall: **DSM-5** autism needs 2 restricted patterns before 3 years in 1 percent. Use **MCHAT** 2 of 20 flags at 18 months in 10 minutes. Treat **Methylphenidate** 10 mg twice daily for 4 weeks in ADHD. Define **IQ** below 70 before 18 years for intellectual disability with ABA 10 hours weekly.",
+   "say": "High-yield for the exam, remember DSM five autism needs two restricted patterns before three years in one percent. Use the screening check two of twenty flags at eighteen months in ten minutes. Treat Methylphenidate ten milligrams twice daily for four weeks in ADHD. Define IQ below seventy before eighteen years for intellectual disability with ten hours of weekly therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Cutoff",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Autism MCHAT",
+      "2 of 20 flags",
+      "18 months check"
+     ],
+     [
+      "ADHD drugs",
+      "10 mg twice daily",
+      "4 weeks trial"
+     ],
+     [
+      "IQ for ID",
+      "Below 70",
+      "Before 18 years"
+     ]
+    ]
+   }
+  }
+ ]
+}
