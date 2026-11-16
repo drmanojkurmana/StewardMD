@@ -175,7 +175,11 @@
   var strokesOf = function (id) { return q("strokes", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
   var textOf = function (id) { return q("ptext", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
   function esc(s) { if (host && host.esc) return host.esc(s); s = String(s == null ? "" : s); return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
-  function getHost() { try { if (G.PREP && G.PREP._host) return G.PREP._host; } catch (e) {} return host; }
+  function getHost() {
+    try { if (G.STUDY && G.STUDY._host && G.STUDY._host()) return G.STUDY._host(); } catch (e) {}
+    try { if (G.PREP && G.PREP._host) return G.PREP._host; } catch (e) {}
+    return host;
+  }
   // ---- trash auto-purge on load (30 days) ----
   function purgeExpiredTrash() {
     var cutoff = Date.now() - 30 * 86400000;
@@ -403,11 +407,14 @@
   function getTabState() { try { var o = JSON.parse(G.localStorage.getItem(TABSTATE_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
   function setTabState(id, st) { var all = getTabState(); all[id] = st; try { G.localStorage.setItem(TABSTATE_KEY, JSON.stringify(all)); } catch (e) {} }
   function addTab(docId) {
+    if (!docId) return;
     var tabs = getTabs();
-    if (tabs.indexOf(docId) === -1) tabs.push(docId);
-    if (tabs.length > 12) tabs = tabs.slice(-12);
-    setTabs(tabs);
-    renderDocTabs();
+    if (tabs.indexOf(docId) === -1) {
+      tabs.push(docId);
+      if (tabs.length > 12) tabs = tabs.slice(-12);
+      setTabs(tabs);
+      renderDocTabs();
+    }
   }
   function removeTab(docId) {
     var tabs = getTabs().filter(function (x) { return x !== docId; });
@@ -470,19 +477,30 @@
     var root = hRoot(); if (!root) return;
     var body = root.querySelector(".pn-body.st-body");
     if (!body) return;
-    var old = body.querySelector("#stDocTabs");
-    if (old && old.parentNode) old.parentNode.removeChild(old);
-    var tabs = getTabs();
-    if (!tabs.length) return;
     var curState = G.STUDY && G.STUDY._state && G.STUDY._state();
     var curId = curState && curState.id;
-    var curIdx = tabs.indexOf(curId);
+    if (curId) addTab(curId);
+    var tabs = getTabs();
+    var existing = body.querySelector("#stDocTabs") || root.querySelector("#stDocTabs");
+    if (!tabs.length) {
+      if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+      return;
+    }
+    var tabKey = tabs.join(",") + ":" + (curId || "");
+    if (existing && existing._tabKey === tabKey) {
+      var p3Top = body.querySelector("#stP3Top") || root.querySelector("#stP3Top");
+      if (p3Top && p3Top.parentNode && p3Top.nextSibling !== existing) {
+        p3Top.parentNode.insertBefore(existing, p3Top.nextSibling);
+      }
+      return;
+    }
     // need titles for tabs; load async then render
     idbAll("docs").then(function (docs) {
       var by = {}; docs.forEach(function (d) { by[d.id] = d; });
-      var tabsEl = D.createElement("div");
+      var tabsEl = existing || D.createElement("div");
       tabsEl.id = "stDocTabs";
       tabsEl.className = "st-doc-tabs";
+      tabsEl._tabKey = tabKey;
       tabsEl.setAttribute("role", "tablist");
       tabsEl.setAttribute("aria-label", "Open documents");
       var html = "";
@@ -496,11 +514,20 @@
         '</div>';
       });
       tabsEl.innerHTML = html;
-      // insert after #stTb if exists else first
-      var tb = body.querySelector("#stTb");
-      if (tb && tb.parentNode === body) body.insertBefore(tabsEl, tb.nextSibling);
-      else if (body.firstChild) body.insertBefore(tabsEl, body.firstChild);
-      else body.appendChild(tabsEl);
+      // Position tabs directly UNDER #stP3Top if it exists, else before #stTb or first in body
+      var p3Top = body.querySelector("#stP3Top") || root.querySelector("#stP3Top");
+      if (p3Top && p3Top.parentNode) {
+        if (p3Top.nextSibling !== tabsEl) p3Top.parentNode.insertBefore(tabsEl, p3Top.nextSibling);
+      } else {
+        var tb = body.querySelector("#stTb");
+        if (tb && tb.parentNode === body) {
+          if (tb.previousSibling !== tabsEl) body.insertBefore(tabsEl, tb);
+        } else if (body.firstChild) {
+          if (body.firstChild !== tabsEl) body.insertBefore(tabsEl, body.firstChild);
+        } else {
+          body.appendChild(tabsEl);
+        }
+      }
     });
   }
   function renderDocTabs() { injectDocTabs(); }
@@ -1028,6 +1055,7 @@
             return p.then(function () {
               var d = r.doc, w = d.kind === "nb" ? Promise.resolve(d.store) : saveOriginalBytes(d.id, ent["files/" + d.id + ".pdf"]);
               return w.then(function (where) { if (d.kind !== "nb") d.store = where; return putAll("strokes", r.strokes); })
+                .then(function () { return r.items && r.items.length ? putAll("items", r.items) : null; })
                 .then(function () { return putAll("ptext", r.ptext); })
                 .then(function () { return r.undo ? idbPut("undo", r.undo) : null; })
                 .then(function () { return r.index ? idbPut("index", r.index) : null; })
@@ -1287,7 +1315,8 @@
     var S = G.STUDY; if (!S) return;
     origAct = S.act;
     var origLib = S.lib;
-    S.lib = function () {
+    S.lib = function (h) {
+      if (h) host = h;
       libState.tab = "documents";
       libState.currentFolderId = null;
       return renderLibPaint();
@@ -1296,12 +1325,13 @@
       host = h;
       if (a.indexOf("st5a-") === 0) return libAct5a(a, el, h);
       // opening a document through the old actions also tracks tabs + injects the tab bar
-      if (a === "st-open" || a === "st-hit" || a === "st-src") {
+      if (a === "st-open" || a === "st-hit" || a === "st-src" || a === "st-mknb" || a === "st5a-mknb") {
         captureCurrentTab();
         var r = origAct(a, el, h);
         var id = a === "st-src" ? el.getAttribute("data-doc") : (el.getAttribute("data-id") || (el.getAttribute && el.getAttribute("data-id")));
         if (a === "st-hit") id = el.getAttribute("data-id");
         if (id) { addTab(id); G.setTimeout(function () { injectDocTabs(); }, 250); }
+        else { G.setTimeout(function () { var st = G.STUDY && G.STUDY._state && G.STUDY._state(); if (st && st.id) { addTab(st.id); injectDocTabs(); } }, 250); }
         return r;
       }
       return origAct(a, el, h);

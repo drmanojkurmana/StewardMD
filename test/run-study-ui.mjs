@@ -618,7 +618,17 @@ await idb("docs", 'o.delete("bad")');
 const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction(store).objectStore(store).getAll(); q.onsuccess = () => { r.result.close(); res(q.result); }; }; }), store);
 const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
 const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
-const openLib = async () => { await page.click('#smdPrep .pnv-tab[data-tab="study"]'); await page.waitForSelector("#stLib"); };
+const openLib = async () => {
+  if (await page.locator("#stLib").count() > 0 && await page.locator("#stLib").isVisible()) {
+    await page.evaluate(() => {
+      if (window.STUDY_LIB && window.STUDY_LIB.renderBody) window.STUDY_LIB.renderBody();
+      else if (window.STUDY && window.STUDY.lib) window.STUDY.lib();
+    });
+    return;
+  }
+  await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+  await page.waitForSelector("#stLib");
+};
 await boot("prep=1&study=1");
 await openLib();
 const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));
@@ -798,11 +808,12 @@ await page.evaluate(() => new Promise(r => { const q = indexedDB.deleteDatabase(
 await openLib();
 await page.waitForTimeout(400);
 /* create a fresh notebook for P3 */
-await page.click('[data-act="st-newnb"]');
-await page.fill("#stNbT", "P3 test");
-await page.selectOption("#stNbS", "ruled");
-await page.selectOption("#stNbZ", "a4");
-await page.click('[data-act="st-mknb"]');
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "P3 test");
+await page.selectOption("#st5aNbS", "ruled");
+await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector("#stPages", { timeout: 15000 });
 await page.waitForSelector("#stP3Top", { timeout: 10000 });
 ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");

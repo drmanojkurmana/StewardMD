@@ -256,10 +256,14 @@
           '<button type="button" class="st-p3-btn" data-act="st-p3-more" aria-label="More options">'+ICO.more+'</button>' +
         '</div>' +
       '</div>';
-    /* insert before .st-tb if exists else at top of body */
-    var insertBefore = tb || root.querySelector(".st-sc");
+    /* insert before #stDocTabs if exists, else before .st-tb if exists else at top of body */
+    var dt = root.querySelector("#stDocTabs");
+    var insertBefore = dt || tb || root.querySelector(".st-sc");
     if(insertBefore && insertBefore.parentNode) insertBefore.parentNode.insertBefore(top, insertBefore);
     else if(root) root.insertBefore(top, root.firstChild);
+    if(dt && dt.parentNode === top.parentNode && top.nextSibling !== dt) {
+      top.parentNode.insertBefore(dt, top.nextSibling);
+    }
     /* bottom pager */
     var pager=D.createElement("button"); pager.type="button"; pager.id="stP3Pager"; pager.className="st-p3-pager";
     pager.setAttribute("data-act","st-p3-goto"); pager.innerHTML='<span id="stP3Cur">1</span><span class="st-p3-slash"> of </span><span id="stP3Tot">1</span>';

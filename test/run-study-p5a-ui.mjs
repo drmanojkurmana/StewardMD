@@ -126,6 +126,15 @@ await page.waitForSelector(".st-pg", { timeout: 20000 });
 await page.evaluate((id) => STUDY_LIB.openById(id, null), ids[1]);
 await page.waitForSelector("#stDocTabs", { timeout: 10000 });
 ok((await page.locator(".st-dt").count()) >= 2, "5.8: open documents shown as tabs");
+await page.waitForSelector("#stP3Top", { timeout: 10000 });
+ok(await page.evaluate(() => {
+  const top = document.querySelector("#stP3Top");
+  const dt = document.querySelector("#stDocTabs");
+  return !!(top && dt && (top.nextSibling === dt || dt.getBoundingClientRect().top >= top.getBoundingClientRect().bottom - 2));
+}), "5.8: tabs sit directly under #stP3Top");
+await page.click('[data-act="st-p3-back"]');
+await page.waitForSelector("#stLib", { timeout: 10000 });
+ok(await page.locator("#stLib").isVisible(), "5.8: back returns to 5a library grid");
 await boot("prep=1&study=1");
 const tabs = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_openTabs") || "[]"));
 ok(tabs.length >= 2, "5.8: tabs remembered on relaunch (" + tabs.length + ")");
