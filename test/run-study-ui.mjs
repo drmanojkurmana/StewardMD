@@ -284,6 +284,9 @@ await page.click('[data-act="st-delpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "notebook: page deleted after confirm");
 
+/* helper declared here so it is available throughout all A6+ tests */
+const gotoSearch = async () => { await page.click('[data-act="st5a-tab"][data-v="search"]'); await page.waitForSelector("#st5aSearchQ", { timeout: 10000 }); };
+
 /* ---- A6 search ---- */
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
@@ -331,7 +334,6 @@ const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const 
 const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
 const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
 const openLib = async () => { await page.click('#smdPrep .pnv-tab[data-tab="study"]'); await page.waitForSelector("#stLib"); };
-const gotoSearch = async () => { await page.click('[data-act="st5a-tab"][data-v="search"]'); await page.waitForSelector("#st5aSearchQ", { timeout: 10000 }); };
 await boot("prep=1&study=1");
 await openLib();
 const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));

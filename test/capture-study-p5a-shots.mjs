@@ -83,8 +83,12 @@ for (const dev of DEVICES) {
     await sleep(400);
     await page.click('[data-act="st5a-tab"][data-v="trash"]'); await sleep(400);
     await page.screenshot({ path: join(OUT_DIR, `${tag}-06-trash.png`) }); console.log(`${tag}-06-trash.png`);
+    await page.locator(".st5a-card.st-doc").first().locator('[data-act="st5a-doc-menu"]').click();
+    await page.waitForSelector('[data-act="st5a-restore"]');
+    await page.click('[data-act="st5a-restore"]'); await sleep(300);
     await page.click('[data-act="st5a-tab"][data-v="documents"]');
-    await page.locator(".st5a-card.st-doc").first().click();
+    await page.waitForSelector(".st5a-card.st-doc [data-act='st5a-open']", { timeout: 10000 });
+    await page.locator(".st5a-card.st-doc [data-act='st5a-open']").first().click();
     await page.waitForSelector(".st-pg", { timeout: 20000 }); await sleep(300);
     await page.screenshot({ path: join(OUT_DIR, `${tag}-07-doc-tabs.png`) }); console.log(`${tag}-07-doc-tabs.png`);
     await ctx.close();

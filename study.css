@@ -1296,7 +1296,10 @@
 .pn-root .st5a-list-tt { display: flex; flex-direction: column; min-width: 0; flex: 1; }
 .pn-root .st5a-list-tt b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pn-root .st5a-list-tt small { color: var(--pn-mut); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pn-root .st5a-bottom { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--pnv-b, 12px) + 8px); z-index: 40; display: flex; gap: 4px; background: var(--pn-card); border: 1px solid var(--pn-line); border-radius: 999px; padding: 6px; box-shadow: var(--pn-shadow); }
+.pn-root:has(#stLib) > .pnv,
+.pn-root:has(.st5a-bottom) > .pnv { display: none !important; pointer-events: none !important; }
+.pn-root > .pn-body.st-lib { z-index: 5; }
+.pn-root .st5a-bottom { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--pnv-b, 12px) + 8px); z-index: 890; display: flex; gap: 4px; background: var(--pn-card); border: 1px solid var(--pn-line); border-radius: 999px; padding: 6px; box-shadow: var(--pn-shadow); }
 .pn-root .st5a-tab { min-height: 52px; min-width: 72px; border-radius: 999px; border: 0; background: transparent; color: var(--pn-mut); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11px; font-weight: 700; }
 .pn-root .st5a-tab.on { background: var(--pn-s2); color: var(--pn-text); }
 .pn-root .st5a-tab-ic { display: flex; }
