@@ -59,50 +59,120 @@
     }
     return insideCount > pts.length * 0.45;
   }
-  // Detects if a stroke is a fast back-and-forth scribble gesture
-  function isScribble(pts) {
+  // Strict scribble detector (phase P0, ink-loss fix). Handwriting like m, n, w, z, e, s must never read as a
+  // scribble: the stroke must clear every gate, any single miss keeps it as a normal stroke. Gates:
+  // >=6 reversals on the main axis, drawn in under 800 ms, path length >=4x the bbox diagonal, box width
+  // <25% of the page width, and >=30% of its points within 6 px of existing (not gone) ink.
+  // pts: [[x, y, pressure?, tMs?]] page-relative 0..1; opts: { durationMs, pageW, pageH, ink } where ink is
+  // an array of strokes { pts, gone } or raw pts arrays on the same page. Without page dimensions a 1000 px
+  // page is assumed for the 6 px tests. Missing duration or ink fails closed (not a scribble).
+  function ptDist2Seg(px, py, ax, ay, bx, by) {
+    var dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy, t = l ? ((px - ax) * dx + (py - ay) * dy) / l : 0;
+    t = t < 0 ? 0 : t > 1 ? 1 : t;
+    var cx = ax + t * dx - px, cy = ay + t * dy - py;
+    return cx * cx + cy * cy;
+  }
+  function segCross(a1, a2, b1, b2) {
+    function o(p, q, r) { var v = (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]); return v > 0 ? 1 : v < 0 ? -1 : 0; }
+    function on(p, q, r) { return q[0] <= Math.max(p[0], r[0]) && q[0] >= Math.min(p[0], r[0]) && q[1] <= Math.max(p[1], r[1]) && q[1] >= Math.min(p[1], r[1]); }
+    var o1 = o(a1, a2, b1), o2 = o(a1, a2, b2), o3 = o(b1, b2, a1), o4 = o(b1, b2, a2);
+    if (o1 !== o2 && o3 !== o4) return true;
+    if (o1 === 0 && on(a1, b1, a2)) return true;
+    if (o2 === 0 && on(a1, b2, a2)) return true;
+    if (o3 === 0 && on(b1, a1, b2)) return true;
+    if (o4 === 0 && on(b1, a2, b2)) return true;
+    return false;
+  }
+  function minDistToPoly(px, py, polyPx, W, H) {
+    var best = Infinity, i;
+    if (!polyPx || !polyPx.length) return best;
+    if (polyPx.length === 1) { var dx = px - polyPx[0][0], dy = py - polyPx[0][1]; return dx * dx + dy * dy; }
+    for (i = 1; i < polyPx.length; i++) {
+      var d = ptDist2Seg(px, py, polyPx[i - 1][0], polyPx[i - 1][1], polyPx[i][0], polyPx[i][1]);
+      if (d < best) best = d;
+    }
+    return best;
+  }
+  function toPx(pts, W, H) {
+    var out = [], i;
+    for (i = 0; i < pts.length; i++) out.push([pts[i][0] * W, pts[i][1] * H]);
+    return out;
+  }
+  function isScribble(pts, opts) {
     if (!pts || pts.length < 8) return false;
-    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    var pathLen = 0;
-    for (var i = 0; i < pts.length; i++) {
+    opts = opts || {};
+    var W = opts.pageW || 1000, H = opts.pageH || 1000;
+    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, pathLen = 0, i;
+    for (i = 0; i < pts.length; i++) {
       var x = pts[i][0], y = pts[i][1];
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
       if (y < minY) minY = y;
       if (y > maxY) maxY = y;
       if (i > 0) {
-        var dx0 = x - pts[i - 1][0], dy0 = y - pts[i - 1][1];
+        var dx0 = (x - pts[i - 1][0]) * W, dy0 = (y - pts[i - 1][1]) * H;
         pathLen += Math.sqrt(dx0 * dx0 + dy0 * dy0);
       }
     }
     var bw = maxX - minX, bh = maxY - minY;
+    if (bw >= 0.25) return false;
     var diag = Math.sqrt(bw * bw + bh * bh);
     if (diag < 0.005 || diag > 0.6) return false;
-    if (pathLen / diag < 2.2) return false;
-
-    var revsX = 0, revsY = 0;
-    var lastSignX = 0, lastSignY = 0;
-    var stepThreshold = diag * 0.06;
-    var accX = 0, accY = 0;
-    for (var j = 1; j < pts.length; j++) {
-      var dx = pts[j][0] - pts[j - 1][0];
-      var dy = pts[j][1] - pts[j - 1][1];
-      accX += dx;
-      accY += dy;
-      if (Math.abs(accX) >= stepThreshold) {
-        var sX = accX > 0 ? 1 : -1;
-        if (lastSignX !== 0 && sX !== lastSignX) revsX++;
-        lastSignX = sX;
-        accX = 0;
-      }
-      if (Math.abs(accY) >= stepThreshold) {
-        var sY = accY > 0 ? 1 : -1;
-        if (lastSignY !== 0 && sY !== lastSignY) revsY++;
-        lastSignY = sY;
-        accY = 0;
+    var diagPx = Math.sqrt(Math.pow(bw * W, 2) + Math.pow(bh * H, 2));
+    if (diagPx <= 0 || pathLen / diagPx < 4) return false;
+    var dur = opts.durationMs;
+    if (dur == null) {
+      var t0 = pts[0] && pts[0][3], t1 = pts[pts.length - 1] && pts[pts.length - 1][3];
+      if (t0 != null && t1 != null) dur = t1 - t0;
+    }
+    if (dur == null || !(dur >= 0) || dur >= 800) return false;
+    var mainX = bw >= bh, revs = 0, lastSign = 0, acc = 0, stepThreshold = diag * 0.06;
+    for (i = 1; i < pts.length; i++) {
+      acc += mainX ? (pts[i][0] - pts[i - 1][0]) : (pts[i][1] - pts[i - 1][1]);
+      if (Math.abs(acc) >= stepThreshold) {
+        var s = acc > 0 ? 1 : -1;
+        if (lastSign !== 0 && s !== lastSign) revs++;
+        lastSign = s;
+        acc = 0;
       }
     }
-    return (revsX >= 3 || revsY >= 3 || (revsX >= 2 && revsY >= 2));
+    if (revs < 6) return false;
+    var ink = opts.ink;
+    if (!ink || !ink.length) return false;
+    var inkPx = [], onInk = 0;
+    for (i = 0; i < ink.length; i++) {
+      var ip = ink[i] && ink[i].pts ? ink[i].pts : ink[i];
+      if (!ip || !ip.length || (ink[i] && ink[i].gone)) continue;
+      inkPx.push(toPx(ip, W, H));
+    }
+    if (!inkPx.length) return false;
+    var rad2 = 36;
+    for (i = 0; i < pts.length; i++) {
+      var px = pts[i][0] * W, py = pts[i][1] * H, best = Infinity, k;
+      for (k = 0; k < inkPx.length; k++) {
+        var d = minDistToPoly(px, py, inkPx[k], W, H);
+        if (d < best) best = d;
+        if (best <= rad2) break;
+      }
+      if (best <= rad2) onInk++;
+    }
+    return onInk / pts.length >= 0.3;
+  }
+  // Covered test for a scribble erase (phase P0): a stroke counts as covered only when it actually crosses
+  // the scribble path. At least 2 of its points within 6 px of the scribble (a single-point dot needs its
+  // one point within 6 px) or any of its segments crossing the scribble path. Never an 18 px neighbourhood.
+  function coveredBy(scribblePts, s, W, H) {
+    if (!scribblePts || !scribblePts.length || !s || !s.pts || !s.pts.length) return false;
+    W = W || 1000; H = H || 1000;
+    var sc = toPx(scribblePts, W, H), tg = toPx(s.pts, W, H), rad2 = 36, near = 0, i, j;
+    for (i = 0; i < tg.length; i++) {
+      if (minDistToPoly(tg[i][0], tg[i][1], sc, W, H) <= rad2) near++;
+    }
+    if (near >= 2 || (tg.length < 2 && near >= 1)) return true;
+    for (i = 1; i < tg.length; i++) for (j = 1; j < sc.length; j++) {
+      if (segCross(tg[i - 1], tg[i], sc[j - 1], sc[j])) return true;
+    }
+    return false;
   }
   // Undo/redo: ops are { t: "add", id } or { t: "del", ids: [id] }. Strokes are never deleted, only flagged gone, so
   // an op is just ids and the stacks stay small enough to persist.
@@ -193,7 +263,7 @@
     BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
     hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure,
-    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble
+    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy
   };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -988,6 +1058,7 @@
   function closeViewer() {
     if (!V) return;
     updateDocThumb();
+    removeEraseToast();
     removeLassoBar();
     closePageSheet();
     closeMoreMenu();
@@ -1071,8 +1142,10 @@
     var root = host.root(), sc = root && root.querySelector("#stSc"), box = root && root.querySelector("#stPages");
     if (!sc) { try { pdf.destroy(); } catch (e) {} return; }
     closeViewer();
-    var scrPref = true;
-    try { scrPref = G.localStorage.getItem("smd_study_scribble") !== "0"; } catch (e) {}
+    // Phase P0 (ink-loss fix): scribble erase defaults to OFF for everyone. The pre-P0 key
+    // smd_study_scribble is ignored so old ONs are reset; only smd_study_scribble2 === "1" turns it on.
+    var scrPref = false;
+    try { scrPref = G.localStorage.getItem("smd_study_scribble2") === "1"; } catch (e) {}
     V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
@@ -1317,7 +1390,7 @@
         return;
       }
       var pt = sample(e);
-      cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now() };
+      cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now() };
       redraw(n, cur);
       e.preventDefault();
     });
@@ -1357,30 +1430,33 @@
         return;
       }
       if (!cur) return;
+      cur.t1 = Date.now();
 
-      // Scribble-to-erase check (only when pen is active and scribble setting is on)
-      if (V.tool === "pen" && V.scribble !== false && isScribble(cur.pts)) {
-        var scPts = cur.pts, scIds = [];
-        var W = ov.clientWidth, H = ov.clientHeight;
-        V.strokes.forEach(function (s) {
-          if (s.page === pid(n) && !s.gone) {
-            for (var k = 0; k < scPts.length; k += 2) {
-              if (hit(s, scPts[k][0], scPts[k][1], 18, W, H)) {
-                s.gone = true;
-                scIds.push(s.id);
-                put("strokes", s);
-                break;
-              }
+      // Scribble-to-erase check (phase P0): only when scribble is ON (default OFF), the strict detector
+      // fires, and the erase covers only strokes it actually crosses (6 px, not an 18 px neighbourhood).
+      // Anything else saves the stroke like any other stroke (never lose ink).
+      if (V.tool === "pen" && V.scribble !== false) {
+        var scW = ov.clientWidth, scH = ov.clientHeight, scInk = [];
+        V.strokes.forEach(function (s) { if (s.page === pid(n) && !s.gone) scInk.push(s); });
+        if (isScribble(cur.pts, { durationMs: cur.t1 - cur.t0, pageW: scW, pageH: scH, ink: scInk })) {
+          var scPts = cur.pts, scIds = [];
+          V.strokes.forEach(function (s) {
+            if (s.page === pid(n) && !s.gone && coveredBy(scPts, s, scW, scH)) {
+              s.gone = true;
+              scIds.push(s.id);
+              put("strokes", s);
             }
+          });
+          if (scIds.length) {
+            cur = null;
+            var scOp = { t: "del", ids: scIds };
+            push(V.stack, scOp);
+            syncTb();
+            saveStack();
+            redraw(n);
+            showEraseToast(scIds.length, scIds, n);
+            return;
           }
-        });
-        if (scIds.length) {
-          cur = null;
-          push(V.stack, { t: "del", ids: scIds });
-          syncTb();
-          saveStack();
-          redraw(n);
-          return;
         }
       }
 
@@ -1404,6 +1480,61 @@
     opIds(r.op).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = r.gone; pages[s.page] = 1; put("strokes", s); } }); });
     Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
     syncTb(); saveStack();
+  }
+
+  // Erase toast with Undo (phase P0): one undo step, exactly the erased strokes come back. Follows the
+  // undo toast pattern (auto-dismiss 4 s). One at a time; a new erase replaces the old toast.
+  var eraseTimer = null;
+  function removeEraseToast() {
+    if (eraseTimer) { G.clearTimeout(eraseTimer); eraseTimer = null; }
+    var b = host && host.root() && host.root().querySelector("#stEraseToast");
+    if (b && b.parentNode) b.parentNode.removeChild(b);
+  }
+  function undoErase(ids) {
+    if (!V) return;
+    var pages = {}, found = -1, i, op;
+    for (i = V.stack.u.length - 1; i >= 0; i--) {
+      op = V.stack.u[i];
+      if (op && op.t === "del" && op.ids.length === ids.length) {
+        var same = true, k;
+        for (k = 0; k < ids.length; k++) if (op.ids.indexOf(ids[k]) === -1) { same = false; break; }
+        if (same) { found = i; break; }
+      }
+    }
+    if (found !== -1) {
+      op = V.stack.u.splice(found, 1)[0];
+      V.stack.r.push(op);
+    }
+    V.strokes.forEach(function (s) {
+      if (ids.indexOf(s.id) !== -1 && s.gone) { s.gone = false; pages[s.page] = 1; put("strokes", s); }
+    });
+    Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
+    syncTb(); saveStack();
+  }
+  function showEraseToast(count, ids, n) {
+    removeEraseToast();
+    var root = host && host.root();
+    if (!root) return;
+    var div = D.createElement("div");
+    div.id = "stEraseToast";
+    div.className = "st-erase-toast";
+    div.setAttribute("role", "status");
+    div.innerHTML = "<span>" + (count === 1 ? "Erased 1 stroke" : "Erased " + count + " strokes") + "</span>" +
+      '<button type="button" class="st-erase-undo" id="stEraseUndo" data-act="st-erase-undo">Undo</button>';
+    div.addEventListener("click", function (e) {
+      var b = e.target;
+      while (b && b !== div) {
+        if (b.getAttribute && b.getAttribute("data-act") === "st-erase-undo") {
+          undoErase(ids);
+          removeEraseToast();
+          return;
+        }
+        b = b.parentNode;
+      }
+    });
+    div._stEraseIds = ids;
+    root.appendChild(div);
+    eraseTimer = G.setTimeout(removeEraseToast, 4000);
   }
 
   /* ---- export and backup (A8) ---- */
@@ -1677,7 +1808,7 @@
     }
     if (a === "st-toggle-scribble") {
       V.scribble = V.scribble === false;
-      try { G.localStorage.setItem("smd_study_scribble", V.scribble ? "1" : "0"); } catch (e) {}
+      try { G.localStorage.setItem("smd_study_scribble2", V.scribble ? "1" : "0"); } catch (e) {}
       var scSt = host.root().querySelector("#stScribbleSt");
       if (scSt) scSt.textContent = V.scribble ? "ON" : "OFF";
       host.toast("Scribble to erase: " + (V.scribble ? "ON" : "OFF"));
@@ -1756,6 +1887,11 @@
     if (a === "st-width") { V.wi = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
     if (a === "st-undo") { var u = undo(V.stack); return u && flipOp(u); }
     if (a === "st-redo") { var r = redo(V.stack); return r && flipOp(r); }
+    if (a === "st-erase-undo") {
+      var et = host.root().querySelector("#stEraseToast");
+      if (et && et._stEraseIds) { undoErase(et._stEraseIds); removeEraseToast(); }
+      return;
+    }
     if (a === "st-go") {
       var inp = h.root().querySelector("#stPage"), n = Math.max(1, Math.min(V.n, parseInt(inp && inp.value, 10) || 1));
       closePageSheet();
