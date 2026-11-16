@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "shp-hepatopulmonary-cardiac",
+ "subject": "ss-hepatology",
+ "title": "Hepatopulmonary and cardiac complications: shunts, platypnoea and hyperdynamic hearts",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Pulmonary complications of liver disease)",
+  "Sleisenger and Fordtran 11e (Hepatopulmonary syndrome)",
+  "AASLD Guidance on Liver Transplant Candidacy 2023"
+ ],
+ "steps": [
+  {
+   "tx": "**Hepatopulmonary syndrome (HPS)** combines liver disease or portal hypertension with low arterial oxygen and dilated lung vessels that shunt blood past the alveoli. It is a shunt disorder, not a pressure disorder. The dilatations sit at the lung bases, so standing pours blood downward and worsens the shunt. Supplemental oxygen supports while the liver awaits definitive repair.",
+   "say": "Hepatopulmonary syndrome always pairs liver disease with low oxygen and dilated pulmonary vessels. The problem is shunting of blood past alveoli, not high pulmonary pressure. Standing worsens the shunt because dilated vessels crowd the lung bases.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Triad", "Meaning", "Test"],
+    "rows": [
+     ["Liver disease", "Portal hypertension", "Clinical context"],
+     ["Hypoxaemia", "Low arterial oxygen", "Blood gases"],
+     ["Vascular dilation", "Intrapulmonary shunt", "Bubble echo"]
+    ]
+   }
+  },
+  {
+   "tx": "Failed hepatic clearance and portosystemic shunting raise circulating vasodilators, especially **nitric oxide** within the pulmonary vasculature. Dilated precapillary and capillary channels move mixed venous blood too fast and too wide for oxygen to reach the centre. True anatomical shunts may also form. **Orthodeoxia (desaturation on sitting)** and **platypnoea (dyspnoea lying flat)** result, with a widened **alveolar-arterial gradient** but normal pulmonary pressures.",
+   "say": "Vasodilators flood the pulmonary circuit while the failing liver cannot clear them. Oversized vessels shunt blood past alveoli too rapidly for oxygen diffusion. Gravity then drags perfusion to the bases, so sitting or standing desaturates the patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "liver", "label": "Portal hypertension"},
+     {"id": "dilate", "label": "Vessels dilate"},
+     {"id": "shunt", "label": "Shunt and diffusion defect"},
+     {"id": "symptom", "label": "Orthodeoxia, platypnoea"}
+    ],
+    "edges": [["liver", "dilate"], ["dilate", "shunt"], ["shunt", "symptom"]]
+   }
+  },
+  {
+   "tx": "Patients desaturate on standing and recover lying flat, a postural pattern that itself points to the diagnosis. **Spider naevi (vascular skin lesions)** and **clubbing (rounded fingertips)** accompany the liver disease and correlate with more severe vasodilatation. Severe resting hypoxaemia demanding high supplemental oxygen or confinement to bed marks advancing shunt. Never measure oxygenation only supine, since the syndrome hides on the flat back.",
+   "say": "Postural desaturation is the clinical fingerprint that should trigger the echo study. Spider naevi and clubbing whisper the same story from the bedside. Supine only measurements lose the syndrome completely.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Lying flat", "points": ["Basal perfusion less", "Oxygen improves", "Comfortable posture", "Shunt partly hidden"]},
+    "right": {"title": "Standing", "points": ["Basal perfusion rises", "Oxygen falls", "Breathlessness mounts", "Shunt exposed"]}
+   }
+  },
+  {
+   "tx": "**Contrast (bubble) echocardiography** is the key diagnostic test, showing delayed left heart microbubbles after several cardiac cycles, which proves intrapulmonary rather than intracardiac shunting. **Arterial blood gases**, ideally supine and upright, document hypoxaemia and orthodeoxia, and the alveolar-arterial gradient quantifies the defect. **Technetium macroaggregated albumin (MAA)** lung perfusion scans quantify shunt fraction, while chest imaging and pulmonary function exclude parenchymal disease.",
+   "say": "Bubble echocardiography proves the shunt site by the delay before bubbles reach the left heart. Blood gases upright and supine give the orthodeoxia for the record. Perfusion scans quantify the shunt when decisions need numbers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "clinic", "label": "Breathless cirrhotic patient"},
+     {"id": "bubble", "label": "Bubble echo positive?"},
+     {"id": "gas", "label": "Blood gases, A-a gradient"},
+     {"id": "hps", "label": "Hepatopulmonary syndrome"}
+    ],
+    "edges": [["clinic", "bubble"], ["bubble", "gas"], ["gas", "hps"]]
+   }
+  },
+  {
+   "tx": "HPS must be separated from **portopulmonary hypertension (PoPH)**, the mirror condition of raised pulmonary pressures with a normal shunt study. Intracardiac right to left shunts, chronic parenchymal lung disease, hereditary arteriovenous malformations and **hepatic hydrothorax** with atelectasis lead the differential. Attribution of hypoxaemia to coexisting lung disease without an echo study is a classic miss. The physiology points are opposite, so confusion carries real risk.",
+   "say": "Portopulmonary hypertension raises pressures while hepatopulmonary syndrome shunts without raising them. Blaming coexistence lung disease without an echo study repeats the classic error. Opposite physiology leads to opposite management.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hepatopulmonary", "points": ["Dilated vessels", "Shunt, low oxygen", "Pressures normal", "Worse standing"]},
+    "right": {"title": "Portopulmonary", "points": ["Vasoconstricted vessels", "High pressures", "Oxygen less affected", "Worse exertion"]}
+   }
+  },
+  {
+   "tx": "**Liver transplantation** is the only definitive therapy, reversing intrapulmonary vasodilatation and hypoxaemia gradually over months. Severe hypoxaemia raises transplant risk yet strengthens the indication, since no effective medical therapy exists. Long term supplemental oxygen, including ambulatory oxygen for exertional and postural desaturation, bridges the wait. Optimise the underlying liver disease and portal hypertension in parallel.",
+   "say": "Transplantation reverses the syndrome over months and remains the only definitive therapy. Severe hypoxaemia strengthens rather than weakens the indication for grafting. Oxygen bridges the wait while portal pressure is controlled.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Therapy", "Role", "Note"],
+    "rows": [
+     ["Transplant", "Definitive cure", "Resolution over months"],
+     ["Oxygen", "Bridge therapy", "Ambulatory for exertion"],
+     ["Embolisation", "Selected large shunts", "Refractory hypoxaemia"],
+     ["Liver care", "Supportive", "Portal pressure control"]
+    ]
+   }
+  },
+  {
+   "tx": "Cirrhotic cardiomyopathy adds cardiac strain to the hepatopulmonary story. A **hyperdynamic circulation**, with wide pulse pressure and high output against low peripheral resistance, burdens the heart in advanced cirrhosis. Blunted stress responses and **QT prolongation** complicate anaesthesia and shunting, while volume shifts at transplant stress the myocardium. Cardiac assessment before listing protects both donor and recipient.",
+   "say": "Cirrhotic hearts beat fast at rest yet respond poorly to stress, which complicates surgery. Volume shifts at transplantation test the myocardium severely. Formal cardiac assessment precedes listing for this reason.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Finding", "Meaning", "Implication"],
+    "rows": [
+     ["Widened pulse pressure", "Vasodilation", "Higher output heart"],
+     ["QT prolongation", "Repolarisation strain", "Anaesthetic risk"],
+     ["Blunted stress response", "Dysfunctional reserve", "Poor exercise tolerance"],
+     ["Volume shifts", "Transplant flux", "Cardiac screening"]
+    ]
+   }
+  },
+  {
+   "tx": "Red flags demand **escalation**. Severe resting hypoxaemia needing high supplemental oxygen, marked orthodeoxia confining the patient to bed, and progressive desaturation each signal advancing shunt. Coexisting features suggesting portopulmonary hypertension alter transplant risk and need right heart catheterisation. Serial blood gases and pulse oximetry, measured supine and upright, track progression and support prioritisation as severity climbs.",
+   "say": "Bedbound orthodeoxia and escalating oxygen demands signal an advancing shunt that needs urgent attention. Features of portopulmonary hypertension reroute the transplant risk assessment. Serial upright and supine measurements track the course.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Flag", "Meaning", "Response"],
+    "rows": [
+     ["High oxygen need", "Advanced shunt", "Expedite listing"],
+     ["Bedbound orthodeoxia", " severe shunt", "Transplant centre now"],
+     ["PoPH features", "Pressure disease", "Catheterise, reassess"],
+     ["Progressive desaturation", "Worsening shunt", "Serial monitoring"]
+    ]
+   }
+  },
+  {
+   "tx": "Prognosis worsens with the syndrome yet improves decisively with grafting. Progressive hypoxaemia can disable, but most patients resolve gradually after transplantation. Decompensated cirrhosis itself carries median survival under **2** years, and fewer than **50** percent survive **2** years after ascites onset. Hepatopulmonary disease accelerates that decline while grafting remains the exit.",
+   "say": "The syndrome shortens survival yet grafting reverses it in most patients over months. Ascites onset already cuts two year survival roughly in half. Pulmonary disease accelerates decline while transplantation remains the exit.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Without graft", "points": ["Disabling hypoxaemia", "Mortality climbs", "Over months", "Oxygen only bridge"]},
+    "right": {"title": "With graft", "points": ["Vasodilation reverses", "Oxygen normalises", "Gradual recovery", "Definitive cure"]}
+   }
+  },
+  {
+   "tx": "Traps centre on **mirror conditions**. Mistaking shunt physiology for pressure disease inverts therapy, attributing hypoxaemia to lung disease skips the echo, and supine only oximetry misses orthodeoxia entirely. Assuming oxygen is definitive treatment rather than a bridge delays listing, and overlooking clubbing with spider naevi discards free bedside clues. Every breathless cirrhotic patient deserves paired postural oximetry.",
+   "say": "Ignoring postural oximetry and echo studies misses every case worth finding. Oxygen alone never cures, since only grafting reverses the shunt. Paired upright and supine measurements catch the diagnosis early.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Miss", "Fix"],
+    "rows": [
+     ["Supine oximetry", "Orthodeoxia hidden", "Measure standing too"],
+     ["Lung disease blame", "No echo done", "Bubble study always"],
+     ["Oxygen as cure", "Listing delayed", "Bridge, then graft"],
+     ["PoPH confusion", "Inverted therapy", "Catheterise when in doubt"]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: HPS triad is liver disease plus hypoxaemia plus shunt on bubble echo, with **orthodeoxia** and **platypnoea** as signatures. Transplantation is the only definitive therapy, oxygen is a bridge, **portopulmonary hypertension** is the pressure mirror to avoid, and cirrhotic cardiomyopathy combines hyperdynamic flow with **QT prolongation** and blunted stress response.",
+   "say": "The triad, the postural signs and the bubble echo delay form the exam core. Transplantation alone heals while oxygen merely bridges. The pressure mirror, portopulmonary hypertension, must never be confused.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["Triad", "Liver, low oxygen, shunt"],
+     ["Signatures", "Orthodeoxia, platypnoea"],
+     ["Diagnostic test", "Bubble echocardiography"],
+     ["Definitive therapy", "Transplantation"],
+     ["Bridge therapy", "Supplemental oxygen"],
+     ["Mirror to avoid", "Portopulmonary hypertension"],
+     ["Heart pattern", "Hyperdynamic, QT prolongation"],
+     ["Basal vessels", "Dilated, shunting"]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,348 @@
+{
+  "steps": [
+    {
+      "say": "Wilson disease is an ATP7B copper pump defect that floods liver, brain, cornea and kidney with copper. It affects about one in thirty thousand people and strikes under forty. Early chelation saves life, while delayed diagnosis lets neurological injury become permanent.",
+      "tx": "**Wilson disease** is an **ATP7B** copper pump defect that floods liver, brain, cornea and kidney with copper, affecting about **1** in **30,000** people. It strikes under age **40** in most series, with hepatic presentations in children and neuropsychiatric ones in adolescents. Early **chelation** saves life, while delayed diagnosis lets neurological injury become permanent. Kayser Fleischer rings appear in **95** percent of neurological disease. Family screening of siblings finds presymptomatic cases at genetic risk.",
+      "vis": {
+        "cols": [
+          "Organ",
+          "Presentation",
+          "Clue"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Liver",
+            "Hepatitis or cirrhosis in children",
+            "Coomb negative haemolysis"
+          ],
+          [
+            "Brain",
+            "Movement disorder in teens",
+            "Dystonia, dysarthria"
+          ],
+          [
+            "Cornea",
+            "Kayser Fleischer rings",
+            "95 percent in neuro disease"
+          ],
+          [
+            "Kidney",
+            "Aminoaciduria, stones",
+            "Fanconi pattern"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Coomb negative haemolytic anaemia with raised enzymes in a teenager screams Wilson disease. Urinary copper above one hundred micrograms daily confirms it, while serum copper runs low or normal. Liver copper above two hundred fifty micrograms per gram seals the diagnosis.",
+      "tx": "**Coomb negative haemolytic anaemia** with raised enzymes in a teenager screams Wilson disease, and the **alkaline phosphatase** to bilirubin ratio stays impressively low. **Urinary copper** above **100** micrograms daily confirms it, while **serum copper** often runs low or normal because most copper rides on ceruloplasmin. Liver copper above **250** micrograms per gram seals the diagnosis on biopsy. Ceruloplasmin falls below **0.2** grams per litre in most cases.",
+      "vis": {
+        "cols": [
+          "Test",
+          "Direction",
+          "Cut off"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Ceruloplasmin",
+            "Low",
+            "Below 0.2 grams per litre"
+          ],
+          [
+            "Urinary copper",
+            "High",
+            "Above 100 micrograms daily"
+          ],
+          [
+            "Liver copper",
+            "Very high",
+            "Above 250 micrograms per gram"
+          ],
+          [
+            "Serum copper",
+            "Low or normal",
+            "Often misleading, ignore alone"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Neurological Wilson disease is offering tremor over eight hertz, dystonia and dysarthria with psychiatric colour. Chorea and pseudo sclerosis are rounding out the classic signs. Magnetic resonance imaging shows T2 signal in the basal ganglia and midbrain reflections.",
+      "tx": "**Neurological Wilson disease** offers tremor above **8** hertz, dystonia, dysarthria with psychiatric colour, and grand mal seizures in a minority. **Chorea** and pseudo sclerosis round out the classic signs, while magnetic resonance imaging shows T2 signal in the basal ganglia. Copper deposition in the midbrain mimetic pattern is called the **face of the giant panda** on axial slices. Psychiatric presentations mislead until movement signs appear.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Tremor above 8 hertz",
+            "Dystonia and dysarthria",
+            "Chorea in a minority"
+          ],
+          "title": "Movement signs"
+        },
+        "right": {
+          "points": [
+            "Depression, psychosis, behaviour change",
+            "Cognitive decline common",
+            "Move signs may lag signs"
+          ],
+          "title": "Psychiatric face"
+        }
+      }
+    },
+    {
+      "say": "D penicillamine chelates copper through the urine, while zinc blocks intestinal absorption by inducing gut metallothionein. Trientine is suiting those intolerant to penicillamine. Neurological worsening in the first month of penicillamine is a well known hazard.",
+      "tx": "**D penicillamine** chelates copper through the urine, while **zinc** blocks intestinal absorption by inducing gut **metallothionein**, and **trientine** suits those intolerant to penicillamine. Neurological worsening in the first month of penicillamine is a well known hazard, reported in **10** to **50** percent of neurological cases. Pyridoxine **25** milligrams daily prevents penicillamine induced deficiency. Zinc response takes **6** months, so chelation bridges the gap in symptomatic disease.",
+      "vis": {
+        "cols": [
+          "Drug",
+          "Mechanism",
+          "Hazard"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "D penicillamine",
+            "Urinary chelation",
+            "Neuro worsening, marrow suppression"
+          ],
+          [
+            "Trientine",
+            "Chelation alternative",
+            "Iron deficiency anaemia"
+          ],
+          [
+            "Zinc acetate",
+            "Gut absorption block",
+            "Slow onset, nausea"
+          ],
+          [
+            "Pyridoxine add on",
+            "Vitamin cover",
+            "Prevents deficiency"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Acute liver failure in Wilson disease announces itself with haemolysis and renal failure and kills without transplant. The alkaline phosphatase to bilirubin ratio below one plus aspartate to alanine above two is predicting it. Transplant listing outranks chelation once encephalopathy arrives.",
+      "tx": "**Acute liver failure** in Wilson disease announces itself with haemolysis and renal failure and kills without transplant. The **alkaline phosphatase** to bilirubin ratio below **1** plus aspartate to alanine above **2** predicts it. Transplant listing outranks chelation once encephalopathy arrives, since chelation cannot reverse established failure. Model scores prove less accurate here than in other fulminant disease. Renal replacement therapy buys time until grafting.",
+      "vis": {
+        "edges": [
+          [
+            "haemolysis",
+            "ratio"
+          ],
+          [
+            "ratio",
+            "list"
+          ],
+          [
+            "list",
+            "transplant"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "haemolysis",
+            "label": "Coomb negative haemolysis"
+          },
+          {
+            "id": "ratio",
+            "label": "Low ratio flags failure"
+          },
+          {
+            "id": "list",
+            "label": "Transplant listing urgent"
+          },
+          {
+            "id": "transplant",
+            "label": "Graft reverses copper load"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Penicillamine worsens neurology early, while zinc is too slow for symptomatic patients. Over chelation is driving pyridoxine deficiency and marrow suppression. Monitoring urinary copper monthly on chelation and zinc levels on zinc keeps dosing honest.",
+      "tx": "**Penicillamine** worsens neurology early, while zinc is too slow for symptomatic patients, so chelation leads and zinc maintains. Over chelation is driving pyridoxine deficiency and marrow suppression, showing as neuropathy and cytopenias. Monitoring **urinary copper** monthly on chelation and zinc levels on zinc keeps dosing honest. Dietary copper restriction avoids shellfish, nuts, chocolate and organ meats for life. Most clinics recheck Kayser Fleischer rings yearly as a response sign.",
+      "vis": {
+        "cols": [
+          "Monitoring",
+          "Frequency",
+          "Target"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Urinary copper on chelation",
+            "Monthly initially",
+            "200 to 500 micrograms daily"
+          ],
+          [
+            "Urinary copper on zinc",
+            "Yearly",
+            "Below 75 micrograms daily"
+          ],
+          [
+            "Blood counts on penicillamine",
+            "Six monthly",
+            "Watch marrow suppression"
+          ],
+          [
+            "Eye rings",
+            "Yearly",
+            "Fading means response"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Kayser Fleischer rings appear at the corneal limbus on slit lamp with golden pigment. They are preceding symptoms in children and fade with therapy. Liver only cases may lack rings, so absence never excludes disease in hepatic presentations.",
+      "tx": "**Kayser Fleischer rings** appear at the corneal limbus on slit lamp with golden pigment, preceding symptoms in children and fading with therapy. Liver only cases may lack rings, so absence never excludes disease in hepatic presentations. Rings reflect copper in Descemet membrane and parallel total body load. Direct and retroillumination techniques reveal early rings missed on torch examination. Eye review therefore belongs in the diagnostic visit, not as an afterthought.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Golden limbal pigment",
+            "Present in 95 percent neuro disease",
+            "Fades with chelation"
+          ],
+          "title": "Ring positive"
+        },
+        "right": {
+          "points": [
+            "Absent in some liver only cases",
+            "Copper tests decide",
+            "Slit lamp still mandatory"
+          ],
+          "title": "Ring negative trap"
+        }
+      }
+    },
+    {
+      "say": "Siblings share a twenty five percent risk, so every family needs screening once the proband is diagnosed. Genetic testing for ATP7B confirms the index case and clarifies relatives. Presymptomatic treatment normalises lifespan completely when started early.",
+      "tx": "**Siblings** share a **25** percent risk, so every family needs screening once the proband is diagnosed, with urinary copper and slit lamp eye review first. **Genetic testing** for ATP7B confirms the index case and clarifies relatives with borderline biochemistry. Presymptomatic treatment normalises lifespan completely when started early, while symptomatic disease still leaves deficits. Adherence counselling dominates long term visits, since missed doses resurrect disease. Most registries offer family screening without charge.",
+      "vis": {
+        "cols": [
+          "Relative",
+          "Test",
+          "When"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Siblings",
+            "Urinary copper plus slit lamp",
+            "At diagnosis of proband"
+          ],
+          [
+            "Children",
+            "Copper studies yearly",
+            "From age 5 onwards"
+          ],
+          [
+            "Borderline cases",
+            "ATP7B genetic testing",
+            "Resolves doubt"
+          ],
+          [
+            "All relatives",
+            "Counselling card",
+            "Lifelong vigilance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dietary copper restriction runs for life alongside chelation, and most families underestimate shellfish and nuts as sources. Zinc dosing needs to stay away from meals, since food blocks its absorption. Urinary copper targets differ on chelation and on zinc, and missing them invites relapse.",
+      "tx": "**Dietary copper restriction** runs for life alongside chelation, avoiding shellfish, nuts, chocolate and organ meats, since small daily excesses accumulate silently. **Zinc** dosing needs to stay away from meals, because food blocks its absorption in the gut. **Urinary copper** targets differ on chelation and on zinc, and missing them invites relapse. Annual eye review tracks ring fading as a cheap response sign.",
+      "vis": {
+        "cols": [
+          "Counselling point",
+          "Source",
+          "Target"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Copper rich foods",
+            "Shellfish, nuts, chocolate",
+            "Daily restriction for life"
+          ],
+          [
+            "Zinc timing",
+            "Up to an hour before meals",
+            "Best absorption"
+          ],
+          [
+            "Urinary copper",
+            "On chelation 200 to 500",
+            "On zinc below 75"
+          ],
+          [
+            "Eye rings",
+            "Yearly slit lamp review",
+            "Fading means response"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Haemolysis in a young patient with raised enzymes is Wilson disease until proven otherwise. The panda face on magnetic resonance imaging and the golden ring on slit lamp are twin signatures. Chelation failure with encephalopathy means listing, not more chelation.",
+      "tx": "**Haemolysis** in a young patient with raised enzymes is Wilson disease until proven otherwise, and the low alkaline phosphatase to bilirubin ratio sharpens the call. The **panda face** on magnetic resonance imaging and the golden ring on slit lamp are twin signatures that confirm what copper tests suggest. Urinary copper above **100** micrograms daily seals symptomatic disease. Chelation failure with encephalopathy means listing, not more chelation.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Incidence",
+            "1 in 30,000",
+            "Autosomal recessive ATP7B"
+          ],
+          [
+            "Urinary copper cut off",
+            "Above 100 micrograms daily",
+            "Symptomatic disease"
+          ],
+          [
+            "Ceruloplasmin cut off",
+            "Below 0.2 grams per litre",
+            "Low in most cases"
+          ],
+          [
+            "Liver copper cut off",
+            "Above 250 micrograms per gram",
+            "Biopsy confirmation"
+          ],
+          [
+            "Sibling risk",
+            "25 percent",
+            "Screen every sibling"
+          ],
+          [
+            "Pyridoxine cover",
+            "25 milligrams daily",
+            "With penicillamine"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-wilson-disease",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, metabolic liver disease chapters",
+    "EASL Clinical Practice Guidelines on Wilson disease"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Wilson disease: copper clues, chelation order and transplant triggers",
+  "v": 1
+}

@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "shp-psc-cholangiopathies",
+ "subject": "ss-hepatology",
+ "title": "Primary sclerosing cholangitis and cholangiopathies: beading, colitis and cancer watch",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Hepatology)",
+  "EASL Guidelines on Primary Sclerosing Cholangitis 2021",
+  "Sleisenger and Fordtran 11e (Biliary diseases)"
+ ],
+ "steps": [
+  {
+   "tx": "**Primary sclerosing cholangitis (PSC)** is a chronic fibrosing inflammation that strictures the intrahepatic and extrahepatic bile ducts. It tracks powerfully with **ulcerative colitis (UC)**, often before bowel symptoms declare themselves. A fluctuating **alkaline phosphatase (ALP)** rise with **gamma glutamyl transferase (GGT)** is the classic laboratory clue, and a dominant stricture appears in up to **45** percent of cases.",
+   "say": "Primary sclerosing cholangitis scars the bile ducts into beaded narrowings, and it travels closely with ulcerative colitis. The earliest laboratory hint is a wobbling alkaline phosphatase, which should always trigger thoughts about duct disease. Nearly half of patients develop one dominant narrow segment that behaves differently from the rest.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clue", "What it tells you", "Exam angle"],
+    "rows": [
+     ["Colitis present", "Gut immune link", "Ask about bowel symptoms"],
+     ["Raised ALP and GGT", "Cholestasis present", "Start the duct workup"],
+     ["Dominant stricture", "Focal narrowing", "Sample for cancer"],
+     ["Beaded ducts", "PSC imaging", "MRCP confirms disease"]
+    ]
+   }
+  },
+  {
+   "tx": "No single cause is proven, yet **immune mediated** injury in a genetically susceptible host best fits the evidence. Altered gut permeability lets microbes cross an inflamed colon, and lymphocytes then attack periductal tissue. Concentric **onion skin fibrosis** wraps each duct, and the small duct variant can advance with a normal cholangiogram, so biopsy alone exposes it.",
+   "say": "The engine of injury appears to start in the colon, where a leaky barrier lets bacterial products reach the liver. Once primed, immune cells circle the bile ducts and lay down rings of scar tissue. Because the scar closes the duct gradually, cholestasis builds quietly over many years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "gut", "label": "Inflamed colon leaks"},
+     {"id": "immune", "label": "Immune attack on ducts"},
+     {"id": "fibrosis", "label": "Onion skin fibrosis"},
+     {"id": "stricture", "label": "Multifocal strictures"}
+    ],
+    "edges": [["gut", "immune"], ["immune", "fibrosis"], ["fibrosis", "stricture"]]
+   }
+  },
+  {
+   "tx": "The key mimic is **IgG4 related sclerosing cholangitis (IgG4 SC)**, which thickens the same ducts yet answers to steroids. Serum **IgG4** elevation points away from classic PSC and toward the steroid responsive mimic. Mislabeling IgG4 disease as PSC denies the patient a treatment that often melts the strictures within weeks.",
+   "say": "Steroid responsive IgG4 disease can look identical on scans, and that single distinction reshapes treatment completely. A high serum IgG4 level should push you toward the mimic rather than classic sclerosing cholangitis. Steroids alone then shrink the IgG4 form, while classic disease never answers to them.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Classic PSC", "points": ["UC linked", "Steroids ineffective", "Beading with strictures", "Transplant for end stage"]},
+    "right": {"title": "IgG4 related", "points": ["Raised serum IgG4", "Steroids melt disease", "Pancreas and salivary clues", "Type one autoimmune pattern"]}
+   }
+  },
+  {
+   "tx": "Progression brings **biliary cirrhosis** with portal hypertension, and the ducts themselves carry a heavy cancer load. Many patients feel well for years, then present with fatigue, **pruritus (itching)** or painless jaundice. **Cholangitis** strikes when a dominant stricture blocks drainage, producing fever, jaundice and right upper quadrant pain in a patient who was previously stable.",
+   "say": "Many patients coast silently for years before cirrhosis or a blocked duct finally surfaces. Itching and fatigue outrun jaundice in the early story, while fever marks a suddenly obstructed segment. Red flags such as rapid decline, weight loss or a new dominant narrowing should raise alarm for cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Phase", "Trap"],
+    "rows": [
+     ["Fatigue, itching", "Early", "Often dismissed alone"],
+     ["Cholangitis", "Blocked segment", "Drain urgently"],
+     ["Weight loss", "New dominance", "Think cancer first"],
+     ["Cirrhosis", "Late", "Refer for transplant"]
+    ]
+   }
+  },
+  {
+   "tx": "**Magnetic resonance cholangiopancreatography (MRCP)** is the noninvasive test of choice and shows multifocal strictures alternating with normal or dilated segments, the **beaded appearance**. **Endoscopic retrograde cholangiopancreatography (ERCP)** stays therapeutic, reserved for sampling or dilating a dominant stricture. Liver biopsy helps mainly when small duct disease or **autoimmune hepatitis (AIH)** overlap is suspected.",
+   "say": "Magnetic resonance imaging maps the beaded ducts without touching them, and it carries the diagnosis in most patients. Endoscopy remains for treatment or tissue, not for diagnosis alone, because the risk remains high. Small duct disease escapes the scan, so only a biopsy decides it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "alp", "label": "Raised ALP"},
+     {"id": "mrcp", "label": "MRCP diagnosis"},
+     {"id": "need", "label": "Therapy or doubt?"},
+     {"id": "ercp", "label": "ERCP treats"},
+     {"id": "bx", "label": "Biopsy small duct"}
+    ],
+    "edges": [["alp", "mrcp"], ["mrcp", "need"], ["need", "ercp"], ["need", "bx"]]
+   }
+  },
+  {
+   "tx": "Surveillance guards the ducts and the colon together. **CA 19-9** with periodic cross sectional imaging screens dominant strictures for **cholangiocarcinoma**, while regular colonoscopy watches the colitis for dysplasia. Any rapid deterioration, weight loss or fresh dominant narrowing demands **ERCP brushings** with cytology. Remember that **p-ANCA** positivity is common yet nonspecific, so it never seals the diagnosis.",
+   "say": "Surveillance runs on two tracks, because cancer can arise in the bile ducts and equally in the inflamed colon. A new dominant stricture always earns brushings at endoscopy, since the stakes are high. Blood markers such as p-ANCA support the picture but cannot carry it alone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Tool", "Target", "When"],
+    "rows": [
+     ["CA 19-9 plus imaging", "Cholangiocarcinoma", "Dominant stricture"],
+     ["Colonoscopy", "Colonic dysplasia", "Concurrent colitis"],
+     ["ERCP brushings", "Tissue proof", "Fresh narrow segment"],
+     ["IgG4 level", "Exclude mimic", "At first diagnosis"]
+    ]
+   }
+  },
+  {
+   "tx": "No medical therapy halts the scarring, so management is mechanical and supportive. **Endoscopic balloon dilatation** with a short stent relieves dominant strictures that obstruct or seed cholangitis. **Cholestyramine** eases pruritus first, escalating stepwise to **rifampicin**, **naltrexone** and **sertraline** when itch persists. Cholangitis needs prompt biliary penetrating antibiotics plus drainage of the blocked segment.",
+   "say": "Since no drug slows the scarring, treatment focuses on opening narrow ducts and quieting itch. Balloons widen dominant segments, and brief stents bridge healing. Bacterial infection of a blocked duct needs swift antibiotics alongside drainage.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Open the duct", "points": ["Balloon dilatation", "Short stent if needed", "Drain blocked segments", "Antibiotics with drainage"]},
+    "right": {"title": "Soothe the itch", "points": ["Cholestyramine first", "Then rifampicin", "Then naltrexone", "Sertraline last"]}
+   }
+  },
+  {
+   "tx": "End stage disease has one definitive answer: **liver transplantation**, which also removes the cancer risk hiding in the native ducts. Refer early for decompensated biliary cirrhosis, recurrent cholangitis or suspected malignancy rather than waiting for frailty. Co management with gastroenterology keeps the colitis controlled, and careful nutrition supports the cholestatic liver while awaiting graft.",
+   "say": "Once the liver fails or infections keep returning, transplantation becomes the sole curative route. Early referral protects patients from arriving too frail for a graft. Joint care with the bowel team keeps the colitis quiet while the liver waits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "chy", "label": "Cholestasis persists"},
+     {"id": "treat", "label": "Dilate, drain, control itch"},
+     {"id": "endstage", "label": "Cirrhosis or recurrent sepsis?"},
+     {"id": "txp", "label": "Transplant referral"}
+    ],
+    "edges": [["chy", "treat"], ["treat", "endstage"], ["endstage", "txp"]]
+   }
+  },
+  {
+   "tx": "The borrowed differential matters, because secondary cholangiopathies imitate PSC. Prior surgery, **ischemia**, stones or parasites can scar ducts in the same beaded fashion. A post surgical stricture, a fluke infestation or recurrent pyogenic cholangitis all deserve exclusion before PSC is named. **Choledocholithiasis** with secondary strictures is a classic confounder in older patients.",
+   "say": "Several acquired insults scar ducts in patterns that imitate sclerosing cholangitis. Stone disease, surgical injury, poor blood flow and fluke infection are forming the differential. Sorting these mimics shifts management from surveillance to removal of the cause.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Mimic", "Clue", "Action"],
+    "rows": [
+     ["Post surgical stricture", "Prior operation", "Revise or stent"],
+     ["Parasitic cholangitis", "Fluke exposure", "Antiparasitic therapy"],
+     ["Stone stricture", "Stones on imaging", "Clear stones first"],
+     ["Ischaemic injury", "Vascular event", "Restore perfusion"]
+    ]
+   }
+  },
+  {
+   "tx": "Traps cluster around what scans cannot see and what mimicry hides. **Small duct PSC** carries a normal cholangiogram, so rising ALP with a clean MRCP still needs biopsy. Quiescent colitis does not exclude PSC, since bowel disease can surface after the liver declares itself. Underweight surveillance loses **cholangiocarcinoma** early, while forgotten **IgG4** testing loses a steroid cure.",
+   "say": "The exam loves the invisible small duct form and the quiescent colitis that fools everyone. A normal scan with rising enzymes still begs a biopsy. Skipping the IgG4 check or abandoning cancer surveillance are the two costliest oversights.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Think again", "points": ["Normal MRCP but high ALP", "Colitis quiet yet PSC present", "Raised IgG4 at diagnosis", "Fresh dominant stricture"]},
+    "right": {"title": "Settle it", "points": ["Biopsy the liver", "Scope the colon", "Steroid trial for IgG4", "Brush the stricture"]}
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: MRCP is the noninvasive diagnosis of choice while ERCP stays therapeutic, and the beaded duct is the signature finding. Dominant stricture appears in up to **45** percent, and serum **IgG4** excludes the steroid responsive mimic. **Cholestyramine** treats itch first, transplantation cures end stage disease, and **CA 19-9** guards the cancer risk.",
+   "say": "The signatures to carry are the beaded MRCP, the IgG4 exclusion, and the dominant stricture in almost half of patients. Itch steps up from cholestyramine, while transplant rescues end stage disease. Cancer surveillance with CA 19-9 and imaging runs for life.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["Diagnostic test", "MRCP beading"],
+     ["Therapeutic tool", "ERCP dilatation"],
+     ["Mimic excluded by", "Serum IgG4"],
+     ["Dominant stricture rate", "Up to 45 percent"],
+     ["Itch first line", "Cholestyramine"],
+     ["Definitive therapy", "Transplantation"],
+     ["Cancer screen", "CA 19-9 surveillance"],
+     ["IBD link", "Ulcerative colitis"]
+    ]
+   }
+  }
+ ]
+}
