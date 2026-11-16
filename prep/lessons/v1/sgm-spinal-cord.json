@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-spinal-cord",
+ "subject": "ss-general-medicine",
+ "title": "Spinal cord disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Spinal cord disorders** are myelopathies of the cord parenchyma. **Compression** causes myelopathy with upper motor neuron signs. **Vascular myelopathy** affects anterior cord with pain loss. **Sensory level** localises cord lesions accurately in these patients. Clinical localization should precede imaging in these patients for triage.",
+   "say": "Spinal cord disorders are myelopathies of the cord parenchyma for cord definition. Compression causes myelopathy with upper motor neuron signs for compressive pattern. Vascular myelopathy affects anterior cord with pain loss for vascular pattern. Sensory level localises cord lesions accurately in these patients for localization use.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intramedullary",
+     "points": [
+      "Inside cord parenchyma",
+      "Suspended sensory level",
+      "Syrinx with dissociated loss",
+      "Tumour or syringomyelia"
+     ]
+    },
+    "right": {
+     "title": "Extramedullary",
+     "points": [
+      "Outside cord parenchyma",
+      "Ascending sensory level",
+      "Meningioma compression",
+      "Disc prolapse compression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Trauma** is the commonest compressive cause worldwide. **Spondylosis** causes cervical myelopathy in elderly patients. **Disc prolapse** causes acute compression in these patients. **Epidural abscess** causes compression with fever in these patients. Diabetes should be sought in these patients during evaluation.",
+   "say": "Trauma is the commonest compressive cause worldwide for traumatic pattern. Spondylosis causes cervical myelopathy in elderly patients for degenerative pattern. Disc prolapse causes acute compression in these patients for disc pattern. Epidural abscess causes compression with fever in these patients for infective pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Trauma",
+      "Acute compression",
+      "History of injury"
+     ],
+     [
+      "Spondylosis",
+      "Chronic compression",
+      "Elderly with neck pain"
+     ],
+     [
+      "Disc prolapse",
+      "Acute compression",
+      "Radicular pain with weakness"
+     ],
+     [
+      "Abscess",
+      "Compression with fever",
+      "Diabetes with back pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anterior spinal artery** infarction affects anterior cord. **Posterior columns** are spared in anterior infarction. **Dissociated loss** marks intramedullary lesions clearly. **Syringomyelia** causes cape loss with pain and temperature. Posterior columns are spared in these patients during assessment always today. Assessment should guide management in these patients today.",
+   "say": "Anterior spinal artery infarction affects anterior cord for vascular syndrome. Posterior columns are spared in anterior infarction for posterior sparing. Dissociated loss marks intramedullary lesions clearly for dissociated pattern. Syringomyelia causes cape loss with pain and temperature for cape distribution.",
+   "vis": null
+  },
+  {
+   "tx": "**Brown-Sequard syndrome** is hemicord compression with ipsilateral loss. **Central cord syndrome** is cervical hyperextension injury. **Anterior cord syndrome** is motor loss with pain loss. **Posterior cord syndrome** is deep sensation loss. Early decompression should be sought in these patients urgently.",
+   "say": "Brown-Sequard syndrome is hemicord compression with ipsilateral loss for hemicord pattern. Central cord syndrome is cervical hyperextension injury for central pattern. Anterior cord syndrome is motor loss with pain loss for anterior pattern. Posterior cord syndrome is deep sensation loss for posterior pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Lesion",
+     "Loss"
+    ],
+    "rows": [
+     [
+      "Brown-Sequard",
+      "Hemicord compression",
+      "Ipsilateral motor with contralateral pain"
+     ],
+     [
+      "Central cord",
+      "Hyperextension injury",
+      "Upper limb greater weakness"
+     ],
+     [
+      "Anterior cord",
+      "Anterior infarction",
+      "Motor with pain loss"
+     ],
+     [
+      "Posterior cord",
+      "Posterior lesion",
+      "Deep sensation loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MRI** is the gold standard for myelopathy. **CT** guides fracture management in trauma. **Sensory level** is the first clinical localiser. **Urodynamics** assess bladder dysfunction in these patients. Bladder dysfunction should be assessed in these patients during evaluation always today. Assessment should guide management in these patients today.",
+   "say": "MRI is the gold standard for myelopathy for imaging standard. CT guides fracture management in trauma for bony assessment. Sensory level is the first clinical localiser for bedside localization. Urodynamics assess bladder dysfunction in these patients for bladder evaluation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Myelopathy signs"
+     },
+     {
+      "id": "b",
+      "label": "Sensory level mapped"
+     },
+     {
+      "id": "c",
+      "label": "MRI cord done"
+     },
+     {
+      "id": "d",
+      "label": "Cause treated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dexamethasone** reduces edema in cord compression. **Surgery** decompresses compressive lesions urgently. **Baclofen** with **tizanidine** treat spasticity in these patients. **Rehabilitation** improves function in these patients. Rehabilitation should be started in these patients for recovery support today always. Assessment should guide management in these patients today.",
+   "say": "Dexamethasone reduces edema in cord compression for edema control. Surgery is the decompression for compressive lesions urgently for definitive decompression. Baclofen with tizanidine treat spasticity in these patients for spasticity control. Rehabilitation improves function in these patients for recovery support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Dexamethasone",
+      "Edema reduction",
+      "Cord compression edema"
+     ],
+     [
+      "Baclofen",
+      "Spasticity control",
+      "Spasticity management"
+     ],
+     [
+      "Tizanidine",
+      "Spasticity control",
+      "Alternative option"
+     ],
+     [
+      "Rehabilitation",
+      "Function support",
+      "Recovery program"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autonomic dysfunction** affects bladder with bowel. **Decubitus ulcers** complicate immobility in these patients. **Respiratory failure** follows high cervical lesions. **Spasticity** complicates chronic cord injury. Thromboprophylaxis is advised in these patients for immobility protection today always. Assessment should guide management in these patients today.",
+   "say": "Autonomic dysfunction affects bladder with bowel for autonomic involvement. Decubitus ulcers are the complication of immobility in these patients for pressure complication. Respiratory failure follows high cervical lesions for respiratory complication. Spasticity complicates chronic cord injury for spasticity burden.",
+   "vis": null
+  },
+  {
+   "tx": "**Pressure care** prevents decubitus ulcers in these patients. **Bladder care** prevents retention with infection. **Thromboprophylaxis** is advised in these patients for immobility. **Pain management** is advised in these patients for pain control. Pain management is advised in these patients for pain control today.",
+   "say": "Pressure care prevents decubitus ulcers in these patients for skin protection. Bladder care prevents retention with infection for bladder maintenance. Thromboprophylaxis is advised in these patients for immobility protection. Pain management is advised in these patients for pain control.",
+   "vis": null
+  },
+  {
+   "tx": "**Age** predicts outcomes in cord injury. **Level** predicts respiratory outcomes in these patients. **Completeness** predicts recovery in these patients. **Early decompression** improves outcomes in these patients. Early decompression is advised in these patients for benefit today always. Assessment should guide management in these patients today.",
+   "say": "Age is predictive of outcomes in cord injury for outcome determination. Level is predictive of respiratory outcomes in these patients for respiratory prediction. Completeness is predictive of recovery in these patients for recovery prediction. Early decompression improves outcomes in these patients for timing benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** with cord injury needs special care. **Methotrexate** has no cord role despite listings confusion. **Methotrexate** is oncology drug without role here. **Supportive care** is the mainstay in many cases. Supportive care is the mainstay in many cases today clearly.",
+   "say": "Pregnancy with cord injury needs special care for pregnancy management. Methotrexate has no cord role despite listings confusion for drug distinction. Methotrexate is oncology drug without role here for oncology distinction. Supportive care is the mainstay in many cases for care standard.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on spinal cord disorders. Remember Brown-Sequard hemicord syndrome, MRI as the gold standard and dexamethasone for edema. Syringomyelia causes cape loss with dissociated loss. Anterior infarction spares posterior columns clearly. Anterior infarction spares posterior columns clearly today.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Brown-Sequard is the hemicord syndrome for hemicord pattern. MRI is the gold standard for myelopathy assessment. Dexamethasone is the edema therapy for compression edema. Syringomyelia causes cape loss with dissociated loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Hemicord syndrome",
+      "Brown-Sequard with crossed loss"
+     ],
+     [
+      "Gold standard",
+      "MRI for myelopathy diagnosis"
+     ],
+     [
+      "Edema therapy",
+      "Dexamethasone for compression edema"
+     ],
+     [
+      "Syrinx pattern",
+      "Cape loss with dissociation"
+     ],
+     [
+      "Anterior infarction",
+      "Posterior columns spared pattern"
+     ],
+     [
+      "Spasticity therapy",
+      "Baclofen with tizanidine options"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

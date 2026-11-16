@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-nmj-muscle",
+ "subject": "ss-general-medicine",
+ "title": "Neuromuscular junction and muscle disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Myasthenia gravis** is antibody mediated neuromuscular junction failure. **Fatigability** worsens weakness during sustained activity. **Ptosis** with diplopia is the commonest presentation. **Bulbar weakness** affects speech with swallowing. **Ocular myasthenia** spares limbs in many patients. Assessment should guide management in these patients during evaluation today.",
+   "say": "Myasthenia gravis is antibody mediated neuromuscular junction failure for NMJ definition. Fatigability worsens weakness during sustained activity for fatigable pattern. Ptosis with diplopia is the commonest presentation for ocular pattern. Bulbar weakness affects speech with swallowing for bulbar pattern. Ocular myasthenia is sparing of limbs in many patients for ocular variant.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myasthenia gravis",
+     "points": [
+      "Fatigable weakness pattern",
+      "Ocular onset common",
+      "AChR antibody positive",
+      "Thymoma association seen"
+     ]
+    },
+    "right": {
+     "title": "Myopathy",
+     "points": [
+      "Fixed weakness pattern",
+      "Proximal muscles affected",
+      "CK elevated often",
+      "No fatigability seen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Thymoma** associates with myasthenia gravis in many patients. **Thyroid disease** associates with myasthenia gravis often. **Drug induced** myasthenia follows beta blockers. **Lambert Eaton syndrome** follows small cell cancer. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Thymoma associates with myasthenia gravis in many patients for thymic association. Thyroid disease associates with myasthenia gravis often for autoimmune association. Drug induced myasthenia follows beta blockers for drug pattern. Lambert Eaton syndrome follows small cell cancer for Lambert pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Association",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Thymoma",
+      "Myasthenia gravis",
+      "Anterior mediastinal mass"
+     ],
+     [
+      "Thyroid disease",
+      "Myasthenia gravis",
+      "Autoimmune clustering"
+     ],
+     [
+      "Small cell cancer",
+      "Lambert Eaton",
+      "Post tetanic facilitation"
+     ],
+     [
+      "Drugs",
+      "Myasthenia pattern",
+      "Beta blocker exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acetylcholine receptor** antibodies bind junction proteins. **MuSK antibodies** mark seronegative myasthenia gravis. **Voltage gated calcium** antibodies mark Lambert Eaton. **Complement** destruction causes junction failure. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Acetylcholine receptor antibodies bind junction proteins for antibody mechanism. MuSK antibodies are the marker for seronegative myasthenia gravis for MuSK pattern. Voltage gated calcium antibodies are the marker for Lambert Eaton for Lambert antibodies. Complement destruction causes junction failure for complement mechanism.",
+   "vis": null
+  },
+  {
+   "tx": "**Fatigable ptosis** worsens during sustained gaze. **Diplopia** worsens during sustained gaze often. **Bulbar fatigue** worsens during sustained speech. **Limb fatigue** worsens during sustained activity. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Fatigable ptosis worsens during sustained gaze for fatigable ptosis. Diplopia worsens during sustained gaze often for fatigable diplopia. Bulbar fatigue worsens during sustained speech for bulbar fatigue. Limb fatigue worsens during sustained activity for limb fatigue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Appearance",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Ptosis",
+      "Worsens on gaze",
+      "Fatigability marker"
+     ],
+     [
+      "Diplopia",
+      "Worsens on gaze",
+      "Fatigability marker"
+     ],
+     [
+      "Bulbar fatigue",
+      "Slurred speech",
+      "Bulbar assessment"
+     ],
+     [
+      "Limb fatigue",
+      "Repetitive weakness",
+      "Motor fatigability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Repetitive nerve stimulation** shows decrement in myasthenia. **Single fibre EMG** shows jitter in myasthenia. **AChR antibody** confirms myasthenia gravis. **CT thorax** screens thymoma in these patients. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Repetitive nerve stimulation is the decrement evidence in myasthenia for RNS pattern. Single fibre EMG is the jitter evidence in myasthenia for jitter pattern. AChR antibody confirms myasthenia gravis for antibody confirmation. CT thorax is the thymoma screen in these patients for thymoma detection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fatigable weakness"
+     },
+     {
+      "id": "b",
+      "label": "RNS decrement seen"
+     },
+     {
+      "id": "c",
+      "label": "Antibody testing done"
+     },
+     {
+      "id": "d",
+      "label": "Thymoma screening"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pyridostigmine** with **neostigmine** inhibit cholinesterase. **Prednisolone** with **prednisone** suppress autoimmunity. **Azathioprine** with **mycophenolate** maintain remission. **Rituximab** helps refractory myasthenia in many patients. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Pyridostigmine with neostigmine are the inhibitors of cholinesterase for symptomatic control. Prednisolone with prednisone are the suppressors of autoimmunity for immunosuppression. Azathioprine with mycophenolate are the maintainers of remission for maintenance control. Rituximab helps refractory myasthenia in many patients for refractory therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Pyridostigmine",
+      "Cholinesterase inhibition",
+      "Symptomatic control"
+     ],
+     [
+      "Prednisolone",
+      "Immunosuppression",
+      "Induction therapy"
+     ],
+     [
+      "Azathioprine",
+      "Steroid sparing",
+      "Maintenance therapy"
+     ],
+     [
+      "Rituximab",
+      "B cell depletion",
+      "Refractory therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Crisis** precipitates respiratory failure in myasthenia. **Myasthenic crisis** follows infection or surgery. **Cholinergic crisis** follows excess cholinesterase inhibition. **ICU care** is advised in these patients. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Crisis precipitates respiratory failure in myasthenia for crisis complication. Myasthenic crisis follows infection or surgery for precipitant pattern. Cholinergic crisis follows excess cholinesterase inhibition for overdose pattern. ICU care is advised in these patients for supportive care.",
+   "vis": null
+  },
+  {
+   "tx": "**IVIG** with **plasma exchange** treat crisis. **Eculizumab** helps refractory AChR myasthenia. **Rozanolixizumab** helps refractory myasthenia in many patients. **Ravulizumab** helps refractory myasthenia in many patients. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "IVIG with plasma exchange are the therapies for crisis for crisis therapy. Eculizumab helps refractory AChR myasthenia for complement blockade. Rozanolixizumab helps refractory myasthenia in many patients for FcRn blockade. Ravulizumab helps refractory myasthenia in many patients for complement blockade.",
+   "vis": null
+  },
+  {
+   "tx": "**Steroid myopathy** weakens proximal muscles during therapy. **Magnesium sulfate** worsens myasthenia in many patients. **Beta blockers** worsen myasthenia in many patients. **Aminoglycosides** worsen myasthenia in many patients. Assessment should guide management in these patients during evaluation today. Assessment should guide management in these patients during evaluation today clearly.",
+   "say": "Steroid myopathy weakens proximal muscles during therapy for steroid complication. Magnesium sulfate worsens myasthenia in many patients for drug caution. Beta blockers worsen myasthenia in many patients for drug caution. Aminoglycosides worsen myasthenia in many patients for drug caution.",
+   "vis": null
+  },
+  {
+   "tx": "**Thymectomy** improves myasthenia outcomes in many patients. **Pregnancy** with myasthenia needs supportive care. **Chloroquine** with **hydroxychloroquine** worsen myasthenia in many patients. **Supportive care** is advised in these patients for control. Assessment should guide management in these patients during evaluation today.",
+   "say": "Thymectomy improves myasthenia outcomes in many patients for thymectomy benefit. Pregnancy with myasthenia needs supportive care for pregnancy management. Chloroquine with hydroxychloroquine worsen myasthenia in many patients for drug caution. Supportive care is advised in these patients for control standard.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on NMJ disorders. Remember pyridostigmine for symptomatic control, thymectomy benefit and provoking drugs. Steroids with azathioprine maintain remission with rituximab for refractory disease. MuSK antibodies mark seronegative myasthenia clearly. Assessment should guide management in these patients during evaluation today.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Pyridostigmine is the symptomatic therapy for myasthenia control. Thymectomy is the outcome improving therapy for thymic disease. Steroids with azathioprine are the maintenance therapy for remission. MuSK antibodies are the marker for seronegative myasthenia clearly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Symptomatic therapy",
+      "Pyridostigmine inhibits cholinesterase"
+     ],
+     [
+      "Outcome therapy",
+      "Thymectomy improves myasthenia outcomes"
+     ],
+     [
+      "Maintenance therapy",
+      "Steroids with azathioprine maintain remission"
+     ],
+     [
+      "Refractory therapy",
+      "Rituximab for refractory disease"
+     ],
+     [
+      "Seronegative marker",
+      "MuSK antibodies mark seronegative disease"
+     ],
+     [
+      "Provoking drugs",
+      "Magnesium worsens myasthenia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

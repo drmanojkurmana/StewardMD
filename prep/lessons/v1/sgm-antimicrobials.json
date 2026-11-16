@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-antimicrobials",
+ "subject": "ss-general-medicine",
+ "title": "Antimicrobial therapy and stewardship",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Antimicrobials** are drugs that inhibit bacteria. **Bactericidal drugs** kill bacteria directly. **Bacteriostatic drugs** inhibit growth here. **Empirical therapy** starts before culture results here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Antimicrobials are the bacterial inhibitors for antimicrobial definition. Bactericidal drugs are the killing drugs directly for bactericidal pattern. Bacteriostatic drugs are the growth inhibitors here for bacteriostatic pattern. Empirical therapy is the therapy before culture results here for empirical pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bactericidal",
+     "points": [
+      "Kill bacteria directly",
+      "Cephalosporin first line",
+      "Used in meningitis",
+      "Used in endocarditis"
+     ]
+    },
+    "right": {
+     "title": "Bacteriostatic",
+     "points": [
+      "Inhibit growth only",
+      "Doxycycline first line",
+      "Used in pneumonia",
+      "Reversible inhibition seen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Beta lactams** inhibit cell wall synthesis. **Cilastatin** enhances imipenem activity here. **Tazobactam** enhances piperacillin activity here. **Inhibitor combinations** extend spectrum here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Beta lactams are the cell wall inhibitors for cell wall mechanism. Cilastatin is the enhancer for imipenem activity here for inhibitor effect. Tazobactam is the enhancer for piperacillin activity here for inhibitor effect. Inhibitor combinations extend spectrum here for combination benefit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Class",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Ceftriaxone",
+      "Cephalosporin",
+      "First line therapy"
+     ],
+     [
+      "Meropenem",
+      "Carbapenem",
+      "Broad coverage"
+     ],
+     [
+      "Piperacillin",
+      "Beta lactam with inhibitor",
+      "Pseudomonas cover"
+     ],
+     [
+      "Imipenem",
+      "Carbapenem with inhibitor",
+      "Broad coverage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vancomycin** treats MRSA infection here. **Linezolid** treats VRE infection here. **Aztreonam** treats bacteremia here. **Cefazolin** treats MSSA infection here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Vancomycin is the therapy for MRSA infection here for MRSA therapy. Linezolid is the therapy for VRE infection here for VRE therapy. Aztreonam is the therapy for bacteremia here for bacteremia therapy. Cefazolin is the therapy for MSSA infection here for MSSA therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Ciprofloxacin** with **levofloxacin** treat Gram negative infection. **Gentamicin** with **amikacin** treat Gram negative infection. **Colistin** treats carbapenem resistant infection here. **Azithromycin** treats atypical pneumonia here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Ciprofloxacin with levofloxacin are the therapies for Gram negative infection for fluoroquinolone therapy. Gentamicin with amikacin are the therapies for Gram negative infection for aminoglycoside therapy. Colistin is the therapy for carbapenem resistant infection here for last line therapy. Azithromycin is the therapy for atypical pneumonia here for atypical coverage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Coverage",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Ceftriaxone",
+      "Empirical cover",
+      "First line therapy"
+     ],
+     [
+      "Meropenem",
+      "Resistant cover",
+      "Carbapenem therapy"
+     ],
+     [
+      "Vancomycin",
+      "MRSA cover",
+      "MRSA therapy"
+     ],
+     [
+      "Colistin",
+      "Carbapenem resistance",
+      "Last line therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Culture** guides de-escalation in therapy. **Sensitivity** guides antibiotic choice here. **Procalcitonin** guides duration in these patients. **De-escalation** reduces resistance here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Culture guides de-escalation in therapy for culture guidance. Sensitivity guides antibiotic choice here for sensitivity guidance. Procalcitonin guides duration in these patients for duration guidance. De-escalation reduces resistance here for stewardship benefit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Empirical therapy started"
+     },
+     {
+      "id": "b",
+      "label": "Culture results reviewed"
+     },
+     {
+      "id": "c",
+      "label": "Narrowing done"
+     },
+     {
+      "id": "d",
+      "label": "Duration set"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amoxicillin** treats susceptible infection here. **Doxycycline** with **doxycycline** treat rickettsial infection. **Erythromycin** treats atypical infection here. **Teicoplanin** treats Gram positive infection here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Amoxicillin is the therapy for susceptible infection here for susceptible therapy. Doxycycline is the therapy for rickettsial infection for rickettsial therapy. Erythromycin is the therapy for atypical infection here for atypical therapy. Teicoplanin is the therapy for Gram positive infection here for Gram positive therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Coverage",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Amoxicillin",
+      "Susceptible cover",
+      "Susceptible therapy"
+     ],
+     [
+      "Doxycycline",
+      "Rickettsial cover",
+      "Rickettsial therapy"
+     ],
+     [
+      "Teicoplanin",
+      "Gram positive cover",
+      "Gram positive therapy"
+     ],
+     [
+      "Doxycycline",
+      "Rickettsial cover",
+      "Rickettsial alternative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nephrotoxicity** complicates aminoglycosides during therapy. **Ototoxicity** complicates aminoglycosides during therapy. **C difficile** complicates broad spectrum therapy. **Allergy** complicates beta lactam therapy here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Nephrotoxicity complicates aminoglycosides during therapy for renal complication. Ototoxicity complicates aminoglycosides during therapy for ear complication. C difficile complicates broad spectrum therapy for gut complication. Allergy complicates beta lactam therapy here for allergy complication.",
+   "vis": null
+  },
+  {
+   "tx": "**Stewardship** reduces resistance in hospitals. **De-escalation** is advised after cultures. **IV to oral** switch is advised early. **Duration** should be short in these patients. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Stewardship reduces resistance in hospitals for stewardship benefit. De-escalation is advised after cultures for resistance reduction. IV to oral switch is advised early for switch benefit. Duration should be short in these patients for duration control.",
+   "vis": null
+  },
+  {
+   "tx": "**Carbapenem** use should be restricted here. **Colistin** use should be restricted here. **Fluoroquinolone** use should be cautious here. **Review** at forty eight hours is advised here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Carbapenem use should be restricted here for restriction protocol. Colistin use should be restricted here for restriction protocol. Fluoroquinolone use should be cautious here for caution protocol. Review after forty eight hours is advised here for review protocol.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** restricts doxycycline use here. **Children** restrict fluoroquinolone use here. **Elderly** need dose adjustment here. **Renal dysfunction** needs dose adjustment here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Pregnancy is the restriction for doxycycline use here for pregnancy restriction. Children restriction is the restriction for fluoroquinolone use here for pediatric restriction. Elderly need dose adjustment here for elderly adjustment. Renal dysfunction needs dose adjustment here for renal adjustment.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on antimicrobials. Remember vancomycin for MRSA, colistin for carbapenem resistance and de-escalation after cultures. Meropenem is the carbapenem with ceftriaxone for empirical cover. Ciprofloxacin treats Gram negative infection here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Vancomycin is the MRSA therapy for MRSA coverage. Colistin is the carbapenem resistance therapy for last line coverage. De-escalation is the culture based narrowing for stewardship benefit. Meropenem is the carbapenem therapy for broad coverage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "MRSA therapy",
+      "Vancomycin is first line therapy"
+     ],
+     [
+      "Last line therapy",
+      "Colistin is last line therapy"
+     ],
+     [
+      "Stewardship rule",
+      "De-escalation after culture results"
+     ],
+     [
+      "Carbapenem",
+      "Meropenem is broad coverage"
+     ],
+     [
+      "Empirical cover",
+      "Ceftriaxone is empirical cover"
+     ],
+     [
+      "Gram negative cover",
+      "Ciprofloxacin treats Gram negative infection"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

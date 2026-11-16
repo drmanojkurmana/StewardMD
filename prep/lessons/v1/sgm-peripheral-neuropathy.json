@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-peripheral-neuropathy",
+ "subject": "ss-general-medicine",
+ "title": "Peripheral neuropathy and Guillain-Barre syndrome",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Peripheral neuropathy** is distal symmetric sensory motor dysfunction. **Guillain Barre syndrome** is ascending motor weakness with areflexia. **Axonal neuropathy** affects length dependent fibres first. **Demyelinating neuropathy** affects myelin with conduction block. Clinical assessment should guide testing in these patients for diagnosis.",
+   "say": "Peripheral neuropathy is distal symmetric sensory motor dysfunction for neuropathy definition. Guillain Barre syndrome is ascending motor weakness with areflexia for GBS pattern. Axonal neuropathy affects length dependent fibres first for axonal pattern. Demyelinating neuropathy affects myelin with conduction block for demyelinating pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Axonal neuropathy",
+     "points": [
+      "Length dependent fibres",
+      "Stocking glove pattern",
+      "Reduced amplitudes on studies",
+      "Recovery is slow"
+     ]
+    },
+    "right": {
+     "title": "Demyelinating neuropathy",
+     "points": [
+      "Myelin with conduction block",
+      "Slowed velocities seen",
+      "GBS with ophthalmoplegia",
+      "Recovery may improve"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diabetes** is the commonest neuropathy cause worldwide. **Alcohol** causes painful neuropathy with deficiency. **Drugs** cause neuropathy with chemotherapy agents. **B12 deficiency** causes combined cord dorsal neuropathy. Drug history should be sought in these patients during evaluation always today. Assessment should guide management in these patients today.",
+   "say": "Diabetes is the commonest neuropathy cause worldwide for diabetic pattern. Alcohol causes painful neuropathy with deficiency for alcoholic pattern. Drugs cause neuropathy with chemotherapy agents for drug pattern. B12 deficiency causes combined cord dorsal neuropathy for B12 pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Diabetes",
+      "Length dependent sensory",
+      "Commonest overall cause"
+     ],
+     [
+      "Alcohol",
+      "Painful sensory",
+      "Nutritional deficiency pattern"
+     ],
+     [
+      "B12 deficiency",
+      "Dorsal column loss",
+      "Combined cord signs"
+     ],
+     [
+      "Drugs",
+      "Sensory neuronopathy",
+      "Chemotherapy exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Length dependent** neuropathy starts with feet. **Stocking glove** pattern affects hands later. **Autonomic dysfunction** affects bowel with bladder. **Motor weakness** affects intrinsic foot muscles first. Motor weakness affects intrinsic foot muscles first during evaluation today always. Assessment should guide management in these patients today.",
+   "say": "Length dependent neuropathy starts with feet for distal pattern. Stocking glove pattern affects hands later for glove progression. Autonomic dysfunction affects bowel with bladder for autonomic involvement. Motor weakness affects intrinsic foot muscles first for motor pattern.",
+   "vis": null
+  },
+  {
+   "tx": "**GBS** follows Campylobacter infection in many patients. **Ascending weakness** with areflexia defines GBS. **Albuminocytologic dissociation** marks CSF in GBS. **Nerve conduction** shows slowed velocities in GBS. Nerve conduction shows slowed velocities in GBS during evaluation today always. Assessment should guide management in these patients today.",
+   "say": "GBS follows Campylobacter infection in many patients for post infective pattern. Ascending weakness with areflexia defines GBS for GBS definition. Albuminocytologic dissociation is the CSF mark in GBS for CSF pattern. Nerve conduction shows slowed velocities in GBS for conduction pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "GBS",
+     "Chronic neuropathy"
+    ],
+    "rows": [
+     [
+      "Course",
+      "Ascending weakness in weeks",
+      "Chronic progressive course"
+     ],
+     [
+      "Reflexes",
+      "Areflexia with weakness",
+      "Reduced reflexes distally"
+     ],
+     [
+      "CSF",
+      "Albuminocytologic dissociation",
+      "Mild protein elevation"
+     ],
+     [
+      "Conduction",
+      "Slowed velocities",
+      "Reduced amplitudes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nerve conduction** is the first diagnostic test. **EMG** shows denervation in neuropathy. **Skin biopsy** shows fibre loss in neuropathy. **MRI** helps root lesions in these patients. MRI helps root lesions in these patients during evaluation today clearly always. Assessment should guide management in these patients today.",
+   "say": "Nerve conduction is the first diagnostic test for conduction assessment. EMG is the denervation evidence in neuropathy for denervation pattern. Skin biopsy is the fibre loss evidence in neuropathy for small fibre assessment. MRI helps root lesions in these patients for root evaluation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Neuropathy signs"
+     },
+     {
+      "id": "b",
+      "label": "Conduction studies"
+     },
+     {
+      "id": "c",
+      "label": "Cause identified"
+     },
+     {
+      "id": "d",
+      "label": "Treatment started"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gabapentin** with **pregabalin** treat painful neuropathy. **Carbamazepine** treats trigeminal neuralgia effectively. **IVIG** with **rituximab** treat GBS variants. **Plasma exchange** helps severe GBS in many patients. Plasma exchange helps severe GBS in many patients during evaluation today clearly always. Assessment should guide management in these patients today.",
+   "say": "Gabapentin with pregabalin treat painful neuropathy for pain control. Carbamazepine treats trigeminal neuralgia effectively for neuralgia control. IVIG with rituximab are the therapies for GBS variants for immune therapy. Plasma exchange helps severe GBS in many patients for severe disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Gabapentin",
+      "Pain modulation",
+      "Painful neuropathy"
+     ],
+     [
+      "Pregabalin",
+      "Pain modulation",
+      "Painful neuropathy alternative"
+     ],
+     [
+      "Carbamazepine",
+      "Sodium channel block",
+      "Trigeminal neuralgia"
+     ],
+     [
+      "IVIG",
+      "Immunotherapy",
+      "GBS variants therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Respiratory failure** complicates GBS during course. **Autonomic instability** complicates GBS during course. **Ulceration** complicates diabetic neuropathy with immobility. **Foot ulceration** complicates diabetic neuropathy during course. Foot ulceration complicates diabetic neuropathy during course with evaluation today always. Assessment should guide management in these patients today.",
+   "say": "Respiratory failure complicates GBS during course for respiratory complication. Autonomic instability complicates GBS during course for autonomic complication. Ulceration complicates diabetic neuropathy with immobility for ulcer complication. Foot ulceration complicates diabetic neuropathy during course for foot complication.",
+   "vis": null
+  },
+  {
+   "tx": "**Vital capacity** monitoring is advised in GBS. **ICU care** is advised in GBS with weakness. **Foot care** is advised in diabetic neuropathy. **Glycaemic control** is advised in diabetic neuropathy. Glycaemic control is advised in diabetic neuropathy for disease control today.",
+   "say": "Vital capacity monitoring is advised in GBS for respiratory surveillance. ICU care is advised in GBS with weakness for supportive care. Foot care is advised in diabetic neuropathy for ulcer prevention. Glycaemic control is advised in diabetic neuropathy for disease control.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetes** duration predicts neuropathy risk. **Age** predicts neuropathy severity in these patients. **Areflexia** predicts GBS course in these patients. **Early therapy** improves GBS outcomes in these patients. Early therapy improves GBS outcomes in these patients for timing benefit today always.",
+   "say": "Diabetes duration is predictive of neuropathy risk for risk determination. Age is predictive of neuropathy severity in these patients for severity prediction. Areflexia is predictive of GBS course in these patients for GBS prediction. Early therapy improves GBS outcomes in these patients for timing benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** with GBS needs supportive care. **Atropine** treats bradycardia in GBS. **Enoxaparin** prevents thrombosis in immobility. **Supportive care** is the mainstay in many cases. Supportive care is the mainstay in many cases for care standard today always. Assessment should guide management in these patients today.",
+   "say": "Pregnancy with GBS needs supportive care for pregnancy management. Atropine treats bradycardia in GBS for autonomic support. Enoxaparin prevents thrombosis in immobility for thromboprophylaxis. Supportive care is the mainstay in many cases for care standard.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on neuropathy. Remember albuminocytologic dissociation for GBS, gabapentin for painful neuropathy and carbamazepine for trigeminal neuralgia. Diabetes is the commonest cause with IVIG for GBS. B12 deficiency causes combined cord dorsal signs. B12 deficiency causes combined cord dorsal signs clearly today.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Albuminocytologic dissociation is the GBS hallmark for GBS diagnosis. Gabapentin is the painful neuropathy therapy for pain control. Carbamazepine is the trigeminal neuralgia therapy for neuralgia control. IVIG is the GBS therapy for immune control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "GBS hallmark",
+      "Albuminocytologic dissociation pattern"
+     ],
+     [
+      "Pain therapy",
+      "Gabapentin for painful neuropathy"
+     ],
+     [
+      "Neuralgia therapy",
+      "Carbamazepine for trigeminal neuralgia"
+     ],
+     [
+      "Commonest cause",
+      "Diabetes overall for neuropathy"
+     ],
+     [
+      "GBS therapy",
+      "IVIG for immune control"
+     ],
+     [
+      "B12 pattern",
+      "Combined cord dorsal signs"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

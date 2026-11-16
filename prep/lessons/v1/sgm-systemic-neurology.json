@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-systemic-neurology",
+ "subject": "ss-general-medicine",
+ "title": "Neurology of systemic disease and toxic-metabolic encephalopathy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Toxic metabolic encephalopathy** is acute brain dysfunction from systemic causes. **Delirium** is inattention with fluctuating course. **Hepatic encephalopathy** follows liver failure in these patients. **Uremic encephalopathy** follows kidney failure in these patients. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Toxic metabolic encephalopathy is acute brain dysfunction from systemic causes for metabolic definition. Delirium is inattention with fluctuating course for delirium definition. Hepatic encephalopathy follows liver failure in these patients for hepatic pattern. Uremic encephalopathy follows kidney failure in these patients for uremic pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Delirium",
+     "points": [
+      "Inattention dominant",
+      "Fluctuating course",
+      "Acute onset",
+      "Reversible causes"
+     ]
+    },
+    "right": {
+     "title": "Dementia",
+     "points": [
+      "Memory dominant",
+      "Progressive course",
+      "Chronic onset",
+      "Irreversible causes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Liver disease** causes hepatic encephalopathy with asterixis. **Kidney disease** causes uremic encephalopathy with myoclonus. **Thyroid disease** causes myxedema coma in many patients. **Electrolytes** cause encephalopathy with hyponatraemia. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Liver disease causes hepatic encephalopathy with asterixis for hepatic pattern. Kidney disease causes uremic encephalopathy with myoclonus for uremic pattern. Thyroid disease causes myxedema coma in many patients for myxedema pattern. Electrolytes cause encephalopathy with hyponatraemia for electrolyte pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Liver failure",
+      "Hepatic encephalopathy",
+      "Asterixis with fetor"
+     ],
+     [
+      "Kidney failure",
+      "Uremic encephalopathy",
+      "Myoclonus with asterixis"
+     ],
+     [
+      "Hypothyroidism",
+      "Myxedema coma",
+      "Hypothermia with bradycardia"
+     ],
+     [
+      "Hyponatraemia",
+      "Encephalopathy",
+      "Seizures with confusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Asterixis** is flapping tremor in encephalopathy. **Myoclonus** marks uremic encephalopathy clearly. **Lactulose** with **rifaximin** treat hepatic encephalopathy. **Thiamine** prevents Wernicke in alcoholics. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Asterixis is flapping tremor in encephalopathy for asterixis sign. Myoclonus is the uremic sign clearly for uremic sign. Lactulose with rifaximin are the therapies for hepatic encephalopathy for hepatic therapy. Thiamine prevents Wernicke in alcoholics for Wernicke prophylaxis.",
+   "vis": null
+  },
+  {
+   "tx": "**Sepsis** causes encephalopathy during course. **Hypoxia** causes encephalopathy during course. **Hypercapnia** causes encephalopathy during course. **Ketamine** has no role here despite confusion. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Sepsis causes encephalopathy during course for septic pattern. Hypoxia causes encephalopathy during course for hypoxic pattern. Hypercapnia causes encephalopathy during course for hypercapnic pattern. Ketamine has no role here despite confusion for drug distinction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Pattern",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Sepsis",
+      "Septic encephalopathy",
+      "Source control"
+     ],
+     [
+      "Hypoxia",
+      "Hypoxic encephalopathy",
+      "Oxygen support"
+     ],
+     [
+      "Hypercapnia",
+      "Hypercapnic encephalopathy",
+      "Ventilation support"
+     ],
+     [
+      "Electrolytes",
+      "Metabolic encephalopathy",
+      "Correction therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glucose** correction treats hypoglycaemia rapidly. **Electrolyte** correction treats hyponatraemia slowly. **Ammonia** guides hepatic encephalopathy in these patients. **Thiamine** precedes glucose in alcoholics here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Glucose correction is the therapy for hypoglycaemia rapidly for hypoglycaemia therapy. Electrolyte correction is the therapy for hyponatraemia slowly for electrolyte correction. Ammonia guides hepatic encephalopathy in these patients for ammonia tracking. Thiamine precedes glucose in alcoholics here for thiamine ordering.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Encephalopathy signs"
+     },
+     {
+      "id": "b",
+      "label": "-glucose checked"
+     },
+     {
+      "id": "c",
+      "label": "Cause corrected"
+     },
+     {
+      "id": "d",
+      "label": "Delirium resolves"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acetylcholine** deficiency contributes to delirium. **Dopamine** excess contributes to delirium here. **Sleep support** helps sleep in delirium. **Agitation therapy** is required in these patients. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Acetylcholine deficiency is the mechanism of delirium for cholinergic mechanism. Dopamine excess is the mechanism of delirium here for dopaminergic mechanism. Sleep support helps sleep in delirium for sleep support. Severe agitation therapy is required in these patients for agitation control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Effect",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Lactulose",
+      "Ammonia reduction",
+      "Hepatic encephalopathy"
+     ],
+     [
+      "Rifaximin",
+      "Gut decontamination",
+      "Hepatic prophylaxis"
+     ],
+     [
+      "Thiamine",
+      "Wernicke prevention",
+      "Alcoholic prophylaxis"
+     ],
+     [
+      "Agitation therapy",
+      "Agitation control",
+      "Severe agitation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sedatives** worsen hepatic encephalopathy in these patients. **Hydration** improves uremic encephalopathy in these patients. **Dialysis** treats uremic encephalopathy definitively. **Precipitant search** is advised in these patients. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Sedatives worsen hepatic encephalopathy in these patients for sedation caution. Hydration improves uremic encephalopathy in these patients for hydration benefit. Dialysis is the definitive therapy for uremic encephalopathy for definitive therapy. Precipitant search is advised in these patients for precipitant detection.",
+   "vis": null
+  },
+  {
+   "tx": "**Elderly** patients develop delirium with minor illness. **ICU** patients develop delirium during course. **Postoperative** patients develop delirium during course. **Sensory impairment** predisposes to delirium here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Elderly patients develop delirium with minor illness for elderly risk. ICU patients develop delirium during course for ICU risk. Postoperative patients develop delirium during course for postoperative risk. Sensory impairment is the risk factor for delirium here for sensory risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Mortality** increases with delirium in these patients. **Prolonged stay** follows delirium in these patients. **Cognitive decline** follows delirium in these patients. **Early correction** improves delirium outcomes here. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Mortality increases with delirium in these patients for mortality risk. Prolonged stay follows delirium in these patients for stay burden. Cognitive decline follows delirium in these patients for cognitive sequelae. Early correction improves delirium outcomes here for timing benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** with encephalopathy needs special care. **Electrolytes** correction is slow in hyponatraemia. **Thiamine** is given before glucose here. **Supportive care** is the mainstay in many cases. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "Pregnancy with encephalopathy needs special care for pregnancy management. Electrolytes correction is slow in hyponatraemia for correction caution. Thiamine is given before glucose here for thiamine ordering. Supportive care is the mainstay in many cases for care standard.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on systemic neurology. Remember lactulose for hepatic encephalopathy, thiamine before glucose and asterixis as the sign. Agitation therapy with hydration for uremia. Myxedema coma is hypothermia with bradycardia. Assessment should guide management in these patients during evaluation today clearly. Assessment should guide management in these patients during evaluation today clearly always.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Lactulose is the hepatic encephalopathy therapy for ammonia reduction. Thiamine is the Wernicke prophylaxis given before glucose. Asterixis is the flapping tremor sign for encephalopathy assessment. Agitation therapy is the severe agitation control for agitation control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Hepatic therapy",
+      "Lactulose reduces ammonia"
+     ],
+     [
+      "Ordering rule",
+      "Thiamine before glucose"
+     ],
+     [
+      "Encephalopathy sign",
+      "Asterixis is flapping tremor"
+     ],
+     [
+      "Agitation therapy",
+      "Agitation therapy for severe agitation"
+     ],
+     [
+      "Myxedema pattern",
+      "Hypothermia with bradycardia"
+     ],
+     [
+      "Uremic therapy",
+      "Dialysis is definitive therapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
