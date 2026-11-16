@@ -1,77 +1,122 @@
 {
-  "checks": {
-    "dropped": 0,
-    "itemN": 10,
-    "kbWords": 0,
-    "numbers": true,
-    "redone": 0,
-    "shape": true,
-    "verbatim": true,
-    "verify": true,
-    "dashes": true,
-    "drugs": true
+ "checks": {
+  "dropped": 0,
+  "itemN": 10,
+  "kbWords": 0,
+  "numbers": true,
+  "redone": 0,
+  "shape": true,
+  "verbatim": true,
+  "verify": true,
+  "dashes": true,
+  "drugs": true
+ },
+ "gen": "AI",
+ "minutes": 6,
+ "model": "muse-wonder (local authoring, no external API)",
+ "module": "med-lymphoma",
+ "quiz": [
+  "bk2-med-631",
+  "bk2-med-632",
+  "bk2-med-633",
+  "bk2-med-634",
+  "bk2-med-635",
+  "bk2-med-636",
+  "bk2-med-637",
+  "bk2-med-638",
+  "bk2-med-639",
+  "bk2-med-640"
+ ],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "run": "books2-lon7",
+ "src": [],
+ "steps": [
+  {
+   "say": "Ask about painless rubbery nodes in the neck, axilla and groin, and record drenching night sweats, weight loss and itch as B symptoms. Ask about node pain after alcohol sips, recurrent infections in elderly leukaemia, and rapid bulky growth that suggests Richter transformation. Record HIV and EBV exposure, cough or stridor from compression, and whether the tempo looks indolent or aggressive.",
+   "tx": "Ask about painless rubbery nodes in the neck, axilla and groin, and record **B symptoms** of drenching night sweats, weight loss and itch. Ask about node pain after alcohol sips, recurrent infections in elderly **chronic lymphocytic** leukaemia, rapid bulky growth of Richter transformation, and HIV or EBV exposure. Note cough or stridor from compression, and separate indolent from **aggressive disease** by tempo.",
+   "vis": null
   },
-  "gen": "AI",
-  "minutes": 6,
-  "model": "muse-wonder (local authoring, no external API)",
-  "module": "med-lymphoma",
-  "quiz": [
-    "bk2-med-631",
-    "bk2-med-632",
-    "bk2-med-633",
-    "bk2-med-634",
-    "bk2-med-635",
-    "bk2-med-636",
-    "bk2-med-637",
-    "bk2-med-638",
-    "bk2-med-639",
-    "bk2-med-640"
-  ],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "run": "books2-lon7",
-  "src": [],
-  "steps": [
-    {
-      "say": "Ask about painless rubbery nodes in the neck, axilla and groin, and record drenching night sweats, weight loss and itch as B symptoms. Ask about node pain after alcohol sips, recurrent infections in elderly leukaemia, and rapid bulky growth that suggests Richter transformation. Record HIV and EBV exposure, cough or stridor from compression, and whether the tempo looks indolent or aggressive.",
-      "tx": "Ask about painless rubbery nodes in the neck, axilla and groin, and record **B symptoms** of drenching night sweats, weight loss and itch. Ask about node pain after alcohol sips, recurrent infections in elderly **chronic lymphocytic** leukaemia, rapid bulky growth of Richter transformation, and HIV or EBV exposure. Note cough or stridor from compression, and separate indolent from **aggressive disease** by tempo.",
-      "vis": null
-    },
-    {
-      "say": "Feel every node group for rubbery discrete nodes, and note any matted or fixed masses that suggest advanced disease. Palpate the liver and spleen together, inspect the tonsils and nasopharynx for Waldeyer ring disease, and examine the skin for mycosis fungoides patches, as all are involved. Look for pallor from marrow infiltration, congestion from vena cava obstruction, and jaw or cord signs of Burkitt lymphoma. Chart the weight and LDH, as both are tracked.",
-      "tx": "Feel every node group for rubbery discrete nodes and note matted or fixed masses, then palpate the **liver and spleen** together. Inspect the tonsils and nasopharynx for Waldeyer ring disease, and examine the skin for mycosis fungoides patches. Look for pallor of marrow infiltration, congestion of **vena cava obstruction**, and jaw or cord signs of **Burkitt lymphoma**, then chart weight and LDH.",
-      "vis": null
-    },
-    {
-      "say": "Study the scan and notice the bulky nodes packing the neck and mediastinum, with matted nodes lower down, a huge spleen, and marrow infiltration. Matted nodes with splenomegaly point toward advanced lymphoma rather than infection, and marrow involvement explains the cytopenias. For the exam, link bulky disease with B symptoms, raised LDH, and urgent excision biopsy.",
-      "tx": "The scan shows **bulky lymphadenopathy** of the neck and mediastinum with matted nodes, a huge spleen, and marrow infiltration. Matted nodes with **splenomegaly** point toward advanced lymphoma rather than infection, and marrow involvement explains cytopenias. For the exam, link bulky disease with **B symptoms**, raised LDH, and urgent excision biopsy for Reed Sternberg cells.",
-      "vis": {
-        "alt": "Coronal CT showing bulky neck and mediastinal nodes, matted nodes, splenomegaly and marrow infiltration.",
-        "ar": 1.3393,
-        "caption": "Bulky nodal disease with splenomegaly, matted nodes and marrow infiltration. Illustration: StewardMD original.",
-        "kind": "image",
-        "src": "v1/lessons/media/med-lymphoma-gen1.webp"
-      }
-    },
-    {
-      "say": "Prove the diagnosis with excision biopsy showing Reed Sternberg cells, because needle samples miss the architecture. Stage the disease with PET, confirm chronic lymphocytic leukaemia with smudge cells and CD5 flow cytometry, and track LDH with calcium and phosphate for tumour lysis. Sample the marrow for infiltration, screen for HIV and EBV, and separate Hodgkin disease, non Hodgkin lymphoma and tuberculosis.",
-      "tx": "Prove the diagnosis with **excision biopsy** showing Reed Sternberg cells, since needle samples miss architecture. Stage with the **Ann Arbor system** using PET, confirm chronic lymphocytic leukaemia with smudge cells and CD5 flow cytometry, and track LDH with calcium and phosphate for **tumour lysis**. Sample the marrow for infiltration, screen for HIV and EBV, and separate Hodgkin disease, non Hodgkin lymphoma and tuberculosis.",
-      "vis": {
-        "alt": "A composite image showing a Reed-Sternberg cell micrograph, the Ann Arbor staging diagram, and a PET scan for lymphoma.",
-        "ar": 1.8349,
-        "caption": "Lymphoma diagnosis: Reed-Sternberg cell, Ann Arbor staging, PET scan",
-        "kind": "image",
-        "src": "v1/lessons/media/med-lymphoma-fig1.webp"
-      }
-    },
-    {
-      "say": "Treat Hodgkin disease with ABVD chemotherapy while watching the lungs for bleomycin injury, and treat non Hodgkin lymphoma with R-CHOP therapy while watching the heart. Manage chronic lymphocytic leukaemia by stage with watchful waiting or targeted agents, and guard against tumour lysis with fluids. Vaccinate the asplenic patient, store sperm or ova before therapy, and harvest stem cells for transplant in relapse.",
-      "tx": "Treat Hodgkin disease with **ABVD chemotherapy** watching bleomycin lungs, and non Hodgkin lymphoma with **R-CHOP therapy** watching anthracycline hearts. Manage chronic lymphocytic leukaemia by stage with watchful waiting or targeted agents, guard against **tumour lysis** with fluids, vaccinate the asplenic patient, store sperm or ova before therapy, and harvest for transplant in relapse.",
-      "vis": null
-    }
-  ],
-  "subject": "medicine",
-  "title": "Lymphoma: Hodgkin, non-Hodgkin and CLL",
-  "v": 1
+  {
+   "say": "Feel every node group for rubbery discrete nodes, and note any matted or fixed masses that suggest advanced disease. Palpate the liver and spleen together, inspect the tonsils and nasopharynx for Waldeyer ring disease, and examine the skin for mycosis fungoides patches, as all are involved. Look for pallor from marrow infiltration, congestion from vena cava obstruction, and jaw or cord signs of Burkitt lymphoma. Chart the weight and LDH, as both are tracked.",
+   "tx": "Feel every node group for rubbery discrete nodes and note matted or fixed masses, then palpate the **liver and spleen** together. Inspect the tonsils and nasopharynx for Waldeyer ring disease, and examine the skin for mycosis fungoides patches. Look for pallor of marrow infiltration, congestion of **vena cava obstruction**, and jaw or cord signs of **Burkitt lymphoma**, then chart weight and LDH.",
+   "vis": null
+  },
+  {
+   "say": "Study the scan and notice the bulky nodes packing the neck and mediastinum, with matted nodes lower down, a huge spleen, and marrow infiltration. Matted nodes with splenomegaly point toward advanced lymphoma rather than infection, and marrow involvement explains the cytopenias. For the exam, link bulky disease with B symptoms, raised LDH, and urgent excision biopsy.",
+   "tx": "The scan shows **bulky lymphadenopathy** of the neck and mediastinum with matted nodes, a huge spleen, and marrow infiltration. Matted nodes with **splenomegaly** point toward advanced lymphoma rather than infection, and marrow involvement explains cytopenias. For the exam, link bulky disease with **B symptoms**, raised LDH, and urgent excision biopsy for Reed Sternberg cells.",
+   "vis": {
+    "alt": "Coronal CT showing bulky neck and mediastinal nodes, matted nodes, splenomegaly and marrow infiltration.",
+    "ar": 1.3393,
+    "caption": "Bulky nodal disease with splenomegaly, matted nodes and marrow infiltration. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/med-lymphoma-gen1.webp"
+   }
+  },
+  {
+   "say": "Prove the diagnosis with excision biopsy showing Reed Sternberg cells, because needle samples miss the architecture. Stage the disease with PET, confirm chronic lymphocytic leukaemia with smudge cells and CD5 flow cytometry, and track LDH with calcium and phosphate for tumour lysis. Sample the marrow for infiltration, screen for HIV and EBV, and separate Hodgkin disease, non Hodgkin lymphoma and tuberculosis.",
+   "tx": "Prove the diagnosis with **excision biopsy** showing Reed Sternberg cells, since needle samples miss architecture. Stage with the **Ann Arbor system** using PET, confirm chronic lymphocytic leukaemia with smudge cells and CD5 flow cytometry, and track LDH with calcium and phosphate for **tumour lysis**. Sample the marrow for infiltration, screen for HIV and EBV, and separate Hodgkin disease, non Hodgkin lymphoma and tuberculosis.",
+   "vis": {
+    "alt": "A composite image showing a Reed-Sternberg cell micrograph, the Ann Arbor staging diagram, and a PET scan for lymphoma.",
+    "ar": 1.8349,
+    "caption": "Lymphoma diagnosis: Reed-Sternberg cell, Ann Arbor staging, PET scan",
+    "kind": "image",
+    "src": "v1/lessons/media/med-lymphoma-fig1.webp"
+   }
+  },
+  {
+   "say": "Treat Hodgkin disease with ABVD chemotherapy while watching the lungs for bleomycin injury, and treat non Hodgkin lymphoma with R-CHOP therapy while watching the heart. Manage chronic lymphocytic leukaemia by stage with watchful waiting or targeted agents, and guard against tumour lysis with fluids. Vaccinate the asplenic patient, store sperm or ova before therapy, and harvest stem cells for transplant in relapse.",
+   "tx": "Treat Hodgkin disease with **ABVD chemotherapy** watching bleomycin lungs, and non Hodgkin lymphoma with **R-CHOP therapy** watching anthracycline hearts. Manage chronic lymphocytic leukaemia by stage with watchful waiting or targeted agents, guard against **tumour lysis** with fluids, vaccinate the asplenic patient, store sperm or ova before therapy, and harvest for transplant in relapse.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: Painless rubbery lymphadenopathy with drenching sweats, weight loss and itch points toward lymphoma rather than infection. Excision biopsy proves the diagnosis because needle samples miss nodal architecture and Reed Sternberg cells. PET scanning supports Ann Arbor staging. ABVD treats Hodgkin disease with bleomycin lung risk, while R-CHOP treats non Hodgkin lymphoma with anthracycline cardiac risk.",
+   "say": "High-yield for the exam: Painless rubbery lymphadenopathy with drenching sweats, weight loss and itch points toward lymphoma rather than infection. Excision biopsy proves the diagnosis because needle samples miss nodal architecture and Reed Sternberg cells. PET scanning supports Ann Arbor staging. ABVD treats Hodgkin disease with bleomycin lung risk, while R-CHOP treats non Hodgkin lymphoma with anthracycline cardiac risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Typical node feel",
+      "Painless, rubbery, discrete nodes enlarging"
+     ],
+     [
+      "B symptom cluster",
+      "Drenching sweats, weight loss, itch, fever"
+     ],
+     [
+      "Alcohol linked clue",
+      "Node pain after alcohol suggests Hodgkin disease"
+     ],
+     [
+      "Best biopsy method",
+      "Excision biopsy preserves nodal architecture"
+     ],
+     [
+      "Hodgkin diagnostic cell",
+      "Reed Sternberg cell on excision biopsy"
+     ],
+     [
+      "Staging approach",
+      "Ann Arbor system with PET scanning"
+     ],
+     [
+      "ABVD toxicity watch",
+      "Bleomycin lung injury during Hodgkin treatment"
+     ],
+     [
+      "R-CHOP toxicity watch",
+      "Anthracycline heart injury during treatment"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "medicine",
+ "title": "Lymphoma: Hodgkin, non-Hodgkin and CLL",
+ "v": 1
 }
