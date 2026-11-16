@@ -99,7 +99,7 @@
   function db() {
     if (dbP) return dbP;
     dbP = new Promise(function (res, rej) {
-      var r = G.indexedDB.open("study", 2);
+      var r = G.indexedDB.open("study", 3);
       r.onupgradeneeded = function () {
         var d = r.result;
         if (!d.objectStoreNames.contains("docs")) d.createObjectStore("docs", { keyPath: "id" });
@@ -109,6 +109,7 @@
         if (!d.objectStoreNames.contains("undo")) d.createObjectStore("undo", { keyPath: "doc" });
         if (!d.objectStoreNames.contains("ptext")) { var p = d.createObjectStore("ptext", { keyPath: "id" }); p.createIndex("doc", "doc"); }
         if (!d.objectStoreNames.contains("index")) d.createObjectStore("index", { keyPath: "doc" });
+        if (!d.objectStoreNames.contains("audio")) { var a = d.createObjectStore("audio", { keyPath: "id" }); a.createIndex("doc", "doc"); } /* Phase 5b */
       };
       r.onsuccess = function () { res(r.result); };
       r.onerror = function () { dbP = null; rej(r.error); };
@@ -970,6 +971,17 @@
                 .then(function () { strokes += r.strokes.length; return idbPut("docs", d); });
             });
           }, Promise.resolve());
+        }).then(function () { /* Phase 5b: audio blobs */
+          var audio = (v.audio || []), inAdd = {}; plan.add.forEach(function (r) { inAdd[r.doc.id] = 1; });
+          return idbAll("audio").then(function (existing) { existing = existing || []; var has = {}; existing.forEach(function (a) { has[a.id] = 1; });
+            var todo = audio.filter(function (a) { return !has[a.id] && inAdd[a.doc]; });
+            return todo.reduce(function (p, a) {
+              return p.then(function () {
+                var bin = ent["audio/" + a.id + ".bin"] || new Uint8Array(0);
+                return idbPut("audio", { id: a.id, doc: a.doc, mime: a.mime || "audio/webm", size: bin.length, started: a.started || 0, dur: a.dur || 0, blob: new Blob([bin], { type: a.mime || "audio/webm" }) });
+              });
+            }, Promise.resolve());
+          }).then(null, function () {});
         }).then(function () {
           bk5a("Restored " + plan.add.length + " documents with " + strokes + " strokes. Skipped " + plan.skip.length + " already in the library. Nothing existing was changed.");
           renderLibBody();
@@ -997,6 +1009,7 @@
   function purgeDoc(id) {
     return strokesOf(id).then(function (ss) { return Promise.all(ss.map(function (s) { return idbDel("strokes", s.id); })); })
       .then(function () { return textOf(id).then(function (rows) { return Promise.all(rows.map(function (x) { return idbDel("ptext", x.id); })); }); })
+      .then(function () { /* Phase 5b: audio */ return idbAll("audio").then(function (aa) { return Promise.all((aa || []).filter(function (a) { return a.doc === id; }).map(function (a) { return idbDel("audio", a.id); })); }).then(null, function () {}); })
       .then(function () { return Promise.all([idbDel("undo", id), idbDel("files", id), idbDel("docs", id), idbDel("index", id)]); })
       .then(function () { removeTab(id); return renderLibBody(); });
   }
@@ -1009,7 +1022,7 @@
     });
   }
   function duplicateDoc(id) {
-    return Promise.all([idbGet("docs", id), strokesOf(id), textOf(id), idbGet("undo", id), idbGet("index", id)]).then(function (r) {
+    return Promise.all([idbGet("docs", id), strokesOf(id), textOf(id), idbGet("undo", id), idbGet("index", id), idbAll("audio").then(function (aa) { return (aa || []).filter(function (a) { return a.doc === id; }); }, function () { return []; })]).then(function (r) {
       var src = r[0]; if (!src) return;
       var nid = uid(), copy = {};
       Object.keys(src).forEach(function (k) { copy[k] = src[k]; });
@@ -1025,7 +1038,21 @@
         return idbPut("docs", copy).then(function () { return putAll("strokes", strokes); })
           .then(function () { return putAll("ptext", ptexts); })
           .then(function () { if (r[3]) return idbPut("undo", { doc: nid, u: [], r: [] }); })
-          .then(function () { if (r[4]) return idbPut("index", { doc: nid, done: 0 }); });
+          .then(function () { if (r[4]) return idbPut("index", { doc: nid, done: 0 }); })
+          .then(function () { /* Phase 5b: copy audio with fresh ids; stroke offsets still valid */
+            var srcAudio = r[5] || [];
+            if (!srcAudio.length) return null;
+            return srcAudio.reduce(function (p, a) {
+              return p.then(function () {
+                var nid2 = uid();
+                var blob = a.blob;
+                var toBytes = blob && blob.arrayBuffer ? blob.arrayBuffer() : Promise.resolve(new ArrayBuffer(0));
+                return toBytes.then(function (ab) {
+                  return idbPut("audio", { id: nid2, doc: nid, mime: a.mime || "audio/webm", size: ab.byteLength, started: a.started || 0, dur: a.dur || 0, blob: new Blob([ab], { type: a.mime || "audio/webm" }) });
+                }, function () {});
+              });
+            }, Promise.resolve());
+          });
       }).then(renderLibBody).then(function () { try { getHost().toast("Duplicated."); } catch (e) {} });
     });
   }

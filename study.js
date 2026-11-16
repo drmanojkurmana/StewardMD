@@ -163,20 +163,28 @@
       });
     }, Promise.resolve(null)).then(function (err) {
       if (err) return bad(err);
-      var recs = [], folders, c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0 }, i, r, k;
+      var recs = [], folders, audio = [], c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, audio: 0 }, i, r, k;
+      /* Phase 5b: audio.json + audio/<id>.bin (optional; old backups have none) */
       try {
         folders = dec("folders.json"); c.folders = folders.length;
         names.forEach(function (n) {
           if (/^docs\//.test(n)) { r = dec(n); recs.push(r); c.docs++; c.strokes += r.strokes.length; c.ptext += r.ptext.length; if (!/^[a-z0-9]+$/.test(r.doc.id) || n !== "docs/" + r.doc.id + ".json") throw new Error("id"); }
           else if (/^files\//.test(n)) c.files++;
+          else if (/^audio\/.+\.bin$/.test(n)) c.audio++;
         });
+        if (ent["audio.json"]) { audio = dec("audio.json"); if (!Array.isArray(audio)) throw new Error("audio"); }
+        if (audio.length !== c.audio) return bad("The backup's record counts do not match what is inside it.");
+        for (i = 0; i < audio.length; i++) {
+          r = audio[i];
+          if (!r || !/^[a-z0-9]+$/i.test(String(r.id)) || !listed["audio/" + r.id + ".bin"]) return bad("The backup could not be read.");
+        }
       } catch (e) { return bad("The backup could not be read."); }
-      for (k in c) if (man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it.");
+      for (k in c) { if (k === "audio" && man.counts.audio == null) continue; if (man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it."); }
       for (i = 0; i < recs.length; i++) {
         r = recs[i].doc;
         if (r.kind !== "nb" && !(listed["files/" + r.id + ".pdf"] && listed["files/" + r.id + ".pdf"].sha256 === r.sha256)) return bad("A document in the backup does not match its file.");
       }
-      return { ok: true, man: man, folders: folders, recs: recs };
+      return { ok: true, man: man, folders: folders, recs: recs, audio: audio };
     });
   }
   // Restore never overwrites: a document is skipped when its id or its sha256 is already in the library.
@@ -242,7 +250,7 @@
   function db() {
     if (dbP) return dbP;
     dbP = new Promise(function (res, rej) {
-      var r = G.indexedDB.open("study", 2);
+      var r = G.indexedDB.open("study", 3);
       r.onupgradeneeded = function () {
         var d = r.result, mk = function (n, k) { return d.objectStoreNames.contains(n) ? null : d.createObjectStore(n, { keyPath: k }); }, s;
         mk("docs", "id"); mk("files", "id"); mk("folders", "id");
@@ -250,6 +258,7 @@
         mk("undo", "doc");
         s = mk("ptext", "id"); if (s) s.createIndex("doc", "doc");
         mk("index", "doc");
+        s = mk("audio", "id"); if (s) s.createIndex("doc", "doc"); /* Phase 5b */
       };
       r.onsuccess = function () { res(r.result); };
       r.onerror = function () { dbP = null; rej(r.error); };
@@ -675,7 +684,7 @@
   function removeDoc(id) {
     return strokesOf(id).then(function (ss) {
       return Promise.all(ss.map(function (s) { return del("strokes", s.id); }));
-    }).then(function () { return Promise.all([del("undo", id), del("files", id), del("docs", id)]); }).then(function () { return purge(id); });
+    }).then(function () { return Promise.all([del("undo", id), del("files", id), del("docs", id)]); }).then(function () { return purge(id); }).then(function () { /* Phase 5b: audio */ try { return q("audio", "readonly", function (o) { try { return o.index("doc").getAll(G.IDBKeyRange.only(id)); } catch (e) { return o.getAll(); } }).then(function (aa) { return Promise.all((aa || []).filter(function (a) { return a.doc === id; }).map(function (a) { return del("audio", a.id); })); }).then(null, function () {}); } catch (e) { return null; } });
   }
 
   /* ---- notebooks (A4) ---- */
@@ -1318,6 +1327,7 @@
       }
       var pt = sample(e);
       cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now() };
+      try { if (G.STUDY_MEDIA && G.STUDY_MEDIA.stampStroke) { var __a = G.STUDY_MEDIA.stampStroke(); if (__a != null) cur.a = __a; } } catch (x) {} /* Phase 5b: audio offset */
       redraw(n, cur);
       e.preventDefault();
     });
@@ -1462,7 +1472,7 @@
   }
   function backup() {
     var F = G.fflate, name = "StewardMD Study backup " + stamp().slice(0, 10) + ".zip", nat = shareReady(), fs = nat && fsPlugin(), parts = [], n = 0, chain = Promise.resolve(), err = null, uri = null;
-    var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0 }, files: [] };
+    var man = { format: BK, v: 1, created: Date.now(), counts: { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, audio: 0 }, files: [] };
     if (!(F && F.Zip && F.ZipPassThrough)) return bk("Backup is not available in this build.");
     var z = new F.Zip(function (e, chunk) {
       if (e) { err = e; return; }
@@ -1492,6 +1502,19 @@
           });
         }, Promise.resolve());
       });
+    }).then(function () { /* Phase 5b: audio blobs + metadata */
+      return all("audio").then(function (aa) { aa = aa || []; man.counts.audio = aa.length;
+        var meta = aa.map(function (a) { return { id: a.id, doc: a.doc, mime: a.mime || "audio/webm", size: a.size || 0, started: a.started || 0, dur: a.dur || 0, bytes: a.size || 0 }; });
+        return add("audio.json", json(meta), true).then(function () {
+          return aa.reduce(function (p, a) {
+            return p.then(function () {
+              var blob = a.blob;
+              var toBytes = blob && blob.arrayBuffer ? blob.arrayBuffer() : Promise.resolve(blob && blob.__bytes ? blob.__bytes : new ArrayBuffer(0));
+              return toBytes.then(function (ab) { return add("audio/" + a.id + ".bin", new Uint8Array(ab), true); }, function () { return add("audio/" + a.id + ".bin", new Uint8Array(0), true); });
+            });
+          }, Promise.resolve());
+        });
+      }).then(null, function () { /* no audio store (old db): backup without audio */ });
     }).then(function () {
       return add("manifest.json", json(man), false);
     }).then(function () {
@@ -1530,6 +1553,18 @@
                 .then(function () { strokes += r.strokes.length; return put("docs", d); });
             });
           }, Promise.resolve());
+        }).then(function () { /* Phase 5b: audio blobs (never overwrite) */
+          var audio = (v.audio || []), inAdd = {}; plan.add.forEach(function (r) { inAdd[r.doc.id] = 1; });
+          return all("audio").then(function (existing) { existing = existing || []; var has = {}; existing.forEach(function (a) { has[a.id] = 1; });
+            var todo = audio.filter(function (a) { return !has[a.id] && inAdd[a.doc]; });
+            return todo.reduce(function (p, a) {
+              return p.then(function () {
+                var bin = ent["audio/" + a.id + ".bin"] || new Uint8Array(0);
+                var blob = new Blob([bin], { type: a.mime || "audio/webm" });
+                return put("audio", { id: a.id, doc: a.doc, mime: a.mime || "audio/webm", size: bin.length, started: a.started || 0, dur: a.dur || 0, blob: blob });
+              });
+            }, Promise.resolve());
+          }).then(null, function () {});
         }).then(function () {
           bk("Restored " + plan.add.length + (plan.add.length === 1 ? " document" : " documents") + " with " + strokes + " strokes. Skipped " + plan.skip.length + " already in the library. Nothing existing was changed.");
           if (onTop("#stLib")) fillLib();
