@@ -48,7 +48,7 @@ const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, de
 const page = await ctx.newPage();
 const errors = []; page.on("pageerror", (e) => errors.push(e.message));
 await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
-await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; });
+await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = (msg, def) => def || "Custom Element"; });
 
 async function boot(q) {
   await page.goto(BASE + "?" + q);
@@ -147,6 +147,18 @@ await page.evaluate(() => {
 });
 await page.waitForSelector("#stLassoBar", { timeout: 5000 });
 ok(await page.evaluate(() => !!document.querySelector("#stLassoBar")), "lasso: draws loop and shows selection action bar");
+ok(await page.locator('[data-act="st-lasso-ai-explain"]').count() === 1, "lasso: AI Explain chip is visible");
+ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso: AI Key summary chip is visible");
+ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
+ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element button is visible");
+await page.click('[data-act="st-lasso-ai-explain"]');
+await page.waitForSelector("#stSheet", { timeout: 5000 });
+ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
+await page.click('[data-act="st-scancel"]');
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+await page.click('[data-act="st-lasso-save-elem"]');
+const savedElems = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_elements") || "[]"));
+ok(savedElems.length === 1 && savedElems[0].name === "Custom Element", "lasso: selection saved as custom element in local storage");
 await page.click('[data-act="st-lasso-del"]');
 ok(await live() === 1, "lasso delete: deletes the selected stroke");
 await page.click('[data-act="st-undo"]');
@@ -167,6 +179,93 @@ await page.evaluate(() => {
 ok(await live() === 1, "scribble erase: fast back-and-forth over a stroke erases it");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 2, "undo of scribble erase restores the stroke");
+
+/* ---- Phase 4: Laser pointer (transient, never saved, never in undo) ---- */
+await page.click('[data-act="st-tool"][data-v="laser"]');
+ok(await page.locator('[data-act="st-laser-trail"]').count() === 1, "laser: options strip shows Trail and Dot");
+const strokesBeforeLaser = await live();
+const stackBeforeLaser = await page.evaluate(() => STUDY._state().stack.u.length);
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 15;
+  const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.4);
+  fire("pointermove", 0.5, 0.4);
+  fire("pointerup", 0.5, 0.4);
+});
+await page.waitForTimeout(100);
+const strokesAfterLaser = await live();
+const stackAfterLaser = await page.evaluate(() => STUDY._state().stack.u.length);
+ok(strokesBeforeLaser === strokesAfterLaser, "laser: NEVER creates strokes in notebook");
+ok(stackBeforeLaser === stackAfterLaser, "laser: NEVER adds to undo stack");
+
+/* ---- Phase 4: Text box & typing mode & format bar ---- */
+await page.click('[data-act="st-tool"][data-v="text"]');
+ok(await page.locator('.st-text-strip').count() === 1, "text tool: shows options strip with presets, fonts, alignments");
+await page.evaluate(() => {
+  const p = document.querySelector('.st-pg[data-n="1"]');
+  const r = p.getBoundingClientRect();
+  p.querySelector(".st-items-layer").dispatchEvent(new PointerEvent("pointerdown", {
+    pointerId: 20, pointerType: "touch", isPrimary: true, clientX: r.left + 0.2 * r.width, clientY: r.top + 0.3 * r.height, bubbles: true
+  }));
+});
+await page.waitForSelector(".st-item-text", { timeout: 5000 });
+ok(await page.locator(".st-item-text").count() === 1, "text tool: tap creates a text box on the items layer");
+await page.waitForSelector("#stFormatBar", { timeout: 5000 });
+ok(await page.locator("#stFormatBar").count() === 1, "format bar: floats above keyboard with style and navigation buttons");
+await page.locator(".st-text-editable").fill("Cardiovascular System & Hemodynamics");
+ok(await page.locator(".st-text-editable").innerText() === "Cardiovascular System & Hemodynamics", "typing mode: text typed into box");
+
+// Format bar style sheet
+await page.click('[data-act="st-fb-styles"]');
+await page.waitForSelector("#stStyleSheet", { timeout: 5000 });
+ok(await page.locator("#stStyleSheet").count() === 1, "format bar: Aa opens text styles & fonts sheet");
+await page.click('[data-act="st-set-preset"][data-v="title"]');
+ok(await page.evaluate(() => document.querySelector(".st-text-editable").style.fontSize === "28px"), "text style: preset Title applies 28px");
+await page.click('[data-act="st-fb-close-styles"]');
+await page.waitForFunction(() => !document.querySelector("#stStyleSheet"));
+
+// Move / Drag and Resize handles
+ok(await page.locator(".st-drag-bar").count() === 1, "handles: drag bar is visible on selected item");
+ok(await page.locator(".st-handle.se").count() === 1, "handles: resize handles present");
+const itemBeforeMove = await page.evaluate(() => STUDY._state().items[0].x);
+await page.evaluate(() => {
+  const drag = document.querySelector(".st-drag-bar");
+  const r = drag.getBoundingClientRect();
+  drag.dispatchEvent(new PointerEvent("pointerdown", { pointerId: 21, clientX: r.left, clientY: r.top, bubbles: true }));
+  window.dispatchEvent(new PointerEvent("pointermove", { pointerId: 21, clientX: r.left + 50, clientY: r.top + 30, bubbles: true }));
+  window.dispatchEvent(new PointerEvent("pointerup", { pointerId: 21, clientX: r.left + 50, clientY: r.top + 30, bubbles: true }));
+});
+const itemAfterMove = await page.evaluate(() => STUDY._state().items[0].x);
+ok(itemAfterMove > itemBeforeMove, "handles: box drags and coordinates update");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate((beforeVal) => STUDY._state().items[0].x === beforeVal, itemBeforeMove), "undo: reverts box move");
+
+/* ---- Phase 4: Stickers & Elements tray ---- */
+await page.click('[data-act="st-tool"][data-v="elements"]');
+await page.waitForSelector("#stStickerTray", { timeout: 5000 });
+ok(await page.locator("#stStickerTray").count() === 1, "elements: sticker tray opens with medical line icons");
+ok(await page.locator('.st-sticker-btn[data-name="heart"]').count() === 1, "sticker tray: medical heart icon available");
+ok(await page.locator('[data-act="st-insert-saved-elem"]').count() === 1, "sticker tray: saved custom element from lasso available");
+await page.click('.st-sticker-btn[data-name="heart"]');
+await page.waitForSelector(".st-item-sticker", { timeout: 5000 });
+ok(await page.locator(".st-sticker-wrap svg").count() === 1, "sticker: heart icon inserted on page");
+
+/* ---- Phase 4: Image insertion & crop ---- */
+await page.click('[data-act="st-tool"][data-v="image"]');
+ok(await page.locator('[data-act="st-img-pick"]').count() === 1 && await page.locator('[data-act="st-camera-pick"]').count() === 1 && await page.locator('[data-act="st-scan-page"]').count() === 1, "image: options strip shows Photos, Camera, Scan into page");
+await page.evaluate(() => {
+  const tinyPng = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+  STUDY_INSERT.insertImageFromDataUrl(tinyPng);
+});
+await page.waitForSelector(".st-item-img", { timeout: 5000 });
+ok(await page.locator(".st-item-img").count() === 1, "image: inserted on page below ink overlay");
+const imgItemId = await page.evaluate(() => document.querySelector(".st-item-img").closest(".st-item").getAttribute("data-id"));
+await page.click(`[data-act="st-img-crop"][data-id="${imgItemId}"]`);
+await page.waitForSelector("#stCropOverlay", { timeout: 5000 });
+ok(await page.locator("#stCropOverlay").count() === 1, "crop: overlay opens for image");
+await page.click('[data-act="st-crop-apply"]');
+await page.waitForFunction(() => !document.querySelector("#stCropOverlay"), null, { timeout: 5000 });
+ok(true, "crop: applied successfully");
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
@@ -413,7 +512,7 @@ ok(Object.keys(before.shas).every((id) => Buffer.from(zmap["files/" + id + ".pdf
 await boot("prep=1&study=1");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
 await openLib();
-const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index"].map((x) => idbAll(x)))).every((a) => a.length === 0);
+const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index", "items"].map((x) => idbAll(x)))).every((a) => a.length === 0);
 ok(await zeroAll(), "wipe: the study database is empty");
 const tamper = (fn) => { const m = FF.unzipSync(new Uint8Array(bk.buf)); fn(m); return Buffer.from(FF.zipSync(m, { level: 0 })); };
 const restore = async (buf) => { await page.setInputFiles("#stRestoreF", { name: "b.zip", mimeType: "application/zip", buffer: buf }); await page.waitForFunction(() => /Restored|Nothing was restored/.test(document.querySelector("#stBk").textContent), null, { timeout: 60000 }); const t = await page.locator("#stBk").innerText(); await page.evaluate(() => { document.querySelector("#stBk").textContent = ""; }); return t; };
@@ -426,6 +525,7 @@ const after = await snap();
 ok(new RegExp("Restored " + before.n + " documents with " + before.st + " strokes\\. Skipped 0").test(msg), "restore: reports the counts restored and skipped");
 ok(after.n === before.n && JSON.stringify(after.docs) === JSON.stringify(before.docs) && JSON.stringify(after.per) === JSON.stringify(before.per) && after.folders === 1, "restore: document count, folders and strokes per page match the library that was backed up");
 ok(JSON.stringify(after.shas) === JSON.stringify(before.shas) && after.shas[fixtureDoc.id] === SHA, "restore: every original's sha256 matches (stored bytes identical)");
+ok((await idbAll("items")).length > 0, "restore: items restored from backup");
 msg = await restore(bk.buf);
 ok(new RegExp("Restored 0 documents with 0 strokes\\. Skipped " + before.n).test(msg) && (await snap()).n === before.n, "restore again: documents already present (by sha256 or id) are skipped, nothing duplicated");
 
