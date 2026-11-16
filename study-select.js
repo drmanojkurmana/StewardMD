@@ -1059,6 +1059,7 @@
     }
     function cancelXform(g) { if (g && g.before) { applySnap(V.strokes, g.before); api.redraw(n); } }
     hostEl.addEventListener("pointerdown", function (e) {
+      V = api.getV(); ov = hostEl.querySelector("canvas.st-ov") || ov;   // live state + overlay: this page element outlives the V and canvas captured at first bind
       if (!V || !V.tool && !V.lasso) { /* long-press and tap below still need the down */ }
       var a = rel(e), W = pageW(), H = pageH();
       // Selection hit test
@@ -1106,6 +1107,7 @@
       }
     }, true);
     hostEl.addEventListener("pointermove", function (e) {
+      V = api.getV(); ov = hostEl.querySelector("canvas.st-ov") || ov;   // live state + overlay: this page element outlives the V and canvas captured at first bind
       var a = rel(e);
       if (G_.lp && G_.lp.pos) {
         var dx = e.clientX - G_.lp.pos.x, dy = e.clientY - G_.lp.pos.y;
@@ -1137,6 +1139,7 @@
       }
     }, true);
     var up = function (e) {
+      V = api.getV(); ov = hostEl.querySelector("canvas.st-ov") || ov;   // live state + overlay: this page element outlives the V and canvas captured at first bind
       var a = rel(e);
       if (G_.drag) { var g = G_.drag; G_.drag = null; finishXform(g); return; }
       if (G_.lp) { clearTimeout(G_.lp.timer); var lp = G_.lp; G_.lp = null; }
@@ -1202,6 +1205,7 @@
     };
     hostEl.addEventListener("pointerup", up, true);
     hostEl.addEventListener("pointercancel", function (e) {
+      V = api.getV(); ov = hostEl.querySelector("canvas.st-ov") || ov;   // live state + overlay: this page element outlives the V and canvas captured at first bind
       if (G_.drag) { cancelXform(G_.drag); G_.drag = null; }
       if (G_.draw) G_.draw = null;
       if (G_.hold) G_.hold = null;

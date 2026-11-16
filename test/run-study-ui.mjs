@@ -51,7 +51,7 @@ await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
 await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; });
 
 async function boot(q) {
-  await page.goto(BASE + "?" + q);
+  await page.goto(BASE + "?" + q, { waitUntil: "domcontentloaded" });   // app readiness is checked next; do not wait on slow third-party loads
   await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
   await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); PREP.open(); });
   await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row", { timeout: 30000 });
@@ -352,7 +352,7 @@ ok(await live() === afterDup, "P2 duplicate: redo brings it back");
 /* cut and copy, then paste across pages via long-press */
 await page.click('[data-act="st-lasso-clipcopy"]');
 await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
-await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("strokes"); q.onsuccess = () => res(); }; }));
+await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("strokes"); q.oncomplete = () => res(); }; }));
 ok(await page.evaluate(() => !!localStorage.getItem("smd_study_clip")), "P2 clipboard: copy persists in localStorage");
 const uBeforeCut = await page.evaluate(() => STUDY._state().stack.u.length);
 await page.click('[data-act="st-lasso-cut"]');
@@ -360,7 +360,7 @@ await page.waitForTimeout(200);
 ok(await live() === afterDup - 1 && await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeCut + 1, "P2 cut: removes the selection in one undo step");
 await page.click('[data-act="st-undo"]');
 ok(await live() === afterDup, "P2 cut: undo brings it back");
-await page.click('[data-act="st-lasso-done"]');
+if (await page.locator('[data-act="st-lasso-done"]').count()) await page.click('[data-act="st-lasso-done"]');   // undo of a cut may clear the selection
 /* paste across pages: long-press an empty spot on page 2 and tap Paste */
 const onP2Before = await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length);
 await page.click('[data-act="st-page-sheet"]');
