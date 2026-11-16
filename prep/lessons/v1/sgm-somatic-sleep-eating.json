@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "sgm-somatic-sleep-eating",
+ "subject": "ss-general-medicine",
+ "title": "Eating disorders, sleep and functional disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Anorexia nervosa affects zero point four percent of women with mortality of ten percent per decade, while bulimia affects one point two percent and binge eating disorder two point eight percent. Insomnia affects ten percent of adults and **obstructive sleep apnoea** affects five percent of men. Somatic symptom disorder occurs in five percent of primary care visits with **multiple medically unexplained** symptoms for over six months.",
+   "say": "Anorexia nervosa affects zero point four percent of women with mortality of ten percent per decade, while bulimia affects one point two percent and binge eating disorder two point eight percent. Insomnia affects ten percent of adults and obstructive sleep apnoea affects five percent of men. Somatic symptom disorder occurs in five percent of primary care visits.",
+   "vis": null
+  },
+  {
+   "tx": "Risk factors include **perfectionism** with three fold higher anorexia risk, female sex with nine to one ratio, dieting in eighty percent of cases before onset and **yoyo dieting** in sixty percent. Sleep apnoea risks are obesity in seventy percent, neck over forty-three cm and alcohol use in forty percent. Functional disorders rise with stress, trauma and emotional distress in fifty percent.",
+   "say": "Risk factors include perfectionism with three fold higher anorexia risk, female sex with nine to one ratio, dieting in eighty percent of cases before onset and yoyo dieting in sixty percent. Sleep apnoea risks are obesity in seventy percent, neck over forty three centimetres and alcohol use. Functional disorders rise with stress and trauma.",
+   "vis": null
+  },
+  {
+   "tx": "Starvation lowers **leptin** by sixty percent, suppressing hypothalamic GnRH and causing amenorrhoea in ninety percent of anorexia cases. Gut brain axis dysregulation raises visceral hypersensitivity in **irritable bowel** syndrome affecting ten percent globally. Sleep apnoea fragments sleep with thirty arousals per hour and **intermittent hypoxia** below eighty-eight percent saturation driving hypertension in fifty percent.",
+   "say": "Starvation lowers leptin by sixty percent, suppressing hypothalamic GnRH and causing amenorrhoea in ninety percent of anorexia cases. Gut brain axis dysregulation raises visceral hypersensitivity in irritable bowel syndrome affecting ten percent globally. Sleep apnoea fragments sleep with thirty arousals per hour and intermittent hypoxia driving hypertension in fifty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway collapse"
+     },
+     {
+      "id": "b",
+      "label": "Hypoxia"
+     },
+     {
+      "id": "c",
+      "label": "Arousal"
+     },
+     {
+      "id": "d",
+      "label": "Sleep split"
+     },
+     {
+      "id": "e",
+      "label": "Day fatigue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anorexia hallmarks are **bradycardia** under fifty per minute in eighty percent, hypothermia under thirty-five degrees in forty percent and Russell sign in thirty percent from self induced vomiting. Bulimia shows **parotid swelling** with dental erosion in seventy percent plus hypokalaemic alkalosis in forty percent. Functional pain shows non anatomical distribution in sixty percent with normal imaging and exam in eighty-five percent.",
+   "say": "Anorexia hallmarks are slow pulse under fifty per minute in eighty percent, low temperature in forty percent and Russell sign in thirty percent from self induced vomiting. Bulimia shows parotid swelling with dental erosion in seventy percent plus low potassium in forty percent. Functional pain can show non anatomical distribution.",
+   "vis": null
+  },
+  {
+   "tx": "Insomnia shows sleep latency over thirty minutes for three nights weekly over three months in ten percent of adults. Sleep apnoea classic triad is **loud snoring** in ninety percent, witnessed apnoeas in seventy percent and daytime sleepiness with sleepiness score over ten.**Narcolepsy** shows cataplexy in sixty percent with sleep latency under eight minutes on nap testing.",
+   "say": "Insomnia can show sleep latency over thirty minutes for three nights weekly over three months in ten percent of adults. Sleep apnoea classic triad is loud snoring in ninety percent, witnessed apnoeas in seventy percent and daytime sleepiness. Narcolepsy shows cataplexy in sixty percent with short sleep latency on nap testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Hallmark",
+     "Threshold",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Anorexia nervosa",
+      "Bradycardia and amenorrhoea",
+      "BMI under seventeen point five ",
+      "ECG and electrolytes"
+     ],
+     [
+      "Bulimia nervosa",
+      "Binge purge cycles",
+      "Weekly for three months",
+      "Electrolytes"
+     ],
+     [
+      "Insomnia",
+      "Latency over thirty minutes",
+      "three months",
+      "Sleep diary"
+     ],
+     [
+      "Sleep apnoea",
+      "Snoring and apnoeas",
+      "AHI over five ",
+      "Polysomnography"
+     ],
+     [
+      "Narcolepsy",
+      "Cataplexy",
+      "Latency under eight minutes",
+      "MSLT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First test is **BMI and vitals** with ECG for bradycardia plus electrolytes in every eating disorder. Gold standard for sleep apnoea is **polysomnography** with apnoea hypopnoea index over five events per hour. Multiple sleep latency test under eight minutes confirms narcolepsy, while Rome IV criteria diagnose irritable bowel syndrome clinically.",
+   "say": "First test is BMI and vitals with ECG for slow pulse plus electrolytes in every eating disorder. Gold standard for sleep apnoea is polysomnography with apnoea hypopnoea index over five events per hour. Multiple sleep latency test under eight minutes confirms narcolepsy.",
+   "vis": null
+  },
+  {
+   "tx": "First line for anorexia is supervised **refeeding** at one thousand five hundred to two thousand kcal daily, adding two hundred kcal per day, with phosphate one mmol per kg daily to prevent refeeding syndrome. Bulimia first line is **a selective serotonin reuptake inhibitor** sixty mg daily for eight weeks with sixty percent binge reduction. Insomnia first line is sleep hygiene with stimulus control and **a sleep aid** three mg at night.",
+   "say": "First line for anorexia is supervised refeeding at fifteen hundred to two thousand kilocalories daily, adding two hundred kilocalories per day, with phosphate to prevent refeeding syndrome. Bulimia first line is a selective serotonin reuptake inhibitor sixty milligrams daily for eight weeks. Insomnia first line is sleep hygiene with a sleep aid three milligrams at night.",
+   "vis": null
+  },
+  {
+   "tx": "Sleep apnoea first line is **CPAP** at eight to twelve cm of water achieving seventy percent apnoea reduction, with mandibular device for mild disease. Binge eating disorder responds to **a stimulant** thirty mg daily titrating to seventy mg daily at forty percent response. Functional disorders need graded exercise one hundred fifty minutes weekly plus low dose tricyclics like a tricyclic ten mg at night.",
+   "say": "Sleep apnoea first line is CPAP at eight to twelve centimetres of water achieving seventy percent apnoea reduction, with mandibular device for mild disease. Binge eating disorder responds to a stimulant thirty milligrams daily titrating to seventy milligrams daily. Functional disorders need graded exercise plus low dose tricyclics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anorexia nervosa",
+     "points": [
+      "Refreeeding slowly",
+      "Phosphate monitoring",
+      "Family therapy",
+      "QTc watch"
+     ]
+    },
+    "right": {
+     "title": "Bulimia nervosa",
+     "points": [
+      "A selective serotonin reuptake inhibitor sixty mg",
+      "CBT sessions",
+      "Electrolyte watch",
+      "Dental review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **refeeding syndrome** in ten percent with phosphate fall over thirty percent in week one, osteoporosis in fifty percent after five years and cardiac atrophy with mitral prolapse.**Untreated apnoea** doubles stroke risk at three years and raises hypertension in fifty percent. Irritable bowel syndrome causes twenty percent work absenteeism and overlaps fibromyalgia in twenty-five percent.",
+   "say": "Complications include refeeding syndrome in ten percent with phosphate fall in week one, osteoporosis in fifty percent after five years and cardiac atrophy. Untreated apnoea doubles stroke risk at three years and raises hypertension in fifty percent. Irritable bowel syndrome causes twenty percent work absenteeism.",
+   "vis": null
+  },
+  {
+   "tx": "Recovery at one year is fifty percent for bulimia and thirty percent for anorexia with **weight restoration** above BMI eighteen point five predicting survival of eighty percent. CPAP adherence over seventy percent slows hypertension progression by forty percent. Functional symptoms improve in fifty percent with reassurance and graded activity within six months.",
+   "say": "Recovery at one year is fifty percent for bulimia and thirty percent for anorexia with weight restoration above BMI eighteen point five predicting survival of eighty percent. CPAP adherence over seventy percent can slow hypertension progression by forty percent. Functional symptoms improve in fifty percent with reassurance and graded activity.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** recall BMI under seventeen point five for anorexia, bradycardia under fifty, a selective serotonin reuptake inhibitor sixty mg for bulimia, refeeding one thousand five hundred kcal rising two hundred daily, AHI over five for apnoea, CPAP eight to twelve cm water, latency under eight minutes for narcolepsy and Rome IV for irritable bowel syndrome.",
+   "say": "This summary will help you remember the exam patterns. Recall BMI under seventeen point five for anorexia, pulse under fifty, a selective serotonin reuptake inhibitor sixty milligrams for bulimia, refeeding fifteen hundred kilocalories rising two hundred daily, AHI over five for apnoea, CPAP eight to twelve centimetres of water and latency under eight minutes for narcolepsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Disorder",
+     "Number"
+    ],
+    "rows": [
+     [
+      "BMI cutoff",
+      "Anorexia nervosa",
+      "Under seventeen point five "
+     ],
+     [
+      "Bradycardia",
+      "Anorexia hallmark",
+      "Under fifty per minute"
+     ],
+     [
+      "A selective serotonin reuptake inhibitor dose",
+      "Bulimia therapy",
+      "sixty mg daily"
+     ],
+     [
+      "Refeeding start",
+      "Anorexia care",
+      "one thousand five hundred kcal daily"
+     ],
+     [
+      "AHI cutoff",
+      "Sleep apnoea",
+      "Over five per hour"
+     ],
+     [
+      "CPAP pressure",
+      "Apnoea therapy",
+      "eight to twelve cm water"
+     ],
+     [
+      "MSLT latency",
+      "Narcolepsy",
+      "Under eight minutes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
