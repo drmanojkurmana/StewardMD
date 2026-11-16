@@ -77,6 +77,51 @@
    "tx": "**Split renal function** percentages from renogram or DMSA allocate how much work each kidney does, with a share under forty percent called reduced and under ten to fifteen percent often called non salvageable in obstruction decisions. The number is read beside drainage, symptoms, infection and the other kidneys health, never alone. A silent ten percent kidney causing hypertension or infection may still earn nephrectomy, while an asymptomatic one is watched.",
    "say": "Split renal function allocates how much work each kidney does, under forty percent called reduced and under ten to fifteen often non salvageable. The number is read beside drainage, symptoms and the other kidney, never alone. A silent poor kidney causing hypertension may still earn nephrectomy.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Measure split function"}, {"id": "b", "label": "Add drainage curve"}, {"id": "c", "label": "Add symptoms and infection"}, {"id": "d", "label": "Reconstruct, remove or watch"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: DMSA scanning is the reference test for cortical scars after childhood urine infection. Cold wedges mark scars. Acute pyelonephritis looks identical until a repeat at six months. DTPA measures filtration and drainage. Washout over 20 minutes suggests obstruction. MAG3 extracts about 50 percent each pass, versus about 20 percent for DTPA. Function under 40 percent is reduced. Captopril collapse means significant renal artery stenosis.",
+   "say": "High-yield for the exam: DMSA scanning is the reference test for cortical scars after childhood urine infection. Cold wedges mark scars. Acute pyelonephritis looks identical until a repeat at six months. DTPA measures filtration and drainage. Washout over 20 minutes suggests obstruction. MAG3 extracts about 50 percent each pass, versus about 20 percent for DTPA. Function under 40 percent is reduced. Captopril collapse means significant renal artery stenosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Reference test",
+      "Childhood cortical scars"
+     ],
+     [
+      "Scar sign",
+      "Photopenic cortical wedge"
+     ],
+     [
+      "Infection mimic",
+      "Repeat at six months"
+     ],
+     [
+      "DTPA curve",
+      "Filtration and washout"
+     ],
+     [
+      "Obstruction",
+      "Washout over 20 minutes"
+     ],
+     [
+      "MAG3 uptake",
+      "About 50 percent per pass"
+     ],
+     [
+      "DTPA uptake",
+      "About 20 percent per pass"
+     ],
+     [
+      "Low share",
+      "Under 40 percent"
+     ]
+    ]
+   }
   }
  ]
 }
