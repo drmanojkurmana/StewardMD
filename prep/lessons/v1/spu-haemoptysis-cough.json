@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "spu-haemoptysis-cough",
+ "subject": "ss-pulmonology",
+ "title": "Haemoptysis severity, bronchial artery embolisation and chronic cough workup",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e pulmonary haemoptysis sections", "BTS haemoptysis guidance and CHEST chronic cough guideline"],
+ "steps": [
+  {
+   "tx": "**Haemoptysis** (coughing blood) under **one hundred fifty** millilitres over **twenty four** hours is non massive, while faster or larger bleeding threatens asphyxiation rather than blood loss. Massive bleeding is defined functionally by airway flooding and **hypoxaemia**. Volume estimates by patients are notoriously unreliable, so abnormal gas exchange drives urgency.",
+   "say": "Haemoptysis under one hundred fifty millilitres over twenty four hours is non massive, while faster or larger bleeding threatens asphyxiation rather than blood loss. Massive bleeding means airway flooding and hypoxaemia. Volume estimates by patients are unreliable, so abnormal gas exchange drives urgency.",
+   "vis": {"kind": "table", "cols": ["Pattern", "Fit", "Action"], "rows": [["Under one hundred fifty millilitres daily", "Non massive", "CT scan, observe"], ["Faster flooding", "Massive", "Resuscitate, isolate lung"], ["Unknown volume", "Assess gas exchange", "Blood gas plus imaging"]]}
+  },
+  {
+   "tx": "Bronchiectasis, necrotising infection, tumour, tuberculosis and pulmonary embolism lead the cause list in most series. **Bronchial arteries** (systemic supply to airways) account for over **ninety** percent of bleeding vessels. **Computed tomography angiography** (CTA, arterial phase chest scan) maps enlarged bronchial arteries before intervention.",
+   "say": "Bronchiectasis, necrotising infection, tumour, tuberculosis and pulmonary embolism lead the cause list. Bronchial arteries supply most bleeding vessels at over ninety percent. Computed tomography angiography maps enlarged bronchial arteries before the intervention.",
+   "vis": {"kind": "table", "cols": ["Cause", "Clues", "First test"], "rows": [["Bronchiectasis", "Chronic purulent sputum", "High resolution CT chest"], ["Tuberculosis", "Weight loss, cavities", "Sputum plus culture"], ["Tumour", "Smoking, focal lesion", "Contrast CT, biopsy"], ["Pulmonary embolism", "Pleuritic pain, tachycardia", "CT pulmonary angiogram"]]}
+  },
+  {
+   "tx": "**Resuscitation** puts the bleeding side dependent, keeps the airway clear and corrects coagulopathy before any localisation. **Tranexamic acid** (antifibrinolytic) is given as a bridge with rapid dosing in the emergency protocol. Unstable patients need **fiberoptic bronchoscopy** for selective intubation and endobronchial blockers.",
+   "say": "Resuscitation puts the bleeding side dependent, keeps the airway clear and corrects coagulopathy before any localisation. Tranexamic acid is given as a bridge in the emergency protocol. Unstable patients need bronchoscopy for selective intubation and blockers.",
+   "vis": {"kind": "flow", "nodes": [{"id": "bleed", "label": "Massive haemoptysis"}, {"id": "pos", "label": "Bleeding side down"}, {"id": "air", "label": "Secure airway, correct clotting"}, {"id": "local", "label": "CTA localisation"}], "edges": [["bleed", "pos"], ["pos", "air"], ["air", "local"]]}
+  },
+  {
+   "tx": "**Bronchial artery embolisation** (BAE, catheter occlusion of hypertrophied feeders) is first line definitive control with technical success of **eighty one** to **one hundred** percent in series. It is the treatment of choice in massive bleeding unfit for surgery. Recurrence reaches **nine point eight** to **fifty seven point five** percent in follow up, so definitive treatment of the cause follows.",
+   "say": "Bronchial artery embolisation is first line definitive control with technical success of eighty one to one hundred percent in series. It is the treatment of choice in massive bleeding unfit for surgery. Recurrence reaches nearly fifty eight percent in follow up, so definitive treatment of the cause follows.",
+   "vis": {"kind": "table", "cols": ["Point", "Figure", "Meaning"], "rows": [["Technical success", "Eighty one to one hundred percent", "Stops massive bleed"], ["Recurrence", "Nine point eight to fifty seven point five percent", "Treat underlying cause"], ["Arterial source", "Over ninety percent bronchial", "Embolisation targets these"]]}
+  },
+  {
+   "tx": "**Bronchoscopy** localises the bleeding segment, clears the airway of clots and places balloon blockers before embolisation in unstable patients. It also samples tumour or infection when imaging stays equivocal or combined pathology is suspected. Cold saline and topical agents give temporary airway control during transfer.",
+   "say": "Bronchoscopy localises the bleeding segment, clears the airway of clots and places balloon blockers before embolisation in unstable patients. It also samples tumour or infection when imaging is equivocal. Cold saline gives temporary airway control during transfer.",
+   "vis": {"kind": "compare", "left": {"title": "Bronchoscopy roles", "points": ["Localise segment", "Clear clots", "Blocker placement", "Sample tissue"]}, "right": {"title": "Definitive controls", "points": ["Embolisation first for massive bleed", "Surgery for resectable cause", "Antitubercular therapy for tuberculosis"]}}
+  },
+  {
+   "tx": "**Chronic cough** (over **eight** weeks) clusters around **upper airway cough syndrome**, **gastro oesophageal reflux disease** (GORD), cough variant asthma and **angiotensin converting enzyme inhibitor** (ACE inhibitor) drugs. Chest radiograph first, then spirometry, separates chest disease from reflux and nasal causes. ACE inhibitor cough resolves within **four** weeks of stopping the drug.",
+   "say": "Chronic cough over eight weeks clusters around upper airway cough, reflux, cough variant asthma and angiotensin converting enzyme inhibitor drugs. Chest radiograph first, then spirometry, separates chest disease from reflux and nasal causes. Angiotensin converting enzyme inhibitor cough resolves within four weeks of stopping.",
+   "vis": {"kind": "table", "cols": ["Cause", "Clue", "Test or trial"], "rows": [["Upper airway syndrome", "Postnasal drip, throat clearing", "Nasal examination"], ["GORD", "Heartburn, regurgitation", "Acid suppression trial"], ["ACE inhibitor", "Dry cough, widow onset", "Stop and wait four weeks"], ["Cough variant asthma", "Night cough, wheeze", "Spirometry, FeNO"]]}
+  },
+  {
+   "tx": "**Eosinophilic bronchitis** (dry cough, normal spirometry, raised sputum eosinophils) responds to inhaled corticosteroid without bronchodilator benefit. **Red flags** (haemoptysis, weight loss, smoker over **fifty five**, chest pain) need early chest imaging and referral. **Gabapentinoids** (nerve pain medicines) help refractory cough hypersensitivity after the cause is treated.",
+   "say": "Eosinophilic bronchitis gives dry cough with normal spirometry and raised sputum eosinophils, and it responds to inhaled corticosteroid. Red flags like haemoptysis, weight loss, smoking over fifty five and chest pain need early imaging. Nerve pain medicines help refractory cough hypersensitivity after the cause is treated.",
+   "vis": {"kind": "flow", "nodes": [{"id": "cough", "label": "Chronic cough over eight weeks"}, {"id": "cxr", "label": "Chest radiograph"}, {"id": "flags", "label": "Red flags present"}, {"id": "refer", "label": "Urgent referral path"}], "edges": [["cough", "cxr"], ["cxr", "flags"], ["flags", "refer"]]}
+  },
+  {
+   "tx": "**Positional cough** with **sputum retention** improves with postural drainage and mucolytics such as carbocysteine in routine practice. **Sputum culture** in bronchiectasis targets Pseudomonas and Haemophilus for tailored therapy during exchanges. **Macrolides** at low dose act as immunomodulators in severe bronchiectasis, beyond antibacterial cover alone.",
+   "say": "Positional cough with sputum retention improves with postural drainage and mucolytics such as carbocysteine in routine practice. Sputum culture in bronchiectasis targets pseudomonas and haemophilus for tailored therapy during exchanges. Low dose macrolides act as immunomodulators in severe bronchiectasis beyond antibacterial cover alone.",
+   "vis": {"kind": "table", "cols": ["Feature", "Action", "Drug clue"], "rows": [["Retained sputum", "Postural drainage", "Carbocysteine"], ["Pseudomonas colonised", "Targeted antibiotics", "Sputum guided"], ["Frequent exacerbations", "Immunomodulation", "Low dose macrolides"]]}
+  },
+  {
+   "tx": "**Pertussis** (whooping cough) causes prolonged paroxysmal cough with post tussive vomiting and striking lymphocytosis in children. **Macrolides** clear carriage but barely shorten symptoms once paroxysms start in the patient. **Pulmonary oedema**, mitral stenosis and pneumonia resemble haemoptysis but they produce frothy sputum or fever patterns too.",
+   "say": "Pertussis causes prolonged paroxysmal cough with vomiting after coughing and lymphocytosis. Macrolides clear carriage but barely shorten symptoms once paroxysms start. Pulmonary oedema, mitral stenosis and pneumonia resemble haemoptysis but they produce frothy sputum or fever patterns.",
+   "vis": {"kind": "compare", "left": {"title": "Blood mimics", "points": ["Pulmonary oedema, froth", "Mitral stenosis, pink sputum", "Pneumonia, purulent blood"]}, "right": {"title": "Red flags", "points": ["Haemoptysis", "Weight loss", "Smoker over fifty five", "Age over fifty five"]}}
+  },
+  {
+   "tx": "High yield for the exam: massive **haemoptysis** floods the airway rather than draining blood volume, bronchial arteries supply over ninety percent of bleeding, embolisation succeeds in eighty one to one hundred percent, recurrence reaches nearly fifty eight percent in a year, chronic cough means over eight weeks, **ACE inhibitor** cough clears in four weeks of stopping, and eosinophilic bronchitis needs inhaled corticosteroid.",
+   "say": "Massive haemoptysis floods the airway rather than draining blood volume, bronchial arteries supply ninety percent of bleeding, embolisation succeeds in eighty one to one hundred percent, recurrence reaches nearly fifty eight percent in a year, chronic cough means over eight weeks, angiotensin converting enzyme inhibitor cough clears in four weeks of stopping, and eosinophilic bronchitis needs inhaled corticosteroid.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Massive bleed", "Airway flooding, hypoxaemia"], ["Source", "Bronchial arteries over ninety percent"], ["Embolisation success", "Eighty one to one hundred percent"], ["Recurrence", "Nearly fifty eight percent in a year"], ["Non massive", "Under one hundred fifty millilitres per day"], ["Chronic cough", "Over eight weeks"], ["ACE inhibitor", "Resolves in four weeks"], ["Eosinophilic bronchitis", "Inhaled corticosteroid"]] }
+  }
+ ]
+}

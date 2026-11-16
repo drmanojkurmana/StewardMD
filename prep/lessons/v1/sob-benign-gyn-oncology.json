@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "sob-benign-gyn-oncology",
+ "subject": "ss-obg",
+ "title": "Benign gynaecology and gynaecological oncology: bleeding, fibroids and cancers",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Williams Gynecology 4e",
+  "Berek Novak Gynecology 16e",
+  "NCCN gynaecologic cancers guidance"
+ ],
+ "steps": [
+  {
+   "tx": "**Abnormal uterine bleeding** (AUB) follows PALM COEIN classification separating structural lesions from systemic and endometrial causes. Tranexamic acid and nonsteroidal anti inflammatory drugs reduce menstrual loss in women who avoid hormones. High dose progestins control acute heavy bleeding when haemodynamics permit.",
+   "say": "Abnormal uterine bleeding follows PALM COEIN classification that separates structural lesions from systemic and endometrial causes. Tranexamic acid and anti inflammatory drugs reduce menstrual loss in women avoiding hormones. High dose progestins control acute heavy bleeding when stability allows.",
+   "vis": {
+    "cols": ["Group", "Cause", "First care"],
+    "kind": "table",
+    "rows": [
+     ["Structural", "Fibroids and polyps", "Surgery or hormones"],
+     ["Systemic", "Bleeding disorders", "Haematology input"],
+     ["Endometrial", "Local dysfunction", "Tranexamic acid"]
+    ]
+   }
+  },
+  {
+   "tx": "**Levonorgestrel intrauterine system** delivers local progestin that thins endometrium and greatly reduces menstrual bleeding. Myomectomy preserves fertility in women with submucosal fibroids, while hysterectomy suits completed families with refractory disease. Uterine artery embolisation offers an alternative for fibroid bulk where fertility matters less.",
+   "say": "The levonorgestrel intrauterine system delivers local progestin that thins the endometrium and greatly reduces bleeding. Myomectomy preserves fertility in women with submucosal fibroids. Uterine artery embolisation offers an alternative for fibroid bulk where fertility matters less.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Preserve uterus", "points": ["Myomectomy surgery", "Embolisation option", "Hormone system", "Fertility retained"]},
+    "right": {"title": "Remove uterus", "points": ["Hysterectomy definitive", "Completed family", "Refractory bleeding", "No recurrence"]}
+   }
+  },
+  {
+   "tx": "**Cervical intraepithelial neoplasia** follows persistent human papillomavirus infection with high grade lesions needing colposcopy driven care. Colposcopy with directed biopsy distinguishes low grade from high grade disease before excision. Loop excision removes the transformation zone with margin control and rhythm of colposcopic follow up.",
+   "say": "Cervical intraepithelial neoplasia follows persistent human papillomavirus infection and high grade lesions need colposcopy driven care. Colposcopy with directed biopsy separates low grade from high grade disease. Loop excision removes the transformation zone with margin control.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "c1", "label": "Abnormal screening"}, {"id": "c2", "label": "Colposcopy"}, {"id": "c3", "label": "Directed biopsy"}, {"id": "c4", "label": "Loop excision"}, {"id": "c5", "label": "Follow up"}],
+    "edges": [["c1", "c2"], ["c2", "c3"], ["c3", "c4"], ["c4", "c5"]]
+   }
+  },
+  {
+   "tx": "**Endometrial carcinoma** usually affects postmenopausal women with postmenopausal bleeding and obesity as dominant risks. Endometrial sampling with pipelle biopsy provides diagnosis in most cases before surgery planning. Sentinel node mapping now guides staging, sparing many women full lymphadenectomy and its lymphoedema risk.",
+   "say": "Endometrial carcinoma usually affects postmenopausal women with postmenopausal bleeding and obesity as dominant risks. Pipelle biopsy provides diagnosis in most cases before surgery planning. Sentinel node mapping guides staging while sparing many women full node dissection.",
+   "vis": {
+    "cols": ["Risk", "Role", "Test"],
+    "kind": "table",
+    "rows": [
+     ["Obesity", "Endometrial risk", "Sampling biopsy"],
+     ["Lynch syndrome", "Early onset", "Gene counselling"],
+     ["Tamoxifen use", "Polyp risk", "Bleeding review"]
+    ]
+   }
+  },
+  {
+   "tx": "**Ovarian masses** in premenopausal women often resolve, so repeat scanning after three cycles avoids rushed surgery. Complex masses with solid parts and ascites raise malignancy concern and merit oncology referral. Risk of malignancy index combining scan, menopausal status and CA 125 guides referral decisions.",
+   "say": "Ovarian masses in premenopausal women often resolve, so repeat scanning after three cycles avoids rushed surgery. Complex masses with solid parts and ascites raise malignancy concern and merit oncology referral. Risk of malignancy index guides referral decisions.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Benign pattern", "points": ["Simple cyst", "Young age", "Resolves on repeat scan", "Conservative surgery"]},
+    "right": {"title": "Malignant pattern", "points": ["Solid and complex", "Ascites present", "Oncology referral", "Staging surgery"]}
+   }
+  },
+  {
+   "tx": "**Vulvar introital and vulvar lesions** include lichen sclerosus with itching and pale plaques that scar and narrow the introitus. Potent topical steroids control lichen sclerosus and prevent sexual dysfunction. Squamous carcinoma favours the labia in older women and needs node assessment for staging.",
+   "say": "Lichen sclerosus presents with itching and pale plaques that scar and narrow the introitus. Potent topical steroids control the disease and prevent sexual dysfunction. Squamous carcinoma favours the labia in older women and needs node assessment for staging.",
+   "vis": {
+    "cols": ["Lesion", "Symptom", "Care"],
+    "kind": "table",
+    "rows": [
+     ["Lichen sclerosus", "Itching and scarring", "Steroid cream"],
+     ["Squamous carcinoma", "Ulcer and bleeding", "Surgery and nodes"],
+     ["Bartholin abscess", "Painful swelling", "Marsupialisation"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cervical cancer** screening with human papillomavirus testing and cytology catches disease before invasion in organised programmes. Early disease with lesions confined to cervix suits radical surgery or radiotherapy equally in selected cases. Prognosis worsens sharply with parametrial spread and pelvic node involvement.",
+   "say": "Cervical cancer screening with human papillomavirus testing and cytology catches disease before invasion in organised programmes. Early confined disease suits surgery or radiotherapy equally in selected cases. Prognosis worsens sharply with parametrial spread and node involvement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "v1", "label": "Screen positive"}, {"id": "v2", "label": "Colposcopy biopsy"}, {"id": "v3", "label": "Stage confirmed"}, {"id": "v4", "label": "Surgery or radiation"}, {"id": "v5", "label": "Follow up"}],
+    "edges": [["v1", "v2"], ["v2", "v3"], ["v3", "v4"], ["v4", "v5"]]
+   }
+  },
+  {
+   "tx": "**Ovarian cancer** spreads transcoelomically across the peritoneum, so chemotherapy follows debulking for advanced disease with staging laparotomy. Cytoreductive surgery aims for no visible residual tumour before chemotherapy begins for best survival. Germ cell tumours affect young women and need different chemotherapy protocols from epithelial disease in follow up.",
+   "say": "Ovarian cancer spreads across the peritoneum, so chemotherapy follows debulking surgery for advanced disease. Cytoreductive surgery aims for no visible residual tumour before chemotherapy starts. Germ cell tumours affect young women and need different protocols from epithelial disease.",
+   "vis": {
+    "cols": ["Type", "Age group", "Therapy"],
+    "kind": "table",
+    "rows": [
+     ["Epithelial", "Older women", "Debulk plus chemotherapy"],
+     ["Germ cell", "Young women", "Fertility sparing surgery"],
+     ["Stromal", "Variable", "Histology driven care"]
+    ]
+   }
+  },
+  {
+   "tx": "**Prolapse** severity follows Pelvic Organ Prolapse Quantification examination, which grades descent point by point. Pessary care suits women avoiding surgery, while sacrocolpopexy offers durable repair for younger active women. Continence assessment matters because prolapse repair can unmask occult stress incontinence.",
+   "say": "Prolapse severity follows pelvic organ quantification grading descent point by point. Pessary care suits women avoiding surgery, while sacrocolpopexy offers durable repair for younger active women. Continence assessment matters because repair can unmask occult stress incontinence.",
+   "vis": {
+    "cols": ["Grade", "Descent", "Option"],
+    "kind": "table",
+    "rows": [
+     ["Stage 1", "Mild descent", "Observation"],
+     ["Stage 2", "At hymen level", "Pessary trial"],
+     ["Stage 3 and 4", "Beyond hymen", "Surgical repair"]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam favourites** tie bleeding classification to drugs, biopsy before excision, and staging that changes surgery. Endometrial biopsy diagnoses most cancers, high grade cervical lesions need excision, and ovarian debulking aims for no residual disease. The table lists PALM COEIN groups, first drugs, gold standard tests and staging rules.",
+   "say": "Exam favourites tie bleeding classification to drugs, biopsy before excision, and staging that changes surgery. Endometrial biopsy diagnoses most cancers and high grade cervical lesions need excision. Ovarian debulking aims for no residual disease, and the final table lists groups, drugs, tests and staging rules.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Answer"],
+    "kind": "table",
+    "rows": [
+     ["Bleeding", "Classification", "PALM COEIN"],
+     ["Heavy periods", "First drug", "Tranexamic acid"],
+     ["Cervix", "Gold standard", "Colposcopy biopsy"],
+     ["Endometrium", "Diagnosis", "Pipelle biopsy"],
+     ["Ovary", "Surgery aim", "No residual disease"],
+     ["Prolapse", "Examination", "POP Q grading"],
+     ["Vulva", "Steroid disease", "Lichen sclerosus"],
+     ["Node staging", "Sparing method", "Sentinel mapping"]
+    ]
+   }
+  }
+ ]
+}

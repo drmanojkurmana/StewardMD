@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "spu-systemic",
+ "subject": "ss-pulmonology",
+ "title": "Lung involvement in systemic disease: joints, vessels, muscle and drugs",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e pulmonary associations chapters", "ACR EULAR 2024 ILD screening guidance"],
+ "steps": [
+  {
+   "tx": "Systemic connective tissue diseases injure lung through fibrosis, pleural inflammation, vascular narrowing and aspiration. **Interstitial lung disease** (ILD, parenchymal fibrosis) occurs in **ten** to **forty** percent of **rheumatoid arthritis** (RA) patients over their course. **Pleural effusions** dominate the early course, while fibrosis emerges late.",
+   "say": "Systemic connective tissue diseases injure lung through fibrosis, pleural inflammation, vascular narrowing and aspiration. Interstitial lung disease occurs in ten to forty percent of rheumatoid arthritis patients over their course. Pleural effusions dominate early, while fibrosis appears late.",
+   "vis": {"kind": "table", "cols": ["Disease", "Common lung lesion", "Peak timing"], "rows": [["Rheumatoid arthritis", "Interstitial disease, pleural disease", "Late, long standing"], ["Systemic sclerosis", "Interstitial disease plus pulmonary hypertension", "Early and progressive"], ["Systemic lupus", "Pleuritis, shrinking lung", "Active systemic disease"]]}
+  },
+  {
+   "tx": "**Rheumatoid nodular fibrosis** (subpleural Caplan like nodules with pneumoconiosis) follows dust exposure with RA. **Usual interstitial pneumonia** (UIP, fibrotic pattern) is the commonest RA histology and carries worse survival. **Caplan syndrome** (rheumatoid nodule plus dust disease) progresses faster than either alone.",
+   "say": "Rheumatoid nodular fibrosis follows dust exposure with rheumatoid arthritis. Usual interstitial pneumonia is the commonest rheumatoid histology and carries worse survival. Caplan syndrome is rheumatoid nodules plus dust disease and it progresses faster than either alone.",
+   "vis": {"kind": "compare", "left": {"title": "Rheumatoid lung patterns", "points": ["Usual pattern fibrosis, worst survival", "Nodular fibrosis with dust", "Pleural effusion, pure inflammation"]}, "right": {"title": "Clues", "points": ["Seropositive joint disease, smoking", "Dust history for Caplan", "Effusion lymphocytic, low glucose"]}}
+  },
+  {
+   "tx": "**Systemic sclerosis** (scleroderma) causes interstitial lung disease in **forty** to **seventy** percent on high resolution computed tomography (HRCT) and **pulmonary arterial hypertension** (PAH) in about **ten** percent. **NSIP** (non specific interstitial pneumonia, ground glass basal pattern) dominates sclerosis lung disease. Early PAH presents as declining **diffusing capacity** (DLCO) out of proportion to spirometry.",
+   "say": "Systemic sclerosis causes interstitial lung disease in forty to seventy percent on high resolution tomography and pulmonary hypertension in about ten percent. Non specific interstitial pneumonia dominates the sclerosis lung pattern. Early pulmonary hypertension shows falling diffusing capacity out of proportion to spirometry.",
+   "vis": {"kind": "table", "cols": ["Finding", "Figure", "Meaning"], "rows": [["Interstitial disease on high resolution tomography", "Forty to seventy percent", "Often subclinical"], ["Pulmonary hypertension", "About ten percent", "Survival driver"], ["Diffusing capacity fall", "Early signal", "Suspect pulmonary hypertension"]]}
+  },
+  {
+   "tx": "**Diffuse alveolar haemorrhage** (DAH, capillary bleed into alveoli) floods alveoli in anti neutrophil cytoplasmic antibody (ANCA) vasculitis and anti glomerular basement membrane disease. Cent per cent of Goodpasture patients develop DAH, while ANCA disease reaches **twenty five** to **sixty** percent. Falling haemoglobin plus raising creatinine plus anaemia triggers urgent **bronchoalveolar lavage** (BAL) that returns increasingly bloody aliquots.",
+   "say": "Diffuse alveolar haemorrhage bleeds into alveoli in anti neutrophil cytoplasmic antibody vasculitis and anti glomerular membrane disease. All Goodpasture patients develop it, while antineutrophil disease reaches twenty five to sixty percent. Falling haemoglobin with raising creatinine triggers urgent lavage returning bloodier aliquots.",
+   "vis": {"kind": "flow", "nodes": [{"id": "anaemia", "label": "Anaemia plus renal failure"}, {"id": "anca", "label": "ANCA plus anti basement membrane serology"}, {"id": "bal", "label": "Lavage increasingly bloody"}, {"id": "pulse", "label": "Steroids, plasma exchange"}], "edges": [["anaemia", "anca"], ["anca", "bal"], ["bal", "pulse"]]}
+  },
+  {
+   "tx": "**Pulmonary capillary haemorrhage** (pulmonary capillary vasculitis) needs steroid pulses with **plasma exchange** (PLEX) in severe Goodpasture disease without delay. **Immunosuppression** sustains remission in ANCA disease through induction maintenance. **Non invasive ventilation** buys hours while immunosuppression and dialysis decisions proceed safely.",
+   "say": "Pulmonary capillary haemorrhage needs steroid pulses with plasma exchange in severe Goodpasture disease. Immunosuppression keeps disease in remission in antineutrophil disease. Non invasive ventilation buys hours while immunosuppression and dialysis decisions proceed.",
+   "vis": {"kind": "table", "cols": ["Disease", "First line", "Add on"], "rows": [["Goodpasture bleed", "Steroid pulses plus plasma exchange", "Cytotoxic drugs"], ["ANCA bleed", "Steroid pulses plus antibody therapy", "Plasma exchange if severe"], ["Bleed plus renal failure", "Dialysis decision", "Multidisciplinary care"]]}
+  },
+  {
+   "tx": "**Dermatomyositis** (muscle disease with ILD) carries **anti melanoma differentiation associated gene 5** (anti MDA5) antibodies linking with rapidly progressive ILD. **Disease activity** outranks muscle strength in deciding lung immunosuppression intensity. Early **HRCT** plus **pulmonary function tests** (PFTs) at diagnosis set the surveillance baseline.",
+   "say": "Dermatomyositis carries anti melanoma differentiation gene antibodies linking with rapidly progressive interstitial lung disease. Disease activity outranks muscle strength in deciding lung immunosuppression intensity. Early high resolution tomography plus lung function tests at diagnosis set the surveillance baseline.",
+   "vis": {"kind": "table", "cols": ["Test", "Role", "Frequency"], "rows": [["High resolution tomography", "Baseline pattern", "At diagnosis, then yearly"], ["Pulmonary function tests with diffusing capacity", "Track decline", "Every three to six months"], ["Antibody panel", "Risk stratification", "Once at diagnosis"]]}
+  },
+  {
+   "tx": "Arthritis treatment triggers **drug related pneumonitis** (subacute drug lung, ground glass pattern) in **two** to **five** percent of RA patients, lethal in about **ten** percent of cases. Late cancer drugs and bladder drugs show fibrosis instead over years. **Drug withdrawal** plus steroids heal early disease, while fibrosis from chronic bladder treatment rarely reverses.",
+   "say": "Drug related pneumonitis affects two to five percent of rheumatoid arthritis patients and is fatal in about ten percent of cases. Late cancer drugs and bladder drugs produce fibrosis instead. Drug withdrawal plus steroids heal early disease, while chronic bladder drug fibrosis rarely reverses.",
+   "vis": {"kind": "compare", "left": {"title": "Early drug lung", "points": ["Arthritis drug, subacute", "Ground glass, reversible", "Stop drug, give steroids"]}, "right": {"title": "Chronic drug lung", "points": ["Bladder, heart rhythm drugs", "Fibrosis, upper lobe", "Withdrawal, slow course"]}}
+  },
+  {
+   "tx": "The leukaemia kinase inhibitor causes **pleural effusion** in **fifteen** to **thirty five** percent of chronic myeloid leukaemia patients through permeability effects. **Pulmonary arterial hypertension** follows in a minority and may reverse after withdrawal. Effusion resolves with dose interruption, diuretics or pleurodesis for recurrence.",
+   "say": "The leukaemia kinase inhibitor causes pleural effusion in fifteen to thirty five percent of chronic myeloid leukaemia patients through permeability effects. Pulmonary arterial hypertension follows in a minority and may reverse after withdrawal. Effusion resolves with dose interruption, diuretics or pleurodesis for recurrence.",
+   "vis": {"kind": "table", "cols": ["Drug class", "Pulmonary lesion", "Frequency"], "rows": [["Leukaemia kinase inhibitor", "Pleural effusion, hypertension", "Fifteen to thirty five percent effusion"], ["Bladder drug", "Chronic fibrosis", "Cumulative dose link"], ["Arthritis drug", "Subacute pneumonitis", "Two to five percent"]]}
+  },
+  {
+   "tx": "**Behçet syndrome** (recurrent oral and genital ulcers with uveitis) causes **pulmonary artery aneurysms** (PAA) that bleed catastrophically into bronchi. **Hughes Stovin syndrome** (venous thrombosis plus PAA) shares vessel wall weakening. **Immunosuppression** heals aneurysms, while anticoagulation risks fatal haemoptysis and must not be given blindly.",
+   "say": "Behçet syndrome causes pulmonary artery aneurysms that bleed catastrophically into bronchi. Hughes Stovin syndrome shares vessel wall weakening with venous thrombosis. Immunosuppression heals aneurysms, while anticoagulation risks fatal haemoptysis and must not be given blindly.",
+   "vis": {"kind": "flow", "nodes": [{"id": "ulcer", "label": "Ulcers plus uveitis"}, {"id": "aneu", "label": "Pulmonary artery aneurysm"}, {"id": "bleed", "label": "Catastrophic haemoptysis risk"}, {"id": "immuno", "label": "Immunosuppression first"}], "edges": [["ulcer", "aneu"], ["aneu", "bleed"], ["bleed", "immuno"]]}
+  },
+  {
+   "tx": "High yield for the exam: rheumatoid lung disease shows **usual interstitial pneumonia** with worst survival, sclerosis lung disease shows non specific pattern with pulmonary hypertension in ten percent, alveolar haemorrhage hits all **Goodpasture** patients, MDA5 links to rapid myositis lung disease, drug pneumonitis strikes two to five percent, kinase inhibitor effusion reaches thirty five percent, and **Behçet** aneurysms must never be anticoagulated blindly.",
+   "say": "Rheumatoid lung disease shows usual interstitial pneumonia with worst survival, sclerosis lung disease shows non specific pattern with pulmonary hypertension in ten percent, alveolar haemorrhage hits all Goodpasture patients, MDA5 links to rapid myositis lung disease, drug pneumonitis strikes two to five percent, kinase inhibitor effusion reaches thirty five percent, and Behçet aneurysms must never be anticoagulated blindly.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Rheumatoid pattern", "Usual pattern, worst survival"], ["Sclerosis disease", "Non specific, hypertension ten percent"], ["Goodpasture bleed", "Hundred percent alveolar bleed"], ["MDA5", "Rapidly progressive disease"], ["Drug pneumonitis", "Two to five percent"], ["Kinase inhibitor", "Effusion fifteen to thirty five percent"], ["Behçet", "Aneurysm, immunosuppress"], ["Lavage proof", "Bloody aliquots rising"]] }
+  }
+ ]
+}
