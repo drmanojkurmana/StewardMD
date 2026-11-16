@@ -153,6 +153,47 @@
           "points": ["One point drives the line", "Groups averaged (ecological data)", "Extreme group remeasured improvement claimed"]
         }
       }
+    },
+    {
+      "tx": "**High-yield for the exam**: Mann Whitney U suits two independent groups with skewed or ordinal data. Wilcoxon signed rank suits paired data, and Kruskal Wallis suits three or more independent groups. Pearson r needs normal continuous data, while Spearman uses ranks. Squaring r gives variation explained. Correlation never proves causation, and regression predicts within range only.",
+      "say": "Mann Whitney U suits two independent groups with skewed or ordinal data. Wilcoxon signed rank suits paired data, and Kruskal Wallis suits three or more independent groups. Pearson r needs normal continuous data, while Spearman uses ranks. Squaring r gives variation explained. Correlation never proves causation, and regression predicts within range only.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Mann Whitney U test",
+            "Two independent groups, non parametric t test twin"
+          ],
+          [
+            "Wilcoxon signed rank",
+            "Paired before after data, non parametric twin"
+          ],
+          [
+            "Kruskal Wallis test",
+            "Three or more independent groups, rank ANOVA"
+          ],
+          [
+            "Pearson correlation r",
+            "Linear association needing near normal continuous data"
+          ],
+          [
+            "Spearman correlation",
+            "Rank based, tolerates skew and outliers well"
+          ],
+          [
+            "Coefficient of determination",
+            "r squared equals variation in y explained"
+          ],
+          [
+            "Regression line",
+            "y equals a plus b x, no extrapolation"
+          ]
+        ]
+      }
     }
   ]
 }
