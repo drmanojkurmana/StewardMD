@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "From six carbons to payoff",
     "nodes": [
-     {"id": "f16", "label": "Fructose-1,6-bisphosphate"},
-     {"id": "tri", "label": "Two triose phosphates"},
-     {"id": "bpg", "label": "1,3-Bisphosphoglycerate"},
-     {"id": "pyr", "label": "Pyruvate"}
+     {
+      "id": "f16",
+      "label": "Fructose-1,6-bisphosphate"
+     },
+     {
+      "id": "tri",
+      "label": "Two triose phosphates"
+     },
+     {
+      "id": "bpg",
+      "label": "1,3-Bisphosphoglycerate"
+     },
+     {
+      "id": "pyr",
+      "label": "Pyruvate"
+     }
     ],
-    "edges": [["f16", "tri"], ["tri", "bpg"], ["bpg", "pyr"]]
+    "edges": [
+     [
+      "f16",
+      "tri"
+     ],
+     [
+      "tri",
+      "bpg"
+     ],
+     [
+      "bpg",
+      "pyr"
+     ]
+    ]
    }
   },
   {
@@ -25,11 +50,27 @@
    "say": "Phosphoglycerate kinase performs the first substrate level phosphorylation, handing phosphate directly to ADP. Because two trioses run per glucose, this step repays the two ATP invested earlier. Enolase then removes water to create phosphoenolpyruvate, whose phosphate bond is among the most energy rich in metabolism.",
    "vis": {
     "kind": "table",
-    "cols": ["Step", "Energy event", "Exam hook"],
+    "cols": [
+     "Step",
+     "Energy event",
+     "Exam hook"
+    ],
     "rows": [
-     ["Phosphoglycerate kinase", "ATP made (substrate level)", "Repays the investment phase"],
-     ["Enolase", "Makes phosphoenolpyruvate", "Blocked by fluoride in blood tubes"],
-     ["Pyruvate kinase", "Second ATP made", "Needs magnesium and potassium"]
+     [
+      "Phosphoglycerate kinase",
+      "ATP made (substrate level)",
+      "Repays the investment phase"
+     ],
+     [
+      "Enolase",
+      "Makes phosphoenolpyruvate",
+      "Blocked by fluoride in blood tubes"
+     ],
+     [
+      "Pyruvate kinase",
+      "Second ATP made",
+      "Needs magnesium and potassium"
+     ]
     ]
    }
   },
@@ -43,8 +84,21 @@
    "say": "Pyruvate kinase transfers phosphate from phosphoenolpyruvate to ADP, yielding pyruvate and ATP. Counting both trioses, glycolysis nets two ATP and two cytosolic NADH per glucose. Feed forward activation by fructose-1,6-bisphosphate keeps this exit synchronised with the committed step.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Investment phase (per glucose)", "points": ["Hexokinase spends 1 ATP", "PFK-1 spends 1 ATP", "Total spent: 2 ATP"]},
-    "right": {"title": "Payoff phase (per glucose)", "points": ["Kinase step makes 2 ATP", "Pyruvate kinase makes 2 ATP", "Net gain: 2 ATP plus 2 NADH"]
+    "left": {
+     "title": "Investment phase (per glucose)",
+     "points": [
+      "Hexokinase spends 1 ATP",
+      "PFK-1 spends 1 ATP",
+      "Total spent: 2 ATP"
+     ]
+    },
+    "right": {
+     "title": "Payoff phase (per glucose)",
+     "points": [
+      "Kinase step makes 2 ATP",
+      "Pyruvate kinase makes 2 ATP",
+      "Net gain: 2 ATP plus 2 NADH"
+     ]
     }
    }
   },
@@ -53,12 +107,27 @@
    "say": "Red cells have no mitochondria, so they depend entirely on this payoff. In pyruvate kinase deficiency they run short of ATP, membranes stiffen, and the spleen removes them, causing chronic haemolytic anaemia. Raised 2,3-BPG partly compensates by releasing oxygen more easily.",
    "vis": {
     "kind": "table",
-    "cols": ["Finding in pyruvate kinase deficiency", "Why it happens"],
+    "cols": [
+     "Finding in pyruvate kinase deficiency",
+     "Why it happens"
+    ],
     "rows": [
-     ["Chronic haemolysis, high reticulocytes", "ATP poor red cells removed by spleen"],
-     ["Splenomegaly", "Work hypertrophy from constant trapping"],
-     ["Raised 2,3-BPG", "Upstream intermediates divert to the shunt"],
-     ["Improvement after splenectomy", "Main destruction site removed"]
+     [
+      "Chronic haemolysis, high reticulocytes",
+      "ATP poor red cells removed by spleen"
+     ],
+     [
+      "Splenomegaly",
+      "Work hypertrophy from constant trapping"
+     ],
+     [
+      "Raised 2,3-BPG",
+      "Upstream intermediates divert to the shunt"
+     ],
+     [
+      "Improvement after splenectomy",
+      "Main destruction site removed"
+     ]
     ]
    }
   },
@@ -69,12 +138,82 @@
     "kind": "flow",
     "title": "Three fates of pyruvate",
     "nodes": [
-     {"id": "pyr", "label": "Pyruvate"},
-     {"id": "aco", "label": "Acetyl-CoA (aerobic)"},
-     {"id": "lac", "label": "Lactate (anaerobic)"},
-     {"id": "oaa", "label": "Oxaloacetate (liver)"}
+     {
+      "id": "pyr",
+      "label": "Pyruvate"
+     },
+     {
+      "id": "aco",
+      "label": "Acetyl-CoA (aerobic)"
+     },
+     {
+      "id": "lac",
+      "label": "Lactate (anaerobic)"
+     },
+     {
+      "id": "oaa",
+      "label": "Oxaloacetate (liver)"
+     }
     ],
-    "edges": [["pyr", "aco"], ["pyr", "lac"], ["pyr", "oaa"]]
+    "edges": [
+     [
+      "pyr",
+      "aco"
+     ],
+     [
+      "pyr",
+      "lac"
+     ],
+     [
+      "pyr",
+      "oaa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Substrate level phosphorylation in glycolysis occurs at phosphoglycerate kinase and pyruvate kinase. Fluoride inhibits magnesium-dependent enolase to preserve blood glucose in collection tubes. Arsenate uncouples glyceraldehyde-3-phosphate dehydrogenase by spontaneous arsenato-phosphoglycerate hydrolysis without yielding ATP. Pyruvate kinase deficiency causes congenital nonspherocytic haemolytic anaemia with elevated 2,3-BPG levels.",
+   "say": "High-yield for the exam: Substrate level phosphorylation in glycolysis occurs at phosphoglycerate kinase and pyruvate kinase. Fluoride inhibits magnesium-dependent enolase to preserve blood glucose in collection tubes. Arsenate uncouples glyceraldehyde-3-phosphate dehydrogenase by spontaneous arsenato-phosphoglycerate hydrolysis without yielding ATP. Pyruvate kinase deficiency causes congenital nonspherocytic haemolytic anaemia with elevated 2,3-BPG levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Substrate level steps",
+      "Phosphoglycerate kinase and pyruvate kinase yield direct ATP"
+     ],
+     [
+      "Enolase inhibitor",
+      "Sodium fluoride in gray top tubes halts in vitro glycolysis"
+     ],
+     [
+      "Enolase cofactor",
+      "Divalent magnesium ion required for catalytic dehydration"
+     ],
+     [
+      "Arsenate toxicity mechanism",
+      "Competes with inorganic phosphate at glyceraldehyde-3-phosphate dehydrogenase"
+     ],
+     [
+      "Net glycolytic yield",
+      "Two net ATP and two cytosolic NADH per glucose"
+     ],
+     [
+      "Pyruvate kinase deficiency",
+      "Second most common erythrocyte enzymopathy causing haemolytic anaemia"
+     ],
+     [
+      "PK deficiency compensatory shift",
+      "Elevated 2,3-BPG shifts oxygen dissociation curve rightward"
+     ],
+     [
+      "Pyruvate kinase activation",
+      "Feed forward allosteric activation by upstream fructose-1,6-bisphosphate"
+     ]
+    ]
    }
   }
  ],
