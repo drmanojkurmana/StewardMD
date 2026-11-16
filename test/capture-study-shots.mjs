@@ -14,8 +14,14 @@ import { freePort } from "./free-port.mjs";
 const req = createRequire(import.meta.url);
 const { chromium } = req("playwright");
 const HERE = dirname(fileURLToPath(import.meta.url));
-const mode = process.argv[2] || "before";
-const OUT_DIR = mode === "p2" ? join(HERE, "..", ".fleet-reports", "study-p2", "shots") : mode === "p1" ? join(HERE, "..", ".fleet-reports", "study-p1", "shots") : join(HERE, "..", ".fleet-reports", "study-ui", mode);
+const targetArg = process.argv[2] || "study-p4";
+const OUT_DIR = targetArg === "p1"
+  ? join(HERE, "..", ".fleet-reports", "study-p1", "shots")
+  : targetArg === "p2"
+    ? join(HERE, "..", ".fleet-reports", "study-p2", "shots")
+    : targetArg.startsWith("study-")
+      ? join(HERE, "..", ".fleet-reports", targetArg)
+      : join(HERE, "..", ".fleet-reports", "study-ui", targetArg);
 mkdirSync(OUT_DIR, { recursive: true });
 
 const PORT = await freePort();
@@ -181,6 +187,146 @@ for (const dev of DEVICES) {
     await page.screenshot({ path: join(OUT_DIR, `${tag}-colour-width-popover.png`) });
     console.log(`Saved ${tag}-colour-width-popover.png`);
 
+    // Phase 4: Text box & format bar
+    if (await page.locator('[data-act="st-tool"][data-v="text"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="text"]');
+      await sleep(150);
+      await page.evaluate(() => {
+        const p = document.querySelector('.st-pg[data-n="1"]');
+        if (!p) return;
+        const r = p.getBoundingClientRect();
+        p.querySelector(".st-items-layer").dispatchEvent(new PointerEvent("pointerdown", {
+          pointerId: 30, pointerType: "touch", isPrimary: true, clientX: r.left + 0.15 * r.width, clientY: r.top + 0.35 * r.height, bubbles: true
+        }));
+      });
+      await sleep(200);
+      const textEd = page.locator(".st-text-editable").first();
+      if (await textEd.count()) {
+        await textEd.fill("Aortic Stenosis: Systolic ejection murmur radiating to carotids.");
+      }
+      await setupTheme();
+      await sleep(150);
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-text-format-bar.png`) });
+      console.log(`Saved ${tag}-text-format-bar.png`);
+
+      // Text style sheet
+      if (await page.locator('[data-act="st-fb-styles"]').count()) {
+        await page.click('[data-act="st-fb-styles"]');
+        await sleep(200);
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-text-style-sheet.png`) });
+        console.log(`Saved ${tag}-text-style-sheet.png`);
+        if (await page.locator('[data-act="st-fb-close-styles"]').count()) {
+          await page.click('[data-act="st-fb-close-styles"]');
+          await sleep(150);
+        }
+      }
+    }
+
+    // Phase 4: Elements & Sticker tray
+    if (await page.locator('[data-act="st-tool"][data-v="elements"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="elements"]');
+      await sleep(250);
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-sticker-tray.png`) });
+      console.log(`Saved ${tag}-sticker-tray.png`);
+
+      if (await page.locator('.st-sticker-btn[data-name="heart"]').count()) {
+        await page.click('.st-sticker-btn[data-name="heart"]');
+        await sleep(250);
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-sticker-on-page.png`) });
+        console.log(`Saved ${tag}-sticker-on-page.png`);
+      }
+    }
+
+    // Phase 4: Image & Crop
+    await page.evaluate(() => {
+      const sampleImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cExAQAAAMKg9U9tDQ8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvg1rYAAB21nCtwAAAABJRU5ErkJggg==";
+      if (window.STUDY_INSERT && window.STUDY_INSERT.insertImageFromDataUrl) {
+        window.STUDY_INSERT.insertImageFromDataUrl(sampleImg);
+      }
+    });
+    await sleep(250);
+    await setupTheme();
+    await page.screenshot({ path: join(OUT_DIR, `${tag}-image-with-handles.png`) });
+    console.log(`Saved ${tag}-image-with-handles.png`);
+
+    const imgId = await page.evaluate(() => {
+      const im = document.querySelector(".st-item-img");
+      return im ? im.closest(".st-item").getAttribute("data-id") : null;
+    });
+    if (imgId && await page.locator(`[data-act="st-img-crop"][data-id="${imgId}"]`).count()) {
+      await page.click(`[data-act="st-img-crop"][data-id="${imgId}"]`);
+      await sleep(250);
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-image-crop.png`) });
+      console.log(`Saved ${tag}-image-crop.png`);
+      if (await page.locator('[data-act="st-crop-cancel"]').count()) {
+        await page.click('[data-act="st-crop-cancel"]');
+        await sleep(150);
+      }
+    }
+
+    // Phase 4: Laser tool
+    if (await page.locator('[data-act="st-tool"][data-v="laser"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="laser"]');
+      await sleep(100);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect();
+        const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 40, pointerType: "pen", isPrimary: true, pressure: 0.8, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.25, 0.65);
+        fire("pointermove", 0.45, 0.68);
+        fire("pointermove", 0.65, 0.63);
+      });
+      await setupTheme();
+      await sleep(100);
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-laser-trail.png`) });
+      console.log(`Saved ${tag}-laser-trail.png`);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect();
+        ov.dispatchEvent(new PointerEvent("pointerup", { pointerId: 40, pointerType: "pen", isPrimary: true, clientX: r.left + 0.65 * r.width, clientY: r.top + 0.63 * r.height, bubbles: true }));
+      });
+    }
+
+    // Phase 4: Lasso selection with AI chips
+    if (await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="lasso"]');
+      await sleep(100);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect(), id = 45;
+        const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.15, 0.15);
+        fire("pointermove", 0.85, 0.15);
+        fire("pointermove", 0.85, 0.35);
+        fire("pointermove", 0.15, 0.35);
+        fire("pointermove", 0.15, 0.15);
+        fire("pointerup", 0.15, 0.15);
+      });
+      await sleep(250);
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-lasso-ai-chips.png`) });
+      console.log(`Saved ${tag}-lasso-ai-chips.png`);
+
+      if (await page.locator('[data-act="st-lasso-ai-explain"]').count()) {
+        await page.click('[data-act="st-lasso-ai-explain"]');
+        await sleep(250);
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-lasso-ai-explain-sheet.png`) });
+        console.log(`Saved ${tag}-lasso-ai-explain-sheet.png`);
+        if (await page.locator('[data-act="st-scancel"]').count()) {
+          await page.click('[data-act="st-scancel"]');
+          await sleep(150);
+        }
+      }
+    }
+
     // 7b. Phase 1: pen settings popover (tap the active pen again), highlighter strip, eraser popover
     if (await page.locator('[data-act="st-tool"][data-v="pen"]').count()) {
       await page.click('[data-act="st-tool"][data-v="pen"]');
@@ -250,6 +396,12 @@ for (const dev of DEVICES) {
     }
 
     // 9. PDF viewer
+    await page.evaluate(() => {
+      if (window.STUDY_INSERT) {
+        while (window.STUDY_INSERT.back()) {}
+      }
+    });
+    await sleep(150);
     await page.click('#smdPrep [data-act="back"]');
     await page.waitForSelector("#stLib", { timeout: 10000 });
     await page.locator(".st-doc", { hasText: "Cardiology" }).locator(".st-open").click();
