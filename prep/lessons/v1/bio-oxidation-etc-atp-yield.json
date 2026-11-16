@@ -21,12 +21,32 @@
    "say": "ATP synthase rotates its gamma shaft to cycle beta subunits through binding change steps, three ATP per turn. Roughly four protons per cytosolic ATP yields modern P/O values of two point five.",
    "vis": {
     "kind": "table",
-    "cols": ["Synthase part", "Job", "Blocker anchor"],
+    "cols": [
+     "Synthase part",
+     "Job",
+     "Blocker anchor"
+    ],
     "rows": [
-     ["F0 c ring (membrane)", "Proton turbine rotation", "Oligomycin plugs; DCCD experimental"],
-     ["Gamma shaft", "Cam forcing beta conformations", "Rotation visualised single molecule Nobel work"],
-     ["F1 alpha3 beta3", "Loose, tight, open ATP cycle", "Aurovertin, efrapeptin experimental"],
-     ["ANT exchanger (separate protein)", "ATP out, ADP in (electrogenic)", "Atractyloside and bongkrekic acid poisons"]
+     [
+      "F0 c ring (membrane)",
+      "Proton turbine rotation",
+      "Oligomycin plugs; DCCD experimental"
+     ],
+     [
+      "Gamma shaft",
+      "Cam forcing beta conformations",
+      "Rotation visualised single molecule Nobel work"
+     ],
+     [
+      "F1 alpha3 beta3",
+      "Loose, tight, open ATP cycle",
+      "Aurovertin, efrapeptin experimental"
+     ],
+     [
+      "ANT exchanger (separate protein)",
+      "ATP out, ADP in (electrogenic)",
+      "Atractyloside and bongkrekic acid poisons"
+     ]
     ]
    }
   },
@@ -35,8 +55,21 @@
    "say": "ADP availability gates proton return, so gradient stalls pumping at rest until ADP pulses surge respiration. Calcium and thyroid hormone tune the set point physiologically beyond ADP alone mechanisms.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "State 4 (resting, ADP low)", "points": ["Gradient maximal", "Respiration slow, leak only", "Heat fraction highest"]},
-    "right": {"title": "State 3 (working, ADP high)", "points": ["Gradient partially discharged usefully", "Respiration maximal coupled", "ATP output maximal"]
+    "left": {
+     "title": "State 4 (resting, ADP low)",
+     "points": [
+      "Gradient maximal",
+      "Respiration slow, leak only",
+      "Heat fraction highest"
+     ]
+    },
+    "right": {
+     "title": "State 3 (working, ADP high)",
+     "points": [
+      "Gradient partially discharged usefully",
+      "Respiration maximal coupled",
+      "ATP output maximal"
+     ]
     }
    }
   },
@@ -50,12 +83,32 @@
    "say": "Glucose totals thirty or thirty two ATP modern by shuttle choice, versus thirty six or thirty eight classic. Anaerobic net two prices correctly only against oxygen independence in red cells and tumours.",
    "vis": {
     "kind": "table",
-    "cols": ["Yield line (per glucose)", "Modern (2.5/1.5)", "Classic (3/2)"],
+    "cols": [
+     "Yield line (per glucose)",
+     "Modern (2.5/1.5)",
+     "Classic (3/2)"
+    ],
     "rows": [
-     ["Substrate level net (glycolysis plus GTP)", "2 plus 2 GTP counted in TCA lines", "Same substrate counts"],
-     ["With glycerol phosphate shuttle", "30 ATP total", "36 ATP total"],
-     ["With malate-aspartate shuttle", "32 ATP total", "38 ATP total"],
-     ["Anaerobic only", "2 net always", "2 net always"]
+     [
+      "Substrate level net (glycolysis plus GTP)",
+      "2 plus 2 GTP counted in TCA lines",
+      "Same substrate counts"
+     ],
+     [
+      "With glycerol phosphate shuttle",
+      "30 ATP total",
+      "36 ATP total"
+     ],
+     [
+      "With malate-aspartate shuttle",
+      "32 ATP total",
+      "38 ATP total"
+     ],
+     [
+      "Anaerobic only",
+      "2 net always",
+      "2 net always"
+     ]
     ]
    }
   },
@@ -66,12 +119,82 @@
     "kind": "flow",
     "title": "Respirometry reads blocks",
     "nodes": [
-     {"id": "base", "label": "Basal respiration (coupled)"},
-     {"id": "oligo", "label": "Oligomycin: leak remains"},
-     {"id": "fccp", "label": "Uncoupler: maximal reserve"},
-     {"id": "rot", "label": "Rotenone/antimycin: non mitochondrial remainder"}
+     {
+      "id": "base",
+      "label": "Basal respiration (coupled)"
+     },
+     {
+      "id": "oligo",
+      "label": "Oligomycin: leak remains"
+     },
+     {
+      "id": "fccp",
+      "label": "Uncoupler: maximal reserve"
+     },
+     {
+      "id": "rot",
+      "label": "Rotenone/antimycin: non mitochondrial remainder"
+     }
     ],
-    "edges": [["base", "oligo"], ["oligo", "fccp"], ["fccp", "rot"]]
+    "edges": [
+     [
+      "base",
+      "oligo"
+     ],
+     [
+      "oligo",
+      "fccp"
+     ],
+     [
+      "fccp",
+      "rot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Complete aerobic oxidation of glucose yields thirty to thirty-two ATP molecules, determined by the shuttle utilized for cytosolic NADH transport. The malate-aspartate shuttle yields 2.5 ATP per cytosolic NADH in heart and liver, while the glycerol-3-phosphate shuttle yields 1.5 ATP in muscle and brain. Cyanide and carbon monoxide inhibit complex IV, whereas oligomycin inhibits ATP synthase. Chemical uncouplers dissipate the proton gradient, generating heat without ATP synthesis.",
+   "say": "High-yield for the exam: Complete aerobic oxidation of glucose yields thirty to thirty-two ATP molecules, determined by the shuttle utilized for cytosolic NADH transport. The malate-aspartate shuttle yields 2.5 ATP per cytosolic NADH in heart and liver, while the glycerol-3-phosphate shuttle yields 1.5 ATP in muscle and brain. Cyanide and carbon monoxide inhibit complex IV, whereas oligomycin inhibits ATP synthase. Chemical uncouplers dissipate the proton gradient, generating heat without ATP synthesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Malate-aspartate shuttle yield",
+      "Transfers electrons to mitochondrial NAD+, yielding thirty-two total ATP per glucose"
+     ],
+     [
+      "Glycerol-3-phosphate shuttle yield",
+      "Transfers electrons to mitochondrial FAD, yielding thirty total ATP per glucose"
+     ],
+     [
+      "P to O ratio modern values",
+      "2.5 ATP per mitochondrial NADH and 1.5 ATP per FADH2"
+     ],
+     [
+      "Complex I inhibitor",
+      "Rotenone and amytal block electron transfer from iron-sulfur centers to ubiquinone"
+     ],
+     [
+      "Complex III inhibitor",
+      "Antimycin A halts electron flow between cytochrome b and c1"
+     ],
+     [
+      "Complex IV inhibitors",
+      "Cyanide, carbon monoxide, azide, and hydrogen sulfide block cytochrome c oxidase"
+     ],
+     [
+      "Complex V (ATP synthase) inhibitor",
+      "Oligomycin directly closes Fo proton channel, halting ATP production"
+     ],
+     [
+      "Uncouplers mechanism",
+      "2,4-Dinitrophenol and thermogenin collapse proton motive force, releasing energy as heat"
+     ]
+    ]
    }
   }
  ],

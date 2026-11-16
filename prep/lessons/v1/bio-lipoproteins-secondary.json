@@ -10,12 +10,32 @@
    "say": "Most dyslipidaemia is secondary, so hunt the cause first. Hypothyroidism, nephrotic syndrome, kidney disease, diabetes, alcohol and drugs drive most abnormal profiles, and treating the driver often halves the abnormality.",
    "vis": {
     "kind": "table",
-    "cols": ["Driver", "Typical lipid pattern", "First move"],
+    "cols": [
+     "Driver",
+     "Typical lipid pattern",
+     "First move"
+    ],
     "rows": [
-     ["Hypothyroidism", "LDL high", "Thyroxine, recheck lipids"],
-     ["Nephrotic syndrome", "LDL high (ApoB overproduced)", "Treat proteinuria cause"],
-     ["Diabetes, metabolic syndrome", "TG high, HDL low, small dense LDL", "Glucose, weight, triglyceride risk"],
-     ["Cholestasis", "Lipoprotein X, cholesterol high", "Treat obstruction"]
+     [
+      "Hypothyroidism",
+      "LDL high",
+      "Thyroxine, recheck lipids"
+     ],
+     [
+      "Nephrotic syndrome",
+      "LDL high (ApoB overproduced)",
+      "Treat proteinuria cause"
+     ],
+     [
+      "Diabetes, metabolic syndrome",
+      "TG high, HDL low, small dense LDL",
+      "Glucose, weight, triglyceride risk"
+     ],
+     [
+      "Cholestasis",
+      "Lipoprotein X, cholesterol high",
+      "Treat obstruction"
+     ]
     ]
    }
   },
@@ -26,12 +46,37 @@
     "kind": "flow",
     "title": "Diabetic lipid remodelling",
     "nodes": [
-     {"id": "ir", "label": "Insulin resistance, fatty acid flood"},
-     {"id": "vldl", "label": "VLDL overproduced"},
-     {"id": "swap", "label": "CETP swaps cores"},
-     {"id": "sd", "label": "Small dense LDL, low HDL"}
+     {
+      "id": "ir",
+      "label": "Insulin resistance, fatty acid flood"
+     },
+     {
+      "id": "vldl",
+      "label": "VLDL overproduced"
+     },
+     {
+      "id": "swap",
+      "label": "CETP swaps cores"
+     },
+     {
+      "id": "sd",
+      "label": "Small dense LDL, low HDL"
+     }
     ],
-    "edges": [["ir", "vldl"], ["vldl", "swap"], ["swap", "sd"]]
+    "edges": [
+     [
+      "ir",
+      "vldl"
+     ],
+     [
+      "vldl",
+      "swap"
+     ],
+     [
+      "swap",
+      "sd"
+     ]
+    ]
    }
   },
   {
@@ -39,8 +84,21 @@
    "say": "Thiazides, steroids, retinoids, protease inhibitors and antipsychotics each distort lipids characteristically. Anabolic steroids crash HDL strikingly, a sports medicine favourite. Review the drug chart before labelling anyone familial.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Triglycerides pushed up", "points": ["Oral oestrogens, retinoids", "Corticosteroids, alcohol", "Protease inhibitors"]},
-    "right": {"title": "HDL pushed down", "points": ["Anabolic steroids (dramatic)", "Smoking, beta blockers modest", "High triglyceride states via CETP"]
+    "left": {
+     "title": "Triglycerides pushed up",
+     "points": [
+      "Oral oestrogens, retinoids",
+      "Corticosteroids, alcohol",
+      "Protease inhibitors"
+     ]
+    },
+    "right": {
+     "title": "HDL pushed down",
+     "points": [
+      "Anabolic steroids (dramatic)",
+      "Smoking, beta blockers modest",
+      "High triglyceride states via CETP"
+     ]
     }
    }
   },
@@ -54,12 +112,32 @@
    "say": "Hypobetalipoproteinaemia halves ApoB particles with fatty liver tendency. Sitosterolaemia loads plant sterols and mimics familial hypercholesterolaemia, yet responds dramatically to ezetimibe. Low HDL differentials complete the set.",
    "vis": {
     "kind": "table",
-    "cols": ["Disorder", "Transport break", "Signature"],
+    "cols": [
+     "Disorder",
+     "Transport break",
+     "Signature"
+    ],
     "rows": [
-     ["Abetalipoproteinaemia", "No ApoB assembly (MTP)", "Acanthocytes, ataxia, retinitis"],
-     ["Hypobetalipoproteinaemia", "Truncated ApoB", "Low LDL, fatty liver"],
-     ["Sitosterolaemia", "Plant sterols absorbed (ABCG5/8)", "Xanthomas, ezetimibe responsive"],
-     ["Tangier", "ABCA1 efflux absent", "Orange tonsils, very low HDL"]
+     [
+      "Abetalipoproteinaemia",
+      "No ApoB assembly (MTP)",
+      "Acanthocytes, ataxia, retinitis"
+     ],
+     [
+      "Hypobetalipoproteinaemia",
+      "Truncated ApoB",
+      "Low LDL, fatty liver"
+     ],
+     [
+      "Sitosterolaemia",
+      "Plant sterols absorbed (ABCG5/8)",
+      "Xanthomas, ezetimibe responsive"
+     ],
+     [
+      "Tangier",
+      "ABCA1 efflux absent",
+      "Orange tonsils, very low HDL"
+     ]
     ]
    }
   },
@@ -70,11 +148,74 @@
     "kind": "flow",
     "title": "Triglyceride action ladder",
     "nodes": [
-     {"id": "m", "label": "200 to 499: lifestyle, secondary causes"},
-     {"id": "h", "label": "500 plus: pancreatitis prevention"},
-     {"id": "e", "label": "1000 plus or pain: urgent lowering"}
+     {
+      "id": "m",
+      "label": "200 to 499: lifestyle, secondary causes"
+     },
+     {
+      "id": "h",
+      "label": "500 plus: pancreatitis prevention"
+     },
+     {
+      "id": "e",
+      "label": "1000 plus or pain: urgent lowering"
+     }
     ],
-    "edges": [["m", "h"], ["h", "e"]]
+    "edges": [
+     [
+      "m",
+      "h"
+     ],
+     [
+      "h",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Secondary dyslipidaemias stem from underlying systemic conditions, notably hypothyroidism, nephrotic syndrome, uncontrolled diabetes, and alcohol excess. Abetalipoproteinaemia is an autosomal recessive disorder caused by MTTP gene mutations, blocking microsomal triglyceride transfer protein and halting ApoB lipoprotein assembly. Patients present in infancy with fat malabsorption, acanthocytosis on peripheral smear, ataxia, and severe fat-soluble vitamin deficiencies, especially vitamin E.",
+   "say": "High-yield for the exam: Secondary dyslipidaemias stem from underlying systemic conditions, notably hypothyroidism, nephrotic syndrome, uncontrolled diabetes, and alcohol excess. Abetalipoproteinaemia is an autosomal recessive disorder caused by MTTP gene mutations, blocking microsomal triglyceride transfer protein and halting ApoB lipoprotein assembly. Patients present in infancy with fat malabsorption, acanthocytosis on peripheral smear, ataxia, and severe fat-soluble vitamin deficiencies, especially vitamin E.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Hypothyroidism lipid abnormality",
+      "Decreased LDL receptor expression causing marked elevation in LDL-C"
+     ],
+     [
+      "Nephrotic syndrome mechanism",
+      "Hepatic ApoB lipoprotein overproduction compensating for low oncotic pressure"
+     ],
+     [
+      "Abetalipoproteinaemia gene defect",
+      "Mutations in MTTP encoding microsomal triglyceride transfer protein"
+     ],
+     [
+      "Abetalipoproteinaemia smear hallmark",
+      "Acanthocytes or spur red cells due to abnormal membrane lipids"
+     ],
+     [
+      "Abetalipoproteinaemia neurological loss",
+      "Severe vitamin E deficiency causing spinocerebellar ataxia and neuropathy"
+     ],
+     [
+      "Friedewald formula limit",
+      "Invalid when triglycerides exceed 400 mg/dL or chylomicrons present"
+     ],
+     [
+      "Friedewald formula calculation",
+      "LDL equals total cholesterol minus HDL minus triglycerides divided by five"
+     ],
+     [
+      "Drug-induced dyslipidaemia",
+      "Isotretinoin, protease inhibitors, and ciclosporin cause prominent hypertriglyceridaemia"
+     ]
+    ]
    }
   }
  ],

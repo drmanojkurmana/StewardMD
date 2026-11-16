@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Shunt outline",
     "nodes": [
-     {"id": "g6p", "label": "Glucose-6-phosphate"},
-     {"id": "ox", "label": "Oxidative phase (2 NADPH)"},
-     {"id": "rib", "label": "Ribulose then ribose-5-P"},
-     {"id": "back", "label": "Non-oxidative return to glycolysis"}
+     {
+      "id": "g6p",
+      "label": "Glucose-6-phosphate"
+     },
+     {
+      "id": "ox",
+      "label": "Oxidative phase (2 NADPH)"
+     },
+     {
+      "id": "rib",
+      "label": "Ribulose then ribose-5-P"
+     },
+     {
+      "id": "back",
+      "label": "Non-oxidative return to glycolysis"
+     }
     ],
-    "edges": [["g6p", "ox"], ["ox", "rib"], ["rib", "back"]]
+    "edges": [
+     [
+      "g6p",
+      "ox"
+     ],
+     [
+      "ox",
+      "rib"
+     ],
+     [
+      "rib",
+      "back"
+     ]
+    ]
    }
   },
   {
@@ -25,8 +50,21 @@
    "say": "The non oxidative phase interconverts sugars reversibly through transketolase and transaldolase. Cells can make ribose without NADPH, or burn ribose back when NADPH demand dominates. One pathway serves proliferation or lipogenesis as needed.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Need NADPH most (liver, fat, red cell defence)", "points": ["Oxidative phase runs forward", "Ribose recycled to glycolysis", "More NADPH per glucose"]},
-    "right": {"title": "Need ribose most (dividing cells)", "points": ["Glycolytic sugars run backward", "Ribose-5-phosphate harvested", "NADPH not required"]
+    "left": {
+     "title": "Need NADPH most (liver, fat, red cell defence)",
+     "points": [
+      "Oxidative phase runs forward",
+      "Ribose recycled to glycolysis",
+      "More NADPH per glucose"
+     ]
+    },
+    "right": {
+     "title": "Need ribose most (dividing cells)",
+     "points": [
+      "Glycolytic sugars run backward",
+      "Ribose-5-phosphate harvested",
+      "NADPH not required"
+     ]
     }
    }
   },
@@ -35,12 +73,32 @@
    "say": "NADPH funds synthesis, glutathione defence, the phagocyte burst, P450 detoxification and nitric oxide production. NADH reports energy while NADPH funds construction and defence. Examinations test that separation relentlessly.",
    "vis": {
     "kind": "table",
-    "cols": ["NADPH consumer", "Setting", "Shunt failure clue"],
+    "cols": [
+     "NADPH consumer",
+     "Setting",
+     "Shunt failure clue"
+    ],
     "rows": [
-     ["Glutathione reductase", "Red cells, all tissues", "Oxidant haemolysis in G6PD deficiency"],
-     ["NADPH oxidase", "Neutrophils and macrophages", "Chronic granulomatous disease when oxidase fails"],
-     ["Fatty acid and steroid synthesis", "Liver, fat, adrenal, gonads", "Fed state shunt induction"],
-     ["Cytochrome P450 system", "Liver microsomes", "Drug handling capacity"]
+     [
+      "Glutathione reductase",
+      "Red cells, all tissues",
+      "Oxidant haemolysis in G6PD deficiency"
+     ],
+     [
+      "NADPH oxidase",
+      "Neutrophils and macrophages",
+      "Chronic granulomatous disease when oxidase fails"
+     ],
+     [
+      "Fatty acid and steroid synthesis",
+      "Liver, fat, adrenal, gonads",
+      "Fed state shunt induction"
+     ],
+     [
+      "Cytochrome P450 system",
+      "Liver microsomes",
+      "Drug handling capacity"
+     ]
     ]
    }
   },
@@ -54,12 +112,27 @@
    "say": "Red cell transketolase activity assays thiamine status because the enzyme needs thiamine pyrophosphate. Wernicke risk and shunt function share one cofactor. No ATP calculation includes the shunt, whose carbon returns or leaves as ribose.",
    "vis": {
     "kind": "table",
-    "cols": ["Shunt fact", "Exam application"],
+    "cols": [
+     "Shunt fact",
+     "Exam application"
+    ],
     "rows": [
-     ["No ATP made or used", "Never add shunt to yield totals"],
-     ["G6PD rate limiting, insulin induced", "Fed liver shunt high"],
-     ["Transketolase needs TPP", "Thiamine assay and Wernicke link"],
-     ["Red cell sole NADPH source", "G6PD haemolysis mechanism"]
+     [
+      "No ATP made or used",
+      "Never add shunt to yield totals"
+     ],
+     [
+      "G6PD rate limiting, insulin induced",
+      "Fed liver shunt high"
+     ],
+     [
+      "Transketolase needs TPP",
+      "Thiamine assay and Wernicke link"
+     ],
+     [
+      "Red cell sole NADPH source",
+      "G6PD haemolysis mechanism"
+     ]
     ]
    }
   },
@@ -70,11 +143,74 @@
     "kind": "flow",
     "title": "Two products, two destinies",
     "nodes": [
-     {"id": "g6p", "label": "Glucose-6-phosphate"},
-     {"id": "nad", "label": "NADPH to synthesis and defence"},
-     {"id": "rib", "label": "Ribose to PRPP and nucleotides"}
+     {
+      "id": "g6p",
+      "label": "Glucose-6-phosphate"
+     },
+     {
+      "id": "nad",
+      "label": "NADPH to synthesis and defence"
+     },
+     {
+      "id": "rib",
+      "label": "Ribose to PRPP and nucleotides"
+     }
     ],
-    "edges": [["g6p", "nad"], ["g6p", "rib"]]
+    "edges": [
+     [
+      "g6p",
+      "nad"
+     ],
+     [
+      "g6p",
+      "rib"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The hexose monophosphate shunt generates NADPH for reductive biosynthesis and glutathione reduction, alongside ribose-5-phosphate for nucleotide synthesis. Glucose-6-phosphate dehydrogenase catalyzes the rate-limiting committed step. G6PD deficiency is an X-linked recessive disorder rendering erythrocytes vulnerable to oxidative stress from antimalarials, sulfonamides, or fava beans. Oxidized hemoglobin precipitates as Heinz bodies, which splenic macrophages remove to create bite cells.",
+   "say": "High-yield for the exam: The hexose monophosphate shunt generates NADPH for reductive biosynthesis and glutathione reduction, alongside ribose-5-phosphate for nucleotide synthesis. Glucose-6-phosphate dehydrogenase catalyzes the rate-limiting committed step. G6PD deficiency is an X-linked recessive disorder rendering erythrocytes vulnerable to oxidative stress from antimalarials, sulfonamides, or fava beans. Oxidized hemoglobin precipitates as Heinz bodies, which splenic macrophages remove to create bite cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "HMP rate-limiting enzyme",
+      "Glucose-6-phosphate dehydrogenase (G6PD), generating initial cytosolic NADPH"
+     ],
+     [
+      "Primary NADPH functions",
+      "Glutathione reduction, fatty acid synthesis, cholesterol synthesis, and respiratory burst"
+     ],
+     [
+      "G6PD deficiency inheritance",
+      "X-linked recessive enzymopathy with increased resistance to falciparum malaria"
+     ],
+     [
+      "Classic hemolytic triggers",
+      "Primaquine, dapsone, rasburicase, nitrofurantoin, infections, and fava beans"
+     ],
+     [
+      "Heinz bodies composition",
+      "Denatured hemoglobin aggregates visualized with supravital methyl violet stain"
+     ],
+     [
+      "Bite cells origin",
+      "Splenic macrophages excise Heinz bodies from erythrocyte membranes"
+     ],
+     [
+      "Non-oxidative branch enzymes",
+      "Transketolase and transaldolase interconvert pentoses and glycolytic intermediates"
+     ],
+     [
+      "Transketolase coenzyme",
+      "Thiamine pyrophosphate (TPP); diagnostic activation test for B1 deficiency"
+     ]
+    ]
    }
   }
  ],

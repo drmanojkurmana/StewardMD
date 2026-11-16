@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Fructose entry below control",
     "nodes": [
-     {"id": "fru", "label": "Fructose (liver)"},
-     {"id": "f1p", "label": "Fructose-1-phosphate (fructokinase)"},
-     {"id": "tri", "label": "DHAP plus glyceraldehyde (aldolase B)"},
-     {"id": "gly", "label": "Glycolysis, fat synthesis"}
+     {
+      "id": "fru",
+      "label": "Fructose (liver)"
+     },
+     {
+      "id": "f1p",
+      "label": "Fructose-1-phosphate (fructokinase)"
+     },
+     {
+      "id": "tri",
+      "label": "DHAP plus glyceraldehyde (aldolase B)"
+     },
+     {
+      "id": "gly",
+      "label": "Glycolysis, fat synthesis"
+     }
     ],
-    "edges": [["fru", "f1p"], ["f1p", "tri"], ["tri", "gly"]]
+    "edges": [
+     [
+      "fru",
+      "f1p"
+     ],
+     [
+      "f1p",
+      "tri"
+     ],
+     [
+      "tri",
+      "gly"
+     ]
+    ]
    }
   },
   {
@@ -25,8 +50,21 @@
    "say": "Missing fructokinase causes essential fructosuria, a benign spill after fruit that reduces Benedict reagent but ignores glucose strips. No hypoglycaemia or liver disease follows. Not every reducing sugar in urine is glucose.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Essential fructosuria (fructokinase absent)", "points": ["Fructose in urine only", "Blood glucose normal", "Benign, no diet needed"]},
-    "right": {"title": "Hereditary fructose intolerance (aldolase B absent)", "points": ["Hypoglycaemia, vomiting, liver failure", "Starts at weaning", "Strict lifelong avoidance"]
+    "left": {
+     "title": "Essential fructosuria (fructokinase absent)",
+     "points": [
+      "Fructose in urine only",
+      "Blood glucose normal",
+      "Benign, no diet needed"
+     ]
+    },
+    "right": {
+     "title": "Hereditary fructose intolerance (aldolase B absent)",
+     "points": [
+      "Hypoglycaemia, vomiting, liver failure",
+      "Starts at weaning",
+      "Strict lifelong avoidance"
+     ]
     }
    }
   },
@@ -35,12 +73,27 @@
    "say": "Missing aldolase B traps phosphate and strangles ATP, so glucose release fails after fructose, sucrose or sorbitol. Vomiting, hypoglycaemia and liver injury follow weaning. Affected children develop protective aversion to sweets.",
    "vis": {
     "kind": "table",
-    "cols": ["Trapped step consequence", "Clinical translation"],
+    "cols": [
+     "Trapped step consequence",
+     "Clinical translation"
+    ],
     "rows": [
-     ["Phosphate sequestered, ATP falls", "Both glucose release routes fail"],
-     ["Fructose-1-phosphate inhibits enzymes", "Hypoglycaemia after sweet feeds"],
-     ["Repeated liver and tubule injury", "Failure to thrive, Fanconi pattern"],
-     ["Learned sweet aversion", "History clue in older children"]
+     [
+      "Phosphate sequestered, ATP falls",
+      "Both glucose release routes fail"
+     ],
+     [
+      "Fructose-1-phosphate inhibits enzymes",
+      "Hypoglycaemia after sweet feeds"
+     ],
+     [
+      "Repeated liver and tubule injury",
+      "Failure to thrive, Fanconi pattern"
+     ],
+     [
+      "Learned sweet aversion",
+      "History clue in older children"
+     ]
     ]
    }
   },
@@ -54,8 +107,21 @@
    "say": "Muscle phosphorylates fructose slowly with hexokinase inside glycolysis, so no trap forms there. Liver specificity follows enzyme distribution. Seminal vesicles make fructose as sperm fuel through the polyol route.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Liver route (fast, trappable)", "points": ["Fructokinase to F-1-P", "Aldolase B splits", "Intolerance lives here"]},
-    "right": {"title": "Muscle route (slow, safe)", "points": ["Hexokinase to F-6-P", "Enters at PFK-1 control", "No phosphate trap"]
+    "left": {
+     "title": "Liver route (fast, trappable)",
+     "points": [
+      "Fructokinase to F-1-P",
+      "Aldolase B splits",
+      "Intolerance lives here"
+     ]
+    },
+    "right": {
+     "title": "Muscle route (slow, safe)",
+     "points": [
+      "Hexokinase to F-6-P",
+      "Enters at PFK-1 control",
+      "No phosphate trap"
+     ]
     }
    }
   },
@@ -66,12 +132,82 @@
     "kind": "flow",
     "title": "Polyol pathway in hyperglycaemia",
     "nodes": [
-     {"id": "glu", "label": "Glucose excess"},
-     {"id": "sor", "label": "Sorbitol (aldose reductase, NADPH used)"},
-     {"id": "fru", "label": "Fructose (sorbitol dehydrogenase)"},
-     {"id": "dmg", "label": "Cataract, nerve injury"}
+     {
+      "id": "glu",
+      "label": "Glucose excess"
+     },
+     {
+      "id": "sor",
+      "label": "Sorbitol (aldose reductase, NADPH used)"
+     },
+     {
+      "id": "fru",
+      "label": "Fructose (sorbitol dehydrogenase)"
+     },
+     {
+      "id": "dmg",
+      "label": "Cataract, nerve injury"
+     }
     ],
-    "edges": [["glu", "sor"], ["sor", "fru"], ["fru", "dmg"]]
+    "edges": [
+     [
+      "glu",
+      "sor"
+     ],
+     [
+      "sor",
+      "fru"
+     ],
+     [
+      "fru",
+      "dmg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Essential fructosuria is a benign, asymptomatic autosomal recessive condition caused by fructokinase deficiency, resulting in fructose appearing in urine. Hereditary fructose intolerance stems from aldolase B deficiency, trapping fructose-1-phosphate and depleting intracellular ATP and inorganic phosphate. This intracellular trapping inhibits glycogenolysis and gluconeogenesis, producing profound postprandial hypoglycaemia, vomiting, and jaundice following dietary fructose, sucrose, or sorbitol ingestion.",
+   "say": "High-yield for the exam: Essential fructosuria is a benign, asymptomatic autosomal recessive condition caused by fructokinase deficiency, resulting in fructose appearing in urine. Hereditary fructose intolerance stems from aldolase B deficiency, trapping fructose-1-phosphate and depleting intracellular ATP and inorganic phosphate. This intracellular trapping inhibits glycogenolysis and gluconeogenesis, producing profound postprandial hypoglycaemia, vomiting, and jaundice following dietary fructose, sucrose, or sorbitol ingestion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Essential fructosuria defect",
+      "Fructokinase deficiency; completely benign and asymptomatic reducing substance in urine"
+     ],
+     [
+      "Hereditary fructose intolerance defect",
+      "Aldolase B deficiency causing intracellular fructose-1-phosphate accumulation"
+     ],
+     [
+      "HFI metabolic crisis mechanism",
+      "Phosphate trapping inhibits glycogen phosphorylase and fructose-1,6-bisphosphatase"
+     ],
+     [
+      "HFI dietary triggers",
+      "Fructose, sucrose (glucose plus fructose), and sorbitol"
+     ],
+     [
+      "Classic galactosemia enzyme defect",
+      "Galactose-1-phosphate uridylyltransferase (GALT) deficiency with severe toxic accumulation"
+     ],
+     [
+      "Classic galactosemia presentation",
+      "Cataracts, hepatomegaly, jaundice, failure to thrive, and E. coli sepsis"
+     ],
+     [
+      "Galactokinase deficiency hallmark",
+      "Isolated juvenile cataract development without hepatomegaly or mental retardation"
+     ],
+     [
+      "Cataract formation pathway",
+      "Aldose reductase converts accumulated galactose into toxic galactitol"
+     ]
+    ]
    }
   }
  ],
