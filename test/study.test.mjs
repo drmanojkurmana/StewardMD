@@ -75,7 +75,7 @@ test("page order: move up and down, ends stay put, input not mutated", () => {
   assert.deepEqual(a, [1, 2, 3]);
 });
 
-test("page backgrounds: blank empty, ruled rows, grid squares, Cornell margin and summary", () => {
+test("page backgrounds: blank empty, ruled rows, grid squares, Cornell margin and summary, dotgrid points", () => {
   assert.equal(S.bgLines("blank", 1.414).length, 0);
   const ruled = S.bgLines("ruled", 1.414);
   assert.ok(ruled.length > 20 && ruled.every((l) => l[1] === l[3] && l[3] < 1.414 && l[0] === 0 && l[2] === 1));
@@ -84,6 +84,44 @@ test("page backgrounds: blank empty, ruled rows, grid squares, Cornell margin an
   const c = S.bgLines("cornell", 1.414);
   assert.ok(c.some((l) => l[0] === 0.3 && l[2] === 0.3) && c.some((l) => l[1] === 1.414 * 0.8 && l[3] === 1.414 * 0.8));
   assert.ok(c.every((l) => l[1] <= 1.414 * 0.8 + 1e-9));
+  const dots = S.bgLines("dotgrid", 1.414);
+  assert.ok(dots.length > 50 && dots.every((l) => Math.abs(l[0] - l[2]) < 0.001 && l[1] === l[3]));
+});
+
+test("lasso: point in polygon and stroke containment", () => {
+  const poly = [[0.2, 0.2], [0.8, 0.2], [0.8, 0.8], [0.2, 0.8]];
+  assert.equal(S.pointInPoly(0.5, 0.5, poly), true);
+  assert.equal(S.pointInPoly(0.1, 0.5, poly), false);
+  assert.equal(S.pointInPoly(0.9, 0.9, poly), false);
+
+  const insideStroke = { pts: [[0.4, 0.4, 0.5], [0.5, 0.5, 0.5], [0.6, 0.6, 0.5]] };
+  const outsideStroke = { pts: [[0.05, 0.05, 0.5], [0.1, 0.1, 0.5]] };
+  assert.equal(S.lassoHit(insideStroke, poly), true);
+  assert.equal(S.lassoHit(outsideStroke, poly), false);
+});
+
+test("scribble detection: fast back-and-forth zig-zag detected, line or circle is not", () => {
+  // Straight line
+  const line = Array.from({ length: 15 }, (_, i) => [0.1 + i * 0.05, 0.1, 0.5]);
+  assert.equal(S.isScribble(line), false);
+
+  // Smooth circle
+  const circle = Array.from({ length: 24 }, (_, i) => {
+    const a = (i / 24) * 2 * Math.PI;
+    return [0.5 + 0.1 * Math.cos(a), 0.5 + 0.1 * Math.sin(a), 0.5];
+  });
+  assert.equal(S.isScribble(circle), false);
+
+  // Back-and-forth zig-zag scribble: 5 reversals
+  const scribble = [];
+  for (let r = 0; r < 5; r++) {
+    const xStart = r % 2 === 0 ? 0.2 : 0.4;
+    const xEnd = r % 2 === 0 ? 0.4 : 0.2;
+    for (let s = 0; s < 4; s++) {
+      scribble.push([xStart + (xEnd - xStart) * (s / 3), 0.3 + r * 0.01 + s * 0.002, 0.5]);
+    }
+  }
+  assert.equal(S.isScribble(scribble), true);
 });
 
 test("snippet: case-insensitive, highlight split, ellipsis at cut ends, no match is null", () => {
