@@ -122,13 +122,16 @@
   function moveItem(a, i, dir) { var j = i + dir, b = a.slice(); if (i < 0 || i >= a.length || j < 0 || j >= a.length) return b; b[i] = a[j]; b[j] = a[i]; return b; }
   // Notebook page background as segments [x1, y1, x2, y2] in page-width units (page is 1 wide, ratio tall).
   function bgLines(style, ratio) {
-    var L = [], s = 0.05, y, x, end = style === "cornell" ? ratio * 0.8 : ratio;
-    if (style === "ruled" || style === "cornell") for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]);
-    if (style === "grid") { for (y = s; y < ratio; y += s) L.push([0, y, 1, y]); for (x = s; x < 1; x += s) L.push([x, 0, x, ratio]); }
-    if (style === "dotgrid" || style === "dots") { for (y = s * 2; y < ratio; y += s) for (x = s; x < 1; x += s) L.push([x, y, x + 0.0001, y]); }
-    if (style === "cornell") { L.push([0.3, s * 2, 0.3, end]); L.push([0, end, 1, end]); }
+    var base = String(style || "").replace(/-dark$/, ""), L = [], s = 0.05, y, x, end = base === "cornell" ? ratio * 0.8 : ratio;
+    if (base === "ruled" || base === "cornell") for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]);
+    else if (base === "ruled-wide") { s = 0.10; for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]); }
+    if (base === "grid") { for (y = s; y < ratio; y += s) L.push([0, y, 1, y]); for (x = s; x < 1; x += s) L.push([x, 0, x, ratio]); }
+    if (base === "dotgrid" || base === "dots") { for (y = s * 2; y < ratio; y += s) for (x = s; x < 1; x += s) L.push([x, y, x + 0.0001, y]); }
+    if (base === "cornell") { L.push([0.3, s * 2, 0.3, end]); L.push([0, end, 1, end]); }
+    if (base === "mcq") { var top = 8, rowH = 18, colW = 1 / 6; L.push([0.03, 0.03 * ratio, 0.97, 0.03 * ratio]); for (var r = 0; r < 20; r++) { var y0 = 44 / (ratio * 400) + r * 0.02; if (y0 + 0.02 > ratio - 0.02) break; L.push([0.03, y0, 0.13, y0]); for (var c = 0; c < 5; c++) { var cx = 0.15 + c * colW; L.push([cx, y0, cx + 0.01, y0]); } } }
     return L;
   }
+  function tplForPid(pid) { try { var m = V && V.doc && V.doc.tplMap; if (m && m[pid]) return m[pid]; if (m && m[String(pid)]) return m[String(pid)]; } catch (e) {} try { if (V && V.nb && V.nb.tplMap && V.nb.tplMap[pid]) return V.nb.tplMap[pid]; } catch (e2) {} return (V && V.nb && V.nb.style) || "ruled"; }
   // Snippet around the first case-insensitive match of q in text: { pre, hit, post } or null.
   function snip(text, q, r) {
     var t = String(text || ""), k = String(q || ""), i = k ? t.toLowerCase().indexOf(k.toLowerCase()) : -1, a, b;
@@ -680,9 +683,13 @@
 
   /* ---- notebooks (A4) ---- */
   function drawBg(ctx, style, ratio, W) {
-    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
-    bgLines(style, ratio).forEach(function (l) { ctx.moveTo(l[0] * W, l[1] * W); ctx.lineTo(l[2] * W, l[3] * W); });
+    var dark = /-dark$/.test(style || ""), base = String(style || "").replace(/-dark$/, "");
+    ctx.fillStyle = dark ? "#0D1D23" : "#fff"; ctx.fillRect(0, 0, W, W * ratio);
+    ctx.strokeStyle = dark ? "rgba(66,205,181,0.28)" : "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
+    bgLines(base, ratio).forEach(function (l) { ctx.moveTo(l[0] * W, l[1] * W); ctx.lineTo(l[2] * W, l[3] * W); });
+    /* dotgrid dots need filled points */
+    if (base === "dotgrid" || base === "dots") { ctx.fillStyle = dark ? "rgba(66,205,181,0.5)" : "#7a8aa0"; ctx.stroke(); for (var i = 0; i < 0; i++) {} ctx.beginPath(); var dg = 0.06; for (var yy = dg * 1.5; yy < ratio; yy += dg) for (var xx = dg; xx < 1; xx += dg) { ctx.fillRect(xx * W, yy * W, Math.max(1, W / 400), Math.max(1, W / 400)); } return; }
+    if (base === "mcq") { ctx.stroke(); return; }
     ctx.stroke();
   }
   function makeNotebook(title, style, size) {
@@ -699,13 +706,15 @@
   }
   function nbAct(a) {
     curPage(); var n = V.cur || 1, d = V.nb, ord = d.ord;
-    if (a === "st-addpg") { ord.splice(n, 0, d.next++); return reloadNb(n + 1); }
+    if (a === "st-addpg") { var nid = d.next++; ord.splice(n, 0, nid); if (!d.tplMap) d.tplMap = {}; if (!d.tplMap[nid]) d.tplMap[nid] = d.style; return reloadNb(n + 1); }
     if (a === "st-up" || a === "st-dn") { var dir = a === "st-up" ? -1 : 1; d.ord = moveItem(ord, n - 1, dir); return reloadNb(Math.max(1, Math.min(d.ord.length, n + dir))); }
     if (ord.length < 2) return host.toast("A notebook needs at least one page.");
-    if (!G.confirm("Delete this page and what you drew on it? This cannot be undone.")) return;
-    var gone = ord.splice(n - 1, 1)[0], dead = V.strokes.filter(function (s) { return s.page === gone; });
-    V.stack = newStack();
-    return Promise.all(dead.map(function (s) { return del("strokes", s.id); })).then(saveStack).then(function () { return reloadNb(Math.min(n, ord.length)); });
+    if (!G.confirm("Delete this page and what you drew on it?")) return;
+    var _gone = ord.splice(n - 1, 1)[0], _dead = V.strokes.filter(function (s) { return s.page === _gone; });
+    _dead.forEach(function (s) { s.gone = true; put("strokes", s); });
+    if (d.tplMap) delete d.tplMap[_gone];
+    push(V.stack, { t: "del", ids: _dead.map(function (s) { return s.id; }) });
+    return put("docs", d).then(saveStack).then(function () { return reloadNb(Math.min(n, ord.length)); });
   }
 
   /* ---- search (A6) ---- */
@@ -858,8 +867,9 @@
       if (!cv) return;
       var ctx = cv.getContext("2d"), cw = cv.width, ch = cv.height;
       if (V.nb) {
-        drawBg(ctx, V.nb.style, V.ratio, cw);
-        var pageId = V.nb.ord[n - 1];
+        var _pid0 = V.nb.ord[n - 1];
+        drawBg(ctx, tplForPid(_pid0), V.ratio, cw);
+        var pageId = _pid0;
         V.strokes.forEach(function (s) {
           if (s.page === pageId && !s.gone) drawStroke(ctx, s, cw, ch, 1);
         });
@@ -969,8 +979,8 @@
       c.width = w; c.height = h;
       var ctx = c.getContext("2d");
       if (V.nb) {
-        drawBg(ctx, V.nb.style, V.ratio, w);
         var p1 = V.nb.ord[0];
+        drawBg(ctx, tplForPid(p1), V.ratio, w);
         V.strokes.forEach(function (s) { if (s.page === p1 && !s.gone) drawStroke(ctx, s, w, h, 1); });
         V.doc.thumb = c.toDataURL("image/jpeg", 0.7);
         put("docs", V.doc);
@@ -1138,7 +1148,7 @@
       ov.width = Math.floor(cw * dpr); ov.height = Math.floor(ch * dpr); ov.className = "st-ov"; ov.setAttribute("data-n", n);
       p.cv = cv; p.ov = ov; p.el.appendChild(cv); p.el.appendChild(ov);
       bindInk(ov, n); redraw(n);
-      if (!page) return drawBg(cv.getContext("2d"), V.nb.style, V.ratio, cv.width);
+      if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; return drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); }
       p.task = page.render({ canvasContext: cv.getContext("2d"), viewport: vp });
       p.task.promise.then(function () {
         return !V || V.pg[n] !== p || p.gen !== gen ? null : textLayer(page, p, cw / v1.width);
@@ -1788,5 +1798,11 @@
   function leave() { closeViewer(); }
   function homeRow(h) { host = h; return ""; }
 
-  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; } };
+  G.STUDY = {
+    on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; },
+    _v: function () { return V; }, _redraw: redraw, _pushUndo: function (op) { if (V) { push(V.stack, op); saveStack(); syncTb(); } },
+    _saveStack: saveStack, _put: put, _get: get, _all: all, _strokesOf: strokesOf, _uid: uid, _drawBg: drawBg, _drawStroke: drawStroke, _del: del,
+    _reloadNb: reloadNb, _host: function () { return host; }, _syncTb: syncTb, _setZoom: setZoom, _openPdf: openPdf, _pdfjs: pdfjs, _loadOriginal: loadOriginal,
+    _doScan: doScan, _pickPhotos: pickPhotos, _pickPdf: pickPdf, _importPhotos: importPhotos
+  };
 })(typeof window !== "undefined" ? window : this);

@@ -230,6 +230,65 @@ for (const dev of DEVICES) {
   }
 }
 
+/* Phase 3: pages and navigation — extra captures to .fleet-reports/study-p3 */
+const P3_DIR = join(HERE, "..", ".fleet-reports", "study-p3");
+mkdirSync(P3_DIR, { recursive: true });
+for (const dev of DEVICES) {
+  for (const theme of THEMES) {
+    const ctx = await browser.newContext({ viewport: { width: dev.width, height: dev.height }, deviceScaleFactor: 2 });
+    const page = await ctx.newPage();
+    await page.route("**/api/**", r => r.fulfill({ status: 404, body: "{}" }));
+    await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = () => "Clinical Notes"; });
+    await page.goto(BASE + "?prep=1&study=1", { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
+    await page.evaluate(() => { ["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(k=>{const e=document.getElementById(k); if(e) e.remove();}); PREP.open(); });
+    await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row, .pnv-tab", { timeout: 30000 });
+    await page.evaluate((th)=>document.body.classList.toggle("dark", th==="dark"), theme);
+    await page.evaluate(() => new Promise(r=>{ const q=indexedDB.deleteDatabase("study"); q.onsuccess=q.onerror=q.onblocked=()=>r(); }));
+    await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+    await page.waitForSelector("#stLib");
+    /* create notebook */
+    if (await page.locator('[data-act="st-newnb"]').count()) {
+      await page.click('[data-act="st-newnb"]');
+      await page.fill("#stNbT", "P3 capture");
+      await page.click('[data-act="st-mknb"]');
+      await page.waitForSelector("#stPages", { timeout: 15000 });
+    }
+    await page.evaluate((th)=>document.body.classList.toggle("dark", th==="dark"), theme);
+    await sleep(250);
+    await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-editor-topbar.png`) });
+    /* Add Page popover */
+    if (await page.locator('[data-act="st-p3-add"]').count()) {
+      await page.click('[data-act="st-p3-add"]');
+      await page.waitForSelector("#stP3AddSheet", { timeout: 5000 }).catch(()=>{});
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-add-page.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3AddSheet")?.remove(); });
+    }
+    /* More menu */
+    if (await page.locator('[data-act="st-p3-more"]').count()) {
+      await page.click('[data-act="st-p3-more"]');
+      await page.waitForSelector("#stP3MoreSheet", { timeout: 5000 }).catch(()=>{});
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-more.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3MoreSheet")?.remove(); });
+    }
+    /* Navigator thumbnails */
+    if (await page.locator('[data-act="st-p3-grid"]').count()) {
+      await page.click('[data-act="st-p3-grid"]');
+      await page.waitForSelector("#stP3NavSheet", { timeout: 5000 }).catch(()=>{});
+      await sleep(300);
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-navigator.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3NavSheet")?.remove(); });
+      /* Favorites empty state */
+      await page.click('[data-act="st-p3-grid"]');
+      await page.waitForSelector("#stP3NavSheet", { timeout: 5000 }).catch(()=>{});
+      await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='favs']");
+      await sleep(200);
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-favorites-empty.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3NavSheet")?.remove(); });
+    }
+    await ctx.close();
+  }
+}
 await browser.close();
 serveProc.kill();
-console.log(`\nAll screenshots captured successfully into ${OUT_DIR}!`);
+console.log(`\nAll screenshots captured successfully into ${OUT_DIR} and ${P3_DIR}!`);
