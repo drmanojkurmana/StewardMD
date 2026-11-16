@@ -10,11 +10,27 @@
    "say": "Insulin induces glucokinase over hours, raises fructose-2,6-bisphosphate within minutes in liver, and keeps pyruvate kinase active. Glucagon reverses each liver effect. Muscle ignores glucagon because it never exports glucose, answering instead to adrenaline, AMP and calcium.",
    "vis": {
     "kind": "table",
-    "cols": ["Hormone signal", "Liver glycolysis", "Muscle glycolysis"],
+    "cols": [
+     "Hormone signal",
+     "Liver glycolysis",
+     "Muscle glycolysis"
+    ],
     "rows": [
-     ["Insulin (fed)", "Strongly on", "On via GLUT4 entry"],
-     ["Glucagon (fasting)", "Off, glucose exported", "No direct effect"],
-     ["Adrenaline (stress)", "Off in liver", "Strongly on for work"]
+     [
+      "Insulin (fed)",
+      "Strongly on",
+      "On via GLUT4 entry"
+     ],
+     [
+      "Glucagon (fasting)",
+      "Off, glucose exported",
+      "No direct effect"
+     ],
+     [
+      "Adrenaline (stress)",
+      "Off in liver",
+      "Strongly on for work"
+     ]
     ]
    }
   },
@@ -25,12 +41,37 @@
     "kind": "flow",
     "title": "Fed liver overflow to fat",
     "nodes": [
-     {"id": "glu", "label": "Glucose floods liver"},
-     {"id": "pyr", "label": "Pyruvate to acetyl-CoA"},
-     {"id": "cit", "label": "Citrate exported to cytosol"},
-     {"id": "fat", "label": "Fatty acids and VLDL"}
+     {
+      "id": "glu",
+      "label": "Glucose floods liver"
+     },
+     {
+      "id": "pyr",
+      "label": "Pyruvate to acetyl-CoA"
+     },
+     {
+      "id": "cit",
+      "label": "Citrate exported to cytosol"
+     },
+     {
+      "id": "fat",
+      "label": "Fatty acids and VLDL"
+     }
     ],
-    "edges": [["glu", "pyr"], ["pyr", "cit"], ["cit", "fat"]]
+    "edges": [
+     [
+      "glu",
+      "pyr"
+     ],
+     [
+      "pyr",
+      "cit"
+     ],
+     [
+      "cit",
+      "fat"
+     ]
+    ]
    }
   },
   {
@@ -43,12 +84,32 @@
    "say": "The brain burns glucose through GLUT1 and GLUT3 transporters that ignore insulin, protecting supply during fasting. During prolonged starvation it adapts to ketones for roughly two thirds of its fuel, sparing glucose and slowing muscle protein breakdown.",
    "vis": {
     "kind": "table",
-    "cols": ["Tissue", "Glycolysis habit", "Reason"],
+    "cols": [
+     "Tissue",
+     "Glycolysis habit",
+     "Reason"
+    ],
     "rows": [
-     ["Brain", "Obligate glucose, then ketones", "Fatty acids cross barrier poorly"],
-     ["Red cells", "Glycolysis only", "No mitochondria"],
-     ["Renal medulla, retina", "Mostly glycolytic", "Low oxygen environment"],
-     ["Exercising muscle", "Glycolysis plus oxidation", "Burst power exceeds oxygen supply"]
+     [
+      "Brain",
+      "Obligate glucose, then ketones",
+      "Fatty acids cross barrier poorly"
+     ],
+     [
+      "Red cells",
+      "Glycolysis only",
+      "No mitochondria"
+     ],
+     [
+      "Renal medulla, retina",
+      "Mostly glycolytic",
+      "Low oxygen environment"
+     ],
+     [
+      "Exercising muscle",
+      "Glycolysis plus oxidation",
+      "Burst power exceeds oxygen supply"
+     ]
     ]
    }
   },
@@ -57,8 +118,21 @@
    "say": "Many cancers ferment glucose to lactate even when oxygen is available, the Warburg effect. Rapid glycolysis supplies carbon skeletons for division at the cost of huge glucose uptake. Fluorodeoxyglucose PET lights up tumours because they trap the analogue through hexokinase.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Normal aerobic cell", "points": ["Pyruvate oxidised fully", "About 30 ATP per glucose", "Modest glucose uptake"]},
-    "right": {"title": "Warburg cancer cell", "points": ["Lactate despite oxygen", "2 ATP per glucose in cytosol", "Avid glucose uptake on PET"]
+    "left": {
+     "title": "Normal aerobic cell",
+     "points": [
+      "Pyruvate oxidised fully",
+      "About 30 ATP per glucose",
+      "Modest glucose uptake"
+     ]
+    },
+    "right": {
+     "title": "Warburg cancer cell",
+     "points": [
+      "Lactate despite oxygen",
+      "2 ATP per glucose in cytosol",
+      "Avid glucose uptake on PET"
+     ]
     }
    }
   },
@@ -69,11 +143,74 @@
     "kind": "flow",
     "title": "Two arms of diabetic hyperglycaemia",
     "nodes": [
-     {"id": "res", "label": "Muscle and fat resist insulin"},
-     {"id": "liv", "label": "Liver overproduces glucose"},
-     {"id": "high", "label": "Blood glucose stays high"}
+     {
+      "id": "res",
+      "label": "Muscle and fat resist insulin"
+     },
+     {
+      "id": "liv",
+      "label": "Liver overproduces glucose"
+     },
+     {
+      "id": "high",
+      "label": "Blood glucose stays high"
+     }
     ],
-    "edges": [["res", "high"], ["liv", "high"]]
+    "edges": [
+     [
+      "res",
+      "high"
+     ],
+     [
+      "liv",
+      "high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Phosphofructokinase-1 is the primary rate-limiting and committed enzyme of glycolysis, allosterically activated by fructose-2,6-bisphosphate and AMP, and inhibited by ATP and citrate. The bifunctional enzyme PFK-2/FBPase-2 regulates fructose-2,6-bisphosphate: insulin dephosphorylates the enzyme to activate PFK-2, accelerating glycolysis in the fed state, while glucagon phosphorylates it via cyclic AMP, activating FBPase-2 to favor gluconeogenesis. Glucokinase in liver has a high Km for glucose, acting as a postprandial glucose sensor.",
+   "say": "Phosphofructokinase-1 is the primary rate-limiting and committed enzyme of glycolysis, allosterically activated by fructose-2,6-bisphosphate and AMP, and inhibited by ATP and citrate. The bifunctional enzyme PFK-2/FBPase-2 regulates fructose-2,6-bisphosphate: insulin dephosphorylates the enzyme to activate PFK-2, accelerating glycolysis in the fed state, while glucagon phosphorylates it via cyclic AMP, activating FBPase-2 to favor gluconeogenesis. Glucokinase in liver has a high Km for glucose, acting as a postprandial glucose sensor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Committed step of glycolysis",
+      "Phosphofructokinase-1 converting fructose-6-phosphate to F-1,6-BP"
+     ],
+     [
+      "Most potent PFK-1 activator",
+      "Fructose-2,6-bisphosphate overcoming high ATP inhibition"
+     ],
+     [
+      "Fed state insulin effect",
+      "Dephosphorylates bifunctional enzyme, activating PFK-2 kinase"
+     ],
+     [
+      "Fasting state glucagon effect",
+      "PKA phosphorylates bifunctional enzyme, activating FBPase-2 phosphatase"
+     ],
+     [
+      "Hexokinase vs Glucokinase Km",
+      "Hexokinase low Km high affinity; Glucokinase high Km low affinity"
+     ],
+     [
+      "Hexokinase feedback inhibition",
+      "Inhibited by its product glucose-6-phosphate unlike glucokinase"
+     ],
+     [
+      "Glucokinase regulatory protein",
+      "Sequestered in nucleus by GKRP at low blood glucose"
+     ],
+     [
+      "Maturity-onset diabetes of young 2",
+      "Inactivating heterozygous mutations in glucokinase gene MODY2"
+     ]
+    ]
    }
   }
  ],
