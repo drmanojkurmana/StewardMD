@@ -1,0 +1,381 @@
+{
+ "v": 1,
+ "module": "sne-adem-other-demyelination",
+ "title": "ADEM and other demyelinating disorders",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Acute disseminated encephalomyelitis** is an immune mediated demyelinating disease that follows infection or vaccination. It presents with multifocal deficits, encephalopathy, and seizures over days to weeks. Children are the typical victims and the **brainstem and cord** are commonly involved. Cerebrospinal fluid shows pleocytosis with raised protein and no oligoclonal bands.",
+   "say": "Acute disseminated encephalomyelitis is an immune mediated demyelinating disease that follows infection or vaccination. It presents with multifocal deficits, encephalopathy and seizures over days to weeks. Children are the typical victims and the brainstem and cord are commonly involved. Cerebrospinal fluid shows pleocytosis with raised protein and no oligoclonal bands.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ms-fig1.webp",
+    "alt": "MRI brain showing demyelinating lesions in multiple sclerosis and ADEM.",
+    "caption": "Demyelinating lesions in periventricular and juxtacortical regions (StewardMD).",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mechanism is **molecular mimicry** where a post infectious immune response attacks myelin proteins. Demyelination is perivenular and monophasic, which separates it from multiple sclerosis. **Bickerstaff brainstem encephalitis** is the brainstem variant with ataxia and ophthalmoplegia. Recovery without sequelae is expected in most patients.",
+   "say": "The mechanism is molecular mimicry where a post infectious immune response attacks myelin proteins. Demyelination is perivenular and monophasic, which separates it from multiple sclerosis. Bickerstaff brainstem encephalitis is the brainstem variant with ataxia and ophthalmoplegia. Recovery without sequelae is expected in most patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Infection or vaccination triggers immunity"
+     },
+     {
+      "id": "b",
+      "label": "Perivenular demyelination develops"
+     },
+     {
+      "id": "c",
+      "label": "Multifocal deficits and encephalopathy"
+     },
+     {
+      "id": "d",
+      "label": "Monophasic course with recovery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Magnetic resonance imaging** shows bilateral, asymmetric, ill defined white matter lesions with deep grey involvement. Lesions are of the same age, which is the single most useful imaging clue against multiple sclerosis. **Enhancement** is variable and homogeneous. The **cord** shows longitudinally extensive lesions more often than in multiple sclerosis.",
+   "say": "Magnetic resonance imaging shows bilateral, asymmetric, ill defined white matter lesions with deep grey involvement. Lesions are of the same age, which is the single most useful imaging clue against multiple sclerosis. Enhancement is variable and homogeneous. Longitudinally extensive cord lesions are more common than in multiple sclerosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging feature",
+     "Acute disseminated encephalomyelitis",
+     "Multiple sclerosis"
+    ],
+    "rows": [
+     [
+      "Lesion age",
+      "Same age lesions",
+      "Different ages, dissemination in time"
+     ],
+     [
+      "Deep grey involvement",
+      "Common",
+      "Uncommon"
+     ],
+     [
+      "Brainstem lesions",
+      "Common",
+      "Less common"
+     ],
+     [
+      "Cord lesions",
+      "Longitudinally extensive",
+      "Short segment, peripheral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First line** therapy is high dose intravenous steroid for 5 days. **Plasma exchange** is added for steroid refractory cases and works well in antibody mediated disease. **Intravenous immunoglobulin** is the third option. Most patients recover over weeks with rehabilitation support.",
+   "say": "First line therapy is high dose intravenous steroid for 5 days. Plasma exchange is added for steroid refractory cases and works well in antibody mediated disease. Intravenous immunoglobulin is the third option. Most patients recover over weeks with rehabilitation support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Regimen",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Intravenous steroid",
+      "High dose for 5 days",
+      "First line, most respond"
+     ],
+     [
+      "Plasma exchange",
+      "Several sessions",
+      "Steroid refractory cases"
+     ],
+     [
+      "Intravenous immunoglobulin",
+      "Five days course",
+      "Alternative third option"
+     ],
+     [
+      "Rehabilitation",
+      "Physiotherapy and speech support",
+      "Weeks to months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Marburg disease** is the fulminant variant with rapid progression to death. **Tumefactive demyelination** mimics tumours with large tumefactive lesions and mass effect. **Balo concentric sclerosis** shows concentric rings on imaging. **Devic disease** is now classified separately as a neuromyelitis optica spectrum disorder with aquaporin antibodies.",
+   "say": "Marburg disease is the fulminant variant with rapid progression to death. Tumefactive demyelination is a tumour mimic with large tumefactive lesions and mass effect. Balo concentric sclerosis shows concentric rings on imaging. Devic disease is now classified separately as a neuromyelitis optica spectrum disorder with aquaporin antibodies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Variant",
+     "Picture",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Marburg disease",
+      "Fulminant demyelination",
+      "Rapidly fatal"
+     ],
+     [
+      "Tumefactive demyelination",
+      "Large lesion with mass effect",
+      "Steroid responsive"
+     ],
+     [
+      "Balo concentric sclerosis",
+      "Concentric ring lesions",
+      "Monophasic or relapsing"
+     ],
+     [
+      "Optic neuritis with myelitis",
+      "Severe optic and cord disease",
+      "Aquaporin antibody positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Optic neuritis** is painful eye movement with colour desaturation and a relative afferent pupillary defect. **Neuromyelitis optica spectrum** disease pairs severe optic neuritis with longitudinally extensive transverse myelitis. **Aquaporin IgG** antibodies are diagnostic, and **myelin oligodendrocyte glycoprotein** antibodies cause a related syndrome. Relapse prevention differs completely from multiple sclerosis.",
+   "say": "Optic neuritis is painful eye movement with colour desaturation and a relative afferent pupillary defect. Neuromyelitis optica spectrum disease is severe optic neuritis with longitudinally extensive transverse myelitis together. Aquaporin IgG antibodies are diagnostic, and myelin oligodendrocyte glycoprotein antibodies cause a related syndrome. Relapse prevention differs completely from multiple sclerosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Spectrum disease",
+     "Multiple sclerosis"
+    ],
+    "rows": [
+     [
+      "Optic neuritis",
+      "Severe, often bilateral",
+      "Milder, unilateral"
+     ],
+     [
+      "Myelitis",
+      "Longitudinally extensive",
+      "Short segment"
+     ],
+     [
+      "Area postrema syndrome",
+      "Intractable hiccoughs",
+      "Uncommon"
+     ],
+     [
+      "Antibody",
+      "Aquaporin positive",
+      "Negative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test lesion age and antibody status. Same age lesions mean acute disseminated encephalomyelitis, while different ages mean multiple sclerosis. Encephalopathy is characteristic of the post infectious disease, and aquaporin positivity is characteristic of the spectrum disorder. **Tumefactive lesions** mislead toward tumour, but steroid responsiveness exposes demyelination. **Balo rings** are pathognomonic when present.",
+   "say": "Traps test lesion age and antibody status. Same age lesions mean acute disseminated encephalomyelitis, while different ages mean multiple sclerosis. Encephalopathy is characteristic of the post infectious disease, and aquaporin positivity is characteristic of the spectrum disorder. Tumefactive lesions suggest tumour, but steroid responsiveness exposes demyelination. Balo rings are pathognomonic when present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Same age lesions",
+      "Multiple sclerosis",
+      "Acute disseminated encephalomyelitis"
+     ],
+     [
+      "Encephalopathy with deficits",
+      "Multiple sclerosis",
+      "Post infectious demyelination"
+     ],
+     [
+      "Large tumefactive lesion",
+      "Glioma",
+      "Tumefactive demyelination"
+     ],
+     [
+      "Concentric rings",
+      "Tuberculoma",
+      "Balo concentric sclerosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** is good in most children with monophasic recovery and few deficits. **Marburg disease** is the fatal exception. Follow up imaging at months separates a monophasic course from evolution into multiple sclerosis. **Relapse** within months suggests the spectrum disorder rather than the acute post infectious form.",
+   "say": "Prognosis is good in most children with monophasic recovery and few deficits. Marburg disease is the fatal exception. Follow up imaging at months separates a monophasic course from evolution into multiple sclerosis. Relapse within months suggests the spectrum disorder rather than the acute post infectious form.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Monophasic post infectious illness"
+     },
+     {
+      "id": "b",
+      "label": "Steroid therapy and recovery"
+     },
+     {
+      "id": "c",
+      "label": "Follow up imaging at months"
+     },
+     {
+      "id": "d",
+      "label": "Relapse changes the diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** acute disseminated encephalomyelitis is post infectious, monophasic, and same age lesions with encephalopathy in children. High dose intravenous steroid is first line, plasma exchange is second line, and Marburg disease is fulminant. Aquaporin antibodies are diagnostic of the spectrum disorder, which consists of severe optic neuritis with longitudinal myelitis together.",
+   "say": "High yield for the exam: acute disseminated encephalomyelitis is post infectious, monophasic and same age lesions with encephalopathy in children. High dose intravenous steroid is first line, plasma exchange is second line and Marburg disease is fulminant. Aquaporin antibodies are diagnostic of the spectrum disorder, which consists of severe optic neuritis with longitudinal myelitis together.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Acute disseminated encephalomyelitis",
+      "Post infectious, monophasic",
+      "Same age lesions"
+     ],
+     [
+      "First line",
+      "Intravenous steroid, 5 days",
+      "Steroid responsive"
+     ],
+     [
+      "Second line",
+      "Plasma exchange",
+      "Steroid refractory disease"
+     ],
+     [
+      "Spectrum antibody",
+      "Aquaporin IgG",
+      "Severe optic neuritis"
+     ],
+     [
+      "Fulminant variant",
+      "Marburg disease",
+      "Rapidly fatal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follow up** imaging at months is mandatory because new lesions change the diagnosis to multiple sclerosis. **Antibody testing** for aquaporin and myelin oligodendrocyte glycoprotein is sent at presentation, not after relapse. **Vaccination** decisions after the illness need specialist advice. Families are counselled that recurrence is uncommon after a monophasic course.",
+   "say": "Follow up imaging at months is mandatory because new lesions change the diagnosis to multiple sclerosis. Antibody testing for aquaporin and myelin oligodendrocyte glycoprotein is sent at presentation, not after relapse. Vaccination decisions after the illness need specialist advice. Families are counselled that recurrence is uncommon after a monophasic course.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Timing",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Acute imaging",
+      "At presentation",
+      "Same age lesion pattern"
+     ],
+     [
+      "Antibody panel",
+      "At presentation",
+      "Spectrum versus acute disease"
+     ],
+     [
+      "Follow up imaging",
+      "At months",
+      "Detect new lesions"
+     ],
+     [
+      "Vaccination review",
+      "After recovery",
+      "Specialist advice"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rehabilitation** with physiotherapy, speech therapy, and cognitive support is integral to recovery. **Seizure** control with antiseizure drugs is often temporary in the acute phase. **Steroid taper** after the pulse prevents rebound. **Steroid** response itself is a diagnostic clue when tumefactive lesions shrink rapidly.",
+   "say": "Rehabilitation with physiotherapy, speech therapy and cognitive support is integral to recovery. Seizure control with antiseizure drugs is often temporary in the acute phase. Steroid taper after the pulse prevents rebound. Steroid response itself is a diagnostic clue when tumefactive lesions shrink rapidly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pulse intravenous steroid given"
+     },
+     {
+      "id": "b",
+      "label": "Steroid taper over weeks"
+     },
+     {
+      "id": "c",
+      "label": "Rehabilitation programme starts"
+     },
+     {
+      "id": "d",
+      "label": "Imaging confirms resolution"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

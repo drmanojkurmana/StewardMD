@@ -1,0 +1,374 @@
+{
+ "v": 1,
+ "module": "sne-seizure-classification",
+ "title": "Seizure and epilepsy classification",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **seizure** is a paroxysmal event from abnormal synchronous cortical firing, and **epilepsy** is the enduring tendency to generate seizures. The 2017 International League Against Epilepsy classification divides seizures into **focal**, **generalised**, and **unknown** onset. Focal seizures begin in one hemisphere, while generalised seizures begin bilaterally and impair consciousness from the start.",
+   "say": "A seizure is a paroxysmal event from abnormal synchronous cortical firing, and epilepsy is the enduring tendency to generate seizures. The 2017 International League Against Epilepsy classification divides seizures into focal, generalised and unknown onset. Focal seizures begin in one hemisphere, while generalised seizures begin bilaterally and impair consciousness from the start.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Onset",
+     "Spread",
+     "Causes"
+    ],
+    "rows": [
+     [
+      "Focal",
+      "One hemisphere",
+      "Cortical dysplasia, tumour, stroke"
+     ],
+     [
+      "Generalised",
+      "Both hemispheres from the start",
+      "Genetic epilepsies"
+     ],
+     [
+      "Unknown",
+      "Cannot be classified",
+      "Poor history, subtle events"
+     ],
+     [
+      "Focal to bilateral",
+      "Focal onset, then spreads",
+      "Hippocampal sclerosis with secondary spread"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Focal aware** seizures preserve awareness while **focal impaired awareness** seizures impair it, and the latter description replaces the older complex partial term. **Focal motor** seizures produce jerks, **focal sensory** seizures produce tingling or visual phenomena, and **focal atonic** seizures cause sudden falls. Awareness is the single most tested discriminator in this classification.",
+   "say": "Focal aware seizures preserve awareness while focal impaired awareness seizures impair it, and the latter description replaces the older complex partial term. Focal motor seizures produce jerks, focal sensory seizures produce tingling or visual phenomena, and focal atonic seizures cause sudden falls. Awareness is the single most tested discriminator in this classification.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Focal type",
+     "What happens",
+     "Cortical origin"
+    ],
+    "rows": [
+     [
+      "Focal aware",
+      "Consciousness preserved, aura possible",
+      "Temporal or parietal cortex"
+     ],
+     [
+      "Focal impaired awareness",
+      "Staring with lip smacking, no recall",
+      "Temporal lobe, hippocampus"
+     ],
+     [
+      "Focal motor",
+      "Jerking of one limb or side",
+      "Motor cortex"
+     ],
+     [
+      "Focal sensory",
+      "Tingling or flashing lights",
+      "Sensory or occipital cortex"
+     ],
+     [
+      "Focal atonic",
+      "Sudden loss of tone and fall",
+      "Frontal cortex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Generalised tonic clonic** seizures show stiffening followed by jerking with loss of consciousness. **Absence** seizures are brief staring with 3 hertz spike and wave on electroencephalogram. **Myoclonic** seizures are single jerks, **atonic** seizures are sudden drops, and **tonic** seizures are sustained stiffening. Generalised nonmotor seizures are absences by definition.",
+   "say": "Generalised tonic clonic seizures show stiffening followed by jerking with loss of consciousness. Absence seizures are brief staring with 3 hertz spike and wave on electroencephalogram. Myoclonic seizures are single jerks, atonic seizures are sudden drops and tonic seizures are sustained stiffening. Generalised nonmotor seizures are absences by definition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Generalised type",
+     "Appearance",
+     "Electroencephalogram"
+    ],
+    "rows": [
+     [
+      "Tonic clonic",
+      "Stiffening then bilateral jerking",
+      "Generalised spike and wave"
+     ],
+     [
+      "Absence",
+      "Brief staring for seconds",
+      "3 hertz spike and wave"
+     ],
+     [
+      "Myoclonic",
+      "Single or multiple jerks",
+      "Polyspike and wave"
+     ],
+     [
+      "Atonic",
+      "Sudden fall with loss of tone",
+      "Fast spike and irregular slow wave"
+     ],
+     [
+      "Tonic",
+      "Sustained stiffening",
+      "Slow spike and wave"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Seizures arise from a shift in the balance between neuronal **excitation and inhibition**. When many excitatory neurons burst together, the cortex enters a hypersynchronised state that produces the surface spike. Calcium influx sustains a prolonged depolarisation that opens voltage dependent sodium channels and drives patterned repetitive firing. A GABA and potassium mediated afterpotential then hyperpolarises the cell and ends the burst.",
+   "say": "Seizures arise from a shift in the balance between neuronal excitation and inhibition. When many excitatory neurons burst together, the cortex enters a hypersynchronised state that produces the surface spike. Calcium influx sustains a prolonged depolarisation that opens voltage dependent sodium channels and drives patterned repetitive firing. A GABA and potassium mediated afterpotential then hyperpolarises the cell and ends the burst.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Excitatory and inhibitory balance lost"
+     },
+     {
+      "id": "b",
+      "label": "Paroxysmal depolarisation shift begins"
+     },
+     {
+      "id": "c",
+      "label": "Repetitive sodium channel firing"
+     },
+     {
+      "id": "d",
+      "label": "Hypersynchronised cortical burst"
+     },
+     {
+      "id": "e",
+      "label": "Clinical seizure occurs"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Epilepsy syndromes combine seizure types with age at onset, electroencephalogram pattern and expected course. **Childhood absence epilepsy** starts in early childhood with a normal background. **Juvenile myoclonic epilepsy** starts in adolescence with morning jerks and generalised tonic clonic seizures. **Mesial temporal lobe epilepsy** is the commonest focal epilepsy and is often hippocampal.",
+   "say": "Epilepsy syndromes combine seizure types with age at onset, electroencephalogram pattern and expected course. Childhood absence epilepsy starts in early childhood with a normal background. Juvenile myoclonic epilepsy starts in adolescence with morning jerks and generalised tonic clonic seizures. Mesial temporal lobe epilepsy is the commonest focal epilepsy and is often hippocampal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Age at onset",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Childhood absence epilepsy",
+      "Early childhood",
+      "3 hertz spike and wave, normal background"
+     ],
+     [
+      "Juvenile myoclonic epilepsy",
+      "Adolescence",
+      "Morning jerks with polyspike and wave"
+     ],
+     [
+      "Mesial temporal lobe epilepsy",
+      "Any age, often young adults",
+      "Auras with hippocampal sclerosis"
+     ],
+     [
+      "West syndrome",
+      "Infancy",
+      "Infantile spasms with hypsarrhythmia"
+     ],
+     [
+      "Lennox-Gastaut syndrome",
+      "Early childhood",
+      "Multiple seizure types, poor response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **first test** in a new seizure is electroencephalogram, which shows interictal epileptiform discharges or the ictal correlate. **Magnetic resonance imaging** is the first imaging test and finds hippocampal sclerosis, cortical dysplasia, or tumours. **Blood tests** include glucose, sodium, calcium, and magnesium because metabolic causes are reversible. Not every patient needs prolonged monitoring.",
+   "say": "The first test in a new seizure is electroencephalogram, which shows interictal epileptiform discharges or the ictal correlate. Magnetic resonance imaging is the first imaging test and finds hippocampal sclerosis, cortical dysplasia or tumours. Blood tests include glucose, sodium, calcium and magnesium because metabolic causes are reversible. Not every patient needs prolonged monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Question answered",
+     "Key finding"
+    ],
+    "rows": [
+     [
+      "Electroencephalogram",
+      "Is there epileptiform activity",
+      "Spikes, sharp waves, 3 hertz pattern"
+     ],
+     [
+      "Magnetic resonance imaging",
+      "Is there a structural lesion",
+      "Hippocampal sclerosis, dysplasia, tumour"
+     ],
+     [
+      "Magnetic resonance spectroscopy",
+      "Is metabolism abnormal",
+      "Mesial temporal focus lateralisation"
+     ],
+     [
+      "Blood glucose and electrolytes",
+      "Is the cause metabolic",
+      "Low glucose or sodium as trigger"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **classification** decides the drug: sodium channel blockers worsen absence and myoclonic seizures, while drugs for generalised epilepsy are ineffective or harmful in some focal cases. **Carbamazepine** and **phenytoin** are classic aggravators of absence seizures. Misclassification is therefore a direct cause of treatment failure in the exam and in practice.",
+   "say": "The classification decides the drug: sodium channel blockers worsen absence and myoclonic seizures, while drugs for generalised epilepsy are ineffective or harmful in some focal cases. Carbamazepine and phenytoin are classic aggravators of absence seizures. Misclassification is therefore a direct cause of treatment failure in the exam and in practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Focal epilepsy drugs",
+     "points": [
+      "Levetiracetam and lamotrigine",
+      "Carbamazepine and oxcarbazepine",
+      "Phenytoin and lacosamide",
+      "Topiramate and zonisamide"
+     ]
+    },
+    "right": {
+     "title": "Generalised epilepsy drugs",
+     "points": [
+      "Levetiracetam and valproate",
+      "Lamotrigine with caution",
+      "Avoid carbamazepine and phenytoin",
+      "Ethosuximide for pure absence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Provoked** seizures occur in the setting of fever, stroke, trauma, or metabolic derangement, while **unprovoked** seizures suggest an enduring epileptic tendency. A single unprovoked seizure carries a lower recurrence risk than two separated by more than a day. Epilepsy is diagnosed after two unprovoked seizures more than 24 hours apart, or one seizure with a high recurrence risk.",
+   "say": "Provoked seizures occur in the setting of fever, stroke, trauma or metabolic derangement, while unprovoked seizures suggest an enduring epileptic tendency. A single unprovoked seizure carries a lower recurrence risk than two separated by more than a day. Epilepsy is diagnosed after two unprovoked seizures more than 24 hours apart, or one seizure with a high recurrence risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Definition",
+     "Recurrence approach"
+    ],
+    "rows": [
+     [
+      "Provoked seizure",
+      "During fever or metabolic insult",
+      "Treat the cause, low recurrence"
+     ],
+     [
+      "Single unprovoked seizure",
+      "One event, normal interval",
+      "Risk stratification, often no drug"
+     ],
+     [
+      "Two unprovoked seizures",
+      "Separated by over 24 hours",
+      "Epilepsy, start drug therapy"
+     ],
+     [
+      "One seizure, high risk",
+      "Epileptiform electroencephalogram or lesion",
+      "Treat as epilepsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** exploit awareness and sequence. Focal aware seizures have preserved consciousness, focal impaired awareness seizures do not, and absence seizures are generalised with impairment from the start. Tonic clonic sequence always matters, and focal seizures can spread to bilateral tonic clonic seizures. Two seizures in one day are counted as one epileptic event for diagnosis.",
+   "say": "Traps are built around awareness and sequence. Focal aware seizures have preserved consciousness, focal impaired awareness seizures do not and absence seizures are generalised with impairment from the start. Tonic clonic sequence always matters, and focal seizures can spread to bilateral tonic clonic seizures. Two seizures in one day are counted as one epileptic event for diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Focal spread to bilateral jerking",
+      "Generalised onset",
+      "Focal onset with bilateral tonic clonic spread"
+     ],
+     [
+      "Preserved awareness",
+      "Generalised seizure",
+      "Focal aware seizure"
+     ],
+     [
+      "Two seizures same day",
+      "Epilepsy diagnosed",
+      "One event, needs second day"
+     ],
+     [
+      "Absence with jerks",
+      "Focal epilepsy",
+      "Generalised epilepsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** focal, generalised, and unknown onset is the 2017 framework, focal aware versus impaired awareness is the key discriminator, and absence shows 3 hertz spike and wave. Two unprovoked seizures over 24 hours apart make epilepsy, and sodium channel blockers worsen absence. Mesial temporal lobe epilepsy with hippocampal sclerosis is the commonest focal epilepsy.",
+   "say": "High yield for the exam: focal, generalised and unknown onset is the 2017 framework, focal aware versus impaired awareness is the key discriminator and absence shows 3 hertz spike and wave. Two unprovoked seizures over 24 hours apart make epilepsy, and sodium channel blockers worsen absence. Mesial temporal lobe epilepsy with hippocampal sclerosis is the commonest focal epilepsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Classification year",
+      "2017 ILAE framework",
+      "Focal, generalised, unknown"
+     ],
+     [
+      "Awareness",
+      "Focal aware versus impaired",
+      "Most tested discriminator"
+     ],
+     [
+      "Absence pattern",
+      "3 hertz spike and wave",
+      "Childhood absence epilepsy"
+     ],
+     [
+      "Epilepsy definition",
+      "Two seizures 24 hours apart",
+      "Single day events count as one"
+     ],
+     [
+      "Commonest focal epilepsy",
+      "Mesial temporal lobe epilepsy",
+      "Hippocampal sclerosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

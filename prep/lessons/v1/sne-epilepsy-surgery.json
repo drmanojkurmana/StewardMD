@@ -1,0 +1,317 @@
+{
+ "v": 1,
+ "module": "sne-epilepsy-surgery",
+ "title": "Drug-resistant epilepsy and surgery",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Drug resistant epilepsy** means failure of adequate trials of two appropriately chosen antiseizure drug schedules. Drug resistance is not rare and it is not a reason to stop trying: roughly a third of patients continue to have seizures despite treatment. The exam fact is that drug resistance is common, early, and demands referral rather than endless drug switching.",
+   "say": "Drug resistant epilepsy means failure of adequate trials of two appropriately chosen antiseizure drug schedules. Drug resistance is not rare and it is not a reason to stop trying: roughly a third of patients continue to have seizures despite treatment. The exam fact is that drug resistance is common, early and demands referral rather than endless drug switching.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Definition",
+     "Criterion",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Drug resistance",
+      "Two failed drug schedules",
+      "Refer for surgical evaluation"
+     ],
+     [
+      "Failed trial",
+      "Adequate dose, duration, adherence",
+      "Not true resistance"
+     ],
+     [
+      "Successful alternative",
+      "Seizure freedom on drugs",
+      "Continue drugs, no surgery"
+     ],
+     [
+      "Third drug added",
+      "Continued seizures",
+      "Surgical referral window"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mesial temporal lobe epilepsy** with hippocampal sclerosis is the classic surgical epilepsy because seizures arise from a resectable focus. **Anterior temporal lobectomy** with amygdalohippocampectomy is the standard operation and gives the best seizure freedom rates. Memory decline is the main cost and is predicted by testing before surgery. The operation is curative in a majority of well selected patients.",
+   "say": "Mesial temporal lobe epilepsy with hippocampal sclerosis is the classic surgical epilepsy because seizures arise from a resectable focus. Anterior temporal lobectomy with amygdalohippocampectomy is the standard operation and gives the best seizure freedom rates. Memory decline is the main cost and is predicted by testing before surgery. The operation is curative in a majority of well selected patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operation",
+     "Target lesion",
+     "Outcome"
+    ],
+    "rows": [
+     [
+      "Anterior temporal lobectomy",
+      "Mesial temporal sclerosis",
+      "Best seizure freedom rates"
+     ],
+     [
+      "Amygdalohippocampectomy",
+      "Hippocampal sclerosis",
+      "Memory risk on dominant side"
+     ],
+     [
+      "Lesionectomy",
+      "Cortical dysplasia, tumour",
+      "Favourable when lesion is clear"
+     ],
+     [
+      "Multiple subpial transection",
+      "Eloquent cortex focus",
+      "Palliative, less common"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vagal nerve stimulation** is a palliative neuromodulation option for patients who are not candidates for resection. **Responsive neurostimulation** detects seizures from intracranial electrodes and responds automatically. **Deep brain stimulation** of thalamic targets is another palliative option. None of these is curative in the way resection is, but each reduces seizure burden.",
+   "say": "Vagal nerve stimulation is a palliative neuromodulation option for patients who are not candidates for resection. Responsive neurostimulation is an automatic responder, with intracranial electrodes providing seizure detection. Deep brain stimulation of thalamic targets is another palliative option. None of these is curative in the way resection is, but each reduces seizure burden.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Device",
+     "Target",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Vagal nerve stimulation",
+      "Left vagus nerve",
+      "Palliative, reduces seizure frequency"
+     ],
+     [
+      "Responsive neurostimulation",
+      "Seizure focus electrodes",
+      "Palliative with detection"
+     ],
+     [
+      "Deep brain stimulation",
+      "Anterior thalamic nuclei",
+      "Palliative option"
+     ],
+     [
+      "Corpus callosotomy",
+      "Callosal fibres",
+      "For drop attacks, palliative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **evaluation** before surgery asks four questions: where do the seizures start, is the focus resectable, and what is at risk. **Video electroencephalogram** with prolonged monitoring captures the ictal onset. **Magnetic resonance imaging** finds the structural target. **Positron emission tomography** and **neuropsychological testing** complete the lateralisation and risk assessment.",
+   "say": "The evaluation before surgery asks four questions: where do the seizures start, is the focus resectable and what is at risk. Video electroencephalogram with prolonged monitoring captures the ictal onset. Magnetic resonance imaging finds the structural target. Positron emission tomography and neuropsychological testing complete the lateralisation and risk assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Seizure onset captured on monitoring"
+     },
+     {
+      "id": "b",
+      "label": "Imaging finds the structural target"
+     },
+     {
+      "id": "c",
+      "label": "Function and memory mapped"
+     },
+     {
+      "id": "d",
+      "label": "Resection planned with margins"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hemispherectomy** is the operation for catastrophic childhood epilepsies with a destroyed hemisphere, such as hemiconvulsions hemiplegia epilepsy syndrome. It trades one hemisphere for seizure freedom and is life changing. **Corpus callosotomy** disconnects the hemispheres and is used for atonic drop attacks. **Multiple subpial transection** preserves eloquent cortex while interrupting horizontal spread.",
+   "say": "Hemispherectomy is the operation for catastrophic childhood epilepsies with a destroyed hemisphere, such as hemiconvulsions hemiplegia epilepsy syndrome. It trades one hemisphere for seizure freedom and is life changing. Corpus callosotomy disconnects the hemispheres and is used for atonic drop attacks. Multiple subpial transection preserves eloquent cortex while interrupting horizontal spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operation",
+     "Indication",
+     "Expected benefit"
+    ],
+    "rows": [
+     [
+      "Hemispherectomy",
+      "Destroyed hemisphere in childhood",
+      "Seizure freedom is possible"
+     ],
+     [
+      "Corpus callosotomy",
+      "Atonic drop attacks",
+      "Fewer falls, palliative"
+     ],
+     [
+      "Multiple subpial transection",
+      "Eloquent cortex focus",
+      "Seizure reduction"
+     ],
+     [
+      "Temporal lobectomy",
+      "Mesial temporal sclerosis",
+      "Best curative rates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ketogenic diet** and **modified Atkins diet** are metabolic therapies for drug resistant epilepsy, especially in children. Corticosteroids and immunoglobulin are tried when autoimmune epilepsy is suspected. A cannabis derived preparation has an evidence base in Dravet and Lennox-Gastaut syndromes. Each of these is an alternative when surgery is not possible or not yet pursued.",
+   "say": "Ketogenic diet and modified Atkins diet are metabolic therapies for drug resistant epilepsy, especially in children. Corticosteroids and immunoglobulin are tried when autoimmune epilepsy is suspected. A cannabis derived preparation has an evidence base in Dravet and Lennox-Gastaut syndromes. Each of these is an alternative when surgery is not possible or not yet pursued.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dietary therapy",
+     "points": [
+      "Ketogenic diet is the classic option",
+      "Modified Atkins is more tolerable",
+      "Best evidence in childhood epilepsy",
+      "Adherence is the main challenge"
+     ]
+    },
+    "right": {
+     "title": "Drug add-ons for refractory epilepsy",
+     "points": [
+      "Corticosteroids for autoimmune epilepsy",
+      "Immunoglobulin for inflammatory disease",
+      "Cannabis preparation for Dravet syndrome",
+      "Cannabis preparation for Lennox-Gastaut syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Counselling** before surgery covers seizure freedom odds, memory risk, mood effects, and the need for continued drugs. Antiseizure drugs are continued after surgery, with slow withdrawal. **Driving** rules vary and must be explained before the operation. Referral to a comprehensive epilepsy centre is itself associated with better outcomes.",
+   "say": "Counselling before surgery covers seizure freedom odds, memory risk, mood effects and the need for continued drugs. Antiseizure drugs are continued after surgery, with slow withdrawal. Driving rules vary and must be explained before the operation. Referral to a comprehensive epilepsy centre is itself associated with better outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Counselling point",
+     "Honest message",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Seizure freedom",
+      "Majority in selected cases",
+      "Sets realistic expectations"
+     ],
+     [
+      "Memory risk",
+      "Higher on dominant side",
+      "Neuropsychological prediction"
+     ],
+     [
+      "Continued drugs",
+      "Most stay on drugs",
+      "Slow post operative taper"
+     ],
+     [
+      "Driving",
+      "Rules vary by jurisdiction",
+      "Legal obligations explained"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** confuse palliative with curative procedures. Vagal nerve stimulation never cures epilepsy, corpus callosotomy does not cure drop attacks but reduces falls, and hemispherectomy is not standard for adult temporal epilepsy. Drug resistance after two schedules is the surgical trigger, not after every possible drug. Early referral is the correct answer in most vignettes.",
+   "say": "Traps are built on confusing palliative with curative procedures. Vagal nerve stimulation never cures epilepsy, corpus callosotomy does not cure drop attacks but reduces falls, and hemispherectomy is not standard for adult temporal epilepsy. Drug resistance after two schedules is the surgical trigger, not after every possible drug. Early referral is the correct answer in most vignettes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Vagal nerve stimulation",
+      "Curative resection",
+      "Palliative seizure reduction"
+     ],
+     [
+      "Drop attacks",
+      "Temporal lobectomy",
+      "Corpus callosotomy"
+     ],
+     [
+      "Drug failure",
+      "Try every drug first",
+      "Refer after two schedules"
+     ],
+     [
+      "Adult temporal epilepsy",
+      "Hemispherectomy",
+      "Anterior temporal lobectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** drug resistance means failure of two drug schedules and affects about a third of patients. Anterior temporal lobectomy is the standard curative operation for mesial temporal sclerosis. Vagal nerve stimulation, responsive neurostimulation, and deep brain stimulation are palliative. Video electroencephalogram with imaging and positron emission tomography complete the evaluation.",
+   "say": "High yield for the exam: drug resistance means failure of two drug schedules and affects about a third of patients. Anterior temporal lobectomy is the standard curative operation for mesial temporal sclerosis. Vagal nerve stimulation, responsive neurostimulation and deep brain stimulation are palliative. Video electroencephalogram with imaging and positron emission tomography complete the evaluation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Definition of resistance",
+      "Two failed drug schedules",
+      "Surgical trigger"
+     ],
+     [
+      "Commonest surgical target",
+      "Mesial temporal sclerosis",
+      "Curative operation exists"
+     ],
+     [
+      "Standard operation",
+      "Anterior temporal lobectomy",
+      "Best seizure freedom"
+     ],
+     [
+      "Palliative devices",
+      "Vagal and responsive stimulation",
+      "Not curative"
+     ],
+     [
+      "First evaluation test",
+      "Video electroencephalogram",
+      "Captures ictal onset"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

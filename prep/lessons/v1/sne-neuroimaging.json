@@ -1,0 +1,346 @@
+{
+ "v": 1,
+ "module": "sne-neuroimaging",
+ "title": "Neuroimaging in neurology",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Imaging choice follows the question: ischaemia, bleed, infection, tumour, or demyelination. **Computed tomography** is the first test for acute presentations because it takes seconds and shows blood immediately. **Magnetic resonance imaging** is the most sensitive test for ischaemia, demyelination, and posterior fossa lesions. The **diffusion weighted** sequence detects acute infarction within the first hours.",
+   "say": "Imaging choice follows the question: ischaemia, bleed, infection, tumour or demyelination. Computed tomography is the first test for acute presentations because it takes seconds and shows blood immediately. Magnetic resonance imaging is the most sensitive test for ischaemia, demyelination and posterior fossa lesions. The diffusion weighted sequence detects acute infarction within the first hours.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ischemic-stroke-fig1.webp",
+    "alt": "MRI brain image showing an acute ischaemic stroke with diffusion restriction.",
+    "caption": "Diffusion weighted MRI shows acute infarction with restricted diffusion (StewardMD).",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Diffusion weighted imaging** is the most sensitive technique for acute cerebral or spinal ischaemia, and restricted diffusion appears in infarction of less than about seven days. It also lights up **encephalitis**, **abscess**, and prion disease, so a bright lesion needs context. The apparent diffusion coefficient map confirms true restriction and excludes shine through.",
+   "say": "Diffusion weighted imaging is the most sensitive technique for acute cerebral or spinal ischaemia, and restricted diffusion appears in infarction of less than about seven days. It also lights up encephalitis, abscess, and prion disease, so a bright lesion needs context. The apparent diffusion coefficient map confirms true restriction and excludes shine through.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sequence",
+     "Best for",
+     "Key finding"
+    ],
+    "rows": [
+     [
+      "Diffusion weighted",
+      "Acute ischaemia",
+      "Bright within hours, under 7 days"
+     ],
+     [
+      "FLAIR",
+      "Periventricular plaques",
+      "Suppressed CSF makes lesions stand out"
+     ],
+     [
+      "T2 weighted",
+      "Oedema and demyelination",
+      "Bright fluid and plaques"
+     ],
+     [
+      "Susceptibility weighted",
+      "Blood, calcium, and air",
+      "Microhaemorrhages and vein staining"
+     ],
+     [
+      "Contrast enhanced T1",
+      "Barrier breakdown",
+      "Tumour, abscess, active plaques"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Susceptibility weighted imaging** is highly sensitive to blood, calcium, and air, and it is the sequence of choice for **microhaemorrhages**. Hypertensive deep haemorrhages, amyloid angiopathy with lobar microbleeds, and haemorrhagic metastases all present on this sequence. Calcium and blood both appear dark, so the history decides which one it is.",
+   "say": "Susceptibility weighted imaging is highly sensitive to blood, calcium and air, and it is the sequence of choice for microhaemorrhages. Hypertensive deep haemorrhages, amyloid angiopathy with lobar microbleeds and haemorrhagic metastases all present on this sequence. Calcium and blood both appear dark, so the history decides which one it is.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Microbleeds on susceptibility imaging"
+     },
+     {
+      "id": "b",
+      "label": "Deep distribution"
+     },
+     {
+      "id": "c",
+      "label": "Hypertensive microbleeds"
+     },
+     {
+      "id": "d",
+      "label": "Lobar distribution"
+     },
+     {
+      "id": "e",
+      "label": "Amyloid angiopathy pattern"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**FLAIR** suppresses the bright cerebrospinal fluid signal of T2 imaging, which improves detection of lesions adjacent to fluid spaces. Periventricular demyelinating plaques and cortical lesions stand out clearly on this sequence. A mismatch between diffusion and FLAIR signals helps **time** a wake-up stroke because FLAIR turns positive a few hours after onset.",
+   "say": "FLAIR suppresses the bright cerebrospinal fluid signal of T2 imaging, which improves detection of lesions adjacent to fluid spaces. Periventricular demyelinating plaques and cortical lesions stand out clearly on this sequence. A mismatch between diffusion and FLAIR signals helps time a wake-up stroke because FLAIR turns positive a few hours after onset.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Diffusion bright, FLAIR normal",
+      "Very early infarction",
+      "Thrombolysis window is open"
+     ],
+     [
+      "Diffusion bright, FLAIR bright",
+      "Established infarction",
+      "Window is closing or closed"
+     ],
+     [
+      "Periventricular bright plaques",
+      "Demyelination",
+      "Multiple sclerosis workup"
+     ],
+     [
+      "High signal adjacent to ventricles",
+      "Perivascular inflammation",
+      "Lymphoma or infection considered"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gadolinium based contrast** does not cause contrast induced nephropathy, but linear agents can cause **nephrogenic systemic fibrosis** in severe renal failure. Macrocyclic agents are far safer and are preferred in at-risk patients. In the normal brain the only enhancing structures are vessels and those without a blood brain barrier such as pituitary, choroid plexus, and dura.",
+   "say": "Gadolinium based contrast does not cause contrast induced nephropathy, but linear agents can cause nephrogenic systemic fibrosis in severe renal failure. Macrocyclic agents are far safer and are preferred in at-risk patients. In the normal brain the only enhancing structures are vessels and those without a blood brain barrier such as pituitary, choroid plexus, and dura.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Linear gadolinium agents",
+     "points": [
+      "Linked to nephrogenic systemic fibrosis",
+      "Avoided in severe renal failure",
+      "Retains gadolinium in tissues",
+      "Older contrast formulations"
+     ]
+    },
+    "right": {
+     "title": "Macrocyclic gadolinium agents",
+     "points": [
+      "Far safer in renal failure",
+      "Preferred when kidney function is poor",
+      "Less tissue retention",
+      "Used for most modern scans"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Computed tomography angiography** and **magnetic resonance angiography** show large vessel occlusion, aneurysms, and malformations, while **catheter angiography** remains the reference standard for vascular detail. **Perfusion imaging** that shows prolonged transit with preserved blood volume identifies salvageable penumbra. The **first test** in acute stroke is noncontrast computed tomography to exclude bleed.",
+   "say": "Computed tomography angiography and magnetic resonance angiography show large vessel occlusion, aneurysms and malformations, while catheter angiography remains the reference standard for vascular detail. Perfusion imaging that shows prolonged transit with preserved blood volume identifies salvageable penumbra. The first test in acute stroke is noncontrast computed tomography to exclude bleed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "First test",
+     "Definitive test"
+    ],
+    "rows": [
+     [
+      "Acute bleed or stroke",
+      "Noncontrast computed tomography",
+      "Magnetic resonance imaging with angiography"
+     ],
+     [
+      "Large vessel occlusion",
+      "Computed tomography angiography",
+      "Catheter angiography"
+     ],
+     [
+      "Aneurysm or malformation",
+      "Magnetic resonance angiography",
+      "Catheter angiography for treatment planning"
+     ],
+     [
+      "Demyelination",
+      "Magnetic resonance imaging brain and cord",
+      "Oligoclonal bands plus imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Computed tomography** misses early ischaemia and posterior fossa detail, so a normal scan never excludes stroke in the first hours. **Magnetic resonance imaging** takes longer and needs a still patient, so unstable patients stay with computed tomography. Choice of sequence follows the clinical question, and a blind protocol wastes the scan's sensitivity.",
+   "say": "Computed tomography misses early ischaemia and posterior fossa detail, so a normal scan never excludes stroke in the first hours. Magnetic resonance imaging takes longer and needs a still patient, so unstable patients stay with computed tomography. Choice of sequence follows the clinical question, and a blind protocol wastes the scan sensitivity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modality",
+     "Strength",
+     "Limitation"
+    ],
+    "rows": [
+     [
+      "Computed tomography",
+      "Seconds to acquire, best for blood",
+      "Misses early ischaemia and posterior fossa"
+     ],
+     [
+      "Magnetic resonance imaging",
+      "Most sensitive for ischaemia and demyelination",
+      "Slow and needs a cooperative patient"
+     ],
+     [
+      "Angiography",
+      "Best vascular detail",
+      "Invasive with catheter risks"
+     ],
+     [
+      "Perfusion imaging",
+      "Identifies salvageable penumbra",
+      "Contrast load and processing time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** in imaging questions are classic. A ring enhancing lesion is not automatically a tuberculoma, and a bright diffusion lesion is not automatically an infarct because abscess and encephalitis also restrict. **Susceptibility** blooming marks blood or calcium, and the clinical context separates them. Always correlate the image with the syndrome before naming the disease.",
+   "say": "Traps in imaging questions are classic. A ring enhancing lesion is not automatically a tuberculoma and a bright diffusion lesion is not automatically an infarct because abscess and encephalitis also restrict. Susceptibility blooming marks blood or calcium and the clinical context separates them. Always correlate the image with the syndrome before naming the disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Common wrong answer",
+     "Correct reading"
+    ],
+    "rows": [
+     [
+      "Ring enhancement midline shift",
+      "Tuberculoma",
+      "Consider abscess, toxoplasma, tumour"
+     ],
+     [
+      "Diffusion restriction",
+      "Infarct",
+      "Consider abscess, encephalitis, prion disease"
+     ],
+     [
+      "Susceptibility blooming",
+      "Calcification",
+      "Consider blood, air, or calcium by history"
+     ],
+     [
+      "Periventricular plaques",
+      "Stroke",
+      "Consider demyelination first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Complications** of imaging work are contrast reactions, kidney injury with iodinated contrast, and radiation from repeated computed tomography. Gadolinium deposition in the brain with repeated linear agents is a recognised concern, which macrocyclic agents largely avoid. Reporting must state the syndrome the image explains, not just describe the lesion.",
+   "say": "Complications of imaging work are contrast reactions, kidney injury with iodinated contrast and radiation from repeated computed tomography. Gadolinium deposition in the brain with repeated linear agents is a recognised concern, which macrocyclic agents largely avoid. Reporting must state the syndrome the image explains, not just describe the lesion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Contrast enhanced scan planned"
+     },
+     {
+      "id": "b",
+      "label": "Kidney function checked"
+     },
+     {
+      "id": "c",
+      "label": "Macrocyclic agent chosen"
+     },
+     {
+      "id": "d",
+      "label": "Lesion correlated with syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** diffusion weighted imaging shows acute ischaemia within hours and for under 7 days. FLAIR has fluid suppression and periventricular plaques are visible on it. Susceptibility imaging is best for microhaemorrhages. Noncontrast computed tomography is first in acute stroke to exclude bleed. Macrocyclic gadolinium is preferred in renal failure, and catheter angiography is the vascular gold standard.",
+   "say": "High yield for the exam: diffusion weighted imaging shows acute ischaemia within hours and for under 7 days. FLAIR has fluid suppression and periventricular plaques are visible on it. Susceptibility imaging is best for microhaemorrhages. Noncontrast computed tomography is first in acute stroke to exclude bleed. Macrocyclic gadolinium is preferred in renal failure, and catheter angiography is the vascular gold standard.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sequence or test",
+     "Single most asked fact",
+     "Disease it decides"
+    ],
+    "rows": [
+     [
+      "Diffusion weighted",
+      "Restricted diffusion under 7 days",
+      "Acute ischaemic stroke"
+     ],
+     [
+      "FLAIR",
+      "Plaques next to fluid spaces",
+      "Multiple sclerosis"
+     ],
+     [
+      "Susceptibility weighted",
+      "Microbleeds and blood products",
+      "Amyloid angiopathy, hypertension"
+     ],
+     [
+      "Noncontrast computed tomography",
+      "Shows blood immediately",
+      "Haemorrhagic stroke"
+     ],
+     [
+      "Catheter angiography",
+      "Reference standard",
+      "Aneurysm and malformation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
