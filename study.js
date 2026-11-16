@@ -1448,8 +1448,32 @@
   // PencilInteraction bridge would call STUDY._inkDblTap() to switch pen and eraser. TODO: native build.
   G.STUDY_INK_DBLTAP_TODO = "native PencilInteraction bridge needed";
   function bindInk(ov, n) {
-    if (G.STUDY_INK && G.STUDY_INK.bindInk) { G.STUDY_INK.bindInk(inkApi(n, ov), ov, n); return; }
+    if (G.STUDY_INK && G.STUDY_INK.bindInk) { bindLaser(ov, n); G.STUDY_INK.bindInk(inkApi(n, ov), ov, n); return; }
     bindInkLegacy(ov, n);
+  }
+  // Laser (Phase 4) must never reach the Phase 1 ink engine: capture listeners on the overlay run first and stop
+  // the event, so a laser trail is never saved as a stroke or pushed to undo.
+  function bindLaser(ov, n) {
+    var on = false, pos = function (e) { var r = ov.getBoundingClientRect(); return toRel(e.clientX, e.clientY, r); };
+    ov.addEventListener("pointerdown", function (e) {
+      if (!V || V.tool !== "laser") return;
+      on = true;
+      try { ov.setPointerCapture(e.pointerId); } catch (x) {}
+      if (G.STUDY_INSERT && G.STUDY_INSERT.laserDown) G.STUDY_INSERT.laserDown(e, n, ov, pos(e));
+      e.preventDefault(); e.stopImmediatePropagation();
+    }, true);
+    ov.addEventListener("pointermove", function (e) {
+      if (!on || !V || V.tool !== "laser") return;
+      if (G.STUDY_INSERT && G.STUDY_INSERT.laserMove) G.STUDY_INSERT.laserMove(e, n, ov, pos(e));
+      e.stopImmediatePropagation();
+    }, true);
+    var end = function (e) {
+      if (!on) return;
+      on = false;
+      if (G.STUDY_INSERT && G.STUDY_INSERT.laserUp) G.STUDY_INSERT.laserUp(e, n, ov);
+      e.stopImmediatePropagation();
+    };
+    ov.addEventListener("pointerup", end, true); ov.addEventListener("pointercancel", end, true);
   }
   function bindInkLegacy(ov, n) {
     var cur = null, pan = null, erased = null, lassoPts = null;

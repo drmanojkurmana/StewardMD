@@ -51,7 +51,7 @@ await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
 await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = (msg, def) => def || "Custom Element"; });
 
 async function boot(q) {
-  await page.goto(BASE + "?" + q);
+  await page.goto(BASE + "?" + q, { waitUntil: "domcontentloaded" });   // app readiness is checked next; do not wait on slow third-party loads
   await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
   await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); PREP.open(); });
   await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row", { timeout: 30000 });
@@ -194,9 +194,11 @@ await page.evaluate(() => { STUDY._state().scribble = false; });
 /* ---- Phase 1 ink: toolbar order, popover, styles, split eraser, palm, 240 Hz ---- */
 ok(await page.evaluate(() => {
   const order = Array.from(document.querySelectorAll("#stTb [data-act='st-tool']")).map((b) => b.getAttribute("data-v"));
-  const hidden = document.querySelectorAll("#stTb .st-slot-future[hidden]").length;
-  return JSON.stringify(order) === JSON.stringify(["pen", "er", "hl", "lasso"]) && hidden === 7;
-}), "P1 toolbar: order pen, eraser, highlighter, lasso with 7 future slots hidden");
+  // Plan order; later phases fill more slots, so check relative order and that Phase 1's tools are all there.
+  const PLAN = ["zoom", "pen", "er", "hl", "shapes", "lasso", "elements", "image", "camera", "text", "typing", "laser"];
+  const known = order.filter((v) => PLAN.includes(v)), idx = known.map((v) => PLAN.indexOf(v));
+  return ["pen", "er", "hl", "lasso"].every((v) => order.includes(v)) && idx.every((v, i) => i === 0 || v > idx[i - 1]);
+}), "P1 toolbar: tools follow the plan order (pen, eraser, highlighter, ..., lasso, ...)");
 await page.click('[data-act="st-tool"][data-v="pen"]');   // second tap on the active pen opens its popover
 await page.waitForSelector("#stInkPop");
 ok(await page.evaluate(() => {
