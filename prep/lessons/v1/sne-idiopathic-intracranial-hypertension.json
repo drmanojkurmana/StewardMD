@@ -1,0 +1,336 @@
+{
+ "v": 1,
+ "module": "sne-idiopathic-intracranial-hypertension",
+ "title": "Idiopathic intracranial hypertension",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Idiopathic intracranial hypertension** means raised intracranial pressure with normal cerebrospinal fluid composition and clean imaging showing no mass, hydrocephalus, or venous sinus thrombosis. It affects a small share of the general population but rises sharply in young women with overweight and recent weight gain. Diagnosis needs bilateral **papilledema** plus a lumbar puncture opening pressure of at least 250 mm of water.",
+   "say": "Idiopathic intracranial hypertension means raised intracranial pressure with normal cerebrospinal fluid composition and clean imaging showing no mass, hydrocephalus, or venous sinus thrombosis. It affects a small share of the general population but rises sharply in young women with overweight and recent weight gain. Diagnosis needs bilateral papilledema plus a lumbar puncture opening pressure of at least two hundred fifty millimeters of water.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Definition",
+      "Raised pressure, normal fluid, no lesion"
+     ],
+     [
+      "Typical group",
+      "Young women with overweight"
+     ],
+     [
+      "Background rate",
+      "Small share of general population"
+     ],
+     [
+      "High risk trigger",
+      "Recent weight gain with overweight"
+     ],
+     [
+      "Pressure cutoff",
+      "At least 250 mm of water with papilledema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most patients are young women with **overweight** and recent weight gain, so rising body weight remains the strongest modifiable risk factor. Precipitating drugs include excess **vitamin A**, retinoids, and tetracyclines, and withdrawing the suspected agent often helps recovery. Raised venous sinus pressure, pregnancy, and obstructive **sleep apnoea** complete the common risk profile seen in clinic.",
+   "say": "Most patients are young women with overweight and recent weight gain, so rising body weight remains the strongest modifiable risk factor. Precipitating drugs include excess vitamin A, retinoids, and tetracyclines, and withdrawing the suspected agent often helps recovery. Raised venous sinus pressure, pregnancy, and obstructive sleep apnoea are seen in the common risk profile in clinic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Patient risk profile",
+     "points": [
+      "Young woman with overweight",
+      "Recent rapid weight gain",
+      "Pregnancy in a susceptible woman",
+      "Sleep apnoea with snoring"
+     ]
+    },
+    "right": {
+     "title": "Drug and venous triggers",
+     "points": [
+      "Excess vitamin A",
+      "Retinoids and tetracyclines",
+      "Raised venous sinus pressure",
+      "Recent weight gain precipitant"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Impaired fluid absorption at the **arachnoid granulations** against raised venous sinus pressure remains the leading explanation, so fluid accumulates without any mass. Obesity raises abdominal and central venous pressure, which transmits to the dural sinuses and resists drainage. Transverse sinus narrowing seen on venography then worsens the gradient, sustaining a self reinforcing pressure loop.",
+   "say": "Impaired fluid absorption at the arachnoid granulations against raised venous sinus pressure remains the leading explanation, so fluid accumulates without any mass. Obesity raises abdominal and central venous pressure, which transmits to the dural sinuses and resists drainage. Transverse sinus narrowing seen on venography then worsens the gradient, sustaining a self reinforcing pressure loop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Obesity raises central venous pressure"
+     },
+     {
+      "id": "b",
+      "label": "Dural sinus pressure rises"
+     },
+     {
+      "id": "c",
+      "label": "Fluid absorption falls at granulations"
+     },
+     {
+      "id": "d",
+      "label": "Intracranial pressure climbs"
+     },
+     {
+      "id": "e",
+      "label": "Sinus narrowing sustains the gradient"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Headache forms the first symptom in most patients, typically a daily dull **pressure** that worsens with coughing, bending, or waking in the morning. Bilateral **papilledema** with enlarged blind spots and transient visual obscurations on standing remains the classic sign. Pulsatile tinnitus with horizontal diplopia from sixth nerve palsy plus shoulder or neck pain is part of the usual presentation.",
+   "say": "Headache forms the first symptom in most patients, typically a daily dull pressure that worsens with coughing, bending, or waking in the morning. Bilateral papilledema with enlarged blind spots and transient visual obscurations on standing remains the classic sign. Pulsatile tinnitus with horizontal diplopia from sixth nerve palsy plus shoulder or neck pain is part of the usual presentation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Headache",
+      "Daily dull pressure, worse on coughing"
+     ],
+     [
+      "Classic sign",
+      "Bilateral papilledema with obscurations"
+     ],
+     [
+      "Tinnitus",
+      "Pulsatile, synchronous with heartbeat"
+     ],
+     [
+      "Diplopia",
+      "Horizontal, from sixth nerve palsy"
+     ],
+     [
+      "Neck pain",
+      "Shoulder and posterior neck ache"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early field loss starts as inferior nasal constriction with preserved central acuity, so patients miss objects at the edges while reading stays normal. Colour desaturation, blurred vision, and brief greyouts signal threatened **optic nerve** function. Absence of altered consciousness, seizures, or focal weakness separates this syndrome from tumours, venous thrombosis, meningitis, and malignant **hypertension**.",
+   "say": "Early field loss starts as inferior nasal constriction with preserved central acuity, so patients miss objects at the edges while reading stays normal. Colour desaturation, blurred vision, and brief greyouts signal threatened optic nerve function. Absence of altered consciousness, seizures, or focal weakness separates this syndrome from tumours, venous thrombosis, meningitis, and malignant hypertension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Threatened optic nerve",
+     "points": [
+      "Inferior nasal field constriction",
+      "Enlarged blind spot, spared centre",
+      "Colour desaturation and blurred vision",
+      "Transient greyouts on standing"
+     ]
+    },
+    "right": {
+     "title": "Points to another cause",
+     "points": [
+      "Altered consciousness or seizures",
+      "Focal weakness or aphasia",
+      "Fever with meningeal signs",
+      "Malignant hypertension on fundoscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Normal brain MRI with no mass, hydrocephalus, or sinus thrombosis is required, while **empty sella**, optic sheath distension, and transverse sinus narrowing support the diagnosis. The first bedside test is formal automated **perimetry** with optic disc photography and tomography of the retinal nerve fibre layer. Lumbar puncture in the lateral decubitus position showing at least 250 mm of water with normal fluid composition seals the diagnosis, and draining 20 to 30 mL often eases headache.",
+   "say": "Normal brain MRI with no mass, hydrocephalus, or sinus thrombosis is required, while empty sella, optic sheath distension, and transverse sinus narrowing support the diagnosis. The first bedside test is formal automated perimetry with optic disc photography and tomography of the retinal nerve fibre layer. Lumbar puncture in the lateral decubitus position showing at least two hundred fifty millimeters of water with normal fluid composition seals the diagnosis, and draining twenty to thirty milliliters often eases headache.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "MRI brain with venography",
+      "Excludes mass, hydrocephalus, thrombosis"
+     ],
+     [
+      "Supportive MRI signs",
+      "Empty sella and sheath distension"
+     ],
+     [
+      "First bedside test",
+      "Automated perimetry plus tomography"
+     ],
+     [
+      "Gold standard",
+      "Opening pressure at least 250 mm of water"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weight loss with a supervised low sodium diet and exercise is the first line, and **acetazolamide** 250 to 500 mg twice daily lowers fluid production. **Topiramate** helps headache and weight control when acetazolamide is not tolerated, and a diuretic adds a second option. Serial visual fields and optic disc checks decide every dose change and show whether treatment is working.",
+   "say": "Weight loss with a supervised low sodium diet and exercise is the first line, and acetazolamide two hundred fifty to five hundred milligrams twice daily lowers fluid production. Topiramate helps headache and weight control when acetazolamide is not tolerated, and a diuretic adds a second option. Serial visual fields and optic disc checks decide every dose change and show whether treatment is working.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Supervised weight loss and diet"
+     },
+     {
+      "id": "b",
+      "label": "Acetazolamide twice daily"
+     },
+     {
+      "id": "c",
+      "label": "Add topiramate or diuretic"
+     },
+     {
+      "id": "d",
+      "label": "Serial fields and disc review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management escalates fast when vision deteriorates despite maximal **acetazolamide**, using optic nerve sheath **fenestration** to rescue sight and fluid diversion for intractable headache with high pressure. Venous sinus stenting suits the small group with a proven pressure gradient across a dominant sinus stenosis that is measured before intervention. Management studies show acetazolamide plus weight loss improves papilledema and field loss, while tomography and perimetry now direct escalation.",
+   "say": "Management escalates fast when vision deteriorates despite maximal acetazolamide, using optic nerve sheath fenestration to rescue sight and fluid diversion for intractable headache with high pressure. Venous sinus stenting suits the small group with a proven pressure gradient across a dominant sinus stenosis that is measured before intervention. Management studies show acetazolamide plus weight loss improves papilledema and field loss, while tomography and perimetry now direct escalation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vision rescue options",
+     "points": [
+      "Optic nerve sheath fenestration",
+      "Fluid diversion for high pressure",
+      "Stenting with proven gradient",
+      "Tomography and perimetry guide timing"
+     ]
+    },
+    "right": {
+     "title": "Steady medical strategy",
+     "points": [
+      "Acetazolamide plus weight plan",
+      "Improves papilledema and fields",
+      "Topiramate aids weight control",
+      "Escalate before atrophy sets in"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Untreated papilledema constricts the fields to tunnel vision and can end in irreversible **optic atrophy** and blindness, even while headache later fades. Recurrence follows weight regain, pregnancy, or renewed exposure to **vitamin A** and tetracyclines. Most patients stabilise with sustained weight loss and acetazolamide, but fulminant disease with rapid field loss has a poor visual outlook without surgery.",
+   "say": "Untreated papilledema constricts the fields to tunnel vision and can end in irreversible optic atrophy and blindness, even while headache later fades. Recurrence follows weight regain, pregnancy, or renewed exposure to vitamin A and tetracyclines. Most patients stabilise with sustained weight loss and acetazolamide, but fulminant disease with rapid field loss has a poor visual outlook without surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Outcome",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Vision threat",
+      "Tunnel vision to optic atrophy"
+     ],
+     [
+      "Headache course",
+      "May persist after pressure settles"
+     ],
+     [
+      "Recurrence triggers",
+      "Weight regain and drug renewed exposure"
+     ],
+     [
+      "Good outlook",
+      "Sustained weight loss with acetazolamide"
+     ],
+     [
+      "Poor outlook",
+      "Fulminant field loss without surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** a young woman with overweight, headache, and **papilledema** is treated as IIH until proven otherwise. Opening pressure of at least 250 mm of water with normal fluid seals the diagnosis. Blind spot enlargement with nasal field loss is the earliest field defect. **Sixth nerve palsy** is a false localising sign. **Acetazolamide** plus weight loss is first therapy, and optic sheath fenestration rescues failing vision.",
+   "say": "High yield for the exam: a young woman with overweight, headache, and papilledema is treated as IIH until proven otherwise. Opening pressure of at least two hundred fifty millimeters of water with normal fluid is the finding that confirms the diagnosis. Blind spot enlargement with nasal field loss is the earliest field defect. Sixth nerve palsy is a false localising sign. Acetazolamide plus weight loss is first therapy, and optic sheath fenestration rescues failing vision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Classic patient",
+      "Young woman with headache"
+     ],
+     [
+      "Pressure cutoff",
+      "At least 250 mm of water, normal fluid"
+     ],
+     [
+      "Earliest field change",
+      "Blind spot enlargement, nasal loss"
+     ],
+     [
+      "False localising sign",
+      "Sixth nerve palsy"
+     ],
+     [
+      "First therapy",
+      "Acetazolamide plus weight loss"
+     ],
+     [
+      "Vision rescue",
+      "Optic sheath fenestration"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

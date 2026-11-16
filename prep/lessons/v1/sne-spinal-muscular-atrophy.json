@@ -1,0 +1,359 @@
+{
+ "v": 1,
+ "module": "sne-spinal-muscular-atrophy",
+ "title": "Spinal muscular atrophy",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Spinal muscular atrophy** is an autosomal recessive degeneration of anterior horn cells caused by loss of the **SMN1 gene**. The motor neurons die, muscles waste, and weakness is proximal and symmetric. The infant form shows hypotonia with a floppy child, a bell shaped chest, and tongue fasciculations. **SMN2** copy number modifies severity by producing some functional protein.",
+   "say": "Spinal muscular atrophy is an autosomal recessive degeneration of anterior horn cells caused by loss of the SMN1 gene. The motor neurons die, muscles waste and weakness is proximal and symmetric. The infant form shows hypotonia with a floppy child, a bell shaped chest and tongue fasciculations. SMN2 copy number modifies severity by producing some functional protein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Onset",
+     "Severity"
+    ],
+    "rows": [
+     [
+      "Type 1, Werdnig Hoffmann",
+      "Infancy",
+      "Severe, never sits"
+     ],
+     [
+      "Type 2, dubow type",
+      "Early childhood",
+      "Sits but never walks"
+     ],
+     [
+      "Kugelberg Welander type",
+      "Later childhood",
+      "Walks at onset"
+     ],
+     [
+      "Type 4, adult onset",
+      "Adulthood",
+      "Mildest form"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SMN1 deletion** on both alleles causes the disease, most often a homozygous loss. The backup **SMN2 gene** makes only a little working protein, so extra **SMN2 copies** give a milder course. **Genetic testing** for SMN1 deletion with SMN2 copy number confirms the diagnosis. **Newborn screening** where available finds the deletion before symptoms and guides very early treatment.",
+   "say": "SMN1 deletion on both alleles causes the disease, most often a homozygous loss. The backup SMN2 gene makes only a little working protein, so extra SMN2 copies give a milder course. Genetic testing for SMN1 deletion with SMN2 copy number confirms the diagnosis. Newborn screening where available finds the deletion before symptoms and guides very early treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SMN1 (disease gene)",
+     "points": [
+      "Homozygous deletion or mutation",
+      "No functional protein made",
+      "Genetic test target"
+     ]
+    },
+    "right": {
+     "title": "SMN2 (modifier gene)",
+     "points": [
+      "Nearly identical backup copy",
+      "Small amount of full protein",
+      "Higher copy number, milder disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The mechanism is loss of **survival motor neuron protein**, which is essential for motor neuron maintenance. **SMN2** produces a small amount of full length protein that partially compensates. **Antisense drugs** increase exon inclusion in SMN2, and **gene replacement** delivers a functional SMN1 copy. Each therapy aims to raise functional protein before neurons are lost.",
+   "say": "The mechanism is loss of survival motor neuron protein, which is essential for motor neuron maintenance. SMN2 produces a small amount of full length protein that partially compensates. Antisense drugs increase exon inclusion in SMN2, and gene replacement delivers a functional SMN1 copy. Each therapy aims to raise functional protein before neurons are lost.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "SMN1 gene lost"
+     },
+     {
+      "id": "b",
+      "label": "Survival protein deficient"
+     },
+     {
+      "id": "c",
+      "label": "Motor neurons degenerate"
+     },
+     {
+      "id": "d",
+      "label": "Proximal symmetric wasting"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tongue fasciculations** are the most characteristic sign in the infant form and are visible with the mouth open. **Reflexes** are absent because the lower motor neuron is affected. **Sensation** is normal throughout, which separates spinal muscular atrophy from neuropathies. **Chest deformity** with a bell shaped chest causes respiratory failure in severe cases.",
+   "say": "Tongue fasciculations are the most characteristic sign in the infant form and are visible with the mouth open. Reflexes are absent because the lower motor neuron is affected. Sensation is normal throughout, which separates spinal muscular atrophy from neuropathies. Chest deformity with a bell shaped chest causes respiratory failure in severe cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Meaning",
+     "Distinguishes from"
+    ],
+    "rows": [
+     [
+      "Tongue fasciculations",
+      "Anterior horn involvement",
+      "Neuropathies"
+     ],
+     [
+      "Absent reflexes",
+      "Lower motor neuron lesion",
+      "Central weakness"
+     ],
+     [
+      "Normal sensation",
+      "Motor neuron only",
+      "Neuropathies, cord lesions"
+     ],
+     [
+      "Bell shaped chest",
+      "Respiratory muscle weakness",
+      "Isolated limb disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nusinersen** is an antisense drug given intrathecally that increases full length transcript from SMN2. **Onasemnogene abeparvovec** is a one time gene replacement. **Risdiplam** is an oral splicing modifier. The **first test** is genetic testing for SMN1 deletion, and the **gold standard** is definitive genetic confirmation.",
+   "say": "Nusinersen is an antisense drug given intrathecally that increases full length transcript from SMN2. Onasemnogene abeparvovec is a one time gene replacement. Risdiplam is an oral splicing modifier. The first test is genetic testing for SMN1 deletion, and the gold standard is definitive genetic confirmation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Route",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Nusinersen",
+      "Intrathecal",
+      "Splicing modifier, repeated doses"
+     ],
+     [
+      "Onasemnogene abeparvovec",
+      "Intravenous once",
+      "Gene replacement, infants"
+     ],
+     [
+      "Risdiplam",
+      "Oral",
+      "Splicing modifier"
+     ],
+     [
+      "Supportive care",
+      "Multidisciplinary",
+      "Feeding, ventilation, physiotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electromyography** shows chronic denervation with fasciculations in a pattern too widespread for a single root. **Creatine kinase** is normal or mildly raised, which separates muscle disease from motor neuron disease. **Muscle biopsy** is rarely needed now that genetics is available. **Targeted prenatal testing** is offered to families with a known mutation.",
+   "say": "Electromyography demonstrates chronic denervation with fasciculations in a pattern too widespread for a single root. Creatine kinase is normal or mildly raised, which separates muscle disease from motor neuron disease. Muscle biopsy is rarely needed now that genetics is available. Targeted prenatal testing is offered to families with a known mutation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Genetic testing for SMN1",
+      "Deletion confirmed",
+      "Definitive diagnosis"
+     ],
+     [
+      "Electromyography",
+      "Chronic denervation, fasciculations",
+      "Severity and pattern"
+     ],
+     [
+      "Creatine kinase",
+      "Normal or mildly raised",
+      "Against myopathy"
+     ],
+     [
+      "Muscle biopsy",
+      "Neurogenic atrophy",
+      "Rarely needed now"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Early treatment** changes the natural history completely, which is why newborn screening and presymptomatic therapy are transformative. **Onasemnogene abeparvovec** is most effective before symptoms appear. Supportive care with feeding, breathing, and orthopaedic care remains essential at every stage. Families need counselling on inheritance and recurrence.",
+   "say": "Early treatment changes the natural history completely, which is why newborn screening and presymptomatic therapy are transformative. Onasemnogene abeparvovec is most effective before symptoms appear. Supportive care with feeding, breathing and orthopaedic care remains essential at every stage. Families need counselling on inheritance and recurrence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Newborn screening detects SMN1 loss"
+     },
+     {
+      "id": "b",
+      "label": "Treatment starts presymptomatically"
+     },
+     {
+      "id": "c",
+      "label": "Motor neurons preserved"
+     },
+     {
+      "id": "d",
+      "label": "Natural history transformed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Complications** are respiratory failure, feeding difficulty with aspiration, scoliosis, and joint contractures. **Type 1** infants need early airway and feeding support. **Scoliosis** progresses with growth and needs orthopaedic review. **Recurrence risk** for parents is one in four in each pregnancy.",
+   "say": "Complications are respiratory failure, feeding difficulty with aspiration, scoliosis and joint contractures. Type 1 infants need early airway and feeding support. Scoliosis progresses with growth and needs orthopaedic review. Recurrence risk for parents is one in four in each pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Type affected",
+     "Care"
+    ],
+    "rows": [
+     [
+      "Respiratory failure",
+      "Type 1 and 2",
+      "Ventilation planning"
+     ],
+     [
+      "Feeding difficulty",
+      "Type 1",
+      "Gastrostomy feeding"
+     ],
+     [
+      "Scoliosis",
+      "Type 2 and later types",
+      "Orthopaedic surveillance"
+     ],
+     [
+      "Contractures",
+      "All types",
+      "Physiotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test reflexes, sensation, and inheritance. Absent reflexes with normal sensation point to anterior horn disease, not neuropathy. Tongue fasciculations in a floppy infant indicate spinal muscular atrophy. Inheritance is recessive, which is the commonest wrong answer in the exam. **Creatine kinase** near normal separates it from dystrophies.",
+   "say": "Traps test reflexes, sensation and inheritance. Absent reflexes with normal sensation point to anterior horn disease, not neuropathy. Tongue fasciculations in a floppy infant indicate spinal muscular atrophy. Inheritance is recessive, which is the commonest wrong answer in the exam. Creatine kinase near normal separates it from dystrophies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Floppy infant, tongue fasciculations",
+      "Neuropathy",
+      "Spinal muscular atrophy type 1"
+     ],
+     [
+      "Absent reflexes, normal sensation",
+      "Cord lesion",
+      "Anterior horn disease"
+     ],
+     [
+      "Inheritance",
+      "Dominant",
+      "Recessive SMN1 loss"
+     ],
+     [
+      "Raised creatine kinase",
+      "Muscular dystrophy",
+      "Normal kinase favours spinal muscular atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** SMN1 loss causes anterior horn degeneration with tongue fasciculations and absent reflexes preserved sensation. Type 1 is severe in infancy, type 2 sits but never walks, and the mildest form walks at onset. Genetic testing is definitive, treatment is most effective presymptomatically, and inheritance is recessive.",
+   "say": "High yield for the exam: SMN1 loss causes anterior horn degeneration with tongue fasciculations and absent reflexes with preserved sensation. Type 1 is severe in infancy, type 2 sits but never walks and the mildest form walks at onset. Genetic testing is definitive, treatment is most effective presymptomatically and inheritance is recessive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Gene",
+      "SMN1 loss",
+      "Recessive inheritance"
+     ],
+     [
+      "Key sign",
+      "Tongue fasciculations",
+      "Infant form"
+     ],
+     [
+      "Reflexes",
+      "Absent",
+      "Lower motor neuron"
+     ],
+     [
+      "Sensation",
+      "Normal",
+      "Excludes neuropathy"
+     ],
+     [
+      "Definitive test",
+      "Genetic testing",
+      "SMN1 deletion"
+     ],
+     [
+      "Treatment",
+      "Gene replacement, antisense",
+      "Presymptomatic best"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

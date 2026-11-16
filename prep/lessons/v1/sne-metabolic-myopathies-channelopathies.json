@@ -1,0 +1,365 @@
+{
+ "v": 1,
+ "module": "sne-metabolic-myopathies-channelopathies",
+ "title": "Metabolic myopathies and channelopathies",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Metabolic myopathies** cause exercise intolerance with muscle pain, stiffness, and second wind phenomena. **Pompe disease** is acid maltase deficiency with proximal weakness and respiratory failure. **McArdle disease** is myophosphorylase deficiency with a second wind after brief rest. **Lipid storage disorders** cause weakness with cardiac involvement. Creatine kinase rises with exertion in most of these conditions.",
+   "say": "Metabolic myopathies cause exercise intolerance with muscle pain, stiffness and second wind phenomena. Pompe disease is acid maltase deficiency with proximal weakness and respiratory failure. McArdle disease is myophosphorylase deficiency with a second wind after brief rest. Lipid storage disorders cause weakness with cardiac involvement. Creatine kinase rises with exertion in most of these conditions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Defect",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Pompe disease",
+      "Acid maltase deficiency",
+      "Proximal weakness with respiratory failure"
+     ],
+     [
+      "McArdle disease",
+      "Myophosphorylase deficiency",
+      "Second wind phenomenon"
+     ],
+     [
+      "Carnitine palmitoyltransferase deficiency",
+      "Fat oxidation defect",
+      "Rhabdomyolysis with fasting"
+     ],
+     [
+      "Lipid storage disease",
+      "Enzyme deficiency",
+      "Weakness with cardiac involvement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**McArdle disease** is the glycogenosis with absent myophosphorylase, and the **second wind** is the exam clue. Plasma creatine kinase rises sharply after exercise because muscle has no backup fuel. **Rhabdomyolysis** with myoglobinuria follows sustained exertion. **Fixed weakness** develops late in the disease. Blood tests during an attack are diagnostic.",
+   "say": "McArdle disease is the glycogenosis with absent myophosphorylase, and the second wind is the exam clue. Plasma creatine kinase rises sharply after exercise because muscle has no backup fuel. Rhabdomyolysis with myoglobinuria follows sustained exertion. Fixed weakness develops late in the disease. Blood tests during an attack are diagnostic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exercise begins, glycogen unavailable"
+     },
+     {
+      "id": "b",
+      "label": "Pain and stiffness at first"
+     },
+     {
+      "id": "c",
+      "label": "Blood flow rises with continued effort"
+     },
+     {
+      "id": "d",
+      "label": "Second wind with fatty acid fuel"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Periodic paralysis** is a channelopathy of hyperkalaemic, hypokalaemic, and normokalaemic forms. **Hypokalaemic periodic paralysis** causes attacks with low potassium and is helped by potassium. **Hyperkalaemic periodic paralysis** causes attacks with high potassium and is helped by carbohydrate. **Andersen Tawil syndrome** is marked by cardiac arrhythmia and dysmorphic features.",
+   "say": "Periodic paralysis is a channelopathy of hyperkalaemic, hypokalaemic, and normokalaemic forms. Hypokalaemic periodic paralysis causes attacks with low potassium and is helped by potassium. Hyperkalaemic periodic paralysis causes attacks with high potassium and is helped by carbohydrate. Andersen Tawil syndrome is marked by cardiac arrhythmia and dysmorphic features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Potassium",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Hypokalaemic",
+      "Low",
+      "Potassium replacement"
+     ],
+     [
+      "Hyperkalaemic",
+      "High",
+      "Carbohydrate with beta-agonist"
+     ],
+     [
+      "Normokalaemic",
+      "Normal",
+      "Acetazolamide"
+     ],
+     [
+      "Andersen Tawil",
+      "Variable",
+      "Cardiac monitoring essential"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Myotonia** is delayed relaxation after contraction and is tested by grip release and percussion mounding. **Myotonic dystrophy** is the commonest adult muscular dystrophy with myotonia and cataracts. **Thomsen disease** is dominant myotonia congenita, and **Becker disease** is the recessive form. **EMG** has myotonic discharges on needle insertion.",
+   "say": "Myotonia is delayed relaxation after contraction and is tested by grip release and percussion mounding. Myotonic dystrophy is the commonest adult muscular dystrophy with myotonia and cataracts. Thomsen disease is dominant myotonia congenita, and Becker disease is the recessive form. EMG has myotonic discharges on needle insertion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Inheritance",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Myotonic dystrophy",
+      "Dominant, with anticipation",
+      "Myotonia with cataracts"
+     ],
+     [
+      "Thomsen disease",
+      "Dominant",
+      "Myotonia congenita"
+     ],
+     [
+      "Becker disease",
+      "Recessive",
+      "Myotonia congenita"
+     ],
+     [
+      "Paramyotonia congenita",
+      "Dominant",
+      "Cold worsened myotonia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malignant hyperthermia** follows volatile anaesthetics and a depolarising relaxant in susceptible patients. **The antidote** is the specific antidote and is given immediately. **Carbohydrate** supports the treatment. Susceptibility is tested by muscle contracture testing. **Exertional rhabdomyolysis** in heat is the community mimic.",
+   "say": "Malignant hyperthermia follows volatile anaesthetics and a depolarising relaxant in susceptible patients. The antidote is the specific antidote and is given immediately. Carbohydrate supports the treatment. Susceptibility is tested by muscle contracture testing. Exertional rhabdomyolysis in heat is the community mimic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Trigger",
+     "Care"
+    ],
+    "rows": [
+     [
+      "Malignant hyperthermia",
+      "Volatile anaesthetics",
+      "The antidote immediately"
+     ],
+     [
+      "Exertional rhabdomyolysis",
+      "Heat with sustained exercise",
+      "Cooling and fluids"
+     ],
+     [
+      "Drug induced weakness",
+      "Recent new prescriptions",
+      "Review and withdrawal"
+     ],
+     [
+      "Alcoholic myopathy",
+      "Chronic alcohol use",
+      "Abstinence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test second wind, myotonia, and anaesthetic triggers. Second wind is McArdle disease, myotonia with cataracts is myotonic dystrophy, and anaesthetic triggered rigidity is malignant hyperthermia. **Fixed weakness** in McArdle disease develops late. **Anticipation** in myotonic dystrophy is maternal in transmission.",
+   "say": "Traps test second wind, myotonia, and anaesthetic triggers. Second wind is McArdle disease, myotonia with cataracts is myotonic dystrophy, and anaesthetic triggered rigidity is malignant hyperthermia. Fixed weakness in McArdle disease develops late. Anticipation in myotonic dystrophy is maternal in transmission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Second wind phenomenon",
+      "Inflammatory myopathy",
+      "McArdle disease"
+     ],
+     [
+      "Myotonia with cataracts",
+      "Myotonic congenita",
+      "Myotonic dystrophy"
+     ],
+     [
+      "Anaesthetic rigidity",
+      "Seizure",
+      "Malignant hyperthermia"
+     ],
+     [
+      "Maternal anticipation",
+      "Thomsen disease",
+      "Myotonic dystrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Evaluation** uses creatine kinase during attacks, forearm exercise testing, and genetic panels. **Muscle biopsy** is reserved for unclear cases with vacuolar pathology. **Cardiac screening** is needed in Andersen Tawil syndrome and myotonic dystrophy. **Anaesthetic alerts** are documented for malignant hyperthermia families.",
+   "say": "Evaluation uses creatine kinase during attacks, forearm exercise testing and genetic panels. Muscle biopsy is reserved for unclear cases with vacuolar pathology. Cardiac screening is needed in Andersen Tawil syndrome and myotonic dystrophy. Anaesthetic alerts are documented for malignant hyperthermia families.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Purpose",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Creatine kinase during attack",
+      "Exercise intolerance",
+      "Sharp rise after effort"
+     ],
+     [
+      "Forearm exercise test",
+      "McArdle disease",
+      "Lactate fails to rise"
+     ],
+     [
+      "Genetic panel",
+      "Channelopathy confirmation",
+      "Mutation identified"
+     ],
+     [
+      "Cardiac screening",
+      "Andersen Tawil, dystrophy",
+      "Arrhythmia risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Treatment** is largely supportive with dietary and exercise advice. **Carbohydrate** helps McArdle disease through second wind strategies. **Potassium** is given for hypokalaemic attacks and **carbohydrate with beta-agonist** is given for hyperkalaemic attacks. A **sodium-channel-blocking agent** helps myotonia in selected patients. **Anaesthetic precautions** are lifelong for malignant hyperthermia families.",
+   "say": "Treatment is largely supportive with dietary and exercise advice. Carbohydrate helps McArdle disease through second wind strategies. Potassium is given for hypokalaemic attacks and carbohydrate with beta-agonist is given for hyperkalaemic attacks. A sodium-channel-blocking agent helps myotonia in selected patients. Anaesthetic precautions are lifelong for malignant hyperthermia families.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exercise intolerance diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Disease specific therapy started"
+     },
+     {
+      "id": "c",
+      "label": "Attack plan documented"
+     },
+     {
+      "id": "d",
+      "label": "Anaesthetic card issued"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** in metabolic myopathies is generally good with adaptation. **McArdle disease** is followed by fixed weakness late in life. **Myotonic dystrophy** is progressive with cardiac and respiratory risk. **Cardiac screening** with ECG and **respiratory monitoring** with forced vital capacity guide care, while **genetic counselling** supports families. **Anaesthetic alerts** are documented for malignant hyperthermia families.",
+   "say": "Prognosis in metabolic myopathies is generally good with adaptation. McArdle disease is followed by fixed weakness late in life. Myotonic dystrophy is progressive with cardiac and respiratory risk. Cardiac screening with ECG and respiratory monitoring with forced vital capacity guide care, while genetic counselling supports families. Anaesthetic alerts are documented for malignant hyperthermia families.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Course",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "McArdle disease",
+      "Late fixed weakness",
+      "Rhabdomyolysis"
+     ],
+     [
+      "Myotonic dystrophy",
+      "Progressive, multisystem",
+      "Cardiac arrhythmia"
+     ],
+     [
+      "Periodic paralysis",
+      "Episodic, normal between",
+      "Respiratory failure in attacks"
+     ],
+     [
+      "Malignant hyperthermia",
+      "Lifelong susceptibility",
+      "Fatal without prompt antidote"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** second wind is McArdle disease, myotonia with cataracts is myotonic dystrophy, a muscle relaxant antidote is the antidote for malignant hyperthermia, and periodic paralysis attacks are driven by potassium. EMG shows myotonic discharges, and fixed weakness in McArdle disease is late.",
+   "say": "High yield for the exam: second wind is McArdle disease, myotonia with cataracts is myotonic dystrophy, a muscle relaxant antidote is the antidote for malignant hyperthermia, and periodic paralysis attacks are driven by potassium. EMG shows myotonic discharges, and fixed weakness in McArdle disease is late.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Second wind",
+      "McArdle disease",
+      "Glycogenosis clue"
+     ],
+     [
+      "Myotonia with cataracts",
+      "Myotonic dystrophy",
+      "Adult muscular dystrophy"
+     ],
+     [
+      "Antidote",
+      "The antidote",
+      "Malignant hyperthermia"
+     ],
+     [
+      "Periodic paralysis",
+      "Potassium driven attacks",
+      "Channelopathy"
+     ],
+     [
+      "EMG finding",
+      "Myotonic discharges",
+      "Needle insertion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,365 @@
+{
+ "v": 1,
+ "module": "sne-tuberculous-meningitis",
+ "title": "Tuberculous meningitis and CNS tuberculosis",
+ "minutes": 10,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Tuberculous meningitis** is a subacute **basal meningoencephalitis** caused by Mycobacterium tuberculosis reaching the subarachnoid space. Symptoms build over 1 to 3 weeks rather than hours, and untreated disease kills rapidly. Treated mortality stays substantial, far higher with HIV coinfection. Tuberculosis behind the blood brain barrier is a medical emergency where treatment must not await confirmation.",
+   "say": "Tuberculous meningitis is a subacute basal meningoencephalitis caused by Mycobacterium tuberculosis reaching the subarachnoid space. Symptoms build over one to three weeks rather than hours, and untreated disease is killing rapidly. Treated mortality is staying substantial, far higher with HIV coinfection. Tuberculosis behind the blood brain barrier is a medical emergency where treatment must not await confirmation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Value",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Tempo",
+      "Builds over 1 to 3 weeks",
+      "Subacute, not abrupt"
+     ],
+     [
+      "Untreated course",
+      "Rapid death",
+      "Never watch and wait"
+     ],
+     [
+      "HIV effect",
+      "Worse with coinfection",
+      "Test every patient for HIV"
+     ],
+     [
+      "Rule",
+      "Treat before confirmation",
+      "Deterioration is otherwise irreversible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disease begins when a **Rich focus**, a small subpial focus seeded during earlier dissemination, ruptures into the subarachnoid space. Active tuberculosis elsewhere is common, usually pulmonary. Risk concentrates in **HIV infection**, young childhood, old age and contacts of drug resistant strains. Evaluation for tuberculosis elsewhere in the body is mandatory, with HIV testing.",
+   "say": "Disease begins when a Rich focus, a small subpial focus seeded during earlier dissemination, ruptures into the subarachnoid space. Active tuberculosis elsewhere is common, usually pulmonary. Risk is concentrating in HIV infection, young childhood, old age and contacts of drug resistant strains. Evaluation for tuberculosis elsewhere in the body is mandatory, with HIV testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk factor",
+     "Detail",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Rich focus",
+      "Old subpial focus",
+      "Rupture starts disease"
+     ],
+     [
+      "Active TB elsewhere",
+      "Common, usually lungs",
+      "Image the chest"
+     ],
+     [
+      "HIV coinfection",
+      "Worse prognosis",
+      "Screen and counsel"
+     ],
+     [
+      "Resistance",
+      "Rifampicin resistance",
+      "Rapid molecular testing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rupture releases bacilli and antigen into the basal cisterns, where a thick **gelatinous exudate** cakes the pons, optic chiasm, and undersurfaces of the temporal lobes. The exudate strangulates **cranial nerves**, triggers **vasculitis** of the circle of Willis with deep infarction, and blocks cerebrospinal fluid flow to produce **communicating hydrocephalus**. Unlike pure meningitis, bacilli invade the pia and brain itself, so the process is truly a meningoencephalitis.",
+   "say": "Rupture is releasing bacilli and antigen into the basal cisterns, where a thick gelatinous exudate is caking the pons, optic chiasm, and undersurfaces of the temporal lobes. The exudate strangulates cranial nerves, triggers vasculitis of the circle of Willis with deep infarction, and blocks cerebrospinal fluid flow to produce communicating hydrocephalus. Unlike pure meningitis, bacilli invade the pia and brain itself, so the process is truly a meningoencephalitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bacteraemia seeds meninges"
+     },
+     {
+      "id": "b",
+      "label": "Rich focus forms silently"
+     },
+     {
+      "id": "c",
+      "label": "Focus ruptures into cisterns"
+     },
+     {
+      "id": "d",
+      "label": "Gelatinous basal exudate"
+     },
+     {
+      "id": "e",
+      "label": "Nerve, vessel, and CSF flow injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Low grade fever, malaise and headache creep in first, with Kernig and Brudzinski signs. The bedside giveaway is **cranial nerve involvement**, usually ocular palsies including the **sixth nerve**, with features of raised pressure from hydrocephalus. In infants the neck may stay supple while apathy, irritability, vomiting and seizures dominate. Declining consciousness and seizures demand urgent neurosurgical assessment.",
+   "say": "Low grade fever, malaise and headache are creeping in first, with Kernig and Brudzinski signs. The bedside giveaway is cranial nerve involvement, usually ocular palsies including the sixth nerve, with features of raised pressure from hydrocephalus. In infants the neck may stay supple while apathy, irritability, vomiting and seizures are dominating. Declining consciousness and seizures are demanding urgent neurosurgical assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult pattern",
+     "points": [
+      "Fever with headache and behaviour change",
+      "Ocular palsies including sixth nerve",
+      "Raised pressure with hydrocephalus"
+     ]
+    },
+    "right": {
+     "title": "Infant pattern",
+     "points": [
+      "Neck may stay supple",
+      "Apathy and hyperirritability",
+      "Vomiting with seizures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Beyond the meninges, tuberculosis builds **tuberculomas**, ring enhancing masses seen with basal enhancement, hydrocephalus and infarcts on imaging. Spinal disease brings cord compression with paraparesis. The closest mimics are partially treated pyogenic meningitis, **cryptococcal** or other fungal meningitis, viral meningoencephalitis and **carcinomatous** meningitis. Contrast imaging plus HIV testing separates them.",
+   "say": "Beyond the meninges, tuberculosis is building tuberculomas, ring enhancing masses seen with basal enhancement, hydrocephalus and infarcts on imaging. Spinal disease is bringing cord compression with paraparesis. The closest mimics are partially treated pyogenic meningitis, cryptococcal or other fungal meningitis, viral meningoencephalitis and carcinomatous meningitis. Contrast imaging plus HIV testing is separating them.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Hallmark",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Meningitis",
+      "Basal exudate with nerve injury",
+      "Progressive without treatment"
+     ],
+     [
+      "Tuberculoma",
+      "Ring enhancing mass",
+      "Shrinks or calcifies on drugs"
+     ],
+     [
+      "Spinal disease",
+      "Cord compression",
+      "Paraparesis and bladder injury"
+     ],
+     [
+      "Mimics",
+      "Pyogenic, fungal, viral, carcinomatous",
+      "Contrast imaging separates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lumbar puncture is the **first test**, showing inflammatory cells with raised protein and low glucose that falls slowly. **Cartridge based nucleic acid amplification** on cerebrospinal fluid gives a rapid answer and detects **rifampicin** resistance, but a negative result never excludes the disease. Contrast imaging shows **basal enhancement** with hydrocephalus, infarcts or tuberculomas, and HIV testing with body evaluation completes the workup.",
+   "say": "Lumbar puncture is the first test, showing inflammatory cells with raised protein and low glucose that falls slowly. Cartridge based nucleic acid amplification on cerebrospinal fluid gives a rapid answer and detects rifampicin resistance, but a negative result never excludes the disease. Contrast imaging shows basal enhancement with hydrocephalus, infarcts or tuberculomas, and HIV testing with body evaluation completes the workup.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CSF feature",
+     "Typical value",
+     "Reading"
+    ],
+    "rows": [
+     [
+      "White cells",
+      "Inflammatory, lymphocytic pattern",
+      "Early neutrophils mislead"
+     ],
+     [
+      "Chemistry",
+      "Raised protein with low glucose",
+      "Falls slowly"
+     ],
+     [
+      "Rapid test",
+      "Nucleic acid amplification",
+      "Detects rifampicin resistance"
+     ],
+     [
+      "Imaging",
+      "Basal enhancement with hydrocephalus",
+      "Infarcts or tuberculomas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment is prompt multidrug **anti-tuberculosis therapy** including **rifampicin**, never withheld while awaiting confirmatory tests. Every regimen adds adjunctive **dexamethasone** to reduce mortality and neurological morbidity. Obstructive hydrocephalus needs cerebrospinal fluid diversion with an external drain or shunt. Coinfected patients need HIV care alongside tuberculosis treatment, with monitoring for resistance and raised pressure.",
+   "say": "Treatment is prompt multidrug anti-tuberculosis therapy including rifampicin, never withheld while awaiting confirmatory tests. Every regimen is adding adjunctive dexamethasone to reduce mortality and neurological morbidity. Obstructive hydrocephalus needs cerebrospinal fluid diversion with an external drain or shunt. Coinfected patients need HIV care alongside tuberculosis treatment, with monitoring for resistance and raised pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Caution"
+    ],
+    "rows": [
+     [
+      "Backbone",
+      "Prompt multidrug anti-tuberculosis therapy",
+      "Never wait for confirmation"
+     ],
+     [
+      "Key drug",
+      "Rifampicin with resistance testing",
+      "Negative never excludes"
+     ],
+     [
+      "Steroid",
+      "Adjunctive dexamethasone",
+      "Reduces death and disability"
+     ],
+     [
+      "Hydrocephalus",
+      "External drain or shunt",
+      "Urgent neurosurgical assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern practice starts HIV treatment promptly in coinfected patients and adjusts regimens when **rifampicin** resistance is detected. Obstructive hydrocephalus needs a **ventricular shunt**, expanding tuberculomas need excision for mass effect, and unstable spinal disease needs stabilisation after initial chemotherapy. Seizures and raised pressure need parallel control. Rehabilitation input addresses cognitive impairment, hydrocephalus and paresis.",
+   "say": "Modern practice starts HIV treatment promptly in coinfected patients and adjusts regimens when rifampicin resistance is detected. Obstructive hydrocephalus needs a ventricular shunt, expanding tuberculomas need excision for mass effect, and unstable spinal disease needs stabilisation after initial chemotherapy. Seizures and raised pressure need parallel control. Rehabilitation input is addressing cognitive impairment, hydrocephalus and paresis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Escalated medical care",
+     "points": [
+      "Prompt HIV treatment in coinfection",
+      "Adjusted regimen when rifampicin resistance is found",
+      "Dexamethasone alongside antibiotics"
+     ]
+    },
+    "right": {
+     "title": "Surgical situations",
+     "points": [
+      "Shunt for obstructive hydrocephalus",
+      "Excision for mass effect tuberculoma",
+      "Stabilisation for unstable spinal disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Survivors carry risks of **deafness**, blindness, epilepsy, cognitive loss and spinal arachnoiditis with paraparesis. **Dexamethasone** with antibiotics lowers mortality yet disability often persists. Outcome depends heavily on the neurological stage at treatment start: early treatment offers good recovery, while coma and deficits at presentation carry high mortality with frequent lasting sequelae.",
+   "say": "Survivors carry risks of deafness, blindness, epilepsy, cognitive loss and spinal arachnoiditis with paraparesis. Dexamethasone with antibiotics is lowering mortality yet disability often persists. Outcome depends heavily on the neurological stage at treatment start: early treatment offers good recovery, while coma and deficits at presentation carry high mortality with frequent lasting sequelae.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Late recognition with coma"
+     },
+     {
+      "id": "b",
+      "label": "Infarcts and hydrocephalus follow"
+     },
+     {
+      "id": "c",
+      "label": "Dexamethasone with antibiotics"
+     },
+     {
+      "id": "d",
+      "label": "Fewer deaths, disability persists"
+     },
+     {
+      "id": "e",
+      "label": "Rehab and shunt care continue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** Rich focus rupture into cisterns starts disease over 1 to 3 weeks; basal gelatinous exudate strangling cranial nerves including the sixth; ocular palsies with raised pressure; inflammatory CSF with low glucose; nucleic amplification detects rifampicin resistance; prompt multidrug therapy with **dexamethasone**; tuberculoma ring lesions; spinal compression with paraparesis.",
+   "say": "High yield for the exam: Rich focus rupture into cisterns is starting disease over one to three weeks; basal gelatinous exudate is strangling cranial nerves including the sixth; ocular palsies with raised pressure are classic; inflammatory CSF with low glucose is typical; nucleic amplification is detecting rifampicin resistance; prompt multidrug therapy with dexamethasone is saving lives; tuberculoma ring lesions and spinal compression with paraparesis are remembered.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Pathogenesis",
+      "Rich focus rupture into cisterns"
+     ],
+     [
+      "Onset",
+      "Subacute over 1 to 3 weeks"
+     ],
+     [
+      "Bedside clue",
+      "Ocular palsies including sixth nerve"
+     ],
+     [
+      "CSF formula",
+      "Inflammatory cells with low glucose"
+     ],
+     [
+      "Rapid test",
+      "Nucleic amplification, detects rifampicin resistance"
+     ],
+     [
+      "Regimen",
+      "Prompt multidrug therapy"
+     ],
+     [
+      "Steroid",
+      "Dexamethasone lowers death and disability"
+     ],
+     [
+      "Spine clue",
+      "Compression with paraparesis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
