@@ -112,16 +112,53 @@ test("scribble detection: fast back-and-forth zig-zag detected, line or circle i
   });
   assert.equal(S.isScribble(circle), false);
 
-  // Back-and-forth zig-zag scribble: 5 reversals
-  const scribble = [];
-  for (let r = 0; r < 5; r++) {
-    const xStart = r % 2 === 0 ? 0.2 : 0.4;
-    const xEnd = r % 2 === 0 ? 0.4 : 0.2;
-    for (let s = 0; s < 4; s++) {
-      scribble.push([xStart + (xEnd - xStart) * (s / 3), 0.3 + r * 0.01 + s * 0.002, 0.5]);
-    }
+  // Old loose rule (3 reversals) no longer fires: 5-reversal zigzag with no ink under it is a normal stroke
+  const zig = [];
+  for (let r = 0; r < 6; r++) for (let s = 0; s < 4; s++) zig.push([(r % 2 ? 0.4 : 0.2) + (r % 2 ? -0.2 : 0.2) * (s / 3), 0.3 + r * 0.01, 0.5]);
+  assert.equal(S.isScribble(zig, { durationMs: 300, pageW: 800, pageH: 1100, ink: [] }), false);
+});
+
+// Phase 0 (ink loss): handwriting must never erase; only fast dense scribbles over existing ink do.
+const PAGE = { pageW: 800, pageH: 1100 };
+const inkLine = (x0, x1, y) => ({ pts: Array.from({ length: 30 }, (_, i) => [x0 + (x1 - x0) * i / 29, y, 0.5]), gone: false });
+const notes = [inkLine(0.1, 0.9, 0.30), inkLine(0.1, 0.9, 0.32), inkLine(0.1, 0.9, 0.34)];
+// Letter-like strokes: rightward progress with vertical waves (m, n, w, e, s, cursive), plus small zigzags of 3-5 reversals.
+function word(x, y, w, waves, amp, n = 60) { return Array.from({ length: n }, (_, i) => [x + w * i / (n - 1), y + amp * Math.sin(i / (n - 1) * waves * Math.PI), 0.5]); }
+function zigzag(x, y, w, h, revs, per = 5) { const p = []; for (let r = 0; r <= revs; r++) for (let s = 0; s < per; s++) p.push([x + (r % 2 ? w - w * s / per : w * s / per), y + h * (r + s / per) / (revs + 1), 0.5]); return p; }
+function scribble(x, y, w, h, passes, per = 6) { const p = []; for (let r = 0; r < passes; r++) for (let s = 0; s < per; s++) p.push([x + (r % 2 ? w - w * s / per : w * s / per), y + h * r / passes + 0.001 * s, 0.5]); return p; }
+
+test("scribble P0: 40 handwriting strokes over notes never erase", () => {
+  const samples = [];
+  for (let i = 0; i < 10; i++) samples.push(word(0.1 + i * 0.03, 0.31, 0.12, 3 + (i % 3), 0.01));            // m, n, w over the lines, fast
+  for (let i = 0; i < 10; i++) samples.push(word(0.1, 0.31, 0.3 + i * 0.02, 8 + i, 0.012, 120));           // cursive words, many waves
+  for (let i = 0; i < 10; i++) samples.push(zigzag(0.2 + i * 0.02, 0.29, 0.05, 0.06, 3 + (i % 3)));       // z, s, 3-5 reversal zigzags
+  for (let i = 0; i < 10; i++) samples.push(scribble(0.2, 0.29, 0.06, 0.05, 8));                          // dense but SLOW scribble
+  let erased = 0;
+  samples.forEach((p, i) => {
+    const dur = i >= 30 ? 1500 : i >= 10 && i < 20 ? 1200 : 350;
+    if (S.isScribble(p, { ...PAGE, durationMs: dur, ink: notes })) erased++;
+  });
+  assert.equal(samples.length, 40);
+  assert.equal(erased, 0);
+});
+
+test("scribble P0: 20 fast dense scribbles over ink erase; same scribble on blank paper does not", () => {
+  let hits = 0;
+  for (let i = 0; i < 20; i++) {
+    const p = scribble(0.15 + i * 0.02, 0.295, 0.08 + (i % 4) * 0.02, 0.05, 8 + (i % 4));
+    if (S.isScribble(p, { ...PAGE, durationMs: 400 + i * 10, ink: notes })) hits++;
   }
-  assert.equal(S.isScribble(scribble), true);
+  assert.equal(hits, 20);
+  assert.equal(S.isScribble(scribble(0.2, 0.6, 0.1, 0.05, 10), { ...PAGE, durationMs: 400, ink: notes }), false);
+  assert.equal(S.isScribble(scribble(0.2, 0.295, 0.1, 0.05, 10), { ...PAGE, durationMs: 400, ink: notes.map((s) => ({ ...s, gone: true })) }), false);
+});
+
+test("scribble P0: erase covers only crossed strokes, a dot 15 px away survives", () => {
+  const sc = scribble(0.3, 0.295, 0.1, 0.05, 10);
+  assert.equal(S.coveredBy(sc, notes[1], 800, 1100), true);
+  const dotX = 0.3 + 0.1 + 15 / 800;
+  assert.equal(S.coveredBy(sc, { pts: [[dotX, 0.31, 0.5]] }, 800, 1100), false);
+  assert.equal(S.coveredBy(sc, inkLine(0.1, 0.9, 0.6), 800, 1100), false);
 });
 
 test("snippet: case-insensitive, highlight split, ellipsis at cut ends, no match is null", () => {

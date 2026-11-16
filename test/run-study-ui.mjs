@@ -152,21 +152,31 @@ ok(await live() === 1, "lasso delete: deletes the selected stroke");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 2, "undo of lasso delete restores the stroke");
 
-/* ---- scribble to erase: fast back-and-forth over a stroke erases it ---- */
+/* ---- scribble (Phase 0 ink-loss fix): OFF by default, so a zigzag over ink is kept as ink; when ON, a fast dense
+   scribble over a stroke erases only that stroke and the toast's Undo brings it back ---- */
 await page.click('[data-act="st-tool"][data-v="pen"]');
-await page.evaluate(() => {
+const scribbleOver = () => page.evaluate(() => {
   const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 12;
   const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
-  fire("pointerdown", 0.3, 0.2);
-  for (let i = 0; i < 4; i++) {
-    fire("pointermove", 0.45, 0.2 + (i % 2 === 0 ? 0.01 : -0.01));
-    fire("pointermove", 0.25, 0.2 + (i % 2 === 0 ? -0.01 : 0.01));
+  const onLine = (x) => 0.2 + (x - 0.2) * 0.125;   // the first test stroke runs (0.2, 0.2) to (0.68, 0.26)
+  fire("pointerdown", 0.3, onLine(0.3));
+  for (let pass = 0; pass < 8; pass++) for (let s = 1; s <= 8; s++) {
+    const x = pass % 2 ? 0.42 - 0.12 * s / 8 : 0.3 + 0.12 * s / 8;
+    fire("pointermove", x, onLine(x) + (s % 2 ? 0.001 : -0.001));
   }
-  fire("pointerup", 0.35, 0.2);
+  fire("pointerup", 0.3, onLine(0.3));
 });
-ok(await live() === 1, "scribble erase: fast back-and-forth over a stroke erases it");
+await scribbleOver();
+ok(await live() === 3, "scribble erase OFF by default: a zigzag over ink is kept as a new stroke, nothing erased");
 await page.click('[data-act="st-undo"]');
-ok(await live() === 2, "undo of scribble erase restores the stroke");
+ok(await live() === 2, "undo removes that zigzag stroke");
+await page.evaluate(() => { STUDY._state().scribble = true; });
+await scribbleOver();
+ok(await live() === 1, "scribble erase ON: a fast dense scribble over a stroke erases only that stroke");
+ok(await page.evaluate(() => /Erased 1 stroke/.test((document.querySelector("#stEraseToast") || {}).textContent || "")), "scribble erase shows the Erased toast with Undo");
+await page.click("#stEraseUndo");
+ok(await live() === 2, "toast Undo restores the erased stroke");
+await page.evaluate(() => { STUDY._state().scribble = false; });
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
