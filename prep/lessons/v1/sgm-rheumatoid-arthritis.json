@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-rheumatoid-arthritis",
+ "subject": "ss-general-medicine",
+ "title": "Rheumatoid arthritis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Rheumatoid arthritis** is symmetric small joint synovitis in middle aged women. **Metacarpophalangeal** and proximal interphalangeal joints are the early targets in these patients. Morning stiffness beyond 1 hour is the inflammatory clue in these patients. **Anti CCP** antibodies precede disease by years in these patients in many cohorts.",
+   "say": "Rheumatoid arthritis is symmetric small joint synovitis in middle aged women. Metacarpophalangeal and proximal interphalangeal joints are the early targets in these patients. Morning stiffness beyond one hour is the inflammatory clue in these patients. Anti CCP antibodies are present for years before disease in these patients in many cohorts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Joint group",
+     "Spared joints",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "MCP and PIP joints",
+      "DIP joints spared",
+      "Early symmetric disease"
+     ],
+     [
+      "Wrists and feet",
+      "Axial spine spared",
+      "Small joint pattern"
+     ],
+     [
+      "Knees and elbows",
+      "Sacroiliac spared",
+      "Large joint involvement"
+     ],
+     [
+      "Cervical spine",
+      "Cervical involvement occurs",
+      "Atlantoaxial subluxation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methotrexate** is the anchor drug for most rheumatoid arthritis in these patients. **Folic acid** co-prescription prevents methotrexate toxicity in these patients in many protocols. **Hydroxychloroquine** is first line for mild disease in these patients in many guidelines. **Sulfasalazine** with **leflunomide** are alternatives when methotrexate is not tolerated in these patients.",
+   "say": "Methotrexate is the anchor drug for most rheumatoid arthritis in these patients. Folic acid co-prescription prevents methotrexate toxicity in these patients in many protocols. Hydroxychloroquine is first line for mild disease in these patients in many guidelines. Sulfasalazine with leflunomide are alternatives when methotrexate is not tolerated in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Early rheumatoid diagnosis"
+     },
+     {
+      "id": "b",
+      "label": "Methotrexate started"
+     },
+     {
+      "id": "c",
+      "label": "Bridge with steroid"
+     },
+     {
+      "id": "d",
+      "label": "Escalate if active"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adalimumab** with **certolizumab** are anti TNF agents for active rheumatoid disease. **Tocilizumab** with **sarilumab** block IL-6 in these patients in many protocols. **Abatacept** mimics CTLA four for T cell costimulation blockade in these patients. **Rituximab** depletes B cells in seropositive refractory disease in these patients.",
+   "say": "Adalimumab with certolizumab are anti TNF agents for active rheumatoid disease. Tocilizumab with sarilumab block interleukin six in these patients in many protocols. Abatacept is CTLA four mimic for T cell costimulation blockade in these patients. Rituximab is B cell depletion in seropositive refractory disease in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Examples",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Anti TNF",
+      "Adalimumab, certolizumab",
+      "First biologic option"
+     ],
+     [
+      "IL-6 blockers",
+      "Tocilizumab, sarilumab",
+      "Monotherapy option"
+     ],
+     [
+      "Costimulation",
+      "Abatacept",
+      "Comorbidity friendly"
+     ],
+     [
+      "B cell depletion",
+      "Rituximab",
+      "Seropositive refractory disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Baricitinib** with **tofacitinib** and **upadacitinib** are oral JAK inhibitors for these patients. **Filgotinib** is the newer JAK inhibitor in this family in many guidelines. **Azathioprine** has a limited role in rheumatoid extra articular disease in these patients. **Colchicine** is not a rheumatoid drug despite its presence in listings confusion.",
+   "say": "Baricitinib with tofacitinib and upadacitinib are oral JAK inhibitors for these patients. Filgotinib is the newer JAK inhibitor in this family in many guidelines. Azathioprine has a limited role in rheumatoid extra articular disease in these patients. Colchicine is not a rheumatoid drug despite its presence in listings confusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Injectable biologics",
+     "points": [
+      "Anti TNF antibodies",
+      "IL-6 receptor blockers",
+      "B cell depletion therapy",
+      "Costimulation blockade works"
+     ]
+    },
+    "right": {
+     "title": "Oral JAK inhibitors",
+     "points": [
+      "Baricitinib and tofacitinib",
+      "Upadacitinib and filgotinib",
+      "Daily oral dosing",
+      "Lipid monitoring is needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**DAS28** scores disease activity for treat to target strategies in these patients. **Remission** is the target in early rheumatoid disease in these patients. **Methotrexate** plus **prednisolone** bridging achieves early control in these patients. **Ultrasound** remission supplements clinical remission in these patients in many protocols.",
+   "say": "DAS twenty eight scores disease activity for treat to target strategies in these patients. Remission is the target in early rheumatoid disease in these patients. Methotrexate plus prednisolone bridging achieves early control in these patients. Ultrasound remission is clinical remission plus imaging in these patients in many protocols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Activity score measured"
+     },
+     {
+      "id": "b",
+      "label": "Methotrexate plus bridge"
+     },
+     {
+      "id": "c",
+      "label": "Three month reassessment"
+     },
+     {
+      "id": "d",
+      "label": "Escalate to biologic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cervical instability** threatens the cord in long standing disease in these patients. **Interstitial lung disease** is the pulmonary complication that worsens prognosis in these patients. **Rheumatoid nodules** appear on pressure areas in these patients with high titre disease. **Vasculitis** is the extra articular smoking linked complication in these patients.",
+   "say": "Cervical instability threatens the cord in long standing disease in these patients. Interstitial lung disease is the pulmonary complication that worsens prognosis in these patients. Rheumatoid nodules appear on pressure areas in these patients with high titre disease. Vasculitis is the extra articular smoking linked complication in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Anaemia of chronic disease** accompanies active rheumatoid inflammation in these patients. **Trimethoprim** prophylaxis suits prolonged steroid use in these patients. **Prednisolone** in low dose with bone protection is the bridge strategy in these patients. **Smoking cessation** slows rheumatoid disease in these patients in many studies globally.",
+   "say": "Anaemia of chronic disease is associated with active rheumatoid inflammation in these patients. Trimethoprim prophylaxis suits prolonged steroid use in these patients. Prednisolone in low dose with bone protection is the bridge strategy in these patients. Smoking cessation slows rheumatoid disease in these patients in many studies globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Palindromic rheumatism** is brief attacks with normal joints between episodes in these patients. **Pregnancy** in rheumatoid disease needs drug review in these patients in many protocols. Joint replacement achieves good outcomes in destroyed joints in these patients. **Vaccination** with inactivated vaccines is advised before immunosuppression in these patients.",
+   "say": "Palindromic rheumatism is brief attacks with normal joints between episodes in these patients. Pregnancy in rheumatoid disease needs drug review in these patients in many protocols. Joint replacement achieves good outcomes in destroyed joints in these patients. Vaccination with inactivated vaccines is advised before immunosuppression in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Mechanism",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Cervical instability",
+      "Atlantoaxial erosion",
+      "Flexion imaging, surgical care"
+     ],
+     [
+      "Lung disease",
+      "Fibrosis pattern",
+      "Biologic caution, referral"
+     ],
+     [
+      "Felty syndrome",
+      "Splenomegaly, neutropenia",
+      "Disease control"
+     ],
+     [
+      "Nodules",
+      "Pressure area granuloma",
+      "Treat active disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anti phospholipid** features complicate rheumatoid disease in some patients with these histories. **Osteoporosis** follows chronic steroids in these patients in many cohorts. **Calcium** with vitamin D prevents steroid bone loss in these patients in many protocols. **DMARD** therapy must continue perioperatively in these patients in many guidelines.",
+   "say": "Anti phospholipid features are associated with rheumatoid disease in some patients with these histories. Osteoporosis follows chronic steroids in these patients in many cohorts. Calcium with vitamin D prevents steroid bone loss in these patients in many protocols. DMARD therapy must continue perioperatively in these patients in many guidelines.",
+   "vis": null
+  },
+  {
+   "tx": "**Treat** to target with methotrexate is the standard in early rheumatoid disease in these patients. **Early** diagnosis within 12 weeks improves outcomes in these patients in many studies. **Health economics** favours early biologic therapy in refractory disease in these patients. **Patient** education improves adherence in these patients in many clinics globally.",
+   "say": "Treat to target with methotrexate is the standard in early rheumatoid disease in these patients. Early diagnosis within twelve weeks improves outcomes in these patients in many studies. Health economics is in favour of early biologic therapy in refractory disease in these patients. Patient education improves adherence in these patients in many clinics globally.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** opens the joint summary for this lesson specifically. Remember methotrexate as the anchor drug, folic acid co-prescription and anti CCP specificity for rheumatoid disease. Anti TNF therapy is first biologic while JAK inhibitors offer oral options in these patients. Interstitial lung disease is the prognosis worsening complication here.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Methotrexate is the anchor drug for rheumatoid disease clearly. Folic acid co-prescription prevents methotrexate toxicity in practice. Anti CCP specificity is the marker of rheumatoid disease. JAK inhibitors are oral options for these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Anchor drug",
+      "Methotrexate for rheumatoid disease"
+     ],
+     [
+      "Co-prescription",
+      "Folic acid prevents toxicity effects"
+     ],
+     [
+      "First biologic",
+      "Anti TNF therapy is first option"
+     ],
+     [
+      "Oral option",
+      "JAK inhibitors offer daily dosing"
+     ],
+     [
+      "Activity score",
+      "DAS28 guides treat to target"
+     ],
+     [
+      "Bad complication",
+      "Interstitial lung disease worsens prognosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

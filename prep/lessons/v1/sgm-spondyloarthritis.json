@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "sgm-spondyloarthritis",
+ "subject": "ss-general-medicine",
+ "title": "Spondyloarthritis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Spondyloarthritis** unites ankylosing spondylitis with psoriatic and reactive forms. **Inflammatory back pain** improves with activity and worsens with rest in these patients. **Sacroiliitis** on MRI is the early imaging hallmark in these patients. **HLA-B27** positivity supports the diagnosis in these patients in many cohorts.",
+   "say": "Spondyloarthritis unites ankylosing spondylitis with psoriatic and reactive forms. Inflammatory back pain improves with activity and worsens with rest in these patients. Sacroiliitis on MRI is the early imaging hallmark in these patients. HLA B twenty seven positivity supports the diagnosis in these patients in many cohorts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Ankylosing spondylitis",
+      "Axial disease",
+      "Sacroiliitis, HLA-B27"
+     ],
+     [
+      "Psoriatic arthritis",
+      "Peripheral and axial",
+      "Nail pits, dactylitis"
+     ],
+     [
+      "Reactive arthritis",
+      "Post dysentery triad",
+      "Conjunctivitis, keratoderma"
+     ],
+     [
+      "Enteropathic arthritis",
+      "With bowel disease",
+      "Crohn and ulcerative colitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Enteropathic arthritis** parallels bowel flares in these patients with this presentation. **Dactylitis** is sausage digit swelling in psoriatic disease in these patients. **Enthesitis** causes Achilles pain in these patients in many histories. **Diclofenac** relieves inflammatory pain in these patients in many protocols globally.",
+   "say": "Enteropathic arthritis is bowel flare associated joint disease in these patients. Dactylitis is sausage digit swelling in psoriatic disease in these patients. Achilles pain with enthesitis is common in these patients in many histories. Diclofenac is relief for inflammatory pain in these patients in many protocols globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Secukinumab** with **ixekizumab** are IL seventeen blockers for axial disease in these patients. **Adalimumab** with **infliximab** are anti TNF options for these patients in many guidelines. **Methotrexate** suits peripheral psoriatic disease in these patients in many protocols. **Sulfasalazine** suits peripheral disease and bowel involvement in these patients.",
+   "say": "Secukinumab with ixekizumab are IL seventeen blockers for axial disease in these patients. Adalimumab with infliximab are anti TNF options for these patients in many guidelines. Methotrexate is the choice for peripheral psoriatic disease in these patients in many protocols. Sulfasalazine is the choice for peripheral disease with bowel involvement in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Axial disease therapy",
+     "points": [
+      "Secukinumab and ixekizumab",
+      "Anti TNF antibodies",
+      "NSAIDs first line step",
+      "Physiotherapy is essential"
+     ]
+    },
+    "right": {
+     "title": "Peripheral disease therapy",
+     "points": [
+      "Methotrexate anchored therapy",
+      "Sulfasalazine option",
+      "IL seventeen blockers",
+      "Anti TNF alternatives"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Uveitis** is acute anterior in spondyloarthritis with painful red eye in these patients. **Iritis** needs topical steroids with ophthalmology care in these patients. **Aortitis** with aortic regurgitation is the cardiac complication in these patients. **Chest expansion** falls with costovertebral ankylosis in these patients.",
+   "say": "Uveitis is acute anterior in spondyloarthritis with painful red eye in these patients. Iritis needs topical steroids with ophthalmology care in these patients. Aortitis with aortic regurgitation is the cardiac complication in these patients. Chest expansion falls with costovertebral ankylosis in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Extra articular",
+     "Presentation",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Uveitis",
+      "Painful red eye",
+      "Topical steroids, referral"
+     ],
+     [
+      "Aortitis",
+      "Aortic regurgitation",
+      "Echo surveillance"
+     ],
+     [
+      "Psoriasis",
+      "Skin plaques",
+      "Dermatology co-care"
+     ],
+     [
+      "Colitis",
+      "Diarrhoea and blood",
+      "Gastroenterology referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ankylosing spondylitis** progresses to bamboo spine over years in these patients. **Bamboo spine** is the radiographic end stage of this disease in these patients. **Osteoporosis** with fractures complicates long standing ankylosis in these patients. **Physiotherapy** preserves posture and spinal mobility in these patients in many protocols.",
+   "say": "Ankylosing spondylitis progresses to bamboo spine over years in these patients. Bamboo spine is the radiographic end stage of this disease in these patients. Osteoporosis with fractures complicates long standing ankylosis in these patients. Physiotherapy is the posture preserving measure in these patients in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Enthesitis related arthritis** presents in young boys with heel pain in these patients. **Peripheral** prophylaxis with rest and physiotherapy suits mild enthesitis in these patients. **Biologics** are needed for refractory axial disease in these patients in many protocols. **Smoking** worsens spinal fusion in these patients in many cohort studies globally.",
+   "say": "Enthesitis related arthritis presents in young boys with heel pain in these patients. Peripheral prophylaxis with rest and physiotherapy suits mild enthesitis in these patients. Biologics are needed for refractory axial disease in these patients in many protocols. Smoking worsens spinal fusion in these patients in many cohort studies globally.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inflammatory back pain"
+     },
+     {
+      "id": "b",
+      "label": "Sacroiliac MRI positive"
+     },
+     {
+      "id": "c",
+      "label": "NSAID and physiotherapy"
+     },
+     {
+      "id": "d",
+      "label": "Biologic if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Psoriatic arthritis** classification needs psoriasis with nail and joint features in these patients. **Methotrexate** controls peripheral joints without axial benefit in these patients in many protocols. **Secukinumab** treats skin and joints together in these patients in many guidelines. **Dactylitis** responds to biologics in these patients in many case series.",
+   "say": "Psoriatic arthritis classification needs psoriasis with nail and joint features in these patients. Methotrexate controls peripheral joints without axial benefit in these patients in many protocols. Secukinumab is the treatment of skin and joints together in these patients in many guidelines. Dactylitis is responsive to biologics in these patients in many case series.",
+   "vis": null
+  },
+  {
+   "tx": "**Reactive arthritis** triad is arthritis, conjunctivitis and keratoderma in these patients. **Antibiotics** treat the trigger infection in these patients in many protocols. **NSAIDs** control joint pain in these patients in many clinics globally. **Chronic** disease needs biologic therapy in these patients in many case reports.",
+   "say": "Reactive arthritis triad is arthritis, conjunctivitis and keratoderma in these patients. Antibiotics are the treatment of the trigger infection in these patients in many protocols. NSAIDs control joint pain in these patients in many clinics globally. Chronic disease needs biologic therapy in these patients in many case reports.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Axial spondylitis",
+     "points": [
+      "Inflammatory back pain",
+      "Sacroiliitis on imaging",
+      "HLA-B27",
+      "Bamboo spine late"
+     ]
+    },
+    "right": {
+     "title": "Psoriatic arthritis",
+     "points": [
+      "Psoriasis usually present",
+      "Dactylitis and enthesitis",
+      "Nail pits characteristic",
+      "Peripheral joints involved"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sacroiliac** joint injections relieve refractory sacroiliitis in these patients. **Spinal** surgery is needed for kyphotic deformity in these patients. **Exercise** programmes preserve spinal mobility in these patients in many studies globally. **Cardiovascular** risk is higher in these patients than in general populations.",
+   "say": "Sacroiliac joint injections are relief for refractory sacroiliitis in these patients. Spinal surgery is needed for kyphotic deformity in these patients. Exercise programmes are the mobility preserving measure in these patients in many studies globally. Cardiovascular risk is higher in these patients than in general populations.",
+   "vis": null
+  },
+  {
+   "tx": "**Screening** for uveitis needs eye referral at disease onset in these patients. **Aortic** regurgitation needs echo surveillance in these patients in many protocols. **Bone density** monitoring is advised in these patients in many guidelines globally. **Vaccination** before biologics is advised in these patients in many clinics today.",
+   "say": "Screening for uveitis needs eye referral at disease onset in these patients. Aortic regurgitation needs echo surveillance in these patients in many protocols. Bone density monitoring is advised in these patients in many guidelines globally. Vaccination before biologics is advised in these patients in many clinics today.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** introduces the final table of this lesson specifically. Remember inflammatory back pain improving with activity, sacroiliitis on MRI and secukinumab for axial disease in these patients. Dactylitis flags psoriatic disease while bamboo spine is the ankylosing end stage. HLA-B27 supports the diagnosis in these patients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Inflammatory back pain is the axial clue in these patients. Sacroiliitis on MRI is the imaging hallmark in these patients. Secukinumab is the IL seventeen blocker for axial disease. Dactylitis is the flag of psoriatic disease in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Back pain clue",
+      "Improves with activity, worsens with rest"
+     ],
+     [
+      "Imaging hallmark",
+      "Sacroiliitis on MRI imaging"
+     ],
+     [
+      "Axial biologic",
+      "Secukinumab blocks IL-17 pathway"
+     ],
+     [
+      "Psoriatic clue",
+      "Dactylitis with nail pits characteristic"
+     ],
+     [
+      "End stage",
+      "Bamboo spine in ankylosing disease"
+     ],
+     [
+      "Genetic support",
+      "HLA-B27 positivity supports diagnosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

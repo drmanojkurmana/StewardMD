@@ -1,0 +1,302 @@
+{
+ "v": 1,
+ "module": "sgm-parkinsonism",
+ "subject": "ss-general-medicine",
+ "title": "Parkinson disease and parkinsonism",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Parkinson disease** presents with bradykinesia and rigidity in these patients. **Tremor** is rest pill rolling in these patients. **Postural instability** is the late feature in these patients. **Levodopa** is the gold standard therapy in these patients. Prognosis is guided in these patients.",
+   "say": "Parkinson disease presents with bradykinesia and rigidity in these patients. Tremor is rest pill rolling in these patients. Postural instability is the late feature in these patients. Levodopa is the gold standard therapy in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Parkinson disease",
+     "Vascular pattern"
+    ],
+    "rows": [
+     [
+      "Bradykinesia",
+      "Prominent early feature",
+      "Less prominent pattern"
+     ],
+     [
+      "Rest tremor",
+      "Pill rolling tremor",
+      "Absent pattern"
+     ],
+     [
+      "Rigidity",
+      "Cogwheel rigidity",
+      "Variable pattern"
+     ],
+     [
+      "Gait",
+      "Festination and shuffle",
+      "Magnetic gait pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Levodopa** with **carbidopa** is the most effective therapy in these patients. **Pramipexole** with **ropinirole** are dopamine agonists in these patients. **Rotigotine** is a patch option in these patients. **Selegiline** with **rasagiline** inhibit MAO B in these patients. Dosing is titrated in these patients.",
+   "say": "Levodopa with carbidopa is the most effective therapy in these patients. Pramipexole with ropinirole are dopamine agonists in these patients. Rotigotine is a patch option in these patients. Selegiline with rasagiline inhibit MAO B in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Class",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Levodopa carbidopa",
+      "Dopamine precursor",
+      "Most effective therapy"
+     ],
+     [
+      "Pramipexole ropinirole",
+      "Dopamine agonists",
+      "Early monotherapy"
+     ],
+     [
+      "Selegiline rasagiline",
+      "MAO B inhibitors",
+      "Mild monotherapy"
+     ],
+     [
+      "Rotigotine",
+      "Agonist patch",
+      "Continuous delivery option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Entacapone** with **opicapone** inhibit COMT in these patients. **Amantadine** treats dyskinesia in these patients. **Apomorphine** infusion treats refractory phases in these patients. **Donepezil** with **rivastigmine** treat dementia in these patients. Dementia screening is needed in these patients during follow-up care.",
+   "say": "Entacapone with opicapone inhibit COMT in these patients with wearing off control. Amantadine is the treatment for dyskinesia in these patients with benefit. Apomorphine infusion is the treatment for refractory phases in these patients with rescue therapy. Donepezil with rivastigmine are the treatments for dementia in these patients with cognitive benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Progressive supranuclear palsy** presents with vertical gaze palsy in these patients. **Corticobasal degeneration** presents with apraxia in these patients. **Multiple system atrophy** presents with dysautonomia in these patients. **Drug induced** parkinsonism follows antipsychotics in these patients. Family history is sought in these patients.",
+   "say": "Progressive supranuclear palsy presents with vertical gaze palsy in these patients. Corticobasal degeneration presents with apraxia in these patients. Multiple system atrophy presents with dysautonomia in these patients. Drug induced parkinsonism follows antipsychotics in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parkinson disease",
+     "points": [
+      "Rest tremor prominent",
+      "Levodopa responsive",
+      "Asymmetric onset",
+      "Hyposmia present"
+     ]
+    },
+    "right": {
+     "title": "Atypical parkinsonism",
+     "points": [
+      "Early falls pattern",
+      "Levodopa poorly responsive",
+      "Symmetric onset",
+      "Gaze palsy present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Haloperidol** with **risperidone** cause parkinsonism in these patients. **Metoclopramide** causes parkinsonism in these patients. **Flunarizine** with **cinnarizine** cause parkinsonism in these patients. **Valproate** causes parkinsonism in these patients. Withdrawal resolves disease in these patients during follow-up care with ongoing monitoring.",
+   "say": "Haloperidol with risperidone cause parkinsonism in these patients with D2 blockade mechanism. Metoclopramide causes parkinsonism in these patients with D2 blockade mechanism. Flunarizine with cinnarizine cause parkinsonism in these patients with calcium blocker effect. Valproate causes parkinsonism in these patients with drug induced pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Class",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Haloperidol",
+      "Antipsychotic",
+      "D2 blockade cause"
+     ],
+     [
+      "Metoclopramide",
+      "Antiemetic",
+      "D2 blockade cause"
+     ],
+     [
+      "Flunarizine",
+      "Calcium blocker",
+      "Parkinsonism cause"
+     ],
+     [
+      "Valproate",
+      "Antimanic",
+      "Parkinsonism cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Deep brain stimulation** treats motor complications in these patients. **Subthalamic nucleus** is the target in these patients. **Globus pallidus** is an alternative target in these patients. **Levodopa** response predicts benefit in these patients. Motor fluctuation assessment should guide timing in these patients.",
+   "say": "Deep brain stimulation is the treatment for motor complications in these patients with fluctuation control. Subthalamic nucleus is the target in these patients with preferred placement. Globus pallidus is an alternative target in these patients with selective placement. Levodopa response is predictive of benefit in these patients with selection value.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Levodopa responsive disease"
+     },
+     {
+      "id": "b",
+      "label": "Motor fluctuations"
+     },
+     {
+      "id": "c",
+      "label": "DBS evaluation"
+     },
+     {
+      "id": "d",
+      "label": "Subthalamic target"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dysautonomia** with constipation precedes motor symptoms in these patients. **REM sleep** behaviour disorder precedes disease in these patients. **Hyposmia** predates disease in these patients. **Depression** accompanies disease in these patients. Prodromal features should be sought during history in these patients.",
+   "say": "Dysautonomia with constipation is the prodrome of motor symptoms in these patients with early onset. REM sleep behaviour disorder is the prodrome of disease in these patients with sleep disturbance. Hyposmia is the prodrome of disease in these patients with smell loss. Depression is the prodrome of disease in these patients with mood disturbance.",
+   "vis": null
+  },
+  {
+   "tx": "**Psychosis** needs **clozapine** with **quetiapine** in these patients. **Olanzapine** worsens parkinsonism in these patients. **Domperidone** treats nausea in these patients. **Midodrine** treats hypotension in these patients. Specialist review is needed in these patients during follow-up care with medication adjustment today.",
+   "say": "Psychosis needs clozapine with quetiapine in these patients with safe selection. Olanzapine is the worsening drug in these patients with parkinsonism risk. Domperidone is the treatment for nausea in these patients with peripheral benefit. Midodrine is the treatment for hypotension in these patients with blood pressure support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Drug",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Psychosis",
+      "Clozapine quetiapine",
+      "Safe in Parkinson disease"
+     ],
+     [
+      "Nausea",
+      "Domperidone",
+      "Peripheral blockade"
+     ],
+     [
+      "Hypotension",
+      "Midodrine",
+      "Vasopressor option"
+     ],
+     [
+      "Depression",
+      "Antidepressants",
+      "Careful selection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Physiotherapy** improves gait in these patients during follow-up. **Speech therapy** helps dysarthria in these patients during follow-up. **Swallowing** assessment is needed in these patients during follow-up. **Falls** prevention is needed in these patients during follow-up. Dietitian support should complement therapy in these patients during follow-up care.",
+   "say": "Physiotherapy improves gait in these patients during follow-up with cueing strategies. Speech therapy helps dysarthria in these patients during follow-up with loudness training. Swallowing assessment is needed in these patients during follow-up with texture modification. Falls prevention is needed in these patients during follow-up with home safety review.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gait freezing"
+     },
+     {
+      "id": "b",
+      "label": "Physiotherapy started"
+     },
+     {
+      "id": "c",
+      "label": "Speech and swallow review"
+     },
+     {
+      "id": "d",
+      "label": "Falls prevention plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glycopyrronium** treats sialorrhoea in these patients during follow-up. **Clonazepam** treats REM disorder in these patients during follow-up. **Melatonin** treats REM disorder in these patients during follow-up. **Memantine** treats dementia in these patients during follow-up. Sleep hygiene should be reinforced in these patients during follow-up care.",
+   "say": "Glycopyrronium is the treatment for sialorrhoea in these patients during follow-up with secretion control. Clonazepam is the treatment for REM disorder in these patients during follow-up with sleep support. Melatonin is the treatment for REM disorder in these patients during follow-up with circadian support. Memantine is the treatment for dementia in these patients during follow-up with cognitive support.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** titles this closing summary for the lesson specifically. Remember bradykinesia with rest tremor for Parkinson disease, levodopa as the gold standard and vertical gaze palsy for PSP. Clozapine with quetiapine treat psychosis while subthalamic DBS treats fluctuations. Hyposmia with REM disorder predates disease clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Bradykinesia with rest tremor is the pattern of Parkinson disease clearly. Levodopa is the gold standard therapy for these patients. Vertical gaze palsy is the pattern of PSP cases. Clozapine with quetiapine are the safe treatments for psychosis in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Motor pattern",
+      "Bradykinesia with rest tremor"
+     ],
+     [
+      "Gold standard",
+      "Levodopa for Parkinson disease"
+     ],
+     [
+      "PSP pattern",
+      "Vertical gaze palsy with early falls"
+     ],
+     [
+      "Psychosis therapy",
+      "Clozapine with quetiapine safe"
+     ],
+     [
+      "DBS target",
+      "Subthalamic nucleus for fluctuations"
+     ],
+     [
+      "Prodrome",
+      "Hyposmia with REM disorder predates"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

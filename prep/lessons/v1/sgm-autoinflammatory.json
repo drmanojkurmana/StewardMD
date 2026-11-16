@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-autoinflammatory",
+ "subject": "ss-general-medicine",
+ "title": "Autoinflammatory syndromes and adult-onset Still disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Familial Mediterranean fever** causes brief febrile serositis attacks in these patients. **Colchicine** prevents attacks and amyloidosis in these patients in many protocols. **Mevalonate kinase deficiency** causes hyper IgD syndrome in these patients. **TRAPS** is TNF receptor associated periodic syndrome in these patients.",
+   "say": "Familial Mediterranean fever causes brief febrile serositis attacks in these patients. Colchicine prevents attacks and amyloidosis in these patients in many protocols. Mevalonate kinase deficiency causes hyper IgD syndrome in these patients. TRAPS is TNF receptor associated periodic syndrome in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Attack duration",
+     "Gene clue"
+    ],
+    "rows": [
+     [
+      "FMF",
+      "Brief 1 to 3 days",
+      "MEFV gene mutation"
+     ],
+     [
+      "TRAPS",
+      "Longer 1 to 4 weeks",
+      "TNFRSF1 mutation"
+     ],
+     [
+      "HIDS MKD",
+      "Days with aphthae",
+      "MVK gene mutation"
+     ],
+     [
+      "CAPS",
+      "Neonatal onset",
+      "NLRP3 mutation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adult onset Still disease** presents with quotidian fever and evanescent rash in these patients. **Ferritin** is markedly elevated in these patients. **Anakinra** with **canakinumab** block IL-1 in these patients. **Tocilizumab** blocks IL-6 in these patients in many protocols very clearly.",
+   "say": "Adult onset Still disease presents with quotidian fever and evanescent rash in these patients. Ferritin is markedly elevated in these patients. Anakinra with canakinumab block interleukin one in these patients. Tocilizumab blocks interleukin six in these patients in many protocols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Quotidian fever pattern"
+     },
+     {
+      "id": "b",
+      "label": "Evanescent rash seen"
+     },
+     {
+      "id": "c",
+      "label": "Ferritin markedly raised"
+     },
+     {
+      "id": "d",
+      "label": "IL blockade therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CAPS** is cryopyrin associated periodic syndrome from birth in these patients. **Ciclosporin** has no CAPS role despite its presence in listings confusion. **Methotrexate** with etanercept help Still disease in these patients. **Etanercept** blocks TNF in these patients. Family history is sought in these patients.",
+   "say": "CAPS is cryopyrin associated periodic syndrome from birth in these patients. Ciclosporin has no CAPS role despite its presence in listings confusion. Methotrexate with etanercept help Still disease in these patients. Etanercept blocks TNF in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Yao syndrome** presents with periodic fever and dermatitis in these patients. **Serositis** with chest pain is the FMF attack pattern in these patients. **Amyloidosis** is the feared complication in these patients. **Colchicine** prevents amyloidosis in these patients. Genetic counselling is offered in these families.",
+   "say": "Yao syndrome presents with periodic fever and dermatitis in these patients. Serositis with chest pain is the FMF attack pattern in these patients. Amyloidosis is the feared complication in these patients. Colchicine prevents amyloidosis in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FMF attacks",
+     "points": [
+      "Brief 1 to 3 days",
+      "Serositis panel of pain",
+      "Colchicine prevents attacks",
+      "Amyloidosis without therapy"
+     ]
+    },
+    "right": {
+     "title": "Still disease",
+     "points": [
+      "Quotidian fever pattern",
+      "Evanescent rash present",
+      "Ferritin markedly raised",
+      "IL blockade helps"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cryopyrin** mutations cause CAPS with urticarial rash and neurosensory loss in these patients. **Canakinumab** is the IL-1 blocker for CAPS in these patients. **Anakinra** is the daily option for CAPS in these patients. **Macrophage activation** is the Still disease complication in these patients.",
+   "say": "Cryopyrin mutations cause CAPS with urticarial rash and neurosensory loss in these patients. Canakinumab is the interleukin one blocker for CAPS in these patients. Anakinra is the daily option for CAPS in these patients. Macrophage activation is the Still disease complication in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Differential** includes infection, lymphoma and vasculitis in these patients. **Infectious** workup excludes sepsis in these patients. **Malignancy** screening is needed in these patients. **Steroid** responsiveness supports Still disease in these patients. Steroid monitoring is needed in these patients. Steroid monitoring is needed in these patients with inflammatory markers serially.",
+   "say": "Differential is infection, lymphoma and vasculitis in these patients with thorough evaluation. Infectious workup excludes sepsis in these patients with cultures and imaging. Malignancy screening is needed in these patients with CT imaging. Steroid responsiveness supports Still disease in these patients with rapid improvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "FMF",
+     "Still disease"
+    ],
+    "rows": [
+     [
+      "Fever pattern",
+      "Brief attacks",
+      "Quotidian daily spikes"
+     ],
+     [
+      "Rash",
+      "Erysipelas like legs",
+      "Evanescent salmon rash"
+     ],
+     [
+      "Ferritin",
+      "Normal between attacks",
+      "Markedly elevated"
+     ],
+     [
+      "Biologic",
+      "Colchicine mainstay",
+      "IL blockade mainstay"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Attack diary** helps families track periodicity in these patients. **Genetic testing** confirms FMF in these patients. **Anakinra** treats colchicine resistant FMF in these patients. **Tocilizumab** treats refractory Still disease in these patients. Attack frequency guides therapy in these patients. Attack frequency guides therapy in these patients with biologic options.",
+   "say": "Attack diary helps families track periodicity in these patients with detailed records. Genetic testing confirms FMF in these patients with professional counselling. Anakinra is the option for colchicine resistant FMF in these patients. Tocilizumab is the option for refractory Still disease in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Growth failure** occurs in untreated CAPS in these patients. **Hearing loss** is a CAPS complication in these patients. **Ciclosporin** has no role here despite its presence in listings confusion. **Etanercept** helps TRAPS in these patients. Hearing assessment is advised in these patients.",
+   "say": "Growth failure occurs in untreated CAPS in these patients. Hearing loss is a CAPS complication in these patients. Ciclosporin has no role here despite its presence in listings confusion. Etanercept helps TRAPS in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Periodic fever attacks"
+     },
+     {
+      "id": "b",
+      "label": "Genetic testing confirm"
+     },
+     {
+      "id": "c",
+      "label": "Colchicine started"
+     },
+     {
+      "id": "d",
+      "label": "Biologic if resistant"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adult Still** needs exclusion of infection before immunosuppression in these patients. **Anakinra** treats macrophage activation in these patients. **Tocilizumab** treats refractory macrophage activation in these patients. **Steroids** bridge until biologics act in these patients. Infection exclusion precedes immunosuppression in these patients.",
+   "say": "Adult Still needs exclusion of infection before immunosuppression in these patients with thorough workup. Anakinra is the option for macrophage activation in these patients. Tocilizumab is the option for refractory macrophage activation in these patients. Steroids bridge until biologics act in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Follow up** needs attack frequency and ferritin monitoring in these patients. **Amyloid** screening with proteinuria is yearly in these patients. **Vaccination** before biologics is advised in these patients. **Steroid** taper is needed in these patients. Proteinuria screening is yearly in these patients.",
+   "say": "Follow up needs attack frequency and ferritin monitoring in these patients. Amyloid screening with proteinuria is yearly in these patients. Vaccination before biologics is advised in these patients. Steroid taper is needed in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** heads this closing table for the lesson specifically. Remember brief attacks with colchicine prevention for FMF and quotidian fever with evanescent rash for Still disease. Ferritin is markedly elevated in Still disease while interleukin blockers treat CAPS and Still disease. Amyloidosis is feared without colchicine in these patients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Brief attacks with colchicine prevention is the pattern of FMF clearly. Quotidian fever with evanescent rash is the pattern of Still disease. Ferritin is markedly elevated in Still disease cases. Interleukin blockers are the therapy for CAPS and Still disease cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "FMF pattern",
+      "Brief attacks, colchicine prevents"
+     ],
+     [
+      "Still pattern",
+      "Quotidian fever, evanescent rash"
+     ],
+     [
+      "Ferritin clue",
+      "Markedly elevated in Still disease"
+     ],
+     [
+      "CAPS therapy",
+      "Interleukin blockers treat CAPS"
+     ],
+     [
+      "Still therapy",
+      "Anakinra and tocilizumab options"
+     ],
+     [
+      "Feared outcome",
+      "Amyloidosis without colchicine therapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

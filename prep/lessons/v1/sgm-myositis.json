@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-myositis",
+ "subject": "ss-general-medicine",
+ "title": "Idiopathic inflammatory myopathies",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Polymyositis** is proximal weakness without rash in these patients. **Dermatomyositis** adds heliotrope rash with Gottron papules in these patients. **Inclusion body** myositis is painless weakness with finger flexor involvement in these patients. **Muscle biopsy** shows perifascicular atrophy in dermatomyositis in these patients.",
+   "say": "Polymyositis is proximal weakness without rash in these patients. Dermatomyositis is heliotrope rash with Gottron papules in these patients. Inclusion body myositis is painless weakness with finger flexor involvement in these patients. Muscle biopsy is the test for perifascicular atrophy in dermatomyositis in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Rash",
+     "Biopsy clue"
+    ],
+    "rows": [
+     [
+      "Polymyositis",
+      "No rash present",
+      "Endomysial infiltrate"
+     ],
+     [
+      "Dermatomyositis",
+      "Heliotrope, Gottron",
+      "Perifascicular atrophy"
+     ],
+     [
+      "Inclusion body",
+      "No rash present",
+      "Rimmed vacuoles"
+     ],
+     [
+      "Antisynthetase",
+      "Mechanic hands",
+      "Perimysial pathology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antisynthetase syndrome** combines myositis with lung disease and mechanic hands in these patients. **anti-Jo-1** is the commonest antisynthetase antibody in these patients. **Atorvastatin** induced myopathy is a mimic in these patients in many histories. **Steroid** myopathy separates by normal enzymes in these patients.",
+   "say": "Antisynthetase syndrome is myositis with lung disease and mechanic hands in these patients. Anti Jo one is the commonest antisynthetase antibody in these patients. Atorvastatin induced myopathy is a mimic in these patients in many histories. Steroid myopathy separates by normal enzymes in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Methylprednisolone** pulses induce remission in severe myositis in these patients. **Methotrexate** with **mycophenolate** are steroid sparing agents in these patients. **Ciclosporin** with tacrolimus suits refractory disease in these patients in many protocols. **Rituximab** helps antibody positive myositis in these patients in many case reports.",
+   "say": "Methylprednisolone pulses are the induction of remission in severe myositis in these patients. Methotrexate with mycophenolate are steroid sparing agents in these patients. Ciclosporin with tacrolimus are options for refractory disease in these patients in many protocols. Rituximab helps antibody positive myositis in these patients in many case reports.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Proximal weakness with rash"
+     },
+     {
+      "id": "b",
+      "label": "Steroid pulse therapy"
+     },
+     {
+      "id": "c",
+      "label": "Steroid sparing added"
+     },
+     {
+      "id": "d",
+      "label": "Physiotherapy support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Interstitial lung disease** is the leading cause of death in antisynthetase syndrome in these patients. **Azathioprine** with **cyclophosphamide** treat lung disease in these patients in many protocols. **Tacrolimus** is an alternative for lung disease in these patients. **CT chest** is the lung assessment test in these patients in many guidelines.",
+   "say": "Interstitial lung disease is the leading cause of death in antisynthetase syndrome in these patients. Azathioprine with cyclophosphamide are the treatment of lung disease in these patients in many protocols. Tacrolimus is an alternative for lung disease in these patients. CT chest is the lung assessment test in these patients in many guidelines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Dermatomyositis",
+     "Polymyositis"
+    ],
+    "rows": [
+     [
+      "Rash",
+      "Heliotrope, Gottron",
+      "Absent pattern"
+     ],
+     [
+      "Malignancy",
+      "Higher risk in adults",
+      "Lower risk pattern"
+     ],
+     [
+      "Lung disease",
+      "Common in antisynthetase",
+      "Less common pattern"
+     ],
+     [
+      "Biopsy",
+      "Perifascicular atrophy",
+      "Endomysial infiltrate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malignancy** screening is mandatory in adult dermatomyositis in these patients. **CT** imaging of chest and abdomen is the screening test in these patients in many protocols. **Dysphagia** with aspiration is the bulbar complication in these patients. **Myocarditis** is rare in these patients in many reports.",
+   "say": "Malignancy screening is mandatory in adult dermatomyositis in these patients. CT imaging of chest and abdomen is the screening test in these patients in many protocols. Dysphagia with aspiration is the bulbar complication in these patients. Myocarditis is rare in these patients in many reports.",
+   "vis": null
+  },
+  {
+   "tx": "**Creatine kinase** elevation supports myositis diagnosis in these patients. **EMG** shows myopathic units in these patients in many protocols. **MRI** shows muscle oedema in these patients in many centres today. **Muscle biopsy** remains the gold standard in these patients in many guidelines.",
+   "say": "Creatine kinase elevation supports myositis diagnosis in these patients. EMG is the test for myopathic units in these patients in many protocols. MRI is the test for muscle oedema in these patients in many centres today. Muscle biopsy remains the gold standard in these patients in many guidelines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Proximal weakness onset"
+     },
+     {
+      "id": "b",
+      "label": "CK elevation check"
+     },
+     {
+      "id": "c",
+      "label": "Muscle biopsy performed"
+     },
+     {
+      "id": "d",
+      "label": "Steroid sparing therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Juvenile dermatomyositis** presents with calcinosis and lipodystrophy in these patients. **Calcinosis** needs wound care in these patients in many protocols. Non myositis drugs have no role here despite their presence in listings confusion. **Physiotherapy** preserves strength in these patients in many studies globally.",
+   "say": "Juvenile dermatomyositis presents with calcinosis and lipodystrophy in these patients. Calcinosis needs wound care in these patients in many protocols. Non myositis drugs have no role here despite their presence in listings confusion. Physiotherapy is the strength preserving measure in these patients in many studies globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Overlap myositis** with systemic sclerosis features occurs in these patients. **Statin** rechallenge is advised after myopathy resolution in these patients. **Hypothyroid myopathy** mimics inflammatory disease in these patients in many histories. **Infection** triggers myositis flares in these patients in many reports.",
+   "say": "Overlap myositis with systemic sclerosis features occurs in these patients. Statin rechallenge is advised after myopathy resolution in these patients. Hypothyroid myopathy is similar to inflammatory disease in these patients in many histories. Infection is a trigger of myositis flares in these patients in many reports.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dermatomyositis pattern",
+     "points": [
+      "Heliotrope rash present",
+      "Gottron papules present",
+      "Perifascicular atrophy",
+      "Malignancy risk higher"
+     ]
+    },
+    "right": {
+     "title": "Polymyositis pattern",
+     "points": [
+      "No rash present",
+      "Endomysial infiltrate",
+      "Malignancy risk lower",
+      "Myositis antibodies help"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Titration** of steroids is guided by strength and CK in these patients. **Bone protection** is mandatory with prolonged steroids in these patients in many protocols. **Pneumocystis prophylaxis** suits prolonged immunosuppression in these patients in many guidelines. **Relapse** is common during steroid taper in these patients.",
+   "say": "Titration of steroids is guided by strength and CK in these patients. Bone protection is mandatory with prolonged steroids in these patients in many protocols. Prophylaxis against pneumocystis is advised during prolonged immunosuppression in these patients in many guidelines. Relapse is common during steroid taper in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Dysphagia** needs speech therapy with swallow assessment in these patients. **Respiratory** muscle weakness needs spirometry surveillance in these patients in many protocols. **IVIG** helps refractory dermatomyositis in these patients in many case reports. **Plasma exchange** is reserved for crisis in these patients in many centres.",
+   "say": "Dysphagia needs speech therapy with swallow assessment in these patients. Respiratory muscle weakness needs spirometry surveillance in these patients in many protocols. IVIG helps refractory dermatomyositis in these patients in many case reports. Plasma exchange is reserved for crisis in these patients in many centres.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** opens the closing table of this lesson specifically. Remember heliotrope rash with Gottron papules for dermatomyositis, perifascicular atrophy on biopsy and anti-Jo-1 for antisynthetase syndrome. Methylprednisolone pulses induce remission while malignancy screening is mandatory in dermatomyositis. Inclusion body myositis is painless with finger flexor weakness in these patients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Heliotrope rash with Gottron papules is the hallmark of dermatomyositis clearly. Perifascicular atrophy is the biopsy pattern in these patients. Anti Jo one is the antibody of antisynthetase syndrome. Methylprednisolone pulses are the induction for severe cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Dermatomyositis rash",
+      "Heliotrope with Gottron papules"
+     ],
+     [
+      "Biopsy pattern",
+      "Perifascicular atrophy in dermatomyositis"
+     ],
+     [
+      "Antisynthetase antibody",
+      "anti-Jo-1 is the commonest"
+     ],
+     [
+      "Induction therapy",
+      "Methylprednisolone pulses for severe disease"
+     ],
+     [
+      "Screening rule",
+      "Malignancy screening is mandatory"
+     ],
+     [
+      "Painless variant",
+      "Inclusion body finger flexor weakness"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

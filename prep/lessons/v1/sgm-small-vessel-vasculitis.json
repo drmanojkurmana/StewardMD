@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-small-vessel-vasculitis",
+ "subject": "ss-general-medicine",
+ "title": "ANCA-associated and small vessel vasculitis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Granulomatosis with polyangiitis** destroys upper airway and kidney in these patients. **Microscopic polyangiitis** lacks granulomas with pulmonary renal disease in these patients. **Eosinophilic granulomatosis** combines asthma with eosinophilia in these patients. **ANCA** antibodies flag these diseases in these patients in many cohorts.",
+   "say": "Granulomatosis with polyangiitis is upper airway and kidney destruction in these patients. Microscopic polyangiitis is pulmonary renal disease without granulomas in these patients. Eosinophilic granulomatosis is asthma with eosinophilia in these patients. ANCA antibodies are the flag of these diseases in these patients in many cohorts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Granuloma",
+     "ANCA pattern"
+    ],
+    "rows": [
+     [
+      "GPA",
+      "Present in airway",
+      "PR3 ANCA positive"
+     ],
+     [
+      "MPA",
+      "Absent pattern",
+      "MPO ANCA positive"
+     ],
+     [
+      "EGPA",
+      "Eosinophilic granulomas",
+      "MPO ANCA in half"
+     ],
+     [
+      "IgA vasculitis",
+      "Leukocytoclastic pattern",
+      "ANCA negative pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rituximab** induces remission in ANCA vasculitis in these patients. **Cyclophosphamide** is the historical induction standard in these patients. **Avacopan** blocks complement in these patients in many protocols globally. **Prednisone** induces remission with these agents in these patients in many centres.",
+   "say": "Rituximab is the induction of remission in ANCA vasculitis in these patients. Cyclophosphamide is the historical induction standard in these patients. Avacopan blocks complement in these patients in many protocols globally. Prednisone is the co-induction with these agents in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pulmonary renal syndrome"
+     },
+     {
+      "id": "b",
+      "label": "ANCA testing positive"
+     },
+     {
+      "id": "c",
+      "label": "Rituximab induction"
+     },
+     {
+      "id": "d",
+      "label": "Prednisone taper"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Azathioprine** with **methotrexate** maintain remission in these patients. **Levamisole** has no small vessel role despite its presence in listings confusion. **Adenosine** has no role here despite its presence in listings confusion. **Plasma exchange** suits alveolar haemorrhage in these patients in many protocols.",
+   "say": "Azathioprine with methotrexate are maintenance of remission in these patients. Levamisole has no small vessel role despite its presence in listings confusion. Adenosine has no role here despite its presence in listings confusion. Plasma exchange is an option for alveolar haemorrhage in these patients in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**IgA vasculitis** causes palpable purpura with abdominal pain in these patients. **Renal** involvement is the determinant of outcome in these patients. **Leukocytoclastic** vasculitis is skin limited disease in these patients. **Cryoglobulinaemia** accompanies hepatitis C in these patients in many centres.",
+   "say": "IgA vasculitis causes palpable purpura with abdominal pain in these patients. Renal involvement is the determinant of outcome in these patients. Leukocytoclastic vasculitis is skin limited disease in these patients. Cryoglobulinaemia is associated with hepatitis C in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Skin",
+     "Systemic"
+    ],
+    "rows": [
+     [
+      "GPA",
+      "Purpura uncommon",
+      "Airway destructive"
+     ],
+     [
+      "MPA",
+      "Purpura common",
+      "Kidney and lung"
+     ],
+     [
+      "EGPA",
+      "Purpura, nodules",
+      "Asthma, eosinophilia"
+     ],
+     [
+      "IgA vasculitis",
+      "Palpable purpura",
+      "Abdomen and kidney"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alveolar haemorrhage** is the pulmonary emergency in these patients. **Crescentic glomerulonephritis** is the renal emergency in these patients. **Saddle nose** destruction flags GPA in these patients in many histories. **Cavitation** on chest imaging flags GPA in these patients in many centres.",
+   "say": "Alveolar haemorrhage is the pulmonary emergency in these patients. Crescentic glomerulonephritis is the renal emergency in these patients. Saddle nose destruction is a flag of GPA in these patients in many histories. Cavitation on chest imaging is a flag of GPA in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Renal emergency",
+     "points": [
+      "Crescentic GN present",
+      "ANCA positive pattern",
+      "Plasma exchange option",
+      "Urgent immunosuppression"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary emergency",
+     "points": [
+      "Alveolar haemorrhage present",
+      "Hypoxia and haemoptysis",
+      "Ventilation support needed",
+      "Urgent immunosuppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tocilizumab** is the steroid sparing agent in large vessel disease in these patients. **ANCA** titre does not guide therapy in these patients in many studies. **Relapse** is common in PR3 positive disease in these patients in many cohorts. **Maintenance** rituximab prevents relapse in these patients.",
+   "say": "Tocilizumab is the steroid sparing agent in large vessel disease in these patients. ANCA titre does not guide therapy in these patients in many studies. Relapse is common in PR3 positive disease in these patients in many cohorts. Maintenance rituximab prevents relapse in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Kidney biopsy** shows pauci immune crescents in these patients. **Upper airway** biopsy is rarely diagnostic in these patients. **Skin** biopsy suits skin limited vasculitis in these patients. **ANCA** testing is the serologic standard in these patients in many guidelines today.",
+   "say": "Kidney biopsy is the test for pauci immune crescents in these patients. Upper airway biopsy is rarely diagnostic in these patients. Skin biopsy suits skin limited vasculitis in these patients. ANCA testing is the serologic standard in these patients in many guidelines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pulmonary renal syndrome"
+     },
+     {
+      "id": "b",
+      "label": "ANCA positive result"
+     },
+     {
+      "id": "c",
+      "label": "Kidney biopsy crescents"
+     },
+     {
+      "id": "d",
+      "label": "Induction therapy started"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eosinophilic granulomatosis** has asthma preceding vasculitis in these patients. **Mononeuritis** is the neurologic pattern in these patients. **IgA vasculitis** renal disease needs BP control in these patients. **Cryoglobulinaemic** disease needs HCV treatment in these patients in many centres. Careful chest follow-up is advised in these patients today.",
+   "say": "Eosinophilic granulomatosis has asthma preceding vasculitis in these patients. Mononeuritis is the neurologic pattern in these patients. IgA vasculitis renal disease needs BP control in these patients. Cryoglobulinaemic disease needs HCV treatment in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Infection** prophylaxis suits induction therapy in these patients in many protocols. **Bone protection** is mandatory with prolonged steroids in these patients. **Fertility** counselling precedes cyclophosphamide in these patients. **Smoking** cessation prevents vascular damage in these patients in many studies. Cardiology review is advised in these patients today.",
+   "say": "Infection prophylaxis is advised during induction therapy in these patients in many protocols. Bone protection is mandatory with prolonged steroids in these patients. Fertility counselling precedes cyclophosphamide in these patients. Smoking cessation prevents vascular damage in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Upper airway",
+     "Kidney"
+    ],
+    "rows": [
+     [
+      "GPA",
+      "Destructive saddle nose",
+      "Crescentic GN"
+     ],
+     [
+      "MPA",
+      "Upper airway spared",
+      "Crescentic GN"
+     ],
+     [
+      "EGPA",
+      "Asthma predominant",
+      "Less common GN"
+     ],
+     [
+      "IgA vasculitis",
+      "Upper airway spared",
+      "Mesangial pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follow up** needs ANCA and renal monitoring in these patients. **Relapse** detection needs early symptom review in these patients. **Vaccination** before immunosuppression is advised in these patients in many guidelines. **Cardiovascular** risk is higher in these patients in many cohorts today.",
+   "say": "Follow up needs ANCA and renal monitoring in these patients. Relapse detection needs early symptom review in these patients. Vaccination before immunosuppression is advised in these patients in many guidelines. Cardiovascular risk is higher in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** seals this lesson on small vessel disease. Remember saddle nose with cavitation for GPA, pauci immune crescents on biopsy and rituximab induction for ANCA vasculitis in these patients. Asthma with eosinophilia flags EGPA while palpable purpura with abdominal pain flags IgA vasculitis. Avacopan blocks complement in these patients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Saddle nose with cavitation is the pattern of GPA clearly. Pauci immune crescents are the biopsy pattern in these patients. Rituximab is the induction agent for ANCA vasculitis cases. Asthma with eosinophilia is the pattern of EGPA cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "GPA pattern",
+      "Saddle nose with cavitation"
+     ],
+     [
+      "Biopsy pattern",
+      "Pauci immune crescents on biopsy"
+     ],
+     [
+      "Induction agent",
+      "Rituximab for ANCA vasculitis"
+     ],
+     [
+      "EGPA pattern",
+      "Asthma with eosinophilia present"
+     ],
+     [
+      "IgA pattern",
+      "Palpable purpura with abdominal pain"
+     ],
+     [
+      "Complement blocker",
+      "Avacopan blocks complement pathway"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

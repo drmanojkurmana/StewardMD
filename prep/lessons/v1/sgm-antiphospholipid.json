@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-antiphospholipid",
+ "subject": "ss-general-medicine",
+ "title": "Antiphospholipid syndrome",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Antiphospholipid syndrome** combines thrombosis with obstetric morbidity in these patients. **Lupus anticoagulant** is the most predictive antibody for thrombosis in these patients. **Anticardiolipin** antibodies persist for 12 weeks in these patients. Classification needs clinical plus laboratory criteria in these patients in many guidelines.",
+   "say": "Antiphospholipid syndrome is thrombosis with obstetric morbidity in these patients. Lupus anticoagulant is the most predictive antibody for thrombosis in these patients. Anticardiolipin antibodies are present for twelve weeks in these patients. Classification needs clinical plus laboratory criteria in these patients in many guidelines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Clinical",
+     "Laboratory"
+    ],
+    "rows": [
+     [
+      "Thrombotic",
+      "Venous or arterial event",
+      "Lupus anticoagulant positive"
+     ],
+     [
+      "Obstetric",
+      "Foetal death, preeclampsia",
+      "Anticardiolipin positive"
+     ],
+     [
+      "Persistency",
+      "Clinical event documented",
+      "Repeat after 12 weeks"
+     ],
+     [
+      "Other",
+      "Livedo, thrombocytopenia",
+      "Beta-2 glycoprotein positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catastrophic APS** is multiorgan thrombosis in days in these patients. **Heparin** with plasma exchange treats catastrophic disease in these patients. **Warfarin** is standard for arterial thrombosis in these patients. **Aspirin** alone suits asymptomatic antibody carriers in these patients. Careful monitoring is required in these patients.",
+   "say": "Catastrophic APS is multiorgan thrombosis in days in these patients. Heparin with plasma exchange is the treatment of catastrophic disease in these patients. Warfarin is standard for arterial thrombosis in these patients. Aspirin alone is the option for asymptomatic antibody carriers in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thrombosis event"
+     },
+     {
+      "id": "b",
+      "label": "Antibody panel positive"
+     },
+     {
+      "id": "c",
+      "label": "Repeat after 12 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Anticoagulation decision"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Obstetric APS** needs heparin with aspirin in pregnancy in these patients. **Hydroxychloroquine** supports obstetric outcomes in these patients in many protocols. **Rituximab** helps refractory cases with these histories in many case reports. **Cyclophosphamide** is reserved for catastrophic disease in these patients.",
+   "say": "Obstetric APS needs heparin with aspirin in pregnancy in these patients. Hydroxychloroquine supports obstetric outcomes in these patients in many protocols. Rituximab helps refractory cases with these histories in many case reports. Cyclophosphamide is reserved for catastrophic disease in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Mycophenolate** with **azathioprine** maintain immunosuppression in lupus associated APS in these patients. **Tacrolimus** with voclosporin are alternatives in these patients in many protocols. **Methylprednisolone** treats acute inflammatory flares in these patients. **Ciclosporin** is another calcineurin option in these patients in many guidelines.",
+   "say": "Mycophenolate with azathioprine maintain immunosuppression in lupus associated APS in these patients. Tacrolimus with voclosporin are alternatives in these patients in many protocols. Methylprednisolone is the treatment of acute inflammatory flares in these patients. Ciclosporin is another calcineurin option in these patients in many guidelines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Venous disease",
+     "points": [
+      "Warfarin INR 2-3",
+      "Heparin bridge at start",
+      "Extended therapy advised",
+      "Bleeding vigilance needed"
+     ]
+    },
+    "right": {
+     "title": "Arterial disease",
+     "points": [
+      "Warfarin standard option",
+      "Aspirin never alone",
+      "Hydroxychloroquine backbone",
+      "Cardiac surveillance needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Belimumab** with anifrolumab treat underlying lupus in APS in these patients in many protocols. **Atorvastatin** supports vascular protection in these patients in many guidelines. **Minocycline** has no APS role despite its presence in listings confusion. **Hydralazine** induced APS like features resolve after drug withdrawal in these patients.",
+   "say": "Belimumab with anifrolumab treat underlying lupus in APS in these patients in many protocols. Atorvastatin supports vascular protection in these patients in many guidelines. Minocycline has no APS role despite its presence in listings confusion. Hydralazine induced APS like features resolve after drug withdrawal in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Livedo reticularis** with thrombocytopenia is the cutaneous clue in these patients. **Nephropathy** with thrombotic microangiopathy is the renal pattern in these patients. **Pulmonary hypertension** complicates APS in these patients in many case series. **Valvular vegetations** mimic endocarditis in these patients in many reports.",
+   "say": "Livedo reticularis with thrombocytopenia is the cutaneous clue in these patients. Nephropathy with thrombotic microangiopathy is the renal pattern in these patients. Pulmonary hypertension complicates APS in these patients in many case series. Valvular vegetations are similar to endocarditis in these patients in many reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Clue",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Livedo",
+      "Net like discoloration",
+      "Anticoagulation review"
+     ],
+     [
+      "Thrombocytopenia",
+      "Low platelet count",
+      "Monitor and treat"
+     ],
+     [
+      "Nephropathy",
+      "Proteinuria present",
+      "Biopsy if indicated"
+     ],
+     [
+      "Valvulopathy",
+      "Vegetation on echo",
+      "Cardiology referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Surgery** with heparin bridging needs perioperative planning in these patients. **Pregnancy** needs early referral for obstetric APS in these patients. **Postpartum** thromboprophylaxis is mandatory in these patients in many protocols. **Avoidance** of oestrogen contraception is advised in these patients in many guidelines.",
+   "say": "Surgery with heparin bridging needs perioperative planning in these patients. Pregnancy needs early referral for obstetric APS in these patients. Postpartum thromboprophylaxis is mandatory in these patients in many protocols. Avoidance of oestrogen contraception is advised in these patients in many guidelines.",
+   "vis": null
+  },
+  {
+   "tx": "**Triple positivity** with all 3 antibodies carries highest thrombosis risk in these patients. **Persistency** after twelve weeks is essential for diagnosis in these patients. **Low titre** antibodies need repeat testing in these patients in many protocols. Transient antibodies follow infection in these patients in many histories.",
+   "say": "Triple positivity with all three antibodies carries highest thrombosis risk in these patients. Persistency after twelve weeks is essential for diagnosis in these patients. Low titre antibodies need repeat testing in these patients in many protocols. Transient antibodies follow infection in these patients in many histories.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antibody positive"
+     },
+     {
+      "id": "b",
+      "label": "Repeat after 12 weeks"
+     },
+     {
+      "id": "c",
+      "label": "Persistent if positive"
+     },
+     {
+      "id": "d",
+      "label": "Classify APS if clinical"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catastrophic** disease mortality is higher than non catastrophic in these patients. **Survivor** follow-up needs hematology co-care in these patients in many centres. **Transplant** has no role in APS outside catastrophic salvage in these patients. **Fertility** preservation is discussed before cyclophosphamide in these patients in many protocols.",
+   "say": "Catastrophic disease mortality is higher than non catastrophic in these patients. Survivor follow-up needs hematology co-care in these patients in many centres. Transplant has no role in APS outside catastrophic salvage in these patients. Fertility preservation is discussed before cyclophosphamide in these patients in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Isoniazid** induced APS like features are rare mimics in these patients. **Procainamide** induced lupus with APS features is another mimic in these patients. **Tamoxifen** has no APS role despite its presence in listings confusion. Warfarin remains the standard for these patients in many guidelines today.",
+   "say": "Isoniazid induced APS like features are rare mimics in these patients. Procainamide induced lupus with APS features is another mimic in these patients. Tamoxifen has no APS role despite its presence in listings confusion. Warfarin remains the standard for these patients in many guidelines today.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** launches the closing summary of this lesson specifically. Remember lupus anticoagulant as the most predictive antibody, 12 week persistency for diagnosis and warfarin for arterial disease in these patients. Heparin with aspirin is obstetric therapy while catastrophic APS needs plasma exchange. Triple positivity carries highest thrombosis risk clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Lupus anticoagulant is the most predictive antibody for thrombosis clearly. Twelve week persistency is essential for APS diagnosis in practice. Warfarin is the standard for arterial disease in these patients. Triple positivity carries highest thrombosis risk in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Most predictive",
+      "Lupus anticoagulant for thrombosis"
+     ],
+     [
+      "Persistency rule",
+      "Twelve weeks required for diagnosis"
+     ],
+     [
+      "Arterial standard",
+      "Warfarin for arterial disease"
+     ],
+     [
+      "Obstetric therapy",
+      "Heparin with aspirin in pregnancy"
+     ],
+     [
+      "Catastrophic therapy",
+      "Plasma exchange plus heparin"
+     ],
+     [
+      "Highest risk",
+      "Triple positivity with all antibodies"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
