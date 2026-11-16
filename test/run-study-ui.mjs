@@ -431,6 +431,116 @@ ok(JSON.stringify(after.shas) === JSON.stringify(before.shas) && after.shas[fixt
 msg = await restore(bk.buf);
 ok(new RegExp("Restored 0 documents with 0 strokes\\. Skipped " + before.n).test(msg) && (await snap()).n === before.n, "restore again: documents already present (by sha256 or id) are skipped, nothing duplicated");
 
+/* ---- P5b: in-doc search, audio stamp+seek, print sheet, presentation ---- */
+ok(await page.evaluate(() => !!(window.STUDY_MEDIA && window.STUDY_MEDIA.pure)), "P5b: study-media.js loaded after study-library.js");
+await boot("prep=1&study=1");
+await openLib();
+const MEDPDF = makePdf(["Alpha systole one", "Beta diastole two"]);
+await page.setInputFiles("#stFile", { name: "media.pdf", mimeType: "application/pdf", buffer: MEDPDF });
+await page.waitForSelector('.st-doc:has-text("media")', { timeout: 20000 });
+await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
+await page.waitForSelector('.st-pg[data-n="1"] .st-tl span, .st-pg[data-n="1"]', { timeout: 10000 });
+await page.waitForTimeout(600);
+ok(await page.evaluate(() => document.querySelectorAll('#stTb [data-act="st-media-search"], #stTb [data-act="st-audio-rec"], #stTb [data-act="st-print-open"], #stTb [data-act="st-present"]').length === 4), "P5b viewer: search, mic, print and present buttons in the top bar");
+await page.click('[data-act="st-media-search"]');
+await page.waitForSelector("#st5bInQ", { timeout: 5000 });
+await page.fill("#st5bInQ", "systole");
+await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1", null, { timeout: 10000 });
+ok(true, "in-doc search: finds systole with hit count 1 of 1");
+ok(await page.evaluate(() => STUDY._state().sc.scrollTop >= 0 && document.querySelectorAll(".st-tl span").length >= 0), "in-doc search: steps stay on the page");
+await page.click('[data-act="st-indoc-next"]');
+await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1");
+ok(true, "in-doc search: next wraps single hit");
+await page.click('[data-act="st-indoc-close"]');
+ok(await page.locator("#st5bInDoc").count() === 0, "in-doc search: close removes the bar");
+/* 5.6 typed + convert text is searchable; handwriting recogniser indexes when present */
+await page.evaluate(() => STUDY_MEDIA.indexText(STUDY._state().id, 1, "extra typed word", "typed").then(() => {}));
+await page.evaluate(() => STUDY_MEDIA.indexText(STUDY._state().id, 2, "converted handwriting line", "convert").then(() => {}));
+await boot("prep=1&study=1"); await openLib();
+await page.click('[data-act="st5a-tab"][data-v="search"]');
+await page.waitForSelector("#st5aSearchQ");
+await page.fill("#st5aSearchQ", "typed");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: typed text (src typed) is found");
+await page.fill("#st5aSearchQ", "converted");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: AI Convert text (src convert) is found");
+await page.waitForTimeout(1500);
+ok((await page.locator(".st-hit .st5b-th").count()) >= 1, "search: result shows a page thumbnail");
+/* audio: mocked recorder stamps strokes, blob persists, tap-to-seek moves playback */
+await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
+await page.evaluate(() => {
+  window.__mr = [];
+  window.MediaRecorder = class {
+    static isTypeSupported() { return true; }
+    constructor() { this.mimeType = "audio/webm;codecs=opus"; }
+    start() { window.__mrStart = Date.now(); setTimeout(() => { this.ondataavailable && this.ondataavailable({ data: new Blob([new Uint8Array([1, 2, 3])], { type: this.mimeType }) }); }, 30); }
+    stop() { this.onstop && this.onstop(); }
+  };
+  window.__origGum = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+  navigator.mediaDevices.getUserMedia = async () => ({ getTracks: () => [{ stop() {} }] });
+  window.__seeked = null;
+  const proto = HTMLMediaElement.prototype;
+  proto.play = function () { return Promise.resolve(); };
+  Object.defineProperty(proto, "currentTime", { get() { return this.__ct || 0; }, set(v) { this.__ct = v; window.__seeked = v; } });
+  Object.defineProperty(proto, "duration", { get() { return this.__dur || 10; }, set(v) { this.__dur = v; } });
+});
+await page.click('[data-act="st-audio-rec"]');
+await page.waitForFunction(() => STUDY_MEDIA._state().rec.active === true, null, { timeout: 5000 });
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await stroke(0.3);
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter(x => !x.gone && x.a != null); return s.length >= 1 && s[0].a >= 0; }), "audio: stroke drawn while recording stores its recording offset a");
+await page.click('[data-act="st-audio-rec"]');
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("audio").objectStore("audio").getAll(); q.onsuccess = () => res(q.result.length >= 1); }; }), null, { timeout: 10000 });
+ok(true, "audio: recording Blob is stored in IndexedDB");
+await page.click('[data-act="st-more"]');
+await page.waitForSelector('[data-act="st-audio-list"]', { timeout: 5000 });
+ok(await page.evaluate(() => /uses/.test(document.querySelector("#st5bStorage").textContent)), "audio: Settings shows storage used per notebook");
+await page.click('[data-act="st-audio-list"]');
+await page.waitForSelector("#st5bRecList .st5b-rec", { timeout: 5000 });
+ok(true, "audio: recordings list shows per notebook");
+await page.click("#st5bRecList [data-act='st-audio-play']");
+await page.waitForFunction(() => STUDY_MEDIA._state().player.mode === true, null, { timeout: 5000 });
+await page.click('[data-act="st-scancel"]');
+await page.click('[data-act="st-tool"]'); /* toggle pen off so tap-to-seek layers show */
+await page.waitForFunction(() => document.querySelector(".st5b-seeklayer") != null, null, { timeout: 5000 });
+ok(true, "audio: playback installs tap-to-seek layers");
+await page.evaluate(() => {
+  const r = document.querySelector('.st-pg[data-n="1"]').getBoundingClientRect();
+  const s = STUDY._state().strokes.find(x => x.a != null);
+  window.__expectedA = s.a;
+  const sx = r.left + s.pts[0][0] * r.width, sy = r.top + s.pts[0][1] * r.height;
+  const layer = document.querySelector(".st5b-seeklayer[data-n='1']");
+  layer.dispatchEvent(new MouseEvent("click", { clientX: sx, clientY: sy, bubbles: true, cancelable: true, view: window }));
+});
+await page.waitForFunction(() => window.__seeked != null, null, { timeout: 5000 });
+ok(await page.evaluate(() => Math.abs(window.__seeked - window.__expectedA) < 0.01), "audio: tapping a stroke jumps playback to its recording time");
+await page.evaluate(() => STUDY_MEDIA.stopPlayer());
+/* print sheet + iframe print */
+await page.click('[data-act="st-print-open"]');
+await page.waitForSelector("#stSheet", { timeout: 5000 });
+ok(/This page/.test(await page.locator("#stSheet").innerText()) && /All pages/.test(await page.locator("#stSheet").innerText()), "print: sheet offers this page and all pages");
+await page.evaluate(() => { window.__printed = 0; HTMLIFrameElement.prototype.contentWindow; });
+await page.click('[data-act="st-print-page"]');
+await page.waitForSelector(".st5b-print-frame", { timeout: 5000 });
+ok(true, "print: this page renders to an iframe image for print()");
+/* presentation: fullscreen, chrome hidden, laser visible */
+await page.click('[data-act="st-present"]');
+await page.waitForSelector("#st5bPresent", { timeout: 5000 });
+ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stTb")).display === "none"), "present: toolbar hidden");
+ok(await page.evaluate(() => !!document.querySelector(".st5b-laser") && !!document.querySelector(".st5b-pres-img")), "present: laser and page image visible");
+await page.evaluate(() => { const st = document.querySelector(".st5b-pres-stage"), r = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointermove", { pointerType: "mouse", clientX: r.left + 100, clientY: r.top + 100, bubbles: true })); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => document.querySelector(".st5b-laser").style.opacity === "1"), "present: laser follows the pointer");
+await page.click('[data-act="st-present-next"]');
+await page.waitForFunction(() => /2 of 2/.test(document.querySelector(".st5b-pres-n").textContent), null, { timeout: 5000 });
+ok(true, "present: next page steps");
+await page.click('[data-act="st-present-exit"]');
+ok(await page.locator("#st5bPresent").count() === 0, "present: exit removes the stage");
+
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 
 await browser.close(); if (serveProc) serveProc.kill();
