@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "sgm-rheumatic-heart",
+ "subject": "ss-general-medicine",
+ "title": "Rheumatic fever and rheumatic heart disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Rheumatic fever [immune mediated illness after throat infection]** is an acute autoimmune [immune attack on body tissues] response following group A streptococcal pharyngitis [severe throat infection]. **Rheumatic heart disease [chronic valve damage]** refers to permanent fibrotic [scarred] deformation of heart valves after repeated rheumatic episodes. Global prevalence reaches about 33 million cases, with severe disease in 15 million persons.",
+   "say": "Rheumatic fever is an acute immune mediated illness that occurs after group A streptococcal pharyngitis. Rheumatic heart disease is chronic valve damage that results from repeated rheumatic episodes over time. Global prevalence reaches about thirty three million cases and severe disease occurs in fifteen million persons. The two entities are related and the burden is high in low income regions.",
+   "vis": null
+  },
+  {
+   "tx": "Group A beta haemolytic Streptococcus pyogenes [throat bacteria] causes pharyngitis, and molecular mimicry [similar proteins confusing immunity] triggers cross reactivity against cardiac myosin [heart muscle protein] and valve tissue. **Molecular mimicry [immune confusion from shared proteins]** explains latency of 2 to 4 weeks between sore throat and joint symptoms. **HLA [human leukocyte antigen, genetic immune marker]** susceptibility and poor housing increase risk of acute rheumatic fever in children.",
+   "say": "Group A beta haemolytic streptococcus causes pharyngitis and molecular mimicry triggers cross reactivity against heart muscle proteins and valve tissue. The mechanism involves immune confusion from shared proteins and the latency is two to four weeks after sore throat. Genetic susceptibility and poor housing increase risk in children. The sore throat is often untreated and the autoimmune response follows.",
+   "vis": null
+  },
+  {
+   "tx": "Children aged 5 to 15 years in overcrowded homes, with recurrent streptococcal tonsillitis and limited access to antibiotics, face the greatest burden. **Overcrowding [crowded living conditions]** and low socioeconomic status prolong streptococcal exposure and delay treatment. **Genetic predisposition [inherited immune tendency]** and family history of rheumatic fever further raise individual susceptibility. Girls and boys are affected equally in acute disease, while chronic valve disease is more common in women.",
+   "say": "Children aged five to fifteen years in overcrowded homes with recurrent streptococcal tonsillitis face the greatest burden. Overcrowding and low socioeconomic status prolong exposure and delay treatment. Genetic predisposition and family history increase susceptibility in affected families. Girls and boys are affected equally in childhood while chronic valve disease is more common in adult women.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect",
+     "Implication"
+    ],
+    "rows": [
+     [
+      "Age five to fifteen",
+      "Peak incidence",
+      "Vulnerable group"
+     ],
+     [
+      "Overcrowding",
+      "Prolonged exposure",
+      "Public health target"
+     ],
+     [
+      "Recurrent streptococcal infection",
+      "Repeated immune trigger",
+      "Prophylaxis needed"
+     ],
+     [
+      "Genetic predisposition",
+      "Immune susceptibility",
+      "Familial clustering"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antibodies against streptococcal M protein bind valve endothelium, recruit T cells [immune cells] and form granulomata known as Aschoff bodies [characteristic immune collections] with fibrinoid necrosis [protein deposition]. **Aschoff bodies [immune granulomas in myocardium]** are pathognomonic [diagnostically definitive] for rheumatic carditis [heart inflammation]. **Valve fibrosis and calcification [scar stiffening]** followed by chordal shortening creates the classic fish mouth mitral stenosis [narrowed mitral opening].",
+   "say": "Antibodies against streptococcal proteins bind valve endothelium and they recruit immune cells and form granulomata known as Aschoff bodies. Aschoff bodies are pathognomonic for rheumatic carditis and they show characteristic features under microscopy. Valve fibrosis and calcification followed by chordal shortening create the classic narrowed mitral opening. The lesion is chronic and it progresses over years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Streptococcal pharyngitis"
+     },
+     {
+      "id": "b",
+      "label": "Molecular mimicry"
+     },
+     {
+      "id": "c",
+      "label": "Aschoff bodies"
+     },
+     {
+      "id": "d",
+      "label": "Valve fibrosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical features follow Jones criteria [diagnostic criteria for rheumatic fever], where two major or one major plus two minor plus evidence of preceding streptococcal infection confirms acute rheumatic fever. **Jones criteria [diagnostic framework]** major manifestations include carditis [heart inflammation], migratory polyarthritis [moving joint inflammation], chorea [involuntary movements], erythema marginatum [ring shaped rash] and subcutaneous nodules [lumps under skin]. **Sydenham chorea [involuntary movements]** may be the sole major criterion in some patients.",
+   "say": "Clinical features follow the Jones criteria where two major manifestations or one major plus two minor manifestations plus evidence of streptococcal infection confirms acute rheumatic fever. Major manifestations include carditis and migratory joint inflammation and chorea and ring shaped rash and skin nodules. Sydenham chorea can be the sole major criterion in some patients. The criteria require evidence of prior streptococcal infection.",
+   "vis": null
+  },
+  {
+   "tx": "Minor criteria add arthralgia [joint pain without swelling], fever above 38 degrees, raised inflammatory markers and prolonged PR interval [conduction delay on tracing]. **Acute phase reactants [inflammation markers]** include erythrocyte sedimentation rate [speed of red cell settling] and C reactive protein [inflammation marker] that rise in acute episodes. **Anti streptolysin O titre [antibody against streptococcal toxin]** above 200 IU/mL supports recent infection, while echocardiography detects subclinical carditis [hidden heart inflammation].",
+   "say": "Minor criteria add joint pain without swelling and fever and raised inflammatory markers and prolonged conduction interval on the tracing. Acute phase reactants include erythrocyte sedimentation rate and C reactive protein that rise in acute episodes. Anti streptolysin O titre above two hundred units supports recent infection in many patients. Echocardiography detects subclinical carditis that is not audible clinically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major criteria",
+     "points": [
+      "Carditis",
+      "Migratory polyarthritis",
+      "Chorea",
+      "Erythema marginatum",
+      "Subcutaneous nodules"
+     ]
+    },
+    "right": {
+     "title": "Minor criteria",
+     "points": [
+      "Arthralgia",
+      "Fever",
+      "Raised ESR and CRP",
+      "Prolonged PR interval"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Echocardiography [heart ultrasound]** is the first test to detect mitral stenosis and regurgitation, left atrial enlargement and pericardial effusion, with the gold standard for valve disease being direct valve visualisation at surgery or autopsy. **Throat culture [bacterial growth test]** and rapid antigen [quick streptococcal test] confirm recent infection, while electrocardiogram [ECG, heart tracing] shows PR prolongation. **Jenkins algorithm [risk stratification tool]** guides chronic severity assessment in modern clinics.",
+   "say": "Echocardiography is the first test and it detects mitral stenosis and regurgitation and atrial enlargement and effusion. Direct valve visualisation at surgery remains the definitive reference for chronic valve disease. Throat culture and rapid antigen confirm recent infection while the heart tracing shows prolonged conduction. The clinical diagnosis requires both cardiac and streptococcal evidence.",
+   "vis": null
+  },
+  {
+   "tx": "First line acute therapy combines penicillin [antibiotic for streptococcus] to eradicate residual infection, anti inflammatory drugs [inflammation suppressors] for arthritis and rest with steroids [steroid hormones] for moderate to severe carditis. **Benzathine penicillin G [long acting penicillin]** remains the drug of choice for eradication and secondary prophylaxis, at 1.2 million units intramuscularly every 3 to 4 weeks. **Corticosteroids [steroid hormones]** improve valve outcomes in severe carditis when started early under cardiology supervision.",
+   "say": "First line acute therapy combines penicillin to eradicate residual infection and anti inflammatory drugs for arthritis and rest with steroids for moderate to severe carditis. Benzathine penicillin G remains the drug of choice and the dose is one point two million units intramuscularly every three to four weeks. Corticosteroids improve valve outcomes in severe carditis when started early. The anti inflammatory course is prolonged and supervised care is required.",
+   "vis": null
+  },
+  {
+   "tx": "American Heart Association [AHA, American guideline body] and European Society of Cardiology [ESC, European guideline body] advise indefinite secondary prophylaxis [ongoing antibiotic prevention] after carditis, with echocardiographic surveillance and early intervention for stenosis. **Secondary prophylaxis [long term antibiotic prevention]** uses benzathine penicillin G [long acting penicillin] every 3 to 4 weeks for years or lifelong in severe disease. **Infective endocarditis prophylaxis [antibiotic before dental work]** is considered in severe valve disease before invasive dental procedures according to guideline updates.",
+   "say": "American and European guidelines provide indefinite secondary prophylaxis after carditis with echocardiographic surveillance and early intervention for stenosis. Secondary prophylaxis is benzathine penicillin G every three to four weeks for years or lifelong in severe disease. Infective endocarditis prophylaxis is considered in severe valve disease before dental procedures according to updated guidance. The prophylaxis duration depends on severity and residual valve damage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Regimen",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Eradication",
+      "Benzathine penicillin G 12 lakh units",
+      "Single dose"
+     ],
+     [
+      "Without carditis",
+      "Every three to four weeks",
+      "Five years minimum"
+     ],
+     [
+      "With carditis",
+      "Same regimen",
+      "Ten years or lifelong"
+     ],
+     [
+      "Prophylaxis compliance",
+      "Intramuscular injection",
+      "Community follow up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic rheumatic heart disease progresses to mitral stenosis [narrowed mitral valve], mitral regurgitation [leaking mitral valve], atrial fibrillation [irregular rhythm], pulmonary hypertension [raised lung pressure] and right heart failure [right side pump failure]. **Fish mouth mitral valve [stenotic narrowed opening]** produces open snap [clicking sound] and diastolic murmur [rumbling sound in diastole]. **Atrial fibrillation [irregular atrial rhythm]** with rapid rate precipitates pulmonary edema [fluid in lungs] and embolic stroke [clot travelling to brain].",
+   "say": "Chronic rheumatic heart disease is characterized by mitral stenosis and mitral regurgitation and atrial fibrillation and pulmonary hypertension and right heart failure. The narrowed mitral valve produces an opening snap and a diastolic murmur in affected patients. Atrial fibrillation with rapid rate precipitates pulmonary edema and embolic stroke in many cases. The complications increase with age and repeated episodes.",
+   "vis": null
+  },
+  {
+   "tx": "Pitfalls include missing subclinical carditis by auscultation alone, confusing Jones criteria without streptococcal evidence, and stopping prophylaxis early after apparent recovery. **Auscultatory miss [missed heart sign]** is common when relying only on stethoscope examination without imaging. **Early cessation [stopping prophylaxis prematurely]** leads to recurrence and accelerated valve damage. Lifelong adherence, echocardiographic screening and attention to migratory arthritis pattern distinguish rheumatic fever from other arthritides.",
+   "say": "Pitfalls include missing subclinical carditis by ear examination alone and confusing Jones criteria without streptococcal evidence. The auscultatory miss is common when relying only on stethoscope examination without imaging. Early cessation leads to recurrence and accelerated valve damage in many patients. Lifelong adherence and echocardiographic screening are important and the migratory pattern distinguishes rheumatic fever from other arthritides.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Detail",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "First test",
+      "Echocardiogram plus ESR and CRP",
+      "Detects subclinical carditis"
+     ],
+     [
+      "Gold standard",
+      "Valve visualisation at surgery",
+      "Definitive anatomy"
+     ],
+     [
+      "Drug of choice",
+      "Benzathine penicillin G",
+      "Prophylaxis backbone"
+     ],
+     [
+      "Prophylaxis interval",
+      "Every three to four weeks",
+      "Intramuscular injection"
+     ],
+     [
+      "Major criteria count",
+      "Two major or one major plus two minor",
+      "With streptococcal evidence"
+     ],
+     [
+      "Classic lesion",
+      "Aschoff bodies, fish mouth mitral",
+      "Pathology hallmark"
+     ],
+     [
+      "Complication",
+      "Mitral stenosis, AF, pulmonary edema",
+      "Progressive course"
+     ],
+     [
+      "Prevention",
+      "Treat streptococcal pharyngitis early",
+      "Primary prevention"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
