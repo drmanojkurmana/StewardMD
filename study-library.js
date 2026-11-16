@@ -57,7 +57,11 @@
   function loadPref(k, def) { try { var v = G.localStorage.getItem(k); return v == null ? def : v; } catch (e) { return def; } }
   function savePref(k, v) { try { G.localStorage.setItem(k, v); } catch (e) {} }
   function parseTabs(raw) { try { var a = JSON.parse(raw || "[]"); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string" && x; }).slice(0, 12) : []; } catch (e) { return []; } }
-  var PURE = { isTrashed: isTrashed, daysOld: daysOld, shouldPurge: shouldPurge, sortDocs: sortDocs, dupTitle: dupTitle, fmtWhen: fmtWhen, loadPref: loadPref, savePref: savePref, parseTabs: parseTabs };
+  // Cover regen predicate (pure): regen only when there is no cover yet or it was marked dirty.
+  function needsCoverRegen(doc) { return !!(doc && (!doc.thumb || doc._thumbDirty)); }
+  // Bounded tab-restore retry (pure): at most 25 polls of 120ms (~3s); the old code polled forever.
+  function shouldRetryTabRestore(tries) { var t = +tries; if (!(t >= 0)) t = 0; return t < 25; }
+  var PURE = { isTrashed: isTrashed, daysOld: daysOld, shouldPurge: shouldPurge, sortDocs: sortDocs, dupTitle: dupTitle, fmtWhen: fmtWhen, loadPref: loadPref, savePref: savePref, parseTabs: parseTabs, needsCoverRegen: needsCoverRegen, shouldRetryTabRestore: shouldRetryTabRestore };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   // Early return when this runs in browser but study.js missing (flag off): nothing to patch.
   // Browser continues below; if G.STUDY is not yet defined we wait for study.js (loader order guarantees it).
@@ -94,24 +98,48 @@
   if (libState.view !== "grid" && libState.view !== "list") libState.view = "grid";
   if (libState.sort !== "date" && libState.sort !== "name" && libState.sort !== "type") libState.sort = "date";
   if (libState.tab !== "documents" && libState.tab !== "search" && libState.tab !== "favorites" && libState.tab !== "trash") libState.tab = "documents";
-  /* IndexedDB (same store as study.js) */
-  var dbP = null;
+  /* IndexedDB (same store as study.js).
+     Phase 5a hang fix: the library MUST reuse study.js's connection (STUDY.db) and never hold
+     a second one. Two open connections to "study" wedged a later indexedDB.open("study") in a
+     real browser (the library froze after import), so db() below delegates to STUDY.db().
+     The fallback open exists only if STUDY is not ready yet (loader order); it handles
+     onblocked/onerror with bounded retries and never loops. */
+  var dbP = null, dbTries = 0;
+  function sharedDb() {
+    try { var S = G.STUDY; if (S && typeof S.db === "function") return S.db(); } catch (e) {}
+    return null;
+  }
+  function ensureStores(d) {
+    if (!d.objectStoreNames.contains("docs")) d.createObjectStore("docs", { keyPath: "id" });
+    if (!d.objectStoreNames.contains("files")) d.createObjectStore("files", { keyPath: "id" });
+    if (!d.objectStoreNames.contains("folders")) d.createObjectStore("folders", { keyPath: "id" });
+    if (!d.objectStoreNames.contains("strokes")) { var s = d.createObjectStore("strokes", { keyPath: "id" }); s.createIndex("doc", "doc"); }
+    if (!d.objectStoreNames.contains("undo")) d.createObjectStore("undo", { keyPath: "doc" });
+    if (!d.objectStoreNames.contains("ptext")) { var p = d.createObjectStore("ptext", { keyPath: "id" }); p.createIndex("doc", "doc"); }
+    if (!d.objectStoreNames.contains("index")) d.createObjectStore("index", { keyPath: "doc" });
+  }
   function db() {
+    var shared = sharedDb();
+    if (shared) return shared;
     if (dbP) return dbP;
+    if (dbTries >= 5) return Promise.reject(new Error("study-db-blocked"));
+    var tries = ++dbTries;
     dbP = new Promise(function (res, rej) {
-      var r = G.indexedDB.open("study", 2);
-      r.onupgradeneeded = function () {
-        var d = r.result;
-        if (!d.objectStoreNames.contains("docs")) d.createObjectStore("docs", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("files")) d.createObjectStore("files", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("folders")) d.createObjectStore("folders", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("strokes")) { var s = d.createObjectStore("strokes", { keyPath: "id" }); s.createIndex("doc", "doc"); }
-        if (!d.objectStoreNames.contains("undo")) d.createObjectStore("undo", { keyPath: "doc" });
-        if (!d.objectStoreNames.contains("ptext")) { var p = d.createObjectStore("ptext", { keyPath: "id" }); p.createIndex("doc", "doc"); }
-        if (!d.objectStoreNames.contains("index")) d.createObjectStore("index", { keyPath: "doc" });
+      var r;
+      try { r = G.indexedDB.open("study", 2); }
+      catch (e) { dbP = null; rej(e); return; }
+      r.onupgradeneeded = function () { try { ensureStores(r.result); } catch (e) {} };
+      r.onsuccess = function () {
+        var conn = r.result;
+        try { conn.onversionchange = function () { dbP = null; try { conn.close(); } catch (e) {} }; } catch (e) {}
+        res(conn);
       };
-      r.onsuccess = function () { res(r.result); };
-      r.onerror = function () { dbP = null; rej(r.error); };
+      r.onblocked = function () { /* another connection holds the upgrade; retry a few times, never forever */
+        dbP = null;
+        if (tries >= 5) return rej(new Error("study-db-blocked"));
+        G.setTimeout(function () { db().then(res, rej); }, 250 * tries);
+      };
+      r.onerror = function () { dbP = null; rej(r.error || new Error("study-db-open")); };
     });
     return dbP;
   }
@@ -150,9 +178,12 @@
     }).then(null, function () {});
   }
   // ---- bulk cover rendering ----
+  var coverBusy = {};
   function renderCoverForDoc(doc, onDone) {
-    var done = function () { if (onDone) onDone(); };
-    if (doc.thumb && !doc._thumbDirty) return done();
+    var done = function () { coverBusy[doc.id] = false; if (onDone) onDone(); };
+    if (!needsCoverRegen(doc)) return done();
+    if (coverBusy[doc.id]) return done();
+    coverBusy[doc.id] = true;
     // For notebooks we can regenerate quickly from strokes; for PDFs we need pdf.js
     if (doc.kind === "nb") {
       strokesOf(doc.id).then(function (ss) {
@@ -391,11 +422,15 @@
     try { origAct("st-open", { getAttribute: function (n) { return n === "data-id" ? id : null; } }, h); } catch (e) {}
     G.setTimeout(function () { injectDocTabs(); restoreTabState(id, page); }, 80);
   }
-  function restoreTabState(id, page) {
+  function restoreTabState(id, page, tries) {
     var saved = getTabState()[id];
     var st = G.STUDY && G.STUDY._state && G.STUDY._state();
-    // if nothing open yet, retry
-    if (!st || st.id !== id) { G.setTimeout(function () { restoreTabState(id, page); }, 120); return; }
+    // if nothing open yet, retry a bounded number of times (the old code retried forever)
+    tries = tries || 0;
+    if (!st || st.id !== id) {
+      if (shouldRetryTabRestore(tries)) G.setTimeout(function () { restoreTabState(id, page, tries + 1); }, 120);
+      return;
+    }
     if (page && st.pg && st.pg[page]) { try { st.sc.scrollTop = st.pg[page].el.offsetTop; if (st.cur !== undefined) st.cur = page; } catch (e) {} }
     if (saved) {
       try {
@@ -576,8 +611,7 @@
     var bodyEl = D.getElementById("stList");
     if (!bodyEl && host && host.root && host.root()) bodyEl = host.root().querySelector("#stList");
     if (!bodyEl) return;
-    // purge expired on render
-    purgeExpiredTrash();
+    // trash purge runs once at init only; purging on every render doubled IDB writes and raced renders
     return Promise.all([idbAll("docs"), idbAll("folders"), idbAll("ptext"), idbAll("index")]).then(function (r) {
       var docs = r[0], folders = r[1], ptext = r[2], ixd = {}; _ixd = ixd; (r[3] || []).forEach(function (x) { ixd[x.doc] = x.done; });
       try { var bcEl = D.getElementById("st5aBc"); if (bcEl) bcEl.innerHTML = currentFolderCrumbHtml(folders); } catch (e) {}
@@ -621,7 +655,7 @@
             }).join("");
           }
           var inp2 = D.getElementById("st5aSearchQ");
-          if (inp2 && !inp2._bound) { inp2._bound = true; inp2.addEventListener("input", function () { G.setTimeout(renderLibBody, 200); }); }
+          if (inp2 && !inp2._bound) { inp2._bound = true; inp2.addEventListener("input", function () { G.clearTimeout(inp2._deb); inp2._deb = G.setTimeout(renderLibBody, 200); }); }
           return;
         } else {
           // search tab empty state with input
@@ -631,7 +665,7 @@
           var listEl = D.getElementById("st5aList");
           if (listEl) listEl.innerHTML = '<p class="pn-empty">Type at least 2 characters to search.</p>';
           var inp = D.getElementById("st5aSearchQ");
-          if (inp && !inp._bound) { inp._bound = true; inp.addEventListener("input", function () { G.setTimeout(renderLibBody, 200); }); }
+          if (inp && !inp._bound) { inp._bound = true; inp.addEventListener("input", function () { G.clearTimeout(inp._deb); inp._deb = G.setTimeout(renderLibBody, 200); }); }
           return;
         }
       }
@@ -686,7 +720,7 @@
         bodyEl.innerHTML = '<div class="st5a-list">' + rows + '</div>' + (showTrash ? '<div class="st5a-trash-actions"><button type="button" class="pn-btn sm" data-act="st5a-purge-all">Empty trash now</button></div>' : '');
       }
       // regenerate covers that are dirty
-      items.forEach(function (it) { if (it.type !== "folder" && it._thumbDirty) renderCoverForDoc(it, function () { /* lazy thumbnail update triggers re-render on next fill? */ }); });
+      items.forEach(function (it) { if (it.type !== "folder" && needsCoverRegen(it)) renderCoverForDoc(it, function () { /* lazy thumbnail update triggers re-render on next fill */ }); });
     });
   }
   function ixLabel5a(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }

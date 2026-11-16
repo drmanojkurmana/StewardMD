@@ -1,8 +1,14 @@
-/* Phase 5a pure helpers (study-library.js): sort, trash purge, dup title, when format, tabs parse, prefs. */
+/* Phase 5a pure helpers (study-library.js): sort, trash purge, dup title, when format, tabs parse, prefs.
+ * Plus hang-fix guards (2026-11): needsCoverRegen, shouldRetryTabRestore, and the shared-connection
+ * regression (the library must reuse STUDY.db, never open its own second IndexedDB connection). */
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 const L = createRequire(import.meta.url)("../study-library.js");
+const HERE = dirname(fileURLToPath(import.meta.url));
 
 test("isTrashed + shouldPurge: 30-day boundary", () => {
   assert.equal(L.isTrashed({ trashedAt: 1 }), true);
@@ -81,4 +87,45 @@ test("parseTabs: keeps strings, caps at 12, bad JSON is empty", () => {
   const many = JSON.stringify(Array.from({ length: 30 }, (_, i) => "t" + i));
   assert.equal(L.parseTabs(many).length, 12);
   assert.deepEqual(L.parseTabs("[]"), []);
+});
+
+test("needsCoverRegen: clean covers skip, dirty or missing covers regen only", () => {
+  assert.equal(L.needsCoverRegen({ thumb: "data:image/jpeg;base64,x" }), false);
+  assert.equal(L.needsCoverRegen({ thumb: "data:image/jpeg;base64,x", _thumbDirty: false }), false);
+  assert.equal(L.needsCoverRegen({ thumb: "data:image/jpeg;base64,x", _thumbDirty: true }), true);
+  assert.equal(L.needsCoverRegen({ thumb: "" }), true);
+  assert.equal(L.needsCoverRegen({}), true);
+  assert.equal(L.needsCoverRegen(null), false);
+  assert.equal(L.needsCoverRegen(undefined), false);
+});
+
+test("shouldRetryTabRestore: bounded polling, then gives up", () => {
+  assert.equal(L.shouldRetryTabRestore(0), true);
+  assert.equal(L.shouldRetryTabRestore(24), true);
+  assert.equal(L.shouldRetryTabRestore(25), false);
+  assert.equal(L.shouldRetryTabRestore(999), false);
+  assert.equal(L.shouldRetryTabRestore(NaN), true);
+  assert.equal(L.shouldRetryTabRestore("2"), true);
+});
+
+test("hang fix: library reuses STUDY.db, never opens its own second connection", () => {
+  const libSrc = readFileSync(join(HERE, "..", "study-library.js"), "utf8");
+  const studySrc = readFileSync(join(HERE, "..", "study.js"), "utf8");
+  // study.js exposes its single connection
+  assert.match(studySrc, /kick:\s*kick,\s*db:\s*db/);
+  // the library delegates to it
+  assert.match(libSrc, /S\.db\(\)|STUDY\.db/);
+  // the library must not hold a second happy-path connection: the only
+  // code-level open left is the STUDY-not-ready fallback with bounded onblocked retries
+  // (comment text mentions indexedDB.open, so count the actual call site only)
+  const codeOnly = libSrc.replace(/\/\*[\s\S]*?\*\//g, "");
+  const opens = codeOnly.match(/G\.indexedDB\.open\(/g) || [];
+  assert.equal(opens.length, 1, "expected exactly one fallback open, got " + opens.length);
+  assert.match(libSrc, /r\.onblocked/);
+  assert.match(libSrc, /onversionchange/);
+  // no unbounded retry: the fallback gives up after 5 tries
+  assert.match(libSrc, /dbTries\s*>=\s*5/);
+  // and no per-render trash purge (init-only)
+  assert.match(libSrc, /trash purge runs once at init only/);
+  assert.ok(!/purgeExpiredTrash\(\);\s*\n\s+return Promise\.all\(\[idbAll\("docs"\)/.test(libSrc), "render path must not purge on every render");
 });

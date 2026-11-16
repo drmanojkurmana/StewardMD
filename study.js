@@ -1789,5 +1789,7 @@
   function homeRow(h) { host = h; return ""; }
 
   /* Phase 5a hook: the GoodNotes library (study-library.js) reuses the indexer so PDF text search keeps working. */
-  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, kick: kick, _pure: PURE, _state: function () { return V; } };
+  /* Phase 5a hang fix: the library reuses STUDY.db (this connection) instead of opening its own
+     IndexedDB connection, so the library never holds a second connection that can wedge opens. */
+  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, kick: kick, db: db, _pure: PURE, _state: function () { return V; } };
 })(typeof window !== "undefined" ? window : this);
