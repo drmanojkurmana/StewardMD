@@ -77,6 +77,47 @@
    "tx": "**Axillary nodes** join every diagnostic breast ultrasound because a cortical thickness over 3 mm, lost fatty hilum or round shape converts a screening visit into a staging one with node sampling. Implants are checked for intracapsular rupture as linguine like lines inside the shell and extracapsular silicone in tissue. MRI is the definitive implant study, while mammography uses displaced Eklund views to free the native tissue from the implant shadow.",
    "say": "Axillary nodes join every diagnostic breast ultrasound because a thick cortex or lost fatty hilum converts screening into staging with node sampling. Implants are checked for rupture lines inside the shell. MRI is the definitive implant study, while mammography uses displaced views to free native tissue.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Diagnostic breast ultrasound"}, {"id": "b", "label": "Scan axilla same visit"}, {"id": "c", "label": "Abnormal node sampled"}, {"id": "d", "label": "Staging completed before surgery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
-  }
+  },
+    {
+      "tx": "**High-yield for the exam**: Ring of fire is peripheral low resistance Doppler flow from a corpus luteum inside the ovary or a tubal ectopic apart from it, settled by the sliding organs sign. An empty uterus above the discriminatory zone with an adnexal mass and free fluid earns emergency review. Torsion often surrounds a cyst over 5 cm, present flow never excludes it, and a node cortex over 3 mm upgrades breast ultrasound to staging.",
+      "say": "Ring of fire is peripheral low resistance Doppler flow from a corpus luteum inside the ovary or a tubal ectopic apart from it, settled by the sliding organs sign. An empty uterus above the discriminatory zone with an adnexal mass and free fluid earns emergency review. Torsion often surrounds a cyst over 5 cm, present flow never excludes it, and a node cortex over 3 mm upgrades breast ultrasound to staging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Ring of fire",
+            "Peripheral low resistance flow"
+          ],
+          [
+            "Ectopic versus luteum",
+            "Mass separate from the ovary"
+          ],
+          [
+            "Discriminatory zone",
+            "Ectopic or completed loss"
+          ],
+          [
+            "Interstitial ectopic",
+            "Myometrial mantle under 5 mm"
+          ],
+          [
+            "Ovarian torsion clue",
+            "Peripheral follicles and whirlpool"
+          ],
+          [
+            "Flow still present",
+            "Does not exclude torsion"
+          ],
+          [
+            "Suspicious node cortex",
+            "Thickness over 3 mm"
+          ]
+        ]
+      }
+    }
  ]
 }
