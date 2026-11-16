@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "sns-trauma",
+ "subject": "ss-neurosurgery",
+ "title": "Neurotrauma and raised intracranial pressure: GCS, CT rules and ICP therapy",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e neurotrauma and raised pressure sections", "Brain Trauma Foundation 4th edition severe TBI guidance"],
+ "steps": [
+  {
+   "tx": "**Glasgow Coma Scale** (GCS, eye verbal motor score of **three** to **fifteen**) grades head injury, with **thirteen** to **fifteen** mild, **nine** to **twelve** moderate and **eight** or less severe. **Traumatic brain injury** (TBI) injures neurons directly as primary damage and by swelling and ischaemia as secondary damage. Secondary injury prevention drives all early care.",
+   "say": "The Glasgow Coma Scale classifies eye, verbal and motor responses from three to fifteen. Scores thirteen to fifteen are mild, nine to twelve moderate and eight or less severe. Traumatic brain injury injures neurons directly as primary damage and by swelling and ischaemia as secondary damage.",
+   "vis": {"kind": "table", "cols": ["Grade", "GCS", "Plan"], "rows": [["Mild", "Thirteen to fifteen", "Observe, CT if criteria"], ["Moderate", "Nine to twelve", "High dependency, repeat CT"], ["Severe", "Eight or less", "Intubate, pressure monitoring"]]}
+  },
+  {
+   "tx": "Primary damage means **contusion** (bruised brain), **diffuse axonal injury** (sheared white matter tracts) and lacerations at impact. **Secondary injury** follows through raised intracranial pressure, hypotension, hypoxia and seizures. A single episode of **systolic blood pressure** under **one hundred** mmHg worsens outcome substantially.",
+   "say": "Primary damage is contusion, diffuse axonal injury and lacerations at impact. Secondary injury follows through raised pressure, hypotension, hypoxia and seizures. A single episode of systolic pressure under one hundred worsens outcome substantially.",
+   "vis": {"kind": "compare", "left": {"title": "Primary injury", "points": ["Contusion, bruised brain", "Diffuse axonal shearing", "Laceration at impact"]}, "right": {"title": "Secondary injury", "points": ["Raised intracranial pressure", "Hypotension, hypoxia", "Seizure, hyperthermia"]}}
+  },
+  {
+   "tx": "**Epidural haematoma** (between skull and dura) forms a **lens shaped** hyperdense collection with a lucid interval in **twenty** to **thirty** percent. The **middle meningeal artery** tears through its foramen and arterial bleeding expands fast. Surgical evacuation of expanding collections over **thirty** millilitres saves lives, while small stable ones may be watched.",
+   "say": "Epidural haematoma forms a lens shaped hyperdense collection with a lucid interval in twenty to thirty percent. The middle meningeal artery tears through its foramen and arterial bleeding expands fast. Surgical evacuation of expanding collections over thirty millilitres saves lives.",
+   "vis": {"kind": "table", "cols": ["Feature", "Epidural", "Subdural"], "rows": [["Shape", "Lens shaped", "Crescent shaped"], ["Onset", "Lucid interval often", "Chronic in elderly"], ["Vessel", "Middle meningeal artery", "Bridging veins"]]}
+  },
+  {
+   "tx": "**Acute subdural haematoma** (between dura and brain) crescents over the hemisphere and tracks with contusion and swelling. **Chronic subdural haematoma** (CSH, old blood collection) follows minor trauma in the elderly over weeks. **Twist drill craniostomy** with drainage evacuates chronic collections safely under local anaesthesia.",
+   "say": "Acute subdural haematoma crescents over the hemisphere and tracks with contusion and swelling. Chronic subdural haematoma follows minor trauma in the elderly over weeks. Twist drill craniostomy with drainage evacuates chronic collections safely under local anaesthesia.",
+   "vis": {"kind": "flow", "nodes": [{"id": "ct", "label": "CT crescent collection"}, {"id": "acute", "label": "Acute: evacuate if mass"}, {"id": "chronic", "label": "Chronic: twist drill drainage"}, {"id": "scan", "label": "Post procedure CT"}], "edges": [["ct", "acute"], ["ct", "chronic"], ["acute", "scan"], ["chronic", "scan"]]}
+  },
+  {
+   "tx": "**Marshall computed tomography** (CT) grading classifies diffuse injury, evacuated and non evacuated mass lesions with **midline shift** in millimetres. **Computed tomography** (CT) head criteria for mild injury include vomiting over two episodes, age over **sixty five**, dangerous mechanism and deficit. **New Orleans** and **Canadian CT Head** rules identify who needs scanning without CT overuse.",
+   "say": "Marshall grading classifies diffuse injury, evacuated and non evacuated mass lesions with midline shift in millimetres. Head injury criteria include vomiting, age over sixty five, dangerous mechanism and deficit. New Orleans and Canadian rules identify who needs scanning without overuse.",
+   "vis": {"kind": "table", "cols": ["Marshall class", "Meaning", "Outcome"], "rows": [["Diffuse injury one", "No visible injury", "Best outcome"], ["Diffuse injury three", "Swollen cisterns", "Higher risk"], ["Evacuated mass", "Surgical lesion removed", "Group dependent"]]}
+  },
+  {
+   "tx": "**Intracranial pressure** (ICP, pressure inside the skull) stays under **twenty** mmHg in health and is treated above **twenty two** mmHg per Brain Trauma Foundation guidance. **Intraparenchymal monitors** (pressure sensors in brain tissue) are the reference standard. **Cerebral perfusion pressure** (CPP, mean arterial pressure minus ICP) targets **sixty** mmHg.",
+   "say": "Intracranial pressure stays under twenty in health and is treated above twenty two per Brain Trauma Foundation guidance. Intraparenchymal monitors are the reference standard. Cerebral perfusion pressure targets sixty millimetres of mercury.",
+   "vis": {"kind": "table", "cols": ["Number", "Threshold", "Meaning"], "rows": [["Intracranial pressure", "Over twenty two", "Treat"], ["Perfusion pressure", "Near sixty", "Target perfusion"], ["Glasgow score", "Eight or less", "Monitor pressure"]]}
+  },
+  {
+   "tx": "**Hyperosmolar therapy** (osmotic shrinkers) shrinks uninjured brain and buys time through osmotic gradients. **Hypertonic saline** (salt solution bolus) is preferred in hypotension while the osmotic diuretic suits volume overloaded patients. **Brain Trauma Foundation** endorses hyperosmolar therapy for raised ICP but not prophylactic use without elevation.",
+   "say": "Hyperosmolar therapy shrinks uninjured brain and buys time through osmotic gradients. Hypertonic saline bolus suits hypotension while the osmotic diuretic suits volume overloaded patients. Guidelines endorse hyperosmolar therapy for raised pressure but not prophylactic use without elevation.",
+   "vis": {"kind": "compare", "left": {"title": "Osmotic diuretic", "points": ["Osmotic diuresis", "Risk hypotension", "Avoid in shock"]}, "right": {"title": "Hypertonic saline", "points": ["Volume expansion", "Raise sodium fast", "Preferred in hypotension"]}}
+  },
+  {
+   "tx": "**Hyperventilation** (forced low carbon levels) constricts cerebral vessels and lowers ICP briefly but worsens cerebral ischaemia in injured tissue. **Prophylactic hyperventilation** to carbon levels under **twenty five** mmHg is forbidden in guidelines for severe injury. **Short hyperventilation** serves only as a brief bridge to definitive surgery in impending herniation syndromes.",
+   "say": "Hyperventilation constricts cerebral vessels and lowers pressure briefly but worsens ischaemia. Prophylactic hyperventilation to low carbon levels is forbidden in guidelines. Short hyperventilation serves only as a bridge to definitive surgery in herniation.",
+   "vis": {"kind": "flow", "nodes": [{"id": "raise", "label": "Raised pressure"}, {"id": "osmo", "label": "Hyperosmolar bolus"}, {"id": "drain", "label": "Cerebrospinal fluid drainage if monitor"}, {"id": "last", "label": "Decompression as last resort"}], "edges": [["raise", "osmo"], ["osmo", "drain"], ["drain", "last"]]}
+  },
+  {
+   "tx": "**Decompressive craniectomy** (bone flap removal to expand the skull) relieves refractory ICP in malignant swelling. The **DECRA** and **RESCUE** trials show death reduction with some disability cost in published reports. Flap replacement follows weeks later after swelling settles and the syndrome of the trephined is recognised.",
+   "say": "Decompressive craniectomy removes the bone flap to expand the skull and relieves refractory pressure in malignant swelling. The DECRA and RESCUE trials give lower death rates with some disability cost. Flap replacement follows weeks later after swelling settles.",
+   "vis": {"kind": "table", "cols": ["Trial", "Signal", "Caution"], "rows": [["DECRA", "Lower pressure, fewer deaths", "More disability"], ["RESCUE", "Death reduction", "Survivor deficit trade"], ["Common ground", "Refractory pressure only", "Not prophylactic"]]}
+  },
+  {
+   "tx": "High yield for the exam: severe injury means **GCS** eight or less, epidural haematoma is lens shaped with lucid interval in twenty to thirty percent, chronic subdural follows minor trauma in the elderly, **ICP** is treated above twenty two, perfusion pressure targets sixty, prophylactic hyperventilation to low carbon levels is forbidden, and a single systolic pressure under one hundred worsens secondary injury.",
+   "say": "Severe injury means Glasgow score eight or less, epidural haematoma is lens shaped with lucid interval in twenty to thirty percent, chronic subdural follows minor trauma in the elderly, intracranial pressure is treated above twenty two, perfusion pressure targets sixty, prophylactic hyperventilation to low carbon levels is forbidden, and a single systolic pressure under one hundred worsens secondary injury.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Severe injury", "Glasgow score eight or less"], ["Epidural", "Lens shaped, lucid gap twenty to thirty percent"], ["Pressure threshold", "Treat above twenty two"], ["Perfusion target", "Sixty"], ["Hyperventilation", "Never prophylactically under twenty five"], ["Hypotension", "Systolic under one hundred harms"], ["Marshall", "CT grading with shift"], ["Chronic subdural", "Minor trauma, elderly"]] }
+  }
+ ]
+}

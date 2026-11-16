@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "pcd-cyanotic-heart-disease",
+ "subject": "ss-paediatric-cardiology",
+ "title": "Cyanotic defects: tetralogy, transposition and single ventricle care",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22e",
+  "Moss and Adams Heart Disease in Children",
+  "American Heart Association congenital guidance"
+ ],
+ "steps": [
+  {
+   "tx": "**Tetralogy of Fallot** (TOF) combines ventricular septal defect, overriding aorta, pulmonary stenosis and right ventricular hypertrophy. Chronic hypoxaemia causes clubbing and polycythaemia with hypercyanotic spells during exertion. Complete repair closes the defect and relieves obstruction, ideally before school age, with follow up of remaining pulmonary stenosis.",
+   "say": "Tetralogy of Fallot combines ventricular septal defect, overriding aorta, pulmonary stenosis and right ventricular hypertrophy. Chronic hypoxaemia causes clubbing and hypercyanotic spells. Complete repair closes the defect and relieves obstruction, ideally before school age.",
+   "vis": {
+    "cols": ["Component", "Effect", "Sign"],
+    "kind": "table",
+    "rows": [
+     ["Septal defect", "Mixing", "Cyanosis"],
+     ["Overriding aorta", "Both ventricles supply", "Sat fall"],
+     ["Pulmonary stenosis", "Right outflow block", "Murmur audible"]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypercyanotic spells** occur when worsening right outflow obstruction diverts more blood right to left across the defect. Knee chest positioning raises systemic resistance and eases the spell while oxygen and morphine settle distress. Propranolol prevents recurrence, and surgical repair cures spell prone anatomy.",
+   "say": "Hypercyanotic spells occur when worsening right outflow obstruction diverts more blood right to left across the defect. Knee chest positioning raises systemic resistance and eases the spell while oxygen and morphine settle distress. Propranolol prevents recurrence until repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "k1", "label": "Spell starts"}, {"id": "k2", "label": "Knee chest"}, {"id": "k3", "label": "Oxygen morphine"}, {"id": "k4", "label": "Beta blocker"}, {"id": "k5", "label": "Definitive repair"}],
+    "edges": [["k1", "k2"], ["k2", "k3"], ["k3", "k4"], ["k4", "k5"]]
+   }
+  },
+  {
+   "tx": "**Transposition of great arteries** (TGA) places aorta from right ventricle and pulmonary artery from left, running in parallel. Survival depends on mixing through patent foramen or ductus. Balloon atrial septostomy (Rashkind) instantly improves mixing and raises saturation before arterial switch.",
+   "say": "Transposition of great arteries places the aorta from the right ventricle and the pulmonary artery from the left, running in parallel. Survival depends on mixing through patent foramen or ductus. Balloon atrial septostomy instantly improves mixing before arterial switch.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Transposition", "points": ["Parallel circuits", "Aorta from right", "Needs mixing defect", "Arterial switch"]},
+    "right": {"title": "Tetralogy", "points": ["Series obstruction", "Single mixing defect", "Needs outflow relief", "Complete repair"]}
+   }
+  },
+  {
+   "tx": "**Arterial switch operation** for transposition reassigns aorta and pulmonary artery to correct ventricles. Timing within the first month exploits the left ventricle still conditioned to systemic load. Coronary transfer determines long term success, with intramural courses posing the greatest technical risk.",
+   "say": "Arterial switch operation for transposition reassigns the aorta and pulmonary artery to correct ventricles. Timing within the first month exploits the left ventricle still conditioned to systemic load. Coronary transfer determines long term success, with intramural courses posing the greatest risk.",
+   "vis": {
+    "cols": ["Step", "Action", "Why"],
+    "kind": "table",
+    "rows": [
+     ["Atrial septostomy", "Improve mixing", "Raise saturation"],
+     ["Arterial switch", "Reassign great vessels", "Normal circulation"],
+     ["Coronary transfer", "Move coronary buttons", "Prevent ischaemia"]
+    ]
+   }
+  },
+  {
+   "tx": "**Total anomalous pulmonary venous connection** (TAPVC) drains pulmonary veins into systemic veins instead of the left atrium directly. Obstructed TAPVC presents with severe distress and pulmonary oedema needing emergency repair now. Unobstructed disease causes progressive pulmonary hypertension and right ventricular failure over weeks.",
+   "say": "Total anomalous pulmonary venous connection drains pulmonary veins into systemic veins instead of the left atrium. Obstructed disease presents with severe distress and pulmonary oedema needing emergency repair. Unobstructed disease causes progressive pulmonary hypertension and right ventricular failure.",
+   "vis": {
+    "cols": ["Type", "Presentation", "Priority"],
+    "kind": "table",
+    "rows": [
+     ["Obstructed", "Severe distress", "Emergency repair"],
+     ["Unobstructed", "Gradual overload", "Planned repair"],
+     ["Mixed obstruction", "Fluctuating course", "Early surgery"]
+    ]
+   }
+  },
+  {
+   "tx": "**Truncus arteriosus** has a single arterial trunk receiving blood from both ventricles above a septal defect. Cyanosis combines with heart failure from pulmonary overcirculation within weeks of birth. Repair separates pulmonary arteries and restores septation while providing a valved conduit for lasting pulmonary flow.",
+   "say": "Truncus arteriosus has a single arterial trunk receiving blood from both ventricles above a septal defect. Cyanosis combines with heart failure from pulmonary overcirculation. Repair separates pulmonary arteries and restores septation while providing a valved conduit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "r1", "label": "Single trunk"}, {"id": "r2", "label": "Pulmonary flow high"}, {"id": "r3", "label": "Heart failure"}, {"id": "r4", "label": "Conduit repair"}, {"id": "r5", "label": "Separate pulmonary"}],
+    "edges": [["r1", "r2"], ["r2", "r3"], ["r3", "r4"], ["r4", "r5"]]
+   }
+  },
+  {
+   "tx": "**Hypoplastic left heart syndrome** (HLHS) leaves aorta and left ventricle underdeveloped, making systemic flow duct dependent until intervention. Prostaglandin maintains systemic perfusion until Norwood palliation creates a neo aorta for systemic delivery. Staged Fontan completion manages single ventricle physiology across childhood with careful oxygen and feeding balance.",
+   "say": "Hypoplastic left heart syndrome leaves the aorta and left ventricle underdeveloped, making systemic flow duct dependent. Prostaglandin maintains perfusion until Norwood palliation creates a neo aorta. Staged Fontan completion manages single ventricle physiology across childhood.",
+   "vis": {
+    "cols": ["Stage", "Operation", "Age"],
+    "kind": "table",
+    "rows": [
+     ["Stage 1", "Norwood palliation", "Neonatal period"],
+     ["Stage 2", "Glenn shunt", "Six months"],
+     ["Stage 3", "Fontan completion", "Two to three years"]
+    ]
+   }
+  },
+  {
+   "tx": "**Single ventricle** physiology cannot separate pulmonary and systemic flows, so staged palliation borrows volume and pressure carefully over years. Glenn shunt diverts superior caval blood to lungs, while Fontan connects inferior return passively without a subpulmonary pump. Pulmonary artery pressure determines candidacy for each stage and repair timing.",
+   "say": "Single ventricle physiology cannot separate pulmonary and systemic flows, so staged palliation borrows volume and pressure carefully. The Glenn shunt diverts caval blood to lungs, while Fontan connects inferior return passively. Pulmonary artery pressure determines candidacy for each stage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "g1", "label": "Single ventricle"}, {"id": "g2", "label": "Glenn shunt"}, {"id": "g3", "label": "Fontan completion"}, {"id": "g4", "label": "Low pressure care"}, {"id": "g5", "label": "No subpulmonary pump"}],
+    "edges": [["g1", "g2"], ["g2", "g3"], ["g3", "g4"], ["g4", "g5"]]
+   }
+  },
+  {
+   "tx": "**Differential diagnosis** of cyanosis lists tet spells, transposition, truncus, TAPVC and hypoplastic left heart as exam staples for quick recall. Clubbing and polycythaemia mark chronic hypoxaemia, while duct dependent collapse marks HLHS and coarctation in neonates. Echocardiogram plus saturation mapping assigns each infant to a surgical pathway with confidence.",
+   "say": "Differential diagnosis of cyanosis lists tet spells, transposition, truncus, anomalous venous connection and hypoplastic left heart as exam staples. Clubbing and polycythaemia mark chronic hypoxaemia, while duct dependent collapse marks hypoplastic left heart. Echocardiogram assigns each infant to a surgical pathway.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Chronic cyanosis", "points": ["Clubbing present", "Polycythaemia high", "Tetralogy common", "Spells episodic"]},
+    "right": {"title": "Acute collapse", "points": ["Shock on duct closure", "Weak pulses", "HLHS pattern", "Prostaglandin urgent"]}
+   }
+  },
+  {
+   "tx": "**Exam table** locks tetralogy components, transposition mixing, TAPVC drainages, truncus trunk and HLHS stages with drugs and operations. Spells answer to knee chest plus morphine and propranolol, transposition to septostomy plus switch, and HLHS to prostaglandin plus Norwood. Each row pairs lesion with gold standard test and first therapy.",
+   "say": "The exam table locks tetralogy components, transposition mixing, anomalous venous connection, truncus trunk and hypoplastic left heart stages with drugs and operations. Spells answer to knee chest plus morphine and propranolol. Each row pairs lesion with gold standard test and first therapy for quick recall.",
+   "vis": {
+    "cols": ["Lesion", "High yield point", "First therapy"],
+    "kind": "table",
+    "rows": [
+     ["Tetralogy", "Components", "Complete repair"],
+     ["Spell", "Position", "Knee chest plus morphine"],
+     ["Transposition", "Mixing defect", "Septostomy then switch"],
+     ["TAPVC", "Vein drainage", "Emergency repair if blocked"],
+     ["Truncus", "Single trunk", "Conduit separation"],
+     ["HLHS", "Duct dependent", "Prostaglandin plus Norwood"],
+     ["Fontan", "Final stage", "Passive pulmonary flow"],
+     ["Test", "Gold standard", "Echocardiogram"]
+    ]
+   }
+  }
+ ]
+}

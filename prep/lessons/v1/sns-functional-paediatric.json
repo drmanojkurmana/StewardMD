@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "sns-functional-paediatric",
+ "subject": "ss-neurosurgery",
+ "title": "Functional neurosurgery and paediatric neurosurgery: epilepsy, movement, CSF and anomalies",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e epilepsy and movement disorder sections", "Wyllie epilepsy surgery principles and paediatric neurosurgery texts"],
+ "steps": [
+  {
+   "tx": "**Drug resistant epilepsy** (seizures despite two appropriate drugs) affects **twenty** to **thirty** percent of epilepsy patients. **Surgery** (resective) cures **fifty** to **seventy** percent in selected temporal lobe cases. **Anterior temporal lobectomy** (temporal tip removal past the hippocampus) helps mesial temporal sclerosis.",
+   "say": "Drug resistant epilepsy means seizures despite two appropriate drugs and it affects twenty to thirty percent of patients. Surgery cures fifty to seventy percent in selected temporal lobe cases. Anterior temporal lobectomy helps mesial temporal sclerosis.",
+   "vis": {"kind": "table", "cols": ["Point", "Figure", "Decision"], "rows": [["Drug resistant", "Twenty to thirty percent", "Refer after two drugs"], ["Temporal surgery cure", "Fifty to seventy percent", "Best in temporal sclerosis"], ["Operation", "Anterior temporal lobectomy", "Sclerotic temporal lobe"]]}
+  },
+  {
+   "tx": "**Stereo electroencephalogram** (SEEG, depth electrodes inside brain) identifies seizure foci from difficult or deep locations accurately. **Video telemetry** (synchronous video plus brain tracing) localises onset before any resection is planned. **Lesionectomy** (removing the visible lesion) suits cortical dysplasia and low grade tumours in many cases.",
+   "say": "Stereo electroencephalogram identifies seizure foci deep inside the brain. Video telemetry localises seizure onset before any resection is planned. Lesionectomy suits cortical dysplasia and low grade tumours.",
+   "vis": {"kind": "flow", "nodes": [{"id": "seizure", "label": "Drug resistant seizures"}, {"id": "telemetry", "label": "Video telemetry"}, {"id": "seeg", "label": "Depth electrodes if unclear"}, {"id": "resect", "label": "Resection of focus"}], "edges": [["seizure", "telemetry"], ["telemetry", "seeg"], ["seeg", "resect"]]}
+  },
+  {
+   "tx": "**Corpus callosotomy** (cutting the bridge between hemispheres) stops drop attacks and generalised tonic clonic spread. It is palliative, rarely curative, and suits **Lennox Gastaut syndrome** (severe childhood epilepsy). **Vagal nerve stimulation** (VNS, neck device) reduces seizure frequency through cyclic stimulation.",
+   "say": "Corpus callosotomy stops drop attacks and generalised spread by cutting the bridge between hemispheres. It is palliative, rarely curative, and suits Lennox Gastaut syndrome. Vagal nerve stimulation reduces seizure frequency through cyclic neck stimulation.",
+   "vis": {"kind": "compare", "left": {"title": "Callosotomy", "points": ["Stops drop attacks", "Palliative not curative", "Lennox Gastaut"]}, "right": {"title": "Nerve stimulation", "points": ["Device in neck", "Seizure frequency down", "No resection needed"]}}
+  },
+  {
+   "tx": "**Deep brain stimulation** (DBS, implanted electrodes in basal ganglia) treats **Parkinson disease** (movement disorder with tremor and rigidity) after replacement drugs fail. **Subthalamic nucleus** (STN, motor nucleus target) improves motor fluctuations markedly. **Globus pallidus interna** (GPi, tyre target) is used for dyskinesia dominant disease.",
+   "say": "Deep brain stimulation treats Parkinson disease after replacement drugs fail with implanted electrodes in basal ganglia. The subthalamic nucleus improves motor fluctuations markedly. The globus pallidus is used for dyskinesia dominant disease.",
+   "vis": {"kind": "table", "cols": ["Target", "Best for", "Effect"], "rows": [["Subthalamic nucleus", "Motor fluctuation", "Strongest drug response"], ["Globus pallidus interna", "Dyskinesia", "Dyskinesia control"], ["Thalamus ventral intermediate", "Tremor", "Essential tremor"]]}
+  },
+  {
+   "tx": "**Essential tremor** (action tremor of hands) responds to **beta blocker drugs** or **anti seizure medicines** but disables writing and drinking in severe cases. **Focused ultrasound** (FUS, no incision ablation) and **gamma knife** thalamotomy end drug resistant tremor. Suicide and depression track disability, not tremor severity itself.",
+   "say": "Essential tremor responds to beta blocker drugs or anti seizure medicines but disables writing and drinking in severe cases. Focused ultrasound and gamma knife thalamotomy end drug resistant tremor. Depression tracks disability, not tremor severity itself.",
+   "vis": {"kind": "flow", "nodes": [{"id": "tremor", "label": "Disabling essential tremor"}, {"id": "drug", "label": "Beta blocker, anti seizure medicine"}, {"id": "fus", "label": "Focused ultrasound thalamotomy"}, {"id": "follow", "label": "Rehabilitation and mood care"}], "edges": [["tremor", "drug"], ["drug", "fus"], ["fus", "follow"]]}
+  },
+  {
+   "tx": "**Hydrocephalus** (water on the brain, CSF accumulation) in children follows **myelomeningocele** (open spinal defect) and intraventricular bleed in preterms. **Ventriculoperitoneal shunt** (VP, tube to peritoneum) is the commonest diversion used worldwide. **Endoscopic third ventriculostomy** (ETV, floor opening) helps aqueduct stenosis without shunt dependence well.",
+   "say": "Hydrocephalus follows myelomeningocele and intraventricular bleed. Ventriculoperitoneal shunt to the peritoneum is the commonest diversion. Endoscopic third ventriculostomy helps aqueduct stenosis without shunt dependence.",
+   "vis": {"kind": "table", "cols": ["Cause", "Mechanism", "Procedure"], "rows": [["Aqueduct stenosis", "Blocked channel", "Endoscopic third ventriculostomy, no shunt"], ["Myelomeningocele", "Chiari association", "Shunt common"], ["Intraventricular bleed", "Blocked drainage", "Shunt or endoscopic procedure"]]}
+  },
+  {
+   "tx": "**Chiari malformation** (hindbrain herniation through foramen magnum, tonsillar descent) descends **five** millimetres in adults on imaging studies. **Arnold Chiari type two** pairs with spina bifida and needs posterior fossa decompression in childhood. **Syringomyelia** (cord cavitation, fluid cavity) explains painless hand burns and wasting in Chiari disease.",
+   "say": "Chiari malformation is hindbrain herniation through the foramen magnum and it descends five millimetres in adults. Type two pairs with spina bifida and needs decompression. Syringomyelia explains painless hand burns and wasting in Chiari disease.",
+   "vis": {"kind": "compare", "left": {"title": "Chiari type one", "points": ["Adult descent over five millimetres", "Cough headache", "Syrinx common"]}, "right": {"title": "Chiari type two", "points": ["With myelomeningocele", "Decompression needed", "Deformity frequent"]}}
+  },
+  {
+   "tx": "**Craniosynostosis** (premature suture fusion, early skull closure) shapes the skull and raises pressure in severe cases often. **Sagittal fusion** (scaphocephaly, boat skull) is the commonest single suture fault seen. **Endoscopic strip craniectomy** (minimal surgery) with helmet therapy helps infants caught before **six** months of age well.",
+   "say": "Craniosynostosis means premature suture fusion and it shapes the skull with raised pressure in severe cases. Sagittal fusion causing boat skull is the commonest single suture fault. Endoscopic strip craniectomy with helmet therapy helps infants before six months.",
+   "vis": {"kind": "table", "cols": ["Fusion", "Skull shape", "Timing"], "rows": [["Sagittal", "Scaphocephaly, long head", "Commonest"], ["Metopic", "Trigonocephaly, ridge", "Forehead ridge"], ["Coronal", "Plagiocephaly, asymmetry", "Unilateral severe"]]}
+  },
+  {
+   "tx": "**Paediatric tumours** peak differently: **medulloblastoma** (posterior fossa embryonal tumour) spreads through cerebrospinal fluid widely, while **pilocytic astrocytoma** (benign cerebellar glioma) suits gross resection with cure. **Craniopharyngioma** (suprasellar cystic tumour) endangers vision and hormones in children often. **Ependymoma** (fourth ventricle tumour) leads the top group and needs radiotherapy routinely.",
+   "say": "Paediatric tumours peak differently with medulloblastoma carrying the commonest malignant tag. Ependymoma in the fourth ventricle and pilocytic astrocytoma in the cerebellum lead the top group. Germinoma secretes human chorionic gonadotropin markers.",
+   "vis": {"kind": "table", "cols": ["Tumour", "Site", "Habit"], "rows": [["Medulloblastoma", "Posterior fossa", "Cerebrospinal fluid spread"], ["Pilocytic astrocytoma", "Cerebellum", "Benign, resectable"], ["Germinoma", "Pineal", "Marker secreting"]]}
+  },
+  {
+   "tx": "High yield for the exam: drug resistant **epilepsy** affects twenty to thirty percent after two drugs, temporal lobectomy cures fifty to seventy percent in mesial disease, callosotomy stops drop attacks, brain stimulation of the subthalamic nucleus helps Parkinson fluctuation, endoscopic procedure suits aqueduct stenosis, Chiari descent over five millimetres is pathological, and medulloblastoma spreads through cerebrospinal fluid.",
+   "say": "Drug resistant epilepsy affects twenty to thirty percent after two drugs, temporal lobectomy cures fifty to seventy percent in mesial disease, callosotomy stops drop attacks, brain stimulation of the subthalamic nucleus helps Parkinson fluctuation, endoscopic procedure suits aqueduct stenosis, Chiari descent over five millimetres is pathological, and medulloblastoma spreads through cerebrospinal fluid.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Drug resistant", "Twenty to thirty percent, two drugs"], ["Temporal surgery", "Fifty to seventy percent"], ["Drop attacks", "Callosotomy"], ["Parkinson", "Subthalamic stimulation"], ["Aqueduct stenosis", "Endoscopic procedure"], ["Chiari", "Over five millimetres pathological"], ["Medulloblastoma", "Cerebrospinal fluid spread"], ["Craniosynostosis", "Sagittal commonest"]] }
+  }
+ ]
+}

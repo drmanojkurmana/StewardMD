@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "spu-sleep-disorders",
+ "subject": "ss-pulmonology",
+ "title": "Sleep-disordered breathing: OSA severity, sleep studies and hypoventilation syndromes",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e sleep medicine chapter", "AASM OSA guidance and ATS hypoventilation statement"],
+ "steps": [
+  {
+   "tx": "**Obstructive sleep apnoea** (OSA, upper airway collapse during sleep) is common at **ten** to **fifteen** percent in middle aged men and causes **daytime somnolence** with snoring. **Apnoea hypopnoea index** (AHI) grades severity with cutoffs at **five**, **fifteen** and **thirty** events per hour. Untreated OSA raises hypertension, atrial fibrillation and road accidents.",
+   "say": "Obstructive sleep apnoea means the upper airway collapses repeatedly in sleep and it affects ten to fifteen percent of middle aged men. The apnoea hypopnoea index grades severity at five, fifteen and thirty events per hour. Untreated disease raises hypertension, atrial fibrillation and road accidents.",
+   "vis": {"kind": "table", "cols": ["Grade", "AHI range", "Treatment"], "rows": [["Normal", "Under five", "No treatment needed"], ["Mild", "Five to fifteen", "Weight loss, position therapy"], ["Moderate", "Fifteen to thirty", "Continuous positive airway pressure usually offered"], ["Severe", "Over thirty", "Continuous positive airway pressure first line"]]}
+  },
+  {
+   "tx": "**Obesity** is the dominant cause, with neck circumference over **forty three** centimetres in men and **forty one** centimetres in women adding risk. **Retrognathia**, large tonsils and nasal blockage narrow the sleeping airway further. **Hypothyroidism**, acromegaly and **Down syndrome** enrich sleep apnoea through soft tissue and bone changes.",
+   "say": "Obesity dominates the cause list, and a neck circumference over forty three centimetres in men marks high risk. Retrognathia, large tonsils and nasal blockage narrow the sleeping airway. Hypothyroidism, acromegaly and Down syndrome also cause sleep apnoea through soft tissue and bone changes.",
+   "vis": {"kind": "compare", "left": {"title": "Anatomical risk", "points": ["Obesity, thick neck", "Retrognathia, large tonsils", "Nasal blockage, high arched palate"]}, "right": {"title": "Endocrine and syndromic", "points": ["Hypothyroidism", "Acromegaly", "Down syndrome"]}}
+  },
+  {
+   "tx": "**Epworth Sleepiness Scale** (ESS, eight situation score) grades daytime sleepiness with a score over **ten** suggesting pathological hypersomnia. **STOP Bang** (snoring, tiredness, observed apnoea, pressure, body mass index, age, neck, gender) screens clinic patients quickly. Scores only triage, they never replace a sleep study.",
+   "say": "The Epworth scale scores eight situations and a score over ten suggests pathological sleepiness. The STOP Bang questionnaire helps screen clinic patients quickly with eight yes or no items. Scores only help triage patients and never stand in for a proper sleep study.",
+   "vis": {"kind": "table", "cols": ["Tool", "Score", "Meaning"], "rows": [["Epworth", "Over ten", "Pathological sleepiness"], ["STOP Bang", "Five or over", "High risk OSA"], ["Likelihood", "Low score", "Polysomnography still may be needed"]]}
+  },
+  {
+   "tx": "**Polysomnography** (in lab sleep recording with electroencephalogram, airflow and oximetry) is the gold standard and measures **apnoea hypopnoea index**, oxygen nadir and sleep staging. Home sleep apnoea testing suffices for straightforward suspected OSA. **Multiple sleep latency test** (MSLT, nap latency study) confirms narcolepsy and quantifies cataplexy risk.",
+   "say": "Laboratory polysomnography is the gold standard and it measures the apnoea hypopnoea index, oxygen nadir and sleep staging. Home testing suffices for straightforward suspected obstructive sleep apnoea. The multiple sleep latency test confirms narcolepsy and quantifies the sleep tendency.",
+   "vis": {"kind": "flow", "nodes": [{"id": "suspect", "label": "Suspected OSA"}, {"id": "home", "label": "Home test if simple"}, {"id": "lab", "label": "Polysomnography if complex"}, {"id": "treat", "label": "Grade and treat"}], "edges": [["suspect", "home"], ["home", "lab"], ["lab", "treat"]]}
+  },
+  {
+   "tx": "**Continuous positive airway pressure** (CPAP) splints the airway open and is first line for moderate to severe OSA, lowering blood pressure and sleepiness. Adherence under **four** hours nightly predicts failure, so masks and humidification are tuned early. **Mandibular advancement device** (oral appliance) suits mild disease or CPAP intolerance.",
+   "say": "Continuous positive airway pressure splints the airway open and is first line for moderate to severe obstructive sleep apnoea. Using it for less than four hours nightly leads to failure, so clinicians tune masks and humidification early. Mandibular devices help mild disease or patients who cannot tolerate the mask.",
+   "vis": {"kind": "table", "cols": ["Option", "Best for", "Limit"], "rows": [["Continuous positive airway pressure", "Moderate to severe OSA", "Adherence under four hours fails"], ["Oral appliance", "Mild OSA", "Less effective in severe disease"], ["Weight loss", "All overweight patients", "Slow and often partial"]]}
+  },
+  {
+   "tx": "**Central sleep apnoea** (CSA, absent respiratory drive without obstruction) arises in **heart failure**, opioid use and high altitude. **Cheyne Stokes breathing** (crescendo decrescendo cycle with apnoea) marks advanced left ventricular failure. **Adaptive servo ventilation** (ASV) is contraindicated when left ventricular **ejection fraction** is under **forty five** percent with predominant CSA.",
+   "say": "Central sleep apnoea means respiratory drive fails without obstruction and it appears in heart failure, opioid use and high altitude. Cheyne Stokes breathing marks advanced left ventricular failure. Adaptive servo ventilation is contraindicated when the ejection fraction is under forty five percent with predominant central events.",
+   "vis": {"kind": "compare", "left": {"title": "Central pattern", "points": ["No effort in apnoea", "Heart failure, opioids", "Cheyne Stokes cycle"]}, "right": {"title": "Obstructive pattern", "points": ["Effort against obstruction", "Snoring, obesity", "Positive airway pressure responsive"]}}
+  },
+  {
+   "tx": "**Obesity hypoventilation syndrome** (OHS, daytime hypercapnia with obesity and sleep apnoea) shows arterial **carbon dioxide** over **forty five** mmHg while awake. **Bicarbonate** over **twenty seven** mmol per litre on venous gas hints chronic retention. Sleep studies show nocturnal hypoventilation with **prolonged time** under **eighty eight** percent saturation.",
+   "say": "Obesity hypoventilation syndrome is daytime CO2 over forty five with obesity and sleep apnoea. A venous bicarbonate over twenty seven suggests chronic retention. Sleep studies show nocturnal hypoventilation with prolonged time under eighty eight percent saturation.",
+   "vis": {"kind": "table", "cols": ["Clue", "Cutoff", "Implication"], "rows": [["Daytime PaCO2", "Over forty five", "Obesity hypoventilation confirmed"], ["Bicarbonate", "Over twenty seven", "Chronic retention"], ["Sleep tracing", "Time under eighty eight percent", "Nocturnal hypoventilation"]]}
+  },
+  {
+   "tx": "**Narcolepsy** (hypocretin loss disease) brings **cataplexy** (emotion triggered atonia), hypnagogic hallucination and sleep paralysis. **Cerebrospinal fluid** (CSF) hypocretin low levels support the diagnosis alongside the sleep study. Treatment uses scheduled naps, **wakefulness medicines** for sleepiness and **night sedation** for cataplexy and entry into sustained sleep.",
+   "say": "Narcolepsy is hypocretin loss with cataplexy, hypnagogic hallucination and sleep paralysis. Low cerebrospinal fluid hypocretin supports the diagnosis. Treatment uses scheduled naps, wakefulness medicines and night sedation for cataplexy.",
+   "vis": {"kind": "table", "cols": ["Symptom", "Hallmark", "Treatment"], "rows": [["Sleepiness", "Short MSLT latency", "Wakefulness medicines, naps"], ["Cataplexy", "Emotion triggered atonia", "Night sedation"], ["Paralysis", "Sleep onset atonia", "Sleep hygiene"]]}
+  },
+  {
+   "tx": "**Restless legs syndrome** (RLS, urge to move legs at rest) worsens at night and eases with movement. **Ferritin** low levels warrant iron replacement even inside the normal range. **Agonist medicines** that act in the brain relieve symptoms but augmentation forces drug holidays over time.",
+   "say": "Restless legs syndrome brings an urge to move the legs at rest that eases with movement. Low ferritin warrants iron replacement even inside the normal range. Agonist medicines relieve symptoms but augmentation leads to drug holidays over time.",
+   "vis": {"kind": "flow", "nodes": [{"id": "urge", "label": "Urge to move legs"}, {"id": "ferr", "label": "Ferritin low"}, {"id": "iron", "label": "Oral iron replacement"}, {"id": "dop", "label": "Agonist medicine if needed"}], "edges": [["urge", "ferr"], ["ferr", "iron"], ["iron", "dop"]]}
+  },
+  {
+   "tx": "High yield for the exam: **AHI** cutoffs sit at five, fifteen and thirty events per hour, CPAP is first line for moderate to severe OSA, adaptive servo ventilation harms left ventricular failure under forty five percent ejection fraction, obesity hypoventilation means daytime **CO2** over forty five, narcolepsy starts with **cataplexy**, and low ferritin still needs iron in restless legs.",
+   "say": "The apnoea hypopnoea index cutoffs sit at five, fifteen and thirty, continuous positive airway pressure is first line for moderate to severe disease, adaptive servo ventilation harms left ventricular failure, obesity hypoventilation means daytime CO2 over forty five, narcolepsy starts with cataplexy, and low ferritin still needs iron in restless legs.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Severity", "AHI five, fifteen, thirty"], ["First line", "CPAP moderate-severe OSA"], ["Contraindication", "Servo ventilation if ejection fraction under forty five percent"], ["Obesity hypoventilation", "Daytime CO2 over forty five"], ["Narcolepsy", "Cataplexy, low hypocretin"], ["Restless legs", "Low ferritin, give iron"], ["Gold standard", "Polysomnography"], ["Screen", "STOP Bang, Epworth over ten"]] }
+  }
+ ]
+}

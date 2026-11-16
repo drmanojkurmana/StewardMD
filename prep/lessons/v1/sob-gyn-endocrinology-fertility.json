@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "sob-gyn-endocrinology-fertility",
+ "subject": "ss-obg",
+ "title": "Reproductive endocrinology and infertility: cycles, PCOS and assisted reproduction",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Williams Obstetrics 25e and Williams Gynecology",
+  "ASRM and ESHRE infertility guidance",
+  "Endocrine Society PCOS guideline"
+ ],
+ "steps": [
+  {
+   "tx": "**Primary amenorrhoea** means no menarche by 15 years or within 3 years of thelarche, and prompts karyotype plus pelvic assessment. Causes include Mullerian anomalies, gonadal dysgenesis and outflow obstruction. Imperforate hymen presents as cyclic pain with haematocolpos and needs prompt surgical release.",
+   "say": "Primary amenorrhoea means no menarche by 15 years and it needs karyotype plus pelvic assessment. Causes include Mullerian anomalies, gonadal dysgenesis and outflow obstruction. An imperforate hymen presents with cyclic pain and needs prompt surgical release.",
+   "vis": {
+    "cols": ["Age", "Breast development", "Likely cause"],
+    "kind": "table",
+    "rows": [
+     ["By 15 years, none", "Present", "Outflow obstruction"],
+     ["By 15 years, none", "Absent", "Gonadal dysgenesis"],
+     ["By 13 years, none", "Absent", "Hypothalamic causes"]
+    ]
+   }
+  },
+  {
+   "tx": "**Polycystic ovary syndrome** (PCOS) requires two of three features: oligoanovulation, hyperandrogenism and polycystic ovaries on scan. Rotterdam criteria exclude thyroid disease and raised prolactin before diagnosis. Metabolic risk with insulin resistance drives type 2 diabetes and endometrial hyperplasia in these women.",
+   "say": "Polycystic ovary syndrome requires two of three Rotterdam features, namely ovulatory dysfunction, hyperandrogenism and polycystic ovaries. Thyroid disease and raised prolactin must be excluded first. Metabolic risk with insulin resistance drives diabetes and endometrial hyperplasia.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "PCOS ovary", "points": ["Many small follicles", "Raised androgens", "Irregular cycles", "Acne and hirsutism"]},
+    "right": {"title": "Exclude first", "points": ["Thyroid dysfunction", "Raised prolactin", "Androgen tumours", "Cushing syndrome"]}
+   }
+  },
+  {
+   "tx": "**Premature ovarian insufficiency** means four months of amenorrhoea with menopausal follicle stimulating hormone before 40 years, confirmed twice four weeks apart. Most cases arise from autoimmune or iatrogenic damage, though Turner mosaicism needs karyotyping. Hormone therapy continues until the natural menopause age unless contraindicated.",
+   "say": "Premature ovarian insufficiency means four months of amenorrhoea with menopausal hormone levels before 40 years, confirmed twice four weeks apart. Autoimmune and iatrogenic damage cause most cases. Hormone therapy continues until the natural menopause age unless contraindicated.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "f1", "label": "Amenorrhoea four months"}, {"id": "f2", "label": "Hormone test twice"}, {"id": "f3", "label": "Karyotype and screen"}, {"id": "f4", "label": "Start hormones"}, {"id": "f5", "label": "Fertility counsel"}],
+    "edges": [["f1", "f2"], ["f2", "f3"], ["f3", "f4"], ["f4", "f5"]]
+   }
+  },
+  {
+   "tx": "**Unexplained infertility** follows normal semen, ovulation and tubal tests, yet needs structured cycles before assisted reproduction. Clomiphene citrate induces ovulation in anovulatory women, while letrozole now performs better in polycystic ovaries. Intrauterine insemination comes before in vitro fertilisation when tubes and semen allow.",
+   "say": "Unexplained infertility follows normal semen, ovulation and tubal tests, yet it still needs structured timely cycles. Clomiphene citrate induces ovulation, while letrozole now performs better in polycystic ovaries. Intrauterine insemination comes before in vitro fertilisation when tubes and semen allow.",
+   "vis": {
+    "cols": ["Test", "Normal result", "Next step"],
+    "kind": "table",
+    "rows": [
+     ["Semen", "Normal counts", "Insemination cycles"],
+     ["Ovulation", "Progesterone normal", "Timed intercourse"],
+     ["Tubes", "Patent", "Insemination trial"]
+    ]
+   }
+  },
+  {
+   "tx": "**Tubal factor** infertility follows chlamydial salpingitis or endometriosis scarring that blocks the fallopian tube over time. Hysterosalpingography maps blockage, though laparoscopy with chromopertubation confirms the anatomy with dye spill assessment. In vitro fertilisation bypasses tubal damage, so extensive blockage moves directly to that pathway for conception.",
+   "say": "Tubal factor infertility follows chlamydial salpingitis or endometriosis scarring that blocks the fallopian tube. Hysterosalpingography maps blockage, while laparoscopy with dye confirms the anatomy. In vitro fertilisation bypasses tubal damage, so extensive blockage moves directly there.",
+   "vis": {
+    "cols": ["Cause", "Test", "Treatment"],
+    "kind": "table",
+    "rows": [
+     ["Chlamydial block", "Hysterosalpingography", "In vitro fertilisation"],
+     ["Hydrosalpinx", "Ultrasound plus scan", "Salpingectomy before transfer"],
+     ["Fimbrial adhesions", "Laparoscopy", "Fertility surgery selected"]
+    ]
+   }
+  },
+  {
+   "tx": "**Endometriosis** pain eases with combined hormonal suppression, which prevents ovulation and shrinks implants. Laparoscopic excision is reserved for endometriomas, deep disease or fertility indications after weighing recurrence risk. In vitro fertilisation does not worsen endometriosis and remains an option after surgery.",
+   "say": "Endometriosis pain eases with combined hormonal suppression that prevents ovulation and shrinks implants. Laparoscopic excision suits endometriomas and deep disease after weighing recurrence risk. In vitro fertilisation does not worsen endometriosis and remains an option after surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Medical suppression", "points": ["Pain control", "No surgery risk", "Delays fertility", "Recurrence after stop"]},
+    "right": {"title": "Surgical excision", "points": ["Histology proof", "Endometrioma removal", "Fertility gain", "Needs skilled surgery"]}
+   }
+  },
+  {
+   "tx": "**Ovarian hyperstimulation syndrome** threatens after gonadotrophin stimulation with many follicles and raised oestradiol levels. Severe disease shows ascites, haemoconcentration and thrombosis risk needing thromboprophylaxis with heparin. Cycle cancellation with embryo freezing prevents severe hyperstimulation while preserving future transfer chances for later months.",
+   "say": "Ovarian hyperstimulation threatens after gonadotrophin stimulation with many follicles and raised oestradiol. Severe disease shows ascites, haemoconcentration and thrombosis risk. Cycle cancellation with embryo freezing prevents severe disease while preserving future transfer chances.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "h1", "label": "Many follicles"}, {"id": "h2", "label": "Oestradiol high"}, {"id": "h3", "label": "Freeze embryos"}, {"id": "h4", "label": "Thromboprophylaxis"}, {"id": "h5", "label": "Transfer later"}],
+    "edges": [["h1", "h2"], ["h2", "h3"], ["h3", "h5"], ["h2", "h4"]]
+   }
+  },
+  {
+   "tx": "**Male infertility** assessment begins with two semen analyses, since single low counts mislead through biological variation. Azoospermia needs karyotype, Y chromosome microdeletion and hormonal workup before assisted reproduction planning. Intracytoplasmic sperm injection corrects severe male factor by injecting one sperm into each egg.",
+   "say": "Male infertility assessment begins with two semen analyses because single low counts mislead through biological variation. Azoospermia needs karyotype and hormonal workup before planning assisted reproduction. Intracytoplasmic sperm injection corrects severe male factor by injecting one sperm into each egg.",
+   "vis": {
+    "cols": ["Finding", "Workup", "Option"],
+    "kind": "table",
+    "rows": [
+     ["Azoospermia", "Karyotype and hormones", "Sperm retrieval"],
+     ["Severe oligospermia", "Repeat semen test", "Injection technique"],
+     ["Normospermia", "Female workup", "Insemination cycles"]
+    ]
+   }
+  },
+  {
+   "tx": "**Recurrent pregnancy loss** means two or more losses and needs antiphospholipid testing, thyroid review and cervical length care. Low dose aspirin with heparin suits antiphospholipid syndrome, while no drug corrects parental translocations. Progesterone helps only selected women with prior loss and threatened bleeding.",
+   "say": "Recurrent pregnancy loss means two or more losses and it needs antiphospholipid testing with thyroid review and cervical care. Low dose aspirin with heparin suits antiphospholipid syndrome. Progesterone helps only selected women with prior loss and threatened bleeding.",
+   "vis": {
+    "cols": ["Cause", "Test", "Care"],
+    "kind": "table",
+    "rows": [
+     ["Antiphospholipid", "Antibody panel", "Aspirin plus heparin"],
+     ["Thyroid disease", "Thyroid profile", "Levothyroxine"],
+     ["Translocation", "Karyotype", "Gene counselling"]
+    ]
+   }
+  },
+  {
+   "tx": "**Key numbers** cover the whole module: amenorrhoea thresholds, Rotterdam rules, ovarian insufficiency timing, hyperstimulation signs, male factor workup and loss criteria. Drugs asked most often are clomiphene, letrozole, gonadotrophins and aspirin with heparin. The table closes with numbers, first tests and gold standard confirmations for quick revision.",
+   "say": "The key numbers cover amenorrhoea thresholds, Rotterdam rules, ovarian insufficiency timing, hyperstimulation signs, male factor workup and loss criteria. Drugs asked most often include clomiphene, letrozole, gonadotrophins and aspirin with heparin. The final table lists thresholds, first tests and gold standard confirmations for quick revision.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or test"],
+    "kind": "table",
+    "rows": [
+     ["Amenorrhoea", "Primary threshold", "15 years or 3 years gap"],
+     ["PCOS", "Rotterdam features", "2 of 3 needed"],
+     ["Ovarian failure", "Amenorrhoea period", "4 months, twice"],
+     ["Induction", "PCOS first drug", "Letrozole"],
+     ["Tubes", "Transfer concern", "Hydrosalpinx removal"],
+     ["Male factor", "Azoospermia test", "Karyotype first"],
+     ["Loss", "Recurrent definition", "2 or more losses"],
+     ["Hyperstimulation", "Severe sign", "Ascites and clot risk"]
+    ]
+   }
+  }
+ ]
+}

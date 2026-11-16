@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "sns-tumours",
+ "subject": "ss-neurosurgery",
+ "title": "Neuro-oncology: glioma grades, meningioma, pituitary tumours and metastases",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e primary brain tumour chapters", "WHO 2021 CNS tumour classification and NCCN CNS cancers"],
+ "steps": [
+  {
+   "tx": "**Glioma** (glial cell tumour) forms about **eighty** percent of primary malignant brain tumours in adults. **WHO grading** (World Health Organization) splits tumours by molecular signature: **isocitrate dehydrogenase** (IDH) mutant versus wild type. **Glioblastoma** (grade four, necrotic, most malignant) carries median survival near **fifteen** months.",
+   "say": "Glioma forms about eighty percent of primary malignant brain tumours in adults. World Health Organization grading splits tumours by molecular signature with isocitrate dehydrogenase mutant versus wild type. Glioblastoma is grade four and most malignant with median survival near fifteen months.",
+   "vis": {"kind": "table", "cols": ["Grade", "Behaviour", "Typical age"], "rows": [["Grade two", "Slow, infiltrative", "Younger adults"], ["Grade three", "Anaplastic, faster", "Mid adults"], ["Grade four", "Glioblastoma, necrotic", "Older adults"]]}
+  },
+  {
+   "tx": "**IDH mutant** gliomas progress slowly and respond better to chemotherapy, while **IDH wild type** tumours behave highly malignantly even at lower grades. **One p nineteen q codeletion** (chromosome arm loss) defines oligodendroglioma and predicts chemosensitivity. **MGMT promoter methylation** predicts temozolomide response in glioblastoma.",
+   "say": "Isocitrate dehydrogenase mutant gliomas progress slowly and respond better to chemotherapy, while wild type tumours behave highly malignantly even at lower grades. Codeletion identifies oligodendroglioma and indicates chemosensitivity. Methylation indicates temozolomide response in glioblastoma.",
+   "vis": {"kind": "table", "cols": ["Marker", "Meaning", "Therapy link"], "rows": [["IDH mutant", "Favourable biology", "Better survival"], ["One p nineteen q codeleted", "Oligodendroglioma", "Chemotherapy responsive"], ["MGMT methylated", "Temozolomide benefit", "Use alkylating therapy"]]}
+  },
+  {
+   "tx": "**Meningioma** (dural origin tumour) is the commonest adult primary brain tumour and favours middle aged women. **Simpson grade** (extent of resection) predicts recurrence better than WHO grade alone. WHO grade **one** tumours are benign but recur near **twenty** percent at five years after incomplete removal.",
+   "say": "Meningioma is the commonest adult primary brain tumour and favours middle aged women. Simpson grade for extent of resection predicts recurrence better than World Health Organization grade alone. Grade one tumours are benign but recur near twenty percent at five years.",
+   "vis": {"kind": "table", "cols": ["Simpson grade", "Resection", "Recurrence trend"], "rows": [["Grade one", "Complete plus dura", "Lowest"], ["Grade two", "Complete, dura coagulated", "Higher"], ["Grade three and above", "Subtotal", "Highest"]]}
+  },
+  {
+   "tx": "**Pituitary adenoma** (sella tumour, benign pituitary growth) secretes prolactin, growth hormone or adrenocorticotropic hormone in most cases. **Prolactinoma** (prolactin secreting tumour) responds to **prolactin lowering medicines** without surgery in most patients. **Transsphenoidal resection** (through nose route) suits growth hormone and adrenocorticotropic hormone secreting tumours well.",
+   "say": "Pituitary adenoma secretes prolactin, growth hormone or adrenocorticotropic hormone in most cases. Prolactinoma is treated with prolactin lowering medicines without surgery. Transsphenoidal resection through the nose suits growth hormone secreting tumours.",
+   "vis": {"kind": "table", "cols": ["Tumour", "Secretion", "First treatment"], "rows": [["Prolactinoma", "Prolactin", "Prolactin lowering medicines first"], ["Acromegaly", "Growth hormone", "Transsphenoidal surgery"], ["Cushing disease", "Adrenocorticotropic hormone", "Transsphenoidal surgery"]]}
+  },
+  {
+   "tx": "**Acromegaly** (excess growth hormone, commonly from growth secreting adenoma) presents with enlarged hands, jaw overgrowth and diabetes over years. **Growth signalling factor** (IGF one) screens disease activity while glucose suppression confirms the diagnosis finally. **Hormone analogue medicines** control residual disease after incomplete surgery effectively.",
+   "say": "Acromegaly presents with enlarged hands, jaw overgrowth and diabetes over years. Growth signalling factor screens activity while glucose suppression confirms diagnosis. Hormone analogue medicines control residual disease after incomplete surgery.",
+   "vis": {"kind": "flow", "nodes": [{"id": "hands", "label": "Enlarged hands, jaw"}, {"id": "igf", "label": "IGF1 elevated"}, {"id": "surgery", "label": "Transsphenoidal resection"}, {"id": "drug", "label": "Hormone medicine if residual"}], "edges": [["hands", "igf"], ["igf", "surgery"], ["surgery", "drug"]]}
+  },
+  {
+   "tx": "**Vestibular schwannoma** (acoustic neuroma, eighth nerve sheath tumour) causes unilateral hearing loss, tinnitus and imbalance in most patients. **Cerebellopontine angle** (CPA, angle between pons and cerebellum) is the classic anatomical site here. **Gamma knife** suits small tumours under **three** centimetres, preserving facial function well.",
+   "say": "Vestibular schwannoma causes unilateral hearing loss, tinnitus and imbalance in most patients. The cerebellopontine angle is the classic site. Gamma knife suits small tumours under three centimetres preserving facial function.",
+   "vis": {"kind": "table", "cols": ["Value", "Detail", "Why asked"], "rows": [["Hearing loss", "Sensorineural, unilateral", "Earliest symptom"], ["Site", "Cerebellopontine angle eighth nerve", "Anatomy question"], ["Gamma knife", "Under three centimetres small", "Function preserving"]]}
+  },
+  {
+   "tx": "**Brain metastases** (metastatic deposits, secondary spread) are commoner than primary tumours and favour lung, breast and melanoma primaries strongly. **Dexamethasone** (steroid, **four** to **sixteen** milligrams daily) controls vasogenic swelling with rapid relief in patients. **Whole brain radiotherapy** suits multiple deposits, while **stereotactic radiosurgery** targets limited lesions precisely.",
+   "say": "Brain metastases are more common than primary tumours and come from lung, breast and melanoma. Dexamethasone controls vasogenic swelling with rapid relief. Whole brain radiotherapy suits multiple deposits while stereotactic radiosurgery targets limited lesions.",
+   "vis": {"kind": "compare", "left": {"title": "Limited lesions", "points": ["Stereotactic radiosurgery", "Preserves cognition", "One to four deposits"]}, "right": {"title": "Multiple lesions", "points": ["Whole brain radiotherapy", "Palliative symptom control", "Cognitive cost higher"]}}
+  },
+  {
+   "tx": "**Peritumoural oedema** (swelling around tumour) follows **vascular endothelial growth factor** (VEGF) leakage and responds to steroids, not diuretics. **Non inducing anti seizure medicine** is first choice for tumour related seizures without enzyme interactions. **Extent of resection** beyond contrast enhancement improves glioblastoma survival in resectable cases.",
+   "say": "Peritumoural oedema follows vascular endothelial growth factor leakage and responds to steroids, not diuretics. A non inducing anti seizure medicine is first choice for tumour related seizures. Extent of resection beyond contrast enhancement improves glioblastoma survival.",
+   "vis": {"kind": "table", "cols": ["Issue", "First line", "Avoid"], "rows": [["Oedema", "Dexamethasone", "Diuretics alone"], ["Seizure", "Non inducing medicine", "Enzyme inducing agents"], ["Extent", "Maximal safe resection", "Biopsy only if deep"]]}
+  },
+  {
+   "tx": "**Childhood tumours** differ: **medulloblastoma** (posterior fossa embryonal tumour) spreads through cerebrospinal fluid widely, while **pilocytic astrocytoma** (benign cerebellar glioma) suits gross resection with cure. **Craniopharyngioma** (suprasellar cystic tumour) endangers vision and hormones in children often. **Ependymoma** (fourth ventricle tumour) recurs locally and needs postoperative radiotherapy routinely.",
+   "say": "Childhood tumours differ in nature. Medulloblastoma spreads through cerebrospinal fluid, while pilocytic astrocytoma suits gross resection. Craniopharyngioma endangers vision and hormones, and ependymoma recurs locally needing radiotherapy.",
+   "vis": {"kind": "table", "cols": ["Tumour", "Site", "Habit"], "rows": [["Medulloblastoma", "Posterior fossa", "Cerebrospinal fluid spread"], ["Pilocytic astrocytoma", "Cerebellum", "Benign, resectable"], ["Craniopharyngioma", "Suprasellar", "Vision, hormones at risk"]]}
+  },
+  {
+   "tx": "High yield for the exam: **glioma** forms eighty percent of malignant primaries, glioblastoma median survival sits near fifteen months, codeletion defines oligodendroglioma, MGMT methylation predicts temozolomide benefit, Simpson grade predicts meningioma recurrence, prolactinoma uses prolactin lowering medicines, metastases get dexamethasone, and **non inducing medicine** avoids enzyme induction.",
+   "say": "Glioma forms eighty percent of malignant primaries, glioblastoma median survival sits near fifteen months, codeletion defines oligodendroglioma, methylation predicts temozolomide benefit, Simpson grade predicts meningioma recurrence, prolactinoma uses prolactin lowering medicines, metastases get dexamethasone, and non inducing medicine avoids enzyme induction.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Malignant share", "Glioma eighty percent"], ["Glioblastoma", "Median fifteen months"], ["Oligodendroglioma", "Codeletion positive"], ["Temozolomide", "MGMT methylated"], ["Meningioma", "Simpson grade recurrence"], ["Prolactinoma", "Prolactin lowering medicines"], ["Metastasis oedema", "Dexamethasone"], ["Seizure drug", "Non inducing medicine"]] }
+  }
+ ]
+}

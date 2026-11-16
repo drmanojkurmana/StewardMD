@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "pcd-fetal-transitional",
+ "subject": "ss-paediatric-cardiology",
+ "title": "Fetal circulation and transitional haemodynamics: shunts in transition",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22e",
+  "American Heart Association neonatal circulation guidance",
+  "Moss and Adams Heart Disease in Infants and Children"
+ ],
+ "steps": [
+  {
+   "tx": "**Fetal circulation** routes oxygenated blood from placenta through ductus venosus and foramen ovale to preload the left heart. Pulmonary blood flow is only a small fraction of combined output and most parallel flow recirculates. Failure of the three shunts to close appropriately produces cyanosis shortly after birth.",
+   "say": "Fetal circulation routes oxygenated blood from the placenta through the ductus venosus and foramen ovale to preload the left heart. Pulmonary blood flow is only a small fraction of combined output. Failure of the three shunts to close appropriately produces cyanosis shortly after birth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "n1", "label": "Placenta"}, {"id": "n2", "label": "Ductus venosus"}, {"id": "n3", "label": "Foramen ovale"}, {"id": "n4", "label": "Ductus arteriosus"}, {"id": "n5", "label": "Lungs"}],
+    "edges": [["n1", "n2"], ["n2", "n3"], ["n3", "n4"], ["n4", "n5"]]
+   }
+  },
+  {
+   "tx": "**Transitional circulation** shifts within hours as lungs aerate and pulmonary resistance falls after first breaths. Delayed cord clamping raises neonatal blood volume and improves iron stores without raising polycythaemia harm in term infants. First breaths with early skin contact support smooth pressure and temperature transitions after delivery.",
+   "say": "Transitional circulation shifts within hours as the lungs aerate and pulmonary resistance falls. Delayed cord clamping raises neonatal blood volume and improves iron stores. First breaths with early skin contact support smooth pressure and temperature transitions.",
+   "vis": {
+    "cols": ["Event", "Effect", "Timing"],
+    "kind": "table",
+    "rows": [
+     ["Lungs aerate", "Resistance falls", "First breaths"],
+     ["Cord clamped", "Volume rises", "Minutes"],
+     ["Foramen closes", "Left pressure rises", "Hours"]
+    ]
+   }
+  },
+  {
+   "tx": "**Persistent pulmonary hypertension** (PPHN) keeps pulmonary resistance high and sustains right to left shunting through the ductus. Chest radiograph shows oligemic lung fields without distress proportionate signs. Inhaled nitric oxide selectively lowers pulmonary resistance and improves oxygenation in term newborns.",
+   "say": "Persistent pulmonary hypertension keeps pulmonary resistance high and sustains right to left shunting through the ductus. Chest radiograph shows oligemic lung fields without matching distress. Inhaled nitric oxide selectively lowers pulmonary resistance and improves oxygenation in term newborns.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "t1", "label": "High resistance"}, {"id": "t2", "label": "Right to left shunt"}, {"id": "t3", "label": "Hypoxaemia"}, {"id": "t4", "label": "Nitric oxide trial"}, {"id": "t5", "label": "Reassess oxygen"}],
+    "edges": [["t1", "t2"], ["t2", "t3"], ["t3", "t4"], ["t4", "t5"]]
+   }
+  },
+  {
+   "tx": "**Ductus arteriosus** stays patent in preterm infants because falling prostaglandin control differs from term closure. Indomethacin or ibuprofen can close the ductus in selected preterm infants before surgical ligation. Prostaglandin E1 infusion keeps the ductus open for duct dependent cardiac lesions until intervention.",
+   "say": "The ductus arteriosus stays patent in preterm infants because prostaglandin control differs from term closure. Anti inflammatory drugs can close the ductus in selected preterm infants before surgical ligation. Prostaglandin infusion keeps the ductus open for duct dependent lesions until intervention.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Close the ductus", "points": ["Preterm patent ductus", "Indomethacin or ibuprofen", "Earlier closure goal", "Echo guided timing"]},
+    "right": {"title": "Keep it open", "points": ["Duct dependent lesions", "Prostaglandin infusion", "Bridges to surgery", "Continuous monitoring"]}
+   }
+  },
+  {
+   "tx": "**Prostaglandin E1** dosing around 0.05 micrograms per kilogram per minute maintains ductal flow in critical congenital disease. Apnoea and hypotension are the earliest drug effects needing ventilator readiness. Echocardiogram must precede long infusions, since prostaglandin cannot treat non cardiac cyanosis.",
+   "say": "Prostaglandin dosing maintains ductal flow in critical congenital disease. Apnoea and hypotension are the earliest drug effects needing ventilator readiness. Echocardiogram must precede long infusions, since prostaglandin cannot treat non cardiac cyanosis.",
+   "vis": {
+    "cols": ["Drug", "Use", "Watch for"],
+    "kind": "table",
+    "rows": [
+     ["Prostaglandin E1", "Keep duct open", "Apnoea and hypotension"],
+     ["Indomethacin", "Close preterm duct", "Kidney and gut effects"],
+     ["Nitric oxide", "Lower lung resistance", "Methaemoglobinaemia"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cyanotic newborn** evaluation starts with hyperoxia test, where failure to rise above 100 mm mercury suggests cardiac disease rather than lung disease. Pulse oximetry of right hand versus foot detects differential saturations in coarctation and duct dependent lesions. Echocardiogram confirms anatomy and directs prostaglandin and surgery choices without delay.",
+   "say": "Cyanotic newborn evaluation starts with a hyperoxia test, where failure to rise sufficiently suggests cardiac disease. Pulse oximetry comparing right hand with foot detects differential saturations in coarctation. Echocardiogram confirms anatomy and directs prostaglandin and surgery choices.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "y1", "label": "Central cyanosis"}, {"id": "y2", "label": "Hyperoxia test"}, {"id": "y3", "label": "Pulse oximetry"}, {"id": "y4", "label": "Echocardiogram"}, {"id": "y5", "label": "Prostaglandin"}],
+    "edges": [["y1", "y2"], ["y2", "y3"], ["y3", "y4"], ["y4", "y5"]]
+   }
+  },
+  {
+   "tx": "**Coarctation of aorta** in a newborn shows weak femoral pulses with lower limb delay and duct dependent physiology. Prostaglandin infusion restores distal flow until surgical repair relieves obstruction. Untreated coarctation presents with heart failure in the second week of life.",
+   "say": "Coarctation of the aorta in a newborn shows weak femoral pulses with lower limb delay and duct dependent physiology. Prostaglandin infusion restores distal flow until surgical repair relieves obstruction. Untreated coarctation presents with heart failure in the second week of life.",
+   "vis": {
+    "cols": ["Sign", "Meaning", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Weak femoral pulse", "Duct dependent aorta", "Prostaglandin start"],
+     ["Upper lower gradient", "Coarctation obstruction", "Echo confirmation"],
+     ["Shock on closure", "Critical narrowing", "Emergency repair"]
+    ]
+   }
+  },
+  {
+   "tx": "**Meconium aspiration** and transitional hypoxia can mimic cardiac cyanosis through lung disease with intrapulmonary shunt distorting saturations. Chest radiograph helps separate cardiac from respiratory cyanosis by heart size and lung fields in newborns. Cardiac cyanosis often lacks respiratory distress despite deep desaturation and poor hyperoxia response.",
+   "say": "Meconium aspiration and transitional hypoxia can mimic cardiac cyanosis through lung disease with shunt. Chest radiograph helps separate cardiac from respiratory cyanosis by heart size and lung fields. Cardiac cyanosis often lacks respiratory distress despite deep desaturation.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Cardiac cyanosis", "points": ["Little respiratory distress", "Normal lung fields", "Shunt persists", "Echo abnormal"]},
+    "right": {"title": "Respiratory cyanosis", "points": ["Marked distress", "Lung disease visible", "Ventilation helps", "Echo normal"]}
+   }
+  },
+  {
+   "tx": "**Hypoxic cyanotic spells** differ from persistent cyanosis by episodic deep desaturation with quiet intervals between attacks. Tetralogy spells respond to knee chest positioning plus oxygen and propranolol for relief. Morphine and propranolol prevent recurrences while definitive repair is planned in the coming days.",
+   "say": "Hypoxic cyanotic spells differ from persistent cyanosis by episodic deep desaturation with quiet intervals. Tetralogy spells respond to knee chest positioning plus oxygen and propranolol. Morphine and propranolol prevent recurrences while definitive repair is planned.",
+   "vis": {
+    "cols": ["Spell", "Response", "Prevent"],
+    "kind": "table",
+    "rows": [
+     ["Tet spell", "Knee chest position", "Propranolol"],
+     ["Persistent cyanosis", "Oxygen unchanged", "Echo and prostaglandin"],
+     ["Respiratory distress", "Ventilation improves", "Lung care"]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield recall** pairs shunt anatomy with closure drugs: preterm ductus with anti inflammatory agents, duct dependent lesions with prostaglandin, pulmonary hypertension with nitric oxide. Hyperoxia test separates cardiac from respiratory cyanosis, and coarctation shows femoral pulse delay. The table locks thresholds for saturation, dosing cues and confirmatory echo.",
+   "say": "High yield recall pairs shunt anatomy with closure drugs, namely preterm ductus with anti inflammatory agents, duct dependent lesions with prostaglandin, and pulmonary hypertension with nitric oxide. The hyperoxia test separates cardiac from respiratory cyanosis. The final table locks saturation thresholds and confirmatory echo points.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or test"],
+    "kind": "table",
+    "rows": [
+     ["Shunts", "Fetal route", "Venosus, ovale, arteriosus"],
+     ["Ductus preterm", "Close agent", "Indomethacin"],
+     ["Ductus dependent", "Keep open", "Prostaglandin E1"],
+     ["Pulmonary hypertension", "Select agent", "Inhaled nitric oxide"],
+     ["Hyperoxia", "Cardiac suggestion", "Below 100 mm mercury"],
+     ["Coarctation", "Pulse clue", "Weak femoral pulse"],
+     ["Spells", "Position", "Knee chest"],
+     ["Confirmation", "Gold standard", "Echocardiogram"]
+    ]
+   }
+  }
+ ]
+}
