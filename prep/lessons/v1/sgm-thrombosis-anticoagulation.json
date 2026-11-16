@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-thrombosis-anticoagulation",
+ "subject": "ss-general-medicine",
+ "title": "Thrombophilia and anticoagulation",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Thrombophilia** is an inherited or acquired tendency to venous thrombosis. **Factor V Leiden** is the commonest inherited thrombophilia in European ancestry populations. **Prothrombin G20210A** is the second commonest inherited variant in many cohorts. **Antithrombin deficiency** is rarer yet carries higher thrombotic risk in family studies.",
+   "say": "Thrombophilia is an inherited or acquired tendency to venous thrombosis. Factor V Leiden is the commonest inherited thrombophilia in European ancestry populations. Prothrombin G20210A is the second commonest inherited variant in many cohorts. Antithrombin deficiency is rarer yet carries higher thrombotic risk in family studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defect",
+     "Frequency",
+     "Risk"
+    ],
+    "rows": [
+     [
+      "Factor V Leiden",
+      "Most common",
+      "Moderate increase"
+     ],
+     [
+      "Prothrombin variant",
+      "Second common",
+      "Moderate increase"
+     ],
+     [
+      "Antithrombin deficiency",
+      "Rare",
+      "High increase"
+     ],
+     [
+      "Protein C deficiency",
+      "Rare",
+      "High increase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Activated protein C resistance** is the laboratory clue of Factor V Leiden. **Venous thromboembolism** in the young or unusual sites deserves thrombophilia workup. **Recurrent miscarriage** with arterial thrombosis flags antiphospholipid syndrome in many histories. Family history of venous thrombosis in first degree relatives multiplies risk.",
+   "say": "Activated protein C resistance is the laboratory clue of Factor V Leiden. Venous thromboembolism in the young or unusual sites is an indication for thrombophilia workup. Recurrent miscarriage with arterial thrombosis is a flag of antiphospholipid syndrome in many histories. Family history of venous thrombosis in first degree relatives is a risk factor for recurrence.",
+   "vis": null
+  },
+  {
+   "tx": "**Antiphospholipid syndrome** combines venous or arterial thrombosis with obstetric morbidity. **Lupus anticoagulant** is the most predictive antibody for thrombotic events in many studies. **Heparin** with aspirin is the obstetric regimen for antiphospholipid syndrome in pregnancy. **Warfarin** remains the standard for non obstetric arterial disease in this syndrome.",
+   "say": "Antiphospholipid syndrome is venous or arterial thrombosis with obstetric morbidity combined. Lupus anticoagulant is the most predictive antibody for thrombotic events in many studies. Heparin with aspirin is the obstetric regimen for antiphospholipid syndrome in pregnancy. Warfarin remains the standard for non obstetric arterial disease in this syndrome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thrombosis or morbidity"
+     },
+     {
+      "id": "b",
+      "label": "Antibody panel positive"
+     },
+     {
+      "id": "c",
+      "label": "Repeat after twelve weeks"
+     },
+     {
+      "id": "d",
+      "label": "Heparin in pregnancy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cancer associated thrombosis** is often Trousseau syndrome with migratory phlebitis. **Heparin** with **enoxaparin** was the historical standard for cancer thrombosis therapy. **Apixaban** and **rivaroxaban** are now preferred for most cancer thrombosis cases. **Idarucizumab** reverses dabigatran rapidly in life threatening bleeding situations.",
+   "say": "Cancer associated thrombosis is often Trousseau syndrome with migratory phlebitis. Heparin with enoxaparin was the historical standard for cancer thrombosis therapy. Apixaban and rivaroxaban are now preferred for most cancer thrombosis cases. Idarucizumab reverses dabigatran rapidly in life threatening bleeding situations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Class",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Warfarin",
+      "Vitamin K antagonist",
+      "Standard anticoagulation"
+     ],
+     [
+      "Enoxaparin",
+      "Low molecular heparin",
+      "Cancer and pregnancy use"
+     ],
+     [
+      "Apixaban",
+      "Factor Xa inhibitor",
+      "Preferred oral option"
+     ],
+     [
+      "Dabigatran",
+      "Thrombin inhibitor",
+      "Reversed by idarucizumab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Protamine** reverses heparin rapidly in cardiac surgery and catheter laboratories. **Fondaparinux** is a synthetic pentasaccharide for HIT thrombosis management in many protocols. **Acenocoumarol** is the vitamin K antagonist used in European practice for decades. **Diclofenac** with anticoagulants multiplies gastrointestinal bleeding risk in many patients.",
+   "say": "Protamine is the reversal agent for heparin in cardiac surgery and catheter laboratories. Fondaparinux is a synthetic pentasaccharide for HIT thrombosis management in many protocols. Acenocoumarol is the vitamin K antagonist used in European practice for decades. Diclofenac with anticoagulants multiplies gastrointestinal bleeding risk in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Cerebral venous thrombosis** presents with headache and seizures in young women. **Drospirenone** containing contraceptives raise venous thrombosis risk in susceptible users. **Insulin** therapy is unrelated to thrombophilia despite its appearance in listings confusion. Investigational agents continue to evolve for recurrent thrombosis with careful risk assessment.",
+   "say": "Cerebral venous thrombosis presents with headache and seizures in young women. Drospirenone containing contraceptives raise venous thrombosis risk in susceptible users. Long term anticoagulation decisions are based on recurrence risk and bleeding risk assessment. Further agents are under study for recurrent thrombosis with careful risk assessment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Presentation",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Leg veins",
+      "Pain and swelling",
+      "Three months minimum"
+     ],
+     [
+      "Pulmonary arteries",
+      "Dyspnoea and pleuritic pain",
+      "Three months minimum"
+     ],
+     [
+      "Cerebral veins",
+      "Headache, seizures",
+      "Longer in antiphospholipid disease"
+     ],
+     [
+      "Splanchnic veins",
+      "Abdominal pain",
+      "Extended if recurrent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Extended anticoagulation** is advised after unprovoked venous thrombosis for recurrence prevention. **Provoked thrombosis** after surgery or oestrogen needs three months therapy in most cases. **Peripartum** prophylaxis is required for high risk thrombophilia carriers in many protocols. **Edoxaban** is another oral option for extended secondary prevention in selected patients.",
+   "say": "Extended anticoagulation is advised after unprovoked venous thrombosis for recurrence prevention. Provoked thrombosis after surgery or oestrogen needs three months therapy in most cases. Peripartum prophylaxis is required for high risk thrombophilia carriers in many protocols. Edoxaban is another oral option for extended secondary prevention in selected patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute thrombosis"
+     },
+     {
+      "id": "b",
+      "label": "Three months therapy"
+     },
+     {
+      "id": "c",
+      "label": "Provoked or unprovoked"
+     },
+     {
+      "id": "d",
+      "label": "Extend if unprovoked"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Warfarin** needs INR monitoring with a target range of two to three in most cases. **Heparin** bridges during warfarin initiation in high risk thrombosis settings. **Aspirin** is antiplatelet therapy and not a substitute for anticoagulation in venous disease. **Bleeding** risk rises with age, hypertension and prior bleeding in many patients.",
+   "say": "Warfarin needs INR monitoring with a target range of two to three in most cases. Heparin bridges during warfarin initiation in high risk thrombosis settings. Aspirin is antiplatelet therapy and is not a substitute for anticoagulation in venous disease. Bleeding risk rises with age, hypertension and prior bleeding in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Thrombophilia testing** during acute thrombosis gives misleading results in many cases. **Protein C** and **protein S** assays fall during acute events and warfarin therapy. **Homocysteine** elevation is a reversible metabolic risk for arterial disease in some patients. Results must be interpreted with haematology input in every case.",
+   "say": "Thrombophilia testing during acute thrombosis gives misleading results in many cases. Protein C and protein S assays fall during acute events and warfarin therapy. Homocysteine elevation is a reversible metabolic risk for arterial disease in some patients. Results must be interpreted with haematology input in every case.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Test after recovery",
+     "points": [
+      "Off anticoagulation stage",
+      "Protein C and S reliable",
+      "Antithrombin assay reliable",
+      "Family counselling possible"
+     ]
+    },
+    "right": {
+     "title": "Test during event",
+     "points": [
+      "False low protein levels",
+      "Lupus anticoagulant common",
+      "Warfarin lowers proteins",
+      "Repeat testing is advised"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mechanical compression** stockings prevent post thrombotic syndrome in many patients after DVT. **Early ambulation** is preferred over bed rest after acute thrombosis in modern care. **Thrombolysis** is reserved for limb threat or massive pulmonary embolism only. **Heparin** dosing uses anti Xa monitoring in pregnancy and obesity situations.",
+   "say": "Mechanical compression stockings prevent post thrombotic syndrome in many patients after DVT. Early ambulation is preferred over bed rest after acute thrombosis in modern care. Thrombolysis is reserved for limb threat or massive pulmonary embolism only. Heparin dosing uses anti Xa monitoring in pregnancy and obesity situations.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember Factor V Leiden with activated protein C resistance, lupus anticoagulant as the most predictive antibody and heparin with aspirin in obstetric antiphospholipid disease. Apixaban is preferred for cancer thrombosis while idarucizumab reverses dabigatran. Protamine reverses heparin rapidly in operative settings.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Factor V Leiden is identified by activated protein C resistance clearly. Lupus anticoagulant is the most predictive antibody for thrombosis. Apixaban is now preferred for cancer thrombosis management. Protamine is the reversal agent for heparin in operative settings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Factor V Leiden",
+      "Activated protein C resistance test positive"
+     ],
+     [
+      "Antiphospholipid clue",
+      "Lupus anticoagulant most predictive antibody"
+     ],
+     [
+      "Obstetric APS therapy",
+      "Heparin with aspirin in pregnancy"
+     ],
+     [
+      "Cancer thrombosis",
+      "Apixaban now preferred oral option"
+     ],
+     [
+      "Reversal agents",
+      "Idarucizumab for dabigatran, protamine for heparin"
+     ],
+     [
+      "INR target",
+      "Two to three for warfarin therapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-immunodeficiency",
+ "subject": "ss-general-medicine",
+ "title": "Primary and secondary immunodeficiency",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Primary immunodeficiency** arises from germline defects in immune development. **Secondary immunodeficiency** follows drugs, malignancy or infection in many patients. **Common variable immunodeficiency** is the commonest symptomatic primary defect in adults. **Recurrent infections** with unusual organisms is the cardinal clue in these patients.",
+   "say": "Primary immunodeficiency arises from germline defects in immune development. Secondary immunodeficiency follows drugs, malignancy or infection in many patients. Common variable immunodeficiency is the commonest symptomatic primary defect in adults. Recurrent infections with unusual organisms is the cardinal clue in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Defect level",
+     "Example"
+    ],
+    "rows": [
+     [
+      "B cell defect",
+      "Antibody production",
+      "Bruton agammaglobulinaemia"
+     ],
+     [
+      "T cell defect",
+      "Cellular immunity",
+      "Severe combined immunodeficiency"
+     ],
+     [
+      "Phagocyte defect",
+      "Oxidative burst",
+      "Chronic granulomatous disease"
+     ],
+     [
+      "Complement defect",
+      "complement one inhibitor",
+      "Hereditary angioedema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hereditary angioedema** is complement one inhibitor deficiency with episodic swelling in many patients. **Kallikrein blockade** prevents attacks in hereditary angioedema in many protocols globally. Acute attack therapy is kallikrein based in hereditary angioedema in many centres. Prophylactic therapy is required based on attack frequency in many cases.",
+   "say": "Hereditary angioedema is complement one inhibitor deficiency with episodic swelling in many patients. Kallikrein blockade prevents attacks in hereditary angioedema in many protocols globally. Acute attack therapy is kallikrein based in hereditary angioedema in many centres. Prophylactic therapy is required based on attack frequency in many cases.",
+   "vis": null
+  },
+  {
+   "tx": "**X linked agammaglobulinaemia** lacks B cells with recurrent bacterial infections in many boys. **Selective IgA deficiency** is common yet often asymptomatic in many patients in practice. Older prophylaxis attenuated hereditary angioedema attacks before newer therapy became available in many centres. First line therapy is required for allergic anaphylaxis with angioedema in these patients.",
+   "say": "X linked agammaglobulinaemia lacks B cells with recurrent bacterial infections in many boys. Selective IgA deficiency is common yet often asymptomatic in many patients in practice. Older prophylaxis attenuated hereditary angioedema attacks before newer therapy became available in many centres. First line therapy is required for allergic anaphylaxis with angioedema in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Allergic angioedema",
+     "points": [
+      "Urticaria often present",
+      "Triggers are identifiable",
+      "First line therapy is urgent",
+      "Response is rapid"
+     ]
+    },
+    "right": {
+     "title": "Hereditary angioedema",
+     "points": [
+      "No urticaria present",
+      "Abdominal attacks common",
+      "complement one inhibitor is deficient",
+      "Kallikrein blockade works"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Secondary defects** follow corticosteroids, chemotherapy and chronic lymphocytic leukaemia in many patients. **Nephrotic syndrome** loses immunoglobulin in urine with recurrent infection risk in many cases. **Malnutrition** impairs T cell function and vaccine responses in these patients. **HIV** remains the commonest secondary immunodeficiency worldwide in many cohorts today.",
+   "say": "Secondary defects follow corticosteroids, chemotherapy and chronic lymphocytic leukaemia in many patients. Nephrotic syndrome loses immunoglobulin in urine with recurrent infection risk in many cases. Malnutrition is impairment of T cell function and vaccine responses in these patients. HIV remains the commonest secondary immunodeficiency worldwide in many cohorts today.",
+   "vis": null
+  },
+  {
+   "tx": "**Quantitative immunoglobulin** levels screen humoral defects in these patients. **Flow cytometry** defines B, T and NK subsets in phenotypic classification in many centres. **Vaccine** challenge testing confirms functional antibody defects in these patients in many protocols. **Genetic** sequencing confirms primary defects in many patients today.",
+   "say": "Quantitative immunoglobulin levels are the screen for humoral defects in these patients. Flow cytometry is the phenotypic test for B, T and NK subsets in many centres. Vaccine challenge testing confirms functional antibody defects in these patients in many protocols. Genetic sequencing confirms primary defects in many patients today.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Recurrent infections"
+     },
+     {
+      "id": "b",
+      "label": "Immunoglobulin levels"
+     },
+     {
+      "id": "c",
+      "label": "Flow cytometry subsets"
+     },
+     {
+      "id": "d",
+      "label": "Genetic confirmation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Replacement therapy** with immunoglobulin protects CVID patients from bacterial infections. **Live vaccines** are contraindicated in severe cellular immunodeficiency in these patients. Non immune adjuvants have no routine role here despite their inclusion in some listings confusion. Antibiotic prophylaxis supports patients with functional antibody defects in many protocols.",
+   "say": "Replacement therapy with immunoglobulin is protection for CVID patients from bacterial infections. Live vaccines are contraindicated in severe cellular immunodeficiency in these patients. Non immune adjuvants have no routine role here despite their inclusion in some listings confusion. Antibiotic prophylaxis supports patients with functional antibody defects in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Severe combined immunodeficiency** presents with opportunistic infections in early infancy in these patients. **Transplantation** is curative when performed before infections occur in many cases. **Thymic** function is absent in complete T cell defects in these patients. Gene therapy is an emerging option in selected primary defects in many trials.",
+   "say": "Severe combined immunodeficiency presents with opportunistic infections in early infancy in these patients. Transplantation is curative when performed before infections occur in many cases. Live vaccines are contraindicated in complete T cell defects in these patients. Gene therapy is an emerging option in selected primary defects in many trials.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defect",
+     "Infection pattern",
+     "Action"
+    ],
+    "rows": [
+     [
+      "SCID",
+      "Opportunistic early infections",
+      "Transplantation curative"
+     ],
+     [
+      "CVID",
+      "Recurrent bacterial infections",
+      "Replacement therapy"
+     ],
+     [
+      "HAE",
+      "No infection increase",
+      "Kallikrein blockade prophylaxis"
+     ],
+     [
+      "NK defect",
+      "Severe herpes infections",
+      "Antiviral prophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Drug induced** immunodeficiency resolves after drug withdrawal in many cases. **Asplenia** impairs encapsulated organism clearance in many patients after splenectomy. **Post transplant** immunosuppression increases infection risks in these patients. **Diabetes** impairs neutrophil function and increases infection risks in many patients today.",
+   "say": "Drug induced immunodeficiency resolves after drug withdrawal in many cases. Asplenia impairs encapsulated organism clearance in many patients after splenectomy. Post transplant immunosuppression increases infection risks in these patients. Diabetes impairs neutrophil function and increases infection risks in many patients today.",
+   "vis": null
+  },
+  {
+   "tx": "**complement one inhibitor** concentrate treats acute hereditary angioedema attacks in many centres. **Family** history of episodic swelling confirms hereditary angioedema in many cases. **Abdominal attacks** mimic surgical emergencies in these patients in many reports. Laryngeal oedema with stridor is the airway emergency in hereditary angioedema cases.",
+   "say": "Complement one inhibitor concentrate is the treatment of acute hereditary angioedema attacks in many centres. Family history of episodic swelling confirms hereditary angioedema in many cases. Abdominal attacks are similar to surgical emergencies in these patients in many reports. Laryngeal oedema with stridor is the airway emergency in hereditary angioedema cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Episodic swelling"
+     },
+     {
+      "id": "b",
+      "label": "complement one inhibitor low level"
+     },
+     {
+      "id": "c",
+      "label": "Kallikrein blockade prophylaxis"
+     },
+     {
+      "id": "d",
+      "label": "Acute attack therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anaphylaxis** is immune hyperreactivity rather than immunodeficiency in many patients. **Mast cell** disorders mimic allergy in these patients with flushing and diarrhoea. **Tryptase** elevation confirms mast cell activation in many cases with these symptoms. **Chronic urticaria** management needs trigger avoidance with symptom control in many protocols.",
+   "say": "Anaphylaxis is immune hyperreactivity rather than immunodeficiency in many patients. Mast cell disorders mimic allergy in these patients with flushing and diarrhoea. Tryptase elevation confirms mast cell activation in many cases with these symptoms. Chronic urticaria management needs trigger avoidance with symptom control in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember complement one inhibitor deficiency as hereditary angioedema, kallikrein blockade for prevention and first line therapy for allergic anaphylaxis. CVID is the commonest adult primary defect while SCID needs transplantation. Live vaccines are contraindicated in cellular immunodeficiency.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Complement one inhibitor deficiency is the defect in hereditary angioedema clearly. Kallikrein blockade is the prevention for hereditary attacks. CVID is the commonest adult primary defect in practice. SCID is the defect that needs transplantation for cure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "HAE defect",
+      "complement one inhibitor deficiency causes attacks"
+     ],
+     [
+      "HAE prevention",
+      "Kallikrein blockade prevents attacks"
+     ],
+     [
+      "Allergic anaphylaxis",
+      "First line therapy is required"
+     ],
+     [
+      "Adult primary defect",
+      "CVID is the commonest adult defect"
+     ],
+     [
+      "Curative therapy",
+      "Transplantation for severe combined defect"
+     ],
+     [
+      "Vaccine caution",
+      "Live vaccines contraindicated in cellular defect"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

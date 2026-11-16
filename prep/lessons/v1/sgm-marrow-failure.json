@@ -1,0 +1,288 @@
+{
+ "v": 1,
+ "module": "sgm-marrow-failure",
+ "subject": "ss-general-medicine",
+ "title": "Bone marrow failure syndromes",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Bone marrow failure** means reduced production of red cells, white cells or platelets. **Aplastic anaemia** is pancytopenia with a hypocellular marrow and no dysplasia or fibrosis. The triad presents with anaemia, infection and bleeding in many patients. **Reticulocytopenia** is the early clue that the marrow itself is failing.",
+   "say": "Bone marrow failure means reduced production of red cells, white cells or platelets. Aplastic anaemia is pancytopenia with a hypocellular marrow and no dysplasia or fibrosis. The triad presents with anaemia, infection and bleeding in many patients. Reticulocytopenia is the early clue that the marrow itself is failing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lineage",
+     "Low product",
+     "Typical presentation"
+    ],
+    "rows": [
+     [
+      "Erythroid",
+      "Reticulocytopenia",
+      "Fatigue and pallor"
+     ],
+     [
+      "Myeloid",
+      "Neutropenia",
+      "Fever and infection"
+     ],
+     [
+      "Megakaryocytic",
+      "Thrombocytopenia",
+      "Bleeding and purpura"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most aplastic anaemia is **immune mediated** with oligoclonal T cell attack on stem cells. **Inherited** forms include Fanconi anaemia, dyskeratosis congenita and Diamond Blackfan anaemia. Clonal disorders and marrow infiltration must be excluded in every adult case. **Telomere** shortening is the mark of dyskeratosis congenita in many families.",
+   "say": "Most aplastic anaemia is immune mediated with oligoclonal T cell attack on stem cells. Inherited forms include Fanconi anaemia, dyskeratosis congenita and Diamond Blackfan anaemia. Clonal disorders and marrow infiltration must be excluded in every adult case. Telomere shortening is the mark of dyskeratosis congenita in many families.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acquired aplastic anaemia",
+     "points": [
+      "Immune attack on stem cells",
+      "Pancytopenia with hypocellular marrow",
+      "Response to immunosuppression",
+      "Risk of clonal evolution"
+     ]
+    },
+    "right": {
+     "title": "Inherited failure",
+     "points": [
+      "Germline DNA repair defect",
+      "Childhood or familial onset",
+      "Congenital anomalies present",
+      "Transplant is the curative option"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fanconi anaemia** shows radial ray, café au lait spots and short stature besides failure. **Diamond Blackfan** is pure red cell aplasia with thumb anomalies and elevated enzymes. Stem cell numbers fall because the **microenvironment** cannot support effective haematopoiesis. Family history is therefore a vital part of this history taking.",
+   "say": "Fanconi anaemia is recognised by radial ray, cafe au lait spots and short stature besides failure. Diamond Blackfan is pure red cell aplasia with thumb anomalies and elevated enzymes. Stem cell numbers fall because the microenvironment cannot support effective haematopoiesis. Family history is therefore a vital part of history taking.",
+   "vis": null
+  },
+  {
+   "tx": "Bone marrow biopsy is the **gold standard** test for this group of disorders. It confirms hypocellularity and excludes myelodysplasia, leukaemia and infiltration. **Cytogenetics** and molecular studies detect clones that alter prognosis and therapy. Peripheral flow cytometry screens for paroxysmal nocturnal haemoglobinuria clones.",
+   "say": "Bone marrow biopsy is the gold standard test for this group of disorders. It confirms hypocellularity and excludes myelodysplasia, leukaemia and infiltration. Cytogenetics and molecular studies are required to detect clones that alter prognosis and therapy. Peripheral flow cytometry is advised for paroxysmal nocturnal haemoglobinuria clone screening in every patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Blood counts and film"
+     },
+     {
+      "id": "b",
+      "label": "Marrow biopsy morphology"
+     },
+     {
+      "id": "c",
+      "label": "Cytogenetics and flow"
+     },
+     {
+      "id": "d",
+      "label": "Germline panel if indicated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hematopoietic stem cell transplantation** is curative for young patients with matched donors. **Ciclosporin** based immunosuppression is first line therapy for older or transplant ineligible adults. **Eltrombopag** enhances platelet response and is added to immunosuppression in many protocols. Danazol helps some telomere defects under specialist supervision.",
+   "say": "Hematopoietic stem cell transplantation is curative for young patients with matched donors. Ciclosporin based immunosuppression is first line therapy for older or transplant ineligible adults. Eltrombopag enhances platelet response and is added to immunosuppression in many protocols. Danazol helps some telomere defects under specialist supervision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment",
+     "Who benefits",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Transplantation",
+      "Young patients with donor",
+      "Curative option"
+     ],
+     [
+      "Ciclosporin immunosuppression",
+      "Older adults",
+      "Haematologic response in many"
+     ],
+     [
+      "Eltrombopag",
+      "Platelet poor patients",
+      "Added to immunosuppression"
+     ],
+     [
+      "Danazol",
+      "Telomere defects",
+      "Specialist use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pure red cell aplasia** selectively spares other lineages and follows drugs or thymoma. **Myelophthisis** results from marrow replacement by granuloma, metastasis or fibrosis. Infections, bleeding and transfusion dependence dominate daily life for these patients. **Iron overload** appears once transfusion burden exceeds about twenty units in many series.",
+   "say": "Pure red cell aplasia selectively spares other lineages and follows drugs or thymoma. Myelophthisis results from marrow replacement by granuloma, metastasis or fibrosis. Infections, bleeding and transfusion dependence dominate daily life for these patients. Iron overload appears once transfusion burden grows large in many series.",
+   "vis": null
+  },
+  {
+   "tx": "**Paroxysmal nocturnal haemoglobinuria** combines failure with haemolysis and thrombosis. **Clones** lacking complement regulators expand under immune selection pressure. Venous thrombosis at unusual sites is the classic vascular clue. Complement blockade is the modern mainstay for classic disease in most adults.",
+   "say": "Paroxysmal nocturnal haemoglobinuria is failure with haemolysis and thrombosis combined. Clones lacking complement regulators expand under immune selection pressure. Venous thrombosis at unusual sites is the classic vascular clue. Complement blockade is the modern mainstay for classic disease in most adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Hallmark",
+     "Distinguisher"
+    ],
+    "rows": [
+     [
+      "Aplastic anaemia",
+      "Pancytopenia",
+      "Hypocellular marrow"
+     ],
+     [
+      "Pure red cell aplasia",
+      "Isolated anaemia",
+      "Low reticulocytes"
+     ],
+     [
+      "Paroxysmal nocturnal haemoglobinuria",
+      "Haemolysis plus thrombosis",
+      "Flow cytometry clone"
+     ],
+     [
+      "Myelofibrosis",
+      "Leukoerythroblastic film",
+      "Marrow fibrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Infection** is the commonest cause of death in severe neutropenia and must be treated fast. **Bleeding** risk rises as platelets fall below ten thousand per microlitre in many patients. Transfusion thresholds balance symptoms against alloimmunisation risks in transplant candidates. **Isolation** and hand hygiene basics remain important during profound cytopenias.",
+   "say": "Infection is the commonest cause of death in severe neutropenia and must be treated fast. Bleeding risk rises as platelets fall to very low counts in many patients. Transfusion thresholds balance symptoms against alloimmunisation risks in transplant candidates. Isolation and hand hygiene basics remain important during profound cytopenias.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever with neutropenia"
+     },
+     {
+      "id": "b",
+      "label": "Cultures then empiric therapy"
+     },
+     {
+      "id": "c",
+      "label": "Source hunt and imaging"
+     },
+     {
+      "id": "d",
+      "label": "Escalate on culture result"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clonal evolution** to myelodysplasia or leukaemia occurs in a minority of patients yearly. Serial blood counts at monthly intervals catch evolving clones early in follow-up. **Survival** improves markedly with prompt immunosuppression or transplantation in young adults. Children need genetic evaluation before any DNA damaging conditioning regimen is chosen.",
+   "say": "Clonal evolution to myelodysplasia or leukaemia occurs in a minority of patients each year. Serial blood counts at monthly intervals catch evolving clones early in follow-up. Survival improves markedly with prompt immunosuppression or transplantation in young adults. Children need genetic evaluation before any conditioning regimen is chosen.",
+   "vis": null
+  },
+  {
+   "tx": "**Telomere biology** disorders cause marrow failure with mucocutaneous signs and pulmonary risk. **Fanconi** patients develop solid tumours early and need cancer surveillance lifelong. An **adenosine** deaminase defect causes severe combined immunodeficiency rather than isolated failure. Sorting inherited from acquired disease changes transplant conditioning choices.",
+   "say": "Telomere biology disorders cause marrow failure with mucocutaneous signs and pulmonary risk. Fanconi patients develop solid tumours early and need cancer surveillance lifelong. An adenosine deaminase defect causes severe combined immunodeficiency rather than isolated failure. Sorting inherited from acquired disease changes transplant conditioning choices.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inherited clues",
+     "points": [
+      "Childhood onset or families",
+      "Congenital anomalies present",
+      "Short telomeres or fragility",
+      "Different conditioning needed"
+     ]
+    },
+    "right": {
+     "title": "Acquired clues",
+     "points": [
+      "Adult onset without anomalies",
+      "Drug or virus trigger",
+      "Immune mediated attack",
+      "Immunosuppression first line"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam** lists the diagnoses asked most often in NEET-SS papers. Remember biopsy as the gold standard, ciclosporin as first line immunosuppression and transplantation as curative therapy. Fanconi anaemia carries radial defects and short stature while telomere defects carry mucocutaneous signs. Clonal evolution remains the feared long term complication.",
+   "say": "High-yield facts are the points the examination asks most often. Biopsy is the gold standard test that confirms hypocellular failure. Ciclosporin is first line immunosuppression in older adults. Transplantation is the curative option in young patients. Fanconi anaemia carries radial defects and short stature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Gold standard",
+      "Marrow biopsy confirms hypocellular failure"
+     ],
+     [
+      "First line immune therapy",
+      "Ciclosporin based immunosuppression"
+     ],
+     [
+      "Curative therapy",
+      "Stem cell transplantation in young patients"
+     ],
+     [
+      "Inherited clue",
+      "Radial defects flag Fanconi anaemia"
+     ],
+     [
+      "Telomere mark",
+      "Mucocutaneous signs with short telomeres"
+     ],
+     [
+      "Feared complication",
+      "Clonal evolution to dysplasia or leukaemia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-allergy-anaphylaxis",
+ "subject": "ss-general-medicine",
+ "title": "Anaphylaxis, urticaria and drug allergy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Anaphylaxis** is severe systemic hypersensitivity with airway or circulation involvement. **Adrenaline** injected intramuscularly in the thigh is first line therapy in every case. **Urticaria** presents with wheals that resolve within twenty four hours in most patients. **Angioedema** involves deeper skin swelling that threatens the airway in many cases.",
+   "say": "Anaphylaxis is severe systemic hypersensitivity with airway or circulation involvement. Adrenaline injected intramuscularly in the thigh is first line therapy in every case. Urticaria presents with wheals that resolve within twenty four hours in most patients. Angioedema involves deeper skin swelling that threatens the airway in many cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Urticaria",
+     "Anaphylaxis"
+    ],
+    "rows": [
+     [
+      "Skin",
+      "Wheals only",
+      "Wheals plus systemic features"
+     ],
+     [
+      "Airway",
+      "Normal",
+      "Stridor and oedema"
+     ],
+     [
+      "Circulation",
+      "Normal",
+      "Hypotension and collapse"
+     ],
+     [
+      "Therapy",
+      "Antihistamine sufficient",
+      "Adrenaline first line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Penicillin allergy** is reported in ten percent yet confirmed in fewer than five percent. **Skin testing** with penicillin distinguishes true allergy from intolerance in many cases. **Omalizumab** prevents attacks in chronic spontaneous urticaria in many protocols globally. **Vancomycin** infusion reaction is a rate related flushing syndrome in many patients.",
+   "say": "Penicillin allergy is reported in ten percent yet confirmed in fewer than five percent. Skin testing with penicillin distinguishes true allergy from intolerance in many cases. Omalizumab prevents attacks in chronic spontaneous urticaria in many protocols globally. Vancomycin infusion reaction is a rate related flushing syndrome in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Drug allergy** spans immediate IgE and delayed T cell mechanisms in many patients. **Rash** with fever suggests DRESS syndrome in delayed drug hypersensitivity in many cases. **Diclofenac** with other NSAIDs causes urticaria and bronchospasm in susceptible patients. **Ciprofloxacin** causes tendinopathy yet allergy testing is rarely needed in these patients.",
+   "say": "Drug allergy spans immediate IgE and delayed T cell mechanisms in many patients. Rash with fever suggests DRESS syndrome in delayed drug hypersensitivity in many cases. Diclofenac with other NSAIDs causes urticaria and bronchospasm in susceptible patients. Ciprofloxacin causes tendinopathy yet allergy testing is rarely needed in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate allergy",
+     "points": [
+      "IgE mediated mechanism",
+      "Minutes to hours onset",
+      "Urticaria and breathing difficulty",
+      "Adrenaline is first line"
+     ]
+    },
+    "right": {
+     "title": "Delayed allergy",
+     "points": [
+      "T cell mediated mechanism",
+      "Days to weeks onset",
+      "Rash with organ injury",
+      "Drug withdrawal is key"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mast cell activation** causes flushing, diarrhoea and hypotension in many patients. **Sinusoidal obstruction** is not a mast cell feature despite its inclusion in listing errors. **Tryptase** measured within hours confirms mast cell activation in these patients. **Rocuronium** as a neuromuscular blocker is a trigger for perioperative anaphylaxis in many cases.",
+   "say": "Mast cell activation causes flushing, diarrhoea and hypotension in many patients. Tryptase measured within hours confirms mast cell activation in these patients. Biphasic reactions need observation for eight hours or more in many protocols. Rocuronium as a neuromuscular blocker is a trigger for perioperative anaphylaxis in many cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Biphasic anaphylaxis** recurs within twelve hours without further exposure in many cases. **Observation** for twelve hours is advised after adrenaline therapy in these patients. **Auto injector** training is mandatory at discharge after anaphylaxis in these patients. **Action plan** cards improve outcomes in these patients in many studies globally.",
+   "say": "Biphasic anaphylaxis recurs within twelve hours without further exposure in many cases. Observation for twelve hours is advised after adrenaline therapy in these patients. Auto injector training is mandatory at discharge after anaphylaxis in these patients. Action plan cards improve outcomes in these patients in many studies globally.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anaphylaxis onset"
+     },
+     {
+      "id": "b",
+      "label": "Adrenaline intramuscular"
+     },
+     {
+      "id": "c",
+      "label": "Observe twelve hours"
+     },
+     {
+      "id": "d",
+      "label": "Auto injector plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic urticaria** persists beyond six weeks with daily wheals in many patients. **Angiotensin** converting enzyme inhibitors worsen urticaria in susceptible patients in many cases. **Food** allergy testing is reserved for immediate reactions in these patients in many protocols. Direct **adrenaline** remains the only life saving drug in anaphylaxis in these patients.",
+   "say": "Chronic urticaria is daily wheals beyond six weeks in many patients. Angiotensin converting enzyme inhibitors worsen urticaria in susceptible patients in many cases. Food allergy testing is reserved for immediate reactions in these patients in many protocols. Direct adrenaline remains the only life saving drug in anaphylaxis in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Duration",
+     "Definition",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Acute urticaria",
+      "Less than six weeks",
+      "Treat trigger, antihistamine"
+     ],
+     [
+      "Chronic urticaria",
+      "Beyond six weeks",
+      "Omalizumab option"
+     ],
+     [
+      "Anaphylaxis",
+      "Systemic reaction",
+      "Adrenaline first line"
+     ],
+     [
+      "Biphasic reaction",
+      "Recurrence within hours",
+      "Observe twelve hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Perioperative anaphylaxis** is triggered by neuromuscular blockers, latex and antibiotics in many cases. **Latex** avoidance is needed in latex sensitised patients in many protocols globally. **Vancomycin** flushing slows with slower infusion rates in these patients. **Skin testing** before drug challenge confirms allergy before re exposure in these patients.",
+   "say": "Perioperative anaphylaxis is triggered by neuromuscular blockers, latex and antibiotics in many cases. Latex avoidance is needed in latex sensitised patients in many protocols globally. Vancomycin flushing slows with slower infusion rates in these patients. Skin testing before drug challenge confirms allergy before re exposure in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Stevens Johnson syndrome** with mucosal erosions needs intensive burn care in many cases. **DRESS syndrome** shows eosinophilia, rash and organ injury in many patients. **Acute generalised exanthematous pustulosis** presents with pustules and fever in many cases. All are delayed hypersensitivity patterns with drug triggers in these patients.",
+   "say": "Stevens Johnson syndrome with mucosal erosions needs intensive burn care in many cases. DRESS syndrome is eosinophilia, rash and organ injury in many patients. Acute generalised exanthematous pustulosis presents with pustules and fever in many cases. All are delayed hypersensitivity patterns with drug triggers in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Hallmark",
+     "Onset"
+    ],
+    "rows": [
+     [
+      "DRESS syndrome",
+      "Eosinophilia, organ injury",
+      "Weeks after drug start"
+     ],
+     [
+      "Stevens Johnson",
+      "Mucosal erosions",
+      "Burns care needed"
+     ],
+     [
+      "Pustulosis",
+      "Sterile pustules, fever",
+      "Days after drug start"
+     ],
+     [
+      "Anaphylaxis",
+      "Airway and shock",
+      "Minutes after exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Allergen avoidance** is the mainstay of prevention in drug allergy in these patients. **Cross reactivity** between penicillin and cephalosporins is lower than once taught in many cases. **Desensitisation** allows essential drug therapy in allergic patients in many protocols globally. **Documentation** in records prevents future re exposure in these patients in many centres today.",
+   "say": "Allergen avoidance is the mainstay of prevention in drug allergy in these patients. Cross reactivity between penicillin and cephalosporins is lower than once taught in many cases. Desensitisation allows essential drug therapy in allergic patients in many protocols globally. Documentation in records prevents future re exposure in these patients in many centres today.",
+   "vis": null
+  },
+  {
+   "tx": "**Contrast induced** reactions mimic allergy without IgE mechanisms in many cases. **Premedication** reduces contrast reaction risk in these patients in many protocols globally. **NSAID** hypersensitivity with diclofenac needs alternative analgesia in these patients. **Fluoroquinolone** allergy with ciprofloxacin is uncommon despite frequent prescribing in many settings.",
+   "say": "Contrast induced reactions mimic allergy without IgE mechanisms in many cases. Premedication reduces contrast reaction risk in these patients in many protocols globally. NSAID hypersensitivity with diclofenac needs alternative analgesia in these patients. Fluoroquinolone allergy with ciprofloxacin is uncommon despite frequent prescribing in many settings.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember adrenaline as first line for anaphylaxis, penicillin allergy overreported with low confirmation and omalizumab for chronic urticaria. Observation for twelve hours covers biphasic reactions while tryptase confirms mast cell activation. DRESS syndrome shows eosinophilia with organ injury pattern.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Adrenaline is the first line treatment for anaphylaxis cases. Penicillin allergy is overreported with low confirmation rates in practice. Omalizumab is an option for chronic spontaneous urticaria cases. Observation for twelve hours is required for biphasic reaction risk cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Anaphylaxis therapy",
+      "Adrenaline is first line treatment"
+     ],
+     [
+      "Penicillin allergy",
+      "Overreported with low confirmation rate"
+     ],
+     [
+      "Chronic urticaria",
+      "Omalizumab prevents attacks in chronic disease"
+     ],
+     [
+      "Biphasic observation",
+      "Twelve hours after adrenaline therapy"
+     ],
+     [
+      "Mast cell test",
+      "Tryptase confirms mast cell activation"
+     ],
+     [
+      "DRESS hallmark",
+      "Eosinophilia with organ injury pattern"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

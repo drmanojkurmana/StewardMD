@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-breast-cancer",
+ "subject": "ss-general-medicine",
+ "title": "Breast cancer",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Breast cancer** is staged by tumour size, nodes and metastasis in current systems. **Oestrogen receptor** positivity predicts endocrine therapy benefit in most patients. **Progesterone receptor** adds prognostic information in early breast cancer management. **HER two** positivity predicts trastuzumab benefit in early disease with careful cardiac monitoring.",
+   "say": "Breast cancer is staged by tumour size, nodes and metastasis in current systems. Oestrogen receptor positivity is predictive of endocrine therapy benefit in most patients. Progesterone receptor level is prognostic information in early breast cancer management. HER two positivity is predictive of trastuzumab benefit in early disease with careful cardiac monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Test",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Oestrogen receptor",
+      "Immunohistochemistry",
+      "Predicts endocrine benefit"
+     ],
+     [
+      "Progesterone receptor",
+      "Immunohistochemistry",
+      "Prognostic information"
+     ],
+     [
+      "HER two",
+      "FISH if IHC positive",
+      "Predicts trastuzumab benefit"
+     ],
+     [
+      "Ki sixty seven",
+      "Proliferation marker",
+      "Prognostic stratification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lumpectomy** with radiation preserves the breast in early cancer management. **Sentinel node** biopsy replaces axillary clearance in clinically negative axilla in many cases. **Mastectomy** remains standard for large tumours or multicentric disease in many patients. **Anastrozole** with **letrozole** or **exemestane** are aromatase inhibitors for postmenopausal disease.",
+   "say": "Lumpectomy with radiation is breast preserving therapy in early cancer management. Sentinel node biopsy has replaced axillary clearance in clinically negative axilla in many cases. Mastectomy remains standard for large tumours or multicentric disease in many patients. Anastrozole with letrozole or exemestane are aromatase inhibitors for postmenopausal disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Early cancer diagnosis"
+     },
+     {
+      "id": "b",
+      "label": "Breast conservation"
+     },
+     {
+      "id": "c",
+      "label": "Sentinel node staging"
+     },
+     {
+      "id": "d",
+      "label": "Adjuvant therapy plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tamoxifen** is the selective modulator for premenopausal hormone receptor disease. **Abemaciclib** with ribociclib are CDK four six inhibitors for advanced hormone disease. **Olaparib** benefits germline BRCA mutated HER two negative cancer in many trials. **Pembrolizumab** adds immunotherapy in triple negative disease with PD L one positivity in many centres.",
+   "say": "Tamoxifen is the selective modulator for premenopausal hormone receptor disease. Abemaciclib with ribociclib are CDK four six inhibitors for advanced hormone disease. Olaparib benefits germline BRCA mutated HER two negative cancer in many trials. Pembrolizumab adds immunotherapy in triple negative disease with PD L one positivity in many centres.",
+   "vis": null
+  },
+  {
+   "tx": "**Sacituzumab** targets TROP two for metastatic triple negative disease in many settings. **Tucatinib** with **pertuzumab** and **trastuzumab** benefits HER two positive metastatic cancer with brain spread. **Docetaxel** with **paclitaxel** are taxanes in neoadjuvant regimens in many protocols globally. **Capecitabine** is an oral fluoropyrimidine for metastatic disease in many patients.",
+   "say": "Sacituzumab targets TROP two for metastatic triple negative disease in many settings. Tucatinib with pertuzumab and trastuzumab benefits HER two positive metastatic cancer with brain spread. Docetaxel with paclitaxel are taxanes in neoadjuvant regimens in many protocols globally. Capecitabine is an oral fluoropyrimidine for metastatic disease in many patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Hallmark",
+     "Therapy"
+    ],
+    "rows": [
+     [
+      "Hormone receptor positive",
+      "ER positive disease",
+      "Endocrine therapy plus CDK inhibitors"
+     ],
+     [
+      "HER two positive",
+      "HER two amplified",
+      "Trastuzumab based therapy"
+     ],
+     [
+      "Triple negative",
+      "Triple negative status",
+      "Pembrolizumab if PD L one high"
+     ],
+     [
+      "Germline BRCA",
+      "BRCA mutated",
+      "Olaparib benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neoadjuvant** chemotherapy shrinks tumours and guides adjuvant choices in many cases. **Pathologic complete response** predicts better survival in triple negative disease in many studies. **Doxorubicin** with **cyclophosphamide** and **carboplatin** are common neoadjuvant backbones in many protocols. **Anthracycline** cardiac toxicity needs baseline and serial echocardiography in these patients.",
+   "say": "Neoadjuvant chemotherapy shrinks tumours and guides adjuvant choices in many cases. Pathologic complete response predicts better survival in triple negative disease in many studies. Doxorubicin with cyclophosphamide and carboplatin are common neoadjuvant backbones in many protocols. Anthracycline cardiac toxicity needs baseline and serial echocardiography in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Neoadjuvant therapy"
+     },
+     {
+      "id": "b",
+      "label": "Surgery after response"
+     },
+     {
+      "id": "c",
+      "label": "Pathology response check"
+     },
+     {
+      "id": "d",
+      "label": "Adjuvant plan by response"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Inflammatory breast cancer** presents with peau d orange and dermal lymphatic spread. **Paget disease** is eczematous nipple involvement that signals underlying cancer in many cases. **Pregnancy associated** cancer needs timely workup without fetal harm in many settings. **Dexamethasone** with **prednisone** premedication prevents hypersensitivity during taxane therapy in many protocols.",
+   "say": "Inflammatory breast cancer presents with peau d orange and dermal lymphatic spread. Paget disease is eczematous nipple involvement that signals underlying cancer in many cases. Pregnancy associated cancer needs timely workup without fetal harm in many settings. Dexamethasone with prednisone premedication prevents hypersensitivity during taxane therapy in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**BRCA** mutation carriers merit risk reducing mastectomy discussions in many families. **Screening** with MRI supplements mammography in high risk carriers in many protocols. **Olaparib** adjuvant therapy improves survival in germline BRCA early cancer in landmark trials. **Progesterone** receptor status refines prognosis in early disease management in many datasets.",
+   "say": "BRCA mutation carriers merit risk reducing mastectomy discussions in many families. Screening with MRI supplements mammography in high risk carriers in many protocols. Olaparib adjuvant therapy improves survival in germline BRCA early cancer in landmark trials. Progesterone receptor status is prognostic in early disease management in many datasets.",
+   "vis": null
+  },
+  {
+   "tx": "**Bone metastasis** causes pain and fractures and responds to radiation in many cases. **Visceral crisis** with liver failure needs rapid chemotherapy response in these patients. **Brain metastasis** screening is advised in HER two positive disease in many protocols. **Bone modifying agents** reduce skeletal events in metastatic disease in many trials globally.",
+   "say": "Bone metastasis causes pain and fractures and responds to radiation in many cases. Visceral crisis with liver failure needs rapid chemotherapy response in these patients. Brain metastasis screening is advised in HER two positive disease in many protocols. Bone modifying agents reduce skeletal events in metastatic disease in many trials globally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Symptom",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Bone",
+      "Pain, fracture risk",
+      "Radiation, bone agents"
+     ],
+     [
+      "Liver",
+      "Jaundice, failure",
+      "Rapid chemotherapy"
+     ],
+     [
+      "Brain",
+      "Headache, seizures",
+      "Radiation and systemic therapy"
+     ],
+     [
+      "Lung",
+      "Effusion, dyspnoea",
+      "Drainage and systemic therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adjuvant** endocrine therapy duration extends to ten years in high risk early disease. **Aromatase inhibitor** switching strategies optimise tolerance in many postmenopausal patients. **Lymphoedema** prophylaxis needs arm care after axillary surgery in these patients. **Fertility** preservation discussions are required in young premenopausal patients before chemotherapy.",
+   "say": "Adjuvant endocrine therapy duration extends to ten years in high risk early disease. Aromatase inhibitor switching strategies optimise tolerance in many postmenopausal patients. Lymphoedema prophylaxis needs arm care after axillary surgery in these patients. Fertility preservation discussions are required in young premenopausal patients before chemotherapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Male breast cancer** presents late with nipple changes in most cases. **Lobular carcinoma** in situ needs surveillance after excision in many patients today. **DCIS** grading guides radiation decisions in early ductal disease in many protocols. Germline testing is advised in male and early onset female breast cancer in many guidelines.",
+   "say": "Male breast cancer presents late with nipple changes in most cases. Lobular carcinoma in situ needs surveillance after excision in many patients today. DCIS grading guides radiation decisions in early ductal disease in many protocols. Germline testing is advised in male and early onset female breast cancer in many guidelines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conservation eligible",
+     "points": [
+      "Small tumour size",
+      "Single focus disease",
+      "Clear margins possible",
+      "Radiation feasible option"
+     ]
+    },
+    "right": {
+     "title": "Mastectomy indicated",
+     "points": [
+      "Large tumour burden",
+      "Multicentric disease",
+      "Invasive lobular pattern",
+      "Radiation contraindicated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember sentinel node biopsy for axillary staging, aromatase inhibitors for postmenopausal disease and tamoxifen for premenopausal disease. Olaparib benefits germline BRCA disease while pembrolizumab helps PD L one positive triple negative disease. Pathologic complete response predicts survival in triple negative cancer.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Sentinel node biopsy is the standard for axillary staging in early disease. Aromatase inhibitors are the treatment for postmenopausal hormone disease. Tamoxifen is the treatment for premenopausal hormone disease. Olaparib benefits germline BRCA mutated disease cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Staging",
+      "Tumour, nodes, metastasis framework"
+     ],
+     [
+      "Postmenopausal therapy",
+      "Aromatase inhibitors are standard now"
+     ],
+     [
+      "Premenopausal therapy",
+      "Tamoxifen is the modulator of choice"
+     ],
+     [
+      "BRCA therapy",
+      "Olaparib benefits germline BRCA disease"
+     ],
+     [
+      "Triple negative",
+      "Pembrolizumab if PD L one positive"
+     ],
+     [
+      "Response predictor",
+      "Pathologic complete response predicts survival"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

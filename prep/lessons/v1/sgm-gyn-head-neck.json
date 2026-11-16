@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-gyn-head-neck",
+ "subject": "ss-general-medicine",
+ "title": "Gynaecological and head and neck cancers",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Cervical cancer** is the commonest gynaecologic cancer in low income settings. **HPV** testing with cytology screens the cervix for precancerous changes in many programmes. **Colposcopy** directs biopsy for high grade abnormalities in screening positive women. **Chemoradiation** with platinum therapy is standard for locally advanced cervical cancer in many centres.",
+   "say": "Cervical cancer is the commonest gynaecologic cancer in low income settings. HPV testing with cytology screens the cervix for precancerous changes in many programmes. Colposcopy directs biopsy for high grade abnormalities in screening positive women. Chemoradiation with platinum therapy is standard for locally advanced cervical cancer in many centres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen positive result"
+     },
+     {
+      "id": "b",
+      "label": "Colposcopy assessment"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy confirmation"
+     },
+     {
+      "id": "d",
+      "label": "Stage based treatment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endometrial cancer** presents with postmenopausal bleeding in most patients early. **Transvaginal ultrasound** measures endometrial thickness as the first test in these women. **Hysteroscopy** with biopsy confirms the diagnosis in most cases today. **Progesterone** receptor status refines prognosis in early endometrial cancer in many datasets.",
+   "say": "Endometrial cancer presents with postmenopausal bleeding in most patients early. Transvaginal ultrasound measures endometrial thickness as the first test in these women. Hysteroscopy with biopsy confirms the diagnosis in most cases today. Progesterone receptor status is prognostic in early endometrial cancer in many datasets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cancer",
+     "Presentation",
+     "First test"
+    ],
+    "rows": [
+     [
+      "Cervical cancer",
+      "Contact bleeding",
+      "HPV and cytology screening"
+     ],
+     [
+      "Endometrial cancer",
+      "Postmenopausal bleeding",
+      "Transvaginal ultrasound"
+     ],
+     [
+      "Ovarian cancer",
+      "Pelvic mass, bloating",
+      "CT abdomen pelvis"
+     ],
+     [
+      "Vulvar cancer",
+      "Itching, ulcer",
+      "Biopsy of lesion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ovarian cancer** spreads transcoelomically with peritoneal deposits in most cases. **CA one two five** tracks disease response in epithelial ovarian cancer. **Debulking surgery** with chemotherapy is the standard for advanced ovarian cancer. **Tamoxifen** has a limited role in granulosa cell tumours in many protocols for this disease.",
+   "say": "Ovarian cancer spreads transcoelomically with peritoneal deposits in most cases. CA one two five tracks disease response in epithelial ovarian cancer. Debulking surgery with chemotherapy is the standard for advanced ovarian cancer. Tamoxifen has a limited role in granulosa cell tumours in many protocols for this disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Head and neck squamous cancer** associates with tobacco, alcohol and HPV in many cases. **Cetuximab** with radiation improves survival in locally advanced head and neck cancer. **Cisplatin** based chemoradiation remains the standard for locally advanced disease in many centres. **PET CT** stages nodal disease accurately in head and neck cancers in many protocols.",
+   "say": "Head and neck squamous cancer is associated with tobacco, alcohol and HPV in many cases. Cetuximab with radiation improves survival in locally advanced head and neck cancer. Cisplatin based chemoradiation remains the standard for locally advanced disease in many centres. PET CT is the staging test for nodal disease in head and neck cancers in many protocols.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Risk factor",
+     "Biology"
+    ],
+    "rows": [
+     [
+      "Oropharynx",
+      "HPV infection",
+      "Better prognosis with HPV"
+     ],
+     [
+      "Oral cavity",
+      "Tobacco and alcohol",
+      "Surgery often primary"
+     ],
+     [
+      "Larynx",
+      "Tobacco and alcohol",
+      "Voice preservation goal"
+     ],
+     [
+      "Nasopharynx",
+      "EBV infection",
+      "Chemoradiation standard"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nasopharyngeal cancer** is endemic in South China with EBV association in many cases. **Plasma EBV** DNA tracks response during chemoradiation in many protocols globally. **Neck dissection** addresses residual nodal disease after chemoradiation in many cases. **Cisplatin** weekly dosing is standard during radiation for nasopharyngeal disease in many centres.",
+   "say": "Nasopharyngeal cancer is endemic in South China with EBV association in many cases. Plasma EBV DNA tracks response during chemoradiation in many protocols globally. Neck dissection is the management of residual nodal disease after chemoradiation in many cases. Cisplatin weekly dosing is standard during radiation for nasopharyngeal disease in many centres.",
+   "vis": null
+  },
+  {
+   "tx": "**Vulvar cancer** presents as chronic ulcer in older women with itching. **Sentinel node** assessment reduces lymphoedema after groin surgery in many centres. **Granulosa cell** tumours secrete oestrogen and present with precocious puberty or bleeding. **Germ cell** tumours in ovary need marker surveillance in many protocols globally.",
+   "say": "Vulvar cancer presents as chronic ulcer in older women with itching. Sentinel node assessment reduces lymphoedema after groin surgery in many centres. Granulosa cell tumours secrete oestrogen and present with precocious puberty or bleeding. Germ cell tumours in ovary need marker surveillance in many protocols globally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early cervical disease",
+     "points": [
+      "Fertility preservation possible",
+      "Conization may suffice",
+      "Trachelectomy in select cases",
+      "Nerve sparing surgery option"
+     ]
+    },
+    "right": {
+     "title": "Locally advanced disease",
+     "points": [
+      "Chemoradiation is standard",
+      "Platinum based therapy",
+      "Brachytherapy is essential",
+      "Surgery is salvage option"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**HPV vaccination** prevents cervical and oropharyngeal cancers in most populations. **Screening** intervals widen after repeated negative HPV results in many guidelines. **Lynch syndrome** carriers need endometrial surveillance in many protocols globally. **Tamoxifen** risk in endometrial cancer is modest and needs counselling in users of this therapy.",
+   "say": "HPV vaccination prevents cervical and oropharyngeal cancers in most populations. Screening intervals widen after repeated negative HPV results in many guidelines. Lynch syndrome carriers need endometrial surveillance in many protocols globally. Hormonal therapy risk in endometrial cancer is modest and needs counselling in users of this therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Adjuvant** radiation reduces recurrence in high risk endometrial disease in many cases. **Molecular classification** with POLE and MSI guides endometrial therapy in many centres today. **PARP inhibitors** benefit BRCA mutated ovarian cancer in many trials globally. **Immunotherapy** helps MSI high endometrial cancer in advanced disease in many settings.",
+   "say": "Adjuvant radiation reduces recurrence in high risk endometrial disease in many cases. Molecular classification with POLE and MSI guides endometrial therapy in many centres today. PARP inhibitors benefit BRCA mutated ovarian cancer in many trials globally. Immunotherapy helps MSI high endometrial cancer in advanced disease in many settings.",
+   "vis": null
+  },
+  {
+   "tx": "**Laryngeal preservation** protocols combine chemoradiation for voice saving in many cases. **Organ preservation** is the goal in oropharyngeal and laryngeal cancers in many centres. **Swallowing therapy** preserves function after chemoradiation in these patients. **Dental** care before radiation prevents osteoradionecrosis in these patients.",
+   "say": "Laryngeal preservation protocols combine chemoradiation for voice saving in many cases. Organ preservation is the goal in oropharyngeal and laryngeal cancers in many centres. Swallowing therapy preserves function after chemoradiation in these patients. Dental care before radiation prevents osteoradionecrosis in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Locally advanced cancer"
+     },
+     {
+      "id": "b",
+      "label": "Chemoradiation choice"
+     },
+     {
+      "id": "c",
+      "label": "Response assessment"
+     },
+     {
+      "id": "d",
+      "label": "Salvage surgery if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ovarian conservation** is possible in early germ cell tumours in many cases. **Fertility sparing** surgery is standard for stage one epithelial disease in young women. **Hormone therapy** suits low grade endometrial disease in young patients in many protocols. HPV genotype sixteen carries highest cervical cancer risk in many studies.",
+   "say": "Ovarian conservation is possible in early germ cell tumours in many cases. Fertility sparing surgery is standard for stage one epithelial disease in young women. Hormone therapy suits low grade endometrial disease in young patients in many protocols. HPV genotype sixteen carries highest cervical cancer risk in many studies.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember HPV screening with colposcopy triage for cervix, postmenopausal bleeding as endometrial presentation and CA one two five for ovarian response tracking. Cetuximab with radiation benefits head and neck cancer while cisplatin chemoradiation is standard. HPV vaccination prevents cervical and oropharyngeal cancers effectively.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. HPV screening with colposcopy triage is the pathway for cervical cancer. Postmenopausal bleeding is the presentation of endometrial cancer. CA one two five tracks ovarian cancer response reliably. HPV vaccination prevents cervical and oropharyngeal cancers effectively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Cervical pathway",
+      "HPV screening with colposcopy triage"
+     ],
+     [
+      "Endometrial clue",
+      "Postmenopausal bleeding is the presentation"
+     ],
+     [
+      "Ovarian tracking",
+      "CA one two five tracks response"
+     ],
+     [
+      "Head neck therapy",
+      "Cetuximab with radiation improves survival"
+     ],
+     [
+      "Nasopharynx therapy",
+      "Cisplatin chemoradiation remains standard"
+     ],
+     [
+      "Prevention",
+      "HPV vaccination prevents cervical cancer"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

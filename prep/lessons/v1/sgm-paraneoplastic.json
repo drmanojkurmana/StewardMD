@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-paraneoplastic",
+ "subject": "ss-general-medicine",
+ "title": "Paraneoplastic syndromes",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Paraneoplastic syndromes** are systemic effects of cancer without direct invasion. They arise from tumour secreted hormones, cytokines or autoantibodies in many cases. **SIADH** with small cell lung cancer is the commonest endocrine example in practice. **Eaton Lambert** syndrome is the neuromuscular junction counterpart of lung cancer associated disease.",
+   "say": "Paraneoplastic syndromes are systemic effects of cancer without direct invasion. They arise from tumour secreted hormones, cytokines or autoantibodies in many cases. SIADH with small cell lung cancer is the commonest endocrine example in practice. Eaton Lambert syndrome is the neuromuscular junction counterpart of lung cancer associated disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Syndrome",
+     "Tumour clue"
+    ],
+    "rows": [
+     [
+      "Endocrine",
+      "SIADH",
+      "Small cell lung cancer"
+     ],
+     [
+      "Endocrine",
+      "Cushing syndrome",
+      "ACTH secreting tumour"
+     ],
+     [
+      "Neurologic",
+      "Eaton Lambert",
+      "Small cell lung cancer"
+     ],
+     [
+      "Neurologic",
+      "Sensory neuronopathy",
+      "Small cell lung cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cushing syndrome** from ectopic ACTH needs rapid cortisol control in many cases. **Hypercalcaemia** from parathyroid related protein accompanies squamous cancers in many patients. **Gynecomastia** with hCG secretion flags testicular tumours in young men with this presentation. **Hypoglycaemia** from tumour secretion is rare yet occurs in mesenchymal tumours in many cases.",
+   "say": "Cushing syndrome from ectopic ACTH needs rapid cortisol control in many cases. Hypercalcaemia from parathyroid related protein accompanies squamous cancers in many patients. Gynecomastia with hCG secretion is a flag of testicular tumours in young men with this presentation. Hypoglycaemia from tumour secretion is rare yet occurs in mesenchymal tumours in many cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Sensory neuronopathy** with anti Hu antibodies accompanies small cell lung cancer. **Anti Ma two** encephalitis flags testicular tumours in young men with limbic dysfunction. **Anti Yo** cerebellar degeneration flags breast and ovarian cancers in older women. **Anti CV two** or CRMP five syndrome links thymoma with chorea in many reports.",
+   "say": "Sensory neuronopathy with anti Hu antibodies is associated with small cell lung cancer. Anti Ma two encephalitis is a flag of testicular tumours in young men with limbic dysfunction. Anti Yo cerebellar degeneration is a flag of breast and ovarian cancers in older women. Anti CV two or CRMP five syndrome links thymoma with chorea in many reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antibody",
+     "Syndrome",
+     "Tumour"
+    ],
+    "rows": [
+     [
+      "Anti Hu",
+      "Sensory neuronopathy",
+      "Small cell lung cancer"
+     ],
+     [
+      "Anti Ma two",
+      "Limbic encephalitis",
+      "Testicular tumour"
+     ],
+     [
+      "Anti Yo",
+      "Cerebellar degeneration",
+      "Breast and ovarian cancer"
+     ],
+     [
+      "Anti CV two",
+      "Chorea and encephalitis",
+      "Thymoma and lung cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rituximab** with **mycophenolate** or **azathioprine** suppresses antibody disease in paraneoplastic encephalitis. **Clonazepam** controls myoclonus in selected paraneoplastic myoclonus cases in many protocols. **Cyclophosphamide** is an alternative immunosuppressant when first line therapy fails in these patients. Tumour removal is the definitive therapy for antibody mediated syndromes in many cases.",
+   "say": "Rituximab with mycophenolate or azathioprine is immunosuppression for antibody disease in paraneoplastic encephalitis. Clonazepam controls myoclonus in selected paraneoplastic myoclonus cases in many protocols. Cyclophosphamide is an alternative immunosuppressant when first line therapy fails in these patients. Tumour removal is the definitive therapy for antibody mediated syndromes in many cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Neurologic syndrome"
+     },
+     {
+      "id": "b",
+      "label": "Antibody panel positive"
+     },
+     {
+      "id": "c",
+      "label": "Search for tumour"
+     },
+     {
+      "id": "d",
+      "label": "Immunotherapy plus tumour care"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clubbing** with hypertrophic osteoarthropathy accompanies lung cancer in many patients. **Trousseau syndrome** causes migratory thrombophlebitis in pancreatic and lung cancers. **Red cell aplasia** accompanies thymoma in many patients with thymic tumours today. **Polydermatomyositis** is the muscle counterpart that flags internal malignancy in older adults.",
+   "say": "Clubbing with hypertrophic osteoarthropathy is associated with lung cancer in many patients. Trousseau syndrome causes migratory thrombophlebitis in pancreatic and lung cancers. Red cell aplasia is associated with thymoma in many patients with thymic tumours today. Polydermatomyositis is the muscle counterpart that is a flag of internal malignancy in older adults.",
+   "vis": null
+  },
+  {
+   "tx": "**Carcinoid syndrome** causes flushing and diarrhoea with liver metastases in many cases. **Tocilizumab** has no routine role in carcinoid syndrome despite its presence in listings confusion. **Glucagonoma** diabetes flag is the pancreatic counterpart of carcinoid syndrome in many cases. **Gastrinoma** acidity with ulcers is another pancreatic neuroendocrine presentation in these patients.",
+   "say": "Carcinoid syndrome causes flushing and diarrhoea with liver metastases in many cases. Additional therapy is required based on tumour burden and symptoms in these patients. Glucagonoma diabetes flag is the pancreatic counterpart of carcinoid syndrome in many cases. Gastrinoma acidity with ulcers is another pancreatic neuroendocrine presentation in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lung linked",
+     "points": [
+      "SIADH with small cell disease",
+      "Anti Hu sensory syndrome",
+      "Eaton Lambert syndrome",
+      "Cushing with ACTH excess"
+     ]
+    },
+    "right": {
+     "title": "Other tumours",
+     "points": [
+      "Anti Yo with breast cancer",
+      "Anti Ma two with testis tumour",
+      "Red cell aplasia with thymoma",
+      "Carcinoid with gut tumours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Inappropriate ADH** secretion is managed by fluid restriction in most patients today. **Hypercalcaemia** responds to hydration in paraneoplastic squamous disease in many cases. **Stabilisation** of blood tests is required before any tumour directed therapy is started in these patients. **Hyponatraemia** correction must be slow to avoid central pontine injury in these patients.",
+   "say": "Inappropriate ADH secretion is managed by fluid restriction in most patients today. Hypercalcaemia is treated by hydration in paraneoplastic squamous disease in many cases. Stabilisation of blood tests is required before any tumour directed therapy is started in these patients. Hyponatraemia correction must be slow to avoid central pontine injury in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Dermatomyositis** with heliotrope rash is the classic skin flag of internal malignancy. **Acanthosis nigricans** signals gastric cancer in many patients with this skin finding. **Necrobiosis** is not a malignancy flag despite its presence in some listings confusion. **Sweet syndrome** with leukaemia is the haematologic counterpart in many reports.",
+   "say": "Dermatomyositis with heliotrope rash is the classic skin flag of internal malignancy. Acanthosis nigricans signals gastric cancer in many patients with this skin finding. Histologic review is required when skin lesions suggest paraneoplastic disease in these patients. Sweet syndrome with leukaemia is the haematologic counterpart in many reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Skin flag",
+     "Definition",
+     "Tumour"
+    ],
+    "rows": [
+     [
+      "Dermatomyositis",
+      "Heliotrope rash, weakness",
+      "Internal malignancy"
+     ],
+     [
+      "Acanthosis nigricans",
+      "Velvety flexural thickening",
+      "Gastric cancer"
+     ],
+     [
+      "Sweet syndrome",
+      "Tender plaques, fever",
+      "Leukaemia association"
+     ],
+     [
+      "Erythema gyratum",
+      "Wood grain rash",
+      "Lung cancer link"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pemphigus** with bullous lesions accompanies internal malignancy in some case series. **Vasculitis** with purpura is another cutaneous paraneoplastic pattern in these patients. **Tumour** treatment often resolves the paraneoplastic feature without additional therapy in many cases. **Immunotherapy** must be coordinated with oncology input in every case.",
+   "say": "Pemphigus with bullous lesions is associated with internal malignancy in some case series. Vasculitis with purpura is another cutaneous paraneoplastic pattern in these patients. Tumour treatment is often the resolution of the paraneoplastic feature without additional therapy in many cases. Immunotherapy must be coordinated with oncology input in every case.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetes insipidus** with nephrogenic resistance occurs in paraneoplastic hypercalcaemia cases. **Thyroid** dysfunction from tumour iodine uptake is uncommon in this group of patients. **Renal** tubular dysfunction accompanies myeloma paraneoplastic disease in many cases. **Hormone** replacement is required when endocrine axes are damaged in these patients.",
+   "say": "Diabetes insipidus with nephrogenic resistance occurs in paraneoplastic hypercalcaemia cases. Thyroid dysfunction from tumour iodine uptake is uncommon in this group of patients. Renal tubular dysfunction is associated with myeloma paraneoplastic disease in many cases. Hormone replacement is required when endocrine axes are damaged in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember SIADH with small cell lung cancer, anti Hu sensory neuronopathy and anti Ma two with testicular tumours. Anti Yo cerebellar disease flags breast and ovarian cancers while rituximab suppresses antibody disease. Dermatomyositis with heliotrope rash is the skin flag of internal malignancy.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. SIADH with small cell lung cancer is the commonest endocrine example clearly. Anti Hu sensory neuronopathy is associated with small cell lung cancer. Anti Ma two encephalitis is a flag of testicular tumours in young men. Anti Yo cerebellar disease is a flag of breast and ovarian cancers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Endocrine common",
+      "SIADH with small cell lung cancer"
+     ],
+     [
+      "Sensory flag",
+      "Anti Hu sensory neuronopathy accompanies SCLC"
+     ],
+     [
+      "Testicular flag",
+      "Anti Ma two encephalitis flags testis tumours"
+     ],
+     [
+      "Breast flag",
+      "Anti Yo flags breast and ovarian cancers"
+     ],
+     [
+      "Antibody therapy",
+      "Rituximab suppresses antibody mediated disease"
+     ],
+     [
+      "Skin flag",
+      "Dermatomyositis heliotrope rash signals malignancy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-acute-leukaemia",
+ "subject": "ss-general-medicine",
+ "title": "Acute leukaemias",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Acute leukaemia** is a clonal proliferation of blasts in marrow and blood. **Acute myeloid leukaemia** arises in older adults with myeloid blasts exceeding twenty percent. **Acute lymphoblastic leukaemia** dominates childhood cancer and presents with lymphoblasts. Both cause marrow failure with anaemia, infection and bleeding rapidly.",
+   "say": "Acute leukaemia is a clonal proliferation of blasts in marrow and blood. Acute myeloid leukaemia arises in older adults with myeloid blasts exceeding twenty percent. Acute lymphoblastic leukaemia dominates childhood cancer and presents with lymphoblasts. Both cause marrow failure with anaemia, infection and bleeding rapidly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Usual age",
+     "Blast line"
+    ],
+    "rows": [
+     [
+      "Acute myeloid leukaemia",
+      "Older adults",
+      "Myeloid blasts"
+     ],
+     [
+      "Acute lymphoblastic leukaemia",
+      "Children",
+      "Lymphoblasts"
+     ],
+     [
+      "Acute promyelocytic leukaemia",
+      "Adults",
+      "Promyelocytes with Auer rods"
+     ],
+     [
+      "Mixed phenotype",
+      "Variable",
+      "Both lineages present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**B symptoms** such as fever, weight loss and night sweats accompany many presentations. **Gum hypertrophy** and skin infiltration flag monocytic subtypes of myeloid disease. **Lymphadenopathy** and mediastinal mass favour lymphoblastic disease in adolescents. Pain from periosteal infiltration is common in children with lymphoid disease.",
+   "say": "B symptoms such as fever, weight loss and night sweats are common accompaniments in many presentations. Gum hypertrophy and skin infiltration are flags of monocytic subtypes of myeloid disease. Lymphadenopathy and mediastinal mass are characteristic of lymphoblastic disease in adolescents. Pain from periosteal infiltration is common in children with lymphoid disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Peripheral smear** showing blasts is the first diagnostic clue in most patients. **Marrow blast percentage** defines acute leukaemia against chronic disease thresholds. Flow cytometry assigns lineage by antigen expression on blasts directly. Cytogenetics and molecular profiling guide risk grouping and targeted therapy selection.",
+   "say": "Peripheral smear showing blasts is the first diagnostic clue in most patients. Marrow blast percentage is the diagnostic criterion of acute leukaemia against chronic disease thresholds. Flow cytometry is required to assign lineage by antigen expression on blasts directly. Cytogenetics and molecular profiling guide risk grouping and targeted therapy selection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Blasts on smear"
+     },
+     {
+      "id": "b",
+      "label": "Marrow confirmation"
+     },
+     {
+      "id": "c",
+      "label": "Flow cytometry lineage"
+     },
+     {
+      "id": "d",
+      "label": "Cytogenetics and mutation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute promyelocytic leukaemia** carries t fifteen seventeen with disseminated coagulopathy. **Arsenic trioxide** with **tretinoin** replaces chemotherapy for most low and intermediate risk patients. **Anthracycline** based therapy remains an option for high risk disease in many centres. Coagulopathy needs prompt blood product support alongside therapy start.",
+   "say": "Acute promyelocytic leukaemia carries t fifteen seventeen with disseminated coagulopathy. Arsenic trioxide with tretinoin is the preferred therapy for most low and intermediate risk patients. Anthracycline based therapy remains an option for high risk disease in many centres. Coagulopathy needs prompt blood product support alongside therapy start.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "APL therapy wins",
+     "points": [
+      "Arsenic trioxide plus tretinoin",
+      "Excellent survival in low risk",
+      "Coagulopathy resolves on therapy",
+      "Differentiation syndrome needs cover"
+     ]
+    },
+    "right": {
+     "title": "Classic AML therapy",
+     "points": [
+      "Cytarabine with anthracycline",
+      "Venetoclax for unfit patients",
+      "Targeted agents by mutation",
+      "Transplant for high risk disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**DAUNORUBICIN** with **cytarabine** is the standard seven plus three induction regimen. **Venetoclax** with azacitidine serves unfit older patients with better response rates. **Cytarabine** high dose consolidation follows in eligible young adults. Measurable residual disease guides transplant decisions in modern protocols.",
+   "say": "Daunorubicin with cytarabine is the standard seven plus three induction regimen. Venetoclax with azacitidine serves unfit older patients with better response rates. Cytarabine high dose consolidation follows in eligible young adults. Measurable residual disease guides transplant decisions in modern protocols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fit assessment"
+     },
+     {
+      "id": "b",
+      "label": "Induction 7 plus 3"
+     },
+     {
+      "id": "c",
+      "label": "Consolidation cycles"
+     },
+     {
+      "id": "d",
+      "label": "Transplant if high risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**FLT3 inhibitors** such as **gilteritinib** and **quizartinib** benefit FLT3 mutated disease. **Ivosidenib** targets IDH one mutated leukaemia with differentiation effect. **Differentiation syndrome** is the risk with IDH directed therapy in these patients. **Midostaurin** combines with chemotherapy for FLT3 mutated younger patients.",
+   "say": "FLT3 inhibitors such as gilteritinib and quizartinib are effective in FLT3 mutated disease. Ivosidenib targets IDH one mutated leukaemia with differentiation effect. Differentiation syndrome is the risk with IDH directed therapy in these patients. Midostaurin is combined with chemotherapy for FLT3 mutated younger patients.",
+   "vis": null
+  },
+  {
+   "tx": "**IDH differentiation syndrome** brings fever, dyspnoea and effusions during targeted therapy. **Decitabine** and **azacitidine** are hypomethylating agents for unfit myeloid disease. **Gemtuzumab ozogamicin** is an antibody drug conjugate for favourable cytogenetics in many protocols. **Revumenib** targets menin in KMT2A rearranged disease under trial settings.",
+   "say": "IDH differentiation syndrome brings fever, dyspnoea and effusions during targeted therapy. Decitabine and azacitidine are hypomethylating agents for unfit myeloid disease. Gemtuzumab ozogamicin is an antibody drug conjugate for favourable cytogenetics in many protocols. Revumenib is a newer menin directed option in selected disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Drug",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "FLT3 mutated",
+      "Gilteritinib",
+      "Kinase blockade"
+     ],
+     [
+      "IDH1 mutated",
+      "Ivosidenib",
+      "Differentiation release"
+     ],
+     [
+      "IDH2 mutated",
+      "IDH directed therapy",
+      "Differentiation release"
+     ],
+     [
+      "KMT2A rearranged",
+      "Revumenib",
+      "Menin blockade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tumour lysis** threatens renal function during induction in hypercellular disease. **Infection** during aplasia needs instant empiric antimicrobial therapy in these patients. **Graft versus leukaemia** effect underlies transplantation benefit in high risk disease. Fungal prophylaxis with **posaconazole** lowers invasive mould infection rates during induction.",
+   "say": "Tumour lysis threatens renal function during induction in hypercellular disease. Infection during aplasia needs instant empiric antimicrobial therapy in these patients. Graft versus leukaemia effect underlies transplantation benefit in high risk disease. Fungal prophylaxis with posaconazole lowers invasive mould infection rates during induction.",
+   "vis": null
+  },
+  {
+   "tx": "**CNS prophylaxis** with intrathecal therapy is standard in lymphoblastic leukaemia. Post remission **transplantation** improves survival in high risk acute myeloid leukaemia. **Minimal residual disease** monitoring detects relapse months before morphologic recurrence. Older unfit patients receive venetoclax combinations as current standard therapy globally.",
+   "say": "CNS prophylaxis with intrathecal therapy is standard in lymphoblastic leukaemia. Post remission transplantation improves survival in high risk acute myeloid leukaemia. Minimal residual disease monitoring detects relapse months before morphologic recurrence. Older unfit patients are treated with venetoclax combinations as current standard therapy globally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Goal",
+     "Tool"
+    ],
+    "rows": [
+     [
+      "Induction",
+      "Remission attainment",
+      "Seven plus three regimen"
+     ],
+     [
+      "Consolidation",
+      "Disease depth",
+      "High dose cytarabine"
+     ],
+     [
+      "Maintenance",
+      "Relapse prevention",
+      "Continued therapy in ALL"
+     ],
+     [
+      "Post remission",
+      "Cure chance",
+      "Transplant if high risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sorafenib** maintenance after transplant reduces relapse in FLT3 mutated disease. **Voriconazole** and **fluconazole** cover mould and yeast during long aplasia in many protocols. **Dexamethasone** forms the backbone of steroid responsive lymphoblastic therapy in children. **Isavuconazole** offers another mould active option for intolerant patients.",
+   "say": "Sorafenib maintenance after transplant reduces relapse in FLT3 mutated disease. Voriconazole and fluconazole are active against mould and yeast during long aplasia in many protocols. Dexamethasone is the backbone of steroid responsive lymphoblastic therapy in children. Isavuconazole is an alternative mould active option for intolerant patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** captures facts asked most often in NEET-SS papers. Remember twenty percent blasts as the acute threshold, t fifteen seventeen for promyelocytic disease and arsenic trioxide with tretinoin as its treatment. Seven plus three remains the AML induction backbone while venetoclax serves unfit patients. Flow cytometry assigns lineage and guides therapy.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Twenty percent blasts are the acute threshold in marrow assessment. T fifteen seventeen is the marker of promyelocytic disease with coagulopathy. Arsenic trioxide with tretinoin is its curative therapy. Flow cytometry is required to assign lineage for therapy decisions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Acute threshold",
+      "Twenty percent blasts defines acute leukaemia"
+     ],
+     [
+      "APL hallmark",
+      "T fifteen seventeen with DIC and Auer rods"
+     ],
+     [
+      "APL treatment",
+      "Arsenic trioxide plus tretinoin curative"
+     ],
+     [
+      "AML induction",
+      "Seven plus three remains the backbone"
+     ],
+     [
+      "Unfit AML therapy",
+      "Venetoclax with azacitidine standard now"
+     ],
+     [
+      "Lineage test",
+      "Flow cytometry assigns blast lineage"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

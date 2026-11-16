@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-oncologic-emergencies",
+ "subject": "ss-general-medicine",
+ "title": "Oncological emergencies",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Malignant spinal cord compression** presents with back pain and leg weakness rapidly. **Steroids** must be started immediately before imaging confirms the diagnosis in these patients. **MRI** of the whole spine is the urgent investigation of choice for this emergency. **Radiotherapy** decompresses the cord when surgery is not feasible or not advisable.",
+   "say": "Malignant spinal cord compression presents with back pain and leg weakness rapidly. Steroids must be started immediately before imaging confirms the diagnosis in these patients. MRI of the whole spine is the urgent investigation of choice for this emergency. Radiotherapy decompresses the cord when surgery is not feasible or not advisable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Back pain plus weakness"
+     },
+     {
+      "id": "b",
+      "label": "Steroids immediately"
+     },
+     {
+      "id": "c",
+      "label": "Urgent MRI spine"
+     },
+     {
+      "id": "d",
+      "label": "RT or surgery review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Superior vena cava obstruction** causes facial swelling with distended neck veins. **Stenting** is the fastest relief when symptoms threaten airway or brain function. **SVC stenting** is the definitive relief for malignant obstruction in many cases. **Salbutamol** has no role here despite its inclusion in some listing errors confusion.",
+   "say": "Superior vena cava obstruction causes facial swelling with distended neck veins. Stenting is the fastest relief when symptoms threaten airway or brain function. Anticoagulation alone does not relieve obstruction without stenting in many cases. Supportive care is required until definitive therapy is available in every patient.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypercalcaemia of malignancy** presents with polyuria, constipation and confusion in many cases. **Saline hydration** is first line therapy for moderate hypercalcaemia in most patients. **Furosemide** has no routine role unless fluid overloaded in these sick patients. **Calcium gluconate** reverses membrane effects during severe symptomatic hypercalcaemia in cardiac patients.",
+   "say": "Hypercalcaemia of malignancy presents with polyuria, constipation and confusion in many cases. Saline hydration is first line therapy for moderate hypercalcaemia in most patients. Furosemide has no routine role unless fluid overloaded in these sick patients. Calcium stabilisation is required for membrane effects during severe symptomatic hypercalcaemia in cardiac patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Emergency",
+     "Clue",
+     "First action"
+    ],
+    "rows": [
+     [
+      "Cord compression",
+      "Back pain, weakness",
+      "Steroids and MRI"
+     ],
+     [
+      "SVC obstruction",
+      "Facial swelling",
+      "Stenting for relief"
+     ],
+     [
+      "Hypercalcaemia",
+      "Polyuria, confusion",
+      "Saline hydration"
+     ],
+     [
+      "Tumour lysis",
+      "Rising potassium, urate",
+      "Hydration and rasburicase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tumour lysis syndrome** follows chemotherapy in bulky highly proliferative tumours. **Potassium** rise with hypocalcaemia is the classic biochemical pair in this syndrome. **Rasburicase** clears uric acid rapidly in high risk tumour lysis cases. **Allopurinol** or **febuxostat** prevents uric acid rise in moderate risk disease in many protocols.",
+   "say": "Tumour lysis syndrome follows chemotherapy in bulky highly proliferative tumours. Potassium rise with hypocalcaemia is the classic biochemical pair in this syndrome. Rasburicase is the treatment for high risk tumour lysis cases rapidly. Allopurinol or febuxostat prevents uric acid rise in moderate risk disease in many protocols.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High risk lysis",
+     "points": [
+      "Burkitts and ALL bulky",
+      "Potassium, urate rise",
+      "Rasburicase treatment",
+      "Dialysis if refractory"
+     ]
+    },
+    "right": {
+     "title": "Moderate risk lysis",
+     "points": [
+      "Solid tumours less common",
+      "Allopurinol prophylaxis",
+      "Hydration is mainstay",
+      "Frequent electrolyte checks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Leukostasis** causes dyspnoea and neurologic symptoms with very high white counts. **Sodium bicarbonate** alkalinises urine during tumour lysis management in selected cases. **Sodium chloride** hydration is the mainstay of lysis prevention in many protocols globally. **Insulin** with glucose shifts potassium intracellularly during lysis hyperkalaemia management in these patients.",
+   "say": "Leukostasis causes dyspnoea and neurologic symptoms with very high white counts. Sodium bicarbonate alkalinises urine during tumour lysis management in selected cases. Sodium chloride hydration is the mainstay of lysis prevention in many protocols globally. Insulin with glucose shifts potassium intracellularly during lysis hyperkalaemia management in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Neutropenic sepsis** is fever with very low neutrophil counts during chemotherapy. **Azathioprine** and **mercaptopurine** cause myelosuppression when overdosed in many patients. **Venetoclax** neutropenia needs growth factor or dose delay in many protocols. **Dexamethasone** is not antimicrobial therapy despite its common use in many regimens.",
+   "say": "Neutropenic sepsis is fever with very low neutrophil counts during chemotherapy. Azathioprine and mercaptopurine cause myelosuppression when overdosed in many patients. Venetoclax neutropenia needs growth factor or dose delay in many protocols. Empiric antibiotics are required immediately for every neutropenic fever case.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever and low counts"
+     },
+     {
+      "id": "b",
+      "label": "Cultures and antibiotics"
+     },
+     {
+      "id": "c",
+      "label": "Source imaging"
+     },
+     {
+      "id": "d",
+      "label": "GCSF if prolonged fall"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pericardial tamponade** from malignancy causes hypotension with muffled heart sounds. **Pericardiocentesis** is therapeutic and diagnostic in malignant tamponade cases. **Pleural effusion** with dyspnoea responds to drainage and pleurodesis in many cases. **Ascites** control combines sodium restriction with diuretic therapy in these patients.",
+   "say": "Pericardial tamponade from malignancy causes hypotension with muffled heart sounds. Pericardiocentesis is therapeutic and diagnostic in malignant tamponade cases. Pleural effusion with dyspnoea is treated by drainage and pleurodesis in many cases. Ascites control combines sodium restriction with diuretic therapy in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Tumour lysis** needs electrolyte monitoring every six hours in high risk cases. **Sodium chloride** saline diuresis is preferred over loop diuretics in many lysis protocols. **Electrolytes** panels track potassium, phosphate and calcium trajectory serially in these patients. **Calcium gluconate** is given only for symptomatic hypocalcaemia in lysis management practice.",
+   "say": "Tumour lysis needs electrolyte monitoring every six hours in high risk cases. Saline diuresis is preferred over loop diuretics in many lysis protocols. Electrolyte panels track potassium, phosphate and calcium trajectory serially in these patients. Calcium stabilisation is required only for symptomatic hypocalcaemia in lysis management practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Electrolyte",
+     "Lysis change",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Potassium",
+      "Rising",
+      "Insulin glucose shift"
+     ],
+     [
+      "Phosphate",
+      "Rising",
+      "Hydration and binders"
+     ],
+     [
+      "Calcium",
+      "Falling",
+      "Calcium gluconate if symptomatic"
+     ],
+     [
+      "Urate",
+      "Rising",
+      "Rasburicase for high risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperleukocytosis** with counts above one hundred thousand needs leukapheresis in symptomatic cases. **Cytoreduction** with supportive measures is a bridge when leukapheresis is unavailable in many settings. **Disseminated coagulation** complicates promyelocytic leukaemia emergency in these patients. Blood product support precedes chemotherapy in coagulopathy cases in many protocols.",
+   "say": "Hyperleukocytosis with very high counts needs leukapheresis in symptomatic cases. Cytoreduction with supportive measures is a bridge when leukapheresis is unavailable in many settings. Disseminated coagulation complicates promyelocytic leukaemia emergency in these patients. Blood product support precedes chemotherapy in coagulopathy cases in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**SVC stenting** relieves symptoms within hours in most malignant obstruction cases. **Radiotherapy** addresses tumour mass when stenting is not feasible in these patients. **Anticoagulation** failure is common without stenting in malignant SVC obstruction cases. **Dexamethasone** reduces oedema during radiotherapy for cord compression in many protocols.",
+   "say": "SVC stenting relieves symptoms within hours in most malignant obstruction cases. Radiotherapy addresses tumour mass when stenting is not feasible in these patients. Anticoagulation failure is common without stenting in malignant SVC obstruction cases. Dexamethasone is required to reduce oedema during radiotherapy for cord compression in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember steroids before MRI for cord compression, stenting for SVC obstruction relief and rasburicase for high risk tumour lysis. Saline hydration is first line for hypercalcaemia while insulin glucose shifts potassium inward. Neutropenic sepsis needs immediate empiric antibiotics in every case.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Steroids before MRI are required for cord compression management. Stenting is the fastest relief for SVC obstruction cases. Rasburicase is the treatment for high risk tumour lysis. Saline hydration is first line for hypercalcaemia cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Cord compression",
+      "Steroids before urgent MRI spine"
+     ],
+     [
+      "SVC relief",
+      "Stenting fastest for symptom relief"
+     ],
+     [
+      "Hypercalcaemia",
+      "Saline hydration first line therapy"
+     ],
+     [
+      "High risk lysis",
+      "Rasburicase clears uric acid rapidly"
+     ],
+     [
+      "Hyperkalaemia",
+      "Insulin glucose shifts potassium inward"
+     ],
+     [
+      "Neutropenic sepsis",
+      "Immediate empiric antibiotics required"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

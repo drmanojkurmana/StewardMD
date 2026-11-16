@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-bleeding-disorders",
+ "subject": "ss-general-medicine",
+ "title": "Inherited and acquired bleeding disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Bleeding disorders** cause mucocutaneous bleeding or deep haemorrhage patterns. **Haemophilia A** is factor eight deficiency with X linked inheritance in most families. **Haemophilia B** is factor nine deficiency with similar clinical severity patterns. **Von Willebrand disease** is the commonest inherited bleeding disorder worldwide in practice.",
+   "say": "Bleeding disorders cause mucocutaneous bleeding or deep haemorrhage patterns. Haemophilia A is factor eight deficiency with X linked inheritance in most families. Haemophilia B is factor nine deficiency with similar clinical severity patterns. Von Willebrand disease is the commonest inherited bleeding disorder worldwide in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Factor",
+     "Inheritance"
+    ],
+    "rows": [
+     [
+      "Haemophilia A",
+      "Factor eight",
+      "X linked"
+     ],
+     [
+      "Haemophilia B",
+      "Factor nine",
+      "X linked"
+     ],
+     [
+      "Von Willebrand disease",
+      "Von Willebrand factor",
+      "Autosomal"
+     ],
+     [
+      "Factor eleven deficiency",
+      "Factor eleven",
+      "Autosomal recessive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemarthrosis** is the hallmark of severe haemophilia with recurrent joint bleeds. **Intracranial haemorrhage** is the feared presentation in newborns and trauma victims. **Inhibitors** against factor eight complicate therapy in roughly thirty percent of severe cases. **Tranexamic acid** is an antifibrinolytic that reduces mucosal bleeding in many patients.",
+   "say": "Haemarthrosis is the hallmark of severe haemophilia with recurrent joint bleeds. Intracranial haemorrhage is the feared presentation in newborns and trauma victims. Inhibitors against factor eight are a complication of therapy in roughly thirty percent of severe cases. Tranexamic acid is an antifibrinolytic that reduces mucosal bleeding in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Emicizumab** is a bispecific antibody that mimics factor eight function. It prevents bleeding in haemophilia A with inhibitors in weekly dosing schedules. **Desmopressin** releases von Willebrand factor and suits mild disease for minor procedures. **Heparin** exposure worsens acquired bleeding and must be stopped promptly in heparin related cases.",
+   "say": "Emicizumab is a bispecific antibody that mimics factor eight function. It prevents bleeding in haemophilia A with inhibitors in weekly dosing schedules. Desmopressin releases von Willebrand factor and suits mild disease for minor procedures. Heparin exposure worsens acquired bleeding and must be stopped promptly in heparin related cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Disease",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Emicizumab",
+      "Haemophilia A with inhibitors",
+      "Mimics factor eight function"
+     ],
+     [
+      "Desmopressin",
+      "Mild von Willebrand disease",
+      "Releases stored factor"
+     ],
+     [
+      "Tranexamic acid",
+      "Mucosal bleeding",
+      "Antifibrinolytic protection"
+     ],
+     [
+      "Rituximab",
+      "Acquired haemophilia",
+      "Suppresses inhibitor production"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acquired haemophilia** is an autoantibody against factor eight in older adults. **Rituximab** with steroids eradicates the inhibitor in many patients today. **Cyclophosphamide** adds immunosuppression for refractory acquired disease in specialist care. Bleeding into soft tissues is the commonest presentation of this disorder.",
+   "say": "Acquired haemophilia is an autoantibody against factor eight in older adults. Rituximab with steroids eradicates the inhibitor in many patients today. Cyclophosphamide adds immunosuppression for refractory acquired disease in specialist care. Bleeding into soft tissues is the commonest presentation of this disorder.",
+   "vis": null
+  },
+  {
+   "tx": "**Disseminated intravascular coagulation** consumes factors and platelets in sepsis and trauma. **Liver disease** reduces clotting factor synthesis with vitamin K dependent factor fall. **Vitamin K** deficiency prolongs prothrombin time with correctable laboratory pattern in many patients. **Aspirin** induced platelet dysfunction adds mucosal bleeding risk in these ill patients.",
+   "say": "Disseminated intravascular coagulation consumes factors and platelets in sepsis and trauma. Liver disease reduces clotting factor synthesis with vitamin K dependent factor fall. Vitamin K deficiency is prolongation of prothrombin time with a correctable laboratory pattern in many patients. Aspirin induced platelet dysfunction adds mucosal bleeding risk in these ill patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bleeding history"
+     },
+     {
+      "id": "b",
+      "label": "PT and aPTT pattern"
+     },
+     {
+      "id": "c",
+      "label": "Factor assay directed"
+     },
+     {
+      "id": "d",
+      "label": "Targeted blood products"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prothrombin time** prolongation points to extrinsic pathway or common factor defects. **Activated partial thromboplastin time** prolongation points to intrinsic pathway defects directly. **Mixing study** correction separates factor deficiency from inhibitor presence in many cases. Thrombin time prolongation suggests fibrinogen abnormality or heparin effect clearly.",
+   "say": "Prothrombin time prolongation points to extrinsic pathway or common factor defects. Activated partial thromboplastin time prolongation points to intrinsic pathway defects directly. Mixing study correction is required to separate factor deficiency from inhibitor presence in many cases. Thrombin time prolongation suggests fibrinogen abnormality or heparin effect clearly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test prolonged",
+     "Points to",
+     "Next test"
+    ],
+    "rows": [
+     [
+      "PT only",
+      "Extrinsic factor defect",
+      "Factor seven assay"
+     ],
+     [
+      "aPTT only",
+      "Intrinsic factor defect",
+      "Factor eight assay"
+     ],
+     [
+      "Both PT and aPTT",
+      "Common pathway defect",
+      "Fibrinogen assay"
+     ],
+     [
+      "Neither prolonged",
+      "Vascular or platelet defect",
+      "Platelet function tests"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prophylaxis** with factor concentrates prevents haemarthrosis in severe haemophilia today. Joint outcome depends on early prophylaxis adherence in these young patients. **Physiotherapy** preserves joint function after recurrent bleeds in chronic disease management. Gene therapy offers durable factor expression in trials with lasting benefit.",
+   "say": "Prophylaxis with factor concentrates prevents haemarthrosis in severe haemophilia today. Joint outcome depends on early prophylaxis adherence in these young patients. Physiotherapy preserves joint function after recurrent bleeds in chronic disease management. Gene therapy offers durable factor expression in trials with lasting benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Postpartum haemorrhage** is worsened by von Willebrand disease in affected women. **Dental extraction** and surgery need operative cover with factor or desmopressin. **Neuraxial anaesthesia** is dangerous when von Willebrand disease is unrecognised in these patients. Labour management benefits from haematology co-care in every case.",
+   "say": "Postpartum haemorrhage is worsened by von Willebrand disease in affected women. Dental extraction and surgery need operative cover with factor or desmopressin in selected cases. Neuraxial anaesthesia is dangerous when von Willebrand disease is unrecognised in these patients. Haematology co-care is advised for labour management in every case.",
+   "vis": null
+  },
+  {
+   "tx": "**Heparin** induced thrombocytopenia is a thrombotic disorder rather than bleeding in nature. **Disseminated coagulation** needs blood products guided by laboratory values in critical illness. **Lumbar puncture** is unsafe with severe coagulopathy in these sick patients. **Aspirin** withdrawal helps when drug induced platelet dysfunction causes bleeding events.",
+   "say": "Heparin induced thrombocytopenia is a thrombotic disorder rather than bleeding in nature. Disseminated coagulation needs blood products guided by laboratory values in critical illness. Lumbar puncture is unsafe with severe coagulopathy in these sick patients. Aspirin withdrawal helps when drug induced platelet dysfunction causes bleeding events.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deep bleeding",
+     "points": [
+      "Haemarthrosis and muscle bleeds",
+      "Factor deficiency pattern",
+      "Factor concentrates treat",
+      "Prophylaxis prevents damage"
+     ]
+    },
+    "right": {
+     "title": "Mucosal bleeding",
+     "points": [
+      "Gums, nose and GI tract",
+      "Platelet or von Willebrand defect",
+      "Desmopressin and antifibrinolytics",
+      "Tranexamic acid for mucosal cover"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Inhibitor** screening by Bethesda assay guides bypass therapy decisions in haemophilia. **Serial** factor level monitoring controls replacement dosing in major surgery cases. **Venous access** devices need care because infection and thrombosis are device risks. Genetic counselling covers carrier detection and prenatal diagnosis for families.",
+   "say": "Inhibitor screening by Bethesda assay is required for bypass therapy decisions in haemophilia. Serial factor level monitoring controls replacement dosing in major surgery cases. Vein access devices need care because infection and clotting are risks with devices over time. Genetic counselling covers carrier detection and prenatal diagnosis for families.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember haemarthrosis as the haemophilia hallmark, emicizumab as the factor eight mimetic and desmopressin for mild von Willebrand disease. Acquired haemophilia is factor eight autoantibody disease with soft tissue bleeds. Tranexamic acid is the antifibrinolytic for mucosal bleeding control.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Haemarthrosis is the hallmark of severe haemophilia clearly. Emicizumab is the factor eight mimetic for inhibitor patients. Desmopressin is useful for mild von Willebrand disease in selected cases. Tranexamic acid is the antifibrinolytic for mucosal bleeding control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Haemophilia hallmark",
+      "Haemarthrosis with recurrent joint bleeds"
+     ],
+     [
+      "Factor mimetic",
+      "Emicizumab mimics factor eight function"
+     ],
+     [
+      "Mild von Willebrand",
+      "Desmopressin releases stored factor"
+     ],
+     [
+      "Acquired disease",
+      "Factor eight autoantibody with soft tissue bleeds"
+     ],
+     [
+      "Mucosal bleeding",
+      "Tranexamic acid antifibrinolytic protection"
+     ],
+     [
+      "Inhibitor test",
+      "Bethesda assay detects the inhibitor"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

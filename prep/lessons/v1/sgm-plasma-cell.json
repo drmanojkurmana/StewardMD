@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-plasma-cell",
+ "subject": "ss-general-medicine",
+ "title": "Plasma cell disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Multiple myeloma** is a clonal plasma cell cancer with marrow and bone disease. **MGUS** is a premalignant clone without end organ damage in most cases. **Smouldering myeloma** progresses to active disease in roughly ten percent yearly. **Waldenstrom** macroglobulinaemia is a lymphoplasmacytic disorder with IgM excess.",
+   "say": "Multiple myeloma is a clonal plasma cell cancer with marrow and bone disease. MGUS is a premalignant clone without end organ damage in most cases. Smouldering myeloma progresses to active disease in roughly ten percent yearly. Waldenstrom macroglobulinaemia is a lymphoplasmacytic disorder with IgM excess.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Premalignant states",
+     "points": [
+      "MGUS without organ damage",
+      "Smouldering without CRAB features",
+      "Surveillance is the strategy",
+      "Progression risk yearly"
+     ]
+    },
+    "right": {
+     "title": "Active myeloma",
+     "points": [
+      "CRAB features present",
+      "Lytic bone disease common",
+      "Clonal plasma cells ten percent",
+      "Therapy is mandatory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CRAB features** are hypercalcaemia, renal failure, anaemia and bone lesions in myeloma. **Lytic lesions** affect skull, spine and pelvis and cause pathologic fractures. **Monoclonal protein** quantification tracks disease burden serially in follow-up. Urine and serum electrophoresis identify the paraprotein type clearly.",
+   "say": "CRAB features are hypercalcaemia, renal failure, anaemia and bone lesions in myeloma. Lytic lesions affect skull, spine and pelvis and cause pathologic fractures. Monoclonal protein quantification tracks disease burden serially in follow-up. Urine and serum electrophoresis identify the paraprotein type clearly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Mechanism",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Hypercalcaemia",
+      "Osteoclast activation",
+      "PUD, polyuria, confusion"
+     ],
+     [
+      "Renal failure",
+      "Light chain cast nephropathy",
+      "Rising creatinine"
+     ],
+     [
+      "Anaemia",
+      "Marrow replacement",
+      "Normocytic anaemia"
+     ],
+     [
+      "Bone lesions",
+      "Lytic punched out defects",
+      "Back pain, fractures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Serum free light chain** assay refines risk in MGUS and smouldering disease. **Marrow clonal plasma** percentage separates MGUS from active myeloma reliably. **PET CT** reveals focal lesions that predict progression in smouldering myeloma. A single **bone lesion** with clonal plasma cells already defines active disease.",
+   "say": "Serum free light chain assay refines risk in MGUS and smouldering disease. Marrow clonal plasma percentage is the separator of MGUS from active myeloma reliably. PET CT reveals focal lesions that predict progression in smouldering myeloma. A single bone lesion with clonal plasma cells is the criterion of active disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Reflex arcs** in amyloid AL cause nephrotic syndrome and restrictive cardiomyopathy. **Macroglossia** with periorbital purpura is the external hallmark of amyloid infiltration. **Cardiac amyloid** restricts filling and presents with low voltage on ECG recordings. **Myocardial** imaging with tagged tracers supports the diagnosis in most centres today.",
+   "say": "Reflex arcs in amyloid AL cause nephrotic syndrome and restrictive cardiomyopathy. Macroglossia with periorbital purpura is the external hallmark of amyloid infiltration. Cardiac amyloid restricts filling and presents with low voltage on ECG recordings. Myocardial imaging with tagged tracers supports the diagnosis in most centres today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Amyloid effect",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Kidney",
+      "Nephrotic syndrome",
+      "Proteinuria, biopsy"
+     ],
+     [
+      "Heart",
+      "Restrictive physiology",
+      "ECG low voltage, echo"
+     ],
+     [
+      "Tongue",
+      "Macroglossia",
+      "Clinical examination"
+     ],
+     [
+      "Nerve",
+      "Neuropathy",
+      "Electrophysiology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bortezomib** with **lenalidomide** and **dexamethasone** is the standard induction backbone. **Daratumumab** is an anti CD thirty eight monoclonal antibody that deepens response. **Carfilzomib** and **pomalidomide** serve relapsed disease in many protocols globally. **Melphalan** conditioning precedes autologous transplantation for eligible patients.",
+   "say": "Bortezomib with lenalidomide and dexamethasone is the standard induction backbone. Daratumumab is an anti CD thirty eight monoclonal antibody that deepens response. Carfilzomib and pomalidomide serve relapsed disease in many protocols globally. Melphalan conditioning precedes autologous transplantation for eligible patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Induction VRd plus Dara"
+     },
+     {
+      "id": "b",
+      "label": "Transplant if eligible"
+     },
+     {
+      "id": "c",
+      "label": "Maintenance therapy"
+     },
+     {
+      "id": "d",
+      "label": "MRD surveillance serial"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Teclistamab** is a BCMA targeting T cell engager for relapsed myeloma. **Talquetamab** targets GPRC5D and expands options after BCMA failure in many patients. **Elranatamab** and **isatuximab** add further choices in relapsed disease care. **Venetoclax** suits t eleven fourteen translocated myeloma in specialist practice.",
+   "say": "Teclistamab is a BCMA targeting T cell engager for relapsed myeloma. Talquetamab targets GPRC5D and expands options after BCMA failure in many patients. Elranatamab and isatuximab add further choices in relapsed disease care. Venetoclax suits t eleven fourteen translocated myeloma in specialist practice.",
+   "vis": null
+  },
+  {
+   "tx": "**Cast nephropathy** needs hydration and rapid light chain reduction in myeloma. **Plasma exchange** helps hyperviscosity in Waldenstrom macroglobulinaemia effectively. **Rituximab** is first line therapy for Waldenstrom disease in most patients today. **Aspirin** prophylaxis covers immunomodulatory therapy together with thromboprophylaxis protocols.",
+   "say": "Cast nephropathy needs hydration and rapid light chain reduction in myeloma. Plasma exchange helps hyperviscosity in Waldenstrom macroglobulinaemia effectively. Rituximab is first line therapy for Waldenstrom disease in most patients today. Aspirin prophylaxis is required with immunomodulatory therapy together with thromboprophylaxis protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Poems syndrome** combines polyneuropathy, organomegaly and endocrine features with monoclonal protein in many patients worldwide. **Castleman** disease is its lymph node counterpart with interleukin six drive clearly defined. **Dexamethasone** forms the backbone of therapy for that association in many cases widely used.",
+   "say": "POEMS syndrome is polyneuropathy, organomegaly and endocrine features with monoclonal protein combined. Castleman disease is its lymph node counterpart with interleukin six drive. Dexamethasone forms the backbone of therapy for that association in many cases. Serum vascular markers help in case selection today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Paraprotein",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "MGUS",
+      "Small M spike",
+      "No CRAB features"
+     ],
+     [
+      "Multiple myeloma",
+      "High M spike",
+      "CRAB features present"
+     ],
+     [
+      "AL amyloidosis",
+      "Light chain clone",
+      "Organ infiltration pattern"
+     ],
+     [
+      "Waldenstrom",
+      "IgM paraprotein",
+      "Hyperviscosity symptoms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High risk cytogenetics** including del seventeen p worsen myeloma prognosis substantially. **RISS staging** combines beta two microglobulin with LDH and cytogenetics for risk. **Minimal residual disease** negativity predicts longer survival in modern trial datasets. Maintenance with lenalidomide prolongs survival after transplantation in most studies.",
+   "say": "High risk cytogenetics including del seventeen p worsen myeloma prognosis substantially. RISS staging combines beta two microglobulin with LDH and cytogenetics for risk. Minimal residual disease negativity is predictive of longer survival in modern trial datasets. Maintenance with lenalidomide is linked to longer survival after transplantation in most studies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "At diagnosis risk"
+     },
+     {
+      "id": "b",
+      "label": "Induction response"
+     },
+     {
+      "id": "c",
+      "label": "Transplant step"
+     },
+     {
+      "id": "d",
+      "label": "Maintenance to improve"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bisphosphonate** therapy heals lytic lesions and reduces skeletal events in myeloma. **Montelukast** has no role here despite its presence in some listings confusion. **Electrolytes** and renal monitoring are essential during induction therapy cycles in many patients. **Dexamethasone** pulses caution in cardiac amyloid with careful dose selection.",
+   "say": "Bisphosphonate therapy heals lytic lesions and reduces skeletal events in myeloma. Renal function and electrolytes are monitored closely during induction therapy cycles in many patients. Dexamethasone pulses need caution in cardiac amyloid with careful dose selection. Bone disease management is part of every myeloma plan today.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** collects facts asked most often in NEET-SS papers. Remember CRAB features for active myeloma, bortezomib with lenalidomide as the induction backbone and daratumumab as the CD thirty eight antibody. Teclistamab targets BCMA in relapsed disease while rituximab treats Waldenstrom disease. Free light chain assay refines MGUS risk stratification.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. CRAB features are the hallmark of active myeloma clearly. Bortezomib with lenalidomide is the induction backbone for myeloma. Daratumumab is the CD thirty eight antibody that deepens response. Free light chain assay is required for MGUS risk stratification.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Active disease",
+      "CRAB features define active myeloma"
+     ],
+     [
+      "Induction backbone",
+      "Bortezomib with lenalidomide and dexamethasone"
+     ],
+     [
+      "Antibody added",
+      "Daratumumab deepens response in induction"
+     ],
+     [
+      "Relapsed BCMA",
+      "Teclistamab targets BCMA in relapse"
+     ],
+     [
+      "Waldenstrom therapy",
+      "Rituximab is first line for Waldenstrom"
+     ],
+     [
+      "MGUS risk",
+      "Free light chain assay refines risk"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
