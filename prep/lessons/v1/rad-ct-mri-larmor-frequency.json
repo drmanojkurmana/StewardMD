@@ -77,6 +77,51 @@
    "tx": "**Dose modulation** lowers tube current automatically over thinner body parts and during angles that cross less tissue, cutting dose without losing diagnostic density. Iterative reconstruction rebuilds images from noisier raw data, so protocols drop tube voltage to 100 kilovolts in slim patients. Children need weight based settings because the same adult exposure gives a far higher organ dose in a small body.",
    "say": "Dose modulation lowers tube current automatically over thinner body parts and across angles crossing less tissue, cutting dose without losing diagnostic density. Iterative reconstruction rebuilds images from noisier raw data, letting protocols drop voltage in slim patients. Children need weight based settings because an adult exposure gives a far higher organ dose in a small body.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Weight based protocol"}, {"id": "b", "label": "Tube current modulation"}, {"id": "c", "label": "Iterative reconstruction"}, {"id": "d", "label": "Lower patient dose"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: Larmor frequency equals the gyromagnetic ratio times field strength. Hydrogen is 42.58 megahertz per tesla, near 63.9 megahertz at 1.5 tesla and near 127.7 at 3 tesla. Spectroscopy places N acetylaspartate at 2.0, creatine at 3.0 and choline at 3.2. Time of flight angiography needs no gadolinium. Volume CT dose index times scan length gives dose length product.",
+   "say": "High-yield for the exam: Larmor frequency equals the gyromagnetic ratio times field strength. Hydrogen is 42.58 megahertz per tesla, near 63.9 megahertz at 1.5 tesla and near 127.7 at 3 tesla. Spectroscopy places N acetylaspartate at 2.0, creatine at 3.0 and choline at 3.2. Time of flight angiography needs no gadolinium. Volume CT dose index times scan length gives dose length product.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "1.5 tesla",
+      "About 63.9 megahertz"
+     ],
+     [
+      "3 tesla",
+      "About 127.7 megahertz"
+     ],
+     [
+      "NAA peak",
+      "2.0 parts per million"
+     ],
+     [
+      "Choline peak",
+      "3.2 parts per million"
+     ],
+     [
+      "Hunters angle",
+      "About 45 degrees normally"
+     ],
+     [
+      "Time of flight",
+      "No contrast, fresh blood bright"
+     ],
+     [
+      "Phase contrast veins",
+      "Encoding near 20 cm per second"
+     ],
+     [
+      "Head effective dose",
+      "Near 2 millisieverts"
+     ]
+    ]
+   }
   }
  ]
 }
