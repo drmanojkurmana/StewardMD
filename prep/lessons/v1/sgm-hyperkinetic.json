@@ -1,0 +1,292 @@
+{
+ "v": 1,
+ "module": "sgm-hyperkinetic",
+ "subject": "ss-general-medicine",
+ "title": "Hyperkinetic movement disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hyperkinetic movement disorders** are involuntary movements from basal ganglia dysfunction. **Chorea** is irregular dance like movements with no pattern. **Ballism** is violent flinging of limbs from subthalamic injury. **Myoclonus** is brief shock like jerks from cortex or brainstem. Basal ganglia dysfunction drives all these patterns together.",
+   "say": "Hyperkinetic movement disorders are involuntary movements from basal ganglia dysfunction. Chorea is irregular dance like movement with no pattern. Ballism is violent flinging of limbs from subthalamic injury. Myoclonus is brief shock like jerks from cortex or brainstem.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chorea",
+     "points": [
+      "Irregular dance like flows",
+      "No fixed pattern",
+      "Motor impersistence seen"
+     ]
+    },
+    "right": {
+     "title": "Ballism",
+     "points": [
+      "Violent flinging limbs",
+      "Subthalamic injury",
+      "Usually one sided",
+      "EMG burst pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sydenham chorea** follows streptococcal infection in children. **Huntington disease** is autosomal dominant with anticipation. **Wilson disease** causes chorea with hepatic dysfunction. **Thyroid disease** produces tremor rather than chorea. Family history with three generation pedigree should be sought in these patients.",
+   "say": "Sydenham chorea follows streptococcal infection in children. Huntington disease is autosomal dominant with anticipation for family history. Wilson disease causes chorea with hepatic dysfunction for liver involvement. Thyroid disease produces tremor rather than chorea for differential pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Sydenham chorea",
+      "Childhood chorea",
+      "Post streptococcal"
+     ],
+     [
+      "Huntington disease",
+      "Adult chorea",
+      "Family history"
+     ],
+     [
+      "Wilson disease",
+      "Chorea with liver disease",
+      "Kayser Fleischer ring"
+     ],
+     [
+      "Henoch Schonlein purpura",
+      "Chorea with purpura",
+      "Skin and kidney signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dopamine** excess drives chorea through striatal hyperactivity. **Dopamine depletion** produces parkinsonism rather than chorea. **VMAT2 inhibition** reduces monoamine vesicular storage. **Levodopa** loading worsens chorea in sensitive patients. Striatal hyperactivity explains why dopamine blockers help in many patients with chorea control.",
+   "say": "Dopamine excess is the driver of chorea through striatal hyperactivity with movement disorder. Dopamine depletion produces parkinsonism rather than chorea for differential pattern. VMAT2 inhibition reduces monoamine vesicular storage for chorea control. Levodopa loading worsens chorea in sensitive patients with dopamine sensitivity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Striatal hyperactivity"
+     },
+     {
+      "id": "b",
+      "label": "Dopamine excess effect"
+     },
+     {
+      "id": "c",
+      "label": "Chorea emerges"
+     },
+     {
+      "id": "d",
+      "label": "VMAT2 blockade helps"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dance like movements** involve face and limbs together. **Motor impersistence** is milkmaid grip with finger movements. **Hypotonia** accompanies chorea in many patients. **Emotional lability** is common in Sydenham chorea. Milkmaid grip is the classic sign in these patients with Sydenham chorea.",
+   "say": "Dance like movement involves face and limbs together with choreic pattern. Motor impersistence is milkmaid grip with finger movement for classic chorea sign. Hypotonia is present with chorea in many patients with central involvement. Emotional lability is common in Sydenham chorea with behavioral disturbance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Description",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Milkmaid grip",
+      "Finger movements",
+      "Sydenham chorea"
+     ],
+     [
+      "Ballism",
+      "Violent flinging",
+      "Subthalamic lesion"
+     ],
+     [
+      "Tics",
+      "Suppressible urges",
+      "Tourette syndrome"
+     ],
+     [
+      "Myoclonus",
+      "Shock like jerks",
+      "Cortical origin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Copper studies** diagnose Wilson disease with low ceruloplasmin. **Slit lamp examination** shows Kayser Fleischer ring. **Huntington gene testing** confirms Huntington disease. **MRI** shows caudate atrophy in Huntington disease. Genetic counselling should follow gene testing in these patients for affected families.",
+   "say": "Copper studies diagnose Wilson disease with low ceruloplasmin for Wilson evaluation. Slit lamp examination is used to show Kayser Fleischer ring for Wilson confirmation. Huntington gene testing confirms Huntington disease for genetic diagnosis. MRI is used to show caudate atrophy in Huntington disease for structural assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chorea presentation"
+     },
+     {
+      "id": "b",
+      "label": "Copper and slit lamp"
+     },
+     {
+      "id": "c",
+      "label": "Gene testing done"
+     },
+     {
+      "id": "d",
+      "label": "MRI atrophy seen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tetrabenazine** is the first line drug for chorea. **Valbenazine** with **deutetrabenazine** block VMAT2. **Prochlorperazine** is an alternative dopamine blocker. **Clozapine** suits psychosis with chorea in many patients. Depression screening should accompany tetrabenazine use in these patients during ongoing therapy today.",
+   "say": "Tetrabenazine is the first line drug for chorea with VMAT2 blockade. Valbenazine with deutetrabenazine block VMAT2 for chorea control. Prochlorperazine is the alternative dopamine blocker for chorea management. Clozapine suits psychosis with chorea in many patients for combined illness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Tetrabenazine",
+      "VMAT2 inhibition",
+      "First line for chorea"
+     ],
+     [
+      "Valbenazine",
+      "VMAT2 inhibition",
+      "Tardive dyskinesia option"
+     ],
+     [
+      "Prochlorperazine",
+      "D2 blockade",
+      "Alternative option"
+     ],
+     [
+      "Clozapine",
+      "Multireceptor block",
+      "Psychosis with chorea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Penicillamine** chelates copper in Wilson disease. **Trientine** is the alternative chelator for Wilson. **Levodopa** avoidance prevents chorea worsening in many patients. **Propranolol** helps tremor with performance anxiety. Lifelong copper chelation is advised in these patients for control and prevention today.",
+   "say": "Penicillamine chelates copper in Wilson disease for copper control. Trientine is the alternative chelator for Wilson disease for intolerant patients. Levodopa avoidance prevents chorea worsening in many patients for chorea protection. Propranolol helps tremor with performance anxiety for tremor control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wilson chelation",
+     "points": [
+      "Penicillamine first agent",
+      "Trientine alternative",
+      "Lifelong copper control",
+      "Family screening needed"
+     ]
+    },
+    "right": {
+     "title": "Chorea control",
+     "points": [
+      "Tetrabenazine first line",
+      "Valbenazine option",
+      "D2 blockers alternative",
+      "Levodopa worsens chorea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Depression** complicates Huntington disease in many patients. **Dysphagia** complicates Huntington disease with aspiration. **Weight loss** progresses in Huntington disease over time. **Psychosis** accompanies Huntington disease in many patients. Multidisciplinary care should address these complications in these patients during follow-up care today.",
+   "say": "Depression complicates Huntington disease in many patients with mood disturbance. Dysphagia complicates Huntington disease with aspiration for swallowing disorder. Weight loss is progressive in Huntington disease over time for nutritional decline. Psychosis is present with Huntington disease in many patients with psychotic features.",
+   "vis": null
+  },
+  {
+   "tx": "**Modifiable triggers** include stress and fatigue in many patients. **Tics** suppress briefly with distraction in many patients. **Myoclonus** worsens with action and startle. **Chorea** worsens with anxiety and improves with sleep. Sleep improvement often reduces chorea in these patients during daily practice.",
+   "say": "Modifiable triggers are stress and fatigue in many patients for pattern awareness. Tics are suppressible with distraction in many patients for tic assessment. Myoclonus worsens with action and startle for cortical pattern. Chorea worsens with anxiety and improves with sleep for fluctuation pattern.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** amplifies chorea in Sydenham chorea. **Antibiotic prophylaxis** prevents Sydenham recurrence in many guidelines. **Family counselling** is advised in Huntington disease. **Genetic counselling** is advised in Huntington disease families. Recurrence prevention is advised in these patients for control and prevention.",
+   "say": "Pregnancy is the exacerbating factor for chorea in Sydenham chorea for exacerbation risk. Antibiotic prophylaxis prevents Sydenham recurrence in many guidelines for recurrence control. Family counselling is advised in Huntington disease for family support. Genetic counselling is advised in Huntington disease families for risk discussion.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on hyperkinetic disorders. Remember tetrabenazine for chorea, penicillamine for Wilson disease and Huntington huntingtin gene as the marker. Valbenazine blocks VMAT2 with tetrabenazine as the comparator. Sydenham chorea follows streptococcal infection in children.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Tetrabenazine is the first line drug for chorea. Penicillamine is the chelator for Wilson disease. Huntington gene testing confirms Huntington disease. Sydenham chorea follows streptococcal infection in children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "First line for chorea",
+      "Tetrabenazine blocks VMAT2"
+     ],
+     [
+      "Wilson chelation",
+      "Penicillamine chelates copper"
+     ],
+     [
+      "Huntington marker",
+      "Huntingtin gene testing confirms"
+     ],
+     [
+      "Sydenham clue",
+      "Post streptococcal chorea"
+     ],
+     [
+      "VMAT2 comparator",
+      "Valbenazine blocks VMAT2"
+     ],
+     [
+      "Worsening drug",
+      "Levodopa worsens chorea"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
