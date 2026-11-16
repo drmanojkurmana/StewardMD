@@ -13,12 +13,27 @@
    "say": "Resident, literate, community-chosen: one per thousand villagers since 2005. She activates health behaviour as a volunteer earning performance incentives, never a salaried employee. That status distinction fills examination stems.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Design"],
+    "cols": [
+     "Feature",
+     "Design"
+    ],
     "rows": [
-     ["Population norm", "About 1 per 1000 rural population"],
-     ["Selection", "Community through panchayat process"],
-     ["Employment status", "Voluntary activist, incentive paid"],
-     ["Residence", "Must live in the village served"]
+     [
+      "Population norm",
+      "About 1 per 1000 rural population"
+     ],
+     [
+      "Selection",
+      "Community through panchayat process"
+     ],
+     [
+      "Employment status",
+      "Voluntary activist, incentive paid"
+     ],
+     [
+      "Residence",
+      "Must live in the village served"
+     ]
     ]
    }
   },
@@ -28,12 +43,27 @@
    "say": "Three hats, one woman. Activist raising demand, facilitator escorting to facilities, first-contact provider from her drug kit. Compare her with ANM and Anganwadi worker whenever stems blur the boundaries.",
    "vis": {
     "kind": "table",
-    "cols": ["Worker", "Core identity"],
+    "cols": [
+     "Worker",
+     "Core identity"
+    ],
     "rows": [
-     ["ASHA", "Activist and link worker, village resident"],
-     ["ANM / CHO", "Clinical service provider at sub-centre or HWC"],
-     ["Anganwadi worker", "Nutrition and preschool, ICDS"],
-     ["MPW male", "Surveillance and vector duties historically"]
+     [
+      "ASHA",
+      "Activist and link worker, village resident"
+     ],
+     [
+      "ANM / CHO",
+      "Clinical service provider at sub-centre or HWC"
+     ],
+     [
+      "Anganwadi worker",
+      "Nutrition and preschool, ICDS"
+     ],
+     [
+      "MPW male",
+      "Surveillance and vector duties historically"
+     ]
     ]
    }
   },
@@ -55,12 +85,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Activity performed and recorded"},
-     {"id": "b", "label": "Monthly format compiled"},
-     {"id": "c", "label": "Verification at facility level"},
-     {"id": "d", "label": "Incentive paid to ASHA"}
+     {
+      "id": "a",
+      "label": "Activity performed and recorded"
+     },
+     {
+      "id": "b",
+      "label": "Monthly format compiled"
+     },
+     {
+      "id": "c",
+      "label": "Verification at facility level"
+     },
+     {
+      "id": "d",
+      "label": "Incentive paid to ASHA"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -69,12 +124,27 @@
    "say": "Visits give her a calendar: days one through forty two for newborns, denser for small babies, extending into the second year. Longitudinal caregiving replaces campaign mobilisation as her core identity.",
    "vis": {
     "kind": "table",
-    "cols": ["Visit window", "Checks"],
+    "cols": [
+     "Visit window",
+     "Checks"
+    ],
     "rows": [
-     ["Days 1, 3, 7", "Temperature, feeding, cord, danger signs"],
-     ["Days 14, 21, 28, 42", "Weight, feeding, immunisation linkage"],
-     ["Low birth weight", "Extra visits added"],
-     ["Months 3 to 24 (HBYC)", "Nutrition, development, illness care"]
+     [
+      "Days 1, 3, 7",
+      "Temperature, feeding, cord, danger signs"
+     ],
+     [
+      "Days 14, 21, 28, 42",
+      "Weight, feeding, immunisation linkage"
+     ],
+     [
+      "Low birth weight",
+      "Extra visits added"
+     ],
+     [
+      "Months 3 to 24 (HBYC)",
+      "Nutrition, development, illness care"
+     ]
     ]
    }
   },
@@ -97,11 +167,19 @@
     "kind": "compare",
     "left": {
      "title": "ASHA brings",
-     "points": ["Beneficiary lists by name", "Mobilisation and escort", "Follow-up of the absent"]
+     "points": [
+      "Beneficiary lists by name",
+      "Mobilisation and escort",
+      "Follow-up of the absent"
+     ]
     },
     "right": {
      "title": "System brings",
-     "points": ["ANM and CHO clinical services", "Vaccines, supplies, records", "Anganwadi nutrition platform"]
+     "points": [
+      "ANM and CHO clinical services",
+      "Vaccines, supplies, records",
+      "Anganwadi nutrition platform"
+     ]
     }
    }
   },
@@ -112,12 +190,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Household CBAC scored by ASHA"},
-     {"id": "b", "label": "High-risk adults listed"},
-     {"id": "c", "label": "Screening at HWC completed"},
-     {"id": "d", "label": "Follow-up and medicine adherence visits"}
+     {
+      "id": "a",
+      "label": "Household CBAC scored by ASHA"
+     },
+     {
+      "id": "b",
+      "label": "High-risk adults listed"
+     },
+     {
+      "id": "c",
+      "label": "Screening at HWC completed"
+     },
+     {
+      "id": "d",
+      "label": "Follow-up and medicine adherence visits"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -126,12 +229,27 @@
    "say": "Support decides performance. Facilitators per twenty workers, modular training in rounds, accompanied home visits as real supervision. Meeting counts flatter reports; accompanied visits change practice.",
    "vis": {
     "kind": "table",
-    "cols": ["Support element", "Design"],
+    "cols": [
+     "Support element",
+     "Design"
+    ],
     "rows": [
-     ["ASHA facilitator", "About 1 per 20 ASHAs"],
-     ["Training", "Induction plus modular rounds"],
-     ["Supervision", "Accompanied visits, review meetings"],
-     ["Kit and tools", "Drug kit, HBNC kit, registers, phone support"]
+     [
+      "ASHA facilitator",
+      "About 1 per 20 ASHAs"
+     ],
+     [
+      "Training",
+      "Induction plus modular rounds"
+     ],
+     [
+      "Supervision",
+      "Accompanied visits, review meetings"
+     ],
+     [
+      "Kit and tools",
+      "Drug kit, HBNC kit, registers, phone support"
+     ]
     ]
    }
   },
@@ -143,11 +261,19 @@
     "kind": "compare",
     "left": {
      "title": "Strongest evidence",
-     "points": ["Institutional delivery rise", "Immunisation session turnout", "Newborn home visit coverage"]
+     "points": [
+      "Institutional delivery rise",
+      "Immunisation session turnout",
+      "Newborn home visit coverage"
+     ]
     },
     "right": {
      "title": "Persistent strains",
-     "points": ["Incentive delays", "Task overload across programmes", "Variable state supervision quality"]
+     "points": [
+      "Incentive delays",
+      "Task overload across programmes",
+      "Variable state supervision quality"
+     ]
     }
    }
   },
@@ -157,12 +283,77 @@
    "say": "Employer and instrument separate the trio. Mission incentives, departmental clinical service, ICDS nutrition. The community health officer leads the wellness centre team above them in current design.",
    "vis": {
     "kind": "table",
-    "cols": ["Cadre", "Employer logic", "Signature tool"],
+    "cols": [
+     "Cadre",
+     "Employer logic",
+     "Signature tool"
+    ],
     "rows": [
-     ["ASHA", "NHM volunteer activist", "Household register, drug kit"],
-     ["ANM", "Health department staff", "Sub-centre clinical services"],
-     ["Anganwadi worker", "ICDS staff", "Growth chart, supplementary food"],
-     ["CHO", "HWC team leader", "Comprehensive primary care package"]
+     [
+      "ASHA",
+      "NHM volunteer activist",
+      "Household register, drug kit"
+     ],
+     [
+      "ANM",
+      "Health department staff",
+      "Sub-centre clinical services"
+     ],
+     [
+      "Anganwadi worker",
+      "ICDS staff",
+      "Growth chart, supplementary food"
+     ],
+     [
+      "CHO",
+      "HWC team leader",
+      "Comprehensive primary care package"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: An ASHA is a resident literate woman chosen by the community, about one per 1000 rural population, working as a voluntary activist paid incentives and never as a salaried employee. Her three roles are activist, facilitator and community provider. Home based newborn care visits fall on days 1, 3, 7, 14, 21, 28 and 42.",
+   "say": "High-yield for the exam: An ASHA is a resident literate woman chosen by the community, about one per 1000 rural population, working as a voluntary activist paid incentives and never as a salaried employee. Her three roles are activist, facilitator and community provider. Home based newborn care visits fall on days 1, 3, 7, 14, 21, 28 and 42.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Population norm",
+      "About one per 1000 rural population"
+     ],
+     [
+      "Employment status",
+      "Voluntary activist paid performance incentives"
+     ],
+     [
+      "Selection route",
+      "Community through panchayat process"
+     ],
+     [
+      "Three roles",
+      "Activist, facilitator, community level provider"
+     ],
+     [
+      "HBNC visit days",
+      "Days 1, 3, 7, 14, 21, 28, 42"
+     ],
+     [
+      "ASHA facilitator ratio",
+      "About one per 20 ASHAs"
+     ],
+     [
+      "VHSND platform",
+      "Monthly day at Anganwadi centre"
+     ],
+     [
+      "NCD triage tool",
+      "Community based assessment checklist scoring"
+     ]
     ]
    }
   }

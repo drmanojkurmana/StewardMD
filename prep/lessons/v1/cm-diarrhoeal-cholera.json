@@ -13,12 +13,27 @@
    "say": "Toxin locks the gut into secretion without destroying it. Painless water pours out, yet oral solution still absorbs. Intact mucosa is why drinking saves cholera patients.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Fact"],
+    "cols": [
+     "Feature",
+     "Fact"
+    ],
     "rows": [
-     ["Organisms", "O1 classical and El Tor, O139"],
-     ["Mechanism", "Toxin driven chloride secretion"],
-     ["Mucosa", "Intact, no invasion"],
-     ["Stool", "Painless, profuse, watery"]
+     [
+      "Organisms",
+      "O1 classical and El Tor, O139"
+     ],
+     [
+      "Mechanism",
+      "Toxin driven chloride secretion"
+     ],
+     [
+      "Mucosa",
+      "Intact, no invasion"
+     ],
+     [
+      "Stool",
+      "Painless, profuse, watery"
+     ]
     ]
    }
   },
@@ -28,12 +43,27 @@
    "say": "Grey rice water with mucus flecks, washerwoman fingers, sunken eyes, yet often no fever and a clear mind. Dehydration signs, not temperature, grade this patient.",
    "vis": {
     "kind": "table",
-    "cols": ["Sign", "Indicates"],
+    "cols": [
+     "Sign",
+     "Indicates"
+    ],
     "rows": [
-     ["Rice water stool", "Peak purging phase"],
-     ["Washerwoman hands", "Severe fluid loss"],
-     ["Sunken eyes, doughy skin", "Dehydration grade"],
-     ["Afebrile, alert early", "Secretory, not invasive, disease"]
+     [
+      "Rice water stool",
+      "Peak purging phase"
+     ],
+     [
+      "Washerwoman hands",
+      "Severe fluid loss"
+     ],
+     [
+      "Sunken eyes, doughy skin",
+      "Dehydration grade"
+     ],
+     [
+      "Afebrile, alert early",
+      "Secretory, not invasive, disease"
+     ]
     ]
    }
   },
@@ -56,11 +86,21 @@
     "kind": "compare",
     "left": {
      "title": "Some dehydration",
-     "points": ["Thirsty, sunken eyes", "Skin pinch slow", "Oral solution in volume", "Observe for worsening"]
+     "points": [
+      "Thirsty, sunken eyes",
+      "Skin pinch slow",
+      "Oral solution in volume",
+      "Observe for worsening"
+     ]
     },
     "right": {
      "title": "Severe dehydration",
-     "points": ["Lethargic, pulse weak", "Skin pinch very slow", "Rapid IV Ringer's lactate", "Oral once drinking resumes"]
+     "points": [
+      "Lethargic, pulse weak",
+      "Skin pinch very slow",
+      "Rapid IV Ringer's lactate",
+      "Oral once drinking resumes"
+     ]
     }
    }
   },
@@ -71,12 +111,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Grade dehydration, weigh patient"},
-     {"id": "b", "label": "Replace calculated deficit"},
-     {"id": "c", "label": "Measure every stool and vomit"},
-     {"id": "d", "label": "Replace losses volume for volume"}
+     {
+      "id": "a",
+      "label": "Grade dehydration, weigh patient"
+     },
+     {
+      "id": "b",
+      "label": "Replace calculated deficit"
+     },
+     {
+      "id": "c",
+      "label": "Measure every stool and vomit"
+     },
+     {
+      "id": "d",
+      "label": "Replace losses volume for volume"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -96,12 +161,27 @@
    "say": "One antibiotic dose shortens purging after fluids are running. Zinc helps children recover. Nothing, repeat nothing, is allowed to delay volume replacement.",
    "vis": {
     "kind": "table",
-    "cols": ["Adjunct", "Role"],
+    "cols": [
+     "Adjunct",
+     "Role"
+    ],
     "rows": [
-     ["Doxycycline single dose", "Shortens purge and shedding"],
-     ["Azithromycin", "Pregnancy, children, resistance"],
-     ["Zinc in children", "Supports mucosal recovery"],
-     ["Antiemetics routine", "Avoid, mask losses"]
+     [
+      "Doxycycline single dose",
+      "Shortens purge and shedding"
+     ],
+     [
+      "Azithromycin",
+      "Pregnancy, children, resistance"
+     ],
+     [
+      "Zinc in children",
+      "Supports mucosal recovery"
+     ],
+     [
+      "Antiemetics routine",
+      "Avoid, mask losses"
+     ]
     ]
    }
   },
@@ -111,12 +191,27 @@
    "say": "El Tor survives in water and hides in carriers, dozens of quiet infections per dramatic case. Water safety and surveillance, not case hunting alone, control it.",
    "vis": {
     "kind": "table",
-    "cols": ["Trait", "El Tor pattern"],
+    "cols": [
+     "Trait",
+     "El Tor pattern"
+    ],
     "rows": [
-     ["Environmental survival", "Prolonged in water"],
-     ["Asymptomatic fraction", "High per severe case"],
-     ["Pandemic", "Seventh, ongoing historically"],
-     ["Control emphasis", "Water, sanitation, surveillance"]
+     [
+      "Environmental survival",
+      "Prolonged in water"
+     ],
+     [
+      "Asymptomatic fraction",
+      "High per severe case"
+     ],
+     [
+      "Pandemic",
+      "Seventh, ongoing historically"
+     ],
+     [
+      "Control emphasis",
+      "Water, sanitation, surveillance"
+     ]
     ]
    }
   },
@@ -127,12 +222,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Alert and confirm first cases"},
-     {"id": "b", "label": "Treatment centre set up"},
-     {"id": "c", "label": "Water chlorination, excreta safety"},
-     {"id": "d", "label": "Daily cases, deaths, fatality review"}
+     {
+      "id": "a",
+      "label": "Alert and confirm first cases"
+     },
+     {
+      "id": "b",
+      "label": "Treatment centre set up"
+     },
+     {
+      "id": "c",
+      "label": "Water chlorination, excreta safety"
+     },
+     {
+      "id": "d",
+      "label": "Daily cases, deaths, fatality review"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,12 +261,27 @@
    "say": "Killed oral vaccine campaigns shield hotspots while infrastructure catches up. Two doses buy time. They never replace chlorination, pipes and latrines.",
    "vis": {
     "kind": "table",
-    "cols": ["Use", "Setting"],
+    "cols": [
+     "Use",
+     "Setting"
+    ],
     "rows": [
-     ["Reactive campaign", "Confirmed outbreak zone"],
-     ["Pre emptive campaign", "Known hotspot, camps"],
-     ["Doses", "Usually two, spaced weeks"],
-     ["Partner measures", "Water and sanitation works"]
+     [
+      "Reactive campaign",
+      "Confirmed outbreak zone"
+     ],
+     [
+      "Pre emptive campaign",
+      "Known hotspot, camps"
+     ],
+     [
+      "Doses",
+      "Usually two, spaced weeks"
+     ],
+     [
+      "Partner measures",
+      "Water and sanitation works"
+     ]
     ]
    }
   },
@@ -156,12 +291,72 @@
    "say": "One suspected case in new territory triggers investigation. Global targets aim to cut deaths ninety percent by 2030 through hotspots, vaccine and water investment.",
    "vis": {
     "kind": "table",
-    "cols": ["Trigger", "Response"],
+    "cols": [
+     "Trigger",
+     "Response"
+    ],
     "rows": [
-     ["Single suspect, new area", "Alert, test, investigate water"],
-     ["Cluster in known hotspot", "Activate outbreak playbook"],
-     ["Fatality above 1 percent", "Audit access and fluids"],
-     ["Season approaching", "Hotspot vaccine and WASH review"]
+     [
+      "Single suspect, new area",
+      "Alert, test, investigate water"
+     ],
+     [
+      "Cluster in known hotspot",
+      "Activate outbreak playbook"
+     ],
+     [
+      "Fatality above 1 percent",
+      "Audit access and fluids"
+     ],
+     [
+      "Season approaching",
+      "Hotspot vaccine and WASH review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Cholera causes painless profuse rice water stools from Vibrio cholerae O1 and O139 toxin, with intact mucosa so oral rehydration still works. Grade dehydration by eyes, thirst, skin pinch and pulse, and give rapid intravenous Ringer lactate in severe cases. Replace ongoing stool losses volume for volume, add single dose doxycycline only after fluids, and treat case fatality above one percent as failed access.",
+   "say": "High-yield for the exam: Cholera causes painless profuse rice water stools from Vibrio cholerae O1 and O139 toxin, with intact mucosa so oral rehydration still works. Grade dehydration by eyes, thirst, skin pinch and pulse, and give rapid intravenous Ringer lactate in severe cases. Replace ongoing stool losses volume for volume, add single dose doxycycline only after fluids, and treat case fatality above one percent as failed access.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Causative organisms",
+      "Vibrio cholerae O1 and O139 toxin producers"
+     ],
+     [
+      "Classic stool",
+      "Painless profuse rice water stool with mucus flecks"
+     ],
+     [
+      "Dehydration clue",
+      "Washerwoman hands, sunken eyes, doughy skin"
+     ],
+     [
+      "Severe case first fluid",
+      "Rapid intravenous Ringer lactate, then oral solution"
+     ],
+     [
+      "Fluid trap",
+      "Replace every measured stool loss volume for volume"
+     ],
+     [
+      "Antibiotic role",
+      "Single dose doxycycline shortens purging after fluids"
+     ],
+     [
+      "El Tor trait",
+      "Seventh pandemic, many mild or asymptomatic infections"
+     ],
+     [
+      "Outbreak warning sign",
+      "Case fatality above one percent means response failure"
+     ]
     ]
    }
   }

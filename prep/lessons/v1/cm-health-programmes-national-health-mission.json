@@ -13,12 +13,27 @@
    "say": "Two thousand five reset rural care. Community workers, untied money, facility committees, district plans, flexible pools. Eight years later the urban mission folded it into one National Health Mission.",
    "vis": {
     "kind": "table",
-    "cols": ["Shift", "Instrument"],
+    "cols": [
+     "Shift",
+     "Instrument"
+    ],
     "rows": [
-     ["Community worker", "ASHA per 1000 population"],
-     ["Facility autonomy", "Untied funds, maintenance grants"],
-     ["Governance", "Rogi Kalyan Samiti committees"],
-     ["Planning", "District health action plans"]
+     [
+      "Community worker",
+      "ASHA per 1000 population"
+     ],
+     [
+      "Facility autonomy",
+      "Untied funds, maintenance grants"
+     ],
+     [
+      "Governance",
+      "Rogi Kalyan Samiti committees"
+     ],
+     [
+      "Planning",
+      "District health action plans"
+     ]
     ]
    }
   },
@@ -29,12 +44,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "District and state PIP drafted"},
-     {"id": "b", "label": "National appraisal and approval"},
-     {"id": "c", "label": "Flexible pools released"},
-     {"id": "d", "label": "Expenditure against outcomes audited"}
+     {
+      "id": "a",
+      "label": "District and state PIP drafted"
+     },
+     {
+      "id": "b",
+      "label": "National appraisal and approval"
+     },
+     {
+      "id": "c",
+      "label": "Flexible pools released"
+     },
+     {
+      "id": "d",
+      "label": "Expenditure against outcomes audited"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -43,12 +83,27 @@
    "say": "Cities arrived late to the mission. Urban PHCs per fifty thousand, slum lists by name, outreach to pavement and migrant populations. Municipal patchwork gained a national floor in 2013.",
    "vis": {
     "kind": "table",
-    "cols": ["Urban element", "Design"],
+    "cols": [
+     "Urban element",
+     "Design"
+    ],
     "rows": [
-     ["Urban PHC", "About 1 per 50000 population"],
-     ["Urban HWC", "Comprehensive primary care in wards"],
-     ["Outreach", "Slum and vulnerable population sessions"],
-     ["Mahila Arogya Samiti", "Women's community groups in slums"]
+     [
+      "Urban PHC",
+      "About 1 per 50000 population"
+     ],
+     [
+      "Urban HWC",
+      "Comprehensive primary care in wards"
+     ],
+     [
+      "Outreach",
+      "Slum and vulnerable population sessions"
+     ],
+     [
+      "Mahila Arogya Samiti",
+      "Women's community groups in slums"
+     ]
     ]
    }
   },
@@ -71,11 +126,19 @@
     "kind": "compare",
     "left": {
      "title": "Voice mechanisms",
-     "points": ["VHSNC with untied grant", "Community monitoring report cards", "Public hearings historically piloted"]
+     "points": [
+      "VHSNC with untied grant",
+      "Community monitoring report cards",
+      "Public hearings historically piloted"
+     ]
     },
     "right": {
      "title": "Money mechanisms",
-     "points": ["Facility untied funds", "RKS spending authority", "ASHA performance incentives"]
+     "points": [
+      "Facility untied funds",
+      "RKS spending authority",
+      "ASHA performance incentives"
+     ]
     }
    }
   },
@@ -85,12 +148,27 @@
    "say": "Traditional systems entered the campus. Co-located AYUSH widened choice and filled gaps, later gaining its own ministry and wellness roles. The mission reformed systems, not single diseases.",
    "vis": {
     "kind": "table",
-    "cols": ["Reform strand", "Example"],
+    "cols": [
+     "Reform strand",
+     "Example"
+    ],
     "rows": [
-     ["Human resources", "Contractual hiring, AYUSH co-location"],
-     ["Infrastructure", "IPHS upgrading drives"],
-     ["Drugs and logistics", "Free drug and diagnostic initiatives in states"],
-     ["Governance", "Societies replacing departmental rigidity"]
+     [
+      "Human resources",
+      "Contractual hiring, AYUSH co-location"
+     ],
+     [
+      "Infrastructure",
+      "IPHS upgrading drives"
+     ],
+     [
+      "Drugs and logistics",
+      "Free drug and diagnostic initiatives in states"
+     ],
+     [
+      "Governance",
+      "Societies replacing departmental rigidity"
+     ]
     ]
    }
   },
@@ -101,24 +179,49 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Centre releases to state society"},
-     {"id": "b", "label": "District society allocates by PIP"},
-     {"id": "c", "label": "Facilities and staff paid flexibly"},
-     {"id": "d", "label": "Utilisation certificates return upward"}
+     {
+      "id": "a",
+      "label": "Centre releases to state society"
+     },
+     {
+      "id": "b",
+      "label": "District society allocates by PIP"
+     },
+     {
+      "id": "c",
+      "label": "Facilities and staff paid flexibly"
+     },
+     {
+      "id": "d",
+      "label": "Utilisation certificates return upward"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
-    "tx": "A public pharmacy counter hands out essential medicines without a charge, and a stock board shows what is actually on the shelf. **Registered health societies**, formed for each state and each district, take mission money outside slow treasury routes and can hire contractual staff on flexible terms. That speed is what keeps a free drug window supplied between programme cycles. Auditors still question that speed, and whether contractual posts become permanent jobs is a governance debate in many states.",
-    "say": "A public pharmacy counter hands out essential medicines without a charge, and a stock board shows what is actually on the shelf. Registered health societies, formed for each state and each district, take mission money outside slow treasury routes and can hire contractual staff on flexible terms. That speed is what keeps a free drug window supplied between programme cycles. Auditors still question that speed, and whether contractual posts become permanent jobs is a governance debate in many states.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n459-cm-health-programmes-national-health-mission.webp",
-      "alt": "Public pharmacy counter giving free essential drugs beneath a stock display board",
-      "caption": "A public pharmacy dispenses free essential medicines while a board displays what is currently in stock. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "A public pharmacy counter hands out essential medicines without a charge, and a stock board shows what is actually on the shelf. **Registered health societies**, formed for each state and each district, take mission money outside slow treasury routes and can hire contractual staff on flexible terms. That speed is what keeps a free drug window supplied between programme cycles. Auditors still question that speed, and whether contractual posts become permanent jobs is a governance debate in many states.",
+   "say": "A public pharmacy counter hands out essential medicines without a charge, and a stock board shows what is actually on the shelf. Registered health societies, formed for each state and each district, take mission money outside slow treasury routes and can hire contractual staff on flexible terms. That speed is what keeps a free drug window supplied between programme cycles. Auditors still question that speed, and whether contractual posts become permanent jobs is a governance debate in many states.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n459-cm-health-programmes-national-health-mission.webp",
+    "alt": "Public pharmacy counter giving free essential drugs beneath a stock display board",
+    "caption": "A public pharmacy dispenses free essential medicines while a board displays what is currently in stock. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Free drugs and diagnostics: the FIFTH promise",
@@ -126,11 +229,23 @@
    "say": "Free medicines attack the commonest bill. Essential drug and diagnostic guarantees under the mission target out-of-pocket spending directly. Pooled procurement and prescription audits decide if promises survive budgets.",
    "vis": {
     "kind": "table",
-    "cols": ["Promise", "Failure mode audited"],
+    "cols": [
+     "Promise",
+     "Failure mode audited"
+    ],
     "rows": [
-     ["Free essential drugs", "Stock-outs pushing outside purchase"],
-     ["Free diagnostics", "Machine downtime, reagent gaps"],
-     ["Free dialysis (many states)", "Session capacity versus demand"]
+     [
+      "Free essential drugs",
+      "Stock-outs pushing outside purchase"
+     ],
+     [
+      "Free diagnostics",
+      "Machine downtime, reagent gaps"
+     ],
+     [
+      "Free dialysis (many states)",
+      "Session capacity versus demand"
+     ]
     ]
    }
   },
@@ -142,11 +257,19 @@
     "kind": "compare",
     "left": {
      "title": "Credited gains",
-     "points": ["Institutional delivery transformation", "Workforce and infrastructure growth", "Mortality decline acceleration"]
+     "points": [
+      "Institutional delivery transformation",
+      "Workforce and infrastructure growth",
+      "Mortality decline acceleration"
+     ]
     },
     "right": {
      "title": "Standing criticisms",
-     "points": ["Specialist vacancies persist", "Out-of-pocket spending stubborn", "Quality and urban care lag"]
+     "points": [
+      "Specialist vacancies persist",
+      "Out-of-pocket spending stubborn",
+      "Quality and urban care lag"
+     ]
     }
    }
   },
@@ -156,10 +279,67 @@
    "say": "The mission hosts one arm, an authority the other. Wellness centres upgrade mission facilities with mission staff; hospitalisation assurance purchases care through a separate authority. Supply versus purchasing is the clean distinction.",
    "vis": {
     "kind": "table",
-    "cols": ["Arm", "Runs through", "Buys or builds"],
+    "cols": [
+     "Arm",
+     "Runs through",
+     "Buys or builds"
+    ],
     "rows": [
-     ["Wellness centres (AAM)", "NHM and states", "Builds public primary care"],
-     ["PM-JAY assurance", "National Health Authority", "Purchases hospitalisation care"]
+     [
+      "Wellness centres (AAM)",
+      "NHM and states",
+      "Builds public primary care"
+     ],
+     [
+      "PM-JAY assurance",
+      "National Health Authority",
+      "Purchases hospitalisation care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: NRHM began in 2005 as a rural systems reform and became NHM in 2013 after NUHM joined. NUHM covers statutory towns above 50000 people with one urban PHC for about 50000 population. Flexible pools flow against approved PIPs through registered state and district societies. Wellness centres build public primary care while PM-JAY purchases hospitalisation care.",
+   "say": "High-yield for the exam: NRHM began in 2005 as a rural systems reform and became NHM in 2013 after NUHM joined. NUHM covers statutory towns above 50000 people with one urban PHC for about 50000 population. Flexible pools flow against approved PIPs through registered state and district societies. Wellness centres build public primary care while PM-JAY purchases hospitalisation care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "NRHM launch year",
+      "2005 rural systems reform mission"
+     ],
+     [
+      "NHM formation",
+      "2013 with urban sub mission added"
+     ],
+     [
+      "NUHM coverage",
+      "Statutory towns above 50000 population"
+     ],
+     [
+      "Urban PHC norm",
+      "About one per 50000 population"
+     ],
+     [
+      "ASHA population norm",
+      "One per 1000 rural population"
+     ],
+     [
+      "Financing route",
+      "Flexible pools against approved PIPs"
+     ],
+     [
+      "Funds holder",
+      "Registered state and district societies"
+     ],
+     [
+      "Ayushman Bharat split",
+      "Wellness centres build; PM-JAY purchases care"
+     ]
     ]
    }
   }
