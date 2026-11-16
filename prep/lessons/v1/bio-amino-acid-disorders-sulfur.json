@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Homocysteine crossroads",
     "nodes": [
-     {"id": "met", "label": "Methionine (via SAM)"},
-     {"id": "hcy", "label": "Homocysteine"},
-     {"id": "rem", "label": "Remethylate (folate, B12)"},
-     {"id": "cys", "label": "Transsulfurate to cysteine (B6)"}
+     {
+      "id": "met",
+      "label": "Methionine (via SAM)"
+     },
+     {
+      "id": "hcy",
+      "label": "Homocysteine"
+     },
+     {
+      "id": "rem",
+      "label": "Remethylate (folate, B12)"
+     },
+     {
+      "id": "cys",
+      "label": "Transsulfurate to cysteine (B6)"
+     }
     ],
-    "edges": [["met", "hcy"], ["hcy", "rem"], ["hcy", "cys"]]
+    "edges": [
+     [
+      "met",
+      "hcy"
+     ],
+     [
+      "hcy",
+      "rem"
+     ],
+     [
+      "hcy",
+      "cys"
+     ]
+    ]
    }
   },
   {
@@ -25,8 +50,21 @@
    "say": "Classic homocystinuria dislocates the lens downward, unlike Marfan upward. Tall habitus, intellectual disability and premature thrombosis complete four systems. Lens direction separates the two syndromes reliably.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Homocystinuria (CBS absent)", "points": ["Lens DOWN and in", "Thrombosis prominent", "Methionine high, diet treats"]},
-    "right": {"title": "Marfan syndrome (fibrillin)", "points": ["Lens UP and out", "Aortic root dilation prominent", "Methionine normal"]
+    "left": {
+     "title": "Homocystinuria (CBS absent)",
+     "points": [
+      "Lens DOWN and in",
+      "Thrombosis prominent",
+      "Methionine high, diet treats"
+     ]
+    },
+    "right": {
+     "title": "Marfan syndrome (fibrillin)",
+     "points": [
+      "Lens UP and out",
+      "Aortic root dilation prominent",
+      "Methionine normal"
+     ]
     }
    }
   },
@@ -35,12 +73,27 @@
    "say": "About half respond to pyridoxine before committing to low methionine diet with betaine support. Thrombosis precautions and multi system surveillance structure follow up as tightly as amino acid levels.",
    "vis": {
     "kind": "table",
-    "cols": ["Test result", "Interpretation"],
+    "cols": [
+     "Test result",
+     "Interpretation"
+    ],
     "rows": [
-     ["Homocysteine high, methionine high", "Transsulfuration block (CBS)"],
-     ["Homocysteine high, methionine low/normal", "Remethylation block (folate, B12, MTHFR axis)"],
-     ["Homocysteine mildly high, vitamins low", "Nutritional, correct and recheck"],
-     ["Cystine stones, COLA amino acids in urine", "Cystinuria transporter, different disease"]
+     [
+      "Homocysteine high, methionine high",
+      "Transsulfuration block (CBS)"
+     ],
+     [
+      "Homocysteine high, methionine low/normal",
+      "Remethylation block (folate, B12, MTHFR axis)"
+     ],
+     [
+      "Homocysteine mildly high, vitamins low",
+      "Nutritional, correct and recheck"
+     ],
+     [
+      "Cystine stones, COLA amino acids in urine",
+      "Cystinuria transporter, different disease"
+     ]
     ]
    }
   },
@@ -54,12 +107,27 @@
    "say": "Prevention needs volumes above three litres including overnight, alkalinisation above pH seven, and thiol chelators for refractory cases. Urology partnership plans procedures, because prevention fails episodically.",
    "vis": {
     "kind": "table",
-    "cols": ["Measure", "Chemistry exploited"],
+    "cols": [
+     "Measure",
+     "Chemistry exploited"
+    ],
     "rows": [
-     ["High urine volume day and night", "Dilutes cystine below precipitation"],
-     ["Potassium citrate alkali", "Cystine solubility rises with pH"],
-     ["Tiopronin thiol exchange", "Soluble mixed disulfides excreted"],
-     ["Sodium and methionine moderation", "Less cystine filtered and excreted"]
+     [
+      "High urine volume day and night",
+      "Dilutes cystine below precipitation"
+     ],
+     [
+      "Potassium citrate alkali",
+      "Cystine solubility rises with pH"
+     ],
+     [
+      "Tiopronin thiol exchange",
+      "Soluble mixed disulfides excreted"
+     ],
+     [
+      "Sodium and methionine moderation",
+      "Less cystine filtered and excreted"
+     ]
     ]
    }
   },
@@ -68,9 +136,67 @@
    "say": "Cystinosis stores cystine inside lysosomes everywhere, causing Fanconi syndrome and photophobia, treated with cysteamine. Same amino acid, opposite compartment and prognosis from cystinuria. Learn the pair once, forever.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Cystinuria (apical transporter)", "points": ["Kidney stones only", "Hexagonal crystals", "Alkali and thiols"]},
-    "right": {"title": "Cystinosis (lysosomal CTNS)", "points": ["Fanconi, cornea, thyroid, muscle", "Crystals in tissues", "Cysteamine depletion"]
+    "left": {
+     "title": "Cystinuria (apical transporter)",
+     "points": [
+      "Kidney stones only",
+      "Hexagonal crystals",
+      "Alkali and thiols"
+     ]
+    },
+    "right": {
+     "title": "Cystinosis (lysosomal CTNS)",
+     "points": [
+      "Fanconi, cornea, thyroid, muscle",
+      "Crystals in tissues",
+      "Cysteamine depletion"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Classical homocystinuria results from cystathionine beta-synthase deficiency, causing severe hyperhomocysteinemia, downward lens subluxation, marfanoid habitus, and premature thromboembolism. Cystinuria involves defective renal proximal tubular reabsorption of dibasic amino acids, presenting with recurrent radiopaque hexagonal cystine calculi identified by the urine cyanide-nitroprusside screening test.",
+   "say": "High-yield for the exam: Classical homocystinuria results from cystathionine beta-synthase deficiency, causing severe hyperhomocysteinemia, downward lens subluxation, marfanoid habitus, and premature thromboembolism. Cystinuria involves defective renal proximal tubular reabsorption of dibasic amino acids, presenting with recurrent radiopaque hexagonal cystine calculi identified by the urine cyanide-nitroprusside screening test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Homocystinuria enzyme defect",
+      "Cystathionine beta-synthase deficiency requiring pyridoxal phosphate vitamin B6 cofactor"
+     ],
+     [
+      "Homocystinuria lens shift",
+      "Ectopia lentis displaced downward and inward, contrasting upward shift in Marfan"
+     ],
+     [
+      "Homocystinuria thrombosis",
+      "Premature arterial and venous thromboembolism is major cause of early mortality"
+     ],
+     [
+      "Cystinuria transport defect",
+      "Impaired apical renal tubular transporter for cystine, ornithine, lysine, arginine"
+     ],
+     [
+      "Cystine stone morphology",
+      "Faintly radiopaque hexagonal flat crystals forming recurrent nephrolithiasis"
+     ],
+     [
+      "Cystinuria screening test",
+      "Sodium cyanide-nitroprusside test produces characteristic purple-red color change"
+     ],
+     [
+      "Cystinuria medical therapy",
+      "Aggressive hydration, urinary alkalinization with potassium citrate, and chelating penicillamine"
+     ],
+     [
+      "Homocystinuria cofactor dose",
+      "High-dose pyridoxine trial; non-responders require dietary methionine restriction and betaine"
+     ]
+    ]
    }
   }
  ],

@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Priming a granule",
     "nodes": [
-     {"id": "g1p", "label": "Glucose-1-phosphate plus UTP"},
-     {"id": "udp", "label": "UDP-glucose donor"},
-     {"id": "gyn", "label": "Glycogenin primer chain"},
-     {"id": "ext", "label": "Synthase extends alpha-1,4"}
+     {
+      "id": "g1p",
+      "label": "Glucose-1-phosphate plus UTP"
+     },
+     {
+      "id": "udp",
+      "label": "UDP-glucose donor"
+     },
+     {
+      "id": "gyn",
+      "label": "Glycogenin primer chain"
+     },
+     {
+      "id": "ext",
+      "label": "Synthase extends alpha-1,4"
+     }
     ],
-    "edges": [["g1p", "udp"], ["udp", "gyn"], ["gyn", "ext"]]
+    "edges": [
+     [
+      "g1p",
+      "udp"
+     ],
+     [
+      "udp",
+      "gyn"
+     ],
+     [
+      "gyn",
+      "ext"
+     ]
+    ]
    }
   },
   {
@@ -25,8 +50,21 @@
    "say": "Glycogen synthase adds glucose in alpha-1,4 linkage and is active when dephosphorylated. Insulin activates it while glucose-6-phosphate activates it allosterically. Glucagon and adrenaline silence it, reciprocally with phosphorylase control.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Synthase ON (fed)", "points": ["Dephosphorylated a form", "Insulin phosphatase signal", "Glucose-6-phosphate allosteric on"]},
-    "right": {"title": "Synthase OFF (fasting, exercise)", "points": ["Phosphorylated b form", "Glucagon or adrenaline kinases", "Storage paused for release"]
+    "left": {
+     "title": "Synthase ON (fed)",
+     "points": [
+      "Dephosphorylated a form",
+      "Insulin phosphatase signal",
+      "Glucose-6-phosphate allosteric on"
+     ]
+    },
+    "right": {
+     "title": "Synthase OFF (fasting, exercise)",
+     "points": [
+      "Phosphorylated b form",
+      "Glucagon or adrenaline kinases",
+      "Storage paused for release"
+     ]
     }
    }
   },
@@ -35,11 +73,27 @@
    "say": "The branching enzyme cuts a short piece and reattaches it in alpha-1,6 linkage, creating a new non reducing end. Branching keeps glycogen soluble and rapidly mobilisable. Without it, Andersen disease injures liver toward childhood cirrhosis.",
    "vis": {
     "kind": "table",
-    "cols": ["Linkage", "Enzyme", "Share and role"],
+    "cols": [
+     "Linkage",
+     "Enzyme",
+     "Share and role"
+    ],
     "rows": [
-     ["Alpha-1,4", "Glycogen synthase", "Bulk chain elongation"],
-     ["Alpha-1,6", "Branching enzyme", "About 8 percent, branch points"],
-     ["Primer bond", "Glycogenin (tyrosine)", "One per granule, starts it all"]
+     [
+      "Alpha-1,4",
+      "Glycogen synthase",
+      "Bulk chain elongation"
+     ],
+     [
+      "Alpha-1,6",
+      "Branching enzyme",
+      "About 8 percent, branch points"
+     ],
+     [
+      "Primer bond",
+      "Glycogenin (tyrosine)",
+      "One per granule, starts it all"
+     ]
     ]
    }
   },
@@ -53,8 +107,21 @@
    "say": "Acid maltase nibbles glycogen inside lysosomes and is irrelevant to normal mobilisation. Its absence in Pompe disease swells lysosomes in heart and muscle while blood glucose stays normal. Compartments prevent the error of expecting hypoglycaemia there.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Cytosolic glycogen system", "points": ["Synthase, phosphorylase, debrancher", "Feeds blood or muscle work", "Defects: von Gierke, McArdle, Cori"]},
-    "right": {"title": "Lysosomal glycogen route", "points": ["Acid maltase only", "Housekeeping, not mobilisation", "Defect: Pompe, glucose normal"]
+    "left": {
+     "title": "Cytosolic glycogen system",
+     "points": [
+      "Synthase, phosphorylase, debrancher",
+      "Feeds blood or muscle work",
+      "Defects: von Gierke, McArdle, Cori"
+     ]
+    },
+    "right": {
+     "title": "Lysosomal glycogen route",
+     "points": [
+      "Acid maltase only",
+      "Housekeeping, not mobilisation",
+      "Defect: Pompe, glucose normal"
+     ]
     }
    }
   },
@@ -63,11 +130,72 @@
    "say": "Phosphorylation switches synthesis and breakdown oppositely through one cascade. In the fed state synthase wakes and phosphorylase sleeps. Type zero disease, with synthase absent, proves necessity: no stores, with fasting hypoglycaemia and ketones.",
    "vis": {
     "kind": "table",
-    "cols": ["State", "Synthase", "Phosphorylase"],
+    "cols": [
+     "State",
+     "Synthase",
+     "Phosphorylase"
+    ],
     "rows": [
-     ["Fed (insulin, phosphatases)", "Dephosphorylated ON", "Dephosphorylated OFF"],
-     ["Fasting liver (glucagon, kinases)", "Phosphorylated OFF", "Phosphorylated ON"],
-     ["Exercising muscle (calcium, AMP)", "OFF", "ON by calcium and AMP"]
+     [
+      "Fed (insulin, phosphatases)",
+      "Dephosphorylated ON",
+      "Dephosphorylated OFF"
+     ],
+     [
+      "Fasting liver (glucagon, kinases)",
+      "Phosphorylated OFF",
+      "Phosphorylated ON"
+     ],
+     [
+      "Exercising muscle (calcium, AMP)",
+      "OFF",
+      "ON by calcium and AMP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Glycogen synthesis requires autoglucosylation of glycogenin to assemble an initial primer chain. UDP-glucose pyrophosphorylase activates glucose-1-phosphate using UTP. Glycogen synthase elongates alpha-1,4-glucosidic bonds as the rate-limiting enzyme, activated when dephosphorylated by insulin-stimulated protein phosphatase-1. The branching enzyme introduces alpha-1,6-glucosidic bonds every 8 to 12 residues; deficiency causes Andersen disease (Type IV) with progressive hepatic cirrhosis.",
+   "say": "High-yield for the exam: Glycogen synthesis requires autoglucosylation of glycogenin to assemble an initial primer chain. UDP-glucose pyrophosphorylase activates glucose-1-phosphate using UTP. Glycogen synthase elongates alpha-1,4-glucosidic bonds as the rate-limiting enzyme, activated when dephosphorylated by insulin-stimulated protein phosphatase-1. The branching enzyme introduces alpha-1,6-glucosidic bonds every 8 to 12 residues; deficiency causes Andersen disease Type IV with progressive hepatic cirrhosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Primer protein core",
+      "Glycogenin autoglucosylates at specific tyrosine residue to prime synthesis"
+     ],
+     [
+      "Active glucose donor",
+      "UDP-glucose synthesized by UDP-glucose pyrophosphorylase from G1P and UTP"
+     ],
+     [
+      "Rate-limiting synthesis enzyme",
+      "Glycogen synthase forming alpha-1,4-glucosidic linkages at non-reducing chain ends"
+     ],
+     [
+      "Covalent control of synthase",
+      "Active in dephosphorylated state (glycogen synthase a); inactive when phosphorylated (b)"
+     ],
+     [
+      "Branching enzyme name",
+      "Amylo-alpha-1,4 to alpha-1,6-transglucosidase introduces branches into linear chains"
+     ],
+     [
+      "Branch spacing distance",
+      "Transfers 6-8 residues, creating alpha-1,6 branches every 8-12 glucosyl units"
+     ],
+     [
+      "Andersen (Type IV) disease",
+      "Branching enzyme deficiency causing long unbranched polyglucosan deposits and fatal cirrhosis"
+     ],
+     [
+      "Phosphorylase kinase trigger",
+      "Activated by calcium binding calmodulin and phosphorylation by protein kinase A"
+     ]
     ]
    }
   }
