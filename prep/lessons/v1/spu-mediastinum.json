@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "spu-mediastinum",
+ "subject": "ss-pulmonology",
+ "title": "Mediastinal masses by compartment with diaphragm disorders and paralysis",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e respiratory and mediastinal chapters", "ITMIS thymoma guidance and WHO 2021 thoracic tumours classification"],
+ "steps": [
+  {
+   "tx": "The **mediastinum** (the space between the lungs holding heart, great vessels and airways) splits into **superior**, **anterior**, **middle** and **posterior** compartments. A mass location narrows the differential sharply on the first chest film. **Four Ts** (thymic, thyroid, teratoma, terrible lymphoma) dominate anterior lesions.",
+   "say": "The mediastinum is the space between the lungs and it splits into superior, anterior, middle and posterior compartments. Location is the first filter before any scan. Anterior masses follow the four Ts rule, thymic, thyroid, teratoma and lymphoma, which is the single most examined shortcut in this topic.",
+   "vis": {"kind": "table", "cols": ["Compartment", "Contents", "Classic masses"], "rows": [["Anterior", "Thymus, anterior pericardium", "Thymoma, lymphoma, teratoma, goitre"], ["Middle", "Nodes, airway bifurcation", "Lymphoma, sarcoid, cystic lesions"], ["Posterior", "Sympathetic chain, vertebrae", "Neurogenic tumours, ganglion lesions"], ["Superior", "Thyroid, thymic tongue", "Goitre, thymoma, nodal disease"]]}
+  },
+  {
+   "tx": "**Thymoma** (epithelial tumour of thymic remnants) is the commonest anterior mass in adults and links with **myasthenia gravis** in about **thirty** to **fifty** percent of cases. It grows silently and can invade pleura and pericardium. **Paraneoplastic** clues include red cell aplasia and Cushing syndrome.",
+   "say": "Thymoma is the commonest adult anterior mediastinal tumour and about a third to a half of patients have myasthenia gravis. It grows slowly and invades pleura and pericardium. Paraneoplastic red cell aplasia and Cushing syndrome are rare but classic exam associations.",
+   "vis": {"kind": "table", "cols": ["Feature", "Thymoma", "Comment"], "rows": [["Age peak", "Forty to sixty years", "Adults, uncommon in children"], ["Myasthenia link", "Thirty to fifty percent", "Test for acetylcholine antibodies"], ["Spread", "Pleural and pericardial", "Stage by Masaoka or TNM"], ["Marker", "None reliable", "Imaging and biopsy decide"]]}
+  },
+  {
+   "tx": "**Hodgkin lymphoma** (Reed Sternberg cell disease) favours the anterior mediastinum in young women as nodular sclerosis type, causing **superior vena cava obstruction** and cough. Germ cell tumours arise from yolk sac elements and secrete **alpha fetoprotein** (AFP) and **beta human chorionic gonadotropin** (beta HCG). Markers separate malignant germ cell tumours from seminoma patterns.",
+   "say": "Hodgkin lymphoma in the anterior mediastinum classically affects young women and blocks the superior vena cava. Germ cell tumours secrete alpha fetoprotein and beta human chorionic gonadotropin, and those markers guide typing and follow up. Marker status guides chemotherapy and surveillance decisions.",
+   "vis": {"kind": "compare", "left": {"title": "Lymphoma", "points": ["Young women, bulky nodes", "SVC obstruction common", "Chemotherapy first line", "Staging by PET CT"]}, "right": {"title": "Germ cell tumour", "points": ["AFP and beta HCG raised", "Young men, testes checked", "Cisplatin based chemotherapy", "Marker guided surveillance"]}}
+  },
+  {
+   "tx": "**Neurogenic tumours** (nerve or ganglia origin) occupy the posterior compartment and include **schwannoma**, **paraganglioma** and ganglion cell tumours. They often grow inside the spinal canal as **dumbbell** lesions. **Horner syndrome** (ptosis, miosis, anhydrosis) and rib erosion point to apical paravertebral lesions.",
+   "say": "Neurogenic tumours live in the posterior mediastinum and dumbbell lesions grow into the spinal canal. Horner syndrome and rib erosion suggest an apical lesion. Magnetic resonance imaging of the spine is mandatory before any resection approach is chosen.",
+   "vis": {"kind": "flow", "nodes": [{"id": "post", "label": "Posterior mass seen"}, {"id": "mri", "label": "MRI spine for dumbbell"}, {"id": "neuro", "label": "Neurosurgery input"}, {"id": "resect", "label": "Planned resection route"}], "edges": [["post", "mri"], ["mri", "neuro"], ["neuro", "resect"]]}
+  },
+  {
+   "tx": "**Superior vena cava syndrome** (facial swelling, distended neck veins, collateral flow) arises from lymphoma, lung cancer and thymic invasion. **Computed tomography** (CT) with contrast is the first test and shows fat planes, vascular encasement and invasion. **Magnetic resonance imaging** (MRI) adds cardiac and chest wall detail when CT is equivocal.",
+   "say": "Superior vena cava syndrome means facial swelling with distended neck veins and collateral flow. Contrast computed tomography is the first investigation and shows encasement and invasion. Magnetic resonance imaging adds cardiac and chest wall detail when the computed tomography answer is unclear.",
+   "vis": {"kind": "flow", "nodes": [{"id": "signs", "label": "SVC syndrome signs"}, {"id": "ct", "label": "Contrast CT chest"}, {"id": "markers", "label": "AFP, beta HCG, LDH"}, {"id": "biopsy", "label": "Biopsy route chosen"}], "edges": [["signs", "ct"], ["ct", "markers"], ["markers", "biopsy"]]}
+  },
+  {
+   "tx": "Tissue diagnosis uses **endobronchial ultrasound** (EBUS) for nodal and central lesions, **image guided core biopsy** for anterior masses and **mediastinoscopy** when smaller samples fail. **Pulmonary function tests** (PFTs) and cardiac assessment precede resection, since post operative ventilation and arrhythmia risk decide fitness. Old fashioned needle aspiration alone rarely suffices for typing.",
+   "say": "Endobronchial ultrasound and image guided core biopsy get tissue for most lesions, and mediastinoscopy backs them up when samples fail. Lung function and cardiac tests decide resectability. Simple needle aspiration alone rarely types these tumours adequately, so core tissue is the standard.",
+   "vis": {"kind": "table", "cols": ["Lesion", "Preferred biopsy", "Why"], "rows": [["Nodal, central", "EBUS guided node sampling", "Safe staging and typing"], ["Anterior mass", "Image guided core biopsy", "Core tissue for margins"], ["Failed samples", "Mediastinoscopy", "Larger nodal tissue"]]}
+  },
+  {
+   "tx": "Resectable **thymoma** and encapsulated **teratoma** suit complete surgical excision after neoadjuvant therapy for invasive disease. **Lymphoma** and malignant **germ cell** tumours receive chemotherapy first and surgery rarely helps. Surgical access uses **video assisted thoracoscopic surgery** (VATS), sternotomy or robotic approaches by compartment.",
+   "say": "Resectable thymoma and teratoma need complete surgical excision, while lymphoma and malignant germ cell tumours get chemotherapy first. Surgery rarely cures lymphoma. The operative route, thoracoscopic, sternotomy or robotic, follows the compartment and the expected invasion.",
+   "vis": {"kind": "compare", "left": {"title": "Surgery first", "points": ["Thymoma, encapsulated teratoma", "Cystic and benign lesions", "Complete excision curative"]}, "right": {"title": "Chemotherapy first", "points": ["Lymphoma", "Malignant germ cell tumour", "Surgery only for residua"]}}
+  },
+  {
+   "tx": "**Diaphragmatic paralysis** (phrenic nerve failure) raises one hemidiaphragm and leaves orthopnoea and basal collapse on that side. **Sniff test** under fluoroscopy shows paradoxical upward motion of the paralysed side during inspiration. **Diaphragmatic eventration** (congenital thinning) mimics paralysis on films but paradoxical motion is absent.",
+   "say": "Diaphragmatic paralysis raises one side and causes orthopnoea with basal collapse. The sniff test under fluoroscopy shows paradoxical upward motion. Eventration looks similar on a static film but the paradoxical motion is missing, so imaging distinguishes them.",
+   "vis": {"kind": "table", "cols": ["Condition", "Chest film", "Sniff test"], "rows": [["Paralysis", "Raised hemidiaphragm", "Paradoxical motion"], ["Eventration", "Raised hemidiaphragm", "Normal motion"], ["Subpulmonic effusion", "Raised apparent diaphragm", "No paradoxical motion"]]}
+  },
+  {
+   "tx": "**Phrenic nerve** injury follows trauma, neck surgery and tumour invasion closely, and bilateral failure causes frank **respiratory failure** with ventilatory dependence in many patients. **Diaphragm plication** (surgical flattening) relieves dyspnoea in symptomatic unilateral paralysis. Electromyography and **phrenic nerve conduction** studies confirm chronic denervation before the operation.",
+   "say": "Phrenic nerve injury follows trauma, neck surgery or tumour invasion, and bilateral failure causes respiratory failure. Plication improves breathlessness and helps symptomatic cases. Nerve conduction studies confirm chronic denervation before the surgeon commits.",
+   "vis": {"kind": "flow", "nodes": [{"id": "raised", "label": "Raised hemidiaphragm"}, {"id": "sniff", "label": "Sniff test paradox"}, {"id": "emg", "label": "Phrenic conduction studies"}, {"id": "plic", "label": "Consider plication"}], "edges": [["raised", "sniff"], ["sniff", "emg"], ["emg", "plic"]]}
+  },
+  {
+   "tx": "High yield for the exam: the compartment rule decides the diagnosis, thymoma links with **myasthenia gravis**, posterior neurogenic tumours risk dumbbell spread, contrast CT comes first, PET CT stages lymphoma, core biopsy beats aspiration, chemotherapy leads for lymphoma, and the **sniff test** separates paralysis from eventration.",
+   "say": "Compartment decides the diagnosis, thymoma links with myasthenia, neurogenic tumours risk dumbbell spread, contrast tomography comes first, positron emission tomography stages lymphoma, core biopsy beats aspiration, chemotherapy leads for lymphoma, and the sniff test separates paralysis from eventration.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["Compartment rule", "Anterior equals four Ts"], ["Thymoma link", "Myasthenia thirty to fifty percent"], ["First test", "Contrast CT chest"], ["Staging", "PET CT for lymphoma"], ["Biopsy", "Core tissue, not aspiration"], ["Diaphragm", "Sniff test paradox"], ["Dumbbell sign", "Posterior neurogenic"], ["SVC syndrome", "Lymphoma, thymic invasion"]]}
+  }
+ ]
+}

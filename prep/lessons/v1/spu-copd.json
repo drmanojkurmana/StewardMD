@@ -1,0 +1,392 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-copd",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e COPD chapter",
+  "GOLD 2025 Global Strategy for COPD"
+ ],
+ "steps": [
+  {
+   "say": "COPD is progressive expiratory airflow limitation after bronchodilator that mixes small airway disease with emphysema. Post bronchodilator spirometry is the diagnostic anchor.",
+   "tx": "**COPD** (chronic obstructive pulmonary disease) is progressive expiratory airflow limitation that persists **after bronchodilator** (post inhaler breathing test), mixing **small airway disease** (inflammation of tiny airways) with **emphysema** (alveolar wall destruction). Diagnosis needs post bronchodilator **FEV1** to FVC ratio below **0.70**, never symptoms or chest imaging alone.",
+   "vis": {
+    "cols": [
+     "Element",
+     "Meaning",
+     "Proof"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Airflow limitation",
+      "FEV1 to FVC under 0.70",
+      "Post bronchodilator spirometry"
+     ],
+     [
+      "Small airway disease",
+      "Bronchiolar inflammation",
+      "CT air trapping"
+     ],
+     [
+      "Emphysema",
+      "Alveolar destruction",
+      "Low DLCO and CT"
+     ],
+     [
+      "Chronic bronchitis",
+      "Years of productive cough",
+      "Clinical definition"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Smoke from tobacco, biomass and pollution drives most COPD in India, with alph antitrypsin and recurrent infections contributing. Exposures compound, and pack years still predict decline after quitting.",
+   "tx": "**Tobacco smoke** (cigarette inhalation), household **biomass smoke** (smoky cooking fuels) and polluted air drive most Indian COPD, with **alpha 1 antitrypsin deficiency** (inherited enzyme loss) and childhood infections adding risk. **Pack years** (packs smoked daily times years) predict decline even after quitting, so document exposure honestly rather than recording smoker or non smoker alone.",
+   "vis": {
+    "edges": [
+     [
+      "smoke",
+      "airway"
+     ],
+     [
+      "airway",
+      "inflammation"
+     ],
+     [
+      "inflammation",
+      "remodel"
+     ],
+     [
+      "remodel",
+      "obstruction"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "smoke",
+      "label": "Smoke and biomass"
+     },
+     {
+      "id": "airway",
+      "label": "Airway injury"
+     },
+     {
+      "id": "inflammation",
+      "label": "Chronic inflammation"
+     },
+     {
+      "id": "remodel",
+      "label": "Wall thickening"
+     },
+     {
+      "id": "obstruction",
+      "label": "Fixed obstruction"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Chronic mucus hypersecretion, hyperinflation and loss of elastic recoil explain dyspnoea. Gas exchange is usually preserved until late, and wheeze correlates poorly with spirometric severity.",
+   "tx": "**Chronic bronchitis** (long term mucus hypersecretion), **hyperinflation** (trapped air raising lung volumes) and **loss of elastic recoil** (alveolar destruction) together drive **dyspnoea** (breathlessness), while gas exchange often stays preserved until late disease. Wheeze intensity correlates poorly with spirometric severity, so grade by **FEV1** percentage and symptom scores rather than chest signs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Breathlessness on exertion",
+      "Chronic cough and sputum",
+      "Poor bronchodilator response"
+     ],
+     "title": "Bronchitic pattern"
+    },
+    "right": {
+     "points": [
+      "Barrel chest, quiet chest",
+      "Weight loss, pink puffer look",
+      "Very low DLCO"
+     ],
+     "title": "Emphysematous pattern"
+    }
+   }
+  },
+  {
+   "say": "GOLD grades airflow by FEV1 percentage, groups by exacerbation risk, and scores breathlessness with mMRC while total burden uses CAT. Symptoms can exceed spirometry, so both axes matter.",
+   "tx": "**GOLD** (Global Initiative for Chronic Obstructive Lung Disease) grades airflow by **FEV1** percentage (80, 50, 30 cutoffs), groups exacerbation risk as A, B or E, and scores breathlessness with **mMRC** (modified Medical Research Council scale) and total burden with **CAT** (COPD Assessment Test). Symptoms often exceed spirometry, so both axes decide treatment and prognosis.",
+   "vis": {
+    "cols": [
+     "Score",
+     "Meaning",
+     "Use"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "FEV1 80 percent or more",
+      "GOLD grade 1",
+      "Mild airflow loss"
+     ],
+     [
+      "mMRC 2 or more",
+      "Marked breathlessness",
+      "Symptom burden"
+     ],
+     [
+      "CAT 10 or more",
+      "High symptom burden",
+      "Therapy threshold"
+     ],
+     [
+      "Two exacerbations yearly",
+      "E group",
+      "Triple therapy thought"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Baseline workup pairs spirometry with chest CT, blood counts and DLCO. Chronic bronchitis history plus CT emphysema plus blood eosinophils gives a full phenotype.",
+   "tx": "Baseline workup pairs **spirometry** with **chest CT** (cross sectional lung imaging), blood eosinophils and **DLCO** (diffusing capacity) to phenotype disease, since high dose inhaled steroid suits blood eosinophils above **100** to **150** cells per microlitre. **Alpha 1** level and **arterial blood gas** join when onset is early, basal emphysema appears or breathlessness is disproportionate.",
+   "vis": {
+    "edges": [
+     [
+      "suspect",
+      "spirometry"
+     ],
+     [
+      "spirometry",
+      "ct"
+     ],
+     [
+      "ct",
+      "phenotype"
+     ],
+     [
+      "phenotype",
+      "therapy"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Suspected COPD"
+     },
+     {
+      "id": "spirometry",
+      "label": "Post bronchodilator test"
+     },
+     {
+      "id": "ct",
+      "label": "CT, DLCO, eosinophils"
+     },
+     {
+      "id": "phenotype",
+      "label": "Phentoype disease"
+     },
+     {
+      "id": "therapy",
+      "label": "Choose inhalers"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Foundational COPD therapy is long acting bronchodilator therapy. Dual LAMA and LABA combinations beat monotherapy for symptoms and exacerbations in most symptomatic patients.",
+   "tx": "**LAMA** (long acting muscarinic antagonist such as tiotropium) and **LABA** (long acting beta agonist such as indacaterol) form the base of COPD therapy, and dual **LAMA LABA** combinations improve symptoms and exacerbations over single agents. **Short acting** inhalers still relieve acute attacks, but maintenance always uses long acting drugs with a spacer and mouth rinse after inhaled steroid.",
+   "vis": {
+    "cols": [
+     "Regimen",
+     "Composition",
+     "Key point"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Dual bronchodilator",
+      "LAMA plus LABA",
+      "First line for symptoms"
+     ],
+     [
+      "Triple therapy",
+      "Dual plus inhaled steroid",
+      "E group, eosinophils high"
+     ],
+     [
+      "Steroid alone",
+      "Not recommended",
+      "Raises pneumonia risk"
+     ],
+     [
+      "Inhaled antibiotic",
+      "Azithromycin selected",
+      "Frequent exacerbators"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Eosinophilic COPD gains from inhaled steroid combinations, with pneumonia and cataracts as the price. Vaccination, pulmonary rehab and smoking cessation change trajectory more than any inhaler.",
+   "tx": "**Inhaled corticosteroid** added to dual bronchodilators suits **eosinophilic COPD** with frequent exacerbations, but raises **pneumonia** and cataract risk, so reserve it for blood eosinophils above **150** cells per microlitre or asthma overlap. **Influenza**, COVID and pneumococcal vaccination plus **pulmonary rehabilitation** (supervised exercise programme) and smoking cessation alter trajectory more than any inhaler.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Fewer exacerbations",
+      "Better symptoms",
+      "Pneumonia risk rises"
+     ],
+     "title": "Triple therapy gain"
+    },
+    "right": {
+     "points": [
+      "Eosinophils under 100",
+      "Dual bronchodilator enough",
+      "Steroid risk without gain"
+     ],
+     "title": "Dual therapy stays"
+    }
+   }
+  },
+  {
+   "say": "Exacerbations are treated with systemic steroids and antibiotics when sputum purulence increases. Nitrogen cycle control, controlled oxygen targets and attention to carbon dioxide retention save lives.",
+   "tx": "**Exacerbation** (acute COPD worsening) is treated with five days of **prednisolone** (oral steroid) and antibiotics when sputum purulence rises, volume increases or breathlessness worsens. Target **oxygen saturation** of **88** to **92** percent in retainers, watch for **carbon dioxide retention** (rising CO2), and use **noninvasive ventilation** (masked breathing support) for acute hypercapnic failure.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Action",
+     "Avoid"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Purulent sputum",
+      "Antibiotic plus steroid",
+      "Prolonged antibiotics"
+     ],
+     [
+      "Hypercapnia",
+      "NIV, target 88 to 92",
+      "Uncontrolled oxygen"
+     ],
+     [
+      "Severe acidosis",
+      "Intensive care",
+      "Sedation without support"
+     ],
+     [
+      "Pneumothorax",
+      "Drainage chest",
+      "Expectant waiting"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Long term oxygen, lung volume reduction and roflumilast each fit a narrow phenotype. End stage disease needs transplant referral early, since most patients die of respiratory failure or cardiovascular events.",
+   "tx": "**Long term oxygen therapy** (home oxygen) suits severe resting hypoxaemia with **PaO2** under **55** mmHg and prolongs survival, while **lung volume reduction** (endobronchial valves or surgery) helps severe emphysema with hyperinflation. **Roflumilast** (phosphodiesterase inhibitor) suits chronic bronchitis with frequent exacerbations, and early **transplant** referral suits rapidly declining patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phenotype",
+     "Test",
+     "Therapy"
+    ],
+    "rows": [
+     [
+      "Severe hypoxaemia PaO2 under 55",
+      "Arterial gas",
+      "Home oxygen"
+     ],
+     [
+      "Emphysema hyperinflation",
+      "Low DLCO, CT",
+      "Valve or surgery"
+     ],
+     [
+      "Bronchitis exacerbations",
+      "Exacerbation count",
+      "Roflumilast add on"
+     ],
+     [
+      "Rapid decline",
+      "FVC trend",
+      "Transplant referral"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Comorbidities drive mortality as much as airflow does. Cardiovascular disease, osteoporosis, depression and lung cancer screening all need systematic hunting at every COPD review.",
+   "tx": "**Comorbidities** (coexisting illnesses) such as **cardiovascular disease**, **osteoporosis** (bone thinning), depression and cachexia drive mortality as much as airflow, so screen systematically at every review. **Lung cancer screening** (low dose CT) suits heavy smokers with emphysema, and **noninvasive ventilation** at home helps chronic hypercapnia with nocturnal hypoventilation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Heart disease, hypertension",
+      "Osteoporosis from steroids",
+      "Depression, anxiety"
+     ],
+     "title": "Hunt every visit"
+    },
+    "right": {
+     "points": [
+      "BMD with steroids",
+      "Echo for cor pulmonale",
+      "CT for cancer in smokers"
+     ],
+     "title": "Targeted testing"
+    }
+   }
+  },
+  {
+   "say": "The core COPD facts are the 0.70 ratio, LAMA LABA dual therapy, triple therapy by eosinophils, five day steroids, NIV for hypercapnia and home oxygen cutoffs.",
+   "tx": "Recall the post bronchodilator ratio below **0.70**, **LAMA LABA** dual therapy as base, triple therapy by **eosinophil** count, **five day** oral steroids for exacerbations, **NIV** for hypercapnic failure and home oxygen for **PaO2** under **55** mmHg. Biomass exposure, pack years and the GOLD A B E grouping complete the picture the examiners favour.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Cutoff",
+     "Question angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Post bronchodilator ratio",
+      "Below 0.70",
+      "Diagnosis"
+     ],
+     [
+      "First line maintenance",
+      "LAMA plus LABA",
+      "Start therapy"
+     ],
+     [
+      "Triple therapy",
+      "E group, eosinophils high",
+      "Step up"
+     ],
+     [
+      "Exacerbation steroid",
+      "Five days prednisolone",
+      "Duration"
+     ],
+     [
+      "Oxygen target retainer",
+      "88 to 92 percent",
+      "Hypercapnia"
+     ],
+     [
+      "LTOT threshold",
+      "PaO2 under 55 mmHg",
+      "Survival"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "COPD grading, inhalers and exacerbations",
+ "v": 1
+}

@@ -1,0 +1,406 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-abpa-eosinophilic",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e allergic fungal and eosinophilic lung disease chapters",
+  "ISHAM ABPA working group criteria",
+  "GINA 2025 severe eosinophilic disease"
+ ],
+ "steps": [
+  {
+   "say": "ABPA is an allergic hypersensitivity to Aspergillus colonising airways in asthmatics and cystic fibrosis patients. Central bronchiectasis with fleeting infiltrates and high IgE is the classic picture.",
+   "tx": "**ABPA** (allergic bronchopulmonary aspergillosis) is an allergic hypersensitivity to **Aspergillus** colonising airways in asthmatics and **cystic fibrosis** patients, producing **central bronchiectasis** (dilatation of central airways) with fleeting infiltrates. Diagnose with **Aspergillus fumigatus IgE** plus total IgE above **500** international units per millilitre and lung opacities on imaging.",
+   "vis": {
+    "cols": [
+     "Criterion",
+     "Cutoff",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Total IgE",
+      "Above 500 units per mL",
+      "Allergic inflammation"
+     ],
+     [
+      "Aspergillus IgE",
+      "Above 0.35 kUA per L",
+      "Sensitisation"
+     ],
+     [
+      "Blood eosinophils",
+      "Above 500 cells per microlitre",
+      "Type 2 activity"
+     ],
+     [
+      "HRCT",
+      "Central bronchiectasis",
+      "Structural damage"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The type two cascade runs through epithelial alarmins into IgE, eosinophils and mucus plugs. Allergic mucin filled bronchi explain the finger in glove and high attenuation mucus signs.",
+   "tx": "The **type 2 cascade** (allergic inflammation chain) runs through epithelial **alarmins** (immune alarm proteins) into **IgE**, **eosinophils** and **mucus plugs** (obstructing mucus), with mucin laden bronchi explaining the **finger in glove** sign on imaging. High attenuation mucus is near pathognomonic for allergic fungal disease and reclassifies asthma that behaves badly.",
+   "vis": {
+    "edges": [
+     [
+      "fungus",
+      "alarmin"
+     ],
+     [
+      "alarmin",
+      "ige"
+     ],
+     [
+      "ige",
+      "eosinophil"
+     ],
+     [
+      "eosinophil",
+      "plugs"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fungus",
+      "label": "Aspergillus colonises"
+     },
+     {
+      "id": "alarmin",
+      "label": "Alarmins released"
+     },
+     {
+      "id": "ige",
+      "label": "IgE and eosinophils"
+     },
+     {
+      "id": "eosinophil",
+      "label": "Mucus plugs form"
+     },
+     {
+      "id": "plugs",
+      "label": "Central dilatation"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Clinical stages run from acute episodes through recurrent exacerbations to permanent airway damage. Staging guides steroid duration, and total IgE tracks response better than symptoms alone.",
+   "tx": "**Stages** (disease phases) of ABPA run from an acute episode through recurrent exacerbations to permanent airway damage, and staging guides steroid duration and transplant timing. **Total IgE** tracks response better than symptoms alone, with **FEV1** and imaging judging progression, and **precipitins** (antibodies against fungal antigen) support the diagnosis in endemic settings.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "First presentation",
+      "Steroid responsive",
+      "IgE falls 25 percent"
+     ],
+     "title": "Acute stage"
+    },
+    "right": {
+     "points": [
+      "Recurrent exacerbations",
+      "Steroid dependent",
+      "Fixed central bronchiectasis"
+     ],
+     "title": "Advanced stage"
+    }
+   }
+  },
+  {
+   "say": "Prednisolone for six to eight weeks is the backbone for acute disease, with itraconazole as steroid sparing and voriconazole for invasive infection. Never miss the diabetes and bone cost of prolonged steroids.",
+   "tx": "**Prednisolone** (oral steroid) at **0.5** milligrams per kilogram for **6** to **8** weeks is the backbone for acute ABPA, with **itraconazole** (antifungal) as steroid sparing and **voriconazole** (alternative antifungal) for invasive disease. Monitor **blood glucose** (sugar) and bone density during therapy, since diabetes and osteoporosis are the commonest long term steroid costs.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Role",
+     "Monitor"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Prednisolone 0.5 mg per kg",
+      "Acute control",
+      "Glucose, bone, weight"
+     ],
+     [
+      "Itraconazole",
+      "Steroid sparing",
+      "Liver enzymes, levels"
+     ],
+     [
+      "Voriconazole",
+      "Invasive disease",
+      "Vision, skin, liver"
+     ],
+     [
+      "Biologics selected",
+      "Steroid dependent",
+      "IgE and eosinophils"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Differentiate ABPA from aspergilloma, invasive aspergillosis and chronic cavitary disease. Colonisation, allergy and tissue invasion form three distinct fungal phenotypes with different treatments.",
+   "tx": "Differentiate **aspergilloma** (fungal ball in a cavity), **invasive aspergillosis** (tissue invasion in neutropenia) and **chronic cavitary disease** (slow fungal destruction), since colonisation, allergy and invasion form three distinct phenotypes with different treatments. **Galactomannan** (fungal cell wall marker) suits neutropenic invasion while IgE and eosinophils suit allergy, so never treat all fungal lung disease identically.",
+   "vis": {
+    "cols": [
+     "Phenotype",
+     "Host",
+     "Therapy"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Allergic ABPA",
+      "Asthmatic, cystic fibrosis",
+      "Steroid plus antifungal"
+     ],
+     [
+      "Aspergilloma",
+      "Cavity disease",
+      "Antifungal, surgery"
+     ],
+     [
+      "Invasive disease",
+      "Neutropenia, graft",
+      "Voriconazole urgent"
+     ],
+     [
+      "Cavitary chronic",
+      "Structural lung disease",
+      "Long antifungal course"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Eosinophilic lung diseases share blood and tissue eosinophilia with asthma and Rhazes pattern infiltrates. Drug reactions, parasites, vasculitis and idiopathic eosinophilic pneumonia form the aetiology list.",
+   "tx": "**Eosinophilic lung disease** (lung inflammation with eosinophils) shares blood and tissue eosinophilia with asthma and Rhazes pattern migratory infiltrates, and aetiologies include drug reactions, parasites, **vasculitis** (vessel inflammation), **Loeffler syndrome** (fleeting infiltrates) and idiopathic **eosinophilic pneumonia** (eosinophil filled air spaces). Blood eosinophils above **500** cells per microlitre flag the group.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Bird fancier exposure",
+      "Ground glass, upper zones",
+      "Balanced lymphocytosis"
+     ],
+     "title": "Hypersensitivity pattern"
+    },
+    "right": {
+     "points": [
+      "Peripheral eosinophilia",
+      "Peripheral consolidation",
+      "Steroid responsive"
+     ],
+     "title": "Eosinophilic pattern"
+    }
+   }
+  },
+  {
+   "say": "Hypereosinophilic syndrome hits heart, skin and gut as well as lung. Organ specific damage decides urgency, and steroids stay first line with imatinib for PDGFRA positive disease.",
+   "tx": "**Hypereosinophilic syndrome** (marked eosinophilia with organ damage) hits heart, skin, gut and lung, and **organ specific damage** (heart and nerve involvement) decides urgency. **Steroids** stay first line while **imatinib** (tyrosine kinase inhibitor) transforms **PDGFRA** positive disease (gene rearranged variant), and **feNO** (exhaled nitric oxide) helps judge airway inflammation follow up.",
+   "vis": {
+    "edges": [
+     [
+      "eosinophilia",
+      "hunt"
+     ],
+     [
+      "hunt",
+      "steroid"
+     ],
+     [
+      "steroid",
+      "pdgfra"
+     ],
+     [
+      "pdgfra",
+      "imatinib"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eosinophilia",
+      "label": "Eosinophils over 1500"
+     },
+     {
+      "id": "hunt",
+      "label": "Hunt organ damage"
+     },
+     {
+      "id": "steroid",
+      "label": "Start steroids"
+     },
+     {
+      "id": "pdgfra",
+      "label": "Test PDGFRA"
+     },
+     {
+      "id": "imatinib",
+      "label": "Imatinib if positive"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Nasal polyps, adult onset asthma, aspirin sensitivity and eosinophilia form the Aspirin Exacerbated Respiratory Disease triad. Leukotriene blockers help, and aspirin desensitisation suits selected patients.",
+   "tx": "**Nasal polyps** (benign growths), adult onset asthma, aspirin sensitivity with eosinophilia form the **AERD** triad (aspirin exacerbated respiratory disease), presenting with anosmia (loss of smell) and recurrent polyps. **Leukotriene antagonists** (montelukast) help, and aspirin **desensitisation** (gradual low dose tolerance) suits selected patients with severe polyp disease.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Clue",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Polyps",
+      "Recurrent, anosmia",
+      "Nasal endoscopy"
+     ],
+     [
+      "Asthma onset",
+      "Adult, severe",
+      "Spirometry"
+     ],
+     [
+      "NSAID sensitivity",
+      "Rhinitis, wheeze",
+      "Careful challenge only"
+     ],
+     [
+      "Eosinophils",
+      "High blood count",
+      "IgE and allergology"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Steroid responsive eosinophilic pneumonia needs prolonged tapering, while EGPA vasculitis adds nerve, skin and renal disease and often needs immune suppression beyond steroids.",
+   "tx": "**Eosinophilic pneumonia** (eosinophil filled air spaces) needs prolonged steroid tapering over months because relapse is usual on short courses, while **EGPA** (eosinophilic granulomatosis with polyangiitis) adds nerve, skin and renal vasculitis and often needs immune suppression beyond steroids. **ANCA** (antibodies against white cell enzymes) and biopsy guide the vasculitis arm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Peripheral consolidation",
+      "High BAL eosinophils",
+      "Months of tapering"
+     ],
+     "title": "Eosinophilic pneumonia"
+    },
+    "right": {
+     "points": [
+      "Vasculitis features",
+      "ANCA or biopsy shown",
+      "Steroid plus immunosuppression"
+     ],
+     "title": "EGPA vasculitis"
+    }
+   }
+  },
+  {
+   "say": "Practical monitoring pairs total IgE, blood eosinophils, FEV1 and HRCT at intervals. Rising IgE or falling FEV1 precedes clinical relapse and should trigger therapy review.",
+   "tx": "Practical monitoring pairs **total IgE**, blood **eosinophils**, **FEV1** and **HRCT** at regular intervals, because rising IgE or a falling FEV1 precedes clinical relapse and should trigger therapy review. **Bone density** (DEXA scan) and glucose checks accompany any prolonged steroid course, and **mould avoidance** (damp exposure reduction) lowers fungal load.",
+   "vis": {
+    "edges": [
+     [
+      "treat",
+      "ige"
+     ],
+     [
+      "ige",
+      "fev1"
+     ],
+     [
+      "fev1",
+      "hrct"
+     ],
+     [
+      "hrct",
+      "review"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "treat",
+      "label": "Six to eight week course"
+     },
+     {
+      "id": "ige",
+      "label": "IgE at 8 weeks"
+     },
+     {
+      "id": "fev1",
+      "label": "FEV1 trend"
+     },
+     {
+      "id": "hrct",
+      "label": "HRCT at 6 months"
+     },
+     {
+      "id": "review",
+      "label": "Adjust therapy"
+     }
+    ]
+   }
+  },
+  {
+   "say": "The ABPA and eosinophilic high yield list is the IgE cutoff, central bronchiectasis, high attenuation mucus, prednisolone dose, itraconazole sparing and the HES and AERD patterns.",
+   "tx": "Recall total IgE above **500**, **central bronchiectasis**, high attenuation mucus, prednisolone **0.5** milligrams per kilogram for **6** to **8** weeks, **itraconazole** sparing, **PDGFRA** imatinib sensitivity, and the **HES** and **AERD** triad patterns. Eosinophilic pneumonia needs months of taper, and EGPA needs vasculitis therapy.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "ABPA IgE",
+      "Above 500 units per mL",
+      "Diagnosis"
+     ],
+     [
+      "ABPA steroid",
+      "0.5 mg per kg, 6 to 8 weeks",
+      "Regimen asked"
+     ],
+     [
+      "CT sign",
+      "High attenuation mucus",
+      "Pathognomonic sign"
+     ],
+     [
+      "Eosinophil line",
+      "Above 500 cells per microlitre",
+      "Group flag"
+     ],
+     [
+      "HES gene",
+      "PDGFRA positive",
+      "Imatinib choice"
+     ],
+     [
+      "AERD triad",
+      "Polyps, asthma, NSAID sensitivity",
+      "Pattern recall"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "ABPA and the eosinophilic lung diseases",
+ "v": 1
+}
