@@ -51,7 +51,7 @@ await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
 await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; });
 
 async function boot(q) {
-  await page.goto(BASE + "?" + q);
+  await page.goto(BASE + "?" + q, { waitUntil: "domcontentloaded" });   // app readiness is checked next; do not wait on slow third-party loads
   await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
   await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); PREP.open(); });
   await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row", { timeout: 30000 });
