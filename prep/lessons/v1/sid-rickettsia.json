@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-rickettsia",
+ "title": "Rickettsial Infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Rickettsiae** spread by mites, ticks, lice and fleas; **fever with rash and headache** after exposure is classic. **Eschar** (painless black scab) marks bite sites and clinches syndromes. **Doxycycline treats all** and starts on suspicion. **Delay kills** in spotted fever; exposure history comes first.",
+   "say": "Rickettsiae are tiny intracellular bacteria spread by mites with ticks with lice with fleas, and fever with rash with headache after outdoor exposure is the classic story. Eschars mark the bite site as a painless black scab, and finding one clinches the syndrome. Doxycycline treats all of them, so it starts on suspicion without waiting. Delay kills in spotted fever, which is why exposure history is taken first.",
+   "vis": {
+    "cols": [
+     "Vector",
+     "Disease",
+     "Eschar"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Mites",
+      "Scrub typhus",
+      "Common, hidden folds"
+     ],
+     [
+      "Ticks",
+      "Spotted fever",
+      "Rare, single"
+     ],
+     [
+      "Lice",
+      "Epidemic typhus",
+      "Absent"
+     ],
+     [
+      "Fleas",
+      "Murine typhus",
+      "Absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Scrub typhus** follows mite bites; **eschar hides in armpits and groins**. Fever with headache, nodes and cough mimics dengue and typhoid; **eschar hunt decides**. **Doxycycline defervesces in two days**; failure means resistance or wrong bug. **Azithromycin covers pregnancy**. **Severe disease** adds intensive support.",
+   "say": "Scrub typhus follows mite bites in scrub vegetation with an eschar hidden in folds like armpits with groins. Fever with headache with lymph nodes with cough mimics dengue with typhoid, so eschar hunt decides. Doxycycline defervesces within two days, and failure suggests resistance or wrong diagnosis. Azithromycin covers pregnancy safely, while severe disease adds intensive support.",
+   "vis": {
+    "cols": [
+     "Scrub clue",
+     "Where",
+     "Mimic split"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Eschar",
+      "Folds, genitals",
+      "Dengue has none"
+     ],
+     [
+      "Nodes, cough",
+      "Generalised",
+      "Typhoid slower"
+     ],
+     [
+      "Defervescence",
+      "Two days doxy",
+      "Wrong bug if not"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spotted fever** starts on **wrists and ankles racing inward**, turning petechial. **Palms and soles** involved late mark severity. **Treatment before day 5** saves lives. **Doxycycline at any age** when threatened; delay kills children fastest. **Ticks removed whole** with tweezers; bodies never crushed.",
+   "say": "Rocky Mountain spotted fever starts on wrists with ankles and races inward, turning petechial as vessels leak. Palms with soles involved late mark severity, and treatment before day five saves lives. Doxycycline is given at any age when spotted fever threatens, because delay kills children fastest. Ticks are removed with tweezers whole, and fingers never crush bodies.",
+   "vis": {
+    "cols": [
+     "Spotted sign",
+     "Timing",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Wrist, ankle rash",
+      "Day three",
+      "Doxycycline now"
+     ],
+     [
+      "Petechiae",
+      "Leaking vessels",
+      "ICU watch"
+     ],
+     [
+      "Palms, soles",
+      "Late",
+      "Severe marker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Epidemic typhus** explodes in louse camps with **stupor**; murine typhus from fleas stays milder. **Brill Zinsser** recrudesces years later mildly. **Delousing with heat** ends epidemics; **doxycycline cures** individuals. **Crowding, cold and war** predict outbreaks and trigger dusting campaigns routinely in camps and jails.",
+   "say": "Epidemic typhus explodes in crowded louse infested camps with stupor that buries the patient alive. Murine typhus from fleas is milder with rash and fewer complications. Brill Zinsser recrudescence is waking years later with milder repeat illness. Delousing with heat with clean clothes ends epidemics, while doxycycline cures individuals. Crowding with cold with war predicts outbreaks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Lice, camps, stupor, delouse the camp"
+     ],
+     "title": "Epidemic"
+    },
+    "right": {
+     "points": [
+      "Fleas, rats, milder, treat the patient"
+     ],
+     "title": "Murine"
+    }
+   }
+  },
+  {
+   "tx": "**Ehrlichiosis and anaplasmosis** follow deer ticks with **low whites, low platelets and raised liver**. **Morulae in white cells** diagnose on smear; PCR confirms early. **Doxycycline cures** both rapidly; delay risks lungs. **Repellents with tucked trousers** prevent bites in woods and fields.",
+   "say": "Ehrlichiosis with anaplasmosis follows deer tick bites with fever with low white cells with low platelets and raised liver enzymes. Morulae inside white cells give the diagnosis on smear, while PCR confirms early. Both are cured rapidly by doxycycline, and delay risks respiratory failure. Lone star ticks with black legged ticks are vectors, and repellents with tucking trousers prevent bites.",
+   "vis": {
+    "cols": [
+     "Tick disease",
+     "Blood clue",
+     "Vector"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ehrlichiosis",
+      "Low whites, liver up",
+      "Lone star tick"
+     ],
+     [
+      "Anaplasmosis",
+      "Low platelets",
+      "Black legged tick"
+     ],
+     [
+      "Lyme same ticks",
+      "Migrans rash",
+      "Same prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Q fever** follows lambing dust; **abattoir workers and vets** catch rashless pneumonia. **Doxycycline shortens** acute disease. **Endocarditis on damaged valves** needs years of combination treatment. **Phase one antibodies** mark chronicity. **Valve patients screened** after every acute case without exception ever.",
+   "say": "Q fever follows dust from lambing sheep with cattle, striking abattoir workers with vets with a pneumonia that needs no rash. Acute disease is self limiting with doxycycline shortening it, while endocarditis on damaged valves needs years of combination treatment. Phase one antibodies mark chronicity, and valve patients are screened after every acute case. Parturient cats are seeding urban clusters too.",
+   "vis": {
+    "cols": [
+     "Q form",
+     "Presents as",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Acute",
+      "Pneumonia, no rash",
+      "Weeks, doxy shortens"
+     ],
+     [
+      "Chronic",
+      "Valve endocarditis",
+      "Years of combos"
+     ],
+     [
+      "Pregnancy",
+      "Abortion risk",
+      "Screen, treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Workup runs with treatment:** counts, liver and smears first; **eschar photographed** before healing. **Serology rises late**; treatment never waits. **Doxycycline on suspicion** in every compatible case. **Ticks saved** in bottles identify vectors for later studies. **Defervescence in two days** confirms the guess.",
+   "say": "Every fever with rash with exposure follows the same order of testing and treatment together. Blood counts with liver with smears open the file, while eschar photographs document before healing. Serology rises late, so acute treatment never waits for titres. Doxycycline starts on suspicion in every compatible case, because no alternative covers the whole family. Ticks saved in bottles identify vectors later.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever, rash, exposure"
+     },
+     {
+      "id": "b",
+      "label": "Hunt eschar, draw labs"
+     },
+     {
+      "id": "c",
+      "label": "Doxycycline at once"
+     },
+     {
+      "id": "d",
+      "label": "Afers in two days?"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**No defervescence in two days** forces rethink: resistant scrub or wrong diagnosis. **Drug fever, viral rashes and typhoid** mimic closely; exposure, eschar and counts separate. **Chloramphenicol rescues** where others fail. **ICU supports** lungs and kidneys. **Second eschar hunts** find missed bites.",
+   "say": "Failure to defervesce in two days forces rethink, because resistant scrub with wrong diagnoses behave the same. Drug fever with viral exanthems with typhoid mimic rickettsial rashes closely, so exposure with eschar with counts separates them. Chloramphenicol rescues pregnancy where azithromycin fails, while intensive care supports lungs with kidneys. Second looks for eschars find what first exams missed.",
+   "vis": {
+    "cols": [
+     "No better in two days",
+     "Think",
+     "Do"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Still febrile",
+      "Resistant, wrong bug",
+      "Reculture, rethink"
+     ],
+     [
+      "Drug rash",
+      "New drug timing",
+      "Stop suspect"
+     ],
+     [
+      "Viral rash",
+      "No eschar",
+      "Support, watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** spotted fever without treatment before day 5 kills; never wait for serology. **Rashless Q fever** pneumonia misleads; ask dust exposure. **Chronic Q endocarditis** needs years, not weeks. **Ehrlichiosis with low counts** mimics leukaemia; smears save. **Pregnancy** always earns azithromycin over doxycycline.",
+   "say": "Prevention beats treatment in tick country, and covered skin with repellents with prompt removal stops most bites. Pets are treated for ticks, because dogs ferry vectors indoors. Endemic residents learn eschar self checks after outings, and travellers pack doxycycline standby where scrub threatens. Camp hygiene with delousing stops typhus before it starts.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Wait for serology",
+      "Dies before titres",
+      "Treat on suspicion"
+     ],
+     [
+      "Rashless pneumonia",
+      "Q fever dust",
+      "Ask occupation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prevention** is covered skin with repellents and prompt removal. **Pets treated** as dogs ferry ticks indoors. **Self checks** for eschars follow outings. **Standby cover** for travellers where scrub threatens. **Camp hygiene** with delousing stops typhus early and completely every season.",
+   "say": "Prevention beats treatment in tick country, and covered skin with repellents with prompt removal stops most bites. Pets are treated for ticks, because dogs ferry vectors indoors. Endemic residents learn eschar self checks after outings, and travellers pack standby cover where scrub threatens. Camp hygiene with delousing stops typhus before it starts.",
+   "vis": {
+    "cols": [
+     "Shield",
+     "Who",
+     "How"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Repellents",
+      "Woods walkers",
+      "Tucked trousers"
+     ],
+     [
+      "Pet treatment",
+      "Dog owners",
+      "Year round"
+     ],
+     [
+      "Standby cover",
+      "Travellers",
+      "Scrub zones"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** hidden **eschar** marks scrub. **Wrists inward** marks spotted fever; treat before **day 5**. **Doxycycline for all** at any age; **azithromycin in pregnancy**. **Defervescence in 2 days** confirms. **Lambing dust** marks Q fever with chronic valves.",
+   "say": "For the exam, the facts to lock in are eschar in hidden folds for scrub, wrists to centre rash for spotted fever, treatment before day five, doxycycline for all at any age, azithromycin for pregnancy, defervescence in two days, and Q fever dust with chronic endocarditis. Epidemic is indicated by lice with stupor, while murine is indicated by fleas with milder illness. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Scrub bite",
+      "Mite, hidden eschar",
+      "Hunt folds"
+     ],
+     [
+      "Spotted rash",
+      "Wrists inward",
+      "Versus viral"
+     ],
+     [
+      "Day rule",
+      "Treat before five",
+      "Delay kills"
+     ],
+     [
+      "Panacea",
+      "Doxycycline all",
+      "Any age"
+     ],
+     [
+      "Pregnancy",
+      "Azithromycin",
+      "Safe cover"
+     ],
+     [
+      "Proof",
+      "Better in two days",
+      "Confirms guess"
+     ],
+     [
+      "Q dust",
+      "Lambing, abattoir",
+      "Rashless"
+     ],
+     [
+      "Q chronic",
+      "Valve endocarditis",
+      "Years treated"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

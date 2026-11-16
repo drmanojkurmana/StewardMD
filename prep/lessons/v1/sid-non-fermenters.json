@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-non-fermenters",
+ "title": "Non-Fermenting Gram Negative Bacilli",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Non fermenters** refuse sugars and love water and ventilators; **ICUs and cystic fibrosis** wards are hunting grounds. **Pseudomonas, Acinetobacter and Burkholderia** cause most disease. **Green sputum** points to Pseudomonas; **late ventilator pneumonia** to Acinetobacter. **Taps, tips and drains** are cultured before cover.",
+   "say": "Non fermenters are defined by refusing sugars and loving water with ventilators, so intensive care units with cystic fibrosis wards are struck. Pseudomonas with Acinetobacter with Burkholderia cause most disease, and each owns a niche. Green sputum with fruity smell points to Pseudomonas, while late ventilator pneumonia points to Acinetobacter. Taps with tips with drains are cultured before cover starts.",
+   "vis": {
+    "cols": [
+     "Bug",
+     "Niche",
+     "Clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Pseudomonas",
+      "Water, lungs, burns",
+      "Green, fruity"
+     ],
+     [
+      "Acinetobacter",
+      "ICU, ventilators",
+      "Late, resistant"
+     ],
+     [
+      "Burkholderia",
+      "CF, soil",
+      "Recurrent flares"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pseudomonas** gives **blue green pus** with grape like smell. **Hot tub folliculitis, swimmer ears and ecthyma gangrenosum** are signatures. **Ceftazidime, piperacillin with tazobactam and cefepime** lead treatment. **Meropenem saved** for resistant disease. **Combination cover** suits shock and neutropenia; narrowing follows cultures.",
+   "say": "Blue green pus with a grape like smell is produced by Pseudomonas aeruginosa, which veterans recognise across the room. Hot tub folliculitis with swimmer ears with ecthyma gangrenosum in neutropenia are its signatures. Ceftazidime with piperacillin with tazobactam with cefepime lead treatment, while meropenem is saved for resistant disease. Combination cover suits shock with neutropenia, then narrowing follows cultures.",
+   "vis": {
+    "cols": [
+     "Pseudomonas sign",
+     "Setting",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ecthyma gangrenosum",
+      "Neutropenia",
+      "Bloodstream, urgent"
+     ],
+     [
+      "Hot tub rash",
+      "Spas, pools",
+      "Self limiting"
+     ],
+     [
+      "Swimmer ear",
+      "Humid canals",
+      "Topical plus cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Late ventilator pneumonia** (after 5 days) is **Acinetobacter or Pseudomonas** first. **Quantitative cultures** separate colonisation from disease. **Early disease** within 4 days stays sensitive. **8 days** treats most responders. **Head elevation with oral care** prevents more than cover. **De-escalate at 72 hours** always.",
+   "say": "Ventilator pneumonia after five days is Acinetobacter with Pseudomonas until proven otherwise, and quantitative cultures separate colonisation from disease. Early pneumonia within four days stays sensitive, while late disease resists almost everything. De-escalation at seventy two hours is audited, and eight days treats most late cases with good response. Head elevation with oral care prevents more than broad cover.",
+   "vis": {
+    "cols": [
+     "VAP timing",
+     "Likely bug",
+     "Cover logic"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Within four days",
+      "Sensitive flora",
+      "Narrow early"
+     ],
+     [
+      "After five days",
+      "Resistant rods",
+      "Broad, then narrow"
+     ],
+     [
+      "No improvement",
+      "Wrong bug, focus",
+      "Rescan, reculture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acinetobacter** survives months on rails and colonises lines; **outbreaks close wards**. **Carbapenem resistance** is common. **Colistin with polymyxin combinations** form the backbone. **Tigecycline with minocycline** joins susceptible patterns. **Source removal** cures more than drugs. **Gloves, gowns and cohorts** contain spread.",
+   "say": "Acinetobacter baumannii survives months on bed rails and colonises every line it touches, so intensive care outbreaks close wards. Carbapenem resistance is common, leaving colistin with polymyxin based combinations as the backbone. Tigecycline with minocycline is added for susceptible patterns, while source removal cures more than drugs alone. Hand carriage spreads it, so gloves with gowns with cohorts contain it.",
+   "vis": {
+    "cols": [
+     "Resistant Acinetobacter",
+     "Backbone",
+     "Add on"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bloodstream",
+      "Colistin combination",
+      "Tigecycline if apt"
+     ],
+     [
+      "Pneumonia",
+      "Colistin, nebulised",
+      "Minocycline joins"
+     ],
+     [
+      "Wound",
+      "Debride, cover",
+      "Remove hardware"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stenotrophomonas** follows carbapenem use; its enzymes destroy them. **Trimethoprim based cover** leads; **minocycline** is the alternative. **Lines out** wherever possible as biofilm shields the bug completely. **Burkholderia cepacia** flares cystic fibrosis lungs and **spreads patient to patient**; segregation is lifelong.",
+   "say": "Stenotrophomonas maltophilia strikes after carbapenems have cleared its rivals, because it carries enzymes that destroy them. Trimethoprim based cover leads treatment, with minocycline as the alternative when sulfa harms. Lines are removed wherever possible, since biofilm shields the bug. Burkholderia cepacia flares cystic fibrosis lungs and spreads between patients, so segregation is lifelong.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "After carbapenems, trimethoprim leads, remove lines"
+     ],
+     "title": "Stenotrophomonas"
+    },
+    "right": {
+     "points": [
+      "CF lungs, spreads between patients, segregate"
+     ],
+     "title": "Burkholderia"
+    }
+   }
+  },
+  {
+   "tx": "**Cystic fibrosis** grows **Pseudomonas early** and keeps it lifelong. **First isolation** earns eradication with nebulised plus oral combinations. **Chronic colonisation** takes rotating suppression. **Transplant resets** lungs but sinuses reseed grafts. **Segregation, physiotherapy and vaccines** extend decades of life together with transplant listing when failing.",
+   "say": "Cystic fibrosis lungs grow Pseudomonas early and keep it for life, with exacerbations marked by falling lung function with greener sputum. Eradication at first isolation uses nebulised with oral combinations, while chronic colonisation takes rotating suppressive cycles. Lung transplantation resets the clock but not the sinuses, which reseed grafts. Segregation with physiotherapy with vaccines extends decades.",
+   "vis": {
+    "cols": [
+     "CF stage",
+     "Move",
+     "Goal"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "First isolation",
+      "Eradicate hard",
+      "Clear completely"
+     ],
+     [
+      "Chronic",
+      "Rotate suppression",
+      "Slow decline"
+     ],
+     [
+      "Exacerbation",
+      "Intensify cover",
+      "Restore function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Burns invite Pseudomonas** in days; **green sweet dressings** warn early. **Daily inspection with early grafting** closes wounds faster than drugs. **Catheters out** the moment unneeded. **Tissue counts** guide grafting; colonisation alone is watched. **Tap water** is chlorinated when outlets grow the bug.",
+   "say": "Burn wounds invite Pseudomonas within days, turning dressings green with sweet decay, while urinary catheters grow biofilms that seed blood. Daily inspection with early grafting closes burns faster than any drug, and catheters are removed the moment they are unneeded. Quantitative tissue counts guide grafting, and colonisation without invasion is watched, not treated. Water systems are chlorinated when taps grow the bug.",
+   "vis": {
+    "cols": [
+     "Source",
+     "Warning",
+     "Fix"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Burns",
+      "Green sweet pus",
+      "Graft early"
+     ],
+     [
+      "Catheters",
+      "Fever, blocked",
+      "Remove at once"
+     ],
+     [
+      "Taps",
+      "Outlet positive",
+      "Chlorinate, filter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Workup order** is fixed: **blood, sputum, urine and tips** cultured before broad cover. **Carbapenemase testing with sensitivity** narrows within days. **Imaging hunts** undrained collections. **Stewardship rounds** stop broad drugs on time every week with pharmacist backup. **Carriers flagged**; contacts screened in outbreaks.",
+   "say": "Every resistant rod is worked up the same way, and colonisation is never treated as disease. Blood with sputum with urine with line tips are cultured before broad cover, then carbapenemase testing with sensitivity narrows within days. Source imaging hunts undrained collections, while stewardship rounds stop broad drugs on time. Carriers are flagged, and contacts are screened in outbreaks.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Culture all sites first"
+     },
+     {
+      "id": "b",
+      "label": "Broad cover if shock"
+     },
+     {
+      "id": "c",
+      "label": "Narrow by sensitivity"
+     },
+     {
+      "id": "d",
+      "label": "Flag carriers, screen contacts"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Combinations** are for shock, neutropenia or known resistance only; **stop at 72 hours** when cultures mature. **Double cover breeds** double resistance. **Nebulised drugs** reach lungs blood cannot; **topical drops** cure ears systemic drugs miss. **Duration counts** from clearance with drained foci.",
+   "say": "Combination cover is reserved for shock with neutropenia with known resistant colonisation, and it stops once cultures mature. Double cover breeds double resistance, so seventy two hour review is mandatory. Nebulised drugs reach lungs that blood cannot, while topical drops cure ears that systemic drugs miss. Duration is counted from clearance, and foci are drained in parallel.",
+   "vis": {
+    "cols": [
+     "Double cover",
+     "When",
+     "Stop when"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Shock, neutropenia",
+      "Start broad",
+      "Cultures mature"
+     ],
+     [
+      "Known resistant",
+      "Cover both",
+      "Narrowed by lab"
+     ],
+     [
+      "Never routine",
+      "Single suffices",
+      "Resistance breeds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** wet lungs with positive sputum may be **colonisation**, not disease. **Meropenem fails** Stenotrophomonas which destroys it. **Burkholderia spreads** between CF patients sharing wards. **Colistin alone** fails bloodstream infections. **Nebulised drugs** never replace systemic cover in bacteraemia with shock.",
+   "say": "The traps that fail examinations are calling colonisation disease in wet lungs, using meropenem for Stenotrophomonas that destroys it, and missing Burkholderia spread between C F patients sharing wards. Colistin alone fails bloodstream infections, so combinations are mandatory. Nebulised drugs never replace systemic cover in bacteraemia.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Treat wet sputum",
+      "Colonisation likely",
+      "Quantify first"
+     ],
+     [
+      "Meropenem for Steno",
+      "Destroyed by enzymes",
+      "Trimethoprim leads"
+     ],
+     [
+      "Share CF ward",
+      "Patient spread",
+      "Segregate always"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** green fruity pus marks **Pseudomonas**. **Late ventilator** disease marks Acinetobacter. **Trimethoprim** leads Stenotrophomonas. **Segregation** contains Burkholderia in CF. **Colistin combinations** treat resistant rods. **Ecthyma** marks neutropenic invasion, and eradication at first isolation protects CF lungs for decades.",
+   "say": "For the exam, the facts to lock in are green fruity pus for Pseudomonas, late ventilator disease for Acinetobacter, trimethoprim for Stenotrophomonas, segregation for Burkholderia in C F, and colistin combinations for carbapenem resistant rods. Ecthyma is indicating neutropenic bloodstream invasion, and eradication at first isolation is protecting C F lungs. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Pseudomonas pus",
+      "Green, fruity",
+      "Bedside clue"
+     ],
+     [
+      "Ecthyma",
+      "Neutropenic spots",
+      "Bloodstream"
+     ],
+     [
+      "Late VAP",
+      "After five days",
+      "Resistant rods"
+     ],
+     [
+      "Acinetobacter cure",
+      "Colistin combos",
+      "Backbone"
+     ],
+     [
+      "Steno drug",
+      "Trimethoprim based",
+      "Leads treatment"
+     ],
+     [
+      "Burkholderia rule",
+      "Segregate CF",
+      "Patient spread"
+     ],
+     [
+      "CF first",
+      "Eradicate hard",
+      "Protect lungs"
+     ],
+     [
+      "Double cover",
+      "Stop at three days",
+      "Breeds resistance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

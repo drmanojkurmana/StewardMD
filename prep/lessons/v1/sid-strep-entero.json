@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-strep-entero",
+ "title": "Streptococcal and Enterococcal Infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Chains on Gram stain** that are catalase negative are streptococci or enterococci. **Beta haemolysis** marks group A and B streptococci; **alpha haemolysis** marks pneumococcus and viridans. **Bacitracin, optochin and bile** discs sort them at the bench. **Culture with sensitivity** decides treatment every time.",
+   "say": "Streptococci with enterococci are gram positive chains that split by haemolysis on blood agar. Beta haemolysis with bacitracin sensitivity is seen in group A streptococcus, while alpha haemolysis with optochin is seen in pneumococcus. Grouping by Lancefield antigen with bile solubility completes bedside sorting. Culture with sensitivity decides everything, because resistance patterns differ street by street.",
+   "vis": {
+    "cols": [
+     "Bug",
+     "Haemolysis",
+     "Bench disc"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Group A strep",
+      "Beta, clear",
+      "Bacitracin sensitive"
+     ],
+     [
+      "Pneumococcus",
+      "Alpha, green",
+      "Optochin sensitive"
+     ],
+     [
+      "Enterococcus",
+      "None or alpha",
+      "Bile, salt tolerant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Group A pharyngitis** is scored by fever, tender nodes, tonsillar pus and **absence of cough**. **High scores earn rapid testing**; only positives are treated. **Rheumatic fever** follows untreated childhood throats. **Post streptococcal kidney injury** follows throat and skin strains. **Treat proven cases** to prevent both sequelae.",
+   "say": "Group A streptococcal sore throat is scored by fever with tender nodes with tonsillar pus without cough. High scores earn testing, and only positives are treated, which protects the microbiome. Rheumatic fever follows untreated throats in children, while post streptococcal kidney injury follows throat with skin strains. Treating the proven case prevents both nonsuppurative sequelae.",
+   "vis": {
+    "cols": [
+     "Score feature",
+     "Present",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fever, nodes, pus",
+      "Yes each",
+      "Adds a point"
+     ],
+     [
+      "Cough, runny nose",
+      "Present",
+      "Viral, subtract"
+     ],
+     [
+      "Childhood, epidemic",
+      "Yes",
+      "Treat if positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Scarlet fever** gives **sandpaper rash** with **strawberry tongue** and peeling skin. **Pastia lines** crease elbows; face flushes with **circumoral pallor**. **Erythrogenic toxin** drives it. **Throat culture with ASLO titres** confirms recent infection. **Peeling after a week** is expected and harmless.",
+   "say": "Scarlet fever presents with a sandpaper rash over a strawberry tongue, and the rash peels like sunburn as it fades. Pastia lines are found in the elbow folds, and the face flushes with a pale ring around the mouth. Erythrogenic toxin causes it all, and the same toxin with wound infection brings toxic shock. Throat culture with antistreptolysin titres confirms recent infection.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Where",
+     "Toxin sign"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Sandpaper rash",
+      "Trunk, neck",
+      "Erythrogenic"
+     ],
+     [
+      "Strawberry tongue",
+      "Mouth",
+      "Red, bumpy"
+     ],
+     [
+      "Pastia lines",
+      "Elbow folds",
+      "Linear red"
+     ],
+     [
+      "Peeling",
+      "Fingers",
+      "Week later"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Necrotising fasciitis** kills fascia in hours; **pain beyond redness** is the alarm. **Blisters, purple patches and gas** follow fast. **Surgical exploration** is test and treatment; fingers beat scans. **Broad cover with toxin suppression** runs with repeated debridement. **Never wait** for imaging when fascia is dying.",
+   "say": "Necrotising fasciitis kills fascia within hours, and pain beyond the visible redness is the alarm that saves lives. Blisters with purple patches with crackling gas follow rapidly, and the patient looks toxic early. Surgical exploration is both test and treatment, because no scan beats a finger in theatre. Broad cover with toxin suppression runs alongside repeated debridement.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pain beyond redness"
+     },
+     {
+      "id": "b",
+      "label": "Blisters, toxic look"
+     },
+     {
+      "id": "c",
+      "label": "Explore in theatre now"
+     },
+     {
+      "id": "d",
+      "label": "Debride, cover, suppress"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Pneumococcus** leads bacterial pneumonia, meningitis and otitis; **vaccines** halved invasive disease. **Rusty sputum with rigors** marks lobar pneumonia. **Low sugar meningitis** needs urgent cover. **Sputum with blood cultures** precede treatment. **Asplenia and age extremes** invite severe disease and earn vaccination.",
+   "say": "Pneumococcus is the commonest bacterial cause of pneumonia with meningitis with ear infections, and vaccines have halved invasive disease. Rusty sputum with rigors with lobar consolidation is the classic chest story, while purulent meningitis with low sugar needs urgent cover. Sputum with blood cultures precede treatment, and resistance testing guides narrowing. The worst disease is seen after splenectomy and at age extremes.",
+   "vis": {
+    "cols": [
+     "Site",
+     "Classic clue",
+     "Prevent"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Lung",
+      "Rusty sputum, rigors",
+      "Vaccine, treat early"
+     ],
+     [
+      "Meninges",
+      "Low sugar pus",
+      "Urgent cover"
+     ],
+     [
+      "Ear",
+      "Bulging drum",
+      "Treat, watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Group B streptococcus** strikes newborns in **two waves**: early sepsis with pneumonia, late meningitis. **Near term screening** with labour cover for positives broke the curve. **Allergy labels** are checked as most are wrong and narrow cover is safer. **Fever in labour** with prolonged rupture raises risk and lowers thresholds.",
+   "say": "Group B streptococcus colonises birth canals and strikes newborns in two waves. Early onset sepsis with pneumonia hits in the first week, while late onset meningitis follows at home. Screening near term with labour cover for positives broke the curve. Allergy labels are checked, because most are wrong and narrow cover is safer for mother with child.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "First week, sepsis, labour cover prevents"
+     ],
+     "title": "Early onset"
+    },
+    "right": {
+     "points": [
+      "Weeks later, meningitis at home, watchful"
+     ],
+     "title": "Late onset"
+    }
+   }
+  },
+  {
+   "tx": "**Viridans endocarditis** follows dental bacteraemia with **weeks of sweats** and weight loss. **Blood cultures** stay positive for days. **Hygiene prevents** more than procedural cover. **Long bactericidal courses** cure native valves. **Prosthetic valves** need surgeons early. **New murmurs** with fever earn cultures first.",
+   "say": "Viridans streptococci live on teeth and seed heart valves after dental work, causing slow endocarditis with night sweats. Blood cultures stay positive for days, and vegetations grow silently for weeks. Dental hygiene prevents more cases than procedural cover. Long bactericidal courses cure native valves, while prosthetic valves need surgeons early.",
+   "vis": {
+    "cols": [
+     "Valve",
+     "Course",
+     "Surgeon"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Native, viridans",
+      "Weeks, slow",
+      "Rarely needed"
+     ],
+     [
+      "Prosthetic, any",
+      "Fast, destructive",
+      "Early always"
+     ],
+     [
+      "Fungal",
+      "Worst, bulky",
+      "Remove, long drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Enterococci** survive bile and salt and trade resistance freely. **Catheter urine, wounds and lines** are their territory. Resistance to last line drugs spreads on plasmids. **Last resort drugs** are saved for proven cases with committee approval. **Catheter removal with source control** cures more than prolonged cover. **Narrowest effective** cover is the rule.",
+   "say": "Enterococci are hardy survivors of bile with salt with gut, and they trade resistance genes freely. Urinary infection with wound infection with line infection in catheterised patients is their territory. Resistance to last line drugs is spreading on plasmids, and last resort drugs are saved for proven cases. Catheter removal with source control cures more than prolonged cover alone.",
+   "vis": {
+    "cols": [
+     "Resistance",
+     "Spreads by",
+     "Answer"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Drug tolerance",
+      "Biofilm, catheters",
+      "Remove source"
+     ],
+     [
+      "Last line resistance",
+      "Plasmids",
+      "Save last resorts"
+     ],
+     [
+      "New drug resistance",
+      "Overuse",
+      "Rotate, restrict"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chain endocarditis** takes long **bactericidal combinations** by species and sensitivity. **Failed clearance, growing vegetations, emboli and heart failure** trigger surgery. **Dental work waits** during treatment. **Repeat cultures** document cure. **Relapse within months** means the valve never sterilised and needs removal.",
+   "say": "Endocarditis from chains is cured by long bactericidal combinations chosen by species with sensitivity. Failed blood clearance with growing vegetations with emboli triggers surgery, and heart failure from valve destruction waits for no course completion. Dental work is deferred during treatment, and repeat cultures document the cure. Relapse within months means the valve was never sterilised.",
+   "vis": {
+    "cols": [
+     "Surgery trigger",
+     "Why",
+     "Timing"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Heart failure",
+      "Valve destroyed",
+      "Emergency"
+     ],
+     [
+      "Emboli repeat",
+      "Vegetation shedding",
+      "Urgent"
+     ],
+     [
+      "No clearance",
+      "Drugs failing",
+      "Urgent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chain osteomyelitis** seeds vertebrae; **back pain with fever** after bloodstream infection means spinal infection first. **Imaging** shows disc and vertebral swelling; **biopsy** names the bug when blood is sterile. **Weeks of combination treatment** from clearance cures most. **Abscess or instability** needs surgeons urgently.",
+   "say": "Bone with joint infection from chains follows bacteraemia, and back pain with fever after bloodstream infection is spinal infection first. Imaging shows disc with vertebral swelling, and biopsy names the bug when blood is sterile. Weeks of combination treatment from clearance cures most, while abscess with instability needs surgeons. Hips with knees are aspirated urgently when hot and swollen.",
+   "vis": {
+    "cols": [
+     "Site",
+     "Test",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Vertebral",
+      "Imaging, biopsy if sterile",
+      "Weeks from clearance"
+     ],
+     [
+      "Septic joint",
+      "Aspirate urgently",
+      "Drain plus weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **beta haemolysis** marks group A strep. **No cough** raises throat scores. **Sandpaper with strawberry tongue** marks scarlet fever. **Pain beyond redness** marks fascia dying. **Rusty sputum** marks pneumococcus. **Two newborn waves** mark group B. **Catheters** invite enterococcus.",
+   "say": "For the exam, the facts to lock in are beta haemolysis for group A, absence of cough raising the throat score, sandpaper rash with strawberry tongue, pain beyond redness for fascia, rusty sputum for pneumococcus, two wave newborn disease for group B, and catheter territory for enterococcus. Culture first always, and narrow cover follows sensitivity. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Group A bench",
+      "Beta, bacitracin",
+      "Sorting question"
+     ],
+     [
+      "Throat score",
+      "No cough counts",
+      "Treat positives"
+     ],
+     [
+      "Scarlet pair",
+      "Sandpaper, strawberry",
+      "Toxin rash"
+     ],
+     [
+      "Fascia alarm",
+      "Pain beyond redness",
+      "Theatre now"
+     ],
+     [
+      "Pneumococcus clue",
+      "Rusty sputum",
+      "Lobar picture"
+     ],
+     [
+      "Group B waves",
+      "Early sepsis, late meningitis",
+      "Screen, cover labour"
+     ],
+     [
+      "Enterococcus home",
+      "Catheters, bile",
+      "Resists, persists"
+     ],
+     [
+      "Endocarditis cure",
+      "Long, bactericidal",
+      "Surgery triggers"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
