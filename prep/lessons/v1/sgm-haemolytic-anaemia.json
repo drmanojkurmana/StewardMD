@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-haemolytic-anaemia",
+ "subject": "ss-general-medicine",
+ "title": "Haemolytic Anaemias",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Haemolytic anaemia** (premature red cell destruction) is defined by **reticulocytosis** (young cell rise) with **jaundice** (bilirubin rise). **Intravascular haemolysis** (inside vessel breakdown) causes haemoglobinuria. **Extravascular haemolysis** (spleen clearance) causes splenomegaly. **Autoimmune haemolytic anaemia** (antibody driven breakdown) is warm or cold type. **Sickle cell disease** (haemoglobin S) causes vaso occlusion. **G6PD deficiency** (enzyme lack) causes oxidative haemolysis.",
+   "say": "Haemolytic anaemia is characterised by premature red cell destruction, and it is defined by reticulocytosis with jaundice that requires hemolysis workup. Intravascular haemolysis is characterised by inside vessel breakdown, and it causes haemoglobinuria that requires transfusion support. Extravascular haemolysis is characterised by spleen clearance, and it causes splenomegaly that requires splenic evaluation.",
+   "vis": null
+  },
+  {
+   "tx": "**Autoimmune warm disease** (IgG warm antibodies) is the commonest acquired cause. **Cold agglutinin disease** (IgM cold antibodies) is associated with lymphoma. **Paroxysmal nocturnal haemoglobinuria** (PNH, complement sensitivity) causes haemoglobinuria. **Sickle cell disease** (beta globin mutation) causes vaso occlusion. **Thalassaemia major** (globin chain failure) causes transfusion dependence. **G6PD deficiency** (X linked enzyme lack) causes fava hemolysis.",
+   "say": "Autoimmune warm disease is characterised by IgG warm antibodies, and it is the commonest acquired cause that requires steroids therapy. Cold agglutinin disease is characterised by IgM cold antibodies, and it is associated with lymphoma that requires chemotherapy. Paroxysmal nocturnal haemoglobinuria is characterised by complement sensitivity, and it causes haemoglobinuria that requires eculizumab therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Antibody coating marks **extravascular clearance** (spleen macrophage removal) with splenomegaly. **Complement activation** (membrane attack) causes **intravascular lysis** (vessel breakdown) with haemoglobinuria. **Colchicine hypersensitivity** (drug immune haemolysis) is drug driven. **Haemoglobin S polymerisation** (dehydration driven sickling) causes occlusion. **Oxidative injury** (Heinz bodies) follows primaquine in G6PD deficiency. **Mechanical shear** (prosthetic valves) causes microangiopathic haemolysis.",
+   "say": "Antibody coating is characterised by marking extravascular clearance, and it causes spleen macrophage removal with splenomegaly. Complement activation is characterised by membrane attack, and it causes intravascular lysis that produces haemoglobinuria. Colchicine hypersensitivity is characterised by drug immune haemolysis, and it is drug driven that requires drug cessation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antibody or defect"
+     },
+     {
+      "id": "b",
+      "label": "Red cell damage"
+     },
+     {
+      "id": "c",
+      "label": "Spleen or vessel lysis"
+     },
+     {
+      "id": "d",
+      "label": "Reticulocytosis"
+     },
+     {
+      "id": "e",
+      "label": "Jaundice and anaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Jaundice** (yellow skin) with **splenomegaly** (enlarged spleen) marks extravascular disease. **Haemoglobinuria** (dark urine) with **haemosiderinuria** (iron stained urine) marks intravascular disease. **Gallstones** (pigment stones) follow chronic haemolysis. **Leg ulcers** (vaso occlusive) mark sickle cell disease. **Priapism** (painful erection) marks sickle cell disease. **Aplastic crisis** (parvovirus infection) complicates sickle disease.",
+   "say": "Jaundice is characterised by yellow skin, and it is accompanied by splenomegaly that marks extravascular disease with spleen clearance. Haemoglobinuria is characterised by dark urine, and it is accompanied by haemosiderinuria that marks intravascular disease with vessel lysis. Gallstones are characterised by pigment stones, and they follow chronic haemolysis that requires cholecystectomy.",
+   "vis": null
+  },
+  {
+   "tx": "**Direct Coombs test** (DAT, antibody coating) is positive in autoimmune haemolysis. **LDH elevation** (tissue enzyme) with **haptoglobin fall** (binding protein lack) confirms haemolysis. **Reticulocyte count** (marrow response) is high in haemolysis. **Peripheral smear** (spherocytes, schistocytes) shows morphology. **Osmotic fragility** (membrane test) confirms hereditary spherocytosis. **Haemoglobin electrophoresis** (S band) confirms sickle disease.",
+   "say": "Direct Coombs test is characterised by antibody coating detection, and it is positive in autoimmune haemolysis that requires steroids therapy. LDH elevation is characterised by tissue enzyme rise, and it is accompanied by haptoglobin fall that confirms haemolysis with binding protein loss. Reticulocyte count is characterised by marrow response assessment, and it is high in haemolysis that indicates compensation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Direct Coombs",
+      "Autoimmune",
+      "Positive warm disease"
+     ],
+     [
+      "LDH haptoglobin",
+      "Haemolysis",
+      "High LDH low haptoglobin"
+     ],
+     [
+      "Reticulocyte",
+      "Marrow response",
+      "High in haemolysis"
+     ],
+     [
+      "Smear",
+      "Morphology",
+      "Spherocytes schistocytes"
+     ],
+     [
+      "Electrophoresis",
+      "Sickle",
+      "S band"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Corticosteroids** (prednisolone 1 mg per kg) are first line for warm autoimmune disease. **Rituximab** (B cell depleter) treats refractory disease. **Splenectomy** (spleen removal) cures hereditary spherocytosis. **Eculizumab** (complement inhibitor) treats PNH. **Hydroxyurea** (sickling reducer) prevents sickle crises. **Transfusion** (packed cells) is indicated for severe disease.",
+   "say": "Corticosteroids are characterised by prednisolone one milligram per kilogram, and they are the first line for warm autoimmune disease that requires monitoring. Rituximab is characterised by B cell depletion, and it treats refractory disease that requires infusion therapy. Splenectomy is characterised by spleen removal, and it cures hereditary spherocytosis that improves haemolysis.",
+   "vis": null
+  },
+  {
+   "tx": "**Warm autoimmune disease** needs steroids first, then rituximab. **Cold agglutinin disease** (IgM disease) needs rituximab without steroids. **PNH** needs eculizumab lifelong. **Sickle cell disease** needs hydroxyurea with vaccinations. **G6PD deficiency** needs trigger avoidance. **Hereditary spherocytosis** needs splenectomy with vaccinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "Warm autoimmune disease is characterised by needing steroids first, and it is followed by rituximab that treats refractory cases. Cold agglutinin disease is characterised by IgM disease, and it needs rituximab without steroids that frequently fail. PNH is characterised by needing eculizumab lifelong, and it prevents thrombosis that dominates mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warm autoimmune",
+     "points": [
+      "IgG warm antibodies",
+      "Steroids first line",
+      "DAT positive",
+      "Spleen clearance"
+     ]
+    },
+    "right": {
+     "title": "Cold PNH disease",
+     "points": [
+      "IgM cold or complement",
+      "Rituximab or eculizumab",
+      "Steroids poor response",
+      "Thrombosis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Thrombosis** (PNH, sickle disease) is the leading mortality cause. **Aplastic crisis** (parvovirus infection) needs transfusion. **Acute chest syndrome** (sickle lung failure) needs exchange transfusion. **Iron overload** (transfusion chelation) needs deferoxamine. **Pulmonary hypertension** (sickle complication) needs screening. **Stroke** (sickle vasculopathy) needs chronic transfusion.",
+   "say": "Thrombosis is characterised by PNH and sickle disease risk, and it is the leading mortality cause that requires anticoagulation. Aplastic crisis is characterised by parvovirus infection, and it needs transfusion that replaces red cells. Acute chest syndrome is characterised by sickle lung failure, and it needs exchange transfusion that dilutes sickle cells.",
+   "vis": null
+  },
+  {
+   "tx": "**Warm autoimmune** disease remits in 70 percent with steroids. PNH survival improves dramatically with eculizumab. Sickle cell survival exceeds 50 years with hydroxyurea and care. Hereditary spherocytosis survival is near normal after splenectomy. G6PD haemolysis is self limited without triggers. Thalassaemia major survival depends on chelation compliance.",
+   "say": "Warm autoimmune disease is characterised by remitting in seventy percent with steroids, and it is achieved with prednisolone therapy. PNH survival is characterised by dramatic improvement with eculizumab, and it is achieved with complement inhibition. Sickle cell survival is characterised by exceeding fifty years with hydroxyurea, and it is achieved with comprehensive care.",
+   "vis": null
+  },
+  {
+   "tx": "Indian guidelines stress DAT diagnosis, hydroxyurea for sickle disease and splenectomy for spherocytosis. **Spherocytes** (ball cells) is a favourite examination sign. **Sickle cells** (crescent cells) is a favourite smear vignette. **Heinz bodies** (oxidative inclusions) mark G6PD disease. Traps include missing DAT in autoimmune disease, omitting penicillin prophylaxis in sickle disease, and calling thalassaemia trait haemolysis. **Fava hemolysis** (broad bean trigger) is the G6PD vignette.",
+   "say": "Current guidelines are characterised by DAT diagnosis and hydroxyurea for sickle disease and splenectomy for spherocytosis, and they are stressed for haemolysis care in India. Spherocytes are characterised by ball cells, and they are a favourite examination sign that confirms extravascular disease. Sickle cells are characterised by crescent cells, and they are a favourite smear vignette that confirms vaso occlusive disease.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers DAT positivity, spherocyte morphology and eculizumab use. Coombs positivity and sickle electrophoresis are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table is characterised by DAT positivity and spherocyte morphology and eculizumab use, and it gathers the high yield points for revision in theory. Coombs positivity and sickle electrophoresis are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Warm DAT",
+      "Positive"
+     ],
+     [
+      "Warm first line",
+      "Prednisolone steroids"
+     ],
+     [
+      "PNH therapy",
+      "Eculizumab lifelong"
+     ],
+     [
+      "Sickle therapy",
+      "Hydroxyurea"
+     ],
+     [
+      "Spherocytosis cure",
+      "Splenectomy"
+     ],
+     [
+      "G6PD trigger",
+      "Primaquine fava"
+     ],
+     [
+      "Smear spherocyte",
+      "Extravascular"
+     ],
+     [
+      "Thrombosis risk",
+      "PNH sickle"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

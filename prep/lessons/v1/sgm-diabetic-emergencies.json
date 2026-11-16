@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-diabetic-emergencies",
+ "subject": "ss-general-medicine",
+ "title": "Diabetic Emergencies and Hypoglycaemia",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Diabetic ketoacidosis** (DKA, acid buildup from insulin lack) is the type 1 emergency with hyperglycaemia above **250 mg per decilitre** and ketosis. **Hyperosmolar hyperglycaemic state** (HHS, severe hyperglycaemia without ketosis) presents with glucose above **600** and dehydration. **Hypoglycaemia** (glucose below 70 mg per decilitre) is the insulin therapy emergency. **Lactic acidosis** (metformin associated acidosis) complicates renal failure. **Euglycaemic ketoacidosis** (ketosis with normal glucose) follows SGLT2 inhibitors.",
+   "say": "Diabetic ketoacidosis is the type one emergency with hyperglycaemia above two hundred fifty and ketosis, and it is characterised by acid buildup from severe insulin lack in the patient. Hyperosmolar hyperglycaemic state presents with glucose above six hundred and profound dehydration, and it is characterised by severe hyperglycaemia without significant ketosis in elderly patients. Hypoglycaemia below seventy is the insulin therapy emergency, and it is characterised by sweating and confusion requiring immediate glucose rescue in the patient.",
+   "vis": null
+  },
+  {
+   "tx": "**Insulin deficiency** (absolute or relative) allows **lipolysis** (fat breakdown) with ketoacid production. **Counterregulatory hormones** (glucagon, cortisol, catecholamines) drive hepatic glucose output. **Volume depletion** (osmotic diuresis) causes hyperosmolality and acidosis. **Acute illness** (infection, myocardial infarction) precipitates emergencies. **Insulin omission** (missed doses) precipitates ketoacidosis in type 1 disease. **SGLT2 inhibition** (glycosuria) precipitates euglycaemic ketoacidosis.",
+   "say": "Insulin deficiency is characterised by absolute or relative lack of insulin, and it allows fat breakdown with ketoacid production that drives the emergency. Counterregulatory hormones are characterised by glucagon and cortisol and catecholamines, and they drive hepatic glucose output that worsens hyperglycaemia. Volume depletion is characterised by osmotic diuresis, and it causes hyperosmolality and acidosis that require fluid resuscitation in the patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Insulin deficiency"
+     },
+     {
+      "id": "b",
+      "label": "Lipolysis and ketosis"
+     },
+     {
+      "id": "c",
+      "label": "Hyperglycaemia"
+     },
+     {
+      "id": "d",
+      "label": "Osmotic diuresis"
+     },
+     {
+      "id": "e",
+      "label": "Acidosis and shock"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Abdominal pain** (ileus mimicking surgical abdomen) with **Kussmaul breathing** (deep rapid breathing) marks ketoacidosis. **Dehydration** (dry mucosa) with **tachycardia** (fast heart) marks hyperosmolar disease. **Fruity breath** (acetone odour) with **vomiting** (repeated) is classic. **Confusion** (delirium) with **hyperosmolality** (severe dehydration) marks hyperosmolar disease. **Hypoglycaemia** presents with sweating, tremor and confusion. **Seizures** (neuroglycopenia) mark severe hypoglycaemia.",
+   "say": "Abdominal pain is characterised by ileus mimicking surgical abdomen, and it is accompanied by deep rapid breathing that marks ketoacidosis in the patient. Dehydration is characterised by dry mucosa, and it is accompanied by fast heart that marks hyperosmolar disease in elderly patients. Fruity breath is characterised by acetone odour, and it is accompanied by repeated vomiting that is classic for ketoacidosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Arterial blood gas** (acidosis test) shows pH below 7.3 with low bicarbonate in ketoacidosis. **Serum ketones** (beta hydroxybutyrate) above 3 mmol per litre confirms ketosis. **Serum osmolality** (solute concentration) above 320 marks hyperosmolar disease. **Bedside glucose** (capillary sample) guides therapy titration. **Potassium level** (serum potassium) is often normal despite total body depletion. **ECG** (heart tracing) shows peaked T waves with hyperkalaemia.",
+   "say": "Arterial blood gas is characterised by pH below seven point three with low bicarbonate, and it confirms acidosis in ketoacidosis. Serum ketones are characterised by beta hydroxybutyrate above three, and they confirm ketosis that guides insulin therapy. Serum osmolality is characterised by concentration above three hundred twenty, and it marks hyperosmolar disease that requires fluid resuscitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Blood gas pH",
+      "Acidosis",
+      "Below 7.3 ketoacidosis"
+     ],
+     [
+      "Serum ketones",
+      "Ketosis",
+      "Above 3 mmol per litre"
+     ],
+     [
+      "Serum osmolality",
+      "Hyperosmolality",
+      "Above 320 hyperosmolar"
+     ],
+     [
+      "Potassium",
+      "Fluid guide",
+      "Often normal total low"
+     ],
+     [
+      "ECG",
+      "Hyperkalaemia",
+      "Peaked T waves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intravenous fluids** (normal saline) are first line for volume resuscitation. **Intravenous insulin infusion** (0.1 unit per kg per hour) is first line for ketoacidosis. **Potassium replacement** (when below 5.3) prevents arrhythmia and insulin resistance. **Bicarbonate therapy** (alkali) is reserved for pH below 6.9. **Hypoglycaemia rescue** (15 g glucose) treats insulin lows. **Thiamine replacement** (vitamin B1) precedes dextrose in malnutrition.",
+   "say": "Intravenous fluids are characterised by normal saline, and they are the first line for volume resuscitation that prevents shock in the patient. Intravenous insulin infusion is characterised by zero point one unit per kilogram per hour, and it is the first line for ketoacidosis that requires titration. Potassium replacement is characterised by correction when below five point three, and it prevents arrhythmia that would otherwise complicate therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Fixed rate insulin infusion** (0.1 unit per kg per hour) is the standard ketoacidosis regimen. **Fluid therapy** (balanced crystalloids) is first line for hyperosmolar disease. **Thromboprophylaxis** (heparin) prevents hypercoagulability in hyperosmolar disease. **Insulin transition** (subcutaneous switch) starts when anion gap closes. **Hypoglycaemia management** (glucose titration) requires hourly checks. **Potassium monitoring** (hourly levels) guides replacement.",
+   "say": "Fixed rate insulin infusion is characterised by zero point one unit per kilogram per hour, and it is the standard regimen for ketoacidosis that requires hourly monitoring. Fluid therapy is characterised by balanced crystalloids, and it is the first line for hyperosmolar disease that requires large volume resuscitation. Thromboprophylaxis is characterised by heparin, and it prevents hypercoagulability that complicates hyperosmolar disease in elderly patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ketoacidosis care",
+     "points": [
+      "Insulin infusion first",
+      "Fluids plus potassium",
+      "Bicarbonate only if pH low",
+      "Transition after gap closure"
+     ]
+    },
+    "right": {
+     "title": "Hyperosmolar care",
+     "points": [
+      "Aggressive fluids first",
+      "Insulin after fluids",
+      "Thromboprophylaxis heparin",
+      "Slower glucose fall"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cerebral oedema** (brain swelling) is the paediatric ketoacidosis killer. **Hypokalaemia** (low potassium) with arrhythmia complicates insulin therapy. **Hypoglycaemia** (low glucose) complicates prolonged infusion. **Venous thrombosis** (hypercoagulability) complicates hyperosmolar disease. **Acute respiratory distress** (ARDS, lung failure) complicates severe acidosis. **Hypophosphataemia** (low phosphate) causes respiratory failure.",
+   "say": "Cerebral oedema is characterised by brain swelling, and it is the paediatric ketoacidosis killer that requires early recognition in the patient. Hypokalaemia is characterised by low potassium with arrhythmia, and it complicates insulin therapy that requires hourly monitoring. Hypoglycaemia is characterised by low glucose, and it complicates prolonged infusion that requires glucose titration and dextrose support.",
+   "vis": null
+  },
+  {
+   "tx": "**Ketoacidosis mortality** is below 1 percent with prompt therapy, driven by cerebral oedema and sepsis. Hyperosmolar mortality exceeds 20 percent in elderly patients from dehydration. Severe hypoglycaemia mortality is low with prompt rescue. Euglycaemic ketoacidosis mortality mirrors classic ketoacidosis. Lactic acidosis mortality exceeds 30 percent with renal failure. Prevention by sick day rules halves recurrence.",
+   "say": "Ketoacidosis mortality is characterised by a rate below one percent with prompt therapy, and it is driven by cerebral oedema and sepsis that require intensive monitoring. Hyperosmolar mortality is characterised by a rate exceeding twenty percent in elderly patients, and it is driven by dehydration and thrombosis that require fluid resuscitation. Severe hypoglycaemia mortality is characterised by a low rate with prompt rescue, and it is driven by neuroglycopenia that requires glucose administration.",
+   "vis": null
+  },
+  {
+   "tx": "American Diabetes Association 2024 guidance stresses fixed rate insulin, potassium replacement and transition criteria. **Anion gap closure** (gap below 12) defines ketoacidosis resolution. **Sick day rules** (never stop insulin) prevent recurrence. Examination traps include giving bicarbonate routinely, missing potassium replacement, and stopping insulin when glucose normalises. **Kussmaul breathing** (deep rapid breathing) is a favourite viva sign.",
+   "say": "Current guidance is characterised by fixed rate insulin and potassium replacement and transition criteria, and it is stressed by the American Diabetes Association for safe practice. Anion gap closure is characterised by a gap below twelve, and it defines ketoacidosis resolution that allows insulin transition. Sick day rules are characterised by never stopping insulin, and they prevent recurrence that is commonly tested in viva examinations.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers ketosis thresholds, pH cutoffs and insulin rates. Kussmaul breathing and anion gap closure are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table is characterised by ketosis thresholds and pH cutoffs and insulin rates, and it gathers the high yield points for revision in theory. Kussmaul breathing and anion gap closure are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Ketosis marker",
+      "Beta hydroxybutyrate above 3"
+     ],
+     [
+      "Acidosis pH",
+      "Below 7.3"
+     ],
+     [
+      "Hyperosmolality",
+      "Above 320"
+     ],
+     [
+      "Insulin rate",
+      "0.1 unit per kg per hour"
+     ],
+     [
+      "K resolution",
+      "Anion gap below 12"
+     ],
+     [
+      "Hypoglycaemia rescue",
+      "15 g fast glucose"
+     ],
+     [
+      "Bicarbonate use",
+      "Only if pH below 6.9"
+     ],
+     [
+      "Potassium rule",
+      "Replace below 5.3"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

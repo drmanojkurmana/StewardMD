@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-porphyria-amyloidosis",
+ "subject": "ss-general-medicine",
+ "title": "Porphyrias and Systemic Amyloidosis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Porphyria** (haem synthesis failure) is hepatic or erythropoietic. **Acute intermittent porphyria** (AIP, HMBS deficiency) causes abdominal pain with neuropathy. **Erythropoietic protoporphyria** (FECH deficiency) causes photosensitivity. **Amyloidosis** (protein misfolding disease) is AL, AA or transthyretin type. **AL amyloidosis** (light chain disease) affects heart and kidney. **AA amyloidosis** (chronic inflammation) is secondary disease.",
+   "say": "Porphyria is characterised by haem synthesis failure, and it is hepatic or erythropoietic that affects skin and nerve. Acute intermittent porphyria is characterised by HMBS deficiency, and it causes abdominal pain with neuropathy that requires glucose loading. Erythropoietic protoporphyria is characterised by FECH deficiency, and it causes photosensitivity that requires sun protection.",
+   "vis": null
+  },
+  {
+   "tx": "**HMBS mutation** (hydroxymethylbilane synthase) causes AIP with neurovisceral attacks. **Variegate porphyria** (PPOX deficiency) causes skin blisters. **Porphyria cutanea tarda** (PCT, uroporphyrinogen decarboxylase) causes skin fragility. **AL light chains** (plasma cell clones) cause systemic amyloidosis. **Transthyretin amyloid** (TTR tetramer) causes cardiomyopathy. **Serum amyloid A** (inflammatory protein) causes AA amyloidosis.",
+   "say": "HMBS mutation is characterised by hydroxymethylbilane synthase deficiency, and it causes AIP with neurovisceral attacks that require trigger avoidance. Variegate porphyria is characterised by PPOX deficiency, and it causes skin blisters that require sun protection. Porphyria cutanea tarda is characterised by uroporphyrinogen decarboxylase deficiency, and it causes skin fragility that requires phlebotomy.",
+   "vis": null
+  },
+  {
+   "tx": "Heme deficiency impairs **cytochrome synthesis** (respiratory enzymes) with neurotoxic ALA accumulation. **ALA excess** (neurotoxic precursor) causes dysautonomia and pain. **Amyloid fibrils** (beta pleated sheets) deposit with **Congo red apple green birefringence** (diagnostic stain). **Light chains** (filtered proteins) thicken glomerular membranes. **Transthyretin tetramers** (unstable proteins) deposit in myocardium. **Organ infiltration** (heart, kidney, nerve) determines prognosis.",
+   "say": "Heme deficiency is characterised by impairing cytochrome synthesis, and it is accompanied by neurotoxic ALA accumulation that causes dysautonomia. ALA excess is characterised by neurotoxic precursor accumulation, and it causes dysautonomia and pain that require glucose loading. Amyloid fibrils are characterised by beta pleated sheets, and they deposit with apple green birefringence that confirms diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Enzyme deficiency"
+     },
+     {
+      "id": "b",
+      "label": "Precursor excess"
+     },
+     {
+      "id": "c",
+      "label": "Neurovisceral attack"
+     },
+     {
+      "id": "d",
+      "label": "Fibril deposition"
+     },
+     {
+      "id": "e",
+      "label": "Organ failure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Abdominal pain** (colicky visceral pain) with **vomiting** (autonomic failure) marks AIP attacks. **Photosensitivity** (sun induced pain) marks protoporphyria. **Skin blisters** (fragility) mark PCT. **Macroglossia** (large tongue) with **cardiomyopathy** (restrictive disease) marks AL amyloidosis. **Nephrotic syndrome** (proteinuria) marks renal amyloidosis. **Carpal tunnel** (median nerve compression) is the earliest amyloid sign.",
+   "say": "Abdominal pain is characterised by colicky visceral pain, and it is accompanied by vomiting that marks AIP attacks with autonomic failure. Photosensitivity is characterised by sun induced pain, and it marks protoporphyria that requires sun protection. Skin blisters are characterised by fragility, and they mark PCT that requires phlebotomy.",
+   "vis": null
+  },
+  {
+   "tx": "**Urine PBG** (porphobilinogen) is positive in AIP attacks. **Plasma porphyrins** (fluorescence scan) confirm protoporphyria. **Fat pad biopsy** (Congo red stain) confirms amyloidosis. **Serum free light chains** (clonal proteins) confirm AL amyloidosis. **Echocardiography** (heart ultrasound) shows restrictive pattern. **Bone scintigraphy** (PYP scan) confirms transthyretin disease.",
+   "say": "Urine PBG is characterised by porphobilinogen testing, and it is positive in AIP attacks that require glucose loading. Plasma porphyrins are characterised by fluorescence scanning, and they confirm protoporphyria that requires sun protection. Fat pad biopsy is characterised by Congo red staining, and it confirms amyloidosis that requires chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Urine PBG",
+      "AIP attack",
+      "Positive in attacks"
+     ],
+     [
+      "Plasma porphyrins",
+      "Protoporphyria",
+      "Fluorescence scan"
+     ],
+     [
+      "Fat pad biopsy",
+      "Amyloid confirm",
+      "Congo red stain"
+     ],
+     [
+      "Free light chains",
+      "AL confirm",
+      "Clonal proteins"
+     ],
+     [
+      "PYP scintigraphy",
+      "TTR confirm",
+      "Heart uptake"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glucose loading** (carbohydrate therapy) suppresses ALA in AIP attacks. **Hemin therapy** (heme arginate) is definitive for severe attacks. **Avoid triggers** (barbiturates, sulfonamides) prevents attacks. **Daratumumab therapy** (anti CD38) treats AL amyloidosis. **Sun protection** (broad spectrum sunscreen) treats photosensitivity. **Phlebotomy** (blood removal) treats PCT iron excess.",
+   "say": "Glucose loading is characterised by carbohydrate therapy, and it suppresses ALA in AIP attacks that require monitoring. Hemin therapy is characterised by heme arginate, and it is definitive for severe attacks that require infusion. Avoid triggers is characterised by barbiturates and sulfonamides avoidance, and it prevents attacks that require counselling.",
+   "vis": null
+  },
+  {
+   "tx": "**Transthyretin stabilisers** (tafamidis) treat ATTR cardiomyopathy. **Gene silencing** (patisiran) treats hereditary ATTR neuropathy. **Anti amyloid therapy** (chemotherapy) prolongs AL survival. **Sun protection** (clothing, sunscreen) prevents protoporphyria burns. **Iron chelation** (deferoxamine) treats PCT iron excess. **Liver transplantation** (organ replacement) cures AIP refractory disease.",
+   "say": "Transthyretin stabilisers are characterised by tafamidis, and they treat ATTR cardiomyopathy that improves survival. Gene silencing is characterised by patisiran, and it treats hereditary ATTR neuropathy with stabilisation. Anti amyloid therapy is characterised by chemotherapy, and it prolongs AL survival that requires hematology care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Porphyria care",
+     "points": [
+      "Glucose and hemin attacks",
+      "Avoid triggers",
+      "Sun protection photosensitivity",
+      "Phlebotomy PCT"
+     ]
+    },
+    "right": {
+     "title": "Amyloidosis care",
+     "points": [
+      "Daratumumab AL therapy",
+      "Tafamidis ATTR heart",
+      "Fat pad diagnosis",
+      "Supportive organ care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**AIP attack ileus** (gut paralysis) needs supportive care. **Hyponatraemia** (SIADH) complicates AIP attacks. **Protoporphyria gallstones** (pigment stones) need cholecystectomy. **AL nephrotic syndrome** (proteinuria) needs kidney protection. **ATTR heart block** (conduction disease) needs pacing. **Carpal tunnel recurrence** (nerve compression) needs release.",
+   "say": "AIP attack ileus is characterised by gut paralysis, and it needs supportive care that bridges attacks. Hyponatraemia is characterised by SIADH, and it complicates AIP attacks that require fluid management. Protoporphyria gallstones are characterised by pigment stones, and they need cholecystectomy that prevents complications.",
+   "vis": null
+  },
+  {
+   "tx": "**AIP attack** mortality is below 5 percent with prompt glucose and hemin. AL amyloidosis median survival is 2 years without therapy. ATTR cardiomyopathy survival improves with tafamidis. PCT survival is near normal with phlebotomy. Protoporphyria survival is near normal with sun protection. AA amyloidosis survival depends on inflammation control.",
+   "say": "AIP attack mortality is characterised by below five percent with prompt glucose and hemin, and it is driven by autonomic complications. AL amyloidosis median survival is characterised by two years without therapy, and it improves with daratumumab chemotherapy. ATTR cardiomyopathy survival is characterised by improvement with tafamidis, and it is achieved with stabiliser therapy.",
+   "vis": null
+  },
+  {
+   "tx": "British Porphyria Society guidance stresses trigger avoidance, glucose loading and hemin therapy. **Urine PBG positivity** (attack marker) is a favourite examination test. **Congo red apple green** (amyloid birefringence) is the classic pathology vignette. Traps include missing triggers, calling amyloid myeloma, and omitting fat pad biopsy. **Macroglossia with nephrotic syndrome** (amyloid clue) is the classic vignette.",
+   "say": "Current guidance is characterised by trigger avoidance and glucose loading and hemin therapy, and it is stressed by porphyria societies for safe care. Urine PBG positivity is characterised by attack marker testing, and it is a favourite examination test that confirms AIP attacks. Congo red apple green is characterised by amyloid birefringence, and it is the classic pathology vignette that confirms diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers PBG positivity, Congo red birefringence and daratumumab use. Apple green and PBG are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table is characterised by PBG positivity and Congo red birefringence and daratumumab use, and it gathers the high yield points for revision in theory. Apple green and PBG are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "AIP urine test",
+      "PBG positive"
+     ],
+     [
+      "Protoporphyria test",
+      "Plasma porphyrins"
+     ],
+     [
+      "Amyloid stain",
+      "Congo red apple green"
+     ],
+     [
+      "AL therapy",
+      "Daratumumab"
+     ],
+     [
+      "ATTR stabiliser",
+      "Tafamidis"
+     ],
+     [
+      "PCT therapy",
+      "Phlebotomy"
+     ],
+     [
+      "Attack therapy",
+      "Glucose and hemin"
+     ],
+     [
+      "Trigger rule",
+      "Avoid barbiturates"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

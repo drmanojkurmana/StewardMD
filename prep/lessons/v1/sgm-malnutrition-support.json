@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-malnutrition-support",
+ "subject": "ss-general-medicine",
+ "title": "Malnutrition and Nutrition Support",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Malnutrition** (nutrient deficiency and excess) affects 30 percent of hospitalised Indians. **Protein energy malnutrition** (marasmus, kwashiorkor) dominates childhood disease. **Micronutrient deficiencies** (vitamin, mineral lack) cause blindness, anaemia and neuropathy. **Refeeding syndrome** (electrolyte collapse) threatens nutritional rehabilitation. **Sarcopenia** (muscle loss) predicts mortality. **Albumin** (nutrition marker) is an acute phase reactant, not a nutrition test.",
+   "say": "Malnutrition is characterised by nutrient deficiency and excess, and it affects thirty percent of hospitalised Indians who require screening. Protein energy malnutrition is characterised by marasmus and kwashiorkor, and it dominates childhood disease that requires rehabilitation. Micronutrient deficiencies are characterised by vitamin and mineral lack, and they cause blindness and anaemia and neuropathy.",
+   "vis": null
+  },
+  {
+   "tx": "**Starvation** (prolonged fasting) causes marasmus with muscle wasting. **Protein deficiency** (low protein diet) causes kwashiorkor with oedema. **Malabsorption** (coeliac, pancreatic failure) causes multiple deficiencies. **Hypercatabolism** (sepsis, burns) increases protein needs. **Anorexia nervosa** (psychological restriction) causes severe malnutrition. **Alcoholism** (thiamine lack) causes Wernicke encephalopathy.",
+   "say": "Starvation is characterised by prolonged fasting, and it causes marasmus with muscle wasting that requires gradual refeeding. Protein deficiency is characterised by low protein diet, and it causes kwashiorkor with oedema that requires protein replacement. Malabsorption is characterised by coeliac and pancreatic failure, and it causes multiple deficiencies that require enzyme therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Starvation depletes **glycogen stores** (carbohydrate reserves) with **fat mobilisation** (ketone production). **Protein catabolism** (muscle breakdown) provides gluconeogenesis. **Micronutrient depletion** (thiamine lack) impairs pyruvate utilisation. **Electrolyte depletion** (phosphate, potassium loss) sets up refeeding collapse. **Immune dysfunction** (lymphopenia) increases infection. **Hypoalbuminaemia** (low protein) causes oedema.",
+   "say": "Starvation is characterised by depleting glycogen stores, and it is accompanied by fat mobilisation that produces ketones for brain fuel. Protein catabolism is characterised by muscle breakdown, and it provides gluconeogenesis that sustains glucose. Micronutrient depletion is characterised by thiamine lack, and it impairs pyruvate utilisation that causes lactic acidosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Starvation"
+     },
+     {
+      "id": "b",
+      "label": "Glycogen and fat loss"
+     },
+     {
+      "id": "c",
+      "label": "Protein catabolism"
+     },
+     {
+      "id": "d",
+      "label": "Micronutrient fall"
+     },
+     {
+      "id": "e",
+      "label": "Immune dysfunction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Weight loss** (10 percent in 6 months) with **temporal wasting** (temple hollowing) is classic. **Bilateral pitting oedema** (protein low oedema) marks kwashiorkor. **Angular stomatitis** (mouth cracking) marks riboflavin deficiency. **Bitot spots** (foamy eye patches) mark vitamin A deficiency. **Glossitis** (smooth tongue) marks B12 deficiency. **Psychosis** (Wernicke confusion) marks thiamine lack.",
+   "say": "Weight loss is characterised by ten percent loss in six months, and it is accompanied by temporal wasting that marks chronic malnutrition. Bilateral pitting oedema is characterised by protein low oedema, and it marks kwashiorkor that requires protein replacement. Angular stomatitis is characterised by mouth cracking, and it marks riboflavin deficiency that requires replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Mid upper arm circumference** (arm measure) below 11.5 cm defines severe malnutrition. **Body mass index** (weight height ratio) below 16 defines severe disease. **Albumin** (protein level) is not a nutrition marker. **Lymphocyte count** (immune marker) below 1500 supports malnutrition. **MUAC tape** (arm tape) screens field malnutrition. **Weight trajectory** (serial weights) is the best monitoring tool.",
+   "say": "Mid upper arm circumference is characterised by arm measurement below eleven point five centimetres, and it defines severe malnutrition that requires feeding. Body mass index is characterised by weight height ratio below sixteen, and it defines severe disease that requires rehabilitation. Albumin is characterised by protein level, and it is not a nutrition marker that reflects inflammation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Mid upper arm circumference",
+      "Screening",
+      "Below 11.5 cm severe"
+     ],
+     [
+      "Body mass index",
+      "Grading",
+      "Below 16 severe"
+     ],
+     [
+      "Albumin",
+      "Acute reactant",
+      "Not nutrition marker"
+     ],
+     [
+      "Lymphocyte count",
+      "Immune",
+      "Below 1500 support"
+     ],
+     [
+      "Weight trajectory",
+      "Monitoring",
+      "Serial weights best"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thiamine replacement** (vitamin B1) precedes glucose in refeeding risk. **Enteral nutrition** (gut feeding) is first line for nutrition support. **Parenteral nutrition** (venous feeding) suits gut failure. **Refeeding protocol** (slow calorie advance) prevents collapse. **Electrolyte monitoring** (phosphate, potassium) is daily in refeeding. **Micronutrient replacement** (vitamins, minerals) is mandatory with refeeding.",
+   "say": "Thiamine replacement is characterised by vitamin B one preceding glucose, and it prevents Wernicke encephalopathy in refeeding risk. Enteral nutrition is characterised by gut feeding, and it is the first line for nutrition support that requires pump delivery. Parenteral nutrition is characterised by venous feeding, and it suits gut failure that requires intensive care.",
+   "vis": null
+  },
+  {
+   "tx": "**Ready to use therapeutic food** (RUTF, peanut paste) treats severe acute malnutrition. **F75 and F100** (WHO milk feeds) treat hospitalised malnutrition. **Nasogastric feeding** (tube feeding) suits dysphagia with aspiration. **Dietary diversification** (food groups) prevents recurrence. **Deworming** (antiparasitic therapy) improves absorption. **Immunisation catch up** (vaccine completion) prevents infection.",
+   "say": "Ready to use therapeutic food is characterised by peanut paste, and it treats severe acute malnutrition in outpatient settings. F seventy five and F one hundred are characterised by WHO milk feeds, and they treat hospitalised malnutrition that requires inpatient care. Nasogastric feeding is characterised by tube feeding, and it suits dysphagia with aspiration that requires intensive monitoring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Enteral nutrition",
+     "points": [
+      "Gut feeding first line",
+      "Nasogastric tube",
+      "RUTF outpatient",
+      "F75 F100 inpatient"
+     ]
+    },
+    "right": {
+     "title": "Parenteral nutrition",
+     "points": [
+      "Venous feeding",
+      "Gut failure suit",
+      "Higher cost",
+      "Infection risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Refeeding syndrome** (phosphate collapse) presents with cardiac failure and seizures. **Wernicke encephalopathy** (thiamine lack) presents with confusion and ophthalmoplegia. **Superinfection** (pneumonia, sepsis) complicates immune dysfunction. **Hypothermia** (temperature fall) complicates severe malnutrition. **Bradycardia** (slow heart) complicates cardiac atrophy. **Aspiration** (tube feeding risk) needs positioning.",
+   "say": "Refeeding syndrome is characterised by phosphate collapse, and it presents with cardiac failure and seizures that require slow feeding. Wernicke encephalopathy is characterised by thiamine lack, and it presents with confusion and eye palsy that requires thiamine. Superinfection is characterised by pneumonia and sepsis, and it complicates immune dysfunction that requires antibiotics.",
+   "vis": null
+  },
+  {
+   "tx": "**Severe acute** malnutrition mortality exceeds 20 percent without treatment. Refeeding syndrome mortality approaches 30 percent without monitoring. Marasmus recovery is good with feeding, while kwashiorkor recovery needs protein. Sarcopenia mortality doubles in elderly patients. Micronutrient blindness is preventable with vitamin A. Wernicke recovery needs early thiamine.",
+   "say": "Severe acute malnutrition mortality is characterised by exceeding twenty percent without treatment, and it is driven by infection and dehydration. Refeeding syndrome mortality is characterised by approaching thirty percent without monitoring, and it is driven by electrolyte collapse. Marasmus recovery is characterised by good outcome with feeding, and it is achieved with gradual rehabilitation.",
+   "vis": null
+  },
+  {
+   "tx": "World Health Organization severe malnutrition guidance stresses thiamine first, slow refeeding and RUTF therapy. **MUAC 11.5 cm** (severe cutoff) is a favourite field number. **Refeeding phosphate fall** (electrolyte collapse) is a favourite viva trap. Traps include giving glucose before thiamine, feeding rapidly, and calling albumin a nutrition marker. **Bitot spots** (foamy eye patches) is the vitamin A vignette.",
+   "say": "Current guidance is characterised by thiamine first and slow refeeding and RUTF therapy, and it is stressed by the World Health Organization for malnutrition care. MUAC eleven point five centimetres is characterised by severe cutoff, and it is a favourite field number that screens malnutrition. Refeeding phosphate fall is characterised by electrolyte collapse, and it is a favourite viva trap that follows rapid feeding.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers MUAC cutoffs, refeeding rules and RUTF use. Eleven point five centimetres and thiamine first are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table is characterised by MUAC cutoffs and refeeding rules and RUTF use, and it gathers the high yield points for revision in theory. Eleven point five centimetres and thiamine first are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Severe MUAC cutoff",
+      "Below 11.5 cm"
+     ],
+     [
+      "Severe BMI cutoff",
+      "Below 16"
+     ],
+     [
+      "Refeeding first",
+      "Thiamine before glucose"
+     ],
+     [
+      "Refeeding risk",
+      "Phosphate collapse"
+     ],
+     [
+      "Outpatient food",
+      "RUTF peanut paste"
+     ],
+     [
+      "Hospital feeds",
+      "F75 and F100"
+     ],
+     [
+      "Feeding route first",
+      "Enteral gut feeding"
+     ],
+     [
+      "Non marker",
+      "Albumin acute reactant"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

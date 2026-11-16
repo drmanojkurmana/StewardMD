@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-reproductive-endo",
+ "subject": "ss-general-medicine",
+ "title": "Reproductive Endocrinology",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hypothalamic pituitary ovarian axis** (HPO axis, hormonal control) regulates ovulation via GnRH pulsatility. **Polycystic ovary syndrome** (PCOS, hyperandrogen hyperovulation) affects 10 percent of women. **Primary amenorrhoea** (absent menses by 15) needs evaluation. **Premature ovarian insufficiency** (ovarian failure before 40) causes hypoestrogenism. **Asherman syndrome** (intrauterine adhesions) causes secondary amenorrhoea. **Turner syndrome** (X monosomy) causes streak ovaries.",
+   "say": "Hypothalamic pituitary ovarian axis is characterised by hormonal control, and it regulates ovulation via pulsatile GnRH that controls follicular development. Polycystic ovary syndrome is characterised by hyperandrogen hyperovulation, and it affects ten percent of women who require lifestyle therapy. Primary amenorrhoea is characterised by absent menses by fifteen, and it requires evaluation that excludes pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "**GnRH pulsatility** (hypothalamic pulses) drives **LH and FSH secretion** (gonadotropins) from pituitary. **Follicular development** (estradiol rise) triggers **LH surge** (ovulatory surge). **Luteal progesterone** (corpus luteum hormone) prepares endometrium. **Hyperandrogenism** (androgen excess) drives PCOS follicle arrest. **Kisspeptin signalling** (puberty regulator) controls GnRH pulses. **Androgen excess** (testosterone rise) suppresses ovulation.",
+   "say": "GnRH pulsatility is characterised by hypothalamic pulses, and it drives LH and FSH secretion that controls follicular development. Follicular development is characterised by estradiol rise, and it triggers LH surge that induces ovulation. Luteal progesterone is characterised by corpus luteum hormone, and it prepares endometrium that supports implantation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "GnRH pulses"
+     },
+     {
+      "id": "b",
+      "label": "LH FSH rise"
+     },
+     {
+      "id": "c",
+      "label": "Follicle growth"
+     },
+     {
+      "id": "d",
+      "label": "LH surge ovulation"
+     },
+     {
+      "id": "e",
+      "label": "Luteal phase"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oligo amenorrhoea** (irregular periods) with **hirsutism** (male hair pattern) marks PCOS. **Acne** (seborrhoea) with **acanthosis nigricans** (dark skin) marks insulin resistance. **Infertility** (anovulation) is the commonest PCOS presentation. **Weight gain** (central obesity) worsens hyperandrogenism. **Depression** (low mood) complicates PCOS commonly. **Primary amenorrhoea** with anosmia marks Kallmann syndrome.",
+   "say": "Oligo amenorrhoea is characterised by irregular periods, and it is accompanied by hirsutism that marks PCOS with hyperandrogenism. Acne is characterised by seborrhoea, and it is accompanied by dark skin that marks insulin resistance in patients. Infertility is characterised by anovulation, and it is the commonest PCOS presentation that requires ovulation induction.",
+   "vis": null
+  },
+  {
+   "tx": "**FSH LH estradiol** (gonadotropin panel) classifies amenorrhoea. **Testosterone level** (androgen test) confirms hyperandrogenism. **Ultrasound pelvis** (ovarian scan) shows polycystic morphology. **Prolactin level** (pituitary marker) excludes prolactinoma. **Thyroid function** (TSH test) excludes thyroid amenorrhoea. **Karyotype** (chromosome analysis) confirms Turner syndrome. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "FSH LH estradiol is characterised by gonadotropin panel testing, and it classifies amenorrhoea that requires hormone interpretation. Testosterone level is characterised by androgen testing, and it confirms hyperandrogenism that guides therapy. Ultrasound pelvis is characterised by ovarian scanning, and it shows polycystic morphology that supports PCOS diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "FSH LH estradiol",
+      "Classification",
+      "Amenorrhoea panel"
+     ],
+     [
+      "Testosterone",
+      "Androgen confirm",
+      "Hyperandrogenism"
+     ],
+     [
+      "Ultrasound pelvis",
+      "Morphology",
+      "Polycystic ovaries"
+     ],
+     [
+      "Prolactin",
+      "Pituitary exclude",
+      "Prolactinoma rule"
+     ],
+     [
+      "Karyotype",
+      "Turner confirm",
+      "X monosomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lifestyle therapy** (diet, exercise, weight loss) is first line for PCOS. **Letrozole** (aromatase inhibitor) is first line for ovulation induction. **Clomiphene** (SERM) is second line for ovulation. **Metformin** (insulin sensitiser) improves metabolic features. **Combined pills** (estrogen progesterone) regulate cycles and hirsutism. **Antiandrogens** (spironolactone) treat hirsutism.",
+   "say": "Lifestyle therapy is characterised by diet and exercise and weight loss, and it is the first line for PCOS that improves ovulation. Letrozole is characterised by aromatase inhibition, and it is the first line for ovulation induction that improves live birth. Clomiphene is characterised by SERM action, and it is second line for ovulation that requires monitoring.",
+   "vis": null
+  },
+  {
+   "tx": "**Premature ovarian insufficiency** (ovarian failure) needs hormone replacement until menopause. **Kallmann syndrome** (GnRH deficiency) needs pulsatile GnRH therapy. **Asherman syndrome** (adhesions) needs hysteroscopic lysis. **Turner syndrome** (X monosomy) needs estrogen replacement. **Hyperprolactinaemia** (prolactin excess) needs cabergoline. **Thyroid amenorrhoea** (thyroid disease) needs thyroxine replacement.",
+   "say": "Premature ovarian insufficiency is characterised by ovarian failure, and it needs hormone replacement until menopause that protects bone and heart. Kallmann syndrome is characterised by GnRH deficiency, and it needs pulsatile GnRH therapy that induces ovulation. Asherman syndrome is characterised by adhesions, and it needs hysteroscopic lysis that restores menstruation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PCOS management",
+     "points": [
+      "Lifestyle first line",
+      "Letrozole ovulation",
+      "Metformin metabolic",
+      "Combined pills hirsutism"
+     ]
+    },
+    "right": {
+     "title": "Amenorrhoea causes",
+     "points": [
+      "Hyperprolactinaemia cabergoline",
+      "Kallmann pulsatile GnRH",
+      "Asherman hysteroscopy",
+      "Turner estrogen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ovarian hyperstimulation** (letrozole complication) needs cycle monitoring. **Multiple pregnancy** (ovulation induction risk) needs counselling. **Hirsutism persistence** (androgen excess) needs long term therapy. **Infertility persistence** (anovulation) needs assisted reproduction. **Depression** (PCOS mood disorder) needs screening. **Diabetes progression** (insulin resistance) needs follow up.",
+   "say": "Ovarian hyperstimulation is characterised by letrozole complication, and it needs cycle monitoring that detects excessive response. Multiple pregnancy is characterised by ovulation induction risk, and it needs counselling that informs couples. Hirsutism persistence is characterised by androgen excess, and it needs long term therapy that controls symptoms.",
+   "vis": null
+  },
+  {
+   "tx": "**PCOS fertility** with letrozole exceeds clomiphene by 10 percent. Premature ovarian insufficiency needs hormone replacement for bone protection. Kallmann fertility is restored with pulsatile GnRH. Asherman recurrence is reduced with stents. Turner survival needs cardiac surveillance. Hyperprolactinaemia fertility recovers with cabergoline.",
+   "say": "PCOS fertility is characterised by letrozole exceeding clomiphene by ten percent, and it improves with ovulation induction that requires monitoring. Premature ovarian insufficiency is characterised by needing hormone replacement, and it protects bone and heart until menopause. Kallmann fertility is characterised by restoration with pulsatile GnRH, and it is achieved with pump therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2023 PCOS guidance stresses letrozole first line, metformin metabolic benefit and lifestyle therapy. **Letrozole superiority** (live birth advantage) is a favourite examination rule. **Rotterdam criteria** (2 of 3 features) define PCOS. Traps include missing prolactin and thyroid screens, calling Turner syndrome PCOS, and omitting karyotype in primary amenorrhoea. **Anosmia with amenorrhoea** (smell loss) is the Kallmann vignette.",
+   "say": "Current guidance is characterised by letrozole first line and metformin metabolic benefit and lifestyle therapy, and it is stressed by the Endocrine Society for PCOS care. Letrozole superiority is characterised by live birth advantage, and it is a favourite examination rule that guides ovulation induction. Rotterdam criteria are characterised by two of three features, and they define PCOS that requires exclusion of mimics.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers Rotterdam features, letrozole superiority and Kallmann signs. Anosmia and live birth advantage are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table is characterised by Rotterdam features and letrozole superiority and Kallmann signs, and it gathers the high yield points for revision in theory. Anosmia and live birth advantage are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "PCOS prevalence",
+      "10 percent women"
+     ],
+     [
+      "Rotterdam features",
+      "2 of 3 features"
+     ],
+     [
+      "Ovulation first line",
+      "Letrozole superior"
+     ],
+     [
+      "Metabolic drug",
+      "Metformin"
+     ],
+     [
+      "Kallmann sign",
+      "Anosmia with amenorrhoea"
+     ],
+     [
+      " Turner karyotype",
+      "X monosomy"
+     ],
+     [
+      "Hyperprolactinaemia drug",
+      "Cabergoline"
+     ],
+     [
+      "Asherman therapy",
+      "Hysteroscopic lysis"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

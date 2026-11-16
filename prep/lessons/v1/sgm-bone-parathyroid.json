@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-bone-parathyroid",
+ "subject": "ss-general-medicine",
+ "title": "Metabolic Bone Disease and Parathyroid Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Osteoporosis** (bone loss with fragility) is defined by bone mineral density below **minus 2.5 standard deviations**. **Osteomalacia** (mineralisation failure) causes low phosphate with high alkaline phosphatase. **Paget disease** (remodelling excess) causes enlarged bones with high alkaline phosphatase. **Primary hyperparathyroidism** (adenoma driven excess) causes hypercalcaemia with stones. **Rickets** (childhood mineralisation failure) causes bow legs. **Fractures** (fragility breaks) are the clinical endpoint.",
+   "say": "Osteoporosis is characterised by bone loss with fragility, and it is defined by bone mineral density below minus two point five standard deviations that predicts fractures. Osteomalacia is characterised by mineralisation failure, and it causes low phosphate with high alkaline phosphatase that requires vitamin D replacement. Paget disease is characterised by remodelling excess, and it causes enlarged bones with high alkaline phosphatase that requires bisphosphonate therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Estrogen deficiency** (menopause) is the commonest osteoporosis cause. **Glucocorticoid therapy** (steroid bone loss) is the commonest secondary cause. **Hyperparathyroidism** (parathyroid excess) causes cortical bone loss. **Vitamin D deficiency** (nutritional lack) causes osteomalacia. **Male hypogonadism** (testosterone lack) causes bone loss. **Thyrotoxicosis** (thyroid excess) accelerates bone turnover. **Multiple myeloma** (plasma cell cancer) causes lytic lesions.",
+   "say": "Estrogen deficiency is characterised by menopause, and it is the commonest osteoporosis cause that requires hormone evaluation. Glucocorticoid therapy is characterised by steroid bone loss, and it is the commonest secondary cause that requires prophylactic bisphosphonates. Hyperparathyroidism is characterised by parathyroid excess, and it causes cortical bone loss that requires parathyroidectomy.",
+   "vis": null
+  },
+  {
+   "tx": "**Osteoclast activation** (bone resorption) exceeds **osteoblast formation** (bone building) in osteoporosis. **Vitamin D deficiency** (low calcitriol) impairs **mineralisation** (bone hardening). **Parathyroid excess** (PTH drive) increases resorption with hypercalcaemia. **Paget remodelling** (mosaic bone) increases turnover with deformity. **Fracture healing** (callus formation) requires mineral adequacy. **Trabecular loss** (spongy bone) precedes cortical loss.",
+   "say": "Osteoclast activation is characterised by bone resorption that exceeds osteoblast formation, and it defines osteoporosis that requires antiresorptive therapy. Vitamin D deficiency is characterised by low calcitriol, and it impairs mineralisation that causes osteomalacia with rickets. Parathyroid excess is characterised by PTH drive, and it increases resorption with hypercalcaemia that requires surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hormone or deficiency"
+     },
+     {
+      "id": "b",
+      "label": "Resorption excess"
+     },
+     {
+      "id": "c",
+      "label": "Density fall"
+     },
+     {
+      "id": "d",
+      "label": "Fragility"
+     },
+     {
+      "id": "e",
+      "label": "Fracture"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fragility fractures** (hip, spine, wrist) are the clinical hallmark. **Height loss** (vertebral compression) with **kyphosis** (hunchback) marks spine disease. **Bone pain** (dull ache) with **muscle weakness** marks osteomalacia. **Bow legs** (genu varum) mark rickets. **Bowing with deformity** marks Paget disease. **Dental loss** (alveolar bone loss) marks chronic disease.",
+   "say": "Fragility fractures are characterised by hip and spine and wrist breaks, and they are the clinical hallmark that requires bone density assessment. Height loss is characterised by vertebral compression, and it is accompanied by hunchback that marks spine disease in elderly patients. Bone pain is characterised by dull ache, and it is accompanied by muscle weakness that marks osteomalacia with vitamin D deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "**Dual energy X ray absorptiometry** (DEXA, bone density scan) is the gold standard for osteoporosis. **Serum calcium phosphate** (mineral levels) classifies mineralisation disease. **Alkaline phosphatase** (bone enzyme) is high in Paget and osteomalacia. **Vitamin D level** (25 hydroxyvitamin D) guides replacement. **Parathyroid hormone** (PTH level) classifies hyperparathyroidism. **Skeletal survey** (X ray series) shows mosaic pattern in Paget disease.",
+   "say": "Dual energy X ray absorptiometry is characterised by bone density scanning, and it is the gold standard for osteoporosis that requires T score interpretation. Serum calcium phosphate is characterised by mineral levels, and they classify mineralisation disease that guides therapy. Alkaline phosphatase is characterised by bone enzyme elevation, and it is high in Paget and osteomalacia that require specific therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "DEXA scan",
+      "Gold standard",
+      "T score below minus 2.5"
+     ],
+     [
+      "Calcium phosphate",
+      "Mineral classify",
+      "Osteomalacia pattern"
+     ],
+     [
+      "Alkaline phosphatase",
+      "Turnover",
+      "High Paget osteomalacia"
+     ],
+     [
+      "Vitamin D level",
+      "Replacement guide",
+      "Deficiency confirm"
+     ],
+     [
+      "PTH level",
+      "Parathyroid classify",
+      "High hyperparathyroidism"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Calcium and vitamin D** (1 g calcium with 800 IU vitamin D) is first line supplementation. **Bisphosphonates** (alendronate) are first line antiresorptives. **Denosumab** (RANKL inhibitor) is second line for intolerance. **Teriparatide** (PTH analogue) is anabolic therapy for severe osteoporosis. **Raloxifene** (SERM) suits postmenopausal prevention. **Parathyroidectomy** (gland removal) cures hyperparathyroidism.",
+   "say": "Calcium and vitamin D are characterised by one gram calcium with eight hundred international units of vitamin D, and they are the first line supplementation that supports bone health. Bisphosphonates are characterised by alendronate, and they are the first line antiresorptives that reduce fractures. Denosumab is characterised by RANKL inhibition, and it is second line for intolerance that requires injection therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Paget disease** (remodelling excess) needs intravenous zoledronate. **Osteomalacia** (mineralisation failure) needs high dose vitamin D with calcium. **Rickets** (childhood disease) needs vitamin D with orthopaedic care. **Steroid osteoporosis** (glucocorticoid bone loss) needs bisphosphonate prophylaxis. **Male osteoporosis** (hypogonadism bone loss) needs testosterone replacement. **Myeloma bone disease** (lytic lesions) needs chemotherapy.",
+   "say": "Paget disease is characterised by remodelling excess, and it needs intravenous zoledronate that suppresses turnover with pain relief. Osteomalacia is characterised by mineralisation failure, and it needs high dose vitamin D with calcium that heals osteoid. Rickets is characterised by childhood disease, and it needs vitamin D with orthopaedic care that corrects deformity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antiresorptive therapy",
+     "points": [
+      "Alendronate first line",
+      "Denosumab second line",
+      "Zoledronate yearly",
+      "Reduces fractures"
+     ]
+    },
+    "right": {
+     "title": "Anabolic therapy",
+     "points": [
+      "Teriparatide analogue",
+      "Builds bone formation",
+      "Severe osteoporosis",
+      "Followed by antiresorptive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Osteonecrosis of jaw** (bisphosphonate complication) needs dental clearance. **Atypical femoral fractures** (long term bisphosphonate risk) need drug holidays. **Hypocalcaemia** (denosumab complication) needs calcium monitoring. **Parathyroid surgery hangry bone** (post operative remineralisation) needs calcium. **Paget sarcoma** (malignant transformation) is rare. **Myeloma fractures** (pathological breaks) need fixation.",
+   "say": "Osteonecrosis of jaw is characterised by bisphosphonate complication, and it needs dental clearance that prevents invasion before therapy. Atypical femoral fractures are characterised by long term bisphosphonate risk, and they need drug holidays that allow healing. Hypocalcaemia is characterised by denosumab complication, and it needs calcium monitoring that prevents tetany.",
+   "vis": null
+  },
+  {
+   "tx": "**Hip fracture** mortality exceeds 20 percent at one year in elderly patients. Vertebral fractures double future fracture risk. Paget disease survival is near normal without complications. Osteomalacia disability resolves with vitamin D replacement. Hyperparathyroidism stone recurrence halves with parathyroidectomy. Male osteoporosis mortality is driven by fractures.",
+   "say": "Hip fracture mortality is characterised by exceeding twenty percent at one year in elderly patients, and it is driven by postoperative complications. Vertebral fractures are characterised by doubling future fracture risk, and they require secondary prevention that reduces recurrence. Paget disease survival is characterised by near normal survival without complications, and it is driven by pain that requires therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2022 osteoporosis guidance stresses DEXA diagnosis, bisphosphonate first line and drug holidays. **T score minus 2.5** (osteoporosis cutoff) is a favourite examination number. **Paget alkaline phosphatase** (high enzyme) is a favourite vignette marker. Traps include missing steroid history, omitting calcium with bisphosphonates, and calling Paget disease osteoporosis. **Hip fracture** (fragility break) is the classic osteoporosis vignette.",
+   "say": "Current guidance is characterised by DEXA diagnosis and bisphosphonate first line and drug holidays, and it is stressed by the Endocrine Society for osteoporosis care. T score minus two point five is characterised by osteoporosis cutoff, and it is a favourite examination number that defines disease. Paget alkaline phosphatase is characterised by high enzyme, and it is a favourite vignette marker that distinguishes remodelling disease.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers T scores, fracture sites and first line drugs. Minus 2.5 and hip mortality are the most asked points in theory and viva examinations. Regular revision of principles before the examination hall improves viva performance and theory scores significantly.",
+   "say": "This table is characterised by T scores and fracture sites and first line drugs, and it gathers the high yield points for revision in theory. Minus two point five and hip mortality are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Osteoporosis T score",
+      "Below minus 2.5"
+     ],
+     [
+      "Common fracture",
+      "Hip spine wrist"
+     ],
+     [
+      "First drug",
+      "Alendronate bisphosphonate"
+     ],
+     [
+      "Anabolic drug",
+      "Teriparatide"
+     ],
+     [
+      "Paget enzyme",
+      "Alkaline phosphatase high"
+     ],
+     [
+      "Hip mortality",
+      "Above 20 percent"
+     ],
+     [
+      "Vitamin D support",
+      "800 IU daily"
+     ],
+     [
+      "Hyperparathyroidism cure",
+      "Parathyroidectomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
