@@ -10,12 +10,32 @@
    "say": "Learn each blocker with the metabolite that piles up behind it. Fluoride stops enolase near the exit, iodoacetate blocks the mid pathway dehydrogenase, and arsenate tricks that enzyme into wasting the payoff. Early blocks starve downstream, late blocks flood upstream.",
    "vis": {
     "kind": "table",
-    "cols": ["Blocker", "Enzyme stopped", "What accumulates"],
+    "cols": [
+     "Blocker",
+     "Enzyme stopped",
+     "What accumulates"
+    ],
     "rows": [
-     ["Iodoacetate", "GAP dehydrogenase (cysteine)", "Fructose-1,6-BP and trioses"],
-     ["Arsenate", "GAP dehydrogenase (uncouples)", "Heat instead of ATP"],
-     ["Fluoride", "Enolase", "2 and 3-phosphoglycerate"],
-     ["Arsenite", "PDH and alpha-KGDH (lipoate)", "Pyruvate and lactate"]
+     [
+      "Iodoacetate",
+      "GAP dehydrogenase (cysteine)",
+      "Fructose-1,6-BP and trioses"
+     ],
+     [
+      "Arsenate",
+      "GAP dehydrogenase (uncouples)",
+      "Heat instead of ATP"
+     ],
+     [
+      "Fluoride",
+      "Enolase",
+      "2 and 3-phosphoglycerate"
+     ],
+     [
+      "Arsenite",
+      "PDH and alpha-KGDH (lipoate)",
+      "Pyruvate and lactate"
+     ]
     ]
    }
   },
@@ -24,8 +44,21 @@
    "say": "Arsenate mimics phosphate and uncouples, while arsenite binds lipoate and arrests decarboxylation. Acute poisoning brings vomiting, rice water diarrhoea, garlic breath and shock. Chronic exposure adds pigmentation, palmar keratosis and Mees lines on nails.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Arsenate (phosphate mimic)", "points": ["Substitutes at GAPDH step", "Product hydrolyses at once", "Glycolysis without ATP gain"]},
-    "right": {"title": "Arsenite (lipoate binder)", "points": ["Freezes PDH swinging arm", "Also blocks alpha-KGDH", "Pyruvate and lactate pile up"]
+    "left": {
+     "title": "Arsenate (phosphate mimic)",
+     "points": [
+      "Substitutes at GAPDH step",
+      "Product hydrolyses at once",
+      "Glycolysis without ATP gain"
+     ]
+    },
+    "right": {
+     "title": "Arsenite (lipoate binder)",
+     "points": [
+      "Freezes PDH swinging arm",
+      "Also blocks alpha-KGDH",
+      "Pyruvate and lactate pile up"
+     ]
     }
    }
   },
@@ -39,12 +72,32 @@
    "say": "Chain poisons reproduce cycle failure from the respiration side. Cyanide binds ferric iron of cytochrome oxidase, causing bitter almond odour and severe lactic acidosis. Venous blood looks arterial because tissues cannot extract oxygen.",
    "vis": {
     "kind": "table",
-    "cols": ["Poison", "Site", "Antidote or rescue pointer"],
+    "cols": [
+     "Poison",
+     "Site",
+     "Antidote or rescue pointer"
+    ],
     "rows": [
-     ["Cyanide", "Complex IV ferric iron", "Hydroxocobalamin; nitrites plus thiosulfate"],
-     ["Carbon monoxide", "Complex IV and haemoglobin", "High flow oxygen, hyperbaric in selected cases"],
-     ["Rotenone", "Complex I", "Supportive, no specific antidote"],
-     ["Oligomycin", "ATP synthase F0", "Supportive, respiration backs up"]
+     [
+      "Cyanide",
+      "Complex IV ferric iron",
+      "Hydroxocobalamin; nitrites plus thiosulfate"
+     ],
+     [
+      "Carbon monoxide",
+      "Complex IV and haemoglobin",
+      "High flow oxygen, hyperbaric in selected cases"
+     ],
+     [
+      "Rotenone",
+      "Complex I",
+      "Supportive, no specific antidote"
+     ],
+     [
+      "Oligomycin",
+      "ATP synthase F0",
+      "Supportive, respiration backs up"
+     ]
     ]
    }
   },
@@ -53,8 +106,21 @@
    "say": "Oligomycin plugs the ATP synthase channel, so the gradient climbs until pumping stalls. Uncouplers do the opposite, short circuiting the gradient into heat with respiration racing and ATP falling, causing fever and weight loss.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Oligomycin (plug)", "points": ["Protons cannot re-enter", "Gradient maximal, chain stalls", "Oxygen use falls"]},
-    "right": {"title": "Uncoupler (short circuit)", "points": ["Protons leak back freely", "Gradient collapses to heat", "Oxygen use races, ATP falls"]
+    "left": {
+     "title": "Oligomycin (plug)",
+     "points": [
+      "Protons cannot re-enter",
+      "Gradient maximal, chain stalls",
+      "Oxygen use falls"
+     ]
+    },
+    "right": {
+     "title": "Uncoupler (short circuit)",
+     "points": [
+      "Protons leak back freely",
+      "Gradient collapses to heat",
+      "Oxygen use races, ATP falls"
+     ]
     }
    }
   },
@@ -65,11 +131,74 @@
     "kind": "flow",
     "title": "From pile up to poison",
     "nodes": [
-     {"id": "obs", "label": "Which metabolite piled up?"},
-     {"id": "enz", "label": "Enzyme just downstream"},
-     {"id": "poi", "label": "Blocker that fits that enzyme"}
+     {
+      "id": "obs",
+      "label": "Which metabolite piled up?"
+     },
+     {
+      "id": "enz",
+      "label": "Enzyme just downstream"
+     },
+     {
+      "id": "poi",
+      "label": "Blocker that fits that enzyme"
+     }
     ],
-    "edges": [["obs", "enz"], ["enz", "poi"]]
+    "edges": [
+     [
+      "obs",
+      "enz"
+     ],
+     [
+      "enz",
+      "poi"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Metabolic pathway poisons block specific enzymatic steps. Sodium fluoride inhibits glycolytic enolase in blood collection tubes. Trivalent arsenite binds lipoic acid sulfhydryls, halting pyruvate dehydrogenase. Fluoroacetate forms fluorocitrate to inhibit aconitase, and malonate competitively inhibits succinate dehydrogenase. In the electron transport chain, rotenone inhibits complex I, while cyanide and carbon monoxide inhibit complex IV cytochrome c oxidase. Chemical uncouplers like 2,4-dinitrophenol dissipate proton gradients, releasing energy as heat.",
+   "say": "High-yield for the exam. Metabolic pathway poisons block specific enzymatic steps. Sodium fluoride inhibits glycolytic enolase in blood collection tubes. Trivalent arsenite binds lipoic acid sulfhydryls, halting pyruvate dehydrogenase. Fluoroacetate forms fluorocitrate to inhibit aconitase, and malonate competitively inhibits succinate dehydrogenase. In the electron transport chain, rotenone inhibits complex I, while cyanide and carbon monoxide inhibit complex IV cytochrome c oxidase. Chemical uncouplers like 2,4-dinitrophenol dissipate proton gradients, releasing energy as heat.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Enolase inhibitor in blood tubes",
+      "Sodium fluoride inhibits enolase by forming magnesium fluorophosphate complex"
+     ],
+     [
+      "Glycolytic substrate-level uncoupler",
+      "Arsenate competes with inorganic phosphate at glyceraldehyde-3-phosphate dehydrogenase"
+     ],
+     [
+      "Lipoic acid poison mechanism",
+      "Trivalent arsenite binds vicinal sulfhydryl groups of lipoic acid"
+     ],
+     [
+      "Aconitase suicide substrate",
+      "Fluoroacetate converted to fluorocitrate inhibiting aconitase and trapping citrate"
+     ],
+     [
+      "Complex one electron inhibitor",
+      "Rotenone and amobarbital block electron transfer to coenzyme Q"
+     ],
+     [
+      "Complex four cytochrome inhibitors",
+      "Cyanide, carbon monoxide, azide, and hydrogen sulfide block respiration"
+     ],
+     [
+      "ATP synthase channel blocker",
+      "Oligomycin binds F0 subunit stopping proton translocation and phosphorylation"
+     ],
+     [
+      "Chemical uncoupler mechanism",
+      "Dissipates electrochemical proton gradient generating heat without synthesizing ATP"
+     ]
+    ]
    }
   }
  ],

@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "onc-solid",
+ "subject": "ss-onco-pathology",
+ "title": "Solid tumour pathology and staging: TNM, grading and samples",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22nd edition"],
+ "steps": [
+  {
+   "tx": "A solid tumour is a **neoplasm** of cohesive cells that form a mass, distinct from leukemias which circulate freely. Sarcomas arise from connective tissue while carcinomas arise from epithelium, together forming 85 to 90 percent of solid cancers. **Tissue diagnosis** before therapy remains mandatory in all patients above 18 years. Growth rates vary from 40 days doubling for neuroblastoma to 200 days for slow renal tumours.",
+   "say": "A solid tumour is a mass of cohesive cells. Sarcomas come from connective tissue and carcinomas from surface cells. Tissue diagnosis before treatment is mandatory in adults. Growth rates vary widely between tumour types.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Origin", "Share"],
+    "rows": [
+     ["Carcinoma", "Epithelium", "Near 85 percent"],
+     ["Sarcoma", "Connective tissue", "Near 10 percent"],
+     ["Germ cell", "Gonads, midline", "Near 5 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "Carcinogens act through **genotoxic** damage to DNA with mutations in 2 or 3 key genes over 10 to 20 years. Tobacco smoke delivers 50 known carcinogens directly to bronchial epithelium. **Aflatoxin** exposure adds hepatitis B risk to hepatocellular carcinoma in 60 percent of Asian cases. Inherited mutations in BRCA1 raise breast cancer risk to 55 percent by age 70.",
+   "say": "Carcinogens damage D N A over many years. Tobacco smoke delivers dozens of carcinogens to the airway. Aflatoxin adds liver cancer risk in many regions. Inherited B R C A mutations raise breast cancer risk greatly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Carcinogen exposure"},
+     {"id": "b", "label": "DNA damage over 10 to 20 years"},
+     {"id": "c", "label": "Accumulated mutations"},
+     {"id": "d", "label": "Solid tumour mass"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Loss of **tumour suppressor genes** such as p53 removes the brake on cell growth in half of human cancers. Gain of **oncogenes** like KRAS drives continuous growth signals without external cues. Apoptosis escape through Bcl2 overexpression occurs in 70 percent of follicular lymphomas. Telomerase reactivation protects cancer cells from senescence in 83 percent of solid tumours.",
+   "say": "Loss of suppressor genes removes the brake on cell growth. Gain of oncogenes sends constant growth signals. Escape from programmed cell death is common in these tumours. Telomerase protects cancer cells from ageing.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Tumour suppressor loss", "points": ["p53 lost in near 50 percent", "Cell cycle unchecked", "Inherited risk possible"]},
+    "right": {"title": "Oncogene gain", "points": ["KRAS drives growth", "MYC amplifies growth", "Needs new drug targets"]}
+   }
+  },
+  {
+   "tx": "Clinical features of solid tumours depend on site, with weight loss of **5 kg in 6 months** typical in gastrointestinal cancers. Pain appears when the tumour invades bone, capsule or nerve in 35 to 45 percent. **Paraneoplastic syndromes** occur in 10 percent, such as SIADH with small cell lung cancer. Anaemia of chronic disease affects 30 percent of patients with advanced malignancy.",
+   "say": "Symptoms depend on tumour site and growth pattern. Weight loss of five kilos in six months is typical for gut cancers. Pain occurs when bone or nerves are invaded. Paraneoplastic syndromes affect one in ten patients.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Example", "Frequency"],
+    "rows": [
+     ["Weight loss", "5 kg in 6 months", "Common in gut cancers"],
+     ["SIADH", "Small cell lung cancer", "10 percent"],
+     ["Anaemia", "Chronic disease", "30 percent"]
+    ]
+   }
+  },
+  {
+   "tx": "FNAC with a 22 to 25 gauge needle gives rapid cytology within 6 hours for **thyroid nodules** and neck nodes. Core biopsy preserves architecture and allows 12 to 20 marker studies on a single sample. **Excisional biopsy** is preferred for small skin lesions under 2 cm and suspected lymphomas. FNA alone is insufficient when IHC grading needs tissue architecture.",
+   "say": "Fine needle sampling gives a fast cell diagnosis within hours. Core biopsy preserves tissue architecture for many marker studies. Small skin lesions suit complete removal. Needle sampling alone misses grading needs that need architecture.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "FNAC", "points": ["Fast, 6 hour answer", "22 to 25 gauge needle", "Good for thyroid, nodes"]},
+    "right": {"title": "Core or excision", "points": ["Architecture preserved", "Allows full IHC panel", "Better for lymphoma"]}
+   }
+  },
+  {
+   "tx": "Immunohistochemistry uses **antibody** staining to identify lineage in 90 percent of poorly differentiated tumours. Cyclin D1 positivity marks mantle cell lymphoma, while synaptophysin marks neuroendocrine tumours in 70 percent. Mitotic counts above **20 per 10 high power fields** upgrade grading in many sarcomas. Estrogen receptor testing on 100 cells guides hormonal therapy in breast cancer.",
+   "say": "Immunohistochemistry uses antibody stains to identify tumour lineage. Specific markers identify lymphoma and hormone driven tumours. Mitotic counts upgrade grading in sarcomas. Hormone receptor testing guides hormonal therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Poorly differentiated tumour"},
+     {"id": "b", "label": "Apply antibody panel"},
+     {"id": "c", "label": "Read markers in 90 percent"},
+     {"id": "d", "label": "Guide targeted therapy"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "The **TNM system** stages tumours by primary size, nodal spread and distant metastasis for accurate comparison of outcomes. Tumour under 2 cm is T1, while nodes beyond the primary zone are N2 in 40 percent. **Bilateral lung metastases** upstage disease to stage 4 regardless of primary size. Stage grouping from 0 to 4 directs surgery, chemotherapy and radiotherapy choices.",
+   "say": "The T N M system stages tumours by size, nodal spread and metastasis. Tumour under two centimetres is early stage. Distant spread upstages disease to the highest group. Stage grouping directs surgery and drug choices.",
+   "vis": {
+    "kind": "table",
+    "cols": ["TNM part", "Meaning", "Example"],
+    "rows": [
+     ["T1", "Primary under 2 cm", "Early tumour"],
+     ["N2", "Advanced nodal spread", "Regional nodes involved"],
+     ["M1", "Distant metastasis", "Stage 4 disease"]
+    ]
+   }
+  },
+  {
+   "tx": "Grading compares tumour cells to normal counterparts, with grade 3 showing marked nuclear pleomorphism and 30 mitoses per field. **Ki67 index** above 30 percent predicts rapid growth and chemotherapy sensitivity in 60 percent of cases. Grade drives adjuvant decisions, since grade 3 tumours receive chemotherapy even at 1.5 cm size. **Tamoxifen** 20 mg daily for 5 years benefits estrogen positive early breast cancer.",
+   "say": "Grading compares tumour cells with normal cells. A high proliferation index predicts rapid growth. Grade three tumours get chemotherapy even when small. Hormonal therapy benefits receptor positive breast cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Grade", "Features", "Action"],
+    "rows": [
+     ["Grade 1", "Near normal cells", "Surgery may suffice"],
+     ["Grade 2", "Moderate atypia", "Consider adjuvant therapy"],
+     ["Grade 3", "Poorly differentiated", "Chemotherapy even if small"]
+    ]
+   }
+  },
+  {
+   "tx": "Chemotherapy with **Doxorubicin** 60 mg per square metre requires cardiac monitoring in 25 percent of patients receiving it. Radiotherapy delivers **60 Gy in 30 fractions** over 6 weeks for definitive local control. Surgical margin positivity under 2 mm raises local recurrence to 15 to 20 percent. **Imatinib** 400 mg daily transformed gastrointestinal stromal tumours from surgery alone to long term control.",
+   "say": "Chemotherapy needs heart monitoring during treatment courses. Radiotherapy is delivered in daily fractions over weeks. Positive surgical margins raise recurrence risk. Targeted therapy transformed one gut tumour group completely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Diagnose plus stage"},
+     {"id": "b", "label": "Grade plus IHC"},
+     {"id": "c", "label": "Surgery plus drugs"},
+     {"id": "d", "label": "Follow for recurrence"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Receptor results guide therapy in **Tamoxifen** responsive breast cancer for 5 years with 30 percent risk reduction. Core biopsy remains the gold standard over FNAC when architecture decides treatment. Stage 4 disease in 70 percent of lung cancers at presentation limits cure options. **TNM staging** with grading and markers together predicts outcome better than any single factor alone.",
+   "say": "High-yield for the exam receptor results guide hormonal therapy in breast cancer. Core biopsy beats needle sampling when architecture matters. Most lung cancers present at the final stage. Combined staging grading and markers predict outcome best.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Point", "Figure", "Takeaway"],
+    "rows": [
+     ["Tamoxifen benefit", "30 percent risk cut", "5 year course"],
+     ["Lung cancer stage 4", "70 percent at diagnosis", "Late presentation"],
+     ["Margin cut-off", "Under 2 mm", "Recurrence 15 to 20 percent"]
+    ]
+   }
+  }
+ ]
+}

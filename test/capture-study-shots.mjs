@@ -15,9 +15,11 @@ const req = createRequire(import.meta.url);
 const { chromium } = req("playwright");
 const HERE = dirname(fileURLToPath(import.meta.url));
 const targetArg = process.argv[2] || "study-p4";
-const OUT_DIR = targetArg.startsWith("study-")
-  ? join(HERE, "..", ".fleet-reports", targetArg)
-  : join(HERE, "..", ".fleet-reports", "study-ui", targetArg);
+const OUT_DIR = targetArg === "p1"
+  ? join(HERE, "..", ".fleet-reports", "study-p1", "shots")
+  : targetArg.startsWith("study-")
+    ? join(HERE, "..", ".fleet-reports", targetArg)
+    : join(HERE, "..", ".fleet-reports", "study-ui", targetArg);
 mkdirSync(OUT_DIR, { recursive: true });
 
 const PORT = await freePort();
@@ -321,6 +323,30 @@ for (const dev of DEVICES) {
           await sleep(150);
         }
       }
+    }
+
+    // 7b. Phase 1: pen settings popover (tap the active pen again), highlighter strip, eraser popover
+    if (await page.locator('[data-act="st-tool"][data-v="pen"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="pen"]');
+      await page.waitForSelector("#stInkPop", { timeout: 5000 }).catch(() => {});
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-pen-popover.png`) });
+      console.log(`Saved ${tag}-p1-pen-popover.png`);
+      await page.click('[data-act="st-tool"][data-v="pen"]');
+    }
+    if (await page.locator('[data-act="st-tool"][data-v="hl"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="hl"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-highlighter-strip.png`) });
+      console.log(`Saved ${tag}-p1-highlighter-strip.png`);
+    }
+    if (await page.locator('[data-act="st-tool"][data-v="er"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="er"]');
+      await page.click('[data-act="st-tool"][data-v="er"]');
+      await page.waitForSelector("#stInkPop", { timeout: 5000 }).catch(() => {});
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-eraser-popover.png`) });
+      console.log(`Saved ${tag}-p1-eraser-popover.png`);
     }
 
     // 8. Page sheet

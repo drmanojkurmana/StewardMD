@@ -21,11 +21,27 @@
    "say": "Isocitrate dehydrogenase releases carbon dioxide and NADH while forming alpha-ketoglutarate. ADP activates this main regulatory enzyme when energy is short, while ATP and NADH restrain it. A second decarboxylation follows, so two carbons leave as gas.",
    "vis": {
     "kind": "table",
-    "cols": ["Enzyme", "Carbon change", "Energy captured"],
+    "cols": [
+     "Enzyme",
+     "Carbon change",
+     "Energy captured"
+    ],
     "rows": [
-     ["Isocitrate dehydrogenase", "6C to 5C plus CO2", "1 NADH"],
-     ["Alpha-ketoglutarate dehydrogenase", "5C to 4C plus CO2", "1 NADH"],
-     ["Succinyl-CoA synthetase", "4C stays 4C", "1 GTP (substrate level)"]
+     [
+      "Isocitrate dehydrogenase",
+      "6C to 5C plus CO2",
+      "1 NADH"
+     ],
+     [
+      "Alpha-ketoglutarate dehydrogenase",
+      "5C to 4C plus CO2",
+      "1 NADH"
+     ],
+     [
+      "Succinyl-CoA synthetase",
+      "4C stays 4C",
+      "1 GTP (substrate level)"
+     ]
     ]
    }
   },
@@ -50,8 +66,23 @@
    "say": "Fumarase adds water to make malate, and malate dehydrogenase oxidises it back to oxaloacetate with the third NADH. Oxaloacetate stays scarce because citrate synthase consumes it eagerly. Per acetyl-CoA the turn yields three NADH, one FADH2, one GTP and two carbon dioxide.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Per acetyl-CoA (one turn)", "points": ["3 NADH (7.5 ATP)", "1 FADH2 (1.5 ATP)", "1 GTP (1 ATP)", "Total about 10 ATP"]},
-    "right": {"title": "Per glucose (two turns)", "points": ["6 NADH from TCA", "2 FADH2 from TCA", "2 GTP from TCA", "Plus PDH and cytosol yields"]
+    "left": {
+     "title": "Per acetyl-CoA (one turn)",
+     "points": [
+      "3 NADH (7.5 ATP)",
+      "1 FADH2 (1.5 ATP)",
+      "1 GTP (1 ATP)",
+      "Total about 10 ATP"
+     ]
+    },
+    "right": {
+     "title": "Per glucose (two turns)",
+     "points": [
+      "6 NADH from TCA",
+      "2 FADH2 from TCA",
+      "2 GTP from TCA",
+      "Plus PDH and cytosol yields"
+     ]
     }
    }
   },
@@ -60,12 +91,72 @@
    "say": "The cycle is amphibolic, both burning acetyl groups and supplying building blocks. It is strictly aerobic in effect because without oxygen the carriers stay reduced and the wheel stops. Withdrawals must be repaid by anaplerosis, the subject of the next lesson.",
    "vis": {
     "kind": "table",
-    "cols": ["Intermediate withdrawn", "Built from it"],
+    "cols": [
+     "Intermediate withdrawn",
+     "Built from it"
+    ],
     "rows": [
-     ["Citrate", "Fatty acids and cholesterol (cytosol)"],
-     ["Alpha-ketoglutarate", "Glutamate and other amino acids"],
-     ["Succinyl-CoA", "Heme"],
-     ["Malate and oxaloacetate", "Glucose via PEPCK"]
+     [
+      "Citrate",
+      "Fatty acids and cholesterol (cytosol)"
+     ],
+     [
+      "Alpha-ketoglutarate",
+      "Glutamate and other amino acids"
+     ],
+     [
+      "Succinyl-CoA",
+      "Heme"
+     ],
+     [
+      "Malate and oxaloacetate",
+      "Glucose via PEPCK"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The citric acid cycle oxidizes acetyl-CoA into carbon dioxide in the mitochondrial matrix. Isocitrate dehydrogenase is the rate-limiting enzyme, allosterically activated by ADP. Succinyl-CoA synthetase catalyzes the sole substrate-level phosphorylation step, generating GTP. Succinate dehydrogenase is the only membrane-bound enzyme, participating directly in complex II of the electron transport chain. Each turn of the cycle generates three NADH, one FADH2, and one GTP, yielding ten net ATP.",
+   "say": "High-yield for the exam. The citric acid cycle oxidizes acetyl-CoA into carbon dioxide in the mitochondrial matrix. Isocitrate dehydrogenase is the rate-limiting enzyme, allosterically activated by ADP. Succinyl-CoA synthetase catalyzes the sole substrate-level phosphorylation step, generating GTP. Succinate dehydrogenase is the only membrane-bound enzyme, participating directly in complex II of the electron transport chain. Each turn of the cycle generates three NADH, one FADH2, and one GTP, yielding ten net ATP.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate-limiting Krebs cycle enzyme",
+      "Isocitrate dehydrogenase allosterically activated by ADP and inhibited by ATP"
+     ],
+     [
+      "Substrate-level phosphorylation step",
+      "Succinyl-coenzyme A synthetase generating one guanosine triphosphate GTP molecule"
+     ],
+     [
+      "Membrane-bound cycle enzyme",
+      "Succinate dehydrogenase embedded in inner mitochondrial membrane as complex two"
+     ],
+     [
+      "Succinate dehydrogenase competitive inhibitor",
+      "Malonate structural analogue of succinate competitively inhibiting active site"
+     ],
+     [
+      "Five dehydrogenase cofactors",
+      "Thiamine, lipoamide, coenzyme A, flavin adenine dinucleotide, and NAD+"
+     ],
+     [
+      "Net high-energy yield per turn",
+      "Three NADH, one FADH2, and one GTP yielding ten ATP"
+     ],
+     [
+      "Oxaloacetate refilling reaction",
+      "Pyruvate carboxylase carboxylation replenishes oxaloacetate from pyruvate"
+     ],
+     [
+      "Amphibolic nature of cycle",
+      "Operates in both oxidative energy harvesting and synthetic precursor generation"
+     ]
     ]
    }
   }
