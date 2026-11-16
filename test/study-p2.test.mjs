@@ -140,6 +140,24 @@ test("handles: corners proportional, sides stretch, centre inside", () => {
   assert.ok(tiny.sx * 0.4 >= 0.02 - 1e-9, "min side respected");
 });
 
+test("pickGesture: flat selection centre moves, corner resizes, degenerate axis never explodes", () => {
+  const flat = { x0: 0.15, y0: 0.74, x1: 0.85, y1: 0.74, cx: 0.5, cy: 0.74 };
+  assert.equal(S.pickGesture(flat, 0.5, 0.74, 344, 486, 22).kind, "move");
+  const corner = S.pickGesture(flat, 0.85, 0.74, 344, 486, 22);
+  assert.equal(corner.kind, "resize");
+  const f = S.resizeFactors({ x0: 0.15, y0: 0.74, x1: 0.85, y1: 0.74 }, "se", 0.95, 0.84);
+  assert.ok(Math.abs(f.sx - 8 / 7) < 1e-6 && f.sy === 1, "flat corner scales x only: " + JSON.stringify(f));
+});
+
+test("pickGesture: tall box interior moves, edge dots resize, outside is null", () => {
+  const tall = { x0: 0.2, y0: 0.2, x1: 0.6, y1: 0.6, cx: 0.4, cy: 0.4 };
+  assert.equal(S.pickGesture(tall, 0.4, 0.4, 400, 400, 22).kind, "move");
+  assert.equal(S.pickGesture(tall, 0.4, 0.2, 400, 400, 22).handle, "n");
+  assert.equal(S.pickGesture(tall, 0.6, 0.6, 400, 400, 22).handle, "se");
+  assert.equal(S.pickGesture(tall, 0.05, 0.05, 400, 400, 22), null);
+  assert.equal(S.pickGesture(null, 0.4, 0.4, 400, 400, 22), null);
+});
+
 test("dwell gate: snap only at 500ms and only when enabled", () => {
   assert.equal(S.dwellSnap(499, true), false);
   assert.equal(S.dwellSnap(500, true), true);

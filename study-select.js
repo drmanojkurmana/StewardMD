@@ -405,18 +405,50 @@
     var p = padRel || 0;
     return x >= bb.x0 - p && x <= bb.x1 + p && y >= bb.y0 - p && y <= bb.y1 + p;
   }
-  // Resize factors for a handle drag: corners proportional, sides stretch. min 0.06..0.75 page on each axis.
+  // Resize factors for a handle drag: corners proportional, sides stretch. min side 0.02 page per axis.
+  // A degenerate axis (flat stroke: h ~ 0) never scales: dividing by ~0 would explode the other axis.
   function resizeFactors(bb, handle, px, py, minSide) {
     var ms = minSide || 0.02, sx = 1, sy = 1;
-    var x0 = bb.x0, x1 = bb.x1, y0 = bb.y0, y1 = bb.y1, w = Math.max(1e-9, x1 - x0), h = Math.max(1e-9, y1 - y0);
-    if (handle === "e" || handle === "ne" || handle === "se") sx = (px - x0) / w;
-    if (handle === "w" || handle === "nw" || handle === "sw") sx = (x1 - px) / w;
-    if (handle === "s" || handle === "se" || handle === "sw") sy = (py - y0) / h;
-    if (handle === "n" || handle === "ne" || handle === "nw") sy = (y1 - py) / h;
+    var x0 = bb.x0, x1 = bb.x1, y0 = bb.y0, y1 = bb.y1, w = x1 - x0, h = y1 - y0;
+    var hasW = w > 0.002, hasH = h > 0.002;
+    if (handle === "e" || handle === "ne" || handle === "se") { if (hasW) sx = (px - x0) / w; }
+    if (handle === "w" || handle === "nw" || handle === "sw") { if (hasW) sx = (x1 - px) / w; }
+    if (handle === "s" || handle === "se" || handle === "sw") { if (hasH) sy = (py - y0) / h; }
+    if (handle === "n" || handle === "ne" || handle === "nw") { if (hasH) sy = (y1 - py) / h; }
     var corner = (handle.length === 2);
-    sx = clamp(sx, ms / w, 1 / w); sy = clamp(sy, ms / h, 1 / h);
-    if (corner) { var s = clamp(Math.max(sx, sy), ms / Math.min(w, h), 1 / Math.min(w, h)); sx = s; sy = s; }
+    if (corner) {
+      var cands = [];
+      if (hasW) cands.push(sx);
+      if (hasH) cands.push(sy);
+      var dims = [];
+      if (hasW) dims.push(w);
+      if (hasH) dims.push(h);
+      if (!cands.length) return { sx: 1, sy: 1 };
+      var mind = Math.min.apply(null, dims);
+      var s = clamp(Math.max.apply(null, cands), ms / mind, 1 / mind);
+      sx = hasW ? s : 1; sy = hasH ? s : 1;
+      return { sx: sx, sy: sy };
+    }
+    if (hasW) sx = clamp(sx, ms / w, 1 / w);
+    if (hasH) sy = clamp(sy, ms / h, 1 / h);
     return { sx: sx, sy: sy };
+  }
+  // Gesture routing for a press near a selection: corners always resize, the
+  // interior always moves, side dots resize only on a box big enough to grab.
+  // A flat (zero-height) selection puts the n/s dots exactly on the stroke, so
+  // interior presses must win there or the selection could never be moved.
+  function pickGesture(bb, x, y, W, H, padPx) {
+    if (!bb) return null;
+    var pad = padPx != null ? padPx : 22;
+    var hdl = handleAt(bb, x, y, W, H, pad);
+    if (hdl) {
+      if (hdl.length === 2) return { kind: "resize", handle: hdl };
+      var wPx = (bb.x1 - bb.x0) * (W || 1), hPx = (bb.y1 - bb.y0) * (H || 1);
+      var thin = (hdl === "n" || hdl === "s") ? !(hPx >= 2 * pad) : !(wPx >= 2 * pad);
+      if (!thin) return { kind: "resize", handle: hdl };
+    }
+    if (insideBB(bb, x, y, 0.004)) return { kind: "move" };
+    return null;
   }
   function resizeAnchor(bb, handle) {
     if (handle === "nw" || handle === "w" || handle === "sw") return [bb.x1, bb.cy];
@@ -487,7 +519,7 @@
     return false;
   }
   function dwellSnap(heldMs, enabled) { return !!enabled && heldMs >= 500; }
-  var PURE = { clamp: clamp, r4: r4, cloneStroke: cloneStroke, bboxOf: bboxOf, selBBox: selBBox, shapePts: shapePts, scaleStroke: scaleStroke, translate: translate, rotateStroke: rotateStroke, clampStroke: clampStroke, fitShape: fitShape, fitForced: fitForced, handlesOf: handlesOf, handleAt: handleAt, insideBB: insideBB, resizeFactors: resizeFactors, resizeAnchor: resizeAnchor, snapItems: snapItems, applySnap: applySnap, encodeClip: encodeClip, decodeClip: decodeClip, lassoDefaults: lassoDefaults, lassoPick: lassoPick, settingsDefaults: settingsDefaults, mergeSelectSettings: mergeSelectSettings, nearStroke: nearStroke, dwellSnap: dwellSnap };
+  var PURE = { clamp: clamp, r4: r4, cloneStroke: cloneStroke, bboxOf: bboxOf, selBBox: selBBox, shapePts: shapePts, scaleStroke: scaleStroke, translate: translate, rotateStroke: rotateStroke, clampStroke: clampStroke, fitShape: fitShape, fitForced: fitForced, handlesOf: handlesOf, handleAt: handleAt, insideBB: insideBB, pickGesture: pickGesture, resizeFactors: resizeFactors, resizeAnchor: resizeAnchor, snapItems: snapItems, applySnap: applySnap, encodeClip: encodeClip, decodeClip: decodeClip, lassoDefaults: lassoDefaults, lassoPick: lassoPick, settingsDefaults: settingsDefaults, mergeSelectSettings: mergeSelectSettings, nearStroke: nearStroke, dwellSnap: dwellSnap };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   G.STUDY_SELECT_PURE = PURE;
 
@@ -1033,13 +1065,13 @@
       if (V.lasso && V.lasso.n === n) {
         var bb = selBBoxNow(api);
         if (bb) {
-          var hdl = handleAt(bb, a[0], a[1], W, H, 22);
-          if (hdl) {
+          var pick = pickGesture(bb, a[0], a[1], W, H, 22);
+          if (pick && pick.kind === "resize") {
             var before = snapItems(selItems(api));
-            G_.drag = { kind: "resize", handle: hdl, bb0: { x0: bb.x0, y0: bb.y0, x1: bb.x1, y1: bb.y1, cx: bb.cx, cy: bb.cy }, before: before };
+            G_.drag = { kind: "resize", handle: pick.handle, bb0: { x0: bb.x0, y0: bb.y0, x1: bb.x1, y1: bb.y1, cx: bb.cx, cy: bb.cy }, before: before };
             consume(e); return;
           }
-          if (insideBB(bb, a[0], a[1], 0.004)) {
+          if (pick && pick.kind === "move") {
             G_.drag = { kind: "move", start: a, before: snapItems(selItems(api)) };
             consume(e); return;
           }
