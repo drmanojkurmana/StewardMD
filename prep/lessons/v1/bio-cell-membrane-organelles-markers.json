@@ -10,14 +10,42 @@
    "say": "Rough reticulum folds secretory proteins with glycosylation and chaperone checks. Smooth reticulum makes steroids and detoxifies through P450. COPII vesicles export finished cargo to Golgi.",
    "vis": {
     "kind": "table",
-    "cols": ["Organelle", "Marker enzyme (classic)", "Signature job"],
+    "cols": [
+     "Organelle",
+     "Marker enzyme (classic)",
+     "Signature job"
+    ],
     "rows": [
-     ["Endoplasmic reticulum", "Glucose-6-phosphatase", "Folding, N-glycosylation start, detox"],
-     ["Golgi apparatus", "Galactosyltransferase", "Glycan finishing, sorting to destinations"],
-     ["Inner mitochondrial membrane", "Succinate dehydrogenase", "Respiration (complex II)"],
-     ["Lysosome", "Acid phosphatase", "Acid digestion (hydrolases, V-ATPase)"],
-     ["Peroxisome", "Catalase (and urate oxidase historically)", "VLCFA oxidation, peroxide disposal"],
-     ["Plasma membrane", "5-prime nucleotidase, Na/K ATPase", "Transport, signalling"]
+     [
+      "Endoplasmic reticulum",
+      "Glucose-6-phosphatase",
+      "Folding, N-glycosylation start, detox"
+     ],
+     [
+      "Golgi apparatus",
+      "Galactosyltransferase",
+      "Glycan finishing, sorting to destinations"
+     ],
+     [
+      "Inner mitochondrial membrane",
+      "Succinate dehydrogenase",
+      "Respiration (complex II)"
+     ],
+     [
+      "Lysosome",
+      "Acid phosphatase",
+      "Acid digestion (hydrolases, V-ATPase)"
+     ],
+     [
+      "Peroxisome",
+      "Catalase (and urate oxidase historically)",
+      "VLCFA oxidation, peroxide disposal"
+     ],
+     [
+      "Plasma membrane",
+      "5-prime nucleotidase, Na/K ATPase",
+      "Transport, signalling"
+     ]
     ]
    }
   },
@@ -28,12 +56,37 @@
     "kind": "flow",
     "title": "Through the Golgi stack",
     "nodes": [
-     {"id": "cis", "label": "Cis: receives COPII cargo"},
-     {"id": "med", "label": "Medial: glycans trimmed and built"},
-     {"id": "trans", "label": "Trans network: sorts three ways"},
-     {"id": "out", "label": "Secretion, granules, lysosomes"}
+     {
+      "id": "cis",
+      "label": "Cis: receives COPII cargo"
+     },
+     {
+      "id": "med",
+      "label": "Medial: glycans trimmed and built"
+     },
+     {
+      "id": "trans",
+      "label": "Trans network: sorts three ways"
+     },
+     {
+      "id": "out",
+      "label": "Secretion, granules, lysosomes"
+     }
     ],
-    "edges": [["cis", "med"], ["med", "trans"], ["trans", "out"]]
+    "edges": [
+     [
+      "cis",
+      "med"
+     ],
+     [
+      "med",
+      "trans"
+     ],
+     [
+      "trans",
+      "out"
+     ]
+    ]
    }
   },
   {
@@ -41,8 +94,21 @@
    "say": "Misfolded proteins undergo ER-associated degradation, and overload triggers the unfolded protein response. Antitrypsin polymers and CFTR retention are quality control diseases linking to lung and liver clinics.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Quality control succeeds", "points": ["Chaperones refold or ERAD degrades", "UPR expands capacity briefly", "Secretion resumes"]},
-    "right": {"title": "Quality control overwhelmed", "points": ["UPR switches pro-apoptotic (CHOP)", "Polymers retained (antitrypsin Z)", "Cell sacrificed to protect tissue"]
+    "left": {
+     "title": "Quality control succeeds",
+     "points": [
+      "Chaperones refold or ERAD degrades",
+      "UPR expands capacity briefly",
+      "Secretion resumes"
+     ]
+    },
+    "right": {
+     "title": "Quality control overwhelmed",
+     "points": [
+      "UPR switches pro-apoptotic (CHOP)",
+      "Polymers retained (antitrypsin Z)",
+      "Cell sacrificed to protect tissue"
+     ]
     }
    }
   },
@@ -56,12 +122,32 @@
    "say": "Lysosomes acidify to pH five, arming sixty hydrolases for digestion and autophagy cargo. Lysosomal exocytosis even repairs membrane wounds by calcium triggered fusion at the surface.",
    "vis": {
     "kind": "table",
-    "cols": ["Lysosome input route", "Cargo", "Failure example"],
+    "cols": [
+     "Lysosome input route",
+     "Cargo",
+     "Failure example"
+    ],
     "rows": [
-     ["Endocytosis", "LDL, fluids, receptors", "Storage when hydrolase missing"],
-     ["Phagocytosis", "Bacteria, apoptotic cells", "Chronic granulomatous killing separate (NADPH oxidase)"],
-     ["Autophagy", "Organelles, aggregates", "Neurodegeneration when clearance lags"],
-     ["Mannose-6-phosphate delivery", "Hydrolases themselves", "I-cell mistargeting (next lesson)"]
+     [
+      "Endocytosis",
+      "LDL, fluids, receptors",
+      "Storage when hydrolase missing"
+     ],
+     [
+      "Phagocytosis",
+      "Bacteria, apoptotic cells",
+      "Chronic granulomatous killing separate (NADPH oxidase)"
+     ],
+     [
+      "Autophagy",
+      "Organelles, aggregates",
+      "Neurodegeneration when clearance lags"
+     ],
+     [
+      "Mannose-6-phosphate delivery",
+      "Hydrolases themselves",
+      "I-cell mistargeting (next lesson)"
+     ]
     ]
    }
   },
@@ -72,11 +158,74 @@
     "kind": "flow",
     "title": "Fraction spins, markers answer",
     "nodes": [
-     {"id": "spin", "label": "Homogenate spun faster stepwise"},
-     {"id": "pel", "label": "Nuclei, mitochondria, microsomes pellet in order"},
-     {"id": "mark", "label": "Marker enzyme identifies each fraction"}
+     {
+      "id": "spin",
+      "label": "Homogenate spun faster stepwise"
+     },
+     {
+      "id": "pel",
+      "label": "Nuclei, mitochondria, microsomes pellet in order"
+     },
+     {
+      "id": "mark",
+      "label": "Marker enzyme identifies each fraction"
+     }
     ],
-    "edges": [["spin", "pel"], ["pel", "mark"]]
+    "edges": [
+     [
+      "spin",
+      "pel"
+     ],
+     [
+      "pel",
+      "mark"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Subcellular organelles possess distinct marker enzymes essential for biochemical identification. The plasma membrane is marked by sodium-potassium ATPase and 5-nucleotidase. Mitochondria feature cytochrome c oxidase in the inner membrane, monoamine oxidase in the outer membrane, and glutamate dehydrogenase in the matrix. Lysosomes are defined by acid phosphatase operating at acidic pH five. Peroxisomes contain catalase, and the Golgi apparatus utilizes galactosyltransferase for glycan processing.",
+   "say": "High-yield for the exam. Subcellular organelles possess distinct marker enzymes essential for biochemical identification. The plasma membrane is marked by sodium-potassium ATPase and 5-nucleotidase. Mitochondria feature cytochrome c oxidase in the inner membrane, monoamine oxidase in the outer membrane, and glutamate dehydrogenase in the matrix. Lysosomes are defined by acid phosphatase operating at acidic pH five. Peroxisomes contain catalase, and the Golgi apparatus utilizes galactosyltransferase for glycan processing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Plasma membrane marker enzymes",
+      "Sodium-potassium ATPase and five prime nucleotidase in membrane fraction"
+     ],
+     [
+      "Mitochondrial inner membrane marker",
+      "Cytochrome c oxidase complex four of electron transport chain"
+     ],
+     [
+      "Mitochondrial outer membrane marker",
+      "Monoamine oxidase catalyzing oxidative deamination of catecholamines"
+     ],
+     [
+      "Mitochondrial matrix marker",
+      "Glutamate dehydrogenase and citrate synthase in matrix compartment"
+     ],
+     [
+      "Lysosomal hallmark marker",
+      "Acid phosphatase operating optimally at luminal acidic pH five"
+     ],
+     [
+      "Peroxisomal marker enzyme",
+      "Catalase decomposing hydrogen peroxide into water and molecular oxygen"
+     ],
+     [
+      "Golgi apparatus marker enzyme",
+      "Galactosyltransferase responsible for terminal oligosaccharide addition"
+     ],
+     [
+      "Endoplasmic reticulum marker",
+      "Glucose-6-phosphatase embedded within luminal membrane of reticulum"
+     ]
+    ]
    }
   }
  ],

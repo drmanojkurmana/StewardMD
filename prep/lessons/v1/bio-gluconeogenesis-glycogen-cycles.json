@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Cori cycle accounting",
     "nodes": [
-     {"id": "m", "label": "Muscle: glucose to lactate (+2 ATP)"},
-     {"id": "b", "label": "Lactate in blood"},
-     {"id": "l", "label": "Liver: lactate to glucose (cost 6)"},
-     {"id": "g", "label": "Glucose returns (net minus 4)"}
+     {
+      "id": "m",
+      "label": "Muscle: glucose to lactate (+2 ATP)"
+     },
+     {
+      "id": "b",
+      "label": "Lactate in blood"
+     },
+     {
+      "id": "l",
+      "label": "Liver: lactate to glucose (cost 6)"
+     },
+     {
+      "id": "g",
+      "label": "Glucose returns (net minus 4)"
+     }
     ],
-    "edges": [["m", "b"], ["b", "l"], ["l", "g"]]
+    "edges": [
+     [
+      "m",
+      "b"
+     ],
+     [
+      "b",
+      "l"
+     ],
+     [
+      "l",
+      "g"
+     ]
+    ]
    }
   },
   {
@@ -25,8 +50,21 @@
    "say": "Nitrogen rides the glucose-alanine cycle, where muscle transaminates pyruvate to alanine. Liver strips alanine back to pyruvate for glucose and sends nitrogen to urea. Fasting delivers glucose precursor and nitrogen disposal together, so urea production rises early.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Cori cycle (carbon only)", "points": ["Carries lactate carbon", "Costs net 4 ATP", "No nitrogen moved"]},
-    "right": {"title": "Glucose-alanine cycle (carbon plus nitrogen)", "points": ["Carries alanine carbon and nitrogen", "Nitrogen ends as urea", "Dominates in fasting"]
+    "left": {
+     "title": "Cori cycle (carbon only)",
+     "points": [
+      "Carries lactate carbon",
+      "Costs net 4 ATP",
+      "No nitrogen moved"
+     ]
+    },
+    "right": {
+     "title": "Glucose-alanine cycle (carbon plus nitrogen)",
+     "points": [
+      "Carries alanine carbon and nitrogen",
+      "Nitrogen ends as urea",
+      "Dominates in fasting"
+     ]
     }
    }
   },
@@ -51,11 +89,27 @@
    "say": "In prolonged fasting, alanine release falls as the brain accepts ketones and muscle protein is spared. Urinary nitrogen drops measurably, a signature of adaptation. Refeeding reverses the switch within hours as insulin rises.",
    "vis": {
     "kind": "table",
-    "cols": ["Phase", "Main glucose source", "Muscle protein fate"],
+    "cols": [
+     "Phase",
+     "Main glucose source",
+     "Muscle protein fate"
+    ],
     "rows": [
-     ["Fed (0 to 4 hours)", "Diet and glycogen building", "Synthesis favoured"],
-     ["Postabsorptive (12 to 24 hours)", "Glycogenolysis, then GNG", "Alanine export begins"],
-     ["Prolonged starvation (days)", "GNG from glycerol, lactate; ketones spare glucose", "Spared, nitrogen loss falls"]
+     [
+      "Fed (0 to 4 hours)",
+      "Diet and glycogen building",
+      "Synthesis favoured"
+     ],
+     [
+      "Postabsorptive (12 to 24 hours)",
+      "Glycogenolysis, then GNG",
+      "Alanine export begins"
+     ],
+     [
+      "Prolonged starvation (days)",
+      "GNG from glycerol, lactate; ketones spare glucose",
+      "Spared, nitrogen loss falls"
+     ]
     ]
    }
   },
@@ -66,11 +120,74 @@
     "kind": "flow",
     "title": "Diabetic liver stuck fasting",
     "nodes": [
-     {"id": "ins", "label": "Insulin signal resisted"},
-     {"id": "enz", "label": "GNG enzymes stay induced"},
-     {"id": "out", "label": "Glucose output stays high"}
+     {
+      "id": "ins",
+      "label": "Insulin signal resisted"
+     },
+     {
+      "id": "enz",
+      "label": "GNG enzymes stay induced"
+     },
+     {
+      "id": "out",
+      "label": "Glucose output stays high"
+     }
     ],
-    "edges": [["ins", "enz"], ["enz", "out"]]
+    "edges": [
+     [
+      "ins",
+      "enz"
+     ],
+     [
+      "enz",
+      "out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Inter-organ metabolic cycles coordinate energy homeostasis during fasting. The Cori cycle transfers muscle and erythrocyte lactate to the liver for gluconeogenesis, while the Cahill glucose-alanine cycle shuttles amino nitrogen from muscle to the hepatic urea cycle. In gluconeogenesis, pyruvate carboxylase requires biotin and acetyl-CoA activation. Fructose-1,6-bisphosphatase is the key regulatory checkpoint, inhibited by fructose-2,6-bisphosphate and AMP. Skeletal muscle lacks glucose-6-phosphatase, preventing blood glucose export.",
+   "say": "High-yield for the exam. Inter-organ metabolic cycles coordinate energy homeostasis during fasting. The Cori cycle transfers muscle and erythrocyte lactate to the liver for gluconeogenesis, while the Cahill glucose-alanine cycle shuttles amino nitrogen from muscle to the hepatic urea cycle. In gluconeogenesis, pyruvate carboxylase requires biotin and acetyl-CoA activation. Fructose-1,6-bisphosphatase is the key regulatory checkpoint, inhibited by fructose-2,6-bisphosphate and AMP. Skeletal muscle lacks glucose-6-phosphatase, preventing blood glucose export.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Cori cycle inter-organ partners",
+      "Muscle and erythrocyte lactate transported to liver for hepatic gluconeogenesis"
+     ],
+     [
+      "Glucose-alanine cycle benefit",
+      "Transports toxic muscle amino nitrogen to hepatic urea cycle safely"
+     ],
+     [
+      "Pyruvate carboxylase activator",
+      "Acetyl-coenzyme A derived from fatty acid oxidation stimulates enzyme"
+     ],
+     [
+      "Key gluconeogenic checkpoint",
+      "Fructose-one comma six-bisphosphatase inhibited by fructose-2,6-bisphosphate"
+     ],
+     [
+      "Muscle glucose release limitation",
+      "Skeletal muscle lacks glucose-6-phosphatase and retains phosphorylated glucose"
+     ],
+     [
+      "Glucagon regulation of PFK-2",
+      "Protein kinase A phosphorylates bifunctional enzyme activating phosphatase domain"
+     ],
+     [
+      "Fructose-2,6-bisphosphate effect",
+      "Potently activates phosphofructokinase-one while allosterically inhibiting fructose-1,6-bisphosphatase"
+     ],
+     [
+      "PEPCK high-energy cofactor",
+      "Guanosine triphosphate GTP supplies high-energy phosphate for decarboxylation"
+     ]
+    ]
    }
   }
  ],
