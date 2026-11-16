@@ -77,6 +77,51 @@
    "tx": "**SUV reporting** quotes maximum standardised uptake value with glucose, uptake time and dose recorded, because a value without its conditions cannot be compared at follow up. Deauville five point scoring in lymphoma instead compares node uptake with mediastinal blood pool and liver, freeing the read from absolute numbers. Both systems exist to stop impressionistic hot or not reporting, and examiners reward the named scale over adjectives every time.",
    "say": "SUV reporting quotes the maximum value with glucose, uptake time and dose recorded, because a value without conditions cannot be compared later. Deauville scoring in lymphoma compares nodes with blood pool and liver instead. Both systems stop impressionistic hot or not reporting, and examiners reward the named scale.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Record glucose and uptake time"}, {"id": "b", "label": "Quote SUV or Deauville score"}, {"id": "c", "label": "Compare like with like"}, {"id": "d", "label": "Response category assigned"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: **FDG** is a glucose analogue trapped after hexokinase phosphorylation, so tumours glow after a sixty minute rest. Standardised uptake value follows disease. It is not a cancer meter. Brain and bladder uptake are physiological. A new glow after radiotherapy waits twelve weeks before it is called recurrence. Glucose above roughly 200 milligrams per decilitre degrades contrast. A **superscan** is a uniformly hot skeleton with faint kidneys. A hot thyroid nodule that suppresses the gland is almost never malignant.",
+   "say": "High-yield for the exam: FDG is a glucose analogue trapped after hexokinase phosphorylation, so tumours glow after a sixty minute rest. Standardised uptake value follows disease. It is not a cancer meter. Brain and bladder uptake are physiological. A new glow after radiotherapy waits twelve weeks before it is called recurrence. Glucose above roughly 200 milligrams per decilitre degrades contrast. A superscan is a uniformly hot skeleton with faint kidneys. A hot thyroid nodule that suppresses the gland is almost never malignant.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "FDG trap",
+      "Hexokinase product stays in the cell"
+     ],
+     [
+      "Uptake rest",
+      "Sixty minutes before the scan"
+     ],
+     [
+      "SUV meaning",
+      "Follow up number, not cancer proof"
+     ],
+     [
+      "Normal hot spots",
+      "Brain cortex and urinary bladder"
+     ],
+     [
+      "After radiotherapy",
+      "Wait twelve weeks before recurrence"
+     ],
+     [
+      "High glucose",
+      "Above roughly 200, poor contrast"
+     ],
+     [
+      "Superscan",
+      "Hot skeleton, kidneys faint or absent"
+     ],
+     [
+      "Hot thyroid nodule",
+      "Almost never malignant, no cytology"
+     ]
+    ]
+   }
   }
  ]
 }
