@@ -77,6 +77,51 @@
    "tx": "**Plain film signs** of pulmonary embolism, Westermark, Hampton hump and Palla together, still miss most cases because small peripheral clots change nothing visible. A high clinical probability with a clear film proceeds straight to CT pulmonary angiography or a ventilation perfusion study when contrast is barred. D dimer only helps when probability is low or intermediate, where a negative result safely avoids imaging.",
    "say": "Plain film signs of pulmonary embolism, taken together, still miss most cases because small peripheral clots change nothing visible. High clinical probability with a clear film proceeds straight to CT pulmonary angiography, or a perfusion study when contrast is barred. D dimer only helps at low or intermediate probability, where a negative avoids imaging.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "High probability, clear film"}, {"id": "b", "label": "CT pulmonary angiography"}, {"id": "c", "label": "Clot mapped or excluded"}, {"id": "d", "label": "Anticoagulation decision"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: The **Golden S sign** is right upper lobe collapse around a central tumour. The fissure droops laterally and bulges near the hilum, a reverse S. Benign collapse stays concave with no medial bulge. **Westermark sign** is focal hyperlucency beyond an embolus, but a normal film never excludes embolism. Hampton hump is a pleural based infarct. Palla sign is a sausage shaped right pulmonary artery. Bronchoscopy follows a Golden S film because imaging cannot type the tumour.",
+   "say": "High-yield for the exam: The Golden S sign is right upper lobe collapse around a central tumour. The fissure droops laterally and bulges near the hilum, a reverse S. Benign collapse stays concave with no medial bulge. Westermark sign is focal hyperlucency beyond an embolus, but a normal film never excludes embolism. Hampton hump is a pleural based infarct. Palla sign is a sausage shaped right pulmonary artery. Bronchoscopy follows a Golden S film because imaging cannot type the tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Reverse S fissure",
+      "Tumour props fissure at hilum"
+     ],
+     [
+      "Benign upper lobe collapse",
+      "Fissure stays concave throughout"
+     ],
+     [
+      "Westermark sign",
+      "Vessels empty beyond the clot"
+     ],
+     [
+      "Normal chest film",
+      "Never excludes pulmonary embolism"
+     ],
+     [
+      "Hampton hump",
+      "Pleural dome of infarction"
+     ],
+     [
+      "Palla sign",
+      "Sausage shaped right artery"
+     ],
+     [
+      "Pale lung in a child",
+      "Often an inhaled foreign body"
+     ],
+     [
+      "After a Golden S film",
+      "Bronchoscopy for tissue diagnosis"
+     ]
+    ]
+   }
   }
  ]
 }
