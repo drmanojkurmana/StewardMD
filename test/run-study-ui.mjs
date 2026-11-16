@@ -125,6 +125,7 @@ ok(await page.evaluate(() => STUDY._state().z === 1.25), "zoom in");
 await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
 await page.waitForSelector('.st-ov[data-n="1"]');
 await page.click('[data-act="st-tool"][data-v="er"]');
+await page.evaluate(() => { const v = STUDY._state(); if (v.ink) { v.ink.eraser.mode = "stroke"; v.ink.eraser.autoDeselect = false; } });   // Phase 1 default is Standard (area); this check is the Stroke eraser
 await page.evaluate(() => {
   const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), f = (t) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 9, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + 0.36 * r.width, clientY: r.top + (0.2 + 0.03) * r.height, bubbles: true, cancelable: true }));
   f("pointerdown"); f("pointerup");
