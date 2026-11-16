@@ -1,0 +1,372 @@
+{
+ "v": 1,
+ "module": "shm-inherited-bleeding-disorders",
+ "subject": "ss-haematology",
+ "title": "Inherited bleeding disorders haemophilia levels and von Willebrand disease",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 121 Coagulation Disorders",
+  "Harrison Ch 120 Disorders of Platelets and Vessel Wall von Willebrand sections",
+  "WFH Guidelines for the Management of Hemophilia 2020"
+ ],
+ "steps": [
+  {
+   "tx": "**Haemophilia** (X linked factor deficiency) affects **one** in **ten thousand** males worldwide, with **haemophilia A** (factor VIII deficiency) forming **eighty** percent of cases. **F8 gene** mutations cause haemophilia A, and **F9 gene** mutations cause haemophilia B. **Haemophilia B** forms the remaining **twenty** percent of cases. **X linked recessive** (gene on X chromosome) inheritance spares most carriers from major bleeding. **Severe disease** (factor below **1** percent) bleeds spontaneously into joints.",
+   "say": "Haemophilia affects one in ten thousand males worldwide. Haemophilia A forms eighty percent of all cases. Severe disease below one percent bleeds spontaneously into joints.",
+   "vis": {
+    "cols": [
+     "Item",
+     "Detail",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Frequency",
+      "one in ten thousand males",
+      "All ethnic groups"
+     ],
+     [
+      "Haemophilia A",
+      "eighty percent cases",
+      "Factor VIII gene"
+     ],
+     [
+      "Haemophilia B",
+      "twenty percent cases",
+      "Factor IX gene"
+     ],
+     [
+      "Inheritance",
+      "X linked recessive",
+      "Carriers seldom bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Factor level grades severity precisely. **Severe haemophilia** (below **1** percent) gives spontaneous haemarthroses (joint bleeds) without injury. **Moderate disease** (**1** to **five** percent) bleeds after minor trauma. **Mild disease** (above **five** percent) bleeds mainly during surgery or after major injury. **Haemophilia A and B** look clinically identical, so factor assay separates them. **Bleeding frequency** exceeds **thirty** joint bleeds yearly in untreated severe disease.",
+   "say": "Severe disease bleeds spontaneously into joints without injury. Moderate disease bleeds after minor trauma episodes. A and B haemophilia look clinically identical to clinicians.",
+   "vis": {
+    "cols": [
+     "Grade",
+     "Factor level",
+     "Pattern"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Severe",
+      "Below 1 percent",
+      "Spontaneous joints"
+     ],
+     [
+      "Moderate",
+      "1 to five percent",
+      "Minor trauma bleeds"
+     ],
+     [
+      "Mild",
+      "Above five percent",
+      "Surgery only"
+     ],
+     [
+      "Carriers",
+      "Variable levels",
+      "Mostly normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemarthrosis** (joint bleed) is the signature bleed of haemophilia and destroys cartilage over time. **Deep muscle bleeds** (in thigh and calf) cause compartment syndrome and pseudotumours. **Epidural and intracranial bleeds** threaten life in neonates and fall injuries. **Physiotherapy** (exercise therapy) preserves joints between bleeds. **Arthropathy** (joint destruction) was the leading disability cause before prophylaxis era.",
+   "say": "Haemarthrosis is the signature bleed of haemophilia disease. Deep muscle bleeds cause compartment syndrome complications. Physiotherapy preserves joints between bleeding episodes in patients today.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Joint bleed starts"
+     },
+     {
+      "id": "dose",
+      "label": "Factor replacement fast"
+     },
+     {
+      "id": "rest",
+      "label": "Rest ice elevation"
+     },
+     {
+      "id": "physio",
+      "label": "Physiotherapy resume"
+     }
+    ],
+    "edges": [
+     [
+      "bleed",
+      "dose"
+     ],
+     [
+      "dose",
+      "rest"
+     ],
+     [
+      "rest",
+      "physio"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute bleeds need factor immediately. **Factor VIII concentrate** (replacement protein) at **fifty** units per kg raises levels to **one hundred** percent in a **seventy** kg severe patient. **1 unit per kg raises factor VIII by ~2 percent**, so **twenty five** units per kg gives roughly **fifty** percent. **Factor IX concentrate** (replacement protein) recovers less per unit, near **1** percent per unit per kg. **Prophylactic dosing** (regular prevention) cuts joint bleeds by over **ninety** percent in children.",
+   "say": "Factor VIII at fifty units raises levels to one hundred percent. One unit per kilogram raises factor VIII by two percent. Prophylaxis cuts joint bleeds by over ninety percent.",
+   "vis": {
+    "cols": [
+     "Product",
+     "Recovery",
+     "Dose clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Factor VIII",
+      "~2 percent per unit",
+      "fifty units per kg"
+     ],
+     [
+      "Factor IX",
+      "~1 percent per unit",
+      "Roughly double"
+     ],
+     [
+      "Prophylaxis",
+      "Over ninety percent cuts",
+      "Children standard"
+     ],
+     [
+      "Life bleed target",
+      "one hundred percent level",
+      "Intracranial bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Inhibitors** (neutralising antibodies) complicate factor replacement badly. **Bethesda units** (inhibitor assay units) quantify strength, with **five** units above clinical relevance. **Haemophilia A inhibitors** develop in **twenty five** to **thirty** percent of severe patients, and **haemophilia B** inhibitors in only **three** to **five** percent. **High risk mutations** (large deletions, nonsense mutations) predict inhibitor formation. **Immune tolerance induction** (ITI, antibody erasure therapy) removes inhibitors in about **sixty** percent.",
+   "say": "Inhibitors develop in twenty five to thirty percent of severe A. Bethesda units above five carry clinical relevance. Immune tolerance removes inhibitors in about sixty percent.",
+   "vis": {
+    "cols": [
+     "Group",
+     "Inhibitor rate",
+     "Predictor"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Severe haemophilia A",
+      "twenty five to thirty percent",
+      "Large deletions"
+     ],
+     [
+      "Nonsevere A",
+      "About ten percent",
+      "intron twenty two inversions"
+     ],
+     [
+      "Haemophilia B",
+      "three to five percent",
+      "Nonsense mutations"
+     ],
+     [
+      "ITI success",
+      "About sixty percent",
+      "Daily high doses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Desmopressin** (DDAVP, hormone releasing stored factor VIII) suits mild haemophilia A with tested response. **Tranexamic acid** (antifibrinolytic drug) is dosed **twenty five** mg per kg three to four times daily for mucosal bleeds. **Non transfusion therapy** (emicizumab, gene therapy) transforms severe care. **Emicizumab** (factor VIII mimetic antibody) is given weekly or monthly by injection in haemophilia A with or without inhibitors. **Gene therapy** (AAV vector delivered factor genes) has reached licensed use in adults.",
+   "say": "Desmopressin suits mild haemophilia A with tested response. Tranexamic acid is dosed at twenty five milligrams per kilogram. Emicizumab allows prophylaxis by weekly injection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mild disease options",
+     "points": [
+      "Desmopressin trial",
+      "Tranexamic acid mucosal",
+      "Factor on demand"
+     ]
+    },
+    "right": {
+     "title": "Severe disease options",
+     "points": [
+      "Prophylactic factor",
+      "Emicizumab weekly",
+      "Gene therapy trials"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Von Willebrand disease** (VWD, vessel factor deficiency) is the commonest inherited bleeding disorder, affecting **1** to **2** percent of people. **Type 1** (partial deficiency) is commonest and desmopressin responsive. **Type 2** (qualitative defect) splits into **2A** (multimer loss), **2B** (platelet gain), **2M** (platelet function loss) and **2N** (factor VIII binding loss). **Type three** (near complete absence) bleeds severely with prophylaxis needs. **Ristocetin cofactor** (activity assay) confirms the diagnosis with antigen levels.",
+   "say": "Von Willebrand disease affects one to two percent of people. Type one is commonest and desmopressin responsive. Type three bleeds severely and needs prophylaxis.",
+   "vis": {
+    "cols": [
+     "Type",
+     "Defect",
+     "Treatment"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Type 1",
+      "Partial deficiency",
+      "Desmopressin first"
+     ],
+     [
+      "Type 2A",
+      "Multimer loss",
+      "VWF concentrate"
+     ],
+     [
+      "Type 2N",
+      "Factor VIII binding",
+      "Mimics haemophilia A"
+     ],
+     [
+      "Type three",
+      "Near total absence",
+      "Prophylaxis needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ristocetin aggregation** (vessel factor test) patterns separate platelet receptor faults from vessel factor faults. **Bernard Soulier syndrome** (GPIb defect) shows absent ristocetin response with giant platelets. **Von Willebrand disease** also loses ristocetin response but keeps normal platelet size and count. **Factor VIII level** falls in **type 2N** disease and corrects the haemophilia A mimicry. **Multimer analysis** (clotting protein size test) grades severity and predicts treatment response.",
+   "say": "Ristocetin testing separates platelet receptor faults from vessel factor faults. Bernard Soulier has giant platelets with absent response. Multimer analysis grades severity and predicts response.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bernard Soulier",
+     "points": [
+      "GPIb defect present",
+      "Giant platelets",
+      "Low platelet count"
+     ]
+    },
+    "right": {
+     "title": "Von Willebrand disease",
+     "points": [
+      "VWF defect present",
+      "Normal platelets",
+      "Normal count"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Women with bleeding disorders need explicit care. **Menorrhagia** (heavy menstrual bleeding) dominates mild haemophilia and VWD presentations in women. **FXI deficiency** (factor XI defect) raises surgical bleeding in specific populations. **Factor XIII deficiency** (clot strength defect) bleeds from the umbilical cord and warns of intracranial risk. **Postpartum haemorrhage** (delivery bleeding) deserves prophylaxis planning in known carriers.",
+   "say": "Menorrhagia dominates mild haemophilia and VWD presentations in women. FXI deficiency raises surgical bleeding in specific populations. Postpartum planning protects known carriers during delivery.",
+   "vis": {
+    "cols": [
+     "Bleed site",
+     "Typical disorder",
+     "Guard"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Joints",
+      "Haemophilia",
+      "Prophylaxis standard"
+     ],
+     [
+      "Menstruation",
+      "VWD mild haemophilia",
+      "Tranexamic acid"
+     ],
+     [
+      "Umbilical cord",
+      "Factor XIII defect",
+      "Prophylaxis planned"
+     ],
+     [
+      "After surgery",
+      "FXI deficiency",
+      "Factor cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems exploit these contrasts. **Haemophilia A** is **X linked** with high joints bleeds, while **VWD type 2N** mimics A with carrier females affected. **1 unit per kg** raises factor VIII by **2** percent, a number examiners demand. **Desmopressin** works in mild haemophilia A and **type 1** VWD but fails in severe disease. **Bethesda units** quantify inhibitors, not factor levels themselves.",
+   "say": "Haemophilia A is X linked with joint bleeds dominant. One unit raises factor VIII by two percent. Desmopressin works in mild disease but fails in severe cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemophilia A",
+     "points": [
+      "Males affected",
+      "Joint bleeds",
+      "Factor VIII low"
+     ]
+    },
+    "right": {
+     "title": "VWD type 2N",
+     "points": [
+      "Females affected",
+      "Mucosal bleeds",
+      "Factor VIII binding lost"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: haemophilia affects **1** in **ten thousand** males with **A forming eighty** percent. **Severe below 1** percent bleeds spontaneously, and **moderate 1 to five** percent bleeds after minor trauma. **1 unit per kg raises factor VIII** by **2** percent, and **prophylaxis** cuts bleeds above **ninety** percent. **VWD** affects **1 to 2** percent of people, and **desmopressin** treats **type 1**.",
+   "say": "Haemophilia A forms eighty percent of all cases. One unit per kilogram raises factor VIII by two percent. Von Willebrand disease affects one to two percent of people.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Frequency",
+      "one in ten thousand males",
+      "Worldwide figure"
+     ],
+     [
+      "Haemophilia A share",
+      "eighty percent",
+      "Factor VIII gene"
+     ],
+     [
+      "Recovery per unit",
+      "2 percent per unit",
+      "Time the dose"
+     ],
+     [
+      "Prophylaxis effect",
+      "Above ninety percent cuts",
+      "Joint bleeds"
+     ],
+     [
+      "Commonest heredity",
+      "VWD 1 to 2 percent",
+      "Mucosal bleeds"
+     ],
+     [
+      "VWD type 1 drug",
+      "Desmopressin",
+      "Test response"
+     ]
+    ]
+   }
+  }
+ ]
+}
