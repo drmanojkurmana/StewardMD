@@ -14,12 +14,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Chlorine gas or bleaching powder added to water"},
-     {"id": "b", "label": "Cl2 + H2O <---> HOCl (Hypochlorous acid) + HCl"},
-     {"id": "c", "label": "HOCl penetrates bacterial membrane freely"},
-     {"id": "d", "label": "Oxidation of intracellular sulfhydryl enzymes and bacterial death"}
+     {
+      "id": "a",
+      "label": "Chlorine gas or bleaching powder added to water"
+     },
+     {
+      "id": "b",
+      "label": "Cl2 + H2O <---> HOCl (Hypochlorous acid) + HCl"
+     },
+     {
+      "id": "c",
+      "label": "HOCl penetrates bacterial membrane freely"
+     },
+     {
+      "id": "d",
+      "label": "Oxidation of intracellular sulfhydryl enzymes and bacterial death"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -39,13 +64,43 @@
    "say": "Water pH governs chlorine potency. Hypochlorous acid is eighty times stronger than hypochlorite ions. Water must be kept slightly acidic or neutral so the active acid form dominates.",
    "vis": {
     "kind": "table",
-    "cols": ["Water pH value", "Hypochlorous acid (HOCl) %", "Hypochlorite ion (OCl-) %", "Disinfection efficacy"],
+    "cols": [
+     "Water pH value",
+     "Hypochlorous acid (HOCl) %",
+     "Hypochlorite ion (OCl-) %",
+     "Disinfection efficacy"
+    ],
     "rows": [
-     ["pH 6.0", "96.5 percent", "3.5 percent", "Maximum rapid bactericidal potency"],
-     ["pH 7.0", "75.0 percent", "25.0 percent", "High bactericidal efficacy"],
-     ["pH 7.5", "50.0 percent", "50.0 percent", "Acceptable disinfection threshold"],
-     ["pH 8.0", "23.0 percent", "77.0 percent", "Reduced potency; longer contact needed"],
-     ["pH 9.0", "3.0 percent", "97.0 percent", "Very weak disinfection; pH correction required"]
+     [
+      "pH 6.0",
+      "96.5 percent",
+      "3.5 percent",
+      "Maximum rapid bactericidal potency"
+     ],
+     [
+      "pH 7.0",
+      "75.0 percent",
+      "25.0 percent",
+      "High bactericidal efficacy"
+     ],
+     [
+      "pH 7.5",
+      "50.0 percent",
+      "50.0 percent",
+      "Acceptable disinfection threshold"
+     ],
+     [
+      "pH 8.0",
+      "23.0 percent",
+      "77.0 percent",
+      "Reduced potency; longer contact needed"
+     ],
+     [
+      "pH 9.0",
+      "3.0 percent",
+      "97.0 percent",
+      "Very weak disinfection; pH correction required"
+     ]
     ]
    }
   },
@@ -56,12 +111,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Total chlorine dose added to raw water"},
-     {"id": "b", "label": "Subtracted: Residual chlorine remaining after 60 min"},
-     {"id": "c", "label": "Equals: Chlorine Demand of the water sample"},
-     {"id": "d", "label": "Determines exact dosage needed at treatment plant"}
+     {
+      "id": "a",
+      "label": "Total chlorine dose added to raw water"
+     },
+     {
+      "id": "b",
+      "label": "Subtracted: Residual chlorine remaining after 60 min"
+     },
+     {
+      "id": "c",
+      "label": "Equals: Chlorine Demand of the water sample"
+     },
+     {
+      "id": "d",
+      "label": "Determines exact dosage needed at treatment plant"
+     }
     ],
-    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -71,11 +151,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Phase 1: Direct oxidation of iron, manganese, H2S"},
-     {"id": "b", "label": "Phase 2: Formation of chloramines with ammonia"},
-     {"id": "c", "label": "Apparent rise in combined residual chlorine"}
+     {
+      "id": "a",
+      "label": "Phase 1: Direct oxidation of iron, manganese, H2S"
+     },
+     {
+      "id": "b",
+      "label": "Phase 2: Formation of chloramines with ammonia"
+     },
+     {
+      "id": "c",
+      "label": "Apparent rise in combined residual chlorine"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -84,13 +182,37 @@
    "say": "Adding more chlorine oxidizes chloramines into nitrogen gas, causing measured residuals to drop. The lowest point is the breakpoint, beyond which pure free chlorine begins to appear.",
    "vis": {
     "kind": "table",
-    "cols": ["Curve section", "Chemical reaction occurring", "Residual form detected"],
+    "cols": [
+     "Curve section",
+     "Chemical reaction occurring",
+     "Residual form detected"
+    ],
     "rows": [
-     ["Phase 1 (Initial)", "Oxidation of reducing minerals (iron, sulphide)", "Zero residual detected"],
-     ["Phase 2 (Ascending)", "Reaction with ammonia to form chloramines", "Combined residual chlorine rises"],
-     ["Phase 3 (Descending)", "Oxidation and destruction of chloramines into N2", "Apparent residual drops sharply"],
-     ["The Breakpoint", "All ammonia and organic matter destroyed", "Nadir of curve; target operational point"],
-     ["Phase 4 (Post-breakpoint)", "Every drop added remains unconsumed", "Free available residual chlorine (HOCl/OCl-)"]
+     [
+      "Phase 1 (Initial)",
+      "Oxidation of reducing minerals (iron, sulphide)",
+      "Zero residual detected"
+     ],
+     [
+      "Phase 2 (Ascending)",
+      "Reaction with ammonia to form chloramines",
+      "Combined residual chlorine rises"
+     ],
+     [
+      "Phase 3 (Descending)",
+      "Oxidation and destruction of chloramines into N2",
+      "Apparent residual drops sharply"
+     ],
+     [
+      "The Breakpoint",
+      "All ammonia and organic matter destroyed",
+      "Nadir of curve; target operational point"
+     ],
+     [
+      "Phase 4 (Post-breakpoint)",
+      "Every drop added remains unconsumed",
+      "Free available residual chlorine (HOCl/OCl-)"
+     ]
     ]
    }
   },
@@ -102,11 +224,19 @@
     "kind": "compare",
     "left": {
      "title": "Free available chlorine (HOCl/OCl-)",
-     "points": ["Fast, potent bactericidal and virucidal kill", "Acts within minutes against vegetative germs", "Required minimum: 0.5 ppm after 60 min contact"]
+     "points": [
+      "Fast, potent bactericidal and virucidal kill",
+      "Acts within minutes against vegetative germs",
+      "Required minimum: 0.5 ppm after 60 min contact"
+     ]
     },
     "right": {
      "title": "Combined chlorine (Chloramines)",
-     "points": ["Sluggish, slow disinfection velocity", "Requires hours of contact time to kill bacteria", "More stable; persists longer in pipe networks"]
+     "points": [
+      "Sluggish, slow disinfection velocity",
+      "Requires hours of contact time to kill bacteria",
+      "More stable; persists longer in pipe networks"
+     ]
     }
    }
   },
@@ -116,12 +246,32 @@
    "say": "Bleaching powder supplies thirty-three percent available chlorine when fresh. Because air and moisture degrade it, bags must be kept tightly sealed in cool, dark storage sheds.",
    "vis": {
     "kind": "table",
-    "cols": ["Chlorine disinfectant agent", "Available chlorine content", "Physical form and use"],
+    "cols": [
+     "Chlorine disinfectant agent",
+     "Available chlorine content",
+     "Physical form and use"
+    ],
     "rows": [
-     ["Fresh bleaching powder", "33 percent available chlorine by weight", "White powder for well disinfection and camps"],
-     ["High test hypochlorite (HTH)", "65 to 70 percent available chlorine", "Stable granules; longer shelf life in tropics"],
-     ["Sodium hypochlorite solution", "5 to 15 percent available chlorine", "Liquid bleach for hospital disinfection and water"],
-     ["Chlorine gas cylinders", "100 percent available chlorine", "Liquefied gas under pressure in urban waterworks"]
+     [
+      "Fresh bleaching powder",
+      "33 percent available chlorine by weight",
+      "White powder for well disinfection and camps"
+     ],
+     [
+      "High test hypochlorite (HTH)",
+      "65 to 70 percent available chlorine",
+      "Stable granules; longer shelf life in tropics"
+     ],
+     [
+      "Sodium hypochlorite solution",
+      "5 to 15 percent available chlorine",
+      "Liquid bleach for hospital disinfection and water"
+     ],
+     [
+      "Chlorine gas cylinders",
+      "100 percent available chlorine",
+      "Liquefied gas under pressure in urban waterworks"
+     ]
     ]
    }
   },
@@ -132,12 +282,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Fill 6 porcelain cups with 2 ml well water each"},
-     {"id": "b", "label": "Add 1 to 6 drops of 1% bleaching powder solution"},
-     {"id": "c", "label": "Stir and add 3 drops of starch-iodide indicator"},
-     {"id": "d", "label": "First cup developing blue color gives required dose"}
+     {
+      "id": "a",
+      "label": "Fill 6 porcelain cups with 2 ml well water each"
+     },
+     {
+      "id": "b",
+      "label": "Add 1 to 6 drops of 1% bleaching powder solution"
+     },
+     {
+      "id": "c",
+      "label": "Stir and add 3 drops of starch-iodide indicator"
+     },
+     {
+      "id": "d",
+      "label": "First cup developing blue color gives required dose"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -159,12 +334,65 @@
     "kind": "compare",
     "left": {
      "title": "Modern DPD comparator test",
-     "points": ["Reagent: Diethyl-p-phenylenediamine tablets", "Produces stable red color instantly with free chlorine", "Safe, non-carcinogenic, specific for free chlorine"]
+     "points": [
+      "Reagent: Diethyl-p-phenylenediamine tablets",
+      "Produces stable red color instantly with free chlorine",
+      "Safe, non-carcinogenic, specific for free chlorine"
+     ]
     },
     "right": {
      "title": "Legacy Orthotolidine (OT) test",
-     "points": ["Reagent: Orthotolidine in acid solution", "Produces yellow color (flashes for free chlorine)", "Carcinogenic reagent; false positives with iron/nitrites"]
+     "points": [
+      "Reagent: Orthotolidine in acid solution",
+      "Produces yellow color (flashes for free chlorine)",
+      "Carcinogenic reagent; false positives with iron/nitrites"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Chlorine forms uncharged hypochlorous acid, which enters bacterial walls and kills vegetative bacteria, acting far stronger than hypochlorite. Potency falls as pH rises, so slightly acidic water disinfects best. Chlorine demand equals dose added minus residual after contact, and free residual appears only beyond breakpoint. Fresh bleaching powder gives 33 percent available chlorine, and Horrocks apparatus sets well dosage.",
+   "say": "High-yield for the exam: Chlorine forms uncharged hypochlorous acid, which enters bacterial walls and kills vegetative bacteria, acting far stronger than hypochlorite. Potency falls as pH rises, so slightly acidic water disinfects best. Chlorine demand equals dose added minus residual after contact, and free residual appears only beyond breakpoint. Fresh bleaching powder gives 33 percent available chlorine, and Horrocks apparatus sets well dosage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Active chlorine form",
+      "Uncharged hypochlorous acid penetrates bacteria"
+     ],
+     [
+      "Potency comparison",
+      "Hypochlorous acid 80 times hypochlorite"
+     ],
+     [
+      "Best pH for action",
+      "Below 7.5 favours active acid"
+     ],
+     [
+      "Chlorine demand formula",
+      "Dose added minus residual remaining"
+     ],
+     [
+      "Breakpoint meaning",
+      "Ammonia destroyed, free residual begins"
+     ],
+     [
+      "Free residual standard",
+      "0.5 milligrams per litre after 60 minutes"
+     ],
+     [
+      "Fresh bleaching powder",
+      "33 percent available chlorine by weight"
+     ],
+     [
+      "Well dose test",
+      "Horrocks apparatus, first blue cup"
+     ]
+    ]
    }
   }
  ],

@@ -13,11 +13,23 @@
    "say": "The patient asks one question: my test is positive, do I have it? True positives over all positives answers it: forty of sixty, sixty six point seven percent in the worked table. Sensitivity answers a different, population question.",
    "vis": {
     "kind": "table",
-    "cols": ["Quantity", "Worked value"],
+    "cols": [
+     "Quantity",
+     "Worked value"
+    ],
     "rows": [
-     ["All positives (a plus b)", "60 people"],
-     ["True positives (a)", "40 people"],
-     ["Positive predictive value", "66.66 percent"]
+     [
+      "All positives (a plus b)",
+      "60 people"
+     ],
+     [
+      "True positives (a)",
+      "40 people"
+     ],
+     [
+      "Positive predictive value",
+      "66.66 percent"
+     ]
     ]
    }
   },
@@ -27,11 +39,23 @@
    "say": "Negatives get their own probability. True negatives over all negatives: ninety eight point nine percent in the worked table. Where disease is rare, negatives are almost always right, so reassurance from screening usually deserves trust.",
    "vis": {
     "kind": "table",
-    "cols": ["Quantity", "Worked value"],
+    "cols": [
+     "Quantity",
+     "Worked value"
+    ],
     "rows": [
-     ["All negatives (c plus d)", "9940 people"],
-     ["True negatives (d)", "9840 people"],
-     ["Negative predictive value", "98.9 percent"]
+     [
+      "All negatives (c plus d)",
+      "9940 people"
+     ],
+     [
+      "True negatives (d)",
+      "9840 people"
+     ],
+     [
+      "Negative predictive value",
+      "98.9 percent"
+     ]
     ]
    }
   },
@@ -41,11 +65,23 @@
    "say": "Same test, different district, different meaning. At five percent prevalence only twenty one percent of positives are true; at twenty five percent, sixty three percent are. Accuracy never changed. Rare disease screening manufactures false alarms by arithmetic.",
    "vis": {
     "kind": "table",
-    "cols": ["Prevalence", "Positive predictive value"],
+    "cols": [
+     "Prevalence",
+     "Positive predictive value"
+    ],
     "rows": [
-     ["5 percent", "21 percent"],
-     ["15 percent", "47 percent"],
-     ["25 percent", "63 percent"]
+     [
+      "5 percent",
+      "21 percent"
+     ],
+     [
+      "15 percent",
+      "47 percent"
+     ],
+     [
+      "25 percent",
+      "63 percent"
+     ]
     ]
    }
   },
@@ -68,11 +104,19 @@
     "kind": "compare",
     "left": {
      "title": "False negative harm",
-     "points": ["Diseased person told healthy", "Later symptoms ignored", "Treatment postponed"]
+     "points": [
+      "Diseased person told healthy",
+      "Later symptoms ignored",
+      "Treatment postponed"
+     ]
     },
     "right": {
      "title": "False positive harm",
-     "points": ["Healthy person told diseased", "Anxiety and repeat testing", "Diagnostic services burdened"]
+     "points": [
+      "Healthy person told diseased",
+      "Anxiety and repeat testing",
+      "Diagnostic services burdened"
+     ]
     }
    }
   },
@@ -82,11 +126,23 @@
    "say": "Ratios escape the prevalence trap. Positive result likelihood divides sensitivity by one minus specificity, converting prior odds into posterior odds. Above ten rules disease in strongly; below zero point one for negatives rules it out.",
    "vis": {
     "kind": "table",
-    "cols": ["Likelihood ratio", "Interpretation"],
+    "cols": [
+     "Likelihood ratio",
+     "Interpretation"
+    ],
     "rows": [
-     ["Positive ratio above 10", "Strong evidence for disease"],
-     ["Positive ratio 1", "Result changes nothing"],
-     ["Negative ratio below 0.1", "Strong evidence against disease"]
+     [
+      "Positive ratio above 10",
+      "Strong evidence for disease"
+     ],
+     [
+      "Positive ratio 1",
+      "Result changes nothing"
+     ],
+     [
+      "Negative ratio below 0.1",
+      "Strong evidence against disease"
+     ]
     ]
    }
   },
@@ -97,12 +153,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Each cut-off gives one point"},
-     {"id": "b", "label": "Points join into a curve"},
-     {"id": "c", "label": "Top-left bow means better test"},
-     {"id": "d", "label": "Area under curve compares tests"}
+     {
+      "id": "a",
+      "label": "Each cut-off gives one point"
+     },
+     {
+      "id": "b",
+      "label": "Points join into a curve"
+     },
+     {
+      "id": "c",
+      "label": "Top-left bow means better test"
+     },
+     {
+      "id": "d",
+      "label": "Area under curve compares tests"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -122,11 +203,23 @@
    "say": "Consequences set the dial. Lethal cancers caught early tolerate false alarms to avoid a single miss. Diabetes screening protects clinic capacity with specificity instead. High prevalence also argues for a lower, more sensitive threshold.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Cut-off leans"],
+    "cols": [
+     "Situation",
+     "Cut-off leans"
+    ],
     "rows": [
-     ["Lethal disease, curable early", "Sensitive, tolerate false positives"],
-     ["Prevalent disease, limited clinics", "Specific, limit false positives"],
-     ["High community prevalence", "Lower threshold justified"]
+     [
+      "Lethal disease, curable early",
+      "Sensitive, tolerate false positives"
+     ],
+     [
+      "Prevalent disease, limited clinics",
+      "Specific, limit false positives"
+     ],
+     [
+      "High community prevalence",
+      "Lower threshold justified"
+     ]
     ]
    }
   },
@@ -138,11 +231,19 @@
     "kind": "compare",
     "left": {
      "title": "Programme on paper",
-     "points": ["Test accuracy from validation study", "Yield assumes full attendance", "Benefits counted for all eligible"]
+     "points": [
+      "Test accuracy from validation study",
+      "Yield assumes full attendance",
+      "Benefits counted for all eligible"
+     ]
     },
     "right": {
      "title": "Programme in practice",
-     "points": ["Highest risk attend least", "Yield consumed by low risk", "Invitation strategy decides value"]
+     "points": [
+      "Highest risk attend least",
+      "Yield consumed by low risk",
+      "Invitation strategy decides value"
+     ]
     }
    }
   },
@@ -152,11 +253,72 @@
    "say": "Same test, three contexts. Screening approaches people not seeking care; case-finding tests those already attending for other reasons; diagnosis settles the symptomatic. Read who initiated the test before naming the activity in a stem.",
    "vis": {
     "kind": "table",
-    "cols": ["Activity", "Who is tested", "Initiative"],
+    "cols": [
+     "Activity",
+     "Who is tested",
+     "Initiative"
+    ],
     "rows": [
-     ["Screening", "Apparently healthy, not seeking care", "Service or investigator"],
-     ["Case-finding", "Attending for other reasons", "Clinician during contact"],
-     ["Diagnosis", "Symptomatic, seeking care", "Patient complaint"]
+     [
+      "Screening",
+      "Apparently healthy, not seeking care",
+      "Service or investigator"
+     ],
+     [
+      "Case-finding",
+      "Attending for other reasons",
+      "Clinician during contact"
+     ],
+     [
+      "Diagnosis",
+      "Symptomatic, seeking care",
+      "Patient complaint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Negative predictive value is true negatives divided by all negatives, here 9840 of 9940 or 98.9 percent. Prevalence moves predictive value while sensitivity and specificity stay fixed, lifting positive predictive value from 21 to 63 percent as prevalence rises from 5 to 25 percent. A positive likelihood ratio above 10 rules disease in, and a negative ratio below 0.1 rules it out.",
+   "say": "High-yield for the exam: Negative predictive value is true negatives divided by all negatives, here 9840 of 9940 or 98.9 percent. Prevalence moves predictive value while sensitivity and specificity stay fixed, lifting positive predictive value from 21 to 63 percent as prevalence rises from 5 to 25 percent. A positive likelihood ratio above 10 rules disease in, and a negative ratio below 0.1 rules it out.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Positive predictive value formula",
+      "True positives divided by all positives"
+     ],
+     [
+      "Negative predictive value formula",
+      "True negatives divided by all negatives"
+     ],
+     [
+      "Worked negative predictive value",
+      "9840 of 9940 equals 98.9 percent"
+     ],
+     [
+      "Prevalence effect",
+      "Raises predictive value, accuracy stays fixed"
+     ],
+     [
+      "Positive likelihood ratio formula",
+      "Sensitivity divided by one minus specificity"
+     ],
+     [
+      "Strong rule in threshold",
+      "Positive likelihood ratio above 10"
+     ],
+     [
+      "Strong rule out threshold",
+      "Negative likelihood ratio below 0.1"
+     ],
+     [
+      "Best ROC curve position",
+      "Bows toward top left corner"
+     ]
     ]
    }
   }

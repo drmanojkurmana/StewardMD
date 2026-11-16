@@ -13,12 +13,27 @@
    "say": "Two weeks of cough, fever, weight loss or blood in sputum makes presumptive TB. Test the same day. Do not waste infectious weeks on blind antibiotic trials.",
    "vis": {
     "kind": "table",
-    "cols": ["Clue", "Action"],
+    "cols": [
+     "Clue",
+     "Action"
+    ],
     "rows": [
-     ["Cough 2 weeks or more", "Offer molecular test today"],
-     ["Haemoptysis any duration", "Test and chest radiograph"],
-     ["Contact of a TB case with symptoms", "Test without waiting"],
-     ["HIV positive with any cough", "Test at every visit"]
+     [
+      "Cough 2 weeks or more",
+      "Offer molecular test today"
+     ],
+     [
+      "Haemoptysis any duration",
+      "Test and chest radiograph"
+     ],
+     [
+      "Contact of a TB case with symptoms",
+      "Test without waiting"
+     ],
+     [
+      "HIV positive with any cough",
+      "Test at every visit"
+     ]
     ]
    }
   },
@@ -30,11 +45,21 @@
     "kind": "compare",
     "left": {
      "title": "Smear microscopy",
-     "points": ["Cheap and widely placed", "Misses paucibacillary disease", "No resistance information", "Result same day but insensitive"]
+     "points": [
+      "Cheap and widely placed",
+      "Misses paucibacillary disease",
+      "No resistance information",
+      "Result same day but insensitive"
+     ]
     },
     "right": {
      "title": "Molecular test",
-     "points": ["Detects low bacillary loads", "Result within hours", "Flags rifampicin resistance", "Higher unit cost per test"]
+     "points": [
+      "Detects low bacillary loads",
+      "Result within hours",
+      "Flags rifampicin resistance",
+      "Higher unit cost per test"
+     ]
     }
    }
   },
@@ -45,12 +70,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Sputum sample collected"},
-     {"id": "b", "label": "DNA extracted on device"},
-     {"id": "c", "label": "Truenat MTB chip run"},
-     {"id": "d", "label": "Reflex rifampicin chip if positive"}
+     {
+      "id": "a",
+      "label": "Sputum sample collected"
+     },
+     {
+      "id": "b",
+      "label": "DNA extracted on device"
+     },
+     {
+      "id": "c",
+      "label": "Truenat MTB chip run"
+     },
+     {
+      "id": "d",
+      "label": "Reflex rifampicin chip if positive"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,12 +120,27 @@
    "say": "CBNAAT answers in two hours with rifampicin resistance built in. The programme treats it and Truenat as upfront equals, placed by site volume and maintenance reach.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Programme point"],
+    "cols": [
+     "Feature",
+     "Programme point"
+    ],
     "rows": [
-     ["Turnaround", "About 2 hours per cartridge"],
-     ["Resistance read", "Rifampicin in same run"],
-     ["Placement", "District and high load sites"],
-     ["Upfront use", "First test for presumptive TB"]
+     [
+      "Turnaround",
+      "About 2 hours per cartridge"
+     ],
+     [
+      "Resistance read",
+      "Rifampicin in same run"
+     ],
+     [
+      "Placement",
+      "District and high load sites"
+     ],
+     [
+      "Upfront use",
+      "First test for presumptive TB"
+     ]
     ]
    }
   },
@@ -85,12 +150,27 @@
    "say": "Rifampicin resistance reported upfront changes the whole pathway: full resistance workup starts at once. A negative test never overrules a strong clinical and radiographic picture.",
    "vis": {
     "kind": "table",
-    "cols": ["Result", "Next step"],
+    "cols": [
+     "Result",
+     "Next step"
+    ],
     "rows": [
-     ["TB detected, rifampicin sensitive", "Start daily first line regimen"],
-     ["TB detected, rifampicin resistant", "Drug resistant TB evaluation"],
-     ["TB not detected, suspicion high", "Radiograph, culture, review"],
-     ["Trace in old treated case", "Correlate clinically, repeat"]
+     [
+      "TB detected, rifampicin sensitive",
+      "Start daily first line regimen"
+     ],
+     [
+      "TB detected, rifampicin resistant",
+      "Drug resistant TB evaluation"
+     ],
+     [
+      "TB not detected, suspicion high",
+      "Radiograph, culture, review"
+     ],
+     [
+      "Trace in old treated case",
+      "Correlate clinically, repeat"
+     ]
     ]
    }
   },
@@ -112,12 +192,27 @@
    "say": "Saliva passed off as sputum is the commonest quality failure. Coach the sample, label at the bedside, repeat errors on fresh sputum. Never report an error as negative.",
    "vis": {
     "kind": "table",
-    "cols": ["Trap", "Protection"],
+    "cols": [
+     "Trap",
+     "Protection"
+    ],
     "rows": [
-     ["Saliva instead of sputum", "Coached deep cough sample"],
-     ["Long transport delay", "Prompt, cool transport"],
-     ["Error or invalid output", "Repeat on fresh sample"],
-     ["Wrong patient label", "Bedside labelling check"]
+     [
+      "Saliva instead of sputum",
+      "Coached deep cough sample"
+     ],
+     [
+      "Long transport delay",
+      "Prompt, cool transport"
+     ],
+     [
+      "Error or invalid output",
+      "Repeat on fresh sample"
+     ],
+     [
+      "Wrong patient label",
+      "Bedside labelling check"
+     ]
     ]
    }
   },
@@ -128,12 +223,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Molecular result positive"},
-     {"id": "b", "label": "Notify on Nikshay"},
-     {"id": "c", "label": "Assign treatment supporter"},
-     {"id": "d", "label": "Follow to declared outcome"}
+     {
+      "id": "a",
+      "label": "Molecular result positive"
+     },
+     {
+      "id": "b",
+      "label": "Notify on Nikshay"
+     },
+     {
+      "id": "c",
+      "label": "Assign treatment supporter"
+     },
+     {
+      "id": "d",
+      "label": "Follow to declared outcome"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -142,12 +262,72 @@
    "say": "Upfront molecular testing made universal rifampicin susceptibility reads routine. Diagnosis shrank from weeks to days. The remaining gap is linking private patients, not laboratory science.",
    "vis": {
     "kind": "table",
-    "cols": ["Before scale up", "After scale up"],
+    "cols": [
+     "Before scale up",
+     "After scale up"
+    ],
     "rows": [
-     ["Smear first, weeks to resistance data", "Resistance read at diagnosis"],
-     ["Children rarely confirmed", "Molecular confirmation routine"],
-     ["Resistance found after failure", "Resistance found before regimen"],
-     ["Private cases invisible", "Notification linked to testing"]
+     [
+      "Smear first, weeks to resistance data",
+      "Resistance read at diagnosis"
+     ],
+     [
+      "Children rarely confirmed",
+      "Molecular confirmation routine"
+     ],
+     [
+      "Resistance found after failure",
+      "Resistance found before regimen"
+     ],
+     [
+      "Private cases invisible",
+      "Notification linked to testing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Sputum smear needs about ten thousand bacilli per millilitre, so it misses paucibacillary, childhood and HIV associated disease. Truenat is an Indian chip based real time PCR platform working at peripheral laboratories on battery backup, with a reflex second chip for rifampicin resistance. CBNAAT reports tuberculosis and rifampicin resistance in about two hours, and any resistant result goes straight for drug resistant evaluation.",
+   "say": "High-yield for the exam: Sputum smear needs about ten thousand bacilli per millilitre, so it misses paucibacillary, childhood and HIV associated disease. Truenat is an Indian chip based real time PCR platform working at peripheral laboratories on battery backup, with a reflex second chip for rifampicin resistance. CBNAAT reports tuberculosis and rifampicin resistance in about two hours, and any resistant result goes straight for drug resistant evaluation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Smear detection threshold",
+      "About ten thousand bacilli per millilitre"
+     ],
+     [
+      "Truenat platform type",
+      "Chip based real time PCR, Indian"
+     ],
+     [
+      "Truenat peripheral advantage",
+      "Battery backup suits subdistrict laboratories"
+     ],
+     [
+      "Positive Truenat next step",
+      "Reflex rifampicin resistance chip run"
+     ],
+     [
+      "CBNAAT turnaround time",
+      "About two hours per cartridge"
+     ],
+     [
+      "Rifampicin resistant result",
+      "Straight to drug resistant evaluation"
+     ],
+     [
+      "Invalid molecular output",
+      "Repeat test on fresh sample"
+     ],
+     [
+      "Negative test, strong suspicion",
+      "Radiography, culture and clinical review"
+     ]
     ]
    }
   }

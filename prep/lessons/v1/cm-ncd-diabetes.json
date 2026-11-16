@@ -13,12 +13,27 @@
    "say": "Thresholds, then confirmation. One twenty six fasting, two hundred after load, six point five A1c, or symptomatic random two hundred. Asymptomatic positives repeat on another day before lifelong labels attach.",
    "vis": {
     "kind": "table",
-    "cols": ["Test", "Diabetes threshold"],
+    "cols": [
+     "Test",
+     "Diabetes threshold"
+    ],
     "rows": [
-     ["Fasting plasma glucose", "126 mg/dl or more"],
-     ["2-hour OGTT glucose", "200 mg/dl or more"],
-     ["HbA1c", "6.5 percent or more"],
-     ["Random with symptoms", "200 mg/dl or more"]
+     [
+      "Fasting plasma glucose",
+      "126 mg/dl or more"
+     ],
+     [
+      "2-hour OGTT glucose",
+      "200 mg/dl or more"
+     ],
+     [
+      "HbA1c",
+      "6.5 percent or more"
+     ],
+     [
+      "Random with symptoms",
+      "200 mg/dl or more"
+     ]
     ]
    }
   },
@@ -30,11 +45,19 @@
     "kind": "compare",
     "left": {
      "title": "Prediabetes found",
-     "points": ["Intensive lifestyle offered", "Weight and activity targets set", "Annual glucose surveillance"]
+     "points": [
+      "Intensive lifestyle offered",
+      "Weight and activity targets set",
+      "Annual glucose surveillance"
+     ]
     },
     "right": {
      "title": "Prediabetes ignored",
-     "points": ["Steady yearly conversion", "Complications begin silently", "Diagnosis arrives with disease"]
+     "points": [
+      "Steady yearly conversion",
+      "Complications begin silently",
+      "Diagnosis arrives with disease"
+     ]
     }
    }
   },
@@ -56,12 +79,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Adults 30 plus risk-scored"},
-     {"id": "b", "label": "Capillary glucose measured"},
-     {"id": "c", "label": "Positives referred for venous test"},
-     {"id": "d", "label": "Confirmed cases registered, treated"}
+     {
+      "id": "a",
+      "label": "Adults 30 plus risk-scored"
+     },
+     {
+      "id": "b",
+      "label": "Capillary glucose measured"
+     },
+     {
+      "id": "c",
+      "label": "Positives referred for venous test"
+     },
+     {
+      "id": "d",
+      "label": "Confirmed cases registered, treated"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,11 +118,23 @@
    "say": "A1c averages three months; under seven percent is the common target, loosened for frailty. Anaemia and haemoglobin variants distort it both ways. Discordance with glucose readings accuses context before patient.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "A1c caution"],
+    "cols": [
+     "Situation",
+     "A1c caution"
+    ],
     "rows": [
-     ["Iron deficiency anaemia", "May read falsely high"],
-     ["Haemolysis or transfusion", "May read falsely low"],
-     ["Frail elderly, hypoglycaemia risk", "Target individualised upward"]
+     [
+      "Iron deficiency anaemia",
+      "May read falsely high"
+     ],
+     [
+      "Haemolysis or transfusion",
+      "May read falsely low"
+     ],
+     [
+      "Frail elderly, hypoglycaemia risk",
+      "Target individualised upward"
+     ]
     ]
    }
   },
@@ -84,12 +144,27 @@
    "say": "Follow-up is a calendar, not a glucose log. Feet, retina, kidney and vessels from diagnosis in type two, because silent years preceded it. Foot ulcers precede most amputations and yield most to prevention.",
    "vis": {
     "kind": "table",
-    "cols": ["Organ", "Scheduled check"],
+    "cols": [
+     "Organ",
+     "Scheduled check"
+    ],
     "rows": [
-     ["Feet", "Sensation, pulses, skin at visits"],
-     ["Eyes", "Dilated retinal examination yearly"],
-     ["Kidneys", "Urine albumin, creatinine yearly"],
-     ["Heart and vessels", "Pressure, lipids, tobacco review"]
+     [
+      "Feet",
+      "Sensation, pulses, skin at visits"
+     ],
+     [
+      "Eyes",
+      "Dilated retinal examination yearly"
+     ],
+     [
+      "Kidneys",
+      "Urine albumin, creatinine yearly"
+     ],
+     [
+      "Heart and vessels",
+      "Pressure, lipids, tobacco review"
+     ]
     ]
    }
   },
@@ -111,12 +186,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Warning symptoms recognised"},
-     {"id": "b", "label": "15 g fast carbohydrate if conscious"},
-     {"id": "c", "label": "Recheck in 15 minutes"},
-     {"id": "d", "label": "IV dextrose or glucagon if unconscious"}
+     {
+      "id": "a",
+      "label": "Warning symptoms recognised"
+     },
+     {
+      "id": "b",
+      "label": "15 g fast carbohydrate if conscious"
+     },
+     {
+      "id": "c",
+      "label": "Recheck in 15 minutes"
+     },
+     {
+      "id": "d",
+      "label": "IV dextrose or glucagon if unconscious"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -125,12 +225,27 @@
    "say": "One load, any hour. Seventy five grams, two-hour one forty diagnoses in Indian single-step practice, repeated mid-pregnancy if negative. Postpartum surveillance lasts for mother and child across generations.",
    "vis": {
     "kind": "table",
-    "cols": ["Step", "Indian practice"],
+    "cols": [
+     "Step",
+     "Indian practice"
+    ],
     "rows": [
-     ["Test", "75 g oral glucose, fasting not required"],
-     ["Diagnosis", "2-hour value 140 mg/dl or more"],
-     ["Timing", "First contact, repeat 24 to 28 weeks"],
-     ["After delivery", "Lifelong maternal glucose surveillance"]
+     [
+      "Test",
+      "75 g oral glucose, fasting not required"
+     ],
+     [
+      "Diagnosis",
+      "2-hour value 140 mg/dl or more"
+     ],
+     [
+      "Timing",
+      "First contact, repeat 24 to 28 weeks"
+     ],
+     [
+      "After delivery",
+      "Lifelong maternal glucose surveillance"
+     ]
     ]
    }
   },
@@ -142,11 +257,19 @@
     "kind": "compare",
     "left": {
      "title": "Policy levers",
-     "points": ["Sweetened drink taxation", "Front-of-pack labelling", "Walkable urban design"]
+     "points": [
+      "Sweetened drink taxation",
+      "Front-of-pack labelling",
+      "Walkable urban design"
+     ]
     },
     "right": {
      "title": "Clinic levers",
-     "points": ["Risk screening and prediabetes care", "Weight management support", "Complication surveillance"]
+     "points": [
+      "Risk screening and prediabetes care",
+      "Weight management support",
+      "Complication surveillance"
+     ]
     }
    }
   },
@@ -156,11 +279,68 @@
    "say": "Diseases arrive in clusters here. Diabetes worsens TB, hypertension multiplies diabetic vascular risk, depression erodes all self-care. Bidirectional screening between programmes operationalises the syndemic at the facility door.",
    "vis": {
     "kind": "table",
-    "cols": ["Pairing", "Bidirectional action"],
+    "cols": [
+     "Pairing",
+     "Bidirectional action"
+    ],
     "rows": [
-     ["Diabetes and TB", "Screen each in the other's clinic"],
-     ["Diabetes and hypertension", "Combined vascular risk management"],
-     ["Diabetes and depression", "Screen mood, support adherence"]
+     [
+      "Diabetes and TB",
+      "Screen each in the other's clinic"
+     ],
+     [
+      "Diabetes and hypertension",
+      "Combined vascular risk management"
+     ],
+     [
+      "Diabetes and depression",
+      "Screen mood, support adherence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Diabetes needs fasting glucose 126 or more, two hour glucose 200 or more, HbA1c 6.5 percent or more, or symptomatic random glucose 200 or more, repeated on another day if asymptomatic. Prediabetes means fasting 100 to 125 or two hour 140 to 199. DIPSI uses one 75 gram load, diagnosing gestational diabetes at two hour 140 or more.",
+   "say": "High-yield for the exam: Diabetes needs fasting glucose 126 or more, two hour glucose 200 or more, HbA1c 6.5 percent or more, or symptomatic random glucose 200 or more, repeated on another day if asymptomatic. Prediabetes means fasting 100 to 125 or two hour 140 to 199. DIPSI uses one 75 gram load, diagnosing gestational diabetes at two hour 140 or more.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Fasting diabetes cutoff",
+      "Plasma glucose 126 mg per dl or more"
+     ],
+     [
+      "Post load diabetes cutoff",
+      "Two hour glucose 200 or more"
+     ],
+     [
+      "HbA1c diabetes cutoff",
+      "6.5 percent or more confirms diagnosis"
+     ],
+     [
+      "Asymptomatic positive result",
+      "Repeat testing on a different day"
+     ],
+     [
+      "Impaired fasting glucose",
+      "Fasting value 100 to 125 range"
+     ],
+     [
+      "Impaired glucose tolerance",
+      "Two hour value 140 to 199"
+     ],
+     [
+      "DIPSI diagnostic value",
+      "Two hour 140 or more after 75 grams"
+     ],
+     [
+      "Community screening entry age",
+      "Risk scoring begins at age 30"
+     ]
     ]
    }
   }
