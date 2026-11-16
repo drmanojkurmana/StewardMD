@@ -1,0 +1,321 @@
+{
+ "v": 1,
+ "module": "shm-acute-myeloid-leukaemia",
+ "subject": "ss-haematology",
+ "title": "Acute myeloid leukaemia APL and targeted care",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 109 Acute Myeloid Leukemia",
+  "European LeukemiaNet AML guidelines 2022"
+ ],
+ "steps": [
+  {
+   "tx": "**Acute myeloid leukaemia** (AML, myeloid blast cancer) packs blood, marrow and tissues with clonal poorly differentiated cells, and untreated disease is uniformly fatal. The United States sees about **20,380** new cases yearly, median age **69**, with only **32** percent survival at **5** years. **Blasts** (immature cells) at or above **20** percent define AML, although certain genetic lesions lower the bar. **ELN** (European LeukemiaNet) risk groups steer every decision.",
+   "say": "Acute myeloid leukaemia is a fast fatal blast disease without treatment. Median age at diagnosis is sixty nine years. Blasts at or above twenty percent define the disease.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Implication"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "New cases yearly",
+      "20,380 cited",
+      "1 percent of cancers"
+     ],
+     [
+      "Median age",
+      "69 years",
+      "Older disease"
+     ],
+     [
+      "Five year survival",
+      "32 percent",
+      "Risk dependent"
+     ],
+     [
+      "Blast threshold",
+      "20 percent",
+      "Genetics can lower"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Genetics now classifies disease. **WHO 2022** (World Health Organization classification) defines AML with **PML RARA** fusion, **RUNX1 RUNX1T1**, **CBFB MYH11** and **KMT2A** rearrangements as genetic entities. **NPM1** (nucleophosmin mutation) without **FLT3** internal tandem duplication favours good risk, while **TP53** (tumour suppressor mutation), complex karyotypes and **MYC** adverse lesions mark poor risk. **CEBPA basic leucine zipper** (bZIP, transcription factor) in frame mutations are favourable.",
+   "say": "Genetic lesions now define acute myeloid leukaemia categories. NPM1 without FLT3 favours good risk, while TP53 marks poor risk. CEBPA bZIP mutations are favourable.",
+   "vis": {
+    "cols": [
+     "ELN group",
+     "Lesions",
+     "Plan"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Favourable",
+      "RUNX1 RUNX1T1 CBFB MYH11 NPM1 no FLT3",
+      "High cure chemotherapy"
+     ],
+     [
+      "Intermediate",
+      "NPM1 with FLT3, t9;11",
+      "Uncertain benefit"
+     ],
+     [
+      "Adverse",
+      "TP53 minus 5 minus 7 complex",
+      "Transplant trial focus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute promyelocytic leukaemia** (APL, M3 variant with **PML RARA** fusion) bleeds catastrophically through **DIC** (disseminated intravascular coagulation) and hyperfibrinolysis. **ATRA** (all trans retinoic acid) plus **arsenic trioxide** (ATO) differentiates blasts and cures over **95** percent, but **differentiation syndrome** (lung and fluid toxicity) kills when missed. **Fibrinogen** (clotting factor) replacement and early ATRA before genetic proof save lives, since coagulopathy precedes confirmation.",
+   "say": "Promyelocytic leukaemia bleeds through extreme coagulopathy. ATRA plus arsenic cures over ninety five percent. Differentiation syndrome needs steroids the moment breathlessness appears.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Suspect APL bleed"
+     },
+     {
+      "id": "atra",
+      "label": "Give ATRA immediately"
+     },
+     {
+      "id": "confirm",
+      "label": "Prove PML RARA fusion"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "atra"
+     ],
+     [
+      "atra",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fit patients receive **7 plus 3** (seven days cytarabine with three days anthracycline) induction, with **gemtuzumab** (CD33 antibody drug) added in core binding variants. **FLT3 inhibitors** (gilteritinib, midostaurin) join induction and maintenance in FLT3 mutant disease. **Ivosidenib** (IDH1 inhibitor) and enasidenib (IDH2 inhibitor) exploit differentiation therapy in mutant disease. **Measurable residual disease** (MRD, lingering leukaemia marker) guides transplant and maintenance choices.",
+   "say": "Fit patients receive seven plus three induction with gemtuzumab in core binding disease. FLT3 inhibitors join mutant disease care. IDH inhibitors exploit differentiation therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fit intensive path",
+     "points": [
+      "7 plus 3 induction",
+      "FLT3 inhibitor added",
+      "Transplant consolidation"
+     ]
+    },
+    "right": {
+     "title": "Unfit gentle path",
+     "points": [
+      "Venetoclax azacitidine",
+      "Ivosidenib enasidenib",
+      "Palliative continuation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unfit patients receive **venetoclax azacitidine** (BCL2 blocker plus hypomethylating agent) as the standard, lifting survival beyond older options. **Ivosidenib** (IDH1 blocker) curative in mutant unfit disease proves genotype first. **CLL1** (myeloid surface marker) and **CD33** (myeloid antigen) anchor antibody and cellular therapies in trials. **Growth factor** support and **infection** prophylaxis shape survival as much as chemotherapy does.",
+   "say": "Venetoclax with azacitidine is the unfit standard. Ivosidenib cures mutant unfit disease in some patients. Infection prophylaxis shapes survival as much as chemotherapy.",
+   "vis": {
+    "cols": [
+     "Regimen",
+     "Population",
+     "Benefit"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Venetoclax azacitidine",
+      "Unfit older",
+      "Standard survival gain"
+     ],
+     [
+      "Ivosidenib monotherapy",
+      "IDH1 mutant unfit",
+      "Curative subset"
+     ],
+     [
+      "Gilteritinib",
+      "FLT3 mutant",
+      "Induction maintenance"
+     ],
+     [
+      "Enasidenib",
+      "IDH2 mutant",
+      "Differentiation cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HSCT** (stem cell transplantation) consolidates adverse and intermediate risk disease in first remission, and graft versus leukaemia immunity cures otherwise fatal relapse. **MRD** (measurable residual disease) negativity predicts durability, while **donor lymphocyte infusion** (DLI, donor immune cells) rescues early relapse. **Myeloablative** (full intensity) conditioning suits young patients and **reduced intensity** suits older adults. **HSCT** timing follows ELN risk plus MRD, not age alone.",
+   "say": "Transplantation consolidates adverse risk disease in first remission. MRD negativity predicts durable control. Conditioning intensity follows fitness, not habit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "remit",
+      "label": "Remission achieved"
+     },
+     {
+      "id": "mrd",
+      "label": "MRD risk checked"
+     },
+     {
+      "id": "hsct",
+      "label": "Transplant or chemo"
+     }
+    ],
+    "edges": [
+     [
+      "remit",
+      "mrd"
+     ],
+     [
+      "mrd",
+      "hsct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications dominate course. **Tumour lysis** (metabolic meltdown) needs hydration and **rasburicase** (urate enzyme) in proliferative disease. **Leukostasis** (white cell lung and brain clogging) with counts above **100,000** needs hydroxyurea, hydration and urgent cytoreduction. **Gum hypertrophy** (swollen gums), **skin leukaemia cutis** (skin deposits) and **CNS spread** (brain involvement) mark monocytic variants. Maintenance prophylaxis follows transplant protocols.",
+   "say": "Tumour lysis needs hydration and rasburicase in proliferative disease. Leukostasis needs urgent cytoreduction. Monocytic variants infiltrate gums, skin and brain.",
+   "vis": {
+    "cols": [
+     "Emergency",
+     "Trigger",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Tumour lysis",
+      "Rapid cell breakdown",
+      "Hydration rasburicase"
+     ],
+     [
+      "Leukostasis",
+      "Above 100,000 blasts",
+      "Hydroxyurea cytoreduction"
+     ],
+     [
+      "Differentiation",
+      "ATRA arsenic therapy",
+      "Steroids immediately"
+     ],
+     [
+      "Sepsis",
+      "Neutropenia prolonged",
+      "Broad antibiotics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Predisposition is wider than taught. **Fanconi anaemia** (DNA defect), telomere disorders, **GATA2** (transcription factor) deficiency and **Down syndrome** with trisomy 21 raise AML risk sharply. Therapy related leukaemia follows **alkylators** (DNA damaging drugs) and **topoisomerase** (DNA unwinding blockers) exposure. **MDS progression** (precursor disease) carries adverse mutations. **Germline testing** in young patients increasingly guides donor choice, since sibling donors may share predisposition.",
+   "say": "Fanconi anaemia and Downs syndrome raise leukaemia risk sharply. Therapy related leukaemia follows alkylators and topoisomerase blockers. Young patients need germline testing before donor selection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inherited risk",
+     "points": [
+      "Fanconi telomere GATA2",
+      "Down syndrome trisomy",
+      "Germline donor caution"
+     ]
+    },
+    "right": {
+     "title": "Acquired risk",
+     "points": [
+      "Therapy related disease",
+      "MDS progression",
+      "Radiation benzene exposure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CLL1** (leukaemia stem marker) trials and **bispecific antibodies** (dual target T cell engagers) promise relapse options, while **menin inhibitors** (protein blockers) exploit **KMT2A** rearrangement biology. **FLT3** inhibition extends beyond fit patients into maintenance settings. **Allogeneic transplant** remains the only curative relapse tool for most adults. **Quality of life** endpoints parallel survival in older unfit cohorts now.",
+   "say": "Menin inhibitors exploit KMT2A rearrangement biology. Bispecific antibodies promise relapse options. Transplantation remains the curative relapse tool for most adults.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Established",
+     "points": [
+      "7 plus 3 backbone",
+      "Venetoclax azacitidine",
+      "HSCT consolidation"
+     ]
+    },
+    "right": {
+     "title": "Emerging",
+     "points": [
+      "Menin inhibitors",
+      "FLT3 maintenance",
+      "CLL1 cellular therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Numbers to recite: **20** percent blast threshold with genetic exceptions; **7 plus 3** backbone; APL cure above **95** percent with ATRA arsenic; **venetoclax azacitidine** as unfit standard; **MRD** guided transplant; **leukostasis** above **100,000** blasts; and **ELN** favourable lesions RUNX1 RUNX1T1, CBFB MYH11, NPM1 without FLT3 and CEBPA bZIP. Never delay ATRA for proof when APL is suspected.",
+   "say": "ATRA is never delayed for proof when APL is suspected. Seven plus three remains the fit backbone. MRD guides transplant and maintenance decisions.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Blast definition",
+      "AML threshold",
+      "20 percent"
+     ],
+     [
+      "Fit induction",
+      "7 plus 3",
+      "Cytarabine anthracycline"
+     ],
+     [
+      "APL therapy",
+      "ATRA arsenic",
+      "Above 95 percent cure"
+     ],
+     [
+      "Unfit standard",
+      "Venetoclax azacitidine",
+      "Survival gain"
+     ],
+     [
+      "Leukostasis risk",
+      "Blast count",
+      "Above 100,000"
+     ],
+     [
+      "MRD role",
+      "Transplant guide",
+      "Negative durable"
+     ]
+    ]
+   }
+  }
+ ]
+}

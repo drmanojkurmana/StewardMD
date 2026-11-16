@@ -1,0 +1,388 @@
+{
+ "v": 1,
+ "module": "son-iniss-recalls",
+ "subject": "ss-medical-oncology",
+ "title": "INI-SS recall themes in haematology oncology and emergencies",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "INI-SS DM Medical Oncology Hematology Checklist 2026",
+  "Harrison Principles of Internal Medicine 22e hematology chapters",
+  "IMWG and Lugano criteria summaries"
+ ],
+ "steps": [
+  {
+   "tx": "**INI-SS** (Institute of National Importance SS entrance) papers weight haematology first in medical oncology. **APL** (acute promyelocytic leukaemia), **AML** (acute myeloid leukaemia) genetics and **CML** (chronic myeloid leukaemia) resistance recur yearly. **Lymphoma** markers and myeloma criteria fill the rest. **Emergencies** (febrile neutropenia, TLS, DIC, TTP) carry one question each paper. **General medicine** (ECG, AKI, sepsis) forms the final block.",
+   "say": "INI-SS papers start with haematology first in medical oncology. APL genetics and CML resistance questions recur every year. Emergencies carry one question in every paper set. General medicine questions close every paper set yearly.",
+   "vis": {
+    "cols": [
+     "Block",
+     "Returns",
+     "Covers"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Leukaemia",
+      "Yearly questions",
+      "APL AML CML"
+     ],
+     [
+      "Lymphoma myeloma",
+      "Yearly questions",
+      "Markers criteria trials"
+     ],
+     [
+      "Emergencies",
+      "One per paper",
+      "TLS DIC TTP"
+     ],
+     [
+      "General medicine",
+      "Final block",
+      "ECG AKI sepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**APL** (acute promyelocytic leukaemia) is the most retested emergency. **t(15;17)** (chromosome translocation) with **PML RARA** (fusion gene) defines it and **DIC** (consumption coagulopathy) accompanies presentation. **ATRA** (all trans retinoic acid) starts on suspicion without awaiting molecular proof. **Arsenic trioxide** (ATO, second drug) pairs with ATRA for cure above **90** percent. **Differentiation syndrome** (breathlessness, effusions, fever) needs steroids and ATRA hold.",
+   "say": "APL is the most retested emergency in INI-SS papers. ATRA starts on suspicion without awaiting molecular proof. Arsenic trioxide plus ATRA is the standard curative regimen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Suspect APL with DIC"
+     },
+     {
+      "id": "atra",
+      "label": "ATRA immediately"
+     },
+     {
+      "id": "confirm",
+      "label": "PML RARA confirms"
+     },
+     {
+      "id": "watch",
+      "label": "Watch differentiation syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "atra"
+     ],
+     [
+      "atra",
+      "confirm"
+     ],
+     [
+      "confirm",
+      "watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**AML** (acute myeloid leukaemia) genetics questions test risk logic. **NPM1** (nucleophosmin mutation) with normal karyotype favours good risk disease. **FLT3 ITD** (internal tandem duplication) marks adverse risk and invites **FLT3 inhibitors** (midostaurin, gilteritinib). **TP53** (tumour suppressor mutation) marks worst risk disease. **IDH1 IDH2** (enzyme mutations) invite **ivosidenib** (IDH1 blocker) and **enasidenib** (IDH2 blocker) in relapse.",
+   "say": "NPM1 with normal karyotype is the favourable pattern. FLT3 duplication is an adverse risk marker inviting inhibitors. IDH mutations invite targeted drugs in relapse cases.",
+   "vis": {
+    "cols": [
+     "Mutation",
+     "Risk",
+     "Targeted answer"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "NPM1",
+      "Favourable",
+      "Standard induction"
+     ],
+     [
+      "FLT3 ITD",
+      "Adverse",
+      "FLT3 inhibitor"
+     ],
+     [
+      "TP53",
+      "Worst risk",
+      "Transplant trial"
+     ],
+     [
+      "IDH1 IDH2",
+      "Relapse option",
+      "Ivosidenib enasidenib"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CML** (chronic myeloid leukaemia) repeats the **T315I** (gatekeeper mutation) story. **BCR ABL1** (fusion gene) on **Ph chromosome** (Philadelphia chromosome) drives disease. **Imatinib** (first TKI, tyrosine kinase inhibitor) still anchors chronic phase therapy. **Ponatinib** (broad TKI) is the only inhibitor reliably active against **T315I**. **MR4** (deep molecular response) tracks transcripts at **0.01** percent on international scale. **Dasatinib** (second generation TKI) carries **pulmonary arterial hypertension** risk.",
+   "say": "Ponatinib is the only inhibitor reliably active against T315I. MR4 tracks transcripts at zero point zero one percent. Dasatinib carries pulmonary arterial hypertension risk.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Covers",
+     "Watch"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Imatinib",
+      "Chronic phase",
+      "Standard first line"
+     ],
+     [
+      "Dasatinib nilotinib",
+      "Second generation",
+      "Lung and vessel harms"
+     ],
+     [
+      "Ponatinib",
+      "T315I mutation",
+      "Vascular risk high"
+     ],
+     [
+      "Asciminib",
+      "Myristoyl pocket",
+      "Newer approved option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CLL** (chronic lymphocytic leukaemia) questions hinge on **del17p** (chromosome loss). **Smudge cells** (crushed lymphocytes) with **CD5 CD23** (markers) clinch CLL over mantle cell disease. **Cyclin D1** (marker) with **t(11;14)** (translocation) names mantle cell lymphoma instead. **IGHV** (heavy chain maturity) unmutated disease needs targeted therapy. **BTK inhibitors** (ibrutinib, acalabrutinib) and **venetoclax** (BCL2 blocker) replaced **FCR** (fludarabine regimen) as standard.",
+   "say": "Del17p decides therapy in repeated CLL questions. Cyclin D1 with t11 14 is seen in mantle cell lymphoma. BTK inhibitors and venetoclax replaced FCR now in guidelines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CLL clues",
+     "points": [
+      "CD5 CD23 positive",
+      "Smudge cells present",
+      "BCL2 overexpression"
+     ]
+    },
+    "right": {
+     "title": "Mantle cell clues",
+     "points": [
+      "Cyclin D1 positive",
+      "CD23 negative",
+      "t(11;14) present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lymphoma** (lymph node cancers) repeats marker translocation pairs. **DLBCL** (diffuse large B cell lymphoma) is treated with **R CHOP** (rituximab regimen) and double hit **MYC BCL2** (gene rearrangements) worsens outcome. **Burkitt lymphoma** carries **MYC** (gene) rearrangement with **starry sky** (tingible macrophages) morphology and **Ki67 near 100** percent. **Follicular lymphoma** carries **t(14;18)** (translocation) with **BCL2** (anti death gene). **Hodgkin lymphoma** retains **CD15 CD30** (markers).",
+   "say": "DLBCL is treated with R CHOP and worst with double hit genetics. Burkitt carries MYC rearrangement with starry sky morphology. Follicular lymphoma carries t14 18 at BCL2.",
+   "vis": {
+    "cols": [
+     "Lymphoma",
+     "Signature",
+     "Treatment anchor"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "DLBCL",
+      "MYC BCL2 double hit",
+      "R CHOP regimen"
+     ],
+     [
+      "Burkitt",
+      "MYC starry sky",
+      "Intensive chemo"
+     ],
+     [
+      "Follicular",
+      "t(14;18) BCL2",
+      "Watch or rituximab"
+     ],
+     [
+      "Hodgkin",
+      "CD15 CD30",
+      "ABVD regimen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Myeloma** (plasma cell cancer) repeats the **SLiM CRAB** (defining events) criteria. **SPEP** (protein electrophoresis) with **free light chains** (abnormal chains) and marrow clonal cells above **10** percent open the workup. **Dara VRD** (daratumumab regimen) is standard induction for transplant eligible patients. **ASCT** (own stem cell transplant) follows induction. **del17p** (chromosome loss) and **t(4;14)** (translocation) mark adverse risk on **R ISS** (revised staging).",
+   "say": "Myeloma questions test SLiM CRAB criteria yearly. Dara VRD is standard induction for eligible patients. Autologous transplant follows induction in eligible patients in practice.",
+   "vis": {
+    "cols": [
+     "Event",
+     "Cutoff",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Marrow clone",
+      "60 percent",
+      "Treat at once"
+     ],
+     [
+      "Light chain ratio",
+      "100",
+      "Treat at once"
+     ],
+     [
+      "CRAB any",
+      "One feature",
+      "Treat at once"
+     ],
+     [
+      "High risk cytogenetic",
+      "del17p t(4;14)",
+      "Worst outcomes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Febrile neutropenia** (fever with low counts) repeats the **ANC 500** (neutrophil count) and **MASCC** (risk score) logic. **Inpatient criteria** (admit scores) flag pneumonia, hypotension and uncontrolled cancer. **Cefepime** (fourth generation cephalosporin) with **vancomycin** (MRSA cover) starts within **1** hour of fever. **Carbapenems** (broad drugs) suit prior resistant infection. **G CSF** (growth factor) helps high risk cases with pneumonia or prolonged neutropenia.",
+   "say": "Febrile neutropenia repeats the ANC five hundred logic yearly. Cefepime with vancomycin starts within one hour. G CSF helps high risk cases with pneumonia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fever",
+      "label": "Fever with neutropenia"
+     },
+     {
+      "id": "cultures",
+      "label": "Blood cultures now"
+     },
+     {
+      "id": "antibiotics",
+      "label": "Cefepime vancomycin"
+     },
+     {
+      "id": "admit",
+      "label": "Admit if MASCC low"
+     }
+    ],
+    "edges": [
+     [
+      "fever",
+      "cultures"
+     ],
+     [
+      "cultures",
+      "antibiotics"
+     ],
+     [
+      "antibiotics",
+      "admit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tumour lysis syndrome** (TLS, metabolic collapse) follows **Cairo Bishop** (laboratory criteria) definitions. **Hyperkalaemia** (high potassium), **hyperphosphataemia** (high phosphate), **hyperuricaemia** (high urate) and **hypocalcaemia** (low calcium) define laboratory TLS. **Rasburicase** (urate clearing enzyme) suits high risk disease, while **allopurinol** (urate lowering pill) suits prevention. **Hydration** (fluids) at **200** to **300** ml per hour runs before chemotherapy. **Renal replacement** (dialysis) rescues refractory hyperkalaemia.",
+   "say": "Tumour lysis follows Cairo Bishop laboratory definitions. Rasburicase is used in high risk disease and allopurinol is for prevention. Hydration runs before chemotherapy starts promptly.",
+   "vis": {
+    "cols": [
+     "Electrolyte",
+     "Direction",
+     "Danger"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Potassium",
+      "High",
+      "Arrhythmia risk"
+     ],
+     [
+      "Phosphate",
+      "High",
+      "Calcium fall"
+     ],
+     [
+      "Urate",
+      "High",
+      "Kidney failure"
+     ],
+     [
+      "Calcium",
+      "Low",
+      "Tetany seizures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coagulation emergencies repeat the **DIC versus TTP** (consumption versus vessel clot) split. **ADAMTS13 below 10** (enzyme level) confirms TTP and **plasma exchange** starts at once. **ISTH score 5** (DIC score) defines overt DIC needing cause treatment. **ITP** (antibody platelet disease) repeats steroid first line logic. **Heparin induced thrombocytopenia** (HIT, clot disease) repeats **4Ts** (probability score) and **argatroban** (direct inhibitor) answers.",
+   "say": "ADAMTS13 below ten percent confirms TTP clearly. ISTH score five is the overt DIC definition clearly. HIT questions appear every year in INI-SS papers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DIC",
+     "points": [
+      "Fibrinogen low",
+      "ISTH above 5",
+      "Treat the cause"
+     ]
+    },
+    "right": {
+     "title": "TTP",
+     "points": [
+      "ADAMTS13 below 10",
+      "Plasma exchange",
+      "Caplacizumab added"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **APL** needs **ATRA** on suspicion, and **CTLA4** (checkpoint target) questions link **ipilimumab** (checkpoint blocker) to colitis. **CML T315I** needs **ponatinib**, and **AML FLT3** invites **FLT3 inhibitors**. **Burkitt MYC** has **Ki67 near 100** percent, and **myeloma del17p** marks high risk. **TTP** needs **plasma exchange**, and **aHUS** needs **eculizumab**.",
+   "say": "APL needs ATRA on suspicion alone. Ponatinib is used for T315I and FLT3 inhibitors are used for FLT3 disease. Plasma exchange is the treatment for TTP and eculizumab is for aHUS disease.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "APL translocation",
+      "t(15;17) PML RARA",
+      "ATRA on suspicion"
+     ],
+     [
+      "CML resistant",
+      "T315I ponatinib",
+      "Gatekeeper mutation"
+     ],
+     [
+      "Burkitt Ki67",
+      "Near 100 percent",
+      "Starry sky"
+     ],
+     [
+      "Myeloma adverse",
+      "del17p",
+      "High risk R ISS"
+     ],
+     [
+      "TTP enzyme",
+      "ADAMTS13 below 10",
+      "Exchange first"
+     ],
+     [
+      "aHUS drug",
+      "Eculizumab",
+      "Vaccinate first"
+     ]
+    ]
+   }
+  }
+ ]
+}
