@@ -1788,5 +1788,6 @@
   function leave() { closeViewer(); }
   function homeRow(h) { host = h; return ""; }
 
-  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, _pure: PURE, _state: function () { return V; } };
+  /* Phase 5a hook: the GoodNotes library (study-library.js) reuses the indexer so PDF text search keeps working. */
+  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, kick: kick, _pure: PURE, _state: function () { return V; } };
 })(typeof window !== "undefined" ? window : this);
