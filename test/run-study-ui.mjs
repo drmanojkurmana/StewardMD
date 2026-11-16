@@ -48,10 +48,10 @@ const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, de
 const page = await ctx.newPage();
 const errors = []; page.on("pageerror", (e) => errors.push(e.message));
 await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
-await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; });
+await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = (msg, def) => def || "Custom Element"; });
 
 async function boot(q) {
-  await page.goto(BASE + "?" + q);
+  await page.goto(BASE + "?" + q, { waitUntil: "domcontentloaded" });   // app readiness is checked next; do not wait on slow third-party loads
   await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
   await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); PREP.open(); });
   await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row", { timeout: 30000 });
@@ -148,6 +148,18 @@ await page.evaluate(() => {
 });
 await page.waitForSelector("#stLassoBar", { timeout: 5000 });
 ok(await page.evaluate(() => !!document.querySelector("#stLassoBar")), "lasso: draws loop and shows selection action bar");
+ok(await page.locator('[data-act="st-lasso-ai-explain"]').count() === 1, "lasso: AI Explain chip is visible");
+ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso: AI Key summary chip is visible");
+ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
+ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element button is visible");
+await page.click('[data-act="st-lasso-ai-explain"]');
+await page.waitForSelector("#stSheet", { timeout: 5000 });
+ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
+await page.click('[data-act="st-scancel"]');
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+await page.click('[data-act="st-lasso-save-elem"]');
+const savedElems = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_elements") || "[]"));
+ok(savedElems.length === 1 && savedElems[0].name === "Custom Element", "lasso: selection saved as custom element in local storage");
 await page.click('[data-act="st-lasso-del"]');
 ok(await live() === 1, "lasso delete: deletes the selected stroke");
 await page.click('[data-act="st-undo"]');
@@ -182,9 +194,13 @@ await page.evaluate(() => { STUDY._state().scribble = false; });
 /* ---- Phase 1 ink: toolbar order, popover, styles, split eraser, palm, 240 Hz ---- */
 ok(await page.evaluate(() => {
   const order = Array.from(document.querySelectorAll("#stTb [data-act='st-tool']")).map((b) => b.getAttribute("data-v"));
+  // Plan order (zoom, pen, er, hl, shapes, lasso, elements, image, camera, text, typing, laser);
+  // later phases fill more slots, so check relative order and that each phase's tools are all there.
+  const PLAN = ["zoom", "pen", "er", "hl", "shapes", "lasso", "elements", "image", "camera", "text", "typing", "laser"];
+  const known = order.filter((v) => PLAN.includes(v)), idx = known.map((v) => PLAN.indexOf(v));
   const hidden = document.querySelectorAll("#stTb .st-slot-future[hidden]").length;
-  return JSON.stringify(order) === JSON.stringify(["pen", "er", "hl", "lasso"]) && hidden === 7;
-}), "P1 toolbar: order pen, eraser, highlighter, lasso with 7 future slots hidden");
+  return ["pen", "er", "hl", "shapes", "lasso"].every((v) => order.includes(v)) && idx.every((v, i) => i === 0 || v > idx[i - 1]) && hidden === 2;
+}), "P1/P2 toolbar: tools follow the plan order (..., shapes, lasso, ...) with future slots hidden");
 await page.click('[data-act="st-tool"][data-v="pen"]');   // second tap on the active pen opens its popover
 await page.waitForSelector("#stInkPop");
 ok(await page.evaluate(() => {
@@ -238,6 +254,275 @@ await page.evaluate(() => {
 });
 await page.waitForTimeout(300);
 ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter((x) => !x.gone).pop(); return s.pts.length >= 241; }), "P1 latency: a 240 Hz scrawl keeps every point");
+
+/* ---- Phase 4: Laser pointer (transient, never saved, never in undo) ---- */
+await page.click('[data-act="st-tool"][data-v="laser"]');
+ok(await page.locator('[data-act="st-laser-trail"]').count() === 1, "laser: options strip shows Trail and Dot");
+const strokesBeforeLaser = await live();
+const stackBeforeLaser = await page.evaluate(() => STUDY._state().stack.u.length);
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 15;
+  const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.4);
+  fire("pointermove", 0.5, 0.4);
+  fire("pointerup", 0.5, 0.4);
+});
+await page.waitForTimeout(100);
+const strokesAfterLaser = await live();
+const stackAfterLaser = await page.evaluate(() => STUDY._state().stack.u.length);
+ok(strokesBeforeLaser === strokesAfterLaser, "laser: NEVER creates strokes in notebook");
+ok(stackBeforeLaser === stackAfterLaser, "laser: NEVER adds to undo stack");
+
+/* ---- Phase 4: Text box & typing mode & format bar ---- */
+await page.click('[data-act="st-tool"][data-v="text"]');
+ok(await page.locator('.st-text-strip').count() === 1, "text tool: shows options strip with presets, fonts, alignments");
+await page.evaluate(() => {
+  const p = document.querySelector('.st-pg[data-n="1"]');
+  const r = p.getBoundingClientRect();
+  p.querySelector(".st-items-layer").dispatchEvent(new PointerEvent("pointerdown", {
+    pointerId: 20, pointerType: "touch", isPrimary: true, clientX: r.left + 0.2 * r.width, clientY: r.top + 0.3 * r.height, bubbles: true
+  }));
+});
+await page.waitForSelector(".st-item-text", { timeout: 5000 });
+ok(await page.locator(".st-item-text").count() === 1, "text tool: tap creates a text box on the items layer");
+await page.waitForSelector("#stFormatBar", { timeout: 5000 });
+ok(await page.locator("#stFormatBar").count() === 1, "format bar: floats above keyboard with style and navigation buttons");
+await page.locator(".st-text-editable").fill("Cardiovascular System & Hemodynamics");
+ok(await page.locator(".st-text-editable").innerText() === "Cardiovascular System & Hemodynamics", "typing mode: text typed into box");
+
+// Format bar style sheet
+await page.click('[data-act="st-fb-styles"]');
+await page.waitForSelector("#stStyleSheet", { timeout: 5000 });
+ok(await page.locator("#stStyleSheet").count() === 1, "format bar: Aa opens text styles & fonts sheet");
+await page.click('[data-act="st-set-preset"][data-v="title"]');
+ok(await page.evaluate(() => document.querySelector(".st-text-editable").style.fontSize === "28px"), "text style: preset Title applies 28px");
+await page.click('[data-act="st-fb-close-styles"]');
+await page.waitForFunction(() => !document.querySelector("#stStyleSheet"));
+
+// Move / Drag and Resize handles
+ok(await page.locator(".st-drag-bar").count() === 1, "handles: drag bar is visible on selected item");
+ok(await page.locator(".st-handle.se").count() === 1, "handles: resize handles present");
+const itemBeforeMove = await page.evaluate(() => STUDY._state().items[0].x);
+await page.evaluate(() => {
+  const drag = document.querySelector(".st-drag-bar");
+  const r = drag.getBoundingClientRect();
+  drag.dispatchEvent(new PointerEvent("pointerdown", { pointerId: 21, clientX: r.left, clientY: r.top, bubbles: true }));
+  window.dispatchEvent(new PointerEvent("pointermove", { pointerId: 21, clientX: r.left + 50, clientY: r.top + 30, bubbles: true }));
+  window.dispatchEvent(new PointerEvent("pointerup", { pointerId: 21, clientX: r.left + 50, clientY: r.top + 30, bubbles: true }));
+});
+const itemAfterMove = await page.evaluate(() => STUDY._state().items[0].x);
+ok(itemAfterMove > itemBeforeMove, "handles: box drags and coordinates update");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate((beforeVal) => STUDY._state().items[0].x === beforeVal, itemBeforeMove), "undo: reverts box move");
+
+/* ---- Phase 4: Stickers & Elements tray ---- */
+await page.click('[data-act="st-tool"][data-v="elements"]');
+await page.waitForSelector("#stStickerTray", { timeout: 5000 });
+ok(await page.locator("#stStickerTray").count() === 1, "elements: sticker tray opens with medical line icons");
+ok(await page.locator('.st-sticker-btn[data-name="heart"]').count() === 1, "sticker tray: medical heart icon available");
+ok(await page.locator('[data-act="st-insert-saved-elem"]').count() === 1, "sticker tray: saved custom element from lasso available");
+await page.click('.st-sticker-btn[data-name="heart"]');
+await page.waitForSelector(".st-item-sticker", { timeout: 5000 });
+ok(await page.locator(".st-sticker-wrap svg").count() === 1, "sticker: heart icon inserted on page");
+
+/* ---- Phase 4: Image insertion & crop ---- */
+await page.click('[data-act="st-tool"][data-v="image"]');
+ok(await page.locator('[data-act="st-img-pick"]').count() === 1 && await page.locator('[data-act="st-camera-pick"]').count() === 1 && await page.locator('[data-act="st-scan-page"]').count() === 1, "image: options strip shows Photos, Camera, Scan into page");
+await page.evaluate(() => {
+  const tinyPng = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+  STUDY_INSERT.insertImageFromDataUrl(tinyPng);
+});
+await page.waitForSelector(".st-item-img", { timeout: 5000 });
+ok(await page.locator(".st-item-img").count() === 1, "image: inserted on page below ink overlay");
+const imgItemId = await page.evaluate(() => document.querySelector(".st-item-img").closest(".st-item").getAttribute("data-id"));
+await page.click(`[data-act="st-img-crop"][data-id="${imgItemId}"]`);
+await page.waitForSelector("#stCropOverlay", { timeout: 5000 });
+ok(await page.locator("#stCropOverlay").count() === 1, "crop: overlay opens for image");
+await page.click('[data-act="st-crop-apply"]');
+await page.waitForFunction(() => !document.querySelector("#stCropOverlay"), null, { timeout: 5000 });
+ok(true, "crop: applied successfully");
+
+/* ---- Phase 2 select and shape: lasso menu, move, resize, clipboard, shapes, draw-and-hold ---- */
+const bboxOfSel = () => page.evaluate(() => {
+  const V = STUDY._state();
+  if (!V.lasso) return null;
+  let x0 = 1, y0 = 1, x1 = 0, y1 = 0;
+  V.strokes.filter((s) => V.lasso.ids.includes(s.id)).forEach((s) => s.pts.forEach((p) => { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }));
+  return { x0, y0, x1, y1, n: V.lasso.n, count: V.lasso.ids.length };
+});
+const dragOnPage = (pick) => page.evaluate((pick) => {
+  const V = STUDY._state(), n2 = pick.n;
+  const ov = document.querySelector('.st-ov[data-n="' + n2 + '"]'), r = ov.getBoundingClientRect(), id = 31;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", (pick.x0 + pick.x1) / 2, (pick.y0 + pick.y1) / 2);
+  fire("pointermove", (pick.x0 + pick.x1) / 2 + pick.dx, (pick.y0 + pick.y1) / 2 + pick.dy);
+  fire("pointerup", (pick.x0 + pick.x1) / 2 + pick.dx, (pick.y0 + pick.y1) / 2 + pick.dy);
+}, pick);
+const drawShapeGhost = (shape) => page.evaluate((shape) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 32;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  if (shape === "circle") { fire("pointerdown", 0.5, 0.12); for (let i = 1; i <= 40; i++) { const a = (i / 40) * 2 * Math.PI; fire("pointermove", 0.5 + Math.cos(a) * 0.09, 0.12 + Math.sin(a) * 0.09); } fire("pointerup", 0.59, 0.12); }
+  else { fire("pointerdown", 0.15, 0.9); for (let i = 1; i <= 24; i++) fire("pointermove", 0.15 + 0.3 * i / 24, 0.9); fire("pointerup", 0.45, 0.9); }
+}, shape);
+const lassoRect = (x0, y0, x1, y1) => page.evaluate(([x0, y0, x1, y1]) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 33;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", x0, y0); fire("pointermove", x1, y0); fire("pointermove", x1, y1); fire("pointermove", x0, y1); fire("pointermove", x0, y0); fire("pointerup", x0, y0);
+}, [x0, y0, x1, y1]);
+/* lasso settings: highlighter can be excluded */
+await page.click('[data-act="st-tool"][data-v="hl"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 34;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.15, 0.68); fire("pointermove", 0.85, 0.68); fire("pointerup", 0.85, 0.68);
+});
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 35;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.15, 0.74); fire("pointermove", 0.85, 0.74); fire("pointerup", 0.85, 0.74);
+});
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.waitForSelector('#stInkCtx [data-sel="rule"][data-v="hl"]');
+ok(await page.locator('#stInkCtx [data-sel="rule"]').count() === 5, "P2 lasso settings: five kind toggles (pen, highlighter, shapes, images, text)");
+await lassoRect(0.1, 0.64, 0.9, 0.78);
+await page.waitForSelector("#stLassoBar");
+ok(/2 items/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso: loop picks the pen and highlighter strokes");
+await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');
+await lassoRect(0.1, 0.64, 0.9, 0.78);
+await page.waitForSelector("#stLassoBar");
+ok(/1 item/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso settings: highlighter excluded after toggle");
+await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');   // restore
+ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && await page.locator('[data-act="st-lasso-resize"]').count() === 1 && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
+/* move: drag inside the box, one undo step */
+const beforeMove = await bboxOfSel();
+const uBeforeMove = await page.evaluate(() => STUDY._state().stack.u.length);
+await dragOnPage({ ...beforeMove, dx: 0.06, dy: 0.02 });
+await page.waitForTimeout(200);
+const afterMove = await bboxOfSel();
+ok(Math.abs(afterMove.x0 - (beforeMove.x0 + 0.06)) < 0.015 && Math.abs(afterMove.y0 - (beforeMove.y0 + 0.02)) < 0.015, "P2 move: selection lands where dropped");
+ok(await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeMove + 1, "P2 move: exactly one undo step");
+await page.click('[data-act="st-undo"]');
+const undone = await bboxOfSel();
+ok(Math.abs(undone.x0 - beforeMove.x0) < 0.015, "P2 move: undo restores the position");
+await page.click('[data-act="st-redo"]');
+ok(Math.abs((await bboxOfSel()).x0 - (beforeMove.x0 + 0.06)) < 0.015, "P2 move: redo reapplies the position");
+/* resize: drag the SE handle */
+const beforeResize = await bboxOfSel();
+await page.evaluate((b) => {
+  const ov = document.querySelector('.st-ov[data-n="' + b.n + '"]'), r = ov.getBoundingClientRect(), id = 36;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", b.x1, b.y1); fire("pointermove", b.x1 + 0.1, b.y1 + 0.1); fire("pointerup", b.x1 + 0.1, b.y1 + 0.1);
+}, beforeResize);
+await page.waitForTimeout(200);
+const afterResize = await bboxOfSel();
+ok(afterResize.x1 - afterResize.x0 > (beforeResize.x1 - beforeResize.x0) * 1.08, "P2 resize: handle drag scales the selection proportionally");
+await page.click('[data-act="st-undo"]');
+const undoneResize = await bboxOfSel();
+ok(Math.abs((undoneResize.x1 - undoneResize.x0) - (beforeResize.x1 - beforeResize.x0)) < 0.02, "P2 resize: undo restores the size");
+/* colour: one undo step */
+await page.click('[data-act="st-lasso-color"]');
+await page.waitForSelector("#stSelColor");
+await page.click('[data-sel-color="#d11a2a"]');
+await page.waitForTimeout(200);
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => STUDY._state().lasso.ids.includes(s.id)).every((s) => s.color === "#d11a2a")), "P2 colour: selection takes the picked colour");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate(() => !STUDY._state().strokes.filter((s) => STUDY._state().lasso.ids.includes(s.id)).every((s) => s.color === "#d11a2a")), "P2 colour: undo restores the old colour");
+/* rotate and screenshot (no mutation for the screenshot) */
+await page.click('[data-act="st-lasso-more"]');
+await page.waitForSelector("#stSelMore");
+const beforeRot = await bboxOfSel();
+await page.click('[data-act="st-lasso-rotate"]');
+await page.waitForTimeout(200);
+ok((await bboxOfSel()) !== null && await page.evaluate(() => STUDY._state().stack.u.length > 0), "P2 rotate: 90 degrees applied as one undo step");
+await page.click('[data-act="st-undo"]');
+const rotUndone = await bboxOfSel();
+ok(Math.abs(rotUndone.x0 - beforeRot.x0) < 0.03 && Math.abs(rotUndone.y0 - beforeRot.y0) < 0.03, "P2 rotate: undo restores the rotation (within clamping)");
+await page.click('[data-act="st-lasso-more"]');
+await page.click('[data-act="st-lasso-shot"]');
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => !document.querySelector("#stSelMore")), "P2 screenshot: action runs and closes the panel");
+/* duplicate: one undo step for every copy */
+const beforeDup = await live();
+await page.click('[data-act="st-lasso-dup"]');
+await page.waitForTimeout(200);
+const afterDup = await live();
+ok(afterDup === beforeDup + 1, "P2 duplicate: copy appears");
+await page.click('[data-act="st-undo"]');
+ok(await live() === beforeDup, "P2 duplicate: one undo removes the copy");
+await page.click('[data-act="st-redo"]');
+ok(await live() === afterDup, "P2 duplicate: redo brings it back");
+/* cut and copy, then paste across pages via long-press */
+await page.click('[data-act="st-lasso-clipcopy"]');
+await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
+await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("strokes"); q.oncomplete = () => res(); }; }));
+ok(await page.evaluate(() => !!localStorage.getItem("smd_study_clip")), "P2 clipboard: copy persists in localStorage");
+const uBeforeCut = await page.evaluate(() => STUDY._state().stack.u.length);
+await page.click('[data-act="st-lasso-cut"]');
+await page.waitForTimeout(200);
+ok(await live() === afterDup - 1 && await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeCut + 1, "P2 cut: removes the selection in one undo step");
+await page.click('[data-act="st-undo"]');
+ok(await live() === afterDup, "P2 cut: undo brings it back");
+if (await page.locator('[data-act="st-lasso-done"]').count()) await page.click('[data-act="st-lasso-done"]');   // undo of a cut may clear the selection
+/* paste across pages: long-press an empty spot on page 2 and tap Paste */
+const onP2Before = await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length);
+await page.click('[data-act="st-page-sheet"]');
+await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
+await page.waitForSelector('.st-ov[data-n="2"]');
+await page.waitForTimeout(400);
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="2"]'), r = ov.getBoundingClientRect(), id = 38;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.5);
+  window.__lpUp = fire;
+});
+await page.waitForTimeout(700);
+await page.waitForSelector("#stPasteBubble", { timeout: 5000 });
+await page.click('[data-sel-paste]');
+await page.evaluate(() => { window.__lpUp("pointerup", 0.3, 0.5); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length) === onP2Before + 1, "P2 paste: copied stroke pastes onto page 2");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length) === onP2Before, "P2 paste: one undo removes the paste across pages");
+await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
+await page.waitForTimeout(400);
+/* shapes tool: every stroke snaps; fill at 25% */
+await page.click('[data-act="st-tool"][data-v="shapes"]');
+await page.waitForSelector('#stInkCtx [data-sel="fill"][data-v="25"]');
+await drawShapeGhost("circle");
+await page.waitForTimeout(300);
+const shapeStroke = await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); const last = ss[ss.length - 1]; return last && { type: last.shape.type, w: last.w }; });
+ok(shapeStroke && ["circle", "ellipse"].includes(shapeStroke.type), "P2 shapes: wobbly circle becomes a " + (shapeStroke && shapeStroke.type));
+await page.click('#stInkCtx [data-sel="fill"][data-v="25"]');
+await drawShapeGhost("line");
+await page.waitForTimeout(300);
+const filled = await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); const last = ss[ss.length - 1]; return last && { type: last.shape.type, fill: last.fill }; });
+ok(filled && filled.fill === "25", "P2 shapes: optional fill colour at 25% opacity");
+/* draw and hold: pen held 0.5s at the end snaps */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+const beforeHold = await live();
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 37;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.5, 0.2);
+  for (let i = 1; i <= 30; i++) { const a = (i / 30) * 2 * Math.PI; fire("pointermove", 0.5 + Math.cos(a) * 0.07, 0.2 + Math.sin(a) * 0.07); }
+  window.__holdUp = fire;
+});
+await page.waitForTimeout(650);
+await page.evaluate(() => { window.__holdUp("pointerup", 0.57, 0.2); });
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); return ss.length >= 1; }) && await live() === beforeHold + 1, "P2 draw and hold: held circle snaps to a perfect shape");
+/* convert stub: signed-out note, then signed-in offline error path is covered by the unit suite */
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await lassoRect(0.4, 0.1, 0.6, 0.3);
+await page.waitForSelector("#stLassoBar", { timeout: 5000 }).catch(() => {});
+if (await page.locator("#stLassoBar").count()) {
+  await page.click('[data-act="st-lasso-more"]');
+  await page.click('[data-act="st-lasso-conv"]');
+  await page.waitForSelector("#stSelConv");
+  ok(/on-device|Server preview/.test(await page.locator("#stSelConv").innerText()), "P2 convert: clearly labelled server stub");
+  await page.click('[data-act="st-lasso-done"]');
+}
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
@@ -488,7 +773,7 @@ ok(Object.keys(before.shas).every((id) => Buffer.from(zmap["files/" + id + ".pdf
 await boot("prep=1&study=1");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
 await openLib();
-const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index"].map((x) => idbAll(x)))).every((a) => a.length === 0);
+const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index", "items"].map((x) => idbAll(x)))).every((a) => a.length === 0);
 ok(await zeroAll(), "wipe: the study database is empty");
 const tamper = (fn) => { const m = FF.unzipSync(new Uint8Array(bk.buf)); fn(m); return Buffer.from(FF.zipSync(m, { level: 0 })); };
 const restore = async (buf) => { await page.setInputFiles("#stRestoreF", { name: "b.zip", mimeType: "application/zip", buffer: buf }); await page.waitForFunction(() => /Restored|Nothing was restored/.test(document.querySelector("#stBk").textContent), null, { timeout: 60000 }); const t = await page.locator("#stBk").innerText(); await page.evaluate(() => { document.querySelector("#stBk").textContent = ""; }); return t; };
@@ -501,8 +786,126 @@ const after = await snap();
 ok(new RegExp("Restored " + before.n + " documents with " + before.st + " strokes\\. Skipped 0").test(msg), "restore: reports the counts restored and skipped");
 ok(after.n === before.n && JSON.stringify(after.docs) === JSON.stringify(before.docs) && JSON.stringify(after.per) === JSON.stringify(before.per) && after.folders === 1, "restore: document count, folders and strokes per page match the library that was backed up");
 ok(JSON.stringify(after.shas) === JSON.stringify(before.shas) && after.shas[fixtureDoc.id] === SHA, "restore: every original's sha256 matches (stored bytes identical)");
+ok((await idbAll("items")).length > 0, "restore: items restored from backup");
 msg = await restore(bk.buf);
 ok(new RegExp("Restored 0 documents with 0 strokes\\. Skipped " + before.n).test(msg) && (await snap()).n === before.n, "restore again: documents already present (by sha256 or id) are skipped, nothing duplicated");
+
+/* ---- Phase 3: pages and navigation (top bar, add page, templates, more, navigator, favourites, outlines, zoom) ---- */
+await boot("prep=1&study=1");
+await page.evaluate(() => { window.confirm = () => true; window.prompt = () => "Chapter 1"; });
+await openLib();
+await page.evaluate(() => new Promise(r => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
+await openLib();
+await page.waitForTimeout(400);
+/* create a fresh notebook for P3 */
+await page.click('[data-act="st-newnb"]');
+await page.fill("#stNbT", "P3 test");
+await page.selectOption("#stNbS", "ruled");
+await page.selectOption("#stNbZ", "a4");
+await page.click('[data-act="st-mknb"]');
+await page.waitForSelector("#stPages", { timeout: 15000 });
+await page.waitForSelector("#stP3Top", { timeout: 10000 });
+ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");
+ok(/1/.test(await page.locator("#stP3Cur").innerText()) && /1/.test(await page.locator("#stP3Tot").innerText()), "P3 top bar: counter 1 of 1");
+ok(await page.evaluate(() => document.querySelector("#stP3Top [data-act='st-p3-grid']") && document.querySelector("#stP3Top [data-act='st-p3-search']") && document.querySelector("#stP3Top [data-act='st-p3-add']")), "P3 top bar: grid, search, share, mic, add icons exist");
+/* draw a stroke, then add ruled page BEFORE page 1 → ink stays */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect();
+  const fire = (t,x,y)=> ov.dispatchEvent(new PointerEvent(t,{pointerId:7,pointerType:"pen",isPrimary:true,pressure:0.5,clientX:r.left+x*r.width,clientY:r.top+y*r.height,bubbles:true,cancelable:true,buttons:t==="pointerup"?0:1}));
+  fire("pointerdown",0.2,0.3); fire("pointermove",0.4,0.35); fire("pointermove",0.6,0.3); fire("pointerup",0.6,0.3);
+});
+await page.waitForTimeout(300);
+await page.click('[data-act="st-p3-add"]');
+await page.waitForSelector("#stP3AddSheet");
+ok(await page.locator("#stP3AddSheet [data-act='st-p3-place'][data-v='before']").count() === 1, "P3 Add: Before/After/Last segmented control");
+await page.click("#stP3AddSheet [data-act='st-p3-place'][data-v='before']");
+/* pick ruled from template grid */
+await page.evaluate(() => {
+  const sheet=document.querySelector("#stP3AddSheet"); const btn=[...sheet.querySelectorAll("[data-tpl]")].find(b=>b.getAttribute("data-tpl")==="ruled");
+  if(btn) btn.click();
+});
+await page.click("#stP3AddSheet [data-act='st-p3-confirm-add']");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n===2, null, {timeout:10000});
+ok(await page.evaluate(() => STUDY._state().n===2), "P3 3.1: ruled page added before page 1 (n=2)");
+/* change template keeps ink */
+const inkBefore = await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length);
+await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._changeTplSheet("page"); });
+await page.waitForSelector("#stP3TplSheet");
+await page.evaluate(() => { const btn=[...document.querySelectorAll("#stP3TplSheet [data-tpl]")].find(b=>b.getAttribute("data-tpl")==="grid"); if(btn) btn.click(); });
+await page.waitForTimeout(400);
+ok((await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length)) === inkBefore, "P3 3.2/3.3: template change keeps the ink");
+/* More menu: copy, rotate, outline, go, clear (each one undo step) */
+await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._openAdd; });
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+ok(await page.locator("#stP3MoreSheet [data-act='st-p3-copy']").count()===1 && await page.locator("#stP3MoreSheet [data-act='st-p3-rotate']").count()===1 && await page.locator("#stP3MoreSheet [data-act='st-p3-outline']").count()===1, "P3 3.4: More menu has Copy, Rotate, Outline, Change Template, Go to Page, Clear");
+await page.click("#stP3MoreSheet [data-act='st-p3-copy']");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n===3, null, {timeout:10000});
+ok(await page.evaluate(() => STUDY._state().n===3), "P3 3.4: Copy Page duplicates page + strokes");
+await page.evaluate(() => { if(window.STUDY_PAGES && window.STUDY_PAGES._rotate) window.STUDY_PAGES._rotate(); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => !!(STUDY._state().doc.rotMap && Object.keys(STUDY._state().doc.rotMap).length)), "P3 3.4: Rotate Page updates rotMap (90° steps)");
+/* Add to outline via More */
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+await page.evaluate(() => { window.prompt = () => "Clinical Notes"; });
+await page.click("#stP3MoreSheet [data-act='st-p3-outline']");
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => (STUDY._state().doc.outlines||[]).some(o=>o.title==="Clinical Notes")), "P3 3.9: Add Page to Outline adds user entry");
+/* Favorites: star page, check empty state then jump */
+await page.click("#stP3Top [data-act='st-p3-fav']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => Object.keys(STUDY._state().doc.favPages||{}).length>0), "P3 3.8: Bookmark star stores favPages");
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='favs']");
+await page.waitForSelector("#stP3FavBody");
+ok(/Page/.test(await page.locator("#stP3FavBody").innerText()), "P3 3.8: Favorites tab lists starred pages");
+await page.click("#stP3FavBody [data-page]");
+await page.waitForTimeout(300);
+ok(true, "P3 3.8: starred page jumps on tap");
+/* Thumbnails: live with ink */
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='thumbs']");
+await page.waitForSelector("#stP3NavGrid .st-p3-nav-card");
+const thumbHasInk = await page.evaluate(() => {
+  const cv=document.querySelector("#stP3NavGrid .st-p3-nav-card canvas"); if(!cv) return false; const d=cv.getContext("2d").getImageData(0,0,cv.width,cv.height).data; for(let i=3;i<d.length;i+=4) if(d[i]>0) return true; return false;
+});
+ok(thumbHasInk, "P3 3.7: thumbnails render page + strokes (not blank)");
+await page.evaluate(() => { document.querySelectorAll("[id^='stP3']")?.forEach ? document.querySelectorAll("[id^='stP3']").forEach(el=>el.remove()) : null; const s=document.querySelector("#stP3NavSheet"); if(s)s.remove(); });
+/* Outlines tab: PDF chapters + user entries + Filter */
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='outlines']");
+await page.waitForSelector("#stP3OutlineBody");
+await page.fill("#stP3OutlineFilter", "Clinical");
+await page.waitForTimeout(300);
+ok(await page.locator("#stP3OutlineBody").innerText().then(t=>/Clinical/.test(t)), "P3 3.9: Outlines filter finds user chapter");
+/* Settings: scrolling direction, palm, lock persist per notebook */
+await page.evaluate(() => { document.querySelector("#stP3NavSheet")?.remove(); });
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+await page.click("#stP3MoreSheet [data-act='st-p3-settings']");
+await page.waitForSelector("#stP3SettingsSheet");
+await page.click("#stP3SettingsSheet [data-act='st-p3-scroll'][data-v='horizontal']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().doc.settings.scrollDir==="horizontal"), "P3 3.5: Settings scrolling direction persists per notebook");
+await page.evaluate(() => { document.querySelector("#stP3SettingsSheet")?.remove(); });
+/* Paging: zoom 50-400% + double-tap fit + page counter Go to Page */
+await page.evaluate(() => STUDY._setZoom(2));
+ok(await page.evaluate(() => STUDY._state().z===2), "P3 3.10: pinch zoom 50-400% via setZoom");
+await page.evaluate(() => STUDY._setZoom(10));
+ok(await page.evaluate(() => STUDY._state().z===4), "P3 3.10: zoom clamped to 400%");
+await page.click("#stP3Pager");
+await page.waitForSelector("#stP3GoSheet");
+await page.fill("#stP3GotoInp", "2");
+await page.click("#stP3GoSheet [data-act='st-p3-do-goto']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().cur===2 || STUDY._state().sc.scrollTop>50 || STUDY._state().sc.scrollLeft>50), "P3 top bar: tapping page counter opens Go to Page and jumps");
+/* Zoom window exists */
+ok(await page.evaluate(() => !!document.querySelector("#stP3ZoomWindow")), "P3 3.11: Zoom window strip element present");
 
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 

@@ -21,8 +21,21 @@
    "say": "CPT-I is rate limiting and is inhibited by malonyl-CoA, so fed cells cannot burn fat while making it. Muscle and liver forms differ in sensitivity. Trapped acylcarnitines are detected beautifully by profiling.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Fed (malonyl-CoA high)", "points": ["CPT-I inhibited", "Fat synthesis proceeds", "Burning paused"]},
-    "right": {"title": "Fasting and exercise (malonyl low)", "points": ["CPT-I open", "Fat burning proceeds", "Synthesis paused"]
+    "left": {
+     "title": "Fed (malonyl-CoA high)",
+     "points": [
+      "CPT-I inhibited",
+      "Fat synthesis proceeds",
+      "Burning paused"
+     ]
+    },
+    "right": {
+     "title": "Fasting and exercise (malonyl low)",
+     "points": [
+      "CPT-I open",
+      "Fat burning proceeds",
+      "Synthesis paused"
+     ]
     }
    }
   },
@@ -42,12 +55,27 @@
    "say": "Palmitate needs seven turns and nets about one hundred and six ATP by modern values after activation cost. Acetyl-CoA earns about ten ATP each through the cycle, which is why fat outyields carbohydrate gram for gram.",
    "vis": {
     "kind": "table",
-    "cols": ["Palmitate ledger", "Yield"],
+    "cols": [
+     "Palmitate ledger",
+     "Yield"
+    ],
     "rows": [
-     ["Spiral (7 turns)", "7 NADH, 7 FADH2, 8 acetyl-CoA"],
-     ["TCA (8 acetyl-CoA)", "About 80 ATP"],
-     ["Activation cost", "Minus 2 ATP equivalents"],
-     ["Net (modern)", "About 106 ATP"]
+     [
+      "Spiral (7 turns)",
+      "7 NADH, 7 FADH2, 8 acetyl-CoA"
+     ],
+     [
+      "TCA (8 acetyl-CoA)",
+      "About 80 ATP"
+     ],
+     [
+      "Activation cost",
+      "Minus 2 ATP equivalents"
+     ],
+     [
+      "Net (modern)",
+      "About 106 ATP"
+     ]
     ]
    }
   },
@@ -63,12 +91,82 @@
     "kind": "flow",
     "title": "Fat block to hypoketotic lows",
     "nodes": [
-     {"id": "blk", "label": "Fat oxidation blocked"},
-     {"id": "ket", "label": "Ketones fail to rise"},
-     {"id": "glu", "label": "Glucose falls (no fuel for GNG)"},
-     {"id": "act", "label": "Give glucose, profile acylcarnitines"}
+     {
+      "id": "blk",
+      "label": "Fat oxidation blocked"
+     },
+     {
+      "id": "ket",
+      "label": "Ketones fail to rise"
+     },
+     {
+      "id": "glu",
+      "label": "Glucose falls (no fuel for GNG)"
+     },
+     {
+      "id": "act",
+      "label": "Give glucose, profile acylcarnitines"
+     }
     ],
-    "edges": [["blk", "ket"], ["ket", "glu"], ["glu", "act"]]
+    "edges": [
+     [
+      "blk",
+      "ket"
+     ],
+     [
+      "ket",
+      "glu"
+     ],
+     [
+      "glu",
+      "act"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Mitochondrial beta-oxidation breaks down long-chain fatty acids through a cyclic four-step pathway of oxidation, hydration, oxidation, and thiolysis. The carnitine shuttle translocates acyl groups across the inner mitochondrial membrane, where carnitine palmitoyltransferase-1 serves as the rate-limiting step, allosterically inhibited by malonyl-CoA. Complete oxidation of palmitate yields 106 net ATP. Medium-chain acyl-CoA dehydrogenase deficiency causes severe fasting hypoketotic hypoglycemia with dicarboxylic aciduria.",
+   "say": "High-yield for the exam. Mitochondrial beta-oxidation breaks down long-chain fatty acids through a cyclic four-step pathway of oxidation, hydration, oxidation, and thiolysis. The carnitine shuttle translocates acyl groups across the inner mitochondrial membrane, where carnitine palmitoyltransferase-1 serves as the rate-limiting step, allosterically inhibited by malonyl-CoA. Complete oxidation of palmitate yields 106 net ATP. Medium-chain acyl-CoA dehydrogenase deficiency causes severe fasting hypoketotic hypoglycemia with dicarboxylic aciduria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate-limiting beta-oxidation enzyme",
+      "Carnitine palmitoyltransferase one located on outer mitochondrial membrane"
+     ],
+     [
+      "Carnitine shuttle inhibitor",
+      "Malonyl-coenzyme A synthesized during fatty acid synthesis inhibits CPT-one"
+     ],
+     [
+      "MCAD deficiency hallmark",
+      "Fasting hypoketotic hypoglycaemia accompanied by urinary dicarboxylic aciduria"
+     ],
+     [
+      "Net ATP yield from palmitate",
+      "One hundred and six net ATP generated from complete oxidation"
+     ],
+     [
+      "Palmitate beta-oxidation cycles",
+      "Seven spiral cycles producing eight acetyl-CoA molecules"
+     ],
+     [
+      "Four recurring cyclic reactions",
+      "Oxidation, hydration, oxidation, and thiolytic cleavage releasing acetyl-CoA"
+     ],
+     [
+      "Odd-chain terminal product",
+      "Propionyl-coenzyme A converted to succinyl-coenzyme A entering Krebs cycle"
+     ],
+     [
+      "Propionyl-CoA carboxylase cofactors",
+      "Biotin vitamin B7, adenosine triphosphate, and carbon dioxide"
+     ]
+    ]
    }
   }
  ],

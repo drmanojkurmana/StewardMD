@@ -10,8 +10,21 @@
    "say": "Allosteric enzymes give sigmoid curves where effectors shift affinity or capacity distinctly from active sites. Haemoglobin is the prototype, with PFK-1 and carboxylase as metabolic exemplars already met previously.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "K system (affinity shifted)", "points": ["S0.5 moves, Vmax same", "Curve slides left (activator) or right", "PFK-1 with F-2,6-BP prototype"]},
-    "right": {"title": "V system (capacity shifted)", "points": ["Vmax moves, S0.5 same", "Curve scales vertically", "Fewer teaching prototypes, rarer stems"]
+    "left": {
+     "title": "K system (affinity shifted)",
+     "points": [
+      "S0.5 moves, Vmax same",
+      "Curve slides left (activator) or right",
+      "PFK-1 with F-2,6-BP prototype"
+     ]
+    },
+    "right": {
+     "title": "V system (capacity shifted)",
+     "points": [
+      "Vmax moves, S0.5 same",
+      "Curve scales vertically",
+      "Fewer teaching prototypes, rarer stems"
+     ]
     }
    }
   },
@@ -22,12 +35,37 @@
     "kind": "flow",
     "title": "Cascade amplification logic",
     "nodes": [
-     {"id": "hor", "label": "Hormone receptor (few molecules)"},
-     {"id": "kin", "label": "Kinase tiers multiply signal"},
-     {"id": "enz", "label": "Target enzymes switched coordinately"},
-     {"id": "off", "label": "Phosphatases reset (insulin favours here in glycogen)"}
+     {
+      "id": "hor",
+      "label": "Hormone receptor (few molecules)"
+     },
+     {
+      "id": "kin",
+      "label": "Kinase tiers multiply signal"
+     },
+     {
+      "id": "enz",
+      "label": "Target enzymes switched coordinately"
+     },
+     {
+      "id": "off",
+      "label": "Phosphatases reset (insulin favours here in glycogen)"
+     }
     ],
-    "edges": [["hor", "kin"], ["kin", "enz"], ["enz", "off"]]
+    "edges": [
+     [
+      "hor",
+      "kin"
+     ],
+     [
+      "kin",
+      "enz"
+     ],
+     [
+      "enz",
+      "off"
+     ]
+    ]
    }
   },
   {
@@ -35,12 +73,32 @@
    "say": "Zymogens store destructive power until proteolysis clips them irreversibly for digestion, clotting and apoptosis commitments. Premature pancreatic activation equals pancreatitis guarded by inhibitor proteins and granule acidity.",
    "vis": {
     "kind": "table",
-    "cols": ["Zymogen", "Activator clip", "Guard against premature fire"],
+    "cols": [
+     "Zymogen",
+     "Activator clip",
+     "Guard against premature fire"
+    ],
     "rows": [
-     ["Trypsinogen", "Enteropeptidase (duodenal brush)", "SPINK1 inhibitor, granule acidity"],
-     ["Pepsinogen", "Stomach acid autoactivation", "Mucus bicarbonate barrier"],
-     ["Prothrombin", "Factor Xa complex on platelets", "Vitamin K carboxylation needed first"],
-     ["Proinsulin", "Prohormone convertases (Golgi granules)", "C-peptide co-secreted equimolar marker"]
+     [
+      "Trypsinogen",
+      "Enteropeptidase (duodenal brush)",
+      "SPINK1 inhibitor, granule acidity"
+     ],
+     [
+      "Pepsinogen",
+      "Stomach acid autoactivation",
+      "Mucus bicarbonate barrier"
+     ],
+     [
+      "Prothrombin",
+      "Factor Xa complex on platelets",
+      "Vitamin K carboxylation needed first"
+     ],
+     [
+      "Proinsulin",
+      "Prohormone convertases (Golgi granules)",
+      "C-peptide co-secreted equimolar marker"
+     ]
     ]
    }
   },
@@ -49,14 +107,42 @@
    "say": "The coenzyme vitamin map must be recitable cold from NAD through biotin and vitamin K recycling. Metals complete cofactor literacy across zinc, copper and selenium enzyme systems in metabolism.",
    "vis": {
     "kind": "table",
-    "cols": ["Coenzyme", "Vitamin source", "Flagship enzymes"],
+    "cols": [
+     "Coenzyme",
+     "Vitamin source",
+     "Flagship enzymes"
+    ],
     "rows": [
-     ["TPP", "Thiamine B1", "PDH, alpha-KGDH, BCKDH, transketolase"],
-     ["PLP", "Pyridoxine B6", "Transaminases, decarboxylases, ALA synthase, phosphorylase"],
-     ["Coenzyme A (pantetheine)", "Pantothenate B5", "PDH E2, fatty acid synthase ACP"],
-     ["THF", "Folate", "Thymidylate synthase, purine synthesis"],
-     ["Biotin (covalently bound)", "Biotin", "Pyruvate, acetyl-CoA, propionyl-CoA carboxylases"],
-     ["NAD, FAD", "Niacin B3, riboflavin B2", "Dehydrogenases everywhere (prior modules)"]
+     [
+      "TPP",
+      "Thiamine B1",
+      "PDH, alpha-KGDH, BCKDH, transketolase"
+     ],
+     [
+      "PLP",
+      "Pyridoxine B6",
+      "Transaminases, decarboxylases, ALA synthase, phosphorylase"
+     ],
+     [
+      "Coenzyme A (pantetheine)",
+      "Pantothenate B5",
+      "PDH E2, fatty acid synthase ACP"
+     ],
+     [
+      "THF",
+      "Folate",
+      "Thymidylate synthase, purine synthesis"
+     ],
+     [
+      "Biotin (covalently bound)",
+      "Biotin",
+      "Pyruvate, acetyl-CoA, propionyl-CoA carboxylases"
+     ],
+     [
+      "NAD, FAD",
+      "Niacin B3, riboflavin B2",
+      "Dehydrogenases everywhere (prior modules)"
+     ]
     ]
    }
   },
@@ -72,12 +158,82 @@
     "kind": "flow",
     "title": "Regulation by timescale",
     "nodes": [
-     {"id": "sec", "label": "Seconds: allosteric effectors"},
-     {"id": "min", "label": "Minutes: phosphorylation cascades"},
-     {"id": "irr", "label": "Irreversible: zymogen clips"},
-     {"id": "hrs", "label": "Hours: enzyme synthesis and degradation"}
+     {
+      "id": "sec",
+      "label": "Seconds: allosteric effectors"
+     },
+     {
+      "id": "min",
+      "label": "Minutes: phosphorylation cascades"
+     },
+     {
+      "id": "irr",
+      "label": "Irreversible: zymogen clips"
+     },
+     {
+      "id": "hrs",
+      "label": "Hours: enzyme synthesis and degradation"
+     }
     ],
-    "edges": [["sec", "min"], ["min", "irr"], ["irr", "hrs"]]
+    "edges": [
+     [
+      "sec",
+      "min"
+     ],
+     [
+      "min",
+      "irr"
+     ],
+     [
+      "irr",
+      "hrs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Allosteric enzymes display sigmoidal velocity curves violating standard Michaelis-Menten kinetics due to cooperative subunit interactions, transitioning between tense and relaxed states. Regulatory covalent modification involves reversible phosphorylation cascades. Essential coenzymes derive from water-soluble vitamins: biotin serves ATP-dependent carboxylases, pyridoxal phosphate mediates transamination, and thiamine pyrophosphate powers oxidative decarboxylation. Zymogen activation requires irreversible proteolytic cleavage.",
+   "say": "High-yield for the exam. Allosteric enzymes display sigmoidal velocity curves violating standard Michaelis-Menten kinetics due to cooperative subunit interactions, transitioning between tense and relaxed states. Regulatory covalent modification involves reversible phosphorylation cascades. Essential coenzymes derive from water-soluble vitamins: biotin serves ATP-dependent carboxylases, pyridoxal phosphate mediates transamination, and thiamine pyrophosphate powers oxidative decarboxylation. Zymogen activation requires irreversible proteolytic cleavage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Allosteric enzyme velocity curve",
+      "Sigmoidal kinetic curve reflecting cooperative subunit binding interactions"
+     ],
+     [
+      "Relaxed state transition",
+      "Allosteric activators stabilize high-affinity relaxed R state conformation"
+     ],
+     [
+      "Biotin carboxylase mnemonic",
+      "ATP, biotin, and carbon dioxide required for ABC carboxylase enzymes"
+     ],
+     [
+      "Pyridoxal phosphate reactions",
+      "Essential cofactor for transamination and amino acid decarboxylation reactions"
+     ],
+     [
+      "Thiamine pyrophosphate enzymes",
+      "Pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase, and transketolase"
+     ],
+     [
+      "Zymogen activation mechanism",
+      "Irreversible proteolytic cleavage unmasks active catalytic site residues"
+     ],
+     [
+      "Glycogen phosphorylase control",
+      "Phosphorylation by phosphorylase kinase activates enzyme into active a-form"
+     ],
+     [
+      "Positive cooperativity marker",
+      "Hill coefficient greater than one indicates positive cooperative binding"
+     ]
+    ]
    }
   }
  ],

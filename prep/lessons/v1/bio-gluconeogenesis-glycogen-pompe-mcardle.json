@@ -10,8 +10,21 @@
    "say": "Pompe disease fails inside lysosomes, so glucose handling stays normal. Infantile disease brings a huge heart and floppy hypotonia. Late onset disease weakens proximal and respiratory muscles without cardiac enlargement, often after years of raised creatine kinase.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Infantile Pompe", "points": ["Cardiomegaly, heart failure", "Floppy baby, macroglossia", "Respiratory failure early"]},
-    "right": {"title": "Late onset Pompe", "points": ["Proximal weakness, back pain", "Respiratory muscles fail", "Heart usually spared"]
+    "left": {
+     "title": "Infantile Pompe",
+     "points": [
+      "Cardiomegaly, heart failure",
+      "Floppy baby, macroglossia",
+      "Respiratory failure early"
+     ]
+    },
+    "right": {
+     "title": "Late onset Pompe",
+     "points": [
+      "Proximal weakness, back pain",
+      "Respiratory muscles fail",
+      "Heart usually spared"
+     ]
     }
    }
   },
@@ -20,11 +33,23 @@
    "say": "Enzyme replacement transformed infantile Pompe survival when started before irreversible cardiac damage. Weeks matter, so newborn screening exists in several programmes. Blood glucose never features, so hypoglycaemia stems point elsewhere.",
    "vis": {
     "kind": "table",
-    "cols": ["Pompe clue", "Why it fits lysosomes"],
+    "cols": [
+     "Pompe clue",
+     "Why it fits lysosomes"
+    ],
     "rows": [
-     ["Normal fasting glucose", "Cytosolic mobilisation intact"],
-     ["High CK, vacuolar myopathy on biopsy", "Lysosomes rupture muscle fibres"],
-     ["Short PR interval, huge QRS voltages", "Glycogen in cardiac conduction tissue"]
+     [
+      "Normal fasting glucose",
+      "Cytosolic mobilisation intact"
+     ],
+     [
+      "High CK, vacuolar myopathy on biopsy",
+      "Lysosomes rupture muscle fibres"
+     ],
+     [
+      "Short PR interval, huge QRS voltages",
+      "Glycogen in cardiac conduction tissue"
+     ]
     ]
    }
   },
@@ -35,12 +60,37 @@
     "kind": "flow",
     "title": "McArdle exercise story",
     "nodes": [
-     {"id": "ex", "label": "Intense exercise starts"},
-     {"id": "cr", "label": "Cramps (no glycogen fuel)"},
-     {"id": "wind", "label": "Second wind (blood fuels arrive)"},
-     {"id": "myo", "label": "Myoglobinuria if pushed"}
+     {
+      "id": "ex",
+      "label": "Intense exercise starts"
+     },
+     {
+      "id": "cr",
+      "label": "Cramps (no glycogen fuel)"
+     },
+     {
+      "id": "wind",
+      "label": "Second wind (blood fuels arrive)"
+     },
+     {
+      "id": "myo",
+      "label": "Myoglobinuria if pushed"
+     }
     ],
-    "edges": [["ex", "cr"], ["cr", "wind"], ["ex", "myo"]]
+    "edges": [
+     [
+      "ex",
+      "cr"
+     ],
+     [
+      "cr",
+      "wind"
+     ],
+     [
+      "ex",
+      "myo"
+     ]
+    ]
    }
   },
   {
@@ -53,12 +103,32 @@
    "say": "Cori disease limits breakdown to outer branches, giving liver enlargement and fasting hypoglycaemia with ketones. Gluconeogenesis is intact, so hypoglycaemia improves with age. High protein diets help by feeding glucose production directly.",
    "vis": {
     "kind": "table",
-    "cols": ["Disease (type)", "Missing enzyme", "Signature"],
+    "cols": [
+     "Disease (type)",
+     "Missing enzyme",
+     "Signature"
+    ],
     "rows": [
-     ["Pompe (II)", "Lysosomal acid maltase", "Heart and muscle, glucose normal"],
-     ["McArdle (V)", "Muscle phosphorylase", "Exercise cramps, second wind"],
-     ["Cori (III)", "Debrancher", "Limit dextrin, milder fasting lows"],
-     ["Tarui (VII)", "Muscle PFK-1", "Exercise failure plus haemolysis"]
+     [
+      "Pompe (II)",
+      "Lysosomal acid maltase",
+      "Heart and muscle, glucose normal"
+     ],
+     [
+      "McArdle (V)",
+      "Muscle phosphorylase",
+      "Exercise cramps, second wind"
+     ],
+     [
+      "Cori (III)",
+      "Debrancher",
+      "Limit dextrin, milder fasting lows"
+     ],
+     [
+      "Tarui (VII)",
+      "Muscle PFK-1",
+      "Exercise failure plus haemolysis"
+     ]
     ]
    }
   },
@@ -67,9 +137,67 @@
    "say": "Andersen disease deposits long chains causing childhood cirrhosis. Tarui disease couples exercise intolerance with haemolysis. Carbohydrate meals worsen Tarui exercise, the opposite prescription to McArdle, a discrimination worth deliberate practice.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "McArdle (phosphorylase)", "points": ["Glucose before exercise helps", "No haemolysis", "Second wind classic"]},
-    "right": {"title": "Tarui (muscle PFK)", "points": ["Glucose before exercise worsens (out of wind)", "Haemolysis present", "Red cells share the subunit"]
+    "left": {
+     "title": "McArdle (phosphorylase)",
+     "points": [
+      "Glucose before exercise helps",
+      "No haemolysis",
+      "Second wind classic"
+     ]
+    },
+    "right": {
+     "title": "Tarui (muscle PFK)",
+     "points": [
+      "Glucose before exercise worsens (out of wind)",
+      "Haemolysis present",
+      "Red cells share the subunit"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Glycogen storage diseases result from discrete enzymatic lesions. Type I von Gierke disease causes severe fasting hypoglycemia, lactic acidosis, and hyperuricemia from glucose-6-phosphatase deficiency. Type II Pompe disease involves lysosomal acid alpha-glucosidase deficiency, leading to fatal infantile hypertrophic cardiomyopathy with normal blood glucose. Type V McArdle disease lacks muscle glycogen phosphorylase, manifesting as painful exercise cramps, myoglobinuria, and the second wind phenomenon.",
+   "say": "High-yield for the exam. Glycogen storage diseases result from discrete enzymatic lesions. Type I von Gierke disease causes severe fasting hypoglycemia, lactic acidosis, and hyperuricemia from glucose-6-phosphatase deficiency. Type II Pompe disease involves lysosomal acid alpha-glucosidase deficiency, leading to fatal infantile hypertrophic cardiomyopathy with normal blood glucose. Type V McArdle disease lacks muscle glycogen phosphorylase, manifesting as painful exercise cramps, myoglobinuria, and the second wind phenomenon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Von Gierke clinical triad",
+      "Severe fasting hypoglycaemia, marked lactic acidosis, and hyperuricaemia"
+     ],
+     [
+      "Pompe disease enzyme defect",
+      "Lysosomal acid alpha-glucosidase or acid maltase causing lysosomal engorgement"
+     ],
+     [
+      "Pompe cardiomegaly presentation",
+      "Massive cardiomegaly with hypertrophic cardiomyopathy and normal blood glucose"
+     ],
+     [
+      "Cori disease accumulated product",
+      "Limit dextrin characterized by short outer branches lacking debranching"
+     ],
+     [
+      "Cori versus von Gierke difference",
+      "Serum lactate levels are normal in Cori disease unlike von Gierke"
+     ],
+     [
+      "McArdle disease enzyme fault",
+      "Muscle glycogen phosphorylase or myophosphorylase sparing hepatic isoform"
+     ],
+     [
+      "McArdle forearm ischemic test",
+      "Absent rise in blood lactate with preserved normal ammonia elevation"
+     ],
+     [
+      "McArdle second wind phenomenon",
+      "Second wind phenomenon reflecting switch to circulating free fatty acids"
+     ]
+    ]
    }
   }
  ],

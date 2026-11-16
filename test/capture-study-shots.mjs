@@ -14,8 +14,14 @@ import { freePort } from "./free-port.mjs";
 const req = createRequire(import.meta.url);
 const { chromium } = req("playwright");
 const HERE = dirname(fileURLToPath(import.meta.url));
-const mode = process.argv[2] || "before";
-const OUT_DIR = mode === "p1" ? join(HERE, "..", ".fleet-reports", "study-p1", "shots") : join(HERE, "..", ".fleet-reports", "study-ui", mode);
+const targetArg = process.argv[2] || "study-p4";
+const OUT_DIR = targetArg === "p1"
+  ? join(HERE, "..", ".fleet-reports", "study-p1", "shots")
+  : targetArg === "p2"
+    ? join(HERE, "..", ".fleet-reports", "study-p2", "shots")
+    : targetArg.startsWith("study-")
+      ? join(HERE, "..", ".fleet-reports", targetArg)
+      : join(HERE, "..", ".fleet-reports", "study-ui", targetArg);
 mkdirSync(OUT_DIR, { recursive: true });
 
 const PORT = await freePort();
@@ -184,6 +190,146 @@ for (const dev of DEVICES) {
     await page.screenshot({ path: join(OUT_DIR, `${tag}-colour-width-popover.png`) });
     console.log(`Saved ${tag}-colour-width-popover.png`);
 
+    // Phase 4: Text box & format bar
+    if (await page.locator('[data-act="st-tool"][data-v="text"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="text"]');
+      await sleep(150);
+      await page.evaluate(() => {
+        const p = document.querySelector('.st-pg[data-n="1"]');
+        if (!p) return;
+        const r = p.getBoundingClientRect();
+        p.querySelector(".st-items-layer").dispatchEvent(new PointerEvent("pointerdown", {
+          pointerId: 30, pointerType: "touch", isPrimary: true, clientX: r.left + 0.15 * r.width, clientY: r.top + 0.35 * r.height, bubbles: true
+        }));
+      });
+      await sleep(200);
+      const textEd = page.locator(".st-text-editable").first();
+      if (await textEd.count()) {
+        await textEd.fill("Aortic Stenosis: Systolic ejection murmur radiating to carotids.");
+      }
+      await setupTheme();
+      await sleep(150);
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-text-format-bar.png`) });
+      console.log(`Saved ${tag}-text-format-bar.png`);
+
+      // Text style sheet
+      if (await page.locator('[data-act="st-fb-styles"]').count()) {
+        await page.click('[data-act="st-fb-styles"]');
+        await sleep(200);
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-text-style-sheet.png`) });
+        console.log(`Saved ${tag}-text-style-sheet.png`);
+        if (await page.locator('[data-act="st-fb-close-styles"]').count()) {
+          await page.click('[data-act="st-fb-close-styles"]');
+          await sleep(150);
+        }
+      }
+    }
+
+    // Phase 4: Elements & Sticker tray
+    if (await page.locator('[data-act="st-tool"][data-v="elements"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="elements"]');
+      await sleep(250);
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-sticker-tray.png`) });
+      console.log(`Saved ${tag}-sticker-tray.png`);
+
+      if (await page.locator('.st-sticker-btn[data-name="heart"]').count()) {
+        await page.click('.st-sticker-btn[data-name="heart"]');
+        await sleep(250);
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-sticker-on-page.png`) });
+        console.log(`Saved ${tag}-sticker-on-page.png`);
+      }
+    }
+
+    // Phase 4: Image & Crop
+    await page.evaluate(() => {
+      const sampleImg = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA0SURBVHhe7cExAQAAAMKg9U9tDQ8gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvg1rYAAB21nCtwAAAABJRU5ErkJggg==";
+      if (window.STUDY_INSERT && window.STUDY_INSERT.insertImageFromDataUrl) {
+        window.STUDY_INSERT.insertImageFromDataUrl(sampleImg);
+      }
+    });
+    await sleep(250);
+    await setupTheme();
+    await page.screenshot({ path: join(OUT_DIR, `${tag}-image-with-handles.png`) });
+    console.log(`Saved ${tag}-image-with-handles.png`);
+
+    const imgId = await page.evaluate(() => {
+      const im = document.querySelector(".st-item-img");
+      return im ? im.closest(".st-item").getAttribute("data-id") : null;
+    });
+    if (imgId && await page.locator(`[data-act="st-img-crop"][data-id="${imgId}"]`).count()) {
+      await page.click(`[data-act="st-img-crop"][data-id="${imgId}"]`);
+      await sleep(250);
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-image-crop.png`) });
+      console.log(`Saved ${tag}-image-crop.png`);
+      if (await page.locator('[data-act="st-crop-cancel"]').count()) {
+        await page.click('[data-act="st-crop-cancel"]');
+        await sleep(150);
+      }
+    }
+
+    // Phase 4: Laser tool
+    if (await page.locator('[data-act="st-tool"][data-v="laser"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="laser"]');
+      await sleep(100);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect();
+        const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 40, pointerType: "pen", isPrimary: true, pressure: 0.8, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.25, 0.65);
+        fire("pointermove", 0.45, 0.68);
+        fire("pointermove", 0.65, 0.63);
+      });
+      await setupTheme();
+      await sleep(100);
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-laser-trail.png`) });
+      console.log(`Saved ${tag}-laser-trail.png`);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect();
+        ov.dispatchEvent(new PointerEvent("pointerup", { pointerId: 40, pointerType: "pen", isPrimary: true, clientX: r.left + 0.65 * r.width, clientY: r.top + 0.63 * r.height, bubbles: true }));
+      });
+    }
+
+    // Phase 4: Lasso selection with AI chips
+    if (await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="lasso"]');
+      await sleep(100);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect(), id = 45;
+        const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.15, 0.15);
+        fire("pointermove", 0.85, 0.15);
+        fire("pointermove", 0.85, 0.35);
+        fire("pointermove", 0.15, 0.35);
+        fire("pointermove", 0.15, 0.15);
+        fire("pointerup", 0.15, 0.15);
+      });
+      await sleep(250);
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-lasso-ai-chips.png`) });
+      console.log(`Saved ${tag}-lasso-ai-chips.png`);
+
+      if (await page.locator('[data-act="st-lasso-ai-explain"]').count()) {
+        await page.click('[data-act="st-lasso-ai-explain"]');
+        await sleep(250);
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-lasso-ai-explain-sheet.png`) });
+        console.log(`Saved ${tag}-lasso-ai-explain-sheet.png`);
+        if (await page.locator('[data-act="st-scancel"]').count()) {
+          await page.click('[data-act="st-scancel"]');
+          await sleep(150);
+        }
+      }
+    }
+
     // 7b. Phase 1: pen settings popover (tap the active pen again), highlighter strip, eraser popover
     if (await page.locator('[data-act="st-tool"][data-v="pen"]').count()) {
       await page.click('[data-act="st-tool"][data-v="pen"]');
@@ -208,6 +354,37 @@ for (const dev of DEVICES) {
       console.log(`Saved ${tag}-p1-eraser-popover.png`);
     }
 
+    // 7c. Phase 2: lasso settings strip + selection with handles, selection menu, shapes strip
+    if (mode === "p2" && await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="lasso"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-lasso-settings.png`) });
+      console.log(`Saved ${tag}-p2-lasso-settings.png`);
+      await page.evaluate(() => {
+        const ov = document.querySelector('.st-ov[data-n="1"]');
+        if (!ov) return;
+        const r = ov.getBoundingClientRect(), id = 3;
+        const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+        fire("pointerdown", 0.1, 0.1); fire("pointermove", 0.9, 0.1); fire("pointermove", 0.9, 0.35); fire("pointermove", 0.1, 0.35); fire("pointermove", 0.1, 0.1); fire("pointerup", 0.1, 0.1);
+      });
+      await page.waitForSelector("#stLassoBar", { timeout: 5000 }).catch(() => {});
+      await sleep(200); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-selection.png`) });
+      console.log(`Saved ${tag}-p2-selection.png`);
+      if (await page.locator('[data-act="st-lasso-color"]').count()) {
+        await page.click('[data-act="st-lasso-color"]');
+        await page.waitForSelector("#stSelColor", { timeout: 5000 }).catch(() => {});
+        await setupTheme();
+        await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-color.png`) });
+        console.log(`Saved ${tag}-p2-color.png`);
+      }
+      await page.click('[data-act="st-lasso-done"]');
+      await page.click('[data-act="st-tool"][data-v="shapes"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-shapes.png`) });
+      console.log(`Saved ${tag}-p2-shapes.png`);
+    }
+
     // 8. Page sheet
     if (await page.locator('[data-act="st-page-sheet"]').count()) {
       await page.click('[data-act="st-page-sheet"]');
@@ -222,6 +399,12 @@ for (const dev of DEVICES) {
     }
 
     // 9. PDF viewer
+    await page.evaluate(() => {
+      if (window.STUDY_INSERT) {
+        while (window.STUDY_INSERT.back()) {}
+      }
+    });
+    await sleep(150);
     await page.click('#smdPrep [data-act="back"]');
     await page.waitForSelector("#stLib", { timeout: 10000 });
     await page.locator(".st-doc", { hasText: "Cardiology" }).locator(".st-open").click();
@@ -257,6 +440,65 @@ for (const dev of DEVICES) {
   }
 }
 
+/* Phase 3: pages and navigation — extra captures to .fleet-reports/study-p3 */
+const P3_DIR = join(HERE, "..", ".fleet-reports", "study-p3");
+mkdirSync(P3_DIR, { recursive: true });
+for (const dev of DEVICES) {
+  for (const theme of THEMES) {
+    const ctx = await browser.newContext({ viewport: { width: dev.width, height: dev.height }, deviceScaleFactor: 2 });
+    const page = await ctx.newPage();
+    await page.route("**/api/**", r => r.fulfill({ status: 404, body: "{}" }));
+    await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = () => "Clinical Notes"; });
+    await page.goto(BASE + "?prep=1&study=1", { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
+    await page.evaluate(() => { ["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(k=>{const e=document.getElementById(k); if(e) e.remove();}); PREP.open(); });
+    await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row, .pnv-tab", { timeout: 30000 });
+    await page.evaluate((th)=>document.body.classList.toggle("dark", th==="dark"), theme);
+    await page.evaluate(() => new Promise(r=>{ const q=indexedDB.deleteDatabase("study"); q.onsuccess=q.onerror=q.onblocked=()=>r(); }));
+    await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+    await page.waitForSelector("#stLib");
+    /* create notebook */
+    if (await page.locator('[data-act="st-newnb"]').count()) {
+      await page.click('[data-act="st-newnb"]');
+      await page.fill("#stNbT", "P3 capture");
+      await page.click('[data-act="st-mknb"]');
+      await page.waitForSelector("#stPages", { timeout: 15000 });
+    }
+    await page.evaluate((th)=>document.body.classList.toggle("dark", th==="dark"), theme);
+    await sleep(250);
+    await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-editor-topbar.png`) });
+    /* Add Page popover */
+    if (await page.locator('[data-act="st-p3-add"]').count()) {
+      await page.click('[data-act="st-p3-add"]');
+      await page.waitForSelector("#stP3AddSheet", { timeout: 5000 }).catch(()=>{});
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-add-page.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3AddSheet")?.remove(); });
+    }
+    /* More menu */
+    if (await page.locator('[data-act="st-p3-more"]').count()) {
+      await page.click('[data-act="st-p3-more"]');
+      await page.waitForSelector("#stP3MoreSheet", { timeout: 5000 }).catch(()=>{});
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-more.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3MoreSheet")?.remove(); });
+    }
+    /* Navigator thumbnails */
+    if (await page.locator('[data-act="st-p3-grid"]').count()) {
+      await page.click('[data-act="st-p3-grid"]');
+      await page.waitForSelector("#stP3NavSheet", { timeout: 5000 }).catch(()=>{});
+      await sleep(300);
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-navigator.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3NavSheet")?.remove(); });
+      /* Favorites empty state */
+      await page.click('[data-act="st-p3-grid"]');
+      await page.waitForSelector("#stP3NavSheet", { timeout: 5000 }).catch(()=>{});
+      await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='favs']");
+      await sleep(200);
+      await page.screenshot({ path: join(P3_DIR, `${dev.name}-${theme}-favorites-empty.png`) });
+      await page.evaluate(()=>{ document.querySelector("#stP3NavSheet")?.remove(); });
+    }
+    await ctx.close();
+  }
+}
 await browser.close();
 serveProc.kill();
-console.log(`\nAll screenshots captured successfully into ${OUT_DIR}!`);
+console.log(`\nAll screenshots captured successfully into ${OUT_DIR} and ${P3_DIR}!`);
