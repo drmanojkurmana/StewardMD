@@ -907,6 +907,9 @@
           chips.innerHTML = lassoChipsHtml();
           sbar.appendChild(chips);
           if (host.root() && host.root().classList) host.root().classList.add("st-lasso-on");
+          if (G.STUDY_SELECT.positionLassoBar) {
+            G.STUDY_SELECT.positionLassoBar(inkApi(V && V.cur ? V.cur : 1, null), sbar);
+          }
         }
         return;
       } catch (e) {}
@@ -918,11 +921,11 @@
     div.className = "st-lasso-bar";
     div.innerHTML =
       '<div class="st-lasso-actions">' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-cut">' + ICO.copy + ' Cut</button>' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-clipcopy">' + ICO.copy + ' Copy</button>' +
-        '<button type="button" class="pn-btn sm bad" data-act="st-lasso-del">' + ICO.trash + ' Delete</button>' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-copy">' + ICO.copy + ' Duplicate</button>' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-color">' + ICO.palette + ' Color</button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-cut">' + ICO.copy + ' <span class="st-sel-lbl">Cut</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-clipcopy">' + ICO.copy + ' <span class="st-sel-lbl">Copy</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn bad" data-act="st-lasso-del">' + ICO.trash + ' <span class="st-sel-lbl">Delete</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-copy">' + ICO.copy + ' <span class="st-sel-lbl">Duplicate</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-color">' + ICO.palette + ' <span class="st-sel-lbl">Color</span></button>' +
       '</div>' +
       '<div class="st-lasso-chips">' + lassoChipsHtml() + '</div>';
     host.root().appendChild(div);

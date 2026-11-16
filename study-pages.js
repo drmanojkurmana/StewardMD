@@ -257,7 +257,7 @@
           '<button type="button" class="st-p3-btn" data-act="st-redo" id="stP3Redo" aria-label="Redo">'+ICO.redo+'</button>' +
           '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-fav" id="stP3Fav" aria-label="Star this page" aria-pressed="false">'+ICO.star+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-add" aria-label="Add page">'+ICO.plus+'</button>' +
-          '<button type="button" class="st-p3-btn" data-act="st-p3-close" aria-label="Close">'+ICO.x+'</button>' +
+          '<button type="button" class="st-p3-btn st-p3-collapse" data-act="st-p3-close" aria-label="Close">'+ICO.x+'</button>' +
           '<button type="button" class="st-p3-btn" data-act="st-p3-more" aria-label="More options">'+ICO.more+'</button>' +
         '</div>' +
       '</div>';

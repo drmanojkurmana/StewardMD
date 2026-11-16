@@ -672,7 +672,9 @@
     resize: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3l-7 7M21 3v5M21 3h-5M3 21l7-7M3 21v-5M3 21h5"/></svg>',
     more: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>',
     rotate: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>',
-    shot: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>'
+    shot: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>',
+    sparkle: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>',
+    book: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10M6 10h10"/></svg>'
   };
   var PEN_COLORS = ["#111111", "#1a56db", "#d11a2a", "#168038", "#7b1fa2", "#ea580c", "#0e7490", "#b45309", "#be185d", "#334155", "#42cdb5", "#f5f0e6"];
   function removeLassoBar(api) {
@@ -698,7 +700,9 @@
     });
   }
   // Filter the loop's picks through the lasso settings, then show the menu (2.6).
+  var lastApi = null;
   function showLassoBar(api) {
+    lastApi = api;
     var V = api.getV();
     if (!V || !V.lasso || !V.lasso.ids.length) { removeLassoBar(api); return; }
     var s = selOf(api), map = {};
@@ -714,14 +718,24 @@
     div.className = "st-lasso-bar st-sel-bar";
     div.setAttribute("role", "toolbar");
     div.setAttribute("aria-label", "Selection actions, " + kept.length + " selected");
-    var btn = function (act, ico, label, extra) { return '<button type="button" class="pn-btn sm st-sel-btn" data-act="' + act + '"' + (extra || "") + ' aria-label="' + label + '">' + ico + "<span>" + label + "</span></button>"; };
-    div.innerHTML = '<span class="st-sel-count">' + kept.length + (kept.length === 1 ? " item" : " items") + "</span>" +
-      btn("st-lasso-cut", ICONS.cut, "Cut") +
-      btn("st-lasso-clipcopy", ICONS.copy, "Copy") +
-      btn("st-lasso-del", ICONS.trash, "Delete") +
-      btn("st-lasso-dup", ICONS.dup, "Duplicate") +
-      btn("st-lasso-color", ICONS.palette, "Color") +
-      btn("st-lasso-more", ICONS.more, "More");
+    var btn = function (act, ico, label, extra) { return '<button type="button" class="pn-btn sm st-sel-btn" data-act="' + act + '"' + (extra || "") + ' aria-label="' + label + '">' + ico + '<span class="st-sel-lbl">' + label + "</span></button>"; };
+    var chipsHtml =
+      '<div class="st-lasso-chips">' +
+        '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-explain">' + ICONS.sparkle + ' Explain</button>' +
+        '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-summary">' + ICONS.sparkle + ' Key summary</button>' +
+        '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-make">' + ICONS.book + ' Make deck</button>' +
+      '</div>';
+    div.innerHTML =
+      '<div class="st-lasso-actions">' +
+        '<span class="st-sel-count">' + kept.length + (kept.length === 1 ? " item" : " items") + "</span>" +
+        btn("st-lasso-cut", ICONS.cut, "Cut") +
+        btn("st-lasso-clipcopy", ICONS.copy, "Copy") +
+        btn("st-lasso-del", ICONS.trash, "Delete") +
+        btn("st-lasso-dup", ICONS.dup, "Duplicate") +
+        btn("st-lasso-color", ICONS.palette, "Color") +
+        btn("st-lasso-more", ICONS.more, "More") +
+      '</div>' +
+      chipsHtml;
     var rootEl = api.root();
     rootEl.appendChild(div);
     if (rootEl.classList) rootEl.classList.add("st-lasso-on");
@@ -731,18 +745,49 @@
   function positionLassoBar(api, div) {
     try {
       var V = api.getV();
+      if (!V || !V.lasso) return;
       var bb = selBBoxNow(api);
       var pg = V && V.pg && V.pg[V.lasso.n];
       var el = pg && pg.el;
       if (!bb || !el || !el.getBoundingClientRect) return;
       var r = el.getBoundingClientRect();
-      var bw = div.offsetWidth || 320, bh = div.offsetHeight || 48;
-      var cx = r.left + ((bb.x0 + bb.x1) / 2) * r.width;
-      var left = Math.max(8, Math.min(cx - bw / 2, (G.innerWidth || 390) - bw - 8));
-      var top = r.top + bb.y0 * r.height - bh - 10;
-      if (top < 108) top = r.top + bb.y1 * r.height + 10;
-      div.style.left = left + "px";
-      div.style.top = top + "px";
+      var zm = 1;
+      try {
+        if (div.getBoundingClientRect && div.offsetWidth) {
+          var rDiv = div.getBoundingClientRect();
+          if (rDiv.width && div.offsetWidth) zm = rDiv.width / div.offsetWidth;
+        } else if (G.getComputedStyle && D.documentElement) {
+          zm = parseFloat(G.getComputedStyle(D.documentElement).zoom) || 1;
+        }
+      } catch (e) { zm = 1; }
+      if (!zm || isNaN(zm) || zm <= 0) zm = 1;
+      var bw = (div.offsetWidth || 320) * zm, bh = (div.offsetHeight || 44) * zm;
+      var selLeft = r.left + bb.x0 * r.width;
+      var selRight = r.left + bb.x1 * r.width;
+      var selTop = r.top + bb.y0 * r.height;
+      var selBottom = r.top + bb.y1 * r.height;
+      var cx = (selLeft + selRight) / 2;
+      var winW = G.innerWidth || (D.documentElement && D.documentElement.clientWidth) || 390;
+      var winH = G.innerHeight || (D.documentElement && D.documentElement.clientHeight) || 800;
+      var left = Math.max(8, Math.min(cx - bw / 2, winW - bw - 8));
+      var rootEl = (api.root && api.root()) || (el && el.closest && el.closest(".pn-root"));
+      var topBar = rootEl && rootEl.querySelector(".st-p3-topbar");
+      var minTop = (topBar ? topBar.getBoundingClientRect().bottom : 56) + 8;
+      var top;
+      if (selTop - bh - 8 >= minTop) {
+        top = selTop - bh - 8;
+      } else {
+        top = selBottom + 8;
+        if (top + bh > winH - 8) {
+          if (selTop - minTop >= bh) {
+            top = Math.max(minTop, selTop - bh - 8);
+          } else {
+            top = Math.max(selBottom + 4, winH - bh - 8);
+          }
+        }
+      }
+      div.style.left = (left / zm) + "px";
+      div.style.top = (top / zm) + "px";
       div.style.bottom = "auto";
       div.style.transform = "none";
     } catch (e) {}
@@ -1241,6 +1286,12 @@
       if (G_.lp) { clearTimeout(G_.lp.timer); G_.lp = null; }
     }, true);
   }
-  G.STUDY_SELECT = { pure: PURE, drawShape: drawShape, drawText: drawText, drawSel: drawSel, stripHtml: stripHtml, syncStrip: syncStrip, showLassoBar: showLassoBar, removeLassoBar: removeLassoBar, removePanels: removePanels, act: act, bindSel: bindSel, pasteAt: pasteAt, getClip: getClip, putClip: putClip, loadSel: loadSel, saveSel: saveSel };
+  G.addEventListener("resize", function () {
+    var b = D.querySelector("#stLassoBar");
+    if (b && lastApi) {
+      positionLassoBar(lastApi, b);
+    }
+  });
+  G.STUDY_SELECT = { pure: PURE, drawShape: drawShape, drawText: drawText, drawSel: drawSel, stripHtml: stripHtml, syncStrip: syncStrip, showLassoBar: showLassoBar, positionLassoBar: positionLassoBar, removeLassoBar: removeLassoBar, removePanels: removePanels, act: act, bindSel: bindSel, pasteAt: pasteAt, getClip: getClip, putClip: putClip, loadSel: loadSel, saveSel: saveSel };
 })(typeof window !== "undefined" ? window : this);
 

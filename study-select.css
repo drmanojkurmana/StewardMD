@@ -16,10 +16,10 @@
 .pn-root .st-sel-fillrow, .pn-root .st-sel-scale { display: flex; flex-wrap: wrap; gap: 8px; }
 .pn-root .st-sel-fill, .pn-root .st-sel-scale .pn-btn { min-height: 44px; }
 .pn-root .st-sel-menubtn { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
-.pn-root .st-sel-bar { flex-wrap: wrap; justify-content: center; max-width: calc(100vw - 16px); box-sizing: border-box; border-radius: 14px; }
-.pn-root .st-sel-count { font-size: 13px; font-weight: 600; color: var(--pn-km-mint, #42cdb5); min-height: 44px; display: inline-flex; align-items: center; }
-.pn-root .st-sel-btn { min-height: 44px; display: inline-flex; align-items: center; gap: 6px; }
+.pn-root .st-sel-bar { flex-wrap: nowrap; justify-content: center; max-width: calc(100vw - 16px); box-sizing: border-box; border-radius: 14px; }
+.pn-root .st-sel-count { font-size: 13px; font-weight: 600; color: var(--pn-km-mint, #42cdb5); min-height: 38px; display: inline-flex; align-items: center; padding: 0 4px; }
+.pn-root .st-sel-btn { min-height: 38px; display: inline-flex; align-items: center; gap: 4px; }
 .pn-root .st-paste-bubble { position: fixed; z-index: 52; display: flex; gap: 8px; padding: 8px; background: var(--pn-card); border: 1px solid var(--pn-line); border-radius: 14px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28); }
 .pn-root .st-paste-btn { min-height: 44px; min-width: 64px; }
-@media (max-width: 430px) { .pn-root .st-sel-hint { display: none; } .pn-root .st-sel-bar { bottom: calc(var(--pnv-h, 64px) + 12px); padding: 6px 8px; gap: 6px; } }
+@media (max-width: 430px) { .pn-root .st-sel-hint { display: none; } .pn-root .st-sel-bar { padding: 4px 6px; gap: 4px; } }
 @media (prefers-reduced-motion: reduce) { .pn-root .st-lasso-bar { animation: none; } }

@@ -387,9 +387,76 @@ await page.evaluate(() => {
 await page.click('[data-act="st-tool"][data-v="lasso"]');
 await page.waitForSelector('#stInkCtx [data-sel="rule"][data-v="hl"]');
 ok(await page.locator('#stInkCtx [data-sel="rule"]').count() === 5, "P2 lasso settings: five kind toggles (pen, highlighter, shapes, images, text)");
+
+/* Polish Finding D: at 390 px every #stInkCtx chip has right edge <= viewport width */
+const chipEdgesOk = await page.evaluate(() => {
+  const chips = Array.from(document.querySelectorAll("#stInkCtx .st-sel-rule"));
+  const vw = window.innerWidth;
+  return chips.length > 0 && chips.every((c) => c.getBoundingClientRect().right <= vw);
+});
+ok(chipEdgesOk, "P2 Finding D: at 390 px every #stInkCtx chip has right edge <= viewport width");
+
 await lassoRect(0.1, 0.64, 0.9, 0.78);
 await page.waitForSelector("#stLassoBar");
 ok(/2 items/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso: loop picks the pen and highlighter strokes");
+
+/* Polish Finding B & D: #stLassoBar does not intersect selection and height <= 112 px on both 390 px and iPad */
+const barMetrics390 = await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  const V = window.STUDY._state();
+  const bb = window.STUDY_SELECT.pure.selBBox(V.strokes.filter((s) => V.lasso.ids.includes(s.id)));
+  const pg = V.pg[V.lasso.n];
+  const r = pg.el.getBoundingClientRect();
+  const selRect = { left: r.left + bb.x0 * r.width, right: r.left + bb.x1 * r.width, top: r.top + bb.y0 * r.height, bottom: r.top + bb.y1 * r.height };
+  const barRect = bar.getBoundingClientRect();
+  const intersects = !(barRect.right <= selRect.left || barRect.left >= selRect.right || barRect.bottom <= selRect.top || barRect.top >= selRect.bottom);
+  return {
+    intersects: intersects,
+    heightLeq112: barRect.height <= 112,
+    rightWithinVp: barRect.right <= window.innerWidth,
+    h: barRect.height
+  };
+});
+ok(!barMetrics390.intersects && barMetrics390.heightLeq112, "P2 Finding B: #stLassoBar does not intersect selection and height <= 112 px on 390 px (height=" + Math.round(barMetrics390.h) + "px)");
+ok(barMetrics390.rightWithinVp, "P2 Finding D: #stLassoBar right edge <= viewport width at 390 px");
+
+/* iPad viewport check for Finding B */
+await page.setViewportSize({ width: 820, height: 1180 });
+await page.waitForTimeout(200);
+await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  if (bar && window.STUDY_SELECT && window.STUDY_SELECT.positionLassoBar && window.STUDY && window.STUDY._inkApi) {
+    window.STUDY_SELECT.positionLassoBar(window.STUDY._inkApi(), bar);
+  }
+});
+await page.waitForTimeout(200);
+const barMetricsIpad = await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  const V = window.STUDY._state();
+  const bb = window.STUDY_SELECT.pure.selBBox(V.strokes.filter((s) => V.lasso.ids.includes(s.id)));
+  const pg = V.pg[V.lasso.n];
+  const r = pg.el.getBoundingClientRect();
+  const selRect = { left: r.left + bb.x0 * r.width, right: r.left + bb.x1 * r.width, top: r.top + bb.y0 * r.height, bottom: r.top + bb.y1 * r.height };
+  const barRect = bar.getBoundingClientRect();
+  const intersects = !(barRect.right <= selRect.left || barRect.left >= selRect.right || barRect.bottom <= selRect.top || barRect.top >= selRect.bottom);
+  return {
+    intersects: intersects,
+    heightLeq112: barRect.height <= 112,
+    h: barRect.height
+  };
+});
+ok(!barMetricsIpad.intersects && barMetricsIpad.heightLeq112, "P2 Finding B: #stLassoBar does not intersect selection and height <= 112 px on iPad (height=" + Math.round(barMetricsIpad.h) + "px)");
+
+/* restore 390 px viewport */
+await page.setViewportSize({ width: 390, height: 844 });
+await page.waitForTimeout(200);
+await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  if (bar && window.STUDY_SELECT && window.STUDY_SELECT.positionLassoBar && window.STUDY && window.STUDY._inkApi) {
+    window.STUDY_SELECT.positionLassoBar(window.STUDY._inkApi(), bar);
+  }
+});
+await page.waitForTimeout(200);
 await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');
 await lassoRect(0.1, 0.64, 0.9, 0.78);
 await page.waitForSelector("#stLassoBar");
@@ -543,6 +610,49 @@ ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await stroke(0.3);
 await page.waitForTimeout(300);
+
+/* Polish Finding A: before selecting, read overlay+page pixel at a ruled-line point inside future selection; select; pixel must still be ruling colour (not white) */
+const rulingPoint = await page.evaluate(() => {
+  const cv = document.querySelector(".st-cv");
+  const ctx = cv.getContext("2d");
+  const x = Math.round(0.35 * cv.width);
+  const col = ctx.getImageData(x, 0, 1, cv.height).data;
+  let ruledY = -1;
+  const isDarkBg = col[0] < 50;
+  for (let y = Math.round(0.20 * cv.height); y < Math.round(0.40 * cv.height); y++) {
+    const idx = y * 4;
+    if (isDarkBg) {
+      if (col[idx + 1] > 45) { ruledY = y; break; }
+    } else {
+      if (col[idx] < 225) { ruledY = y; break; }
+    }
+  }
+  if (ruledY === -1) ruledY = Math.round(0.28 * cv.height);
+  const px = Array.from(ctx.getImageData(x, ruledY, 1, 1).data);
+  return { x: x, y: ruledY, px: px };
+});
+
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 24;
+  const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.1, 0.22); fire("pointermove", 0.9, 0.22); fire("pointermove", 0.9, 0.38); fire("pointermove", 0.1, 0.38); fire("pointermove", 0.1, 0.22); fire("pointerup", 0.1, 0.22);
+});
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+
+const pixelCheckAfter = await page.evaluate((pt) => {
+  const cv = document.querySelector(".st-cv");
+  const ov = document.querySelector('.st-ov[data-n="1"]') || document.querySelector(".st-ov");
+  const cvP = Array.from(cv.getContext("2d").getImageData(pt.x, pt.y, 1, 1).data);
+  const ovP = Array.from(ov.getContext("2d").getImageData(pt.x, pt.y, 1, 1).data);
+  const isWhite = (cvP[0] > 250 && cvP[1] > 250 && cvP[2] > 250 && pt.px[0] < 230) || (ovP[3] > 0 && ovP[0] > 240 && ovP[1] > 240 && ovP[2] > 240);
+  const matchesRuling = cvP[0] === pt.px[0] && cvP[1] === pt.px[1] && cvP[2] === pt.px[2];
+  return { matchesRuling: matchesRuling, isWhite: isWhite, ovAlpha: ovP[3] };
+}, rulingPoint);
+ok(pixelCheckAfter.matchesRuling && !pixelCheckAfter.isWhite && pixelCheckAfter.ovAlpha === 0, "notebook Finding A: selected stroke area is transparent (ruling line colour preserved, not white box)");
+
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.waitForTimeout(150);
 await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-addpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 2 && STUDY._state().pg[2], null, { timeout: 10000 });
@@ -810,6 +920,18 @@ await page.waitForSelector("#stP3Top", { timeout: 10000 });
 ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");
 ok(/1/.test(await page.locator("#stP3Cur").innerText()) && /1/.test(await page.locator("#stP3Tot").innerText()), "P3 top bar: counter 1 of 1");
 ok(await page.evaluate(() => document.querySelector("#stP3Top [data-act='st-p3-grid']") && document.querySelector("#stP3Top [data-act='st-p3-search']") && document.querySelector("#stP3Top [data-act='st-p3-add']")), "P3 top bar: grid, search, share, mic, add icons exist");
+
+/* Polish Finding C: at 390 px the title element's innerText equals the notebook title and its width > 60 px */
+const titleData = await page.evaluate(() => {
+  const el = document.querySelector(".st-p3-title");
+  const txt = document.querySelector(".st-p3-title-txt");
+  const r = el ? el.getBoundingClientRect() : null;
+  return {
+    innerText: txt ? txt.textContent : (el ? el.innerText : ""),
+    width: r ? r.width : 0
+  };
+});
+ok(titleData.innerText === "P3 test" && titleData.width > 60, "P3 Finding C: at 390 px title element innerText equals notebook title and width > 60 px (width=" + Math.round(titleData.width) + "px)");
 /* draw a stroke, then add ruled page BEFORE page 1 → ink stays */
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await page.evaluate(() => {

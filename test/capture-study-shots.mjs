@@ -160,8 +160,10 @@ for (const dev of DEVICES) {
       await page.locator(".st-open").first().click();
     }
     await page.waitForSelector("#stPages", { timeout: 15000 });
+    // Wait for leaving screen (.pn-ghost) cross-fade transition to finish so editor covers full width
+    await page.waitForFunction(() => !document.querySelector(".pn-ghost"), { timeout: 5000 }).catch(() => {});
+    await sleep(400);
     await setupTheme();
-    await sleep(200);
     await page.screenshot({ path: join(OUT_DIR, `${tag}-notebook-editor.png`) });
     console.log(`Saved ${tag}-notebook-editor.png`);
 
@@ -266,6 +268,14 @@ for (const dev of DEVICES) {
         await page.click('[data-act="st-crop-cancel"]');
         await sleep(150);
       }
+    }
+    if (imgId) {
+      await page.evaluate((id) => {
+        if (window.STUDY_INSERT && window.STUDY_INSERT.deleteItem) {
+          window.STUDY_INSERT.deleteItem(id);
+        }
+      }, imgId);
+      await sleep(150);
     }
 
     // Phase 4: Laser tool
