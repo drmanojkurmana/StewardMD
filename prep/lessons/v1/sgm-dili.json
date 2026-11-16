@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sgm-dili",
+ "subject": "ss-general-medicine",
+ "title": "Drug induced liver injury",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Drug induced liver injury** (DILI, chemical liver damage) causes about 10 to 15% of acute liver failure in Western registries. It is idiosyncratic in most cases and unrelated to dose. **Hy law** states that hepatocellular injury with alanine transaminase above 3 times normal plus bilirubin above 2 times normal predicts 10 to 50% mortality. **RUCAM** (Roussel Uclaf causality assessment method) grades causality from excluded to highly probable.",
+   "say": "Drug induced liver injury causes about ten to fifteen percent of acute liver failure cases. The injury is idiosyncratic in most cases and is unrelated to drug dose. Hy law states that liver injury with alanine transaminase above three times normal predicts high mortality. Roussel Uclaf causality assessment method grades causality from excluded to highly probable clearly.",
+   "vis": null
+  },
+  {
+   "tx": "**Antitubercular therapy** (isoniazid, rifampicin, pyrazinamide) is the leading cause of DILI in India and accounts for about 20% of cases. **Amoxicillin clavulanate** is the commonest cause in Western series and presents late. **Anticonvulsants** (phenytoin, carbamazepine, valproate), **statins**, **methotrexate** and herbal supplements are frequent culprits. Augmentation phase pyrazinamide sharply raises the risk of hepatotoxicity.",
+   "say": "Antitubercular therapy is the leading cause of drug induced liver injury in India. Amoxicillin clavulanate is the commonest cause in Western series and presents late. Anticonvulsants and methotrexate and herbal supplements are frequent culprits in practice. Augmentation phase pyrazinamide sharply raises the risk of hepatotoxicity in patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Culprit drug",
+     "Typical latency or pattern"
+    ],
+    "rows": [
+     [
+      "Isoniazid",
+      "Hepatocellular, weeks to months"
+     ],
+     [
+      "Amoxicillin clavulanate",
+      "Cholestatic, delayed weeks"
+     ],
+     [
+      "Phenytoin",
+      "Hepatocellular with hypersensitivity features"
+     ],
+     [
+      "Statins",
+      "Hepatocellular, dose related risk"
+     ],
+     [
+      "Methotrexate",
+      "Fibrosis with chronic low dose use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two mechanisms lead to injury: **intrinsic** hepatotoxicity (dose dependent, predictable, e.g. paracetamol) and **idiosyncratic** injury (unpredictable, immune or metabolic). **Paracetamol** above 4 g daily causes intrinsic injury via glutathione depletion and **NAPQI** accumulation. **Immune idiosyncratic** injury shows fever, rash, eosinophilia and autoantibodies. **Metabolic idiosyncratic** injury is silent and dose related only in part.",
+   "say": "Intrinsic hepatotoxicity is dose dependent and is predictable in affected patients. Paracetamol above four grams daily causes intrinsic injury via glutathione depletion. Immune idiosyncratic injury is marked by fever and rash and eosinophilia and autoantibodies. Metabolic idiosyncratic injury is silent and is dose related only in part often.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatocellular pattern** (transaminases above 2 times normal) is common with isoniazid, halothane and statins. **Cholestatic pattern** (alkaline phosphatase above 2 times normal) is common with amoxicillin clavulanate and anabolic steroids. **Mixed pattern** falls between the two and is common with sulfonamides. Pattern is best judged by the **R ratio** (ALT divided by alkaline phosphatase).",
+   "say": "Hepatocellular pattern is common with isoniazid and halothane and statins. Cholestatic pattern is common with amoxicillin clavulanate and anabolic steroids. Mixed pattern falls between the two and is common with sulfonamides. The R ratio is the test which judges the pattern of liver injury well.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hepatocellular injury",
+     "points": [
+      "ALT rises most",
+      "Isoniazid, halothane",
+      "Acute failure risk",
+      "R ratio above five"
+     ]
+    },
+    "right": {
+     "title": "Cholestatic injury",
+     "points": [
+      "ALP rises most",
+      "Amoxicillin clavulanate",
+      "Prolonged course",
+      "R ratio below two"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **first test** is liver enzymes with bilirubin, prothrombin time and eosinophil count. **Viral serology** (hepatitis A through E), **autoimmune markers** and **paracetamol level** exclude common mimics. **Liver biopsy** shows portal eosinophils, granulomas and canalicular cholestasis in drug injury. **Rechallenge** is diagnostic but is never performed for confirmation because it can cause fatal failure.",
+   "say": "The first test is liver enzymes with bilirubin and prothrombin time and eosinophil count. Viral serology and autoimmune markers are the exclusion set which rules out common mimics well. Liver biopsy is the histology test which shows portal eosinophils and granulomas in drug injury. Rechallenge is diagnostic but is never performed because it can cause fatal failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Enzymes and bilirubin"
+     },
+     {
+      "id": "b",
+      "label": "Exclude viral and autoimmune disease"
+     },
+     {
+      "id": "c",
+      "label": "Drug history and RUCAM score"
+     },
+     {
+      "id": "d",
+      "label": "Liver biopsy if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cornerstone is **early withdrawal** of the culprit drug and supportive care with antiemetics and hydration. **N acetylcysteine** is the specific antidote for paracetamol poisoning given intravenously or orally. **Acetaminophen** dosing above 4 g daily should be avoided with regular alcohol use. **Antitubercular therapy** needs expert modification with ethambutol and levofloxacin sparing hepatotoxins during recovery.",
+   "say": "Early withdrawal of the culprit drug is the cornerstone of management in drug injury. N acetylcysteine is the specific antidote for paracetamol poisoning in patients. Paracetamol dosing above four grams daily should be avoided with regular alcohol use. Antitubercular therapy needs expert modification during recovery of liver injury overall.",
+   "vis": null
+  },
+  {
+   "tx": "**Acetaminophen** toxicity is treated with N acetylcysteine ideally within 8 hours of overdose. Standard regimen is 150 mg/kg over 1 hour, then 50 mg/kg over 4 hours. **Rumack Matthew nomogram** applies only to single acute ingestion between four and 24 hours. **Activated charcoal** is useful within 1 hour of ingestion and is not routinely recommended.",
+   "say": "N acetylcysteine is the treatment which is ideal within eight hours of overdose. The standard regimen has one hundred fifty milligrams per kilogram over one hour period. Rumack Matthew nomogram is valid only for single acute ingestion between four and twenty four hours. Activated charcoal is useful within one hour of ingestion and is not routinely recommended.",
+   "vis": null
+  },
+  {
+   "tx": "**Hy law** carries about 10% mortality in hepatocellular drug injury and 5 to 50% in mixed injury. **Acute liver failure** is drug related in about 11% of Western cases. **Chronic drug injury** leads to fibrosis with methotrexate and to veno occlusive disease with azathioprine. Long term survivors after severe DILI need monitoring for chronic cholestasis and ductopenia.",
+   "say": "Hy law carries about ten percent mortality in hepatocellular drug injury cases. Acute liver failure is drug related in about eleven percent of Western cases overall. Chronic drug injury leads to fibrosis with methotrexate and to veno occlusive disease. Long term survivors after severe injury need monitoring for chronic cholestasis.",
+   "vis": null
+  },
+  {
+   "tx": "**Flucloxacillin** and other penicillins cause prolonged cholestatic injury with slow recovery. **Anabolic steroids** cause bland cholestasis with very high bilirubin and minimal inflammation. **Halothane hepatitis** is an immune idiosyncratic injury after anaesthesia. **Polypharmacy** masks the culprit, so a structured drug timeline with exact start dates is essential before blaming any single agent.",
+   "say": "Flucloxacillin and other penicillins cause prolonged cholestatic injury with slow recovery. Anabolic steroids cause bland cholestasis with very high bilirubin and minimal inflammation. Halothane hepatitis is an immune idiosyncratic injury which follows anaesthesia exposure. Polypharmacy masks the culprit and a structured drug timeline is essential before blaming any single agent.",
+   "vis": null
+  },
+  {
+   "tx": "Always record the exact start and stop dates of every drug including over the counter and herbal agents. **Eosinophilia** favours immune idiosyncratic injury, while **neutrophil predominance** favours intrinsic injury. **Alanine transaminase** above 3 times normal with bilirubin above 2 times normal fulfils Hy law. **Prothrombin time** prolongation predicts poor outcome better than transaminase levels alone.",
+   "say": "Always record the exact start and stop dates of every drug including herbal agents. Eosinophilia is a feature of immune idiosyncratic injury and neutrophil predominance is a feature of intrinsic injury. Alanine transaminase above three times normal with bilirubin above two times normal is consistent with Hy law. Prothrombin time prolongation is a better predictor of poor outcome than transaminase levels alone.",
+   "vis": null
+  },
+  {
+   "tx": "Keep the **drug injury numbers** in one place for rapid recall during ward rounds and viva examinations. The table fixes Hy law cutoffs, paracetamol risk dose, N acetylcysteine timing, R ratio bands and the commonest culprits worldwide. Use it with the clinical pattern you have just chosen in the case.",
+   "say": "This revision table is the highest yield summary of drug induced liver injury numbers. Hy law has alanine transaminase above three times normal with bilirubin above two times normal. Paracetamol risk is above four grams daily and N acetylcysteine works best within eight hours. The R ratio and commonest culprits are also included here for recall.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Cutoff or rule"
+    ],
+    "rows": [
+     [
+      "Hy law ALT threshold",
+      "Above three times normal"
+     ],
+     [
+      "Hy law bilirubin threshold",
+      "Above two times normal"
+     ],
+     [
+      "Paracetamol risk dose",
+      "Above four grams daily"
+     ],
+     [
+      "NAC best window",
+      "Within eight hours"
+     ],
+     [
+      "R ratio hepatocellular",
+      "Above five"
+     ],
+     [
+      "R ratio cholestatic",
+      "Below two"
+     ],
+     [
+      "India commonest cause",
+      "Antitubercular therapy"
+     ],
+     [
+      "West commonest cause",
+      "Amoxicillin clavulanate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

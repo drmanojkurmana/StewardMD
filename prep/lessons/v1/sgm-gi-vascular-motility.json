@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "sgm-gi-vascular-motility",
+ "subject": "ss-general-medicine",
+ "title": "Mesenteric Ischaemia and Motility Emergencies",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Mesenteric ischaemia** is loss of intestinal blood flow causing mucosal injury then transmural necrosis. **Acute ischaemia** presents abruptly with severe pain, while **chronic mesenteric ischaemia** causes postprandial food fear and weight loss. **Superior mesenteric artery embolism** accounts for about 40% of acute cases. Mortality exceeds 50% once transmural necrosis is established.",
+   "say": "Mesenteric ischaemia is defined by loss of intestinal blood flow causing mucosal injury and necrosis. Acute ischaemia presents abruptly with severe pain while chronic ischaemia causes food fear and weight loss. Superior mesenteric artery embolism accounts for many acute cases in practice. Mortality is very high once transmural necrosis is established in patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Atrial fibrillation** predisposes to embolism lodging in the superior mesenteric artery. **Thrombosis** complicates atherosclerotic stenosis with postprandial angina history. **Non occlusive ischaemia** follows low flow states in heart failure, sepsis or dialysis. **Mesenteric venous thrombosis** follows malignancy, pregnancy and thrombophilia. **Vasculitis and dissection** are less common but important in younger patients.",
+   "say": "Atrial fibrillation predisposes to embolism lodging in the superior mesenteric artery in many patients. Thrombosis can complicate atherosclerotic stenosis with postprandial angina history and bruit. Non occlusive ischaemia follows low flow states in heart failure, sepsis or dialysis settings. Mesenteric venous thrombosis follows malignancy, pregnancy and thrombophilia with subacute pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Risk group",
+     "Onset"
+    ],
+    "rows": [
+     [
+      "Embolic",
+      "Atrial fibrillation valvular",
+      "Abrupt severe pain"
+     ],
+     [
+      "Thrombotic",
+      "Atherosclerosis hypertension",
+      "Postprandial pain history"
+     ],
+     [
+      "Non occlusive",
+      "Low flow shock dialysis",
+      "Sick patients pain"
+     ],
+     [
+      "Venous",
+      "Malignancy pregnancy clot",
+      "Subacute bloating pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ischaemic injury** progresses from mucosal shedding to full wall gangrene and perforation. **Bacterial translocation** through necrotic mucosa drives bacteraemia and septic shock. **Reperfusion injury** after embolectomy worsens oedema and free radical damage. **Lactate accumulation** reflects anaerobic metabolism in ischaemic bowel. Early reperfusion salvages bowel but delayed treatment increases resection length and mortality.",
+   "say": "Ischaemic injury progresses from mucosal shedding to full wall gangrene and perforation. Bacterial translocation through necrotic mucosa can drive bacteraemia and septic shock in patients. Reperfusion injury after embolectomy can worsen oedema and tissue damage further. Lactate accumulation reflects anaerobic metabolism and early reperfusion salvages bowel when instituted promptly.",
+   "vis": null
+  },
+  {
+   "tx": "**Pain out of proportion** to examination is the classic early sign in embolic disease. Later signs include peritonitic tenderness, bloody stools and absent bowel sounds. **Sigmoid volvulus** presents with distension, constipation and coffee bean sign on X ray. **Intussusception** causes colicky pain, currant jelly stools and target sausage mass. **Hirschsprung disease** presents in neonates with delayed meconium passage.",
+   "say": "Pain out of proportion to examination is the classic early sign in embolic disease. Later signs include peritonitic tenderness, bloody stools and absent bowel sounds. Sigmoid volvulus presents with distension, constipation and coffee bean sign on radiograph. Intussusception causes colicky pain, currant jelly stools and sausage mass in young children.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sigmoid volvulus",
+     "points": [
+      "Elderly constipated patient",
+      "Coffee bean X ray loop",
+      "Bent inner tube imaging"
+     ]
+    },
+    "right": {
+     "title": "Caecal volvulus",
+     "points": [
+      "Younger patient pain distension",
+      "Comma whirl sign tomography",
+      "Kidney shaped caecal loop"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Computed tomography angiography** is the gold standard for acute mesenteric ischaemia. First tests include erect abdominal radiograph, blood gas with lactate and Doppler ultrasound for venous thrombosis. **Pneumatosis intestinalis** and portal venous gas are late ominous signs. Abdominal computed tomography without contrast can still show bowel wall thickening. Bedside lactate and base deficit guide resuscitation urgency.",
+   "say": "Computed tomography angiography is the reference standard for acute mesenteric ischaemia diagnosis. First tests include erect abdominal radiograph, blood gas with lactate and Doppler ultrasound. Pneumatosis intestinalis and portal venous gas are late ominous signs in evaluation. Abdominal tomography without contrast can show bowel wall thickening and bedside lactate guides resuscitation urgency.",
+   "vis": null
+  },
+  {
+   "tx": "**Emergency embolectomy** through laparotomy is definitive for embolic occlusion. **Intra arterial papaverine infusion** and thrombolysis help selected superior mesenteric artery thrombosis. **Bowel resection** is required when transmural necrosis or perforation is found. **Heparin anticoagulation** prevents extension and supports venous thrombosis management. **Broad spectrum antibiotics** and aggressive fluid resuscitation are started at diagnosis.",
+   "say": "Emergency embolectomy through laparotomy is definitive therapy for embolic occlusion in patients. Intra arterial infusion and thrombolysis can help selected arterial thrombosis in suitable cases. Bowel resection is required when transmural necrosis or perforation is found intraoperatively. Heparin anticoagulation can prevent extension and broad spectrum antibiotics are started at diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resuscitate antibiotics heparin"
+     },
+     {
+      "id": "b",
+      "label": "CT angiography diagnose"
+     },
+     {
+      "id": "c",
+      "label": "Embolectomy or intervention"
+     },
+     {
+      "id": "d",
+      "label": "Second look resection stoma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sigmoid volvulus** is managed by flexible sigmoidoscopy with flatus tube decompression. **Neostigmine 2 mg** intravenous reverses Ogilvie syndrome with colonic distension without mechanical obstruction. **Air enema reduction** is first line for intussusception in haemodynamically stable children. **Hirschsprung disease** requires rectal suction biopsy showing aganglionic segment. The **World Society of Emergency Surgery guidelines** endorse early angiography and damage control laparotomy.",
+   "say": "Sigmoid volvulus is managed by flexible sigmoidoscopy with flatus tube decompression in patients. Neostigmine can reverse Ogilvie syndrome with colonic distension without mechanical obstruction effectively. Air enema reduction is first line therapy for intussusception in stable children with careful monitoring. Hirschsprung disease requires rectal biopsy showing aganglionic segment in diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute intestinal pseudo obstruction** presents with massive colonic dilatation without transition zone. **Mechanical obstruction** shows transition point with air fluid levels and collapsed distal bowel. **Peritonitis with free air** indicates perforation and needs emergency laparotomy. **Short bowel syndrome** follows massive resection with malabsorption and dependency. **Intestinal parasites** such as Ascaris can still obstruct in paediatric practice.",
+   "say": "Acute intestinal pseudo obstruction presents with massive colonic dilatation without transition zone. Mechanical obstruction shows transition point with air fluid levels and collapsed distal bowel. Peritonitis with free air indicates perforation and it needs emergency laparotomy in patients. Short bowel syndrome follows massive resection with malabsorption and dependency on parenteral support.",
+   "vis": null
+  },
+  {
+   "tx": "**Pain out of proportion** should never be dismissed when atrial fibrillation is present. **Bloody diarrhoea with pain** in a shocked patient suggests ischaemia rather than gastroenteritis. **Coffee bean sign** points to sigmoid volvulus while whirl sign points to caecal volvulus. **Currant jelly stool** with sausage mass suggests intussusception over dysentery. **Neostigmine is contraindicated** in mechanical obstruction and bradycardia.",
+   "say": "Pain out of proportion should never be dismissed when atrial fibrillation is present in a patient. Bloody diarrhoea with pain in a shocked patient suggests ischaemia rather than gastroenteritis. Coffee bean sign points to sigmoid volvulus while whirl sign points to caecal volvulus in imaging. Currant jelly stool with sausage mass suggests intussusception over dysentery in young children.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis for **acute ischaemia** is grave when diagnosis is delayed beyond 6 hours. **Chronic ischaemia** improves markedly after revascularisation with stenting or bypass. **Volvulus and intussusception** have good outcomes when reduced promptly before gangrene. **Hirschsprung disease** has excellent results after corrective pull through surgery. Early recognition and referral remain the strongest predictors of survival.",
+   "say": "Prognosis for acute ischaemia is grave when diagnosis is delayed beyond several hours in practice. Chronic ischaemia improves markedly after revascularisation with stenting or bypass surgery. Volvulus and intussusception have good outcomes when reduced promptly before gangrene occurs. Hirschsprung disease has excellent results after corrective surgery and early referral improves survival.",
+   "vis": null
+  },
+  {
+   "tx": "Revise **mesenteric ischaemia** (gut blood loss emergency) with pain out of proportion and lactate rise, confirmed by computed tomography angiography as **gold standard**. Recall **Ogilvie syndrome** reversed by 2 mg neostigmine, sigmoid volvulus **coffee bean** loop, intussusception reduced by air enema, and **Hirschsprung disease** proved by aganglionic rectal biopsy.",
+   "say": "You should recall gold standard angiography and the classic pain proportion mismatch in embolism. Neostigmine can reverse Ogilvie syndrome while air enema reduces intussusception in stable children. Hirschsprung disease needs aganglionic biopsy proof for confirmation in all cases. Embolectomy remains definitive therapy for superior mesenteric embolism presenting early with ischaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Gold standard",
+      "Computed tomography angiography"
+     ],
+     [
+      "Classic sign",
+      "Pain out of proportion"
+     ],
+     [
+      "Sigmoid sign",
+      "Coffee bean X ray loop"
+     ],
+     [
+      "Intussusception",
+      "Currant jelly sausage mass"
+     ],
+     [
+      "Ogilvie drug",
+      "Neostigmine two milligrams"
+     ],
+     [
+      "Effective reduction",
+      "Air enema stable children"
+     ],
+     [
+      "Hirschsprung proof",
+      "Rectal biopsy aganglionic"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

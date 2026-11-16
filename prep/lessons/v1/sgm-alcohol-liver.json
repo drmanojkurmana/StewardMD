@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sgm-alcohol-liver",
+ "subject": "ss-general-medicine",
+ "title": "Alcohol-Related Liver Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Alcohol related liver disease** (ALD, liver injury from prolonged heavy drinking) is considered when intake stays above 40 g of ethanol daily in men and 20 g daily in women. 10 to 20% of heavy drinkers develop clinically important disease, while only a minority progress to cirrhosis quickly. Audit tools such as AUDIT-C (a three item screening questionnaire) flag risky drinking in clinic. Binge pattern and low nutrition raise risk further.",
+   "say": "Alcohol related liver disease is liver injury from prolonged heavy drinking in many patients. It is considered when intake stays above forty grams daily in men and twenty grams daily in women. Ten to twenty per cent of heavy drinkers develop clinically important disease over time. Audit tools such as AUDIT-C identify risky drinking in clinic practice for early counsel.",
+   "vis": null
+  },
+  {
+   "tx": "The spectrum runs from **alcoholic steatosis** (fatty liver of drinkers, reversible in weeks of abstinence) through alcoholic hepatitis to cirrhosis with portal hypertension. Fatty change appears within days of binge drinking and often regresses quickly when drinking stops. Hepatitis adds neutrophil infiltration, ballooned cells, and Mallory hyaline on histology. Cirrhosis is macronodular and can also occur without a hepatitis stage in some patients.",
+   "say": "The spectrum runs from alcoholic steatosis through alcoholic hepatitis to cirrhosis with portal hypertension. Fatty change appears within days of binge drinking in many patients. It is often reversible within weeks when drinking stops for a few weeks. Hepatitis adds neutrophil infiltration, ballooned cells, and Mallory hyaline on histology in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Histology",
+     "Reversibility"
+    ],
+    "rows": [
+     [
+      "Steatosis",
+      "Fat in hepatocytes",
+      "Reversible in weeks"
+     ],
+     [
+      "Hepatitis",
+      "Ballooning, neutrophils",
+      "May progress or resolve"
+     ],
+     [
+      "Fibrosis",
+      "Pericellular collagen",
+      "Early change reversible"
+     ],
+     [
+      "Cirrhosis",
+      "Nodules, portal hypertension",
+      "Irreversible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic heavy drinking with poor diet, male sex, and obesity raises susceptibility, while female sex lowers the threshold for injury. Gut permeability rises, so **endotoxin** (lipopolysaccharide from gut bacteria) reaches the liver and primes immune injury. Mitochondrial dysfunction and acetaldehyde toxicity add oxidative stress to simple fat accumulation. Vitamin E and other antioxidant defences fall in malnourished patients, which accelerates collateral damage.",
+   "say": "Chronic heavy drinking with poor diet and obesity raises susceptibility to liver injury. Gut permeability rises with drinking and endotoxin reaches the liver in such patients. Mitochondrial dysfunction and acetaldehyde toxicity increase oxidative stress and fat accumulation. Vitamin defences fall in malnourished patients and that change can accelerate collateral damage.",
+   "vis": null
+  },
+  {
+   "tx": "Ethanol passes through alcohol dehydrogenase (ADH, a liver enzyme) to acetaldehyde, then to acetate for energy. **CYP2E1** (a microsomal enzyme induced by chronic drinking) creates more reactive oxygen species per gram of ethanol. The induced pathway explains higher injury per drink in chronic users. Acetate fuels fat synthesis, so steatosis worsens even when oxidant injury stays controlled.",
+   "say": "Ethanol passes through liver enzymes to acetaldehyde and then to acetate for energy in the body. C Y P two E one is a microsomal enzyme that is induced by chronic drinking over time. The induced pathway explains higher injury per drink in chronic users as a rule. Acetate fuels fat synthesis and steatosis worsens even when oxidant injury stays controlled.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chronic drinking"
+     },
+     {
+      "id": "b",
+      "label": "CYP2E1 induced, oxidants rise"
+     },
+     {
+      "id": "c",
+      "label": "Fat and inflammation build"
+     },
+     {
+      "id": "d",
+      "label": "Hepatitis or cirrhosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early disease often stays silent, with smooth hepatomegaly and tender liver in hepatitis. Stigmata include spider naevi, palmar erythema, gynecomastia, testicular atrophy, Dupuytren contracture, and parotid enlargement. Jaundice with fever, leukocytosis, and tender hepatomegaly marks **alcoholic hepatitis** (an inflamed alcoholic liver with systemic upset), often with poor appetite and vomiting. Ascites, encephalopathy, and spider naevi signal advanced cirrhosis.",
+   "say": "Early disease often remains silent, with smooth hepatomegaly and a tender liver in hepatitis. Stigmata include spider naevi, palmar erythema, gynecomastia, and testicular atrophy in these patients. Jaundice with fever, leukocytosis, and tender hepatomegaly marks alcoholic hepatitis in this stage. Ascites and encephalopathy can signal advanced cirrhosis in such patients in late disease.",
+   "vis": null
+  },
+  {
+   "tx": "Aspartate aminotransferase (AST) above aspartate alanine ratio with AST below 300 to 400 IU/L is classic for alcoholic disease. **Gamma glutamyl transferase** (GGT, an enzyme raised by induction) rises with enzyme induction and shows high values. Complete blood count shows macrocytosis without anaemia in many patients, with low platelets from marrow suppression. Ultrasound shows bright liver with hepatomegaly, and biopsy is unnecessary in clear cases.",
+   "say": "AST with an aspartate to alanine ratio above two and AST below three hundred to four hundred units is classic for alcoholic disease. GGT rises with enzyme induction and shows high values in such patients. The blood count often has macrocytosis without anaemia in these patients in this stage. Ultrasound has a bright appearance with hepatomegaly and biopsy is unnecessary in clear cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alcoholic hepatitis",
+     "points": [
+      "Jaundice, fever, leukocytosis",
+      "AST under 400 units",
+      "Tender hepatomegaly",
+      "Maddrey score guides steroids"
+     ]
+    },
+    "right": {
+     "title": "Alcoholic steatosis",
+     "points": [
+      "Silent or mild pain",
+      "Bright liver on ultrasound",
+      "Reverses with abstinence",
+      "No biopsy needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Abstinence is the only therapy that reverses steatosis and stabilises early fibrosis, with relapse in most who resume drinking. **Thiamine** (vitamin B1, given before glucose to prevent Wernicke encephalopathy) is started first, often 300 mg intravenously daily. Nutrition needs 30 to 40 kcal/kg with protein near 1.2 to 1.5 g/kg daily. Electrolyte and zinc correction support recovery in malnourished patients.",
+   "say": "Abstinence is the only therapy that reverses steatosis and stabilises early fibrosis in such patients. Thiamine is started first and it is also given before glucose to prevent Wernicke encephalopathy. Nutrition needs thirty to forty kilocalories per kilogram with protein near one point two grams daily. Electrolyte correction and zinc replacement can support recovery in malnourished patients.",
+   "vis": null
+  },
+  {
+   "tx": "Severe alcoholic hepatitis with **Maddrey discriminant function** (a prognosis score from bilirubin and prothrombin time) above 32 is treated first with **prednisolone** (40 mg daily for 28 days) after infection is excluded. Lille score above 0.45 at day 7 marks non response and stops steroids. N-acetylcysteine as an adjunct improves short term survival in some trials. Antibiotics, diuretics, and lactulose treat infection, ascites, and encephalopathy in parallel.",
+   "say": "Severe alcoholic hepatitis with Maddrey score above thirty two is treated first with prednisolone for twenty eight days. Infection must be excluded before steroids are started in such patients as a rule. Lille score above zero point four five at day seven indicates non response and requires stopping steroids. N-acetylcysteine as an adjunct can improve short term survival in some trials in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Score",
+     "Cutoff",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Maddrey function",
+      "Above 32",
+      "Severe disease, steroids if no infection"
+     ],
+     [
+      "Lille score",
+      "Above 0.45 at day 7",
+      "Non response, stop steroids"
+     ],
+     [
+      "AST in ALD",
+      "Below 300 to 400",
+      "Typical alcoholic pattern"
+     ],
+     [
+      "Nutrition",
+      "30 to 40 kcal per kg",
+      "Plus 1.2 to 1.5 g protein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Withdrawal needs benzodiazepine based protocols with thiamine cover, since seizures and delirium tremens can kill. American Association for the Study of Liver Diseases (AASLD) guidance since 2024 keeps steroids for Maddrey above 32 without infection and urges addiction treatment in parallel. **Baclofen** (a muscle relaxant used for dependence), naltrexone, and acamprosate help selected patients stay abstinent after withdrawal. Liver transplantation is considered after sustained abstinence, though selection rules vary by centre.",
+   "say": "Withdrawal needs benzodiazepine based protocols with thiamine cover in such patients. AASLD guidance keeps steroids for Maddrey above thirty two without infection as a rule. Addiction treatment should run in parallel with liver therapy in these patients. Liver transplantation is considered after sustained abstinence though selection rules vary by centre.",
+   "vis": null
+  },
+  {
+   "tx": "Complications are sepsis, hepatorenal syndrome, gastrointestinal bleed, infection, and **hepatocellular carcinoma** (primary liver cancer), which alcohol raises independent of virus. 5-year survival is above 90% in simple steatosis with abstinence, near 70% in early cirrhosis, and below 30% in severe hepatitis without response. Resumed drinking erases every gain and rekindles hepatitis fast. Recovery of nutrition and abstinence are the strongest predictors of liver outcome.",
+   "say": "Complications are sepsis, hepatorenal syndrome, gastrointestinal bleed, infection, and hepatocellular carcinoma in these patients. Five year survival is above ninety per cent in simple steatosis with abstinence as a rule. Survival is much lower in severe hepatitis without response in such patients. Resumed drinking can erase every gain and it can rekindle hepatitis fast in such cases.",
+   "vis": null
+  },
+  {
+   "tx": "This review fixes the drinking thresholds, the AST pattern, the Maddrey and Lille cutoffs, the steroid course, and the abstinence rule into examination ready memory. Hold the thiamine before glucose order, the **prednisolone dose** (40 mg daily), and the severe hepatitis cutoffs as fixed recall.",
+   "say": "This review gives the drinking thresholds, AST pattern, and severe hepatitis cutoffs for examination ready memory. The thiamine before glucose order should be held as fixed recall in such cases. Prednisolone dose and Maddrey cutoff are expected to be recalled without delay in viva rounds. Abstinence remains the strongest predictor of liver outcome in these patients at any stage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Risk thresholds",
+      "40 g men, 20 g women daily"
+     ],
+     [
+      "AST pattern",
+      "AST under 300 to 400, ratio above 2"
+     ],
+     [
+      "Maddrey severe",
+      "Above 32, steroids if no infection"
+     ],
+     [
+      "Lille non response",
+      "Above 0.45 at day 7"
+     ],
+     [
+      "Steroid course",
+      "Prednisolone 40 mg for 28 days"
+     ],
+     [
+      "Thiamine order",
+      "Before glucose, 300 mg IV daily"
+     ],
+     [
+      "Nutrition",
+      "30 to 40 kcal, protein 1.2 to 1.5 g per kg"
+     ],
+     [
+      "Best predictor",
+      "Abstinence from alcohol"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

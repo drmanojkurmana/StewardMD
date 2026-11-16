@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "sgm-acute-liver-failure",
+ "subject": "ss-general-medicine",
+ "title": "Acute Liver Failure and ACLF",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Acute liver failure** (ALF, massive liver necrosis with coagulopathy and encephalopathy) needs an international normalised ratio of 1.5 or more with hepatic encephalopathy and an illness under 26 weeks in a patient without prior cirrhosis. Mortality without transplantation exceeds 80% in many series. Age, jaundice to encephalopathy interval, and aetiology decide the outcome more than any single laboratory value.",
+   "say": "Acute liver failure is massive liver necrosis with coagulopathy and encephalopathy in a previously normal liver. It needs an international normalised ratio of one point five or more with hepatic encephalopathy and an illness under twenty six weeks. Mortality is above eighty per cent without transplantation in many large series. Age and the jaundice to encephalopathy interval can decide the outcome in such patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute on chronic liver failure** (ACLF, an acute insult on chronic liver disease with organ failures) is defined by the Asian Pacific Association for the Study of Liver Diseases (APASL) as jaundice with coagulopathy and ascites or encephalopathy within 4 weeks. Chronic liver disease includes cirrhosis and noncirrhotic portal hypertension. The European version from the CANONIC study grades organ systems separately. Both systems stress that previous compensated disease matters for the definition.",
+   "say": "Acute on chronic liver failure is an acute insult on chronic liver disease with organ failures in such patients. APASL criteria require jaundice with coagulopathy and ascites or encephalopathy within four weeks. Chronic liver disease is cirrhosis or noncirrhotic portal hypertension in this definition. The European system grades organ systems separately and it also stresses previous compensated disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute liver failure",
+     "points": [
+      "Prior cirrhosis absent",
+      "Illness under twenty six weeks",
+      "INR one point five or more",
+      "Encephalopathy required"
+     ]
+    },
+    "right": {
+     "title": "Acute on chronic failure",
+     "points": [
+      "Chronic disease present",
+      "Acute precipitant found",
+      "Organ failures involved",
+      "Mortality graded by organ count"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Paracetamol overdose** (a dose dependent liver necrosis) is the commonest cause in the West, while hepatitis A, B, and E dominate in India. Other causes include isoniazid, anti epileptics, herbal products, heat stroke, Wilson disease, Budd Chiari syndrome, and autoimmune hepatitis. Acute on chronic failure is precipitated by infection, gastrointestinal bleed, alcohol binge, constipation, and elective surgery. Indeterminate cases remain common even after full workup in many referral centres.",
+   "say": "Paracetamol overdose is the commonest cause of acute liver failure in the West. Hepatitis A, B, and E dominate as causes of acute liver failure in India. Other causes include isoniazid, anti epileptics, herbal products, heat stroke, and Wilson disease in these patients. Infection, gastrointestinal bleed, alcohol binge, and surgery can precipitate acute on chronic failure in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "Massive hepatocyte loss releases danger signals that swell astrocytes and raise **intracranial pressure** (pressure inside the skull). Micro thrombosis in the failing liver worsens tissue ischaemia, while endotoxaemia from gut translocation fuels sepsis. Coagulopathy comes from failed synthesis of all clotting factors, so INR rises fast. Renal failure follows splanchnic vasodilatation and effective hypovolaemia, completing the multi organ picture.",
+   "say": "Massive hepatocyte loss releases danger signals that swell astrocytes and raise intracranial pressure. Micro thrombosis in the failing liver can worsen tissue ischaemia in such patients. Coagulopathy results from failed synthesis of all clotting factors and INR rises fast. Renal failure follows splanchnic vasodilatation and effective hypovolaemia in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Insult kills hepatocytes"
+     },
+     {
+      "id": "b",
+      "label": "Toxins and coagulopathy rise"
+     },
+     {
+      "id": "c",
+      "label": "Brain, kidney, lung affected"
+     },
+     {
+      "id": "d",
+      "label": "ICU support, transplant call"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Encephalopathy is graded from sleep inversion and subtle behaviour change through confusion to stupor and coma. **Asterixis** (flapping tremor on dorsiflexion of the wrist) and fetor hepaticus mark advanced failure. Vomiting, jaundice, bruising, and bleeding are usual, with hypoglycaemia and hypotension in severe disease. Acute on chronic failure adds ascites, hepatorenal physiology, and precipitated infections that mimic sepsis elsewhere.",
+   "say": "Encephalopathy is graded from sleep inversion and subtle behaviour change through confusion to coma. Asterixis and fetor hepaticus are classic markers of advanced liver failure. Vomiting, jaundice, bruising, and bleeding are usual in such patients in this stage. Ascites and precipitated infections can be prominent in acute on chronic failure cases.",
+   "vis": null
+  },
+  {
+   "tx": "First tests are INR, bilirubin, transaminases, creatinine, electrolytes, glucose, arterial lactate, ammonia, and blood cultures with full septic screen. **King's College criteria** (mortality predictor score) predict death for paracetamol and non paracetamol sets using INR, bilirubin, creatinine, and encephalopathy depth. The Model for End Stage Liver Disease (MELD, a score of bilirubin, INR, and creatinine) guides listing in chronic disease. Liver biopsy is reserved for uncertain Wilson or autoimmune disease.",
+   "say": "First tests should include INR, bilirubin, transaminases, creatinine, glucose, arterial lactate, and ammonia in such patients. King's College criteria are strong predictors of death using INR, bilirubin, creatinine, and encephalopathy depth. The Model for End Stage Liver Disease score guides listing in chronic liver disease. Liver biopsy is reserved only for uncertain Wilson or autoimmune disease in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "What it measures",
+     "Use"
+    ],
+    "rows": [
+     [
+      "King's College criteria",
+      "INR, bilirubin, creatinine, coma",
+      "Predict death in ALF"
+     ],
+     [
+      "MELD score",
+      "Bilirubin, INR, creatinine",
+      "List for transplant"
+     ],
+     [
+      "Arterial lactate",
+      "Tissue perfusion",
+      "Early mortality signal"
+     ],
+     [
+      "Ammonia",
+      "Cerebral risk",
+      "Predict intracranial pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every patient needs intensive care unit (ICU) admission with airway protection for grade 3 and 4 encephalopathy. **N-acetylcysteine** (NAC, a glutathione donor) is given by the 21-hour intravenous protocol starting at 150 mg/kg, even in non paracetamol failure. Hypoglycaemia needs constant dextrose, infection needs immediate broad antibiotics, and intracranial pressure needs avoidance of hypoxia and hypercapnia. Sedatives, lactulose excess, and hepatotoxic drugs are avoided.",
+   "say": "Every patient needs intensive care admission with airway protection for advanced encephalopathy grades. N-acetylcysteine is given by the standard intravenous protocol even in non paracetamol failure cases. Hypoglycaemia needs constant dextrose and infection needs immediate broad antibiotics in these patients. Sedatives and hepatotoxic drugs should be avoided throughout the course of treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Encephalopathy care uses **lactulose** (a non absorbed sugar that traps ammonia in the gut) titrated to 2 or 3 soft stools daily. **Rifaximin** (a gut acting antibiotic) at 550 mg twice daily reduces recurrence in cirrhosis. Acute on chronic care adds albumin for hepatorenal physiology, vasopressors for circulatory failure, and early antibiotics for infection. Transplantation is the only definite cure and listing must be urgent once King criteria are met.",
+   "say": "Encephalopathy care uses lactulose titrated to two or three soft stools daily in such patients. Rifaximin is given twice daily and it can reduce recurrence in cirrhosis. Acute on chronic care gives albumin for kidney physiology and vasopressors for circulatory failure. Early antibiotics should be given for infection and transplant listing must be urgent in such patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Support organ systems",
+     "points": [
+      "Airway and ventilation",
+      "Dextrose for hypoglycaemia",
+      "Antibiotics for sepsis",
+      "Albumin and vasopressors"
+     ]
+    },
+    "right": {
+     "title": "Definitive option",
+     "points": [
+      "Transplant is only cure",
+      "List once criteria met",
+      "NAC as bridge only",
+      "No role for detox diets"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cerebral oedema** (brain swelling) with uncal herniation is the feared killer, more in young patients with rapid course. American Association for the Study of Liver Diseases (AASLD) guidance since 2022 keeps NAC for all acute liver failure patients and stresses early transfer to a transplant centre. Asian Pacific Association guidance adds early renal support and infection control for acute on chronic disease. Retransplantation for primary non function needs very early recognition in the first week.",
+   "say": "Cerebral oedema with herniation is the feared killer in rapid course cases. AASLD guidance keeps NAC for all acute liver failure patients and stresses early transfer to a transplant centre. Asian Pacific Association guidance adds early kidney support and infection control in these patients. Early recognition of primary graft non function can allow a retransplantation decision in time.",
+   "vis": null
+  },
+  {
+   "tx": "Complications are **cerebral oedema** (brain swelling), sepsis, hypoglycaemia, coagulopathy with bleeding, renal failure, acute respiratory distress syndrome, and gastrointestinal haemorrhage. Without transplantation, paracetamol induced failure fares better than non paracetamol failure, and older age with deep coma predicts death. A short jaundice to encephalopathy interval under 7 days is hyperacute and often recovers better. Survival to discharge without transplant is common only in hyperacute and milder grades.",
+   "say": "Complications include cerebral oedema, sepsis, hypoglycaemia, bleeding, renal failure, and acute respiratory distress syndrome. Paracetamol induced failure fares better than non paracetamol failure without transplantation as a rule. Older age with deep coma usually can predict death in such patients. A short interval from jaundice to encephalopathy often can predict better recovery in hyperacute cases.",
+   "vis": null
+  },
+  {
+   "tx": "These takeaways summarise the definitions, scores, protocols, and pitfalls that examinations repeatedly target in liver failure. Hold the INR threshold, the **NAC protocol** (21-hour intravenous course), the King cutoffs, and the organ failure grades as fixed recall. Remember the traps that enlarged INR without bleeding still marks severe dysfunction.",
+   "say": "These takeaways summarise the definitions, scores, and protocols that are most often asked in examinations. The INR threshold and the NAC protocol should be held as fixed recall items. King cutoffs and organ failure grades are expected to be recalled without delay in viva rounds. Clear recall of these items should prevent many errors in single best answer questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "ALF threshold",
+      "INR at least 1.5 plus encephalopathy"
+     ],
+     [
+      "Time limit",
+      "Illness under 26 weeks"
+     ],
+     [
+      "NAC protocol",
+      "150 mg per kg over 1 hour first"
+     ],
+     [
+      "Lactulose target",
+      "Two to three soft stools daily"
+     ],
+     [
+      "Rifaximin dose",
+      "550 mg twice daily"
+     ],
+     [
+      "King predictor",
+      "INR, bilirubin, creatinine, coma"
+     ],
+     [
+      "ACL definition",
+      "Jaundice plus organ failure in 4 weeks"
+     ],
+     [
+      "Definitive cure",
+      "Transplantation; ICU support as bridge"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

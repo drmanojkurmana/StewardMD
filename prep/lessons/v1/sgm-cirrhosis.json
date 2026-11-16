@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sgm-cirrhosis",
+ "subject": "ss-general-medicine",
+ "title": "Cirrhosis and portal hypertension",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Cirrhosis** is diffuse fibrosis with regenerative nodules that distort liver architecture and destroy normal lobules. It is the final common pathway of all chronic liver injury and defines the end stage lesion. In India the dominant drivers are alcohol, hepatitis B and non alcoholic fatty liver disease. Once established, fibrosis is largely irreversible even if the cause is removed.",
+   "say": "Cirrhosis is diffuse fibrosis with regenerative nodules that distort the liver architecture. It is the final common pathway of every form of chronic liver injury. In India alcohol is a dominant driver and hepatitis B and fatty liver disease also contribute often. Fibrosis at this stage is largely irreversible even if the causal factor is removed early.",
+   "vis": null
+  },
+  {
+   "tx": "**Alcoholic liver disease** accounts for about 40 to 50% of cirrhosis in most Indian series, with daily drinking above 30 g in men raising risk sharply. **Hepatitis B** is the leading viral cause and often coexists with alcohol. **Metabolic dysfunction associated steatotic liver disease** is rising fast in obesity and diabetes. Other causes include hepatitis C, autoimmune disease, iron overload, copper overload and prolonged cholestasis.",
+   "say": "Alcohol is the dominant cause in most Indian series and accounts for about forty to fifty percent of cases. Daily drinking above thirty grams a day increases the risk of alcohol related cirrhosis sharply. Hepatitis B is the leading viral cause and often coexists with alcohol use in the same patient. Metabolic fatty liver disease is rising rapidly in obesity and type two diabetes. Other causes are hepatitis C and autoimmune disease and iron overload and prolonged cholestasis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Clue to suspect it"
+    ],
+    "rows": [
+     [
+      "Alcohol",
+      "Heavy daily drinking history"
+     ],
+     [
+      "Hepatitis B",
+      "HBsAg positive serology"
+     ],
+     [
+      "Metabolic liver disease",
+      "Obesity, diabetes, metabolic syndrome"
+     ],
+     [
+      "Autoimmune disease",
+      "Young woman, high IgG, ANA positive"
+     ],
+     [
+      "Cholestatic disease",
+      "Chronic itching, bile duct dilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic injury activates **hepatic stellate cells** (perisinusoidal vitamin A storing cells) that deposit collagen in the space of Disse. Fibrosis plus regenerative nodules raise **hepatic vascular resistance** and distort sinusoids. **Portal hypertension** is a hepatic venous pressure gradient of 10 mmHg or more. Splanchnic vasodilation and a hyperdynamic circulation then worsen the gradient and drive ascites formation.",
+   "say": "Chronic injury activates hepatic stellate cells which are perisinusoidal vitamin A storing cells. Fibrosis and regenerative nodules are the reason hepatic vascular resistance rises in advanced liver disease. Portal hypertension is a pressure gradient of ten millimetres of mercury or more. Splanchnic vasodilation is the mechanism which worsens the gradient and drives ascites formation often.",
+   "vis": null
+  },
+  {
+   "tx": "Stigmata include **spider naevi** on the upper trunk, **palmar erythema** and **Dupuytren contracture**. Hypogonadism causes gynaecomastia, loss of axillary hair and testicular atrophy. **Splenomegaly**, shifting dullness from ascites and **caput medusae** with haemorrhoids point to portal hypertension. **Fetor hepaticus** (musty sweet breath) and asterixis signal **hepatic encephalopathy** rather than liver failure itself.",
+   "say": "Stigmata are spider naevi on the upper trunk along with palmar erythema and Dupuytren contracture. Hypogonadism causes gynaecomastia and loss of axillary hair and testicular atrophy in men. Splenomegaly and shifting dullness from ascites point toward portal hypertension strongly. Caput medusae and haemorrhoids also point toward portal hypertension in these patients. Fetor hepaticus is a musty sweet breath odour which signals hepatic encephalopathy clearly.",
+   "vis": null
+  },
+  {
+   "tx": "Start with blood counts, liver panel, albumin, prothrombin time and renal function, plus ultrasound with Doppler. **Pan hepatic workup** includes viral serology, iron studies and autoimmune markers. **Transient elastography** (FibroScan) estimates liver stiffness noninvasively and predicts fibrosis. **Liver biopsy** with histopathology remains the gold standard that shows fibrosis staging, inflammation and cause pattern.",
+   "say": "Initial testing has blood counts and liver panel and albumin and prothrombin time and renal function. Ultrasound with Doppler is the first imaging test which assesses liver texture and portal flow. Pan hepatic workup is needed to find the cause of the liver disease. Transient elastography is a noninvasive test which estimates liver stiffness and predicts fibrosis well. Liver biopsy with histopathology remains the gold standard which shows fibrosis staging and cause pattern clearly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Initial labs and ultrasound"
+     },
+     {
+      "id": "b",
+      "label": "Doppler assessment"
+     },
+     {
+      "id": "c",
+      "label": "Cause workup and elastography"
+     },
+     {
+      "id": "d",
+      "label": "Liver biopsy gold standard"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remove the cause: absolute **alcohol abstinence**, antivirals for hepatitis B and weight reduction in metabolic disease. Sodium restriction and **spironolactone plus furosemide** in a 100 to 40 mg ratio control ascites. Intestinal nonabsorbable disaccharide **lactulose** titrated to 2 to 3 soft stools daily treats encephalopathy. Vaccinate against hepatitis A and B and avoid hepatotoxins and sedatives.",
+   "say": "Removal of the cause is the first step in management of cirrhosis. Absolute alcohol abstinence is mandatory and antivirals are required for hepatitis B infection. Sodium restriction is needed and spironolactone with furosemide in a hundred to forty ratio controls ascites well. Lactulose is titrated to two to three soft stools daily for encephalopathy control. Vaccination against hepatitis A and hepatitis B is also required in every patient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compensated cirrhosis",
+     "points": [
+      "No ascites or bleed",
+      "Child Pugh A stage",
+      "Monitor for decompensation",
+      "Beta blocker if varices"
+     ]
+    },
+    "right": {
+     "title": "Decompensated cirrhosis",
+     "points": [
+      "Ascites, bleed or encephalopathy",
+      "Child Pugh B or C stage",
+      "Needs hospital care",
+      "Transplant evaluation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "According to **Baveno VII** guidelines, carvedilol is the preferred nonselective blocker for clinically significant portal hypertension. Start **carvedilol** at 6.25 milligrams once daily and titrate to 12.5 mg. **Endoscopic variceal ligation** is the alternative when carvedilol is not tolerated or contraindicated. Preemptive transjugular portosystemic shunt within 72 hours of bleed reduces rebleeding and mortality.",
+   "say": "Baveno seventh guidelines state that carvedilol is the preferred nonselective blocker for portal hypertension. Carvedilol is started at six point two five milligrams once daily and is titrated to twelve point five milligrams. Endoscopic variceal ligation is the alternative when carvedilol is not tolerated or is contraindicated. Preemptive transjugular portosystemic shunt within seventy two hours of bleeding reduces rebleeding and mortality.",
+   "vis": null
+  },
+  {
+   "tx": "Variceal bleeding is the most lethal complication and needs transfusion restraint, vasoactive drugs and early endoscopy. **Spontaneous bacterial peritonitis** (neutrophils above 250/µL) needs albumin plus cefotaxime. **Hepatorenal syndrome** is a functional renal failure from splanchnic vasodilation and responds to terlipressin with albumin. **Hepatopulmonary syndrome** causes platypnoea with intrapulmonary shunting.",
+   "say": "Variceal bleeding is the most lethal complication of cirrhosis and needs rapid resuscitation. Spontaneous bacterial peritonitis is defined by neutrophils above two hundred fifty per microlitre in ascitic fluid. Hepatorenal syndrome is a functional renal failure which results from splanchnic vasodilation. Terlipressin with albumin is the treatment which improves renal function in hepatorenal syndrome. Hepatopulmonary syndrome causes platypnoea with intrapulmonary shunting in affected patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Child Pugh score** (bilirubin, albumin, prothrombin time, ascites, encephalopathy) grades severity and predicts surgical mortality. **Model for End Stage Liver Disease** (MELD, creatinine based) lists patients for transplant above 15. 1-year  mortality after first decompensation for variceal bleed is about 20%. 5-year survival without transplant in compensated disease is about 70 to 80%.",
+   "say": "Child Pugh score is a grading system which predicts operative mortality well. Model for End Stage Liver Disease is a creatinine based score which lists patients for transplant. Transplant listing is advised at a score above fifteen overall. One year mortality after first decompensation for variceal bleeding is about twenty percent. Five year survival without transplant in compensated disease is about seventy to eighty percent.",
+   "vis": null
+  },
+  {
+   "tx": "Always search for a precipitant of decompensation: infection, bleeding, constipation, sedatives or high protein load. **Serum ascites albumin gradient** (SAAG) of 1.1 g/dL or more means portal hypertension. **Neutrophil count** above 250/µL in ascites means spontaneous bacterial peritonitis. Encephalopathy needs lactulose and rifaximin, while high protein intake is continued not restricted.",
+   "say": "A clinician should always search for a precipitant of decompensation such as infection or bleeding or constipation. Serum ascites albumin gradient of one point one grams per decilitre or more suggests portal hypertension. Neutrophil count above two hundred fifty per microlitre in ascitic fluid indicates spontaneous bacterial peritonitis. Encephalopathy is treated with lactulose and rifaximin in affected patients. High protein intake is continued and is not restricted in encephalopathy.",
+   "vis": null
+  },
+  {
+   "tx": "This **revision table** collects the most repeated numbers and rules for cirrhosis examinations. It links portal pressure thresholds, ascites fluid cutoffs, diuretic ratios and transplant listing criteria. Keep these values ready for single best answer questions on management and prognosis in daily ward work and competitive entrance examinations.",
+   "say": "This short table is the highest yield revision which is asked very often in examinations. Portal pressure of ten millimetres of mercury or more is clinically significant hypertension. Variceal bleeding risk is high above twelve millimetres of mercury pressure gradient. Ascites albumin gradient cut off and neutrophil count cut off are also included here.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield item",
+     "Threshold or rule"
+    ],
+    "rows": [
+     [
+      "HVPG significant portal hypertension",
+      "Ten millimetres of mercury or more"
+     ],
+     [
+      "HVPG variceal bleed risk",
+      "Twelve millimetres of mercury or more"
+     ],
+     [
+      "SAAG for portal hypertension",
+      "One point one grams per decilitre or more"
+     ],
+     [
+      "SBP ascitic neutrophils",
+      "Two hundred fifty per microlitre or more"
+     ],
+     [
+      "Diuretic ratio spironolactone to furosemide",
+      "One hundred to forty milligrams"
+     ],
+     [
+      "Carvedilol dose",
+      "Six point two five to twelve point five milligrams"
+     ],
+     [
+      "Preemptive TIPS window",
+      "Within seventy two hours of bleed"
+     ],
+     [
+      "MELD transplant listing",
+      "Fifteen or more"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-kidney-transplant",
+ "subject": "ss-general-medicine",
+ "title": "Kidney Transplantation",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Kidney transplantation** (donor kidney replacement) is the best therapy for end stage kidney disease, offering survival advantage over dialysis. **Living donor transplantation** (healthy relative kidney) gives superior outcomes and dominates in India. **Deceased donor transplantation** (brain death organ) serves patients without living donors. **Preemptive transplantation** (before dialysis) gives best results. **Crossmatch positive** (antibody incompatible) transplantation needs desensitisation.",
+   "say": "Kidney transplantation replaces failed kidneys and gives survival advantage over dialysis. Healthy relative donation gives superior outcomes and dominates in India. Brain death donation serves patients without living donors. Transplant before dialysis gives best results. Antibody incompatibility needs special desensitisation protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**HLA matching** (immune compatibility scoring) and **panel reactive antibody** (sensitisation measure) guide donor selection. **Crossmatch** (donor recipient compatibility test) must be negative for standard transplantation. **ABO incompatibility** (blood group mismatch) needs desensitisation with rituximab and plasma exchange. **Kidney donor profile index** (donor quality score) predicts graft longevity. Recipient evaluation needs malignancy screening and infection clearance.",
+   "say": "Immune matching and sensitisation measures guide donor selection. Crossmatch must be negative for standard transplantation. Blood group mismatch needs desensitisation with rituximab and plasma exchange. Donor quality scores predict longevity. Recipients need malignancy screening and infection clearance.",
+   "vis": null
+  },
+  {
+   "tx": "Living donors need normal kidney function, no uncontrolled hypertension and psychological clearance. **Donor kidney function** (GFR above 80) ensures adequate nephron mass. **Laparoscopic donor nephrectomy** (keyhole kidney removal) is standard with faster recovery. **Cadaveric donor** (deceased organ) needs brain death certification and cold storage under 24 hours. **Paired exchange** (donor swap) helps incompatible pairs find matches.",
+   "say": "Living donors need normal kidney function and no uncontrolled hypertension and psychological clearance. Keyhole kidney removal is standard with faster recovery. Deceased donation needs brain death certification and short cold storage. Donor swap helps incompatible pairs find matches.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Workup and listing"
+     },
+     {
+      "id": "b",
+      "label": "Donor evaluation"
+     },
+     {
+      "id": "c",
+      "label": "Crossmatch"
+     },
+     {
+      "id": "d",
+      "label": "Implantation"
+     },
+     {
+      "id": "e",
+      "label": "Induction and maintenance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Delayed graft function** (dialysis need in week one) predicts worse outcomes and needs careful fluid management. **Acute rejection** (immune attack) presents with fever, oliguria and raised creatinine and needs biopsy confirmation. **Tacrolimus** (calcineurin inhibitor) with mycophenolate and steroids is the standard maintenance. **Induction therapy** (antithymocyte globulin) covers high immune risk recipients. **Pneumocystis prophylaxis** (cotrimoxazole) continues for 6 months.",
+   "say": "Dialysis need in the first week predicts worse outcomes and needs careful fluid care. Acute rejection presents with fever and low urine and raised creatinine and needs biopsy. Tacrolimus with mycophenolate and steroids is standard maintenance. Antibody induction covers high risk recipients. Pneumocystis prevention continues for six months.",
+   "vis": null
+  },
+  {
+   "tx": "**Donor specific antibodies** (donor targeting antibodies) cause antibody mediated rejection with microvascular inflammation. **Banff classification** (transplant pathology grading) stages rejection severity. **Plasmapheresis** (antibody removal) with intravenous immunoglobulin treats antibody rejection. **Chronic rejection** (gradual scarring) is the leading late loss cause. **Protocol biopsies** (surveillance samples) detect subclinical rejection.",
+   "say": "Donor targeting antibodies cause antibody mediated rejection with vessel inflammation. Banff grading stages rejection severity. Plasma exchange with immunoglobulin treats antibody rejection. Gradual scarring is the leading late loss cause. Surveillance biopsies detect silent rejection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Donor antibodies present",
+      "Antibody rejection risk",
+      "Plasma exchange"
+     ],
+     [
+      "Acute rejection biopsy",
+      "Immune attack",
+      "Steroid pulse"
+     ],
+     [
+      "Delayed function",
+      "Ischaemic injury",
+      "Dialysis support"
+     ],
+     [
+      "Chronic scarring",
+      "Late loss predictor",
+      "Optimise drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**BK virus nephropathy** (donor originated virus) causes graft dysfunction and needs drug reduction. **Cytomegalovirus disease** (viral invasive illness) is prevented by ganciclovir prophylaxis. **Post transplant diabetes** (new hyperglycaemia) affects 20 percent and needs screening. **Post transplant lymphoproliferative disorder** (EBV driven growth) links to immunosuppression intensity. **Urinary tract infection** (donor kidney infection) is the commonest early infection.",
+   "say": "Donor originated virus causes graft dysfunction and needs drug reduction. Invasive virus disease is prevented by ganciclovir. New diabetes affects twenty percent and needs screening. Virus driven growth links to drug intensity. Kidney infection is the commonest early infection.",
+   "vis": null
+  },
+  {
+   "tx": "**Urinary leak** (tissue fluid escape) presents with drain fluid and rising creatinine and needs stent and drainage. **Renal artery stenosis** (clotted donor artery) causes hypertension and failure and needs angioplasty. **Lymphocele** (lymph collection) compresses bladder and needs marsupialisation. **Ureteric stricture** (blocked urine tube) causes hydronephrosis and needs stenting. **Transplant renal artery thrombosis** (clotted artery) needs urgent surgery.",
+   "say": "Fluid escapes present with drain fluid and rising creatinine and need stent and drainage. Artery narrowing causes hypertension and needs balloon opening. Lymph collections compress the bladder. Blocked urine tubes cause swelling and need stenting. Clotted arteries need urgent surgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cellular rejection",
+     "points": [
+      "T cell tubulitis attack",
+      "Steroid pulse responsive",
+      "Fever and oliguria",
+      "Biopsy graded by Banff"
+     ]
+    },
+    "right": {
+     "title": "Antibody rejection",
+     "points": [
+      "Donor antibody driven",
+      "Plasma exchange needed",
+      "Microvascular inflammation",
+      "Worse graft prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cardiovascular disease** (heart attack and failure) is the leading death cause in transplant recipients. **Metabolic syndrome** (obesity, diabetes, hypertension) accelerates graft loss. **Skin cancers** (squamous cell risk) rise with immunosuppression and need sun protection. **Infection** (tuberculosis in India) needs prophylaxis and screening. **Nonadherence** (stopping drugs) is the commonest preventable late loss cause.",
+   "say": "Heart disease is the leading death cause in recipients. Metabolic syndrome accelerates graft loss. Skin cancers rise with suppression and need sun protection. Tuberculosis needs screening in India. Stopping drugs is the commonest preventable late loss.",
+   "vis": null
+  },
+  {
+   "tx": "Five year graft survival exceeds **85 percent** with living donors and **70 percent** with deceased donors in Indian series. **Patient survival** (recipient survival) exceeds dialysis by large margin at 5 years. **Chronic allograft nephropathy** (gradual scarring) limits long term survival. **Cancer recurrence** (prior tumour return) is guarded by waiting periods. Paediatric outcomes are better than adult series.",
+   "say": "Five year graft survival exceeds eighty five percent with relatives and seventy percent with deceased donors. Patient survival exceeds dialysis by a large margin. Gradual scarring limits long term survival. Prior tumour return is guarded by waiting periods. Paediatric outcomes are better than adult series.",
+   "vis": null
+  },
+  {
+   "tx": "Indian Transplantation of Human Organs Act mandates authorisations and altruistic living donation. **Spousal donation** (partner kidney) is permitted with explanation. **Swap transplantation** (paired exchange) is legal within a kidney pair. Examination traps include ignoring donor specific antibodies, missing BK virus screening and undervaccinating recipients. Preemptive transplantation timing is a favourite viva theme.",
+   "say": "Indian law mandates authorisations and altruistic living donation. Partner donation is permitted with explanation. Swap transplantation is legal within a pair. Traps include ignoring donor antibodies and missing virus screening and undervaccinating recipients. Transplant before dialysis is a favourite viva theme.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers matching, rejection and infection rules for revision in theory and viva examinations. Crossmatch negativity and Banff grading are the most asked points that need precise recall. BK virus and cytomegalovirus prophylaxis are the signature viva themes that need precise recall.",
+   "say": "This table gathers matching and rejection and infection rules for revision. Crossmatch negativity and Banff grading are the most asked points. BK virus and cytomegalovirus prophylaxis are signature viva themes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Essential test",
+      "Crossmatch negative"
+     ],
+     [
+      "Rejection grading",
+      "Banff classification"
+     ],
+     [
+      "Virus nephropathy",
+      "BK virus"
+     ],
+     [
+      "Prophylaxis drug",
+      "Ganciclovir for cytomegalovirus"
+     ],
+     [
+      "Pneumocystis cover",
+      "Cotrimoxazole 6 months"
+     ],
+     [
+      "Survival advantage",
+      "Preemptive over dialysis"
+     ],
+     [
+      "Late loss cause",
+      "Chronic scarring"
+     ],
+     [
+      "Leading death",
+      "Cardiovascular disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
