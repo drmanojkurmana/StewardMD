@@ -122,3 +122,11 @@ body.dark #thSheet{--th-bg:#0f1a21;--th-ink:#e8eef2;--th-muted:#9aabb8;--th-line
 .th-foot{margin:6px 0 0;font-size:12px;line-height:1.4;color:var(--th-muted)}
 @media (max-width:360px){.th-ev{grid-template-columns:52px 1fr;gap:10px}.th-yr{font-size:18px}.th-body{padding:4px 16px 16px}}
 @media (prefers-reduced-motion:reduce){.th-sheet,.th-sheet.on,.th-scrim{transition:none}}
+/* Same green as the card it flips from (owner 2026-11-16: "both should be same green, the flipped one looks darker").
+   The default face takes the Pro banner's own gradient and theme variables, no drifting light pools, no mint ring; the
+   date line is a warm champagne so it is not green on green. An Indian headline keeps its night-and-saffron face. */
+#homeV2#homeV2.rnav .hrf-banner.th-back .th-face:not(.th-india){
+  background:linear-gradient(100deg,var(--hrf-b1,#03463e) 0%,var(--hrf-b2,#05725f) 58%,var(--hrf-b3,#076958) 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -14px 26px -14px rgba(0,0,0,.32)}
+#homeV2#homeV2.rnav .hrf-banner.th-back .th-face:not(.th-india)::before{display:none}
+#homeV2#homeV2.rnav .hrf-banner .th-face:not(.th-india) .th-face-ey{color:#f3d9a8}
