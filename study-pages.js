@@ -691,8 +691,8 @@
       var num=Math.max(1, Math.min(n, parseInt(inp.value,10)||1));
       removeSheet("stP3GoSheet");
       var vv=V(); if(vv&&vv.pg&&vv.pg[num]&&vv.pg[num].el){
-        vv.sc.scrollTop = vv.pg[num].el.offsetTop;
-        if(G.STUDY._v){ /* cur update handled by curPage */ }
+        var horiz=vv.doc&&vv.doc.settings&&vv.doc.settings.scrollDir==="horizontal";
+        if(horiz) vv.sc.scrollLeft = vv.pg[num].el.offsetLeft; else vv.sc.scrollTop = vv.pg[num].el.offsetTop;
         vv.cur=num; refreshTopBar();
       } else {
         /* fallback reload */

@@ -473,7 +473,7 @@ await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._changeTpl
 await page.waitForSelector("#stP3TplSheet");
 await page.evaluate(() => { const btn=[...document.querySelectorAll("#stP3TplSheet [data-tpl]")].find(b=>b.getAttribute("data-tpl")==="grid"); if(btn) btn.click(); });
 await page.waitForTimeout(400);
-ok(await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length === inkBefore), "P3 3.2/3.3: template change keeps the ink");
+ok((await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length)) === inkBefore, "P3 3.2/3.3: template change keeps the ink");
 /* More menu: copy, rotate, outline, go, clear (each one undo step) */
 await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._openAdd; });
 await page.click("#stP3Top [data-act='st-p3-more']");
@@ -542,7 +542,7 @@ await page.waitForSelector("#stP3GoSheet");
 await page.fill("#stP3GotoInp", "2");
 await page.click("#stP3GoSheet [data-act='st-p3-do-goto']");
 await page.waitForTimeout(300);
-ok(await page.evaluate(() => STUDY._state().cur===2 || STUDY._state().sc.scrollTop>50), "P3 top bar: tapping page counter opens Go to Page and jumps");
+ok(await page.evaluate(() => STUDY._state().cur===2 || STUDY._state().sc.scrollTop>50 || STUDY._state().sc.scrollLeft>50), "P3 top bar: tapping page counter opens Go to Page and jumps");
 /* Zoom window exists */
 ok(await page.evaluate(() => !!document.querySelector("#stP3ZoomWindow")), "P3 3.11: Zoom window strip element present");
 
