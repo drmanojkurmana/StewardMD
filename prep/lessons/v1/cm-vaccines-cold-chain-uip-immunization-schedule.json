@@ -13,11 +13,23 @@
    "say": "Dates anchor this lesson. Global expansion began in May 1974 against six diseases and reached India in 1978. The universal programme followed on 19 November 1985, aiming at full eligible coverage by 1990.",
    "vis": {
     "kind": "table",
-    "cols": ["Year", "Milestone"],
+    "cols": [
+     "Year",
+     "Milestone"
+    ],
     "rows": [
-     ["May 1974", "WHO launches Expanded Programme on Immunization"],
-     ["January 1978", "EPI launched in India"],
-     ["19 November 1985", "Universal Immunization Programme launched"]
+     [
+      "May 1974",
+      "WHO launches Expanded Programme on Immunization"
+     ],
+     [
+      "January 1978",
+      "EPI launched in India"
+     ],
+     [
+      "19 November 1985",
+      "Universal Immunization Programme launched"
+     ]
     ]
    }
   },
@@ -27,12 +39,27 @@
    "say": "Four tests judge any schedule. Disease must matter, timing must suit infant immunity, visits must stay few and affordable, and customs must accept it. Every revision debate examiners quote argues on these four axes.",
    "vis": {
     "kind": "table",
-    "cols": ["Test", "Failure looks like"],
+    "cols": [
+     "Test",
+     "Failure looks like"
+    ],
     "rows": [
-     ["Epidemiologically relevant", "Vaccine for a trivial local problem"],
-     ["Immunologically effective", "Dose wasted under maternal antibody"],
-     ["Operationally feasible", "Too many visits, coverage collapses"],
-     ["Socially acceptable", "Sessions clash with work and custom"]
+     [
+      "Epidemiologically relevant",
+      "Vaccine for a trivial local problem"
+     ],
+     [
+      "Immunologically effective",
+      "Dose wasted under maternal antibody"
+     ],
+     [
+      "Operationally feasible",
+      "Too many visits, coverage collapses"
+     ],
+     [
+      "Socially acceptable",
+      "Sessions clash with work and custom"
+     ]
     ]
    }
   },
@@ -42,11 +69,27 @@
    "say": "Three vaccines greet the newborn. BCG intradermally on the left arm, polio drops within fifteen days, hepatitis B into the thigh within twenty four hours. Standard sites let any worker read the record from the body itself.",
    "vis": {
     "kind": "table",
-    "cols": ["Vaccine", "Dose and route", "Site and timing"],
+    "cols": [
+     "Vaccine",
+     "Dose and route",
+     "Site and timing"
+    ],
     "rows": [
-     ["BCG", "0.1 ml intradermal", "Left upper arm, at birth"],
-     ["OPV-0", "2 drops oral", "Within first 15 days"],
-     ["Hepatitis B birth dose", "0.5 ml intramuscular", "Anterolateral thigh, within 24 hours"]
+     [
+      "BCG",
+      "0.1 ml intradermal",
+      "Left upper arm, at birth"
+     ],
+     [
+      "OPV-0",
+      "2 drops oral",
+      "Within first 15 days"
+     ],
+     [
+      "Hepatitis B birth dose",
+      "0.5 ml intramuscular",
+      "Anterolateral thigh, within 24 hours"
+     ]
     ]
    }
   },
@@ -57,24 +100,49 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "6 weeks: pentavalent 1, OPV 1, rota 1, fIPV 1, PCV 1"},
-     {"id": "b", "label": "10 weeks: pentavalent 2, OPV 2, rota 2"},
-     {"id": "c", "label": "14 weeks: pentavalent 3, OPV 3, rota 3, fIPV 2, PCV 2"},
-     {"id": "d", "label": "9 months: MR 1, PCV booster window opens"}
+     {
+      "id": "a",
+      "label": "6 weeks: pentavalent 1, OPV 1, rota 1, fIPV 1, PCV 1"
+     },
+     {
+      "id": "b",
+      "label": "10 weeks: pentavalent 2, OPV 2, rota 2"
+     },
+     {
+      "id": "c",
+      "label": "14 weeks: pentavalent 3, OPV 3, rota 3, fIPV 2, PCV 2"
+     },
+     {
+      "id": "d",
+      "label": "9 months: MR 1, PCV booster window opens"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
-    "tx": "Rows on the national chart run from birth doses, through visits at 6, 10 and 14 weeks, to a 9 month visit and a 16 to 24 month visit. At those three early visits the infant receives **pentavalent vaccine** 0.5 ml intramuscularly, oral polio drops and oral rotavirus vaccine. Fractional inactivated polio vaccine 0.1 ml intradermal joins at 6 and 14 weeks, with pneumococcal conjugate at the same two ages and a booster from 9 to 12 months.",
-    "say": "Rows on the national chart run from birth doses, through visits at 6, 10 and 14 weeks, to a 9 month visit and a 16 to 24 month visit. At those three early visits the infant receives pentavalent vaccine 0.5 ml intramuscularly, oral polio drops and oral rotavirus vaccine. Fractional inactivated polio vaccine 0.1 ml intradermal joins at 6 and 14 weeks, with pneumococcal conjugate at the same two ages and a booster from 9 to 12 months.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n308-cm-vaccines-cold-chain-uip-immunization-schedule.webp",
-      "alt": "National immunisation wall chart with birth, 6 to 14 week, 9 month and 16 to 24 month rows",
-      "caption": "The national schedule is laid out in rows for birth doses, the 6, 10 and 14 week visits, 9 months, and 16 to 24 months. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Rows on the national chart run from birth doses, through visits at 6, 10 and 14 weeks, to a 9 month visit and a 16 to 24 month visit. At those three early visits the infant receives **pentavalent vaccine** 0.5 ml intramuscularly, oral polio drops and oral rotavirus vaccine. Fractional inactivated polio vaccine 0.1 ml intradermal joins at 6 and 14 weeks, with pneumococcal conjugate at the same two ages and a booster from 9 to 12 months.",
+   "say": "Rows on the national chart run from birth doses, through visits at 6, 10 and 14 weeks, to a 9 month visit and a 16 to 24 month visit. At those three early visits the infant receives pentavalent vaccine 0.5 ml intramuscularly, oral polio drops and oral rotavirus vaccine. Fractional inactivated polio vaccine 0.1 ml intradermal joins at 6 and 14 weeks, with pneumococcal conjugate at the same two ages and a booster from 9 to 12 months.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n308-cm-vaccines-cold-chain-uip-immunization-schedule.webp",
+    "alt": "National immunisation wall chart with birth, 6 to 14 week, 9 month and 16 to 24 month rows",
+    "caption": "The national schedule is laid out in rows for birth doses, the 6, 10 and 14 week visits, 9 months, and 16 to 24 months. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Nine months and the second year",
@@ -82,12 +150,27 @@
    "say": "Nine months brings measles-rubella vaccine plus the first vitamin A dose. The second year stacks measles-rubella second dose with DPT and polio boosters. Vitamin A then repeats six-monthly until age five.",
    "vis": {
     "kind": "table",
-    "cols": ["Age", "Due vaccines"],
+    "cols": [
+     "Age",
+     "Due vaccines"
+    ],
     "rows": [
-     ["9 to 12 months", "MR-1, vitamin A 1 ml, JE-1 in endemic districts"],
-     ["16 to 24 months", "MR-2, DPT booster-1, OPV booster, JE-2"],
-     ["5 to 6 years", "DPT booster-2"],
-     ["10 and 16 years", "Td doses"]
+     [
+      "9 to 12 months",
+      "MR-1, vitamin A 1 ml, JE-1 in endemic districts"
+     ],
+     [
+      "16 to 24 months",
+      "MR-2, DPT booster-1, OPV booster, JE-2"
+     ],
+     [
+      "5 to 6 years",
+      "DPT booster-2"
+     ],
+     [
+      "10 and 16 years",
+      "Td doses"
+     ]
     ]
    }
   },
@@ -99,24 +182,32 @@
     "kind": "compare",
     "left": {
      "title": "Arm sites",
-     "points": ["BCG left upper arm, intradermal", "MR right upper arm, subcutaneous", "Td upper arm, intramuscular"]
+     "points": [
+      "BCG left upper arm, intradermal",
+      "MR right upper arm, subcutaneous",
+      "Td upper arm, intramuscular"
+     ]
     },
     "right": {
      "title": "Thigh sites",
-     "points": ["Pentavalent anterolateral thigh", "Hepatitis B birth dose thigh", "DPT boosters thigh in toddlers"]
+     "points": [
+      "Pentavalent anterolateral thigh",
+      "Hepatitis B birth dose thigh",
+      "DPT boosters thigh in toddlers"
+     ]
     }
    }
   },
   {
-    "tx": "The infant map places BCG on the left arm, measles rubella on the right arm, and pentavalent vaccine in the **anterolateral thigh**. Fractional IPV also uses an arm, Japanese encephalitis uses the left arm, and other injectable infant vaccines stay on the thigh, never the buttock. Pregnancy uses the upper arm instead: two Td doses separated by 4 weeks are given early, or one booster if a completed pair falls inside the previous 3 years. Each dose is 0.5 ml.",
-    "say": "The infant map places BCG on the left arm, measles rubella on the right arm, and pentavalent vaccine in the anterolateral thigh. Fractional IPV also uses an arm, Japanese encephalitis uses the left arm, and other injectable infant vaccines stay on the thigh, never the buttock. Pregnancy uses the upper arm instead: two Td doses separated by 4 weeks are given early, or one booster if a completed pair falls inside the previous 3 years. Each dose is 0.5 ml.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n309-cm-vaccines-cold-chain-uip-immunization-schedule.webp",
-      "alt": "Infant body map marking BCG on the left arm, MR on the right arm and pentavalent on the thigh",
-      "caption": "Injection sites are marked with BCG on the left arm, measles rubella on the right arm, and pentavalent vaccine on the anterolateral thigh. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "The infant map places BCG on the left arm, measles rubella on the right arm, and pentavalent vaccine in the **anterolateral thigh**. Fractional IPV also uses an arm, Japanese encephalitis uses the left arm, and other injectable infant vaccines stay on the thigh, never the buttock. Pregnancy uses the upper arm instead: two Td doses separated by 4 weeks are given early, or one booster if a completed pair falls inside the previous 3 years. Each dose is 0.5 ml.",
+   "say": "The infant map places BCG on the left arm, measles rubella on the right arm, and pentavalent vaccine in the anterolateral thigh. Fractional IPV also uses an arm, Japanese encephalitis uses the left arm, and other injectable infant vaccines stay on the thigh, never the buttock. Pregnancy uses the upper arm instead: two Td doses separated by 4 weeks are given early, or one booster if a completed pair falls inside the previous 3 years. Each dose is 0.5 ml.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n309-cm-vaccines-cold-chain-uip-immunization-schedule.webp",
+    "alt": "Infant body map marking BCG on the left arm, MR on the right arm and pentavalent on the thigh",
+    "caption": "Injection sites are marked with BCG on the left arm, measles rubella on the right arm, and pentavalent vaccine on the anterolateral thigh. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Delayed doses never restart the series",
@@ -124,11 +215,23 @@
    "say": "Late children resume, never restart. Earlier doses still count; give the next due dose and continue. Restarting wastes vaccine and visits, and the schedule rejects that belief explicitly. Migrant children benefit most from this rule.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Correct action"],
+    "cols": [
+     "Situation",
+     "Correct action"
+    ],
     "rows": [
-     ["Second dose 3 months late", "Give it now, continue spacing"],
-     ["Family migrated, card lost", "Reconstruct from history and scars, resume"],
-     ["Child ill with mild fever", "Vaccinate, minor illness is no contraindication"]
+     [
+      "Second dose 3 months late",
+      "Give it now, continue spacing"
+     ],
+     [
+      "Family migrated, card lost",
+      "Reconstruct from history and scars, resume"
+     ],
+     [
+      "Child ill with mild fever",
+      "Vaccinate, minor illness is no contraindication"
+     ]
     ]
    }
   },
@@ -140,11 +243,19 @@
     "kind": "compare",
     "left": {
      "title": "Vaccinate anyway",
-     "points": ["Low-grade fever, mild cold", "Diarrhoea on the day", "Malnutrition at any grade"]
+     "points": [
+      "Low-grade fever, mild cold",
+      "Diarrhoea on the day",
+      "Malnutrition at any grade"
+     ]
     },
     "right": {
      "title": "Defer or avoid",
-     "points": ["Severe acute illness, stabilise first", "Live vaccine in significant immunodeficiency", "Most live vaccines in pregnancy"]
+     "points": [
+      "Severe acute illness, stabilise first",
+      "Live vaccine in significant immunodeficiency",
+      "Most live vaccines in pregnancy"
+     ]
     }
    }
   },
@@ -155,12 +266,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Eligible children listed by name"},
-     {"id": "b", "label": "Session held as microplanned"},
-     {"id": "c", "label": "Absent children traced same week"},
-     {"id": "d", "label": "Dropout rate reviewed monthly"}
+     {
+      "id": "a",
+      "label": "Eligible children listed by name"
+     },
+     {
+      "id": "b",
+      "label": "Session held as microplanned"
+     },
+     {
+      "id": "c",
+      "label": "Absent children traced same week"
+     },
+     {
+      "id": "d",
+      "label": "Dropout rate reviewed monthly"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The Expanded Programme reached India in January 1978, and the Universal Immunization Programme launched on 19 November 1985. Birth doses are BCG intradermal on the left arm, oral polio zero within 15 days, and hepatitis B intramuscular within 24 hours. An interrupted schedule never restarts, the next due dose is simply given, and minor illness or malnutrition never defers vaccination.",
+   "say": "High-yield for the exam: The Expanded Programme reached India in January 1978, and the Universal Immunization Programme launched on 19 November 1985. Birth doses are BCG intradermal on the left arm, oral polio zero within 15 days, and hepatitis B intramuscular within 24 hours. An interrupted schedule never restarts, the next due dose is simply given, and minor illness or malnutrition never defers vaccination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "EPI launch in India",
+      "January 1978, six target diseases"
+     ],
+     [
+      "UIP launch date",
+      "19 November 1985 in India"
+     ],
+     [
+      "BCG dose and site",
+      "Intradermal over left upper arm"
+     ],
+     [
+      "OPV zero dose window",
+      "Two drops within first 15 days"
+     ],
+     [
+      "Hepatitis B birth window",
+      "Intramuscular within 24 hours of birth"
+     ],
+     [
+      "Interrupted schedule rule",
+      "Never restart, give next due dose"
+     ],
+     [
+      "False contraindication examples",
+      "Mild fever, diarrhoea and malnutrition vaccinate"
+     ],
+     [
+      "Pentavalent dropout meaning",
+      "Children reached once then lost to follow up"
+     ]
+    ]
    }
   }
  ],

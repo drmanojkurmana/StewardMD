@@ -27,11 +27,19 @@
     "kind": "compare",
     "left": {
      "title": "Vaccinate too early",
-     "points": ["Maternal antibody neutralises vaccine", "Primary vaccine failure commoner", "False sense of protection"]
+     "points": [
+      "Maternal antibody neutralises vaccine",
+      "Primary vaccine failure commoner",
+      "False sense of protection"
+     ]
     },
     "right": {
      "title": "Vaccinate too late",
-     "points": ["Wild measles strikes first", "Infant deaths in the gap", "Outbreak fuel accumulates"]
+     "points": [
+      "Wild measles strikes first",
+      "Infant deaths in the gap",
+      "Outbreak fuel accumulates"
+     ]
     }
    }
   },
@@ -41,11 +49,23 @@
    "say": "Rubella rides along for its fetal damage. Mild in children, catastrophic in the first trimester: cataracts, heart defects, deafness. Childhood coverage protects pregnant women indirectly by shrinking circulation around them.",
    "vis": {
     "kind": "table",
-    "cols": ["Component", "Catastrophe prevented"],
+    "cols": [
+     "Component",
+     "Catastrophe prevented"
+    ],
     "rows": [
-     ["Measles antigen", "Pneumonia, encephalitis, measles deaths"],
-     ["Rubella antigen", "Congenital rubella syndrome"],
-     ["Given at", "9 to 12 months and 16 to 24 months"]
+     [
+      "Measles antigen",
+      "Pneumonia, encephalitis, measles deaths"
+     ],
+     [
+      "Rubella antigen",
+      "Congenital rubella syndrome"
+     ],
+     [
+      "Given at",
+      "9 to 12 months and 16 to 24 months"
+     ]
     ]
    }
   },
@@ -56,12 +76,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Reconstitute with supplied diluent"},
-     {"id": "b", "label": "0.5 ml subcutaneous, right arm"},
-     {"id": "c", "label": "Use within session hours"},
-     {"id": "d", "label": "Discard remainder, no reuse"}
+     {
+      "id": "a",
+      "label": "Reconstitute with supplied diluent"
+     },
+     {
+      "id": "b",
+      "label": "0.5 ml subcutaneous, right arm"
+     },
+     {
+      "id": "c",
+      "label": "Use within session hours"
+     },
+     {
+      "id": "d",
+      "label": "Discard remainder, no reuse"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,12 +115,27 @@
    "say": "Expect a miniature measles echo in a minority: fever and faint rash a week later, vastly milder than wild disease. Rare seizures and platelet falls occur. The dreaded late brain disease follows wild measles, which vaccination prevents.",
    "vis": {
     "kind": "table",
-    "cols": ["Reaction", "Frequency or note"],
+    "cols": [
+     "Reaction",
+     "Frequency or note"
+    ],
     "rows": [
-     ["Fever, mild rash, conjunctivitis", "5 to 15 percent of vaccinees"],
-     ["Febrile seizure", "Rare, recovers fully usually"],
-     ["Thrombocytopenia", "Rare and transient"],
-     ["SSPE", "Follows wild measles, vaccine prevents it"]
+     [
+      "Fever, mild rash, conjunctivitis",
+      "5 to 15 percent of vaccinees"
+     ],
+     [
+      "Febrile seizure",
+      "Rare, recovers fully usually"
+     ],
+     [
+      "Thrombocytopenia",
+      "Rare and transient"
+     ],
+     [
+      "SSPE",
+      "Follows wild measles, vaccine prevents it"
+     ]
     ]
    }
   },
@@ -87,11 +147,19 @@
     "kind": "compare",
     "left": {
      "title": "Do not vaccinate",
-     "points": ["Pregnancy", "Severe immunodeficiency", "Anaphylaxis to a component"]
+     "points": [
+      "Pregnancy",
+      "Severe immunodeficiency",
+      "Anaphylaxis to a component"
+     ]
     },
     "right": {
      "title": "Vaccinate anyway",
-     "points": ["Egg allergy", "Mild illness or malnutrition", "Breastfeeding by mother or child"]
+     "points": [
+      "Egg allergy",
+      "Mild illness or malnutrition",
+      "Breastfeeding by mother or child"
+     ]
     }
    }
   },
@@ -101,24 +169,36 @@
    "say": "Measles sets the hardest threshold. Two doses at ninety five percent in every district, not national averages, because the virus finds the last pockets. Global milestones paired coverage, incidence and mortality targets together.",
    "vis": {
     "kind": "table",
-    "cols": ["Target", "Level demanded"],
+    "cols": [
+     "Target",
+     "Level demanded"
+    ],
     "rows": [
-     ["First dose coverage", "90 percent or more nationally"],
-     ["District coverage", "80 percent minimum, 95 elimination goal"],
-     ["Incidence milestone", "Under 5 cases per million"]
+     [
+      "First dose coverage",
+      "90 percent or more nationally"
+     ],
+     [
+      "District coverage",
+      "80 percent minimum, 95 elimination goal"
+     ],
+     [
+      "Incidence milestone",
+      "Under 5 cases per million"
+     ]
     ]
    }
   },
   {
-    "tx": "Districts painted below 95 percent two dose measles coverage are the outbreak pockets on the map. **Elimination strategy** needs both doses at or above that 95 percent line in the country and in every district, because measles has the highest herd threshold among UIP diseases. Global milestones paired 90 percent coverage for dose one, incidence under 5 per million, and a 95 percent fall in deaths against year 2000. A national average does not cancel a weak district.",
-    "say": "Districts painted below 95 percent two dose measles coverage are the outbreak pockets on the map. Elimination strategy needs both doses at or above that 95 percent line in the country and in every district, because measles has the highest herd threshold among UIP diseases. Global milestones paired 90 percent coverage for dose one, incidence under 5 per million, and a 95 percent fall in deaths against year 2000. A national average does not cancel a weak district.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n313-cm-vaccines-cold-chain-measles-mr-vaccine.webp",
-      "alt": "District map highlighting pockets below 95 percent two dose measles coverage",
-      "caption": "Districts whose two dose measles coverage sits below 95 percent are highlighted as outbreak risk. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Districts painted below 95 percent two dose measles coverage are the outbreak pockets on the map. **Elimination strategy** needs both doses at or above that 95 percent line in the country and in every district, because measles has the highest herd threshold among UIP diseases. Global milestones paired 90 percent coverage for dose one, incidence under 5 per million, and a 95 percent fall in deaths against year 2000. A national average does not cancel a weak district.",
+   "say": "Districts painted below 95 percent two dose measles coverage are the outbreak pockets on the map. Elimination strategy needs both doses at or above that 95 percent line in the country and in every district, because measles has the highest herd threshold among UIP diseases. Global milestones paired 90 percent coverage for dose one, incidence under 5 per million, and a 95 percent fall in deaths against year 2000. A national average does not cancel a weak district.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n313-cm-vaccines-cold-chain-measles-mr-vaccine.webp",
+    "alt": "District map highlighting pockets below 95 percent two dose measles coverage",
+    "caption": "Districts whose two dose measles coverage sits below 95 percent are highlighted as outbreak risk. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Campaigns, catch-up and outbreak response",
@@ -127,12 +207,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Immunity gap identified by data"},
-     {"id": "b", "label": "Wide age-band campaign"},
-     {"id": "c", "label": "Routine system repaired meanwhile"},
-     {"id": "d", "label": "Follow-up campaigns per cohort"}
+     {
+      "id": "a",
+      "label": "Immunity gap identified by data"
+     },
+     {
+      "id": "b",
+      "label": "Wide age-band campaign"
+     },
+     {
+      "id": "c",
+      "label": "Routine system repaired meanwhile"
+     },
+     {
+      "id": "d",
+      "label": "Follow-up campaigns per cohort"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,11 +246,68 @@
    "say": "Vitamin A rides the measles platform. One lakh units at nine months, double thereafter six-monthly to age five. Deficiency turns measles blinding and lethal; therapeutic doses in acute measles save lives where deficiency rules.",
    "vis": {
     "kind": "table",
-    "cols": ["Contact", "Vitamin A dose"],
+    "cols": [
+     "Contact",
+     "Vitamin A dose"
+    ],
     "rows": [
-     ["At 9 months with MR-1", "1 ml, 1 lakh IU oral"],
-     ["16 to 18 months onward", "2 ml, 2 lakh IU oral"],
-     ["Interval thereafter", "Every 6 months to age 5"]
+     [
+      "At 9 months with MR-1",
+      "1 ml, 1 lakh IU oral"
+     ],
+     [
+      "16 to 18 months onward",
+      "2 ml, 2 lakh IU oral"
+     ],
+     [
+      "Interval thereafter",
+      "Every 6 months to age 5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Measles rubella vaccine is given at nine completed months because earlier dosing is neutralised by maternal antibody, while delay leaves infants exposed. The second dose at 16 to 24 months immunises non responders rather than acting as a classic booster. Each dose is 0.5 ml subcutaneous in the right upper arm, reconstituted vials are discarded at session end, and elimination needs 95 percent two dose coverage in every district.",
+   "say": "High-yield for the exam: Measles rubella vaccine is given at nine completed months because earlier dosing is neutralised by maternal antibody, while delay leaves infants exposed. The second dose at 16 to 24 months immunises non responders rather than acting as a classic booster. Each dose is 0.5 ml subcutaneous in the right upper arm, reconstituted vials are discarded at session end, and elimination needs 95 percent two dose coverage in every district.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "First MR dose timing",
+      "Nine completed months of age"
+     ],
+     [
+      "Early dosing failure cause",
+      "Maternal antibody neutralises live vaccine"
+     ],
+     [
+      "Second dose purpose",
+      "Immunises primary non responders, not booster"
+     ],
+     [
+      "MR dose and site",
+      "0.5 ml subcutaneous, right upper arm"
+     ],
+     [
+      "Reconstituted vial fate",
+      "Discard at session end, no reuse"
+     ],
+     [
+      "Common vaccine reaction rate",
+      "Fever or mild rash in 5 to 15 percent"
+     ],
+     [
+      "Egg allergy status",
+      "Not a contraindication for MR vaccine"
+     ],
+     [
+      "Elimination coverage target",
+      "95 percent two doses every district"
+     ]
     ]
    }
   }

@@ -13,11 +13,23 @@
    "say": "Simplest first. All deaths in one year, per thousand mid-year population, in one place. Districts often have nothing else, so planners open with this figure before turning to detailed tables.",
    "vis": {
     "kind": "table",
-    "cols": ["Part", "Definition"],
+    "cols": [
+     "Part",
+     "Definition"
+    ],
     "rows": [
-     ["Numerator", "Deaths from all causes in the year"],
-     ["Denominator", "Estimated mid-year population"],
-     ["Multiplier", "Per 1000 population"]
+     [
+      "Numerator",
+      "Deaths from all causes in the year"
+     ],
+     [
+      "Denominator",
+      "Estimated mid-year population"
+     ],
+     [
+      "Multiplier",
+      "Per 1000 population"
+     ]
     ]
    }
   },
@@ -29,11 +41,19 @@
     "kind": "compare",
     "left": {
      "title": "Older population",
-     "points": ["Many deaths each year", "High crude rate despite good care", "Looks unhealthy on crude figures"]
+     "points": [
+      "Many deaths each year",
+      "High crude rate despite good care",
+      "Looks unhealthy on crude figures"
+     ]
     },
     "right": {
      "title": "Younger population",
-     "points": ["Few deaths each year", "Low crude rate despite poor care", "Looks healthy on crude figures"]
+     "points": [
+      "Few deaths each year",
+      "Low crude rate despite poor care",
+      "Looks healthy on crude figures"
+     ]
     }
    }
   },
@@ -43,12 +63,32 @@
    "say": "One example exposes the trap. The first population shows fifteen point two per thousand against nine point nine, yet the second is worse in every single age group. More old people explain the reversal. Developing countries display the same national pattern.",
    "vis": {
     "kind": "table",
-    "cols": ["Rate per 1000", "Population A", "Population B"],
+    "cols": [
+     "Rate per 1000",
+     "Population A",
+     "Population B"
+    ],
     "rows": [
-     ["Crude death rate", "15.2", "9.9"],
-     ["Age 0 to 1 years", "13.5", "22.6"],
-     ["Age 45 to 64 years", "10.7", "18.8"],
-     ["Age 65 years and above", "59.7", "61.1"]
+     [
+      "Crude death rate",
+      "15.2",
+      "9.9"
+     ],
+     [
+      "Age 0 to 1 years",
+      "13.5",
+      "22.6"
+     ],
+     [
+      "Age 45 to 64 years",
+      "10.7",
+      "18.8"
+     ],
+     [
+      "Age 65 years and above",
+      "59.7",
+      "61.1"
+     ]
     ]
    }
   },
@@ -69,11 +109,23 @@
    "say": "Name one cause at a time. Deaths from tuberculosis, cancer or accidents over the same mid-year population rank the killers inside one community. Trustworthy ranking needs proper medical certification of cause, or error quietly reshapes the table.",
    "vis": {
     "kind": "table",
-    "cols": ["Rate", "Numerator"],
+    "cols": [
+     "Rate",
+     "Numerator"
+    ],
     "rows": [
-     ["Tuberculosis death rate", "Deaths from tuberculosis in the year"],
-     ["Cancer death rate", "Deaths from cancer in the year"],
-     ["Accident death rate", "Deaths from accidents in the year"]
+     [
+      "Tuberculosis death rate",
+      "Deaths from tuberculosis in the year"
+     ],
+     [
+      "Cancer death rate",
+      "Deaths from cancer in the year"
+     ],
+     [
+      "Accident death rate",
+      "Deaths from accidents in the year"
+     ]
     ]
    }
   },
@@ -84,24 +136,53 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "All deaths in the year"},
-     {"id": "b", "label": "Split by cause"},
-     {"id": "c", "label": "Split by age and sex"},
-     {"id": "d", "label": "At-risk groups identified"}
+     {
+      "id": "a",
+      "label": "All deaths in the year"
+     },
+     {
+      "id": "b",
+      "label": "Split by cause"
+     },
+     {
+      "id": "c",
+      "label": "Split by age and sex"
+     },
+     {
+      "id": "d",
+      "label": "At-risk groups identified"
+     }
     ],
-    "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
-    "tx": "**Proportional mortality** asks what share of all deaths, not of the living population, is due to one cause. In a rural example, respiratory disease accounts for 29.47 percent of deaths. That slice can look large even when the age specific death rate is modest, because the denominator is total deaths. Monthly and weekly rates, multiplied by 12 or by 52, stay comparable with annual figures when planners look for groups to protect.",
-    "say": "Proportional mortality asks what share of all deaths, not of the living population, is due to one cause. In a rural example, respiratory disease accounts for 29.47 percent of deaths. That slice can look large even when the age specific death rate is modest, because the denominator is total deaths. Monthly and weekly rates, multiplied by 12 or by 52, stay comparable with annual figures when planners look for groups to protect.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n182-cm-measures-crude-death-rate.webp",
-      "alt": "Pie chart in which respiratory disease occupies 29.47 percent of all rural deaths",
-      "caption": "Respiratory disease forms 29.47 percent of all deaths in the rural proportional mortality pie. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "**Proportional mortality** asks what share of all deaths, not of the living population, is due to one cause. In a rural example, respiratory disease accounts for 29.47 percent of deaths. That slice can look large even when the age specific death rate is modest, because the denominator is total deaths. Monthly and weekly rates, multiplied by 12 or by 52, stay comparable with annual figures when planners look for groups to protect.",
+   "say": "Proportional mortality asks what share of all deaths, not of the living population, is due to one cause. In a rural example, respiratory disease accounts for 29.47 percent of deaths. That slice can look large even when the age specific death rate is modest, because the denominator is total deaths. Monthly and weekly rates, multiplied by 12 or by 52, stay comparable with annual figures when planners look for groups to protect.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n182-cm-measures-crude-death-rate.webp",
+    "alt": "Pie chart in which respiratory disease occupies 29.47 percent of all rural deaths",
+    "caption": "Respiratory disease forms 29.47 percent of all deaths in the rural proportional mortality pie. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Proportional mortality: share of all deaths",
@@ -109,11 +190,27 @@
    "say": "Shares need no population count. Deaths from one cause per hundred total deaths show relative importance at once. Respiratory diseases near twenty nine percent mark one area's major killers. Prematurity near forty six percent of infant deaths pointed services at preterm care.",
    "vis": {
     "kind": "table",
-    "cols": ["Share", "Figure", "Signal"],
+    "cols": [
+     "Share",
+     "Figure",
+     "Signal"
+    ],
     "rows": [
-     ["Respiratory deaths of all deaths", "29.47 percent", "Major killer group in that area"],
-     ["Prematurity deaths of infant deaths", "46.4 percent, rural 1994", "Focus on preterm care"],
-     ["Under-5 deaths of all deaths", "Varies by hygiene level", "Child survival priority"]
+     [
+      "Respiratory deaths of all deaths",
+      "29.47 percent",
+      "Major killer group in that area"
+     ],
+     [
+      "Prematurity deaths of infant deaths",
+      "46.4 percent, rural 1994",
+      "Focus on preterm care"
+     ],
+     [
+      "Under-5 deaths of all deaths",
+      "Varies by hygiene level",
+      "Child survival priority"
+     ]
     ]
    }
   },
@@ -125,11 +222,19 @@
     "kind": "compare",
     "left": {
      "title": "Under-5 proportionate mortality",
-     "points": ["Under-5 deaths over total deaths", "High where hygiene is poor", "Falls as child survival improves"]
+     "points": [
+      "Under-5 deaths over total deaths",
+      "High where hygiene is poor",
+      "Falls as child survival improves"
+     ]
     },
     "right": {
      "title": "Proportional mortality 50-plus",
-     "points": ["Deaths at 50-plus over total deaths", "Rises as populations age", "Higher in developed patterns"]
+     "points": [
+      "Deaths at 50-plus over total deaths",
+      "Rises as populations age",
+      "Higher in developed patterns"
+     ]
     }
    }
   },
@@ -139,11 +244,23 @@
    "say": "Shares hide risk. No living population enters the calculation, so a cause can dominate merely because rivals shrank. Cross population comparisons mislead. Use shares to rank importance inside one population, above all for preventable infectious deaths.",
    "vis": {
     "kind": "table",
-    "cols": ["Question", "Can proportional mortality answer it?"],
+    "cols": [
+     "Question",
+     "Can proportional mortality answer it?"
+    ],
     "rows": [
-     ["Which cause kills the largest share here?", "Yes, within this population"],
-     ["What is my risk of dying from it?", "No, no population denominator"],
-     ["Is district X worse than district Y?", "No, shares distort comparison"]
+     [
+      "Which cause kills the largest share here?",
+      "Yes, within this population"
+     ],
+     [
+      "What is my risk of dying from it?",
+      "No, no population denominator"
+     ],
+     [
+      "Is district X worse than district Y?",
+      "No, shares distort comparison"
+     ]
     ]
    }
   },
@@ -154,12 +271,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Patients diagnosed or treated"},
-     {"id": "b", "label": "Followed for five years"},
-     {"id": "c", "label": "Alive at five years counted"},
-     {"id": "d", "label": "Survival rate in percent"}
+     {
+      "id": "a",
+      "label": "Patients diagnosed or treated"
+     },
+     {
+      "id": "b",
+      "label": "Followed for five years"
+     },
+     {
+      "id": "c",
+      "label": "Alive at five years counted"
+     },
+     {
+      "id": "d",
+      "label": "Survival rate in percent"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Crude death rate counts all deaths in one year per 1000 mid year population. Its main flaw is population composition, so unlike age structures cannot be compared crudely. Proportional mortality uses total deaths as denominator and shows no risk of dying. Swarup index uses deaths at 50 years and above.",
+   "say": "High-yield for the exam: Crude death rate counts all deaths in one year per 1000 mid year population. Its main flaw is population composition, so unlike age structures cannot be compared crudely. Proportional mortality uses total deaths as denominator and shows no risk of dying. Swarup index uses deaths at 50 years and above.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Crude death rate numerator",
+      "All cause deaths in one year"
+     ],
+     [
+      "Crude death rate denominator",
+      "Estimated mid year population, per 1000"
+     ],
+     [
+      "Crude rate main disadvantage",
+      "Age sex composition differs between populations"
+     ],
+     [
+      "Cause specific rate use",
+      "Ranks killers within one population"
+     ],
+     [
+      "Age specific rate meaning",
+      "Deaths in group over group population"
+     ],
+     [
+      "Monthly rate conversion",
+      "Monthly deaths multiplied by 12"
+     ],
+     [
+      "Proportional mortality denominator",
+      "Total deaths, per 100 deaths"
+     ],
+     [
+      "Proportional mortality limit",
+      "Cannot show individual risk of dying"
+     ]
+    ]
    }
   }
  ],

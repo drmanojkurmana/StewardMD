@@ -14,12 +14,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Stabilisation phase: F-75 formula (Days 1 to 2)"},
-     {"id": "b", "label": "Transition phase: Increase feeds gradually (Days 3 to 7)"},
-     {"id": "c", "label": "Rehabilitation phase: F-100 and catch-up growth"},
-     {"id": "d", "label": "Discharge when weight-for-height >= -2 SD"}
+     {
+      "id": "a",
+      "label": "Stabilisation phase: F-75 formula (Days 1 to 2)"
+     },
+     {
+      "id": "b",
+      "label": "Transition phase: Increase feeds gradually (Days 3 to 7)"
+     },
+     {
+      "id": "c",
+      "label": "Rehabilitation phase: F-100 and catch-up growth"
+     },
+     {
+      "id": "d",
+      "label": "Discharge when weight-for-height >= -2 SD"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -39,14 +64,42 @@
    "say": "The ten steps begin by keeping the child warm, correcting low blood sugar, treating dehydration with specialized ReSoMal, fixing electrolytes, and giving broad-spectrum antibiotics.",
    "vis": {
     "kind": "table",
-    "cols": ["Step in management", "Phase of protocol", "Clinical action taken"],
+    "cols": [
+     "Step in management",
+     "Phase of protocol",
+     "Clinical action taken"
+    ],
     "rows": [
-     ["1. Prevent hypoglycemia", "Stabilisation (Day 1-2)", "10% glucose feed immediately; feed every 2 hours"],
-     ["2. Prevent hypothermia", "Stabilisation (Day 1-2)", "Kangaroo mother care; maintain room temp 28-32 C"],
-     ["3. Treat dehydration", "Stabilisation (Day 1-2)", "Oral ReSoMal slowly; avoid standard IV saline"],
-     ["4. Correct electrolytes", "Stabilisation (Day 1-7)", "Give potassium and magnesium; zero extra sodium"],
-     ["5. Treat infection", "Stabilisation (Day 1-7)", "Routine ampicillin and gentamicin to all cases"],
-     ["6. Correct micronutrients", "Stabilisation & Rehab", "Vitamin A, zinc, copper; delay iron until week 2"]
+     [
+      "1. Prevent hypoglycemia",
+      "Stabilisation (Day 1-2)",
+      "10% glucose feed immediately; feed every 2 hours"
+     ],
+     [
+      "2. Prevent hypothermia",
+      "Stabilisation (Day 1-2)",
+      "Kangaroo mother care; maintain room temp 28-32 C"
+     ],
+     [
+      "3. Treat dehydration",
+      "Stabilisation (Day 1-2)",
+      "Oral ReSoMal slowly; avoid standard IV saline"
+     ],
+     [
+      "4. Correct electrolytes",
+      "Stabilisation (Day 1-7)",
+      "Give potassium and magnesium; zero extra sodium"
+     ],
+     [
+      "5. Treat infection",
+      "Stabilisation (Day 1-7)",
+      "Routine ampicillin and gentamicin to all cases"
+     ],
+     [
+      "6. Correct micronutrients",
+      "Stabilisation & Rehab",
+      "Vitamin A, zinc, copper; delay iron until week 2"
+     ]
     ]
    }
   },
@@ -58,11 +111,19 @@
     "kind": "compare",
     "left": {
      "title": "F-75 Starter formula",
-     "points": ["75 kcal and 0.9 g protein / 100 ml", "Low sodium, low osmolarity formula", "Stabilises metabolism without heart failure"]
+     "points": [
+      "75 kcal and 0.9 g protein / 100 ml",
+      "Low sodium, low osmolarity formula",
+      "Stabilises metabolism without heart failure"
+     ]
     },
     "right": {
      "title": "F-100 Catch-up formula",
-     "points": ["100 kcal and 2.9 g protein / 100 ml", "High energy, high protein density", "Drives rapid weight gain (> 10 g/kg/day)"]
+     "points": [
+      "100 kcal and 2.9 g protein / 100 ml",
+      "High energy, high protein density",
+      "Drives rapid weight gain (> 10 g/kg/day)"
+     ]
     }
    }
   },
@@ -73,12 +134,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Rapid excessive carbohydrate feeding"},
-     {"id": "b", "label": "Sudden insulin secretion surge"},
-     {"id": "c", "label": "Severe intracellular shift of phosphate and potassium"},
-     {"id": "d", "label": "Profound hypophosphataemia, arrhythmia, heart failure"}
+     {
+      "id": "a",
+      "label": "Rapid excessive carbohydrate feeding"
+     },
+     {
+      "id": "b",
+      "label": "Sudden insulin secretion surge"
+     },
+     {
+      "id": "c",
+      "label": "Severe intracellular shift of phosphate and potassium"
+     },
+     {
+      "id": "d",
+      "label": "Profound hypophosphataemia, arrhythmia, heart failure"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -98,13 +184,49 @@
    "say": "Anaemia means haemoglobin below eleven grams per decilitre in pregnant mothers and young children, below twelve in non-pregnant women, and below thirteen in adult men.",
    "vis": {
     "kind": "table",
-    "cols": ["Population group", "Normal threshold (g/dl)", "Mild anaemia", "Moderate anaemia", "Severe anaemia"],
+    "cols": [
+     "Population group",
+     "Normal threshold (g/dl)",
+     "Mild anaemia",
+     "Moderate anaemia",
+     "Severe anaemia"
+    ],
     "rows": [
-     ["Children 6-59 months", ">= 11.0 g/dl", "10.0 to 10.9", "7.0 to 9.9", "Less than 7.0 g/dl"],
-     ["Children 5-11 years", ">= 11.5 g/dl", "11.0 to 11.4", "8.0 to 10.9", "Less than 8.0 g/dl"],
-     ["Non-pregnant women (>=15)", ">= 12.0 g/dl", "11.0 to 11.9", "8.0 to 10.9", "Less than 8.0 g/dl"],
-     ["Pregnant women", ">= 11.0 g/dl", "10.0 to 10.9", "7.0 to 9.9", "Less than 7.0 g/dl"],
-     ["Adult men (>= 15 years)", ">= 13.0 g/dl", "11.0 to 12.9", "8.0 to 10.9", "Less than 8.0 g/dl"]
+     [
+      "Children 6-59 months",
+      ">= 11.0 g/dl",
+      "10.0 to 10.9",
+      "7.0 to 9.9",
+      "Less than 7.0 g/dl"
+     ],
+     [
+      "Children 5-11 years",
+      ">= 11.5 g/dl",
+      "11.0 to 11.4",
+      "8.0 to 10.9",
+      "Less than 8.0 g/dl"
+     ],
+     [
+      "Non-pregnant women (>=15)",
+      ">= 12.0 g/dl",
+      "11.0 to 11.9",
+      "8.0 to 10.9",
+      "Less than 8.0 g/dl"
+     ],
+     [
+      "Pregnant women",
+      ">= 11.0 g/dl",
+      "10.0 to 10.9",
+      "7.0 to 9.9",
+      "Less than 7.0 g/dl"
+     ],
+     [
+      "Adult men (>= 15 years)",
+      ">= 13.0 g/dl",
+      "11.0 to 12.9",
+      "8.0 to 10.9",
+      "Less than 8.0 g/dl"
+     ]
     ]
    }
   },
@@ -115,12 +237,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Point-of-care digital hemoglobin testing"},
-     {"id": "b", "label": "Age-stratified IFA supplementation"},
-     {"id": "c", "label": "Biannual school and Anganwadi deworming"},
-     {"id": "d", "label": "Fortified rice distribution via PDS"}
+     {
+      "id": "a",
+      "label": "Point-of-care digital hemoglobin testing"
+     },
+     {
+      "id": "b",
+      "label": "Age-stratified IFA supplementation"
+     },
+     {
+      "id": "c",
+      "label": "Biannual school and Anganwadi deworming"
+     },
+     {
+      "id": "d",
+      "label": "Fortified rice distribution via PDS"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -129,12 +276,32 @@
    "say": "Goitre surveys palpate thyroid glands in schoolchildren aged six to twelve. If more than five percent of surveyed children have an enlarged thyroid, the district is declared endemic.",
    "vis": {
     "kind": "table",
-    "cols": ["Goitre Grade", "Clinical palpation finding", "Visibility"],
+    "cols": [
+     "Goitre Grade",
+     "Clinical palpation finding",
+     "Visibility"
+    ],
     "rows": [
-     ["Grade 0", "No goitre palpable or visible", "Thyroid lobes smaller than child's thumb"],
-     ["Grade 1", "Thyroid palpable but not visible in neutral neck", "Enlarged lobes match or exceed thumb phalanx"],
-     ["Grade 2", "Goitre clearly visible with neck in normal position", "Distinct neck mass visible from a distance"],
-     ["Total Goitre Rate (TGR)", "Sum of Grade 1 + Grade 2 percentages", "Benchmark > 5% defines endemic iodine deficiency"]
+     [
+      "Grade 0",
+      "No goitre palpable or visible",
+      "Thyroid lobes smaller than child's thumb"
+     ],
+     [
+      "Grade 1",
+      "Thyroid palpable but not visible in neutral neck",
+      "Enlarged lobes match or exceed thumb phalanx"
+     ],
+     [
+      "Grade 2",
+      "Goitre clearly visible with neck in normal position",
+      "Distinct neck mass visible from a distance"
+     ],
+     [
+      "Total Goitre Rate (TGR)",
+      "Sum of Grade 1 + Grade 2 percentages",
+      "Benchmark > 5% defines endemic iodine deficiency"
+     ]
     ]
    }
   },
@@ -145,12 +312,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Universal production of iodised salt (30 ppm)"},
-     {"id": "b", "label": "Household salt testing by ASHA using test kits"},
-     {"id": "c", "label": "Urinary iodine excretion monitoring (100-200 mcg/L)"},
-     {"id": "d", "label": "District goitre resurveys every five years"}
+     {
+      "id": "a",
+      "label": "Universal production of iodised salt (30 ppm)"
+     },
+     {
+      "id": "b",
+      "label": "Household salt testing by ASHA using test kits"
+     },
+     {
+      "id": "c",
+      "label": "Urinary iodine excretion monitoring (100-200 mcg/L)"
+     },
+     {
+      "id": "d",
+      "label": "District goitre resurveys every five years"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -161,12 +353,65 @@
     "kind": "compare",
     "left": {
      "title": "Standard iodised salt",
-     "points": ["Contains potassium iodate only", "Prevents goitre and cretinism", "Has no effect on nutritional anaemia"]
+     "points": [
+      "Contains potassium iodate only",
+      "Prevents goitre and cretinism",
+      "Has no effect on nutritional anaemia"
+     ]
     },
     "right": {
      "title": "Double fortified salt (DFS)",
-     "points": ["Contains potassium iodate + encapsulated iron", "Prevents both goitre and iron deficiency anaemia", "Supplies 30% of daily iron needs safely"]
+     "points": [
+      "Contains potassium iodate + encapsulated iron",
+      "Prevents both goitre and iron deficiency anaemia",
+      "Supplies 30% of daily iron needs safely"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Nutrition Rehabilitation Centres admit complicated severe acute malnutrition or failed appetite tests for about 14 days. Stabilisation uses F-75 at 75 kilocalories per 100 millilitres, then F-100 drives catch up growth. ReSoMal treats dehydration, while iron waits until week two. Hypoglycaemia, hypothermia and infection come first.",
+   "say": "High-yield for the exam: Nutrition Rehabilitation Centres admit complicated severe acute malnutrition or failed appetite tests for about 14 days. Stabilisation uses F-75 at 75 kilocalories per 100 millilitres, then F-100 drives catch up growth. ReSoMal treats dehydration, while iron waits until week two. Hypoglycaemia, hypothermia and infection come first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Centre admission criteria",
+      "Complications present or appetite test failed"
+     ],
+     [
+      "Typical admission duration",
+      "About 14 days inpatient care"
+     ],
+     [
+      "F-75 composition",
+      "75 kilocalories, 0.9 grams protein per 100 millilitres"
+     ],
+     [
+      "F-100 composition",
+      "100 kilocalories, 2.9 grams protein per 100 millilitres"
+     ],
+     [
+      "Dehydration fluid choice",
+      "Oral ReSoMal slowly, avoid fluid overload"
+     ],
+     [
+      "Electrolyte rule",
+      "Potassium and magnesium, no extra sodium"
+     ],
+     [
+      "Iron timing rule",
+      "Delay iron until week two"
+     ],
+     [
+      "Refeeding syndrome ions",
+      "Phosphate, potassium, magnesium shift intracellularly"
+     ]
+    ]
    }
   }
  ],
