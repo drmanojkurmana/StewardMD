@@ -1,0 +1,388 @@
+{
+ "v": 1,
+ "module": "shm-thrombophilia-anticoagulation",
+ "subject": "ss-haematology",
+ "title": "Thrombophilia testing DOAC dosing and anticoagulant reversal",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 122 Arterial and Venous Thrombosis",
+  "Harrison Ch 123 Antiplatelet Anticoagulant and Fibrinolytic Drugs",
+  "ASH guidelines on thrombophilia testing 2023"
+ ],
+ "steps": [
+  {
+   "tx": "**Venous thromboembolism** (VTE, clots in veins) starts with **Virchow triad** (stasis, vessel injury, hypercoagulability). **Deep vein thrombosis** (leg clots) presents with unilateral calf pain and swelling. **Pulmonary embolism** (lung clots) causes dyspnoea (breathlessness) and pleuritic chest pain. **Post thrombotic syndrome** (chronic leg damage) follows **20** to **30** percent of leg clots. **Cancer** (malignancy) is the commonest unprovoked VTE clue.",
+   "say": "Virchow triad explains every venous clot through stasis injury and hypercoagulability. Post thrombotic syndrome follows twenty to thirty percent of leg clots. Cancer is the commonest unprovoked VTE clue.",
+   "vis": {
+    "cols": [
+     "Triad limb",
+     "Example",
+     "Seen in"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stasis",
+      "Immobility flight",
+      "Long haul travel"
+     ],
+     [
+      "Vessel injury",
+      "Surgery trauma",
+      "Knee replacement"
+     ],
+     [
+      "Hypercoagulability",
+      "Cancer pregnancy",
+      "Active malignancy"
+     ],
+     [
+      "Outcome",
+      "Post thrombotic 20 to 30",
+      "Leg clots"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Factor V Leiden** (activated protein C resistance mutation) is the commonest inherited thrombophilia, present in **5** percent of the population. Heterozygous carriers carry **3** to **7** fold VTE risk, while homozygous carriers carry far higher risk. **Prothrombin G20210A** (gene mutation) is second commonest with **2** fold risk. **Antithrombin deficiency** (low regulator protein) and **protein C S deficiencies** (low regulator proteins) are rarer but stronger. **Homocysteine** (amino acid) above **15** micromol per litre adds independent risk.",
+   "say": "Factor V Leiden is the commonest inherited thrombophilia worldwide. Heterozygous carriers carry three to seven fold risk. Antithrombin deficiency is rarer but stronger in families.",
+   "vis": {
+    "cols": [
+     "Defect",
+     "Frequency",
+     "Risk strength"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Factor V Leiden",
+      "5 percent people",
+      "3 to 7 fold"
+     ],
+     [
+      "Prothrombin mutation",
+      "1 to 3 percent",
+      "About 2 fold"
+     ],
+     [
+      "Antithrombin low",
+      "Rare under 1",
+      "Strong risk"
+     ],
+     [
+      "Protein C S low",
+      "Rare under 1",
+      "Strong risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antiphospholipid syndrome** (APS, arterial and venous clots with pregnancy loss) needs **lupus anticoagulant** (clotting test), **anticardiolipin** (antibody) or **anti beta 2 glycoprotein** (antibody) antibodies. Criteria need persistence for **12** weeks to exclude transient antiphospholipid antibodies. **Recurrent pregnancy loss** (miscarriage) and **livedo reticularis** (net like skin) complete the syndrome. **Catastrophic APS** (CAPS, multi organ clots) kills **50** percent without plasma exchange plus anticoagulation.",
+   "say": "Antiphospholipid antibodies must persist twelve weeks before APS diagnosis. Recurrent pregnancy loss is a core APS feature. Catastrophic APS kills fifty percent without combined therapy.",
+   "vis": {
+    "cols": [
+     "Antibody",
+     "Test",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Lupus anticoagulant",
+      "Clotting based",
+      "Prolongs aPTT"
+     ],
+     [
+      "Anticardiolipin",
+      "ELISA antibody",
+      "IgG favoured"
+     ],
+     [
+      "Anti beta 2",
+      "ELISA antibody",
+      "High titre counts"
+     ],
+     [
+      "Persistence",
+      "12 weeks required",
+      "Repeat testing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thrombophilia testing needs discipline. **ASH guidelines** (society recommendations) advise against testing in provoked VTE with major triggers. **Antithrombin protein C and S** (regulator proteins) fall during acute clots and on **warfarin** (vitamin K antagonist), so testing waits for recovery. **Factor V Leiden DNA test** (gene test) works anytime, including during clots. **D dimer** (fibrin breakdown marker) never diagnoses thrombophilia itself.",
+   "say": "ASH guidelines oppose thrombophilia testing in provoked VTE cases. Antithrombin falls during acute clots and warfarin therapy. DNA testing works anytime including during acute clots. Timing matters for protein tests in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vte",
+      "label": "VTE event"
+     },
+     {
+      "id": "provoked",
+      "label": "Provoked or unprovoked?"
+     },
+     {
+      "id": "test",
+      "label": "Test only if decision changes"
+     },
+     {
+      "id": "duration",
+      "label": "Duration decision"
+     }
+    ],
+    "edges": [
+     [
+      "vte",
+      "provoked"
+     ],
+     [
+      "provoked",
+      "test"
+     ],
+     [
+      "test",
+      "duration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Duration is the real decision. **Provoked VTE** (surgery, trauma, travel) with major transient risk gets **3** months of anticoagulation. **Unprovoked VTE** (no trigger) gets extended therapy after bleeding risk review. **Recurrent VTE** (second clot) mandates **indefinite anticoagulation** for most patients. **Active cancer VTE** (cancer related clots) needs anticoagulation while cancer is active. **D dimer** (marker) may guide duration in selected unprovoked cases.",
+   "say": "Provoked VTE gets three months of anticoagulation therapy. Unprovoked VTE gets extended therapy after bleeding review. Recurrent VTE mandates indefinite anticoagulation for most patients.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Duration",
+     "Caveat"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Provoked major",
+      "3 months",
+      "Transient trigger gone"
+     ],
+     [
+      "Unprovoked first",
+      "Extended review",
+      "Bleeding risk rules"
+     ],
+     [
+      "Recurrent VTE",
+      "Indefinite",
+      "Unless bleeding high"
+     ],
+     [
+      "Cancer VTE",
+      "While cancer active",
+      "Reassess yearly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Direct oral anticoagulants** (DOACs, pill blood thinners) replaced warfarin for most VTE. **Schedule A** (twice daily Xa inhibitor) is dosed **10** mg twice daily for **7** days, then **5** mg twice daily. **Schedule B** (Xa inhibitor) is **15** mg twice daily for **twenty one** days, then **20** mg daily with food. **Thrombin inhibitor schedule** and **edoxaban** need **5** days of parenteral therapy first. **No routine INR** (clotting test) monitoring is needed.",
+   "say": "Schedule A is dosed at ten milligrams twice daily for seven days. Schedule B is twenty milligrams daily after three weeks. Thrombin inhibitors need five days of parenteral therapy first.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Start dose",
+     "Step down"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Schedule A",
+      "10 mg twice daily",
+      "5 mg after 7 days"
+     ],
+     [
+      "Schedule B",
+      "15 mg twice daily",
+      "20 mg daily after twenty one days"
+     ],
+     [
+      "Thrombin inhibitor",
+      "Parenteral 5 days",
+      "one hundred fifty mg twice daily"
+     ],
+     [
+      "Edoxaban",
+      "Parenteral 5 days",
+      "sixty mg daily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Warfarin** (vitamin K antagonist) survives in APS, valve disease and severe kidney failure. **INR** (international normalised ratio) target is **2** to **3** for venous clots. **Bridging** (heparin cover) suits high risk interruptions like new valves. **Low molecular weight heparin** (LMWH, injection blood thinner) covers pregnancy because **DOACs** (pill thinners) are teratogenic. **Thrombolysis** (clot dissolving drugs) rescues massive pulmonary embolism with shock.",
+   "say": "Warfarin remains the choice in antiphospholipid syndrome and valve disease. INR target is two to three for venous clots. LMWH covers pregnancy because DOACs are teratogenic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warfarin keeps role",
+     "points": [
+      "APS triple positive",
+      "Mechanical valves",
+      "Severe kidney failure"
+     ]
+    },
+    "right": {
+     "title": "DOACs first choice",
+     "points": [
+      "Ordinary VTE",
+      "No INR checks",
+      "Fewer brain bleeds"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reversal knowledge is asked often. **Vitamin K** (phytonadione, antidote vitamin) plus **4F PCC** (four factor prothrombin complex concentrate) reverses warfarin bleeding. **Thrombin inhibitor antidote** (antibody fragment) reverses the **thrombin inhibitor** specifically. **Andexanet alfa** (modified Xa decoy) reverses **factor Xa inhibitors** in life threatening bleeding. **Activated charcoal** (gut binder) within **2** hours helps fresh DOAC overdose.",
+   "say": "Vitamin K with 4F PCC reverses warfarin bleeding fast. Antibody reversal works for thrombin inhibitors in severe bleeding. Andexanet alfa reverses factor Xa inhibitors in bleeding. Supportive care continues during the reversal period.",
+   "vis": {
+    "cols": [
+     "Bleed source",
+     "Antidote",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Warfarin",
+      "Vitamin K plus 4F PCC",
+      "INR 2 to 3 target"
+     ],
+     [
+      "Thrombin inhibitor",
+      "Antibody fragment",
+      "Antibody fragment"
+     ],
+     [
+      "Xa inhibitors",
+      "Andexanet alfa",
+      "Modified Xa decoy"
+     ],
+     [
+      "Fresh overdose",
+      "Activated charcoal",
+      "Within 2 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy and special groups need care. **Pregnancy VTE** (clots in pregnancy) doubles at delivery, so **postpartum prophylaxis** (after birth injections) lasts **6** weeks. **Factor IX concentrate** (replacement protein) has no thrombophilia role but mirrors reversal thinking. **Nephrotic syndrome** (heavy protein urine) loses **antithrombin** (regulator protein) and clots veins, including renal veins. **Trousseau syndrome** (cancer clots) favours LMWH in advanced malignancy.",
+   "say": "Postpartum prophylaxis is given for six weeks in pregnancy VTE cases. Nephrotic syndrome is a cause of antithrombin loss in urine. Trousseau syndrome requires LMWH in advanced malignancy cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "preg",
+      "label": "Pregnancy VTE"
+     },
+     {
+      "id": "lmwh",
+      "label": "LMWH through pregnancy"
+     },
+     {
+      "id": "deliver",
+      "label": "Deliver and bridge"
+     },
+     {
+      "id": "post",
+      "label": "Six weeks postpartum"
+     }
+    ],
+    "edges": [
+     [
+      "preg",
+      "lmwh"
+     ],
+     [
+      "lmwh",
+      "deliver"
+     ],
+     [
+      "deliver",
+      "post"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems love these discriminators. **Factor V Leiden** (mutation) resists **activated protein C**, not antithrombin. **APS** (antibody syndrome) needs **12** week persistence, not one positive test. **Schedule A** needs no parenteral lead in, while **thrombin inhibitor** dosing always needs **5** days of heparin first. **Antibody fragment** reverses **thrombin inhibitors** and never warfarin.",
+   "say": "Factor V Leiden resists activated protein C specifically. APS needs twelve week persistence for diagnosis. Antibody reversal is for thrombin inhibitors and never warfarin today.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Needs lead in heparin",
+     "points": [
+      "Thrombin inhibitor five days",
+      "Edoxaban five days",
+      "Warfarin bridging"
+     ]
+    },
+    "right": {
+     "title": "No lead in needed",
+     "points": [
+      "Schedule A direct start",
+      "Schedule B direct start",
+      "LMWH pregnancy cover"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **Virchow triad** is stasis, injury and hypercoagulability. **Factor V Leiden** affects **5** percent with **3** to **7** fold risk, and **APS needs 12** week persistence. **Schedule A** is **10** mg twice daily for **7** days, and **schedule B** steps down after **twenty one** days. **INR 2 to 3** covers warfarin, and **antibody fragment** reverses **thrombin inhibitors**.",
+   "say": "Factor V Leiden affects five percent of the population. APS needs twelve week persistence for diagnosis. Schedule A starts at ten milligrams twice daily.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Virchow triad",
+      "Stasis injury hypercoagulability",
+      "Three limbs"
+     ],
+     [
+      "Factor V Leiden",
+      "5 percent, 3 to 7 fold",
+      "Commonest defect"
+     ],
+     [
+      "APS persistence",
+      "12 weeks",
+      "Repeat testing"
+     ],
+     [
+      "Schedule A start",
+      "10 mg twice daily",
+      "7 days"
+     ],
+     [
+      "Warfarin target",
+      "INR 2 to 3",
+      "Venous clots"
+     ],
+     [
+      "Antibody fragment",
+      "Specific antibody reversal",
+      "Specific reversal"
+     ]
+    ]
+   }
+  }
+ ]
+}

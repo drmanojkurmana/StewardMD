@@ -1,0 +1,326 @@
+{
+ "v": 1,
+ "module": "shm-hereditary-haemolytic-anaemia",
+ "subject": "ss-haematology",
+ "title": "Hereditary haemolysis membrane enzyme and oxidative defects",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 105 Hemolytic Anemias",
+  "British Society for Haematology guideline on hereditary spherocytosis 2023"
+ ],
+ "steps": [
+  {
+   "tx": "**Hereditary spherocytosis** (HS, membrane loss disease) is the commonest membrane defect, with incidence near **1** in **2000** in northern Europe and autosomal dominant spread in **75** percent. **Ankyrin** (anchor protein), band **3** (anion exchanger) and **spectrin** (membrane skeleton) mutations truncate the membrane, trapping water loss and spherocyte formation. **Osmotic fragility** (salt solution lysis test) picks it up, but **EMA binding** (eosin 5 maleimide binding test) is more specific.",
+   "say": "Hereditary spherocytosis is the commonest membrane defect and usually travels in families. Anchor protein mutations destroy membrane surface. EMA binding is more specific than osmotic fragility.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Detail",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Pattern",
+      "Dominant in 75 percent",
+      "Family screening"
+     ],
+     [
+      "Proteins",
+      "Ankyrin band 3 spectrin",
+      "Membrane loss"
+     ],
+     [
+      "Smear",
+      "Spherocytes",
+      "Pallor absent"
+     ],
+     [
+      "Test",
+      "EMA binding",
+      "More specific"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Elliptocytosis** (oval membrane disease) follows **spectrin** or **protein 4.1** (membrane link protein) faults and often stays mild. **Stomatocytosis** (slit mouthed cells) arises from cation leaks, with hereditary and acquired forms, and overhydration marks the smear. **Acanthocytes** (spiculated cells) cluster in severe liver disease and **McLeod phenotype** (Kell system variant with chorea). Each shape whispers its protein fault.",
+   "say": "Elliptocytosis often stays mild despite striking oval cells. Stomatocytosis arises from cation leaks. Spiculated acanthocytes cluster in liver disease and the McLeod phenotype.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Common membrane faults",
+     "points": [
+      "Spherocytosis dominant",
+      "Elliptocytosis often mild",
+      "Stomatocytosis cation leak"
+     ]
+    },
+    "right": {
+     "title": "Rare membrane clues",
+     "points": [
+      "Acanthocytes liver disease",
+      "McLeod chorea link",
+      "Target cells thalassaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**G6PD deficiency** (glucose 6 phosphate dehydrogenase enzyme lack) is the commonest enzyme defect, X linked and affecting **400** million people. The **hexose monophosphate shunt** (oxidation protective pathway) makes **NADPH** (reducing power) and **glutathione** (antioxidant shield), which detoxify oxidants. Triggers include fava beans in **favism** (acute oxidative haemolysis), rasburicase, primaquine and nitrofurantoin, and cells show **bite** and **blister** damage.",
+   "say": "G6PD deficiency affects four hundred million people worldwide. Favism and oxidant drugs trigger acute haemolysis. Bite and blister cells mark oxidative damage on the smear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trigger",
+      "label": "Oxidant trigger hits"
+     },
+     {
+      "id": "damage",
+      "label": "Haemoglobin precipitates"
+     },
+     {
+      "id": "clear",
+      "label": "Spleen pits Heinz bodies"
+     }
+    ],
+    "edges": [
+     [
+      "trigger",
+      "damage"
+     ],
+     [
+      "damage",
+      "clear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pyruvate kinase deficiency** (PKD, final glycolysis enzyme fault) ranks second among enzyme defects and follows autosomal recessive inheritance. Red cells cannot make enough **ATP** (cell fuel) and suffer membrane failure. **Heinz bodies** (denatured haemoglobin clumps) appear in both G6PD and PKD, and **brilliant cresyl blue** stain reveals them. Neonatal jaundice is often the first clue, sometimes needing exchange transfusion.",
+   "say": "Pyruvate kinase deficiency ranks second among enzyme defects and follows recessive inheritance. Heinz bodies show denatured haemoglobin clumps. Neonatal jaundice is often the first presentation.",
+   "vis": {
+    "cols": [
+     "Defect",
+     "Inheritance",
+     "Clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "G6PD",
+      "X linked",
+      "Bite cells, triggers"
+     ],
+     [
+      "Pyruvate kinase",
+      "Autosomal recessive",
+      "Neonatal jaundice"
+     ],
+     [
+      "GPI deficiency",
+      "Autosomal recessive",
+      "Often severe"
+     ],
+     [
+      "Stain",
+      "Brilliant cresyl blue",
+      "Heinz bodies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Haemolysis signature is shared: **jaundice** (yellow skin from bilirubin), dark urine, splenomegaly and anaemia with high **reticulocytes** (young red cells). **LDH** (lactate dehydrogenase) climbs while **haptoglobin** (haemoglobin binding protein) falls. **Urobilinogen** (bile pigment in urine) rises, while bilirubin stays **unconjugated** (water insoluble pigment). Symptom onset may be gradual over years in mild hereditary disease.",
+   "say": "Jaundice, splenomegaly and splenic enlargement mark chronic haemolysis. LDH rises while haptoglobin falls. Reticulocytes climb as the marrow compensates.",
+   "vis": {
+    "cols": [
+     "Marker",
+     "Change",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "LDH",
+      "High",
+      "Cell destruction"
+     ],
+     [
+      "Haptoglobin",
+      "Low or absent",
+      "Consumed binding"
+     ],
+     [
+      "Urobilinogen",
+      "High in urine",
+      "Pigment load"
+     ],
+     [
+      "Bilirubin",
+      "Unconjugated high",
+      "Haemolysis pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Coombs test** (direct antiglobulin test) stays negative in hereditary disease and positive in immune haemolysis, making it the opening fork. **Coagulation** studies and blood cultures help when microangiopathy looms. **Haemoglobin electrophoresis** (protein separation test) screens haemoglobinopathies. A ** Heinz body** screen and enzyme assay confirm oxidant defects, while membrane protein analysis settles membrane diagnoses.",
+   "say": "A negative Coombs test points away from immune haemolysis. Electrophoresis screens haemoglobinopathies. Enzyme and protein assays confirm membrane and enzyme faults.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immune haemolysis",
+     "points": [
+      "Coombs positive",
+      "Spherocytes present",
+      "Steroids and transfusions"
+     ]
+    },
+    "right": {
+     "title": "Hereditary haemolysis",
+     "points": [
+      "Coombs negative",
+      "Family history common",
+      "Specific protein or enzyme test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Splenectomy** (spleen removal) transforms severe spherocytosis and many enzyme defects by stopping premature splenic trapping, and it is delayed until after age **5** to protect vaccine response. Vaccination against pneumococcus, meningococcus and Haemophilus must precede surgery. **Folic acid** supports brisk marrow turnover. **Parvovirus B19** (red cell viral infection) can crash haemoglobin in chronic haemolysis, a crisis every student must recognise.",
+   "say": "Splenectomy transforms severe spherocytosis but is delayed beyond age five. Vaccination must precede the operation. Parvovirus infection can crash haemoglobin in chronic haemolysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vaccinate",
+      "label": "Vaccinate child"
+     },
+     {
+      "id": "spleen",
+      "label": "Splenectomy after age 5"
+     },
+     {
+      "id": "folate",
+      "label": "Folate plus follow up"
+     }
+    ],
+    "edges": [
+     [
+      "vaccinate",
+      "spleen"
+     ],
+     [
+      "spleen",
+      "folate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications accumulate quietly. **Pigment gallstones** (bilirubin stones) fill the gallbladder in lifelong haemolysis, while **aplastic crises** follow parvovirus and **megaloblastic crises** follow folate shortage. Iron overload creeps with chronic transfusion. Iron chelators such as **deferasirox** (oral chelator) protect transfused patients, and hydroxyurea offers selected sickle cell benefit through **HbF** (fetal haemoglobin) induction.",
+   "say": "Pigment gallstones fill the gallbladder in lifelong haemolysis. Aplastic crisis follows parvovirus infection. Megaloblastic crisis follows folate shortage during brisk turnover.",
+   "vis": {
+    "cols": [
+     "Crisis",
+     "Trigger",
+     "Clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Aplastic crisis",
+      "Parvovirus B19",
+      "Reticulocytes vanish"
+     ],
+     [
+      "Megaloblastic crisis",
+      "Folate lack",
+      "Macrocytic change"
+     ],
+     [
+      "Haemolytic crisis",
+      "Infection or oxidants",
+      "Hb crash, jaundice"
+     ],
+     [
+      "Gallstones",
+      "Chronic haemolysis",
+      "Pigment stones grow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis now leans on sequencing. **NGS panels** (next generation sequencing gene tests) cover membrane and enzyme genes together and resolve atypical cases. Genetic counselling aids families, and prenatal diagnosis is possible in severe pedigrees. **Osmotic fragility** remains a screening tool where EMA binding is unavailable. Results guide splenectomy timing, trigger avoidance lists and reproductive advice.",
+   "say": "Gene panels now cover membrane and enzyme defects together. Genetic counselling aids families and prenatal diagnosis is possible. Osmotic fragility still screens where EMA binding is unavailable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Old bedside tests",
+     "points": [
+      "Osmotic fragility screen",
+      "Heinz body stain",
+      "Family smear review"
+     ]
+    },
+    "right": {
+     "title": "Modern confirmation",
+     "points": [
+      "EMA binding test",
+      "Enzyme activity assay",
+      "NGS gene panel"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anchors for the exam: spherocytes with negative Coombs equal hereditary spherocytosis; **G6PD** is X linked with bite cells and favism history; Heinz bodies show on brilliant cresyl blue; splenectomy after age **5** with vaccination is the rule; pigment gallstones mark chronic haemolysis; and parvovirus causes aplastic crisis. **EMA binding** beats osmotic fragility for spherocytosis confirmation.",
+   "say": "Spherocytes with a negative Coombs test equal hereditary spherocytosis. G6PD is X linked and triggered by fava beans. EMA binding beats osmotic fragility for confirmation.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Answer",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Spherocytes Coombs negative",
+      "Hereditary spherocytosis",
+      "1 in 2000"
+     ],
+     [
+      "Bite cells favism",
+      "G6PD deficiency",
+      "400 million affected"
+     ],
+     [
+      "Heinz body stain",
+      "Brilliant cresyl blue",
+      "Denatured Hb clumps"
+     ],
+     [
+      "Splenectomy timing",
+      "After age 5",
+      "Vaccinate first"
+     ],
+     [
+      "EMA binding",
+      "Confirms HS",
+      "Beats fragility"
+     ],
+     [
+      "Crisis with low retics",
+      "Parvovirus B19",
+      "Aplastic crisis"
+     ]
+    ]
+   }
+  }
+ ]
+}
