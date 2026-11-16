@@ -888,21 +888,35 @@
     // Phase 2 hook: study-select.js sub-panels clear with the bar.
     if (G.STUDY_SELECT && G.STUDY_SELECT.removePanels) { try { G.STUDY_SELECT.removePanels(host && host.root()); } catch (e) {} }
   }
+  function lassoChipsHtml() {
+    return '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-explain">' + ICO.sparkle + ' Explain</button>' +
+      '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-summary">' + ICO.sparkle + ' Key summary</button>' +
+      '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-make">' + ICO.book + ' Make deck</button>' +
+      '<button type="button" class="pn-btn sm" data-act="st-lasso-save-elem">' + ICO.star + ' Save Element</button>';
+  }
   function showLassoBar() {
     // Phase 2 hook: extended menu lives in study-select.js; this keeps working without it (OPTIONAL skip).
-    if (G.STUDY_SELECT && G.STUDY_SELECT.showLassoBar) { try { G.STUDY_SELECT.showLassoBar(inkApi(V && V.cur ? V.cur : 1, null)); return; } catch (e) {} }
+    if (G.STUDY_SELECT && G.STUDY_SELECT.showLassoBar) {
+      try {
+        G.STUDY_SELECT.showLassoBar(inkApi(V && V.cur ? V.cur : 1, null));
+        // Phase 4: AI on selection and Save Element ride on Phase 2's bar (actions handled by the dispatcher).
+        var sbar = host && host.root() && host.root().querySelector("#stLassoBar");
+        if (sbar && !sbar.querySelector('[data-act="st-lasso-ai-explain"]')) {
+          var chips = D.createElement("div");
+          chips.className = "st-lasso-chips";
+          chips.innerHTML = lassoChipsHtml();
+          sbar.insertBefore(chips, sbar.firstChild);
+        }
+        return;
+      } catch (e) {}
+    }
     removeLassoBar();
     if (!V || !V.lasso || !V.lasso.ids.length) return;
     var div = D.createElement("div");
     div.id = "stLassoBar";
     div.className = "st-lasso-bar";
     div.innerHTML =
-      '<div class="st-lasso-chips">' +
-        '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-explain">' + ICO.sparkle + ' Explain</button>' +
-        '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-summary">' + ICO.sparkle + ' Key summary</button>' +
-        '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-make">' + ICO.book + ' Make deck</button>' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-save-elem">' + ICO.star + ' Save Element</button>' +
-      '</div>' +
+      '<div class="st-lasso-chips">' + lassoChipsHtml() + '</div>' +
       '<div class="st-lasso-actions">' +
         '<button type="button" class="pn-btn sm" data-act="st-lasso-copy">' + ICO.copy + ' Duplicate</button>' +
         '<button type="button" class="pn-btn sm" data-act="st-lasso-color">' + ICO.palette + ' Recolour</button>' +
