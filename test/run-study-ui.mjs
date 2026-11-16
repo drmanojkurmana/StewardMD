@@ -125,6 +125,7 @@ ok(await page.evaluate(() => STUDY._state().z === 1.25), "zoom in");
 await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
 await page.waitForSelector('.st-ov[data-n="1"]');
 await page.click('[data-act="st-tool"][data-v="er"]');
+await page.evaluate(() => { const v = STUDY._state(); if (v.ink) { v.ink.eraser.mode = "stroke"; v.ink.eraser.autoDeselect = false; } });   // Phase 1 default is Standard (area); this check is the Stroke eraser
 await page.evaluate(() => {
   const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), f = (t) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 9, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + 0.36 * r.width, clientY: r.top + (0.2 + 0.03) * r.height, bubbles: true, cancelable: true }));
   f("pointerdown"); f("pointerup");
@@ -152,21 +153,91 @@ ok(await live() === 1, "lasso delete: deletes the selected stroke");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 2, "undo of lasso delete restores the stroke");
 
-/* ---- scribble to erase: fast back-and-forth over a stroke erases it ---- */
+/* ---- scribble (Phase 0 ink-loss fix): OFF by default, so a zigzag over ink is kept as ink; when ON, a fast dense
+   scribble over a stroke erases only that stroke and the toast's Undo brings it back ---- */
 await page.click('[data-act="st-tool"][data-v="pen"]');
-await page.evaluate(() => {
+const scribbleOver = () => page.evaluate(() => {
   const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 12;
   const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
-  fire("pointerdown", 0.3, 0.2);
-  for (let i = 0; i < 4; i++) {
-    fire("pointermove", 0.45, 0.2 + (i % 2 === 0 ? 0.01 : -0.01));
-    fire("pointermove", 0.25, 0.2 + (i % 2 === 0 ? -0.01 : 0.01));
+  const onLine = (x) => 0.2 + (x - 0.2) * 0.125;   // the first test stroke runs (0.2, 0.2) to (0.68, 0.26)
+  fire("pointerdown", 0.3, onLine(0.3));
+  for (let pass = 0; pass < 8; pass++) for (let s = 1; s <= 8; s++) {
+    const x = pass % 2 ? 0.42 - 0.12 * s / 8 : 0.3 + 0.12 * s / 8;
+    fire("pointermove", x, onLine(x) + (s % 2 ? 0.001 : -0.001));
   }
-  fire("pointerup", 0.35, 0.2);
+  fire("pointerup", 0.3, onLine(0.3));
 });
-ok(await live() === 1, "scribble erase: fast back-and-forth over a stroke erases it");
+await scribbleOver();
+ok(await live() === 3, "scribble erase OFF by default: a zigzag over ink is kept as a new stroke, nothing erased");
 await page.click('[data-act="st-undo"]');
-ok(await live() === 2, "undo of scribble erase restores the stroke");
+ok(await live() === 2, "undo removes that zigzag stroke");
+await page.evaluate(() => { STUDY._state().scribble = true; });
+await scribbleOver();
+ok(await live() === 1, "scribble erase ON: a fast dense scribble over a stroke erases only that stroke");
+ok(await page.evaluate(() => /Erased 1 stroke/.test((document.querySelector("#stEraseToast") || {}).textContent || "")), "scribble erase shows the Erased toast with Undo");
+await page.click("#stEraseUndo");
+ok(await live() === 2, "toast Undo restores the erased stroke");
+await page.evaluate(() => { STUDY._state().scribble = false; });
+
+/* ---- Phase 1 ink: toolbar order, popover, styles, split eraser, palm, 240 Hz ---- */
+ok(await page.evaluate(() => {
+  const order = Array.from(document.querySelectorAll("#stTb [data-act='st-tool']")).map((b) => b.getAttribute("data-v"));
+  const hidden = document.querySelectorAll("#stTb .st-slot-future[hidden]").length;
+  return JSON.stringify(order) === JSON.stringify(["pen", "er", "hl", "lasso"]) && hidden === 7;
+}), "P1 toolbar: order pen, eraser, highlighter, lasso with 7 future slots hidden");
+await page.click('[data-act="st-tool"][data-v="pen"]');   // second tap on the active pen opens its popover
+await page.waitForSelector("#stInkPop");
+ok(await page.evaluate(() => {
+  const cv = document.querySelector(".st-ink-preview"), d = cv.getContext("2d").getImageData(0, 0, cv.width, cv.height).data;
+  for (let i = 3; i < d.length; i += 4) if (d[i]) return true; return false;
+}), "P1 pen popover: live preview is drawn");
+await page.click('#stInkPop [data-ink="style"][data-v="brush"]');
+await page.waitForSelector('#stInkPop [data-ink="style"][data-v="brush"].on');
+ok(true, "P1 pen popover: brush style selectable");
+await page.evaluate(() => { const r = document.querySelector('#stInkPop [data-ink="sens"]'); r.value = "100"; r.dispatchEvent(new Event("input", { bubbles: true })); });
+ok(await page.evaluate(() => STUDY._state().ink.pen.sens === 1), "P1 pressure slider: 100% stored on the viewer state");
+await page.click('[data-act="st-tool"][data-v="pen"]');   // toggle the popover closed
+ok(await page.evaluate(() => !document.querySelector("#stInkPop")), "P1 pen popover: tapping the pen again closes it");
+const drawLine = (tool, y, x0 = 0.15, x1 = 0.85, steps = 24) => page.evaluate(([y, x0, x1, steps]) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 21;
+  const fire = (t, x, yy, ts) => { const e = new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }); Object.defineProperty(e, "timeStamp", { value: ts }); ov.dispatchEvent(e); };
+  fire("pointerdown", x0, y, 1000); for (let i = 1; i <= steps; i++) fire("pointermove", x0 + (x1 - x0) * i / steps, y, 1000 + i * 10); fire("pointerup", x1, y, 1000 + steps * 10);
+}, [y, x0, x1, steps]);
+const beforeP1 = await live();
+await drawLine("pen", 0.62);
+ok(await live() === beforeP1 + 1 && await page.evaluate(() => { const s = STUDY._state().strokes.filter((x) => !x.gone).pop(); return s.style === "brush" && s.sens === 1 && s.pts.length >= 20; }), "P1 stroke: new strokes carry style and sensitivity, all points kept");
+/* precision eraser splits the stroke drawn above; one undo restores it whole */
+await page.click('[data-act="st-tool"][data-v="er"]');
+await page.evaluate(() => { STUDY._state().ink.eraser.mode = "precision"; STUDY._state().ink.eraser.autoDeselect = false; STUDY_INK.syncStrip(STUDY._inkApi()); });
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect();
+  const f = (t) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 22, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + 0.5 * r.width, clientY: r.top + 0.62 * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  f("pointerdown"); f("pointerup");
+});
+await page.waitForTimeout(300);
+ok(await live() === beforeP1 + 2, "P1 precision eraser: half-erased stroke splits into two pieces (one undo step)");
+await page.click('[data-act="st-undo"]');
+ok(await live() === beforeP1 + 1, "P1 precision eraser: undo restores the whole stroke and removes the pieces");
+await page.click('[data-act="st-redo"]');
+ok(await live() === beforeP1 + 2, "P1 precision eraser: redo splits it again");
+await page.click('[data-act="st-undo"]');
+/* palm rejection: a touch after a pen was seen makes no mark */
+const beforeTouch = await live();
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 23;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "touch", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", 0.2, 0.75); fire("pointermove", 0.6, 0.75); fire("pointerup", 0.6, 0.75);
+});
+ok(await live() === beforeTouch, "P1 palm rejection: touch does not draw after a pen was seen");
+/* 240 Hz scrawl: every synthetic point is kept */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 24;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", 0.05, 0.82); for (let i = 1; i <= 240; i++) fire("pointermove", 0.05 + 0.9 * i / 240, 0.82 + Math.sin(i / 8) * 0.01); fire("pointerup", 0.95, 0.82);
+});
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter((x) => !x.gone).pop(); return s.pts.length >= 241; }), "P1 latency: a 240 Hz scrawl keeps every point");
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");

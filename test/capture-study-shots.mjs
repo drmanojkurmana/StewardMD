@@ -15,7 +15,7 @@ const req = createRequire(import.meta.url);
 const { chromium } = req("playwright");
 const HERE = dirname(fileURLToPath(import.meta.url));
 const mode = process.argv[2] || "before";
-const OUT_DIR = join(HERE, "..", ".fleet-reports", "study-ui", mode);
+const OUT_DIR = mode === "p1" ? join(HERE, "..", ".fleet-reports", "study-p1", "shots") : join(HERE, "..", ".fleet-reports", "study-ui", mode);
 mkdirSync(OUT_DIR, { recursive: true });
 
 const PORT = await freePort();
@@ -183,6 +183,30 @@ for (const dev of DEVICES) {
     await setupTheme();
     await page.screenshot({ path: join(OUT_DIR, `${tag}-colour-width-popover.png`) });
     console.log(`Saved ${tag}-colour-width-popover.png`);
+
+    // 7b. Phase 1: pen settings popover (tap the active pen again), highlighter strip, eraser popover
+    if (await page.locator('[data-act="st-tool"][data-v="pen"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="pen"]');
+      await page.waitForSelector("#stInkPop", { timeout: 5000 }).catch(() => {});
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-pen-popover.png`) });
+      console.log(`Saved ${tag}-p1-pen-popover.png`);
+      await page.click('[data-act="st-tool"][data-v="pen"]');
+    }
+    if (await page.locator('[data-act="st-tool"][data-v="hl"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="hl"]');
+      await sleep(150); await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-highlighter-strip.png`) });
+      console.log(`Saved ${tag}-p1-highlighter-strip.png`);
+    }
+    if (await page.locator('[data-act="st-tool"][data-v="er"]').count()) {
+      await page.click('[data-act="st-tool"][data-v="er"]');
+      await page.click('[data-act="st-tool"][data-v="er"]');
+      await page.waitForSelector("#stInkPop", { timeout: 5000 }).catch(() => {});
+      await setupTheme();
+      await page.screenshot({ path: join(OUT_DIR, `${tag}-p1-eraser-popover.png`) });
+      console.log(`Saved ${tag}-p1-eraser-popover.png`);
+    }
 
     // 8. Page sheet
     if (await page.locator('[data-act="st-page-sheet"]').count()) {
