@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-tropical-bacterial",
+ "subject": "ss-general-medicine",
+ "title": "Tropical bacterial and rickettsial infections",
+ "minutes": 11,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Typhoid fever** is caused by **Salmonella typhi** from contaminated food and water. **Leptospirosis** follows **animal urine** contact in floods yearly. **Scrub typhus** is caused by **Orientia tsutsugamushi** from trombiculid mite. **Melioidosis** from **Burkholderia pseudomallei** affects **diabetes** patients in 60% of cases.",
+   "say": "Typhoid fever is caused by Salmonella typhi spread through contaminated food and water. Leptospirosis follows contact with animal urine during floods. Scrub typhus is caused by Orientia tsutsugamushi spread through a tiny mite. Melioidosis affects diabetic patients in most cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typhoid",
+     "points": [
+      "Salmonella typhi from food and water",
+      "Rose spots with relative bradycardia",
+      "Blood culture positive in first week",
+      "Ceftriaxone is first line treatment"
+     ]
+    },
+    "right": {
+     "title": "Scrub typhus",
+     "points": [
+      "Orientia tsutsugamushi from trombiculid mite",
+      "Eschar with regional lymphadenopathy",
+      "Weil Felix test supports diagnosis",
+      "Doxycycline is first line treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Flood exposure** plus **paddy work** raises **leptospirosis risk** more than 10 times. **Rodent contact** at home spreads **Weil disease** in urban slums. **Cattle handling** transmits **brucellosis** with **undulant fever** pattern. **Sewer work** increases risk of **typhoid** and **hepatitis E** infections.",
+   "say": "Flood exposure with paddy field work raises leptospirosis risk more than ten times. Rodent contact at home spreads Weil disease in crowded urban slums. Cattle handling transmits brucellosis with an undulant pattern of fever. Sewer work increases the risk of typhoid and hepatitis infections.",
+   "vis": null
+  },
+  {
+   "tx": "**Endotoxin lipopolysaccharide** drives **fever and shock** in typhoid infection. **Bacteraemia** spreads from gut to **reticuloendothelial system** within 7 days. **Rickettsial invasion** of endothelium causes **vasculitis** in scrub typhus. **Eschar** forms at the **mite bite site** in 40% of scrub cases.",
+   "say": "Endotoxin can drive fever and shock in typhoid infection. The bacteria spread from the gut to the reticuloendothelial system within a week. Rickettsial invasion of the vessel lining causes vasculitis in scrub typhus. An eschar forms at the mite bite site in many scrub typhus cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e",
+      "label": "Exposure",
+      "sub": "food water or mite"
+     },
+     {
+      "id": "i",
+      "label": "Invasion",
+      "sub": "gut or skin entry"
+     },
+     {
+      "id": "s",
+      "label": "Systemic spread",
+      "sub": "blood stream"
+     },
+     {
+      "id": "o",
+      "label": "Organ damage",
+      "sub": "shock or vasculitis"
+     }
+    ],
+    "edges": [
+     [
+      "e",
+      "i"
+     ],
+     [
+      "i",
+      "s"
+     ],
+     [
+      "s",
+      "o"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rose spots** on trunk with **relative bradycardia** mark typhoid fever very clearly. **Eschar** with **lymphadenopathy** is the classic scrub typhus sign in many patients. **Conjunctival suffusion** with **calf tenderness** marks leptospirosis infection in endemic zones. **Inguinal lymphadenopathy** occurs in **lymphogranuloma venereum** cases often.",
+   "say": "Rose spots on the trunk with relative bradycardia mark typhoid fever clearly. An eschar with lymphadenopathy is the classic sign of scrub typhus. Conjunctival suffusion with calf tenderness suggests leptospirosis infection. Inguinal lymphadenopathy occurs in lymphogranuloma venereum.",
+   "vis": null
+  },
+  {
+   "tx": "**Blood culture** is the **gold standard** for typhoid in **first week**. **Widal test first** is used for screening but is **less specific** than culture. **Weil Felix test** supports scrub typhus diagnosis after **day 7**. **PCR for Orientia** is the **confirmatory test** with high sensitivity in studies.",
+   "say": "Blood culture is the gold standard for typhoid in the first week of illness. The Widal test is used for screening but is less specific than culture. The Weil Felix test supports scrub typhus diagnosis after a week. PCR for Orientia is the confirmatory test with high sensitivity in studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "First test",
+     "Gold standard"
+    ],
+    "rows": [
+     [
+      "Typhoid",
+      "Widal test",
+      "Blood culture week one"
+     ],
+     [
+      "Scrub typhus",
+      "Weil Felix test",
+      "PCR for Orientia"
+     ],
+     [
+      "Leptospirosis",
+      "MAT screening",
+      "Culture of blood"
+     ],
+     [
+      "Melioidosis",
+      "Serology test",
+      "Culture of pus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ceftriaxone 2 g daily** intravenous is first line for **typhoid** fever. **Doxycycline 100 mg twice daily** for 7 days treats **scrub typhus** and **rickettsial** fevers. **Ceftriaxone 1 g daily** treats **leptospirosis** when severe. **Azithromycin 1 g daily** for 3 days is an **alternative** for typhoid.",
+   "say": "Ceftriaxone given daily by vein is first line for typhoid fever. Doxycycline given twice daily for a week treats scrub typhus and rickettsial fevers. Ceftriaxone daily can treat severe leptospirosis. Azithromycin daily for three days is an alternative option for typhoid.",
+   "vis": null
+  },
+  {
+   "tx": "**Chloramphenicol 50 mg per kg** was old **typhoid therapy** before resistance developed widely. **A fluoroquinolone** twice daily worked until **nalidixic resistance** emerged fully. **MDR typhoid** means resistance to **three classic first line** drugs. **XDR typhoid** adds resistance to **fluoroquinolones** and **ceftriaxone** often yet.",
+   "say": "Chloramphenicol dosed by body weight was old typhoid therapy before resistance emerged. A fluoroquinolone worked well until nalidixic resistance appeared. Multidrug resistant typhoid can mean resistance to three classic drugs. Extensively resistant typhoid can add resistance to fluoroquinolones and ceftriaxone.",
+   "vis": null
+  },
+  {
+   "tx": "**Intestinal perforation** occurs in **3% of typhoid** cases in third week. **Weil disease** with **jaundice and renal failure** follows leptospirosis. **Scrub typhus pneumonia** develops in **20% of cases** without treatment. **Melioidosis abscess** in **liver and prostate** needs **6 months** of therapy.",
+   "say": "Intestinal perforation occurs in a small percentage of typhoid cases in the third week. Weil disease with jaundice and renal failure follows leptospirosis. Scrub typhus pneumonia develops in about one fifth of cases without treatment. Melioidosis abscess in the liver needs six months of therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Safe water** with **chlorination 0.5 mg per litre** prevents **typhoid infection** in outbreaks. **Food handlers** with typhoid must be excluded for **1 year** after recovery. **Rodent control** reduces **leptospirosis spread** in endemic slums effectively. **Mite control** with **repellents** prevents **scrub typhus** in field workers.",
+   "say": "Safe water with chlorination prevents typhoid infection during outbreaks. Food handlers with typhoid must be excluded for about a year after recovery. Rodent control reduces leptospirosis spread in endemic slums effectively. Mite control with repellents prevents scrub typhus in field workers.",
+   "vis": null
+  },
+  {
+   "tx": "**Relative bradycardia** separates typhoid from **other fevers** in wards clearly. **Eschar** is pathognomonic of **scrub typhus** when present in many cases. **Calf tenderness** with **conjunctival suffusion** points to **leptospirosis** infection. **Doxycycline** is first line for **all rickettsial** diseases asked in **SS examinations** yearly.",
+   "say": "Relative bradycardia separates typhoid from other causes of fever in wards. An eschar is pathognomonic of scrub typhus when present. Calf tenderness with conjunctival suffusion points to leptospirosis. Doxycycline is first line for all rickettsial diseases asked in examinations.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** contrasts typhoid and scrub typhus clearly. **Typhoid** rose spots with **blood culture** and **ceftriaxone** therapy. **Scrub typhus** eschar with **Weil Felix** and **doxycycline** treatment. **Leptospirosis** calf pain with **ceftriaxone** therapy only. **Melioidosis** hits **diabetes** patients and needs **6 months** therapy.",
+   "say": "This is the high yield summary for typhoid and scrub typhus. Typhoid shows rose spots with blood culture and needs ceftriaxone. Scrub typhus shows an eschar with Weil Felix and needs doxycycline. Leptospirosis shows calf pain and needs ceftriaxone. Melioidosis hits diabetics and needs six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Classic sign",
+     "First drug"
+    ],
+    "rows": [
+     [
+      "Typhoid",
+      "Rose spots",
+      "Ceftriaxone 2 g"
+     ],
+     [
+      "Scrub typhus",
+      "Eschar",
+      "Doxycycline 100 mg"
+     ],
+     [
+      "Leptospirosis",
+      "Calf tenderness",
+      "Ceftriaxone 1 g"
+     ],
+     [
+      "Brucellosis",
+      "Undulant fever",
+      "Doxycycline rifampicin"
+     ],
+     [
+      "Rocky Mountain spots",
+      "Wrist ankles spread",
+      "Doxycycline 100 mg"
+     ],
+     [
+      "Melioidosis",
+      "Diabetes abscess",
+      "Intravenous therapy"
+     ],
+     [
+      "Cholera",
+      "Rice water stool",
+      "Doxycycline single dose"
+     ]
+    ]
+   }
+  }
+ ]
+}
