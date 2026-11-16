@@ -1,0 +1,338 @@
+{
+ "v": 1,
+ "module": "sne-trigeminal-autonomic-cephalalgias",
+ "title": "Trigeminal autonomic cephalalgias and facial pain",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Trigeminal autonomic cephalalgias** are strictly unilateral primary headaches with **ipsilateral cranial autonomic signs** and **restlessness or agitation**. The group is **cluster headache**, **paroxysmal hemicrania**, **SUNCT and SUNA**, and **hemicrania continua**. Attacks range from seconds in SUNCT to 3 hours in cluster, with frequency from once daily to dozens per hour.",
+   "say": "Trigeminal autonomic cephalalgias are strictly unilateral primary headaches with ipsilateral cranial autonomic signs and restlessness or agitation. The group is cluster headache, paroxysmal hemicrania, SUNCT and SUNA, and hemicrania continua. Attacks are brief in SUNCT and are prolonged to three hours in cluster, with frequency ranging from once daily to dozens per hour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Attack duration",
+     "Attacks per day"
+    ],
+    "rows": [
+     [
+      "Cluster headache",
+      "15 minutes to 3 hours",
+      "1 to 8 per day"
+     ],
+     [
+      "Paroxysmal hemicrania",
+      "Brief attacks lasting minutes",
+      "Many per day"
+     ],
+     [
+      "SUNCT and SUNA",
+      "Seconds per stab",
+      "Dozens per hour"
+     ],
+     [
+      "Hemicrania continua",
+      "Continuous ache plus spikes",
+      "Continuous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most TACs are **primary** with **male predominance** in cluster and **female predominance** in paroxysmal hemicrania. **Alcohol and vasodilators** trigger cluster bouts, while stress and neck movement do not. **Secondary mimics** are **pituitary adenoma**, **cavernous sinus lesion**, and **posterior fossa arteriovenous malformation**. Any atypical age, abnormal examination, or poor treatment response is followed by imaging.",
+   "say": "Most TACs are primary with male predominance in cluster and female predominance in paroxysmal hemicrania. Alcohol and vasodilators trigger cluster bouts, while stress and neck movement do not. Secondary mimics are pituitary adenoma, cavernous sinus lesion, and posterior fossa arteriovenous malformation. Any atypical age, abnormal examination, or poor treatment response is followed by imaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary TAC pattern",
+     "points": [
+      "Typical age with normal examination",
+      "Clocklike bouts with full autonomic storm",
+      "Alcohol trigger in cluster period",
+      "Dramatic response to oxygen or indomethacin"
+     ]
+    },
+    "right": {
+     "title": "Secondary mimic pattern",
+     "points": [
+      "Atypical age or abnormal neurologic signs",
+      "Pituitary or cavernous sinus lesion on MRI",
+      "Posterior fossa vascular malformation",
+      "Poor response to standard abortive drugs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Attacks begin with **posterior hypothalamic activation**, visible on functional imaging during bouts. The **trigeminal autonomic reflex** then produces pain through the **ophthalmic division** and parasympathetic outflow through the **sphenopalatine ganglion**. Release of **calcitonin gene related peptide** and **vasoactive intestinal peptide** produces vasodilatation, lacrimation, rhinorrhoea, and eyelid oedema on the painful side.",
+   "say": "Attacks begin with posterior hypothalamic activation, visible on functional imaging during bouts. The trigeminal autonomic reflex is activated then and produces pain through the ophthalmic division with parasympathetic outflow through the sphenopalatine ganglion. Release of calcitonin gene related peptide and vasoactive intestinal peptide produces vasodilatation, lacrimation, rhinorrhoea, and eyelid oedema on the painful side.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Posterior hypothalamus activates"
+     },
+     {
+      "id": "b",
+      "label": "Trigeminal ophthalmic pain fires"
+     },
+     {
+      "id": "c",
+      "label": "Sphenopalatine parasympathetic outflow"
+     },
+     {
+      "id": "d",
+      "label": "Tearing, red eye, blocked nose"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cluster headache causes **excruciating unilateral orbital or temporal pain** lasting **15 minutes to 3 hours**, occurring **1 to 8 times daily** in bouts of weeks. Pain strikes at night, peaks within minutes, and forces pacing or rocking. **Ipsilateral lacrimation, conjunctival injection, nasal congestion, ptosis, and miosis** accompany every typical attack. A **partial Horner syndrome** may persist between bouts.",
+   "say": "Cluster headache causes excruciating unilateral orbital or temporal pain lasting fifteen minutes to three hours, occurring one to eight times daily in bouts of weeks. Pain strikes at night, peaks within minutes, and forces pacing or rocking. Ipsilateral lacrimation, conjunctival injection, nasal congestion, ptosis, and miosis is present in every typical attack. A partial Horner syndrome may persist between bouts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cluster feature",
+     "Detail",
+     "Bedside clue"
+    ],
+    "rows": [
+     [
+      "Site and severity",
+      "Orbital or temporal, excruciating",
+      "Patient paces or rocks"
+     ],
+     [
+      "Timing",
+      "Nocturnal, 15 minutes to 3 hours",
+      "Clocklike same hour"
+     ],
+     [
+      "Autonomic storm",
+      "Tearing, red eye, blocked nose",
+      "Strictly same side as pain"
+     ],
+     [
+      "Horner sign",
+      "Ptosis with small pupil",
+      "May linger after attack"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paroxysmal hemicrania gives **brief attacks many times daily**, always aborted by **indomethacin**. **SUNCT and SUNA** give **seconds-long stabs dozens of times daily** with prominent tearing and red eye. **Hemicrania continua** is a **continuous unilateral ache** with superimposed spikes, also indomethacin responsive. **Migraine** lasts longer with nausea and photophobia, while **trigeminal neuralgia** gives electric shocks without autonomic storm.",
+   "say": "Paroxysmal hemicrania causes brief attacks many times daily and is always aborted by indomethacin. SUNCT and SUNA cause seconds-long stabs dozens of times daily with prominent tearing and red eye. Hemicrania continua is a continuous unilateral ache with superimposed spikes and is also indomethacin responsive. Migraine lasts longer with nausea and photophobia, while trigeminal neuralgia gives electric shocks without autonomic storm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Short TACs",
+     "points": [
+      "Paroxysmal hemicrania: brief, many per day",
+      "SUNCT and SUNA: seconds, dozens per day",
+      "Absolute indomethacin response in hemicrania",
+      "Striking tearing with red eye"
+     ]
+    },
+    "right": {
+     "title": "Lookalikes",
+     "points": [
+      "Migraine: prolonged attacks with nausea",
+      "Trigeminal neuralgia: electric shocks on touch",
+      "Dental pain: local tenderness, no autonomic signs",
+      "Sinusitis: fever with purulent discharge"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The first test for any suspected TAC is **contrast MRI of the brain** with dedicated **pituitary and cavernous sinus views**. The gold standard workup is **MR angiography and venography** to exclude dissection, fistula, and venous thrombosis. **SUNCT** needs close **posterior fossa** scrutiny for vascular loops and demyelination. Normal imaging with a typical phenotype confirms a **primary TAC** and treatment response seals the diagnosis.",
+   "say": "The first test for any suspected TAC is contrast MRI of the brain with dedicated pituitary and cavernous sinus views. The gold standard workup is MR angiography with venography to exclude dissection, fistula, and venous thrombosis. SUNCT needs close posterior fossa scrutiny for vascular loops and demyelination. Normal imaging with a typical phenotype confirms a primary TAC and treatment response seals the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "First test",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Any first TAC presentation",
+      "Contrast MRI brain plus pituitary views",
+      "Excludes adenoma and cavernous lesion"
+     ],
+     [
+      "Atypical or SUNCT phenotype",
+      "MRI posterior fossa plus angiography",
+      "Finds vascular loop or demyelination"
+     ],
+     [
+      "Thunderclap overlap",
+      "MR angiography and venography",
+      "Excludes dissection and thrombosis"
+     ],
+     [
+      "Typical plus normal scan",
+      "Indomethacin or oxygen trial",
+      "Response confirms primary TAC"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute cluster attacks abort with **high flow oxygen** or **subcutaneous sumatriptan**. **Verapamil in divided doses** is first line prevention with ECG monitoring for block. **Paroxysmal hemicrania and hemicrania continua** are aborted by **indomethacin daily**. Short courses of **corticosteroid** or **greater occipital nerve block** bridge into prevention.",
+   "say": "Acute cluster attacks are aborted with high flow oxygen or subcutaneous sumatriptan. Verapamil in divided doses is first line prevention with ECG monitoring for block. Paroxysmal hemicrania and hemicrania continua are aborted by indomethacin daily. Short courses of corticosteroid or greater occipital nerve block are used to bridge into prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Acute care",
+     "Prevention"
+    ],
+    "rows": [
+     [
+      "Cluster headache",
+      "Oxygen with subcutaneous sumatriptan",
+      "Verapamil daily with ECG monitoring"
+     ],
+     [
+      "Paroxysmal hemicrania",
+      "Indomethacin trial aborts attacks",
+      "Indomethacin daily with gastric cover"
+     ],
+     [
+      "SUNCT and SUNA",
+      "Lidocaine infusion in status",
+      "Lamotrigine or topiramate"
+     ],
+     [
+      "Hemicrania continua",
+      "Indomethacin confirms diagnosis",
+      "Daily indomethacin with gastric cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Episodic cluster uses **lithium or topiramate** as targeted prevention when verapamil alone is not enough, while chronic cluster uses **occipital nerve stimulation** or **sphenopalatine ganglion stimulation** in refractory cases. **Short corticosteroid courses** and **greater occipital nerve block** give transitional control. **Trigeminal neuralgia** options differ and include **microvascular decompression** for classic vascular conflict.",
+   "say": "Episodic cluster is treated with lithium or topiramate as targeted prevention when verapamil alone is not enough, while chronic cluster is managed with occipital nerve stimulation or sphenopalatine ganglion stimulation in refractory cases. Short corticosteroid courses and greater occipital nerve block give transitional control. Trigeminal neuralgia options differ and include microvascular decompression for classic vascular conflict.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Episodic cluster diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Verapamil plus short corticosteroid bridge"
+     },
+     {
+      "id": "c",
+      "label": "Add lithium or topiramate if bouts persist"
+     },
+     {
+      "id": "d",
+      "label": "Chronic refractory: nerve or ganglion stimulation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "About **10 to 15 percent** of cluster cases turn **chronic** without remission longer than 3 months. Repeated nocturnal attacks cause **sleep deprivation, depression, and job loss**, with suicide risk higher than in migraine. High dose verapamil can cause **bradycardia, heart block, and ankle oedema**. Most episodic bouts are self-limited, and correct prophylaxis is followed by shorter bouts with restored function within weeks.",
+   "say": "About ten to fifteen percent of cluster cases are chronic without remission longer than three months. Repeated nocturnal attacks cause sleep deprivation, depression, and job loss, with suicide risk higher than in migraine. High dose verapamil can cause bradycardia, heart block, and ankle oedema. Most episodic bouts are self-limited, and correct prophylaxis is followed by shorter bouts with restored function within weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Good prognosis signs",
+     "points": [
+      "Episodic bouts with long remissions",
+      "Prompt response to oxygen or verapamil",
+      "Normal MRI with typical phenotype",
+      "Young onset with clear triggers"
+     ]
+    },
+    "right": {
+     "title": "Poor prognosis signs",
+     "points": [
+      "Chronic course beyond one year",
+      "Depression with nocturnal sleep loss",
+      "Verapamil heart block or oedema",
+      "Atypical features needing repeat imaging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam:** cluster lasts 15 minutes to 3 hours and 1 to 8 times daily and loves oxygen and sumatriptan. Paroxysmal hemicrania causes brief attacks many times daily and always answers indomethacin. SUNCT gives seconds-long stabs dozens of times daily with red tearing eye. Hemicrania continua is continuous and indomethacin responsive. Verapamil prevents cluster and posterior hypothalamus drives every TAC.",
+   "say": "High yield for the exam: cluster lasts fifteen minutes to three hours one to eight times daily and is relieved by oxygen and sumatriptan. Paroxysmal hemicrania causes brief attacks many times daily and is always aborted by indomethacin. SUNCT gives seconds-long stabs dozens of times daily with red tearing eye. Hemicrania continua is continuous and is indomethacin responsive. Verapamil prevents cluster and posterior hypothalamus drives every TAC.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Number",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Cluster duration and frequency",
+      "15 min to 3 hours, 1 to 8 per day",
+      "Oxygen plus sumatriptan"
+     ],
+     [
+      "Paroxysmal hemicrania",
+      "Brief, many per day",
+      "Indomethacin always works"
+     ],
+     [
+      "SUNCT and SUNA",
+      "Seconds, dozens per day",
+      "Tearing red eye stabs"
+     ],
+     [
+      "Hemicrania continua",
+      "Continuous ache plus spikes",
+      "Indomethacin responsive"
+     ],
+     [
+      "Prevention and mechanism",
+      "Verapamil daily",
+      "Posterior hypothalamus"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
