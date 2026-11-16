@@ -1,0 +1,322 @@
+{
+ "v": 1,
+ "module": "gmh-dementia-delirium",
+ "subject": "ss-geriatric-mental-health",
+ "title": "Dementia and delirium: recognition, causes and bedside tools",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22nd edition",
+  "Nelson Textbook of Pediatrics 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Delirium** is abrupt confusion with waxing attention over hours, while **dementia** is slow decline over 6 months with clear sensorium. A 78 year old with fever 102 F and new disorientation for 1 day suggests delirium. Dementia needs informant history of 2 or more cognitive fails. Both raise fall and death risk in 100 ward patients.",
+   "say": "Delirium is abrupt confusion with waxing attention over hours, while dementia is slow decline over six months with clear sensorium. A seventy eight year old with fever and new disorientation for one day suggests delirium. Dementia needs informant history of two or more cognitive failures. Both raise fall and death risk in one hundred ward patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Delirium",
+     "Dementia"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Hours to days",
+      "Months to years"
+     ],
+     [
+      "Consciousness",
+      "Clouded and fluctuating",
+      "Clear till late"
+     ],
+     [
+      "Course",
+      "Reversible often",
+      "Progressive usually"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Common **causes** of delirium split into medical, drugs and withdrawal in older adults. Infection, dehydration, pain and 3 organ fails trigger most cases in 200 admissions. Drugs like **Haloperidol** 1 mg, anticholinergics and 2 recent anaesthetics worsen risk. **Delirium** screening must list every drug taken over 7 days plus fever and oxygen levels.",
+   "say": "Common causes of delirium split into medical causes, drugs and withdrawal in older adults. Infection, dehydration, pain and three organ failures trigger most cases in two hundred admissions. Drugs like Haloperidol, anticholinergics and two recent anaesthetics worsen risk. Screening must list every drug taken over seven days plus fever and oxygen levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ask date and attention"
+     },
+     {
+      "id": "b",
+      "label": "Check fever and vitals"
+     },
+     {
+      "id": "c",
+      "label": "Review 7 day drug list"
+     },
+     {
+      "id": "d",
+      "label": "Look for cause in 24 hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alzheimer disease** involves amyloid plaques and tau tangles killing neurons in hippocampus over 8 years. Cholinergic loss reduces memory encoding in 60 percent of dementias in 500 cases. **Acetylcholinesterase inhibitors** like **Donepezil** 10 mg block enzyme breakdown. Oxidative stress and APOE 4 gene raise risk 3 fold in families with 2 affected members.",
+   "say": "Alzheimer disease involves amyloid plaques and tau tangles killing neurons in the hippocampus over eight years. Cholinergic loss reduces memory encoding in sixty percent of dementias. Acetylcholinesterase inhibitors like Donepezil ten milligrams daily block enzyme breakdown. Oxidative stress and the APOE four gene raise risk three fold in families with two affected members.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amyloid plaques",
+     "points": [
+      "Extracellular deposits",
+      "Start in cortex",
+      "Mark early disease"
+     ]
+    },
+    "right": {
+     "title": "Tau tangles",
+     "points": [
+      "Inside neurons",
+      "Hippo camp loss",
+      "Track memory fail"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Early **Alzheimer** shows short memory loss for 3 names and misplacing keys in 70 year olds. **Lewy body dementia** adds vivid dreams, visual hallucinations and 2 step rigidity. **Vascular dementia** steps down after 2 strokes with brief focal weakness. **Parkinsonism** plus REM sleep change points to Lewy disease in 15 percent of 100 dementia cases.",
+   "say": "Early Alzheimer shows short memory loss for three names and misplacing keys in seventy year olds. Lewy body dementia adds vivid dreams, visual hallucinations and two step rigidity. Vascular dementia steps down after two strokes with brief focal weakness. Parkinsonism plus REM sleep change points to Lewy disease in fifteen percent of one hundred dementia cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Early sign",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Alzheimer",
+      "Forgets recent events",
+      "Slow memory loss"
+     ],
+     [
+      "Lewy body",
+      "Vivid dreams",
+      "Hallucinations plus rigidity"
+     ],
+     [
+      "Vascular",
+      "Stepwise decline",
+      "After 2 strokes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MMSE** scores cognition to 30, with 24 or less suggesting dementia in 72 year olds. **MoCA** scores to 30 too, with 26 or less showing early fail in 10 minutes. **4AT** flags delirium in 1 minute with 4 items and 12 out of 12 scoring. **CAM** needs acute onset plus inattention plus disorganised thinking in 85 percent sensitivity.",
+   "say": "MMSE scores cognition to thirty, with twenty four or less suggesting dementia in seventy two year olds. MoCA scores to thirty too, with twenty six or less showing early failure in ten minutes. Four AT flags delirium in one minute with four items. CAM needs acute onset plus inattention plus disorganised thinking with high sensitivity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Take informant history"
+     },
+     {
+      "id": "b",
+      "label": "Do MoCA 10 minutes"
+     },
+     {
+      "id": "c",
+      "label": "Run 4AT or CAM"
+     },
+     {
+      "id": "d",
+      "label": "Reassess after 1 week"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Donepezil** 10 mg daily and **Memantine** 20 mg daily aid cognition for 6 months in mild cases. **Rivastigmine** 12 mg helps Lewy disease with parkinsonism in 40 percent. Non drug care gives 1 hour daily orientation, clocks and 4 family visits. Watching weight monthly and 2 mobility checks matters because falls reach 30 percent yearly.",
+   "say": "Donepezil ten milligrams daily and Memantine twenty milligrams daily aid cognition for six months in mild cases. Rivastigmine twelve milligrams helps Lewy disease with parkinsonism in forty percent. Non drug care gives one hour daily orientation plus clocks and four family visits. Watching weight monthly and two mobility checks matters because falls reach thirty percent yearly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cholinesterase drugs",
+     "points": [
+      "Raise acetylcholine",
+      "Help memory scores",
+      "Cause nausea in 15 percent"
+     ]
+    },
+    "right": {
+     "title": "Memantine",
+     "points": [
+      "Blocks glutamate excess",
+      "Use in moderate disease",
+      "Dose 20 mg daily"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Haloperidol** 0.25 to 1 mg hourly or **Risperidone** 0.25 mg settles severe delirium for 2 days. Give 1 litre fluids and correct potassium in 24 hours. **Melatonin** 5 mg aids sleep in 50 percent of cases. Daily 4 hour sleep care with glasses and hearing aids beats 3 restraints because restraints worsen death.",
+   "say": "Haloperidol a quarter to one milligram cautiously or Risperidone settles severe delirium for two days. Give one litre fluids and correct potassium within one day. Melatonin five milligrams aids sleep in half of cases. Daily four hour sleep care with glasses and hearing aids beats restraints because restraints worsen outcome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fix cause fast"
+     },
+     {
+      "id": "b",
+      "label": "Orient and hydrate"
+     },
+     {
+      "id": "c",
+      "label": "Low dose Haloperidol"
+     },
+     {
+      "id": "d",
+      "label": "Review in 12 hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lewy body** patients react badly to standard antipsychotics, so 1 mg **Haloperidol** can cause fatal rigidity in 5 percent. **Neuroleptic sensitivity** forces tiny doses under 0.5 mg if needed. Delirium carries 20 percent mortality at 6 months in 100 frail elders. Aspiration and 3 bed sores add harm, needing 4 hourly turns and swallow checks.",
+   "say": "Lewy body patients react badly to standard antipsychotics, so one milligram Haloperidol can cause fatal rigidity in five percent. Neuroleptic sensitivity forces tiny doses if needed. Delirium carries twenty percent mortality at six months in one hundred frail elders. Aspiration and three bed sores add harm, needing four hourly turns and swallow checks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Harm",
+     "Who",
+     "Prevent"
+    ],
+    "rows": [
+     [
+      "Rigidity",
+      "Lewy body",
+      "Avoid Haloperidol 1 mg"
+     ],
+     [
+      "Falls",
+      "All dementia",
+      "Check 4 hourly"
+     ],
+     [
+      "Aspiration",
+      "Delirium 70 year",
+      "Swallow test early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pseudodementia** from depression shows 3 quick answers, poor effort and rapid recovery with vitamins. **True dementia** shows near misses over 8 months and cortical fails. Ask Dont know answers 5 times in 10 questions favours depression. **Mirtazapine** 15 mg plus 2 reassessments often lifts score by 3 points within 4 weeks.",
+   "say": "Pseudodementia from depression shows quick answers, poor effort and rapid recovery with encouragement. True dementia shows near misses over eight months and cortical failures. Asking do not know answers five times in ten questions favours depression. Mirtazapine fifteen milligrams plus two reassessments often lifts the score by three points within four weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudodementia",
+     "points": [
+      "Depressed mood 4 weeks",
+      "Quick Dont know",
+      "Effort poor"
+     ]
+    },
+    "right": {
+     "title": "True dementia",
+     "points": [
+      "Near miss answers",
+      "Cortical signs 6 months",
+      "Effort preserved"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield recall: **MMSE** 24 and **MoCA** 26 cut offs with **4AT** in 1 minute separate delirium. Remember **Donepezil** 10 mg and **Memantine** 20 mg for 6 months in Alzheimer cases. Avoid **Haloperidol** 1 mg in Lewy disease because 5 percent get rigidity. Flag depression pseudodementia in 4 weeks for treatment with Mirtazapine 15 mg.",
+   "say": "High-yield for the exam, remember MMSE twenty four and MoCA twenty six cut offs with four AT in one minute separate delirium. Remember Donepezil ten milligrams and Memantine twenty milligrams for six months in Alzheimer cases. Avoid Haloperidol in Lewy disease because five percent get rigidity. Flag depression pseudodementia in four weeks for treatment with Mirtazapine fifteen milligrams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Cutoff",
+     "Use"
+    ],
+    "rows": [
+     [
+      "MMSE",
+      "24 or less",
+      "Dementia screen"
+     ],
+     [
+      "MoCA",
+      "26 or less",
+      "Early fail in 10 min"
+     ],
+     [
+      "4AT",
+      "About 12 points",
+      "Delirium in 1 minute"
+     ],
+     [
+      "Pseudodementia",
+      "4 weeks history",
+      "Treat depression first"
+     ]
+    ]
+   }
+  }
+ ]
+}

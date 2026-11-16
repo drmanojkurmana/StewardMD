@@ -1185,6 +1185,49 @@
   color: var(--pn-sub);
 }
 
+/* Scribble erase toast (phase P0): PrepNucleus dark, bottom-anchored, 44px Undo target */
+.pn-root .st-erase-toast {
+  position: fixed;
+  bottom: calc(var(--pnv-h, 64px) + 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px 6px 16px;
+  max-width: min(calc(100vw - 32px), 440px);
+  background: #0D1D23;
+  color: var(--pn-text);
+  border: 1px solid rgba(66, 205, 181, 0.35);
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  font-size: 14px;
+  font-weight: 550;
+  animation: stFadeIn 180ms var(--pn-ease);
+}
+.pn-root .st-erase-undo {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--pn-km-mint, #42CDB5);
+  background: var(--pn-km-mint, #42CDB5);
+  color: #071318;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform var(--pn-d-press, 120ms) var(--pn-ease);
+}
+.pn-root .st-erase-undo:active {
+  transform: scale(0.97);
+}
+.pn-root .st-erase-toast:focus-visible,
+.pn-root .st-erase-undo:focus-visible {
+  outline: 2px solid var(--pn-km-mint, #42CDB5);
+  outline-offset: 2px;
+}
+
 /* Accessibility: Focus visible */
 .pn-root .st-b:focus-visible,
 .pn-root .st-action-tile:focus-visible,
@@ -1270,6 +1313,7 @@
   .pn-root .st-w,
   .pn-root .st-chip,
   .pn-root .st-lasso-bar,
+  .pn-root .st-erase-toast,
   .pn-root .st-sh,
   .pn-root .st-pg-card,
   .pn-root .st-p3-btn,
