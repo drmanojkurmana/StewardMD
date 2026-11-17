@@ -425,18 +425,22 @@
     return '<div class="pl-wm" aria-hidden="true"><span class="pl-wm-pn"></span><span class="pl-wm-rule"></span>' +
       '<span class="pl-wm-by"><span class="pl-wm-pb">Powered by</span><span class="pl-wm-sd"><i class="pl-wm-gl"></i><span class="pl-wm-wd">Steward<b>MD</b></span></span></span></div>';
   }
-  function homeHtml(h) {
+  // mid: drawn between the readiness card and Today's plan (owner 2026-11-17: Question of the day goes there). The two
+  // halves are separate boxes so homeMounted() repaints them without touching what sits between.
+  function homeHtml(h, mid) {
     H = h;
     var s = store();
-    return '<div id="pnPlanTop" class="pl-top">' + wmHtml() + heroHtml(computeReadiness()) + planHead() + planHtml(planValid(s) ? s.pt : null) + "</div>";
+    return '<div id="pnPlanTop" class="pl-top">' + wmHtml() + heroHtml(computeReadiness()) + "</div>" + (mid || "") +
+      '<div id="pnPlanList" class="pl-top">' + planHead() + planHtml(planValid(s) ? s.pt : null) + "</div>";
   }
   function homeMounted(h) {
     H = h;
     lessonList().then(function (lessons) {
-      var box = root() && root().querySelector("#pnPlanTop");
-      if (!box) return;
+      var box = root() && root().querySelector("#pnPlanTop"), list = root() && root().querySelector("#pnPlanList");
+      if (!box || !list) return;
       var s = store(), pt = planValid(s) ? s.pt : makePlan(lessons);
-      box.innerHTML = wmHtml() + heroHtml(computeReadiness()) + planHead() + planHtml(pt, true);
+      box.innerHTML = wmHtml() + heroHtml(computeReadiness());
+      list.innerHTML = planHead() + planHtml(pt, true);
       if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
   }
