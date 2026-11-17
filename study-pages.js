@@ -109,7 +109,10 @@
     gear: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="15" cy="17" r="2"/></svg>',
     rotate: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
-    tpl: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>'
+    tpl: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>',
+    print: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
+    present: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>',
+    micOff: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="2" x2="22" y2="22"/><path d="M9 9v3a3 3 0 0 0 5.12 2.12"/><path d="M15 9.34V4a3 3 0 0 0-5.94-.6"/><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/><line x1="12" y1="19" x2="12" y2="23"/></svg>'
   };
 
   function ensureDocMeta(doc){
@@ -645,18 +648,23 @@
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-change-tpl">'+ICO.tpl+'<div class="st-p3-menu-txt"><strong>Change Template</strong><small>This page or all pages</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-go">'+ICO.gotoIco+'<div class="st-p3-menu-txt"><strong>Go to Page</strong><small>1–'+n+'</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-p3-settings">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Settings</strong><small>Scroll, palm rejection, lock</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-print-open">'+ICO.print+'<div class="st-p3-menu-txt"><strong>Print</strong><small>This page or all pages</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-present">'+ICO.present+'<div class="st-p3-menu-txt"><strong>Present</strong><small>Fullscreen, laser follows pointer</small></div></button>' +
+        '<button type="button" class="st-p3-menu-item" data-act="st-audio-list">'+ICO.mic+'<div class="st-p3-menu-txt"><strong>Recordings</strong><small>Play and tap a stroke to jump</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-search">'+ICO.search+'<div class="st-p3-menu-txt"><strong>Search</strong><small>Find in this notebook</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-share">'+ICO.share+'<div class="st-p3-menu-txt"><strong>Share</strong><small>Share this notebook</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-mic">'+ICO.mic+'<div class="st-p3-menu-txt"><strong>Voice note</strong><small>Microphone</small></div></button>' +
         '<button type="button" class="st-p3-menu-item st-p3-phone-only" data-act="st-p3-fav">'+ICO.star+'<div class="st-p3-menu-txt"><strong>Star page</strong><small>Bookmark this page</small></div></button>' +
         '<button type="button" class="st-p3-menu-item" data-act="st-more">'+ICO.gear+'<div class="st-p3-menu-txt"><strong>Notebook options</strong><small>Study AI, share, zoom and settings</small></div></button>' +
         '<button type="button" class="st-p3-menu-item bad" data-act="st-p3-clear">'+ICO.trash+'<div class="st-p3-menu-txt"><strong>Clear Page</strong><small>Removes ink on this page</small></div></button>' +
-      '</div>';
+      '</div>' +
+      '<p class="pn-note" id="st5bStorage" role="status" style="margin-top:10px">Calculating storage…</p>';
     var el=sheetEl("stP3MoreSheet", html);
     if(!el) return;
     /* thumb */
     var cv=el.querySelector("#stP3MoreThumb");
     if(cv) renderThumbInto(cv, cur);
+    if(G.STUDY_MEDIA && G.STUDY_MEDIA.refreshSettingsStorage) G.STUDY_MEDIA.refreshSettingsStorage();
   }
   function openSettingsSheet(){
     var v=V(); if(!v||!v.doc) return;
@@ -665,9 +673,11 @@
     var html = '<div class="st-p3-sh-head"><h3>Settings</h3><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Done</button></div>' +
       '<div class="st-p3-setting"><div><strong>Scrolling direction</strong><small>Vertical for reading, horizontal for boards</small></div><div class="st-p3-seg"><button type="button" class="st-p3-seg-btn'+(s.scrollDir!=="horizontal"?" on":"")+'" data-act="st-p3-scroll" data-v="vertical">Vertical</button><button type="button" class="st-p3-seg-btn'+(s.scrollDir==="horizontal"?" on":"")+'" data-act="st-p3-scroll" data-v="horizontal">Horizontal</button></div></div>' +
       '<div class="st-p3-setting"><div><strong>Stylus &amp; palm rejection</strong><small>Phase 1 owns behaviour</small></div><button type="button" class="pn-btn sm" data-act="st-p3-palm" aria-pressed="'+!!s.palm+'">'+(s.palm?"ON":"OFF")+'</button></div>' +
-      '<div class="st-p3-setting"><div><strong>Document editing lock</strong><small>Read-only</small></div><button type="button" class="pn-btn sm" data-act="st-p3-lock" aria-pressed="'+!!s.lock+'">'+(s.lock?"LOCKED":"EDIT")+'</button></div>';
+      '<div class="st-p3-setting"><div><strong>Document editing lock</strong><small>Read-only</small></div><button type="button" class="pn-btn sm" data-act="st-p3-lock" aria-pressed="'+!!s.lock+'">'+(s.lock?"LOCKED":"EDIT")+'</button></div>' +
+      '<div class="st-p3-setting"><div><strong>Storage used</strong><small id="st5bStorage">Calculating…</small></div></div>';
     var el=sheetEl("stP3SettingsSheet", html);
     if(!el) return;
+    if(G.STUDY_MEDIA && G.STUDY_MEDIA.refreshSettingsStorage) G.STUDY_MEDIA.refreshSettingsStorage();
     el.querySelectorAll("[data-act='st-p3-scroll']").forEach(function(b){
       b.addEventListener("click", function(){
         v.doc.settings.scrollDir=b.getAttribute("data-v");
@@ -1074,7 +1084,7 @@
   }
 
   /* ---- top-level dispatch ---- */
-  var PHASE3_ACTS = ["st-p3-back","st-p3-grid","st-p3-search","st-p3-share","st-p3-mic","st-p3-title","st-p3-fav","st-p3-add","st-p3-close","st-p3-more","st-p3-goto","st-p3-close-sheet","st-p3-place","st-p3-more-tpls","st-p3-confirm-add","st-p3-add-image","st-p3-add-scan","st-p3-add-photo","st-p3-add-pdf","st-p3-tab","st-p3-select-toggle","st-p3-nav-add","st-p3-change-tpl","st-p3-tpl-scope","st-p3-copy","st-p3-rotate","st-p3-outline","st-p3-clear","st-p3-settings","st-p3-scroll","st-p3-palm","st-p3-lock","st-p3-do-goto","st-p3-rename"];
+  var PHASE3_ACTS = ["st-p3-back","st-p3-grid","st-p3-search","st-p3-share","st-p3-mic","st-p3-title","st-p3-fav","st-p3-add","st-p3-close","st-p3-more","st-p3-goto","st-p3-close-sheet","st-p3-place","st-p3-more-tpls","st-p3-confirm-add","st-p3-add-image","st-p3-add-scan","st-p3-add-photo","st-p3-add-pdf","st-p3-tab","st-p3-select-toggle","st-p3-nav-add","st-p3-change-tpl","st-p3-tpl-scope","st-p3-copy","st-p3-rotate","st-p3-outline","st-p3-clear","st-p3-settings","st-p3-scroll","st-p3-palm","st-p3-lock","st-p3-do-goto","st-p3-rename","st-print-open","st-present","st-audio-list","st-p3-print","st-p3-present"];
   function isPhase3(a){ return PHASE3_ACTS.indexOf(a)!==-1; }
 
   function handlePhase3(a, el, h){
@@ -1094,9 +1104,39 @@
       openNavigator("thumbs");
       return;
     }
-    if(a==="st-p3-search"){ openComingSoon("Search","Search is coming soon in Phase 5."); return; }
-    if(a==="st-p3-share"){ openComingSoon("Share","Share is coming soon in Phase 5."); return; }
-    if(a==="st-p3-mic"){ openComingSoon("Microphone","Voice notes are coming soon in Phase 5."); return; }
+    if(a==="st-p3-search"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.toggleInDoc) G.STUDY_MEDIA.toggleInDoc(true);
+      else openComingSoon("Search","Search is coming soon in Phase 5.");
+      return;
+    }
+    if(a==="st-p3-share"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_LIB && G.STUDY_LIB.exportAll && v && v.id) G.STUDY_LIB.exportAll(v.id, null);
+      else openComingSoon("Share","Share is coming soon in Phase 5.");
+      return;
+    }
+    if(a==="st-p3-mic"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.startRec) G.STUDY_MEDIA.startRec();
+      else openComingSoon("Microphone","Voice notes are coming soon in Phase 5.");
+      return;
+    }
+    if(a==="st-print-open"||a==="st-p3-print"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.openPrintSheet) G.STUDY_MEDIA.openPrintSheet();
+      return;
+    }
+    if(a==="st-present"||a==="st-p3-present"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.enterPresent) G.STUDY_MEDIA.enterPresent();
+      return;
+    }
+    if(a==="st-audio-list"){
+      removeSheet("stP3MoreSheet");
+      if(G.STUDY_MEDIA && G.STUDY_MEDIA.showAudioSheet) G.STUDY_MEDIA.showAudioSheet();
+      return;
+    }
     if(a==="st-p3-title"){
       /* notebook title menu: rename, duplicate, export */
       var html='<div class="st-p3-sh-head"><h3>'+esc(v?v.doc.title:"")+'</h3><button type="button" class="pn-btn sm" data-act="st-p3-close-sheet">Done</button></div>' +

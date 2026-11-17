@@ -80,6 +80,7 @@
   /* ---- db (study v3, same as study.js) ---- */
   var dbP = null;
   function db() {
+    try { if (G.STUDY && typeof G.STUDY.db === "function") return G.STUDY.db(); } catch (e) {}
     if (dbP) return dbP;
     dbP = new Promise(function (res, rej) {
       var r = G.indexedDB.open("study", 3);
@@ -94,7 +95,11 @@
         if (!d.objectStoreNames.contains("index")) d.createObjectStore("index", { keyPath: "doc" });
         if (!d.objectStoreNames.contains("audio")) { var a = d.createObjectStore("audio", { keyPath: "id" }); a.createIndex("doc", "doc"); }
       };
-      r.onsuccess = function () { res(r.result); };
+      r.onsuccess = function () {
+        var conn = r.result;
+        conn.onversionchange = function () { dbP = null; try { conn.close(); } catch (e) {} };
+        res(conn);
+      };
       r.onerror = function () { dbP = null; rej(r.error); };
     });
     return dbP;
@@ -322,8 +327,12 @@
         '<button type="button" class="st5b-nav" data-act="st-indoc-prev" aria-label="Previous match">' + ICO.prev + "</button>" +
         '<button type="button" class="st5b-nav" data-act="st-indoc-next" aria-label="Next match">' + ICO.next + "</button>" +
         '<button type="button" class="st5b-nav" data-act="st-indoc-close" aria-label="Close search">' + ICO.close + "</button>";
+      var dt = root.querySelector("#stDocTabs");
+      var p3Top = root.querySelector("#stP3Top");
       var tb = root.querySelector("#stTb");
-      if (tb && tb.parentNode) tb.parentNode.insertBefore(el, tb.nextSibling);
+      if (dt && dt.parentNode) dt.parentNode.insertBefore(el, dt.nextSibling);
+      else if (p3Top && p3Top.parentNode) p3Top.parentNode.insertBefore(el, p3Top.nextSibling);
+      else if (tb && tb.parentNode) tb.parentNode.insertBefore(el, tb.nextSibling);
       else root.appendChild(el);
       var inp = el.querySelector("#st5bInQ");
       inp.addEventListener("input", function () { runInDoc(inp.value); });
@@ -338,10 +347,10 @@
   }
   function runInDoc(raw) {
     var V = studyState();
-    var q = String(raw || "").trim().toLowerCase();
-    inDoc.q = q; inDoc.seq++;
+    var qs = String(raw || "").trim().toLowerCase();
+    inDoc.q = qs; inDoc.seq++;
     var countEl = hostRoot() && hostRoot().querySelector("#st5bInCount");
-    if (!V || !V.id || q.length < 2) {
+    if (!V || !V.id || qs.length < 2) {
       inDoc.hits = []; inDoc.idx = -1; clearInDocHL();
       if (countEl) countEl.textContent = "0 of 0";
       return;
@@ -351,7 +360,7 @@
     var seq = inDoc.seq;
     q("ptext", "readonly", function (o) { try { return o.index("doc").getAll(G.IDBKeyRange.only(V.id)); } catch (e) { return o.getAll(); } }).then(function (rows) {
       if (seq !== inDoc.seq) return;
-      rows = (rows || []).filter(function (x) { return x.doc === V.id && x.text && x.text.toLowerCase().indexOf(q) !== -1; });
+      rows = (rows || []).filter(function (x) { return x.doc === V.id && x.text && x.text.toLowerCase().indexOf(qs) !== -1; });
       rows.sort(function (a, b) { return a.page - b.page; });
       inDoc.hits = rows; inDoc.idx = rows.length ? 0 : -1;
       clearInDocHL();
@@ -415,8 +424,21 @@
   }
   function setMicBtn() {
     var root = hostRoot(); if (!root) return;
-    var b = root.querySelector('[data-act="st-audio-rec"]');
-    if (b) { b.classList.toggle("on", rec.active); b.setAttribute("aria-pressed", rec.active ? "true" : "false"); b.innerHTML = rec.active ? ICO.micOff : ICO.mic; }
+    var btns = root.querySelectorAll('[data-act="st-audio-rec"], [data-act="st-p3-mic"]');
+    Array.prototype.forEach.call(btns, function (b) {
+      if (b._lastRecActive === rec.active && b._inited) return;
+      b._lastRecActive = rec.active;
+      b._inited = true;
+      b.classList.toggle("on", rec.active);
+      b.setAttribute("aria-pressed", rec.active ? "true" : "false");
+      var isMenu = b.classList.contains("st-p3-menu-item");
+      if (isMenu) {
+        b.innerHTML = (rec.active ? ICO.micOff : ICO.mic) + '<div class="st-p3-menu-txt"><strong>' + (rec.active ? "Stop recording" : "Voice note") + '</strong><small>' + (rec.active ? "Recording in progress" : "Microphone") + '</small></div>';
+      } else {
+        b.innerHTML = rec.active ? ICO.micOff : ICO.mic;
+        b.setAttribute("aria-label", rec.active ? "Stop recording" : "Microphone");
+      }
+    });
   }
   function startRec() {
     var V = studyState(); if (!V || !V.id) return toast("Open a document first.");
@@ -460,8 +482,8 @@
   function installSeekLayers() {
     stopSeekLayersOnly();
     var V = studyState(); if (!V || !V.pg) return;
-    /* While a pen tool is selected the user is writing: do not overlay seek targets. */
-    if (V.tool) return;
+    /* While a writing tool is selected the user is writing: do not overlay seek targets (the editor always has a tool, so lasso/laser/elements/image allow seeking). */
+    if (V.tool && /^(pen|er|hl|shapes|text)$/.test(V.tool)) return;
     var root = hostRoot(); if (root) root.classList.add("st5b-seek");
     Object.keys(V.pg).forEach(function (k) {
       var pg = V.pg[k]; if (!pg || !pg.el) return;
@@ -566,11 +588,13 @@
   }
   function refreshSettingsStorage() {
     var el = hostRoot() && hostRoot().querySelector("#st5bStorage");
-    var V = studyState(); if (!el || !V) return;
+    var V = studyState(); if (!el || !V || el._busy) return;
+    el._busy = true;
     storageForDoc(V.id).then(function (s) {
-      if (s.total) el.textContent = "This notebook uses " + fmtBytes(s.total) + " on this phone (" + s.n + (s.n === 1 ? " recording" : " recordings") + ", " + fmtBytes(s.audioBytes) + " audio).";
-      else el.textContent = "This notebook uses almost no space on this phone.";
-    });
+      el._busy = false;
+      var msg = s.total ? ("This notebook uses " + fmtBytes(s.total) + " on this phone (" + s.n + (s.n === 1 ? " recording" : " recordings") + ", " + fmtBytes(s.audioBytes) + " audio).") : "This notebook uses almost no space on this phone.";
+      if (el.textContent !== msg) el.textContent = msg;
+    }, function () { el._busy = false; });
   }
   /* ================= 5.11 Print ================= */
   function sheet(html, ok, label) {
@@ -727,9 +751,10 @@
   }
   /* ================= viewer toolbar + sheets injection ================= */
   function mediaButtons() {
-    /* Injected into the viewer toolbar; study.js toolbar stays untouched apart from
-       the stroke-a hook. Buttons dispatch through STUDY.act (st- prefix). */
+    /* If polished #stP3Top is present, media controls live in #stP3Top and #stP3MoreSheet.
+       Do not inject extra buttons into #stTb. */
     var root = hostRoot(); if (!root) return;
+    if (root.querySelector("#stP3Top")) return;
     var tb = root.querySelector("#stTb");
     if (!tb || tb.querySelector('[data-act="st-media-search"]')) return;
     var more = tb.querySelector(".st-tb-more");
@@ -782,19 +807,24 @@
   }
   /* ================= actions (st- prefix via STUDY.act wrapper) ================= */
   var origAct = null, origBack = null, origLeave = null;
+  function closeP3More() {
+    var root = hostRoot(); if (!root) return;
+    var s = root.querySelector("#stP3MoreSheet");
+    if (s && s.parentNode) s.parentNode.removeChild(s);
+  }
   function mediaAct(a, el, h) {
-    if (a === "st-media-search") { toggleInDoc(!(inDocBar())); return true; }
+    if (a === "st-media-search" || a === "st-p3-search") { closeP3More(); toggleInDoc(!(inDocBar())); return true; }
     if (a === "st-indoc-close") { toggleInDoc(false); return true; }
     if (a === "st-indoc-prev") { stepInDoc(-1); return true; }
     if (a === "st-indoc-next") { stepInDoc(1); return true; }
-    if (a === "st-audio-rec") { startRec(); return true; }
-    if (a === "st-audio-list") { showAudioSheet(); return true; }
+    if (a === "st-audio-rec" || a === "st-p3-mic") { closeP3More(); startRec(); return true; }
+    if (a === "st-audio-list") { closeP3More(); showAudioSheet(); return true; }
     if (a === "st-audio-play") { playRec(el.getAttribute("data-id")); return true; }
     if (a === "st-audio-del") { delRec(el.getAttribute("data-id")); return true; }
-    if (a === "st-print-open") { openPrintSheet(); return true; }
+    if (a === "st-print-open" || a === "st-p3-print") { closeP3More(); openPrintSheet(); return true; }
     if (a === "st-print-page") { doPrint("page"); return true; }
     if (a === "st-print-all") { doPrint("all"); return true; }
-    if (a === "st-present") { enterPresent(); return true; }
+    if (a === "st-present" || a === "st-p3-present") { closeP3More(); enterPresent(); return true; }
     if (a === "st-present-exit") { exitPresent(); return true; }
     if (a === "st-present-prev") { stepPresent(-1); return true; }
     if (a === "st-present-next") { stepPresent(1); return true; }
@@ -840,9 +870,10 @@
     pure: PURE, stampStroke: stampStroke, indexText: indexText, indexStrokeText: indexStrokeText,
     pageThumb: pageThumb, runInDoc: runInDoc, stepInDoc: stepInDoc, toggleInDoc: toggleInDoc,
     startRec: startRec, stopRec: stopRec, playRec: playRec, stopPlayer: stopPlayer, delRec: delRec,
-    showAudioSheet: showAudioSheet, storageForDoc: storageForDoc, openPrintSheet: openPrintSheet,
-    doPrint: doPrint, enterPresent: enterPresent, exitPresent: exitPresent, stepPresent: stepPresent,
-    mediaButtons: mediaButtons, _state: function () { return { rec: rec, player: player, inDoc: inDoc, pres: pres }; }
+    showAudioSheet: showAudioSheet, storageForDoc: storageForDoc, refreshSettingsStorage: refreshSettingsStorage,
+    openPrintSheet: openPrintSheet, doPrint: doPrint, enterPresent: enterPresent, exitPresent: exitPresent,
+    stepPresent: stepPresent, mediaButtons: mediaButtons,
+    _state: function () { return { rec: rec, player: player, inDoc: inDoc, pres: pres }; }
   };
 })(typeof window !== "undefined" ? window : this);
 

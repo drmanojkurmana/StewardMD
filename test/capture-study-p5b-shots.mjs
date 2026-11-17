@@ -107,78 +107,72 @@ for (const dev of DEVICES) {
     await page.waitForTimeout(300);
 
     // open viewer
+    await page.click('[data-act="st5a-tab"][data-v="documents"]');
     await page.locator(".st-doc", { hasText: "Cardiology" }).locator(".st-open").click();
     await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 15000 });
     await setupTheme();
     await sleep(300);
 
     // 5.7 in-document search open
-    if (await page.locator('[data-act="st-media-search"]').count()) {
-      await page.click('[data-act="st-media-search"]');
-      await page.waitForSelector("#st5bInQ", { timeout: 5000 });
-      await page.fill("#st5bInQ", "systole");
-      await page.waitForTimeout(800);
-      await setupTheme();
-      await page.screenshot({ path: join(OUT_DIR, `${tag}-indoc-search.png`) });
-      console.log(`Saved ${tag}-indoc-search.png`);
-      if (await page.locator('[data-act="st-indoc-close"]').count()) {
-        await page.click('[data-act="st-indoc-close"]');
-        await sleep(200);
-      }
+    const topSearch = page.locator('#stP3Top [data-act="st-p3-search"]');
+    if (await topSearch.isVisible()) {
+      await topSearch.click();
+    } else {
+      await page.click('#stP3Top [data-act="st-p3-more"]');
+      await page.waitForSelector('#stP3MoreSheet [data-act="st-p3-search"]', { timeout: 5000 });
+      await page.click('#stP3MoreSheet [data-act="st-p3-search"]');
+    }
+    await page.waitForSelector("#st5bInQ", { timeout: 5000 });
+    await page.fill("#st5bInQ", "systole");
+    await page.waitForTimeout(800);
+    await setupTheme();
+    await page.screenshot({ path: join(OUT_DIR, `${tag}-indoc-search.png`) });
+    console.log(`Saved ${tag}-indoc-search.png`);
+    if (await page.locator('[data-act="st-indoc-close"]').count()) {
+      await page.click('[data-act="st-indoc-close"]');
+      await sleep(200);
     }
 
     // 5.11 print sheet
-    if (await page.locator('[data-act="st-print-open"]').count()) {
-      await page.click('[data-act="st-print-open"]');
-      await page.waitForSelector("#stSheet", { timeout: 5000 });
-      await setupTheme();
+    await page.click('#stP3Top [data-act="st-p3-more"]');
+    await page.waitForSelector('#stP3MoreSheet [data-act="st-print-open"]', { timeout: 5000 });
+    await page.click('#stP3MoreSheet [data-act="st-print-open"]');
+    await page.waitForSelector("#stSheet", { timeout: 5000 });
+    await setupTheme();
+    await sleep(200);
+    await page.screenshot({ path: join(OUT_DIR, `${tag}-print-sheet.png`) });
+    console.log(`Saved ${tag}-print-sheet.png`);
+    if (await page.locator('[data-act="st-scancel"]').count()) {
+      await page.click('[data-act="st-scancel"]');
       await sleep(200);
-      await page.screenshot({ path: join(OUT_DIR, `${tag}-print-sheet.png`) });
-      console.log(`Saved ${tag}-print-sheet.png`);
-      if (await page.locator('[data-act="st-scancel"]').count()) {
-        await page.click('[data-act="st-scancel"]');
-        await sleep(200);
-      }
     }
 
     // 5.9 audio sheet (recordings list; empty state)
-    if (await page.locator('[data-act="st-more"]').count()) {
-      await page.click('[data-act="st-more"]');
-      await sleep(300);
-      if (await page.locator('[data-act="st-audio-list"]').count()) {
-        await page.click('[data-act="st-audio-list"]');
-        await page.waitForSelector("#st5bRecList", { timeout: 5000 });
-        await setupTheme();
-        await sleep(200);
-        await page.screenshot({ path: join(OUT_DIR, `${tag}-audio-list.png`) });
-        console.log(`Saved ${tag}-audio-list.png`);
-        if (await page.locator('[data-act="st-scancel"]').count()) {
-          await page.click('[data-act="st-scancel"]');
-          await sleep(150);
-        }
-      } else {
-        await setupTheme();
-        await page.screenshot({ path: join(OUT_DIR, `${tag}-audio-list.png`) });
-        console.log(`Saved ${tag}-audio-list.png`);
-      }
-      if (await page.locator('[data-act="st-close-more"]').count()) {
-        await page.click('[data-act="st-close-more"]');
-        await sleep(150);
-      }
+    await page.click('#stP3Top [data-act="st-p3-more"]');
+    await page.waitForSelector('#stP3MoreSheet [data-act="st-audio-list"]', { timeout: 5000 });
+    await page.click('#stP3MoreSheet [data-act="st-audio-list"]');
+    await page.waitForSelector("#st5bRecList", { timeout: 5000 });
+    await setupTheme();
+    await sleep(200);
+    await page.screenshot({ path: join(OUT_DIR, `${tag}-audio-list.png`) });
+    console.log(`Saved ${tag}-audio-list.png`);
+    if (await page.locator('[data-act="st-scancel"]').count()) {
+      await page.click('[data-act="st-scancel"]');
+      await sleep(150);
     }
 
     // 5.12 presentation
-    if (await page.locator('[data-act="st-present"]').count()) {
-      await page.click('[data-act="st-present"]');
-      await page.waitForSelector("#st5bPresent", { timeout: 8000 });
-      await page.waitForTimeout(600);
-      await setupTheme();
-      await page.screenshot({ path: join(OUT_DIR, `${tag}-present.png`) });
-      console.log(`Saved ${tag}-present.png`);
-      if (await page.locator('[data-act="st-present-exit"]').count()) {
-        await page.click('[data-act="st-present-exit"]');
-        await sleep(300);
-      }
+    await page.click('#stP3Top [data-act="st-p3-more"]');
+    await page.waitForSelector('#stP3MoreSheet [data-act="st-present"]', { timeout: 5000 });
+    await page.click('#stP3MoreSheet [data-act="st-present"]');
+    await page.waitForSelector("#st5bPresent", { timeout: 8000 });
+    await page.waitForTimeout(600);
+    await setupTheme();
+    await page.screenshot({ path: join(OUT_DIR, `${tag}-present.png`) });
+    console.log(`Saved ${tag}-present.png`);
+    if (await page.locator('[data-act="st-present-exit"]').count()) {
+      await page.click('[data-act="st-present-exit"]');
+      await sleep(300);
     }
 
     await ctx.close();

@@ -75,7 +75,7 @@ await page.setInputFiles("#stFile", { name: "fixture.pdf", mimeType: "applicatio
 await page.waitForSelector(".st-doc", { timeout: 20000 });
 ok(/2 pages/.test(await page.locator(".st-doc").innerText()), "library: imported PDF listed with 2 pages");
 ok(await page.evaluate(() => /^data:image\/jpeg/.test(document.querySelector(".st-th").src)), "library: page-1 thumbnail");
-const meta = await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => res(q.result[0]); }; }));
+const meta = await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => { const d = q.result[0]; r.result.close(); res(d); }; }; }));
 ok(meta.sha256 === SHA && meta.pageCount === 2 && meta.folderId === null && meta.favourite === false && meta.store === "idb", "metadata: sha256 of the original, pageCount, folderId, favourite, idb fallback");
 
 /* ---- viewer + pen ---- */
@@ -153,6 +153,7 @@ ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso:
 ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
 await page.click('[data-act="st-lasso-more"]');   // polish: Save as element lives in the selection More menu
 ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element is in the selection More menu");
+if (await page.locator('#stSelMore [data-sel-close]').count()) await page.click('#stSelMore [data-sel-close]');
 await page.click('[data-act="st-lasso-ai-explain"]');
 await page.waitForSelector("#stSheet", { timeout: 5000 });
 ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
@@ -1063,8 +1064,31 @@ await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
 await page.waitForSelector('.st-pg[data-n="1"] .st-tl span, .st-pg[data-n="1"]', { timeout: 10000 });
 await page.waitForTimeout(600);
-ok(await page.evaluate(() => document.querySelectorAll('#stTb [data-act="st-media-search"], #stTb [data-act="st-audio-rec"], #stTb [data-act="st-print-open"], #stTb [data-act="st-present"]').length === 4), "P5b viewer: search, mic, print and present buttons in the top bar");
-await page.click('[data-act="st-media-search"]');
+ok(await page.evaluate(() => {
+  const topSearch = document.querySelector('#stP3Top [data-act="st-p3-search"], #stP3Top [data-act="st-media-search"]');
+  const topMic = document.querySelector('#stP3Top [data-act="st-p3-mic"], #stP3Top [data-act="st-audio-rec"]');
+  const noTbDupes = document.querySelectorAll('#stTb [data-act="st-media-search"], #stTb [data-act="st-audio-rec"], #stTb [data-act="st-print-open"], #stTb [data-act="st-present"]').length === 0;
+  return !!topSearch && !!topMic && noTbDupes;
+}), "P5b viewer: search and mic in #stP3Top, no duplicate buttons in #stTb");
+const openInDocSearch = async () => {
+  if (await page.locator('#stP3Top [data-act="st-p3-search"]').isVisible()) {
+    await page.click('#stP3Top [data-act="st-p3-search"]');
+  } else {
+    await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+    await page.waitForSelector('#stP3MoreSheet');
+    await page.click('#stP3MoreSheet [data-act="st-p3-search"]');
+  }
+};
+const toggleMic = async () => {
+  if (await page.locator('#stP3Top [data-act="st-p3-mic"]').isVisible()) {
+    await page.click('#stP3Top [data-act="st-p3-mic"]');
+  } else {
+    await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+    await page.waitForSelector('#stP3MoreSheet');
+    await page.click('#stP3MoreSheet [data-act="st-p3-mic"]');
+  }
+};
+await openInDocSearch();
 await page.waitForSelector("#st5bInQ", { timeout: 5000 });
 await page.fill("#st5bInQ", "systole");
 await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1", null, { timeout: 10000 });
@@ -1089,6 +1113,7 @@ await page.waitForSelector(".st-hit", { timeout: 10000 });
 ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: AI Convert text (src convert) is found");
 await page.waitForTimeout(1500);
 ok((await page.locator(".st-hit .st5b-th").count()) >= 1, "search: result shows a page thumbnail");
+await page.click('[data-act="st5a-tab"][data-v="documents"]');   // back to the Documents grid (5a library tabs)
 /* audio: mocked recorder stamps strokes, blob persists, tap-to-seek moves playback */
 await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
@@ -1108,17 +1133,18 @@ await page.evaluate(() => {
   Object.defineProperty(proto, "currentTime", { get() { return this.__ct || 0; }, set(v) { this.__ct = v; window.__seeked = v; } });
   Object.defineProperty(proto, "duration", { get() { return this.__dur || 10; }, set(v) { this.__dur = v; } });
 });
-await page.click('[data-act="st-audio-rec"]');
+await toggleMic();
 await page.waitForFunction(() => STUDY_MEDIA._state().rec.active === true, null, { timeout: 5000 });
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await stroke(0.3);
 await page.waitForTimeout(400);
 ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter(x => !x.gone && x.a != null); return s.length >= 1 && s[0].a >= 0; }), "audio: stroke drawn while recording stores its recording offset a");
-await page.click('[data-act="st-audio-rec"]');
+await toggleMic();
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("audio").objectStore("audio").getAll(); q.onsuccess = () => res(q.result.length >= 1); }; }), null, { timeout: 10000 });
 ok(true, "audio: recording Blob is stored in IndexedDB");
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
 await page.waitForSelector('[data-act="st-audio-list"]', { timeout: 5000 });
+await page.waitForFunction(() => /uses/.test((document.querySelector("#st5bStorage") || {}).textContent || ""), null, { timeout: 5000 }).catch(() => {});
 ok(await page.evaluate(() => /uses/.test(document.querySelector("#st5bStorage").textContent)), "audio: Settings shows storage used per notebook");
 await page.click('[data-act="st-audio-list"]');
 await page.waitForSelector("#st5bRecList .st5b-rec", { timeout: 5000 });
@@ -1126,7 +1152,7 @@ ok(true, "audio: recordings list shows per notebook");
 await page.click("#st5bRecList [data-act='st-audio-play']");
 await page.waitForFunction(() => STUDY_MEDIA._state().player.mode === true, null, { timeout: 5000 });
 await page.click('[data-act="st-scancel"]');
-await page.click('[data-act="st-tool"]'); /* toggle pen off so tap-to-seek layers show */
+await page.click('[data-act="st-tool"][data-v="lasso"]'); /* leave the writing tools so tap-to-seek layers show */
 await page.waitForFunction(() => document.querySelector(".st5b-seeklayer") != null, null, { timeout: 5000 });
 ok(true, "audio: playback installs tap-to-seek layers");
 await page.evaluate(() => {
@@ -1141,17 +1167,23 @@ await page.waitForFunction(() => window.__seeked != null, null, { timeout: 5000 
 ok(await page.evaluate(() => Math.abs(window.__seeked - window.__expectedA) < 0.01), "audio: tapping a stroke jumps playback to its recording time");
 await page.evaluate(() => STUDY_MEDIA.stopPlayer());
 /* print sheet + iframe print */
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-print-open"]', { timeout: 5000 });
 await page.click('[data-act="st-print-open"]');
 await page.waitForSelector("#stSheet", { timeout: 5000 });
 ok(/This page/.test(await page.locator("#stSheet").innerText()) && /All pages/.test(await page.locator("#stSheet").innerText()), "print: sheet offers this page and all pages");
-await page.evaluate(() => { window.__printed = 0; HTMLIFrameElement.prototype.contentWindow; });
+await page.evaluate(() => { window.__printed = 0; });
 await page.click('[data-act="st-print-page"]');
 await page.waitForSelector(".st5b-print-frame", { timeout: 5000 });
 ok(true, "print: this page renders to an iframe image for print()");
 /* presentation: fullscreen, chrome hidden, laser visible */
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-present"]', { timeout: 5000 });
 await page.click('[data-act="st-present"]');
 await page.waitForSelector("#st5bPresent", { timeout: 5000 });
 ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stTb")).display === "none"), "present: toolbar hidden");
+ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stP3Top")).display === "none"), "present: top bar hidden");
+ok(await page.evaluate(() => !document.querySelector("#stDocTabs") || getComputedStyle(document.querySelector("#stDocTabs")).display === "none"), "present: doc tabs hidden");
 ok(await page.evaluate(() => !!document.querySelector(".st5b-laser") && !!document.querySelector(".st5b-pres-img")), "present: laser and page image visible");
 await page.evaluate(() => { const st = document.querySelector(".st5b-pres-stage"), r = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointermove", { pointerType: "mouse", clientX: r.left + 100, clientY: r.top + 100, bubbles: true })); });
 await page.waitForTimeout(300);

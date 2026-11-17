@@ -354,6 +354,7 @@
       var ts = toolSettings(st, V.tool);
       var pt = sample(e); lastMoveTs = e.timeStamp || Date.now(); lastPt = pt;
       cur = { id: api.uid(), doc: V.id, page: api.pid(n), tool: V.tool, color: ts.color, w: ts.widths[ts.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now(), style: V.tool === "hl" ? "ball" : ts.style, sens: ts.sens, tip: ts.tip };
+      try { if (window.STUDY_MEDIA && window.STUDY_MEDIA.stampStroke) { var aOff = window.STUDY_MEDIA.stampStroke(); if (aOff != null) cur.a = aOff; } } catch (x) {} /* Phase 5b: audio offset for tap-to-seek */
       scheduleRedraw(cur); e.preventDefault();
     });
     ov.addEventListener("pointermove", function (e) {

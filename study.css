@@ -1443,16 +1443,40 @@
 .pn-root .st5b-pres-n { color: #e6f5f1; font-size: 13px; font-weight: 700; min-width: 64px; text-align: center; }
 .pn-root .st5b-laser { position: absolute; left: 0; top: 0; width: 16px; height: 16px; pointer-events: none; opacity: 0; z-index: 5; }
 .pn-root .st5b-laser-dot { display: block; width: 16px; height: 16px; border-radius: 50%; background: #e5484d; border: 2px solid #fff; box-shadow: 0 0 0 3px rgba(229,72,77,0.35); }
-.pn-root .st5b-presenting .st-tb, .pn-root .st5b-presenting .st-doc-tabs, .pn-root .st5b-presenting .st-ai-box { display: none !important; }
+.pn-root.st5b-presenting #stP3Top,
+.pn-root .st5b-presenting #stP3Top,
+.pn-root.st5b-presenting .st-p3-topbar,
+.pn-root .st5b-presenting .st-p3-topbar,
+.pn-root.st5b-presenting #stDocTabs,
+.pn-root .st5b-presenting #stDocTabs,
+.pn-root.st5b-presenting #stP3Pager,
+.pn-root .st5b-presenting #stP3Pager,
+.pn-root.st5b-presenting .st-tb,
+.pn-root .st5b-presenting .st-tb,
+.pn-root.st5b-presenting #stToolOptions,
+.pn-root .st5b-presenting #stToolOptions,
+.pn-root.st5b-presenting #stInkCtx,
+.pn-root .st5b-presenting #stInkCtx,
+.pn-root.st5b-presenting .st-doc-tabs,
+.pn-root .st5b-presenting .st-doc-tabs,
+.pn-root.st5b-presenting .st-ai-box,
+.pn-root .st5b-presenting .st-ai-box { display: none !important; }
+body.st5b-presenting #stP3Top,
+body.st5b-presenting .st-p3-topbar,
+body.st5b-presenting #stDocTabs,
+body.st5b-presenting #stP3Pager,
+body.st5b-presenting #stTb { display: none !important; }
+.pn-root .st-p3-btn[data-act="st-p3-mic"].on,
+.pn-root .st-p3-menu-item[data-act="st-p3-mic"].on {
+  color: #e5484d;
+  background: rgba(229, 72, 77, 0.15);
+  border-color: rgba(229, 72, 77, 0.35);
+}
 @media (prefers-reduced-motion: reduce) {
   .pn-root .st5b-nav, .pn-root .st5b-rec-play, .pn-root .st5b-pres-btn { transition: none !important; animation: none !important; }
 }
 .pn-root .st5b-nav:focus-visible, .pn-root .st5b-rec-play:focus-visible, .pn-root .st5b-rec-del:focus-visible { outline: 2px solid var(--pn-km-mint, #42cdb5); outline-offset: 2px; }
 @media (max-width: 420px) { .pn-root .st5b-indoc-count { min-width: 44px; } }
-@media (max-width: 560px) {
-  .pn-root .st-tb { flex-wrap: wrap; row-gap: 4px; }
-  .pn-root .st-tb-more { flex-wrap: wrap; }
-}
 
 /* Phase 4: insert (Text, Image, Stickers, Laser, Format Bar) */
 .pn-root .st-items-layer {
