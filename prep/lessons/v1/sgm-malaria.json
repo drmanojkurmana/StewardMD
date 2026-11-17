@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-malaria",
+ "subject": "ss-general-medicine",
+ "title": "Malaria",
+ "minutes": 11,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Malaria** is a protozoal disease from Plasmodium species transmitted by Anopheles mosquito. **Five species** infect humans and **P falciparum** causes severe disease. Global burden is about **two hundred forty-one million cases** yearly, with **six hundred twenty-seven thousand deaths** mostly in Africa and children under five years.",
+   "say": "Malaria is a protozoal disease caused by Plasmodium species and spread by the Anopheles mosquito. Five species infect humans and falciparum causes the most severe disease. The global burden is very large, with hundreds of millions of cases yearly and most deaths occurring in young children in Africa.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Severe malaria",
+     "points": [
+      "P falciparum and P vivax cause severe disease",
+      "Cerebral malaria is common in children",
+      "Renal failure follows blackwater fever",
+      "ARASD follows falciparum infection"
+     ]
+    },
+    "right": {
+     "title": "Benign malaria",
+     "points": [
+      "P vivax relapses from liver hypnozoites",
+      "P ovale also relapses from liver forms",
+      "P malariae causes nephrosis in children",
+      "P knowlesi mimics falciparum and is zoonotic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anopheles mosquito** transmits malaria during a **night bite** at 8 PM to 4 AM. **Stagnant water** breeds larvae in tanks and marshes. **Travel to endemic area** is the strongest risk factor, with **monsoon transmission** peaking in months of heavy rain.",
+   "say": "The Anopheles mosquito can transmit malaria when it bites at night. Larvae can breed in stagnant water such as tanks and marshes. Travel to an endemic area is the strongest risk factor, and transmission peaks during the monsoon months when rains are heavy.",
+   "vis": null
+  },
+  {
+   "tx": "**Sporozoite** enters blood after a mosquito bite and reaches **liver within 30 minutes** to multiply silently. **Merozoite** release from liver brings fever after **7 to 30 days** incubation period. **Schizont rupture** in red cells releases **haemozoin pigment** every 48 hours in vivax infection.",
+   "say": "After a mosquito bite, sporozoites can reach the liver within minutes and multiply there silently. When merozoites are released into the blood, fever begins after an incubation of about one to four weeks. Schizont rupture in red cells releases haemozoin pigment at regular intervals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b",
+      "label": "Mosquito bite",
+      "sub": "sporozoites injected"
+     },
+     {
+      "id": "l",
+      "label": "Liver stage",
+      "sub": "7 to 30 days"
+     },
+     {
+      "id": "r",
+      "label": "Blood stage",
+      "sub": "red cell rupture"
+     },
+     {
+      "id": "g",
+      "label": "Gametocyte",
+      "sub": "back to mosquito"
+     }
+    ],
+    "edges": [
+     [
+      "b",
+      "l"
+     ],
+     [
+      "l",
+      "r"
+     ],
+     [
+      "r",
+      "g"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Periodic fever** with chills lasting **6 to 12 hours** is the classic pattern in early disease. **Bidimensional fever** occurs in vivax every **48 hours** with sweating. **Splenomegaly** with **pallor** and **jaundice** develop after repeated attacks over years. **Cerebral malaria** causes **seizures and coma** in falciparum infection.",
+   "say": "Periodic fever with chills lasting many hours is the classic pattern of malaria. Vivax gives a forty eight hourly rhythm. Splenomegaly with pallor and jaundice develops after repeated attacks. Cerebral malaria presents with seizures and coma and is a medical emergency.",
+   "vis": null
+  },
+  {
+   "tx": "**Thick blood smear** is the first test to detect low parasitaemia. **Thin smear** identifies the Plasmodium species by morphology. **Gold standard** is **microscopy of Giemsa stained smear**. **Rapid antigen test** detects **histidine rich protein 2** for falciparum within 15 minutes.",
+   "say": "A thick blood smear is the first test to detect low levels of parasitaemia. A thin smear then identifies the species by morphology. Microscopy of a Giemsa stained smear is the gold standard. A rapid antigen test detects a falciparum specific protein within minutes and is useful in the field.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Time"
+    ],
+    "rows": [
+     [
+      "Thick smear",
+      "Detect parasites",
+      "15 minutes"
+     ],
+     [
+      "Thin smear",
+      "Species identification",
+      "30 minutes"
+     ],
+     [
+      "Rapid antigen test",
+      "Falciparum screen",
+      "15 minutes"
+     ],
+     [
+      "PCR",
+      "Confirms species",
+      "6 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Artesunate 2.4 mg per kg** intravenous at fixed hours is first line for severe malaria. **Artemether lumefantrine 80 mg 480 mg** twice daily for 3 days treats **uncomplicated falciparum** disease. **Quinine 10 mg per kg** is used when artesunate is unavailable or in **pregnancy**.",
+   "say": "Intravenous artesunate dosed by body weight at fixed hours is first line for severe malaria. Artemether lumefantrine given twice daily for three days treats uncomplicated falciparum malaria. Quinine by weight remains an option when artesunate is unavailable or in pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "**Primaquine 15 mg daily** for 14 days prevents **vivax relapses** arising from dormant liver forms. **G6PD testing** must precede primaquine to avoid fatal **haemolysis**. **Chloroquine 25 mg per kg** over 3 days treats the **vivax blood stage** unless the strain is resistant to chloroquine.",
+   "say": "Primaquine given daily for fourteen days prevents vivax relapses from dormant liver forms. A glucose six phosphate dehydrogenase test must be done first to avoid haemolysis. Chloroquine given by weight over three days clears the blood stage of vivax unless resistance is present.",
+   "vis": null
+  },
+  {
+   "tx": "**Cerebral malaria** causes mortality in **20% of cases** without any treatment available. **Acute kidney injury** needs dialysis in **10% of severe cases** seen each year. **Blackwater fever** with **haemoglobinuria** follows massive intravascular haemolysis after quinine. **Pulmonary oedema** is the leading cause of death in **adult falciparum** cases worldwide.",
+   "say": "Cerebral malaria is fatal in about one fifth of untreated cases. Acute kidney injury may need dialysis in roughly one in ten severe cases. Blackwater fever presents with haemoglobinuria after intravascular haemolysis. Pulmonary oedema is the leading cause of death in adult falciparum malaria.",
+   "vis": null
+  },
+  {
+   "tx": "**Bed nets** treated with **insecticide** reduce transmission by **seventy percent** in endemic zones. **Indoor spraying** with **DDT 1 g per square metre** kills resting mosquitoes. **Larvicides** control breeding in tanks. **Chemoprophylaxis** with **doxycycline 100 mg daily** protects travellers in **high risk areas**.",
+   "say": "Insecticide treated bed nets reduce transmission very substantially in endemic zones. Indoor spraying kills resting mosquitoes inside houses, protecting everyone who sleeps there. Larvicides control breeding sites such as industrial tanks. Chemoprophylaxis greatly protects travellers entering high risk areas.",
+   "vis": null
+  },
+  {
+   "tx": "**Schuffner dots** in red cells identify **vivax infection** under the microscope. **Maurer clefts** identify **falciparum infection** in thin smears. **Signet ring** forms are typical of **falciparum trophozoites**. **Duration of primaquine** is **14 days**, not 5 days, as asked in **SS traps**.",
+   "say": "Schuffner dots in red cells identify vivax infection under the microscope. Maurer clefts identify falciparum infection in thin smears. Signet ring forms are typical of falciparum trophozoites. Remember that primaquine for vivax relapse is given for fourteen days, a favourite examination trap.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** is the malaria pattern grid to memorise. **Falciparum** kills and therefore needs **artesunate** therapy. **Vivax** relapses and needs **primaquine** for liver forms. **Rapid antigen** detects **histidine rich protein 2** within minutes. **Thick smear** detects parasites and **thin smear** speciates them. **Cerebral malaria** is the **deadliest** feature of all.",
+   "say": "This is the high yield summary for malaria. Falciparum kills and needs artesunate. Vivax relapses and needs primaquine after enzyme testing. A rapid antigen test detects a falciparum specific protein. The thick smear detects parasites while the thin smear identifies the species. Cerebral malaria is the deadliest feature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Falciparum",
+     "Vivax"
+    ],
+    "rows": [
+     [
+      "Course",
+      "Severe and fatal",
+      "Relapsing and benign"
+     ],
+     [
+      "Fever rhythm",
+      "Irregular 24 hours",
+      "48 hourly pattern"
+     ],
+     [
+      "Liver form",
+      "None dormant",
+      "Hypnozoite present"
+     ],
+     [
+      "Smear dots",
+      "Maurer clefts",
+      "Schuffner dots"
+     ],
+     [
+      "First drug",
+      "Artesunate",
+      "Chloroquine"
+     ],
+     [
+      "Relapse drug",
+      "Not needed",
+      "Primaquine 14 days"
+     ],
+     [
+      "Killer feature",
+      "Cerebral malaria",
+      "None severe"
+     ]
+    ]
+   }
+  }
+ ]
+}

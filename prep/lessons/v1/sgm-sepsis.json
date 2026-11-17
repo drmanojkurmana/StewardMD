@@ -1,0 +1,98 @@
+{
+  "v": 1,
+  "module": "sgm-sepsis",
+  "subject": "ss-general-medicine",
+  "title": "Sepsis and septic shock",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Sepsis** involves dangerous organ failure driven by an abnormal immune response to infection, while **septic shock** is the vasopressor refractory hypotension with **lactate above 2 mmol per L** despite fluids. The **Surviving Sepsis Campaign** reports more than 11 million deaths yearly, representing 20% of global mortality. Early antibiotics within 1 hour and **30 mL per kg** balanced crystalloid form the cornerstone. Median age of affected patients exceeds 65 years in most cohorts.",
+      "say": "Sepsis involves dangerous organ failure driven by an abnormal immune response to infection, while septic shock is vasopressor refractory hypotension with lactate above two millimoles per litre despite fluids. The Surviving Sepsis Campaign reports more than eleven million deaths yearly, representing twenty percent of global mortality. Early antibiotics within one hour and thirty millilitres per kilogram balanced crystalloid form the cornerstone. Median age of affected patients exceeds sixty five years in most cohorts.",
+      "vis": null
+    },
+    {
+      "tx": "Risk factors include **community acquired pneumonia**, urinary tract infection, intra abdominal infection, neutropenia and recent surgery. Immunosuppression, diabetes, chronic kidney disease and **indwelling catheters** raise susceptibility. Gram negative bacilli cause 60% of bloodstream infections, while gram positive and fungal agents account for 40%. **NHSN** surveillance shows central line infection in 1 to 2 per one thousand device days. Multidrug resistant organisms complicate 15% of hospital acquired episodes.",
+      "say": "Risk factors include community acquired pneumonia, urinary tract infection, intra abdominal infection, neutropenia and recent surgery. Immunosuppression, diabetes, chronic kidney disease and indwelling catheters raise susceptibility. Gram negative bacilli cause sixty percent of bloodstream infections, while gram positive and fungal agents account for forty percent. This surveillance program tracks central line infection at one to two per thousand device days. Multidrug resistant organisms complicate fifteen percent of hospital acquired episodes.",
+      "vis": null
+    },
+    {
+      "tx": "Mechanism proceeds through **pathogen associated molecular patterns** activating **toll like receptors**, cytokine storm, endothelial glycocalyx shedding and microvascular thrombosis. Simultaneously **immunosuppression** with T cell exhaustion and regulatory T cell expansion sustains secondary infection. **Sequential organ failure assessment** score captures renal, hepatic and cardiac dysfunction. Lactate rises from tissue hypoperfusion and adrenergic stress. Early organ dysfunction therefore predicts mortality more reliably than fever alone.",
+      "say": "Mechanism proceeds through pathogen associated molecular patterns activating toll like receptors, cytokine storm, endothelial shedding and microvascular thrombosis. Simultaneously immunosuppression with T cell exhaustion and regulatory cell expansion allows secondary infection. Sequential organ failure assessment score reflects renal, hepatic and cardiac dysfunction. Lactate rises from tissue hypoperfusion and adrenergic stress. Early organ dysfunction therefore reflects mortality more reliably than fever alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "a", "label": "Infection and pathogen recognition" },
+          { "id": "b", "label": "Cytokine storm and endotheliitis" },
+          { "id": "c", "label": "Capillary leak and vasodilation" },
+          { "id": "d", "label": "Microthrombosis and hypoperfusion" },
+          { "id": "e", "label": "Multi organ dysfunction" }
+        ],
+        "edges": [[ "a", "b" ], [ "b", "c" ], [ "c", "d" ], [ "d", "e" ]]
+      }
+    },
+    {
+      "tx": "Classic features include fever above thirty eight point three C, hypothermia below thirty six C, **tachycardia above 90 per minute** and tachypnoea above 20 per minute. **Altered mentation** and mottled skin signal cerebral and cutaneous hypoperfusion. The **quick Sequential Organ Failure Assessment** score of 2 or more predicts mortality. Meningism, petechiae and **Waterhouse Friderichsen syndrome** point to meningococcal disease. Postpartum uterine tenderness with foul discharge suggests puerperal sepsis.",
+      "say": "Classic features include fever above thirty eight point three degrees Celsius, hypothermia below thirty six degrees Celsius, tachycardia above ninety per minute and tachypnoea above twenty per minute. Altered mentation and mottled skin signal cerebral and cutaneous hypoperfusion. The quick Sequential Organ Failure Assessment score of two or more reflects mortality risk. Meningism, petechiae and Waterhouse Friderichsen syndrome point to meningococcal disease. Postpartum uterine tenderness with foul discharge suggests puerperal sepsis.",
+      "vis": null
+    },
+    {
+      "tx": "The **first test** is **serum lactate** with blood cultures drawn before antibiotics, plus urine culture and complete blood count with C reactive protein. The **gold standard** is two sets of **blood cultures** with sensitivity seventy three percent for bacteraemia, drawn from separate sites. **Procalcitonin** above 2 ng per mL supports bacterial sepsis with eighty percent specificity. **Computed tomography** localises intra abdominal sources with 90% accuracy. **qSOFA** score 2 or more triggers sepsis bundle activation.",
+      "say": "The first test is serum lactate with blood cultures drawn before antibiotics, plus urine culture and complete blood count with C reactive protein. The gold standard is two sets of blood cultures with sensitivity seventy three percent for bacteraemia, drawn from separate sites. Procalcitonin above two nanograms per millilitre supports bacterial sepsis with eighty percent specificity. Computed tomography localises intra abdominal sources with ninety percent accuracy. Quick score two or more starts sepsis bundle activation.",
+      "vis": null
+    },
+    {
+      "tx": "First line therapy begins with **balanced crystalloid 30 mL per kg** within 3 hours, followed by early **broad spectrum antibiotics** within 1 hour for shock and within 3 hours otherwise. Broad cover plus targeted therapy covers resistant gram negative and gram positive cocci. **Norepinephrine** maintains **mean arterial pressure 65 mmHg** when fluids fail. Hydrocortisone daily benefits refractory shock with 15% excess mortality in delay.",
+      "say": "First line therapy begins with balanced crystalloid thirty millilitres per kilogram within three hours, followed by early broad spectrum antibiotics within one hour for shock and within three hours otherwise. Broad spectrum cover plus targeted therapy is the strategy for resistant organisms. Norepinephrine maintains mean arterial pressure sixty five millimetres of mercury when fluids fail. Delay in antibiotics increases mortality measurably.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Community acquired sepsis",
+          "points": ["Broad antibiotics 2 g intravenously daily", "Add targeted cover 500 mg daily", "Fluids 30 mL per kg initially", "Review culture at 48 hours"]
+        },
+        "right": {
+          "title": "Hospital acquired septic shock",
+          "points": ["Broad cover 1 g every 8 hours", "Targeted cover 15 mg per kg every twelve hours", "Norepinephrine for pressure 65 mmHg", "De escalate by culture report"]
+        }
+      }
+    },
+    {
+      "tx": "Escalation uses **broad cover** four point five grams every 6 hours plus aminoglycoside single dose for Gram negative bacteraemia. **Continuous renal replacement therapy** corrects fluid overload and acidosis in acute kidney injury. Source control means drainage, debridement or device removal within twelve hours. **Hydrocortisone 200 mg per day** is reserved for fluid and vasopressor refractory shock. Ventilation uses low tidal volume 6 mL per kg predicted body weight for lung protection.",
+      "say": "Escalation uses broad cover four point five grams every six hours plus aminoglycoside single dose for Gram negative bacteraemia. Continuous renal replacement therapy improves fluid overload and acidosis in acute kidney injury. Source control means drainage, debridement or device removal within twelve hours. Hydrocortisone two hundred milligrams per day is reserved for fluid and vasopressor refractory shock. Ventilation uses low tidal volume six millilitres per kilogram predicted body weight for lung protection.",
+      "vis": null
+    },
+    {
+      "tx": "The **one hour bundle** mandates lactate measurement, blood cultures, broad spectrum antibiotics, **30 mL per kg crystalloid** and vasopressors for hypotension. **Oxygen targets** of ninety to ninety four percent saturate safely without hyperoxia. **Venous thromboembolism prophylaxis** with thromboprophylaxis five thousand units daily prevents circuit clotting and thrombosis. **Blood sugar** control within one hundred and forty to one hundred and eighty mg per dL avoids hypoglycaemia. Daily **Sequential Organ Failure Assessment** trends judge organ recovery and transition readiness.",
+      "say": "The one hour bundle mandates lactate measurement, blood cultures, broad spectrum antibiotics, thirty millilitres per kilogram crystalloid and vasopressors for hypotension. Oxygen targets of ninety to ninety four percent saturate safely without hyperoxia. Venous thromboembolism prophylaxis with thromboprophylaxis five thousand units daily prevents circuit clotting and thrombosis. Blood sugar control within one hundred and forty to one hundred and eighty milligrams per decilitre avoids hypoglycaemia. Daily organ scores reflect recovery.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **acute kidney injury** in 40% of septic shock, **acute respiratory distress syndrome** in 25% and disseminated intravascular coagulation with 20% excess mortality. Prolonged immunosuppression causes secondary fungal infection in 10% and critical illness polyneuropathy with 30% weakness. **Post intensive care syndrome** affects 50% with cognitive and physical impairment. Without source control, mortality rises by seven point six percent per hour of antibiotic delay. Mortality exceeds 40% in septic shock globally.",
+      "say": "Complications include acute kidney injury in forty percent of septic shock, acute respiratory distress syndrome in twenty five percent and disseminated intravascular coagulation with twenty percent excess mortality. Prolonged immunosuppression causes secondary fungal infection in ten percent and critical illness polyneuropathy with thirty percent weakness. Post intensive care syndrome affects fifty percent with cognitive and physical impairment. Without source control, mortality rises measurably per hour of antibiotic delay. Mortality remains above forty percent in septic shock globally.",
+      "vis": null
+    },
+    {
+      "tx": "Learn the **exam traps**: sepsis needs organ dysfunction, not fever alone, and septic shock needs lactate above 2 mmol per L with vasopressor refractoriness. **Gram positive only cover** never covers Gram negative sepsis, and **qSOFA** 2 or more is the bedside trigger. Blood cultures must precede antibiotics, but therapy never waits beyond 1 hour. **Balanced crystalloid** beats saline for chloride load. Early vasopressor through peripheral line during central access is acceptable practice.",
+      "say": "Learn the exam traps. Sepsis needs organ dysfunction, not fever alone, and septic shock needs lactate above two millimoles per litre with vasopressor refractoriness. Targeted gram positive cover never covers Gram negative sepsis, and quick score two or more is the bedside trigger. Blood cultures must precede antibiotics, but therapy never waits beyond one hour. Balanced crystalloid beats saline for chloride load. Early vasopressor through peripheral line during central access is acceptable practice.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** table anchors bundles, drugs and targets. Fluids are **30 mL per kg** balanced crystalloid within 3 hours. Antibiotics start within **1 hour** for shock. Broad cover every eight hours is the broad Gram negative anchor. **Norepinephrine** targets **mean arterial pressure 65 mmHg**. Lactate above **2 mmol per L** defines shock. De escalation at 48 to seventy two hours based on cultures saves resistance.",
+      "say": "This high yield table anchors bundles, drugs and targets. Fluids are thirty millilitres per kilogram balanced crystalloid within three hours. Antibiotics start within one hour for shock. Broad cover every eight hours is the broad Gram negative anchor. Norepinephrine targets mean arterial pressure sixty five millimetres of mercury. Lactate above two millimoles per litre identifies shock. De escalation at forty eight to seventy two hours based on cultures reduces resistance.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Action", "Specification", "Target", "Timing"],
+        "rows": [
+          ["Fluids", "Balanced crystalloid", "30 mL per kg", "Within 3 hours"],
+          ["Antibiotics", "Broad cover every eight hours", "Broad cover plus targeted cover", "Within 1 hour for shock"],
+          ["Vasopressor", "Norepinephrine infusion", "Mean arterial pressure 65 mmHg", "Started during fluids"],
+          ["Lactate", "Serum lactate", "Above 2 mmol per L defines shock", "Repeat within 4 hours"],
+          ["Cultures", "Two sets blood cultures", "Before antibiotics", "Within 1 hour"],
+          ["De escalation", "Narrow by culture report", "48 to seventy two hours", "Daily review"],
+          ["Ventilation", "Tidal volume 6 mL per kg", "Predicted body weight", "From intubation"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
