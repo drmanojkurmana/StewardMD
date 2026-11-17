@@ -274,12 +274,21 @@
   }
 
   function ixLabel(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }
+  // Apple Pencil hardware -> which STUDY method to call (ios/App/App/PencilPlugin.swift).
+  // Returns the STUDY method name, or null for "ignore".
+  function pencilActionFor(action) {
+    if (action === "switchEraser" || action === "squeeze") return "pencilDoubleTap";
+    if (action === "switchPrevious") return "pencilSwitchPrevious";
+    if (action === "showColorPalette" || action === "showInkAttributes") return "openPenSettings";
+    return null;
+  }
 
   var PURE = {
     BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
     hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure,
-    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy
+    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
+    pencilActionFor: pencilActionFor
   };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -1234,6 +1243,7 @@
     V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
+    bindPencil();
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
     syncTb();
   }
@@ -1489,9 +1499,29 @@
       clearPage: clearPageInk
     };
   }
-  // Pencil double-tap (1.18): no web hook exists for Apple Pencil double-tap; a native
-  // PencilInteraction bridge would call STUDY._inkDblTap() to switch pen and eraser. TODO: native build.
-  G.STUDY_INK_DBLTAP_TODO = "native PencilInteraction bridge needed";
+  // Apple Pencil hardware (study-pencil): no web hook exists for Apple Pencil double-tap; the native
+  // UIPencilInteraction bridge (ios/App/App/PencilPlugin.swift) forwards hardware gestures as
+  // "pencilTap" { action }. iPad-only: this stays a no-op on web and Android.
+  function pencilDoubleTap() { if (!V) return; if (V.tool !== "er" && V.tool) V.prevTool = V.tool; V.tool = V.tool === "er" ? (V.prevTool || "pen") : "er"; syncTb(); }
+  function pencilSwitchPrevious() { if (!V) return; var cur = V.tool, prev = V.prevTool || "pen"; V.tool = prev; if (cur && cur !== prev) V.prevTool = cur; syncTb(); }
+  function openPenSettings() { if (!V || !G.STUDY_INK || typeof G.STUDY_INK.popover !== "function") return; var t = (V.tool === "pen" || V.tool === "hl" || V.tool === "er") ? V.tool : "pen"; try { G.STUDY_INK.popover(inkApi(V.cur || 1, null), t); } catch (e) {} }
+  var pencilBound = false;
+  function handlePencilTap(d) {
+    var m = pencilActionFor(d && d.action);
+    if (!m) return;
+    if (m === "pencilDoubleTap") { if (G.STUDY && typeof G.STUDY.pencilDoubleTap === "function") G.STUDY.pencilDoubleTap(); return; }
+    if (m === "pencilSwitchPrevious") { if (G.STUDY && typeof G.STUDY.pencilSwitchPrevious === "function") G.STUDY.pencilSwitchPrevious(); else if (G.STUDY && typeof G.STUDY.pencilDoubleTap === "function") G.STUDY.pencilDoubleTap(); return; }
+    if (m === "openPenSettings") { if (G.STUDY && typeof G.STUDY.openPenSettings === "function") G.STUDY.openPenSettings(); else openPenSettings(); }
+  }
+  function bindPencil() {
+    if (pencilBound) return;
+    try {
+      var P = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Pencil;
+      if (!P || typeof P.addListener !== "function") return;
+      P.addListener("pencilTap", function (d) { handlePencilTap(d); });
+      pencilBound = true;
+    } catch (e) {}
+  }
   function bindInk(ov, n) {
     // Phase 2 hook: selection and shape gestures bind first (capture); ink binds after.
     if (G.STUDY_SELECT && G.STUDY_SELECT.bindSel) { try { G.STUDY_SELECT.bindSel(inkApi(n, ov), ov, n); } catch (e) {} }
@@ -2217,6 +2247,7 @@
     _saveStack: saveStack, _put: put, _get: get, _all: all, _strokesOf: strokesOf, _uid: uid, _drawBg: drawBg, _drawStroke: drawStroke, _del: del,
     _reloadNb: reloadNb, _host: function () { return host; }, _syncTb: syncTb, _setZoom: setZoom, _openPdf: openPdf, _pdfjs: pdfjs, _loadOriginal: loadOriginal,
     _doScan: doScan, _pickPhotos: pickPhotos, _pickPdf: pickPdf, _importPhotos: importPhotos,
-    _inkDblTap: inkDblTap, _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; }
+    _inkDblTap: inkDblTap, _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; },
+    pencilDoubleTap: pencilDoubleTap, pencilSwitchPrevious: pencilSwitchPrevious, openPenSettings: openPenSettings
   };
 })(typeof window !== "undefined" ? window : this);
