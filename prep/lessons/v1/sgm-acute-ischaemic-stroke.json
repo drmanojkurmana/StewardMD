@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-acute-ischaemic-stroke",
+ "subject": "ss-general-medicine",
+ "title": "Acute ischaemic stroke",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Ischaemic stroke** is brain infarction from arterial occlusion in these patients. **Time** is brain with window dependent therapy in these patients. **Alteplase** within 4.5 hours is standard thrombolysis in these patients. **Tenecteplase** is an alternative single bolus agent in these patients.",
+   "say": "Ischaemic stroke is brain infarction from arterial occlusion in these patients. Time is brain with window dependent therapy in these patients. Alteplase within four point five hours is standard thrombolysis in these patients. Tenecteplase is an alternative single bolus agent in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden neuro deficit"
+     },
+     {
+      "id": "b",
+      "label": "CT excludes bleed"
+     },
+     {
+      "id": "c",
+      "label": "Thrombolysis if in window"
+     },
+     {
+      "id": "d",
+      "label": "Aspirin after bleed excluded"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Aspirin** within 24 hours is standard antiplatelet therapy in these patients. **Clopidogrel** is an alternative after intolerance in these patients. **Heparin** is avoided in acute ischaemic stroke in these patients. **Labetalol** controls severe hypertension in these patients. Dosing is adjusted in these patients.",
+   "say": "Aspirin within twenty four hours is standard antiplatelet therapy in these patients. Clopidogrel is an alternative after intolerance in these patients. Heparin is avoided in acute ischaemic stroke in these patients. Labetalol controls severe hypertension in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Window",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Alteplase",
+      "Within 4.5 hours",
+      "Standard thrombolysis"
+     ],
+     [
+      "Tenecteplase",
+      "Similar window",
+      "Single bolus alternative"
+     ],
+     [
+      "Aspirin",
+      "Within 24 hours",
+      "Antiplatelet standard"
+     ],
+     [
+      "Clopidogrel",
+      "After intolerance",
+      "Alternative antiplatelet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thrombectomy** retrieves clot in large vessel occlusion in these patients. **Adrenaline** has no stroke role despite its presence in listings confusion. **Methylprednisolone** has no stroke role despite its presence in listings confusion. **Tranexamic acid** is for haemorrhage not ischaemia in these patients.",
+   "say": "Thrombectomy retrieves clot in large vessel occlusion in these patients. Adrenaline has no stroke role despite its presence in listings confusion. Methylprednisolone has no stroke role despite its presence in listings confusion. Tranexamic acid is for haemorrhage not ischaemia in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Carotid stenosis** needs endarterectomy in these patients. **Atrial fibrillation** needs anticoagulation in these patients. **Secondary prevention** uses lipid lowering therapy in these patients. **BP control** prevents recurrence in these patients. Holter monitoring detects fibrillation in these patients. Secondary prevention is lifelong in these patients.",
+   "say": "Carotid stenosis needs endarterectomy in these patients with surgical referral. Atrial fibrillation needs anticoagulation in these patients with rhythm assessment. Secondary prevention uses lipid lowering therapy in these patients with lifestyle measures. BP control prevents recurrence in these patients with long term adherence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Prevention",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Carotid stenosis",
+      "Endarterectomy",
+      "Surgery referral"
+     ],
+     [
+      "Atrial fibrillation",
+      "Anticoagulation",
+      "Embolism prevention"
+     ],
+     [
+      "Small vessel",
+      "BP and diabetes control",
+      "Lifestyle measures"
+     ],
+     [
+      "Lacunar",
+      "Lipid lowering therapy",
+      "Secondary prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**NIH stroke scale** grades deficits in these patients. **CT angiography** identifies large vessel occlusion in these patients. **MRI diffusion** confirms infarction in these patients. **Thrombectomy** window extends with imaging in these patients. Dosing is guided by imaging in these patients.",
+   "say": "NIH stroke scale grades deficits in these patients. CT angiography identifies large vessel occlusion in these patients. MRI diffusion confirms infarction in these patients. Thrombectomy window extends with imaging in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Deficit assessment NIHSS"
+     },
+     {
+      "id": "b",
+      "label": "CT non contrast"
+     },
+     {
+      "id": "c",
+      "label": "CTA vessel occlusion"
+     },
+     {
+      "id": "d",
+      "label": "Thrombectomy decision"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dysphagia** screening prevents aspiration in these patients. **Early mobilisation** prevents complications in these patients. **Stroke unit** care improves outcomes in these patients. **Rehabilitation** starts early in these patients. Unit care improves outcomes in these patients. Rehabilitation is started early in these patients.",
+   "say": "Dysphagia screening prevents aspiration in these patients with bedside assessment. Early mobilisation prevents complications in these patients with physiotherapy support. Stroke unit care improves outcomes in these patients with specialist nursing. Rehabilitation starts early in these patients with multidisciplinary support.",
+   "vis": null
+  },
+  {
+   "tx": "**Posterior circulation** stroke presents with vertigo and diplopia in these patients. **Vertebrobasilar** disease needs imaging in these patients. **Thrombolysis** applies to posterior stroke in these patients. **MRI** is preferred in these patients. Imaging selection guides therapy in these patients. MRI is preferred in these patients worldwide today.",
+   "say": "Posterior circulation stroke presents with vertigo and diplopia in these patients with brainstem signs. Vertebrobasilar disease needs imaging in these patients with MRI evaluation. Thrombolysis is indicated for posterior stroke in these patients with eligibility assessment. MRI is the preferred test in these patients with diffusion sequences.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior circulation",
+     "points": [
+      "Face and arm weakness",
+      "Aphasia common pattern",
+      "Thrombectomy highly effective",
+      "CTA diagnoses occlusion"
+     ]
+    },
+    "right": {
+     "title": "Posterior circulation",
+     "points": [
+      "Vertigo and diplopia",
+      "Ataxia and dysarthria",
+      "MRI is preferred test",
+      "Thrombolysis still applies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hyperglycaemia** worsens outcomes in these patients. **Fever** worsens outcomes in these patients. **Normothermia** is advised in these patients. **Glucose** control is needed in these patients. Glucose control is needed in these patients. Glucose control is needed in these patients worldwide today.",
+   "say": "Hyperglycaemia worsens outcomes in these patients with poor control. Fever worsens outcomes in these patients with infection assessment. Normothermia is advised in these patients with temperature monitoring. Glucose control is needed in these patients with regular measurement.",
+   "vis": null
+  },
+  {
+   "tx": "**Lipid** therapy prevents recurrence in these patients. **Dual antiplatelet** suits minor stroke in these patients. **Carotid imaging** is needed in these patients. **Holter monitoring** detects fibrillation in these patients. Doppler ultrasound assesses carotids in these patients. Carotid bruit should be sought during examination in these patients.",
+   "say": "Lipid therapy prevents recurrence in these patients with long term adherence. Dual antiplatelet therapy is the option for minor stroke in these patients with short course. Carotid imaging is needed in these patients with Doppler assessment. Holter monitoring is used to detect fibrillation in these patients with rhythm recording.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Workup",
+     "Test",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Carotid",
+      "Doppler ultrasound",
+      "Surgery if severe"
+     ],
+     [
+      "Cardiac",
+      "Holter monitoring",
+      "Anticoagulation if AF"
+     ],
+     [
+      "Diabetes",
+      "HbA1c measurement",
+      "Tight control"
+     ],
+     [
+      "Lipids",
+      "Lipid profile",
+      "Cholesterol lowering therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Driving** advice is needed in these patients. **Discharge** planning starts early in these patients. **Secondary stroke** prevention is lifelong in these patients. **Follow up** needs neurology review in these patients. Community follow-up is arranged in these patients. Community follow-up is arranged in these patients worldwide today.",
+   "say": "Driving advice is needed in these patients with legal requirements. Discharge planning starts early in these patients with community support. Secondary stroke prevention is lifelong in these patients with adherence counselling. Follow up needs neurology review in these patients with scheduled appointments.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** opens this closing summary for the lesson specifically. Remember alteplase within 4.5 hours, aspirin within 24 hours and thrombectomy for large vessel occlusion. NIHSS grades deficits while CTA identifies occlusion in these patients. Dysphagia screening prevents aspiration in these patients clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Alteplase within four point five hours is the thrombolysis window clearly. Aspirin within twenty four hours is the standard therapy in practice. Thrombectomy is the treatment for large vessel occlusion. NIHSS grading quantifies deficits for management decisions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Thrombolysis window",
+      "Alteplase within 4.5 hours"
+     ],
+     [
+      "Antiplatelet",
+      "Aspirin within 24 hours"
+     ],
+     [
+      "Clot retrieval",
+      "Thrombectomy for large vessel occlusion"
+     ],
+     [
+      "Grading scale",
+      "NIHSS grades deficits objectively"
+     ],
+     [
+      "Vessel test",
+      "CTA identifies occlusion partner"
+     ],
+     [
+      "Aspiration prevention",
+      "Dysphagia screening prevents aspiration"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

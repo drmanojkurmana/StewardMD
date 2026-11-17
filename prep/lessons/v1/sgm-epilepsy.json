@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-epilepsy",
+ "subject": "ss-general-medicine",
+ "title": "Epilepsy and seizures",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Epilepsy** is recurrent unprovoked seizures in these patients. **Focal** seizures start in 1 hemisphere in these patients. **Generalised** seizures involve both hemispheres in these patients. **EEG** supports diagnosis in these patients. Seizure diary helps titration in these patients. Seizure diary helps titration in these patients today.",
+   "say": "Epilepsy is recurrent unprovoked seizures in these patients with classification. Focal seizures start in one hemisphere in these patients with awareness loss. Generalised seizures involve both hemispheres in these patients with consciousness loss. EEG supports diagnosis in these patients with characteristic patterns.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Onset",
+     "EEG clue"
+    ],
+    "rows": [
+     [
+      "Focal seizure",
+      "One hemisphere",
+      "Focal spike pattern"
+     ],
+     [
+      "Generalised tonic clonic",
+      "Both hemispheres",
+      "General spike wave"
+     ],
+     [
+      "Absence seizure",
+      "Both hemispheres",
+      "Three cycles per second"
+     ],
+     [
+      "Myoclonic seizure",
+      "Both hemispheres",
+      "Polyspike pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Levetiracetam** is first line for focal seizures in these patients. **Lamotrigine** with **carbamazepine** are alternatives in these patients. **Valproate** suits generalised epilepsy in these patients. **Folic acid** co-prescription is advised in these patients. Dosing is guided by seizures in these patients.",
+   "say": "Levetiracetam is first line for focal seizures in these patients. Lamotrigine with carbamazepine are alternatives in these patients. Valproate suits generalised epilepsy in these patients. Folic acid co-prescription is advised in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "First line",
+     "Alternative"
+    ],
+    "rows": [
+     [
+      "Focal seizure",
+      "Levetiracetam",
+      "Lamotrigine, carbamazepine"
+     ],
+     [
+      "Generalised",
+      "Valproate",
+      "Lamotrigine option"
+     ],
+     [
+      "Absence",
+      "Ethosuximide",
+      "Valproate option"
+     ],
+     [
+      "Myoclonic JME",
+      "Valproate",
+      "Levetiracetam option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Juvenile myoclonic epilepsy** presents with morning myoclonus in these patients. **Ethosuximide** treats absence seizures in these patients. **Topiramate** with **zonisamide** are adjunctive options in these patients. **Perampanel** is a newer option in these patients. Morning myoclonus is typical in these patients.",
+   "say": "Juvenile myoclonic epilepsy presents with morning myoclonus in these patients with onset in adolescence. Ethosuximide is the treatment of absence seizures in these patients. Topiramate with zonisamide are adjunctive options in these patients with titration. Perampanel is a newer option in these patients with adjunctive use.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Focal epilepsy",
+     "points": [
+      "Levetiracetam first line",
+      "Lamotrigine alternative",
+      "Carbamazepine alternative",
+      "Focal EEG pattern"
+     ]
+    },
+    "right": {
+     "title": "Generalised epilepsy",
+     "points": [
+      "Valproate first line",
+      "Ethosuximide for absence",
+      "Lacosamide adjunctive",
+      "General spike wave"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Gabapentin** with **pregabalin** treat neuropathic pain and seizures in these patients. **Oxcarbazepine** with **eslicarbazepine** are focal options in these patients. **Lacosamide** is an adjunctive option in these patients. **Fosphenytoin** treats status in these patients. Adjunctive dosing is gradual in these patients.",
+   "say": "Gabapentin with pregabalin are the treatment of neuropathic pain and seizures in these patients. Oxcarbazepine with eslicarbazepine are focal options in these patients with titration. Lacosamide is an adjunctive option in these patients with tolerability. Fosphenytoin is the treatment of status in these patients with loading.",
+   "vis": null
+  },
+  {
+   "tx": "**Phenytoin** with **phenytoin** duplication is an error in these patients. **Phenobarbital** with **primidone** are older agents in these patients. **Tiagabine** with **vigabatrin** are niche options in these patients. **Rapamycin** has no epilepsy role despite its presence in listings confusion. Niche agents are reserved in these patients.",
+   "say": "Phenytoin with phenytoin duplication is an error in these patients. Phenobarbital with primidone are older agents in these patients. Tiagabine with vigabatrin are niche options in these patients. Rapamycin has no epilepsy role despite its presence in listings confusion.",
+   "vis": null
+  },
+  {
+   "tx": "**Lorazepam** with **midazolam** treat status epilepticus in these patients. **Cyproheptadine** has no epilepsy role despite its presence in listings confusion. **Lithium** has no epilepsy role despite its presence in listings confusion. **Warfarin** has no epilepsy role despite its presence in listings confusion.",
+   "say": "Lorazepam with midazolam are the treatment of status epilepticus in these patients with protocol. Cyproheptadine has no epilepsy role despite its presence in listings confusion. Lithium has no epilepsy role despite its presence in listings confusion. Warfarin has no epilepsy role despite its presence in listings confusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Seizure diagnosis"
+     },
+     {
+      "id": "b",
+      "label": "Focal or generalised"
+     },
+     {
+      "id": "c",
+      "label": "First line started"
+     },
+     {
+      "id": "d",
+      "label": "Seizure diary follow"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Driving** restrictions are mandatory in these patients. **Surgery** suits drug refractory focal epilepsy in these patients. **Ketogenic diet** helps children in these patients. **Vagus nerve** stimulation helps refractory cases in these patients. Referral pathways help these patients. Seizure diary helps titration in these patients today.",
+   "say": "Driving restrictions are mandatory in these patients with legal compliance. Surgery is the option for drug refractory focal epilepsy in these patients with evaluation. Ketogenic diet helps children in these patients with specialist supervision. Vagus nerve stimulation helps refractory cases in these patients with implantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Advice",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Driving",
+      "Restrictions mandatory",
+      "Legal compliance"
+     ],
+     [
+      "Pregnancy",
+      "Folic acid advised",
+      "Valproate avoidance"
+     ],
+     [
+      "Refractory focal",
+      "Surgery evaluation",
+      "Ketogenic diet option"
+     ],
+     [
+      "Children",
+      "Diet therapy option",
+      "Stimulation option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Valproate** is teratogenic in these patients. **Carbamazepine** induces enzymes in these patients. **Lamotrigine** suits women in these patients. **Levetiracetam** suits pregnancy in these patients. Surveillance is guided in these patients. Seizure diary helps titration in these patients today. Counselling is provided in these patients today.",
+   "say": "Valproate is teratogenic in these patients with pregnancy contraindication. Carbamazepine is an enzyme inducer in these patients with drug interactions. Lamotrigine is the option for women in these patients with reproductive safety. Levetiracetam is the option for pregnancy in these patients with benefit profile.",
+   "vis": null
+  },
+  {
+   "tx": "**EEG** monitoring detects subclinical seizures in these patients. **MRI** detects cortical dysplasia in these patients. **PET** localises foci in these patients. **Surgery** needs localisation in these patients. Localisation guides surgery in these patients. Seizure diary helps titration in these patients today.",
+   "say": "EEG monitoring is used to detect subclinical seizures in these patients with continuous recording. MRI is used to detect cortical dysplasia in these patients with epilepsy protocol. PET is also used to localise foci in these patients with metabolic imaging. Surgery needs localisation in these patients with multidisciplinary evaluation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Refractory seizures"
+     },
+     {
+      "id": "b",
+      "label": "EEG and MRI done"
+     },
+     {
+      "id": "c",
+      "label": "PET localisation"
+     },
+     {
+      "id": "d",
+      "label": "Surgery evaluation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adherence** counselling is essential in these patients. **Seizure diary** helps titration in these patients. **Side effects** monitoring is needed in these patients. **Referral** to neurology is needed in these patients. Seizure diary helps titration in these patients today. Counselling is provided in these patients today.",
+   "say": "Adherence counselling is essential in these patients with education support. Seizure diary helps titration in these patients with records review. Side effects monitoring is needed in these patients with laboratory surveillance. Referral to neurology is needed in these patients with scheduled review.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** titles this closing table for the lesson specifically. Remember levetiracetam first line for focal seizures, valproate for generalised disease and ethosuximide for absence seizures. Carbamazepine is focal while folic acid co-prescription is advised in these patients. Lamotrigine suits women while valproate is teratogenic clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Levetiracetam is first line for focal seizures clearly. Valproate is first line for generalised disease cases. Ethosuximide is the treatment of absence seizures in these patients. Folic acid co-prescription is advised in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Focal first line",
+      "Levetiracetam for focal seizures"
+     ],
+     [
+      "Generalised first line",
+      "Valproate for generalised disease"
+     ],
+     [
+      "Absence therapy",
+      "Ethosuximide for absence seizures"
+     ],
+     [
+      "Women option",
+      "Lamotrigine suits women patients"
+     ],
+     [
+      "Teratogenic drug",
+      "Valproate is teratogenic in pregnancy"
+     ],
+     [
+      "Co-prescription",
+      "Folic acid advised with therapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

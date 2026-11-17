@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-haemorrhagic-stroke",
+ "subject": "ss-general-medicine",
+ "title": "Intracerebral and subarachnoid haemorrhage",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Intracerebral haemorrhage** is bleeding within brain parenchyma in these patients. **Hypertension** is the commonest cause in these patients. **Headache** with vomiting is the presentation in these patients. **CT** shows hyperdense bleed in these patients. Glasgow coma scale predicts outcomes in these patients.",
+   "say": "Intracerebral haemorrhage is bleeding within brain parenchyma in these patients. Hypertension is the commonest cause in these patients. Headache with vomiting is the presentation in these patients. CT shows hyperdense bleed in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Site",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Hypertension",
+      "Basal ganglia",
+      "Deep bleed pattern"
+     ],
+     [
+      "Amyloid",
+      "Lobar bleed",
+      "Elderly patients"
+     ],
+     [
+      "Anticoagulation",
+      "Any site",
+      "Warfarin history"
+     ],
+     [
+      "Vascular malformation",
+      "Any site",
+      "Young patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**BP lowering** with **labetalol** with **nicardipine** controls hypertension in these patients. **Electrolytes** monitoring is needed in these patients. **Warfarin** reversal is needed in these patients. **Parietal** bleed needs monitoring in these patients. Neurocritical care is needed in these patients. Specialist review is advised in these patients today.",
+   "say": "BP lowering with labetalol with nicardipine controls hypertension in these patients. Electrolytes monitoring is needed in these patients. Warfarin reversal is needed in these patients. Parietal bleed needs monitoring in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haemorrhage on CT"
+     },
+     {
+      "id": "b",
+      "label": "BP control started"
+     },
+     {
+      "id": "c",
+      "label": "Reversal if anticoagulated"
+     },
+     {
+      "id": "d",
+      "label": "Neurosurgery review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subarachnoid haemorrhage** is thunderclap headache in these patients. **Nimodipine** prevents vasospasm in these patients. **CTA** identifies aneurysm in these patients. **Levetiracetam** treats seizures in these patients. Digital subtraction guides therapy in these patients. Specialist review is advised in these patients today.",
+   "say": "Subarachnoid haemorrhage is thunderclap headache in these patients with meningism. Nimodipine prevents vasospasm in these patients with oral dosing. CTA identifies aneurysm in these patients with vascular imaging. Levetiracetam is the treatment of seizures in these patients with prophylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Disease",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Nimodipine",
+      "SAH vasospasm",
+      "Prevention standard"
+     ],
+     [
+      "Lab et alol analogue",
+      "ICH hypertension",
+      "BP control needed"
+     ],
+     [
+      "Levetiracetam",
+      "Seizures",
+      "Prophylaxis option"
+     ],
+     [
+      "Phenytoin",
+      "Seizures",
+      "Alternative option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amphetamine** induced bleed is vasculopathy bleed in these patients. **Methamphetamine** abuse complicates stroke in these patients. **Tranexamic acid** is for haemorrhage not ischaemia in these patients. **Paracetamol** treats headache in these patients. Smoking cessation prevents recurrence in these patients. Specialist review is advised in these patients today.",
+   "say": "Amphetamine induced bleed is vasculopathy bleed in these patients with drug history. Methamphetamine abuse complicates stroke in these patients with young onset. Tranexamic acid is for haemorrhage and not for ischaemia in these patients. Paracetamol is the treatment of headache in these patients with supportive care.",
+   "vis": null
+  },
+  {
+   "tx": "**Aneurysm clipping** prevents rebleed in these patients. **Coiling** is an alternative in these patients. **Vasospasm** monitoring is daily in these patients. **Hydrocephalus** needs drainage in these patients. Vasospasm onset is delayed in these patients. Specialist review is advised in these patients today.",
+   "say": "Aneurysm clipping prevents rebleed in these patients with surgical repair. Coiling is an alternative in these patients with endovascular repair. Vasospasm monitoring is daily in these patients with Doppler surveillance. Hydrocephalus needs drainage in these patients with ventricular shunting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thunderclap headache"
+     },
+     {
+      "id": "b",
+      "label": "CT bleed confirmed"
+     },
+     {
+      "id": "c",
+      "label": "CTA aneurysm found"
+     },
+     {
+      "id": "d",
+      "label": "Clip or coil decided"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Microsurgical** drainage suits cerebellar bleed in these patients. **Intraventricular** extension needs drainage in these patients. **Fludrocortisone** has no stroke role despite its presence in listings confusion. **Noradrenaline** supports pressure in these patients. Icu care is needed in these patients. Specialist review is advised in these patients today.",
+   "say": "Microsurgical drainage suits cerebellar bleed in these patients. Intraventricular extension needs drainage in these patients. Fludrocortisone has no stroke role despite its presence in listings confusion. Noradrenaline supports pressure in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Seizures** are common after lobar bleed in these patients. **EEG** monitoring detects seizures in these patients. **Lifestyle** control prevents recurrence in these patients. **Follow up** needs imaging in these patients. Rehabilitation starts after stabilisation in these patients. Specialist review is advised in these patients today.",
+   "say": "Seizures are common after lobar bleed in these patients with cortical involvement. EEG monitoring detects seizures in these patients with continuous recording. Lifestyle control prevents recurrence in these patients with risk reduction. Follow up needs imaging in these patients with scheduled review.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ICH pattern",
+     "points": [
+      "Deep basal bleed",
+      "Hypertension cause",
+      "BP control urgent",
+      "Headache prominent"
+     ]
+    },
+    "right": {
+     "title": "SAH pattern",
+     "points": [
+      "Thunderclap headache",
+      "Aneurysm cause",
+      "Nimodipine prevents spasm",
+      "Vasospasm risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cerebellar** bleed compresses brainstem in these patients. **Posterior fossa** monitoring is needed in these patients. **Surgical decompression** saves lives in these patients. **ICU** care is needed in these patients. Brainstem compression should be sought during assessment in these patients. Specialist review is advised in these patients today.",
+   "say": "Cerebellar bleed compresses brainstem in these patients with coma risk. Posterior fossa monitoring is needed in these patients with ICU care. Surgical decompression is the life saving operation in these patients with emergency indications. ICU care is needed in these patients with specialist nursing.",
+   "vis": null
+  },
+  {
+   "tx": "**Rehabilitation** starts after stabilisation in these patients. **Secondary prevention** needs BP control in these patients. **Driving** advice is needed in these patients. **Caregiver** support is needed in these patients. Specialist review is advised in these patients today. Long term follow-up is advised in these patients today.",
+   "say": "Rehabilitation starts after stabilisation in these patients with multidisciplinary support. Secondary prevention needs BP control in these patients with long term adherence. Driving advice is needed in these patients with legal requirements. Caregiver support is needed in these patients with community networks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prevention",
+     "Measure",
+     "Action"
+    ],
+    "rows": [
+     [
+      "BP control",
+      "Low salt diet",
+      "Lifelong adherence"
+     ],
+     [
+      "Smoking",
+      "Cessation advice",
+      "Support programmes"
+     ],
+     [
+      "Alcohol",
+      "Abstinence advice",
+      "Follow up care"
+     ],
+     [
+      "Anticoagulation",
+      "Avoid if possible",
+      "Review indication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** depends on bleed size in these patients. **Location** determines outcomes in these patients. **Age** predicts outcomes in these patients. **Consciousness** predicts outcomes in these patients. Specialist review is advised in these patients today. Long term follow-up is advised in these patients today.",
+   "say": "Prognosis depends on bleed size in these patients with imaging correlation. Location is the determinant of outcomes in these patients with functional assessment. Age is predictive of outcomes in these patients with comorbidity adjustment. Consciousness is predictive of outcomes in these patients with coma scale scoring.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** introduces this closing summary for the lesson specifically. Remember thunderclap headache with nimodipine for SAH and basal ganglia bleed with hypertension for ICH. Labetalol and nicardipine control pressure while CTA finds aneurysms. Nimodipine prevents vasospasm in these patients clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Thunderclap headache is the pattern of SAH clearly. Nimodipine prevents vasospasm in SAH cases. Basal ganglia bleed is the pattern of ICH cases. CTA is the test that finds aneurysms in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "SAH pattern",
+      "Thunderclap headache with meningism"
+     ],
+     [
+      "SAH prevention",
+      "Nimodipine prevents vasospasm"
+     ],
+     [
+      "ICH site",
+      "Basal ganglia bleed commonest"
+     ],
+     [
+      "BP therapy",
+      "Labetalol and nicardipine control pressure"
+     ],
+     [
+      "Aneurysm test",
+      "CTA identifies aneurysm site"
+     ],
+     [
+      "Surgical rescue",
+      "Decompression for cerebellar bleed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

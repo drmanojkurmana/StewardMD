@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-infectious-arthritis",
+ "subject": "ss-general-medicine",
+ "title": "Infectious and post-infectious arthritis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Septic arthritis** is bacterial joint infection needing same day drainage in these patients. **Hot swollen joint** with fever is the presentation in these patients. **Risk factors** include diabetes, rheumatoid disease and prosthetic joints in these patients. **Aspirate** the joint urgently for Gram stain and culture in these patients.",
+   "say": "Septic arthritis is bacterial joint infection needing same day drainage in these patients. Hot swollen joint with fever is the presentation in these patients. Diabetes with rheumatoid disease and prosthetic joints are risk factors in these patients. Joint aspiration is urgent for Gram stain and culture in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hot swollen joint"
+     },
+     {
+      "id": "b",
+      "label": "Aspirate urgently"
+     },
+     {
+      "id": "c",
+      "label": "Gram stain guided"
+     },
+     {
+      "id": "d",
+      "label": "Antibiotics and drainage"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Empiric antibiotics** cover staphylococci pending culture results in these patients. **Sulfasalazine** has no septic role despite its presence in listings confusion. **Meticillin** resistant staphylococci need alternative cover in these patients. **Drainage** is arthroscopic or open drainage in these patients. Dosing is adjusted in these patients.",
+   "say": "Empiric antibiotics cover staphylococci pending culture results in these patients. Sulfasalazine has no septic role despite its presence in listings confusion. Meticillin resistant staphylococci need alternative cover in these patients. Drainage is arthroscopic or open drainage in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Joint pattern",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Staphylococcus aureus",
+      "Acute monoarthritis",
+      "Antibiotics and drainage"
+     ],
+     [
+      "Gonococcus",
+      "Migratory pain, pustules",
+      "Antibiotics urgent"
+     ],
+     [
+      "Gram negatives",
+      "Prosthetic joint infection",
+      "Revision surgery option"
+     ],
+     [
+      "Tuberculosis",
+      "Chronic monoarthritis",
+      "Long term therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Disseminated gonococcal infection** presents with pustules and migratory pain in these patients. **Culture** of blood and joint fluid confirms disease in these patients. **Partner** treatment is mandatory in these patients. **HIV** testing is advised in these patients. Cardiac monitoring is needed in these patients.",
+   "say": "Disseminated gonococcal infection presents with pustules and migratory pain in these patients. Culture of blood and joint fluid confirms disease in these patients. Partner treatment is mandatory in these patients. HIV testing is advised in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Reactive arthritis** follows dysentery with conjunctivitis in these patients. **Keratoderma** is the skin lesion in these patients. **HLA-B27** positivity supports diagnosis in these patients. **NSAIDs** control symptoms in these patients. Sarcoid mimics occur in these patients. Supportive care alone suits these patients worldwide today.",
+   "say": "Reactive arthritis follows dysentery with conjunctivitis in these patients. Keratoderma is the skin lesion in these patients. HLA B twenty seven positivity supports diagnosis in these patients. NSAIDs control symptoms in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Reactive pattern",
+     "Action"
+    ],
+    "rows": [
+     [
+      " Arthritis",
+      "Oligoarthritis lower limbs",
+      "NSAIDs for symptoms"
+     ],
+     [
+      "Conjunctivitis",
+      "Bilateral red eye",
+      "Ophthalmology referral"
+     ],
+     [
+      "Keratoderma",
+      "Palmoplantar lesions",
+      "Dermatology referral"
+     ],
+     [
+      "Urethritis",
+      "Sterile pyuria",
+      "Treat trigger infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tuberculous arthritis** causes chronic monoarthritis in these patients. **MRI** shows synovial thickening in these patients. **Biopsy** with culture confirms disease in these patients. **Long term** therapy is needed in these patients. Synovial thickening is seen in these patients. Synovial thickening is seen in these patients on imaging.",
+   "say": "Tuberculous arthritis causes chronic monoarthritis in these patients with slow progression. MRI shows synovial thickening in these patients with effusion and erosion. Biopsy with culture confirms disease in these patients with prolonged incubation. Long term therapy is needed in these patients with adherence support.",
+   "vis": null
+  },
+  {
+   "tx": "**Prosthetic joint infection** needs revision surgery in these patients. **Aspiration** before revision guides therapy in these patients. **Bone scan** supports diagnosis in these patients. **Antibiotics** continue after revision in these patients. Staged surgery is planned in these patients. Staged surgery is planned in these patients worldwide today.",
+   "say": "Prosthetic joint infection needs revision surgery in these patients with thorough planning. Aspiration before revision guides therapy in these patients with organism identification. Bone scan supports diagnosis in these patients with metabolic activity. Antibiotics are continued after revision in these patients with oral step down.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prosthetic pain and swelling"
+     },
+     {
+      "id": "b",
+      "label": "Aspirate fluid culture"
+     },
+     {
+      "id": "c",
+      "label": "Orthopaedic referral"
+     },
+     {
+      "id": "d",
+      "label": "Revision with antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lyme arthritis** follows erythema migrans in these patients. **Knee** monoarthritis is common in these patients. **Serology** confirms disease in these patients. **Antibiotics** treat disease in these patients. Cardiac involvement is screened in these patients. Cardiac involvement is screened in these patients worldwide today.",
+   "say": "Lyme arthritis follows erythema migrans in these patients with characteristic rash. Knee monoarthritis is common in these patients with associated features. Serology confirms disease in these patients with antibody testing. Antibiotics are the treatment of disease in these patients with adequate duration.",
+   "vis": null
+  },
+  {
+   "tx": "**Viral arthritis** is self limited in these patients. **Parvovirus** causes symmetric arthritis in these patients. **Rubella** vaccination prevents arthritis in these patients. **Supportive** care suits these patients. Supportive care alone suits these patients. Supportive care alone suits these patients worldwide today.",
+   "say": "Viral arthritis is self limited in these patients with supportive care. Parvovirus causes symmetric arthritis in these patients with rash. Rubella vaccination prevents arthritis in these patients with herd protection. Supportive care suits these patients with symptom control.",
+   "vis": null
+  },
+  {
+   "tx": "**Crystal disease** mimics septic arthritis in these patients. **Fluid microscopy** separates crystals in these patients. **Tophaceous** gout is chronic disease in these patients. **Supportive care** treats crystals in these patients. Septic arthritis is the emergency in these patients. Septic arthritis is the emergency in these patients worldwide today.",
+   "say": "Crystal disease is similar to septic arthritis in these patients with acute presentation. Fluid microscopy separates crystals in these patients with polarised light. Tophaceous gout is chronic disease in these patients with deposits. Supportive care is the treatment of crystals in these patients with flare control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Septic arthritis",
+     "points": [
+      "Hot swollen joint",
+      "Fever present",
+      "Neutrophils very high",
+      "Drainage is urgent"
+     ]
+    },
+    "right": {
+     "title": "Crystal arthritis",
+     "points": [
+      "Podagra pattern common",
+      "Crystals on microscopy",
+      "Neutrophils high too",
+      "Supportive care helps"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Prevention** needs diabetes control in these patients. **Skin** care prevents bacteraemia in these patients. **Prophylaxis** suits high risk procedures in these patients. **Education** helps these patients. Comorbidity screening is needed in these patients. Comorbidity screening is needed in these patients worldwide today.",
+   "say": "Prevention needs diabetes control in these patients with good glycaemic control. Skin care prevents bacteraemia in these patients with wound hygiene. Prophylaxis is advised for high risk procedures in these patients with dental review. Education helps these patients with awareness and early presentation.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** launches this closing summary for the lesson specifically. Remember same day aspiration with drainage for septic arthritis, pustules with migratory pain for gonococcal disease and triad for reactive arthritis. Knee monoarthritis follows Lyme disease while chronic monoarthritis needs TB biopsy in these patients. Empiric antibiotics cover staphylococci pending culture results clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Same day aspiration with drainage is the rule for septic arthritis clearly. Pustules with migratory pain is the pattern of gonococcal disease cases. Triad with conjunctivitis is reactive arthritis pattern in practice. Empiric antibiotics cover staphylococci pending culture results.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Septic urgency",
+      "Same day aspiration with drainage"
+     ],
+     [
+      "Gonococcal pattern",
+      "Pustules with migratory pain"
+     ],
+     [
+      "Reactive pattern",
+      "Arthritis, conjunctivitis, keratoderma"
+     ],
+     [
+      "Lyme pattern",
+      "Knee monoarthritis after migrans"
+     ],
+     [
+      "TB pattern",
+      "Chronic monoarthritis needs biopsy"
+     ],
+     [
+      "Empiric cover",
+      "Antibiotics cover staphylococci pending culture"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
