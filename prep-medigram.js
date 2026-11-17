@@ -17,8 +17,8 @@
   var FLAGS = DATA.resolveFlags({ prepEnabled: prepOn(), get: lsGet, search: (G.location && G.location.search) || "" });
   if (!FLAGS.parent) return;
 
-  var BATCH = 18, L = ["A", "B", "C", "D", "E", "F"];
-  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, ct, fs, seen }
+  var BATCH = 18, PER = 2, L = ["A", "B", "C", "D", "E", "F"];
+  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, ct, lt, les, fs, seen }
   var VIDS = null, IMGS = null;
 
   function H() { return S.host; }
@@ -39,7 +39,8 @@
     return Promise.all(h.subjectsOf(ex).map(function (sb) { return h.loadIndex(sb.id).then(function (ix) { return { sid: sb.id, ix: ix }; }, function () { return null; }); })).then(function (xs) {
       var mods = [];
       xs.forEach(function (x) { if (x && x.ix && x.ix.topics) x.ix.topics.forEach(function (t) { if (t.group !== "mixed" && h.countFor(t, ex) > 0) mods.push({ s: x.sid, m: t.id }); }); });
-      return Promise.all(h.shuffle(mods).slice(0, k).map(function (x) { return h.loadModule(x.s, x.m).then(function (items) { return h.pool(h.poolFor(items, ex, null)).filter(textOnly); }, function () { return []; }); }));
+      // More topics, fewer per topic: at most PER questions from each of k random modules.
+      return Promise.all(h.shuffle(mods).slice(0, k).map(function (x) { return h.loadModule(x.s, x.m).then(function (items) { return h.shuffle(h.pool(h.poolFor(items, ex, null)).filter(textOnly)).slice(0, PER); }, function () { return []; }); }));
     }).then(function (lists) { var all = []; lists.forEach(function (l) { all = all.concat(l); }); return h.shuffle(all); });
   }
   // A reel card shows text only, so questions that need their figure are left out (same rule as the daily question in prep.js).
@@ -82,7 +83,7 @@
   function unseen(xs, kind) { return xs.filter(function (x) { return !S.seen[keyOf(x.kind ? x : { kind: kind, it: x })]; }); }
   function batch() {
     if (S.mode === "clinical") return Promise.all([videos(), images()]).then(function (x) { return fresh(rotate(unseen(x[0]), [], unseen(x[1], "img")).slice(0, BATCH)); });
-    return Promise.all([draw(5), videos(), images()]).then(function (x) {
+    return Promise.all([draw(10), videos(), images()]).then(function (x) {
       var items = unseen(x[0], "q").slice(0, BATCH);
       return lessonsFor(items).then(function (les) { return fresh(DATA.mixFeed(items, rotate(unseen(x[1]), unseen(les), unseen(x[2], "img")), lsGet("smd_prep_medigram_cadence") || 3)); });
     });
@@ -108,10 +109,15 @@
     if (c.kind === "video") {
       return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch' + (c.s ? " · " + esc(subjName(c.s) || c.s.charAt(0).toUpperCase() + c.s.slice(1)) : "") + "</p>" + '<p class="vf-stem">' + esc(c.title) + "</p>" +
         // The poster is a background, not an <img>: a tap must start the video, never open the image zoom viewer.
-        '<div class="pn-mg-frame" data-act="mg-play" data-i="' + i + '" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg\')"><span class="pn-mg-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' + vctl() + "</div>" +
+        '<div class="pn-mg-frame" data-act="mg-play" data-i="' + i + '" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg\')"><span class="pn-mg-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>' + vctl() +
         '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
     }
-    if (c.kind === "lesson") return '<article class="vf-c pn-mg-c"' + a + '><p class="pn-mg-tag">Lesson · ' + esc(subjName(c.sid)) + '</p><p class="vf-big">' + esc(c.title) + '</p><p class="pn-mut">' + (c.minutes ? c.minutes + " min read, built from the questions you just met." : "Built from the questions you just met.") + '</p><button type="button" class="pn-btn pri" data-act="mg-lesson" data-i="' + i + '">Open lesson</button></article>';
+    if (c.kind === "lesson") {
+      return '<article class="vf-c pn-mg-c pn-mg-les"' + a + '><p class="pn-mg-tag">Lesson · ' + esc(subjName(c.sid)) + (c.minutes ? " · " + c.minutes + " min" : "") + '</p><p class="vf-stem">' + esc(c.title) + "</p>" +
+        '<div class="pn-mg-story" data-act="mg-les-tap" data-i="' + i + '" aria-live="polite">' + storyHtml(c) + "</div>" +
+        '<div class="pn-mg-lctl"><button type="button" class="pn-btn" data-act="mg-les" data-v="listen" data-i="' + i + '" aria-pressed="' + !!c.listen + '">' + (c.listen ? "Stop listening" : "Listen") + '</button>' +
+        '<button type="button" class="pn-btn" data-act="mg-lesson" data-i="' + i + '">Full lesson and quiz</button></div></article>';
+    }
     if (c.kind === "img") {
       return '<article class="vf-c vf-img pn-mg-c"' + a + '><p class="pn-mg-tag">Spot it · ' + esc(c.it.modality || c.it.deck || "Image") + '</p><figure><img src="' + esc(imgUrl(c.it.img)) + '" alt="Clinical image" loading="lazy" decoding="async"></figure>' +
         (c.shown ? '<p class="vf-big">' + esc(c.it.dx) + "</p>" + (c.it.finding ? '<p class="vf-why">' + esc(c.it.finding) + "</p>" : "") : '<button type="button" class="pn-btn" data-act="mg-reveal" data-i="' + i + '">Show the diagnosis</button>') + "</article>";
@@ -130,8 +136,59 @@
   var VI = { back: '<path d="M11 7l-5 5 5 5M18 7l-5 5 5 5"/>', fwd: '<path d="M6 7l5 5-5 5M13 7l5 5-5 5"/>', play: '<path d="M8 5v14l11-7z" fill="currentColor"/>', pause: '<path d="M8 5v14M16 5v14"/>',
     snd: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 010 6"/>', mute: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/>', fs: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', exit: '<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>' };
   function vi(n) { return '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + VI[n] + "</svg>"; }
+  /* ---------- lessons as a story (passive) ---------- */
+  // Each step shows its text (and a small table when it has one) and moves on by itself after a reading time, or when
+  // narration ends (Listen). Tap the right of the story for next, the left for back, the middle to pause. It stops at
+  // the end of the lesson: nothing scrolls the reel on its own.
+  function md(t) { return esc(String(t || "")).replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>"); }
+  function stepHtml(st) {
+    var h = '<p class="pn-mg-stx">' + md(st.tx) + "</p>", v = st.vis;
+    if (v && v.kind === "table" && v.cols && v.rows) h += '<div class="pn-mg-tbl"><table><thead><tr>' + v.cols.map(function (x) { return "<th>" + md(x) + "</th>"; }).join("") + "</tr></thead><tbody>" + v.rows.slice(0, 6).map(function (r) { return "<tr>" + r.map(function (x) { return "<td>" + md(x) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+    return h;
+  }
+  function stepMs(st) { var w = String((st && (st.say || st.tx)) || "").split(/\s+/).length; return Math.max(7000, Math.min(30000, w * 330)); }
+  function storyHtml(c) {
+    if (c.err) return '<p class="pn-mg-stx">This lesson could not load here. Open the full lesson below.</p>';
+    if (!c.les) return '<p class="pn-mg-stx pn-mut">Swipe here and the lesson plays.</p>';
+    var n = c.les.steps.length, k = Math.min(c.step || 0, n - 1), done = c.step >= n;
+    var segs = '<div class="pn-mg-segs" aria-hidden="true">' + c.les.steps.map(function (st, j) {
+      var fill = j < k || done ? " full" : j === k && c.playing && !c.listen ? " run" : "";
+      return '<span class="pn-mg-seg' + fill + '"><i' + (fill === " run" ? ' style="animation-duration:' + stepMs(st) + 'ms"' : "") + "></i></span>";
+    }).join("") + "</div>";
+    if (done) return segs + '<p class="pn-mg-stx"><b>Lesson done.</b> Swipe on, or take the quiz in the full lesson.</p>';
+    return segs + '<p class="pn-mg-sn">Step ' + (k + 1) + " of " + n + (c.playing ? "" : " · paused") + "</p>" + stepHtml(c.les.steps[k]);
+  }
+  var TAPX = null;   // where the last tap landed, for the story's back / pause / next thirds
+  try { G.document.addEventListener("click", function (e) { TAPX = e.clientX; }, true); } catch (e) {}
+  function lesEl(i) { return H().root().querySelector('#pnMgFeed .vf-c[data-i="' + i + '"]'); }
+  function lesDraw(i) { var el = lesEl(i), c = S.cards[i]; if (!el || !c) return; var box = el.querySelector(".pn-mg-story"); if (box) box.innerHTML = storyHtml(c); var b = el.querySelector('[data-v="listen"]'); if (b) { b.textContent = c.listen ? "Stop listening" : "Listen"; b.setAttribute("aria-pressed", String(!!c.listen)); } }
+  function lesStop() { if (!S) return; G.clearTimeout(S.lt); S.lt = 0; try { if (S.les != null && G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {} S.les = null; }
+  function lesRun(i) {
+    var c = S.cards[i];
+    G.clearTimeout(S.lt);
+    if (!c || !c.les || c.step >= c.les.steps.length || !c.playing) return lesDraw(i);
+    lesDraw(i);
+    var st = c.les.steps[c.step], k = c.step, adv = function () { if (!S || S.les !== i || c.step !== k) return; c.step++; lesRun(i); };
+    if (c.listen && G.speechSynthesis && G.SpeechSynthesisUtterance) {
+      try { G.speechSynthesis.cancel(); var u = new G.SpeechSynthesisUtterance(String(st.say || st.tx || "").replace(/\*\*/g, "")); u.lang = "en-IN"; u.rate = 1; u.onend = adv; G.speechSynthesis.speak(u); return; } catch (e) {}
+    }
+    S.lt = G.setTimeout(adv, stepMs(st));
+  }
+  function lesStart(el) {
+    var i = Number(el.getAttribute("data-i")), c = S.cards[i];
+    if (!c || S.les === i) return;
+    lesStop(); S.les = i;
+    if (c.step == null) { c.step = 0; c.playing = true; }
+    if (c.les) return lesRun(i);
+    if (!G.PREP_LESSONS || !G.PREP_LESSONS.file) { c.err = 1; return lesDraw(i); }
+    G.PREP_LESSONS.file(c.mid, H()).then(function (les) {
+      if (!S || S.cards[i] !== c) return;
+      if (!les || !les.steps || !les.steps.length) { c.err = 1; return lesDraw(i); }
+      c.les = les; if (S.les === i) lesRun(i); else lesDraw(i);
+    }, function () { if (S && S.cards[i] === c) { c.err = 1; lesDraw(i); } });
+  }
   function vctl() {
-    return '<div class="pn-mg-vctl" role="group" aria-label="Video controls">' +
+    return '<div class="pn-mg-vctl" role="group" aria-label="Video controls" data-act="mg-ctl">' +
       '<button type="button" data-act="mg-v" data-v="back" aria-label="Back 10 seconds">' + vi("back") + "</button>" +
       '<button type="button" data-act="mg-v" data-v="toggle" data-k="play" aria-label="Pause">' + vi("pause") + "</button>" +
       '<button type="button" data-act="mg-v" data-v="fwd" aria-label="Forward 10 seconds">' + vi("fwd") + "</button>" +
@@ -156,13 +213,12 @@
   /* The glass controls sit on the video and fade out 3 s after they appear (they stay while the video is paused).
      They come up when a video starts, on any of our buttons, and when YouTube's own controls pause or play it. */
   function showCtl(card) {
-    var f = card && card.querySelector(".pn-mg-frame");
-    if (!f || !S) return;
-    f.classList.add("ctl");
+    if (!card || !S) return;
+    card.classList.add("ctlon");
     G.clearTimeout(S.ct);
-    S.ct = G.setTimeout(function () { var l = MEDIA && MEDIA.current(); if (l && l.holder === f && l.state === 2) return; hideCtl(card); }, 3000);
+    S.ct = G.setTimeout(function () { var l = MEDIA && MEDIA.current(); if (l && l.holder.closest(".pn-mg-vid") === card && l.state === 2) return; hideCtl(card); }, 3000);
   }
-  function hideCtl(card) { var f = card && card.querySelector(".pn-mg-frame"); if (f) f.classList.remove("ctl"); if (S) G.clearTimeout(S.ct); }
+  function hideCtl(card) { if (card) card.classList.remove("ctlon"); if (S) G.clearTimeout(S.ct); }
   function setFull(card, on) {
     var box = H().root() && H().root().querySelector("#pnMgFeed");
     if (S.fs && S.fs !== card) S.fs.classList.remove("pn-mg-fs");
@@ -194,12 +250,13 @@
      plays at a time. Measured with getBoundingClientRect after scrolling settles (not IntersectionObserver, which did
      not fire for the reel box in the iPad WebView, 2026-11-17 recording). A tap on the poster also plays it. */
   function syncVideo() {
-    if (!S || !MEDIA || S.fs) return;   // a full-screen video stays put while the reel underneath settles
+    if (!S || !MEDIA || S.fs || S.mode === "break") return;   // a full-screen video stays put while the reel underneath settles
     var box = H().root() && H().root().querySelector("#pnMgFeed");
     if (!box) return;
     var r = box.getBoundingClientRect(), mid = r.top + r.height / 2, on = null;
     [].some.call(box.querySelectorAll(".vf-c"), function (el) { var c = el.getBoundingClientRect(); if (c.top <= mid && c.bottom >= mid) { on = el; return true; } return false; });
     if (on && on.classList.contains("pn-mg-vid")) { var was = MEDIA.current(); playIn(on); if (!was || was !== MEDIA.current()) showCtl(on); } else MEDIA.release();
+    if (on && on.classList.contains("pn-mg-les")) lesStart(on); else lesStop();
   }
   function playIn(el) {
     var holder = el && el.querySelector(".pn-mg-frame");
@@ -232,7 +289,7 @@
   }
   function tickBreak() { if (!S || !S.brk || S.mode !== "break") return stopBreakTimer(); if (DATA.breakState(S.brk, Date.now()).expired) stopBreakTimer(); renderBreak(); }
   function stopBreakTimer() { if (S && S.timer) { G.clearInterval(S.timer); S.timer = 0; } }
-  function stopMedia() { if (S && S.fs) setFull(S.fs, false); if (MEDIA) MEDIA.release(); if (S) { G.clearTimeout(S.vt); G.clearTimeout(S.ct); } }
+  function stopMedia() { if (S && S.fs) setFull(S.fs, false); if (MEDIA) MEDIA.release(); if (S) { G.clearTimeout(S.vt); G.clearTimeout(S.ct); lesStop(); } }
   function setMode(mode) { stopMedia(); stopBreakTimer(); S.brk = null; S.mode = mode; S.cards = []; S.seen = {}; S.top = 0; S.done = S.right = 0; if (mode === "break") return renderBreak(); load(); }
 
   function start(host, mode) {
@@ -273,10 +330,28 @@
       if (nx) box.scrollTo({ top: nx.offsetTop - box.offsetTop, behavior: G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       return;
     }
+    if (a === "mg-ctl") return showCtl(el.closest(".pn-mg-vid"));   // a tap on the (hidden) bar area brings it back
+    if (a === "mg-les-tap" || a === "mg-les") {
+      if (!c || c.kind !== "lesson") return;
+      if (a === "mg-les") {   // Listen: narration reads each step and moves on when it ends
+        c.listen = !c.listen; c.playing = true;
+        if (!c.listen) { try { G.speechSynthesis.cancel(); } catch (e) {} }
+        if (S.les !== i) { lesStart(el.closest(".vf-c")); return; }
+        return lesRun(i);
+      }
+      if (!c.les) return lesStart(el.closest(".vf-c"));
+      var r = el.getBoundingClientRect(), x = (TAPX != null ? TAPX : r.left + r.width / 2) - r.left;
+      if (c.step >= c.les.steps.length) c.step = 0;
+      else if (x < r.width / 3) c.step = Math.max(0, c.step - 1);
+      else if (x > r.width * 2 / 3) c.step = Math.min(c.les.steps.length, c.step + 1);
+      else c.playing = !c.playing;
+      if (!c.playing) { G.clearTimeout(S.lt); try { G.speechSynthesis.cancel(); } catch (e) {} return lesDraw(i); }
+      S.les = i; return lesRun(i);
+    }
     if (a === "mg-play") {
       var vc = el.closest(".pn-mg-vid"), cur = MEDIA && MEDIA.current();
       if (!cur || cur.holder.closest(".pn-mg-vid") !== vc) { playIn(vc); return showCtl(vc); }
-      return el.classList.contains("ctl") ? hideCtl(vc) : showCtl(vc);
+      return vc.classList.contains("ctlon") ? hideCtl(vc) : showCtl(vc);
     }
     if (a === "mg-v" || a === "mg-fs") {
       var card = el.closest(".pn-mg-vid"), live = MEDIA && MEDIA.current();
@@ -288,7 +363,7 @@
       return showCtl(card);
     }
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
-    if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
+    if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); S.les = null; emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
     if (a === "mg-understand") {
       if (c && G.PREP_ASK && G.PREP_ASK.open) { stopMedia(); try { G.PREP_ASK.open({ kind: "card", title: firstSentence(c.it.q).slice(0, 80), ask: "Explain this question and its answer in plain language with one analogy.", fr: c.it.q + "\n" + c.it.o.map(function (o, k) { return L[k] + ". " + o; }).join("\n"), bk: "Answer: " + L[c.it.a] + ". " + c.it.o[c.it.a] + "\n" + String(c.it.exp || (c.it.x && c.it.x.key) || "") }, host); } catch (e) {} }
       emit("understand_requested", {}); return;
