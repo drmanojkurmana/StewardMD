@@ -77,6 +77,51 @@
    "tx": "**Display windowing** never changes the stored CT data, only the grey map applied to it. The same head scan is reviewed on brain, stroke, subdural and bone windows because each window answers a different question. A subdural window at level 60 and width 130 lifts a thin acute subdural collection away from the bright inner table, which a standard brain window merges into one white band.",
    "say": "Display windowing never changes the stored scan data, only the grey map applied to it. One head scan is reviewed on brain, stroke, subdural and bone windows because each setting answers a different question. A subdural window at level sixty and width one hundred thirty lifts a thin acute collection away from the bright inner table.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "One head CT dataset"}, {"id": "b", "label": "Brain window 40/80"}, {"id": "c", "label": "Bone window 400/1800"}, {"id": "d", "label": "Different questions answered"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: **Window level** is the Hounsfield value set at middle grey. **Window width** is the span from black to white. Brain display uses level 40 and width 80. The stroke window uses level 32 and width 8 so a drop of 1 to 3 units reveals insular ribbon loss. High resolution CT uses 1 to 1.5 mm slices. Prone images separate dependent collapse from fibrosis. Expiratory images show air trapping. On T1 fat is bright and fluid is dark. On T2 water rich tissue is bright.",
+   "say": "High-yield for the exam: Window level is the Hounsfield value set at middle grey. Window width is the span from black to white. Brain display uses level 40 and width 80. The stroke window uses level 32 and width 8 so a drop of 1 to 3 units reveals insular ribbon loss. High resolution CT uses 1 to 1.5 mm slices. Prone images separate dependent collapse from fibrosis. Expiratory images show air trapping. On T1 fat is bright and fluid is dark. On T2 water rich tissue is bright.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Window level",
+      "Hounsfield value at middle grey"
+     ],
+     [
+      "Window width",
+      "Grey span from black to white"
+     ],
+     [
+      "Brain window",
+      "Level 40 and width 80"
+     ],
+     [
+      "Stroke window",
+      "Level 32 and width 8"
+     ],
+     [
+      "Insular ribbon loss",
+      "Early drop of 1 to 3 units"
+     ],
+     [
+      "HRCT slice",
+      "Thin sections of 1 to 1.5 mm"
+     ],
+     [
+      "Prone and expiratory",
+      "Collapse versus air trapping"
+     ],
+     [
+      "T1 versus T2",
+      "Fat bright on T1, water bright on T2"
+     ]
+    ]
+   }
   }
  ]
 }
