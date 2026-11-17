@@ -10,12 +10,32 @@
    "say": "Mucopolysaccharidoses store glycosaminoglycans, giving coarse facies, dysostosis multiplex, liver enlargement and stiff joints. Corneas are cloudy or clear by type, which examinations exploit relentlessly.",
    "vis": {
     "kind": "table",
-    "cols": ["Type (eponym)", "Enzyme missing", "GAG stored"],
+    "cols": [
+     "Type (eponym)",
+     "Enzyme missing",
+     "GAG stored"
+    ],
     "rows": [
-     ["I (Hurler)", "Alpha-L-iduronidase", "Dermatan plus heparan"],
-     ["II (Hunter)", "Iduronate sulfatase (X linked)", "Dermatan plus heparan"],
-     ["III (Sanfilippo)", "Heparan enzymes (4 subtypes)", "Heparan only"],
-     ["IV (Morquio)", "Galactose-6-sulfatase etc.", "Keratan"]
+     [
+      "I (Hurler)",
+      "Alpha-L-iduronidase",
+      "Dermatan plus heparan"
+     ],
+     [
+      "II (Hunter)",
+      "Iduronate sulfatase (X linked)",
+      "Dermatan plus heparan"
+     ],
+     [
+      "III (Sanfilippo)",
+      "Heparan enzymes (4 subtypes)",
+      "Heparan only"
+     ],
+     [
+      "IV (Morquio)",
+      "Galactose-6-sulfatase etc.",
+      "Keratan"
+     ]
     ]
    }
   },
@@ -24,8 +44,21 @@
    "say": "Hunter spares the cornea while Hurler clouds it, and Hunter is X linked in boys. One corneal finding plus inheritance separates two otherwise twin stems. Attenuated forms keep intellect.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Hurler (MPS I)", "points": ["Cornea cloudy", "Both sexes (recessive)", "Severe: regression, death in childhood"]},
-    "right": {"title": "Hunter (MPS II)", "points": ["Cornea clear (classic contrast)", "Boys (X linked)", "Pebbly shoulder skin lesions"]
+    "left": {
+     "title": "Hurler (MPS I)",
+     "points": [
+      "Cornea cloudy",
+      "Both sexes (recessive)",
+      "Severe: regression, death in childhood"
+     ]
+    },
+    "right": {
+     "title": "Hunter (MPS II)",
+     "points": [
+      "Cornea clear (classic contrast)",
+      "Boys (X linked)",
+      "Pebbly shoulder skin lesions"
+     ]
     }
    }
   },
@@ -34,8 +67,21 @@
    "say": "Sanfilippo keeps soma mild while brain bears the disease, with hyperactivity and sleep reversal mislabelled as autism first. Morquio inverts the pattern with skeletal disease and intellect preserved.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Sanfilippo (brain dominant)", "points": ["Heparan only", "Behaviour and sleep first", "Mild facies and soma"]},
-    "right": {"title": "Morquio (bone dominant)", "points": ["Keratan stored", "Short trunk, odontoid danger", "Intellect preserved"]
+    "left": {
+     "title": "Sanfilippo (brain dominant)",
+     "points": [
+      "Heparan only",
+      "Behaviour and sleep first",
+      "Mild facies and soma"
+     ]
+    },
+    "right": {
+     "title": "Morquio (bone dominant)",
+     "points": [
+      "Keratan stored",
+      "Short trunk, odontoid danger",
+      "Intellect preserved"
+     ]
     }
    }
   },
@@ -49,11 +95,27 @@
    "say": "Enzyme replacement improves viscera but barely reaches brain, so early transplant remains brain protecting in selected Hurler children. Airway, valve and cervical spine risks dominate multidisciplinary care.",
    "vis": {
     "kind": "table",
-    "cols": ["Therapy", "Reaches brain?", "Best window"],
+    "cols": [
+     "Therapy",
+     "Reaches brain?",
+     "Best window"
+    ],
     "rows": [
-     ["IV enzyme replacement", "Negligibly", "Any age for somatic gain"],
-     ["Stem cell transplant", "Donor microglia deliver enzyme", "Hurler under about 2.5 years, pre-regression"],
-     ["Supportive and surgical", "Symptomatic", "Airway, valves, spine, hearing, vision"]
+     [
+      "IV enzyme replacement",
+      "Negligibly",
+      "Any age for somatic gain"
+     ],
+     [
+      "Stem cell transplant",
+      "Donor microglia deliver enzyme",
+      "Hurler under about 2.5 years, pre-regression"
+     ],
+     [
+      "Supportive and surgical",
+      "Symptomatic",
+      "Airway, valves, spine, hearing, vision"
+     ]
     ]
    }
   },
@@ -64,11 +126,74 @@
     "kind": "flow",
     "title": "One question per storage child",
     "nodes": [
-     {"id": "m", "label": "Which molecule accumulates?"},
-     {"id": "c", "label": "In which cells (neuron, macrophage, fibroblast)?"},
-     {"id": "p", "label": "Pattern: cornea, skeleton, brain, viscera"}
+     {
+      "id": "m",
+      "label": "Which molecule accumulates?"
+     },
+     {
+      "id": "c",
+      "label": "In which cells (neuron, macrophage, fibroblast)?"
+     },
+     {
+      "id": "p",
+      "label": "Pattern: cornea, skeleton, brain, viscera"
+     }
     ],
-    "edges": [["m", "c"], ["c", "p"]]
+    "edges": [
+     [
+      "m",
+      "c"
+     ],
+     [
+      "c",
+      "p"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Mucopolysaccharidoses result from deficiencies in lysosomal enzymes that degrade glycosaminoglycans, causing dysostosis multiplex, coarse facies, and organomegaly. Hurler syndrome (MPS I) is autosomal recessive with alpha-L-iduronidase deficiency, severe cognitive decline, and corneal clouding. Hunter syndrome (MPS II) is X-linked recessive with iduronate-2-sulfatase deficiency, displaying pebbly skin papules and characteristically clear corneas. Sanfilippo syndrome (MPS III) accumulates heparan sulfate, presenting with profound neurobehavioral deterioration and minimal somatic changes.",
+   "say": "High-yield for the exam: Mucopolysaccharidoses result from deficiencies in lysosomal enzymes that degrade glycosaminoglycans, causing dysostosis multiplex, coarse facies, and organomegaly. Hurler syndrome (MPS I) is autosomal recessive with alpha-L-iduronidase deficiency, severe cognitive decline, and corneal clouding. Hunter syndrome (MPS II) is X-linked recessive with iduronate-2-sulfatase deficiency, displaying pebbly skin papules and characteristically clear corneas. Sanfilippo syndrome (MPS III) accumulates heparan sulfate, presenting with profound neurobehavioral deterioration and minimal somatic changes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Hurler syndrome (MPS I)",
+      "Alpha-L-iduronidase deficiency with corneal clouding and early cognitive decline"
+     ],
+     [
+      "Hunter syndrome (MPS II)",
+      "Iduronate-2-sulfatase deficiency, X-linked recessive inheritance with clear corneas"
+     ],
+     [
+      "Sanfilippo syndrome (MPS III)",
+      "Heparan sulfate accumulation causing severe behavioral hyperactivity and dementia"
+     ],
+     [
+      "Morquio syndrome (MPS IV)",
+      "Keratan sulfate storage with severe skeletal dysplasia and normal intellect"
+     ],
+     [
+      "Skeletal radiological signs",
+      "Dysostosis multiplex: oar-shaped ribs, hypoplastic vertebrae, and acetabular dysplasia"
+     ],
+     [
+      "I-cell disease defect",
+      "Phosphotransferase deficiency failing to synthesize mannose-6-phosphate lysosomal tag"
+     ],
+     [
+      "I-cell disease diagnostic hallmark",
+      "Severely elevated lysosomal enzymes in plasma with intracellular deficiency"
+     ],
+     [
+      "Enzyme replacement limitation",
+      "Recombinant intravenous enzymes do not cross blood-brain barrier effectively"
+     ]
+    ]
    }
   }
  ],

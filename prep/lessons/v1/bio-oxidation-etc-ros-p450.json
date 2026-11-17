@@ -12,11 +12,29 @@
     "kind": "flow",
     "title": "ROS ladder and defences",
     "nodes": [
-     {"id": "sup", "label": "Superoxide (SOD dismutates)"},
-     {"id": "per", "label": "Hydrogen peroxide (catalase, GPx)"},
-     {"id": "hyd", "label": "Hydroxyl by Fenton iron (no enzyme: prevent iron free)"}
+     {
+      "id": "sup",
+      "label": "Superoxide (SOD dismutates)"
+     },
+     {
+      "id": "per",
+      "label": "Hydrogen peroxide (catalase, GPx)"
+     },
+     {
+      "id": "hyd",
+      "label": "Hydroxyl by Fenton iron (no enzyme: prevent iron free)"
+     }
     ],
-    "edges": [["sup", "per"], ["per", "hyd"]]
+    "edges": [
+     [
+      "sup",
+      "per"
+     ],
+     [
+      "per",
+      "hyd"
+     ]
+    ]
    }
   },
   {
@@ -24,12 +42,32 @@
    "say": "Superoxide dismutases compartmentalise by metal and location, while GPx4 failure unleashes ferroptosis death. Vitamins E and C regenerate each other across membrane and aqueous phases protectively in tissues.",
    "vis": {
     "kind": "table",
-    "cols": ["Defence", "Compartment and cofactor", "Failure or frontier"],
+    "cols": [
+     "Defence",
+     "Compartment and cofactor",
+     "Failure or frontier"
+    ],
     "rows": [
-     ["SOD1 CuZn / SOD2 Mn", "Cytosol / mitochondria", "ALS SOD1 toxic gain; SOD2 essential"],
-     ["Catalase", "Peroxisomes, iron heme", "High peroxide loads; deficiency often silent"],
-     ["Glutathione peroxidase 4", "Membranes, selenium", "Ferroptosis when failed (lipid ROS)"],
-     ["Vitamin E then C recycling", "Membrane then aqueous interface", "Ataxia in E transport failure (AVED gene)"]
+     [
+      "SOD1 CuZn / SOD2 Mn",
+      "Cytosol / mitochondria",
+      "ALS SOD1 toxic gain; SOD2 essential"
+     ],
+     [
+      "Catalase",
+      "Peroxisomes, iron heme",
+      "High peroxide loads; deficiency often silent"
+     ],
+     [
+      "Glutathione peroxidase 4",
+      "Membranes, selenium",
+      "Ferroptosis when failed (lipid ROS)"
+     ],
+     [
+      "Vitamin E then C recycling",
+      "Membrane then aqueous interface",
+      "Ataxia in E transport failure (AVED gene)"
+     ]
     ]
    }
   },
@@ -38,8 +76,21 @@
    "say": "Chronic granulomatous disease cannot burst phagosomes, so catalase positive organisms survive characteristically. Dihydrorhodamine flow diagnoses it, with prophylaxis and transplant strata defining modern management pathways completely.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "CGD (oxidase absent)", "points": ["Catalase POSITIVE pathogens persist", "Abscesses, granulomas, Aspergillus", "DHR flow flat; interferon gamma helps"]},
-    "right": {"title": "Myeloperoxidase deficiency (common)", "points": ["HOCl reduced only", "Usually asymptomatic (peroxide intact)", "Candida only with diabetes cofactor"]
+    "left": {
+     "title": "CGD (oxidase absent)",
+     "points": [
+      "Catalase POSITIVE pathogens persist",
+      "Abscesses, granulomas, Aspergillus",
+      "DHR flow flat; interferon gamma helps"
+     ]
+    },
+    "right": {
+     "title": "Myeloperoxidase deficiency (common)",
+     "points": [
+      "HOCl reduced only",
+      "Usually asymptomatic (peroxide intact)",
+      "Candida only with diabetes cofactor"
+     ]
     }
    }
   },
@@ -53,12 +104,32 @@
    "say": "P450 oxidases hydroxylate drugs and steroids while activating procarcinogens and prodrugs variably by isoform. Rifampicin induces over days, while grapefruit suicide inhibits intestinal 3A4 within hours dangerously.",
    "vis": {
     "kind": "table",
-    "cols": ["CYP isoform", "Share and flagship substrates", "Inducer or inhibitor anchor"],
+    "cols": [
+     "CYP isoform",
+     "Share and flagship substrates",
+     "Inducer or inhibitor anchor"
+    ],
     "rows": [
-     ["3A4 (most abundant)", "About half of drugs; midazolam, statins, tacrolimus", "Inhibited grapefruit, ketoconazole, ritonavir; induced rifampicin, carbamazepine"],
-     ["2D6 (polymorphic)", "Codeine activation, tamoxifen, many psychotropics", "Poor versus ultrarapid metabolisers; fluoxetine inhibits"],
-     ["2C9 and 2C19", "Warfarin S, phenytoin; clopidogrel activation, PPIs", "VKORC1 pairing warfarin; clopidogrel loss in 2C19 poor"],
-     ["1A2, 2E1", "Theophylline, caffeine; ethanol and paracetamol toxication", "Smoking induces 1A2; chronic ethanol induces 2E1 (NAPQI up)"]
+     [
+      "3A4 (most abundant)",
+      "About half of drugs; midazolam, statins, tacrolimus",
+      "Inhibited grapefruit, ketoconazole, ritonavir; induced rifampicin, carbamazepine"
+     ],
+     [
+      "2D6 (polymorphic)",
+      "Codeine activation, tamoxifen, many psychotropics",
+      "Poor versus ultrarapid metabolisers; fluoxetine inhibits"
+     ],
+     [
+      "2C9 and 2C19",
+      "Warfarin S, phenytoin; clopidogrel activation, PPIs",
+      "VKORC1 pairing warfarin; clopidogrel loss in 2C19 poor"
+     ],
+     [
+      "1A2, 2E1",
+      "Theophylline, caffeine; ethanol and paracetamol toxication",
+      "Smoking induces 1A2; chronic ethanol induces 2E1 (NAPQI up)"
+     ]
     ]
    }
   },
@@ -69,11 +140,74 @@
     "kind": "flow",
     "title": "Drug fate by CYP genotype",
     "nodes": [
-     {"id": "poor", "label": "Poor metaboliser: prodrug fails or drug accumulates"},
-     {"id": "norm", "label": "Extensive: label doses designed here"},
-     {"id": "ultra", "label": "Ultrarapid: prodrug floods active metabolite"}
+     {
+      "id": "poor",
+      "label": "Poor metaboliser: prodrug fails or drug accumulates"
+     },
+     {
+      "id": "norm",
+      "label": "Extensive: label doses designed here"
+     },
+     {
+      "id": "ultra",
+      "label": "Ultrarapid: prodrug floods active metabolite"
+     }
     ],
-    "edges": [["poor", "norm"], ["norm", "ultra"]]
+    "edges": [
+     [
+      "poor",
+      "norm"
+     ],
+     [
+      "norm",
+      "ultra"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Reactive oxygen species arise from mitochondrial electron leakage and enzymatic reactions. Superoxide dismutase converts superoxide to hydrogen peroxide, which catalase and selenium-dependent glutathione peroxidase detoxify to water. In chronic granulomatous disease, NADPH oxidase deficiency impairs phagocytic superoxide generation, increasing susceptibility to catalase-positive bacteria and fungi. Cytochrome P450 monooxygenases catalyze phase I drug hydroxylation, inducible by phenobarbital and rifampicin, and inhibited by cimetidine and grapefruit juice.",
+   "say": "High-yield for the exam: Reactive oxygen species arise from mitochondrial electron leakage and enzymatic reactions. Superoxide dismutase converts superoxide to hydrogen peroxide, which catalase and selenium-dependent glutathione peroxidase detoxify to water. In chronic granulomatous disease, NADPH oxidase deficiency impairs phagocytic superoxide generation, increasing susceptibility to catalase-positive bacteria and fungi. Cytochrome P450 monooxygenases catalyze phase I drug hydroxylation, inducible by phenobarbital and rifampicin, and inhibited by cimetidine and grapefruit juice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Superoxide dismutase isoforms",
+      "Cytosolic copper-zinc SOD1, mitochondrial manganese SOD2, and extracellular SOD3"
+     ],
+     [
+      "Fenton reaction components",
+      "Ferrous iron Fe2+ reacts with hydrogen peroxide, generating deadly hydroxyl radicals"
+     ],
+     [
+      "Glutathione peroxidase cofactor",
+      "Selenocysteine at catalytic active site protects membrane lipids from peroxidation"
+     ],
+     [
+      "Chronic granulomatous disease genetics",
+      "X-linked gp91phox mutation impairing phagocytic respiratory burst"
+     ],
+     [
+      "CGD vulnerable organisms",
+      "Catalase-positive microbes: S. aureus, Pseudomonas, Serratia, Nocardia, Aspergillus"
+     ],
+     [
+      "CGD diagnostic test",
+      "Abnormal dihydrorhodamine 123 flow cytometry or negative nitroblue tetrazolium reduction"
+     ],
+     [
+      "Cytochrome P450 nomenclature",
+      "Absorbs light at 450 nanometres when bound to carbon monoxide"
+     ],
+     [
+      "CYP2E1 induction hazard",
+      "Chronic alcohol induces CYP2E1, accelerating paracetamol conversion to toxic NAPQI"
+     ]
+    ]
    }
   }
  ],

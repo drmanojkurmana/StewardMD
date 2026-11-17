@@ -10,12 +10,27 @@
    "say": "The peptide bond is planar and rigid by resonance, forcing trans configuration except sometimes before proline. Alpha carbon rotations generate all folding geometry from one repeating chemistry.",
    "vis": {
     "kind": "table",
-    "cols": ["Bond property", "Structural consequence"],
+    "cols": [
+     "Bond property",
+     "Structural consequence"
+    ],
     "rows": [
-     ["Partial double bond (resonance)", "Planar, no rotation, 1.32 angstrom intermediate"],
-     ["Trans configuration", "Side chains alternate, steric relief (cis only pre-Pro)"],
-     ["Phi and psi rotations free", "Ramachandran allowed regions; Gly widest, Pro fixed"],
-     ["Hydrogen bond donor/acceptor pattern", "Helices and sheets in next lesson"]
+     [
+      "Partial double bond (resonance)",
+      "Planar, no rotation, 1.32 angstrom intermediate"
+     ],
+     [
+      "Trans configuration",
+      "Side chains alternate, steric relief (cis only pre-Pro)"
+     ],
+     [
+      "Phi and psi rotations free",
+      "Ramachandran allowed regions; Gly widest, Pro fixed"
+     ],
+     [
+      "Hydrogen bond donor/acceptor pattern",
+      "Helices and sheets in next lesson"
+     ]
     ]
    }
   },
@@ -26,11 +41,29 @@
     "kind": "flow",
     "title": "Sequence to destiny",
     "nodes": [
-     {"id": "seq", "label": "Primary sequence (N to C)"},
-     {"id": "fold", "label": "Fold encoded (Anfinsen)"},
-     {"id": "var", "label": "One substitution can rewrite function"}
+     {
+      "id": "seq",
+      "label": "Primary sequence (N to C)"
+     },
+     {
+      "id": "fold",
+      "label": "Fold encoded (Anfinsen)"
+     },
+     {
+      "id": "var",
+      "label": "One substitution can rewrite function"
+     }
     ],
-    "edges": [["seq", "fold"], ["fold", "var"]]
+    "edges": [
+     [
+      "seq",
+      "fold"
+     ],
+     [
+      "fold",
+      "var"
+     ]
+    ]
    }
   },
   {
@@ -38,8 +71,21 @@
    "say": "Trypsin cuts after lysine and arginine, chymotrypsin after aromatics, and elastase after small residues. Proteomics digests with trypsin because its cuts are predictable at common residues.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Endopeptidases (cut inside)", "points": ["Trypsin: after K, R", "Chymotrypsin: after F, Y, W", "Pepsin: acid, broad aromatic"]},
-    "right": {"title": "Exopeptidases (trim ends)", "points": ["Carboxypeptidase B: C-term K, R", "Aminopeptidases: N-term sequential", "Dipeptidyl enzymes in gut and ACE family"]
+    "left": {
+     "title": "Endopeptidases (cut inside)",
+     "points": [
+      "Trypsin: after K, R",
+      "Chymotrypsin: after F, Y, W",
+      "Pepsin: acid, broad aromatic"
+     ]
+    },
+    "right": {
+     "title": "Exopeptidases (trim ends)",
+     "points": [
+      "Carboxypeptidase B: C-term K, R",
+      "Aminopeptidases: N-term sequential",
+      "Dipeptidyl enzymes in gut and ACE family"
+     ]
     }
    }
   },
@@ -53,12 +99,32 @@
    "say": "Glutathione uses a gamma bond resisting peptidases, while oxytocin and vasopressin differ at two positions with uterine versus renal empires. Length never predicts potency in peptide pharmacology.",
    "vis": {
     "kind": "table",
-    "cols": ["Peptide", "Length trick", "Job"],
+    "cols": [
+     "Peptide",
+     "Length trick",
+     "Job"
+    ],
     "rows": [
-     ["Glutathione", "Gamma bond, 3 residues", "Redox buffer (prior module)"],
-     ["Oxytocin vs vasopressin", "9 residues, 2 differ", "Uterus and milk vs kidney water"],
-     ["TRH", "3 residues, blocked ends", "Pituitary thyrotropin release"],
-     ["Insulin", "A 21 plus B 30, 3 disulfides", "First sequenced, proinsulin C-peptide equal secretion marker"]
+     [
+      "Glutathione",
+      "Gamma bond, 3 residues",
+      "Redox buffer (prior module)"
+     ],
+     [
+      "Oxytocin vs vasopressin",
+      "9 residues, 2 differ",
+      "Uterus and milk vs kidney water"
+     ],
+     [
+      "TRH",
+      "3 residues, blocked ends",
+      "Pituitary thyrotropin release"
+     ],
+     [
+      "Insulin",
+      "A 21 plus B 30, 3 disulfides",
+      "First sequenced, proinsulin C-peptide equal secretion marker"
+     ]
     ]
    }
   },
@@ -69,11 +135,74 @@
     "kind": "flow",
     "title": "Disulfide decisions",
     "nodes": [
-     {"id": "cys", "label": "Cysteine pairs meet in ER (oxidising)"},
-     {"id": "pdi", "label": "PDI shuffles wrong pairs"},
-     {"id": "lock", "label": "Correct staples lock the fold"}
+     {
+      "id": "cys",
+      "label": "Cysteine pairs meet in ER (oxidising)"
+     },
+     {
+      "id": "pdi",
+      "label": "PDI shuffles wrong pairs"
+     },
+     {
+      "id": "lock",
+      "label": "Correct staples lock the fold"
+     }
     ],
-    "edges": [["cys", "pdi"], ["pdi", "lock"]]
+    "edges": [
+     [
+      "cys",
+      "pdi"
+     ],
+     [
+      "pdi",
+      "lock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Peptide bonds possess partial double bond character due to resonance, enforcing planarity and restricting rotation to the phi and psi angles. Natural amino acids in human proteins have the L-stereochemical configuration, except glycine, which lacks an asymmetric alpha carbon. The primary structure defines the linear sequence from amino to carboxyl terminus, held by covalent peptide bonds. Sickle cell disease illustrates the clinical impact of a single primary substitution: valine replacing glutamate at position six.",
+   "say": "High-yield for the exam: Peptide bonds possess partial double bond character due to resonance, enforcing planarity and restricting rotation to the phi and psi angles. Natural amino acids in human proteins have the L-stereochemical configuration, except glycine, which lacks an asymmetric alpha carbon. The primary structure defines the linear sequence from amino to carboxyl terminus, held by covalent peptide bonds. Sickle cell disease illustrates the clinical impact of a single primary substitution: valine replacing glutamate at position six.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Peptide bond resonance",
+      "Forty percent double bond character locking the four peptide atoms planar"
+     ],
+     [
+      "Peptide backbone rotation angles",
+      "Phi angle around N-C-alpha; Psi angle around C-alpha-C bond"
+     ],
+     [
+      "Standard stereochemical form",
+      "L-amino acids exclusively incorporated into mammalian ribosomal proteins"
+     ],
+     [
+      "Achiral amino acid",
+      "Glycine possesses two hydrogen atoms at its alpha carbon"
+     ],
+     [
+      "Primary structure bond",
+      "Covalent amide (peptide) bonds resistant to heating and denaturants"
+     ],
+     [
+      "Sickle cell mutation",
+      "Point mutation substituting valine for glutamic acid at beta-chain position six"
+     ],
+     [
+      "Disulfide bond formation",
+      "Covalent oxidation linking sulfhydryl groups of two cysteine residues"
+     ],
+     [
+      "Edman degradation reagent",
+      "Phenylisothiocyanate labels and cleaves the N-terminal amino acid sequentially"
+     ]
+    ]
    }
   }
  ],
