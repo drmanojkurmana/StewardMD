@@ -1,0 +1,113 @@
+{
+  "v": 1,
+  "module": "sgm-poisoning-approach",
+  "subject": "ss-general-medicine",
+  "title": "Approach to the poisoned patient",
+  "minutes": 11,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Poisoning means harmful effect from **toxic dose** exposure by ingestion, inhalation, skin or injection, affecting one point four million deaths annually with 70 percent suicidal in some series. Intentional self poisoning uses **paracetamol** and antidepressants, while occupational and accidental exposure includes pesticides and gases. Children under 5 years account for 20 percent of cases and suicidal intent needs **risk stratification** with psychiatric liaison and means restriction.",
+      "say": "Poisoning causes over a million deaths each year, with most adolescent and adult cases being suicidal. Paracetamol and antidepressants are common, while children often swallow medicines accidentally. Every case needs suicide risk assessment, psychiatric review and restriction of further access to poisons.",
+      "vis": null
+    },
+    {
+      "tx": "Common toxidromes cluster by **pupils** and secretions, with organophosphate causing miosis and hypersecretion, opioids causing miosis and slow breathing, and sympathomimetic toxicity causing mydriasis with hyperthermia. Anticholinergic poisoning gives **hot dry skin** with **mycotic** confusion and urinary retention, while **histamine** mediated anaphylaxis shows urticaria and wheeze. Bedside **toxidrome** recognition guides antidote choice before laboratory confirmation.",
+      "say": "Look for toxidrome patterns in pupils, skin, breathing and mental state to guess the poison early. Organophosphate and opioids cause constricted pupils, while sympathomimetic and anticholinergic poisonings cause dilated pupils and dry the skin. Recognising the pattern guides antidote use before laboratory results arrive.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Toxidrome", "Pupils", "Key clue"],
+        "rows": [
+          ["Organophosphate", "Miosis", "Bronchorrhoea and bradycardia"],
+          ["Opioid", "Miosis", "Respiratory depression"],
+          ["Anticholinergic", "Mydriasis", "Hot dry flushed skin"],
+          ["Sympathomimetic", "Mydriasis", "Hyperthermia and agitation"],
+          ["Sedative hypnotic", "Normal", "Depressed airway reflexes"]
+        ]
+      }
+    },
+    {
+      "tx": "Poison absorption needs **gastric lavage** within 1 hour for 60 mg per kg charcoal dose, repeated only for sustained release drugs, and **activated charcoal** 1 g per kg single dose with protected airway. Emesis with **ipecac** is obsolete, whole bowel irrigation with 2 L per hour polyethylene glycol suits **iron** and lithium packets, and parenteral antidotes bypass gut absorption. **Decontamination** never delays airway, breathing and circulation resuscitation in any poisoned patient.",
+      "say": "Give activated charcoal one gram per kilogram within one hour only when the airway is protected. Gastric lavage is limited to early large ingestions, and whole bowel irrigation suits iron and lithium. Do not delay airway and circulation resuscitation for decontamination procedures.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "air", "label": "Airway and breathing" },
+          { "id": "circ", "label": "Circulation and antidote" },
+          { "id": "char", "label": "Charcoal if early and protected" },
+          { "id": "monitor", "label": "ICU monitoring and repeat levels" }
+        ],
+        "edges": [["air", "circ"], ["circ", "char"], ["char", "monitor"]]
+      }
+    },
+    {
+      "tx": "Airway in poisoning needs **intubation** for Glasgow coma scale below eight, absent gag reflex, or blood gas retention above 50 mmHg. A **left lateral** position protects against aspiration with 30 degree head elevation, suction as needed, and oxygen to keep saturation above ninety four percent. **Naloxone** zero point four mg intravenous in adults reverses opioid depression, **flumazenil** zero point two mg intravenous reverses benzodiazepine sedation, but **flumazenil** risks seizures in mixed overdose with tricyclic drugs.",
+      "say": "Intubate when the coma score falls below eight, gag reflex disappears or blood gas level rises above fifty. Keep the patient on the left side with head elevation and give oxygen to keep saturation above ninety four percent. Naloxone and flumazenil can reverse opioid and benzodiazepine effects but need caution.",
+      "vis": null
+    },
+    {
+      "tx": "**First test** is bedside glucose, pulse oximetry, **arterial blood gas** and 12 lead ECG for every poisoned patient, while **gold standard** is serum drug level with drug specific assays. Paracetamol level at 4 hours uses **Rumack Matthew** line, salicylate level above 100 mg per dL needs dialysis, and **digoxin** level guides digoxin poisoning care. **Paracetamol** toxicity is treated with N acetylcysteine, not repeated levels alone, and results must be timed from ingestion.",
+      "say": "Start with bedside glucose, oxygen saturation, blood gas and ECG while arranging serum drug levels. Paracetamol levels must be timed at four hours and plotted on the treatment line. Salicylate levels above one hundred need dialysis, and digoxin levels guide specific therapy.",
+      "vis": null
+    },
+    {
+      "tx": "Antidotes are given early with **naloxone** 0.4 to 2 mg intravenous for opioids, **flumazenil** zero point two mg intravenous for benzodiazepines, and **atropine** zero point six mg intravenous for organophosphate bradycardia. **N acetylcysteine** starts as one hundred fifty mg per kg over 1 hour then 50 mg per kg over 4 hours, and **iron chelator** at 15 mg per kg clears iron. **Fomepizole** 15 mg per kg blocks alcohol dehydrogenase in toxic alcohol poisoning and is given early before acidosis worsens.",
+      "say": "Give naloxone for opioid depression, atropine for organophosphate bradycardia, and N acetylcysteine for paracetamol poisoning. The first N acetylcysteine dose is one hundred fifty milligrams per kilogram over one hour. Fomepizole blocks toxic alcohol metabolism and must be given before severe acidosis develops.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Poison", "Antidote", "Dose"],
+        "rows": [
+          ["Paracetamol", "N acetylcysteine", "one hundred fifty then 50 mg per kg"],
+          ["Opioid", "Naloxone", "zero point four mg intravenous"],
+          ["Benzodiazepine", "Flumazenil", "zero point two mg intravenous"],
+          ["Organophosphate", "Atropine plus oxime", "zero point six mg intravenous"],
+          ["Iron", "Iron chelating medicine", "15 mg per kg"],
+          ["Toxic alcohol", "Fomepizole", "15 mg per kg"]
+        ]
+      }
+    },
+    {
+      "tx": "Enhanced elimination uses urinary alkalinisation with bicarbonate for **salicylate** with urine pH 7.5 to eight, and haemodialysis for severe acidosis, seizures, or refractory **hyperkalaemia**. **Lithium** above 4 mmol per L with confusion needs dialysis, salicylate above 100 mg per dL needs dialysis, and **methanol** with visual changes needs dialysis urgently. **Charcoal haemoperfusion** is obsolete, and multiple doses of charcoal 20 g every 4 hours enhance **carbamazepine** and quinine clearance.",
+      "say": "Alkalinise urine for salicylate poisoning and dialyse for severe acidosis, seizures or very high lithium and salicylate levels. Multiple charcoal doses help carbamazepine and quinine clearance. Dialysis decisions depend on levels plus clinical severity, not numbers alone.",
+      "vis": null
+    },
+    {
+      "tx": "Common complications include **aspiration pneumonia** in 10 percent of severe poisoning, **metabolic acidosis** with anion gap above 12, seizures from convulsants, arrhythmia from rhythm drugs and rhabdomyolysis. **Hepatic failure** follows paracetamol beyond 24 hours without N acetylcysteine, and **renal injury** follows iron and toxic alcohols. **Paracetamol** hepatotoxicity peaks at seventy two hours with transaminases above one thousand IU per L, so early treatment prevents **necrosis** completely.",
+      "say": "Watch for aspiration pneumonia, high anion gap acidosis, seizures and arrhythmia in severe poisoning. Paracetamol causes liver failure peaking at seventy two hours, while iron injures kidneys. Early N acetylcysteine prevents liver necrosis when given within eight hours.",
+      "vis": null
+    },
+    {
+      "tx": "**Prognosis** improves with early antidote, psychiatric follow up and restricted means, with repeat attempt rate 20 percent at 1 year. Children have better outcome with accidental single ingestion, while **suicidal intent** with high lethality needs **involuntary admission** under mental health law. **Follow up** at 2 weeks assesses depression, substance use and access to poisons, and families are counselled to lock medicines in 90 percent of homes.",
+      "say": "Outcome improves with early antidote, psychiatric follow up and restricted access to poisons. Repeat attempts occur in twenty percent at one year, so follow up at two weeks is essential. Counsel families to lock medicines and remove means at home.",
+      "vis": null
+    },
+    {
+      "tx": "Exam traps stress **charcoal** only with protected airway, **flumazenil** seizures in mixed tricyclic overdose, and **naloxone** short half life needing infusion. **Paracetamol** level before 4 hours is uninterpretable, **Rumack Matthew** line applies only to single acute ingestion, and **salicylate** chronic poisoning harms at lower levels than acute. **Antidote** delay beyond 24 hours for toxic alcohols worsens visual loss, so **fomepizole** must start on suspicion alone.",
+      "say": "Remember that charcoal needs a protected airway and flumazenil risks seizures in mixed overdose. Paracetamol levels before four hours are meaningless and the treatment line suits single ingestions only. Start fomepizole on suspicion of toxic alcohol poisoning without waiting for levels.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Charcoal suits", "points": ["Early ingestion within 1 hour", "Protected airway only", "Single dose 1 g per kg", "Multiple doses for certain drugs"] },
+        "right": { "title": "Charcoal avoids", "points": ["Unprotected airway", "Corrosive ingestion", "Hydrocarbon ingestion risk", "No benefit after 4 hours"] }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam** links toxidromes to antidotes, ABCDE resuscitation before decontamination, and N acetylcysteine one hundred fifty mg per kg first dose. Naloxone 0.4 mg reverses opioids, atropine controls organophosphate secretions, and fomepizole 15 mg per kg prevents toxic alcohol damage. Dialysis is indicated for salicylate above 100 mg per dL and lithium above 4 mmol per L, with psychiatric follow up for 20 percent repeat risk.",
+      "say": "Link each toxidrome to its antidote, start resuscitation before decontamination, and dose N acetylcysteine correctly. Dialyse for salicylate above one hundred and lithium above four, and arrange psychiatric follow up because repeat attempts are common.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Situation", "Action", "Number"],
+        "rows": [
+          ["Coma scale below eight", "Intubate airway", "GCS below eight"],
+          ["Paracetamol", "N acetylcysteine first dose", "one hundred fifty mg per kg"],
+          ["Opioid depression", "Naloxone", "zero point four mg intravenous"],
+          ["Organophosphate", "Atropine", "zero point six mg intravenous"],
+          ["Toxic alcohol", "Fomepizole", "15 mg per kg"],
+          ["Salicylate dialysis", "High level and acidosis", "100 mg per dL"],
+          ["Lithium dialysis", "Severe confusion", "4 mmol per L"],
+          ["Repeat risk", "Psychiatric follow up", "20 percent at 1 year"]
+        ]
+      }
+    }
+  ]
+}

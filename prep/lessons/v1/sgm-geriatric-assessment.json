@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "module": "sgm-geriatric-assessment",
+ "subject": "ss-general-medicine",
+ "title": "Comprehensive geriatric assessment and frailty",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Comprehensive geriatric assessment** is structured evaluation of medical, functional, cognitive, mood, nutritional and social domains to tailor care in older adults. In India, **sixty% of patients** over sixty five years have three or more chronic diseases, while **frailty** raises fall, hospitalisation and death risk two to four times even at the same **calendar age** of seventy five years.",
+   "say": "Comprehensive geriatric assessment is structured evaluation of medical, functional, cognitive, mood, nutritional and social domains to tailor care in older adults. In India, sixty percent of patients over sixty five years have three or more chronic diseases, while frailty raises fall, hospitalisation and death risk two to four times even at the same calendar age.",
+   "vis": null
+  },
+  {
+   "tx": "Risk grows with **age over eighty years**, female sex, widowhood, low income, low education and recent **bereavement**, while rural isolation and living alone multiply risk. **Sensory impairment**, urinary incontinence and home hazards convert mild deficits into dependence, and **social isolation** in twenty% of elders predicts **depression** and malnutrition within twelve months.",
+   "say": "Risk grows with age over eighty years, female sex, widowhood, low income, low education and recent bereavement, while rural isolation and living alone multiply risk. Sensory impairment, urinary incontinence and home hazards can cause dependence from mild deficits, and social isolation in twenty percent predicts depression and malnutrition within twelve months.",
+   "vis": null
+  },
+  {
+   "tx": "Domains must be documented explicitly. This table lists six CGA domains with **screening tools**, cutoffs and first action, showing why a **falls history** alone never completes assessment when cognition, continence and **polypharmacy** remain unchecked. Each domain score feeds a **shared care plan** where medicine, physiotherapy, diet, continence and social workers act together and review outcomes at thirty days.",
+   "say": "Domains must be documented explicitly. This table lists six assessment domains with screening tools, cutoffs and first action. It shows why a falls history alone never completes assessment when cognition, continence and multiple medicines remain unchecked.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Tool",
+     "Cutoff"
+    ],
+    "rows": [
+     [
+      "Function",
+      "Katz ADL score",
+      "Below four needs help"
+     ],
+     [
+      "Cognition",
+      "MMSE thirty point scale",
+      "Below twenty four impaired"
+     ],
+     [
+      "Mood",
+      "GDS fifteen item scale",
+      "Above five depressed"
+     ],
+     [
+      "Nutrition",
+      "MNA short form",
+      "eleven or less at risk"
+     ],
+     [
+      "Falls",
+      "Timed up and go",
+      "Over twelve seconds risky"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Frailty is a **multisystem vulnerability** state, not just old age. A flow links sarcopenia, inflammation and **homeostenosis** to falls, disability and death, explaining why **resistance exercise** and protein repletion can reverse early frailty while late frailty demands **advance care planning** and caregiver support. Frailty raises **two to four times** fall risk and recovery takes **six to twelve weeks** with protein plus training.",
+   "say": "Frailty is a multisystem vulnerability state, not just old age. This flow links muscle loss, inflammation and reduced reserve to falls, disability and death. It explains why resistance exercise and protein repletion can reverse early frailty while late frailty demands advance care planning and caregiver support.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sarcopenia and inflammation"
+     },
+     {
+      "id": "b",
+      "label": "Reduced reserve"
+     },
+     {
+      "id": "c",
+      "label": "Fall or illness"
+     },
+     {
+      "id": "d",
+      "label": "Disability and death"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic signs include **gait instability**, orthostatic hypotension, **weight loss over five%** in six months, grip weakness and **recent falls**, while comprehensive examination covers vision, hearing, dentition, continence and **pressure ulcers**. **Timed up and go over twelve seconds**, **Katz ADL below four** and **MMSE below twenty four** each flag major intervention rather than reassurance.",
+   "say": "Classic signs include unsteady gait, dizziness on standing, weight loss over five percent in six months, weak grip and recent falls, while complete examination covers vision, hearing, dentition, continence and pressure areas. Timed up and go over twelve seconds, Katz score below four and MMSE below twenty four each flag major intervention.",
+   "vis": null
+  },
+  {
+   "tx": "Frail and fit elders are contrasted here. This comparison separates **reversible weakness** with recent stress from **established frailty** with multimorbidity, because **intensive rehabilitation** helps one group while **deprescribing** and **palliative goals** suit the other. This distinction guides **advance care planning** and family discussion about hospital goals, since intensive reversal efforts suit early frailty while comfort focused care suits advanced disease. Reverse course in **eight weeks** with exercise is possible in early frailty, while late frailty needs **six months** of coordinated care.",
+   "say": "Frail and fit elders are contrasted here. This comparison separates reversible weakness with recent stress from established frailty with many diseases, because intensive rehabilitation helps one group while deprescribing and palliative goals suit the other.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fit older adult",
+     "points": [
+      "ADL fully independent",
+      "Cognition normal",
+      "Gait under ten seconds",
+      "No recent falls"
+     ]
+    },
+    "right": {
+     "title": "Frail older adult",
+     "points": [
+      "ADL needs help daily",
+      "Cognitive decline present",
+      "Weight loss over five percent",
+      "Fall in last year"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Investigations start at bedside with **postural vitals**, blister free skin check and **BMI** trends, then **hemoglobin**, **vitamin D**, **vitamin Btwelve**, **TSH** and **urinalysis** for reversible causes. **Gold standard** is multidisciplinary CGA scoring with therapy input, while **DEXA** and **frailty phenotype** of five criteria confirm **sarcopenia** when grip and gait testing is equivocal.",
+   "say": "Investigations start at bedside with posture vital signs, skin check and body mass index trends, then haemoglobin, vitamin D, vitamin B twelve, TSH and urine analysis for reversible causes. The multidisciplinary assessment is the reference standard, while DEXA and the five point frailty phenotype confirm muscle loss when grip and gait testing is unclear.",
+   "vis": null
+  },
+  {
+   "tx": "Goals shift from disease cure to function and comfort. Prescribe **single dose** timing, use **dose reduction by twenty five%** in renal impairment, arrange **home safety** with rails and lighting, and correct **vitamin D sixty thousand IU weekly**, **calcium one thousand mg daily** with **resistance exercise** twice weekly coordinated by physiotherapy.",
+   "say": "Goals shift from disease cure to function and comfort. Prescribe single dose timing, reduce dose by twenty five percent in kidney impairment, arrange home safety with rails and lighting, and correct vitamin D and calcium with resistance exercise twice weekly coordinated by physiotherapy.",
+   "vis": null
+  },
+  {
+   "tx": "Multidisciplinary care uses **caregiver training**, **respite care**, aids for vision and hearing, and **deprescribing** with **anticholinergic taper**. Refer **falls clinic**, **memory clinic** and **geriatric psychiatry** for depression over **GDS five**, while palliative planning with **advance directive** and **durable power of attorney** protects autonomy in advanced dementia.",
+   "say": "Multidisciplinary care uses caregiver training, respite care, aids for vision and hearing, and stopping harmful medicines taper by taper. Refer falls clinic, memory clinic and geriatric psychiatry for depression, while planning for advance directive and family decision maker protects autonomy in advanced dementia.",
+   "vis": null
+  },
+  {
+   "tx": "Complications are falls with **hip fracture mortality twenty%** at one year, **delirium** after every hospital stay, **pressure sores** healing in six weeks, and **caregiver burnout**. Prognosis hinges on **frailty score** and **ADL trajectory**, where CGA reduces **ninety day readmission** by twenty% and improves **thirty day survival** in randomised trials of admitted elders.",
+   "say": "Complications are falls with hip fracture mortality twenty percent at one year, delirium after every hospital stay, pressure sores healing in six weeks, and caregiver burnout. Prognosis hinges on frailty score and daily living trajectory, where comprehensive assessment reduces ninety day readmission by twenty percent and improves thirty day survival.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: CGA has **six domains**, frailty phenotype has **five criteria**, protect a vitamin style gaps by checking **vision**, **hearing**, **continence** and **social support** always. Use this **summary table** to answer tools, cutoffs and rehabilitation questions in one pass.",
+   "say": "This high yield material helps in the exam. Comprehensive assessment has six domains, frailty phenotype has five criteria, and vision, hearing, continence and social support must always be checked. Use this summary table to answer tools, cutoffs and rehabilitation questions in one pass.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Tool and cutoff"
+    ],
+    "rows": [
+     [
+      "Basic function",
+      "Katz below four impaired"
+     ],
+     [
+      "Cognition",
+      "MMSE below twenty four impaired"
+     ],
+     [
+      "Mood",
+      "GDS fifteen above five depressed"
+     ],
+     [
+      "Nutrition",
+      "MNA eleven or less at risk"
+     ],
+     [
+      "Mobility",
+      "Up and go over twelve seconds"
+     ],
+     [
+      "Frailty count",
+      "three of five phenotype criteria"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

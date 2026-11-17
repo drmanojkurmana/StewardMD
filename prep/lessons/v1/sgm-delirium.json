@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "module": "sgm-delirium",
+ "subject": "ss-general-medicine",
+ "title": "Delirium",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Delirium** is acute brain failure with fluctuating attention, awareness and cognition over hours to days, affecting **thirty% to fifty% of hospitalised elders** and sixty% of intensive care patients. India sees **hypoactive delirium** in forty% of ward cases, with **thirty day mortality twenty% to thirty%** and **two fold dementia** risk, making it a medical emergency today.",
+   "say": "Delirium is acute brain failure with fluctuating attention, awareness and cognition over hours to days, affecting thirty to fifty percent of hospitalised elders and sixty percent in intensive care. India sees quiet hypoactive delirium in forty percent of ward cases, with thirty day mortality twenty to thirty percent and two fold dementia risk, making it a medical emergency.",
+   "vis": null
+  },
+  {
+   "tx": "Causes follow **vulnerability** and acute insult. Age over seventy five years, **dementia**, sensory loss and **polypharmacy** create vulnerability, while infection, **dehydration**, **a salt balance treatment disturbance**, **hypoxia** and **pain** precipitate attacks. **Postoperative** course, **immobilisation** and **catheter use** each double risk in the first **seventy two hours** after surgery.",
+   "say": "Causes follow vulnerability and acute insult. Age over seventy five years, dementia, sensory loss and multiple medicines cause vulnerability, while infection, dehydration, a salt balance treatment disturbance, low oxygen and pain precipitate attacks. Postoperative course, immobility and catheter use each double risk in the first seventy two hours after surgery.",
+   "vis": null
+  },
+  {
+   "tx": "Precipitants cluster for rapid recall. This table lists common **precipitants** with bedside clues and first correction, because delirium stems from **multifactorial** insults and a single antibiotic prescription never covers **hypoglycaemia** or **urinary retention** at two a.m. Because delirium is **multifactorial**, correction targets infection, fluids, oxygen, a salt balance treatment and medicines together, with **medication review** within six hours of recognition.",
+   "say": "Precipitants can occur for rapid recall. This table explains common precipitants with bedside clues and first correction, because delirium stems from many insults and a single antibiotic never covers low sugar or urine retention at night.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Precipitant",
+     "Clue",
+     "First fix"
+    ],
+    "rows": [
+     [
+      "Infection",
+      "Fever, cough, dysuria",
+      "Cultures plus antibiotics"
+     ],
+     [
+      "Dehydration",
+      "Dry mucosa, tachycardia",
+      "Saline fifty mL per hour"
+     ],
+     [
+      "Hypoxia",
+      "Low saturation, COPD",
+      "Oxygen two L per minute"
+     ],
+     [
+      "Medicines",
+      "New sedative, anticholinergic",
+      "Stop culprit drug"
+     ],
+     [
+      "Retention",
+      "Suprapubic pain, no void",
+      "Bladder catheterisation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acetylcholine failure and **dopamine excess** drive inattention. A flow links cholinergic deficit to **neuroinflammation**, blood brain barrier failure and **sleep wake reversal**, explaining why **anticholinergics** worsen confusion while reorientation and daylight restore **circadian rhythm** without heavy sedation. Supportive orientation, **daylight exposure** and **sleep promotion** restore circadian cues, while avoiding **restraints** and oversedation prevents prolonged ICU stays. Circadian care cuts delirium duration by **twenty%** and ICU stays by **forty%** in randomised ward trials.",
+   "say": "Acetylcholine failure and dopamine excess cause inattention. This flow links cholinergic deficit to inflammation, blood brain barrier failure and sleep wake reversal, explaining why anticholinergics worsen confusion while reorientation and daylight restore circadian rhythm without heavy sedation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cholinergic failure"
+     },
+     {
+      "id": "b",
+      "label": "Inflammation and hypoxia"
+     },
+     {
+      "id": "c",
+      "label": "Attention collapse"
+     },
+     {
+      "id": "d",
+      "label": "Fluctuating confusion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic features are **inattention**, disorientation, hallucinations and **fluctuating course** worst at night, with **psychomotor subtypes** from hyperactive agitation to hypoactive withdrawal. **CAM positive** in three of four items, **RASS score** of one to two for agitation, and **MMSE under twenty** during delirium but normal at baseline prove acute change, not **dementia** alone.",
+   "say": "Classic features are inattention, disorientation, hallucinations and fluctuating course worst at night, with motor subtypes from excited agitation to quiet withdrawal. CAM positive in three of four items, RASS score for agitation, and MMSE under twenty during delirium but normal at baseline prove acute change, not dementia alone.",
+   "vis": null
+  },
+  {
+   "tx": "Dementia and delirium differ sharply. This comparison prevents the frequent **underdiagnosis** of hypoactive delirium and **overuse** of antipsychotics, since chronic **memory loss** over years never explains fluctuation over **hours** with **visual hallucinations** and **autonomic signs**. Mislabeling delirium as dementia delays **cause correction** and worsens dehydration and hypoxia outcomes, so every acute confusion needs bedside **CAM testing** first. Hypoactive delirium is missed in **forty%** of ward cases, raising mortality to **twenty% to thirty%** at thirty days.",
+   "say": "Dementia and delirium differ sharply. This comparison prevents the frequent missed hypoactive delirium and overuse of antipsychotics, since chronic memory loss over years never explains fluctuation over hours with visual hallucinations and autonomic signs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dementia",
+     "points": [
+      "Slow onset over years",
+      "Clear sensorium early",
+      "Attention preserved early",
+      "No psychomotor change"
+     ]
+    },
+    "right": {
+     "title": "Delirium",
+     "points": [
+      "Acute onset over hours",
+      "Clouded sensorium",
+      "Attention lost first",
+      "Fluctuates nightly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First test is **CAM or fourAT** at bedside, then **full blood count**, **urea creatinine**, **sodium one hundred thirty five mmol per litre** trends, **glucose**, **calcium**, **TSH** and **arterial blood gas**. **Gold standard** is **DSM five criteria** with collateral history, while **CT head** is reserved for focal signs, **head injury** or no improvement in **seventy two hours** after correction.",
+   "say": "First test is CAM or four AT at bedside, then full blood count, kidney profile, sodium trends, glucose, calcium, TSH and blood gas. The DSM five criteria with family history is the reference standard, while CT head is reserved for focal signs, head injury or no improvement in seventy two hours after correction.",
+   "vis": null
+  },
+  {
+   "tx": "First line is non pharmacologic. Reorient hourly, mobilise early, correct **hearing aids**, **glasses**, **hydration** and **sleep hygiene**, and stop **benzodiazepines** and **anticholinergics**. **Haloperidol zero point five mg** stat is reserved for dangerous agitation with **QTc under four hundred fifty** milliseconds, while **a sedative one mg** suits alcohol withdrawal delirium only.",
+   "say": "First line is non drug care. Reorient hourly, mobilise early, correct hearing aids, glasses, hydration and sleep hygiene, and stop benzodiazepines and anticholinergics. Haloperidol zero point five milligrams is reserved for dangerous agitation with QTc under four hundred fifty milliseconds, while a sedative suits alcohol withdrawal delirium only.",
+   "vis": null
+  },
+  {
+   "tx": "Drug choices need minimal dosing. **Haloperidol zero point two five to zero point five mg** twice daily, **risperidone zero point two five mg** once daily or **an antipsychotic tablet twenty five mg** nightly control agitation for **forty eight hours** only, with **a vitamin one hundred mg** in malnutrition and **a sleep aid three mg** for sleep. **Physical restraints** are avoided, and **family presence** plus **daylight** cut duration by twenty% in ward trials.",
+   "say": "Drug choices need minimal dosing. Haloperidol zero point two five to zero point five milligrams twice daily, risperidone zero point two five milligrams daily or an antipsychotic tablet twenty five milligrams nightly control agitation for forty eight hours only, with a vitamin and a sleep aid for sleep. Restraints are avoided, and family presence plus daylight cut duration by twenty percent.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **aspiration**, **pressure injury** in six weeks, **prolonged ventilation**, **falls** and **functional decline** at ninety days, plus **institutionalisation** in twenty% and **caregiver trauma**. Prognosis recovers in **seven to ten days** when cause corrects early, but **persistent delirium beyond thirty days** predicts dementia and **one year mortality forty%**.",
+   "say": "Complications include breathing infection, pressure injury in six weeks, prolonged ventilation, falls and functional decline at ninety days, plus nursing home admission in twenty percent and caregiver trauma. Prognosis recovers in seven to ten days when cause corrects early, but persistent delirium beyond thirty days predicts dementia and one year mortality forty percent.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: delirium means **attention failure**, CAM has **four items**, treat cause first, and never use **a sedative** except in alcohol withdrawal. Use this **summary table** to answer subtypes, scales, dosing and prognosis questions in one view. One view of **attention failure**, **CAM scoring**, **zero point five mg haloperidol use**, **a sedative limits** and **seven day recovery** answers most viva traps.",
+   "say": "This high yield material helps in the exam. Delirium means attention failure, CAM has four items, treat cause first, and never use a sedative except in alcohol withdrawal. Use this summary table to answer subtypes, scales, dosing and prognosis questions in one view.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Core sign",
+      "Inattention, fluctuating"
+     ],
+     [
+      "CAM items",
+      "four features to score"
+     ],
+     [
+      "Antipsychotic dose",
+      "Haloperidol zero point five mg"
+     ],
+     [
+      "Alcohol delirium drug",
+      "a sedative only"
+     ],
+     [
+      "CT head trigger",
+      "Focal sign or seventy two hours"
+     ],
+     [
+      "Recovery time",
+      "seven to ten days"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

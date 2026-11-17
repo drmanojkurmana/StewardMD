@@ -1,0 +1,102 @@
+{
+  "v": 1,
+  "module": "sgm-pesticide-poisoning",
+  "subject": "ss-general-medicine",
+  "title": "Organophosphate and pesticide poisoning",
+  "minutes": 11,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Organophosphates** are esters that irreversibly inhibit acetylcholinesterase and cause cholinergic crisis within minutes, with two hundred fifty thousand deaths annually in South Asia. Suicide by **pesticide** ingestion accounts for forty percent of poisoning deaths in rural India, while occupational exposure affects 30 percent of sprayers. **Carbamates** cause similar effects but enzyme recovers within 24 hours, and **pyrethroids** cause paraesthesia without cholinergic storm.",
+      "say": "Organophosphates irreversibly block the enzyme that breaks down acetylcholine, causing cholinergic crisis within minutes. Pesticide ingestion is a leading cause of poisoning deaths in rural India, while sprayers face occupational exposure. Carbamates cause similar but shorter illness.",
+      "vis": null
+    },
+    {
+      "tx": "Risk factors include easy village access, **stockpiling** at home, alcohol use, prior attempt, and impulsive despair after quarrels. Agricultural work, **spraying** without gloves and mask, and storage in soft drink bottles raise chance of accidental childhood exposure in 15 percent of cases. **Monocrotophos** and **parathion** are highly lethal with 10 to 20 mL lethal dose, while **fenvalerate** needs larger doses and better outcome.",
+      "say": "Easy access at home, alcohol use and impulsive despair cause most pesticide poisonings. Sprayers without protection face occupational exposure, and storage in drink bottles causes childhood poisoning. Monocrotophos and parathion are lethal in small volumes of ten to twenty millilitres.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Agent", "Enzyme effect", "Lethal dose"],
+        "rows": [
+          ["Monocrotophos", "Irreversible inhibition", "10 to 20 mL"],
+          ["Parathion", "Irreversible inhibition", "10 mL"], 
+          ["Carbamate", "Reversible inhibition", "five hundred mg"],
+          ["Pyrethroid", "No enzyme inhibition", "five thousand mg"],
+          ["Triazine herbicide", "Mild irritation", "Very high"]
+        ]
+      }
+    },
+    {
+      "tx": "Inhibition of **acetylcholinesterase** raises acetylcholine at **muscarinic**, **nicotinic** and central synapses, causing salivation, bronchorrhoea, bradycardia, miosis, fasciculations and convulsions. The **DUMBELS** acronym lists diarrhoea, urination, miosis, bradycardia, emesis, lacrimation and salivation. **Nicotinic** stimulation causes fasciculations followed by weakness and paralysis, while **central** effects cause confusion, seizures and coma requiring **oxime** reactivation.",
+      "say": "Blocking acetylcholinesterase raises acetylcholine at muscarinic, nicotinic and brain synapses. This causes salivation, chest secretions, slow pulse, constricted pupils and muscle twitching. Nicotinic overstimulation leads to weakness and paralysis, while brain effects cause confusion and seizures.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "bind", "label": "Irreversible enzyme binding" },
+          { "id": "excess", "label": "Acetylcholine excess" },
+          { "id": "crisis", "label": "Cholinergic crisis with secretions" },
+          { "id": "paral", "label": "Weakness and respiratory failure" }
+        ],
+        "edges": [["bind", "excess"], ["excess", "crisis"], ["crisis", "paral"]]
+      }
+    },
+    {
+      "tx": "Clinical features divide into **muscarinic** bradycardia, hypotension, bronchospasm, **bronchorrhoea**, miosis and hypersecretion, **nicotinic** fasciculations, weakness and **diaphragm** failure, and central confusion with seizures. **Garlic odour** with miosis and fasciculations is classic, and **fasciculations** precede paralysis by 1 to 2 hours. **Intermediate syndrome** at 24 to 96 hours causes proximal weakness and neck flexor failure needing **ventilation**.",
+      "say": "Muscarinic effects slow the pulse and flood the chest with secretions, while nicotinic effects cause twitching then weakness. Garlic odour with constricted pupils is classic in the exam. Watch for intermediate syndrome at one to four days with neck and limb weakness needing ventilation.",
+      "vis": null
+    },
+    {
+      "tx": "**First test** is red cell **cholinesterase** level with atropine challenge, while **gold standard** is red cell cholinesterase assay plus clinical response to **atropine**. Pseudocholinesterase is less reliable and levels vary with **liver** disease and malnutrition. **Atropine** 0.6 mg intravenous doubling every 5 minutes to drying of secretions and heart rate above 80 per minute guides therapy before **oxime** results return.",
+      "say": "Check red cell cholinesterase and give an atropine challenge while treating on clinical grounds. Pseudocholinesterase is less reliable in liver disease and malnutrition. Double atropine every five minutes until secretions dry and heart rate rises above eighty.",
+      "vis": null
+    },
+    {
+      "tx": "First line is **atropine** 0.6 to 1.8 mg intravenous doubling every 5 minutes to maintain dry chest and heart rate 80 per minute, total often above 20 mg per day. **Pralidoxime** twenty five to fifty mg per kg intravenous over 30 minutes then infusion 10 to 20 mg per kg per hour reactivates enzyme within 24 hours. **Diazepam** 10 mg intravenous stops seizures, and **charcoal** 1 g per kg with protected airway is given within 1 hour.",
+      "say": "Give atropine doubling every five minutes until secretions dry and heart rate exceeds eighty. Give pralidoxime of twenty five to fifty milligrams per kilogram within twenty four hours to reactivate enzyme. Diazepam controls seizures, and charcoal is given early with a protected airway.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Atropine effect", "points": ["Dries secretions", "Raises heart rate above 80", "Reverses bronchospasm", "No muscle weakness benefit"] },
+        "right": { "title": "Pralidoxime effect", "points": ["Reactivates enzyme", "Improves weakness and fasciculation", "Needed within 24 hours", "Infusion after loading dose"] }
+      }
+    },
+    {
+      "tx": "Airway care needs **suction** every few minutes for bronchorrhoea, intubation for coma score below 8, and avoidance of **muscle relaxant** 1 mg per kg because it prolongs paralysis. **Atropine** infusion at 10 to 20 percent of loading dose per hour maintains dry chest, and **magnesium** 4 g intravenous reduces arrhythmia. Staff need **gloves** and apron protection, skin decontamination with soap, and removal of soiled clothes to prevent secondary **poisoning**.",
+      "say": "Give frequent suction for chest secretions, intubate for coma or respiratory failure, and avoid a muscle relaxant. Maintain atropine infusion to keep secretions dry and heart rate controlled. Protect staff with gloves, wash skin and remove soiled clothes.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **aspiration** pneumonia in 15 percent, **intermediate syndrome** with ventilator need for 10 to 15 days, **organophosphate induced polyneuropathy** at 2 to 3 weeks with glove stocking weakness, and **pancreatitis** from **amylase** rise. **Atropine** toxicity causes dry hot confusion, and **seizures** need benzodiazepines not the older seizure drug. **Delayed neuropathy** 2 to 3 weeks after diisopropyl fluorophosphate exposure needs **physiotherapy** and supportive care.",
+      "say": "Watch for aspiration pneumonia, intermediate syndrome needing prolonged ventilation, delayed neuropathy and pancreatitis. Atropine excess causes dry hot confusion and must be differentiated from recurrence. Supportive care and physiotherapy manage delayed neuropathy.",
+      "vis": null
+    },
+    {
+      "tx": "Mortality is 10 to 20 percent with respiratory failure as primary cause, and **ventilation** beyond seven days predicts prolonged **ICU** stay. Survivors need psychiatric care with 20 percent repeat attempt rate, means restriction, and community education on **locked storage** in ninety percent of farms. **Pralidoxime** before 24 hours cuts mortality to 5 percent, while delayed **oxime** beyond 48 hours offers little benefit in established aging.",
+      "say": "Mortality is ten to twenty percent, mainly from respiratory failure needing prolonged ventilation. Give pralidoxime before twenty four hours to cut deaths, and arrange psychiatric care with locked storage of pesticides. Delayed oxime after forty eight hours helps little once enzyme has aged.",
+      "vis": null
+    },
+    {
+      "tx": "Exam traps confuse **carbamate** reversible inhibition with **organophosphate** irreversible aging, and **pyrethroid** paraesthesia without cholinergic crisis. **Atropine** never reverses weakness, **pralidoxime** never replaces atropine, and **muscle relaxant** is absolutely contraindicated. **Pseudocholinesterase** low alone does not prove poisoning, **oxime** delay beyond 24 hours is often tested, and **diazepam** is drug of choice for seizures over **older seizure drug** in 1 mg per kg studies.",
+      "say": "Carbamates recover quickly while organophosphates age irreversibly, and pyrethroids only cause skin tingling. Atropine never improves weakness and pralidoxime never replaces atropine. Give diazepam for seizures, distrust pseudocholinesterase alone, and avoid a muscle relaxant.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** pairs DUMBELS features with atropine 0.6 mg doubling, pralidoxime twenty five mg per kg within 24 hours, and diazepam 10 mg for seizures. Garlic odour, miosis and fasciculations point to organophosphate poisoning, intermediate syndrome occurs at 24 to 96 hours, and delayed neuropathy at 2 to 3 weeks. Charcoal 1 g per kg needs protected airway, staff need gloves, and a muscle relaxant must be avoided in one hundred percent of cases.",
+      "say": "Link DUMBELS features to atropine doubling and pralidoxime within twenty four hours, with diazepam for seizures. Remember garlic odour, intermediate syndrome at one to four days and delayed neuropathy at two to three weeks. Let staff wear gloves and never give a muscle relaxant.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Finding", "Action", "Number"],
+        "rows": [
+          ["DUMBELS features", "Atropine doubling", "0.6 mg intravenous"],
+          ["Enzyme reactivation", "Pralidoxime load", "twenty five mg per kg"],
+          ["Seizures", "Diazepam", "10 mg intravenous"],
+          ["Intermediate syndrome", "Ventilation", "24 to 96 hours"],
+          ["Delayed neuropathy", "Physiotherapy", "2 to 3 weeks"],
+          ["Charcoal", "Protected airway", "1 g per kg"],
+          ["Avoid", "Muscle relaxant", "Contraindicated"],
+          ["Staff protection", "Gloves apron wash", "All cases"]
+        ]
+      }
+    }
+  ]
+}
