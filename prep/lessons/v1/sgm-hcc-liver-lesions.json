@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sgm-hcc-liver-lesions",
+ "subject": "ss-general-medicine",
+ "title": "Hepatocellular carcinoma and liver lesions",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hepatocellular carcinoma** (HCC, malignant hepatocyte tumour) is the commonest primary liver cancer and the third commonest cause of cancer death globally. About 80% of cases arise in **cirrhotic livers** from hepatitis B, hepatitis C, alcohol or metabolic disease. **Alpha fetoprotein** (AFP) above 400 ng/mL is strongly suggestive but not diagnostic. Ultrasound surveillance every 6 months is standard in cirrhosis.",
+   "say": "Hepatocellular carcinoma is the commonest primary liver cancer worldwide. About eighty percent of cases arise in cirrhotic livers from hepatitis B or alcohol. Alpha fetoprotein above four hundred nanograms per millilitre is strongly suggestive but is not diagnostic. Ultrasound surveillance every six months is standard in cirrhosis patients overall.",
+   "vis": null
+  },
+  {
+   "tx": "**Hepatitis B** is the single most important risk factor and raises HCC risk 100-fold. **Hepatitis C** with cirrhosis, **aflatoxin** contamination and **metabolic syndrome** are major co factors. **Alcohol** above 80 g daily for more than 10 years doubles risk. **Haemochromatosis** and **alpha one antitrypsin deficiency** are less common but strong risk factors.",
+   "say": "Hepatitis B is the single most important risk factor and raises risk a hundred fold. Hepatitis C with cirrhosis and aflatoxin contamination are major co factors in India. Alcohol above eighty grams daily for more than ten years doubles the risk. Haemochromatosis and alpha one antitrypsin deficiency are less common but strong risk factors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk factor",
+     "Key association"
+    ],
+    "rows": [
+     [
+      "Hepatitis B",
+      "Hundred fold risk increase"
+     ],
+     [
+      "Hepatitis C",
+      "Cirrhosis in most cases"
+     ],
+     [
+      "Alcohol",
+      "Eighty grams daily ten years"
+     ],
+     [
+      "Aflatoxin",
+      "Groundnut contamination"
+     ],
+     [
+      "Metabolic syndrome",
+      "Diabetes and obesity link"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic inflammation drives hepatocyte regeneration and **DNA damage** that selects malignant clones in regenerative nodules. Tumour neovessels supply the lesion through the **hepatic artery**, causing **arterial hyperenhancement** with **venous washout**. **Alpha fetoprotein** (oncofetal protein) is re expressed by dedifferentiated tumour cells. **Des gamma carboxy prothrombin** is a second tumour marker that rises with vitamin K depletion.",
+   "say": "Chronic inflammation is the driver which produces hepatocyte regeneration and DNA damage in the liver. Tumour neovessels supply the lesion through the hepatic artery in patients. Arterial hyperenhancement with venous washout is the classical imaging signature of HCC. Alpha fetoprotein is re expressed by dedifferentiated tumour cells in HCC.",
+   "vis": null
+  },
+  {
+   "tx": "**Right upper quadrant pain** from liver stretch and **weight loss** dominate early symptoms, while **jaundice** is late. **Palpable tender liver** with a bruit over the tumour is a classic clinical sign. **Paraneoplastic syndromes** include hypoglycaemia, erythrocytosis and hypercalcaemia. **Fetor hepaticus** and asterixis signal hepatic failure rather than tumour itself. Ascites in cirrhosis with a mass should raise suspicion of HCC.",
+   "say": "Right upper quadrant pain from liver stretch is a dominant early symptom along with weight loss. Palpable tender liver with a bruit over the tumour is a classic clinical sign. Paraneoplastic syndromes are hypoglycaemia and erythrocytosis and hypercalcaemia in affected patients. Ascites in cirrhosis with a mass should raise suspicion of HCC strongly.",
+   "vis": null
+  },
+  {
+   "tx": "**Ultrasound** is the first test and detects lesions above 1 cm. **Multiphasic computed tomography** (CT) or **magnetic resonance imaging** (MRI) with arterial hyperenhancement plus venous washout is diagnostic. **Liver biopsy** is the gold standard but is avoided when imaging is classical. **Liver imaging reporting and data system** (LI RADS) standardises categorisation of lesions in cirrhosis.",
+   "say": "Ultrasound is the first test and detects lesions above one centimetre in size. Multiphasic computed tomography or magnetic resonance imaging is diagnostic in classical lesions. Arterial hyperenhancement plus venous washout is the diagnostic imaging signature of HCC. Liver biopsy is the gold standard but is avoided when imaging is classical and clear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ultrasound surveillance"
+     },
+     {
+      "id": "b",
+      "label": "Multiphasic CT or MRI"
+     },
+     {
+      "id": "c",
+      "label": "Arterial plus washout check"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy only if atypical"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Milan criteria** (single tumour up to 5 cm, or up to three tumours each up to 3 cm) select patients for transplant with excellent outcomes. **Barcelona Clinic Liver Cancer** (BCLC) staging links tumour burden with liver function and performance status. **Very early BCLC** allows resection or ablation, while **intermediate BCLC** gets **transarterial chemoembolisation** (TACE). **Barcelona end stage** disease needs systemic therapy or best supportive care.",
+   "say": "Milan criteria select patients for transplant within defined tumour size limits. Barcelona Clinic Liver Cancer staging links tumour burden with liver function and performance status. Very early stage disease allows resection or ablation with curative intent. Intermediate stage disease is treated with transarterial chemoembolisation as standard locoregional therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Milan transplant criteria",
+     "points": [
+      "Single tumour up to five centimetres",
+      "Or three tumours up to three centimetres",
+      "No vascular invasion",
+      "No extrahepatic spread"
+     ]
+    },
+    "right": {
+     "title": "BCLC early staging",
+     "points": [
+      "Solitary tumour resectable",
+      "Good liver function",
+      "Performance status good",
+      "Curative options first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sorafenib** was the first systemic drug that improved survival in advanced HCC. **Lenvatinib** is noninferior to sorafenib and is an alternative first line option. **Atezolizumab plus bevacizumab** is the current preferred first line regimen with the best survival benefit. Newer **dual immunotherapy** (tremelimumab plus durvalumab) is another preferred option in eligible patients.",
+   "say": "Sorafenib was the first systemic drug which improved survival in advanced HCC. Lenvatinib is noninferior to sorafenib and is an alternative first line option. Atezolizumab plus bevacizumab is the current preferred first line regimen with best survival. Dual immunotherapy with tremelimumab plus durvalumab is another preferred option now.",
+   "vis": null
+  },
+  {
+   "tx": "**Cavernous haemangioma** is the commonest benign liver lesion and shows peripheral nodular enhancement with centripetal fill. **Focal nodular hyperplasia** is the second commonest benign lesion and shows central scar with arterial blush. **Liver abscess** is hypoenhancing with a double target sign and clinical sepsis. **Hypovascular metastases** are multiple bilateral lesions from colon, stomach or pancreas primaries.",
+   "say": "Cavernous haemangioma is the commonest benign liver lesion in practice. Peripheral nodular enhancement with centripetal fill is classical for haemangioma. Focal nodular hyperplasia shows central scar with arterial blush on imaging. Liver abscess is hypoenhancing with double target sign and clinical sepsis features.",
+   "vis": null
+  },
+  {
+   "tx": "Hepatocellular carcinoma prognosis is poor without treatment, with **median survival** under 1 year in advanced stage. **5-year survival** after transplant within Milan criteria exceeds 70%. **Alpha fetoprotein** above 1000 ng/mL predicts poor outcome. **Child Pugh C** liver with large tumours has median survival of about 3 months without therapy.",
+   "say": "Prognosis of HCC is poor without treatment in advanced stage patients. Five year survival after transplant within Milan criteria exceeds seventy percent. Alpha fetoprotein above one thousand nanograms per millilitre is a poor outcome predictor in HCC. Child Pugh C liver with large tumours has median survival of about three months without therapy.",
+   "vis": null
+  },
+  {
+   "tx": "An **arterial blush** alone does not diagnose HCC because hypervascular metastases also enhance. **Alpha fetoprotein** can be normal in 40% of cancers and raised in active hepatitis. **Imaging diagnosis** without biopsy is accepted only in cirrhotic livers and is not valid in normal livers. **AFP above 400** with a classical mass is enough for diagnosis, so histology is reserved for doubtful lesions.",
+   "say": "An arterial blush alone does not diagnose HCC in patients. Alpha fetoprotein can be normal in forty percent of cancers and is raised in active hepatitis. Imaging diagnosis without biopsy is accepted only in cirrhotic livers. Alpha fetoprotein above four hundred with classical mass is enough for diagnosis in most cases.",
+   "vis": null
+  },
+  {
+   "tx": "Use this **final revision table** for hepatocellular carcinoma and focal liver lesion questions that set most examination papers. It fixes marker cutoffs, imaging hallmarks, transplant criteria, staging systems and benign lesion signatures. Learn it alongside the clinical pattern of cirrhosis with a new mass.",
+   "say": "This final revision table is the highest yield summary for HCC and liver lesion examinations. Alpha fetoprotein above four hundred is strongly suggestive and above one thousand predicts poor outcome. Milan criteria define transplant eligibility and Barcelona staging guides treatment choice. Benign lesion signatures of haemangioma and abscess are also included here.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Cutoff or hallmark"
+    ],
+    "rows": [
+     [
+      "AFP strongly suggestive",
+      "Above four hundred nanograms"
+     ],
+     [
+      "AFP poor outcome",
+      "Above one thousand nanograms"
+     ],
+     [
+      "Milan single tumour limit",
+      "Five centimetres or less"
+     ],
+     [
+      "Milan multiple tumours",
+      "Three lesions up to three centimetres"
+     ],
+     [
+      "HCC imaging signature",
+      "Arterial blush plus washout"
+     ],
+     [
+      "Haemangioma signature",
+      "Nodular fill centripetal"
+     ],
+     [
+      "Abscess signature",
+      "Double target sign"
+     ],
+     [
+      "Surveillance ultrasound interval",
+      "Every six months"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

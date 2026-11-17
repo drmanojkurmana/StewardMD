@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sgm-vascular-liver-pregnancy",
+ "subject": "ss-general-medicine",
+ "title": "Vascular liver disease and pregnancy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Budd Chiari syndrome** (hepatic venous outflow block) is obstruction of hepatic veins or inferior vena cava. It occurs in young women on **oral contraceptive pills** and in myeloproliferative disease. **Portal vein thrombosis** (PVT) is a block of the portal trunk and is commoner in cirrhosis and abdominal sepsis. **Sinusoidal obstructive syndrome** (SOS, veno occlusive disease) is injury to sinusoidal endothelium, classically after stem cell transplant.",
+   "say": "Budd Chiari syndrome is obstruction of hepatic veins or inferior vena cava outflow. Portal vein thrombosis is a block of the portal trunk in patients. Sinusoidal obstructive syndrome is injury to sinusoidal endothelium after transplant conditioning. Oral contraceptive pills and myeloproliferative disease are major risk factors overall.",
+   "vis": null
+  },
+  {
+   "tx": "**Budd Chiari syndrome** presents with the triad of **painful hepatomegaly**, ascites and jaundice, classically after oral contraceptive use. **Portal vein thrombosis** presents with acute abdominal pain, fever and ascites after pancreatitis or sepsis. **Hepatic arterial ischaemia** causes sudden transaminase surge after shock and is called **shock liver**. **Inferior vena cava web** is a leading cause in Asian patients with membranous obstruction.",
+   "say": "Budd Chiari syndrome presents with painful hepatomegaly and ascites and jaundice classically. Portal vein thrombosis presents with abdominal pain and fever and ascites after pancreatitis. Hepatic arterial ischaemia causes sudden transaminase surge after shock and is called shock liver. Inferior vena cava web is a leading cause in Asian patients with obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular disease",
+     "Classic setting"
+    ],
+    "rows": [
+     [
+      "Budd Chiari syndrome",
+      "Oral contraceptives, myeloproliferative disease"
+     ],
+     [
+      "Portal vein thrombosis",
+      "Pancreatitis, cirrhosis, sepsis"
+     ],
+     [
+      "Sinusoidal obstructive syndrome",
+      "Stem cell transplant conditioning"
+     ],
+     [
+      "Shock liver",
+      "Acute hypotension and ischaemia"
+     ],
+     [
+      "Inferior vena cava web",
+      "Asian membranous obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thrombosis forms when **Virchow triad** (stasis, hypercoagulability, endothelial injury) is satisfied in splanchnic veins. **Haematopoietic stem cell transplant** with busulfan conditioning damages sinusoidal endothelium and allows **fibrin deposition** that narrows sinusoids. **Ischaemic hepatitis** is centrilobular necrosis from low perfusion and regenerates fully if perfusion recovers. **Congestive hepatopathy** raises pressure backward from right heart failure and causes pain with tender liver.",
+   "say": "Thrombosis forms when Virchow triad of stasis and hypercoagulability and injury is satisfied. Stem cell transplant with busulfan conditioning damages sinusoidal endothelium in patients. Ischaemic hepatitis is centrilobular necrosis from low perfusion in shock. Congestive hepatopathy raises pressure backward from right heart failure and causes tender liver.",
+   "vis": null
+  },
+  {
+   "tx": "**Ascites** that is rapidly recurrent and refractory to diuretics is common in Budd Chiari syndrome. **Splenomegaly** with hypersplenism favour portal vein thrombosis over hepatic vein block. **Hepatic encephalopathy** is uncommon in Budd Chiari syndrome until late stage. **Sinusoidal obstructive syndrome** presents with painful liver, weight gain and bilirubin above 2 mg/dL within 21 days of transplant.",
+   "say": "Ascites that is rapidly recurrent and refractory to diuretics is common in Budd Chiari syndrome. Splenomegaly with hypersplenism favours portal vein thrombosis over hepatic vein block. Hepatic encephalopathy is uncommon in Budd Chiari syndrome until late stage disease. Sinusoidal obstructive syndrome presents with painful liver and weight gain after transplant.",
+   "vis": null
+  },
+  {
+   "tx": "The **first test** is duplex Doppler ultrasound which shows absent or reversed venous flow. **Computed tomography venography** or **magnetic resonance venography** maps the clot and collaterals accurately. **Liver biopsy** in sinusoidal obstructive syndrome shows centrilobular congestion and fibrosis. **Right heart catheterisation** with wedge pressures is the gold standard that confirms sinusoidal obstructive syndrome when biopsy is unsafe.",
+   "say": "The first test is duplex Doppler ultrasound which shows absent or reversed venous flow. Computed tomography venography or magnetic resonance venography maps the clot and collaterals. Liver biopsy is the histology test which shows centrilobular congestion and fibrosis in sinusoidal obstructive syndrome. Right heart catheterisation with wedge pressures is the gold standard which confirms the diagnosis clearly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Doppler ultrasound first"
+     },
+     {
+      "id": "b",
+      "label": "CT or MR venography mapping"
+     },
+     {
+      "id": "c",
+      "label": "Clot and collateral assessment"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy if diagnosis doubtful"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anticogulation** with heparin bridging to warfarin is first line for Budd Chiari syndrome and portal vein thrombosis. **Transjugular intrahepatic portosystemic shunt** (TIPS) is the next step for refractory ascites or failed anticoagulation. **Defibrotide** is the specific treatment for severe sinusoidal obstructive syndrome after transplant. Management of shock liver is **correction of hypotension** and underlying sepsis.",
+   "say": "Anticoagulation with heparin bridging to warfarin is first line for Budd Chiari syndrome. Transjugular intrahepatic portosystemic shunt is the next step for refractory ascites in patients. Defibrotide is the specific treatment for severe sinusoidal obstructive syndrome after transplant. Management of shock liver is correction of hypotension and underlying sepsis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Budd Chiari syndrome",
+     "points": [
+      "Hepatic vein block",
+      "Painful liver plus ascites",
+      "Anticoagulation first",
+      "TIPS for refractory disease"
+     ]
+    },
+    "right": {
+     "title": "Portal vein thrombosis",
+     "points": [
+      "Portal trunk block",
+      "Post pancreatitis or sepsis",
+      "Anticoagulation first",
+      "Surveillance for collaterals"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**HELLP syndrome** (haemolysis, elevated liver enzymes, low platelets) occurs in severe pre eclampsia and needs **magnesium sulphate** plus delivery planning. **Acute fatty liver of pregnancy** (AFLP, microvesicular steatosis) presents with coagulopathy, hypoglycaemia and liver failure, usually in the third trimester. **Intrahepatic cholestasis of pregnancy** causes pruritus of palms and soles with bile acids above 10 micromoles per litre. **Viral hepatitis E** in pregnancy carries about 20% mortality and is a pregnancy specific danger.",
+   "say": "HELLP syndrome occurs in severe pre eclampsia and needs magnesium sulphate plus delivery planning. Acute fatty liver of pregnancy presents with coagulopathy and hypoglycaemia and liver failure. Intrahepatic cholestasis of pregnancy causes pruritus with bile acids above ten micromoles per litre. Viral hepatitis E in pregnancy carries about twenty percent mortality and is a pregnancy specific danger.",
+   "vis": null
+  },
+  {
+   "tx": "**Dexamethasone** relieves pruritus in intrahepatic cholestasis and **ursodeoxycholic acid** at 10 to 15 mg/kg improves bile acids. **Delivery at 37 weeks** is advised for cholestasis with bile acids above 100 µmol/L. **Acute fatty liver of pregnancy** needs immediate delivery plus glucose, vitamin K and plasma correction. **HELLP syndrome** needs delivery after maternal stabilisation and is not managed conservatively.",
+   "say": "Ursodeoxycholic acid at ten to fifteen milligrams per kilogram improves bile acids in cholestasis. Delivery at thirty seven weeks is advised for cholestasis with very high bile acids. Acute fatty liver of pregnancy needs immediate delivery plus glucose and plasma correction. HELLP syndrome needs delivery after maternal stabilisation and is not managed conservatively.",
+   "vis": null
+  },
+  {
+   "tx": "Vascular liver injury has excellent prognosis with timely anticoagulation, while **acute fatty liver of pregnancy** has high mortality without delivery. **Swansea criteria** (six or more features including glucose below 72 mg/dL) support clinical diagnosis of AFLP. **Bile acids** above 10 micromoles per litre diagnose cholestasis, while above 100 predicts fetal risk. **Platelet count below 50000** in HELLP needs transfusion before operative delivery.",
+   "say": "Vascular liver injury has excellent prognosis with timely anticoagulation therapy. Acute fatty liver of pregnancy has high mortality without prompt delivery intervention. Swansea criteria support clinical diagnosis of acute fatty liver of pregnancy clearly. Platelet count below fifty thousand in HELLP needs transfusion before operative delivery.",
+   "vis": null
+  },
+  {
+   "tx": "Do not miss **Budd Chiari syndrome** in a young woman on contraceptive pills with painful liver and rebellious ascites. **Herpes simplex hepatitis** mimics HELLP syndrome with transaminases above 5000 and needs **acyclovir**. **Gallstone ileus** and **acute fatty liver** can both cause coagulopathy, so glucose and prothrombin time together raise suspicion of AFLP. **Pruritus with raised bile acids** in the third trimester is cholestasis until proven otherwise.",
+   "say": "Do not miss Budd Chiari syndrome in a young woman on contraceptive pills with painful liver. Herpes simplex hepatitis mimics HELLP syndrome with very high transaminases and needs acyclovir. Gallstone ileus and acute fatty liver can both cause coagulopathy in pregnancy. Pruritus with raised bile acids in third trimester suggests cholestasis until proven otherwise.",
+   "vis": null
+  },
+  {
+   "tx": "Use this **revision table** for vascular liver disease and liver disease in pregnancy, the two topics set together in many viva examinations. It fixes Doppler gold standards, anticoagulation thresholds, HELLP and AFLP features, bile acid cutoffs and delivery timings. Learn the vascular triad and the pregnancy triad side by side.",
+   "say": "This revision table is the vascular and pregnancy liver disease summary for recall. Budd Chiari syndrome needs Doppler diagnosis and anticoagulation as first line treatment. Acute fatty liver and HELLP syndrome need delivery for definitive cure. Bile acid cutoffs and delivery timings are also included here for recall.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "Key rule"
+    ],
+    "rows": [
+     [
+      "Budd Chiari first test",
+      "Duplex Doppler ultrasound flow absent"
+     ],
+     [
+      "Budd Chiari first line",
+      "Heparin bridging to warfarin"
+     ],
+     [
+      "SOS specific drug",
+      "Defibrotide after transplant"
+     ],
+     [
+      "HELLP platelets caution",
+      "Below fifty thousand transfusion"
+     ],
+     [
+      "Cholestasis bile acids",
+      "Above ten micromoles diagnose"
+     ],
+     [
+      "Cholestasis high risk",
+      "Above one hundred delivery early"
+     ],
+     [
+      "AFLP Swansea features",
+      "Six or more features diagnose"
+     ],
+     [
+      "Hepatitis E in pregnancy mortality",
+      "About twenty percent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

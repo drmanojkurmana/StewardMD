@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sgm-pancreatitis",
+ "subject": "ss-general-medicine",
+ "title": "Acute and Chronic Pancreatitis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Acute pancreatitis** is sudden pancreatic inflammation with acinar injury and systemic response. Diagnosis needs two of three criteria: characteristic pain, lipase more than 3 times upper normal, or imaging findings. **Revised Atlanta 2012 classification** grades mild, moderately severe and severe disease by organ failure and local complications. **Gallstones and alcohol** together account for about 70 to 80% of cases.",
+   "say": "Acute pancreatitis is defined by sudden pancreatic inflammation with acinar injury and systemic response. Diagnosis requires two of three criteria including pain, enzyme rise and imaging findings. The Revised Atlanta classification grades disease by organ failure and local complications. Gallstones and alcohol together are responsible for most cases of acute pancreatitis in practice.",
+   "vis": null
+  },
+  {
+   "tx": "The **GET SMASHED** mnemonic lists gallstones, ethanol, trauma, steroids, mumps, autoimmune, scorpion sting and hypertriglyceridaemia. **Hypertriglyceridaemia above 1000 mg/dL** and hypercalcaemia are important metabolic causes. **Drug induced disease** follows azathioprine, valproate and thiazide diuretics. **Pancreatic divisum** and microlithiasis remain common in recurrent idiopathic disease.",
+   "say": "The GET SMASHED mnemonic lists gallstones, ethanol, trauma, steroids, mumps, autoimmune disease, scorpion sting and high triglycerides. Hypertriglyceridaemia above one thousand units and hypercalcaemia are important metabolic causes. Drug induced disease can occur with azathioprine, valproate and thiazide diuretics in patients. Pancreatic divisum and microlithiasis remain common in recurrent idiopathic disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause group",
+     "Examples",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Biliary",
+      "Gallstones microlithiasis",
+      "Raised ALT abnormal ultrasound"
+     ],
+     [
+      "Alcohol",
+      "Chronic heavy use",
+      "Recurrent attacks fatty stools"
+     ],
+     [
+      "Metabolic",
+      "High triglycerides calcium",
+      "Family history diabetes"
+     ],
+     [
+      "Drugs",
+      "Azathioprine valproate",
+      "Temporal relation onset"
+     ],
+     [
+      "Other",
+      "Trauma, post procedure",
+      "Recent intervention history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Premature intra acinar activation** of trypsinogen converts zymogens inside the gland. **Autodigestion and oedema** trigger cytokine mediated capillary leak and third space loss. **Necrotising disease** follows severe acinar necrosis with infected collections in a subset. Systemic inflammatory response drives acute respiratory distress and renal failure. Early fluid resuscitation interrupts this cascade by maintaining pancreatic perfusion.",
+   "say": "Premature intra acinar activation of trypsinogen leads to premature conversion of zymogens inside the gland. Autodigestion and oedema trigger cytokine mediated capillary leak and fluid loss. Necrotising disease can produce infected collections and prolonged systemic illness in patients. Systemic inflammation can cause respiratory distress and renal failure and early fluids help maintain pancreatic perfusion.",
+   "vis": null
+  },
+  {
+   "tx": "**Epigastric pain radiating to back** with vomiting is the classic presentation. Pain increases in supine posture and eases with sitting forward in many patients. **Cullen sign** (flank bruising) and **Grey Turner sign** (periumbilical bruising) indicate severe disease. Lipase rises within 4 to 8 hours and remains elevated for 8 to 14 days. **Chronic pancreatitis** presents with steatorrhoea, weight loss and diabetes rather than pain alone.",
+   "say": "Epigastric pain radiating to the back with vomiting is the classic presentation of acute disease. Pain often increases in supine posture and it can ease with sitting forward in patients. Cullen sign with flank bruising and Grey Turner sign with periumbilical bruising indicate severe disease. Lipase rises early and it remains elevated for many days rather than hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute pancreatitis",
+     "points": [
+      "Sudden severe epigastric pain",
+      "High lipase mimic of MI",
+      "Risk of necrosis shock"
+     ]
+    },
+    "right": {
+     "title": "Chronic pancreatitis",
+     "points": [
+      "Steatorrhoea weight loss",
+      "Type three C diabetes",
+      "Calcification duct changes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Serum lipase** is the enzyme of choice because of sensitivity and prolonged elevation. **Bedside ultrasound** is the first test to detect gallstones and biliary dilatation. **Contrast enhanced computed tomography** is the gold standard for necrosis and severity, best delayed 72 hours. **C reactive protein above 150 mg/L** at 48 hours predicts necrosis. Bedside scores include **BISAP, APACHE II and Glasgow criteria**.",
+   "say": "Serum lipase is the enzyme of choice because of sensitivity and prolonged elevation over time. Bedside ultrasound is the first test to detect gallstones and biliary dilatation in patients. Contrast enhanced computed tomography is the reference standard for necrosis and severity assessment. C reactive protein above one hundred fifty units at forty eight hours predicts necrotising disease and bedside scores help stratify severity.",
+   "vis": null
+  },
+  {
+   "tx": "**Early aggressive fluid resuscitation** with balanced crystalloids is the cornerstone of care. **Analgesia with opioids** and correction of electrolytes support organ function. **Early enteral nutrition within 24 hours** reduces infection and mortality. **No prophylactic antibiotics** are recommended for sterile necrosis. **Endoscopic retrograde cholangiography** is reserved for cholangitis or persistent biliary obstruction.",
+   "say": "Early aggressive fluid resuscitation with balanced crystalloids is the cornerstone of care. Analgesia with opioids and correction of electrolytes should support organ function throughout. Early enteral nutrition within twenty four hours can reduce infection and mortality in patients. Prophylactic antibiotics are not recommended for sterile necrosis and cholangiography is reserved for cholangitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fluids analgesia monitor"
+     },
+     {
+      "id": "b",
+      "label": "NPO then early enteral feeds"
+     },
+     {
+      "id": "c",
+      "label": "Ultrasound for gallstones"
+     },
+     {
+      "id": "d",
+      "label": "Cholecystectomy same admission"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Same admission cholecystectomy** prevents recurrence in gallstone disease. **Endoscopic sphincterotomy** is used when surgery is delayed or cholangitis is present. Infected necrosis is managed with **step up approach** using percutaneous or endoscopic drainage before necrosectomy. **Pancreatic enzyme replacement** with 50000 lipase units per meal treats exocrine failure. The **International Association of Pancreatology 2021 guidance** endorses early enteral feeding and step up drainage.",
+   "say": "Same admission cholecystectomy can prevent recurrence in gallstone disease in most patients. Endoscopic sphincterotomy is used when surgery is delayed or cholangitis is present. Infected necrosis is managed with step up drainage before necrosectomy in modern practice. Pancreatic enzyme replacement with meals treats exocrine failure and International Association guidance endorses enteral feeding.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **pancreatic necrosis, pseudocyst, walled off necrosis and fistula**. **Acute respiratory distress syndrome** and acute kidney injury drive early mortality. **Pancreatic collections** become infected in about 20% of necrotising cases. Chronic disease develops **exocrine insufficiency** with steatorrhoea and fat soluble vitamin deficiency. **Type 3 C diabetes** reflects islet destruction and requires insulin therapy.",
+   "say": "Complications include pancreatic necrosis, pseudocyst, walled off necrosis and fistula formation. Acute respiratory distress and acute kidney injury can drive early mortality in severe disease. Pancreatic collections can become infected in a substantial minority of necrotising cases. Chronic disease develops exocrine insufficiency with steatorrhoea and diabetes reflecting islet destruction.",
+   "vis": null
+  },
+  {
+   "tx": "**Lipase remains more sensitive than amylase** in late presentation and renal failure. **Hypertriglyceridaemia induced disease** recurs unless triglycerides are controlled aggressively. **Alcohol continued use** doubles recurrence risk after gallstone clearance. **Autoimmune pancreatitis** presents with diffuse sausage gland and responds to steroids, not surgery. Pancreatic cancer must still be excluded in persistent chronic imaging changes and weight loss.",
+   "say": "Lipase remains more sensitive than amylase in late presentation and renal failure in patients. Hypertriglyceridaemia induced disease can recur unless triglycerides are controlled aggressively. Continued alcohol use can double recurrence risk after gallstone clearance and intervention. Autoimmune pancreatitis presents with diffuse sausage gland and it responds to steroids rather than surgery.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis suits severity because **mild disease resolves in 1 week** with minimal risk of recurrence. Severe necrotising disease carries mortality of 10 to 30% depending on infection and organ failure. **Chronic disease does not transform into cancer** but carries increased risk and requires nutritional support. **Smoking cessation and alcohol abstinence** are the most effective long term measures. Follow up imaging and diabetes screening are needed in recurrent disease.",
+   "say": "Prognosis is related to severity because mild disease resolves quickly with low recurrence risk. Severe necrotising disease carries substantial mortality depending on infection and organ failure. Chronic disease does not transform into cancer but it carries increased risk and needs nutritional support. Smoking cessation and alcohol abstinence are the most effective long term measures for prevention.",
+   "vis": null
+  },
+  {
+   "tx": "Remember **two of three criteria**, **lipase** as the best early enzyme, and ultrasound first for gallstones. Contrast tomography at 72 hours stages necrosis while CRP predicts it early. Early enteral feeding and same admission cholecystectomy change outcomes. Cullen and Grey Turner signs point to severe haemorrhagic disease.",
+   "say": "You should remember two of three diagnostic criteria with lipase as the best early enzyme. Ultrasound should be first for gallstones while contrast tomography at seventy two hours stages necrosis. Early enteral feeding and same admission cholecystectomy can change outcomes in gallstone disease. Cullen and Grey Turner signs point to severe haemorrhagic disease with high risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Diagnosis",
+      "Two of three criteria"
+     ],
+     [
+      "Best enzyme",
+      "Lipase over amylase"
+     ],
+     [
+      "First imaging",
+      "Ultrasound gallstones"
+     ],
+     [
+      "Gold standard",
+      "Contrast tomography necrosis"
+     ],
+     [
+      "Nutrition",
+      "Early enteral twenty four hours"
+     ],
+     [
+      "Recurrence prevention",
+      "Cholecystectomy same admission"
+     ],
+     [
+      "Severe signs",
+      "Cullen Grey Turner plus CRP"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
