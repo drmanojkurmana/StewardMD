@@ -1,0 +1,102 @@
+{
+  "v": 1,
+  "module": "sgm-burns-perioperative",
+  "subject": "ss-general-medicine",
+  "title": "Burns, trauma and perioperative medicine",
+  "minutes": 11,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A burn is coagulative necrosis of skin by heat, electricity, chemicals or friction, graded by depth and **total body surface area** with 9% blocks. First degree burn affects only epidermis with erythema and pain, second degree involves dermis with blisters, third degree is full thickness with charred insensate skin. Adults with 20% or more burns develop burn shock and need referral, and **Parkland formula** estimates fluids.",
+      "say": "A burn is heat injury that destroys skin, and depth plus total body surface area decide severity. First degree burns involve only the surface and hurt a lot, second degree burns blister, and third degree burns are deep and painless. Burns involving twenty percent or more of the body cause shock, so they need urgent fluids and specialist referral.",
+      "vis": null
+    },
+    {
+      "tx": "Burns follow scalds in children at sixty C, flames in adults, electric injury on moist skin, acid and alkali chemicals, and **contact** injury from hot objects. Domestic cooking, epilepsy, alcohol use, delayed rescue and comorbid **diabetes** increase risk and severity. Chemical splash risk rises with exposed area and contact time, while electric burns track **deep** tissues along vessels and nerves and often show entry and exit wounds.",
+      "say": "Most burns come from scalds in children, flames in adults, electric injury, chemicals and contact with hot objects. Stroke, epilepsy, alcohol use and delayed rescue all worsen outcome. Acid and alkali splashes need prolonged washing, and electric burns often injure deep tissues even when skin injury looks small.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Type", "Typical skin finding", "Pain"],
+        "rows": [
+          ["Scald", "Erythema and blisters, patchy depth", "Severe"],
+          ["Flame", "Charred and deep areas common", "Mixed"],
+          ["Electric", "Entry and exit wounds", "Depends on path"],
+          ["Acid chemical", "Coagulative white or brown eschar", "Severe"],
+          ["Alkali chemical", "Liquefactive soft eschar", "Severe"]
+        ]
+      }
+    },
+    {
+      "tx": "Heat denatures proteins and kills cells above forty four C, with fluid loss from injured capillaries raising losses to 3 to 4 mL per kg per percent burn. Inflammatory **mediators** release histamine, prostaglandins and cytokines, causing oedema and vasodilation. Burn shock combines **hypovolaemic** loss with myocardial depression and cutaneous vasoconstriction, so urine output falls below 0.5 mL per kg per hour and **hypermetabolism** follows after 48 hours.",
+      "say": "Heat destroys proteins and injured capillaries leak large volumes of fluid into tissues and blisters. Inflammatory mediators cause swelling and vessel widening, while fluid loss causes shock with falling urine output. After two days the body becomes hypermetabolic and needs extra calories and protein.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "injury", "label": "Thermal injury" },
+          { "id": "leak", "label": "Capillary leak and fluid loss" },
+          { "id": "shock", "label": "Burn shock and oliguria" },
+          { "id": "hyper", "label": "Hypermetabolism after 48 hours" }
+        ],
+        "edges": [["injury", "leak"], ["leak", "shock"], ["shock", "hyper"]]
+      }
+    },
+    {
+      "tx": "**Depth** decides care more than area alone, with **superficial partial** burns healing in 14 days without graft, **deep partial** burns beyond twenty one days needing graft, and full thickness burns always needing **excision** and graft. Electrical burns show entry and exit wounds, lightning gives **Lichtenberg figures** like ferns on skin, and circumferential burns cause eschar with tight chest or limb constriction needing **escharotomy**.",
+      "say": "Depth matters more than size alone for healing and grafting decisions. Superficial partial burns often heal without grafts while deep burns need surgery. Electric burns track deeply, lightning causes fern like marks, and tight circumferential eschar may need urgent cutting to restore breathing or circulation.",
+      "vis": null
+    },
+    {
+      "tx": "Airway burns show **hoarse voice**, stridor, carbonaceous sputum, facial burns and singed nasal hairs, needing early intubation within six hours. All trauma patients need **primary survey** with airway, breathing, circulation, disability and exposure, plus 2 large bore cannulas, blood group, X ray chest and pelvis, and FAST scan. Coexisting **polytrauma** such as head injury, rib fractures and **haemothorax** changes priority and fluids must be guided by urine output.",
+      "say": "Airway burns cause hoarseness, stridor and sooty sputum, and delayed swelling can block the airway quickly. Every trauma patient needs a primary survey with airway, breathing, circulation and exposure checks. Look for head injury, broken ribs and blood in the chest because these injuries change the order of care.",
+      "vis": null
+    },
+    {
+      "tx": "Rapid assessment uses **Parkland formula** 4 mL multiplied by weight in kg and percent burn, with half given in first 8 hours from injury time. Adults target urine output 0.5 to 1 mL per kg per hour, children 1 mL per kg per hour, and balanced crystalloid Ringer lactate is preferred. **First test** is bedside urine output with Foley catheter, while **gold standard** for perfusion is invasive monitoring plus **urinary output** trend and lactate clearance in major burns.",
+      "say": "Estimate fluids with the Parkland formula and give half the volume in the first eight hours from injury. Watch urine output hourly as the main guide to perfusion. Bedside urine output is the first practical test, while lactate and invasive monitoring become the gold standard in major burns.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Partial thickness burn", "points": ["Blisters and moist wound bed", "Painful with blanching", "Heals by re epithelialisation", "Graft if deep or slow"] },
+        "right": { "title": "Full thickness burn", "points": ["Charred dry insensate skin", "No blanching, thrombosed vessels", "Never heals without excision", "Early excision and grafting needed"] }
+      }
+    },
+    {
+      "tx": "First line care is cool running water 20 C for 20 minutes within 3 hours, cover with sterile non adherent **dressing**, give opioid pain relief zero point one mg per kg, update tetanus with a booster vaccine 0.5 mL intramuscular, and start **topical antimicrobial** cream for infected wounds. The topical cream and dressings are changed daily, and **oral** intake starts early with high protein diet 2 g per kg per day to support **healing**.",
+      "say": "Cool the burn with running water for twenty minutes and cover it with a clean non adherent dressing. Give opioid pain relief, update tetanus vaccination, and apply topical antimicrobial cream to infected wounds. Start early oral feeding with extra protein to help healing.",
+      "vis": null
+    },
+    {
+      "tx": "Perioperative patients need **functional capacity** 4 METS assessment, beta blocker continuation, and control of blood pressure below one hundred forty over ninety millimetres of mercury before elective surgery. Smoking cessation 8 weeks before surgery, **spirometry** for chronic lung disease, echocardiography for **ejection fraction** below thirty five percent, and HbA1c below seven percent improve outcome. Anaemia correction targets haemoglobin above 8 g per dL and stopping the antiplatelet drug 5 days preoperatively reduces bleeding.",
+      "say": "Before surgery check functional capacity, blood pressure, smoking status, lung function and heart function. Optimise glycated haemoglobin, correct anaemia above eight grams per decilitre, and stop the antiplatelet drug five days before surgery. Continue beta blockers but do not start new ones on the day of surgery.",
+      "vis": null
+    },
+    {
+      "tx": "Intraoperative fluids range 2 to 3 mL per kg per hour for major surgery, with **urine output** 0.5 mL per kg per hour and mean arterial pressure above sixty five millimetres of mercury as targets. Postoperative pain uses simple pain relief 1 g every six hours, **opioid pain relief** infusion for major burns, and multimodal analgesia to reduce opioids. **Deep vein thrombosis** prophylaxis starts with a blood thinning injection five thousand units subcutaneously twelve hourly, and **early mobilisation** within 24 hours cuts pneumonia and clot risk.",
+      "say": "Give intraoperative fluids of two to three millilitres per kilogram per hour and keep urine output above half a millilitre per kilogram per hour. Use simple pain relief plus strong opioid for severe pain and start clot prophylaxis early. Mobilise patients within twenty four hours to reduce chest and clot complications.",
+      "vis": null
+    },
+    {
+      "tx": "Burn complications include **sepsis** as leading cause of death after seven days, pneumonia from inhalation injury, acute kidney injury, Curling ulcer with **stress gastritis**, and hypertrophic scar with contracture. Mortality rises with age over sixty years, area over forty percent, and inhalation injury as **Baux score** predicts. Early excision within 48 hours cuts sepsis, and long term care needs physiotherapy, pressure garments and **rehabilitation** for contractures.",
+      "say": "Sepsis is the leading late cause of death after burns, followed by pneumonia, kidney injury and stomach ulcers. Mortality rises steeply with older age, larger area and inhalation injury. Early wound excision reduces sepsis, and physiotherapy with pressure garments prevents contractures.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** pairs Rule of 9 with Parkland fluids, cool water for 20 minutes, and a tetanus booster vaccine. Burns of 20 percent or more need referral, inhalation injury needs early intubation, and full thickness burns need excision within 48 hours. Electric burns injure deep tissues, alkali burns need prolonged washing, and circumferential burns need escharotomy for airway and limb compromise in 3 percent of cases.",
+      "say": "Remember the rule of nine, the Parkland formula and twenty minutes of cooling for every burn case. Refer burns above twenty percent, intubate airway burns early, excise full thickness burns within forty eight hours, and cut tight eschar that threatens breathing or limbs.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Finding", "Action", "Number"],
+        "rows": [
+          ["20 percent burn", "Parkland fluids and referral", "4 mL times kg times percent"],
+          ["Cool water", "Running water within 3 hours", "20 minutes at 20 C"],
+          ["Airway burn", "Early intubation", "Within six hours"],
+          ["Full thickness", "Excision and graft", "Within 48 hours"],
+          ["Tetanus", "Booster intramuscular", "0.5 mL dose"],
+          ["Pain", "Opioid pain relief", "zero point one mg per kg"],
+          ["Protein need", "High protein diet", "2 g per kg per day"],
+          ["Rule of 9", "Surface area blocks", "9 percent each"]
+        ]
+      }
+    }
+  ]
+}

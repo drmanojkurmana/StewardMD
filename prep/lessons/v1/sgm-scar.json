@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "sgm-scar",
+ "subject": "ss-general-medicine",
+ "title": "Severe cutaneous adverse reactions",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Severe cutaneous adverse reactions are life threatening **delayed hypersensitivity** reactions with incidence of one to six per million per year. They include Stevens Johnson syndrome with ten percent body surface detachment, toxic epidermal necrolysis with over thirty percent detachment and drug reaction with **eosinophilia** and systemic symptoms. Early warning signs appear within seven to twenty-eight days of drug start.",
+   "say": "Severe cutaneous adverse reactions are life threatening delayed hypersensitivity reactions with incidence of one to six per million per year. They can include Stevens Johnson syndrome with ten percent body surface detachment, toxic epidermal necrolysis with over thirty percent detachment and drug reaction with eosinophilia and systemic symptoms. Early warning signs appear within seven to twenty eight days.",
+   "vis": null
+  },
+  {
+   "tx": "High risk drugs are **allopurinol** in forty percent of cases, aromatic anticonvulsants like carbamazepine and lamotrigine in twenty percent, sulfonamides in fifteen percent plus nevirapine and oxicam NSAIDs. HLA B one thousand five hundred two predicts carbamazepine reaction with one hundred fold risk in Asian patients, and HLA B five thousand eight hundred one predicts allopurinol reaction. Slow dose titration lowers anticonvulsant risk.",
+   "say": "High risk drugs are allopurinol in about forty percent of cases, aromatic anticonvulsants like carbamazepine and lamotrigine in about twenty percent, sulfonamides in about fifteen percent plus nevirapine and oxicam NSAIDs. HLA B fifteen oh two predicts carbamazepine reaction with hundred fold risk in Asian patients, and HLA B fifty eight oh one predicts allopurinol reaction.",
+   "vis": null
+  },
+  {
+   "tx": "Drug peptide presented on **HLA class I** activates cytotoxic T cells and natural killer cells, releasing granulysin and perforin that kill keratinocytes across epidermis. Granulysin level **above ten ng** per mL predicts blistering at eighty percent accuracy. Eosinophils and atypical lymphocytes dominate drug reaction with eosinophilia, while neutrophils are sparse.",
+   "say": "Drug peptide presented on HLA class one activates cytotoxic T cells and natural killer cells, releasing granulysin and perforin that kill keratinocytes. Granulysin level above ten nanograms per millilitre predicts blistering well. Eosinophils and atypical lymphocytes dominate drug reaction with eosinophilia, while neutrophils are sparse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drug start"
+     },
+     {
+      "id": "b",
+      "label": "HLA presentation"
+     },
+     {
+      "id": "c",
+      "label": "T cell activation"
+     },
+     {
+      "id": "d",
+      "label": "Granulysin release"
+     },
+     {
+      "id": "e",
+      "label": "Keratinocyte death"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stevens Johnson syndrome presents with painful dusky **targetoid** macules, fever, facial oedema, sore throat and **mucosal erosions** in ninety percent of cases with conjunctivitis and dysphagia. Nikolsky sign is positive. Drug reaction with eosinophilia shows morbilliform rash with striking facial oedema, lymphadenopathy in seventy percent and latency of two to six weeks.",
+   "say": "Stevens Johnson syndrome presents with painful dusky targetoid macules, fever, facial oedema, sore throat and mucosal erosions in ninety percent of cases with conjunctivitis and difficulty swallowing. Nikolsky sign is positive. Drug reaction with eosinophilia shows morbilliform rash with striking facial oedema and lymphadenopathy in seventy percent.",
+   "vis": null
+  },
+  {
+   "tx": "Acute generalised exanthematous pustulosis gives fever with **sterile pustules** within two days and neutrophilia over seven thousand per microlitre. Stevens Johnson syndrome detachment starts at ten percent body surface, while toxic epidermal necrolysis exceeds thirty percent with **full epidermal** loss and pinch sign detachment. Dress syndrome shows eosinophils over seven hundred per microlitre plus liver enzyme rise above three times normal.",
+   "say": "Acute generalised exanthematous pustulosis gives fever with sterile pustules within two days and neutrophilia over seven thousand per microlitre. Stevens Johnson syndrome detachment starts at ten percent body surface, while toxic epidermal necrolysis exceeds thirty percent with full epidermal loss. Dress syndrome shows high eosinophils plus liver enzyme rise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reaction",
+     "Skin hallmark",
+     "Onset",
+     "Systemic clue"
+    ],
+    "rows": [
+     [
+      "SJS",
+      "Targetoid dusky macules",
+      "seven to twenty-eight days",
+      "Mucositis ninety percent"
+     ],
+     [
+      "TEN",
+      "Over thirty percent detachment",
+      "seven to twenty-eight days",
+      "Nikolsky positive"
+     ],
+     [
+      "DRESS",
+      "Facial oedema",
+      "two to six weeks",
+      "Eosinophilia and hepatitis"
+     ],
+     [
+      "AGEP",
+      "Sterile pustules",
+      "Within two days",
+      "Neutrophilia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First test is **complete blood count** with differential and liver enzymes plus skin biopsy showing necrotic keratinocytes. Gold standard is **clinical scoring** with SCORTEN, where a score of four predicts mortality near ninety percent and score of one predicts mortality near three percent. RegiSCAR criteria confirm drug reaction with eosinophilia diagnosis.",
+   "say": "First test is complete blood count with differential and liver enzymes plus skin biopsy showing necrotic keratinocytes. Gold standard is clinical scoring with SCORTEN, where a score of four predicts mortality near ninety percent and score of one predicts mortality near three percent. RegiSCAR criteria confirm drug reaction with eosinophilia.",
+   "vis": null
+  },
+  {
+   "tx": "Immediate drug withdrawal is first line and reduces mortality by twenty percent when done within twenty-four hours. Supportive care follows burn unit principles with **IV fluids** two mL per kg per percent burn daily, protein one point five g per kg daily and strict infection control. Culprit drug cards and family **alert** letters prevent rechallenge.",
+   "say": "Immediate drug withdrawal is first line and reduces mortality when done within twenty four hours. Supportive care follows burn unit principles with IV fluids two millilitres per kilogram per percent burn daily, protein one point five grams per kilogram daily and strict infection control. Culprit drug cards and family alert letters prevent rechallenge.",
+   "vis": null
+  },
+  {
+   "tx": "Systemic cyclosporine three to five mg per kg daily for seven to ten days lowers mortality in toxic epidermal necrolysis in observational series. IVIG two g per kg over three days is used widely, while **etanercept** twenty-five mg twice weekly improves survival to ninety percent in one trial. Steroids alone raise infection risk without clear benefit.",
+   "say": "Systemic cyclosporine three to five milligrams per kilogram daily for seven to ten days can lower mortality in toxic epidermal necrolysis in observational series. IVIG two grams per kilogram over three days is used widely, while etanercept twenty five milligrams twice weekly improves survival. Steroids alone can raise infection risk without clear benefit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stevens Johnson syndrome",
+     "points": [
+      "Detachment under ten percent",
+      "Mucosal care priority",
+      "Ophthalmology review daily",
+      "Drug withdrawal first"
+     ]
+    },
+    "right": {
+     "title": "Toxic epidermal necrolysis",
+     "points": [
+      "Detachment over thirty percent",
+      "Burn unit care",
+      "Cyclosporine or etanercept",
+      "Exclude sepsis daily"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mucosal scarring causes blindness in eighty percent of survivors with ocular involvement plus dysphagia in forty percent from oesophageal strictures. Secondary infection kills thirty percent of severe cases, and late autoimmune thyroid disease occurs in ten percent after toxic epidermal necrolysis. Dress syndrome risks **relapse** flares for eight to twelve weeks after onset.",
+   "say": "Mucosal scarring causes blindness in most survivors with ocular involvement plus difficulty swallowing from oesophageal strictures. Secondary infection kills about thirty percent of severe cases, and late autoimmune thyroid disease occurs in about ten percent after toxic epidermal necrolysis. Dress syndrome can risk relapse flares for many weeks after onset.",
+   "vis": null
+  },
+  {
+   "tx": "Survival with supportive care reaches eighty percent for Stevens Johnson syndrome and sixty percent for toxic epidermal necrolysis in high volume centres.**Long term follow up** for two years monitors eyes, lungs, liver and thyroid function every six months. Psychiatric sequelae like depression occur in thirty percent of survivors and need screening.",
+   "say": "Survival with supportive care can reach eighty percent for Stevens Johnson syndrome and sixty percent for toxic epidermal necrolysis in high volume centres. Long term follow up for two years monitors eyes, lungs, liver and thyroid function every six months. Psychiatric sequelae like depression occur in thirty percent of survivors.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** recall culprits allopurinol forty percent, carbamazepine and lamotrigine twenty percent plus sulfonamides fifteen percent, detachment under ten percent is SJS and over thirty percent is toxic epidermal necrolysis, dress latency is two to six weeks with eosinophils over seven hundred, AGEP onset within two days with sterile pustules, SCORTEN four predicts mortality near ninety percent and drug withdrawal within twenty-four hours is first line.",
+   "say": "This summary will help you remember the exam patterns. You can recall culprits allopurinol forty percent, carbamazepine and lamotrigine twenty percent plus sulfonamides fifteen percent. Detachment under ten percent is SJS and over thirty percent is toxic epidermal necrolysis. Dress latency is two to six weeks. AGEP onset is within two days. SCORTEN four can predict mortality near ninety percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Reaction",
+     "Number"
+    ],
+    "rows": [
+     [
+      "Allopurinol share",
+      "SCAR culprit",
+      "forty percent"
+     ],
+     [
+      "SJS detachment",
+      "Stevens Johnson syndrome",
+      "Under ten percent"
+     ],
+     [
+      "TEN detachment",
+      "Toxic epidermal necrolysis",
+      "Over thirty percent"
+     ],
+     [
+      "DRESS latency",
+      "Drug eosinophilia syndrome",
+      "two to six weeks"
+     ],
+     [
+      "AGEP onset",
+      "Pustular reaction",
+      "Under two days"
+     ],
+     [
+      "SCORTEN four mortality",
+      "Toxic epidermal necrolysis",
+      "Near ninety percent"
+     ],
+     [
+      "Cyclosporine dose",
+      "TEN therapy",
+      "three to five mg per kg"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
