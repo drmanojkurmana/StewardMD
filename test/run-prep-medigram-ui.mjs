@@ -89,6 +89,11 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
   await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
   ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 8000), "swiping away releases the player");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-vid img');`) === true, "the video poster is a background, so a tap can never open the image zoom viewer");
+  await click("#smdPrep .pn-mg-vid [data-act=mg-play]");
+  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "tapping a video poster plays it in the card");
+  await ev(`var b=document.querySelector("#pnMgFeed"); b.scrollTop=b.scrollHeight; return 1;`);
+  ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "and it stops once the reel settles on another card");
   // End card: Keep going appends a batch, Finish returns home.
   const n0 = await ev(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length;`);
   await click("#smdPrep [data-act=mg-more]");
