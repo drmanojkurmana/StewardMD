@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-large-medium-vasculitis",
+ "subject": "ss-general-medicine",
+ "title": "Large and medium vessel vasculitis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Giant cell arteritis** is the commonest vasculitis over age 50 in these patients. **Jaw claudication** is the specific symptom of this disease in these patients. **Temporal artery biopsy** shows granulomatous inflammation in these patients. **Adenosine** deaminase is not a driver here despite its presence in listings confusion.",
+   "say": "Giant cell arteritis is the commonest vasculitis over age fifty in these patients. Jaw claudication is the specific symptom of this disease in these patients. Temporal artery biopsy is the test for granulomatous inflammation in these patients. Adenosine deaminase is not a driver here despite its presence in listings confusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "GCA pattern",
+     "Takayasu pattern"
+    ],
+    "rows": [
+     [
+      "Age",
+      "Over fifty years",
+      "Young women"
+     ],
+     [
+      "Vessel",
+      "Temporal, ophthalmic",
+      "Aorta and branches"
+     ],
+     [
+      "Clue",
+      "Jaw claudication",
+      "Pulse deficit"
+     ],
+     [
+      "Biopsy",
+      "Skip granulomas",
+      "Not feasible routinely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Takayasu arteritis** strikes young women with pulse deficits in these patients. **Blood pressure** difference between arms exceeds 10 mmHg in these patients. **Bruits** over subclavian arteries flag stenosis in these patients. **Aortogram** imaging guides revascularisation in these patients in many protocols.",
+   "say": "Takayasu arteritis is young women with pulse deficits in these patients. Blood pressure difference between arms is over ten millimetres in these patients. Bruits over subclavian arteries are a flag of stenosis in these patients. Aortogram imaging guides revascularisation in these patients in many protocols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pulse deficit noticed"
+     },
+     {
+      "id": "b",
+      "label": "Bilateral BP measured"
+     },
+     {
+      "id": "c",
+      "label": "CTA or MRA imaging"
+     },
+     {
+      "id": "d",
+      "label": "Disease activity assessment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prednisone** at 1 mg/kg is first line for GCA in these patients. **Tocilizumab** is the steroid sparing agent for GCA in these patients. **Methotrexate** suits refractory disease in these patients. **Rituximab** helps refractory large vessel disease in these patients in many case reports.",
+   "say": "Prednisone at one milligram per kilogram is first line for GCA in these patients. Tocilizumab is the steroid sparing agent for GCA in these patients. Methotrexate is the option for refractory disease in these patients. Rituximab helps refractory large vessel disease in these patients in many case reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Role",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Prednisone",
+      "First line induction",
+      "High dose initially"
+     ],
+     [
+      "Tocilizumab",
+      "Steroid sparing",
+      "Giant cell arteritis"
+     ],
+     [
+      "Methotrexate",
+      "Refractory option",
+      "Steroid taper aid"
+     ],
+     [
+      "Rituximab",
+      "Refractory option",
+      "Case report evidence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Kawasaki disease** is medium vessel vasculitis of children with coronary dilation in these patients. **Coronary aneurysm** is the cardiac complication in these patients. **Immunoglobulin** therapy treats Kawasaki disease in these patients. **Adenovirus** is the trigger in these patients in many reports.",
+   "say": "Kawasaki disease is medium vessel vasculitis of children with coronary dilation in these patients. Coronary aneurysm is the cardiac complication in these patients. Immunoglobulin therapy is the treatment of Kawasaki disease in these patients. Adenovirus is the trigger in these patients in many reports.",
+   "vis": null
+  },
+  {
+   "tx": "**Behcet disease** causes oral and genital ulcers with uveitis in these patients. **Pathergy** is the skin hyperreactivity sign in these patients. **Avacopan** has no Behcet role despite its presence in listings confusion. **Immunosuppression** helps refractory uveitis in these patients in many protocols.",
+   "say": "Behcet disease causes oral and genital ulcers with uveitis in these patients. Pathergy is the skin hyperreactivity sign in these patients. Avacopan has no Behcet role despite its presence in listings confusion. Immunotherapy helps refractory uveitis in these patients in many protocols.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Giant cell arteritis",
+     "points": [
+      "Age over fifty",
+      "Jaw claudication present",
+      "Temporal biopsy positive",
+      "Vision loss risk"
+     ]
+    },
+    "right": {
+     "title": "Takayasu arteritis",
+     "points": [
+      "Young women affected",
+      "Pulse deficit present",
+      "Aortic arch syndrome",
+      "Immunosuppression helps uveitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Vision loss** is the feared complication of GCA in these patients. **Same day steroids** prevent contralateral blindness in these patients. **Temporal artery ultrasound** shows halo sign in these patients in many centres. **ESR** elevation supports diagnosis in these patients in many protocols.",
+   "say": "Vision loss is the feared complication of GCA in these patients. Same day steroids prevent contralateral blindness in these patients. Temporal artery ultrasound is the test for halo sign in these patients in many centres. ESR elevation supports diagnosis in these patients in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Azathioprine** with **cyclophosphamide** treat refractory large vessel disease in these patients. **Levamisole** has no large vessel role despite its presence in listings confusion. **Adrenal** insufficiency is not a vasculitis feature in these patients. **Relapse** is common during steroid taper in these patients.",
+   "say": "Azathioprine with cyclophosphamide are the treatment of refractory large vessel disease in these patients. Levamisole has no large vessel role despite its presence in listings confusion. Adrenal insufficiency is not a vasculitis feature in these patients. Relapse is common during steroid taper in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Claudication symptoms"
+     },
+     {
+      "id": "b",
+      "label": "Steroid started"
+     },
+     {
+      "id": "c",
+      "label": "Imaging confirmation"
+     },
+     {
+      "id": "d",
+      "label": "Steroid sparing added"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PET CT** shows vessel wall uptake in large vessel vasculitis in these patients. **Cryoglobulinaemic** vasculitis is small vessel disease in these patients. **Churg Strauss** is eosinophilic granulomatosis in these patients. Medium vessel disease needs biopsy in these patients in many centres.",
+   "say": "PET CT is the test for vessel wall uptake in large vessel vasculitis in these patients. Cryoglobulinaemic vasculitis is small vessel disease in these patients. Churg Strauss is eosinophilic granulomatosis in these patients. Medium vessel disease needs biopsy in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Revascularisation** follows disease control in these patients. **Stenting** is deferred until quiescent disease in these patients in many protocols. **Smoking** cessation prevents vascular damage in these patients in many studies. **Vascular** protection measures support vessels in these patients in many guidelines.",
+   "say": "Revascularisation follows disease control in these patients. Stenting is deferred until quiescent disease in these patients in many protocols. Smoking cessation prevents vascular damage in these patients in many studies. Vascular protection measures support vessels in these patients in many guidelines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vessel size",
+     "Entity",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Large vessel",
+      "Giant cell arteritis",
+      "Jaw claudication, vision risk"
+     ],
+     [
+      "Large vessel",
+      "Takayasu arteritis",
+      "Young women, pulse deficit"
+     ],
+     [
+      "Medium vessel",
+      "Kawasaki disease",
+      "Coronary aneurysm children"
+     ],
+     [
+      "Medium vessel",
+      "Behcet disease",
+      "Ulcers, pathergy, uveitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follow up** needs ESR and CRP monitoring in these patients. **Bone protection** is mandatory with prolonged steroids in these patients in many protocols. **Glaucoma** screening is advised in these patients in many guidelines. **Diabetes** screening is advised in these patients.",
+   "say": "Follow up needs ESR and CRP monitoring in these patients. Bone protection is mandatory with prolonged steroids in these patients in many protocols. Glaucoma screening is advised in these patients in many guidelines. Diabetes screening is advised in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on large vessel disease. Remember jaw claudication and vision loss for giant cell arteritis, young women with pulse deficit for Takayasu and coronary aneurysm for Kawasaki disease. Same day steroids prevent blindness while tocilizumab spares steroids in GCA. Behcet shows ulcers with pathergy and uveitis in these patients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Jaw claudication with vision loss is the hallmark of giant cell arteritis clearly. Young women with pulse deficit is Takayasu arteritis pattern in practice. Coronary aneurysm is the complication of Kawasaki disease. Same day steroids prevent blindness in GCA cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "GCA hallmark",
+      "Jaw claudication with vision loss"
+     ],
+     [
+      "Takayasu pattern",
+      "Young women with pulse deficit"
+     ],
+     [
+      "Kawasaki complication",
+      "Coronary aneurysm in children"
+     ],
+     [
+      "Behcet triad",
+      "Ulcers, pathergy, uveitis pattern"
+     ],
+     [
+      "Blindness prevention",
+      "Same day steroids prevent contralateral loss"
+     ],
+     [
+      "Steroid sparing",
+      "Tocilizumab spares steroids in GCA"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
