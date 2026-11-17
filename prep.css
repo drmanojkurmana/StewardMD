@@ -1542,6 +1542,7 @@ body.dark .pn-root .pl-orb .pl-hl small, body.dark .pn-root .pl-orb .pl-hl svg {
 /* ---- Question of the day ---- */
 .pn-root .pn-qotd { padding: 16px 16px 14px; border-radius: var(--pn-r-lg); background: var(--pn-card); box-shadow: var(--pn-elev), inset 0 0 0 1px var(--pn-card-edge); }
 .pn-root .pn-qotd[hidden] { display: none; }
+.pn-root .pn-qotd.pn-qotd-wait { min-height: 300px; }
 .pn-root .pn-qd-h { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 650; letter-spacing: -.005em; color: var(--pn-pri-ink); }
 body.dark .pn-root .pn-qd-h { color: var(--pn-c-amber); }
 .pn-root .pn-qd-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pn-c-amber); box-shadow: 0 0 0 3px color-mix(in srgb, var(--pn-c-amber) 28%, transparent); }

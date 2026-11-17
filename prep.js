@@ -2052,13 +2052,12 @@
        the secondary figures (streak, today, level) and Compete. */
     paint(bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="find" aria-label="Search questions, lessons, pearls and IDs">' + ico("search") + '</button><button type="button" class="pn-ib" data-act="menu" aria-label="Menu">' + ico("menu") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      // Readiness and Today's plan (prep-plan.js); the older Today card without it.
-      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
-      coachSecHtml("home") +
+      // Owner 2026-11-17: Question of the day at the top, IQoach after Practise.
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
-      (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd" id="pnQotd" hidden></section>') +
+      (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd pn-qotd-wait" id="pnQotd" aria-hidden="true"></section>') +
+      // Readiness and Today's plan (prep-plan.js); the older Today card without it.
+      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       '<h2 class="pn-h">Practise</h2>' +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext"' + (nx0 ? ' data-s="' + esc(nx0.subject) + '" data-m="' + esc(nx0.module) + '"' : " hidden") + '><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT">' + (nx0 ? esc(nextLabel(nx0)) : "") + "</b></span>" + ico("chev") + "</button>" +
       // PrepReels (prep-medigram.js): the one swipe feed (Play's Swipe feed opens it too).
@@ -2080,6 +2079,8 @@
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.STUDY ? G.STUDY.homeRow(HOST) : "") +
       "</div>" +
+      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
+      coachSecHtml("home") +
       (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
@@ -2102,7 +2103,7 @@
       if (G.PREP_PLAN) G.PREP_PLAN.homeMounted(HOST);
       if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = nextLabel(nx); }
       qotdMount(subs, s);
-    });
+    }, function () { var q = root && root.querySelector("#pnQotd.pn-qotd-wait"); if (q) q.hidden = true; });
   }
   /* ---------- question of the day (prep50) ----------
      One real bank question a day: the day picks a module of the exam's subjects already on this phone, the day
@@ -2154,9 +2155,12 @@
   function qotdMount(subs, s) {
     var box = root && root.querySelector("#pnQotd");
     if (!box) return;
-    qotdPick(subs, s).then(function (it) {
+    qotdPick(subs, s).then(null, function () { return null; }).then(function (it) {
       box = root && root.querySelector("#pnQotd");
-      if (!box || !it || !st.open) return;
+      if (!box || !st.open) return;
+      // At the top of home its space is kept while it loads (no jump); no question today (offline, empty) drops it.
+      box.classList.remove("pn-qotd-wait"); box.removeAttribute("aria-hidden");
+      if (!it) { box.hidden = true; return; }
       st.qotd = it; st.qotdDay = today(); st.qotdEx = s.exam;
       patchHtml(box, qotdHtml(it)); box.hidden = false;
     });
