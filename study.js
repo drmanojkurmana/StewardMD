@@ -1297,18 +1297,23 @@
     var curP = host.root() && host.root().querySelector("#stCurP"); if (curP) curP.textContent = n;
   }
 
+  var CANVAS_MAX_PX = 8e6;
+  function canvasScale(cw, ch, dpr) { return Math.max(0.25, Math.min(dpr, 4096 / cw, Math.sqrt(CANVAS_MAX_PX / Math.max(1, cw * ch)))); }
   function renderPage(n) {
     var p = V && V.pg[n]; if (!p || p.on) return;
     p.on = true; var gen = ++p.gen, pdf = V.pdf;
     (pdf ? pdf.getPage(n) : Promise.resolve(null)).then(function (page) {
       if (!V || V.pdf !== pdf || V.pg[n] !== p || p.gen !== gen) return;
       var v1 = page ? page.getViewport({ scale: 1 }) : { width: 1, height: V.ratio }, cw = V.baseW * V.z, ch = cw * v1.height / v1.width, dpr = Math.min(G.devicePixelRatio || 1, 2);
-      var qf = Math.min(dpr, 4096 / cw);
+      /* iPad Safari blanks any canvas over ~16.7 M pixels (and total canvas memory is limited): when zoomed,
+         a full-dpr page overlay was 30 M+ px, so ink vanished and the pen stopped drawing. Cap every page canvas
+         at ~8 M px; at fit width this is still full retina. */
+      var qf = canvasScale(cw, ch, dpr);
       p.ratio = v1.height / v1.width; p.el.style.height = ch + "px";
       var cv = D.createElement("canvas"), ov = D.createElement("canvas"), vp = page ? page.getViewport({ scale: (cw / v1.width) * qf }) : { width: cw * qf, height: ch * qf };
       cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.className = "st-cv";
       cv.style.zIndex = "1"; cv.style.pointerEvents = "none";
-      ov.width = Math.floor(cw * dpr); ov.height = Math.floor(ch * dpr); ov.className = "st-ov"; ov.setAttribute("data-n", n);
+      ov.width = Math.floor(cw * qf); ov.height = Math.floor(ch * qf); ov.className = "st-ov"; ov.setAttribute("data-n", n);
       ov.style.touchAction = "none";
       ov.style.zIndex = "10";
       var itemLayer = D.createElement("div"); itemLayer.className = "st-items-layer"; itemLayer.setAttribute("data-n", n);

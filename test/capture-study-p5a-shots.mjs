@@ -81,7 +81,7 @@ for (const dev of DEVICES) {
     await page.locator(".st5a-card.st-doc").first().locator('[data-act="st5a-doc-menu"]').click();
     await page.waitForSelector('[data-act="st5a-trash"]'); await page.click('[data-act="st5a-trash"]');
     await sleep(400);
-    await page.click('[data-act="st5a-tab"][data-v="trash"]'); await sleep(400);
+    await (async () => { if (!(await page.locator('[data-act="st5a-tab"][data-v="trash"]:visible').count())) { await page.click('[data-act="st5a-libmore"]'); await page.waitForSelector('#st5aSheet [data-act="st5a-tab"][data-v="trash"]'); } await page.click('[data-act="st5a-tab"][data-v="trash"]:visible'); })(); await sleep(400);
     await page.screenshot({ path: join(OUT_DIR, `${tag}-06-trash.png`) }); console.log(`${tag}-06-trash.png`);
     await page.locator(".st5a-card.st-doc").first().locator('[data-act="st5a-doc-menu"]').click();
     await page.waitForSelector('[data-act="st5a-restore"]');
