@@ -1961,6 +1961,8 @@ Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decis
 
 ## MediGram (proposed, 2026-10-31)
 
+**2026-11-17 rebuild:** PrepReels now runs on the real bank (random modules across every subject of the exam), mixes questions, pearls, lessons, images and the cleared CliniX videos (played through the `stewardmd.in/_site/yt` shim, since YouTube rejects capacitor://). Files: `prep-medigram.js` (feed), `prep-medigram-media.js` (shim player), `prep-medigram-data.js` (`mixFeed`, flags, break timer). UI test: `test/run-prep-medigram-ui.mjs`. See Decisions 2026-11-17.
+
 Optional short-form adaptive learning feed inside PrepNucleus: MCQs, explanations, first-party micro-lessons, curated clinical discovery and spaced recall. Reuses the existing bank, lessons, My Mistakes, bookmarks and FSRS-6; it does not create a parallel learning engine. Proposed flag: smd_prep_medigram (default OFF). YouTube is an optional compliant public-video source only; personalised Shorts feeds are not imported or cloned. Smart Break is time-bounded and deferred until the Study Feed is validated. Full product, architecture, rollout, policy, privacy, measurement and test plan: [[plans/PrepNucleus-MediGram]].
 
 
