@@ -13,11 +13,27 @@
    "say": "Triple drug therapy combines ivermectin, diethylcarbamazine and albendazole into a single annual treatment. It clears microfilariae for two full years, slashing elimination timelines.",
    "vis": {
     "kind": "table",
-    "cols": ["Drug in IDA protocol", "Prescribed dosage", "Key biological effect"],
+    "cols": [
+     "Drug in IDA protocol",
+     "Prescribed dosage",
+     "Key biological effect"
+    ],
     "rows": [
-     ["Ivermectin", "200 mcg/kg body weight", "Paralyses microfilariae pharynx and clears blood"],
-     ["Diethylcarbamazine (DEC)", "6 mg/kg body weight", "Kills microfilariae and sterilises adult worms"],
-     ["Albendazole", "400 mg fixed oral dose", "Disrupts adult worm metabolism and clears helminths"]
+     [
+      "Ivermectin",
+      "200 mcg/kg body weight",
+      "Paralyses microfilariae pharynx and clears blood"
+     ],
+     [
+      "Diethylcarbamazine (DEC)",
+      "6 mg/kg body weight",
+      "Kills microfilariae and sterilises adult worms"
+     ],
+     [
+      "Albendazole",
+      "400 mg fixed oral dose",
+      "Disrupts adult worm metabolism and clears helminths"
+     ]
     ]
    }
   },
@@ -38,12 +54,32 @@
    "say": "The sandfly Phlebotomus argentipes transmits kala-azar. It breeds in damp mud wall cracks and cattle sheds, flying with short hops and biting silently after dark.",
    "vis": {
     "kind": "table",
-    "cols": ["Sandfly trait", "Biological manifestation", "Control intervention"],
+    "cols": [
+     "Sandfly trait",
+     "Biological manifestation",
+     "Control intervention"
+    ],
     "rows": [
-     ["Breeding substrate", "Damp mud floors mixed with cattle dung", "Pucca flooring and plastering of mud walls"],
-     ["Flight dynamics", "Weak short hopping flight under 300 metres", "Focal spraying within a village perimeter"],
-     ["Feeding time", "Nocturnal twilight and midnight biting", "Bed nets and indoor residual insecticide sprays"],
-     ["Insecticide sensitivity", "Susceptible to synthetic pyrethroids and DDT", "Two rounds of indoor residual spraying yearly"]
+     [
+      "Breeding substrate",
+      "Damp mud floors mixed with cattle dung",
+      "Pucca flooring and plastering of mud walls"
+     ],
+     [
+      "Flight dynamics",
+      "Weak short hopping flight under 300 metres",
+      "Focal spraying within a village perimeter"
+     ],
+     [
+      "Feeding time",
+      "Nocturnal twilight and midnight biting",
+      "Bed nets and indoor residual insecticide sprays"
+     ],
+     [
+      "Insecticide sensitivity",
+      "Susceptible to synthetic pyrethroids and DDT",
+      "Two rounds of indoor residual spraying yearly"
+     ]
     ]
    }
   },
@@ -54,11 +90,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Macrophage multiplication of Leishmania"},
-     {"id": "b", "label": "Massive splenomegaly and hypersplenism"},
-     {"id": "c", "label": "Pancytopenia, severe anaemia, cachexia"}
+     {
+      "id": "a",
+      "label": "Macrophage multiplication of Leishmania"
+     },
+     {
+      "id": "b",
+      "label": "Massive splenomegaly and hypersplenism"
+     },
+     {
+      "id": "c",
+      "label": "Pancytopenia, severe anaemia, cachexia"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -69,11 +123,19 @@
     "kind": "compare",
     "left": {
      "title": "rK39 rapid dipstick",
-     "points": ["Fast finger-prick blood test in 15 minutes", "Over 98% sensitive in acute disease", "Non-invasive, safe at primary health centres"]
+     "points": [
+      "Fast finger-prick blood test in 15 minutes",
+      "Over 98% sensitive in acute disease",
+      "Non-invasive, safe at primary health centres"
+     ]
     },
     "right": {
      "title": "Splenic or marrow aspiration",
-     "points": ["Direct demonstration of amastigotes", "Hazard of fatal splenic haemorrhage", "Requires hospital setting and specialist"]
+     "points": [
+      "Direct demonstration of amastigotes",
+      "Hazard of fatal splenic haemorrhage",
+      "Requires hospital setting and specialist"
+     ]
     }
    }
   },
@@ -95,11 +157,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Positive rK39 test with fever > 2 weeks"},
-     {"id": "b", "label": "Single IV infusion of 10 mg/kg over 2 hours"},
-     {"id": "c", "label": "Complete parasitological cure and rapid discharge"}
+     {
+      "id": "a",
+      "label": "Positive rK39 test with fever > 2 weeks"
+     },
+     {
+      "id": "b",
+      "label": "Single IV infusion of 10 mg/kg over 2 hours"
+     },
+     {
+      "id": "c",
+      "label": "Complete parasitological cure and rapid discharge"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -108,11 +188,27 @@
    "say": "Miltefosine is an oral medication taken for twenty-eight days. Because it damages the developing fetus, women must avoid pregnancy during treatment and for three months after.",
    "vis": {
     "kind": "table",
-    "cols": ["Therapeutic regimen", "Route and duration", "Operational consideration"],
+    "cols": [
+     "Therapeutic regimen",
+     "Route and duration",
+     "Operational consideration"
+    ],
     "rows": [
-     ["Liposomal Amphotericin B", "Single IV dose 10 mg/kg", "Preferred national first-line, cures in 1 day"],
-     ["Miltefosine oral", "50 mg twice daily for 28 days", "Strict contraception mandatory; gastrointestinal nausea"],
-     ["Paromomycin + Miltefosine", "IM injection + oral for 10 days", "Shortened combination regimen in special settings"]
+     [
+      "Liposomal Amphotericin B",
+      "Single IV dose 10 mg/kg",
+      "Preferred national first-line, cures in 1 day"
+     ],
+     [
+      "Miltefosine oral",
+      "50 mg twice daily for 28 days",
+      "Strict contraception mandatory; gastrointestinal nausea"
+     ],
+     [
+      "Paromomycin + Miltefosine",
+      "IM injection + oral for 10 days",
+      "Shortened combination regimen in special settings"
+     ]
     ]
    }
   },
@@ -124,11 +220,19 @@
     "kind": "compare",
     "left": {
      "title": "Visceral kala-azar",
-     "points": ["Systemic fever, wasting and anaemia", "Massive splenomegaly and hepatomegaly", "Low skin parasite density"]
+     "points": [
+      "Systemic fever, wasting and anaemia",
+      "Massive splenomegaly and hepatomegaly",
+      "Low skin parasite density"
+     ]
     },
     "right": {
      "title": "Post-kala-azar dermal leishmaniasis",
-     "points": ["No fever; patient feels physically healthy", "Nodular and macular hypopigmented skin rash", "High skin parasite density that infects vectors"]
+     "points": [
+      "No fever; patient feels physically healthy",
+      "Nodular and macular hypopigmented skin rash",
+      "High skin parasite density that infects vectors"
+     ]
     }
    }
   },
@@ -139,11 +243,74 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Active door-to-door fever searches"},
-     {"id": "b", "label": "Indoor residual pyrethroid spraying"},
-     {"id": "c", "label": "Block incidence maintained < 1 per 10,000"}
+     {
+      "id": "a",
+      "label": "Active door-to-door fever searches"
+     },
+     {
+      "id": "b",
+      "label": "Indoor residual pyrethroid spraying"
+     },
+     {
+      "id": "c",
+      "label": "Block incidence maintained < 1 per 10,000"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Triple drug therapy for filariasis combines ivermectin 200 micrograms per kilogram, diethylcarbamazine 6 milligrams per kilogram and albendazole 400 milligrams in one annual dose. Kala azar is diagnosed in the field with the rK39 strip test on finger prick blood within fifteen minutes. First line treatment is single dose liposomal amphotericin B at 10 milligrams per kilogram, curing above ninety five percent.",
+   "say": "High-yield for the exam: Triple drug therapy for filariasis combines ivermectin 200 micrograms per kilogram, diethylcarbamazine 6 milligrams per kilogram and albendazole 400 milligrams in one annual dose. Kala azar is diagnosed in the field with the rK39 strip test on finger prick blood within fifteen minutes. First line treatment is single dose liposomal amphotericin B at 10 milligrams per kilogram, curing above ninety five percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Ivermectin IDA dose",
+      "200 micrograms per kilogram single dose"
+     ],
+     [
+      "Diethylcarbamazine IDA dose",
+      "6 milligrams per kilogram single dose"
+     ],
+     [
+      "Albendazole IDA dose",
+      "400 milligrams fixed single dose"
+     ],
+     [
+      "Kala azar vector",
+      "Phlebotomus argentipes sandfly bites at night"
+     ],
+     [
+      "Kala azar field test",
+      "rK39 strip result within fifteen minutes"
+     ],
+     [
+      "Kala azar first line drug",
+      "Liposomal amphotericin B 10 milligrams per kilogram"
+     ],
+     [
+      "Miltefosine warning",
+      "Teratogenic, contraception during and three months after"
+     ],
+     [
+      "Elimination target",
+      "Below one case per ten thousand per block"
+     ]
+    ]
    }
   }
  ],

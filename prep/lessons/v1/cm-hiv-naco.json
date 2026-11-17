@@ -25,11 +25,27 @@
    "say": "Negative can still mean infectious. Before antibodies appear at two to twelve weeks, virus runs high and tests read negative. Exposure protocols repeat testing on schedule because one early negative closes nothing.",
    "vis": {
     "kind": "table",
-    "cols": ["Moment", "Antibody test", "Reality"],
+    "cols": [
+     "Moment",
+     "Antibody test",
+     "Reality"
+    ],
     "rows": [
-     ["Days after exposure", "Negative", "Virus may already replicate"],
-     ["Window period", "Negative", "High infectiousness possible"],
-     ["After 12 weeks", "Positive if infected", "Established seroconversion"]
+     [
+      "Days after exposure",
+      "Negative",
+      "Virus may already replicate"
+     ],
+     [
+      "Window period",
+      "Negative",
+      "High infectiousness possible"
+     ],
+     [
+      "After 12 weeks",
+      "Positive if infected",
+      "Established seroconversion"
+     ]
     ]
    }
   },
@@ -41,11 +57,19 @@
     "kind": "compare",
     "left": {
      "title": "High efficiency",
-     "points": ["Infected blood transfusion", "Shared injecting equipment", "Untreated vertical transmission"]
+     "points": [
+      "Infected blood transfusion",
+      "Shared injecting equipment",
+      "Untreated vertical transmission"
+     ]
     },
     "right": {
      "title": "Lower per act",
-     "points": ["Sexual exposure, viral load dependent", "Occupational needle-stick about 0.3 percent", "No risk: casual contact, food, mosquitoes"]
+     "points": [
+      "Sexual exposure, viral load dependent",
+      "Occupational needle-stick about 0.3 percent",
+      "No risk: casual contact, food, mosquitoes"
+     ]
     }
    }
   },
@@ -56,12 +80,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Consent and pre-test counselling"},
-     {"id": "b", "label": "Screening assay performed"},
-     {"id": "c", "label": "Confirmatory algorithm if reactive"},
-     {"id": "d", "label": "Result with post-test counselling"}
+     {
+      "id": "a",
+      "label": "Consent and pre-test counselling"
+     },
+     {
+      "id": "b",
+      "label": "Screening assay performed"
+     },
+     {
+      "id": "c",
+      "label": "Confirmatory algorithm if reactive"
+     },
+     {
+      "id": "d",
+      "label": "Result with post-test counselling"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,12 +119,27 @@
    "say": "Diagnosis now means treatment, whatever the CD4. Rapid single-pill first-line therapy prevents illness and transmission; undetectable equals untransmittable anchors adherence counselling. Waiting for CD4 thresholds belongs to history.",
    "vis": {
     "kind": "table",
-    "cols": ["Principle", "Practice"],
+    "cols": [
+     "Principle",
+     "Practice"
+    ],
     "rows": [
-     ["Treat all", "ART regardless of CD4 count"],
-     ["Start rapidly", "Same week, often same day readiness"],
-     ["Preferred first line", "Tenofovir plus lamivudine plus dolutegravir"],
-     ["Goal", "Sustained undetectable viral load"]
+     [
+      "Treat all",
+      "ART regardless of CD4 count"
+     ],
+     [
+      "Start rapidly",
+      "Same week, often same day readiness"
+     ],
+     [
+      "Preferred first line",
+      "Tenofovir plus lamivudine plus dolutegravir"
+     ],
+     [
+      "Goal",
+      "Sustained undetectable viral load"
+     ]
     ]
    }
   },
@@ -86,12 +150,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "95 percent diagnosed"},
-     {"id": "b", "label": "95 percent of those treated"},
-     {"id": "c", "label": "95 percent of those suppressed"},
-     {"id": "d", "label": "Transmission chains collapse"}
+     {
+      "id": "a",
+      "label": "95 percent diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "95 percent of those treated"
+     },
+     {
+      "id": "c",
+      "label": "95 percent of those suppressed"
+     },
+     {
+      "id": "d",
+      "label": "Transmission chains collapse"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -100,25 +189,40 @@
    "say": "Vertical transmission is preventable end to end. Test every pregnancy, treat positives for life, prophylax the infant, guide feeding under cover. Forty five percent collapses below two when the cascade completes.",
    "vis": {
     "kind": "table",
-    "cols": ["Cascade step", "Effect"],
+    "cols": [
+     "Cascade step",
+     "Effect"
+    ],
     "rows": [
-     ["Antenatal HIV testing", "Finds positives early"],
-     ["Lifelong maternal ART", "Viral load suppressed by delivery"],
-     ["Infant prophylaxis", "Covers delivery and early exposure"],
-     ["Complete cascade", "Transmission under 2 percent"]
+     [
+      "Antenatal HIV testing",
+      "Finds positives early"
+     ],
+     [
+      "Lifelong maternal ART",
+      "Viral load suppressed by delivery"
+     ],
+     [
+      "Infant prophylaxis",
+      "Covers delivery and early exposure"
+     ],
+     [
+      "Complete cascade",
+      "Transmission under 2 percent"
+     ]
     ]
    }
   },
   {
-    "tx": "Antenatal testing starts a cascade that continues through maternal treatment and infant prophylaxis. **Parent to child transmission** falls from a ceiling near 45 percent to below 2 percent when the sequence is complete: every pregnant woman is tested, lifelong ART begins at once if positive, and the infant receives prophylaxis matched to risk. Feeding advice stays under ART cover. The same visit can add partner testing plus syphilis and hepatitis screening.",
-    "say": "Antenatal testing starts a cascade that continues through maternal treatment and infant prophylaxis. Parent to child transmission falls from a ceiling near 45 percent to below 2 percent when the sequence is complete: every pregnant woman is tested, lifelong ART begins at once if positive, and the infant receives prophylaxis matched to risk. Feeding advice stays under ART cover. The same visit can add partner testing plus syphilis and hepatitis screening.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n423-cm-hiv-naco.webp",
-      "alt": "Cascade from antenatal HIV testing through maternal ART and infant prophylaxis to low transmission",
-      "caption": "The prevention cascade runs from antenatal testing and maternal ART to infant prophylaxis and much lower transmission. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Antenatal testing starts a cascade that continues through maternal treatment and infant prophylaxis. **Parent to child transmission** falls from a ceiling near 45 percent to below 2 percent when the sequence is complete: every pregnant woman is tested, lifelong ART begins at once if positive, and the infant receives prophylaxis matched to risk. Feeding advice stays under ART cover. The same visit can add partner testing plus syphilis and hepatitis screening.",
+   "say": "Antenatal testing starts a cascade that continues through maternal treatment and infant prophylaxis. Parent to child transmission falls from a ceiling near 45 percent to below 2 percent when the sequence is complete: every pregnant woman is tested, lifelong ART begins at once if positive, and the infant receives prophylaxis matched to risk. Feeding advice stays under ART cover. The same visit can add partner testing plus syphilis and hepatitis screening.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n423-cm-hiv-naco.webp",
+    "alt": "Cascade from antenatal HIV testing through maternal ART and infant prophylaxis to low transmission",
+    "caption": "The prevention cascade runs from antenatal testing and maternal ART to infant prophylaxis and much lower transmission. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "PEP and PrEP: drugs around exposure",
@@ -128,11 +232,19 @@
     "kind": "compare",
     "left": {
      "title": "Post-exposure (PEP)",
-     "points": ["Start within 72 hours", "28 days of therapy", "Occupational and sexual exposure"]
+     "points": [
+      "Start within 72 hours",
+      "28 days of therapy",
+      "Occupational and sexual exposure"
+     ]
     },
     "right": {
      "title": "Pre-exposure (PrEP)",
-     "points": ["Before ongoing risk", "Daily or event-driven dosing", "Regular HIV testing mandatory"]
+     "points": [
+      "Before ongoing risk",
+      "Daily or event-driven dosing",
+      "Regular HIV testing mandatory"
+     ]
     }
    }
   },
@@ -142,12 +254,72 @@
    "say": "One organisation steers the architecture: targeted interventions, testing centres, ART and STI clinics, blood safety, condoms, through state societies since 1992. The 2017 Act's anti-discrimination shield is itself a structural intervention.",
    "vis": {
     "kind": "table",
-    "cols": ["Component", "Delivers"],
+    "cols": [
+     "Component",
+     "Delivers"
+    ],
     "rows": [
-     ["Targeted interventions", "Key population prevention"],
-     ["ICTC network", "Counselling and testing"],
-     ["ART centres", "Free treatment and monitoring"],
-     ["Suraksha STI clinics", "Syndromic STI management"]
+     [
+      "Targeted interventions",
+      "Key population prevention"
+     ],
+     [
+      "ICTC network",
+      "Counselling and testing"
+     ],
+     [
+      "ART centres",
+      "Free treatment and monitoring"
+     ],
+     [
+      "Suraksha STI clinics",
+      "Syndromic STI management"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Window period lasts about 2 to 12 weeks with negative antibody tests despite high infectiousness. NACO follows test and treat with tenofovir, lamivudine and dolutegravir first line regardless of CD4 count. Complete PPTCT cuts vertical transmission from 15 to 45 percent to under 2 percent. PEP must start within 72 hours for 28 days.",
+   "say": "High-yield for the exam: Window period lasts about 2 to 12 weeks with negative antibody tests despite high infectiousness. NACO follows test and treat with tenofovir, lamivudine and dolutegravir first line regardless of CD4 count. Complete PPTCT cuts vertical transmission from 15 to 45 percent to under 2 percent. PEP must start within 72 hours for 28 days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Window period",
+      "About 2 to 12 weeks, antibody negative"
+     ],
+     [
+      "Needle stick risk",
+      "About 0.3 percent per exposure"
+     ],
+     [
+      "Vertical transmission untreated",
+      "Roughly 15 to 45 percent overall"
+     ],
+     [
+      "Preferred first line ART",
+      "Tenofovir plus lamivudine plus dolutegravir"
+     ],
+     [
+      "Global targets 2030",
+      "95 diagnosed, 95 treated, 95 suppressed"
+     ],
+     [
+      "Infant testing under 18 months",
+      "Virological test; maternal antibody confounds serology"
+     ],
+     [
+      "PEP window and duration",
+      "Within 72 hours, for 28 days"
+     ],
+     [
+      "Testing venue",
+      "ICTC with consent and counselling"
+     ]
     ]
    }
   }

@@ -14,12 +14,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Glucose plus sodium in solution"},
-     {"id": "b", "label": "Cotransporter absorbs both"},
-     {"id": "c", "label": "Water follows osmotically"},
-     {"id": "d", "label": "Circulating volume restored"}
+     {
+      "id": "a",
+      "label": "Glucose plus sodium in solution"
+     },
+     {
+      "id": "b",
+      "label": "Cotransporter absorbs both"
+     },
+     {
+      "id": "c",
+      "label": "Water follows osmotically"
+     },
+     {
+      "id": "d",
+      "label": "Circulating volume restored"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -28,12 +53,32 @@
    "say": "Look, touch, then decide. Alert versus restless versus lethargic; normal versus sunken eyes; skin pinch snapping back versus lingering. Two signs in a column assign no, some or severe dehydration and with it the plan.",
    "vis": {
     "kind": "table",
-    "cols": ["Sign", "Some dehydration", "Severe dehydration"],
+    "cols": [
+     "Sign",
+     "Some dehydration",
+     "Severe dehydration"
+    ],
     "rows": [
-     ["General state", "Restless, irritable", "Lethargic or unconscious"],
-     ["Eyes", "Sunken", "Very sunken"],
-     ["Drinking", "Eager, thirsty", "Poorly or unable"],
-     ["Skin pinch", "Goes back slowly", "Goes back very slowly"]
+     [
+      "General state",
+      "Restless, irritable",
+      "Lethargic or unconscious"
+     ],
+     [
+      "Eyes",
+      "Sunken",
+      "Very sunken"
+     ],
+     [
+      "Drinking",
+      "Eager, thirsty",
+      "Poorly or unable"
+     ],
+     [
+      "Skin pinch",
+      "Goes back slowly",
+      "Goes back very slowly"
+     ]
     ]
    }
   },
@@ -56,11 +101,19 @@
     "kind": "compare",
     "left": {
      "title": "Home first fluids",
-     "points": ["Sugar-salt solution correctly mixed", "Rice water, dal water, coconut water", "Continued breastfeeding and feeding"]
+     "points": [
+      "Sugar-salt solution correctly mixed",
+      "Rice water, dal water, coconut water",
+      "Continued breastfeeding and feeding"
+     ]
     },
     "right": {
      "title": "Packet ORS moments",
-     "points": ["Visible dehydration present", "Large ongoing losses", "Home fluids failing or refused"]
+     "points": [
+      "Visible dehydration present",
+      "Large ongoing losses",
+      "Home fluids failing or refused"
+     ]
     }
    }
   },
@@ -70,24 +123,36 @@
    "say": "No dehydration stays home with rules. Extra fluid after every stool by age band, feeding continued, zinc added, two packets sent along. Blood in stool, poor drinking or worsening means return at once.",
    "vis": {
     "kind": "table",
-    "cols": ["Age", "ORS after each loose stool"],
+    "cols": [
+     "Age",
+     "ORS after each loose stool"
+    ],
     "rows": [
-     ["2 to 24 months", "50 to 100 ml"],
-     ["2 to 10 years", "100 to 200 ml"],
-     ["10 years and above", "As much as wanted"]
+     [
+      "2 to 24 months",
+      "50 to 100 ml"
+     ],
+     [
+      "2 to 10 years",
+      "100 to 200 ml"
+     ],
+     [
+      "10 years and above",
+      "As much as wanted"
+     ]
     ]
    }
   },
   {
-    "tx": "Plan B is the clinic arm for some dehydration: 75 ml per kg of **oral rehydration solution** over 4 hours, then reassessment under observation while feeding, including breastfeeding, continues. Plan A stays at home when dehydration is absent: extra sips after every loose stool, zinc, and two ORS packets to take away. Come back at once for blood in the stool, poor drinking or worsening. The 4 hour mark on the chart is the decision point, not the end.",
-    "say": "Plan B is the clinic arm for some dehydration: 75 ml per kg of oral rehydration solution over 4 hours, then reassessment under observation while feeding, including breastfeeding, continues. Plan A stays at home when dehydration is absent: extra sips after every loose stool, zinc, and two ORS packets to take away. Come back at once for blood in the stool, poor drinking or worsening. The 4 hour mark on the chart is the decision point, not the end.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n315-cm-diarrhoea-ors-oral-rehydration-solution.webp",
-      "alt": "Plan B chart giving 75 ml per kg of ORS over 4 hours with a reassessment point",
-      "caption": "Plan B gives 75 ml per kg of oral rehydration solution over 4 hours and marks the reassessment point. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Plan B is the clinic arm for some dehydration: 75 ml per kg of **oral rehydration solution** over 4 hours, then reassessment under observation while feeding, including breastfeeding, continues. Plan A stays at home when dehydration is absent: extra sips after every loose stool, zinc, and two ORS packets to take away. Come back at once for blood in the stool, poor drinking or worsening. The 4 hour mark on the chart is the decision point, not the end.",
+   "say": "Plan B is the clinic arm for some dehydration: 75 ml per kg of oral rehydration solution over 4 hours, then reassessment under observation while feeding, including breastfeeding, continues. Plan A stays at home when dehydration is absent: extra sips after every loose stool, zinc, and two ORS packets to take away. Come back at once for blood in the stool, poor drinking or worsening. The 4 hour mark on the chart is the decision point, not the end.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n315-cm-diarrhoea-ors-oral-rehydration-solution.webp",
+    "alt": "Plan B chart giving 75 ml per kg of ORS over 4 hours with a reassessment point",
+    "caption": "Plan B gives 75 ml per kg of oral rehydration solution over 4 hours and marks the reassessment point. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Plan B: ORS by weight over four hours",
@@ -96,12 +161,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Weigh child, calculate 75 ml per kg"},
-     {"id": "b", "label": "Sip steadily over 4 hours"},
-     {"id": "c", "label": "Reassess hydration at 4 hours"},
-     {"id": "d", "label": "Move to Plan A, repeat B, or escalate"}
+     {
+      "id": "a",
+      "label": "Weigh child, calculate 75 ml per kg"
+     },
+     {
+      "id": "b",
+      "label": "Sip steadily over 4 hours"
+     },
+     {
+      "id": "c",
+      "label": "Reassess hydration at 4 hours"
+     },
+     {
+      "id": "d",
+      "label": "Move to Plan A, repeat B, or escalate"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -110,12 +200,27 @@
    "say": "Feeding is therapy. Breastfeeding never stops, local energy foods continue in small frequent meals, and an extra daily meal for a week after repays losses. Stopping feeds turns four days of illness into malnutrition's doorway.",
    "vis": {
     "kind": "table",
-    "cols": ["Practice", "Verdict"],
+    "cols": [
+     "Practice",
+     "Verdict"
+    ],
     "rows": [
-     ["Continue breastfeeding", "Always, throughout illness"],
-     ["Small frequent energy foods", "Encourage actively"],
-     ["Extra meal for a week after", "Repays nutritional losses"],
-     ["Stop feeds to rest the gut", "Harmful, never advise"]
+     [
+      "Continue breastfeeding",
+      "Always, throughout illness"
+     ],
+     [
+      "Small frequent energy foods",
+      "Encourage actively"
+     ],
+     [
+      "Extra meal for a week after",
+      "Repays nutritional losses"
+     ],
+     [
+      "Stop feeds to rest the gut",
+      "Harmful, never advise"
+     ]
     ]
    }
   },
@@ -127,11 +232,19 @@
     "kind": "compare",
     "left": {
      "title": "ORS alone does",
-     "points": ["Replaces water and salts", "Prevents dehydration death", "No effect on episode length"]
+     "points": [
+      "Replaces water and salts",
+      "Prevents dehydration death",
+      "No effect on episode length"
+     ]
     },
     "right": {
      "title": "Adding zinc does",
-     "points": ["Shortens duration and severity", "Fewer subsequent episodes", "Supports mucosal recovery"]
+     "points": [
+      "Shortens duration and severity",
+      "Fewer subsequent episodes",
+      "Supports mucosal recovery"
+     ]
     }
    }
   },
@@ -141,11 +254,23 @@
    "say": "Know when mouths lose. Shock, defeating vomiting, unconsciousness, distended silent abdomen, or worsening output on ORS all escalate to drip or tube. Ninety five percent oral success still leaves a supervised minority.",
    "vis": {
     "kind": "table",
-    "cols": ["Escalation sign", "Route chosen"],
+    "cols": [
+     "Escalation sign",
+     "Route chosen"
+    ],
     "rows": [
-     ["Severe dehydration or shock", "Rapid intravenous fluids, Plan C"],
-     ["Persistent vomiting, conscious", "Nasogastric ORS under supervision"],
-     ["Unconscious or convulsing", "Intravenous, airway protected"]
+     [
+      "Severe dehydration or shock",
+      "Rapid intravenous fluids, Plan C"
+     ],
+     [
+      "Persistent vomiting, conscious",
+      "Nasogastric ORS under supervision"
+     ],
+     [
+      "Unconscious or convulsing",
+      "Intravenous, airway protected"
+     ]
     ]
    }
   },
@@ -156,12 +281,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Child assessed at ORS corner"},
-     {"id": "b", "label": "Plan A, B or C assigned"},
-     {"id": "c", "label": "Observed rehydration on site"},
-     {"id": "d", "label": "Mother taught before discharge"}
+     {
+      "id": "a",
+      "label": "Child assessed at ORS corner"
+     },
+     {
+      "id": "b",
+      "label": "Plan A, B or C assigned"
+     },
+     {
+      "id": "c",
+      "label": "Observed rehydration on site"
+     },
+     {
+      "id": "d",
+      "label": "Mother taught before discharge"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Oral rehydration works because intestinal sodium glucose cotransport remains intact even in secretory diarrhoea, so water follows sodium osmotically. Plan B gives 75 millilitres per kilogram of ORS over four hours for some dehydration. Zinc is given for fourteen days alongside ORS. Continued feeding and breastfeeding must never stop during the episode.",
+   "say": "High-yield for the exam: Oral rehydration works because intestinal sodium glucose cotransport remains intact even in secretory diarrhoea, so water follows sodium osmotically. Plan B gives 75 millilitres per kilogram of ORS over four hours for some dehydration. Zinc is given for fourteen days alongside ORS. Continued feeding and breastfeeding must never stop during the episode.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "ORS physiological basis",
+      "Sodium glucose cotransport intact in secretory diarrhoea"
+     ],
+     [
+      "Low osmolarity ORS composition",
+      "Sodium 75 and glucose 75 millimoles per litre"
+     ],
+     [
+      "Total ORS osmolarity",
+      "245 milliosmoles per litre for low osmolarity ORS"
+     ],
+     [
+      "Some dehydration signs",
+      "Restless, sunken eyes, eager drinking, slow skin pinch"
+     ],
+     [
+      "Severe dehydration signs",
+      "Lethargic, very sunken eyes, poor drinking, very slow pinch"
+     ],
+     [
+      "Plan B ORS volume",
+      "75 millilitres per kilogram over four hours"
+     ],
+     [
+      "Plan A home fluid dose",
+      "50 to 100 millilitres after each loose stool under two years"
+     ],
+     [
+      "Zinc dose above six months",
+      "20 milligrams daily for fourteen days"
+     ]
+    ]
    }
   }
  ],
