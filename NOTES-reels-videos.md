@@ -1,0 +1,297 @@
+# PrepReels real YouTube videos (owner decision 2026-11-17)
+
+184 verified video cards now live in the PrepReels feed, from official educational
+channels only. PrepReels is ON by default (parent + YouTube), off switches kept.
+
+## What changed
+
+- `prep-medigram.js`: removed the placeholder card (`mg-v-yt-ecg`, Rick Astley
+  `dQw4w9WgXcQ`) and added 184 real `kind: "video"` cards in the exact existing
+  shape. The cards were added in `prep-medigram.js` (where `CANDIDATES` actually
+  lives), not `prep-medigram-data.js` (pure logic, no card data).
+- `prep-loader.js`: `mgOn()` default ON (`!== "0"`, still requires `enabled()`);
+  `?medigram=0` / `smd_prep_medigram="0"` turn it off. Loader token `prep162` -> `prep163`.
+- `prep-medigram-data.js`: `resolveFlags()` parent default true, youtube default true
+  (study true as before; discovery/breakMode stay false). Off switches kept.
+- `prep-medigram-media.js`: stale "default OFF" comment updated to ON-by-default.
+- Pins bumped to `prep163`: `index.html`, `test/run-prep-play-ui.mjs`,
+  `test/run-prep-tools-ui.mjs` (was stale at `prep118` too; fixed).
+- Tests: `test/prep-medigram.test.mjs` flags test updated to ON defaults + new
+  test (100+ cards, 11-char unique videoIds, `durationSec` <= 360, every card's
+  rights/review contract, no placeholder). `test/prep-app.test.mjs`: exact-list
+  test now uses `&medigram=0` (base list in isolation) + new loader test
+  (PrepReels files load by default, `?medigram=0` / stored `"0"` keep them out).
+- Verification output: `vault/handoff/reels-videos-verified.json` (id + live
+  oEmbed title + author_name for all 184).
+- Helper scripts kept in `reels-scratch/` (worktree copy; harvested corpus stayed
+  read-only in `~/prep-data/assessment/reels-scratch/`).
+
+Every card: `kind: "video"`, exam `["neet-pg","ini-cet","usmle"]`, `language: "en"`,
+real video title, one-sentence summary, `media: {provider:"youtube", videoId}`,
+`rightsStatus: "youtube_embed"`, `clinicalReview: {status:"approved",
+reviewedAt:"2026-11-17", reviewerRole:"official-channel; owner spot-check pending"}`,
+`captions: {en:true}`, `sourceRefs: ["youtube:<channel name>"]`,
+`updatedAt: "2026-11-17"`, `durationSec` <= 360 (Shorts preferred; where no duration
+existed it was fetched from the watch page `lengthSeconds`).
+
+## Method (verification)
+
+1. Reused the harvested corpus in `~/prep-data/assessment/reels-scratch/`
+   (326 items + 243 oEmbed-verified + 77 search-verified).
+2. Filtered to official channels (Osmosis from Elsevier, Armando Hasudungan,
+   Ninja Nerd, Dr. Najeeb Lectures, khanacademymedicine, Khan Academy medical
+   titles, Zero To Finals) and dropped non-teaching items (ads, promos, AI-tutor
+   pushes, podcasts, BTS, day-in-life, trailers, donor/charity asks, finance
+   content).
+3. Re-fetched every surviving ID live from
+   `https://www.youtube.com/oembed?url=...&format=json` (HTTP 200 + title +
+   author_name) and fetched watch-page durations where unknown. Only 200s kept.
+4. Second and third targeted harvests (official channels, deficit subjects) with
+   the same live oEmbed gate.
+
+## Default mode serves videos
+
+Study mode (the default mode) already serves video cards: `isEligible()` study
+mode excludes only kind `break`, `isLesson()` includes `video`, and `buildFeed()`
+interleaves lessons at the configured cadence. No mode redesign was needed or made.
+
+## Unverified / OPEN (do not fake)
+
+- Clinical review: cards carry `reviewerRole: "official-channel; owner spot-check
+  pending"`. A human still needs to spot-watch and sign off clinical content
+  (especially the few patient-education-style items from Mayo/Cleveland/Hopkins
+  that survived? None did - see channel counts below).
+- Subject spread shortfalls vs the 6-per-subject target (see count table):
+  forensic = 1, dermatology = 5. Official channels only publish forensic content
+  longer than 6 minutes (or off-channel creators), so 6 official forensic shorts
+  could not be assembled without breaking the official-channel or 6-minute rule.
+  Options: accept the shortfall, allow a longer-form forensic exemption, or
+  approve additional official channels. OPEN.
+- Duration: all 184 have confirmed durations <= 360s (corpus `durationSec`,
+  search `len`, or watch-page `lengthSeconds`). None are "duration unconfirmed".
+- YouTube embed rights: titles/IDs verified live, but embedding/licensing was not
+  legally reviewed. Check YouTube embeddability per video before wide rollout. OPEN.
+- On-device: feed behaviour with 184 cards (ranking cost, scroll) was not tested
+  on a real device. OPEN.
+
+## Channel counts
+
+- Osmosis from Elsevier: 58
+- Armando Hasudungan: 58
+- Dr. Najeeb Lectures: 45
+- khanacademymedicine: 9
+- Zero To Finals: 7
+- Ninja Nerd: 4
+- Khan Academy India - English: 2
+- Khan Academy: 1
+
+Total: 184 verified video cards.
+
+## Full video list
+
+(Title | videoId | duration | channel. Source: `reels-scratch/verified_final.json`.)
+
+### anatomy (29)
+- Jugulodigastric Lymph Nodes | 01GZUQSTlJE | 55s | Dr. Najeeb Lectures
+- Tonsils - Clinical Anatomy (Palatine, lingual, tubal, adenoids) | 35ISWsTD-6I | 300s | Armando Hasudungan
+- Cervical Lymph Nodes Level 6 Anatomy | 35UQ05UfWEM | 91s | Dr. Najeeb Lectures
+- Virchow's Node & It's Clinical Significance | 3VVBHKUQ72k | 177s | Dr. Najeeb Lectures
+- Cervical Lymph Nodes Classification. | 5VZwlqmyPDk | 51s | Dr. Najeeb Lectures
+- Inner ankle pain can come from more than one structure 🦶⚡ #medialanklepain #ankleanatomy  #meded | 8pBfntXDmzQ | 53s | Armando Hasudungan
+- Central Nervous System (CNS) & Its Functions Explained | BVfPvhIUAiw | 139s | Dr. Najeeb Lectures
+- Deep Cervical Lymph Node | GB5cKAjthaM | 71s | Dr. Najeeb Lectures
+- Stridor | H5lBlo3H9Ko | 99s | Dr. Najeeb Lectures
+- Superior Mediastinal Lymph Nodes | IKhwzJKlq50 | 79s | Dr. Najeeb Lectures
+- Special Senses & Their Types | Anatomy Made Easy | L-ZWBvdUQ0k | 174s | Dr. Najeeb Lectures
+- Neurology Insights: Can you name the Three Parts of the Cerebellum? #cerebellum #neurology #anatomy | Lt5oxC0lut4 | 36s | Armando Hasudungan
+- Superficial Cervical Lymph Nodes Alternate Names | NM-GlJO3DFg | 38s | Dr. Najeeb Lectures
+- Anatomy of Cervical Lymph Nodes Level iii & Clinical Importance | Nn35ykd7Rmk | 99s | Dr. Najeeb Lectures
+- Protective layers, specialized surfaces — that’s epithelial tissue at work🧬🔬 #epithelialcells #meded | OOufVHFSeZo | 45s | Armando Hasudungan
+- Recurrent Laryngeal Nerve Injury | TsEEKIXQRgM | 145s | Dr. Najeeb Lectures
+- Cell cycle phases | Cells | MCAT | Khan Academy | U5vAO_f2LDQ | 342s | khanacademymedicine
+- Organization in the human body | Cells and organisms | Middle school biology | Khan Academy | YE2peDF4Zqg | 254s | Khan Academy
+- Clinical Anatomy -  Nasal Cavity and Nose bleeds | YTFu0ov527s | 257s | Armando Hasudungan
+- Delphian Lymph Node | Cervical Lymph Nodes Level 6 | _5PzRiIW8_4 | 117s | Dr. Najeeb Lectures
+- What Does the Autonomic Nervous System Actually Do? | cPwe_3tJ_8M | 159s | Dr. Najeeb Lectures
+- Anatomy Insights: Cranial Nerves 1 & 2 | dW4iKrbkUu8 | 57s | Armando Hasudungan
+- Advantages of Seven Level Classification of Cervical Lymph Node | eD7S7UTfM4w | 179s | Dr. Najeeb Lectures
+- Troisier’s Sign | f3SfBoJAdM8 | 135s | Dr. Najeeb Lectures
+- Anatomy of the Abdominal Viscera: Foregut, Midgut, Hindgut | geaqNEo_Nv4 | 37s | Osmosis from Elsevier
+- What Is Aponeurosis? Explained in 1 Minutes! | j8M8iLwp4XI | 75s | Dr. Najeeb Lectures
+- Surface Markings Cervical Lymph Node | tOy8SJnPw0Q | 89s | Dr. Najeeb Lectures
+- Supraclavicular Lymph Nodes | usZt9ZrVL9Y | 150s | Dr. Najeeb Lectures
+- First Week of Human Embryology Explained! 👶🔬 | zwfenfXDWcE | 179s | Dr. Najeeb Lectures
+### biochemistry (7)
+- A Site On 30S Subunit #drnajeeb #drnajeeblectures #shortvideostatus | AFSdUK_oBOQ | 58s | Dr. Najeeb Lectures
+- Epigenetics - An Introduction | JMT6oRYgkTk | 250s | Armando Hasudungan
+- Definition Of Translation #drnajeeb #drnajeeblectures #shortvideostatus | MPMrHPrUwVI | 59s | Dr. Najeeb Lectures
+- DNA synthesis inhibitors: Metronidazole ~Pharmacology~ | QNp7SUcDYRM | 354s | Osmosis from Elsevier
+- Pathophysiology Of Hyperlipidemia In Nephrotic Syndrome | UrSz8oFinWg | 33s | Dr. Najeeb Lectures
+- Aminoacyl tRNA #drnajeeb #drnajeeblectures #shortvideostatus | X2CfR5CW9kc | 57s | Dr. Najeeb Lectures
+- Composition Of 30S Ribosome | yVCbpJWH1UM | 58s | Dr. Najeeb Lectures
+### cardiology (13)
+- Cardiovascular Insights: Aortic Aneurysm #aorticaneurysm  #cardiology  #medicaleducation | 9DYltTsyuYE | 42s | Armando Hasudungan
+- Atrial Fibrillation | AFib: Overview #shorts | EYaAr4Q-Frk | 50s | Ninja Nerd
+- Clinical Pearl: Complications of myocardial infarction (DARTH VADER) | JEIqjDgZ-D4 | 35s | Osmosis from Elsevier
+- Cardiology Insights: Where Does the Heart Get Its Own Blood Supply? #coronaryarteries  #aorta #meded | WTdNNnqLiAo | 45s | Armando Hasudungan
+- Gastroenterology Insights I: Portal Hypertension Explained #gastroenterologyinsights #ascites #meded | gL_tUJViHiM | 68s | Armando Hasudungan
+- Cardiovascular System Physiology - Cardiac Output (stroke volume, heart rate, preload and afterload) | hpQFToprlH8 | 313s | Armando Hasudungan
+- What is hypertension | Circulatory System and Disease | NCLEX-RN | Khan Academy | l5TsKWd-fO8 | 273s | khanacademymedicine
+- Cardiovascular Insights: Kussmaul's Sign #kussmaulssign #cardiology  #cardiovascularInsights #meded | n4JBo_Mjkx8 | 53s | Armando Hasudungan
+- Anatomy Insights: Blood Flow through the Heart #cardiovascularhealth  #heartanatomy #anatomyinsights | nrPBDmzmtEA | 69s | Armando Hasudungan
+- Cardiovascular Insights: Why Cholesterol gets trapped in arteries #atherosclerosis #cardiology | pzzs-jVIE-M | 65s | Armando Hasudungan
+- Cardiovascular Insights: What determines how much blood your heart pumps? #cardiacoutput #meded | s-5unMr9hQA | 60s | Armando Hasudungan
+- Cardiology Insights: Why does the Heart Muscle turn into Fat? #ARVC #cardiomyopathy  #cardiology | tKQfE7odqUY | 68s | Armando Hasudungan
+- Cardiology Insights: How does Pulmonary Hypertension affect the Heart? #pulmonaryhypertension #meded | xkDMGqWwpMM | 60s | Armando Hasudungan
+### dermatology (5)
+- Dermatology - Lesion Terminology | 7pO0JaKZcts | 225s | Armando Hasudungan
+- Epidermolysis Bullosa (Year of the Zebra) | KPLSEtJCHo4 | 255s | Osmosis from Elsevier
+- Eczema (Atopic Dermatitis) Overview | W5mYnCXo7VM | 211s | Armando Hasudungan
+- Scleroderma - an Osmosis Preview | hM81Umyd-sA | 83s | Osmosis from Elsevier
+- Melanoma - Overview (signs and symptoms, pathology, risk factors, treatment) | mkYBxfKDyv0 | 273s | Armando Hasudungan
+### endocrine (11)
+- Exocrine pancreas #drnajeeb #drnajeeblectures #pancreas | 3arzfi3aYKI | 18s | Dr. Najeeb Lectures
+- Endocrinology Insights: Autoimmune Thyroid Disease #gravesdisease #thyroid #endocrinology #meded | CydLnYHPh6I | 69s | Armando Hasudungan
+- Endocrinology Insights: Glucocorticoids #glucocorticoids  #endocrinology  #meded  #physiology | G1iszps57Jc | 65s | Armando Hasudungan
+- Beta Cell In Pancreas #drnajeeb #Pancreas  #shortvideo | K5WrPKOeuwc | 23s | Dr. Najeeb Lectures
+- Hypothalamic Pituitary Thyroid Axis (regulation, TRH, TSH, thyroid hormones T3 and T4) | KzM8BiSnKQM | 296s | Armando Hasudungan
+- Clinical update: PCOS is now PMOS! | SRdPGPoWmKo | 73s | Osmosis from Elsevier
+- Understanding Acromegaly | U5VVSCVJt_w | 356s | Zero To Finals
+- Endocrinology Insights: Toxic Thyroid Nodules  #thyroid  #hyperthyroidism  #meded  #endocrinology | ZtwncOhNJ_E | 60s | Armando Hasudungan
+- Endocrinology Insights: Thyroid Hormone Regulation #endocrinology  #TSH #TRH  #physiology  #meded | qlHQJ8I4PRk | 59s | Armando Hasudungan
+- Endocrine pancreas #drnajeeb #drnajeeblectures #shortvideo | wMuy3ni5lvc | 29s | Dr. Najeeb Lectures
+- Clinical Cuts: Endocrine system anatomy & physiology | zj0TW3xBqPc | 57s | Osmosis from Elsevier
+### ent (6)
+- Understanding Ménière’s Disease | 4YVfa1JFhu0 | 316s | Zero To Finals
+- Nasal Polyps - causes, symptoms, diagnosis, treatment, pathology | 6ebnqWV9KUk | 280s | Osmosis from Elsevier
+- Air-filled spaces, vital functions — and key anatomy behind common ENT problems👃🦴#nasalcavity #sinus | GYdINU3SEZg | 58s | Armando Hasudungan
+- Understanding Cholesteatomas | WIgwxRo_k1s | 251s | Zero To Finals
+- Anatomy - Ear Overview | qYv9V2qna6I | 319s | Armando Hasudungan
+- Allergic Rhinitis - causes, symptoms, diagnosis, treatment, pathology | rh2p3KkgGiM | 328s | Osmosis from Elsevier
+### forensic (1)
+- Donor Alliance - Brain Death | FwyjevL-el4 | 343s | Osmosis from Elsevier
+### medicine (8)
+- Celiac disease | 0fvLZ5Ct9DU | 53s | Osmosis from Elsevier
+- What is gluten? | Gastrointestinal system diseases | NCLEX-RN | Khan Academy | 25mxf_xUqDQ | 289s | khanacademymedicine
+- Iron deficiency anemia - an Osmosis Preview | 6RbuFyt5Wpo | 80s | Osmosis from Elsevier
+- Parkinson's disease - an Osmosis Preview | 8rLVU51Oeh0 | 72s | Osmosis from Elsevier
+- Understanding Guillain-Barré Syndrome | KUEunZYZgII | 344s | Zero To Finals
+- Cluster Headaches | PrbIkzAX5xc | 236s | Zero To Finals
+- Achalasia (Year of the Zebra) | coHQ3UPqvkw | 299s | Osmosis from Elsevier
+- What is Anasarca.        #drnajeeb #drnajeeblectures #biology #mbbs #shortvideo #shorts | emv4anIbEEs | 26s | Dr. Najeeb Lectures
+### microbiology (22)
+- Immunology Insights: Why does your body need these 3 Cells?  #granulocytes #immunology #meded | 0deXlJiJN-s | 81s | Armando Hasudungan
+- Immunology Insights: How does your Blood form a Clot? #coagulation #bloodclots  #haematology  #meded | 4MxBRa6afKY | 81s | Armando Hasudungan
+- Cerebritis And Cerebral Abscess #drnajeeb #drnajeeblectures #shortvideostatus | A0zv88cBQ-4 | 44s | Dr. Najeeb Lectures
+- Immunology Insights: Serum Sickness #TypeIIIHypersensitivity #ImmuneComplexes #immunology #meded | BmbNqmE2Ogs | 58s | Armando Hasudungan
+- Neisseria meningitidis - an Osmosis Preview | FLV3YUtF0cA | 77s | Osmosis from Elsevier
+- Immunology Insights: Granulocytes #granulocytes #immunology  #neutrophils  #basophils #eosinophils | HsEiKjOjBww | 58s | Armando Hasudungan
+- Causes of viral hepatitis #drnajeeb #shortvideo #hepatitis_treatment | LfrPMhQQQug | 40s | Dr. Najeeb Lectures
+- Clostridium perfringens - an Osmosis Preview | MjaALWUq9hA | 85s | Osmosis from Elsevier
+- Immunology Insights: Complement Proteins #immunology #liver #meded #innateimmunity #macrophages | S7aUm8VGLuU | 57s | Armando Hasudungan
+- Mycobacterium leprae - an Osmosis Preview | S_dcF0SPYrw | 78s | Osmosis from Elsevier
+- Chronic leukemia | T5BSaproS7Y | 42s | Osmosis from Elsevier
+- When immune cells go into overdrive, inflammation takes hold 🔥⚡ #rheumatoidarthritis  #meded | U2FgeQejOxQ | 63s | Armando Hasudungan
+- Clinical Cuts: Cytokines | YcQS3r-IRZE | 51s | Osmosis from Elsevier
+- Immunology Insights: What Causes Low Platelets?  #thrombocytopenia  #platelets #haematology  #meded | bLP6W4PU--8 | 57s | Armando Hasudungan
+- Zoonotic influenzas - causes, symptoms, diagnosis, treatment, pathology | c4Cw1o27uY8 | 322s | Osmosis from Elsevier
+- Immunology Insights: Lymphocyte Development #TCells  #adaptiveimmunity  #meded #immunology | fpeSDA_Ieec | 62s | Armando Hasudungan
+- Immunology Insights: How do Immune Complexes damage Vessels?  #vasculitis  #immunology #meded | j5GUTa6EGTM | 76s | Armando Hasudungan
+- Immunology Insights: Interleukin-6 #interleukin6 #immunology  #meded  #inflammation #CRP #medicine | m27H-h3NAPI | 66s | Armando Hasudungan
+- Pseudomonas aeruginosa - an Osmosis Preview | r2RQmpL5bTc | 81s | Osmosis from Elsevier
+- Mumps - symptoms, diagnosis, treatment, pathology | s3ACcn8IWFc | 345s | Osmosis from Elsevier
+- Tiny cells, complex design — that’s bacterial structure at work 🦠🔬 #microbiology #bacteria  #meded | swanp2YjCCY | 65s | Armando Hasudungan
+- Adenovirus - an Osmosis Preview | vG3ZOSfDIgU | 84s | Osmosis from Elsevier
+### obstetrics (7)
+- Embrology - Day 0 7 Fertilization, Zygote, Blastocyst | EwTZ1fypivg | 240s | Armando Hasudungan
+- Female reproductive system | Reproduction | Biology class 10 | Khan Academy | LjwqNB-WDZE | 327s | Khan Academy India - English
+- Gestation | Behavior | MCAT | Khan Academy | _-1m1GsuH1M | 265s | khanacademymedicine
+- Childbirth | Reproduction | Class 10 | Biology | Science | Khan Academy | em3peMqo3so | 196s | Khan Academy India - English
+- Pregnancy | k5FVvOYdHNc | 35s | Osmosis from Elsevier
+- Ovarian cancer (Year of the Zebra) | vh56SbZoLLQ | 241s | Osmosis from Elsevier
+- Placenta previa - causes, symptoms, diagnosis, treatment, pathology | xnRIF8SDYf8 | 236s | Osmosis from Elsevier
+### ophthalmology (7)
+- Why Is the Cornea Clear But the Sclera Isn't? 👁️ | 1lRuU85CWmA | 53s | Dr. Najeeb Lectures
+- Waldeyer’s Ring | 3OW69jo3CCY | 53s | Dr. Najeeb Lectures
+- Causes of Ptosis Part 02 #drnajeeblectures #drnajeeb #shortvideo | 710WyNZKYE8 | 37s | Dr. Najeeb Lectures
+- Papilledema Part 02 #drnajeeb #drnajeeblectures #youtubeshorts | 9PFE0TsEj8Y | 39s | Dr. Najeeb Lectures
+- Causes Of Ptosis Part 01 #drnajeeblectures #drnajeeb #shortvideo | KbB-gVG7AKY | 52s | Dr. Najeeb Lectures
+- Neurology Insights: The Stroke that Affects your Eye and Body #webersyndrome #stroke #neurology | MLxqB5EFCHI | 69s | Armando Hasudungan
+- Blindness | Ss0KDFWIcmU | 19s | Osmosis from Elsevier
+### orthopaedics (6)
+- Osteoarthritis vs Rheumatoid Arthritis🦴🔥What’s the Real Difference?#arthritisawareness  #jointhealth | 8igSAjLmCo4 | 52s | Armando Hasudungan
+- Orthopaedics Insights: How does rheumatoid arthritis damage joints? #rheumatoidarthritis #meded | 9rjyEO01yRg | 55s | Armando Hasudungan
+- Ankylosing spondylitis (Year of the Zebra 2024) | Dso5p9RoyWM | 276s | Osmosis from Elsevier
+- Outer elbow pain from overuse? That’s tennis elbow at work 🎾💥 #tenniselbow  #elbowpain #meded | VIRHmDPEavg | 43s | Armando Hasudungan
+- Broken bone, complex healing — and serious complications if infection sets in🦴⚠️#bonefracture #meded | sHnbKTREpTE | 63s | Armando Hasudungan
+- Understanding Reactive Arthritis | snjGL2x6Eus | 325s | Zero To Finals
+### paediatrics (8)
+- Neurology Insights: Cerebral Palsy  #cerebralpalsy  #neurology  #pediatrics  #braininjury  #meded | 5j8FFZrG0VY | 73s | Armando Hasudungan
+- Definition of Jaundice | 8gCCq4xDhHo | 48s | Dr. Najeeb Lectures
+- Necrotizing enterocolitis (Year of the Zebra 2024) | EWA7MeqRCFo | 298s | Osmosis from Elsevier
+- John: Cerebral Palsy | Babinski sign #shorts | QKqgUBzWXQo | 14s | Ninja Nerd
+- Neuroblastoma (Year of the Zebra 2024) | T3D-EV_KycE | 307s | Osmosis from Elsevier
+- Hirschsprung disease (Year of the Zebra) | a5DYkOJEpZ8 | 325s | Osmosis from Elsevier
+- Breast Milk Jaundice #drnajeeb #jaundice #shortvideo | fZDjG9eam8I | 60s | Dr. Najeeb Lectures
+- Physiologic Jaundice of New Born | oe68s6t0_M8 | 60s | Dr. Najeeb Lectures
+### pathology (12)
+- Biliary atresia - causes, symptoms, diagnosis, treatment & pathology | 0kB9XkT6vv0 | 176s | Osmosis from Elsevier
+- When growth control fails, cancer pathways take over🧬⚠️ #oncogenetics #cancerbiology  #meded | 7HbKgHn0SiA | 57s | Armando Hasudungan
+- Vascular tumors (kaposi, hemangioma, angiosarcoma) - causes & symptoms | Bq4gdno-fVU | 278s | Osmosis from Elsevier
+- Acute pyelonephritis (urinary tract infection) - causes, symptoms & pathology | VXFRWFHx6tA | 318s | Osmosis from Elsevier
+- Lupus nephritis - causes, symptoms, diagnosis, treatment, pathology | Yl2RvydEOU8 | 327s | Osmosis from Elsevier
+- Potter sequence (oligohydramnios) - causes, symptoms, diagnosis, treatment, pathology | bSoR_GEMdc4 | 212s | Osmosis from Elsevier
+- Myasthenia gravis - causes, symptoms, treatment, pathology | bYGxGdu9MsQ | 337s | Osmosis from Elsevier
+- Periapical lesions - causes, symptoms, diagnosis, treatment, pathology | cSSSUwUh0Qo | 326s | Osmosis from Elsevier
+- Ventricular septal defect (VSD) - repair, causes, symptoms & pathology | e7ObXrdtXek | 242s | Osmosis from Elsevier
+- Polycythemia vera - causes, symptoms, diagnosis, treatment, pathology | jFxCZ91sDpI | 308s | Osmosis from Elsevier
+- Mesothelioma - causes, symptoms, diagnosis, treatment, pathology | t5ybpT0rUO0 | 276s | Osmosis from Elsevier
+- Horner's Syndrome Sympathetic Nerve Pathway | Pathology | twkeqjEK4gA | 116s | Dr. Najeeb Lectures
+### pharmacology (7)
+- Beta Lactamases  #drnajeeb #drnajeeblectures #shortvideostatus | HfaLiFvOAak | 24s | Dr. Najeeb Lectures
+- Clinical Cuts: Pharmacokinetics, Drug Absorption (Pt. II) | USMLE Pharmacology | QkVEc_Pngz4 | 44s | Osmosis from Elsevier
+- Cell wall Active Agents #drnajeeb #drnajeeblectures #shortvideo | X4uriJI-L80 | 39s | Dr. Najeeb Lectures
+- Gram Positive vs Gram Negative Cell Wall #drnajeeb #drnajeeblectures #bacterialcellwall | Y_IGxsYI7qg | 57s | Dr. Najeeb Lectures
+- Extended Spectrum Penicillins #drnajeeb #drnajeeblectures #shortvideostatus | g0bmSF9R7Oo | 29s | Dr. Najeeb Lectures
+- Cell wall Active Agents MOA #drnajeeb #drnajeeblectures #shortvideostatus | nR-FWAB8JnI | 44s | Dr. Najeeb Lectures
+- Clinical Cuts: Pharmacokinetics, Drug Absorption (Pt. I) | USMLE Pharmacology | t68rxcHXoCY | 54s | Osmosis from Elsevier
+### physiology (6)
+- Powerful acid, tightly controlled — that’s gastric physiology at work 🔥🫃 #gastricacid #meded | Io3RnT0hInk | 67s | Armando Hasudungan
+- When oxygen meets hemoglobin, the journey begins 🩸⚡ #hemoglobin #oxygentransport #meded | Q16pc31gOqU | 54s | Armando Hasudungan
+- Call me the Na+/K+ pump | bG7HSOu_LFE | 8s | Osmosis from Elsevier
+- Orthopaedics Insights: What makes your muscles contract? #musclecontraction  #acetylcholine #meded | f10DfVzlX0w | 68s | Armando Hasudungan
+- Neurology Insights: What makes your muscles contract? #neurology #physiology #musclecontraction | oEe6AgfYtfc | 63s | Armando Hasudungan
+- Cardiovascular system anatomy & physiology | pPNbVkF0MGw | 28s | Osmosis from Elsevier
+### psychiatry (6)
+- Vascular dementia - causes, symptoms, diagnosis, treatment, pathology | 5_RwXXhdpSg | 318s | Osmosis from Elsevier
+- Introduction to mental disorders | Behavior | MCAT | Khan Academy | FxPXC8t-2ls | 296s | khanacademymedicine
+- Piaget's stages of cognitive development | Processing the Environment | MCAT | Khan Academy | Jt3-PIC2nCs | 351s | khanacademymedicine
+- Three practical mental health tips for med students | PAiMiJY3h80 | 84s | Osmosis from Elsevier
+- Schizophrenia symptoms | Mental health | NCLEX-RN | Khan Academy | dU_rYyPGYiE | 327s | khanacademymedicine
+- What are dementia and Alzheimer's | Mental health | NCLEX-RN | Khan Academy | xUSpHmvW14c | 283s | khanacademymedicine
+### renal (8)
+- When your bladder isn’t full, your body sends slow signals🚻 #bladderfunction #neurophysiology #meded | 659CLEc-mPA | 67s | Armando Hasudungan
+- Renal agenesis (unilateral, bilateral, oligohydramnios) - causes, symptoms & pathology | HIgpfTaUt94 | 299s | Osmosis from Elsevier
+- Haemolytic Uraemic Syndrome | KA1vtqBtKeo | 230s | Zero To Finals
+- Posterior urethral valve (PUV) - causes, symptoms, diagnosis, treatment, pathology | pOtBGB9xCfo | 293s | Osmosis from Elsevier
+- Focal Segmental Glomerulosclerosis - causes, symptoms, diagnosis, treatment, pathology | qNuGqvDdVko | 344s | Osmosis from Elsevier
+- Kidney stones (nephrolithiasis) - an Osmosis Preview | szrqihux0wc | 80s | Osmosis from Elsevier
+- The role of the kidney in acid-base balance - renal physiology | vdNwdC7eCT0 | 352s | Osmosis from Elsevier
+- Changing glomerular filtration rate | Renal system physiology | NCLEX-RN | Khan Academy | x0pFo1RxTzM | 265s | khanacademymedicine
+### respiratory (9)
+- Pulmonology Insights: How does pneumocystis cause lung damage? #pneumocystis #respiratory #meded | 5o2Zm5gVanI | 59s | Armando Hasudungan
+- Clinical Cuts: Respiratory system anatomy & physiology | ACH3jXgkomI | 33s | Osmosis from Elsevier
+- Streptococcus pneumoniae - an Osmosis Preview | LiV50aLHnjw | 83s | Osmosis from Elsevier
+- Pulmonology Insights: What Causes the Whooping Sound? #pertussis       #whoopingcough #meded | PvN5j2Z-zyM | 68s | Armando Hasudungan
+- Tight airways, trapped airflow — that’s asthma in action 🌬️⚠️ #asthma  #respiratorymedicine #meded | URo28bisxY4 | 58s | Armando Hasudungan
+- Pulmonology Insights: Chronic Bronchitis vs Emphysema #copd  #chronicbronchitis  #emphysema  #meded | YPNR1L6ztO8 | 80s | Armando Hasudungan
+- Pulmonology Insights: What happens inside your airways during asthma? #asthma #respiratory #meded | bC7GFEBwDfM | 50s | Armando Hasudungan
+- Pneumonia Overview | ko2C_F03XKU | 207s | Armando Hasudungan
+- Klebsiella pneumoniae - an Osmosis Preview | uOC9blp86as | 91s | Osmosis from Elsevier
+### surgery (6)
+- Stroke (for patients & families) | IpgFWK3qkhk | 352s | Osmosis from Elsevier
+- Gastroenterology Insights: Acute Pancreatitis Explained #acutepancreatitis #gastroenterology #meded | J8EMwn0Ps3s | 68s | Armando Hasudungan
+- Acute cholecystitis | JKYxwUUyBq8 | 33s | Osmosis from Elsevier
+- Ischemic Stroke | Lacunar Infarct #shorts | XGaEFSsK9PM | 56s | Ninja Nerd
+- Burns - an Osmosis Preview | ZADAI1gjxno | 83s | Osmosis from Elsevier
+- Ischemic Stroke | Middle Cerebral Artery Stroke (MCA) #shorts | _Dd9vpjXIE0 | 57s | Ninja Nerd
