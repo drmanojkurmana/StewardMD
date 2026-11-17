@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "sgm-autoimmune-cholestatic",
+ "subject": "ss-general-medicine",
+ "title": "Autoimmune and cholestatic liver disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Autoimmune hepatitis** (AIH, immune mediated hepatocellular inflammation) clusters in young women, while **primary biliary cholangitis** (PBC, small duct destruction) clusters in middle aged women. **Primary sclerosing cholangitis** (PSC, large duct fibrosis) clusters in men with ulcerative colitis. Each disease carries a characteristic autoantibody and a cholestatic or hepatocellular enzyme pattern that guides testing.",
+   "say": "Autoimmune hepatitis is immune mediated inflammation of liver cells which clusters in young women often. Primary biliary cholangitis involves destruction of small bile ducts and clusters in middle aged women. Primary sclerosing cholangitis involves fibrosis of large bile ducts and clusters in men with ulcerative colitis. Each disease has a characteristic autoantibody and a typical enzyme pattern which guides further testing well.",
+   "vis": null
+  },
+  {
+   "tx": "**Autoimmune hepatitis type 1** peaks at ages 20 to 40 and is associated with **antinuclear antibody** and anti smooth muscle antibody. **Type 2** affects children and young adults and carries **anti liver kidney microsomal antibody**. Both types show raised immunoglobulin G and immune mediated interface hepatitis. Another autoimmune disease such as thyroid disease or vitiligo is present in about half of patients.",
+   "say": "Autoimmune hepatitis type one peaks in young adults and is associated with antinuclear antibody strongly. Type two affects children and carries anti liver kidney microsomal antibody clearly. Both types show raised immunoglobulin G and immune mediated interface hepatitis on biopsy. Another autoimmune disease such as thyroid disease is present in about half of affected patients often.",
+   "vis": null
+  },
+  {
+   "tx": "Loss of self tolerance lets **autoreactive T cells** attack hepatocytes and bile duct epithelium without control. Plasma cell rich infiltrates and interface hepatitis with rosettes are typical of autoimmune hepatitis. **Bile duct injury** with granulomas and ductopenia is typical of primary biliary cholangitis. **Periductal fibrosis** with onion skin layers and beading on cholangiography is typical of sclerosing cholangitis.",
+   "say": "Loss of self tolerance allows autoreactive T cells to attack hepatocytes without proper control. Plasma cell rich infiltrates and interface hepatitis with rosettes are typical of autoimmune hepatitis. Bile duct injury with granulomas and ductopenia is typical of primary biliary cholangitis clearly. Periductal fibrosis with onion skin layers is typical of sclerosing cholangitis on imaging.",
+   "vis": null
+  },
+  {
+   "tx": "**Pruritus** dominates primary biliary cholangitis, often starting on palms and soles and worsening at night. **Xanthelasma** (cholesterol deposits on eyelids) and hyperpigmentation reflect chronic cholestasis, while osteoporosis follows fat soluble vitamin loss. **Sclerosing cholangitis** presents with waxing jaundice, fever and **bacterial cholangitis**, and ulcerative colitis is present in about 70% of cases.",
+   "say": "Pruritus dominates primary biliary cholangitis and often starts on the palms and soles of patients. Xanthelasma and hyperpigmentation are features of chronic cholestasis in these patients. Sclerosing cholangitis presents with waxing jaundice and fever and bacterial cholangitis episodes. Ulcerative colitis is present in about seventy percent of sclerosing cholangitis cases overall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary biliary cholangitis",
+     "points": [
+      "Middle aged women",
+      "Small bile duct loss",
+      "AMA positive",
+      "Itching is dominant"
+     ]
+    },
+    "right": {
+     "title": "Sclerosing cholangitis",
+     "points": [
+      "Young men with colitis",
+      "Large bile duct fibrosis",
+      "pANCA often positive",
+      "Cholangitis episodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fatigue** and **dry eyes with dry mouth** (sicca symptoms) affect about 2/3 of primary biliary cholangitis patients. **Sclerosing cholangitis** patients often have dominant strictures that cause worsening cholestasis. **10 to 20%** of sclerosing patients develop **cholangiocarcinoma** within 5 years, heralded by worsening jaundice and weight loss. Autoimmune hepatitis presents with fatigue, jaundice and arthralgia like acute hepatitis.",
+   "say": "Fatigue and dry eyes with dry mouth affect about two thirds of patients with primary biliary cholangitis. Dominant strictures in sclerosing cholangitis cause worsening cholestasis and recurrent cholangitis. About ten to twenty percent of sclerosing patients develop cholangiocarcinoma within five years. Worsening jaundice and weight loss are warning features for cholangiocarcinoma in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "The **first test** is transaminases with alkaline phosphatase and immunoglobulin G plus antinuclear antibody screening. **Antimitochondrial antibody** is positive in 95% of primary biliary cholangitis. **Magnetic resonance cholangiopancreatography** (MRCP) showing multifocal beaded ducts is the gold standard for sclerosing cholangitis. **Liver biopsy** confirms interface hepatitis in autoimmune disease and florid duct lesions in cholangitis.",
+   "say": "The first test has transaminases with alkaline phosphatase and immunoglobulin G levels. Antimitochondrial antibody is positive in ninety five percent of primary biliary cholangitis cases. Magnetic resonance cholangiopancreatography showing multifocal beaded ducts is the gold standard for sclerosing cholangitis. Liver biopsy confirms interface hepatitis in autoimmune disease and florid duct lesions in cholangitis clearly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Liver enzymes and IgG"
+     },
+     {
+      "id": "b",
+      "label": "Autoantibody panel"
+     },
+     {
+      "id": "c",
+      "label": "MRCP for beaded ducts"
+     },
+     {
+      "id": "d",
+      "label": "Liver biopsy confirmation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immunosuppression for autoimmune hepatitis starts with **prednisolone** at 60 mg daily with rapid taper, plus **azathioprine** at 1.5 to 2 mg/kg. **Ursodeoxycholic acid** at 13 to 15 mg/kg daily is first line for primary biliary cholangitis and improves transplant free survival. **Obeticholic acid** is a second line farnesoid receptor agonist for inadequate responders. **Cholestyramine** is the first line drug for cholestatic pruritus.",
+   "say": "Prednisolone at sixty milligrams daily is the first line treatment for autoimmune hepatitis. Azathioprine at one point five to two milligrams per kilogram is added as steroid sparing therapy. Ursodeoxycholic acid at thirteen to fifteen milligrams per kilogram daily is first line for primary biliary cholangitis. Cholestyramine is the first line drug for cholestatic pruritus in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "First line drug"
+    ],
+    "rows": [
+     [
+      "Autoimmune hepatitis",
+      "Prednisolone plus azathioprine"
+     ],
+     [
+      "Primary biliary cholangitis",
+      "Ursodeoxycholic acid"
+     ],
+     [
+      "Sclerosing cholangitis",
+      "No proven drug therapy"
+     ],
+     [
+      "Cholestatic pruritus",
+      "Cholestyramine first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sclerosing cholangitis has **no proven medical therapy** and steroids or ursodeoxycholic acid do not improve survival. **Dominant strictures** need endoscopic dilation and surveillance for cholangiocarcinoma. Newer guidance accepts **seladelpar** and **elafibranor** as second line options in primary biliary cholangitis after inadequate ursodeoxycholic response. Definitive care in all three advanced diseases is **liver transplantation**.",
+   "say": "Sclerosing cholangitis has no proven medical therapy which improves survival in patients. Dominant strictures need endoscopic dilation and regular surveillance for cholangiocarcinoma development. Newer options seladelpar and elafibranor help selected patients with primary biliary cholangitis. Liver transplantation is definitive care in advanced disease of all three types overall.",
+   "vis": null
+  },
+  {
+   "tx": "Relapse after steroid withdrawal occurs in about 70% of autoimmune hepatitis within 1 year. **Overlap syndrome** (autoimmune hepatitis with sclerosing cholangitis) is commonest in children and carries a worse prognosis. **IgG4 related sclerosing cholangitis** mimics primary sclerosing disease but responds dramatically to steroids. **Cholestasis** in ulcerative colitis with normal bile ducts should still raise suspicion of sclerosing cholangitis.",
+   "say": "Relapse after steroid withdrawal occurs in about seventy percent of patients within one year. Overlap syndrome with sclerosing cholangitis is commonest in children and carries worse prognosis. IgG four related sclerosing cholangitis mimics primary sclerosing disease but responds to steroids. Cholestasis in ulcerative colitis with normal bile ducts should still raise suspicion of sclerosing disease.",
+   "vis": null
+  },
+  {
+   "tx": "Antinuclear antibody alone does not prove autoimmune hepatitis because low titres appear in healthy people. **Antimitochondrial antibody** positive cholestasis in a middle aged woman is primary biliary cholangitis until proven otherwise. **Pruritus ladder** is cholestyramine first, then colesevelam, then naltrexone, then sertraline. **Fecal calprotectin** is raised with colitis activity and should not be confused with liver cause.",
+   "say": "Antinuclear antibody alone does not prove autoimmune hepatitis in patients. Antimitochondrial antibody positive cholestasis in a middle aged woman suggests primary biliary cholangitis strongly. The pruritus ladder starts with cholestyramine and then adds colesevelam and naltrexone. Fecal calprotectin is raised with colitis activity and should not be confused with hepatic causes.",
+   "vis": null
+  },
+  {
+   "tx": "Use this **revision table** for the three autoimmune and cholestatic diseases that dominate viva questions. It fixes antibody hallmarks, imaging gold standards, first line drugs and malignancy risks. Memorise the pattern of young woman, middle aged woman and young man with colitis before answering.",
+   "say": "This revision table is the hallmark summary of three autoimmune and cholestatic liver diseases. Autoimmune hepatitis has antinuclear antibody and responds to prednisolone with azathioprine. Primary biliary cholangitis has antimitochondrial antibody and responds to ursodeoxycholic acid. Sclerosing cholangitis has beaded ducts on magnetic resonance imaging and needs surveillance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Hallmark finding"
+    ],
+    "rows": [
+     [
+      "Autoimmune hepatitis type 1",
+      "ANA and anti smooth muscle antibody"
+     ],
+     [
+      "Autoimmune hepatitis type 2",
+      "Anti liver kidney microsomal antibody"
+     ],
+     [
+      "Primary biliary cholangitis",
+      "Antimitochondrial antibody M2 type"
+     ],
+     [
+      "Sclerosing cholangitis imaging",
+      "Beaded ducts on MRCP"
+     ],
+     [
+      "Autoimmune hepatitis first line",
+      "Prednisolone plus azathioprine"
+     ],
+     [
+      "PBC first line",
+      "Ursodeoxycholic acid fifteen milligrams"
+     ],
+     [
+      "Cholestatic pruritus ladder",
+      "Cholestyramine is first"
+     ],
+     [
+      "PSC colitis link",
+      "Ulcerative colitis in seventy percent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

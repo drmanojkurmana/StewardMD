@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "module": "sgm-diarrhoea",
+ "subject": "ss-general-medicine",
+ "title": "Diarrhoea and Intestinal Infections",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Diarrhoea** is passage of loose stools more than 3 times daily with increased stool volume. **Acute diarrhoea** lasts less than 14 days, persistent forms last 2 to 4 weeks and chronic forms persist beyond 4 weeks. Children younger than 5 years and older adults carry the highest mortality. **Dehydration severity** decides admission and fluid choice.",
+   "say": "Diarrhoea is defined by loose stools passed more than three times daily with increased stool volume. Acute diarrhoea is defined by duration less than two weeks and chronic diarrhoea is defined by duration beyond four weeks. Children younger than five years and older adults have the highest mortality from this illness. Dehydration severity should decide admission and the choice of fluid replacement strategy.",
+   "vis": null
+  },
+  {
+   "tx": "Causes split into watery secretory, inflammatory dysentery and fatty malabsorptive patterns. **Vibrio cholerae** and enterotoxigenic Escherichia coli produce rice water stools. **Shigella, Campylobacter and Entamoeba histolytica** cause bloody mucoid stools with fever. **Rotavirus, norovirus, Giardia lamblia and Clostridioides difficile** cluster in young children, travellers and recent antibiotic exposure.",
+   "say": "Diarrhoea patterns are classified as watery secretory, inflammatory dysentery or fatty malabsorptive types. Vibrio cholerae and enterotoxigenic Escherichia coli produce rice water stools in patients. Shigella, Campylobacter and Entamoeba histolytica cause bloody mucoid stools with fever and tenesmus. Rotavirus, norovirus, Giardia and Clostridioides difficile cluster in young children and antibiotic exposed patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Stool",
+     "Key organisms"
+    ],
+    "rows": [
+     [
+      "Secretory",
+      "Rice water voluminous",
+      "Cholera, enterotoxigenic E coli"
+     ],
+     [
+      "Inflammatory",
+      "Bloody mucoid fever",
+      "Shigella, Campylobacter, Entamoeba"
+     ],
+     [
+      "Fatty",
+      "Greasy foul floating",
+      "Giardia, tropical sprue"
+     ],
+     [
+      "Toxin mediated",
+      "Watery vomiting",
+      "Norovirus, rotavirus, Staph aureus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Secretory toxins** raise cyclic AMP and chloride secretion while inhibiting absorption. **Invasive organisms** destroy mucosa through cytotoxins and inflammatory infiltrate. **Osmotic diarrhoea** follows lactose intolerance or magnesium containing antacids. **Bile acid malabsorption** causes watery diarrhoea after ileal resection or cholecystectomy. Stool frequency and nocturnal symptoms help separate secretory from functional forms.",
+   "say": "Secretory toxins increase chloride secretion and inhibit absorption in the small bowel mucosa. Invasive organisms cause destruction of mucosa through cytotoxins and inflammatory infiltration of the wall. Osmotic diarrhoea occurs after lactose intolerance or magnesium containing antacids in patients. Bile acid malabsorption causes watery diarrhoea after ileal resection or gallbladder removal.",
+   "vis": null
+  },
+  {
+   "tx": "**Cholera** presents with painless profuse watery diarrhoea, vomiting and rapid circulatory collapse. **Shigellosis** causes high fever, abdominal cramps, tenesmus and small volume bloody stools. **Enterohaemorrhagic E coli O157 colon** predisposes to haemolytic uraemic syndrome. **Clostridioides difficile** follows antibiotics with foul watery diarrhoea and pseudomembranes on colonoscopy. **Signs of severe dehydration** include sunken eyes, poor skin turgor and thready pulse.",
+   "say": "Cholera presents with painless profuse watery diarrhoea and rapid circulatory collapse without fever. Shigellosis causes high fever, cramps, tenesmus and small volume bloody stools in patients. Enterohaemorrhagic Escherichia coli infection can cause haemolytic uraemic syndrome in children. Clostridioides difficile follows antibiotics with foul watery diarrhoea and colonic pseudomembranes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cholera pattern",
+     "points": [
+      "Painless rice water stool",
+      "No fever no blood",
+      "Rapid dehydration"
+     ]
+    },
+    "right": {
+     "title": "Dysentery pattern",
+     "points": [
+      "Bloody mucoid small volume",
+      "High fever cramps tenesmus",
+      "Faecal leukocytes present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stool microscopy and culture** remain the reference standard for bacterial pathogens. **Multiplex polymerase chain reaction** panels detect toxin genes and Clostridioides difficile nucleic acid rapidly. First bedside tests include stool routine examination, faecal leukocytes and occult blood. **Electrolytes, renal function and venous blood gas** guide fluid resuscitation in severe dehydration. Stool electrolytes demonstrate the osmotic gap when the cause remains unclear.",
+   "say": "Stool microscopy and culture remain the reference standard for bacterial pathogens in evaluation. Multiplex polymerase chain reaction panels can detect toxin genes and Clostridioides difficile nucleic acid rapidly. First bedside tests should include stool routine examination, faecal leukocytes and occult blood testing. Electrolytes, renal function and blood gas analysis guide fluid resuscitation in severe dehydration.",
+   "vis": null
+  },
+  {
+   "tx": "**Low osmolarity oral rehydration solution** is first line for most dehydrated patients. The **World Health Organization formula** contains sodium 75 millimoles per litre with glucose and potassium. **Zinc supplementation 10 to 20 mg** daily for 10 days reduces duration in children. Intravenous Ringer lactate is reserved for shock or persistent vomiting. Antimotility agents are avoided in dysentery and suspected Shiga toxin disease.",
+   "say": "Low osmolarity oral rehydration solution is first line therapy for most dehydrated patients. The World Health Organization formula contains sodium, glucose and potassium in specified concentrations. Zinc supplementation for ten days can reduce duration of diarrhoea in young children. Intravenous fluids are reserved for shock or persistent vomiting and antimotility agents should be avoided.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess dehydration ABC"
+     },
+     {
+      "id": "b",
+      "label": "Oral rehydration solution"
+     },
+     {
+      "id": "c",
+      "label": "Stool tests plus electrolytes"
+     },
+     {
+      "id": "d",
+      "label": "Antibiotics only if indicated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antibiotics are targeted by syndrome and severity rather than given routinely. **Azithromycin 500 mg** daily is preferred for dysentery and travellers diarrhoea. **Ciprofloxacin 500 mg** twice daily is an alternative where susceptibility allows. **Oral vancomycin 125 mg** 4 times daily treats Clostridioides difficile colitis. The **Infectious Diseases Society of America 2017 guideline** advises against antibiotics in suspected enterohaemorrhagic coli infection.",
+   "say": "Antibiotics should be targeted by syndrome and severity rather than given routinely to all patients. Azithromycin is preferred for dysentery and travellers diarrhoea in current guidelines. Ciprofloxacin is an alternative where susceptibility allows and severity warrants therapy. Oral vancomycin is used for Clostridioides difficile colitis and antibiotics should be avoided in suspected enterohaemorrhagic infection.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute kidney injury** and hypokalaemia are the commonest metabolic complications of profuse diarrhoea. **Haemolytic uraemic syndrome** presents with triad of haemolytic anaemia, thrombocytopenia and renal failure. **Toxic megacolon and perforation** complicate severe Clostridioides difficile colitis. Mortality is high in infants and elderly patients with delayed rehydration. Early oral rehydration reduces deaths across all age groups.",
+   "say": "Acute kidney injury and hypokalaemia are the commonest metabolic complications of profuse diarrhoea. Haemolytic uraemic syndrome presents with haemolytic anaemia, thrombocytopenia and renal failure together. Toxic megacolon and perforation can complicate severe Clostridioides difficile colitis in patients. Mortality is high in infants and elderly patients when rehydration is delayed and early oral rehydration reduces deaths.",
+   "vis": null
+  },
+  {
+   "tx": "**Loperamide is contraindicated** in dysentery, Shiga toxin infection and severe colitis. **Rice water stool with hypokalaemia** should raise suspicion of cholera even without travel history. **Bloody diarrhoea with normal temperature** still requires consideration of enterohaemorrhagic coli. **Antibiotics for watery diarrhoea** without fever or blood offer little benefit and increase resistance. Clostridioides difficile testing is required in any hospital onset diarrhoea after antibiotics.",
+   "say": "Loperamide is contraindicated in dysentery, Shiga toxin infection and severe colitis in practice. Rice water stool with hypokalaemia should raise suspicion of cholera even without recent travel. Bloody diarrhoea with normal temperature still requires consideration of enterohaemorrhagic infection. Antibiotics for watery diarrhoea without fever or blood offer little benefit and increase resistance risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Travellers diarrhoea** is usually self limited and requires rehydration and food safety advice. **Persistent diarrhoea** beyond 14 days needs stool antigen, serology and evaluation for malabsorption. **Chronic watery diarrhoea** with weight loss suggests coeliac disease, microscopic colitis or bile acid malabsorption. Rectal examination and perianal inspection remain useful before invasive colonoscopy in dysentery.",
+   "say": "Travellers diarrhoea is usually self limited and it requires rehydration and food safety advice. Persistent diarrhoea beyond two weeks needs antigen testing and evaluation for malabsorption. Chronic watery diarrhoea with weight loss suggests coeliac disease or bile acid malabsorption in patients. Rectal examination remains useful before invasive colonoscopy in dysentery presentations.",
+   "vis": null
+  },
+  {
+   "tx": "Recall the **oral rehydration composition**, zinc dose, and Shiga toxin antibiotic warning. Cholera shows painless rice water stool while Shigella shows fever with tenesmus. **Haemolytic uraemic syndrome** follows enterohaemorrhagic infection and carries renal risk. Oral vancomycin is the standard for Clostridioides difficile colitis in current practice.",
+   "say": "Recall the oral rehydration composition and the zinc dosing used for children with diarrhoea. Cholera presents with painless rice water stool while Shigella presents with fever and tenesmus. Haemolytic uraemic syndrome follows enterohaemorrhagic infection and it carries significant renal risk. Oral vancomycin remains the standard therapy for Clostridioides difficile colitis in current practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Oral rehydration",
+      "Sodium seventy five millimoles per litre"
+     ],
+     [
+      "Zinc in children",
+      "Ten to twenty milligrams ten days"
+     ],
+     [
+      "Cholera stool",
+      "Painless rice water severe loss"
+     ],
+     [
+      "Avoid antibiotics",
+      "Suspected enterohaemorrhagic coli"
+     ],
+     [
+      "C difficile drug",
+      "Oral vancomycin one hundred twenty five milligrams"
+     ],
+     [
+      "Dysentery drug",
+      "Azithromycin five hundred milligrams daily"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

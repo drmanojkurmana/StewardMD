@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "sgm-functional-gi",
+ "subject": "ss-general-medicine",
+ "title": "Functional Gastrointestinal Disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Functional gastrointestinal disorders** (gut symptoms without structural damage) affect about 10 to 15% of adults. The **Rome IV criteria** require recurrent abdominal pain on at least 1 day per week during the past 3 months. **Irritable bowel syndrome** is the commonest form, followed by functional dyspepsia, constipation and diarrhoea.",
+   "say": "Functional gastrointestinal disorders are common conditions where pain and bowel symptoms occur without visible structural damage. The Rome criteria are based on pain frequency and symptom duration over several months. Irritable bowel syndrome is the commonest pattern and it should prompt careful exclusion of alarm features. Management is based on explanation and symptom control rather than repeated invasive testing.",
+   "vis": null
+  },
+  {
+   "tx": "No single cause explains **gut-brain axis dysfunction** (two way signalling between gut and brain). Common triggers include **post infectious sensitisation** after gastroenteritis, prior antibiotics, chronic stress, anxiety, depression and high intake of fermentable carbohydrates. **Low grade inflammation** and altered motility persist in a subset of patients after infection.",
+   "say": "The underlying mechanism involves disruption of communication between the gut and the brain in susceptible patients. Recent infection, antibiotic exposure, chronic stress and dietary factors are common triggers. Post infectious sensitisation is well described after bacterial gastroenteritis and it can persist for years. Inflammation and altered motility can remain abnormal even after the infection has resolved.",
+   "vis": null
+  },
+  {
+   "tx": "**Visceral hypersensitivity** (exaggerated pain sensing in gut wall) and **dysmotility** together explain most symptoms. Distension triggers pain at volumes that are normal in healthy controls. **Microbiome shifts**, bile acid malabsorption and food intolerance worsen bloating in selected patients. Symptoms fluctuate with meals, menses and psychological stress.",
+   "say": "Visceral hypersensitivity is present in many patients and it causes pain at normal distension volumes. Dysmotility with altered transit produces constipation, diarrhoea or alternating bowel habit. Microbiome changes and bile acid malabsorption can worsen bloating in selected patients. Symptoms often vary with meals, menstrual cycle and psychological stress in affected individuals.",
+   "vis": null
+  },
+  {
+   "tx": "**Irritable bowel syndrome** presents with pain related to defecation, change in stool form or frequency, bloating and urgency. Subtypes are constipation predominant, diarrhoea predominant, mixed and unclassified using **Bristol stool chart** proportions. Functional dyspepsia causes postprandial fullness and early satiety without burning or pain predominance. Alarm features must still be excluded on first presentation.",
+   "say": "Irritable bowel syndrome presents with pain that is related to defecation and change in stool form. Subtypes are classified by predominant stool pattern using the Bristol stool chart proportions. Functional dyspepsia presents with fullness and early satiety after meals. Alarm features such as weight loss and bleeding should prompt investigation before a functional label is applied.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Stool pattern",
+     "Typical drug"
+    ],
+    "rows": [
+     [
+      "IBS constipation",
+      "Hard lumpy stools",
+      "Linaclotide or fibre"
+     ],
+     [
+      "IBS diarrhoea",
+      "Loose watery stools",
+      "Loperamide"
+     ],
+     [
+      "IBS mixed",
+      "Alternating habit",
+      "Antispasmodic plus diet"
+     ],
+     [
+      "Functional dyspepsia",
+      "Fullness early satiety",
+      "Low dose amitriptyline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluation is limited after **red flag exclusion** (bleeding, anaemia, weight loss, family history). **Faecal calprotectin** and coeliac serology with tissue transglutaminase IgA are first line tests in diarrhoea predominant disease. **No routine colonoscopy** is needed in young patients with typical symptoms and no alarm features. Stool studies and imaging are reserved for atypical or progressive presentations.",
+   "say": "Evaluation should start with careful exclusion of red flag features such as bleeding and weight loss. Faecal calprotectin and coeliac serology are first line tests when diarrhoea predominates. Colonoscopy is not required routinely in young patients with typical symptoms. Stool studies and imaging should be reserved for atypical or progressive presentations.",
+   "vis": null
+  },
+  {
+   "tx": "Initial care emphasises **reassurance and explanation** of the gut-brain concept with regular exercise and sleep hygiene. **Low FODMAP diet** (low fermentable carbohydrate diet) for 4 to 6 weeks reduces bloating in many patients. **Soluble fibre** like psyllium improves constipation and stool form. **Peppermint oil** and antispasmodics such as hyoscine butylbromide relieve colicky pain.",
+   "say": "Initial care should emphasise reassurance and explanation of the gut brain concept for patients. Exercise and sleep hygiene can improve symptoms in many individuals over time. A low FODMAP diet for several weeks is associated with less bloating and gas. Soluble fibre can improve stool form and peppermint oil can relieve colicky pain in selected patients.",
+   "vis": null
+  },
+  {
+   "tx": "Secretory agents include **linaclotide 10 mcg** daily and **lubiprostone** for constipation predominant disease. **Loperamide 2 mg** as needed controls diarrhoea but is not used for pain. **Low dose amitriptyline 10 mg** at night helps pain and diarrhoea through central modulation. **Gut directed hypnotherapy** and cognitive behavioural therapy provide durable benefit. The **American College of Gastroenterology 2021 guideline** endorses this stepwise approach.",
+   "say": "Secretory agents such as linaclotide and lubiprostone are used for constipation predominant disease. Loperamide can control diarrhoea but it does not relieve abdominal pain effectively. Low dose amitriptyline can help pain and diarrhoea through central modulation of visceral signals. Gut directed hypnotherapy and cognitive behavioural therapy provide durable benefit and should be offered when available.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Explain reassurance diet fibre"
+     },
+     {
+      "id": "b",
+      "label": "Antispasmodic plus peppermint oil"
+     },
+     {
+      "id": "c",
+      "label": "Subtype secretory or loperamide"
+     },
+     {
+      "id": "d",
+      "label": "Amitriptyline and gut brain therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prognosis is reassuring because **malignant transformation is absent** and life expectancy remains normal. Morbidity comes from **psychological comorbidity** with anxiety, depression and somatic amplification. **Quality of life** loss can rival chronic organic disease during flares. Early explanation reduces unnecessary investigations and improves long term adherence to therapy.",
+   "say": "Prognosis is generally reassuring because malignant transformation does not occur in this condition. Morbidity is driven by psychological comorbidity and somatic amplification of symptoms. Quality of life loss can be significant during flares and it needs explicit support. Early explanation is associated with fewer unnecessary investigations and better long term adherence.",
+   "vis": null
+  },
+  {
+   "tx": "Differentiate functional disease from **inflammatory bowel disease** and coeliac disease before labelling. **Weight loss, night diarrhoea, fever, iron deficiency and family history** of colorectal cancer require organic work up. **Overlap with fibromyalgia, migraine and chronic fatigue** suggests central sensitisation. **Functional diarrhoea** lacks pain predominance and improves with loperamide.",
+   "say": "Functional disease should be distinguished from inflammatory bowel disease and coeliac disease before labelling. Weight loss, night diarrhoea, fever and iron deficiency require organic work up in evaluation. Overlap with fibromyalgia and chronic fatigue suggests central sensitisation in many patients. Functional diarrhoea lacks pain predominance and it can improve with loperamide therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Functional pattern",
+     "points": [
+      "Pain eases after defecation",
+      "Bloating with meals",
+      "Normal weight and bloods"
+     ]
+    },
+    "right": {
+     "title": "Organic pattern",
+     "points": [
+      "Night symptoms and fever",
+      "Weight loss or bleeding",
+      "Raised calprotectin or anaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Functional constipation** needs regular toilet routine, adequate fluid intake and fibre, with osmotic laxatives for persistent cases. **Rumination syndrome** and **cyclic vomiting** present with effortless regurgitation and stereotyped episodes. **Prokinetics** help selected diabetic or post viral dysmotility but are not first line generally. Faecal incontinence requires pelvic floor assessment rather than simple laxative use.",
+   "say": "Functional constipation requires regular toilet routine and adequate fibre intake in daily practice. Osmotic laxatives can help when symptoms persist despite lifestyle measures over time. Rumination syndrome and cyclic vomiting present with effortless regurgitation and stereotyped episodes. Faecal incontinence requires pelvic floor assessment rather than simple laxative use alone.",
+   "vis": null
+  },
+  {
+   "tx": "High yield recall covers **Rome pain threshold**, and the role of **faecal calprotectin**. Remember linaclotide dose, low dose amitriptyline effect, and the low FODMAP diet duration. Screening colonoscopy is not indicated for typical functional symptoms. Explanation itself is therapy and reduces anxiety driven amplification.",
+   "say": "High yield recall should include Rome pain thresholds and the role of faecal calprotectin in triage. Linaclotide dosing and low dose amitriptyline effects are frequently asked in examinations. Low FODMAP diet duration and reassurance principles are also important for vivas. Explanation itself is therapeutic and it reduces anxiety driven amplification of gut signals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Rome pain rule",
+      "One day per week for three months"
+     ],
+     [
+      "First tests",
+      "Calprotectin plus coeliac serology"
+     ],
+     [
+      "Constipation drug",
+      "Linaclotide ten micrograms daily"
+     ],
+     [
+      "Pain modulator",
+      "Amitriptyline ten milligrams nightly"
+     ],
+     [
+      "Diet",
+      "Low FODMAP four to six weeks"
+     ],
+     [
+      "No test",
+      "Routine colonoscopy in typical case"
+     ],
+     [
+      "Guideline",
+      "American College of Gastroenterology 2021"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

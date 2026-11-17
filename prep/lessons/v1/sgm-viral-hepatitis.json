@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "sgm-viral-hepatitis",
+ "subject": "ss-general-medicine",
+ "title": "Viral Hepatitis A to E",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**viral hepatitis** (infective inflammation of the liver by hepatitis viruses) is caused by five classic agents labelled A, B, C, D, and E. Transaminases often rise more than 1000 IU/L at the peak, then fall as the patient recovers. Incubation is about 15 to 50 days for A and E, and 45 to 160 days for B. Fulminant failure is uncommon but carries high mortality in pregnancy with E.",
+   "say": "Viral hepatitis is infective inflammation of the liver that is caused by five classic agents labelled A, B, C, D, and E. The liver enzymes often rise to more than a thousand units at the peak of the illness. Incubation is about fifteen to fifty days with A and E, and longer with B and C. Fulminant liver failure is uncommon but it can be fatal in pregnancy with E.",
+   "vis": null
+  },
+  {
+   "tx": "Hepatitis A and E travel by the **faecal oral** route (mouth, gut, liver) through contaminated food and water, and they seldom cause chronic disease. Hepatitis B travels by blood, sexual contact, and mother to child spread, with about 5% of adults becoming chronic carriers, while newborn infection becomes chronic in 90 to 95%. Hepatitis C spreads mainly by blood exposure and becomes chronic in 75 to 85%.",
+   "say": "Hepatitis A and E are spread by the faecal oral route through contaminated food and water. They seldom remain chronic and they usually resolve completely in most patients. Hepatitis B is spread by blood, sexual contact, and mother to child transmission. Hepatitis C is spread mainly by blood exposure and it usually becomes chronic in a large majority.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "A and E hepatitis",
+     "points": [
+      "Faecal oral spread",
+      "Seldom chronic disease",
+      "No vaccine for E",
+      "Travel and sanitation link"
+     ]
+    },
+    "right": {
+     "title": "B and C hepatitis",
+     "points": [
+      "Blood and sexual spread",
+      "Often chronic course",
+      "Vaccine exists for B only",
+      "Cancer and cirrhosis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Risk factors for B and C include transfusion before screening, **intravenous drug use** (injection drug use through shared needles), unsafe injections, tattooing, needle stick injury, and hemodialysis. Sexual risk is high for B and moderate for C, while D needs B for its life cycle. Travel, shellfish, crowded living, and water outbreaks raise A and E risk. Vaccination history, alcohol intake, and family history of hepatitis or liver cancer complete the enquiry.",
+   "say": "Transfusion before screening, injection drug use, unsafe injections, and needle stick injuries all increase the risk of B and C infection. Sexual contact raises the risk of B much more than it raises the risk of C. Travel, shellfish, crowded living, and water outbreaks all increase the risk of A and E infection. Vaccination history and family history of liver disease should be asked from every patient.",
+   "vis": null
+  },
+  {
+   "tx": "Most liver injury in hepatitis B and C comes from the immune response rather than direct viral killing. Hepatitis B can insert its DNA into host DNA, which helps explain **hepatocellular carcinoma** (liver cancer) without cirrhosis. Hepatitis C drives chronic immune injury, steatosis, and fibrosis in a steady march toward cirrhosis. Hepatitis D is really a defective particle that can only replicate when B helper proteins are present.",
+   "say": "Most liver injury in hepatitis B and C results from the immune response rather than direct viral killing. Hepatitis B can insert its DNA into host DNA and that property helps explain cancer without cirrhosis. Hepatitis C causes chronic immune injury and fibrosis in a steady march toward cirrhosis. Hepatitis D is a defective particle that can only replicate when B proteins are present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exposure by blood or gut"
+     },
+     {
+      "id": "b",
+      "label": "Viral entry to hepatocyte"
+     },
+     {
+      "id": "c",
+      "label": "Immune attack on infected cells"
+     },
+     {
+      "id": "d",
+      "label": "Acute, chronic, or cleared"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute hepatitis often starts with anorexia, nausea, malaise, right upper quadrant discomfort, and fever, then jaundice with dark urine and pale stools. The prodrome is followed by jaundice with raised transaminases and bilirubin, hepatomegaly, and a markedly tender liver. A classic clue is the **hepatocellular pattern** (ALT and AST far above alkaline phosphatase) with a rise above 1000 in acute viral disease. Some patients stay anicteric and the illness stays silent.",
+   "say": "Acute hepatitis often starts with anorexia, nausea, malaise, and right upper quadrant discomfort. This prodrome is usually followed by jaundice with dark urine and pale stools. The classic clue is a hepatocellular pattern where ALT and AST are far above alkaline phosphatase. Some patients remain anicteric and the whole illness stays silent without any detection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Typical features",
+     "Tests"
+    ],
+    "rows": [
+     [
+      "Prodrome",
+      "Anorexia, nausea, fever",
+      "ALT rising"
+     ],
+     [
+      "Jaundiced phase",
+      "Jaundice, dark urine",
+      "ALT above one thousand"
+     ],
+     [
+      "Compensated recovery",
+      "Appetite returns",
+      "ALT falling"
+     ],
+     [
+      "Fulminant course",
+      "Encephalopathy, coagulopathy",
+      "INR rising, bilirubin rising"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic hepatitis B moves through **immune tolerant**, immune active, inactive carrier, and reactivation phases based on HBeAg and viral load. Hepatitis C is chronic in most patients and slowly builds fibrosis through F0 to F4 stages, where F4 is cirrhosis. Hepatitis A and E almost never go chronic, except that E can persist in transplant recipients and other immune suppressed patients. Cirrhosis is defined by bridging fibrosis with nodules and portal hypertension.",
+   "say": "Chronic hepatitis B goes through immune tolerant, immune active, inactive carrier, and reactivation phases over time. Hepatitis C is chronic in most patients and it slowly builds fibrosis through progressive stages. Hepatitis A and E almost never remain chronic except in immune suppressed patients. Cirrhosis is defined by bridging fibrosis with nodules and portal hypertension in the liver.",
+   "vis": null
+  },
+  {
+   "tx": "Anti-HAV IgM (acute A antibody) and anti-HEV IgM with HEV RNA mark acute A and E infection. Hepatitis B surface antigen (HBsAg) marks new infection, anti-HBs (surface antibody) marks immunity, and anti-HBc IgM marks acute B with window period disease. **HBV DNA** (quantitative viral load by polymerase chain reaction) is the gold standard for B activity, and **HCV RNA** quantitative assay is the gold standard for C diagnosis and treatment monitoring.",
+   "say": "Anti-HAV IgM and anti-HEV IgM with HEV RNA indicate acute A and E infection in these patients. HBsAg indicates active B infection while anti-HBs indicates immunity in vaccinated persons. Anti-HBc IgM indicates acute B disease and the window period in such patients. HBV DNA and HCV RNA quantitative assays serve as gold standard tests for diagnosis and treatment monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "First test",
+     "Definitive test"
+    ],
+    "rows": [
+     [
+      "Hepatitis A",
+      "Anti-HAV IgM",
+      "Clinical course plus IgM"
+     ],
+     [
+      "Hepatitis B",
+      "HBsAg",
+      "HBV DNA quantitative"
+     ],
+     [
+      "Hepatitis C",
+      "Anti-HCV",
+      "HCV RNA quantitative"
+     ],
+     [
+      "Hepatitis E",
+      "Anti-HEV IgM",
+      "HEV RNA quantitative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute A and E care is supportive, with hydration, abstinence from alcohol, and avoidance of hepatotoxic drugs. Acute B with severe course needs **entecavir** (0.5 mg daily) or tenofovir from the start. Chronic B first line is entecavir or **tenofovir** (300 mg daily or 25 mg daily alafenamide salt) with near lifelong therapy. Pegylated interferon alfa is an option in selected young patients under American Association for the Study of Liver Diseases (AASLD) guidance.",
+   "say": "Acute A and E disease requires only supportive care with hydration and avoidance of alcohol. Acute B with a severe course should be treated with entecavir or tenofovir from the beginning. Chronic B is treated first with entecavir or tenofovir as near lifelong therapy in most cases. Pegylated interferon alfa is an option only in selected young patients under AASLD guidance.",
+   "vis": null
+  },
+  {
+   "tx": "Chronic hepatitis C is now cured in most patients with **direct acting antivirals** (DAAs, target the viral replication machinery) such as sofosbuvir plus velpatasvir for 12 weeks. Sofosbuvir dose is 400 mg daily and velpatasvir is 100 mg daily as fixed dose pangenotypic therapy. European Association for the Study of the Liver (EASL) guidance favours short oral courses with sustained virological response above 95%. Treatment before cirrhosis prevents most late complications and liver cancer.",
+   "say": "Chronic hepatitis C can now be cured in most patients with direct acting antivirals over twelve weeks. Sofosbuvir and velpatasvir are given daily as fixed dose pangenotypic therapy in such patients. EASL guidance favours short oral courses with sustained response above ninety five per cent. Treatment before cirrhosis can prevent most late complications and liver cancer in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hepatitis B chronic",
+     "points": [
+      "Suppress, rarely cure",
+      "Entecavir or tenofovir daily",
+      "Monitor DNA and surface antigen",
+      "Cancer screening in cirrhosis"
+     ]
+    },
+    "right": {
+     "title": "Hepatitis C chronic",
+     "points": [
+      "Cure most patients",
+      "Sofosbuvir plus velpatasvir",
+      "Check RNA after course",
+      "Cancer risk falls but remains"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include fulminant failure, chronic hepatitis, cirrhosis, portal hypertension, and hepatocellular carcinoma, which in B can arise without cirrhosis. Extrahepatic hepatitis C shows **cryoglobulinaemia** (immune complex small vessel disease), membranoproliferative kidney injury, and B cell lymphomas. Hepatitis B brings polyarteritis nodosa and serum sickness like features. Prognosis is excellent for A and E, guarded for chronic B and C with cirrhosis, and best when cure or suppression starts early.",
+   "say": "Complications are fulminant failure, chronic hepatitis, cirrhosis, portal hypertension, and hepatocellular carcinoma in these patients. Hepatitis B can cause cancer even without cirrhosis in active chronic infection. Extrahepatic hepatitis C can cause cryoglobulinaemia, kidney injury, and lymphomas over time. Prognosis is excellent for A and E but it is guarded for chronic B and C with cirrhosis.",
+   "vis": null
+  },
+  {
+   "tx": "This revision gathers the serology patterns, drugs, and risk numbers that dominate viva questions on viral hepatitis. Memory of the **vaccine immunity** pattern and the window period pattern prevents most single best answer errors. Keep the chronicity figures and the DNA and RNA gold tests ready for direct recall.",
+   "say": "This revision gathers the serology patterns and drug details that are most often asked in examinations. Memory of the vaccine immunity pattern and the window period pattern can prevent many single best answer errors. The chronicity figures and the DNA and RNA gold tests are expected to be recalled without delay. Clear recall of these patterns should prevent most errors in viva rounds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Vaccine immunity",
+      "Anti-HBs positive, anti-HBc negative"
+     ],
+     [
+      "Window period",
+      "Only anti-HBc IgM positive"
+     ],
+     [
+      "HBV active infection",
+      "HBsAg positive"
+     ],
+     [
+      "Chronicity B adults",
+      "About five per cent"
+     ],
+     [
+      "Chronicity C",
+      "About seventy five to eighty five per cent"
+     ],
+     [
+      "B first line",
+      "Entecavir 0.5 mg daily"
+     ],
+     [
+      "C first line",
+      "Sofosbuvir plus velpatasvir 12 weeks"
+     ],
+     [
+      "Gold tests",
+      "HBV DNA and HCV RNA quantitative"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
