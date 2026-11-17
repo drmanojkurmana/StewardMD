@@ -1,0 +1,330 @@
+{
+ "v": 1,
+ "module": "shp-liver-transplantation",
+ "subject": "ss-hepatology",
+ "title": "Liver transplantation indications MELD allocation and graft care",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 356 Liver Transplantation",
+  "American Association for the Study of Liver Diseases guidance on liver transplantation 2024",
+  "European Association for the Study of the Liver transplantation guidance 2024"
+ ],
+ "steps": [
+  {
+   "tx": "**Liver transplantation** (orthotopic replacement of the diseased native liver with a donor organ) is the definitive treatment for decompensated cirrhosis and acute liver failure. One year survival now exceeds **90** percent. Most candidates carry a **MELD** score (Model for End-Stage Liver Disease) between **15** and **40**, where higher scores gain earlier access to donor organs.",
+   "say": "Liver transplantation replaces the failed native liver with a donor organ in the same position. One year survival now passes ninety percent. Allocation follows the MELD score, which ranks urgency and determines who receives an organ first.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Detail",
+     "Exam point"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Operation",
+      "Orthotopic replacement",
+      "Donor in native site"
+     ],
+     [
+      "One year survival",
+      "Above 90 percent",
+      "Modern era result"
+     ],
+     [
+      "MELD range for listing",
+      "15 to 40",
+      "Higher scores prioritised"
+     ],
+     [
+      "Typical duration",
+      "6 to 18 hours",
+      "Haemodynamic shifts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Decompensated cirrhosis of any cause is the leading indication, and **steatotic liver disease** (fat related liver disease) now tops the list. Alcohol associated cirrhosis needs strict abstinence criteria and psychosocial clearance. **Sclerosing cholangitis** (inflammation and stricturing of bile ducts) is transplanted for recurrent cholangitis, since previous biliary surgery complicates the graft.",
+   "say": "End stage cirrhosis of every cause qualifies for transplantation. Fat related liver disease is now the commonest indication. Sclerosing cholangitis is selected for recurrent bacterial cholangitis and cirrhosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cause",
+      "label": "Decompensated cirrhosis"
+     },
+     {
+      "id": "etiology",
+      "label": "Cause confirmed and staged"
+     },
+     {
+      "id": "list",
+      "label": "Listed with MELD score"
+     }
+    ],
+    "edges": [
+     [
+      "cause",
+      "etiology"
+     ],
+     [
+      "etiology",
+      "list"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute **liver failure** (rapid loss of liver function with coagulopathy and **encephalopathy**, meaning brain dysfunction) earns **Status 1** listing, which bypasses the MELD queue. Hepatitis C reinfection once ruined grafts, but direct acting antivirals (DAA, medicines that block viral replication) have transformed outcomes. Hepatitis B prophylaxis with entecavir plus **immunoglobulin** (antibody protein) protects the graft.",
+   "say": "Acute liver failure receives Status 1 listing and bypasses the regular queue. Modern antiviral therapy has rescued grafts from hepatitis C reinfection. Hepatitis B prophylaxis now combines antiviral tablets with immunoglobulin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Status 1 acute failure",
+     "points": [
+      "No encephalopathy needed",
+      "Bypasses MELD queue",
+      "Highest priority listing"
+     ]
+    },
+    "right": {
+     "title": "Chronic MELD allocation",
+     "points": [
+      "Score 15 to 40",
+      "Continuous allocation",
+      "Exception points possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **MELD** formula uses **bilirubin** (yellow pigment), **creatinine** (kidney marker), **sodium** and albumin; higher values predict death without transplantation. Scores above **40** are capped at 40. Selected patients receive **exception points** when MELD underestimates risk, such as hepatopulmonary syndrome or perihilar cholangiocarcinoma under the Mayo protocol.",
+   "say": "MELD combines bilirubin, creatinine, sodium and albumin into a score capped at forty. Exception points correct underestimation in conditions such as hepatopulmonary syndrome. Mayo protocol patients with small hilar tumours also gain exception points.",
+   "vis": {
+    "cols": [
+     "Variable",
+     "What it reflects",
+     "Direction"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bilirubin",
+      "Excretory failure",
+      "Higher worsens score"
+     ],
+     [
+      "Creatinine",
+      "Renal dysfunction",
+      "Higher worsens score"
+     ],
+     [
+      "Sodium",
+      "Volume disturbance",
+      "Lower worsens score"
+     ],
+     [
+      "Albumin",
+      "Synthetic function",
+      "Lower worsens score"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Candidates need cardiac, pulmonary and renal screening because fixed pulmonary hypertension with mean pressure above **35** mmHg usually excludes transplantation. Severe **coronary disease** needs treatment first. Living donors are **18** to **65** years old, blood group compatible and medically clear. Right lobe donation suits adults while left grafts suit children and small recipients.",
+   "say": "Every candidate needs heart, lung and kidney clearance before listing. Fixed severe pulmonary hypertension usually bars transplantation. Living donors are screened rigorously and typically aged eighteen to sixty five.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Heart lung kidney screen"
+     },
+     {
+      "id": "clear",
+      "label": "Suitable candidate and donor"
+     },
+     {
+      "id": "op",
+      "label": "Transplant operation"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "clear"
+     ],
+     [
+      "clear",
+      "op"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the **anhepatic phase** (period without a liver), hypoglycaemia (low blood sugar), hypocalcaemia (low calcium) and **coagulopathy** (defective clotting) demand active correction. Surgeons anastomose cava, portal vein, artery and bile duct in sequence. **Choledochojejunostomy** (bile duct to bowel connection) replaces duct to duct repair when the recipient duct is unusable, a classic setting in sclerosing cholangitis.",
+   "say": "The anhepatic phase brings low sugar, low calcium and clotting defects that need correction. Surgeons connect cava, portal vein, artery and bile duct in order. Biliary surgery is needed when the native duct cannot be reused.",
+   "vis": {
+    "cols": [
+     "Phase",
+     "Problem",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Anhepatic",
+      "Low glucose and calcium",
+      "Correct aggressively"
+     ],
+     [
+      "Reperfusion",
+      "Post reperfusion syndrome",
+      "Inotrope readiness"
+     ],
+     [
+      "Biliary",
+      "Duct unusable",
+      "Roux-en-Y drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maintenance **immunosuppression** (drugs preventing organ rejection) starts with a calcineurin inhibitor such as **tacrolimus**, usually with mycophenolate and tapering steroids. **Induction** (initial intensive immunosuppression) may add **basiliximab** (antibody against interleukin 2 receptors). Drug levels, renal function and electrolytes need close monitoring, since tacrolimus causes tremor and kidney injury.",
+   "say": "Maintenance immunosuppression centres on tacrolimus with mycophenolate and tapering steroids. Basiliximab is used for induction in selected patients. Levels and kidney function need frequent checks after transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shield the graft",
+     "points": [
+      "Tacrolimus maintenance",
+      "Mycophenolate add on",
+      "Steroids tapered early"
+     ]
+    },
+    "right": {
+     "title": "Watch toxicity",
+     "points": [
+      "Kidney injury",
+      "Tremor and seizure",
+      "Infection risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hepatic artery thrombosis** (clotted graft artery) is the dreaded early complication, presenting with bile leak and graft failure, and needs urgent revascularisation or retransplantation. **Primary nonfunction** (graft that never works) also mandates retransplantation. **Acute cellular rejection** (immune attack in the first weeks) appears with raised transaminases and responds to steroid pulses.",
+   "say": "Artery thrombosis is the most feared early complication and threatens graft survival. Primary nonfunction needs urgent retransplantation. Cellular rejection raises liver enzymes and usually responds to pulse steroids.",
+   "vis": {
+    "cols": [
+     "Early complication",
+     "Clue",
+     "Response"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Artery thrombosis",
+      "Bile leak, graft failure",
+      "Urgent retransplant"
+     ],
+     [
+      "Primary nonfunction",
+      "No graft function",
+      "Relist as Status 1"
+     ],
+     [
+      "Cellular rejection",
+      "Rising transaminases",
+      "Steroid pulse"
+     ],
+     [
+      "Infection",
+      "Fever, infiltrates",
+      "Targeted therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long term threats are **cytomegalovirus** (CMV, a herpesvirus) disease, recurrent original disease and **metabolic syndrome** (weight gain, diabetes and hypertension) driven by steroids and calcineurin inhibitors. Alcohol relapse recurs in up to **25** percent despite screening. **Hepatocellular carcinoma** (liver cancer) recurrence follows Milan criteria (strict tumour size and number limits) breach.",
+   "say": "Long term follow up watches for viral infection, recurrent disease and metabolic syndrome. Alcohol relapse still occurs in a quarter of selected patients. Tumour recurrence rises when Milan criteria are breached.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "watch",
+      "label": "Lifelong surveillance"
+     },
+     {
+      "id": "detect",
+      "label": "CMV metabolic relapse"
+     },
+     {
+      "id": "treat",
+      "label": "Adjust drugs lifestyle"
+     }
+    ],
+    "edges": [
+     [
+      "watch",
+      "detect"
+     ],
+     [
+      "detect",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Common traps: **MELD** cap at 40 despite worse sickness; Status 1 includes primary graft nonfunction; high tacrolimus levels cause tremor and renal injury; **split liver** grafts serve two recipients from one donor; and transplantation for severe alcohol associated hepatitis remains selective, not routine. Indian programmes list most patients after multidisciplinary clearance, not on MELD alone.",
+   "say": "MELD scores are capped at forty even in sicker patients. Status 1 covers primary graft nonfunction as well as acute failure. Split liver grafting allows one donor to help two recipients.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Trap"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "MELD",
+      "Cap at 40",
+      "Sickest look identical"
+     ],
+     [
+      "Status 1",
+      "Acute failure",
+      "Includes nonfunction"
+     ],
+     [
+      "Alcohol hepatitis",
+      "Highly selected",
+      "Not routine standard"
+     ],
+     [
+      "Donor sharing",
+      "Split graft",
+      "Two recipients"
+     ],
+     [
+      "Tacrolimus",
+      "Narrow window",
+      "Kidney toxicity"
+     ],
+     [
+      "Tumour rule",
+      "Milan limits",
+      "Recurrence if breached"
+     ]
+    ]
+   }
+  }
+ ]
+}

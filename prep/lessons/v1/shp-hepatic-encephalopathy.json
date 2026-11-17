@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "shp-hepatic-encephalopathy",
+ "subject": "ss-hepatology",
+ "title": "Hepatic encephalopathy: West Haven grades, precipitants and lactulose titration",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Hepatic encephalopathy)",
+  "EASL Guidelines on Hepatic Encephalopathy 2022",
+  "Sleisenger and Fordtran 11e (Liver failure)"
+ ],
+ "steps": [
+  {
+   "tx": "**Hepatic encephalopathy (HE)** is brain dysfunction from liver failure or portosystemic shunting, suspect in any cirrhosis or **transjugular intrahepatic portosystemic shunt (TIPS)** patient with confusion, disorientation, sleep reversal, personality change, somnolence or coma. It remains a diagnosis of exclusion, graded by **West Haven** criteria. **Overt HE** means grade **2** or higher, while **asterixis (flapping tremor)** alone without cognitive change cannot diagnose it.",
+   "say": "Hepatic encephalopathy haunts every confused patient with cirrhosis or a shunt, and it stays a diagnosis of exclusion. West Haven grades sort subtle inattention from coma. Asterixis alone never carries the diagnosis without mental change.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Grade", "Picture", "Class"],
+    "rows": [
+     ["Grade 1", "Inattention, euphoria", "Covert"],
+     ["Grade 2", "Lethargy, asterixis", "Overt"],
+     ["Grade 3", "Somnolent, rousable", "Overt"],
+     ["Grade 4", "Coma", "Overt"]
+    ]
+   }
+  },
+  {
+   "tx": "Gut toxins bypass the failing liver through shunts and reduced hepatic mass, poisoning the brain. **Ammonia** leads the toxins, raised by protein loads, bleeding, constipation and infection. The diagnosis stays clinical, since ammonia correlates poorly with severity and a normal level cannot exclude a cause. Use the **Glasgow Coma Scale (GCS)** alongside **West Haven** when consciousness falls.",
+   "say": "Shunted gut toxins, led by ammonia, poison the brain when the liver cannot clear them. Blood ammonia misleads at every level, and the diagnosis remains clinical. Coma scores plus West Haven grades track the depth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "shunt", "label": "Shunts bypass liver"},
+     {"id": "ammonia", "label": "Ammonia accumulates"},
+     {"id": "brain", "label": "Brain slows"},
+     {"id": "grade", "label": "West Haven grades"}
+    ],
+    "edges": [["shunt", "ammonia"], ["ammonia", "brain"], ["brain", "grade"]]
+   }
+  },
+  {
+   "tx": "Precipitants almost always explain the episode: infection, gastrointestinal bleeding, constipation, dehydration or diuretic excess, kidney injury, hyponatraemia, hypokalaemia, hypoglycaemia and sedating drugs. **Benzodiazepines**, opioids, gabapentinoids and sleep medicines top the drug list, with alcohol withdrawal in the differential. Search for **spontaneous bacterial peritonitis (SBP)** whenever ascites coexists, since infection triggers encephalopathy more often than any other cause.",
+   "say": "Almost every episode carries a precipitant such as infection, bleeding, constipation or sedatives. Infection, especially peritonitis, leads the list by a wide margin. Stopping sedatives and clearing the bowel form the first moves.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Precipitant", "Clue", "Action"],
+    "rows": [
+     ["Infection, SBP", "Fever, AKI", "Tap, culture, treat"],
+     ["GI bleeding", "Melaena, falling Hb", "Resuscitate, scope"],
+     ["Constipation", "Days without stool", "Lactulose, enema"],
+     ["Sedatives", "Drug chart", "Stop, avoid"]
+    ]
+   }
+  },
+  {
+   "tx": "**Grade 3** to **4** or falling GCS means high dependency or intensive care, with intubation when the airway cannot be protected. Check capillary glucose immediately, treating levels below **70** mg per decilitre, and give intravenous **thiamine** before glucose in alcohol use or malnutrition. Nurse head up with aspiration precautions, and place a nasogastric tube for **lactulose** if swallowing fails. Routine brain imaging waits for focal signs, injury or seizures.",
+   "say": "Deep grades need high dependency care and airway protection without delay. Glucose checks and thiamine precede any sugary fluids in depleted patients. Head up nursing plus nasogastric lactulose keeps the airway safe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "grade", "label": "Grade 3 to 4, falling GCS"},
+     {"id": "hdu", "label": "HDU or ICU admission"},
+     {"id": "airway", "label": "Intubate if needed"},
+     {"id": "support", "label": "Thiamine, glucose, head up"}
+    ],
+    "edges": [["grade", "hdu"], ["hdu", "airway"], ["airway", "support"]]
+   }
+  },
+  {
+   "tx": "Begin with **lactulose** **10** to **20** grams orally or by nasogastric tube, repeated every second hour until the stool softens twice, then settle into **2** to **4** daily doses that keep **2** to **3** soft stools each day. An enema of **300** millilitres lactulose in **700** millilitres water, retained **30** to **60** minutes, serves patients who cannot take oral therapy. Expect improvement within **24** to **48** hours, with re-evaluation for missed precipitants beyond that span.",
+   "say": "Lactulose opens with frequent doses until two soft bowel movements arrive, then settles into daily titration. Enemas serve patients who cannot swallow or tolerate oral therapy. Improvement inside two days confirms the plan.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Route", "Dose", "Target"],
+    "rows": [
+     ["Oral", "10 to 20 g every 2 hours", "2 soft stools"],
+     ["Maintenance", "2 to 4 times daily", "2 to 3 stools"],
+     ["Enema", "300 mL, retain 30 to 60 min", "Every 4 to 6 hours"],
+     ["Alternative", "Polyethylene glycol 4 L", "Distension, ileus"]
+    ]
+   }
+  },
+  {
+   "tx": "Add **rifaximin** **550** mg twice daily to lactulose in hospitalised overt disease and for recurrence despite lactulose, with strong recommendations in recent guidance. Start rifaximin **14** days before elective TIPS and continue **6** months after. **Protein** runs **1.2** to **1.5** grams per kilogram daily, up to **2** grams when critically ill, with **no protein restriction**. A late evening snack and branched chain amino acids fill gaps when food falls short.",
+   "say": "Rifaximin joins lactulose for hospitalised overt disease and for relapses despite it. Protein feeds muscle and clears ammonia, so restriction harms without helping. Late evening snacks sustain overnight metabolism.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "First episode", "points": ["Lactulose long term", "Find precipitant", "Protein not restricted", "Educate caregivers"]},
+    "right": {"title": "Recurrent", "points": ["Add rifaximin 550 mg", "Start 14 days pre TIPS", "Continue 6 months", "Consider shunt embolisation"]}
+   }
+  },
+  {
+   "tx": "Over purging with lactulose causes dehydration, hypernatraemia, hypokalaemia and kidney injury, all of which worsen encephalopathy. Monitor West Haven grade or GCS at least daily with stool frequency, fluid balance and daily sodium, potassium and creatinine. Hold lactulose in intubated patients when stool exceeds **300** millilitres daily. Avoid sedating an agitated patient with benzodiazepines, which deepen brain failure.",
+   "say": "Lactulose excess dehydrates and deranges sodium, potassium and kidneys, deepening the confusion it treats. Daily grades, stool charts and electrolytes watch the narrow corridor. Sedatives for agitation worsen rather than calm brain failure.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Monitor", "Frequency", "Reason"],
+    "rows": [
+     ["West Haven, GCS", "Daily or more", "Tracks depth"],
+     ["Stool chart", "Every shift", "Titrates lactulose"],
+     ["Sodium, potassium", "Daily", "Over purging harm"],
+     ["Creatinine", "Daily", "AKI precipitant"]
+    ]
+   }
+  },
+  {
+   "tx": "Long term secondary prophylaxis after a first overt episode means lactulose titrated to **2** to **3** soft stools daily for life, with rifaximin added on recurrence. Advise **no driving** after overt disease in the past **3** months, review sedatives and unnecessary **proton pump inhibitors (PPIs)** at discharge, and refer for transplant assessment. Refractory disease with a large shunt may benefit from shunt embolisation to cut the bypass.",
+   "say": "Lactulose continues for life after a first overt episode, with rifaximin joining relapses. Driving waits three months after overt disease, and discharge reviews prune sedatives and acid blockers. Transplant referral closes the loop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "episode", "label": "First overt episode"},
+     {"id": "lactulose", "label": "Lactulose for life"},
+     {"id": "relapse", "label": "Relapse? Add rifaximin"},
+     {"id": "transplant", "label": "Transplant assessment"}
+    ],
+    "edges": [["episode", "lactulose"], ["lactulose", "relapse"], ["relapse", "transplant"]]
+   }
+  },
+  {
+   "tx": "Traps punish reflexes like **ammonia chasing**. Treating ammonia numbers rather than the patient misses every nuance, and **protein restriction** starves muscle without shortening confusion. Missing **SBP** or gastrointestinal bleeding leaves the true trigger untouched, while excess lactulose dehydrates and sedatives deepen coma. A normal ammonia in a confused patient should widen the search for stroke, bleed, meningitis, Wernicke disease or sepsis associated confusion.",
+   "say": "Ammonia chasing, protein restriction and missed triggers cause the commonest harm. Excess lactulose and sedatives deepen the very brain failure they should relieve. A normal ammonia points the search beyond the liver.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Harm", "Fix"],
+    "rows": [
+     ["Ammonia titration", "Wrong compass", "Clinical diagnosis"],
+     ["Protein restriction", "Muscle loss", "Feed 1.2 to 1.5"],
+     ["Missed SBP, bleed", "Trigger persists", "Tap, scope early"],
+     ["Sedation, over purge", "Deepened coma", "Stop sedatives"]
+    ]
+   }
+  },
+  {
+   "tx": "Pulmonary and cardiac siblings mimic and complicate encephalopathy care. **Hepatopulmonary syndrome** causes platypnoea and orthodeoxia that mimic primary chest disease in a confused patient. A hyperdynamic circulation with widened pulse pressure marks advanced cirrhosis and worsens kidney perfusion. Breathlessness in a drowsy cirrhotic patient deserves pulse oximetry upright and supine before attributing it to aspiration alone.",
+   "say": "Breathlessness in a drowsy cirrhotic patient rarely comes from aspiration alone. Upright and supine oximetry points to the shunt physiology behind it. Cardiac strain and pulmonary shunts affect every management plan.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hepatic cause", "points": ["Toxins bypass liver", "Ammonia leads", "Infection triggers", "Grades track depth"]},
+    "right": {"title": "Mimic or cousin", "points": ["Shunt hypoxaemia", "Sepsis confusion", "Stroke, bleed", "Wernicke disease"]}
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: **West Haven** grade **2** or higher is overt, asterixis alone never diagnoses it, and ammonia never guides therapy. Lactulose targets **2** to **3** soft stools daily at **10** to **20** g every **2** hours, **rifaximin** **550** mg twice daily treats recurrence, protein runs **1.2** to **1.5** grams per kilogram with no restriction, and infection leads the precipitant list.",
+   "say": "Grades, lactulose titration and rifaximin doses form the exam core, with protein never restricted. Infection leads the precipitant list at every station. Shunt embolisation helps refractory disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["Overt cutoff", "Grade 2 or more"],
+     ["Asterixis alone", "Never enough"],
+     ["Ammonia role", "Never guides"],
+     ["Lactulose start", "10 to 20 g"],
+     ["Stool target", "2 to 3 daily"],
+     ["Rifaximin dose", "550 mg twice"],
+     ["Protein dose", "1.2 to 1.5 g/kg"],
+     ["Top precipitant", "Infection, SBP"]
+    ]
+   }
+  }
+ ]
+}
