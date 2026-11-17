@@ -105,8 +105,26 @@ export function leaveGroupStmts(db, uidh, code) {
   ];
 }
 // Every social row of a player, for Leave Arena (DELETE /api/prep/arena/consent).
+/* PrepReels "send to a friend" (owner 2026-11-17). A share carries a reference, never content: the friend's app rebuilds
+   the card from its own bank (question by subject/module/id, video by id, Image Library entry by system and src, lesson
+   by subject/module), so no free text from one user is ever shown to another. -> normalised ref or null. */
+const SLUG = /^[a-z0-9][a-z0-9-]{0,63}$/, QID = /^[A-Za-z0-9_.:-]{1,80}$/, VID = /^[A-Za-z0-9_-]{11}$/;
+export function validShareRef(r) {
+  if (!r || typeof r !== "object" || Array.isArray(r)) return null;
+  if (r.k === "q" && SLUG.test(r.s || "") && SLUG.test(r.m || "") && QID.test(r.id || "")) return { k: "q", s: r.s, m: r.m, id: r.id };
+  if (r.k === "v" && VID.test(r.v || "")) return { k: "v", v: r.v };
+  if (r.k === "b" && SLUG.test(r.sys || "") && typeof r.src === "string" && r.src.length <= 300 && /^(\/|https:\/\/)/.test(r.src)) return { k: "b", sys: r.sys, src: r.src };
+  if (r.k === "l" && SLUG.test(r.s || "") && SLUG.test(r.m || "")) return { k: "l", s: r.s, m: r.m };
+  return null;
+}
+// Created on first use as well as by the migration, so a database the migration never reached still works.
+export const SHARE_DDL = "CREATE TABLE IF NOT EXISTS social_shares (id INTEGER PRIMARY KEY AUTOINCREMENT, from_uidh TEXT NOT NULL, to_uidh TEXT NOT NULL, ref TEXT NOT NULL, at INTEGER NOT NULL)";
+export const SHARE_IDX = "CREATE INDEX IF NOT EXISTS social_shares_to ON social_shares (to_uidh, at)";
+
 export function socialDeleteStmts(db, uidh) {
   return [
+    db.prepare(SHARE_DDL),   // the table may not exist yet; the DELETE below must not fail the whole Leave Arena batch
+    db.prepare("DELETE FROM social_shares WHERE from_uidh = ? OR to_uidh = ?").bind(uidh, uidh),
     db.prepare("DELETE FROM social_friends WHERE a = ? OR b = ?").bind(uidh, uidh),
     db.prepare("DELETE FROM social_challenges WHERE from_uidh = ? OR to_uidh = ?").bind(uidh, uidh),
     db.prepare("DELETE FROM social_college WHERE uidh = ?").bind(uidh),

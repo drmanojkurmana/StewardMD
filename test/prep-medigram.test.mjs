@@ -127,7 +127,8 @@ test("media: videos come from cleared CliniX manifest entries and play through t
   assert.match(shimHtml, /e\.source !== window\.parent/, "the shim takes commands only from the app frame that embeds it");
   for (const c of ["play", "pause", "seek", "mute", "unmute"]) assert.match(shimHtml, new RegExp('d\\.smdCmd === "' + c + '"'), "shim handles " + c);
   assert.match(media, /postMessage\(\{ smdCmd: cmd, by: by \|\| 0 \}, "https:\/\/stewardmd\.in"\)/, "commands are posted to the shim origin only");
-  assert.doesNotMatch(media + feed, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "videos never hand off to the YouTube app or site");
+  assert.doesNotMatch(media, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "the player never hands a video off to the YouTube app or site");
+  assert.doesNotMatch(feed, /youtube\.com\/watch|Play on YouTube/, "the reel never hands a video off either (Browser.open there is for sharing to WhatsApp only)");
   const vids = M.videosFrom({ media: {
     a: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ", title: "Resp exam", attribution: "Geeky Medics" },
     b: { kind: "embed", embeddable: false, cleared: true, videoId: "XU_xeUMJ3Zc" },

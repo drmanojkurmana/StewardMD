@@ -74,3 +74,16 @@
 .pn-root .pn-mg-fig { margin: 0; border-radius: var(--pn-r-lg); overflow: hidden; background: #000; }
 .pn-root .pn-mg-fig img { display: block; width: 100%; max-height: 46vh; object-fit: contain; aspect-ratio: var(--ar, auto); }
 .pn-root .pn-mg-cap { font-size: 15px; }
+
+/* Like, save, share on every card (owner 2026-11-17) */
+.pn-root .pn-mg-acts2 { display: flex; gap: 8px; margin-top: 4px; }
+.pn-root .pn-mg-a { flex: 1 1 0; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 10px; border: 1px solid var(--pn-edge); border-radius: 999px; background: var(--pn-card); color: var(--pn-text); font-size: 14px; font-weight: 600; }
+.pn-root .pn-mg-a.on { color: #1b7466; border-color: #1b7466; }
+body.dark .pn-root .pn-mg-a.on { color: #42cdb5; border-color: #42cdb5; }
+body.dark .pn-root .pn-mg-a[data-act="mg-like"].on { color: #ff6b7d; border-color: #ff6b7d; }
+.pn-root .pn-mg-a[data-act="mg-like"].on { color: #c8374c; border-color: #c8374c; }
+.pn-root .pn-mg-share { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); }
+.pn-root .pn-mg-frs { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .pn-mg-frs .pn-btn { flex: 0 1 auto; }
+.pn-root .pn-mg-from { margin: 0; font-size: 13px; font-weight: 700; color: #1b7466; }
+body.dark .pn-root .pn-mg-from { color: #42cdb5; }
