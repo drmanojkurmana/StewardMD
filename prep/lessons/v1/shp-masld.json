@@ -1,0 +1,337 @@
+{
+  "steps": [
+    {
+      "say": "Metabolic dysfunction associated steatotic liver disease means fat in the liver driven by insulin resistance, weight gain and dyslipidaemia. It is now the commonest chronic liver disease in India. The name change from fatty liver disease matters because exam stems are now using the new term.",
+      "tx": "**Metabolic dysfunction associated steatotic liver disease** means fat in the liver driven by insulin resistance, weight gain and dyslipidaemia, with steatosis in above **5** percent of hepatocytes. It is now the commonest chronic liver disease in India, overtaking hepatitis B in clinic numbers. The new name replaced **non alcoholic fatty liver disease** to drop alcohol denial wording. Alcohol above **20** grams daily moves the label toward mixed disease instead.",
+      "vis": {
+        "cols": [
+          "Name",
+          "Population",
+          "Location"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Metabolic steatotic disease",
+            "About 30 percent of adults",
+            "Commonest chronic liver disease"
+          ],
+          [
+            "Steatohepatitis",
+            "Subset with inflammation",
+            "June 2023 nomenclature"
+          ],
+          [
+            "Fibrosis stage F0 to F4",
+            "Determinant of outcome",
+            "Elastography grades it"
+          ],
+          [
+            "Lean disease",
+            "10 to 20 percent of cases",
+            "Asian populations prominent"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Type two diabetes, obesity and metabolic syndrome are clustering around metabolic steatotic disease. Fibrosis stage, not fat amount, predicts death, so elastography triages everyone with raised enzymes. Diabetes with fibrosis over F2 carries the highest five year mortality.",
+      "tx": "**Type 2 diabetes**, obesity and metabolic syndrome cluster around metabolic steatotic disease, and fibrosis stage, not fat amount, predicts death. **Liver stiffness** on elastography above **8** kilopascals flags fibrosis needing hepatology referral, while below **6** reassures. Diabetes with fibrosis over **F2** carries the highest five year mortality in most cohorts. Every patient with raised alanine therefore needs a fibrosis estimate, not just weight advice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Type 2 diabetes strongest predictor",
+            "Obesity and dyslipidaemia cluster",
+            "Hypertension adds vascular risk"
+          ],
+          "title": "Who gets it"
+        },
+        "right": {
+          "points": [
+            "Fibrosis stage predicts death",
+            "Stiffness above 8 kilopascals flags",
+            "Stage gates clinic pathway"
+          ],
+          "title": "What predicts harm"
+        }
+      }
+    },
+    {
+      "say": "Seven to ten percent weight loss is resolving steatohepatitis in most patients, and bariatric surgery achieves it in over half. Glucagon like peptide one drugs are adding five to fifteen percent weight loss on top of lifestyle change. The diet that survives is the one the patient can follow for years.",
+      "tx": "**7** to **10** percent weight loss resolves steatohepatitis in most patients, and **bariatric surgery** achieves it in over **50** percent of suitable candidates. **Glucagon like peptide 1 receptor agonists** add **5** to **15** percent weight loss on top of lifestyle change, and semaglutide leads the field. The diet that survives is the one the patient can follow for years, not the strictest one for a month. Mediterranean pattern beats low calorie crash plans for adherence.",
+      "vis": {
+        "cols": [
+          "Intervention",
+          "Weight loss",
+          "Liver benefit"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Diet plus exercise",
+            "7 to 10 percent target",
+            "Resolves steatohepatitis in most"
+          ],
+          [
+            "Semaglutide",
+            "About 15 percent",
+            "High steatohepatitis resolution"
+          ],
+          [
+            "Bariatric surgery",
+            "20 to 30 percent",
+            "Fibrosis regression in half"
+          ],
+          [
+            "Pioglitazone",
+            "Weight gain, liver gain",
+            "Histology improves despite weight"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Resmetirom remains the first drug approved for steatohepatitis with F2 to F3 fibrosis. Vitamin E and pioglitazone hold biopsy proven benefit in selected groups. Statins stay on the chart because cardiovascular disease kills more of these patients than liver disease does.",
+      "tx": "**Resmetirom** remains the first drug approved specifically for steatohepatitis with **F2** to **F3** fibrosis, a thyroid hormone receptor agonist that doubles resolution rates. **Vitamin E** at **800** international units daily and **pioglitazone** hold biopsy proven benefit in selected non diabetic and diabetic groups. **Statins** stay on the chart anyway, because cardiovascular disease kills more of these patients than liver disease does. Treating the heart protects the liver here.",
+      "vis": {
+        "edges": [
+          [
+            "fibrosis",
+            "drug"
+          ],
+          [
+            "drug",
+            "biopsy"
+          ],
+          [
+            "biopsy",
+            "follow"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fibrosis",
+            "label": "F2 to F3 fibrosis confirmed"
+          },
+          {
+            "id": "drug",
+            "label": "Resmetirom daily"
+          },
+          {
+            "id": "biopsy",
+            "label": "Resolution at 52 weeks"
+          },
+          {
+            "id": "follow",
+            "label": "Stiffness yearly"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Cardiovascular death is outranking liver death in metabolic steatotic disease by a wide margin. Diabetes control with metformin, statins and blood pressure control therefore outrank liver drugs in absolute benefit. Colon cancer screening follows local guidelines, since colonic neoplasia runs higher.",
+      "tx": "**Cardiovascular death** outranks liver death in metabolic steatotic disease by a wide margin, so blood pressure, lipid, sugar and smoking control outrank liver drugs in absolute benefit. **Metformin** manages diabetes without weight gain. Colon cancer screening follows local guidelines, since colonic neoplasia runs higher in this group. Liver cancer screening starts once cirrhosis arrives, not at the steatosis stage. Most clinics audit cardiovascular risk, not just alanine levels.",
+      "vis": {
+        "cols": [
+          "Killer",
+          "Rank",
+          "Clinic action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Cardiovascular disease",
+            "First",
+            "Statin, control pressure and sugar"
+          ],
+          [
+            "Liver failure",
+            "Second",
+            "Elastography staging"
+          ],
+          [
+            "Kidney disease",
+            "Third",
+            "Diabetes control"
+          ],
+          [
+            "Cancer",
+            "Rising",
+            "Colon and liver screening by stage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lean metabolic disease is striking a fifth of Asian patients with normal weight and strong genetic drive. The PNPLA3 gene variant raises fibrosis risk without obesity. Metformin and statin decisions follow metabolic risk, not body mass index alone.",
+      "tx": "**Lean metabolic disease** strikes about **10** to **20** percent of Asian patients with normal weight and strong genetic drive. The **PNPLA3** gene variant raises fibrosis risk without obesity, identifying fast progressors early. **Metformin** and statin decisions follow metabolic risk, not body mass index alone. Waist circumference beats weight in risk stratification once visceral fat is the culprit. Family screening of diabetic siblings finds silent fibrosis regularly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Lean patients carry disease",
+            "PNPLA3 variant drives fibrosis",
+            "Family screening worthwhile"
+          ],
+          "title": "Thin phenotype"
+        },
+        "right": {
+          "points": [
+            "Obesity classic phenotype",
+            "Diabetes amplifies risk",
+            "Weight loss remains mainstay"
+          ],
+          "title": "Obese phenotype"
+        }
+      }
+    },
+    {
+      "say": "Fibrosis progression runs at one stage per four to seven years in steatohepatitis and per fourteen years in simple steatosis. Rapid progressors carry diabetes, hypertension and high stiffness. Yearly elastography is catching the jump before decompensation arrives.",
+      "tx": "**Fibrosis progression** runs at one stage per **4** to **7** years in steatohepatitis and per **14** years in simple steatosis, so staging frequency differs sharply. Rapid progressors carry diabetes, hypertension and high stiffness at baseline. Yearly elastography catches the jump before decompensation arrives. Non invasive scores like **Fibrosis 4 index** above **2.67** send patients to elastography for confirmation. Treatment intensifies only after staging, not after enzyme values.",
+      "vis": {
+        "cols": [
+          "Risk",
+          "Fibrosis speed",
+          "Action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Simple steatosis",
+            "One stage per 14 years",
+            "Lifestyle, repeat in 2 years"
+          ],
+          [
+            "Steatohepatitis",
+            "One stage per 4 to 7 years",
+            "Yearly elastography"
+          ],
+          [
+            "Diabetes plus fibrosis",
+            "Fastest progressor group",
+            "Hepatology comanagement"
+          ],
+          [
+            "Fibrosis 4 index above 2.67",
+            "High fibrosis probability",
+            "Elastography and biopsy if needed"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Biopsy remains the reference for staging when elastography disagrees with clinical suspicion. Ballooning and inflammation define steatohepatitis beyond fat alone. Trial endpoints are now accepting elastography change as a surrogate, while regulators still ask for histology.",
+      "tx": "**Biopsy** remains the reference for staging when elastography disagrees with clinical suspicion, since ballooning and inflammation define steatohepatitis beyond fat alone. **Elastography** change now serves as a trial surrogate, while regulators still ask for histology in drug approvals. Drug trials report fibrosis improvement of at least **one** stage without worsening inflammation. Clinics rarely biopsy after diagnosis, reserving it for doubt or trial entry. Fat percentage alone never stages disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Fat percent does not stage disease",
+            "Ballooning defines steatohepatitis",
+            "Biopsy resolves disagreement"
+          ],
+          "title": "Histology view"
+        },
+        "right": {
+          "points": [
+            "Stiffness grades fibrosis",
+            "Fibrosis 4 index triages first",
+            "Yearly elastography tracks change"
+          ],
+          "title": "Non invasive view"
+        }
+      }
+    },
+    {
+      "say": "Alcohol above twenty grams daily moves the label toward mixed disease and accelerates fibrosis. Vaccinating against hepatitis A and B protects the steatotic liver before cirrhosis arrives. Bone density and sarcopenia screening start once cirrhosis develops.",
+      "tx": "**Alcohol** above **20** grams daily moves the label toward mixed disease and accelerates fibrosis, while combined alcohol plus steatohepatitis drives faster decompensation. Vaccinating against **hepatitis A** and **B** protects the steatotic liver before cirrhosis arrives. Bone density and **sarcopenia** screening start once cirrhosis develops, because muscle loss predicts death. Coffee intake above **2** cups daily associates with slower fibrosis in observational data. Weight regain after success undoes most gains within years.",
+      "vis": {
+        "cols": [
+          "Factor",
+          "Signal",
+          "Move"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Alcohol above 20 grams",
+            "Mixed disease label",
+            "Abstinence counselling"
+          ],
+          [
+            "Vaccines A and B",
+            "Protects pre cirrhosis liver",
+            "Complete series early"
+          ],
+          [
+            "Coffee above 2 cups",
+            "Slower fibrosis signal",
+            "Encourage, not prescribe"
+          ],
+          [
+            "Weight regain",
+            "Undoes gains",
+            "Maintenance programme"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The numbers to carry are thirty percent prevalence, five percent fat threshold, eight kilopascals for referral, and seven to ten percent weight loss target. Resmetirom covers F2 to F3 fibrosis with yearly elastography follow up. Cardiovascular care carries the largest survival gain in the whole pathway.",
+      "tx": "The numbers to carry are **30** percent prevalence, **5** percent fat threshold, **8** kilopascals for referral, and **7** to **10** percent weight loss target. **Resmetirom** covers **F2** to **F3** fibrosis with yearly elastography follow up. Cardiovascular care carries the largest survival gain in the whole pathway. Lean disease affects **10** to **20** percent of Asian cases with **PNPLA3** risk. Fibrosis 4 index above **2.67** triggers elastography for confirmation.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Adult prevalence",
+            "About 30 percent",
+            "Commonest chronic liver disease"
+          ],
+          [
+            "Referral stiffness",
+            "Above 8 kilopascals",
+            "Hepatology pathway"
+          ],
+          [
+            "Weight loss target",
+            "7 to 10 percent",
+            "Resolves steatohepatitis"
+          ],
+          [
+            "High risk fibrosis index",
+            "Above 2.67",
+            "Confirm with elastography"
+          ],
+          [
+            "Approval stage",
+            "F2 to F3 fibrosis",
+            "Resmetirom indication"
+          ],
+          [
+            "Progression in steatohepatitis",
+            "One stage per 4 to 7 years",
+            "Yearly elastography"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-masld",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, metabolic liver disease chapters",
+    "AASLD Guidance on metabolic steatotic liver disease 2024"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Metabolic steatotic liver disease: staging, weight loss and drug choice",
+  "v": 1
+}

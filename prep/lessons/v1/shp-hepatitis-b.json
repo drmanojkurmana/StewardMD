@@ -1,0 +1,360 @@
+{
+  "steps": [
+    {
+      "say": "Hepatitis B virus is a partially double stranded DNA virus whose surface antigen marks coloured infection. Globally it is driving the largest share of cirrhosis and liver cancer. India is sitting in the intermediate endemicity band, so vaccination history anchors every workup.",
+      "tx": "**Hepatitis B virus** is a partially double stranded **DNA virus** whose surface antigen marks active infection and the great majority of cirrhosis and liver cancer worldwide. India carries intermediate endemicity with about **2** to **4** percent hepatitis B surface antigen positivity. Adult infection clears fully in over **95** percent of cases, while neonatal infection becomes chronic in about **90** percent. Vaccination history therefore anchors every adult workup.",
+      "vis": {
+        "cols": [
+          "Group",
+          "Chronicity risk",
+          "Why it matters"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Infected at birth",
+            "About 90 percent",
+            "Hepatitis B e antigen positive mothers"
+          ],
+          [
+            "Childhood infection",
+            "About 30 percent",
+            "Persistent exposure without vaccine"
+          ],
+          [
+            "Adult infection",
+            "Under 5 percent",
+            "Sexual and percutaneous spread"
+          ],
+          [
+            "Vaccinated children",
+            "Protected",
+            "Birth dose within 24 hours"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Five serological markers tell the whole story if read in order. Surface antigen is for carriage, antibody to e antigen is for viral activity, antibody to surface antigen is for vaccine or immunity, antibody to core is for past infection, and immunoglobulin M core is for recent infection.",
+      "tx": "Five serological markers tell the whole story when read in sequence. **Hepatitis B surface antigen** marks carriage, **hepatitis B e antigen** marks high viral activity, **anti surface antibody** marks vaccine or natural immunity, **anti core antibody** marks past infection, and **immunoglobulin M anti core** marks recent infection. Anti surface antibody above **10** milli international units per millilitre protects after vaccination. Drawing all five on one form prevents the classic misreads.",
+      "vis": {
+        "cols": [
+          "Marker positive",
+          "Meaning",
+          "Next question"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Surface antigen",
+            "Active infection",
+            "Acute or chronic"
+          ],
+          [
+            "Anti core immunoglobulin M",
+            "Recent infection",
+            "Fulminant risk"
+          ],
+          [
+            "Hepatitis B e antigen",
+            "High replication",
+            "Infectivity, drug need"
+          ],
+          [
+            "Anti surface antibody",
+            "Immunity",
+            "Vaccine or natural"
+          ],
+          [
+            "Anti core antibody alone",
+            "Past infection",
+            "Occult disease check"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The tenofovir and entecavir regimens are suppressing viral DNA below detectable limits and pull transaminases down. Stopping them early invites flares, so therapy runs indefinitely unless seroconversion is documented. Pegylated interferon offers a finite course at the cost of toxicity.",
+      "tx": "Suppressive therapy with **tenofovir disoproxil** or **entecavir** drives **hepatitis B DNA** below detectable limits and normalises transaminases in most adherent patients. Stopping therapy early invites flares, so most non cirrhotic patients continue indefinitely unless anti surface seroconversion is documented. **Pegylated interferon** offers a finite **48** week course at the cost of greater toxicity. Tenofovir needs renal monitoring and entecavir needs dose reduction in renal failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Tenofovir disoproxil daily",
+            "Entecavir daily",
+            "Indefinite unless seroconversion",
+            "Monitor kidney function"
+          ],
+          "title": "Nucleoside analogues"
+        },
+        "right": {
+          "points": [
+            "Pegylated interferon 48 weeks",
+            "Finite course",
+            "Flulike symptoms, cytopenias",
+            "Contraindicated in decompensated cirrhosis"
+          ],
+          "title": "Pegylated interferon"
+        }
+      }
+    },
+    {
+      "say": "Surface antibody alone is a sign of vaccine immunity, while core antibody with surface antibody is a sign of natural immunity. Surface antigen with core antibody is meaning active infection, and immunoglobulin M core with surface antigen is meaning acute disease. One table of combinations is answering ninety percent of serology stems.",
+      "tx": "The five marker combinations separate vaccine immunity from natural immunity and acute from chronic disease. **Anti surface antibody** alone means vaccine immunity, while anti core with anti surface means natural immunity. Surface antigen with anti core means active infection, and immunoglobulin M anti core with surface antigen means acute infection. Isolated anti core needs hepatitis B DNA to exclude occult disease. One table of combinations answers most serology stems.",
+      "vis": {
+        "cols": [
+          "Pattern",
+          "Meaning",
+          "Action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Anti surface alone",
+            "Vaccine immunity",
+            "Reassure, no workup"
+          ],
+          [
+            "Anti core plus anti surface",
+            "Resolved natural infection",
+            "Immune; check DNA if immunosuppression planned"
+          ],
+          [
+            "Surface antigen positive",
+            "Active infection",
+            "Stage chronicity, start assessment"
+          ],
+          [
+            "Immunoglobulin M anti core positive",
+            "Acute infection",
+            "Monitor for fulminant course"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Natural history runs through immune tolerant, immune active, inactive carrier and reactivation phases. Quantitative surface antigen and hepatitis B DNA track the viral load, while elastography stages the fibrosis. Treatment entry follows alanine transaminase plus fibrosis stage, not the viral number alone.",
+      "tx": "Natural history runs through **immune tolerant**, **immune active**, **inactive carrier** and **reactivation** phases, each with a different hepatitis B e antigen, DNA and alanine level. **Quantitative surface antigen** and hepatitis B DNA track viral load, while elastography stages **fibrosis**. Treatment entry follows alanine level plus fibrosis stage, not the viral number alone. Cirrhosis at any viral level earns indefinite therapy.",
+      "vis": {
+        "edges": [
+          [
+            "tolerant",
+            "active"
+          ],
+          [
+            "active",
+            "inactive"
+          ],
+          [
+            "inactive",
+            "reactivate"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tolerant",
+            "label": "Immune tolerant, high DNA"
+          },
+          {
+            "id": "active",
+            "label": "Immune active, enzymes raised"
+          },
+          {
+            "id": "inactive",
+            "label": "Inactive carrier, low DNA"
+          },
+          {
+            "id": "reactivate",
+            "label": "Reactivation flare"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Fulminant hepatitis B is striking under one percent of acute adult cases and declares itself with encephalopathy within weeks. Immunoglobulin M anti core is usually positive. Early transplant referral decides survival, since steroids and antivirals alone rarely reverse established failure.",
+      "tx": "**Fulminant hepatitis** strikes under **1** percent of acute adult cases and declares itself with encephalopathy within **8** weeks of onset, usually with immunoglobulin M anti core positivity. Coagulopathy and rising bilirubin precede cerebral symptoms and predict death without transplant. Early referral to a transplant centre decides survival, since antivirals alone rarely reverse established failure. Steroids lack proven benefit and often hasten sepsis in this setting.",
+      "vis": {
+        "cols": [
+          "Feature",
+          "Acute hepatitis",
+          "Fulminant hepatitis"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Encephalopathy",
+            "Absent",
+            "Within 8 weeks"
+          ],
+          [
+            "Clotting time",
+            "Near normal",
+            "Markedly prolonged"
+          ],
+          [
+            "Bilirubin",
+            "Rising",
+            "Preceding jaundice by days"
+          ],
+          [
+            "Mortality",
+            "Low",
+            "Above 70 percent without transplant"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Reactivation follows rituximab, high dose steroids and chemotherapy when occult carriage wakes up. Hepatitis B DNA can climb a hundredfold before enzymes move. Prophylaxis with entecavir or tenofovir starts before immunosuppression, not after the flare.",
+      "tx": "**Reactivation** follows rituximab, high dose steroids and chemotherapy when occult carriage wakes, and hepatitis B DNA can climb before enzymes move. Prophylaxis with **entecavir** or **tenofovir** starts before immunosuppression in surface antigen carriers, never after the flare. Anti core positive patients receive prophylaxis or close DNA monitoring depending on drug risk. Missing prophylaxis before cycl chemotherapy is a classic exam trap.",
+      "vis": {
+        "edges": [
+          [
+            "screen",
+            "risk"
+          ],
+          [
+            "risk",
+            "prophylax"
+          ],
+          [
+            "prophylax",
+            "monitor"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "Surface antigen and anti core"
+          },
+          {
+            "id": "risk",
+            "label": "Drug risk high or low"
+          },
+          {
+            "id": "prophylax",
+            "label": "Entecavir or tenofovir prophylaxis"
+          },
+          {
+            "id": "monitor",
+            "label": "DNA every 1 to 3 months"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Chronic hepatitis B is driving cirrhosis in about fifteen percent over decades and multiplies liver cancer risk twentyfold. Six monthly ultrasound with alpha fetoprotein screens cirrhotic patients, because early tumours are curable by resection. Suppressing DNA cuts, but never erases, the cancer risk.",
+      "tx": "Chronic hepatitis B drives **cirrhosis** in about **15** percent over decades and multiplies **hepatocellular carcinoma** risk **20** fold, through integration of viral DNA into the host genome. Six monthly **ultrasound** with alpha fetoprotein screens cirrhotic patients, because early tumours suit curative resection. Suppressing hepatitis B DNA cuts, but never erases, the cancer risk. Family screening of household contacts therefore pays double dividends.",
+      "vis": {
+        "cols": [
+          "Risk",
+          "Magnitude",
+          "Screening"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Cirrhosis over decades",
+            "About 15 percent",
+            "Elastography yearly"
+          ],
+          [
+            "Liver cancer",
+            "About 20 fold risk",
+            "Ultrasound 6 monthly"
+          ],
+          [
+            "Decompensation",
+            "Rises once cirrhotic",
+            "Child Pugh scoring"
+          ],
+          [
+            "Household transmission",
+            "High if unvaccinated",
+            "Vaccinate and test contacts"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lamivudine resistance is climbing at twenty percent per year and reaches seventy percent by five years. Tenofovir holds the highest barrier and anchors most rescue regimens. Resistance testing and switching beat adding a weak agent to a failing one.",
+      "tx": "**Lamivudine** resistance climbs at **20** percent per year and reaches **70** percent by **5** years, because a single mutation opens the escape channel. **Tenofovir** carries the highest genetic barrier and anchors most rescue regimens. Resistance testing with combined agents beats adding a weak drug to a failing one. Renal function monitoring remains mandatory on tenofovir, especially beyond **5** years of therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Lamivudine resistance 70 percent at 5 years",
+            "Entecavir resistance low in naive patients",
+            "Tenofovir resistance rare"
+          ],
+          "title": "Resistance ladder"
+        },
+        "right": {
+          "points": [
+            "Test resistance genes",
+            "Switch to tenofovir anchor",
+            "Monitor kidney function yearly"
+          ],
+          "title": "Rescue moves"
+        }
+      }
+    },
+    {
+      "say": "Post exposure prophylaxis is pairing vaccine with immunoglobulin within twenty four hours. Standard therapy is pairing drug choice with fibre stage and cancer surveillance. The serology table plus the resistance ladder is answering most one liners on this virus.",
+      "tx": "Post exposure **prophylaxis** pairs vaccine with **immunoglobulin** within **24** hours for needlestick or neonatal exposure, while chronic therapy pairs drug choice with fibrosis stage and cancer surveillance. Surface antigen positive mothers need vaccine plus immunoglobulin for the newborn within **12** hours plus nucleoside cover in the third trimester when DNA is high. The serology table plus the resistance ladder answers most one liners on this virus.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Neonatal chronicity",
+            "About 90 percent",
+            "Birth dose within 24 hours"
+          ],
+          [
+            "Adult chronicity",
+            "Under 5 percent",
+            "Full recovery usual"
+          ],
+          [
+            "Lamivudine resistance",
+            "70 percent at 5 years",
+            "Tenofovir rescues"
+          ],
+          [
+            "Cancer risk multiplier",
+            "About 20 fold",
+            "Six monthly ultrasound"
+          ],
+          [
+            "Protective anti surface level",
+            "Above 10 units",
+            "Vaccine response check"
+          ],
+          [
+            "Fulminant incidence",
+            "Under 1 percent",
+            "Early transplant referral"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-hepatitis-b",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, viral hepatitis chapters",
+    "EASL Clinical Practice Guidelines on hepatitis B 2022"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Hepatitis B: five markers, phases and suppression rules",
+  "v": 1
+}
