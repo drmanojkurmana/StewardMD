@@ -10,8 +10,21 @@
    "say": "Elastin recoils through desmosine crosslinks with a half life measured in decades. Developmental failures and acquired elastolysis are essentially irreversible because adult synthesis barely replaces it.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Collagen (strength)", "points": ["Gly-X-Y triple helix, crosslinked fibrils", "Turns over, remodels wounds", "Tensile, minimally extensible"]},
-    "right": {"title": "Elastin (recoil)", "points": ["Desmosine crosslinked amorphous core", "Decades half life, developmental laid", "Stretches and snaps back"]
+    "left": {
+     "title": "Collagen (strength)",
+     "points": [
+      "Gly-X-Y triple helix, crosslinked fibrils",
+      "Turns over, remodels wounds",
+      "Tensile, minimally extensible"
+     ]
+    },
+    "right": {
+     "title": "Elastin (recoil)",
+     "points": [
+      "Desmosine crosslinked amorphous core",
+      "Decades half life, developmental laid",
+      "Stretches and snaps back"
+     ]
     }
    }
   },
@@ -20,11 +33,27 @@
    "say": "Antitrypsin shields elastin from neutrophil elastase in lung, and PiZZ deficiency destroys alveolar walls into early emphysema. Protease biology links emphysema and aortic aneurysm examinations together.",
    "vis": {
     "kind": "table",
-    "cols": ["Elastin enemy", "Tissue destroyed", "Protection"],
+    "cols": [
+     "Elastin enemy",
+     "Tissue destroyed",
+     "Protection"
+    ],
     "rows": [
-     ["Neutrophil elastase", "Alveolar walls (emphysema)", "Alpha-1 antitrypsin (augmentation if severe PiZZ)"],
-     ["MMP-9 and MMP-12 (macrophage)", "Aneurysm walls, plaques", "Doxycycline investigated; risk factor control standard"],
-     ["Ultraviolet plus enzymes", "Dermal elastin (solar elastosis)", "Photoprotection only prevention"]
+     [
+      "Neutrophil elastase",
+      "Alveolar walls (emphysema)",
+      "Alpha-1 antitrypsin (augmentation if severe PiZZ)"
+     ],
+     [
+      "MMP-9 and MMP-12 (macrophage)",
+      "Aneurysm walls, plaques",
+      "Doxycycline investigated; risk factor control standard"
+     ],
+     [
+      "Ultraviolet plus enzymes",
+      "Dermal elastin (solar elastosis)",
+      "Photoprotection only prevention"
+     ]
     ]
    }
   },
@@ -33,8 +62,21 @@
    "say": "Marfan fibrillin failure gives upward lens dislocation and lethal aortic root dilatation. Ghent criteria weight aortic root and genetics over habitus alone for diagnosis and prophylaxis thresholds.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Marfan (FBN1)", "points": ["Lens UP and out", "Aortic root aneurysm lethal", "Beta blockade, losartan, root surgery thresholds"]},
-    "right": {"title": "Homocystinuria (CBS, prior module)", "points": ["Lens DOWN and in", "Thrombosis lethal", "Pyridoxine, diet, betaine"]
+    "left": {
+     "title": "Marfan (FBN1)",
+     "points": [
+      "Lens UP and out",
+      "Aortic root aneurysm lethal",
+      "Beta blockade, losartan, root surgery thresholds"
+     ]
+    },
+    "right": {
+     "title": "Homocystinuria (CBS, prior module)",
+     "points": [
+      "Lens DOWN and in",
+      "Thrombosis lethal",
+      "Pyridoxine, diet, betaine"
+     ]
     }
    }
   },
@@ -50,12 +92,37 @@
     "kind": "flow",
     "title": "Wound matrix in sequence",
     "nodes": [
-     {"id": "clot", "label": "Fibrin clot scaffold"},
-     {"id": "gran", "label": "Granulation: collagen III, vessels"},
-     {"id": "remod", "label": "Remodel: collagen I crosslinked"},
-     {"id": "scar", "label": "Scar at about 80 percent strength"}
+     {
+      "id": "clot",
+      "label": "Fibrin clot scaffold"
+     },
+     {
+      "id": "gran",
+      "label": "Granulation: collagen III, vessels"
+     },
+     {
+      "id": "remod",
+      "label": "Remodel: collagen I crosslinked"
+     },
+     {
+      "id": "scar",
+      "label": "Scar at about 80 percent strength"
+     }
     ],
-    "edges": [["clot", "gran"], ["gran", "remod"], ["remod", "scar"]]
+    "edges": [
+     [
+      "clot",
+      "gran"
+     ],
+     [
+      "gran",
+      "remod"
+     ],
+     [
+      "remod",
+      "scar"
+     ]
+    ]
    }
   },
   {
@@ -63,11 +130,72 @@
    "say": "Alport loses the collagen four network in glomeruli with deafness and lenticonus, while Goodpasture antibodies attack its alpha three chain. One network explains an entire renal examination chapter completely.",
    "vis": {
     "kind": "table",
-    "cols": ["Collagen IV disease", "Genetics or antibody", "Ear and eye flags"],
+    "cols": [
+     "Collagen IV disease",
+     "Genetics or antibody",
+     "Ear and eye flags"
+    ],
     "rows": [
-     ["Alport syndrome", "COL4A5 (X) or A3/A4", "Sensorineural deafness, lenticonus"],
-     ["Thin basement membrane nephropathy", "COL4A3/A4 carriers", "Isolated haematuria, usually benign"],
-     ["Goodpasture (anti-GBM)", "Autoantibody to alpha3 NC1", "Lung haemorrhage plus crescentic GN"]
+     [
+      "Alport syndrome",
+      "COL4A5 (X) or A3/A4",
+      "Sensorineural deafness, lenticonus"
+     ],
+     [
+      "Thin basement membrane nephropathy",
+      "COL4A3/A4 carriers",
+      "Isolated haematuria, usually benign"
+     ],
+     [
+      "Goodpasture (anti-GBM)",
+      "Autoantibody to alpha3 NC1",
+      "Lung haemorrhage plus crescentic GN"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Elastin is an insoluble extracellular protein rich in glycine, alanine, and proline, synthesized as tropoelastin and cross-linked by desmosine and isodesmosine through copper-dependent lysyl oxidase. Unlike collagen, elastin lacks triple helices and has minimal hydroxylysine. Fibrillin-1 serves as a microfibrillar scaffold for elastin deposition; mutations in FBN1 cause Marfan syndrome with ectopia lentis, aortic root aneurysms, and arachnodactyly. Alpha-1 antitrypsin deficiency causes unrestrained elastase breakdown of alveolar elastin, leading to panacinar emphysema.",
+   "say": "Elastin is an insoluble extracellular protein rich in glycine, alanine, and proline, synthesized as tropoelastin and cross-linked by desmosine and isodesmosine through copper-dependent lysyl oxidase. Unlike collagen, elastin lacks triple helices and has minimal hydroxylysine. Fibrillin-1 serves as a microfibrillar scaffold for elastin deposition; mutations in FBN1 cause Marfan syndrome with ectopia lentis, aortic root aneurysms, and arachnodactyly. Alpha-1 antitrypsin deficiency causes unrestrained elastase breakdown of alveolar elastin, leading to panacinar emphysema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Elastin cross-linking molecules",
+      "Desmosine and isodesmosine linking four lysine residues"
+     ],
+     [
+      "Marfan syndrome gene mutation",
+      "FBN1 gene on chromosome 15 encoding fibrillin-1"
+     ],
+     [
+      "Marfan ectopia lentis direction",
+      "Superotemporal upward lens subluxation, unlike homocystinuria"
+     ],
+     [
+      "Homocystinuria lens direction",
+      "Inferomedial downward lens subluxation with intellectual disability"
+     ],
+     [
+      "Alpha-1 antitrypsin target enzyme",
+      "Neutrophil elastase destroying alveolar interstitial elastin"
+     ],
+     [
+      "Panacinar emphysema site",
+      "Lower lung zones in homozygous PiZZ genotype individuals"
+     ],
+     [
+      "Fibronectin integrin binding sequence",
+      "Arg-Gly-Asp RGD cell attachment recognition tripeptide"
+     ],
+     [
+      "Laminin basal lamina role",
+      "Cruciform glycoprotein cross-linking type IV collagen and cell integrins"
+     ]
     ]
    }
   }
