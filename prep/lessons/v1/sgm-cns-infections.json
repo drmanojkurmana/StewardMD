@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "sgm-cns-infections",
+ "subject": "ss-general-medicine",
+ "title": "Central nervous system infections",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Meningitis** is acute meningeal inflammation with fever and neck stiffness. **Encephalitis** is brain parenchymal infection with altered consciousness. **Meningoencephalitis** involves meninges with brain parenchyma together. **Cerebral abscess** is focal infection with mass effect. CT head should precede LP in these patients for safety during evaluation today.",
+   "say": "Meningitis is acute meningeal inflammation with fever and neck stiffness for meningeal pattern. Encephalitis is brain parenchymal infection with altered consciousness for parenchymal pattern. Meningoencephalitis involves meninges with brain parenchyma together for combined pattern. Cerebral abscess is focal infection with mass effect for focal pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Meningitis",
+     "points": [
+      "Meningeal inflammation",
+      "Fever with neck stiffness",
+      "CSF pleocytosis pattern",
+      "CT before LP"
+     ]
+    },
+    "right": {
+     "title": "Encephalitis",
+     "points": [
+      "Parenchymal infection",
+      "Altered consciousness",
+      "Seizures common",
+      "Temporal lobe tendency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pneumococcus** causes bacterial meningitis in adults. **Meningococcus** causes meningitis with rash. **Listeria** causes meningitis in elderly with risk. **Haemophilus** caused meningitis in unvaccinated children. Haemophilus caused meningitis in unvaccinated children before vaccine era during evaluation period today. Empirical therapy should precede culture results in these patients.",
+   "say": "Pneumococcus causes bacterial meningitis in adults for adult pattern. Meningococcus causes meningitis with rash for rash association. Listeria causes meningitis in elderly with risk for elderly pattern. Haemophilus caused meningitis in unvaccinated children for vaccine pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Pneumococcus",
+      "Adult meningitis",
+      "Commonest adult cause"
+     ],
+     [
+      "Meningococcus",
+      "Meningitis with rash",
+      "Petechial rash sign"
+     ],
+     [
+      "Listeria",
+      "Elderly meningitis",
+      "Pregnancy and elderly risk"
+     ],
+     [
+      "Herpes simplex",
+      "Encephalitis",
+      "Temporal lobe involvement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Herpes simplex** causes temporal lobe encephalitis. **Varicella** causes encephalitis with vasculopathy. **Japanese encephalitis** causes thalamic encephalitis in season. **Rabies** causes encephalitis with hydrophobia. Rabies causes encephalitis with hydrophobia as the hallmark during evaluation today clearly always. Empirical therapy should precede culture results in these patients today.",
+   "say": "Herpes simplex causes temporal lobe encephalitis for temporal pattern. Varicella causes encephalitis with vasculopathy for vasculopathic pattern. Japanese encephalitis causes thalamic encephalitis in season for seasonal pattern. Rabies causes encephalitis with hydrophobia for hydrophobia hallmark.",
+   "vis": null
+  },
+  {
+   "tx": "**CSF** shows pleocytosis with high protein in meningitis. **Gram stain** identifies bacteria during evaluation. **Culture** confirms bacteria during evaluation. **PCR** identifies viruses during evaluation. PCR identifies viruses during evaluation for viral detection with rapid turnaround today. Empirical therapy should precede culture results in these patients today clearly.",
+   "say": "CSF is pleocytic with with high protein in meningitis for CSF pattern. Gram stain identifies bacteria during evaluation for rapid diagnosis. Culture confirms bacteria during evaluation for definitive diagnosis. PCR identifies viruses during evaluation for viral detection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever with stiffness"
+     },
+     {
+      "id": "b",
+      "label": "CT head done"
+     },
+     {
+      "id": "c",
+      "label": "LP with CSF sent"
+     },
+     {
+      "id": "d",
+      "label": "Antibiotics started"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ceftriaxone** with **vancomycin** cover pneumococcal meningitis. **Acyclovir** covers suspected herpes encephalitis. **Amoxicillin** covers Listeria in elderly patients. **Doxycycline** covers rickettsial meningoencephalitis in many settings. Doxycycline covers rickettsial meningoencephalitis in many settings for rickettsial coverage today always. Empirical therapy should precede culture results in these patients today clearly always.",
+   "say": "Ceftriaxone with vancomycin are the cover for pneumococcal meningitis for bacterial coverage. Acyclovir is the cover for suspected herpes encephalitis for viral coverage. Amoxicillin is the cover for Listeria in elderly patients for Listeria coverage. Doxycycline is the cover for rickettsial meningoencephalitis in many settings for rickettsial coverage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Coverage",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Ceftriaxone",
+      "Pneumococcal meningitis",
+      "First line for adults"
+     ],
+     [
+      "Vancomycin",
+      "Resistant pneumococcus",
+      "Empirical addition"
+     ],
+     [
+      "Acyclovir",
+      "Herpes encephalitis",
+      "Suspected viral cover"
+     ],
+     [
+      "Amoxicillin",
+      "Listeria coverage",
+      "Elderly empiric addition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Focal deficits** suggest abscess rather than meningitis. **Papilloedema** suggests raised pressure workup. **Ring enhancing lesion** suggests abscess in imaging. **Toxoplasma** causes abscess in immunocompromised patients. Toxoplasma causes abscess in immunocompromised patients during evaluation period today clearly always. Empirical therapy should precede culture results in these patients today clearly always.",
+   "say": "Focal deficits suggest abscess rather than meningitis for focal pattern. Papilloedema suggests raised pressure workup for raised pressure clue. Ring enhancing lesion suggests abscess in imaging for abscess pattern. Toxoplasma causes abscess in immunocompromised patients for opportunistic pattern.",
+   "vis": null
+  },
+  {
+   "tx": "**HIV** predisposes to cryptococcal meningitis. **Tuberculous meningitis** causes chronic meningitis with basilar thickening. **Fungal meningitis** follows immunosuppression during course. **Subacute meningitis** suggests tuberculosis or fungal cause. Subacute meningitis suggests tuberculosis or fungal cause during evaluation period today clearly always. Empirical therapy should precede culture results in these patients today clearly always better.",
+   "say": "HIV is the risk for cryptococcal meningitis for opportunistic pattern. Tuberculous meningitis causes chronic meningitis with basilar thickening for chronic pattern. Fungal meningitis follows immunosuppression during course for fungal pattern. Subacute meningitis suggests tuberculosis or fungal cause for subacute pattern.",
+   "vis": null
+  },
+  {
+   "tx": "**Ganciclovir** covers CMV encephalitis in immunocompromised patients. **Foscarnet** is an alternative for CMV encephalitis. **Ribavirin** covers some viral encephalitis in many protocols. **Steroids** help tuberculous meningitis in many guidelines. Steroids help tuberculous meningitis in many guidelines for inflammation control today clearly.",
+   "say": "Ganciclovir is the cover for CMV encephalitis in immunocompromised patients for CMV coverage. Foscarnet is an alternative for CMV encephalitis for resistant therapy. Ribavirin is the cover for some viral encephalitis in many protocols for viral coverage. Steroids help tuberculous meningitis in many guidelines for inflammation control.",
+   "vis": null
+  },
+  {
+   "tx": "**Seizures** complicate encephalitis during course. **Coma** complicates encephalitis during course. **Autonomic instability** complicates encephalitis during course. **ICU care** is advised in these patients for support. ICU care is advised in these patients for supportive care during course today clearly always.",
+   "say": "Seizures complicate encephalitis during course for seizure complication. Coma complicates encephalitis during course for coma complication. Autonomic instability complicates encephalitis during course for autonomic complication. ICU care is advised in these patients for supportive care.",
+   "vis": null
+  },
+  {
+   "tx": "**Prognosis** depends on cause with early therapy. **Early acyclovir** improves herpes encephalitis outcomes. **Tuberculous meningitis** has high mortality without therapy. **Bacterial meningitis** has complications without early therapy. Bacterial meningitis has complications without early therapy for bacterial urgency today clearly always.",
+   "say": "Prognosis depends on cause with early therapy for outcome determination in these patients. Early acyclovir is effective for herpes encephalitis outcomes for herpes benefit in these patients. Tuberculous meningitis is fatal without therapy for TB urgency in these patients. Bacterial meningitis is dangerous without early therapy for bacterial urgency in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on CNS infections. Remember ceftriaxone for pneumococcal meningitis, acyclovir for herpes encephalitis and amoxicillin for Listeria cover. Herpes affects temporal lobes with CSF lymphocytosis. Tuberculous meningitis is chronic with basilar thickening. Tuberculous meningitis is chronic with basilar thickening clearly today.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Ceftriaxone is the first line therapy for pneumococcal meningitis. Acyclovir is the herpes encephalitis therapy for viral coverage. Amoxicillin is the Listeria therapy for elderly coverage. Herpes affects temporal lobes with CSF lymphocytosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Bacterial cover",
+      "Ceftriaxone for pneumococcal meningitis"
+     ],
+     [
+      "Herpes cover",
+      "Acyclovir covers herpes encephalitis"
+     ],
+     [
+      "Listeria cover",
+      "Amoxicillin for elderly meningitis"
+     ],
+     [
+      "Herpes pattern",
+      "Temporal lobe with lymphocytosis"
+     ],
+     [
+      "Chronic meningitis",
+      "Tuberculosis with basilar thickening"
+     ],
+     [
+      "Abscess cause",
+      "Toxoplasma in immunocompromised"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
