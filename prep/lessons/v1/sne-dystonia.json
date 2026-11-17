@@ -1,0 +1,385 @@
+{
+ "v": 1,
+ "module": "sne-dystonia",
+ "title": "Dystonia",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dystonia** is a movement disorder characterised by sustained muscle contractions causing twisting and repetitive movements with abnormal postures. The movements are typically **action specific**, worse on voluntary action in the affected part, and relieved by sensory tricks. Primary dystonia affects a single body part, while secondary dystonia is driven by drugs, birth injury, or other causes.",
+   "say": "Dystonia is a movement disorder characterised by sustained muscle contractions causing twisting and repetitive movements with abnormal postures. The movements are typically action specific, worse on voluntary action in the affected part, and relieved by sensory tricks. Primary dystonia affects a single body part, while secondary dystonia is driven by drugs, birth injury or other causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Distribution",
+     "Common cause"
+    ],
+    "rows": [
+     [
+      "Focal",
+      "One body part",
+      "Idiopathic or drug induced"
+     ],
+     [
+      "Segmental",
+      "Adjacent body parts",
+      "Genetic or drug induced"
+     ],
+     [
+      "Generalised",
+      "Whole body",
+      "Genetic, dopa responsive"
+     ],
+     [
+      "Secondary",
+      "Any pattern",
+      "Birth injury, drugs, trauma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blepharospasm** is focal dystonia of the eyelids with forceful spasmodic closure, and **cervical dystonia** is the commonest focal form in adults. **Spasmodic torticollis** and **writer cramp** are the other classic focal presentations. The **sensory trick** or geste antagoniste, such as touching the chin, relieves cervical dystonia and confirms the diagnosis.",
+   "say": "Blepharospasm is focal dystonia of the eyelids with forceful spasmodic closure, and cervical dystonia is the commonest focal form in adults. Spasmodic torticollis and writer cramp are the other classic focal presentations. The sensory trick or geste antagoniste, such as touching the chin, relieves cervical dystonia and confirms the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Focal form",
+     "Site",
+     "Geste antagoniste"
+    ],
+    "rows": [
+     [
+      "Blepharospasm",
+      "Eyelids",
+      "Touching the brow or eye frame"
+     ],
+     [
+      "Cervical dystonia",
+      "Neck",
+      "Touching the chin or cheek"
+     ],
+     [
+      "Writer cramp",
+      "Hand",
+      "Changing grip or posture"
+     ],
+     [
+      "Laryngeal dystonia",
+      "Vocal cords",
+      "Speaking or singing maneuvers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dopa responsive dystonia** is the mimicker that changes management completely because of its dramatic response to levodopa. It presents in childhood with diurnal fluctuation, worse in the evening and better after sleep. **Paroxysmal myoclonus dystonia** is the associated genetic syndrome with intermittent myoclonus. Every childhood dystonia needs a levodopa trial before other conclusions.",
+   "say": "Dopa responsive dystonia is the mimicker that changes management completely because of its dramatic response to levodopa. It presents in childhood with diurnal fluctuation, worse in the evening and better after sleep. Paroxysmal myoclonus dystonia is the associated genetic syndrome with intermittent myoclonus. Every childhood dystonia needs a levodopa trial before other conclusions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Childhood dystonia with diurnal fluctuation"
+     },
+     {
+      "id": "b",
+      "label": "Levodopa trial given"
+     },
+     {
+      "id": "c",
+      "label": "Dramatic response confirms diagnosis"
+     },
+     {
+      "id": "d",
+      "label": "Low dose lifelong therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute dystonic reaction** follows dopamine receptor blockers with torticollis, oculogyric crisis, and opisthotonos. It is treated with an anticholinergic injection and resolves promptly. **Neuroleptic malignant syndrome** is the dangerous end of the same pathway with fever, rigidity, and autonomic instability. Young males on first exposure to antiemetics are the typical victims.",
+   "say": "Acute dystonic reaction follows dopamine receptor blockers with torticollis, oculogyric crisis and opisthotonos. It is treated with an anticholinergic injection and resolves promptly. Neuroleptic malignant syndrome is the dangerous end of the same pathway with fever, rigidity and autonomic instability. Young males on first exposure to antiemetics are the typical victims.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reaction",
+     "Features",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Acute dystonia",
+      "Torticollis, oculogyric crisis",
+      "Anticholinergic promptly"
+     ],
+     [
+      "Neuroleptic malignant syndrome",
+      "Fever, rigidity, instability",
+      "Intensive care treatment"
+     ],
+     [
+      "Tardive dystonia",
+      "Persistent adult onset form",
+      "Withdrawal and therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Botulinum toxin** injection remains the treatment of choice for focal dystonia because it weakens the overactive muscles locally. Cervical dystonia, blepharospasm, and writer cramp also respond well to injection therapy. The effect lasts about three months and injections are repeated. Systemic anticholinergics are reserved for generalised disease and children.",
+   "say": "Botulinum toxin injection remains the treatment of choice for focal dystonia because it weakens the overactive muscles locally. Cervical dystonia, blepharospasm and writer cramp have good responses to injection therapy. The effect lasts about three months and injections are repeated. Systemic anticholinergics are reserved for generalised disease and children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment",
+     "Best for",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Botulinum toxin",
+      "Focal dystonia",
+      "About three months"
+     ],
+     [
+      "Anticholinergics",
+      "Generalised disease",
+      "Oral daily therapy"
+     ],
+     [
+      "Deep brain stimulation",
+      "Severe generalised disease",
+      "Surgical option"
+     ],
+     [
+      "Levodopa trial",
+      "Childhood, diurnal forms",
+      "Lifelong low dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Status dystonicus** is sustained dystonia with fever, dehydration, and respiratory compromise, and it needs intensive care treatment. **Wilson disease** must be excluded in every young patient with dystonia because copper deposition causes it. Serum ceruloplasmin and slit lamp examination are the first tests. Treatment of Wilson disease prevents progression.",
+   "say": "Status dystonicus is sustained dystonia with fever, dehydration and respiratory compromise, and it needs intensive care treatment. Wilson disease must be excluded in every young patient with dystonia because copper deposition causes it. Serum ceruloplasmin and slit lamp examination are the first tests. Treatment of Wilson disease prevents progression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Disease",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Serum ceruloplasmin",
+      "Wilson disease",
+      "Chelation therapy"
+     ],
+     [
+      "Slit lamp for Kayser-Fleischer rings",
+      "Wilson disease",
+      "Confirms copper deposition"
+     ],
+     [
+      "Magnetic resonance imaging",
+      "Secondary causes",
+      "Finds structural lesions"
+     ],
+     [
+      "Drug history",
+      "Drug induced dystonia",
+      "Withdraw the offender"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test Wilson disease and the levodopa trial. Young dystonia with a low ceruloplasmin is Wilson disease until proven otherwise. **Dopa responsive dystonia** is missed when levodopa is never tried. **Acute dystonia** after antiemetics responds to anticholinergics, not benzodiazepines. Sensory tricks confirm dystonia clinically and are heavily tested.",
+   "say": "Traps test Wilson disease and the levodopa trial. Young dystonia with a low ceruloplasmin is Wilson disease until proven otherwise. Dopa responsive dystonia is missed when levodopa is never tried. Acute dystonia after antiemetics is treated with anticholinergics, not benzodiazepines. Sensory tricks confirm dystonia clinically and are heavily tested.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Young dystonia",
+      "Idiopathic focal dystonia",
+      "Wilson disease workup"
+     ],
+     [
+      "Childhood diurnal dystonia",
+      "Botulinum toxin first",
+      "Levodopa trial"
+     ],
+     [
+      "Acute reaction to antiemetics",
+      "Benzodiazepine",
+      "Anticholinergic injection"
+     ],
+     [
+      "Sensory trick relief",
+      "Functional disorder",
+      "Dystonia confirmed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** depends on the cause: idiopathic focal dystonia progresses slowly and stays focal, while generalised genetic forms progress. **Writer cramp** is task specific and is worsened by continued writing. **Physiotherapy** and splinting help focal hand dystonia. Families need counselling that focal disease rarely generalises.",
+   "say": "Prognosis depends on the cause: idiopathic focal dystonia progresses slowly and stays focal, while generalised genetic forms progress. Writer cramp is task specific and is worsened by continued writing. Physiotherapy and splinting help focal hand dystonia. Families need counselling that focal disease rarely generalises.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Focal dystonia diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Botulinum toxin offered"
+     },
+     {
+      "id": "c",
+      "label": "Physiotherapy and splinting added"
+     },
+     {
+      "id": "d",
+      "label": "Review every three months"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Myoclonus dystonia** links dystonia with brief myoclonic jerks and alcohol responsiveness, a distinctive pattern worth recalling. **Torticollis** after dopamine blockers is the acute presentation most often seen in the emergency department. **Cranial cervical dystonia** combines blepharospasm with oromandibular dystonia. Each pattern is a favourite one line answer.",
+   "say": "Myoclonus dystonia links dystonia with brief myoclonic jerks and alcohol responsiveness, a distinctive pattern worth recalling. Torticollis after dopamine blockers is the acute presentation most often seen in the emergency department. Cranial cervical dystonia is blepharospasm with oromandibular dystonia together. Each pattern is a favourite one line answer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Combination",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Myoclonus dystonia",
+      "Dystonia with jerks",
+      "Alcohol responsiveness"
+     ],
+     [
+      "Cranial cervical dystonia",
+      "Blepharospasm with jaw dystonia",
+      "Combined focal forms"
+     ],
+     [
+      "Acute drug dystonia",
+      "Torticollis after blockers",
+      "Emergency department"
+     ],
+     [
+      "Benign hereditary chorea",
+      "Chorea without progression",
+      "Family history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Functional dystonia** is suggested by fixed postures present from the onset, distractibility, and incongruence with known patterns. It is diagnosed positively on clinical grounds, not by exclusion. Botulinum toxin can worsen fixed functional postures. Early physiotherapy and psychiatric support are the treatments, with the diagnosis explained honestly.",
+   "say": "Functional dystonia is suggested by fixed postures present from the onset, distractibility and incongruence with known patterns. It is diagnosed positively on clinical grounds, not by exclusion. Botulinum toxin can worsen fixed functional postures. Early physiotherapy and psychiatric support are the treatments, with the diagnosis explained honestly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Organic dystonia",
+     "points": [
+      "Action specific and variable",
+      "Sensory trick relieves",
+      "Normal posture at rest onset",
+      "Botulinum toxin helps"
+     ]
+    },
+    "right": {
+     "title": "Functional dystonia",
+     "points": [
+      "Fixed from onset",
+      "Incongruent patterns",
+      "Distractible attacks",
+      "Physiotherapy is the treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** cervical dystonia and blepharospasm are the commonest focal forms, sensory tricks relieve them, and botulinum toxin is the treatment of choice. Dopa responsive dystonia is diurnal, childhood onset, and levodopa trial is mandatory. Young dystonia needs Wilson disease exclusion, and acute antiemetic reactions need anticholinergics.",
+   "say": "High yield for the exam: cervical dystonia and blepharospasm are the commonest focal forms, sensory tricks relieve them and botulinum toxin is the treatment of choice. Dopa responsive dystonia is diurnal, childhood onset and levodopa trial is mandatory. Young dystonia needs Wilson disease exclusion, and acute antiemetic reactions need anticholinergics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Commonest focal form",
+      "Cervical dystonia",
+      "Adult focal dystonia"
+     ],
+     [
+      "Sensory trick",
+      "Touching the chin",
+      "Clinical confirmation"
+     ],
+     [
+      "Treatment of choice",
+      "Botulinum toxin",
+      "Focal dystonia"
+     ],
+     [
+      "Mimicker",
+      "Dopa responsive dystonia",
+      "Diurnal, childhood onset"
+     ],
+     [
+      "Mandatory exclusion",
+      "Wilson disease",
+      "Young dystonia workup"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
