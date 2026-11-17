@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "sgm-cardiac-arrest",
+ "subject": "ss-general-medicine",
+ "title": "Cardiac arrest and resuscitation",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Cardiac arrest is sudden loss of **effective mechanical blood flow** with pulselessness and apnoea, affecting about 10 per one hundred thousand people yearly. Survival to discharge is 10% in hospital and 5% out of hospital without CPR. Brain injury starts after 4 minutes without flow. High quality CPR chest depth is 5 to 6 cm at one hundred to one hundred twenty compressions per minute.",
+   "say": "Cardiac arrest stops blood flow with pulselessness and stopped breathing. Survival falls sharply without CPR. Brain injury starts after about four minutes without flow.",
+   "vis": null
+  },
+  {
+   "tx": "Common causes are **4 H and 4 T**: hypoxia, hypo or hyperkalaemia, hypothermia, acidosis, tension pneumothorax, tamponade, toxins and thrombosis. Risk factors are ischaemic heart disease in 70%, age above 60, prior infarction and shock. Overdose with tricyclics causes 5% of in hospital arrests. K six point five mmol per L alone can cause bradycardic arrest.",
+   "say": "Causes follow the four H and four T pattern in resuscitation. Heart disease causes most arrests in adult patients. Low or high potassium can stop the heart quickly during arrest.",
+   "vis": null
+  },
+  {
+   "tx": "The **mechanism** begins when coronary flow falls below 15% of normal and myocardial ATP drops within 30 seconds. Ventricular fibrillation and pulseless ventricular tachycardia cause 25% of arrests, while asystole and pulseless electrical activity cause 75%. Hypoxia raises acid load and drains glycogen in 10 minutes. Cerebral cortex loses eighty percent of ATP within 4 minutes.",
+   "say": "Coronary flow drops and heart muscle runs out of energy fast. Shockable rhythms cause about one quarter of arrests. Brain cells lose energy within four minutes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hypoxia and ischaemia"
+     },
+     {
+      "id": "b",
+      "label": "VF or VT"
+     },
+     {
+      "id": "c",
+      "label": "Loss of cardiac output"
+     },
+     {
+      "id": "d",
+      "label": "Brain hypoxia"
+     },
+     {
+      "id": "e",
+      "label": "CPR plus defibrillation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical features are unresponsiveness, absent pulse within 10 seconds, apnoea within 20 seconds and cyanosis in 2 minutes. **Classic sign** is agonal breaths that mimic normal breathing but signal arrest. Pupils dilate at 3 minutes and corneal reflex is lost at 10 minutes. Monitor shows VF, VT, asystole or pulseless electrical activity with organised complexes.",
+   "say": "The patient is unresponsive with no pulse and no breathing at all. Agonal breaths still indicate arrest and need immediate response. Pupils are dilated after about three minutes without flow.",
+   "vis": null
+  },
+  {
+   "tx": "First test is rhythm check on monitor with pulse check within 10 seconds, plus capnography showing ETCO2 below 10 mmHg. **Gold standard** is arterial line wave showing loss of pulsation and defibrillator rhythm analysis with pad placement. Arterial blood gas shows pH below seven point one and lactate above 10 mmol per L after 10 minutes. Echo excludes tamponade and pneumothorax in 5 minutes.",
+   "say": "Check pulse and rhythm in ten seconds for every arrest. Capnography falls below ten during arrest in most patients. Echo quickly checks for tamponade and tension pneumothorax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rhythm",
+     "Frequency",
+     "Defibrillation"
+    ],
+    "rows": [
+     [
+      "Ventricular fibrillation",
+      "25 percent",
+      "two hundred J biphasic"
+     ],
+     [
+      "Pulseless VT",
+      "15 percent",
+      "two hundred J biphasic"
+     ],
+     [
+      "Asystole",
+      "40 percent",
+      "No shock"
+     ],
+     [
+      "PEA",
+      "35 percent",
+      "No shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line is high quality CPR with **adrenaline** 1 mg every 3 to 5 minutes plus amiodarone 300 mg then 150 mg for shockable rhythms. Use biphasic energy one hundred twenty to two hundred J for VF and VT. Give oxygen 15 litres per min and secure airway within 10 minutes. Push hard and fast with depth 5 to 6 cm and full recoil one hundred to one hundred twenty per minute.",
+   "say": "Adrenaline one milligram every three to five minutes is the backbone. Amiodarone follows for shockable rhythms. Compressions must be deep and fast with full recoil.",
+   "vis": null
+  },
+  {
+   "tx": "After ROSC, target MAP sixty-five to eighty mmHg, SpO2 94 to 98% and temperature control at 36 degrees for 24 hours. Use anticoagulant eighty units per kg bolus then 18 units per kg per hour for STEMI with **antiplatelet agent** 180 mg load. Correct K to 4 to 5 mmol per L and Mg above 2 mg per dL. Start dual antiplatelet within 24 hours when coronary cause is proven.",
+   "say": "After return of circulation, keep pressure and oxygen in a safe range. Cooling to thirty six degrees protects the brain. Heart block and potassium must be corrected.",
+   "vis": null
+  },
+  {
+   "tx": "Shockable versus non shockable arrest needs different drug order in the first 10 minutes. **Comparison** shows survival 30% with VF defibrillated within 3 minutes versus 5% after 10 minutes. Amiodarone raises ROSC by 15% in shock refractory VF. Adrenaline every 5 minutes raises survival but with 10% worse neurology when given late.",
+   "say": "Shockable rhythms need defibrillation within three minutes for best survival. Amiodarone helps refractory VF in the unit at once. Adrenaline timing affects brain recovery after arrest a lot.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shockable rhythms",
+     "points": [
+      "VF and pulseless VT 25 percent",
+      "Defibrillate two hundred J fast",
+      "Amiodarone 300 mg then 150 mg"
+     ]
+    },
+    "right": {
+     "title": "Non shockable rhythms",
+     "points": [
+      "Asystole and PEA 75 percent",
+      "Adrenaline 1 mg every 5 minutes",
+      "Find reversible cause 4 H 4 T"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **rib fractures** in 30%, sternal injury in 15%, aspiration in 20% and ICU myopathy in 25%. Neurological injury affects 50% of survivors with hypoxic ischaemic encephalopathy. Recurrent arrest occurs in 40% within 24 hours. Prognosis is best with bystander CPR within 4 minutes, raising good neurology to 40% from 5%.",
+   "say": "Rib fractures occur in about thirty percent of CPR. Brain injury affects half of survivors. Physical injury is common but recovery is possible with fast CPR.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis predictors are **witnessed arrest**, bystander CPR within 4 minutes, VF as first rhythm and ROSC within 20 minutes. ETCO2 above 20 mmHg during CPR predicts ROSC in eighty percent. Pupils equal and reactive at 24 hours predict good outcome with 90% accuracy. Survivors need ICU care for 3 to 5 days and echo within 12 hours.",
+   "say": "Witnessed arrest with fast bystander CPR gives the best odds. Pupil signs reflect recovery well after arrest. ICU care for three to five days is standard care.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** table for cardiac arrest and resuscitation in seven high yield points. Remember CPR depth 5 to 6 cm, rate one hundred to one hundred twenty per minute, adrenaline 1 mg every 3 to 5 minutes and biphasic two hundred J. Shockable rhythms are 25% and non shockable 75%. Brain injury begins after 4 minutes without flow.",
+   "say": "This table has the numbers to quote quickly. Rate depth drugs and energy are the core facts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "Number to recall",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Compression depth",
+      "5 to 6 cm",
+      "Full recoil one hundred to one hundred twenty"
+     ],
+     [
+      "Adrenaline dose",
+      "1 mg every 3 to 5 minutes",
+      "Early as possible"
+     ],
+     [
+      "Defibrillation energy",
+      "two hundred J biphasic",
+      "Shockable rhythms only"
+     ],
+     [
+      "Amiodarone dose",
+      "300 mg then 150 mg",
+      "Shock refractory VF"
+     ],
+     [
+      "Brain injury time",
+      "After 4 minutes",
+      "Start CPR at once"
+     ],
+     [
+      "CPR target ETCO2",
+      "Above 20 mmHg",
+      "Predicts ROSC"
+     ],
+     [
+      "Post arrest MAP",
+      "sixty-five to eighty mmHg",
+      "Maintain for 24 hours"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-hiv-art",
+ "subject": "ss-general-medicine",
+ "title": "HIV infection and antiretroviral therapy",
+ "minutes": 11,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**HIV** is a **retrovirus** that attacks **helper T cells** steadily. **CD4 count** below **200** per microlitre defines **AIDS** in adults. **Viral load** above **one hundred thousand** copies per millilitre marks **high transmission** risk. **Window period** lasts **3 to 6 weeks** when **antibodies** remain undetectable completely.",
+   "say": "HIV is a retrovirus that attacks helper T cells steadily. A C D four helper count below two hundred per microlitre defines AIDS in adults. A viral load above one hundred thousand copies per millilitre marks high transmission risk. The window period lasts three to six weeks when antibodies remain undetectable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute HIV",
+     "points": [
+      "Mononucleosis like illness in week four",
+      "P twenty four antigen is positive",
+      "CD4 count remains near normal",
+      "High viral load in blood stream"
+     ]
+    },
+    "right": {
+     "title": "Chronic HIV",
+     "points": [
+      "Asymptomatic for eight to ten years",
+      "CD4 count falls gradually over time",
+      "Antibodies remain positive for life",
+      "Viral load set point decides fate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sexual transmission** through **unprotected intercourse** causes **most adult** HIV cases. **Needle sharing** in **intravenous drug use** spreads **a large share of cases** worldwide. **Transfusion** of infected **blood products** transmitted disease before **the early eighties**. **Mother to child** transmission across **placenta** occurs in **a substantial minority** without treatment.",
+   "say": "Sexual transmission through unprotected intercourse causes most adult HIV cases. Needle sharing in drug use spreads a large share of cases worldwide. Transfusion of infected blood products transmitted disease before the mid eighties. Mother to child transmission across the placenta occurs in a substantial minority without treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Reverse transcriptase** converts viral **RNA to DNA** inside host immune cells. **Integrase enzyme** inserts **provirus** into **helper T cell nucleus** permanently. **Protease** splits **polyproteins** to make **mature virions** in HIV infection. **Entry inhibitor** blocks **envelope binding** to **CD4 receptors** on cells fully.",
+   "say": "Reverse transcriptase can convert viral RNA to DNA inside host cells. Integrase enzyme inserts provirus into the nucleus of helper T cells. Protease cleaves polyproteins to make mature virions. Entry inhibitors block binding of the viral envelope protein to receptors on cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e",
+      "label": "Entry",
+      "sub": "envelope binds CD4"
+     },
+     {
+      "id": "r",
+      "label": "Reverse transcription",
+      "sub": "RNA to DNA"
+     },
+     {
+      "id": "i",
+      "label": "Integration",
+      "sub": "provirus forms"
+     },
+     {
+      "id": "p",
+      "label": "Protease maturation",
+      "sub": "new virions"
+     }
+    ],
+    "edges": [
+     [
+      "e",
+      "r"
+     ],
+     [
+      "r",
+      "i"
+     ],
+     [
+      "i",
+      "p"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute retroviral syndrome** with fever rash and **lymphadenopathy** appears at **4 weeks**. **Generalised lymphadenopathy** is the **classic sign** of chronic HIV stage. **Oral thrush** at **low helper counts** suggests **early opportunistic** infections soon. **Weight loss above 10%** with **diarrhoea** marks **wasting syndrome** in AIDS.",
+   "say": "Acute retroviral syndrome with fever rash and lymphadenopathy appears at four weeks. Generalised lymphadenopathy is the classic sign of the chronic stage. Oral thrush at low helper counts suggests early opportunistic infections soon. Weight loss above one tenth with diarrhoea marks wasting syndrome in AIDS.",
+   "vis": null
+  },
+  {
+   "tx": "**Fourth generation ELISA** detecting **antigen plus antibody** is the **first test** for HIV. **Gold standard** is **Western blot** confirming **antibody pattern** in positives. **HIV RNA PCR** detects infection during **window period** at **about ten days**. **CD4 count** stages disease while **viral load** decides **treatment urgency** well.",
+   "say": "Fourth generation immunoassay detecting antigen plus antibody is the first test for HIV. Western blot is a gold standard confirming the antibody pattern in positives. RNA testing detects infection during the window period at about ten days. Helper count stages disease while viral load decides treatment urgency well.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Detects",
+     "Window"
+    ],
+    "rows": [
+     [
+      "ELISA combo",
+      "Antigen antibody",
+      "3 weeks"
+     ],
+     [
+      "RNA PCR",
+      "Viral nucleic acid",
+      "10 days"
+     ],
+     [
+      "Western blot",
+      "Antibody bands",
+      "4 weeks"
+     ],
+     [
+      "CD4 count",
+      "Immune staging",
+      "Any time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dolutegravir dosed daily** is first line **integrase inhibitor** now. **Tenofovir** plus **emtricitabine** form the **dual NRTI** backbone. **Efavirenz nightly** was **old first line** replaced due to **neuropsychiatric** effects. **Bictegravir** single pill regimen is **guideline preferred** for most adults in **recent** recommendations.",
+   "say": "Dolutegravir fifty milligrams daily is the first line integrase inhibitor now. Tenofovir with emtricitabine forms the dual backbone of most regimens. Efavirenz nightly was old first line replaced because of neuropsychiatric effects. Bictegravir single pill is the guideline preferred option in recent recommendations.",
+   "vis": null
+  },
+  {
+   "tx": "**Co-trimoxazole thrice weekly** prevents **Pneumocystis** when **CD4 below two hundred**. **A macrolide dosed weekly** prevents **MAC** when **CD4 below fifty**. **Fluconazole dosed weekly** prevents **candida** when **CD4 below one hundred fifty**. **Isoniazid daily** for **six months** prevents **tuberculosis** in seropositive patients.",
+   "say": "Co-trimoxazole thrice weekly prevents Pneumocystis when helper counts fall below two hundred. A macrolide weekly prevents MAC when counts fall below fifty. Fluconazole weekly prevents candida when counts fall below one hundred fifty. Isoniazid daily for six months prevents tuberculosis in seropositive patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Resistance mutations** appear within **four weeks** of **irregular ART** intake. **Adherence above ninety five percent** is needed for **viral suppression** in trials. **Viral load** must fall below **fifty copies** within **six months** of therapy. **Genotypic resistance** testing guides **second line** choice in **virological failure** cases.",
+   "say": "Resistance mutations appear within four weeks of irregular ART intake. Adherence above ninety five percent is needed for viral suppression in trials. Viral load must fall below fifty copies within six months of therapy. Resistance testing guides second line choice in virological failure cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Tenofovir** causes **renal failure** in **a small percentage of patients** on long therapy. **Efavirenz** causes **vivid dreams** in **many patients** early on. **Ritonavir boosted regimens** raise **cholesterol** in **a substantial minority of treated** adults yearly. **Dolutegravir** raises **weight** over **a year of follow** up in trials.",
+   "say": "Tenofovir can cause renal failure in a small percentage of patients on long therapy. Efavirenz causes vivid dreams in many patients early on. Ritonavir boosted regimens raise cholesterol in a substantial minority of treated adults yearly. Dolutegravir raises weight over a year of follow up in trials.",
+   "vis": null
+  },
+  {
+   "tx": "**Transmitted resistance** occurs in **8% of new** HIV infections in cities. **Dolutegravir** has **higher barrier** with **fewer mutations** in treated cohorts. **Cabotegravir injection** every **2 months** is **long acting ART** for selected patients. **Rilpivirine injection** pairs with **cabotegravir** for **monthly maintenance** therapy.",
+   "say": "Transmitted resistance occurs in about eight percent of new HIV infections in cities. Dolutegravir has a higher barrier with fewer mutations in treated cohorts. Cabotegravir injection every two months is long acting therapy for selected patients. Rilpivirine injection can pair with cabotegravir for monthly maintenance therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** is the HIV grid to memorise. **Acute** mononucleosis at **four weeks** with **p twenty four** positive. **CD4 two hundred** defines **AIDS** and triggers **co trimoxazole** prophylaxis. **Dolutegravir** plus **two NRTIs** is **first line** ART. **Undetectable** viral load means **no transmission** at all.",
+   "say": "This is the high yield summary for HIV. Acute illness like mononucleosis appears at four weeks with a positive antigen test. A helper count of two hundred defines AIDS and triggers prophylaxis. Dolutegravir plus two nucleoside drugs is first line therapy. Undetectable viral load indicates no sexual transmission at all.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Cutoff",
+     "Action"
+    ],
+    "rows": [
+     [
+      "CD4 count",
+      "Below 200",
+      "AIDS defined"
+     ],
+     [
+      "CD4 count",
+      "Below one hundred fifty",
+      "Candida prophylaxis"
+     ],
+     [
+      "CD4 count",
+      "Below 100",
+      "Toxoplasma prophylaxis"
+     ],
+     [
+      "CD4 count",
+      "Below 50",
+      "MAC prophylaxis"
+     ],
+     [
+      "Viral load",
+      "Above one hundred thousand",
+      "High transmission"
+     ],
+     [
+      "Viral load",
+      "Below 50",
+      "Suppressed infection"
+     ],
+     [
+      "Adherence",
+      "Above ninety five percent",
+      "Viral suppression"
+     ]
+    ]
+   }
+  }
+ ]
+}
