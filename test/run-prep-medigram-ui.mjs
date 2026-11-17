@@ -91,6 +91,11 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
   // Our own controls: pause/play, seek, sound, full screen (YouTube's overlay hides itself on touch screens).
   const cardSel = "#smdPrep .pn-mg-vid.pn-mg-c:has(iframe)";
+  const ctlOn = `var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && f.classList.contains('ctl') && getComputedStyle(f.querySelector('.pn-mg-vctl')).pointerEvents === 'auto';`;
+  ok(await until(`var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && !f.classList.contains('ctl');`, 5000), "the glass controls fade out on their own (3 s)");
+  ok(await ev(`var v=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}); var c=getComputedStyle(v); return !!v.closest('.pn-mg-frame') && /blur/.test(c.backdropFilter || c.webkitBackdropFilter || '');`) === true, "the controls sit on the video as blurred glass");
+  await ev(`document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).click(); return 1;`);
+  ok(await until(ctlOn, 2000), "a tap on the video brings the controls back");
   ok(await ev(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && ["back","toggle","fwd","sound"].every(function(v){return !!c.querySelector('[data-act=mg-v][data-v='+v+']');}) && !!c.querySelector('[data-act=mg-fs]');`) === true, "the playing video has back, play/pause, forward, sound and full screen controls");
   await click(cardSel + " [data-act=mg-v][data-v=toggle]");
   ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`, 4000), "Pause pauses (the button turns to Play)");
