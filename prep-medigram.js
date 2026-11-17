@@ -18,7 +18,7 @@
   if (!FLAGS.parent) return;
 
   var BATCH = 18, L = ["A", "B", "C", "D", "E", "F"];
-  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, fs, seen }
+  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, ct, fs, seen }
   var VIDS = null, IMGS = null;
 
   function H() { return S.host; }
@@ -108,8 +108,8 @@
     if (c.kind === "video") {
       return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch' + (c.s ? " · " + esc(subjName(c.s) || c.s.charAt(0).toUpperCase() + c.s.slice(1)) : "") + "</p>" + '<p class="vf-stem">' + esc(c.title) + "</p>" +
         // The poster is a background, not an <img>: a tap must start the video, never open the image zoom viewer.
-        '<div class="pn-mg-frame" role="button" tabindex="0" data-act="mg-play" data-i="' + i + '" aria-label="Play video: ' + esc(c.title) + '" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg\')"><span class="pn-mg-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>' +
-        vctl() + '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
+        '<div class="pn-mg-frame" data-act="mg-play" data-i="' + i + '" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg\')"><span class="pn-mg-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' + vctl() + "</div>" +
+        '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
     }
     if (c.kind === "lesson") return '<article class="vf-c pn-mg-c"' + a + '><p class="pn-mg-tag">Lesson · ' + esc(subjName(c.sid)) + '</p><p class="vf-big">' + esc(c.title) + '</p><p class="pn-mut">' + (c.minutes ? c.minutes + " min read, built from the questions you just met." : "Built from the questions you just met.") + '</p><button type="button" class="pn-btn pri" data-act="mg-lesson" data-i="' + i + '">Open lesson</button></article>';
     if (c.kind === "img") {
@@ -146,7 +146,18 @@
     if (t) { t.innerHTML = vi(playing ? "pause" : "play"); t.setAttribute("aria-label", playing ? "Pause" : "Play"); }
     if (m) { m.innerHTML = vi(live.muted ? "mute" : "snd"); m.setAttribute("aria-label", live.muted ? "Unmute" : "Mute"); }
   }
-  if (MEDIA && MEDIA.onState) MEDIA.onState(showState);
+  if (MEDIA && MEDIA.onState) MEDIA.onState(function (live) { showState(live); var card = live.holder && live.holder.closest(".pn-mg-vid"); if (card && live.state === 2) showCtl(card); });
+  /* The glass controls sit on the video and fade out 3 s after the last touch (they stay while the video is paused).
+     A tap anywhere on the video brings them back: the frame's own layer takes the tap (a tap inside the YouTube
+     frame never reaches the app). */
+  function showCtl(card) {
+    var f = card && card.querySelector(".pn-mg-frame");
+    if (!f || !S) return;
+    f.classList.add("ctl");
+    G.clearTimeout(S.ct);
+    S.ct = G.setTimeout(function () { var l = MEDIA && MEDIA.current(); if (l && l.holder === f && l.state === 2) return; hideCtl(card); }, 3000);
+  }
+  function hideCtl(card) { var f = card && card.querySelector(".pn-mg-frame"); if (f) f.classList.remove("ctl"); if (S) G.clearTimeout(S.ct); }
   function setFull(card, on) {
     var box = H().root() && H().root().querySelector("#pnMgFeed");
     if (S.fs && S.fs !== card) S.fs.classList.remove("pn-mg-fs");
@@ -183,7 +194,7 @@
     if (!box) return;
     var r = box.getBoundingClientRect(), mid = r.top + r.height / 2, on = null;
     [].some.call(box.querySelectorAll(".vf-c"), function (el) { var c = el.getBoundingClientRect(); if (c.top <= mid && c.bottom >= mid) { on = el; return true; } return false; });
-    if (on && on.classList.contains("pn-mg-vid")) playIn(on); else MEDIA.release();
+    if (on && on.classList.contains("pn-mg-vid")) { var was = MEDIA.current(); playIn(on); if (!was || was !== MEDIA.current()) showCtl(on); } else MEDIA.release();
   }
   function playIn(el) {
     var holder = el && el.querySelector(".pn-mg-frame");
@@ -216,7 +227,7 @@
   }
   function tickBreak() { if (!S || !S.brk || S.mode !== "break") return stopBreakTimer(); if (DATA.breakState(S.brk, Date.now()).expired) stopBreakTimer(); renderBreak(); }
   function stopBreakTimer() { if (S && S.timer) { G.clearInterval(S.timer); S.timer = 0; } }
-  function stopMedia() { if (S && S.fs) setFull(S.fs, false); if (MEDIA) MEDIA.release(); if (S) G.clearTimeout(S.vt); }
+  function stopMedia() { if (S && S.fs) setFull(S.fs, false); if (MEDIA) MEDIA.release(); if (S) { G.clearTimeout(S.vt); G.clearTimeout(S.ct); } }
   function setMode(mode) { stopMedia(); stopBreakTimer(); S.brk = null; S.mode = mode; S.cards = []; S.seen = {}; S.top = 0; S.done = S.right = 0; if (mode === "break") return renderBreak(); load(); }
 
   function start(host, mode) {
@@ -257,15 +268,19 @@
       if (nx) box.scrollTo({ top: nx.offsetTop - box.offsetTop, behavior: G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       return;
     }
-    if (a === "mg-play") { playIn(el.closest(".pn-mg-vid")); return; }
+    if (a === "mg-play") {
+      var vc = el.closest(".pn-mg-vid"), cur = MEDIA && MEDIA.current();
+      if (!cur || cur.holder.closest(".pn-mg-vid") !== vc) { playIn(vc); return showCtl(vc); }
+      return el.classList.contains("ctl") ? hideCtl(vc) : showCtl(vc);
+    }
     if (a === "mg-v" || a === "mg-fs") {
       var card = el.closest(".pn-mg-vid"), live = MEDIA && MEDIA.current();
       if (!live || live.holder.closest(".pn-mg-vid") !== card) { playIn(card); live = MEDIA && MEDIA.current(); }   // a control on a card not yet playing starts it
-      if (a === "mg-fs") return setFull(card, !card.classList.contains("pn-mg-fs"));
+      if (a === "mg-fs") { setFull(card, !card.classList.contains("pn-mg-fs")); return showCtl(card); }
       if (v === "back" || v === "fwd") MEDIA.command("seek", v === "back" ? -10 : 10);
       else if (v === "toggle") MEDIA.command(live && (live.state === 1 || live.state === 3) ? "pause" : "play");
       else if (v === "sound") MEDIA.command(live && live.muted ? "unmute" : "mute");
-      return;
+      return showCtl(card);
     }
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
     if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
