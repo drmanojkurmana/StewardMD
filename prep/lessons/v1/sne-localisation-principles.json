@@ -1,0 +1,355 @@
+{
+ "v": 1,
+ "module": "sne-localisation-principles",
+ "title": "Principles of neurological localisation",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Localisation** answers one question: where in the nervous system is the lesion that explains every sign? The history gives the tempo, and the examination gives the pattern. Cortical lesions cause focal deficits with higher cognitive or language loss, while deep lesions cause crossed signs and tracts of weakness. Once the level is named, the cause is usually obvious.",
+   "say": "Localisation answers one question: where in the nervous system is the lesion that explains every sign? The history gives the tempo, and the examination gives the pattern. Cortical lesions cause focal deficits with higher cognitive or language loss, while deep lesions cause crossed signs and tracts of weakness. Once the level is named, the cause is usually obvious.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Hallmark pattern",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Cortex",
+      "Higher function loss with focal deficit",
+      "Aphasia, neglect, cortical sensory loss"
+     ],
+     [
+      "Subcortical",
+      "Crossed signs and long tracts",
+      "Crossed face and body weakness"
+     ],
+     [
+      "Brainstem",
+      "Crossed cranial nerve with body signs",
+      "Internuclear ophthalmoplegia, locked-in state"
+     ],
+     [
+      "Spinal cord",
+      "Sensory level with flaccid onset then spastic limbs",
+      "Brown-Sequard deficit, central cord pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unilateral supratentorial lesions produce **contralateral** signs below the head with **ipsilateral** face involvement in cortical lesions. Brainstem lesions produce **crossed** signs: cranial nerve palsy on the side of the lesion and limb weakness on the opposite side. The crossed pattern is the single most useful discriminator between a cortical and a brainstem lesion at the bedside.",
+   "say": "Unilateral supratentorial lesions produce contralateral signs below the head with ipsilateral face involvement in cortical lesions. Brainstem lesions produce crossed signs: cranial nerve palsy on the side of the lesion and limb weakness on the opposite side. The crossed pattern is the single most useful discriminator between a cortical and a brainstem lesion at the bedside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cortical lesion",
+     "points": [
+      "Face and limbs weak on the opposite side",
+      "Language loss if dominant hemisphere",
+      "Crude touch preserved, fine discrimination lost",
+      "Gaze deviation toward the lesion"
+     ]
+    },
+    "right": {
+     "title": "Brainstem lesion",
+     "points": [
+      "Cranial nerve palsy on the side of the lesion",
+      "Limb weakness on the opposite side",
+      "Multiple cranial nerves in a short distance",
+      "Early coma or respiratory failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **sensory level** marks the upper border of a cord lesion and is found by pinprick testing from below upward. **Reflex dissociation** separates upper from lower motor neuron lesions: brisk reflexes with extensor plantar responses favour the cord, while lost reflexes with fasciculations point to root, plexus, or anterior horn. A **flaccid** start that turns spastic over weeks is classic for an acute cord insult.",
+   "say": "The sensory level marks the upper border of a cord lesion and is found by pinprick testing from below upward. Reflex dissociation separates upper from lower motor neuron lesions: brisk reflexes with extensor plantar responses favour the cord, while absent reflexes with fasciculations point to root, plexus, or anterior horn. A flaccid start that turns spastic over weeks is classic for an acute cord insult.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sensory level found on pinprick"
+     },
+     {
+      "id": "b",
+      "label": "Brisk reflexes and extensor plantars"
+     },
+     {
+      "id": "c",
+      "label": "Cord lesion above the level"
+     },
+     {
+      "id": "d",
+      "label": "Lost reflexes and fasciculations"
+     },
+     {
+      "id": "e",
+      "label": "Root, plexus or anterior horn"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **cortical sensory** system tests discrimination rather than just detection. **Stereognosis**, graphaesthesia, and two-point discrimination localise to the parietal cortex and its subcortical connections. Loss of these functions with preserved crude touch and vibration is called **cortical sensory loss**, and it never occurs in a cord or peripheral lesion.",
+   "say": "The cortical sensory system tests discrimination rather than just detection. Stereognosis, graphaesthesia and two-point discrimination localise to the parietal cortex and its subcortical connections. Loss of these functions with preserved crude touch and vibration is called cortical sensory loss, and it never occurs in a cord or peripheral lesion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Pathway",
+     "Localises to"
+    ],
+    "rows": [
+     [
+      "Stereognosis",
+      "Dorsal column and parietal integration",
+      "Parietal cortex"
+     ],
+     [
+      "Graphaesthesia",
+      "Fine touch and spatial perception",
+      "Parietal cortex"
+     ],
+     [
+      "Joint position",
+      "Dorsal columns and medial lemniscal system",
+      "Cord, brainstem, or parietal cortex"
+     ],
+     [
+      "Vibration sense",
+      "Dorsal columns and thalamocortical projections",
+      "Cord, thalamus, or parietal cortex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dejerine-Roussy** syndrome is the archetype of a subcortical lesion: a thalamic stroke causes early loss of sensation on one side, then weeks later spontaneous burning pain with exaggerated responses to touch. The delay between the stroke and the pain, and the **allodynia** where light touch hurts, are the features examiners ask about. It is a central neuropathic pain disorder, not a peripheral one.",
+   "say": "Dejerine-Roussy syndrome is the archetype of a subcortical lesion: a thalamic stroke causes early loss of sensation on one side, then weeks later spontaneous burning pain with exaggerated responses to touch. The delay between the stroke and the pain, and the allodynia where light touch hurts, are the features examiners ask about. It is a central neuropathic pain disorder, not a peripheral one.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thalamic stroke in VPL territory"
+     },
+     {
+      "id": "b",
+      "label": "Contralateral sensory loss"
+     },
+     {
+      "id": "c",
+      "label": "Weeks later burning central pain"
+     },
+     {
+      "id": "d",
+      "label": "Hyperpathia and allodynia on that side"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **first test** for any suspected focal lesion is contrast-enhanced imaging of the region the pattern suggests, and the **definitive** localisation comes from matching the lesion to the signs. A lesion that does not explain the whole pattern is incomplete, and a second lesion should be sought. More than one level is involved in **multifocal** diseases such as demyelination and metastases.",
+   "say": "The first test for any suspected focal lesion is contrast-enhanced imaging of the region the pattern suggests, and the most useful localisation comes from matching the lesion to the signs. A lesion that does not explain the whole pattern is incomplete, and a second lesion should be sought. More than one level is involved in multifocal diseases such as demyelination and metastases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern finding",
+     "Next question",
+     "What it suggests"
+    ],
+    "rows": [
+     [
+      "One level, all signs explained",
+      "Which cause fits the tempo",
+      "Single structural lesion"
+     ],
+     [
+      "Two separate levels",
+      "Dissemination in space",
+      "Multifocal disease such as demyelination"
+     ],
+     [
+      "No lesion explains the deficit",
+      "Re examine the sensory level",
+      "Functional disorder or missed subtle lesion"
+     ],
+     [
+      "Rapidly progressive deficit",
+      "Ischaemia or haemorrhage first",
+      "Stroke until proven otherwise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tempo** localises almost as well as anatomy. Seconds suggest a seizure or transient ischaemia, minutes suggest stroke, days suggest inflammation, and weeks suggest infection or tumour. A deficit that is maximal at onset and then improves is vascular, while one that builds over days is inflammatory. Always state the level and the likely cause together in the answer.",
+   "say": "Tempo localises almost as well as anatomy. Seconds suggest a seizure or transient ischaemia, minutes suggest stroke, days suggest inflammation, and weeks suggest infection or tumour. A deficit that is maximal at onset and then improves is vascular, while one that builds over days is inflammatory. Always state the level and the likely cause together in the answer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tempo",
+     "Most likely mechanism",
+     "Typical cause"
+    ],
+    "rows": [
+     [
+      "Seconds",
+      "Transient neuronal failure",
+      "Seizure, transient ischaemia"
+     ],
+     [
+      "Minutes, maximal at onset",
+      "Vascular occlusion",
+      "Ischaemic or haemorrhagic stroke"
+     ],
+     [
+      "Days, stepwise",
+      "Inflammation or infection",
+      "Meningitis, encephalitis, abscess"
+     ],
+     [
+      "Weeks with progression",
+      "Structural growth",
+      "Tumour, granuloma, chronic infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Upper** and **lower** motor neuron patterns must never be confused. Brisk reflexes with clonus and extensor plantars indicate a central lesion above the anterior horn cell. Wasting, fasciculations, and absent reflexes mean the cell itself or its axon. A mixed pattern of wasting in the limbs with brisk reflexes is **amyotrophic lateral sclerosis** until proven otherwise.",
+   "say": "Upper and lower motor neuron patterns must never be confused. Brisk reflexes with clonus and extensor plantars indicate a central lesion above the anterior horn cell. Wasting, fasciculations and absent reflexes mean the cell itself or its axon. A mixed pattern of wasting in the limbs with brisk reflexes is amyotrophic lateral sclerosis until proven otherwise.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper motor neuron signs",
+     "points": [
+      "Brisk reflexes and clonus",
+      "Extensor plantar responses",
+      "No wasting, only spastic tightness",
+      "Weakness in a pyramidal pattern"
+     ]
+    },
+    "right": {
+     "title": "Lower motor neuron signs",
+     "points": [
+      "Absent or reduced reflexes",
+      "Wasting with fasciculations",
+      "Flaccid tone and flaccid limbs",
+      "Weakness in a root or nerve pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Common traps** in localisation papers are deliberate. A thalamic lesion is mistaken for a cortical one, a brainstem crossed syndrome for a stroke, and a cord level for a peripheral neuropathy. The **crossed** signs and the **sensory level** are the two findings that most reliably rescue the answer. Name the level first, then the mechanism, and the multiple choice option usually follows.",
+   "say": "Common traps in localisation papers are deliberate. A thalamic lesion is mistaken for a cortical one, a brainstem crossed syndrome for a stroke, and a cord level for a peripheral neuropathy. The crossed signs and the sensory level are the two findings that most reliably rescue the answer. Name the level first, then the mechanism, and the multiple choice option usually follows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Why it happens",
+     "Rescue finding"
+    ],
+    "rows": [
+     [
+      "Thalamic taken for cortical",
+      "Both cause hemisensory loss",
+      "Delayed burning pain with allodynia"
+     ],
+     [
+      "Brainstem taken for cortical stroke",
+      "Hemisensory deficit dominates",
+      "Crossed cranial nerve and body signs"
+     ],
+     [
+      "Cord level taken for neuropathy",
+      "Bilateral leg involvement",
+      "A sensory level with spastic limbs"
+     ],
+     [
+      "Root lesion taken for cord lesion",
+      "Dermatomal pain misleads",
+      "Single myotome weakness with lost reflex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** crossed signs mean brainstem, a sensory level means cord, and cortical sensory loss means parietal cortex. Dejerine-Roussy is thalamic infarction with delayed burning central pain. Brisk reflexes with extensor plantars mean a central lesion, while wasting with absent reflexes means a lower motor neuron lesion. Tempo separates vascular from inflammatory causes within seconds.",
+   "say": "High yield for the exam: crossed signs mean brainstem, a sensory level means cord, and cortical sensory loss means parietal cortex. Dejerine-Roussy is thalamic infarction with delayed burning central pain. Brisk reflexes with extensor plantars mean a central lesion, while wasting with absent reflexes means a lower motor neuron lesion. Tempo separates vascular from inflammatory causes within seconds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Level",
+     "Classic disease"
+    ],
+    "rows": [
+     [
+      "Crossed face and body signs",
+      "Brainstem",
+      "Brainstem infarct or glioma"
+     ],
+     [
+      "Sensory level with spastic limbs",
+      "Cord",
+      "Compression, demyelination, tumour"
+     ],
+     [
+      "Cortical sensory loss",
+      "Parietal cortex",
+      "Cortical stroke"
+     ],
+     [
+      "Delayed burning pain after stroke",
+      "Thalamus",
+      "Dejerine-Roussy syndrome"
+     ],
+     [
+      "Wasting with brisk reflexes",
+      "Motor neuron disease",
+      "Amyotrophic lateral sclerosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

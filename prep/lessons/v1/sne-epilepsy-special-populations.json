@@ -1,0 +1,351 @@
+{
+ "v": 1,
+ "module": "sne-epilepsy-special-populations",
+ "title": "Epilepsy in women, pregnancy and the elderly",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Women of childbearing age** with epilepsy need pre conception planning from the first prescription. **Valproate** is avoided because of neural tube defects and neurodevelopmental harm, and it is contraindicated where alternatives exist. **Folic acid** supplementation is advised for all women on antiseizure drugs. Contraception is reviewed at every visit because enzyme inducers reduce oral contraceptive efficacy.",
+   "say": "Women of childbearing age with epilepsy need pre conception planning from the first prescription. Valproate is avoided because of neural tube defects and neurodevelopmental harm, and it is contraindicated where alternatives exist. Folic acid supplementation is advised for all women on antiseizure drugs. Contraception is reviewed at every visit because enzyme inducers reduce oral contraceptive efficacy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Drug advice",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Planning pregnancy",
+      "Lamotrigine or levetiracetam",
+      "Lower teratogenic risk"
+     ],
+     [
+      "All women on drugs",
+      "High dose folic acid",
+      "Neural tube defect prevention"
+     ],
+     [
+      "Indigene pregnancy",
+      "Continue therapy",
+      "Seizures harm the fetus too"
+     ],
+     [
+      "Enzyme inducer users",
+      "Alternative contraception",
+      "Reduced oral contraceptive efficacy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pregnancy** increases clearance of many antiseizure drugs, so levels fall and seizures recur. **Lamotrigine** clearance rises substantially and needs level guided dosing. **Levetiracetam** clearance also increases. Seizures are not stopped in pregnancy because seizures themselves cause fetal harm and maternal injury. Therapeutic drug monitoring in each trimester is the standard answer.",
+   "say": "Pregnancy increases clearance of many antiseizure drugs, so levels fall and seizures recur. Lamotrigine clearance rises substantially and needs level guided dosing. Levetiracetam clearance also increases. Seizures are not stopped in pregnancy because seizures themselves cause fetal harm and maternal injury. Therapeutic drug monitoring in each trimester is the standard answer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Pregnancy change",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Lamotrigine",
+      "Clearance rises markedly",
+      "Level guided dose increases"
+     ],
+     [
+      "Levetiracetam",
+      "Clearance rises",
+      "Monitor levels each trimester"
+     ],
+     [
+      "Carbamazepine",
+      "Clearance rises moderately",
+      "Monitor for breakthrough seizures"
+     ],
+     [
+      "Valproate",
+      "Still avoided",
+      "Switch before conception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catamenial** epilepsy shows seizure clustering around menstruation because of hormonal fluctuation around menstruation. **Topiramate** and **zonisamide** are among the drugs with data for perimenstrual seizure control. **Pregabalin** is an alternative in selected patients. Hormonal contraception can worsen seizures in women with catamenial patterns.",
+   "say": "Catamenial epilepsy shows seizure clustering around menstruation because of hormonal fluctuation around menstruation. Topiramate and zonisamide are among the drugs with data for perimenstrual seizure control. Pregabalin is an alternative in selected patients. Hormonal contraception can worsen seizures in women with catamenial patterns.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Estrogen rises, excitatory"
+     },
+     {
+      "id": "b",
+      "label": "Inhibitory cover is lost"
+     },
+     {
+      "id": "c",
+      "label": "Perimenstrual seizure cluster"
+     },
+     {
+      "id": "d",
+      "label": "Perimenstrual drug cover added"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **elderly** have the highest incidence of epilepsy because stroke, tumours, and dementia predominate. **Levetiracetam** and **lamotrigine** are the preferred first line drugs in older patients because of few interactions. **Phenytoin** is used cautiously in this age group because of interactions and falls. New onset seizures in the elderly are focal until proven otherwise.",
+   "say": "The elderly have the highest incidence of epilepsy because stroke, tumours and dementia predominate. Levetiracetam and lamotrigine are the preferred first line drugs in older patients because of few interactions. Phenytoin is used cautiously in this age group because of interactions and falls. New onset seizures in the elderly are focal until proven otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Elderly pattern",
+     "Implication"
+    ],
+    "rows": [
+     [
+      "Incidence",
+      "Highest in this age group",
+      "Stroke and dementia predominate"
+     ],
+     [
+      "Seizure type",
+      "Focal onset most often",
+      "Structural imaging is essential"
+     ],
+     [
+      "First line drugs",
+      "Levetiracetam, lamotrigine",
+      "Few drug interactions"
+     ],
+     [
+      "Avoid",
+      "Phenytoin where possible",
+      "Falls and interactions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pharmacokinetics** change with age because renal and hepatic clearance fall and protein binding changes. Doses start low and titrate slowly in older patients. **Gabapentin** and **pregabalin** need renal dose adjustment. Interacting drugs such as **warfarin** are affected by enzyme inducers, and the combination needs careful review.",
+   "say": "Pharmacokinetics change with age because renal and hepatic clearance fall and protein binding changes. Doses start low and titrate slowly in older patients. Gabapentin and pregabalin need renal dose adjustment. Interacting drugs such as warfarin are affected by enzyme inducers, and the combination needs careful review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Change",
+     "Effect",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Renal clearance falls",
+      "Active drug accumulates",
+      "Reduce dose, space intervals"
+     ],
+     [
+      "Hepatic clearance falls",
+      "Half life prolongs",
+      "Start low, titrate slowly"
+     ],
+     [
+      "Protein binding falls",
+      "Free drug fraction rises",
+      "Watch for toxicity at normal levels"
+     ],
+     [
+      "Polypharmacy",
+      "Interactions multiply",
+      "Review enzyme inducers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Status epilepticus** in the elderly has high mortality and needs the same timeline as in younger patients. **Nonconvulsive status** is common in older patients with altered consciousness. Valproate carries extra liver risk in children under 2 years and in suspected metabolic disease, where levetiracetam is preferred. Children and the elderly share the principle of age adjusted caution.",
+   "say": "Status epilepticus in the elderly has high mortality and needs the same timeline as in younger patients. Nonconvulsive status is common in older patients with altered consciousness. Valproate carries extra liver risk in children under 2 years and in suspected metabolic disease, where levetiracetam is preferred. Children and the elderly share the principle of age adjusted caution.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Special risk",
+     "Drug choice"
+    ],
+    "rows": [
+     [
+      "Elderly",
+      "Nonconvulsive status, falls",
+      "Levetiracetam, lamotrigine"
+     ],
+     [
+      "Children under 2 years",
+      "Valproate liver toxicity",
+      "Levetiracetam preferred"
+     ],
+     [
+      "Women who could conceive",
+      "Teratogenicity",
+      "Lamotrigine, levetiracetam"
+     ],
+     [
+      "Renal impairment",
+      "Drug accumulation",
+      "Dose adjust gabapentin analogues"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Breast feeding** is generally compatible with antiseizure therapy because drug transfer into milk is low and benefits of feeding are high. Maternal seizure control matters more than milk exposure. Sedating drugs are watched for infant drowsiness. The exam answer is almost always to continue drugs and continue breastfeeding.",
+   "say": "Breast feeding is generally compatible with antiseizure therapy because drug transfer into milk is low and benefits of feeding are high. Maternal seizure control matters more than milk exposure. Sedating drugs are watched for infant drowsiness. The exam answer is almost always to continue drugs and continue breastfeeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continue therapy",
+     "points": [
+      "Maternal control is essential",
+      "Drug in milk is low",
+      "Breast feeding benefits are high",
+      "Monitor infant for drowsiness"
+     ]
+    },
+    "right": {
+     "title": "Stop therapy wrongly",
+     "points": [
+      "Seizure risk rises sharply",
+      "Fetal harm from seizures continues",
+      "Bonding and nutrition suffer",
+      "Rebound seizures are common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Traps** test teratogenicity and clearance. **Valproate** before conception is the classic wrong prescription, and **lamotrigine** clearance in pregnancy is the classic dose trap. **Phenytoin** in lactation is often wrongly stopped. The elderly new onset focal seizure needs structural imaging, not reassurance. Enzyme induction also reduces contraceptive efficacy.",
+   "say": "Traps test teratogenicity and clearance. Valproate before conception is the classic wrong prescription, and lamotrigine clearance in pregnancy is the classic dose trap. Phenytoin in lactation is often wrongly stopped. The elderly new onset focal seizure needs structural imaging, not reassurance. Enzyme induction also reduces contraceptive efficacy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Planning conception",
+      "Continue valproate",
+      "Switch to lamotrigine or levetiracetam"
+     ],
+     [
+      "Pregnancy level fall",
+      "No dose change",
+      "Level guided adjustment"
+     ],
+     [
+      "Breast feeding",
+      "Stop the drug",
+      "Continue drug and feeding"
+     ],
+     [
+      "Elderly focal seizures",
+      "Reassure without imaging",
+      "Imaging for stroke or tumour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long term** care adds bone health for enzyme inducers, mood screening for levetiracetam, and driving advice. **Carbamazepine** and **phenytoin** cause osteopenia and vitamin D deficiency. **Oxcarbazepine** shares the hyponatraemia risk. Fertility, mood, and adherence are reviewed annually in every clinic visit.",
+   "say": "Long term care adds bone health for enzyme inducers, mood screening for levetiracetam and driving advice. Carbamazepine and phenytoin cause osteopenia and vitamin D deficiency. Oxcarbazepine carries the same hyponatraemia risk. Fertility, mood and adherence are reviewed annually in every clinic visit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Drugs",
+     "Care"
+    ],
+    "rows": [
+     [
+      "Osteopenia",
+      "Carbamazepine, phenytoin",
+      "Vitamin D and bone density checks"
+     ],
+     [
+      "Hyponatraemia",
+      "Carbamazepine, oxcarbazepine",
+      "Serum sodium monitoring"
+     ],
+     [
+      "Mood change",
+      "Levetiracetam",
+      "Mood screening at each visit"
+     ],
+     [
+      "Teratogenicity",
+      "All drugs",
+      "Folic acid and planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** valproate is avoided in women who could conceive, lamotrigine and levetiracetam are preferred, and folic acid is advised for all. Lamotrigine clearance rises in pregnancy and levetiracetam clearance rises too. The elderly have the highest incidence and need structural imaging for focal onset. Breast feeding continues with therapy.",
+   "say": "High yield for the exam: valproate is avoided in women who could conceive, lamotrigine and levetiracetam are preferred and folic acid is advised for all. Lamotrigine clearance rises in pregnancy and levetiracetam clearance rises too. The elderly have the highest incidence and need structural imaging for focal onset. Breast feeding continues with therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Women planning pregnancy",
+      "Avoid valproate",
+      "Teratogenicity is the top trap"
+     ],
+     [
+      "Clearance in pregnancy",
+      "Lamotrigine and levetiracetam rise",
+      "Dose adjustment is needed"
+     ],
+     [
+      "Elderly incidence",
+      "Highest age group",
+      "New focal seizures appear"
+     ],
+     [
+      "Breast feeding",
+      "Continue drug and feeding",
+      "Transfer into milk is low"
+     ],
+     [
+      "Catamenial pattern",
+      "Perimenstrual clustering",
+      "Hormonal fluctuation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
