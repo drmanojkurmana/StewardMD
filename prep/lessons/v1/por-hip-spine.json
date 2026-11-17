@@ -1,0 +1,144 @@
+{
+  "v": 1,
+  "module": "por-hip-spine",
+  "subject": "ss-paediatric-orthopaedics",
+  "title": "Paediatric hip, spine and neuromuscular disorders: DDH to scoliosis",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Sabiston Surgery 22nd edition"
+  ],
+  "steps": [
+    {
+      "tx": "**Developmental dysplasia of hip** means a shallow socket that leaves the femoral head unstable at birth. About 1 in 1000 live births is affected, with 5 to 6 times higher rates in breech babies. Ortolani and Barlow tests feel the head in and out in the first 3 days. Late presentation after 12 weeks needs open surgery with spica in 70 percent of cases.",
+      "say": "Developmental dysplasia means a shallow hip socket leaving the ball unstable at birth. It affects about one in a thousand live births, more often after breech delivery. Hip tests feel the ball in and out in the first days. Late presentation needs open surgery with a spica cast.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Finding", "Age clue"],
+        "rows": [
+          ["Positive click tests", "First 3 days of life"],
+          ["Limited abduction", "After 3 months"],
+          ["Limping gait", "After walking age"],
+          ["Breech first born female", "Highest risk group"]
+        ]
+      }
+    },
+    {
+      "tx": "**Breech position** with legs extended and family history raise risk 5 to 10 fold. First born female infants carry higher risk than males by 8 to 1 in clinic series. Oligohydramnios and tight swaddling add mechanical constraint in 2 to 3 percent of births. About 20 percent of cases have associated foot deformity needing assessment.",
+      "say": "Breech position and family history raise risk five to ten fold. First born girls are affected far more than boys. Low fluid volume and tight swaddling add mechanical constraint. A fifth of cases also have foot deformity that needs checking.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Breech position", "sub": "mechanical cause"},
+          {"id": "b", "label": "Family pattern", "sub": "female first born"},
+          {"id": "c", "label": "Tight wrapping", "sub": "legs bound straight"},
+          {"id": "d", "label": "Screening", "sub": "weeks 6 to 8"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "**Hip instability** lets the head slip out past 80 degrees of flexion with adduction. The shallow acetabulum grows shallower under avascular load over 6 months. Tightly swaddled legs lie in extension, blocking normal socket growth in 5 to 8 percent of cultures. Early splintage recentres the head before 3 months in 95 percent of cases.",
+      "say": "Instability lets the head slip out when the hip bends and moves inward. The shallow socket grows shallower under load over months. Tight wrapping keeps legs straight and blocks normal socket growth. Early splintage recentres the head well when started before three months.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Shallow socket", "sub": "acetabulum under 60 degrees"},
+          {"id": "b", "label": "Head subluxates", "sub": "in flexion and adduction"},
+          {"id": "c", "label": "Growth fails", "sub": "over 6 months"},
+          {"id": "d", "label": "Late arthritis", "sub": "by age 30"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "**Legg Perthes** disease cuts blood to the capital femoral head in boys aged 4 to 8 years. About 1 in 10000 children is affected, 3 to 5 times more in boys. The child limps with knee pain referred in 30 percent of cases, an inferolateral limp also hinting at dysplasia. Range of abduction falls by 15 degrees while knees stay normal.",
+      "say": "Perthes disease cuts the blood supply to the hip ball in young boys. It affects about one in ten thousand children, three to five times more in boys. The child limps and may complain of knee pain. Hip movement falls while the knees themselves look normal.",
+      "vis": {
+        "kind": "compare",
+        "left": {"title": "Perthes pattern", "points": ["Boys aged 4 to 8 years", "Limp with knee pain", "Abduction reduced 15 degrees", "Knees clinically normal"]},
+        "right": {"title": "Slipped capital femoral epiphysis", "points": ["Adolescents aged 10 to 16 years", "Obese habitus common", "External rotation of limb", "Cannot bear weight suddenly"]}
+      }
+    },
+    {
+      "tx": "**Slipped capital femoral epiphysis** displaces the epiphysis through a weak physis in obese adolescents. Cerebral palsy hips migrate laterally under spasticity in 30 percent of non walking children. Scoliosis curves exceed 20 degrees in 3 percent of screened adolescents. Rickets bows legs over 5 degrees with widened growth plates in 2.5 percent of undernourished children.",
+      "say": "Slipped hip occurs in obese adolescents through a weak growth plate. Cerebral palsy hips migrate laterally under spasticity in many non walking children. Spinal curves exceed twenty degrees in a few percent of screened adolescents. Rickets bows legs with widened growth plates in undernourished children.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Condition", "Hallmark age"],
+        "rows": [
+          ["Perthes disease", "About 4 to 8 years"],
+          ["Slipped epiphysis", "About 10 to 16 years"],
+          ["Cerebral palsy hip", "Non walking children"],
+          ["Scoliosis", "Adolescents screening age"]
+        ]
+      }
+    },
+    {
+      "tx": "**Ultrasound at 6 weeks** confirms dysplasia with 95 percent accuracy in high risk babies. X-ray after 4 months shows the ossific nucleus for migration index above 30 percent. Perthes staging uses Herring classes 1 to 4 over 2 years of films. Scoliosis screening with Adam test uses Scoliometer above 7 degrees for referral.",
+      "say": "Ultrasound at six weeks confirms dysplasia with high accuracy in high risk babies. X-rays after four months show migration for hip instability. Perthes staging uses four classes over two years of films. Scoliosis screening with a surface device triggers referral above seven degrees.",
+      "vis": {
+        "kind": "compare",
+        "left": {"title": "Hip imaging", "points": ["Ultrasound at 6 weeks", "X-ray after 4 months", "Migration above 30 percent", "Perthes classes 1 to 4"]},
+        "right": {"title": "Spine imaging", "points": ["Adam forward bend test", "Scoliometer above 7 degrees", "Cobb angle over 20 degrees", "Repeat films at 6 months"]}
+      }
+    },
+    {
+      "tx": "**Pavlik harness** for 6 weeks centres the hip in 90 percent of early cases without surgery. Bracing for Perthes covers 6 to 12 months with containment over 15 degrees of abduction. Varus osteotomy for slipped hip in 5 to 10 percent prevents bilateral slip. Achilles lengthening treats 2.5 cm of leg length gap in walking cerebral palsy children.",
+      "say": "A harness for six weeks centres early dysplasia in most cases without surgery. Bracing for Perthes covers many months with containment. Slipped hip needs pin fixation in a minority to prevent both sides slipping. Leg length correction helps walking children with cerebral palsy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Diagnose early", "sub": "weeks 6 to 8"},
+          {"id": "b", "label": "Splint or brace", "sub": "6 weeks to 12 months"},
+          {"id": "c", "label": "Review films", "sub": "every 3 months"},
+          {"id": "d", "label": "Surgery if needed", "sub": "open or osteotomy"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "**Spinal bracing** for curves 25 to 40 degrees during growth needs 18 hours daily wear over 2 years. Fusion for curves above 50 degrees covers 5 to 8 levels in a single sitting. Botulinum toxin relaxes spastic adductors in 4 to 6 weeks with effect lasting 3 months. Fusion failure with infection strikes 2 to 4 percent of neuromuscular cases.",
+      "say": "Bracing for moderate curves during growth needs many hours daily over two years. Fusion for large curves covers several levels in one sitting. Toxin injections relax tight muscles for a few months. Wound infection remains the main surgical worry in weak children.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Treatment", "Typical span"],
+        "rows": [
+          ["Pavlik harness", "About 6 weeks"],
+          ["Perthes bracing", "About 6 to 12 months"],
+          ["Scoliosis bracing", "About 18 hours daily for 2 years"],
+          ["Spinal fusion", "Curves above 50 degrees"]
+        ]
+      }
+    },
+    {
+      "tx": "**Avascular necrosis** after late dysplasia surgery hits 10 to 15 percent of open reductions. Slipped hip with avascular necrosis disables 20 percent of severely slipped heads. Progressive scoliosis above 60 degrees risks pulmonary compromise in 10 percent of cases. Cerebral palsy hip dislocation in 15 percent needs palliation over formal reduction.",
+      "say": "Loss of blood to the hip ball after late surgery affects a minority. Severe slipped hip with blood loss disables many heads. Very large spinal curves compromise breathing in a fraction of cases. Dislocated palsy hips often get comfort surgery rather than full reduction.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Late problem", "Approximate rate"],
+        "rows": [
+          ["Neck necrosis after late surgery", "About 10 to 15 percent"],
+          ["Disabled severely slipped heads", "About 20 percent"],
+          ["Lung compromise above 60 degrees", "About 10 percent"],
+          ["Palsy hip dislocation", "About 15 percent"]
+        ]
+      }
+    },
+    {
+      "tx": "**Breech first born female** with click hip at 6 weeks belongs in a Pavlik harness within 2 weeks. Obese adolescent with external rotation and knee pain needs frog leg view for slipped epiphysis, not knee treatment. Non walking palsy child needs yearly pelvis films after age 4 because 30 percent migrate silently.",
+      "say": "High-yield for the exam: breech first born girl with click hip needs early splintage within two weeks. Obese adolescent with out turned limb needs hip films, not knee treatment. Non walking palsy child needs yearly pelvis films because migration is often silent.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Scenario", "Action"],
+        "rows": [
+          ["Breech girl, click hip at 6 weeks", "Harness within 2 weeks"],
+          ["Obese teen, out turned limb", "Frog leg hip films now"],
+          ["Non walking palsy child after 4 years", "Yearly pelvis films"],
+          ["Curve over 25 degrees at 12 years", "Brace 18 hours daily"]
+        ]
+      }
+    }
+  ]
+}
