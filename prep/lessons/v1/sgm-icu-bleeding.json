@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "sgm-icu-bleeding",
+ "subject": "ss-general-medicine",
+ "title": "Transfusion, coagulopathy and bleeding in critical illness",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Critical bleeding** means acute loss of over one thousand five hundred mL or 3 to 4 units of blood with shock, lactate above 4 mmol per L and Hb drop below 7 g per dL. Normal platelets are one hundred fifty to four hundred times 10 to power 9 per L and INR below one point two. Massive transfusion is 10 units PRBC in 24 hours. Trigger for transfusion is Hb 7 g per dL in most stable patients.",
+   "say": "Critical bleeding is a loss of over fifteen hundred millilitres with shock. Normal platelets and INR help set targets. The transfusion trigger is usually seven grams per decilitre.",
+   "vis": null
+  },
+  {
+   "tx": "Causes of **ICU bleeding** are 5 groups: surgery, trauma, sepsis DIC, liver failure and drugs. Risk factors are platelets below 50, INR above 1.5, prior anticoagulant use in 10%, recent surgery within 7 days and sepsis. Vitamin K deficiency occurs in 15% with poor intake. About 20% of ICU deaths involve coagulopathy with DIC scoring above 5.",
+   "say": "Bleeding causes include surgery, trauma, sepsis and drugs. Low platelets and high INR increase risk sharply for patients. Sepsis coagulopathy affects about one fifth of critical patients.",
+   "vis": null
+  },
+  {
+   "tx": "The **mechanism** starts with endothelial injury exposing tissue factor, which activates extrinsic coagulation and consumes factors within 10 minutes. Platelet activation forms primary haemostasis, fibrin crosslinking stabilises clot, then fibrinolysis breaks it down. Hyperfibrinolysis with d dimer above 5 micrograms per mL shows fresh clot breakdown. Dilution from 1 to 1 to 1 fluids worsens coagulopathy by 30%.",
+   "say": "Tissue factor causes clotting and platelets seal the vessel for defence. Fibrinolysis then breaks clot down to allow flow. Dilution from excess fluids worsens the bleeding in the unit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vessel injury"
+     },
+     {
+      "id": "b",
+      "label": "Tissue factor trigger"
+     },
+     {
+      "id": "c",
+      "label": "Platelet plug"
+     },
+     {
+      "id": "d",
+      "label": "Fibrin clot"
+     },
+     {
+      "id": "e",
+      "label": "Fibrinolysis and DIC"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical features are active bleeding, tachycardia above one hundred ten per minute, hypotension below 90 systolic and cool clammy skin within 10 minutes. **Classic sign** of DIC is oozing from puncture sites plus schistocytes on smear. Conjunctival pallor appears with Hb below 8 g per dL. Urine output falls below zero point five mL per kg per hour or 30 mL per hour.",
+   "say": "Bleeding patients are tachycardic and hypotensive quickly after injury. Oozing from puncture sites suggests DIC in severe bleeding. Pallor appears when haemoglobin falls below eight grams in the unit.",
+   "vis": null
+  },
+  {
+   "tx": "First test is Hb, platelet count and INR with fibrinogen above one hundred fifty mg per dL, plus ROTEM and TEG for clot dynamics. **Gold standard** is viscoelastic testing showing clot time and maximum clot firmness guiding 1 to 1 to 1 transfusion. Group and cross match 4 units at once when Hb is below 7. Lactate above 4 and base deficit below minus six confirm shock.",
+   "say": "Blood counts and clotting tests come first for every bleeding patient. Viscoelastic tests guide component therapy precisely in the unit. Lactate above four confirms shock and need for action.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Normal value",
+     "Transfusion trigger"
+    ],
+    "rows": [
+     [
+      "Haemoglobin",
+      "twelve to fifteen g per dL",
+      "Below 7 g per dL"
+     ],
+     [
+      "Platelets",
+      "one hundred fifty to four hundred thousand",
+      "Below 50 thousand"
+     ],
+     [
+      "INR",
+      "Below one point two",
+      "Above 1.5 with bleeding"
+     ],
+     [
+      "Fibrinogen",
+      "one hundred fifty to four hundred mg per dL",
+      "Below one hundred fifty mg per dL"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line is 1 to 1 to 1 transfusion with **tranexamic acid** 1 g bolus in 10 minutes then 1 g over 8 hours within 3 hours of injury. Give calcium 1 g per 4 units to hold ionised Ca above 1.1 mmol per L. Correct temperature above 36 degrees and pH above seven point two to preserve clotting. Cryoprecipitate 1 unit per 10 kg raises fibrinogen by 50 mg per dL.",
+   "say": "Tranexamic acid within three hours helps save lives in bleeding. Calcium must be replaced with every four units given. Warmth and pH also help protect clotting in the unit.",
+   "vis": null
+  },
+  {
+   "tx": "Second line uses **platelet** transfusion at 1 unit per 10 kg for counts below 50, vitamin K 10 mg IV for deficiency and reversal agent 10 mg per one thousand units anticoagulant. For warfarin bleed give prothrombin complex 50 units per kg. For factor deficiency give recombinant factor VIIa 90 micrograms per kg only in refractory cases. Cell saver reduces allogenic need by 30% in surgery.",
+   "say": "Platelets are given for low counts with active bleeding. Vitamin K and complex help correct warfarin effects in bleeding. Cell saver cuts donor blood need by about thirty percent.",
+   "vis": null
+  },
+  {
+   "tx": "Choose therapy by cause in the first 24 hours of ICU admission. **Comparison** of TXA versus no TXA shows mortality 15% versus twenty-two percent when given within 3 hours. Fibrinogen concentrate 2 to 4 g raises level in 10 minutes, while cryoprecipitate takes 30 minutes. Overtransfusion raises ARDS risk by 10%, so stop at Hb 9 g per dL.",
+   "say": "Tranexamic acid early cuts mortality by about seven percent in bleeding. Fibrinogen concentrate acts faster than cryoprecipitate in practice. Overtransfusion itself can harm the lungs and should be avoided.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tranexamic acid",
+     "points": [
+      "1 g bolus then 1 g infusion",
+      "Within 3 hours of injury",
+      "Cuts death 15 versus twenty-two percent"
+     ]
+    },
+    "right": {
+     "title": "Blood components",
+     "points": [
+      "1 to 1 to 1 ratio",
+      "Platelets above 50 thousand",
+      "Fibrinogen above one hundred fifty mg per dL"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **TRALI** in 1 in five thousand transfusions, TACO in 5% of cardiac patients, haemolysis in 1 in twelve thousand and citrate toxicity with Ca below 1.1 mmol per L. Infection transmission is now below 1 in 1 million with screening. DIC mortality reaches forty percent when scores exceed six. Thrombosis follows 15% of massive transfusions with excess prothrombin.",
+   "say": "Transfusion carries risks like lung injury and overload in patients. Modern screening makes infection very rare in practice now. DIC with high scores carries about forty percent mortality in the unit.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis improves when **bleeding stops** within six hours, lactate clears below 2 mmol per L by twelve hours and base deficit normalises. Early goal Hb of 7 to 9 g per dL balances oxygen need and overload. Survivors of massive transfusion have 20% renal failure rate in the first week. Long term fatigue affects 30% at 3 months from anaemia.",
+   "say": "Stopping bleeding within six hours improves survival a lot. Lactate should clear by twelve hours. Kidney injury follows in about one fifth of cases.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** table for transfusion coagulopathy and bleeding in 7 high yield points. Remember Hb trigger 7 g per dL, platelets below 50 thousand, INR above 1.5 and fibrinogen below one hundred fifty mg per dL. Tranexamic acid 1 g within 3 hours and calcium 1 g per 4 units are key actions.",
+   "say": "This table has the thresholds for the exam. Haemoglobin platelets INR and fibrinogen help define the trigger.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "Number to recall",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Hb trigger",
+      "7 g per dL",
+      "Transfuse if stable"
+     ],
+     [
+      "Platelet trigger",
+      "50 thousand",
+      "1 unit per 10 kg"
+     ],
+     [
+      "INR trigger",
+      "Above 1.5 bleeding",
+      "PCC 50 units per kg"
+     ],
+     [
+      "Fibrinogen",
+      "one hundred fifty mg per dL",
+      "Cryoprecipitate"
+     ],
+     [
+      "TXA dose",
+      "1 g plus 1 g",
+      "Within 3 hours"
+     ],
+     [
+      "Calcium",
+      "1 g per 4 units",
+      "Keep Ca above 1.1"
+     ],
+     [
+      "DIC score",
+      "Above 5 of 8",
+      "Treat cause"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
