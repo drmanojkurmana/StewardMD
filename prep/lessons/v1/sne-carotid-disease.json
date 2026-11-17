@@ -1,228 +1,269 @@
 {
- "v": 1,
- "module": "sne-carotid-disease",
- "title": "Carotid and vertebral artery disease and dissection",
- "minutes": 8,
- "gen": "AI",
- "steps": [
-  {
-   "tx": "Spontaneous dissection of the extracranial **internal carotid artery** represents a major cause of ischaemic stroke in young adults. The classic clinical presentation consists of the diagnostic triad of sudden unilateral frontotemporal or neck pain, a painful partial **Horner syndrome** lacking facial anhidrosis, and delayed cerebral or retinal ischaemic symptoms within several hours to days.",
-   "say": "Spontaneous dissection of the extracranial internal carotid artery represents a major cause of ischaemic stroke in young adults. The classic clinical presentation consists of the diagnostic triad of sudden unilateral frontotemporal or neck pain, a painful partial Horner syndrome lacking facial anhidrosis, and delayed cerebral or retinal ischaemic symptoms within several hours to days.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Carotid Dissection Triad",
-     "points": [
-      "Unilateral frontotemporal or facial pain",
-      "Partial Horner syndrome with ptosis and miosis",
-      "Absence of facial anhidrosis",
-      "Transient monocular blindness or stroke"
-     ]
+  "v": 1,
+  "module": "sne-carotid-disease",
+  "title": "Carotid and vertebral artery disease and dissection",
+  "minutes": 8,
+  "gen": "AI",
+  "steps": [
+    {
+      "tx": "Spontaneous dissection of the extracranial **internal carotid artery** represents a major cause of ischaemic stroke in young adults. The classic clinical presentation consists of the diagnostic triad of sudden unilateral frontotemporal or neck pain, a painful partial **Horner syndrome** lacking facial anhidrosis, and delayed cerebral or retinal ischaemic symptoms within several hours to days.",
+      "say": "Spontaneous dissection of the extracranial internal carotid artery represents a major cause of ischaemic stroke in young adults. The classic clinical presentation consists of the diagnostic triad of sudden unilateral frontotemporal or neck pain, a painful partial Horner syndrome lacking facial anhidrosis, and delayed cerebral or retinal ischaemic symptoms within several hours to days.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carotid Dissection Triad",
+          "points": [
+            "Unilateral frontotemporal or facial pain",
+            "Partial Horner syndrome with ptosis and miosis",
+            "Absence of facial anhidrosis",
+            "Transient monocular blindness or stroke"
+          ]
+        },
+        "right": {
+          "title": "Aetiological Mechanisms",
+          "points": [
+            "Intimal tear with mural haematoma",
+            "Underlying connective tissue disorder",
+            "Minor cervical hyperextension trauma",
+            "Thromboembolism from pseudoaneurysm"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Aetiological Mechanisms",
-     "points": [
-      "Intimal tear with mural haematoma",
-      "Underlying connective tissue disorder",
-      "Minor cervical hyperextension trauma",
-      "Thromboembolism from pseudoaneurysm"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Spontaneous **vertebral artery dissection** typically targets the mobile V3 horizontal loop segment as the vessel winds around the **atlas loop** at the suboccipital triangle. Patients experience severe ipsilateral occipitonuchal headache and neck stiffness, followed hours or days later by brainstem or cerebellar stroke manifestations including lateral medullary ischaemia.",
-   "say": "Spontaneous vertebral artery dissection typically targets the mobile V3 horizontal loop segment as the vessel winds around the atlas loop at the suboccipital triangle. Patients experience severe ipsilateral occipitonuchal headache and neck stiffness, followed hours or days later by brainstem or cerebellar stroke manifestations including lateral medullary ischaemia.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Cervical Rotation Strain"
-     },
-     {
-      "id": "b",
-      "label": "V3 Atlas Loop Torsion"
-     },
-     {
-      "id": "c",
-      "label": "Intimal Tear and Haematoma"
-     },
-     {
-      "id": "d",
-      "label": "Vertebrobasilar Stroke"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b",
-      "mechanical stress"
-     ],
-     [
-      "b",
-      "c",
-      "wall disruption"
-     ],
-     [
-      "c",
-      "d",
-      "thromboembolism"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "High-resolution cross-sectional magnetic resonance imaging provides non-invasive diagnostic confirmation of cervical arterial dissection. Axial fat-saturated **T1-weighted** magnetic resonance imaging exquisitely reveals an eccentric crescentic hyperintense **intramural hematoma** surrounding a narrowed eccentric arterial flow void, confirming acute or subacute subadventitial dissection.",
-   "say": "High-resolution cross-sectional magnetic resonance imaging provides non-invasive diagnostic confirmation of cervical arterial dissection. Axial fat-saturated T1-weighted magnetic resonance imaging exquisitely reveals an eccentric crescentic hyperintense intramural hematoma surrounding a narrowed eccentric arterial flow void, confirming acute or subacute subadventitial dissection.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Imaging Modality",
-     "Key Radiographic Finding",
-     "Diagnostic Utility"
-    ],
-    "rows": [
-     [
-      "Fat-saturated T1 MRI",
-      "Crescentic intramural haematoma",
-      "Definitive tissue confirmation"
-     ],
-     [
-      "CT Angiography",
-      "String sign and flame tapering",
-      "Rapid acute emergency triage"
-     ],
-     [
-      "Duplex Ultrasound",
-      "Elevated resistance and flap",
-      "Bedside screening and monitoring"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Initial antithrombotic management of acute extracranial **cervical artery dissection** focuses on secondary embolic prevention. Randomised clinical data from the CADISS and TREAT-CAD trials establish equivalent clinical efficacy between antiplatelet agents and therapeutic **anticoagulation**, demonstrating no significant differences in stroke recurrence or overall survival outcomes.",
-   "say": "Initial antithrombotic management of acute extracranial cervical artery dissection focuses on secondary embolic prevention. Randomised clinical data from the CADISS and TREAT-CAD trials establish equivalent clinical efficacy between antiplatelet agents and therapeutic anticoagulation, demonstrating no significant differences in stroke recurrence or overall survival outcomes.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/tia-fig1.webp",
-    "alt": "Diagram illustrating transient ischaemic attack and arterial thromboembolism.",
-    "caption": "Arterial thromboembolic pathways and transient cerebral ischaemia (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "An intimal fibrovascular anomaly known as a **Carotid web** arises as a shelf-like projection along the posterior wall of the **internal carotid** bulb. This projection causes localized flow stagnation and recirculation, generating microthrombi that predispose young patients to recurrent embolic strokes despite standard single antiplatelet therapy.",
-   "say": "An intimal fibrovascular anomaly known as a Carotid web arises as a shelf-like projection along the posterior wall of the internal carotid bulb. This projection causes localized flow stagnation and recirculation, generating microthrombi that predispose young patients to recurrent embolic strokes despite standard single antiplatelet therapy.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Carotid Web Pathology",
-     "points": [
-      "Atypical intimal fibromuscular variant",
-      "Posterior internal carotid bulb shelf",
-      "Young adults without vascular risk factors",
-      "Recurrent downstream embolic events"
-     ]
+    {
+      "tx": "Spontaneous **vertebral artery dissection** typically targets the mobile V3 horizontal loop segment as the vessel winds around the **atlas loop** at the suboccipital triangle. Patients experience severe ipsilateral occipitonuchal headache and neck stiffness, followed hours or days later by brainstem or cerebellar stroke manifestations including lateral medullary ischaemia.",
+      "say": "Spontaneous vertebral artery dissection typically targets the mobile V3 horizontal loop segment as the vessel winds around the atlas loop at the suboccipital triangle. Patients experience severe ipsilateral occipitonuchal headache and neck stiffness, followed hours or days later by brainstem or cerebellar stroke manifestations including lateral medullary ischaemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cervical Rotation Strain"
+          },
+          {
+            "id": "b",
+            "label": "V3 Atlas Loop Torsion"
+          },
+          {
+            "id": "c",
+            "label": "Intimal Tear and Haematoma"
+          },
+          {
+            "id": "d",
+            "label": "Vertebrobasilar Stroke"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "mechanical stress"
+          ],
+          [
+            "b",
+            "c",
+            "wall disruption"
+          ],
+          [
+            "c",
+            "d",
+            "thromboembolism"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Definitive Management",
-     "points": [
-      "Catheter or CT angiography diagnosis",
-      "Carotid artery stenting placement",
-      "Surgical open web resection",
-      "Superior to antiplatelet monotherapy"
-     ]
+    {
+      "tx": "High-resolution cross-sectional magnetic resonance imaging provides non-invasive diagnostic confirmation of cervical arterial dissection. Axial fat-saturated **T1-weighted** magnetic resonance imaging exquisitely reveals an eccentric crescentic hyperintense **intramural hematoma** surrounding a narrowed eccentric arterial flow void, confirming acute or subacute subadventitial dissection.",
+      "say": "High-resolution cross-sectional magnetic resonance imaging provides non-invasive diagnostic confirmation of cervical arterial dissection. Axial fat-saturated T1-weighted magnetic resonance imaging exquisitely reveals an eccentric crescentic hyperintense intramural hematoma surrounding a narrowed eccentric arterial flow void, confirming acute or subacute subadventitial dissection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging Modality",
+          "Key Radiographic Finding",
+          "Diagnostic Utility"
+        ],
+        "rows": [
+          [
+            "Fat-saturated T1 MRI",
+            "Crescentic intramural haematoma",
+            "Definitive tissue confirmation"
+          ],
+          [
+            "CT Angiography",
+            "String sign and flame tapering",
+            "Rapid acute emergency triage"
+          ],
+          [
+            "Duplex Ultrasound",
+            "Elevated resistance and flap",
+            "Bedside screening and monitoring"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Initial antithrombotic management of acute extracranial **cervical artery dissection** focuses on secondary embolic prevention. Randomised clinical data from the CADISS and TREAT-CAD trials establish equivalent clinical efficacy between antiplatelet agents and therapeutic **anticoagulation**, demonstrating no significant differences in stroke recurrence or overall survival outcomes.",
+      "say": "Initial antithrombotic management of acute extracranial cervical artery dissection focuses on secondary embolic prevention. Randomised clinical data from the CADISS and TREAT-CAD trials establish equivalent clinical efficacy between antiplatelet agents and therapeutic anticoagulation, demonstrating no significant differences in stroke recurrence or overall survival outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tia-fig1.webp",
+        "alt": "Diagram illustrating transient ischaemic attack and arterial thromboembolism.",
+        "caption": "Arterial thromboembolic pathways and transient cerebral ischaemia (StewardMD).",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "An intimal fibrovascular anomaly known as a **Carotid web** arises as a shelf-like projection along the posterior wall of the **internal carotid** bulb. This projection causes localized flow stagnation and recirculation, generating microthrombi that predispose young patients to recurrent embolic strokes despite standard single antiplatelet therapy.",
+      "say": "An intimal fibrovascular anomaly known as a Carotid web arises as a shelf-like projection along the posterior wall of the internal carotid bulb. This projection causes localized flow stagnation and recirculation, generating microthrombi that predispose young patients to recurrent embolic strokes despite standard single antiplatelet therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carotid Web Pathology",
+          "points": [
+            "Atypical intimal fibromuscular variant",
+            "Posterior internal carotid bulb shelf",
+            "Young adults without vascular risk factors",
+            "Recurrent downstream embolic events"
+          ]
+        },
+        "right": {
+          "title": "Definitive Management",
+          "points": [
+            "Catheter or CT angiography diagnosis",
+            "Carotid artery stenting placement",
+            "Surgical open web resection",
+            "Superior to antiplatelet monotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Revascularization strategies for symptomatic high-grade atherosclerotic stenosis balance clinical and perioperative procedural risks. While conventional surgery remains standard, **Carotid artery stenting** represents a proven therapeutic alternative for individuals presenting with surgically hostile neck anatomy, prior cervical radiation injury, or high surgical contraindications to open **carotid endarterectomy**.",
+      "say": "Revascularization strategies for symptomatic high-grade atherosclerotic stenosis balance clinical and perioperative procedural risks. While conventional surgery remains standard, Carotid artery stenting represents a proven therapeutic alternative for individuals presenting with surgically hostile neck anatomy, prior cervical radiation injury, or high surgical contraindications to open carotid endarterectomy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/abdominal-aortic-aneurysms-evar-and-carotid-endarterectomy-fig1.webp",
+        "alt": "Surgical diagrams detailing open carotid endarterectomy and vascular reconstructions.",
+        "caption": "Carotid endarterectomy and surgical endovascular reconstructions (StewardMD).",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Severe proximal stenosis or occlusion of the prevertebral subclavian artery precipitates **Subclavian steal syndrome**. Vigorous upper extremity exercise creates a marked pressure gradient, inducing retrograde reversal of flow down the ipsilateral **vertebral artery** to supply the working arm at the expense of brainstem and cerebellar perfusion.",
+      "say": "Severe proximal stenosis or occlusion of the prevertebral subclavian artery precipitates Subclavian steal syndrome. Vigorous upper extremity exercise creates a marked pressure gradient, inducing retrograde reversal of flow down the ipsilateral vertebral artery to supply the working arm at the expense of brainstem and cerebellar perfusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Subclavian Stenosis"
+          },
+          {
+            "id": "b",
+            "label": "Ipsilateral Arm Exercise"
+          },
+          {
+            "id": "c",
+            "label": "Vertebral Flow Reversal"
+          },
+          {
+            "id": "d",
+            "label": "Posterior Hypoperfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "arterial narrowing"
+          ],
+          [
+            "b",
+            "c",
+            "pressure gradient"
+          ],
+          [
+            "c",
+            "d",
+            "retrograde steal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-atherosclerotic vascular dysplasia known as **Fibromuscular dysplasia** predominantly affects young to middle-aged female patients. Medial fibroplasia accounts for over 80% of cases, yielding the pathognomonic string-of-beads angiographic contour along the mid and distal segments of the extracranial **internal carotid** and renal arteries.",
+      "say": "Non-atherosclerotic vascular dysplasia known as Fibromuscular dysplasia predominantly affects young to middle-aged female patients. Medial fibroplasia accounts for over 80% of cases, yielding the pathognomonic string-of-beads angiographic contour along the mid and distal segments of the extracranial internal carotid and renal arteries.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Fibromuscular Dysplasia",
+          "Atherosclerotic Stenosis"
+        ],
+        "rows": [
+          [
+            "Patient Demographics",
+            "Young to middle-aged females",
+            "Older adults with metabolic risks"
+          ],
+          [
+            "Anatomical Location",
+            "Mid-to-distal internal carotid",
+            "Carotid bifurcation and bulb"
+          ],
+          [
+            "Angiographic Sign",
+            "Classic string-of-beads appearance",
+            "Eccentric focal calcified plaque"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Extracranial arterial dissection and carotid stenosis questions test Horner syndrome mechanisms, imaging hallmarks, and endarterectomy thresholds. Internal carotid artery dissection presents with ipsilateral neck pain, Horner syndrome without anhidrosis, and focal cerebral ischemia. Crescent sign on cross-sectional MRI marks intramural hematoma. Carotid endarterectomy benefits symptomatic carotid stenosis exceeding 70 percent.",
+      "say": "High-yield for the exam: Extracranial arterial dissection and carotid stenosis questions test Horner syndrome mechanisms, imaging hallmarks, and endarterectomy thresholds. Internal carotid artery dissection presents with ipsilateral neck pain, Horner syndrome without anhidrosis, and focal cerebral ischemia. Crescent sign on cross-sectional MRI marks intramural hematoma. Carotid endarterectomy benefits symptomatic carotid stenosis exceeding 70 percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Carotid dissection triad",
+            "Unilateral neck pain, partial Horner syndrome, and retinal ischemia"
+          ],
+          [
+            "Partial Horner mechanism",
+            "Facial sweating preserved because sudomotor fibers travel along external carotid"
+          ],
+          [
+            "MRI crescent sign",
+            "Bright intramural hematoma encircling narrowed lumen on T1 fat-suppression"
+          ],
+          [
+            "Vertebral dissection",
+            "Occipital pain, posterior circulation stroke, and lateral medullary syndrome"
+          ],
+          [
+            "Dissection treatment",
+            "Systemic anticoagulation or antiplatelet therapy prevents thromboembolic stroke"
+          ],
+          [
+            "Symptomatic stenosis",
+            "Carotid endarterectomy indicated for 70 to 99 percent stenosis"
+          ],
+          [
+            "Asymptomatic stenosis",
+            "Strict medical therapy; consider endarterectomy only if low surgical risk"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Revascularization strategies for symptomatic high-grade atherosclerotic stenosis balance clinical and perioperative procedural risks. While conventional surgery remains standard, **Carotid artery stenting** represents a proven therapeutic alternative for individuals presenting with surgically hostile neck anatomy, prior cervical radiation injury, or high surgical contraindications to open **carotid endarterectomy**.",
-   "say": "Revascularization strategies for symptomatic high-grade atherosclerotic stenosis balance clinical and perioperative procedural risks. While conventional surgery remains standard, Carotid artery stenting represents a proven therapeutic alternative for individuals presenting with surgically hostile neck anatomy, prior cervical radiation injury, or high surgical contraindications to open carotid endarterectomy.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/abdominal-aortic-aneurysms-evar-and-carotid-endarterectomy-fig1.webp",
-    "alt": "Surgical diagrams detailing open carotid endarterectomy and vascular reconstructions.",
-    "caption": "Carotid endarterectomy and surgical endovascular reconstructions (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "Severe proximal stenosis or occlusion of the prevertebral subclavian artery precipitates **Subclavian steal syndrome**. Vigorous upper extremity exercise creates a marked pressure gradient, inducing retrograde reversal of flow down the ipsilateral **vertebral artery** to supply the working arm at the expense of brainstem and cerebellar perfusion.",
-   "say": "Severe proximal stenosis or occlusion of the prevertebral subclavian artery precipitates Subclavian steal syndrome. Vigorous upper extremity exercise creates a marked pressure gradient, inducing retrograde reversal of flow down the ipsilateral vertebral artery to supply the working arm at the expense of brainstem and cerebellar perfusion.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Subclavian Stenosis"
-     },
-     {
-      "id": "b",
-      "label": "Ipsilateral Arm Exercise"
-     },
-     {
-      "id": "c",
-      "label": "Vertebral Flow Reversal"
-     },
-     {
-      "id": "d",
-      "label": "Posterior Hypoperfusion"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b",
-      "arterial narrowing"
-     ],
-     [
-      "b",
-      "c",
-      "pressure gradient"
-     ],
-     [
-      "c",
-      "d",
-      "retrograde steal"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Non-atherosclerotic vascular dysplasia known as **Fibromuscular dysplasia** predominantly affects young to middle-aged female patients. Medial fibroplasia accounts for over 80% of cases, yielding the pathognomonic string-of-beads angiographic contour along the mid and distal segments of the extracranial **internal carotid** and renal arteries.",
-   "say": "Non-atherosclerotic vascular dysplasia known as Fibromuscular dysplasia predominantly affects young to middle-aged female patients. Medial fibroplasia accounts for over 80% of cases, yielding the pathognomonic string-of-beads angiographic contour along the mid and distal segments of the extracranial internal carotid and renal arteries.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Fibromuscular Dysplasia",
-     "Atherosclerotic Stenosis"
-    ],
-    "rows": [
-     [
-      "Patient Demographics",
-      "Young to middle-aged females",
-      "Older adults with metabolic risks"
-     ],
-     [
-      "Anatomical Location",
-      "Mid-to-distal internal carotid",
-      "Carotid bifurcation and bulb"
-     ],
-     [
-      "Angiographic Sign",
-      "Classic string-of-beads appearance",
-      "Eccentric focal calcified plaque"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "refs": [
-  "Adams and Victor Principles of Neurology 11e Ch. 34",
-  "Netter Neurology 2e Ch. 12"
- ]
+  ],
+  "quiz": [],
+  "refs": [
+    "Adams and Victor Principles of Neurology 11e Ch. 34",
+    "Netter Neurology 2e Ch. 12"
+  ]
 }
