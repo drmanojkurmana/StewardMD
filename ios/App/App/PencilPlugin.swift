@@ -45,22 +45,20 @@ public class PencilPlugin: CAPPlugin, CAPBridgedPlugin, UIPencilInteractionDeleg
         }
     }
 
-    // iOS 12.1+ double-tap. On iOS 17.5+ the tap arrives via didReceiveTap instead, so stay
-    // quiet here to avoid notifying twice.
+    // iOS 12.1-17.4 double-tap. On iOS 17.5+ UIKit calls didReceiveTap instead (this one is not called
+    // when the newer method is implemented), so there is no double notification.
     public func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
-        if #available(iOS 17.5, *) { return }
-        notifyListeners("pencilTap", data: ["action": PencilPlugin.actionString(interaction.preferredTapAction)])
+        notifyListeners("pencilTap", data: ["action": PencilPlugin.actionString(UIPencilInteraction.preferredTapAction)])
     }
 
     @available(iOS 17.5, *)
-    public func pencilInteraction(_ interaction: UIPencilInteraction, didReceiveTap action: UIPencilInteraction.TapAction) {
-        notifyListeners("pencilTap", data: ["action": PencilPlugin.actionString(action)])
+    public func pencilInteraction(_ interaction: UIPencilInteraction, didReceiveTap tap: UIPencilInteraction.Tap) {
+        notifyListeners("pencilTap", data: ["action": PencilPlugin.actionString(UIPencilInteraction.preferredTapAction)])
     }
 
     @available(iOS 17.5, *)
-    public func pencilInteraction(_ interaction: UIPencilInteraction, didReceiveSqueeze squeeze: UIPencilInteraction.Squeeze, phase: UITouch.Phase) {
-        _ = squeeze
-        guard phase == .ended else { return }
+    public func pencilInteraction(_ interaction: UIPencilInteraction, didReceiveSqueeze squeeze: UIPencilInteraction.Squeeze) {
+        guard squeeze.phase == .ended else { return }
         notifyListeners("pencilTap", data: ["action": "squeeze"])
     }
 
