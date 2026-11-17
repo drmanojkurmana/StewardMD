@@ -135,7 +135,48 @@
    "tx": "For **sequential tests**, multiply the pre-test odds by each likelihood ratio in turn, assuming conditional independence. A **sensitive** test with a negative result helps rule disease out (SnNout), while a **specific** test with a positive result helps rule it in (SpPin). Always interpret NNT with its confidence interval. If the interval crosses no effect, the benefit is uncertain.",
    "say": "For sequential tests, multiply the pre-test odds by each likelihood ratio in turn, assuming conditional independence. A sensitive test with a negative result helps rule disease out, remembered as SnNout, while a specific test with a positive result helps rule it in, remembered as SpPin. Always interpret the number needed to treat with its confidence interval. If the interval crosses no effect, the benefit is uncertain.",
    "vis": null
-  }
+  },
+    {
+      "tx": "**High-yield for the exam**: Number needed to treat is one divided by the absolute risk reduction, the control rate minus the treated rate, never the relative reduction alone. Number needed to harm is one divided by the absolute risk increase. Bleeding in 3 percent versus 1 percent is an increase of 2 percent, so the number needed to harm is 50. A positive likelihood ratio is sensitivity divided by one minus specificity.",
+      "say": "Number needed to treat is one divided by the absolute risk reduction, the control rate minus the treated rate, never the relative reduction alone. Number needed to harm is one divided by the absolute risk increase. Bleeding in 3 percent versus 1 percent is an increase of 2 percent, so the number needed to harm is 50. A positive likelihood ratio is sensitivity divided by one minus specificity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Absolute risk reduction",
+            "Control rate minus treated"
+          ],
+          [
+            "Number needed to treat",
+            "One divided by reduction"
+          ],
+          [
+            "Number needed to harm",
+            "One divided by increase"
+          ],
+          [
+            "Bleeding example",
+            "3 percent versus 1 percent"
+          ],
+          [
+            "Harm number",
+            "NNH equals 50"
+          ],
+          [
+            "Positive likelihood ratio",
+            "Sensitivity over one minus specificity"
+          ],
+          [
+            "Rule in and out",
+            "SpPin and SnNout"
+          ]
+        ]
+      }
+    }
  ],
  "quiz": [],
  "src": [],
