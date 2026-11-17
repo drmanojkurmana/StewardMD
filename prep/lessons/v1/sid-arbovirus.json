@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sid-arbovirus",
+ "title": "Dengue, chikungunya and arboviral infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Aedes day-biters** spread dengue, chikungunya, Zika and yellow fever in Indian cities; **second dengue serotype** turns severe by enhancement. **Fever with myalgia with retro-orbital pain** opens dengue; **crippling arthralgia** marks chikungunya. **Zika threatens fetuses**, not mothers. **Yellow fever with Japanese encephalitis** have vaccines; dengue, chikungunya and Zika do not. **Co-circulation** confuses every monsoon fever.",
+   "say": "Aedes day-biters were reported to spread dengue, chikungunya, Zika and yellow fever in Indian cities, while second dengue serotype was reported to turn severe by enhancement. Fever with myalgia and retro-orbital pain was reported to open dengue, while crippling arthralgia marked chikungunya. Zika was reported to threaten fetuses, not mothers. Yellow fever with Japanese encephalitis was reported to have vaccines, while dengue, chikungunya and Zika did not. Co-circulation was reported to confuse every monsoon fever.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Vector",
+     "Mark"
+    ],
+    "rows": [
+     [
+      "Dengue 1-4",
+      "Aedes day bite",
+      "Breakbone fever"
+     ],
+     [
+      "Chikungunya",
+      "Aedes day bite",
+      "Crippling joints"
+     ],
+     [
+      "Zika",
+      "Aedes day bite",
+      "Fetal harm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Febrile phase** (2 to 7 days) brings high fever with headache, myalgia and rash; **tourniquet test** may bleed. **Critical leak at defervescence** drops pressure as fever settles; **narrow pulse with cold limbs** warns shock. **Platelets below 100,000 with rising haematocrit** track the leak. **Shock lasts 2 to 3 days** with fluids; **recovery reabsorbs** fluid and overload threatens. **CFR near 1%** with expert fluid care.",
+   "say": "Febrile phase of two to seven days was reported to bring high fever with headache, myalgia and rash, while tourniquet test sometimes bled. Critical leak at defervescence was reported to drop pressure as fever settled, while narrow pulse with cold limbs warned shock. Platelets below one hundred thousand with rising haematocrit were reported to track the leak. Shock lasting two to three days was reported to need fluids, while recovery reabsorbed fluid and overload threatened. C F R near one percent was reported with expert fluid care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever 2 to 7 days"
+     },
+     {
+      "id": "b",
+      "label": "Defervescence leak"
+     },
+     {
+      "id": "c",
+      "label": "Shock or recovery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Warning signs admit**: severe belly pain, **persistent vomiting**, mucosal bleed, lethargy, fluid collection, **rising haematocrit with falling platelets**. **NS1 antigen in first 5 days** diagnoses early; **IgM then IgG** stage later, IgG from day 4 marking secondary infection. **Ultrasound shows leak** (ascites, effusion, gallbladder wall swelling). **Serial counts with vitals** replace single values. **Cross-reaction with Zika and JE** confuses serology.",
+   "say": "Warning signs were reported to admit: severe belly pain, persistent vomiting, mucosal bleed, lethargy, fluid collection, and rising haematocrit with falling platelets. N S one antigen in the first five days was reported to diagnose early, while I g M then I g G staged later, with I g G from day four marking secondary infection. Ultrasound was reported to show leak as ascites, effusion and gallbladder wall swelling. Serial counts with vitals were reported to replace single values. Cross-reaction with Zika and J E was reported to confuse serology.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "When",
+     "Means"
+    ],
+    "rows": [
+     [
+      "NS1 antigen",
+      "First 5 days",
+      "Early dengue"
+     ],
+     [
+      "IgM, IgG",
+      "After day 5",
+      "IgG early equals second"
+     ],
+     [
+      "Serial counts",
+      "Daily",
+      "Leak trend"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paracetamol with isotonic fluids** lead; **NSAIDs with aspirin with steroids never help** and worsen bleed. **Admit warning signs** for monitored fluids guided by haematocrit. **Platelets only for bleeding**, never for counts alone. **Shock gets crystalloids fast**, colloids if refractory, with ICU care. **Paracetamol overdose harms livers** already inflamed. **Discharge after 48 hours** afebrile with stable counts and no leak.",
+   "say": "Paracetamol with isotonic fluids was reported to lead, while N S A I Ds with aspirin and steroids were reported to never help and worsen bleed. Admitting warning signs for monitored fluids guided by haematocrit was advised. Platelets were reported to help only for bleeding, never for counts alone. Shock was reported to get crystalloids fast, with colloids if refractory, and I C U care. Paracetamol overdose was reported to harm livers already inflamed. Discharge after forty eight hours afebrile with stable counts and no leak was advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Action",
+     "Detail",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Fluids",
+      "Isotonic, guided",
+      "Neither dry nor drowned"
+     ],
+     [
+      "Platelets",
+      "Bleeding only",
+      "Never for counts"
+     ],
+     [
+      "No NSAIDs",
+      "Paracetamol only",
+      "Bleed risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fever with symmetrical small-joint pain** cripples chikungunya; **rash with conjunctivitis** joins. **Chronic arthritis for months** disables middle-aged with prior osteoarthritis. **NSAIDs after dengue excluded** ease joints; **steroids spare** refractory cases. **Neonatal infection at delivery** threatens sick babies. **Diagnosis is PCR early, serology later**; cross-reaction with dengue misleads. **No vaccine, no antiviral**; rest with fluids cures most.",
+   "say": "Fever with symmetrical small-joint pain was reported to cripple chikungunya, while rash with conjunctivitis joined. Chronic arthritis for months was reported to disable middle-aged with prior osteoarthritis. N S A I Ds after dengue was excluded were reported to ease joints, while steroids spared refractory cases. Neonatal infection at delivery was reported to threaten sick babies. Diagnosis by P C R early and serology later was ordered, while cross-reaction with dengue misled. No vaccine and no antiviral existed, while rest with fluids cured most.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Chikungunya",
+     "Versus dengue"
+    ],
+    "rows": [
+     [
+      "Joints",
+      "Crippling, symmetric",
+      "Dengue milder"
+     ],
+     [
+      "Chronic ache",
+      "Months",
+      "Dengue weeks"
+     ],
+     [
+      "NSAIDs",
+      "After exclusion",
+      "Never in dengue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Zika runs mild**: low fever with rash with conjunctivitis resolving in days. **Fetal microcephaly** follows first-trimester infection; **Guillain-Barre** follows adults rarely. **Sexual transmission persists months** in semen; couples defer conception. **PCR blood early with urine longer** diagnoses; serology cross-reacts. **No treatment, no vaccine**; mosquito control with repellents protects pregnancies. **Test every febrile pregnant traveller** returning from outbreaks.",
+   "say": "Zika was reported to run mild with low fever, rash and conjunctivitis resolving in days. Fetal microcephaly was reported to follow first-trimester infection, while Guillain-Barre followed adults rarely. Sexual transmission was reported to persist months in semen, so couples deferred conception. P C R blood early with urine longer was reported to diagnose, while serology cross-reacted. No treatment and no vaccine existed, while mosquito control with repellents protected pregnancies. Every febrile pregnant traveller returning from outbreaks was tested.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Fact",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Mild adult",
+      "Rash, pink eye",
+      "Supportive"
+     ],
+     [
+      "Fetus",
+      "Microcephaly",
+      "Avoid travel"
+     ],
+     [
+      "Semen months",
+      "Sexual spread",
+      "Defer conception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Yellow fever 17D vaccine** protects travellers for life; **viscerotropic disease** rarely follows vaccination. **Jaundice with black vomit** with bradycardia (Faget sign) marks severe YF. **Jungle cycle (monkeys) with urban cycle (Aedes)** both kill. **Japanese encephalitis** follows pigs with wading birds; **vaccine shields** endemic children. **No antivirals for either**; ICU support decides. **Proof of YF vaccination** is required at endemic borders.",
+   "say": "Yellow fever seventeen D vaccine was reported to protect travellers for life, while viscerotropic disease rarely followed vaccination. Jaundice with black vomit and bradycardia were reported to mark severe yellow fever. Jungle cycle with monkeys and urban cycle with Aedes were both reported to kill. Japanese encephalitis was reported to follow pigs with wading birds, while vaccine shielded endemic children. No antivirals for either existed, while I C U support decided. Proof of yellow fever vaccination was required at endemic borders.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Vaccine",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Yellow fever",
+      "17D vaccine",
+      "Certificate needed"
+     ],
+     [
+      "JE",
+      "Endemic kids",
+      "Pigs, birds"
+     ],
+     [
+      "Neither",
+      "No antiviral",
+      "Supportive ICU"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Japanese encephalitis follows monsoon**: pigs amplify, **wading birds reservoir**, Culex bites at dusk. **Parkinsonian mask with dystonia** with seizures marks midbrain disease. **A third die, a third disabled, a third recover**; children suffer most. **No antiviral works**; ICU with raised-pressure care decides. **Vaccine in endemic districts** shields children; **pig-bird separation with nets** breaks cycles. **CSF IgM confirms**; serum cross-reacts with dengue.",
+   "say": "Japanese encephalitis was reported to follow monsoon, as pigs amplified, wading birds reservoired and Culex bit at dusk. Parkinsonian mask with dystonia and seizures was reported to mark midbrain disease. A third was reported to die, a third disabled and a third to recover, while children suffered most. No antiviral was reported to work, while I C U with raised-pressure care decided. Vaccine in endemic districts was reported to shield children, while pig-bird separation with nets broke cycles. C S F I g M was reported to confirm, while serum cross-reacted with dengue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Pigs, birds",
+      "Amplify, reservoir",
+      "Separate, nets"
+     ],
+     [
+      "Parkinson signs",
+      "Midbrain",
+      "ICU care"
+     ],
+     [
+      "Thirds rule",
+      "Die, disabled, well",
+      "Vaccinate kids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** defervescence improves nothing; leak peaks then. **Platelets for low counts** without bleed harms. **NSAIDs in suspected dengue** before chikungunya is excluded kills. **Zika mild in mother** still harms fetus. **Normal tourniquet** never excludes dengue. **Dengvaxia without prior dengue** harms seronegatives; screen before vaccinating. **Steroids in dengue** never help.",
+   "say": "For the exam, these traps were tabulated as requested. Defervescence was reported to improve nothing, while leak peaked then. Platelets for low counts without bleed were reported to harm. N S A I Ds in suspected dengue before chikungunya was excluded were reported to kill. Zika mild in mother was reported to still harm the fetus. Normal tourniquet was reported to never exclude dengue. Dengvaxia without prior dengue was reported to harm seronegatives, so screening preceded vaccinating. Steroids in dengue were reported to never help.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Fever settled",
+      "Leak peaks",
+      "Watch closest"
+     ],
+     [
+      "Platelets for counts",
+      "Harm",
+      "Bleed only"
+     ],
+     [
+      "NSAIDs early",
+      "Bleed risk",
+      "Paracetamol only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **defervescence leak** defines critical dengue; **warning signs admit**. **NS1 first 5 days**; **IgG day 4 means secondary**. **Platelets below 100,000** track leak; **transfuse only bleeders**. **Crippling symmetric arthralgia** marks chikungunya. **Microcephaly** marks Zika; **black vomit** marks yellow fever. **17D vaccine** prevents YF.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Defervescence leak was reported to define critical dengue, while warning signs admitted. N S one first five days was reported, while I g G day four meant secondary. Platelets below one hundred thousand were reported to track leak, while transfusion covered only bleeders. Crippling symmetric arthralgia was reported to mark chikungunya. Microcephaly was reported to mark Zika, while black vomit marked yellow fever. Seventeen D vaccine was reported to prevent yellow fever.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Leak at defervescence",
+      "Critical phase",
+      "Timing trap"
+     ],
+     [
+      "NS1 5 days",
+      "IgG day 4 second",
+      "Test asked"
+     ],
+     [
+      "Platelets under 100k",
+      "Bleed only",
+      "Transfusion rule"
+     ],
+     [
+      "Symmetric arthralgia",
+      "Chikungunya",
+      "Versus dengue"
+     ],
+     [
+      "17D",
+      "YF vaccine",
+      "Certificate asked"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "module": "sid-respiratory-viral",
+ "title": "Influenza and respiratory viral infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Influenza A with B** cause seasonal epidemics by **drift** (small yearly changes) with pandemics by **shift** (reassorted new virus). **RSV, parainfluenza, adenovirus, rhinovirus and seasonal coronaviruses** fill the rest of winter. **Pigs mix avian with human strains** into pandemic candidates. **B mutates slower** with humans its only home. **Vaccines renew yearly** because drift outdates last year's match. **Bacterial superinfection** follows viral damage, not the virus alone.",
+   "say": "Influenza A with B was reported to cause seasonal epidemics by drift with small yearly changes and pandemics by shift with reassorted new virus. R S V, parainfluenza, adenovirus, rhinovirus and seasonal coronaviruses were reported to fill the rest of winter. Pigs were reported to mix avian with human strains into pandemic candidates. B was reported to mutate slower with humans its only home. Vaccines were renewed yearly because drift outdid last year's match. Bacterial superinfection was reported to follow viral damage, not the virus alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Change",
+     "Season"
+    ],
+    "rows": [
+     [
+      "Flu A",
+      "Drift plus shift",
+      "Winter epidemics"
+     ],
+     [
+      "Flu B",
+      "Drift slow",
+      "Humans only"
+     ],
+     [
+      "RSV, PIV",
+      "Stable",
+      "Kids winter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Droplets with fomites** spread flu with RSV in homes with wards; **incubation 1 to 2 days** for flu, longer for RSV. **Children shed longest**, seeding grandparents with fatal pneumonia. **Winter crowding** concentrates epidemics; **tropical rains** shift the peak. **Poultry with pig contact** risks avian spillover. **Asymptomatic shedding** defeats symptom screening alone. **Hand hygiene with masks** in wards breaks chains.",
+   "say": "Droplets with fomites were reported to spread flu with R S V in homes and wards, while incubation lasted one to two days for flu and longer for R S V. Children were reported to shed longest, seeding grandparents with fatal pneumonia. Winter crowding was reported to concentrate epidemics, while tropical rains shifted the peak. Poultry with pig contact was reported to risk avian spillover. Asymptomatic shedding was reported to defeat symptom screening alone. Hand hygiene with masks in wards was reported to break chains.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Incubation",
+      "1 to 2 days flu",
+      "Isolate fast"
+     ],
+     [
+      "Kids shed most",
+      "Seed elders",
+      "Vaccinate contacts"
+     ],
+     [
+      "Winter peak",
+      "Crowding",
+      "Mask wards"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Abrupt fever with myalgia with dry cough** marks flu; **coryza points away** toward cold viruses. **Primary viral pneumonia** drowns within days of onset in pandemics. **Secondary bacterial pneumonia** (pneumococcus, S aureus) rebounds after brief improvement. **Myositis with myocarditis with encephalopathy** complicate rarely. **Otitis with sinusitis in kids** follows viral congestion. **Wheeze in infants** means RSV bronchiolitis, not asthma.",
+   "say": "Abrupt fever with myalgia and dry cough was reported to mark flu, while coryza pointed away toward cold viruses. Primary viral pneumonia was reported to drown within days of onset in pandemics. Secondary bacterial pneumonia with pneumococcus and S aureus was reported to rebound after brief improvement. Myositis with myocarditis and encephalopathy were reported to complicate rarely. Otitis with sinusitis in kids was reported to follow viral congestion. Wheeze in infants was reported to mean R S V bronchiolitis, not asthma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Flu points",
+     "points": [
+      "Abrupt fever, aches",
+      "Dry cough",
+      "No coryza early"
+     ]
+    },
+    "right": {
+     "title": "Not flu",
+     "points": [
+      "Coryza first",
+      "Wheeze infants",
+      "Rebound fever"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Barking cough with stridor** at night marks parainfluenza croup; **steeple sign** confirms. **Pink eye with sore throat** marks adenovirus; outbreaks sweep barracks. **Rhinovirus colds** stay above the neck and resolve in days. **RSV bronchiolitis** feeds poorly with apnoeas in preterms. **Human metapneumo** mimics RSV in elders. **Seasonal coronaviruses** cause winter colds, not MERS.",
+   "say": "Barking cough with stridor at night was reported to mark parainfluenza croup, while steeple sign confirmed it. Pink eye with sore throat was reported to mark adenovirus, while outbreaks swept barracks. Rhinovirus colds were reported to stay above the neck and resolve in days. R S V bronchiolitis was reported to feed poorly with apnoeas in preterms. Human metapneumo was reported to mimic R S V in elders. Seasonal coronaviruses were reported to cause winter colds, not M E R S.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Classic sign",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Parainfluenza",
+      "Barking croup",
+      "Steeple neck"
+     ],
+     [
+      "Adenovirus",
+      "Pink eye",
+      "Barracks outbreaks"
+     ],
+     [
+      "RSV",
+      "Infant wheeze",
+      "Supportive only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rapid molecular test** is first line; **antigen RIDT misses half** and never excludes. **Multiplex PCR panel** sorts severe pneumonia and outbreaks. **Procalcitonin low** supports pure viral illness; **rising CRP with lobar shadow** means bacteria joined. **Pulse oximetry** triages home versus ward. **Viral culture is too slow** for decisions. **Test avian contacts** with full PPE notification urgently.",
+   "say": "Rapid molecular test was ordered as first line, while antigen R I D T was reported to miss half and never exclude. Multiplex P C R panel was ordered to sort severe pneumonia and outbreaks. Low procalcitonin was reported to support pure viral illness, while rising C R P with lobar shadow meant bacteria joined. Pulse oximetry was reported to triage home versus ward. Viral culture was reported to stay too slow for decisions. Testing avian contacts with full P P E notification was ordered urgently.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever plus cough"
+     },
+     {
+      "id": "b",
+      "label": "Molecular test fast"
+     },
+     {
+      "id": "c",
+      "label": "Treat, isolate, watch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oseltamivir 75 mg twice daily for 5 days** treats severe or hospitalised flu at any duration; **high-risk outpatients** start within 48 hours. **Single-dose baloxavir** suits high-risk early illness within 2 days; **pregnancy avoids it**. **IV peramivir** covers those who cannot swallow. **Zanamivir inhaled** alternates where available. **Longer courses** run for ventilated and immunocompromised shedders.",
+   "say": "Oseltamivir at seventy five milligrams twice daily for five days was reported to treat severe or hospitalised flu at any duration, while high-risk outpatients started within forty eight hours. Single-dose baloxavir was reported to suit high-risk early illness within two days, while pregnancy avoided it. I V peramivir was reported to cover those who could not swallow. Zanamivir inhaled was reported to alternate where available. Longer courses were reported to run for ventilated and immunocompromised shedders.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "When"
+    ],
+    "rows": [
+     [
+      "Oseltamivir",
+      "75 twice daily 5 days",
+      "Severe, any duration"
+     ],
+     [
+      "Baloxavir",
+      "Single dose",
+      "High-risk in 2 days"
+     ],
+     [
+      "Peramivir IV",
+      "Cannot swallow",
+      "Hospital only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antibiotics never treat** pure viral illness; **add only for bacterial superinfection** with purulent rebound, lobar shadow or rising procalcitonin. **Oxygen with fluids** carries bronchiolitis; **bronchodilators rarely help** RSV. **Steroids do not help** flu and worsen shedding. **Nebulised adrenaline** eases croup stridor with corticosteroids. **Ventilate ARDS early** with lung-protective settings in pandemics.",
+   "say": "Antibiotics were reported to never treat pure viral illness, while adding was reserved for bacterial superinfection with purulent rebound, lobar shadow or rising procalcitonin. Oxygen with fluids was reported to carry bronchiolitis, while bronchodilators rarely helped R S V. Steroids were reported to not help flu and worsen shedding. Nebulised adrenaline was reported to ease croup stridor with corticosteroids. Ventilating A R D S early with lung-protective settings was reported in pandemics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Give",
+     "points": [
+      "Oxygen, fluids",
+      "Nebulised adrenaline croup",
+      "Ventilate ARDS early"
+     ]
+    },
+    "right": {
+     "title": "Avoid",
+     "points": [
+      "Antibiotics routine",
+      "Steroids for flu",
+      "Bronchodilators RSV"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Annual inactivated vaccine** before winter protects elders with comorbid illness; **live spray avoids pregnancy**. **Post-exposure baloxavir single dose or oseltamivir 75 mg daily for 10 days** shields only extreme-risk contacts within 48 hours. **Cohort with masks** stops ward outbreaks. **Avian culls with PPE** contain spillover at source. **Travel advisories** pause during declared pandemics.",
+   "say": "Annual inactivated vaccine before winter was reported to protect elders with comorbid illness, while live spray avoided pregnancy. Post-exposure baloxavir single dose or oseltamivir seventy five milligrams daily for ten days was reported to shield only extreme-risk contacts within forty eight hours. Cohorting with masks was reported to stop ward outbreaks. Avian culls with P P E were reported to contain spillover at source. Travel advisories were reported to pause during declared pandemics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Who",
+     "When"
+    ],
+    "rows": [
+     [
+      "Vaccine yearly",
+      "Elders, ill",
+      "Before winter"
+     ],
+     [
+      "PEP extreme risk",
+      "Age 85 plus",
+      "Within 48 hours"
+     ],
+     [
+      "Cohort, mask",
+      "Wards",
+      "Outbreak"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pregnancy gets oseltamivir** at any stage; flu kills mothers disproportionately. **Immunocompromised shed for weeks** and breed resistance; **baloxavir caution** applies. **Elderly with cardiac disease** decompensate with small hypoxia. **Children with aspirin** risk Reye syndrome; **paracetamol leads** fever control. **Avian H5N1 kills half** its recognised cases; **conjunctivitis with exposure** triggers testing.",
+   "say": "Pregnancy was reported to get oseltamivir at any stage, as flu killed mothers disproportionately. Immunocompromised patients were reported to shed for weeks and breed resistance, while baloxavir caution applied. Elderly with cardiac disease were reported to decompensate with small hypoxia. Children with aspirin were reported to risk Reye syndrome, while paracetamol led fever control. Avian H five N one was reported to kill half its recognised cases, while conjunctivitis with exposure triggered testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Rule",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Pregnancy",
+      "Oseltamivir any stage",
+      "Mothers die more"
+     ],
+     [
+      "Immunocompromised",
+      "Shed weeks",
+      "Resistance watch"
+     ],
+     [
+      "Kids",
+      "No aspirin",
+      "Reye risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** coryza first means cold, not flu. **Normal RIDT never excludes**; molecular decides. **Antibiotics for pure flu** harm microbiomes without benefit. **Steroids for wheezy infants** miss bronchiolitis. **Baloxavir with milk or antacids** fails absorption; separate doses. **Live vaccine in pregnancy** is banned; inactivated is safe. **Stopping at 48 hours** denies severe cases treatment at any duration.",
+   "say": "For the exam, these traps were tabulated as requested. Coryza first was reported to mean cold, not flu. Normal R I D T was reported to never exclude, while molecular decided. Antibiotics for pure flu were reported to harm microbiomes without benefit. Steroids for wheezy infants were reported to miss bronchiolitis. Baloxavir with milk or antacids was reported to fail absorption, so doses were separated. Live vaccine in pregnancy was banned, while inactivated stayed safe. Stopping at forty eight hours was reported to deny severe cases treatment at any duration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Coryza first",
+      "Cold virus",
+      "Not flu"
+     ],
+     [
+      "RIDT negative",
+      "Still flu",
+      "Molecular test"
+     ],
+     [
+      "Live vaccine pregnant",
+      "Banned",
+      "Inactivated safe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **abrupt fever-myalgia** without coryza marks flu; **drift yearly, shift pandemic**. **Oseltamivir 75 twice daily 5 days** treats severe at any duration; **within 48 hours** for high-risk. **Baloxavir single dose** within 2 days; **avoid in pregnancy**. **Barking croup** is parainfluenza; **pink eye outbreaks** adenovirus. **No antibiotics, no steroids** for pure viral illness.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Abrupt fever with myalgia without coryza was reported to mark flu, while drift yearly and shift pandemic were defined. Oseltamivir seventy five twice daily for five days was reported to treat severe cases at any duration, with treatment within forty eight hours for high risk. Baloxavir single dose was reported for use within two days, avoided in pregnancy. Barking croup was reported as parainfluenza, while pink eye outbreaks marked adenovirus. No antibiotics and no steroids for pure viral illness were advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Abrupt fever, aches",
+      "No coryza",
+      "Flu picture"
+     ],
+     [
+      "75 twice daily 5 days",
+      "Severe any time",
+      "Dose asked"
+     ],
+     [
+      "Baloxavir single",
+      "Within 2 days",
+      "New drug"
+     ],
+     [
+      "Barking croup",
+      "Parainfluenza",
+      "Classic"
+     ],
+     [
+      "No antibiotics",
+      "Pure viral",
+      "Trap"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
