@@ -18,7 +18,7 @@
   if (!FLAGS.parent) return;
 
   var BATCH = 18, L = ["A", "B", "C", "D", "E", "F"];
-  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, io, seen }
+  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, seen }
   var VIDS = null, IMGS = null;
 
   function H() { return S.host; }
@@ -106,8 +106,9 @@
     var a = ' data-i="' + i + '"';
     if (c.kind === "pearl") return '<article class="vf-c vf-pearl pn-mg-c"' + a + '><p class="pn-mg-tag">Remember</p><p class="vf-big">' + esc(c.text) + "</p>" + (c.s ? '<p class="pn-mut pn-small">' + esc(subjName(c.s)) + "</p>" : "") + "</article>";
     if (c.kind === "video") {
-      return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch</p><p class="vf-stem">' + esc(c.title) + "</p>" +
-        '<div class="pn-mg-frame" role="region" aria-label="Video player"><img alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg"></div>' +
+      return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch' + (c.s ? " · " + esc(subjName(c.s) || c.s.charAt(0).toUpperCase() + c.s.slice(1)) : "") + "</p>" + '<p class="vf-stem">' + esc(c.title) + "</p>" +
+        // The poster is a background, not an <img>: a tap must start the video, never open the image zoom viewer.
+        '<div class="pn-mg-frame" role="button" tabindex="0" data-act="mg-play" data-i="' + i + '" aria-label="Play video: ' + esc(c.title) + '" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg\')"><span class="pn-mg-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>' +
         '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
     }
     if (c.kind === "lesson") return '<article class="vf-c pn-mg-c"' + a + '><p class="pn-mg-tag">Lesson · ' + esc(subjName(c.sid)) + '</p><p class="vf-big">' + esc(c.title) + '</p><p class="pn-mut">' + (c.minutes ? c.minutes + " min read, built from the questions you just met." : "Built from the questions you just met.") + '</p><button type="button" class="pn-btn pri" data-act="mg-lesson" data-i="' + i + '">Open lesson</button></article>';
@@ -139,22 +140,23 @@
     if (!box) return;
     if (scrollTo >= 0) { var nx = box.querySelectorAll(".vf-c")[scrollTo]; if (nx) box.scrollTop = nx.offsetTop - box.offsetTop; }
     else box.scrollTop = S.top || 0;
-    box.addEventListener("scroll", function () { if (S) S.top = box.scrollTop; }, { passive: true });
-    watchVideos(box);
+    box.addEventListener("scroll", function () { if (!S) return; S.top = box.scrollTop; G.clearTimeout(S.vt); S.vt = G.setTimeout(syncVideo, 150); }, { passive: true });
+    syncVideo();
   }
-  // A video autoplays in the app while its card is on screen and is removed when swiped away, so one plays at a time.
-  function watchVideos(box) {
-    if (S.io) S.io.disconnect();
-    if (!MEDIA || !G.IntersectionObserver) return;
-    S.io = new G.IntersectionObserver(function (ents) {
-      ents.forEach(function (e) {
-        var el = e.target, vid = el.getAttribute("data-vid"), holder = el.querySelector(".pn-mg-frame");
-        if (!holder) return;
-        if (e.isIntersecting) MEDIA.mount(holder, vid, el.querySelector(".vf-stem").textContent);
-        else if (holder.classList.contains("on")) MEDIA.release();
-      });
-    }, { root: box, rootMargin: "-45% 0px -45% 0px" });   // "on screen" = crosses the middle band, whatever the card height
-    [].forEach.call(box.querySelectorAll(".pn-mg-vid"), function (el) { S.io.observe(el); });
+  /* A video autoplays in the app while its card holds the middle of the reel, and is removed when swiped away, so one
+     plays at a time. Measured with getBoundingClientRect after scrolling settles (not IntersectionObserver, which did
+     not fire for the reel box in the iPad WebView, 2026-11-17 recording). A tap on the poster also plays it. */
+  function syncVideo() {
+    if (!S || !MEDIA) return;
+    var box = H().root() && H().root().querySelector("#pnMgFeed");
+    if (!box) return;
+    var r = box.getBoundingClientRect(), mid = r.top + r.height / 2, on = null;
+    [].some.call(box.querySelectorAll(".vf-c"), function (el) { var c = el.getBoundingClientRect(); if (c.top <= mid && c.bottom >= mid) { on = el; return true; } return false; });
+    if (on && on.classList.contains("pn-mg-vid")) playIn(on); else MEDIA.release();
+  }
+  function playIn(el) {
+    var holder = el && el.querySelector(".pn-mg-frame");
+    if (holder) MEDIA.mount(holder, el.getAttribute("data-vid"), el.querySelector(".vf-stem").textContent);
   }
   function redraw(i) {
     var el = H().root().querySelector('#pnMgFeed .vf-c[data-i="' + i + '"]');
@@ -183,12 +185,12 @@
   }
   function tickBreak() { if (!S || !S.brk || S.mode !== "break") return stopBreakTimer(); if (DATA.breakState(S.brk, Date.now()).expired) stopBreakTimer(); renderBreak(); }
   function stopBreakTimer() { if (S && S.timer) { G.clearInterval(S.timer); S.timer = 0; } }
-  function stopMedia() { if (MEDIA) MEDIA.release(); if (S && S.io) { S.io.disconnect(); S.io = null; } }
+  function stopMedia() { if (MEDIA) MEDIA.release(); if (S) G.clearTimeout(S.vt); }
   function setMode(mode) { stopMedia(); stopBreakTimer(); S.brk = null; S.mode = mode; S.cards = []; S.seen = {}; S.top = 0; S.done = S.right = 0; if (mode === "break") return renderBreak(); load(); }
 
   function start(host, mode) {
     if (G.PrepPro && G.PrepPro.can && !G.PrepPro.can("questions", { items: [] })) { G.PrepPro.openLimit("questions"); return; }
-    S = { host: host, mode: "study", cards: [], loading: false, err: false, done: 0, right: 0, top: 0, brk: null, timer: 0, io: null, seen: {} };
+    S = { host: host, mode: "study", cards: [], loading: false, err: false, done: 0, right: 0, top: 0, brk: null, timer: 0, vt: 0, seen: {} };
     if (mode === "clinical" && FLAGS.discovery) S.mode = "clinical";
     else if (!FLAGS.study && FLAGS.discovery) S.mode = "clinical";
     emit("session_started", { mode: S.mode });
@@ -224,6 +226,7 @@
       if (nx) box.scrollTo({ top: nx.offsetTop - box.offsetTop, behavior: G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       return;
     }
+    if (a === "mg-play") { playIn(el.closest(".pn-mg-vid")); return; }
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
     if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
     if (a === "mg-understand") {
