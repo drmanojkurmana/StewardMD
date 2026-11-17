@@ -187,7 +187,7 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy]") && !document.querySelector("#smdPrep .pn-tile[data-s=ss-cardiology]");`, 5000), "the FMGE tab lists the MBBS subjects");
   ok(/FMGE readiness/.test(await text("#smdPrep .pl-hero")), "readiness follows the tab: " + await text("#smdPrep .pl-hero"));
   await shot("fmge-home");
-  await click("#smdPrep [data-act=mocks]");
+  await click("#smdPrep nav .pnv-tab[data-tab=tests]");   // Mock exam lives in the Tests tab (compact home 2026-11-17)
   ok(await until(`return /300 questions in 2 parts of 150, 2 h 30 min each/.test(document.querySelector("#smdPrep .pn-body").textContent);`, 3000), "the FMGE pattern: " + await text("#smdPrep .pn-panel .pn-mut"));
   ok(/no negative marking/.test(await text("#smdPrep .pn-panel")) && /Pass mark 150 of 300/.test(await text("#smdPrep .pn-panel")), "no negative marking, pass mark 150 of 300");
   ok(/One part: 150 questions/.test(await text('#smdPrep [data-act=mock][data-k=part]')), "a full mock is one part of 150");

@@ -215,36 +215,33 @@ test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded;
   assert.match(ui, /G\.fetch\("\/clinix\/media\/manifest\.json"\)/, "the only fetch is the bundled CliniX manifest");
 });
 
-test("home row: matches sibling rows with leading icon tile and trailing chevron", () => {
-  const mockG = {
-    PREP_MG_DATA: D,
-    PREP_MG_MEDIA: M,
-    localStorage: { getItem: () => null, setItem: () => {} },
-    location: { search: "?medigram=1" }
-  };
+test("home card: one PrepReels card in the Solve next style, Saved beside it once anything is saved", () => {
   const code = read("prep-medigram.js");
-  new Function("window", code)(mockG);
-  const mg = mockG.PREP_MEDIGRAM;
+  const boot = () => { const g = { PREP_MG_DATA: D, PREP_MG_MEDIA: M, localStorage: { getItem: () => null, setItem: () => {} }, location: { search: "?medigram=1" } }; new Function("window", code)(g); return g.PREP_MEDIGRAM; };
+  const mg = boot();
   assert.ok(mg, "PREP_MEDIGRAM registered");
+  const host = (mgsv) => ({ ico: (n) => `<ico-${n}/>`, store: () => ({ mgsv }) });
+  const html = mg.homeHtml(host({}));
+  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>[^<]+<\/b><\/span><ico-chev\/><\/button><\/div>$/);
+  assert.doesNotMatch(html, /mg-saved/, "no Saved button with nothing saved");
+  const two = mg.homeHtml(host({ a: {}, b: {} }));
+  assert.match(two, /data-act="mg-saved" aria-label="Saved from PrepReels, 2 cards"/);
+  assert.match(two, /<small>Saved<\/small><b>2<\/b>/);
+});
 
-  const mockHost = {
-    row: (act, icon, title, sub, attrs) => `<button type="button" class="pn-row" data-act="${act}"${attrs || ""}><span class="pn-ri" aria-hidden="true">${icon}</span><span class="pn-rb"><b>${title}</b><small>${sub}</small></span><chev/></button>`,
-    ico: (n) => `<ico-${n}/>`,
-    esc: (s) => s
-  };
-
-  const html = mg.homeHtml(mockHost);
-  assert.match(html, /class="pn-row"/);
-  assert.match(html, /data-act="mg-open"/);
-  assert.match(html, /class="pn-ri"[^>]*><ico-play\/>/);
-  assert.match(html, /class="pn-rb"[^>]*><b>PrepReels<\/b><small>Questions, videos and pearls, one swipe each<\/small><\/span>/);
-  assert.match(html, /<chev\/>/);
-
-  // Standalone fallback without host also provides pn-ri, pn-rb, play icon and chevron
-  const fallbackHtml = mg.homeHtml({});
-  assert.match(fallbackHtml, /class="pn-row"/);
-  assert.match(fallbackHtml, /data-act="mg-open"/);
-  assert.match(fallbackHtml, /class="pn-ri"/);
-  assert.match(fallbackHtml, /d="M7 5l12 7-12 7z"/, "play icon path");
-  assert.match(fallbackHtml, /d="M9 6l6 6-6 6"/, "chevron icon path");
+test("one feed and a compact home (owner 2026-11-17): Swipe feed is PrepReels; moved rows stay reachable", () => {
+  const play = read("prep-play.js"), prep = read("prep.js"), css = read("prep.css");
+  assert.match(play, /if \(a === "v-feed"\) return feed\(\);/, "the Swipe feed act goes through feed()");
+  assert.match(play, /if \(kind === "feed"\) return feed\(\);/, "the widget, watch and notification link too");
+  assert.match(play, /function feed\(\) \{ var M = reels\(\); return M \? M\.open\(H, "study"\) : openFeed\(\); \}/, "PrepReels when on, the old feed only as its fallback");
+  assert.match(play, /\(reels\(\) \? "" : H\.row\("v-feed"/, "no Swipe feed row while PrepReels is on");
+  assert.match(play, /class="pn-group pn-strip"/);
+  assert.doesNotMatch(play.slice(play.indexOf("function homeHtml("), play.indexOf("function freezeTick(")), /v-freeze/, "Streak freezes left the Play strip");
+  // Rows that leave home with the tab bar are in the You menu (renderMenu) or the Tests tab (renderMocks).
+  const menu = prep.slice(prep.indexOf("function renderMenu("), prep.indexOf("/* ---------- image credit sheet"));
+  for (const a of ["a-stats", "soc-open", "soc-acc", "p-settings", "bookmarks"]) assert.ok(menu.includes('"' + a + '"'), "You menu has " + a);
+  assert.match(prep, /var tabbed = !!G\.PREP_NAV;/, "without the tab bar the rows stay on home");
+  assert.match(prep, /cut = !scope && !st\.subsAll && subs\.length > 7/);
+  assert.match(prep, /if \(a === "subs-all"\)/);
+  assert.match(css, /\.pn-subs\.pn-cut > \.pn-tile:nth-child\(n\+7\) \{ display: none; \}/);
 });

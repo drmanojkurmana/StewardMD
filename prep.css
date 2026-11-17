@@ -163,6 +163,26 @@ body.dark .pn-root .pn-bar-logo.pn-lg-d { display: inline-block; }
 .pn-root .pn-next .pn-ri { background: var(--pn-pri-soft); color: var(--pn-pri-ink); }
 .pn-root .pn-next .pn-rb small { order: -1; font-size: 12px; font-weight: 600; letter-spacing: .01em; color: var(--pn-mut); }
 .pn-root .pn-next .pn-rb b { font-size: 15.5px; font-weight: 650; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Compact home (owner 2026-11-17: "overwhelming, more options, more scrolling"). The same rows and actions, laid out
+   tighter: Practise as icon tiles, Play as a sideways strip whose next card peeks in, Subjects cut to 6 with Show all,
+   and PrepReels as one card beside Solve next. */
+.pn-root .pn-home > .pn-group.pn-grid4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(78px, 1fr)); gap: 8px; border: 0; border-radius: 0; background: none; overflow: visible; box-shadow: none; }
+.pn-root .pn-home > .pn-grid4 > .pn-row { flex-direction: column; justify-content: flex-start; gap: 7px; min-height: 88px; padding: 12px 4px 10px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); text-align: center; }
+.pn-root .pn-home > :is(.pn-grid4, .pn-strip) > .pn-row::before, .pn-root .pn-home > :is(.pn-grid4, .pn-strip) > .pn-row > svg:last-child, .pn-root .pn-home > .pn-grid4 .pn-rb small { display: none; }
+.pn-root .pn-home > :is(.pn-grid4, .pn-strip) > .pn-row { border-color: var(--pn-card-edge); box-shadow: var(--pn-elev); }
+.pn-root .pn-home > .pn-grid4 .pn-rb { flex: 0 0 auto; align-items: center; }
+.pn-root .pn-home > .pn-grid4 .pn-rb b { font-size: 12.5px; font-weight: 600; letter-spacing: 0; line-height: 1.25; }
+.pn-root .pn-home > .pn-group.pn-strip { flex-direction: row; gap: 8px; overflow-x: auto; overflow-y: hidden; border: 0; border-radius: 0; background: none; box-shadow: none; padding: 2px 0 8px; margin-bottom: -8px; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.pn-root .pn-home > .pn-strip::-webkit-scrollbar { display: none; }
+.pn-root .pn-home > .pn-strip > .pn-row { flex: 0 0 148px; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 8px; min-height: 124px; padding: 12px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); scroll-snap-align: start; }
+.pn-root .pn-home > .pn-strip .pn-rb b { font-size: 14px; line-height: 1.25; }
+.pn-root .pn-home > .pn-strip .pn-rb small { font-size: 12.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.pn-root .pn-mgh { display: flex; gap: 8px; }
+.pn-root .pn-mgh > .pn-next { flex: 1 1 auto; min-width: 0; }
+.pn-root .pn-mgh > .pn-mgh-sv { flex: 0 0 auto; }
+.pn-root .pn-subs.pn-cut > .pn-tile:nth-child(n+7) { display: none; }
+.pn-root .pn-subs-all { align-self: stretch; }
+
 
 /* ---- subjects: one list on a phone (name, modules done, MCQs, a thin progress line), a grid of rows from 700 px ---- */
 .pn-root .pn-subs { display: grid; grid-template-columns: minmax(0, 1fr); border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); overflow: hidden; }
@@ -2150,3 +2170,4 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pn-why-chip { transition: none; }
 }
+

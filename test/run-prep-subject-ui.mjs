@@ -127,7 +127,8 @@ try {
     await ev(`PREP.open(); return 1;`);
     ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 20000), "home opens" + at);
     ok(await ev(`return !document.querySelector("#smdPrep .pn-tabs, #smdPrep [data-act=exam]");`) === true, "home has no exam switcher" + at);
-    ok(/Exam: NEET-PG/.test(await ev(`var r=document.querySelector("#smdPrep [data-act=p-settings].pn-row"); return r ? r.textContent : "";`) || ""), "home lists Settings with the exam" + at);
+    // Settings (exam and plan) is in the You tab since the compact home (2026-11-17); home names the exam in its bar.
+    ok(/NEET-PG/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`) || "") && await ev(`return !!document.querySelector("#smdPrep #pnHome [data-act=p-settings]") || !!document.querySelector("#smdPrep nav .pnv-tab[data-tab=you]");`) === true, "home names the exam; Settings is one tap away (You tab)" + at);
     await shot(tag, "home");
     await ev(`PREP._host.setExam("neet-ss"); return 1;`);
     ok(await until(`return !!document.querySelector('#smdPrep [data-act=subject][data-s="ss-radiology"]');`, 8000), "NEET-SS lists Radiology" + at);
@@ -205,7 +206,7 @@ try {
   await ev(`PREP.close(); return 1;`); await boot("&ob=1"); await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 15000) && await ev(`return !document.querySelector("#smdPrep [data-act=p-f-exam]");`) === true, "a reopen goes straight home, the exam is not asked again");
   ok(/NEET-SS/.test(await ev(`return document.querySelector("#smdPrep .pn-t p").textContent;`)), "the bar names the exam");
-  await click("#smdPrep .pn-row[data-act=p-settings]");
+  await click("#smdPrep [data-act=p-settings]");
   ok(await until(`return document.querySelectorAll("#pnPlanSheet [data-act=p-f-exam]").length === 6;`, 4000), "Settings has the Exam row with six exams");
   const segOver = await ev(`var o=[]; document.querySelectorAll("#pnPlanSheet .pl-g-exam .pl-segb").forEach(function(b){ if(b.scrollWidth>b.clientWidth+1) o.push(b.textContent); }); return o.join(",");`);
   ok(segOver === "", "no exam label is clipped in Settings " + segOver);
