@@ -186,15 +186,30 @@
   };
   function settingsOf(api) { var V = api.getV(); if (!V.ink) V.ink = loadSettings(); return V.ink; }
   function persist(api) { saveSettings(settingsOf(api)); syncStrip(api); }
+  /* Highlighter like real ink: all highlight strokes are painted OPAQUE on a scratch layer, then laid down
+     once at a fixed opacity, so self-overlaps and crossings never darken into blobs (GoodNotes look). */
+  var hlScratch = null;
+  function drawHlLayer(ctx, list, W, H, dpr) {
+    if (!list || !list.length) return;
+    var cw = ctx.canvas.width, ch = ctx.canvas.height;
+    if (!hlScratch) hlScratch = D.createElement("canvas");
+    if (hlScratch.width !== cw || hlScratch.height !== ch) { hlScratch.width = cw; hlScratch.height = ch; }
+    var sc = hlScratch.getContext("2d");
+    sc.setTransform(1, 0, 0, 1, 0, 0); sc.clearRect(0, 0, cw, ch); sc.scale(dpr, dpr);
+    sc.lineCap = "round"; sc.lineJoin = "round"; sc.globalAlpha = 1;
+    list.forEach(function (s) {
+      var pts = s.pts || []; if (!pts.length) return;
+      sc.strokeStyle = s.color; sc.lineWidth = Math.max(1, s.w * W * 6); sc.beginPath();
+      pts.forEach(function (p, i) { if (i) sc.lineTo(p[0] * W, p[1] * H); else sc.moveTo(p[0] * W, p[1] * H); });
+      if (pts.length === 1) sc.lineTo(pts[0][0] * W + 0.01, pts[0][1] * H);
+      sc.stroke();
+    });
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 0.55; ctx.globalCompositeOperation = "multiply";
+    ctx.drawImage(hlScratch, 0, 0); ctx.restore();
+  }
   function drawStyled(ctx, s, W, H, dpr) {
+    if (s.tool === "hl") { drawHlLayer(ctx, [s], W, H, dpr); return; }
     ctx.save(); ctx.scale(dpr, dpr);
-    if (s.tool === "hl") {
-      ctx.globalAlpha = 0.38; ctx.globalCompositeOperation = "multiply"; ctx.strokeStyle = s.color; ctx.lineCap = "round"; ctx.lineJoin = "round";
-      ctx.lineWidth = Math.max(1, s.w * W * 6); ctx.beginPath();
-      s.pts.forEach(function (p, i) { if (i) ctx.lineTo(p[0] * W, p[1] * H); else ctx.moveTo(p[0] * W, p[1] * H); });
-      if (s.pts.length === 1) ctx.lineTo(s.pts[0][0] * W + 0.01, s.pts[0][1] * H);
-      ctx.stroke(); ctx.restore(); return;
-    }
     var poly = outline(s.pts, { style: s.style || "ball", sens: s.sens != null ? s.sens : 0.5, tip: s.tip != null ? s.tip : 0.7, w: s.w }, W, H);
     ctx.fillStyle = s.color; ctx.beginPath();
     poly.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
@@ -539,6 +554,6 @@
     ov.addEventListener("pointerup", end); ov.addEventListener("pointercancel", end);
     ov.addEventListener("pointerleave", function () { if (api.getV() && api.getV().tool === "er") clearLive(); });
   }
-  G.STUDY_INK = { pure: PURE, ICONS: ICONS, drawStroke: drawStroke, drawStyled: drawStyled, stripHtml: stripHtml, syncStrip: syncStrip, popover: popover, closePopover: closePopover, bindInk: bindInk, loadSettings: loadSettings, toolSettings: toolSettings, onPenSeen: onPenSeen, preview: preview };
+  G.STUDY_INK = { pure: PURE, ICONS: ICONS, drawStroke: drawStroke, drawStyled: drawStyled, drawHlLayer: drawHlLayer, stripHtml: stripHtml, syncStrip: syncStrip, popover: popover, closePopover: closePopover, bindInk: bindInk, loadSettings: loadSettings, toolSettings: toolSettings, onPenSeen: onPenSeen, preview: preview };
 })(typeof window !== "undefined" ? window : this);
 

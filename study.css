@@ -2377,3 +2377,7 @@ body.dark .pn-root .st-tb-tools .st-b[data-v="hl"].on { color: var(--st-pen, #e8
 
 /* iPad/iPhone status bar: the Study top bar starts below it (navy fills behind the clock/battery) */
 .pn-root .st-p3-topbar { padding-top: calc(6px + env(safe-area-inset-top, 0px)); padding-left: calc(8px + env(safe-area-inset-left, 0px)); padding-right: calc(8px + env(safe-area-inset-right, 0px)); }
+
+/* Zoomed pages wider than the screen must scroll on both sides: the column grows to the page width
+   (centred flex items overflowing to the left cannot be scrolled to). */
+.pn-root .st-pages { width: max-content; min-width: 100%; }

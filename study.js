@@ -1360,27 +1360,77 @@
     if (pg) V.sel = { page: +pg.getAttribute("data-n"), text: t };
   }
 
-  function setZoom(z) {
-    z = Math.max(0.5, Math.min(4, z)); if (!V || z === V.z) return;
-    var k = z / V.z, i, cw = V.baseW * z;
-    V.sc.scrollTop *= k; V.sc.scrollLeft *= k; V.z = z;
+  // Re-render a page at the new zoom WITHOUT a blank flash: the old (CSS-stretched) canvases stay until the new render lands.
+  function rerenderPage(n) {
+    var p = V && V.pg[n]; if (!p || !p.on) return;
+    var old = [p.cv, p.tl, p.ov, p.itemLayer, p.live].filter(Boolean);
+    old.forEach(function (c) { c.style.pointerEvents = "none"; });
+    try { if (p.task) p.task.cancel(); } catch (e) {}
+    p.on = false; p.gen++; p.task = null; p.cv = p.tl = p.ov = p.itemLayer = p.live = null;
+    if (G.STUDY_INSERT && G.STUDY_INSERT.onPageFree) G.STUDY_INSERT.onPageFree(n);
+    renderPage(n);
+    var done = function () { old.forEach(function (c) { if (c.width !== undefined) { c.width = 0; c.height = 0; } if (c.parentNode) c.parentNode.removeChild(c); }); };
+    var tries = 0, wait = function () { if (p.task && p.task.promise) { p.task.promise.then(done, done); return; } if (p.cv || ++tries > 40) { G.setTimeout(done, 30); return; } G.setTimeout(wait, 25); };
+    G.setTimeout(wait, 0);
+  }
+  function layoutZoom(z) {
+    var i, cw = V.baseW * z; V.z = z;
     for (i = 1; i <= V.n; i++) { var p = V.pg[i]; p.el.style.width = cw + "px"; p.el.style.height = cw * p.ratio + "px"; }
     G.clearTimeout(V.zt);
-    V.zt = G.setTimeout(function () { if (!V) return; Object.keys(V.pg).forEach(function (n) { if (V.pg[n].on) { freePage(+n); renderPage(+n); } }); }, 250);
+    V.zt = G.setTimeout(function () { if (!V) return; Object.keys(V.pg).forEach(function (n) { if (V.pg[n].on) rerenderPage(+n); }); }, 120);
+    var zl = host.root() && host.root().querySelector("#stZoomLabel"); if (zl) zl.textContent = Math.round(z * 100) + "%";
+  }
+  function setZoom(z) {
+    z = Math.max(1, Math.min(4, z)); if (!V || z === V.z) return;
+    var k = z / V.z, cx = V.sc.scrollLeft + V.sc.clientWidth / 2, cy = V.sc.scrollTop + V.sc.clientHeight / 2;
+    layoutZoom(z);
+    V.sc.scrollLeft = cx * k - V.sc.clientWidth / 2; V.sc.scrollTop = cy * k - V.sc.clientHeight / 2;
   }
 
+  /* Native-feeling pinch: while fingers move only a GPU transform (scale around the pinch point + pan) is applied;
+     on release the pages are laid out once at the new zoom and the point under the fingers stays put.
+     Zoom range: fit width (1) to 400%; pinching below fit springs back to fit, like GoodNotes. */
   function bindPinch() {
-    var d0 = 0, z0 = 1;
+    var g = null;
     var span = function (t) { var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); };
+    var mid = function (t) { return [(t[0].clientX + t[1].clientX) / 2, (t[0].clientY + t[1].clientY) / 2]; };
+    var box = V.box;
+    function commit() {
+      if (!g) return;
+      var gg = g; g = null;
+      var z = Math.max(1, Math.min(4, gg.z0 * gg.s)), k = z / gg.z0;
+      box.style.transition = ""; box.style.transform = ""; box.style.willChange = "";
+      layoutZoom(z);
+      // the spot on the page that was under the fingers at the start lands under the fingers' final midpoint
+      // two passes: the second absorbs any layout offset that moves with the scroll position
+      for (var pass = 0; gg.pe && pass < 2; pass++) {
+        var r = gg.pe.getBoundingClientRect();
+        V.sc.scrollLeft += r.left + gg.fx * r.width - gg.m[0];
+        V.sc.scrollTop += r.top + gg.fy * r.height - gg.m[1];
+      }
+    }
     V.sc.addEventListener("touchstart", function (e) {
       if (V && V._isPenDown) return;
-      if (e.touches.length === 2) { d0 = span(e.touches); z0 = V.z; }
+      if (e.touches.length === 2) {
+        var m = mid(e.touches), br = box.getBoundingClientRect(), hit = D.elementFromPoint(m[0], m[1]), pe = hit && hit.closest ? hit.closest(".st-pg") : null;
+        if (!pe && V.pg[V.cur || 1]) pe = V.pg[V.cur || 1].el;
+        var pr = pe ? pe.getBoundingClientRect() : null;
+        g = { d0: span(e.touches) || 1, z0: V.z, m0: m, m: m, ox: m[0] - br.left, oy: m[1] - br.top, s: 1, pe: pe, fx: pr ? (m[0] - pr.left) / (pr.width || 1) : 0, fy: pr ? (m[1] - pr.top) / (pr.height || 1) : 0 };
+        box.style.transformOrigin = g.ox + "px " + g.oy + "px"; box.style.willChange = "transform";
+      }
     }, { passive: true });
     V.sc.addEventListener("touchmove", function (e) {
-      if (V && V._isPenDown) return;
-      if (e.touches.length === 2 && d0) { if (e.cancelable) e.preventDefault(); setZoom(z0 * span(e.touches) / d0); }
+      if (!g || (V && V._isPenDown)) return;
+      if (e.touches.length !== 2) return;
+      if (e.cancelable) e.preventDefault();
+      var m = mid(e.touches), z = g.z0 * span(e.touches) / g.d0;
+      z = z < 1 ? 1 - (1 - z) * 0.35 : z > 4 ? 4 + (z - 4) * 0.2 : z; // rubber-band past the limits
+      g.s = z / g.z0; g.m = m;
+      box.style.transform = "translate(" + (m[0] - g.m0[0]) + "px," + (m[1] - g.m0[1]) + "px) scale(" + g.s + ")";
     }, { passive: false });
-    V.sc.addEventListener("touchend", function (e) { if (e.touches.length < 2) d0 = 0; }, { passive: true });
+    var end = function (e) { if (g && (!e.touches || e.touches.length < 2)) commit(); };
+    V.sc.addEventListener("touchend", end, { passive: true });
+    V.sc.addEventListener("touchcancel", end, { passive: true });
   }
 
   /* ---- ink ---- */
@@ -1416,9 +1466,13 @@
     // Highlighter renders under pen ink and text-layer content visually (multiply on the overlay).
     var ordered = V.strokes.filter(function (s) { return s.page === pid(n) && !s.gone; });
     ordered.sort(function (a, b) { return (a.tool === "hl" ? 0 : 1) - (b.tool === "hl" ? 0 : 1); });
+    var isSelS = function (s) { return V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1; };
+    // All styled highlighter strokes go down as ONE even layer (no darkened overlaps); everything else as before.
+    var hlLayer = G.STUDY_INK && G.STUDY_INK.drawHlLayer ? ordered.filter(function (s) { return s.tool === "hl" && s.style && !s.shape && !isSelS(s); }) : [];
+    if (hlLayer.length) G.STUDY_INK.drawHlLayer(ctx, hlLayer, W, H, dpr);
     ordered.forEach(function (s) {
-      var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
-      drawStroke(ctx, s, W, H, dpr, isSel);
+      if (hlLayer.indexOf(s) !== -1) return;
+      drawStroke(ctx, s, W, H, dpr, isSelS(s));
     });
     if (live) drawStroke(ctx, live, W, H, dpr);
     // Phase 2 hook: dashed selection box with resize handles.
