@@ -601,9 +601,10 @@ if (await page.locator("#stLassoBar").count()) {
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
-await page.click('[data-act="st-newnb"]');
-await page.fill("#stNbT", "Ward notes"); await page.selectOption("#stNbS", "ruled"); await page.selectOption("#stNbZ", "a4");
-await page.click('[data-act="st-mknb"]');
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "Ward notes"); await page.selectOption("#st5aNbS", "ruled"); await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
 ok(await page.evaluate(() => { const s = STUDY._state(); return !!s.nb && s.pdf === null && s.nb.style === "ruled" && s.n === 1; }), "notebook: opens with one page and no PDF");
 ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let ink = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 250) ink++; return ink > 200; }), "notebook: ruled lines are drawn on the page");
@@ -684,24 +685,27 @@ await page.click('[data-act="st-delpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "notebook: page deleted after confirm");
 
+/* helper declared here so it is available throughout all A6+ tests */
+const gotoSearch = async () => { await page.click('[data-act="st5a-tab"][data-v="search"]'); await page.waitForSelector("#st5aSearchQ", { timeout: 10000 }); };
+
 /* ---- A6 search ---- */
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("index").objectStore("index").getAll(); q.onsuccess = () => res(q.result.length === 1 && q.result[0].done === 2); }; }), null, { timeout: 20000 });
 ok(await page.evaluate(() => document.querySelector(".st-ix").textContent === ""), "search: fully indexed PDF shows no Indexing label");
-await page.fill("#stQ", "TWO");
+await gotoSearch(); await page.fill("#st5aSearchQ", "TWO");
 await page.waitForSelector(".st-hit", { timeout: 10000 });
 const hit = await page.locator(".st-hit").first().innerText();
 ok(/Page 2/.test(hit) && /fixture/.test(hit) && await page.locator(".st-hit mark").first().innerText() === "two", "search: result shows document, page 2 and the highlighted match (case-insensitive)");
 ok(await page.locator(".st-hit").count() === 1, "search: one result only, for page 2");
-await page.fill("#stQ", "Ward");
-await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stRes").innerText));
+await page.fill("#st5aSearchQ", "Ward");
+await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stList").innerText));
 ok(true, "search: notebook titles are searched");
-await page.fill("#stQ", "zebra");
-await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stRes").innerText));
+await page.fill("#st5aSearchQ", "zebra");
+await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stList").innerText));
 ok(true, "search: absent word gives a clear empty state");
-await page.fill("#stQ", "two");
+await page.fill("#st5aSearchQ", "two");
 await page.waitForSelector(".st-hit");
 await page.click(".st-hit");
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
@@ -721,16 +725,26 @@ await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector('[data-ix="bad"]');
 await page.waitForTimeout(800);
 ok(await page.locator('[data-ix="bad"]').innerText() === "Indexing, 0 of 5 pages", "library: partly indexed PDF shows Indexing, n of m pages");
-await page.fill("#stQ", "zebra");
-await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stRes").innerText));
-ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stRes").innerText()), "search: results say which pages are not yet indexed");
+await gotoSearch(); await page.fill("#st5aSearchQ", "zebra");
+await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stList").innerText));
+ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stList").innerText()), "search: results say which pages are not yet indexed");
 await idb("docs", 'o.delete("bad")');
 
 /* ---- A5: photos to PDF (stubbed OCR), scan (stubbed plugin), cancel, pickImage ---- */
 const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction(store).objectStore(store).getAll(); q.onsuccess = () => { r.result.close(); res(q.result); }; }; }), store);
 const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
 const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
-const openLib = async () => { await page.click('#smdPrep .pnv-tab[data-tab="study"]'); await page.waitForSelector("#stLib"); };
+const openLib = async () => {
+  if (await page.locator("#stLib").count() > 0 && await page.locator("#stLib").isVisible()) {
+    await page.evaluate(() => {
+      if (window.STUDY_LIB && window.STUDY_LIB.renderBody) window.STUDY_LIB.renderBody();
+      else if (window.STUDY && window.STUDY.lib) window.STUDY.lib();
+    });
+    return;
+  }
+  await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+  await page.waitForSelector("#stLib");
+};
 await boot("prep=1&study=1");
 await openLib();
 const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));
@@ -742,10 +756,10 @@ const photoDoc = (await idbAll("docs")).find((d) => /^Photos /.test(d.title));
 const photoPdf = await fileBytes(photoDoc.id);
 ok(photoDoc.pageCount === 3 && photoPdf.slice(0, 5).toString() === "%PDF-" && pagesIn(photoPdf) === 3 && createHash("sha256").update(photoPdf).digest("hex") === photoDoc.sha256, "photos: 3 images become one 3-page PDF stored like an import (sha256 kept)");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => { r.result.close(); res(q.result.filter((x) => x.src === "ocr").length === 3); }; }; }), null, { timeout: 20000 });
-await page.fill("#stQ", "quokka");
+await gotoSearch(); await page.fill("#st5aSearchQ", "quokka");
 await page.waitForFunction(() => document.querySelectorAll(".st-hit").length === 3, null, { timeout: 10000 });
 ok(/Page 1/.test(await page.locator(".st-hit").first().innerText()), "photos: OCR text (stubbed, 3 pages) is found by search, one hit per page");
-await page.fill("#stQ", "");
+await page.fill("#st5aSearchQ", "");
 /* scan: no button while the plugin says unavailable */
 await page.evaluate((b) => {
   window.__del = []; window.__scanRes = "ok";
@@ -754,18 +768,18 @@ await page.evaluate((b) => {
     Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
   window.__avail = false;
 }, jpegs[0]);
-await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib(); await page.waitForTimeout(400);
-ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button while isAvailable is false");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib(); await page.waitForTimeout(400);
+ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button (st-scan) while isAvailable is false");
 await page.evaluate(() => { window.__avail = true; });
-await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib();
-await page.waitForSelector('[data-act="st-scan"]', { timeout: 5000 });
-ok(true, "scan: the Scan button shows once isAvailable is true");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib();
+await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]', { timeout: 5000 });
+ok(true, "scan: the New sheet shows Scan (delegates to DocScan)");
 const nDocs = (await idbAll("docs")).length;
 await page.evaluate(() => { window.__scanRes = "cancel"; });
-await page.click('[data-act="st-scan"]'); await page.waitForTimeout(700);
+await page.click('[data-act="st5a-scan"]'); await page.waitForTimeout(700);
 ok((await idbAll("docs")).length === nDocs && await page.evaluate(() => window.__del.length) === 0, "scan: cancel returns quietly, nothing added");
 await page.evaluate(() => { window.__scanRes = "ok"; });
-await page.click('[data-act="st-scan"]');
+await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]'); await page.click('[data-act="st5a-scan"]');
 await page.waitForFunction((n) => document.querySelectorAll(".st-doc").length > n, nDocs, { timeout: 30000 });
 const scanDoc = (await idbAll("docs")).find((d) => /^Scan /.test(d.title));
 ok(scanDoc.pageCount === 2 && pagesIn(await fileBytes(scanDoc.id)) === 2, "scan: two pages become one 2-page PDF in the library");
@@ -774,7 +788,7 @@ await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open
 ok(true, "scan: OCR ran in the background for both pages");
 /* pickImage path: one photo, "add another" answered no */
 await page.evaluate((b) => { window.confirm = () => false; window.SMD_NATIVE.pickImage = async () => "data:image/jpeg;base64," + b; }, jpegs[1]);
-await page.click('[data-act="st-photos"]');
+await page.click('[data-act="st5a-new"]'); await page.click('[data-act="st5a-new-photos"]');
 await page.waitForFunction(() => /Photos[\s\S]*1 page\b/.test(document.querySelector("#stList").innerText), null, { timeout: 30000 });
 ok(true, "photos: pickImage path (native bridge) builds a 1-page PDF");
 await page.evaluate(() => { window.confirm = () => true; delete window.Capacitor; });
@@ -876,7 +890,7 @@ const snap = async () => {
   return { docs: docs.map((d) => d.id).sort(), per, shas, folders: (await idbAll("folders")).length, n: docs.length, st: strokes.length };
 };
 const before = await snap();
-const bk = await dl(() => page.click('[data-act="st-backup"]'));
+const bk = await dl(() => page.click('[data-act="st5a-backup"]'));
 const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
 const nPdf = Object.keys(before.shas).length;
 ok(/^StewardMD Study backup \d{4}-\d\d-\d\d\.zip$/.test(bk.name) && zman.counts.docs === before.n && zman.counts.strokes === before.st && zman.counts.files === nPdf && zman.counts.folders === 1 && zman.files.length === Object.keys(zmap).length - 1, "backup: one zip with the manifest counts (documents, strokes, originals, folders) and a sha256 per file");
@@ -910,11 +924,12 @@ await page.evaluate(() => new Promise(r => { const q = indexedDB.deleteDatabase(
 await openLib();
 await page.waitForTimeout(400);
 /* create a fresh notebook for P3 */
-await page.click('[data-act="st-newnb"]');
-await page.fill("#stNbT", "P3 test");
-await page.selectOption("#stNbS", "ruled");
-await page.selectOption("#stNbZ", "a4");
-await page.click('[data-act="st-mknb"]');
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "P3 test");
+await page.selectOption("#st5aNbS", "ruled");
+await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector("#stPages", { timeout: 15000 });
 await page.waitForSelector("#stP3Top", { timeout: 10000 });
 ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");

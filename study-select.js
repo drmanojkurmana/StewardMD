@@ -842,6 +842,11 @@
     });
   }
   function showMorePanel(api) {
+    var r = api && api.root && api.root();
+    if (r && r.querySelector("#stSelMore")) {
+      removePanel(api);
+      return;
+    }
     removePanel(api);
     var html = '<div class="st-sel-panel-head"><b>More</b><button type="button" class="pn-btn sm" data-sel-close="1">Close</button></div>' +
       '<button type="button" class="pn-btn sm st-sel-menubtn" data-act="st-lasso-resize">' + ICONS.resize + " Resize</button>" +

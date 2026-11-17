@@ -334,7 +334,13 @@
         mk("index", "doc");
         s = mk("items", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc");
       };
-      r.onsuccess = function () { res(r.result); };
+      r.onsuccess = function () {
+        var conn = r.result;
+        /* Phase 5a hang fix: respond to versionchange (e.g. deleteDatabase in tests) so the
+           pending request can complete and later opens are not blocked forever. */
+        conn.onversionchange = function () { dbP = null; try { conn.close(); } catch (e) {} };
+        res(conn);
+      };
       r.onerror = function () { dbP = null; rej(r.error); };
     });
     return dbP;
@@ -709,6 +715,7 @@
   }
 
   function fillLib() {
+    if (G.STUDY_LIB && G.STUDY_LIB.renderBody) return G.STUDY_LIB.renderBody();
     closeDocMenu();
     Promise.all([all("docs"), all("folders"), all("index")]).then(function (r) {
       var ixd = {}; r[2].forEach(function (x) { ixd[x.doc] = x.done; });
@@ -716,7 +723,8 @@
       var docs = r[0].sort(function (a, b) { return (b.lastOpened || b.created) - (a.lastOpened || a.created); }), folders = r[1], esc = host.esc, f = lib.filter;
       if (f !== "all" && f !== "fav" && !folders.some(function (x) { return x.id === f; })) f = lib.filter = "all";
       var chip = function (v, label) { return '<button type="button" class="st-chip' + (f === v ? " on" : "") + '" data-act="st-filter" data-v="' + esc(v) + '">' + esc(label) + "</button>"; };
-      root.querySelector("#stChips").innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
+      var ch = root.querySelector("#stChips");
+      if (ch) ch.innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
         '<button type="button" class="st-chip" data-act="st-newfolder">' + ICO.plus + ' Folder</button>' + (f !== "all" && f !== "fav" ? '<button type="button" class="st-chip" data-act="st-delfolder" data-v="' + esc(f) + '">Delete folder</button>' : "");
       var shown = docs.filter(function (d) { return f === "all" || (f === "fav" ? d.favourite : d.folderId === f); });
       if (!shown.length) {
@@ -851,7 +859,7 @@
     var root = host && host.root(), res = root && root.querySelector("#stRes"), qs = String(raw || "").trim(), tok = ++searchTok;
     if (!res) return;
     var show = qs.length < 2;
-    res.hidden = show; root.querySelector("#stList").hidden = !show; root.querySelector("#stChips").hidden = !show;
+    res.hidden = show; var lst = root.querySelector("#stList"); if (lst) lst.hidden = !show; var ch = root.querySelector("#stChips"); if (ch) ch.hidden = !show;
     if (show) return;
     Promise.all([all("docs"), all("ptext"), all("index")]).then(function (r) {
       if (tok !== searchTok || !host.root() || !host.root().querySelector("#stRes")) return;
@@ -2153,9 +2161,13 @@
   function leave() { closeViewer(); }
   function homeRow(h) { host = h; return ""; }
 
+  /* Phase 5a hook: the GoodNotes library (study-library.js) reuses the indexer so PDF text search keeps working. */
+  /* Phase 5a hang fix: the library reuses STUDY.db (this connection) instead of opening its own
+     IndexedDB connection, so the library never holds a second connection that can wedge opens. */
   function inkDblTap() { if (!V) return; V.tool = V.tool === "er" ? (V.prevTool || "pen") : "er"; syncTb(); }
   G.STUDY = {
     on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText,
+    kick: kick, db: db,
     _pure: PURE, _state: function () { return V; },
     put: put, del: del, get: get, all: all, q: q, itemsOf: itemsOf,
     pushUndo: function (op) { push(V.stack, op); syncTb(); saveStack(); },
