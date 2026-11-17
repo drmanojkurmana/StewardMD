@@ -2052,7 +2052,7 @@ main before this change.
 Owner: "Homepage is overwhelming, more options more scrolling" and "Swipe feed and PrepReels are same, unite them". Phone home
 went from 6.7 screens to 3.7. Same rows and actions, laid out tighter (CSS block "Compact home" near the top of prep.css,
 ahead of the scoped "Reasoning explanations" / "Why option chips" blocks whose tests read everything after their marker):
-- Order (owner, same day): Question of the day first, then readiness and Today's plan, Practise, IQoach, Play, Subjects,
+- Order (owner, same day, then moved by the owner's markup): readiness score, Question of the day, Today's plan (`#pnPlanTop` and `#pnPlanList` are separate boxes so `homeMounted` never wipes it), Practise, IQoach, Play, Subjects,
   Your progress, Compete. `#pnQotd` keeps 300 px (`.pn-qotd-wait`) until the question loads, so the plan does not jump;
   no question (offline, empty, failed index load) hides it.
 - PrepReels: one `.pn-next`-style card under Solve next (`.pn-mgh`), Saved beside it once anything is saved.

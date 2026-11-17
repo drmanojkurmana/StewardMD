@@ -2050,14 +2050,14 @@
     /* Quiet home (2026-10-10, owner brief): the brand is the mark and the name in the bar (no banner, no painted sky).
        Top down: readiness and days to the exam, today's next task and the rest of the plan, practice, subjects, then
        the secondary figures (streak, today, level) and Compete. */
+    var qotdSec = (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd pn-qotd-wait" id="pnQotd" aria-hidden="true"></section>');
     paint(bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="find" aria-label="Search questions, lessons, pearls and IDs">' + ico("search") + '</button><button type="button" class="pn-ib" data-act="menu" aria-label="Menu">' + ico("menu") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      // Owner 2026-11-17: Question of the day at the top, IQoach after Practise.
+      // Readiness, then Question of the day (owner 2026-11-17: under the score, above Today's plan), then Today's plan
+      // (prep-plan.js); the older Today card without it. IQoach sits after Practise.
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
-      (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd pn-qotd-wait" id="pnQotd" aria-hidden="true"></section>') +
-      // Readiness and Today's plan (prep-plan.js); the older Today card without it.
-      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
+      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST, qotdSec) : qotdSec + '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       '<h2 class="pn-h">Practise</h2>' +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext"' + (nx0 ? ' data-s="' + esc(nx0.subject) + '" data-m="' + esc(nx0.module) + '"' : " hidden") + '><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT">' + (nx0 ? esc(nextLabel(nx0)) : "") + "</b></span>" + ico("chev") + "</button>" +
       // PrepReels (prep-medigram.js): the one swipe feed (Play's Swipe feed opens it too).
