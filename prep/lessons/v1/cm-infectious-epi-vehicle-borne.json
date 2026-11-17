@@ -13,12 +13,27 @@
    "say": "No intermediary, no delay. Skin contact, short-range droplets, soil contact, direct inoculation and placental passage all qualify. Each route names its own barrier, from condoms to antenatal screening.",
    "vis": {
     "kind": "table",
-    "cols": ["Direct route", "Barrier that answers it"],
+    "cols": [
+     "Direct route",
+     "Barrier that answers it"
+    ],
     "rows": [
-     ["Direct contact and sexual contact", "Condoms, lesion care"],
-     ["Droplet spread, short range", "Masks, distance at bedside"],
-     ["Transplacental", "Antenatal screening and treatment"],
-     ["Soil contact", "Wound care, footwear"]
+     [
+      "Direct contact and sexual contact",
+      "Condoms, lesion care"
+     ],
+     [
+      "Droplet spread, short range",
+      "Masks, distance at bedside"
+     ],
+     [
+      "Transplacental",
+      "Antenatal screening and treatment"
+     ],
+     [
+      "Soil contact",
+      "Wound care, footwear"
+     ]
     ]
    }
   },
@@ -30,11 +45,19 @@
     "kind": "compare",
     "left": {
      "title": "Water vehicle",
-     "points": ["Typhoid, cholera, dysentery", "Hepatitis A, gastroenteritis", "Chlorination interrupts spread"]
+     "points": [
+      "Typhoid, cholera, dysentery",
+      "Hepatitis A, gastroenteritis",
+      "Chlorination interrupts spread"
+     ]
     },
     "right": {
      "title": "Food vehicle",
-     "points": ["Point source meal outbreaks", "Multiplication in milk possible", "Cooking and refrigeration interrupt"]
+     "points": [
+      "Point source meal outbreaks",
+      "Multiplication in milk possible",
+      "Cooking and refrigeration interrupt"
+     ]
     }
    }
   },
@@ -44,12 +67,27 @@
    "say": "Insects carry two ways. Mechanical carriage is transport only, flies seeding food. Biological transmission transforms the agent inside the vector: multiplication alone, development alone, or both together as malaria shows. The distinction decides incubation inside the vector.",
    "vis": {
     "kind": "table",
-    "cols": ["Vector pattern", "Inside the vector"],
+    "cols": [
+     "Vector pattern",
+     "Inside the vector"
+    ],
     "rows": [
-     ["Mechanical", "No development or multiplication"],
-     ["Propagative", "Multiplication only"],
-     ["Developmental", "Development only"],
-     ["Cyclo-developmental", "Development plus multiplication, malaria"]
+     [
+      "Mechanical",
+      "No development or multiplication"
+     ],
+     [
+      "Propagative",
+      "Multiplication only"
+     ],
+     [
+      "Developmental",
+      "Development only"
+     ],
+     [
+      "Cyclo-developmental",
+      "Development plus multiplication, malaria"
+     ]
     ]
    }
   },
@@ -72,11 +110,19 @@
     "kind": "compare",
     "left": {
      "title": "Droplet nuclei (airborne)",
-     "points": ["Under 5 microns, float for hours", "Tuberculosis, measles, chickenpox", "Ventilation and isolation answer"]
+     "points": [
+      "Under 5 microns, float for hours",
+      "Tuberculosis, measles, chickenpox",
+      "Ventilation and isolation answer"
+     ]
     },
     "right": {
      "title": "Large droplets (direct)",
-     "points": ["Fall within about one metre", "Short range cough and sneeze", "Distance and masks answer"]
+     "points": [
+      "Fall within about one metre",
+      "Short range cough and sneeze",
+      "Distance and masks answer"
+     ]
     }
    }
   },
@@ -98,12 +144,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Case contaminates article or hands"},
-     {"id": "b", "label": "Agent survives on surface"},
-     {"id": "c", "label": "Susceptible touches, then mouth or wound"},
-     {"id": "d", "label": "Handwashing breaks the chain"}
+     {
+      "id": "a",
+      "label": "Case contaminates article or hands"
+     },
+     {
+      "id": "b",
+      "label": "Agent survives on surface"
+     },
+     {
+      "id": "c",
+      "label": "Susceptible touches, then mouth or wound"
+     },
+     {
+      "id": "d",
+      "label": "Handwashing breaks the chain"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -112,11 +183,23 @@
    "say": "Attack the middle link environmentally. Treated water, clean food practice and vector destruction break chains before hosts meet agents. Droplet infections resist this link and lean on early treatment plus secretion hygiene instead.",
    "vis": {
     "kind": "table",
-    "cols": ["Chain link", "Attack mounted there"],
+    "cols": [
+     "Chain link",
+     "Attack mounted there"
+    ],
     "rows": [
-     ["Reservoir", "Diagnosis, treatment, isolation"],
-     ["Transmission route", "Water, food, vector and hand measures"],
-     ["Susceptible host", "Immunisation and chemoprophylaxis"]
+     [
+      "Reservoir",
+      "Diagnosis, treatment, isolation"
+     ],
+     [
+      "Transmission route",
+      "Water, food, vector and hand measures"
+     ],
+     [
+      "Susceptible host",
+      "Immunisation and chemoprophylaxis"
+     ]
     ]
    }
   },
@@ -128,11 +211,19 @@
     "kind": "compare",
     "left": {
      "title": "Immunity based",
-     "points": ["Active immunisation, durable", "Passive immunoglobulin, immediate", "Combined post-exposure cover"]
+     "points": [
+      "Active immunisation, durable",
+      "Passive immunoglobulin, immediate",
+      "Combined post-exposure cover"
+     ]
     },
     "right": {
      "title": "Non-immunity based",
-     "points": ["Chemoprophylaxis for exposures", "Nutrition and general resistance", "Personal protective measures"]
+     "points": [
+      "Chemoprophylaxis for exposures",
+      "Nutrition and general resistance",
+      "Personal protective measures"
+     ]
     }
    }
   },
@@ -142,12 +233,27 @@
    "say": "Clues name routes before organisms. Flooded wells, shared meals, winter crowding, blood products, mosquito density: each points one way. Control answers follow the route identified, so decode the setting first.",
    "vis": {
     "kind": "table",
-    "cols": ["Stem clue", "Route to answer"],
+    "cols": [
+     "Stem clue",
+     "Route to answer"
+    ],
     "rows": [
-     ["Flooded well, many households ill", "Water vehicle-borne"],
-     ["Wedding meal, onset in hours", "Food vehicle, point source"],
-     ["Winter crowding, cough spread", "Droplet, direct"],
-     ["Mosquito density high", "Vector-borne, biological"]
+     [
+      "Flooded well, many households ill",
+      "Water vehicle-borne"
+     ],
+     [
+      "Wedding meal, onset in hours",
+      "Food vehicle, point source"
+     ],
+     [
+      "Winter crowding, cough spread",
+      "Droplet, direct"
+     ],
+     [
+      "Mosquito density high",
+      "Vector-borne, biological"
+     ]
     ]
    }
   },
@@ -158,12 +264,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Animal reservoir controlled"},
-     {"id": "b", "label": "Vector breeding reduced"},
-     {"id": "c", "label": "Human exposure falls"},
-     {"id": "d", "label": "Spillover events prevented"}
+     {
+      "id": "a",
+      "label": "Animal reservoir controlled"
+     },
+     {
+      "id": "b",
+      "label": "Vector breeding reduced"
+     },
+     {
+      "id": "c",
+      "label": "Human exposure falls"
+     },
+     {
+      "id": "d",
+      "label": "Spillover events prevented"
+     }
     ],
-    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Droplet nuclei under 5 microns float for hours carrying tuberculosis, measles and chickenpox, while large droplets fall within about one metre. Water vehicles carry typhoid, cholera and hepatitis A, and a shared meal gives a point source food outbreak. Malaria shows cyclo propagative change inside the mosquito, both development and multiplication.",
+   "say": "High-yield for the exam: Droplet nuclei under 5 microns float for hours carrying tuberculosis, measles and chickenpox, while large droplets fall within about one metre. Water vehicles carry typhoid, cholera and hepatitis A, and a shared meal gives a point source food outbreak. Malaria shows cyclo propagative change inside the mosquito, both development and multiplication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Droplet nuclei size",
+      "Under 5 microns, float for hours"
+     ],
+     [
+      "Airborne examples",
+      "Tuberculosis, measles and chickenpox spread"
+     ],
+     [
+      "Large droplet range",
+      "Fall within about one metre"
+     ],
+     [
+      "Water vehicle diseases",
+      "Typhoid, cholera, dysentery, hepatitis A"
+     ],
+     [
+      "Food vehicle pattern",
+      "Point source outbreak after shared meal"
+     ],
+     [
+      "Mechanical vector spread",
+      "Flies transport agent without development"
+     ],
+     [
+      "Propagative example",
+      "Plague bacilli multiply in rat flea"
+     ],
+     [
+      "Cyclo developmental example",
+      "Microfilaria develops only in mosquito"
+     ]
+    ]
    }
   }
  ],

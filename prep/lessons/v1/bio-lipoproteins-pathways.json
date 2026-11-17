@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Exogenous (meal) pathway",
     "nodes": [
-     {"id": "gut", "label": "Gut chylomicron (B-48)"},
-     {"id": "lpl", "label": "Lipase unloads (C-II on)"},
-     {"id": "rem", "label": "Remnant (ApoE rich)"},
-     {"id": "liv", "label": "Liver remnant uptake"}
+     {
+      "id": "gut",
+      "label": "Gut chylomicron (B-48)"
+     },
+     {
+      "id": "lpl",
+      "label": "Lipase unloads (C-II on)"
+     },
+     {
+      "id": "rem",
+      "label": "Remnant (ApoE rich)"
+     },
+     {
+      "id": "liv",
+      "label": "Liver remnant uptake"
+     }
     ],
-    "edges": [["gut", "lpl"], ["lpl", "rem"], ["rem", "liv"]]
+    "edges": [
+     [
+      "gut",
+      "lpl"
+     ],
+     [
+      "lpl",
+      "rem"
+     ],
+     [
+      "rem",
+      "liv"
+     ]
+    ]
    }
   },
   {
@@ -27,12 +52,37 @@
     "kind": "flow",
     "title": "Endogenous (liver) pathway",
     "nodes": [
-     {"id": "vldl", "label": "VLDL secreted (B-100)"},
-     {"id": "idl", "label": "IDL after lipolysis"},
-     {"id": "ldl", "label": "LDL (hepatic lipase trims)"},
-     {"id": "rec", "label": "LDL receptor clearance"}
+     {
+      "id": "vldl",
+      "label": "VLDL secreted (B-100)"
+     },
+     {
+      "id": "idl",
+      "label": "IDL after lipolysis"
+     },
+     {
+      "id": "ldl",
+      "label": "LDL (hepatic lipase trims)"
+     },
+     {
+      "id": "rec",
+      "label": "LDL receptor clearance"
+     }
     ],
-    "edges": [["vldl", "idl"], ["idl", "ldl"], ["ldl", "rec"]]
+    "edges": [
+     [
+      "vldl",
+      "idl"
+     ],
+     [
+      "idl",
+      "ldl"
+     ],
+     [
+      "ldl",
+      "rec"
+     ]
+    ]
    }
   },
   {
@@ -40,11 +90,23 @@
    "say": "The LDL receptor endocytoses through clathrin pits and recycles, while cholesterol suppresses reductase and receptor synthesis and activates ACAT storage. Recite that feedback triad together for homeostasis questions.",
    "vis": {
     "kind": "table",
-    "cols": ["Rising cell cholesterol does what", "Effect"],
+    "cols": [
+     "Rising cell cholesterol does what",
+     "Effect"
+    ],
     "rows": [
-     ["Suppresses HMG-CoA reductase (plus faster degradation)", "Less synthesis"],
-     ["Retains SREBP, fewer LDL receptors", "Less uptake (protects cell, raises plasma LDL if systemic)"],
-     ["Activates ACAT", "Stores cholesteryl esters safely"]
+     [
+      "Suppresses HMG-CoA reductase (plus faster degradation)",
+      "Less synthesis"
+     ],
+     [
+      "Retains SREBP, fewer LDL receptors",
+      "Less uptake (protects cell, raises plasma LDL if systemic)"
+     ],
+     [
+      "Activates ACAT",
+      "Stores cholesteryl esters safely"
+     ]
     ]
    }
   },
@@ -64,8 +126,21 @@
    "say": "Ezetimibe blocks gut absorption, statins block liver synthesis, and PCSK9 blockers preserve receptors. Resins add sterol excretion as a fourth station. Rational add on questions expect this station logic.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Reduce input to liver", "points": ["Ezetimibe: gut NPC1L1 blocked", "Resins: bile sterols lost", "Diet plant sterols compete"]},
-    "right": {"title": "Increase clearance by liver", "points": ["Statins: synthesis blocked, receptors up", "PCSK9 antibodies: receptors recycled", "Combination cuts LDL most"]
+    "left": {
+     "title": "Reduce input to liver",
+     "points": [
+      "Ezetimibe: gut NPC1L1 blocked",
+      "Resins: bile sterols lost",
+      "Diet plant sterols compete"
+     ]
+    },
+    "right": {
+     "title": "Increase clearance by liver",
+     "points": [
+      "Statins: synthesis blocked, receptors up",
+      "PCSK9 antibodies: receptors recycled",
+      "Combination cuts LDL most"
+     ]
     }
    }
   },
@@ -73,6 +148,51 @@
    "tx": "When receptors fail genetically, scavenger pathways in macrophages clear modified LDL without feedback restraint, filling foam cells, tendon **xanthomas** and arterial plaques despite intracellular cholesterol plenty. That unrestrained scavenger uptake (by oxidised LDL receptors) explains why familial hypercholesterolaemia arteries suffer while hepatocytes stay cholesterol hungry. The familial classification lesson now names each break by Fredrickson pattern.",
    "say": "When receptors fail, macrophages clear modified LDL without feedback restraint, filling foam cells and xanthomas. Scavenger uptake explains why arteries suffer while hepatocytes stay cholesterol hungry in familial disease.",
    "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: Lipoprotein lipase on capillary endothelium hydrolyses triglycerides in chylomicrons and VLDL, requiring apolipoprotein C-II. Abetalipoproteinaemia is an autosomal recessive deficiency of microsomal triglyceride transfer protein, resulting in absent apolipoprotein B, severe fat malabsorption, acanthocytosis, and spinocerebellar ataxia. Type III dysbetalipoproteinaemia stems from homozygous apolipoprotein E2, leading to impaired remnant clearance, palmar xanthomas, and accelerated cardiovascular disease.",
+   "say": "Lipoprotein lipase on capillary endothelium hydrolyses triglycerides in chylomicrons and VLDL, requiring apolipoprotein C-II. Abetalipoproteinaemia is an autosomal recessive deficiency of microsomal triglyceride transfer protein, resulting in absent apolipoprotein B, severe fat malabsorption, acanthocytosis, and spinocerebellar ataxia. Type III dysbetalipoproteinaemia stems from homozygous apolipoprotein E2, leading to impaired remnant clearance, palmar xanthomas, and accelerated cardiovascular disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Lipoprotein lipase role",
+      "Hydrolyses triacylglycerols in chylomicrons and VLDL releasing free fatty acids"
+     ],
+     [
+      "Apo C-II deficiency",
+      "Type I hyperlipoproteinaemia with severe hypertriglyceridaemia and eruptive xanthomas"
+     ],
+     [
+      "Type III hyperlipoproteinaemia",
+      "Homozygous Apo E2 allele causing remnant accumulation and palmar xanthomas"
+     ],
+     [
+      "Abetalipoproteinaemia cause",
+      "Microsomal triglyceride transfer protein mutation preventing apo B particle assembly"
+     ],
+     [
+      "Peripheral smear in abetalipoproteinaemia",
+      "Acanthocytes or thorny red blood cells due to abnormal membrane lipids"
+     ],
+     [
+      "Reverse transport enzyme",
+      "LCAT esterifies free cholesterol on HDL particles for transport"
+     ],
+     [
+      "CETP function",
+      "Transfers cholesteryl esters from HDL to VLDL in exchange for triglycerides"
+     ],
+     [
+      "PCSK9 function",
+      "Targets LDL receptors for lysosomal destruction reducing surface clearance"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [],

@@ -66,6 +66,51 @@
    "tx": "**Pericardial fat pad** mimics atrial enlargement at the cardiophrenic angles, but it reads less dense than heart muscle and never splays the carina or lifts a bronchus. The double atrial shadow instead matches soft tissue density exactly and curves parallel inside the right border. Checking the carina and left bronchus on the same film settles the mimic without extra radiation, a favourite examiner trap in both directions.",
    "say": "Pericardial fat pad mimics atrial enlargement at the cardiophrenic angles, but it reads less dense than heart muscle and never splays the carina or lifts a bronchus. The double atrial shadow matches soft tissue density and curves inside the right border. Checking the carina on the same film settles the mimic.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Extra density at heart border"}, {"id": "b", "label": "Check carina and bronchus"}, {"id": "c", "label": "Splayed: atrial enlargement"}, {"id": "d", "label": "Normal: fat pad likely"}], "edges": [["a", "b"], ["b", "c"], ["b", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: Double atrial shadow is the enlarged left atrium seen through the right heart border, usually in mitral stenosis. It joins carinal splaying beyond about 90 degrees and a lifted left main bronchus. A mitralised heart straightens the left border with four bumps. Coronary calcium uses the Agatston score, and cardiac MRI late gadolinium enhancement is subendocardial after infarction.",
+   "say": "High-yield for the exam: Double atrial shadow is the enlarged left atrium seen through the right heart border, usually in mitral stenosis. It joins carinal splaying beyond about 90 degrees and a lifted left main bronchus. A mitralised heart straightens the left border with four bumps. Coronary calcium uses the Agatston score, and cardiac MRI late gadolinium enhancement is subendocardial after infarction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Double density",
+      "Left atrium through right border"
+     ],
+     [
+      "Usual cause",
+      "Mitral stenosis"
+     ],
+     [
+      "Carina",
+      "Angle beyond about 90 degrees"
+     ],
+     [
+      "Left border bumps",
+      "Aorta, pulmonary, appendage, ventricle"
+     ],
+     [
+      "Walking man",
+      "Horizontal left main bronchus"
+     ],
+     [
+      "Calcium zero",
+      "Strong negative prediction"
+     ],
+     [
+      "Heavy calcium",
+      "Agatston 400 and above"
+     ],
+     [
+      "Infarct scar",
+      "Subendocardial late enhancement"
+     ]
+    ]
+   }
   }
  ]
 }

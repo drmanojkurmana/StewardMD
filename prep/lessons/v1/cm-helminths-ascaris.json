@@ -13,12 +13,27 @@
    "say": "The world's commonest worm rides faeces to soil to mouth. Eggs need weeks in warm soil before they can infect. Break that soil interval and transmission falls.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Fact"],
+    "cols": [
+     "Feature",
+     "Fact"
+    ],
     "rows": [
-     ["Site in host", "Jejunum lumen"],
-     ["Infective stage", "Embryonated egg from soil"],
-     ["Soil maturation", "About 2 to 3 weeks"],
-     ["Adult life span", "1 to 2 years"]
+     [
+      "Site in host",
+      "Jejunum lumen"
+     ],
+     [
+      "Infective stage",
+      "Embryonated egg from soil"
+     ],
+     [
+      "Soil maturation",
+      "About 2 to 3 weeks"
+     ],
+     [
+      "Adult life span",
+      "1 to 2 years"
+     ]
     ]
    }
   },
@@ -29,12 +44,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Eggs swallowed from soil route"},
-     {"id": "b", "label": "Larvae hatch, reach liver and lungs"},
-     {"id": "c", "label": "Coughed up and swallowed"},
-     {"id": "d", "label": "Adults mature in jejunum"}
+     {
+      "id": "a",
+      "label": "Eggs swallowed from soil route"
+     },
+     {
+      "id": "b",
+      "label": "Larvae hatch, reach liver and lungs"
+     },
+     {
+      "id": "c",
+      "label": "Coughed up and swallowed"
+     },
+     {
+      "id": "d",
+      "label": "Adults mature in jejunum"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -54,12 +94,27 @@
    "say": "Heavy loads knot into obstructing boluses in children; single wanderers enter bile ducts or appear at the nose. Colic plus a mobile mass in endemic country means worms.",
    "vis": {
     "kind": "table",
-    "cols": ["Event", "Presentation"],
+    "cols": [
+     "Event",
+     "Presentation"
+    ],
     "rows": [
-     ["Bolus obstruction", "Colic, vomiting, palpable mass"],
-     ["Biliary migration", "Cholangitis, pancreatitis"],
-     ["Volvulus, intussusception", "Surgical abdomen"],
-     ["Wandering worm", "Exit via nose or mouth"]
+     [
+      "Bolus obstruction",
+      "Colic, vomiting, palpable mass"
+     ],
+     [
+      "Biliary migration",
+      "Cholangitis, pancreatitis"
+     ],
+     [
+      "Volvulus, intussusception",
+      "Surgical abdomen"
+     ],
+     [
+      "Wandering worm",
+      "Exit via nose or mouth"
+     ]
     ]
    }
   },
@@ -82,11 +137,21 @@
     "kind": "compare",
     "left": {
      "title": "Ascaris and whipworm",
-     "points": ["Malabsorption, appetite loss", "Growth and learning effects", "Obstruction at heavy loads", "Dysentery with heavy whipworm"]
+     "points": [
+      "Malabsorption, appetite loss",
+      "Growth and learning effects",
+      "Obstruction at heavy loads",
+      "Dysentery with heavy whipworm"
+     ]
     },
     "right": {
      "title": "Hookworm",
-     "points": ["Chronic intestinal blood loss", "Iron deficiency anaemia", "Ground itch at entry", "Protein loss in heavy loads"]
+     "points": [
+      "Chronic intestinal blood loss",
+      "Iron deficiency anaemia",
+      "Ground itch at entry",
+      "Protein loss in heavy loads"
+     ]
     }
    }
   },
@@ -96,12 +161,27 @@
    "say": "Mamillated eggs confirm established infection easily. Early lung passage and male only infections shed nothing. Negative stool plus eosinophilia still fits travelling larvae.",
    "vis": {
     "kind": "table",
-    "cols": ["Finding", "Interpretation"],
+    "cols": [
+     "Finding",
+     "Interpretation"
+    ],
     "rows": [
-     ["Mamillated fertile eggs", "Established Ascaris infection"],
-     ["No eggs, eosinophilia", "Migration phase possible"],
-     ["Adult worm passed", "Confirm species visually"],
-     ["Eggs per gram counts", "Intensity classification"]
+     [
+      "Mamillated fertile eggs",
+      "Established Ascaris infection"
+     ],
+     [
+      "No eggs, eosinophilia",
+      "Migration phase possible"
+     ],
+     [
+      "Adult worm passed",
+      "Confirm species visually"
+     ],
+     [
+      "Eggs per gram counts",
+      "Intensity classification"
+     ]
     ]
    }
   },
@@ -111,12 +191,27 @@
    "say": "One albendazole tablet clears most Ascaris. In obstruction, decompress first and deworm when the bowel moves, surgeons watching. Campaign safety never overrides surgical sequence.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Drug action"],
+    "cols": [
+     "Situation",
+     "Drug action"
+    ],
     "rows": [
-     ["Uncomplicated infection", "Albendazole 400 mg single dose"],
-     ["Campaign setting", "No prior stool test needed"],
-     ["Bowel obstruction", "Decompress first, drug later"],
-     ["Pregnancy first trimester", "Defer routine deworming"]
+     [
+      "Uncomplicated infection",
+      "Albendazole 400 mg single dose"
+     ],
+     [
+      "Campaign setting",
+      "No prior stool test needed"
+     ],
+     [
+      "Bowel obstruction",
+      "Decompress first, drug later"
+     ],
+     [
+      "Pregnancy first trimester",
+      "Defer routine deworming"
+     ]
     ]
    }
   },
@@ -127,12 +222,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Fixed national deworming date"},
-     {"id": "b", "label": "Dose at school or Anganwadi"},
-     {"id": "c", "label": "Mop up day for absentees"},
-     {"id": "d", "label": "Repeat next round, intensity held low"}
+     {
+      "id": "a",
+      "label": "Fixed national deworming date"
+     },
+     {
+      "id": "b",
+      "label": "Dose at school or Anganwadi"
+     },
+     {
+      "id": "c",
+      "label": "Mop up day for absentees"
+     },
+     {
+      "id": "d",
+      "label": "Repeat next round, intensity held low"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,12 +261,27 @@
    "say": "Tablets rent control; toilets own it. Handwashing, safe child faeces disposal and washed food close the soil loop. Neither half works alone for long.",
    "vis": {
     "kind": "table",
-    "cols": ["WASH element", "Transmission blocked"],
+    "cols": [
+     "WASH element",
+     "Transmission blocked"
+    ],
     "rows": [
-     ["Toilet use, no open defecation", "Eggs reaching soil"],
-     ["Child faeces disposal", "Household soil seeding"],
-     ["Handwashing with soap", "Hand to mouth transfer"],
-     ["Washing raw vegetables", "Food borne eggs"]
+     [
+      "Toilet use, no open defecation",
+      "Eggs reaching soil"
+     ],
+     [
+      "Child faeces disposal",
+      "Household soil seeding"
+     ],
+     [
+      "Handwashing with soap",
+      "Hand to mouth transfer"
+     ],
+     [
+      "Washing raw vegetables",
+      "Food borne eggs"
+     ]
     ]
    }
   },
@@ -156,12 +291,72 @@
    "say": "Sentinel school surveys set the rhythm: twice yearly, yearly, or targeted. Egg reduction audits delivery, sanitation coverage forecasts whether gains survive.",
    "vis": {
     "kind": "table",
-    "cols": ["Survey result", "Response"],
+    "cols": [
+     "Survey result",
+     "Response"
+    ],
     "rows": [
-     ["High prevalence", "Twice yearly mass treatment"],
-     ["Moderate prevalence", "Yearly mass treatment"],
-     ["Low prevalence", "Targeted case treatment"],
-     ["Poor egg reduction", "Audit drug quality and coverage"]
+     [
+      "High prevalence",
+      "Twice yearly mass treatment"
+     ],
+     [
+      "Moderate prevalence",
+      "Yearly mass treatment"
+     ],
+     [
+      "Low prevalence",
+      "Targeted case treatment"
+     ],
+     [
+      "Poor egg reduction",
+      "Audit drug quality and coverage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Ascaris spreads by embryonated eggs that mature in soil over two to three weeks, with adults living one to two years in the jejunum. Lung migration at ten to fourteen days causes Loeffler syndrome with eosinophilia. Albendazole 400 mg single dose treats uncomplicated infection, while obstruction needs decompression before any anthelmintic.",
+   "say": "High-yield for the exam: Ascaris spreads by embryonated eggs that mature in soil over two to three weeks, with adults living one to two years in the jejunum. Lung migration at ten to fourteen days causes Loeffler syndrome with eosinophilia. Albendazole 400 mg single dose treats uncomplicated infection, while obstruction needs decompression before any anthelmintic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Infective stage",
+      "Embryonated egg swallowed from soil"
+     ],
+     [
+      "Soil maturation time",
+      "About two to three weeks"
+     ],
+     [
+      "Adult habitat and lifespan",
+      "Jejunum lumen for one to two years"
+     ],
+     [
+      "Loeffler timing",
+      "Ten to fourteen days after ingestion"
+     ],
+     [
+      "Bolus obstruction site",
+      "Ileum with colic and palpable mass"
+     ],
+     [
+      "Stool finding",
+      "Thick mamillated fertile eggs seen"
+     ],
+     [
+      "First line treatment",
+      "Albendazole 400 mg single dose"
+     ],
+     [
+      "National Deworming Day",
+      "Ages one to nineteen, February and August"
+     ]
     ]
    }
   }

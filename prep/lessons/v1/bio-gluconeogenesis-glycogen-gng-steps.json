@@ -10,12 +10,32 @@
    "say": "Only liver and kidney cortex can release glucose because only they own glucose-6-phosphatase. Gluconeogenesis rebuilds glucose from lactate, glycerol and glucogenic amino acids. Four bypass enzymes handle the irreversible glycolytic steps across mitochondria, cytosol and endoplasmic reticulum.",
    "vis": {
     "kind": "table",
-    "cols": ["Bypass enzyme", "Compartment", "Detour it provides"],
+    "cols": [
+     "Bypass enzyme",
+     "Compartment",
+     "Detour it provides"
+    ],
     "rows": [
-     ["Pyruvate carboxylase", "Mitochondria", "Pyruvate to oxaloacetate"],
-     ["PEPCK", "Cytosol and mitochondria", "Oxaloacetate to PEP"],
-     ["Fructose-1,6-bisphosphatase", "Cytosol", "Past the PFK-1 step"],
-     ["Glucose-6-phosphatase", "Endoplasmic reticulum", "Free glucose released"]
+     [
+      "Pyruvate carboxylase",
+      "Mitochondria",
+      "Pyruvate to oxaloacetate"
+     ],
+     [
+      "PEPCK",
+      "Cytosol and mitochondria",
+      "Oxaloacetate to PEP"
+     ],
+     [
+      "Fructose-1,6-bisphosphatase",
+      "Cytosol",
+      "Past the PFK-1 step"
+     ],
+     [
+      "Glucose-6-phosphatase",
+      "Endoplasmic reticulum",
+      "Free glucose released"
+     ]
     ]
    }
   },
@@ -26,12 +46,37 @@
     "kind": "flow",
     "title": "Pyruvate back to PEP",
     "nodes": [
-     {"id": "pyr", "label": "Pyruvate (cytosol to mitochondria)"},
-     {"id": "oaa", "label": "Oxaloacetate (carboxylase)"},
-     {"id": "mal", "label": "Export as malate or aspartate"},
-     {"id": "pep", "label": "PEP by PEPCK (GTP)"}
+     {
+      "id": "pyr",
+      "label": "Pyruvate (cytosol to mitochondria)"
+     },
+     {
+      "id": "oaa",
+      "label": "Oxaloacetate (carboxylase)"
+     },
+     {
+      "id": "mal",
+      "label": "Export as malate or aspartate"
+     },
+     {
+      "id": "pep",
+      "label": "PEP by PEPCK (GTP)"
+     }
     ],
-    "edges": [["pyr", "oaa"], ["oaa", "mal"], ["mal", "pep"]]
+    "edges": [
+     [
+      "pyr",
+      "oaa"
+     ],
+     [
+      "oaa",
+      "mal"
+     ],
+     [
+      "mal",
+      "pep"
+     ]
+    ]
    }
   },
   {
@@ -39,8 +84,23 @@
    "say": "Alanine is the main amino acid donor, lactate returns through the Cori cycle, and glycerol enters at dihydroxyacetone phosphate. Propionate enters through succinyl-CoA. Even chain fatty acids contribute no net glucose because acetyl-CoA carbons exit as carbon dioxide.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Can become net glucose", "points": ["Lactate and pyruvate", "Glycerol from fat", "Glucogenic amino acids", "Propionate (odd chains)"]},
-    "right": {"title": "Cannot become net glucose", "points": ["Acetyl-CoA (even chains)", "Ketone bodies", "Leucine and lysine carbon", "Cholesterol fragments"]
+    "left": {
+     "title": "Can become net glucose",
+     "points": [
+      "Lactate and pyruvate",
+      "Glycerol from fat",
+      "Glucogenic amino acids",
+      "Propionate (odd chains)"
+     ]
+    },
+    "right": {
+     "title": "Cannot become net glucose",
+     "points": [
+      "Acetyl-CoA (even chains)",
+      "Ketone bodies",
+      "Leucine and lysine carbon",
+      "Cholesterol fragments"
+     ]
     }
    }
   },
@@ -54,11 +114,27 @@
    "say": "Ethanol floods liver cytosol with NADH, pushing pyruvate toward lactate, so gluconeogenesis stalls after drinking without food. Children and depleted adults develop alcohol hypoglycaemia. Intravenous glucose rescues it because glucagon needs glycogen to act through.",
    "vis": {
     "kind": "table",
-    "cols": ["Block", "Mechanism", "Bedside consequence"],
+    "cols": [
+     "Block",
+     "Mechanism",
+     "Bedside consequence"
+    ],
     "rows": [
-     ["Ethanol NADH surge", "Precursors diverted to lactate and malate", "Fasting hypoglycaemia"],
-     ["Von Gierke phosphatase loss", "Glucose-6-phosphate trapped", "Hypoglycaemia plus lactate and urate up"],
-     ["PEPCK or carboxylase faults (rare)", "First bypass fails", "Hypoglycaemia with acidosis"]
+     [
+      "Ethanol NADH surge",
+      "Precursors diverted to lactate and malate",
+      "Fasting hypoglycaemia"
+     ],
+     [
+      "Von Gierke phosphatase loss",
+      "Glucose-6-phosphate trapped",
+      "Hypoglycaemia plus lactate and urate up"
+     ],
+     [
+      "PEPCK or carboxylase faults (rare)",
+      "First bypass fails",
+      "Hypoglycaemia with acidosis"
+     ]
     ]
    }
   },
@@ -67,9 +143,67 @@
    "say": "Insulin suppresses PEPCK and glucose-6-phosphatase genes, while glucagon and cortisol induce them. Steroid therapy therefore raises fasting glucose, and uncontrolled diabetes overproduces glucose overnight. The next lesson adds the interorgan cycles that feed this machinery.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Insulin (fed) transcription", "points": ["PEPCK gene suppressed", "Phosphatase gene suppressed", "Glucokinase induced"]},
-    "right": {"title": "Glucagon and cortisol (fasting) transcription", "points": ["PEPCK gene induced", "Phosphatase gene induced", "Gluconeogenesis capacity rises"]
+    "left": {
+     "title": "Insulin (fed) transcription",
+     "points": [
+      "PEPCK gene suppressed",
+      "Phosphatase gene suppressed",
+      "Glucokinase induced"
+     ]
+    },
+    "right": {
+     "title": "Glucagon and cortisol (fasting) transcription",
+     "points": [
+      "PEPCK gene induced",
+      "Phosphatase gene induced",
+      "Gluconeogenesis capacity rises"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Gluconeogenesis bypasses the three irreversible steps of glycolysis using four dedicated enzymes. Pyruvate carboxylase in mitochondria converts pyruvate to oxaloacetate, requiring biotin, ATP, and allosteric activation by acetyl-CoA. Phosphoenolpyruvate carboxykinase converts oxaloacetate to phosphoenolpyruvate using GTP. Fructose-1,6-bisphosphatase is the rate-limiting enzyme of gluconeogenesis, allosterically inhibited by fructose-2,6-bisphosphate and AMP. Glucose-6-phosphatase in the endoplasmic reticulum hydrolyzes glucose-6-phosphate to release free glucose into blood.",
+   "say": "Gluconeogenesis bypasses the three irreversible steps of glycolysis using four dedicated enzymes. Pyruvate carboxylase in mitochondria converts pyruvate to oxaloacetate, requiring biotin, ATP, and allosteric activation by acetyl-CoA. Phosphoenolpyruvate carboxykinase converts oxaloacetate to phosphoenolpyruvate using GTP. Fructose-1,6-bisphosphatase is the rate-limiting enzyme of gluconeogenesis, allosterically inhibited by fructose-2,6-bisphosphate and AMP. Glucose-6-phosphatase in the endoplasmic reticulum hydrolyzes glucose-6-phosphate to release free glucose into blood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Pyruvate carboxylase cofactor",
+      "Biotin vitamin B7 carrying activated carbon dioxide"
+     ],
+     [
+      "Obligate pyruvate carboxylase activator",
+      "Acetyl-CoA allosteric activation signaling energy abundance"
+     ],
+     [
+      "PEPCK energy currency",
+      "GTP provides high-energy phosphate and driving force"
+     ],
+     [
+      "Rate-limiting gluconeogenic enzyme",
+      "Fructose-1,6-bisphosphatase in cytosol"
+     ],
+     [
+      "FBPase-1 potent inhibitor",
+      "Fructose-2,6-bisphosphate and AMP allosteric inhibition"
+     ],
+     [
+      "Glucose-6-phosphatase cellular site",
+      "Luminal surface of endoplasmic reticulum membrane"
+     ],
+     [
+      "Cori cycle inter-organ shuttle",
+      "Lactate from muscle converted to glucose in liver"
+     ],
+     [
+      "Non-gluconeogenic substrates",
+      "Acetyl-CoA and even-chain fatty acids cannot yield glucose"
+     ]
+    ]
    }
   }
  ],

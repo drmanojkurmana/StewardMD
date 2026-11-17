@@ -1,6 +1,7 @@
 /* Study Studio (study.js, study.css): premium mobile notes, PDF library & viewer.
    Uses PrepNucleus tokens (--pn-*) and palette (#071318 / #0D1D23 / #42CDB5).
-   All interactive targets >= 44px. No em-dash in app-facing copy. */
+   All interactive targets >= 44px. No em-dash in app-facing copy.
+   Radius scale: pills 999px, sheets 16px, cards 12px, chips 10px. One accent: #42CDB5. */
 
 /* Base & Library Layout */
 .pn-root .st-lib {
@@ -514,7 +515,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
+  box-sizing: border-box;
   background: var(--pn-bg);
 }
 .pn-root .st-body > * {
@@ -569,7 +572,7 @@
   flex-shrink: 0;
 }
 .pn-root .st-b:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
 }
 .pn-root .st-b.on {
   background: var(--pn-km-mint, #42cdb5);
@@ -583,11 +586,11 @@
   cursor: default;
 }
 .pn-root .st-tb-tools .st-b {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  border-radius: 18px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 999px;
   padding: 0;
 }
 .pn-root .st-tb-tools .st-b.on {
@@ -799,23 +802,24 @@
 /* Lasso Actions Bar */
 .pn-root .st-lasso-bar {
   position: fixed;
-  bottom: calc(var(--pnv-h, 64px) + 24px);
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 50;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
+  gap: 4px;
+  padding: 4px 8px;
   background: var(--pn-card);
   border: 1px solid var(--pn-line);
-  border-radius: 24px;
+  border-radius: 14px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  box-sizing: border-box;
   animation: stFadeIn 180ms var(--pn-ease);
 }
 @keyframes stFadeIn {
-  from { opacity: 0; transform: translate(-50%, 8px) scale(0.96); }
-  to { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* AI Study Assistant Box Under Page */
@@ -1816,3 +1820,113 @@ body:not(.dark) .pn-root .st-ink-seg.on {
 .pn-root .st-p3-btn:focus-visible,
 .pn-root .st-p3-tpl:focus-visible,
 .pn-root .st-p3-nav-card:focus-visible { outline:2px solid var(--pn-km-mint,#42cdb5); outline-offset:2px; }
+
+/* Polish pass: one top bar + one tool row, phone collapse, one selection pill. */
+.pn-root .st-tb { justify-content: center; overflow-x: auto; scrollbar-width: none; }
+.pn-root .st-tb::-webkit-scrollbar { display: none; }
+.pn-root .st-p3-phone-only { display: none; }
+@media (max-width: 560px) {
+  .pn-root .st-p3-collapse { display: none !important; }
+  .pn-root .st-p3-phone-only { display: flex; }
+  .pn-root .st-p3-title {
+    max-width: calc(100vw - 230px);
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 2px 6px;
+    min-width: 0;
+  }
+  .pn-root .st-p3-title-txt {
+    max-width: 100%;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pn-root .st-tb {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 12px;
+    scroll-padding: 0 12px;
+  }
+  .pn-root .st-tb-tools .st-b {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    flex-shrink: 0;
+  }
+  #stInkCtx .st-sel-strip {
+    gap: 4px;
+    padding: 4px 6px;
+    justify-content: center;
+    flex-wrap: nowrap;
+  }
+  #stInkCtx .st-sel-rule {
+    min-height: 40px;
+    padding: 0 8px;
+    font-size: 12.5px;
+    letter-spacing: -0.2px;
+    flex: 0 1 auto;
+  }
+  .pn-root .st-sel-lbl { display: none !important; }
+  .pn-root .st-sel-btn {
+    min-width: 38px;
+    width: 38px;
+    min-height: 44px;
+    height: 44px;
+    padding: 0 2px;
+    justify-content: center;
+  }
+  .pn-root .st-sel-count {
+    font-size: 11px;
+    padding: 0 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .pn-root .st-lasso-chips .st-ai-chip {
+    font-size: 11px;
+    padding: 4px 6px;
+    min-height: 32px;
+  }
+}
+.pn-root.st-lasso-on .st-item-bar { display: none !important; }
+.pn-root .st-lasso-bar {
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 14px;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  box-sizing: border-box;
+}
+.pn-root .st-lasso-bar .st-lasso-actions,
+.pn-root .st-lasso-bar .st-lasso-chips {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex-wrap: nowrap;
+}
+.pn-root .st-sel-btn {
+  min-width: 44px;
+  min-height: 38px;
+  height: 38px;
+  padding: 0 8px;
+  font-size: 13px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.pn-root .st-sel-btn:active, .pn-root .st-p3-btn:active, .pn-root .pn-btn:active { transform: scale(0.97); }
+.pn-root .st-item-bar .st-ib-btn { min-width: 44px; min-height: 44px; border-radius: 10px; }
+.pn-root .st-b:focus-visible, .pn-root .st-sel-btn:focus-visible, .pn-root .pn-btn:focus-visible,
+.pn-root .st-menu-item:focus-visible, .pn-root .st-p3-menu-item:focus-visible {
+  outline: 2px solid var(--pn-km-mint, #42cdb5); outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .st-lasso-bar, .pn-root .st-sel-panel, .pn-root .st-sh { animation: none !important; transition: none !important; }
+  .pn-root .st-b:active, .pn-root .pn-btn:active, .pn-root .st-p3-btn:active { transform: none !important; }
+}

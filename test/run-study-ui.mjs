@@ -117,7 +117,7 @@ await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => STUDY._state().sc.scrollTop > 100);
 ok(true, "page jump scrolls to page 2");
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 await page.click('[data-act="st-zoom"][data-v="+"]');
 await page.click('[data-act="st-close-more"]');
 ok(await page.evaluate(() => STUDY._state().z === 1.25), "zoom in");
@@ -151,12 +151,14 @@ ok(await page.evaluate(() => !!document.querySelector("#stLassoBar")), "lasso: d
 ok(await page.locator('[data-act="st-lasso-ai-explain"]').count() === 1, "lasso: AI Explain chip is visible");
 ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso: AI Key summary chip is visible");
 ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
-ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element button is visible");
+await page.click('[data-act="st-lasso-more"]');   // polish: Save as element lives in the selection More menu
+ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element is in the selection More menu");
 await page.click('[data-act="st-lasso-ai-explain"]');
 await page.waitForSelector("#stSheet", { timeout: 5000 });
 ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
 await page.click('[data-act="st-scancel"]');
 await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+if (!(await page.locator('[data-act="st-lasso-save-elem"]:visible').count())) await page.click('[data-act="st-lasso-more"]');
 await page.click('[data-act="st-lasso-save-elem"]');
 const savedElems = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_elements") || "[]"));
 ok(savedElems.length === 1 && savedElems[0].name === "Custom Element", "lasso: selection saved as custom element in local storage");
@@ -385,15 +387,85 @@ await page.evaluate(() => {
 await page.click('[data-act="st-tool"][data-v="lasso"]');
 await page.waitForSelector('#stInkCtx [data-sel="rule"][data-v="hl"]');
 ok(await page.locator('#stInkCtx [data-sel="rule"]').count() === 5, "P2 lasso settings: five kind toggles (pen, highlighter, shapes, images, text)");
+
+/* Polish Finding D: at 390 px every #stInkCtx chip has right edge <= viewport width */
+const chipEdgesOk = await page.evaluate(() => {
+  const chips = Array.from(document.querySelectorAll("#stInkCtx .st-sel-rule"));
+  const vw = window.innerWidth;
+  return chips.length > 0 && chips.every((c) => c.getBoundingClientRect().right <= vw);
+});
+ok(chipEdgesOk, "P2 Finding D: at 390 px every #stInkCtx chip has right edge <= viewport width");
+
 await lassoRect(0.1, 0.64, 0.9, 0.78);
 await page.waitForSelector("#stLassoBar");
 ok(/2 items/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso: loop picks the pen and highlighter strokes");
+
+/* Polish Finding B & D: #stLassoBar does not intersect selection and height <= 112 px on both 390 px and iPad */
+const barMetrics390 = await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  const V = window.STUDY._state();
+  const bb = window.STUDY_SELECT.pure.selBBox(V.strokes.filter((s) => V.lasso.ids.includes(s.id)));
+  const pg = V.pg[V.lasso.n];
+  const r = pg.el.getBoundingClientRect();
+  const selRect = { left: r.left + bb.x0 * r.width, right: r.left + bb.x1 * r.width, top: r.top + bb.y0 * r.height, bottom: r.top + bb.y1 * r.height };
+  const barRect = bar.getBoundingClientRect();
+  const intersects = !(barRect.right <= selRect.left || barRect.left >= selRect.right || barRect.bottom <= selRect.top || barRect.top >= selRect.bottom);
+  return {
+    intersects: intersects,
+    heightLeq112: barRect.height <= 112,
+    rightWithinVp: barRect.right <= window.innerWidth,
+    h: barRect.height
+  };
+});
+ok(!barMetrics390.intersects && barMetrics390.heightLeq112, "P2 Finding B: #stLassoBar does not intersect selection and height <= 112 px on 390 px (height=" + Math.round(barMetrics390.h) + "px)");
+ok(barMetrics390.rightWithinVp, "P2 Finding D: #stLassoBar right edge <= viewport width at 390 px");
+
+/* iPad viewport check for Finding B */
+await page.setViewportSize({ width: 820, height: 1180 });
+await page.waitForTimeout(200);
+await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  if (bar && window.STUDY_SELECT && window.STUDY_SELECT.positionLassoBar && window.STUDY && window.STUDY._inkApi) {
+    window.STUDY_SELECT.positionLassoBar(window.STUDY._inkApi(), bar);
+  }
+});
+await page.waitForTimeout(200);
+const barMetricsIpad = await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  const V = window.STUDY._state();
+  const bb = window.STUDY_SELECT.pure.selBBox(V.strokes.filter((s) => V.lasso.ids.includes(s.id)));
+  const pg = V.pg[V.lasso.n];
+  const r = pg.el.getBoundingClientRect();
+  const selRect = { left: r.left + bb.x0 * r.width, right: r.left + bb.x1 * r.width, top: r.top + bb.y0 * r.height, bottom: r.top + bb.y1 * r.height };
+  const barRect = bar.getBoundingClientRect();
+  const intersects = !(barRect.right <= selRect.left || barRect.left >= selRect.right || barRect.bottom <= selRect.top || barRect.top >= selRect.bottom);
+  return {
+    intersects: intersects,
+    heightLeq112: barRect.height <= 112,
+    h: barRect.height
+  };
+});
+ok(!barMetricsIpad.intersects && barMetricsIpad.heightLeq112, "P2 Finding B: #stLassoBar does not intersect selection and height <= 112 px on iPad (height=" + Math.round(barMetricsIpad.h) + "px)");
+
+/* restore 390 px viewport */
+await page.setViewportSize({ width: 390, height: 844 });
+await page.waitForTimeout(200);
+await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  if (bar && window.STUDY_SELECT && window.STUDY_SELECT.positionLassoBar && window.STUDY && window.STUDY._inkApi) {
+    window.STUDY_SELECT.positionLassoBar(window.STUDY._inkApi(), bar);
+  }
+});
+await page.waitForTimeout(200);
 await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');
 await lassoRect(0.1, 0.64, 0.9, 0.78);
 await page.waitForSelector("#stLassoBar");
 ok(/1 item/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso settings: highlighter excluded after toggle");
 await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');   // restore
-ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && await page.locator('[data-act="st-lasso-resize"]').count() === 1 && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
+await page.click('[data-act="st-lasso-more"]');
+const hasResize = await page.locator('[data-act="st-lasso-resize"]').count() === 1;
+await page.click('#stSelMore [data-sel-close]');
+ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && hasResize && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
 /* move: drag inside the box, one undo step */
 const beforeMove = await bboxOfSel();
 const uBeforeMove = await page.evaluate(() => STUDY._state().stack.u.length);
@@ -521,7 +593,8 @@ if (await page.locator("#stLassoBar").count()) {
   await page.click('[data-act="st-lasso-conv"]');
   await page.waitForSelector("#stSelConv");
   ok(/on-device|Server preview/.test(await page.locator("#stSelConv").innerText()), "P2 convert: clearly labelled server stub");
-  await page.click('[data-act="st-lasso-done"]');
+  if (await page.locator('[data-act="st-lasso-done"]').count()) await page.click('[data-act="st-lasso-done"]');
+  else if (await page.locator('#stSelConv [data-sel-close]').count()) await page.click('#stSelConv [data-sel-close]');
 }
 
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
@@ -538,6 +611,49 @@ ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await stroke(0.3);
 await page.waitForTimeout(300);
+
+/* Polish Finding A: before selecting, read overlay+page pixel at a ruled-line point inside future selection; select; pixel must still be ruling colour (not white) */
+const rulingPoint = await page.evaluate(() => {
+  const cv = document.querySelector(".st-cv");
+  const ctx = cv.getContext("2d");
+  const x = Math.round(0.35 * cv.width);
+  const col = ctx.getImageData(x, 0, 1, cv.height).data;
+  let ruledY = -1;
+  const isDarkBg = col[0] < 50;
+  for (let y = Math.round(0.20 * cv.height); y < Math.round(0.40 * cv.height); y++) {
+    const idx = y * 4;
+    if (isDarkBg) {
+      if (col[idx + 1] > 45) { ruledY = y; break; }
+    } else {
+      if (col[idx] < 225) { ruledY = y; break; }
+    }
+  }
+  if (ruledY === -1) ruledY = Math.round(0.28 * cv.height);
+  const px = Array.from(ctx.getImageData(x, ruledY, 1, 1).data);
+  return { x: x, y: ruledY, px: px };
+});
+
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 24;
+  const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.1, 0.22); fire("pointermove", 0.9, 0.22); fire("pointermove", 0.9, 0.38); fire("pointermove", 0.1, 0.38); fire("pointermove", 0.1, 0.22); fire("pointerup", 0.1, 0.22);
+});
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+
+const pixelCheckAfter = await page.evaluate((pt) => {
+  const cv = document.querySelector(".st-cv");
+  const ov = document.querySelector('.st-ov[data-n="1"]') || document.querySelector(".st-ov");
+  const cvP = Array.from(cv.getContext("2d").getImageData(pt.x, pt.y, 1, 1).data);
+  const ovP = Array.from(ov.getContext("2d").getImageData(pt.x, pt.y, 1, 1).data);
+  const isWhite = (cvP[0] > 250 && cvP[1] > 250 && cvP[2] > 250 && pt.px[0] < 230) || (ovP[3] > 0 && ovP[0] > 240 && ovP[1] > 240 && ovP[2] > 240);
+  const matchesRuling = cvP[0] === pt.px[0] && cvP[1] === pt.px[1] && cvP[2] === pt.px[2];
+  return { matchesRuling: matchesRuling, isWhite: isWhite, ovAlpha: ovP[3] };
+}, rulingPoint);
+ok(pixelCheckAfter.matchesRuling && !pixelCheckAfter.isWhite && pixelCheckAfter.ovAlpha === 0, "notebook Finding A: selected stroke area is transparent (ruling line colour preserved, not white box)");
+
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.waitForTimeout(150);
 await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-addpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 2 && STUDY._state().pg[2], null, { timeout: 10000 });
@@ -652,10 +768,10 @@ await page.evaluate((b) => {
     Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
   window.__avail = false;
 }, jpegs[0]);
-await page.click('#smdPrep [data-act="back"]'); await openLib(); await page.waitForTimeout(400);
-ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no top-level Scan button (now inside New)");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib(); await page.waitForTimeout(400);
+ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button (st-scan) while isAvailable is false");
 await page.evaluate(() => { window.__avail = true; });
-await page.click('#smdPrep [data-act="back"]'); await openLib();
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib();
 await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]', { timeout: 5000 });
 ok(true, "scan: the New sheet shows Scan (delegates to DocScan)");
 const nDocs = (await idbAll("docs")).length;
@@ -693,7 +809,7 @@ const linkDoc = (await idbAll("docs")).find((d) => d.title === "link");
 await page.locator(".st-doc", { hasText: "link" }).locator(".st-open").click();
 await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 });
 ok(await page.evaluate(() => document.querySelector(".st-tl").classList.contains("smd-books-keep") && document.querySelector(".st-tl").classList.contains("smd-emo-keep")), "viewer: the text layer keeps smd-books-keep smd-emo-keep");
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 await page.fill("#stRange", "2");
 ok((await page.locator('[data-act="st-make"]').count()) === 1 && /Make deck/.test(await page.locator('[data-act="st-make"]').innerText()), "Make deck: one button (Layer C makes questions and cards together)");
 await page.locator('[data-act="st-make"]').first().click();
@@ -724,7 +840,7 @@ ok(await page.evaluate((id) => { const l = PREP_C.srcLink({ src: { std: id, p: [
 await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 });
 await page.evaluate(() => { const sp = document.querySelector('.st-pg[data-n="2"] .st-tl span'), r = document.createRange(); r.selectNodeContents(sp); const s = getSelection(); s.removeAllRanges(); s.addRange(r); });
 await page.waitForFunction(() => STUDY._state().sel && STUDY._state().sel.page === 2, null, { timeout: 5000 });
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 await page.click('[data-act="st-explain"]');
 await page.waitForSelector("#stSheetOk");
 ok(/will be sent to the AI/.test(await page.locator("#stSheet").innerText()) && /cardiac cycle/.test(await page.locator(".st-bq").innerText()) && teach.length === 0, "Explain: the confirm sheet names what is sent; nothing sent before the tap");
@@ -750,20 +866,20 @@ await openLib();
 const fixtureDoc = (await idbAll("docs")).find((d) => d.title === "fixture");
 await page.locator(".st-doc", { hasText: "fixture" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 let out = await dl(() => page.click('[data-act="st-orig"]'));
 ok(out.name === "fixture.pdf" && shaOf(out.buf) === SHA, "share original: the file is byte-identical to the stored original");
 out = await dl(() => page.click('[data-act="st-flat"]'));
 ok(out.name === "fixture (flattened).pdf" && out.buf.slice(0, 5).toString() === "%PDF-" && pagesIn(out.buf) === 2 && shaOf(out.buf) !== SHA, "flattened export: named (flattened), 2 pages, differs from the original");
 ok(shaOf(await fileBytes(fixtureDoc.id)) === SHA, "flattened export: the stored original's sha256 is unchanged");
-await page.click('#smdPrep [data-act="back"]');
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
 await page.waitForSelector("#stLib");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 out = await dl(() => page.click('[data-act="st-flat"]'));
 ok(out.name === "Ward notes.pdf" && pagesIn(out.buf) === 1, "notebook to PDF: one page per notebook page");
-await page.click('#smdPrep [data-act="back"]');
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
 await page.waitForSelector("#stLib");
 /* back up */
 await idb("folders", 'o.put({ id: "f1", name: "Ward" })');
@@ -819,6 +935,18 @@ await page.waitForSelector("#stP3Top", { timeout: 10000 });
 ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");
 ok(/1/.test(await page.locator("#stP3Cur").innerText()) && /1/.test(await page.locator("#stP3Tot").innerText()), "P3 top bar: counter 1 of 1");
 ok(await page.evaluate(() => document.querySelector("#stP3Top [data-act='st-p3-grid']") && document.querySelector("#stP3Top [data-act='st-p3-search']") && document.querySelector("#stP3Top [data-act='st-p3-add']")), "P3 top bar: grid, search, share, mic, add icons exist");
+
+/* Polish Finding C: at 390 px the title element's innerText equals the notebook title and its width > 60 px */
+const titleData = await page.evaluate(() => {
+  const el = document.querySelector(".st-p3-title");
+  const txt = document.querySelector(".st-p3-title-txt");
+  const r = el ? el.getBoundingClientRect() : null;
+  return {
+    innerText: txt ? txt.textContent : (el ? el.innerText : ""),
+    width: r ? r.width : 0
+  };
+});
+ok(titleData.innerText === "P3 test" && titleData.width > 60, "P3 Finding C: at 390 px title element innerText equals notebook title and width > 60 px (width=" + Math.round(titleData.width) + "px)");
 /* draw a stroke, then add ruled page BEFORE page 1 → ink stays */
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await page.evaluate(() => {
@@ -865,7 +993,13 @@ await page.click("#stP3MoreSheet [data-act='st-p3-outline']");
 await page.waitForTimeout(400);
 ok(await page.evaluate(() => (STUDY._state().doc.outlines||[]).some(o=>o.title==="Clinical Notes")), "P3 3.9: Add Page to Outline adds user entry");
 /* Favorites: star page, check empty state then jump */
-await page.click("#stP3Top [data-act='st-p3-fav']");
+if (await page.locator("#stP3Top [data-act='st-p3-fav']:visible").count()) {
+  await page.click("#stP3Top [data-act='st-p3-fav']");
+} else {
+  await page.click("#stP3Top [data-act='st-p3-more']");
+  await page.waitForSelector("#stP3MoreSheet");
+  await page.click("#stP3MoreSheet [data-act='st-p3-fav']");
+}
 await page.waitForTimeout(300);
 ok(await page.evaluate(() => Object.keys(STUDY._state().doc.favPages||{}).length>0), "P3 3.8: Bookmark star stores favPages");
 await page.click("#stP3Top [data-act='st-p3-grid']");

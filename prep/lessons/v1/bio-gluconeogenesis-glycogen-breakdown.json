@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Releasing glucose units",
     "nodes": [
-     {"id": "gly", "label": "Glycogen (many ends)"},
-     {"id": "pho", "label": "Phosphorylase (PLP) releases G-1-P"},
-     {"id": "deb", "label": "Debrancher clears branches"},
-     {"id": "g6p", "label": "Glucose-6-phosphate pool"}
+     {
+      "id": "gly",
+      "label": "Glycogen (many ends)"
+     },
+     {
+      "id": "pho",
+      "label": "Phosphorylase (PLP) releases G-1-P"
+     },
+     {
+      "id": "deb",
+      "label": "Debrancher clears branches"
+     },
+     {
+      "id": "g6p",
+      "label": "Glucose-6-phosphate pool"
+     }
     ],
-    "edges": [["gly", "pho"], ["pho", "deb"], ["deb", "g6p"]]
+    "edges": [
+     [
+      "gly",
+      "pho"
+     ],
+     [
+      "pho",
+      "deb"
+     ],
+     [
+      "deb",
+      "g6p"
+     ]
+    ]
    }
   },
   {
@@ -25,11 +50,27 @@
    "say": "The debranching enzyme moves three residues, then frees the branch glucose itself as free glucose. Its absence in Cori disease leaves limit dextrin, liver enlargement and milder fasting hypoglycaemia because gluconeogenesis still works.",
    "vis": {
     "kind": "table",
-    "cols": ["Activity", "Bond handled", "Product"],
+    "cols": [
+     "Activity",
+     "Bond handled",
+     "Product"
+    ],
     "rows": [
-     ["Transferase (debrancher)", "Moves alpha-1,4 trio", "Longer chain for phosphorylase"],
-     ["Glucosidase (debrancher)", "Alpha-1,6 branch point", "One free glucose"],
-     ["Phosphoglucomutase", "1-phosphate to 6-phosphate", "Glucose-6-phosphate"]
+     [
+      "Transferase (debrancher)",
+      "Moves alpha-1,4 trio",
+      "Longer chain for phosphorylase"
+     ],
+     [
+      "Glucosidase (debrancher)",
+      "Alpha-1,6 branch point",
+      "One free glucose"
+     ],
+     [
+      "Phosphoglucomutase",
+      "1-phosphate to 6-phosphate",
+      "Glucose-6-phosphate"
+     ]
     ]
    }
   },
@@ -38,8 +79,21 @@
    "say": "Liver glucose-6-phosphatase frees glucose into blood, while muscle lacks it, so muscle sugar burns internally only. This single enzyme explains organ roles and why muscle glycogen cannot rescue hypoglycaemia during a marathon.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Liver glycogenolysis", "points": ["Ends in free blood glucose", "Glucagon responsive", "Serves brain and red cells"]},
-    "right": {"title": "Muscle glycogenolysis", "points": ["Ends in own glycolysis", "Adrenaline, calcium, AMP responsive", "Serves contraction only"]
+    "left": {
+     "title": "Liver glycogenolysis",
+     "points": [
+      "Ends in free blood glucose",
+      "Glucagon responsive",
+      "Serves brain and red cells"
+     ]
+    },
+    "right": {
+     "title": "Muscle glycogenolysis",
+     "points": [
+      "Ends in own glycolysis",
+      "Adrenaline, calcium, AMP responsive",
+      "Serves contraction only"
+     ]
     }
    }
   },
@@ -53,11 +107,27 @@
    "say": "Insulin activates phosphoprotein phosphatase, so phosphorylase sleeps and synthase wakes. Glucose itself exposes liver phosphorylase to the phosphatase, signalling that incoming sugar should be stored. The cascade reads hormones and metabolites together.",
    "vis": {
     "kind": "table",
-    "cols": ["Signal", "Cascade direction", "Net glycogen effect"],
+    "cols": [
+     "Signal",
+     "Cascade direction",
+     "Net glycogen effect"
+    ],
     "rows": [
-     ["Glucagon (liver)", "Kinases on", "Breakdown to blood glucose"],
-     ["Adrenaline (liver and muscle)", "Kinases on plus calcium in muscle", "Breakdown for export or work"],
-     ["Insulin plus glucose (fed)", "Phosphatase on", "Synthesis and storage"]
+     [
+      "Glucagon (liver)",
+      "Kinases on",
+      "Breakdown to blood glucose"
+     ],
+     [
+      "Adrenaline (liver and muscle)",
+      "Kinases on plus calcium in muscle",
+      "Breakdown for export or work"
+     ],
+     [
+      "Insulin plus glucose (fed)",
+      "Phosphatase on",
+      "Synthesis and storage"
+     ]
     ]
    }
   },
@@ -66,9 +136,67 @@
    "say": "Hepatic phosphorylase and kinase defects cause mild hypoglycaemia because gluconeogenesis compensates. Von Gierke is severe because both pathways end blocked at the shared glucose-6-phosphate exit. That shared exit logic ranks severity fastest in examinations.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Mild hepatic defects (VI, IX, III)", "points": ["One route blocked", "Gluconeogenesis compensates", "Ketones rise appropriately"]},
-    "right": {"title": "Von Gierke (type I)", "points": ["Shared exit blocked", "Neither route can release glucose", "Lactate and urate rise instead"]
+    "left": {
+     "title": "Mild hepatic defects (VI, IX, III)",
+     "points": [
+      "One route blocked",
+      "Gluconeogenesis compensates",
+      "Ketones rise appropriately"
+     ]
+    },
+    "right": {
+     "title": "Von Gierke (type I)",
+     "points": [
+      "Shared exit blocked",
+      "Neither route can release glucose",
+      "Lactate and urate rise instead"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Glycogen phosphorylase cleaves alpha-1,4-glycosidic bonds using inorganic phosphate, releasing glucose-1-phosphate until four residues remain before a branch point. The debranching enzyme bifunctional complex transfers three glucosyl residues via 4-alpha-D-glucanotransferase and hydrolyzes the remaining alpha-1,6 branch point via amylo-alpha-1,6-glucosidase to liberate free glucose. In muscle, glycogenolysis is stimulated allosterically by AMP and calcium without responding to glucagon. Hepatic glycogenolysis responds to glucagon via cyclic AMP and protein kinase A.",
+   "say": "Glycogen phosphorylase cleaves alpha-1,4-glycosidic bonds using inorganic phosphate, releasing glucose-1-phosphate until four residues remain before a branch point. The debranching enzyme bifunctional complex transfers three glucosyl residues via 4-alpha-D-glucanotransferase and hydrolyzes the remaining alpha-1,6 branch point via amylo-alpha-1,6-glucosidase to liberate free glucose. In muscle, glycogenolysis is stimulated allosterically by AMP and calcium without responding to glucagon. Hepatic glycogenolysis responds to glucagon via cyclic AMP and protein kinase A.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Glycogen phosphorylase cofactor",
+      "Pyridoxal phosphate vitamin B6 bound covalently to lysine"
+     ],
+     [
+      "Primary product of phosphorylase",
+      "Glucose-1-phosphate released by phosphorolytic cleavage"
+     ],
+     [
+      "Free glucose release from branch",
+      "Amylo-1,6-glucosidase activity releasing free unphosphorylated glucose"
+     ],
+     [
+      "Limit dextrin definition",
+      "Branched glycogen core remaining after phosphorylase stalls"
+     ],
+     [
+      "Muscle glycogen phosphorylase activator",
+      "AMP allosteric activation without phosphorylation"
+     ],
+     [
+      "Calcium activation mechanism",
+      "Calmodulin subunit of phosphorylase kinase activates enzyme"
+     ],
+     [
+      "Why muscle cannot release glucose",
+      "Lacks glucose-6-phosphatase, trapping glucose for glycolysis"
+     ],
+     [
+      "Von Gierke type Ia enzyme",
+      "Glucose-6-phosphatase defect blocking both glycogenolysis and gluconeogenesis"
+     ]
+    ]
    }
   }
  ],
