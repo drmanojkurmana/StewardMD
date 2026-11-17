@@ -1,0 +1,306 @@
+{
+ "v": 1,
+ "module": "sid-hcv-other-hepatitis",
+ "title": "Hepatitis C, A and E",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hepatitis C becomes chronic in 85 to 90%**, unlike A and E which never chronify the competent host. **Blood with needles with birth** spreads C; **fecal-oral food with water** spreads A and E. **E kills 10 to 20% of pregnant women** with fulminant failure. **All five hepatotropic viruses** (A, B, C, D, E) cause identical acute illness; **only serology tells** them apart. **HCV RNA is the gold test**, appearing before enzymes rise.",
+   "say": "Hepatitis C was reported to become chronic in eighty five to ninety percent, unlike A and E which never chronified the competent host. Blood with needles and birth were reported to spread C, while fecal-oral food and water spread A and E. E was reported to kill ten to twenty percent of pregnant women with fulminant failure. All five hepatotropic viruses were reported to cause identical acute illness, while only serology told them apart. H C V R N A was defined as the gold test, appearing before enzymes rose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Spreads by",
+     "Chronic?"
+    ],
+    "rows": [
+     [
+      "Hep C",
+      "Blood, needles",
+      "85 to 90 percent"
+     ],
+     [
+      "Hep A",
+      "Food, water",
+      "Never"
+     ],
+     [
+      "Hep E",
+      "Food, water, pigs",
+      "Never except graft"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Injection sharing with unsafe transfusion** drives C; **MSM with HIV with prisoners** carry extra risk. **Pigs with pork with water** seed E genotypes 3 and 4 worldwide; **genotypes 1 and 2** strike India and Asia epidemically. **Shellfish with daycare** spread A to children. **No chronicity in A** even in pregnancy; **E chronifies only grafts** on tacrolimus. **Genotype 3 C** steatoses and resists some regimens.",
+   "say": "Injection sharing with unsafe transfusion was reported to drive C, while M S M with H I V and prisoners carried extra risk. Pigs with pork and water were reported to seed E genotypes three and four worldwide, while genotypes one and two struck India and Asia epidemically. Shellfish with daycare were reported to spread A to children. No chronicity in A was reported even in pregnancy, while E was reported to chronify only grafts on tacrolimus. Genotype three C was reported to cause fat and resist some regimens.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Source",
+     "Note"
+    ],
+    "rows": [
+     [
+      "C",
+      "Shared needles",
+      "Test donors"
+     ],
+     [
+      "E 1, 2",
+      "Water India",
+      "Pregnancy killer"
+     ],
+     [
+      "E 3, 4",
+      "Pigs worldwide",
+      "Graft chronic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Silent for decades** is C's rule; fatigue alone misleads. **Cirrhosis in up to 20% over 10 to 20 years**, then **HCC 1 to 4% yearly** once cirrhotic. **Cryo vasculitis with lichen with porphyria** reveal extrahepatic C. **Acute C rarely yellow**; most acute illness is B-like but milder. **A gives fever 38 to 39 with jaundice** in adults; children stay anicteric. **E mimics A** except in pregnancy, where failure strikes.",
+   "say": "Silence for decades was defined as C's rule, while fatigue alone misled. Cirrhosis in up to twenty percent over ten to twenty years was reported, then H C C one to four percent yearly once cirrhotic. Cryo vasculitis with lichen and porphyria were reported to reveal extrahepatic C. Acute C was reported to rarely turn yellow, as most acute illness stayed B-like but milder. A was reported to give fever thirty eight to thirty nine with jaundice in adults, while children stayed anicteric. E was reported to mimic A except in pregnancy, where failure struck.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Silent decades"
+     },
+     {
+      "id": "b",
+      "label": "Fibrosis to cirrhosis"
+     },
+     {
+      "id": "c",
+      "label": "Yearly cancer watch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anti-HCV then HCV RNA** diagnoses C; antibody alone never proves viraemia. **RNA positive with antibody negative** means acute window or graft. **FIB-4 with APRI** stages fibrosis; **genotype matters less** with pangenotypic drugs. **IgM anti-HAV with IgM anti-HEV** diagnose acute A and E. **Transaminases above 10 times normal** with bilirubin mark acute viral injury. **INR rising with encephalopathy** warns of failure, not severity of enzymes.",
+   "say": "Anti-H C V then H C V R N A was ordered to diagnose C, while antibody alone never proved viraemia. R N A positive with antibody negative was reported to mean acute window or graft. F I B four with A P R I was ordered to stage fibrosis, while genotype mattered less with pangenotypic drugs. I g M anti-H A V with I g M anti-H E V was reported to diagnose acute A and E. Transaminases above ten times normal with bilirubin were reported to mark acute viral injury. Rising I N R with encephalopathy was reported to warn of failure, not enzyme severity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Shows",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Anti-HCV plus RNA",
+      "Active C",
+      "RNA decides"
+     ],
+     [
+      "IgM HAV, HEV",
+      "Acute A, E",
+      "First-line pair"
+     ],
+     [
+      "FIB-4, APRI",
+      "Fibrosis",
+      "Treat by stage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Treat every viraemic C**: **sofosbuvir with velpatasvir for 12 weeks** or **glecaprevir with pibrentasvir for 8 weeks** cures most. **SVR12 (RNA undetectable 12 weeks post-treatment)** defines cure. **Genotype 3 with cirrhosis** may need ribavirin or longer courses. **Decompensated cirrhosis avoids protease** inhibitors; sofosbuvir-based stays safe. **Cure halves liver deaths**; HCC watch continues in cirrhosis after cure.",
+   "say": "Treating every viraemic C was advised, with sofosbuvir and velpatasvir for twelve weeks or glecaprevir with pibrentasvir for eight weeks curing most. S V R twelve with R N A undetectable twelve weeks post-treatment was defined as cure. Genotype three with cirrhosis was reported to need ribavirin or longer courses. Decompensated cirrhosis was reported to avoid protease inhibitors, while sofosbuvir-based therapy stayed safe. Cure was reported to halve liver deaths, while H C C watch continued in cirrhosis after cure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Span",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Sofosbuvir-velpatasvir",
+      "12 weeks",
+      "Pangenotypic"
+     ],
+     [
+      "Glecaprevir-pibrentasvir",
+      "8 weeks",
+      "No decompensation"
+     ],
+     [
+      "SVR12",
+      "12 weeks after",
+      "Defines cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**A and E need rest with hydration**, avoiding paracetamol excess with alcohol; **antibiotics never help**. **Rising INR with encephalopathy** moves to transplant centres; **N-acetylcysteine** helps early failure. **Severe acute E gets ribavirin**; **chronic E in grafts** eases with lower immunosuppression plus ribavirin. **E vaccine exists in China** only; **A vaccine with immunoglobulin** protects travellers with contacts. **Fulminant E in pregnancy** delivers early with ICU care.",
+   "say": "A and E were reported to need rest with hydration, avoiding paracetamol excess with alcohol, while antibiotics were never advised. Rising I N R with encephalopathy was reported to move patients to transplant centres, while N-acetylcysteine helped early failure. Severe acute E was reported to get ribavirin, while chronic E in grafts eased with lower immunosuppression plus ribavirin. E vaccine was reported to exist in China only, while A vaccine with immunoglobulin protected travellers and contacts. Fulminant E in pregnancy was reported to need early delivery with I C U care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Action",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Acute A, E",
+      "Supportive",
+      "No antibiotics"
+     ],
+     [
+      "Rising INR",
+      "Transplant centre",
+      "NAC early"
+     ],
+     [
+      "Chronic E graft",
+      "Cut tacrolimus",
+      "Add ribavirin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV with HCV** accelerates fibrosis; treat both, watching tenofovir with DAA interactions. **DAA start reactivates Hep B**; test HBsAg with anti-HBc first and prophylax positives. **Dialysis cohorts** carry C silently; transplant needs cure first. **Pregnancy defers DAA**; treat after delivery while E is watched. **Reinfection after cure** strikes sharers; anti-HCV stays positive lifelong without protection.",
+   "say": "H I V with H C V was reported to accelerate fibrosis, so both were treated while tenofovir with D A A interactions were watched. D A A start was reported to reactivate Hep B, so H B s A g with anti-H B c was tested first and positives were prophylaxed. Dialysis cohorts were reported to carry C silently, while transplant needed cure first. Pregnancy was reported to defer D A A, while treatment waited till after delivery and E was watched. Reinfection after cure was reported to strike sharers, while anti-H C V stayed positive lifelong without protection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treat together",
+     "points": [
+      "HIV plus HCV",
+      "Cure before graft",
+      "Watch interactions"
+     ]
+    },
+    "right": {
+     "title": "Check first",
+     "points": [
+      "HBsAg before DAA",
+      "Pregnancy defers",
+      "Anti-HCV stays positive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Exam traps:** antibody-positive RNA-negative means cured, not active C. **Normal enzymes never exclude** chronic C; RNA decides. **A vaccine after exposure** still protects with immunoglobulin. **E in pregnancy diagnosed late** kills; test fever with jaundice early. **Protease inhibitors in decompensation** harm; sofosbuvir-based regimens stay safe. **Stopping surveillance after SVR in cirrhosis** misses HCC.",
+   "say": "For the exam, these traps were tabulated as requested. Antibody-positive R N A-negative was reported to mean cured, not active C. Normal enzymes were reported to never exclude chronic C, while R N A decided. A vaccine after exposure was reported to still protect with immunoglobulin. E in pregnancy diagnosed late was reported to kill, so fever with jaundice was tested early. Protease inhibitors in decompensation were reported to harm, while sofosbuvir-based regimens stayed safe. Stopping surveillance after S V R in cirrhosis was reported to miss H C C.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Antibody alone",
+      "Not active",
+      "Need RNA"
+     ],
+     [
+      "Normal ALT",
+      "Still chronic",
+      "RNA decides"
+     ],
+     [
+      "Protease in failure",
+      "Harms",
+      "SOF-based safe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Delta needs Hep B**; test anti-HDV then HDV RNA in every HBsAg positive with active disease. **Superinfection races to cirrhosis** at 4% yearly; **coinfection often resolves** like B alone. **Low B DNA with high ALT** unmasks delta hiding behind quiet B. **Peg-interferon suppresses** some delta; **bulevirtide access stays limited**. **Cure rates after SVR12** near 100% with pangenotypic drugs. **HCC yearly 1 to 4%** in cirrhosis demands lifelong ultrasound even after cure.",
+   "say": "Delta was reported to need Hep B, so anti-H D V then H D V R N A was tested in every H B s A g positive with active disease. Superinfection was reported to race to cirrhosis at four percent yearly, while coinfection often resolved like B alone. Low B D N A with high A L T was reported to unmask delta hiding behind quiet B. Peg-interferon was reported to suppress some delta, while bulevirtide access stayed limited. Cure rates after S V R twelve were reported to near one hundred percent with pangenotypic drugs. H C C yearly one to four percent in cirrhosis was reported to demand lifelong ultrasound even after cure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Course",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Delta superinfection",
+      "Races",
+      "Test every B"
+     ],
+     [
+      "Delta coinfection",
+      "Resolves often",
+      "Watch"
+     ],
+     [
+      "Post-SVR cirrhosis",
+      "HCC yearly",
+      "Ultrasound life"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **85 to 90% of acute C chronifies**; **antibody then RNA** diagnoses. **Sofosbuvir-velpatasvir 12 weeks** or **glecaprevir-pibrentasvir 8 weeks** cures; **SVR12** defines cure. **E kills 10 to 20% of pregnancies**; **IgM HEV** diagnoses. **Rising INR** warns failure. **HBsAg before DAA**; reactivation kills.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Eighty five to ninety percent of acute C was reported to chronify, while antibody then R N A diagnosed it. Sofosbuvir-velpatasvir for twelve weeks or glecaprevir-pibrentasvir for eight weeks was reported to cure, while S V R twelve defined cure. E was reported to kill ten to twenty percent of pregnancies, while I g M H E V diagnosed it. Rising I N R was reported to warn failure. H B s A g before D A A was tested, as reactivation killed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "85 to 90 percent",
+      "C chronicity",
+      "Natural history"
+     ],
+     [
+      "SOF-VEL 12 weeks",
+      "Pangenotypic",
+      "Regimen asked"
+     ],
+     [
+      "GLE-PIB 8 weeks",
+      "No decompensation",
+      "Span asked"
+     ],
+     [
+      "E in pregnancy",
+      "10 to 20 percent die",
+      "Killer fact"
+     ],
+     [
+      "HBsAg first",
+      "Before DAA",
+      "Reactivation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
