@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-potassium",
+ "subject": "ss-general-medicine",
+ "title": "Disorders of Potassium",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hyperkalaemia** (serum potassium above 5.5 mmol per litre) threatens the heart with **peaked T waves** (pointed ECG deflections) and sine waves. **Hypokalaemia** (below 3.5 mmol per litre) causes **U waves** (small post T bumps) and ileus. **Intracellular potassium 98 percent** (stores inside cells) shifts with pH and insulin. **Spurious hyperkalaemia** (fist clenching artefact) needs repeat venous sampling. Total body deficit is 300 mmol per 1 mmol fall.",
+   "say": "Hyperkalaemia above five point five threatens the heart with peaked T waves and sine waves. Hypokalaemia below three point five causes U waves and ileus. Ninety eight percent of potassium lives inside cells and shifts with pH and insulin and this is examined in viva examinations for revision. Fist clenching causes spurious elevation and total body deficit is three hundred per one point fall.",
+   "vis": null
+  },
+  {
+   "tx": "**Kidney failure** (reduced excretion) is the commonest hyperkalaemia cause in CKD. **ACE inhibitors** (blockers) and **spironolactone** (aldosterone blocker) impair excretion. **Acidosis** (acidemia) shifts potassium extracellularly. **Tissue breakdown** (rhabdomyolysis, haemolysis) releases intracellular stores. **Hypokalaemia** follows vomiting, diuretics, hyperaldosteronism and magnesium depletion.",
+   "say": "Kidney failure is the commonest cause in chronic disease. Blockers and spironolactone impair excretion and this is examined in viva examinations for revision. Acidemia shifts potassium outside cells and tissue breakdown releases stores and low potassium follows vomiting and diuretics and aldosterone excess and magnesium depletion.",
+   "vis": null
+  },
+  {
+   "tx": "Aldosterone drives **sodium potassium exchange** (distal tubule swap) in collecting ducts. Acidosis exchanges **hydrogen for potassium** (acid potassium trade) and raises extracellular potassium. **Insulin** (glucose lowering hormone) drives potassium intracellularly via Na K ATPase. **Beta agonists** (salbutamol) also shift potassium inside cells. **Magnesium depletion** (low magnesium) causes refractory potassium wasting.",
+   "say": "Aldosterone drives sodium potassium exchange in collecting ducts. Acidosis trades hydrogen for potassium and raises extracellular potassium. Insulin drives potassium inside cells and beta agonists also shift potassium inside and low magnesium causes refractory wasting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Aldosterone or acidosis"
+     },
+     {
+      "id": "b",
+      "label": "Exchange shift"
+     },
+     {
+      "id": "c",
+      "label": "Extracellular rise"
+     },
+     {
+      "id": "d",
+      "label": "ECG changes"
+     },
+     {
+      "id": "e",
+      "label": "Insulin calcium therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ECG changes** (peaked T, wide QRS, sine wave) are the earliest danger signs of hyperkalaemia. **Bradycardia** (slow rhythm) with hypotension signals severe toxicity. **Muscle weakness** (ascending paralysis) with flaccidity marks chronic disease. **Ileus** (gut standstill) with constipation marks hypokalaemia. **Rhabdomyolysis** (muscle breakdown) presents with pigmenturia and hyperkalaemia. Symptoms lags behind numbers unreliably.",
+   "say": "ECG changes are the earliest danger signs. Slow rhythm with low pressure signals severe toxicity and this is examined in viva examinations for revision. Ascending weakness marks chronic disease and gut standstill marks low potassium and muscle breakdown presents with dark urine and symptoms lag behind numbers unreliably.",
+   "vis": null
+  },
+  {
+   "tx": "**Serum potassium** (venous sample) confirmed without haemolysis is the core test. **ECG** (heart tracing) shows peaked T and wide QRS in hyperkalaemia. **Arterial blood gas** (acidosis test) identifies pH driven shifts. **Blood glucose** (sugar test) excludes pseudohyperkalaemia from glucose load. **Magnesium level** (low magnesium test) guides refractory hypokalaemia repair. **Urine potassium** (excretion test) distinguishes renal wasting.",
+   "say": "Venous sampling without haemolysis is the core test. Heart tracing is marked by peaked T and wide QRS. Blood gas identifies pH driven shifts and glucose excludes pseudohyperkalaemia and low magnesium guides refractory repair and urine testing distinguishes renal wasting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Serum potassium",
+      "Diagnosis",
+      "Above 5.5 hyperkalaemia"
+     ],
+     [
+      "ECG",
+      "Danger sign",
+      "Peaked T wide QRS"
+     ],
+     [
+      "Blood gas",
+      "Shift cause",
+      "Acidosis exchange"
+     ],
+     [
+      "Magnesium",
+      "Refractory guide",
+      "Low causes wasting"
+     ],
+     [
+      "Urine potassium",
+      "Renal loss",
+      "Distinguishes wasting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Calcium gluconate** (1 ampoule intravenously) stabilises myocardium in hyperkalaemia with ECG changes. **Insulin dextrose** (10 units insulin with 25 g glucose) shifts potassium intracellularly. **Salbutamol nebulisation** (beta agonist) shifts potassium inside cells. **Sodium bicarbonate** (alkali) helps acidotic patients. **Loop diuretics** (frusemide) enhance excretion with volume overload. **Potassium binders** (patiromer, zirconium) provide chronic control.",
+   "say": "Calcium stabilises myocardium with ECG changes. Insulin with glucose shifts potassium inside and this is examined in viva examinations for revision. Beta agonist nebulisation also shifts inside and alkali helps acidotic patients and loop diuretics enhance excretion and binders provide chronic control.",
+   "vis": null
+  },
+  {
+   "tx": "**Dialysis** (artificial kidney) is definitive for refractory hyperkalaemia with kidney failure. **Oral potassium replacement** (sypotassium tablets) with magnesium correction treats hypokalaemia. **Potassium sparing diuretics** (spironolactone) treat aldosterone driven wasting. **Magnesium sulfate** (intravenous magnesium) corrects refractory wasting. **Potassium supplementation rate** (10 mmol per hour) limits peripheral vein injury.",
+   "say": "Dialysis is definitive for refractory disease with kidney failure. Oral replacement with magnesium correction treats low potassium and this is examined in viva examinations for revision. Spironolactone treats aldosterone wasting and intravenous magnesium corrects refractory wasting and infusion rate limits vein injury.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperkalaemia emergency",
+     "points": [
+      "Calcium first",
+      "Insulin dextrose",
+      "Beta agonist nebulisation",
+      "Dialysis definitive"
+     ]
+    },
+    "right": {
+     "title": "Hypokalaemia repair",
+     "points": [
+      "Oral potassium first",
+      "Magnesium correction",
+      "Stop diuretic if possible",
+      "Monitor ECG"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Normal saline** (fluid resuscitation) corrects volume driven potassium loss. **Thyroid replacement** (hypothyroid correction) reverses myxoedema hypokalaemia. **Steroid replacement** (adrenal insufficiency cover) corrects adrenal hyperkalaemia. **Dialysis prescription** (low potassium dialysate) controls refractory disease. **Dietary counselling** (low potassium diet) prevents recurrence in CKD.",
+   "say": "Fluid resuscitation corrects volume driven loss and this is examined in viva examinations for revision. Thyroid correction reverses myxoedema hypokalaemia and steroid cover corrects adrenal hyperkalaemia and low potassium dialysate controls refractory disease and diet counselling prevents recurrence.",
+   "vis": null
+  },
+  {
+   "tx": "Severe hyperkalaemia with sine wave mortality exceeds 30 percent without treatment. Chronic hypokalaemia predicts arrhythmia and ileus with poor fitness. **Cardiac arrest** (sine wave asystole) is the terminal hyperkalaemia event. **Rhabdomyolysis hyperkalaemia** needs compartment surveillance. **Diuretic hypokalaemia** resolves with cessation and replacement. Prevention by magnesium correction halves recurrence.",
+   "say": "Severe disease with sine wave mortality exceeds thirty percent without treatment and this is examined in viva examinations for revision. Chronic low potassium predicts arrhythmia and ileus and this is examined in viva examinations for revision. Sine wave asystole is the terminal event and muscle breakdown needs compartment surveillance and diuretic loss resolves with cessation and magnesium correction halves recurrence.",
+   "vis": null
+  },
+  {
+   "tx": "Kidney Disease Improving Global Outcomes 2024 stresses binder use, ECG triage and magnesium correction. **Calcium action** (membrane stabilisation) without glucose fall is a favourite viva distinction from insulin action. Examination traps include missing spurious hyperkalaemia, forgetting magnesium in refractory hypokalaemia, and delaying calcium for sine waves. **Peaked T waves** (pointed deflections) are the classic hyperkalaemia vignette.",
+   "say": "Current guidance stresses binder use and ECG triage and magnesium correction and this is examined in viva examinations for revision. Membrane stabilisation without glucose fall is a favourite viva distinction. Traps include missing spurious elevation and forgetting magnesium and delaying calcium and pointed T waves are the classic vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers potassium cutoffs, ECG signs and emergency drugs. Peaked T waves and calcium action are the most asked points in theory and viva examinations. Structured review of therapy sequences aids viva answers. Calcium stabilises membrane before insulin shift therapy.",
+   "say": "This table gathers potassium cutoffs and ECG signs and emergency drugs for revision and this is examined in viva examinations for revision. Pointed T waves and calcium action are the most asked points and magnesium correction is a favourite viva distinction theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Hyperkalaemia cutoff",
+      "Above 5.5 mmol per litre"
+     ],
+     [
+      "Hypokalaemia cutoff",
+      "Below 3.5 mmol per litre"
+     ],
+     [
+      "ECG hyperkalaemia",
+      "Peaked T wide QRS"
+     ],
+     [
+      "ECG hypokalaemia",
+      "U waves"
+     ],
+     [
+      "First hyperkalaemia drug",
+      "Calcium gluconate"
+     ],
+     [
+      "Shift drug",
+      "Insulin dextrose"
+     ],
+     [
+      "Definitive therapy",
+      "Dialysis"
+     ],
+     [
+      "Refractory guide",
+      "Magnesium correction"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

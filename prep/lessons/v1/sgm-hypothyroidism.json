@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-hypothyroidism",
+ "subject": "ss-general-medicine",
+ "title": "Hypothyroidism and Thyroid Function Interpretation",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hypothyroidism** (thyroid hormone failure) affects 5 percent of Indians, with **Hashimoto thyroiditis** (autoimmune destruction) as the leading cause. **Primary hypothyroidism** (gland failure) shows high TSH with low free T4. **Secondary hypothyroidism** (pituitary failure) shows low TSH with low free T4. **Subclinical hypothyroidism** (mild failure) shows high TSH with normal free T4. **Myxoedema coma** (severe decompensation) is fatal without treatment.",
+   "say": "Hypothyroidism affects five percent of Indians, with autoimmune destruction as the leading cause. Gland failure is marked by high TSH with low free T4. Pituitary failure is marked by low TSH with low free T4. Mild failure is marked by high TSH with normal free T4 and severe decompensation is fatal without treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Hashimoto thyroiditis** (anti thyroid antibodies) causes chronic destruction. **Iodine deficiency** (low intake) causes goitre with hypothyroidism in Himalayan regions. **Post thyroidectomy** (surgical removal) and **radioiodine ablation** (therapy induced failure) are iatrogenic causes. **Lithium therapy** (mood stabiliser) and **amiodarone** impair hormone synthesis. **Sheehan syndrome** (postpartum necrosis) causes secondary disease.",
+   "say": "Anti thyroid antibodies cause chronic destruction. Low intake causes goitre with failure in Himalayan regions. Surgical removal and radioiodine therapy are iatrogenic causes and mood stabiliser and amiodarone impair synthesis and postpartum necrosis causes secondary disease.",
+   "vis": null
+  },
+  {
+   "tx": "Autoimmune destruction reduces **thyroxine production** (T4 synthesis) with compensatory **TSH rise** (pituitary drive). **Iodine deficiency** limits **thyroglobulin iodination** (hormone assembly). **Low T4** reduces **basal metabolic rate** (heat production) causing cold intolerance. **Mucopolysaccharide accumulation** (skin deposits) causes puffy facies. **Bradycardia** (slow heart) reflects reduced beta sensitivity. **Constipation** (gut hypomotility) follows slowed transit.",
+   "say": "Autoimmune destruction reduces T4 synthesis with compensatory TSH rise. Low intake limits hormone assembly and this is examined in viva examinations for revision. Low T4 reduces heat production and causes cold intolerance and skin deposits cause puffy facies and slow heart reflects reduced beta sensitivity and slowed gut causes constipation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gland failure"
+     },
+     {
+      "id": "b",
+      "label": "T4 fall"
+     },
+     {
+      "id": "c",
+      "label": "TSH rise"
+     },
+     {
+      "id": "d",
+      "label": "Metabolic slowing"
+     },
+     {
+      "id": "e",
+      "label": "Myxoedema"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fatigue** (tiredness) with cold intolerance, constipation and weight gain is classic. **Puffy facies** (myxoedema face) with macroglossia and hoarse voice is characteristic. **Bradycardia** (slow pulse) with delayed reflexes marks severe disease. **Dry skin** (coarse texture) with hair loss is common. **Depression** (low mood) with cognitive slowing affects elderly patients. **Myxoedema coma** (hypothermia with hypoventilation) is the emergency.",
+   "say": "Tiredness with cold intolerance and constipation and weight gain is classic. Puffy face with large tongue and hoarse voice is characteristic. Slow pulse with delayed reflexes marks severe disease. Coarse skin with hair loss is common and low mood with cognitive slowing affects elderly patients and hypothermia with hypoventilation is the emergency.",
+   "vis": null
+  },
+  {
+   "tx": "**TSH** (thyroid stimulating hormone) is the most sensitive test for primary disease. **Free T4** (hormone level) confirms severity and central disease. **Anti TPO antibodies** (peroxidase antibodies) confirm Hashimoto thyroiditis. **Lipid profile** (raised cholesterol) supports chronic disease. **Creatine kinase** (raised enzyme) reflects myopathy. **ECG** (bradycardia with low voltage) confirms effect.",
+   "say": "TSH is the most sensitive test for primary disease. Free T4 confirms severity and central disease and this is examined in viva examinations for revision. Peroxidase antibodies confirm Hashimoto thyroiditis and raised cholesterol supports chronic disease and raised enzyme reflects muscle injury and bradycardia with low voltage confirms effect.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "TSH",
+      "Sensitivity",
+      "High primary low secondary"
+     ],
+     [
+      "Free T4",
+      "Severity",
+      "Low confirms deficiency"
+     ],
+     [
+      "Anti TPO antibodies",
+      "Hashimoto confirm",
+      "Autoimmune cause"
+     ],
+     [
+      "Lipids",
+      "Support",
+      "High cholesterol"
+     ],
+     [
+      "ECG",
+      "Effect",
+      "Bradycardia low voltage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Levothyroxine** (T4 replacement) at 1.6 mcg per kg daily is first line for primary disease. **Dosing titration** (TSH guided adjustment) needs 6 weekly checks until stable. **Timing** (empty stomach, away from calcium iron) improves absorption. **Pregnancy dose increase** (25 to 50 percent) is needed with monthly monitoring. **Elderly dosing** (lower starting dose) avoids cardiac strain. **Myxoedema coma therapy** needs intravenous hydrocortisone with thyroxine.",
+   "say": "Levothyroxine at one point six per kg daily is first line. Six weekly checks are needed until stable. Empty stomach timing improves absorption. Pregnancy needs dose increase with monthly monitoring and elderly patients need lower starting doses and coma therapy needs intravenous hydrocortisone with thyroxine.",
+   "vis": null
+  },
+  {
+   "tx": "**Subclinical hypothyroidism** (high TSH, normal T4) needs treatment in pregnancy and high antibody disease. **Secondary hypothyroidism** (pituitary failure) needs hydrocortisone before thyroxine. **Congenital hypothyroidism** (neonatal screening) needs early replacement to prevent cretinism. **Drug interaction management** (calcium iron separation) improves absorption. **Nonadherence counselling** (morning dosing discipline) improves control. **Annual monitoring** (TSH recall) is mandatory after stabilisation.",
+   "say": "Mild disease needs treatment in pregnancy and high antibody disease. Pituitary failure needs hydrocortisone before thyroxine. Neonatal screening needs early replacement to prevent cretinism and calcium iron separation improves absorption and morning discipline improves control and annual monitoring is mandatory after stabilisation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary hypothyroidism",
+     "points": [
+      "High TSH low T4",
+      "Levothyroxine first",
+      "Anti TPO positive",
+      "Annual monitoring"
+     ]
+    },
+    "right": {
+     "title": "Secondary hypothyroidism",
+     "points": [
+      "Low TSH low T4",
+      "Steroids before thyroxine",
+      "Pituitary MRI",
+      "Hydrocortisone first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Myxoedema coma** (hypothermia, hypoventilation) needs intensive care with steroids and thyroxine. **Pericardial effusion** (heart sac fluid) with tamponade complicates severe disease. **Hyponatraemia** (low sodium) from ADH dysfunction needs correction. **Hypoglycaemia** (low glucose) needs dextrose support. **Infection** (pneumonia trigger) precipitates decompensation. **Overtreatment cardiac strain** (angina) needs dose reduction in elderly stents.",
+   "say": "Hypothermia with hypoventilation needs intensive care with steroids and thyroxine. Heart sac fluid with tamponade complicates severe disease. Low sodium needs correction and low glucose needs dextrose support and pneumonia precipitates decompensation and overtreatment strains stented hearts.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary hypothyroidism** with replacement has normal survival, with mortality driven by cardiovascular disease. Untreated myxoedema coma mortality exceeds 30 percent. Subclinical disease mortality is cardiovascular dependent. Congenital disease with early treatment has normal intellect. Hashimoto disease needs lifelong replacement. Steroid before thyroxine ordering prevents adrenal crisis.",
+   "say": "Primary disease with replacement has normal survival. Untreated coma mortality exceeds thirty percent. Mild disease mortality is cardiovascular dependent and congenital disease with early treatment has normal intellect and hashimoto disease needs lifelong replacement and steroid before thyroxine ordering prevents crisis.",
+   "vis": null
+  },
+  {
+   "tx": "American Thyroid Association 2014 guidance stresses TSH sensitive diagnosis, levothyroxine dosing and pregnancy monitoring. **Subclinical thresholds** (TSH above 10) guide treatment decisions. Examination traps include replacing thyroxine before steroids in secondary disease, checking TSH too early, and missing anti TPO confirmation. **Delayed reflexes** (myxoedema sign) is a favourite viva sign.",
+   "say": "Current guidance stresses sensitive diagnosis and dosing and pregnancy monitoring. Thresholds above ten guide treatment decisions. Traps include replacing thyroxine before steroids and checking too early and missing antibody confirmation and delayed reflexes is a favourite viva sign.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers TSH patterns, antibody confirmations and replacement rules. Steroid before thyroxine and pregnancy dose rises are the most asked points in theory and viva examinations. Focused revision of replacement dosing aids viva performance. TSH 10 mIU per litre prompts treatment consideration.",
+   "say": "This table gathers TSH patterns and antibody confirmations and replacement rules for revision and this is examined in viva examinations for revision. Steroid before thyroxine and pregnancy dose rises are the most asked points. Delayed reflexes is a favourite viva sign theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Sensitive test",
+      "TSH primary disease"
+     ],
+     [
+      "Hashimoto antibody",
+      "Anti TPO positive"
+     ],
+     [
+      "Replacement dose",
+      "1.6 mcg per kg"
+     ],
+     [
+      "Pregnancy action",
+      "Increase 25 to 50 percent"
+     ],
+     [
+      "Order rule",
+      "Steroids before thyroxine"
+     ],
+     [
+      "Subclinical treat",
+      "TSH above 10"
+     ],
+     [
+      "Coma therapy",
+      "Hydrocortisone plus thyroxine"
+     ],
+     [
+      "Timing",
+      "Empty stomach away from calcium"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
