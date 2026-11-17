@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "shm-chronic-lymphocytic-leukaemia",
+ "subject": "ss-haematology",
+ "title": "Chronic lymphocytic leukaemia markers staging and treatment triggers",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 112 Chronic Lymphocytic Leukemia",
+  "iwCLL guidelines 2018",
+  "ERIC guidelines 2024"
+ ],
+ "steps": [
+  {
+   "tx": "**Chronic lymphocytic leukaemia** (CLL, indolent B cell lymphoproliferative disease) is the most common adult leukaemia in western countries, striking males **2** to **1** over females. Diagnosis needs **5** times 10 to the 9 per litre (five thousand per microlitre) of monoclonal B lymphocytes in blood. **Smudge cells** (crushed lymphocytes on smear) and **CD5** (T cell marker) **CD23** (B cell marker) expression mark the classic immunophenotype.",
+   "say": "CLL is the commonest adult leukaemia in western countries today. Diagnosis needs five thousand clonal B cells per microlitre of blood. Smudge cells are typical, and CD5 with CD23 expression is classic.",
+   "vis": {
+    "cols": [
+     "Item",
+     "Rule",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Threshold",
+      "five thousand clonal B cells",
+      "Per microlitre blood"
+     ],
+     [
+      "Markers",
+      "CD5 plus CD23",
+      "CD19 CD20 CD22"
+     ],
+     [
+      "Smear",
+      "Smudge cells",
+      "Crushed lymphocytes"
+     ],
+     [
+      "Sex ratio",
+      "2 to 1 male",
+      "Older adults"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three entities share one biology. **Monoclonal B cell lymphocytosis** (MBL, low count clone without disease) carries under **half** times 10 to the 9 per litre and progresses in about **1** to **2** percent yearly. **CLL** exceeds **5** times 10 to the 9 per litre in blood, while **SLL** (small lymphocytic lymphoma) stays below that with nodal disease only. **Richter transformation** (progression to aggressive lymphoma) follows in **5** percent.",
+   "say": "MBL, CLL and SLL have the same biology at different tumour burdens. Richter transformation is seen in about five percent of patients. Low count MBL has a one to two percent yearly progression rate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MBL and SLL",
+     "points": [
+      "MBL below half count",
+      "SLL nodal only",
+      "Indolent course"
+     ]
+    },
+    "right": {
+     "title": "CLL and Richter",
+     "points": [
+      "Above 5.0 count",
+      "Blood and marrow disease",
+      "Richter 5 percent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "CLL favours older adults with median age near **70** years, and first degree relatives carry **eightfold** risk. **Agent Orange** (herbicide exposure) is a recognised cause, and prior hepatitis or other infections play no role. **Familial CLL** (inherited predisposition) accounts for **7** to **10** percent of cases. **Rai stage 0** (lymphocytosis only) precedes symptomatic disease by years in most patients.",
+   "say": "CLL affects older adults with a median age near seventy years. Relatives carry an eightfold risk of the disease. Agent Orange exposure is a recognised cause here.",
+   "vis": {
+    "cols": [
+     "Factor",
+     "Finding",
+     "Strength"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Age",
+      "Median near 70",
+      "Older adults"
+     ],
+     [
+      "Family history",
+      "eightfold risk",
+      "7 to 10 percent cases"
+     ],
+     [
+      "Exposure",
+      "Agent Orange",
+      "Recognised cause"
+     ],
+     [
+      "Precursor",
+      "Rai stage 0",
+      "Lymphocytosis only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients often present without symptoms, found by routine counts. **Lymphadenopathy** (enlarged nodes) and **splenomegaly** (enlarged spleen) dominate once disease advances, while **B symptoms** (fever, night sweats, weight loss) appear late. **Recurrent infections** (especially encapsulated bacteria) reflect hypogammaglobulinaemia and T cell dysfunction. **Skin lesions** (leukaemia cutis) and **autoimmune cytopenias** (low blood counts from antibodies) complicate one fifth of cases.",
+   "say": "Most patients present without symptoms, and routine counts reveal disease. Nodes and spleen are enlarged as disease advances over time. Autoimmune cytopenias are seen in about one fifth of cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "count",
+      "label": "High lymphocyte count"
+     },
+     {
+      "id": "flow",
+      "label": "Flow confirms CLL"
+     },
+     {
+      "id": "stage",
+      "label": "Stage and test risk"
+     },
+     {
+      "id": "watch",
+      "label": "Watch or treat"
+     }
+    ],
+    "edges": [
+     [
+      "count",
+      "flow"
+     ],
+     [
+      "flow",
+      "stage"
+     ],
+     [
+      "stage",
+      "watch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular risk decides therapy more than stage alone. **IGHV** (immunoglobulin heavy chain variable region) unmutated disease, about **40** percent, behaves aggressively, while mutated disease stays indolent. **del17p** (loss of chromosome arm 17p with **TP53** gene) confers chemoresistance and needs targeted drugs always. **del11q** (chromosome 11 loss) brings bulky nodes, and **trisomy 12** (extra chromosome 12) enriches Richter risk. **del13q** (chromosome 13 loss alone) is most favourable.",
+   "say": "Unmutated IGHV and del17p are markers of aggressive disease. Del17p demands targeted therapy in every single case. Del13q alone carries the most favourable outlook.",
+   "vis": {
+    "cols": [
+     "Abnormality",
+     "Meaning",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "del17p TP53",
+      "Chemoresistant",
+      "Targeted drugs always"
+     ],
+     [
+      "del11q",
+      "Bulky nodes",
+      "BTK inhibitor preferred"
+     ],
+     [
+      "Trisomy 12",
+      "Richter risk",
+      "Close surveillance"
+     ],
+     [
+      "del13q alone",
+      "Favourable",
+      "Watch and wait"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rai staging** (lymphocytosis based) runs from **0** to **4**, with stage **0** meaning lymphocytosis only and stage **4** meaning marrow failure. **Binet staging** (nodes based) runs **A** to **C**, with stage **C** defined by haemoglobin or platelets falling low. Modern practice adds **CLL IP** (prognostic index) combining age, stage, IGHV, TP53 and cytogenetics. **Beta 2 microglobulin** (blood protein) adds prognostic weight in newer scores.",
+   "say": "Rai staging runs from zero to four in CLL. Binet staging runs from A to C in CLL. Marrow failure is the highest stage in both systems.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rai 0 to 4",
+     "points": [
+      "0 lymphocytosis only",
+      "1 nodes, 2 spleen liver",
+      "3 anaemia, 4 platelets"
+     ]
+    },
+    "right": {
+     "title": "Binet A to C",
+     "points": [
+      "A under 3 areas",
+      "B over 3 areas",
+      "C low counts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**iwCLL indications** (treating criteria) need active disease, not stage alone. Active features include progressive marrow failure, massive or symptomatic nodes or spleen, lymphocyte doubling under **6** months, and autoimmune cytopenias refractory to steroids. **B symptoms** (weight loss above **10** percent, fever above **thirty eight** degrees, drenching sweats) qualify when present. **Watch and wait** (observation) suits asymptomatic early disease without del17p.",
+   "say": "Treatment starts only for active disease under iwCLL rules. Progressive marrow failure and bulky symptomatic nodes are qualifying features. Asymptomatic early disease is managed by watch and wait.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Confirmed CLL"
+     },
+     {
+      "id": "active",
+      "label": "Active disease?"
+     },
+     {
+      "id": "watch",
+      "label": "Watch and wait"
+     },
+     {
+      "id": "treat",
+      "label": "Targeted therapy"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "active"
+     ],
+     [
+      "active",
+      "watch"
+     ],
+     [
+      "active",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line therapy for fit patients combines targeted drugs. **Venetoclax** (BCL2 blocker) with **obinutuzumab** (anti CD20 antibody) suits **TP53** wild type patients and suits older or unfit patients too. **Ibrutinib** (Bruton tyrosine kinase inhibitor, first BTK inhibitor) or **acalabrutinib** (second generation BTK inhibitor) suits del17p and other high risk patients. **Chemoimmunotherapy** (FCR regimen) survives only for **IGHV** mutated disease without TP53 faults.",
+   "say": "Venetoclax with obinutuzumab is standard for most fit patients today. BTK inhibitors are used for del17p and high risk disease. Chemoimmunotherapy remains only for mutated IGHV disease.",
+   "vis": {
+    "cols": [
+     "Group",
+     "Regimen",
+     "Reason"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fit, no TP53 fault",
+      "Venetoclax obinutuzumab",
+      "Fixed duration, deep response"
+     ],
+     [
+      "del17p or high risk",
+      "Ibrutinib or acalabrutinib",
+      "Continuous BTK block"
+     ],
+     [
+      "Frail or comorbid",
+      "Venetoclax based",
+      "Better tolerated"
+     ],
+     [
+      "IGHV mutated ideal",
+      "FCR regimen",
+      "Rarely curative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long term hazards shape follow up. **Autoimmune haemolytic anaemia** (AIHA, antibody destroyed red cells) and **immune thrombocytopenia** (ITP, antibody destroyed platelets) arise in **5** to **10** percent. **Richter transformation** to diffuse large B cell lymphoma strikes **5** percent and behaves aggressively with median survival under **1** year. **Second cancers** (skin, lung, prostate) exceed population rates. **Hypogammaglobulinaemia** (low antibodies) drives infection deaths.",
+   "say": "Autoimmune cytopenias affect five to ten percent of patients. Richter transformation acts like aggressive lymphoma always. Second cancers exceed population rates in CLL cases.",
+   "vis": {
+    "cols": [
+     "Hazard",
+     "Frequency",
+     "Lesson"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "AIHA and ITP",
+      "5 to 10 percent",
+      "Steroids and rituximab"
+     ],
+     [
+      "Richter",
+      "5 percent",
+      "Biopsy bulky node"
+     ],
+     [
+      "Infections",
+      "Commonest death cause",
+      "Vaccinate, monitor IgG"
+     ],
+     [
+      "Second cancers",
+      "Above population",
+      "Screen annually"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems try to catch the following. **MBL** (low count clone) must not change management like CLL does. **del17p** (TP53 loss) must trigger BTK inhibitor choice, never FCR. **CD23** (marker) plus **CD5** (marker) plus smudge cells clinch CLL over mantle cell lymphoma, where cyclin D1 rules. **Ibrutinib** (BTK inhibitor) at **four hundred twenty** mg daily stays standard even without TP53 faults in many guidelines.",
+   "say": "FCR is never offered to del17p disease in stems. CD23 with CD5 and smudge cells are the CLL signature. MBL needs no management unlike frank CLL.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CLL clues",
+     "points": [
+      "CD5 CD23 positive",
+      "Smudge cells present",
+      "ZAP70 positive"
+     ]
+    },
+    "right": {
+     "title": "Mantle cell clues",
+     "points": [
+      "Cyclin D1 positive",
+      "CD23 negative",
+      "eleven fourteen translocation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: diagnosis needs **five thousand** clonal B cells per microlitre with **CD5** **CD23** and smudge cells. **del17p** **TP53** demands BTK inhibitor, and **IGHV** unmutated means aggressive course. **Rai 0** is lymphocytosis only, and **Binet C** is low counts. **Venetoclax obinutuzumab** is fixed duration first line, with **ibrutinib four hundred twenty** mg daily as the classic BTK option.",
+   "say": "Diagnosis needs five thousand clonal B cells with CD5 and CD23. Del17p requires a BTK inhibitor every single time. Venetoclax obinutuzumab leads first line therapy.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Diagnostic count",
+      "five thousand per microlitre",
+      "Clonal B cells"
+     ],
+     [
+      "Bad marker",
+      "del17p TP53",
+      "BTK inhibitor"
+     ],
+     [
+      "Good marker",
+      "del13q alone",
+      "Watch and wait"
+     ],
+     [
+      "Rai 0",
+      "Lymphocytosis only",
+      "Lowest stage"
+     ],
+     [
+      "Richter rate",
+      "5 percent",
+      "Aggressive lymphoma"
+     ],
+     [
+      "First line",
+      "Venetoclax obinutuzumab",
+      "Fixed duration"
+     ]
+    ]
+   }
+  }
+ ]
+}

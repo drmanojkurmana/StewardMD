@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "shm-thrombotic-microangiopathies",
+ "subject": "ss-haematology",
+ "title": "Thrombotic microangiopathies TTP HUS and complement disease",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 105 Hemolytic Anemias TTP HUS sections",
+  "International consensus on atypical HUS 2016",
+  "ISTH guidelines on TTP 2020"
+ ],
+ "steps": [
+  {
+   "tx": "**Thrombotic microangiopathy** (TMA, small vessel clotting with organ injury) shows a fixed triad. **Microangiopathic haemolytic anaemia** (MAHA, red cells sheared by vessel clots) gives schistocytes (helmet fragmented cells) on smear with high **LDH** (cell damage enzyme). **Thrombocytopenia** (low platelets) follows platelet consumption in clots. **Organ injury** (kidney, brain, heart) completes the picture. **Normal coagulation tests** separate TMA from **DIC** (consumption coagulopathy).",
+   "say": "TMA is MAHA plus low platelets plus organ injury. Schistocytes shear through narrowed vessels with high LDH. Normal coagulation tests separate TMA from DIC clearly.",
+   "vis": {
+    "cols": [
+     "Triad piece",
+     "Finding",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "MAHA",
+      "Schistocytes present",
+      "High LDH low haptoglobin"
+     ],
+     [
+      "Platelets low",
+      "Below one hundred thousand",
+      "Consumed in clots"
+     ],
+     [
+      "Organ injury",
+      "Kidney brain heart",
+      "Creatinine neuro signs"
+     ],
+     [
+      "Coagulation",
+      "Normal PT aPTT",
+      "Fibrinogen preserved"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thrombotic thrombocytopenic purpura** (TTP, ADAMTS13 deficiency disease) is the TMA emergency. **ADAMTS13** (enzyme cutting large von Willebrand multimers) falls below **10** percent in TTP, letting giant clots form. **Pentad** (fever, confusion, renal failure, haemolysis, thrombocytopenia) is fully present in a minority today. **Normal kidney function** favours TTP over **HUS** (kidney dominant disease). **Platelet transfusion** is avoided except for life threatening bleeding.",
+   "say": "TTP stems from ADAMTS13 falling below ten percent. The full pentad appears in only a minority today. Normal kidney function is more typical of TTP.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "triad",
+      "label": "MAHA plus low platelets"
+     },
+     {
+      "id": "kidney",
+      "label": "Kidney severe? Think HUS"
+     },
+     {
+      "id": "adamts",
+      "label": "ADAMTS13 below 10 percent"
+     },
+     {
+      "id": "plex",
+      "label": "Plasma exchange now"
+     }
+    ],
+    "edges": [
+     [
+      "triad",
+      "kidney"
+     ],
+     [
+      "kidney",
+      "adamts"
+     ],
+     [
+      "adamts",
+      "plex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Plasma exchange** (therapeutic plasma replacement, PEX) is the lifesaving therapy of TTP and starts before test results return. **Caplacizumab** (anti von Willebrand nanobody) blocks **GPIb** (platelet receptor) clumping during exchange. **Corticosteroids** (prednisolone) suppress autoantibodies against ADAMTS13. **Rituximab** (anti B cell antibody) is added for refractory or relapsed immune TTP. **Neurological knots** (confusion, seizures) dominate early presentations in adults.",
+   "say": "Plasma exchange starts promptly before ADAMTS13 results return. Caplacizumab blocks platelet clumping during exchange therapy. Rituximab helps refractory immune TTP cases widely in practice.",
+   "vis": {
+    "cols": [
+     "Therapy",
+     "Role",
+     "Timing"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Plasma exchange",
+      "Removes antibodies",
+      "Start immediately"
+     ],
+     [
+      "Caplacizumab",
+      "Blocks GPIb clump",
+      "Alongside exchange"
+     ],
+     [
+      "Steroids",
+      "Suppress antibodies",
+      "Immediate start"
+     ],
+     [
+      "Rituximab",
+      "B cell depletion",
+      "Refractory disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Shiga toxin HUS** (STEC HUS, toxin kidney failure) follows bloody diarrhoea by **5** to **10** days. **Shiga toxin producing E coli** (STEC, gut bacteria) damages endothelium in kidneys first. **Children** under **5** years carry the highest risk, with **CNS** (central nervous system) involvement in severe cases. **Supportive care** (dialysis, careful fluids) remains the treatment, and **antibiotics** (killing bacteria) and antimotility drugs worsen toxin release. **Plasma exchange** offers no benefit in STEC HUS.",
+   "say": "STEC HUS follows bloody diarrhoea by five to ten days. Antibiotics worsen toxin release and must be avoided. Supportive dialysis remains the treatment for STEC HUS.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "STEC HUS",
+     "TTP contrast"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Trigger",
+      "Bloody diarrhoea",
+      "ADAMTS13 below 10"
+     ],
+     [
+      "Kidney",
+      "Dominant failure",
+      "Mild or normal"
+     ],
+     [
+      "Age clue",
+      "Under 5 years",
+      "Adults common"
+     ],
+     [
+      "Treatment",
+      "Supportive only",
+      "Plasma exchange"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Atypical HUS** (aHUS, complement driven childhood and adult HUS) is complement dysregulation without STEC. **Complement factor H** (regulator protein) mutations and anti factor H antibodies drive most cases. **Eculizumab** (C5 complement blocker, terminal complement inhibitor) rescues kidney function in most patients. **Meningococcal vaccination** (meningitis vaccine) must precede eculizumab because C5 blockade invites meningococcal sepsis. **Plasma exchange** serves only as a bridge until complement blockade starts.",
+   "say": "Atypical HUS is a complement dysregulation disease without STEC toxin. Eculizumab rescues kidney function in most treated patients. Meningococcal vaccination must precede complement blockade here in practice. Genetic counselling follows for relatives in families.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tma",
+      "label": "TMA without STEC"
+     },
+     {
+      "id": "comp",
+      "label": "Complement workup"
+     },
+     {
+      "id": "vacc",
+      "label": "Vaccinate first"
+     },
+     {
+      "id": "block",
+      "label": "Eculizumab block"
+     }
+    ],
+    "edges": [
+     [
+      "tma",
+      "comp"
+     ],
+     [
+      "comp",
+      "vacc"
+     ],
+     [
+      "vacc",
+      "block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary TMA has named triggers that exams love. **Drug induced TMA** (from gemcitabine, antiplatelet and calcineurin blocker drugs) stops with drug withdrawal. **Calcineurin inhibitor TMA** (immune suppressor drug effect) plagues transplant recipients. **Pre eclampsia HELLP** (haemolysis, high liver enzymes, low platelets) resolves with delivery. **Malignant hypertension** (severe high pressure) injures vessels widely. **Cobalamin C defect** (vitamin B twelve pathway disease) mimics TMA in infants with high homocysteine.",
+   "say": "Drug induced TMA stops promptly with drug withdrawal. HELLP is resolved by delivery of the placenta itself. Malignant hypertension is a cause of wide vessel injury in TMA cases.",
+   "vis": {
+    "cols": [
+     "Trigger",
+     "Clue",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Gemcitabine",
+      "Cancer drug",
+      "Stop the drug"
+     ],
+     [
+      "Calcineurin blocker",
+      "Transplant patient",
+      "Switch or stop"
+     ],
+     [
+      "Pre eclampsia HELLP",
+      "Pregnancy, high BP",
+      "Deliver promptly"
+     ],
+     [
+      "Malignant hypertension",
+      "Pressure above two hundred",
+      "Control pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **DIC versus TMA** (consumption versus vessel clot) split decides urgent therapy. **DIC** (disseminated intravascular coagulation) lowers **fibrinogen** (clotting protein) and raises **D dimer** (fibrin breakdown marker) with prolonged PT aPTT. **TMA** keeps fibrinogen normal with normal clotting times and schistocytes dominant. **Sepsis** (infection) drives most DIC, while **ADAMTS13** drives TTP. **Blood products** treat DIC bleeding, while platelet transfusion harms TTP.",
+   "say": "DIC is marked by low fibrinogen while TMA has normal fibrinogen. DIC prolongs clotting times and TMA leaves them normal. Platelet transfusion harms TTP but treats DIC bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DIC",
+     "points": [
+      "Fibrinogen low",
+      "PT aPTT prolonged",
+      "Sepsis driven"
+     ]
+    },
+    "right": {
+     "title": "TMA",
+     "points": [
+      "Fibrinogen normal",
+      "Schistocytes dominant",
+      "ADAMTS13 driven"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prognosis tracks organ damage and speed of therapy. **Acute kidney injury** (kidney failure) needing dialysis in **twenty** to **forty** percent of aHUS persists without complement blockade. **Stroke** (brain clots) and **myocardial infarction** (heart attack) threaten TTP in the first days. Mortality fell from above **90** percent to below **10** percent after plasma exchange reached TTP care. **Relapse** affects **forty** percent of immune TTP within **2** years, tracked by **ADAMTS13** monitoring.",
+   "say": "Mortality fell below ten percent after plasma exchange reached TTP care. Relapse affects forty percent within two years of remission. ADAMTS13 monitoring tracks relapse risk closely.",
+   "vis": {
+    "cols": [
+     "Risk",
+     "Rate",
+     "Guard"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "aHUS dialysis need",
+      "twenty to forty percent",
+      "Eculizumab early"
+     ],
+     [
+      "TTP relapse",
+      "forty percent at 2 years",
+      "ADAMTS13 checks"
+     ],
+     [
+      "Older TTP death",
+      "Above 90 percent",
+      "Before plasma exchange"
+     ],
+     [
+      "STEC CNS disease",
+      "Severe cases",
+      "PICU supportive care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Newer evidence reshaped aHUS care. **Ravulizumab** (long acting C5 blocker, every **eight** weeks) matches eculizumab with longer dosing intervals. **Eculizumab discontinuation** (stopping block) is considered after **3** to **6** months of remission, since relapse risk falls with time. **Genetic testing** (complement gene panel) guides relapse counselling and family screening. **Plasma exchange** has no proven role in STEC HUS and wastes resources there.",
+   "say": "Ravulizumab matches eculizumab with longer dosing intervals. Eculizumab stopping is considered after three to six months. Genetic testing guides relapse counselling and family screening.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Eculizumab",
+     "points": [
+      "Every 2 weeks",
+      "Meningococcal risk",
+      "Rescues kidney"
+     ]
+    },
+    "right": {
+     "title": "Ravulizumab",
+     "points": [
+      "Every eight weeks",
+      "Same risk profile",
+      "Longer half life"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exam stems repeat these discriminators. **ADAMTS13 below 10** percent confirms TTP and never STEC HUS. **Bloody diarrhoea five days prior** points to STEC HUS, not TTP. **Normal fibrinogen** with schistocytes points to TMA over DIC. **Eculizumab** is the answer for complement mediated aHUS, while **plasma exchange** is the answer for TTP.",
+   "say": "ADAMTS13 below ten percent confirms TTP every time. Bloody diarrhoea five days prior points to STEC HUS. Plasma exchange is the treatment for TTP while eculizumab is for aHUS disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TTP triggers",
+     "points": [
+      "ADAMTS13 below 10",
+      "Plasma exchange",
+      "Caplacizumab added"
+     ]
+    },
+    "right": {
+     "title": "HUS triggers",
+     "points": [
+      "STEC toxin present",
+      "Supportive care",
+      "Eculizumab in aHUS"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: TMA triad is **MAHA** with schistocytes, **low platelets**, and **organ injury** with normal clotting tests. **ADAMTS13 below 10** percent confirms TTP, and **plasma exchange** starts immediately. **STEC HUS** follows bloody diarrhoea in **5** to **10** days and **antibiotics** worsen it. **aHUS** needs **eculizumab** after meningococcal vaccination.",
+   "say": "TMA is MAHA plus low platelets plus organ injury. ADAMTS13 below ten percent confirms TTP clearly. STEC HUS follows bloody diarrhoea by five to ten days only.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "TTP enzyme",
+      "ADAMTS13 below 10",
+      "Below 10 percent"
+     ],
+     [
+      "TTP therapy",
+      "Plasma exchange",
+      "Start immediately"
+     ],
+     [
+      "STEC timing",
+      "5 to 10 days",
+      "After diarrhoea"
+     ],
+     [
+      "STEC avoid",
+      "Antibiotics",
+      "Worsen toxin"
+     ],
+     [
+      "aHUS drug",
+      "Eculizumab",
+      "Vaccinate first"
+     ],
+     [
+      "DIC contrast",
+      "Fibrinogen low",
+      "TMA normal"
+     ]
+    ]
+   }
+  }
+ ]
+}
