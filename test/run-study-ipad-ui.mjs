@@ -52,6 +52,8 @@ await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
 await page.waitForTimeout(400);
 ok(await page.evaluate(() => document.documentElement.style.zoom) === "1.25", "html Display zoom is still 1.25 in the notebook");
+const fit = await page.evaluate(() => { const v = STUDY._state(), r = v.pg[1].el.getBoundingClientRect(), s = v.sc.getBoundingClientRect(); return { over: v.sc.scrollWidth - v.sc.clientWidth, l: r.left - s.left, r: s.right - r.right }; });
+ok(fit.over <= 0 && Math.abs(fit.l - fit.r) < 3, "fit width: the whole page shows with equal side margins, no sideways scroll (" + JSON.stringify(fit) + ")");
 await page.click('[data-act="st-tool"][data-v="pen"]');
 
 /* Draw a stroke at page-relative points with a pen of the given pressure; return the screen points. */
@@ -159,6 +161,33 @@ if (SHOTS) await page.screenshot({ path: SHOTS + "/ipad-zoomwin.png" });
 await page.click('[data-act="st-zoom-close"]');
 await page.waitForTimeout(200);
 ok(await page.evaluate(() => !document.querySelector(".st-pg .st-zw-box") && document.getElementById("stP3ZoomWindow").hidden), "zoom window: Done closes it and removes the box");
+
+/* ---- Text tool: a REAL tap (hit-tested, not dispatched on the layer) places a text box you can type in ---- */
+await page.click('[data-act="st-tool"][data-v="text"]');
+await page.waitForTimeout(200);
+const tp = await page.evaluate(() => { const r = STUDY._state().pg[1].el.getBoundingClientRect(); return [r.left + r.width * 0.55, r.top + r.height * 0.3]; });
+const itemsBefore = await page.evaluate(() => (STUDY._state().items || []).filter((i) => !i.gone).length);
+await page.mouse.click(tp[0], tp[1]);
+await page.waitForTimeout(400);
+const tx = await page.evaluate(() => ({ n: (STUDY._state().items || []).filter((i) => !i.gone).length, ce: !!(document.activeElement && document.activeElement.isContentEditable) }));
+ok(tx.n === itemsBefore + 1 && tx.ce, "text tool: a real tap places a text box with the caret in it (" + JSON.stringify(tx) + ")");
+await page.keyboard.type("Start SGLT2i early");
+await page.waitForTimeout(200);
+ok(await page.evaluate(() => STUDY._state().tool) === "text", "text tool: typing goes into the box, not to tool shortcuts");
+ok(await page.evaluate(() => (STUDY._state().items || []).some((i) => /SGLT2i/.test((i.data && i.data.text) || i.text || ""))), "text tool: the typed text is saved on the item");
+if (SHOTS) await page.screenshot({ path: SHOTS + "/ipad-text.png" });
+
+/* ---- Sticker: lands in view, square ---- */
+await page.keyboard.press("Escape").catch(() => {});
+await page.evaluate(() => { const v = STUDY._state(); v.sc.scrollTop = v.pg[1].el.offsetTop + v.pg[1].el.offsetHeight * 0.4; });
+await page.waitForTimeout(400);
+await page.click('[data-act="st-tool"][data-v="elements"]');
+await page.waitForTimeout(300);
+await page.click('[data-act="st-insert-sticker"]');
+await page.waitForTimeout(500);
+const stk = await page.evaluate(() => { const v = STUDY._state(), it = v.items.filter((i) => !i.gone && i.kind === "sticker").pop(), e = document.querySelector('.st-item[data-id="' + it.id + '"]') || Array.from(document.querySelectorAll(".st-item")).pop(), r = e.getBoundingClientRect(), s = v.sc.getBoundingClientRect(); return { inView: r.top >= s.top && r.bottom <= s.bottom && r.left >= s.left && r.right <= s.right, w: r.width, h: r.height }; });
+ok(stk.inView, "sticker: lands on the part of the page that is on screen (" + JSON.stringify(stk) + ")");
+ok(Math.abs(stk.w - stk.h) < 2, "sticker: its box is square");
 
 ok(!errors.length, "no page errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
 await browser.close();

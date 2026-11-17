@@ -1552,6 +1552,8 @@ body.st5b-presenting #stTb { display: none !important; }
 .pn-root .st-ink .st-items-layer > * {
   pointer-events: none;
 }
+.pn-root .st-text .st-items-layer { pointer-events: auto; cursor: text; z-index: 13; }
+.pn-root .st-text .st-tl, .pn-root .st-text .st-tl * { pointer-events: none !important; }
 
 .pn-root .st-item {
   position: absolute;

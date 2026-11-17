@@ -1382,7 +1382,7 @@
     // smd_study_scribble is ignored so old ONs are reset; only smd_study_scribble2 === "1" turns it on.
     var scrPref = false;
     try { scrPref = G.localStorage.getItem("smd_study_scribble2") === "1"; } catch (e) {}
-    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
+    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 26), /* .st-pages padding 12 + 12, page border 1 + 1: fit width shows the whole page, no sideways scroll */ goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
     bindPencil();
@@ -1787,9 +1787,12 @@
     var isLaser = V.tool === "laser";
     var hasInkTool = isInk || V.tool === "er" || V.tool === "lasso" || isLaser;
     V.box.classList.toggle("st-ink", hasInkTool);
+    // Text tool: the item layer takes the tap that places a text box (it is pointer-events none otherwise, and on a
+    // PDF the text layer sat on top), so a real tap never reached it before 2026-11-18.
+    V.box.classList.toggle("st-text", V.tool === "text");
     for (var pgi in V.pg) {
       if (V.pg[pgi] && V.pg[pgi].tl) {
-        V.pg[pgi].tl.style.pointerEvents = hasInkTool ? "none" : "auto";
+        V.pg[pgi].tl.style.pointerEvents = hasInkTool || V.tool === "text" ? "none" : "auto";
       }
     }
     if (G.STUDY_INSERT && G.STUDY_INSERT.syncTb) G.STUDY_INSERT.syncTb(V, root);
