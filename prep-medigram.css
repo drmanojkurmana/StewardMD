@@ -69,3 +69,8 @@
    zoom (1.15) and ran the reel 180 px below the screen, cutting off the bottom of every card. */
 .pn-root .pn-body.pn-mg { overflow: hidden; }
 .pn-root .pn-body.pn-mg > .vf.pn-mg-feed { height: auto; flex: 1 1 0; min-height: 0; }
+
+/* Image Library cards */
+.pn-root .pn-mg-fig { margin: 0; border-radius: var(--pn-r-lg); overflow: hidden; background: #000; }
+.pn-root .pn-mg-fig img { display: block; width: 100%; max-height: 46vh; object-fit: contain; aspect-ratio: var(--ar, auto); }
+.pn-root .pn-mg-cap { font-size: 15px; }

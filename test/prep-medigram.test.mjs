@@ -158,6 +158,21 @@ test("official-channel videos: 100+, unique 11-char ids, all on the shim allow-l
   assert.doesNotMatch(read("prep-medigram.js") + read("prep-medigram-videos.js"), /dQw4w9WgXcQ/, "placeholder gone");
 });
 
+test("image systems: NEET-SS gets its specialty systems, every other exam any system", () => {
+  assert.equal(D.imgSystemsFor("neet-pg", ["anatomy"]), null);
+  assert.equal(D.imgSystemsFor("mrcp-part1", []), null);
+  assert.equal(D.imgSystemsFor("usmle", []), null);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-cardiology"]), ["cardiology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-paediatric-nephrology"]), ["paediatrics", "renal-and-urology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-surgical-gastroenterology"]), ["surgery", "gastroenterology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-ctvs", "ss-neurosurgery"]), ["surgery", "cardiology", "neurology"]);
+  assert.ok(D.imgSystemsFor("neet-ss", ["ss-mixed"]).includes("medicine"), "unrecognised specialty falls back to the medical systems");
+  const slugs = JSON.parse(read("kb/dist/imglib/index.json")).systems.map((x) => x.slug);
+  const all = new Set();
+  for (const id of ["ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-pulmonology", "ss-infectious-diseases", "ss-rheumatology-immunology", "ss-critical-care", "ss-neonatology", "ss-obg", "ss-radiology", "ss-head-neck-surgery", "ss-plastic-surgery", "ss-urology", "ss-onco-pathology", "ss-cardiac-anaesthesia", "ss-geriatric-mental-health", "ss-clinical-pharmacology", "ss-general-medicine"]) D.imgSystemsFor("neet-ss", [id]).forEach((x) => all.add(x));
+  for (const x of all) assert.ok(slugs.includes(x), x + " is a real Image Library system");
+});
+
 test("mixFeed: every n questions one other card, pearls and extras alternate, pearls never come early", () => {
   const q = (id, kp) => ({ id, q: "Q" + id, o: ["a", "b"], a: 0, kp, _s: "s" });
   const items = [q(1, "P1"), q(2), q(3, "P3"), q(4), q(5), q(6)];
@@ -165,7 +180,7 @@ test("mixFeed: every n questions one other card, pearls and extras alternate, pe
   const out = D.mixFeed(items, ex, 3);
   assert.deepEqual(out.map((c) => c.kind), ["q", "q", "q", "pearl", "q", "q", "q", "video"]);
   assert.equal(out[3].text, "P1");
-  assert.deepEqual(D.mixFeed(items, ex, 2).map((c) => c.kind), ["q", "q", "pearl", "q", "q", "video", "q", "q", "pearl"]);
+  assert.deepEqual(D.mixFeed(items, ex, 2).map((c) => c.kind), ["q", "q", "pearl", "q", "q", "video", "q", "q", "lesson"], "one pearl in three slots");
   assert.deepEqual(D.mixFeed([], ex, 3), []);
   assert.deepEqual(D.mixFeed(items, [], "5").map((c) => c.kind), ["q", "q", "q", "q", "q", "pearl", "q"]);
 });

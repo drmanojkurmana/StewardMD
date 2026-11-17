@@ -67,9 +67,11 @@ try {
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 20000), "home shows the PrepReels row");
   await click("#smdPrep [data-act=mg-open]");
   ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > 5;`, 20000), "PrepReels opens on a reel built from the bank");
-  const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
+  const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('pn-mg-lib')?'lib':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
   ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  ok(await ev(`var c=document.querySelectorAll('#smdPrep .pn-mg-lib'); return c.length >= 2 && [].every.call(c, function(x){ return !!x.querySelector('img') && x.querySelector('.vf-stem').textContent.length > 2; });`) === true, "Image Library pictures show in the reel with their title");
+  ok(await ev(`return [].some.call(document.querySelectorAll('#smdPrep .pn-mg-lib'), function(x){ return !!x.querySelector('.pn-mg-cap') || !!x.querySelector('[data-act=mg-lib-art],[data-act=mg-lib-les]'); });`) === true, "they come explained: caption, article or lesson");
   ok(await ev(`var b=document.querySelector('#pnMgFeed').getBoundingClientRect(); return b.bottom <= innerHeight + 8 && b.height > 300;`) === true, "the reel ends at the bottom of the screen (no card cut off; under 8 px of padding may tuck under)");
   ok(await ev(`return !/shown in the image/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "questions that need a figure are left out");
   ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows, Skip or Next before an answer: one card per swipe");
@@ -142,7 +144,7 @@ try {
   await click("#smdPrep [data-act=mg-more]");
   ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > ${n0};`, 15000), "Keep going adds more cards");
   ok(await ev(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`) === true, "earlier answers survive the new batch");
-  ok(await ev(`var k={}, d=0; PREP_MEDIGRAM._s().cards.forEach(function(c){ var x=c.kind+":"+(c.it?c.it.id||c.it.img:c.videoId||c.mid||c.text); if(k[x]) d++; k[x]=1; }); return d;`) === 0, "nothing repeats across batches");
+  ok(await ev(`var k={}, d=0; PREP_MEDIGRAM._s().cards.forEach(function(c){ var x=c.kind+":"+(c.it?c.it.id||c.it.img:c.e?c.e.s:c.videoId||c.mid||c.text); if(k[x]) d++; k[x]=1; }); return d;`) === 0, "nothing repeats across batches");
   // A silent shim (offline, slow) never hands off to YouTube: the player stays in the card over the poster.
   shimSilent = true;
   await ev(`var v=[].filter.call(document.querySelectorAll('#smdPrep .pn-mg-vid'), function(e){ return e.getAttribute('data-vid') !== ${JSON.stringify(played)}; })[0]; var b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
