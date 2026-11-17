@@ -1,0 +1,356 @@
+{
+ "v": 1,
+ "module": "sgs-colorectal",
+ "subject": "ss-general-surgery",
+ "title": "Colorectal surgery: cancer staging, obstruction, piles and fistula",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Colorectal cancer** is the third commonest cancer worldwide, with 1.9 million new cases yearly and 13 percent under 50 years. **Adenoma** precursor progresses over 10 years, and 5 percent of polyps transform yearly. A family history raises risk 2.5 times, and screening from age 45 cuts mortality by 30 percent.",
+   "say": "Colorectal cancer is the third commonest cancer worldwide, with one point nine million new cases yearly. Adenoma precursor progresses over ten years, and five percent of polyps transform yearly. A family history raises risk two and a half times, and screening from age forty five cuts mortality by thirty percent in most study populations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk group",
+     "Relative risk",
+     "Screening age"
+    ],
+    "rows": [
+     [
+      "General",
+      "1.0",
+      "45 years"
+     ],
+     [
+      "Family history",
+      "2.5 times",
+      "35 years"
+     ],
+     [
+      "Lynch syndrome",
+      "10 times",
+      "25 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Staging uses the **TNM system** where T is depth, N is nodes and M is metastasis, and 5 year survival for stage 1 exceeds 90 percent. **T3** disease breaches muscularis propria, while **N2** means 4 or more nodes positive. **METS** to liver occurs in 50 percent of metastatic cases at presentation.",
+   "say": "Staging uses the TNM system where T is depth, N is nodes and M is metastasis. Five year survival for stage one exceeds ninety percent. T three disease breaches the muscle layer, while N two means four or more nodes positive. Liver spread occurs in fifty percent of metastatic cases at presentation in most series.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "T depth"
+     },
+     {
+      "id": "t2",
+      "label": "N nodes"
+     },
+     {
+      "id": "t3",
+      "label": "M spread"
+     },
+     {
+      "id": "t4",
+      "label": "Stage"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Obstruction** from rectal cancer presents with absolute constipation for 3 days, distension and vomiting in 20 percent. **Change in bowel habit** with weight loss over 5 kg in 6 months is a red flag. A **Dixon score** is not used for obstruction, while CT detects the transition point in 95 percent.",
+   "say": "Obstruction from rectal cancer presents with absolute constipation for three days, distension and vomiting in twenty percent. Change in bowel habit with weight loss over five kilograms in six months is a red flag. CT detects the transition point in ninety five percent, while plain X-ray suggests obstruction in about seventy percent of cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left sided",
+     "points": [
+      "Obstruction common",
+      "Change in stool",
+      "Narrow stools"
+     ]
+    },
+    "right": {
+     "title": "Right sided",
+     "points": [
+      "Anaemia common",
+      "Bleeding",
+      "Weight loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Haemorrhoids** grade 1 bleed without prolapse, while grade 4 prolapse stays out and needs reduction. **Internal piles** arise above the dentate line, and **external piles** arise below it with pain. **Rubber band ligation** suits grade 2 piles with 70 percent success, while 2.5 cm piles often need haemorrhoidectomy.",
+   "say": "Haemorrhoids grade one bleed without prolapse, while grade four prolapse stays out and needs reduction. Internal piles arise above the dentate line, and external piles arise below it with pain. Rubber band ligation suits grade two piles with seventy percent success, while larger piles often need surgical removal for lasting relief.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Prolapse",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "None",
+      "Fibre and fluids"
+     ],
+     [
+      "Grade 2",
+      "Reduces alone",
+      "Banding"
+     ],
+     [
+      "Grade 3",
+      "Needs fingers",
+      "Surgery"
+     ],
+     [
+      "Grade 4",
+      "Irreducible",
+      "Surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fistula in ano** presents with discharge in 60 percent and an external opening near the anus. **Goodsall rule** says a curved track lies posteriorly and a straight track anteriorly. **MRI fistulogram** finds the internal opening in 85 percent, and **fistulotomy** cures 90 percent with 5 percent incontinence risk.",
+   "say": "Fistula in ano presents with discharge in sixty percent and an external opening near the anus. Goodsall rule says a curved track lies behind and a straight track in front. MRI fistulogram finds the internal opening in eighty five percent, and fistulotomy cures ninety percent with five percent incontinence risk in difficult cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Discharge"
+     },
+     {
+      "id": "p2",
+      "label": "External opening"
+     },
+     {
+      "id": "p3",
+      "label": "Goodsall rule"
+     },
+     {
+      "id": "p4",
+      "label": "Fistulotomy"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diverticulitis** causes left iliac fossa pain with fever above 38 degrees, and **Hinchey stage 2** means abscess over 3 cm needs drainage. **Colonoscopy** after 6 weeks excludes malignancy found in 5 percent. **Hartmann procedure** suits perforated disease with faecal peritonitis in 10 percent of cases.",
+   "say": "Diverticulitis causes left lower abdominal pain with fever above thirty eight degrees. Hinchey stage two means abscess over three centimetres needs drainage. Colonoscopy after six weeks excludes cancer found in five percent. Hartmann procedure suits perforated disease with faecal peritonitis in ten percent of cases coming to surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hinchey",
+     "Finding",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Stage 0",
+      "Wall thickening",
+      "Antibiotics"
+     ],
+     [
+      "Stage 2",
+      "Abscess over 3 cm",
+      "Drain"
+     ],
+     [
+      "Stage 3",
+      "Perforation",
+      "Surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Investigations include **CEA above 5** ng per mL in 60 percent of cancers, and **CT colonography** detects lesions over 6 mm with 90 percent sensitivity. **Colonicoscopy** with biopsy gives diagnosis in 95 percent, and **MRI pelvis** decides rectal invasion within 1 mm. **PET CT** stages poorly differentiated tumours accurately in 85 percent.",
+   "say": "Investigations include CEA above five nanograms per milliliter in sixty percent of cancers, and CT colonography detects lesions over six millimeters with ninety percent sensitivity. Colonoscopy with biopsy gives diagnosis in ninety five percent. MRI pelvis decides rectal invasion within one millimeter. PET CT stages advanced tumours accurately in eighty five percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finds",
+     "Accuracy"
+    ],
+    "rows": [
+     [
+      "Colonoscopy",
+      "Diagnosis",
+      "95 percent"
+     ],
+     [
+      "MRI pelvis",
+      "Rectal depth",
+      "90 percent"
+     ],
+     [
+      "CT chest",
+      "Metastasis",
+      "85 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neoadjuvant chemoradiation** for T3 rectal cancer improves resectability from 60 to 85 percent, using **capecitabine** 825 mg twice daily. **Total mesorectal excision** lowers local recurrence to 5 percent from 25 percent without it. Anastomotic leak occurs in 8 percent and needs diversion in half.",
+   "say": "Neoadjuvant chemoradiation for T three rectal cancer improves resectability from sixty to eighty five percent. Total mesorectal excision lowers local recurrence to five percent from twenty five percent without it. Anastomotic leak occurs in eight percent and needs diversion in half of those patients in most reported series here.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neoadjuvant",
+     "points": [
+      "Shrinks tumour",
+      "Capecitabine 825 mg",
+      "Wait 8 weeks"
+     ]
+    },
+    "right": {
+     "title": "Adjuvant",
+     "points": [
+      "Kills spread",
+      "FOLFOX 12 cycles",
+      "After surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stent** placement relieves malignant obstruction in 80 percent and avoids emergency colostomy in 70 percent of cases. **Diverting colostomy** suits low rectal blockage with faecal peritonitis, and reversal is possible in 60 percent after 6 months. **Hartmann** mortality reaches 15 percent in elderly patients over 75 years.",
+   "say": "Stent placement relieves malignant obstruction in eighty percent and avoids emergency colostomy in seventy percent of cases. Diverting colostomy suits low rectal blockage with faecal peritonitis, and reversal is possible in sixty percent after six months. Hartmann mortality reaches fifteen percent in elderly patients over seventy five years in many hospitals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Obstruction"
+     },
+     {
+      "id": "s2",
+      "label": "Stent"
+     },
+     {
+      "id": "s3",
+      "label": "Bridge"
+     },
+     {
+      "id": "s4",
+      "label": "Surgery"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications after colorectal surgery include **pelvic sepsis** in 10 percent, **ureteric injury** in 1 percent, and **incisional hernia** in 15 percent at 3 years. **Liver metastasis** develops in 30 percent within 5 years, and **peritoneal spread** in 10 percent. Follow up CEA every 3 months catches recurrence early.",
+   "say": "Complications after colorectal surgery include pelvic sepsis in ten percent, ureteric injury in one percent, and incisional hernia in fifteen percent at three years. Liver metastasis develops in thirty percent within five years, and peritoneal spread in ten percent. Follow up CEA every three months catches recurrence early in most patients after surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Rate",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Anastomotic leak",
+      "8 percent",
+      "Day 5"
+     ],
+     [
+      "Liver mets",
+      "30 percent",
+      "5 years"
+     ],
+     [
+      "Hernia",
+      "15 percent",
+      "3 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stage 1** cancer needs surgery alone with 90 percent cure, while **stage 3** needs adjuvant FOLFOX for 6 months. **Rectal T3** needs chemoradiation before surgery, and **fistula** needs duty to avoid incontinence. **CEA above 5** before surgery predicts 25 percent recurrence even after full resection.",
+   "say": "High-yield for the exam. Stage one cancer needs surgery alone with ninety percent cure, while stage three needs adjuvant chemotherapy for six months. Rectal T three needs chemoradiation before surgery, and fistula surgery must preserve continence. CEA above five before surgery predicts twenty five percent recurrence even after full resection is done.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Action",
+     "Cure"
+    ],
+    "rows": [
+     [
+      "Stage 1",
+      "Surgery",
+      "90 percent"
+     ],
+     [
+      "Stage 3",
+      "Surgery plus FOLFOX",
+      "60 percent"
+     ],
+     [
+      "Stage 4",
+      "Palliative plus palliation",
+      "20 percent"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,144 @@
+{
+  "v": 1,
+  "module": "hnd-reconstruction",
+  "subject": "ss-hand-surgery",
+  "title": "Hand reconstruction and microsurgery: flaps, arthroplasty and plexus",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Plastic Surgery 5th edition 2024"
+  ],
+  "steps": [
+    {
+      "tx": "**Microsurgery** repairs vessels and nerves under 4 to 10 times magnification down to 0.3 mm diameter. Free flaps move skin and muscle with their own blood supply to cover 8 to 15 cm defects. Vessel patency decides survival, with patency above 95 percent in experienced centres at 1 year. Nerve recovery follows 1 mm per day over 6 months.",
+      "say": "Microsurgery joins tiny vessels and nerves under high magnification. Free flaps move tissue with its own blood supply to cover large defects. Patency rates above ninety five percent define experienced centres. Nerves regrow slowly at one millimetre each day.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Element", "Working scale"],
+        "rows": [
+          ["Magnification", "About 4 to 10 times"],
+          ["Vessel size", "Down to 0.3 mm"],
+          ["Flap defect", "About 8 to 15 cm"],
+          ["Nerve growth", "About 1 mm per day"]
+        ]
+      }
+    },
+    {
+      "tx": "**Defects above 5 cm** that expose tendon or bone cannot heal by skin grafting alone. Burns, tumour clearance and crush injuries create 3 to 6 cm losses needing durable cover. Exposed joints stiffen within 10 days without early coverage. Fracture nonunion with dead bone marks the end of simple closures in 5 percent of cases.",
+      "say": "Defects larger than five centimetres exposing tendon or bone need more than a graft. Burns, tumour clearance and crush injuries create such losses. Exposed joints stiffen quickly without early cover. Dead bone ends simple closures, so flap cover becomes necessary.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Wound assess", "sub": "size and depth"},
+          {"id": "b", "label": "Exposed vital part", "sub": "tendon bone joint"},
+          {"id": "c", "label": "Graft possible", "sub": "vascular bed intact"},
+          {"id": "d", "label": "Flap needed", "sub": "over 5 cm loss"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "**Anastomosis** joins artery to artery with 8 to 10 stitches in 0.5 mm vessels. Veins run at 5 to 8 cm of mercury pressure, so 2 to 3 veins guard drainage. Ischemia time beyond 4 hours cuts flap survival by 20 percent. A patent artery without venous outflow clogs within 12 hours despite perfect stitching.",
+      "say": "Micro stitching joins artery to artery with fine stitches in tiny vessels. Pressure is low in veins, so two to three veins protect drainage. Warm time beyond four hours sharply cuts flap survival. Blocked outflow clots the flap even when the artery stays open.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Artery join", "sub": "8 to 10 stitches"},
+          {"id": "b", "label": "Vein joins", "sub": "2 to 3 veins"},
+          {"id": "c", "label": "Reperfusion", "sub": "warm time under 4 hours"},
+          {"id": "d", "label": "Monitoring", "sub": "first 12 hours"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "**Burn contracture** binds the hand after 8 to 12 percent total body burns needing release. Rheumatoid arthritis destroys joints in 60 percent of chronic cases, needing replacement. Post traumatic arthritis affects 25 percent of severe wrist injuries at 2 years. Thumb loss below the metacarpal head cripples grip in 40 percent of daily tasks.",
+      "say": "Burn contracture binds the hand after large burns and needs surgical release. Rheumatoid disease destroys joints in most chronic cases, needing replacement. After severe wrist injury, arthritis is common within two years. Thumb loss cripples grip because the thumb carries so much of daily work.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Condition", "Functional burden"],
+        "rows": [
+          ["Burn contracture", "Bends joints, needs release"],
+          ["Rheumatoid joints", "Painful, unstable motion"],
+          ["Post traumatic arthritis", "About 25 percent at 2 years"],
+          ["Thumb loss", "Near 40 percent of grip tasks"]
+        ]
+      }
+    },
+    {
+      "tx": "**Amputation level** sets function, with mid metacarpal loss keeping 70 percent of pre injury grip. Brachial plexus injury weakens 3 to 4 muscle groups in 10 to 15 cm root avulsions. Phalangeal shortening over 2 cm breaks the tripod grip pattern. Bilateral loss below the wrist disables 90 percent of self care tasks.",
+      "say": "Amputation level sets function, with loss at the knuckle keeping most grip. Plexus injury weakens several muscle groups when roots tear away. Shortening beyond two centimetres breaks the tripod grip pattern. Low bilateral loss disables most self care activities.",
+      "vis": {
+        "kind": "compare",
+        "left": {"title": "Distal loss", "points": ["Keeps about 70 percent grip", "Tripod grip preserved", "Splints fit well", "Prosthesis needed rarely"]},
+        "right": {"title": "Proximal loss", "points": ["Grip falls below 40 percent", "Tripod pattern lost", "Prosthesis needed often", "Rehabilitation longer"]}
+      }
+    },
+    {
+      "tx": "**CT angiography** maps donor vessels in 3D before flap harvest, cutting operative time by 30 percent. Doppler signals confirm vessel flow over 5 cm of perforator. Nerve conduction shows root avulsion with fibrillations at 3 weeks. Plain X-ray and USG together stage joint destruction in 90 percent of cases.",
+      "say": "CT angiography maps donor vessels in three dimensions before flap harvest. Doppler confirms flow through small perforators. Nerve studies show root injury with muscle change by three weeks. Plain films plus ultrasound stage joint destruction well.",
+      "vis": {
+        "kind": "compare",
+        "left": {"title": "Flap planning", "points": ["CT angiography in 3D", "Doppler over 5 cm perforator", "Mark vessels preoperatively", "Size defect plus 2 cm margin"]},
+        "right": {"title": "Joint planning", "points": ["X-ray staging of arthritis", "Ultrasound for tendon integrity", "Nerve conduction at 3 weeks", "Grip dynamometry baseline"]}
+      }
+    },
+    {
+      "tx": "**Free flaps** serve 8 to 15 cm defects, with donor sites chosen where vessel calibre exceeds 1 mm. Pedicled flaps suit 3 to 5 cm wounds without micro skills and cost 40 percent less time. Arthroplasty interposes tissue in 3 to 4 finger joints to keep pain free motion over 10 degrees. Velopharyngeal repair is separate, for speech only.",
+      "say": "Free flaps cover large defects where vessel size allows. Pedicled flaps suit smaller wounds and save time when microsurgery is unavailable. Joint replacement keeps motion with less pain in several finger joints. Speech repair belongs to a different field and is tested separately.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Option", "Best fit"],
+        "rows": [
+          ["Free flap", "Defects of 8 to 15 cm"],
+          ["Pedicled flap", "Wounds of 3 to 5 cm"],
+          ["Arthroplasty", "Painful joints, keep 10 degrees motion"],
+          ["Skin graft", " Vascular wound bed only"]
+        ]
+      }
+    },
+    {
+      "tx": "**Plexus repair** reinnervates the 10 to 15 cm arm through nerve transfers within 6 months. Elbow motion returns in 50 percent of early repairs with elbow flexion recovered over 6 months. Amputation closure at transmetacarpal level uses 2 cm of dorsal skin planning. Rehabilitation starts day 3 with elevation and 20 degrees of mobilisation.",
+      "say": "Plexus repair transfers nerves early to reinnervate the long arm. Elbow bending returns in half of early cases over six months. Amputation closure needs planned skin flaps for tension free cover. Rehabilitation starts within days with elevation and gentle motion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Assess level", "sub": "root versus trunk"},
+          {"id": "b", "label": "Transfer nerves", "sub": "within 6 months"},
+          {"id": "c", "label": "Reinnervation", "sub": "over 6 months"},
+          {"id": "d", "label": "Therapy", "sub": "from day 3"}
+        ],
+        "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+      }
+    },
+    {
+      "tx": "**Flap loss** strikes 3 to 5 percent despite 95 percent patency, with arterial clot the top cause. Venous congestion hits 4 to 6 percent inside 24 hours and needs rescue. Arthroplasty loosens in 10 to 15 percent at 10 years. Stump neuromas trouble 8 to 10 percent of amputees with shooting pain over 3 months.",
+      "say": "Flap loss still occurs in a few percent despite high patency, with clot the top cause. Venous congestion needs rescue within a day. Joint replacements loosen in a minority over ten years. Painful stump nerves trouble some amputees for months.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Complication", "Frequency"],
+        "rows": [
+          ["Flap loss", "About 3 to 5 percent"],
+          ["Venous congestion", "About 4 to 6 percent"],
+          ["Loosening at 10 years", "About 10 to 15 percent"],
+          ["Stump neuroma pain", "About 8 to 10 percent"]
+        ]
+      }
+    },
+    {
+      "tx": "**Warm time over 4 hours** or crush level above 8 cm rules out replantation in most cases. Free flap defects of 12 cm need veins of 1 mm or more, not 0.5 mm perforators. Nerve transfer after 9 months rarely restores hand function, so consent families by 6 months.",
+      "say": "High-yield for the exam: long warm time or crush level rules out replantation in most cases. Large defects need vessels of one millimetre or more for flap harvest. Nerve transfer done late rarely restores hand function, so counsel families by six months.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Rule", "Cutoff"],
+        "rows": [
+          ["Warm ischemia limit", "Keep under 4 hours"],
+          ["Crush level for replantation", "Above 8 cm, do not attempt"],
+          ["Flap vessel calibre", "At least 1 mm for 12 cm defects"],
+          ["Nerve transfer window", "Best within 6 months"]
+        ]
+      }
+    }
+  ]
+}
