@@ -189,13 +189,13 @@
   /* Highlighter like real ink: all highlight strokes are painted OPAQUE on a scratch layer, then laid down
      once at a fixed opacity, so self-overlaps and crossings never darken into blobs (GoodNotes look). */
   var hlScratch = null;
-  function drawHlLayer(ctx, list, W, H, dpr) {
+  function drawHlLayer(ctx, list, W, H, dpr, ox, oy) {
     if (!list || !list.length) return;
     var cw = ctx.canvas.width, ch = ctx.canvas.height;
     if (!hlScratch) hlScratch = D.createElement("canvas");
     if (hlScratch.width !== cw || hlScratch.height !== ch) { hlScratch.width = cw; hlScratch.height = ch; }
     var sc = hlScratch.getContext("2d");
-    sc.setTransform(1, 0, 0, 1, 0, 0); sc.clearRect(0, 0, cw, ch); sc.scale(dpr, dpr);
+    sc.setTransform(1, 0, 0, 1, 0, 0); sc.clearRect(0, 0, cw, ch); sc.setTransform(dpr, 0, 0, dpr, -(ox || 0) * dpr, -(oy || 0) * dpr); /* ox/oy: page offset of a viewport tile */
     sc.lineCap = "round"; sc.lineJoin = "round"; sc.globalAlpha = 1;
     list.forEach(function (s) {
       var pts = s.pts || []; if (!pts.length) return;

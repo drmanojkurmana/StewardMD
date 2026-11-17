@@ -1278,7 +1278,7 @@
       es.forEach(function (e) { var n = +e.target.getAttribute("data-n"); if (e.isIntersecting) renderPage(n); else freePage(n); });
     }, { root: V.sc, rootMargin: "150% 0px 150% 0px" });
     for (i = 1; i <= V.n; i++) V.io.observe(V.pg[i].el);
-    V.sc.addEventListener("scroll", function () { if (V.raf) return; V.raf = G.requestAnimationFrame(function () { V.raf = 0; curPage(); }); });
+    V.sc.addEventListener("scroll", function () { scheduleSharp(); if (V.raf) return; V.raf = G.requestAnimationFrame(function () { V.raf = 0; curPage(); }); });
     bindPinch();
     if (V.goto > 1 && V.pg[V.goto]) { V.sc.scrollTop = V.pg[V.goto].el.offsetTop; curPage(); }
     V.sc.addEventListener("pointermove", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
@@ -1323,9 +1323,12 @@
       if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; lv.style.zIndex = "11"; lv.style.pointerEvents = "none"; p.live = lv; p.el.appendChild(lv); }
       bindInk(ov, n); redraw(n);
       if (G.STUDY_INSERT && G.STUDY_INSERT.renderPageItems) G.STUDY_INSERT.renderPageItems(n, p);
-      if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; return drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); }
+      if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); scheduleSharp(); return; }
+      cv.style.visibility = "hidden"; // no blank flash: the old canvas (or the white page) shows until this one is drawn
       p.task = page.render({ canvasContext: cv.getContext("2d"), viewport: vp });
       p.task.promise.then(function () {
+        cv.style.visibility = "";
+        scheduleSharp();
         return !V || V.pg[n] !== p || p.gen !== gen ? null : textLayer(page, p, cw / v1.width);
       }).then(function () { page.cleanup(); }, function () {});
     });
@@ -1336,8 +1339,8 @@
     p.on = false; p.gen++;
     try { if (p.task) p.task.cancel(); } catch (e) {}
     p.task = null;
-    [p.cv, p.tl, p.ov, p.itemLayer, p.live].forEach(function (c) { if (c) { if (c.width !== undefined) c.width = 0; if (c.height !== undefined) c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
-    p.cv = p.tl = p.ov = p.itemLayer = p.live = null;
+    [p.cv, p.tl, p.ov, p.itemLayer, p.live, p.tpdf, p.tink].forEach(function (c) { if (c) { if (c.width !== undefined) c.width = 0; if (c.height !== undefined) c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
+    p.cv = p.tl = p.ov = p.itemLayer = p.live = p.tpdf = p.tink = null; p.trc = null; p.tbg = null;
     if (G.STUDY_INSERT && G.STUDY_INSERT.onPageFree) G.STUDY_INSERT.onPageFree(n);
   }
 
@@ -1380,10 +1383,93 @@
   }
   function layoutZoom(z) {
     var i, cw = V.baseW * z; V.z = z;
+    Object.keys(V.pg).forEach(function (k) { hideTiles(V.pg[k]); });
     for (i = 1; i <= V.n; i++) { var p = V.pg[i]; p.el.style.width = cw + "px"; p.el.style.height = cw * p.ratio + "px"; }
     G.clearTimeout(V.zt);
     V.zt = G.setTimeout(function () { if (!V) return; Object.keys(V.pg).forEach(function (n) { if (V.pg[n].on) rerenderPage(+n); }); }, 120);
     var zl = host.root() && host.root().querySelector("#stZoomLabel"); if (zl) zl.textContent = Math.round(z * 100) + "%";
+  }
+  /* ---- Sharp viewport tiles (GoodNotes-crisp zoom) ----
+     Page canvases are pixel-capped (iPad blanks canvases over ~16.7 M px), so when zoomed they are soft. For the
+     on-screen part of each page two viewport-sized canvases are drawn at full screen resolution:
+       tpdf (just above the page canvas): the PDF / notebook paper;  tink (just above the ink overlay): the ink.
+     The soft ink overlay is clipped out under tink, so ink is never missing while scrolling. Pen input still goes to
+     the ink overlay. Re-drawn after zoom / scroll settles and whenever ink changes (redraw). */
+  function sharpDpr() { return Math.min(G.devicePixelRatio || 1, 2); }
+  function hideTiles(p) {
+    if (!p) return;
+    if (p.tpdf) p.tpdf.style.display = "none";
+    if (p.tink) p.tink.style.display = "none";
+    if (p.ov) setMaskHole(p.ov, null);
+    p.trc = null; p.tgen = (p.tgen || 0) + 1;
+    try { if (p.ttask) p.ttask.cancel(); } catch (e) {}
+  }
+  function setMaskHole(el, rc) {
+    var st = el.style;
+    if (!rc) { ["maskImage", "webkitMaskImage", "maskSize", "webkitMaskSize", "maskPosition", "webkitMaskPosition", "maskRepeat", "webkitMaskRepeat", "maskComposite", "webkitMaskComposite"].forEach(function (k) { st[k] = ""; }); return; }
+    var img = "linear-gradient(#000, #000), linear-gradient(#000, #000)", size = rc.w + "px " + rc.h + "px, 100% 100%", pos = rc.x + "px " + rc.y + "px, 0 0";
+    st.webkitMaskImage = img; st.maskImage = img; st.webkitMaskSize = size; st.maskSize = size; st.webkitMaskPosition = pos; st.maskPosition = pos;
+    st.webkitMaskRepeat = "no-repeat"; st.maskRepeat = "no-repeat"; st.webkitMaskComposite = "xor"; st.maskComposite = "exclude";
+  }
+  function scheduleSharp(ms) { if (!V) return; G.clearTimeout(V.sharpT); V.sharpT = G.setTimeout(sharpenVisible, ms == null ? 110 : ms); }
+  function sharpenVisible() {
+    if (!V || V._pinching || !V.sc) return;
+    var dpr = sharpDpr(), scr = V.sc.getBoundingClientRect();
+    Object.keys(V.pg).forEach(function (k) {
+      var n = +k, p = V.pg[n]; if (!p || !p.on || !p.ov || !p.cv) return;
+      var r = p.el.getBoundingClientRect(); if (!r.width) return;
+      if (p.ov.width / r.width >= dpr * 0.98) { hideTiles(p); return; } // page canvases are already full resolution
+      var x0 = Math.max(0, scr.left - r.left), y0 = Math.max(0, scr.top - r.top), x1 = Math.min(r.width, scr.right - r.left), y1 = Math.min(r.height, scr.bottom - r.top);
+      if (x1 - x0 < 2 || y1 - y0 < 2) { hideTiles(p); return; }
+      x0 = Math.max(0, Math.floor(x0 - 64)); y0 = Math.max(0, Math.floor(y0 - 128)); x1 = Math.min(r.width, Math.ceil(x1 + 64)); y1 = Math.min(r.height, Math.ceil(y1 + 128));
+      if (p.trc && p.trc.W === r.width && p.trc.x <= x0 && p.trc.y <= y0 && p.trc.x + p.trc.w >= x1 && p.trc.y + p.trc.h >= y1) return; // still covered
+      paintTiles(n, p, { x: x0, y: y0, w: x1 - x0, h: y1 - y0, W: r.width, H: r.height }, dpr);
+    });
+  }
+  function tileEl(p, key, z) {
+    if (!p[key]) { var t = D.createElement("canvas"); t.className = "st-tile " + (key === "tink" ? "st-tile-ink" : "st-tile-pdf"); t.style.cssText = "position:absolute;left:0;top:0;pointer-events:none;display:none;z-index:" + z + ";max-width:none"; p[key] = t; }
+    return p[key];
+  }
+  function paintTiles(n, p, rc, dpr) {
+    var gen = (p.tgen = (p.tgen || 0) + 1), pw = Math.round(rc.w * dpr), ph = Math.round(rc.h * dpr);
+    var bg = D.createElement("canvas"); bg.width = pw; bg.height = ph; var b = bg.getContext("2d");
+    var finish = function () {
+      if (!V || p.tgen !== gen || !p.cv || !p.ov) return;
+      var tp = tileEl(p, "tpdf", 1), ti = tileEl(p, "tink", 10);
+      if (tp.parentNode !== p.el || tp.previousSibling !== p.cv) p.el.insertBefore(tp, p.cv.nextSibling);
+      if (ti.parentNode !== p.el || ti.previousSibling !== p.ov) p.el.insertBefore(ti, p.ov.nextSibling);
+      if (tp.width !== pw || tp.height !== ph) { tp.width = pw; tp.height = ph; }
+      tp.getContext("2d").drawImage(bg, 0, 0); bg.width = 0;
+      [tp, ti].forEach(function (t) { t.style.left = rc.x + "px"; t.style.top = rc.y + "px"; t.style.width = rc.w + "px"; t.style.height = rc.h + "px"; t.style.display = ""; });
+      p.trc = rc; p.tdpr = dpr;
+      paintInkTile(n, p);
+    };
+    if (V.pdf) {
+      try { if (p.ttask) p.ttask.cancel(); } catch (e) {}
+      V.pdf.getPage(n).then(function (page) {
+        if (!V || p.tgen !== gen) return;
+        var v1 = page.getViewport({ scale: 1 }), sc = (rc.W / v1.width) * dpr;
+        b.fillStyle = "#fff"; b.fillRect(0, 0, pw, ph);
+        p.ttask = page.render({ canvasContext: b, viewport: page.getViewport({ scale: sc, offsetX: -rc.x * dpr, offsetY: -rc.y * dpr }) });
+        return p.ttask.promise.then(finish);
+      }).then(null, function () {});
+    } else {
+      var pid0 = V.nb ? V.nb.ord[n - 1] : null;
+      b.save(); b.translate(-rc.x * dpr, -rc.y * dpr); drawBg(b, pid0 != null ? tplForPid(pid0) : V.nb.style, V.ratio, rc.W * dpr); b.restore();
+      finish();
+    }
+  }
+  function paintInkTile(n, p) {
+    var t = p.tink, rc = p.trc, dpr = p.tdpr; if (!t || !rc || !p.ov) return;
+    var pw = Math.round(rc.w * dpr), ph = Math.round(rc.h * dpr);
+    if (t.width !== pw || t.height !== ph) { t.width = pw; t.height = ph; }
+    var ctx = t.getContext("2d"); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, pw, ph);
+    ctx.save(); ctx.translate(-rc.x * dpr, -rc.y * dpr);
+    inkInto(ctx, n, rc.W, rc.H, dpr, rc.x, rc.y);
+    ctx.restore();
+    // hide the soft overlay ink where the sharp tile covers it (pointer input still reaches the overlay)
+    // (a mask, not clip-path: clip-path would also stop the pen from hitting the overlay there)
+    setMaskHole(p.ov, rc);
   }
   function setZoom(z) {
     z = Math.max(1, Math.min(4, z)); if (!V || z === V.z) return;
@@ -1465,8 +1551,18 @@
     ctx.restore();
   }
 
+  function inkInto(ctx, n, W, H, dpr, ox, oy) {
+    var ordered = V.strokes.filter(function (s) { return s.page === pid(n) && !s.gone; });
+    ordered.sort(function (a, b) { return (a.tool === "hl" ? 0 : 1) - (b.tool === "hl" ? 0 : 1); });
+    var isSelS = function (s) { return V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1; };
+    var hlLayer = G.STUDY_INK && G.STUDY_INK.drawHlLayer ? ordered.filter(function (s) { return s.tool === "hl" && s.style && !s.shape && !isSelS(s); }) : [];
+    if (hlLayer.length) G.STUDY_INK.drawHlLayer(ctx, hlLayer, W, H, dpr, ox, oy);
+    ordered.forEach(function (s) { if (hlLayer.indexOf(s) === -1) drawStroke(ctx, s, W, H, dpr, isSelS(s)); });
+    if (G.STUDY_SELECT && G.STUDY_SELECT.drawSel) { try { G.STUDY_SELECT.drawSel(ctx, V, W, H, dpr, n); } catch (e) {} }
+  }
   function redraw(n, live, lassoLoop) {
     var p = V && V.pg[n]; if (!p || !p.ov) return;
+    if (p.trc && p.tink) paintInkTile(n, p);
     var ctx = p.ov.getContext("2d"), dpr = p.ov.width / (p.el.clientWidth || 1), W = p.el.clientWidth, H = p.el.clientHeight;
     ctx.clearRect(0, 0, p.ov.width, p.ov.height);
     // Highlighter renders under pen ink and text-layer content visually (multiply on the overlay).
