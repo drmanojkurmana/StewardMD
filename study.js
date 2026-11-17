@@ -1204,8 +1204,14 @@
     if (G.STUDY_INK) return '<div id="stInkCtx" class="st-ink-ctx"></div>';
     var isHl = V && V.tool === "hl", pal = isHl ? HCOLORS : COLORS;
     var cIdx = V ? V.ci : 0;
-    var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#42cdb5");
+    var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#111111");
     return '<div class="st-opt-strip" id="stToolOptions" ' + (V && (V.tool === "pen" || V.tool === "hl") ? "" : 'hidden') + '>' +
+      '<div class="st-widths-row">' +
+        [0, 1, 2].map(function (i) {
+          return '<button type="button" class="st-b st-w' + (V && V.wi === i ? ' on' : '') + '" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + ((i + 1) * 2 + 1) + 'px"></i></button>';
+        }).join("") +
+      '</div>' +
+      '<span class="st-sep"></span>' +
       '<div class="st-colors-row">' +
         pal.map(function (c, i) {
           return '<button type="button" class="st-b st-c' + (cIdx === i ? ' on' : '') + '" data-act="st-color" data-v="' + i + '" aria-label="Colour ' + (i + 1) + '" style="--c:' + c + '"></button>';
@@ -1213,12 +1219,6 @@
         '<label class="st-c st-c-custom' + (cIdx === -1 ? ' on' : '') + '" title="Custom colour" aria-label="Custom colour" style="--c:' + custCol + '">' +
           '<input type="color" id="stColorPicker" value="' + custCol + '" aria-label="Choose colour">' +
         '</label>' +
-      '</div>' +
-      '<span class="st-sep"></span>' +
-      '<div class="st-widths-row">' +
-        [0, 1, 2].map(function (i) {
-          return '<button type="button" class="st-b st-w' + (V && V.wi === i ? ' on' : '') + '" data-act="st-width" data-v="' + i + '" aria-label="Width ' + (i + 1) + '"><i style="height:' + ((i + 1) * 2 + 1) + 'px"></i></button>';
-        }).join("") +
       '</div>' +
     '</div>';
   }

@@ -186,11 +186,12 @@
         '<span class="st-ink-hint">Tap the eraser again for more options</span></div>';
     }
     var ts = toolSettings(s, tool), pal = tool === "hl" ? HL_COLORS : PEN_COLORS;
-    var html = '<div class="st-ink-strip" role="group" aria-label="' + (tool === "hl" ? "Highlighter" : "Pen") + ' options"><div class="st-ink-colors">' +
+    var html = '<div class="st-ink-strip" role="group" aria-label="' + (tool === "hl" ? "Highlighter" : "Pen") + ' options">' +
+      '<div class="st-ink-widths" role="group" aria-label="Width presets">' + ts.widths.map(function (w, i) { return '<button type="button" class="st-ink-w' + (ts.wi === i ? " on" : "") + '" data-ink="width" data-v="' + i + '" aria-label="Width preset ' + (i + 1) + ', long press to edit" aria-pressed="' + (ts.wi === i) + '"><i style="height:' + Math.max(2, Math.round(w * 900)) + 'px"></i></button>'; }).join("") + "</div>" +
+      '<span class="st-ink-divider" aria-hidden="true"></span><div class="st-ink-colors">' +
       pal.map(function (c) { return '<button type="button" class="st-ink-c' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Colour ' + c + '" aria-pressed="' + (ts.color === c) + '" style="--c:' + c + '"></button>'; }).join("") +
       (s.recents || []).map(function (c) { return '<button type="button" class="st-ink-c recent' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Recent colour ' + c + '" style="--c:' + c + '"></button>'; }).join("") +
       '<label class="st-ink-custom" title="Custom colour"><input type="color" data-ink-custom value="' + esc(ts.color) + '" aria-label="Custom colour wheel"><input type="text" data-ink-hex value="' + esc(ts.color) + '" aria-label="Custom colour hex" maxlength="7" spellcheck="false"></label></div>' +
-      '<div class="st-ink-widths" role="group" aria-label="Width presets">' + ts.widths.map(function (w, i) { return '<button type="button" class="st-ink-w' + (ts.wi === i ? " on" : "") + '" data-ink="width" data-v="' + i + '" aria-label="Width preset ' + (i + 1) + ', long press to edit" aria-pressed="' + (ts.wi === i) + '"><i style="height:' + Math.max(2, Math.round(w * 900)) + 'px"></i></button>'; }).join("") + "</div>" +
       '<span class="st-ink-hint">Tap the ' + (tool === "hl" ? "highlighter" : "pen") + " again for settings</span></div>";
     return html;
   }
