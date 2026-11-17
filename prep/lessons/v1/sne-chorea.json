@@ -1,0 +1,352 @@
+{
+ "v": 1,
+ "module": "sne-chorea",
+ "title": "Chorea and Huntington disease",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Chorea** is an involuntary, irregular, dance-like movement disorder with flowing unpredictable fragments. It is the hyperkinetic counterpart of dystonia and is produced by striatal dysfunction. **Huntington disease** is the archetypal cause of adult chorea with autosomal dominant inheritance. Gait instability and inability to sustain voluntary contraction are the bedside clues.",
+   "say": "Chorea is an involuntary, irregular, dance-like movement disorder with flowing unpredictable fragments. It is the hyperkinetic counterpart of dystonia and is produced by striatal dysfunction. Huntington disease is the archetypal cause of adult chorea with autosomal dominant inheritance. Gait instability and inability to sustain voluntary contraction are the bedside clues.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/huntington-disease-fig1.webp",
+    "alt": "Brain imaging showing caudate atrophy characteristic of Huntington disease.",
+    "caption": "Caudate atrophy on imaging is characteristic of Huntington disease (StewardMD).",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Huntington disease** is caused by a **CAG trinucleotide repeat** expansion in the huntingtin gene on a numbered chromosome. Longer repeats cause earlier onset, known as anticipation, with paternal transmission worst. The triad is chorea, psychiatric disturbance, and cognitive decline. Caudate atrophy with box shaped ventricles is the imaging hallmark.",
+   "say": "Huntington disease is caused by a CAG trinucleotide repeat expansion in the huntingtin gene on a numbered chromosome. Longer repeats cause earlier onset, known as anticipation, with paternal transmission worst. The triad is chorea, psychiatric disturbance and cognitive decline. Caudate atrophy with box shaped ventricles is the imaging hallmark.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Pattern",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Repeat length",
+      "Longer repeats, earlier onset",
+      "Anticipation in the family"
+     ],
+     [
+      "Paternal transmission",
+      "Worst anticipation",
+      "Juvenile form in children"
+     ],
+     [
+      "Caudate atrophy",
+      "Box shaped ventricles",
+      "Imaging hallmark"
+     ],
+     [
+      "Triad",
+      "Chorea, psychiatry, cognition",
+      "Full presentation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sydenham chorea** is the paediatric form linked to preceding **group A streptococcal infection** and rheumatic fever. It is a post infectious autoimmune process affecting the basal ganglia. Carditis accompanies it in a substantial minority and needs cardiac evaluation. The course is self limiting over months, but recurrence follows reinfection.",
+   "say": "Sydenham chorea is the paediatric form linked to preceding group A streptococcal infection and rheumatic fever. It is a post infectious autoimmune process affecting the basal ganglia. Carditis accompanies it in a substantial minority and needs cardiac evaluation. The course is self limiting over months, but recurrence follows reinfection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Group A streptococcal pharyngitis"
+     },
+     {
+      "id": "b",
+      "label": "Autoimmune basal ganglia injury"
+     },
+     {
+      "id": "c",
+      "label": "Chorea with hypotonia"
+     },
+     {
+      "id": "d",
+      "label": "Cardiac evaluation completed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chorea acanthocytosis** links choreoacanthocytosis with acanthocytes on the blood film and seizures. **Benign hereditary chorea** is a nonprogressive autosomal dominant chorea of childhood onset. **Neuroacanthocytosis syndromes** share the acanthocyte finding. **Tardive dyskinesia** after dopamine blockers mimics chorea and reverses on withdrawal.",
+   "say": "Chorea acanthocytosis links choreoacanthocytosis with acanthocytes on the blood film and seizures. Benign hereditary chorea is a nonprogressive autosomal dominant chorea of childhood onset. Neuroacanthocytosis syndromes share the acanthocyte finding. Tardive dyskinesia after dopamine blockers is a chorea mimic and reverses on withdrawal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Blood or lab clue",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Chorea acanthocytosis",
+      "Acanthocytes present",
+      "Progressive with seizures"
+     ],
+     [
+      "Benign hereditary chorea",
+      "No abnormal blood finding",
+      "Nonprogressive childhood chorea"
+     ],
+     [
+      "Sydenham chorea",
+      "Raised streptococcal titres",
+      "Self limiting with carditis risk"
+     ],
+     [
+      "Tardive dyskinesia",
+      "Drug history",
+      "Reverses on withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Reversible causes** of chorea must be checked before assuming genetic disease. **Hyperthyroidism**, **hyperglycaemia**, **hyperkalaemia**, and **pregnancy** are the metabolic mimics. **Antiphospholipid syndrome** causes chorea with livedo and recurrent loss. Each reverses with treatment of the cause, which is why the workup matters.",
+   "say": "Reversible causes of chorea must be checked before assuming genetic disease. Hyperthyroidism, hyperglycaemia, hyperkalaemia and pregnancy are the metabolic mimics. Antiphospholipid syndrome causes chorea with livedo and recurrent loss. Each reverses with treatment of the cause, which is why the workup matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Screening test",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Hyperthyroidism",
+      "Thyroid function tests",
+      "Treat the thyroid"
+     ],
+     [
+      "Hyperglycaemia",
+      "Glucose and ketones",
+      "Medical treatment and fluids"
+     ],
+     [
+      "Hyperkalaemia",
+      "Serum potassium",
+      "Medical correction"
+     ],
+     [
+      "Pregnancy",
+      "Pregnancy test",
+      "Delivery or supportive care"
+     ],
+     [
+      "Antiphospholipid syndrome",
+      "Antibody panel",
+      "Anticoagulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Treatment** of Huntington chorea uses dopamine depleting drugs, with **tetrabenazine** as the classic agent. **Deutetrabenazine** is the newer equivalent with better tolerability. Antipsychotics are alternatives where depression is present. No drug alters progression, so genetic counselling and family support are central.",
+   "say": "Treatment of Huntington chorea uses dopamine depleting drugs, with tetrabenazine as the classic agent. Deutetrabenazine is the newer equivalent with better tolerability. Antipsychotics are alternatives where depression is present. No drug alters progression, so genetic counselling and family support are central.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Action",
+     "Caution"
+    ],
+    "rows": [
+     [
+      "Tetrabenazine",
+      "Dopamine depletion",
+      "Depression, suicidality"
+     ],
+     [
+      "Deutetrabenazine",
+      "Dopamine depletion",
+      "Sedation, akathisia"
+     ],
+     [
+      "Antipsychotics",
+      "Dopamine blockade",
+      "Parkinsonism, tardive dyskinesia"
+     ],
+     [
+      "Antidepressants",
+      "Mood symptoms",
+      "Serotonin syndrome in combination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Genetic counselling** is mandatory for Huntington families because predictive testing affects relatives and offspring. Longer repeats give earlier onset disease, with an inverse relation to the repeat count. **Psychiatric symptoms** often precede chorea by years and dominate the burden. Suicide risk is elevated and needs explicit assessment.",
+   "say": "Genetic counselling is mandatory for Huntington families because predictive testing affects relatives and offspring. Longer repeats give earlier onset disease, with an inverse relation to the repeat count. The psychiatric phase is present for years before chorea in many families and dominates the burden of disease. Suicide risk is elevated and needs explicit assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Family history of chorea"
+     },
+     {
+      "id": "b",
+      "label": "Predictive genetic testing offered"
+     },
+     {
+      "id": "c",
+      "label": "Repeat count determines onset"
+     },
+     {
+      "id": "d",
+      "label": "Counselling for offspring and relatives"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test inheritance and the paediatric form. Huntington chorea is genetically dominant and anticipation is paternal in transmission. Sydenham chorea is the streptococcal paediatric form with carditis. Acanthocytes point to neuroacanthocytosis rather than Huntington disease, and benign hereditary chorea does not progress. Each distractor produces a different answer.",
+   "say": "Traps test inheritance and the paediatric form. Huntington chorea is genetically dominant and anticipation is paternal in transmission. Sydenham chorea is the streptococcal paediatric form with carditis. Acanthocytes point to neuroacanthocytosis rather than Huntington disease, and benign hereditary chorea does not progress. Each distractor produces a different answer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Childhood chorea after sore throat",
+      "Huntington disease",
+      "Sydenham chorea"
+     ],
+     [
+      "Acanthocytes on film",
+      "Huntington disease",
+      "Neuroacanthocytosis"
+     ],
+     [
+      "Paternal anticipation",
+      "Maternal inheritance",
+      "Paternal transmission worst"
+     ],
+     [
+      "Nonprogressive hereditary chorea",
+      "Huntington disease",
+      "Benign hereditary chorea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** in Huntington disease is measured in decades, with death usually from aspiration or intercurrent infection. **Juvenile Huntington disease** with long repeats progresses fast and presents with rigidity rather than chorea. **Chorea acanthocytosis** is progressive with seizures and dysphagia. **Sydenham chorea** remits in most patients with continuous antibacterial prophylaxis.",
+   "say": "Prognosis in Huntington disease is measured in decades, with death usually from aspiration or intercurrent infection. Juvenile Huntington disease with long repeats progresses fast and presents with rigidity rather than chorea. Chorea acanthocytosis is progressive with seizures and dysphagia. Sydenham chorea is self limiting in most patients receiving continuous antibacterial prophylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Course",
+     "Usual cause of death"
+    ],
+    "rows": [
+     [
+      "Adult Huntington disease",
+      "Decades, slow progression",
+      "Aspiration, infection"
+     ],
+     [
+      "Juvenile Huntington disease",
+      "Rapid, rigid presentation",
+      "Intercurrent infection"
+     ],
+     [
+      "Chorea acanthocytosis",
+      "Progressive with dysphagia",
+      "Aspiration"
+     ],
+     [
+      "Sydenham chorea",
+      "Remission expected",
+      "Cardiac disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** CAG repeat expansion in huntingtin is the Huntington mechanism, and anticipation is paternal. Sydenham chorea is post streptococcal with carditis, acanthocytes mean neuroacanthocytosis, and benign hereditary chorea does not progress. Tetrabenazine is the chorea treatment, and caudate atrophy with box ventricles is the imaging hallmark.",
+   "say": "High yield for the exam: CAG repeat expansion in huntingtin is the Huntington mechanism and anticipation is paternal. Sydenham chorea is post streptococcal with carditis, acanthocytes mean neuroacanthocytosis and benign hereditary chorea does not progress. Tetrabenazine is the chorea treatment and caudate atrophy with box ventricles is the imaging hallmark.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Huntington mechanism",
+      "CAG trinucleotide repeat",
+      "Autosomal dominant inheritance"
+     ],
+     [
+      "Anticipation",
+      "Paternal transmission worst",
+      "Earlier onset in children"
+     ],
+     [
+      "Paediatric form",
+      "Sydenham chorea",
+      "Post streptococcal, carditis"
+     ],
+     [
+      "Acanthocytes",
+      "Neuroacanthocytosis",
+      "Seizures with chorea"
+     ],
+     [
+      "Treatment",
+      "Tetrabenazine, deutetrabenazine",
+      "No disease modification"
+     ],
+     [
+      "Imaging",
+      "Caudate atrophy, box ventricles",
+      "Huntington hallmark"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
