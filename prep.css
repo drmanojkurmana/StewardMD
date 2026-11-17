@@ -1715,6 +1715,58 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-figgo-t small { color: var(--pn-mut); }
 .pn-root .pn-vfigx figcaption { padding: 8px 2px 0; }
 
+/* ---- Learn more (owner 2026-11-17: "consistent spacing, alignment, touch targets and typography"; "Learn more becomes a
+   distinct section rather than a collection of floating buttons"). One titled group under the explanation: Know more
+   targets, the interactive figure and Ask MaiK are rows of one inset list, each 60px tall, a 32px icon tile on a single
+   left edge, title over its kind, a chevron on the right, hairlines between. The ID sits below as a quiet meta line.
+   Selectors carry .pn-lm-list so they outrank the older per-button looks (dark Know more card, the Ask MaiK pill). */
+.pn-root .pn-lm { margin: 10px 0 0; }
+.pn-root .pn-fb .pn-lm .pn-lm-h { margin: 0 0 8px; padding-top: 0; }
+html body .pn-root .pn-lm .pn-lm-list { display: flex; flex-direction: column; gap: 8px; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km, .pn-km-row, .pn-km-duo, .pn-km-proto-row, .pn-figrow) { display: contents; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-h, .pn-km-count), html body .pn-root .pn-lm .pn-lm-list .pn-figchip > span[aria-hidden] { display: none; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: auto auto; gap: 1px 14px; align-items: center; align-content: center;
+  justify-content: stretch; width: 100%; max-width: none; min-height: 60px; margin: 0; padding: 10px 44px 10px 14px; box-sizing: border-box;
+  border: 1px solid var(--pn-edge); border-radius: 14px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgb(148,154,168)' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat right 16px center / 16px 16px, var(--pn-lm-bg);
+  color: var(--pn-text); text-align: left; font: inherit; white-space: normal; transform: none; -webkit-tap-highlight-color: transparent; box-shadow: var(--pn-lm-sh); transition: transform .12s ease, box-shadow .12s ease; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]):active { transform: translateY(1px); box-shadow: var(--pn-lm-sh-on); }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]):focus-visible { outline: 2px solid var(--pn-pri); outline-offset: -2px; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > :is(b, small, span:not(.pt-av)) { grid-column: 2; min-width: 0; margin: 0; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > :only-child, html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > b:last-child:first-of-type { grid-row: 1 / span 2; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) b, html body .pn-root .pn-lm .pn-lm-list .pa-ask > span:not(.pt-av) { font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--pn-text); overflow-wrap: anywhere; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) small { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--pn-mut); overflow-wrap: anywhere; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > small:first-child { grid-row: 2; }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > small:first-child + b { grid-row: 1; }
+html body .pn-root .pn-lm .pn-lm-list .pa-ask > .pt-av { grid-column: 1; grid-row: 1 / span 2; width: 32px; height: 32px; border-radius: 10px; }
+html body .pn-root .pn-lm .pn-lm-list .pa-ask > span:not(.pt-av) { grid-row: 1 / span 2; }
+/* 3D (owner 2026-11-17: "give 3D effect and differentiation between buttons, a line at least"): every row is its own
+   raised key: a top-lit surface, a hairline edge, a soft drop below and a bright top lip; it sinks 1px when pressed.
+   The icon tiles are lit the same way. */
+.pn-root .pn-lm { --pn-lm-bg: linear-gradient(180deg, var(--pn-card) 0%, var(--pn-s1) 100%);
+  --pn-lm-sh: inset 0 1px 0 rgba(255, 255, 255, .9), 0 1px 1px rgba(19, 32, 61, .06), 0 4px 10px -4px rgba(19, 32, 61, .16);
+  --pn-lm-sh-on: inset 0 1px 2px rgba(19, 32, 61, .12), 0 0 0 rgba(19, 32, 61, 0);
+  --pn-lm-tile-sh: inset 0 1px 0 rgba(255, 255, 255, .7), inset 0 -1px 0 rgba(19, 32, 61, .08), 0 1px 2px rgba(19, 32, 61, .12); }
+body.dark .pn-root .pn-lm { --pn-lm-bg: linear-gradient(180deg, color-mix(in srgb, var(--pn-s1) 82%, white) 0%, var(--pn-s1) 100%);
+  --pn-lm-sh: inset 0 1px 0 rgba(255, 255, 255, .07), 0 1px 1px rgba(0, 0, 0, .35), 0 6px 14px -6px rgba(0, 0, 0, .6);
+  --pn-lm-sh-on: inset 0 2px 4px rgba(0, 0, 0, .45);
+  --pn-lm-tile-sh: inset 0 1px 0 rgba(255, 255, 255, .12), 0 1px 2px rgba(0, 0, 0, .4); }
+/* The icon tile: the tint is ::before, the glyph (masked, in the accent) is ::after over it. */
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, [data-act="teach"])::before { content: ""; grid-column: 1; grid-row: 1 / span 2; width: 32px; height: 32px; border-radius: 10px; background: var(--pn-pri-soft); box-shadow: var(--pn-lm-tile-sh); }
+html body .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, [data-act="teach"])::after { content: ""; position: absolute; left: 23px; top: 50%; width: 18px; height: 18px; margin-top: -9px; background: var(--pn-pri);
+  -webkit-mask: var(--pn-lm-i, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5zM12 6v13.5'/%3E%3C/svg%3E")) center / contain no-repeat; mask: var(--pn-lm-i, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5zM12 6v13.5'/%3E%3C/svg%3E")) center / contain no-repeat; }
+html body .pn-root .pn-lm .pn-lm-list [data-act="l-open"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 9.5 12 5l10 4.5L12 14zM6 11.5V16c3.5 2.5 8.5 2.5 12 0v-4.5M22 9.5V15'/%3E%3C/svg%3E"); }
+html body .pn-root .pn-lm .pn-lm-list [data-act="r-drug"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.5 20.5a5 5 0 0 1-7-7l7-7a5 5 0 0 1 7 7zM7 10l7 7'/%3E%3C/svg%3E"); }
+html body .pn-root .pn-lm .pn-lm-list :is([data-act="r-proto"], [data-act="r-cancer-protocols"]) { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 3h6v3H9zM7 4.5H5.5v16.5h13V4.5H17M8.5 11h7M8.5 15h5'/%3E%3C/svg%3E"); }
+html body .pn-root .pn-lm .pn-lm-list [data-act="k-open"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 7.5h12.5v13H3.5zM8 3.5h12.5v13'/%3E%3C/svg%3E"); }
+html body .pn-root .pn-lm .pn-lm-list [data-act="n360-topic"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18'/%3E%3C/svg%3E"); }
+html body .pn-root .pn-lm .pn-lm-list .pn-figchip { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M8 5.5v13l10.5-6.5z'/%3E%3C/svg%3E"); }
+html body .pn-root .pn-lm .pn-lm-list .pn-km-more { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z'/%3E%3C/svg%3E"); }
+/* A module-level fallback row: the same shape, a neutral tile (it is not about this question). */
+html body .pn-root .pn-lm .pn-lm-list .pn-km-fb::before { background: var(--pn-s2); }
+html body .pn-root .pn-lm .pn-lm-list .pn-km-fb::after { background: var(--pn-mut); }
+/* The ID: a quiet meta line on the same left edge as everything above, still a 44px copy target. */
+.pn-root .pn-run .pn-fb > .pi-chip { align-self: flex-start; margin: 4px 0 0; padding: 0 2px; background: transparent; color: var(--pn-mut); }
+
 /* ---- Reasoning explanations (prep-reason.js): scannable sections, collapsed wrong-option rows, Learn more,
    the one next action, related questions. Old items never match these selectors, so they render as before. ---- */
 .pn-root .pn-rlo { display: flex; flex-direction: column; gap: 2px; font-size: 14.5px; line-height: 1.55; color: var(--pn-text); }
@@ -1984,47 +2036,6 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
    native-feel.css makes every [data-act] user-select:none, so a long-press could only select the spaces BETWEEN
    sentences: the striped, broken selection. The sentences, their bold terms and highlights are text again. */
 .pn-root .pn-lsn-tx, .pn-root .pn-lsn-tx .pn-sent, .pn-root .pn-lsn-tx .pn-sent * { -webkit-user-select: text !important; user-select: text !important; -webkit-touch-callout: none; }
-/* ---- Learn more (owner 2026-11-17: "consistent spacing, alignment, touch targets and typography"; "Learn more becomes a
-   distinct section rather than a collection of floating buttons"). One titled group under the explanation: Know more
-   targets, the interactive figure and Ask MaiK are rows of one inset list, each 60px tall, a 32px icon tile on a single
-   left edge, title over its kind, a chevron on the right, hairlines between. The ID sits below as a quiet meta line.
-   Selectors carry .pn-lm-list so they outrank the older per-button looks (dark Know more card, the Ask MaiK pill). */
-.pn-root .pn-lm { margin: 10px 0 0; }
-.pn-root .pn-fb .pn-lm .pn-lm-h { margin: 0 0 8px; padding-top: 0; }
-html .pn-root .pn-lm .pn-lm-list { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--pn-r-lg); background: var(--pn-s1); }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km, .pn-km-row, .pn-km-duo, .pn-km-proto-row, .pn-figrow) { display: contents; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-h, .pn-km-count), html .pn-root .pn-lm .pn-lm-list .pn-figchip > span[aria-hidden] { display: none; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); grid-template-rows: auto auto; gap: 1px 14px; align-items: center; align-content: center;
-  justify-content: stretch; width: 100%; max-width: none; min-height: 60px; margin: -1px 0 0; padding: 10px 44px 10px 16px; box-sizing: border-box;
-  border: 0; border-top: 1px solid var(--pn-line); border-radius: 0; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgb(148,154,168)' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat right 16px center / 16px 16px;
-  color: var(--pn-text); text-align: left; font: inherit; white-space: normal; transform: none; -webkit-tap-highlight-color: transparent; transition: background-color .15s ease; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]):active { background-color: var(--pn-s2); transform: none; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]):focus-visible { outline: 2px solid var(--pn-pri); outline-offset: -2px; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > :is(b, small, span:not(.pt-av)) { grid-column: 2; min-width: 0; margin: 0; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > :only-child, html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > b:last-child:first-of-type { grid-row: 1 / span 2; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) b, html .pn-root .pn-lm .pn-lm-list .pa-ask > span:not(.pt-av) { font-size: 15px; font-weight: 600; line-height: 1.3; color: var(--pn-text); overflow-wrap: anywhere; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) small { font-size: 13px; font-weight: 500; line-height: 1.35; color: var(--pn-mut); overflow-wrap: anywhere; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > small:first-child { grid-row: 2; }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, .pa-ask, [data-act="teach"]) > small:first-child + b { grid-row: 1; }
-html .pn-root .pn-lm .pn-lm-list .pa-ask > .pt-av { grid-column: 1; grid-row: 1 / span 2; width: 32px; height: 32px; border-radius: 10px; }
-html .pn-root .pn-lm .pn-lm-list .pa-ask > span:not(.pt-av) { grid-row: 1 / span 2; }
-/* The icon tile: the tint is ::before, the glyph (masked, in the accent) is ::after over it. */
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, [data-act="teach"])::before { content: ""; grid-column: 1; grid-row: 1 / span 2; width: 32px; height: 32px; border-radius: 10px; background: var(--pn-pri-soft); }
-html .pn-root .pn-lm .pn-lm-list :is(.pn-km-btn, .pn-figchip, [data-act="teach"])::after { content: ""; position: absolute; left: 23px; top: 50%; width: 18px; height: 18px; margin-top: -9px; background: var(--pn-pri);
-  -webkit-mask: var(--pn-lm-i, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5zM12 6v13.5'/%3E%3C/svg%3E")) center / contain no-repeat; mask: var(--pn-lm-i, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 5.5C4.5 4 8 4 12 6c4-2 7.5-2 10-.5V19c-2.5-1.5-6-1.5-10 .5-4-2-7.5-2-10-.5zM12 6v13.5'/%3E%3C/svg%3E")) center / contain no-repeat; }
-html .pn-root .pn-lm .pn-lm-list [data-act="l-open"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 9.5 12 5l10 4.5L12 14zM6 11.5V16c3.5 2.5 8.5 2.5 12 0v-4.5M22 9.5V15'/%3E%3C/svg%3E"); }
-html .pn-root .pn-lm .pn-lm-list [data-act="r-drug"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.5 20.5a5 5 0 0 1-7-7l7-7a5 5 0 0 1 7 7zM7 10l7 7'/%3E%3C/svg%3E"); }
-html .pn-root .pn-lm .pn-lm-list :is([data-act="r-proto"], [data-act="r-cancer-protocols"]) { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 3h6v3H9zM7 4.5H5.5v16.5h13V4.5H17M8.5 11h7M8.5 15h5'/%3E%3C/svg%3E"); }
-html .pn-root .pn-lm .pn-lm-list [data-act="k-open"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 7.5h12.5v13H3.5zM8 3.5h12.5v13'/%3E%3C/svg%3E"); }
-html .pn-root .pn-lm .pn-lm-list [data-act="n360-topic"] { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18'/%3E%3C/svg%3E"); }
-html .pn-root .pn-lm .pn-lm-list .pn-figchip { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M8 5.5v13l10.5-6.5z'/%3E%3C/svg%3E"); }
-html .pn-root .pn-lm .pn-lm-list .pn-km-more { --pn-lm-i: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z'/%3E%3C/svg%3E"); }
-/* A module-level fallback row: the same shape, a neutral tile (it is not about this question). */
-html .pn-root .pn-lm .pn-lm-list .pn-km-fb::before { background: var(--pn-s2); }
-html .pn-root .pn-lm .pn-lm-list .pn-km-fb::after { background: var(--pn-mut); }
-/* The ID: a quiet meta line on the same left edge as everything above, still a 44px copy target. */
-.pn-root .pn-run .pn-fb > .pi-chip { align-self: flex-start; margin: 4px 0 0; padding: 0 2px; background: transparent; color: var(--pn-mut); }
-
 /* ---- Why option chips (free stored explanation) ---- */
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-why-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }

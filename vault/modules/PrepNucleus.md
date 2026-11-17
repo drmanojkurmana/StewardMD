@@ -2039,7 +2039,7 @@ a collection of floating buttons". Under every answered MCQ (practice, review, t
 the Know more slot, the interactive-figure row and Ask MaiK in `<section class="pn-lm">` titled "Learn more". CSS
 (`prep.css`, before the Why chips block) flattens the Know more rows (`display: contents`) into one inset list: 60px
 rows, 32px icon tile per kind (book, lesson, drug, protocol, cards, Nucleus360, figure, more), title over kind, chevron,
-hairlines. Fallback rows keep a neutral tile. The ID chip is a quiet left-aligned line. Inner label markup unchanged
+hairlines. Fallback rows keep a neutral tile. Then (owner: "3D effect and differentiation between buttons") each row became its own raised key: top-lit gradient, hairline edge, soft drop, 1px press; block now sits before "Reasoning explanations" (that block bans shadows) with an `html body` specificity bump. The ID chip is a quiet left-aligned line. Inner label markup unchanged
 (tests pin it); icons are masked pseudo-elements. Items with the reasoning body (RX) keep Know more inside `.pn-rx`; the
 group then holds the figure and Ask MaiK. Known: `run-prep-relabel-ui` q4 and `run-beta-figure-ui` paracetamol fail on
 main before this change.
