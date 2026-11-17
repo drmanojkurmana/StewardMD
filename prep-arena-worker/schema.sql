@@ -214,3 +214,7 @@ CREATE TABLE IF NOT EXISTS play_mn_report (
   at INTEGER NOT NULL,
   PRIMARY KEY (mn, uidh)
 );
+
+-- PrepReels shares (migrations/0008_shares.sql)
+CREATE TABLE IF NOT EXISTS social_shares (id INTEGER PRIMARY KEY AUTOINCREMENT, from_uidh TEXT NOT NULL, to_uidh TEXT NOT NULL, ref TEXT NOT NULL, at INTEGER NOT NULL);
+CREATE INDEX IF NOT EXISTS social_shares_to ON social_shares (to_uidh, at);

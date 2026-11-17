@@ -65,11 +65,16 @@ try {
   ok(await until(`return !!(window.PREP_MEDIGRAM && window.PREP_MG_DATA);`, 20000), "PREP_MEDIGRAM and PREP_MG_DATA loaded");
   ok(reqs.some((u) => /prep-medigram\.js/.test(u)), "prep-loader fetched prep-medigram.js with the flag on");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 20000), "home shows the PrepReels row");
+  // Friends API stubbed (no Firebase user here): one friend, one card a friend sent, sends recorded.
+  await ev(`window.__sent=[]; window.__seen=[]; if (!window.PrepSocial) window.PrepSocial = {}; window.PrepSocial.api = function(m, p, b){ if (p === "friends") return Promise.resolve({ friends: [{ smdId: "SMD-BBBBBB", name: "Bilal K" }] }); if (p === "shares") return Promise.resolve({ shares: [{ id: 7, from: { name: "Asha Rao" }, ref: { k: "q", s: "anatomy", m: "ana-bones-ossification", id: "ana-bones-ossification-3" } }] }); if (p === "shares/seen") { window.__seen.push(b); return Promise.resolve({ ok: true }); } if (p === "share") { window.__sent.push(b); return Promise.resolve({ ok: true }); } return Promise.reject({ status: 404 }); }; return 1;`);
   await click("#smdPrep [data-act=mg-open]");
   ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > 5;`, 20000), "PrepReels opens on a reel built from the bank");
   const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('pn-mg-lib')?'lib':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
   ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  ok(await ev(`var f=document.querySelector('#smdPrep #pnMgFeed .vf-c .pn-mg-from'); return !!f && /Sent by Asha Rao/.test(f.textContent) && /ana-bones-ossification/.test(document.querySelector('#smdPrep #pnMgFeed .vf-c .vf-stem').textContent);`) === true, "a card a friend sent comes first, marked with who sent it");
+  ok(await until(`return window.__seen.length === 1 && window.__seen[0].ids[0] === 7;`, 3000), "and leaves the inbox once shown");
+  ok(await ev(`return [].every.call(document.querySelectorAll('#smdPrep #pnMgFeed .vf-c:not(.vf-end)'), function(c){ return !!c.querySelector('[data-act=mg-like]') && !!c.querySelector('[data-act=mg-share]'); });`) === true, "every card has Like and Share");
   ok(await ev(`var c=document.querySelectorAll('#smdPrep .pn-mg-lib'); return c.length >= 2 && [].every.call(c, function(x){ return !!x.querySelector('img') && x.querySelector('.vf-stem').textContent.length > 2; });`) === true, "Image Library pictures show in the reel with their title");
   ok(await ev(`return [].some.call(document.querySelectorAll('#smdPrep .pn-mg-lib'), function(x){ return !!x.querySelector('.pn-mg-cap') || !!x.querySelector('[data-act=mg-lib-art],[data-act=mg-lib-les]'); });`) === true, "they come explained: caption, article or lesson");
   ok(await ev(`var b=document.querySelector('#pnMgFeed').getBoundingClientRect(); return b.bottom <= innerHeight + 8 && b.height > 300;`) === true, "the reel ends at the bottom of the screen (no card cut off; under 8 px of padding may tuck under)");
@@ -84,6 +89,17 @@ try {
   await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-next]");
   ok(await until(`return document.querySelector('#pnMgFeed').scrollTop > ${top0} + 100;`, 4000), "Next after an answer moves to the next card");
   await ev(`document.querySelector('#pnMgFeed').scrollTop=0; return 1;`);
+  const n0c = await ev(`return PREP_MEDIGRAM._s().cards.length;`);
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-like]");
+  ok(await until(`var s=PREP_MEDIGRAM._s(); return s.cards.length === ${n0c} + 2 && s.cards[1].more === 1 && s.cards[2].more === 1 && s.cards[1].it._m === s.cards[0].it._m;`, 5000), "Like brings 2 more questions on the same topic right after it");
+  ok(await ev(`var s=PREP._host.store(); return (s.mgtop||[]).some(function(t){ return t.m === PREP_MEDIGRAM._s().cards[0].it._m; }) && /Liked/.test(document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-like]").textContent);`) === true, "the liked topic is remembered for the next batches");
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-save]");
+  ok(await ev(`var s=PREP._host.store(), id=PREP_MEDIGRAM._s().cards[0].it.id; return !!s.bm[id] && Object.keys(s.mgsv||{}).length === 1;`) === true, "Save puts the question in PrepNucleus Bookmarks and the Saved reel");
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-share]");
+  ok(await until(`var p=document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .pn-mg-share"); return !!p && !!p.querySelector('[data-act=mg-sh-wa]') && !!p.querySelector('[data-act=mg-sh-more]') && !!p.querySelector('[data-act=mg-sh-fr][data-v="SMD-BBBBBB"]') && !!p.querySelector('[data-act=mg-sh-add]');`, 4000), "Share offers WhatsApp, other apps, StewardMD friends and Add a friend");
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-sh-fr]");
+  ok(await until(`var b=window.__sent[0]; return !!b && b.smdId === "SMD-BBBBBB" && b.ref.k === "q" && !!b.ref.id && Object.keys(b).length === 2 && !b.ref.q;`, 3000), "sending to a friend sends a reference only, never the content");
+  ok(await ev(`var v=document.querySelector('#smdPrep .pn-mg-vid'); if(!v) return true; return !!v.querySelector('[data-act=mg-like]');`) === true, "video cards have the actions too");
   ok(await ev(`return /of 1 right/.test(document.querySelector("#smdPrep .pn-t p").textContent);`) === true, "the bar keeps score");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).length > 0;`) === true, "the answer wrote an FSRS card row (" + subj + ")");
   // Video: scrolling a video card into view mounts the https shim (never a direct YouTube embed from the app origin).
@@ -162,6 +178,12 @@ try {
   shimSilent = false;
   await click("#smdPrep [data-act=mg-done]");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 8000), "Finish returns to the PrepNucleus home");
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-saved]');`, 4000), "home shows Saved from PrepReels");
+  await click("#smdPrep [data-act=mg-saved]");
+  ok(await until(`var s=PREP_MEDIGRAM._s(); return !!s && s.mode === "saved" && s.cards.length === 1 && s.cards[0].kind === "q";`, 6000), "the Saved reel shows exactly what was saved");
+  ok(await ev(`return !document.querySelector('#smdPrep [data-act=mg-more]');`) === true, "the Saved reel has no Keep going");
+  await click("#smdPrep [data-act=mg-done]");
+  await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 6000);
   // Smart Break: sub-flag on, 3-minute timer, return offers study (never locks)
   await click("#smdPrep [data-act=mg-open]");
   await until(`return !!document.querySelector('#smdPrep [data-act=mg-mode][data-v=break]');`, 8000);

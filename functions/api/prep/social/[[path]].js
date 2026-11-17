@@ -21,6 +21,9 @@
  * which every member met the daily target (functions/_prep-social.js squadStreak).
  *   POST   progress {done}             -> { ok:true }   (questions done today; feeds todayDone and the group sprint)
  *   POST   nudges {on, token, quiet, tz} -> { ok:true } | { error }   (social pushes for this phone, functions/_prep-nudge-push.js)
+ *   POST   share {smdId, ref}          -> { ok:true }   (PrepReels: accepted friends only; ref = validShareRef; 40 a day)
+ *   GET    shares                      -> { shares:[{id, from:{smdId,name}, ref, at}] }   (sent to me, last 14 days, newest first)
+ *   POST   shares/seen {ids:[id]}      -> { ok:true }   (removes them from my inbox)
  *   POST   digest  (no user: X-Prep-Cron = PREP_CRON_TOKEN, the prep-arena Worker's cron) -> { players, sent }
  *
  * A challenge pushes to the friend it names (their limits apply); see functions/_prep-nudge-push.js.
@@ -32,12 +35,12 @@ import { verifiedClaimsFor } from "../../../_fbauth.js";
 import { EXAMS, uidHash } from "../../../_prep-arena.js";
 import { register as nudgeRegister, pushTo, digest, cronOk, safely, first } from "../../../_prep-nudge-push.js";
 import { squadStreak, SQUAD_MIN, SQUAD_MAX } from "../../../_prep-social.js";
-import { istDay, weekStart, randomCode, ROOM_RE, GROUP_RE, COLLEGES, collegeKey, cleanText, uidhForSmd, ensureMySmd, leaveGroupStmts, normalizeSmdId } from "../../../_prep-social.js";
+import { istDay, weekStart, randomCode, ROOM_RE, GROUP_RE, COLLEGES, collegeKey, cleanText, uidhForSmd, ensureMySmd, leaveGroupStmts, normalizeSmdId, validShareRef, SHARE_DDL, SHARE_IDX } from "../../../_prep-social.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 const err = (code, s) => json({ error: code }, s);
 const DAY = 86400e3, CHALLENGE_MS = 10 * 60e3, BOARD_DAYS = 30;
-const MAX_FRIENDS = 200, MAX_OPEN_CHALLENGES = 5, MAX_GROUPS = 10, GROUP_MAX = 30;
+const MAX_FRIENDS = 200, MAX_OPEN_CHALLENGES = 5, MAX_GROUPS = 10, GROUP_MAX = 30, SHARES_PER_DAY = 40, SHARE_DAYS = 14;
 const pair = (x, y) => (x < y ? [x, y] : [y, x]);
 function ranked(rows, key) {
   let prev = null, rank = 0;
@@ -119,6 +122,33 @@ export async function handle(request, env, path, now = Date.now(), bg = null) {
       db.prepare("DELETE FROM social_friends WHERE a = ? AND b = ?").bind(x, y),
       db.prepare("DELETE FROM social_challenges WHERE (from_uidh = ? AND to_uidh = ?) OR (from_uidh = ? AND to_uidh = ?)").bind(uidh, o, o, uidh),
     ]);
+    return json({ ok: true });
+  }
+
+  if (route === "POST share" || route === "GET shares" || route === "POST shares/seen") {
+    await db.batch([db.prepare(SHARE_DDL), db.prepare(SHARE_IDX)]);
+    if (route === "POST share") {
+      const ref = validShareRef(b.ref);
+      if (!ref) return err("bad_request", 400);
+      const { o, res } = await other(false);
+      if (res) return res;
+      const row = await friendRow(o);
+      if (!row || row.status !== "accepted") return err("not_friends", 403);
+      const n = await db.prepare("SELECT COUNT(*) AS c FROM social_shares WHERE from_uidh = ? AND at > ?").bind(uidh, now - 86400000).first();
+      if (n && n.c >= SHARES_PER_DAY) return err("limit", 429);
+      await db.prepare("INSERT INTO social_shares (from_uidh, to_uidh, ref, at) VALUES (?, ?, ?, ?)").bind(uidh, o, JSON.stringify(ref), now).run();
+      return json({ ok: true });
+    }
+    if (route === "GET shares") {
+      const { results } = await db.prepare(
+        "SELECT x.id, x.ref, x.at, p.name, s.smd_id FROM social_shares x JOIN arena_players p ON p.uidh = x.from_uidh LEFT JOIN social_ids s ON s.uidh = x.from_uidh " +
+        "WHERE x.to_uidh = ? AND x.at > ? ORDER BY x.at DESC LIMIT 20").bind(uidh, now - SHARE_DAYS * 86400000).all();
+      const shares = [];
+      for (const r of results || []) { let ref = null; try { ref = validShareRef(JSON.parse(r.ref)); } catch (e) {} if (ref) shares.push({ id: r.id, from: { smdId: r.smd_id || null, name: r.name }, ref, at: r.at }); }
+      return json({ shares });
+    }
+    const ids = (Array.isArray(b.ids) ? b.ids : []).filter((x) => Number.isInteger(x) && x > 0).slice(0, 50);
+    if (ids.length) await db.prepare("DELETE FROM social_shares WHERE to_uidh = ? AND id IN (" + ids.map(() => "?").join(",") + ")").bind(uidh, ...ids).run();
     return json({ ok: true });
   }
 
