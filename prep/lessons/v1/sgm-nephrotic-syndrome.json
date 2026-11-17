@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-nephrotic-syndrome",
+ "subject": "ss-general-medicine",
+ "title": "Nephrotic Syndrome and Podocytopathies",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Nephrotic syndrome** (heavy proteinuria with hypoalbuminaemia) is defined by **urine protein above 3.5 g daily**, serum albumin below 30 g per litre, oedema and hyperlipidaemia. **Minimal change disease** (podocyte fusion, steroid sensitive) is the commonest cause in children. **Focal segmental glomerulosclerosis** (FSGS, partial scars) dominates in adults. **Membranous nephropathy** (thickened basement membrane) presents in adults with idiopathic or malignancy associated disease.",
+   "say": "Nephrotic syndrome is heavy proteinuria with low serum albumin and swelling and high cholesterol, defined by protein above three point five grams daily and albumin below thirty. Minimal change disease is the commonest cause in children. Focal scars dominate in adults and this is examined in viva examinations for revision. Thickened membrane disease presents in adults with idiopathic or malignancy associated disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetic nephropathy** (diabetes driven proteinuria) is the commonest secondary cause in adults. **Amyloidosis** (AL amyloid deposits) causes nephrotic syndrome with cardiomyopathy. **Lupus nephritis class V** (membranous lupus) and **hepatitis B membranous disease** are immune causes. **NSAID nephropathy** (analgesic driven minimal change with interstitial injury) is drug related. **HIV associated nephropathy** (collapsing FSGS) affects untreated HIV patients.",
+   "say": "Diabetes driven proteinuria is the commonest secondary cause in adults. Amyloid deposits cause nephrotic syndrome with heart disease. Membranous lupus and hepatitis B disease are immune causes and analgesic driven disease is drug related and untreated HIV causes collapsing scars.",
+   "vis": null
+  },
+  {
+   "tx": "Podocyte injury effaces foot processes, opening the filtration barrier to albumin. **Selective proteinuria** (albumin predominant) in minimal change shows foot process effacement without deposits. **Non selective proteinuria** (broader proteins) suggests structural disease. **Membranous thickening** (subepithelial deposits) traps immune complexes. **Focal scarring** (segmental sclerosis) destroys partial glomeruli. Hypercoagulability (clotting tendency) explains renal vein thrombosis.",
+   "say": "Podocyte injury effaces foot processes and opens the filtration barrier to albumin and this is examined in viva examinations for revision. Selective proteinuria suggests minimal change and this is examined in viva examinations for revision. Broader proteins suggest structural disease and thickening traps immune complexes and partial scars destroy part of glomeruli and clotting tendency explains renal vein thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Podocyte injury"
+     },
+     {
+      "id": "b",
+      "label": "Filtration leak"
+     },
+     {
+      "id": "c",
+      "label": "Hypoalbuminaemia"
+     },
+     {
+      "id": "d",
+      "label": "Oedema"
+     },
+     {
+      "id": "e",
+      "label": "Hypercoagulability"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive oedema with ascites and pleural effusions, weight gain and dyspnoea mark severe disease. **Thromboembolic events** (venous clots) occur in 30 percent of membranous disease. **Infections** (pneumococcal peritonitis) follow urinary immunoglobulin loss. **Hyperlipidaemia** (high cholesterol) increases cardiovascular risk. **Acute kidney injury** (abrupt failure) complicates severe hypoalbuminaemia and diuretics. Children present with periorbital oedema (eye puffiness) in the morning.",
+   "say": "Massive swelling with ascites and pleural effusions marks severe disease. Venous clots occur in thirty percent of membranous disease. Chest infections follow urinary immunoglobulin loss and high cholesterol increases heart risk and abrupt failure complicates severe disease and diuretics.",
+   "vis": null
+  },
+  {
+   "tx": "**Urine protein quantification** (24 hour protein or ratio) confirms nephrotic range. **Serum albumin** (low protein) and **lipid profile** (high cholesterol) support diagnosis. **Kidney biopsy** (tissue sample) is the gold standard for classification. **Anti PLA2R antibodies** (membranous antibodies) predict idiopathic membranous disease. **Serum electrophoresis** (protein pattern) screens for myeloma amyloidosis.",
+   "say": "Quantification confirms nephrotic range. Low albumin and high cholesterol support diagnosis. Biopsy is the gold standard for classification and anti PLA two R antibodies predict idiopathic membranous disease and protein pattern screens for myeloma amyloidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Urine protein ratio",
+      "Quantification",
+      "Above 3.5 g daily"
+     ],
+     [
+      "Serum albumin",
+      "Support",
+      "Below 30 g per litre"
+     ],
+     [
+      "Kidney biopsy",
+      "Gold standard",
+      "Light electron immunofluorescence"
+     ],
+     [
+      "Anti PLA2R",
+      "Membranous predict",
+      "Idiopathic disease"
+     ],
+     [
+      "Electrophoresis",
+      "Amyloid screen",
+      "Myeloma clonal protein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Corticosteroids** (prednisolone 1 mg per kg) induce remission in minimal change and FSGS. **Calcineurin inhibitors** (tacrolimus) treat steroid resistant disease. **ACE inhibitors** (proteinuria reducers) protect glomeruli. **Diuretics** (frusemide) control oedema with albumin support in severe cases. **Anticoagulation** (heparin) is prophylactic in membranous disease with severe hypoalbuminaemia.",
+   "say": "Steroids induce remission in minimal change and focal scars and this is examined in viva examinations for revision. Tacrolimus treats steroid resistant disease and aCE inhibitors protect glomeruli and diuretics control swelling and heparin prophylaxis is considered in severe membranous disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Membranous nephropathy** needs rituximab or cyclophosphamide with steroids for antibody positive disease. **FSGS cellular variant** (active scars) needs steroids with calcineurin inhibitors. **Amyloidosis** (AL disease) needs chemotherapy daratumumab based regimens. **Secondary disease** (diabetes, lupus) needs cause directed therapy. **Diuretics** need albumin infusion in refractory oedema with gut oedema.",
+   "say": "Membranous disease needs B cell depleter or cyclophosphamide with steroids for antibody positive disease. Active focal scars need steroids with calcineurin inhibitors. Amyloidosis needs daratumumab based regimens and secondary disease needs cause directed therapy and refractory swelling needs albumin support.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Minimal change (children)",
+     "points": [
+      "Steroid sensitive",
+      "Normal complement",
+      "Foot process effacement",
+      "Excellent prognosis"
+     ]
+    },
+    "right": {
+     "title": "Membranous (adults)",
+     "points": [
+      "Anti PLA2R positive",
+      "Thickened membrane",
+      "Thrombotic tendency",
+      "Rituximab first line"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Renal vein thrombosis** (clotted kidney vein) presents with flank pain and worsening failure. **Venous thromboembolism** (lung and leg clots) needs anticoagulation. **Infections** (pneumococcal peritonitis, cellulitis) need vaccination with pneumococcal and influenza vaccines. **Hyperlipidaemia** (high cholesterol) needs statins. **Adrenal insufficiency** (steroid withdrawal) mimics oedema and needs taper care.",
+   "say": "Clotted kidney vein presents with flank pain and worsening failure. Lung and leg clots need anticoagulation. Infections need pneumococcal and influenza vaccination and high cholesterol needs statins and steroid withdrawal mimics oedema and needs taper care.",
+   "vis": null
+  },
+  {
+   "tx": "**Minimal change** disease recovers fully in most children with steroids. Membranous disease remits in 30 percent over years, with thrombosis dominating early mortality. FSGS progresses to kidney failure in half of adults over 10 years. Amyloidosis survival depends on haematological remission. Diabetic nephrotic disease progresses steadily without SGLT2 and renin angiotensin blockade.",
+   "say": "Minimal change recovers fully in most children and this is examined in viva examinations for revision. Membranous disease remits in thirty percent over years and this is examined in viva examinations for revision. Focal scars progress in half of adults over ten years and amyloid survival depends on remission and diabetic disease progresses steadily without blockade and this is examined in viva examinations for revision.",
+   "vis": null
+  },
+  {
+   "tx": "Kidney Disease Improving Global Outcomes 2024 emphasises PLA2R guided therapy, rituximab first line and SGLT2 protection. **Complement inhibition** (eculizumab) is emerging in atypical disease. Examination traps include missing thrombosis prophylaxis in membranous disease, undervaccinating against pneumococci, and calling selective proteinuria non selective. **Steroid sensitivity** (response pattern) is a favourite paediatric vignette.",
+   "say": "Current guidance emphasises PLA two R guided therapy and B cell depleter first line and kidney protection. Complement inhibition is emerging. Traps include missing clot prophylaxis and undervaccinating and misreading protein selectivity and steroid sensitivity is a favourite paediatric vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers protein thresholds, biopsy patterns and therapy choices. Nephrotic range cutoffs and anti PLA2R are the most asked points in theory and viva examinations. Steroid sensitivity and thrombosis prophylaxis are favourite vignette themes. Ward viva practice on drug doses and cutoffs strengthens examination performance.",
+   "say": "This table gathers protein thresholds and biopsy patterns and therapy choices for revision and this is examined in viva examinations for revision. Nephrotic range cutoffs and anti PLA two R are the most asked points. Steroid sensitivity and clot prophylaxis are favourite vignette themes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Nephrotic protein",
+      "Above 3.5 g daily"
+     ],
+     [
+      "Albumin cutoff",
+      "Below 30 g per litre"
+     ],
+     [
+      "Child commonest",
+      "Minimal change disease"
+     ],
+     [
+      "Adult membranous antibody",
+      "Anti PLA2R"
+     ],
+     [
+      "Embolic rate membranous",
+      "30 percent"
+     ],
+     [
+      "Steroid first line",
+      "Prednisolone 1 mg per kg"
+     ],
+     [
+      "Thrombosis action",
+      "Prophylactic heparin"
+     ],
+     [
+      "Gold standard",
+      "Kidney biopsy"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

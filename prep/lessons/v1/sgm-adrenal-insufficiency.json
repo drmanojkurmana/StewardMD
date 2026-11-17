@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-adrenal-insufficiency",
+ "subject": "ss-general-medicine",
+ "title": "Adrenal Insufficiency and Congenital Adrenal Hyperplasia",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Adrenal insufficiency** (cortisol and aldosterone failure) is primary (gland failure) or secondary (pituitary failure). **Addison disease** (autoimmune adrenal destruction) is the commonest primary cause. **Adrenal crisis** (severe decompensation) presents with hypotension and hyperkalaemia. **Congenital adrenal hyperplasia** (21 hydroxylase deficiency) causes virilisation in girls. **Steroid withdrawal** (abrupt cessation) precipitates crisis. **ACTH stimulation test** (synthetic ACTH test) confirms insufficiency.",
+   "say": "Adrenal insufficiency is cortisol and aldosterone failure, primary or secondary. Autoimmune destruction is the commonest primary cause. Severe decompensation presents with low pressure and high potassium and hydroxylase deficiency causes virilisation in girls and abrupt cessation precipitates crisis and synthetic ACTH test confirms insufficiency.",
+   "vis": null
+  },
+  {
+   "tx": "**Autoimmune Addison disease** (anti adrenal antibodies) causes primary failure. **Tuberculosis adrenalitis** (infection destruction) is the Indian cause. **Fungal adrenalitis** (histoplasmosis) follows disseminated infection. **Adrenal haemorrhage** (bleeding) follows anticoagulation and sepsis. **Sheehan syndrome** (postpartum necrosis) causes secondary failure. **Steroid cessation** (abrupt withdrawal) causes secondary failure.",
+   "say": "Autoimmune disease is the commonest primary cause. Tuberculosis is the Indian cause. Fungal disease follows disseminated infection and bleeding follows anticoagulation and sepsis and postpartum necrosis causes secondary failure and abrupt cessation causes secondary failure.",
+   "vis": null
+  },
+  {
+   "tx": "Autoimmune destruction reduces **cortisol synthesis** (steroid production) with compensatory **ACTH rise**. Aldosterone loss causes **salt wasting** (sodium and water loss) with hypovolaemia. **ACTH excess** (pigment stimulation) causes **hyperpigmentation** (skin darkening) in primary disease. **Insulin sensitivity** rises with cortisol loss causing hypoglycaemia. **Vascular tone loss** (catecholamine resistance) causes hypotension. **21 hydroxylase deficiency** blocks cortisol and aldosterone synthesis.",
+   "say": "Autoimmune destruction reduces cortisol synthesis with compensatory ACTH rise. Aldosterone loss causes salt wasting with low volume. Pigment stimulation causes skin darkening in primary disease. Cortisol loss increases insulin sensitivity and causes low glucose and tone loss causes low pressure and hydroxylase deficiency blocks synthesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gland failure"
+     },
+     {
+      "id": "b",
+      "label": "Cortisol fall"
+     },
+     {
+      "id": "c",
+      "label": "ACTH rise"
+     },
+     {
+      "id": "d",
+      "label": "Aldosterone fall"
+     },
+     {
+      "id": "e",
+      "label": "Crisis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fatigue** (tiredness) with anorexia, nausea and weight loss is early. **Hyperpigmentation** (dark creases, scars) marks primary disease. **Postural hypotension** (standing dizziness) with hyponatraemia is classic. **Salt craving** (desire for salt) is distinctive. **Hypoglycaemia** (low glucose) complicates crisis. **Virilisation** (masculinisation) in girls marks congenital hyperplasia. **Short stature** (growth failure) marks chronic disease.",
+   "say": "Tiredness with nausea and weight loss is early. Dark creases and scars mark primary disease and this is examined in viva examinations for revision. Standing dizziness with low sodium is classic. Desire for salt is distinctive and low glucose complicates crisis and masculinisation in girls marks congenital disease and growth failure marks chronic disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Morning cortisol** (low cortisol) with **ACTH elevation** (high ACTH) confirms primary insufficiency. **Short synacthen test** (synthetic ACTH stimulation) is the gold standard. **Electrolytes** (hyponatraemia with hyperkalaemia) support primary disease. **Anti 21 hydroxylase antibodies** (autoimmune markers) confirm Addison disease. **Adrenal computed tomography** (adrenal scan) excludes tuberculosis and haemorrhage. **17 hydroxyprogesterone** (elevated marker) confirms congenital hyperplasia.",
+   "say": "Low morning cortisol with high ACTH confirms primary insufficiency. Synthetic stimulation is the gold standard. Electrolytes support primary disease and autoimmune markers confirm Addison disease and adrenal scan excludes infection and bleeding and elevated marker confirms congenital hyperplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Morning cortisol ACTH",
+      "Screen",
+      "Low cortisol high ACTH"
+     ],
+     [
+      "Synacthen test",
+      "Gold standard",
+      "Stimulation failure"
+     ],
+     [
+      "Electrolytes",
+      "Support",
+      "Low sodium high potassium"
+     ],
+     [
+      "Anti 21 hydroxylase",
+      "Autoimmune",
+      "Addison confirmation"
+     ],
+     [
+      "17 hydroxyprogesterone",
+      "Congenital confirm",
+      "Elevated in CAH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydrocortisone** (cortisol replacement) at 15 to 25 mg daily in divided doses is first line. **Fludrocortisone** (aldosterone replacement) is needed in primary disease. **Stress dosing** (double or triple doses) covers illness and surgery. **Emergency hydrocortisone** (intravenous bolus) treats crisis. **Salt intake** (liberal salt) supports primary disease. **Hydrocortisone taper** (gradual withdrawal) prevents crisis after steroids.",
+   "say": "Hydrocortisone at fifteen to twenty five milligrams daily is first line. Aldosterone replacement is needed in primary disease. Double doses cover illness and surgery, and intravenous bolus treats crisis, and liberal salt supports primary disease, and gradual withdrawal prevents crisis after steroids.",
+   "vis": null
+  },
+  {
+   "tx": "**Adrenal crisis** needs intravenous hydrocortisone 100 mg with saline and dextrose. **Congenital hyperplasia** needs glucocorticoid and mineralocorticoid with salt. **Virilisation surgery** (genitoplasty) is offered in infancy with counselling. **Salt wasting crisis** (neonatal dehydration) needs saline and fludrocortisone. **Steroid stress cover** (perioperative dosing) prevents crisis. **Medic alert** (medical identification) is mandatory for primary disease.",
+   "say": "Crisis needs intravenous hydrocortisone with saline and dextrose. Congenital disease needs glucocorticoid and mineralocorticoid with salt. Infant surgery is offered with counselling and neonatal dehydration needs saline and fludrocortisone and perioperative dosing prevents crisis and medical identification is mandatory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary insufficiency",
+     "points": [
+      "High ACTH hyperpigmentation",
+      "Hydrocortisone plus fludrocortisone",
+      "Salt wasting",
+      "Autoimmune tuberculosis"
+     ]
+    },
+    "right": {
+     "title": "Secondary insufficiency",
+     "points": [
+      "Low ACTH no pigmentation",
+      "Hydrocortisone alone",
+      "No salt wasting",
+      "Sheehan steroid withdrawal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Adrenal crisis precipitants** (infection, surgery, missed doses) need emergency therapy. **Hypoglycaemia** (low glucose) needs dextrose. **Hyponatraemia** (low sodium) needs saline. **Hyperkalaemia** (high potassium) needs treatment. **Congenital salt wasting** (neonatal crisis) needs saline. **Steroid overreplacement** (Cushing features) needs dose titration. Targeted revision of stress dosing aids viva performance.",
+   "say": "Infection and surgery and missed doses precipitate crisis and need emergency therapy. Low glucose needs dextrose. Low sodium needs saline and high potassium needs treatment and neonatal crisis needs saline and overreplacement needs dose titration.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary insufficiency** with replacement has normal survival. Adrenal crisis mortality exceeds 6 percent without treatment. Congenital hyperplasia with early treatment has normal growth. Tuberculosis adrenal disease survival depends on antitubercular therapy. Addison disease needs lifelong replacement. Medic alert use reduces crisis mortality.",
+   "say": "Primary disease with replacement has normal survival. Crisis mortality exceeds six percent without treatment and this is examined in viva examinations for revision. Congenital disease with early treatment has normal growth and tuberculosis disease survival depends on therapy and addison disease needs lifelong replacement and medical identification reduces crisis mortality.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2016 adrenal insufficiency guidance stresses synacthen gold standards, stress dosing and emergency education. **21 hydroxylase mutants** (genetic forms) guide congenital therapy. Examination traps include missing hyperpigmentation, replacing thyroxine before steroids, and omitting stress dosing. **Salt craving** (desire for salt) is a favourite viva clue.",
+   "say": "Current guidance stresses gold standards and stress dosing and emergency education. Genetic forms guide congenital therapy. Traps include missing darkening and replacing thyroxine before steroids and omitting stress dosing and desire for salt is a favourite viva clue.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers ACTH patterns, synacthen gold standards and crisis doses. Hyperpigmentation and salt craving are the most asked points in theory and viva examinations. Targeted revision of stress dosing aids viva performance. Crisis uses 100 mg hydrocortisone without delay.",
+   "say": "This table gathers ACTH patterns and gold standards and crisis doses for revision and this is examined in viva examinations for revision. Darkening and salt craving are the most asked points and desire for salt is a favourite viva clue theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Primary ACTH",
+      "High with hyperpigmentation"
+     ],
+     [
+      "Secondary ACTH",
+      "Low without pigmentation"
+     ],
+     [
+      "Gold test",
+      "Synacthen stimulation"
+     ],
+     [
+      "Daily replacement",
+      "Hydrocortisone divided"
+     ],
+     [
+      "Crisis dose",
+      "100 mg intravenous"
+     ],
+     [
+      "Congenital marker",
+      "17 hydroxyprogesterone"
+     ],
+     [
+      "Indian cause",
+      "Tuberculosis adrenalitis"
+     ],
+     [
+      "Order rule",
+      "Steroids before thyroxine"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

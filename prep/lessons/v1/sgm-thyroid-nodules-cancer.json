@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-thyroid-nodules-cancer",
+ "subject": "ss-general-medicine",
+ "title": "Thyroid Nodules and Thyroid Cancer",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Thyroid nodules** (focal thyroid swellings) are palpable in 5 percent of adults and visible on ultrasound in 50 percent. **Papillary carcinoma** (B epithelial cancer) is the commonest thyroid cancer worldwide. **Follicular carcinoma** (haematogenous spread) is more aggressive. **Medullary carcinoma** (calcitonin secreting cancer) links to MEN 2. **Anaplastic carcinoma** (undifferentiated cancer) is rapidly fatal. **Lymphoma** (immune cancer) affects Hashimoto glands.",
+   "say": "Nodules are palpable in five percent of adults and visible on ultrasound in fifty percent. Papillary cancer is the commonest thyroid cancer worldwide. Follicular disease is more aggressive. Calcitonin secreting disease links to MEN two and undifferentiated cancer is rapidly fatal and immune cancer affects Hashimoto glands.",
+   "vis": null
+  },
+  {
+   "tx": "**Iodine deficiency** (low intake) causes multinodular goitre in endemic regions. **Hashimoto thyroiditis** (autoimmune disease) increases lymphoma risk. **Radiation exposure** (childhood neck irradiation) predisposes to papillary cancer. **Family history** (papillary and medullary clustering) suggests hereditary disease. **RET mutation** (proto oncogene) causes medullary carcinoma. **Thyroiditis** (inflammation) mimics malignancy on imaging.",
+   "say": "Low intake causes multinodular goitre in endemic regions. Autoimmune disease increases lymphoma risk. Childhood neck irradiation predisposes to papillary cancer and family clustering suggests hereditary disease and proto oncogene mutation causes medullary disease and inflammation mimics malignancy on imaging.",
+   "vis": null
+  },
+  {
+   "tx": "**BRAF V600E mutation** (kinase activation) drives papillary carcinoma in 60 percent. **RET rearrangements** (gene fusions) drive papillary disease in children. **RAS mutations** (small G protein) drive follicular carcinoma. **Calcitonin secretion** (tumour marker) tracks medullary disease burden. **Lymphatic spread** (nodal metastasis) dominates papillary pattern. **Haematogenous spread** (blood spread) dominates follicular pattern.",
+   "say": "Kinase activation drives papillary cancer in sixty percent and this is examined in viva examinations for revision. Gene fusions drive disease in children and this is examined in viva examinations for revision. Small protein mutations drive follicular cancer and tumour marker tracks medullary burden and lymphatic spread dominates papillary pattern and blood spread dominates follicular pattern.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gene mutation"
+     },
+     {
+      "id": "b",
+      "label": "Cell proliferation"
+     },
+     {
+      "id": "c",
+      "label": "Nodule growth"
+     },
+     {
+      "id": "d",
+      "label": "Capsule breach"
+     },
+     {
+      "id": "e",
+      "label": "Nodal or blood spread"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Painless neck swelling** (goitre) is the commonest presentation of nodules and cancer. **Cervical lymphadenopathy** (neck node enlargement) suggests papillary disease. **Hoarseness** (recurrent laryngeal palsy) suggests malignancy. **Compressive symptoms** (dysphagia, stridor) suggest large goitres. **Sipple syndrome** (MEN 2 with phaeochromocytoma) marks medullary disease. **Diarrhoea** (calcitonin effect) marks advanced medullary cancer.",
+   "say": "Painless neck swelling is the commonest presentation. Neck node enlargement suggests papillary disease and this is examined in viva examinations for revision. Hoarseness suggests malignancy and swallowing and breathing compression suggests large goitres and sipple syndrome marks medullary disease and diarrhoea marks advanced medullary cancer.",
+   "vis": null
+  },
+  {
+   "tx": "**Ultrasound risk stratification** (TI RADS scoring) guides biopsy thresholds. **Fine needle aspiration cytology** (FNAC, needle cell test) is the gold standard for diagnosis. **Bethesda system** (cytology categories I to VI) standardises reporting. **Calcitonin level** (tumour marker) screens medullary disease. **Serum thyroglobulin** (post surgical marker) monitors recurrence. **CT neck** (cross section scan) stages advanced disease.",
+   "say": "Ultrasound risk scoring guides biopsy thresholds. Needle cell test is the gold standard for diagnosis. Bethesda categories standardise reporting and tumour marker screens medullary disease and serum marker monitors recurrence and cross section scan stages advanced disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Ultrasound TI RADS",
+      "Risk stratification",
+      "Biopsy thresholds"
+     ],
+     [
+      "FNAC cytology",
+      "Gold standard",
+      "Bethesda I to VI"
+     ],
+     [
+      "Calcitonin",
+      "Medullary screen",
+      "Tumour marker"
+     ],
+     [
+      "Thyroglobulin",
+      "Recurrence monitor",
+      "Post surgical marker"
+     ],
+     [
+      "CT neck",
+      "Staging",
+      "Advanced disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Total thyroidectomy** (complete gland removal) is first line for carcinoma. **Central neck dissection** (node clearance) treats papillary nodal disease. **Radioiodine ablation** (125I therapy) treats residual papillary disease. **Thyroxine suppression** (TSH lowering) reduces recurrence risk. **Calcitonin surveillance** (marker tracking) monitors medullary disease. **Lateral neck dissection** (side clearance) treats lateral nodal disease.",
+   "say": "Complete gland removal is first line for carcinoma. Node clearance treats papillary nodal disease and this is examined in viva examinations for revision. Radioiodine therapy treats residual disease and tSH lowering reduces recurrence risk and marker tracking monitors medullary disease and side clearance treats lateral nodal disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Anaplastic carcinoma** (undifferentiated cancer) needs multimodality with tracheostomy. **Medullary carcinoma** (RET disease) needs prophylactic thyroidectomy in carriers. **Lymphoma** (Hashimoto cancer) needs chemotherapy. **Benign nodules** (colloid disease) need observation with surveillance. **Compressive goitre** (retrosternal disease) needs surgery. **Prophylactic central dissection** (preventive clearance) is debated in early disease.",
+   "say": "Undifferentiated cancer needs multimodality with tracheostomy. RET disease needs prophylactic removal in carriers. Hashimoto cancer needs chemotherapy and benign nodules need observation and retrosternal disease needs surgery and preventive clearance is debated in early disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Papillary carcinoma",
+     "points": [
+      "Lymphatic spread",
+      "BRAF positive",
+      "Radioiodine responsive",
+      "Excellent prognosis"
+     ]
+    },
+    "right": {
+     "title": "Follicular carcinoma",
+     "points": [
+      "Haematogenous spread",
+      "RAS positive",
+      "Radioiodine less effective",
+      "Worse prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Recurrent laryngeal nerve palsy** (hoarseness) complicates thyroidectomy. **Hypoparathyroidism** (calcium fall) complicates central dissection. **Haematoma** (neck blood collection) needs evacuation. **Chyle leak** (lymph escape) complicates lateral dissection. **Lymphoma progression** (rapid airway compression) needs urgent chemotherapy. **Anaplastic airway obstruction** needs urgent tracheostomy.",
+   "say": "Hoarseness complicates thyroidectomy. Calcium fall complicates central dissection and neck blood collection needs evacuation and lymph escape complicates lateral dissection and rapid progression needs urgent chemotherapy and airway obstruction needs urgent tracheostomy.",
+   "vis": null
+  },
+  {
+   "tx": "**Papillary carcinoma** survival exceeds 95 percent at 10 years with treatment. Follicular carcinoma survival is 85 percent at 10 years. Medullary carcinoma survival depends on calcitonin doubling time. Anaplastic carcinoma survival is below 10 percent at one year. Benign nodules have excellent survival with surveillance. Lymphoma survival depends on chemotherapy response.",
+   "say": "Papillary survival exceeds ninety five percent at ten years and this is examined in viva examinations for revision. Follicular survival is eighty five percent. Medullary survival depends on calcitonin doubling time and undifferentiated survival is below ten percent and benign nodules have excellent survival and lymphoma survival depends on chemotherapy response.",
+   "vis": null
+  },
+  {
+   "tx": "American Thyroid Association 2015 guidelines stress TI RADS triage, Bethesda cytology and lobectomy for low risk disease. **BRAF testing** (mutation testing) refines prognosis. Examination traps include biopsy thresholds without ultrasound risk, missing calcitonin in medullary disease, and calling thyroiditis malignancy. **Hoarseness with goitre** (malignancy clue) is a favourite viva sign.",
+   "say": "Current guidelines stress risk triage and cytology categories and lobectomy for low risk disease and this is examined in viva examinations for revision. Mutation testing refines prognosis. Traps include biopsy without risk scoring and missing calcitonin and misreading thyroiditis and hoarseness with goitre is a favourite viva sign.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers Bethesda categories, gene mutations and survival figures. Papillary BRAF frequency and FNAC gold standards are the most asked points in theory and viva examinations. Structured practice with cytology categories aids viva answers. Papillary spread remains lymphatic and late haematogenous.",
+   "say": "This table gathers Bethesda categories and gene mutations and survival figures for revision and this is examined in viva examinations for revision. BRAF frequency and needle gold standards are the most asked points. Hoarseness with goitre is a favourite viva sign theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Commonest cancer",
+      "Papillary carcinoma"
+     ],
+     [
+      "Papillary mutation",
+      "BRAF 60 percent"
+     ],
+     [
+      "Gold test",
+      "FNAC cytology"
+     ],
+     [
+      "Cytology system",
+      "Bethesda I to VI"
+     ],
+     [
+      "Medullary marker",
+      "Calcitonin"
+     ],
+     [
+      "Papillary spread",
+      "Lymphatic"
+     ],
+     [
+      "Follicular spread",
+      "Haematogenous"
+     ],
+     [
+      "Anaplastic survival",
+      "Below 10 percent"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
