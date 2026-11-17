@@ -84,7 +84,27 @@
   function put(s,v){ return G.STUDY._put(s,v); }
   function get(s,k){ return G.STUDY._get(s,k); }
   function del(s,k){ return G.STUDY._del(s,k); }
-  function toast(m){ var h=host(); if(h&&h.toast) h.toast(m); else if(G.toast) G.toast(m); }
+  function toast(m){
+    try {
+      if (G.SMD_dynNotify && G.SMD_dynNotify.dismiss) G.SMD_dynNotify.dismiss();
+      var r = (host() && host().root ? host().root() : null) || document.getElementById("smdPrep") || document.body;
+      if (r) {
+        var t = r.querySelector("#stStudyToast");
+        if (!t) {
+          t = document.createElement("div");
+          t.id = "stStudyToast";
+          t.className = "st-study-toast";
+          r.appendChild(t);
+        }
+        t.textContent = m;
+        t.style.display = "block";
+        clearTimeout(t._tm);
+        t._tm = setTimeout(function(){ if (t && t.parentNode) t.parentNode.removeChild(t); }, 2200);
+        return;
+      }
+    } catch(e){}
+    var h=host(); if(h&&h.toast) h.toast(m); else if(G.toast) G.toast(m);
+  }
 
   var ICO = {
     back: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
@@ -240,6 +260,8 @@
     enhancedFor=vId;
     /* remove old if re-injected */
     var oldTop=root.querySelector("#stP3Top"); if(oldTop) oldTop.parentNode.removeChild(oldTop);
+    var oldPnBar=root.querySelector(".pn-bar"); if(oldPnBar&&oldPnBar.parentNode) oldPnBar.parentNode.removeChild(oldPnBar);
+    if(G.SMD_dynNotify&&G.SMD_dynNotify.dismiss){ try { G.SMD_dynNotify.dismiss(); } catch(e){} }
     var body=root.querySelector(".pn-body.st-body") || root.querySelector("#stSc");
     var top=D.createElement("div");
     top.id="stP3Top";
@@ -265,7 +287,11 @@
         '</div>' +
       '</div>';
     /* insert before #stDocTabs if exists, else before .st-tb if exists else at top of body */
-    var dt = root.querySelector("#stDocTabs");
+    var allDt = root.querySelectorAll("#stDocTabs");
+    for (var di = 1; di < allDt.length; di++) {
+      if (allDt[di].parentNode) allDt[di].parentNode.removeChild(allDt[di]);
+    }
+    var dt = allDt && allDt[0];
     var insertBefore = dt || tb || root.querySelector(".st-sc");
     if(insertBefore && insertBefore.parentNode) insertBefore.parentNode.insertBefore(top, insertBefore);
     else if(root) root.insertBefore(top, root.firstChild);

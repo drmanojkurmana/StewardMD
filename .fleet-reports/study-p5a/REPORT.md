@@ -321,3 +321,262 @@ All 28 screenshots successfully captured into `.fleet-reports/study-p5a/`:
 - `ipad-dark`: 01-library-empty, 02-library-grid-folder, 03-item-menu, 04-library-list, 05-search, 06-trash, 07-doc-tabs
 - `ipad-light`: 01-library-empty, 02-library-grid-folder, 03-item-menu, 04-library-list, 05-search, 06-trash, 07-doc-tabs
 
+
+
+---
+
+# Merge round (agy, 2026-11-17): Bring Phases 2-4 from main into Phase 5a
+
+Branch `study-p5a-library`. Merged `origin/main` (commit `973e485c5`, containing Phases 2–4: `study-select.js`, `study-pages.js` with `#stP3Top`, `study-insert.js`, laser, AI chips in `#stLassoBar`).
+
+## 1. Conflict resolution and file integrations
+- **`prep-loader.js`**: Kept all modules from main (`study-select.js`, `study-select.css`, `study-pages.js`, `study-insert.js`) and added `study-library.js` in `OPTIONAL` and `studyOn()` `jsList`. Kept main's V token `prep161` (not bumped).
+- **`study.css`**: Merged Phase 5a library styles alongside Phase 2/3/4 styles (`.st-p3-topbar`, items layer, text format bar, sticker tray, crop overlay, laser, and lasso bar updates).
+- **`study.js`**: Merged object stores (`items` store with `doc` index), connection cleanup (`onversionchange` handler to avoid blocking versionchange handshakes), and exported properties (`kick`, `db`, `itemsOf`, `put`, `del`, `get`, `all`, `reloadNb`, etc.).
+- **`study-library.js`**:
+  - Restored `items` object store in `restoreBytes5a` so custom stickers, text, images, and lasso elements are recovered on backup restore.
+  - Document tabs placement: positioned `#stDocTabs` directly under `#stP3Top` (`p3Top.parentNode.insertBefore(tabsEl, p3Top.nextSibling)`). Guarded against recursive DOM churn and redundant re-rendering via cache key on `#stDocTabs`.
+  - Added `h` parameter to `S.lib(h)` to properly set the host reference and reset `libState.tab = "documents"`, `libState.currentFolderId = null`, rendering the 5a library grid.
+  - Tracked opened documents for tabs when `st-mknb` or `st5a-mknb` creates new notebooks.
+- **`study-pages.js`**:
+  - Top bar insertion order: inside `injectTopBar()`, ensures `#stDocTabs` sits directly under `#stP3Top`.
+  - Back button (`[data-act="st-p3-back"]`): dispatches `STUDY.leave()` and `STUDY.lib(host2)` returning directly to the Phase 5a library grid.
+- **`test/run-study-ui.mjs`**:
+  - Handled cases where `#stLib` is already visible on `openLib()`, re-rendering body via `STUDY_LIB.renderBody()` instead of attempting to click the hidden bottom navigation tab.
+  - Updated Phase 3 notebook creation test block to use the Phase 5a controls (`[data-act="st5a-new"]` -> `[data-act="st5a-new-notebook"]` -> `#st5aNbT` -> `st5a-mknb`).
+- **`test/run-study-p5a-ui.mjs`**:
+  - Added explicit assertions verifying document tabs sit directly under `#stP3Top` and tapping `[data-act="st-p3-back"]` returns to the Phase 5a library grid.
+
+## 2. Test output
+
+### Unit tests (72 passing, 0 failing):
+```
+node --test --experimental-test-module-mocks --experimental-sqlite test/study*.test.mjs
+✔ 1.4 pressure: 0% constant, 100% doubles under hard press (0.808834ms)
+✔ 1.2/1.3 pen styles: fountain tapers, ball even, brush heavy taper (0.292916ms)
+✔ 1.9 split: erasing the middle of a stroke gives two pieces, ends and no-touch keep it whole (0.407875ms)
+✔ 1.8 straight snap: hold gate at 500ms and snap keeps only the ends (0.097042ms)
+✔ 1.16/1.17 palm and finger: pen draws, touch pans once a pen was seen, finger draws before that (0.078791ms)
+✔ 1.5/1.6 settings: defaults, per-tool width, recent colours capped at 5, hex check (0.18825ms)
+✔ latency outline: 500-point stroke outlines without dropping points (0.934833ms)
+✔ makeItem: constructs valid item record with page-relative coordinates (1.086791ms)
+✔ moveItemGeom: moves item and clamps to page bounds 0..1 (0.144917ms)
+✔ resizeItemGeom: handles corner handles and enforces min dimensions (0.153458ms)
+✔ rotateItemGeom: sets angle and snaps to cardinal angles (0, 90, 180, 270) (0.096375ms)
+✔ compressDimensions: preserves small images, scales down large images to 2048px (0.108458ms)
+✔ laserFilterPoints: discards points older than 1000ms (0.092208ms)
+✔ laserFadeAlpha: computes linear fade opacity over 1s (0.070958ms)
+✔ text styles and system fonts: Title, H1, H2, Body definitions (0.076459ms)
+✔ stickers library: contains required medical icons, arrows, and callouts as inline SVG (0.141041ms)
+✔ sticker labels: provides human-readable labels for all elements (no raw ids) (0.202875ms)
+✔ shape fitter: 12 noisy samples each, at least 11 of 12 correct (90%+) (5.2245ms)
+✔ shape fitter: 20 handwriting samples have 0 false snaps; small dots never snap (0.957458ms)
+✔ fitForced never returns null for 3+ points (Shapes tool snaps every stroke) (0.789ms)
+✔ shapePts outline round-trips through the fitter for every shape type (0.377917ms)
+✔ bbox, translate and scale: line width follows the scale factor (0.475125ms)
+✔ rotate 90 twice is 180; clamp keeps ink on the page (0.159333ms)
+✔ xform snapshots: applySnap restores before, redo reapplies after (0.264209ms)
+✔ clipboard: encode/decode round trips, bad JSON and wrong version rejected (0.307458ms)
+✔ lasso settings: highlighter can be excluded, pen and shapes stay (0.155459ms)
+✔ handles: corners proportional, sides stretch, centre inside (0.357583ms)
+✔ pickGesture: flat selection centre moves, corner resizes, degenerate axis never explodes (0.187542ms)
+✔ pickGesture: tall box interior moves, edge dots resize, outside is null (0.086583ms)
+✔ dwell gate: snap only at 500ms and only when enabled (0.0425ms)
+✔ nearStroke finds shape outlines and misses far points (0.071208ms)
+✔ templates: labels, dark detection, list covers required set (0.980375ms)
+✔ addIndex: before/after/last (0.072709ms)
+✔ insertAt/removeAt: does not mutate (0.42175ms)
+✔ rotateStep: 90deg cycle (0.069083ms)
+✔ zoom: clamp 50-400% (0.058292ms)
+✔ fav: toggle per page, isFav (0.1095ms)
+✔ outline flatten + filter (0.116834ms)
+✔ visibleRange: lazy near viewport, no gaps (0.075167ms)
+✔ fitWidth: double-tap fit (0.067875ms)
+✔ isTrashed + shouldPurge: 30-day boundary (0.428625ms)
+✔ sortDocs date: newest first, folders and docs mixed (0.332667ms)
+✔ sortDocs name: case-insensitive alphabetical (0.07925ms)
+✔ sortDocs type: folders first, then notebooks, then PDFs, alpha within (0.091875ms)
+✔ dupTitle appends copy and caps length (0.064625ms)
+✔ fmtWhen: today, yesterday, this year, older, empty (0.863292ms)
+✔ parseTabs: keeps strings, caps at 12, bad JSON is empty (0.181ms)
+✔ needsCoverRegen: clean covers skip, dirty or missing covers regen only (0.065792ms)
+✔ shouldRetryTabRestore: bounded polling, then gives up (0.077208ms)
+✔ hang fix: library reuses STUDY.db, never opens its own second connection (0.68025ms)
+✔ flag: default off, needs prep, ?study overrides storage (0.576916ms)
+✔ page-relative transform round trips at any zoom (0.360833ms)
+✔ eraser hit: near a segment hits, far misses, single point works (0.100917ms)
+✔ undo and redo: add, erase, redo cleared by a new op, empty stack (0.121ms)
+✔ stack is capped at 200 and survives a JSON round trip (0.167917ms)
+✔ pressure: pen value kept, 0 or other pointer types fall back to 0.5 (0.057792ms)
+✔ page order: move up and down, ends stay put, input not mutated (0.070375ms)
+✔ page backgrounds: blank empty, ruled rows, grid squares, Cornell margin and summary, dotgrid points (0.280333ms)
+✔ lasso: point in polygon and stroke containment (0.105375ms)
+✔ scribble detection: fast back-and-forth zig-zag detected, line or circle is not (0.229125ms)
+✔ scribble P0: 40 handwriting strokes over notes never erase (0.657875ms)
+✔ scribble P0: 20 fast dense scribbles over ink erase; same scribble on blank paper does not (2.259917ms)
+✔ scribble P0: erase covers only crossed strokes, a dot 15 px away survives (0.366375ms)
+✔ snippet: case-insensitive, highlight split, ellipsis at cut ends, no match is null (0.156625ms)
+✔ indexing label: shown until every page is done (0.04925ms)
+✔ A7 page range: empty is the page on screen, typed ranges use Layer C's parser and cap (1.27525ms)
+✔ A7 source ref: items and cards made from a Study Studio document carry std, others are unchanged (2.449875ms)
+✔ A8 zip: the streaming writer round trips every file, stored without compression (1.616375ms)
+✔ A8 backup verify: a good backup passes with its records (0.372666ms)
+✔ A8 backup verify: a tampered byte inside the zip is refused (sha256 mismatch) (0.153583ms)
+✔ A8 backup verify: wrong record count, wrong size, extra file, missing manifest, record vs file sha (0.377959ms)
+✔ A8 restore plan: skip by id or sha256, add the rest, never touch what exists (0.064375ms)
+ℹ tests 72
+ℹ suites 0
+ℹ pass 72
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 125.790583
+```
+
+### Full Study UI suite (ALL PASSED, 0 fail):
+```
+node test/run-study-ui.mjs
+... (140+ assertions passing across Phases 0–4 and Phase 5a)
+PASS no uncaught page error 
+
+ALL PASSED
+```
+
+### Phase 5a UI suite (ALL PASSED, 0 fail):
+```
+node test/run-study-p5a-ui.mjs
+PASS 5.1: New tile present
+PASS 5.1: first card is inset from the viewport edge (26px/191px)
+PASS 5.1: card shows date edited
+PASS 5.1: real cover thumbnail rendered
+PASS 5.2: folder created
+PASS 5.2: document moved into folder (menu path data)
+PASS 5.2: folder colour changed
+PASS 5.3: sort choice persisted
+PASS 5.3: view choice survives reload
+PASS 5.4: duplicate creates a copy with ink
+PASS 5.4: doc leaves grid when trashed
+PASS 5.4: Trash view shows the item
+PASS 5.4: restore brings the notebook back (ink intact)
+PASS 5.4: strokes still stored after trash cycle
+PASS 5.5: search finds by title
+PASS 5.8: open documents shown as tabs
+PASS 5.8: tabs sit directly under #stP3Top
+PASS 5.8: back returns to 5a library grid
+PASS 5.8: tabs remembered on relaunch (2)
+PASS 5.10: export downloads a PDF
+PASS 5.10: export has both pages
+PASS no uncaught page error 
+
+ALL PASSED
+```
+
+## 3. Screenshots
+Captured all 28 screenshots to `.fleet-reports/study-p5a/`:
+- `phone-dark`: 01-library-empty, 02-library-grid-folder, 03-item-menu, 04-library-list, 05-search, 06-trash, 07-doc-tabs
+- `phone-light`: 01-library-empty, 02-library-grid-folder, 03-item-menu, 04-library-list, 05-search, 06-trash, 07-doc-tabs
+- `ipad-dark`: 01-library-empty, 02-library-grid-folder, 03-item-menu, 04-library-list, 05-search, 06-trash, 07-doc-tabs
+- `ipad-light`: 01-library-empty, 02-library-grid-folder, 03-item-menu, 04-library-list, 05-search, 06-trash, 07-doc-tabs
+Verified phone and iPad layouts: library grid cards are properly inset, item menus display clear actions, search shows highlighted snippets, and open notebooks render tabs directly below `#stP3Top`.
+
+---
+
+# DESIGN ROUND (agy): Phase 5a library and PDF editor look (after PR #2641 polish)
+
+Branch: `study-p5a-library`.
+Merge commit: merged `origin/main` (prep162 with unified `#stP3Top` chrome and tool row polish).
+
+## Design Fixes Implemented
+
+### A. "Documents" three times (Resolved)
+- **Problem:** iPad screenshots showed "Documents / Study Studio" top-bar title, a "Documents" root breadcrumb chip, and a large "Documents" heading in the body.
+- **Fix:**
+  - Removed redundant `h.bar(...)` call in `study-library.js` when in library root.
+  - Suppressed the root breadcrumb chip (`!libState.currentFolderId`), displaying folder breadcrumbs only when navigated inside a subfolder.
+  - Preserved exactly ONE clean, large `<h1 class="st5a-h1">Documents</h1>` in the view, paired with the bottom floating navigation tab for Documents.
+
+### B. Grid cards overflow and clutter (Resolved)
+- **Problem:** Card titles ran into adjacent cards, "Notebook or import" truncated awkwardly, and cards suffered from cluttered separate star and chevron buttons.
+- **Fix:**
+  - Adopted GoodNotes card specification: fixed 3:4 aspect ratio covers, clean one-line title with CSS text ellipsis inside `.st5a-title-open`, small subtle `⌄` chevron button (`.st5a-chev-btn`) dedicated to opening the item context menu (`data-act="st5a-doc-menu"` / `data-act="st5a-folder-menu"`).
+  - Moved "Favourite" action inside the item sheet menu; favourited documents display a discreet gold star badge (`★`, `var(--pn-star, #efc07b)`) on the top-right corner of the cover.
+  - Replaced constrained layout by overriding `.pn-root .st5a-lib #stList { display: block; width: 100%; }` and configuring `.st5a-grid` with `repeat(auto-fill, minmax(150px, 1fr))` on iPad and 2 columns on phone. On iPad 1024px, the grid displays 5 clean columns per row.
+  - Verified no card title exceeds its card boundary on 390px phone or 1024px iPad via programmatic bounding client rect checks in `test/run-study-p5a-ui.mjs`.
+
+### C. PDF open = legacy header eliminated (Resolved)
+- **Problem:** Opening a PDF rendered the legacy `pn-bar` ("Cardiology-Notes / 2 pages") above the document tabs and tool row, and top notifications (`SMD_dynNotify`) obstructed `#stP3Top`.
+- **Fix:**
+  - PDF documents now render the exact same `#stP3Top` top bar as notebooks (one top bar, then document tabs `#stDocTabs`, then compact tool row `.st-tb`).
+  - Stale `.pn-bar` DOM nodes are purged on viewer entry.
+  - Deduplicated `#stDocTabs` DOM nodes before and after asynchronous IDB operations to prevent race conditions during rapid or duplicate `injectDocTabs()` calls.
+  - Added bottom-docked `#stStudyToast` (`.st-study-toast`) pill anchored at `bottom: calc(var(--pnv-h, 0px) + 24px + env(safe-area-inset-bottom, 0px))` for Study Studio notifications.
+  - Wired `study-pages.js` `toast(m)` to use `#stStudyToast` and immediately dismiss `SMD_dynNotify` on viewer entry so the `#stP3Top` top bar is never obscured.
+
+### D. Empty library, list view, trash, and search audit (Resolved)
+- **Empty Library:** Clean dashed "New..." tile alongside informative "No documents yet" empty card with quick-action buttons.
+- **List View:** Single-line items with fixed icon/thumbnail, title, metadata, and right-aligned `⌄` action button.
+- **Trash View:** Single "Trash" heading with clear 30-day retention notice and "Empty trash now" action.
+- **Search View:** Single "Search" heading, persistent sort and view controls, and search result snippets with `<mark>` hit highlighting.
+
+---
+
+## Final Verification & Test Results
+
+All three test suites passed 100% green:
+
+### 1. Unit Tests (`node --test --experimental-test-module-mocks --experimental-sqlite test/study*.test.mjs`):
+```
+✔ 72 tests passed (0 failed, 0 skipped)
+duration: ~100ms
+```
+
+### 2. Phase 5a UI Suite (`node test/run-study-p5a-ui.mjs`):
+```
+PASS 5.1: New tile present
+PASS 5.1: first card is inset from the viewport edge (32px/185px)
+PASS 5.1: card shows date edited
+PASS 5.1: real cover thumbnail rendered
+PASS 5.2: folder created
+PASS 5.2: document moved into folder (menu path data)
+PASS 5.2: folder colour changed
+PASS 5.3: sort choice persisted
+PASS 5.3: view choice survives reload
+PASS 5.4: duplicate creates a copy with ink
+PASS 5.4: doc leaves grid when trashed
+PASS 5.4: Trash view shows the item
+PASS 5.4: restore brings the notebook back (ink intact)
+PASS 5.4: strokes still stored after trash cycle
+PASS 5.5: search finds by title
+PASS 5.8: open documents shown as tabs
+PASS 5.8: tabs sit directly under #stP3Top
+PASS 5.8: back returns to 5a library grid
+PASS 5.8: tabs remembered on relaunch (2)
+PASS 5.10: export downloads a PDF
+PASS 5.10: export has both pages
+PASS P5a-A: no .st5a-card title right edge exceeds its card at 390px
+PASS P5a-B: iPad grid has >= 4 columns at 1024px (5 inferred cols)
+PASS P5a-C: library screen has no duplicate pn-bar header element
+PASS P5a-C: opened PDF has #stP3Top
+PASS P5a-C: opened PDF has no legacy pn-bar visible
+PASS no uncaught page error 
+
+ALL PASSED
+```
+
+### 3. Full Study Regression Suite (`node test/run-study-ui.mjs`):
+```
+... (all 140+ assertions passing across Phases 0, 1, 2, 3, 4, 5a)
+PASS no uncaught page error 
+
+ALL PASSED
+```
+
+---
+
+## Visual Screenshot Audit (`.fleet-reports/study-p5a/`)
+
+Re-captured all 28 screenshot PNGs via `node test/capture-study-p5a-shots.mjs` (Phone 390px & iPad 820px, Dark and Light modes):
+- `phone-dark-01` through `07`: Clean single Documents title, 2-column cards with no title overflow, bottom-sheet item menu with Favourite toggle, clean list view, search snippet highlighting, trash view, and open PDF with unified `#stP3Top` and `#stDocTabs`.
+- `ipad-dark-01` through `07`: Spacious 5-column auto-fill grid, no duplicate header bars, unobstructed `#stP3Top` with single document tab and floating tool row.
+- `phone-light-01` through `07` & `ipad-light-01` through `07`: Flawless contrast and light theme styling across all components matching PrepNucleus tokens.
