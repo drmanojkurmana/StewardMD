@@ -92,6 +92,10 @@ async function check(id, html) {
   } else if (id === "ana-gametogenesis-q3") {
     ok(/Zika virus infection/.test(html) && /Learn this module/.test(html), "q3 items with both keep both");
     ok(html.indexOf("Zika virus infection") < html.indexOf("Learn this module"), "q3 evidenced first");
+    // Learn more (owner 2026-11-17): one titled group; Know more targets and Ask MaiK are rows on one left edge, 44px+ tall.
+    const lm = JSON.parse(await ev(`var g=document.querySelectorAll("#smdPrep .pn-qw .pn-lm"); if(g.length!==1) return JSON.stringify({n:g.length}); var rows=[].slice.call(g[0].querySelectorAll(".pn-lm-list button")); return JSON.stringify({n:1, h:g[0].querySelector(".pn-lm-h").textContent, rows:rows.length, ask:!!g[0].querySelector(".pa-ask"), lefts:rows.map(function(b){return Math.round(b.getBoundingClientRect().left);}), minH:Math.min.apply(null, rows.map(function(b){return b.offsetHeight;}))});`));
+    ok(lm.n === 1 && lm.h === "Learn more" && lm.ask && lm.rows >= 3, "q3 Learn more is one group holding Know more and Ask MaiK: " + JSON.stringify(lm));
+    ok(lm.lefts && lm.lefts.every((x) => x === lm.lefts[0]) && lm.minH >= 44, "q3 rows share one left edge and keep 44px+ targets");
     await shot("q3-both");
   } else if (id === "ana-gametogenesis-q4") {
     ok(/Learn this module/.test(html) && /data-l="ana-gametogenesis"/.test(html), "q4 lesson-only fallback relabels, same target");

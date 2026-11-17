@@ -2723,7 +2723,12 @@
     var F = G.SMD_FIG;
     if (!F || !F.matchText || !it || it._gone) return "";
     var txt = [it.q, (it.o || []).join(" "), stripWmMarks(it.exp), it.kp].join(" "), m = F.matchText(txt, 1)[0];
-    return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open") + "</div>" : "";
+    // The kind line under the title, so the row reads like its Learn more neighbours.
+    return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open").replace(/<\/b><\/button>$/, "</b><small>Interactive figure</small></button>") + "</div>" : "";
+  }
+  // The Learn more group: one titled section holding the rows; nothing at all when there is nothing in it.
+  function lmGroup(inner) {
+    return inner ? '<section class="pn-lm" aria-label="Learn more"><h3 class="pn-lm-h">Learn more</h3><div class="pn-lm-list">' + inner + "</div></section>" : "";
   }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
@@ -2845,14 +2850,16 @@
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
-        pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
-        figRowHtml(it) +
-        whyRowHtml(it, chosen, r.i) +
-        (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
+        pearlHtml(it, xo)) +
+        // Learn more (owner 2026-11-17: "a distinct section rather than a collection of floating buttons"): Know more
+        // targets, the interactive figure and Ask MaiK as one grouped list, every row the same height, icon and chevron.
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
         // older offline-only button, shown only when MaiK runs on this phone.
+        lmGroup((RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it) +
         (G.PREP_ASK ? askBtn("ask", "Ask MaiK") :
-          !ok && !tup && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
+          !ok && !tup && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "")) +
+        whyRowHtml(it, chosen, r.i) +
+        (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
         (!ok && !own ? '<div class="pn-mtag" role="group" aria-label="Why did you miss it?"><span class="pn-mut pn-small">Why did you miss it?</span><div class="pn-wrap">' + MISTAKE_TAGS.map(function (t) {
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
@@ -3312,8 +3319,8 @@
       var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
-        }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-      ex += figRowHtml(it);
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+      ex += lmGroup((RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it));
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
       // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
       var tagRow = r.mark[i] && !it._gone ? '<div class="pn-mtag" role="group" aria-label="How sure were you?"><span class="pn-mut pn-small">Marked for review: how sure were you? (optional)</span><div class="pn-wrap">' + [["guessing", "Guessing"], ["confident", "Confident"], ["confused", "Confused"]].map(function (t) {
@@ -3461,14 +3468,13 @@
     var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
         return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
-      }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-    ex += figRowHtml(it);
+      }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+    var rvLm = (RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it) + (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "");
     var sRv = load(), rvBm = it._s !== "deck" && !it._py && !!(sRv.bm && sRv.bm[it.id]);
     var rvActs = (it._s === "deck" || it._py ? "" : '<button type="button" class="pn-ib' + (rvBm ? " on" : "") + '" data-act="rvbookmark" aria-pressed="' + rvBm + '" aria-label="' + (rvBm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", rvBm) + "</button>") + (rid ? G.PREP_IDS.shareBtn(rid) : "");
     paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
-    }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
-      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
+    }).join("") + '</ol><section class="pn-fb">' + ex + lmGroup(rvLm) + outdatedHtml(it) + provHtml(it) + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
     bindRvSwipe();
