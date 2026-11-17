@@ -2368,3 +2368,12 @@ body.dark .pn-root .st-tb-tools .st-b.on {
 }
 body.dark .pn-root .st-tb-tools .st-b[data-v="pen"].on,
 body.dark .pn-root .st-tb-tools .st-b[data-v="hl"].on { color: var(--st-pen, #e8ecf3); }
+
+/* Laser colour swatches (study-insert laser strip) */
+.pn-root .st-laser-strip { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pn-root .st-laser-col { width: 28px; height: 28px; min-width: 28px; border-radius: 999px; border: 2px solid transparent; background: var(--lc); box-shadow: 0 0 0 1px rgba(0,0,0,.12) inset; padding: 0; cursor: pointer; }
+.pn-root .st-laser-col.on { border-color: var(--st-gold, #c9a227); box-shadow: 0 0 0 2px #fff inset; }
+.pn-root .st-laser-col::before { content: ""; display: block; width: 44px; height: 44px; margin: -10px; }
+
+/* iPad/iPhone status bar: the Study top bar starts below it (navy fills behind the clock/battery) */
+.pn-root .st-p3-topbar { padding-top: calc(6px + env(safe-area-inset-top, 0px)); padding-left: calc(8px + env(safe-area-inset-left, 0px)); padding-right: calc(8px + env(safe-area-inset-right, 0px)); }

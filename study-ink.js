@@ -126,6 +126,33 @@
   }
   function snapStraight(pts) { if (!pts || !pts.length) return pts; if (pts.length < 2) return pts.slice(); return [pts[0], pts[pts.length - 1]]; }
   function isStraightSnap(heldMs) { return heldMs >= 500; }
+  /* Hold-to-straighten recogniser (pts in 0..1 page space, W/H page size in px).
+     Open stroke -> straight line; closed stroke -> rectangle or ellipse; scribbles -> null (keep freehand). */
+  function recognizeShape(pts, W, H) {
+    if (!pts || pts.length < 3) return null;
+    var px = pts.map(function (p) { return [p[0] * W, p[1] * H]; }), i, len = 0;
+    for (i = 1; i < px.length; i++) len += Math.sqrt(Math.pow(px[i][0] - px[i - 1][0], 2) + Math.pow(px[i][1] - px[i - 1][1], 2));
+    if (len < 18) return null;
+    var minx = Infinity, miny = Infinity, maxx = -Infinity, maxy = -Infinity, pr = 0;
+    px.forEach(function (q, k) { minx = Math.min(minx, q[0]); maxx = Math.max(maxx, q[0]); miny = Math.min(miny, q[1]); maxy = Math.max(maxy, q[1]); pr += pts[k][2] != null ? pts[k][2] : 0.5; });
+    pr = r4(pr / pts.length);
+    var bw = maxx - minx, bh = maxy - miny, diag = Math.sqrt(bw * bw + bh * bh) || 1;
+    var a0 = px[0], a1 = px[px.length - 1], gap = Math.sqrt(Math.pow(a1[0] - a0[0], 2) + Math.pow(a1[1] - a0[1], 2));
+    var toRel = function (x, y) { return [r4(x / W), r4(y / H), pr]; };
+    var dense = function (list, closed) { var out = [], j, k, n = list.length; for (j = 0; j < n - (closed ? 0 : 1); j++) { var A = list[j], B = list[(j + 1) % n]; for (k = 0; k < 8; k++) out.push(toRel(A[0] + (B[0] - A[0]) * k / 8, A[1] + (B[1] - A[1]) * k / 8)); } out.push(toRel(list[closed ? 0 : n - 1][0], list[closed ? 0 : n - 1][1])); return out; };
+    var closed = gap < 0.22 * diag && len > 2.2 * diag && Math.min(bw, bh) > 14;
+    if (!closed) return { kind: "line", pts: dense([a0, a1], false) };
+    var cx = (minx + maxx) / 2, cy = (miny + maxy) / 2, rx = bw / 2 || 1, ry = bh / 2 || 1, eErr = 0, rErr = 0, m = Math.min(bw, bh) || 1;
+    px.forEach(function (q) {
+      var dx = (q[0] - cx) / rx, dy = (q[1] - cy) / ry; eErr += Math.abs(Math.sqrt(dx * dx + dy * dy) - 1);
+      rErr += Math.min(Math.abs(q[0] - minx), Math.abs(q[0] - maxx), Math.abs(q[1] - miny), Math.abs(q[1] - maxy)) / m;
+    });
+    eErr /= px.length; rErr /= px.length;
+    if (Math.min(eErr, rErr) > 0.12) return null;
+    if (rErr <= eErr) return { kind: "rect", pts: dense([[minx, miny], [maxx, miny], [maxx, maxy], [minx, maxy]], true) };
+    var el = []; for (i = 0; i <= 48; i++) { var t = i / 48 * Math.PI * 2; el.push(toRel(cx + Math.cos(t) * rx, cy + Math.sin(t) * ry)); }
+    return { kind: "ellipse", pts: el };
+  }
   // Palm rejection / finger policy. Returns "draw" | "pan" | "ignore".
   function pointerAction(e, st, isPenActive) {
     if (!e || e.isPrimary === false) return "ignore";
@@ -140,7 +167,7 @@
   }
   function toolSettings(s, tool) { return tool === "hl" ? s.hl : s.pen; }
   function activeWidth(s, tool) { var t = toolSettings(s, tool); return t.widths[t.wi] || t.widths[1]; }
-  var PURE = { PEN_COLORS: PEN_COLORS, HL_COLORS: HL_COLORS, ERASER_RADII: ERASER_RADII, defaults: defaults, mergeSettings: mergeSettings, loadSettings: loadSettings, saveSettings: saveSettings, validHex: validHex, addRecent: addRecent, widthFactor: widthFactor, effPressure: effPressure, pointScale: pointScale, strokeWidths: strokeWidths, outline: outline, splitPts: splitPts, snapStraight: snapStraight, isStraightSnap: isStraightSnap, pointerAction: pointerAction, activeWidth: activeWidth, distPtSeg: distPtSeg, clamp: clamp };
+  var PURE = { PEN_COLORS: PEN_COLORS, HL_COLORS: HL_COLORS, ERASER_RADII: ERASER_RADII, defaults: defaults, mergeSettings: mergeSettings, loadSettings: loadSettings, saveSettings: saveSettings, validHex: validHex, addRecent: addRecent, widthFactor: widthFactor, effPressure: effPressure, pointScale: pointScale, strokeWidths: strokeWidths, outline: outline, splitPts: splitPts, snapStraight: snapStraight, isStraightSnap: isStraightSnap, recognizeShape: recognizeShape, pointerAction: pointerAction, activeWidth: activeWidth, distPtSeg: distPtSeg, clamp: clamp };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   G.STUDY_INK_PURE = PURE;
 
@@ -331,55 +358,14 @@
       var a = posFast(e);
       return [r4(a[0]), r4(a[1]), r4(api.pressureOf(e))];
     };
-    function drawIncremental() {
-      if (!cur || !cur.pts || !cur.pts.length) return;
-      var ctx = ov.getContext("2d");
-      var W = cachedW || ov.clientWidth, H = cachedH || ov.clientHeight, dpr = cachedDpr;
-      ctx.save();
-      ctx.scale(dpr, dpr);
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-      var sens = cur.sens != null ? cur.sens : 0.5;
-      var baseW = (cur.w || 0.0032) * W;
-      if (cur.tool === "hl") {
-        ctx.globalAlpha = 0.38;
-        ctx.globalCompositeOperation = "multiply";
-        ctx.strokeStyle = cur.color;
-        ctx.fillStyle = cur.color;
-      } else {
-        ctx.strokeStyle = cur.color;
-        ctx.fillStyle = cur.color;
-      }
-      var pts = cur.pts;
-      if (drawnIndex === 0) {
-        var p0 = pts[0];
-        var w0 = cur.tool === "hl" ? Math.max(1, cur.w * W * 6) : Math.max(0.5, baseW * widthFactor(p0[2], sens));
-        ctx.beginPath();
-        ctx.arc(p0[0] * W, p0[1] * H, w0 / 2, 0, Math.PI * 2);
-        ctx.fill();
-        drawnIndex = 1;
-      }
-      var from = Math.max(1, drawnIndex - 1);
-      for (var i = from; i < pts.length; i++) {
-        var a = pts[i - 1], b = pts[i];
-        var wi = cur.tool === "hl" ? Math.max(1, cur.w * W * 6) : Math.max(0.5, baseW * widthFactor(b[2], sens));
-        ctx.lineWidth = wi;
-        ctx.beginPath();
-        ctx.moveTo(a[0] * W, a[1] * H);
-        ctx.lineTo(b[0] * W, b[1] * H);
-        ctx.stroke();
-      }
-      drawnIndex = pts.length;
-      ctx.restore();
-    }
+    /* Live stroke is drawn by the SAME renderer as the saved stroke (drawStyled), on the live layer,
+       so nothing changes when the pen lifts (owner: "bold while drawing, shrinks after"). */
+    function drawIncremental() { drawPredicted(); }
     function scheduleFrame() {
       if (rafId) return;
       rafId = G.requestAnimationFrame(function () {
         rafId = 0;
-        if (cur) {
-          drawIncremental();
-          drawPredicted();
-        }
+        if (cur) drawPredicted();
       });
     }
     function drawPredicted() {
@@ -387,7 +373,8 @@
       var ctx = p.live.getContext("2d"), dpr = cachedDpr || (p.live.width / (p.el.clientWidth || 1)), W = cachedW || p.el.clientWidth, H = cachedH || p.el.clientHeight;
       ctx.clearRect(0, 0, p.live.width, p.live.height);
       // predicted points are drawn only on the live layer and never saved
-      if (cur._pred && cur._pred.length) { var tmp = { tool: cur.tool, color: cur.color, w: cur.w, pts: cur.pts.concat(cur._pred), style: cur.style, sens: cur.sens, tip: cur.tip }; drawStyled(ctx, tmp, W, H, dpr); }
+      var tmp = { tool: cur.tool, color: cur.color, w: cur.w, pts: (cur._pred && cur._pred.length && !snapped) ? cur.pts.concat(cur._pred) : cur.pts, style: cur.style, sens: cur.sens, tip: cur.tip };
+      drawStyled(ctx, tmp, W, H, dpr);
     }
     function clearLive() { var V = api.getV(), p = V && V.pg[n]; if (p && p.live) { var ctx = p.live.getContext("2d"); ctx.clearRect(0, 0, p.live.width, p.live.height); } if (cur) cur._pred = null; }
     function eraseRadius() { var s = settingsOf(api); if (s.eraser.mode === "precision") return ERASER_RADII.precision; if (s.eraser.mode === "standard") return ERASER_RADII.standard[s.eraser.size] || 18; return ERASER_RADII.stroke; }
@@ -425,6 +412,20 @@
       });
       if (changed) api.redraw(n);
     }
+    var holdTimer = 0, holdAnchor = null, snapped = null;
+    function clearHold() { if (holdTimer) { G.clearTimeout(holdTimer); holdTimer = 0; } }
+    function armHold(p) {
+      clearHold(); holdAnchor = p;
+      holdTimer = G.setTimeout(function () {
+        holdTimer = 0;
+        if (!cur || snapped || (cur.tool !== "pen" && cur.tool !== "hl")) return;
+        var shape = recognizeShape(cur.pts, cachedW || ov.clientWidth, cachedH || ov.clientHeight);
+        if (!shape) return;
+        cur._free = cur.pts; cur.pts = shape.pts; cur.snap = shape.kind; snapped = shape;
+        try { if (G.navigator && G.navigator.vibrate) G.navigator.vibrate(8); } catch (x) {}
+        drawPredicted();
+      }, 500);
+    }
     ov.addEventListener("pointerdown", function (e) {
       var V = api.getV(); if (!V || !V.tool) return;
       if (e.pointerType === "pen") {
@@ -448,7 +449,7 @@
       if (V.tool === "lasso") { lassoPts = [posFast(e)]; api.removeLassoBar(); api.redraw(n, null, lassoPts); e.preventDefault(); return; }
       var ts = toolSettings(st, V.tool);
       var pt = sampleFast(e); lastMoveTs = e.timeStamp || Date.now(); lastPt = pt;
-      drawnIndex = 0;
+      drawnIndex = 0; snapped = null; clearHold();
       cur = { id: api.uid(), doc: V.id, page: api.pid(n), tool: V.tool, color: ts.color, w: ts.widths[ts.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now(), style: V.tool === "hl" ? "ball" : ts.style, sens: ts.sens, tip: ts.tip };
       try { if (window.STUDY_MEDIA && window.STUDY_MEDIA.stampStroke) { var aOff = window.STUDY_MEDIA.stampStroke(); if (aOff != null) cur.a = aOff; } } catch (x) {} /* Phase 5b: audio offset for tap-to-seek */
       drawIncremental();
@@ -466,12 +467,21 @@
       if (V.tool === "er") { showCursor(e); return; }
       if (lassoPts) { lassoPts.push(posFast(e)); api.redraw(n, null, lassoPts); return; }
       if (!cur) return;
+      if (snapped) {
+        /* after a snap, a line's end follows the pen until lift (GoodNotes); rectangles/ellipses stay put */
+        if (snapped.kind === "line") { var ep = sampleFast(e), sp = cur.pts[0]; cur.pts = recognizeShape([sp, [(sp[0] + ep[0]) / 2, (sp[1] + ep[1]) / 2, sp[2]], [ep[0], ep[1], sp[2]]], cachedW || ov.clientWidth, cachedH || ov.clientHeight).pts; }
+        scheduleFrame(); return;
+      }
       var evs = (e.getCoalescedEvents && e.getCoalescedEvents()) || null;
       if (!evs || !evs.length) evs = [e];
       for (var ci = 0; ci < evs.length; ci++) {
         var p = sampleFast(evs[ci]);
         cur.pts.push(p);
         lastPt = p;
+      }
+      if (cur.tool === "pen" || cur.tool === "hl") {
+        var Wm = cachedW || ov.clientWidth, Hm = cachedH || ov.clientHeight;
+        if (!holdAnchor || Math.abs((lastPt[0] - holdAnchor[0]) * Wm) > 4 || Math.abs((lastPt[1] - holdAnchor[1]) * Hm) > 4) armHold(lastPt);
       }
       lastMoveTs = e.timeStamp || Date.now();
       var pred = (e.getPredictedEvents && e.getPredictedEvents()) || [];
@@ -509,10 +519,10 @@
       }
       if (!cur) return;
       cur.t1 = Date.now();
-      var held = (e && e.timeStamp ? e.timeStamp : Date.now()) - lastMoveTs;
-      if (V.tool === "hl" && isStraightSnap(held) && cur.pts.length > 2) cur.pts = snapStraight(cur.pts);
+      clearHold(); holdAnchor = null;
+      var wasSnapped = !!snapped; snapped = null;
       // Phase 0 scribble erase, unchanged gates via study.js helpers
-      if (V.tool === "pen" && V.scribble !== false) {
+      if (V.tool === "pen" && V.scribble !== false && !wasSnapped) {
         var scW = ov.clientWidth, scH = ov.clientHeight, scInk = [];
         V.strokes.forEach(function (s2) { if (s2.page === api.pid(n) && !s2.gone) scInk.push(s2); });
         if (api.isScribble(cur.pts, { durationMs: cur.t1 - cur.t0, pageW: scW, pageH: scH, ink: scInk })) {
