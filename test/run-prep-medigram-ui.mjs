@@ -25,7 +25,8 @@ const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugg
 let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let shimSilent = false;
 // The shim (stewardmd.in/_site/yt) is stubbed: it posts the same hello the real one does, or stays silent.
-const shimPage = (silent) => "<!doctype html><body style=background:#000><script>" + (silent ? "" : "var v=(location.search.match(/v=([^&]+)/)||[])[1];parent.postMessage({clinixYt:true,v:v,shim:'loaded'},'*');") + "</script>";
+// The live stub also answers the app's commands like the real shim: { smdCmd } in, { smdYt, state, muted } out.
+const shimPage = (silent) => "<!doctype html><body style=background:#000><script>" + (silent ? "" : "var v=(location.search.match(/v=([^&]+)/)||[])[1],st=1,mu=false,t=0;function rep(){parent.postMessage({smdYt:true,v:v,state:st,muted:mu,t:t},'*');}parent.postMessage({clinixYt:true,v:v,shim:'loaded'},'*');rep();addEventListener('message',function(e){var c=e.data&&e.data.smdCmd;if(c==='pause')st=2;if(c==='play')st=1;if(c==='mute')mu=true;if(c==='unmute')mu=false;if(c==='seek')t=Math.max(0,t+(+e.data.by||0));rep();});") + "</script>";
 // Every bank module the reel draws gets a 30-question fixture (the fixture bank only has two real modules); imglearn gets two images.
 const fixtureFor = (u) => {
   if (/imglearn/.test(u)) return { set: "eye", items: [{ img: "fx.webp", dx: "Fixture diagnosis", finding: "Fixture finding.", deck: "Eye" }, { img: "fx2.webp", dx: "Second diagnosis", deck: "Eye" }] };
@@ -71,7 +72,8 @@ try {
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
   ok(await ev(`return !/shown in the image/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "questions that need a figure are left out");
   ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows, Skip or Next before an answer: one card per swipe");
-  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "nothing wider than the 390 px screen");
+  const wide = await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(e.tagName+"."+String(e.className).slice(0,30)+":"+Math.round(r.right));}); return o.slice(0,4).join(" ");`);
+  ok(wide === "", "nothing wider than the 390 px screen" + (wide ? ": " + wide : ""));
   const subj = await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-q .pn-eb').textContent;`);
   await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-answer][data-k='0']");
   ok(await until(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`, 8000), "answering shows the explanation in place");
@@ -87,6 +89,21 @@ try {
   const played = await ev(`return document.querySelector('#smdPrep .pn-mg-vid iframe').closest('.pn-mg-vid').getAttribute('data-vid');`);
   await sleep(6500);
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
+  // Our own controls: pause/play, seek, sound, full screen (YouTube's overlay hides itself on touch screens).
+  const cardSel = "#smdPrep .pn-mg-vid.pn-mg-c:has(iframe)";
+  ok(await ev(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && ["back","toggle","fwd","sound"].every(function(v){return !!c.querySelector('[data-act=mg-v][data-v='+v+']');}) && !!c.querySelector('[data-act=mg-fs]');`) === true, "the playing video has back, play/pause, forward, sound and full screen controls");
+  await click(cardSel + " [data-act=mg-v][data-v=toggle]");
+  ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`, 4000), "Pause pauses (the button turns to Play)");
+  await click(cardSel + " [data-act=mg-v][data-v=toggle]");
+  ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Pause';`, 4000), "Play resumes");
+  await click(cardSel + " [data-act=mg-v][data-v=sound]");
+  ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=sound]")}).getAttribute('aria-label') === 'Unmute';`, 4000), "Sound mutes and unmutes");
+  await click(cardSel + " [data-act=mg-fs]");
+  ok(await until(`var c=document.querySelector('#smdPrep .pn-mg-fs'); if(!c) return false; var r=c.getBoundingClientRect(); return r.top<=1 && r.left<=1 && r.width>=innerWidth-1 && r.height>=innerHeight-1 && !!c.querySelector('iframe');`, 4000), "Full screen covers the whole screen and keeps the same player");
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(); return f.width<=innerWidth+1 && f.bottom<=innerHeight+1 && f.height>100;`) === true, "the full-screen video fits the screen");
+  ok(await ev(`var e=document.elementFromPoint(innerWidth/2, 30); return !!(e && e.closest('.pn-mg-fs'));`) === true, "nothing (header, tabs) shows over the full-screen video");
+  await evA(`window.PREP.back ? window.PREP.back() : history.back()`);
+  ok(await until(`return !document.querySelector('#smdPrep .pn-mg-fs') && !!document.querySelector('#smdPrep #pnMgFeed') && !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "Back leaves full screen first, the video keeps playing in its card");
   await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
   ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 8000), "swiping away releases the player");
   ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-vid img');`) === true, "the video poster is a background, so a tap can never open the image zoom viewer");

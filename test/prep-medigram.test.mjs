@@ -124,6 +124,9 @@ test("media: videos come from cleared CliniX manifest entries and play through t
   assert.match(shimHtml, /auto \? "&autoplay=1"/, "the shim forwards autoplay to the official player");
   assert.match(shimHtml, /onAutoplayBlocked: muteAndPlay/, "a blocked autoplay retries muted instead of sitting paused");
   assert.match(media, /"autoplay; /, "the app frame delegates autoplay");
+  assert.match(shimHtml, /e\.source !== window\.parent/, "the shim takes commands only from the app frame that embeds it");
+  for (const c of ["play", "pause", "seek", "mute", "unmute"]) assert.match(shimHtml, new RegExp('d\\.smdCmd === "' + c + '"'), "shim handles " + c);
+  assert.match(media, /postMessage\(\{ smdCmd: cmd, by: by \|\| 0 \}, "https:\/\/stewardmd\.in"\)/, "commands are posted to the shim origin only");
   assert.doesNotMatch(media + feed, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "videos never hand off to the YouTube app or site");
   const vids = M.videosFrom({ media: {
     a: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ", title: "Resp exam", attribution: "Geeky Medics" },

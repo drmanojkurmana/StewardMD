@@ -314,8 +314,23 @@
 
   if (auto) {
     window.onYouTubeIframeAPIReady = function () {
-      var muted = false, muteAndPlay = function () { if (muted) return; muted = true; try { p.mute(); p.playVideo(); } catch (x) {} };
+      var muted = false, muteAndPlay = function () { if (muted) return; muted = true; try { p.mute(); p.playVideo(); } catch (x) {} setTimeout(report, 300); };
+      // State up to the app (its own play/pause, seek, sound and fullscreen controls), commands down from it.
+      var report = function () { try { parent.postMessage({ smdYt: true, v: v, state: p.getPlayerState(), muted: p.isMuted() }, "*"); } catch (x) {} };
+      window.addEventListener("message", function (e) {
+        var d = e && e.data;
+        if (e.source !== window.parent || !d || typeof d.smdCmd !== "string") return;
+        try {
+          if (d.smdCmd === "play") p.playVideo();
+          else if (d.smdCmd === "pause") p.pauseVideo();
+          else if (d.smdCmd === "seek") p.seekTo(Math.max(0, p.getCurrentTime() + (+d.by || 0)), true);
+          else if (d.smdCmd === "mute") p.mute();
+          else if (d.smdCmd === "unmute") { p.unMute(); p.setVolume(100); }
+        } catch (x) {}
+        setTimeout(report, 250);
+      });
       var p = new YT.Player("ytp", { events: {
+        onStateChange: report,
         onReady: function () {
           try { p.playVideo(); } catch (x) {}
           // Older players do not send onAutoplayBlocked: still unstarted or cued after 3 s means it was blocked.

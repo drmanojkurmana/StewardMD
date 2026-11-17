@@ -10,6 +10,18 @@
 .pn-root .pn-mg-frame { background-size: cover; background-position: center; cursor: pointer; }
 .pn-root .pn-mg-play { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: #0d1d23; border: 1px solid #42cdb5; color: #42cdb5; padding-left: 3px; box-sizing: border-box; }
 .pn-root .pn-mg-frame.on .pn-mg-play { display: none; }
+.pn-root .pn-mg-vctl { display: flex; justify-content: space-between; gap: 6px; }
+.pn-root .pn-mg-vctl button { flex: 1 1 0; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); background: var(--pn-card); color: var(--pn-text); padding: 0; }
+.pn-root .pn-mg-vctl button:active { background: var(--pn-s1); }
+/* Full screen is our own layer (no Fullscreen API: WKWebView leaves element full screen off). The reel box drops its
+   leftover animation transform while it is open, or position: fixed would be trapped inside it. */
+.pn-root .pn-mg-fsbox { transform: none !important; animation: none !important; overflow: hidden; }
+.pn-root > .pn-body.pn-mg-fsbody { z-index: 5000; }   /* .pn-body is its own stacking layer (z 1) under the bar (z 2) */
+.pn-root .pn-mg-vid.pn-mg-fs { position: fixed; inset: 0; z-index: 5000; margin: 0; max-width: none; background: #000; justify-content: center; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+.pn-root .pn-mg-fs .pn-mg-frame { border-radius: 0; align-self: center; flex: 0 0 auto; width: min(100%, calc((100dvh - 80px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px)) * 16 / 9)); }
+.pn-root .pn-mg-fs > .pn-mg-tag, .pn-root .pn-mg-fs > .vf-stem, .pn-root .pn-mg-fs > .pn-mut { display: none; }
+.pn-root .pn-mg-fs .pn-mg-vctl { width: 100%; max-width: 560px; margin: 8px auto 0; padding: 0 12px; box-sizing: border-box; }
+.pn-root .pn-mg-fs .pn-mg-vctl button { background: #0d1d23; border-color: #16323b; color: #e2f1ee; }
 .pn-root .pn-mg-row { display: flex; gap: 8px; }
 .pn-root .pn-mg-row .pn-btn { flex: 1 1 0; }
 .pn-root .vf-end .pn-btn { min-width: 200px; }
