@@ -2149,9 +2149,10 @@ body:not(.dark) .pn-root .st-ink-seg.on {
 .pn-root .st-ink-ctx {
   display: flex;
   align-items: center;
-  flex: 1 1 auto;
+  flex: 1 1 0;
   min-width: 0;
 }
+.pn-root .st-tb .st-ink-strip { min-width: 0; }
 .pn-root .st-ink-ctx:empty { display: none; }
 .pn-root .st-ink-ctx:not(:empty) {
   border-left: 1px solid var(--st-hairline);
@@ -2176,4 +2177,107 @@ body:not(.dark) .pn-root .st-ink-seg.on {
 .pn-root .st-tb .st-w.on {
   background: var(--st-active-wash);
   border-color: var(--st-navy);
+}
+.pn-root .st-tb .st-ink-hint { display: none; }
+
+/* Page area: neutral grey canvas, white page, hairline border. */
+.pn-root .st-sc { background: var(--st-canvas); }
+.pn-root .st-pg {
+  border: 1px solid var(--st-hairline);
+  box-shadow: 0 1px 4px rgba(28, 36, 50, 0.12);
+  border-radius: 2px;
+}
+.pn-root .st-p3-pager {
+  background: var(--st-navy);
+  border-color: var(--st-navy-deep);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(28, 36, 50, 0.25);
+}
+
+/* Gold spends: selection handles, lasso bar, focus rings, sheet primaries. */
+.pn-root .st-item.selected { outline-color: var(--st-gold); }
+.pn-root .st-handle { background: var(--st-gold); }
+.pn-root .st-drag-bar i { background: var(--st-gold); }
+.pn-root .st-rot-handle { border-color: var(--st-gold); }
+.pn-root .st-rot-handle::after { background: var(--st-gold); }
+.pn-root .st-lasso-bar { border-color: var(--st-gold); }
+.pn-root .st-sel-count { color: var(--st-navy-ink); }
+.pn-root .st-b:focus-visible, .pn-root .st-c:focus-visible, .pn-root .st-w:focus-visible,
+.pn-root .st-chip:focus-visible, .pn-root .st-pg-card:focus-visible,
+.pn-root .st-p3-btn:focus-visible, .pn-root .st-p3-topbar:focus-visible,
+.pn-root .st-action-tile:focus-visible, .pn-root .st-dt-open:focus-visible,
+.pn-root .st-dt-x:focus-visible, .pn-root .st-menu-item:focus-visible,
+.pn-root .st5a-chip:focus-visible, .pn-root .st5a-tab:focus-visible,
+.pn-root .st-erase-toast:focus-visible, .pn-root .st-erase-undo:focus-visible {
+  outline: 2px solid var(--st-gold);
+  outline-offset: 2px;
+}
+.pn-root .st-sh .pn-btn.pri,
+.pn-root .st-erase-undo {
+  background: var(--st-gold);
+  border-color: var(--st-gold);
+  color: var(--st-gold-ink);
+}
+.pn-root .st-menu-item.on, .pn-root .st-p3-menu-item.on {
+  border-color: var(--st-gold);
+  background: rgba(201, 162, 39, 0.1);
+}
+.pn-root .st-more-sec-title, .pn-root .st-p3-out-head { color: var(--st-sub); }
+
+/* Library: same navy + gold product feel. */
+.pn-root .st-chip.on, .pn-root .st5a-chip.on {
+  background: var(--st-navy);
+  border-color: var(--st-navy);
+  color: #ffffff;
+}
+.pn-root .st5a-tab.on { background: var(--st-navy); color: #ffffff; }
+.pn-root .st-action-tile.pri { border-color: var(--st-navy-2); }
+.pn-root .st-action-ico, .pn-root .st-menu-ico, .pn-root .st-empty-ico { color: var(--st-navy); }
+.pn-root .st-ai-title { color: var(--st-navy-ink); }
+.pn-root .st-q:focus { outline-color: var(--st-gold); }
+.pn-root .st-pg-card.cur, .pn-root .st-p3-nav-card.cur {
+  border-color: var(--st-gold);
+  background: rgba(201, 162, 39, 0.1);
+}
+
+/* Dark mode: navy bars stay, tool row turns dark navy-grey, page stays white. */
+body.dark .pn-root .st-tb {
+  background: var(--st-toolrow-dark);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+body.dark .pn-root .st-tb .st-b { color: #e8ecf3; }
+body.dark .pn-root .st-tb-tools .st-b.on {
+  background: var(--st-active-wash);
+  color: var(--st-navy-ink);
+}
+body.dark .pn-root .st-dt.on { background: var(--st-toolrow-dark); }
+body.dark .pn-root .st-dt.on .st-dt-open { color: #ffffff; }
+body.dark .pn-root .st-dt.on .st-dt-x { color: #a9b1c7; }
+body.dark .pn-root .st-sc { background: var(--st-canvas-dark); }
+body.dark .pn-root .st-ai-title, body.dark .pn-root .st-sel-count { color: #e8ecf3; }
+body.dark .pn-root .st-ink-seg.on {
+  background: var(--st-active-wash);
+  border-color: transparent;
+  color: var(--st-navy-ink);
+}
+
+/* Phone: top bar already collapses into More; tabs scroll; tool row wraps
+   inside the same bar, tools scroll with snap, colour dots live in the popover. */
+@media (max-width: 560px) {
+  .pn-root .st-tb { justify-content: flex-start; padding: 4px 6px; }
+  .pn-root .st-tb-group { flex: 1 1 100%; min-width: 0; }
+  .pn-root .st-tb-tools {
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pn-root .st-tb-tools::-webkit-scrollbar { display: none; }
+  .pn-root .st-tb-tools .st-b { scroll-snap-align: start; }
+  .pn-root .st-ink-ctx:not(:empty) { border-left: 0; margin-left: 0; padding-left: 0; flex: 1 1 100%; }
+  .pn-root .st-tb .st-ink-colors, .pn-root .st-tb .st-ink-custom { display: none; }
+  .pn-root .st-dt { min-width: 132px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pn-root .st-p3-btn, .pn-root .st-dt-open, .pn-root .st-ink-pop { transition: none !important; animation: none !important; }
 }
