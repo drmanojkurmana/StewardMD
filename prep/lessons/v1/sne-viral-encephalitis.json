@@ -1,0 +1,343 @@
+{
+ "v": 1,
+ "module": "sne-viral-encephalitis",
+ "title": "Viral encephalitis and meningitis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Encephalitis** is inflammation of brain tissue that clouds consciousness, while **aseptic meningitis** is irritation of the coverings with headache and neck stiffness but preserved alertness. **HSV-1** causes about **90%** of HSV encephalitis and is the chief treatable sporadic cause. **Enteroviruses** cause more than **85%** of viral meningitis with a proven agent, and a specific virus is found in **60 to 90%** of cases.",
+   "say": "Encephalitis is inflammation of brain tissue that clouds consciousness, while aseptic meningitis is irritation of the coverings with headache and neck stiffness but preserved alertness. HSV-1 causes about ninety percent of HSV encephalitis and is the chief treatable sporadic cause. Enteroviruses cause more than eighty five percent of viral meningitis with a proven agent, and a specific virus is found in sixty to ninety percent of cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Encephalitis",
+     "Aseptic meningitis"
+    ],
+    "rows": [
+     [
+      "Sensorium",
+      "Clouded, confused or comatose",
+      "Alert with headache"
+     ],
+     [
+      "Neck stiffness",
+      "May be mild or absent",
+      "Prominent with photophobia"
+     ],
+     [
+      "Top viral cause",
+      "HSV-1, about 90 percent",
+      "Enterovirus, over 85 percent proven"
+     ],
+     [
+      "Season and age",
+      "All ages, all year",
+      "Children under 15 in summer and fall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HSV-1** occurs sporadically all year in all ages, while **enteroviruses** spread by the fecal oral route with August and September peaks in children. Mosquito viruses such as **West Nile** and **Japanese encephalitis** appear in summer and early autumn. **VZV** remains latent for decades after chickenpox and causes shingles in the elderly, and **Nipah virus** follows bat exposure with very high fatality.",
+   "say": "HSV-1 occurs sporadically all year in all ages, while enteroviruses spread by the fecal oral route with August and September peaks in children. Mosquito viruses such as West Nile and Japanese encephalitis appear in summer and early autumn. VZV remains latent for decades after chickenpox and causes shingles in the elderly, and Nipah virus follows bat exposure with very high fatality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Year round sporadic",
+     "points": [
+      "HSV-1 encephalitis in any age and season",
+      "HSV-2 recurrent meningitis after genital herpes",
+      "VZV reactivation decades after chickenpox",
+      "Elderly and immunocompromised hosts at risk"
+     ]
+    },
+    "right": {
+     "title": "Seasonal vector borne",
+     "points": [
+      "Enterovirus in children by fecal oral spread",
+      "West Nile and Japanese encephalitis in summer",
+      "Summer and early autumn clustering",
+      "Nipah after bat exposure in South Asia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Most viruses reach the brain through the **bloodstream** after a systemic viremia, which is the dominant route for nearly all agents. **HSV-1** and **VZV** also spread backward along sensory axons from ganglia, and HSV may enter through olfactory neurons to the temporal lobe. Inside neurons the virus replicates and lyses cells, and **microglia** take up the debris in a process called neuronophagia.",
+   "say": "Most viruses reach the brain through the bloodstream after a systemic viremia, which is the dominant route for nearly all agents. HSV-1 and VZV also spread backward along sensory axons from ganglia, and HSV may enter through olfactory neurons to the temporal lobe. Inside neurons the virus replicates and lyses cells, and microglia take up the debris in a process called neuronophagia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Viremia seeds the brain"
+     },
+     {
+      "id": "b",
+      "label": "HSV reactivates in trigeminal ganglia"
+     },
+     {
+      "id": "c",
+      "label": "Axonal spread to temporal lobe"
+     },
+     {
+      "id": "d",
+      "label": "Neuronal lysis by virus"
+     },
+     {
+      "id": "e",
+      "label": "Neuronophagia and necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HSV encephalitis** develops over days with fever, headache, seizures and deepening confusion toward coma. The classic clue is **temporal lobe** dysfunction: smell or taste hallucinations, new aphasia, bizarre behavior and personality change. **Hemorrhagic swelling** of one or both temporal lobes can herniate early and remains a poor prognostic sign.",
+   "say": "HSV encephalitis develops over days with fever, headache, seizures and deepening confusion toward coma. The classic clue is temporal lobe dysfunction: smell or taste hallucinations, new aphasia, bizarre behavior and personality change. Hemorrhagic swelling of one or both temporal lobes can herniate early and remains a poor prognostic sign.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Points to",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Smell or taste hallucinations",
+      "Inferomedial temporal lobe",
+      "Signature of HSV encephalitis"
+     ],
+     [
+      "Aphasia and personality change",
+      "Frontal and temporal cortex",
+      "Separates it from pure meningitis"
+     ],
+     [
+      "Seizures evolving over days",
+      "HSV over other viruses",
+      "Status epilepticus stays rare"
+     ],
+     [
+      "Temporal swelling with herniation",
+      "Raised pressure emergency",
+      "Poor prognostic sign"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**VZV vasculitis** causes stroke like deficits weeks after **ophthalmic shingles** with deep ipsilateral infarcts. **West Nile virus** produces tremor, parkinsonism and flaccid polio like weakness from anterior horn injury. **Mollaret meningitis** is recurrent brief **HSV-2** meningitis, and new confusion with seizures in the elderly can mimic stroke or venous thrombosis.",
+   "say": "V Z V vasculitis causes stroke like deficits weeks after ophthalmic shingles with deep ipsilateral infarcts. West Nile virus produces tremor, parkinsonism and flaccid polio like weakness from anterior horn injury. Mollaret meningitis is recurrent brief HSV-2 meningitis, and new confusion with seizures in the elderly can mimic stroke or venous thrombosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "VZV patterns",
+     "points": [
+      "Stroke weeks after ophthalmic shingles",
+      "Small deep infarcts ipsilateral to the rash",
+      "Confusion in elderly during late shingles",
+      "Vasculopathy rather than true encephalitis"
+     ]
+    },
+    "right": {
+     "title": "Flavivirus patterns",
+     "points": [
+      "West Nile tremor with parkinsonism",
+      "Flaccid asymmetric weakness, anterior horn injury",
+      "Japanese encephalitis thalamic and parkinsonian signs",
+      "Deep grey matter signs suggest flavivirus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CSF PCR for HSV** is the definitive test to confirm or exclude HSV encephalitis, but it can be falsely negative in the first **48 hours** and must be repeated. The first imaging test is **MRI** showing T2 and FLAIR signal in the inferior temporal lobe and insula. **EEG** shows lateralized periodic discharges, and arboviruses are diagnosed by serum and CSF **IgM** testing.",
+   "say": "CSF PCR for HSV is the definitive test to confirm or exclude HSV encephalitis, but it can be falsely negative in the first two days and must be repeated. The first imaging test is MRI showing T2 and FLAIR signal in the inferior temporal lobe and insula. EEG shows lateralized periodic discharges, and arboviruses are diagnosed by serum and CSF IgM testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Role"
+    ],
+    "rows": [
+     [
+      "CSF HSV PCR",
+      "Positive in most, repeat if early negative",
+      "Definitive test, confirms HSV"
+     ],
+     [
+      "Brain MRI",
+      "Temporal and insular T2 signal",
+      "First imaging, almost always abnormal"
+     ],
+     [
+      "EEG",
+      "Lateralized periodic discharges",
+      "Supportive in the right setting"
+     ],
+     [
+      "Serum and CSF IgM",
+      "Virus specific antibody in days",
+      "Diagnoses West Nile and equine viruses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intravenous acyclovir** at **10 mg** per kg every **8 hours** for **14 to 21 days** is started the moment HSV encephalitis is suspected, without waiting for PCR. Arboviral encephalitis has **no specific antiviral** and needs intensive supportive care with raised pressure control. Ophthalmic zoster needs oral antivirals, and **doxycycline** is added where scrub typhus is suspected.",
+   "say": "Intravenous acyclovir at ten milligrams per kilogram every eight hours for fourteen to twenty one days is started the moment HSV encephalitis is suspected, without waiting for PCR. Arboviral encephalitis has no specific antiviral and needs intensive supportive care with raised pressure control. Ophthalmic zoster needs oral antivirals, and doxycycline is added where scrub typhus is suspected.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect HSV encephalitis"
+     },
+     {
+      "id": "b",
+      "label": "IV acyclovir 10 mg per kg every 8 hours"
+     },
+     {
+      "id": "c",
+      "label": "Continue 14 to 21 days"
+     },
+     {
+      "id": "d",
+      "label": "Arboviral pattern instead"
+     },
+     {
+      "id": "e",
+      "label": "Supportive care only"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CSF VZV antibodies** indicate vasculitis more sensitively than viral DNA, and such patients receive acyclovir with **corticosteroids**. About **20%** of HSV survivors develop **anti NMDA receptor antibodies** with delayed movement disorders or delirium needing immunotherapy. **Next generation sequencing** of spinal fluid now identifies obscure causes within days when PCR panels stay negative.",
+   "say": "CSF VZV antibodies indicate vasculitis more sensitively than viral DNA, and such patients receive acyclovir with corticosteroids. About twenty percent of HSV survivors develop anti NMDA receptor antibodies with delayed movement disorders or delirium needing immunotherapy. Next generation sequencing of spinal fluid now identifies obscure causes within days when PCR panels stay negative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Advance",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "VZV antibody over DNA",
+      "More sensitive for zoster vasculitis"
+     ],
+     [
+      "Acyclovir plus steroids",
+      "Justified when vessel walls are infected"
+     ],
+     [
+      "Anti NMDA after HSV",
+      "Delayed relapse picture in 20 percent"
+     ],
+     [
+      "Spinal fluid sequencing",
+      "Finds obscure agents in days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Untreated **HSV encephalitis** carries very high mortality, while early aciclovir means roughly **81%** survive. Only about **half** of survivors have no or minor sequelae, and the rest keep deficits such as **Korsakoff amnesia**, aphasia or temporal lobe epilepsy. **Eastern equine encephalitis** leaves about **80%** of survivors severely impaired, while La Crosse infection stays almost uniformly benign.",
+   "say": "Untreated HSV encephalitis carries very high mortality, while early aciclovir means roughly eighty one percent survive. Only about half of survivors have no or minor sequelae, and the rest keep deficits such as Korsakoff amnesia, aphasia or temporal lobe epilepsy. Eastern equine encephalitis leaves about eighty percent of survivors severely impaired, while La Crosse infection stays almost uniformly benign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HSV outlook",
+     "points": [
+      "Early aciclovir saves roughly 81 percent",
+      "Only half escape major sequelae",
+      "Korsakoff amnesia, aphasia, epilepsy",
+      "Outcome tracks age and consciousness"
+     ]
+    },
+    "right": {
+     "title": "Arboviral outlook",
+     "points": [
+      "Eastern equine impairs 80 percent of survivors",
+      "Japanese encephalitis kills 20 to 30 percent",
+      "West Nile weakness may persist for months",
+      "La Crosse mostly benign in children"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** HSV encephalitis strikes the inferior temporal lobe and insula, and CSF PCR is the gold standard. Start acyclovir **10 mg** per kg every **8 hours** for **14 to 21 days** without waiting. **Mollaret** meningitis is recurrent HSV-2 disease. Post ophthalmic zoster stroke indicates **VZV vasculitis**. West Nile causes flaccid weakness, and Japanese encephalitis kills **20 to 30 percent**.",
+   "say": "High yield for the exam: HSV encephalitis strikes the inferior temporal lobe and insula, and CSF PCR is the gold standard. Start acyclovir ten milligrams per kilogram every eight hours for fourteen to twenty one days without waiting. Mollaret meningitis is recurrent HSV-2 disease. Post ophthalmic zoster stroke indicates VZV vasculitis. West Nile causes flaccid weakness, and Japanese encephalitis kills twenty to thirty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pearl",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Temporal signs with fever",
+      "HSV encephalitis, do CSF PCR"
+     ],
+     [
+      "Acyclovir regimen",
+      "10 mg per kg every 8 hours, 14 to 21 days"
+     ],
+     [
+      "Recurrent brief meningitis",
+      "Mollaret, usually HSV-2"
+     ],
+     [
+      "Stroke after ophthalmic shingles",
+      "VZV vasculitis weeks later"
+     ],
+     [
+      "Flaccid weakness with encephalitis",
+      "West Nile anterior horn injury"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

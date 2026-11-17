@@ -1,0 +1,361 @@
+{
+ "v": 1,
+ "module": "sne-lewy-body-dementia",
+ "title": "Dementia with Lewy bodies and Parkinson disease dementia",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dementia with Lewy bodies (DLB)** is the second most common neurodegenerative dementia after Alzheimer disease. When dementia starts before or within **1 year** of parkinsonism, the diagnosis is **DLB**, while dementia arising after **10 to 15 years** of established Parkinson disease is **Parkinson disease dementia (PDD)**. Both lie on a single **Lewy body disease** spectrum. About **10%** of Parkinson patients develop dementia each year, and most progress over time.",
+   "say": "Dementia with Lewy bodies is the second most common neurodegenerative dementia after Alzheimer disease. When dementia starts before or within one year of parkinsonism it is called D L B, while dementia arising after ten to fifteen years of established Parkinson disease means Parkinson disease dementia. About ten percent of Parkinson patients develop dementia each year, and most progress over time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "DLB",
+     "Parkinson disease dementia"
+    ],
+    "rows": [
+     [
+      "Timing of dementia",
+      "Before or within 1 year of parkinsonism",
+      "After 10 to 15 years of Parkinson disease"
+     ],
+     [
+      "Yearly risk",
+      "About 10 percent of Parkinson patients progress",
+      "Most progress over time"
+     ],
+     [
+      "Hallucinations",
+      "Early and well formed",
+      "Later, often drug related"
+     ],
+     [
+      "Memory pattern",
+      "Episodic memory often spared",
+      "Executive loss dominates early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ageing** and **male sex** are the strongest risk factors for Lewy body disease. **GBA gene mutations** predispose to both PDD and DLB, while **alpha-synuclein gene duplications or triplications** produce Parkinson disease or DLB phenotypes. A long prodrome of **REM sleep behavior disorder**, anosmia, constipation, and depression often precedes diagnosis by years. Toxins acting on a susceptible genetic background are proposed as a **double hit**.",
+   "say": "Ageing and male sex are the strongest risk factors for Lewy body disease. G B A gene mutations predispose to both P D D and D L B, while alpha-synuclein gene duplications or triplications produce Parkinson disease or D L B phenotypes. A long prodrome of R E M sleep behavior disorder, anosmia, constipation, and depression often develops years before diagnosis. Toxins acting on a susceptible genetic background are proposed as a double hit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genetic susceptibility",
+     "points": [
+      "GBA mutations favour PDD and DLB",
+      "Alpha-synuclein duplication or triplication",
+      "Family background of Parkinson disease",
+      "Proposed double hit with toxins"
+     ]
+    },
+    "right": {
+     "title": "Prodromal clues",
+     "points": [
+      "REM sleep behavior disorder",
+      "Anosmia with chronic constipation",
+      "Depression and anxiety",
+      "Male sex with advancing age"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Alpha-synuclein** misfolds into straight neurofilaments that form **Lewy bodies** and **Lewy neurites** in brainstem nuclei, amygdala, cingulate gyrus, and neocortex. Spread follows connected pathways from the **enteric nervous system** through the vagus nerve and from the **olfactory bulb** upward, in a prion-like manner. Profound **cholinergic loss** from basal forebrain degeneration causes the fluctuations, inattention, and visual hallucinations.",
+   "say": "Alpha-synuclein misfolds into straight neurofilaments that form Lewy bodies and Lewy neurites in brainstem nuclei, amygdala, cingulate gyrus, and neocortex. Spread follows connected pathways from the enteric nervous system through the vagus nerve and from the olfactory bulb upward, in a prion-like manner. Profound cholinergic loss from basal forebrain degeneration causes the fluctuations, inattention, and visual hallucinations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Alpha-synuclein misfolding in gut and nose"
+     },
+     {
+      "id": "b",
+      "label": "Vagus and olfactory ascent to brainstem"
+     },
+     {
+      "id": "c",
+      "label": "Limbic spread to amygdala and cingulate"
+     },
+     {
+      "id": "d",
+      "label": "Diffuse neocortical Lewy pathology"
+     },
+     {
+      "id": "e",
+      "label": "Cholinergic loss with fluctuating hallucinations"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fluctuating attention and alertness** with episodes of confusion or lethargy is the signature cognitive pattern, with early deficits in **visuospatial and executive function** and relatively spared episodic memory. **Well-formed visual hallucinations** of people or animals appear early and are the single most characteristic feature. **Parkinsonism** with bradykinesia, rigidity, and early postural instability accompanies or follows the dementia.",
+   "say": "Fluctuating attention and alertness with episodes of confusion or lethargy is the signature cognitive pattern, with early deficits in visuospatial and executive function and relatively spared episodic memory. Well-formed visual hallucinations of people or animals appear early and are the single most characteristic feature. Parkinsonism with bradykinesia, rigidity, and early postural instability accompanies or follows the dementia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "What is seen",
+     "Points to"
+    ],
+    "rows": [
+     [
+      "Fluctuating alertness",
+      "Episodes of confusion or lethargy",
+      "Lewy body disease"
+     ],
+     [
+      "Visual hallucinations",
+      "Well-formed people or animals, early",
+      "Dementia with Lewy bodies"
+     ],
+     [
+      "Cognitive profile",
+      "Visuospatial and executive loss, memory spared",
+      "Lewy body pattern"
+     ],
+     [
+      "Motor signs",
+      "Bradykinesia, rigidity, early falls",
+      "PDD or DLB"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**REM sleep behavior disorder** with violent dream enactment often predates dementia by years. **Severe neuroleptic sensitivity** means even small doses of typical antipsychotics can trigger rigidity or neuroleptic malignant syndrome. **Delusions** of misidentification and marked sensitivity to infections also occur. Alzheimer disease is predominantly **amnestic**, while **multiple system atrophy** shows earlier severe autonomic failure with preserved cognition.",
+   "say": "R E M sleep behavior disorder with violent dream enactment often predates dementia by years. Severe neuroleptic sensitivity means even small doses of typical antipsychotics can trigger rigidity or neuroleptic malignant syndrome. Delusions of misidentification and marked sensitivity to infections also occur. Alzheimer disease is predominantly amnestic, while multiple system atrophy shows earlier severe autonomic failure with preserved cognition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lewy body clues",
+     "points": [
+      "Violent dream enactment for years",
+      "Severe neuroleptic sensitivity",
+      "Misidentification delusions",
+      "Worsening with minor infections"
+     ]
+    },
+    "right": {
+     "title": "Mimics that differ",
+     "points": [
+      "Alzheimer disease is amnestic",
+      "MSA has early severe autonomic failure",
+      "PSP shows downgaze palsy",
+      "Vascular disease is stepwise with focal signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**MRI brain** is the first test to exclude vascular parkinsonism, subdural collections, and strategic infarcts. **Dopamine transporter SPECT** showing reduced striatal uptake and **MIBG cardiac scintigraphy** showing sympathetic denervation are indicative biomarkers. **Polysomnography** shows REM sleep without atonia. The **gold standard** remains neuropathology with **alpha-synuclein immunostaining** of Lewy bodies and neurites.",
+   "say": "M R I brain is the first test to exclude vascular parkinsonism, subdural collections, and strategic infarcts. Dopamine transporter SPECT showing reduced striatal uptake and M I B G cardiac scintigraphy showing sympathetic denervation are indicative biomarkers. Polysomnography shows R E M sleep without atonia and helps confirm the disorder. The gold standard remains neuropathology with alpha-synuclein immunostaining of Lewy bodies and neurites.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Role"
+    ],
+    "rows": [
+     [
+      "MRI brain",
+      "Excludes vascular and subdural lesions",
+      "First test"
+     ],
+     [
+      "DAT SPECT",
+      "Reduced striatal uptake",
+      "Indicative biomarker"
+     ],
+     [
+      "MIBG scintigraphy",
+      "Cardiac sympathetic denervation",
+      "Indicative biomarker"
+     ],
+     [
+      "Polysomnography",
+      "REM sleep without atonia",
+      "Confirms RBD"
+     ],
+     [
+      "Neuropathology",
+      "Alpha-synuclein stained Lewy bodies",
+      "Gold standard"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rivastigmine** or **donepezil** is first line therapy for cognition and hallucinations, and the patch is re-titrated from **4.6 mg** per **24 hours** if more than **3 days** are missed. **Levodopa** is kept at the lowest effective dose for disabling parkinsonism. Refractory psychosis may need **clozapine** or **quetiapine** with extreme caution and blood monitoring, while **haloperidol** and anticholinergic drugs are avoided because they can cause death.",
+   "say": "Rivastigmine or donepezil is first line therapy for cognition and hallucinations, and the patch is re-titrated from the standard starting dose if more than three days are missed. Levodopa is kept at the lowest effective dose for disabling parkinsonism. Refractory psychosis may need clozapine or quetiapine with extreme caution and blood monitoring, while haloperidol and anticholinergic drugs are avoided because they can cause death.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "DLB with hallucinations diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "Rivastigmine or donepezil started"
+     },
+     {
+      "id": "c",
+      "label": "Psychosis persists despite treatment"
+     },
+     {
+      "id": "d",
+      "label": "Clozapine or quetiapine with caution"
+     },
+     {
+      "id": "e",
+      "label": "Haloperidol and anticholinergic drugs banned"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CSF alpha-synuclein RT-QuIC** seed amplification and cardiac **MIBG** imaging now support early diagnosis, alongside **DAT-SPECT** and occipital hypometabolism with the **cingulate island sign**. The **MCI with Lewy bodies** concept reflects prodromal disease with hallucinations, RBD, or fluctuations. Combining **levodopa** at the lowest effective dose with a cholinesterase inhibitor gives better motor tolerability.",
+   "say": "C S F alpha-synuclein R T Qu I C seed amplification and cardiac M I B G imaging now support early diagnosis, alongside D A T SPECT and occipital hypometabolism with the cingulate island sign. The M C I with Lewy bodies concept reflects prodromal disease with hallucinations, R B D, or fluctuations. Combining levodopa at the lowest effective dose with a cholinesterase inhibitor gives better motor tolerability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Newer diagnostic supports",
+     "points": [
+      "CSF alpha-synuclein RT-QuIC assay",
+      "MIBG cardiac sympathetic imaging",
+      "MCI with Lewy bodies prodrome",
+      "Occipital hypometabolism island sign"
+     ]
+    },
+    "right": {
+     "title": "Treatment cautions",
+     "points": [
+      "Rivastigmine or donepezil first line",
+      "Levodopa at lowest effective dose",
+      "Clozapine only with extreme caution",
+      "Haloperidol risks death"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recurrent **falls** from postural instability cause fractures and head injury. **Aspiration pneumonia** and prolonged **delirium** during minor infections are common terminal events. Excessive daytime sleepiness and autonomic failure reduce independence. The course is steadily **progressive over years**, and coexistent Alzheimer pathology predicts faster decline. Structured physiotherapy, home safety review, and caregiver support reduce hospitalisation.",
+   "say": "Recurrent falls from postural instability cause fractures and head injury. Aspiration pneumonia and prolonged delirium during minor infections are common terminal events. Excessive daytime sleepiness and autonomic failure reduce independence and need daily support. The course is steadily progressive over years, and coexistent Alzheimer pathology predicts faster decline. Structured physiotherapy, home safety review, and caregiver support reduce hospitalisation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Why it happens",
+     "Prevention"
+    ],
+    "rows": [
+     [
+      "Falls with injury",
+      "Postural instability",
+      "Physiotherapy and home safety"
+     ],
+     [
+      "Aspiration pneumonia",
+      "Dysphagia with immobility",
+      "Swallow review"
+     ],
+     [
+      "Prolonged delirium",
+      "Sensitivity to infection",
+      "Early infection treatment"
+     ],
+     [
+      "Caregiver burnout",
+      "Years of progressive disease",
+      "Respite and social support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** well-formed visual hallucinations mark DLB, the 1-year rule separates DLB from Parkinson disease dementia, violent RBD predates disease by years, DAT SPECT plus MIBG are indicative biomarkers, rivastigmine is first line therapy, haloperidol can cause death, and alpha-synuclein immunostaining is the gold standard.",
+   "say": "High yield for the exam: well-formed visual hallucinations mark D L B, the one year rule separates D L B from Parkinson disease dementia, violent R B D predates disease by years, D A T SPECT plus M I B G are indicative biomarkers, rivastigmine is first line therapy, haloperidol can cause death, and alpha-synuclein immunostaining is the gold standard.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Exam line"
+    ],
+    "rows": [
+     [
+      "Hallucination",
+      "Well-formed visual hallucinations mark DLB"
+     ],
+     [
+      "One-year rule",
+      "Dementia within 1 year of parkinsonism is DLB"
+     ],
+     [
+      "RBD",
+      "Violent dream enactment predates disease by years"
+     ],
+     [
+      "Biomarkers",
+      "DAT SPECT plus MIBG are indicative"
+     ],
+     [
+      "First line",
+      "Rivastigmine or donepezil for cognition"
+     ],
+     [
+      "Danger drug",
+      "Haloperidol can cause death"
+     ],
+     [
+      "Gold standard",
+      "Alpha-synuclein immunostaining"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
