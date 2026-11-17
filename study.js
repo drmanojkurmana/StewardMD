@@ -1397,7 +1397,7 @@
     var box = V.box;
     function commit() {
       if (!g) return;
-      var gg = g; g = null;
+      var gg = g; g = null; V._pinching = false;
       var z = Math.max(1, Math.min(4, gg.z0 * gg.s)), k = z / gg.z0;
       box.style.transition = ""; box.style.transform = ""; box.style.willChange = "";
       layoutZoom(z);
@@ -1415,6 +1415,7 @@
         var m = mid(e.touches), br = box.getBoundingClientRect(), hit = D.elementFromPoint(m[0], m[1]), pe = hit && hit.closest ? hit.closest(".st-pg") : null;
         if (!pe && V.pg[V.cur || 1]) pe = V.pg[V.cur || 1].el;
         var pr = pe ? pe.getBoundingClientRect() : null;
+        V._pinching = true;
         g = { d0: span(e.touches) || 1, z0: V.z, m0: m, m: m, ox: m[0] - br.left, oy: m[1] - br.top, s: 1, pe: pe, fx: pr ? (m[0] - pr.left) / (pr.width || 1) : 0, fy: pr ? (m[1] - pr.top) / (pr.height || 1) : 0 };
         box.style.transformOrigin = g.ox + "px " + g.oy + "px"; box.style.willChange = "transform";
       }

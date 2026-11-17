@@ -453,7 +453,7 @@
       var act2 = pointerAction(e, { penSeen: api.isPenSeen() || st.penSeen, drawFinger: st.drawFinger }, isPenActive);
       if (act2 === "ignore") return;
       if (act2 === "pan") {
-        if (isPenActive) return;
+        if (isPenActive || V._pinching) return;
         pan = { y: e.clientY, x: e.clientX };
         return;
       }
@@ -465,7 +465,9 @@
       var ts = toolSettings(st, V.tool);
       var pt = sampleFast(e); lastMoveTs = e.timeStamp || Date.now(); lastPt = pt;
       drawnIndex = 0; snapped = null; clearHold();
+      if (V._pinching) return;
       cur = { id: api.uid(), doc: V.id, page: api.pid(n), tool: V.tool, color: ts.color, w: ts.widths[ts.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now(), style: V.tool === "hl" ? "ball" : ts.style, sens: ts.sens, tip: ts.tip };
+      cur._touch = e.pointerType === "touch";
       try { if (window.STUDY_MEDIA && window.STUDY_MEDIA.stampStroke) { var aOff = window.STUDY_MEDIA.stampStroke(); if (aOff != null) cur.a = aOff; } } catch (x) {} /* Phase 5b: audio offset for tap-to-seek */
       drawIncremental();
       scheduleFrame();
@@ -474,9 +476,10 @@
     ov.addEventListener("pointermove", function (e) {
       var V = api.getV(); if (!V) return;
       if (pan) {
-        if (V && V._isPenDown) { pan = null; return; }
+        if (V && (V._isPenDown || V._pinching)) { pan = null; return; } /* two fingers = pinch/pan owns the gesture */
         V.sc.scrollTop -= e.clientY - pan.y; V.sc.scrollLeft -= e.clientX - pan.x; pan.y = e.clientY; pan.x = e.clientX; return;
       }
+      if (V._pinching && cur && cur._touch) { clearHold(); cur = null; snapped = null; clearLive(); return; } /* second finger landed: a pinch, not ink */
       if (e.pointerType === "touch" && (cur || (V && V._isPenDown))) return;
       if (eraseOrig.length || erasePieces.length || erasedWhole.length || (V.tool === "er" && e.buttons)) { eraseAt(e); showCursor(e); return; }
       if (V.tool === "er") { showCursor(e); return; }
@@ -547,7 +550,7 @@
         }
       }
       var s = cur; cur = null; clearLive();
-      delete s._pred;
+      delete s._pred; delete s._touch; delete s._free; /* runtime-only fields never stored */
       V.strokes.push(s); api.pushOp({ t: "add", id: s.id }); api.syncTb(); api.redraw(n);
       api.putStroke(s).then(function () { api.saveStack(); });
     };
