@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-stones-uti",
+ "subject": "ss-general-medicine",
+ "title": "Nephrolithiasis and Urinary Tract Infection",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Nephrolithiasis** (kidney stones, urinary calculi) affects 12 percent of Indian adults, with **calcium oxalate stones** (calcium oxalate crystals) accounting for 80 percent. **Urinary tract infection** (UTI, bacterial urinary infection) affects 50 percent of women at least once. **Renal colic** (flank pain with haematuria) is the stone hallmark. **Pyelonephritis** (kidney infection) presents with fever and loin pain. **Asymptomatic bacteriuria** (bacteria without symptoms) needs no treatment except in pregnancy.",
+   "say": "Kidney stones affect twelve percent of Indian adults, with calcium oxalate accounting for eighty percent. Urinary infection affects half of women at least once. Flank pain with blood in urine is the stone hallmark. Kidney infection presents with fever and loin pain and bacteria without symptoms need no treatment except in pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypercalciuria** (high urine calcium) from hyperparathyroidism and sarcoidosis, **hyperoxaluria** (high oxalate) from enteric disease, and **hypocitraturia** (low citrate) promote stones. **Dehydration** (low urine volume) in heat and low fluid intake is the Indian driver. **Urinary tract infection** (bacterial obstruction) with urease producers makes struvite stones. **Gout** (uric acid disease) causes uric acid stones. **Cystinuria** (cysteine stone disease) is hereditary.",
+   "say": "High urine calcium from parathyroid and sarcoidosis, high oxalate from gut disease, and low citrate promote stones and this is examined in viva examinations for revision. Dehydration in heat is the Indian driver. Urease bacteria make struvite stones and gout causes uric acid stones and cysteine stone disease is hereditary.",
+   "vis": null
+  },
+  {
+   "tx": "Supersaturation nucleates crystals that aggregate into stones during **urine stasis** (stagnant flow). **Matrix proteins** (organic scaffolding) anchor crystal growth. **Randall plaque** (papillary calcification) anchors oxalate stones. **Struvite precipitation** (alkaline infected urine) grows rapidly in obstruction. **Uric acid stones** (acidic urine) grow when pH stays below 5.5. Stones obstruct and cause **hydronephrosis** (swollen kidney).",
+   "say": "Supersaturation nucleates crystals that aggregate into stones during stagnant flow. Matrix proteins anchor growth. Papillary calcification anchors oxalate stones and alkaline infected urine grows struvite rapidly and acidic urine below five point five grows uric acid stones and stones obstruct and swell the kidney.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Supersaturation"
+     },
+     {
+      "id": "b",
+      "label": "Nucleation"
+     },
+     {
+      "id": "c",
+      "label": "Crystal growth"
+     },
+     {
+      "id": "d",
+      "label": "Stone formation"
+     },
+     {
+      "id": "e",
+      "label": "Obstruction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal colic** (severe flank pain radiating to groin) with nausea and restlessness is classic for ureteric stones. **Lower tract symptoms** (frequency, urgency) suggest distal stones. **Fever with obstruction** (infected hydronephrosis) is an emergency needing drainage. **Pyelonephritis** (kidney infection) shows fever with flank tenderness and pyuria. **Haematuria** (blood in urine) accompanies most stones. Recurrent infections signal obstruction or stones.",
+   "say": "Severe flank pain radiating to groin with nausea is classic for ureteric stones. Frequency and urgency suggest distal stones and this is examined in viva examinations for revision. Fever with obstruction is an emergency and kidney infection is marked by fever with flank tenderness and blood in urine accompanies most stones.",
+   "vis": null
+  },
+  {
+   "tx": "**Noncontrast computed tomography** (stone protocol scan) is the gold standard for size and site. **Ultrasound** (kidney scan) screens for hydronephrosis and stones in pregnancy. **Urine microscopy** (crystal examination) shows calcium oxalate, uric acid or struvite crystals. **Urine culture** (bacterial growth test) confirms infection and guides antibiotics. **Stone analysis** (chemical composition) guides prevention.",
+   "say": "Stone protocol scanning is the gold standard for size and site. Ultrasound screens for swelling and stones in pregnancy. Microscopy is marked by crystal types and culture confirms infection and guides antibiotics and stone analysis guides prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Noncontrast CT",
+      "Gold standard",
+      "Size and site"
+     ],
+     [
+      "Ultrasound",
+      "Screening",
+      "Hydronephrosis in pregnancy"
+     ],
+     [
+      "Urine microscopy",
+      "Crystal type",
+      "Oxalate uric struvite"
+     ],
+     [
+      "Urine culture",
+      "Infection confirm",
+      "Guides antibiotics"
+     ],
+     [
+      "Stone analysis",
+      "Prevention guide",
+      "Composition directed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fluid therapy** (hydration to 2 litres urine) is first line stone prevention. **Thiazide diuretics** (chlonethiazide) reduce calcium excretion, while **citrate therapy** (potassium citrate) alkalinises urine. **Allopurinol** (uric acid reducer) helps hyperuricosuria. **Extra corporeal shock wave lithotripsy** (ESWL, sound wave fragmentation) breaks small stones. **Ureteroscopy** (scope fragmentation) treats distal stones with laser.",
+   "say": "Hydration to two litres urine is first line prevention. Thiazides reduce calcium excretion, while citrate alkalinises urine. Allopurinol helps high uric acid and sound wave fragmentation breaks small stones and scope fragmentation treats distal stones with laser.",
+   "vis": null
+  },
+  {
+   "tx": "**Uncomplicated cystitis** (bladder infection) needs nitrofurantoin 100 mg twice daily for 5 days. **Pyelonephritis** (kidney infection) needs ceftriaxone with step down cover. **Complicated UTI** (obstruction, catheter) needs culture guided therapy. **Pregnancy UTI** (bacteriuria in pregnancy) needs treatment to prevent preterm birth. **Catheter associated infection** (tube related bacteria) needs catheter change, not prolonged antibiotics.",
+   "say": "Bladder infection needs nitrofurantoin for five days. Kidney infection needs ceftriaxone with step down. Complicated infection needs culture guided therapy and pregnancy bacteriuria needs treatment to prevent preterm birth and tube related infection needs catheter change.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncomplicated cystitis",
+     "points": [
+      "Nitrofurantoin 5 days",
+      "No fever or flank pain",
+      "Outpatient therapy",
+      "Culture optional"
+     ]
+    },
+    "right": {
+     "title": "Pyelonephritis",
+     "points": [
+      "Fever and flank pain",
+      "Ceftriaxone first",
+      "Admission needed",
+      "Culture mandatory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Infected hydronephrosis** (pus behind blocked stone) needs urgent stent or nephrostomy drainage. **Anuria** (no urine) from bilateral obstruction needs decompression. **Sepsis** (bloodstream infection) with obstruction needs broad antibiotics and drainage. **Acute kidney injury** (abrupt failure) follows obstruction and needs relief. **Emphysematous pyelonephritis** (gas forming kidney infection) in diabetics needs nephrectomy often.",
+   "say": "Pus behind a blocked stone needs urgent stent or tube drainage. No urine from bilateral block needs decompression. Bloodstream infection needs antibiotics and drainage and abrupt failure follows obstruction and gas forming kidney infection in diabetics often needs kidney removal.",
+   "vis": null
+  },
+  {
+   "tx": "Stones recur in half of patients within 10 years without prevention. **Hydration compliance** (fluid discipline) halves recurrence. **Struvite stones** (infection stones) recur rapidly without infection control. **Cystinuria stones** need high fluid and tiopronin. **Urinary tract infection recurrence** needs prophylaxis with nitrofurantoin. **End stage kidney disease** (kidney failure) follows neglected obstruction and stones in 2 percent.",
+   "say": "Stones recur in half within ten years without prevention and this is examined in viva examinations for revision. Fluid discipline halves recurrence. Infection stones recur rapidly without control and cysteine stones need high fluid and chelators and recurrent infections need prophylaxis and neglected obstruction causes failure in two percent.",
+   "vis": null
+  },
+  {
+   "tx": "European Association of Urology guidelines stress metabolic evaluation after first stone and fluid therapy. **Potassium citrate** (alkaliniser) is first line for hypocitraturia and uric acid disease. Examination traps include treating asymptomatic bacteriuria, missing infected obstruction, and advising analgesics alone for colic. **Bacteriuria in pregnancy** screening is a favourite Indian vignette.",
+   "say": "Current guidelines stress metabolic evaluation after first stone and fluid therapy and this is examined in viva examinations for revision. Alkaliniser is first line for low citrate and uric acid disease. Traps include treating asymptomatic bacteriuria and missing infected obstruction and screening bacteriuria in pregnancy is a favourite vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers stone composition, colic features and UTI regimens. Calcium oxalate frequency and noncontrast scan gold standards are the most asked points in theory and viva examinations. Targeted rehearsal of investigation choices aids viva responses in the examination.",
+   "say": "This table gathers stone composition and colic features and UTI regimens for revision and this is examined in viva examinations for revision. Calcium oxalate frequency and scan gold standards are the most asked points. Pregnancy bacteriuria screening is a favourite vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Commonest stone",
+      "Calcium oxalate 80 percent"
+     ],
+     [
+      "Gold standard scan",
+      "Noncontrast CT"
+     ],
+     [
+      "Cystitis drug",
+      "Nitrofurantoin 100 mg twice daily"
+     ],
+     [
+      "Cystitis course",
+      "5 days"
+     ],
+     [
+      "Emergency drainage",
+      "Infected hydronephrosis"
+     ],
+     [
+      "Stone prevention",
+      "2 litres urine daily"
+     ],
+     [
+      "Uric acid clue",
+      "pH below 5.5"
+     ],
+     [
+      "Pregnancy action",
+      "Treat bacteriuria"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
