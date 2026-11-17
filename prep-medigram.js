@@ -258,6 +258,7 @@
     S.fs = on ? card : null;
     if (card) card.classList.toggle("pn-mg-fs", !!on);
     if (box) { box.classList.toggle("pn-mg-fsbox", !!on); var body = box.closest(".pn-body"); if (body) body.classList.toggle("pn-mg-fsbody", !!on); }
+    if (MEDIA && MEDIA.fit) { MEDIA.fit(); G.setTimeout(MEDIA.fit, 50); }   // the box changed size: resize the player to match
     var b = card && card.querySelector("[data-act=mg-fs]");
     if (b) { b.innerHTML = vi(on ? "exit" : "fs"); b.setAttribute("aria-label", on ? "Exit full screen" : "Full screen"); }
   }

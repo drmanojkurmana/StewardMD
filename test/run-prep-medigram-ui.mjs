@@ -89,6 +89,7 @@ try {
   // Video: scrolling a video card into view mounts the https shim (never a direct YouTube embed from the app origin).
   await ev(`var v=document.querySelector('#smdPrep .pn-mg-vid'), b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
   ok(await until(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'); return !!f && /^https:\\/\\/stewardmd\\.in\\/_site\\/yt\\?v=[\\w-]{11}&autoplay=1$/.test(f.src);`, 8000), "a video card in view autoplays in the app through the stewardmd.in shim");
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'), h=f.parentNode, a=f.getBoundingClientRect(), b=h.getBoundingClientRect(); var z=f.currentCSSZoom||1; return Math.abs(a.width-b.width)<2 && Math.abs(a.height-b.height)<2 && Math.abs(z-1)<0.01;`) === true, "the player fills its frame exactly and is not zoomed (iPad layout zoom undone)");
   const played = await ev(`return document.querySelector('#smdPrep .pn-mg-vid iframe').closest('.pn-mg-vid').getAttribute('data-vid');`);
   await sleep(6500);
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
@@ -116,6 +117,8 @@ try {
   await click(cardSel + " [data-act=mg-fs]");
   ok(await until(`var c=document.querySelector('#smdPrep .pn-mg-fs'); if(!c) return false; var r=c.getBoundingClientRect(); return r.top<=1 && r.left<=1 && r.width>=innerWidth-1 && r.height>=innerHeight-1 && !!c.querySelector('iframe');`, 4000), "Full screen covers the whole screen and keeps the same player");
   ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(); return f.width<=innerWidth+1 && f.bottom<=innerHeight+1 && f.height>100;`) === true, "the full-screen video fits the screen");
+  await sleep(150);
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'), h=f.parentNode, a=f.getBoundingClientRect(), b=h.getBoundingClientRect(); var z=f.currentCSSZoom||1; return Math.abs(a.width-b.width)<2 && Math.abs(a.height-b.height)<2 && Math.abs(z-1)<0.01;`.replace("'#smdPrep .pn-mg-vid iframe'", "'#smdPrep .pn-mg-fs iframe'")) === true, "in full screen the player fills the screen area exactly (nothing cut)");
   ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(), v=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-vctl').getBoundingClientRect(); return v.top >= f.bottom - 1 && v.bottom <= innerHeight + 1;`) === true, "in full screen our bar sits at the bottom, below the video");
   ok(await ev(`var e=document.elementFromPoint(innerWidth/2, 30); return !!(e && e.closest('.pn-mg-fs'));`) === true, "nothing (header, tabs) shows over the full-screen video");
   await evA(`window.PREP.back ? window.PREP.back() : history.back()`);
