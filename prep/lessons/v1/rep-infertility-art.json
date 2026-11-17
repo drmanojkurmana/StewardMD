@@ -1,0 +1,149 @@
+{
+  "v": 1,
+  "module": "rep-infertility-art",
+  "subject": "ss-reproductive-medicine",
+  "title": "Infertility and Assisted Reproduction: Ovulation to Implantation",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": ["Williams Obstetrics 25th edition"],
+  "steps": [
+    {
+      "tx": "**Infertility** means failure to conceive after 12 months of unprotected intercourse under age 35. After 35 years the window shrinks to 6 months of regular cycles. **Primary infertility** affects 1 in 7 couples with female factors in 40 percent. **Male factor** alone accounts for 25 percent, and 15 to 20 percent stays unexplained after standard work up.",
+      "say": "Infertility starts with a clear time definition. Couples under thirty five wait twelve months. Couples over thirty five wait six months. Female factors contribute in many couples. Male factors contribute in a quarter. A sixth stays unexplained after full work up.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Factor", "Share", "First test"],
+        "rows": [
+          ["Ovulatory", "25 percent", "Progesterone day 21"],
+          ["Tubal", "20 percent", "Hsg study"],
+          ["Male", "25 percent", "Semen analysis"]
+        ]
+      }
+    },
+    {
+      "tx": "Anovulation follows **polycystic ovaries** with 70 percent of anovulatory cases in reproductive clinics. **Hyperprolactinaemia** suppresses gonadotrophins in 10 percent of chronic anovulation. **Premature ovarian insufficiency** before 40 years affects 1 percent of women. **Thyroid disease** alters ovulation in 5 to 10 percent of infertile cohorts screened.",
+      "say": "Anovulatory cause dominates clinic visits. Polycystic ovaries explain the majority of anovulation. Raised prolactin suppresses ovulation in a minority. Early ovarian failure affects one percent of women. Thyroid disease also alters ovulation in screened cohorts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "pcos", "label": "Polycystic ovaries"},
+          {"id": "prl", "label": "Raised prolactin"},
+          {"id": "pof", "label": "Ovarian failure"},
+          {"id": "anov", "label": "Anovulation"}
+        ],
+        "edges": [["pcos", "anov"], ["prl", "anov"], ["pof", "anov"]]
+      }
+    },
+    {
+      "tx": "**FSH** drives follicular growth while **LH** surge triggers ovulation near day 14. **Oestradiol** from the dominant follicle feeds back positively to release gonadotrophin-releasing hormone. **AMH** from small follicles predicts ovarian reserve at 1 to 4 ng per ml normal range. **Inhibin B** restrains FSH secretion during the early follicular phase.",
+      "say": "Hormone control runs on feedback loops. F S H drives follicle growth each cycle. L H surge triggers ovulation near day fourteen. Oestradiol feeds back positively before ovulation. A M H predicts reserve across women. Inhibin restrains early F S H release.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ovarian reserve markers",
+          "points": ["AMH of one to four", "Antral count predicts response", "Day three F S H baseline"]
+        },
+        "right": {
+          "title": "Ovulation markers",
+          "points": ["LH surge near day fourteen", "Progesterone on day twenty one", "Ultrasound tracks follicle"]
+        }
+      }
+    },
+    {
+      "tx": "Patients present with **irregular cycles** beyond 35 days or amenorrhoea for 3 months. **Acne** with hirsutism scores above 8 on Ferriman-Gallwey scale in PCOS. **Galactorrhoea** points to prolactin excess in 15 percent of cases. **Coital pain** and pelvic mass need evaluation for endometriosis in 30 percent of chronic pain cases.",
+      "say": "Irregular cycles bring most women for assessment. Acne with excess hair growth suggests polycystic ovaries. Breast milk discharge points to prolactin excess. Pain during intercourse suggests endometriosis often. A pelvic mass also needs evaluation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "cycle", "label": "Irregular cycles"},
+          {"id": "hirs", "label": "Hirsutism present"},
+          {"id": "prl", "label": "Milk discharge"},
+          {"id": "workup", "label": "Hormone work up"}
+        ],
+        "edges": [["cycle", "workup"], ["hirs", "workup"], ["prl", "workup"]]
+      }
+    },
+    {
+      "tx": "**Semen analysis** needs 2 samples 2 to 5 days apart with count above 15 million per ml. **Hysterosalpingography** maps tubal blocks with hyopaque spill in 70 percent of normal studies. **Transvaginal ultrasound** counts antral follicles at 5 to 10 mm size ahead of stimulation. **TSH** and prolactin screen both partners in 10 percent of holistic work ups.",
+      "say": "Work up needs timed precise tests. Semen analysis needs two samples days apart. Tubal studies map blocks with dye spill. Ultrasound counts small follicles before stimulation. Thyroid and prolactin screening complete the picture.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Test", "Purpose", "Timing"],
+        "rows": [
+          ["Semen analysis", "Male factor", "Two samples apart"],
+          ["Hsg study", "Tubal patency", "Day seven to ten"],
+          ["Antral count", "Reserve estimate", "Early follicular"]
+        ]
+      }
+    },
+    {
+      "tx": "**Ovulation induction** with **letrozole** at 2.5 to 7.5 mg daily for 5 days thrives in PCOS. **Clomiphene** up to 150 mg daily suits unexplained anovulation over 3 cycles. **Gonadotrophins** start at 37.5 to 75 IU daily with ultrasound monitoring. Cancellation rights appear when 3 or more follicles exceed 16 mm diameter.",
+      "say": "Ovulation induction starts with letrozole in polycystic disease. Clomiphene suits other anovulation over many cycles. Gonadotrophins need ultrasound monitoring daily. Too many mature follicles cancel the cycle to avoid multiples. Timed intercourse or insemination follows.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral induction",
+          "points": ["Letrozole two point five to seven", "Clomiphene up to one fifty", "Low multiple risk"]
+        },
+        "right": {
+          "title": "Gonadotrophin induction",
+          "points": ["Seventy five IU daily start", "Ultrasound monitoring daily", "Higher multiple risk"]
+        }
+      }
+    },
+    {
+      "tx": "**Controlled ovarian stimulation** for IVF uses **recombinant FSH** at 150 to 300 IU daily for 8 to 12 days. **GnRH antagonists** start at follicle 13 mm to prevent surge. **Trigger** with 10,000 IU hCG at 18 mm size matures ova. **Luteal support** uses 90 mg progesterone gel for 14 days after transfer.",
+      "say": "Stimulation protocols aim for many ova safely. Recombinant F S H starts at one fifty to three hundred units daily. Antagonists start at thirteen millimetres to block surge. The trigger shot follows at eighteen millimetres. Luteal progesterone supports implantation for two weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "fsh", "label": "Recombinant FSH"},
+          {"id": "antag", "label": "Antagonist from 13 mm"},
+          {"id": "trig", "label": "hCG trigger"},
+          {"id": "pickup", "label": "Oocyte pickup"}
+        ],
+        "edges": [["fsh", "antag"], ["antag", "trig"], ["trig", "pickup"]]
+      }
+    },
+    {
+      "tx": "**IVF indications** include bilateral tubal block in 30 percent, severe male factor at 5 million per ml, and end-stage endometriosis. **Preimplantation genetic testing** suits carriers of translocations in 2 percent of couples. **Single embryo transfer** cuts twins by 40 percent without hurting live birth. **ICSI** fertilises 70 percent of ova versus 60 percent with conventional insemination.",
+      "say": "IVF indications centre on tubes and sperm. Blocked tubes and severe male factor head the list. Genetic testing suits translocation carriers. Single embryo transfer cuts twins sharply. ICSI improves fertilisation in severe male factor.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Indication", "Threshold", "Technique"],
+        "rows": [
+          ["Tubal block", "Bilateral block", "IVF"],
+          ["Male factor", "Under 5 million", "ICSI"],
+          ["Genetic", "Translocation carrier", "PGT screening"]
+        ]
+      }
+    },
+    {
+      "tx": "**Ovarian hyperstimulation** triples risk in women under 30 with 25 follicles or more. **Mild OHSS** brings distension and pain in 10 percent of cycles. **Severe OHSS** with ascites and thrombosis hits 1 to 2 percent of stimulations. **Freeze-all** strategy cuts OHSS by 70 percent while preserving live birth rates.",
+      "say": "Hyperstimulation is the feared stimulation risk. Young women with many follicles carry higher risk. Mild disease brings distension and pain in many cycles. Severe disease with ascites hits a small minority. Freeze all strategy cuts severe disease sharply.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Grade", "Features", "Rate"],
+        "rows": [
+          ["Mild", "Distension and pain", "10 percent of cycles"],
+          ["Moderate", "Ascites and nausea", "3 to 5 percent"],
+          ["Severe", "Thrombosis risk", "1 to 2 percent"]
+        ]
+      }
+    },
+    {
+      "tx": "For the **exam**, quote **12 months** to define infertility and **35 years** to shrink the window to 6 months. **Letrozole** at **2.5 to 7.5 mg** leads PCOS induction, while **150 IU** of FSH starts IVF stimulation. **Semen** counts below **15 million** per ml define male factor, and **freeze-all** cuts OHSS by 70 percent.",
+      "say": "High-yield for the exam fix the time rules. Twelve months defines infertility under thirty five. Six months defines it after thirty five. Letrozole leads induction in polycystic disease. F S H at one fifty units starts stimulation. Freeze all cuts hyperstimulation sharply.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Topic", "Number to quote"],
+        "rows": [
+          ["Definition", "Twelve months under 35"],
+          ["Induction", "Letrozole 2.5 to 7.5 mg"],
+          ["Safety", "Freeze-all cuts OHSS 70 percent"]
+        ]
+      }
+    }
+  ]
+}
