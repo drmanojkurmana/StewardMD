@@ -305,7 +305,7 @@
     root.appendChild(pager);
     /* zoom window */
     var zw=D.createElement("div"); zw.id="stP3ZoomWindow"; zw.className="st-p3-zoomwin"; zw.hidden=true;
-    zw.innerHTML='<canvas id="stP3ZoomCv" width="640" height="120"></canvas><span class="st-p3-zoom-tag">Zoom</span>';
+    zw.innerHTML='<div class="st-p3-zoomwin-bar"><span class="st-p3-zoom-tag">Zoom</span><button type="button" class="pn-btn sm st-p3-zoom-close" data-act="st-zoom-close" aria-label="Close zoom window">Done</button></div><canvas id="stP3ZoomCv" width="640" height="120"></canvas>';
     root.appendChild(zw);
     refreshTopBar();
     applySettings();
@@ -364,17 +364,13 @@
     if(!sc) return;
     /* double-tap to fit width (double click fallback) */
     sc.addEventListener("dblclick", function(e){
-      var vv=V(); if(!vv) return;
+      var vv=V(); if(!vv || vv.tool) return;
       /* fit to width => zoom 1 */
       if(G.STUDY && G.STUDY._setZoom) G.STUDY._setZoom(1);
       refreshTopBar();
     });
     /* pinch already in study.js; we just ensure clamp */
-    /* zoom window on pen touch: show magnified strip at touch Y */
-    var zoomWin = host().root() ? host().root().querySelector("#stP3ZoomWindow") : null;
-    if(zoomWin && !zoomWin._bound){
-      zoomWin._bound=true;
-    }
+    /* zoom window: stays hidden until user taps zoom-window tool */
   }
 
   /* ---- page ops (one undo step each) ---- */
@@ -1110,20 +1106,32 @@
   }
 
   /* ---- top-level dispatch ---- */
-  var PHASE3_ACTS = ["st-p3-back","st-p3-grid","st-p3-search","st-p3-share","st-p3-mic","st-p3-title","st-p3-fav","st-p3-add","st-p3-close","st-p3-more","st-p3-goto","st-p3-close-sheet","st-p3-place","st-p3-more-tpls","st-p3-confirm-add","st-p3-add-image","st-p3-add-scan","st-p3-add-photo","st-p3-add-pdf","st-p3-tab","st-p3-select-toggle","st-p3-nav-add","st-p3-change-tpl","st-p3-tpl-scope","st-p3-copy","st-p3-rotate","st-p3-outline","st-p3-clear","st-p3-settings","st-p3-scroll","st-p3-palm","st-p3-lock","st-p3-do-goto","st-p3-rename","st-print-open","st-present","st-audio-list","st-p3-print","st-p3-present"];
+  var PHASE3_ACTS = ["st-p3-back","st-p3-grid","st-p3-search","st-p3-share","st-p3-mic","st-p3-title","st-p3-fav","st-p3-add","st-p3-close","st-p3-more","st-p3-goto","st-p3-close-sheet","st-p3-place","st-p3-more-tpls","st-p3-confirm-add","st-p3-add-image","st-p3-add-scan","st-p3-add-photo","st-p3-add-pdf","st-p3-tab","st-p3-select-toggle","st-p3-nav-add","st-p3-change-tpl","st-p3-tpl-scope","st-p3-copy","st-p3-rotate","st-p3-outline","st-p3-clear","st-p3-settings","st-p3-scroll","st-p3-palm","st-p3-lock","st-p3-do-goto","st-p3-rename","st-print-open","st-present","st-audio-list","st-p3-print","st-p3-present","st-zoom-close"];
   function isPhase3(a){ return PHASE3_ACTS.indexOf(a)!==-1; }
 
   function handlePhase3(a, el, h){
     var v=V();
+    if(a==="st-zoom-close"){
+      var h0=host(); var root0=h0&&h0.root?h0.root():null;
+      if(root0){
+        var zw0=root0.querySelector("#stP3ZoomWindow"); if(zw0) zw0.hidden=true;
+        var btn0=root0.querySelector('#stTb [data-act="st-zoom-window"]'); if(btn0) btn0.classList.remove("on");
+      }
+      return;
+    }
     if(a==="st-p3-back"||a==="st-p3-close"){
       /* back to library */
+      ["stP3AddSheet","stP3TplSheet","stP3MoreSheet","stP3SettingsSheet","stP3GoSheet","stP3NavSheet","stP3SoonSheet","stP3TitleSheet"].forEach(removeSheet);
+      var rootB=(host()&&host().root)?host().root():null;
+      if(rootB){
+        var popB=rootB.querySelector("#stInkPop"); if(popB&&popB.parentNode) popB.parentNode.removeChild(popB);
+        var zwB=rootB.querySelector("#stP3ZoomWindow"); if(zwB) zwB.hidden=true;
+        var shB=rootB.querySelectorAll(".st-sheet"); if(shB) Array.prototype.forEach.call(shB, function(s){ if(s.parentNode) s.parentNode.removeChild(s); });
+      }
       try{ if(G.STUDY&&G.STUDY.leave) G.STUDY.leave(); }catch(e){}
       var host2=h||host();
-      if(host2&&host2.root){
-        /* navigate back to library via host's pop? fallback to STUDY lib render */
-        if(G.STUDY&&G.STUDY.lib) G.STUDY.lib(host2);
-        else if(h&&h.back) h.back();
-      } else if(G.STUDY&&G.STUDY.lib&&host()) G.STUDY.lib(host());
+      if(G.STUDY&&G.STUDY.lib) G.STUDY.lib(host2);
+      else if(host2&&host2.root&&host2.back) host2.back();
       return;
     }
     if(a==="st-p3-grid"){
@@ -1256,6 +1264,42 @@
   }
   wrap();
 
+  /* ---- Escape key closes any active sheet, popover, or zoom window ---- */
+  if (D && D.addEventListener) {
+    D.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        var h = host(); var root = h && h.root ? h.root() : null;
+        if (!root) return;
+        var sheets = root.querySelectorAll(".st-sheet, .st-p3-sheet, [id^='stP3'][id$='Sheet'], #stPageSheet");
+        if (sheets && sheets.length) {
+          Array.prototype.forEach.call(sheets, function (s) { if (s.parentNode) s.parentNode.removeChild(s); });
+          e.preventDefault();
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return;
+        }
+        var pop = root.querySelector("#stInkPop");
+        if (pop && pop.parentNode) {
+          pop.parentNode.removeChild(pop);
+          e.preventDefault();
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return;
+        }
+        var zw = root.querySelector("#stP3ZoomWindow");
+        if (zw && !zw.hidden) {
+          zw.hidden = true;
+          var btn = root.querySelector('#stTb [data-act="st-zoom-window"]');
+          if (btn) btn.classList.remove("on");
+          e.preventDefault();
+          if (e.stopPropagation) e.stopPropagation();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return;
+        }
+      }
+    }, true);
+  }
+
   /* ---- observer to inject top bar & refresh ---- */
   function observe(){
     var h=host(); var root=h&&h.root? h.root(): null;
@@ -1287,47 +1331,35 @@
   }
   setInterval(observe, 300);
 
-  /* zoom window interaction: magnified writing strip at bottom that auto-advances with pen Y */
-  function bindZoomWindow(){
+  /* zoom window: magnified writing strip at bottom that opens ONLY when zoom-window tool is tapped */
+  function renderZoom(e){
     var h=host(); if(!h||!h.root) return;
-    var sc=h.root().querySelector("#stSc");
-    if(!sc||sc._p3zw) return; sc._p3zw=true;
-    function drawZoom(e){
-      var v=V(); if(!v||!v.tool) return;
-      var zw=h.root().querySelector("#stP3ZoomWindow");
-      if(!zw) return;
-      zw.hidden=false;
-      var ovWrap = e.target && e.target.closest && e.target.closest(".st-pg");
-      var cv = zw.querySelector("#stP3ZoomCv");
-      if(!cv) return;
-      var ctx=cv.getContext("2d");
-      ctx.fillStyle="#fff"; ctx.fillRect(0,0,cv.width,cv.height);
-      ctx.strokeStyle="#071318"; ctx.strokeRect(0,0,cv.width,cv.height);
-      try {
-        var pageCv = null;
-        var pgEl = ovWrap;
-        if(pgEl){ var baseCv=pgEl.querySelector("canvas.st-cv"); if(baseCv) pageCv=baseCv; }
-        if(pageCv && e.offsetX!=null){
-          var fracX = e.offsetX / pageCv.width, fracY = e.offsetY / pageCv.height;
-          if(!(fracX>=0 && fracX<=1)) { var r=pageCv.getBoundingClientRect(); fracX=(e.clientX-r.left)/r.width; fracY=(e.clientY-r.top)/r.height; }
-          var sw=pageCv.width*0.35, sh=60;
-          var sx=Math.max(0, pageCv.width*fracX - sw/2), sy=Math.max(0, pageCv.height*fracY - sh/2);
-          ctx.drawImage(pageCv, sx, sy, sw, sh, 0,0, cv.width, cv.height);
+    var zw=h.root().querySelector("#stP3ZoomWindow");
+    if(!zw || zw.hidden) return;
+    var cv = zw.querySelector("#stP3ZoomCv");
+    if(!cv) return;
+    var ctx=cv.getContext("2d");
+    ctx.fillStyle="#fff"; ctx.fillRect(0,0,cv.width,cv.height);
+    ctx.strokeStyle="#071318"; ctx.strokeRect(0,0,cv.width,cv.height);
+    try {
+      var ovWrap = (e && e.target && e.target.closest && e.target.closest(".st-pg")) || h.root().querySelector(".st-pg");
+      var baseCv = ovWrap ? ovWrap.querySelector("canvas.st-cv") : null;
+      if(baseCv){
+        var fracX = (e && e.offsetX!=null) ? e.offsetX / baseCv.width : 0.5;
+        var fracY = (e && e.offsetY!=null) ? e.offsetY / baseCv.height : 0.5;
+        if(!(fracX>=0 && fracX<=1)) {
+          var r=baseCv.getBoundingClientRect();
+          fracX=(e && e.clientX ? (e.clientX-r.left)/r.width : 0.5);
+          fracY=(e && e.clientY ? (e.clientY-r.top)/r.height : 0.5);
         }
-      }catch(e2){}
-    }
-    sc.addEventListener("pointerdown", drawZoom);
-    sc.addEventListener("pointermove", function(e){ if(e.pointerType==="pen"||e.pointerType==="touch") drawZoom(e); });
-    sc.addEventListener("pointerup", function(){
-      var zw=h.root().querySelector("#stP3ZoomWindow"); if(zw) zw.hidden=true;
-    });
-    sc.addEventListener("pointercancel", function(){
-      var zw=h.root().querySelector("#stP3ZoomWindow"); if(zw) zw.hidden=true;
-    });
+        var sw=baseCv.width*0.35, sh=60;
+        var sx=Math.max(0, baseCv.width*fracX - sw/2), sy=Math.max(0, baseCv.height*fracY - sh/2);
+        ctx.drawImage(baseCv, sx, sy, sw, sh, 0,0, cv.width, cv.height);
+      }
+    }catch(e2){}
   }
-  setInterval(bindZoomWindow, 600);
 
   /* expose for tests */
-  G.STUDY_PAGES = { _pure: PURE, _openNavigator: openNavigator, _openAdd: openAddPageSheet, _refresh: refreshTopBar, _addPage: addPage, _rotate: rotatePage, _clear: clearPage, _copy: copyPage, _changeTplSheet: openChangeTemplate };
+  G.STUDY_PAGES = { _pure: PURE, _openNavigator: openNavigator, _openAdd: openAddPageSheet, _refresh: refreshTopBar, _addPage: addPage, _rotate: rotatePage, _clear: clearPage, _copy: copyPage, _changeTplSheet: openChangeTemplate, _renderZoom: renderZoom };
 
 })(typeof window!=="undefined"?window:this);

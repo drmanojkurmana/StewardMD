@@ -948,6 +948,20 @@
     host.root().appendChild(div);
   }
 
+  function toggleZoomWindow() {
+    var root = host && host.root && host.root();
+    if (!root) return;
+    var zw = root.querySelector("#stP3ZoomWindow");
+    if (zw) {
+      zw.hidden = !zw.hidden;
+      var btn = root.querySelector('#stTb [data-act="st-zoom-window"]');
+      if (btn) btn.classList.toggle("on", !zw.hidden);
+      if (!zw.hidden && G.STUDY_PAGES && G.STUDY_PAGES._renderZoom) {
+        G.STUDY_PAGES._renderZoom();
+      }
+    }
+  }
+
   function showPageSheet() {
     closePageSheet();
     closeMoreMenu();
@@ -1180,7 +1194,8 @@
     return '<div class="st-tb" id="stTb" role="toolbar" aria-label="Pen tools">' +
       '<div class="st-tb-group">' +
         '<div class="st-tb-tools">' +
-          b("st-page-sheet", inkIco.zoom || ICO.grid, null, ' title="Zoom window and pages" aria-label="Zoom window and pages"') +
+          b("st-zoom-window", inkIco.zoom || ICO.grid, null, ' title="Zoom window" aria-label="Zoom window"') +
+          b("st-page-sheet", ICO.grid, null, ' title="Pages overview" aria-label="Pages overview"') +
           b("st-tool", ICO.pen, "pen", ' title="Pen" aria-label="Pen"') +
           b("st-tool", ICO.er, "er", ' title="Eraser" aria-label="Eraser"') +
           b("st-tool", ICO.hl, "hl", ' title="Highlighter" aria-label="Highlighter"') +
@@ -1258,6 +1273,8 @@
     if (V.goto > 1 && V.pg[V.goto]) { V.sc.scrollTop = V.pg[V.goto].el.offsetTop; curPage(); }
     V.sc.addEventListener("pointermove", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
     V.sc.addEventListener("pointerdown", function (e) { if (e.pointerType === "pen") penSeen = true; }, true);
+    V.sc.addEventListener("pointerup", function (e) { if (e.pointerType === "pen" && V) V._isPenDown = false; }, true);
+    V.sc.addEventListener("pointercancel", function (e) { if (e.pointerType === "pen" && V) V._isPenDown = false; }, true);
   }
 
   function curPage() {
@@ -1280,12 +1297,15 @@
       p.ratio = v1.height / v1.width; p.el.style.height = ch + "px";
       var cv = D.createElement("canvas"), ov = D.createElement("canvas"), vp = page ? page.getViewport({ scale: (cw / v1.width) * qf }) : { width: cw * qf, height: ch * qf };
       cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.className = "st-cv";
+      cv.style.zIndex = "1"; cv.style.pointerEvents = "none";
       ov.width = Math.floor(cw * dpr); ov.height = Math.floor(ch * dpr); ov.className = "st-ov"; ov.setAttribute("data-n", n);
+      ov.style.touchAction = "none";
+      ov.style.zIndex = "10";
       var itemLayer = D.createElement("div"); itemLayer.className = "st-items-layer"; itemLayer.setAttribute("data-n", n);
       p.cv = cv; p.ov = ov; p.itemLayer = itemLayer;
       p.el.appendChild(cv); p.el.appendChild(itemLayer); p.el.appendChild(ov);
       // Phase 1 live layer: predicted points + eraser cursor only; committed ink stays on ov.
-      if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; p.live = lv; p.el.appendChild(lv); }
+      if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; lv.style.zIndex = "11"; lv.style.pointerEvents = "none"; p.live = lv; p.el.appendChild(lv); }
       bindInk(ov, n); redraw(n);
       if (G.STUDY_INSERT && G.STUDY_INSERT.renderPageItems) G.STUDY_INSERT.renderPageItems(n, p);
       if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; return drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); }
@@ -1313,6 +1333,10 @@
       if (!p.cv || !p.ov) return;
       var tl = D.createElement("div");
       tl.className = "st-tl smd-books-keep smd-emo-keep"; tl.style.setProperty("--scale-factor", String(k));
+      tl.style.zIndex = "2";
+      if (V && (V.tool === "pen" || V.tool === "hl" || V.tool === "er" || V.tool === "lasso" || V.tool === "shapes" || V.tool === "laser")) {
+        tl.style.pointerEvents = "none";
+      }
       p.el.insertBefore(tl, p.ov); p.tl = tl;
       return L.renderTextLayer({ textContentSource: tc, container: tl, viewport: page.getViewport({ scale: k }), textDivs: [] }).promise;
     }).then(null, function () {});
@@ -1338,8 +1362,14 @@
   function bindPinch() {
     var d0 = 0, z0 = 1;
     var span = function (t) { var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx * dx + dy * dy); };
-    V.sc.addEventListener("touchstart", function (e) { if (e.touches.length === 2) { d0 = span(e.touches); z0 = V.z; } }, { passive: true });
-    V.sc.addEventListener("touchmove", function (e) { if (e.touches.length === 2 && d0) { if (e.cancelable) e.preventDefault(); setZoom(z0 * span(e.touches) / d0); } }, { passive: false });
+    V.sc.addEventListener("touchstart", function (e) {
+      if (V && V._isPenDown) return;
+      if (e.touches.length === 2) { d0 = span(e.touches); z0 = V.z; }
+    }, { passive: true });
+    V.sc.addEventListener("touchmove", function (e) {
+      if (V && V._isPenDown) return;
+      if (e.touches.length === 2 && d0) { if (e.cancelable) e.preventDefault(); setZoom(z0 * span(e.touches) / d0); }
+    }, { passive: false });
     V.sc.addEventListener("touchend", function (e) { if (e.touches.length < 2) d0 = 0; }, { passive: true });
   }
 
@@ -1452,9 +1482,15 @@
     if (inp && D.activeElement !== inp) inp.value = V.cur || 1;
     var zm = root.querySelector("#stZoomLabel");
     if (zm) zm.textContent = Math.round((V.z || 1) * 100) + "%";
-    var isInk = V.tool === "pen" || V.tool === "hl";
+    var isInk = V.tool === "pen" || V.tool === "hl" || V.tool === "shapes";
     var isLaser = V.tool === "laser";
-    V.box.classList.toggle("st-ink", isInk || V.tool === "er" || V.tool === "lasso" || isLaser);
+    var hasInkTool = isInk || V.tool === "er" || V.tool === "lasso" || isLaser;
+    V.box.classList.toggle("st-ink", hasInkTool);
+    for (var pgi in V.pg) {
+      if (V.pg[pgi] && V.pg[pgi].tl) {
+        V.pg[pgi].tl.style.pointerEvents = hasInkTool ? "none" : "auto";
+      }
+    }
     if (G.STUDY_INSERT && G.STUDY_INSERT.syncTb) G.STUDY_INSERT.syncTb(V, root);
     // Phase 1 hook: refresh the ink context strip for the active tool.
     if (G.STUDY_INK) { try { G.STUDY_INK.syncStrip(inkApi(V.cur || 1, null)); } catch (e) {} }
@@ -1936,6 +1972,7 @@
     e.id = "stSheet"; e.className = "st-sheet"; e.setAttribute("role", "dialog"); e.setAttribute("aria-modal", "true");
     e.innerHTML = '<div class="st-sh smd-books-keep smd-emo-keep">' + html + '<div class="st-acts">' + (ok ? '<button type="button" class="pn-btn pri" data-act="st-sok" id="stSheetOk">' + label + "</button>" : "") +
       '<button type="button" class="pn-btn" data-act="st-scancel">' + (ok ? "Cancel" : "Close") + "</button></div></div>";
+    e.addEventListener("click", function (ev) { if (ev.target === e) closeSheet(); });
     host.root().appendChild(e); sheetOk = ok || null;
   }
   function signedIn() { var a = G.SMD_AUTH; return !!(a && a.currentUser); }
@@ -2058,6 +2095,7 @@
     if (a === "st-orig") return shareOriginal();
     if (a === "st-flat") return flatten();
     if (a === "st-explain") return explain();
+    if (a === "st-zoom-window") return toggleZoomWindow();
     if (a === "st-page-sheet") return showPageSheet();
     if (a === "st-close-pagesheet") return closePageSheet();
     if (a === "st-jump-page") {
@@ -2199,7 +2237,27 @@
   /* Phase 5a hook: the GoodNotes library (study-library.js) reuses the indexer so PDF text search keeps working. */
   /* Phase 5a hang fix: the library reuses STUDY.db (this connection) instead of opening its own
      IndexedDB connection, so the library never holds a second connection that can wedge opens. */
-  function inkDblTap() { if (!V) return; V.tool = V.tool === "er" ? (V.prevTool || "pen") : "er"; syncTb(); }
+  function pencilDoubleTap() {
+    if (!V) return;
+    if (V.tool === "er") {
+      V.tool = V.prevTool || "pen";
+    } else {
+      V.prevTool = V.tool || "pen";
+      V.tool = "er";
+    }
+    syncTb();
+  }
+  function inkDblTap() { pencilDoubleTap(); }
+
+  D.addEventListener("keydown", function (e) {
+    if (!V) return;
+    var tag = e.target && e.target.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || (e.target && e.target.isContentEditable)) return;
+    if (e.key === "d" || e.key === "D" || e.key === "e" || e.key === "E") {
+      pencilDoubleTap();
+    }
+  });
+
   G.STUDY = {
     on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText,
     kick: kick, db: db,
@@ -2210,12 +2268,14 @@
     askAi: askAi, makeDeck: makeDeck, sheet: sheet, closeSheet: closeSheet,
     scanner: scanner, normPhoto: normPhoto, shotsToDoc: shotsToDoc,
     pid: pid, posOf: posOf, redraw: redraw,
+    pencilDoubleTap: pencilDoubleTap, toggleZoomWindow: toggleZoomWindow, showPageSheet: showPageSheet,
     host: function () { return host; },
     buildPdf: buildPdf,
     _v: function () { return V; }, _redraw: redraw, _pushUndo: function (op) { if (V) { push(V.stack, op); saveStack(); syncTb(); } },
     _saveStack: saveStack, _put: put, _get: get, _all: all, _strokesOf: strokesOf, _uid: uid, _drawBg: drawBg, _drawStroke: drawStroke, _del: del,
     _reloadNb: reloadNb, _host: function () { return host; }, _syncTb: syncTb, _setZoom: setZoom, _openPdf: openPdf, _pdfjs: pdfjs, _loadOriginal: loadOriginal,
     _doScan: doScan, _pickPhotos: pickPhotos, _pickPdf: pickPdf, _importPhotos: importPhotos,
-    _inkDblTap: inkDblTap, _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; }
+    _inkDblTap: pencilDoubleTap, _pencilDoubleTap: pencilDoubleTap, _showPageSheet: showPageSheet, _toggleZoomWindow: toggleZoomWindow,
+    _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; }
   };
 })(typeof window !== "undefined" ? window : this);
