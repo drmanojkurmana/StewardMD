@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "shm-plasma-cell-disorders",
+ "subject": "ss-haematology",
+ "title": "Plasma cell disorders myeloma thresholds amyloidosis and Waldenstrom",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 116 Plasma Cell Disorders",
+  "Harrison Ch 117 Amyloidosis",
+  "IMWG myeloma criteria 2024"
+ ],
+ "steps": [
+  {
+   "tx": "Clonal plasma cell excess builds in three tiers. **MGUS** (monoclonal gammopathy of undetermined significance, silent clone) needs serum **M protein** (abnormal antibody) under **3** grams per decilitre and marrow clonal plasma cells under **10** percent. **Smouldering myeloma** (SMM, high burden silent disease) carries marrow clonal cells **10** to **60** percent or M protein above **3** grams per decilitre without end organ damage. **Active myeloma** (MM, symptomatic disease) adds myeloma defining events.",
+   "say": "MGUS, smouldering myeloma and active myeloma are three tiers of clonal excess. MGUS needs M protein below three grams in serum. Active myeloma has end organ damage features.",
+   "vis": {
+    "cols": [
+     "Tier",
+     "Marrow clone",
+     "Damage"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "MGUS",
+      "Under 10 percent",
+      "None, silent"
+     ],
+     [
+      "Smouldering",
+      "10 to 60 percent",
+      "None, high burden"
+     ],
+     [
+      "Active myeloma",
+      "Above 10 percent",
+      "CRAB or SLiM"
+     ],
+     [
+      "M protein MGUS",
+      "Under 3 grams",
+      "Progression 1 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SLiM CRAB** (myeloma defining events) settles treatment need. **SLiM** features include marrow clonal plasma cells **60** percent or more, involved to uninvolved **free light chain ratio** (abnormal antibody chains) **100** or more, and more than **1** focal lesion on MRI (magnetic resonance imaging). **CRAB** features are hypercalcaemia, renal failure, anaemia and bone lesions from the clone. Any single **SLiM** or **CRAB** feature with clonal excess above **10** percent starts therapy.",
+   "say": "SLiM CRAB features determine when myeloma needs treatment. Sixty percent marrow clonal cells is a treatment trigger. A single SLiM or CRAB feature starts therapy. Any one feature is enough for immediate treatment.",
+   "vis": {
+    "cols": [
+     "Event",
+     "Cutoff",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Marrow clone",
+      "60 percent or more",
+      "Treat at once"
+     ],
+     [
+      "Light chain ratio",
+      "100 or more",
+      "Treat at once"
+     ],
+     [
+      "MRI lesions",
+      "More than 1 focal",
+      "Treat at once"
+     ],
+     [
+      "CRAB any",
+      "One feature",
+      "Treat at once"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Multiple myeloma** (MM, malignant plasma cell disease) strikes older adults with median age near **70** years and **IgG** (antibody class) in about **fifty five** percent. **Bone pain** (especially spine and ribs) and **fatigue** dominate early symptoms. **CRAB** features (calcium, renal, anaemia, bone) summarise end organ damage at diagnosis. **Renal failure** affects nearly **25** percent at presentation, usually from **cast nephropathy** (protein casts in kidney tubules).",
+   "say": "Myeloma affects older adults with a median age near seventy years. Bone pain and fatigue are common early symptoms. Renal failure affects nearly twenty five percent at presentation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Anemia renal bone pain"
+     },
+     {
+      "id": "spep",
+      "label": "SPEP immunofixation sFLC"
+     },
+     {
+      "id": "marrow",
+      "label": "Marrow clonal cells"
+     },
+     {
+      "id": "treat",
+      "label": "SLiM CRAB? Treat"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "spep"
+     ],
+     [
+      "spep",
+      "marrow"
+     ],
+     [
+      "marrow",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SPEP** (serum protein electrophoresis, protein separation test) finds the **M spike** (abnormal antibody peak) and quantifies **M protein** (monoclonal antibody). **Serum immunofixation** (sensitive antibody test) confirms clonality and light chain type. **Serum free light chains** (sFLC, unbound antibody chains) and kappa lambda ratio expose light chain only disease. **Urine immunofixation** and **24 hour urine protein** complete the baseline panel.",
+   "say": "SPEP finds and quantifies the M spike in serum. Immunofixation confirms clonality and light chain type. Free light chains are the test for light chain disease.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Shows",
+     "Cutoff clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "SPEP",
+      "M spike peak",
+      "Quantifies M protein"
+     ],
+     [
+      "Immunofixation",
+      "Clonality",
+      "Heavy and light type"
+     ],
+     [
+      "Free light chains",
+      "Involved chain level",
+      "Ratio 100 treats"
+     ],
+     [
+      "Urine studies",
+      "Bence Jones protein",
+      "Renal risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**R ISS** (Revised International Staging System) stratifies newly diagnosed myeloma with beta 2 microglobulin, albumin, **LDH** (cell damage enzyme) and cytogenetics. **del17p** (chromosome 17 loss) and **t(4;14)** (chromosome translocation) mark high risk disease. **t(11;14)** (chromosome translocation) marks standard risk and **BCMA** (B cell maturation antigen) sensitive disease. **Gain 1q** (extra chromosome arm) pushes risk upward and predicts early relapse. **Trisomy thirteen nineteen** (extra chromosomes) also carry favourable weight.",
+   "say": "R ISS staging is based on beta 2 microglobulin albumin and cytogenetics. Del17p and t4 14 are high risk markers. Gain 1q is a marker of early relapse patterns.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Favourable genetics",
+     "points": [
+      "t(11;14) standard risk",
+      "Trisomy eleven nineteen favourable",
+      "Deep MRD responses"
+     ]
+    },
+    "right": {
+     "title": "Adverse genetics",
+     "points": [
+      "del17p high risk",
+      "t(4;14) high risk",
+      "Gain 1q adverse"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transplant eligible patients need quadruplet induction. **Daratumumab** (anti CD38 antibody) combined with **VRD** (bortezomib, lenalidomide, dexamethasone) forms **Dara VRD** (daratumumab VRD) standard induction. **Bortezomib** (proteasome inhibitor) is dosed **one point three** mg per square metre on days **1 4 8 11**. **Lenalidomide** (immunomodulatory drug) is **25** mg daily for **21** days per cycle. **Autologous transplant** (ASCT, own stem cells) follows induction in eligible patients.",
+   "say": "Daratumumab VRD forms standard induction for transplant eligible patients. Bortezomib is dosed at one point three milligrams. Autologous transplant follows induction in eligible patients.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Dose",
+     "Role"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bortezomib",
+      "one point three mg per sq m",
+      "Days 1 4 8 11"
+     ],
+     [
+      "Lenalidomide",
+      "25 mg daily",
+      "21 days per cycle"
+     ],
+     [
+      "Daratumumab",
+      "16 mg per kg",
+      "Anti CD38 antibody"
+     ],
+     [
+      "ASCT",
+      "After induction",
+      "Own stem cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lenalidomide maintenance** (continuing drug) follows ASCT and extends survival in most patients. **MRD** (measurable residual disease, tiny residual clone) negativity at **10** to the minus **5** predicts longer control and guides duration. **Bisphosphonates** (bone strengthening drugs) prevent skeletal events and are standard in myeloma. **BCMA directed therapy** (CAR T cells) rescues relapsed disease in late lines.",
+   "say": "Lenalidomide maintenance after transplant extends survival in most patients. MRD negativity predicts considerably longer disease control. Bisphosphonate treatment prevents skeletal events in myeloma patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "induction",
+      "label": "Dara VRD induction"
+     },
+     {
+      "id": "asct",
+      "label": "Autologous transplant"
+     },
+     {
+      "id": "maint",
+      "label": "Lenalidomide maintenance"
+     },
+     {
+      "id": "mrd",
+      "label": "MRD surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "induction",
+      "asct"
+     ],
+     [
+      "asct",
+      "maint"
+     ],
+     [
+      "maint",
+      "mrd"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**AL amyloidosis** (light chain amyloid disease) deposits toxic light chains in heart and kidney. **Congo red staining** (amyloid dye test) with **apple green birefringence** (polarised light colour) proves tissue amyloid. **NT proBNP** (heart failure marker) and **troponin** (heart damage marker) stage cardiac disease. **dFLC** (difference between involved and uninvolved free light chains) below **50** mg per litre predicts better survival.",
+   "say": "AL amyloidosis is seen with light chain deposits in heart and kidney. Congo red staining with apple green birefringence proves amyloid. Low dFLC is a marker of better survival outcomes.",
+   "vis": {
+    "cols": [
+     "Organ",
+     "Clue",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Heart",
+      "Thick wall low voltage",
+      "NT proBNP troponin"
+     ],
+     [
+      "Kidney",
+      "Nephrotic proteinuria",
+      "Biopsy Congo red"
+     ],
+     [
+      "Nerves",
+      "Carpal tunnel bin",
+      "Fat pad aspirate"
+     ],
+     [
+      "Tongue",
+      "Macroglossia",
+      "Clone in marrow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Waldenstrom macroglobulinaemia** (WM, IgM lymphoplasmacytic disease) secretes **IgM** (large antibody) that thickens blood. **Hyperviscosity** (thick blood symptoms) causes blurred vision, headache and bleeding from mucosal surfaces. **MYD88 L265P** (gene mutation) is found in over **90** percent of cases and supports diagnosis. **Rituximab** (anti CD20 antibody) can flare IgM and worsen hyperviscosity transiently, so plasmapheresis precedes it when IgM is very high.",
+   "say": "Waldenstrom disease secretes large IgM that thickens blood. Hyperviscosity causes blurred vision and mucosal bleeding. MYD88 mutation supports the diagnosis in most cases worldwide.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myeloma contrast",
+     "points": [
+      "IgG IgA IgD types",
+      "Lytic bone lesions",
+      "CRAB features common"
+     ]
+    },
+    "right": {
+     "title": "Waldenstrom contrast",
+     "points": [
+      "IgM only type",
+      "Hyperviscosity instead",
+      "MYD88 mutation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exam stems test these discriminators. **MGUS** (silent clone) never gets treatment and progresses near **1** percent yearly. **Solitary plasmacytoma** (single clone without marrow spread) needs radiation, not systemic chemotherapy. **POEMS syndrome** (polyneuropathy, organomegaly, endocrinopathy, M protein, skin changes) mimics myeloma but **VEGF** (growth factor) is the diagnostic driver. **Castleman disease** (lymph node disorder) overlaps POEMS features closely.",
+   "say": "MGUS never receives treatment and is a slowly progressive disease. Solitary plasmacytoma needs radiation rather than chemotherapy. POEMS syndrome is a VEGF excess disease pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treat the clone",
+     "points": [
+      "Active myeloma",
+      "AL amyloidosis",
+      "Solitary plasmacytoma radiation"
+     ]
+    },
+    "right": {
+     "title": "Never treat",
+     "points": [
+      "MGUS silent clone",
+      "Smouldering watchful",
+      "Repeat SPEP yearly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **MGUS** needs M protein under **3** grams per decilitre and clone under **10** percent. **SLiM** thresholds are clone **60** percent, light chain ratio **100**, and MRI lesions above **1**. **Bortezomib** is **one point three** mg per square metre, and **lenalidomide** is **25** mg daily. **AL amyloid** shows **Congo red** apple green birefringence, and **Waldenstrom** carries **MYD88** mutation.",
+   "say": "MGUS needs clone below ten percent and M protein below three grams. SLiM thresholds cover sixty percent marrow and ratio one hundred. Bortezomib is dosed at one point three milligrams.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "MGUS clone limit",
+      "10 percent",
+      "Silent disease"
+     ],
+     [
+      "SLiM clone limit",
+      "60 percent",
+      "Treat at once"
+     ],
+     [
+      "Light chain ratio",
+      "100",
+      "Treat at once"
+     ],
+     [
+      "Bortezomib dose",
+      "one point three mg per sq m",
+      "Days 1 4 8 11"
+     ],
+     [
+      "Amyloid stain",
+      "Congo red apple green",
+      "Heart and kidney"
+     ],
+     [
+      "WM mutation",
+      "MYD88 L265P",
+      "IgM disease"
+     ]
+    ]
+   }
+  }
+ ]
+}

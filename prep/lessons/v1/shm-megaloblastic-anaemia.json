@@ -1,0 +1,321 @@
+{
+ "v": 1,
+ "module": "shm-megaloblastic-anaemia",
+ "subject": "ss-haematology",
+ "title": "Megaloblastic anaemia B12 folate and neurology",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 104 Megaloblastic Anemias",
+  "British Society for Haematology guidance on B12 and folate deficiency 2024"
+ ],
+ "steps": [
+  {
+   "tx": "**Megaloblasts** (giant immature red precursors) with **hypersegmented neutrophils** (neutrophils with five or more lobes) define megaloblastic change, pointing to vitamin **B12** (cobalamin) or folate failure. Total body B12 is only **2** to **5** mg, so stores last **3** to **5** years, while folate stores of **5** to **20** mg last just months. **Macrocytosis** (large red cells with MCV above **100**) is the usual flag.",
+   "say": "Giant megaloblasts with hypersegmented neutrophils point to B12 or folate failure. B12 stores last years, but folate stores last only months. Macrocytosis is the usual laboratory flag.",
+   "vis": {
+    "cols": [
+     "Vitamin",
+     "Store",
+     "Depletion time"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "B12",
+      "2 to 5 mg",
+      "3 to 5 years"
+     ],
+     [
+      "Folate",
+      "5 to 20 mg",
+      "Months only"
+     ],
+     [
+      "MCV flag",
+      "Above 100",
+      "Macrocytosis"
+     ],
+     [
+      "Smear sign",
+      "Hypersegmentation",
+      "B12 or folate lack"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intrinsic factor** (stomach protein needed for B12 uptake) and **transcobalamin II** (plasma B12 carrier, TC II) move B12 into marrow and placenta. Gastric surgery, pernicious anaemia and vegan diets deplete intake, while pancreatic insufficiency, ileal disease and nitrous oxide (anaesthetic gas) impair uptake or activation. **Food cobalamin malabsorption** (low acid releasing B12) explains many older adults, whereas ileocecal resection recreates permanent deficiency.",
+   "say": "Intrinsic factor and transcobalamin II carry B12 into tissues. Gastric surgery and pernicious anaemia block uptake, while nitrous oxide locks cobalamin inactive. Food cobalamin malabsorption strikes many older adults.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "intake",
+      "label": "Intake or uptake fails"
+     },
+     {
+      "id": "lower",
+      "label": "Stores fall over years"
+     },
+     {
+      "id": "marrow",
+      "label": "Megaloblasts evolve"
+     }
+    ],
+    "edges": [
+     [
+      "intake",
+      "lower"
+     ],
+     [
+      "lower",
+      "marrow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Folate cycles among **tetrahydrofolate** (THF, active folate pool) forms: **5-methyl-THF** (methyl carrier), **5,10-methylene-THF** (purine and pyrimidine builder) and **10-formyl-THF** (formate donor). **Methionine synthase** (enzyme regenerating THF and methionine) needs methylcobalamin, while **MTHFR** (methylene reductase) closes the loop. Folate supports **DNA** (cell replication chemistry) synthesis and **SAM** (universal methyl donor) methylation, and failure traps folate as 5-methyl-THF.",
+   "say": "Folate shuttles single carbon units between THF forms to build DNA. Methionine synthase needs B12 to regenerate THF. Without B12, folate is trapped in the methyl form.",
+   "vis": {
+    "cols": [
+     "Folate form",
+     "Job",
+     "Needs"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "5-methyl-THF",
+      "Methyl donation",
+      "B12 plus synthase"
+     ],
+     [
+      "Methylene-THF",
+      "DNA building",
+      "Purine pyrimidine"
+     ],
+     [
+      "Formyl-THF",
+      "Formate transfer",
+      "Purine synthesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cobalamin failure hurts the cord hardest. **Subacute combined degeneration** (demyelination of posterior and lateral columns) produces paresthesia, weakness, ataxia, spasticity, positive **Romberg** (standing balance test) and **Lhermitte** (neck flexion electric shock) signs. Dementia, psychosis and optic atrophy may dominate. Infants with prolonged lack suffer poor brain development and intellectual impairment, which may never fully reverse.",
+   "say": "Cord demyelination produces numbness, weakness and unsteadiness with spasticity. Balance testing turns positive, and neck flexion may trigger electric shock sensations. Infantile deficiency impairs brain development permanently.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cord signs",
+     "points": [
+      "Lost vibration and position",
+      "Ataxia with spasticity",
+      "Romberg and Lhermitte positive"
+     ]
+    },
+    "right": {
+     "title": "Brain signs",
+     "points": [
+      "Dementia and psychosis",
+      "Optic atrophy possible",
+      "Infant development hit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnosis leans on **B12 level** (serum cobalamin), red cell folate and borderline markers. **MMA** (methylmalonic acid) rises in true B12 lack, while **homocysteine** (sulfur amino acid) rises in either B12 or folate lack. **Anti-parietal** and **anti-intrinsic** antibodies confirm pernicious anaemia. Blood counts often show **pancytopenia** (all lineages low) with high **LDH** (lactate dehydrogenase, cell damage enzyme) from ineffective erythropoiesis.",
+   "say": "Methylmalonic acid rises in true B12 lack, while homocysteine rises in either deficiency. Parietal antibodies confirm pernicious anaemia. Pancytopenia with high LDH supports megaloblastosis.",
+   "vis": {
+    "cols": [
+     "Test",
+     "B12 lack",
+     "Folate lack"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "B12 level",
+      "Low",
+      "Normal"
+     ],
+     [
+      "MMA",
+      "High",
+      "Normal"
+     ],
+     [
+      "Homocysteine",
+      "High",
+      "High"
+     ],
+     [
+      "Red cell folate",
+      "Normal or low",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurology can become irreversible within weeks, so **B12 replacement** (hydroxocobalamin 1000 micrograms intramuscularly) starts before assay results when suspicion is high. Oral **1000** micrograms daily also works if absorption pathways hold. Folate treats only folate lack; giving folic acid alone to combined deficiency masks anaemia while cord injury marches on. Reticulocytes surge within days, then counts recover over weeks.",
+   "say": "Neurological damage may turn permanent within weeks, so B12 is given before results when suspicion is high. Folic acid alone is dangerous in combined deficiency. Counts recover after reticulocytes surge.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspicion",
+      "label": "Strong clinical suspicion"
+     },
+     {
+      "id": "b12give",
+      "label": "Give B12 immediately"
+     },
+     {
+      "id": "confirm",
+      "label": "Assay and investigate cause"
+     }
+    ],
+    "edges": [
+     [
+      "suspicion",
+      "b12give"
+     ],
+     [
+      "b12give",
+      "confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Liver disease, alcohol, hypothyroidism and **MDS** (myelodysplastic syndrome, marrow dysplasia) mimic macrocytosis without megaloblasts. **Zieve syndrome** (anaemia with liver disease and hyperlipidaemia) and drug effects of **azathioprine** (immune suppressant) or **methotrexate** (antifolate) complicate the picture. A normal smear with a reticulocytosis may hide early deficiency, and recent transfusion falsifies folate results by adding donor cells.",
+   "say": "Liver disease and hypothyroidism mimic macrocytosis without megaloblasts. Recent transfusion can hide deficiency behind donor cells. Antifolate drugs complicate the interpretation further.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True deficiency",
+     "points": [
+      "Hypersegmentation present",
+      "MMA or homocysteine high",
+      "Reticulocyte surge on treatment"
+     ]
+    },
+    "right": {
+     "title": "Macrocytosis mimics",
+     "points": [
+      "No hypersegmentation",
+      "Liver or thyroid cause",
+      "No true marrow change"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Public health adds weight. **Neural tube defects** (spina bifida, anencephaly) result from folate lack, so periconceptional **400** micrograms folic acid prevents them in nearly all women of childbearing age. Pregnancy, haemolysis and antifolate drugs raise demand sharply. Malabsorption syndromes and **bariatric surgery** (weight loss stomach surgery) need lifelong B12 surveillance after anatomy changes.",
+   "say": "Folate lack causes neural tube defects, so periconceptional folic acid is recommended. Pregnancy and haemolysis raise folate demand sharply. Bariatric surgery patients need lifelong B12 surveillance.",
+   "vis": {
+    "cols": [
+     "Group",
+     "Risk",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Women of childbearing age",
+      "Neural tube defects",
+      "Folic acid 400 micrograms"
+     ],
+     [
+      "Pregnancy",
+      "High folate demand",
+      "Supplement routinely"
+     ],
+     [
+      "Bariatric surgery",
+      "B12 malabsorption",
+      "Lifelong B12 checks"
+     ],
+     [
+      "Antifolate drugs",
+      "Folate blockade",
+      "Folinic acid rescue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications extend beyond the cord. **Glossitis** (sore tongue), diarrhoea and **infertility** frequently accompany deficiency, while pancytopenia invites infection and bleeding. Osteoporosis associations are reported, and phagocyte bacterial killing weakens. **Methotrexate** toxicity and pancytopenia worsen when folate is low, so oncologists supplement folinic acid in high dose regimens.",
+   "say": "Glossitis and diarrhoea often accompany megaloblastic anaemia. Pancytopenia invites infection and bleeding. Folinic acid rescues high dose methotrexate toxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Marrow effects",
+     "points": [
+      "Pancytopenia pattern",
+      "Infection and bleeding risk",
+      "Cytopenias reversible"
+     ]
+    },
+    "right": {
+     "title": "Beyond marrow",
+     "points": [
+      "Glossitis and gut upset",
+      "Bone health concern",
+      "Weak phagocyte killing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exam anchors: megaloblasts plus hypersegmentation equal B12 or folate lack; **MMA** high means B12 deficiency while homocysteine high covers both; **subacute combined degeneration** is the classic cord syndrome; never give folate alone when B12 status is unknown; and periconceptional **400** micrograms prevents neural tube defects. Nitrous oxide abuse can precipitate acute cord disease even with normal B12 levels.",
+   "say": "MMA elevation points to B12 deficiency while homocysteine covers both vitamins. Combined cord degeneration is the classic neurology. Folate alone is never given when B12 status is unknown.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Megaloblasts",
+      "B12 or folate lack",
+      "Measure both levels"
+     ],
+     [
+      "MMA high",
+      "True B12 deficiency",
+      "Replace B12 fast"
+     ],
+     [
+      "Homocysteine high",
+      "Either deficiency",
+      "Check both vitamins"
+     ],
+     [
+      "Cord signs",
+      "B12 emergency",
+      "Give before results"
+     ],
+     [
+      "Pregnancy prevention",
+      "400 micrograms folate",
+      "Neural tube protection"
+     ],
+     [
+      "Folate alone",
+      "Masks anaemia",
+      "Never without B12 check"
+     ]
+    ]
+   }
+  }
+ ]
+}

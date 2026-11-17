@@ -1,0 +1,372 @@
+{
+ "v": 1,
+ "module": "shm-transfusion-medicine",
+ "subject": "ss-haematology",
+ "title": "Transfusion medicine components thresholds reactions and compatibility",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 118 Transfusion Therapy and Biology",
+  "AABB Clinical Transfusion Guidelines 2023",
+  "BSH guideline on platelet transfusion 2024"
+ ],
+ "steps": [
+  {
+   "tx": "**Red cells** (RBCs, oxygen carriers) correct anaemia without overload. **Platelets** (clotting cells) prevent bleeding in severe thrombocytopenia. **Fresh frozen plasma** (FFP, frozen plasma) replaces multiple factors in DIC and liver failure. **Cryoprecipitate** (frozen plasma fraction) delivers concentrated **fibrinogen** (clotting protein) fast. **One unit** (single donor pack) of red cells raises haemoglobin by about **1** gram per decilitre.",
+   "say": "Red cells correct anaemia without overloading the circulation today. Platelets prevent bleeding in severe thrombocytopenia cases. Cryoprecipitate delivers concentrated fibrinogen very fast in DIC. Component choice depends on the clinical need itself.",
+   "vis": {
+    "cols": [
+     "Component",
+     "Holds",
+     "Raises"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Red cells",
+      "Haemoglobin",
+      "1 gram per unit"
+     ],
+     [
+      "Platelets",
+      "Clotting cells",
+      "Rise depends on size"
+     ],
+     [
+      "FFP",
+      "All factors",
+      "Broad replacement"
+     ],
+     [
+      "Cryoprecipitate",
+      "Fibrinogen VWF",
+      "Fast concentrate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ABO antigens** (blood group sugars) are genuine tissue groups expressed on endothelium. **Anti A and anti B** (natural antibodies) are present in **group O** plasma, while **group AB** plasma carries none. **Group O red cells** (universal donors) lack A and B antigens for transfusion safety. **Group AB plasma** (universal plasma donor) suits every recipient. **RhD positive** (Rh factor) red cells are safe for **RhD positive** recipients and men.",
+   "say": "Group O red cells are safer for universal transfusion. Group AB plasma is the universal plasma donor. RhD positive red cells are used for positive recipients and men.",
+   "vis": {
+    "cols": [
+     "Group",
+     "Red cells to",
+     "Plasma to"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Group O",
+      "Any recipient",
+      "O recipients only"
+     ],
+     [
+      "Group A",
+      "A and AB",
+      "A and O"
+     ],
+     [
+      "Group B",
+      "B and AB",
+      "B and O"
+     ],
+     [
+      "Group AB",
+      "AB only",
+      "Any recipient"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Restrictive threshold** (higher haemoglobin tolerated) guides modern transfusion. Stable ward patients transfuse at haemoglobin below **7** grams per decilitre. Patients after cardiac surgery tolerate **7.5 to 8** grams per decilitre. **Acute coronary syndrome** (heart attack) favours **8** to **10** grams per decilitre thresholds in many trials. **Symptoms** (dyspnoea, chest pain) override numbers when present. **Transfusion cost** and alloimmunisation drive restrictive practice.",
+   "say": "Stable ward patients are transfused below seven grams per decilitre. Cardiac surgery patients can tolerate seven point five to eight grams. Symptoms override numbers when they are present.",
+   "vis": {
+    "cols": [
+     "Setting",
+     "Threshold",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stable ward",
+      "Below 7 grams",
+      "Restrictive standard"
+     ],
+     [
+      "Cardiac surgery",
+      "7.5 to 8 grams",
+      "AABB guidance"
+     ],
+     [
+      "Coronary syndrome",
+      "8 to 10 grams",
+      "Trial debate"
+     ],
+     [
+      "Symptomatic",
+      "Treat symptoms",
+      "Number secondary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Platelet thresholds** (clotting cell cutoffs) suit surgery and bleeding. Prophylactic transfusion suits counts below **ten thousand** per microlitre in stable patients. Active bleeding favours transfusion below **fifty thousand** per microlitre. Major surgery targets **50** to **100** per microlitre, and neurosurgery demands **100** per microlitre. **Neonatal** (newborn) thresholds sit near **twenty five thousand** to **fifty thousand** for most situations. **ITP** (immune platelet loss) needs transfusion only for life threatening bleeding.",
+   "say": "Prophylactic platelets are indicated below ten thousand in stable patients. Active bleeding favours transfusion below fifty thousand. Neurosurgery demands one hundred thousand per microlitre.",
+   "vis": {
+    "cols": [
+     "Setting",
+     "Count target",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stable prophylaxis",
+      "ten thousand",
+      "Below suits transfusion"
+     ],
+     [
+      "Active bleeding",
+      "fifty thousand",
+      "Transfuse faster"
+     ],
+     [
+      "Major surgery",
+      "50 to 100",
+      "Per microlitre"
+     ],
+     [
+      "Neurosurgery",
+      "one hundred thousand",
+      "Highest standard"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Leukoreduction** (white cell removal) is now standard for all components. **Irradiation** (radiation treated blood) prevents **TA GVHD** (transfusion associated graft versus host disease) in **SCID** (immune deficiency), **HLADR matched** (immune matched) donations and Hodgkin disease. **CMV safe** (cytomegalovirus safe blood) suits neonatal and transplant recipients. **Washed red cells** (saline rinsed units) suit **IgA deficiency** (antibody defect) with anti IgA antibodies.",
+   "say": "Leukoreduction is standard for all blood components today. Irradiation prevents graft versus host disease in SCID. Washed red cells suit IgA deficiency with antibodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Irradiate needed",
+     "points": [
+      "SCID immune defect",
+      "Hodgkin lymphoma",
+      "HLA matched donation"
+     ]
+    },
+    "right": {
+     "title": "Washed cells needed",
+     "points": [
+      "IgA deficiency",
+      "Anti IgA present",
+      "Neonatal exchange"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acute haemolytic reaction** (AHTR, ABO immune haemolysis) is the radio emergency of transfusion. Onset occurs within **24** hours with fever, flank pain and **DIC** (consumption coagulopathy). **Direct antiglobulin test** (DAT, Coombs test) turns positive in immune haemolysis. **Stop the unit** (halt transfusion) and support kidneys immediately. **ABO mistransfusion** (wrong blood sampling) at the bedside causes nearly half of fatal events.",
+   "say": "Acute haemolytic reaction is the transfusion emergency to fear. Onset occurs within twenty four hours of transfusion. Wrong blood sampling causes nearly half of fatal events.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fever",
+      "label": "Fever flank pain"
+     },
+     {
+      "id": "stop",
+      "label": "Stop unit at once"
+     },
+     {
+      "id": "dat",
+      "label": "DAT and hemolysis labs"
+     },
+     {
+      "id": "kidney",
+      "label": "Protect kidney, support"
+     }
+    ],
+    "edges": [
+     [
+      "fever",
+      "stop"
+     ],
+     [
+      "stop",
+      "dat"
+     ],
+     [
+      "dat",
+      "kidney"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**TRALI** (transfusion related acute lung injury) and **TACO** (transfusion associated circulatory overload) both present with dyspnoea (breathlessness) but diverge management. **TRALI** brings fever, hypoxia and bilateral shadowing with normal heart pressures within **6** hours. **TACO** brings hypertension, raised **BNP** (heart failure marker) and pulmonary oedema (lung fluid) from volume overload. **TACO** topped transfusion deaths near **32** percent, followed by **TRALI** near **21** percent.",
+   "say": "TRALI and TACO both present with dyspnoea after transfusion. TACO carries hypertension and raised BNP markers. TACO topped transfusion deaths near thirty two percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TRALI",
+     "points": [
+      "Fever and hypoxia",
+      "Within 6 hours",
+      "Normal heart pressures"
+     ]
+    },
+    "right": {
+     "title": "TACO",
+     "points": [
+      "Hypertension present",
+      "Raised BNP level",
+      "Volume overload cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Febrile nonhaemolytic reaction** (FNHTR, fever without haemolysis) follows **leukocyte** (white cell) reactions and is now rare with leukoreduction. **Allergic reactions** (urticaria to anaphylaxis) track **IgE** (allergy antibody) mediated responses to plasma proteins. **Post transfusion purpura** (PTP, platelet antibody disease) drops platelets **5** to **12** days after transfusion. **Iron overload** (excess iron storage) follows **10** to **20** chronic units and needs chelation. **Alloimmunisation** (new antibody formation) to **HLA** (immune matched markers) limits platelet therapy.",
+   "say": "Febrile nonhaemolytic reactions are now rare with leukoreduction. Platelets are lowered in post transfusion purpura after five to twelve days. Iron overload follows ten to twenty chronic units.",
+   "vis": {
+    "cols": [
+     "Reaction",
+     "Timing",
+     "Clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "FNHTR fever",
+      "During 4 hours",
+      "No haemolysis signs"
+     ],
+     [
+      "Allergic",
+      "Minutes to hours",
+      "Urticaria to shock"
+     ],
+     [
+      "Post transfusion purpura",
+      "5 to 12 days",
+      "Platelets drop fast"
+     ],
+     [
+      "Iron overload",
+      "10 to 20 units",
+      "Chelation needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Massive transfusion** (replacing whole blood volume rapidly) needs balanced components. **1 to 1 to 1 ratio** (red cells, plasma, platelets) mimics whole blood and limits coagulopathy. **Antifibrinolytic drug** at **CRASH 2** (trauma trial) dosing cuts bleeding deaths. **Calcium** (mineral) falls with citrate load and needs repletion during rapid transfusion. **Permissive hypotension** (low pressure resuscitation) protects early clots in trauma bleeding.",
+   "say": "Massive transfusion needs balanced one to one to one replacement. Antifibrinolytic treatment cuts bleeding deaths in trauma trials. Calcium falls with citrate load during rapid transfusion.",
+   "vis": {
+    "cols": [
+     "Component",
+     "Ratio aim",
+     "Watch"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Red cells",
+      "1 part",
+      "Volume restoration"
+     ],
+     [
+      "Plasma",
+      "1 part",
+      "TACO risk"
+     ],
+     [
+      "Platelets",
+      "1 part",
+      "Count above 50"
+     ],
+     [
+      "Calcium",
+      "Replete fast",
+      "Citrate chelation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems repeat these pairings. **TACO** (overload) raises pressure and **BNP** (marker), while **TRALI** (lung injury) lowers oxygen with normal pressures. **1 unit** of red cells raises haemoglobin by **1** gram per decilitre. **CRASH 2** (trauma trial) proves antifibrinolytic value in bleeding trauma. **Irradiated blood** (treated units) is mandatory in **SCID** (immune defect) and **TA GVHD** (graft disease) prevention.",
+   "say": "TACO raises pressure and BNP while TRALI lowers oxygen. One unit raises haemoglobin by one gram per decilitre. Irradiated blood is mandatory in SCID patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TACO",
+     "points": [
+      "Hypertension present",
+      "BNP raised high",
+      "Diuretics help"
+     ]
+    },
+    "right": {
+     "title": "TRALI",
+     "points": [
+      "Fever and hypoxia",
+      "BNP normal range",
+      "Supportive ventilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: restrictive **haemoglobin threshold 7** grams per decilitre suits stable ward patients. **Platelets ten thousand** prophylactic, **fifty thousand** bleeding, and **one hundred thousand** neurosurgery are the asked cutoffs. **1 to 1 to 1** balances massive transfusion, and **1 unit raises haemoglobin** by **1** gram. **TRALI** hits within **6** hours, and **TACO** causes near **32** percent of transfusion deaths.",
+   "say": "Restrictive threshold is seven grams per decilitre in stable patients. Platelet cutoffs cover ten thousand fifty thousand and one hundred thousand. One unit raises haemoglobin by one gram.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ward threshold",
+      "Below 7 grams",
+      "Restrictive care"
+     ],
+     [
+      "Platelets bleed",
+      "fifty thousand",
+      "Active bleeding"
+     ],
+     [
+      "Neurosurgery platelets",
+      "one hundred thousand",
+      "Highest standard"
+     ],
+     [
+      "Massive ratio",
+      "1 to 1 to 1",
+      "Balanced replacement"
+     ],
+     [
+      "TRALI window",
+      "Within 6 hours",
+      "Hypoxia fever"
+     ],
+     [
+      "TACO deaths share",
+      "Near 32 percent",
+      "Circulatory overload"
+     ]
+    ]
+   }
+  }
+ ]
+}
