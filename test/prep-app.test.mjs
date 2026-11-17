@@ -190,12 +190,25 @@ test("loader: ON by default (owner 2026-10-06); smd_prep=0 or ?prep=0 turns it o
 });
 
 test("loader: first open injects the stylesheet and scripts in order at one token", () => {
-  const on = loaderIn("?prep=1&spotify=0&study=0", {});   // the base list; Spotify and Study Studio are covered below
+  const on = loaderIn("?prep=1&spotify=0&study=0&medigram=0", {});   // the base list; Spotify, Study Studio and PrepReels are covered below
   on.win.PREP.open();
   const L = on.win.PREP_LOADER;
   assert.deepEqual(on.added.map((e) => e.href || e.src), [...L.CSS, ...L.JS].map((f) => "/" + f + "?v=" + L.V));
   assert.ok(on.added.filter((e) => e.tag === "script").every((e) => e.async === false));
   assert.ok(L.JS.indexOf("specialty-core.js") < L.JS.indexOf("prep.js"));
+});
+
+test("loader: PrepReels is ON by default (owner 2026-11-17); ?medigram=0 keeps its files from loading", () => {
+  const on = loaderIn("?prep=1&spotify=0&study=0", {});
+  on.win.PREP.open();
+  const got = on.added.map((e) => e.href || e.src);
+  assert.ok(got.some((u) => /\/prep-medigram\.js\?/.test(u)) && got.some((u) => /\/prep-medigram\.css\?/.test(u)), "PrepReels files load by default");
+  const off = loaderIn("?prep=1&spotify=0&study=0&medigram=0", {});
+  off.win.PREP.open();
+  assert.ok(!off.added.some((e) => /prep-medigram/.test(e.href || e.src || "")), "no PrepReels files when off");
+  const storedOff = loaderIn("?prep=1&spotify=0&study=0", { smd_prep_medigram: "0" });
+  storedOff.win.PREP.open();
+  assert.ok(!storedOff.added.some((e) => /prep-medigram/.test(e.href || e.src || "")), "stored 0 turns it off");
 });
 
 test("loader: Study Studio is ON by default (owner 2026-11-15); ?study=0 keeps its files from loading", () => {

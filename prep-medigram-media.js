@@ -1,6 +1,6 @@
 /* PrepReels media: first-party descriptor + official YouTube nocookie embed adapter.
    window.PREP_MG_MEDIA. ES5. Plan: vault/plans/PrepNucleus-MediGram.md section 7.
-   The adapter is behind smd_prep_medigram_youtube (default OFF, see prep-medigram-data.js).
+   The adapter is behind smd_prep_medigram_youtube (default ON since 2026-11-17, see prep-medigram-data.js).
    When disabled, unavailable or offline it returns a fallback descriptor and creates no iframe.
    No scraping, no download, no rehost, no control hiding. Pause and release on navigation/background. */
 (function (G) {

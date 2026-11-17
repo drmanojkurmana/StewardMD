@@ -18,11 +18,12 @@ const NOW = Date.parse("2026-10-31T00:00:00Z");
 const base = (o = {}) => Object.assign({ id: "c1", kind: "mcq", exam: ["neet-pg"], subject: "medicine", module: "m1", topicIds: ["t1"], language: "en", title: "T", questionId: "q1", rightsStatus: "owned", clinicalReview: { status: "approved", reviewedAt: "2026-10-01", reviewerRole: "medicine" }, captions: { en: true }, sourceRefs: [], tags: [], updatedAt: "2026-10-01" }, o);
 const lesson = (o = {}) => base({ id: "l1", kind: "micro_lesson", questionId: undefined, lessonId: "les1", media: { provider: "first_party", assetId: "a1" }, ...o });
 
-test("flags: parent OFF by default, requires smd_prep; study only-on default", () => {
+test("flags: parent ON by default (owner 2026-11-17), requires smd_prep; study and youtube on by default", () => {
   const get = (m) => (k) => m[k] ?? null;
-  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: false, study: false, discovery: false, breakMode: false, youtube: false });
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
   assert.deepEqual(D.resolveFlags({ prepEnabled: false, get: get({ smd_prep_medigram: "1" }), search: "" }).parent, false);
-  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1" }), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: false });
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1" }), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "0" }), search: "" }).parent, false, "0 turns it off");
   const all = D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_discovery: "1", smd_prep_medigram_break: "1", smd_prep_medigram_youtube: "1" }), search: "" });
   assert.deepEqual(all, { parent: true, study: true, discovery: true, breakMode: true, youtube: true });
   assert.equal(D.resolveFlags({ prepEnabled: true, get: get({}), search: "?medigram=1&medigram_study=0" }).study, false);
@@ -113,6 +114,30 @@ test("modes: study hides break items, clinical keeps lessons, break keeps only b
   assert.equal(D.isEligible(brk, { ...ctx, mode: "break" }), true);
   assert.equal(D.isEligible(lesson(), { ...ctx, mode: "clinical" }), true);
   assert.equal(D.isEligible(base(), { ...ctx, mode: "clinical" }), false);
+});
+
+test("video cards: 100+ real YouTube cards, 11-char ids, each passes validateCard; placeholder gone", () => {
+  const src = read("prep-medigram.js");
+  assert.doesNotMatch(src, /dQw4w9WgXcQ/, "Rick Astley placeholder removed");
+  const lines = src.split("\n").filter((l) => /kind: "video"/.test(l) && /provider: "youtube"/.test(l));
+  assert.ok(lines.length >= 100, "at least 100 video cards, got " + lines.length);
+  const ids = new Set();
+  for (const line of lines) {
+    const vid = (line.match(/videoId: "([A-Za-z0-9_-]{1,30})"/) || [])[1];
+    assert.ok(vid && /^[A-Za-z0-9_-]{11}$/.test(vid), "11-char videoId: " + line.slice(0, 80));
+    assert.ok(!ids.has(vid), "unique videoId: " + vid);
+    ids.add(vid);
+    const dur = +((line.match(/durationSec: (\d+)/) || [])[1]);
+    assert.ok(dur > 0 && dur <= 360, "durationSec <= 360: " + dur);
+    assert.match(line, /rightsStatus: "youtube_embed"/);
+    assert.match(line, /clinicalReview: \{ status: "approved", reviewedAt: "2026-11-17", reviewerRole: "official-channel; owner spot-check pending" \}/);
+    assert.match(line, /captions: \{ en: true \}/);
+    assert.match(line, /language: "en"/);
+    assert.match(line, /sourceRefs: \["youtube:[^"]+"\]/);
+    const r = D.validateCandidate({ id: "t", kind: "video", exam: ["neet-pg"], subject: "medicine", module: "m", topicIds: ["t"], durationSec: dur, language: "en", title: "T", media: { provider: "youtube", videoId: vid }, rightsStatus: "youtube_embed", clinicalReview: { status: "approved", reviewedAt: "2026-11-17", reviewerRole: "official-channel; owner spot-check pending" }, captions: { en: true }, updatedAt: "2026-11-17" }, { now: NOW });
+    assert.equal(r.ok, true, "validates: " + vid + " " + r.errors);
+  }
+  assert.equal(ids.size, lines.length);
 });
 
 test("media: YouTube behind policy flag, offline and bad metadata degrade", () => {
