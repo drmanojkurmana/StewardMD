@@ -30,6 +30,7 @@
   }
   function subjName(sid) { try { var sb = H().subjectById(sid); return sb ? H().tx(sb.name) : ""; } catch (e) { return ""; } }
   function firstSentence(t) { t = String(t || "").replace(/\*\*|__/g, "").replace(/[​‌‍⁠﻿]/g, "").replace(/\s+/g, " ").trim(); var m = /^.*?[.!?](\s|$)/.exec(t); return (m ? m[0] : t).trim().slice(0, 260); }
+  function libUrl(u) { u = String(u || ""); return u.charAt(0) === "/" && G.SMD_API_BASE && (u.indexOf("/api/") === 0 || u.indexOf("/assets/") === 0) ? String(G.SMD_API_BASE).replace(/\/$/, "") + u : u; }   // as image-library.js imgUrl
   function imgUrl(f) { var u = (H().bankApi || "/api/prep/bank/") + "img/maikimg/" + f; return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u; }
 
   /* ---------- content ---------- */
@@ -63,6 +64,27 @@
     var get = function (f) { return H().getJSON(base + "imglearn/" + f).then(function (m) { return ((m && m.items) || []).filter(function (x) { return x.img && x.dx; }); }, function () { return []; }); };
     return Promise.all([get("eye.json"), get("psm.json")]).then(function (x) { return (IMGS = x[0].concat(x[1])); });
   }
+  /* Image Library (kb/dist/imglib, the same bank the Image Library screen shows: KB figures, lesson images, ECGs, Tokos,
+     Ophthalmos, Narke, CliniX and Commons pathology, about 10,000 captioned images). NEET-SS takes its specialty
+     systems; every other exam takes a few random systems per batch so a batch never downloads the whole bank. */
+  var IGL = "/kb/dist/imglib/", iglIx = null, iglSys = {};
+  function iglJSON(u) { return (G.SMD_CONTENT && G.SMD_CONTENT.fetchJSON ? G.SMD_CONTENT.fetchJSON(u) : G.fetch(u).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })); }
+  function iglSystem(slug) {
+    if (iglSys[slug]) return Promise.resolve(iglSys[slug]);
+    return iglJSON(IGL + slug + ".json").then(function (j) {
+      return (iglSys[slug] = ((j && j.items) || []).filter(function (e) { return e && e.s && (e.c || e.t); }).map(function (e) { return { kind: "lib", e: e, sys: (j && j.name) || slug }; }));
+    }, function () { return []; });
+  }
+  function libImages(n) {
+    var h = H(), ex = h.exam().id, subs = [];
+    try { subs = (h.planSubjects ? h.planSubjects() : []).map(function (x) { return x.id; }); if (!subs.length) subs = h.subjectsOf(ex).map(function (x) { return x.id; }); } catch (e) {}
+    var want = DATA.imgSystemsFor ? DATA.imgSystemsFor(ex, subs) : null;
+    var pick = want ? Promise.resolve(want) : (iglIx ? Promise.resolve(iglIx) : iglJSON(IGL + "index.json").then(function (j) { return (iglIx = ((j && j.systems) || []).map(function (x) { return x.slug; })); }, function () { return []; }));
+    return pick.then(function (slugs) {
+      slugs = h.shuffle(slugs.slice()).slice(0, want ? 4 : 3);
+      return Promise.all(slugs.map(iglSystem));
+    }).then(function (lists) { var all = []; lists.forEach(function (l) { all = all.concat(unseen(l)); }); return h.shuffle(all).slice(0, n); });
+  }
   function lessonsFor(items) {
     if (!G.PREP_LESSONS || !G.PREP_LESSONS.index) return Promise.resolve([]);
     return G.PREP_LESSONS.index().then(function (ix) {
@@ -72,20 +94,22 @@
     }, function () { return []; });
   }
   // Extras in a rotation (video, lesson, image) so every format shows up early in a batch.
-  function rotate(vids, lessons, imgs) {
-    var h = H(), v = h.shuffle(vids.slice()), l = lessons.slice(), im = h.shuffle(imgs.slice()).slice(0, 4).map(function (it) { return { kind: "img", it: it }; }), out = [];
-    while (v.length || l.length || im.length) { if (v.length) out.push(v.shift()); if (l.length) out.push(l.shift()); if (im.length) out.push(im.shift()); }
+  function rotate(vids, lessons, imgs, lib) {
+    var h = H(), v = h.shuffle(vids.slice()), l = lessons.slice(), im = h.shuffle(imgs.slice()).slice(0, 3).map(function (it) { return { kind: "img", it: it }; }), b = (lib || []).slice(), out = [];
+    while (v.length || l.length || im.length || b.length) {
+      if (v.length) out.push(v.shift()); if (b.length) out.push(b.shift()); if (l.length) out.push(l.shift()); if (b.length) out.push(b.shift()); if (im.length) out.push(im.shift());
+    }
     return out;
   }
   // Nothing repeats inside a session: questions, videos, lessons and images already shown are left out of later batches.
-  function keyOf(c) { return c.kind === "q" ? "q:" + c.it.id : c.kind === "video" ? "v:" + c.videoId : c.kind === "lesson" ? "l:" + c.mid : c.kind === "img" ? "i:" + c.it.img : c.kind === "pearl" ? "p:" + c.text : ""; }
+  function keyOf(c) { return c.kind === "q" ? "q:" + c.it.id : c.kind === "video" ? "v:" + c.videoId : c.kind === "lesson" ? "l:" + c.mid : c.kind === "img" ? "i:" + c.it.img : c.kind === "lib" ? "b:" + c.e.s : c.kind === "pearl" ? "p:" + c.text : ""; }
   function fresh(cards) { return cards.filter(function (c) { var k = keyOf(c); if (!k || S.seen[k]) return false; S.seen[k] = 1; return true; }); }
   function unseen(xs, kind) { return xs.filter(function (x) { return !S.seen[keyOf(x.kind ? x : { kind: kind, it: x })]; }); }
   function batch() {
-    if (S.mode === "clinical") return Promise.all([videos(), images()]).then(function (x) { return fresh(rotate(unseen(x[0]), [], unseen(x[1], "img")).slice(0, BATCH)); });
-    return Promise.all([draw(10), videos(), images()]).then(function (x) {
+    if (S.mode === "clinical") return Promise.all([videos(), images(), libImages(10)]).then(function (x) { return fresh(rotate(unseen(x[0]), [], unseen(x[1], "img"), x[2]).slice(0, BATCH)); });
+    return Promise.all([draw(10), videos(), images(), libImages(8)]).then(function (x) {
       var items = unseen(x[0], "q").slice(0, BATCH);
-      return lessonsFor(items).then(function (les) { return fresh(DATA.mixFeed(items, rotate(unseen(x[1]), unseen(les), unseen(x[2], "img")), lsGet("smd_prep_medigram_cadence") || 3)); });
+      return lessonsFor(items).then(function (les) { return fresh(DATA.mixFeed(items, rotate(unseen(x[1]), unseen(les), unseen(x[2], "img"), x[3]), lsGet("smd_prep_medigram_cadence") || 3)); });
     });
   }
   function load(more) {
@@ -117,6 +141,15 @@
         '<div class="pn-mg-story" data-act="mg-les-tap" data-i="' + i + '" aria-live="polite">' + storyHtml(c) + "</div>" +
         '<div class="pn-mg-lctl"><button type="button" class="pn-btn" data-act="mg-les" data-v="listen" data-i="' + i + '" aria-pressed="' + !!c.listen + '">' + (c.listen ? "Stop listening" : "Listen") + '</button>' +
         '<button type="button" class="pn-btn" data-act="mg-lesson" data-i="' + i + '">Full lesson and quiz</button></div></article>';
+    }
+    if (c.kind === "lib") {
+      // An Image Library picture, explained: its caption, plus its article and lesson when it has them. Tap = zoom viewer.
+      var e = c.e, cap = e.c || e.a || "";
+      return '<article class="vf-c pn-mg-c pn-mg-lib"' + a + '><p class="pn-mg-tag">' + esc([e.k || "Image", c.sys].filter(Boolean).join(" · ")) + '</p>' +
+        '<figure class="pn-mg-fig"' + (e.ar ? ' style="--ar:' + (+e.ar || 1.5) + '"' : "") + '><img src="' + esc(libUrl(e.s)) + '" alt="' + esc(e.a || e.t || "Clinical image") + '" loading="lazy" decoding="async"></figure>' +
+        '<p class="vf-stem">' + esc(e.t || "") + "</p>" + (cap && cap !== e.t ? '<p class="vf-why pn-mg-cap">' + esc(cap) + "</p>" : "") +
+        ((e.ka || e.ls) ? '<div class="pn-mg-lctl">' + (e.ka ? '<button type="button" class="pn-btn" data-act="mg-lib-art" data-i="' + i + '">Read the article</button>' : "") + (e.ls ? '<button type="button" class="pn-btn" data-act="mg-lib-les" data-i="' + i + '">Open the lesson</button>' : "") + "</div>" : "") +
+        "</article>";
     }
     if (c.kind === "img") {
       return '<article class="vf-c vf-img pn-mg-c"' + a + '><p class="pn-mg-tag">Spot it · ' + esc(c.it.modality || c.it.deck || "Image") + '</p><figure><img src="' + esc(imgUrl(c.it.img)) + '" alt="Clinical image" loading="lazy" decoding="async"></figure>' +
@@ -362,6 +395,8 @@
       else if (v === "sound") MEDIA.command(live && live.muted ? "unmute" : "mute");
       return showCtl(card);
     }
+    if (a === "mg-lib-art") { if (c && c.e && c.e.ka && G.SMD_KB && G.SMD_KB.open) { stopMedia(); G.SMD_KB.open(c.e.ka); } return; }
+    if (a === "mg-lib-les") { if (c && c.e && c.e.ls && G.PREP_LESSONS) { stopMedia(); S.les = null; G.PREP_LESSONS.open(c.e.lsj, c.e.lm, host, c.e.ls); } return; }
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
     if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); S.les = null; emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
     if (a === "mg-understand") {
