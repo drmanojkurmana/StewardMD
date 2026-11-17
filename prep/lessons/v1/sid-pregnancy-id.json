@@ -1,135 +1,176 @@
 {
- "v": 1,
- "module": "sid-pregnancy-id",
- "subject": "ss-infectious-diseases",
- "title": "Infections in pregnancy and the neonate: vertical transmission and key perinatal pathogens",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Vertical transmission means an infection passes from mother to fetus or newborn. It can happen **transplacentally** in utero, during delivery through the birth canal, or after birth through breast milk or close contact. Timing of exposure decides which infants are at risk and which tests are useful. Neonatal infections are often grouped as early onset, within the first few days, and late onset, after the first week. Knowing the route helps you choose prophylaxis and diagnosis.",
-   "say": "Vertical transmission means an infection passes from mother to fetus or newborn. It can happen transplacentally in utero, during delivery through the birth canal, or after birth through breast milk or close contact. Timing of exposure decides which infants are at risk and which tests are useful. Neonatal infections are often grouped as early onset, within the first few days, and late onset, after the first week. Knowing the route helps you choose prophylaxis and diagnosis.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Route",
-     "Typical timing",
-     "Example pathogen"
-    ],
-    "rows": [
-     [
-      "In utero transplacental",
-      "Before birth",
-      "Rubella, CMV, toxoplasma, syphilis"
-     ],
-     [
-      "During delivery",
-      "Intrapartum",
-      "Group B streptococcus, HSV"
-     ],
-     [
-      "Postnatal",
-      "After birth",
-      "HIV through breast milk, HBV"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Group B streptococcus** (GBS) colonises the maternal birth canal and is the leading cause of early-onset neonatal sepsis in many settings. Universal screening uses a vaginal-rectal swab at **36 to 37 6/7 weeks**. Women who test positive, or have risk factors such as preterm labour or prolonged rupture of membranes, receive intrapartum antibiotic prophylaxis. Penicillin is the usual first choice. Early-onset disease carries a roughly 29-fold higher risk when the mother is colonised.",
-   "say": "Group B streptococcus colonises the maternal birth canal and is the leading cause of early-onset neonatal sepsis in many settings. Universal screening uses a vaginal-rectal swab at 36 to 37 6/7 weeks. Women who test positive, or have risk factors such as preterm labour or prolonged rupture of membranes, receive intrapartum antibiotic prophylaxis. Penicillin is the usual first choice. Early-onset disease carries a roughly 29-fold higher risk when the mother is colonised.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Swab at 36-37 6/7 weeks"
-     },
-     {
-      "id": "b",
-      "label": "GBS positive or risk factor"
-     },
-     {
-      "id": "c",
-      "label": "Intrapartum penicillin"
-     },
-     {
-      "id": "d",
-      "label": "Lower neonatal early-onset risk"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The left panel shows **vaginal rectal screening** for **Group B streptococcus** at 36 to 37 6/7 weeks near term, with a swab of the birth canal and an inset of chain forming cocci. The right panel shows **intrapartum penicillin** given by vein during labour, which blocks ascent of organisms to the newborn. This paired strategy prevents **early onset** neonatal sepsis. Link swab near term plus drug during labour to prevention of early onset sepsis in an exam vignette.",
-   "say": "Screen first, then treat during labour. A vaginal rectal swab at 36 to 37 6/7 weeks detects Group B streptococcus carriage in the birth canal. If the result is positive, or risk factors such as preterm labour or prolonged rupture are present, give penicillin by vein during labour. This intrapartum prophylaxis lowers early onset neonatal sepsis, though it does not prevent late onset disease with meningitis after the first week.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sid-pregnancy-id-gen1.webp",
-    "alt": "Two panel view of birth canal swab screening near term and penicillin infusion during labour to stop newborn sepsis.",
-    "caption": "Swab screening paired with drug cover during labour, Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Intrapartum prophylaxis lowers **early-onset** GBS disease but does not prevent **late-onset** disease, which often presents after one week with meningitis. The current incidence of GBS early-onset disease is about 0.23 per 1000 live births after universal screening and prophylaxis. Clinicians must still watch infants for late-onset meningitis. The lineage CC17 carries the HvgA adhesin, which helps it cross the blood-brain barrier.",
-   "say": "Intrapartum prophylaxis lowers early-onset GBS disease but does not prevent late-onset disease, which often presents after one week with meningitis. The current incidence of GBS early-onset disease is about 0.23 per 1000 live births after universal screening and prophylaxis. Clinicians must still watch infants for late-onset meningitis. The lineage CC17 carries the HvgA adhesin, which helps it cross the blood-brain barrier.",
-   "vis": null
-  },
-  {
-   "tx": "**Listeriosis** in pregnancy causes fever and flu-like illness in the mother and can lead to miscarriage, stillbirth, or neonatal sepsis. Ingestion of contaminated soft cheese or unpasteurised milk is a classic source. Maternal infection is often mild, so a febrile pregnant woman with these exposures needs prompt blood cultures. Ampicillin or penicillin is the standard treatment. Meningitis and granulomatosis of the infant are serious features.",
-   "say": "Listeriosis in pregnancy causes fever and flu-like illness in the mother and can lead to miscarriage, stillbirth, or neonatal sepsis. Ingestion of contaminated soft cheese or unpasteurised milk is a classic source. Maternal infection is often mild, so a febrile pregnant woman with these exposures needs prompt blood cultures. Ampicillin or penicillin is the standard treatment. Meningitis and granulomatosis of the infant are serious features.",
-   "vis": null
-  },
-  {
-   "tx": "**Congenital syphilis** results from transplacental spread of Treponema pallidum, most often after the fourth month. Screening every pregnant woman at the first visit is essential, and treatment with benzathine penicillin is needed for infected mothers and exposed infants. Early maternal treatment prevents most infection. Infants may show rash, hepatosplenomegaly, and osteochondritis. In India, the NACO and national programme guidance emphasise universal antenatal screening.",
-   "say": "Congenital syphilis results from transplacental spread of Treponema pallidum, most often after the fourth month. Screening every pregnant woman at the first visit is essential, and treatment with benzathine penicillin is needed for infected mothers and exposed infants. Early maternal treatment prevents most infection. Infants may show rash, hepatosplenomegaly, and osteochondritis. In India, the NACO and national programme guidance emphasise universal antenatal screening.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sid-pregnancy-id-fig1.webp",
-    "alt": "Diagram illustrating congenital syphilis, showing maternal screening, transplacental transmission of Treponema pallidum, and an infant with characteristic rash, hepatosplenomegaly, and osteochondritis.",
-    "caption": "Congenital syphilis: maternal screening prevents infant rash, hepatosplenomegaly, and osteochondritis. Image: Unknown, CC BY 4.0, Wikimedia Commons.",
-    "ar": 0.7921
-   }
+  "v": 1,
+  "module": "sid-pregnancy-id",
+  "subject": "ss-infectious-diseases",
+  "title": "Infections in pregnancy and the neonate: vertical transmission and key perinatal pathogens",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Vertical transmission means an infection passes from mother to fetus or newborn. It can happen **transplacentally** in utero, during delivery through the birth canal, or after birth through breast milk or close contact. Timing of exposure decides which infants are at risk and which tests are useful. Neonatal infections are often grouped as early onset, within the first few days, and late onset, after the first week. Knowing the route helps you choose prophylaxis and diagnosis.",
+      "say": "Vertical transmission means an infection passes from mother to fetus or newborn. It can happen transplacentally in utero, during delivery through the birth canal, or after birth through breast milk or close contact. Timing of exposure decides which infants are at risk and which tests are useful. Neonatal infections are often grouped as early onset, within the first few days, and late onset, after the first week. Knowing the route helps you choose prophylaxis and diagnosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Route",
+          "Typical timing",
+          "Example pathogen"
+        ],
+        "rows": [
+          [
+            "In utero transplacental",
+            "Before birth",
+            "Rubella, CMV, toxoplasma, syphilis"
+          ],
+          [
+            "During delivery",
+            "Intrapartum",
+            "Group B streptococcus, HSV"
+          ],
+          [
+            "Postnatal",
+            "After birth",
+            "HIV through breast milk, HBV"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Group B streptococcus** (GBS) colonises the maternal birth canal and is the leading cause of early-onset neonatal sepsis in many settings. Universal screening uses a vaginal-rectal swab at **36 to 37 6/7 weeks**. Women who test positive, or have risk factors such as preterm labour or prolonged rupture of membranes, receive intrapartum antibiotic prophylaxis. Penicillin is the usual first choice. Early-onset disease carries a roughly 29-fold higher risk when the mother is colonised.",
+      "say": "Group B streptococcus colonises the maternal birth canal and is the leading cause of early-onset neonatal sepsis in many settings. Universal screening uses a vaginal-rectal swab at 36 to 37 6/7 weeks. Women who test positive, or have risk factors such as preterm labour or prolonged rupture of membranes, receive intrapartum antibiotic prophylaxis. Penicillin is the usual first choice. Early-onset disease carries a roughly 29-fold higher risk when the mother is colonised.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Swab at 36-37 6/7 weeks"
+          },
+          {
+            "id": "b",
+            "label": "GBS positive or risk factor"
+          },
+          {
+            "id": "c",
+            "label": "Intrapartum penicillin"
+          },
+          {
+            "id": "d",
+            "label": "Lower neonatal early-onset risk"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The left panel shows **vaginal rectal screening** for **Group B streptococcus** at 36 to 37 6/7 weeks near term, with a swab of the birth canal and an inset of chain forming cocci. The right panel shows **intrapartum penicillin** given by vein during labour, which blocks ascent of organisms to the newborn. This paired strategy prevents **early onset** neonatal sepsis. Link swab near term plus drug during labour to prevention of early onset sepsis in an exam vignette.",
+      "say": "Screen first, then treat during labour. A vaginal rectal swab at 36 to 37 6/7 weeks detects Group B streptococcus carriage in the birth canal. If the result is positive, or risk factors such as preterm labour or prolonged rupture are present, give penicillin by vein during labour. This intrapartum prophylaxis lowers early onset neonatal sepsis, though it does not prevent late onset disease with meningitis after the first week.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sid-pregnancy-id-gen1.webp",
+        "alt": "Two panel view of birth canal swab screening near term and penicillin infusion during labour to stop newborn sepsis.",
+        "caption": "Swab screening paired with drug cover during labour, Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Intrapartum prophylaxis lowers **early-onset** GBS disease but does not prevent **late-onset** disease, which often presents after one week with meningitis. The current incidence of GBS early-onset disease is about 0.23 per 1000 live births after universal screening and prophylaxis. Clinicians must still watch infants for late-onset meningitis. The lineage CC17 carries the HvgA adhesin, which helps it cross the blood-brain barrier.",
+      "say": "Intrapartum prophylaxis lowers early-onset GBS disease but does not prevent late-onset disease, which often presents after one week with meningitis. The current incidence of GBS early-onset disease is about 0.23 per 1000 live births after universal screening and prophylaxis. Clinicians must still watch infants for late-onset meningitis. The lineage CC17 carries the HvgA adhesin, which helps it cross the blood-brain barrier.",
+      "vis": null
+    },
+    {
+      "tx": "**Listeriosis** in pregnancy causes fever and flu-like illness in the mother and can lead to miscarriage, stillbirth, or neonatal sepsis. Ingestion of contaminated soft cheese or unpasteurised milk is a classic source. Maternal infection is often mild, so a febrile pregnant woman with these exposures needs prompt blood cultures. Ampicillin or penicillin is the standard treatment. Meningitis and granulomatosis of the infant are serious features.",
+      "say": "Listeriosis in pregnancy causes fever and flu-like illness in the mother and can lead to miscarriage, stillbirth, or neonatal sepsis. Ingestion of contaminated soft cheese or unpasteurised milk is a classic source. Maternal infection is often mild, so a febrile pregnant woman with these exposures needs prompt blood cultures. Ampicillin or penicillin is the standard treatment. Meningitis and granulomatosis of the infant are serious features.",
+      "vis": null
+    },
+    {
+      "tx": "**Congenital syphilis** results from transplacental spread of Treponema pallidum, most often after the fourth month. Screening every pregnant woman at the first visit is essential, and treatment with benzathine penicillin is needed for infected mothers and exposed infants. Early maternal treatment prevents most infection. Infants may show rash, hepatosplenomegaly, and osteochondritis. In India, the NACO and national programme guidance emphasise universal antenatal screening.",
+      "say": "Congenital syphilis results from transplacental spread of Treponema pallidum, most often after the fourth month. Screening every pregnant woman at the first visit is essential, and treatment with benzathine penicillin is needed for infected mothers and exposed infants. Early maternal treatment prevents most infection. Infants may show rash, hepatosplenomegaly, and osteochondritis. In India, the NACO and national programme guidance emphasise universal antenatal screening.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sid-pregnancy-id-fig1.webp",
+        "alt": "Diagram illustrating congenital syphilis, showing maternal screening, transplacental transmission of Treponema pallidum, and an infant with characteristic rash, hepatosplenomegaly, and osteochondritis.",
+        "caption": "Congenital syphilis: maternal screening prevents infant rash, hepatosplenomegaly, and osteochondritis. Image: Unknown, CC BY 4.0, Wikimedia Commons.",
+        "ar": 0.7921
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Perinatal infection questions test congenital TORCH syndromes, maternal intrapartum GBS prophylaxis, and neonatal herpes management. Congenital cytomegalovirus presents with periventricular calcifications, sensorineural deafness, and microcephaly. Congenital toxoplasmosis shows diffuse intracranial calcifications, chorioretinitis, and hydrocephalus. Intrapartum intravenous penicillin prevents early-onset group B streptococcal neonatal sepsis.",
+      "say": "High-yield for the exam: Perinatal infection questions test congenital TORCH syndromes, maternal intrapartum GBS prophylaxis, and neonatal herpes management. Congenital cytomegalovirus presents with periventricular calcifications, sensorineural deafness, and microcephaly. Congenital toxoplasmosis shows diffuse intracranial calcifications, chorioretinitis, and hydrocephalus. Intrapartum intravenous penicillin prevents early-onset group B streptococcal neonatal sepsis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Congenital CMV",
+            "Periventricular calcifications, microcephaly, sensorineural hearing loss, petechiae"
+          ],
+          [
+            "Congenital Toxoplasma",
+            "Diffuse intracranial calcifications, hydrocephalus, and bilateral chorioretinitis"
+          ],
+          [
+            "Congenital Rubella",
+            "Patent ductus arteriosus, cataracts, and sensorineural deafness triad"
+          ],
+          [
+            "GBS prophylaxis",
+            "Intrapartum intravenous penicillin for colonized mothers during active labor"
+          ],
+          [
+            "Neonatal HSV",
+            "Surface, CNS, or disseminated disease; high-dose intravenous acyclovir mandatory"
+          ],
+          [
+            "Congenital Syphilis",
+            "Snuffles, Hutchinson teeth, saddle nose, and periostitis on radiography"
+          ],
+          [
+            "Listeria in pregnancy",
+            "Unpasteurized cheese ingestion; causes spontaneous abortion and neonatal granulomatosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_56af6324cb67",
+    "q_f79ce35d9093",
+    "q_c51c44078a2e"
+  ],
+  "src": [],
+  "refs": [
+    "WHO Consolidated Guidelines on HIV in Infants and Children",
+    "CDC Prevention of Perinatal Group B Streptococcal Disease",
+    "ACOG Practice Bulletin on Prevention of Early-Onset Group B Streptococcal Disease"
+  ],
+  "gen": "AI",
+  "run": "links100",
+  "model": "claude-haiku-5-5",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 2,
+    "kbWords": 0,
+    "itemN": 11
   }
- ],
- "quiz": [
-  "q_56af6324cb67",
-  "q_f79ce35d9093",
-  "q_c51c44078a2e"
- ],
- "src": [],
- "refs": [
-  "WHO Consolidated Guidelines on HIV in Infants and Children",
-  "CDC Prevention of Perinatal Group B Streptococcal Disease",
-  "ACOG Practice Bulletin on Prevention of Early-Onset Group B Streptococcal Disease"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 11
- }
 }
