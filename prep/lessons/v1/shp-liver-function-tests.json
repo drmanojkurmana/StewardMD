@@ -1,0 +1,402 @@
+{
+  "steps": [
+    {
+      "say": "Most liver blood tests do not measure liver function at all. Alanine and aspartate transaminases leak from injured cells, while albumin, bilirubin clearance and clotting time truly reflect function. Reading the pattern is what matters most here.",
+      "tx": "The routine panel combines **albumin**, **bilirubin**, **transaminases**, **alkaline phosphatase** and **gamma glutamyl transferase** with **prothrombin time**, yet only albumin, bilirubin and clotting reflect true **synthetic function**. Enzymes signal injury or cholestasis, not capacity. A low albumin with prolonged clotting time therefore worries more than a modest transaminase rise, because it shows the liver failing at production, not merely leaking.",
+      "vis": {
+        "cols": [
+          "Test",
+          "What it reflects",
+          "Typical normal adult value"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Albumin",
+            "Synthesis and nutrition",
+            "35 to 50 grams per litre"
+          ],
+          [
+            "Bilirubin, total",
+            "Excretion and haemolysis",
+            "Below 21 micromol per litre"
+          ],
+          [
+            "Alanine transaminase",
+            "Hepatocyte injury",
+            "Below 40 international units per litre"
+          ],
+          [
+            "Alkaline phosphatase",
+            "Cholestasis or bone disease",
+            "40 to 130 international units per litre"
+          ],
+          [
+            "Prothrombin time, INR",
+            "Clotting factor synthesis",
+            "INR 0.9 to 1.2"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When alanine transaminase climbs high, hepatocytes are dying. Aspartate transaminase also sits in muscle, heart and red cells, so one should check creatine kinase before blaming the liver. The two to one aspartate to alanine ratio in alcohol excess is a classic exam clue.",
+      "tx": "**Alanine transaminase** is the more liver specific injury marker, while **aspartate transaminase** also comes from muscle, heart and red cells. A ratio of aspartate to alanine above **2** with values below **300** suggests alcohol related injury, whereas viral hepatitis often gives values into the thousands. Always check **creatine kinase** when transaminases rise with muscle symptoms, because rhabdomyolysis mimics hepatitis on blood tests.",
+      "vis": {
+        "cols": [
+          "Pattern",
+          "Typical enzymes",
+          "Common causes"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Viral or ischaemic injury",
+            "Often above 1000",
+            "Hepatitis, shock liver, Budd Chiari"
+          ],
+          [
+            "Alcohol related injury",
+            "Below 300, ratio above 2",
+            "Alcohol, sepsis"
+          ],
+          [
+            "Drug injury",
+            "Variable, often hepatocellular",
+            "Paracetamol, statins, antituberculous drugs"
+          ],
+          [
+            "Muscle injury",
+            "Aspartate above alanine",
+            "Rhabdomyolysis, myositis, marathon running"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cholestasis raises alkaline phosphatase and gamma glutamyl transferase because bile flow is blocked. Gamma glutamyl transferase rises in liver cholestasis and with alcohol and enzyme inducers, but not in bone disease. That distinction rescues the diagnosis, as it is normal in bone disease.",
+      "tx": "Raised **alkaline phosphatase** with raised **gamma glutamyl transferase** points to **cholestasis**, whereas isolated alkaline phosphatase rise with normal gamma glutamyl transferase suggests bone or placental source. Alcohol, phenytoin and other enzyme inducers raise gamma glutamyl transferase without obstruction, so it never alone proves blockage. Bilirubin rises later, after a week or more of complete obstruction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Alkaline phosphatase high",
+            "Gamma transferase high",
+            "Bilirubin rises late",
+            "Itch, pale stools, dark urine"
+          ],
+          "title": "Cholestasis"
+        },
+        "right": {
+          "points": [
+            "Alanine transaminase high",
+            "Gamma transferase normal",
+            "Bilirubin variable",
+            "Pain, vomiting, jaundice"
+          ],
+          "title": "Hepatocellular injury"
+        }
+      }
+    },
+    {
+      "say": "True liver function shows in albumin, bilirubin, clotting time and platelet count together. Albumin falls slowly because its half life is about three weeks. Clotting time responds within days because factor seven turns over fast. Both are deranged in acute failure.",
+      "tx": "True **synthetic function** is judged by **albumin**, **bilirubin**, **prothrombin time** and **platelet count**, not by transaminases. Albumin has a half life near **3** weeks so it lags in acute illness, while factor **VII** turns over within hours and prolongs clotting time early. Snapshots of clotting time therefore track acute change best. A normal albumin with prolonged clotting time still signals failing synthesis.",
+      "vis": {
+        "cols": [
+          "Marker",
+          "Turnover",
+          "What it tells you"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Albumin",
+            "About 3 weeks",
+            "Chronic synthetic reserve"
+          ],
+          [
+            "Prothrombin time",
+            "Factor VII in hours",
+            "Early synthetic failure"
+          ],
+          [
+            "Bilirubin",
+            "Daily excretion",
+            "Excretory function plus haemolysis"
+          ],
+          [
+            "Platelets",
+            "Low in portal hypertension",
+            "Splenic sequestration and reserve"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "One should sort raised liver tests into three patterns before ordering more tests. Hepatocellular, cholestatic and mixed patterns each carry a different differential and a different first scan. The gamma glutamyl transferase level is what anchors the cholestatic call.",
+      "tx": "Divide abnormal liver tests into **hepatocellular**, **cholestatic** and **mixed** patterns, because each pattern carries its own differential and its own first scan. Hepatocellular injury leads to viral serology and drug review, while cholestatic injury leads to ultrasound for duct dilatation. **Gamma glutamyl transferase** confirms the cholestatic pattern when alkaline phosphatase is borderline. Mixed injury, common with drugs, needs both pathways.",
+      "vis": {
+        "edges": [
+          [
+            "abnormal",
+            "pattern"
+          ],
+          [
+            "pattern",
+            "hep"
+          ],
+          [
+            "pattern",
+            "chol"
+          ],
+          [
+            "pattern",
+            "mixed"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "abnormal",
+            "label": "Abnormal liver tests"
+          },
+          {
+            "id": "pattern",
+            "label": "Name the pattern"
+          },
+          {
+            "id": "hep",
+            "label": "Viral, drug, ischaemic tests"
+          },
+          {
+            "id": "chol",
+            "label": "Ultrasound of ducts"
+          },
+          {
+            "id": "mixed",
+            "label": "Both pathways run"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Unconjugated hyperbilirubinaemia without transaminase rise is usually Gilbert syndrome or haemolysis. Conjugated hyperbilirubinaemia means obstruction or hepatocellular disease. Fractionating the bilirubin is the oldest and fastest discriminator in the whole panel.",
+      "tx": "**Unconjugated hyperbilirubinaemia** with normal enzymes suggests **Gilbert syndrome** or haemolysis, while **conjugated hyperbilirubinaemia** suggests obstruction or hepatocellular disease. Gilbert affects **5** to **10** percent of adults with mild bilirubin under **50** micromol per litre and entirely normal enzymes. Haemolysis adds raised lactate dehydrogenase, low haptoglobin and reticulocytosis. Fractionation therefore settles most jaundice puzzles quickly.",
+      "vis": {
+        "cols": [
+          "Bilirubin fraction",
+          "Enzymes",
+          "Likely cause"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Mostly unconjugated",
+            "Normal",
+            "Gilbert syndrome"
+          ],
+          [
+            "Mostly unconjugated with reticulocytosis",
+            "Normal or mild rise",
+            "Haemolysis"
+          ],
+          [
+            "Mostly conjugated",
+            "Alkaline phosphatase high",
+            "Obstruction or cholangitis"
+          ],
+          [
+            "Mixed",
+            "Transaminases high",
+            "Hepatitis or drug injury"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prognosis in cirrhosis is flowing from numbers, not impressions. Child Pugh is built from five variables scored in three classes. Model for end stage liver disease uses bilirubin, creatinine, sodium and clotting time for transplant listing. Both are pure arithmetic once the values are known.",
+      "tx": "Prognostic scores turn five bedside variables into numbers. **Child Pugh** grades bilirubin, albumin, clotting time, ascites and encephalopathy into classes **A** to **C**, predicting surgical and shunt risk. **Model for end stage liver disease** combines bilirubin, creatinine, sodium and clotting time to predict 3 month mortality for transplant listing. Flip patients to the score rather than gestalt when counselling families about risk.",
+      "vis": {
+        "cols": [
+          "Score",
+          "Components",
+          "Use"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Child Pugh class",
+            "Bilirubin, albumin, INR, ascites, encephalopathy",
+            "Operative and shunt risk"
+          ],
+          [
+            "Model for end stage liver disease",
+            "Bilirubin, creatinine, sodium, INR",
+            "Transplant listing priority"
+          ],
+          [
+            "Albudex",
+            "Albumin, bilirubin, clotting time",
+            "Bedside synthetic estimate"
+          ],
+          [
+            "Hepatic encephalopathy grade",
+            "Consciousness, asterixis, behaviour",
+            "Class C when severe"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transaminases above ten times normal with a shock history point to ischaemic hepatitis. Lactate dehydrogenase rises early and very high. The liver pain and clotting change arrive within a day or two. Without the hypotension story, one is chasing viruses in vain.",
+      "tx": "**Ischaemic hepatitis** gives transaminases above **10** times normal within **24** to **48** hours of shock, with very high **lactate dehydrogenase** and transient clotting failure. Viral hepatitis rarely exceeds this speed, and paracetamol injury needs days of escalating rise. The shock story therefore outranks serology at the bedside. Lactate clearance and clotting recovery track hepatic perfusion better than pain does.",
+      "vis": {
+        "edges": [
+          [
+            "shock",
+            "enz"
+          ],
+          [
+            "enz",
+            "ldh"
+          ],
+          [
+            "ldh",
+            "recover"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "shock",
+            "label": "Shock or heart failure"
+          },
+          {
+            "id": "enz",
+            "label": "Transaminases above 10 times"
+          },
+          {
+            "id": "ldh",
+            "label": "Lactate dehydrogenase very high"
+          },
+          {
+            "id": "recover",
+            "label": "Perfusion restored, enzymes fall"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Drug injury is hiding behind common prescriptions. Amoxicillin clavulanate causes delayed cholestasis, antituberculous drugs cause hepatocellular necrosis, and statins cause usually benign transaminase bumps. Timing the drug start against the enzyme rise is the single most useful history move here.",
+      "tx": "Drug induced liver injury hides behind ordinary prescriptions, and the timing of the start against the enzyme rise is the key history move. **Amoxicillin clavulanate** causes delayed **cholestasis** weeks after stopping, while **antituberculous drugs** cause hepatocellular necrosis, often within the first month. Statin transaminase bumps are usually benign and transient. Documenting start and stop dates beats any score in drug causality assessment.",
+      "vis": {
+        "cols": [
+          "Drug",
+          "Pattern",
+          "Timing clue"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Amoxicillin clavulanate",
+            "Cholestatic",
+            "Weeks after course ends"
+          ],
+          [
+            "Antituberculous regimen",
+            "Hepatocellular",
+            "First month of therapy"
+          ],
+          [
+            "Statins",
+            "Mild hepatocellular",
+            "Weeks after starting"
+          ],
+          [
+            "Paracetamol overdose",
+            "Massive hepatocellular",
+            "Days after ingestion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pregnancy raises alkaline phosphatase from placenta, and childhood raises it from growing bone. Muscle disease mimics hepatitis through aspartate leaking from injured muscle. Haemolysis tints bilirubin unconjugated. Three non liver sources must die before one calls liver disease.",
+      "tx": "Three non liver sources mimic liver disease and must die before diagnosis. Placental **alkaline phosphatase** rises in pregnancy and bone **alkaline phosphatase** rises in growing children, both with normal gamma glutamyl transferase. Muscle disease leaks **aspartate transaminase** in parallel with **creatine kinase**. Haemolysis raises unconjugated bilirubin with normal enzymes. Checking these three decoys first saves most false alarms.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Pregnancy: placenta source",
+            "Childhood: bone growth source",
+            "Gamma transferase normal"
+          ],
+          "title": "Alkaline phosphatase trap"
+        },
+        "right": {
+          "points": [
+            "Muscle disease: aspartate source",
+            "Haemolysis: unconjugated bilirubin",
+            "Creatine kinase and haptoglobin settle it"
+          ],
+          "title": "Enzyme and bilirubin traps"
+        }
+      }
+    },
+    {
+      "say": "Four patterns are covering most exam stems: hepatocellular, cholestatic, synthetic failure and the decoys. Albumin and clotting time carry function, while the transaminase ratio and gamma transferase carry aetiology. One table of thresholds is answering most one liners.",
+      "tx": "High yield patterns for the exam pair each number with its meaning. Aspartate to **alanine** ratio above **2** below **300** means alcohol, transaminases above **1000** mean viral, ischaemic or paracetamol injury, and alkaline phosphatase with gamma transferase means cholestasis. Normal gamma transferase with raised alkaline phosphatase means bone or placenta. Bilirubin under **21**, albumin **35** to **50** and international normalised ratio near **1** are the anchor normals.",
+      "vis": {
+        "cols": [
+          "Finding",
+          "Interpretation",
+          "Next test"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Transaminases above 1000",
+            "Viral, ischaemic or paracetamol",
+            "Serology, clotting time, drug history"
+          ],
+          [
+            "Ratio above 2, values below 300",
+            "Alcohol related injury",
+            "Alcohol history, gamma transferase"
+          ],
+          [
+            "Alkaline phosphatase plus gamma transferase high",
+            "Cholestasis",
+            "Ultrasound of ducts"
+          ],
+          [
+            "Albumin low, INR high",
+            "Failing synthesis",
+            "Child Pugh and Model scores"
+          ],
+          [
+            "Unconjugated bilirubin, normal enzymes",
+            "Gilbert or haemolysis",
+            "Haptoglobin, reticulocytes"
+          ],
+          [
+            "Alkaline phosphatase high, gamma normal",
+            "Bone or placenta",
+            "Bone profile, pregnancy test"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-liver-function-tests",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, liver physiology and evaluation chapters",
+    "EASL Clinical Practice Guidelines on drug induced liver injury"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Liver function tests: patterns that point to disease",
+  "v": 1
+}

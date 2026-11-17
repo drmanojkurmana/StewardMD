@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "shp-biliary-tumours-benign-lesions",
+ "subject": "ss-hepatology",
+ "title": "Biliary cancers and benign liver lesions: gallbladder, cholangiocarcinoma and incidental finds",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Biliary tract cancers)",
+  "NCCN Biliary Tract Cancers 2025",
+  "Sleisenger and Fordtran 11e (Liver tumours)"
+ ],
+ "steps": [
+  {
+   "tx": "**Biliary tract cancers** split into gallbladder cancer, intrahepatic cholangiocarcinoma and extrahepatic cholangiocarcinoma, with the intrahepatic form the second commonest primary liver cancer overall. **Gallbladder cancer** declares as a mass or wall thickening, a polyp meeting resection criteria, or an incidental find on cholecystectomy pathology. **Perihilar disease (Klatskin tumour)** strictures at the cystic duct insertion, while distal strictures below it cause painless obstructive jaundice. Site decides the operation.",
+   "say": "Biliary cancers fall into anatomy based groups: gallbladder, intrahepatic and extrahepatic disease. Intrahepatic cholangiocarcinoma stands second among primary liver cancers. The exact ductal level decides between liver resection and pancreaticoduodenectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Site", "Looks like", "Operation"],
+    "rows": [
+     ["Gallbladder", "Mass, wall thickening", "Segments IVB and V"],
+     ["Intrahepatic", "Liver mass, rim enhancement", "Anatomic resection"],
+     ["Perihilar", "Hilar stricture", "Duct plus hepatectomy"],
+     ["Distal", "Painless jaundice", "Pancreaticoduodenectomy"]
+    ]
+   }
+  },
+  {
+   "tx": "Multiphase contrast abdominal and pelvic **computed tomography (CT)** or liver **magnetic resonance imaging (MRI)** with **magnetic resonance cholangiopancreatography (MRCP)** stages wall depth, liver infiltration of segments **IVB** and **V**, vascular contact and nodal spread. **Staging laparoscopy** with laparoscopic ultrasound finds occult peritoneal or superficial liver metastases in **20** to **30** percent of apparently resectable gallbladder and intrahepatic cancers. Serum **CA 19-9** and **carcinoembryonic antigen (CEA)** complete the baseline, with **alpha fetoprotein (AFP)** added when hepatocellular carcinoma enters the differential.",
+   "say": "Multiphase CT or MRI with MRCP runs before any operation, showing invasion depth, segments and vessels. Staging laparoscopy exposes occult spread in a fifth to a third of cases. Tumour markers form the baseline assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "imaging", "label": "CT or MRI with MRCP"},
+     {"id": "markers", "label": "CA 19-9, CEA, AFP"},
+     {"id": "laparoscopy", "label": "Staging laparoscopy"},
+     {"id": "plan", "label": "Resectability decided"}
+    ],
+    "edges": [["imaging", "markers"], ["markers", "laparoscopy"], ["laparoscopy", "plan"]]
+   }
+  },
+  {
+   "tx": "Resectability demands a solitary tumour or confined disease amenable to margin negative surgery with adequate **future liver remnant (FLR)** and no extrahepatic spread. Portal vein embolisation follows when anticipated FLR sits below **30** percent in normal liver or **30** to **40** percent in cholestatic, diseased liver, with reimaging in **3** to **4** weeks. Definitions of unresectable disease include extensive liver infiltration, bilateral vascular involvement, bulky **N2** nodes or a remnant too small for **R0** resection.",
+   "say": "Resectability needs margin negative surgery with an adequate future liver remnant and no distant spread. Portal vein embolisation grows the remnant when it falls below thirty percent. Reimaging confirms hypertrophy before extended hepatectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Question", "Test", "Answer"],
+    "rows": [
+     ["Resectable?", "Solitary, no invasion", "Anatomic resection"],
+     ["Remnant small?", "FLR below 30 percent", "Portal vein embolisation"],
+     ["Hypertrophy?", "Reimage 3 to 4 weeks", "Proceed if grown"],
+     ["Unresectable?", "Bilateral vessels, N2", "Systemic therapy"]
+    ]
+   }
+  },
+  {
+   "tx": "Gallbladder cancer surgery means en bloc **wedge resection of segments IVB and V** with **portal lymphadenectomy** examining at least **6** nodes, with at least **2** centimetres of liver margin and formal right hepatectomy only for extensive infiltration. Incidental cancer on routine pathology turns on depth: **pT1a** disease may observe, while **pT1b** or greater, invading muscularis propria, needs radical re-resection. Depth of invasion decides between surveillance and reoperation.",
+   "say": "Gallbladder cancer surgery removes segments four B and five with portal nodes, aiming for six examined nodes. Incidental disease turns on depth, with muscle invasion mandating re-resection. Surveillance follows only the earliest depth.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "pT1a", "points": ["Mucosa only", "Surveillance possible", "Cholecystectomy enough", "CA 19-9 follow up"]},
+    "right": {"title": "pT1b or greater", "points": ["Muscularis invaded", "Radical re-resection", "Liver wedge, nodes", "Adjuvant plan"]}
+   }
+  },
+  {
+   "tx": "Intrahepatic cholangiocarcinoma needs anatomic resection with microscopically negative **R0** margins of at least **1** centimetre, since non anatomic wedge resection is discouraged for mass forming tumours. Perihilar disease follows **Bismuth-Corlette** mapping **I** to **IV**: type **I** to **II** needs bile duct resection with **Roux-en-Y hepaticojejunostomy**, type **III** needs extended hepatectomy, and type **IV** needs a reconstructible single sided remnant. Distal disease means pancreaticoduodenectomy. Selected unresectable perihilar tumours of **3** centimetres or smaller without metastases may enter strict transplant protocols.",
+   "say": "Intrahepatic tumours need anatomic resection with a centimetre of margin. Perihilar disease follows Bismuth Corlette mapping to size the hepatectomy. Small perihilar tumours without spread may enter transplant protocols.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Site", "Operation", "Rule"],
+    "rows": [
+     ["Intrahepatic", "Anatomic resection", "R0 margin 1 cm"],
+     ["Perihilar I to II", "Duct resection", "Roux-en-Y drainage"],
+     ["Perihilar III to IV", "Extended hepatectomy", "Single sided remnant"],
+     ["Distal", "Pancreaticoduodenectomy", "Whipple procedure"]
+    ]
+   }
+  },
+  {
+   "tx": "Fit patients receive **gemcitabine plus cisplatin** with programmed death ligand **1 (PD-L1)** or programmed death **1 (PD-1)** blockade, since **TOPAZ-1** with durvalumab and **KEYNOTE-966** with pembrolizumab each improved survival over gemcitabine cisplatin alone. Preferred dosing runs gemcitabine **1000** milligrams per square metre plus cisplatin **25** milligrams per square metre on days **1** and **8** every **21** days, with durvalumab **1500** milligrams on day **1** for up to **8** cycles. Immunotherapy ineligible patients receive gemcitabine cisplatin alone.",
+   "say": "Gemcitabine cisplatin with durvalumab or pembrolizumab leads first line therapy in fit patients. The three weekly backbone runs days one and eight with immunotherapy. Ineligible patients take gemcitabine cisplatin alone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regimen", "Drugs", "Schedule"],
+    "rows": [
+     ["Preferred A", "Gemcitabine, cisplatin, durvalumab", "Days 1, 8 every 21"],
+     ["Preferred B", "Gemcitabine, cisplatin, pembrolizumab", "Day 1 every 21"],
+     ["Alone", "Gemcitabine, cisplatin", "Up to 8 cycles"],
+     ["Second line", "mFOLFOX6", "After GemCis failure"]
+    ]
+   }
+  },
+  {
+   "tx": "**BILCAP** established adjuvant **capecitabine** after **R0** resection, with per protocol survival reaching **51.1** months and intention to treat analysis **49.6** months, against **36.4** months for observation alone. Second line **mFOLFOX6** lifted survival to **6.2** versus **5.3** months after gemcitabine cisplatin progression in **ABC-06**. Follow up pairs clinical review with **CA 19-9** twice yearly for **2** years, then annually, while cross sectional imaging repeats twice yearly for **2** years.",
+   "say": "Adjuvant capecitabine after R0 resection improves survival on both per protocol and intention to treat analyses. Second line mFOLFOX6 extends survival after gemcitabine cisplatin failure. Surveillance pairs CA 19-9 with imaging for two years.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Setting", "Therapy", "Gain"],
+    "rows": [
+     ["Adjuvant", "Capecitabine", "51.1 vs 36.4 months"],
+     ["Second line", "mFOLFOX6", "6.2 vs 5.3 months"],
+     ["Watch", "CA 19-9, imaging", "2 years, then yearly"],
+     ["Follow up", "History, examination", "LFTs included"]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular testing at diagnosis of unresectable or metastatic disease prepares targeted therapy at progression. **FGFR2** fusions, mainly intrahepatic, answer to **pemigatinib** or **futibatinib**, while **IDH1 R132** mutations answer to **ivosidenib**. Actionable hierarchy continues through **HER2** amplification, **BRAF V600E**, **MSI-H** or mismatch repair deficiency, **NTRK** and **RET** fusions and **TMB-H**. Repeat biopsy or **circulating tumour DNA (ctDNA)** at acquired resistance unmasks the escape route.",
+   "say": "Comprehensive molecular testing at diagnosis prepares targeted therapy at progression. FGFR2 fusions target pemigatinib while IDH1 mutations target ivosidenib. Repeat profiling at resistance reveals the escape route.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "ngs", "label": "NGS at diagnosis"},
+     {"id": "fgfr", "label": "FGFR2: pemigatinib"},
+     {"id": "idh", "label": "IDH1: ivosidenib"},
+     {"id": "repeat", "label": "Resistance: reprofile"}
+    ],
+    "edges": [["ngs", "fgfr"], ["ngs", "idh"], ["fgfr", "repeat"], ["idh", "repeat"]]
+   }
+  },
+  {
+   "tx": "Benign lesions imitate cancers and reward restraint. Simple cysts, haemangiomas and focal nodular hyperplasia need no resection once imaging characterises them, while biliary cystadenoma and cystadenocarcinoma mimic cystic tumours and deserve removal. **MRCP** maps the ductal anomaly, distinguishing **Caroli disease** and choledochal cysts from strictures. Watching a classic benign lesion beats operating on it, yet indeterminate cystic lesions deserve surgical eyes.",
+   "say": "Benign lesions argue for patient observation, not aggressive surgery. Simple cysts and haemangiomas stay under surveillance once characterised. Cystic tumours with malignant potential still need removal.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Watch", "points": ["Simple cyst", "Haemangioma", "Focal nodular hyperplasia", "Classic imaging"]},
+    "right": {"title": "Resect", "points": ["Cystadenoma", "Cystadenocarcinoma", "Indeterminate cystic", "Surgical referral"]}
+   }
+  },
+  {
+   "tx": "Traps cluster around staging, drainage and surveillance. Operating before cross sectional staging lets stents obscure ductal extent, while skipping staging laparoscopy loses occult disease in a fifth to a third of cases. Missing depth on incidental gallbladder cancer loses the re-resection window, and treating without molecular profiling squanders targeted options. Benign strictures mimic hilar cancer, so **IgG4** levels guard the steroid responsive mimic.",
+   "say": "Staging before drainage, laparoscopy before laparotomy and profiling before systemic therapy set the safe sequence. Skipping any step forfeits information that never returns. Benign strictures need IgG4 exclusion before cancer labels.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Loss", "Fix"],
+    "rows": [
+     ["Drain before staging", "Extent obscured", "Image first"],
+     ["No laparoscopy", "Occult disease missed", "Scope before open"],
+     ["Depth missed", "Window lost", "Re-resect pT1b up"],
+     ["No profiling", "Drugs wasted", "Test at diagnosis"]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: staging laparoscopy finds occult spread in **20** to **30** percent, **FLR** thresholds sit below **30** percent normal and **30** to **40** percent diseased liver, gallbladder surgery examines at least **6** nodes, **BILCAP** capecitabine yields **51.1** months, first line adds durvalumab or pembrolizumab, and **FGFR2** plus **IDH1** predict targeted responses.",
+   "say": "Laparoscopy yield, liver remnant thresholds and BILCAP survival carry the exam facts. First line chemoimmunotherapy leads advanced disease. Targeted options follow FGFR2 and IDH1 results.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["Laparoscopy yield", "20 to 30 percent"],
+     ["FLR normal", "Below 30 percent"],
+     ["FLR diseased", "30 to 40 percent"],
+     ["GBC nodes", "At least 6"],
+     ["BILCAP median", "51.1 months"],
+     ["Second line", "mFOLFOX6, 6.2 months"],
+     ["FGFR2 drug", "Pemigatinib"],
+     ["IDH1 drug", "Ivosidenib"]
+    ]
+   }
+  }
+ ]
+}
