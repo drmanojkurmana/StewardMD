@@ -70,6 +70,7 @@ try {
   const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
   ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  ok(await ev(`var b=document.querySelector('#pnMgFeed').getBoundingClientRect(); return b.bottom <= innerHeight + 8 && b.height > 300;`) === true, "the reel ends at the bottom of the screen (no card cut off; under 8 px of padding may tuck under)");
   ok(await ev(`return !/shown in the image/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "questions that need a figure are left out");
   ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows, Skip or Next before an answer: one card per swipe");
   const wide = await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(e.tagName+"."+String(e.className).slice(0,30)+":"+Math.round(r.right));}); return o.slice(0,4).join(" ");`);
@@ -91,15 +92,17 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
   // Our own controls: pause/play, seek, sound, full screen (YouTube's overlay hides itself on touch screens).
   const cardSel = "#smdPrep .pn-mg-vid.pn-mg-c:has(iframe)";
-  const ctlOn = `var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && f.classList.contains('ctl') && getComputedStyle(f.querySelector('.pn-mg-vctl button')).pointerEvents === 'auto';`;
-  ok(await until(`var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && !f.classList.contains('ctl');`, 5000), "the glass controls fade out on their own (3 s)");
-  ok(await ev(`var v=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}); var c=getComputedStyle(v); return !!v.closest('.pn-mg-frame') && /blur/.test(c.backdropFilter || c.webkitBackdropFilter || '');`) === true, "the controls sit on the video as blurred glass");
+  const ctlOn = `var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && c.classList.contains('ctlon') && getComputedStyle(c.querySelector('.pn-mg-vctl button')).pointerEvents === 'auto';`;
+  ok(await until(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && !c.classList.contains('ctlon');`, 5000), "the glass controls fade out on their own (3 s)");
+  ok(await ev(`var v=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}); var c=getComputedStyle(v); var f=v.parentNode.querySelector('.pn-mg-frame').getBoundingClientRect(); return !v.closest('.pn-mg-frame') && v.getBoundingClientRect().top >= f.bottom - 1 && /blur/.test(c.backdropFilter || c.webkitBackdropFilter || '');`) === true, "the controls are blurred glass under the video, never on it");
+  await ev(`document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}).click(); return 1;`);
+  ok(await until(ctlOn, 2000), "a tap on the hidden bar's area brings it back");
   ok(await ev(`var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).getBoundingClientRect(); var e=document.elementFromPoint(f.left+f.width/2, f.top+f.height/2); return !!e && e.tagName === 'IFRAME';`) === true, "nothing covers the player: a tap reaches YouTube's own controls");
   // A pause made with YouTube's own controls (simulated in the stub) brings our bar up and keeps it while paused.
   await ev(`document.querySelector(${JSON.stringify(cardSel + " iframe")}).contentWindow.postMessage({ smdSim: 'pause' }, '*'); return 1;`);
   ok(await until(ctlOn.replace("pointerEvents === 'auto'", "opacity === '1'"), 3000), "a pause from YouTube's controls brings our bar up");
   await sleep(3500);
-  ok(await ev(`return document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).classList.contains('ctl') && document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`) === true, "our bar stays while paused and shows Play");
+  ok(await ev(`return document.querySelector(${JSON.stringify(cardSel)}).classList.contains('ctlon') && document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`) === true, "our bar stays while paused and shows Play");
   await click(cardSel + " [data-act=mg-v][data-v=toggle]");
   ok(await ev(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && ["back","toggle","fwd","sound"].every(function(v){return !!c.querySelector('[data-act=mg-v][data-v='+v+']');}) && !!c.querySelector('[data-act=mg-fs]');`) === true, "the playing video has back, play/pause, forward, sound and full screen controls");
   await click(cardSel + " [data-act=mg-v][data-v=toggle]");
@@ -111,6 +114,7 @@ try {
   await click(cardSel + " [data-act=mg-fs]");
   ok(await until(`var c=document.querySelector('#smdPrep .pn-mg-fs'); if(!c) return false; var r=c.getBoundingClientRect(); return r.top<=1 && r.left<=1 && r.width>=innerWidth-1 && r.height>=innerHeight-1 && !!c.querySelector('iframe');`, 4000), "Full screen covers the whole screen and keeps the same player");
   ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(); return f.width<=innerWidth+1 && f.bottom<=innerHeight+1 && f.height>100;`) === true, "the full-screen video fits the screen");
+  ok(await ev(`var f=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-frame').getBoundingClientRect(), v=document.querySelector('#smdPrep .pn-mg-fs .pn-mg-vctl').getBoundingClientRect(); return v.top >= f.bottom - 1 && v.bottom <= innerHeight + 1;`) === true, "in full screen our bar sits at the bottom, below the video");
   ok(await ev(`var e=document.elementFromPoint(innerWidth/2, 30); return !!(e && e.closest('.pn-mg-fs'));`) === true, "nothing (header, tabs) shows over the full-screen video");
   await evA(`window.PREP.back ? window.PREP.back() : history.back()`);
   ok(await until(`return !document.querySelector('#smdPrep .pn-mg-fs') && !!document.querySelector('#smdPrep #pnMgFeed') && !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "Back leaves full screen first, the video keeps playing in its card");
@@ -121,6 +125,18 @@ try {
   ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "tapping a video poster plays it in the card");
   await ev(`var b=document.querySelector("#pnMgFeed"); b.scrollTop=b.scrollHeight; return 1;`);
   ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 4000), "and it stops once the reel settles on another card");
+  // Lesson: plays inline as a story when its card is on screen; tap right = next step, middle = pause.
+  if (await ev(`return !!document.querySelector('#smdPrep .pn-mg-les');`)) {
+    await ev(`var v=document.querySelector('#smdPrep .pn-mg-les'), b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
+    ok(await until(`var t=document.querySelector('#smdPrep .pn-mg-les .pn-mg-stx'); return !!t && /Step 1 of/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn') ? document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent : '') && t.textContent.length > 40;`, 10000), "a lesson card plays the lesson inline (step 1 text shows)");
+    ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-les .pn-mg-seg.run');`) === true, "its progress bar runs on its own (passive)");
+    await ev(`var s=document.querySelector('#smdPrep .pn-mg-les .pn-mg-story'), r=s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent('click',{bubbles:true,clientX:r.right-10,clientY:r.top+20})); return 1;`);
+    ok(await until(`return /Step 2 of/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent);`, 3000), "a tap on the right moves to the next step");
+    await ev(`var s=document.querySelector('#smdPrep .pn-mg-les .pn-mg-story'), r=s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent('click',{bubbles:true,clientX:r.left+r.width/2,clientY:r.top+20})); return 1;`);
+    ok(await until(`return /paused/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent);`, 3000), "a tap in the middle pauses it");
+    ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-les [data-act=mg-lesson]') && !!document.querySelector('#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]');`) === true, "Listen and the full lesson with its quiz are one tap away");
+    await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
+  } else ok(false, "the reel has a lesson card to play");
   // End card: Keep going appends a batch, Finish returns home.
   const n0 = await ev(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length;`);
   await click("#smdPrep [data-act=mg-more]");
