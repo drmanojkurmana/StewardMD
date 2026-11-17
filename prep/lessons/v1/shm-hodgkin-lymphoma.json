@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "shm-hodgkin-lymphoma",
+ "subject": "ss-haematology",
+ "title": "Hodgkin lymphoma Reed Sternberg cells staging and ABVD therapy",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 114 Hodgkin Lymphoma",
+  "ESMO Hodgkin lymphoma guidelines 2024",
+  "GHSG Hodgkin Study Group reports"
+ ],
+ "steps": [
+  {
+   "tx": "**Hodgkin lymphoma** (HL, malignant Reed Sternberg B cells in reactive background) is rare but highly curable, peaking in young adults and older adults. **Reed Sternberg cells** (RS cells, giant binucleate cells with mirror nuclei) form under **1** percent of tissue cells. **HRS cells** (Hodgkin Reed Sternberg cells) secrete cytokines that recruit T cells, eosinophils and macrophages around them. Incidence is near **3** per **one hundred thousand** yearly.",
+   "say": "Hodgkin lymphoma spreads through rare malignant cells in a reactive background. RS cells form under one percent of tumour tissue. Cure rates exceed eighty percent in modern practice.",
+   "vis": {
+    "cols": [
+     "Item",
+     "Detail",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Malignant cell",
+      "Reed Sternberg",
+      "Under 1 percent cells"
+     ],
+     [
+      "Peaks",
+      "Young and old",
+      "Bimodal age curve"
+     ],
+     [
+      "Incidence",
+      "3 per one hundred thousand",
+      "Highly curable"
+     ],
+     [
+      "Background",
+      "Reactive mix",
+      "T cells eosinophils"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Epstein Barr virus** (EBV, latent infection) drives about **40** percent of classical HL cases, with higher rates in mixed cellularity and HIV linked disease. **HIV infection** (immune deficiency) raises HL risk **10** fold and EBV rates climb higher still. **Young adult peak** (age **20** to **40**) dominates in developed countries. **Male predominance** is mild overall but stronger in nodular sclerosis in women.",
+   "say": "EBV is present in about forty percent of classical cases worldwide. HIV raises risk tenfold with higher EBV rates. Young adults dominate in developed countries today.",
+   "vis": {
+    "cols": [
+     "Factor",
+     "Effect",
+     "Rate"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "EBV",
+      "Latent infection",
+      "40 percent cases"
+     ],
+     [
+      "HIV",
+      "Immune deficiency",
+      "10 fold risk"
+     ],
+     [
+      "Young peak",
+      "Age 20 to 40",
+      "Dominant group"
+     ],
+     [
+      "Male excess",
+      "Mild overall",
+      "Stronger in poverty"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two great families split HL biology. **Classical HL** (cHL, RS cell disease) shows **CD30** (tumour marker) and **CD15** (myeloid marker) on HRS cells with weak **PAX5** (B cell factor) and lost **CD20** (B cell marker). **Nodular lymphocyte predominant HL** (NLPHL, LP cell disease) shows LP cells (popcorn cells) with strong **CD20** and **CD79a** (B cell markers) and usually **CD30** negative. **LP cells** (lymphocyte predominant cells) evolve like B cell lymphoma.",
+   "say": "Classical HL loses CD20 and gains CD15 and CD30 expression. NLPHL keeps CD20 strong and CD30 negative. LP cells are like B cell lymphoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classical HL",
+     "points": [
+      "CD30 CD15 positive",
+      "CD20 lost, PAX5 weak",
+      "EBV in 40 percent"
+     ]
+    },
+    "right": {
+     "title": "NLPHL",
+     "points": [
+      "CD20 CD79a strong",
+      "CD30 usually negative",
+      "LP popcorn cells"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Four classical subtypes fill most cases. **Nodular sclerosis** (NS, commonest subtype) strikes young women with mediastinal masses and lacunar cells. **Mixed cellularity** (MC, second commonest) shows classic RS cells with eosinophils and EBV positivity most often. **Lymphocyte rich** (LR, favourable) and **lymphocyte depleted** (LD, aggressive) complete the list. **NS** forms about **seventy** percent of classical cases in young adults.",
+   "say": "Nodular sclerosis affects young women with mediastinal masses. Mixed cellularity is EBV positive most often. Lymphocyte depleted disease is the most aggressive form in this group.",
+   "vis": {
+    "cols": [
+     "Subtype",
+     "Pattern",
+     "Clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Nodular sclerosis",
+      "Young women",
+      "Mediastinal mass"
+     ],
+     [
+      "Mixed cellularity",
+      "EBV positive",
+      "Older and HIV"
+     ],
+     [
+      "Lymphocyte rich",
+      "Favourable",
+      "Early stage"
+     ],
+     [
+      "Lymphocyte depleted",
+      "Aggressive",
+      "High cell RS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients present with **painless lymphadenopathy** (painless enlarged nodes) in cervical or supraclavicular regions. **B symptoms** (fever above **38** degrees, >10 percent weight loss, drenching night sweats) define adverse prognosis. **Pruritus** (itching) and **pel Ebstein fever** (cyclic fever) are classical associations. **Contiguous spread** (to neighbouring nodes) rules HL, unlike non Hodgkin lymphoma which skips regions. Bone pain marks stage **4** disease.",
+   "say": "Painless cervical nodes are the usual presentation pattern in HL. B symptoms worsen prognosis in every stage. Contiguous nodal spread is the classic Hodgkin signature.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "nodes",
+      "label": "Painless nodes"
+     },
+     {
+      "id": "bsympt",
+      "label": "B symptoms?"
+     },
+     {
+      "id": "stage",
+      "label": "Lugano stage"
+     },
+     {
+      "id": "pet",
+      "label": "PET guided therapy"
+     }
+    ],
+    "edges": [
+     [
+      "nodes",
+      "bsympt"
+     ],
+     [
+      "bsympt",
+      "stage"
+     ],
+     [
+      "stage",
+      "pet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lugano staging** (modern HL staging) uses **PET CT** (scan combining metabolic and anatomical imaging) as the standard tool. Stage **1** covers single region disease, stage **2** covers same side regions, stage **3** covers both sides of diaphragm, and stage **4** covers disseminated organ disease. **Ann Arbor** (older system) survives only as descriptive language. **Bulky disease** (mass above **seven** cm) worsens prognosis and triggers radiation.",
+   "say": "Lugano staging uses PET CT as the standard examination tool. Stage four means disseminated organ disease today. Bulky mass above seven centimetres worsens prognosis.",
+   "vis": {
+    "cols": [
+     "Stage",
+     "Spread",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "1",
+      "Single region",
+      "Best prognosis"
+     ],
+     [
+      "2",
+      "Same side",
+      "Includes bulk factor"
+     ],
+     [
+      "3",
+      "Both sides diaphragm",
+      "Systemic therapy"
+     ],
+     [
+      "4",
+      "Disseminated organs",
+      "Advanced disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ABVD** (four drug regimen, standard acronym) cures most HL and stays the backbone worldwide. Early favourable disease gets **2** to **4** cycles of ABVD plus **involved field radiation** (targeted radiotherapy). **PET guided therapy** (scan responses decide cycles) cuts chemotherapy where response is complete after **2** cycles. **Brentuximab vedotin** (anti CD30 antibody drug conjugate) replaces bleomycin in advanced disease in many centres.",
+   "say": "ABVD is the curative regimen in most patients worldwide today. PET responses decide how many cycles continue overall. Brentuximab vedotin targets CD30 in advanced disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "abvd",
+      "label": "ABVD 2 cycles"
+     },
+     {
+      "id": "pet",
+      "label": "PET scan"
+     },
+     {
+      "id": "stop",
+      "label": "Negative: stop"
+     },
+     {
+      "id": "go",
+      "label": "Positive: continue"
+     }
+    ],
+    "edges": [
+     [
+      "abvd",
+      "pet"
+     ],
+     [
+      "pet",
+      "stop"
+     ],
+     [
+      "pet",
+      "go"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Escalated BEACOPP** (intensive acronym regimen) lifts control in advanced HL but costs fertility and second cancers. **GHSG** (Hodgkin Study Group, German trial group) HD9 era trials settled dose intensity debates. **Checkpoint inhibitors** (PD1 blockers like nivolumab) rescue relapsed disease with high response rates. **CAR T cells** (engineered T cells) target **CD30** in refractory cases at trial centres.",
+   "say": "Escalated BEACOPP improves disease control in advanced HL disease. PD1 blockers rescue relapsed disease effectively today. CD30 directed CAR T cells remain investigational options.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ABVD standard",
+     "points": [
+      "Less toxicity",
+      "Fertility preserved",
+      "Cures most cases"
+     ]
+    },
+    "right": {
+     "title": "Escalated BEACOPP",
+     "points": [
+      "Better control advanced",
+      "Infertility risk high",
+      "Second cancers rise"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Late toxicity colours survivorship for decades. **Bleomycin lung injury** (fibrosis) demands baseline lung function and lifetime dose caps near **four hundred** units. **Doxorubicin cardiac injury** (cardiomyopathy) needs anthracycline cumulative dose limits and echocardiography. **Second malignancy** (especially breast) rises above **10** percent at **20** years after mantle radiation. **Infertility** (gonadal failure) follows alkylating regimens and pelvic radiation.",
+   "say": "Bleomycin lung injury and doxorubicin cardiac injury are the main late effects. Second cancers rise above ten percent at twenty years. Mantle radiation is a breast cancer risk.",
+   "vis": {
+    "cols": [
+     "Drug or field",
+     "Late harm",
+     "Guard"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bleomycin",
+      "Lung fibrosis",
+      "Cap near four hundred units"
+     ],
+     [
+      "Doxorubicin",
+      "Cardiomyopathy",
+      "Echo surveillance"
+     ],
+     [
+      "Chest radiation",
+      "Breast cancer",
+      "MRI screening"
+     ],
+     [
+      "Alkylators",
+      "Infertility",
+      "Fertility preservation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems reward the following contrasts. **RS cells** (giant binucleate cells) live in HL, never in non Hodgkin lymphoma. **CD30** (marker) positivity with weak PAX5 points to classical HL over NLPHL. **Contiguous spread** (stepwise nodal spread) is a Hodgkin signature. **Night sweats**, **fever** and weight loss together form **B symptoms** and upstage adverse prognosis in every system.",
+   "say": "RS cells are seen only in Hodgkin lymphoma in exam stems. Contiguous spread forms the Hodgkin signature pattern. B symptoms always worsen prognosis in every system.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hodgkin patterns",
+     "points": [
+      "Contiguous spread",
+      "RS cells present",
+      "Mediastinal common"
+     ]
+    },
+    "right": {
+     "title": "Non Hodgkin patterns",
+     "points": [
+      "Skips regions",
+      "Extranodal common",
+      "Gut and marrow"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **RS cells** (giant binucleate cells) with **CD30** **CD15** and weak **PAX5** define classical HL. **ABVD** is the curative backbone, and **PET negative** after **2** cycles may allow stopping. **B symptoms** include fever, night sweats and weight loss above **10** percent. **Nodular sclerosis** is the commonest subtype, and **cure rates** exceed **eighty** percent.",
+   "say": "RS cells with CD30 and CD15 are the classical Hodgkin cells. ABVD forms the curative backbone of therapy. PET negativity after two cycles guides stopping.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Tumour cell",
+      "Reed Sternberg",
+      "Under 1 percent"
+     ],
+     [
+      "Markers",
+      "CD30 CD15 PAX5",
+      "CD20 lost"
+     ],
+     [
+      "Regimen",
+      "ABVD",
+      "Curative backbone"
+     ],
+     [
+      "Bulk cutoff",
+      "seven centimetres",
+      "Radiation trigger"
+     ],
+     [
+      "B symptom fever",
+      "Above 38 degrees",
+      "Adverse factor"
+     ],
+     [
+      "Cure rate",
+      "Above eighty percent",
+      "Modern era"
+     ]
+    ]
+   }
+  }
+ ]
+}

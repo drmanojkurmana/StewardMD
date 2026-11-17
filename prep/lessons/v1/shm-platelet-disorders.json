@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "shm-platelet-disorders",
+ "subject": "ss-haematology",
+ "title": "Platelet disorders ITP HIT inherited defects and bleeding care",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 120 Disorders of Platelets and Vessel Wall",
+  "ASH guidelines on immune thrombocytopenia 2019",
+  "BSH guideline on HIT 2024"
+ ],
+ "steps": [
+  {
+   "tx": "Platelets plug vessels through three moves. **Adhesion** (sticky contact) uses **GPIb** (von Willebrand receptor) binding von Willebrand factor at injury sites. **Activation** (change of state) triggers **ADP** (chemical signal) and **thrombin** (clotting enzyme) release, while **GPIIb/IIIa** (aggregation receptor) binds fibrinogen. **Aggregation** (clumping) needs fibrinogen bridges to seal the plug. **Bleeding time** (test of platelet function) prolongs when any move fails.",
+   "say": "Platelets form a plug on vessels through adhesion activation. GPIb is the anchor for platelets to von Willebrand factor. GPIIb IIIa binds fibrinogen to seal the plug. Failure of any step is a cause of prolonged bleeding time.",
+   "vis": {
+    "cols": [
+     "Move",
+     "Receptor",
+     "Ligand"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Adhesion",
+      "GPIb",
+      "Von Willebrand factor"
+     ],
+     [
+      "Activation",
+      "ADP thrombin",
+      "Shape change"
+     ],
+     [
+      "Aggregation",
+      "GPIIb IIIa",
+      "Fibrinogen bridges"
+     ],
+     [
+      "Defect effect",
+      "Bleeding time up",
+      "PT aPTT normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Platelet failure bleeds differently from clotting factor failure. **Purpura** (small skin bleeds) and **mucosal bleeding** (gums, nose, gut) dominate platelet disorders, while deep muscle bleeds stay rare. **Joint bleeds** (haemarthroses) never occur in pure platelet disease. **Normal PT aPTT** (clotting times) with **low platelets** points to platelet cause. **Platelet count** under **one hundred thousand** per microlitre defines thrombocytopenia in most laboratories.",
+   "say": "Platelet failure causes purpura and mucosal bleeding patterns. Joint bleeds never occur in pure platelet disease. Normal clotting times with low platelets point to platelet cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Platelet bleeding",
+     "points": [
+      "Purpura and mucosal",
+      "Immediate bleeding",
+      "Normal PT aPTT"
+     ]
+    },
+    "right": {
+     "title": "Factor bleeding",
+     "points": [
+      "Deep muscle bleeds",
+      "Joint haemarthroses",
+      "Delayed bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Immune thrombocytopenia** (ITP, antibody platelet destruction) is a diagnosis of exclusion with normal marrow. Most adults present with counts under **one hundred thousand** per microlitre, and young patients often recover spontaneously. **Anti platelet antibodies** (immune attack) shorten platelet survival without marrow damage. **Secondary ITP** follows **HIV** (immune deficiency virus), **hepatitis C** (liver virus), **SLE** (lupus) or lymphoid cancers. **Bone marrow biopsy** is not routine in typical cases.",
+   "say": "Platelets in ITP are destroyed by antibody attack while marrow stays normal. Secondary ITP follows HIV hepatitis C lupus or lymphoid cancers. Marrow biopsy is unnecessary in typical cases.",
+   "vis": {
+    "cols": [
+     "Cause",
+     "Pattern",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Primary ITP",
+      "Isolated low platelets",
+      "Excluded other causes"
+     ],
+     [
+      "HIV",
+      "Secondary ITP",
+      "Test every patient"
+     ],
+     [
+      "Hepatitis C",
+      "Secondary ITP",
+      "Treat the virus"
+     ],
+     [
+      "SLE lupus",
+      "Secondary ITP",
+      "Multilineage clues"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment follows bleeding risk, not numbers alone. **Corticosteroids** (prednisolone **1** mg per kg) are first line and lift counts in most patients within **1** to **2** weeks. **Intravenous immunoglobulin** (IVIG, antibody infusion) works within **24** to **72** hours for critical bleeding or imminent surgery. **Thrombopoietin receptor agonists** (eltrombopag, romiplostim) sustain counts in persistent disease. **Splenectomy** (spleen removal) gives durable remission in about **60** percent after **12** months of failed drugs.",
+   "say": "Corticosteroids are first line therapy for ITP. IVIG works within one to three days for critical bleeding. Splenectomy gives durable remission in about sixty percent.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Speed",
+     "Role"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Prednisolone steroids",
+      "1 to 2 weeks",
+      "First line 1 mg per kg"
+     ],
+     [
+      "IVIG",
+      "24 to 72 hours",
+      "Critical bleeding"
+     ],
+     [
+      "Eltrombopag",
+      "1 to 2 weeks",
+      "Persistent disease"
+     ],
+     [
+      "Rituximab",
+      "Weeks",
+      "Second line option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glanzmann thrombasthenia** (GPIIb/IIIa defect) and **Bernard Soulier syndrome** (GPIb defect) are the two classical inherited platelet failures. Glanzmann platelets fail to aggregate with normal adhesion, while Bernard Soulier platelets fail adhesion with **giant platelets** (abnormally large platelets) and low counts. **Ristocetin aggregation** (vessel factor test) is absent in Bernard Soulier but preserved in Glanzmann. **Dense granule deficiency** (storage pool disease) blunts release reactions (lumilux test).",
+   "say": "Glanzmann disease lacks GPIIb IIIa and fails aggregation. Bernard Soulier lacks GPIb and fails adhesion. Ristocetin testing separates these two inherited defects cleanly in everyday practice. Treatment is platelet transfusion support only for now.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glanzmann",
+     "points": [
+      "GPIIb IIIa absent",
+      "Adhesion preserved",
+      "Normal platelet size"
+     ]
+    },
+    "right": {
+     "title": "Bernard Soulier",
+     "points": [
+      "GPIb absent",
+      "Giant platelets",
+      "Ristocetin absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Heparin induced thrombocytopenia** (HIT, heparin antibody disease) is prothrombotic, not prohaemorrhagic. Onset follows heparin exposure by **5** to **10** days, with **50** percent platelet falls in most cases. **Thrombosis** (clots) strikes up to **50** percent of HIT patients, including **HITT** (HIT with thrombosis). **Heparin PF4 antibodies** (immune complexes) activate platelets and endothelium. **Nadir counts** rarely fall below **20,000** per microlitre.",
+   "say": "HIT is prothrombotic and never a bleeding disorder. Onset follows heparin by five to ten days. Thrombosis affects up to fifty percent of HIT patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "heparin",
+      "label": "Heparin exposure"
+     },
+     {
+      "id": "fall",
+      "label": "Platelets fall 50 percent"
+     },
+     {
+      "id": "4ts",
+      "label": "4Ts score high?"
+     },
+     {
+      "id": "treat",
+      "label": "Stop heparin, start DTI"
+     }
+    ],
+    "edges": [
+     [
+      "heparin",
+      "fall"
+     ],
+     [
+      "fall",
+      "4ts"
+     ],
+     [
+      "4ts",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **4Ts score** (clinical HIT probability score) covers **thrombocytopenia** (fall size), **timing** (day **5** to **10**), **thrombosis** (new clot) and **other causes** (no clear cause wins points). Low scores exclude HIT safely and prevent false labelling. **Anti heparin PF4 ELISA** (antibody screening test) is sensitive but poorly specific, since most antibody carriers never develop HIT. **Serotonin release assay** (functional test) confirms diagnosis.",
+   "say": "The 4Ts score covers fall size timing thrombosis and other causes. Low scores are useful to exclude HIT safely. ELISA screening is sensitive but poorly specific.",
+   "vis": {
+    "cols": [
+     "T of 4Ts",
+     "Score point",
+     "Trap"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Thrombocytopenia",
+      "50 percent fall",
+      "Or nadir below 10"
+     ],
+     [
+      "Timing",
+      "Days 5 to 10",
+      "Delayed onset rare"
+     ],
+     [
+      "Thrombosis",
+      "New clot present",
+      "Up to 50 percent"
+     ],
+     [
+      "Other causes",
+      "None found",
+      "Scores point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suspected HIT needs immediate action without waiting for tests. **Stop all heparin** (including flushes and line coatings) and never use **low molecular weight heparin** (cross reactive drug), since antibodies cross react. **Argatroban** (direct thrombin inhibitor, DTI) treats HITT during confirmation. **Warfarin** (vitamin K antagonist) started alone can precipitate thrombosis through **protein C** (clotting regulator) depletion. **Platelet transfusion** is reserved for bleeding or surgery.",
+   "say": "Suspected HIT needs immediate heparin withdrawal for safety. Low molecular weight heparin cross reacts dangerously with antibodies. Warfarin alone precipitates thrombosis in HIT cases. Confirmation follows promptly after withdrawal of heparin today.",
+   "vis": {
+    "cols": [
+     "Action",
+     "Rule",
+     "Why"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stop heparin",
+      "All forms stop",
+      "Antibody trigger"
+     ],
+     [
+      "Argatroban",
+      "DTI start now",
+      "No cross reaction"
+     ],
+     [
+      "Warfarin",
+      "Never start alone",
+      "Protein C fall"
+     ],
+     [
+      "LMWH",
+      "Avoid always",
+      "Cross reacts in HIT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug induced platelet failure rounds out adult practice. **Non steroidal anti inflammatory drugs** (NSAIDs, pain relief drugs) impair platelet function without low counts. **Aspirin** (anti platelet drug) covalently blocks **COX1** (cyclooxygenase enzyme) for the platelet lifetime. **Lumilux** (ATP release test) and **PFA** (platelet function analyser) confirm storage pool defects. **Alcohol** (marrow suppression) and **myelodysplasia** (clonal marrow disease) lower production in admitted patients.",
+   "say": "Aspirin blocks COX1 for the entire platelet lifetime today. NSAIDs reduce platelet function while counts are normal. Alcohol and myelodysplasia are causes of low platelet production.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "history",
+      "label": "Drug and alcohol history"
+     },
+     {
+      "id": "count",
+      "label": "Count and smear"
+     },
+     {
+      "id": "pfa",
+      "label": "PFA and lumiaggregometry"
+     },
+     {
+      "id": "cause",
+      "label": "Treat the cause"
+     }
+    ],
+    "edges": [
+     [
+      "history",
+      "count"
+     ],
+     [
+      "count",
+      "pfa"
+     ],
+     [
+      "pfa",
+      "cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems love the following traps. **HIT** (heparin antibody disease) causes thrombosis, while **ITP** (platelet antibody disease) causes bleeding. **4Ts score** of **zero** to **three** makes HIT unlikely despite positive ELISA. **Ristocetin** (vessel factor test) absence marks Bernard Soulier, not Glanzmann. **Delayed onset HIT** (clots after heparin stopped) appears within **100** days and fools discharge planning.",
+   "say": "HIT causes thrombosis while ITP causes bleeding in patients. A low 4Ts score is evidence against HIT despite ELISA positivity. Ristocetin absence is a sign of Bernard Soulier disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ITP picture",
+     "points": [
+      "Bleeding dominant",
+      "Isolated failure",
+      "Steroids first line"
+     ]
+    },
+    "right": {
+     "title": "HIT picture",
+     "points": [
+      "Clots dominant",
+      "Heparin history",
+      "Argatroban treats"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **ITP** is excluded by causes, with **prednisolone 1** mg per kg first line and **IVIG** working in **24** to **72** hours. **HIT** begins in **5** to **10** days with **4Ts** score guiding exclusion. **Glanzmann** lacks **GPIIb IIIa**, and **Bernard Soulier** lacks **GPIb** with giant platelets. **Splenectomy** gives durable remission in about **60** percent of chronic ITP.",
+   "say": "Prednisolone at one milligram is first line for ITP. HIT starts five to ten days after heparin exposure. Splenectomy gives durable remission in about sixty percent.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "ITP first line",
+      "Prednisolone 1 mg per kg",
+      "Weeks to respond"
+     ],
+     [
+      "IVIG speed",
+      "24 to 72 hours",
+      "Critical bleeding"
+     ],
+     [
+      "HIT timing",
+      "Days 5 to 10",
+      "Heparin history"
+     ],
+     [
+      "4Ts purpose",
+      "Exclude HIT safely",
+      "Low score rules out"
+     ],
+     [
+      "Glanzmann defect",
+      "GPIIb IIIa absent",
+      "No aggregation"
+     ],
+     [
+      "HITT risk",
+      "Up to 50 percent",
+      "Argatroban treats"
+     ]
+    ]
+   }
+  }
+ ]
+}
