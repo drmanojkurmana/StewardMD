@@ -768,10 +768,10 @@ await page.evaluate((b) => {
     Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
   window.__avail = false;
 }, jpegs[0]);
-await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib(); await page.waitForTimeout(400);
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib(); await page.waitForTimeout(400);
 ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button (st-scan) while isAvailable is false");
 await page.evaluate(() => { window.__avail = true; });
-await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible'); await openLib();
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib();
 await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]', { timeout: 5000 });
 ok(true, "scan: the New sheet shows Scan (delegates to DocScan)");
 const nDocs = (await idbAll("docs")).length;

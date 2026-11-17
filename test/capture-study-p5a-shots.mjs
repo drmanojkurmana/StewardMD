@@ -89,7 +89,9 @@ for (const dev of DEVICES) {
     await page.click('[data-act="st5a-tab"][data-v="documents"]');
     await page.waitForSelector(".st5a-card.st-doc [data-act='st5a-open']", { timeout: 10000 });
     await page.locator(".st5a-card.st-doc [data-act='st5a-open']").first().click();
-    await page.waitForSelector(".st-pg", { timeout: 20000 }); await sleep(300);
+    await page.waitForSelector(".st-pg", { timeout: 20000 });
+    await page.evaluate(() => { if (window.SMD_dynNotify && window.SMD_dynNotify.dismiss) window.SMD_dynNotify.dismiss(); });
+    await sleep(500);
     await page.screenshot({ path: join(OUT_DIR, `${tag}-07-doc-tabs.png`) }); console.log(`${tag}-07-doc-tabs.png`);
     await ctx.close();
   }

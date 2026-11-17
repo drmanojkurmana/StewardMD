@@ -39,7 +39,9 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); 
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
 const page = await ctx.newPage();
-const errors = []; page.on("pageerror", (e) => errors.push(e.message));
+const errors = [];
+page.on("pageerror", (e) => { console.error("[pageerror]", e); errors.push(e.message); });
+page.on("console", (msg) => { if (msg.type() === "error") console.error("[console.error]", msg.text()); });
 await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
 await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = (m, d) => d; });
 async function boot(q) {
@@ -145,6 +147,61 @@ const [d] = await Promise.all([page.waitForEvent("download", { timeout: 60000 })
 const buf = readFileSync(await d.path());
 ok(d.suggestedFilename().endsWith(".pdf") && buf.slice(0, 5).toString() === "%PDF-", "5.10: export downloads a PDF");
 ok((buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length === 2, "5.10: export has both pages");
+/* P5a design: card title overflow check at 390px — no .st5a-card title right edge must exceed card right edge */
+/* Navigate back to library — after 5.10 export we are inside the doc viewer */
+await page.click('[data-act="st-p3-back"]').catch(function () {});
+await page.waitForSelector("#stLib", { timeout: 10000 });
+await page.waitForSelector(".st5a-card.st-doc", { timeout: 10000 });
+const overflowCheck390 = await page.evaluate(() => {
+  var cards = document.querySelectorAll(".st5a-card");
+  var overflow = false;
+  [].forEach.call(cards, function (card) {
+    var cr = card.getBoundingClientRect();
+    var title = card.querySelector(".st5a-title-t");
+    if (title) { var tr = title.getBoundingClientRect(); if (tr.right > cr.right + 2) { overflow = true; } }
+  });
+  return { overflow: overflow, vw: window.innerWidth };
+});
+ok(!overflowCheck390.overflow, "P5a-A: no .st5a-card title right edge exceeds its card at " + overflowCheck390.vw + "px");
+/* P5a design: at iPad width (1024px), check grid has >= 4 columns (auto-fill minmax(160px,1fr)) */
+await page.setViewportSize({ width: 1024, height: 1366 });
+await page.waitForTimeout(600);
+const gridCols1024 = await page.evaluate(() => {
+  var grid = document.querySelector(".st5a-grid");
+  if (!grid) return 0;
+  /* Use offsetWidth of the first card vs grid width to infer column count.
+     auto-fill minmax(160px,1fr) at 1024px grid ~= 6 cols; card width ~ 1024/6 ~ 170px */
+  var firstCard = grid.querySelector(".st5a-card");
+  if (!firstCard) return 0;
+  var gw = grid.offsetWidth;
+  var cw = firstCard.offsetWidth;
+  /* At 2 cols: cw ~ gw/2; at 4+ cols: cw <= gw/4. Use ceil to tolerate gap */
+  return gw > 0 && cw > 0 ? Math.round(gw / cw) : 0;
+});
+ok(gridCols1024 >= 4, "P5a-B: iPad grid has >= 4 columns at 1024px (" + gridCols1024 + " inferred cols)");
+await page.setViewportSize({ width: 390, height: 844 });
+/* P5a design: check no pn-bar visible when library is shown (Fix A: removed h.bar()) */
+const hasLibPnBar = await page.evaluate(() => {
+  var bar = document.querySelector(".pn-bar");
+  if (!bar) return false;
+  var r = bar.getBoundingClientRect();
+  return r.width > 0 && r.height > 0;
+});
+ok(!hasLibPnBar, "P5a-C: library screen has no duplicate pn-bar header element");
+/* P5a design: open a PDF and verify #stP3Top present, no legacy pn-bar */
+await page.evaluate((id) => STUDY_LIB.openById(id, null), ids[0]);
+await page.waitForSelector(".st-pg", { timeout: 20000 });
+await page.waitForSelector("#stP3Top", { timeout: 10000 });
+const pdfHeaderCheck = await page.evaluate(() => {
+  var p3top = document.querySelector("#stP3Top");
+  var pnBar = document.querySelector(".pn-bar");
+  var pnBarVisible = pnBar && pnBar.getBoundingClientRect().height > 0;
+  return { hasP3Top: !!p3top, pnBarVisible: pnBarVisible };
+});
+ok(pdfHeaderCheck.hasP3Top, "P5a-C: opened PDF has #stP3Top");
+ok(!pdfHeaderCheck.pnBarVisible, "P5a-C: opened PDF has no legacy pn-bar visible");
+await page.click('[data-act="st-p3-back"]');
+await page.waitForSelector("#stLib", { timeout: 10000 });
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 await browser.close(); if (serveProc) serveProc.kill();
 console.log(fails ? "\n" + fails + " FAILED" : "\nALL PASSED");
