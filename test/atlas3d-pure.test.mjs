@@ -86,7 +86,7 @@ ok("already-decoded body of the exact raw size is accepted", P.looksLikeChunk(ne
 ok("an HTML fallback page is rejected", P.looksLikeChunk(new TextEncoder().encode("<!doctype html><html>").buffer, 40) === false);
 ok("empty body is rejected", P.looksLikeChunk(new ArrayBuffer(0), 0) === false);
 const bases = P.dataBases();
-ok("web: same-origin first, R2 models host last", bases[0] === "" && bases[bases.length - 1] === "https://models.stewardmd.in/atlas3d");
+ok("web: same-origin first, media host last (atlas moved off Pages)", bases[0] === "" && bases[bases.length - 1] === "https://media.stewardmd.in/atlas/3d");
 ok("dataUrl maps the /atlas/3d path onto the R2 key prefix", P.dataUrl("/atlas/3d/skeletal-0.bin.gz", "https://models.stewardmd.in/atlas3d") === "https://models.stewardmd.in/atlas3d/skeletal-0.bin.gz" && P.dataUrl("/atlas/3d/x.bin.gz", "") === "/atlas/3d/x.bin.gz");
 const m2 = P.parseManifest({ parts: [["LIVE_liver", "Liver", "FMA7197", 0, 1, 0, 0, 3, [0, 0, 0, 1, 1, 1], "LIVER", 1, null]], concepts: [], sources: [{ id: "bp3d" }, { id: "live" }], planes: { "ct-live-torso-axial": { "5": { axis: "y", pos: 0.9 } } } });
 ok("parseManifest reads the source flag, sources and planes", m2.parts[0].src === 1 && m2.sources.length === 2 && m2.planes["ct-live-torso-axial"]["5"].axis === "y");

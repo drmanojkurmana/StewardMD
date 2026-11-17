@@ -19,10 +19,15 @@
 # only in the Pages build copy. test/pages-output.test.mjs parses the list
 # below and fails CI before the cap is crossed again.
 #
+# atlas/ is REMOVED (owner 2026-11-17): RadioAnatome files live on the public media bucket
+# (media.stewardmd.in, tools/atlas-media-sync.mjs); Pages no longer serves them, which frees
+# ~5,200 files under the 20,000-file cap. atlas.js / atlas3d.js load them from the media host
+# with a fallback to the old relative path, and the native bundle is unaffected (build-www.sh
+# copies the JSON it needs from the repo, never from Pages).
+#
 # KEPT on purpose (runtime-fetched from Pages, do not add here):
 #   functions/ + connect-agent/ (functions/api/connect imports
-#   connect-agent/manifest/*.mjs), atlas/ (.webp slices + 3d .bin.gz are
-#   served from Pages), kb/dist + runtime kb/ dirs, prep/lessons,
+#   connect-agent/manifest/*.mjs), kb/dist + runtime kb/ dirs, prep/lessons,
 #   prep/overlays, prep/bank, prep/art (logos fetched by prep.js), data/
 #   (functions/ also imports data/interaction-rules.json at bundle time),
 #   assets/, vendor/, tokos/ + tokos-models/ (tokos-loader.js loads
@@ -39,7 +44,7 @@ cd "$(dirname "$0")/.."
 # www/ bundle (build-www.sh) and reaches phones by OTA from R2 (ota-stage.mjs), never from Pages.
 
 rm -rf \
-  test docs vault android ios \
+  test docs vault android ios atlas \
   worker prep-arena-worker voice-worker \
   kb/reference kb/validation kb/diseases kb/tools \
   prep/fill prep/screen prep/build \

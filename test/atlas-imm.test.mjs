@@ -21,12 +21,13 @@ const RS = [{ i: 1, pins: [{ s: "brain" }] }, { i: 2, pins: [{ s: "brain" }] }, 
 const regs = P.immRegionSlices(RS, [["head", "Head", "brain"], ["chest", "Chest", "heart"], ["pelvis", "Pelvis", "urinary-bladder"]]);
 ok("immRegionSlices: middle of each run, absent anchors dropped", JSON.stringify(regs) === JSON.stringify([{ id: "head", label: "Head", i: 2 }, { id: "chest", label: "Chest", i: 3 }]));
 
-// --- native geometry fallback: R2 first, then the committed copy on the API host ---
+// --- native geometry fallback: R2 first, then the atlas copy on the media host
+// (owner 2026-11-17: atlas/ moved off Pages to stewardmd-public-media, tools/atlas-media-sync.mjs) ---
 const modN = { exports: {} };
 new Function("window", "document", "module", SRC)({ addEventListener() {}, SMD_IS_NATIVE: true, localStorage: { getItem() { return null; } } }, undefined, modN);
 const nb = modN.exports.dataBases();
-ok("native: R2 first, the API host's committed copy last (new bodies load before an R2 upload)", nb.join() === "https://models.stewardmd.in/atlas3d,https://stewardmd.in/atlas/3d");
-ok("native fallback maps chunk paths onto the API host", modN.exports.dataUrl("/atlas/3d/body-skeletal-10.01c457d3.bin.gz", nb[1]) === "https://stewardmd.in/atlas/3d/body-skeletal-10.01c457d3.bin.gz");
+ok("native: R2 first, the media-host copy last", nb.join() === "https://models.stewardmd.in/atlas3d,https://media.stewardmd.in/atlas/3d");
+ok("native fallback maps chunk paths onto the media host", modN.exports.dataUrl("/atlas/3d/body-skeletal-10.01c457d3.bin.gz", nb[1]) === "https://media.stewardmd.in/atlas/3d/body-skeletal-10.01c457d3.bin.gz");
 
 // --- display flip is its own inverse (a tap on the mirrored image maps back to the stored pin) ---
 ok("immShownX mirrors only when flipped", P.immShownX(30, true) === 70 && P.immShownX(30, false) === 30);
