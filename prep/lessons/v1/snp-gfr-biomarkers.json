@@ -1,203 +1,244 @@
 {
- "v": 1,
- "module": "snp-gfr-biomarkers",
- "title": "GFR estimation and kidney biomarkers",
- "minutes": 8,
- "gen": "AI",
- "steps": [
-  {
-   "tx": "The **CKD-EPI 2021** race-free creatinine estimating equation eliminates the historical race coefficient to provide standardized and unbiased GFR estimation across diverse clinical populations. By incorporating age, sex, and standardized serum **creatinine**, this updated algorithm maintains high diagnostic accuracy without perpetuating spurious demographic distinctions in estimated clearance across healthcare systems.",
-   "say": "The CKD-EPI 2021 race-free creatinine estimating equation eliminates the historical race coefficient to provide standardized and unbiased GFR estimation across diverse clinical populations. By incorporating age, sex, and standardized serum creatinine, this updated algorithm maintains high diagnostic accuracy without perpetuating spurious demographic distinctions in estimated clearance across healthcare systems.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "CKD-EPI 2021 Equation",
-     "points": [
-      "Eliminates race coefficient entirely",
-      "Incorporates age, sex, and creatinine",
-      "Standardized across diverse populations",
-      "Maintains high clinical precision"
-     ]
+  "v": 1,
+  "module": "snp-gfr-biomarkers",
+  "title": "GFR estimation and kidney biomarkers",
+  "minutes": 8,
+  "gen": "AI",
+  "steps": [
+    {
+      "tx": "The **CKD-EPI 2021** race-free creatinine estimating equation eliminates the historical race coefficient to provide standardized and unbiased GFR estimation across diverse clinical populations. By incorporating age, sex, and standardized serum **creatinine**, this updated algorithm maintains high diagnostic accuracy without perpetuating spurious demographic distinctions in estimated clearance across healthcare systems.",
+      "say": "The CKD-EPI 2021 race-free creatinine estimating equation eliminates the historical race coefficient to provide standardized and unbiased GFR estimation across diverse clinical populations. By incorporating age, sex, and standardized serum creatinine, this updated algorithm maintains high diagnostic accuracy without perpetuating spurious demographic distinctions in estimated clearance across healthcare systems.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CKD-EPI 2021 Equation",
+          "points": [
+            "Eliminates race coefficient entirely",
+            "Incorporates age, sex, and creatinine",
+            "Standardized across diverse populations",
+            "Maintains high clinical precision"
+          ]
+        },
+        "right": {
+          "title": "Legacy 2009 Equation",
+          "points": [
+            "Included categorical Black race coefficient",
+            "Systematically overestimated clearance",
+            "Delayed specialist nephrology referrals",
+            "Superseded by current consensus guidelines"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Legacy 2009 Equation",
-     "points": [
-      "Included categorical Black race coefficient",
-      "Systematically overestimated clearance",
-      "Delayed specialist nephrology referrals",
-      "Superseded by current consensus guidelines"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Endogenous serum **cystatin C** is freely filtered across glomerular capillaries and completely catabolized by proximal tubular cells without significant **tubular secretion**. Unlike creatinine, cystatin C-based clearance remains unaffected by total skeletal muscle mass, nutritional protein intake, or severe **sarcopenia**, establishing its clinical role as an ideal confirmatory filtration marker in frail individuals.",
-   "say": "Endogenous serum cystatin C is freely filtered across glomerular capillaries and completely catabolized by proximal tubular cells without significant tubular secretion. Unlike creatinine, cystatin C-based clearance remains unaffected by total skeletal muscle mass, nutritional protein intake, or severe sarcopenia, establishing its clinical role as an ideal confirmatory filtration marker in frail individuals.",
-   "vis": {
-    "kind": "image",
-    "src": "prep/lessons/media/ap-nephron-filtration.webp",
-    "alt": "Glomerular filtration barrier and cellular dynamics",
-    "caption": "Glomerular filtration barrier and tubular transport mechanisms (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "Direct plasma clearance of **iohexol**, inulin, or 51Cr-EDTA represents the gold-standard reference methodology for accurately determining true **measured GFR** in complex clinical scenarios. While mathematical estimating equations suffice for routine outpatient surveillance, gold-standard clearance measurements become mandatory during clinical trials, organ donor work-ups, and when body habitus extremes render creatinine unreliable.",
-   "say": "Direct plasma clearance of iohexol, inulin, or 51Cr-EDTA represents the gold-standard reference methodology for accurately determining true measured GFR in complex clinical scenarios. While mathematical estimating equations suffice for routine outpatient surveillance, gold-standard clearance measurements become mandatory during clinical trials, organ donor work-ups, and when body habitus extremes render creatinine unreliable.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Clinical equipoise in eGFR"
-     },
-     {
-      "id": "b",
-      "label": "Exogenous tracer injection (iohexol)"
-     },
-     {
-      "id": "c",
-      "label": "Serial plasma clearance curves"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Therapeutic administration of **Trimethoprim**, cimetidine, cobicistat, or dolutegravir reversibly elevates serum creatinine concentrations by selectively blocking basolateral organic cation transporter 2 (**OCT2**) and apical **MATE1** transporters. This pharmacological inhibition halts active proximal **creatinine secretion** without reducing true glomerular filtration, producing benign pseudonephrotoxicity that promptly resolves upon drug discontinuation.",
-   "say": "Therapeutic administration of Trimethoprim, cimetidine, cobicistat, or dolutegravir reversibly elevates serum creatinine concentrations by selectively blocking basolateral organic cation transporter 2 and apical MATE1 transporters. This pharmacological inhibition halts active proximal creatinine secretion without reducing true glomerular filtration, producing benign pseudonephrotoxicity that promptly resolves upon drug discontinuation.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "OCT2 and MATE1 Inhibitors",
-     "points": [
-      "Trimethoprim and cimetidine",
-      "Cobicistat and dolutegravir",
-      "Blocks tubular creatinine secretion",
-      "True filtration remains completely intact"
-     ]
+    {
+      "tx": "Endogenous serum **cystatin C** is freely filtered across glomerular capillaries and completely catabolized by proximal tubular cells without significant **tubular secretion**. Unlike creatinine, cystatin C-based clearance remains unaffected by total skeletal muscle mass, nutritional protein intake, or severe **sarcopenia**, establishing its clinical role as an ideal confirmatory filtration marker in frail individuals.",
+      "say": "Endogenous serum cystatin C is freely filtered across glomerular capillaries and completely catabolized by proximal tubular cells without significant tubular secretion. Unlike creatinine, cystatin C-based clearance remains unaffected by total skeletal muscle mass, nutritional protein intake, or severe sarcopenia, establishing its clinical role as an ideal confirmatory filtration marker in frail individuals.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-nephron-filtration.webp",
+        "alt": "Glomerular filtration barrier and cellular dynamics",
+        "caption": "Glomerular filtration barrier and tubular transport mechanisms (StewardMD).",
+        "ar": 1.7778
+      }
     },
-    "right": {
-     "title": "True Nephrotoxins",
-     "points": [
-      "Aminoglycosides and cisplatin",
-      "Direct proximal tubular cellular injury",
-      "Substantial fall in true measured GFR",
-      "Elevates structural damage biomarkers"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The historic **Cockcroft-Gault** equation estimates global **creatinine clearance** utilizing patient age, actual body weight, and serum creatinine concentrations, requiring multiplication by **0.85** in female patients to account for lower average lean muscle mass. Despite significant limitations in obese individuals, this legacy formula remains embedded in numerous pharmacopoeial drug dosing package inserts.",
-   "say": "The historic Cockcroft-Gault equation estimates global creatinine clearance utilizing patient age, actual body weight, and serum creatinine concentrations, requiring multiplication by 0.85 in female patients to account for lower average lean muscle mass. Despite significant limitations in obese individuals, this legacy formula remains embedded in numerous pharmacopoeial drug dosing package inserts.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Equation Parameter",
-     "Male Patients",
-     "Female Patients"
-    ],
-    "rows": [
-     [
-      "Lean mass factor",
-      "Unadjusted numerator",
-      "Multiply clearance by 0.85"
-     ],
-     [
-      "Weight metric",
-      "Ideal or actual weight",
-      "Ideal body weight preferred in obesity"
-     ],
-     [
-      "Clinical utility",
-      "Historical drug labelling",
-      "Legacy antimicrobials and chemotherapy"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Urinary and circulating **Neutrophil gelatinase-associated lipocalin** (**NGAL**) rises exponentially within **2** to **4** hours following acute toxic or ischemic tubular insult. Operating as an early structural **biomarker**, elevated NGAL levels signal acute epithelial cellular injury well before functional accumulation of serum creatinine becomes detectable, establishing a valuable early therapeutic window.",
-   "say": "Urinary and circulating Neutrophil gelatinase-associated lipocalin rises exponentially within 2 to 4 hours following acute toxic or ischemic tubular insult. Operating as an early structural biomarker, elevated NGAL levels signal acute epithelial cellular injury well before functional accumulation of serum creatinine becomes detectable, establishing a valuable early therapeutic window.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-gfr-biomarkers-fig1.webp",
-    "alt": "Renal functional reserve: GFR response to protein load",
-    "caption": "Renal functional reserve and early structural injury biomarker response (StewardMD).",
-    "ar": 1.7778
-   }
-  },
-  {
-   "tx": "Membrane-anchored **Kidney injury molecule-1** (**KIM-1**) is an upregulated transmembrane glycoprotein whose extracellular ectodomain is rapidly cleaved into the tubular lumen by metalloproteinases. Shedding occurs selectively from dedifferentiated **proximal tubular** epithelial cells undergoing ischemic or toxic necrosis, providing exceptional diagnostic specificity that distinguishes genuine intrinsic acute tubular necrosis from volume-responsive prerenal azotemia.",
-   "say": "Membrane-anchored Kidney injury molecule-1 is an upregulated transmembrane glycoprotein whose extracellular ectodomain is rapidly cleaved into the tubular lumen by metalloproteinases. Shedding occurs selectively from dedifferentiated proximal tubular epithelial cells undergoing ischemic or toxic necrosis, providing exceptional diagnostic specificity that distinguishes genuine intrinsic acute tubular necrosis from volume-responsive prerenal azotemia.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "KIM-1 Biomarker Signalling",
-     "points": [
-      "Selective proximal tubular expression",
-      "Ectodomain cleaved into urine",
-      "High specificity for structural damage",
-      "Facilitates clearance of luminal debris"
-     ]
+    {
+      "tx": "Direct plasma clearance of **iohexol**, inulin, or 51Cr-EDTA represents the gold-standard reference methodology for accurately determining true **measured GFR** in complex clinical scenarios. While mathematical estimating equations suffice for routine outpatient surveillance, gold-standard clearance measurements become mandatory during clinical trials, organ donor work-ups, and when body habitus extremes render creatinine unreliable.",
+      "say": "Direct plasma clearance of iohexol, inulin, or 51Cr-EDTA represents the gold-standard reference methodology for accurately determining true measured GFR in complex clinical scenarios. While mathematical estimating equations suffice for routine outpatient surveillance, gold-standard clearance measurements become mandatory during clinical trials, organ donor work-ups, and when body habitus extremes render creatinine unreliable.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Clinical equipoise in eGFR"
+          },
+          {
+            "id": "b",
+            "label": "Exogenous tracer injection (iohexol)"
+          },
+          {
+            "id": "c",
+            "label": "Serial plasma clearance curves"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Prerenal Azotemia State",
-     "points": [
-      "Intact tubular cellular architecture",
-      "Negligible urinary KIM-1 excretion",
-      "Intact sodium reabsorptive capacity",
-      "Normalizes rapidly with volume resuscitation"
-     ]
+    {
+      "tx": "Therapeutic administration of **Trimethoprim**, cimetidine, cobicistat, or dolutegravir reversibly elevates serum creatinine concentrations by selectively blocking basolateral organic cation transporter 2 (**OCT2**) and apical **MATE1** transporters. This pharmacological inhibition halts active proximal **creatinine secretion** without reducing true glomerular filtration, producing benign pseudonephrotoxicity that promptly resolves upon drug discontinuation.",
+      "say": "Therapeutic administration of Trimethoprim, cimetidine, cobicistat, or dolutegravir reversibly elevates serum creatinine concentrations by selectively blocking basolateral organic cation transporter 2 and apical MATE1 transporters. This pharmacological inhibition halts active proximal creatinine secretion without reducing true glomerular filtration, producing benign pseudonephrotoxicity that promptly resolves upon drug discontinuation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "OCT2 and MATE1 Inhibitors",
+          "points": [
+            "Trimethoprim and cimetidine",
+            "Cobicistat and dolutegravir",
+            "Blocks tubular creatinine secretion",
+            "True filtration remains completely intact"
+          ]
+        },
+        "right": {
+          "title": "True Nephrotoxins",
+          "points": [
+            "Aminoglycosides and cisplatin",
+            "Direct proximal tubular cellular injury",
+            "Substantial fall in true measured GFR",
+            "Elevates structural damage biomarkers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The historic **Cockcroft-Gault** equation estimates global **creatinine clearance** utilizing patient age, actual body weight, and serum creatinine concentrations, requiring multiplication by **0.85** in female patients to account for lower average lean muscle mass. Despite significant limitations in obese individuals, this legacy formula remains embedded in numerous pharmacopoeial drug dosing package inserts.",
+      "say": "The historic Cockcroft-Gault equation estimates global creatinine clearance utilizing patient age, actual body weight, and serum creatinine concentrations, requiring multiplication by 0.85 in female patients to account for lower average lean muscle mass. Despite significant limitations in obese individuals, this legacy formula remains embedded in numerous pharmacopoeial drug dosing package inserts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Equation Parameter",
+          "Male Patients",
+          "Female Patients"
+        ],
+        "rows": [
+          [
+            "Lean mass factor",
+            "Unadjusted numerator",
+            "Multiply clearance by 0.85"
+          ],
+          [
+            "Weight metric",
+            "Ideal or actual weight",
+            "Ideal body weight preferred in obesity"
+          ],
+          [
+            "Clinical utility",
+            "Historical drug labelling",
+            "Legacy antimicrobials and chemotherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Urinary and circulating **Neutrophil gelatinase-associated lipocalin** (**NGAL**) rises exponentially within **2** to **4** hours following acute toxic or ischemic tubular insult. Operating as an early structural **biomarker**, elevated NGAL levels signal acute epithelial cellular injury well before functional accumulation of serum creatinine becomes detectable, establishing a valuable early therapeutic window.",
+      "say": "Urinary and circulating Neutrophil gelatinase-associated lipocalin rises exponentially within 2 to 4 hours following acute toxic or ischemic tubular insult. Operating as an early structural biomarker, elevated NGAL levels signal acute epithelial cellular injury well before functional accumulation of serum creatinine becomes detectable, establishing a valuable early therapeutic window.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-gfr-biomarkers-fig1.webp",
+        "alt": "Renal functional reserve: GFR response to protein load",
+        "caption": "Renal functional reserve and early structural injury biomarker response (StewardMD).",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Membrane-anchored **Kidney injury molecule-1** (**KIM-1**) is an upregulated transmembrane glycoprotein whose extracellular ectodomain is rapidly cleaved into the tubular lumen by metalloproteinases. Shedding occurs selectively from dedifferentiated **proximal tubular** epithelial cells undergoing ischemic or toxic necrosis, providing exceptional diagnostic specificity that distinguishes genuine intrinsic acute tubular necrosis from volume-responsive prerenal azotemia.",
+      "say": "Membrane-anchored Kidney injury molecule-1 is an upregulated transmembrane glycoprotein whose extracellular ectodomain is rapidly cleaved into the tubular lumen by metalloproteinases. Shedding occurs selectively from dedifferentiated proximal tubular epithelial cells undergoing ischemic or toxic necrosis, providing exceptional diagnostic specificity that distinguishes genuine intrinsic acute tubular necrosis from volume-responsive prerenal azotemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "KIM-1 Biomarker Signalling",
+          "points": [
+            "Selective proximal tubular expression",
+            "Ectodomain cleaved into urine",
+            "High specificity for structural damage",
+            "Facilitates clearance of luminal debris"
+          ]
+        },
+        "right": {
+          "title": "Prerenal Azotemia State",
+          "points": [
+            "Intact tubular cellular architecture",
+            "Negligible urinary KIM-1 excretion",
+            "Intact sodium reabsorptive capacity",
+            "Normalizes rapidly with volume resuscitation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The urinary **cell cycle arrest** biomarker panel combines tissue inhibitor of metalloproteinases-2 (**TIMP-2**) and insulin-like growth factor-binding protein 7 (**IGFBP7**) under the commercial assay **NephroCheck**. An index value exceeding **0.3** assesses acute tubular cellular stress, accurately predicting the development of moderate to severe acute kidney injury within **12** hours.",
+      "say": "The urinary cell cycle arrest biomarker panel combines tissue inhibitor of metalloproteinases-2 and insulin-like growth factor-binding protein 7 under the commercial assay NephroCheck. An index value exceeding 0.3 assesses acute tubular cellular stress, accurately predicting the development of moderate to severe acute kidney injury within 12 hours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tubular epithelial stress"
+          },
+          {
+            "id": "b",
+            "label": "G1 cell cycle arrest (TIMP-2, IGFBP7)"
+          },
+          {
+            "id": "c",
+            "label": "Index > 0.3 predicts AKI in 12 hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Kidney function assessment questions test race-free CKD-EPI equations, cystatin C advantages, and inulin clearance gold standards. Inulin clearance represents the physiological reference standard for true GFR measurement. Serum cystatin C is freely filtered and unaffected by muscle mass, making it superior for validating borderline creatinine-based GFR. Creatinine tubular secretion causes overestimation of true GFR.",
+      "say": "High-yield for the exam: Kidney function assessment questions test race-free CKD-EPI equations, cystatin C advantages, and inulin clearance gold standards. Inulin clearance represents the physiological reference standard for true GFR measurement. Serum cystatin C is freely filtered and unaffected by muscle mass, making it superior for validating borderline creatinine-based GFR. Creatinine tubular secretion causes overestimation of true GFR.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Gold standard GFR",
+            "Inulin or iohexol plasma clearance represents true reference standard"
+          ],
+          [
+            "CKD-EPI 2021 equation",
+            "Race-free creatinine equation standardizes international GFR reporting"
+          ],
+          [
+            "Cystatin C advantages",
+            "Produced by all nucleated cells; independent of muscle mass or diet"
+          ],
+          [
+            "Creatinine secretion",
+            "Proximal tubular secretion via OCT2 overestimates GFR in advanced CKD"
+          ],
+          [
+            "Drugs blocking secretion",
+            "Trimethoprim and cimetidine increase serum creatinine without altering true GFR"
+          ],
+          [
+            "Cockcroft-Gault utility",
+            "Historic formula still required for certain FDA drug dosing labels"
+          ],
+          [
+            "Confirming CKD stage",
+            "CKD-EPI creatinine-cystatin C combined equation provides maximal diagnostic accuracy"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "The urinary **cell cycle arrest** biomarker panel combines tissue inhibitor of metalloproteinases-2 (**TIMP-2**) and insulin-like growth factor-binding protein 7 (**IGFBP7**) under the commercial assay **NephroCheck**. An index value exceeding **0.3** assesses acute tubular cellular stress, accurately predicting the development of moderate to severe acute kidney injury within **12** hours.",
-   "say": "The urinary cell cycle arrest biomarker panel combines tissue inhibitor of metalloproteinases-2 and insulin-like growth factor-binding protein 7 under the commercial assay NephroCheck. An index value exceeding 0.3 assesses acute tubular cellular stress, accurately predicting the development of moderate to severe acute kidney injury within 12 hours.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Tubular epithelial stress"
-     },
-     {
-      "id": "b",
-      "label": "G1 cell cycle arrest (TIMP-2, IGFBP7)"
-     },
-     {
-      "id": "c",
-      "label": "Index > 0.3 predicts AKI in 12 hours"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "refs": [
-  "Comprehensive Clinical Nephrology 7e Ch. 4",
-  "Brenner and Rector The Kidney 11e Ch. 27",
-  "KDIGO Clinical Practice Guideline for Acute Kidney Injury"
- ]
+  ],
+  "quiz": [],
+  "refs": [
+    "Comprehensive Clinical Nephrology 7e Ch. 4",
+    "Brenner and Rector The Kidney 11e Ch. 27",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury"
+  ]
 }
