@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-sodium",
+ "subject": "ss-general-medicine",
+ "title": "Hyponatraemia and Hypernatraemia",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hyponatraemia** (serum sodium below 135 mmol per litre) is the commonest electrolyte disorder in hospitals. **Hypernatraemia** (above 145 mmol per litre) signals water deficit with thirst. **Effective osmolality** (solute concentration) determines cell swelling, not sodium alone. **Syndrome of inappropriate antidiuresis** (SIADH, ADH excess) causes euvolemic hyponatraemia. Correction faster than **8 mmol per litre daily** risks osmotic demyelination.",
+   "say": "Hyponatraemia below one hundred thirty five is the commonest hospital electrolyte disorder. Hypernatraemia above one hundred forty five signals water deficit with thirst. Effective solute concentration determines cell swelling, not sodium alone. ADH excess causes euvolemic hyponatraemia and faster correction than eight per day risks brain injury.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypovolaemia** (volume depletion) stimulates ADH and retains free water. **Thiazide diuretics** (urine sodium losers) cause hyponatraemia with volume depletion. **SIADH** (malignancy, pneumonia, drugs) causes euvolemic water retention. **Hyperglycaemia** (high glucose) causes translocational hyponatraemia with normal cell osmolality. **Adrenal insufficiency** (cortisol lack) impairs free water excretion. **Hypernatraemia** follows diabetes insipidus and insensible losses.",
+   "say": "Volume depletion stimulates ADH and retains water. Thiazide diuretics cause hyponatraemia with depletion. Malignancy and pneumonia cause euvolemic retention and high glucose causes translocational hyponatraemia and cortisol lack impairs water excretion and diabetes insipidus causes hypernatraemia.",
+   "vis": null
+  },
+  {
+   "tx": "ADH inserts **aquaporin channels** (water pores) into collecting ducts, retaining free water. Hypovolaemia triggers **non osmotic ADH release** (volume driven retention). Hyperglycaemia shifts water extracellularly, diluting sodium. **Osmotic demyelination** (pontine myelin injury) follows rapid correction with brainstem failure. **Cerebral oedema** (brain swelling) follows acute hyponatraemia with seizures.",
+   "say": "ADH inserts water pores into collecting ducts and retains free water. Volume depletion triggers non osmotic hormone release and this is examined in viva examinations for revision. High glucose shifts water outside cells and dilutes sodium and rapid correction injures pontine myelin and acute hyponatraemia swells the brain and causes seizures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sodium fall"
+     },
+     {
+      "id": "b",
+      "label": "Cell swelling"
+     },
+     {
+      "id": "c",
+      "label": "Brain oedema"
+     },
+     {
+      "id": "d",
+      "label": "Seizures"
+     },
+     {
+      "id": "e",
+      "label": "Controlled correction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute severe hyponatraemia presents with seizures, coma and brain oedema from cell swelling. Chronic mild disease is often asymptomatic with subtle gait and cognition changes. **SIADH features** (euvolemia, concentrated urine, high urine sodium) classify the cause. **Hypernatraemia** presents with thirst, dry mucosa and confusion. **Hypernatraemia in elderly** (poor thirst) presents with delirium. Volume status examination distinguishes hypovolemia clearly.",
+   "say": "Acute severe disease presents with seizures and coma and brain swelling. Chronic mild disease is often asymptomatic with subtle gait changes. Euvolemia with concentrated urine classifies SIADH. Hypernatraemia presents with thirst and confusion and elderly patients present with delirium and volume examination distinguishes depletion.",
+   "vis": null
+  },
+  {
+   "tx": "**Serum osmolality** (solute concentration) with **urine osmolality and sodium** (concentration tests) classify hyponatraemia. **Corrected sodium** (glucose adjusted value) corrects hyperglycaemic dilution. **Thyroid and cortisol** (hormone tests) exclude endocrine causes. **Chest imaging** (SIADH malignancy screen) excludes lung cancer. **Medication review** (thiazides, SSRIs) identifies precipitants. **Urine output charting** (volume tracking) guides fluid therapy.",
+   "say": "Serum and urine concentration tests classify hyponatraemia. Glucose adjusted sodium corrects hyperglycaemic dilution. Thyroid and cortisol exclude endocrine causes and chest imaging excludes lung cancer and medication review identifies precipitants and volume charting guides fluid therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Serum plus urine osmolality",
+      "Classification",
+      "Concentrated urine SIADH"
+     ],
+     [
+      "Corrected sodium",
+      "Glucose adjustment",
+      "Hyperglycaemic dilution"
+     ],
+     [
+      "Thyroid cortisol",
+      "Endocrine screen",
+      "Adrenal hypothyroid exclusion"
+     ],
+     [
+      "Chest imaging",
+      "Malignancy screen",
+      "Lung SIADH cause"
+     ],
+     [
+      "Medication review",
+      "Precipitant find",
+      "Thiazides SSRIs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fluid restriction** (1 litre daily) is first line for SIADH. **Salt tablets** (sodium chloride) with oral urea augment free water clearance. **Loop diuretics** (frusemide) with salt tablets treat severe SIADH. **Euvolemia correction** (dehydration repair) treats hypovolaemic disease. **Vasopressin antagonists** (tolvaptan) are reserved for severe SIADH with monitoring. Correction limits at 8 mmol per litre daily.",
+   "say": "Fluid restriction at one litre daily is first line for SIADH. Salt tablets with urea augment water clearance and this is examined in viva examinations for revision. Loop diuretics with salt treat severe disease and dehydration repair treats hypovolaemic disease and antagonists are reserved with monitoring and correction limits at eight per day.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypertonic saline** (3 percent saline) bolus treats seizures and coma from acute hyponatraemia. **Desmopressin clamp** (DDAVP, ADH analogue) prevents overcorrection during therapy. **Hypernatraemia correction** (free water replacement) uses 5 percent dextrose with slow fall below 10 mmol per litre daily. **Potassium repletion** (KCl) corrects total body depletion. **Osmotic demyelination** (pontine injury) needs slow recorrection and physiotherapy.",
+   "say": "Hypertonic saline bolus treats seizures and coma and this is examined in viva examinations for revision. Desmopressin clamp prevents overcorrection. Hypernatraemia needs free water with slow fall below ten per day and potassium repletion corrects depletion and pontine injury needs slow recorrection and physiotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyponatraemia care",
+     "points": [
+      "Fluid restriction first",
+      "Hypertonic for seizures",
+      "Limit 8 per day",
+      "Desmopressin clamp"
+     ]
+    },
+    "right": {
+     "title": "Hypernatraemia care",
+     "points": [
+      "Free water replacement",
+      "Five percent dextrose",
+      "Limit 10 per day",
+      "Watch for cerebral oedema"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Glucose correction** (insulin therapy) reverses translocational hyponatraemia without fluid shifts. **Adrenal replacement** (hydrocortisone) corrects adrenal hyponatraemia. **Thyroxine replacement** (thyroid hormone) corrects hypothyroid hyponatraemia. **Diabetes insipidus therapy** (desmopressin) treats central disease. **Nephrogenic insipidus** (resistant kidney) needs thiazides with low salt diet.",
+   "say": "Insulin therapy reverses translocational disease without fluid shifts and this is examined in viva examinations for revision. Hydrocortisone corrects adrenal disease and thyroid hormone corrects hypothyroid disease and desmopressin treats central insipidus and resistant kidney disease needs thiazides with low salt diet.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute hyponatraemia** mortality is driven by cerebral oedema and underlying malignancy. Osmotic demyelination mortality exceeds 30 percent once established. Hypernatraemia mortality in elderly exceeds 40 percent from dehydration and sepsis. Chronic SIADH prognosis depends on lung cancer stage. Correction discipline determines survival more than admission sodium.",
+   "say": "Acute mortality is driven by brain swelling and underlying malignancy. Pontine injury mortality exceeds thirty percent once established. Elderly hypernatraemia mortality exceeds forty percent and chronic SIADH prognosis depends on cancer stage and correction discipline determines survival and this is examined in viva examinations for revision.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2023 hyponatraemia guidance stresses volume classification, desmopressin clamps and correction limits. **Osmotic demyelination** (pontine injury) prevention dominates management. Examination traps include correcting chronic disease rapidly, missing glucose correction, and giving fluids in SIADH. **Corrected sodium formula** (glucose adjusted) is a favourite calculation vignette.",
+   "say": "Current guidance stresses volume classification and clamps and correction limits and this is examined in viva examinations for revision. Pontine injury prevention dominates management. Traps include rapid correction and missing glucose correction and giving fluids in SIADH and glucose adjusted formula is a favourite calculation vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers sodium thresholds, correction limits and SIADH tests. Eight per day and ten per day limits are the most asked points in theory and viva examinations. Careful rehearsal of diagnostic cutoffs aids viva performance. Corrected sodium 8 per day aids interpretation.",
+   "say": "This table gathers sodium thresholds and correction limits and SIADH tests for revision. Limits of eight and ten per day are the most asked points. Glucose adjusted formula is a favourite calculation vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Hyponatraemia cutoff",
+      "Below 135 mmol per litre"
+     ],
+     [
+      "Hypernatraemia cutoff",
+      "Above 145 mmol per litre"
+     ],
+     [
+      "Correction limit hypo",
+      "8 per day"
+     ],
+     [
+      "Correction limit hyper",
+      "10 per day"
+     ],
+     [
+      "Seizure drug",
+      "3 percent saline bolus"
+     ],
+     [
+      "SIADH first line",
+      "Fluid restriction"
+     ],
+     [
+      "Glucose adjustment",
+      "Corrected sodium"
+     ],
+     [
+      "Overcorrection guard",
+      "Desmopressin clamp"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}
