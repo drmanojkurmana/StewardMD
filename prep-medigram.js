@@ -18,7 +18,7 @@
   if (!FLAGS.parent) return;
 
   var BATCH = 18, L = ["A", "B", "C", "D", "E", "F"];
-  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, seen }
+  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, vt, fs, seen }
   var VIDS = null, IMGS = null;
 
   function H() { return S.host; }
@@ -109,7 +109,7 @@
       return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch' + (c.s ? " · " + esc(subjName(c.s) || c.s.charAt(0).toUpperCase() + c.s.slice(1)) : "") + "</p>" + '<p class="vf-stem">' + esc(c.title) + "</p>" +
         // The poster is a background, not an <img>: a tap must start the video, never open the image zoom viewer.
         '<div class="pn-mg-frame" role="button" tabindex="0" data-act="mg-play" data-i="' + i + '" aria-label="Play video: ' + esc(c.title) + '" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg\')"><span class="pn-mg-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>' +
-        '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
+        vctl() + '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
     }
     if (c.kind === "lesson") return '<article class="vf-c pn-mg-c"' + a + '><p class="pn-mg-tag">Lesson · ' + esc(subjName(c.sid)) + '</p><p class="vf-big">' + esc(c.title) + '</p><p class="pn-mut">' + (c.minutes ? c.minutes + " min read, built from the questions you just met." : "Built from the questions you just met.") + '</p><button type="button" class="pn-btn pri" data-act="mg-lesson" data-i="' + i + '">Open lesson</button></article>';
     if (c.kind === "img") {
@@ -124,6 +124,37 @@
       (done ? '<p class="vf-why" role="status"><b>' + (c.ans === it.a ? "Right. " : "Answer: " + L[it.a] + ". ") + "</b>" + esc(firstSentence(it.exp || (it.x && it.x.key))) + "</p>" +
         '<div class="pn-mg-row"><button type="button" class="pn-btn pri" data-act="mg-next" data-i="' + i + '">Next</button>' +
         (G.PREP_ASK && G.PREP_ASK.open ? '<button type="button" class="pn-btn" data-act="mg-understand" data-i="' + i + '">Explain simply</button>' : "") + "</div>" : "") + "</article>";
+  }
+  /* Our own controls under the player (YouTube's overlay hides itself on touch screens): back 10 s, play/pause,
+     forward 10 s, sound, fullscreen. Commands go to the shim (prep-medigram-media.js command), state comes back. */
+  var VI = { back: '<path d="M11 7l-5 5 5 5M18 7l-5 5 5 5"/>', fwd: '<path d="M6 7l5 5-5 5M13 7l5 5-5 5"/>', play: '<path d="M8 5v14l11-7z" fill="currentColor"/>', pause: '<path d="M8 5v14M16 5v14"/>',
+    snd: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9a4 4 0 010 6"/>', mute: '<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9l4 6M21 9l-4 6"/>', fs: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>', exit: '<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>' };
+  function vi(n) { return '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + VI[n] + "</svg>"; }
+  function vctl() {
+    return '<div class="pn-mg-vctl" role="group" aria-label="Video controls">' +
+      '<button type="button" data-act="mg-v" data-v="back" aria-label="Back 10 seconds">' + vi("back") + "</button>" +
+      '<button type="button" data-act="mg-v" data-v="toggle" data-k="play" aria-label="Pause">' + vi("pause") + "</button>" +
+      '<button type="button" data-act="mg-v" data-v="fwd" aria-label="Forward 10 seconds">' + vi("fwd") + "</button>" +
+      '<button type="button" data-act="mg-v" data-v="sound" data-k="snd" aria-label="Mute">' + vi("snd") + "</button>" +
+      '<button type="button" data-act="mg-fs" aria-label="Full screen">' + vi("fs") + "</button></div>";
+  }
+  // Reflect the live player in its card's buttons (icon + label), without repainting the reel.
+  function showState(live) {
+    var card = live && live.holder && live.holder.closest(".pn-mg-vid");
+    if (!card) return;
+    var t = card.querySelector('[data-v="toggle"]'), m = card.querySelector('[data-v="sound"]'), playing = live.state === 1 || live.state === 3;
+    if (t) { t.innerHTML = vi(playing ? "pause" : "play"); t.setAttribute("aria-label", playing ? "Pause" : "Play"); }
+    if (m) { m.innerHTML = vi(live.muted ? "mute" : "snd"); m.setAttribute("aria-label", live.muted ? "Unmute" : "Mute"); }
+  }
+  if (MEDIA && MEDIA.onState) MEDIA.onState(showState);
+  function setFull(card, on) {
+    var box = H().root() && H().root().querySelector("#pnMgFeed");
+    if (S.fs && S.fs !== card) S.fs.classList.remove("pn-mg-fs");
+    S.fs = on ? card : null;
+    if (card) card.classList.toggle("pn-mg-fs", !!on);
+    if (box) { box.classList.toggle("pn-mg-fsbox", !!on); var body = box.closest(".pn-body"); if (body) body.classList.toggle("pn-mg-fsbody", !!on); }
+    var b = card && card.querySelector("[data-act=mg-fs]");
+    if (b) { b.innerHTML = vi(on ? "exit" : "fs"); b.setAttribute("aria-label", on ? "Exit full screen" : "Full screen"); }
   }
   function subtitle() { return S.done ? S.right + " of " + S.done + " right" : "Swipe up for the next"; }
   function render(scrollTo) {
@@ -147,7 +178,7 @@
      plays at a time. Measured with getBoundingClientRect after scrolling settles (not IntersectionObserver, which did
      not fire for the reel box in the iPad WebView, 2026-11-17 recording). A tap on the poster also plays it. */
   function syncVideo() {
-    if (!S || !MEDIA) return;
+    if (!S || !MEDIA || S.fs) return;   // a full-screen video stays put while the reel underneath settles
     var box = H().root() && H().root().querySelector("#pnMgFeed");
     if (!box) return;
     var r = box.getBoundingClientRect(), mid = r.top + r.height / 2, on = null;
@@ -185,7 +216,7 @@
   }
   function tickBreak() { if (!S || !S.brk || S.mode !== "break") return stopBreakTimer(); if (DATA.breakState(S.brk, Date.now()).expired) stopBreakTimer(); renderBreak(); }
   function stopBreakTimer() { if (S && S.timer) { G.clearInterval(S.timer); S.timer = 0; } }
-  function stopMedia() { if (MEDIA) MEDIA.release(); if (S) G.clearTimeout(S.vt); }
+  function stopMedia() { if (S && S.fs) setFull(S.fs, false); if (MEDIA) MEDIA.release(); if (S) G.clearTimeout(S.vt); }
   function setMode(mode) { stopMedia(); stopBreakTimer(); S.brk = null; S.mode = mode; S.cards = []; S.seen = {}; S.top = 0; S.done = S.right = 0; if (mode === "break") return renderBreak(); load(); }
 
   function start(host, mode) {
@@ -227,6 +258,15 @@
       return;
     }
     if (a === "mg-play") { playIn(el.closest(".pn-mg-vid")); return; }
+    if (a === "mg-v" || a === "mg-fs") {
+      var card = el.closest(".pn-mg-vid"), live = MEDIA && MEDIA.current();
+      if (!live || live.holder.closest(".pn-mg-vid") !== card) { playIn(card); live = MEDIA && MEDIA.current(); }   // a control on a card not yet playing starts it
+      if (a === "mg-fs") return setFull(card, !card.classList.contains("pn-mg-fs"));
+      if (v === "back" || v === "fwd") MEDIA.command("seek", v === "back" ? -10 : 10);
+      else if (v === "toggle") MEDIA.command(live && (live.state === 1 || live.state === 3) ? "pause" : "play");
+      else if (v === "sound") MEDIA.command(live && live.muted ? "unmute" : "mute");
+      return;
+    }
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
     if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
     if (a === "mg-understand") {
@@ -241,7 +281,7 @@
     if (a === "mg-break-extend") { S.brk = DATA.extendBreak(S.brk, 3); stopBreakTimer(); S.timer = G.setInterval(tickBreak, 1000); return renderBreak(); }
     if (a === "mg-break-return") { emit("break_returned", {}); return setMode("study"); }
   }
-  function back() { stopMedia(); return false; }
+  function back() { if (S && S.fs) { setFull(S.fs, false); return true; } stopMedia(); return false; }
   function leave() { stopMedia(); stopBreakTimer(); S = null; }
 
   G.PREP_MEDIGRAM = { open: start, act: act, back: back, leave: leave, homeHtml: homeHtml, homeRow: homeRowHtml, _flags: FLAGS, _s: function () { return S; } };

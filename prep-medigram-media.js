@@ -28,7 +28,18 @@
   /* ================= browser ================= */
   /* One live player, inside the app (never a hand-off to the YouTube app or site). It autoplays when its card arrives
      and is removed when the card leaves, so nothing plays off screen. */
-  var live = null;   // { holder, iframe }
+  var live = null, onState = null;   // live = { holder, iframe, videoId, state, muted }
+  // The shim reports { smdYt, v, state, muted } (YouTube states: 1 playing, 2 paused, 3 buffering, 0 ended).
+  try { G.addEventListener("message", function (e) {
+    var d = e && e.data;
+    if (!live || !d || d.smdYt !== true || d.v !== live.videoId || e.source !== live.iframe.contentWindow) return;
+    live.state = d.state; live.muted = !!d.muted;
+    if (onState) try { onState(live); } catch (x) {}
+  }); } catch (e) {}
+  function command(cmd, by) {
+    if (!live || !live.iframe.contentWindow) return false;
+    try { live.iframe.contentWindow.postMessage({ smdCmd: cmd, by: by || 0 }, "https://stewardmd.in"); return true; } catch (e) { return false; }
+  }
   function release() {
     if (!live) return;
     try { if (live.iframe.parentNode) live.iframe.parentNode.removeChild(live.iframe); } catch (e) {}
@@ -47,11 +58,11 @@
     f.setAttribute("allowfullscreen", "");
     holder.appendChild(f);
     holder.classList.add("on");
-    live = { holder: holder, iframe: f };
+    live = { holder: holder, iframe: f, videoId: videoId, state: -1, muted: false };
   }
   try {
     G.document.addEventListener("visibilitychange", function () { if (G.document.visibilityState === "hidden") release(); });
     G.addEventListener("pagehide", release);
   } catch (e) {}
-  G.PREP_MG_MEDIA = { validVideoId: validVideoId, shimUrl: shimUrl, videosFrom: videosFrom, mount: mount, release: release, _pure: PURE };
+  G.PREP_MG_MEDIA = { validVideoId: validVideoId, shimUrl: shimUrl, videosFrom: videosFrom, mount: mount, release: release, command: command, current: function () { return live; }, onState: function (fn) { onState = fn; }, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);
