@@ -105,6 +105,47 @@
     "caption": "An interval crossing the null line is compatible with no effect. Width is precision.",
     "ar": 1.5384615384615385
    }
+  },
+  {
+   "tx": "**High-yield for the exam**: The choice of statistical hypothesis test depends on the type and distribution of data. Compare two independent continuous normal variables using Student unpaired t-test, and paired normal data using paired t-test. For non-parametric continuous data, use Mann-Whitney U test for two independent groups and Wilcoxon signed-rank test for paired data. Compare three or more continuous groups with ANOVA or Kruskal-Wallis. Analyze categorical proportions with Pearson chi-square test or Fisher exact test when expected cell counts are under five.",
+   "say": "The choice of statistical hypothesis test depends on the type and distribution of data. Compare two independent continuous normal variables using Student unpaired t-test, and paired normal data using paired t-test. For non-parametric continuous data, use Mann-Whitney U test for two independent groups and Wilcoxon signed-rank test for paired data. Compare three or more continuous groups with ANOVA or Kruskal-Wallis. Analyze categorical proportions with Pearson chi-square test or Fisher exact test when expected cell counts are under five.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Two independent normal means",
+      "Student independent samples two-tailed t-test"
+     ],
+     [
+      "Two paired continuous normal variables",
+      "Paired t-test comparing before and after values"
+     ],
+     [
+      "Two independent skewed non-parametric groups",
+      "Mann-Whitney U test Wilcoxon rank-sum test"
+     ],
+     [
+      "Paired non-parametric continuous variables",
+      "Wilcoxon signed-rank test for matched observations"
+     ],
+     [
+      "Three or more normal continuous groups",
+      "One-way analysis of variance ANOVA test"
+     ],
+     [
+      "Three or more non-parametric groups",
+      "Kruskal-Wallis non-parametric analysis of variance"
+     ],
+     [
+      "Categorical contingency tables",
+      "Pearson chi-square test, or Fisher exact test if cell under five"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [
