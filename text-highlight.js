@@ -229,7 +229,16 @@
     left = Math.max(12, Math.min(vw - w - 12, left));
     p.style.left = left + "px"; p.style.top = Math.round(top) + "px";
   }
-  function hide() { if (pal) pal.classList.remove("on"); cur = null; }
+  /* OUR SELECTION, NOT THE SYSTEM'S (owner, 2026-11-14: "Copy menu still appears ... select just for highlight").
+   * iOS shows its Copy / Look Up menu for as long as a native selection exists, and no web API turns that menu off.
+   * So once the finger lifts and the selection settles, the range is copied, the native selection is cleared (the
+   * menu and the handles go with it) and the same words are painted with the CSS Custom Highlight API instead.
+   * The palette then acts on that range. Where the API is missing, the native selection stays (old behaviour). */
+  var HL_NAME = "smd-hl-sel", touching = 0;
+  function canPaint() { try { return !!(G.CSS && G.CSS.highlights && typeof G.Highlight === "function"); } catch (e) { return false; } }
+  function paintSel(range) { try { G.CSS.highlights.set(HL_NAME, new G.Highlight(range)); return true; } catch (e) { return false; } }
+  function unpaintSel() { try { if (G.CSS && G.CSS.highlights) G.CSS.highlights.delete(HL_NAME); } catch (e) {} }
+  function hide() { if (pal) pal.classList.remove("on"); cur = null; unpaintSel(); }
 
   function recOf(key, id) { var a = list(key); for (var i = 0; i < a.length; i++) if (a[i].id === id) return a[i]; return null; }
 
@@ -270,7 +279,7 @@
     applying = true;
     try { wrap(map, cur.s, cur.e, rec); } finally { applying = false; }
     arr.push(rec); put(key, arr);
-    clearSel();
+    clearSel(); unpaintSel();
     cur = { root: root, key: key, id: rec.id, rect: markRect(root, rec.id) };   // stay open on the new highlight so bold + colour combine
     drawPal(rec);
   }
@@ -294,14 +303,20 @@
     clearTimeout(selT);
     selT = setTimeout(function () {
       var s = G.getSelection && G.getSelection();
+      // Our own clearing of the native selection (see paintSel) must not close the palette it just opened.
+      if ((!s || s.isCollapsed || !s.rangeCount) && cur && cur.painted) return;
       if (!s || s.isCollapsed || !s.rangeCount) { if (cur && !cur.id) hide(); return; }
+      // Still dragging a handle: wait for the finger to lift, so the range is the one the reader meant.
+      if (touching > 0) { onSel(); return; }
       var r = s.getRangeAt(0), root = rootOf(r.commonAncestorContainer);
       if (!root) { if (cur && !cur.id) hide(); return; }
       var map = textMap(root), a = offsetOf(map, r.startContainer, r.startOffset), z = offsetOf(map, r.endContainer, r.endOffset);
       if (a < 0 || z < 0) return;
       var t = trimRange(map.text, Math.min(a, z), Math.max(a, z));
       if (t[1] - t[0] < 1) return;
-      cur = { root: root, key: root.getAttribute("data-hl-key"), s: t[0], e: t[1], rect: function () { return r.getBoundingClientRect(); } };
+      var keep = r.cloneRange();
+      cur = { root: root, key: root.getAttribute("data-hl-key"), s: t[0], e: t[1], rect: function () { return keep.getBoundingClientRect(); } };
+      if (canPaint() && paintSel(keep)) { cur.painted = true; clearSel(); }
       drawPal(null);
       place(cur.rect());
     }, 220);
@@ -336,6 +351,10 @@
   function init() {
     if (!D || !D.body) return;
     D.addEventListener("selectionchange", onSel);
+    D.addEventListener("touchstart", function () { touching++; }, { passive: true, capture: true });
+    var lift = function (e) { touching = Math.max(0, (e.touches && e.touches.length) || 0); };
+    D.addEventListener("touchend", lift, { passive: true, capture: true });
+    D.addEventListener("touchcancel", lift, { passive: true, capture: true });
     D.addEventListener("click", onTap, true);
     // Scrolling keeps the palette with its text; it closes once that text leaves the screen.
     var scT = 0;

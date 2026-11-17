@@ -69,6 +69,10 @@ try {
   ok(await ev(inside), 'history text inside the banner');
   ok(await ev(`(()=>{const p=document.querySelector('#hrfBanner .th-face-pic').getBoundingClientRect();return [...document.querySelector('#hrfBanner .th-face-txt').children].slice(1).every(n=>n.getBoundingClientRect().right<=p.left+1)})()`), 'picture clear of the text (the eyebrow runs over the top of the picture on purpose)');
   ok(await ev(`!document.querySelector('#hrfBanner .th-face-go')`), 'no Tap to explore on the face');
+  // Owner 2026-11-16: the flipped face is the same green as the Pro card, and its date line is not green.
+  const look = JSON.parse(await ev(`(()=>{const b=document.getElementById('hrfBanner'), f=b.querySelector('.th-face'); if(f.classList.contains('th-india')) return '{"india":1}'; b.classList.remove('th-back'); const front=getComputedStyle(b).backgroundImage; b.classList.add('th-back'); const ey=getComputedStyle(f.querySelector('.th-face-ey')).color.match(/[0-9]+/g).map(Number); return JSON.stringify({same:getComputedStyle(f).backgroundImage===front, gl:!!f.querySelector('canvas.th-aurora'), ey})})()`));
+  ok(look.india || (look.same && !look.gl), 'history face wears the Pro card gradient, no aurora: ' + JSON.stringify(look));
+  ok(look.india || (look.ey[0] > look.ey[1] && look.ey[0] > 200), 'date line is warm, not green: ' + JSON.stringify(look.ey));
   ok(await ev(`!!document.querySelector('#hrfBanner .th-face-art, #hrfBanner .th-face-img')`), 'face has a picture');
   ok(await ev(`/^This day in medical history, [0-9]{4}: /.test(document.getElementById('hrfBanner').getAttribute('aria-label'))`), 'banner name follows the face');
   ok(await ev(`document.documentElement.scrollWidth<=innerWidth`), 'no sideways scroll');

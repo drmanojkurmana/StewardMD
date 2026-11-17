@@ -12,11 +12,29 @@
     "kind": "flow",
     "title": "Through the gate",
     "nodes": [
-     {"id": "pyr", "label": "Pyruvate enters mitochondria"},
-     {"id": "pdh", "label": "PDH complex decarboxylates"},
-     {"id": "aco", "label": "Acetyl-CoA to TCA or fat"}
+     {
+      "id": "pyr",
+      "label": "Pyruvate enters mitochondria"
+     },
+     {
+      "id": "pdh",
+      "label": "PDH complex decarboxylates"
+     },
+     {
+      "id": "aco",
+      "label": "Acetyl-CoA to TCA or fat"
+     }
     ],
-    "edges": [["pyr", "pdh"], ["pdh", "aco"]]
+    "edges": [
+     [
+      "pyr",
+      "pdh"
+     ],
+     [
+      "pdh",
+      "aco"
+     ]
+    ]
    }
   },
   {
@@ -24,11 +42,27 @@
    "say": "Three enzymes share the work. E1 decarboxylates with thiamine pyrophosphate, E2 transfers the acetyl group to coenzyme A through a swinging lipoamide arm, and E3 restores the arm using FAD and NAD. Five coenzymes cooperate: thiamine, lipoic acid, coenzyme A, FAD and NAD.",
    "vis": {
     "kind": "table",
-    "cols": ["Subunit", "Coenzyme it uses", "Job in one line"],
+    "cols": [
+     "Subunit",
+     "Coenzyme it uses",
+     "Job in one line"
+    ],
     "rows": [
-     ["E1 pyruvate dehydrogenase", "Thiamine pyrophosphate (B1)", "Removes carbon dioxide"],
-     ["E2 transacetylase", "Lipoic acid, then CoA (B5)", "Hands acetyl to CoA"],
-     ["E3 dihydrolipoyl dehydrogenase", "FAD (B2), then NAD (B3)", "Resets the arm, makes NADH"]
+     [
+      "E1 pyruvate dehydrogenase",
+      "Thiamine pyrophosphate (B1)",
+      "Removes carbon dioxide"
+     ],
+     [
+      "E2 transacetylase",
+      "Lipoic acid, then CoA (B5)",
+      "Hands acetyl to CoA"
+     ],
+     [
+      "E3 dihydrolipoyl dehydrogenase",
+      "FAD (B2), then NAD (B3)",
+      "Resets the arm, makes NADH"
+     ]
     ]
    }
   },
@@ -37,8 +71,21 @@
    "say": "A kinase switches the complex off when NADH, acetyl-CoA or ATP announce that energy is abundant. A phosphatase switches it back on when ADP, calcium or insulin request more oxidation. Pyruvate itself restrains the kinase, so substrate arrival opens its own gate.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Kinase dominates (OFF)", "points": ["NADH and acetyl-CoA high", "ATP plentiful", "E1 phosphorylated, gate shut"]},
-    "right": {"title": "Phosphatase dominates (ON)", "points": ["ADP and calcium signal work", "Insulin after meals", "E1 dephosphorylated, gate open"]
+    "left": {
+     "title": "Kinase dominates (OFF)",
+     "points": [
+      "NADH and acetyl-CoA high",
+      "ATP plentiful",
+      "E1 phosphorylated, gate shut"
+     ]
+    },
+    "right": {
+     "title": "Phosphatase dominates (ON)",
+     "points": [
+      "ADP and calcium signal work",
+      "Insulin after meals",
+      "E1 dephosphorylated, gate open"
+     ]
     }
    }
   },
@@ -52,12 +99,27 @@
    "say": "Thiamine deficiency disables the same gate from the coenzyme side, so giving glucose first can precipitate crisis. Pyruvate cannot pass, lactate climbs, and brainstem nuclei fail as Wernicke encephalopathy. Thiamine before glucose prevents this predictable worsening.",
    "vis": {
     "kind": "table",
-    "cols": ["Clue", "Points toward"],
+    "cols": [
+     "Clue",
+     "Points toward"
+    ],
     "rows": [
-     ["Alcohol dependence, vomiting, poor intake", "Thiamine stores empty in weeks"],
-     ["Confusion plus ataxia plus nystagmus", "Wernicke encephalopathy, treat now"],
-     ["Lactate rises after glucose load", "PDH blocked at E1"],
-     ["Confabulation persists after treatment", "Korsakoff memory syndrome"]
+     [
+      "Alcohol dependence, vomiting, poor intake",
+      "Thiamine stores empty in weeks"
+     ],
+     [
+      "Confusion plus ataxia plus nystagmus",
+      "Wernicke encephalopathy, treat now"
+     ],
+     [
+      "Lactate rises after glucose load",
+      "PDH blocked at E1"
+     ],
+     [
+      "Confabulation persists after treatment",
+      "Korsakoff memory syndrome"
+     ]
     ]
    }
   },
@@ -66,9 +128,63 @@
    "say": "Children born with a faulty complex present with congenital lactic acidosis, hypotonia, seizures and developmental delay. Dichloroacetate inhibits the kinase and holds residual enzyme active. This neurology picture contrasts with the haemolysis of pyruvate kinase deficiency.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "PDH deficiency picture", "points": ["Brain and lactate dominate", "Onset in infancy", "Acidosis without haemolysis"]},
-    "right": {"title": "Pyruvate kinase deficiency picture", "points": ["Red cells and spleen dominate", "Chronic haemolysis", "Lactate usually normal"]
+    "left": {
+     "title": "PDH deficiency picture",
+     "points": [
+      "Brain and lactate dominate",
+      "Onset in infancy",
+      "Acidosis without haemolysis"
+     ]
+    },
+    "right": {
+     "title": "Pyruvate kinase deficiency picture",
+     "points": [
+      "Red cells and spleen dominate",
+      "Chronic haemolysis",
+      "Lactate usually normal"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The pyruvate dehydrogenase complex requires five coenzymes: thiamine pyrophosphate, lipoamide, coenzyme A, FAD, and NAD+. Pyruvate dehydrogenase kinase inactivates the complex by phosphorylation in response to elevated acetyl-CoA and NADH. Inherited deficiency presents with congenital lactic acidosis, psychomotor delay, and Leigh syndrome. Treatment includes a ketogenic diet high in fat with leucine and lysine.",
+   "say": "The pyruvate dehydrogenase complex requires five coenzymes: thiamine pyrophosphate, lipoamide, coenzyme A, FAD, and NAD+. Pyruvate dehydrogenase kinase inactivates the complex by phosphorylation in response to elevated acetyl-CoA and NADH. Inherited deficiency presents with congenital lactic acidosis, psychomotor delay, and Leigh syndrome. Treatment includes a ketogenic diet high in fat with leucine and lysine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Coenzymes required",
+      "Thiamine pyrophosphate, lipoic acid, CoA, FAD, and NAD+"
+     ],
+     [
+      "Kinase regulation",
+      "Inactivates enzyme via phosphorylation when ATP or NADH rise"
+     ],
+     [
+      "Phosphatase activation",
+      "Activates enzyme via dephosphorylation triggered by calcium ions"
+     ],
+     [
+      "Arsenite poisoning",
+      "Binds sulfhydryl groups of lipoic acid halting activity"
+     ],
+     [
+      "Wernicke-Korsakoff trigger",
+      "Giving intravenous glucose before thiamine in alcohol dependency"
+     ],
+     [
+      "Inherited deficiency diet",
+      "Ketogenic diet with ketogenic amino acids leucine and lysine"
+     ],
+     [
+      "Commonest genetic cause",
+      "X-linked E1-alpha subunit mutation causing Leigh syndrome"
+     ]
+    ]
    }
   }
  ],

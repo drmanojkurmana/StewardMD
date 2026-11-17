@@ -31,8 +31,9 @@
     var m = String(search || "").match(new RegExp("[?&]" + key + "=([^&]+)"));
     return m ? decodeURIComponent(m[1]) : null;
   }
-  /* resolveFlags({ prepEnabled, get(key)->string|null, search }) -> mode switches. Parent default OFF and
-     requires smd_prep; Study defaults ON when the parent is on, the other modes and YouTube default OFF. */
+  /* resolveFlags({ prepEnabled, get(key)->string|null, search }) -> mode switches. Parent default ON since
+     2026-11-17 (still requires smd_prep); Study defaults ON when the parent is on, YouTube defaults ON,
+     the other modes default OFF. */
   function resolveFlags(env) {
     env = env || {};
     var get = env.get || function () { return null; };
@@ -42,7 +43,7 @@
       var s = flagVal(get(skey)); if (s != null) return s;
       return dflt;
     }
-    var parent = !!env.prepEnabled && pick("medigram", "smd_prep_medigram", false);
+    var parent = !!env.prepEnabled && pick("medigram", "smd_prep_medigram", true);
     if (!parent) return { parent: false, study: false, discovery: false, breakMode: false, youtube: false };
     return {
       parent: true,

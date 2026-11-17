@@ -1391,3 +1391,11 @@ html #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{font-weight:700}
 #homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline .rds-icon-btn::before{content:none!important}
 #homeV2#homeV2#homeV2.rnav .hrf-head .hrf-menu.hrf-inline .rds-icon-btn:active{background:rgba(255,255,255,.14)}
 #homeV2#homeV2#homeV2.rnav .hrf-head #hrfMore[hidden]{display:none}
+/* The theme's accent for surfaces outside home (sidebar drawer, Clinical Progress). Also set in sidebar-redesign.js;
+   defined here too because this stylesheet is always loaded. Blue matches the navy home shows. */
+html[data-theme="blue"]{--sbr-acc:#262e9a}
+html[data-theme="ocean"]{--sbr-acc:#0a7d8c}
+html[data-theme="tiranga"]{--sbr-acc:#1a7a41}
+html[data-theme="amber"]{--sbr-acc:#a86412}
+html[data-theme="slate"]{--sbr-acc:#3d5166}
+html[data-theme="contrast"]{--sbr-acc:#00463d}

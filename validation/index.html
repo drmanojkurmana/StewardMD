@@ -328,8 +328,15 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
         if (++n < 600) setTimeout(settle, 300);
       })();
     }
+    // Atlas JSON lives on the media host now (Pages no longer ships atlas/); the old
+    // relative path is the fallback, mirroring atlas.js fetchJson().
+    function atlasJson(rel) {
+      var media = "https://media.stewardmd.in" + rel;
+      function ok(r) { if (!r || !r.ok) throw new Error("http"); return r.json(); }
+      return fetch(media).then(ok).catch(function () { return fetch(rel).then(ok); });
+    }
     Promise.all([
-      fetch("/atlas/modules.json").then(function (r) { return r.json(); }),
+      atlasJson("/atlas/modules.json"),
       fetch("/api/validation").then(function (r) { return r.json(); })
         .catch(function () { return { current: {}, enabled: false }; })
     ]).then(function (res) {
@@ -341,7 +348,7 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
         return (i < 0 ? 99 : i) - (j < 0 ? 99 : j);
       });
       return Promise.all(mods.map(function (m) {
-        return fetch("/atlas/" + m.id + "/atlas.json").then(function (r) { return r.json(); })
+        return atlasJson("/atlas/" + m.id + "/atlas.json")
           .then(function (A) {
             var count = {}, names = {};
             (A.slices || []).forEach(function (s) {

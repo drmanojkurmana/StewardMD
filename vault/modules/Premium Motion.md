@@ -98,3 +98,30 @@ Everything travels; nothing dissolves (reduced motion keeps its short fade; `smd
 - **Pages with no source tile** and **full-screen dialogs** (`dialog-motion.js` "fade" family) slide up from the bottom edge and back down.
 - **Whole-screen View Transitions** (row taps in `view-transitions.js`, Back in `page-motion.js` with `html.smd-vt-back`): root push/pop slide, CSS injected by `smd-motion.js`. `page-motion.js` stays off while one runs (`vtBusy`, `window.__smdVtAt`).
 - Gotcha fixed: the PrepNucleus ghost carries `data-no-motion`, else page-motion treated it as a page opening and animated it in.
+
+## Shared elements (2026-11-15, owner: "navigation should feel continuous")
+Owner asked for card to page expansion, page to card collapse, menus out of their button, nothing appearing from nowhere,
+spring easing about 200 to 300 ms, the element visible the whole way.
+- **Card to page** (`smd-motion.js morphIn`): the page is clipped to the card's EXACT rect and radius (scale 1, the old
+  0.96 scale and the page fade are gone) and grows on the `morph` spring [700, 50] (318 ms, no overshoot). A host laid
+  over the page, clipped with the same keyframes, carries the card's surface (its background colour/image) and a
+  computed-style copy of the card (`snapshot()`, ids stripped, inert; over 80 nodes only the outer box). The copy
+  scales from the card to the page width and hands over to the page in the first 40%: the shape reads as the card
+  growing, the container itself never fades.
+- **Page to card** (`morphOut`, used by `page-motion.js outFor`): the reverse, ending on the card's exact rect with the
+  card's face back over the last 45%, so the last frame is the card. Still only when the card is where it was.
+- **Menus** (`menu-origin.js`, new, switch `smd_menu_origin` = "0"): a dropdown/popover/menu that becomes visible within
+  900 ms of a tap grows out of the tapped control (`popIn`: the individual `scale` property from the button's centre on
+  the `menu` spring [560, 38], about 1% overshoot), and shrinks back into it when hidden (shown inline for the 200 ms
+  exit) or removed (inert copy). Its own CSS entrance (`animation`) is held off while open. Skips dialogs, sheets,
+  full-screen pages, `data-own-motion`/`data-no-motion` and `.hrf-inline`.
+- **Floating dialogs** (`dialog-motion.js` "modal" family): out of the button that opened them and back into it; opened
+  by code (no tap) they rise from the bottom edge (`riseFromEdge`, `translate` property). Sheets, scrims and full-screen
+  dialogs keep their slides. Without SMD_MOTION the old Motion scale(0.94) runs.
+- **Gotcha: the text-size setting zooms `<html>`** (zoom 0.95 in the test harness). Rects are screen px, styles are CSS
+  px: every rect goes through `zf(el)` (rect width / offsetWidth) before it becomes a clip, transform or origin. The old
+  morph was 5% off under zoom.
+- **Gotcha: a pop's exit holds its last frame** (fill forwards) until the app hides the element; `popIn` cancels
+  animations with id `smd-pop` first, or a reopened dialog opens at scale 0.2.
+- Tests: `test/run-smd-motion-ui.mjs` (exact rect in and out, card face, menu hidden and removed, dialog from button and
+  from the edge), `test/menu-origin.test.mjs`. Not seen on a handset yet.

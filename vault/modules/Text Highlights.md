@@ -46,3 +46,18 @@ iOS follow-up (same day): the owner's new build still showed the menu. Current W
 interaction) presents it through its own `UIEditMenuInteraction`, which does not ask `canPerformAction`. `SmdWebView`
 now gives every edit menu interaction in the web content an `EditMenuGate` delegate (on each touch, via `hitTest`)
 that returns no menu on read-only text and forwards everything else to the original delegate.
+
+## No system Copy menu; lesson sentences selectable (2026-11-14)
+Owner (iPhone, lesson reader): "not able to select just for highlight, Copy menu still appears, not able to scroll".
+- **Broken selection**: every lesson sentence is a tap target (`.pn-sent[data-act=l-say]`) and `native-feel.css`
+  makes every `[data-act]` `user-select:none`, so a long-press could select only the spaces BETWEEN sentences (the
+  striped selection in the screenshot). `prep.css` makes `.pn-lsn-tx` and its sentences `user-select:text`.
+- **Copy menu**: iOS shows Copy / Look Up for as long as a native selection exists and no web API turns it off.
+  Once the finger lifts (touch count tracked) and the selection settles, `onSel` clones the range, clears the
+  native selection and paints the same words with the CSS Custom Highlight API (`::highlight(smd-hl-sel)` in
+  text-highlight.css). The palette acts on that range (`cur.painted`). No API: native selection kept as before.
+  Trade-off: handles disappear after lift; to change the range, select again.
+- **Scrolling**: a real touch drag on the lesson text scrolls in Chromium (CDP dispatchTouchEvent, 0 -> 261 px), both
+  with and without a selection; `Input.synthesizeScrollGesture` reports 0 there and is not a valid probe for it.
+  The iOS report most likely came from the broken selection state; verify on the phone.
+- `run-prep-lessons-ix-ui.mjs` fails 23 checks on main too (predates this).

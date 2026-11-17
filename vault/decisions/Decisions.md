@@ -12439,3 +12439,10 @@ Owner: "not working as intended, should work in all formats, random medical know
 - **Video:** iframes `https://stewardmd.in/_site/yt?v=` (the CliniX shim, allow-listed); mounted only while the card is on screen, released on swipe/background; silent shim after 6 s falls back to Play on YouTube (Capacitor Browser). `smd_prep_medigram_youtube` now defaults ON (owner asked for videos; same cleared set CliniX already ships).
 - **UX:** one full-screen card per swipe (Play's `.vf` snap feed). Removed mission chips, language chips, Save/Skip/Report row, Prev/Next. Batch ends on a score card with Keep going / Finish. Hindi/Telugu dropped from the UI (no reviewed content exists).
 - **Gotcha:** never put "Loading…" text in a feed card: skeletons.js turns a lone "Loading…" block into the full-screen SMD_LOADER cover. `.pn-eb` is `display:none` in prep.css, so feed labels use `.pn-mg-tag`.
+
+## 2026-11-17 PrepReels videos autoplay in the app; both video sets merged
+Owner: "it should play in app directly, autoplay, not redirect to YouTube like CliniX".
+- `_site/yt.html` takes `autoplay=1` (PrepReels only; CliniX URLs unchanged): starts the official player at once; if sound autoplay is blocked (`onAutoplayBlocked`, or still unstarted/cued after 3 s) it mutes and plays, so YouTube's own unmute button shows instead of a paused frame. Both iframes carry `allow="autoplay"`.
+- The "Play on YouTube" hand-off card is removed; the poster sits under the player while it loads.
+- A parallel session's 184 verified official-channel videos (previously fixture candidates in prep-medigram.js) now live in `prep-medigram-videos.js` and are added to the shim allow-list; the feed mixes them with the CliniX exam videos. Adding a video = add it to that file AND the shim ALLOW list (a unit test enforces it).
+- Shim changes go live on push to main (Cloudflare Pages); the app JS needs the OTA.

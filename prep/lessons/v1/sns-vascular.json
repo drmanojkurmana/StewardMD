@@ -1,0 +1,62 @@
+{
+ "v": 1,
+ "module": "sns-vascular",
+ "subject": "ss-neurosurgery",
+ "title": "Vascular neurosurgery: aneurysmal SAH, vasospasm, AVM and moyamoya",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Harrison 2025 22e subarachnoid haemorrhage sections", "AHA 2023 aneurysmal SAH guidance and ISAT trial data"],
+ "steps": [
+  {
+   "tx": "**Subarachnoid haemorrhage** (SAH, blood in the subarachnoid space) bursts from **saccular aneurysms** (berry outpouchings) in **eighty** percent of cases. The classic story is sudden thunderclap headache with neck stiffness and vomiting. **Non contrast computed tomography** (CT) head is the first test and shows blood in basal cisterns.",
+   "say": "Subarachnoid haemorrhage occurs from saccular aneurysms in eighty percent of cases. The classic story is sudden thunderclap headache with neck stiffness and vomiting. Non contrast computed tomography is the first test and shows blood in basal cisterns.",
+   "vis": {"kind": "table", "cols": ["Cause", "Share", "Clue"], "rows": [["Saccular aneurysm", "Eighty percent", "Thunderclap headache"], ["Perimesencephalic", "Non aneurysmal", "Benign course"], ["Other arterial", "Small share", "Search on angiogram"]]}
+  },
+  {
+   "tx": "**Lumbar puncture** (CSF tap showing xanthochromia) follows negative CT when suspicion stays high. **Computed tomography angiography** (CTA, arterial scan) detects aneurysms over **three** millimetres with high sensitivity. **Digital subtraction angiography** (DSA, catheter angiogram) remains gold standard for small lesions and treatment planning.",
+   "say": "Lumbar puncture showing xanthochromia follows negative tomography when suspicion stays high. Computed tomography angiography detects aneurysms over three millimetres with high sensitivity. Catheter angiography remains gold standard for small lesions and treatment planning.",
+   "vis": {"kind": "flow", "nodes": [{"id": "thunder", "label": "Thunderclap headache"}, {"id": "ct", "label": "Non contrast CT"}, {"id": "lp", "label": "Lumbar puncture if CT negative"}, {"id": "angio", "label": "CTA then digital subtraction gold"}], "edges": [["thunder", "ct"], ["ct", "lp"], ["lp", "angio"]]}
+  },
+  {
+   "tx": "**Hunt Hess scale** (clinical grade one to five from asymptomatic to coma) predicts outcome and triages urgency. **Fisher scale** (CT cisternal blood load grades one to four) predicts vasospasm risk with grade **three** carrying the highest danger. Poor Hunt Hess grade supports early intervention, including stent assisted coiling in selected cases.",
+   "say": "The Hunt Hess scale grades patients clinically from asymptomatic to coma and predicts outcome. The Fisher scale grades cisternal blood load on tomography and predicts vasospasm with grade three carrying highest danger. Poor grade supports early intervention including stent assisted coiling.",
+   "vis": {"kind": "table", "cols": ["Scale", "Grades", "Predicts"], "rows": [["Hunt Hess", "One to five clinical", "Outcome, triage"], ["Fisher", "One to four blood load", "Vasospasm risk"], ["WFNS", "One to five", "Alternative grading"]]}
+  },
+  {
+   "tx": "**Aneurysm securing** uses surgical **clipping** (metal clip across the neck) or endovascular **coiling** (platinum loops filling the sac). **ISAT** (International SAH trial) showed less dependency after coiling at one year. **Clipping** suits young patients, wide neck aneurysms and resectable haematoma cases.",
+   "say": "Aneurysm securing uses surgical clipping or endovascular coiling. The ISAT trial showed less dependency after coiling at one year. Clipping suits young patients, wide neck aneurysms and resectable haematoma cases.",
+   "vis": {"kind": "compare", "left": {"title": "Coiling", "points": ["Less disability at one year", "Less invasive", "Higher recurrence need"]}, "right": {"title": "Clipping", "points": ["Durable, less recurrence", "Better in young patients", "Resectable haematoma"]}}
+  },
+  {
+   "tx": "**Vasospasm** (arterial narrowing after blood exposure) peaks on days **four** to **fourteen** and causes delayed ischaemia in **thirty** percent. **Calcium channel blockade** (oral drug taken every **four** hours) is the only treatment with proven outcome benefit. **Transcranial Doppler** (TCD, bedside flow velocities) screens daily for rising middle cerebral velocity over **two hundred** centimetres per second.",
+   "say": "Vasospasm peaks on days four to fourteen and causes delayed ischaemia in thirty percent. The calcium channel blockade drug is the only drug with proven outcome benefit. Transcranial Doppler screens daily for rising velocity over two hundred centimetres per second.",
+   "vis": {"kind": "table", "cols": ["Point", "Figure", "Action"], "rows": [["Vasospasm window", "Days four to fourteen", "Daily monitoring"], ["Calcium channel blocker", "Every four hours", "Give to all SAH"], ["Doppler alert", "Over two hundred centimetres per second", "Angiography, treat"]]}
+  },
+  {
+   "tx": "**Arteriovenous malformation** (AVM, tangle of vessels without capillary bed) presents with intracerebral bleed, seizures or bruit. **Spetzler Martin grading** (size, venous drainage, eloquence) predicts surgical risk with grade **four** and five mostly inoperable. **Gamma knife radiosurgery** (focused radiation) suits small deep lesions with cure rates near **eighty** percent at three years.",
+   "say": "Arteriovenous malformation presents with bleed, seizures or bruit. Spetzler Martin grading by size, venous drainage and eloquence predicts surgical risk with grades four and five inoperable. Gamma knife helps small deep lesions with cure near eighty percent at three years.",
+   "vis": {"kind": "table", "cols": ["Grade", "Meaning", "Plan"], "rows": [["One to two", "Small, safe resection", "Surgery or radiosurgery"], ["Three", "Mixed, smaller part", "Combined approach"], ["Four to five", "Large, high risk", "Radiosurgery, conservative"]]}
+  },
+  {
+   "tx": "**Cavernous malformation** (cavernoma, mulberry vascular nest without high flow) bleeds repeatedly with risk near **one** to **two** percent yearly. **Magnetic resonance angiography** (MRA, blood sequence imaging) shows popcorn lesions with hemosiderin rings. Surgery removes cavernomas that are accessible and have bled.",
+   "say": "Cavernous malformation bleeds repeatedly with risk near one to two percent yearly. Magnetic resonance imaging shows popcorn lesions with hemosiderin rings. Surgery removes cavernomas that are accessible and have bled.",
+   "vis": {"kind": "compare", "left": {"title": "AVM", "points": ["High flow shunt", "Bruit early", "Spetzler Martin grade"]}, "right": {"title": "Cavernoma", "points": ["Low flow mulberry", "Popcorn on imaging", "Bleed risk one to two percent"]}}
+  },
+  {
+   "tx": "**Moyamoya disease** (progressive basal ganglia arterial stenosis with puffs of smoke collaterals) causes childhood stroke and adult haemorrhage in practice. **Suzuki staging** (stenosis grades one to six) tracks progression over successive angiograms. **Direct bypass** (STA to MCA graft) prevents ischaemic events in symptomatic disease reliably.",
+   "say": "Moyamoya disease is progressive basal arterial stenosis with puffs of smoke collaterals. It causes childhood stroke and adult haemorrhage. Suzuki staging tracks progression and direct bypass prevents ischaemic events in symptomatic disease.",
+   "vis": {"kind": "flow", "nodes": [{"id": "child", "label": "Childhood stroke"}, {"id": "angio", "label": "Angiography puff collaterals"}, {"id": "suzuki", "label": "Suzuki stage"}, {"id": "bypass", "label": "Direct bypass if symptomatic"}], "edges": [["child", "angio"], ["angio", "suzuki"], ["suzuki", "bypass"]]}
+  },
+  {
+   "tx": "**Dural arteriovenous fistula** (DAVF, shunt between dural arteries and sinus) presents with pulsatile tinnitus, proptosis or venous hypertension. **Cognard grading** (one to five by cortical reflux) guides urgency with grade **three** and above needing treatment. **Venous stenosis** with cortical drainage carries haemorrhage risk and forbids sinus sacrifice.",
+   "say": "Dural arteriovenous fistula presents with pulsatile tinnitus, proptosis or venous hypertension. Cognard grading by cortical reflux guides urgency with grade three and above needing treatment. Venous stenosis with cortical drainage carries haemorrhage risk.",
+   "vis": {"kind": "table", "cols": ["Grade", "Feature", "Action"], "rows": [["One to two", "No cortical reflux", "Observe or embolise"], ["Three to four", "Cortical reflux", "Treat urgently"], ["Five", "Spinal drainage", "Treat, specialist care"]]}
+  },
+  {
+   "tx": "High yield for the exam: aneurysms cause **eighty** percent of SAH, the calcium channel blocker drug every four hours is mandatory, vasospasm peaks days four to fourteen, Doppler velocity over two hundred alerts, ISAT favours coiling for disability, Spetzler Martin grades malformations, Cognard grades fistulas, and cavernoma bleed risk runs one to two percent yearly.",
+   "say": "Aneurysms cause eighty percent of subarachnoid haemorrhage, the calcium channel blocker drug every four hours is mandatory, vasospasm peaks days four to fourteen, Doppler velocity over two hundred alerts, the ISAT trial favours coiling for disability, Spetzler Martin grades malformations, Cognard grades fistulas, and cavernoma bleed risk runs one to two percent yearly.",
+   "vis": {"kind": "table", "cols": ["Ask", "Fact"], "rows": [["SAH cause", "Aneurysm eighty percent"], ["Calcium channel blocker", "Every four hours"], ["Vasospasm", "Days four to fourteen"], ["Doppler alert", "Over two hundred centimetres per second"], ["ISAT", "Coiling less dependency"], ["AVM", "Spetzler Martin"], ["Fistula", "Cognard grade"], ["Cavernoma", "Bleed one to two percent yearly"]] }
+  }
+ ]
+}

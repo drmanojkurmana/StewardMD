@@ -67,8 +67,13 @@ try {
   // ---- select -> palette under the selection
   await select("#smdPrep .pn-lsn-tx", word);
   ok(await palOn(), "selecting text in the lesson shows the palette");
-  const geo = await page.evaluate(() => { const p = document.querySelector(".smd-hlp").getBoundingClientRect(), r = getSelection().getRangeAt(0).getBoundingClientRect(); return { below: p.top >= r.bottom, inside: p.left >= 0 && p.right <= innerWidth, dots: document.querySelectorAll(".smd-hlp-dot").length, bold: !!document.querySelector('.smd-hlp [data-hl-act=b]'), x: !!document.querySelector('.smd-hlp [data-hl-act=x]') }; });
+  const geo = await page.evaluate(() => { const p = document.querySelector(".smd-hlp").getBoundingClientRect(), r = [...CSS.highlights.get("smd-hl-sel")][0].getBoundingClientRect(); return { below: p.top >= r.bottom, inside: p.left >= 0 && p.right <= innerWidth, dots: document.querySelectorAll(".smd-hlp-dot").length, bold: !!document.querySelector('.smd-hlp [data-hl-act=b]'), x: !!document.querySelector('.smd-hlp [data-hl-act=x]') }; });
   ok(geo.below && geo.inside, "palette sits under the selection, on screen");
+  // 2026-11-14: no system Copy / Look Up menu. The native selection is cleared once it settles and the same words are
+  // painted with the Custom Highlight API; and lesson sentences (tap targets) are selectable text, not just the spaces.
+  const own = await page.evaluate(() => ({ native: getSelection().isCollapsed, painted: !!(CSS.highlights.get("smd-hl-sel") && CSS.highlights.get("smd-hl-sel").size), sel: getComputedStyle(document.querySelector("#smdPrep .pn-lsn-tx .pn-sent")).userSelect }));
+  ok(own.native && own.painted, "the system selection is cleared (no Copy menu) and the words are painted instead: " + JSON.stringify(own));
+  ok(own.sel === "text", "lesson sentences are selectable text (was none, so only the spaces selected): " + own.sel);
   ok(geo.dots === 7 && geo.bold && geo.x, "7 colours, Bold and Remove");
   if (SHOTS) await page.screenshot({ path: join(SHOTS, "hl-palette.png") });
 

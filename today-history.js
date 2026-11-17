@@ -166,7 +166,9 @@
     b.classList.toggle("th-back", on);
     if (on) {
       var e = todays[pick % todays.length]; pick++;
-      var f = ensureFace(b); f.className = "th-face" + (e.in ? " th-india" : ""); f.innerHTML = face(e); fit(f); auroraAttach(f, !!e.in);
+      var f = ensureFace(b); f.className = "th-face" + (e.in ? " th-india" : ""); f.innerHTML = face(e); fit(f);
+      // The face wears the Pro card's own green (owner 2026-11-16: "both should be same green"); only an Indian headline keeps its aurora.
+      if (e.in) auroraAttach(f, true); else auroraStop();
       // Playfair Display can land after the face is drawn; measure the title again once it has
       if (D.fonts && D.fonts.load) D.fonts.load("600 18px 'Playfair Display'").then(function () { fit(f); }, function () {});
       if (!frontLabel) frontLabel = b.getAttribute("aria-label") || "";

@@ -18,12 +18,13 @@ const NOW = Date.parse("2026-10-31T00:00:00Z");
 const base = (o = {}) => Object.assign({ id: "c1", kind: "mcq", exam: ["neet-pg"], subject: "medicine", module: "m1", topicIds: ["t1"], language: "en", title: "T", questionId: "q1", rightsStatus: "owned", clinicalReview: { status: "approved", reviewedAt: "2026-10-01", reviewerRole: "medicine" }, captions: { en: true }, sourceRefs: [], tags: [], updatedAt: "2026-10-01" }, o);
 const lesson = (o = {}) => base({ id: "l1", kind: "micro_lesson", questionId: undefined, lessonId: "les1", media: { provider: "first_party", assetId: "a1" }, ...o });
 
-test("flags: parent OFF by default, requires smd_prep; study only-on default", () => {
+test("flags: parent ON by default (owner 2026-11-17), requires smd_prep; study and youtube on by default", () => {
   const get = (m) => (k) => m[k] ?? null;
-  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: false, study: false, discovery: false, breakMode: false, youtube: false });
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
   assert.deepEqual(D.resolveFlags({ prepEnabled: false, get: get({ smd_prep_medigram: "1" }), search: "" }).parent, false);
   assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1" }), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
   assert.equal(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_youtube: "0" }), search: "" }).youtube, false);
+  assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "0" }), search: "" }).parent, false, "0 turns it off");
   const all = D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_discovery: "1", smd_prep_medigram_break: "1", smd_prep_medigram_youtube: "1" }), search: "" });
   assert.deepEqual(all, { parent: true, study: true, discovery: true, breakMode: true, youtube: true });
   assert.equal(D.resolveFlags({ prepEnabled: true, get: get({}), search: "?medigram=1&medigram_study=0" }).study, false);
@@ -141,6 +142,19 @@ test("media: videos come from cleared CliniX manifest entries and play through t
   for (const v of real) assert.match(shim, new RegExp('"' + v.videoId.replace(/[-]/g, "\\-") + '": 1'), v.videoId + " on the shim allow-list");
 });
 
+test("official-channel videos: 100+, unique 11-char ids, all on the shim allow-list; placeholder gone", () => {
+  const V = require("../prep-medigram-videos.js"), shim = read("_site/yt.html");
+  assert.ok(V.length >= 100, "at least 100 videos, got " + V.length);
+  const ids = new Set();
+  for (const [id, title, by, subject] of V) {
+    assert.match(id, /^[A-Za-z0-9_-]{11}$/);
+    assert.ok(!ids.has(id), "unique " + id); ids.add(id);
+    assert.ok(title && by && subject, "title, channel and subject for " + id);
+    assert.ok(shim.includes('"' + id + '": 1'), id + " on the shim allow-list");
+  }
+  assert.doesNotMatch(read("prep-medigram.js") + read("prep-medigram-videos.js"), /dQw4w9WgXcQ/, "placeholder gone");
+});
+
 test("mixFeed: every n questions one other card, pearls and extras alternate, pearls never come early", () => {
   const q = (id, kp) => ({ id, q: "Q" + id, o: ["a", "b"], a: 0, kp, _s: "s" });
   const items = [q(1, "P1"), q(2), q(3, "P3"), q(4), q(5), q(6)];
@@ -162,7 +176,7 @@ test("events: consent-aware, learning outcomes only, sensitive keys dropped", ()
 
 test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded; CSS contract", () => {
   const loader = read("prep-loader.js"), prep = read("prep.js"), css = read("prep-medigram.css");
-  assert.match(loader, /MG_JS = \["prep-medigram-data\.js", "prep-medigram-media\.js", "prep-medigram\.js"\]/);
+  assert.match(loader, /MG_JS = \["prep-medigram-data\.js", "prep-medigram-media\.js", "prep-medigram-videos\.js", "prep-medigram\.js"\]/);
   assert.match(loader, /if \(mgOn\(\)\)/);
   assert.match(prep, /a\.indexOf\("mg-"\) === 0 && G\.PREP_MEDIGRAM/);
   assert.match(prep, /G\.PREP_MEDIGRAM \? G\.PREP_MEDIGRAM\.homeHtml\(HOST\)/);

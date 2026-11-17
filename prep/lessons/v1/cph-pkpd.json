@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "cph-pkpd",
+ "subject": "ss-clinical-pharmacology",
+ "title": "Pharmacokinetics and pharmacodynamics: ADME and receptors",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": ["Goodman and Gilman pharmacology notes"],
+ "steps": [
+  {
+   "tx": "**Pharmacokinetics** describes what the body does to a drug through ADME over time. Absorption, distribution, metabolism and excretion together define the plasma profile in 24 hours. Bioavailability of an oral drug averages 70 percent compared to intravenous dosing at 100 percent. **Clearance** measured in litres per hour links dose rate to steady state concentration.",
+   "say": "Pharmacokinetics describes what the body does to a drug. Absorption distribution metabolism and excretion define the profile. Bioavailability averages seventy percent for oral drugs. Clearance links dose rate to steady state levels.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step", "Process", "Figure"],
+    "rows": [
+     ["Absorption", "Gut to blood", "Bioavailability 70 percent"],
+     ["Distribution", "Blood to tissues", "Volume of distribution"],
+     ["Metabolism", "Liver breakdown", "Cytochrome enzymes"],
+     ["Excretion", "Kidney or bile", "Clearance 4 litres per hour"]
+    ]
+   }
+  },
+  {
+   "tx": "Enteric coating protects **Omeprazole** from stomach acid for 2 hours before reaching the duodenum. Prodrugs such as **Enalapril** need liver conversion to Enalaprilat within 4 hours for action. First pass metabolism removes 30 percent of oral Midazolam before it reaches blood. **Grapefruit juice** raises Felodipine levels 3 fold by blocking gut CYP3A4 enzymes.",
+   "say": "Enteric coating protects one drug from stomach acid. Prodrugs need liver conversion before they act. First pass metabolism removes a large share of oral drugs. Grapefruit juice blocks gut enzymes and raises levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Swallow tablet"},
+     {"id": "b", "label": "Survive stomach 2 hours"},
+     {"id": "c", "label": "Absorb in gut, 70 percent"},
+     {"id": "d", "label": "Liver converts prodrug"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "The **receptor** concept holds that most drugs bind a specific protein to change its function. Agonists activate the receptor fully, while **Propranolol** blocks activation as a competitive antagonist. Partial agonists give 40 to 60 percent of full effect at 10 mg doses. Occupancy of 70 percent usually yields near maximal effect in clinical use.",
+   "say": "Most drugs bind a specific receptor protein to act. Agonists activate fully while blockers stop activation. Partial agonists give a fraction of full effect. High occupancy usually gives near maximal effect.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Agonist", "points": ["Full activation", "Example Adrenaline", "Effect up to 100 percent"]},
+    "right": {"title": "Antagonist", "points": ["Blocks activation", "Example Propranolol", "Effect zero alone"]}
+   }
+  },
+  {
+   "tx": "Dose response curves plot log dose against effect, with **ED50** marking the dose for 50 percent response. Therapeutic index equals TD50 divided by ED50, ideally above 10 in safe drugs. **Digoxin** has an index near 2, so 2.5 mg may prove toxic. **Plateau** at 100 mg of Losartan means higher doses add toxicity without benefit.",
+   "say": "Dose response curves plot log dose against effect. The therapeutic index compares toxic and effective doses. One heart drug has a very narrow safety margin. Higher doses add toxicity without extra benefit.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Term", "Meaning", "Example"],
+    "rows": [
+     ["ED50", "50 percent effective dose", "10 mg Losartan"],
+     ["TD50", "50 percent toxic dose", "Index above 10 ideal"],
+     ["Plateau", "Maximal effect", "100 mg Losartan"]
+    ]
+   }
+  },
+  {
+   "tx": "Apparent **volume of distribution** Vd equals amount in body divided by plasma concentration in litres. Drugs with Vd of 5 litres stay in plasma, while **Warfarin** reaches 50 litres with tissue binding, giving Vd near 70 litres in a 70 kg adult. Loading dose equals Vd multiplied by target concentration, often 15 mg per kg. Small Vd means plasma levels rise rapidly after a single dose.",
+   "say": "Volume of distribution relates amount in the body to plasma level. Some drugs stay in plasma while others spread widely. Loading dose uses this volume times target level. Small volumes give rapid plasma rises.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug", "Vd", "Meaning"],
+    "rows": [
+     ["Warfarin", "Near 70 litres", "Wide tissue binding"],
+     ["Gentamicin", "Near 20 litres", "Extracellular fluid"],
+     ["A small drug", "5 litres", "Stays in plasma"]
+    ]
+   }
+  },
+  {
+   "tx": "Clearance of 4 litres per hour with a 20 litre volume gives **half life** near 3.5 hours by formula. Half life means 4 to 5 intervals reach steady state in 24 hours. **Vancomycin** 15 mg per kg every 12 hours suits a 6 hour half life. **Renal impairment** below 30 ml per minute clearance halves drug clearance in 60 percent of cases.",
+   "say": "Half life comes from clearance and volume together. Steady state needs four to five half lives. One antibiotic is dosed every twelve hours for its half life. Kidney failure halves clearance in most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cl 4 litres per hour"},
+     {"id": "b", "label": "Vd 20 litres"},
+     {"id": "c", "label": "Half life 3.5 hours"},
+     {"id": "d", "label": "Steady state in 24 hours"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "Cytochrome P450 enzymes in the liver metabolise 60 percent of drugs via **CYP3A4** as the main pathway. **Rifampicin** 600 mg daily induces enzymes within 7 days and cuts levels by 40 percent. **Ketoconazole** 200 mg inhibits CYP3A4 and doubles Simvastatin exposure within 3 days. Genetic **CYP2C19** poor metabolisers lack Omeprazole metabolism in 15 percent of Asian patients.",
+   "say": "Liver enzymes metabolise most drugs through one main pathway. One antibiotic induces enzymes within a week. One antifungal blocks enzymes within days. Genetics explains why some patients metabolise slower.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug pair", "Mechanism", "Effect"],
+    "rows": [
+     ["Rifampicin 600 mg", "Induction in 7 days", "Levels cut 40 percent"],
+     ["Ketoconazole 200 mg", "Inhibition in 3 days", "Levels doubled"],
+     ["CYP2C19 poor", "Genetic loss", "15 percent in Asians"]
+    ]
+   }
+  },
+  {
+   "tx": "Michaelis Menten kinetics fit **Phenytoin** with a Vmax of 500 mg per day and Km of 4 mg per litre. At 300 mg daily, saturation raises levels 2 fold with small dose changes. **Alcohol** 80 ml inhibits metabolism of Paracetamol within 12 hours of binge drinking. **Protein binding** of 90 percent for Valproic Acid leaves 10 percent free active drug in plasma.",
+   "say": "One seizure drug follows saturable kinetics with low capacity. Small dose changes cause disproportionate rises. Alcohol blocks metabolism for half a day. Only the free fraction of bound drug acts.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "First order", "points": ["Linear rise", "Constant half life", "Example Most antibiotics"]},
+    "right": {"title": "Michaelis Menten", "points": ["Saturable, Vmax 500 mg", "Km 4 mg per litre", "Example Phenytoin"]}
+   }
+  },
+  {
+   "tx": "Adverse drug reactions affect 5 to 8 percent of admissions, with **ACE inhibitor** cough in 10 percent of patients. **Thiazide** 25 mg raises glucose above 126 mg decilitre in 12 percent of diabetics. Drug interactions cause 5 percent of hospitalisations at doses beyond 100 mg per day. **Monitoring** drug levels with 2 week checks catches toxicity before crisis in 80 percent of cases.",
+   "say": "Adverse drug reactions affect a measurable share of admissions. One blood pressure drug commonly causes cough. One diuretic raises glucose in diabetics. Level monitoring catches toxicity before crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Reaction", "Rate", "Monitor"],
+    "rows": [
+     ["ACE cough", "10 percent", "Clinical review"],
+     ["Thiazide glucose", "12 percent", "Fasting glucose yearly"],
+     ["Interactions", "5 percent of admissions", "Check after 2 weeks"]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic index near 2 for **Digoxin** demands levels between 0.8 and 2.0 nanograms per ml with 2.5 mg caution. Phenytoin Km of 4 mg per litre with Vmax 500 mg per day predicts saturation accurately. **Copy the loading dose** as Vd multiplied by target, usually 15 mg per kg for antibiotics. **Steady state** in 4 to 5 half lives is the most tested PKPD point in exams.",
+   "say": "High-yield for the exam the narrow index drug needs tight level monitoring. Saturable kinetics predict disproportionate rises with small dose changes. Loading dose uses volume times target concentration. Steady state takes four to five half lives.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Point", "Figure", "Use"],
+    "rows": [
+     ["Digoxin index", "Near 2", "Level 0.8 to 2.0"],
+     ["Phenytoin Km", "4 mg per litre", "Vmax 500 mg per day"],
+     ["Loading dose", "15 mg per kg", "Vd times target"]
+    ]
+   }
+  }
+ ]
+}

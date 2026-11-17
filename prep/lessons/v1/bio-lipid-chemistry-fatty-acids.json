@@ -21,8 +21,21 @@
    "say": "Trans bonds straighten chains toward saturated behaviour and worsen lipids beyond saturates gram for gram. Reading labels for partially hydrogenated oils remains the practical skill after chemistry.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Cis (natural oils)", "points": ["Kinked, liquid", "Membrane fluidity favoured", "Essential families cis configured"]},
-    "right": {"title": "Trans (partial hydrogenation)", "points": ["Straight, solid, shelf stable", "LDL up, HDL down", "Elimination policies worldwide"]
+    "left": {
+     "title": "Cis (natural oils)",
+     "points": [
+      "Kinked, liquid",
+      "Membrane fluidity favoured",
+      "Essential families cis configured"
+     ]
+    },
+    "right": {
+     "title": "Trans (partial hydrogenation)",
+     "points": [
+      "Straight, solid, shelf stable",
+      "LDL up, HDL down",
+      "Elimination policies worldwide"
+     ]
     }
    }
   },
@@ -31,11 +44,27 @@
    "say": "Linoleate reaches arachidonate for eicosanoids, while alpha-linolenate converts inefficiently to EPA and DHA. Oily fish provides preformed sources decisive for retina and brain accretion in infancy.",
    "vis": {
     "kind": "table",
-    "cols": ["Family", "Parent (essential)", "Long chain products"],
+    "cols": [
+     "Family",
+     "Parent (essential)",
+     "Long chain products"
+    ],
     "rows": [
-     ["Omega-6", "Linoleic acid (18:2)", "Arachidonic acid (20:4) to eicosanoids"],
-     ["Omega-3", "Alpha-linolenic acid (18:3)", "EPA (20:5), DHA (22:6) brain and retina"],
-     ["Omega-9 (non essential)", "Oleic acid (18:1) made de novo", "Mead acid rises in EFA deficiency (20:3)"]
+     [
+      "Omega-6",
+      "Linoleic acid (18:2)",
+      "Arachidonic acid (20:4) to eicosanoids"
+     ],
+     [
+      "Omega-3",
+      "Alpha-linolenic acid (18:3)",
+      "EPA (20:5), DHA (22:6) brain and retina"
+     ],
+     [
+      "Omega-9 (non essential)",
+      "Oleic acid (18:1) made de novo",
+      "Mead acid rises in EFA deficiency (20:3)"
+     ]
     ]
    }
   },
@@ -46,12 +75,37 @@
     "kind": "flow",
     "title": "Why fat wins long term storage",
     "nodes": [
-     {"id": "tag", "label": "Triacylglycerol anhydrous droplets"},
-     {"id": "dens", "label": "9 kcal per gram, no water carried"},
-     {"id": "gly", "label": "Glycogen: 4 kcal plus 3 g water each"},
-     {"id": "dep", "label": "Fat depot outlasts glycogen days to months"}
+     {
+      "id": "tag",
+      "label": "Triacylglycerol anhydrous droplets"
+     },
+     {
+      "id": "dens",
+      "label": "9 kcal per gram, no water carried"
+     },
+     {
+      "id": "gly",
+      "label": "Glycogen: 4 kcal plus 3 g water each"
+     },
+     {
+      "id": "dep",
+      "label": "Fat depot outlasts glycogen days to months"
+     }
     ],
-    "edges": [["tag", "dens"], ["gly", "dep"], ["dens", "dep"]]
+    "edges": [
+     [
+      "tag",
+      "dens"
+     ],
+     [
+      "gly",
+      "dep"
+     ],
+     [
+      "dens",
+      "dep"
+     ]
+    ]
    }
   },
   {
@@ -64,12 +118,72 @@
    "say": "Arachidonate hides at membrane sn-2 for phospholipase release into eicosanoid cascades. EPA competes toward less inflammatory series plus resolvins, the kernel inside fish oil debates worth separating from marketing.",
    "vis": {
     "kind": "table",
-    "cols": ["Number fact", "Value to quote"],
+    "cols": [
+     "Number fact",
+     "Value to quote"
+    ],
     "rows": [
-     ["Fat energy density", "9 kcal per gram (carbohydrate and protein 4)"],
-     ["Arachidonic acid shorthand", "20:4 omega-6 (delta 5,8,11,14)"],
-     ["EPA and DHA shorthand", "20:5 and 22:6 omega-3"],
-     ["EFA deficiency ratio", "Triene to tetraene above 0.2"]
+     [
+      "Fat energy density",
+      "9 kcal per gram (carbohydrate and protein 4)"
+     ],
+     [
+      "Arachidonic acid shorthand",
+      "20:4 omega-6 (delta 5,8,11,14)"
+     ],
+     [
+      "EPA and DHA shorthand",
+      "20:5 and 22:6 omega-3"
+     ],
+     [
+      "EFA deficiency ratio",
+      "Triene to tetraene above 0.2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Fatty acids are classified by chain length, saturation, and double bond position. Essential fatty acids linoleic acid (18:2 omega-6) and alpha-linolenic acid (18:3 omega-3) cannot be synthesized because mammalian desaturases cannot introduce double bonds beyond carbon 9. Arachidonic acid (20:4 omega-6) serves as the obligate precursor for prostaglandins, thromboxanes, and leukotrienes. Triacylglycerols represent the most energy-dense fuel storage, yielding nine kilocalories per gram upon complete oxidation.",
+   "say": "High-yield for the exam: Fatty acids are classified by chain length, saturation, and double bond position. Essential fatty acids linoleic acid (18:2 omega-6) and alpha-linolenic acid (18:3 omega-3) cannot be synthesized because mammalian desaturases cannot introduce double bonds beyond carbon 9. Arachidonic acid (20:4 omega-6) serves as the obligate precursor for prostaglandins, thromboxanes, and leukotrienes. Triacylglycerols represent the most energy-dense fuel storage, yielding nine kilocalories per gram upon complete oxidation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Mammalian desaturase limitation",
+      "Enzymes introduce double bonds only at delta-4, 5, 6, and 9"
+     ],
+     [
+      "Essential fatty acid omega-6",
+      "Linoleic acid 18:2 precursor to arachidonic acid"
+     ],
+     [
+      "Essential fatty acid omega-3",
+      "Alpha-linolenic acid 18:3 precursor to EPA and DHA"
+     ],
+     [
+      "Triacylglycerol energy density",
+      "Anhydrous storage yielding nine kilocalories per gram"
+     ],
+     [
+      "Eicosanoid precursor liberation",
+      "Phospholipase A2 cleaves arachidonic acid from membrane phospholipids"
+     ],
+     [
+      "Trans fatty acid risk",
+      "Raises atherogenic LDL-C and lowers protective HDL-C"
+     ],
+     [
+      "Odd chain fatty acid fate",
+      "Terminal propionyl-CoA enters TCA cycle via succinyl-CoA"
+     ],
+     [
+      "Brown adipose fuel combustion",
+      "Uncoupling protein 1 thermogenin dissipates proton gradient as heat"
+     ]
     ]
    }
   }

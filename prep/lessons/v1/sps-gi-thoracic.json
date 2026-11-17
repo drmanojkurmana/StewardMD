@@ -1,0 +1,398 @@
+{
+ "v": 1,
+ "module": "sps-gi-thoracic",
+ "subject": "ss-paediatric-surgery",
+ "title": "Paediatric GI and thoracic surgery essentials",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e",
+  "Nelson Textbook of Pediatrics 22e",
+  "NICE guidance on paediatric surgery"
+ ],
+ "steps": [
+  {
+   "tx": "**Oesophageal atresia** (failure of oesophageal continuity) occurs in **1 in 3500** births, with **polyhydramnios** in two thirds and associated **VACTERL** anomalies in one third. The classic infant has **frothy secretions**, coughing with feeds and **aspiration pneumonia** from birth. A **nasogastric tube** that coils in the upper pouch confirms the diagnosis before any contrast study.",
+   "say": "Oesophageal atresia happens in about one in thirty five hundred births. Most babies show frothy saliva and coughing or choking when fed. A nasogastric tube that coils in the upper pouch proves the diagnosis without contrast.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Detail",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Incidence",
+      "1 in 3500 births",
+      "Tested number"
+     ],
+     [
+      "VACTERL association",
+      "Up to one third",
+      "Screen heart, spine, limbs"
+     ],
+     [
+      "First test",
+      "NG tube coils",
+      "No contrast needed"
+     ],
+     [
+      "Key risk",
+      "Aspiration pneumonia",
+      "Suction and nurse head up"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Repair needs **primary anastomosis** (end to end joining) in most long gap cases the surgeon first creates a **gastrostomy** for feeding and feeding. **Replogle tube** (continuous aspiration) prevents aspiration while awaiting surgery, and the infant is kept **head up 30 degrees** with intermittent suction. Cardiac echo and renal scan are done before anaesthesia because associated anomalies change outcome.",
+   "say": "Primary joining of the two ends is possible in most babies. When the gap is long the surgeon first places a gastrostomy for feeding. A Replogle tube stays on suction and the baby nurses head up to stop aspiration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "NG tube coils"
+     },
+     {
+      "id": "assess",
+      "label": "Echo plus renal scan"
+     },
+     {
+      "id": "replogle",
+      "label": "Head up plus Replogle"
+     },
+     {
+      "id": "repair",
+      "label": "Primary anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "assess"
+     ],
+     [
+      "assess",
+      "replogle"
+     ],
+     [
+      "replogle",
+      "repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Congenital diaphragmatic hernia** (bowel in chest through a diaphragmatic defect) presents with **respiratory distress**, **scaphoid abdomen** and bowel sounds in the chest. The mediastinum shifts away from the hernia side and **gastric bubble** sits in the thorax on chest X-ray. A **nasogastric tube** decompresses the intrathoracic stomach and **gentle ventilation** avoids barotrauma.",
+   "say": "Diaphragmatic hernia pushes abdominal organs into the chest. The baby breathes fast, the abdomen looks scaphoid and the mediastinum shifts away. A chest X-ray shows bowel loops in the chest and the stomach bubble up high.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Scaphoid abdomen",
+      "Viscera in chest",
+      "NG decompression"
+     ],
+     [
+      "Bowel sounds in chest",
+      "Hernia present",
+      "Chest X-ray"
+     ],
+     [
+      "Mediastinal shift",
+      "Tension from organs",
+      "Gentle ventilation"
+     ],
+     [
+      "Gastric bubble in thorax",
+      "Stomach herniated",
+      "Avoid bag masking"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Malrotation** (bowel looped wrongly around the superior mesenteric vessels) risks **midgut volvulus** (twisting that cuts blood supply). Bilious vomiting in a newborn is **malrotation with volvulus** until proven otherwise and needs urgent **upper gastrointestinal contrast**. A **Ladd procedure** (division of congenital bands plus appendicectomy) untwists and fixes the gut, and bilious vomiting must never be observed.",
+   "say": "Malrotation can twist the midgut and cut off its blood supply. Any newborn with green vomiting is treated as volvulus until proven otherwise. The Ladd operation divides the bands, untwists the gut and removes the appendix.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Volvulus - urgent",
+     "points": [
+      "Bilious vomiting",
+      "Upper contrast shows corkscrew",
+      "Ladd procedure now",
+      "High risk of necrosis"
+     ]
+    },
+    "right": {
+     "title": "Simple obstruction",
+     "points": [
+      "Non bilious vomiting",
+      "Contrast shows cutoff",
+      "Resuscitate then explore",
+      "Less time pressure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Duodenal atresia** (failure of duodenal recanalisation) gives **polyhydramnios**, a **double bubble** on X-ray and associations in **30 percent** such as **Down syndrome** and annular pancreas. **Necrotising enterocolitis** (bowel wall inflammation in premature infants) starts with feed intolerance, **abdominal distension** and pneumatosis on imaging. Bell stage **3** with pneumoperitoneum needs a **drain or laparotomy**.",
+   "say": "Duodenal atresia shows a double bubble on the X-ray and links with Down syndrome in about a third. Necrotising enterocolitis in preterm babies starts with feed intolerance and distension. Stage three disease with pneumoperitoneum needs a drain or an operation.",
+   "vis": {
+    "cols": [
+     "Condition",
+     "Classic test",
+     "Key association"
+    ],
+    "rows": [
+     [
+      "Duodenal atresia",
+      "Double bubble sign",
+      "Down syndrome 30 percent"
+     ],
+     [
+      "Malrotation",
+      "Corkscrew contrast",
+      "Midgut volvulus risk"
+     ],
+     [
+      "Necrotising enterocolitis",
+      "Pneumatosis intestinalis",
+      "Prematurity"
+     ],
+     [
+      "Oesophageal atresia",
+      "Coiled NG tube",
+      "VACTERL one third"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Hirschsprung disease** (aganglionosis, absence of ganglion cells) presents with **delayed meconium** beyond **48 hours**, distension and enterocolitis. **Rectal biopsy** showing **aganglionic** suction sample is diagnostic, and **short segment** disease is most common. **Pulled through** operation (Swenson or Soave, pulling aganglionic bowel out) cures most cases, while **enterocolitis** (severe bowel inflammation) is the main killer.",
+   "say": "Hirschsprung disease means a length of bowel lacks ganglion cells. The baby passes meconium late and develops distension. Rectal suction biopsy proves it, and enterocolitis is the dangerous complication to watch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "delay",
+      "label": "No meconium 48 hours"
+     },
+     {
+      "id": "biopsy",
+      "label": "Rectal suction biopsy"
+     },
+     {
+      "id": "level",
+      "label": "Aganglionic segment found"
+     },
+     {
+      "id": "pull",
+      "label": "Pull through operation"
+     }
+    ],
+    "edges": [
+     [
+      "delay",
+      "biopsy"
+     ],
+     [
+      "biopsy",
+      "level"
+     ],
+     [
+      "level",
+      "pull"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Choanal atresia** (nasal airway blocked) presents with **respiratory distress relieved by crying**, and unilateral cases present later with unilateral discharge. **Catheter** that cannot pass through the nose confirms anatomy and **computed tomography** maps the bony plate. **Transnasal endoscopic repair** with stenting is current practice, and **CHARGE** syndrome needs screening in every case.",
+   "say": "Choanal atresia blocks the nasal airway, so the baby struggles to breathe but cries normally. A catheter that will not pass through the nose confirms it. Endoscopic repair is now standard and CHARGE syndrome must be screened for.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Test",
+     "Link"
+    ],
+    "rows": [
+     [
+      "Distress relieved by crying",
+      "Nasal catheter fails",
+      "Choanal atresia"
+     ],
+     [
+      "Unilateral discharge",
+      "CT bony plate",
+      "Unilateral atresia"
+     ],
+     [
+      "Coloboma, cardiac defects",
+      "CHARGE screen",
+      "Chromosomal syndrome"
+     ],
+     [
+      "Bilious vomiting",
+      "Upper GI contrast",
+      "Malrotation volvulus"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Biliary atresia** (obliterated bile ducts) presents by **6 weeks** with pale stools, dark urine and persistent direct hyperbilirubinaemia. **Kasai portoenterostomy** (Roux loop at the porta) before **60 days** gives the best drainage, while late Kasai fails. **Stabilise**, investigate urinary tract and cardiac anomalies first, and every neonatal obstructive jaundice needs referral before **8 weeks**.",
+   "say": "Biliary atresia blocks all bile ducts and presents with pale stools and dark urine by six weeks. The Kasai operation works best before sixty days. Any baby with persistent direct jaundice must be referred early.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Kasai",
+     "points": [
+      "Before 60 days",
+      "Bile drainage possible",
+      "Transplant avoided longer",
+      "Best outcome"
+     ]
+    },
+    "right": {
+     "title": "Late Kasai",
+     "points": [
+      "After 90 days",
+      "Fibrosis established",
+      "Transplant often needed",
+      "Poor drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Perioperative care saves these babies more than the operation itself. **Premature infants** need **thermoregulation**, glucose control and **parenteral nutrition** with careful fluid limits. **Sepsis** from cholangitis or enterocolitis kills more than the anatomical lesion, so **broad spectrum antibiotics** and drainage of pus decide survival. Proton pump inhibitors reduce reflux after oesophageal repair.",
+   "say": "Good perioperative care matters as much as the surgery in these infants. Keep them warm, maintain glucose and feed them parenterally. Sepsis from cholangitis or enterocolitis is the commonest cause of death, so treat infection early.",
+   "vis": {
+    "cols": [
+     "Care point",
+     "Target",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Temperature",
+      "Normothermia",
+      "Prevents coagulopathy"
+     ],
+     [
+      "Glucose",
+      "Above 2.6 mmol per L",
+      "Premature infants at risk"
+     ],
+     [
+      "Antibiotics",
+      "Broad spectrum early",
+      "Sepsis kills first"
+     ],
+     [
+      "Feeds",
+      "Parenteral then enteral",
+      "Gut protection"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Imperforate anus** (failure of anal opening) shows a **flat perineum** with meconium passing from a fistula, and **VACTERL** screening is mandatory. High lesions need **divided colostomy** first with **posterior sagittal** repair later, while low fistulas need primary repair. Long term outlook depends on **sacral ratio**, **spinal cord tethering** and continence programme with **bowel management**.",
+   "say": "Imperforate anus shows a flat perineum with meconium coming from an abnormal opening. High lesions need a colostomy first and a later repair. Long term continence depends on the sacral ratio and spinal cord anomalies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inspect",
+      "label": "Flat perineum fistula"
+     },
+     {
+      "id": "level",
+      "label": "Invertogram X-ray"
+     },
+     {
+      "id": "stoma",
+      "label": "High lesion colostomy"
+     },
+     {
+      "id": "repair",
+      "label": "Posterior sagittal repair"
+     }
+    ],
+    "edges": [
+     [
+      "inspect",
+      "level"
+     ],
+     [
+      "level",
+      "stoma"
+     ],
+     [
+      "stoma",
+      "repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **bilious vomiting** (green vomit) means **malrotation volvulus**, **double bubble** means **duodenal atresia**, and **delayed meconium** means **Hirschsprung disease** proved by rectal biopsy. **Kasai portoenterostomy** (bile drainage surgery) before **60 days** saves biliary atresia, while the **coiled nasogastric tube** diagnoses **oesophageal atresia** without contrast studies.",
+   "say": "Finally revise the numbers and named signs. Bilious vomiting means volvulus, double bubble means duodenal atresia and delayed meconium means Hirschsprung disease. Kasai works before sixty days and the coiled nasogastric tube diagnoses oesophageal atresia.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Oesophageal atresia number",
+      "1 in 3500; NG tube coils"
+     ],
+     [
+      "Bilious vomiting in newborn",
+      "Malrotation with volvulus"
+     ],
+     [
+      "Double bubble",
+      "Duodenal atresia"
+     ],
+     [
+      "Delayed meconium beyond 48 hours",
+      "Hirschsprung disease, biopsy proves"
+     ],
+     [
+      "Kasai timing",
+      "Before 60 days"
+     ],
+     [
+      "Diaphragmatic hernia signs",
+      "Scaphoid abdomen, bowel in chest"
+     ],
+     [
+      "CDH ventilation",
+      "Gentle, avoid barotrauma"
+     ],
+     [
+      "Enterocolitis stage 3",
+      "Pneumoperitoneum, drain or surgery"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ]
+}

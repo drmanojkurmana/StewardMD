@@ -23,12 +23,37 @@
     "kind": "flow",
     "title": "Glutamate glutamine cycle",
     "nodes": [
-     {"id": "neur", "label": "Neuron releases glutamate"},
-     {"id": "astr", "label": "Astrocyte takes it up"},
-     {"id": "gln", "label": "Glutamine returned (synthetase)"},
-     {"id": "back", "label": "Neuron remakes glutamate"}
+     {
+      "id": "neur",
+      "label": "Neuron releases glutamate"
+     },
+     {
+      "id": "astr",
+      "label": "Astrocyte takes it up"
+     },
+     {
+      "id": "gln",
+      "label": "Glutamine returned (synthetase)"
+     },
+     {
+      "id": "back",
+      "label": "Neuron remakes glutamate"
+     }
     ],
-    "edges": [["neur", "astr"], ["astr", "gln"], ["gln", "back"]]
+    "edges": [
+     [
+      "neur",
+      "astr"
+     ],
+     [
+      "astr",
+      "gln"
+     ],
+     [
+      "gln",
+      "back"
+     ]
+    ]
    }
   },
   {
@@ -36,8 +61,21 @@
    "say": "Decarboxylating glutamate yields GABA, the dominant inhibitory transmitter. Pyridoxine failure seizes until B6 is given, and vigabatrin raises GABA by blocking its breakdown irreversibly.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Glutamate (excitatory)", "points": ["NMDA calcium learning receptor", "Excitotoxic in excess", "From alpha-ketoglutarate"]},
-    "right": {"title": "GABA (inhibitory)", "points": ["GABA-A chloride channel drugs", "Made by PLP decarboxylase", "Vigabatrin blocks its breakdown"]
+    "left": {
+     "title": "Glutamate (excitatory)",
+     "points": [
+      "NMDA calcium learning receptor",
+      "Excitotoxic in excess",
+      "From alpha-ketoglutarate"
+     ]
+    },
+    "right": {
+     "title": "GABA (inhibitory)",
+     "points": [
+      "GABA-A chloride channel drugs",
+      "Made by PLP decarboxylase",
+      "Vigabatrin blocks its breakdown"
+     ]
     }
    }
   },
@@ -46,11 +84,27 @@
    "say": "Glycine inhibits in cord through chloride channels, blocked by strychnine and silenced by tetanus toxin, while co-activating cortical NMDA receptors. The same molecule brakes below and enables above.",
    "vis": {
     "kind": "table",
-    "cols": ["Agent", "Glycine system effect", "Clinical picture"],
+    "cols": [
+     "Agent",
+     "Glycine system effect",
+     "Clinical picture"
+    ],
     "rows": [
-     ["Strychnine", "Blocks glycine receptors", "Stimulus convulsions, opisthotonus"],
-     ["Tetanus toxin", "Blocks glycine and GABA release", "Spastic paralysis, trismus"],
-     ["Glycine cleavage failure", "Glycine floods brain", "Neonatal encephalopathy (prior lesson)"]
+     [
+      "Strychnine",
+      "Blocks glycine receptors",
+      "Stimulus convulsions, opisthotonus"
+     ],
+     [
+      "Tetanus toxin",
+      "Blocks glycine and GABA release",
+      "Spastic paralysis, trismus"
+     ],
+     [
+      "Glycine cleavage failure",
+      "Glycine floods brain",
+      "Neonatal encephalopathy (prior lesson)"
+     ]
     ]
    }
   },
@@ -66,12 +120,82 @@
     "kind": "flow",
     "title": "Anaphylaxis logic in one line",
     "nodes": [
-     {"id": "mast", "label": "Mast cells degranulate (histamine)"},
-     {"id": "vas", "label": "Vasodilation, bronchospasm, oedema"},
-     {"id": "adr", "label": "Adrenaline reverses all three"},
-     {"id": "tryp", "label": "Tryptase confirms afterwards"}
+     {
+      "id": "mast",
+      "label": "Mast cells degranulate (histamine)"
+     },
+     {
+      "id": "vas",
+      "label": "Vasodilation, bronchospasm, oedema"
+     },
+     {
+      "id": "adr",
+      "label": "Adrenaline reverses all three"
+     },
+     {
+      "id": "tryp",
+      "label": "Tryptase confirms afterwards"
+     }
     ],
-    "edges": [["mast", "vas"], ["vas", "adr"], ["mast", "tryp"]]
+    "edges": [
+     [
+      "mast",
+      "vas"
+     ],
+     [
+      "vas",
+      "adr"
+     ],
+     [
+      "mast",
+      "tryp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Histamine is produced by histidine decarboxylase using pyridoxal phosphate, acting on H1 receptors in allergy and H2 receptors on gastric parietal cells. Glutamate is the principal excitatory central neurotransmitter, acting on NMDA, AMPA, and kainate ionotropic channels. Decarboxylation of glutamate by PLP-dependent GAD produces GABA, the primary inhibitory neurotransmitter acting via ionotropic GABA-A chloride channels. Glycine acts as the primary inhibitory neurotransmitter in spinal cord interneurons, antagonized by strychnine.",
+   "say": "High-yield for the exam: Histamine is produced by histidine decarboxylase using pyridoxal phosphate, acting on H1 receptors in allergy and H2 receptors on gastric parietal cells. Glutamate is the principal excitatory central neurotransmitter, acting on NMDA, AMPA, and kainate ionotropic channels. Decarboxylation of glutamate by PLP-dependent GAD produces GABA, the primary inhibitory neurotransmitter acting via ionotropic GABA-A chloride channels. Glycine acts as the primary inhibitory neurotransmitter in spinal cord interneurons, antagonized by strychnine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Histamine synthesis enzyme",
+      "Histidine decarboxylase requiring pyridoxal phosphate (vitamin B6) cofactor"
+     ],
+     [
+      "Gastric H2 receptor signaling",
+      "Gs-coupled receptor increasing cAMP and activating parietal cell proton pump"
+     ],
+     [
+      "Glutamate NMDA receptor blocker",
+      "Magnesium ion blocks channel pore until relieved by membrane depolarization"
+     ],
+     [
+      "GABA synthesis enzyme",
+      "Glutamic acid decarboxylase (GAD) requiring pyridoxal phosphate (B6)"
+     ],
+     [
+      "GABA-A receptor mechanism",
+      "Ligand-gated chloride channel potentiated by benzodiazepines, barbiturates, and alcohol"
+     ],
+     [
+      "GABA-B receptor mechanism",
+      "G-protein coupled receptor opening potassium channels, stimulated by baclofen"
+     ],
+     [
+      "Glycine spinal receptor inhibitor",
+      "Strychnine competitively blocks glycine receptors, causing fatal spastic convulsions"
+     ],
+     [
+      "Tetanus toxin mechanism",
+      "Retrograde axonal transport cleaving synaptobrevin, blocking glycine and GABA release"
+     ]
+    ]
    }
   }
  ],

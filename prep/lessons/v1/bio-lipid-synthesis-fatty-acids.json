@@ -21,12 +21,32 @@
    "say": "Acetyl-CoA carboxylase commits carbon to malonyl-CoA, needing biotin and ATP. Citrate activates it, insulin switches it on, and glucagon switches it off. Malonyl-CoA blocks CPT-I, so synthesis and burning exclude each other.",
    "vis": {
     "kind": "table",
-    "cols": ["Regulator", "Carboxylase effect", "Fed or fasting signal"],
+    "cols": [
+     "Regulator",
+     "Carboxylase effect",
+     "Fed or fasting signal"
+    ],
     "rows": [
-     ["Citrate high", "Activates (polymerises)", "Carbon plentiful, fed"],
-     ["Insulin", "Dephosphorylates ON", "Fed"],
-     ["Glucagon, adrenaline, AMP kinase", "Phosphorylates OFF", "Fasting, energy short"],
-     ["Palmitoyl-CoA high", "Inhibits", "Product enough"]
+     [
+      "Citrate high",
+      "Activates (polymerises)",
+      "Carbon plentiful, fed"
+     ],
+     [
+      "Insulin",
+      "Dephosphorylates ON",
+      "Fed"
+     ],
+     [
+      "Glucagon, adrenaline, AMP kinase",
+      "Phosphorylates OFF",
+      "Fasting, energy short"
+     ],
+     [
+      "Palmitoyl-CoA high",
+      "Inhibits",
+      "Product enough"
+     ]
     ]
    }
   },
@@ -46,8 +66,21 @@
    "say": "Humans lack desaturases beyond delta-9, so linoleate and alpha-linolenate remain essential. Arachidonate feeds eicosanoids, while fish oils supply preformed EPA and DHA that bypass sluggish conversion.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Humans can make", "points": ["Palmitate (16:0) de novo", "Stearate (18:0) by elongation", "Oleate (18:1 delta-9)"]},
-    "right": {"title": "Humans must eat", "points": ["Linoleate (omega-6 essential)", "Alpha-linolenate (omega-3 essential)", "Preformed EPA and DHA (efficient)"]
+    "left": {
+     "title": "Humans can make",
+     "points": [
+      "Palmitate (16:0) de novo",
+      "Stearate (18:0) by elongation",
+      "Oleate (18:1 delta-9)"
+     ]
+    },
+    "right": {
+     "title": "Humans must eat",
+     "points": [
+      "Linoleate (omega-6 essential)",
+      "Alpha-linolenate (omega-3 essential)",
+      "Preformed EPA and DHA (efficient)"
+     ]
     }
    }
   },
@@ -63,12 +96,82 @@
     "kind": "flow",
     "title": "Malonyl-CoA as fed switch",
     "nodes": [
-     {"id": "fed", "label": "Fed: citrate and insulin high"},
-     {"id": "mal", "label": "Malonyl-CoA rises"},
-     {"id": "syn", "label": "Palmitate synthesis runs"},
-     {"id": "blk", "label": "CPT-I blocked, burning paused"}
+     {
+      "id": "fed",
+      "label": "Fed: citrate and insulin high"
+     },
+     {
+      "id": "mal",
+      "label": "Malonyl-CoA rises"
+     },
+     {
+      "id": "syn",
+      "label": "Palmitate synthesis runs"
+     },
+     {
+      "id": "blk",
+      "label": "CPT-I blocked, burning paused"
+     }
     ],
-    "edges": [["fed", "mal"], ["mal", "syn"], ["mal", "blk"]]
+    "edges": [
+     [
+      "fed",
+      "mal"
+     ],
+     [
+      "mal",
+      "syn"
+     ],
+     [
+      "mal",
+      "blk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: De novo fatty acid synthesis occurs in the cytoplasm of liver and lactating mammary glands. The rate-limiting enzyme is acetyl-CoA carboxylase, which converts acetyl-CoA to malonyl-CoA requiring biotin, ATP, and carbon dioxide. Citrate delivers mitochondrial acetyl-CoA into the cytoplasm via the citrate shuttle. Fatty acid synthase is a multifunctional homodimer whose acyl carrier protein requires phosphopantetheine, synthesizing palmitate using NADPH.",
+   "say": "De novo fatty acid synthesis occurs in the cytoplasm of liver and lactating mammary glands. The rate-limiting enzyme is acetyl-CoA carboxylase, which converts acetyl-CoA to malonyl-CoA requiring biotin, ATP, and carbon dioxide. Citrate delivers mitochondrial acetyl-CoA into the cytoplasm via the citrate shuttle. Fatty acid synthase is a multifunctional homodimer whose acyl carrier protein requires phosphopantetheine, synthesizing palmitate using NADPH.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate-limiting step",
+      "Acetyl-CoA carboxylase synthesising malonyl-CoA from acetyl-CoA"
+     ],
+     [
+      "Carboxylase cofactors",
+      "Requires ATP, biotin, and carbon dioxide for catalytic activity"
+     ],
+     [
+      "Allosteric activation",
+      "Citrate stimulates acetyl-CoA carboxylase promoting active polymer assembly"
+     ],
+     [
+      "Allosteric inhibition",
+      "Palmitoyl-CoA inactivates acetyl-CoA carboxylase causing enzyme depolymerisation"
+     ],
+     [
+      "Mitochondrial export shuttle",
+      "Citrate shuttle transfers acetyl carbons across inner mitochondrial membrane"
+     ],
+     [
+      "Cytosolic acetyl cleavage",
+      "ATP-citrate lyase cleaves citrate into acetyl-CoA and oxaloacetate"
+     ],
+     [
+      "NADPH sources",
+      "Malic enzyme reaction and pentose phosphate pathway supply reducing equivalents"
+     ],
+     [
+      "Primary end product",
+      "Palmitate sixteen carbon saturated free fatty acid"
+     ]
+    ]
    }
   }
  ],

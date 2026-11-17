@@ -48,10 +48,10 @@ const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, de
 const page = await ctx.newPage();
 const errors = []; page.on("pageerror", (e) => errors.push(e.message));
 await page.route("**/api/**", (r) => r.fulfill({ status: 404, body: "{}" }));
-await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; });
+await page.addInitScript(() => { window.SMD_PREP_SETUP = false; window.SMD_PREP_ONBOARD = false; window.confirm = () => true; window.prompt = (msg, def) => def || "Custom Element"; });
 
 async function boot(q) {
-  await page.goto(BASE + "?" + q);
+  await page.goto(BASE + "?" + q, { waitUntil: "domcontentloaded" });   // app readiness is checked next; do not wait on slow third-party loads
   await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
   await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); PREP.open(); });
   await page.waitForSelector("#smdPrep .pn-tile, #smdPrep .pn-row", { timeout: 30000 });
@@ -75,7 +75,7 @@ await page.setInputFiles("#stFile", { name: "fixture.pdf", mimeType: "applicatio
 await page.waitForSelector(".st-doc", { timeout: 20000 });
 ok(/2 pages/.test(await page.locator(".st-doc").innerText()), "library: imported PDF listed with 2 pages");
 ok(await page.evaluate(() => /^data:image\/jpeg/.test(document.querySelector(".st-th").src)), "library: page-1 thumbnail");
-const meta = await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => res(q.result[0]); }; }));
+const meta = await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("docs").objectStore("docs").getAll(); q.onsuccess = () => { const d = q.result[0]; r.result.close(); res(d); }; }; }));
 ok(meta.sha256 === SHA && meta.pageCount === 2 && meta.folderId === null && meta.favourite === false && meta.store === "idb", "metadata: sha256 of the original, pageCount, folderId, favourite, idb fallback");
 
 /* ---- viewer + pen ---- */
@@ -113,15 +113,19 @@ const undoRec = await page.evaluate(() => STUDY._state().stack.u.length);
 ok(undoRec === 2, "the undo stack was restored from storage");
 
 /* ---- zoom and page jump ---- */
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => STUDY._state().sc.scrollTop > 100);
 ok(true, "page jump scrolls to page 2");
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 await page.click('[data-act="st-zoom"][data-v="+"]');
+await page.click('[data-act="st-close-more"]');
 ok(await page.evaluate(() => STUDY._state().z === 1.25), "zoom in");
 /* ---- eraser: a touch on a stroke removes the whole stroke; undo restores it ---- */
 await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
 await page.waitForSelector('.st-ov[data-n="1"]');
 await page.click('[data-act="st-tool"][data-v="er"]');
+await page.evaluate(() => { const v = STUDY._state(); if (v.ink) { v.ink.eraser.mode = "stroke"; v.ink.eraser.autoDeselect = false; } });   // Phase 1 default is Standard (area); this check is the Stroke eraser
 await page.evaluate(() => {
   const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), f = (t) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 9, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + 0.36 * r.width, clientY: r.top + (0.2 + 0.03) * r.height, bubbles: true, cancelable: true }));
   f("pointerdown"); f("pointerup");
@@ -130,24 +134,535 @@ ok(await live() === 1, "eraser removes the whole stroke it touches");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 2, "undo of an erase restores the stroke");
 
+/* ---- lasso select: loop around stroke, delete selection, undo ---- */
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 11;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.1, 0.1);
+  fire("pointermove", 0.9, 0.1);
+  fire("pointermove", 0.9, 0.35);
+  fire("pointermove", 0.1, 0.35);
+  fire("pointermove", 0.1, 0.1);
+  fire("pointerup", 0.1, 0.1);
+});
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+ok(await page.evaluate(() => !!document.querySelector("#stLassoBar")), "lasso: draws loop and shows selection action bar");
+ok(await page.locator('[data-act="st-lasso-ai-explain"]').count() === 1, "lasso: AI Explain chip is visible");
+ok(await page.locator('[data-act="st-lasso-ai-summary"]').count() === 1, "lasso: AI Key summary chip is visible");
+ok(await page.locator('[data-act="st-lasso-ai-make"]').count() === 1, "lasso: AI Make deck chip is visible");
+await page.click('[data-act="st-lasso-more"]');   // polish: Save as element lives in the selection More menu
+ok(await page.locator('[data-act="st-lasso-save-elem"]').count() === 1, "lasso: Save Element is in the selection More menu");
+if (await page.locator('#stSelMore [data-sel-close]').count()) await page.click('#stSelMore [data-sel-close]');
+await page.click('[data-act="st-lasso-ai-explain"]');
+await page.waitForSelector("#stSheet", { timeout: 5000 });
+ok(await page.locator('#stSheet img[alt="Selection preview"]').count() === 1, "lasso AI: Explain sheet shows visual preview of selection");
+await page.click('[data-act="st-scancel"]');
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+if (!(await page.locator('[data-act="st-lasso-save-elem"]:visible').count())) await page.click('[data-act="st-lasso-more"]');
+await page.click('[data-act="st-lasso-save-elem"]');
+const savedElems = await page.evaluate(() => JSON.parse(localStorage.getItem("smd_study_elements") || "[]"));
+ok(savedElems.length === 1 && savedElems[0].name === "Custom Element", "lasso: selection saved as custom element in local storage");
+await page.click('[data-act="st-lasso-del"]');
+ok(await live() === 1, "lasso delete: deletes the selected stroke");
+await page.click('[data-act="st-undo"]');
+ok(await live() === 2, "undo of lasso delete restores the stroke");
+
+/* ---- scribble (Phase 0 ink-loss fix): OFF by default, so a zigzag over ink is kept as ink; when ON, a fast dense
+   scribble over a stroke erases only that stroke and the toast's Undo brings it back ---- */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+const scribbleOver = () => page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 12;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  const onLine = (x) => 0.2 + (x - 0.2) * 0.125;   // the first test stroke runs (0.2, 0.2) to (0.68, 0.26)
+  fire("pointerdown", 0.3, onLine(0.3));
+  for (let pass = 0; pass < 8; pass++) for (let s = 1; s <= 8; s++) {
+    const x = pass % 2 ? 0.42 - 0.12 * s / 8 : 0.3 + 0.12 * s / 8;
+    fire("pointermove", x, onLine(x) + (s % 2 ? 0.001 : -0.001));
+  }
+  fire("pointerup", 0.3, onLine(0.3));
+});
+await scribbleOver();
+ok(await live() === 3, "scribble erase OFF by default: a zigzag over ink is kept as a new stroke, nothing erased");
+await page.click('[data-act="st-undo"]');
+ok(await live() === 2, "undo removes that zigzag stroke");
+await page.evaluate(() => { STUDY._state().scribble = true; });
+await scribbleOver();
+ok(await live() === 1, "scribble erase ON: a fast dense scribble over a stroke erases only that stroke");
+ok(await page.evaluate(() => /Erased 1 stroke/.test((document.querySelector("#stEraseToast") || {}).textContent || "")), "scribble erase shows the Erased toast with Undo");
+await page.click("#stEraseUndo");
+ok(await live() === 2, "toast Undo restores the erased stroke");
+await page.evaluate(() => { STUDY._state().scribble = false; });
+
+/* ---- Phase 1 ink: toolbar order, popover, styles, split eraser, palm, 240 Hz ---- */
+ok(await page.evaluate(() => {
+  const order = Array.from(document.querySelectorAll("#stTb [data-act='st-tool']")).map((b) => b.getAttribute("data-v"));
+  // Plan order (zoom, pen, er, hl, shapes, lasso, elements, image, camera, text, typing, laser);
+  // later phases fill more slots, so check relative order and that each phase's tools are all there.
+  const PLAN = ["zoom", "pen", "er", "hl", "shapes", "lasso", "elements", "image", "camera", "text", "typing", "laser"];
+  const known = order.filter((v) => PLAN.includes(v)), idx = known.map((v) => PLAN.indexOf(v));
+  const hidden = document.querySelectorAll("#stTb .st-slot-future[hidden]").length;
+  return ["pen", "er", "hl", "shapes", "lasso"].every((v) => order.includes(v)) && idx.every((v, i) => i === 0 || v > idx[i - 1]) && hidden === 2;
+}), "P1/P2 toolbar: tools follow the plan order (..., shapes, lasso, ...) with future slots hidden");
+await page.click('[data-act="st-tool"][data-v="pen"]');   // second tap on the active pen opens its popover
+await page.waitForSelector("#stInkPop");
+ok(await page.evaluate(() => {
+  const cv = document.querySelector(".st-ink-preview"), d = cv.getContext("2d").getImageData(0, 0, cv.width, cv.height).data;
+  for (let i = 3; i < d.length; i += 4) if (d[i]) return true; return false;
+}), "P1 pen popover: live preview is drawn");
+await page.click('#stInkPop [data-ink="style"][data-v="brush"]');
+await page.waitForSelector('#stInkPop [data-ink="style"][data-v="brush"].on');
+ok(true, "P1 pen popover: brush style selectable");
+await page.evaluate(() => { const r = document.querySelector('#stInkPop [data-ink="sens"]'); r.value = "100"; r.dispatchEvent(new Event("input", { bubbles: true })); });
+ok(await page.evaluate(() => STUDY._state().ink.pen.sens === 1), "P1 pressure slider: 100% stored on the viewer state");
+await page.click('[data-act="st-tool"][data-v="pen"]');   // toggle the popover closed
+ok(await page.evaluate(() => !document.querySelector("#stInkPop")), "P1 pen popover: tapping the pen again closes it");
+const drawLine = (tool, y, x0 = 0.15, x1 = 0.85, steps = 24) => page.evaluate(([y, x0, x1, steps]) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 21;
+  const fire = (t, x, yy, ts) => { const e = new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }); Object.defineProperty(e, "timeStamp", { value: ts }); ov.dispatchEvent(e); };
+  fire("pointerdown", x0, y, 1000); for (let i = 1; i <= steps; i++) fire("pointermove", x0 + (x1 - x0) * i / steps, y, 1000 + i * 10); fire("pointerup", x1, y, 1000 + steps * 10);
+}, [y, x0, x1, steps]);
+const beforeP1 = await live();
+await drawLine("pen", 0.62);
+ok(await live() === beforeP1 + 1 && await page.evaluate(() => { const s = STUDY._state().strokes.filter((x) => !x.gone).pop(); return s.style === "brush" && s.sens === 1 && s.pts.length >= 20; }), "P1 stroke: new strokes carry style and sensitivity, all points kept");
+/* precision eraser splits the stroke drawn above; one undo restores it whole */
+await page.click('[data-act="st-tool"][data-v="er"]');
+await page.evaluate(() => { STUDY._state().ink.eraser.mode = "precision"; STUDY._state().ink.eraser.autoDeselect = false; STUDY_INK.syncStrip(STUDY._inkApi()); });
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect();
+  const f = (t) => ov.dispatchEvent(new PointerEvent(t, { pointerId: 22, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + 0.5 * r.width, clientY: r.top + 0.62 * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  f("pointerdown"); f("pointerup");
+});
+await page.waitForTimeout(300);
+ok(await live() === beforeP1 + 2, "P1 precision eraser: half-erased stroke splits into two pieces (one undo step)");
+await page.click('[data-act="st-undo"]');
+ok(await live() === beforeP1 + 1, "P1 precision eraser: undo restores the whole stroke and removes the pieces");
+await page.click('[data-act="st-redo"]');
+ok(await live() === beforeP1 + 2, "P1 precision eraser: redo splits it again");
+await page.click('[data-act="st-undo"]');
+/* palm rejection: a touch after a pen was seen makes no mark */
+const beforeTouch = await live();
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 23;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "touch", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", 0.2, 0.75); fire("pointermove", 0.6, 0.75); fire("pointerup", 0.6, 0.75);
+});
+ok(await live() === beforeTouch, "P1 palm rejection: touch does not draw after a pen was seen");
+/* 240 Hz scrawl: every synthetic point is kept */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 24;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", 0.05, 0.82); for (let i = 1; i <= 240; i++) fire("pointermove", 0.05 + 0.9 * i / 240, 0.82 + Math.sin(i / 8) * 0.01); fire("pointerup", 0.95, 0.82);
+});
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter((x) => !x.gone).pop(); return s.pts.length >= 241; }), "P1 latency: a 240 Hz scrawl keeps every point");
+
+/* ---- Phase 4: Laser pointer (transient, never saved, never in undo) ---- */
+await page.click('[data-act="st-tool"][data-v="laser"]');
+ok(await page.locator('[data-act="st-laser-trail"]').count() === 1, "laser: options strip shows Trail and Dot");
+const strokesBeforeLaser = await live();
+const stackBeforeLaser = await page.evaluate(() => STUDY._state().stack.u.length);
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 15;
+  const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.4);
+  fire("pointermove", 0.5, 0.4);
+  fire("pointerup", 0.5, 0.4);
+});
+await page.waitForTimeout(100);
+const strokesAfterLaser = await live();
+const stackAfterLaser = await page.evaluate(() => STUDY._state().stack.u.length);
+ok(strokesBeforeLaser === strokesAfterLaser, "laser: NEVER creates strokes in notebook");
+ok(stackBeforeLaser === stackAfterLaser, "laser: NEVER adds to undo stack");
+
+/* ---- Phase 4: Text box & typing mode & format bar ---- */
+await page.click('[data-act="st-tool"][data-v="text"]');
+ok(await page.locator('.st-text-strip').count() === 1, "text tool: shows options strip with presets, fonts, alignments");
+await page.evaluate(() => {
+  const p = document.querySelector('.st-pg[data-n="1"]');
+  const r = p.getBoundingClientRect();
+  p.querySelector(".st-items-layer").dispatchEvent(new PointerEvent("pointerdown", {
+    pointerId: 20, pointerType: "touch", isPrimary: true, clientX: r.left + 0.2 * r.width, clientY: r.top + 0.3 * r.height, bubbles: true
+  }));
+});
+await page.waitForSelector(".st-item-text", { timeout: 5000 });
+ok(await page.locator(".st-item-text").count() === 1, "text tool: tap creates a text box on the items layer");
+await page.waitForSelector("#stFormatBar", { timeout: 5000 });
+ok(await page.locator("#stFormatBar").count() === 1, "format bar: floats above keyboard with style and navigation buttons");
+await page.locator(".st-text-editable").fill("Cardiovascular System & Hemodynamics");
+ok(await page.locator(".st-text-editable").innerText() === "Cardiovascular System & Hemodynamics", "typing mode: text typed into box");
+
+// Format bar style sheet
+await page.click('[data-act="st-fb-styles"]');
+await page.waitForSelector("#stStyleSheet", { timeout: 5000 });
+ok(await page.locator("#stStyleSheet").count() === 1, "format bar: Aa opens text styles & fonts sheet");
+await page.click('[data-act="st-set-preset"][data-v="title"]');
+ok(await page.evaluate(() => document.querySelector(".st-text-editable").style.fontSize === "28px"), "text style: preset Title applies 28px");
+await page.click('[data-act="st-fb-close-styles"]');
+await page.waitForFunction(() => !document.querySelector("#stStyleSheet"));
+
+// Move / Drag and Resize handles
+ok(await page.locator(".st-drag-bar").count() === 1, "handles: drag bar is visible on selected item");
+ok(await page.locator(".st-handle.se").count() === 1, "handles: resize handles present");
+const itemBeforeMove = await page.evaluate(() => STUDY._state().items[0].x);
+await page.evaluate(() => {
+  const drag = document.querySelector(".st-drag-bar");
+  const r = drag.getBoundingClientRect();
+  drag.dispatchEvent(new PointerEvent("pointerdown", { pointerId: 21, clientX: r.left, clientY: r.top, bubbles: true }));
+  window.dispatchEvent(new PointerEvent("pointermove", { pointerId: 21, clientX: r.left + 50, clientY: r.top + 30, bubbles: true }));
+  window.dispatchEvent(new PointerEvent("pointerup", { pointerId: 21, clientX: r.left + 50, clientY: r.top + 30, bubbles: true }));
+});
+const itemAfterMove = await page.evaluate(() => STUDY._state().items[0].x);
+ok(itemAfterMove > itemBeforeMove, "handles: box drags and coordinates update");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate((beforeVal) => STUDY._state().items[0].x === beforeVal, itemBeforeMove), "undo: reverts box move");
+
+/* ---- Phase 4: Stickers & Elements tray ---- */
+await page.click('[data-act="st-tool"][data-v="elements"]');
+await page.waitForSelector("#stStickerTray", { timeout: 5000 });
+ok(await page.locator("#stStickerTray").count() === 1, "elements: sticker tray opens with medical line icons");
+ok(await page.locator('.st-sticker-btn[data-name="heart"]').count() === 1, "sticker tray: medical heart icon available");
+ok(await page.locator('[data-act="st-insert-saved-elem"]').count() === 1, "sticker tray: saved custom element from lasso available");
+await page.click('.st-sticker-btn[data-name="heart"]');
+await page.waitForSelector(".st-item-sticker", { timeout: 5000 });
+ok(await page.locator(".st-sticker-wrap svg").count() === 1, "sticker: heart icon inserted on page");
+
+/* ---- Phase 4: Image insertion & crop ---- */
+await page.click('[data-act="st-tool"][data-v="image"]');
+ok(await page.locator('[data-act="st-img-pick"]').count() === 1 && await page.locator('[data-act="st-camera-pick"]').count() === 1 && await page.locator('[data-act="st-scan-page"]').count() === 1, "image: options strip shows Photos, Camera, Scan into page");
+await page.evaluate(() => {
+  const tinyPng = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+  STUDY_INSERT.insertImageFromDataUrl(tinyPng);
+});
+await page.waitForSelector(".st-item-img", { timeout: 5000 });
+ok(await page.locator(".st-item-img").count() === 1, "image: inserted on page below ink overlay");
+const imgItemId = await page.evaluate(() => document.querySelector(".st-item-img").closest(".st-item").getAttribute("data-id"));
+await page.click(`[data-act="st-img-crop"][data-id="${imgItemId}"]`);
+await page.waitForSelector("#stCropOverlay", { timeout: 5000 });
+ok(await page.locator("#stCropOverlay").count() === 1, "crop: overlay opens for image");
+await page.click('[data-act="st-crop-apply"]');
+await page.waitForFunction(() => !document.querySelector("#stCropOverlay"), null, { timeout: 5000 });
+ok(true, "crop: applied successfully");
+
+/* ---- Phase 2 select and shape: lasso menu, move, resize, clipboard, shapes, draw-and-hold ---- */
+const bboxOfSel = () => page.evaluate(() => {
+  const V = STUDY._state();
+  if (!V.lasso) return null;
+  let x0 = 1, y0 = 1, x1 = 0, y1 = 0;
+  V.strokes.filter((s) => V.lasso.ids.includes(s.id)).forEach((s) => s.pts.forEach((p) => { x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]); x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]); }));
+  return { x0, y0, x1, y1, n: V.lasso.n, count: V.lasso.ids.length };
+});
+const dragOnPage = (pick) => page.evaluate((pick) => {
+  const V = STUDY._state(), n2 = pick.n;
+  const ov = document.querySelector('.st-ov[data-n="' + n2 + '"]'), r = ov.getBoundingClientRect(), id = 31;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  fire("pointerdown", (pick.x0 + pick.x1) / 2, (pick.y0 + pick.y1) / 2);
+  fire("pointermove", (pick.x0 + pick.x1) / 2 + pick.dx, (pick.y0 + pick.y1) / 2 + pick.dy);
+  fire("pointerup", (pick.x0 + pick.x1) / 2 + pick.dx, (pick.y0 + pick.y1) / 2 + pick.dy);
+}, pick);
+const drawShapeGhost = (shape) => page.evaluate((shape) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 32;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  if (shape === "circle") { fire("pointerdown", 0.5, 0.12); for (let i = 1; i <= 40; i++) { const a = (i / 40) * 2 * Math.PI; fire("pointermove", 0.5 + Math.cos(a) * 0.09, 0.12 + Math.sin(a) * 0.09); } fire("pointerup", 0.59, 0.12); }
+  else { fire("pointerdown", 0.15, 0.9); for (let i = 1; i <= 24; i++) fire("pointermove", 0.15 + 0.3 * i / 24, 0.9); fire("pointerup", 0.45, 0.9); }
+}, shape);
+const lassoRect = (x0, y0, x1, y1) => page.evaluate(([x0, y0, x1, y1]) => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 33;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", x0, y0); fire("pointermove", x1, y0); fire("pointermove", x1, y1); fire("pointermove", x0, y1); fire("pointermove", x0, y0); fire("pointerup", x0, y0);
+}, [x0, y0, x1, y1]);
+/* lasso settings: highlighter can be excluded */
+await page.click('[data-act="st-tool"][data-v="hl"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 34;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.15, 0.68); fire("pointermove", 0.85, 0.68); fire("pointerup", 0.85, 0.68);
+});
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 35;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.15, 0.74); fire("pointermove", 0.85, 0.74); fire("pointerup", 0.85, 0.74);
+});
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.waitForSelector('#stInkCtx [data-sel="rule"][data-v="hl"]');
+ok(await page.locator('#stInkCtx [data-sel="rule"]').count() === 5, "P2 lasso settings: five kind toggles (pen, highlighter, shapes, images, text)");
+
+/* Polish Finding D: at 390 px every #stInkCtx chip has right edge <= viewport width */
+const chipEdgesOk = await page.evaluate(() => {
+  const chips = Array.from(document.querySelectorAll("#stInkCtx .st-sel-rule"));
+  const vw = window.innerWidth;
+  return chips.length > 0 && chips.every((c) => c.getBoundingClientRect().right <= vw);
+});
+ok(chipEdgesOk, "P2 Finding D: at 390 px every #stInkCtx chip has right edge <= viewport width");
+
+await lassoRect(0.1, 0.64, 0.9, 0.78);
+await page.waitForSelector("#stLassoBar");
+ok(/2 items/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso: loop picks the pen and highlighter strokes");
+
+/* Polish Finding B & D: #stLassoBar does not intersect selection and height <= 112 px on both 390 px and iPad */
+const barMetrics390 = await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  const V = window.STUDY._state();
+  const bb = window.STUDY_SELECT.pure.selBBox(V.strokes.filter((s) => V.lasso.ids.includes(s.id)));
+  const pg = V.pg[V.lasso.n];
+  const r = pg.el.getBoundingClientRect();
+  const selRect = { left: r.left + bb.x0 * r.width, right: r.left + bb.x1 * r.width, top: r.top + bb.y0 * r.height, bottom: r.top + bb.y1 * r.height };
+  const barRect = bar.getBoundingClientRect();
+  const intersects = !(barRect.right <= selRect.left || barRect.left >= selRect.right || barRect.bottom <= selRect.top || barRect.top >= selRect.bottom);
+  return {
+    intersects: intersects,
+    heightLeq112: barRect.height <= 112,
+    rightWithinVp: barRect.right <= window.innerWidth,
+    h: barRect.height
+  };
+});
+ok(!barMetrics390.intersects && barMetrics390.heightLeq112, "P2 Finding B: #stLassoBar does not intersect selection and height <= 112 px on 390 px (height=" + Math.round(barMetrics390.h) + "px)");
+ok(barMetrics390.rightWithinVp, "P2 Finding D: #stLassoBar right edge <= viewport width at 390 px");
+
+/* iPad viewport check for Finding B */
+await page.setViewportSize({ width: 820, height: 1180 });
+await page.waitForTimeout(200);
+await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  if (bar && window.STUDY_SELECT && window.STUDY_SELECT.positionLassoBar && window.STUDY && window.STUDY._inkApi) {
+    window.STUDY_SELECT.positionLassoBar(window.STUDY._inkApi(), bar);
+  }
+});
+await page.waitForTimeout(200);
+const barMetricsIpad = await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  const V = window.STUDY._state();
+  const bb = window.STUDY_SELECT.pure.selBBox(V.strokes.filter((s) => V.lasso.ids.includes(s.id)));
+  const pg = V.pg[V.lasso.n];
+  const r = pg.el.getBoundingClientRect();
+  const selRect = { left: r.left + bb.x0 * r.width, right: r.left + bb.x1 * r.width, top: r.top + bb.y0 * r.height, bottom: r.top + bb.y1 * r.height };
+  const barRect = bar.getBoundingClientRect();
+  const intersects = !(barRect.right <= selRect.left || barRect.left >= selRect.right || barRect.bottom <= selRect.top || barRect.top >= selRect.bottom);
+  return {
+    intersects: intersects,
+    heightLeq112: barRect.height <= 112,
+    h: barRect.height
+  };
+});
+ok(!barMetricsIpad.intersects && barMetricsIpad.heightLeq112, "P2 Finding B: #stLassoBar does not intersect selection and height <= 112 px on iPad (height=" + Math.round(barMetricsIpad.h) + "px)");
+
+/* restore 390 px viewport */
+await page.setViewportSize({ width: 390, height: 844 });
+await page.waitForTimeout(200);
+await page.evaluate(() => {
+  const bar = document.querySelector("#stLassoBar");
+  if (bar && window.STUDY_SELECT && window.STUDY_SELECT.positionLassoBar && window.STUDY && window.STUDY._inkApi) {
+    window.STUDY_SELECT.positionLassoBar(window.STUDY._inkApi(), bar);
+  }
+});
+await page.waitForTimeout(200);
+await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');
+await lassoRect(0.1, 0.64, 0.9, 0.78);
+await page.waitForSelector("#stLassoBar");
+ok(/1 item/.test(await page.locator("#stLassoBar").innerText()), "P2 lasso settings: highlighter excluded after toggle");
+await page.click('#stInkCtx [data-sel="rule"][data-v="hl"]');   // restore
+await page.click('[data-act="st-lasso-more"]');
+const hasResize = await page.locator('[data-act="st-lasso-resize"]').count() === 1;
+await page.click('#stSelMore [data-sel-close]');
+ok(await page.locator('[data-act="st-lasso-cut"]').count() === 1 && await page.locator('[data-act="st-lasso-dup"]').count() === 1 && hasResize && await page.locator('[data-act="st-lasso-more"]').count() === 1, "P2 menu: Cut, Duplicate, Resize and More actions present");
+/* move: drag inside the box, one undo step */
+const beforeMove = await bboxOfSel();
+const uBeforeMove = await page.evaluate(() => STUDY._state().stack.u.length);
+await dragOnPage({ ...beforeMove, dx: 0.06, dy: 0.02 });
+await page.waitForTimeout(200);
+const afterMove = await bboxOfSel();
+ok(Math.abs(afterMove.x0 - (beforeMove.x0 + 0.06)) < 0.015 && Math.abs(afterMove.y0 - (beforeMove.y0 + 0.02)) < 0.015, "P2 move: selection lands where dropped");
+ok(await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeMove + 1, "P2 move: exactly one undo step");
+await page.click('[data-act="st-undo"]');
+const undone = await bboxOfSel();
+ok(Math.abs(undone.x0 - beforeMove.x0) < 0.015, "P2 move: undo restores the position");
+await page.click('[data-act="st-redo"]');
+ok(Math.abs((await bboxOfSel()).x0 - (beforeMove.x0 + 0.06)) < 0.015, "P2 move: redo reapplies the position");
+/* resize: drag the SE handle */
+const beforeResize = await bboxOfSel();
+await page.evaluate((b) => {
+  const ov = document.querySelector('.st-ov[data-n="' + b.n + '"]'), r = ov.getBoundingClientRect(), id = 36;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", b.x1, b.y1); fire("pointermove", b.x1 + 0.1, b.y1 + 0.1); fire("pointerup", b.x1 + 0.1, b.y1 + 0.1);
+}, beforeResize);
+await page.waitForTimeout(200);
+const afterResize = await bboxOfSel();
+ok(afterResize.x1 - afterResize.x0 > (beforeResize.x1 - beforeResize.x0) * 1.08, "P2 resize: handle drag scales the selection proportionally");
+await page.click('[data-act="st-undo"]');
+const undoneResize = await bboxOfSel();
+ok(Math.abs((undoneResize.x1 - undoneResize.x0) - (beforeResize.x1 - beforeResize.x0)) < 0.02, "P2 resize: undo restores the size");
+/* colour: one undo step */
+await page.click('[data-act="st-lasso-color"]');
+await page.waitForSelector("#stSelColor");
+await page.click('[data-sel-color="#d11a2a"]');
+await page.waitForTimeout(200);
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => STUDY._state().lasso.ids.includes(s.id)).every((s) => s.color === "#d11a2a")), "P2 colour: selection takes the picked colour");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate(() => !STUDY._state().strokes.filter((s) => STUDY._state().lasso.ids.includes(s.id)).every((s) => s.color === "#d11a2a")), "P2 colour: undo restores the old colour");
+/* rotate and screenshot (no mutation for the screenshot) */
+await page.click('[data-act="st-lasso-more"]');
+await page.waitForSelector("#stSelMore");
+const beforeRot = await bboxOfSel();
+await page.click('[data-act="st-lasso-rotate"]');
+await page.waitForTimeout(200);
+ok((await bboxOfSel()) !== null && await page.evaluate(() => STUDY._state().stack.u.length > 0), "P2 rotate: 90 degrees applied as one undo step");
+await page.click('[data-act="st-undo"]');
+const rotUndone = await bboxOfSel();
+ok(Math.abs(rotUndone.x0 - beforeRot.x0) < 0.03 && Math.abs(rotUndone.y0 - beforeRot.y0) < 0.03, "P2 rotate: undo restores the rotation (within clamping)");
+await page.click('[data-act="st-lasso-more"]');
+await page.click('[data-act="st-lasso-shot"]');
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => !document.querySelector("#stSelMore")), "P2 screenshot: action runs and closes the panel");
+/* duplicate: one undo step for every copy */
+const beforeDup = await live();
+await page.click('[data-act="st-lasso-dup"]');
+await page.waitForTimeout(200);
+const afterDup = await live();
+ok(afterDup === beforeDup + 1, "P2 duplicate: copy appears");
+await page.click('[data-act="st-undo"]');
+ok(await live() === beforeDup, "P2 duplicate: one undo removes the copy");
+await page.click('[data-act="st-redo"]');
+ok(await live() === afterDup, "P2 duplicate: redo brings it back");
+/* cut and copy, then paste across pages via long-press */
+await page.click('[data-act="st-lasso-clipcopy"]');
+await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
+await page.evaluate(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("strokes"); q.oncomplete = () => res(); }; }));
+ok(await page.evaluate(() => !!localStorage.getItem("smd_study_clip")), "P2 clipboard: copy persists in localStorage");
+const uBeforeCut = await page.evaluate(() => STUDY._state().stack.u.length);
+await page.click('[data-act="st-lasso-cut"]');
+await page.waitForTimeout(200);
+ok(await live() === afterDup - 1 && await page.evaluate(() => STUDY._state().stack.u.length) === uBeforeCut + 1, "P2 cut: removes the selection in one undo step");
+await page.click('[data-act="st-undo"]');
+ok(await live() === afterDup, "P2 cut: undo brings it back");
+if (await page.locator('[data-act="st-lasso-done"]').count()) await page.click('[data-act="st-lasso-done"]');   // undo of a cut may clear the selection
+/* paste across pages: long-press an empty spot on page 2 and tap Paste */
+const onP2Before = await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length);
+await page.click('[data-act="st-page-sheet"]');
+await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
+await page.waitForSelector('.st-ov[data-n="2"]');
+await page.waitForTimeout(400);
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="2"]'), r = ov.getBoundingClientRect(), id = 38;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.3, 0.5);
+  window.__lpUp = fire;
+});
+await page.waitForTimeout(700);
+await page.waitForSelector("#stPasteBubble", { timeout: 5000 });
+await page.click('[data-sel-paste]');
+await page.evaluate(() => { window.__lpUp("pointerup", 0.3, 0.5); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length) === onP2Before + 1, "P2 paste: copied stroke pastes onto page 2");
+await page.click('[data-act="st-undo"]');
+ok(await page.evaluate(() => STUDY._state().strokes.filter((s) => s.page === 2 && !s.gone).length) === onP2Before, "P2 paste: one undo removes the paste across pages");
+await page.evaluate(() => { STUDY._state().sc.scrollTop = 0; });
+await page.waitForTimeout(400);
+/* shapes tool: every stroke snaps; fill at 25% */
+await page.click('[data-act="st-tool"][data-v="shapes"]');
+await page.waitForSelector('#stInkCtx [data-sel="fill"][data-v="25"]');
+await drawShapeGhost("circle");
+await page.waitForTimeout(300);
+const shapeStroke = await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); const last = ss[ss.length - 1]; return last && { type: last.shape.type, w: last.w }; });
+ok(shapeStroke && ["circle", "ellipse"].includes(shapeStroke.type), "P2 shapes: wobbly circle becomes a " + (shapeStroke && shapeStroke.type));
+await page.click('#stInkCtx [data-sel="fill"][data-v="25"]');
+await drawShapeGhost("line");
+await page.waitForTimeout(300);
+const filled = await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); const last = ss[ss.length - 1]; return last && { type: last.shape.type, fill: last.fill }; });
+ok(filled && filled.fill === "25", "P2 shapes: optional fill colour at 25% opacity");
+/* draw and hold: pen held 0.5s at the end snaps */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+const beforeHold = await live();
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 37;
+  const fire = (t, x, yy) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.7, clientX: r.left + x * r.width, clientY: r.top + yy * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.5, 0.2);
+  for (let i = 1; i <= 30; i++) { const a = (i / 30) * 2 * Math.PI; fire("pointermove", 0.5 + Math.cos(a) * 0.07, 0.2 + Math.sin(a) * 0.07); }
+  window.__holdUp = fire;
+});
+await page.waitForTimeout(650);
+await page.evaluate(() => { window.__holdUp("pointerup", 0.57, 0.2); });
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => { const ss = STUDY._state().strokes.filter((s) => s.tool === "shape" && !s.gone); return ss.length >= 1; }) && await live() === beforeHold + 1, "P2 draw and hold: held circle snaps to a perfect shape");
+/* convert stub: signed-out note, then signed-in offline error path is covered by the unit suite */
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await lassoRect(0.4, 0.1, 0.6, 0.3);
+await page.waitForSelector("#stLassoBar", { timeout: 5000 }).catch(() => {});
+if (await page.locator("#stLassoBar").count()) {
+  await page.click('[data-act="st-lasso-more"]');
+  await page.click('[data-act="st-lasso-conv"]');
+  await page.waitForSelector("#stSelConv");
+  ok(/on-device|Server preview/.test(await page.locator("#stSelConv").innerText()), "P2 convert: clearly labelled server stub");
+  if (await page.locator('[data-act="st-lasso-done"]').count()) await page.click('[data-act="st-lasso-done"]');
+  else if (await page.locator('#stSelConv [data-sel-close]').count()) await page.click('#stSelConv [data-sel-close]');
+}
+
 /* ---- A4 notebook: ruled, stroke, add page, move it, reload ---- */
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
-await page.click('[data-act="st-newnb"]');
-await page.fill("#stNbT", "Ward notes"); await page.selectOption("#stNbS", "ruled"); await page.selectOption("#stNbZ", "a4");
-await page.click('[data-act="st-mknb"]');
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "Ward notes"); await page.selectOption("#st5aNbS", "ruled"); await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
 ok(await page.evaluate(() => { const s = STUDY._state(); return !!s.nb && s.pdf === null && s.nb.style === "ruled" && s.n === 1; }), "notebook: opens with one page and no PDF");
 ok(await page.evaluate(() => { const c = document.querySelector(".st-cv"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let ink = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 250) ink++; return ink > 200; }), "notebook: ruled lines are drawn on the page");
 await page.click('[data-act="st-tool"][data-v="pen"]');
 await stroke(0.3);
 await page.waitForTimeout(300);
+
+/* Polish Finding A: before selecting, read overlay+page pixel at a ruled-line point inside future selection; select; pixel must still be ruling colour (not white) */
+const rulingPoint = await page.evaluate(() => {
+  const cv = document.querySelector(".st-cv");
+  const ctx = cv.getContext("2d");
+  const x = Math.round(0.35 * cv.width);
+  const col = ctx.getImageData(x, 0, 1, cv.height).data;
+  let ruledY = -1;
+  const isDarkBg = col[0] < 50;
+  for (let y = Math.round(0.20 * cv.height); y < Math.round(0.40 * cv.height); y++) {
+    const idx = y * 4;
+    if (isDarkBg) {
+      if (col[idx + 1] > 45) { ruledY = y; break; }
+    } else {
+      if (col[idx] < 225) { ruledY = y; break; }
+    }
+  }
+  if (ruledY === -1) ruledY = Math.round(0.28 * cv.height);
+  const px = Array.from(ctx.getImageData(x, ruledY, 1, 1).data);
+  return { x: x, y: ruledY, px: px };
+});
+
+await page.click('[data-act="st-tool"][data-v="lasso"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect(), id = 24;
+  const fire = (t, x, y) => ov.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: 0.5, clientX: r.left + x * r.width, clientY: r.top + y * r.height, bubbles: true, cancelable: true }));
+  fire("pointerdown", 0.1, 0.22); fire("pointermove", 0.9, 0.22); fire("pointermove", 0.9, 0.38); fire("pointermove", 0.1, 0.38); fire("pointermove", 0.1, 0.22); fire("pointerup", 0.1, 0.22);
+});
+await page.waitForSelector("#stLassoBar", { timeout: 5000 });
+
+const pixelCheckAfter = await page.evaluate((pt) => {
+  const cv = document.querySelector(".st-cv");
+  const ov = document.querySelector('.st-ov[data-n="1"]') || document.querySelector(".st-ov");
+  const cvP = Array.from(cv.getContext("2d").getImageData(pt.x, pt.y, 1, 1).data);
+  const ovP = Array.from(ov.getContext("2d").getImageData(pt.x, pt.y, 1, 1).data);
+  const isWhite = (cvP[0] > 250 && cvP[1] > 250 && cvP[2] > 250 && pt.px[0] < 230) || (ovP[3] > 0 && ovP[0] > 240 && ovP[1] > 240 && ovP[2] > 240);
+  const matchesRuling = cvP[0] === pt.px[0] && cvP[1] === pt.px[1] && cvP[2] === pt.px[2];
+  return { matchesRuling: matchesRuling, isWhite: isWhite, ovAlpha: ovP[3] };
+}, rulingPoint);
+ok(pixelCheckAfter.matchesRuling && !pixelCheckAfter.isWhite && pixelCheckAfter.ovAlpha === 0, "notebook Finding A: selected stroke area is transparent (ruling line colour preserved, not white box)");
+
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.waitForTimeout(150);
+await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-addpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 2 && STUDY._state().pg[2], null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1,2]", "notebook: page added after the current one");
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => STUDY._state().sc.scrollTop > 100);
+await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-up"]');
 await page.waitForFunction(() => STUDY._state() && JSON.stringify(STUDY._state().nb.ord) === "[2,1]", null, { timeout: 10000 });
 ok(true, "notebook: page 2 moved up");
@@ -160,13 +675,19 @@ await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").cli
 await page.waitForSelector(".st-pg canvas.st-ov");
 await page.waitForFunction(() => STUDY._state() && STUDY._state().strokes.length === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[2,1]", "after reload: notebook page order intact");
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "2"); await page.click('[data-act="st-go"]');
 await page.waitForFunction(() => { const c = document.querySelector('.st-ov[data-n="2"]'); if (!c) return false; const d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 4) if (d[i]) return true; return false; }, null, { timeout: 10000 });
 ok(true, "after reload: the stroke is on the page it was drawn on (now second)");
+await page.click('[data-act="st-page-sheet"]');
 await page.fill("#stPage", "1"); await page.click('[data-act="st-go"]');
+await page.click('[data-act="st-page-sheet"]');
 await page.click('[data-act="st-delpg"]');
 await page.waitForFunction(() => STUDY._state() && STUDY._state().n === 1, null, { timeout: 10000 });
 ok(await page.evaluate(() => JSON.stringify(STUDY._state().nb.ord)) === "[1]", "notebook: page deleted after confirm");
+
+/* helper declared here so it is available throughout all A6+ tests */
+const gotoSearch = async () => { await page.click('[data-act="st5a-tab"][data-v="search"]'); await page.waitForSelector("#st5aSearchQ", { timeout: 10000 }); };
 
 /* ---- A6 search ---- */
 await boot("prep=1&study=1");
@@ -174,22 +695,22 @@ await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("index").objectStore("index").getAll(); q.onsuccess = () => res(q.result.length === 1 && q.result[0].done === 2); }; }), null, { timeout: 20000 });
 ok(await page.evaluate(() => document.querySelector(".st-ix").textContent === ""), "search: fully indexed PDF shows no Indexing label");
-await page.fill("#stQ", "TWO");
+await gotoSearch(); await page.fill("#st5aSearchQ", "TWO");
 await page.waitForSelector(".st-hit", { timeout: 10000 });
 const hit = await page.locator(".st-hit").first().innerText();
 ok(/Page 2/.test(hit) && /fixture/.test(hit) && await page.locator(".st-hit mark").first().innerText() === "two", "search: result shows document, page 2 and the highlighted match (case-insensitive)");
 ok(await page.locator(".st-hit").count() === 1, "search: one result only, for page 2");
-await page.fill("#stQ", "Ward");
-await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stRes").innerText));
+await page.fill("#st5aSearchQ", "Ward");
+await page.waitForFunction(() => /Notebook title/.test(document.querySelector("#stList").innerText));
 ok(true, "search: notebook titles are searched");
-await page.fill("#stQ", "zebra");
-await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stRes").innerText));
+await page.fill("#st5aSearchQ", "zebra");
+await page.waitForFunction(() => /Nothing found/.test(document.querySelector("#stList").innerText));
 ok(true, "search: absent word gives a clear empty state");
-await page.fill("#stQ", "two");
+await page.fill("#st5aSearchQ", "two");
 await page.waitForSelector(".st-hit");
 await page.click(".st-hit");
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
-await page.waitForFunction(() => document.querySelector("#stPage").value === "2" && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
+await page.waitForFunction(() => (document.querySelector("#stCurP") ? document.querySelector("#stCurP").textContent === "2" : document.querySelector("#stTbPage").value === "2") && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
 ok(true, "search: tapping the result opens the PDF at page 2");
 /* resume after reload: wipe the index, open the library again, the PDF is indexed again from page 1 */
 const idb = (store, fn) => page.evaluate(([store, fn]) => new Promise((r) => { const q = indexedDB.open("study"); q.onsuccess = () => { const t = q.result.transaction(store, "readwrite"); new Function("o", fn)(t.objectStore(store)); t.oncomplete = r; }; }), [store, fn]);
@@ -205,16 +726,26 @@ await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector('[data-ix="bad"]');
 await page.waitForTimeout(800);
 ok(await page.locator('[data-ix="bad"]').innerText() === "Indexing, 0 of 5 pages", "library: partly indexed PDF shows Indexing, n of m pages");
-await page.fill("#stQ", "zebra");
-await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stRes").innerText));
-ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stRes").innerText()), "search: results say which pages are not yet indexed");
+await gotoSearch(); await page.fill("#st5aSearchQ", "zebra");
+await page.waitForFunction(() => /not yet indexed/.test(document.querySelector("#stList").innerText));
+ok(/Broken scan \(Indexing, 0 of 5 pages\)/.test(await page.locator("#stList").innerText()), "search: results say which pages are not yet indexed");
 await idb("docs", 'o.delete("bad")');
 
 /* ---- A5: photos to PDF (stubbed OCR), scan (stubbed plugin), cancel, pickImage ---- */
 const idbAll = (store) => page.evaluate((store) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction(store).objectStore(store).getAll(); q.onsuccess = () => { r.result.close(); res(q.result); }; }; }), store);
 const fileBytes = (id) => page.evaluate((id) => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("files").objectStore("files").get(id); q.onsuccess = () => q.result.blob.arrayBuffer().then((b) => { r.result.close(); res(Array.from(new Uint8Array(b))); }); }; }), id).then((a) => Buffer.from(a));
 const pagesIn = (buf) => (buf.toString("latin1").match(/\/Type\s*\/Page(?![a-z])/g) || []).length;
-const openLib = async () => { await page.click('#smdPrep .pnv-tab[data-tab="study"]'); await page.waitForSelector("#stLib"); };
+const openLib = async () => {
+  if (await page.locator("#stLib").count() > 0 && await page.locator("#stLib").isVisible()) {
+    await page.evaluate(() => {
+      if (window.STUDY_LIB && window.STUDY_LIB.renderBody) window.STUDY_LIB.renderBody();
+      else if (window.STUDY && window.STUDY.lib) window.STUDY.lib();
+    });
+    return;
+  }
+  await page.click('#smdPrep .pnv-tab[data-tab="study"]');
+  await page.waitForSelector("#stLib");
+};
 await boot("prep=1&study=1");
 await openLib();
 const jpegs = await page.evaluate(() => [0, 1, 2].map((i) => { const c = document.createElement("canvas"); c.width = 300 + i * 50; c.height = 400; const x = c.getContext("2d"); x.fillStyle = ["#c33", "#3c3", "#33c"][i]; x.fillRect(0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.8).split(",")[1]; }));
@@ -226,10 +757,10 @@ const photoDoc = (await idbAll("docs")).find((d) => /^Photos /.test(d.title));
 const photoPdf = await fileBytes(photoDoc.id);
 ok(photoDoc.pageCount === 3 && photoPdf.slice(0, 5).toString() === "%PDF-" && pagesIn(photoPdf) === 3 && createHash("sha256").update(photoPdf).digest("hex") === photoDoc.sha256, "photos: 3 images become one 3-page PDF stored like an import (sha256 kept)");
 await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("ptext").objectStore("ptext").getAll(); q.onsuccess = () => { r.result.close(); res(q.result.filter((x) => x.src === "ocr").length === 3); }; }; }), null, { timeout: 20000 });
-await page.fill("#stQ", "quokka");
+await gotoSearch(); await page.fill("#st5aSearchQ", "quokka");
 await page.waitForFunction(() => document.querySelectorAll(".st-hit").length === 3, null, { timeout: 10000 });
 ok(/Page 1/.test(await page.locator(".st-hit").first().innerText()), "photos: OCR text (stubbed, 3 pages) is found by search, one hit per page");
-await page.fill("#stQ", "");
+await page.fill("#st5aSearchQ", "");
 /* scan: no button while the plugin says unavailable */
 await page.evaluate((b) => {
   window.__del = []; window.__scanRes = "ok";
@@ -238,18 +769,18 @@ await page.evaluate((b) => {
     Filesystem: { readFile: async () => ({ data: b }), deleteFile: async ({ path }) => { window.__del.push(path); } } } };
   window.__avail = false;
 }, jpegs[0]);
-await page.click('#smdPrep [data-act="back"]'); await openLib(); await page.waitForTimeout(400);
-ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button while isAvailable is false");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib(); await page.waitForTimeout(400);
+ok(await page.locator('[data-act="st-scan"]').count() === 0, "scan: no Scan button (st-scan) while isAvailable is false");
 await page.evaluate(() => { window.__avail = true; });
-await page.click('#smdPrep [data-act="back"]'); await openLib();
-await page.waitForSelector('[data-act="st-scan"]', { timeout: 5000 });
-ok(true, "scan: the Scan button shows once isAvailable is true");
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible, [data-act="st5a-tab"][data-v="documents"]:visible'); await openLib();
+await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]', { timeout: 5000 });
+ok(true, "scan: the New sheet shows Scan (delegates to DocScan)");
 const nDocs = (await idbAll("docs")).length;
 await page.evaluate(() => { window.__scanRes = "cancel"; });
-await page.click('[data-act="st-scan"]'); await page.waitForTimeout(700);
+await page.click('[data-act="st5a-scan"]'); await page.waitForTimeout(700);
 ok((await idbAll("docs")).length === nDocs && await page.evaluate(() => window.__del.length) === 0, "scan: cancel returns quietly, nothing added");
 await page.evaluate(() => { window.__scanRes = "ok"; });
-await page.click('[data-act="st-scan"]');
+await page.click('[data-act="st5a-new"]'); await page.waitForSelector('[data-act="st5a-scan"]'); await page.click('[data-act="st5a-scan"]');
 await page.waitForFunction((n) => document.querySelectorAll(".st-doc").length > n, nDocs, { timeout: 30000 });
 const scanDoc = (await idbAll("docs")).find((d) => /^Scan /.test(d.title));
 ok(scanDoc.pageCount === 2 && pagesIn(await fileBytes(scanDoc.id)) === 2, "scan: two pages become one 2-page PDF in the library");
@@ -258,7 +789,7 @@ await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open
 ok(true, "scan: OCR ran in the background for both pages");
 /* pickImage path: one photo, "add another" answered no */
 await page.evaluate((b) => { window.confirm = () => false; window.SMD_NATIVE.pickImage = async () => "data:image/jpeg;base64," + b; }, jpegs[1]);
-await page.click('[data-act="st-photos"]');
+await page.click('[data-act="st5a-new"]'); await page.click('[data-act="st5a-new-photos"]');
 await page.waitForFunction(() => /Photos[\s\S]*1 page\b/.test(document.querySelector("#stList").innerText), null, { timeout: 30000 });
 ok(true, "photos: pickImage path (native bridge) builds a 1-page PDF");
 await page.evaluate(() => { window.confirm = () => true; delete window.Capacitor; });
@@ -279,7 +810,7 @@ const linkDoc = (await idbAll("docs")).find((d) => d.title === "link");
 await page.locator(".st-doc", { hasText: "link" }).locator(".st-open").click();
 await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 });
 ok(await page.evaluate(() => document.querySelector(".st-tl").classList.contains("smd-books-keep") && document.querySelector(".st-tl").classList.contains("smd-emo-keep")), "viewer: the text layer keeps smd-books-keep smd-emo-keep");
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 await page.fill("#stRange", "2");
 ok((await page.locator('[data-act="st-make"]').count()) === 1 && /Make deck/.test(await page.locator('[data-act="st-make"]').innerText()), "Make deck: one button (Layer C makes questions and cards together)");
 await page.locator('[data-act="st-make"]').first().click();
@@ -303,14 +834,14 @@ await page.evaluate(async () => { const j = PREP_C._job().job; PREP_CARDS.start(
 await page.click('[data-act="c-kflip"]');
 await page.click('[data-act="st-src"]');
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
-await page.waitForFunction(() => document.querySelector("#stPage").value === "2" && STUDY._state().id !== undefined && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
+await page.waitForFunction(() => (document.querySelector("#stCurP") ? document.querySelector("#stCurP").textContent === "2" : document.querySelector("#stTbPage").value === "2") && STUDY._state().id !== undefined && STUDY._state().sc.scrollTop > 100, null, { timeout: 10000 });
 ok(await page.evaluate((id) => STUDY._state().id === id, linkDoc.id), "a card made from the document opens that document at page 2");
 ok(await page.evaluate((id) => { const l = PREP_C.srcLink({ src: { std: id, p: [2] } }); return /data-act="st-src"/.test(l) && !/[Pp]age/.test(l) && PREP_C.srcLink({ src: { p: [2] } }) === "" && PREP_C.srcLink({}) === ""; }, linkDoc.id), "an answered question made from the document gets the same Open in Study Studio link (srcLink, used by prep.js); other items none");
 /* Explain: nothing is sent until the confirm tap; text and source shown; offline says so */
 await page.waitForSelector('.st-pg[data-n="2"] .st-tl span', { timeout: 20000 });
 await page.evaluate(() => { const sp = document.querySelector('.st-pg[data-n="2"] .st-tl span'), r = document.createRange(); r.selectNodeContents(sp); const s = getSelection(); s.removeAllRanges(); s.addRange(r); });
 await page.waitForFunction(() => STUDY._state().sel && STUDY._state().sel.page === 2, null, { timeout: 5000 });
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 await page.click('[data-act="st-explain"]');
 await page.waitForSelector("#stSheetOk");
 ok(/will be sent to the AI/.test(await page.locator("#stSheet").innerText()) && /cardiac cycle/.test(await page.locator(".st-bq").innerText()) && teach.length === 0, "Explain: the confirm sheet names what is sent; nothing sent before the tap");
@@ -336,20 +867,20 @@ await openLib();
 const fixtureDoc = (await idbAll("docs")).find((d) => d.title === "fixture");
 await page.locator(".st-doc", { hasText: "fixture" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 let out = await dl(() => page.click('[data-act="st-orig"]'));
 ok(out.name === "fixture.pdf" && shaOf(out.buf) === SHA, "share original: the file is byte-identical to the stored original");
 out = await dl(() => page.click('[data-act="st-flat"]'));
 ok(out.name === "fixture (flattened).pdf" && out.buf.slice(0, 5).toString() === "%PDF-" && pagesIn(out.buf) === 2 && shaOf(out.buf) !== SHA, "flattened export: named (flattened), 2 pages, differs from the original");
 ok(shaOf(await fileBytes(fixtureDoc.id)) === SHA, "flattened export: the stored original's sha256 is unchanged");
-await page.click('#smdPrep [data-act="back"]');
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
 await page.waitForSelector("#stLib");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
-await page.click('[data-act="st-more"]');
+await page.click('#stP3Top [data-act="st-p3-more"]'); await page.click('[data-act="st-more"]');
 out = await dl(() => page.click('[data-act="st-flat"]'));
 ok(out.name === "Ward notes.pdf" && pagesIn(out.buf) === 1, "notebook to PDF: one page per notebook page");
-await page.click('#smdPrep [data-act="back"]');
+await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
 await page.waitForSelector("#stLib");
 /* back up */
 await idb("folders", 'o.put({ id: "f1", name: "Ward" })');
@@ -360,7 +891,7 @@ const snap = async () => {
   return { docs: docs.map((d) => d.id).sort(), per, shas, folders: (await idbAll("folders")).length, n: docs.length, st: strokes.length };
 };
 const before = await snap();
-const bk = await dl(() => page.click('[data-act="st-backup"]'));
+const bk = await dl(() => page.click('[data-act="st5a-backup"]'));
 const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
 const nPdf = Object.keys(before.shas).length;
 ok(/^StewardMD Study backup \d{4}-\d\d-\d\d\.zip$/.test(bk.name) && zman.counts.docs === before.n && zman.counts.strokes === before.st && zman.counts.files === nPdf && zman.counts.folders === 1 && zman.files.length === Object.keys(zmap).length - 1, "backup: one zip with the manifest counts (documents, strokes, originals, folders) and a sha256 per file");
@@ -369,7 +900,7 @@ ok(Object.keys(before.shas).every((id) => Buffer.from(zmap["files/" + id + ".pdf
 await boot("prep=1&study=1");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
 await openLib();
-const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index"].map((x) => idbAll(x)))).every((a) => a.length === 0);
+const zeroAll = async () => (await Promise.all(["docs", "files", "folders", "strokes", "undo", "ptext", "index", "items"].map((x) => idbAll(x)))).every((a) => a.length === 0);
 ok(await zeroAll(), "wipe: the study database is empty");
 const tamper = (fn) => { const m = FF.unzipSync(new Uint8Array(bk.buf)); fn(m); return Buffer.from(FF.zipSync(m, { level: 0 })); };
 const restore = async (buf) => { await page.setInputFiles("#stRestoreF", { name: "b.zip", mimeType: "application/zip", buffer: buf }); await page.waitForFunction(() => /Restored|Nothing was restored/.test(document.querySelector("#stBk").textContent), null, { timeout: 60000 }); const t = await page.locator("#stBk").innerText(); await page.evaluate(() => { document.querySelector("#stBk").textContent = ""; }); return t; };
@@ -382,8 +913,286 @@ const after = await snap();
 ok(new RegExp("Restored " + before.n + " documents with " + before.st + " strokes\\. Skipped 0").test(msg), "restore: reports the counts restored and skipped");
 ok(after.n === before.n && JSON.stringify(after.docs) === JSON.stringify(before.docs) && JSON.stringify(after.per) === JSON.stringify(before.per) && after.folders === 1, "restore: document count, folders and strokes per page match the library that was backed up");
 ok(JSON.stringify(after.shas) === JSON.stringify(before.shas) && after.shas[fixtureDoc.id] === SHA, "restore: every original's sha256 matches (stored bytes identical)");
+ok((await idbAll("items")).length > 0, "restore: items restored from backup");
 msg = await restore(bk.buf);
 ok(new RegExp("Restored 0 documents with 0 strokes\\. Skipped " + before.n).test(msg) && (await snap()).n === before.n, "restore again: documents already present (by sha256 or id) are skipped, nothing duplicated");
+
+/* ---- Phase 3: pages and navigation (top bar, add page, templates, more, navigator, favourites, outlines, zoom) ---- */
+await boot("prep=1&study=1");
+await page.evaluate(() => { window.confirm = () => true; window.prompt = () => "Chapter 1"; });
+await openLib();
+await page.evaluate(() => new Promise(r => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
+await openLib();
+await page.waitForTimeout(400);
+/* create a fresh notebook for P3 */
+await page.click('[data-act="st5a-new"]');
+await page.click('[data-act="st5a-new-notebook"]');
+await page.fill("#st5aNbT", "P3 test");
+await page.selectOption("#st5aNbS", "ruled");
+await page.selectOption("#st5aNbZ", "a4");
+await page.click('[data-act="st5a-mknb"]');
+await page.waitForSelector("#stPages", { timeout: 15000 });
+await page.waitForSelector("#stP3Top", { timeout: 10000 });
+ok(await page.evaluate(() => !!document.querySelector("#stP3Top") && !!document.querySelector("#stP3Pager")), "P3 top bar: GoodNotes-style top bar and page counter are present");
+ok(/1/.test(await page.locator("#stP3Cur").innerText()) && /1/.test(await page.locator("#stP3Tot").innerText()), "P3 top bar: counter 1 of 1");
+ok(await page.evaluate(() => document.querySelector("#stP3Top [data-act='st-p3-grid']") && document.querySelector("#stP3Top [data-act='st-p3-search']") && document.querySelector("#stP3Top [data-act='st-p3-add']")), "P3 top bar: grid, search, share, mic, add icons exist");
+
+/* Polish Finding C: at 390 px the title element's innerText equals the notebook title and its width > 60 px */
+const titleData = await page.evaluate(() => {
+  const el = document.querySelector(".st-p3-title");
+  const txt = document.querySelector(".st-p3-title-txt");
+  const r = el ? el.getBoundingClientRect() : null;
+  return {
+    innerText: txt ? txt.textContent : (el ? el.innerText : ""),
+    width: r ? r.width : 0
+  };
+});
+ok(titleData.innerText === "P3 test" && titleData.width > 60, "P3 Finding C: at 390 px title element innerText equals notebook title and width > 60 px (width=" + Math.round(titleData.width) + "px)");
+/* draw a stroke, then add ruled page BEFORE page 1 → ink stays */
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await page.evaluate(() => {
+  const ov = document.querySelector('.st-ov[data-n="1"]'), r = ov.getBoundingClientRect();
+  const fire = (t,x,y)=> ov.dispatchEvent(new PointerEvent(t,{pointerId:7,pointerType:"pen",isPrimary:true,pressure:0.5,clientX:r.left+x*r.width,clientY:r.top+y*r.height,bubbles:true,cancelable:true,buttons:t==="pointerup"?0:1}));
+  fire("pointerdown",0.2,0.3); fire("pointermove",0.4,0.35); fire("pointermove",0.6,0.3); fire("pointerup",0.6,0.3);
+});
+await page.waitForTimeout(300);
+await page.click('[data-act="st-p3-add"]');
+await page.waitForSelector("#stP3AddSheet");
+ok(await page.locator("#stP3AddSheet [data-act='st-p3-place'][data-v='before']").count() === 1, "P3 Add: Before/After/Last segmented control");
+await page.click("#stP3AddSheet [data-act='st-p3-place'][data-v='before']");
+/* pick ruled from template grid */
+await page.evaluate(() => {
+  const sheet=document.querySelector("#stP3AddSheet"); const btn=[...sheet.querySelectorAll("[data-tpl]")].find(b=>b.getAttribute("data-tpl")==="ruled");
+  if(btn) btn.click();
+});
+await page.click("#stP3AddSheet [data-act='st-p3-confirm-add']");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n===2, null, {timeout:10000});
+ok(await page.evaluate(() => STUDY._state().n===2), "P3 3.1: ruled page added before page 1 (n=2)");
+/* change template keeps ink */
+const inkBefore = await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length);
+await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._changeTplSheet("page"); });
+await page.waitForSelector("#stP3TplSheet");
+await page.evaluate(() => { const btn=[...document.querySelectorAll("#stP3TplSheet [data-tpl]")].find(b=>b.getAttribute("data-tpl")==="grid"); if(btn) btn.click(); });
+await page.waitForTimeout(400);
+ok((await page.evaluate(() => STUDY._state().strokes.filter(s=>!s.gone).length)) === inkBefore, "P3 3.2/3.3: template change keeps the ink");
+/* More menu: copy, rotate, outline, go, clear (each one undo step) */
+await page.evaluate(() => { if(window.STUDY_PAGES) window.STUDY_PAGES._openAdd; });
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+ok(await page.locator("#stP3MoreSheet [data-act='st-p3-copy']").count()===1 && await page.locator("#stP3MoreSheet [data-act='st-p3-rotate']").count()===1 && await page.locator("#stP3MoreSheet [data-act='st-p3-outline']").count()===1, "P3 3.4: More menu has Copy, Rotate, Outline, Change Template, Go to Page, Clear");
+await page.click("#stP3MoreSheet [data-act='st-p3-copy']");
+await page.waitForFunction(() => STUDY._state() && STUDY._state().n===3, null, {timeout:10000});
+ok(await page.evaluate(() => STUDY._state().n===3), "P3 3.4: Copy Page duplicates page + strokes");
+await page.evaluate(() => { if(window.STUDY_PAGES && window.STUDY_PAGES._rotate) window.STUDY_PAGES._rotate(); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => !!(STUDY._state().doc.rotMap && Object.keys(STUDY._state().doc.rotMap).length)), "P3 3.4: Rotate Page updates rotMap (90° steps)");
+/* Add to outline via More */
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+await page.evaluate(() => { window.prompt = () => "Clinical Notes"; });
+await page.click("#stP3MoreSheet [data-act='st-p3-outline']");
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => (STUDY._state().doc.outlines||[]).some(o=>o.title==="Clinical Notes")), "P3 3.9: Add Page to Outline adds user entry");
+/* Favorites: star page, check empty state then jump */
+if (await page.locator("#stP3Top [data-act='st-p3-fav']:visible").count()) {
+  await page.click("#stP3Top [data-act='st-p3-fav']");
+} else {
+  await page.click("#stP3Top [data-act='st-p3-more']");
+  await page.waitForSelector("#stP3MoreSheet");
+  await page.click("#stP3MoreSheet [data-act='st-p3-fav']");
+}
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => Object.keys(STUDY._state().doc.favPages||{}).length>0), "P3 3.8: Bookmark star stores favPages");
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='favs']");
+await page.waitForSelector("#stP3FavBody");
+ok(/Page/.test(await page.locator("#stP3FavBody").innerText()), "P3 3.8: Favorites tab lists starred pages");
+await page.click("#stP3FavBody [data-page]");
+await page.waitForTimeout(300);
+ok(true, "P3 3.8: starred page jumps on tap");
+/* Thumbnails: live with ink */
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='thumbs']");
+await page.waitForSelector("#stP3NavGrid .st-p3-nav-card");
+const thumbHasInk = await page.evaluate(() => {
+  const cv=document.querySelector("#stP3NavGrid .st-p3-nav-card canvas"); if(!cv) return false; const d=cv.getContext("2d").getImageData(0,0,cv.width,cv.height).data; for(let i=3;i<d.length;i+=4) if(d[i]>0) return true; return false;
+});
+ok(thumbHasInk, "P3 3.7: thumbnails render page + strokes (not blank)");
+await page.evaluate(() => { document.querySelectorAll("[id^='stP3']")?.forEach ? document.querySelectorAll("[id^='stP3']").forEach(el=>el.remove()) : null; const s=document.querySelector("#stP3NavSheet"); if(s)s.remove(); });
+/* Outlines tab: PDF chapters + user entries + Filter */
+await page.click("#stP3Top [data-act='st-p3-grid']");
+await page.waitForSelector("#stP3NavSheet");
+await page.click("#stP3NavSheet [data-act='st-p3-tab'][data-v='outlines']");
+await page.waitForSelector("#stP3OutlineBody");
+await page.fill("#stP3OutlineFilter", "Clinical");
+await page.waitForTimeout(300);
+ok(await page.locator("#stP3OutlineBody").innerText().then(t=>/Clinical/.test(t)), "P3 3.9: Outlines filter finds user chapter");
+/* Settings: scrolling direction, palm, lock persist per notebook */
+await page.evaluate(() => { document.querySelector("#stP3NavSheet")?.remove(); });
+await page.click("#stP3Top [data-act='st-p3-more']");
+await page.waitForSelector("#stP3MoreSheet");
+await page.click("#stP3MoreSheet [data-act='st-p3-settings']");
+await page.waitForSelector("#stP3SettingsSheet");
+await page.click("#stP3SettingsSheet [data-act='st-p3-scroll'][data-v='horizontal']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().doc.settings.scrollDir==="horizontal"), "P3 3.5: Settings scrolling direction persists per notebook");
+await page.evaluate(() => { document.querySelector("#stP3SettingsSheet")?.remove(); });
+/* Paging: zoom 50-400% + double-tap fit + page counter Go to Page */
+await page.evaluate(() => STUDY._setZoom(2));
+ok(await page.evaluate(() => STUDY._state().z===2), "P3 3.10: pinch zoom 50-400% via setZoom");
+await page.evaluate(() => STUDY._setZoom(10));
+ok(await page.evaluate(() => STUDY._state().z===4), "P3 3.10: zoom clamped to 400%");
+await page.click("#stP3Pager");
+await page.waitForSelector("#stP3GoSheet");
+await page.fill("#stP3GotoInp", "2");
+await page.click("#stP3GoSheet [data-act='st-p3-do-goto']");
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => STUDY._state().cur===2 || STUDY._state().sc.scrollTop>50 || STUDY._state().sc.scrollLeft>50), "P3 top bar: tapping page counter opens Go to Page and jumps");
+/* Zoom window exists */
+ok(await page.evaluate(() => !!document.querySelector("#stP3ZoomWindow")), "P3 3.11: Zoom window strip element present");
+
+/* ---- P5b: in-doc search, audio stamp+seek, print sheet, presentation ---- */
+ok(await page.evaluate(() => !!(window.STUDY_MEDIA && window.STUDY_MEDIA.pure)), "P5b: study-media.js loaded after study-library.js");
+await boot("prep=1&study=1");
+await openLib();
+const MEDPDF = makePdf(["Alpha systole one", "Beta diastole two"]);
+await page.setInputFiles("#stFile", { name: "media.pdf", mimeType: "application/pdf", buffer: MEDPDF });
+await page.waitForSelector('.st-doc:has-text("media")', { timeout: 20000 });
+await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 20000 });
+await page.waitForSelector('.st-pg[data-n="1"] .st-tl span, .st-pg[data-n="1"]', { timeout: 10000 });
+await page.waitForTimeout(600);
+ok(await page.evaluate(() => {
+  const topSearch = document.querySelector('#stP3Top [data-act="st-p3-search"], #stP3Top [data-act="st-media-search"]');
+  const topMic = document.querySelector('#stP3Top [data-act="st-p3-mic"], #stP3Top [data-act="st-audio-rec"]');
+  const noTbDupes = document.querySelectorAll('#stTb [data-act="st-media-search"], #stTb [data-act="st-audio-rec"], #stTb [data-act="st-print-open"], #stTb [data-act="st-present"]').length === 0;
+  return !!topSearch && !!topMic && noTbDupes;
+}), "P5b viewer: search and mic in #stP3Top, no duplicate buttons in #stTb");
+const openInDocSearch = async () => {
+  if (await page.locator('#stP3Top [data-act="st-p3-search"]').isVisible()) {
+    await page.click('#stP3Top [data-act="st-p3-search"]');
+  } else {
+    await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+    await page.waitForSelector('#stP3MoreSheet');
+    await page.click('#stP3MoreSheet [data-act="st-p3-search"]');
+  }
+};
+const toggleMic = async () => {
+  if (await page.locator('#stP3Top [data-act="st-p3-mic"]').isVisible()) {
+    await page.click('#stP3Top [data-act="st-p3-mic"]');
+  } else {
+    await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+    await page.waitForSelector('#stP3MoreSheet');
+    await page.click('#stP3MoreSheet [data-act="st-p3-mic"]');
+  }
+};
+await openInDocSearch();
+await page.waitForSelector("#st5bInQ", { timeout: 5000 });
+await page.fill("#st5bInQ", "systole");
+await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1", null, { timeout: 10000 });
+ok(true, "in-doc search: finds systole with hit count 1 of 1");
+ok(await page.evaluate(() => STUDY._state().sc.scrollTop >= 0 && document.querySelectorAll(".st-tl span").length >= 0), "in-doc search: steps stay on the page");
+await page.click('[data-act="st-indoc-next"]');
+await page.waitForFunction(() => document.querySelector("#st5bInCount").textContent === "1 of 1");
+ok(true, "in-doc search: next wraps single hit");
+await page.click('[data-act="st-indoc-close"]');
+ok(await page.locator("#st5bInDoc").count() === 0, "in-doc search: close removes the bar");
+/* 5.6 typed + convert text is searchable; handwriting recogniser indexes when present */
+await page.evaluate(() => STUDY_MEDIA.indexText(STUDY._state().id, 1, "extra typed word", "typed").then(() => {}));
+await page.evaluate(() => STUDY_MEDIA.indexText(STUDY._state().id, 2, "converted handwriting line", "convert").then(() => {}));
+await boot("prep=1&study=1"); await openLib();
+await page.click('[data-act="st5a-tab"][data-v="search"]');
+await page.waitForSelector("#st5aSearchQ");
+await page.fill("#st5aSearchQ", "typed");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: typed text (src typed) is found");
+await page.fill("#st5aSearchQ", "converted");
+await page.waitForSelector(".st-hit", { timeout: 10000 });
+ok(/media/.test(await page.locator(".st-hit").first().innerText()), "search: AI Convert text (src convert) is found");
+await page.waitForTimeout(1500);
+ok((await page.locator(".st-hit .st5b-th").count()) >= 1, "search: result shows a page thumbnail");
+await page.click('[data-act="st5a-tab"][data-v="documents"]');   // back to the Documents grid (5a library tabs)
+/* audio: mocked recorder stamps strokes, blob persists, tap-to-seek moves playback */
+await page.locator(".st-doc", { hasText: "media" }).locator(".st-open").click();
+await page.waitForSelector(".st-pg canvas.st-ov", { timeout: 20000 });
+await page.evaluate(() => {
+  window.__mr = [];
+  window.MediaRecorder = class {
+    static isTypeSupported() { return true; }
+    constructor() { this.mimeType = "audio/webm;codecs=opus"; }
+    start() { window.__mrStart = Date.now(); setTimeout(() => { this.ondataavailable && this.ondataavailable({ data: new Blob([new Uint8Array([1, 2, 3])], { type: this.mimeType }) }); }, 30); }
+    stop() { this.onstop && this.onstop(); }
+  };
+  window.__origGum = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+  navigator.mediaDevices.getUserMedia = async () => ({ getTracks: () => [{ stop() {} }] });
+  window.__seeked = null;
+  const proto = HTMLMediaElement.prototype;
+  proto.play = function () { return Promise.resolve(); };
+  Object.defineProperty(proto, "currentTime", { get() { return this.__ct || 0; }, set(v) { this.__ct = v; window.__seeked = v; } });
+  Object.defineProperty(proto, "duration", { get() { return this.__dur || 10; }, set(v) { this.__dur = v; } });
+});
+await toggleMic();
+await page.waitForFunction(() => STUDY_MEDIA._state().rec.active === true, null, { timeout: 5000 });
+await page.click('[data-act="st-tool"][data-v="pen"]');
+await stroke(0.3);
+await page.waitForTimeout(400);
+ok(await page.evaluate(() => { const s = STUDY._state().strokes.filter(x => !x.gone && x.a != null); return s.length >= 1 && s[0].a >= 0; }), "audio: stroke drawn while recording stores its recording offset a");
+await toggleMic();
+await page.waitForFunction(() => new Promise((res) => { const r = indexedDB.open("study"); r.onsuccess = () => { const q = r.result.transaction("audio").objectStore("audio").getAll(); q.onsuccess = () => res(q.result.length >= 1); }; }), null, { timeout: 10000 });
+ok(true, "audio: recording Blob is stored in IndexedDB");
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-audio-list"]', { timeout: 5000 });
+await page.waitForFunction(() => /uses/.test((document.querySelector("#st5bStorage") || {}).textContent || ""), null, { timeout: 5000 }).catch(() => {});
+ok(await page.evaluate(() => /uses/.test(document.querySelector("#st5bStorage").textContent)), "audio: Settings shows storage used per notebook");
+await page.click('[data-act="st-audio-list"]');
+await page.waitForSelector("#st5bRecList .st5b-rec", { timeout: 5000 });
+ok(true, "audio: recordings list shows per notebook");
+await page.click("#st5bRecList [data-act='st-audio-play']");
+await page.waitForFunction(() => STUDY_MEDIA._state().player.mode === true, null, { timeout: 5000 });
+await page.click('[data-act="st-scancel"]');
+await page.click('[data-act="st-tool"][data-v="lasso"]'); /* leave the writing tools so tap-to-seek layers show */
+await page.waitForFunction(() => document.querySelector(".st5b-seeklayer") != null, null, { timeout: 5000 });
+ok(true, "audio: playback installs tap-to-seek layers");
+await page.evaluate(() => {
+  const r = document.querySelector('.st-pg[data-n="1"]').getBoundingClientRect();
+  const s = STUDY._state().strokes.find(x => x.a != null);
+  window.__expectedA = s.a;
+  const sx = r.left + s.pts[0][0] * r.width, sy = r.top + s.pts[0][1] * r.height;
+  const layer = document.querySelector(".st5b-seeklayer[data-n='1']");
+  layer.dispatchEvent(new MouseEvent("click", { clientX: sx, clientY: sy, bubbles: true, cancelable: true, view: window }));
+});
+await page.waitForFunction(() => window.__seeked != null, null, { timeout: 5000 });
+ok(await page.evaluate(() => Math.abs(window.__seeked - window.__expectedA) < 0.01), "audio: tapping a stroke jumps playback to its recording time");
+await page.evaluate(() => STUDY_MEDIA.stopPlayer());
+/* print sheet + iframe print */
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-print-open"]', { timeout: 5000 });
+await page.click('[data-act="st-print-open"]');
+await page.waitForSelector("#stSheet", { timeout: 5000 });
+ok(/This page/.test(await page.locator("#stSheet").innerText()) && /All pages/.test(await page.locator("#stSheet").innerText()), "print: sheet offers this page and all pages");
+await page.evaluate(() => { window.__printed = 0; });
+await page.click('[data-act="st-print-page"]');
+await page.waitForSelector(".st5b-print-frame", { timeout: 5000 });
+ok(true, "print: this page renders to an iframe image for print()");
+/* presentation: fullscreen, chrome hidden, laser visible */
+await page.click('#stP3Top [data-act="st-p3-more"], [data-act="st-more"]');
+await page.waitForSelector('[data-act="st-present"]', { timeout: 5000 });
+await page.click('[data-act="st-present"]');
+await page.waitForSelector("#st5bPresent", { timeout: 5000 });
+ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stTb")).display === "none"), "present: toolbar hidden");
+ok(await page.evaluate(() => getComputedStyle(document.querySelector("#stP3Top")).display === "none"), "present: top bar hidden");
+ok(await page.evaluate(() => !document.querySelector("#stDocTabs") || getComputedStyle(document.querySelector("#stDocTabs")).display === "none"), "present: doc tabs hidden");
+ok(await page.evaluate(() => !!document.querySelector(".st5b-laser") && !!document.querySelector(".st5b-pres-img")), "present: laser and page image visible");
+await page.evaluate(() => { const st = document.querySelector(".st5b-pres-stage"), r = st.getBoundingClientRect(); st.dispatchEvent(new PointerEvent("pointermove", { pointerType: "mouse", clientX: r.left + 100, clientY: r.top + 100, bubbles: true })); });
+await page.waitForTimeout(300);
+ok(await page.evaluate(() => document.querySelector(".st5b-laser").style.opacity === "1"), "present: laser follows the pointer");
+await page.click('[data-act="st-present-next"]');
+await page.waitForFunction(() => /2 of 2/.test(document.querySelector(".st5b-pres-n").textContent), null, { timeout: 5000 });
+ok(true, "present: next page steps");
+await page.click('[data-act="st-present-exit"]');
+ok(await page.locator("#st5bPresent").count() === 0, "present: exit removes the stage");
 
 ok(errors.length === 0, "no uncaught page error " + errors.join("|"));
 

@@ -10,12 +10,27 @@
    "say": "Glycolytic defects declare themselves in red cells that own no mitochondria. Pyruvate kinase deficiency is the commonest, inherited recessively. ATP starved cells stiffen and are culled by the spleen, causing neonatal jaundice, gallstones and iron loading.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Pyruvate kinase deficiency"],
+    "cols": [
+     "Feature",
+     "Pyruvate kinase deficiency"
+    ],
     "rows": [
-     ["Inheritance and frequency", "Autosomal recessive, commonest glycolytic haemolysis"],
-     ["Blood film clue", "Echinocytes, high reticulocytes"],
-     ["2,3-BPG", "Raised, eases oxygen release"],
-     ["Splenectomy", "Helps severe cases, does not cure"]
+     [
+      "Inheritance and frequency",
+      "Autosomal recessive, commonest glycolytic haemolysis"
+     ],
+     [
+      "Blood film clue",
+      "Echinocytes, high reticulocytes"
+     ],
+     [
+      "2,3-BPG",
+      "Raised, eases oxygen release"
+     ],
+     [
+      "Splenectomy",
+      "Helps severe cases, does not cure"
+     ]
     ]
    }
   },
@@ -24,8 +39,21 @@
    "say": "Hexokinase and isomerase deficiencies cause haemolysis without kinase signatures. Muscle phosphofructokinase deficiency, Tarui disease, adds exercise intolerance and myoglobinuria because muscle and red cells share the same subunit. Examiners use that pattern to test isoform reasoning.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Red cell only picture", "points": ["Pyruvate kinase, hexokinase defects", "Haemolysis and splenomegaly", "Exercise tolerance normal"]},
-    "right": {"title": "Red cell plus muscle picture", "points": ["Muscle PFK deficiency (Tarui)", "Haemolysis plus exercise collapse", "Shared subunit explains both"]
+    "left": {
+     "title": "Red cell only picture",
+     "points": [
+      "Pyruvate kinase, hexokinase defects",
+      "Haemolysis and splenomegaly",
+      "Exercise tolerance normal"
+     ]
+    },
+    "right": {
+     "title": "Red cell plus muscle picture",
+     "points": [
+      "Muscle PFK deficiency (Tarui)",
+      "Haemolysis plus exercise collapse",
+      "Shared subunit explains both"
+     ]
     }
    }
   },
@@ -39,12 +67,27 @@
    "say": "Management works around the gate. A ketogenic diet supplies acetyl-CoA from fat below the block, dichloroacetate squeezes residual activity, and thiamine helps responsive variants. Families need illness plans because carbohydrate surges precipitate acidosis.",
    "vis": {
     "kind": "table",
-    "cols": ["Strategy", "How it bypasses the block"],
+    "cols": [
+     "Strategy",
+     "How it bypasses the block"
+    ],
     "rows": [
-     ["Ketogenic diet", "Fat gives acetyl-CoA directly"],
-     ["Dichloroacetate", "Kinase blocked, enzyme held on"],
-     ["Thiamine trial", "Helps cofactor responsive E1 faults"],
-     ["Illness plan", "Prevents surge and catabolism crises"]
+     [
+      "Ketogenic diet",
+      "Fat gives acetyl-CoA directly"
+     ],
+     [
+      "Dichloroacetate",
+      "Kinase blocked, enzyme held on"
+     ],
+     [
+      "Thiamine trial",
+      "Helps cofactor responsive E1 faults"
+     ],
+     [
+      "Illness plan",
+      "Prevents surge and catabolism crises"
+     ]
     ]
    }
   },
@@ -53,8 +96,21 @@
    "say": "Adult lactic acidosis sorts into overproduction with hypoxia versus under clearance without it. Shock and sepsis drive the first group, liver failure, metformin and thiamine deficiency drive the second. Lactate with pyruvate and a drug review separates them faster.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Overproduction (hypoxic)", "points": ["Shock, sepsis, ischaemia", "Lactate to pyruvate ratio high", "Fix perfusion urgently"]},
-    "right": {"title": "Under clearance or PDH failure", "points": ["Liver failure, metformin, thiamine lack", "Pyruvate rises alongside", "Remove drug, give thiamine"]
+    "left": {
+     "title": "Overproduction (hypoxic)",
+     "points": [
+      "Shock, sepsis, ischaemia",
+      "Lactate to pyruvate ratio high",
+      "Fix perfusion urgently"
+     ]
+    },
+    "right": {
+     "title": "Under clearance or PDH failure",
+     "points": [
+      "Liver failure, metformin, thiamine lack",
+      "Pyruvate rises alongside",
+      "Remove drug, give thiamine"
+     ]
     }
    }
   },
@@ -65,11 +121,74 @@
     "kind": "flow",
     "title": "Three stories, three sites",
     "nodes": [
-     {"id": "haem", "label": "Haemolysis: payoff enzymes"},
-     {"id": "brain", "label": "Brain lactate: PDH gate"},
-     {"id": "shock", "label": "Shock lactate: oxygen delivery"}
+     {
+      "id": "haem",
+      "label": "Haemolysis: payoff enzymes"
+     },
+     {
+      "id": "brain",
+      "label": "Brain lactate: PDH gate"
+     },
+     {
+      "id": "shock",
+      "label": "Shock lactate: oxygen delivery"
+     }
     ],
-    "edges": [["haem", "brain"], ["brain", "shock"]]
+    "edges": [
+     [
+      "haem",
+      "brain"
+     ],
+     [
+      "brain",
+      "shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Pyruvate dehydrogenase complex deficiency is an X-linked metabolic disorder causing congenital lactic acidosis, microcephaly, and psychomotor retardation due to inability to convert pyruvate into acetyl-CoA. Treatment requires a ketogenic diet rich in fats and ketogenic amino acids leucine and lysine to generate acetyl-CoA without producing pyruvate. Pyruvate kinase deficiency is an autosomal recessive cause of hereditary non-spherocytic hemolytic anemia, characterized by ATP depletion in erythrocytes and increased 2,3-bisphosphoglycerate.",
+   "say": "Pyruvate dehydrogenase complex deficiency is an X-linked metabolic disorder causing congenital lactic acidosis, microcephaly, and psychomotor retardation due to inability to convert pyruvate into acetyl-CoA. Treatment requires a ketogenic diet rich in fats and ketogenic amino acids leucine and lysine to generate acetyl-CoA without producing pyruvate. Pyruvate kinase deficiency is an autosomal recessive cause of hereditary non-spherocytic hemolytic anemia, characterized by ATP depletion in erythrocytes and increased 2,3-bisphosphoglycerate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "PDH complex inheritance",
+      "X-linked dominant most commonly in E1 alpha subunit gene"
+     ],
+     [
+      "PDH deficiency dietary therapy",
+      "Ketogenic diet with high fat, low carbohydrate, leucine and lysine"
+     ],
+     [
+      "Sole purely ketogenic amino acids",
+      "Leucine and lysine do not yield pyruvate on catabolism"
+     ],
+     [
+      "Pyruvate kinase deficiency genetics",
+      "Autosomal recessive defect in erythrocyte PK isoenzyme"
+     ],
+     [
+      "Hemolytic mechanism in PK defect",
+      "Depleted ATP impairs Na-K ATPase causing erythrocyte lysis"
+     ],
+     [
+      "2,3-BPG level in PK deficiency",
+      "Markedly elevated 2,3-BPG shifting oxygen curve right"
+     ],
+     [
+      "Arsenic poisoning mechanism",
+      "Inhibits lipoic acid cofactor of pyruvate dehydrogenase"
+     ],
+     [
+      "Fluoroacetate mechanism",
+      "Inhibits aconitase in TCA cycle after conversion to fluorocitrate"
+     ]
+    ]
    }
   }
  ],

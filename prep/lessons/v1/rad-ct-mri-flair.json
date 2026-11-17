@@ -55,6 +55,51 @@
    "tx": "**Nephrogenic systemic fibrosis** was linked to older linear gadolinium agents in patients whose glomerular filtration rate fell below 30. Macrocyclic agents carry far lower risk and dominate current practice, but the kidney function and agent group are still recorded before injection. Gadolinium is avoided in pregnancy unless the result changes urgent management, because the agent crosses the placenta and recirculates through the fetal kidneys into amniotic fluid.",
    "say": "Nephrogenic systemic fibrosis was linked to older linear gadolinium agents when filtration fell below thirty. Macrocyclic agents carry far lower risk and dominate current practice, yet kidney function and agent group are still recorded before injection. Gadolinium is avoided in pregnancy unless the result changes urgent care, because it crosses the placenta and recirculates through fetal kidneys.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Check kidney function"}, {"id": "b", "label": "Pick macrocyclic agent"}, {"id": "c", "label": "Record dose and group"}, {"id": "d", "label": "Scan and observe"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: **FLAIR** makes spinal fluid dark while oedema and periventricular plaques stay bright. Acute infarct is bright on diffusion images and dark on the apparent diffusion coefficient map. **T2 shine through** is bright on both, as in vasogenic oedema. True restriction needs both findings together. Ring enhancement fits abscess or necrotic tumour. A dural tail fits meningioma. Linear gadolinium risk of nephrogenic systemic fibrosis rises when filtration falls below 30. The device card, not the device name, clears an implant.",
+   "say": "High-yield for the exam: FLAIR makes spinal fluid dark while oedema and periventricular plaques stay bright. Acute infarct is bright on diffusion images and dark on the apparent diffusion coefficient map. T2 shine through is bright on both, as in vasogenic oedema. True restriction needs both findings together. Ring enhancement fits abscess or necrotic tumour. A dural tail fits meningioma. Linear gadolinium risk of nephrogenic systemic fibrosis rises when filtration falls below 30. The device card, not the device name, clears an implant.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "FLAIR fluid",
+      "Spinal fluid dark, oedema bright"
+     ],
+     [
+      "Periventricular plaque",
+      "Hidden on T2, bright on FLAIR"
+     ],
+     [
+      "Acute infarct",
+      "Bright diffusion, dark coefficient map"
+     ],
+     [
+      "T2 shine through",
+      "Bright diffusion and bright map"
+     ],
+     [
+      "Ring enhancement",
+      "Abscess or necrotic tumour"
+     ],
+     [
+      "Meningioma",
+      "Solid nodular plus dural tail"
+     ],
+     [
+      "Linear gadolinium",
+      "Fibrosis risk if filtration below 30"
+     ],
+     [
+      "Unknown clip or pacemaker",
+      "Bar scan until device card clears"
+     ]
+    ]
+   }
   }
  ]
 }

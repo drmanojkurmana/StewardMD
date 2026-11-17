@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Heme to bilirubin",
     "nodes": [
-     {"id": "heme", "label": "Heme (old red cells)"},
-     {"id": "verd", "label": "Biliverdin plus CO plus iron"},
-     {"id": "uncon", "label": "Unconjugated bilirubin (albumin)"},
-     {"id": "con", "label": "Conjugated in liver (UGT1A1)"}
+     {
+      "id": "heme",
+      "label": "Heme (old red cells)"
+     },
+     {
+      "id": "verd",
+      "label": "Biliverdin plus CO plus iron"
+     },
+     {
+      "id": "uncon",
+      "label": "Unconjugated bilirubin (albumin)"
+     },
+     {
+      "id": "con",
+      "label": "Conjugated in liver (UGT1A1)"
+     }
     ],
-    "edges": [["heme", "verd"], ["verd", "uncon"], ["uncon", "con"]]
+    "edges": [
+     [
+      "heme",
+      "verd"
+     ],
+     [
+      "verd",
+      "uncon"
+     ],
+     [
+      "uncon",
+      "con"
+     ]
+    ]
    }
   },
   {
@@ -25,12 +50,32 @@
    "say": "UGT1A1 conjugates bilirubin and MRP2 exports it rate limitingly to bile. Pale stool plus dark urine means conjugated bilirubin regurgitates to blood and urine instead of gut, predicting the site.",
    "vis": {
     "kind": "table",
-    "cols": ["Finding", "Unconjugated excess", "Conjugated excess"],
+    "cols": [
+     "Finding",
+     "Unconjugated excess",
+     "Conjugated excess"
+    ],
     "rows": [
-     ["Urine bilirubin", "Absent (albumin bound, acholuric)", "Present (water soluble)"],
-     ["Urine urobilinogen", "Raised (more delivered to gut)", "Low or absent (none reaches gut)"],
-     ["Stool colour", "Normal or dark", "Pale or clay when obstructed"],
-     ["Prototype causes", "Haemolysis, Gilbert, Crigler-Najjar", "Obstruction, hepatitis, Dubin-Johnson"]
+     [
+      "Urine bilirubin",
+      "Absent (albumin bound, acholuric)",
+      "Present (water soluble)"
+     ],
+     [
+      "Urine urobilinogen",
+      "Raised (more delivered to gut)",
+      "Low or absent (none reaches gut)"
+     ],
+     [
+      "Stool colour",
+      "Normal or dark",
+      "Pale or clay when obstructed"
+     ],
+     [
+      "Prototype causes",
+      "Haemolysis, Gilbert, Crigler-Najjar",
+      "Obstruction, hepatitis, Dubin-Johnson"
+     ]
     ]
    }
   },
@@ -39,8 +84,21 @@
    "say": "Free unconjugated bilirubin stains basal ganglia as kernicterus when binding or barrier fails. Treatment charts integrate age, gestation and haemolysis risk, not bilirubin alone, for exchange decisions.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Bound bilirubin (safer)", "points": ["Albumin carried, brain excluded", "Total level guides charts", "Phototherapy isomerises for excretion"]},
-    "right": {"title": "Free bilirubin (dangerous)", "points": ["Displacers: sulfonamides, ceftriaxone caution", "Prematurity, acidosis, haemolysis", "Kernicterus risk at lower totals"]
+    "left": {
+     "title": "Bound bilirubin (safer)",
+     "points": [
+      "Albumin carried, brain excluded",
+      "Total level guides charts",
+      "Phototherapy isomerises for excretion"
+     ]
+    },
+    "right": {
+     "title": "Free bilirubin (dangerous)",
+     "points": [
+      "Displacers: sulfonamides, ceftriaxone caution",
+      "Prematurity, acidosis, haemolysis",
+      "Kernicterus risk at lower totals"
+     ]
     }
    }
   },
@@ -54,12 +112,32 @@
    "say": "Crigler-Najjar type one has no enzyme activity and no phenobarbitone response, needing transplant pathways. Type two responds partially to phenobarbitone induction, separating them functionally at the bedside.",
    "vis": {
     "kind": "table",
-    "cols": ["Syndrome", "UGT1A1 activity", "Phenobarbitone response"],
+    "cols": [
+     "Syndrome",
+     "UGT1A1 activity",
+     "Phenobarbitone response"
+    ],
     "rows": [
-     ["Gilbert", "About 30 percent", "Lowers (not needed clinically)"],
-     ["Crigler-Najjar II", "Partial (under 10 percent)", "Lowers by 25 percent plus"],
-     ["Crigler-Najjar I", "Absent", "None; transplant pathway"],
-     ["Dubin-Johnson and Rotor (conjugated)", "Normal conjugation, export or storage fails", "Not applicable (see next step)"]
+     [
+      "Gilbert",
+      "About 30 percent",
+      "Lowers (not needed clinically)"
+     ],
+     [
+      "Crigler-Najjar II",
+      "Partial (under 10 percent)",
+      "Lowers by 25 percent plus"
+     ],
+     [
+      "Crigler-Najjar I",
+      "Absent",
+      "None; transplant pathway"
+     ],
+     [
+      "Dubin-Johnson and Rotor (conjugated)",
+      "Normal conjugation, export or storage fails",
+      "Not applicable (see next step)"
+     ]
     ]
    }
   },
@@ -68,9 +146,67 @@
    "say": "Dubin-Johnson regurgitates conjugated bilirubin with a black liver, while Rotor mimics it mildly without black liver. Both are benign and punish unnecessary surgery when recognised late.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Dubin-Johnson (MRP2 absent)", "points": ["Black liver pigment", "Coproporphyrin I dominant in urine", "Gallbladder non visualisation classic"]},
-    "right": {"title": "Rotor (OATP uptake failure)", "points": ["No black liver", "Total coproporphyrin raised", "Milder, benign"]
+    "left": {
+     "title": "Dubin-Johnson (MRP2 absent)",
+     "points": [
+      "Black liver pigment",
+      "Coproporphyrin I dominant in urine",
+      "Gallbladder non visualisation classic"
+     ]
+    },
+    "right": {
+     "title": "Rotor (OATP uptake failure)",
+     "points": [
+      "No black liver",
+      "Total coproporphyrin raised",
+      "Milder, benign"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Heme oxygenase cleaves heme into biliverdin, releasing carbon monoxide and iron. Hepatic UDP-glucuronosyltransferase UGT1A1 conjugates bilirubin with glucuronic acid for biliary excretion. Gilbert syndrome features mild unconjugated hyperbilirubinaemia provoked by fasting or stress due to a promoter TATAA box defect. Crigler-Najjar type I lacks UGT1A1 activity entirely, causing lethal kernicterus unless treated with phototherapy or liver transplantation.",
+   "say": "High-yield for the exam: Heme oxygenase cleaves heme into biliverdin, releasing carbon monoxide and iron. Hepatic UDP-glucuronosyltransferase UGT1A1 conjugates bilirubin with glucuronic acid for biliary excretion. Gilbert syndrome features mild unconjugated hyperbilirubinaemia provoked by fasting or stress due to a promoter TATAA box defect. Crigler-Najjar type I lacks UGT1A1 activity entirely, causing lethal kernicterus unless treated with phototherapy or liver transplantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate limiting heme degradation",
+      "Heme oxygenase produces biliverdin, iron, and carbon monoxide"
+     ],
+     [
+      "Bilirubin conjugation enzyme",
+      "Hepatic microsomal UDP-glucuronosyltransferase 1A1 (UGT1A1)"
+     ],
+     [
+      "Gilbert syndrome defect",
+      "UGT1A1 promoter A(TA)7TAA insertion with thirty percent activity"
+     ],
+     [
+      "Crigler-Najjar type I hallmark",
+      "Absent UGT1A1 activity with severe kernicterus risk"
+     ],
+     [
+      "Phenobarbital responsiveness",
+      "Induces UGT1A1 in Crigler-Najjar type II, ineffective in type I"
+     ],
+     [
+      "Dubin-Johnson syndrome",
+      "Defective canalicular MRP2 transporter causing black liver pigmentation"
+     ],
+     [
+      "Rotor syndrome contrast",
+      "Defective OATP1B1 and OATP1B3 hepatic reuptake without liver pigmentation"
+     ],
+     [
+      "Kernicterus vulnerability threshold",
+      "Unconjugated bilirubin crossing blood-brain barrier exceeding 20 mg/dL"
+     ]
+    ]
    }
   }
  ],

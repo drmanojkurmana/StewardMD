@@ -24,11 +24,27 @@
    "say": "Patients receive intramuscular benzathine penicillin every three to four weeks. Maintaining continuous protective antibiotic levels in the blood shields heart valves from recurrent streptococcal attacks.",
    "vis": {
     "kind": "table",
-    "cols": ["Body weight category", "Benzathine penicillin dosage", "Injection interval"],
+    "cols": [
+     "Body weight category",
+     "Benzathine penicillin dosage",
+     "Injection interval"
+    ],
     "rows": [
-     ["Children under 27 kg", "600,000 international units IM", "Every 3 to 4 weeks (every 21 to 28 days)"],
-     ["Children >= 27 kg and adults", "1,200,000 international units IM", "Every 3 to 4 weeks (every 21 to 28 days)"],
-     ["Penicillin-allergic patients", "Oral erythromycin 250 mg twice daily", "Continuous daily oral administration"]
+     [
+      "Children under 27 kg",
+      "600,000 international units IM",
+      "Every 3 to 4 weeks (every 21 to 28 days)"
+     ],
+     [
+      "Children >= 27 kg and adults",
+      "1,200,000 international units IM",
+      "Every 3 to 4 weeks (every 21 to 28 days)"
+     ],
+     [
+      "Penicillin-allergic patients",
+      "Oral erythromycin 250 mg twice daily",
+      "Continuous daily oral administration"
+     ]
     ]
    }
   },
@@ -38,12 +54,32 @@
    "say": "For patients with permanent heart valve damage, penicillin shots must continue until at least age forty. Patients who had surgery for damaged valves require lifelong monthly protection.",
    "vis": {
     "kind": "table",
-    "cols": ["Rheumatic fever category", "Minimum duration of prophylaxis", "Age cut-off benchmark"],
+    "cols": [
+     "Rheumatic fever category",
+     "Minimum duration of prophylaxis",
+     "Age cut-off benchmark"
+    ],
     "rows": [
-     ["Rheumatic fever without carditis", "5 years after last attack", "or until 21 years of age (longer)"],
-     ["Rheumatic fever with resolved carditis", "10 years after last attack", "or until 21 years of age (longer)"],
-     ["Established RHD with persistent valvular defect", "10 years after last attack", "or until 40 years of age (lifelong if severe)"],
-     ["Post-prosthetic valve replacement", "Lifelong prophylaxis mandatory", "Continuous protection against infective endocarditis"]
+     [
+      "Rheumatic fever without carditis",
+      "5 years after last attack",
+      "or until 21 years of age (longer)"
+     ],
+     [
+      "Rheumatic fever with resolved carditis",
+      "10 years after last attack",
+      "or until 21 years of age (longer)"
+     ],
+     [
+      "Established RHD with persistent valvular defect",
+      "10 years after last attack",
+      "or until 40 years of age (lifelong if severe)"
+     ],
+     [
+      "Post-prosthetic valve replacement",
+      "Lifelong prophylaxis mandatory",
+      "Continuous protection against infective endocarditis"
+     ]
     ]
    }
   },
@@ -54,12 +90,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "School-based screening with portable echo"},
-     {"id": "b", "label": "Detection of subclinical pathological regurgitation"},
-     {"id": "c", "label": "Enrolment in district RHD patient registry"},
-     {"id": "d", "label": "Regular 3-weekly benzathine penicillin shots"}
+     {
+      "id": "a",
+      "label": "School-based screening with portable echo"
+     },
+     {
+      "id": "b",
+      "label": "Detection of subclinical pathological regurgitation"
+     },
+     {
+      "id": "c",
+      "label": "Enrolment in district RHD patient registry"
+     },
+     {
+      "id": "d",
+      "label": "Regular 3-weekly benzathine penicillin shots"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -79,12 +140,32 @@
    "say": "The National Programme for Non-Communicable Diseases provides free screening and medicines for hypertension, diabetes, heart disease and stroke across every district hospital in India.",
    "vis": {
     "kind": "table",
-    "cols": ["Healthcare level", "NP-NCD institutional unit", "Key service delivered"],
+    "cols": [
+     "Healthcare level",
+     "NP-NCD institutional unit",
+     "Key service delivered"
+    ],
     "rows": [
-     ["Sub-centre / HWCs", "Ayushman Arogya Mandir", "Community screening, CBAC form, BP tracking"],
-     ["Primary health centre", "PHC NCD Clinic", "Physician diagnosis, oral drug refills, counselling"],
-     ["Community health centre", "CHC NCD Clinic", "ECG, biochemical labs, secondary consultation"],
-     ["District hospital", "District NCD Clinic and CCU", "Intensive cardiac care, echo, stroke management"]
+     [
+      "Sub-centre / HWCs",
+      "Ayushman Arogya Mandir",
+      "Community screening, CBAC form, BP tracking"
+     ],
+     [
+      "Primary health centre",
+      "PHC NCD Clinic",
+      "Physician diagnosis, oral drug refills, counselling"
+     ],
+     [
+      "Community health centre",
+      "CHC NCD Clinic",
+      "ECG, biochemical labs, secondary consultation"
+     ],
+     [
+      "District hospital",
+      "District NCD Clinic and CCU",
+      "Intensive cardiac care, echo, stroke management"
+     ]
     ]
    }
   },
@@ -95,12 +176,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Household survey of adults >= 30 years"},
-     {"id": "b", "label": "Completion of CBAC risk assessment score"},
-     {"id": "c", "label": "On-site BP measurement and blood glucose test"},
-     {"id": "d", "label": "Referral of positives to PHC medical officer"}
+     {
+      "id": "a",
+      "label": "Household survey of adults >= 30 years"
+     },
+     {
+      "id": "b",
+      "label": "Completion of CBAC risk assessment score"
+     },
+     {
+      "id": "c",
+      "label": "On-site BP measurement and blood glucose test"
+     },
+     {
+      "id": "d",
+      "label": "Referral of positives to PHC medical officer"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -110,12 +216,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Step 1: Low-dose amlodipine 5 mg once daily"},
-     {"id": "b", "label": "Step 2: Add telmisartan 40 mg if BP uncontrolled"},
-     {"id": "c", "label": "Step 3: Add chlorthalidone diuretic at month 3"},
-     {"id": "d", "label": "Digital app tracks adherence and 30-day refills"}
+     {
+      "id": "a",
+      "label": "Step 1: Low-dose amlodipine 5 mg once daily"
+     },
+     {
+      "id": "b",
+      "label": "Step 2: Add telmisartan 40 mg if BP uncontrolled"
+     },
+     {
+      "id": "c",
+      "label": "Step 3: Add chlorthalidone diuretic at month 3"
+     },
+     {
+      "id": "d",
+      "label": "Digital app tracks adherence and 30-day refills"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -126,12 +257,65 @@
     "kind": "compare",
     "left": {
      "title": "Childhood high percentile tracking",
-     "points": ["BP >= 90th percentile for age and sex", "Strong predictor of adult hypertension", "Early left ventricular mass enlargement"]
+     "points": [
+      "BP >= 90th percentile for age and sex",
+      "Strong predictor of adult hypertension",
+      "Early left ventricular mass enlargement"
+     ]
     },
     "right": {
      "title": "Public health intervention seam",
-     "points": ["Promote physical activity in schools", "Eliminate ultra-processed cafeteria foods", "Routine blood pressure checks in school health"]
+     "points": [
+      "Promote physical activity in schools",
+      "Eliminate ultra-processed cafeteria foods",
+      "Routine blood pressure checks in school health"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The mitral valve is involved in over ninety percent of rheumatic heart disease, causing stenosis and regurgitation. Secondary prophylaxis uses benzathine penicillin 1.2 million units intramuscularly every three to four weeks. Prophylaxis continues until age forty or ten years after the last attack, whichever is longer. Portable echocardiography detects subclinical disease missed by auscultation in school surveys.",
+   "say": "High-yield for the exam: The mitral valve is involved in over ninety percent of rheumatic heart disease, causing stenosis and regurgitation. Secondary prophylaxis uses benzathine penicillin 1.2 million units intramuscularly every three to four weeks. Prophylaxis continues until age forty or ten years after the last attack, whichever is longer. Portable echocardiography detects subclinical disease missed by auscultation in school surveys.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Commonest valve involved",
+      "Mitral valve in over ninety percent cases"
+     ],
+     [
+      "Classic mitral stenosis deformity",
+      "Fish mouth valve with commissural fusion"
+     ],
+     [
+      "Normal mitral valve area",
+      "Four to six square centimetres normally"
+     ],
+     [
+      "Severe mitral stenosis area",
+      "Below 1.5 square centimetres is severe"
+     ],
+     [
+      "Benzathine penicillin adult dose",
+      "1.2 million units intramuscularly every three to four weeks"
+     ],
+     [
+      "Benzathine penicillin child dose",
+      "600000 units below twenty seven kilograms body weight"
+     ],
+     [
+      "Prophylaxis duration rule",
+      "Until forty years or ten years after last attack"
+     ],
+     [
+      "Subclinical disease detection",
+      "Portable echocardiography using World Heart Federation criteria"
+     ]
+    ]
    }
   }
  ],

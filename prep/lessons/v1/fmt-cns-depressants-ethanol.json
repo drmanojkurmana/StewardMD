@@ -82,6 +82,47 @@
    "tx": "The **examination for drunkenness** combines observation and chemistry, because the blood level is only of value when consistent with non chemical observations. Smell of breath, dress and behaviour, speech, gait on turning, finger nose and Romberg type coordination, pupils, memory and orientation are recorded contemporaneously, with consent and a note of injuries that imitate drunkenness, head injury above all. The opinion uses the statutory words, sober, drinking, under the influence or drunk, tied to the measured level and the signs together.",
    "say": "Signs and level must agree before the certificate chooses its words, and head injury is excluded before alcohol is blamed.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Observe gait, speech, pupils"}, {"id": "b", "label": "Exclude head injury and hypoglycaemia"}, {"id": "c", "label": "Measure blood alcohol level"}, {"id": "d", "label": "Certify only where both agree"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: Blood alcohol 80 to 150 milligrams percent means under the influence. Above 400 means coma and death. India driving limit is 30 milligrams percent under Section 185. Accident risk doubles at 60. Delirium tremens appears at 72 to 96 hours. Alcohol in blood but absent in urine and vitreous suggests putrefaction artefact.",
+   "say": "Blood alcohol 80 to 150 milligrams percent means under the influence. Above 400 means coma and death. India driving limit is 30 milligrams percent under Section 185. Accident risk doubles at 60. Delirium tremens appears at 72 to 96 hours. Alcohol in blood but absent in urine and vitreous suggests putrefaction artefact.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Under the influence level",
+      "80 to 150 milligrams percent blood alcohol"
+     ],
+     [
+      "Drunk or intoxicated level",
+      "150 to 300 milligrams percent blood alcohol"
+     ],
+     [
+      "Coma and death level",
+      "400 milligrams percent and above blood alcohol"
+     ],
+     [
+      "India statutory driving limit",
+      "30 milligrams percent under Section 185"
+     ],
+     [
+      "Accident risk doubling point",
+      "Risk doubles at 60 milligrams percent"
+     ],
+     [
+      "Delirium tremens onset",
+      "72 to 96 hours after withdrawal begins"
+     ],
+     [
+      "Putrefaction alcohol trap",
+      "Blood positive, urine and vitreous negative"
+     ]
+    ]
+   }
   }
  ],
  "quiz": []

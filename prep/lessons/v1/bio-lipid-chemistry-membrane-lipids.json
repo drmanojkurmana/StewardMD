@@ -21,12 +21,32 @@
    "say": "Dipalmitoyl lecithin collapses alveolar surface tension and is deficient in preterm distress syndrome. Cardiolipin anchors inner mitochondrial membranes, failing in Barth syndrome cardiomyopathy and neutropenia.",
    "vis": {
     "kind": "table",
-    "cols": ["Glycerolipid", "Head or quirk", "Clinical anchor"],
+    "cols": [
+     "Glycerolipid",
+     "Head or quirk",
+     "Clinical anchor"
+    ],
     "rows": [
-     ["Phosphatidylcholine (lecithin)", "Choline head", "Surfactant DPPC, L/S ratio"],
-     ["Phosphatidylserine", "Serine, inner leaflet", "Apoptosis eat me, clotting surface"],
-     ["Phosphatidylinositol", "Inositol, PIP2", "IP3/DAG signalling, lithium mood link"],
-     ["Cardiolipin", "Double molecule, mitochondria", "Barth syndrome, antiphospholipid antibodies"]
+     [
+      "Phosphatidylcholine (lecithin)",
+      "Choline head",
+      "Surfactant DPPC, L/S ratio"
+     ],
+     [
+      "Phosphatidylserine",
+      "Serine, inner leaflet",
+      "Apoptosis eat me, clotting surface"
+     ],
+     [
+      "Phosphatidylinositol",
+      "Inositol, PIP2",
+      "IP3/DAG signalling, lithium mood link"
+     ],
+     [
+      "Cardiolipin",
+      "Double molecule, mitochondria",
+      "Barth syndrome, antiphospholipid antibodies"
+     ]
     ]
    }
   },
@@ -37,12 +57,37 @@
     "kind": "flow",
     "title": "Ceramide hub radiates",
     "nodes": [
-     {"id": "cer", "label": "Ceramide (sphingosine plus fatty acid)"},
-     {"id": "smy", "label": "Sphingomyelin (myelin)"},
-     {"id": "cerb", "label": "Cerebrosides and sulfatides"},
-     {"id": "gang", "label": "Gangliosides (sialic acid, brain)"}
+     {
+      "id": "cer",
+      "label": "Ceramide (sphingosine plus fatty acid)"
+     },
+     {
+      "id": "smy",
+      "label": "Sphingomyelin (myelin)"
+     },
+     {
+      "id": "cerb",
+      "label": "Cerebrosides and sulfatides"
+     },
+     {
+      "id": "gang",
+      "label": "Gangliosides (sialic acid, brain)"
+     }
     ],
-    "edges": [["cer", "smy"], ["cer", "cerb"], ["cer", "gang"]]
+    "edges": [
+     [
+      "cer",
+      "smy"
+     ],
+     [
+      "cer",
+      "cerb"
+     ],
+     [
+      "cer",
+      "gang"
+     ]
+    ]
    }
   },
   {
@@ -50,8 +95,21 @@
    "say": "Plasmalogens enrich myelin and fall diagnostically in peroxisome diseases. Ceramide signalling reaches apoptosis and insulin resistance narratives, extending sphingolipids from practicals to metabolic frontiers coherently.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Glycerol based (phospholipids)", "points": ["Bilayer bulk, surfactant", "Arachidonate reservoir sn-2", "Cardiolipin in mitochondria"]},
-    "right": {"title": "Sphingosine based (sphingolipids)", "points": ["Myelin and rafts enriched", "Sugar heads store in lysosomes", "Ceramide signals apoptosis"]
+    "left": {
+     "title": "Glycerol based (phospholipids)",
+     "points": [
+      "Bilayer bulk, surfactant",
+      "Arachidonate reservoir sn-2",
+      "Cardiolipin in mitochondria"
+     ]
+    },
+    "right": {
+     "title": "Sphingosine based (sphingolipids)",
+     "points": [
+      "Myelin and rafts enriched",
+      "Sugar heads store in lysosomes",
+      "Ceramide signals apoptosis"
+     ]
     }
    }
   },
@@ -65,12 +123,72 @@
    "say": "Antiphospholipid antibodies prolong clotting tests in vitro while thrombosing in vivo, a paradox worth stating exactly. Membrane heads are antigens, signals and toxins at once across this family.",
    "vis": {
     "kind": "table",
-    "cols": ["Lipid head lesson", "One line anchor"],
+    "cols": [
+     "Lipid head lesson",
+     "One line anchor"
+    ],
     "rows": [
-     ["Phosphatidylserine exposed", "Eat me and procoagulant surface"],
-     ["Cardiolipin antibody target", "Antiphospholipid thrombosis paradox"],
-     ["GM1 ganglioside", "Cholera toxin entry receptor"],
-     ["Sphingomyelin storage", "Niemann-Pick foam cells"]
+     [
+      "Phosphatidylserine exposed",
+      "Eat me and procoagulant surface"
+     ],
+     [
+      "Cardiolipin antibody target",
+      "Antiphospholipid thrombosis paradox"
+     ],
+     [
+      "GM1 ganglioside",
+      "Cholera toxin entry receptor"
+     ],
+     [
+      "Sphingomyelin storage",
+      "Niemann-Pick foam cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Dipalmitoylphosphatidylcholine is the major active component of pulmonary surfactant, reducing alveolar surface tension to prevent end-expiratory atelectasis. An amniotic fluid lecithin-to-sphingomyelin ratio exceeding 2.0 confirms fetal lung maturity. Sphingolipids contain a sphingosine backbone linked to a fatty acid forming ceramide. Plasmalogens are ether phospholipids abundant in cardiac tissue and myelin, whose synthesis begins within cellular peroxisomes.",
+   "say": "Dipalmitoylphosphatidylcholine is the major active component of pulmonary surfactant, reducing alveolar surface tension to prevent end-expiratory atelectasis. An amniotic fluid lecithin-to-sphingomyelin ratio exceeding 2.0 confirms fetal lung maturity. Sphingolipids contain a sphingosine backbone linked to a fatty acid forming ceramide. Plasmalogens are ether phospholipids abundant in cardiac tissue and myelin, whose synthesis begins within cellular peroxisomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Surfactant component",
+      "Dipalmitoylphosphatidylcholine lowers alveolar surface tension prevents collapse"
+     ],
+     [
+      "Fetal lung maturity marker",
+      "Amniotic fluid lecithin to sphingomyelin ratio above 2.0"
+     ],
+     [
+      "Sphingolipid structural core",
+      "Ceramide consisting of sphingosine linked to a fatty acid"
+     ],
+     [
+      "Ganglioside composition",
+      "Ceramide oligosaccharide containing one or more N-acetylneuraminic acid residues"
+     ],
+     [
+      "Plasmalogen synthesis site",
+      "Peroxisomal enzymes initiate ether lipid synthesis for myelin"
+     ],
+     [
+      "Zellweger syndrome defect",
+      "Peroxisomal biogenesis failure impairing plasmalogen and bile production"
+     ],
+     [
+      "Antiphospholipid syndrome",
+      "Antibodies against beta-2 glycoprotein I and cardiolipin cause thrombosis"
+     ],
+     [
+      "Myelin insulation lipid",
+      "Galactosylceramide is the principal glycolipid in nerve tissue"
+     ]
     ]
    }
   }

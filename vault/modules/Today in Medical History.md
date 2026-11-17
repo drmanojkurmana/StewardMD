@@ -111,3 +111,8 @@ Owner: the banner area flips on any swipe; the rest of the page scrolls. The axi
 
 ## No CTA on the face (2026-11-13, th21)
 Owner removed "Tap to explore". The whole banner is the tap target (aria-label still says so). The picture is centred top to bottom in the right column (10 px padding, like the text), and the text stops before it.
+
+- 2026-11-16 (owner: "both should be same green, the flipped one looks darker and vibe coded; the date line any color other than green"):
+  the default face now uses the Pro banner's own gradient (`--hrf-b1..b3`, so it follows the theme), no mint ring, no
+  drifting light pools, and the WebGL aurora runs only for an Indian headline (`today-history.js setShowing`). The
+  eyebrow (date and label) is champagne `#f3d9a8`. India faces are unchanged. Test: `run-today-history-ui.mjs`.

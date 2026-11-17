@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "pcd-rheumatic-kawasaki",
+ "subject": "ss-paediatric-cardiology",
+ "title": "Rheumatic fever, endocarditis and Kawasaki disease in children",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22e",
+  "American Heart Association rheumatic fever and Kawasaki guidance",
+  "Jones criteria revision guidance"
+ ],
+ "steps": [
+  {
+   "tx": "**Acute rheumatic fever** follows group A streptococcal pharyngitis and inflames heart, joints, skin and brain. Migratory polyarthritis, carditis, erythema marginatum, subcutaneous nodules and chorea define Jones criteria. Elevated acute phase reactants with raised anti streptolysin titres support the diagnosis after pharyngitis.",
+   "say": "Acute rheumatic fever follows group A streptococcal pharyngitis and inflames the heart, joints, skin and brain. Migratory polyarthritis, carditis, erythema marginatum, subcutaneous nodules and chorea define Jones criteria. Raised acute phase reactants support the diagnosis after pharyngitis.",
+   "vis": {
+    "cols": ["Major feature", "Meaning", "Need"],
+    "kind": "table",
+    "rows": [
+     ["Carditis", "Valvular inflammation", "Echo mandatory"],
+     ["Polyarthritis", "Migratory pattern", "Aspirin relief"],
+     ["Chorea", "Brain involvement", "Careful sedation"]
+    ]
+   }
+  },
+  {
+   "tx": "**Jones criteria** require two major or one major plus two minor features with evidence of streptococcal infection. Revised criteria apply stricter thresholds in low risk populations and broader ones where rheumatic disease remains common. Echocardiogram detecting subclinical carditis upgrades minor disease into major evidence.",
+   "say": "Jones criteria require two major or one major plus two minor features with evidence of streptococcal infection. Revised criteria apply stricter thresholds in low risk populations and broader ones where disease remains common. Echocardiogram detecting subclinical carditis upgrades minor disease into major evidence.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Major features", "points": ["Carditis included", "Polyarthritis", "Chorea", "Erythema and nodules"]},
+    "right": {"title": "Minor features", "points": ["Fever present", "Arthralgia noted", "Raised reactants", "Long interval"]}
+   }
+  },
+  {
+   "tx": "**Rheumatic carditis** targets mitral and aortic valves with eventual stenosis and regurgitation decades after childhood disease. Anti streptococcal prophylaxis with benzathine penicillin prevents recurrences and halts valve damage with regular injections. Lifelong prophylaxis suits severe carditis with residual valve disease and prior recurrence risk.",
+   "say": "Rheumatic carditis targets mitral and aortic valves with eventual stenosis and regurgitation decades later. Benzathine penicillin prophylaxis prevents recurrences and halts valve damage. Lifelong prophylaxis suits severe carditis with residual valve disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "j1", "label": "Streptococcal pharyngitis"}, {"id": "j2", "label": "Carditis develops"}, {"id": "j3", "label": "Echo confirms"}, {"id": "j4", "label": "Penicillin prophylaxis"}, {"id": "j5", "label": "Valve protection"}],
+    "edges": [["j1", "j2"], ["j2", "j3"], ["j3", "j4"], ["j4", "j5"]]
+   }
+  },
+  {
+   "tx": "**Infective endocarditis** presents with prolonged fever, murmur and splinter haemorrhages from persistent bacteraemia in children. Blood cultures before antibiotics provide the gold standard diagnosis alongside echocardiogram vegetation on valves. Empiric therapy covers staphylococci and streptococci until organism directed drugs replace it safely.",
+   "say": "Infective endocarditis presents with prolonged fever, murmur and splinter haemorrhages from bacteraemia. Blood cultures before antibiotics provide the gold standard diagnosis alongside echocardiogram vegetation. Empiric therapy covers staphylococci and streptococci until directed drugs replace it.",
+   "vis": {
+    "cols": ["Clue", "Test", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Fever and murmur", "Blood cultures", "Start empiric drugs"],
+     ["Vegetation", "Echocardiogram", "Confirm diagnosis"],
+     ["Embolic signs", "Duke criteria review", "Surgery consult"]
+    ]
+   }
+  },
+  {
+   "tx": "**Duke criteria** combine major evidence from cultures and echo with minor clues like fever and vascular phenomena. Definite endocarditis needs two major, or one major with three minor, or five minor features. Transoesophageal echo raises sensitivity in prosthetic valve infection and complex anatomy.",
+   "say": "Duke criteria combine major evidence from cultures and echocardiography with minor clues like fever and vascular phenomena. Definite disease needs two major, or one major with three minor, or five minor features. Transoesophageal echo raises sensitivity in prosthetic valve infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "d1", "label": "Fever with murmur"}, {"id": "d2", "label": "Cultures drawn"}, {"id": "d3", "label": "Echo done"}, {"id": "d4", "label": "Criteria counted"}, {"id": "d5", "label": "Directed therapy"}],
+    "edges": [["d1", "d2"], ["d2", "d3"], ["d3", "d4"], ["d4", "d5"]]
+   }
+  },
+  {
+   "tx": "**Kawasaki disease** affects children under five with fever for five days plus mucocutaneous changes across skin and mucosa. Strawberry tongue, polymorphous rash, conjunctivitis, extremity oedema and cervical nodes define classic disease clearly. Intravenous immunoglobulin within ten days prevents coronary artery aneurysms in most patients with benefit.",
+   "say": "Kawasaki disease affects children under five with fever for five days plus mucocutaneous changes. Strawberry tongue, polymorphous rash, conjunctivitis and extremity oedema define classic disease. Intravenous immunoglobulin within ten days prevents coronary artery aneurysms in most patients.",
+   "vis": {
+    "cols": ["Feature", "Cutoff", "Significance"],
+    "kind": "table",
+    "rows": [
+     ["Fever", "Five days", "Required feature"],
+     ["Mucosal changes", "Strawberry tongue", "Classic clue"],
+     ["Coronary change", "Aneurysm on echo", "Needs anticoagulation"]
+    ]
+   }
+  },
+  {
+   "tx": "**Kawasaki coronary sequelae** include dilatation and aneurysms that threaten myocardial infarction in childhood with long term risk. Aspirin with immunoglobulin forms acute therapy, while warfarin or heparin covers giant aneurysms with surveillance. Incomplete disease lacking classic features still needs echo and inflammatory marker assessment for decision making.",
+   "say": "Kawasaki coronary sequelae include dilatation and aneurysms that threaten myocardial infarction in childhood. Aspirin with immunoglobulin forms acute therapy, while anticoagulation covers giant aneurysms. Incomplete disease lacking classic features still needs echo and inflammatory marker assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Classic Kawasaki", "points": ["Fever five days", "Strawberry tongue", "Rash and red eyes", "Echo surveillance"]},
+    "right": {"title": "Incomplete disease", "points": ["Fever shorter", "Fewer features", "High reactants", "Treat on suspicion"]}
+   }
+  },
+  {
+   "tx": "**Sydenham chorea** follows rheumatic disease with involuntary dance like movements and emotional lability in school children. Penicillin prophylaxis prevents further rheumatic recurrences including chorea relapse over years. Heart disease evaluation remains mandatory because valve lesions often coexist silently with brain involvement.",
+   "say": "Sydenham chorea follows rheumatic disease with involuntary dance like movements and emotional lability. Penicillin prophylaxis prevents further rheumatic recurrences including chorea relapse. Heart evaluation remains mandatory because valve lesions often coexist silently.",
+   "vis": {
+    "cols": ["Finding", "Test", "Care"],
+    "kind": "table",
+    "rows": [
+     ["Chorea", "Echo heart scan", "Penicillin prophylaxis"],
+     ["Arthralgia", "Jones assessment", "Aspirin trial"],
+     ["Erythema marginatum", "Clinical diagnosis", "Prophylaxis started"]
+    ]
+   }
+  },
+  {
+   "tx": "**Prophylaxis strategy** continues benzathine penicillin every three to four weeks depending on risk tier and residual lesions. Severe carditis with valve changes needs lifelong cover, while mild disease without sequelae may stop after years. Dental hygiene and endocarditis prophylaxis protect prosthetic and damaged valves.",
+   "say": "Prophylaxis strategy continues benzathine penicillin every three to four weeks depending on risk tier and residual lesions. Severe carditis with valve changes needs lifelong cover, while mild disease may stop after years. Dental hygiene and endocarditis prophylaxis protect damaged valves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "f1", "label": "Carditis severity"}, {"id": "f2", "label": "Echo lesions"}, {"id": "f3", "label": "Duration set"}, {"id": "f4", "label": "Recall follow up"}, {"id": "f5", "label": "Dental care"}],
+    "edges": [["f1", "f2"], ["f2", "f3"], ["f3", "f4"], ["f4", "f5"]]
+   }
+  },
+  {
+   "tx": "**Exam table** pairs Jones features with prophylaxis, Duke features with cultures, and Kawasaki day counts with immunoglobulin timing. Penicillin prevents rheumatic recurrence, aspirin relieves arthritis, and echo confirms carditis and vegetations. The table gathers numbers, gold standard tests and first drugs for revision.",
+   "say": "The exam table pairs Jones features with prophylaxis, Duke features with cultures, and Kawasaki day counts with immunoglobulin timing. Penicillin prevents rheumatic recurrence and echo confirms carditis and vegetations. The table gathers numbers, gold standard tests and first drugs for revision.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or test"],
+    "kind": "table",
+    "rows": [
+     ["Rheumatic fever", "Criteria", "Jones features"],
+     ["Prophylaxis", "Drug", "Benzathine penicillin"],
+     ["Endocarditis", "Gold standard", "Blood cultures"],
+     ["Duke", "Definite needs", "Two major features"],
+     ["Kawasaki", "Fever days", "Five days"],
+     ["Kawasaki care", "Prevent aneurysm", "Immunoglobulin"],
+     ["Chorea", "Organ involved", "Brain and heart"],
+     ["Confirmation", "Heart imaging", "Echocardiogram"]
+    ]
+   }
+  }
+ ]
+}

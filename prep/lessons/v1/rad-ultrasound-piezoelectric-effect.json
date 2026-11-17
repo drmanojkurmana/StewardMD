@@ -77,6 +77,47 @@
    "tx": "**Sound speed** in soft tissue is taken as 1540 metres per second, and the scanner converts echo return time into depth using that single value. Fat conducts sound slower near 1450 metres per second, so structures behind thick fat are placed slightly too deep. The same assumption explains why a silicone breast implant, with much slower sound speed, distorts the apparent position of tissue behind it.",
    "say": "Sound speed in soft tissue is taken as fifteen forty metres per second, and the scanner converts echo return time into depth using that single value. Fat conducts sound slower, near fourteen fifty, so structures behind thick fat are placed slightly too deep. A silicone implant distorts apparent depth the same way because its sound speed is far slower.",
    "vis": {"kind": "table", "cols": ["Medium", "Sound speed", "Effect"], "rows": [["Soft tissue average", "1540 m per second", "Assumed by scanner"], ["Fat", "1450 m per second", "Depth overstated"], ["Muscle", "1580 m per second", "Depth understated"], ["Bone", "4080 m per second", "Strong reflection"]]}
-  }
+  },
+    {
+      "tx": "**High-yield for the exam**: The piezoelectric crystal both transmits the pulse and then listens for the returning echo, while higher frequency buys fine detail but loses penetration. A large impedance gap at bone or stone throws a clean shadow, whereas fluid attenuates little and paints posterior enhancement. Soft tissue speed is assumed at a single value, so fat places echoes too deep, and a mirrored copy across the diaphragm vanishes when the probe angle changes.",
+      "say": "The piezoelectric crystal both transmits the pulse and then listens for the returning echo, while higher frequency buys fine detail but loses penetration. A large impedance gap at bone or stone throws a clean shadow, whereas fluid attenuates little and paints posterior enhancement. Soft tissue speed is assumed at a single value, so fat places echoes too deep, and a mirrored copy across the diaphragm vanishes when the probe angle changes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Piezoelectric crystal",
+            "Sends the pulse then listens"
+          ],
+          [
+            "Higher frequency",
+            "Detail rises and depth falls"
+          ],
+          [
+            "Large impedance gap",
+            "Bone or stone casts shadow"
+          ],
+          [
+            "Fluid filled path",
+            "Posterior enhancement behind cyst"
+          ],
+          [
+            "Stone versus polyp",
+            "Shadow and movement separate them"
+          ],
+          [
+            "Comet versus ring down",
+            "Crystal trail versus gas stream"
+          ],
+          [
+            "Mirror image artefact",
+            "New angle removes the ghost"
+          ]
+        ]
+      }
+    }
  ]
 }

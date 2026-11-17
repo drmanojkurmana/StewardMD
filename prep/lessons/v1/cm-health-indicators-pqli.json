@@ -13,11 +13,27 @@
    "say": "Three ingredients make this index: infant mortality, life expectancy at age one, and literacy. Each scores between zero and one hundred, and the average gives the final value. Remember, income plays no part here, and the survival measure starts at age one.",
    "vis": {
     "kind": "table",
-    "cols": ["Component", "Scale", "Weight"],
+    "cols": [
+     "Component",
+     "Scale",
+     "Weight"
+    ],
     "rows": [
-     ["Infant mortality rate", "0 to 100, lower deaths score higher", "One third"],
-     ["Life expectancy at age one", "0 to 100, longer life scores higher", "One third"],
-     ["Literacy rate", "0 to 100, higher literacy scores higher", "One third"]
+     [
+      "Infant mortality rate",
+      "0 to 100, lower deaths score higher",
+      "One third"
+     ],
+     [
+      "Life expectancy at age one",
+      "0 to 100, longer life scores higher",
+      "One third"
+     ],
+     [
+      "Literacy rate",
+      "0 to 100, higher literacy scores higher",
+      "One third"
+     ]
     ]
    }
   },
@@ -29,11 +45,19 @@
     "kind": "compare",
     "left": {
      "title": "High income, modest PQLI pattern",
-     "points": ["Oil revenue raises income fast", "Child survival lags behind wealth", "Literacy gains take a generation"]
+     "points": [
+      "Oil revenue raises income fast",
+      "Child survival lags behind wealth",
+      "Literacy gains take a generation"
+     ]
     },
     "right": {
      "title": "Low income, high PQLI pattern",
-     "points": ["Kerala and Sri Lanka pattern", "Schooling reaches girls early", "Child survival improves first"]
+     "points": [
+      "Kerala and Sri Lanka pattern",
+      "Schooling reaches girls early",
+      "Child survival improves first"
+     ]
     }
    }
   },
@@ -43,25 +67,45 @@
    "say": "Place the two indices side by side. One runs from zero to one hundred, uses literacy, and excludes income. The other runs from zero to one, uses schooling years, and includes national income per person. Examiners swap these features to catch you.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "PQLI", "HDI"],
+    "cols": [
+     "Feature",
+     "PQLI",
+     "HDI"
+    ],
     "rows": [
-     ["Range", "0 to 100", "0 to 1"],
-     ["Survival measure", "Life expectancy at age one", "Life expectancy at birth"],
-     ["Education measure", "Literacy rate", "Mean and expected schooling"],
-     ["Income included", "No", "Yes, GNI per capita"]
+     [
+      "Range",
+      "0 to 100",
+      "0 to 1"
+     ],
+     [
+      "Survival measure",
+      "Life expectancy at age one",
+      "Life expectancy at birth"
+     ],
+     [
+      "Education measure",
+      "Literacy rate",
+      "Mean and expected schooling"
+     ],
+     [
+      "Income included",
+      "No",
+      "Yes, GNI per capita"
+     ]
     ]
    }
   },
   {
-    "tx": "**Physical quality of life index** scores infant mortality, life expectancy at age one and literacy, each placed on a 0 to 100 bar, and it ignores income. The Human Development Index instead folds longevity at birth, years of school completed and still expected, and gross national income per capita into one geometric mean between 0 and 1. Income and schooling years are the contrast to remember.",
-    "say": "Physical quality of life index scores infant mortality, life expectancy at age one and literacy, each placed on a 0 to 100 bar, and it ignores income. The Human Development Index instead folds longevity at birth, years of school completed and still expected, and gross national income per capita into one geometric mean between 0 and 1. Income and schooling years are the contrast to remember.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n132-cm-health-indicators-pqli.webp",
-      "alt": "Paired bars of PQLI scaled 0 to 100 and HDI scaled 0 to 1, each with three labelled components",
-      "caption": "PQLI components on a 0 to 100 scale sit beside HDI components on a 0 to 1 scale. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "**Physical quality of life index** scores infant mortality, life expectancy at age one and literacy, each placed on a 0 to 100 bar, and it ignores income. The Human Development Index instead folds longevity at birth, years of school completed and still expected, and gross national income per capita into one geometric mean between 0 and 1. Income and schooling years are the contrast to remember.",
+   "say": "Physical quality of life index scores infant mortality, life expectancy at age one and literacy, each placed on a 0 to 100 bar, and it ignores income. The Human Development Index instead folds longevity at birth, years of school completed and still expected, and gross national income per capita into one geometric mean between 0 and 1. Income and schooling years are the contrast to remember.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n132-cm-health-indicators-pqli.webp",
+    "alt": "Paired bars of PQLI scaled 0 to 100 and HDI scaled 0 to 1, each with three labelled components",
+    "caption": "PQLI components on a 0 to 100 scale sit beside HDI components on a 0 to 1 scale. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Years of life lost inside DALY",
@@ -69,11 +113,27 @@
    "say": "First half of the burden idea counts early deaths. Subtract age at death from a standard life expectancy, and the gap is the loss. Dying at thirty against a standard near seventy five loses about forty five years. Preventing early deaths shrinks this half fastest.",
    "vis": {
     "kind": "table",
-    "cols": ["Death at age", "Standard expectancy 75", "Years lost"],
+    "cols": [
+     "Death at age",
+     "Standard expectancy 75",
+     "Years lost"
+    ],
     "rows": [
-     ["30 years", "75 years", "45 years"],
-     ["60 years", "75 years", "15 years"],
-     ["74 years", "75 years", "1 year"]
+     [
+      "30 years",
+      "75 years",
+      "45 years"
+     ],
+     [
+      "60 years",
+      "75 years",
+      "15 years"
+     ],
+     [
+      "74 years",
+      "75 years",
+      "1 year"
+     ]
     ]
    }
   },
@@ -84,13 +144,45 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Deaths at each age"},
-     {"id": "b", "label": "Years of life lost"},
-     {"id": "c", "label": "Cases times duration times weight"},
-     {"id": "d", "label": "Years lived with disability"},
-     {"id": "e", "label": "Total burden in DALYs"}
+     {
+      "id": "a",
+      "label": "Deaths at each age"
+     },
+     {
+      "id": "b",
+      "label": "Years of life lost"
+     },
+     {
+      "id": "c",
+      "label": "Cases times duration times weight"
+     },
+     {
+      "id": "d",
+      "label": "Years lived with disability"
+     },
+     {
+      "id": "e",
+      "label": "Total burden in DALYs"
+     }
     ],
-    "edges": [["a", "b"], ["b", "e"], ["c", "d"], ["d", "e"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
    }
   },
   {
@@ -112,11 +204,19 @@
     "kind": "compare",
     "left": {
      "title": "Lost to early death",
-     "points": ["Road deaths in young adults", "Maternal deaths", "Fatal infections in children"]
+     "points": [
+      "Road deaths in young adults",
+      "Maternal deaths",
+      "Fatal infections in children"
+     ]
     },
     "right": {
      "title": "Lost to disability",
-     "points": ["Depression over many years", "Musculoskeletal pain", "Stroke disability after survival"]
+     "points": [
+      "Depression over many years",
+      "Musculoskeletal pain",
+      "Stroke disability after survival"
+     ]
     }
    }
   },
@@ -126,12 +226,32 @@
    "say": "Here quality adjusts quantity. A year in perfect health scores one, death scores zero, and states between take fractions. Half a year at half quality equals a quarter unit. Dividing cost by units gained compares dialysis with vaccination on one scale.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Utility", "Units gained"],
+    "cols": [
+     "Situation",
+     "Utility",
+     "Units gained"
+    ],
     "rows": [
-     ["One year in perfect health", "1.0", "1.0"],
-     ["One year at half quality", "0.5", "0.5"],
-     ["Half year in perfect health", "1.0", "0.5"],
-     ["Death", "0.0", "0.0"]
+     [
+      "One year in perfect health",
+      "1.0",
+      "1.0"
+     ],
+     [
+      "One year at half quality",
+      "0.5",
+      "0.5"
+     ],
+     [
+      "Half year in perfect health",
+      "1.0",
+      "0.5"
+     ],
+     [
+      "Death",
+      "0.0",
+      "0.0"
+     ]
     ]
    }
   },
@@ -143,11 +263,19 @@
     "kind": "compare",
     "left": {
      "title": "Life expectancy at birth",
-     "points": ["Counts all years lived", "Ignores health during those years", "Rises as deaths fall"]
+     "points": [
+      "Counts all years lived",
+      "Ignores health during those years",
+      "Rises as deaths fall"
+     ]
     },
     "right": {
      "title": "Health adjusted expectancy",
-     "points": ["Counts years in full health", "Penalises years with disability", "Falls when chronic disease rises"]
+     "points": [
+      "Counts years in full health",
+      "Penalises years with disability",
+      "Falls when chronic disease rises"
+     ]
     }
    }
   },
@@ -157,12 +285,72 @@
    "say": "Learn the fingerprints. Literacy beside infant mortality points to the first index. Schooling years beside income points to the second. Years lost, quality weights and full health years each point to their own measure. Identify first, calculate second.",
    "vis": {
     "kind": "table",
-    "cols": ["Stem fingerprint", "Index wanted"],
+    "cols": [
+     "Stem fingerprint",
+     "Index wanted"
+    ],
     "rows": [
-     ["Literacy plus infant mortality, 0 to 100", "PQLI"],
-     ["Schooling years plus income, 0 to 1", "HDI"],
-     ["Years lost to death and disability", "DALY"],
-     ["Years expected in full health", "HALE"]
+     [
+      "Literacy plus infant mortality, 0 to 100",
+      "PQLI"
+     ],
+     [
+      "Schooling years plus income, 0 to 1",
+      "HDI"
+     ],
+     [
+      "Years lost to death and disability",
+      "DALY"
+     ],
+     [
+      "Years expected in full health",
+      "HALE"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Physical Quality of Life Index averages infant mortality, life expectancy at age one and literacy, each scored zero to one hundred, and deliberately excludes income. The Human Development Index instead uses life expectancy at birth, schooling years and gross national income per capita on a zero to one scale. One DALY means one healthy year lost through early death or disability.",
+   "say": "High-yield for the exam: Physical Quality of Life Index averages infant mortality, life expectancy at age one and literacy, each scored zero to one hundred, and deliberately excludes income. The Human Development Index instead uses life expectancy at birth, schooling years and gross national income per capita on a zero to one scale. One DALY means one healthy year lost through early death or disability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "PQLI component one",
+      "Infant mortality rate scored zero to hundred"
+     ],
+     [
+      "PQLI survival component",
+      "Life expectancy at age one, not birth"
+     ],
+     [
+      "PQLI education component",
+      "Literacy rate, not years of schooling"
+     ],
+     [
+      "PQLI income status",
+      "Per capita income deliberately excluded"
+     ],
+     [
+      "HDI scale",
+      "Zero to one as geometric mean"
+     ],
+     [
+      "DALY formula",
+      "Years of life lost plus years lived disabled"
+     ],
+     [
+      "QALY perfect health value",
+      "One year in perfect health scores one"
+     ],
+     [
+      "HALE meaning",
+      "Years expected in full health from birth"
+     ]
     ]
    }
   }

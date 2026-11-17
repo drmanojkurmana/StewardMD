@@ -21,12 +21,32 @@
    "say": "ALA dehydratase makes porphobilinogen, and ferrochelatase inserts iron to finish heme after cytosolic detours. Both dehydratase and ferrochelatase are lead sensitive, with compartment shuttling itself tested.",
    "vis": {
     "kind": "table",
-    "cols": ["Enzyme", "Lead sensitivity", "Block disease"],
+    "cols": [
+     "Enzyme",
+     "Lead sensitivity",
+     "Block disease"
+    ],
     "rows": [
-     ["ALA synthase (ALAS1 liver)", "Induced indirectly in attacks", "Rate limiting, hemin suppresses"],
-     ["ALA dehydratase", "Very high (zinc enzyme)", "ALA rises, porphyria mimic (plumboporphyria rare)"],
-     ["PBG deaminase", "Low", "Acute intermittent porphyria"],
-     ["Ferrochelatase", "High", "Zinc protoporphyrin rises; EPP when inherited"]
+     [
+      "ALA synthase (ALAS1 liver)",
+      "Induced indirectly in attacks",
+      "Rate limiting, hemin suppresses"
+     ],
+     [
+      "ALA dehydratase",
+      "Very high (zinc enzyme)",
+      "ALA rises, porphyria mimic (plumboporphyria rare)"
+     ],
+     [
+      "PBG deaminase",
+      "Low",
+      "Acute intermittent porphyria"
+     ],
+     [
+      "Ferrochelatase",
+      "High",
+      "Zinc protoporphyrin rises; EPP when inherited"
+     ]
     ]
    }
   },
@@ -46,8 +66,21 @@
    "say": "Acute intermittent porphyria floods a partial block when ALAS1 is induced, causing abdominal pain, neuropathy and psychosis without skin disease. Attacks kill by neuropathy and arrhythmia, not pain.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Acute hepatic porphyrias (AIP prototype)", "points": ["ALA and PBG neurotoxic", "Abdomen, nerves, mind; no rash", "Glucose and hemin suppress ALAS1"]},
-    "right": {"title": "Cutaneous porphyrias (PCT prototype)", "points": ["Porphyrins phototoxic in skin", "Blisters, fragility, milia", "Phlebotomy or hydroxychloroquine (PCT)"]
+    "left": {
+     "title": "Acute hepatic porphyrias (AIP prototype)",
+     "points": [
+      "ALA and PBG neurotoxic",
+      "Abdomen, nerves, mind; no rash",
+      "Glucose and hemin suppress ALAS1"
+     ]
+    },
+    "right": {
+     "title": "Cutaneous porphyrias (PCT prototype)",
+     "points": [
+      "Porphyrins phototoxic in skin",
+      "Blisters, fragility, milia",
+      "Phlebotomy or hydroxychloroquine (PCT)"
+     ]
     }
    }
   },
@@ -61,11 +94,72 @@
    "say": "Porphyria cutanea tarda blisters sun exposed hands with iron and hepatitis C drivers, treated by phlebotomy. Erythropoietic protoporphyria burns painfully without blisters, separating the photosensitivities cleanly.",
    "vis": {
     "kind": "table",
-    "cols": ["Cutaneous disease", "Enzyme or block", "Skin signature"],
+    "cols": [
+     "Cutaneous disease",
+     "Enzyme or block",
+     "Skin signature"
+    ],
     "rows": [
-     ["Porphyria cutanea tarda", "Uroporphyrinogen decarboxylase (liver inhibited)", "Blisters, fragility, milia on hands"],
-     ["Variegate and hereditary copro (mixed)", "Oxidase steps", "Blisters plus acute attacks"],
-     ["Erythropoietic protoporphyria", "Ferrochelatase", "Burning pain, no blisters, waxy thickening"]
+     [
+      "Porphyria cutanea tarda",
+      "Uroporphyrinogen decarboxylase (liver inhibited)",
+      "Blisters, fragility, milia on hands"
+     ],
+     [
+      "Variegate and hereditary copro (mixed)",
+      "Oxidase steps",
+      "Blisters plus acute attacks"
+     ],
+     [
+      "Erythropoietic protoporphyria",
+      "Ferrochelatase",
+      "Burning pain, no blisters, waxy thickening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Delta-aminolevulinic acid synthase is the rate-limiting enzyme of heme synthesis requiring pyridoxal phosphate. Acute intermittent porphyria stems from porphobilinogen deaminase deficiency, presenting with neurovisceral symptoms without cutaneous photosensitivity, treated with intravenous hemin and glucose. Porphyria cutanea tarda results from uroporphyrinogen decarboxylase deficiency, causing blistering skin lesions, hypertrichosis, and pink-red urine under Wood lamp.",
+   "say": "Delta-aminolevulinic acid synthase is the rate-limiting enzyme of heme synthesis requiring pyridoxal phosphate. Acute intermittent porphyria stems from porphobilinogen deaminase deficiency, presenting with neurovisceral symptoms without cutaneous photosensitivity, treated with intravenous hemin and glucose. Porphyria cutanea tarda results from uroporphyrinogen decarboxylase deficiency, causing blistering skin lesions, hypertrichosis, and pink-red urine under Wood lamp.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate-limiting enzyme",
+      "ALAS-1 in liver regulated by feedback repression from heme"
+     ],
+     [
+      "Acute intermittent porphyria",
+      "Porphobilinogen deaminase defect with abdominal pain and psychosis"
+     ],
+     [
+      "AIP cutaneous lesions",
+      "Absent because porphobilinogen and ALA are non-phototoxic"
+     ],
+     [
+      "Porphyria cutanea tarda",
+      "Uroporphyrinogen decarboxylase defect causing bullae and fragility"
+     ],
+     [
+      "PCT urine fluorescence",
+      "Coral-pink fluorescence under Wood lamp due to uroporphyrins"
+     ],
+     [
+      "Lead poisoning enzymes",
+      "Inhibits ALA dehydratase and ferrochelatase elevating protoporphyrin"
+     ],
+     [
+      "AIP attack treatment",
+      "Intravenous hemin and glucose infusion to suppress ALAS-1"
+     ],
+     [
+      "PCT therapy",
+      "Phlebotomy and low-dose chloroquine to clear hepatic iron"
+     ]
     ]
    }
   }

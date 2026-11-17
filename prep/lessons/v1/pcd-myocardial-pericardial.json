@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "pcd-myocardial-pericardial",
+ "subject": "ss-paediatric-cardiology",
+ "title": "Cardiomyopathies, myocarditis and pericardial disease in children",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22e",
+  "American Heart Association pediatric heart failure guidance",
+  "Moss and Adams cardiology chapters"
+ ],
+ "steps": [
+  {
+   "tx": "**Dilated cardiomyopathy** dilates and weakens the left ventricle, presenting in infants with tachypnoea, poor feeding and hepatomegaly. Echocardiogram shows enlarged chambers with low shortening fraction below 28 percent. Heart failure therapy with digoxin, diuretics and afterload reduction stabilises symptoms before transplant evaluation.",
+   "say": "Dilated cardiomyopathy dilates and weakens the left ventricle, presenting in infants with tachypnoea, poor feeding and hepatomegaly. Echocardiogram shows enlarged chambers with low shortening fraction. Heart failure therapy with diuretics and afterload reduction stabilises symptoms before transplant evaluation.",
+   "vis": {
+    "cols": ["Finding", "Meaning", "Action"],
+    "kind": "table",
+    "rows": [
+     ["Dilated chambers", "Volume overload", "Failure treatment"],
+     ["Low shortening", "Poor squeeze", "Serial echo follow up"],
+     ["Hepatomegaly", "Venous congestion", "Decongestion"]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypertrophic cardiomyopathy** thickens septum and narrows outflow, causing effort syncope and sudden death in adolescents during exertion. Echocardiogram classifies concentric versus asymmetric hypertrophy with left ventricular outflow gradient at rest and stress. Beta blockers protect against dynamic obstruction, while septal reduction suits refractory gradient with drug failure.",
+   "say": "Hypertrophic cardiomyopathy thickens the septum and narrows outflow, causing effort syncope and sudden death in adolescents. Echocardiogram classifies hypertrophy with outflow gradient. Beta blockers protect against dynamic obstruction, while septal reduction suits refractory gradient.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Dilated disease", "points": ["Chambers enlarged", "Squeeze weak", "Infant failure", "Transplant option"]},
+    "right": {"title": "Hypertrophic disease", "points": ["Wall thickened", "Outflow narrow", "Adolescent syncope", "Beta blocker first"]}
+   }
+  },
+  {
+   "tx": "**Restrictive cardiomyopathy** stiffens myocardium so diastolic filling fails despite normal contractility and preserved ejection in children. Dip and plateau waveforms on catheterisation expose restrictive physiology with raised pressures. Prognosis remains poor, and transplantation is the only curative option for progressive disease awaiting donors.",
+   "say": "Restrictive cardiomyopathy stiffens the myocardium so diastolic filling fails despite normal contractility. Dip and plateau waveforms on catheterisation expose restrictive physiology. Prognosis remains poor, and transplantation is the only curative option for progressive disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "m1", "label": "Stiff myocardium"}, {"id": "m2", "label": "Filling impaired"}, {"id": "m3", "label": "Catheter pattern"}, {"id": "m4", "label": "Diuretic caution"}, {"id": "m5", "label": "Transplant list"}],
+    "edges": [["m1", "m2"], ["m2", "m3"], ["m3", "m4"], ["m4", "m5"]]
+   }
+  },
+  {
+   "tx": "**Myocarditis** inflames myocardium after viral illness, presenting as chest pain, arrhythmia or heart failure in young children. Troponin rises with cardiac magnetic resonance showing oedema and late enhancement in the injured wall. Supportive care with activity restriction and heart failure therapy covers most cases without immunosuppression routinely.",
+   "say": "Myocarditis inflames the myocardium after viral illness, presenting as chest pain, arrhythmia or heart failure. Troponin rises with cardiac magnetic resonance showing oedema and late enhancement. Supportive care with activity restriction and heart failure therapy covers most cases.",
+   "vis": {
+    "cols": ["Clue", "Test", "Finding"],
+    "kind": "table",
+    "rows": [
+     ["Chest pain", "Troponin", "Raised level"],
+     ["Oedema", "Cardiac magnetic resonance", "Late enhancement"],
+     ["Arrhythmia", "Echocardiogram", "Variable function"]
+    ]
+   }
+  },
+  {
+   "tx": "**Viral aetiology** behind myocarditis includes coxsackievirus, adenovirus and parvovirus B19 in seasonal clusters across childhood. Endomyocardial biopsy remains gold standard but rarely performed in children due to risk and sampling limits. Most epidemics resolve with supportive care, though giant cell variants need aggressive therapy and transplant listing.",
+   "say": "Viral aetiology behind myocarditis includes coxsackievirus, adenovirus and parvovirus in seasonal clusters. Endomyocardial biopsy remains the gold standard but is rarely performed in children due to risk. Most epidemics resolve with supportive care, though giant cell variants need aggressive therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "i1", "label": "Viral prodrome"}, {"id": "i2", "label": "Troponin rise"}, {"id": "i3", "label": "Magnetic resonance"}, {"id": "i4", "label": "Supportive care"}, {"id": "i5", "label": "Biopsy selected"}],
+    "edges": [["i1", "i2"], ["i2", "i3"], ["i3", "i4"], ["i4", "i5"]]
+   }
+  },
+  {
+   "tx": "**Pericarditis** in children shows pleuritic pain relieved by sitting forward with pericardial friction rub and breathlessness. Electrocardiogram with widespread concave elevation and low voltage confirms inflammation across the heart surface. High dose aspirin or ibuprofen plus colchicine hastens resolution and prevents recurrence in most cases.",
+   "say": "Pericarditis in children shows pleuritic pain relieved by sitting forward with a pericardial friction rub. Electrocardiogram with widespread concave elevation confirms inflammation. High dose aspirin or ibuprofen plus colchicine hastens resolution and prevents recurrence.",
+   "vis": {
+    "cols": ["Sign", "Meaning", "Care"],
+    "kind": "table",
+    "rows": [
+     ["Friction rub", "Inflamed pericardium", "Anti inflammatory drugs"],
+     ["Concave elevation", "Diffuse inflammation", "Colchicine added"],
+     ["Effusion", "Fluid collection", "Pericardiocentesis if tamponade"]
+    ]
+   }
+  },
+  {
+   "tx": "**Constrictive pericarditis** thickens pericardium and impairs diastolic filling with raised venous pressures causing hepatomegaly. Pericardial calcification on computed tomography supports constriction over restriction with thickened layers. Pericardiectomy removes the rigid shell and restores diastolic expansion with sustained relief after surgery.",
+   "say": "Constrictive pericarditis thickens the pericardium and impairs diastolic filling with raised venous pressures. Pericardial calcification on computed tomography supports constriction over restriction. Pericardiectomy removes the rigid shell and restores diastolic expansion.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Constriction", "points": ["Pericardium thick", "Calcification seen", "Venous pressure high", "Pericardiectomy"]},
+    "right": {"title": "Restriction", "points": ["Myocardium stiff", "Myocardial disease", "Dip plateau pattern", "Transplant option"]}
+   }
+  },
+  {
+   "tx": "**Pericardial tamponade** compresses chambers when effusion raises intrapericardial pressure above diastolic filling pressure distorting cardiac output. Beck triad with hypotension, muffled sounds and raised neck veins signals tamponade in older children urgently. Emergency pericardiocentesis relieves tamponade and restores filling within minutes with monitoring.",
+   "say": "Pericardial tamponade compresses chambers when effusion raises pressure above diastolic filling pressure. Beck triad with hypotension, muffled sounds and raised neck veins signals tamponade. Emergency pericardiocentesis relieves tamponade and restores filling within minutes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [{"id": "b1", "label": "Effusion rises"}, {"id": "b2", "label": "Filling falls"}, {"id": "b3", "label": "Hypotension"}, {"id": "b4", "label": "Pericardiocentesis"}, {"id": "b5", "label": "Recovery"}],
+    "edges": [["b1", "b2"], ["b2", "b3"], ["b3", "b4"], ["b4", "b5"]]
+   }
+  },
+  {
+   "tx": "**Prognosis** of dilated disease improves with early failure therapy, while hypertrophic sudden death risk needs family screening and sports restriction. Myocarditis recurrence falls with activity restriction for six months after onset. Constrictive disease cures with pericardiectomy, whereas restrictive disease progresses to transplantation.",
+   "say": "Prognosis of dilated disease improves with early failure therapy, while hypertrophic sudden death risk needs family screening and sports restriction. Myocarditis recurrence falls with activity restriction for six months. Constrictive disease cures with pericardiectomy, whereas restrictive disease progresses to transplantation.",
+   "vis": {
+    "cols": ["Disease", "Prognosis", "Plan"],
+    "kind": "table",
+    "rows": [
+     ["Dilated", "Variable survival", "Failure therapy"],
+     ["Hypertrophic", "Sudden death risk", "Beta blocker and screening"],
+     ["Restrictive", "Poor survival", "Transplant evaluation"],
+     ["Myocarditis", "Often recovers", "Rest six months"]
+    ]
+   }
+  },
+  {
+   "tx": "**Final table** anchors echo cutoffs, drug choices and gold standard tests: shortening below 28 percent defines dilated disease, beta blockers protect hypertrophic outflow, colchicine prevents pericarditis recurrence, and pericardiocentesis treats tamponade. Biopsy confirms myocarditis, calcification confirms constriction, and failure therapy bridges toward transplantation.",
+   "say": "The final table anchors echo cutoffs, drug choices and gold standard tests. Shortening below 28 percent defines dilated disease and beta blockers protect hypertrophic outflow. Colchicine prevents pericarditis recurrence and pericardiocentesis treats tamponade. Biopsy confirms myocarditis and failure therapy bridges toward transplantation.",
+   "vis": {
+    "cols": ["Topic", "High yield point", "Number or test"],
+    "kind": "table",
+    "rows": [
+     ["Dilated", "Shortening cutoff", "Below 28 percent"],
+     ["Hypertrophic", "First drug", "Beta blocker"],
+     ["Myocarditis", "Gold standard", "Biopsy or resonance"],
+     ["Pericarditis", "Prevent recurrence", "Colchicine"],
+     ["Tamponade", "Relief", "Pericardiocentesis"],
+     ["Constriction", "Imaging clue", "Calcification"],
+     ["Failure", "Bridge", "Transplant evaluation"],
+     ["Rest", "Myocarditis period", "Six months"]
+    ]
+   }
+  }
+ ]
+}

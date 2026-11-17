@@ -61,3 +61,6 @@ body.dark .smd-hlp-list { border-left-color: rgba(235, 235, 245, .18); }
 .smd-hlp-item span { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; opacity: .85; }
 @media (max-width: 360px) { .smd-hlp-list { width: 120px; } }
 @media (prefers-reduced-motion: reduce) { .smd-hlp.on, mark.smd-hl.flash { animation: none; } }
+/* The reader's selection once the finger lifts (text-highlight.js paintSel): the system selection is cleared so iOS
+   shows no Copy / Look Up menu, and the same words are painted here in the system's selection blue. */
+::highlight(smd-hl-sel) { background-color: rgba(0, 122, 255, .26); color: inherit; }

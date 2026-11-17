@@ -51,7 +51,10 @@
   }
   function videos() {
     if (VIDS || !FLAGS.youtube || !MEDIA) return Promise.resolve(VIDS || []);
-    return G.fetch("/clinix/media/manifest.json").then(function (r) { return r.json(); }).then(function (m) { return (VIDS = MEDIA.videosFrom(m)); }, function () { return []; });
+    // The bundled official-channel set (prep-medigram-videos.js) plus the CliniX exam videos.
+    var own = (G.PREP_MG_VIDEOS || []).filter(function (v) { return MEDIA.validVideoId(v[0]); }).map(function (v) { return { kind: "video", videoId: v[0], title: v[1], caption: "", by: v[2], s: v[3] }; });
+    return G.fetch("/clinix/media/manifest.json").then(function (r) { return r.json(); }).then(function (m) { return MEDIA.videosFrom(m); }, function () { return []; })
+      .then(function (cx) { var seen = {}; VIDS = own.concat(cx).filter(function (v) { return !seen[v.videoId] && (seen[v.videoId] = 1); }); return VIDS; });
   }
   function images() {
     if (IMGS) return Promise.resolve(IMGS);

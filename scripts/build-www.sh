@@ -278,7 +278,9 @@ rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/na
 # local copy under kardia/probelab/ ships so it works offline in the app.
 # The recursive copy above already carries it; this explicit copy keeps
 # that guarantee if the kardia copy ever gains excludes.
-if [ -d kardia/probelab ]; then mkdir -p "$WWW/kardia/probelab"; cp -R kardia/probelab/. "$WWW/kardia/probelab/"; echo "  probelab: $(find "$WWW/kardia/probelab" -type f | wc -l | tr -d ' ') files"; fi
+# The loader fetches sim/AorticTrial.rgba via its packed .gz; shipping both breaks
+# Android mergeDebugAssets ("Duplicate resources"), so drop the raw copy.
+if [ -d kardia/probelab ]; then mkdir -p "$WWW/kardia/probelab"; cp -R kardia/probelab/. "$WWW/kardia/probelab/"; rm -f "$WWW/kardia/probelab/assets/sim/AorticTrial.rgba"; echo "  probelab: $(find "$WWW/kardia/probelab" -type f | wc -l | tr -d ' ') files"; fi
 # AngioView coronary simulator (Angio Lab tab): the whole local copy under
 # kardia/angiolab/ ships so the lab works offline in the app. The recursive
 # copy above already carries it; this explicit copy keeps that guarantee
