@@ -1,7 +1,7 @@
 /* PrepReels (MediGram) in the REAL app (headless Chrome over CDP), flag smd_prep_medigram ON.
  * What must hold: prep-loader fetches the PrepReels files only with the flag; home shows PrepReels;
  * the reel mixes bank questions, pearls and videos; an answer scores in place and writes FSRS; a video in view
- * plays through the https shim (stubbed here) and falls back to Play on YouTube when the shim is silent; Keep going
+ * autoplays in the app through the https shim (stubbed here) and never hands off to YouTube; Keep going
  * and Finish work; Smart Break (sub-flag) runs a timer that only offers a return; nothing wider than 390 px.
  * USAGE: node test/run-prep-medigram-ui.mjs   (CHROME=<path>) */
 import { spawn } from "node:child_process";
@@ -83,7 +83,7 @@ try {
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).length > 0;`) === true, "the answer wrote an FSRS card row (" + subj + ")");
   // Video: scrolling a video card into view mounts the https shim (never a direct YouTube embed from the app origin).
   await ev(`var v=document.querySelector('#smdPrep .pn-mg-vid'), b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
-  ok(await until(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'); return !!f && f.src.indexOf('https://stewardmd.in/_site/yt?v=') === 0 && f.src.length === 43;`, 8000), "a video card in view plays through the stewardmd.in shim");
+  ok(await until(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'); return !!f && /^https:\\/\\/stewardmd\\.in\\/_site\\/yt\\?v=[\\w-]{11}&autoplay=1$/.test(f.src);`, 8000), "a video card in view autoplays in the app through the stewardmd.in shim");
   const played = await ev(`return document.querySelector('#smdPrep .pn-mg-vid iframe').closest('.pn-mg-vid').getAttribute('data-vid');`);
   await sleep(6500);
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
@@ -95,10 +95,12 @@ try {
   ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > ${n0};`, 15000), "Keep going adds more cards");
   ok(await ev(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`) === true, "earlier answers survive the new batch");
   ok(await ev(`var k={}, d=0; PREP_MEDIGRAM._s().cards.forEach(function(c){ var x=c.kind+":"+(c.it?c.it.id||c.it.img:c.videoId||c.mid||c.text); if(k[x]) d++; k[x]=1; }); return d;`) === 0, "nothing repeats across batches");
-  // A silent shim (offline, blocked; on a video that has not played yet) falls back to a Play on YouTube card instead of a black box.
+  // A silent shim (offline, slow) never hands off to YouTube: the player stays in the card over the poster.
   shimSilent = true;
   await ev(`var v=[].filter.call(document.querySelectorAll('#smdPrep .pn-mg-vid'), function(e){ return e.getAttribute('data-vid') !== ${JSON.stringify(played)}; })[0]; var b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
-  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-yt]');`, 12000), "a silent shim falls back to Play on YouTube");
+  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe');`, 8000), "a second video mounts in the app");
+  await sleep(7000);
+  ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !/Play on YouTube/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "a silent shim keeps the in-app player, no YouTube hand-off");
   shimSilent = false;
   await click("#smdPrep [data-act=mg-done]");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 8000), "Finish returns to the PrepNucleus home");

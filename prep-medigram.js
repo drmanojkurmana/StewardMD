@@ -18,7 +18,7 @@
   if (!FLAGS.parent) return;
 
   var BATCH = 18, L = ["A", "B", "C", "D", "E", "F"];
-  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, io, ytFail, extrasAt }
+  var S = null;   // { host, mode, cards, loading, err, done, right, top, brk, timer, io, seen }
   var VIDS = null, IMGS = null;
 
   function H() { return S.host; }
@@ -103,10 +103,8 @@
     var a = ' data-i="' + i + '"';
     if (c.kind === "pearl") return '<article class="vf-c vf-pearl pn-mg-c"' + a + '><p class="pn-mg-tag">Remember</p><p class="vf-big">' + esc(c.text) + "</p>" + (c.s ? '<p class="pn-mut pn-small">' + esc(subjName(c.s)) + "</p>" : "") + "</article>";
     if (c.kind === "video") {
-      var failed = S.ytFail[c.videoId];
       return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch</p><p class="vf-stem">' + esc(c.title) + "</p>" +
-        (failed ? '<button type="button" class="pn-mg-yt" data-act="mg-yt" data-v="' + esc(c.videoId) + '"><img alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg"><span>Play on YouTube</span></button>'
-          : '<div class="pn-mg-frame" role="region" aria-label="Video player"></div>') +
+        '<div class="pn-mg-frame" role="region" aria-label="Video player"><img alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg"></div>' +
         '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
     }
     if (c.kind === "lesson") return '<article class="vf-c pn-mg-c"' + a + '><p class="pn-mg-tag">Lesson · ' + esc(subjName(c.sid)) + '</p><p class="vf-big">' + esc(c.title) + '</p><p class="pn-mut">' + (c.minutes ? c.minutes + " min read, built from the questions you just met." : "Built from the questions you just met.") + '</p><button type="button" class="pn-btn pri" data-act="mg-lesson" data-i="' + i + '">Open lesson</button></article>';
@@ -141,7 +139,7 @@
     box.addEventListener("scroll", function () { if (S) S.top = box.scrollTop; }, { passive: true });
     watchVideos(box);
   }
-  // A video plays only while its card fills the screen: mounted on arrival, released when swiped away. No autoplay.
+  // A video autoplays in the app while its card is on screen and is removed when swiped away, so one plays at a time.
   function watchVideos(box) {
     if (S.io) S.io.disconnect();
     if (!MEDIA || !G.IntersectionObserver) return;
@@ -149,7 +147,7 @@
       ents.forEach(function (e) {
         var el = e.target, vid = el.getAttribute("data-vid"), holder = el.querySelector(".pn-mg-frame");
         if (!holder) return;
-        if (e.isIntersecting) MEDIA.mount(holder, vid, el.querySelector(".vf-stem").textContent, function (v) { if (!S) return; S.ytFail[v] = 1; if (el.isConnected) redraw(Number(el.getAttribute("data-i"))); });
+        if (e.isIntersecting) MEDIA.mount(holder, vid, el.querySelector(".vf-stem").textContent);
         else if (holder.classList.contains("on")) MEDIA.release();
       });
     }, { root: box, rootMargin: "-45% 0px -45% 0px" });   // "on screen" = crosses the middle band, whatever the card height
@@ -187,7 +185,7 @@
 
   function start(host, mode) {
     if (G.PrepPro && G.PrepPro.can && !G.PrepPro.can("questions", { items: [] })) { G.PrepPro.openLimit("questions"); return; }
-    S = { host: host, mode: "study", cards: [], loading: false, err: false, done: 0, right: 0, top: 0, brk: null, timer: 0, io: null, ytFail: {}, seen: {} };
+    S = { host: host, mode: "study", cards: [], loading: false, err: false, done: 0, right: 0, top: 0, brk: null, timer: 0, io: null, seen: {} };
     if (mode === "clinical" && FLAGS.discovery) S.mode = "clinical";
     else if (!FLAGS.study && FLAGS.discovery) S.mode = "clinical";
     emit("session_started", { mode: S.mode });
@@ -229,7 +227,6 @@
       if (c && G.PREP_ASK && G.PREP_ASK.open) { stopMedia(); try { G.PREP_ASK.open({ kind: "card", title: firstSentence(c.it.q).slice(0, 80), ask: "Explain this question and its answer in plain language with one analogy.", fr: c.it.q + "\n" + c.it.o.map(function (o, k) { return L[k] + ". " + o; }).join("\n"), bk: "Answer: " + L[c.it.a] + ". " + c.it.o[c.it.a] + "\n" + String(c.it.exp || (c.it.x && c.it.x.key) || "") }, host); } catch (e) {} }
       emit("understand_requested", {}); return;
     }
-    if (a === "mg-yt") { if (MEDIA) MEDIA.openExternal(v); return; }
     if (a === "mg-more") { if (!S.loading) { el.disabled = true; stopMedia(); load(true); } return; }
     if (a === "mg-retry") return load();
     if (a === "mg-mode") return setMode(v || "study");

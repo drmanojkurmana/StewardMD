@@ -117,9 +117,13 @@ test("modes: study hides break items, clinical keeps lessons, break keeps only b
 });
 
 test("media: videos come from cleared CliniX manifest entries and play through the https shim", () => {
-  assert.equal(M.shimUrl("gRWSyqatWQQ"), "https://stewardmd.in/_site/yt?v=gRWSyqatWQQ");
+  assert.equal(M.shimUrl("gRWSyqatWQQ"), "https://stewardmd.in/_site/yt?v=gRWSyqatWQQ&autoplay=1");
   assert.equal(M.shimUrl("bad id"), null);
-  assert.equal(M.watchUrl("x"), null);
+  const shimHtml = read("_site/yt.html"), media = read("prep-medigram-media.js"), feed = read("prep-medigram.js");
+  assert.match(shimHtml, /auto \? "&autoplay=1"/, "the shim forwards autoplay to the official player");
+  assert.match(shimHtml, /onAutoplayBlocked: muteAndPlay/, "a blocked autoplay retries muted instead of sitting paused");
+  assert.match(media, /"autoplay; /, "the app frame delegates autoplay");
+  assert.doesNotMatch(media + feed, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "videos never hand off to the YouTube app or site");
   const vids = M.videosFrom({ media: {
     a: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ", title: "Resp exam", attribution: "Geeky Medics" },
     b: { kind: "embed", embeddable: false, cleared: true, videoId: "XU_xeUMJ3Zc" },

@@ -104,15 +104,19 @@
   if (ALLOW[v] !== 1) { fail("That video is not part of CliniX."); return; }
 
   var start = parseInt(param("start") || param("t") || "0", 10);
+  // autoplay=1 (PrepReels): start as soon as the card is on screen. With sound when the WebView allows it,
+  // otherwise muted (YouTube's own unmute button stays), so a blocked autoplay never leaves a paused frame.
+  var auto = param("autoplay") === "1";
   var f = document.createElement("iframe");
   // enablejsapi so the parent can detect that the player really started, and fall back to a
   // link card if it did not. playsinline keeps it in the lesson on iOS instead of going fullscreen.
   f.src = "https://www.youtube.com/embed/" + v +
           "?rel=0&modestbranding=1&playsinline=1&enablejsapi=1" +
-          (start > 0 ? "&start=" + start : "") +
+          (start > 0 ? "&start=" + start : "") + (auto ? "&autoplay=1" : "") +
           "&origin=" + encodeURIComponent(location.origin);
-  f.setAttribute("allow", "accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
+  f.setAttribute("allow", "autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
   f.setAttribute("allowfullscreen", "");
+  f.id = "ytp";
   f.setAttribute("title", "CliniX teaching video");
   document.body.appendChild(f);
 
@@ -122,6 +126,23 @@
     try { parent.postMessage({ clinixYt: true, v: v, data: e.data }, "*"); } catch (x) {}
   });
   try { parent.postMessage({ clinixYt: true, v: v, shim: "loaded" }, "*"); } catch (x) {}
+
+  if (auto) {
+    window.onYouTubeIframeAPIReady = function () {
+      var muted = false, muteAndPlay = function () { if (muted) return; muted = true; try { p.mute(); p.playVideo(); } catch (x) {} };
+      var p = new YT.Player("ytp", { events: {
+        onReady: function () {
+          try { p.playVideo(); } catch (x) {}
+          // Older players do not send onAutoplayBlocked: still unstarted or cued after 3 s means it was blocked.
+          setTimeout(function () { try { var st = p.getPlayerState(); if (st === -1 || st === 5) muteAndPlay(); } catch (x) {} }, 3000);
+        },
+        onAutoplayBlocked: muteAndPlay
+      } });
+    };
+    var s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(s);
+  }
 })();
 </script>
 </body>

@@ -1,14 +1,13 @@
 /* PrepReels (MediGram). The reel itself reuses the Play feed classes (.vf, .vf-c, .pn-opt in prep-play.css / prep.css);
-   only the video frame, the YouTube hand-off card, mode tabs and the Smart Break card live here. Accent #42CDB5 on
+   only the video frame, mode tabs and the Smart Break card live here. Accent #42CDB5 on
    #071318 / #0D1D23. No glow, no gradient, no backdrop blur. */
 .pn-root .pn-mg-tabs { box-sizing: border-box; width: calc(100% - 32px); display: flex; gap: 2px; margin: 8px 16px; padding: 3px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-md); background: var(--pn-s1); }
 .pn-root .pn-mg-tab { flex: 1 1 0; min-height: 44px; padding: 0 12px; border: 0; border-radius: var(--pn-r-sm); background: none; color: var(--pn-mut); font-size: 14px; font-weight: 600; }
 .pn-root .pn-mg-tab.on { background: var(--pn-card); color: var(--pn-text); box-shadow: 0 0 0 1px var(--pn-edge); }
-.pn-root .pn-mg-frame, .pn-root .pn-mg-yt { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--pn-r-md); overflow: hidden; background: #071318; color: #e2f1ee; padding: 0; }
+.pn-root .pn-mg-frame { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--pn-r-md); overflow: hidden; background: #071318; color: #e2f1ee; padding: 0; }
 .pn-root .pn-mg-tag { margin: 0; font-size: 13px; font-weight: 650; color: var(--pn-mut); }
 .pn-root .pn-mg-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.pn-root .pn-mg-yt img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
-.pn-root .pn-mg-yt span { position: relative; min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: var(--pn-r-pill); background: #0d1d23; border: 1px solid #42cdb5; font-weight: 650; }
+.pn-root .pn-mg-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .pn-root .pn-mg-row { display: flex; gap: 8px; }
 .pn-root .pn-mg-row .pn-btn { flex: 1 1 0; }
 .pn-root .vf-end .pn-btn { min-width: 200px; }
