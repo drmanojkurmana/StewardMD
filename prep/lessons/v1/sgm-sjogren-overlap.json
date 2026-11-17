@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-sjogren-overlap",
+ "subject": "ss-general-medicine",
+ "title": "Sjogren disease, MCTD and IgG4-related disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Sjogren disease** causes dry eyes and dry mouth in these patients. **Schirmer test** quantifies tear production in these patients. **Anti Ro** with anti La antibodies are the serologic hallmarks in these patients. **Parotid swelling** is episodic in these patients in many histories.",
+   "say": "Sjogren disease causes dry eyes and dry mouth in these patients. Schirmer test quantifies tear production in these patients. Anti Ro with anti La antibodies are the serologic hallmarks in these patients. Parotid swelling is episodic in these patients in many histories.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Schirmer test",
+      "Reduced tear production",
+      "Dry eye quantification"
+     ],
+     [
+      "Sialometry",
+      "Reduced saliva flow",
+      "Dry mouth quantification"
+     ],
+     [
+      "Anti Ro La",
+      "Antibody positive",
+      "Serologic hallmark"
+     ],
+     [
+      "Lip biopsy",
+      "Focal lymphocytic infiltrate",
+      "Histologic confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydroxychloroquine** treats systemic features of Sjogren disease in these patients. **Pilocarpine** with **cevimeline** stimulate saliva in these patients in many protocols. **Rituximab** helps refractory systemic disease in these patients in many case reports. **Methotrexate** suits articular disease in these patients.",
+   "say": "Hydroxychloroquine is the treatment of systemic features of Sjogren disease in these patients. Pilocarpine with cevimeline stimulate saliva in these patients in many protocols. Rituximab helps refractory systemic disease in these patients in many case reports. Methotrexate is the option for articular disease in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dry eyes and mouth"
+     },
+     {
+      "id": "b",
+      "label": "Antibody testing"
+     },
+     {
+      "id": "c",
+      "label": "Hydroxychloroquine backbone"
+     },
+     {
+      "id": "d",
+      "label": "Saliva stimulants added"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MCTD** combines lupus with scleroderma and myositis features in these patients. **Anti U1 RNP** antibodies define MCTD in these patients in many cohorts. **Raynaud** with swollen hands is the early presentation in these patients. **Pulmonary hypertension** is the killer in MCTD in these patients in many series.",
+   "say": "MCTD is lupus with scleroderma and myositis features in these patients. Anti U1 RNP antibodies are the MCTD defining antibodies in these patients in many cohorts. Raynaud with swollen hands is the early presentation in these patients. Pulmonary hypertension is the killer in MCTD in these patients in many series.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sjogren disease",
+     "points": [
+      "Dry eyes and mouth",
+      "Anti Ro La positive",
+      "Parotid swelling",
+      "Dental caries risk"
+     ]
+    },
+    "right": {
+     "title": "MCTD overlap",
+     "points": [
+      "Anti U1 RNP positive",
+      "Raynaud and puffy hands",
+      "Myositis features",
+      "Pulmonary hypertension risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ciclosporin** eye drops treat dry eye disease in these patients in many protocols. **Lifitegrast** is the other eye drop option in these patients. **Dental** care with fluoride prevents caries in these patients. **Vaginal** dryness needs moisturiser therapy in these patients.",
+   "say": "Ciclosporin eye drops are the treatment of dry eye disease in these patients in many protocols. Lifitegrast is the other eye drop option in these patients. Dental care with fluoride prevents caries in these patients. Vaginal dryness needs moisturiser therapy in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**IgG4-related disease** causes painless multiorgan swelling in these patients. **Retroperitoneal fibrosis** is the renal pattern in these patients. **Sclerosing cholangitis** is the biliary pattern in these patients. **Steroid responsiveness** is the diagnostic clue in these patients in many reports clearly.",
+   "say": "IgG four related disease causes painless multiorgan swelling in these patients. Retroperitoneal fibrosis is the renal pattern in these patients. Sclerosing cholangitis is the biliary pattern in these patients. Steroid responsiveness is the diagnostic clue in these patients in many reports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Salivary",
+      "Painless swelling",
+      "IgG4 positive"
+     ],
+     [
+      "Kidney",
+      "Retroperitoneal fibrosis",
+      "Steroid responsive"
+     ],
+     [
+      "Biliary",
+      "Sclerosing cholangitis",
+      "Obstructive jaundice"
+     ],
+     [
+      "Pancreas",
+      "Autoimmune pancreatitis",
+      "Sausage pancreas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mycophenolate** with **azathioprine** maintain MCTD immunosuppression in these patients. **Lymphoma** risk is higher in Sjogren disease in these patients in many studies. **Cryoglobulinaemia** flags lymphoma risk in these patients. **Parotid** biopsy is reserved in these patients in many centres today.",
+   "say": "Mycophenolate with azathioprine are maintenance for MCTD immunosuppression in these patients. Lymphoma risk is higher in Sjogren disease in these patients in many studies. Cryoglobulinaemia is a lymphoma risk flag in these patients. Parotid biopsy is reserved in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Neonatal lupus** follows anti Ro antibodies in these patients. **Congenital heart block** is the fetal complication in these patients. **Hydroxychloroquine** prevents recurrence in these patients in many protocols. **Fetal** heart monitoring is advised in these patients in many centres today.",
+   "say": "Neonatal lupus follows anti Ro antibodies in these patients. Congenital heart block is the fetal complication in these patients. Hydroxychloroquine prevents recurrence in these patients in many protocols. Fetal heart monitoring is advised in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anti Ro positive mother"
+     },
+     {
+      "id": "b",
+      "label": "Fetal heart monitoring"
+     },
+     {
+      "id": "c",
+      "label": "Hydroxychloroquine continue"
+     },
+     {
+      "id": "d",
+      "label": "Neonatal follow up"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Interstitial lung disease** complicates Sjogren disease in these patients. **Pulmonary hypertension** complicates MCTD in these patients. **Myositis** overlap needs CK monitoring in these patients. Non Sjogren drugs have no role here despite their presence in listings confusion today. Careful lung surveillance is advised in these patients today.",
+   "say": "Interstitial lung disease complicates Sjogren disease in these patients. Pulmonary hypertension complicates MCTD in these patients. Myositis overlap needs CK monitoring in these patients. Non Sjogren drugs have no role here despite their presence in listings confusion today.",
+   "vis": null
+  },
+  {
+   "tx": "**Biopsy** of minor salivary glands confirms Sjogren disease in these patients. **Focus score** quantifies lymphocytic infiltration in these patients. **Ultrasound** of salivary glands supports diagnosis in these patients in many protocols. **Dryness** scores track response in these patients in many studies.",
+   "say": "Biopsy of minor salivary glands confirms Sjogren disease in these patients. Focus score is the quantification of lymphocytic infiltration in these patients. Ultrasound of salivary glands supports diagnosis in these patients in many protocols. Dryness scores track response in these patients in many studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Result",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Lip biopsy",
+      "Focal infiltrate",
+      "Confirmation standard"
+     ],
+     [
+      "Schirmer test",
+      "Tear reduction",
+      "Dry eye grading"
+     ],
+     [
+      "Sialometry",
+      "Saliva reduction",
+      "Dry mouth grading"
+     ],
+     [
+      "Antibody panel",
+      "Ro La positive",
+      "Serologic support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follow up** in Sjogren disease needs lymphoma surveillance in these patients. **Parotid** swelling needs review in these patients. **Dental** follow-up is yearly in these patients in many guidelines today. **Eye** follow-up is needed in these patients in many centres today.",
+   "say": "Follow up in Sjogren disease needs lymphoma surveillance in these patients. Parotid swelling needs review in these patients. Dental follow-up is yearly in these patients in many guidelines today. Eye follow-up is needed in these patients in many centres today.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** heads this closing table for the lesson specifically. Remember Schirmer test for dry eye, lip biopsy with focus score for Sjogren, anti U1 RNP for MCTD and painless multiorgan swelling for IgG4 disease. Pilocarpine stimulates saliva while pulmonary hypertension kills in MCTD. Neonatal lupus follows anti Ro antibodies in these patients.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Schirmer test is the dry eye quantification test in practice. Lip biopsy with focus score is the confirmation for Sjogren disease. Anti U1 RNP is the antibody of MCTD clearly. Painless multiorgan swelling is the pattern of IgG four disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Sjogren confirmation",
+      "Lip biopsy with focus score"
+     ],
+     [
+      "Serologic hallmark",
+      "Anti Ro with anti La positive"
+     ],
+     [
+      "MCTD antibody",
+      "Anti U1 RNP defines MCTD"
+     ],
+     [
+      "IgG4 pattern",
+      "Painless multiorgan swelling"
+     ],
+     [
+      "Saliva stimulant",
+      "Pilocarpine stimulates saliva production"
+     ],
+     [
+      "MCTD killer",
+      "Pulmonary hypertension dominates mortality"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
