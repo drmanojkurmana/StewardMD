@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sgm-masld",
+ "subject": "ss-general-medicine",
+ "title": "MASLD and Metabolic Liver Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Metabolic dysfunction associated steatotic liver disease** (MASLD, liver fat above 5% with metabolic risk and limited alcohol) replaced the older fatty liver name in the 2023 multi society consensus. Steatosis means more than 5% of hepatocytes carry fat droplets. Alcohol use below 21 drinks per week in men and 14 in women keeps the label inside MASLD. India carries one of the highest obesity and diabetes burdens in this disease.",
+   "say": "Metabolic dysfunction associated steatotic liver disease is liver fat above five per cent with metabolic risk and limited alcohol intake. Steatosis means that more than five per cent of hepatocytes carry fat droplets inside the cells. Alcohol use below twenty one drinks per week in men and fourteen in women keeps the label inside MASLD. India carries one of the highest obesity and diabetes burdens in this disease.",
+   "vis": null
+  },
+  {
+   "tx": "The family splits into **MASLD** (metabolic driven), **MetALD** (metabolic plus moderate alcohol), and **ALD** (alcohol driven with other causes). MASH (metabolic dysfunction associated steatohepatitis) is the inflamed and ballooned stage with fibrosis risk. Simple steatosis is stage S0 with fat alone, while MASH adds inflammation and ballooned cells. The naming change from NAFLD to MASLD was made to highlight metabolic drivers and reduce stigma.",
+   "say": "The family is split into MASLD, MetALD, and ALD based on metabolic drivers and alcohol use. MASH is the inflamed and ballooned stage with fibrosis risk in these patients. Simple steatosis is fat alone while MASH adds inflammation and ballooned cells in the liver. The naming change from NAFLD to MASLD was made to highlight metabolic drivers and reduce stigma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Label",
+     "Driver",
+     "Alcohol"
+    ],
+    "rows": [
+     [
+      "MASLD",
+      "Metabolic risk, no alcohol excess",
+      "Below limits"
+     ],
+     [
+      "MetALD",
+      "Metabolic risk plus alcohol",
+      "Moderate intake"
+     ],
+     [
+      "ALD",
+      "Alcohol driven",
+      "Above limits"
+     ],
+     [
+      "MASH",
+      "Inflamed MASLD stage",
+      "Any, with ballooning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiometabolic factors include central obesity, **type 2 diabetes** (high blood sugar), hypertension, high triglycerides, and low high density lipoprotein cholesterol. Type 2 diabetes alone doubles the risk of advanced fibrosis and hepatocellular carcinoma. Lean patients with insulin resistance and visceral fat are not spared, which matters in South Asian practice. Drugs such as steroids, tamoxifen, and methotrexate can mimic or worsen the picture.",
+   "say": "Cardiometabolic factors involve central obesity, type two diabetes, hypertension, and abnormal lipids in these patients. Type two diabetes alone doubles the risk of advanced fibrosis and liver cancer. Lean patients with insulin resistance and visceral fat are not spared in this disease. Drugs such as steroids and tamoxifen can mimic or worsen the picture in such patients.",
+   "vis": null
+  },
+  {
+   "tx": "Insulin resistance floods the liver with free fatty acids, so triglyceride synthesis rises while fat export falls. Lipotoxic intermediates trigger endoplasmic reticulum stress, oxidative injury, and stellate cell activation. This cascade forms **ballooning** (swollen injured hepatocyte) and perisinusoidal fibrosis that can progress to cirrhosis. Gut derived endotoxin and recent diet changes add fuel to the inflammatory fire in many patients.",
+   "say": "Insulin resistance causes excess free fatty acids to reach the liver in many patients. Lipotoxic intermediates cause stress, oxidative injury, and stellate cell activation in this process. This cascade forms ballooning and perisinusoidal fibrosis that can progress to cirrhosis over time. Gut derived endotoxin and diet changes can add fuel to the inflammatory fire in such patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Insulin resistance"
+     },
+     {
+      "id": "b",
+      "label": "Fat accumulates in liver"
+     },
+     {
+      "id": "c",
+      "label": "Ballooning and inflammation"
+     },
+     {
+      "id": "d",
+      "label": "Fibrosis to cirrhosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most patients stay asymptomatic, and mild hepatomegaly with soft liver edge is the commonest finding. **Acanthosis nigricans** (dark thickened skin folds), skin tags, and stigmata of metabolic syndrome support the diagnosis without proving it. A raised alanine aminotransferase (ALT) below 3 times normal is typical, but normal enzymes do not exclude advanced fibrosis. Co existent gallstones and sleep apnoea are common associations in clinic cohorts.",
+   "say": "Most patients remain asymptomatic and mild hepatomegaly is the commonest finding on examination. Acanthosis nigricans and skin tags can support the diagnosis without proving it directly. A raised ALT below three times normal is typical in these patients in this stage. Normal enzymes do not exclude advanced fibrosis in such patients at any time.",
+   "vis": null
+  },
+  {
+   "tx": "The **FIB-4** score (a fibrosis index from age, AST, ALT, and platelets) below 1.3 makes advanced fibrosis unlikely, while above 2.67 marks high risk. Transient elastography gives liver stiffness (LSM, a stiffness measure in kPa) near 8 kPa for significant fibrosis and 12 for cirrhosis. Ultrasound shows bright liver but cannot stage fibrosis. Liver biopsy (tissue histology) remains the gold standard for activity and staging.",
+   "say": "The FIB four score below one point three makes advanced fibrosis unlikely in most patients. A score above two point six seven indicates high risk for advanced fibrosis in such patients. Transient elastography gives liver stiffness near eight kilopascal for significant fibrosis. Liver biopsy remains the gold standard for activity and staging in uncertain cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Cutoff",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "FIB-4 low",
+      "Below 1.3",
+      "Advanced fibrosis unlikely"
+     ],
+     [
+      "FIB-4 high",
+      "Above 2.67",
+      "High fibrosis risk"
+     ],
+     [
+      "LSM moderate",
+      "Near 8 kPa",
+      "Significant fibrosis"
+     ],
+     [
+      "LSM high",
+      "Near 12 kPa",
+      "Cirrhosis likely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weight loss is the foundation, where 3 to 5% improves steatosis and 7 to 10% improves steatohepatitis and fibrosis. A Mediterranean pattern with limited sugar drinks and daily walking is the practical prescription. **Pioglitazone** (a thiazolidinedione, 30 to 45 mg daily) improves histology but adds weight and bone loss. **Vitamin E** (800 international units daily) helps selected non diabetic MASH without cirrhosis.",
+   "say": "Weight loss is the foundation of management in metabolic liver disease. A loss of three to five per cent improves steatosis while seven to ten per cent can improve steatohepatitis. A Mediterranean pattern with daily walking is the practical prescription for most patients. Pioglitazone and vitamin E help selected patients and they add weight and other effects.",
+   "vis": null
+  },
+  {
+   "tx": "Glucagon like peptide one agonists (GLP-1, agents such as semaglutide) reduce weight, glycaemia, and MASH activity in trials. **Resmetirom** (a thyroid hormone receptor agonist, 80 mg daily below 100 kg and 100 mg above) was approved by the United States Food and Drug Administration in 2024 for MASH with F2 to F3 fibrosis. American Association for the Study of Liver Diseases (AASLD) practice guidance urges statins, blood pressure control, and diabetes treatment in every patient.",
+   "say": "G L P one agents reduce weight, glycaemia, and MASH activity in trials of such patients. Resmetirom was approved by the United States Food and Drug Administration in twenty twenty four for MASH with fibrosis. AASLD practice guidance is to use statins, blood pressure control, and diabetes treatment in every patient. These measures also reduce cardiovascular death which is the commonest killer in MASLD.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lifestyle measures",
+     "points": [
+      "Weight loss seven to ten per cent",
+      "Mediterranean diet pattern",
+      "Daily walking routine",
+      "Zero sugary drinks"
+     ]
+    },
+    "right": {
+     "title": "Drug measures",
+     "points": [
+      "Pioglitazone histology gain",
+      "Vitamin E selected patients",
+      "Resmetirom for F2 to F3",
+      "Statins for heart risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cirrhosis, **hepatocellular carcinoma** (primary liver cancer), and acute decompensation are liver complications, while cardiovascular disease remains the leading cause of death. Diabetes and chronic kidney disease worsen faster in advanced fibrosis. European Association for the Study of the Liver (EASL) guidance favours sequential noninvasive tests to limit biopsies. HCC surveillance with ultrasound and alpha fetoprotein is needed once cirrhosis develops.",
+   "say": "Cirrhosis, hepatocellular carcinoma, and acute decompensation are liver complications in these patients. Cardiovascular disease remains the leading cause of death in MASLD cohorts. Diabetes and chronic kidney disease worsen faster in advanced fibrosis cases. HCC surveillance with ultrasound is needed once cirrhosis develops in such patients.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis is good in simple steatosis and poor once cirrhosis and diabetes coexist. Energy lies in early FIB-4 stratification, strict metabolic control, and alcohol abstinence in MetALD. Traps include that normal liver tests hide cirrhosis, that **lean patients** carry risk, that FIB-4 rises with age alone, and that HCC can occur without cirrhosis. A high FibroScan value fits better with portal hypertension than with pure fat.",
+   "say": "Prognosis is good in simple steatosis and poor once cirrhosis and diabetes coexist in a patient. Energy is best placed in early stratification, strict metabolic control, and alcohol abstinence in such patients. Normal liver tests can hide cirrhosis and lean patients can carry risk in this disease. The FIB four score also rises with age alone and HCC can occur without cirrhosis in such cases.",
+   "vis": null
+  },
+  {
+   "tx": "This summary locks the name change, the alcohol limits, the fibrosis scores, the weight targets, and the newest drugs into examination ready memory. Keep the **FIB-4** (fibrosis score) and stiffness cutoffs, the resmetirom dosing split, and the cardiovascular death warning as your core revision.",
+   "say": "This summary gives the name change, alcohol limits, fibrosis scores, and weight targets for examination ready memory. The FIB four cutoffs and stiffness values should be held as fixed recall items. Resmetirom dosing split and the cardiovascular death warning are expected to be recalled without delay. Clear recall of these items should prevent many errors in single best answer questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "MASLD alcohol limits",
+      "Under 21 drinks men, 14 women weekly"
+     ],
+     [
+      "FIB-4 low risk",
+      "Below 1.3 unlikely fibrosis"
+     ],
+     [
+      "FIB-4 high risk",
+      "Above 2.67 high fibrosis risk"
+     ],
+     [
+      "LSM significant",
+      "Near 8 kPa"
+     ],
+     [
+      "LSM cirrhosis",
+      "Near 12 kPa"
+     ],
+     [
+      "Weight target",
+      "7 to 10 per cent for MASH"
+     ],
+     [
+      "New drug",
+      "Resmetirom F2 to F3 fibrosis"
+     ],
+     [
+      "Leading killer",
+      "Cardiovascular disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
