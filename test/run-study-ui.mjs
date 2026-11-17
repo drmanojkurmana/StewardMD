@@ -70,7 +70,7 @@ ok(true, "flag on: the Study tab shows");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
-ok(/No PDFs yet/.test(await page.locator("#stList").innerText()), "library: empty state");
+ok(/Import a PDF, create a notebook, or scan notes/.test(await page.locator("#stList").innerText()), "library: empty state");
 await page.setInputFiles("#stFile", { name: "fixture.pdf", mimeType: "application/pdf", buffer: PDF });
 await page.waitForSelector(".st-doc", { timeout: 20000 });
 ok(/2 pages/.test(await page.locator(".st-doc").innerText()), "library: imported PDF listed with 2 pages");
