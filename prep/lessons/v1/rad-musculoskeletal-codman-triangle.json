@@ -55,6 +55,51 @@
    "tx": "**MRI staging** of a bone sarcoma maps marrow extent, skip lesions in the same bone, joint and neurovascular involvement and the soft tissue compartment for the surgeon. The biopsy track is planned with the resecting surgeon and placed where the definitive operation can excise it, because a badly placed track seeds tumour into new compartments. Chest CT completes staging since lung is the first metastatic station for osteosarcoma and Ewing alike.",
    "say": "MRI staging maps marrow extent, skip lesions, joint and neurovascular involvement for the surgeon. The biopsy track is planned with the resecting surgeon where the operation can excise it, because a badly placed track seeds new compartments. Chest CT completes staging since lung is the first metastatic station.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Plain film grades tempo"}, {"id": "b", "label": "MRI maps local extent"}, {"id": "c", "label": "Planned biopsy track"}, {"id": "d", "label": "Chest CT stages spread"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: A **Codman triangle** is reactive bone where fast growth lifts periosteum and only the base ossifies. Osteosarcoma is the classic owner, but Ewing sarcoma and osteomyelitis can raise the same cuff. **Sunburst** spicules shoot perpendicular to cortex with a wide transition zone in an adolescent metaphysis. Onion peel stacks concentric layers in diaphyseal Ewing sarcoma, and fever makes it mimic infection, so biopsy follows. Sequestrum and cloaca favour infection. A mineralised soft tissue mass favours tumour.",
+   "say": "High-yield for the exam: A Codman triangle is reactive bone where fast growth lifts periosteum and only the base ossifies. Osteosarcoma is the classic owner, but Ewing sarcoma and osteomyelitis can raise the same cuff. Sunburst spicules shoot perpendicular to cortex with a wide transition zone in an adolescent metaphysis. Onion peel stacks concentric layers in diaphyseal Ewing sarcoma, and fever makes it mimic infection, so biopsy follows. Sequestrum and cloaca favour infection. A mineralised soft tissue mass favours tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Codman triangle",
+      "Ossified cuff of lifted periosteum"
+     ],
+     [
+      "Classic owner",
+      "Osteosarcoma, also Ewing and infection"
+     ],
+     [
+      "Sunburst",
+      "Perpendicular spicules from cortex"
+     ],
+     [
+      "Onion peel",
+      "Concentric layers, diaphyseal Ewing"
+     ],
+     [
+      "Aggressive tempo",
+      "Wide zone, destroyed cortex, mass"
+     ],
+     [
+      "Benign tempo",
+      "Narrow zone, intact cortex"
+     ],
+     [
+      "Infection clues",
+      "Sequestrum, cloaca, and involucrum"
+     ],
+     [
+      "Tumour matrix",
+      "Osteoid clouds in osteosarcoma"
+     ]
+    ]
+   }
   }
  ]
 }
