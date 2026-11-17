@@ -1076,7 +1076,9 @@
     }
     function loadAtlas(opts) {
       opts = opts || {};
-      var base = opts.baseUrl || "";
+      // atlas/3d lives on the public media bucket (tools/atlas-media-sync.mjs); the old
+      // relative path was the Pages origin, which no longer ships it.
+      var base = opts.baseUrl || "https://media.stewardmd.in";
       var manifestUrl = opts.manifestUrl || (base + "/atlas/3d/manifest.json");
       function inflate(buf, rawBytes) {
         if (buf.byteLength === rawBytes) return Promise.resolve(buf);

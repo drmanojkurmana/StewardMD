@@ -6,6 +6,29 @@
 (function (G) {
   "use strict";
 
+  /* ATLAS MEDIA (owner 2026-11-17): RadioAnatome files live on the public R2 bucket behind
+   * media.stewardmd.in (tools/atlas-media-sync.mjs); atlas/ is excluded from the Pages deploy
+   * (scripts/pages-build.sh) to stay under the 20,000-file cap. The files were already public
+   * on Pages, so nothing gated moves. window.SMD_ATLAS_MEDIA overrides the base; "" disables
+   * it and everything below is the old relative path again. One constant per reader file,
+   * same default value (the app is buildless ES5, so there is no shared import). */
+  var ATLAS_MEDIA_DEFAULT = "https://media.stewardmd.in/atlas";
+  function mediaBase() {
+    var b = G.SMD_ATLAS_MEDIA;
+    if (b === "" || b === false) return "";
+    return String(b || ATLAS_MEDIA_DEFAULT).replace(/\/+$/, "");
+  }
+  function mediaUrl(u) {
+    var base = mediaBase(), s = String(u || "");
+    if (!base || s.indexOf("/atlas/") !== 0) return u;
+    return base + s.slice("/atlas".length);
+  }
+  function mediaRel(u) {
+    var base = mediaBase(), s = String(u || "");
+    if (!base || s.indexOf(base) !== 0) return u;
+    return "/atlas" + s.slice(base.length);
+  }
+
   /* ---------- pure helpers ---------- */
 
   // Distribute labels down one gutter so none overlap and none leave the column.
@@ -627,12 +650,16 @@
   /* ---------- data ---------- */
 
   // Network JSON, falling back to a downloaded module's offline cache (airplane mode). Resolves
-  // null when neither has it.
+  // null when neither has it. Atlas JSON is tried on the media host first (Pages no longer
+  // ships it) and then on the old relative path, which is also where the native bundle keeps it.
   function fetchJson(url) {
     if (!G.fetch) return Promise.resolve(null);
-    return G.fetch(url)
-      .then(function (r) { if (!r || !r.ok) throw new Error("http"); return r.json(); })
-      .catch(function () { return cachedJson(url); });
+    var alt = mediaUrl(url);
+    function ok(r) { if (!r || !r.ok) throw new Error("http"); return r.json(); }
+    if (alt === url) return G.fetch(url).then(ok).catch(function () { return cachedJson(url); });
+    return G.fetch(alt).then(ok).catch(function () {
+      return G.fetch(url).then(ok).catch(function () { return cachedJson(url); });
+    });
   }
   function cachedJson(url) {
     if (!offCaps()) return Promise.resolve(null);
@@ -643,8 +670,15 @@
     return ids.reduce(function (p, id) {
       return p.then(function (hit) {
         if (hit) return hit;
-        return G.caches.open(offCacheName(id)).then(function (c) { return c.match(url); })
-          .then(function (r) { return r ? r.json() : null; }).catch(function () { return null; });
+        return G.caches.open(offCacheName(id)).then(function (c) {
+          // Old caches store JSON under the relative path, new ones under the media host.
+          return c.match(url).then(function (r) { return r ? r.json() : null; }).then(function (j) {
+            if (j) return j;
+            var m = mediaUrl(url);
+            if (m === url) return null;
+            return c.match(m).then(function (r2) { return r2 ? r2.json() : null; });
+          });
+        }).catch(function () { return null; });
       });
     }, Promise.resolve(null));
   }
@@ -687,12 +721,14 @@
     if (st.view === "viewer") afterViewerPaint();
   }
 
-  // Native builds do not bundle the .webp slices (~2 MB/module), so point them at
-  // the live origin — mirroring kardiox-screens.js kxImg() for kardiox-learn.
+  // Atlas files live on the media host (tools/atlas-media-sync.mjs), not the Pages origin:
+  // the native bundle never bundled the .webp slices (~2 MB/module) and Pages no longer ships
+  // them, so every host resolves atlas files through mediaUrl(). Every consumer below pairs
+  // this with the old relative path as a fallback (fetchJson, one()), which is also where
+  // the native bundle keeps the JSON.
   function netUrl(u) {
     try {
-      if (u && u.charAt(0) === "/" && u.indexOf("/atlas/") === 0 && !/\.json$/.test(u) && G.SMD_IS_NATIVE)
-        return "https://stewardmd.in" + u;
+      if (u && u.charAt(0) === "/" && u.indexOf("/atlas/") === 0) return mediaUrl(u);
     } catch (e) {}
     return u;
   }
@@ -1677,7 +1713,16 @@
     var stage = $("atlasStage");
     function cls(add, name) { if (stage) stage.classList[add ? "add" : "remove"](name); }
     function show() { cls(false, "is-loading"); cls(false, "is-error"); drawOverlay(); warmModule(); }
-    function fail() { cls(false, "is-loading"); cls(true, "is-error"); }
+    function fail() {
+      cls(false, "is-loading");
+      // One retry on the old relative path when the media host failed (kill-switch shape of
+      // prep-bank-client.js mediaFallback); the error state lands only if that fails too.
+      if (!img._smdMediaRelTried) {
+        var rel = mediaRel(img.src || url);
+        if (rel && rel !== img.src) { img._smdMediaRelTried = 1; img.src = rel; return; }
+      }
+      cls(true, "is-error");
+    }
     img.onload = show; img.onerror = fail;
     if (url != null) { cls(false, "is-error"); cls(true, "is-loading"); img.src = url; }
     if (img.complete && img.naturalWidth > 0) show();
@@ -2112,13 +2157,16 @@
     var mod = modById(id) || {}, d = _dl = { id: id, done: 0, total: 0, bytes: 0, stop: false, err: null };
     _dlErr = null; offUi();
     var name = offCacheName(id), mc = G.SMD_THOREX_MODEL_CACHE;
+    function dl(u) {
+      return (mc && mc.loadModelBytes) ? mc.loadModelBytes(u, { cacheName: name })
+        : G.fetch(u).then(function (r) {
+            if (!r || !r.ok) throw new Error("http " + (r && r.status));
+            return G.caches.open(name).then(function (c) { return c.put(u, r.clone()); }).then(function () { return r.arrayBuffer(); });
+          });
+    }
     function one(path) {
       var url = netUrl(path);
-      var p = (mc && mc.loadModelBytes) ? mc.loadModelBytes(url, { cacheName: name })
-        : G.fetch(url).then(function (r) {
-            if (!r || !r.ok) throw new Error("http " + (r && r.status));
-            return G.caches.open(name).then(function (c) { return c.put(url, r.clone()); }).then(function () { return r.arrayBuffer(); });
-          });
+      var p = (url !== path) ? dl(url).catch(function () { return dl(path); }) : dl(url);
       return p.then(function (buf) { d.bytes += (buf && buf.byteLength) || 0; d.done++; offUi(); })
         .catch(function (e) { d.err = e || true; throw e; });
     }
@@ -2533,7 +2581,8 @@
     windowUrl: windowUrl, defaultLabelMode: defaultLabelMode, placePins: placePins,
     normText: normText, searchAtlas: searchAtlas, pushRecent: pushRecent, qPoint: qPoint,
     qNormal: qNormal, planeDist: planeDist, nearestSlice: nearestSlice, planeLine: planeLine,
-    offlineFiles: offlineFiles, flipOf: flipOf, imgTransform: imgTransform, scoutSegment: scoutSegment
+    offlineFiles: offlineFiles, flipOf: flipOf, imgTransform: imgTransform, scoutSegment: scoutSegment,
+    mediaBase: mediaBase, mediaUrl: mediaUrl, mediaRel: mediaRel, netUrl: netUrl
   };
 
   G.ATLAS = G.ATLAS || {};
