@@ -23,6 +23,7 @@ test("flags: parent ON by default (owner 2026-11-17), requires smd_prep; study a
   assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({}), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
   assert.deepEqual(D.resolveFlags({ prepEnabled: false, get: get({ smd_prep_medigram: "1" }), search: "" }).parent, false);
   assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1" }), search: "" }), { parent: true, study: true, discovery: false, breakMode: false, youtube: true });
+  assert.equal(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_youtube: "0" }), search: "" }).youtube, false);
   assert.deepEqual(D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "0" }), search: "" }).parent, false, "0 turns it off");
   const all = D.resolveFlags({ prepEnabled: true, get: get({ smd_prep_medigram: "1", smd_prep_medigram_discovery: "1", smd_prep_medigram_break: "1", smd_prep_medigram_youtube: "1" }), search: "" });
   assert.deepEqual(all, { parent: true, study: true, discovery: true, breakMode: true, youtube: true });
@@ -116,39 +117,54 @@ test("modes: study hides break items, clinical keeps lessons, break keeps only b
   assert.equal(D.isEligible(base(), { ...ctx, mode: "clinical" }), false);
 });
 
-test("video cards: 100+ real YouTube cards, 11-char ids, each passes validateCard; placeholder gone", () => {
-  const src = read("prep-medigram.js");
-  assert.doesNotMatch(src, /dQw4w9WgXcQ/, "Rick Astley placeholder removed");
-  const lines = src.split("\n").filter((l) => /kind: "video"/.test(l) && /provider: "youtube"/.test(l));
-  assert.ok(lines.length >= 100, "at least 100 video cards, got " + lines.length);
-  const ids = new Set();
-  for (const line of lines) {
-    const vid = (line.match(/videoId: "([A-Za-z0-9_-]{1,30})"/) || [])[1];
-    assert.ok(vid && /^[A-Za-z0-9_-]{11}$/.test(vid), "11-char videoId: " + line.slice(0, 80));
-    assert.ok(!ids.has(vid), "unique videoId: " + vid);
-    ids.add(vid);
-    const dur = +((line.match(/durationSec: (\d+)/) || [])[1]);
-    assert.ok(dur > 0 && dur <= 360, "durationSec <= 360: " + dur);
-    assert.match(line, /rightsStatus: "youtube_embed"/);
-    assert.match(line, /clinicalReview: \{ status: "approved", reviewedAt: "2026-11-17", reviewerRole: "official-channel; owner spot-check pending" \}/);
-    assert.match(line, /captions: \{ en: true \}/);
-    assert.match(line, /language: "en"/);
-    assert.match(line, /sourceRefs: \["youtube:[^"]+"\]/);
-    const r = D.validateCandidate({ id: "t", kind: "video", exam: ["neet-pg"], subject: "medicine", module: "m", topicIds: ["t"], durationSec: dur, language: "en", title: "T", media: { provider: "youtube", videoId: vid }, rightsStatus: "youtube_embed", clinicalReview: { status: "approved", reviewedAt: "2026-11-17", reviewerRole: "official-channel; owner spot-check pending" }, captions: { en: true }, updatedAt: "2026-11-17" }, { now: NOW });
-    assert.equal(r.ok, true, "validates: " + vid + " " + r.errors);
-  }
-  assert.equal(ids.size, lines.length);
+test("media: videos come from cleared CliniX manifest entries and play through the https shim", () => {
+  assert.equal(M.shimUrl("gRWSyqatWQQ"), "https://stewardmd.in/_site/yt?v=gRWSyqatWQQ&autoplay=1");
+  assert.equal(M.shimUrl("bad id"), null);
+  const shimHtml = read("_site/yt.html"), media = read("prep-medigram-media.js"), feed = read("prep-medigram.js");
+  assert.match(shimHtml, /auto \? "&autoplay=1"/, "the shim forwards autoplay to the official player");
+  assert.match(shimHtml, /onAutoplayBlocked: muteAndPlay/, "a blocked autoplay retries muted instead of sitting paused");
+  assert.match(media, /"autoplay; /, "the app frame delegates autoplay");
+  assert.doesNotMatch(media + feed, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "videos never hand off to the YouTube app or site");
+  const vids = M.videosFrom({ media: {
+    a: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ", title: "Resp exam", attribution: "Geeky Medics" },
+    b: { kind: "embed", embeddable: false, cleared: true, videoId: "XU_xeUMJ3Zc" },
+    c: { kind: "embed", embeddable: true, cleared: false, videoId: "XU_xeUMJ3Zc" },
+    d: { kind: "embed", embeddable: true, cleared: true, videoId: "bad" },
+    e: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ" },
+    f: { kind: "image", embeddable: true, cleared: true, videoId: "XU_xeUMJ3Zc" } } });
+  assert.deepEqual(vids.map((v) => v.videoId), ["gRWSyqatWQQ"]);
+  assert.equal(vids[0].by, "Geeky Medics");
+  assert.deepEqual(M.videosFrom(null), []);
+  // Every video PrepReels can show must be on the shim's allow-list, or the shim refuses it.
+  const real = M.videosFrom(JSON.parse(read("clinix/media/manifest.json")));
+  const shim = read("_site/yt.html");
+  assert.ok(real.length >= 20, "the cleared video set is there");
+  for (const v of real) assert.match(shim, new RegExp('"' + v.videoId.replace(/[-]/g, "\\-") + '": 1'), v.videoId + " on the shim allow-list");
 });
 
-test("media: YouTube behind policy flag, offline and bad metadata degrade", () => {
-  const yt = { kind: "video", title: "V", media: { provider: "youtube", videoId: "dQw4w9WgXcQ" } };
-  assert.equal(M.describe(yt, { youtubeEnabled: false }).kind, "disabled");
-  assert.equal(M.describe(yt, { youtubeEnabled: true, offline: true }).kind, "unavailable");
-  assert.equal(M.describe(yt, { youtubeEnabled: true }).kind, "youtube");
-  assert.match(M.describe(yt, { youtubeEnabled: true }).url, /youtube-nocookie\.com\/embed\/dQw4w9WgXcQ/);
-  assert.equal(M.describe({ kind: "video", media: { provider: "youtube", videoId: "bad id" } }, { youtubeEnabled: true }).kind, "unavailable");
-  assert.equal(M.describe(null, {}).kind, "none");
-  assert.equal(M.embedUrl("bad id"), null);
+test("official-channel videos: 100+, unique 11-char ids, all on the shim allow-list; placeholder gone", () => {
+  const V = require("../prep-medigram-videos.js"), shim = read("_site/yt.html");
+  assert.ok(V.length >= 100, "at least 100 videos, got " + V.length);
+  const ids = new Set();
+  for (const [id, title, by, subject] of V) {
+    assert.match(id, /^[A-Za-z0-9_-]{11}$/);
+    assert.ok(!ids.has(id), "unique " + id); ids.add(id);
+    assert.ok(title && by && subject, "title, channel and subject for " + id);
+    assert.ok(shim.includes('"' + id + '": 1'), id + " on the shim allow-list");
+  }
+  assert.doesNotMatch(read("prep-medigram.js") + read("prep-medigram-videos.js"), /dQw4w9WgXcQ/, "placeholder gone");
+});
+
+test("mixFeed: every n questions one other card, pearls and extras alternate, pearls never come early", () => {
+  const q = (id, kp) => ({ id, q: "Q" + id, o: ["a", "b"], a: 0, kp, _s: "s" });
+  const items = [q(1, "P1"), q(2), q(3, "P3"), q(4), q(5), q(6)];
+  const ex = [{ kind: "video", videoId: "v" }, { kind: "lesson", mid: "m" }];
+  const out = D.mixFeed(items, ex, 3);
+  assert.deepEqual(out.map((c) => c.kind), ["q", "q", "q", "pearl", "q", "q", "q", "video"]);
+  assert.equal(out[3].text, "P1");
+  assert.deepEqual(D.mixFeed(items, ex, 2).map((c) => c.kind), ["q", "q", "pearl", "q", "q", "video", "q", "q", "pearl"]);
+  assert.deepEqual(D.mixFeed([], ex, 3), []);
+  assert.deepEqual(D.mixFeed(items, [], "5").map((c) => c.kind), ["q", "q", "q", "q", "q", "pearl", "q"]);
 });
 
 test("events: consent-aware, learning outcomes only, sensitive keys dropped", () => {
@@ -160,24 +176,23 @@ test("events: consent-aware, learning outcomes only, sensitive keys dropped", ()
 
 test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded; CSS contract", () => {
   const loader = read("prep-loader.js"), prep = read("prep.js"), css = read("prep-medigram.css");
-  assert.match(loader, /MG_JS = \["prep-medigram-data\.js", "prep-medigram-media\.js", "prep-medigram\.js"\]/);
+  assert.match(loader, /MG_JS = \["prep-medigram-data\.js", "prep-medigram-media\.js", "prep-medigram-videos\.js", "prep-medigram\.js"\]/);
   assert.match(loader, /if \(mgOn\(\)\)/);
   assert.match(prep, /a\.indexOf\("mg-"\) === 0 && G\.PREP_MEDIGRAM/);
   assert.match(prep, /G\.PREP_MEDIGRAM \? G\.PREP_MEDIGRAM\.homeHtml\(HOST\)/);
-  assert.match(css, /\.pn-mg-opt \{[^}]*min-height: 52px/);
+  assert.match(css, /\.pn-mg-btn \{[^}]*min-height: 52px/);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /#42cdb5/i);
   assert.doesNotMatch(css, /linear-gradient|radial-gradient|backdrop-filter/);
   const ui = read("prep-medigram.js");
-  assert.match(ui, /Finish session/);
-  assert.match(ui, /I don't understand|I don\\'t understand/);
+  assert.match(ui, /data-act="mg-done">Finish/);
   assert.doesNotMatch(ui, /data-act="mg-cadence"/);
-  assert.doesNotMatch(ui, /aria-label="Cadence"/);
-  assert.match(ui, /host\.row\("mg-open", icon, "PrepReels", "Short study feed · finish anytime"\)/);
+  assert.match(ui, /host\.row\("mg-open", icon, "PrepReels", "Questions, videos and pearls, one swipe each"\)/);
   assert.match(ui, /class="pn-ri"/);
   assert.match(ui, /class="pn-rb"/);
   assert.match(ui, /ico\("play"\)/);
-  assert.doesNotMatch(ui, /api\.youtube\.com|googleapis|fetch\(/, "no paid or YouTube API call in the feed");
+  assert.doesNotMatch(ui, /api\.youtube\.com|googleapis|youtube-nocookie/, "no YouTube API call and no direct embed from the app origin");
+  assert.match(ui, /G\.fetch\("\/clinix\/media\/manifest\.json"\)/, "the only fetch is the bundled CliniX manifest");
 });
 
 test("home row: matches sibling rows with leading icon tile and trailing chevron", () => {
@@ -202,7 +217,7 @@ test("home row: matches sibling rows with leading icon tile and trailing chevron
   assert.match(html, /class="pn-row"/);
   assert.match(html, /data-act="mg-open"/);
   assert.match(html, /class="pn-ri"[^>]*><ico-play\/>/);
-  assert.match(html, /class="pn-rb"[^>]*><b>PrepReels<\/b><small>Short study feed · finish anytime<\/small><\/span>/);
+  assert.match(html, /class="pn-rb"[^>]*><b>PrepReels<\/b><small>Questions, videos and pearls, one swipe each<\/small><\/span>/);
   assert.match(html, /<chev\/>/);
 
   // Standalone fallback without host also provides pn-ri, pn-rb, play icon and chevron
@@ -212,38 +227,4 @@ test("home row: matches sibling rows with leading icon tile and trailing chevron
   assert.match(fallbackHtml, /class="pn-ri"/);
   assert.match(fallbackHtml, /d="M7 5l12 7-12 7z"/, "play icon path");
   assert.match(fallbackHtml, /d="M9 6l6 6-6 6"/, "chevron icon path");
-});
-
-test("cadence arm: set internally via localStorage or setCadence, no learner chip in UI", () => {
-  let stored = {};
-  const mockG = {
-    PREP_MG_DATA: D,
-    PREP_MG_MEDIA: M,
-    localStorage: {
-      getItem: (k) => stored[k] ?? null,
-      setItem: (k, v) => { stored[k] = String(v); }
-    },
-    location: { search: "?medigram=1" }
-  };
-  const code = read("prep-medigram.js");
-  new Function("window", code)(mockG);
-  const mg = mockG.PREP_MEDIGRAM;
-
-  // Default cadence is 3:1
-  assert.equal(D.resolveCadence(null), "3:1");
-
-  // Arm set to "2" via localStorage
-  stored["smd_prep_medigram_cadence"] = "2";
-  assert.equal(D.resolveCadence(mockG.localStorage.getItem("smd_prep_medigram_cadence")), "2:1");
-  assert.equal(D.cadenceN(mockG.localStorage.getItem("smd_prep_medigram_cadence")), 2);
-
-  // Arm set to "5" via localStorage
-  stored["smd_prep_medigram_cadence"] = "5";
-  assert.equal(D.resolveCadence(mockG.localStorage.getItem("smd_prep_medigram_cadence")), "5:1");
-  assert.equal(D.cadenceN(mockG.localStorage.getItem("smd_prep_medigram_cadence")), 5);
-
-  // Arm set via setCadence API
-  assert.equal(mg.setCadence("2"), "2:1");
-  assert.equal(stored["smd_prep_medigram_cadence"], "2");
-  assert.equal(D.cadenceN(stored["smd_prep_medigram_cadence"]), 2);
 });
