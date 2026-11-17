@@ -90,7 +90,7 @@
     favIc: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
     palette: '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.3c3.9 0 7-3.1 7-7 0-5.5-5.4-9.1-10-9.1z"/></svg>'
   };
-  var FOLDER_COLORS = ["#42CDB5", "#60A5FA", "#F5854A", "#A78BFA", "#34D399", "#F87171", "#FBBF24", "#94A3B8"];
+  var FOLDER_COLORS = ["#C9A227", "#60A5FA", "#F5854A", "#A78BFA", "#34D399", "#F87171", "#FBBF24", "#94A3B8"];
   var uidN = 0;
   function uid() { return Date.now().toString(36) + (++uidN).toString(36) + Math.random().toString(36).slice(2, 7); }
   var host = null;
@@ -570,7 +570,7 @@
     return html;
   }
   function folderCardHtml(f) {
-    var col = f.colour || "#42CDB5";
+    var col = f.colour || "#C9A227";
     var icon = f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder;
     var favBadge = f.favourite ? '<span class="st5a-fav-badge" title="Favourite">\u2605</span>' : "";
     return '<div class="st5a-card st5a-folder" data-folder="' + f.id + '" draggable="false">' +
@@ -751,12 +751,12 @@
         }
         var isFav = libState.tab === "favorites";
         /* Always show the + New tile in the Documents tab even when the list is empty,
-           so the test (and user) can find .st5a-new and .st5a-card immediately. */
-        var emptyHtml = '<div class="st-empty-box"><div class="st-empty-ico">' + (isFav ? LIB_ICO.favIc : LIB_ICO.book) + '</div><h3>' + (isFav ? "No favourites yet" : "No PDFs yet") + '</h3><p>' + (isFav ? "Star a document or folder to pin it here." : "Import a PDF, create a notebook, or scan notes.") + '</p></div>';
+           so the test (and user) can find .st5a-new and .st5a-card immediately.
+           One empty message only: a single short line under the New tile. */
         if (!isFav && libState.tab === "documents") {
-          bodyEl.innerHTML = '<div class="st5a-grid">' + newTileHtml() + '</div>' + emptyHtml;
+          bodyEl.innerHTML = '<div class="st5a-grid">' + newTileHtml() + '</div><p class="st5a-empty-line">Import a PDF, create a notebook, or scan notes.</p>';
         } else {
-          bodyEl.innerHTML = emptyHtml;
+          bodyEl.innerHTML = '<div class="st-empty-box"><div class="st-empty-ico">' + LIB_ICO.favIc + '</div><h3>No favourites yet</h3><p>Star a document or folder to pin it here.</p></div>';
         }
         return;
       }
@@ -775,7 +775,7 @@
           if (it.type === "folder") {
             var f = it.f;
             return '<div class="st5a-list-row st5a-list-folder" data-folder="' + f.id + '">' +
-              '<button type="button" class="st5a-list-open" data-act="st5a-open-folder" data-id="' + f.id + '"><span class="st5a-list-th-ph" style="color:' + (f.colour || "#42CDB5") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><span class="st5a-list-tt"><b>' + esc(f.name) + '</b><small>' + esc(fmtWhen(f.mtime || f.created || Date.now())) + '</small></span></button>' +
+              '<button type="button" class="st5a-list-open" data-act="st5a-open-folder" data-id="' + f.id + '"><span class="st5a-list-th-ph" style="color:' + (f.colour || "#C9A227") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><span class="st5a-list-tt"><b>' + esc(f.name) + '</b><small>' + esc(fmtWhen(f.mtime || f.created || Date.now())) + '</small></span></button>' +
               '<button type="button" class="st5a-chev-btn" data-act="st5a-folder-menu" data-id="' + f.id + '" aria-label="Options for folder ' + esc(f.name) + '">' + LIB_ICO.chev + '</button>' +
             '</div>';
           }
@@ -879,7 +879,7 @@
       var html = '<div class="st-doc-menu-head"><div class="st-doc-menu-title"><h3>Move to folder</h3><small>' + esc(d.title) + '</small></div><button type="button" class="pn-btn sm" data-act="st5a-close">Done</button></div>' +
         '<div class="st-doc-menu-items">' +
           '<button type="button" class="st-menu-item' + (!d.folderId ? " on" : "") + '" data-act="st5a-set-folder" data-id="' + d.id + '" data-folder=""><div class="st-menu-ico">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>(No folder)</strong></div></button>' +
-          folders.map(function (f) { return '<button type="button" class="st-menu-item' + (d.folderId === f.id ? " on" : "") + '" data-act="st5a-set-folder" data-id="' + d.id + '" data-folder="' + f.id + '"><div class="st-menu-ico" style="color:' + (f.colour || "#42CDB5") + '">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>' + esc(f.name) + '</strong></div></button>'; }).join("") +
+          folders.map(function (f) { return '<button type="button" class="st-menu-item' + (d.folderId === f.id ? " on" : "") + '" data-act="st5a-set-folder" data-id="' + d.id + '" data-folder="' + f.id + '"><div class="st-menu-ico" style="color:' + (f.colour || "#C9A227") + '">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>' + esc(f.name) + '</strong></div></button>'; }).join("") +
           '<div class="st5a-new-folder-row" style="display:flex;gap:8px;margin-top:8px"><input id="st5aNewFolderName" type="text" placeholder="New folder name" maxlength="40" style="flex:1;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--pn-line);background:var(--pn-s1);color:var(--pn-text)"><button type="button" class="pn-btn sm" data-act="st5a-new-folder-for-move" data-id="' + d.id + '">Create</button></div>' +
         '</div>';
       openSheet(html);
@@ -893,11 +893,11 @@
       var docsIn = 0;
       idbAll("docs").then(function (docs) { docsIn = docs.filter(function (d) { return d.folderId === folderId && !d.trashedAt; }).length; });
       // open sheet quickly; doc count filled in on click? we already have all for folders; docs loaded separately will be silent
-      openSheet('<div class="st-doc-menu-head"><div class="st-doc-menu-title" style="display:flex;gap:10px;align-items:center;"><span style="color:' + (f.colour || "#42CDB5") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><div><h3>' + esc(f.name) + '</h3><small>' + kids + (kids === 1 ? " subfolder" : " subfolders") + '</small></div></div><button type="button" class="pn-btn sm" data-act="st5a-close">Done</button></div>' +
+      openSheet('<div class="st-doc-menu-head"><div class="st-doc-menu-title" style="display:flex;gap:10px;align-items:center;"><span style="color:' + (f.colour || "#C9A227") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><div><h3>' + esc(f.name) + '</h3><small>' + kids + (kids === 1 ? " subfolder" : " subfolders") + '</small></div></div><button type="button" class="pn-btn sm" data-act="st5a-close">Done</button></div>' +
         '<div class="st-doc-menu-items">' +
           '<button type="button" class="st-menu-item" data-act="st5a-rename-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.edit + '</div><div class="st-menu-txt"><strong>Rename folder</strong></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-fav-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + (f.favourite ? LIB_ICO.starFill : LIB_ICO.star) + '</div><div class="st-menu-txt"><strong>' + (f.favourite ? "Remove favourite" : "Mark as favourite") + '</strong><small>Red star</small></div></button>' +
-          '<button type="button" class="st-menu-item" data-act="st5a-folder-colour" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.palette + '</div><div class="st-menu-txt"><strong>Folder colour</strong><small>Current: ' + esc(f.colour || "#42CDB5") + '</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-folder-colour" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.palette + '</div><div class="st-menu-txt"><strong>Folder colour</strong><small>Current: ' + esc(f.colour || "#C9A227") + '</small></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-new-subfolder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.plus + '</div><div class="st-menu-txt"><strong>New subfolder</strong></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-move-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.move + '</div><div class="st-menu-txt"><strong>Move folder</strong></div></button>' +
           '<button type="button" class="st-menu-item bad" data-act="st5a-del-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.trash + '</div><div class="st-menu-txt"><strong>Delete folder</strong><small>Items stay in library</small></div></button>' +

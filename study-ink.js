@@ -186,11 +186,12 @@
         '<span class="st-ink-hint">Tap the eraser again for more options</span></div>';
     }
     var ts = toolSettings(s, tool), pal = tool === "hl" ? HL_COLORS : PEN_COLORS;
-    var html = '<div class="st-ink-strip" role="group" aria-label="' + (tool === "hl" ? "Highlighter" : "Pen") + ' options"><div class="st-ink-colors">' +
+    var html = '<div class="st-ink-strip" role="group" aria-label="' + (tool === "hl" ? "Highlighter" : "Pen") + ' options">' +
+      '<div class="st-ink-widths" role="group" aria-label="Width presets">' + ts.widths.map(function (w, i) { return '<button type="button" class="st-ink-w' + (ts.wi === i ? " on" : "") + '" data-ink="width" data-v="' + i + '" aria-label="Width preset ' + (i + 1) + ', long press to edit" aria-pressed="' + (ts.wi === i) + '"><i style="height:' + Math.max(2, Math.round(w * 900)) + 'px"></i></button>'; }).join("") + "</div>" +
+      '<span class="st-ink-divider" aria-hidden="true"></span><div class="st-ink-colors">' +
       pal.map(function (c) { return '<button type="button" class="st-ink-c' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Colour ' + c + '" aria-pressed="' + (ts.color === c) + '" style="--c:' + c + '"></button>'; }).join("") +
       (s.recents || []).map(function (c) { return '<button type="button" class="st-ink-c recent' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Recent colour ' + c + '" style="--c:' + c + '"></button>'; }).join("") +
       '<label class="st-ink-custom" title="Custom colour"><input type="color" data-ink-custom value="' + esc(ts.color) + '" aria-label="Custom colour wheel"><input type="text" data-ink-hex value="' + esc(ts.color) + '" aria-label="Custom colour hex" maxlength="7" spellcheck="false"></label></div>' +
-      '<div class="st-ink-widths" role="group" aria-label="Width presets">' + ts.widths.map(function (w, i) { return '<button type="button" class="st-ink-w' + (ts.wi === i ? " on" : "") + '" data-ink="width" data-v="' + i + '" aria-label="Width preset ' + (i + 1) + ', long press to edit" aria-pressed="' + (ts.wi === i) + '"><i style="height:' + Math.max(2, Math.round(w * 900)) + 'px"></i></button>'; }).join("") + "</div>" +
       '<span class="st-ink-hint">Tap the ' + (tool === "hl" ? "highlighter" : "pen") + " again for settings</span></div>";
     return html;
   }
@@ -211,6 +212,8 @@
     if (tool === "er") {
       var er = s.eraser;
       el.innerHTML = "<h3>Eraser</h3>" +
+        '<div class="st-ink-styles" role="group" aria-label="Eraser mode">' + ["precision", "standard", "stroke"].map(function (m) { return '<button type="button" class="st-ink-seg' + (er.mode === m ? " on" : "") + '" data-ink="er-mode" data-v="' + m + '" aria-pressed="' + (er.mode === m) + '">' + (m === "stroke" ? "Whole stroke" : m === "precision" ? "Precision" : "Partial") + "</button>"; }).join("") + "</div>" +
+        (er.mode === "standard" ? '<div class="st-ink-styles" role="group" aria-label="Eraser size">' + [0, 1, 2].map(function (i) { return '<button type="button" class="st-ink-seg' + (er.size === i ? " on" : "") + '" data-ink="er-size" data-v="' + i + '" aria-pressed="' + (er.size === i) + '">' + ["Small", "Medium", "Large"][i] + "</button>"; }).join("") + "</div>" : "") +
         '<label class="st-ink-row"><span>Erase highlighter only</span><button type="button" class="st-ink-toggle' + (er.hlOnly ? " on" : "") + '" data-ink="er-hlonly" aria-pressed="' + er.hlOnly + '">' + (er.hlOnly ? "On" : "Off") + "</button></label>" +
         '<label class="st-ink-row"><span>Return to previous tool after erasing</span><button type="button" class="st-ink-toggle' + (er.autoDeselect ? " on" : "") + '" data-ink="er-auto" aria-pressed="' + er.autoDeselect + '">' + (er.autoDeselect ? "On" : "Off") + "</button></label>" +
         '<button type="button" class="st-ink-danger" data-ink="er-clear">Clear page</button>' +
@@ -220,6 +223,9 @@
       el.innerHTML = "<h3>" + (tool === "hl" ? "Highlighter" : "Pen") + "</h3>" +
         '<canvas class="st-ink-preview" width="520" height="96" aria-label="Stroke preview"></canvas>' +
         (tool === "pen" ? '<div class="st-ink-styles" role="group" aria-label="Pen style">' + ["fountain", "ball", "brush"].map(function (st) { return '<button type="button" class="st-ink-seg' + (ts.style === st ? " on" : "") + '" data-ink="style" data-v="' + st + '" aria-pressed="' + (ts.style === st) + '">' + st.charAt(0).toUpperCase() + st.slice(1) + "</button>"; }).join("") + "</div>" : "") +
+        '<label class="st-ink-slider"><span>Size <b data-ink-size-val>' + Math.round(ts.widths[ts.wi] * 1500) + '</b></span><input type="range" min="1" max="12" step="0.5" value="' + Math.round(ts.widths[ts.wi] * 1500) + '" data-ink="size" aria-label="Pen size"></label>' +
+        '<div class="st-ink-pop-colors" role="group" aria-label="Colour">' + (tool === "hl" ? HL_COLORS : PEN_COLORS).map(function (c) { return '<button type="button" class="st-ink-c' + (ts.color === c ? " on" : "") + '" data-ink="color" data-v="' + c + '" aria-label="Colour ' + c + '" aria-pressed="' + (ts.color === c) + '" style="--c:' + c + '"></button>'; }).join("") +
+        '<label class="st-ink-custom" title="Custom colour"><input type="color" data-ink-custom value="' + esc(ts.color) + '" aria-label="Custom colour wheel"><input type="text" data-ink-hex value="' + esc(ts.color) + '" aria-label="Custom colour hex" maxlength="7" spellcheck="false"></label></div>' +
         '<label class="st-ink-slider"><span>Pressure sensitivity <b data-ink-sens-val>' + Math.round(ts.sens * 100) + '%</b></span><input type="range" min="0" max="100" step="1" value="' + Math.round(ts.sens * 100) + '" data-ink="sens" aria-label="Pressure sensitivity"></label>' +
         (tool === "pen" && ts.style === "fountain" ? '<label class="st-ink-slider"><span>Tip sharpness <b data-ink-tip-val>' + Math.round(ts.tip * 100) + '%</b></span><input type="range" min="0" max="100" step="1" value="' + Math.round(ts.tip * 100) + '" data-ink="tip" aria-label="Tip sharpness"></label>' : "") +
         '<label class="st-ink-row"><span>Draw with finger</span><button type="button" class="st-ink-toggle' + (s.drawFinger ? " on" : "") + '" data-ink="finger" aria-pressed="' + s.drawFinger + '">' + (s.drawFinger ? "On" : "Off") + "</button></label>" +
@@ -234,12 +240,18 @@
       var t = e.target, k = t.getAttribute("data-ink"), V = api.getV(), s = settingsOf(api), ts = toolSettings(s, V.tool === "hl" ? "hl" : "pen");
       if (k === "sens") { ts.sens = (+t.value) / 100; var b = el.querySelector("[data-ink-sens-val]"); if (b) b.textContent = t.value + "%"; }
       if (k === "tip") { ts.tip = (+t.value) / 100; var b2 = el.querySelector("[data-ink-tip-val]"); if (b2) b2.textContent = t.value + "%"; }
+      if (k === "size") { ts.widths[ts.wi] = (+t.value) / 1500; var b3 = el.querySelector("[data-ink-size-val]"); if (b3) b3.textContent = t.value; }
+      if (t.hasAttribute("data-ink-custom")) { ts.color = t.value; ts.ci = -1; addRecent(s, ts.color); var hx = el.querySelector("[data-ink-hex]"); if (hx) hx.value = ts.color; }
+      if (t.hasAttribute("data-ink-hex")) { var hv = t.value.trim(); if (validHex(hv)) { ts.color = hv; ts.ci = -1; addRecent(s, hv); } }
       persist(api); preview(api, el.querySelector(".st-ink-preview"));
     });
     el.addEventListener("click", function (e) {
       var b = e.target; while (b && b !== el && !b.getAttribute("data-ink")) b = b.parentNode;
       if (!b || b === el) return;
       var k = b.getAttribute("data-ink"), V = api.getV(), s = settingsOf(api), tool = V.tool === "hl" ? "hl" : "pen", ts = toolSettings(s, tool);
+      if (k === "color") { ts.color = b.getAttribute("data-v"); ts.ci = (tool === "hl" ? HL_COLORS : PEN_COLORS).indexOf(ts.color); persist(api); popoverRefresh(api, tool); }
+      if (k === "er-mode") { s.eraser.mode = b.getAttribute("data-v"); persist(api); popoverRefresh(api, "er"); }
+      if (k === "er-size") { s.eraser.size = +b.getAttribute("data-v"); persist(api); popoverRefresh(api, "er"); }
       if (k === "style") { ts.style = b.getAttribute("data-v"); persist(api); popoverRefresh(api, tool); }
       if (k === "finger") { s.drawFinger = !s.drawFinger; s.fingerManual = true; persist(api); popoverRefresh(api, tool); }
       if (k === "er-hlonly") { s.eraser.hlOnly = !s.eraser.hlOnly; persist(api); popoverRefresh(api, "er"); }
@@ -310,7 +322,7 @@
       var V = api.getV(), p = V && V.pg[n]; if (!p || !p.live) return;
       var ctx = p.live.getContext("2d"), dpr = p.live.width / (p.el.clientWidth || 1), a = pos(e);
       ctx.clearRect(0, 0, p.live.width, p.live.height); ctx.save(); ctx.scale(dpr, dpr);
-      ctx.strokeStyle = "#42cdb5"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(a[0] * p.el.clientWidth, a[1] * p.el.clientHeight, eraseRadius(), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+      ctx.strokeStyle = "#3e4c72"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(a[0] * p.el.clientWidth, a[1] * p.el.clientHeight, eraseRadius(), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
     }
     function eraseAt(e) {
       var V = api.getV(), s = settingsOf(api), a = pos(e), W = ov.clientWidth, H = ov.clientHeight, rad = eraseRadius(), changed = false;
