@@ -305,6 +305,8 @@
   }
 
   /* ---- Laser Pointer (NEVER stored, never in undo) ---- */
+  /* same pixel cap as the page canvases: iPad blanks canvases over ~16.7 M px when zoomed */
+  function laserDpr(cw, ch) { return Math.max(0.25, Math.min(G.devicePixelRatio || 1, 2, Math.sqrt(8e6 / Math.max(1, cw * ch)))); }
   function getLaserCanvas(n) {
     var v = V();
     if (!v || !v.pg[n]) return null;
@@ -323,7 +325,7 @@
       el.appendChild(lcv);
     }
     var cw = el.clientWidth, ch = el.clientHeight;
-    var dpr = Math.min(G.devicePixelRatio || 1, 2);
+    var dpr = laserDpr(cw, ch);
     if (lcv.width !== Math.floor(cw * dpr) || lcv.height !== Math.floor(ch * dpr)) {
       lcv.width = Math.floor(cw * dpr);
       lcv.height = Math.floor(ch * dpr);
@@ -345,7 +347,7 @@
     var lcv = getLaserCanvas(n);
     if (!lcv) return;
     var ctx = lcv.getContext("2d");
-    var dpr = Math.min(G.devicePixelRatio || 1, 2);
+    var dpr = lcv.width / (lcv.clientWidth || lcv.width || 1);
     ctx.clearRect(0, 0, lcv.width, lcv.height);
     var cw = lcv.clientWidth || (lcv.width / dpr);
     var ch = lcv.clientHeight || (lcv.height / dpr);
