@@ -1,240 +1,281 @@
 {
- "v": 1,
- "module": "sne-nerve-conduction-emg",
- "title": "Electromyography and nerve conduction studies",
- "minutes": 8,
- "gen": "AI",
- "steps": [
-  {
-   "tx": "**Demyelinating neuropathies** in electrodiagnostic studies are characterized by marked reduction in **conduction velocity** greater than **30%** below normal, prolonged distal motor latencies exceeding **130%** of normal, and temporal dispersion or partial conduction block across non-entrapment peripheral nerve segments throughout clinical neurophysiology laboratories.",
-   "say": "Demyelinating neuropathies in electrodiagnostic studies are characterized by marked reduction in conduction velocity greater than 30% below normal prolonged distal motor latencies exceeding 130% of normal and temporal dispersion or partial conduction block across non-entrapment peripheral nerve segments throughout clinical neurophysiology laboratories.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Demyelinating Neuropathy",
-     "points": [
-      "Conduction velocity slowed >30% below lower limit",
-      "Distal motor latencies prolonged >130% of normal",
-      "Temporal dispersion and conduction block",
-      "Relatively preserved CMAP amplitudes early"
-     ]
+  "v": 1,
+  "module": "sne-nerve-conduction-emg",
+  "title": "Electromyography and nerve conduction studies",
+  "minutes": 8,
+  "gen": "AI",
+  "steps": [
+    {
+      "tx": "**Demyelinating neuropathies** in electrodiagnostic studies are characterized by marked reduction in **conduction velocity** greater than **30%** below normal, prolonged distal motor latencies exceeding **130%** of normal, and temporal dispersion or partial conduction block across non-entrapment peripheral nerve segments throughout clinical neurophysiology laboratories.",
+      "say": "Demyelinating neuropathies in electrodiagnostic studies are characterized by marked reduction in conduction velocity greater than 30% below normal prolonged distal motor latencies exceeding 130% of normal and temporal dispersion or partial conduction block across non-entrapment peripheral nerve segments throughout clinical neurophysiology laboratories.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Demyelinating Neuropathy",
+          "points": [
+            "Conduction velocity slowed >30% below lower limit",
+            "Distal motor latencies prolonged >130% of normal",
+            "Temporal dispersion and conduction block",
+            "Relatively preserved CMAP amplitudes early"
+          ]
+        },
+        "right": {
+          "title": "Axonal Neuropathy",
+          "points": [
+            "Profound reduction of CMAP and SNAP amplitudes",
+            "Preserved or mildly slowed conduction velocity",
+            "Normal or minimally prolonged distal latencies",
+            "Prominent active denervation on needle EMG"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Axonal Neuropathy",
-     "points": [
-      "Profound reduction of CMAP and SNAP amplitudes",
-      "Preserved or mildly slowed conduction velocity",
-      "Normal or minimally prolonged distal latencies",
-      "Prominent active denervation on needle EMG"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The traces contrast a crisp normal motor response with a diseased study showing late onset, tiny spread out potentials. This is **demyelinating neuropathy** with prolonged distal latency, slowed **conduction velocity** and **temporal dispersion**. Conduction block across non entrapment segments helps separate it from axonal loss where amplitudes fall but speed is largely preserved.",
-   "say": "The traces contrast a crisp normal motor response with a diseased study showing late onset and spread out potentials. This is demyelinating neuropathy with prolonged distal latency, slowed conduction speed and temporal dispersion. Block across segments without entrapment helps separate it from axonal loss where amplitudes fall but speed is largely preserved.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-nerve-conduction-emg-gen1.webp",
-    "alt": "Paired motor traces compare a normal response with prolonged latency, slowed conduction and dispersed potentials.",
-    "caption": "Normal and demyelinating motor responses compared, Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "**Axonal neuropathies** predominantly feature reduced compound muscle **action potential** and sensory nerve action potential amplitudes with relatively preserved conduction velocities and distal latencies. The primary loss of functioning axons diminishes voltage generator quantity without impairing the speed of saltatory conduction in remaining healthy myelinated fibers.",
-   "say": "Axonal neuropathies predominantly feature reduced compound muscle action potential and sensory nerve action potential amplitudes with relatively preserved conduction velocities and distal latencies. The primary loss of functioning axons diminishes voltage generator quantity without impairing the speed of saltatory conduction in remaining healthy myelinated fibers.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Axonal Pathophysiology",
-     "points": [
-      "Loss of structural axonal cylinders",
-      "Drop in CMAP amplitude proportional to axonal loss",
-      "Drop in SNAP amplitude in sensory fibers",
-      "Velocity preserved in surviving large fibers"
-     ]
+    {
+      "tx": "The traces contrast a crisp normal motor response with a diseased study showing late onset, tiny spread out potentials. This is **demyelinating neuropathy** with prolonged distal latency, slowed **conduction velocity** and **temporal dispersion**. Conduction block across non entrapment segments helps separate it from axonal loss where amplitudes fall but speed is largely preserved.",
+      "say": "The traces contrast a crisp normal motor response with a diseased study showing late onset and spread out potentials. This is demyelinating neuropathy with prolonged distal latency, slowed conduction speed and temporal dispersion. Block across segments without entrapment helps separate it from axonal loss where amplitudes fall but speed is largely preserved.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sne-nerve-conduction-emg-gen1.webp",
+        "alt": "Paired motor traces compare a normal response with prolonged latency, slowed conduction and dispersed potentials.",
+        "caption": "Normal and demyelinating motor responses compared, Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     },
-    "right": {
-     "title": "Diagnostic Implications",
-     "points": [
-      "Seen in diabetic, toxic, and vasculitic neuropathies",
-      "Wallerian degeneration follows axonal breakdown",
-      "Fibrillations appear 2-3 weeks post injury",
-      "Collateral reinnervation produces giant MUAPs"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Spontaneous fibrillations and **positive sharp waves** on needle electromyography represent active skeletal muscle fiber **denervation**, appearing **2** to **3** weeks after acute motor axon transection or severe axonal injury. Denervated muscle membranes express supersensitive acetylcholine receptors that undergo spontaneous rhythmic depolarization.",
-   "say": "Spontaneous fibrillations and positive sharp waves on needle electromyography represent active skeletal muscle fiber denervation appearing 2 to 3 weeks after acute motor axon transection or severe axonal injury. Denervated muscle membranes express supersensitive acetylcholine receptors that undergo spontaneous rhythmic depolarization.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "EMG Waveform",
-     "Origin Mechanism",
-     "Morphology & Timing",
-     "Pathological Meaning"
-    ],
-    "rows": [
-     [
-      "Fibrillation Potentials",
-      "Single muscle fibre rhythm",
-      "Short biphasic spikes, 2-3 weeks post-injury",
-      "Ongoing active axonal denervation"
-     ],
-     [
-      "Positive Sharp Waves",
-      "Injured sarcolemmal discharge",
-      "Rapid positive deflection followed by slow decay",
-      "Active muscle denervation or membrane instability"
-     ],
-     [
-      "Fasciculation Potentials",
-      "Spontaneous motor unit firing",
-      "Polyphasic irregular motor unit discharges",
-      "Motor neuron disease or benign irritation"
-     ],
-     [
-      "Myotonic Discharges",
-      "Repetitive sarcolemmal firing",
-      "Waxing and waning dive-bomber sound",
-      "Myotonic dystrophies and channelopathies"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Fasciculation potentials** represent spontaneous motor unit discharges that occur in neurogenic disorders like **amyotrophic lateral sclerosis** as well as benign fasciculation syndrome. In motor neuron disease, widespread fasciculations in multiple body segments coexist with active fibrillations and chronic neurogenic motor unit remodeling.",
-   "say": "Fasciculation potentials represent spontaneous motor unit discharges that occur in neurogenic disorders like amyotrophic lateral sclerosis as well as benign fasciculation syndrome. In motor neuron disease widespread fasciculations in multiple body segments coexist with active fibrillations and chronic neurogenic motor unit remodeling.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "MND / ALS Fasciculations",
-     "points": [
-      "Coexist with fibrillations and positive sharp waves",
-      "Widespread in bulbar, cervical, thoracic, lumbosacral",
-      "Complex unstable polyphasic morphology",
-      "Accompanied by progressive muscle weakness and wasting"
-     ]
+    {
+      "tx": "**Axonal neuropathies** predominantly feature reduced compound muscle **action potential** and sensory nerve action potential amplitudes with relatively preserved conduction velocities and distal latencies. The primary loss of functioning axons diminishes voltage generator quantity without impairing the speed of saltatory conduction in remaining healthy myelinated fibers.",
+      "say": "Axonal neuropathies predominantly feature reduced compound muscle action potential and sensory nerve action potential amplitudes with relatively preserved conduction velocities and distal latencies. The primary loss of functioning axons diminishes voltage generator quantity without impairing the speed of saltatory conduction in remaining healthy myelinated fibers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Axonal Pathophysiology",
+          "points": [
+            "Loss of structural axonal cylinders",
+            "Drop in CMAP amplitude proportional to axonal loss",
+            "Drop in SNAP amplitude in sensory fibers",
+            "Velocity preserved in surviving large fibers"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic Implications",
+          "points": [
+            "Seen in diabetic, toxic, and vasculitic neuropathies",
+            "Wallerian degeneration follows axonal breakdown",
+            "Fibrillations appear 2-3 weeks post injury",
+            "Collateral reinnervation produces giant MUAPs"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Benign Fasciculations",
-     "points": [
-      "Absence of active fibrillations or sharp waves",
-      "Normal motor unit action potential morphology",
-      "Normal muscle power and deep tendon reflexes",
-      "Frequently aggravated by caffeine, stress, and fatigue"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**Myopathic** needle electromyography demonstrates small-amplitude, short-duration, polyphasic motor unit action potentials accompanied by rapid, **early recruitment** despite weak effort. Because individual muscle fibers within the motor unit are diseased or atrophic, many units must be recruited early to generate minimal mechanical force.",
-   "say": "Myopathic needle electromyography demonstrates small-amplitude short-duration polyphasic motor unit action potentials accompanied by rapid early recruitment despite weak effort. Because individual muscle fibers within the motor unit are diseased or atrophic many units must be recruited early to generate minimal mechanical force.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Neurogenic Pattern",
-     "Myopathic Pattern",
-     "Diagnostic Utility"
-    ],
-    "rows": [
-     [
-      "MUAP Duration",
-      "Prolonged (>15 ms)",
-      "Short (<5 ms)",
-      "Distinguishes axonal loss from primary myopathy"
-     ],
-     [
-      "MUAP Amplitude",
-      "High (>5 mV)",
-      "Low (<0.5 mV)",
-      "Confirms motor unit remodeling versus fibre loss"
-     ],
-     [
-      "Recruitment Pattern",
-      "Reduced recruitment with rapid firing",
-      "Early full recruitment with low force",
-      "Assesses functional motor unit availability"
-     ],
-     [
-      "Spontaneous Discharges",
-      "Fibrillations and positive sharp waves",
-      "Myotonic discharges or electrical silence",
-      "Identifies active inflammation or necrosis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Neurogenic motor units in chronic **reinnervation** are characterized by enlarged, long-duration, **polyphasic** motor unit action potentials with reduced recruitment firing at high frequencies. Surviving motor axons sprout collateral terminals to reinnervate orphaned muscle fibers, expanding the territory and fiber density of the motor unit.",
-   "say": "Neurogenic motor units in chronic reinnervation are characterized by enlarged long-duration polyphasic motor unit action potentials with reduced recruitment firing at high frequencies. Surviving motor axons sprout collateral terminals to reinnervate orphaned muscle fibers expanding the territory and fiber density of the motor unit.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Collateral Sprouting",
-     "points": [
-      "Terminal axonal sprouting from surviving motoneurons",
-      "Reinnervation of orphaned denervated muscle fibres",
-      "Fiber type grouping on histochemical biopsy",
-      "Synchronous firing of enlarged grouped motor units"
-     ]
+    {
+      "tx": "Spontaneous fibrillations and **positive sharp waves** on needle electromyography represent active skeletal muscle fiber **denervation**, appearing **2** to **3** weeks after acute motor axon transection or severe axonal injury. Denervated muscle membranes express supersensitive acetylcholine receptors that undergo spontaneous rhythmic depolarization.",
+      "say": "Spontaneous fibrillations and positive sharp waves on needle electromyography represent active skeletal muscle fiber denervation appearing 2 to 3 weeks after acute motor axon transection or severe axonal injury. Denervated muscle membranes express supersensitive acetylcholine receptors that undergo spontaneous rhythmic depolarization.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "EMG Waveform",
+          "Origin Mechanism",
+          "Morphology & Timing",
+          "Pathological Meaning"
+        ],
+        "rows": [
+          [
+            "Fibrillation Potentials",
+            "Single muscle fibre rhythm",
+            "Short biphasic spikes, 2-3 weeks post-injury",
+            "Ongoing active axonal denervation"
+          ],
+          [
+            "Positive Sharp Waves",
+            "Injured sarcolemmal discharge",
+            "Rapid positive deflection followed by slow decay",
+            "Active muscle denervation or membrane instability"
+          ],
+          [
+            "Fasciculation Potentials",
+            "Spontaneous motor unit firing",
+            "Polyphasic irregular motor unit discharges",
+            "Motor neuron disease or benign irritation"
+          ],
+          [
+            "Myotonic Discharges",
+            "Repetitive sarcolemmal firing",
+            "Waxing and waning dive-bomber sound",
+            "Myotonic dystrophies and channelopathies"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Giant MUAP Characteristics",
-     "points": [
-      "Markedly expanded duration exceeding 15 to 20 ms",
-      "Giant amplitudes often exceeding 5 to 10 mV",
-      "High polyphasic turn complexity and instability",
-      "Reduced recruitment with rapid solitary unit firing"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**Myotonic discharges** on needle electromyography produce a characteristic waxing and waning high-frequency audio pattern resembling a **dive-bomber**, seen in myotonic dystrophy and myotonia congenita. These discharges originate from intrinsic muscle membrane hyperexcitability and delayed sarcolemmal repolarization caused by chloride or sodium channel mutations.",
-   "say": "Myotonic discharges on needle electromyography produce a characteristic waxing and waning high-frequency audio pattern resembling a dive-bomber seen in myotonic dystrophy and myotonia congenita. These discharges originate from intrinsic muscle membrane hyperexcitability and delayed sarcolemmal repolarization caused by chloride or sodium channel mutations.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Acoustic & Electrical Features",
-     "points": [
-      "Classic dive-bomber sound on audio monitor",
-      "Spontaneous or needle insertion induced",
-      "Waxing and waning frequency (20 to 150 Hz)",
-      "Waxing and waning amplitude (10 to 1000 uV)"
-     ]
+    {
+      "tx": "**Fasciculation potentials** represent spontaneous motor unit discharges that occur in neurogenic disorders like **amyotrophic lateral sclerosis** as well as benign fasciculation syndrome. In motor neuron disease, widespread fasciculations in multiple body segments coexist with active fibrillations and chronic neurogenic motor unit remodeling.",
+      "say": "Fasciculation potentials represent spontaneous motor unit discharges that occur in neurogenic disorders like amyotrophic lateral sclerosis as well as benign fasciculation syndrome. In motor neuron disease widespread fasciculations in multiple body segments coexist with active fibrillations and chronic neurogenic motor unit remodeling.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MND / ALS Fasciculations",
+          "points": [
+            "Coexist with fibrillations and positive sharp waves",
+            "Widespread in bulbar, cervical, thoracic, lumbosacral",
+            "Complex unstable polyphasic morphology",
+            "Accompanied by progressive muscle weakness and wasting"
+          ]
+        },
+        "right": {
+          "title": "Benign Fasciculations",
+          "points": [
+            "Absence of active fibrillations or sharp waves",
+            "Normal motor unit action potential morphology",
+            "Normal muscle power and deep tendon reflexes",
+            "Frequently aggravated by caffeine, stress, and fatigue"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Clinical Channelopathies",
-     "points": [
-      "Myotonic dystrophy types 1 (DMPK) and 2 (CNBP)",
-      "Myotonia congenita (CLCN1 chloride channel)",
-      "Paramyotonia congenita (SCN4A sodium channel)",
-      "Acid maltase deficiency (Pompe disease)"
-     ]
+    {
+      "tx": "**Myopathic** needle electromyography demonstrates small-amplitude, short-duration, polyphasic motor unit action potentials accompanied by rapid, **early recruitment** despite weak effort. Because individual muscle fibers within the motor unit are diseased or atrophic, many units must be recruited early to generate minimal mechanical force.",
+      "say": "Myopathic needle electromyography demonstrates small-amplitude short-duration polyphasic motor unit action potentials accompanied by rapid early recruitment despite weak effort. Because individual muscle fibers within the motor unit are diseased or atrophic many units must be recruited early to generate minimal mechanical force.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Neurogenic Pattern",
+          "Myopathic Pattern",
+          "Diagnostic Utility"
+        ],
+        "rows": [
+          [
+            "MUAP Duration",
+            "Prolonged (>15 ms)",
+            "Short (<5 ms)",
+            "Distinguishes axonal loss from primary myopathy"
+          ],
+          [
+            "MUAP Amplitude",
+            "High (>5 mV)",
+            "Low (<0.5 mV)",
+            "Confirms motor unit remodeling versus fibre loss"
+          ],
+          [
+            "Recruitment Pattern",
+            "Reduced recruitment with rapid firing",
+            "Early full recruitment with low force",
+            "Assesses functional motor unit availability"
+          ],
+          [
+            "Spontaneous Discharges",
+            "Fibrillations and positive sharp waves",
+            "Myotonic discharges or electrical silence",
+            "Identifies active inflammation or necrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Neurogenic motor units in chronic **reinnervation** are characterized by enlarged, long-duration, **polyphasic** motor unit action potentials with reduced recruitment firing at high frequencies. Surviving motor axons sprout collateral terminals to reinnervate orphaned muscle fibers, expanding the territory and fiber density of the motor unit.",
+      "say": "Neurogenic motor units in chronic reinnervation are characterized by enlarged long-duration polyphasic motor unit action potentials with reduced recruitment firing at high frequencies. Surviving motor axons sprout collateral terminals to reinnervate orphaned muscle fibers expanding the territory and fiber density of the motor unit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Collateral Sprouting",
+          "points": [
+            "Terminal axonal sprouting from surviving motoneurons",
+            "Reinnervation of orphaned denervated muscle fibres",
+            "Fiber type grouping on histochemical biopsy",
+            "Synchronous firing of enlarged grouped motor units"
+          ]
+        },
+        "right": {
+          "title": "Giant MUAP Characteristics",
+          "points": [
+            "Markedly expanded duration exceeding 15 to 20 ms",
+            "Giant amplitudes often exceeding 5 to 10 mV",
+            "High polyphasic turn complexity and instability",
+            "Reduced recruitment with rapid solitary unit firing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Myotonic discharges** on needle electromyography produce a characteristic waxing and waning high-frequency audio pattern resembling a **dive-bomber**, seen in myotonic dystrophy and myotonia congenita. These discharges originate from intrinsic muscle membrane hyperexcitability and delayed sarcolemmal repolarization caused by chloride or sodium channel mutations.",
+      "say": "Myotonic discharges on needle electromyography produce a characteristic waxing and waning high-frequency audio pattern resembling a dive-bomber seen in myotonic dystrophy and myotonia congenita. These discharges originate from intrinsic muscle membrane hyperexcitability and delayed sarcolemmal repolarization caused by chloride or sodium channel mutations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acoustic & Electrical Features",
+          "points": [
+            "Classic dive-bomber sound on audio monitor",
+            "Spontaneous or needle insertion induced",
+            "Waxing and waning frequency (20 to 150 Hz)",
+            "Waxing and waning amplitude (10 to 1000 uV)"
+          ]
+        },
+        "right": {
+          "title": "Clinical Channelopathies",
+          "points": [
+            "Myotonic dystrophy types 1 (DMPK) and 2 (CNBP)",
+            "Myotonia congenita (CLCN1 chloride channel)",
+            "Paramyotonia congenita (SCN4A sodium channel)",
+            "Acid maltase deficiency (Pompe disease)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Repetitive nerve stimulation** at low frequencies between **2** and **3** Hz demonstrates a decremental compound muscle action potential response exceeding **10%** in postsynaptic **myasthenia gravis**. Progressive depletion of readily releasable acetylcholine quanta from presynaptic terminals against blocked receptors drops endplate potentials below the threshold for muscle fiber activation.",
+      "say": "Repetitive nerve stimulation at low frequencies between 2 and 3 Hz demonstrates a decremental compound muscle action potential response exceeding 10% in postsynaptic myasthenia gravis. Progressive depletion of readily releasable acetylcholine quanta from presynaptic terminals against blocked receptors drops endplate potentials below the threshold for muscle fiber activation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
+        "alt": "Diagram illustrating repetitive nerve stimulation responses and post-synaptic neuromuscular junction blockade in myasthenia gravis.",
+        "caption": "Decremental electrophysiological response in myasthenia gravis (StewardMD).",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Electrodiagnostic questions test distinction between demyelinating and axonal neuropathies, motor neuron disease fasciculations, and neuromuscular junction decremental responses. Demyelinating neuropathies produce marked conduction velocity slowing and prolonged distal latencies. Axonal neuropathies show reduced CMAP and SNAP amplitudes with preserved velocities. Myasthenia gravis demonstrates decremental CMAP response on repetitive 3 Hz nerve stimulation.",
+      "say": "High-yield for the exam: Electrodiagnostic questions test distinction between demyelinating and axonal neuropathies, motor neuron disease fasciculations, and neuromuscular junction decremental responses. Demyelinating neuropathies produce marked conduction velocity slowing and prolonged distal latencies. Axonal neuropathies show reduced CMAP and SNAP amplitudes with preserved velocities. Myasthenia gravis demonstrates decremental CMAP response on repetitive 3 Hz nerve stimulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Demyelinating hallmarks",
+            "Conduction velocity slowing, prolonged distal latencies, and temporal dispersion"
+          ],
+          [
+            "Axonal hallmarks",
+            "Reduced compound motor and sensory action potential amplitudes"
+          ],
+          [
+            "Conduction block",
+            "Focal amplitude drop exceeding 50 percent across non-entrapment segment"
+          ],
+          [
+            "Active denervation",
+            "Fibrillation potentials and positive sharp waves on needle EMG"
+          ],
+          [
+            "Fasciculation potentials",
+            "Spontaneous motor unit firing characteristic of amyotrophic lateral sclerosis"
+          ],
+          [
+            "Myasthenia gravis",
+            "Repetitive 3 Hz stimulation shows progressive decrement in CMAP amplitude"
+          ],
+          [
+            "Lambert-Eaton syndrome",
+            "Low baseline CMAP with marked post-exercise facilitation exceeding 100 percent"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Repetitive nerve stimulation** at low frequencies between **2** and **3** Hz demonstrates a decremental compound muscle action potential response exceeding **10%** in postsynaptic **myasthenia gravis**. Progressive depletion of readily releasable acetylcholine quanta from presynaptic terminals against blocked receptors drops endplate potentials below the threshold for muscle fiber activation.",
-   "say": "Repetitive nerve stimulation at low frequencies between 2 and 3 Hz demonstrates a decremental compound muscle action potential response exceeding 10% in postsynaptic myasthenia gravis. Progressive depletion of readily releasable acetylcholine quanta from presynaptic terminals against blocked receptors drops endplate potentials below the threshold for muscle fiber activation.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
-    "alt": "Diagram illustrating repetitive nerve stimulation responses and post-synaptic neuromuscular junction blockade in myasthenia gravis.",
-    "caption": "Decremental electrophysiological response in myasthenia gravis (StewardMD).",
-    "ar": 1.7778
-   }
-  }
- ],
- "quiz": [],
- "refs": [
-  "Adams and Victor Principles of Neurology 11e Ch. 43, 44",
-  "Harrison Principles of Internal Medicine 22e Ch. 446",
-  "Preston & Shapiro Electromyography and Neuromuscular Disorders 4e"
- ]
+  ],
+  "quiz": [],
+  "refs": [
+    "Adams and Victor Principles of Neurology 11e Ch. 43, 44",
+    "Harrison Principles of Internal Medicine 22e Ch. 446",
+    "Preston & Shapiro Electromyography and Neuromuscular Disorders 4e"
+  ]
 }
