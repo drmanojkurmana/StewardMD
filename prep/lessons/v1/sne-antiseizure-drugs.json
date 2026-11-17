@@ -1,0 +1,420 @@
+{
+ "v": 1,
+ "module": "sne-antiseizure-drugs",
+ "title": "Antiseizure medications",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The aim of therapy is **seizure freedom** without intolerable side effects while preserving cognition and quality of life. **Levetiracetam** is the usual first choice for most focal and generalised epilepsies because of its broad spectrum and few interactions. **Lamotrigine** and **valproate** are the other common first line agents, chosen by seizure type and patient profile.",
+   "say": "The aim of therapy is seizure freedom without intolerable side effects while preserving cognition and quality of life. Levetiracetam is the usual first choice for most focal and generalised epilepsies because of its broad spectrum and few interactions. Lamotrigine and valproate are the other common first line agents, chosen by seizure type and patient profile.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Best for",
+     "Key caution"
+    ],
+    "rows": [
+     [
+      "Levetiracetam",
+      "Focal and generalised epilepsy",
+      "Mood change, irritability"
+     ],
+     [
+      "Lamotrigine",
+      "Focal seizures, bipolar overlap",
+      "Rash, Stevens-Johnson syndrome"
+     ],
+     [
+      "Valproate",
+      "Generalised epilepsy, myoclonus",
+      "Teratogenic, liver toxicity"
+     ],
+     [
+      "Carbamazepine",
+      "Focal seizures",
+      "Worsens absence, hyponatraemia"
+     ],
+     [
+      "Phenytoin",
+      "Focal seizures, status epilepticus",
+      "Gingival hyperplasia, cerebellar atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drugs act by **sodium channel blockade**, **GABA enhancement**, **calcium channel modulation**, or **SV2A binding**. **Carbamazepine** and **phenytoin** stabilise sodium channels, while **levetiracetam** binds the synaptic vesicle protein SV2A. **Gabapentin** and **pregabalin** bind the alpha2delta subunit of calcium channels. Efficacy and side effect patterns follow from the mechanism.",
+   "say": "Drugs act by sodium channel blockade, GABA enhancement, calcium channel modulation or SV2A binding. Carbamazepine and phenytoin stabilise sodium channels, while levetiracetam binds the synaptic vesicle protein SV2A. Gabapentin and pregabalin bind the alpha2delta subunit of calcium channels. Efficacy and side effect patterns follow from the mechanism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Drugs",
+     "Typical side effect"
+    ],
+    "rows": [
+     [
+      "Sodium channel blockade",
+      "Carbamazepine, phenytoin, oxcarbazepine",
+      "Dizziness, ataxia, diplopia"
+     ],
+     [
+      "GABA enhancement",
+      "Valproate and phenobarbital",
+      "Sedation, dependence"
+     ],
+     [
+      "Calcium channel modulation",
+      "Gabapentin, pregabalin",
+      "Drowsiness, weight gain"
+     ],
+     [
+      "SV2A binding",
+      "Levetiracetam",
+      "Irritability, mood change"
+     ],
+     [
+      "Slow sodium inactivation",
+      "Lacosamide",
+      "Dizziness, cardiac conduction delay"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dosing follows a simple rule: start low, titrate slowly, and judge at a therapeutic dose before changing. **Lamotrigine** needs slow titration because rapid escalation causes serious rash. **Carbamazepine** induces its own metabolism, so levels fall as doses rise. Breakthrough seizures during titration are usually pharmacokinetic rather than treatment failure.",
+   "say": "Dosing follows a simple rule: start low, titrate slowly and judge at a therapeutic dose before changing. Lamotrigine needs slow titration because rapid escalation causes serious rash. Carbamazepine induces its own metabolism, so levels fall as doses rise. Breakthrough seizures during titration are usually pharmacokinetic rather than treatment failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start low with one drug"
+     },
+     {
+      "id": "b",
+      "label": "Titrate to therapeutic dose"
+     },
+     {
+      "id": "c",
+      "label": "Judge response and tolerability"
+     },
+     {
+      "id": "d",
+      "label": "Add second mechanism if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Valproate** is highly teratogenic with neural tube defects and neurodevelopmental harm, so it is avoided in women who could become pregnant. **Carbamazepine** is teratogenic and interacts with anticonceptives through enzyme induction. **Lamotrigine** and **levetiracetam** are considered safer in pregnancy. Folic acid supplementation is advised for all women of childbearing age on antiseizure drugs.",
+   "say": "Valproate is highly teratogenic with neural tube defects and neurodevelopmental harm, so it is avoided in women who could become pregnant. Carbamazepine is teratogenic and interacts with anticonceptives through enzyme induction. Lamotrigine and levetiracetam are considered safer in pregnancy. Folic acid supplementation is advised for all women of childbearing age on antiseizure drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Teratogenic risk",
+     "Pregnancy approach"
+    ],
+    "rows": [
+     [
+      "Valproate",
+      "Highest, neural tube defects",
+      "Avoid in women of childbearing age"
+     ],
+     [
+      "Carbamazepine",
+      "Moderate",
+      "Use with folic acid if essential"
+     ],
+     [
+      "Lamotrigine",
+      "Lower risk",
+      "Preferred when a drug is essential"
+     ],
+     [
+      "Levetiracetam",
+      "Lower risk",
+      "Preferred when a drug is essential"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phenytoin** shows nonlinear kinetics with **saturable metabolism**, so small dose changes produce large level swings. Chronic use causes gingival hyperplasia, hirsutism, osteopenia, and cerebellar atrophy. **Carbamazepine** causes hyponatraemia through antidiuresis, and **oxcarbazepine** carries similar risk. **Topiramate** causes weight loss and kidney stones, the opposite direction from valproate.",
+   "say": "Phenytoin shows nonlinear kinetics with saturable metabolism, so small dose changes produce large level swings. Chronic use causes gingival hyperplasia, hirsutism, osteopenia and cerebellar atrophy. Carbamazepine causes hyponatraemia through antidiuresis, and oxcarbazepine carries similar risk. Topiramate causes weight loss and kidney stones, the opposite direction from valproate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Chronic effect",
+     "Monitoring"
+    ],
+    "rows": [
+     [
+      "Phenytoin",
+      "Gingival hyperplasia, osteopenia",
+      "Levels, bone density, gums"
+     ],
+     [
+      "Carbamazepine",
+      "Hyponatraemia, dizziness",
+      "Sodium, blood counts"
+     ],
+     [
+      "Oxcarbazepine",
+      "Hyponatraemia like carbamazepine",
+      "Sodium at baseline and follow up"
+     ],
+     [
+      "Valproate",
+      "Weight gain, hair loss",
+      "Liver tests, platelets"
+     ],
+     [
+      "Topiramate",
+      "Weight loss, kidney stones",
+      "Cognition, urinalysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Second line** choices add a drug from a different mechanism rather than switching within the same class. **Lacosamide** enhances slow inactivation of sodium channels, **topiramate** acts at several targets, and **zonisamide** blocks sodium and calcium channels. **Pregabalin** and **gabapentin** are added for focal seizures with pain overlap. Drug interactions and side effect profiles decide between equals.",
+   "say": "Second line choices add a drug from a different mechanism rather than switching within the same class. Lacosamide enhances slow inactivation of sodium channels, topiramate acts at several targets and zonisamide blocks sodium and calcium channels. Pregabalin and gabapentin are added for focal seizures with pain overlap. Drug interactions and side effect profiles decide between equals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Main side effect"
+    ],
+    "rows": [
+     [
+      "Lacosamide",
+      "Slow sodium channel inactivation",
+      "Dizziness, pr interval prolongation"
+     ],
+     [
+      "Topiramate",
+      "Multiple targets",
+      "Weight loss, kidney stones"
+     ],
+     [
+      "Zonisamide",
+      "Sodium and calcium blockade",
+      "Drowsiness, rash"
+     ],
+     [
+      "Pregabalin",
+      "Alpha2delta calcium binding",
+      "Dizziness, weight gain"
+     ],
+     [
+      "Gabapentin",
+      "Alpha2delta calcium binding",
+      "Drowsiness, ataxia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ethosuximide** is the drug for pure childhood absence epilepsy and has no effect on tonic clonic seizures. **Phenobarbital** is effective but sedating and dependence prone, so it is reserved for specific settings. **Oxcarbazepine** is preferred where carbamazepine hyponatraemia is a concern. Seizure type is considered first and the side effect profile second.",
+   "say": "Ethosuximide is the drug for pure childhood absence epilepsy and has no effect on tonic clonic seizures. Phenobarbital is effective but sedating and dependence prone, so it is reserved for specific settings. Oxcarbazepine is preferred where carbamazepine hyponatraemia is a concern. Seizure type is considered first and the side effect profile second.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absence epilepsy",
+     "points": [
+      "Ethosuximide is first choice",
+      "Effective for staring spells only",
+      "No effect on tonic clonic seizures",
+      "Valproate added if jerks coexist"
+     ]
+    },
+    "right": {
+     "title": "Focal epilepsy",
+     "points": [
+      "Levetiracetam or lamotrigine first",
+      "Carbamazepine is effective",
+      "Phenytoin is effective",
+      "Lacosamide is a common second line"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Monitoring** covers blood counts, liver tests, sodium, dosing in pregnancy, and bone health for enzyme inducers. **Carbamazepine** needs sodium and blood count checks, and **valproate** needs liver tests and platelets. Therapeutic drug monitoring helps for **phenytoin** because of its nonlinear kinetics. Adherence counselling prevents most breakthrough seizures attributed to drug failure.",
+   "say": "Monitoring covers blood counts, liver tests, sodium, dosing in pregnancy and bone health for enzyme inducers. Carbamazepine needs sodium and blood count checks, and valproate needs liver tests and platelets. Therapeutic drug monitoring helps for phenytoin because of its nonlinear kinetics. Adherence counselling prevents most breakthrough seizures attributed to drug failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Tests",
+     "Interval"
+    ],
+    "rows": [
+     [
+      "Carbamazepine",
+      "Sodium, blood counts",
+      "Baseline then periodic"
+     ],
+     [
+      "Valproate",
+      "Liver tests, platelets",
+      "Baseline then periodic"
+     ],
+     [
+      "Phenytoin",
+      "Serum levels",
+      "When dose or condition changes"
+     ],
+     [
+      "Lamotrigine",
+      "Rash vigilance",
+      "Titration weeks"
+     ],
+     [
+      "All drugs in pregnancy",
+      "Drug levels, folic acid",
+      "Each trimester"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test worsening and teratogenicity. **Carbamazepine** and **phenytoin** worsen absence and myoclonic seizures, while **valproate** harms the unborn child. **Lamotrigine** causes serious rash when titrated fast. **Levetiracetam** causes irritability that patients rarely volunteer. Enzyme induction reduces oral contraceptive efficacy, a heavily tested interaction.",
+   "say": "Traps test worsening and teratogenicity. Carbamazepine and phenytoin worsen absence and myoclonic seizures, while valproate harms the unborn child. Lamotrigine causes serious rash when titrated fast. Levetiracetam causes irritability that patients rarely volunteer. Enzyme induction reduces oral contraceptive efficacy, a heavily tested interaction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Absence seizures",
+      "Carbamazepine",
+      "Ethosuximide or valproate"
+     ],
+     [
+      "Women who could conceive",
+      "Routine valproate",
+      "Lamotrigine or levetiracetam"
+     ],
+     [
+      "Rapid lamotrigine titration",
+      "Safe escalation",
+      "Serious rash risk"
+     ],
+     [
+      "High phenytoin dose change",
+      "Predictable effect",
+      "Saturable nonlinear kinetics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stopping** rules complete the management picture. Drugs are continued for at least 2 years after the last seizure in resolved epilepsy. Tapering is slow with electroencephalogram and imaging guidance, and recurrence risk is highest in the first months. Patients are counselled on driving, bathing, and adherence before any taper begins.",
+   "say": "Stopping rules complete the management picture. Drugs are continued for at least 2 years after the last seizure in resolved epilepsy. Tapering is slow with electroencephalogram and imaging guidance, and recurrence risk is highest in the first months. Patients are counselled on driving, bathing and adherence before any taper begins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Two years seizure free"
+     },
+     {
+      "id": "b",
+      "label": "Electroencephalogram and imaging checked"
+     },
+     {
+      "id": "c",
+      "label": "Slow taper over months"
+     },
+     {
+      "id": "d",
+      "label": "Follow up for recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** levetiracetam is the broad spectrum first choice with SV2A binding, lamotrigine needs slow titration to avoid rash, and valproate is teratogenic and avoided in women of childbearing age. Carbamazepine and phenytoin worsen absence, phenytoin kinetics are saturable, and carbamazepine causes hyponatraemia. Ethosuximide treats pure absence.",
+   "say": "High yield for the exam: levetiracetam is the broad spectrum first choice with SV2A binding, lamotrigine needs slow titration to avoid rash and valproate is teratogenic and avoided in women of childbearing age. Carbamazepine and phenytoin worsen absence, phenytoin kinetics are saturable and carbamazepine causes hyponatraemia. Ethosuximide treats pure absence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Examination pearl"
+    ],
+    "rows": [
+     [
+      "Levetiracetam",
+      "SV2A binding",
+      "Broad spectrum first choice"
+     ],
+     [
+      "Lamotrigine",
+      "Sodium channel blockade",
+      "Slow titration, rash risk"
+     ],
+     [
+      "Valproate",
+      "Multiple mechanisms",
+      "Teratogenic, avoid in pregnancy"
+     ],
+     [
+      "Carbamazepine",
+      "Sodium channel blockade",
+      "Worsens absence, hyponatraemia"
+     ],
+     [
+      "Phenytoin",
+      "Sodium channel blockade",
+      "Saturable kinetics, gingival hyperplasia"
+     ],
+     [
+      "Ethosuximide",
+      "T type calcium block",
+      "Pure absence only"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
