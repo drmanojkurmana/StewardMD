@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "sne-autonomic-disorders",
+ "title": "Autonomic nervous system disorders",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **autonomic nervous system** controls blood pressure, heart rate, sweating, bowel, bladder and sexual function through **sympathetic** outflow from thoracic to lumbar cord and **parasympathetic** outflow from cranial nerves plus sacral segments. **Neurogenic orthostatic hypotension** is a sustained fall of 20 mmHg systolic or 10 mmHg diastolic within 3 minutes of standing. **POTS** is a heart rate rise of 30 beats per minute without hypotension.",
+   "say": "The autonomic nervous system controls blood pressure, heart rate, sweating, bowel, bladder and sexual function through sympathetic outflow from thoracic to lumbar cord and parasympathetic outflow from cranial nerves plus sacral segments. Neurogenic orthostatic hypotension is a sustained fall of twenty millimetres of mercury systolic or ten diastolic within three minutes of standing. POTS is a heart rate rise of thirty beats per minute without hypotension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Division",
+     "Outflow",
+     "Postganglionic transmitter"
+    ],
+    "rows": [
+     [
+      "Sympathetic",
+      "T1 to L2 cord segments",
+      "Norepinephrine, sweat glands use acetylcholine"
+     ],
+     [
+      "Parasympathetic",
+      "Cranial nerves with S2 to S4",
+      "Acetylcholine"
+     ],
+     [
+      "Enteric",
+      "Myenteric and submucosal plexuses",
+      "Intrinsic transmitters, hundreds of millions of neurons"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic autonomic failure usually comes from **diabetes**, **amyloidosis** including transthyretin type, **Parkinson disease** and **multiple system atrophy**. Acute crises follow **Guillain Barre syndrome**, **porphyria** attacks and high spinal cord injury. Common precipitants are beta-blockers, tricyclics, diuretics, dopamine agonists and levodopa. Small fiber neuropathy, botulism, HIV related neuropathy and familial dysautonomia complete the bedside list.",
+   "say": "Chronic autonomic failure usually comes from diabetes, amyloidosis including transthyretin type, Parkinson disease and multiple system atrophy. Acute crises follow Guillain Barre syndrome, porphyria attacks and high spinal cord injury. Common precipitants are beta-blockers, tricyclics, diuretics, dopamine agonists and levodopa. Small fiber neuropathy, botulism, HIV related neuropathy and familial dysautonomia are the remaining bedside causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause group",
+     "Examples",
+     "Autonomic clue"
+    ],
+    "rows": [
+     [
+      "Metabolic and degenerative",
+      "Diabetes, Parkinson disease, multiple system atrophy",
+      "Orthostatic hypotension with bladder failure"
+     ],
+     [
+      "Infiltrative and genetic",
+      "Transthyretin amyloid, familial dysautonomia",
+      "Polyneuropathy with anhidrosis and labile pressure"
+     ],
+     [
+      "Acute and paroxysmal",
+      "Guillain Barre syndrome, porphyria, cord lesion above T6",
+      "Pressure swings, tachycardia, dysreflexia"
+     ],
+     [
+      "Drugs",
+      "Beta-blockers, tricyclics, levodopa",
+      "Reversible fall on standing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preganglionic fibers release **acetylcholine**, and most postganglionic sympathetic fibers release **norepinephrine** (eccrine sweat glands stay cholinergic). The **baroreflex** senses pressure drops and orders vasoconstriction plus heart rate rise. Efferent fiber loss therefore produces the deepest orthostatic falls, with **denervation supersensitivity** and loss of buffering. When buffering fails, patients swing between standing hypotension and **supine hypertension**.",
+   "say": "Preganglionic fibers release acetylcholine, and most postganglionic sympathetic fibers release norepinephrine, while eccrine sweat glands are cholinergic. The baroreflex is the sensor that orders vasoconstriction plus a heart rate rise. Efferent fiber loss therefore produces the deepest orthostatic falls, with denervation supersensitivity and loss of buffering. When buffering fails, patients swing between standing hypotension and supine hypertension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pressure drop sensed by baroreceptors"
+     },
+     {
+      "id": "b",
+      "label": "Brainstem orders sympathetic surge"
+     },
+     {
+      "id": "c",
+      "label": "Norepinephrine vasoconstriction plus faster heart"
+     },
+     {
+      "id": "d",
+      "label": "Efferent fiber loss breaks the loop"
+     },
+     {
+      "id": "e",
+      "label": "Standing hypotension with supine hypertension"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standing brings **light headedness**, dimming vision, weakness, nausea and **syncope**, worst in mornings, heat and after meals. **Neurogenic orthostatic hypotension** is the defining feature, often paired with a fixed heart rate, absent sweating and supine hypertension. **Impotence** in men and cold feet from excess vasoconstriction can precede the falls by months. Symptoms ease promptly on sitting or lying flat.",
+   "say": "Standing brings light headedness, dimming vision, weakness, nausea and syncope, worst in mornings, heat and after meals. Neurogenic orthostatic hypotension is the defining feature, often paired with a fixed heart rate, absent sweating and supine hypertension. Impotence in men and cold feet from excess vasoconstriction can precede the falls by months. Symptoms ease promptly on sitting or lying flat.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neurogenic fall",
+     "points": [
+      "Heart rate stays fixed on standing",
+      "Supine hypertension and nocturnal pressure rise",
+      "Anhidrosis with heat intolerance",
+      "Postprandial worsening after meals"
+     ]
+    },
+    "right": {
+     "title": "Non neurogenic fall",
+     "points": [
+      "Heart rate surges to compensate",
+      "No supine hypertension",
+      "Sweating preserved",
+      "Volume loss or drug cause obvious"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bladder patterns separate the level: central disease gives a small spastic **overactive bladder**, while peripheral disease gives a large flaccid **retention bladder**. Gut involvement means gastroparesis with vomiting of old food, severe constipation or nocturnal diarrhea. Pupils add clues: **Horner syndrome** (ptosis, miosis, anhidrosis) marks sympathetic loss and a **tonic pupil** marks cholinergic failure in autoimmune ganglionopathy.",
+   "say": "Bladder patterns separate the level: central disease gives a small spastic overactive bladder, while peripheral disease gives a large flaccid retention bladder. Gut involvement is showing gastroparesis with vomiting of old food, severe constipation or nocturnal diarrhea. Pupils add clues: Horner syndrome with ptosis, miosis and anhidrosis is the sign of sympathetic loss and a tonic pupil is the sign of cholinergic failure in autoimmune ganglionopathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Bladder pattern",
+     "Extra clue"
+    ],
+    "rows": [
+     [
+      "Central",
+      "Small spastic overactive bladder",
+      "Frequency with small volumes"
+     ],
+     [
+      "Peripheral",
+      "Large flaccid retention bladder",
+      "Overflow incontinence, large volumes"
+     ],
+     [
+      "Gut",
+      "Gastroparesis and dysmotility",
+      "Vomiting of old food, bloating, constipation"
+     ],
+     [
+      "Ocular sympathetic",
+      "Horner or tonic pupil",
+      "Ptosis with miosis, or denervated pupil"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside testing starts with **supine then standing blood pressure** and heart rate at 1 and 3 minutes plus a drug review. Formal confirmation uses **tilt table** tracings, heart rate variability, Valsalva responses and sweat testing (QSART or thermoregulatory sweat test). **Supine plasma norepinephrine** separates postganglionic failure (low) from central disease (normal). MRI of brain or cord and **urodynamics** follow when central signs or bladder failure dominate.",
+   "say": "Bedside testing starts with supine then standing blood pressure and heart rate at one and three minutes plus a drug review. Formal confirmation uses tilt table tracings, heart rate variability, Valsalva responses and sweat testing with QSART or the thermoregulatory sweat test. Supine plasma norepinephrine separates postganglionic failure, where it is low, from central disease, where it is normal. Imaging of brain or cord and urodynamics follow when central signs or bladder failure dominate.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Supine and standing vitals at 1 and 3 minutes"
+     },
+     {
+      "id": "b",
+      "label": "Tilt table with heart rate and sweat tests"
+     },
+     {
+      "id": "c",
+      "label": "Supine plasma norepinephrine level"
+     },
+     {
+      "id": "d",
+      "label": "Low value means postganglionic failure"
+     },
+     {
+      "id": "e",
+      "label": "MRI and urodynamics for central or bladder disease"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First remove drugs that lower pressure, then prescribe **salt and water** with generous intake plus **head up sleeping** and leg crossing. A rapid **water drink** raises pressure briefly. When measures fail, **midodrine** is the direct alpha1 agonist of choice, with **fludrocortisone** for volume expansion and **pyridostigmine** when supine hypertension forbids stronger pressors.",
+   "say": "First, review of drugs that lower pressure is essential, then salt and water with generous intake plus head up sleeping and leg crossing are prescribed. A rapid water drink is useful because it raises pressure briefly. When measures fail, midodrine is the direct alpha one agonist of choice, with fludrocortisone for volume expansion and pyridostigmine when supine hypertension forbids stronger pressors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "How",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Volume expansion",
+      "Salt, fluids, generous intake",
+      "Raises standing pressure"
+     ],
+     [
+      "Posture",
+      "Head up bed, slow mornings, leg crossing",
+      "Limits nocturnal pressure loss"
+     ],
+     [
+      "Water drink",
+      "A rapid water drink",
+      "Raises pressure briefly"
+     ],
+     [
+      "Midodrine as first pressor",
+      "Direct alpha agonist",
+      "First drug, watch supine hypertension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Droxidopa** treats neurogenic orthostatic hypotension by conversion to norepinephrine, and **plasma exchange** helps **autoimmune autonomic ganglionopathy** with tumour screening for lung cancer, thymoma or lymphoma. About one-third of untreated cases improve spontaneously. Salt, fluids, compression and head up sleeping remain the base, with **midodrine**, **fludrocortisone** or **pyridostigmine** added when standing pressure stays low.",
+   "say": "Droxidopa treats neurogenic orthostatic hypotension by conversion to norepinephrine, and plasma exchange helps autoimmune autonomic ganglionopathy with tumour screening for lung cancer, thymoma or lymphoma. About one-third of untreated cases improve spontaneously, which is encouraging. Salt, fluids, compression and head up sleeping are the base, with midodrine, fludrocortisone or pyridostigmine added when standing pressure is low.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autoimmune ganglionopathy",
+     "points": [
+      "Plasma exchange with tumour screening",
+      "Treat lung cancer, thymoma or lymphoma",
+      "About one-third improve spontaneously",
+      "Salt, fluids and compression first"
+     ]
+    },
+    "right": {
+     "title": "Refractory neurogenic hypotension",
+     "points": [
+      "Droxidopa converted to norepinephrine",
+      "Midodrine as first pressor",
+      "Fludrocortisone for volume expansion",
+      "Pyridostigmine when supine pressure is high"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neurogenic orthostatic hypotension carries high mortality, approaching **44 percent** over **30 months** and exceeding **60 percent** over **10 years**, with falls, coronary disease, heart failure, stroke and death. Diabetic autonomic neuropathy raises diabetic mortality up to **3 times**. Severe **Guillain Barre syndrome** can cause fatal cardiovascular collapse. **Multiple system atrophy** progresses relentlessly with death typically **7 to 10 years** after onset, while **pure autonomic failure** progresses slowly with a better outlook.",
+   "say": "Neurogenic orthostatic hypotension carries high mortality, approaching forty four percent over thirty months and exceeding sixty percent over ten years, with falls, coronary disease, heart failure, stroke and death. Diabetic autonomic neuropathy raises diabetic mortality up to three times. Severe Guillain Barre syndrome can cause fatal cardiovascular collapse. Multiple system atrophy progresses relentlessly with death typically seven to ten years after onset, while pure autonomic failure is slowly progressive with a better outlook.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe neurogenic orthostatic hypotension"
+     },
+     {
+      "id": "b",
+      "label": "Falls with cardiac and renal injury"
+     },
+     {
+      "id": "c",
+      "label": "High mortality over months and years"
+     },
+     {
+      "id": "d",
+      "label": "Multiple system atrophy course"
+     },
+     {
+      "id": "e",
+      "label": "Death typically 7 to 10 years after onset"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** orthostatic hypotension is 20 over 10 within 3 minutes, POTS is a 30 beat rise without hypotension, and low supine norepinephrine means postganglionic failure. Midodrine leads drug therapy. Anti alpha3 ganglionic acetylcholine receptor antibody defines autoimmune ganglionopathy. Multiple system atrophy kills in 7 to 10 years, and spinal lesions above T6 risk dysreflexia.",
+   "say": "High yield for the exam: orthostatic hypotension is twenty over ten within three minutes, POTS is a thirty beat rise without hypotension, and low supine norepinephrine is the sign of postganglionic failure. Midodrine leads drug therapy. Anti alpha three ganglionic acetylcholine receptor antibody is the marker that defines autoimmune ganglionopathy. Multiple system atrophy is fatal in seven to ten years, and spinal lesions above the sixth thoracic level are the ones that risk dysreflexia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Value",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Orthostatic fall",
+      "20 systolic or 10 diastolic within 3 minutes",
+      "Neurogenic orthostatic hypotension"
+     ],
+     [
+      "Standing heart rate rise",
+      "30 beats per minute without hypotension",
+      "POTS, women 5 times more often, aged 15 to 45"
+     ],
+     [
+      "Supine norepinephrine low",
+      "Postganglionic failure",
+      "Pure autonomic failure"
+     ],
+     [
+      "Ganglionic receptor antibody",
+      "Anti alpha3 acetylcholine receptor",
+      "Autoimmune autonomic ganglionopathy"
+     ],
+     [
+      "Survival after onset",
+      "Death in 7 to 10 years",
+      "Multiple system atrophy"
+     ],
+     [
+      "Cord level for dysreflexia",
+      "Lesions above T6",
+      "Bladder distension triggers crisis"
+     ],
+     [
+      "First pressor choice",
+      "Midodrine, droxidopa or fludrocortisone",
+      "Neurogenic orthostatic hypotension"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,370 @@
+{
+ "v": 1,
+ "module": "sne-prion-rapidly-progressive",
+ "title": "Prion diseases and rapidly progressive dementia",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Sporadic Creutzfeldt-Jakob disease is a rapidly progressive dementia with **stimulus sensitive myoclonus** that ends in **akinetic mutism** and death, usually within 1 year of onset. It strikes about 1 per million each year, typically in later life, with men and women affected equally. Most cases are **sporadic** with no identifiable source. No case has ever remitted.",
+   "say": "Sporadic Creutzfeldt-Jakob disease is a rapidly progressive dementia with stimulus sensitive myoclonus that ends in akinetic mutism and death, usually within one year of onset. It is striking about one per million each year, typically in later life, with men and women affected equally. Most cases are sporadic with no identifiable source. No case has ever remitted.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical value",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Annual incidence",
+      "1 per million",
+      "Among the rarest dementias"
+     ],
+     [
+      "Usual onset",
+      "Later life",
+      "Young onset suggests variant disease"
+     ],
+     [
+      "Sporadic share",
+      "Most cases, no source found",
+      "Take a three generation history"
+     ],
+     [
+      "Course to death",
+      "Under 1 year",
+      "Speed separates it from Alzheimer disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most cases are **sporadic**, with no identifiable source, while a minority are **genetic** with PRNP mutations or **acquired** through variant disease from infected beef, historical kuru, and rare iatrogenic spread through dura grafts, corneal transplant, depth electrodes or cadaveric growth hormone. Genetic forms show autosomal dominant inheritance. Age in later life is the peak window.",
+   "say": "Most cases are sporadic, with no identifiable source, while a minority are genetic with PRNP mutations or acquired through variant disease from infected beef, historical kuru, and rare iatrogenic spread through dura grafts, corneal transplant, depth electrodes or cadaveric growth hormone. Genetic forms show autosomal dominant inheritance. Age in later life is the peak window.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sporadic and genetic",
+     "points": [
+      "No source found in most cases",
+      "PRNP mutation in families",
+      "Dominant inheritance pattern"
+     ]
+    },
+    "right": {
+     "title": "Acquired",
+     "points": [
+      "Variant disease from infected beef",
+      "Dura grafts and corneal transplant",
+      "Cadaveric growth hormone and electrodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The normal prion protein, **PrPc**, misfolds into the abnormal **PrPSc** form, swapping alpha helical structure for **beta pleated sheet**. Each misfolded molecule templates the conversion of its healthy neighbours, so infectivity spreads without any nucleic acid. Accumulating PrPSc kills neurons and astrocytes, leaving **spongiform vacuolation** and gliosis with strikingly no inflammation. Genotype at a key codon plus prion fragment type 1 or 2 defines the common sporadic subtypes.",
+   "say": "The normal prion protein, PrPc, misfolds into the abnormal PrPSc form, swapping alpha helical structure for beta pleated sheet. Each misfolded molecule templates the conversion of its healthy neighbours, so infectivity spreads without any nucleic acid. Accumulating abnormal protein kills neurons and astrocytes, leaving spongiform vacuolation and gliosis with strikingly no inflammation. Genotype at a key codon plus prion fragment type one or two is defining the common sporadic subtypes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Normal PrPc with alpha helices"
+     },
+     {
+      "id": "b",
+      "label": "Misfolded PrPSc with beta sheets"
+     },
+     {
+      "id": "c",
+      "label": "Templated conversion of neighbours"
+     },
+     {
+      "id": "d",
+      "label": "Neuronal loss with gliosis"
+     },
+     {
+      "id": "e",
+      "label": "Spongiform change, no inflammation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "About one third of patients report weeks of fatigue, depression, weight loss, or disturbed sleep before neurology declares itself. Then confusion with hallucinations, **cerebellar ataxia**, and distorted vision advance visibly week by week. The signature is **myoclonus** triggered by noise, light, or touch, sometimes only a fleeting startle response, while well formed seizures never belong to this illness. Decline continues into mutism, stupor, and coma.",
+   "say": "About one third of patients are reporting weeks of fatigue, depression, weight loss, or disturbed sleep before neurology is declaring itself. Then confusion with hallucinations, cerebellar ataxia, and distorted vision advance visibly week by week. The signature is myoclonus triggered by noise, light, or touch, sometimes only a fleeting startle response, while well formed seizures never belong to this illness. Decline is continuing into mutism, stupor, and coma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Features",
+     "Bedside clue"
+    ],
+    "rows": [
+     [
+      "Weeks of prodrome",
+      "Fatigue, depression, weight loss, broken sleep",
+      "Present in one third of cases"
+     ],
+     [
+      "Early neurology",
+      "Confusion, hallucinations, ataxia, blurred vision",
+      "Decline visible week by week"
+     ],
+     [
+      "Myoclonus phase",
+      "Jerks triggered by noise, light, or touch",
+      "Sometimes only a startle response"
+     ],
+     [
+      "Terminal phase",
+      "Mutism, stupor, then coma",
+      "Jerks may persist to the end"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Heidenhain variant** opens with cortical blindness and visual distortion, while the **Brownell-Oppenheimer variant** opens with progressive ataxia; both converge on dementia and myoclonus. Variant disease in the young instead begins with psychiatric and sensory symptoms and a longer course. Treatable mimics must be excluded first: **Hashimoto encephalopathy**, CNS vasculitis, CNS infection, lymphoma and autoimmune encephalitis can all pair dementia with myoclonus.",
+   "say": "The Heidenhain variant is opening with cortical blindness and visual distortion, while the Brownell-Oppenheimer variant is opening with progressive ataxia; both converge on dementia and myoclonus. Variant disease in the young is instead beginning with psychiatric and sensory symptoms and a longer course. Treatable mimics must be excluded first: Hashimoto encephalopathy, CNS vasculitis, CNS infection, lymphoma and autoimmune encephalitis can all pair dementia with myoclonus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heidenhain variant",
+     "points": [
+      "Opens with cortical visual loss",
+      "Occipitoparietal cortex worst hit",
+      "Converges on dementia and jerks"
+     ]
+    },
+    "right": {
+     "title": "Brownell-Oppenheimer variant",
+     "points": [
+      "Opens with progressive ataxia",
+      "Cerebellum worst hit",
+      "Converges on dementia and jerks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Brain **MRI with diffusion weighting** is the first test, showing restricted diffusion as a cortical ribbon plus **striatal hyperintensity** once disease is established. The EEG evolves from diffuse slowing to stereotyped **periodic sharp wave complexes**, often time locked to the jerks. CSF **RT-QuIC** seeding assay is the most specific confirmatory test, outperforming **14-3-3 protein**. Definite diagnosis still rests on brain histopathology with PrPSc immunostaining.",
+   "say": "Brain MRI with diffusion weighting is the first test, showing restricted diffusion as a cortical ribbon plus striatal hyperintensity once disease is established. The EEG evolves from diffuse slowing to stereotyped periodic sharp wave complexes, often time locked to the jerks. CSF RT-QuIC seeding assay is the most specific confirmatory test, outperforming fourteen three three protein. Definite diagnosis is still resting on brain histopathology with PrPSc immunostaining.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Diffusion MRI first",
+      "Cortical ribbon plus striatal signal",
+      "Earliest structural proof"
+     ],
+     [
+      "EEG",
+      "Periodic sharp wave complexes",
+      "Time locked to myoclonus"
+     ],
+     [
+      "CSF RT-QuIC",
+      "Seeded prion amplification",
+      "Most specific live test"
+     ],
+     [
+      "CSF 14-3-3",
+      "Abnormal 14-3-3 protein",
+      "Supports but never decides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "No drug halts prion disease, so care is **supportive and palliative** from the day of diagnosis. Standard precautions apply because casual contact carries no risk, yet instruments demand **prion grade decontamination** with specialist high temperature processing, since routine boiling, formalin and alcohol all fail. Affected patients must never donate organs, corneas or blood. Families with inherited disease need genetic counselling.",
+   "say": "No drug halts prion disease, so care is supportive and palliative from the day of diagnosis. Standard precautions apply because casual contact carries no risk, yet instruments demand specialist high temperature processing, since routine boiling, formalin and alcohol all fail. Affected patients must never donate organs, corneas or blood. Families with inherited disease need genetic counselling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Precaution",
+     "Detail",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Instrument sterilisation",
+      "Specialist high temperature processing",
+      "Routine methods fail"
+     ],
+     [
+      "Tissue policy",
+      "No organ, cornea, or blood donation",
+      "Iatrogenic spread is proven"
+     ],
+     [
+      "Family care",
+      "Genetic counselling for PRNP kindreds",
+      "Dominant inheritance risk"
+     ],
+     [
+      "Daily care",
+      "Nursing for immobility and swallowing",
+      "Aspiration and skin protection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern criteria accept **RT-QuIC positivity** or characteristic MRI as the backbone of probable diagnosis during life, reserving biopsy for unresolved cases. Nasal mucosal brushing RT-QuIC and tonsil immunostaining in variant disease extend testing beyond lumbar puncture. No disease modifying therapy exists, so care stays **supportive**. National surveillance centres perform confirmatory testing free of charge and track iatrogenic exposures.",
+   "say": "Modern criteria accept RT-QuIC positivity or characteristic MRI as the backbone of probable diagnosis during life, reserving biopsy for unresolved cases. Nasal mucosal brushing RT-QuIC and tonsil immunostaining in variant disease are extending testing beyond lumbar puncture. No disease modifying therapy exists, so care is staying supportive. National surveillance centres perform confirmatory testing free of charge and track iatrogenic exposures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected rapidly progressive dementia"
+     },
+     {
+      "id": "b",
+      "label": "Diffusion MRI plus RT-QuIC"
+     },
+     {
+      "id": "c",
+      "label": "Probable disease confirmed in life"
+     },
+     {
+      "id": "d",
+      "label": "Nasal or tonsil assay if unclear"
+     },
+     {
+      "id": "e",
+      "label": "Surveillance centre confirmation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Late disease brings **aspiration pneumonia**, urinary incontinence and total immobility, with myoclonus sometimes persisting into coma. Sporadic disease kills within months from onset. Inherited forms run a longer course over several years with ataxia and dementia. Whatever the form, the trajectory is **invariably fatal**, and unusually prolonged survival should prompt diagnostic review.",
+   "say": "Late disease brings aspiration pneumonia, urinary incontinence and total immobility, with myoclonus sometimes persisting into coma. Sporadic disease is killing within months from onset. Inherited forms are running a longer course over several years with ataxia and dementia. Whatever the form, the trajectory is invariably fatal, and unusually prolonged survival should prompt diagnostic review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Typical survival",
+     "Lesson"
+    ],
+    "rows": [
+     [
+      "Sporadic CJD",
+      "Months, under 1 year",
+      "Speed separates from Alzheimer disease"
+     ],
+     [
+      "Variant CJD",
+      "Longer psychiatric prodrome",
+      "Tonsil testing helps"
+     ],
+     [
+      "Gerstmann-Straussler-Scheinker",
+      "Several years, P102L families",
+      "Ataxia dominates, dementia mild"
+     ],
+     [
+      "Fatal familial insomnia",
+      "Prolonged course with insomnia",
+      "Dysautonomia prominent"
+     ],
+     [
+      "Kuru",
+      "Historical cerebellar disease",
+      "Ritual exposure history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** incidence 1 per million with onset in later life; stimulus sensitive myoclonus plus periodic complexes; DWI cortical ribbon and striatal signal; RT-QuIC beats 14-3-3; P102L marks inherited GSS; iatrogenic spread via dura, cornea and growth hormone; specialist decontamination with donation ban.",
+   "say": "High yield for the exam: incidence is one per million with onset in later life, and stimulus sensitive myoclonus plus periodic complexes is the signature. Diffusion cortical ribbon and striatal signal is the imaging hallmark, and RT-QuIC is the best live test ahead of fourteen three three. P one hundred two L is the marker of inherited GSS. Iatrogenic spread via dura, cornea and growth hormone is the reason for the donation ban with specialist decontamination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Annual incidence",
+      "1 per million, onset in later life"
+     ],
+     [
+      "Signature sign",
+      "Stimulus sensitive myoclonus"
+     ],
+     [
+      "EEG hallmark",
+      "Periodic sharp wave complexes"
+     ],
+     [
+      "MRI hallmark",
+      "Diffusion cortical ribbon plus striatal signal"
+     ],
+     [
+      "Best live test",
+      "CSF RT-QuIC, ahead of 14-3-3"
+     ],
+     [
+      "Inherited marker",
+      "P102L in GSS families"
+     ],
+     [
+      "Spread precaution",
+      "Donation ban with specialist decontamination"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,356 @@
+{
+ "v": 1,
+ "module": "sne-guillain-barre",
+ "title": "Guillain-Barre syndrome",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Guillain-Barre syndrome** is an acute immune mediated polyradiculoneuropathy with ascending flaccid paralysis and areflexia. A preceding respiratory or gastrointestinal infection is recorded in most patients, classically with **Campylobacter jejuni**. The nadir is reached within 4 weeks. **Albuminocytological dissociation** with high protein and normal cell count is the cerebrospinal fluid hallmark.",
+   "say": "Guillain-Barre syndrome is an acute immune mediated polyradiculoneuropathy with ascending flaccid paralysis and areflexia. A preceding respiratory or gastrointestinal infection is recorded in most patients, classically with Campylobacter jejuni. The nadir is reached within 4 weeks. Albuminocytological dissociation with high protein and normal cell count is the cerebrospinal fluid hallmark.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding",
+     "Distinguishes from"
+    ],
+    "rows": [
+     [
+      "Weakness",
+      "Ascending flaccid paralysis",
+      "Central weakness, brisk reflexes"
+     ],
+     [
+      "Reflexes",
+      "Absent throughout",
+      "Upper motor neuron disease"
+     ],
+     [
+      "Sensation",
+      "Paraesthesia, neuropathic pain",
+      "Sensory level lesions"
+     ],
+     [
+      "Autonomic signs",
+      "Blood pressure swings, ileus",
+      "Functional weakness"
+     ],
+     [
+      "Antecedent infection",
+      "Campylobacter jejuni",
+      "Cause free onset"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Two thirds** of patients give a history of diarrhoeal or respiratory illness 2 to 4 weeks before weakness. **Campylobacter jejuni** leads the triggers in 20 to 30%, with herpesviruses close behind. **AMAN** follows C. jejuni with anti GM1 antibodies and summer outbreaks. A preceding illness plus ascending weakness with lost reflexes is the classic entry picture.",
+   "say": "Two thirds of patients give a history of diarrhoeal or respiratory illness two to four weeks before weakness. Campylobacter jejuni leads the triggers in twenty to thirty percent, with herpesviruses close behind. AMAN follows Campylobacter jejuni with anti GM1 antibodies and summer outbreaks. A preceding illness plus ascending weakness with lost reflexes is the classic entry picture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trigger",
+     "Share",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Campylobacter jejuni",
+      "20 to 30% of cases",
+      "AMAN with summer outbreaks"
+     ],
+     [
+      "Herpesviruses",
+      "Similar share",
+      "Preceding respiratory illness"
+     ],
+     [
+      "Any GI illness",
+      "2 to 4 weeks before",
+      "Ascending weakness follows"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Miller Fisher** syndrome is the triad of ataxia, areflexia, and ophthalmoplegia, and it is the commonest variant in Asia. **Acute motor axonal neuropathy** follows Campylobacter with pure motor involvement. **Pharyngeal cervical brachial** variant affects throat and arm muscles. **Bickerstaff brainstem encephalitis** is the central variant. Each variant is a named answer in the exam.",
+   "say": "Miller Fisher syndrome is the triad of ataxia, areflexia and ophthalmoplegia, and it is the commonest variant in Asia. Acute motor axonal neuropathy follows Campylobacter with pure motor involvement. Pharyngeal cervical brachial variant affects throat and arm muscles. Bickerstaff brainstem encephalitis is the central variant. Each variant is a named answer in the exam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Variant",
+     "Picture",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Classic demyelinating form",
+      "Ascending paralysis with areflexia",
+      "Campylobacter antecedent"
+     ],
+     [
+      "Miller Fisher",
+      "Ataxia with ophthalmoplegia",
+      "Triad presentation"
+     ],
+     [
+      "Acute motor axonal neuropathy",
+      "Pure motor, rapid",
+      "Ganglioside antibodies"
+     ],
+     [
+      "Pharyngeal cervical brachial",
+      "Throat and arm weakness",
+      "Bulbar predominance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The mechanism is **molecular mimicry** where antibodies raised against Campylobacter gangliosides cross react with nerve membranes. **Demyelination** dominates in the classic form and **axonal injury** dominates in the axonal variants. **Nerve conduction studies** show conduction block, temporal dispersion, and prolonged latency in the demyelinating form. Recovery takes weeks to months.",
+   "say": "The mechanism is molecular mimicry where antibodies raised against Campylobacter gangliosides cross react with nerve membranes. Demyelination dominates in the classic form and axonal injury dominates in the axonal variants. Nerve conduction studies show conduction block, temporal dispersion and prolonged latency in the demyelinating form. Recovery takes weeks to months.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Campylobacter infection"
+     },
+     {
+      "id": "b",
+      "label": "Antiganglioside antibodies form"
+     },
+     {
+      "id": "c",
+      "label": "Nerve demyelination or axonal injury"
+     },
+     {
+      "id": "d",
+      "label": "Ascending paralysis with areflexia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intravenous immunoglobulin** and **plasma exchange** are the two proven disease modifying therapies, and corticosteroids are ineffective. Treatment is given early in non ambulant patients and those with respiratory or bulbar failure. **Ventilation** is the life saving intervention when diaphragmatic weakness develops. Dysautonomia with cardiac arrhythmias needs continuous monitoring.",
+   "say": "Intravenous immunoglobulin and plasma exchange are the two proven disease modifying therapies, and corticosteroids are ineffective. Treatment is given early in non ambulant patients and those with respiratory or bulbar failure. Ventilation is the life saving intervention when diaphragmatic weakness develops. Dysautonomia with cardiac arrhythmias needs continuous monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Action",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Intravenous immunoglobulin",
+      "Neutralises antibodies",
+      "First line, non ambulant patients"
+     ],
+     [
+      "Plasma exchange",
+      "Removes pathogenic antibodies",
+      "Alternative first line"
+     ],
+     [
+      "Corticosteroids",
+      "Ineffective in this disease",
+      "Not recommended"
+     ],
+     [
+      "Ventilation",
+      "Supports respiratory failure",
+      "Life saving intervention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Forced vital capacity** and **negative inspiratory force** are monitored serially because they predict respiratory failure. A falling vital capacity with weak cough is the warning picture. **Blood pressure swings** and ileus mark dysautonomia and are often the fatal events. Early intensive care admission decisions are made on these numbers.",
+   "say": "Forced vital capacity and negative inspiratory force are monitored serially because they predict respiratory failure. A falling vital capacity with weak cough is the warning picture. Blood pressure swings and ileus mark dysautonomia and are often the fatal events. Early intensive care admission decisions are made on these numbers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Weight",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Forced vital capacity",
+      "Falling predicts failure",
+      "Intubate when threatened"
+     ],
+     [
+      "Negative inspiratory force",
+      "Weak cough advances risk",
+      "Early airway protection"
+     ],
+     [
+      "Blood pressure swings",
+      "Dysautonomia marker",
+      "Continuous cardiac monitoring"
+     ],
+     [
+      "Swallowing assessment",
+      "Aspiration risk",
+      "Nil by mouth, nasogastric feeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **first test** is nerve conduction studies, which are normal in the first week and abnormal thereafter. **Cerebrospinal fluid** protein rises after the first week with normal cell count. **Stool culture** identifies Campylobacter in the antecedent illness. **Lumbar puncture** findings lag behind the clinical syndrome and never exclude it early.",
+   "say": "The first test is nerve conduction studies, which are normal in the first week and abnormal thereafter. Cerebrospinal fluid protein rises after the first week with normal cell count. Stool culture identifies Campylobacter in the antecedent illness. Lumbar puncture findings are delayed relative to the syndrome and never exclude it early.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Nerve conduction studies",
+      "Conduction block and dispersion",
+      "Normal first week"
+     ],
+     [
+      "Cerebrospinal fluid",
+      "High protein, normal cells",
+      "After first week"
+     ],
+     [
+      "Stool culture",
+      "Campylobacter jejuni",
+      "Antecedent illness"
+     ],
+     [
+      "Antiganglioside antibodies",
+      "Axonal variant markers",
+      "Miller Fisher serology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** test the nadir and the variant names. The nadir of weakness is within 4 weeks by definition. Continued progression beyond 8 weeks means chronic inflammatory demyelinating polyradiculoneuropathy, not Guillain-Barre syndrome. **Corticosteroids** are ineffective despite their use in other immune neuropathies. Dysautonomia, not weakness, is the fatal complication in many patients.",
+   "say": "Traps test the nadir and the variant names. The nadir of weakness is within 4 weeks by definition. Continued progression beyond 8 weeks means chronic inflammatory demyelinating polyradiculoneuropathy, not Guillain-Barre syndrome. Corticosteroids are ineffective despite their use in other immune neuropathies. Dysautonomia, not weakness, is the fatal complication in many patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Guillain-Barre syndrome",
+     "points": [
+      "Nadir within 4 weeks",
+      "Areflexia with ascending weakness",
+      "High protein normal cells in fluid",
+      "Immunoglobulin or exchange therapy"
+     ]
+    },
+    "right": {
+     "title": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+     "points": [
+      "Progression over 8 weeks",
+      "Relapses occur",
+      "Steroid responsive",
+      "Maintenance immunotherapy needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Prognosis** is good in most patients, with recovery over months and a walking majority. **Dysautonomia** with arrhythmia is a leading cause of death. **Physiotherapy** starts during admission and continues through recovery. **Neuropathic pain** is common and needs early analgesia with gabapentinoids.",
+   "say": "Prognosis is good in most patients, with recovery over months and a walking majority. Dysautonomia with arrhythmia is a leading cause of death. Physiotherapy starts during admission and continues through recovery. Neuropathic pain is common and needs early analgesia with gabapentinoids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Outcome",
+     "Frequency",
+     "Care"
+    ],
+    "rows": [
+     [
+      "Full recovery",
+      "Majority of patients",
+      "Physiotherapy and rehabilitation"
+     ],
+     [
+      "Residual deficits",
+      "One in five patients",
+      "Long term support"
+     ],
+     [
+      "Fatal arrhythmia",
+      "Dysautonomia related",
+      "Continuous monitoring"
+     ],
+     [
+      "Neuropathic pain",
+      "Common in admission",
+      "Gabapentinoids early"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** ascending flaccid paralysis with areflexia, Campbell antecedent, and albuminocytological dissociation define the syndrome. Miller Fisher is ataxia with ophthalmoplegia, the nadir is within 4 weeks, and immunoglobulin or plasma exchange are the proven therapies while steroids fail. Campylobacter ganglioside mimicry is the mechanism.",
+   "say": "High yield for the exam: ascending flaccid paralysis with areflexia, Campylobacter antecedent and albuminocytological dissociation define the syndrome. Miller Fisher is ataxia with ophthalmoplegia, the nadir is within 4 weeks and immunoglobulin or plasma exchange are the proven therapies while steroids fail. Campylobacter ganglioside mimicry is the mechanism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Classic picture",
+      "Ascending flaccid, areflexia",
+      "Campylobacter antecedent"
+     ],
+     [
+      "Fluid hallmark",
+      "High protein, normal cells",
+      "Albuminocytological dissociation"
+     ],
+     [
+      "Variant",
+      "Miller Fisher triad",
+      "Ataxia, areflexia, ophthalmoplegia"
+     ],
+     [
+      "Nadir",
+      "Within 4 weeks",
+      "Defines the syndrome"
+     ],
+     [
+      "Proven therapy",
+      "Immunoglobulin, plasma exchange",
+      "Steroids are ineffective"
+     ],
+     [
+      "Mechanism",
+      "Ganglioside mimicry",
+      "Campylobacter cross reaction"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
