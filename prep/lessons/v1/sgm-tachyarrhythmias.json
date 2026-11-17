@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "sgm-tachyarrhythmias",
+ "subject": "ss-general-medicine",
+ "title": "Supraventricular and ventricular arrhythmias",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Supraventricular tachycardia** (narrow complex tachycardia from above ventricles) and **ventricular tachycardia** (broad complex tachycardia from ventricles) need rapid separation by QRS width. Narrow complex suggests supraventricular origin with bundle branch block as alternative, while **broad complex tachycardia** (wide QRS) is ventricular until proven otherwise. Mortality is highest when broad complex tachycardia is treated as supraventricular by mistake, so err towards ventricular management.",
+   "say": "Supraventricular tachycardia means narrow complex tachycardia arising above the ventricles, while ventricular tachycardia means broad complex tachycardia arising from the ventricles. Rapid separation by QRS width is therefore essential. Narrow complex rhythm suggests supraventricular origin with bundle branch block as an alternative, while broad complex tachycardia is ventricular until proven otherwise and must be managed accordingly.",
+   "vis": null
+  },
+  {
+   "tx": "Common supraventricular circuits are **atrioventricular nodal reentry** (loop through nodal pathways) and **atrioventricular reentry** (extra pathway around heart). Triggers include caffeine, alcohol, stress, **hyperthyroidism** (overactive thyroid) and **electrolyte disturbance** (abnormal salts). Ventricular arrhythmias follow scar, ischaemia and **long QT syndrome** (inherited repolarisation disorder), with electrolyte lows and proarrhythmic drugs provoking torsades forms of degeneration.",
+   "say": "Common supraventricular circuits are atrioventricular nodal reentry through nodal pathways and atrioventricular reentry using an extra pathway around the heart. Triggers can include caffeine, alcohol, stress, hyperthyroidism and electrolyte disturbance. Ventricular arrhythmias follow scar, ischaemia and long QT syndrome, with low potassium or magnesium and proarrhythmic drugs provoking torsades forms of degeneration.",
+   "vis": null
+  },
+  {
+   "tx": "**Wolff-Parkinson-White syndrome** (accessory pathway with delta wave) predisposes to reentry via the extra connection. Fast atrial fibrillation conducting down the pathway can degenerate to ventricular fibrillation, so atrioventricular nodal blockers are dangerous here. Mechanism matters because **adenosine** (rapid nodal blocker) terminates nodal reentry safely, but the same drug can precipitate collapse in preexcited fibrillation, explaining why the history and baseline electrocardiogram must be checked.",
+   "say": "Wolff-Parkinson-White syndrome means an accessory pathway with a delta wave on baseline electrocardiogram, predisposing to reentry via the extra connection. Fast atrial fibrillation conducting down that pathway can degenerate to ventricular fibrillation, so nodal blockers are dangerous here. Adenosine terminates nodal reentry safely, but the same drug can precipitate collapse in preexcited fibrillation, which is why history and baseline tracings must be checked carefully.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nodal reentry SVT",
+     "points": [
+      "Regular narrow complex",
+      "Vagal manoeuvres then adenosine",
+      "Catheter ablation curative",
+      "No delta wave at baseline"
+     ]
+    },
+    "right": {
+     "title": "Preexcited tachycardia",
+     "points": [
+      "Broad or very irregular QRS",
+      "Avoid adenosine and nodal blockers",
+      "Procainamide or cardioversion",
+      "Accessory pathway ablation later"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patients describe sudden onset palpitations with abrupt termination, neck pounding and **presyncope** (near fainting) during episodes. **Ebstein anomaly** (displaced tricuspid valve) and hyperthyroidism cases cluster in younger patients with accessory pathways. Ventricular tachycardia presents with chest pain, breathlessness, hypotension and **pulmonary oedema** (fluid in lungs), while **ventricular fibrillation** (chaotic ventricular rhythm) causes immediate collapse and cardiac arrest.",
+   "say": "Patients describe sudden onset palpitations with abrupt termination, neck pounding and near fainting during episodes. Epstein anomaly and hyperthyroidism cases can cluster in younger patients with accessory pathways. Ventricular tachycardia presents with chest pain, breathlessness, hypotension and fluid in the lungs, while ventricular fibrillation is chaotic ventricular rhythm causing immediate collapse and cardiac arrest.",
+   "vis": null
+  },
+  {
+   "tx": "12-lead **electrocardiogram during tachycardia** (heart tracing while fast) is the first and most valuable test, showing QRS width, axis and preexcitation. Monitor oxygen, blood pressure and **capillary refill** (blanching after finger pressure) continuously. After conversion, **echocardiography** (ultrasound scan of heart) finds scar, valve disease and ejection fraction. Screen potassium, magnesium and drug history in every broad complex case before debating mechanism.",
+   "say": "Twelve lead electrocardiogram during tachycardia is the first and most valuable test, showing QRS width, axis and preexcitation patterns. You must continuously monitor oxygen, blood pressure and capillary refill after finger pressure. After conversion, echocardiography can find scar, valve disease and ejection fraction. Screen potassium, magnesium and drug history in every broad complex case before debating mechanism.",
+   "vis": null
+  },
+  {
+   "tx": "Unstable narrow complex tachycardia gets **synchronised cardioversion** (timed electric shock) with sedation without delay. Stable supraventricular tachycardia starts with **vagal manoeuvres** (vagus nerve stimulation) such as Valsalva, then **adenosine 6 mg** (nodal blocker) rapid intravenous push followed by 12 mg if needed. **European Society of Cardiology** (ESC) 2019 guidance stresses adenosine dosing technique with rapid flush and raised arm, because slow injection falsely appears ineffective.",
+   "say": "Unstable narrow complex tachycardia gets synchronised cardioversion with sedation without delay. Stable supraventricular tachycardia starts with vagal manoeuvres such as Valsalva, then adenosine six milligrams as rapid intravenous push followed by twelve milligrams if needed. European Society of Cardiology guidance from twenty nineteen stresses rapid flush with raised arm, because slow injection falsely appears ineffective in many cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stable narrow SVT"
+     },
+     {
+      "id": "b",
+      "label": "Vagal manoeuvres"
+     },
+     {
+      "id": "c",
+      "label": "Adenosine push"
+     },
+     {
+      "id": "d",
+      "label": "Cardioversion if unstable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stable broad complex tachycardia is treated as ventricular tachycardia: **amiodarone 150 mg** (multichannel antiarrhythmic) intravenously, or **procainamide** (sodium blocker prolonging refractory period) when ischaemia is not the cause. **Torsades de pointes** (twisting ventricular tachycardia with long QT) needs **magnesium sulfate 2 g** (electrolyte infusion) and overdrive pacing, not amiodarone which prolongs QT further. Unstable ventricular tachycardia needs immediate unsynchronised shock.",
+   "say": "Stable broad complex tachycardia is treated as ventricular tachycardia with amiodarone one hundred and fifty milligrams intravenously, or procainamide when ischaemia is not the cause. Torsades de pointes with long QT needs magnesium sulfate two grams and overdrive pacing, not amiodarone which prolongs QT further. Unstable ventricular tachycardia needs immediate unsynchronised shock without waiting for drugs.",
+   "vis": null
+  },
+  {
+   "tx": "Definitive therapy for recurrent nodal reentry is **catheter ablation** (targeted burns to circuits) with circumferential pulmonary vein isolation for fibrillation. **Atrial flutter** (sawtooth reentry) is cured by cavotricuspid isthmus ablation. **American College of Cardiology, American Heart Association and Heart Rhythm Society** (ACC AHA HRS) guidance endorses ablation for symptomatic recurrent supraventricular tachycardia, reducing lifetime drug exposure and hospital visits after a single procedure.",
+   "say": "Definitive therapy for recurrent nodal reentry is catheter ablation with targeted burns to circuits, and pulmonary vein isolation for fibrillation. Typical atrial flutter is cured by cavotricuspid isthmus ablation. Guidance from the American College of Cardiology and partner societies endorses ablation for symptomatic recurrent supraventricular tachycardia, reducing lifetime drug exposure and hospital visits after a single procedure.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **syncope** (fainting from low output), **myocardial infarction** (heart muscle death) from demand, tachycardia cardiomyopathy and sudden death in ventricular rhythms. Mortality after ventricular fibrillation exceeds 90% without prompt help, while timely defibrillation restores survival in many. **Implantable cardioverter defibrillator** (ICD device) is indicated for survivors of ventricular arrest with structural disease, not for simple supraventricular tachycardia without collapse.",
+   "say": "Complications can include faints from low cardiac output, heart muscle death from demand, tachycardia cardiomyopathy and sudden death in ventricular rhythms. Mortality after ventricular fibrillation exceeds ninety percent without prompt help, while timely defibrillation restores survival in many cases. Implantable cardioverter defibrillator placement is indicated for survivors of ventricular arrest with structural disease, not for simple supraventricular tachycardia without collapse.",
+   "vis": null
+  },
+  {
+   "tx": "Exam traps punish calling broad complex tachycardia supraventricular and giving verapamil, which can collapse ventricular tachycardia. **Preexcited fibrillation** (fast irregular broad rhythm with pathway) must never receive adenosine or nodal blockers. Torsades with long QT needs magnesium and potassium optimisation, not QT prolonging drugs. Always check **electrolytes** (blood salts) and QT before escalating amiodarone, and remember monomorphic ventricular tachycardia is usually scar driven.",
+   "say": "Examination traps punish calling broad complex tachycardia supraventricular and giving verapamil, which can collapse ventricular tachycardia. Preexcited fibrillation must never receive adenosine or nodal blockers because degeneration to ventricular fibrillation follows. Torsades with long QT needs magnesium and potassium optimisation, not QT prolonging drugs. Always check blood salts and QT before escalating amiodarone therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: quote broad complex equals ventricular until proven otherwise, vagal then adenosine 6 mg sequence, amiodarone 150 mg for stable ventricular tachycardia, cardioversion for instability, magnesium 2 g for torsades, ablation for recurrent supraventricular tachycardia and flutter, and defibrillator indications after ventricular arrest with structural disease. These dose numbers answer drug selection questions directly.",
+   "say": "High yield for the exam includes broad complex meaning ventricular until proven otherwise, the vagal then adenosine six milligrams sequence, amiodarone one hundred and fifty milligrams for stable ventricular tachycardia, cardioversion for instability, magnesium two grams for torsades, ablation for recurrent supraventricular tachycardia and flutter, and defibrillator indications after ventricular arrest with structural disease. These dose numbers can answer drug selection questions directly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High-yield fact to quote"
+    ],
+    "rows": [
+     [
+      "Broad complex",
+      "Treat as ventricular tachycardia"
+     ],
+     [
+      "Narrow SVT first",
+      "Vagal manoeuvres then adenosine"
+     ],
+     [
+      "Adenosine doses",
+      "6 mg then 12 mg rapid push"
+     ],
+     [
+      "Stable VT drug",
+      "Amiodarone 150 mg"
+     ],
+     [
+      "Torsades drug",
+      "Magnesium sulfate 2 g"
+     ],
+     [
+      "Unstable therapy",
+      "Synchronised cardioversion"
+     ],
+     [
+      "Definitive cure",
+      "Catheter ablation"
+     ],
+     [
+      "Collapse prevention",
+      "Implantable defibrillator"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

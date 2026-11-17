@@ -1,0 +1,284 @@
+{
+ "v": 1,
+ "module": "sgm-pharmacogenomics",
+ "subject": "ss-general-medicine",
+ "title": "Pharmacogenomics: genes that change drug response",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Pharmacogenomics** (the study of how inherited genes shape drug response) explains why the same standard dose helps one patient and harms another. **CYP450 enzymes** (a family of liver enzymes that activate or clear many drugs) carry most of the variation. A **star allele** (a named DNA variant with a known effect) decides whether a person is a poor, intermediate, normal or ultra rapid metaboliser for a drug.",
+   "say": "Pharmacogenomics is the study of how inherited genes shape the way a person responds to a medicine. A family of liver enzymes called cytochrome P four five zero does most of the activating and clearing, and small inherited spelling changes in those genes decide whether someone metabolises quickly, slowly, or not at all. Each spelling change is given a star name, and that name tells the clinician what will happen after the usual dose is given.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metaboliser group",
+     "Enzyme result",
+     "Typical drug effect"
+    ],
+    "rows": [
+     [
+      "Poor metaboliser",
+      "Little or no enzyme",
+      "Standard dose causes toxicity"
+     ],
+     [
+      "Intermediate metaboliser",
+      "Reduced enzyme activity",
+      "Higher levels than expected"
+     ],
+     [
+      "Normal metaboliser",
+      "Usual enzyme activity",
+      "Standard dose behaves normally"
+     ],
+     [
+      "Ultra rapid metaboliser",
+      "Extra enzyme copies",
+      "Standard dose may fail"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CYP2C19** (a liver enzyme that converts the prodrug clopidogrel into its active form) causes stent thrombosis when it works poorly. **Loss of function alleles** (gene copies that make no working enzyme) hit roughly a quarter of Indians. **Point of care genotyping** (a bedside test done during coronary stenting) lets cardiology swap clopidogrel for ticagrelor or prasugrel in carriers before the platelet is judged.",
+   "say": "Clopidogrel is a silent prodrug until an enzyme called CYP two C nineteen switches it on inside the liver. People who carry copies of the gene that make no working enzyme cannot generate enough active drug, and their coronary stents can clot. Because about one in four Indians carries such a copy, bedside genotyping during stenting is increasingly used to choose ticagrelor or prasugrel instead of standard clopidogrel.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Coronary stent planned"
+     },
+     {
+      "id": "b",
+      "label": "CYP2C19 genotype"
+     },
+     {
+      "id": "c",
+      "label": "Normal metaboliser"
+     },
+     {
+      "id": "d",
+      "label": "Loss of function carrier"
+     },
+     {
+      "id": "e",
+      "label": "Ticagrelor or prasugrel"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CYP2D6** (a highly variable liver enzyme) decides the fate of **codeine** (a prodrug painkiller that needs conversion to morphine). **Ultra rapid metabolisers** (people with extra enzyme copies) turn a normal codeine dose into sudden morphine poisoning, while **poor metabolisers** (those lacking the enzyme) gain no pain relief. **Tramadol** (another prodrug opioid) shares the same dependence on this pathway in Indian clinical practice.",
+   "say": "Codeine itself does not kill pain until the liver enzyme CYP two D six can turn a small part of it into morphine. Extra enzyme copies push normal doses toward dangerous overdose, while missing enzyme leaves the drug useless. Tramadol can follow a similar activation route, so the same genetic pattern explains both sudden toxicity and complete failure of these two very common painkillers.",
+   "vis": null
+  },
+  {
+   "tx": "**Thiopurine methyltransferase** (an enzyme that detoxifies thiopurine drugs) protects against **azathioprine** (an immunosuppressant used in autoimmune disease and transplant). **Heterozygotes** (people with one faulty gene copy) cannot handle full doses and develop fatal marrow suppression. **TPMT activity testing** (a blood test of enzyme strength) or **genotyping** (testing the DNA code directly) guides cutting the dose by more than half in carriers.",
+   "say": "Azathioprine and mercaptopurine must be broken down by an enzyme called thiopurine methyltransferase. Even one faulty gene copy reduces that protection sharply, and a full dose can wipe out the marrow. Checking enzyme activity or the gene itself before starting therapy allows safer dose cuts in carriers and still leaves full dosing for the majority who can detoxify normally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal TPMT activity",
+     "points": [
+      "Breaks thiopurine safely",
+      "Full dose tolerated",
+      "Routine blood counts suffice",
+      "Watch for rash and nausea"
+     ]
+    },
+    "right": {
+     "title": "Faulty TPMT activity",
+     "points": [
+      "Toxic breakdown products pile up",
+      "Marrow failure may be fatal",
+      "Dose reduced sharply",
+      "Counts needed very often"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dihydropyrimidine dehydrogenase** (an enzyme that clears most of the chemotherapy **fluorouracil** (a drug whose toxicity can be lethal)) varies widely between people. **DPYD gene testing** (a DNA test for the enzyme code) is now expected before **fluoropyrimidines** (drugs including capecitabine and infusional fluorouracil). ** DPD deficiency** (missing enzyme capacity) turns the first cycle into severe diarrhoea, mucositis and neutropenia that can kill without warning.",
+   "say": "Fluorouracil and capecitabine require one enzyme, dihydropyrimidine dehydrogenase, for clearance after each cycle. When that enzyme is missing or weak, the first exposure builds up to overwhelming gut and marrow injury. Testing the DPYD gene beforehand identifies these patients and permits dose reduction, and awareness of this pathway is now part of safe chemotherapy prescribing.",
+   "vis": null
+  },
+  {
+   "tx": "**HLA associations** (links between a human leukocyte antigen gene and a drug reaction) are among the strongest in pharmacogenomics. **HLA-B*47:01** (a gene marker once linked to abacavir reactions) predicts **abacavir hypersensitivity** (a potentially fatal multiorgan allergy). **HLA-B*15:02** (another marker common in South Asian populations) predicts **carbamazepine induced Stevens Johnson syndrome** (a skin detachment emergency) with near certainty.",
+   "say": "Some drug allergies are written into the immune genes rather than the liver enzymes. One HLA marker predicts a dangerous abacavir allergy so well that testing before the first tablet is mandatory. Another marker, common across South Asia, can predict carbamazepine driven Stevens Johnson syndrome and skin detachment. Both examples show how a single pre treatment gene test can prevent a fatal reaction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene marker",
+     "Drug",
+     "Reaction prevented"
+    ],
+    "rows": [
+     [
+      "HLA B star 5701",
+      "Abacavir",
+      "Multisystem hypersensitivity"
+     ],
+     [
+      "HLA B star 1502",
+      "Carbamazepine",
+      "Stevens Johnson syndrome"
+     ],
+     [
+      "UGT1A1 repeat",
+      "Irinotecan",
+      "Severe neutropenia"
+     ],
+     [
+      "CYP2C19 loss",
+      "Clopidogrel",
+      "Stent thrombosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Warfarin** (a blood thinner guided by clotting tests) responds to two genes at once. **VKORC1** (the enzyme warfarin blocks to thin blood) controls how sensitive the patient is, while **CYP2C9** (the enzyme that clears warfarin) controls how long the drug lingers. **Genotype guided dosing** (calculating the starting dose from DNA rather than by trial) reaches the target quicker and reduces bleeding in the early days of therapy.",
+   "say": "Warfarin response is governed by two genes in parallel. One can control the target enzyme that the drug blocks, and the other can control how fast the liver clears the drug away. Together they predict the right starting dose far better than age and weight alone. Using that prediction shortens the unstable early phase when bleeding risk is highest for new starters.",
+   "vis": null
+  },
+  {
+   "tx": "**N acetyltransferase two** (a liver enzyme that handles **isoniazid** (the first line antituberculosis drug)) splits Indians into **slow acetylators** (people whose livers clear the drug sluggishly). **Slow acetylators** accumulate nerve toxicity and need **pyridoxine** (vitamin B six given alongside to protect nerves). **Rapid acetylators** clear the drug faster, so the classic drug induced lupus and neuropathy story maps onto this single metabolic trait.",
+   "say": "Isoniazid is cleared by an enzyme called N acetyltransferase, and Indians are often slow at this step. Slow clearers build higher drug levels and develop tingling and numbness unless vitamin B six is added alongside. Recognising this trait explains who needs nerve protection, who develops lupus like features, and why one standard dose is not right for every chest.",
+   "vis": null
+  },
+  {
+   "tx": "**Glucose six phosphate dehydrogenase deficiency** (a red cell enzyme defect passed on the X chromosome) exposes patients to **oxidant drugs** (medicines that stress red cells). **Primaquine** (the antimalarial that kills dormant malaria) and **dapsone** (the antileprotic drug) can trigger **acute haemolysis** (sudden red cell destruction) in deficient patients. **UGT1A1 testing** (measuring the irinotecan disposal pathway) similarly guards against life threatening diarrhoea and neutropenia from **irinotecan** (a bowel cancer drug).",
+   "say": "A red cell enzyme defect can turn routine drugs into a cause of sudden jaundice and dark urine. The antimalarial primaquine and the antileprosy drug dapsone can both stress fragile red cells and trigger acute breakdown. In cancer care, a different disposal enzyme predicts who will suffer severe diarrhoea from irinotecan. Each story starts with a simple question about inherited enzyme strength.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "G6PD deficiency",
+     "points": [
+      "X linked red cell defect",
+      "Oxidant drugs trigger haemolysis",
+      "Primaquine and dapsone risky",
+      "Avoid known offenders"
+     ]
+    },
+    "right": {
+     "title": "UGT1A1 variation",
+     "points": [
+      "Slower irinotecan clearance",
+      "Severe neutropenia risk",
+      "Diarrhoea may be fatal",
+      "Dose cut before starting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CPIC guidelines** (practical prescribing advice that translates gene results into dose changes) cover the pairs examined most often. **Level A pairs** (drug and gene combinations with anonymised clinical action) include clopidogrel with CYP2C19, thiopurines with TPMT, and fluoropyrimidines with DPYD. **Electronic records** that store the genotype once and flag every future prescription have shifted practice from single drug testing to lifelong decision support.",
+   "say": "International guidance tries to make gene results useful at the bedside rather than academic. The strongest recommendations cover clopidogrel with its activating enzyme, thiopurines with TPMT, and fluoropyrimidines with DPYD. Storing the genotype once inside the electronic record and alerting every later prescription is becoming the practical model, turning a one time test into protection across many future drugs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Order gene test"
+     },
+     {
+      "id": "b",
+      "label": "Result stored"
+     },
+     {
+      "id": "c",
+      "label": "Drug prescribed"
+     },
+     {
+      "id": "d",
+      "label": "Dose adjusted"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam** means locking in drug gene pairs that appear repeatedly. **CYP2C19 loss** with clopidogrel, **CYP2D6** with codeine, **TPMT** with thiopurines, **DPYD** with fluoropyrimidines, **HLA markers** with abacavir and carbamazepine, **VKORC1 and CYP2C9** with warfarin, **NAT2** with isoniazid, and **G6PD** with primaquine form the core list. **Poor metaboliser** and **ultra rapid metaboliser** definitions plus **CPIC level A** wording complete the answer.",
+   "say": "High yield for the exam means locking in the drug and gene pairs that keep returning. Clopidogrel needs CYP two C nineteen, codeine needs CYP two D six, thiopurines need TPMT, fluoropyrimidines need DPYD, abacavir and carbamazepine need HLA markers, warfarin needs VKORC one with CYP two C nine, isoniazid needs NAT two, and primaquine needs G six P D. You must remember the metaboliser definitions and the CPIC level A phrase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Gene",
+     "Risk in variant"
+    ],
+    "rows": [
+     [
+      "Clopidogrel",
+      "CYP2C19 loss",
+      "Stent thrombosis"
+     ],
+     [
+      "Codeine",
+      "CYP2D6 ultra rapid",
+      "Morphine overdose"
+     ],
+     [
+      "Azathioprine",
+      "TPMT faulty",
+      "Marrow failure"
+     ],
+     [
+      "Fluorouracil",
+      "DPYD missing",
+      "Fatal toxicity"
+     ],
+     [
+      "Carbamazepine",
+      "HLA B 1502",
+      "Stevens Johnson syndrome"
+     ],
+     [
+      "Warfarin",
+      "VKORC1 plus CYP2C9",
+      "Bleeding or slow control"
+     ],
+     [
+      "Primaquine",
+      "G6PD deficient",
+      "Haemolysis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
