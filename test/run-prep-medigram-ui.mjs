@@ -52,7 +52,7 @@ try {
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Fetch.enable", { patterns: ["*stewardmd.in/_site/yt*", "*/mcq/*.json*", "*imglearn/*"].map((u) => ({ urlPattern: u, requestStage: "Request" })) });
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API="/test/fixtures/prep/api/"; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep_medigram","1");}catch(e){}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API="/test/fixtures/prep/api/"; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; window.SMD_PREP_VOICE=false; try{localStorage.setItem("smd_prep_medigram","1");}catch(e){}` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.setItem("smd_prep_medigram","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} return 1;`);
@@ -137,6 +137,11 @@ try {
     await ev(`var s=document.querySelector('#smdPrep .pn-mg-les .pn-mg-story'), r=s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent('click',{bubbles:true,clientX:r.left+r.width/2,clientY:r.top+20})); return 1;`);
     ok(await until(`return /paused/.test(document.querySelector('#smdPrep .pn-mg-les .pn-mg-sn').textContent);`, 3000), "a tap in the middle pauses it");
     ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-les [data-act=mg-lesson]') && !!document.querySelector('#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]');`) === true, "Listen and the full lesson with its quiz are one tap away");
+    await ev(`window.__spoke=[]; var o=window.SMD_SPEAK.say; window.SMD_SPEAK.say=function(t,x){ window.__spoke.push(t); return o.call(this,t,x); }; return 1;`);
+    await click("#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]");
+    ok(await until(`return window.__spoke.length > 0 && window.__spoke[0].length > 20;`, 4000), "Listen reads the step through the app's standard voice (SMD_SPEAK)");
+    await click("#smdPrep .pn-mg-les [data-act=mg-les][data-v=listen]");
+    ok(await until(`return !window.SMD_SPEAK.speaking();`, 3000), "Stop listening stops the voice");
     await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
   } else ok(false, "the reel has a lesson card to play");
   // End card: Keep going appends a batch, Finish returns home.
