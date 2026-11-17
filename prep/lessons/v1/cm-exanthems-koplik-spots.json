@@ -13,12 +13,27 @@
    "say": "Airborne, over ninety percent attack rates in susceptible households, lymphoid viraemia seeding skin. Humans alone carry it. Few infections spread this efficiently indoors.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Fact"],
+    "cols": [
+     "Feature",
+     "Fact"
+    ],
     "rows": [
-     ["Family", "Paramyxovirus"],
-     ["Spread", "Airborne droplets and aerosols"],
-     ["Household attack rate", "Above 90 percent if susceptible"],
-     ["Reservoir", "Humans only"]
+     [
+      "Family",
+      "Paramyxovirus"
+     ],
+     [
+      "Spread",
+      "Airborne droplets and aerosols"
+     ],
+     [
+      "Household attack rate",
+      "Above 90 percent if susceptible"
+     ],
+     [
+      "Reservoir",
+      "Humans only"
+     ]
     ]
    }
   },
@@ -40,12 +55,27 @@
    "say": "Cough, coryza, conjunctivitis on rising fever. Infectious four days before any rash appears. Waiting for spots on skin to isolate always arrives late.",
    "vis": {
     "kind": "table",
-    "cols": ["Prodrome sign", "Detail"],
+    "cols": [
+     "Prodrome sign",
+     "Detail"
+    ],
     "rows": [
-     ["Cough", "Brassy, persistent"],
-     ["Coryza", "Profuse nasal discharge"],
-     ["Conjunctivitis", "Red eyes, photophobia"],
-     ["Infectious window", "4 days before to 4 after rash"]
+     [
+      "Cough",
+      "Brassy, persistent"
+     ],
+     [
+      "Coryza",
+      "Profuse nasal discharge"
+     ],
+     [
+      "Conjunctivitis",
+      "Red eyes, photophobia"
+     ],
+     [
+      "Infectious window",
+      "4 days before to 4 after rash"
+     ]
     ]
    }
   },
@@ -67,12 +97,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Behind ears and hairline"},
-     {"id": "b", "label": "Face and trunk spread down"},
-     {"id": "c", "label": "Limbs involved by day three"},
-     {"id": "d", "label": "Fades in order with staining"}
+     {
+      "id": "a",
+      "label": "Behind ears and hairline"
+     },
+     {
+      "id": "b",
+      "label": "Face and trunk spread down"
+     },
+     {
+      "id": "c",
+      "label": "Limbs involved by day three"
+     },
+     {
+      "id": "d",
+      "label": "Fades in order with staining"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -81,12 +136,27 @@
    "say": "Measles deletes immune memory, inviting other infections for months afterwards. Later pneumonia deaths belong partly to measles. The vaccine protects the library, not just the skin.",
    "vis": {
     "kind": "table",
-    "cols": ["Effect", "Consequence"],
+    "cols": [
+     "Effect",
+     "Consequence"
+    ],
     "rows": [
-     ["Antibody memory erased", "Prior protection weakened"],
-     ["Lymphocyte depletion", "Secondary infections rise"],
-     ["Duration", "Months to years"],
-     ["Prevention", "Two dose vaccination"]
+     [
+      "Antibody memory erased",
+      "Prior protection weakened"
+     ],
+     [
+      "Lymphocyte depletion",
+      "Secondary infections rise"
+     ],
+     [
+      "Duration",
+      "Months to years"
+     ],
+     [
+      "Prevention",
+      "Two dose vaccination"
+     ]
     ]
    }
   },
@@ -96,12 +166,27 @@
    "say": "Ears commonly, lungs fatally, brain rarely now and very rarely years later as SSPE. Undernutrition and vitamin A deficiency turn measles lethal.",
    "vis": {
     "kind": "table",
-    "cols": ["Complication", "Note"],
+    "cols": [
+     "Complication",
+     "Note"
+    ],
     "rows": [
-     ["Otitis media", "Commonest complication"],
-     ["Pneumonia", "Commonest cause of death"],
-     ["Encephalitis", "About 1 per 1000 cases"],
-     ["SSPE", "Late, years after infancy infection"]
+     [
+      "Otitis media",
+      "Commonest complication"
+     ],
+     [
+      "Pneumonia",
+      "Commonest cause of death"
+     ],
+     [
+      "Encephalitis",
+      "About 1 per 1000 cases"
+     ],
+     [
+      "SSPE",
+      "Late, years after infancy infection"
+     ]
     ]
    }
   },
@@ -111,12 +196,27 @@
    "say": "Two vitamin A doses on consecutive days cut deaths and save corneas in deficient children. Measles plus malnutrition once blinded children at scale.",
    "vis": {
     "kind": "table",
-    "cols": ["Child", "Vitamin A action"],
+    "cols": [
+     "Child",
+     "Vitamin A action"
+    ],
     "rows": [
-     ["Hospitalised measles", "Two doses, consecutive days"],
-     ["Eye signs present", "Treat and refer urgently"],
-     ["Malnourished", "Treat, do not wait for eye signs"],
-     ["Community recovery", "Dietary diversification advice"]
+     [
+      "Hospitalised measles",
+      "Two doses, consecutive days"
+     ],
+     [
+      "Eye signs present",
+      "Treat and refer urgently"
+     ],
+     [
+      "Malnourished",
+      "Treat, do not wait for eye signs"
+     ],
+     [
+      "Community recovery",
+      "Dietary diversification advice"
+     ]
     ]
    }
   },
@@ -127,12 +227,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Case notified, line list opened"},
-     {"id": "b", "label": "Isolation and contact listing"},
-     {"id": "c", "label": "Catch up vaccination round"},
-     {"id": "d", "label": "Coverage survey of the pocket"}
+     {
+      "id": "a",
+      "label": "Case notified, line list opened"
+     },
+     {
+      "id": "b",
+      "label": "Isolation and contact listing"
+     },
+     {
+      "id": "c",
+      "label": "Catch up vaccination round"
+     },
+     {
+      "id": "d",
+      "label": "Coverage survey of the pocket"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -143,12 +268,67 @@
     "kind": "compare",
     "left": {
      "title": "Classic measles",
-     "points": ["Three Cs prodrome", "Koplik spots present", "Confluent downward rash", "High fever at eruption"]
+     "points": [
+      "Three Cs prodrome",
+      "Koplik spots present",
+      "Confluent downward rash",
+      "High fever at eruption"
+     ]
     },
     "right": {
      "title": "Modified measles",
-     "points": ["Partial immunity background", "Koplik spots absent", "Faint, brief rash", "Still infectious to others"]
+     "points": [
+      "Partial immunity background",
+      "Koplik spots absent",
+      "Faint, brief rash",
+      "Still infectious to others"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Koplik spots are pathognomonic for measles, appearing as bluish white grains opposite the lower molars one to two days before the rash. The prodrome brings cough, coryza and conjunctivitis, and infectivity runs from four days before to four days after rash onset. Otitis media is the commonest complication, pneumonia is the commonest killer, and two vitamin A doses protect sight and life.",
+   "say": "High-yield for the exam: Koplik spots are pathognomonic for measles, appearing as bluish white grains opposite the lower molars one to two days before the rash. The prodrome brings cough, coryza and conjunctivitis, and infectivity runs from four days before to four days after rash onset. Otitis media is the commonest complication, pneumonia is the commonest killer, and two vitamin A doses protect sight and life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Koplik spot site",
+      "Buccal mucosa opposite lower molars"
+     ],
+     [
+      "Koplik timing",
+      "One to two days before skin rash"
+     ],
+     [
+      "Prodrome three Cs",
+      "Cough, coryza and conjunctivitis with fever"
+     ],
+     [
+      "Infectious period",
+      "Four days before to four days after rash"
+     ],
+     [
+      "Rash first site",
+      "Behind ears and at hairline"
+     ],
+     [
+      "Commonest complication",
+      "Otitis media in measles cases"
+     ],
+     [
+      "Commonest fatal complication",
+      "Pneumonia causes most measles deaths"
+     ],
+     [
+      "Coverage target",
+      "Ninety five percent with two vaccine doses"
+     ]
+    ]
    }
   }
  ],

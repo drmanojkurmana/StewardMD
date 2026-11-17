@@ -55,6 +55,47 @@
    "tx": "**Acute hydrocephalus** complicates aneurysmal bleeding when blood blocks cerebrospinal fluid flow and absorption, showing enlarged temporal horns and transependymal oedema on repeat CT. Falling consciousness after initial stability is its clinical flag, and an external ventricular drain treats pressure while the aneurysm is secured. Intraventricular blood extension worsens grade and prognosis in every scoring system, so the first report must state it explicitly.",
    "say": "Acute hydrocephalus complicates aneurysmal bleeding when blood blocks fluid flow, showing enlarged temporal horns on repeat CT. Falling consciousness after initial stability is its flag, and a ventricular drain treats pressure while the aneurysm is secured. Intraventricular blood worsens every grade, so reports state it explicitly.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blood blocks fluid pathways"}, {"id": "b", "label": "Temporal horns enlarge"}, {"id": "c", "label": "Consciousness falls"}, {"id": "d", "label": "Ventricular drain placed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
-  }
+  },
+    {
+      "tx": "**High-yield for the exam**: Subarachnoid blood paints basal cisterns, sylvian fissures and sulci white on non contrast CT, and a thunderclap story stays open after a delayed negative scan. Anterior communicating aneurysms favour interhemispheric blood, while a hyperdense middle cerebral artery marks acute thrombus and large territory infarct. Vasospasm threatens between days four and fourteen, perimesencephalic blood with negative angiography is usually benign, and acute hydrocephalus needs an external ventricular drain while the aneurysm is secured.",
+      "say": "Subarachnoid blood paints basal cisterns, sylvian fissures and sulci white on non contrast CT, and a thunderclap story stays open after a delayed negative scan. Anterior communicating aneurysms favour interhemispheric blood, while a hyperdense middle cerebral artery marks acute thrombus and large territory infarct. Vasospasm threatens between days four and fourteen, perimesencephalic blood with negative angiography is usually benign, and acute hydrocephalus needs an external ventricular drain while the aneurysm is secured.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Cisternal blood",
+            "Aneurysmal until proven otherwise"
+          ],
+          [
+            "Convexity only blood",
+            "Think amyloid or vasoconstriction"
+          ],
+          [
+            "Negative late CT",
+            "Does not close thunderclap case"
+          ],
+          [
+            "Hyperdense MCA sign",
+            "Fresh thrombus inside the artery"
+          ],
+          [
+            "Early infarct signs",
+            "Insular ribbon and sulcal effacement"
+          ],
+          [
+            "Vasospasm window",
+            "Days four to fourteen"
+          ],
+          [
+            "Perimesencephalic pattern",
+            "Benign if angiography is negative"
+          ]
+        ]
+      }
+    }
  ]
 }

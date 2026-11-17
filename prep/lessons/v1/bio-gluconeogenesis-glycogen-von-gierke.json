@@ -21,12 +21,32 @@
    "say": "Trapped glucose-6-phosphate overflows down every open road. Glycolysis makes lactate, the shunt feeds urate, and lipogenesis makes triglycerides. Reciting the crossroads predicts the blood panel without memorising a list.",
    "vis": {
     "kind": "table",
-    "cols": ["Overflow road", "Product in excess", "Clinical result"],
+    "cols": [
+     "Overflow road",
+     "Product in excess",
+     "Clinical result"
+    ],
     "rows": [
-     ["Glycolysis", "Lactate", "Metabolic acidosis"],
-     ["HMP shunt to purines", "Uric acid", "Gout, kidney stones"],
-     ["Lipogenesis", "Triglycerides", "Fatty liver, eruptive risk"],
-     ["Glycogen synthesis", "Stored glycogen", "Massive hepatomegaly"]
+     [
+      "Glycolysis",
+      "Lactate",
+      "Metabolic acidosis"
+     ],
+     [
+      "HMP shunt to purines",
+      "Uric acid",
+      "Gout, kidney stones"
+     ],
+     [
+      "Lipogenesis",
+      "Triglycerides",
+      "Fatty liver, eruptive risk"
+     ],
+     [
+      "Glycogen synthesis",
+      "Stored glycogen",
+      "Massive hepatomegaly"
+     ]
     ]
    }
   },
@@ -35,8 +55,21 @@
    "say": "Type Ia lacks the phosphatase itself, while type Ib lacks the translocase and adds neutropenia with recurrent infections. Both share the metabolic storm because the lumenal reaction starves either way, proving compartment logic in human disease.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Type Ia (enzyme absent)", "points": ["Full metabolic picture", "Neutrophils normal", "Commoner form"]},
-    "right": {"title": "Type Ib (translocase absent)", "points": ["Same metabolic picture", "Neutropenia plus infections", "May need G-CSF support"]
+    "left": {
+     "title": "Type Ia (enzyme absent)",
+     "points": [
+      "Full metabolic picture",
+      "Neutrophils normal",
+      "Commoner form"
+     ]
+    },
+    "right": {
+     "title": "Type Ib (translocase absent)",
+     "points": [
+      "Same metabolic picture",
+      "Neutropenia plus infections",
+      "May need G-CSF support"
+     ]
     }
    }
   },
@@ -50,12 +83,27 @@
    "say": "Treatment supplies glucose by the clock: frequent feeds, uncooked cornstarch overnight, and continuous gastric glucose in infants. Fructose and galactose are limited because they trap without yielding blood glucose. Families carry sick day plans.",
    "vis": {
     "kind": "table",
-    "cols": ["Measure", "Purpose"],
+    "cols": [
+     "Measure",
+     "Purpose"
+    ],
     "rows": [
-     ["Frequent feeds, cornstarch overnight", "Never allow a long fast"],
-     ["Limit fructose and galactose", "Avoid trapped precursors"],
-     ["Allopurinol, lipid and BP control", "Protect kidney and vessels"],
-     ["Liver imaging surveillance", "Watch adenomas"]
+     [
+      "Frequent feeds, cornstarch overnight",
+      "Never allow a long fast"
+     ],
+     [
+      "Limit fructose and galactose",
+      "Avoid trapped precursors"
+     ],
+     [
+      "Allopurinol, lipid and BP control",
+      "Protect kidney and vessels"
+     ],
+     [
+      "Liver imaging surveillance",
+      "Watch adenomas"
+     ]
     ]
    }
   },
@@ -66,11 +114,74 @@
     "kind": "flow",
     "title": "Does GNG rescue?",
     "nodes": [
-     {"id": "q", "label": "Fasting hypoglycaemia with liver enlargement"},
-     {"id": "both", "label": "Both routes blocked: von Gierke (severe)"},
-     {"id": "one", "label": "One route blocked: Hers or Cori (milder)"}
+     {
+      "id": "q",
+      "label": "Fasting hypoglycaemia with liver enlargement"
+     },
+     {
+      "id": "both",
+      "label": "Both routes blocked: von Gierke (severe)"
+     },
+     {
+      "id": "one",
+      "label": "One route blocked: Hers or Cori (milder)"
+     }
     ],
-    "edges": [["q", "both"], ["q", "one"]]
+    "edges": [
+     [
+      "q",
+      "both"
+     ],
+     [
+      "q",
+      "one"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Von Gierke disease glycogen storage disease type Ia is an autosomal recessive deficiency of glucose-6-phosphatase, impairing both glycogenolysis and gluconeogenesis. Patients present in infancy with severe fasting hypoglycemia, doll-like facies, massive hepatomegaly without splenomegaly, lactic acidosis, hyperuricemia, and hyperlipidemia. Type Ib involves a defect in the microsomal glucose-6-phosphate translocase, characterized additionally by neutropenia and recurrent bacterial infections. Pompe disease type II involves lysosomal alpha-1,4-glucosidase with fatal infantile hypertrophic cardiomyopathy.",
+   "say": "Von Gierke disease glycogen storage disease type Ia is an autosomal recessive deficiency of glucose-6-phosphatase, impairing both glycogenolysis and gluconeogenesis. Patients present in infancy with severe fasting hypoglycemia, doll-like facies, massive hepatomegaly without splenomegaly, lactic acidosis, hyperuricemia, and hyperlipidemia. Type Ib involves a defect in the microsomal glucose-6-phosphate translocase, characterized additionally by neutropenia and recurrent bacterial infections. Pompe disease type II involves lysosomal alpha-1,4-glucosidase with fatal infantile hypertrophic cardiomyopathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Type Ia defective enzyme",
+      "Glucose-6-phosphatase catalytic subunit in endoplasmic reticulum"
+     ],
+     [
+      "Type Ib distinctive feature",
+      "Glucose-6-phosphate translocase defect with neutropenia and enterocolitis"
+     ],
+     [
+      "Metabolic tetrad of Von Gierke",
+      "Hypoglycemia, lactic acidosis, hyperuricemia, hypertriglyceridemia"
+     ],
+     [
+      "Hyperuricemia mechanism",
+      "Lactate competes with uric acid for proximal renal tubular secretion"
+     ],
+     [
+      "Primary treatment strategy",
+      "Uncooked cornstarch feedings and nocturnal nasogastric glucose"
+     ],
+     [
+      "Pompe disease type II defect",
+      "Lysosomal acid maltase alpha-1,4-glucosidase with cardiomegaly"
+     ],
+     [
+      "Cori disease type III defect",
+      "Debranching enzyme deficiency with normal blood lactate levels"
+     ],
+     [
+      "McArdle disease type V defect",
+      "Muscle glycogen phosphorylase deficiency with exercise myoglobinuria"
+     ]
+    ]
    }
   }
  ],

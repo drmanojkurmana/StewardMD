@@ -77,6 +77,51 @@
    "tx": "**Mirror artefact** also corrupts Doppler studies when a strong reflector like the diaphragm or bladder wall folds a vessel image into a false second location. Spectral traces from the ghost vessel duplicate the real waveform, tempting a report of two arteries where one exists. Changing the acoustic window, reducing gain and tracing the vessel in two planes exposes the copy before measurements are recorded.",
    "say": "Mirror artefact also corrupts Doppler studies when a strong reflector like the diaphragm or bladder wall folds a vessel image into a false second location. Spectral traces from the ghost duplicate the real waveform, tempting a report of two arteries where one exists. Changing the window, reducing gain and tracing in two planes exposes the copy.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Strong reflector present"}, {"id": "b", "label": "Ghost vessel appears"}, {"id": "c", "label": "Change acoustic window"}, {"id": "d", "label": "Ghost disappears"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**High-yield for the exam**: **Doppler shift** is zero at 90 degrees, so use 60 degrees or less with correction on. Flow toward the probe raises frequency. Default colour is red toward and blue away, and it flips if inverted. **Tardus parvus** is a slow, low peak beyond renal artery stenosis. Resistive index uses peak systole minus end diastole, divided by peak systole. Normal intrarenal values sit below 0.70. Above 0.80 in a transplant prompts a search. Aliasing wraps flow above the Nyquist limit, half the pulse repetition frequency.",
+   "say": "High-yield for the exam: Doppler shift is zero at 90 degrees, so use 60 degrees or less with correction on. Flow toward the probe raises frequency. Default colour is red toward and blue away, and it flips if inverted. Tardus parvus is a slow, low peak beyond renal artery stenosis. Resistive index uses peak systole minus end diastole, divided by peak systole. Normal intrarenal values sit below 0.70. Above 0.80 in a transplant prompts a search. Aliasing wraps flow above the Nyquist limit, half the pulse repetition frequency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Angle rule",
+      "Use 60 degrees or less"
+     ],
+     [
+      "Right angle",
+      "Shift is zero at 90 degrees"
+     ],
+     [
+      "Default colour",
+      "Red toward and blue away"
+     ],
+     [
+      "Tardus parvus",
+      "Slow low peak past a stenosis"
+     ],
+     [
+      "Normal intrarenal RI",
+      "Values sit below 0.70"
+     ],
+     [
+      "Transplant RI",
+      "Above 0.80 prompts a search"
+     ],
+     [
+      "Nyquist limit",
+      "Half the pulse repetition frequency"
+     ],
+     [
+      "Cirrhosis stiffness",
+      "Above 12.5 kilopascals"
+     ]
+    ]
+   }
   }
  ]
 }

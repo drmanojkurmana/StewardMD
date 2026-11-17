@@ -25,11 +25,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Adults >= 30 yrs or high risk screened"},
-     {"id": "b", "label": "Random capillary glucose >= 140 mg/dl"},
-     {"id": "c", "label": "Fasting plasma glucose or 75g OGTT confirmation"}
+     {
+      "id": "a",
+      "label": "Adults >= 30 yrs or high risk screened"
+     },
+     {
+      "id": "b",
+      "label": "Random capillary glucose >= 140 mg/dl"
+     },
+     {
+      "id": "c",
+      "label": "Fasting plasma glucose or 75g OGTT confirmation"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -38,12 +56,32 @@
    "say": "An oral glucose tolerance test drinks seventy-five grams of glucose in water after an overnight fast. Blood glucose is measured at baseline and two hours later.",
    "vis": {
     "kind": "table",
-    "cols": ["Glycaemic category", "Fasting plasma glucose (mg/dl)", "2-hour post-glucose load (mg/dl)"],
+    "cols": [
+     "Glycaemic category",
+     "Fasting plasma glucose (mg/dl)",
+     "2-hour post-glucose load (mg/dl)"
+    ],
     "rows": [
-     ["Normal glucose tolerance", "Less than 100 mg/dl", "Less than 140 mg/dl"],
-     ["Impaired fasting glucose (IFG)", "100 to 125 mg/dl", "Less than 140 mg/dl"],
-     ["Impaired glucose tolerance (IGT)", "Less than 126 mg/dl", "140 to 199 mg/dl"],
-     ["Diabetes mellitus", "126 mg/dl or higher", "200 mg/dl or higher"]
+     [
+      "Normal glucose tolerance",
+      "Less than 100 mg/dl",
+      "Less than 140 mg/dl"
+     ],
+     [
+      "Impaired fasting glucose (IFG)",
+      "100 to 125 mg/dl",
+      "Less than 140 mg/dl"
+     ],
+     [
+      "Impaired glucose tolerance (IGT)",
+      "Less than 126 mg/dl",
+      "140 to 199 mg/dl"
+     ],
+     [
+      "Diabetes mellitus",
+      "126 mg/dl or higher",
+      "200 mg/dl or higher"
+     ]
     ]
    }
   },
@@ -53,12 +91,32 @@
    "say": "An HbA1c of six point five percent or higher confirms diabetes without needing a fasting sample. Values between five point seven and six point four identify pre-diabetes.",
    "vis": {
     "kind": "table",
-    "cols": ["Diagnostic threshold", "HbA1c percentage range", "Clinical interpretation"],
+    "cols": [
+     "Diagnostic threshold",
+     "HbA1c percentage range",
+     "Clinical interpretation"
+    ],
     "rows": [
-     ["Normal", "Below 5.7 percent", "Optimal long-term glucose homeostasis"],
-     ["Pre-diabetes", "5.7 to 6.4 percent", "High risk of microvascular and macrovascular disease"],
-     ["Diabetes mellitus", "6.5 percent or higher", "Diagnostic confirmation; initiate lifestyle and drugs"],
-     ["Treatment target", "Below 7.0 percent", "Standard target to prevent microvascular injury"]
+     [
+      "Normal",
+      "Below 5.7 percent",
+      "Optimal long-term glucose homeostasis"
+     ],
+     [
+      "Pre-diabetes",
+      "5.7 to 6.4 percent",
+      "High risk of microvascular and macrovascular disease"
+     ],
+     [
+      "Diabetes mellitus",
+      "6.5 percent or higher",
+      "Diagnostic confirmation; initiate lifestyle and drugs"
+     ],
+     [
+      "Treatment target",
+      "Below 7.0 percent",
+      "Standard target to prevent microvascular injury"
+     ]
     ]
    }
   },
@@ -70,11 +128,19 @@
     "kind": "compare",
     "left": {
      "title": "International WHO cut-offs",
-     "points": ["Normal: 18.5 to 24.9 kg/m2", "Overweight: 25.0 to 29.9 kg/m2", "Obesity: 30.0 kg/m2 or higher"]
+     "points": [
+      "Normal: 18.5 to 24.9 kg/m2",
+      "Overweight: 25.0 to 29.9 kg/m2",
+      "Obesity: 30.0 kg/m2 or higher"
+     ]
     },
     "right": {
      "title": "Revised Asian Indian cut-offs",
-     "points": ["Normal: 18.5 to 22.9 kg/m2", "Overweight: 23.0 to 24.9 kg/m2", "Obesity: 25.0 kg/m2 or higher"]
+     "points": [
+      "Normal: 18.5 to 22.9 kg/m2",
+      "Overweight: 23.0 to 24.9 kg/m2",
+      "Obesity: 25.0 kg/m2 or higher"
+     ]
     }
    }
   },
@@ -84,13 +150,37 @@
    "say": "Metabolic syndrome is diagnosed when a patient has any three of five traits: large waist size, high triglycerides, low HDL, elevated blood pressure, or high fasting blood sugar.",
    "vis": {
     "kind": "table",
-    "cols": ["Metabolic criterion", "Cut-off threshold in Asian Indians", "Underlying pathophysiology"],
+    "cols": [
+     "Metabolic criterion",
+     "Cut-off threshold in Asian Indians",
+     "Underlying pathophysiology"
+    ],
     "rows": [
-     ["Abdominal obesity", "Waist >= 90 cm (men), >= 80 cm (women)", "Visceral intra-abdominal fat deposition"],
-     ["High triglycerides", ">= 150 mg/dl (or on drug therapy)", "Excessive hepatic VLDL synthesis"],
-     ["Low HDL cholesterol", "< 40 mg/dl (men), < 50 mg/dl (women)", "Accelerated HDL clearance by hepatic lipase"],
-     ["High blood pressure", ">= 130/85 mmHg (or on drug therapy)", "Endothelial dysfunction and arterial stiffness"],
-     ["Elevated fasting glucose", ">= 100 mg/dl (or on diabetes drugs)", "Impaired suppression of hepatic gluconeogenesis"]
+     [
+      "Abdominal obesity",
+      "Waist >= 90 cm (men), >= 80 cm (women)",
+      "Visceral intra-abdominal fat deposition"
+     ],
+     [
+      "High triglycerides",
+      ">= 150 mg/dl (or on drug therapy)",
+      "Excessive hepatic VLDL synthesis"
+     ],
+     [
+      "Low HDL cholesterol",
+      "< 40 mg/dl (men), < 50 mg/dl (women)",
+      "Accelerated HDL clearance by hepatic lipase"
+     ],
+     [
+      "High blood pressure",
+      ">= 130/85 mmHg (or on drug therapy)",
+      "Endothelial dysfunction and arterial stiffness"
+     ],
+     [
+      "Elevated fasting glucose",
+      ">= 100 mg/dl (or on diabetes drugs)",
+      "Impaired suppression of hepatic gluconeogenesis"
+     ]
     ]
    }
   },
@@ -112,12 +202,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "5 to 7 percent body weight loss target"},
-     {"id": "b", "label": "150 minutes/week moderate aerobic exercise"},
-     {"id": "c", "label": "Replace refined grains with complex whole pulses"},
-     {"id": "d", "label": "58% reduction in diabetes progression risk"}
+     {
+      "id": "a",
+      "label": "5 to 7 percent body weight loss target"
+     },
+     {
+      "id": "b",
+      "label": "150 minutes/week moderate aerobic exercise"
+     },
+     {
+      "id": "c",
+      "label": "Replace refined grains with complex whole pulses"
+     },
+     {
+      "id": "d",
+      "label": "58% reduction in diabetes progression risk"
+     }
     ],
-    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -127,12 +242,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Community screening at Ayushman Arogya Mandir"},
-     {"id": "b", "label": "Glucometer testing and CBAC risk profiling"},
-     {"id": "c", "label": "Free metformin initiation and diet counselling"},
-     {"id": "d", "label": "Annual screening for retinopathy and foot ulcers"}
+     {
+      "id": "a",
+      "label": "Community screening at Ayushman Arogya Mandir"
+     },
+     {
+      "id": "b",
+      "label": "Glucometer testing and CBAC risk profiling"
+     },
+     {
+      "id": "c",
+      "label": "Free metformin initiation and diet counselling"
+     },
+     {
+      "id": "d",
+      "label": "Annual screening for retinopathy and foot ulcers"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Diabetes is diagnosed at fasting plasma glucose 126, two hour glucose 200 after 75 grams glucose, or HbA1c 6.5 percent. HbA1c 5.7 to 6.4 percent is prediabetes. Screening under the national programme targets adults aged thirty and above. For Asian Indians, overweight begins at BMI 23 and obesity at BMI 25.",
+   "say": "High-yield for the exam: Diabetes is diagnosed at fasting plasma glucose 126, two hour glucose 200 after 75 grams glucose, or HbA1c 6.5 percent. HbA1c 5.7 to 6.4 percent is prediabetes. Screening under the national programme targets adults aged thirty and above. For Asian Indians, overweight begins at BMI 23 and obesity at BMI 25.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Standard OGTT load",
+      "75 grams anhydrous glucose after overnight fast"
+     ],
+     [
+      "Diabetes fasting glucose cut off",
+      "Fasting plasma glucose 126 milligrams per decilitre or higher"
+     ],
+     [
+      "Diabetes two hour cut off",
+      "Two hour glucose 200 milligrams per decilitre or higher"
+     ],
+     [
+      "HbA1c diabetes threshold",
+      "6.5 percent or higher confirms diabetes"
+     ],
+     [
+      "HbA1c prediabetes range",
+      "5.7 to 6.4 percent defines prediabetes"
+     ],
+     [
+      "Random glucose action level",
+      "140 milligrams per decilitre mandates confirmatory testing"
+     ],
+     [
+      "Asian Indian obesity cut off",
+      "Body mass index 25 or higher is obesity"
+     ],
+     [
+      "Metabolic syndrome rule",
+      "Any three of five criteria required"
+     ]
+    ]
    }
   }
  ],

@@ -26,11 +26,19 @@
     "kind": "compare",
     "left": {
      "title": "Paucibacillary (PB) leprosy",
-     "points": ["1 to 5 skin lesions with sensory loss", "At most 1 peripheral nerve involved", "Slit skin smear negative at all sites"]
+     "points": [
+      "1 to 5 skin lesions with sensory loss",
+      "At most 1 peripheral nerve involved",
+      "Slit skin smear negative at all sites"
+     ]
     },
     "right": {
      "title": "Multibacillary (MB) leprosy",
-     "points": ["6 or more skin lesions", "2 or more peripheral nerves enlarged", "Slit skin smear positive at any site"]
+     "points": [
+      "6 or more skin lesions",
+      "2 or more peripheral nerves enlarged",
+      "Slit skin smear positive at any site"
+     ]
     }
    }
   },
@@ -51,12 +59,37 @@
    "say": "Multidrug therapy comes in pre-packaged blister packs: green for paucibacillary and pink for multibacillary cases. Blister cards separate monthly supervised pills from daily home doses.",
    "vis": {
     "kind": "table",
-    "cols": ["Blister pack type", "Colour code", "Regimen duration", "Target classification"],
+    "cols": [
+     "Blister pack type",
+     "Colour code",
+     "Regimen duration",
+     "Target classification"
+    ],
     "rows": [
-     ["PB Adult Blister", "Green card", "6 blister packs within 9 months", "Paucibacillary patients >= 15 years"],
-     ["MB Adult Blister", "Pink card", "12 blister packs within 18 months", "Multibacillary patients >= 15 years"],
-     ["PB Child Blister", "Green card (small)", "6 blister packs within 9 months", "Paucibacillary children 10 to 14 years"],
-     ["MB Child Blister", "Pink card (small)", "12 blister packs within 18 months", "Multibacillary children 10 to 14 years"]
+     [
+      "PB Adult Blister",
+      "Green card",
+      "6 blister packs within 9 months",
+      "Paucibacillary patients >= 15 years"
+     ],
+     [
+      "MB Adult Blister",
+      "Pink card",
+      "12 blister packs within 18 months",
+      "Multibacillary patients >= 15 years"
+     ],
+     [
+      "PB Child Blister",
+      "Green card (small)",
+      "6 blister packs within 9 months",
+      "Paucibacillary children 10 to 14 years"
+     ],
+     [
+      "MB Child Blister",
+      "Pink card (small)",
+      "12 blister packs within 18 months",
+      "Multibacillary children 10 to 14 years"
+     ]
     ]
    }
   },
@@ -67,11 +100,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Supervised monthly dose of 600 mg rifampicin"},
-     {"id": "b", "label": "99.9% bacillary destruction in 72 hours"},
-     {"id": "c", "label": "Immediate loss of community transmission"}
+     {
+      "id": "a",
+      "label": "Supervised monthly dose of 600 mg rifampicin"
+     },
+     {
+      "id": "b",
+      "label": "99.9% bacillary destruction in 72 hours"
+     },
+     {
+      "id": "c",
+      "label": "Immediate loss of community transmission"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -80,11 +131,31 @@
    "say": "Patients take one hundred milligrams of dapsone daily at home to block bacterial folate synthesis. Dapsone prevents resistance from developing against the powerful monthly rifampicin.",
    "vis": {
     "kind": "table",
-    "cols": ["Drug agent", "Administration schedule", "Adult dosage", "Supervision status"],
+    "cols": [
+     "Drug agent",
+     "Administration schedule",
+     "Adult dosage",
+     "Supervision status"
+    ],
     "rows": [
-     ["Rifampicin", "Once monthly (Day 1)", "600 mg (two 300 mg capsules)", "Directly observed by health worker"],
-     ["Dapsone", "Daily (Days 1 to 28)", "100 mg single oral tablet", "Self-administered daily at home"],
-     ["Clofazimine (in MB)", "Once monthly + daily", "300 mg supervised + 50 mg daily", "Monthly supervised, daily home ingestion"]
+     [
+      "Rifampicin",
+      "Once monthly (Day 1)",
+      "600 mg (two 300 mg capsules)",
+      "Directly observed by health worker"
+     ],
+     [
+      "Dapsone",
+      "Daily (Days 1 to 28)",
+      "100 mg single oral tablet",
+      "Self-administered daily at home"
+     ],
+     [
+      "Clofazimine (in MB)",
+      "Once monthly + daily",
+      "300 mg supervised + 50 mg daily",
+      "Monthly supervised, daily home ingestion"
+     ]
     ]
    }
   },
@@ -95,11 +166,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Initiate PB treatment: Green blister pack"},
-     {"id": "b", "label": "Complete 6 blister cards within 9 months"},
-     {"id": "c", "label": "Official discharge: Treatment completed cure"}
+     {
+      "id": "a",
+      "label": "Initiate PB treatment: Green blister pack"
+     },
+     {
+      "id": "b",
+      "label": "Complete 6 blister cards within 9 months"
+     },
+     {
+      "id": "c",
+      "label": "Official discharge: Treatment completed cure"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -110,11 +199,19 @@
     "kind": "compare",
     "left": {
      "title": "PB treatment completion",
-     "points": ["6 blister cards in 9 months", "Rifampicin + Dapsone only", "Discharged with self-care counseling"]
+     "points": [
+      "6 blister cards in 9 months",
+      "Rifampicin + Dapsone only",
+      "Discharged with self-care counseling"
+     ]
     },
     "right": {
      "title": "MB treatment completion",
-     "points": ["12 blister cards in 18 months", "Rifampicin + Dapsone + Clofazimine", "Annual follow-up for 5 years"]
+     "points": [
+      "12 blister cards in 18 months",
+      "Rifampicin + Dapsone + Clofazimine",
+      "Annual follow-up for 5 years"
+     ]
     }
    }
   },
@@ -124,11 +221,72 @@
    "say": "Modern guidelines often give all three drugs to every patient, varying only duration from six months for mild cases to twelve months for heavy disease to prevent undertreatment.",
    "vis": {
     "kind": "table",
-    "cols": ["Classification", "Unified drugs prescribed", "Recommended duration"],
+    "cols": [
+     "Classification",
+     "Unified drugs prescribed",
+     "Recommended duration"
+    ],
     "rows": [
-     ["Paucibacillary (PB)", "Rifampicin + Dapsone + Clofazimine", "6 months of therapy (6 blister packs)"],
-     ["Multibacillary (MB)", "Rifampicin + Dapsone + Clofazimine", "12 months of therapy (12 blister packs)"],
-     ["Relapse / Refractory", "Second-line ofloxacin / minocycline", "24 months under specialist supervision"]
+     [
+      "Paucibacillary (PB)",
+      "Rifampicin + Dapsone + Clofazimine",
+      "6 months of therapy (6 blister packs)"
+     ],
+     [
+      "Multibacillary (MB)",
+      "Rifampicin + Dapsone + Clofazimine",
+      "12 months of therapy (12 blister packs)"
+     ],
+     [
+      "Relapse / Refractory",
+      "Second-line ofloxacin / minocycline",
+      "24 months under specialist supervision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Ridley Jopling runs from tuberculoid with strong cell mediated immunity to lepromatous with absent immunity and heavy bacillary load. Paucibacillary means 1 to 5 lesions, at most one nerve and negative smears; six or more lesions or any positive smear means multibacillary. Rifampicin 600 mg monthly supervised kills 99.9 percent of viable bacilli.",
+   "say": "High-yield for the exam: Ridley Jopling runs from tuberculoid with strong cell mediated immunity to lepromatous with absent immunity and heavy bacillary load. Paucibacillary means 1 to 5 lesions, at most one nerve and negative smears; six or more lesions or any positive smear means multibacillary. Rifampicin 600 mg monthly supervised kills 99.9 percent of viable bacilli.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Ridley Jopling poles",
+      "TT strong immunity; LL absent immunity"
+     ],
+     [
+      "PB lesion count",
+      "1 to 5 lesions, smear negative"
+     ],
+     [
+      "MB lesion count",
+      "6 or more lesions, or smear positive"
+     ],
+     [
+      "PB nerve limit",
+      "At most one nerve trunk involved"
+     ],
+     [
+      "Rifampicin dose",
+      "600 mg monthly supervised, day one"
+     ],
+     [
+      "Dapsone dose",
+      "100 mg daily self administered"
+     ],
+     [
+      "PB pack duration",
+      "Green pack: 6 packs within 9 months"
+     ],
+     [
+      "MB pack duration",
+      "Pink pack: 12 packs within 18 months"
+     ]
     ]
    }
   }

@@ -21,12 +21,32 @@
    "say": "Electrophoresis and HPLC diagnose definitively, separating S from its mimics on two media. Trait is usually asymptomatic except renal rarities, while SC disease adds retinopathy and osteonecrosis patterns.",
    "vis": {
     "kind": "table",
-    "cols": ["Genotype", "Haemoglobins present", "Severity sketch"],
+    "cols": [
+     "Genotype",
+     "Haemoglobins present",
+     "Severity sketch"
+    ],
     "rows": [
-     ["AS trait", "A greater than S", "Carrier, counselling, rare renal events"],
-     ["SS disease", "S dominant, F variable, A absent", "Severe haemolysis and occlusion"],
-     ["SC disease", "S equals C", "Milder anaemia, eye and bone events"],
-     ["S-beta thalassaemia", "S plus A low or absent (by beta type)", "Grades between trait and SS"]
+     [
+      "AS trait",
+      "A greater than S",
+      "Carrier, counselling, rare renal events"
+     ],
+     [
+      "SS disease",
+      "S dominant, F variable, A absent",
+      "Severe haemolysis and occlusion"
+     ],
+     [
+      "SC disease",
+      "S equals C",
+      "Milder anaemia, eye and bone events"
+     ],
+     [
+      "S-beta thalassaemia",
+      "S plus A low or absent (by beta type)",
+      "Grades between trait and SS"
+     ]
     ]
    }
   },
@@ -35,8 +55,21 @@
    "say": "Alpha deletions grade from silent carrier to lethal hydrops by gene count, while beta trait raises HbA2 characteristically. Major disease expands marrow and overloads iron through transfusions and absorption.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Alpha thalassaemia (deletions)", "points": ["Genes lost 1 to 4 grade disease", "HbH (beta4) and Bart (gamma4) tetramers", "Newborn Bart screening clue"]},
-    "right": {"title": "Beta thalassaemia (mutations)", "points": ["Trait: microcytosis, HbA2 high", "Major: transfusion, iron chelation", "Marrow expansion facies and bones"]
+    "left": {
+     "title": "Alpha thalassaemia (deletions)",
+     "points": [
+      "Genes lost 1 to 4 grade disease",
+      "HbH (beta4) and Bart (gamma4) tetramers",
+      "Newborn Bart screening clue"
+     ]
+    },
+    "right": {
+     "title": "Beta thalassaemia (mutations)",
+     "points": [
+      "Trait: microcytosis, HbA2 high",
+      "Major: transfusion, iron chelation",
+      "Marrow expansion facies and bones"
+     ]
     }
    }
   },
@@ -50,12 +83,32 @@
    "say": "Methaemoglobinaemia oxidises iron to ferric with chocolate blood staying brown on paper. Co-oximetry measures it while pulse oximetry plateaus deceptively near eighty five percent regardless of severity.",
    "vis": {
     "kind": "table",
-    "cols": ["Cause family", "Prototype", "Methylene blue response"],
+    "cols": [
+     "Cause family",
+     "Prototype",
+     "Methylene blue response"
+    ],
     "rows": [
-     ["Reductase deficiency (recessive)", "Cytochrome b5 reductase", "Works (needs NADPH pathway intact)"],
-     ["Haemoglobin M (dominant)", "His to Tyr near heme", "No (enzyme normal, globin locked)"],
-     ["Acquired oxidants", "Benzocaine, dapsone, nitrites", "Works; avoid in G6PD deficiency (haemolysis)"],
-     ["Sulfhaemoglobin (irreversible)", "Sulfur incorporation, drugs", "No; time and support only"]
+     [
+      "Reductase deficiency (recessive)",
+      "Cytochrome b5 reductase",
+      "Works (needs NADPH pathway intact)"
+     ],
+     [
+      "Haemoglobin M (dominant)",
+      "His to Tyr near heme",
+      "No (enzyme normal, globin locked)"
+     ],
+     [
+      "Acquired oxidants",
+      "Benzocaine, dapsone, nitrites",
+      "Works; avoid in G6PD deficiency (haemolysis)"
+     ],
+     [
+      "Sulfhaemoglobin (irreversible)",
+      "Sulfur incorporation, drugs",
+      "No; time and support only"
+     ]
     ]
    }
   },
@@ -66,12 +119,82 @@
     "kind": "flow",
     "title": "Cyanosis at the bedside",
     "nodes": [
-     {"id": "cyan", "label": "Cyanosed, oxygen unresponsive"},
-     {"id": "blood", "label": "Blood chocolate brown, stays brown"},
-     {"id": "coox", "label": "Co-oximetry: methaemoglobin percent"},
-     {"id": "rx", "label": "Methylene blue unless G6PD or HbM"}
+     {
+      "id": "cyan",
+      "label": "Cyanosed, oxygen unresponsive"
+     },
+     {
+      "id": "blood",
+      "label": "Blood chocolate brown, stays brown"
+     },
+     {
+      "id": "coox",
+      "label": "Co-oximetry: methaemoglobin percent"
+     },
+     {
+      "id": "rx",
+      "label": "Methylene blue unless G6PD or HbM"
+     }
     ],
-    "edges": [["cyan", "blood"], ["blood", "coox"], ["coox", "rx"]]
+    "edges": [
+     [
+      "cyan",
+      "blood"
+     ],
+     [
+      "blood",
+      "coox"
+     ],
+     [
+      "coox",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Sickle cell anaemia results from a missense mutation substituting valine for glutamic acid at codon six of the beta globin chain. Deoxygenated HbS polymerises, producing sickling and vaso-occlusive crises. Methaemoglobinaemia features ferric iron unable to bind oxygen, presenting with chocolate-coloured blood and refractory cyanosis. The emergency antidote is intravenous methylene blue, which reduces iron via NADPH-dependent methaemoglobin reductase.",
+   "say": "Sickle cell anaemia results from a missense mutation substituting valine for glutamic acid at codon six of the beta globin chain. Deoxygenated HbS polymerises, producing sickling and vaso-occlusive crises. Methaemoglobinaemia features ferric iron unable to bind oxygen, presenting with chocolate-coloured blood and refractory cyanosis. The emergency antidote is intravenous methylene blue, which reduces iron via NADPH-dependent methaemoglobin reductase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "HbS mutation",
+      "Glutamic acid replaced by valine at position beta six"
+     ],
+     [
+      "Sickling trigger",
+      "Polymerisation of deoxyhaemoglobin in low oxygen or acidosis"
+     ],
+     [
+      "Methaemoglobin iron state",
+      "Oxidised ferric Fe3+ iron cannot bind molecular oxygen"
+     ],
+     [
+      "Classic physical sign",
+      "Chocolate-brown coloured blood that does not redden with oxygen"
+     ],
+     [
+      "First-line antidote",
+      "Intravenous methylene blue at 1 to 2 mg per kg"
+     ],
+     [
+      "G6PD deficiency caveat",
+      "Methylene blue is ineffective and contraindicated causing severe haemolysis"
+     ],
+     [
+      "Screening investigation",
+      "Dithionite sodium metabisulphite solubility test detects HbS polymerisation"
+     ],
+     [
+      "Diagnostic confirmation",
+      "Haemoglobin electrophoresis or high-performance liquid chromatography"
+     ]
+    ]
    }
   }
  ],

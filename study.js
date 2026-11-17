@@ -902,14 +902,14 @@
   function removeLassoBar() {
     var b = host && host.root() && host.root().querySelector("#stLassoBar");
     if (b && b.parentNode) b.parentNode.removeChild(b);
+    if (host && host.root() && host.root().classList) host.root().classList.remove("st-lasso-on");
     // Phase 2 hook: study-select.js sub-panels clear with the bar.
     if (G.STUDY_SELECT && G.STUDY_SELECT.removePanels) { try { G.STUDY_SELECT.removePanels(host && host.root()); } catch (e) {} }
   }
   function lassoChipsHtml() {
     return '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-explain">' + ICO.sparkle + ' Explain</button>' +
       '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-summary">' + ICO.sparkle + ' Key summary</button>' +
-      '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-make">' + ICO.book + ' Make deck</button>' +
-      '<button type="button" class="pn-btn sm" data-act="st-lasso-save-elem">' + ICO.star + ' Save Element</button>';
+      '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-make">' + ICO.book + ' Make deck</button>';
   }
   function showLassoBar() {
     // Phase 2 hook: extended menu lives in study-select.js; this keeps working without it (OPTIONAL skip).
@@ -922,7 +922,11 @@
           var chips = D.createElement("div");
           chips.className = "st-lasso-chips";
           chips.innerHTML = lassoChipsHtml();
-          sbar.insertBefore(chips, sbar.firstChild);
+          sbar.appendChild(chips);
+          if (host.root() && host.root().classList) host.root().classList.add("st-lasso-on");
+          if (G.STUDY_SELECT.positionLassoBar) {
+            G.STUDY_SELECT.positionLassoBar(inkApi(V && V.cur ? V.cur : 1, null), sbar);
+          }
         }
         return;
       } catch (e) {}
@@ -933,13 +937,14 @@
     div.id = "stLassoBar";
     div.className = "st-lasso-bar";
     div.innerHTML =
-      '<div class="st-lasso-chips">' + lassoChipsHtml() + '</div>' +
       '<div class="st-lasso-actions">' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-copy">' + ICO.copy + ' Duplicate</button>' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-color">' + ICO.palette + ' Recolour</button>' +
-        '<button type="button" class="pn-btn sm bad" data-act="st-lasso-del">' + ICO.trash + ' Delete</button>' +
-        '<button type="button" class="pn-btn sm" data-act="st-lasso-done">' + ICO.check + ' Done</button>' +
-      '</div>';
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-cut">' + ICO.copy + ' <span class="st-sel-lbl">Cut</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-clipcopy">' + ICO.copy + ' <span class="st-sel-lbl">Copy</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn bad" data-act="st-lasso-del">' + ICO.trash + ' <span class="st-sel-lbl">Delete</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-copy">' + ICO.copy + ' <span class="st-sel-lbl">Duplicate</span></button>' +
+        '<button type="button" class="pn-btn sm st-sel-btn" data-act="st-lasso-color">' + ICO.palette + ' <span class="st-sel-lbl">Color</span></button>' +
+      '</div>' +
+      '<div class="st-lasso-chips">' + lassoChipsHtml() + '</div>';
     host.root().appendChild(div);
   }
 
@@ -1032,6 +1037,8 @@
 
   function showMoreMenu() {
     closeMoreMenu();
+    var p3m = host && host.root() && host.root().querySelector("#stP3MoreSheet");
+    if (p3m && p3m.parentNode) p3m.parentNode.removeChild(p3m);
     if (!V) return;
     var d = V.doc, isNb = !!V.nb;
     var el = D.createElement("div");
@@ -1046,10 +1053,18 @@
       '</div>' +
       '<div class="st-more-sec">' +
         '<div class="st-more-sec-title">Study AI</div>' +
-        (isNb ?
+          '<button type="button" class="st-menu-item" data-act="st-ai-explain-page">' +
+            '<div class="st-menu-ico">' + ICO.sparkle + '</div>' +
+            '<div class="st-menu-txt"><strong>Explain this page</strong><small>Explain the current page</small></div>' +
+          '</button>' +
           '<button type="button" class="st-menu-item" data-act="st-ai-summary">' +
             '<div class="st-menu-ico">' + ICO.sparkle + '</div>' +
             '<div class="st-menu-txt"><strong>Key summary</strong><small>Summarize page notes</small></div>' +
+          '</button>' +
+        (isNb ?
+          '<button type="button" class="st-menu-item" data-act="st-ai-make">' +
+            '<div class="st-menu-ico">' + ICO.book + '</div>' +
+            '<div class="st-menu-txt"><strong>Make deck</strong><small>Flashcards and questions from this notebook</small></div>' +
           '</button>' :
           '<div class="st-more-field">' +
             '<label class="st-more-label">Pages range: <input id="stRange" class="st-range-input" type="text" placeholder="this page (e.g. 1-3)" aria-label="Pages to use"></label>' +
@@ -1145,8 +1160,7 @@
     get("docs", id).then(function (d) {
       if (!d) return h.back();
       d.lastOpened = Date.now(); put("docs", d);
-      h.paint(h.bar(h.esc(d.title), d.pageCount + (d.pageCount === 1 ? " page" : " pages"), "back") +
-        '<div class="pn-body st-body">' +
+      h.paint('<div class="pn-body st-body">' +
           toolbarHtml(d) +
           '<div class="st-sc" id="stSc">' +
             '<div class="st-pages" id="stPages"></div>' +
@@ -1180,19 +1194,7 @@
           b("st-tool", ICO.laser, "laser", ' title="Laser pointer" aria-label="Laser pointer"') +
         '</div>' +
       '</div>' +
-      '<div class="st-tb-group st-tb-history">' +
-        b("st-undo", ICO.undo, null, ' id="stUndo" title="Undo" aria-label="Undo" disabled') +
-        b("st-redo", ICO.redo, null, ' id="stRedo" title="Redo" aria-label="Redo" disabled') +
-      '</div>' +
-      '<div class="st-tb-group st-tb-page">' +
-        '<button type="button" class="st-b st-pj-btn" data-act="st-page-sheet" title="Thumbnails and pages" aria-label="Pages overview">' +
-          '<span id="stCurP">' + cp + '</span><span class="st-pj-slash"> / </span><span id="stTotP">' + d.pageCount + '</span>' +
-        '</button>' +
-        '<input id="stTbPage" type="hidden" value="' + cp + '">' +
-      '</div>' +
-      '<div class="st-tb-group st-tb-more">' +
-        b("st-more", ICO.more, null, ' title="More options" aria-label="More options"') +
-      '</div>' +
+      '<input id="stTbPage" type="hidden" value="' + cp + '">' +
     '</div>' +
     colorStripHtml() +
     '<div id="stInsertOptions"></div>';
@@ -1246,20 +1248,7 @@
     }
     V.box.appendChild(f);
 
-    // AI Study Assistant box below pages (Ref 2)
-    var aiBox = D.createElement("div");
-    aiBox.className = "st-ai-box smd-books-keep smd-emo-keep";
-    aiBox.innerHTML = '<div class="st-ai-head">' +
-      '<div class="st-ai-title">' + ICO.sparkle + '<span>Study Assistant</span></div>' +
-      '<small>Generate study materials or explain concepts from this document</small>' +
-    '</div>' +
-    '<div class="st-ai-chips">' +
-      '<button type="button" class="st-ai-chip" data-act="st-ai-explain-page">' + ICO.sparkle + ' Explain this page</button>' +
-      (V.nb ? "" : '<button type="button" class="st-ai-chip" data-act="st-ai-make">' + ICO.book + ' Make flashcards &amp; questions</button>') +
-      '<button type="button" class="st-ai-chip" data-act="st-ai-summary">' + ICO.sparkle + ' Key summary</button>' +
-    '</div>';
-    V.box.appendChild(aiBox);
-
+    // Study Assistant lives in the More menu (st-more / top-bar More), not over the page.
     V.io = new G.IntersectionObserver(function (es) {
       es.forEach(function (e) { var n = +e.target.getAttribute("data-n"); if (e.isIntersecting) renderPage(n); else freePage(n); });
     }, { root: V.sc, rootMargin: "150% 0px 150% 0px" });

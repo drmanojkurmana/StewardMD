@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "Sterol assembly line",
     "nodes": [
-     {"id": "aco", "label": "Acetyl-CoA (cytosol)"},
-     {"id": "hmg", "label": "HMG-CoA"},
-     {"id": "mev", "label": "Mevalonate (reductase step)"},
-     {"id": "cho", "label": "Cholesterol (rings closed)"}
+     {
+      "id": "aco",
+      "label": "Acetyl-CoA (cytosol)"
+     },
+     {
+      "id": "hmg",
+      "label": "HMG-CoA"
+     },
+     {
+      "id": "mev",
+      "label": "Mevalonate (reductase step)"
+     },
+     {
+      "id": "cho",
+      "label": "Cholesterol (rings closed)"
+     }
     ],
-    "edges": [["aco", "hmg"], ["hmg", "mev"], ["mev", "cho"]]
+    "edges": [
+     [
+      "aco",
+      "hmg"
+     ],
+     [
+      "hmg",
+      "mev"
+     ],
+     [
+      "mev",
+      "cho"
+     ]
+    ]
    }
   },
   {
@@ -25,12 +50,32 @@
    "say": "HMG-CoA reductase is controlled by SREBP transcription, covalent switching, degradation and esterification. Statins competitively inhibit this step, lowering liver cholesterol until LDL receptors multiply to clear blood LDL.",
    "vis": {
     "kind": "table",
-    "cols": ["Control layer", "Signal", "Reductase result"],
+    "cols": [
+     "Control layer",
+     "Signal",
+     "Reductase result"
+    ],
     "rows": [
-     ["Transcription (SREBP)", "Low sterols release SREBP", "More enzyme made"],
-     ["Covalent", "Insulin on, glucagon off", "Activity follows feeding"],
-     ["Degradation", "Sterols accelerate destruction", "Enzyme half life shortens"],
-     ["Drug", "Statins compete at active site", "LDL receptors up, LDL falls"]
+     [
+      "Transcription (SREBP)",
+      "Low sterols release SREBP",
+      "More enzyme made"
+     ],
+     [
+      "Covalent",
+      "Insulin on, glucagon off",
+      "Activity follows feeding"
+     ],
+     [
+      "Degradation",
+      "Sterols accelerate destruction",
+      "Enzyme half life shortens"
+     ],
+     [
+      "Drug",
+      "Statins compete at active site",
+      "LDL receptors up, LDL falls"
+     ]
     ]
    }
   },
@@ -39,8 +84,21 @@
    "say": "Cytosolic HMG-CoA feeds cholesterol, while mitochondrial HMG-CoA feeds ketones during fasting. Same name, opposite compartments and opposite states. Mevalonate also supplies isoprenoids for ubiquinone and prenylation.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Cytosolic HMG-CoA (fed)", "points": ["To mevalonate and cholesterol", "Reductase statin target", "Insulin favoured"]},
-    "right": {"title": "Mitochondrial HMG-CoA (fasting)", "points": ["To ketone bodies", "Lyase releases acetoacetate", "Glucagon favoured"]
+    "left": {
+     "title": "Cytosolic HMG-CoA (fed)",
+     "points": [
+      "To mevalonate and cholesterol",
+      "Reductase statin target",
+      "Insulin favoured"
+     ]
+    },
+    "right": {
+     "title": "Mitochondrial HMG-CoA (fasting)",
+     "points": [
+      "To ketone bodies",
+      "Lyase releases acetoacetate",
+      "Glucagon favoured"
+     ]
     }
    }
   },
@@ -54,11 +112,27 @@
    "say": "Bile salts recycle six to ten times daily, with ileal transporters reclaiming about ninety five percent. Sequestrants interrupt recycling and multiply LDL receptors. Gallstones form when cholesterol supersaturates bile.",
    "vis": {
     "kind": "table",
-    "cols": ["Intervention", "Bile circuit effect", "LDL result"],
+    "cols": [
+     "Intervention",
+     "Bile circuit effect",
+     "LDL result"
+    ],
     "rows": [
-     ["Cholestyramine (resin)", "Faecal bile loss up", "Receptors up, LDL down"],
-     ["Ileal resection or Crohn disease", "Recycling broken", "Bile diarrhoea, stones risk"],
-     ["Statin plus resin", "Synthesis and loss combined", "Additive LDL fall"]
+     [
+      "Cholestyramine (resin)",
+      "Faecal bile loss up",
+      "Receptors up, LDL down"
+     ],
+     [
+      "Ileal resection or Crohn disease",
+      "Recycling broken",
+      "Bile diarrhoea, stones risk"
+     ],
+     [
+      "Statin plus resin",
+      "Synthesis and loss combined",
+      "Additive LDL fall"
+     ]
     ]
    }
   },
@@ -69,12 +143,82 @@
     "kind": "flow",
     "title": "Five fates of cholesterol",
     "nodes": [
-     {"id": "cho", "label": "Cholesterol pool"},
-     {"id": "mem", "label": "Membranes and myelin"},
-     {"id": "bile", "label": "Bile acids and salts"},
-     {"id": "hor", "label": "Steroids and vitamin D"}
+     {
+      "id": "cho",
+      "label": "Cholesterol pool"
+     },
+     {
+      "id": "mem",
+      "label": "Membranes and myelin"
+     },
+     {
+      "id": "bile",
+      "label": "Bile acids and salts"
+     },
+     {
+      "id": "hor",
+      "label": "Steroids and vitamin D"
+     }
     ],
-    "edges": [["cho", "mem"], ["cho", "bile"], ["cho", "hor"]]
+    "edges": [
+     [
+      "cho",
+      "mem"
+     ],
+     [
+      "cho",
+      "bile"
+     ],
+     [
+      "cho",
+      "hor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Cholesterol biosynthesis begins with two acetyl-CoA molecules and proceeds via cytosolic HMG-CoA synthase. The rate-limiting committed step is catalyzed by microsomal HMG-CoA reductase, producing mevalonate. Statins act as competitive, reversible inhibitors of HMG-CoA reductase, upregulating hepatic LDL receptors. Rate-limiting bile acid synthesis relies on 7-alpha-hydroxylase, which is inhibited by bile salts and stimulated by cholesterol.",
+   "say": "High-yield for the exam: Cholesterol biosynthesis begins with two acetyl-CoA molecules and proceeds via cytosolic HMG-CoA synthase. The rate-limiting committed step is catalyzed by microsomal HMG-CoA reductase, producing mevalonate. Statins act as competitive, reversible inhibitors of HMG-CoA reductase, upregulating hepatic LDL receptors. Rate-limiting bile acid synthesis relies on 7-alpha-hydroxylase, which is inhibited by bile salts and stimulated by cholesterol.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate-limiting cholesterol step",
+      "HMG-CoA reductase converts HMG-CoA to mevalonate using two NADPH"
+     ],
+     [
+      "HMG-CoA pool distinction",
+      "Cytosolic enzyme makes cholesterol; mitochondrial enzyme makes ketones"
+     ],
+     [
+      "Statin mechanism of action",
+      "Structural analogue competitively inhibiting HMG-CoA reductase"
+     ],
+     [
+      "Transcriptional cholesterol sensor",
+      "SREBP-SCAP complex translocates to Golgi when sterol levels drop"
+     ],
+     [
+      "Bile acid rate-limiting enzyme",
+      "Cholesterol 7-alpha-hydroxylase, a microsomal cytochrome P450 enzyme"
+     ],
+     [
+      "Primary bile acids",
+      "Cholic acid and chenodeoxycholic acid synthesized in hepatocytes"
+     ],
+     [
+      "Secondary bile acids",
+      "Deoxycholic acid and lithocholic acid formed by colonic bacteria"
+     ],
+     [
+      "Enterohepatic circulation",
+      "Over 95 percent of bile salts reabsorbed in terminal ileum"
+     ]
+    ]
    }
   }
  ],
