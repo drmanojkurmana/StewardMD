@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "sgm-airway-procedures",
+ "subject": "ss-general-medicine",
+ "title": "Airway management and ICU procedures",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "The **airway** means the passage from lips to carina that must stay open for oxygen to reach alveoli. About 10 to 15 cm of upper airway can collapse within minutes when tone is lost. Normal tidal volume for adults is four hundred to five hundred mL and normal alveolar ventilation needs PaO2 above 60 mmHg with SpO2 above ninety-two percent.",
+   "say": "The airway is the passage that carries oxygen to the lungs. Normal tidal volume at rest is about four hundred to five hundred millilitres. Oxygen saturation should stay above ninety two percent when the airway is open.",
+   "vis": null
+  },
+  {
+   "tx": "Causes include reduced **consciousness** from 5 major groups: trauma, stroke, seizure, overdose and metabolic failure. Risk factors are 3 age extremes, obesity with BMI above 30, short neck, full stomach after 6 hours, and airway oedema from infection, anaphylaxis or burns. Male sex and emergency setting double aspiration risk.",
+   "say": "Many causes can block the airway and stop oxygen from reaching the lungs. Trauma and stroke affect consciousness and reduce muscle tone. Obesity and a short neck increase the risk of collapse. A full stomach also makes aspiration more likely during attempts.",
+   "vis": null
+  },
+  {
+   "tx": "The **mechanism** starts when upper airway dilator muscles lose tone and the tongue falls back to the posterior pharynx. Negative inspiratory pressure then sucks soft tissues inward, while surfactant loss and atelectasis raise closing volume by twenty percent. Partial obstruction causes stridor, complete obstruction causes silent apnoea with desaturation within 4 to 6 minutes.",
+   "say": "When muscle tone falls, the tongue slips back and blocks the pharynx. Breathing in pulls soft tissue inward. Complete blockage leads to silent apnoea and fast desaturation over a few minutes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Loss of airway tone"
+     },
+     {
+      "id": "b",
+      "label": "Tongue falls back",
+      "sub": "posterior pharynx"
+     },
+     {
+      "id": "c",
+      "label": "Obstruction",
+      "sub": "partial or complete"
+     },
+     {
+      "id": "d",
+      "label": "Hypoxia"
+     },
+     {
+      "id": "e",
+      "label": "Intubation or tracheostomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical features include noisy breathing, stridor, accessory muscle use, falling consciousness within 2 minutes and absent chest movement in complete obstruction. Look for **classic sign** of direct laryngoscopy showing a Cormack Lehane grade 1 to 4 view. Airway exam uses 3 finger test, Mallampati class 1 to 4, mouth opening below 3 cm and thyromental distance below 6 cm.",
+   "say": "Blocked airways are noisy, with stridor and accessory muscle use. Consciousness falls after about two minutes without oxygen. Direct laryngoscopy grades the view from one to four.",
+   "vis": null
+  },
+  {
+   "tx": "First test is bedside assessment with SpO2, respiratory rate and auscultation, followed by arterial blood gas showing PaCO2 above fifty mmHg in hypoventilation. **Gold standard** for glottic view is video laryngoscopy or fibreoptic bronchoscopy with capnography waveform confirmation. Chest X ray confirms tube position above carina by 2 to 3 cm. Ultrasound confirms cords and tube in trachea.",
+   "say": "The first checks are saturation, respiratory rate and listening to the chest. Blood gas shows gas retention when ventilation fails. Video laryngoscopy gives the clearest glottic view.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Airway device",
+     "Best use",
+     "Cuff pressure"
+    ],
+    "rows": [
+     [
+      "Face mask and bag",
+      "Short airway support",
+      "No cuff"
+     ],
+     [
+      "Supraglottic airway",
+      "Rescue and safe hands",
+      "fifteen to twenty-five cmH2O"
+     ],
+     [
+      "Endotracheal tube",
+      "Definitive airway",
+      "twenty to thirty cmH2O"
+     ],
+     [
+      "Tracheostomy tube",
+      "Prolonged ventilation",
+      "twenty to thirty cmH2O"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line for emergency airway is rapid sequence intubation with **sedative agent** zero point three mg per kg or ketamine 1 to 2 mg per kg plus rocuronium 1.2 mg per kg. Give suxamethonium 1 to 1.5 mg per kg when no contraindication. Maintain cuff pressure at twenty to thirty cmH2O and confirm with capnography showing sustained ETCO2 thirty-five to forty-five mmHg for at least 6 breaths.",
+   "say": "Rapid sequence intubation needs a sedative plus a muscle relaxant. A sedative agent helps keep blood pressure stable. Capnography must show exhaled gas for at least six breaths.",
+   "vis": null
+  },
+  {
+   "tx": "Refractory airway failure needs **awake fibreoptic intubation** with topical local anaesthetic 2% and sedative 1 to 2 mg sedation. Use ventilator settings with tidal volume 6 mL per kg predicted weight and PEEP 5 to 10 cmH2O. Perform tracheostomy after seven to fourteen days of prolonged ventilation. Declare surgical airway when intubation fails after 3 attempts or 10 minutes of hypoxia.",
+   "say": "Difficult airways need awake fibreoptic intubation with local anaesthetic and light sedation. Lung protective volumes are six millilitres per kilogram. Tracheostomy is planned after one to two weeks of ventilation.",
+   "vis": null
+  },
+  {
+   "tx": "Choose the device by anatomy and duration of need. **Comparison** guides rescue choice when the first attempt fails after 3 tries. Orotracheal tubes suit short term use for up to fourteen days, while tracheostomy suits beyond twenty-one days or laryngeal injury. Nasotracheal tubes help facial trauma but raise sinusitis risk by 15%.",
+   "say": "The device choice depends on anatomy and how long ventilation is needed. Short term tubes are orotracheal for brief ventilation. Tracheostomy is needed for long ventilation or laryngeal injury.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Orotracheal tube",
+     "points": [
+      "Use up to fourteen days",
+      "Fastest definitive airway",
+      "Higher VAP and sinusitis risk"
+     ]
+    },
+    "right": {
+     "title": "Tracheostomy tube",
+     "points": [
+      "Use beyond twenty-one days",
+      "Less sedation and injury",
+      "Surgical airway in emergency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **aspiration** in 5% to twenty percent of emergency cases, dental trauma in 2%, hypoxia below SpO2 80% during attempts, and bronchial intubation causing one lung ventilation. Subglottic stenosis occurs in 5% after prolonged cuff pressure above 30 cmH2O. Prognosis is good when tube is placed within 10 minutes, with mortality near 10% in elective cases.",
+   "say": "Complications occur in five to twenty percent of emergency cases. Dental trauma occurs in about two percent of cases. Prognosis is good when the tube is placed quickly.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis improves with early **capnography confirmation** within 6 breaths and cuff pressure kept at twenty to thirty cmH2O. Failure to confirm tube position with auscultation alone raises mortality 2 fold. Early tracheostomy after fourteen days cuts sedation days by 3 to 5 days. Long term stenosis risk is highest with smokers and patients ventilated beyond twenty-one days.",
+   "say": "Confirmation by capnography improves safety for every ventilated patient. Cuff pressure must stay controlled throughout ventilation. Early tracheostomy reduces sedation and speeds weaning after two weeks.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** table for airway management and ICU procedures in seven high yield points. Remember tidal volume 6 mL per kg, cuff pressure twenty to thirty cmH2O, ETCO2 thirty-five to forty-five mmHg and desaturation below SpO2 80% as failure point. Tracheostomy is planned after seven to fourteen days and surgical airway after 3 failed attempts.",
+   "say": "This table collects the numbers you must quote in the exam. Remember tidal volume, cuff pressure and the failed airway rule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "Number to recall",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Tidal volume",
+      "6 mL per kg",
+      "Lung protective ventilation"
+     ],
+     [
+      "Cuff pressure",
+      "twenty to thirty cmH2O",
+      "Avoid stenosis"
+     ],
+     [
+      "ETCO2 target",
+      "thirty-five to forty-five mmHg",
+      "Confirm tube 6 breaths"
+     ],
+     [
+      "Rapid sequence dose",
+      "Rocuronium 1.2 mg per kg",
+      "30 to 60 seconds onset"
+     ],
+     [
+      "Ventilation duration",
+      "seven to fourteen days",
+      "Tracheostomy decision"
+     ],
+     [
+      "Failed airway",
+      "After 3 attempts",
+      "Supraglottic rescue"
+     ],
+     [
+      "VAP risk",
+      "Up to twenty percent",
+      "HLL elevation 30 degrees"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

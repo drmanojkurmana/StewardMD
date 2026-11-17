@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-bloodstream",
+ "subject": "ss-general-medicine",
+ "title": "Bloodstream infections and Staphylococcus aureus bacteraemia",
+ "minutes": 11,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Bloodstream infection** is viable organisms circulating in blood with fever. **Staphylococcus aureus bacteraemia** means **S aureus** in blood culture and needs **14 days** therapy. **Catheter related infection** accounts for **30% of cases** in hospitals. **Persistent bacteraemia** beyond **72 hours** suggests **endocarditis** in most patients.",
+   "say": "Bloodstream infection is viable organisms circulating in blood and causes fever. Staphylococcus aureus bacteraemia means the organism is found in blood culture and needs fourteen days of therapy. Catheter related infection accounts for about one third of cases in hospitals. Persistent bacteraemia beyond three days suggests endocarditis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MSSA bacteraemia",
+     "points": [
+      "Sensitive to methicillin drugs",
+      "Cefazolin is preferred treatment",
+      "Mortality about fifteen percent",
+      "Persistent fever suggests endocarditis"
+     ]
+    },
+    "right": {
+     "title": "MRSA bacteraemia",
+     "points": [
+      "Resistant to methicillin drugs",
+      "Vancomycin is first line treatment",
+      "Mortality about thirty percent",
+      "Daptomycin is alternative therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Central venous catheter** is the **commonest source** in hospital bacteraemia. **Intravenous drug use** causes **S aureus bacteraemia** in **20% of cases** globally. **Indwelling devices** like pacemakers carry **twenty-five percent risk** of infection after implantation. **Prosthetic joints** develop **haematogenous infection** in **1% of arthroplasty** cases.",
+   "say": "A central venous catheter is the commonest source of hospital bacteraemia. Intravenous drug use causes aureus bacteraemia in about one fifth of cases globally. Indwelling devices such as pacemakers carry a substantial risk of infection after implantation. Prosthetic joints can develop blood stream infection in a small percentage of cases.",
+   "vis": null
+  },
+  {
+   "tx": "**Adhesion proteins** bind **fibrinogen and fibronectin** on catheter surfaces strongly. **Biofilm formation** protects bacteria from **vancomycin** within **48 hours** of initial attachment. **Exotoxins** like **panton valentine leucocidin** damage **white cells** in severe cases. **Surface protein A** blocks **phagocytosis** by neutrophils very effectively daily.",
+   "say": "Adhesion proteins bind fibrinogen and fibronectin on catheter surfaces. Biofilm formation can protect bacteria from antibiotics within a couple of days of attachment. Exotoxins can damage white cells in severe cases. Surface protein A blocks phagocytosis by neutrophils very effectively.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c",
+      "label": "Catheter colonisation",
+      "sub": "skin flora entry"
+     },
+     {
+      "id": "b",
+      "label": "Biofilm forms",
+      "sub": "within two days"
+     },
+     {
+      "id": "s",
+      "label": "Bloodstream spread",
+      "sub": "sustained bacteraemia"
+     },
+     {
+      "id": "m",
+      "label": "Metastatic focus",
+      "sub": "heart bone spine"
+     }
+    ],
+    "edges": [
+     [
+      "c",
+      "b"
+     ],
+     [
+      "b",
+      "s"
+     ],
+     [
+      "s",
+      "m"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fever with chills** is common in **S aureus bacteraemia** cases. **Sept ic emboli** on skin and retina suggest **endocarditis** in many patients. **Janeway lesions** with **Osler nodes** are the **classic sign** of endocarditis. **Splinter haemorrhages** under nails mark **embolic phenomenon** in bacteraemia.",
+   "say": "Fever with chills is common in aureus bacteraemia. Septic emboli on the skin and retina suggest endocarditis in many patients. Janeway lesions with Osler nodes are the classic signs of endocarditis. Splinter haemorrhages under nails suggest embolic phenomenon in bacteraemia.",
+   "vis": null
+  },
+  {
+   "tx": "**Two sets of blood cultures** are the **first test** before antibiotics start. **Gold standard** is **gallium scan** for **occult metastatic focus** detection. **Transthoracic echo** screens all **S aureus bacteraemia** within **24 hours**. **Transoesophageal echo** is needed when **transthoracic study** is negative but suspicion persists.",
+   "say": "Two sets of blood cultures are the first test before antibiotics start. A gallium scan is a useful gold standard for occult metastatic focus detection. Transthoracic echo can screen all aureus bacteraemia within a day. Transoesophageal echo is needed when the first echo is negative but suspicion persists.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Blood cultures",
+      "Confirm bacteraemia",
+      "Before antibiotics"
+     ],
+     [
+      "Transthoracic echo",
+      "Screen endocarditis",
+      "Within 24 hours"
+     ],
+     [
+      "Transoesophageal echo",
+      "Confirm vegetations",
+      "If first echo negative"
+     ],
+     [
+      "CT whole body",
+      "Find metastatic focus",
+      "Within 48 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vancomycin 15 mg per kg** every 8 to 12 hours covers **MRSA bacteraemia** empirically. **Cefazolin 2 g every 8 hours** is first line for **MSSA bacteraemia** with **better outcomes**. **A newer beta lactam** every twelve hours treats **MRSA** where **vancomycin fails** in trials. **Daptomycin 8 mg per kg** daily is an **alternative** for MRSA.",
+   "say": "Vancomycin dosed by body weight every eight to twelve hours covers MRSA bacteraemia empirically. Cefazolin every eight hours is first line for MSSA bacteraemia with better outcomes. A newer agent every twelve hours treats MRSA where vancomycin fails. Daptomycin daily by weight is an alternative for MRSA.",
+   "vis": null
+  },
+  {
+   "tx": "**Catheter removal within 24 hours** is first line for **line infection**. **Repeat blood culture** at **72 hours** guides **duration of therapy**. **An extra agent** twice daily is added for **prosthetic device** infection. **Routine extra agents** are **not recommended** in **native valve endocarditis** any more.",
+   "say": "Catheter removal within a day is first line for line infection. Repeat blood culture at three days guides the duration of therapy. An extra agent twice daily is added for prosthetic device infection. Routine extra agents are no longer recommended in native valve endocarditis.",
+   "vis": null
+  },
+  {
+   "tx": "**Infective endocarditis** develops in **one quarter of S aureus** bacteraemia cases seen worldwide. **Vertebral osteomyelitis** complicates **15% of persistent** bacteraemia episodes in adults. **Septic arthritis** occurs in **10% of cases** with prosthetic joints often. **Infective endocarditis mortality** reaches **30%** without **early surgery** intervention at all.",
+   "say": "Infective endocarditis develops in one quarter of aureus bacteraemia cases. Vertebral osteomyelitis complicates about fifteen percent of persistent bacteraemia episodes. Septic arthritis occurs in about one tenth of cases with prosthetic joints. Endocarditis mortality remains high without early surgery.",
+   "vis": null
+  },
+  {
+   "tx": "**Fourteen days therapy** from **first negative culture** treats uncomplicated bacteraemia. **Four to six weeks** is needed for **endocarditis** with **metastatic foci**. **Oral step down** therapy failed in **a large trial** for bacteraemia. **Repeat echo** at **7 days** guides **surgery timing** in severe cases.",
+   "say": "Fourteen days of therapy from the first negative culture treats uncomplicated bacteraemia. Four to six weeks is needed for endocarditis with metastatic foci. Oral step down with certain drugs failed in a large trial for bacteraemia. Repeat echo at one week guides surgery timing in severe cases.",
+   "vis": null
+  },
+  {
+   "tx": "**S aureus bacteraemia** is **never a contaminant** in blood culture. **Do not add routine extra agents** in **native valve endocarditis** as they worsen **renal function**. **Daptomycin cannot treat pneumonia** because **surfactant** inactivates the drug. **Cefazolin beats vancomycin** in **MSSA bacteraemia** mortality data.",
+   "say": "Staphylococcus aureus bacteraemia is never a contaminant in blood culture. Do not add routine extra agents in native valve endocarditis because they worsen kidney function. Daptomycin cannot treat pneumonia because surfactant in the lung inactivates the drug. Cefazolin can outperform vancomycin in MSSA bacteraemia.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** is the bacteraemia grid to memorise. **S aureus** in blood is **never contaminant**. **MSSA** needs **cefazolin** and **MRSA** needs **vancomycin**. **Echo within 24 hours** finds **endocarditis**. **Line removal** plus **14 days** for **uncomplicated** cases. **Daptomycin** fails in **lung** only.",
+   "say": "This is the high yield summary for exam revision on bacteraemia. Aureus found in blood is never a contaminant in practice. MSSA bacteraemia needs cefazolin while MRSA bacteraemia needs vancomycin. Echocardiography within a day finds endocarditis in most patients. Line removal plus fourteen days of therapy treats uncomplicated cases well. Daptomycin fails only in the lung in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "First drug",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "MSSA bacteraemia",
+      "Cefazolin 2 g",
+      "14 days"
+     ],
+     [
+      "MRSA bacteraemia",
+      "Vancomycin 15 mg",
+      "14 days"
+     ],
+     [
+      "Line infection",
+      "Remove catheter",
+      "14 days"
+     ],
+     [
+      "Endocarditis",
+      "Cefazolin or vancomycin",
+      "4 to 6 weeks"
+     ],
+     [
+      "Prosthetic valve",
+      "Add an extra agent",
+      "6 weeks"
+     ],
+     [
+      "Persistent fever",
+      "Repeat echo",
+      "Extend therapy"
+     ],
+     [
+      "Lung infection",
+      "Avoid daptomycin",
+      "Use vancomycin"
+     ]
+    ]
+   }
+  }
+ ]
+}
