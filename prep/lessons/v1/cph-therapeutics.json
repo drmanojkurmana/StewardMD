@@ -1,0 +1,322 @@
+{
+ "v": 1,
+ "module": "cph-therapeutics",
+ "subject": "ss-clinical-pharmacology",
+ "title": "Trials and prescribing: design, evidence and the prescription",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22nd edition",
+  "Nelson Textbook of Pediatrics 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "A **randomised controlled trial** tests whether a treatment changes an outcome in people placed into groups by chance. In a common pattern 400 adults receive Atorvastatin 20 mg or placebo for 12 weeks and heart attack rates are compared. The **controlled design** lets benefit be judged against the same period and care.",
+   "say": "A randomised controlled trial tests whether a treatment changes an outcome in people who are placed into groups by chance. In a common pattern four hundred adults receive a statin tablet daily or a dummy tablet for twelve weeks and heart attack rates are compared. That fair setup means we judge the new drug against usual care in the same time window.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Meaning",
+     "Exam cue"
+    ],
+    "rows": [
+     [
+      "Random allocation",
+      "Chance decides the group",
+      "Balances unknown factors"
+     ],
+     [
+      "Concurrent control",
+      "Same time and care",
+      "Cuts time related bias"
+     ],
+     [
+      "Prespecified plan",
+      "Fixed before starting",
+      "Stops data dredging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trials grow from **therapeutic uncertainty** when the best drug or dose is still unclear. Illness varies, so about 25 percent may improve in 4 weeks even without the new drug. Putting 2 similar groups in the same setting separates real drug action from natural recovery. **Aspirin** proved useful only after large trials replaced opinion in 1985.",
+   "say": "Trials grow from uncertainty when the best drug or dose is still unclear. Illness varies, so about one quarter may improve within four weeks even without the new drug. Putting two similar groups in the same setting separates real drug action from natural recovery. Aspirin proved useful only after large trials replaced opinion in nineteen eighty five.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "State the question"
+     },
+     {
+      "id": "b",
+      "label": "Enrol 200 patients"
+     },
+     {
+      "id": "c",
+      "label": "Randomise to drug or control"
+     },
+     {
+      "id": "d",
+      "label": "Follow for 6 months"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Randomisation** stops selection bias by making assignment unpredictable for each of 300 participants. **Blinding** stops observer bias by hiding allocation from patient and doctor. **Allocation concealment** keeps the next code hidden until entry. These 3 guards together protect **internal validity**, which means the result truly reflects the drug and not the method.",
+   "say": "Randomisation stops selection bias by making assignment unpredictable for each of three hundred participants. Hiding the drug name from patient and clinician cuts the chance that hopes skew the results. Keeping the next code sealed until the person joins preserves the unpredictability we need. These three guards together protect internal validity, which means the result truly reflects the drug and not the method.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Selection bias",
+     "points": [
+      "Sicker patients enter treatment arm",
+      "Fixed by randomisation",
+      "Cuts baseline differences"
+     ]
+    },
+    "right": {
+     "title": "Observer bias",
+     "points": [
+      "Doctor rates outcome loosely",
+      "Fixed by blinding",
+      "Needs objective endpoints"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **primary endpoint** is the single outcome the trial was powered to test, often 1 major event at 12 months. **Secondary endpoints** add extra signals like 5 quality measures and safety events. Primary results drive the main claim and need about 500 patients in many trials. Secondary findings only suggest new hypotheses for later 10 patient proof studies.",
+   "say": "The primary endpoint is the single outcome the trial was powered to test, often one major event at twelve months. Secondary endpoints add extra signals like five quality measures and safety events. Primary results drive the main claim and often need five hundred patients in many trials. Secondary findings only suggest new hypotheses for later proof studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endpoint type",
+     "Role",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Primary",
+      "Powers sample size",
+      "Death at 12 months"
+     ],
+     [
+      "Secondary",
+      "Adds clinical detail",
+      "Pain score at 4 weeks"
+     ],
+     [
+      "Safety",
+      "Harms tracking",
+      "Bleeding in 2 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intention to treat** analyses every patient in the group set at randomisation, counting all 250 randomised adults. **Per protocol** looks only at those who finish 8 weeks as planned. A drug like **Metoprolol** 50 mg helps in intention to treat if real world adherence is only 70 percent. Excluding dropouts after 3 weeks can falsely inflate benefit.",
+   "say": "Intention to treat analyses every patient in the group set at randomisation, counting all two hundred and fifty randomised adults. Per protocol looks only at those who finish eight weeks as planned. A drug like Metoprolol fifty milligrams daily helps in intention to treat if real world adherence is only seventy percent. Excluding dropouts can falsely inflate benefit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen 400 people"
+     },
+     {
+      "id": "b",
+      "label": "Randomise 250 adults"
+     },
+     {
+      "id": "c",
+      "label": "Follow everyone"
+     },
+     {
+      "id": "d",
+      "label": "Analyse by randomised group"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Number needed to treat** tells how many patients must receive treatment for 1 extra to benefit. If event falls from 20 percent to 15 percent in 100 patients, **NNT** is 20. The formula uses absolute risk reduction of 5 percent, which equals 0.05. **Lisinopril** 10 mg often shows NNT near 25 in hypertension trials over 2 years.",
+   "say": "Number needed to treat tells how many patients must receive treatment for one extra person to benefit. If the event falls from twenty percent to fifteen percent in one hundred patients, the number needed to treat is twenty. The formula uses absolute risk reduction of five percent. Lisinopril often shows a number near twenty five in hypertension trials over two years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Relative risk",
+     "points": [
+      "Compares 2 proportions",
+      "Large sounding effect",
+      "Hides baseline risk"
+     ]
+    },
+    "right": {
+     "title": "Number needed to treat",
+     "points": [
+      "Uses absolute difference",
+      "Guides real prescription",
+      "Needs time frame"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bioequivalence** means a generic gives the same drug exposure as the brand in 24 healthy volunteers. The 90 percent confidence interval for absorption must sit between 80 and 125 percent. **Bioavailability** and peak level must match within 20 percent. **Paracetamol** generics pass at 100 mg dose testing with 2 hour sampling in most cases.",
+   "say": "Bioequivalence means a generic gives the same drug exposure as the brand in twenty four healthy volunteers. The ninety percent confidence interval for absorption must sit between eighty and one hundred and twenty five percent. Bioavailability and peak level must match within twenty percent. Paracetamol generics pass at the usual dose testing with two hour sampling in most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Give brand 100 mg"
+     },
+     {
+      "id": "b",
+      "label": "Measure AUC and peak"
+     },
+     {
+      "id": "c",
+      "label": "Give generic 100 mg"
+     },
+     {
+      "id": "d",
+      "label": "Check 80 to 125 percent"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A legal **prescription** must state patient name, age 35 years, drug name **Amoxicillin**, dose 500 mg, route 3 times daily, duration 5 days, quantity and prescriber sign with 99 percent legibility need. Vague orders like 1 tablet cause most errors in 1000 charts. **Route of administration** and frequency fix the dose and prevent a 2 fold mistake.",
+   "say": "Every legal prescription must state patient name, age thirty five years, drug name Amoxicillin, dose five hundred milligrams, route three times daily, duration five days, quantity and prescriber sign. Vague orders like one tablet cause most errors in one thousand charts. Route of administration and frequency fix the dose and prevent a two fold mistake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Field",
+     "What to write",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Patient",
+      "Name and age",
+      "Age 35 years"
+     ],
+     [
+      "Drug and dose",
+      "Name plus mg",
+      "Amoxicillin 500 mg"
+     ],
+     [
+      "Schedule",
+      "Times and days",
+      "3 times for 5 days"
+     ],
+     [
+      "Sign",
+      "Name and date",
+      "Signed on day 1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Attrition bias** strikes when 15 percent leave before 6 months and sicker patients quit first. **Publication bias** hides null trials so only 1 of 3 positive studies reaches print. **Carryover** ruins 2 period crossover trials if the drug lasts 3 weeks. Checking dropout at 50 percent follow up and blinding by 2 raters guards validity.",
+   "say": "Attrition bias strikes when fifteen percent leave before six months and sicker patients quit first. Publication bias hides null trials so only one of three positive studies reaches print. Carryover ruins two period crossover trials if the drug lasts three weeks. Checking dropout at half follow up and blinding by two raters guards validity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Attrition bias",
+     "points": [
+      "Dropout differs by arm",
+      "Worse in long trials",
+      "Count every patient"
+     ]
+    },
+    "right": {
+     "title": "Publication bias",
+     "points": [
+      "Null trials stay hidden",
+      "Inflates pooled effect",
+      "Check trial registry"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield revision links design to care: randomise 1 to 1 in 200 patients to cut selection bias. **Primary endpoint** decides power while **secondary** only suggests ideas. Apply **NNT** of 20 for 5 percent gain and require bioequivalence 80 to 125 percent. Write 5 part prescriptions with Amoxicillin 500 mg 3 times daily for 5 days without error.",
+   "say": "High-yield for the exam, remember that randomisation in one to one design with two hundred patients cuts selection bias. The primary endpoint decides power while secondary endpoints only suggest ideas. Apply a number needed to treat of twenty for a five percent gain and require bioequivalence of eighty to one hundred and twenty five percent. Write five part prescriptions with the full dose three times daily for five days without error.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Idea",
+     "Number",
+     "Action"
+    ],
+    "rows": [
+     [
+      "NNT for 5 percent gain",
+      "20 patients",
+      "Prescribe with benefit"
+     ],
+     [
+      "Bioequivalence window",
+      "80 to 125 percent",
+      "Allow generic swap"
+     ],
+     [
+      "Prescription core",
+      "500 mg 3 times 5 days",
+      "Write, sign, date"
+     ]
+    ]
+   }
+  }
+ ]
+}

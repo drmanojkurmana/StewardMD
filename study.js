@@ -59,61 +59,132 @@
     }
     return insideCount > pts.length * 0.45;
   }
-  // Detects if a stroke is a fast back-and-forth scribble gesture
-  function isScribble(pts) {
+  // Strict scribble detector (phase P0, ink-loss fix). Handwriting like m, n, w, z, e, s must never read as a
+  // scribble: the stroke must clear every gate, any single miss keeps it as a normal stroke. Gates:
+  // >=6 reversals on the main axis, drawn in under 800 ms, path length >=4x the bbox diagonal, box width
+  // <25% of the page width, and >=30% of its points within 6 px of existing (not gone) ink.
+  // pts: [[x, y, pressure?, tMs?]] page-relative 0..1; opts: { durationMs, pageW, pageH, ink } where ink is
+  // an array of strokes { pts, gone } or raw pts arrays on the same page. Without page dimensions a 1000 px
+  // page is assumed for the 6 px tests. Missing duration or ink fails closed (not a scribble).
+  function ptDist2Seg(px, py, ax, ay, bx, by) {
+    var dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy, t = l ? ((px - ax) * dx + (py - ay) * dy) / l : 0;
+    t = t < 0 ? 0 : t > 1 ? 1 : t;
+    var cx = ax + t * dx - px, cy = ay + t * dy - py;
+    return cx * cx + cy * cy;
+  }
+  function segCross(a1, a2, b1, b2) {
+    function o(p, q, r) { var v = (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0]); return v > 0 ? 1 : v < 0 ? -1 : 0; }
+    function on(p, q, r) { return q[0] <= Math.max(p[0], r[0]) && q[0] >= Math.min(p[0], r[0]) && q[1] <= Math.max(p[1], r[1]) && q[1] >= Math.min(p[1], r[1]); }
+    var o1 = o(a1, a2, b1), o2 = o(a1, a2, b2), o3 = o(b1, b2, a1), o4 = o(b1, b2, a2);
+    if (o1 !== o2 && o3 !== o4) return true;
+    if (o1 === 0 && on(a1, b1, a2)) return true;
+    if (o2 === 0 && on(a1, b2, a2)) return true;
+    if (o3 === 0 && on(b1, a1, b2)) return true;
+    if (o4 === 0 && on(b1, a2, b2)) return true;
+    return false;
+  }
+  function minDistToPoly(px, py, polyPx, W, H) {
+    var best = Infinity, i;
+    if (!polyPx || !polyPx.length) return best;
+    if (polyPx.length === 1) { var dx = px - polyPx[0][0], dy = py - polyPx[0][1]; return dx * dx + dy * dy; }
+    for (i = 1; i < polyPx.length; i++) {
+      var d = ptDist2Seg(px, py, polyPx[i - 1][0], polyPx[i - 1][1], polyPx[i][0], polyPx[i][1]);
+      if (d < best) best = d;
+    }
+    return best;
+  }
+  function toPx(pts, W, H) {
+    var out = [], i;
+    for (i = 0; i < pts.length; i++) out.push([pts[i][0] * W, pts[i][1] * H]);
+    return out;
+  }
+  function isScribble(pts, opts) {
     if (!pts || pts.length < 8) return false;
-    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    var pathLen = 0;
-    for (var i = 0; i < pts.length; i++) {
+    opts = opts || {};
+    var W = opts.pageW || 1000, H = opts.pageH || 1000;
+    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity, pathLen = 0, i;
+    for (i = 0; i < pts.length; i++) {
       var x = pts[i][0], y = pts[i][1];
       if (x < minX) minX = x;
       if (x > maxX) maxX = x;
       if (y < minY) minY = y;
       if (y > maxY) maxY = y;
       if (i > 0) {
-        var dx0 = x - pts[i - 1][0], dy0 = y - pts[i - 1][1];
+        var dx0 = (x - pts[i - 1][0]) * W, dy0 = (y - pts[i - 1][1]) * H;
         pathLen += Math.sqrt(dx0 * dx0 + dy0 * dy0);
       }
     }
     var bw = maxX - minX, bh = maxY - minY;
+    if (bw >= 0.25) return false;
     var diag = Math.sqrt(bw * bw + bh * bh);
     if (diag < 0.005 || diag > 0.6) return false;
-    if (pathLen / diag < 2.2) return false;
-
-    var revsX = 0, revsY = 0;
-    var lastSignX = 0, lastSignY = 0;
-    var stepThreshold = diag * 0.06;
-    var accX = 0, accY = 0;
-    for (var j = 1; j < pts.length; j++) {
-      var dx = pts[j][0] - pts[j - 1][0];
-      var dy = pts[j][1] - pts[j - 1][1];
-      accX += dx;
-      accY += dy;
-      if (Math.abs(accX) >= stepThreshold) {
-        var sX = accX > 0 ? 1 : -1;
-        if (lastSignX !== 0 && sX !== lastSignX) revsX++;
-        lastSignX = sX;
-        accX = 0;
-      }
-      if (Math.abs(accY) >= stepThreshold) {
-        var sY = accY > 0 ? 1 : -1;
-        if (lastSignY !== 0 && sY !== lastSignY) revsY++;
-        lastSignY = sY;
-        accY = 0;
+    var diagPx = Math.sqrt(Math.pow(bw * W, 2) + Math.pow(bh * H, 2));
+    if (diagPx <= 0 || pathLen / diagPx < 4) return false;
+    var dur = opts.durationMs;
+    if (dur == null) {
+      var t0 = pts[0] && pts[0][3], t1 = pts[pts.length - 1] && pts[pts.length - 1][3];
+      if (t0 != null && t1 != null) dur = t1 - t0;
+    }
+    if (dur == null || !(dur >= 0) || dur >= 800) return false;
+    var mainX = bw >= bh, revs = 0, lastSign = 0, acc = 0, stepThreshold = diag * 0.06;
+    for (i = 1; i < pts.length; i++) {
+      acc += mainX ? (pts[i][0] - pts[i - 1][0]) : (pts[i][1] - pts[i - 1][1]);
+      if (Math.abs(acc) >= stepThreshold) {
+        var s = acc > 0 ? 1 : -1;
+        if (lastSign !== 0 && s !== lastSign) revs++;
+        lastSign = s;
+        acc = 0;
       }
     }
-    return (revsX >= 3 || revsY >= 3 || (revsX >= 2 && revsY >= 2));
+    if (revs < 6) return false;
+    var ink = opts.ink;
+    if (!ink || !ink.length) return false;
+    var inkPx = [], onInk = 0;
+    for (i = 0; i < ink.length; i++) {
+      var ip = ink[i] && ink[i].pts ? ink[i].pts : ink[i];
+      if (!ip || !ip.length || (ink[i] && ink[i].gone)) continue;
+      inkPx.push(toPx(ip, W, H));
+    }
+    if (!inkPx.length) return false;
+    var rad2 = 36;
+    for (i = 0; i < pts.length; i++) {
+      var px = pts[i][0] * W, py = pts[i][1] * H, best = Infinity, k;
+      for (k = 0; k < inkPx.length; k++) {
+        var d = minDistToPoly(px, py, inkPx[k], W, H);
+        if (d < best) best = d;
+        if (best <= rad2) break;
+      }
+      if (best <= rad2) onInk++;
+    }
+    return onInk / pts.length >= 0.3;
+  }
+  // Covered test for a scribble erase (phase P0): a stroke counts as covered only when it actually crosses
+  // the scribble path. At least 2 of its points within 6 px of the scribble (a single-point dot needs its
+  // one point within 6 px) or any of its segments crossing the scribble path. Never an 18 px neighbourhood.
+  function coveredBy(scribblePts, s, W, H) {
+    if (!scribblePts || !scribblePts.length || !s || !s.pts || !s.pts.length) return false;
+    W = W || 1000; H = H || 1000;
+    var sc = toPx(scribblePts, W, H), tg = toPx(s.pts, W, H), rad2 = 36, near = 0, i, j;
+    for (i = 0; i < tg.length; i++) {
+      if (minDistToPoly(tg[i][0], tg[i][1], sc, W, H) <= rad2) near++;
+    }
+    if (near >= 2 || (tg.length < 2 && near >= 1)) return true;
+    for (i = 1; i < tg.length; i++) for (j = 1; j < sc.length; j++) {
+      if (segCross(tg[i - 1], tg[i], sc[j - 1], sc[j])) return true;
+    }
+    return false;
   }
   // Undo/redo: ops are { t: "add", id } or { t: "del", ids: [id] }. Strokes are never deleted, only flagged gone, so
   // an op is just ids and the stacks stay small enough to persist.
   var CAP = 200;
   function newStack(o) { return { u: (o && o.u) || [], r: (o && o.r) || [] }; }
   function push(st, op) { st.u.push(op); if (st.u.length > CAP) st.u.shift(); st.r = []; return st; }
-  function opIds(op) { return op.t === "add" ? [op.id] : op.ids; }
+  // Phase 2 (study-select.js): addmulti = one undo step for many new strokes; xform = before/after snapshots.
+  function opIds(op) { if (op.t === "add") return [op.id]; if (op.t === "addmulti") return op.ids || []; if (op.t === "xform") return (op.before || []).map(function (t) { return t.id; }); if (op.t === "split") return (op.orig || []).concat(op.pieces || []); return op.ids; }
   // gone value each id of op takes when the op is undone (undoing true) or applied again.
-  function goneAfter(op, undoing) { return op.t === "add" ? !!undoing : !undoing; }
-  function undo(st) { var op = st.u.pop(); if (!op) return null; st.r.push(op); return { op: op, gone: goneAfter(op, true) }; }
-  function redo(st) { var op = st.r.pop(); if (!op) return null; st.u.push(op); return { op: op, gone: goneAfter(op, false) }; }
+  function goneAfter(op, undoing) { if (op.t === "xform") return undefined; if (op.t === "add" || op.t === "addmulti") return !!undoing; return !undoing; }
+  function undo(st) { var op = st.u.pop(); if (!op) return null; st.r.push(op); return { op: op, gone: goneAfter(op, true), undoing: true }; }
+  function redo(st) { var op = st.r.pop(); if (!op) return null; st.u.push(op); return { op: op, gone: goneAfter(op, false), undoing: false }; }
   // Pressure: pens report 0..1; 0 or missing (mouse, finger, unsupported) is 0.5.
   function pressure(e) { return e && e.pointerType === "pen" && e.pressure > 0 ? e.pressure : 0.5; }
   function r4(n) { return Math.round(n * 10000) / 10000; }
@@ -122,13 +193,16 @@
   function moveItem(a, i, dir) { var j = i + dir, b = a.slice(); if (i < 0 || i >= a.length || j < 0 || j >= a.length) return b; b[i] = a[j]; b[j] = a[i]; return b; }
   // Notebook page background as segments [x1, y1, x2, y2] in page-width units (page is 1 wide, ratio tall).
   function bgLines(style, ratio) {
-    var L = [], s = 0.05, y, x, end = style === "cornell" ? ratio * 0.8 : ratio;
-    if (style === "ruled" || style === "cornell") for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]);
-    if (style === "grid") { for (y = s; y < ratio; y += s) L.push([0, y, 1, y]); for (x = s; x < 1; x += s) L.push([x, 0, x, ratio]); }
-    if (style === "dotgrid" || style === "dots") { for (y = s * 2; y < ratio; y += s) for (x = s; x < 1; x += s) L.push([x, y, x + 0.0001, y]); }
-    if (style === "cornell") { L.push([0.3, s * 2, 0.3, end]); L.push([0, end, 1, end]); }
+    var base = String(style || "").replace(/-dark$/, ""), L = [], s = 0.05, y, x, end = base === "cornell" ? ratio * 0.8 : ratio;
+    if (base === "ruled" || base === "cornell") for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]);
+    else if (base === "ruled-wide") { s = 0.10; for (y = s * 2; y < end; y += s) L.push([0, y, 1, y]); }
+    if (base === "grid") { for (y = s; y < ratio; y += s) L.push([0, y, 1, y]); for (x = s; x < 1; x += s) L.push([x, 0, x, ratio]); }
+    if (base === "dotgrid" || base === "dots") { for (y = s * 2; y < ratio; y += s) for (x = s; x < 1; x += s) L.push([x, y, x + 0.0001, y]); }
+    if (base === "cornell") { L.push([0.3, s * 2, 0.3, end]); L.push([0, end, 1, end]); }
+    if (base === "mcq") { var top = 8, rowH = 18, colW = 1 / 6; L.push([0.03, 0.03 * ratio, 0.97, 0.03 * ratio]); for (var r = 0; r < 20; r++) { var y0 = 44 / (ratio * 400) + r * 0.02; if (y0 + 0.02 > ratio - 0.02) break; L.push([0.03, y0, 0.13, y0]); for (var c = 0; c < 5; c++) { var cx = 0.15 + c * colW; L.push([cx, y0, cx + 0.01, y0]); } } }
     return L;
   }
+  function tplForPid(pid) { try { var m = V && V.doc && V.doc.tplMap; if (m && m[pid]) return m[pid]; if (m && m[String(pid)]) return m[String(pid)]; } catch (e) {} try { if (V && V.nb && V.nb.tplMap && V.nb.tplMap[pid]) return V.nb.tplMap[pid]; } catch (e2) {} return (V && V.nb && V.nb.style) || "ruled"; }
   // Snippet around the first case-insensitive match of q in text: { pre, hit, post } or null.
   function snip(text, q, r) {
     var t = String(text || ""), k = String(q || ""), i = k ? t.toLowerCase().indexOf(k.toLowerCase()) : -1, a, b;
@@ -163,12 +237,16 @@
       });
     }, Promise.resolve(null)).then(function (err) {
       if (err) return bad(err);
-      var recs = [], folders, audio = [], c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, audio: 0 }, i, r, k;
+      var recs = [], folders, audio = [], c = { docs: 0, folders: 0, strokes: 0, ptext: 0, files: 0, items: 0, audio: 0 }, i, r, k;
       /* Phase 5b: audio.json + audio/<id>.bin (optional; old backups have none) */
       try {
         folders = dec("folders.json"); c.folders = folders.length;
         names.forEach(function (n) {
-          if (/^docs\//.test(n)) { r = dec(n); recs.push(r); c.docs++; c.strokes += r.strokes.length; c.ptext += r.ptext.length; if (!/^[a-z0-9]+$/.test(r.doc.id) || n !== "docs/" + r.doc.id + ".json") throw new Error("id"); }
+          if (/^docs\//.test(n)) {
+            r = dec(n); recs.push(r); c.docs++; c.strokes += r.strokes.length; c.ptext += r.ptext.length;
+            if (r.items) c.items += r.items.length;
+            if (!/^[a-z0-9]+$/.test(r.doc.id) || n !== "docs/" + r.doc.id + ".json") throw new Error("id");
+          }
           else if (/^files\//.test(n)) c.files++;
           else if (/^audio\/.+\.bin$/.test(n)) c.audio++;
         });
@@ -179,7 +257,7 @@
           if (!r || !/^[a-z0-9]+$/i.test(String(r.id)) || !listed["audio/" + r.id + ".bin"]) return bad("The backup could not be read.");
         }
       } catch (e) { return bad("The backup could not be read."); }
-      for (k in c) { if (k === "audio" && man.counts.audio == null) continue; if (man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it."); }
+      for (k in c) { if ((k === "audio" || k === "items") && man.counts[k] == null) continue; if (man.counts[k] !== c[k]) return bad("The backup's record counts do not match what is inside it."); }
       for (i = 0; i < recs.length; i++) {
         r = recs[i].doc;
         if (r.kind !== "nb" && !(listed["files/" + r.id + ".pdf"] && listed["files/" + r.id + ".pdf"].sha256 === r.sha256)) return bad("A document in the backup does not match its file.");
@@ -201,7 +279,7 @@
     BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
     hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure,
-    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble
+    r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy
   };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -237,6 +315,10 @@
     palette: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.3c3.9 0 7-3.1 7-7 0-5.5-5.4-9.1-10-9.1z"/></svg>',
     grid: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
     minus: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    text: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="12" y1="4" x2="12" y2="20"/></svg>',
+    image: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+    elements: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+    laser: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/><circle cx="20" cy="20" r="1"/></svg>',
     share: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>',
     edit: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
     folder: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>'
@@ -254,13 +336,20 @@
       r.onupgradeneeded = function () {
         var d = r.result, mk = function (n, k) { return d.objectStoreNames.contains(n) ? null : d.createObjectStore(n, { keyPath: k }); }, s;
         mk("docs", "id"); mk("files", "id"); mk("folders", "id");
-        s = mk("strokes", "id"); if (s) s.createIndex("doc", "doc");
+        s = mk("strokes", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc");
         mk("undo", "doc");
-        s = mk("ptext", "id"); if (s) s.createIndex("doc", "doc");
+        s = mk("ptext", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc");
         mk("index", "doc");
-        s = mk("audio", "id"); if (s) s.createIndex("doc", "doc"); /* Phase 5b */
+        s = mk("audio", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc"); /* Phase 5b */
+        s = mk("items", "id"); if (s && !s.indexNames.contains("doc")) s.createIndex("doc", "doc");
       };
-      r.onsuccess = function () { res(r.result); };
+      r.onsuccess = function () {
+        var conn = r.result;
+        /* Phase 5a hang fix: respond to versionchange (e.g. deleteDatabase in tests) so the
+           pending request can complete and later opens are not blocked forever. */
+        conn.onversionchange = function () { dbP = null; try { conn.close(); } catch (e) {} };
+        res(conn);
+      };
       r.onerror = function () { dbP = null; rej(r.error); };
     });
     return dbP;
@@ -280,6 +369,7 @@
   var del = function (s, k) { return q(s, "readwrite", function (o) { return o.delete(k); }); };
   var strokesOf = function (id) { return q("strokes", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
   var textOf = function (id) { return q("ptext", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
+  var itemsOf = function (id) { return q("items", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
 
   /* ---- original bytes ---- */
   function fsPlugin() { try { var P = G.Capacitor && G.Capacitor.Plugins; return P && P.Filesystem && P.Filesystem.writeFile ? P.Filesystem : null; } catch (e) { return null; } }
@@ -634,6 +724,7 @@
   }
 
   function fillLib() {
+    if (G.STUDY_LIB && G.STUDY_LIB.renderBody) return G.STUDY_LIB.renderBody();
     closeDocMenu();
     Promise.all([all("docs"), all("folders"), all("index")]).then(function (r) {
       var ixd = {}; r[2].forEach(function (x) { ixd[x.doc] = x.done; });
@@ -641,7 +732,8 @@
       var docs = r[0].sort(function (a, b) { return (b.lastOpened || b.created) - (a.lastOpened || a.created); }), folders = r[1], esc = host.esc, f = lib.filter;
       if (f !== "all" && f !== "fav" && !folders.some(function (x) { return x.id === f; })) f = lib.filter = "all";
       var chip = function (v, label) { return '<button type="button" class="st-chip' + (f === v ? " on" : "") + '" data-act="st-filter" data-v="' + esc(v) + '">' + esc(label) + "</button>"; };
-      root.querySelector("#stChips").innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
+      var ch = root.querySelector("#stChips");
+      if (ch) ch.innerHTML = chip("all", "Recent") + chip("fav", "Favourites") + folders.map(function (x) { return chip(x.id, x.name); }).join("") +
         '<button type="button" class="st-chip" data-act="st-newfolder">' + ICO.plus + ' Folder</button>' + (f !== "all" && f !== "fav" ? '<button type="button" class="st-chip" data-act="st-delfolder" data-v="' + esc(f) + '">Delete folder</button>' : "");
       var shown = docs.filter(function (d) { return f === "all" || (f === "fav" ? d.favourite : d.folderId === f); });
       if (!shown.length) {
@@ -684,14 +776,22 @@
   function removeDoc(id) {
     return strokesOf(id).then(function (ss) {
       return Promise.all(ss.map(function (s) { return del("strokes", s.id); }));
+    }).then(function () {
+      return itemsOf(id).then(function (its) {
+        return Promise.all(its.map(function (it) { return del("items", it.id); }));
+      });
     }).then(function () { return Promise.all([del("undo", id), del("files", id), del("docs", id)]); }).then(function () { return purge(id); }).then(function () { /* Phase 5b: audio */ try { return q("audio", "readonly", function (o) { try { return o.index("doc").getAll(G.IDBKeyRange.only(id)); } catch (e) { return o.getAll(); } }).then(function (aa) { return Promise.all((aa || []).filter(function (a) { return a.doc === id; }).map(function (a) { return del("audio", a.id); })); }).then(null, function () {}); } catch (e) { return null; } });
   }
 
   /* ---- notebooks (A4) ---- */
   function drawBg(ctx, style, ratio, W) {
-    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
-    bgLines(style, ratio).forEach(function (l) { ctx.moveTo(l[0] * W, l[1] * W); ctx.lineTo(l[2] * W, l[3] * W); });
+    var dark = /-dark$/.test(style || ""), base = String(style || "").replace(/-dark$/, "");
+    ctx.fillStyle = dark ? "#0D1D23" : "#fff"; ctx.fillRect(0, 0, W, W * ratio);
+    ctx.strokeStyle = dark ? "rgba(66,205,181,0.28)" : "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
+    bgLines(base, ratio).forEach(function (l) { ctx.moveTo(l[0] * W, l[1] * W); ctx.lineTo(l[2] * W, l[3] * W); });
+    /* dotgrid dots need filled points */
+    if (base === "dotgrid" || base === "dots") { ctx.fillStyle = dark ? "rgba(66,205,181,0.5)" : "#7a8aa0"; ctx.stroke(); for (var i = 0; i < 0; i++) {} ctx.beginPath(); var dg = 0.06; for (var yy = dg * 1.5; yy < ratio; yy += dg) for (var xx = dg; xx < 1; xx += dg) { ctx.fillRect(xx * W, yy * W, Math.max(1, W / 400), Math.max(1, W / 400)); } return; }
+    if (base === "mcq") { ctx.stroke(); return; }
     ctx.stroke();
   }
   function makeNotebook(title, style, size) {
@@ -708,13 +808,15 @@
   }
   function nbAct(a) {
     curPage(); var n = V.cur || 1, d = V.nb, ord = d.ord;
-    if (a === "st-addpg") { ord.splice(n, 0, d.next++); return reloadNb(n + 1); }
+    if (a === "st-addpg") { var nid = d.next++; ord.splice(n, 0, nid); if (!d.tplMap) d.tplMap = {}; if (!d.tplMap[nid]) d.tplMap[nid] = d.style; return reloadNb(n + 1); }
     if (a === "st-up" || a === "st-dn") { var dir = a === "st-up" ? -1 : 1; d.ord = moveItem(ord, n - 1, dir); return reloadNb(Math.max(1, Math.min(d.ord.length, n + dir))); }
     if (ord.length < 2) return host.toast("A notebook needs at least one page.");
-    if (!G.confirm("Delete this page and what you drew on it? This cannot be undone.")) return;
-    var gone = ord.splice(n - 1, 1)[0], dead = V.strokes.filter(function (s) { return s.page === gone; });
-    V.stack = newStack();
-    return Promise.all(dead.map(function (s) { return del("strokes", s.id); })).then(saveStack).then(function () { return reloadNb(Math.min(n, ord.length)); });
+    if (!G.confirm("Delete this page and what you drew on it?")) return;
+    var _gone = ord.splice(n - 1, 1)[0], _dead = V.strokes.filter(function (s) { return s.page === _gone; });
+    _dead.forEach(function (s) { s.gone = true; put("strokes", s); });
+    if (d.tplMap) delete d.tplMap[_gone];
+    push(V.stack, { t: "del", ids: _dead.map(function (s) { return s.id; }) });
+    return put("docs", d).then(saveStack).then(function () { return reloadNb(Math.min(n, ord.length)); });
   }
 
   /* ---- search (A6) ---- */
@@ -766,7 +868,7 @@
     var root = host && host.root(), res = root && root.querySelector("#stRes"), qs = String(raw || "").trim(), tok = ++searchTok;
     if (!res) return;
     var show = qs.length < 2;
-    res.hidden = show; root.querySelector("#stList").hidden = !show; root.querySelector("#stChips").hidden = !show;
+    res.hidden = show; var lst = root.querySelector("#stList"); if (lst) lst.hidden = !show; var ch = root.querySelector("#stChips"); if (ch) ch.hidden = !show;
     if (show) return;
     Promise.all([all("docs"), all("ptext"), all("index")]).then(function (r) {
       if (tok !== searchTok || !host.root() || !host.root().querySelector("#stRes")) return;
@@ -800,17 +902,44 @@
   function removeLassoBar() {
     var b = host && host.root() && host.root().querySelector("#stLassoBar");
     if (b && b.parentNode) b.parentNode.removeChild(b);
+    // Phase 2 hook: study-select.js sub-panels clear with the bar.
+    if (G.STUDY_SELECT && G.STUDY_SELECT.removePanels) { try { G.STUDY_SELECT.removePanels(host && host.root()); } catch (e) {} }
+  }
+  function lassoChipsHtml() {
+    return '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-explain">' + ICO.sparkle + ' Explain</button>' +
+      '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-summary">' + ICO.sparkle + ' Key summary</button>' +
+      '<button type="button" class="st-ai-chip sm" data-act="st-lasso-ai-make">' + ICO.book + ' Make deck</button>' +
+      '<button type="button" class="pn-btn sm" data-act="st-lasso-save-elem">' + ICO.star + ' Save Element</button>';
   }
   function showLassoBar() {
+    // Phase 2 hook: extended menu lives in study-select.js; this keeps working without it (OPTIONAL skip).
+    if (G.STUDY_SELECT && G.STUDY_SELECT.showLassoBar) {
+      try {
+        G.STUDY_SELECT.showLassoBar(inkApi(V && V.cur ? V.cur : 1, null));
+        // Phase 4: AI on selection and Save Element ride on Phase 2's bar (actions handled by the dispatcher).
+        var sbar = host && host.root() && host.root().querySelector("#stLassoBar");
+        if (sbar && !sbar.querySelector('[data-act="st-lasso-ai-explain"]')) {
+          var chips = D.createElement("div");
+          chips.className = "st-lasso-chips";
+          chips.innerHTML = lassoChipsHtml();
+          sbar.insertBefore(chips, sbar.firstChild);
+        }
+        return;
+      } catch (e) {}
+    }
     removeLassoBar();
     if (!V || !V.lasso || !V.lasso.ids.length) return;
     var div = D.createElement("div");
     div.id = "stLassoBar";
     div.className = "st-lasso-bar";
-    div.innerHTML = '<button type="button" class="pn-btn sm" data-act="st-lasso-copy">' + ICO.copy + ' Duplicate</button>' +
-      '<button type="button" class="pn-btn sm" data-act="st-lasso-color">' + ICO.palette + ' Recolour</button>' +
-      '<button type="button" class="pn-btn sm bad" data-act="st-lasso-del">' + ICO.trash + ' Delete</button>' +
-      '<button type="button" class="pn-btn sm" data-act="st-lasso-done">' + ICO.check + ' Done</button>';
+    div.innerHTML =
+      '<div class="st-lasso-chips">' + lassoChipsHtml() + '</div>' +
+      '<div class="st-lasso-actions">' +
+        '<button type="button" class="pn-btn sm" data-act="st-lasso-copy">' + ICO.copy + ' Duplicate</button>' +
+        '<button type="button" class="pn-btn sm" data-act="st-lasso-color">' + ICO.palette + ' Recolour</button>' +
+        '<button type="button" class="pn-btn sm bad" data-act="st-lasso-del">' + ICO.trash + ' Delete</button>' +
+        '<button type="button" class="pn-btn sm" data-act="st-lasso-done">' + ICO.check + ' Done</button>' +
+      '</div>';
     host.root().appendChild(div);
   }
 
@@ -867,8 +996,9 @@
       if (!cv) return;
       var ctx = cv.getContext("2d"), cw = cv.width, ch = cv.height;
       if (V.nb) {
-        drawBg(ctx, V.nb.style, V.ratio, cw);
-        var pageId = V.nb.ord[n - 1];
+        var _pid0 = V.nb.ord[n - 1];
+        drawBg(ctx, tplForPid(_pid0), V.ratio, cw);
+        var pageId = _pid0;
         V.strokes.forEach(function (s) {
           if (s.page === pageId && !s.gone) drawStroke(ctx, s, cw, ch, 1);
         });
@@ -978,8 +1108,8 @@
       c.width = w; c.height = h;
       var ctx = c.getContext("2d");
       if (V.nb) {
-        drawBg(ctx, V.nb.style, V.ratio, w);
         var p1 = V.nb.ord[0];
+        drawBg(ctx, tplForPid(p1), V.ratio, w);
         V.strokes.forEach(function (s) { if (s.page === p1 && !s.gone) drawStroke(ctx, s, w, h, 1); });
         V.doc.thumb = c.toDataURL("image/jpeg", 0.7);
         put("docs", V.doc);
@@ -997,6 +1127,7 @@
   function closeViewer() {
     if (!V) return;
     updateDocThumb();
+    removeEraseToast();
     removeLassoBar();
     closePageSheet();
     closeMoreMenu();
@@ -1021,20 +1152,32 @@
             '<div class="st-pages" id="stPages"></div>' +
           '</div>' +
         '</div>');
-      return Promise.all([d.kind === "nb" ? null : loadOriginal(d).then(openPdf), strokesOf(id), get("undo", id)]).then(function (r) { startViewer(d, r[0], r[1], r[2], goto); });
+      return Promise.all([d.kind === "nb" ? null : loadOriginal(d).then(openPdf), strokesOf(id), get("undo", id), itemsOf(id)]).then(function (r) { startViewer(d, r[0], r[1], r[2], goto, r[3]); });
     }).catch(function () { h.toast("That PDF could not be opened."); });
   }
 
   function toolbarHtml(d) {
     var b = function (act, label, v, extra) { return '<button type="button" class="st-b" data-act="' + act + '"' + (v != null ? ' data-v="' + v + '"' : "") + (extra || "") + ">" + label + "</button>"; };
     var cp = V ? (V.cur || 1) : 1;
+    // Phase 1 toolbar order: zoom window, pen, eraser, highlighter, shapes, lasso, elements, image, camera, text, typing, laser.
+    // Phase 2 hook: the Shapes slot ships as a real tool; the other later-phase slots stay hidden.
+    var inkIco = (G.STUDY_INK && G.STUDY_INK.ICONS) || {};
+    var hiddenSlot = function (label, ico) { return '<button type="button" class="st-b st-slot-future" hidden title="' + label + '" aria-label="' + label + '">' + (ico || ICO.more) + "</button>"; };
     return '<div class="st-tb" id="stTb" role="toolbar" aria-label="Pen tools">' +
       '<div class="st-tb-group">' +
         '<div class="st-tb-tools">' +
+          b("st-page-sheet", inkIco.zoom || ICO.grid, null, ' title="Zoom window and pages" aria-label="Zoom window and pages"') +
           b("st-tool", ICO.pen, "pen", ' title="Pen" aria-label="Pen"') +
-          b("st-tool", ICO.hl, "hl", ' title="Marker" aria-label="Marker"') +
           b("st-tool", ICO.er, "er", ' title="Eraser" aria-label="Eraser"') +
+          b("st-tool", ICO.hl, "hl", ' title="Highlighter" aria-label="Highlighter"') +
+          b("st-tool", inkIco.shapes || ICO.more, "shapes", ' title="Shapes" aria-label="Shapes"') +
           b("st-tool", ICO.lasso, "lasso", ' title="Lasso select" aria-label="Lasso select"') +
+          b("st-tool", ICO.elements, "elements", ' title="Stickers and elements" aria-label="Stickers and elements"') +
+          b("st-tool", ICO.image, "image", ' title="Insert image" aria-label="Insert image"') +
+          hiddenSlot("Camera", inkIco.camera) +
+          b("st-tool", ICO.text, "text", ' title="Text box tool" aria-label="Text box tool"') +
+          hiddenSlot("Typing", inkIco.typing) +
+          b("st-tool", ICO.laser, "laser", ' title="Laser pointer" aria-label="Laser pointer"') +
         '</div>' +
       '</div>' +
       '<div class="st-tb-group st-tb-history">' +
@@ -1051,10 +1194,12 @@
         b("st-more", ICO.more, null, ' title="More options" aria-label="More options"') +
       '</div>' +
     '</div>' +
-    colorStripHtml();
+    colorStripHtml() +
+    '<div id="stInsertOptions"></div>';
   }
 
   function colorStripHtml() {
+    if (G.STUDY_INK) return '<div id="stInkCtx" class="st-ink-ctx"></div>';
     var isHl = V && V.tool === "hl", pal = isHl ? HCOLORS : COLORS;
     var cIdx = V ? V.ci : 0;
     var custCol = (V && V.customColor) ? V.customColor : (isHl ? "#ffe14d" : "#42cdb5");
@@ -1076,13 +1221,15 @@
     '</div>';
   }
 
-  function startViewer(d, pdf, strokes, undoRec, goto) {
+  function startViewer(d, pdf, strokes, undoRec, goto, items) {
     var root = host.root(), sc = root && root.querySelector("#stSc"), box = root && root.querySelector("#stPages");
     if (!sc) { try { pdf.destroy(); } catch (e) {} return; }
     closeViewer();
-    var scrPref = true;
-    try { scrPref = G.localStorage.getItem("smd_study_scribble") !== "0"; } catch (e) {}
-    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null };
+    // Phase P0 (ink-loss fix): scribble erase defaults to OFF for everyone. The pre-P0 key
+    // smd_study_scribble is ignored so old ONs are reset; only smd_study_scribble2 === "1" turns it on.
+    var scrPref = false;
+    try { scrPref = G.localStorage.getItem("smd_study_scribble2") === "1"; } catch (e) {}
+    V = { id: d.id, doc: d, title: d.title, sel: null, n: pdf ? pdf.numPages : d.ord.length, pdf: pdf, nb: d.kind === "nb" ? d : null, sc: sc, box: box, z: 1, pg: {}, strokes: strokes, items: items || [], stack: newStack(undoRec), tool: null, ci: 0, wi: 1, ratio: d.ratio || 1.414, baseW: Math.max(200, (sc.clientWidth || 360) - 16), goto: goto, scribble: scrPref, lasso: null, prevTool: null, ink: null };
     V.onSel = onSel; D.addEventListener("selectionchange", onSel);
     if (carry) { V.tool = carry.tool; V.ci = carry.ci; V.wi = carry.wi; carry = null; }
     if (pdf) pdf.getPage(1).then(function (p) { var v = p.getViewport({ scale: 1 }); V.ratio = v.height / v.width; build(); }); else build();
@@ -1145,9 +1292,14 @@
       var cv = D.createElement("canvas"), ov = D.createElement("canvas"), vp = page ? page.getViewport({ scale: (cw / v1.width) * qf }) : { width: cw * qf, height: ch * qf };
       cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.className = "st-cv";
       ov.width = Math.floor(cw * dpr); ov.height = Math.floor(ch * dpr); ov.className = "st-ov"; ov.setAttribute("data-n", n);
-      p.cv = cv; p.ov = ov; p.el.appendChild(cv); p.el.appendChild(ov);
+      var itemLayer = D.createElement("div"); itemLayer.className = "st-items-layer"; itemLayer.setAttribute("data-n", n);
+      p.cv = cv; p.ov = ov; p.itemLayer = itemLayer;
+      p.el.appendChild(cv); p.el.appendChild(itemLayer); p.el.appendChild(ov);
+      // Phase 1 live layer: predicted points + eraser cursor only; committed ink stays on ov.
+      if (G.STUDY_INK) { var lv = D.createElement("canvas"); lv.width = ov.width; lv.height = ov.height; lv.className = "st-live"; p.live = lv; p.el.appendChild(lv); }
       bindInk(ov, n); redraw(n);
-      if (!page) return drawBg(cv.getContext("2d"), V.nb.style, V.ratio, cv.width);
+      if (G.STUDY_INSERT && G.STUDY_INSERT.renderPageItems) G.STUDY_INSERT.renderPageItems(n, p);
+      if (!page) { var _pid = V.nb ? V.nb.ord[n - 1] : null; return drawBg(cv.getContext("2d"), _pid != null ? tplForPid(_pid) : V.nb.style, V.ratio, cv.width); }
       p.task = page.render({ canvasContext: cv.getContext("2d"), viewport: vp });
       p.task.promise.then(function () {
         return !V || V.pg[n] !== p || p.gen !== gen ? null : textLayer(page, p, cw / v1.width);
@@ -1160,8 +1312,9 @@
     p.on = false; p.gen++;
     try { if (p.task) p.task.cancel(); } catch (e) {}
     p.task = null;
-    [p.cv, p.tl, p.ov].forEach(function (c) { if (c) { c.width = 0; c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
-    p.cv = p.tl = p.ov = null;
+    [p.cv, p.tl, p.ov, p.itemLayer, p.live].forEach(function (c) { if (c) { if (c.width !== undefined) c.width = 0; if (c.height !== undefined) c.height = 0; if (c.parentNode) c.parentNode.removeChild(c); } });
+    p.cv = p.tl = p.ov = p.itemLayer = p.live = null;
+    if (G.STUDY_INSERT && G.STUDY_INSERT.onPageFree) G.STUDY_INSERT.onPageFree(n);
   }
 
   function textLayer(page, p, k) {
@@ -1204,6 +1357,11 @@
   /* ---- ink ---- */
   function penW(s, W, p) { return s.tool === "hl" ? s.w * W * HMUL : s.w * W * (0.5 + p); }
   function drawStroke(ctx, s, W, H, dpr, isSel) {
+    // Phase 2 hooks: vector shapes and text boxes render via study-select.js (outline pts stay the fallback).
+    if (G.STUDY_SELECT && s.shape && G.STUDY_SELECT.drawShape(ctx, s, W, H, dpr, isSel)) return;
+    if (G.STUDY_SELECT && s.tool === "text" && G.STUDY_SELECT.drawText(ctx, s, W, H, dpr, isSel)) return;
+    // Phase 1 hook: styled strokes render via study-ink.js; old strokes keep the legacy renderer below.
+    if (G.STUDY_INK && G.STUDY_INK.drawStroke(ctx, s, W, H, dpr, isSel)) return;
     var p = s.pts, i;
     ctx.save(); ctx.scale(dpr, dpr); ctx.lineCap = "round"; ctx.lineJoin = "round";
     ctx.strokeStyle = isSel ? "#42cdb5" : s.color;
@@ -1226,13 +1384,16 @@
     var p = V && V.pg[n]; if (!p || !p.ov) return;
     var ctx = p.ov.getContext("2d"), dpr = p.ov.width / (p.el.clientWidth || 1), W = p.el.clientWidth, H = p.el.clientHeight;
     ctx.clearRect(0, 0, p.ov.width, p.ov.height);
-    V.strokes.forEach(function (s) {
-      if (s.page === pid(n) && !s.gone) {
-        var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
-        drawStroke(ctx, s, W, H, dpr, isSel);
-      }
+    // Highlighter renders under pen ink and text-layer content visually (multiply on the overlay).
+    var ordered = V.strokes.filter(function (s) { return s.page === pid(n) && !s.gone; });
+    ordered.sort(function (a, b) { return (a.tool === "hl" ? 0 : 1) - (b.tool === "hl" ? 0 : 1); });
+    ordered.forEach(function (s) {
+      var isSel = V.lasso && V.lasso.page === pid(n) && V.lasso.ids.indexOf(s.id) !== -1;
+      drawStroke(ctx, s, W, H, dpr, isSel);
     });
     if (live) drawStroke(ctx, live, W, H, dpr);
+    // Phase 2 hook: dashed selection box with resize handles.
+    if (G.STUDY_SELECT && G.STUDY_SELECT.drawSel) { try { G.STUDY_SELECT.drawSel(ctx, V, W, H, dpr, n); } catch (e) {} }
     if (lassoLoop && lassoLoop.length > 1) {
       ctx.save();
       ctx.scale(dpr, dpr);
@@ -1302,12 +1463,79 @@
     if (inp && D.activeElement !== inp) inp.value = V.cur || 1;
     var zm = root.querySelector("#stZoomLabel");
     if (zm) zm.textContent = Math.round((V.z || 1) * 100) + "%";
-    V.box.classList.toggle("st-ink", !!V.tool);
+    var isInk = V.tool === "pen" || V.tool === "hl";
+    var isLaser = V.tool === "laser";
+    V.box.classList.toggle("st-ink", isInk || V.tool === "er" || V.tool === "lasso" || isLaser);
+    if (G.STUDY_INSERT && G.STUDY_INSERT.syncTb) G.STUDY_INSERT.syncTb(V, root);
+    // Phase 1 hook: refresh the ink context strip for the active tool.
+    if (G.STUDY_INK) { try { G.STUDY_INK.syncStrip(inkApi(V.cur || 1, null)); } catch (e) {} }
+    // Phase 2 hook: lasso settings and shapes strips share the same context host.
+    if (G.STUDY_SELECT) { try { G.STUDY_SELECT.syncStrip(inkApi(V.cur || 1, null)); } catch (e) {} }
   }
 
   function saveStack() { return put("undo", { doc: V.id, u: V.stack.u, r: V.stack.r }); }
 
+  /* ---- Phase 1 ink hooks (study-ink.js) ---- */
+  function clearPageInk() {
+    if (!V) return;
+    var pageId = pid(V.cur || 1), ids = [];
+    V.strokes.forEach(function (s) { if (s.page === pageId && !s.gone) { s.gone = true; ids.push(s.id); put("strokes", s); } });
+    if (!ids.length) { if (host) host.toast("This page is already clear."); return; }
+    push(V.stack, { t: "del", ids: ids }); syncTb(); saveStack(); redraw(V.cur || 1);
+    if (host) host.toast("Page cleared. Undo brings it back.");
+  }
+  function inkApi(n, ov) {
+    return {
+      getV: function () { return V; }, root: function () { return host && host.root(); }, n: n, ov: ov,
+      pid: pid, uid: uid, toRel: toRel, pressureOf: pressure,
+      // Phase 2 hook: toast for study-select.js ops.
+      toast: function (m) { try { if (host) host.toast(m); } catch (e) {} },
+      putStroke: function (s) { return put("strokes", s); },
+      pushOp: function (op) { push(V.stack, op); }, saveStack: saveStack, syncTb: syncTb,
+      redraw: function (nn, live, loop) { redraw(nn == null ? n : nn, live, loop); },
+      lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
+      removeLassoBar: removeLassoBar, showLassoBar: showLassoBar, showEraseToast: showEraseToast,
+      isPenSeen: function () { return penSeen; }, setPenSeen: function () { penSeen = true; },
+      clearPage: clearPageInk
+    };
+  }
+  // Pencil double-tap (1.18): no web hook exists for Apple Pencil double-tap; a native
+  // PencilInteraction bridge would call STUDY._inkDblTap() to switch pen and eraser. TODO: native build.
+  G.STUDY_INK_DBLTAP_TODO = "native PencilInteraction bridge needed";
   function bindInk(ov, n) {
+    // Phase 2 hook: selection and shape gestures bind first (capture); ink binds after.
+    if (G.STUDY_SELECT && G.STUDY_SELECT.bindSel) { try { G.STUDY_SELECT.bindSel(inkApi(n, ov), ov, n); } catch (e) {} }
+    // Laser (Phase 4) capture listeners run before the Phase 1 ink engine, so a laser
+    // trail is never saved as a stroke or pushed to undo.
+    bindLaser(ov, n);
+    if (G.STUDY_INK && G.STUDY_INK.bindInk) { G.STUDY_INK.bindInk(inkApi(n, ov), ov, n); return; }
+    bindInkLegacy(ov, n);
+  }
+  // Laser (Phase 4) must never reach the Phase 1 ink engine: capture listeners on the overlay run first and stop
+  // the event, so a laser trail is never saved as a stroke or pushed to undo.
+  function bindLaser(ov, n) {
+    var on = false, pos = function (e) { var r = ov.getBoundingClientRect(); return toRel(e.clientX, e.clientY, r); };
+    ov.addEventListener("pointerdown", function (e) {
+      if (!V || V.tool !== "laser") return;
+      on = true;
+      try { ov.setPointerCapture(e.pointerId); } catch (x) {}
+      if (G.STUDY_INSERT && G.STUDY_INSERT.laserDown) G.STUDY_INSERT.laserDown(e, n, ov, pos(e));
+      e.preventDefault(); e.stopImmediatePropagation();
+    }, true);
+    ov.addEventListener("pointermove", function (e) {
+      if (!on || !V || V.tool !== "laser") return;
+      if (G.STUDY_INSERT && G.STUDY_INSERT.laserMove) G.STUDY_INSERT.laserMove(e, n, ov, pos(e));
+      e.stopImmediatePropagation();
+    }, true);
+    var end = function (e) {
+      if (!on) return;
+      on = false;
+      if (G.STUDY_INSERT && G.STUDY_INSERT.laserUp) G.STUDY_INSERT.laserUp(e, n, ov);
+      e.stopImmediatePropagation();
+    };
+    ov.addEventListener("pointerup", end, true); ov.addEventListener("pointercancel", end, true);
+  }
+  function bindInkLegacy(ov, n) {
     var cur = null, pan = null, erased = null, lassoPts = null;
     var pos = function (e) { var r = ov.getBoundingClientRect(); return toRel(e.clientX, e.clientY, r); };
     var sample = function (e) { var a = pos(e); return [r4(a[0]), r4(a[1]), r4(pressure(e))]; };
@@ -1316,6 +1544,13 @@
       if (e.pointerType === "pen") penSeen = true;
       if (e.pointerType === "touch" && penSeen) { pan = { y: e.clientY, x: e.clientX }; return; }
       if (e.pointerType === "mouse" && e.button) return;
+      if (V.tool === "laser") {
+        try { ov.setPointerCapture(e.pointerId); } catch (x) {}
+        if (G.STUDY_INSERT && G.STUDY_INSERT.laserDown) G.STUDY_INSERT.laserDown(e, n, ov, pos(e));
+        e.preventDefault();
+        return;
+      }
+      if (V.tool !== "pen" && V.tool !== "hl" && V.tool !== "er" && V.tool !== "lasso") return;
       try { ov.setPointerCapture(e.pointerId); } catch (x) {}
       if (V.tool === "er") { erased = []; eraseAt(e); return; }
       if (V.tool === "lasso") {
@@ -1326,13 +1561,17 @@
         return;
       }
       var pt = sample(e);
-      cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now() };
+      cur = { id: uid(), doc: V.id, page: pid(n), tool: V.tool, color: activeColor(), w: WIDTHS[V.wi], pts: [pt], gone: false, t: Date.now(), t0: Date.now(), t1: Date.now() };
       try { if (G.STUDY_MEDIA && G.STUDY_MEDIA.stampStroke) { var __a = G.STUDY_MEDIA.stampStroke(); if (__a != null) cur.a = __a; } } catch (x) {} /* Phase 5b: audio offset */
       redraw(n, cur);
       e.preventDefault();
     });
     ov.addEventListener("pointermove", function (e) {
       if (pan) { V.sc.scrollTop -= e.clientY - pan.y; V.sc.scrollLeft -= e.clientX - pan.x; pan.y = e.clientY; pan.x = e.clientX; return; }
+      if (V.tool === "laser") {
+        if (G.STUDY_INSERT && G.STUDY_INSERT.laserMove) G.STUDY_INSERT.laserMove(e, n, ov, pos(e));
+        return;
+      }
       if (erased) return eraseAt(e);
       if (lassoPts) {
         lassoPts.push(pos(e));
@@ -1347,6 +1586,10 @@
     });
     var end = function (e) {
       if (pan) { pan = null; return; }
+      if (V.tool === "laser") {
+        if (G.STUDY_INSERT && G.STUDY_INSERT.laserUp) G.STUDY_INSERT.laserUp(e, n, ov);
+        return;
+      }
       if (erased) { var ids = erased; erased = null; if (ids.length) { push(V.stack, { t: "del", ids: ids }); syncTb(); saveStack(); } return; }
       if (lassoPts) {
         var loop = lassoPts; lassoPts = null;
@@ -1367,30 +1610,33 @@
         return;
       }
       if (!cur) return;
+      cur.t1 = Date.now();
 
-      // Scribble-to-erase check (only when pen is active and scribble setting is on)
-      if (V.tool === "pen" && V.scribble !== false && isScribble(cur.pts)) {
-        var scPts = cur.pts, scIds = [];
-        var W = ov.clientWidth, H = ov.clientHeight;
-        V.strokes.forEach(function (s) {
-          if (s.page === pid(n) && !s.gone) {
-            for (var k = 0; k < scPts.length; k += 2) {
-              if (hit(s, scPts[k][0], scPts[k][1], 18, W, H)) {
-                s.gone = true;
-                scIds.push(s.id);
-                put("strokes", s);
-                break;
-              }
+      // Scribble-to-erase check (phase P0): only when scribble is ON (default OFF), the strict detector
+      // fires, and the erase covers only strokes it actually crosses (6 px, not an 18 px neighbourhood).
+      // Anything else saves the stroke like any other stroke (never lose ink).
+      if (V.tool === "pen" && V.scribble !== false) {
+        var scW = ov.clientWidth, scH = ov.clientHeight, scInk = [];
+        V.strokes.forEach(function (s) { if (s.page === pid(n) && !s.gone) scInk.push(s); });
+        if (isScribble(cur.pts, { durationMs: cur.t1 - cur.t0, pageW: scW, pageH: scH, ink: scInk })) {
+          var scPts = cur.pts, scIds = [];
+          V.strokes.forEach(function (s) {
+            if (s.page === pid(n) && !s.gone && coveredBy(scPts, s, scW, scH)) {
+              s.gone = true;
+              scIds.push(s.id);
+              put("strokes", s);
             }
+          });
+          if (scIds.length) {
+            cur = null;
+            var scOp = { t: "del", ids: scIds };
+            push(V.stack, scOp);
+            syncTb();
+            saveStack();
+            redraw(n);
+            showEraseToast(scIds.length, scIds, n);
+            return;
           }
-        });
-        if (scIds.length) {
-          cur = null;
-          push(V.stack, { t: "del", ids: scIds });
-          syncTb();
-          saveStack();
-          redraw(n);
-          return;
         }
       }
 
@@ -1409,11 +1655,120 @@
     }
   }
 
+  // Phase 2 (study-select.js): move, resize, recolour, rotate restore snapshots; addmulti toggles every id at once.
+  function applyXformSnap(strokes, snap) {
+    (snap || []).forEach(function (t) {
+      for (var i = 0; i < strokes.length; i++) {
+        if (strokes[i].id === t.id) {
+          strokes[i].pts = t.pts.map(function (p) { return [p[0], p[1], p[2]]; });
+          strokes[i].w = t.w; strokes[i].color = t.color;
+          strokes[i].shape = t.shape ? JSON.parse(JSON.stringify(t.shape)) : strokes[i].shape;
+          if (t.fill != null) strokes[i].fill = t.fill;
+          if (t.page != null) strokes[i].page = t.page;
+          break;
+        }
+      }
+    });
+  }
   function flipOp(r) {
     var pages = {};
-    opIds(r.op).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = r.gone; pages[s.page] = 1; put("strokes", s); } }); });
+    // Phase 4: item move/resize/format ops flip the item snapshot via study-insert.js.
+    if (r.op && r.op.t === "item_mod") {
+      if (G.STUDY_INSERT && G.STUDY_INSERT.flipItemMod) {
+        G.STUDY_INSERT.flipItemMod(r.op, flipOp._undoing === true || !!r.undoing);
+      }
+      syncTb(); saveStack();
+      return;
+    }
+    if (r.op.t === "xform") {
+      // Undo restores the before snapshot; redo reapplies the after snapshot. No gone flip.
+      var isUndo2 = flipOp._undoing === true;
+      var snap = isUndo2 ? r.op.before : r.op.after;
+      applyXformSnap(V.strokes, snap);
+      (snap || []).forEach(function (t) {
+        V.strokes.forEach(function (s) { if (s.id === t.id) { pages[s.page || 1] = 1; put("strokes", s); } });
+      });
+      Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
+      syncTb(); saveStack(); return;
+    }
+    if (r.op.t === "split") {
+      // Undo of a split/erase gesture: originals come back, pieces go. Redo reverses it.
+      var isUndo = flipOp._undoing === true;
+      (r.op.orig || []).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = isUndo ? false : true; pages[s.page] = 1; put("strokes", s); } }); });
+      (r.op.pieces || []).forEach(function (id) { V.strokes.forEach(function (s) { if (s.id === id) { s.gone = isUndo ? true : false; pages[s.page] = 1; put("strokes", s); } }); });
+      Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
+      syncTb(); saveStack(); return;
+    }
+    opIds(r.op).forEach(function (id) {
+      V.strokes.forEach(function (s) { if (s.id === id) { s.gone = r.gone; pages[s.page] = 1; put("strokes", s); } });
+      if (V.items) {
+        V.items.forEach(function (it) {
+          if (it.id === id) {
+            it.gone = r.gone;
+            pages[it.page] = 1;
+            put("items", it);
+            if (G.STUDY_INSERT && G.STUDY_INSERT.renderPageItems) G.STUDY_INSERT.renderPageItems(posOf(it.page));
+          }
+        });
+      }
+    });
     Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
     syncTb(); saveStack();
+  }
+
+  // Erase toast with Undo (phase P0): one undo step, exactly the erased strokes come back. Follows the
+  // undo toast pattern (auto-dismiss 4 s). One at a time; a new erase replaces the old toast.
+  var eraseTimer = null;
+  function removeEraseToast() {
+    if (eraseTimer) { G.clearTimeout(eraseTimer); eraseTimer = null; }
+    var b = host && host.root() && host.root().querySelector("#stEraseToast");
+    if (b && b.parentNode) b.parentNode.removeChild(b);
+  }
+  function undoErase(ids) {
+    if (!V) return;
+    var pages = {}, found = -1, i, op;
+    for (i = V.stack.u.length - 1; i >= 0; i--) {
+      op = V.stack.u[i];
+      if (op && op.t === "del" && op.ids.length === ids.length) {
+        var same = true, k;
+        for (k = 0; k < ids.length; k++) if (op.ids.indexOf(ids[k]) === -1) { same = false; break; }
+        if (same) { found = i; break; }
+      }
+    }
+    if (found !== -1) {
+      op = V.stack.u.splice(found, 1)[0];
+      V.stack.r.push(op);
+    }
+    V.strokes.forEach(function (s) {
+      if (ids.indexOf(s.id) !== -1 && s.gone) { s.gone = false; pages[s.page] = 1; put("strokes", s); }
+    });
+    Object.keys(pages).forEach(function (k) { redraw(posOf(+k)); });
+    syncTb(); saveStack();
+  }
+  function showEraseToast(count, ids, n) {
+    removeEraseToast();
+    var root = host && host.root();
+    if (!root) return;
+    var div = D.createElement("div");
+    div.id = "stEraseToast";
+    div.className = "st-erase-toast";
+    div.setAttribute("role", "status");
+    div.innerHTML = "<span>" + (count === 1 ? "Erased 1 stroke" : "Erased " + count + " strokes") + "</span>" +
+      '<button type="button" class="st-erase-undo" id="stEraseUndo" data-act="st-erase-undo">Undo</button>';
+    div.addEventListener("click", function (e) {
+      var b = e.target;
+      while (b && b !== div) {
+        if (b.getAttribute && b.getAttribute("data-act") === "st-erase-undo") {
+          undoErase(ids);
+          removeEraseToast();
+          return;
+        }
+        b = b.parentNode;
+      }
+    });
+    div._stEraseIds = ids;
+    root.appendChild(div);
+    eraseTimer = G.setTimeout(removeEraseToast, 4000);
   }
 
   /* ---- export and backup (A8) ---- */
@@ -1449,6 +1804,13 @@
           c.width = cw; c.height = ch; x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, cw, ch);
           return (pg ? pg.render({ canvasContext: x, viewport: pg.getViewport({ scale: sc }) }).promise.then(function () { pg.cleanup(); }) : Promise.resolve(drawBg(x, d.style, d.ratio, cw))).then(function () {
             var id = pdf ? k : d.ord[k - 1], o = v1.height >= v1.width ? "p" : "l";
+            if (V.items) {
+              V.items.forEach(function (it) {
+                if (it.page === id && !it.gone) {
+                  if (G.STUDY_INSERT && G.STUDY_INSERT.drawItemToCanvas) G.STUDY_INSERT.drawItemToCanvas(x, it, cw, ch);
+                }
+              });
+            }
             strokes.forEach(function (s) { if (s.page === id) drawStroke(x, s, cw, ch, 1); });
             if (!doc) doc = new J({ unit: "pt", format: [v1.width, v1.height], orientation: o, compress: true }); else doc.addPage([v1.width, v1.height], o);
             doc.addImage(c.toDataURL("image/jpeg", 0.85), "JPEG", 0, 0, v1.width, v1.height); c.width = 0;
@@ -1492,9 +1854,10 @@
       return add("folders.json", json(r[1]), true).then(function () {
         return r[0].reduce(function (p, d) {
           return p.then(function () {
-            return Promise.all([strokesOf(d.id), get("undo", d.id), textOf(d.id), get("index", d.id)]).then(function (x) {
+            return Promise.all([strokesOf(d.id), get("undo", d.id), textOf(d.id), get("index", d.id), itemsOf(d.id)]).then(function (x) {
               man.counts.docs++; man.counts.strokes += x[0].length; man.counts.ptext += x[2].length;
-              return add("docs/" + d.id + ".json", json({ doc: d, strokes: x[0], undo: x[1] || null, ptext: x[2], index: x[3] || null }), true);
+              if (man.counts.items != null) man.counts.items += x[4].length;
+              return add("docs/" + d.id + ".json", json({ doc: d, strokes: x[0], undo: x[1] || null, ptext: x[2], index: x[3] || null, items: x[4] || [] }), true);
             }).then(function () {
               if (d.kind === "nb") return;
               return loadOriginal(d).then(function (bytes) { man.counts.files++; return add("files/" + d.id + ".pdf", bytes, true); });
@@ -1547,6 +1910,7 @@
             return p.then(function () {
               var d = r.doc, w = d.kind === "nb" ? Promise.resolve(d.store) : saveOriginal(d.id, ent["files/" + d.id + ".pdf"]);
               return w.then(function (where) { if (d.kind !== "nb") d.store = where; return putAll("strokes", r.strokes); })
+                .then(function () { return r.items && r.items.length ? putAll("items", r.items) : null; })
                 .then(function () { return putAll("ptext", r.ptext); })
                 .then(function () { return r.undo ? put("undo", r.undo) : null; })
                 .then(function () { return r.index ? put("index", r.index) : null; })
@@ -1659,6 +2023,7 @@
   function docIdOf(el) { return el.getAttribute("data-id"); }
   function act(a, el, h) {
     host = h;
+    if (G.STUDY_INSERT && G.STUDY_INSERT.act && G.STUDY_INSERT.act(a, el, h, V)) return;
     if (a === "st-import") return pickPdf();
     if (a === "st-photos") return pickPhotos();
     if (a === "st-backup") return backup();
@@ -1696,6 +2061,8 @@
       }).then(fillLib);
     }
     if (!V) return;
+    // Phase 2 hook: selection menu actions (study-select.js) own the st-lasso-* actions.
+    if (G.STUDY_SELECT && G.STUDY_SELECT.act && G.STUDY_SELECT.act(a, el, h, inkApi(V.cur || 1, null))) return;
     if (a === "st-more") return showMoreMenu();
     if (a === "st-close-more") return closeMoreMenu();
     if (a === "st-make") return makeDeck();
@@ -1712,7 +2079,7 @@
     }
     if (a === "st-toggle-scribble") {
       V.scribble = V.scribble === false;
-      try { G.localStorage.setItem("smd_study_scribble", V.scribble ? "1" : "0"); } catch (e) {}
+      try { G.localStorage.setItem("smd_study_scribble2", V.scribble ? "1" : "0"); } catch (e) {}
       var scSt = host.root().querySelector("#stScribbleSt");
       if (scSt) scSt.textContent = V.scribble ? "ON" : "OFF";
       host.toast("Scribble to erase: " + (V.scribble ? "ON" : "OFF"));
@@ -1786,11 +2153,27 @@
       });
       return;
     }
-    if (a === "st-tool") { var t = el.getAttribute("data-v"); V.tool = V.tool === t ? null : t; if (V.lasso) { V.lasso = null; removeLassoBar(); } return syncTb(); }
+    if (a === "st-tool") {
+      var t = el.getAttribute("data-v");
+      // Phase 1: tapping the active pen/highlighter/eraser again opens its settings popover.
+      if (V.tool === t && G.STUDY_INK && (t === "pen" || t === "hl" || t === "er")) { G.STUDY_INK.popover(inkApi(V.cur || 1, null), t); return syncTb(); }
+      if (V.tool && V.tool !== "er" && t === "er") V.prevTool = V.tool;
+      if (t !== "er" && V.tool !== t) V.prevTool = V.tool;
+      V.tool = V.tool === t ? null : t;
+      if (G.STUDY_INK) G.STUDY_INK.closePopover(inkApi(V.cur || 1, null));
+      if (V.lasso) { V.lasso = null; removeLassoBar(); }
+      return syncTb();
+    }
+    if (a === "st-ink-clear") { if (G.STUDY_INK) G.STUDY_INK.closePopover(inkApi(V.cur || 1, null)); return clearPageInk(); }
     if (a === "st-color") { V.ci = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
     if (a === "st-width") { V.wi = +el.getAttribute("data-v"); if (!V.tool) V.tool = "pen"; return syncTb(); }
-    if (a === "st-undo") { var u = undo(V.stack); return u && flipOp(u); }
-    if (a === "st-redo") { var r = redo(V.stack); return r && flipOp(r); }
+    if (a === "st-undo") { var u = undo(V.stack); if (u) { flipOp._undoing = true; flipOp(u); flipOp._undoing = false; } return; }
+    if (a === "st-redo") { var r = redo(V.stack); if (r) { flipOp._undoing = false; flipOp(r); } return; }
+    if (a === "st-erase-undo") {
+      var et = host.root().querySelector("#stEraseToast");
+      if (et && et._stEraseIds) { undoErase(et._stEraseIds); removeEraseToast(); }
+      return;
+    }
     if (a === "st-go") {
       var inp = h.root().querySelector("#stPage"), n = Math.max(1, Math.min(V.n, parseInt(inp && inp.value, 10) || 1));
       closePageSheet();
@@ -1812,6 +2195,7 @@
   function back() {
     var root = host && host.root();
     if (root) {
+      if (G.STUDY_INSERT && G.STUDY_INSERT.back && G.STUDY_INSERT.back(root)) return true;
       var s = root.querySelector("#stMoreSheet, #stPageSheet, #stDocMenuSheet, #stFolderSheet");
       if (s) {
         closeMoreMenu(); closePageSheet(); closeDocMenu(); closeFolderSheet();
@@ -1824,5 +2208,25 @@
   function homeRow(h) { host = h; return ""; }
 
   /* Phase 5a hook: the GoodNotes library (study-library.js) reuses the indexer so PDF text search keeps working. */
-  G.STUDY = { on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText, kick: kick, _pure: PURE, _state: function () { return V; } };
+  /* Phase 5a hang fix: the library reuses STUDY.db (this connection) instead of opening its own
+     IndexedDB connection, so the library never holds a second connection that can wedge opens. */
+  function inkDblTap() { if (!V) return; V.tool = V.tool === "er" ? (V.prevTool || "pen") : "er"; syncTb(); }
+  G.STUDY = {
+    on: on, lib: renderLib, act: act, back: back, leave: leave, homeRow: homeRow, setPageText: setPageText,
+    kick: kick, db: db,
+    _pure: PURE, _state: function () { return V; },
+    put: put, del: del, get: get, all: all, q: q, itemsOf: itemsOf,
+    pushUndo: function (op) { push(V.stack, op); syncTb(); saveStack(); },
+    syncTb: syncTb, saveStack: saveStack, reloadNb: reloadNb,
+    askAi: askAi, makeDeck: makeDeck, sheet: sheet, closeSheet: closeSheet,
+    scanner: scanner, normPhoto: normPhoto, shotsToDoc: shotsToDoc,
+    pid: pid, posOf: posOf, redraw: redraw,
+    host: function () { return host; },
+    buildPdf: buildPdf,
+    _v: function () { return V; }, _redraw: redraw, _pushUndo: function (op) { if (V) { push(V.stack, op); saveStack(); syncTb(); } },
+    _saveStack: saveStack, _put: put, _get: get, _all: all, _strokesOf: strokesOf, _uid: uid, _drawBg: drawBg, _drawStroke: drawStroke, _del: del,
+    _reloadNb: reloadNb, _host: function () { return host; }, _syncTb: syncTb, _setZoom: setZoom, _openPdf: openPdf, _pdfjs: pdfjs, _loadOriginal: loadOriginal,
+    _doScan: doScan, _pickPhotos: pickPhotos, _pickPdf: pickPdf, _importPhotos: importPhotos,
+    _inkDblTap: inkDblTap, _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; }
+  };
 })(typeof window !== "undefined" ? window : this);

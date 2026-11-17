@@ -57,7 +57,11 @@
   function loadPref(k, def) { try { var v = G.localStorage.getItem(k); return v == null ? def : v; } catch (e) { return def; } }
   function savePref(k, v) { try { G.localStorage.setItem(k, v); } catch (e) {} }
   function parseTabs(raw) { try { var a = JSON.parse(raw || "[]"); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string" && x; }).slice(0, 12) : []; } catch (e) { return []; } }
-  var PURE = { isTrashed: isTrashed, daysOld: daysOld, shouldPurge: shouldPurge, sortDocs: sortDocs, dupTitle: dupTitle, fmtWhen: fmtWhen, loadPref: loadPref, savePref: savePref, parseTabs: parseTabs };
+  // Cover regen predicate (pure): regen only when there is no cover yet or it was marked dirty.
+  function needsCoverRegen(doc) { return !!(doc && (!doc.thumb || doc._thumbDirty)); }
+  // Bounded tab-restore retry (pure): at most 25 polls of 120ms (~3s); the old code polled forever.
+  function shouldRetryTabRestore(tries) { var t = +tries; if (!(t >= 0)) t = 0; return t < 25; }
+  var PURE = { isTrashed: isTrashed, daysOld: daysOld, shouldPurge: shouldPurge, sortDocs: sortDocs, dupTitle: dupTitle, fmtWhen: fmtWhen, loadPref: loadPref, savePref: savePref, parseTabs: parseTabs, needsCoverRegen: needsCoverRegen, shouldRetryTabRestore: shouldRetryTabRestore };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   // Early return when this runs in browser but study.js missing (flag off): nothing to patch.
   // Browser continues below; if G.STUDY is not yet defined we wait for study.js (loader order guarantees it).
@@ -90,29 +94,54 @@
   var uidN = 0;
   function uid() { return Date.now().toString(36) + (++uidN).toString(36) + Math.random().toString(36).slice(2, 7); }
   var host = null;
-  var libState = { view: loadPref("smd_study_lib_view", "grid"), sort: loadPref("smd_study_lib_sort", "date"), tab: loadPref("smd_study_lib_tab", "documents"), currentFolderId: null };
+  var libState = { view: loadPref("smd_study_lib_view", "grid"), sort: loadPref("smd_study_lib_sort", "date"), tab: "documents", currentFolderId: null };
   if (libState.view !== "grid" && libState.view !== "list") libState.view = "grid";
   if (libState.sort !== "date" && libState.sort !== "name" && libState.sort !== "type") libState.sort = "date";
-  if (libState.tab !== "documents" && libState.tab !== "search" && libState.tab !== "favorites" && libState.tab !== "trash") libState.tab = "documents";
-  /* IndexedDB (same store as study.js) */
-  var dbP = null;
+  libState.tab = "documents";
+  /* IndexedDB (same store as study.js).
+     Phase 5a hang fix: the library MUST reuse study.js's connection (STUDY.db) and never hold
+     a second one. Two open connections to "study" wedged a later indexedDB.open("study") in a
+     real browser (the library froze after import), so db() below delegates to STUDY.db().
+     The fallback open exists only if STUDY is not ready yet (loader order); it handles
+     onblocked/onerror with bounded retries and never loops. */
+  var dbP = null, dbTries = 0;
+  function sharedDb() {
+    try { var S = G.STUDY; if (S && typeof S.db === "function") return S.db(); } catch (e) {}
+    return null;
+  }
+  function ensureStores(d) {
+    if (!d.objectStoreNames.contains("docs")) d.createObjectStore("docs", { keyPath: "id" });
+    if (!d.objectStoreNames.contains("files")) d.createObjectStore("files", { keyPath: "id" });
+    if (!d.objectStoreNames.contains("folders")) d.createObjectStore("folders", { keyPath: "id" });
+    if (!d.objectStoreNames.contains("strokes")) { var s = d.createObjectStore("strokes", { keyPath: "id" }); s.createIndex("doc", "doc"); }
+    if (!d.objectStoreNames.contains("undo")) d.createObjectStore("undo", { keyPath: "doc" });
+    if (!d.objectStoreNames.contains("ptext")) { var p = d.createObjectStore("ptext", { keyPath: "id" }); p.createIndex("doc", "doc"); }
+    if (!d.objectStoreNames.contains("index")) d.createObjectStore("index", { keyPath: "doc" });
+    if (!d.objectStoreNames.contains("audio")) { var a = d.createObjectStore("audio", { keyPath: "id" }); a.createIndex("doc", "doc"); } /* Phase 5b */
+    if (!d.objectStoreNames.contains("items")) { var it = d.createObjectStore("items", { keyPath: "id" }); it.createIndex("doc", "doc"); }
+  }
   function db() {
+    var shared = sharedDb();
+    if (shared) return shared;
     if (dbP) return dbP;
+    if (dbTries >= 5) return Promise.reject(new Error("study-db-blocked"));
+    var tries = ++dbTries;
     dbP = new Promise(function (res, rej) {
-      var r = G.indexedDB.open("study", 3);
-      r.onupgradeneeded = function () {
-        var d = r.result;
-        if (!d.objectStoreNames.contains("docs")) d.createObjectStore("docs", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("files")) d.createObjectStore("files", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("folders")) d.createObjectStore("folders", { keyPath: "id" });
-        if (!d.objectStoreNames.contains("strokes")) { var s = d.createObjectStore("strokes", { keyPath: "id" }); s.createIndex("doc", "doc"); }
-        if (!d.objectStoreNames.contains("undo")) d.createObjectStore("undo", { keyPath: "doc" });
-        if (!d.objectStoreNames.contains("ptext")) { var p = d.createObjectStore("ptext", { keyPath: "id" }); p.createIndex("doc", "doc"); }
-        if (!d.objectStoreNames.contains("index")) d.createObjectStore("index", { keyPath: "doc" });
-        if (!d.objectStoreNames.contains("audio")) { var a = d.createObjectStore("audio", { keyPath: "id" }); a.createIndex("doc", "doc"); } /* Phase 5b */
+      var r;
+      try { r = G.indexedDB.open("study", 3); }
+      catch (e) { dbP = null; rej(e); return; }
+      r.onupgradeneeded = function () { try { ensureStores(r.result); } catch (e) {} };
+      r.onsuccess = function () {
+        var conn = r.result;
+        try { conn.onversionchange = function () { dbP = null; try { conn.close(); } catch (e) {} }; } catch (e) {}
+        res(conn);
       };
-      r.onsuccess = function () { res(r.result); };
-      r.onerror = function () { dbP = null; rej(r.error); };
+      r.onblocked = function () { /* another connection holds the upgrade; retry a few times, never forever */
+        dbP = null;
+        if (tries >= 5) return rej(new Error("study-db-blocked"));
+        G.setTimeout(function () { db().then(res, rej); }, 250 * tries);
+      };
+      r.onerror = function () { dbP = null; rej(r.error || new Error("study-db-open")); };
     });
     return dbP;
   }
@@ -129,10 +158,30 @@
   var idbAll = function (s) { return q(s, "readonly", function (o) { return o.getAll(); }); };
   var idbPut = function (s, v) { return q(s, "readwrite", function (o) { return o.put(v); }); };
   var idbDel = function (s, k) { return q(s, "readwrite", function (o) { return o.delete(k); }); };
+  /* idbUpdate: get + mutate + put in ONE read-write transaction (avoids a race between separate get/put
+     calls and a concurrent read from the test harness or a different connection). */
+  var idbUpdate = function (s, k, fn) {
+    return db().then(function (d) {
+      return new Promise(function (res, rej) {
+        var t = d.transaction(s, "readwrite"), store = t.objectStore(s);
+        var gr = store.get(k);
+        gr.onsuccess = function () {
+          var v = gr.result; if (!v) { t.abort(); return res(null); }
+          fn(v); store.put(v);
+          t.oncomplete = function () { res(v); };
+        };
+        t.onerror = t.onabort = function () { rej(t.error); };
+      });
+    });
+  };
   var strokesOf = function (id) { return q("strokes", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
   var textOf = function (id) { return q("ptext", "readonly", function (o) { return o.index("doc").getAll(G.IDBKeyRange.only(id)); }); };
   function esc(s) { if (host && host.esc) return host.esc(s); s = String(s == null ? "" : s); return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
-  function getHost() { try { if (G.PREP && G.PREP._host) return G.PREP._host; } catch (e) {} return host; }
+  function getHost() {
+    try { if (G.STUDY && G.STUDY._host && G.STUDY._host()) return G.STUDY._host(); } catch (e) {}
+    try { if (G.PREP && G.PREP._host) return G.PREP._host; } catch (e) {}
+    return host;
+  }
   // ---- trash auto-purge on load (30 days) ----
   function purgeExpiredTrash() {
     var cutoff = Date.now() - 30 * 86400000;
@@ -151,9 +200,12 @@
     }).then(null, function () {});
   }
   // ---- bulk cover rendering ----
+  var coverBusy = {};
   function renderCoverForDoc(doc, onDone) {
-    var done = function () { if (onDone) onDone(); };
-    if (doc.thumb && !doc._thumbDirty) return done();
+    var done = function () { coverBusy[doc.id] = false; if (onDone) onDone(); };
+    if (!needsCoverRegen(doc)) return done();
+    if (coverBusy[doc.id]) return done();
+    coverBusy[doc.id] = true;
     // For notebooks we can regenerate quickly from strokes; for PDFs we need pdf.js
     if (doc.kind === "nb") {
       strokesOf(doc.id).then(function (ss) {
@@ -357,11 +409,14 @@
   function getTabState() { try { var o = JSON.parse(G.localStorage.getItem(TABSTATE_KEY) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
   function setTabState(id, st) { var all = getTabState(); all[id] = st; try { G.localStorage.setItem(TABSTATE_KEY, JSON.stringify(all)); } catch (e) {} }
   function addTab(docId) {
+    if (!docId) return;
     var tabs = getTabs();
-    if (tabs.indexOf(docId) === -1) tabs.push(docId);
-    if (tabs.length > 12) tabs = tabs.slice(-12);
-    setTabs(tabs);
-    renderDocTabs();
+    if (tabs.indexOf(docId) === -1) {
+      tabs.push(docId);
+      if (tabs.length > 12) tabs = tabs.slice(-12);
+      setTabs(tabs);
+      renderDocTabs();
+    }
   }
   function removeTab(docId) {
     var tabs = getTabs().filter(function (x) { return x !== docId; });
@@ -389,19 +444,27 @@
     if (!h) return;
     addTab(id);
     // delegate to STUDY's original open (it pushes the viewer itself)
-    try { origAct("st-open", { getAttribute: function (n) { return n === "data-id" ? id : null; } }, h); } catch (e) {}
+    if (page && page > 1) {
+      try { origAct("st-hit", { getAttribute: function (n) { return n === "data-id" ? id : n === "data-page" ? page : null; } }, h); } catch (e) {}
+    } else {
+      try { origAct("st-open", { getAttribute: function (n) { return n === "data-id" ? id : null; } }, h); } catch (e) {}
+    }
     G.setTimeout(function () { injectDocTabs(); restoreTabState(id, page); }, 80);
   }
-  function restoreTabState(id, page) {
+  function restoreTabState(id, page, tries) {
     var saved = getTabState()[id];
     var st = G.STUDY && G.STUDY._state && G.STUDY._state();
-    // if nothing open yet, retry
-    if (!st || st.id !== id) { G.setTimeout(function () { restoreTabState(id, page); }, 120); return; }
+    // if nothing open yet, retry a bounded number of times (the old code retried forever)
+    tries = tries || 0;
+    if (!st || st.id !== id) {
+      if (shouldRetryTabRestore(tries)) G.setTimeout(function () { restoreTabState(id, page, tries + 1); }, 120);
+      return;
+    }
     if (page && st.pg && st.pg[page]) { try { st.sc.scrollTop = st.pg[page].el.offsetTop; if (st.cur !== undefined) st.cur = page; } catch (e) {} }
     if (saved) {
       try {
         if (saved.tool) { st.tool = saved.tool; st.ci = saved.ci; st.wi = saved.wi; }
-        if (saved.scrollTop != null && st.sc) { st.sc.scrollTop = saved.scrollTop; st.sc.scrollLeft = saved.scrollLeft || 0; }
+        if (!page && saved.scrollTop != null && st.sc) { st.sc.scrollTop = saved.scrollTop; st.sc.scrollLeft = saved.scrollLeft || 0; }
         if (saved.z && saved.z !== st.z) { /* use study.js setZoom via internal? we set directly and sync */ st.z = saved.z; /* trigger re-render of pages */ try { G.setTimeout(function () { var s2 = G.STUDY && G.STUDY._state && G.STUDY._state(); if (s2 && s2.sc) { /* re-render visible pages large */ } }, 100); } catch (e) {} }
         // sync toolbar
         try { var tb = G.STUDY && G.STUDY._state && G.STUDY._state(); /* syncTb is internal, but calling act tool with same tool will re-sync */ } catch (e) {}
@@ -416,19 +479,30 @@
     var root = hRoot(); if (!root) return;
     var body = root.querySelector(".pn-body.st-body");
     if (!body) return;
-    var old = body.querySelector("#stDocTabs");
-    if (old && old.parentNode) old.parentNode.removeChild(old);
-    var tabs = getTabs();
-    if (!tabs.length) return;
     var curState = G.STUDY && G.STUDY._state && G.STUDY._state();
     var curId = curState && curState.id;
-    var curIdx = tabs.indexOf(curId);
+    if (curId) addTab(curId);
+    var tabs = getTabs();
+    var existing = body.querySelector("#stDocTabs") || root.querySelector("#stDocTabs");
+    if (!tabs.length) {
+      if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+      return;
+    }
+    var tabKey = tabs.join(",") + ":" + (curId || "");
+    if (existing && existing._tabKey === tabKey) {
+      var p3Top = body.querySelector("#stP3Top") || root.querySelector("#stP3Top");
+      if (p3Top && p3Top.parentNode && p3Top.nextSibling !== existing) {
+        p3Top.parentNode.insertBefore(existing, p3Top.nextSibling);
+      }
+      return;
+    }
     // need titles for tabs; load async then render
     idbAll("docs").then(function (docs) {
       var by = {}; docs.forEach(function (d) { by[d.id] = d; });
-      var tabsEl = D.createElement("div");
+      var tabsEl = existing || D.createElement("div");
       tabsEl.id = "stDocTabs";
       tabsEl.className = "st-doc-tabs";
+      tabsEl._tabKey = tabKey;
       tabsEl.setAttribute("role", "tablist");
       tabsEl.setAttribute("aria-label", "Open documents");
       var html = "";
@@ -442,11 +516,20 @@
         '</div>';
       });
       tabsEl.innerHTML = html;
-      // insert after #stTb if exists else first
-      var tb = body.querySelector("#stTb");
-      if (tb && tb.parentNode === body) body.insertBefore(tabsEl, tb.nextSibling);
-      else if (body.firstChild) body.insertBefore(tabsEl, body.firstChild);
-      else body.appendChild(tabsEl);
+      // Position tabs directly UNDER #stP3Top if it exists, else before #stTb or first in body
+      var p3Top = body.querySelector("#stP3Top") || root.querySelector("#stP3Top");
+      if (p3Top && p3Top.parentNode) {
+        if (p3Top.nextSibling !== tabsEl) p3Top.parentNode.insertBefore(tabsEl, p3Top.nextSibling);
+      } else {
+        var tb = body.querySelector("#stTb");
+        if (tb && tb.parentNode === body) {
+          if (tb.previousSibling !== tabsEl) body.insertBefore(tabsEl, tb);
+        } else if (body.firstChild) {
+          if (body.firstChild !== tabsEl) body.insertBefore(tabsEl, body.firstChild);
+        } else {
+          body.appendChild(tabsEl);
+        }
+      }
     });
   }
   function renderDocTabs() { injectDocTabs(); }
@@ -532,7 +615,7 @@
     var thumb = d.thumb ? '<img class="st5a-list-th" alt="" src="' + d.thumb + '" loading="lazy">' : '<div class="st5a-list-th-ph">' + (isNb ? LIB_ICO.book : LIB_ICO.pdf) + '</div>';
     return '<div class="st5a-list-row" data-id="' + d.id + '" draggable="true">' +
       '<button type="button" class="st5a-list-open" data-act="st5a-open" data-id="' + d.id + '">' + thumb +
-        '<span class="st5a-list-tt"><b>' + esc(d.title) + '</b><small>' + esc(meta) + ' · ' + esc(fmtWhen(when)) + '</small></span>' +
+        '<span class="st5a-list-tt"><b>' + esc(d.title) + '</b><small>' + esc(meta) + ' · ' + esc(fmtWhen(when)) + '</small>' + (isNb ? '' : '<small class="st-ix" data-ix="' + d.id + '">' + esc(ixLabel5a(_ixd[d.id] || 0, d.pageCount)) + '</small>') + '</span>' +
       '</button>' +
       '<button type="button" class="st5a-icon-btn' + (d.favourite ? " on" : "") + '" data-act="st5a-fav" data-id="' + d.id + '" aria-label="Star">' + (d.favourite ? LIB_ICO.starFill : LIB_ICO.star) + '</button>' +
       '<button type="button" class="st5a-icon-btn" data-act="st5a-doc-menu" data-id="' + d.id + '">' + LIB_ICO.more + '</button>' +
@@ -565,20 +648,19 @@
   }
   function libHtml() {
     var title = libState.tab === "trash" ? "Trash" : libState.tab === "search" ? "Search" : libState.tab === "favorites" ? "Favorites" : "Documents";
-    return '<div class="st5a-wrap">' +
+    return '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
       '<div class="st5a-header"><div class="st5a-bc" id="st5aBc"></div>' +
         '<h1 class="st5a-h1" id="st5aH1">' + esc(title) + '</h1>' +
       '</div>' +
       sortChipsHtml() +
-      '<div id="stList"></div>' +
+      '<div id="stList" class="smd-books-keep smd-emo-keep"></div>' +
     '</div>';
   }
   function renderLibBody() {
     var bodyEl = D.getElementById("stList");
     if (!bodyEl && host && host.root && host.root()) bodyEl = host.root().querySelector("#stList");
     if (!bodyEl) return;
-    // purge expired on render
-    purgeExpiredTrash();
+    // trash purge runs once at init only; purging on every render doubled IDB writes and raced renders
     return Promise.all([idbAll("docs"), idbAll("folders"), idbAll("ptext"), idbAll("index")]).then(function (r) {
       var docs = r[0], folders = r[1], ptext = r[2], ixd = {}; _ixd = ixd; (r[3] || []).forEach(function (x) { ixd[x.doc] = x.done; });
       try { var bcEl = D.getElementById("st5aBc"); if (bcEl) bcEl.innerHTML = currentFolderCrumbHtml(folders); } catch (e) {}
@@ -596,7 +678,7 @@
           var byId = {}; docs.forEach(function (d) { byId[d.id] = d; });
           var hits = [];
           // title hits
-          filtered.forEach(function (d) { if (String(d.title || "").toLowerCase().indexOf(raw) !== -1) hits.push({ d: d, html: esc(snippet(d.title, raw)) }); });
+          filtered.forEach(function (d) { if (String(d.title || "").toLowerCase().indexOf(raw) !== -1) hits.push({ d: d, title: true, html: snippet(d.title, raw) }); });
           // pdf text hits
           ptext.forEach(function (x) {
             if (x.text && x.text.toLowerCase().indexOf(raw) !== -1) {
@@ -604,10 +686,11 @@
               if (d && !d.trashedAt && (libState.currentFolderId ? d.folderId === libState.currentFolderId : true)) {
                 // avoid dupe if already title hit? allow multiple pages distinct
                 var exists = hits.some(function (h) { return h.d.id === d.id && h.page === x.page; });
-                if (!exists) hits.push({ d: d, page: x.page, html: esc(snippet(x.text, raw)) });
+                if (!exists) hits.push({ d: d, page: x.page, title: false, html: snippet(x.text, raw) });
               }
             }
           });
+          hits.sort(function (a, b) { return ((b.title ? 1 : 0) - (a.title ? 1 : 0)) || (a.d.title < b.d.title ? -1 : a.d.title > b.d.title ? 1 : 0) || ((a.page || 1) - (b.page || 1)); });
           var pend = docs.filter(function (d) { return d.kind !== "nb" && (ixd[d.id] || 0) < (d.pageCount || 0); });
           var pendingNote = pend.length ? '<p class="pn-note">Some pages are not yet indexed, so more matches may appear: ' + pend.map(function (d) { return esc(d.title) + " (" + ixLabel5a(ixd[d.id] || 0, d.pageCount) + ")"; }).join("; ") + ".</p>" : "";
           // render search results
@@ -618,11 +701,11 @@
             hits = hits.slice(0, 60);
             bodyEl.innerHTML = searchInputHtml + hits.map(function (h) {
               var d = h.d;
-              return '<button type="button" class="st-hit" data-act="st5a-open" data-id="' + d.id + '" data-page="' + (h.page || 1) + '"><b>' + esc(d.title) + '</b><small>' + (h.page ? "Page " + h.page : (d.kind === "nb" ? "Notebook title" : "Title")) + '</small><span class="st-sn">' + h.html + '</span></button>';
+              return '<button type="button" class="st-hit" data-act="st-hit" data-id="' + d.id + '" data-page="' + (h.page || 1) + '"><b>' + esc(d.title) + '</b><small>' + (h.page ? "Page " + h.page : (d.kind === "nb" ? "Notebook title" : "Title")) + '</small><span class="st-sn">' + h.html + '</span></button>';
             }).join("");
           }
           var inp2 = D.getElementById("st5aSearchQ");
-          if (inp2 && !inp2._bound) { inp2._bound = true; inp2.addEventListener("input", function () { G.setTimeout(renderLibBody, 200); }); }
+          if (inp2 && !inp2._bound) { inp2._bound = true; inp2.addEventListener("input", function () { G.clearTimeout(inp2._deb); inp2._deb = G.setTimeout(renderLibBody, 200); }); }
           return;
         } else {
           // search tab empty state with input
@@ -632,7 +715,7 @@
           var listEl = D.getElementById("st5aList");
           if (listEl) listEl.innerHTML = '<p class="pn-empty">Type at least 2 characters to search.</p>';
           var inp = D.getElementById("st5aSearchQ");
-          if (inp && !inp._bound) { inp._bound = true; inp.addEventListener("input", function () { G.setTimeout(renderLibBody, 200); }); }
+          if (inp && !inp._bound) { inp._bound = true; inp.addEventListener("input", function () { G.clearTimeout(inp._deb); inp._deb = G.setTimeout(renderLibBody, 200); }); }
           return;
         }
       }
@@ -658,7 +741,14 @@
           return;
         }
         var isFav = libState.tab === "favorites";
-        bodyEl.innerHTML = '<div class="st-empty-box"><div class="st-empty-ico">' + (isFav ? LIB_ICO.favIc : LIB_ICO.book) + '</div><h3>' + (isFav ? "No favourites yet" : "No PDFs yet") + '</h3><p>' + (isFav ? "Star a document or folder to pin it here." : "Import a PDF, create a notebook, or scan notes.") + '</p></div>';
+        /* Always show the + New tile in the Documents tab even when the list is empty,
+           so the test (and user) can find .st5a-new and .st5a-card immediately. */
+        var emptyHtml = '<div class="st-empty-box"><div class="st-empty-ico">' + (isFav ? LIB_ICO.favIc : LIB_ICO.book) + '</div><h3>' + (isFav ? "No favourites yet" : "No PDFs yet") + '</h3><p>' + (isFav ? "Star a document or folder to pin it here." : "Import a PDF, create a notebook, or scan notes.") + '</p></div>';
+        if (!isFav && libState.tab === "documents") {
+          bodyEl.innerHTML = '<div class="st5a-grid">' + newTileHtml() + '</div>' + emptyHtml;
+        } else {
+          bodyEl.innerHTML = emptyHtml;
+        }
         return;
       }
       if (libState.view === "grid") {
@@ -687,16 +777,18 @@
         bodyEl.innerHTML = '<div class="st5a-list">' + rows + '</div>' + (showTrash ? '<div class="st5a-trash-actions"><button type="button" class="pn-btn sm" data-act="st5a-purge-all">Empty trash now</button></div>' : '');
       }
       // regenerate covers that are dirty
-      items.forEach(function (it) { if (it.type !== "folder" && it._thumbDirty) renderCoverForDoc(it, function () { /* lazy thumbnail update triggers re-render on next fill? */ }); });
+      items.forEach(function (it) { if (it.type !== "folder" && needsCoverRegen(it)) renderCoverForDoc(it, function () { /* lazy thumbnail update triggers re-render on next fill */ }); });
     });
   }
   function ixLabel5a(done, total) { return done >= total ? "" : "Indexing, " + done + " of " + total + " pages"; }
   function snippet(text, q) {
-    var s = String(text || ""), lower = s.toLowerCase(), idx = lower.indexOf(q), r = 40;
-    if (idx < 0) return s.slice(0, 80);
-    var a = Math.max(0, idx - r), b = Math.min(s.length, idx + q.length + r);
-    var pre = s.slice(a, idx), hit = s.slice(idx, idx + q.length), post = s.slice(idx + q.length, b);
-    return (a ? "..." : "") + pre + "<mark>" + hit + "</mark>" + post + (b < s.length ? "..." : "");
+    var s = String(text || ""), lower = s.toLowerCase(), idx = lower.indexOf(String(q || "").toLowerCase()), r = 40;
+    if (idx < 0) return esc(s.slice(0, 80));
+    var a = Math.max(0, idx - r), b = Math.min(s.length, idx + (q ? q.length : 0) + r);
+    var pre = (a ? "..." : "") + s.slice(a, idx);
+    var hit = s.slice(idx, idx + (q ? q.length : 0));
+    var post = s.slice(idx + (q ? q.length : 0), b) + (b < s.length ? "..." : "");
+    return esc(pre) + "<mark>" + esc(hit) + "</mark>" + esc(post);
   }
   function wireDrag() {
     var root = hRoot(); if (!root) return;
@@ -965,6 +1057,7 @@
             return p.then(function () {
               var d = r.doc, w = d.kind === "nb" ? Promise.resolve(d.store) : saveOriginalBytes(d.id, ent["files/" + d.id + ".pdf"]);
               return w.then(function (where) { if (d.kind !== "nb") d.store = where; return putAll("strokes", r.strokes); })
+                .then(function () { return r.items && r.items.length ? putAll("items", r.items) : null; })
                 .then(function () { return putAll("ptext", r.ptext); })
                 .then(function () { return r.undo ? idbPut("undo", r.undo) : null; })
                 .then(function () { return r.index ? idbPut("index", r.index) : null; })
@@ -1063,7 +1156,6 @@
     if (a === "st5a-close") { closeSheet5a(); return; }
     if (a === "st5a-tab") {
       libState.tab = el.getAttribute("data-v") || "documents";
-      savePref("smd_study_lib_tab", libState.tab);
       closeSheet5a();
       renderLibPaint();
       return;
@@ -1117,9 +1209,17 @@
     if (a === "st5a-purge-all") return purgeAllTrash();
     if (a === "st5a-new") return showNewSheet();
     if (a === "st5a-new-notebook") { return showNotebookSheet(); }
-    if (a === "st5a-mknb") { closeSheet5a(); var rt = hRoot(); return makeNotebook5a(rt.querySelector("#st5aNbT").value, rt.querySelector("#st5aNbS").value, rt.querySelector("#st5aNbZ").value).then(function (m) { openDocById(m.id, null); }); }
-    if (a === "st5a-new-folder") { closeSheet5a(); var fn = G.prompt("Folder name"); if (fn && fn.trim()) return newFolder(fn, libState.currentFolderId).then(renderLibBody); return; }
-    if (a === "st5a-new-subfolder") { closeSheet5a(); var sn = G.prompt("Folder name"); if (sn && sn.trim()) return newFolder(sn, idOf(el)).then(renderLibBody); return; }
+    if (a === "st5a-mknb") {
+      /* Read form values BEFORE closing the sheet (closeSheet5a removes #st5aSheet from DOM). */
+      var nbRoot = hRoot();
+      var nbTitle = nbRoot && nbRoot.querySelector("#st5aNbT") ? nbRoot.querySelector("#st5aNbT").value : "";
+      var nbStyle = nbRoot && nbRoot.querySelector("#st5aNbS") ? nbRoot.querySelector("#st5aNbS").value : "ruled";
+      var nbSize  = nbRoot && nbRoot.querySelector("#st5aNbZ") ? nbRoot.querySelector("#st5aNbZ").value : "a4";
+      closeSheet5a();
+      return makeNotebook5a(nbTitle, nbStyle, nbSize).then(function (m) { openDocById(m.id, null); });
+    }
+    if (a === "st5a-new-folder") { closeSheet5a(); var fn = G.prompt("Folder name", "New Folder"); if (fn && fn.trim()) return newFolder(fn, libState.currentFolderId).then(renderLibBody); return; }
+    if (a === "st5a-new-subfolder") { closeSheet5a(); var sn = G.prompt("Subfolder name", "New Folder"); if (sn && sn.trim()) return newFolder(sn, idOf(el)).then(renderLibBody); return; }
     if (a === "st5a-new-import") { closeSheet5a(); var f = hRoot() && hRoot().querySelector("#stFile"); if (f) f.click(); return; }
     if (a === "st5a-new-photos") {
       closeSheet5a();
@@ -1130,14 +1230,15 @@
       })([]);
       return;
     }
-    if (a === "st5a-scan") { if (origAct) return origAct("st-scan", el, h); return; }
-    if (a === "st5a-backup") { if (origAct) return origAct("st-backup", el, h); return; }
-    if (a === "st5a-restore-lib") { var rf = hRoot() && hRoot().querySelector("#stRestoreF"); if (rf) rf.click(); return; }
+    if (a === "st5a-scan") { closeSheet5a(); if (origAct) return origAct("st-scan", el, h); return; }
+    if (a === "st5a-backup") { closeSheet5a(); if (origAct) return origAct("st-backup", el, h); return; }
+    if (a === "st5a-restore-lib") { closeSheet5a(); var rf = hRoot() && hRoot().querySelector("#stRestoreF"); if (rf) rf.click(); return; }
     if (a === "st5a-folder-colour") return showFolderColourSheet(idOf(el));
     if (a === "st5a-set-colour") {
       var col = el.getAttribute("data-col");
+      var fid5a = idOf(el);
       closeSheet5a();
-      return idbGet("folders", idOf(el)).then(function (f) { if (!f) return; f.colour = col; return idbPut("folders", f); }).then(renderLibBody);
+      return idbUpdate("folders", fid5a, function (f) { f.colour = col; }).then(renderLibBody);
     }
     if (a === "st5a-move-folder") {
       closeSheet5a();
@@ -1181,7 +1282,7 @@
     var h = getHost(); if (!h) return;
     var title = libState.tab === "trash" ? "Trash" : libState.tab === "search" ? "Search" : libState.tab === "favorites" ? "Favorites" : "Documents";
     h.paint(h.bar(title, libState.tab === "documents" ? "Study Studio" : "Study Studio", "back") +
-      '<div class="pn-body st-lib st5a-lib" id="stLib">' +
+      '<div class="pn-body st-lib st5a-lib smd-books-keep smd-emo-keep" id="stLib">' +
         libHtml() +
         bottomBarHtml() +
         '<input type="file" id="stFile" accept="application/pdf" hidden>' +
@@ -1242,17 +1343,23 @@
     var S = G.STUDY; if (!S) return;
     origAct = S.act;
     var origLib = S.lib;
-    S.lib = function () { return renderLibPaint(); };
+    S.lib = function (h) {
+      if (h) host = h;
+      libState.tab = "documents";
+      libState.currentFolderId = null;
+      return renderLibPaint();
+    };
     S.act = function (a, el, h) {
       host = h;
       if (a.indexOf("st5a-") === 0) return libAct5a(a, el, h);
       // opening a document through the old actions also tracks tabs + injects the tab bar
-      if (a === "st-open" || a === "st-hit" || a === "st-src") {
+      if (a === "st-open" || a === "st-hit" || a === "st-src" || a === "st-mknb" || a === "st5a-mknb") {
         captureCurrentTab();
         var r = origAct(a, el, h);
         var id = a === "st-src" ? el.getAttribute("data-doc") : (el.getAttribute("data-id") || (el.getAttribute && el.getAttribute("data-id")));
         if (a === "st-hit") id = el.getAttribute("data-id");
         if (id) { addTab(id); G.setTimeout(function () { injectDocTabs(); }, 250); }
+        else { G.setTimeout(function () { var st = G.STUDY && G.STUDY._state && G.STUDY._state(); if (st && st.id) { addTab(st.id); injectDocTabs(); } }, 250); }
         return r;
       }
       return origAct(a, el, h);
