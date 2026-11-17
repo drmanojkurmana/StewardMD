@@ -1,0 +1,349 @@
+{
+ "v": 1,
+ "module": "sid-tb",
+ "title": "Tuberculosis Diagnosis and Drug Susceptible Treatment",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**TB diagnosis** finds the bug: **GeneXpert first**, smears need heavy loads, cultures stay gold but slow. **Chest films suggest** but never prove. **Treatment starts** on strong suspicion without waiting. **HIV with diabetes** screened in every case. **Contacts traced** from every pulmonary diagnosis.",
+   "say": "Tuberculosis is diagnosed by finding the bug, and GeneXpert has replaced smears as the first test in most clinics. Smears need ten thousand bugs per millilitre to turn positive, while cultures stay gold but take weeks. Chest films suggest but never prove, and treatment starts on strong suspicion without waiting. Every pulmonary case earns H I V testing with diabetes screening alongside.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Speed",
+     "Role"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "GeneXpert",
+      "Hours",
+      "First, plus resistance"
+     ],
+     [
+      "Smear",
+      "Minutes",
+      "Needs heavy load"
+     ],
+     [
+      "Culture",
+      "Weeks",
+      "Gold, slow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Drug susceptible TB** takes **2HRZE then 4HR**: 2 months of 4 drugs, 4 months of 2. **Isoniazid, rifampicin, pyrazinamide and ethambutol** open; **isoniazid with rifampicin** completes. **Pyridoxine shields** nerves at risk. **Liver watched** throughout. **Observed treatment** with support cures cohorts.",
+   "say": "Drug susceptible pulmonary tuberculosis is cured by two months of four drugs followed by four months of two drugs. Intensive phase is isoniazid with rifampicin with pyrazinamide with ethambutol, then isoniazid with rifampicin completes. Pyridoxine shields nerves where neuropathy threatens, and liver is watched through treatment. Direct observation with adherence support cures cohorts, not just individuals.",
+   "vis": {
+    "cols": [
+     "Phase",
+     "Drugs",
+     "Months"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Intensive",
+      "H, R, Z, E",
+      "Two"
+     ],
+     [
+      "Continuation",
+      "H, R",
+      "Four"
+     ],
+     [
+      "Extend if",
+      "Cavities, slow",
+      "Longer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**2 month smears** divide responders from failures; **positive at 5 months** defines failure. **Cultures repeated** till negative. **Weight with appetite** tracks recovery. **Failure triggers** resistance testing with full regimen review at once. **Adherence audited** before biology blamed; missed doses mimic failure.",
+   "say": "Sputum conversion at two months is separating responders from failures, and positive smears at five months define failure. Cultures are repeated till negative, while weight with appetite tracks recovery clinically. Failure triggers resistance testing with regimen review, because single drug additions breed wider resistance. Adherence is audited before biology is blamed, as missed doses mimic failure.",
+   "vis": {
+    "cols": [
+     "Month",
+     "Result",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Two",
+      "Smear negative",
+      "Responding"
+     ],
+     [
+      "Two",
+      "Still positive",
+      "Extend, watch"
+     ],
+     [
+      "Five",
+      "Still positive",
+      "Failure, retest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV with TB** treated together; **antiretrovirals within two weeks** at low counts. **Rifampicin induces** metabolism, so compatible regimens chosen. **Immune reconstitution** flares nodes and fevers; managed, not feared. **Preventive tablets shield** throughout. **Together treatment** halves deaths versus sequential care dramatically.",
+   "say": "H I V coinfection kills fastest when both diseases are treated together, and antiretrovirals start within two weeks of TB drugs at low counts. Rifampicin slashes many antiretroviral levels, so regimens are chosen to survive induction. Immune reconstitution flares nodes with fevers weeks after starting, which is managed, not feared. Preventive tablets shield throughout, and mortality falls dramatically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Start ART in two weeks, expect flares, manage on"
+     ],
+     "title": "Low CD4"
+    },
+    "right": {
+     "points": [
+      "Start by eight weeks, stable immunity, routine"
+     ],
+     "title": "Higher CD4"
+    }
+   }
+  },
+  {
+   "tx": "**Childhood TB** shows nodes, miliary and meningitis over cavities. **Gastric aspirates, induced sputum and stool Xpert** find hidden bugs. **Weight band doses** with dispersible tablets help adherence. **Steroids join** meningitis and pericarditis routinely. **BCG scars** reduce miliary and meningeal disasters.",
+   "say": "Children swallow TB differently, with lymph nodes with miliary with meningitis dominating adult type cavities. Gastric aspirates with induced sputum with stool Xpert find bugs that little lungs hide. Doses run by weight bands, and syrups with dispersible tablets help adherence. Steroids join meningitis with pericarditis, while B C G scars reduce miliary with meningeal disasters.",
+   "vis": {
+    "cols": [
+     "Child form",
+     "Finds it",
+     "Add on"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Nodes",
+      "Needle biopsy",
+      "Full course"
+     ],
+     [
+      "Miliary",
+      "Millet films",
+      "Steroids if gasping"
+     ],
+     [
+      "Meningitis",
+      "Spinal fluid",
+      "Steroids, long course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Extrapulmonary TB** hides in nodes, pleura, spine and meninges; **biopsy with fluids** proves each. **Pleural protein high, sugar low, lymphocyte predominance** suggests. **Longer courses** for meningitis and bone. **Steroids protect** nerves and pericardium. **Lung co disease** is hunted in every single case.",
+   "say": "Extrapulmonary tuberculosis is found in nodes with pleura with spine with meninges, and biopsy with fluids proves each site. Pleural fluid with high protein with low sugar and lymphocyte predominance suggests tuberculosis where clinics rely on it. Treatment runs longer for meningitis with bone, and steroids protect nerves with pericardium. Pulmonary co disease is hunted in every case.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect site, image it"
+     },
+     {
+      "id": "b",
+      "label": "Biopsy, fluid tests"
+     },
+     {
+      "id": "c",
+      "label": "Start full regimen"
+     },
+     {
+      "id": "d",
+      "label": "Longer if brain, bone"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Liver injury** pauses hepatotoxic drugs beyond **5 times** normal with symptoms; restart one by one. **Rash** earns switches. **Red urine** from rifampicin warned, never feared. **Gout** from pyrazinamide eases with fluids. **Vision checked** on ethambutol monthly. **Reactions managed**, never abandoned silently.",
+   "say": "Drug reactions interrupt treatment often, and liver injury leads the list of stoppers. Transaminases beyond five times normal with symptoms pause all hepatotoxic drugs, which restart one by one after settling. Rash with itch earns antihistamines with switches, while red urine from rifampicin is warned about, not feared. Gout from pyrazinamide eases with fluids, and vision is checked on ethambutol.",
+   "vis": {
+    "cols": [
+     "Reaction",
+     "Trigger",
+     "Move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Liver up",
+      "Five times, symptoms",
+      "Pause, restart singly"
+     ],
+     [
+      "Red urine",
+      "Rifampicin",
+      "Warn, continue"
+     ],
+     [
+      "Vision blur",
+      "Ethambutol",
+      "Stop, test eyes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prevention** screens households with chests and Xpert. **Under 5s and converters** earn preventive courses after exclusion. **Weekly isoniazid with rifapentine for 3 months** suits where available. **BCG at birth** prevents miliary and meningitis. **Masks with ventilation** cut ward spread. **Active excluded** before prevention.",
+   "say": "Prevention ends epidemics faster than treatment alone, and household contacts are screened with chests with Xpert. Children under five with new converters earn preventive courses after active disease is excluded. Weekly isoniazid with rifapentine for three months is used where available. B C G at birth prevents miliary with meningitis, and ventilation with masks cuts ward spread.",
+   "vis": {
+    "cols": [
+     "Shield",
+     "Who",
+     "How long"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Contact screen",
+      "Households",
+      "Chest, Xpert"
+     ],
+     [
+      "Preventive",
+      "Under five, converters",
+      "Three months weekly"
+     ],
+     [
+      "BCG",
+      "Birth",
+      "Once, scars"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** single drugs added to failure breed resistance. **HIV missed** in TB kills both. **Stopping at relief** relapses; complete courses. **Liver paused**, restarted singly, never abandoned. **Contacts unscreened** reseed homes silently. **5 month positivity** without retesting breeds wider resistance.",
+   "say": "The traps that fail examinations are adding single drugs to failing regimens, missing H I V in every T B case, and stopping at symptom relief instead of course completion. Liver injury is paused and restarted, never abandoned. Red urine needs warning, not stopping. Contacts unscreened reseed households, and five month positivity without resistance testing breeds extensively resistant disease.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Add one drug",
+      "Breeds resistance",
+      "Review whole regimen"
+     ],
+     [
+      "Skip HIV test",
+      "Kills both",
+      "Test every case"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cure needs** negative cultures at completion with clinical recovery; **follow up runs two years** watching relapse. **Weight with appetite with clear films** confirms healing. **Relapse within two years** restarts full workup with resistance testing. **Treatment cards** document every dose for the next clinician.",
+   "say": "Cure is declared by negative cultures at completion with clinical recovery, and follow up watches for relapse for two years. Weight regained with appetite returned with clear films confirms healing. Relapse within two years restarts full workup with resistance testing, because reinfection with failure look identical. Treatment cards document every dose for the next clinician.",
+   "vis": {
+    "cols": [
+     "End point",
+     "Proves",
+     "Then"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cultures negative",
+      "Bugs gone",
+      "Complete course"
+     ],
+     [
+      "Two year watch",
+      "No relapse",
+      "Discharge after"
+     ],
+     [
+      "Relapse",
+      "Failure or new",
+      "Full reworkup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **GeneXpert first** diagnoses. **2HRZE then 4HR** cures susceptible disease. **2 month smears** divide response; **5 month positive** means failure. **ART within 2 weeks** at low counts. **Steroids** join meningitis. **Red urine** from rifampicin is harmless.",
+   "say": "For the exam, the facts to lock in are GeneXpert first, two H R Z E then four H R, two month smears dividing response, positive at five months meaning failure, antiretrovirals within two weeks at low counts, steroids for meningitis with pericarditis, and red urine harmless from rifampicin. Liver beyond five times is pausing drugs, and children show nodes with miliary. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "First test",
+      "GeneXpert",
+      "Plus resistance"
+     ],
+     [
+      "Regimen",
+      "2HRZE, 4HR",
+      "Durations asked"
+     ],
+     [
+      "Two months",
+      "Smear check",
+      "Extend or not"
+     ],
+     [
+      "Failure",
+      "Positive at five",
+      "Retest, review"
+     ],
+     [
+      "HIV timing",
+      "ART in two weeks",
+      "Low counts"
+     ],
+     [
+      "Steroid sites",
+      "Meninges, pericardium",
+      "Protects nerves"
+     ],
+     [
+      "Red urine",
+      "Rifampicin",
+      "Warn, continue"
+     ],
+     [
+      "Child nodes",
+      "Biopsy them",
+      "Commonest form"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

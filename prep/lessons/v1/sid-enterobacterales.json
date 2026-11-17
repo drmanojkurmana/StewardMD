@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-enterobacterales",
+ "title": "Enterobacterales and Carbapenem Resistance",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Enterobacterales** are gut gram negatives lethal outside bowel; **E coli and Klebsiella** cause most hospital infections. **Lactose, citrate and motility** sort them at the bench. **Resistance travels on plasmids**, so patterns change yearly. **Blood with urine cultures** name culprits; local antibiograms guide empiric cover.",
+   "say": "Enterobacterales are gut gram negatives that turn lethal outside the bowel, and E coli with Klebsiella cause most hospital infections. Lactose with citrate with motility is used to sort them at the bench, while blood with urine cultures name the culprit. Resistance travels on plasmids, so yesterday's sensitive bug is today's nightmare. Knowing local patterns beats any single guideline.",
+   "vis": {
+    "cols": [
+     "Bug",
+     "Home",
+     "Classic disease"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "E. coli",
+      "Gut, urine",
+      "UTI, bloodstream"
+     ],
+     [
+      "Klebsiella",
+      "Gut, lungs",
+      "Liver abscess, pneumonia"
+     ],
+     [
+      "Proteus",
+      "Gut, soil",
+      "Staghorn stones, UTIs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**E coli UTI** needs symptoms with pyuria; **cloudy bags alone** mean nothing. **Asymptomatic bacteriuria** is treated only in pregnancy and before urology. **Young women** take short oral courses; **men with fever** need longer prostate cover. **Catheters out fastest** as biofilm beats drugs. **Recurrence triggers** anatomy review.",
+   "say": "E coli urinary infection is diagnosed by symptoms with pyuria, not by cloudy bags alone, and asymptomatic bacteriuria is treated only in pregnancy with before urology. Cystitis in young women takes short oral courses, while men with fever need longer treatment for prostate involvement. Catheters are removed fastest, because biofilm defeats every drug. Recurrence is followed by anatomy review, not endless prophylaxis.",
+   "vis": {
+    "cols": [
+     "UTI group",
+     "Course",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Young women",
+      "Short oral",
+      "Narrowest that works"
+     ],
+     [
+      "Men, fever",
+      "Longer, prostate",
+      "Examine, scan if repeats"
+     ],
+     [
+      "Pregnancy",
+      "Treat even silent",
+      "Screen each trimester"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Klebsiella liver abscess** strikes diabetics with **single large lesions** seeding eyes and lungs. **Hypervirulent string positive** strains dominate East Asia. **Drainage with prolonged cover** cures most. **Endophthalmitis blinds** without intravitreal rescue. **Blood cultures with eye examination** are mandatory in every single case.",
+   "say": "Klebsiella liver abscess with single large lesions is seen in diabetics and seeds eyes with lungs. Taiwan with East Asia reports most cases, and the hypervirulent string test positive strain is the culprit. Drainage with prolonged cover cures most, while metastatic endophthalmitis blinds without intravitreal rescue. Blood cultures with eye examination are mandatory in every case.",
+   "vis": {
+    "cols": [
+     "Abscess clue",
+     "Points to",
+     "Extra test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Single large, diabetic",
+      "Klebsiella",
+      "Eye exam, blood culture"
+     ],
+     [
+      "Multiple small",
+      "Biliary, amoebic",
+      "Biliary imaging"
+     ],
+     [
+      "Air inside",
+      "Gas former",
+      "Urgent drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ESBLs** destroy penicillins and cephalosporins but **spare carbapenems**. **Ceftriaxone failure** is the bedside clue; laboratory testing confirms. **Carbapenems lead** treatment. **Piperacillin with tazobactam** suits mild low risk disease. **Contact precautions with hand hygiene** stop ward spread. **Bladder cover alone** never needs carbapenems.",
+   "say": "Extended spectrum beta lactamases destroy penicillins with cephalosporins but spare carbapenems, and E coli with Klebsiella carry them on plasmids. Ceftriaxone failure with urine cover failing is the bedside clue, confirmed by laboratory testing. Carbapenems lead treatment, while piperacillin with tazobactam suits mild disease from low risk sources. Contact precautions with hand hygiene stop ward spread.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Plasmid enzyme, ceftriaxone fails, carbapenem works"
+     ],
+     "title": "ESBL"
+    },
+    "right": {
+     "points": [
+      "Chromosomal, cephalosporin induces, cefepime works"
+     ],
+     "title": "AmpC"
+    }
+   }
+  },
+  {
+   "tx": "**AmpC** hides chromosomally and **emerges on cephalosporins**; day 3 failure is classic. **Enterobacter, Citrobacter and Serratia** carry inducible genes. **Cefepime resists** the enzyme and leads. **Carbapenems saved** for severe disease. **Repeat cultures** catch emergence early; de-escalate when stable and sensitive.",
+   "say": "AmpC enzymes hide on chromosomes and emerge during cephalosporin therapy, turning day three failures into nightmares. Enterobacter with Citrobacter with Serratia carry the inducible gene, so ceftriaxone with ceftazidime select resistance even when first sensitive. Cefepime resists the enzyme and leads treatment, while carbapenems are saved for severe disease. Repeat cultures are catching emergence early.",
+   "vis": {
+    "cols": [
+     "Risk bug",
+     "Inducer",
+     "Better pick"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Enterobacter",
+      "Ceftriaxone, ceftazidime",
+      "Cefepime"
+     ],
+     [
+      "Citrobacter",
+      "Cephalosporins",
+      "Cefepime"
+     ],
+     [
+      "Serratia",
+      "Cephalosporins",
+      "Carbapenem if severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CRE** carries **KPC, NDM or OXA** enzymes; bloodstream mortality reaches half. **Rectal screening** finds carriers; **cohort nursing** slows spread. **Polymyxin with newer combinations** treats by laboratory guidance. **Kidneys are watched** on polymyxin therapy. **Every case** triggers infection control review and contact tracing.",
+   "say": "Carbapenem resistant Enterobacterales carry K P C with N D M with O X A enzymes and kill half of bloodstream victims. Rectal screening finds carriers on admission to high risk units, and cohort nursing with dedicated equipment slows spread. Polymyxin with newer combinations treats susceptible patterns, guided by laboratory testing always. Polymyxin dosing harms kidneys, so levels with function are watched closely.",
+   "vis": {
+    "cols": [
+     "Enzyme",
+     "Common home",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "KPC",
+      "Americas, Europe",
+      "Serine enzyme"
+     ],
+     [
+      "NDM",
+      "South Asia",
+      "Metallo, travels fast"
+     ],
+     [
+      "OXA enzymes",
+      "Middle East, India",
+      "Weak alone, spreads"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urinary source bacteraemia** has the best prognosis with **drained bladder and right cover**. **Shock with source control** decides intensive care. **Follow up cultures** document clearance. **Echo follows** persistent bacteraemia. **7 days** suffices for uncomplicated urinary sources cleared fast with drained foci.",
+   "say": "Bloodstream infection from urine sources carries the best prognosis when the bladder is drained and cover is right. Pitt scores with shock with source control decide intensive care, not the organism name alone. Follow up cultures document clearance, and echocardiography follows persistent bacteraemia. Seven days suffices for uncomplicated urinary sources with rapid clearance and drained foci.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gram negative in blood"
+     },
+     {
+      "id": "b",
+      "label": "Find source, drain it"
+     },
+     {
+      "id": "c",
+      "label": "Targeted cover by sensitivity"
+     },
+     {
+      "id": "d",
+      "label": "Clear cultures, stop at seven"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Empiric cover** follows severity, source and local patterns; **shock earns broad** beta lactams at once. **Stable cystitis** waits for culture. **De-escalate at seventy two hours**; audits enforce it. **Intravenous to oral switch** follows stability with working guts. **Duration is counted** from clearance and control.",
+   "say": "Empiric cover follows severity with source with local resistance, and broad starts narrow fast. Shock is treated at once with anti pseudomonal beta lactams, while stable cystitis waits for culture. De-escalation at seventy two hours is audited, because every extra broad day breeds resistance. Intravenous to oral switch follows clinical stability with working guts.",
+   "vis": {
+    "cols": [
+     "Start",
+     "Narrow when",
+     "Stop when"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Broad in shock",
+      "Cultures mature",
+      "Source controlled"
+     ],
+     [
+      "Narrow stable",
+      "Sensitivity known",
+      "Course complete"
+     ],
+     [
+      "Oral switch",
+      "Gut works, stable",
+      "Same total days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Infection control** beats plasmids: **hand hygiene, isolation and stewardship** form the tripod. **Carriers flagged** on readmission; equipment dedicated to cohorts. **Outbreaks close wards** for cleaning. **Audits cut** carbapenem overuse. **Leadership rounds** make resistance visible and change habits faster than guidelines.",
+   "say": "Infection control stops plasmids better than any new drug, and hand hygiene with isolation with stewardship is the tripod. Carriers are flagged on readmission, and equipment is dedicated to cohort rooms. Outbreaks close wards for deep cleaning, while antibiotic audits cut carbapenem overuse. Leadership rounds make resistance visible, which changes prescribing faster than guidelines.",
+   "vis": {
+    "cols": [
+     "Control move",
+     "Does what",
+     "Owned by"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Hand hygiene",
+      "Breaks transmission",
+      "Everyone, audited"
+     ],
+     [
+      "Cohort nursing",
+      "Contains carriers",
+      "Bed managers"
+     ],
+     [
+      "Stewardship",
+      "Cuts overuse",
+      "Pharmacy, rounds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** cloudy bags without symptoms need no treatment. **Eye seeding** is missed in Klebsiella bacteraemia without examination. **Day 3 failure** means AmpC emergence, not wrong drug. **Polymyxin never alone**. **Precautions precede** laboratory proof in outbreaks. **Persistent bugs** always earn echocardiography.",
+   "say": "The traps that cost marks are treating cloudy bags without symptoms, missing eye seeding in Klebsiella bacteraemia, and calling day three failure a wrong drug instead of AmpC emergence. Polymyxin is never used alone, and contact precautions start before laboratory confirmation in outbreak wards. Urinary bacteraemia with rapid clearance needs no echo, while persistent bugs always do.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Treat cloudy bag",
+      "No symptoms, no drugs",
+      "Pyuria plus symptoms"
+     ],
+     [
+      "Skip eye exam",
+      "Blindness follows",
+      "Examine every Klebsiella blood"
+     ],
+     [
+      "Polymyxin solo",
+      "Resistance follows",
+      "Combine always"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **E coli** dominates urine; **string positive Klebsiella** abscess hits diabetics. **Ceftriaxone failure** marks ESBL; **day 3 failure** marks AmpC. **KPC, NDM, OXA** mark CRE. **Carbapenems** lead ESBL; **cefepime** leads AmpC. **Drainage with 7 days** cures urinary bacteraemia.",
+   "say": "For the exam, the facts to lock in are E coli for urine, string positive Klebsiella liver abscess in diabetics, ceftriaxone failure pointing to E S B L, day three failure pointing to AmpC, and K P C with N D M with O X A marking C R E. Carbapenems lead E S B L, cefepime leads AmpC, and source control with seven days cures urinary bacteraemia. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "UTI leader",
+      "E coli",
+      "Commonest cause"
+     ],
+     [
+      "Liver abscess",
+      "String positive Klebsiella",
+      "Diabetic, eye risk"
+     ],
+     [
+      "ESBL clue",
+      "Ceftriaxone fails",
+      "Plasmid enzyme"
+     ],
+     [
+      "ESBL drug",
+      "Carbapenems",
+      "Spare nothing"
+     ],
+     [
+      "AmpC clue",
+      "Fails day three",
+      "Inducible"
+     ],
+     [
+      "AmpC drug",
+      "Cefepime",
+      "Resists enzyme"
+     ],
+     [
+      "CRE enzymes",
+      "KPC, NDM, OXA",
+      "Half die in blood"
+     ],
+     [
+      "Urinary blood",
+      "Seven days if drained",
+      "Shortest course"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

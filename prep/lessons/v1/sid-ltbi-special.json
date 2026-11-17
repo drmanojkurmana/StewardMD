@@ -1,0 +1,349 @@
+{
+ "v": 1,
+ "module": "sid-ltbi-special",
+ "title": "Latent TB Infection and TB in Special Populations",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Latent TB** sleeps without symptoms with normal films; **immune memory** proves it, not bugs. **Tuberculin skin** cross reacts with BCG; **interferon assays** stay specific with one visit. **Neither separates** latent from active; chests with sputum exclude activity first. **Treating latency** prevents lifetime reactivation.",
+   "say": "Latent tuberculosis sleeps without symptoms with a normal chest film, and it is proven by immune memory, not by finding bugs. Tuberculin skin testing cross reacts with B C G, while interferon gamma release assays stay specific and need one visit. Neither test separates latent from active disease, so chests with sputum exclude activity first. Treating latency prevents the ten percent lifetime reactivation.",
+   "vis": {
+    "cols": [
+     "Test",
+     "BCG effect",
+     "Visits"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Tuberculin skin",
+      "Cross reacts",
+      "Two visits"
+     ],
+     [
+      "Interferon assay",
+      "Unaffected",
+      "One visit"
+     ],
+     [
+      "Neither",
+      "Both immune",
+      "Exclude active first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Short regimens** replaced 9 lonely months; **completion decides** protection. **Weekly isoniazid with rifapentine for 3 months** cures in 12 doses. **Daily rifampicin for 4 months** suits most others. **6 months isoniazid** remains where rifamycins barred. **Liver watched**; active disease excluded first.",
+   "say": "Short rifamycin regimens have replaced nine months of lonely isoniazid, because completion decides protection. Weekly isoniazid with rifapentine for three months cures with twelve doses, while daily rifampicin for four months suits where combinations threaten. Six months of isoniazid remains where rifamycins cannot go. Liver is watched on all of them, and active disease excluded before the first dose.",
+   "vis": {
+    "cols": [
+     "Regimen",
+     "Doses",
+     "Suits"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "3HP weekly",
+      "Twelve doses",
+      "Most adults"
+     ],
+     [
+      "4R daily",
+      "Four months",
+      "HIV, contacts"
+     ],
+     [
+      "6H daily",
+      "Six months",
+      "Rifamycin barred"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Under 5 contacts** progress fastest; examine with chests and tests within days. **New converters** carry highest reactivation odds. **Prevention follows** active exclusion; windows close fast. **Smear positive mothers** mask till noninfectious; **babies receive** prevention. **Schools screened** after teacher disease is found.",
+   "say": "Household contacts under five progress fastest, so they are examined with chests with tests within days. New converters with recent skin or blood conversion carry the highest reactivation odds. Preventive treatment follows exclusion of active disease, and windows are closed fast. Mothers with smear positive disease are isolating with masks till noninfectious, while babies receive prevention.",
+   "vis": {
+    "cols": [
+     "Contact",
+     "Risk",
+     "Move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Under five",
+      "Progresses fast",
+      "Examine, prevent"
+     ],
+     [
+      "Converter",
+      "Reactivates most",
+      "Treat promptly"
+     ],
+     [
+      "Newborn of ill",
+      "Infected early",
+      "Prevent, mask mother"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV accelerates** reactivation 20-fold; every exposed positive is tested and treated. **Antiretroviral timing** follows counts. **Rifamycins reshape** both regimens through induction. **Preventive courses are repeated** after new exposures. **Immune unmasking** managed, never feared. **Together clinics** treat both diseases. Ever. Always.",
+   "say": "H I V coinfection accelerates reactivation twenty fold, so every positive with exposure is tested with treated. Antiretroviral timing follows counts, while rifamycin interactions reshape both regimens. Close follow up continues while counts stay low, and immune recovery unmasks hidden disease. Preventive courses are repeated after new exposures, because immunity never fully restores.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Test all exposed, treat latency, repeat after exposure"
+     ],
+     "title": "HIV positive"
+    },
+    "right": {
+     "points": [
+      "Test contacts, treat once, close window fast"
+     ],
+     "title": "HIV negative contacts"
+    }
+   }
+  },
+  {
+   "tx": "**Biologic screening** precedes first doses; blockers wake sleeping TB. **Films with assays with scar review** open files. **Latency treated fully** before blockade. **Dialysis with transplant** candidates screened likewise. **Old scars untreated** earn full courses first. **Hold blockers** during active treatment.",
+   "say": "Tumour necrosis factor blockers wake sleeping tuberculosis, so screening precedes every first dose without exception. Chest films with interferon assays with old scar review open the file, and latency treated fully before blockade starts. Dialysis with transplant candidates are screened the same way, because suppression follows. Chest scars with untreated history earn full courses first.",
+   "vis": {
+    "cols": [
+     "Suppression",
+     "Screen with",
+     "Treat when"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "TNF blockers",
+      "Film, assay",
+      "Latency full first"
+     ],
+     [
+      "Transplant",
+      "Film, assay",
+      "Before suppression"
+     ],
+     [
+      "Dialysis",
+      "Film, assay",
+      "Latent treated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pregnancy takes** isoniazid with ethambutol; pyrazinamide follows local guidance. **Breastfeeding continues** safely through treatment. **Symptomatic mothers** worked up urgently; congenital follows untreated illness. **Babies of infectious** mothers receive prevention. **Postpartum completion** is chased as defaulting peaks after delivery. Ever. Always.",
+   "say": "Pregnancy tolerates isoniazid with ethambutol while pyrazinamide waits for local guidance, and breastfeeding continues through treatment safely. Congenital disease follows untreated maternal illness, so symptomatic mothers are worked up urgently. Babies of infectious mothers receive prevention with B C G deferred. Postpartum completion is chased, because defaulting peaks after delivery.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen high risk groups"
+     },
+     {
+      "id": "b",
+      "label": "Exclude active disease"
+     },
+     {
+      "id": "c",
+      "label": "Short preventive course"
+     },
+     {
+      "id": "d",
+      "label": "Watch liver, complete"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Diabetes triples** reactivation; sugar control joins prevention. **Silicosis with smoking** multiplies risk; dust histories taken. **Steroids, cancers and malnutrition** suppress similarly. **Weight, sugar and lungs** reviewed together. **Glycaemic control** halves the excess risk measurably over years of care. Ever. Always.",
+   "say": "Diabetes triples reactivation, so sugar control joins prevention in every diabetic contact. Silicosis withquilla with smoking multiplies risk similarly, and occupational dust histories are taken. Steroids with cancers with malnutrition suppress similarly, earning screening before prolonged courses. Weight with sugar with lungs reviewed together at every visit.",
+   "vis": {
+    "cols": [
+     "Multiplier",
+     "How much",
+     "Fix with"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Diabetes",
+      "Triples",
+      "Sugar control"
+     ],
+     [
+      "Silicosis",
+      "Multiplies",
+      "Dust control"
+     ],
+     [
+      "Steroids",
+      "Suppresses",
+      "Screen first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Liver is watched** with baseline tests and monthly symptom review. **5 times normal** pauses drugs; restart after settling. **Alcohol counselled** before courses. **Defaulters are traced** within days of missing. **Completion certificates** close files; registers chase 90% targets. Ever. Yearly. Always.",
+   "say": "Liver injury is the commonest reason courses stop, so baseline tests with monthly symptom review run through treatment. Transaminases beyond five times normal pause drugs, which restart after settling. Alcohol counselling precedes every course, and defaulters are traced within days, not months. Completion certificates close files, and registers track cohorts to ninety percent targets.",
+   "vis": {
+    "cols": [
+     "Monitor",
+     "When",
+     "Act"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Baseline liver",
+      "Start",
+      "Monthly symptoms"
+     ],
+     [
+      "Five times up",
+      "Pause drugs",
+      "Restart settled"
+     ],
+     [
+      "Defaulter",
+      "Days late",
+      "Trace now"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prisons, mines and shelters** screened at entry with yearly rounds. **Migrants screened** at arrival with chests and tests. **Silica with HIV with diabetes** multiplies miner risk many fold. **Completion in mobile** groups needs supporters with incentives. **Registers follow** movers across districts.",
+   "say": "Prisons with mines with shelters concentrate risk, so entry screening with yearly rounds finds cases early. Migrants from high burden lands are screened at arrival with chests with tests. Silica dust with H I V with diabetes is multiplying risk many fold in miners. Treatment completion in mobile groups needs supporters with incentives, not threats.",
+   "vis": {
+    "cols": [
+     "Group",
+     "Screen",
+     "Keep"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Prisons",
+      "Entry, yearly",
+      "Treat inside"
+     ],
+     [
+      "Miners",
+      "Dust, HIV, sugar",
+      "Prevent all three"
+     ],
+     [
+      "Migrants",
+      "Arrival chest",
+      "Follow movers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** prevention without **excluding active** breeds resistance. **Biologics unscreened** wake sleeping TB. **Liver scares** pause, never abandon. **Under fives unexamined** progress to meningitis. **HIV unscreened** reactivates in years. **Registers unclosed** lose cohorts silently to follow up. Ever. Always Ever.",
+   "say": "The traps that fail examinations are single drug prevention without excluding active disease, missing biologic screening before first doses, and stopping at liver scares without restarting. Under five contacts unexamined progress to meningitis, and H I V positives unscreened reactivate within years. Registers unclosed lose cohorts, and preventive courses repeated needlessly waste drugs.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Prevent blind",
+      "Active lurks",
+      "Exclude first"
+     ],
+     [
+      "Biologic blind",
+      "Wakes TB",
+      "Screen first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** interferon assays are **specific, one visit**. **Active excluded** before prevention. **12 doses in 3 months** cures most. **4 month rifampicin** alternative. **Screen everyone before biologics**. **Under fives and converters** prevented. **HIV 20-fold**; diabetes triples risk.",
+   "say": "For the exam, the facts to lock in are interferon assays specific with one visit, active disease excluded first, twelve dose weekly three month cure, four month rifampicin alternative, screening before biologic first doses, and preventive courses for under five contacts with converters. H I V accelerates twenty fold, pregnancy keeps isoniazid with ethambutol, and diabetes triples risk. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Specific test",
+      "Interferon assay",
+      "BCG cross reacts"
+     ],
+     [
+      "Rule one",
+      "Exclude active first",
+      "Single drugs resist"
+     ],
+     [
+      "Shortest cure",
+      "Twelve weekly doses",
+      "3HP regimen"
+     ],
+     [
+      "Alternative",
+      "Rifampicin four months",
+      "4R regimen"
+     ],
+     [
+      "Biologic rule",
+      "Screen first dose",
+      "Wakes sleeping TB"
+     ],
+     [
+      "Top contacts",
+      "Under five, converters",
+      "Prevent fast"
+     ],
+     [
+      "HIV multiplier",
+      "Twenty fold",
+      "Test all exposed"
+     ],
+     [
+      "Diabetes multiplier",
+      "Triples",
+      "Control sugar"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

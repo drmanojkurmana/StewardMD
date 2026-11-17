@@ -1,0 +1,349 @@
+{
+ "v": 1,
+ "module": "sid-atypicals",
+ "title": "Mycoplasma, Chlamydia and Atypical Pathogens",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Atypical pneumonia** walks: dry cough, headache and low fever with **worse X ray than patient**. **Cold agglutinins, bullous drums and rashes** point to mycoplasma. **Beta lactams fail** all atypicals; **macrolides and tetracyclines** lead. **Normal white counts** with patchy shadows complete the picture.",
+   "say": "Atypical pneumonia walks while typical pneumonia lies down, because mycoplasma with chlamydia cause mild systemic illness with disproportionate X ray shadows. Dry cough with headache with low grade fever and normal white counts is the classic picture. Cold agglutinins with bullous eardrums with rashes point to mycoplasma. Beta lactams fail all of them, so macrolides with tetracyclines lead.",
+   "vis": {
+    "cols": [
+     "Pneumonia",
+     "Patient versus film",
+     "Drug works"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Typical",
+      "Sick, lobar shadow",
+      "Beta lactams"
+     ],
+     [
+      "Mycoplasma",
+      "Walking, patchy",
+      "Macrolides"
+     ],
+     [
+      "Chlamydia",
+      "Mild, single patch",
+      "Tetracyclines"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mycoplasma** spreads in schools in slow epidemics striking the young. **2 to 3 week** incubation, then dry cough settling for weeks. **Streaky films** worse than the well child. **Azithromycin 5 days** or doxycycline where age allows cures most. **Cough lingers** weeks after cure; warn families.",
+   "say": "Mycoplasma pneumoniae spreads in schools with barracks in slow epidemics, striking the young with walking pneumonia. Incubation runs two to three weeks, then dry cough with sore throat with headache settles for weeks. Chest films show streaky infiltrates far worse than the well looking child. Azithromycin for five days or doxycycline where age allows cures most.",
+   "vis": {
+    "cols": [
+     "Mycoplasma clue",
+     "Detail",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Walking child",
+      "Well, patchy film",
+      "Macrolide five days"
+     ],
+     [
+      "Bullous drums",
+      "Ear blebs",
+      "Same treatment"
+     ],
+     [
+      "Lingering cough",
+      "Weeks after",
+      "Reassure, follow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Extrapulmonary mycoplasma** follows chest disease: **Stevens Johnson, haemolysis and encephalitis** form the dangerous trio. **Macrolides continue** while immune damage earns steroids. **Transverse myelitis with Guillain Barre** follow rarely and need their own teams. **Cold agglutinins** explain anaemia; warmth with transfusion supports.",
+   "say": "Mycoplasma attacks outside lungs too, and rashes with anaemia with brain inflammation follow chest disease by days. Stevens Johnson syndrome with cold agglutinin haemolysis with encephalitis are the dangerous trio. Macrolides continue while steroids are added for severe immune mediated damage. Transverse myelitis with Guillain Barre syndrome follow rarely, and each needs its own specialist.",
+   "vis": {
+    "cols": [
+     "Outside lung",
+     "Presents as",
+     "Add on"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Skin",
+      "Stevens Johnson",
+      "Steroids, eye care"
+     ],
+     [
+      "Blood",
+      "Cold haemolysis",
+      "Warm, transfuse"
+     ],
+     [
+      "Brain",
+      "Encephalitis",
+      "Steroids, macrolide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chlamydia pneumoniae** gives **single patch** pneumonia resolving slowly in young adults. **Sore throat with hoarseness** precedes chests. **White counts stay normal**. **Doxycycline or azithromycin** cures every case; beta lactams fail all. **Reinfection is common** as immunity fades; dormitories are revisited yearly.",
+   "say": "Chlamydia pneumoniae causes single patch pneumonia in young adults that resolves slowly over weeks. Sore throat with hoarseness is preceding the chest phase, and white counts stay normal throughout. Cure comes from doxycycline or azithromycin, while beta lactams watch helplessly. Reinfection is common because immunity fades, so outbreaks revisit dormitories yearly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Young, patchy, cold agglutinins, school epidemics"
+     ],
+     "title": "Mycoplasma"
+    },
+    "right": {
+     "points": [
+      "Young adult, single patch, hoarse, sporadic"
+     ],
+     "title": "Chlamydia pneumoniae"
+    }
+   }
+  },
+  {
+   "tx": "**Psittacosis** follows **bird dust**; breeders and abattoir workers struck. **High fever, headache and spleen** mimic typhoid; exposure names birds. **Doxycycline cures** rapidly as drug of choice. **Birds are culled, cages disinfected** by veterinary teams. **Pneumonia with hepatitis** after bird contact is psittacosis first.",
+   "say": "Psittacosis follows bird dust from parrots with poultry with pigeons, striking breeders with abattoir workers. High fever with headache with splenomegaly is mimicking typhoid, but exposure names the bird. Doxycycline cures rapidly and is the drug of choice, while birds are culled with cages disinfected. Pneumonia with hepatitis together after bird contact is psittacosis first.",
+   "vis": {
+    "cols": [
+     "Bird clue",
+     "Occupation",
+     "Control"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Parrots, poultry",
+      "Breeders, abattoirs",
+      "Cull, disinfect"
+     ],
+     [
+      "Pigeons",
+      "Cleaners",
+      "Masks, wash"
+     ],
+     [
+      "Sick birds",
+      "Pet shops",
+      "Vet review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trachoma** blinds via **in turned lashes** scratching corneas after repeated infection. **SAFE strategy** combines surgery, antibiotics, facial cleanliness and environment. **Single dose azithromycin** clears high prevalence districts. **Clean faces with latrines** prevent more blindness than drugs alone can ever achieve.",
+   "say": "Trachoma blinds through repeated childhood infection, with lashes turning inward to scratch corneas over years. SAFE strategy combines surgery for trichiasis with antibiotics with facial cleanliness with environmental fly control. Single dose azithromycin for whole districts clears reservoirs where prevalence is high. Clean faces with latrines prevent more blindness than drugs alone.",
+   "vis": {
+    "cols": [
+     "SAFE letter",
+     "Means",
+     "Done by"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Surgery",
+      "Lash correction",
+      "Camps"
+     ],
+     [
+      "Antibiotics",
+      "District doses",
+      "Annual rounds"
+     ],
+     [
+      "Face, environment",
+      "Clean, flies cut",
+      "Villages"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chlamydia trachomatis** scars tubes silently; **single dose azithromycin** cures uncomplicated cases. **Doxycycline for a week** suits rectal disease. **Partners from two months** treated together. **Lymphogranuloma venereum** needs **3 weeks** doxycycline for grooving buboes. **Test of cure** follows pregnancy cases without exception.",
+   "say": "Chlamydia trachomatis causes silent cervicitis with urethritis that scars tubes into infertility. Single dose azithromycin cures uncomplicated cases, while doxycycline for a week suits rectal disease. Partners from two months are treated together, or ping pong reinfection continues. Lymphogranuloma venereum needs three weeks of doxycycline for buboes that groove the groin.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Discharge, silent screen"
+     },
+     {
+      "id": "b",
+      "label": "NAAT confirms species"
+     },
+     {
+      "id": "c",
+      "label": "Treat plus partners"
+     },
+     {
+      "id": "d",
+      "label": "Test of cure if pregnant"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Workup pairs testing with contacts:** nucleic acid tests confirm discharge pathogens together. **Mycoplasma PCR with serology** proves chest cases. **Contacts treated** on epidemiology, never symptoms. **Macrolide failures** watched as resistance rises; **doxycycline stands** behind. **Screening** catches silent tubal damage before infertility.",
+   "say": "Every genital discharge with every walking pneumonia follows the same testing logic of confirming before treating contacts. Nucleic acid tests confirm chlamydia with gonorrhoea together, while mycoplasma serology with PCR proves chest cases. Contacts are treated on epidemiology, never on symptoms alone. Resistance is watched as macrolide failures rise, and doxycycline stands ready behind.",
+   "vis": {
+    "cols": [
+     "Presenting",
+     "Confirm with",
+     "Treat plus"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Discharge",
+      "NAAT both bugs",
+      "Partners two months"
+     ],
+     [
+      "Walking pneumonia",
+      "PCR, serology",
+      "Macrolide course"
+     ],
+     [
+      "Bubo",
+      "LGV testing",
+      "Three weeks doxy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** penicillin alone fails walking pneumonia. **Extrapulmonary rashes** missed without skin checks. **Partners untreated** reinfect within weeks. **Macrolide failure** switches to doxycycline. **Trachoma pills** without face washing fail districts. **Discharge testing** covers both bugs always without any exception. Always.",
+   "say": "The traps that cost marks are treating walking pneumonia with penicillin alone, missing extrapulmonary mycoplasma rashes, and forgetting partner treatment in chlamydia. Macrolide failure is rechecked with doxycycline, not repeated endlessly. Trachoma antibiotics without face washing fail districts, and single stool thinking misses genital co infections. Every discharge earns nucleic acid testing for both bugs.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Penicillin walking",
+      "Atypicals resist",
+      "Add macrolide"
+     ],
+     [
+      "No partner cover",
+      "Ping pong returns",
+      "Treat two months back"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prevention** is cough hygiene with isolation in dormitories. **Poultry workers** wear masks with bird screening. **Trachoma districts** receive annual mass rounds. **Chlamydia screening** of the young with notification breaks chains. **Vaccines are awaited**; behaviour with treatment carries on meanwhile everywhere.",
+   "say": "Prevention in dormitories with barracks relies on cough hygiene with early isolation of the walking sick. Poultry workers wear masks with yearly bird screening, while trachoma districts receive annual mass drug rounds. Chlamydia screening of the young with partner notification breaks chains silently. Vaccines are awaited, so behaviour with treatment carries prevention.",
+   "vis": {
+    "cols": [
+     "Setting",
+     "Shield",
+     "Cycle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Dormitories",
+      "Hygiene, isolate",
+      "Outbreaks"
+     ],
+     [
+      "Poultry",
+      "Masks, screen birds",
+      "Yearly"
+     ],
+     [
+      "Districts",
+      "Mass rounds",
+      "Annual"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** walking with **worse films** marks mycoplasma. **Cold agglutinins** confirm. **Beta lactams fail** all. **Azithromycin 5 days** cures mycoplasma. **Doxycycline** cures psittacosis. **SAFE** saves trachoma eyes. **Single dose** cures chlamydia silently; **3 weeks** cures LGV buboes.",
+   "say": "For the exam, the facts to lock in are walking pneumonia with worse films, cold agglutinins for mycoplasma, beta lactams failing all atypicals, azithromycin five days for mycoplasma, doxycycline for psittacosis, S A F E for trachoma, and single dose azithromycin for chlamydia with three weeks for L G V. Stevens Johnson with haemolysis with encephalitis marks extrapulmonary spread. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Walking clue",
+      "Well child, bad film",
+      "Versus typical"
+     ],
+     [
+      "Mycoplasma blood",
+      "Cold agglutinins",
+      "Haemolysis"
+     ],
+     [
+      "Drug rule",
+      "Beta lactams fail",
+      "Use macrolides"
+     ],
+     [
+      "Mycoplasma course",
+      "Azithromycin five days",
+      "Duration"
+     ],
+     [
+      "Bird disease",
+      "Psittacosis, doxy",
+      "Exposure clue"
+     ],
+     [
+      "Trachoma plan",
+      "SAFE strategy",
+      "Surgery to environment"
+     ],
+     [
+      "Chlamydia cure",
+      "Single azithromycin",
+      "Partners too"
+     ],
+     [
+      "LGV course",
+      "Three weeks doxy",
+      "Grooving buboes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
