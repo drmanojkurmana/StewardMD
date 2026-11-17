@@ -161,7 +161,7 @@ try {
   ok(await until(`return !!document.querySelector("#pnQotd") && !document.querySelector("#pnQotd").hidden && /Question of the day/.test(document.querySelector("#pnQotd").textContent);`, 8000), "Question of the day shows on a fresh phone (no module cached)");
   ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena=0 turns the Arena off");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play = await ev(`return !!window.PREP_PLAY;`)) ? "Today's plan|IQoach|Practise|Play|Subjects|Your progress" : "Today's plan|IQoach|Practise|Subjects|Your progress", "home sections (quiet home, 2026-10-10; Play 2026-10-30): Today's plan, My coaching, Practise, Play, Subjects, Your progress");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play = await ev(`return !!window.PREP_PLAY;`)) ? "Today's plan|Practise|IQoach|Play|Subjects|Your progress" : "Today's plan|Practise|IQoach|Subjects|Your progress", "home sections (quiet home, 2026-10-10; Play 2026-10-30): Today's plan, My coaching, Practise, Play, Subjects, Your progress");
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic svg") && !/[A-Z]{3}/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy] .pn-ic").textContent);`) === true, "subject cards carry an SVG icon, not a text monogram");
   await shot("home-off");
   // some local practice so My stats has something to show
@@ -196,7 +196,7 @@ try {
   ok(await until(`var c=document.getElementById("pnCompete"); return !!c && /Live now, ends in 1\\d:\\d\\d/.test(c.textContent) && /Starts in 2 d/.test(c.textContent);`, 8000), "Compete: live daily sprint with its countdown, weekly test coming: " + await ev(`return (document.getElementById("pnCompete")||{}).textContent;`));
   const cd1 = await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`); await sleep(1300);
   ok(await ev(`return document.querySelector("#pnCompete [data-cd]").textContent;`) !== cd1, "the countdown ticks");
-  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play ? "Today's plan|IQoach|Practise|Play|Subjects|Your progress|Compete" : "Today's plan|IQoach|Practise|Subjects|Your progress|Compete"), "home sections (quiet home, 2026-10-10): Today's plan, My coaching, Practise, Subjects, Your progress, then Compete");
+  ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === (window_play ? "Today's plan|Practise|IQoach|Play|Subjects|Your progress|Compete" : "Today's plan|Practise|IQoach|Subjects|Your progress|Compete"), "home sections (owner 2026-11-17: Question of the day on top, IQoach after Practise): Today's plan, Practise, My coaching, Play, Subjects, Your progress, then Compete");
   await shot("home");
 
   // ---- consent

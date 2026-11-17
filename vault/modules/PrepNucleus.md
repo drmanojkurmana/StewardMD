@@ -2048,10 +2048,13 @@ hairlines. Fallback rows keep a neutral tile. Then (owner: "3D effect and differ
 group then holds the figure and Ask MaiK. Known: `run-prep-relabel-ui` q4 and `run-beta-figure-ui` paracetamol fail on
 main before this change.
 
-## Compact home (2026-11-17, prep180)
+## Compact home (2026-11-17, prep180; order prep183)
 Owner: "Homepage is overwhelming, more options more scrolling" and "Swipe feed and PrepReels are same, unite them". Phone home
 went from 6.7 screens to 3.7. Same rows and actions, laid out tighter (CSS block "Compact home" near the top of prep.css,
 ahead of the scoped "Reasoning explanations" / "Why option chips" blocks whose tests read everything after their marker):
+- Order (owner, same day): Question of the day first, then readiness and Today's plan, Practise, IQoach, Play, Subjects,
+  Your progress, Compete. `#pnQotd` keeps 300 px (`.pn-qotd-wait`) until the question loads, so the plan does not jump;
+  no question (offline, empty, failed index load) hides it.
 - PrepReels: one `.pn-next`-style card under Solve next (`.pn-mgh`), Saved beside it once anything is saved.
 - Practise: `.pn-group.pn-grid4` icon tiles (auto-fit, min 78 px: 4 a row on a phone, 3 under 360 px, one row on iPad),
   subtitles hidden. Nucleus360, ReWise, Custom, Mistakes, Weak areas, Bookmarks, Previous year papers (NEET-PG), Cards due, decks.
