@@ -1292,7 +1292,17 @@
 .pn-root .st-p3-zoomwin{ position:fixed; left:8px; right:8px; bottom:12px; z-index:60; background:var(--pn-card,#0D1D23); border:1px solid var(--pn-line,#2a3f45); border-radius:12px; padding:6px; }
 .pn-root .st-p3-zoomwin-bar{ display:flex; align-items:center; justify-content:space-between; padding:2px 4px 6px 4px; }
 .pn-root .st-p3-zoom-close{ min-height:32px; padding:0 10px; border-radius:8px; }
-.pn-root .st-p3-zoomwin canvas{ width:100%; height:120px; display:block; background:#fff; border-radius:8px; }
+.pn-root .st-p3-zoomwin canvas{ width:100%; height:clamp(150px, 26vh, 300px); display:block; background:#fff; border-radius:8px; touch-action:none; cursor:crosshair; }
+.pn-root .st-p3-zoomwin{ box-shadow:0 10px 30px rgba(10,20,30,0.28); }
+.pn-root .st-zw-ctl{ display:flex; align-items:center; gap:4px; flex:1; justify-content:center; }
+.pn-root .st-zw-b{ min-width:44px; min-height:40px; padding:0 10px; display:inline-flex; align-items:center; justify-content:center; gap:6px; border:0; border-radius:10px; background:transparent; color:var(--pn-text,#e8f2f0); font:inherit; font-size:13px; font-weight:600; cursor:pointer; }
+.pn-root .st-zw-b:active{ background:rgba(127,127,127,0.18); }
+.pn-root .st-zw-b:focus-visible{ outline:2px solid var(--pn-km-mint,#c9a227); outline-offset:1px; }
+.pn-root .st-zw-sep{ width:1px; height:22px; background:var(--pn-line,#2a3f45); margin:0 4px; }
+@media (max-width: 560px) { .pn-root .st-zw-nl span{ display:none; } .pn-root .st-zw-b{ min-width:40px; padding:0 6px; } }
+/* The box on the page that the strip magnifies; the shaded right edge is the auto-advance margin. */
+.pn-root .st-pg .st-zw-box{ position:absolute; z-index:14; pointer-events:none; border:2px solid #c9a227; border-radius:4px; background:rgba(201,162,39,0.05); box-shadow:0 0 0 1px rgba(255,255,255,0.7); box-sizing:border-box; }
+.pn-root .st-pg .st-zw-box-m{ position:absolute; top:0; right:0; bottom:0; background:rgba(201,162,39,0.14); border-left:1px dashed rgba(201,162,39,0.8); }
 .pn-root .st-p3-zoom-tag{ display:block; font-size:11px; color:var(--pn-mut,#9bb8b3); padding:4px 2px; }
 .pn-root .st-p3-sh{ max-height:88vh; }
 .pn-root .st-p3-sh-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--pn-line); }

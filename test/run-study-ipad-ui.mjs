@@ -75,18 +75,14 @@ const geom = () => page.evaluate(() => {
   const p = document.querySelector('.st-ov[data-n="1"]').parentNode, t = p.querySelector("canvas.st-tile-ink"), pr = p.getBoundingClientRect();
   if (!t || t.style.display === "none") return { tile: false };
   const tr = t.getBoundingClientRect(), sc = STUDY._state().sc.getBoundingClientRect();
-  if (window.__dbgGeom) console.log("GEOM", JSON.stringify({ tr, pr, sc }));
   return { tile: true, inside: tr.left >= pr.left - 1 && tr.top >= pr.top - 1 && tr.right <= pr.right + 1 && tr.bottom <= pr.bottom + 1,
     covers: tr.left <= Math.max(pr.left, sc.left) + 3 && tr.top <= Math.max(pr.top, sc.top) + 3 && tr.right >= Math.min(pr.right, sc.right) - 3 && tr.bottom >= Math.min(pr.bottom, sc.bottom) - 3 };
 });
 
-page.on("console", (m) => { if (/^GEOM/.test(m.text())) console.log(m.text()); });
-if (process.env.DBG) await page.evaluate(() => { window.__dbgGeom = 1; });
 const ZIG = [[0.2, 0.12], [0.26, 0.16], [0.32, 0.12], [0.38, 0.16], [0.44, 0.12]];
 let scr = await draw(ZIG, 0.5);
 await page.waitForTimeout(500);   // sharp tiles settle (110 ms) and repaint
 let g = await geom(), ink = await inkAt(scr);
-if (process.env.DBG) console.log(JSON.stringify(await page.evaluate(() => { const v = STUDY._state(), p = v.pg[1]; return { pts: v.strokes.map((s) => s.pts), trc: p.trc, tdpr: p.tdpr, W: p.el.clientWidth, ow: p.el.offsetWidth, rw: p.el.getBoundingClientRect().width, sc: v.sc.getBoundingClientRect(), pr: p.el.getBoundingClientRect() }; })), null, 0);
 ok(!g.tile || (g.inside && g.covers), "fit width, html zoom 1.25: the sharp tile sits on the visible part of the page (" + JSON.stringify(g) + ")");
 ok(ink.a.every((a) => a > 120), "fit width: saved ink is under the pen at every point (" + (ink.tileOn ? "tile" : "overlay") + " alpha " + ink.a.join(",") + ")");
 const off = await inkAt(scr.map(([x, y]) => [x + 60, y + 70]));
@@ -129,6 +125,40 @@ g = await geom(); ink = await inkAt(scr);
 ok(g.tile && g.inside && g.covers, "2x zoom, html zoom 1.25: the sharp tile is shown and sits on the visible part of the page (" + JSON.stringify(g) + ")");
 ok(ink.a.every((a) => a > 120), "2x zoom: saved ink is under the pen at every point (" + (ink.tileOn ? "tile" : "overlay") + " alpha " + ink.a.join(",") + ")");
 if (SHOTS) await page.screenshot({ path: SHOTS + "/ipad-2x.png" });
+
+/* ---- Zoom window: write in the strip, the ink lands inside the box on the page ---- */
+await page.evaluate(() => STUDY._setZoom(1));
+await page.waitForTimeout(500);
+await page.evaluate(() => { const v = STUDY._state(); v.sc.scrollTop = 0; });
+await page.click('[data-act="st-zoom-window"]');
+await page.waitForTimeout(400);
+const zw0 = await page.evaluate(() => { const v = STUDY._state(), box = document.querySelector(".st-pg .st-zw-box"); return { zw: v.zw, box: !!box, open: !document.getElementById("stP3ZoomWindow").hidden }; });
+ok(zw0.open && zw0.box && zw0.zw && zw0.zw.w > 0.1, "zoom window: opens with a box on the page (" + JSON.stringify(zw0.zw) + ")");
+const before = await page.evaluate(() => STUDY._state().strokes.filter((s) => !s.gone).length);
+const stripStroke = (fx0, fx1) => page.evaluate(([fx0, fx1]) => {
+  const cv = document.getElementById("stP3ZoomCv"), r = cv.getBoundingClientRect(), id = 55;
+  const f = (t, fx, fy) => cv.dispatchEvent(new PointerEvent(t, { pointerId: id, pointerType: "pen", isPrimary: true, pressure: t === "pointerup" ? 0 : 0.25, clientX: r.left + fx * r.width, clientY: r.top + fy * r.height, bubbles: true, cancelable: true, buttons: t === "pointerup" ? 0 : 1 }));
+  f("pointerdown", fx0, 0.5); for (let i = 1; i <= 8; i++) f("pointermove", fx0 + (fx1 - fx0) * i / 8, 0.5 + (i % 2 ? 0.15 : -0.15)); f("pointerup", fx1, 0.5);
+}, [fx0, fx1]);
+await stripStroke(0.1, 0.4);
+await page.waitForTimeout(300);
+const zs = await page.evaluate(() => { const v = STUDY._state(), s = v.strokes.filter((x) => !x.gone), last = s[s.length - 1], b = v.zw; return { n: s.length, inBox: last.pts.every((p) => p[0] >= b.x - 0.002 && p[0] <= b.x + b.w + 0.002 && p[1] >= b.y - 0.002 && p[1] <= b.y + b.h + 0.002), zw: b }; });
+ok(zs.n === before + 1 && zs.inBox, "zoom window: a stroke written in the strip is saved inside the box on the page");
+const stripInk = await page.evaluate(() => { const c = document.getElementById("stP3ZoomCv"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i] < 80 && d[i + 1] < 80 && d[i + 2] < 80) n++; return n; });
+ok(stripInk > 200, "zoom window: the strip shows the ink magnified (" + stripInk + " dark px)");
+const x0 = zs.zw.x;
+await stripStroke(0.6, 0.93);   // pen lifts in the right margin: the box moves on
+await page.waitForTimeout(300);
+const x1 = await page.evaluate(() => STUDY._state().zw.x);
+ok(x1 > x0 + 0.1, "zoom window: lifting the pen in the margin moves the box right (" + x0.toFixed(3) + " -> " + x1.toFixed(3) + ")");
+const y0 = await page.evaluate(() => STUDY._state().zw.y);
+await page.click('[data-act="st-zw-nl"]');
+const nl = await page.evaluate(() => STUDY._state().zw);
+ok(nl.x < 0.1 && nl.y > y0, "zoom window: New line goes back to the left margin, one box lower");
+if (SHOTS) await page.screenshot({ path: SHOTS + "/ipad-zoomwin.png" });
+await page.click('[data-act="st-zoom-close"]');
+await page.waitForTimeout(200);
+ok(await page.evaluate(() => !document.querySelector(".st-pg .st-zw-box") && document.getElementById("stP3ZoomWindow").hidden), "zoom window: Done closes it and removes the box");
 
 ok(!errors.length, "no page errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
 await browser.close();

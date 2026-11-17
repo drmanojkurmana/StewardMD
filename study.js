@@ -801,7 +801,9 @@
   function drawBg(ctx, style, ratio, W) {
     var dark = /-dark$/.test(style || ""), base = String(style || "").replace(/-dark$/, "");
     ctx.fillStyle = dark ? "#0D1D23" : "#fff"; ctx.fillRect(0, 0, W, W * ratio);
-    ctx.strokeStyle = dark ? "rgba(66,205,181,0.28)" : "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400); ctx.beginPath();
+    // Paper lines are fine and light, like a printed notebook, so ink reads first (owner's recording 2026-11-18: the
+    // ruling was as heavy as the writing). Spacing is unchanged: existing handwriting stays on its lines.
+    ctx.strokeStyle = dark ? "rgba(66,205,181,0.28)" : base === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900); ctx.beginPath();
     bgLines(base, ratio).forEach(function (l) { ctx.moveTo(l[0] * W, l[1] * W); ctx.lineTo(l[2] * W, l[3] * W); });
     /* dotgrid dots need filled points */
     if (base === "dotgrid" || base === "dots") { ctx.fillStyle = dark ? "rgba(66,205,181,0.5)" : "#7a8aa0"; ctx.stroke(); for (var i = 0; i < 0; i++) {} ctx.beginPath(); var dg = 0.06; for (var yy = dg * 1.5; yy < ratio; yy += dg) for (var xx = dg; xx < 1; xx += dg) { ctx.fillRect(xx * W, yy * W, Math.max(1, W / 400), Math.max(1, W / 400)); } return; }
@@ -962,18 +964,138 @@
     host.root().appendChild(div);
   }
 
+  /* ---- Zoom window (GoodNotes style) ----
+     A framed box on the page (V.zw: page n, x/w in page widths, y/h in page heights) is shown magnified in a strip at
+     the bottom. Writing in the strip is replayed onto the page overlay as pointer events at the matching spot, so the
+     normal ink path (pen, highlighter, eraser, undo, autosave, palm rules) does everything. Lifting the pen in the
+     shaded right margin moves the box on; at the page edge it wraps to the next line. Was a static picture before
+     (2026-11-18). */
+  var ZW_MARGIN = 0.18, ZW_LEFT = 0.06, ZW_RIGHT = 0.96;
+  function zwEl() { var r = host && host.root && host.root(); return r ? r.querySelector("#stP3ZoomWindow") : null; }
+  function zwOpen() { var z = zwEl(); return !!(z && !z.hidden && V && V.zw); }
+  // Pure: the box after the pen lifts at strip fraction fx (0..1) of its width. Unchanged unless fx is in the margin.
+  function zwAdvance(b, fx) {
+    if (fx < 1 - ZW_MARGIN) return b;
+    var nx = b.x + b.w * 0.6;
+    if (nx + b.w <= ZW_RIGHT + 0.001) return { n: b.n, x: nx, y: b.y, w: b.w, h: b.h };
+    return zwNewLine(b);
+  }
+  function zwNewLine(b) { return { n: b.n, x: ZW_LEFT, y: Math.min(1 - b.h, b.y + b.h), w: b.w, h: b.h }; }
+  function zwStripSize() { var cv = zwEl() && zwEl().querySelector("#stP3ZoomCv"); return cv ? { cv: cv, w: cv.clientWidth || 600, h: cv.clientHeight || 160 } : null; }
+  function zwFit(b) {
+    var p = V.pg[b.n], s = zwStripSize(); if (!p || !s) return b;
+    var W = p.el.clientWidth || 1, H = p.el.clientHeight || 1, w = Math.max(0.12, Math.min(0.9, b.w));
+    var h = Math.min(0.5, (w * W * s.h / s.w) / H);
+    var x = Math.max(0, Math.min(1 - w, b.x)), y = Math.max(0, Math.min(1 - h, b.y));
+    return { n: b.n, x: x, y: y, w: w, h: h };
+  }
+  function zwBox() {
+    if (!V || !V.zw) return;
+    var b = V.zw, p = V.pg[b.n]; if (!p) return;
+    var el = V.zwBoxEl;
+    if (!el) { el = V.zwBoxEl = D.createElement("div"); el.className = "st-zw-box"; el.innerHTML = '<span class="st-zw-box-m"></span>'; }
+    if (el.parentNode !== p.el) p.el.appendChild(el);
+    el.style.left = b.x * 100 + "%"; el.style.top = b.y * 100 + "%"; el.style.width = b.w * 100 + "%"; el.style.height = b.h * 100 + "%";
+    el.querySelector(".st-zw-box-m").style.width = ZW_MARGIN * 100 + "%";
+  }
+  // Keep the box on screen: scroll so it sits in the upper part of the view when it is out of sight.
+  function zwReveal() {
+    var b = V.zw, p = V.pg[b.n]; if (!p || !V.sc) return;
+    var kz = zoomOf(V.sc), r = p.el.getBoundingClientRect(), sr = V.sc.getBoundingClientRect(), strip = zwStripSize();
+    var top = r.top + b.y * r.height, bot = top + b.h * r.height, left = r.left + b.x * r.width, right = left + b.w * r.width;
+    var visBot = Math.min(sr.bottom, strip && strip.cv.getBoundingClientRect().top - 12 || sr.bottom);
+    if (top < sr.top + 8 || bot > visBot) V.sc.scrollTop += (top - (sr.top + (visBot - sr.top) * 0.25)) / kz;
+    if (left < sr.left || right > sr.right) V.sc.scrollLeft += (left - sr.left - 24) / kz;
+  }
+  function zwSet(b) { V.zw = zwFit(b); zwBox(); zwReveal(); zwRender(); }
+  function zwRender() {
+    if (!zwOpen()) return;
+    var b = V.zw, p = V.pg[b.n], s = zwStripSize(); if (!s) return;
+    var dpr = Math.min((G.devicePixelRatio || 1) * zoomOf(s.cv), 3), pw = Math.round(s.w * dpr), ph = Math.round(s.h * dpr), cv = s.cv;
+    if (cv.width !== pw || cv.height !== ph) { cv.width = pw; cv.height = ph; }
+    var ctx = cv.getContext("2d"); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, pw, ph);
+    if (!p || !p.on || !p.cv) return;
+    var W = p.el.clientWidth || 1, H = p.el.clientHeight || 1, bx = b.x * W, by = b.y * H, bw = b.w * W, bh = b.h * H, k = pw / bw;
+    if (V.nb) { var pid0 = V.nb.ord[b.n - 1]; ctx.save(); ctx.setTransform(k, 0, 0, k, -bx * k, -by * k); drawBg(ctx, pid0 != null ? tplForPid(pid0) : V.nb.style, V.ratio, W); ctx.restore(); }
+    else { var ck = p.cv.width / W; try { ctx.drawImage(p.cv, bx * ck, by * ck, bw * ck, bh * ck, 0, 0, pw, ph); } catch (e) {} }
+    ctx.save(); ctx.translate(-bx * k, -by * k); inkInto(ctx, b.n, W, H, k, bx, by); ctx.restore();
+    if (p.live) { var lk = p.live.width / W; try { ctx.drawImage(p.live, bx * lk, by * lk, bw * lk, bh * lk, 0, 0, pw, ph); } catch (e) {} }
+    // auto-advance margin: lifting the pen here moves the box on
+    ctx.fillStyle = "rgba(201,162,39,0.07)"; ctx.fillRect(pw * (1 - ZW_MARGIN), 0, pw * ZW_MARGIN, ph);
+    ctx.strokeStyle = "rgba(201,162,39,0.55)"; ctx.lineWidth = Math.max(1, dpr); ctx.setLineDash([6 * dpr, 5 * dpr]);
+    ctx.beginPath(); ctx.moveTo(pw * (1 - ZW_MARGIN), 0); ctx.lineTo(pw * (1 - ZW_MARGIN), ph); ctx.stroke(); ctx.setLineDash([]);
+  }
+  function zwSchedule() { if (!V || V.zwRaf) return; V.zwRaf = G.requestAnimationFrame(function () { if (V) { V.zwRaf = 0; zwRender(); } }); }
+  // Strip input -> the same pointer event on the page overlay, at the matching page point.
+  function zwBindStrip(cv) {
+    if (cv._zwBound) return; cv._zwBound = true;
+    var down = null;
+    var fwd = function (type, e, list) {
+      if (!V || !V.zw) return;
+      var b = V.zw, p = V.pg[b.n]; if (!p || !p.ov) return;
+      var r = cv.getBoundingClientRect(), o = p.ov.getBoundingClientRect();
+      (list && list.length ? list : [e]).forEach(function (ev) {
+        var fx = (ev.clientX - r.left) / (r.width || 1), fy = (ev.clientY - r.top) / (r.height || 1);
+        var x = o.left + (b.x + fx * b.w) * o.width, y = o.top + (b.y + fy * b.h) * o.height;
+        p.ov.dispatchEvent(new G.PointerEvent(type, { pointerId: 900000 + (e.pointerId || 0), pointerType: e.pointerType || "pen", isPrimary: true, pressure: ev.pressure, tiltX: ev.tiltX || 0, tiltY: ev.tiltY || 0, clientX: x, clientY: y, button: e.button || 0, buttons: type === "pointerup" ? 0 : (e.buttons || 1), bubbles: true, cancelable: true }));
+      });
+    };
+    cv.addEventListener("pointerdown", function (e) {
+      if (!V || !V.zw) return;
+      if (!V.tool || ["pen", "hl", "er"].indexOf(V.tool) === -1) { setTool("pen"); }
+      try { cv.setPointerCapture(e.pointerId); } catch (x) {}
+      down = { id: e.pointerId, n: V.zw.n }; e.preventDefault(); fwd("pointerdown", e); zwSchedule();
+    });
+    cv.addEventListener("pointermove", function (e) {
+      if (!down || e.pointerId !== down.id) { if (e.pointerType === "pen" || e.pointerType === "mouse") fwd("pointermove", e); return; }
+      e.preventDefault(); fwd("pointermove", e, e.getCoalescedEvents && e.getCoalescedEvents()); zwSchedule();
+    });
+    var up = function (e) {
+      if (!down || e.pointerId !== down.id) return;
+      down = null; fwd(e.type === "pointercancel" ? "pointercancel" : "pointerup", e);
+      var r = cv.getBoundingClientRect(), fx = (e.clientX - r.left) / (r.width || 1);
+      var nb = (V.tool === "pen" || V.tool === "hl") ? zwAdvance(V.zw, fx) : V.zw;
+      if (nb !== V.zw) zwSet(nb); else zwSchedule();
+    };
+    cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+    cv.style.touchAction = "none";
+  }
+  function setTool(t) { if (!V) return; if (V.tool !== t) V.prevTool = V.tool; V.tool = t; if (V.lasso) { V.lasso = null; removeLassoBar(); } syncTb(); }
+  function zwClose() {
+    var z = zwEl(); if (z) z.hidden = true;
+    var btn = host && host.root && host.root() && host.root().querySelector('#stTb [data-act="st-zoom-window"]'); if (btn) btn.classList.remove("on");
+    if (V && V.zwBoxEl && V.zwBoxEl.parentNode) V.zwBoxEl.parentNode.removeChild(V.zwBoxEl);
+  }
   function toggleZoomWindow() {
     var root = host && host.root && host.root();
     if (!root) return;
     var zw = root.querySelector("#stP3ZoomWindow");
-    if (zw) {
-      zw.hidden = !zw.hidden;
-      var btn = root.querySelector('#stTb [data-act="st-zoom-window"]');
-      if (btn) btn.classList.toggle("on", !zw.hidden);
-      if (!zw.hidden && G.STUDY_PAGES && G.STUDY_PAGES._renderZoom) {
-        G.STUDY_PAGES._renderZoom();
-      }
+    if (!zw) return;
+    if (!zw.hidden) return zwClose();
+    zw.hidden = false;
+    var btn = root.querySelector('#stTb [data-act="st-zoom-window"]'); if (btn) btn.classList.add("on");
+    // Done, Escape and Back (study-pages.js) hide the window directly: drop the box on the page with it.
+    if (!zw._zwObs && G.MutationObserver) { zw._zwObs = new G.MutationObserver(function () { if (zw.hidden && V && V.zwBoxEl && V.zwBoxEl.parentNode) V.zwBoxEl.parentNode.removeChild(V.zwBoxEl); }); zw._zwObs.observe(zw, { attributes: true, attributeFilter: ["hidden"] }); }
+    var cv = zw.querySelector("#stP3ZoomCv"); if (cv) zwBindStrip(cv);
+    if (!V.tool || ["pen", "hl", "er"].indexOf(V.tool) === -1) setTool("pen");
+    curPage();
+    var n = V.cur || 1, keep = V.zw && V.zw.n === n;
+    if (!keep) {
+      // start at the left margin of the first line in view
+      var p = V.pg[n], r = p.el.getBoundingClientRect(), sr = V.sc.getBoundingClientRect(), fy = Math.max(0.04, (sr.top - r.top) / (r.height || 1) + 0.04);
+      V.zw = { n: n, x: ZW_LEFT, y: fy, w: 0.34, h: 0.05 };
     }
+    G.requestAnimationFrame(function () { if (V && V.zw) zwSet(V.zw); });
+  }
+  function zwAct(a) {
+    if (!V || !V.zw) return false;
+    var b = V.zw;
+    if (a === "st-zw-left") { zwSet({ n: b.n, x: b.x - b.w * 0.6, y: b.y, w: b.w, h: b.h }); return true; }
+    if (a === "st-zw-right") { zwSet(zwAdvance(b, 1)); return true; }
+    if (a === "st-zw-nl") { zwSet(zwNewLine(b)); return true; }
+    if (a === "st-zw-up") { zwSet({ n: b.n, x: b.x, y: b.y - b.h, w: b.w, h: b.h }); return true; }
+    if (a === "st-zw-zin" || a === "st-zw-zout") { var w = b.w * (a === "st-zw-zin" ? 0.8 : 1.25); zwSet({ n: b.n, x: b.x, y: b.y, w: w, h: b.h }); return true; }
+    return false;
   }
 
   function showPageSheet() {
@@ -1574,6 +1696,7 @@
   function redraw(n, live, lassoLoop) {
     var p = V && V.pg[n]; if (!p || !p.ov) return;
     if (p.trc && p.tink) paintInkTile(n, p);
+    if (V.zw && V.zw.n === n) zwSchedule();
     var ctx = p.ov.getContext("2d"), dpr = p.ov.width / (p.el.clientWidth || 1), W = p.el.clientWidth, H = p.el.clientHeight;
     ctx.clearRect(0, 0, p.ov.width, p.ov.height);
     // Highlighter renders under pen ink and text-layer content visually (multiply on the overlay).
@@ -2293,6 +2416,7 @@
     if (a === "st-flat") return flatten();
     if (a === "st-explain") return explain();
     if (a === "st-zoom-window") return toggleZoomWindow();
+    if (a.indexOf("st-zw-") === 0) { zwAct(a); return; }
     if (a === "st-page-sheet") return showPageSheet();
     if (a === "st-close-pagesheet") return closePageSheet();
     if (a === "st-jump-page") {
@@ -2472,7 +2596,7 @@
     _saveStack: saveStack, _put: put, _get: get, _all: all, _strokesOf: strokesOf, _uid: uid, _drawBg: drawBg, _drawStroke: drawStroke, _del: del,
     _reloadNb: reloadNb, _host: function () { return host; }, _syncTb: syncTb, _setZoom: setZoom, _openPdf: openPdf, _pdfjs: pdfjs, _loadOriginal: loadOriginal,
     _doScan: doScan, _pickPhotos: pickPhotos, _pickPdf: pickPdf, _importPhotos: importPhotos,
-    _inkDblTap: inkDblTap, _pencilDoubleTap: pencilDoubleTap, _showPageSheet: showPageSheet, _toggleZoomWindow: toggleZoomWindow,
+    _inkDblTap: inkDblTap, _pencilDoubleTap: pencilDoubleTap, _showPageSheet: showPageSheet, _toggleZoomWindow: toggleZoomWindow, _zwAdvance: zwAdvance,
     _inkApi: function () { return V ? inkApi(V.cur || 1, null) : null; },
     pencilDoubleTap: pencilDoubleTap, pencilSwitchPrevious: pencilSwitchPrevious, openPenSettings: openPenSettings
   };

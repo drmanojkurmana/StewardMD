@@ -326,7 +326,7 @@
   function drawBgForExport(ctx, style, ratio, W) {
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
     if (style === "blank") return;
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400);
+    ctx.strokeStyle = style === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900);
     var s = 0.05, end = style === "cornell" ? ratio * 0.8 : ratio;
     ctx.beginPath();
     if (style === "ruled" || style === "cornell") { for (var y = s * 2; y < end; y += s) { ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); } }
@@ -982,7 +982,7 @@
   function drawBgCanvas(ctx, style, ratio, W) {
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
     if (style === "blank") return;
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400);
+    ctx.strokeStyle = style === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900);
     var s = 0.05, end = style === "cornell" ? ratio * 0.8 : ratio;
     ctx.beginPath();
     if (style === "ruled" || style === "cornell") { for (var y = s * 2; y < end; y += s) { ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); } }
