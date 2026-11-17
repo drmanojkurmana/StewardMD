@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "sgm-bradyarrhythmias",
+ "subject": "ss-general-medicine",
+ "title": "Bradyarrhythmias and conduction disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Bradyarrhythmia** (abnormally slow heart rhythm below 60 per minute) and **heart block** (delayed or failed conduction between atria and ventricles) cause symptoms only when rate or output falls. Symptomatic bradycardia presents with **syncope** (fainting), presyncope, exertional dyspnoea and **angina** (chest pain from low supply). Athletes may run at 40 beats per minute asymptomatically, so symptoms plus chronotropic incompetence matter more than the bare number.",
+   "say": "Bradyarrhythmia means an abnormally slow heart rhythm below sixty beats per minute, and heart block means delayed or failed conduction between atria and ventricles. Symptoms appear only when rate or cardiac output falls. Symptomatic bradycardia presents with faints, near faints, breathlessness on exertion and chest pain from low supply. Athletes may run at forty beats per minute asymptomatically, so symptoms matter more than the bare number.",
+   "vis": null
+  },
+  {
+   "tx": "Causes span **inferior myocardial infarction** (heart attack to lower wall), drugs such as beta blockers, **hyperkalaemia** (high potassium), hypothyroidism and **sleep apnoea** (airway collapse in sleep). Degenerative fibrosis of conduction tissue is commonest in older adults. **Congenital heart disease** (lifelong structural defects) and post surgical damage add younger cases. Always review **beta blockers** (rate slowing drugs) and calcium blockers before diagnosing intrinsic conduction disease.",
+   "say": "Causes span inferior myocardial infarction, rate slowing drugs such as beta blockers, hyperkalaemia, hypothyroidism and obstructive sleep apnoea. Degenerative fibrosis of conduction tissue is commonest in older adults. Congenital heart disease and post surgical damage can add younger cases. Always review beta blockers and calcium blockers before diagnosing intrinsic conduction disease as the primary cause.",
+   "vis": null
+  },
+  {
+   "tx": "The **sinoatrial node** (pacemaker in right atrium) fails to fire or conduct, causing pauses and **sick sinus syndrome** (unstable sinus function with tachy brady episodes). His-Purkinje disease prolongs conduction variably, producing **Mobitz type I** (Wenckebach) or **Mobitz type II** blocks. **Bilateral bundle branch block** (both bundle branches blocked) signals infra Hisian disease with higher progression to complete block and sudden deterioration, explaining why pacing thresholds differ between levels.",
+   "say": "The sinoatrial node, which is the pacemaker in the right atrium, may fail to fire or conduct, causing pauses and sick sinus syndrome with tachy brady episodes. His-Purkinje disease prolongs conduction variably, producing Mobitz type one, known as Wenckebach, or Mobitz type two blocks. Bilateral bundle branch block signals infra Hisian disease with higher progression to complete block, which explains differing pacing thresholds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Block pattern",
+     "Electrocardiogram clue",
+     "Typical level"
+    ],
+    "rows": [
+     [
+      "First degree delay",
+      "Long PR interval",
+      "Atrioventricular node"
+     ],
+     [
+      "Mobitz type one",
+      "Wenckebach, grouped beating",
+      "Node, usually benign"
+     ],
+     [
+      "Mobitz type two",
+      "Fixed PR, sudden dropped QRS",
+      "His Purkinje, ominous"
+     ],
+     [
+      "Complete heart block",
+      "Atria and ventricles independent",
+      "Infra Hisian, needs pacing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fatigue, palpitations, confusion and **cardiorenal syndrome** (heart kidney interaction) emerge when chronic low output injures organs slowly. Examination shows slow regular or irregular pulse, **cannon waves** (prominent neck pulsations) with atrioventricular dissociation, and signs of heart failure. **Stokes-Adams attacks** (sudden fainting with conduction failure) history points to intermittent complete block. Orthostatic vitals and **carotid sinus hypersensitivity** (oversensitive pressure sensors) help in recurrent unexplained syncope.",
+   "say": "Fatigue, palpitations, confusion and cardiorenal symptoms can emerge when chronic low output injures organs slowly. Examination can show slow pulse, prominent cannon waves in the neck with atrioventricular dissociation, and signs of heart failure. A history of Stokes-Adams attacks, which are sudden faints with conduction failure, points to intermittent complete block. Orthostatic vitals and carotid sinus hypersensitivity help in recurrent unexplained syncope.",
+   "vis": null
+  },
+  {
+   "tx": "12-lead **electrocardiogram** (heart tracing) is the first test, defining PR interval, QRS width and pause patterns. **Holter monitoring** (prolonged rhythm recording) captures intermittent blocks when resting tracings are normal. **Electrophysiology study** (invasive conduction measurement) is reserved for borderline cases before pacing. Bloods exclude hyperkalaemia and hypothyroidism, and **echocardiography** (ultrasound of heart) excludes structural disease before device planning.",
+   "say": "Twelve lead electrocardiogram is the first test, defining PR interval, QRS width and pause patterns. Holter monitoring captures intermittent blocks when resting tracings appear normal. Electrophysiology study with invasive conduction measurement is reserved for borderline cases before pacing. Blood tests exclude hyperkalaemia and hypothyroidism, and echocardiography excludes structural disease before device planning.",
+   "vis": null
+  },
+  {
+   "tx": "Symptomatic bradycardia starts with **atropine 1 mg** (anticholinergic) intravenously, repeated every 3 to 5 minutes to a maximum of 3 mg. **Isoproterenol** (beta stimulant infusion) or **dopamine** (inotrope infusion) bridges unstable patients to pacing. **European Society of Cardiology** (ESC) 2021 guidance urges pacing for high grade block rather than repeated drug trials, because atropine works poorly infra Hisian and delays definitive therapy dangerously.",
+   "say": "Symptomatic bradycardia starts with atropine one milligram intravenously, repeated every three to five minutes to a maximum of three milligrams. Isoproterenol infusion or dopamine infusion bridges unstable patients to pacing. European Society of Cardiology guidance from twenty twenty one urges pacing for high grade block rather than repeated drug trials, because atropine works poorly in infra Hisian block and delays definitive therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Symptomatic bradycardia"
+     },
+     {
+      "id": "b",
+      "label": "Atropine bolus"
+     },
+     {
+      "id": "c",
+      "label": "Bridge infusion if unstable"
+     },
+     {
+      "id": "d",
+      "label": "Temporary pacing"
+     },
+     {
+      "id": "e",
+      "label": "Permanent pacing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temporary **transcutaneous pacing** (pacing pads on skin) buys time, but **transvenous pacing** (wire through vein) is definitive in unstable complete block. Permanent **single lead ventricular pacing** (VVI device), **dual chamber pacing** (atrial plus ventricular leads) and **physiologic pacing** (avoiding dyssynchrony) are chosen by level and atrial dependence. **American College of Cardiology, American Heart Association and Heart Rhythm Society** (ACC AHA HRS) pacing guidance prioritises atrioventricular synchrony in sinus bradycardia.",
+   "say": "Temporary transcutaneous pacing with pads on skin buys time, but transvenous pacing through a vein is definitive in unstable complete block. Permanent single lead ventricular pacing, dual chamber pacing with atrial plus ventricular leads, and physiologic pacing avoiding dyssynchrony are chosen by block level and atrial dependence. American pacing guidance prioritises atrioventricular synchrony in sinus bradycardia patients.",
+   "vis": null
+  },
+  {
+   "tx": "Reversible causes such as hyperkalaemia, hypothyroidism and drug toxicity are corrected first, because pacing may be unnecessary after resolution. **Hypothyroxine** (thyroid hormone replacement) treats hypothyroid bradycardia, while drug holds restore conduction within hours. Recent **European Society of Cardiology** updates support wearable or temporary strategies only as bridges, never as substitutes for permanent devices in persistent high grade atrioventricular block with syncope.",
+   "say": "Reversible causes such as hyperkalaemia, hypothyroidism and drug toxicity are corrected first, because pacing may be unnecessary after resolution. Hypothyroxine replacement treats hypothyroid bradycardia, while holding rate slowing drugs restores conduction within hours. Recent European updates support wearable or temporary strategies only as bridges, never as substitutes for permanent devices in persistent high grade block with syncope.",
+   "vis": null
+  },
+  {
+   "tx": "Progression from Mobitz two or bundle branch block to complete heart block can be abrupt, causing trauma and **sudden cardiac death** (unexpected collapse) without warning. Mortality rises with **New York Heart Association class III or IV** (severe symptom functional classes) heart failure and tachy brady episodes. Generator change and lead revisions carry infection risk, so device centres stress **endocarditis prophylaxis** habits and remote monitoring for early dysfunction detection.",
+   "say": "Progression from Mobitz type two or bundle branch block to complete heart block can be abrupt, causing trauma and sudden cardiac death without warning. Mortality can rise with severe heart failure functional classes and tachy brady episodes. Generator change and lead revisions carry infection risk, so device centres stress remote monitoring and early detection of dysfunction long term.",
+   "vis": null
+  },
+  {
+   "tx": "Exam traps separate **Mobitz one**, usually benign and nodal, from **Mobitz two**, ominous and infra Hisian with wide QRS. Atropine helps nodal block but not complete escape rhythms. **Acute inferior infarction** (lower wall attack) block is usually transient and vagally mediated, while anterior infarction block is structural and permanent pacing is needed. Never pace asymptomatic first degree block alone, and always check potassium and drug history before implanting.",
+   "say": "Examination traps can separate Mobitz type one, usually benign and nodal, from Mobitz type two, ominous and infra Hisian with wide QRS intervals. Atropine helps nodal block but not complete escape rhythms. Acute inferior infarction block is usually transient and vagally mediated, while anterior infarction block is structural and permanent pacing is needed. You should never pace asymptomatic first degree block alone.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: quote symptomatic threshold below 60, atropine 1 mg bolus, Mobitz 1 versus 2 distinction, complete block independent rates, first test electrocardiogram plus Holter, pacing indications for high grade block with syncope, dual chamber preference for sinus bradycardia, and ESC 2021 pacing guidance. These mappings cover most electrocardiogram and management stems in one pass.",
+   "say": "High yield for the exam includes the symptomatic threshold below sixty, atropine one milligram bolus, the Mobitz one versus Mobitz two distinction, complete block with independent rates, electrocardiogram plus Holter as first tests, pacing indications for high grade block with syncope, dual chamber preference for sinus bradycardia, and European Society of Cardiology pacing guidance. These mappings can cover most electrocardiogram and management stems.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High-yield fact to quote"
+    ],
+    "rows": [
+     [
+      "Symptomatic rate",
+      "Below 60 with syncope, dyspnoea"
+     ],
+     [
+      "First drug",
+      "Atropine 1 mg intravenous"
+     ],
+     [
+      "Benign block",
+      "Mobitz type one, nodal"
+     ],
+     [
+      "Ominous block",
+      "Mobitz type two, wide QRS"
+     ],
+     [
+      "Complete block",
+      "Independent atrial ventricular rates"
+     ],
+     [
+      "First tests",
+      "Electrocardiogram plus Holter"
+     ],
+     [
+      "Pacing pacing",
+      "High grade block with syncope"
+     ],
+     [
+      "Device choice",
+      "Dual chamber in sinus bradycardia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
