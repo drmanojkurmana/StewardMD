@@ -1,0 +1,320 @@
+{
+ "v": 1,
+ "module": "shm-sickle-cell-disease",
+ "subject": "ss-haematology",
+ "title": "Sickle cell disease vaso occlusion and organ care",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 103 Disorders of Hemoglobin",
+  "American Society of Hematology guidelines for sickle cell disease 2020"
+ ],
+ "steps": [
+  {
+   "tx": "**Sickle cell disease** (SCD, sickling haemoglobin disorder) follows a single **glutamate to valine** substitution in **HBB** (beta gene), forming **HbS** (sickle haemoglobin). **HbSS** (homozygous disease) is the severest form and **HbSC** is milder. **HbF** (fetal haemoglobin) inhibits sickling and naturally modifies severity. **Polymerisation** (fibre formation) deforms cells, stiffening them and triggering **vaso occlusion** (vessel blockage pain).",
+   "say": "A single valine substitution in the beta gene forms sickle haemoglobin. Polymer fibres deform red cells and block small vessels. Fetal haemoglobin naturally protects against sickling.",
+   "vis": {
+    "cols": [
+     "Genotype",
+     "Severity",
+     "Pattern"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "HbSS",
+      "Severest disease",
+      "No normal HbA"
+     ],
+     [
+      "HbS beta zero",
+      "Severe like HbSS",
+      "Sickling dominant"
+     ],
+     [
+      "HbSC",
+      "Milder disease",
+      "HbC contribution"
+     ],
+     [
+      "Sickle trait",
+      "Carrier mostly well",
+      "Sickling under stress"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Triggers are predictable: **hypoxia** (low oxygen), cold, dehydration, infection, acidosis and altitude. **Dactylitis** (painful hand foot syndrome) is the infant hallmark, while older children suffer **stroke** (brain vessel occlusion) and adults endure **sickle bone pain** (vaso occlusive crisis). **Acute chest syndrome** (lung sickling complication) follows infection, surgery, asthma or abrupt haemoglobin fall and demands oxygen and transfusion.",
+   "say": "Cold, dehydration, infection and hypoxia trigger sickling crises. Dactylitis is the infant hallmark, while stroke strikes older children. Acute chest syndrome follows infection or surgery and demands urgent care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trigger",
+      "label": "Cold hypoxia dehydration"
+     },
+     {
+      "id": "sickle",
+      "label": "Polymer sickling"
+     },
+     {
+      "id": "pain",
+      "label": "Bone lung brain pain"
+     }
+    ],
+    "edges": [
+     [
+      "trigger",
+      "sickle"
+     ],
+     [
+      "sickle",
+      "pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic haemolysis and autosplenectomy reshape childhood. **Splenomegaly** early gives way to **autoinfarction** (spleen self destruction) by age **5**, leaving functional **asplenia** and twin infection risks from encapsulated organisms. **Penicillin prophylaxis** (preventive antibiotic) starts from **2** months in many programmes, and pneumococcal vaccination is mandatory. **Parkland** habits of fever, pain and chest symptoms always raise sickle emergencies.",
+   "say": "The spleen infarcts by age five, leaving functional asplenia. Encapsulated organisms thrive without splenic filtration. Penicillin prophylaxis and pneumococcal vaccination protect young children.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early spleen intact",
+     "points": [
+      "Splenomegaly present",
+      "Sepsis risk high",
+      "Penicillin from 2 months"
+     ]
+    },
+    "right": {
+     "title": "Later spleen lost",
+     "points": [
+      "Autoinfarction complete",
+      "Asplenia lifelong",
+      "Vaccination lifelong"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hydroxyurea** (HbF inducer, ribonucleotide reductase blocker) cuts pain crises by **44** percent and acute chest events substantially, and it is offered early in children and adults. Starting at **15** to **20** milligrams per kilogram daily and titrating by **MCV** (mean size) and counts earns steady benefit. **Voxelotor** (haemoglobin oxygen modulator, withdrawn in 2024) and **crizanlizumab** (P selectin blocker, withdrawn after failure) mark changing options. **NSAIDs** (pain relievers) plus opioids manage crises.",
+   "say": "Hydroxyurea cuts pain crises by nearly half and is offered early. Voxelotor was withdrawn in twenty twenty four over safety signals. Crizanlizumab also failed confirmatory testing.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Effect",
+     "Dose anchor"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Hydroxyurea",
+      "Raises HbF 44 percent fewer crises",
+      "15 to 20 mg per kg"
+     ],
+     [
+      "Voxelotor",
+      "Modulates oxygen",
+      "Withdrawn 2024"
+     ],
+     [
+      "Crizanlizumab",
+      "Blocks P selectin",
+      "Failed confirmatory trial"
+     ],
+     [
+      "Pain drugs",
+      "NSAIDs opioids",
+      "Crisis ladder"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transfusion saves lives in stroke and acute chest, with **simple transfusion** (top up) for stable patients and **exchange transfusion** (automated red cell swap) preferred in stroke to cut HbS below **30** percent fast. Chronic programmes need phenotype matching to prevent **alloimmunisation** (antibody formation). **Chelation** handles transfusional iron after about **20** units. Screening for alloantibodies precedes every chronic programme.",
+   "say": "Exchange transfusion is preferred in stroke to cut HbS below thirty percent quickly. Simple top up suits stable patients. Phenotype matching prevents alloimmunisation in chronic programmes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple transfusion",
+     "points": [
+      "Stable anaemia top up",
+      "Quick bedside option",
+      "Iron accumulates"
+     ]
+    },
+    "right": {
+     "title": "Exchange transfusion",
+     "points": [
+      "Stroke and chest syndrome",
+      "HbS below 30 percent",
+      "Rapid reduction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stroke** (brain infarction) prevention uses annual **transcranial Doppler** (TCD, brain blood flow scan) from age **2**, with abnormal velocities under **200** centimetres per second defining risk. Chronic exchange transfusion protects high risk children. **HSCT** (stem cell transplantation) cures disease with matched donors, and **gene therapy** (lentiviral beta addition) plus **CRISPR** (fetal haemoglobin reactivation) are now approved. **Pulmonary hypertension** (lung pressure rise) screening with echo guides referral.",
+   "say": "Annual transcranial Doppler screening runs from age two. Chronic exchange transfusion protects high risk children. Stem cell transplantation cures disease with matched donors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tcd",
+      "label": "TCD screening yearly"
+     },
+     {
+      "id": "risk",
+      "label": "High velocity high risk"
+     },
+     {
+      "id": "protect",
+      "label": "Chronic exchange transfusion"
+     }
+    ],
+    "edges": [
+     [
+      "tcd",
+      "risk"
+     ],
+     [
+      "risk",
+      "protect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Organs fail slowly. **Nephropathy** (kidney disease) begins with albuminuria, while **retinopathy** (eye vessel change) threatens vision in HbSC. **Avascular necrosis** (bone blood loss) strikes femoral and humeral heads, and **priapism** (prolonged erection) emergencies need oxygen, fluids and exchange rather than waiting. **Pregnancy** amplifies crisis, chest and clot risks, so combined haematology obstetric care is essential. Screening urines and fundi yearly is standard.",
+   "say": "Kidney disease starts with albuminuria, while retinopathy threatens vision in HbSC disease. Bone infarcts strike hip and shoulder heads. Priapism needs oxygen, fluids and exchange promptly.",
+   "vis": {
+    "cols": [
+     "Organ",
+     "Lesion",
+     "Screen"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Brain",
+      "Silent infarct stroke",
+      "TCD yearly from age 2"
+     ],
+     [
+      "Kidney",
+      "Albuminuria failure",
+      "Urine albumin yearly"
+     ],
+     [
+      "Eye",
+      "Retinopathy",
+      "Fundus examination"
+     ],
+     [
+      "Bone",
+      "Avascular necrosis",
+      "Pain driven imaging"
+     ],
+     [
+      "Lung",
+      "Pulmonary hypertension",
+      "Echo screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Global health** lessons matter. Newborn screening enables penicillin before first sepsis, and **PVOC** (pneumococcal vaccine) plus Hib vaccines are lifelong. In India, **HbS beta thalassaemia** and HbS beta plus compound heterozygotes complicate interpretation, and **GWAS** (genome wide studies) identify HbF modifiers. **Opdivo** confusion aside, **lactate dehydrogenase** and reticulocytes track haemolysis, while cold drinks and **meperidine** (pain drug) worsen sickling. Patient education is itself treatment.",
+   "say": "Newborn screening enables penicillin before the first sepsis. Vaccines and patient education are themselves treatment. Mepiridine worsens sickling and cold drinks trigger crises.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prevent crises",
+     "points": [
+      "Keep warm hydrated oxygenated",
+      "Penicillin early",
+      " Vaccines complete"
+     ]
+    },
+    "right": {
+     "title": "Worsen crises",
+     "points": [
+      "Cold exposure",
+      "Dehydration",
+      "Meperidine avoidance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Follow through pays. **Pain management** follows a ladder from NSAIDs to opioids with oxygen, fluids and incentive spirometry for chest prevention. **Anticoagulation** helps only selected acute chest subsets, not routine pain. **Deferasirox** chelates chronic transfusion iron. **HSCT** donor search starts early, since matched siblings are rare. Quality of life scores improve most with fewer crises, not merely higher haemoglobin.",
+   "say": "Pain follows a stepped ladder with hydration and spirometry support. Anticoagulation helps only selected chest subsets. Donor search for transplantation starts early.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Crisis care",
+     "points": [
+      "Oxygen fluids spirometry",
+      "NSAIDs then opioids",
+      "Exchange if severe"
+     ]
+    },
+    "right": {
+     "title": "Long term care",
+     "points": [
+      "Hydroxyurea early",
+      "Chelation if transfused",
+      "Donor search early"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exam anchors: single valine substitution gives HbS; **HbSS** is severest; autosplenectomy by age **5**; hydroxyurea at **15** to **20** milligrams per kilogram cuts crises by **44** percent; TCD from age **2** screens stroke; exchange transfusion is preferred in stroke; **voxelotor** withdrawn in 2024; and **CRISPR** reactivation therapy is approved. Meperidine and cold drinks are classic sickling triggers students must name.",
+   "say": "A single valine substitution creates sickle haemoglobin. Hydroxyurea cuts crises by nearly half. Stroke needs exchange transfusion, not simple top up.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "HbS change",
+      "Glutamate to valine",
+      "Single substitution"
+     ],
+     [
+      "Hydroxyurea",
+      "15 to 20 mg per kg",
+      "44 percent fewer crises"
+     ],
+     [
+      "TCD screen",
+      "From age 2",
+      "Yearly velocities"
+     ],
+     [
+      "Stroke therapy",
+      "Exchange preferred",
+      "HbS below 30 percent"
+     ],
+     [
+      "Spleen fate",
+      "Autoinfarct by 5",
+      "Asplenia lifelong"
+     ],
+     [
+      "Withdrawn drugs",
+      "Voxelotor 2024",
+      "Crizanlizumab failed"
+     ]
+    ]
+   }
+  }
+ ]
+}

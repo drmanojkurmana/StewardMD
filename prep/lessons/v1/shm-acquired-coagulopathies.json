@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "shm-acquired-coagulopathies",
+ "subject": "ss-haematology",
+ "title": "Acquired coagulopathies DIC mixing study traps and liver disease",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 121 Coagulation Disorders",
+  "ISTH DIC guidelines 2024",
+  "BSH guideline on acquired haemophilia A 2023"
+ ],
+ "steps": [
+  {
+   "tx": "Clotting times sort acquired bleeding fast. **PT** (prothrombin time) tests the **extrinsic pathway** (tissue factor route) and falls first in vitamin K deficiency. **aPTT** (activated partial thromboplastin time) tests the **intrinsic pathway** (contact route) and prolongs in inhibitors and haemophilia. **Thrombin time** (TT, final step test) prolongs in low **fibrinogen** (clotting protein) and sample contamination. **Both prolonged** with low fibrinogen shouts **DIC** (consumption coagulopathy).",
+   "say": "PT tests the extrinsic pathway and falls first in vitamin K deficiency. aPTT tests the intrinsic pathway and prolongs in inhibitors. Both prolonged with low fibrinogen shouts DIC.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "PT",
+     "aPTT"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Vitamin K deficiency",
+      "Prolonged",
+      "Prolonged later"
+     ],
+     [
+      "DIC",
+      "Prolonged",
+      "Prolonged, fibrinogen low"
+     ],
+     [
+      "Liver disease",
+      "Prolonged",
+      "Prolonged mild"
+     ],
+     [
+      "Haemophilia",
+      "Normal",
+      "Prolonged"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**DIC** (disseminated intravascular coagulation) consumes factors and platelets together. **Sepsis** (infection), **malignancy** (cancer), **obstetric catastrophe** (amniotic embolism) and **trauma** (crush injury) drive it. **Schistocytes** (sheared red cells) appear with **thrombocytopenia** (low platelets). **Fibrinogen** (clotting protein) falls and **D dimer** (fibrin breakdown marker) soars. **ISTH score** (International Society scoring system) at or above **five** defines overt DIC.",
+   "say": "DIC consumes clotting factors and platelets together. Sepsis malignancy and obstetric catastrophe cause most DIC. An ISTH score above five is the definition of overt DIC.",
+   "vis": {
+    "cols": [
+     "Item",
+     "DIC direction",
+     "Scoring"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Platelets",
+      "Falling count",
+      "Points for fall"
+     ],
+     [
+      "D dimer",
+      "Strongly raised",
+      "Points for level"
+     ],
+     [
+      "PT",
+      "Prolonged minutes",
+      "Points for delay"
+     ],
+     [
+      "Fibrinogen",
+      "Below one gram",
+      "Points for fall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ISTH DIC score** (scoring system) adds four items: platelets, D dimer, PT prolongation and fibrinogen. A score **above five** means overt DIC and daily repetition is advised. A score **below five** suggests nonovert DIC and repeat testing in **one** to **two** days. **Pregnancy DIC** needs a separate scoring tool because fibrinogen runs higher in pregnancy. **Chronic DIC** (Trousseau syndrome in cancer) runs low grade with raised D dimer and near normal platelets.",
+   "say": "The ISTH score is made of platelets D dimer PT and fibrinogen. A score above five is overt DIC clearly. Pregnancy DIC needs a separate scoring tool.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "score",
+      "label": "Score four items"
+     },
+     {
+      "id": "cutoff",
+      "label": "Above five?"
+     },
+     {
+      "id": "overt",
+      "label": "Overt DIC: treat cause"
+     },
+     {
+      "id": "repeat",
+      "label": "Below five: repeat one to two days"
+     }
+    ],
+    "edges": [
+     [
+      "score",
+      "cutoff"
+     ],
+     [
+      "cutoff",
+      "overt"
+     ],
+     [
+      "cutoff",
+      "repeat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treating DIC means treating its driver first. **Underlying cause control** (antibiotics for sepsis, delivery, chemotherapy) stops consumption. **Platelets** (blood cells) are transfused below **fifty thousand** per microlitre with bleeding or before surgery. **Fibrinogen concentrate** (protein replacement) or cryoprecipitate (frozen plasma fraction) corrects fibrinogen below **one point five** grams per litre. **Fresh frozen plasma** (FFP, frozen plasma) covers multiple factor losses in bleeding patients. **Blood thinners** have no routine DIC role.",
+   "say": "Treating DIC means controlling the underlying cause first. Platelets are transfused below fifty thousand with bleeding. Fibrinogen concentrate corrects fibrinogen below one point five grams.",
+   "vis": {
+    "cols": [
+     "Product",
+     "Trigger",
+     "Target"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Platelets",
+      "Below fifty thousand bleeding",
+      "Above fifty thousand"
+     ],
+     [
+      "Fibrinogen concentrate",
+      "Below one point five gram",
+      "Above one point five gram"
+     ],
+     [
+      "FFP",
+      "Multi factor loss",
+      "Bleeding patient"
+     ],
+     [
+      "Vitamin K",
+      "Deficiency suspected",
+      "Give trial dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mixing study** (correction test) separates deficiency from inhibitor. A **one to one mix** (equal patient plus normal plasma) corrects **factor deficiency** immediately. **Inhibitors** (antibodies) fail immediate correction or correct then prolong again at **thirty seven** degrees after **one** to **two** hours. **Acquired haemophilia A** (anti factor VIII autoimmunity) shows time dependent non correction. **Bethesda assay** (inhibitor quantification test) measures strength in Bethesda units.",
+   "say": "Mixing studies separate factor deficiency from inhibitors. Deficiency is corrected immediately in the mix. Acquired haemophilia A is corrected then prolongs at thirty seven degrees here.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deficiency pattern",
+     "points": [
+      "Mix corrects at once",
+      "Stays corrected",
+      "Factor replacement works"
+     ]
+    },
+    "right": {
+     "title": "Inhibitor pattern",
+     "points": [
+      "No immediate correction",
+      "Or correction then relapse",
+      "Bethesda units quantify"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acquired haemophilia A** (autoimmune factor VIII loss) strikes older adults, often after childbirth. Bleeding pattern is severe: skin, muscle and mucosal bleeds dominate. **Joint bleeds** (haemarthroses), the hallmark of inherited disease, stay rare here. **Factor VIII activity** (clotting level) can be near normal while inhibitor titres run high. **Steroids** plus **B cell antibody therapy** eradicate the autoantibody in most patients.",
+   "say": "Acquired haemophilia A affects older adults after childbirth often. Joint bleeds are rare in acquired disease. Steroids with antibody therapy are used to eradicate the autoantibody.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Inherited",
+     "Acquired"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Age start",
+      "Childhood",
+      "Older adults"
+     ],
+     [
+      "Joint bleeds",
+      "Dominant hallmark",
+      "Rare indeed"
+     ],
+     [
+      "Inhibitor rate",
+      "twenty five to thirty percent",
+      "Autoimmune always"
+     ],
+     [
+      "Treatment",
+      "Replace factor",
+      "Suppress antibody"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Liver disease coagulopathy** (clotting failure in liver failure) is balanced, not purely prohaemorrhagic. The liver makes factors **II V VII IX X** (clotting proteins) and **protein C S** (regulators) alike. **INR** (international normalised ratio) therefore overreads bleeding risk in cirrhosis. **Thrombosis** (clots) still strikes cirrhotic patients, including portal vein thrombosis. **Thromboelastography** (whole blood clot test) guides products better than INR alone.",
+   "say": "Both clotting factors and regulators are low in liver disease. INR is not a reliable bleeding guide in cirrhosis. Thromboelastography guides products better than INR alone today.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pro bleeding side",
+     "points": [
+      "Factors II V VII low",
+      "Fibrinogen low late",
+      "Platelets low in spleen"
+     ]
+    },
+    "right": {
+     "title": "Pro clot side",
+     "points": [
+      "Protein C S low",
+      "Antithrombin low",
+      "Portal thrombosis common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Vitamin K deficiency** (nutrient clotting defect) prolongs PT before aPTT moves. **Vitamin K antagonist** effect mimics dietary deficiency exactly. **PIVKA II** (proteins induced by vitamin K absence) levels rise in deficiency states. **Vitamin K trial** (slow intravenous dose) corrects deficiency within **twelve** to **twenty four** hours. **Cholestasis** (bile flow block) causes malabsorption of fat soluble vitamin K in chronic disease.",
+   "say": "Vitamin K deficiency is seen in prolonged PT before aPTT moves. A vitamin K trial is a test for deficiency within twelve to twenty four hours. Cholestasis causes vitamin K malabsorption in chronic disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pt",
+      "label": "PT prolonged first"
+     },
+     {
+      "id": "pivka",
+      "label": "PIVKA II raised"
+     },
+     {
+      "id": "vk",
+      "label": "Vitamin K trial dose"
+     },
+     {
+      "id": "correct",
+      "label": "Corrects in twelve to twenty four hours"
+     }
+    ],
+    "edges": [
+     [
+      "pt",
+      "pivka"
+     ],
+     [
+      "pivka",
+      "vk"
+     ],
+     [
+      "vk",
+      "correct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acquired von Willebrand disease** (autoimmune vessel factor loss) follows **MGUS** (silent clone), lymphomas and myeloproliferative disease. **Ristocetin cofactor** (activity assay) falls with normal platelet counts. **Hormone treatment** gives brief correction in mild cases. **Acquired hemophilia** (autoimmune factor loss) shows the mixing study non correction pattern already discussed. **Sample contamination** (blood sample error) prolongs thrombin time and corrects with enzyme treatment.",
+   "say": "Acquired von Willebrand disease follows MGUS and lymphomas. Ristocetin cofactor falls with normal platelet counts in patients. Sample contamination is a cause of prolonged thrombin time in samples today.",
+   "vis": {
+    "cols": [
+     "Cause",
+     "Clue",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "MGUS clone",
+      "Older adult bleed",
+      "Ristocetin cofactor low"
+     ],
+     [
+      "Lymphoma",
+      "Nodes and bleeds",
+      "VWF antigen ratio"
+     ],
+     [
+      "MPN disease",
+      "High platelets",
+      "Multimer loss"
+     ],
+     [
+      "Sample contamination",
+      "Thrombin prolonged",
+      "Enzyme treatment corrects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam stems trap the following. **DIC** (consumption) lowers fibrinogen, while **TMA** (vessel clot) preserves it. **Mixing study** correction means deficiency, while non correction means inhibitor. **Vitamin K** (antidote vitamin) corrects deficiency but never inhibitor disease. **ISTH score five** is the overt DIC cutoff examiners demand by number.",
+   "say": "DIC is marked by low fibrinogen while TMA preserves it. Mixing study correction means deficiency and non correction means inhibitor. ISTH score five is the overt DIC cutoff.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deficiency clues",
+     "points": [
+      "Mix corrects at once",
+      "Factor replacement works",
+      "Vitamin K trial corrects"
+     ]
+    },
+    "right": {
+     "title": "Inhibitor clues",
+     "points": [
+      "Mix fails to correct",
+      "Time dependent worsening",
+      "Bethesda units measure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-yield for the exam: **DIC** is driven by **sepsis** and **malignancy**, scored by **ISTH at five** for overt disease. **Mixing study** corrects in deficiency and fails in inhibitors. **Acquired haemophilia A** spares joints and is treated with **steroids antibody therapy**. **Vitamin K** corrects deficiency in **twelve to twenty four** hours, and **liver INR** overreads bleeding risk.",
+   "say": "DIC scores above five are overt disease. Mixing studies correct in deficiency and fail in inhibitors. Vitamin K is a trial correcting deficiency within twelve to twenty four hours.",
+   "vis": {
+    "cols": [
+     "Asked point",
+     "Answer",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Overt DIC cutoff",
+      "ISTH score five",
+      "Above five overt"
+     ],
+     [
+      "Mix corrects",
+      "Deficiency",
+      "Factor replacement"
+     ],
+     [
+      "Mix fails",
+      "Inhibitor",
+      "Bethesda units"
+     ],
+     [
+      "Acquired joints",
+      "Rare bleeding",
+      "Skin and muscle"
+     ],
+     [
+      "Vitamin K speed",
+      "twelve to twenty four hours",
+      "Trial dose"
+     ],
+     [
+      "DIC platelets trigger",
+      "Below fifty thousand bleeding",
+      "Transfuse then"
+     ]
+    ]
+   }
+  }
+ ]
+}

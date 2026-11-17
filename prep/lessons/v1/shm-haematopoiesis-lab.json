@@ -1,0 +1,318 @@
+{
+ "v": 1,
+ "module": "shm-haematopoiesis-lab",
+ "subject": "ss-haematology",
+ "title": "Haematopoiesis blood counts and marrow interpretation",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 65 Interpreting Peripheral Blood Smears and Ch 66 Anemia and Polycythemia",
+  "Harrison Principles of Internal Medicine 22e Ch 101 Hematopoietic Stem Cells"
+ ],
+ "steps": [
+  {
+   "tx": "A **haematopoietic stem cell** (self renewing parent cell) sits at the top of the marrow hierarchy and repopulates every lineage for life. **Clonal haematopoiesis** (mutant clone without disease) accumulates with age. Red cells live **120** days, platelets **7** to **10** days and neutrophils only hours, so count patterns betray which lineage fails first.",
+   "say": "The marrow hierarchy begins with a self renewing stem cell. Each lineage has a very different lifespan. Those lifespans explain how blood counts change when production fails.",
+   "vis": {
+    "cols": [
+     "Cell",
+     "Lifespan",
+     "Fall timing"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Red cell",
+      "120 days",
+      "Slow fall"
+     ],
+     [
+      "Platelet",
+      "7 to 10 days",
+      "Rapid fall"
+     ],
+     [
+      "Neutrophil",
+      "Hours in blood",
+      "Fastest fall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every assessment starts with a **full blood count** (FBC, complete blood count) including **MCV** (mean corpuscular volume, average red cell size) and **RDW** (red cell distribution width, size variation). The **reticulocyte count** (young red cells) separates underproduction from destruction or loss. A high reticulocyte index points to bleeding or haemolysis, while a low index implicates marrow failure.",
+   "say": "The full blood count with red cell indices opens every work up. The reticulocyte count tells us whether the marrow is responding. A brisk reticulocytosis favours bleeding or haemolysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fbc",
+      "label": "Full blood count"
+     },
+     {
+      "id": "retic",
+      "label": "Reticulocyte count"
+     },
+     {
+      "id": "split",
+      "label": "High loss or low production"
+     }
+    ],
+    "edges": [
+     [
+      "fbc",
+      "retic"
+     ],
+     [
+      "retic",
+      "split"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On the smear, size is judged against a small lymphocyte nucleus, about **8** micrometres wide. Cells smaller are **microcytic** (small red cells) and larger are **macrocytic** (large red cells). **Hypersegmented neutrophils** (neutrophils with five or more lobes) scream vitamin B12 or folate lack. **Polychromasia** (bluish young red cells) marks reticulocytosis in simple terms.",
+   "say": "Cell size is judged against a small lymphocyte nucleus about eight micrometres wide. Hypersegmented neutrophils point strongly toward B12 or folate deficiency. Bluish young cells indicate a reticulocyte response.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Small cells",
+     "points": [
+      "Iron deficiency",
+      "Thalassaemia trait",
+      "Lead poisoning"
+     ]
+    },
+    "right": {
+     "title": "Large cells",
+     "points": [
+      "B12 or folate lack",
+      "Liver disease",
+      "Hypothyroidism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Shape clues sharpen the diagnosis. **Spherocytes** (dense round cells without central pallor) mark membrane loss in hereditary spherocytosis and immune haemolysis. **Schistocytes** (fragmented cells) signal microangiopathic haemolysis in **TTP** (thrombotic thrombocytopenic purpura). **Target cells** crowd thalassaemia and liver disease, while **sickle cells** confirm sickling disorders.",
+   "say": "Round dense spherocytes suggest membrane loss. Fragmented schistocytes warn of microangiopathic haemolysis. Target cells and sickle forms each point to specific disorders.",
+   "vis": {
+    "cols": [
+     "Shape",
+     "Meaning",
+     "Next test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Spherocytes",
+      "Membrane loss",
+      "Osmotic fragility or Coombs"
+     ],
+     [
+      "Schistocytes",
+      "Shear damage",
+      "TTP work up"
+     ],
+     [
+      "Target cells",
+      "Liver or thalassaemia",
+      "HbA2 and LFT"
+     ],
+     [
+      "Teardrop cells",
+      "Marrow fibrosis",
+      "Dry tap likely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Platelets are counted in five to six oil immersion fields, averaged and multiplied by **20,000**. Giant platelets mean brisk turnover or myeloproliferation, while clumped platelets falsely lower the automated count. Absent granules suggest **gray platelet syndrome** (congenital granule lack). White cell forms are then inspected for blasts, toxic granules and Pelger Huet anomaly.",
+   "say": "Platelets are estimated by counting fields and multiplying by twenty thousand. Giant platelets suggest rapid turnover. Clumped platelets can falsely depress the automated count.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Platelet clues",
+     "points": [
+      "Giant forms rapid turnover",
+      "Clumps false low count",
+      "Absent granules gray syndrome"
+     ]
+    },
+    "right": {
+     "title": "White cell clues",
+     "points": [
+      "Blasts mean leukaemia",
+      "Toxic granules infection",
+      "Pelger Huet benign anomaly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Marrow examination** (needle sampling of marrow) remains the gold standard when blood and smear leave doubt. The aspirate shows cellularity, lineage maturation and blast percentage, while the trephine biopsy reveals fibrosis, focal deposits and architecture. **Flow cytometry** (antibody based cell phenotyping) identifies blasts and clonal populations. Cytogenetics and next generation sequencing complete the picture for leukaemia and MDS.",
+   "say": "Marrow examination is the gold standard when blood tests leave doubt. Aspirate shows maturation while biopsy reveals fibrosis and focal lesions. Flow cytometry and sequencing complete the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "blood",
+      "label": "Blood count and smear"
+     },
+     {
+      "id": "marrow",
+      "label": "Aspirate plus trephine biopsy"
+     },
+     {
+      "id": "molecular",
+      "label": "Cytogenetics and sequencing"
+     }
+    ],
+    "edges": [
+     [
+      "blood",
+      "marrow"
+     ],
+     [
+      "marrow",
+      "molecular"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **dry tap** (aspirate yielding no marrow) hints at fibrosis, packed marrow or technical error and pushes the team to biopsy. **Teardrop cells** (dacrocytes, squeezed red cells) plus nucleated red cells flag marrow fibrosis. **Howell Jolly bodies** (nuclear remnants) appear after splenectomy and in dysplasia. **Rouleaux** (stacked red cells) reflect high proteins such as myeloma.",
+   "say": "A dry tap suggests fibrosis, packed marrow or a technical miss and pushes us to biopsy. Teardrop cells flag fibrosis. Howell Jolly bodies appear after splenectomy and in dysplasia.",
+   "vis": {
+    "cols": [
+     "Finding",
+     "Points to",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Dry tap",
+      "Fibrosis or packed marrow",
+      "Trephine biopsy"
+     ],
+     [
+      "Teardrop cells",
+      "Marrow fibrosis",
+      "Marrow biopsy"
+     ],
+     [
+      "Howell Jolly bodies",
+      "Asplenia or dysplasia",
+      "Context check"
+     ],
+     [
+      "Rouleaux",
+      "High serum proteins",
+      "Myeloma screen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pattern thinking saves time. **Pancytopenia** (all three lineages low) with a low reticulocyte count means marrow failure, infiltration or consumption, while isolated cytopenias favour specific causes. A raised white count with blasts needs urgent leukaemia work up. **Leukoerythroblastic** picture (nucleated red cells with immature white cells) signals marrow replacement by fibrosis, cancer or granulomas.",
+   "say": "Pancytopenia with low reticulocytes means marrow failure or infiltration. Blasts in blood need urgent leukaemia evaluation. A leukoerythroblastic picture signals marrow replacement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Marrow failure",
+     "points": [
+      "Low reticulocytes",
+      "Pancytopenia pattern",
+      "Dry tap possible"
+     ]
+    },
+    "right": {
+     "title": "Peripheral cause",
+     "points": [
+      "High reticulocytes",
+      "Splenomegaly present",
+      "Single lineage drop"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clonal spread complicates interpretation. **Clonal haematopoiesis of indeterminate potential** (CHIP, mutant clone without blood cancer) rises after age **50** and predicts cardiovascular events, not leukaemia. Spliceosome mutations such as **SF3B1** (splicing factor) favour MDS, while **DNMT3A** and **TET2** mark clonal expansion. Management follows the clone: observe CHIP, treat only overt disease.",
+   "say": "Clonal haematopoiesis without disease rises with age and predicts cardiovascular risk. CHIP itself needs observation rather than treatment. Spliceosome mutations steer the diagnosis toward myelodysplasia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "clone",
+      "label": "Mutant clone found"
+     },
+     {
+      "id": "classify",
+      "label": "CHIP versus MDS"
+     },
+     {
+      "id": "act",
+      "label": "Observe or treat"
+     }
+    ],
+    "edges": [
+     [
+      "clone",
+      "classify"
+     ],
+     [
+      "classify",
+      "act"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traps to memorise: normal red cell size equals the small lymphocyte nucleus at about **8** micrometres; platelet estimate multiplies the field average by **20,000**; hypersegmented neutrophils mean B12 or folate lack; schistocytes mean microangiopathic haemolysis; and a low reticulocyte index never fits acute bleeding. Paperless analysers never replace a trained smear review when counts diverge from the clinical story.",
+   "say": "The lymphocyte nucleus remains the best size ruler on the smear. Hypersegmentation is never normal. Counts that clash with the clinical story always deserve a smear review.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Correct rule",
+     "Consequence"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Red cell size",
+      "Compare with lymphocyte nucleus",
+      "Right MCV call"
+     ],
+     [
+      "Platelet count",
+      "Field average times 20000",
+      "Avoid false low label"
+     ],
+     [
+      "Hypersegmentation",
+      "B12 or folate lack",
+      "Do not miss neuropathy"
+     ],
+     [
+      "Schistocytes",
+      "Microangiopathy",
+      "TTP alert"
+     ],
+     [
+      "Reticulocytes",
+      "Low never fits bleeding",
+      "Reassess cause"
+     ],
+     [
+      "Analyser count",
+      "Confirm with smear",
+      "Catches clumping error"
+     ]
+    ]
+   }
+  }
+ ]
+}
