@@ -106,7 +106,7 @@
     var a = ' data-i="' + i + '"';
     if (c.kind === "pearl") return '<article class="vf-c vf-pearl pn-mg-c"' + a + '><p class="pn-mg-tag">Remember</p><p class="vf-big">' + esc(c.text) + "</p>" + (c.s ? '<p class="pn-mut pn-small">' + esc(subjName(c.s)) + "</p>" : "") + "</article>";
     if (c.kind === "video") {
-      return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch</p><p class="vf-stem">' + esc(c.title) + "</p>" +
+      return '<article class="vf-c pn-mg-c pn-mg-vid"' + a + ' data-vid="' + esc(c.videoId) + '"><p class="pn-mg-tag">Watch' + (c.s ? " · " + esc(subjName(c.s) || c.s.charAt(0).toUpperCase() + c.s.slice(1)) : "") + "</p>" + '<p class="vf-stem">' + esc(c.title) + "</p>" +
         '<div class="pn-mg-frame" role="region" aria-label="Video player"><img alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(c.videoId) + '/hqdefault.jpg"></div>' +
         '<p class="pn-mut pn-small">' + esc(c.caption && c.caption !== c.title ? c.caption + " · " : "") + (c.by ? esc(c.by) + " on YouTube" : "YouTube") + "</p></article>";
     }
