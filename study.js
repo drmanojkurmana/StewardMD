@@ -186,7 +186,12 @@
   function undo(st) { var op = st.u.pop(); if (!op) return null; st.r.push(op); return { op: op, gone: goneAfter(op, true), undoing: true }; }
   function redo(st) { var op = st.r.pop(); if (!op) return null; st.u.push(op); return { op: op, gone: goneAfter(op, false), undoing: false }; }
   // Pressure: pens report 0..1; 0 or missing (mouse, finger, unsupported) is 0.5.
-  function pressure(e) { return e && e.pointerType === "pen" && e.pressure > 0 ? e.pressure : 0.5; }
+  /* Stylus pressure as stored. An Apple Pencil reports force / max force, so ordinary handwriting is about 0.07 to 0.36
+     while 0.5 (mouse, finger, the width the user picked) is a firm press: strokes came out as hairlines (owner's
+     recording 2026-11-18 02:31). A curve maps everyday writing to the chosen width: 0.2 -> 0.5, 0.07 -> 0.32, 1 -> 1. */
+  var PEN_GAMMA = 0.43;
+  function penPressure(raw) { return raw > 0 ? Math.min(1, Math.pow(raw, PEN_GAMMA)) : 0.5; }
+  function pressure(e) { return e && e.pointerType === "pen" && e.pressure > 0 ? penPressure(e.pressure) : 0.5; }
   function r4(n) { return Math.round(n * 10000) / 10000; }
 
   // Page order: move item i by dir (-1 up, +1 down); at an end the order is returned unchanged.
@@ -286,7 +291,7 @@
   var PURE = {
     BK: BK, verifyBackup: verifyBackup, restorePlan: restorePlan, pageSel: pageSel, moveItem: moveItem,
     bgLines: bgLines, snip: snip, ixLabel: ixLabel, enabled: enabled, toRel: toRel, toAbs: toAbs,
-    hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure,
+    hit: hit, newStack: newStack, push: push, undo: undo, redo: redo, opIds: opIds, pressure: pressure, penPressure: penPressure,
     r4: r4, pointInPoly: pointInPoly, lassoHit: lassoHit, isScribble: isScribble, coveredBy: coveredBy,
     pencilActionFor: pencilActionFor
   };
@@ -1412,18 +1417,23 @@
     st.webkitMaskRepeat = "no-repeat"; st.maskRepeat = "no-repeat"; st.webkitMaskComposite = "xor"; st.maskComposite = "exclude";
   }
   function scheduleSharp(ms) { if (!V) return; G.clearTimeout(V.sharpT); V.sharpT = G.setTimeout(sharpenVisible, ms == null ? 110 : ms); }
+  /* Screen px per CSS px of an element. The Display setting zooms <html> (home.js zoomNowD, above 1 on an iPad), so
+     getBoundingClientRect is in screen px while style left/top/width and clientWidth are CSS px. Every rect is
+     divided by this before it is used as a CSS length (owner's recording 2026-11-18 02:32: strokes jumped and grew). */
+  function zoomOf(el) { var w = el && el.offsetWidth, r = w ? el.getBoundingClientRect().width : 0; return w > 0 && r > 0 ? r / w : 1; }
   function sharpenVisible() {
     if (!V || V._pinching || !V.sc) return;
-    var dpr = sharpDpr(), scr = V.sc.getBoundingClientRect();
+    var scr = V.sc.getBoundingClientRect();
     Object.keys(V.pg).forEach(function (k) {
       var n = +k, p = V.pg[n]; if (!p || !p.on || !p.ov || !p.cv) return;
-      var r = p.el.getBoundingClientRect(); if (!r.width) return;
-      if (p.ov.width / r.width >= dpr * 0.98) { hideTiles(p); return; } // page canvases are already full resolution
-      var x0 = Math.max(0, scr.left - r.left), y0 = Math.max(0, scr.top - r.top), x1 = Math.min(r.width, scr.right - r.left), y1 = Math.min(r.height, scr.bottom - r.top);
+      var r = p.el.getBoundingClientRect(), W = p.el.clientWidth, H = p.el.clientHeight; if (!r.width || !W) return;
+      var kz = r.width / (p.el.offsetWidth || W), dpr = Math.min(sharpDpr() * kz, 3); // backing px per CSS px that look sharp
+      if (p.ov.width / W >= dpr * 0.98) { hideTiles(p); return; } // page canvases are already full resolution
+      var x0 = Math.max(0, (scr.left - r.left) / kz), y0 = Math.max(0, (scr.top - r.top) / kz), x1 = Math.min(W, (scr.right - r.left) / kz), y1 = Math.min(H, (scr.bottom - r.top) / kz);
       if (x1 - x0 < 2 || y1 - y0 < 2) { hideTiles(p); return; }
-      x0 = Math.max(0, Math.floor(x0 - 64)); y0 = Math.max(0, Math.floor(y0 - 128)); x1 = Math.min(r.width, Math.ceil(x1 + 64)); y1 = Math.min(r.height, Math.ceil(y1 + 128));
-      if (p.trc && p.trc.W === r.width && p.trc.x <= x0 && p.trc.y <= y0 && p.trc.x + p.trc.w >= x1 && p.trc.y + p.trc.h >= y1) return; // still covered
-      paintTiles(n, p, { x: x0, y: y0, w: x1 - x0, h: y1 - y0, W: r.width, H: r.height }, dpr);
+      x0 = Math.max(0, Math.floor(x0 - 64)); y0 = Math.max(0, Math.floor(y0 - 128)); x1 = Math.min(W, Math.ceil(x1 + 64)); y1 = Math.min(H, Math.ceil(y1 + 128));
+      if (p.trc && p.trc.W === W && p.tdpr === dpr && p.trc.x <= x0 && p.trc.y <= y0 && p.trc.x + p.trc.w >= x1 && p.trc.y + p.trc.h >= y1) return; // still covered
+      paintTiles(n, p, { x: x0, y: y0, w: x1 - x0, h: y1 - y0, W: W, H: H }, dpr);
     });
   }
   function tileEl(p, key, z) {
@@ -1495,9 +1505,9 @@
       // the spot on the page that was under the fingers at the start lands under the fingers' final midpoint
       // two passes: the second absorbs any layout offset that moves with the scroll position
       for (var pass = 0; gg.pe && pass < 2; pass++) {
-        var r = gg.pe.getBoundingClientRect();
-        V.sc.scrollLeft += r.left + gg.fx * r.width - gg.m[0];
-        V.sc.scrollTop += r.top + gg.fy * r.height - gg.m[1];
+        var r = gg.pe.getBoundingClientRect(), kz = zoomOf(V.sc); // screen px -> the scroller's CSS px (Display zoom)
+        V.sc.scrollLeft += (r.left + gg.fx * r.width - gg.m[0]) / kz;
+        V.sc.scrollTop += (r.top + gg.fy * r.height - gg.m[1]) / kz;
       }
     }
     V.sc.addEventListener("touchstart", function (e) {
@@ -1507,7 +1517,8 @@
         if (!pe && V.pg[V.cur || 1]) pe = V.pg[V.cur || 1].el;
         var pr = pe ? pe.getBoundingClientRect() : null;
         V._pinching = true;
-        g = { d0: span(e.touches) || 1, z0: V.z, m0: m, m: m, ox: m[0] - br.left, oy: m[1] - br.top, s: 1, pe: pe, fx: pr ? (m[0] - pr.left) / (pr.width || 1) : 0, fy: pr ? (m[1] - pr.top) / (pr.height || 1) : 0 };
+        var kz = zoomOf(box); // transform-origin and translate are CSS px of the box; touches are screen px
+        g = { kz: kz, d0: span(e.touches) || 1, z0: V.z, m0: m, m: m, ox: (m[0] - br.left) / kz, oy: (m[1] - br.top) / kz, s: 1, pe: pe, fx: pr ? (m[0] - pr.left) / (pr.width || 1) : 0, fy: pr ? (m[1] - pr.top) / (pr.height || 1) : 0 };
         box.style.transformOrigin = g.ox + "px " + g.oy + "px"; box.style.willChange = "transform";
       }
     }, { passive: true });
@@ -1518,7 +1529,7 @@
       var m = mid(e.touches), z = g.z0 * span(e.touches) / g.d0;
       z = z < 1 ? 1 - (1 - z) * 0.35 : z > 4 ? 4 + (z - 4) * 0.2 : z; // rubber-band past the limits
       g.s = z / g.z0; g.m = m;
-      box.style.transform = "translate(" + (m[0] - g.m0[0]) + "px," + (m[1] - g.m0[1]) + "px) scale(" + g.s + ")";
+      box.style.transform = "translate(" + (m[0] - g.m0[0]) / g.kz + "px," + (m[1] - g.m0[1]) / g.kz + "px) scale(" + g.s + ")";
     }, { passive: false });
     var end = function (e) { if (g && (!e.touches || e.touches.length < 2)) commit(); };
     V.sc.addEventListener("touchend", end, { passive: true });

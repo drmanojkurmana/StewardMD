@@ -24,6 +24,9 @@ A PDF library, viewer, pen, notebooks, search, scan, study link and export / bac
 - A PDF that fails to index (corrupt, missing file) stays at its count and is retried at the next library open.
 
 ## Gotchas
+- **Display zoom on `<html>`** (home.js `zoomNowD`, above 1 on an iPad): `getBoundingClientRect` is screen px, style lengths, `clientWidth` and `scrollLeft` are CSS px. Divide rects by `zoomOf(el)` (study.js) before using them as CSS lengths. Missing this in the sharp viewport tiles made every finished stroke jump down-right and grow by the zoom (owner's recording 2026-11-18 02:32); the pinch origin and scroll fix-up had the same mix. Test: `test/run-study-ipad-ui.mjs` (1366x1024, zoom 1.25).
+- **Pencil pressure** is stored on a curve (`penPressure`, `raw^0.43`): Apple Pencil handwriting is about 0.07 to 0.36 of max force, which drew hairlines when 0.5 meant the chosen width. Mouse and finger stay 0.5. Strokes saved before 2026-11-18 keep their raw values.
+- The outline renderer densifies points to 2 px apart first (`densify`), so a sparse stroke (mouse, trackpad, fast flick) keeps its corners.
 - `emoji-icons.js` rewrites any text node matching "page N" into a "Standard textbooks" line. The results box carries `smd-books-keep smd-emo-keep` to opt out; keep that class or snippets of the user's own PDF text get mangled.
 - Deleting a notebook page deletes its strokes and clears that notebook's undo history. Notebook thumbnails are the blank page style (not refreshed with ink).
 - Pen strokes are written when the stroke ends (autosave per stroke); the eraser writes as it touches.
