@@ -49,7 +49,7 @@
       study: pick("medigram_study", "smd_prep_medigram_study", true),
       discovery: pick("medigram_discovery", "smd_prep_medigram_discovery", false),
       breakMode: pick("medigram_break", "smd_prep_medigram_break", false),
-      youtube: pick("medigram_youtube", "smd_prep_medigram_youtube", false)
+      youtube: pick("medigram_youtube", "smd_prep_medigram_youtube", true)   // owner 2026-11-17: the cleared CliniX video set plays by default
     };
   }
   function resolveCadence(arm) {
@@ -200,6 +200,22 @@
     return out.slice(0, size);
   }
 
+  /* The reel: bank questions in order; after every n questions one other card, alternating a pearl (the key point of a
+     question already passed, never one still to come) with the next extra (video, lesson or image, in the caller's order). */
+  function mixFeed(items, extras, n) {
+    n = cadenceN(n); extras = extras || [];
+    var out = [], pearls = [], ei = 0, slot = 0;
+    (items || []).forEach(function (it, i) {
+      out.push({ kind: "q", it: it });
+      if (it.kp) pearls.push(it);
+      if ((i + 1) % n) return;
+      var pearlTurn = slot++ % 2 === 0;
+      if ((pearlTurn || ei >= extras.length) && pearls.length) { var p = pearls.shift(); out.push({ kind: "pearl", text: p.kp, s: p._s }); }
+      else if (ei < extras.length) out.push(extras[ei++]);
+    });
+    return out;
+  }
+
   function missionById(id) { for (var i = 0; i < MISSIONS.length; i++) if (MISSIONS[i].id === id) return MISSIONS[i]; return MISSIONS[0]; }
   /* A mission completes on learning actions only: video watch time alone never completes it. */
   function missionProgress(mission, actions) {
@@ -256,7 +272,7 @@
     resolveCadence: resolveCadence,
     validateCandidate: validateCandidate, isEligible: isEligible, eligible: eligible, dedupe: dedupe,
     scoreCandidate: scoreCandidate, rankCandidates: rankCandidates, reasonFor: reasonFor, isQuestion: isQuestion, isLesson: isLesson,
-    buildFeed: buildFeed, missionById: missionById, missionProgress: missionProgress, isMissionComplete: isMissionComplete,
+    buildFeed: buildFeed, mixFeed: mixFeed, missionById: missionById, missionProgress: missionProgress, isMissionComplete: isMissionComplete,
     createBreak: createBreak, breakState: breakState, extendBreak: extendBreak,
     shouldScheduleFsrs: shouldScheduleFsrs, explainRequest: explainRequest, buildEvent: buildEvent };
   if (NODE) { module.exports = PURE; return; }

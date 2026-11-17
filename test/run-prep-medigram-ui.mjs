@@ -1,8 +1,8 @@
 /* PrepReels (MediGram) in the REAL app (headless Chrome over CDP), flag smd_prep_medigram ON.
  * What must hold: prep-loader fetches the PrepReels files only with the flag; home shows PrepReels;
- * the feed answers an MCQ (FSRS row written), save/skip/report and the lesson card work, Finish
- * session always shows and returns home; Smart Break (sub-flag) runs a 3-minute timer that only
- * offers a return; no YouTube iframe while the policy flag is off; nothing wider than 390 px.
+ * the reel mixes bank questions, pearls and videos; an answer scores in place and writes FSRS; a video in view
+ * plays through the https shim (stubbed here) and falls back to Play on YouTube when the shim is silent; Keep going
+ * and Finish work; Smart Break (sub-flag) runs a timer that only offers a return; nothing wider than 390 px.
  * USAGE: node test/run-prep-medigram-ui.mjs   (CHROME=<path>) */
 import { spawn } from "node:child_process";
 import { freePort } from "./free-port.mjs";
@@ -23,6 +23,16 @@ async function ensureServer() {
 await ensureServer();
 const chrome = spawn(CHROME, ["--headless=new", "--no-sandbox", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`, "--no-first-run", "--no-default-browser-check", "--disable-dev-shm-usage", "--disable-gpu"], { stdio: ["ignore", "ignore", "pipe"] });
 let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
+let shimSilent = false;
+// The shim (stewardmd.in/_site/yt) is stubbed: it posts the same hello the real one does, or stays silent.
+const shimPage = (silent) => "<!doctype html><body style=background:#000><script>" + (silent ? "" : "var v=(location.search.match(/v=([^&]+)/)||[])[1];parent.postMessage({clinixYt:true,v:v,shim:'loaded'},'*');") + "</script>";
+// Every bank module the reel draws gets a 30-question fixture (the fixture bank only has two real modules); imglearn gets two images.
+const fixtureFor = (u) => {
+  if (/imglearn/.test(u)) return { set: "eye", items: [{ img: "fx.webp", dx: "Fixture diagnosis", finding: "Fixture finding.", deck: "Eye" }, { img: "fx2.webp", dx: "Second diagnosis", deck: "Eye" }] };
+  const mid = (u.match(/\/mcq\/([^/?]+)\.json/) || [, "fx"])[1], items = [];
+  for (let i = 0; i < 30; i++) items.push({ id: mid + "-" + i, q: "Fixture question " + i + " on " + mid + "?", o: ["One", "Two", "Three", "Four"], a: 0, exp: "Fixture explanation " + i + ". More.", kp: i % 2 ? "Pearl " + i + " of " + mid : undefined, t: mid, d: 3, prov: "LIC" });
+  return { topic: mid, items };
+};
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const reqs = [];
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
@@ -34,10 +44,11 @@ try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   if (!ver) throw new Error("Chrome did not start: " + chromeErr.slice(-500));
   ws = new WebSocket(ver.webSocketDebuggerUrl); await new Promise((res, rej) => { ws.onopen = res; ws.onerror = rej; });
-  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } if (m.method === "Network.requestWillBeSent") reqs.push(m.params.request.url); if (m.method === "Runtime.exceptionThrown") { const d = m.params.exceptionDetails; if (/prep|PREP|medigram/i.test(JSON.stringify(d))) errors.push((d.exception && d.exception.description) || d.text); } };
+  ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } if (m.method === "Network.requestWillBeSent") reqs.push(m.params.request.url); if (m.method === "Fetch.requestPaused") { const u = m.params.request.url, isShim = /_site\/yt/.test(u); call("Fetch.fulfillRequest", { requestId: m.params.requestId, responseCode: 200, responseHeaders: [{ name: "Content-Type", value: isShim ? "text/html" : "application/json" }], body: Buffer.from(isShim ? shimPage(shimSilent) : JSON.stringify(fixtureFor(u))).toString("base64") }); } if (m.method === "Runtime.exceptionThrown") { const d = m.params.exceptionDetails; if (/prep|PREP|medigram/i.test(JSON.stringify(d))) errors.push((d.exception && d.exception.description) || d.text); } };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
+  await call("Fetch.enable", { patterns: ["*stewardmd.in/_site/yt*", "*/mcq/*.json*", "*imglearn/*"].map((u) => ({ urlPattern: u, requestStage: "Request" })) });
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_API="/test/fixtures/prep/api/"; window.SMD_PREP_FLAG_API="/test/fixtures/prep/hidden.json"; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep_medigram","1");}catch(e){}` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
@@ -53,25 +64,37 @@ try {
   ok(reqs.some((u) => /prep-medigram\.js/.test(u)), "prep-loader fetched prep-medigram.js with the flag on");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 20000), "home shows the PrepReels row");
   await click("#smdPrep [data-act=mg-open]");
-  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-card');`, 8000), "PrepReels feed opens on a card");
-  ok(await ev(`return !!document.querySelector('#smdPrep [data-act=mg-finish]');`) === true, "Finish session is present from the first item");
-  ok(await ev(`return document.querySelectorAll('#smdPrep iframe').length;`) === 0, "no YouTube iframe while the policy flag is off");
+  ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > 5;`, 20000), "PrepReels opens on a reel built from the bank");
+  const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
+  ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
+  ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows or Next/Skip buttons: one card per swipe");
   ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "nothing wider than the 390 px screen");
-  // answer the first MCQ correctly (option A is correct in every fixture MCQ)
-  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-answer]');`, 8000), "first feed item is an MCQ with options");
-  await click("#smdPrep [data-act=mg-answer][data-k='0']");
-  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-exp');`, 8000), "answering shows the explanation at once");
-  ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).some(function(k){return k.indexOf("q-")>=0;});`) === true, "the valid answer wrote an FSRS card row");
-  await click("#smdPrep [data-act=mg-save]"); await click("#smdPrep [data-act=mg-report]");
-  await click("#smdPrep [data-act=mg-next]");
-  ok(await until(`return /Item 2 of/.test(document.querySelector("#smdPrep .pn-t p").textContent);`, 8000), "Next moves to item 2");
-  await click("#smdPrep [data-act=mg-skip]");
-  ok(await until(`return /Item 3 of/.test(document.querySelector("#smdPrep .pn-t p").textContent);`, 8000), "Skip moves to item 3 without answering");
-  // finish from mid-feed: always available, summary, Done returns home
-  await click("#smdPrep [data-act=mg-finish]");
-  ok(await until(`return /Session finished|Mission complete/.test(document.querySelector("#smdPrep .pn-mg-h").textContent);`, 8000), "Finish session shows the summary");
+  const subj = await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-q .pn-eb').textContent;`);
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-answer][data-k='0']");
+  ok(await until(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`, 8000), "answering shows the explanation in place");
+  ok(await ev(`return /of 1 right/.test(document.querySelector("#smdPrep .pn-t p").textContent);`) === true, "the bar keeps score");
+  ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).length > 0;`) === true, "the answer wrote an FSRS card row (" + subj + ")");
+  // Video: scrolling a video card into view mounts the https shim (never a direct YouTube embed from the app origin).
+  await ev(`var v=document.querySelector('#smdPrep .pn-mg-vid'), b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
+  ok(await until(`var f=document.querySelector('#smdPrep .pn-mg-vid iframe'); return !!f && f.src.indexOf('https://stewardmd.in/_site/yt?v=') === 0 && f.src.length === 43;`, 8000), "a video card in view plays through the stewardmd.in shim");
+  const played = await ev(`return document.querySelector('#smdPrep .pn-mg-vid iframe').closest('.pn-mg-vid').getAttribute('data-vid');`);
+  await sleep(6500);
+  ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
+  await ev(`var b=document.querySelector('#pnMgFeed'); b.scrollTop=0; return 1;`);
+  ok(await until(`return !document.querySelector('#smdPrep .pn-mg-vid iframe');`, 8000), "swiping away releases the player");
+  // End card: Keep going appends a batch, Finish returns home.
+  const n0 = await ev(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length;`);
+  await click("#smdPrep [data-act=mg-more]");
+  ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > ${n0};`, 15000), "Keep going adds more cards");
+  ok(await ev(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`) === true, "earlier answers survive the new batch");
+  // A silent shim (offline, blocked; on a video that has not played yet) falls back to a Play on YouTube card instead of a black box.
+  shimSilent = true;
+  await ev(`var v=[].filter.call(document.querySelectorAll('#smdPrep .pn-mg-vid'), function(e){ return e.getAttribute('data-vid') !== ${JSON.stringify(played)}; })[0]; var b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-yt]');`, 12000), "a silent shim falls back to Play on YouTube");
+  shimSilent = false;
   await click("#smdPrep [data-act=mg-done]");
-  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 8000), "Done returns to the PrepNucleus home");
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 8000), "Finish returns to the PrepNucleus home");
   // Smart Break: sub-flag on, 3-minute timer, return offers study (never locks)
   await click("#smdPrep [data-act=mg-open]");
   await until(`return !!document.querySelector('#smdPrep [data-act=mg-mode][data-v=break]');`, 8000);
@@ -80,9 +103,9 @@ try {
   await click("#smdPrep [data-act=mg-break-start][data-v='3']");
   ok(await until(`return /left|Break/.test(document.querySelector("#smdPrep .pn-mg-h").textContent);`, 8000), "break timer is running");
   await click("#smdPrep [data-act=mg-break-return]");
-  ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-card');`, 8000), "Return to study goes back to the feed");
+  ok(await until(`return !!document.querySelector('#smdPrep #pnMgFeed .vf-c');`, 15000), "Return to study goes back to the reel");
   ok(!errors.length, "no uncaught PrepReels error" + (errors.length ? ": " + errors[0] : ""));
-  ok(!reqs.some((u) => /youtube\.com|youtube-nocookie\.com|googleapis\.com\/youtube/.test(u)), "no YouTube or paid API request was made");
+  ok(!reqs.some((u) => /youtube-nocookie\.com|googleapis\.com\/youtube/.test(u)), "no direct YouTube embed or YouTube API request from the app");
   // Sound flag on: the first-party Sound path loads (PREP_SOUND defined) after open.
   reqs.length = 0;   // only this page's requests count for the spotify=0 check
   await call("Page.navigate", { url: BASE + "?prep=1&sound=1&spotify=0" });
