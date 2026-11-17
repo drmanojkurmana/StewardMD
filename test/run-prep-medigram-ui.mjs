@@ -26,7 +26,7 @@ let chromeErr = ""; chrome.stderr.on("data", (d) => { chromeErr += d; });
 let shimSilent = false;
 // The shim (stewardmd.in/_site/yt) is stubbed: it posts the same hello the real one does, or stays silent.
 // The live stub also answers the app's commands like the real shim: { smdCmd } in, { smdYt, state, muted } out.
-const shimPage = (silent) => "<!doctype html><body style=background:#000><script>" + (silent ? "" : "var v=(location.search.match(/v=([^&]+)/)||[])[1],st=1,mu=false,t=0;function rep(){parent.postMessage({smdYt:true,v:v,state:st,muted:mu,t:t},'*');}parent.postMessage({clinixYt:true,v:v,shim:'loaded'},'*');rep();addEventListener('message',function(e){var c=e.data&&e.data.smdCmd;if(c==='pause')st=2;if(c==='play')st=1;if(c==='mute')mu=true;if(c==='unmute')mu=false;if(c==='seek')t=Math.max(0,t+(+e.data.by||0));rep();});") + "</script>";
+const shimPage = (silent) => "<!doctype html><body style=background:#000><script>" + (silent ? "" : "var v=(location.search.match(/v=([^&]+)/)||[])[1],st=1,mu=false,t=0;function rep(){parent.postMessage({smdYt:true,v:v,state:st,muted:mu,t:t},'*');}parent.postMessage({clinixYt:true,v:v,shim:'loaded'},'*');rep();addEventListener('message',function(e){var c=e.data&&e.data.smdCmd;if(c==='pause')st=2;if(c==='play')st=1;if(c==='mute')mu=true;if(c==='unmute')mu=false;if(c==='seek')t=Math.max(0,t+(+e.data.by||0));if(e.data&&e.data.smdSim==='pause')st=2;rep();});") + "</script>";
 // Every bank module the reel draws gets a 30-question fixture (the fixture bank only has two real modules); imglearn gets two images.
 const fixtureFor = (u) => {
   if (/imglearn/.test(u)) return { set: "eye", items: [{ img: "fx.webp", dx: "Fixture diagnosis", finding: "Fixture finding.", deck: "Eye" }, { img: "fx2.webp", dx: "Second diagnosis", deck: "Eye" }] };
@@ -91,11 +91,16 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mg-vid iframe') && !document.querySelector('#smdPrep [data-act=mg-yt]');`) === true, "a shim that reports in keeps playing (no fallback)");
   // Our own controls: pause/play, seek, sound, full screen (YouTube's overlay hides itself on touch screens).
   const cardSel = "#smdPrep .pn-mg-vid.pn-mg-c:has(iframe)";
-  const ctlOn = `var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && f.classList.contains('ctl') && getComputedStyle(f.querySelector('.pn-mg-vctl')).pointerEvents === 'auto';`;
+  const ctlOn = `var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && f.classList.contains('ctl') && getComputedStyle(f.querySelector('.pn-mg-vctl button')).pointerEvents === 'auto';`;
   ok(await until(`var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}); return !!f && !f.classList.contains('ctl');`, 5000), "the glass controls fade out on their own (3 s)");
   ok(await ev(`var v=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-vctl")}); var c=getComputedStyle(v); return !!v.closest('.pn-mg-frame') && /blur/.test(c.backdropFilter || c.webkitBackdropFilter || '');`) === true, "the controls sit on the video as blurred glass");
-  await ev(`document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).click(); return 1;`);
-  ok(await until(ctlOn, 2000), "a tap on the video brings the controls back");
+  ok(await ev(`var f=document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).getBoundingClientRect(); var e=document.elementFromPoint(f.left+f.width/2, f.top+f.height/2); return !!e && e.tagName === 'IFRAME';`) === true, "nothing covers the player: a tap reaches YouTube's own controls");
+  // A pause made with YouTube's own controls (simulated in the stub) brings our bar up and keeps it while paused.
+  await ev(`document.querySelector(${JSON.stringify(cardSel + " iframe")}).contentWindow.postMessage({ smdSim: 'pause' }, '*'); return 1;`);
+  ok(await until(ctlOn.replace("pointerEvents === 'auto'", "opacity === '1'"), 3000), "a pause from YouTube's controls brings our bar up");
+  await sleep(3500);
+  ok(await ev(`return document.querySelector(${JSON.stringify(cardSel + " .pn-mg-frame")}).classList.contains('ctl') && document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`) === true, "our bar stays while paused and shows Play");
+  await click(cardSel + " [data-act=mg-v][data-v=toggle]");
   ok(await ev(`var c=document.querySelector(${JSON.stringify(cardSel)}); return !!c && ["back","toggle","fwd","sound"].every(function(v){return !!c.querySelector('[data-act=mg-v][data-v='+v+']');}) && !!c.querySelector('[data-act=mg-fs]');`) === true, "the playing video has back, play/pause, forward, sound and full screen controls");
   await click(cardSel + " [data-act=mg-v][data-v=toggle]");
   ok(await until(`return document.querySelector(${JSON.stringify(cardSel + " [data-v=toggle]")}).getAttribute('aria-label') === 'Play';`, 4000), "Pause pauses (the button turns to Play)");

@@ -146,10 +146,15 @@
     if (t) { t.innerHTML = vi(playing ? "pause" : "play"); t.setAttribute("aria-label", playing ? "Pause" : "Play"); }
     if (m) { m.innerHTML = vi(live.muted ? "mute" : "snd"); m.setAttribute("aria-label", live.muted ? "Unmute" : "Mute"); }
   }
-  if (MEDIA && MEDIA.onState) MEDIA.onState(function (live) { showState(live); var card = live.holder && live.holder.closest(".pn-mg-vid"); if (card && live.state === 2) showCtl(card); });
-  /* The glass controls sit on the video and fade out 3 s after the last touch (they stay while the video is paused).
-     A tap anywhere on the video brings them back: the frame's own layer takes the tap (a tap inside the YouTube
-     frame never reaches the app). */
+  // Connected to YouTube's own controls: a pause or play there (reported by the shim) brings our bar up too.
+  if (MEDIA && MEDIA.onState) MEDIA.onState(function (live) {
+    var prev = live._shown; live._shown = live.state;
+    showState(live);
+    var card = live.holder && live.holder.closest(".pn-mg-vid");
+    if (card && (live.state === 1 || live.state === 2) && prev !== live.state) showCtl(card);
+  });
+  /* The glass controls sit on the video and fade out 3 s after they appear (they stay while the video is paused).
+     They come up when a video starts, on any of our buttons, and when YouTube's own controls pause or play it. */
   function showCtl(card) {
     var f = card && card.querySelector(".pn-mg-frame");
     if (!f || !S) return;
