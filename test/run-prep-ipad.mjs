@@ -151,16 +151,14 @@ try {
     // PrepNucleus is "perfect on iPad already" (owner 2026-10-16): it keeps its iPad scale while open.
     const zIn = await ev(`return parseFloat(document.documentElement.style.zoom)||1;`);
     if (S.w !== 390) ok(Math.abs(zIn - Z) < 0.001, "8. PrepNucleus open: its own iPad zoom " + zIn + " (want " + Z + ")" + at);
-    const al = await geo(`var t=RT.querySelector(".pn-home > .pn-next + .pn-group"), c=RT.querySelector("#pnGrid"); var a=R(t), b=R(c); return Math.abs(a.l-b.l).toFixed(1)+"|"+Math.abs(a.r-b.r).toFixed(1);`);
+    const al = await geo(`var t=RT.querySelector(".pn-home > .pn-grid4"), c=RT.querySelector("#pnGrid"); var a=R(t), b=R(c); return Math.abs(a.l-b.l).toFixed(1)+"|"+Math.abs(a.r-b.r).toFixed(1);`);
     ok(+al.split("|")[0] <= 1 && +al.split("|")[1] <= 1, "2. home: the Practise group shares the column's edges (left|right off by " + al + ")" + at);
-    // Quiet home (2026-10-10): Practise is one list, two columns inside its card from 700 CSS px; subjects are rows, a
-    // grid of row cards (each at least 300 px) from 700 CSS px.
-    const wide = await ev(`return matchMedia("(min-width: 700px)").matches;`);
-    const subs = await ev(COLS("#smdPrep #pnGrid")), grp = await ev(COLS("#smdPrep .pn-home > .pn-next + .pn-group"));
+    // Compact home (2026-11-17): Practise is a grid of icon tiles, at least 4 a row on a phone, all in one row on iPad.
+    const subs = await ev(COLS("#smdPrep #pnGrid")), grp = await ev(COLS("#smdPrep .pn-home > .pn-grid4"));
     const tileW = await ev(`return Math.round(document.querySelector("#smdPrep #pnGrid > .pn-tile").getBoundingClientRect().width / (parseFloat(document.documentElement.style.zoom)||1));`);
     // Tide pass (prep50): subjects are tiles, 1 a row under 360 CSS px, 2 on a phone, 3 from 700, 4 from 1000; never under 150 px.
     const cssW = await ev(`return Math.round(innerWidth / (parseFloat(document.documentElement.style.zoom)||1));`), wantSubs = cssW < 360 ? 1 : cssW < 700 ? 2 : cssW < 1000 ? 3 : 4;
-    ok(grp === (wide ? 2 : 1) && subs === wantSubs && tileW >= 150, `3. home: Practise ${wide ? 2 : 1} a row (${grp}), subject tiles ${subs} a row (want ${wantSubs}) at ${tileW} px` + at);
+    ok(grp >= (cssW < 360 ? 3 : 4) && subs === wantSubs && tileW >= 150, `3. home: Practise tiles at least 4 a row, 3 under 360 px (${grp}), subject tiles ${subs} a row (want ${wantSubs}) at ${tileW} px` + at);
     ok(await geo(SMALL) === "", "6. home: 44 px targets " + (await geo(SMALL)) + at);
     await shot(tag, "home");
     if (SHOTS) { await ev(`var h=document.querySelector("#smdPrep .pn-home"), p=h.querySelectorAll(".pn-h"); for (var i=0;i<p.length;i++) if (/Practise/.test(p[i].textContent)) { h.scrollTop += p[i].getBoundingClientRect().top - h.getBoundingClientRect().top - 8; } return 1;`); await shot(tag, "home-tiles"); await ev(`document.querySelector("#smdPrep .pn-home").scrollTop = 0; return 1;`); }

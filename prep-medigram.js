@@ -490,11 +490,15 @@
     var chev = (host && host.ico ? host.ico("chev") : '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>');
     return '<button type="button" class="pn-row" data-act="mg-open"><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>PrepReels</b><small>Questions, videos and pearls, one swipe each</small></span>' + chev + "</button>";
   }
+  /* Home: one card under Solve next (owner 2026-11-17: the one swipe feed; Play's Swipe feed opens it too), with Saved
+     beside it once anything is saved. Same .pn-next look as Solve next. */
   function homeHtml(host) {
     if (!FLAGS.study && !FLAGS.discovery && !FLAGS.breakMode) return "";
     var n = 0; try { n = Object.keys((host.store() || {}).mgsv || {}).length; } catch (e) {}
-    var savedRow = n && host && host.row ? host.row("mg-saved", host.ico ? host.ico("bm") : "", "Saved from PrepReels", n + (n === 1 ? " card" : " cards")) : "";
-    return '<h2 class="pn-h">PrepReels</h2><div class="pn-group">' + homeRowHtml(host) + savedRow + "</div>";
+    var ico = host && host.ico ? host.ico : function () { return ""; };
+    return '<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true">' + ico("play") +
+      '</span><span class="pn-rb"><small>PrepReels</small><b>Questions, videos, images</b></span>' + ico("chev") + "</button>" +
+      (n ? '<button type="button" class="pn-next pn-mgh-sv" data-act="mg-saved" aria-label="Saved from PrepReels, ' + n + (n === 1 ? " card" : " cards") + '"><span class="pn-ri" aria-hidden="true">' + ico("bm") + '</span><span class="pn-rb"><small>Saved</small><b>' + n + "</b></span></button>" : "") + "</div>";
   }
 
   function act(a, el, host) {
