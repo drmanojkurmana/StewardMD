@@ -15,11 +15,19 @@
     "kind": "compare",
     "left": {
      "title": "Intention to treat",
-     "points": ["Groups exactly as randomised", "Dropouts counted at home", "Estimates real world offering effect"]
+     "points": [
+      "Groups exactly as randomised",
+      "Dropouts counted at home",
+      "Estimates real world offering effect"
+     ]
     },
     "right": {
      "title": "Per protocol",
-     "points": ["Only completers analysed", "Random comparability broken", "Estimates ideal condition effect"]
+     "points": [
+      "Only completers analysed",
+      "Random comparability broken",
+      "Estimates ideal condition effect"
+     ]
     }
    }
   },
@@ -40,11 +48,23 @@
    "say": "Completers are survivors, not samples. Patients who tolerate treatment differ from those who quit through side effects or decline, so deleting them flatters the drug. Randomised groups stay primary; completer analysis supports, never replaces.",
    "vis": {
     "kind": "table",
-    "cols": ["Who vanishes in per protocol", "Distortion created"],
+    "cols": [
+     "Who vanishes in per protocol",
+     "Distortion created"
+    ],
     "rows": [
-     ["Patients with side effects", "Harms understated"],
-     ["Patients who deteriorate early", "Benefits overstated"],
-     ["Non adherent patients", "Real world effect lost"]
+     [
+      "Patients with side effects",
+      "Harms understated"
+     ],
+     [
+      "Patients who deteriorate early",
+      "Benefits overstated"
+     ],
+     [
+      "Non adherent patients",
+      "Real world effect lost"
+     ]
     ]
    }
   },
@@ -55,12 +75,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Phase I safety and dose"},
-     {"id": "b", "label": "Phase II efficacy signals"},
-     {"id": "c", "label": "Phase III randomised comparison"},
-     {"id": "d", "label": "Phase IV marketed surveillance"}
+     {
+      "id": "a",
+      "label": "Phase I safety and dose"
+     },
+     {
+      "id": "b",
+      "label": "Phase II efficacy signals"
+     },
+     {
+      "id": "c",
+      "label": "Phase III randomised comparison"
+     },
+     {
+      "id": "d",
+      "label": "Phase IV marketed surveillance"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -69,12 +114,32 @@
    "say": "Trials sort by target. Clinical trials treat patients; preventive trials protect the healthy with vaccines or chemoprophylaxis; risk factor trials cut cholesterol, smoking, pressure or inactivity; service trials test delivery itself. Randomisation stays the shared core.",
    "vis": {
     "kind": "table",
-    "cols": ["Trial type", "Participants", "Example"],
+    "cols": [
+     "Trial type",
+     "Participants",
+     "Example"
+    ],
     "rows": [
-     ["Clinical", "Patients", "New drug against standard care"],
-     ["Preventive", "Healthy people", "Vaccine or chemoprophylaxis"],
-     ["Risk factor", "People with risk factors", "Cholesterol or smoking intervention"],
-     ["Health service evaluation", "Facilities or districts", "New delivery model"]
+     [
+      "Clinical",
+      "Patients",
+      "New drug against standard care"
+     ],
+     [
+      "Preventive",
+      "Healthy people",
+      "Vaccine or chemoprophylaxis"
+     ],
+     [
+      "Risk factor",
+      "People with risk factors",
+      "Cholesterol or smoking intervention"
+     ],
+     [
+      "Health service evaluation",
+      "Facilities or districts",
+      "New delivery model"
+     ]
     ]
    }
   },
@@ -86,11 +151,19 @@
     "kind": "compare",
     "left": {
      "title": "Clinical trial setting",
-     "points": ["Hospital patients enrolled", "Treatment of existing disease", "Ward logistics dominate"]
+     "points": [
+      "Hospital patients enrolled",
+      "Treatment of existing disease",
+      "Ward logistics dominate"
+     ]
     },
     "right": {
      "title": "Field trial setting",
-     "points": ["Healthy community members enrolled", "Prevention where disease occurs", "Field logistics dominate"]
+     "points": [
+      "Healthy community members enrolled",
+      "Prevention where disease occurs",
+      "Field logistics dominate"
+     ]
     }
    }
   },
@@ -100,11 +173,23 @@
    "say": "Whole communities become the unit here. Villages or districts receive fluoridation or media campaigns together, because individual allocation cannot contain such measures. Clustering shrinks effective sample size, and rare slow diseases still demand thousands followed for years.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Community trial consequence"],
+    "cols": [
+     "Feature",
+     "Community trial consequence"
+    ],
     "rows": [
-     ["Unit of allocation", "Village, town or district"],
-     ["Suits", "Fluoridation, mass campaigns"],
-     ["Analysis caution", "Clustering within communities"]
+     [
+      "Unit of allocation",
+      "Village, town or district"
+     ],
+     [
+      "Suits",
+      "Fluoridation, mass campaigns"
+     ],
+     [
+      "Analysis caution",
+      "Clustering within communities"
+     ]
     ]
    }
   },
@@ -115,12 +200,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Assessed for eligibility"},
-     {"id": "b", "label": "Randomised to arms"},
-     {"id": "c", "label": "Followed up, losses shown"},
-     {"id": "d", "label": "Analysed, numbers stated"}
+     {
+      "id": "a",
+      "label": "Assessed for eligibility"
+     },
+     {
+      "id": "b",
+      "label": "Randomised to arms"
+     },
+     {
+      "id": "c",
+      "label": "Followed up, losses shown"
+     },
+     {
+      "id": "d",
+      "label": "Analysed, numbers stated"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -129,11 +239,27 @@
    "say": "Invert the absolute gain. Event rates falling from twenty to fifteen percent give a reduction of five hundredths; one over that means twenty patients treated per success. Baseline risk rides inside this number, unlike relative risk, so clinicians can quote effort honestly.",
    "vis": {
     "kind": "table",
-    "cols": ["Control events", "Treatment events", "NNT"],
+    "cols": [
+     "Control events",
+     "Treatment events",
+     "NNT"
+    ],
     "rows": [
-     ["20 percent", "15 percent", "20 patients"],
-     ["10 percent", "9 percent", "100 patients"],
-     ["50 percent", "25 percent", "4 patients"]
+     [
+      "20 percent",
+      "15 percent",
+      "20 patients"
+     ],
+     [
+      "10 percent",
+      "9 percent",
+      "100 patients"
+     ],
+     [
+      "50 percent",
+      "25 percent",
+      "4 patients"
+     ]
     ]
    }
   },
@@ -154,11 +280,68 @@
    "say": "Some questions forbid randomisation. Uncontrolled series, natural experiments and before-after comparisons fill the gap, at the price of comparability no analysis fully restores. Pair each design with its characteristic bias in answers, not definitions alone.",
    "vis": {
     "kind": "table",
-    "cols": ["Design", "Characteristic weakness"],
+    "cols": [
+     "Design",
+     "Characteristic weakness"
+    ],
     "rows": [
-     ["Uncontrolled trial", "No comparison group at all"],
-     ["Natural experiment", "Groups formed by circumstance, not chance"],
-     ["Before and after study", "Secular change mimics treatment effect"]
+     [
+      "Uncontrolled trial",
+      "No comparison group at all"
+     ],
+     [
+      "Natural experiment",
+      "Groups formed by circumstance, not chance"
+     ],
+     [
+      "Before and after study",
+      "Secular change mimics treatment effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Intention to treat analysis keeps every participant in the group randomisation assigned, including crossovers, dropouts and protocol breakers, preserving the balance randomisation created. Per protocol analysis alone breaks that balance and flatters treatment by removing people with side effects. Number needed to treat is one divided by absolute risk reduction, so a fall from twenty to fifteen percent gives twenty.",
+   "say": "High-yield for the exam: Intention to treat analysis keeps every participant in the group randomisation assigned, including crossovers, dropouts and protocol breakers, preserving the balance randomisation created. Per protocol analysis alone breaks that balance and flatters treatment by removing people with side effects. Number needed to treat is one divided by absolute risk reduction, so a fall from twenty to fifteen percent gives twenty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Intention to treat rule",
+      "Analyse everyone exactly as randomised"
+     ],
+     [
+      "Per protocol trap",
+      "Removing non completers rebuilds selection bias"
+     ],
+     [
+      "Phase one trial",
+      "Safety and dose in few healthy volunteers"
+     ],
+     [
+      "Phase three trial",
+      "Large randomised comparison against standard care"
+     ],
+     [
+      "Phase four trial",
+      "Marketed surveillance for rare late harms"
+     ],
+     [
+      "Field trial population",
+      "Healthy community members, prevention tested"
+     ],
+     [
+      "Community trial unit",
+      "Whole villages or districts allocated together"
+     ],
+     [
+      "CONSORT flow use",
+      "Shows randomised, lost and analysed numbers"
+     ]
     ]
    }
   }
