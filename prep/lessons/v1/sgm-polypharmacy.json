@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "module": "sgm-polypharmacy",
+ "subject": "ss-general-medicine",
+ "title": "Polypharmacy and prescribing in older adults",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Polypharmacy** means use of five or more regular medicines, affecting **forty% of adults** over seventy five years and ninety% of those in nursing homes, with **inappropriate prescribing** in thirty% to fifty% of prescriptions. Adverse drug reactions cause **ten% of admissions** and twenty% of hospital deaths in elders, making prescribing quality a core **geriatric syndrome**.",
+   "say": "Polypharmacy means use of five or more regular medicines, affecting forty percent of adults over seventy five years and ninety percent in nursing homes, with inappropriate prescribing in thirty to fifty percent. Side effects cause ten percent of admissions and twenty percent of hospital deaths in elders, making prescribing quality a core geriatric problem.",
+   "vis": null
+  },
+  {
+   "tx": "Risk rises with **age over seventy five years**, female sex, **eight or more medicines**, cognitive impairment, renal disease and **twelve or more prescriptions yearly**. **Anticholinergics**, **benzodiazepines**, **nonsteroidal anti inflammatory** drugs and **beta blockers** top harm lists, while **self medication** with over the counter analgesics adds **bleeding** and **kidney injury** risk sharply.",
+   "say": "Risk rises with age over seventy five years, female sex, eight or more medicines, thinking impairment, kidney disease and many prescriptions yearly. Anticholinergics, benzodiazepines, painkillers and beta blockers top harm lists, while self medication with shop analgesics adds bleeding and kidney injury risk sharply.",
+   "vis": null
+  },
+  {
+   "tx": "Harm clusters around drug classes. This table maps frequent culprits to **harm**, **prevalence** in elders and **safer swap**, because examination options often test **anticholinergic burden** causing confusion and dry mouth rather than simple drug counts. Repeated audits show **pharmacist reconciliation** at discharge lowers prescribing errors by forty% and shortens readmission stays in older medical wards substantially.",
+   "say": "Harm can occur with drug classes. This table maps frequent culprits to harm, prevalence in elders and safer swap, because examination options often test anticholinergic burden causing confusion and dry mouth rather than simple drug counts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Main harm",
+     "Safer choice"
+    ],
+    "rows": [
+     [
+      "Benzodiazepines",
+      "Falls and confusion",
+      "Low dose a sedative short course"
+     ],
+     [
+      "NSAIDs",
+      "Bleed and kidney injury",
+      "a pain relief tablet two g maximum"
+     ],
+     [
+      "Anticholinergics",
+      "Delirium and dry eyes",
+      "Avoid; use single dose"
+     ],
+     [
+      "Beta blockers",
+      "Bradycardia, fatigue",
+      "Review need every six months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ageing alters **pharmacokinetics** and **pharmacodynamics**. A flow traces reduced clearance, higher sensitivity and **drug interactions** to adverse effects, showing why **creatinine clearance below thirty** demands dose cuts and **serum levels** guard a drug for long term illness and **a heart drug** toxicity. This vulnerability explains **dose sensitive toxicity** at standard adult doses and longer half lives in muscle wasting elders with **low body weight** and hypoalbuminaemia.",
+   "say": "Ageing alters drug handling and response. This flow traces reduced clearance, higher sensitivity and drug interactions to adverse effects, showing why creatinine clearance below thirty demands dose cuts and blood levels guard a drug for long term illness and a heart drug toxicity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Reduced clearance"
+     },
+     {
+      "id": "b",
+      "label": "Higher sensitivity"
+     },
+     {
+      "id": "c",
+      "label": "Interactions and burden"
+     },
+     {
+      "id": "d",
+      "label": "Adverse drug reaction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic adverse signs mimic geriatric disease: **falls**, acute **confusion**, **constipation**, **urinary retention**, **hyponatraemia** and **hypotension** within two weeks of a new drug. **Anticholinergic burden score over three**, **Beers criteria** flags and postural **systolic drop over twenty mmHg** each point to prescribing harm before disease progression is blamed.",
+   "say": "Classic adverse signs mimic old age disease, including falls, acute confusion, constipation, urine retention, low sodium and low blood pressure within two weeks of a new drug. Anticholinergic burden score over three, Beers criteria flags and postural systolic drop over twenty millimetres point to prescribing harm before disease progression is blamed.",
+   "vis": null
+  },
+  {
+   "tx": "Beers and STOPP tools are compared. This contrast separates American **Beers two thousand twenty three** drug lists from European **STOPP criteria** on renal and **sedative burden**, because trainees must name the tool, not just the drug, in prescription audit questions. Examiners expect candidates to quote **STOPP version three** pairs for renal dosing and sedation, plus **Beers two thousand twenty three** thresholds for falls and confusion risk after review.",
+   "say": "Beers and STOPP tools are compared. This contrast separates American Beers drug lists from European STOPP criteria on kidney and sedative burden, because trainees must name the tool, not just the drug, in prescription audit questions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Beers criteria",
+     "points": [
+      "Drug disease interaction lists",
+      "Falls and sedation flagged",
+      "Updated twenty twenty three",
+      "Single drug focus"
+     ]
+    },
+    "right": {
+     "title": "STOPP criteria",
+     "points": [
+      "Physiological system pairs",
+      "Renal and cardiac pairs",
+      "Covers interactions better",
+      "Screening tool version three"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Review starts with **medication reconciliation** within twenty four hours, then **renal function**, **eGFR**, **a salt balance treatment**, **ECG** and **serum drug levels** for a mood stabilising drug and a heart drug. **Gold standard** is structured STOPP START audit plus **pharmacist review** at discharge, while **anticholinergic burden scale** quantifies cumulative **sedative load** better than drug count alone.",
+   "say": "Review starts with medication reconciliation within twenty four hours, then kidney function, a salt balance treatment, ECG and blood drug levels for a mood stabilising drug and a heart drug. The reference standard is structured STOPP START audit plus pharmacist review at discharge, while anticholinergic burden scale quantifies cumulative sedative load better than drug count alone.",
+   "vis": null
+  },
+  {
+   "tx": "First line is to **deprescribe** one drug at a time with **twenty five% taper** over four weeks, correct **renal dosing** by creatinine clearance and keep **a pain relief tablet maximum two g daily** over age sixty five. Stop **proton pump inhibitors** beyond eight weeks without indication, switch **a mood stabilising drug three hundred mg** with hydration checks and control **potassium four point zero mmol per litre** targets.",
+   "say": "First line is to stop one drug at a time with twenty five percent taper over four weeks, correct kidney dosing by creatinine clearance and keep a pain relief tablet maximum two grams daily over age sixty five. Stop long term acid blockers beyond eight weeks without indication, watch a mood stabilising drug with hydration checks and control potassium targets.",
+   "vis": null
+  },
+  {
+   "tx": "Specific swaps include **a cholesterol tablet ten mg** review in primary prevention over eighty five years, **a blood pressure tablet two point five mg** start low for hypertension, **a diabetes tablet five hundred mg** only above eGFR thirty, and **a sleep aid three mg** instead of a sleep tablet for sleep. **Deprescribing clinics**, **dose optimisation** and **blister packs** improve **adherence over eighty%** in supervised elders.",
+   "say": "Specific swaps include a cholesterol tablet ten milligrams review in primary prevention over eighty five years, a blood pressure tablet two point five milligrams start low for hypertension, a diabetes tablet five hundred milligrams only above eGFR thirty, and a sleep aid three milligrams instead of a sleep tablet for sleep. Deprescribing clinics and blister packs improve adherence.",
+   "vis": null
+  },
+  {
+   "tx": "Complications after poor prescribing include **hospital acquired delirium**, **hip fracture**, **gastrointestinal bleed** in one in fifty a pain relief drug users yearly, and **hyperkalaemia** with an antibiotic tablet. Prognosis improves when **drug count falls below five**, since **ninety day mortality** drops by fifteen% and **readmission** falls by twenty% after structured **medication review** programs.",
+   "say": "Complications after poor prescribing include hospital delirium, hip fracture, gut bleeding in one in fifty painkiller users yearly, and high potassium with an antibiotic tablet. Prognosis improves when drug count falls below five, since ninety day mortality drops by fifteen percent and readmission falls by twenty percent after structured review.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: polypharmacy is **five drugs**, taper at **twenty five%**, credit **Beers** and **STOPP**, never blame disease before checking **new drug timing**. Use this **summary table** to answer renal dose, burden score and deprescribing questions precisely. Pair this with **Beers** and **STOPP** naming, **twenty five percent tapers** and **creatinine clearance** dosing to secure full marks in pharmacology viva rounds.",
+   "say": "This high yield material helps in the exam. Polypharmacy is five drugs, taper at twenty five percent, credit Beers and STOPP tools, and never blame disease before checking new drug timing. Use this summary table to answer kidney dose, burden score and deprescribing questions precisely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Polypharmacy cut",
+      "five or more medicines"
+     ],
+     [
+      "Taper step",
+      "twenty five% every four weeks"
+     ],
+     [
+      "Anticholinergic flag",
+      "Score over three harmful"
+     ],
+     [
+      "Renal dosing",
+      "Creatinine clearance based"
+     ],
+     [
+      "a pain relief tablet cap",
+      "two g daily over sixty five"
+     ],
+     [
+      "STOPP review",
+      "At every discharge"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
