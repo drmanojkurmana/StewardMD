@@ -25,6 +25,7 @@ class MainViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(SmdDevicePlugin())
         bridge?.registerPluginInstance(NfcPlugin())
+        bridge?.registerPluginInstance(PencilPlugin())
         if let launchBackground = UIColor(named: "LaunchBackground") {
             webView?.backgroundColor = launchBackground
             webView?.scrollView.backgroundColor = launchBackground
