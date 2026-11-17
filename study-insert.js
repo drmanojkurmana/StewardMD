@@ -230,9 +230,15 @@
     return S() && S()._state ? S()._state() : null;
   }
 
-  /* ---- Image Compression (JPEG 0.85, max 2048 px long edge) ---- */
+  /* ---- Image Compression (JPEG 0.85, max 2048 px long edge; PNG preserved for transparency) ---- */
   function compressImage(fileOrDataUrl) {
     return new Promise(function (resolve, reject) {
+      var isPng = false;
+      if (typeof fileOrDataUrl === "string") {
+        if (fileOrDataUrl.indexOf("data:image/png") === 0) isPng = true;
+      } else if (fileOrDataUrl && fileOrDataUrl.type === "image/png") {
+        isPng = true;
+      }
       var img = new G.Image();
       img.onload = function () {
         var dims = compressDimensions(img.naturalWidth || img.width, img.naturalHeight || img.height, 2048);
@@ -240,10 +246,12 @@
         cv.width = dims.w;
         cv.height = dims.h;
         var ctx = cv.getContext("2d");
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, dims.w, dims.h);
+        if (!isPng) {
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, dims.w, dims.h);
+        }
         ctx.drawImage(img, 0, 0, dims.w, dims.h);
-        var dataUrl = cv.toDataURL("image/jpeg", 0.85);
+        var dataUrl = isPng ? cv.toDataURL("image/png") : cv.toDataURL("image/jpeg", 0.85);
         cv.width = 0; cv.height = 0;
         resolve({
           data: dataUrl,
@@ -262,6 +270,22 @@
         reader.readAsDataURL(fileOrDataUrl);
       }
     });
+  }
+
+  function deleteItemById(dId) {
+    var v = V(), h = S() && S().host ? S().host() : null;
+    if (v && v.items) {
+      var it = v.items.find(function (x) { return x.id === dId; });
+      if (it) {
+        it.gone = true;
+        S().put("items", it);
+        S().pushUndo({ t: "del", ids: [dId] });
+        selectedItemId = null;
+        var pgN = S().posOf(it.page);
+        if (v.pg && v.pg[pgN]) renderPageItems(pgN, v.pg[pgN]);
+        if (h && h.toast) h.toast("Item deleted.");
+      }
+    }
   }
 
   /* ---- Laser Pointer (NEVER stored, never in undo) ---- */
@@ -1318,6 +1342,7 @@
     } catch (e) {}
 
     if (S().host()) S().host().toast("Saved '" + name + "' to Elements!");
+    if (G.STUDY_SELECT && G.STUDY_SELECT.removePanels) G.STUDY_SELECT.removePanels(S().host() && S().host().root());
   }
 
   /* ---- Sync Toolbar & Options ---- */
@@ -1781,6 +1806,7 @@
     compressImage: compressImage,
     insertImageFromDataUrl: insertImageFromDataUrl,
     insertImageFromFile: insertImageFromFile,
+    deleteItem: deleteItemById,
     ICO: {
       text: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><polyline points="4 7 4 4 20 4 20 7"/><line x1="12" y1="4" x2="12" y2="20"/></svg>',
       image: '<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',

@@ -126,7 +126,7 @@ for (const dev of DEVICES) {
           });
           await sleep(200);
           // go back to lib
-          await page.click('#smdPrep [data-act="back"]');
+          await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
           await page.waitForSelector("#stLib", { timeout: 10000 });
         }
       }
@@ -160,8 +160,10 @@ for (const dev of DEVICES) {
       await page.locator(".st-open").first().click();
     }
     await page.waitForSelector("#stPages", { timeout: 15000 });
+    // Wait for leaving screen (.pn-ghost) cross-fade transition to finish so editor covers full width
+    await page.waitForFunction(() => !document.querySelector(".pn-ghost"), { timeout: 5000 }).catch(() => {});
+    await sleep(400);
     await setupTheme();
-    await sleep(200);
     await page.screenshot({ path: join(OUT_DIR, `${tag}-notebook-editor.png`) });
     console.log(`Saved ${tag}-notebook-editor.png`);
 
@@ -267,6 +269,14 @@ for (const dev of DEVICES) {
         await sleep(150);
       }
     }
+    if (imgId) {
+      await page.evaluate((id) => {
+        if (window.STUDY_INSERT && window.STUDY_INSERT.deleteItem) {
+          window.STUDY_INSERT.deleteItem(id);
+        }
+      }, imgId);
+      await sleep(150);
+    }
 
     // Phase 4: Laser tool
     if (await page.locator('[data-act="st-tool"][data-v="laser"]').count()) {
@@ -352,7 +362,7 @@ for (const dev of DEVICES) {
     }
 
     // 7c. Phase 2: lasso settings strip + selection with handles, selection menu, shapes strip
-    if (mode === "p2" && await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
+    if (await page.locator('[data-act="st-tool"][data-v="lasso"]').count()) {
       await page.click('[data-act="st-tool"][data-v="lasso"]');
       await sleep(150); await setupTheme();
       await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-lasso-settings.png`) });
@@ -375,7 +385,12 @@ for (const dev of DEVICES) {
         await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-color.png`) });
         console.log(`Saved ${tag}-p2-color.png`);
       }
-      await page.click('[data-act="st-lasso-done"]');
+      if (await page.locator('#stSelColor [data-sel-close]').count()) {
+        await page.click('#stSelColor [data-sel-close]');
+      }
+      if (await page.locator('[data-act="st-lasso-done"]').count()) {
+        await page.click('[data-act="st-lasso-done"]');
+      }
       await page.click('[data-act="st-tool"][data-v="shapes"]');
       await sleep(150); await setupTheme();
       await page.screenshot({ path: join(OUT_DIR, `${tag}-p2-shapes.png`) });
@@ -402,7 +417,7 @@ for (const dev of DEVICES) {
       }
     });
     await sleep(150);
-    await page.click('#smdPrep [data-act="back"]');
+    await page.click('#smdPrep [data-act="back"]:visible, #stP3Top [data-act="st-p3-back"]:visible');
     await page.waitForSelector("#stLib", { timeout: 10000 });
     await page.locator(".st-doc", { hasText: "Cardiology" }).locator(".st-open").click();
     await page.waitForSelector(".st-pg canvas.st-cv", { timeout: 15000 });
