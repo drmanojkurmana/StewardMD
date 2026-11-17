@@ -1,0 +1,364 @@
+{
+ "v": 1,
+ "module": "sid-fever-approach",
+ "title": "Fever and Fever of Unknown Origin",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Fever of unknown origin** is temperature above **38.3°C** for **3 weeks** without diagnosis after basic tests. The 4 groups are **classical, nosocomial, neutropenic and HIV** related. **Infections** cause 33%; tumours and inflammation share the rest. **Labelling the group** narrows the hunt at once.",
+   "say": "Fever of unknown origin is defined as temperature above thirty eight point three degrees lasting three weeks with no diagnosis after basic tests. The four groups are classical, hospital acquired, neutropenic and H I V related, and each has its own likely list. Infections cause about a third, tumours and inflammation share the rest. Labelling the group correctly narrows the hunt at once.",
+   "vis": {
+    "cols": [
+     "FUO group",
+     "Setting",
+     "Top suspects"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Classical",
+      "Community, 3 weeks",
+      "TB, abscess, Still, tumour"
+     ],
+     [
+      "Nosocomial",
+      "Hospital onset",
+      "Line, urine, C. difficile"
+     ],
+     [
+      "Neutropenic",
+      "Counts low",
+      "Fungi, resistant bacteria"
+     ],
+     [
+      "HIV related",
+      "Low CD4",
+      "Mycobacteria, CMV, lymphoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**History** hunts contacts, travel, animals, drugs and hobbies. **Household TB contact**, raw milk brucella and **new drug within days** are classic links. **Examination repeats daily** as murmurs, rashes and nodes appear late. **Drug chart review** cures 1 in 10 prolonged fevers. **Stop the suspect drug**; fever falls within days.",
+   "say": "History hunts contacts with travel with animals with drugs with hobbies, because each exposure names a suspect. Tuberculosis follows household contact, brucella follows raw milk, and drug fever follows a new prescription within days. Examination repeats daily since new murmurs with rashes with nodes appear late. A drug chart review cures one in ten prolonged fevers without a single test.",
+   "vis": {
+    "cols": [
+     "Exposure",
+     "Suspect",
+     "Proof"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Raw milk, cattle",
+      "Brucella",
+      "Blood culture, serology"
+     ],
+     [
+      "New drug, days",
+      "Drug fever",
+      "Stops on withdrawal"
+     ],
+     [
+      "Travel, jungle",
+      "Malaria, typhoid",
+      "Smear, blood culture"
+     ],
+     [
+      "Pets, birds",
+      "Psittacosis, Q fever",
+      "Serology, exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cultures before antibiotics**: 3 **blood culture** sets with urine and sputum open workup. **Procalcitonin** separates bacterial from viral; **ESR and CRP** track inflammation. **HIV with TB tests** are routine in prolonged fever. **Antibiotics before cultures** blind the laboratory for weeks.",
+   "say": "Cultures are drawn before antibiotics, and three sets of blood cultures with urine with sputum open every workup. Procalcitonin separates bacterial from viral illness, while E S R with C reactive protein tracks inflammation over weeks. H I V testing with tuberculosis tests is routine in every prolonged fever. Antibiotics before cultures leave the laboratory blind for weeks.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Shows",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Blood cultures x3",
+      "Bacteraemia",
+      "Before antibiotics"
+     ],
+     [
+      "Procalcitonin",
+      "Bacterial signal",
+      "Guides start, stop"
+     ],
+     [
+      "HIV, TB tests",
+      "Hidden drivers",
+      "Routine in all"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Contrast CT** hunts **abscesses** in liver, pelvis and spine. **Echocardiography** follows murmurs, emboli and prosthetic valves. **PET CT** lights up hidden infection, tumours and large vessel vasculitis in one sweep. **Biopsy the lit lesion**; blind treatment wastes the chance and breeds resistance.",
+   "say": "Contrast imaging hunts abscesses that antibiotics cannot reach, and the liver with the pelvis with the spine are favourite hiding places. Echocardiography is ordered when murmurs with emboli with prosthetic valves appear. P E T C T is ordered for hidden infection with tumours with large vessel vasculitis in one sweep. Biopsy of the lit up lesion, not blind treatment, gives the diagnosis.",
+   "vis": {
+    "cols": [
+     "Scan",
+     "Finds",
+     "Next move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Contrast CT",
+      "Abscess, nodes",
+      "Drain, culture"
+     ],
+     [
+      "Echo",
+      "Vegetations",
+      "Long antibiotics"
+     ],
+     [
+      "PET CT",
+      "Hidden focus",
+      "Biopsy the hotspot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adult Still disease** spikes fever daily with **salmon rash** fading between spikes. **Arthralgia** with ferritin above **10,000** and neutrophilia completes it. **Infection and malignancy** are excluded first as steroids mask both. **Steroids** with interleukin blockade control most cases once infection is dead.",
+   "say": "Fever in Adult Still disease rises once or twice daily with salmon rash that fades between spikes. Joints are aching, ferritin is soaring above ten thousand, and neutrophils crowd the blood. Infection with malignancy is excluded first, because steroids mask both. Interleukin blockers with steroids control most cases once the mimics are dead.",
+   "vis": {
+    "cols": [
+     "Still feature",
+     "Detail",
+     "Mimic excluded"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fever pattern",
+      "Once or twice daily",
+      "Infection"
+     ],
+     [
+      "Rash",
+      "Salmon, evanescent",
+      "Drug rash"
+     ],
+     [
+      "Ferritin",
+      "Above ten thousand",
+      "Lymphoma, TB"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Temporal arteritis** hides behind elderly fever with **scalp sore, jaw pain** and vision loss. **Steroids start before biopsy** as eyes follow in days. **Lymphoma** gives drenching sweats, weight loss and painless nodes. **Node or marrow biopsy** decides. **B symptoms** are asked in every prolonged fever.",
+   "say": "Temporal arteritis hides behind prolonged fever in the elderly with headache that is blamed on age. Scalp tenderness with jaw pain with sudden vision loss is the warning cluster, and steroids start before biopsy. Lymphoma announces itself with drenching sweats with weight loss with nodes that do not ache. Biopsy of node with marrow decides, and B symptoms are asked in every case.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Older, scalp sore, vision at risk, steroids now"
+     ],
+     "title": "Arteritis"
+    },
+    "right": {
+     "points": [
+      "Sweats, weight loss, nodes, biopsy first"
+     ],
+     "title": "Lymphoma"
+    }
+   }
+  },
+  {
+   "tx": "**Tuberculosis** causes 20% of classical FUO where endemic; **nodes, spine, meninges and pericardium** hide it. **GeneXpert with culture** proves it. **Treatment runs many months** with follow up till cultures stay negative. **HIV testing** is mandatory as coinfection changes drugs and duration.",
+   "say": "Tuberculosis causes a fifth of classical fever of unknown origin in endemic regions, and it hides outside the lungs. Lymph nodes with spine with meninges with pericardium are favourite silent sites. GeneXpert with culture with histology proves it, and treatment runs many months. H I V testing is mandatory, because coinfection changes drugs with duration with prophylaxis.",
+   "vis": {
+    "cols": [
+     "Hidden TB site",
+     "Clue",
+     "Proof"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Nodes",
+      "Matted, neck",
+      "Needle biopsy"
+     ],
+     [
+      "Spine",
+      "Back pain, kyphosis",
+      "MRI, GeneXpert"
+     ],
+     [
+      "Meninges",
+      "Slow confusion",
+      "Spinal fluid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neutropenic fever** is treated within the **hour**: single spike above **38.3°C** with low counts triggers broad cover. **Cultures first, antibiotics at once**. **Antifungals join** past day **4** of persistent fever. **Growth factors** with isolation protect next cycles. Delay kills; the clock starts at the spike.",
+   "say": "Neutropenic fever is treated within the hour because bacteria kill quickly without white cells. A single spike above thirty eight point three with low counts triggers broad cover at once. Cultures are drawn first but antibiotics never wait for results. Antifungals are added when fever persists beyond four days despite antibacterials. Growth factors with isolation are protecting the next cycle.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Spike with low counts"
+     },
+     {
+      "id": "b",
+      "label": "Cultures, broad cover now"
+     },
+     {
+      "id": "c",
+      "label": "Fever past day four"
+     },
+     {
+      "id": "d",
+      "label": "Add antifungals"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Nosocomial fever** is a **line infection** first; pull infected lines. **Urine, lungs, wounds and C. difficile** follow in order. **Eosinophils with rash** with recovery on stopping seals **drug fever**. **Fresh cultures** precede broader cover in every new spike. **Devices** are reviewed daily.",
+   "say": "Hospital fever is a line infection until proven otherwise, and the line is pulled when cultures turn positive. Urine with lungs with wounds with C difficile follow in order, and each new drug is a suspect for drug fever. Eosinophils with rash with improving patient on stopping the drug seals drug fever. New fever after stability is always cultured fresh before broader cover.",
+   "vis": {
+    "cols": [
+     "Hospital source",
+     "Clue",
+     "Fix"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Line",
+      "Spike, no focus",
+      "Pull, culture tip"
+     ],
+     [
+      "Urine",
+      "Catheter, cloudy",
+      "Remove, treat"
+     ],
+     [
+      "C. difficile",
+      "Watery diarrhoea",
+      "Test stool, isolate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** antibiotics before cultures blind everything. **Drug fever** is missed when charts are skipped. **Steroids** without excluding TB and lymphoma harm. **PET normal** never rules out disease. Fever melting with **anti-inflammatory drugs** points to tumours and Still disease, not infection.",
+   "say": "The traps that fail examinations are starting antibiotics before cultures, missing drug fever, and scanning before examining. Steroids without excluding tuberculosis with lymphoma harm both. A normal P E T is never proof of health, and a single blood culture is never proof of contamination. Fever that melts with anti-inflammatory drugs points to tumours with Still disease, not infection.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Early antibiotics",
+      "Cultures dead",
+      "Culture first always"
+     ],
+     [
+      "Steroids too soon",
+      "Masks TB, lymphoma",
+      "Exclude both first"
+     ],
+     [
+      "Normal PET",
+      "Still diseased",
+      "Biopsy the clinic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **38.3°C for 3 weeks** defines FUO. **Cultures before antibiotics** always. Neutropenic cover within the **hour**, antifungals past day **4**. **Salmon rash with 10,000** ferritin marks Still disease. **Steroids before biopsy** in arteritis saves the second eye.",
+   "say": "For the exam, the facts to lock in are thirty eight point three for three weeks, cultures before antibiotics, neutropenic cover within the hour with antifungals past day four, salmon rash with ten thousand ferritin for Still disease, and steroids before biopsy for arteritis. Tuberculosis is hidden outside lungs while drug fever is cured on withdrawal. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "FUO definition",
+      "38.3 for 3 weeks",
+      "Cutoff question"
+     ],
+     [
+      "First move",
+      "Cultures first",
+      "Blinds lab"
+     ],
+     [
+      "Neutropenic hour",
+      "Cover within hour",
+      "Emergency"
+     ],
+     [
+      "Antifungal day",
+      "Past day four",
+      "Escalation"
+     ],
+     [
+      "Still rash",
+      "Salmon, evanescent",
+      "Classic sign"
+     ],
+     [
+      "Still ferritin",
+      "Above ten thousand",
+      "Marker"
+     ],
+     [
+      "Arteritis rule",
+      "Steroids before biopsy",
+      "Saves eyes"
+     ],
+     [
+      "TB share",
+      "Fifth of FUO here",
+      "Endemic weight"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

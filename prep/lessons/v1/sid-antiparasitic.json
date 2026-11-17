@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-antiparasitic",
+ "title": "Antiparasitic Agents",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Antiparasitics** divide by kingdom: protozoa, worms and ectoparasites share little biology. **Malaria** treatment leads exams, then amoebiasis, helminths and leishmania. **Species diagnosis** precedes treatment always. **Severity, pregnancy and resistance** pick regimens. Combination therapy slows resistance everywhere, and weight based dosing protects children.",
+   "say": "Antiparasitic drugs are divided by kingdom, because protozoa with worms with ectoparasites share almost no biology. Malaria treatment is the most examined, followed by amoebiasis with helminths with leishmania. Species diagnosis is always done before treatment, since the wrong drug wastes the window. Severity with pregnancy with resistance pattern is guiding the regimen.",
+   "vis": {
+    "cols": [
+     "Kingdom",
+     "Example",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Protozoa",
+      "Malaria, amoeba",
+      "Species then treat"
+     ],
+     [
+      "Worms",
+      "Round, tape, fluke",
+      "Single dose often"
+     ],
+     [
+      "Ectoparasites",
+      "Scabies, lice",
+      "Treat contacts too"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uncomplicated falciparum** malaria takes **artemether with lumefantrine** over **3 days** with fatty food. **Complete the course** despite early improvement. **Vomited doses** are repeated. **Early pregnancy** favours quinine based regimens over combinations. **Artesunate with mefloquine** with other combinations cover resistant zones.",
+   "say": "Uncomplicated falciparum malaria is treated with artemisinin combinations that clear parasites within days. Artemether with lumefantrine is the commonest fixed tablet, taken with fatty food for absorption. Doses run over three days and must be completed despite early improvement. Vomited doses are repeated, and pregnancy shifts choice toward quinine based regimens in early months.",
+   "vis": {
+    "cols": [
+     "Regimen",
+     "Use",
+     "Caution"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Artemether-lumefantrine",
+      "Uncomplicated, commonest",
+      "Fatty food, finish course"
+     ],
+     [
+      "Quinine based",
+      "Early pregnancy",
+      "Longer, bitter"
+     ],
+     [
+      "Other ACTs",
+      "Resistant zones",
+      "Follow local policy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Severe malaria** (coma, acidosis, renal failure) takes **intravenous artesunate**, which beats quinine clearly. **Exchange transfusion** has no role. **Fluids, glucose and seizures** are managed alongside. **Parasite counts** tracked till clearance. **Follow with full oral** course after parenteral treatment finishes and smears clear.",
+   "say": "Severe malaria kills through coma with acidosis with renal failure, and intravenous artesunate is the treatment that saves lives. Quinine was the old standard but artesunate beats it clearly, so it leads everywhere available. Exchange transfusion has no role, while fluids with glucose with seizures are managed alongside. Parasite counts are tracked till clearance is documented.",
+   "vis": {
+    "cols": [
+     "Severity sign",
+     "Meaning",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cerebral coma",
+      "Brain involved",
+      "Artesunate IV now"
+     ],
+     [
+      "Acidosis, renal",
+      "Multiorgan",
+      "Support plus artesunate"
+     ],
+     [
+      "High parasites",
+      "Heavy load",
+      "Track till clear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vivax and ovale** relapse from liver dormants without **radical cure**. **Primaquine for 14 days** clears dormants. **G6PD testing first**; deficiency haemolyses. **Resistant zones** need higher doses. **Pregnancy defers** cure till delivery. **Blood stages are cleared first**, liver sterilised after with follow up smears.",
+   "say": "Vivax with ovale malaria are hidden in the liver and relapse for years without radical cure. Primaquine for two weeks clears the dormant forms, but G six P D testing comes first because deficiency causes haemolysis. Higher doses suit resistant zones, and pregnancy defers radical cure till delivery. Blood stages are cleared first, then the liver is sterilised.",
+   "vis": {
+    "cols": [
+     "Step",
+     "Drug logic",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Blood stages",
+      "ACT or chloroquine",
+      "Clear first"
+     ],
+     [
+      "Liver dormants",
+      "Primaquine 14 days",
+      "G6PD first"
+     ],
+     [
+      "Pregnancy",
+      "Defer radical cure",
+      "Treat blood only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chloroquine** still cures sensitive vivax and malariae where maps allow. **Falciparum** is assumed resistant in most zones. **Doxycycline** partners quinine and doubles as traveller prophylaxis. **Mefloquine** suits long stays without psychiatric history. **Prophylaxis spans entry to weeks after exit**, matching each drug schedule.",
+   "say": "Chloroquine still cures sensitive vivax with malariae, and it remains the sweetest tablet where it works. Resistance maps decide its use, and falciparum is assumed resistant in most zones. Doxycycline partners quinine where combinations are needed, and it doubles as prophylaxis for travellers. Prophylaxis starts before entry and continues after exit for the full incubation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Sensitive vivax, sweet tablet, maps allow"
+     ],
+     "title": "Chloroquine works"
+    },
+    "right": {
+     "points": [
+      "Most falciparum, assume failure, use ACT"
+     ],
+     "title": "Chloroquine fails"
+    }
+   }
+  },
+  {
+   "tx": "**Amoebiasis** needs **tissue agents** for gut wall and liver plus **luminal agents** for cysts. **Microscopy with antigen** separates true amoeba from lookalikes. **Anchovy sauce pus** without bacteria marks abscess. **Serology is positive** for years and never proves fresh disease on its own.",
+   "say": "Amoebic dysentery with liver abscess needs tissue agents that reach the gut wall with the liver, followed by luminal agents that clear cysts. Stool microscopy with antigen separates true amoeba from harmless lookalikes, because overtreatment wastes drugs. Anchovy sauce pus on aspiration with no bacteria confirms abscess. Serology is positive for years, so it never proves fresh disease.",
+   "vis": {
+    "cols": [
+     "Site",
+     "Agents",
+     "Proof"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Gut wall",
+      "Tissue agents",
+      "Antigen positive"
+     ],
+     [
+      "Liver abscess",
+      "Tissue, aspirate if large",
+      "Anchovy pus, sterile"
+     ],
+     [
+      "Lumen",
+      "Luminal agents",
+      "Cysts cleared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Helminths** take **single dose tablets** by species; **stool microscopy** names the worm first. **Roundworm, threadworm and hookworm** each have preferred tablets. **Tapeworms** need head killing agents. **Neurocysticercosis** needs specialist cover as dying cysts inflame brain. **School deworming days** cut stunting where worms burden children.",
+   "say": "Worms are killed by single dose tablets chosen by species, and stool microscopy names the worm before treatment. Roundworm with threadworm with hookworm each have a preferred tablet, while tapeworms need agents that kill the head. Neurocysticercosis needs imaging with specialist cover because dying cysts inflame the brain. Mass drug days are deworming whole schools where worms stunt growth.",
+   "vis": {
+    "cols": [
+     "Worm",
+     "Diagnosis",
+     "Principle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Round, hook, whip",
+      "Stool ova",
+      "Single dose by species"
+     ],
+     [
+      "Threadworm",
+      "Night itch, tape test",
+      "Treat household"
+     ],
+     [
+      "Tapeworm",
+      "Segments passed",
+      "Kill the head"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Visceral leishmaniasis** swells spleen with months of fever and wasting. **Rapid antibody test screens, marrow proves**. **Single dose liposomal** treatment cures most where available. **Post treatment skin lesions** spread infection and need therapy. **Bed nets with vector work** protect villages. HIV coinfection needs longer courses.",
+   "say": "Visceral leishmaniasis swells spleen with fever with wasting for months, and a rapid antibody test screens while marrow proves. Single dose liposomal treatment cures most where available, with antimony courses where it is not. Post treatment skin lesions spread infection and need therapy. Vector control with bed nets with reservoir work protects villages together.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever, spleen, wasting"
+     },
+     {
+      "id": "b",
+      "label": "Rapid test, marrow proof"
+     },
+     {
+      "id": "c",
+      "label": "Treat by local regimen"
+     },
+     {
+      "id": "d",
+      "label": "Watch skin, protect village"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Scabies** itches worst at night with **finger burrows**; households treated together. **Topical cream neck down** with repeat in a week cures most. **Oral tablets** suit crusted disease. **Lice** need combing plus treatment. **Itching persists weeks** after cure from allergy, not failure.",
+   "say": "Scabies itches worst at night with burrows between fingers, and whole households are treated together whether itching or not. Antiparasitic cream from neck down with a repeat in a week cures most, while oral tablets suit crusted cases. Lice are combed with treated hair, and bedding is washed hot. Itching lasts weeks after cure, which is allergy not failure.",
+   "vis": {
+    "cols": [
+     "Infestation",
+     "Treat who",
+     "Repeat"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Scabies",
+      "Whole household",
+      "Cream, repeat week"
+     ],
+     [
+      "Crusted scabies",
+      "Patient plus contacts",
+      "Oral tablets"
+     ],
+     [
+      "Head lice",
+      "Child plus close contacts",
+      "Comb plus treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** falciparum with **chloroquine** fails in resistant zones. **G6PD skipped** before primaquine haemolyses. **Radical cure skipped** means yearly vivax relapses. Severe malaria needs **intravenous artesunate**, never tablets alone, and parenteral quinine is second best. **Single stool** misses worms; examine 3 samples.",
+   "say": "The traps that cost lives are treating falciparum with chloroquine in resistant zones, skipping G six P D before primaquine, and forgetting radical cure so vivax relapses yearly. Severe malaria without intravenous artesunate is needlessly fatal. Single stool samples miss worms, so three samples are examined. Pregnancy changes every choice, so dates are confirmed first.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Chloroquine falciparum",
+      "Resistant zones",
+      "Use ACT"
+     ],
+     [
+      "Primaquine blind",
+      "Haemolysis risk",
+      "G6PD first"
+     ],
+     [
+      "No radical cure",
+      "Relapses yearly",
+      "14 days primaquine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **artemether-lumefantrine for 3 days** treats uncomplicated falciparum. **Intravenous artesunate** saves severe malaria. **Primaquine 14 days** after G6PD gives radical cure. **Anchovy pus** marks amoebic abscess. **Rapid test** screens leishmania. Examine **3 stool** samples for ova and parasites.",
+   "say": "For the exam, the facts to lock in are artemether lumefantrine for three days, intravenous artesunate for severe, fourteen days primaquine after G six P D, chloroquine only where sensitive, anchovy sauce pus for amoebic abscess, r K thirty nine for leishmania, and three stool samples for worms. Species is identified first always, and pregnancy changes every choice. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Uncomplicated drug",
+      "Artemether-lumefantrine",
+      "First line"
+     ],
+     [
+      "Severe drug",
+      "Artesunate IV",
+      "Beats quinine"
+     ],
+     [
+      "Radical cure",
+      "Primaquine 14 days",
+      "Relapse stopper"
+     ],
+     [
+      "G6PD rule",
+      "Test before primaquine",
+      "Haemolysis trap"
+     ],
+     [
+      "Sensitive drug",
+      "Chloroquine",
+      "Maps allow"
+     ],
+     [
+      "Amoebic abscess",
+      "Anchovy pus",
+      "Sterile pus"
+     ],
+     [
+      "Leishmania screen",
+      "Rapid test",
+      "Marrow proves"
+     ],
+     [
+      "Worm samples",
+      "Three stools",
+      "Sensitivity"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

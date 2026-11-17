@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "module": "sid-leptospirosis",
+ "title": "Leptospirosis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Leptospirosis** enters through cuts, eyes and mouth from **rat urine in floodwater**; farmers and drain workers after rains are struck. **Calf pain with red eyes** without discharge separates it from dengue. Most stay mild; 1 in 10 turns icteric with failing kidneys. **Monsoon, occupation and exposure** diagnose before laboratories.",
+   "say": "Leptospirosis is rat urine in floodwater entering through cuts with eyes with mouths, and it strikes farmers with drain workers with adventurers after rains. Calf pain with red eyes without discharge is the bedside pair that separates it from dengue. Most cases stay mild and flu like, while one in ten turns icteric with kidneys failing. Monsoon with occupation with exposure makes the diagnosis before laboratories.",
+   "vis": {
+    "cols": [
+     "Exposure",
+     "Enters via",
+     "Season"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Floodwater",
+      "Cuts, eyes, mouth",
+      "Monsoon weeks"
+     ],
+     [
+      "Rat urine",
+      "Skin, mucosa",
+      "After rains"
+     ],
+     [
+      "Farm, drains",
+      "Bare feet, hands",
+      "Occupational"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anicteric disease** mimics dengue and flu, settling in days. **Biphasic meningism** follows a well gap in 25%; spinal fluid is sterile. **Doxycycline shortens** early illness. **Platelets with liver stay normal**, unlike dengue. **Rest with fluids** carries most; antibiotics speed recovery in all treated early.",
+   "say": "Anicteric leptospirosis mimics dengue with flu, with fever with headache with muscle pain settling in days. Biphasic return with meningism follows a brief well gap in a quarter of cases, and spinal fluid shows sterile pleocytosis. Doxycycline shortens the illness when started early, while rest with fluids carries most. Platelets with liver stay normal, which separates it from dengue with hepatitis.",
+   "vis": {
+    "cols": [
+     "Mild feature",
+     "Leptospirosis",
+     "Dengue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fever, ache",
+      "Calf pain, red eyes",
+      "Eye pain, rash"
+     ],
+     [
+      "Platelets",
+      "Normal",
+      "Low"
+     ],
+     [
+      "Liver",
+      "Normal early",
+      "Raised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Weil disease** is jaundice with **renal failure and lung bleed**; dialysis with cover saves. **Suffusion, calf pain and low platelets** complete the triad. **Pulmonary haemorrhage** needs ventilation suddenly. **Penicillin or ceftriaxone** runs while organs supported. **Hyperkalaemia with acidosis** earns urgent dialysis.",
+   "say": "Weil disease is the icteric storm with jaundice with renal failure with bleeding into lungs, and it kills without dialysis with cover. Conjunctival suffusion with calf tenderness with low platelets makes up the dangerous triad. Pulmonary haemorrhage drowns suddenly and needs ventilation, while hyperkalaemia with acidosis needs dialysis urgently. Penicillin with ceftriaxone runs while organs are supported.",
+   "vis": {
+    "cols": [
+     "Weil organ",
+     "Fails as",
+     "Rescue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Kidney",
+      "Oliguria, potassium up",
+      "Dialyse early"
+     ],
+     [
+      "Lung",
+      "Bleed, breathless",
+      "Ventilate"
+     ],
+     [
+      "Liver",
+      "Deep jaundice",
+      "Support, cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diagnosis follows weeks: PCR early, antibodies late**. **Microscopic agglutination** confirms with rising pairs but arrives late. **Darkfield obsolete** and dangerous. **Treatment is never delayed** for titres with classic exposure in season. **Paired sera** prove retrospectively; empirical cover saves prospectively and kidneys.",
+   "say": "Diagnosis is timed by week, because blood PCR works early while antibodies rise late. Microscopic agglutination testing confirms with rising pairs but arrives after decisions are made. Darkfield seeing is obsolete and dangerous, so cultures go to reference laboratories. Treatment is never delayed for titres with classic exposure in season, because delay kills kidneys.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Flood exposure, calf pain"
+     },
+     {
+      "id": "b",
+      "label": "PCR early, sera late"
+     },
+     {
+      "id": "c",
+      "label": "Treat without waiting"
+     },
+     {
+      "id": "d",
+      "label": "Prove with pairs later"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Mild disease** takes **doxycycline or amoxicillin** tablets; fever shortens in days. **Azithromycin suits pregnancy**; children dosed by weight. **Severe disease** takes **intravenous penicillin or ceftriaxone** with ICU for lungs and kidneys. **Jarisch like worsening** follows first doses and is ridden through.",
+   "say": "Mild disease is treated with doxycycline or amoxicillin tablets, and both shorten fever within days. Azithromycin suits pregnancy where doxycycline is avoided, while children take weight based doses. Severe disease takes intravenous penicillin or ceftriaxone, with intensive care for lungs with kidneys. Jarisch like worsening follows first doses and is ridden through, not feared.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Tablets, mild, doxycycline or amoxicillin"
+     ],
+     "title": "Mild"
+    },
+    "right": {
+     "points": [
+      "IV penicillin or ceftriaxone, ICU organs"
+     ],
+     "title": "Severe"
+    }
+   }
+  },
+  {
+   "tx": "**Chemoprophylaxis** is weekly **doxycycline 200 mg** for flood zone entrants, started before exposure. **Rodent control with drains with boots** prevents more than pills. **Wounds washed** with clean water at once as inoculum decides severity. **Worker vaccines** cover few strains where available.",
+   "say": "Chemoprophylaxis with weekly doxycycline protects soldiers with relief workers entering flood zones, and it starts before exposure. Rodent control with drain clearing with boots prevents more cases than pills ever will. Worker vaccines are available in some regions but cover few strains. Wounds are washed with clean water at once, because inoculum decides severity.",
+   "vis": {
+    "cols": [
+     "Shield",
+     "Who",
+     "How"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Weekly doxycycline",
+      "Flood entrants",
+      "200 mg, before entry"
+     ],
+     [
+      "Boots, drains",
+      "Farmers",
+      "Every monsoon"
+     ],
+     [
+      "Wound wash",
+      "All exposed",
+      "Clean water at once"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Kidneys recover fully** if dialysis bridges oliguric days. **Potassium, acidosis and overload** trigger sessions. **Bleeding** needs platelets with clotting support. **Liver recovers** without scarring; jaundice fades over weeks. **Follow up proves** full renal recovery in most survivors over weeks of review.",
+   "say": "Kidneys fail early and recover fully if dialysis bridges the oliguric days, which is the most hopeful message in Weil disease. Potassium with acidosis with fluid overload triggers urgent sessions, while bleeding needs platelets with clotting support. Liver recovers without scarring, unlike viral hepatitis, and jaundice fades over weeks. Follow up proves full renal recovery in most survivors.",
+   "vis": {
+    "cols": [
+     "Support",
+     "Trigger",
+     "Outcome"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Dialysis",
+      "Potassium, overload",
+      "Full recovery usual"
+     ],
+     [
+      "Ventilation",
+      "Lung bleed",
+      "Bridges crisis"
+     ],
+     [
+      "Platelets",
+      "Active bleed",
+      "Clotting support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Monsoon fevers** overlap and are separated daily: rash with low platelets marks **dengue**; rigors with sweats mark **malaria**; eschar marks **scrub**; calf pain with red eyes marks **leptospirosis**. **Smears, cultures and serology** run together as coinfections happen. **Likeliest treated** while results pend.",
+   "say": "Monsoon fevers overlap, so dengue with malaria with scrub typhus with leptospirosis are separated at the bedside daily. Rash with low platelets points to dengue, rigors with sweats to malaria, eschar to scrub, and calf pain with red eyes to leptospirosis. Smears with cultures with serology run together, because co infections happen. Treatment covers the likeliest while results pend.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Rash, low platelets, eye pain, fluids only"
+     ],
+     "title": "Dengue"
+    },
+    "right": {
+     "points": [
+      "Calf pain, red eyes, doxycycline helps"
+     ],
+     "title": "Leptospirosis"
+    }
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** floodwater with **rat urine** exposes. **Calf pain with red eyes** marks cases. **Biphasic meningism** hits 25%. **Weil triad** needs dialysis. **PCR early, antibodies late**. **Doxycycline** treats mild; penicillin or ceftriaxone severe. **Weekly 200 mg** prevents.",
+   "say": "For the exam, the facts to lock in are floodwater with rat urine, calf pain with red eyes, biphasic meningism in a quarter, Weil triad with dialysis rescue, P C R early with antibodies late, doxycycline for mild with penicillin or ceftriaxone for severe, and weekly two hundred milligrams for prevention. Dengue is lowering platelets while leptospirosis is sparing them early. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Exposure",
+      "Rat urine floods",
+      "Monsoon link"
+     ],
+     [
+      "Bedside pair",
+      "Calf pain, red eyes",
+      "Versus dengue"
+     ],
+     [
+      "Biphasic",
+      "Meningism after gap",
+      "Quarter of cases"
+     ],
+     [
+      "Weil triad",
+      "Jaundice, kidney, bleed",
+      "Dialyse early"
+     ],
+     [
+      "Early test",
+      "PCR blood",
+      "Antibodies late"
+     ],
+     [
+      "Mild drug",
+      "Doxycycline",
+      "Shortens fever"
+     ],
+     [
+      "Severe drugs",
+      "Penicillin, ceftriaxone",
+      "IV with ICU"
+     ],
+     [
+      "Prevention",
+      "Weekly 200 mg",
+      "Flood entrants"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pregnancy and childhood** use the same drugs with adjusted doses; **azithromycin covers pregnancy** safely. **Children dosed by weight**; breastfeeding continues. **Severe pregnancy** disease delivers early with ICU for both. **Paediatric kidneys** recover like adults when dialysis bridges in time without delay.",
+   "say": "Pregnancy with childhood leptospirosis follows the same drugs with adjusted doses, and azithromycin covers pregnancy safely. Children are dosed by weight with syrups where available, and breastfeeding continues through treatment. Severe disease in pregnancy is delivered early with intensive care for mother with baby together. Paediatric kidneys are recovering like adults when dialysis bridges in time.",
+   "vis": {
+    "cols": [
+     "Group",
+     "Adjustment",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Pregnancy",
+      "Azithromycin safe",
+      "Avoid doxycycline"
+     ],
+     [
+      "Children",
+      "Weight doses",
+      "Syrups available"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** lung bleed drowns in hours; ventilate early. **Titres waited** for kills kidneys; treat on exposure. **Calves with eyes** unchecked misses cases. **Dialysis delayed** for potassium kills. **Prophylaxis skipped** wastes prevention. **Weil cases** earn ICU from arrival without exception.",
+   "say": "The traps that fail examinations are missing lung bleed that drowns in hours, waiting for antibody titres before treating, and calling every monsoon fever dengue without checking calves with eyes. Dialysis delayed for rising potassium kills needlessly. Chemoprophylaxis skipped before flood entry wastes the only prevention. Every Weil case is receiving intensive care from arrival.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Wait for titres",
+      "Kidneys fail meanwhile",
+      "Treat on exposure"
+     ],
+     [
+      "Miss lung bleed",
+      "Drowns in hours",
+      "Ventilate early"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

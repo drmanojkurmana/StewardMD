@@ -1,0 +1,351 @@
+{
+ "v": 1,
+ "module": "sid-staph",
+ "title": "Staphylococcal Infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Staphylococcus aureus** kills by toxins plus invasion; **bacteraemia with new murmur** is endocarditis first. **Nasal carriage** seeds invasive disease. Every bacteraemia earns **repeat cultures with echocardiography**. **mecA gene** marks methicillin resistance and changes drugs, never urgency. **Source control** with right drug and duration cures most.",
+   "say": "Staphylococcus aureus kills through toxins with invasion together, so bacteraemia with a new murmur is endocarditis until proven otherwise. Most invasive disease is seeded from nasal carriage, and every bacteraemia earns repeat cultures with echocardiography. Methicillin resistance is carried on the mecA gene, which changes the drug but never the urgency. Source control with the right drug for the right duration cures most cases.",
+   "vis": {
+    "cols": [
+     "Disease",
+     "Toxin or invasion",
+     "Urgency"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bacteraemia",
+      "Invasion",
+      "Echo, repeat cultures"
+     ],
+     [
+      "Endocarditis",
+      "Valve invasion",
+      "Weeks of drugs"
+     ],
+     [
+      "Toxic shock",
+      "Toxin flood",
+      "ICU, source out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sensitive S. aureus** takes **cloxacillin or nafcillin**, which kill faster than vancomycin. **Cefazolin** suits mild allergy history. **Vancomycin** is reserved for resistance and severe allergy history as it kills slower. **De-escalate** to cloxacillin once sensitive; kidneys and outcomes improve together with shorter stays.",
+   "say": "Methicillin sensitive disease is treated with narrow anti-staphylococcal drugs that kill faster than vancomycin. Cloxacillin with nafcillin leads native infections, while cefazolin suits milder allergy. Vancomycin is reserved for true resistance with severe allergy history, because it kills slower. De-escalation to cloxacillin once sensitivity is known saves lives and kidneys.",
+   "vis": {
+    "cols": [
+     "Bug",
+     "First drug",
+     "Reserve"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Sensitive S. aureus",
+      "Cloxacillin, nafcillin",
+      "Cefazolin if allergic"
+     ],
+     [
+      "MRSA",
+      "Vancomycin",
+      "Daptomycin, linezolid"
+     ],
+     [
+      "Mild allergy history",
+      "Cefazolin",
+      "Vancomycin if severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MRSA bacteraemia** takes **vancomycin** with trough and kidney monitoring. **Daptomycin** suits bacteraemia but **never pneumonia** as surfactant inactivates it. **Linezolid with tedizolid** suits pneumonia and skin but suppresses marrow over time. **Levels, kidneys and counts** are watched on long courses.",
+   "say": "Methicillin resistant disease needs vancomycin with level monitoring, and troughs with kidney function guide every dose. Daptomycin replaces it in bacteraemia with pneumonia excluded, because surfactant inactivates it in lungs. Linezolid with tedizolid is suited to pneumonia with skin disease but suppresses marrow with time. Clots with kidneys with ears are watched on prolonged courses.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Best use",
+     "Never or caution"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Vancomycin",
+      "MRSA everywhere",
+      "Slow, watch kidneys"
+     ],
+     [
+      "Daptomycin",
+      "Bacteraemia, skin",
+      "Never lungs"
+     ],
+     [
+      "Linezolid",
+      "Pneumonia, skin",
+      "Marrow, nerves late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uncomplicated bacteraemia** clears within **3 days** with no prosthesis and no focus; **2 weeks** from clearance suffices. **Complicated** disease needs **4 to 6 weeks** from last positive culture. **Repeat cultures at 72 hours** divide the groups and are never skipped. **Transoesophageal echo** finds hidden vegetations.",
+   "say": "Uncomplicated bacteraemia clears within three days with no prosthetic material and no second focus, and two weeks of drugs from clearance suffices. Complicated disease with endocarditis with bone with lung seeds needs four to six weeks from the last positive culture. Repeat cultures at seventy two hours divide the two groups, which is why they are never skipped. Transoesophageal echo finds vegetations that surface scans miss.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "S. aureus in blood"
+     },
+     {
+      "id": "b",
+      "label": "Repeat cultures, echo"
+     },
+     {
+      "id": "c",
+      "label": "Clear in 3 days or not"
+     },
+     {
+      "id": "d",
+      "label": "Two weeks or six weeks"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Abscesses are drained**; antibiotics add little to drained pus. **Cellulitis** takes streptococcal plus sensitive staph cover. **Recurrent boils** need **decolonisation**: mupirocin ointment with antiseptic washes and linen changes. **Diabetes, eczema and shaving injury** invite recurrence and are fixed alongside with glucose control.",
+   "say": "Skin abscesses are cured by incision and drainage, and antibiotics add little to a drained collection. Cellulitis without pus takes cover for streptococci with sensitive staph, while recurrent boils need decolonisation. Mupirocin ointment with antiseptic washes with linen changes is used to clear carriage. Diabetes with eczema with shaving injury invites recurrence, so risks are fixed alongside.",
+   "vis": {
+    "cols": [
+     "Skin lesion",
+     "Key move",
+     "Antibiotics"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Abscess",
+      "Incise and drain",
+      "Little added"
+     ],
+     [
+      "Cellulitis",
+      "Mark edge",
+      "Cover strep, staph"
+     ],
+     [
+      "Recurrent boils",
+      "Decolonise",
+      "Mupirocin, washes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prosthetic infection** needs **removal** where possible; biofilm defeats drugs alone. **Valve infection** takes **6 weeks** of bactericidal combinations with **gentamicin** added early. **Joint retention** tries debridement plus suppression. **Surgery is never delayed** waiting for drugs; source outruns cover every time.",
+   "say": "Prosthetic joints with heart valves infected by staph are removed wherever possible, because biofilm defeats drugs alone. Valve infection takes six weeks of bactericidal combinations with gentamicin added early. Joint infection with stable implants tries debridement with retention plus long suppression. Bone penetrating combinations are chosen where implants stay, and surgery is never delayed for drugs to work.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Valve infected, remove, six weeks bactericidal"
+     ],
+     "title": "Prosthetic valve"
+    },
+    "right": {
+     "points": [
+      "Joint stable, debride, retain, suppress long"
+     ],
+     "title": "Prosthetic joint"
+    }
+   }
+  },
+  {
+   "tx": "**Toxic shock** drops pressure with **sunburn rash** and later peeling. **Tampons, packs and wounds** are sources removed at once. **Toxin suppressing** drugs with fluids and ICU reverse most. **Cultures stay negative**, unlike septic shock. **Desquamation** after a week confirms the diagnosis retrospectively.",
+   "say": "Toxic shock floods the circulation with toxin and drops pressure with sunburn rash with peeling skin. Tampons with wound packing with nasal packs are classic sources that are removed at once. Toxin suppressing drugs with fluids with intensive care are reversing most cases. Blood cultures stay negative, which separates it from septic shock with bacteraemia.",
+   "vis": {
+    "cols": [
+     "Shock type",
+     "Cultures",
+     "Source move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Toxic shock",
+      "Negative",
+      "Remove tampon, pack"
+     ],
+     [
+      "Septic shock",
+      "Positive",
+      "Drain, bactericidal drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post flu staph pneumonia** necrotises fast with **pneumatoceles**. **Linezolid or vancomycin** covers resistant strains till cultures mature. **Empyema with cavities** needs drainage with drugs. **Flu with pneumococcal vaccines** prevent most cases and are given together. **Necrosis** on imaging warns of prolonged course.",
+   "say": "Pneumonia after influenza is classically staphylococcal and necrotises fast with pneumatoceles. Linezolid with vancomycin is covering resistant strains while cultures mature. Cavities with empyema with pneumatothorax complicate imaging, and drainage joins drugs early. Vaccination against flu with pneumococcus prevents most cases, which is the cheapest intensive care unit.",
+   "vis": {
+    "cols": [
+     "Lung lesion",
+     "Meaning",
+     "Add on"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Pneumatoceles",
+      "Necrotising staph",
+      "Resistant cover"
+     ],
+     [
+      "Empyema",
+      "Pus in pleura",
+      "Drain early"
+     ],
+     [
+      "Cavities",
+      "Tissue death",
+      "Long course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Staph osteomyelitis** seeds vertebrae and prostheses; **back pain with fever** after bacteraemia means spinal infection first. **MRI** shows disc and vertebral oedema; **biopsy** names the bug when blood is sterile. **6 weeks** from clearance cures most. **Abscess or instability** needs surgeons urgently.",
+   "say": "Bone infection follows bacteraemia to vertebrae with prosthetic joints, and back pain with fever after staph blood infection is spinal infection first. Magnetic resonance shows disc with vertebral oedema, and biopsy names the bug when blood is sterile. Six weeks of drugs from clearance cures most, while abscess with instability needs surgeons. Hips with knees with shoulders are aspirated urgently when septic.",
+   "vis": {
+    "cols": [
+     "Joint or bone",
+     "Test",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Vertebral",
+      "MRI, biopsy if sterile",
+      "Six weeks"
+     ],
+     [
+      "Septic joint",
+      "Aspirate urgently",
+      "Drain plus weeks"
+     ],
+     [
+      "Prosthetic joint",
+      "Loosening, sinus",
+      "Remove or suppress"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Line infection** is diagnosed by **paired cultures**; line sample turns positive hours earlier. **Lines are pulled** in staph infection always; salvage seeds valves. **Tip with repeat cultures** documents clearance. **New lines** go in fresh sites after clearance, never the infected track.",
+   "say": "Catheter bloodstream infection is diagnosed by paired cultures with the line sample turning positive hours earlier. Lines are pulled in staph infection without debate, because salvage fails and seeds valves. Tip culture with repeat blood cultures is documenting clearance. New lines go in fresh sites after bacteraemia clears, never through the infected track.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fever with line in place"
+     },
+     {
+      "id": "b",
+      "label": "Paired cultures drawn"
+     },
+     {
+      "id": "c",
+      "label": "Pull line, treat weeks"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **cloxacillin or nafcillin** treats sensitive disease; **vancomycin** treats MRSA. **Daptomycin never in lungs**. Repeat cultures at **72 hours** divide 2 from 6 weeks. **Abscesses are drained**. **Lines are pulled** always. **mecA** marks resistance and guides the switch.",
+   "say": "For the exam, the facts to lock in are cloxacillin for sensitive disease, vancomycin for resistant, daptomycin never in lungs, repeat cultures at seventy two hours, two weeks for uncomplicated with six for complicated, drainage for abscesses, and line removal always. mecA marks resistance and transoesophageal echo finds hidden vegetations. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Sensitive drug",
+      "Cloxacillin, nafcillin",
+      "Kills fastest"
+     ],
+     [
+      "MRSA drug",
+      "Vancomycin",
+      "Levels watched"
+     ],
+     [
+      "Lung rule",
+      "No daptomycin",
+      "Surfactant blocks"
+     ],
+     [
+      "Culture rule",
+      "Repeat at 72 hours",
+      "Divides duration"
+     ],
+     [
+      "Short course",
+      "2 weeks, uncomplicated",
+      "Clears in 3 days"
+     ],
+     [
+      "Long course",
+      "4 to 6 weeks",
+      "Complicated"
+     ],
+     [
+      "Abscess rule",
+      "Drain first",
+      "Drugs add little"
+     ],
+     [
+      "Line rule",
+      "Pull always",
+      "Seeds valves"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
