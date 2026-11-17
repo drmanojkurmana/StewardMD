@@ -67,6 +67,10 @@
   // Browser continues below; if G.STUDY is not yet defined we wait for study.js (loader order guarantees it).
   var D = G.document;
   var LIB_ICO = {
+    back: '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+    dots: '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>',
+    upload: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>',
+    restore: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
     folder: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
     folderStar: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="#e5484d" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="none"/><polygon points="12 8 13.7 11.5 17.5 12 14.8 14.6 15.4 18.4 12 16.5 8.6 18.4 9.2 14.6 6.5 12 10.3 11.5" fill="#e5484d" stroke="#e5484d"/></svg>',
     star: '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
@@ -591,7 +595,7 @@
   function docCardHtml(d, folders) {
     var isNb = d.kind === "nb";
     var when = d.lastOpened || d.created || Date.now();
-    var meta = (isNb ? "Notebook, " + d.pageCount + (d.pageCount === 1 ? " page" : " pages") : d.pageCount + (d.pageCount === 1 ? " page" : " pages")) + " \u00b7 " + fmtWhen(when);
+    var meta = d.pageCount + (d.pageCount === 1 ? " page" : " pages") + " \u00b7 " + fmtWhen(when); /* kind shows on the cover badge */
     var thumb = d.thumb ? '<img class="st5a-th st-th" alt="" src="' + d.thumb + '" width="160" height="226" loading="lazy">' : '<div class="st5a-th-ph">' + (isNb ? LIB_ICO.book : LIB_ICO.pdf) + '</div>';
     var favBadge = d.favourite ? '<span class="st5a-fav-badge" title="Favourite">\u2605</span>' : "";
     return '<div class="st5a-card st-doc" data-id="' + d.id + '" draggable="true">' +
@@ -638,13 +642,12 @@
   }
   function sortChipsHtml() {
     var s = libState.sort;
-    function chip(v, label) { return '<button type="button" class="st5a-chip' + (s === v ? " on" : "") + '" data-act="st5a-sort" data-v="' + v + '">' + label + '</button>'; }
-    var viewIc = libState.view === "grid" ? LIB_ICO.grid : LIB_ICO.list;
-    var nextView = libState.view === "grid" ? "list" : "grid";
-    return '<div class="st5a-sort-row" role="group" aria-label="Sort and view">' +
-      chip("date", "Date") + chip("name", "Name") + chip("type", "Type") +
-      '<button type="button" class="st5a-view-btn" data-act="st5a-view" data-v="' + nextView + '" aria-label="Show ' + (nextView === "grid" ? "grid" : "list") + ' view">' + viewIc + '</button>' +
-      '<button type="button" class="st5a-chip st5a-trash-chip" data-act="st5a-tab" data-v="trash">' + LIB_ICO.trash + ' Trash</button>' +
+    function seg(v, label) { return '<button type="button" class="st5a-chip st5a-seg-b' + (s === v ? " on" : "") + '" data-act="st5a-sort" data-v="' + v + '" aria-pressed="' + (s === v) + '">' + label + '</button>'; }
+    function vb(v, ic, label) { var on = libState.view === v; return '<button type="button" class="st5a-view-btn st5a-seg-b' + (on ? " on" : "") + '" data-act="st5a-view" data-v="' + v + '" aria-pressed="' + on + '" aria-label="' + label + '">' + ic + '</button>'; }
+    return '<div class="st5a-sort-row" role="toolbar" aria-label="Sort and view">' +
+      '<div class="st5a-seg" role="group" aria-label="Sort by">' + seg("date", "Date") + seg("name", "Name") + seg("type", "Type") + '</div>' +
+      '<span class="st5a-sp"></span>' +
+      '<div class="st5a-seg st5a-seg-ic" role="group" aria-label="View">' + vb("grid", LIB_ICO.grid, "Grid view") + vb("list", LIB_ICO.list, "List view") + '</div>' +
     '</div>';
   }
   function bottomBarHtml() {
@@ -658,10 +661,19 @@
   function libHtml() {
     var title = libState.tab === "trash" ? "Trash" : libState.tab === "search" ? "Search" : libState.tab === "favorites" ? "Favorites" : "Documents";
     var showBc = !!(libState.currentFolderId);
-    return '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
+    return '<header class="st5a-top" role="banner">' +
+        '<button type="button" class="st5a-top-ib" data-act="back" aria-label="Back to PrepNucleus">' + LIB_ICO.back + '</button>' +
+        '<h1 class="st5a-h1" id="st5aH1">' + esc(title) + '</h1>' +
+        '<div class="st5a-top-acts">' +
+          '<button type="button" class="st5a-top-ib" data-act="st5a-tab" data-v="search" aria-label="Search">' + LIB_ICO.search + '</button>' +
+          '<button type="button" class="st5a-top-ib" data-act="st5a-libmore" aria-label="More: back up, restore, trash">' + LIB_ICO.dots + '</button>' +
+          '<button type="button" class="st5a-new-btn" data-act="st5a-new" aria-label="New notebook or import">' + LIB_ICO.plus + '<span>New</span></button>' +
+        '</div>' +
+      '</header>' +
+      '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
       (showBc ? '<div class="st5a-header"><div class="st5a-bc" id="st5aBc"></div></div>' : '<div class="st5a-bc" id="st5aBc" hidden></div>') +
-      '<h1 class="st5a-h1" id="st5aH1">' + esc(title) + '</h1>' +
-      sortChipsHtml() +
+      (libState.tab === "search" ? '' : sortChipsHtml()) +
+      '<p class="st5a-status pn-note" id="stBk" role="status"></p>' +
       '<div id="stList" class="smd-books-keep smd-emo-keep"></div>' +
     '</div>';
   }
@@ -1239,6 +1251,17 @@
       return;
     }
     if (a === "st5a-scan") { closeSheet5a(); if (origAct) return origAct("st-scan", el, h); return; }
+    if (a === "st5a-libmore") {
+      openSheet('<div class="st-doc-menu-head"><div class="st-doc-menu-title">Library</div></div>' +
+        '<div class="st-menu-list">' +
+          '<button type="button" class="st-menu-item" data-act="st5a-backup"><div class="st-menu-ico">' + LIB_ICO.upload + '</div><div class="st-menu-txt"><strong>Back up library</strong><small>Save every notebook, PDF and ink as one file</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-restore-lib"><div class="st-menu-ico">' + LIB_ICO.restore + '</div><div class="st-menu-txt"><strong>Restore</strong><small>Bring back a library backup file</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-new-folder"><div class="st-menu-ico">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>New folder</strong><small>Group notebooks and PDFs</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-tab" data-v="trash"><div class="st-menu-ico">' + LIB_ICO.trash + '</div><div class="st-menu-txt"><strong>Trash</strong><small>Deleted items stay 30 days</small></div></button>' +
+        '</div>' +
+        '<div class="st-sh-foot"><button type="button" class="pn-btn" data-act="st5a-close">Done</button></div>');
+      return;
+    }
     if (a === "st5a-backup") { closeSheet5a(); if (origAct) return origAct("st-backup", el, h); return; }
     if (a === "st5a-restore-lib") { closeSheet5a(); var rf = hRoot() && hRoot().querySelector("#stRestoreF"); if (rf) rf.click(); return; }
     if (a === "st5a-folder-colour") return showFolderColourSheet(idOf(el));
@@ -1295,13 +1318,7 @@
         '<input type="file" id="stFile" accept="application/pdf" hidden>' +
         '<input type="file" id="stPhotos" accept="image/*" multiple hidden>' +
         '<input type="file" id="stRestoreF" accept=".zip,application/zip" hidden>' +
-        '<div class="st-backup-box">' +
-          '<div class="st-acts">' +
-            '<button type="button" class="pn-btn sm" data-act="st5a-backup">Back up library</button>' +
-            '<button type="button" class="pn-btn sm" data-act="st5a-restore-lib">Restore</button>' +
-          '</div>' +
-          '<p class="pn-note" id="stBk" role="status" style="margin:0"></p>' +
-        '</div>' +
+
       '</div>');
     wireLib();
     try { if (G.STUDY && G.STUDY.kick) G.STUDY.kick(); } catch (e) {}

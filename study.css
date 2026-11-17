@@ -2381,3 +2381,91 @@ body.dark .pn-root .st-tb-tools .st-b[data-v="hl"].on { color: var(--st-pen, #e8
 /* Zoomed pages wider than the screen must scroll on both sides: the column grows to the page width
    (centred flex items overflowing to the left cannot be scrolled to). */
 .pn-root .st-pages { width: max-content; min-width: 100%; }
+
+/* ===== Study library: native iPad Documents screen (navy + gold, GoodNotes-grade) =====
+   Radius scale: buttons/segments 10, cards 14, sheets 16, pills 999. One accent: --st-gold. */
+.pn-root .st5a-lib { background: var(--st-canvas, #e9ebee) !important; background-image: none !important; padding: 0 0 calc(64px + env(safe-area-inset-bottom, 0px) + 24px) !important; gap: 0 !important; min-height: 100%; }
+body.dark .pn-root .st5a-lib { background: var(--st-canvas-dark, #171d2b) !important; }
+.pn-root:has(.st5a-lib) { background: var(--st-canvas, #e9ebee) !important; background-image: none !important; }
+.pn-root:has(.st5a-lib)::before, .pn-root:has(.st5a-lib)::after { display: none !important; }
+
+/* header */
+.pn-root .st5a-top { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: 6px; background: var(--st-navy, #3e4c72); color: #fff;
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) calc(env(safe-area-inset-right, 0px) + 16px) 12px calc(env(safe-area-inset-left, 0px) + 8px); }
+.pn-root .st5a-top .st5a-h1 { flex: 1; min-width: 0; margin: 0; color: #fff; font-size: 28px; font-weight: 750; letter-spacing: -0.02em; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .st5a-top-acts { display: flex; align-items: center; gap: 4px; flex: none; }
+.pn-root .st5a-top-ib { width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 10px; background: transparent; color: #fff; cursor: pointer; transition: background-color .12s, transform .12s; }
+.pn-root .st5a-top-ib:active { background: rgba(255,255,255,.14); transform: scale(.96); }
+.pn-root .st5a-new-btn { height: 40px; display: inline-flex; align-items: center; gap: 6px; padding: 0 16px 0 12px; margin-left: 6px; border: 0; border-radius: 999px; background: var(--st-gold, #c9a227); color: var(--st-gold-ink, #241d05); font-weight: 700; font-size: 15px; cursor: pointer; transition: transform .12s, filter .12s; }
+.pn-root .st5a-new-btn:active { transform: scale(.97); filter: brightness(.95); }
+.pn-root .st5a-top-ib:focus-visible, .pn-root .st5a-new-btn:focus-visible { outline: 2px solid var(--st-gold, #c9a227); outline-offset: 2px; }
+
+/* content column */
+.pn-root .st5a-lib .st5a-wrap { padding: 16px calc(env(safe-area-inset-right, 0px) + 20px) 0 calc(env(safe-area-inset-left, 0px) + 20px); gap: 14px; max-width: 1180px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+.pn-root .st5a-status:empty { display: none; }
+
+/* segmented controls */
+.pn-root .st5a-sort-row { display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; }
+.pn-root .st5a-sp { flex: 1; }
+.pn-root .st5a-seg { display: inline-flex; padding: 3px; gap: 2px; border-radius: 12px; background: rgba(28,36,50,.07); }
+body.dark .pn-root .st5a-seg { background: rgba(255,255,255,.08); }
+.pn-root .st5a-seg .st5a-seg-b { min-height: 36px; min-width: 64px; padding: 0 14px; border: 0 !important; border-radius: 9px !important; background: transparent !important; color: var(--st-sub, #5b6575) !important; font-weight: 600; font-size: 14px; box-shadow: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.pn-root .st5a-seg-ic .st5a-seg-b { min-width: 44px; padding: 0; }
+.pn-root .st5a-seg .st5a-seg-b.on { background: #fff !important; color: var(--st-navy-ink, #232f4a) !important; box-shadow: 0 1px 3px rgba(20,28,45,.16); }
+body.dark .pn-root .st5a-seg .st5a-seg-b.on { background: var(--st-navy-2, #55648c) !important; color: #fff !important; }
+
+/* grid of covers */
+.pn-root .st5a-lib .st5a-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important; gap: 28px 22px; padding-top: 4px; }
+@media (max-width: 520px) { .pn-root .st5a-lib .st5a-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 22px 14px; } }
+.pn-root .st5a-lib .st5a-card { border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; gap: 8px; }
+.pn-root .st5a-lib .st5a-cover { aspect-ratio: 3 / 4; border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 1px 2px rgba(20,28,45,.10), 0 6px 18px rgba(20,28,45,.10); border: 1px solid rgba(20,28,45,.06); transition: transform .14s; position: relative; display: flex; align-items: center; justify-content: center; }
+.pn-root .st5a-lib .st5a-cover:active { transform: scale(.97); }
+.pn-root .st5a-lib .st5a-cover img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.pn-root .st5a-lib .st5a-cover-new { background: transparent; border: 2px dashed rgba(62,76,114,.28); box-shadow: none; color: var(--st-gold, #c9a227); }
+.pn-root .st5a-lib .st5a-cover-new svg { width: 34px; height: 34px; }
+.pn-root .st5a-lib .st5a-cover-folder { background: color-mix(in srgb, var(--fc, #c9a227) 14%, #fff); }
+.pn-root .st5a-lib .st5a-folder-ic svg { width: 54px; height: 54px; }
+.pn-root .st5a-lib .st5a-kind-badge { position: absolute; left: 8px; bottom: 8px; top: auto; padding: 2px 7px; border-radius: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; background: rgba(35,47,74,.82); color: #fff; }
+.pn-root .st5a-lib .st5a-name { padding: 0 2px; }
+.pn-root .st5a-lib .st5a-title-row { display: flex; align-items: center; justify-content: center; gap: 2px; }
+.pn-root .st5a-lib .st5a-title-open { min-width: 0; border: 0; background: transparent; padding: 0; color: var(--st-ink, #1c2432); font-weight: 650; font-size: 15px; text-align: center; }
+.pn-root .st5a-lib .st5a-title-t { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-root .st5a-lib .st5a-chev-btn { width: 32px; height: 32px; flex: none; border: 0; border-radius: 8px; background: transparent; color: var(--st-sub, #5b6575); display: inline-flex; align-items: center; justify-content: center; }
+.pn-root .st5a-lib .st5a-meta, .pn-root .st5a-lib .st-ix { display: block; text-align: center; color: var(--st-sub, #5b6575); font-size: 12.5px; margin-top: 1px; }
+body.dark .pn-root .st5a-lib .st5a-title-open { color: #fff; }
+
+/* list view: one grouped inset list (iOS Settings style) */
+.pn-root .st5a-lib .st5a-list { display: flex; flex-direction: column; gap: 0; background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 1px 2px rgba(20,28,45,.08); }
+body.dark .pn-root .st5a-lib .st5a-list { background: var(--st-toolrow-dark, #232e47); }
+.pn-root .st5a-lib .st5a-list-row { border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; min-height: 76px; padding: 8px 8px 8px 16px; position: relative; }
+.pn-root .st5a-lib .st5a-list-row + .st5a-list-row::before { content: ""; position: absolute; top: 0; left: 76px; right: 0; height: 1px; background: var(--st-hairline, #d8dce2); }
+.pn-root .st5a-lib .st5a-list-row:active { background: var(--st-active-wash, #edeff2) !important; }
+.pn-root .st5a-lib .st5a-list-th, .pn-root .st5a-lib .st5a-list-th-ph { width: 44px; height: 58px; border-radius: 6px; object-fit: cover; object-position: top; box-shadow: 0 0 0 1px rgba(20,28,45,.08); background: #fff; display: inline-flex; align-items: center; justify-content: center; color: var(--st-sub, #5b6575); }
+.pn-root .st5a-lib .st5a-list-new .st5a-list-th-ph { color: var(--st-gold, #c9a227); box-shadow: inset 0 0 0 2px rgba(201,162,39,.45); }
+.pn-root .st5a-lib .st5a-list-tt b { font-size: 16px; font-weight: 650; color: var(--st-ink, #1c2432); }
+.pn-root .st5a-lib .st5a-list-tt small { color: var(--st-sub, #5b6575); font-size: 13px; }
+body.dark .pn-root .st5a-lib .st5a-list-tt b { color: #fff; }
+
+/* bottom tab bar: docked, full width, equal tabs */
+.pn-root .st5a-lib .st5a-bottom { left: 0 !important; right: 0 !important; bottom: 0 !important; transform: none !important; width: auto !important; max-width: none !important; border-radius: 0 !important; display: flex !important; justify-content: center; gap: 0; padding: 6px calc(env(safe-area-inset-right, 0px) + 12px) calc(env(safe-area-inset-bottom, 0px) + 6px) calc(env(safe-area-inset-left, 0px) + 12px) !important;
+  background: rgba(255,255,255,.98) !important; border: 0 !important; border-top: 1px solid var(--st-hairline, #d8dce2) !important; box-shadow: none !important; }
+body.dark .pn-root .st5a-lib .st5a-bottom { background: var(--st-toolrow-dark, #232e47) !important; border-top-color: rgba(255,255,255,.08) !important; }
+.pn-root .st5a-lib .st5a-tab { flex: 0 1 180px; min-height: 50px; border-radius: 10px !important; background: transparent !important; color: var(--st-sub, #5b6575) !important; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 11.5px; font-weight: 600; }
+.pn-root .st5a-lib .st5a-tab.on { color: var(--st-navy, #3e4c72) !important; }
+.pn-root .st5a-lib .st5a-tab.on .st5a-tab-ic { color: var(--st-gold, #c9a227); }
+body.dark .pn-root .st5a-lib .st5a-tab.on { color: #fff !important; }
+.pn-root .st5a-lib .st5a-tab:active { background: var(--st-active-wash, #edeff2) !important; }
+
+/* empty + phone */
+.pn-root .st5a-lib .st5a-empty-line { text-align: center; color: var(--st-sub, #5b6575); margin: 6px 0 0; }
+@media (max-width: 520px) {
+  .pn-root .st5a-top .st5a-h1 { font-size: 22px; }
+  .pn-root .st5a-new-btn span { display: none; }
+  .pn-root .st5a-new-btn { width: 40px; padding: 0; justify-content: center; }
+  .pn-root .st5a-lib .st5a-wrap { padding-left: 14px; padding-right: 14px; }
+  .pn-root .st5a-seg .st5a-seg-b { min-width: 52px; padding: 0 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .pn-root .st5a-lib *, .pn-root .st5a-top * { transition: none !important; } }
+.pn-root .st5a-lib .st5a-grid > .st5a-card, .pn-root .st5a-lib .st5a-grid > .st5a-card.st-doc, .pn-root .st5a-lib .st5a-grid > .st5a-card.st5a-new { box-shadow: none !important; background: transparent !important; border: 0 !important; }
+/* refined.css styles every *-card with an id-level selector; #stLib keeps library cards flat (covers carry the shadow) */
+.pn-root #stLib .st5a-grid > .st5a-card { box-shadow: none !important; background: transparent !important; border: 0 !important; }

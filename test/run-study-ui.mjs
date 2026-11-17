@@ -670,7 +670,7 @@ await page.waitForTimeout(300);
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
-ok(await page.evaluate(() => /Notebook, 2 pages/.test(document.querySelector("#stList").innerText) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
+ok(await page.evaluate(() => (/Notebook, 2 pages/.test(document.querySelector("#stList").innerText) || Array.from(document.querySelectorAll("#stList .st-doc")).some((c) => /\bNB\b/.test(c.innerText) && /2 pages/.test(c.innerText))) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov");
 await page.waitForFunction(() => STUDY._state() && STUDY._state().strokes.length === 1, null, { timeout: 10000 });
@@ -891,6 +891,7 @@ const snap = async () => {
   return { docs: docs.map((d) => d.id).sort(), per, shas, folders: (await idbAll("folders")).length, n: docs.length, st: strokes.length };
 };
 const before = await snap();
+if (!(await page.locator('[data-act="st5a-backup"]:visible').count())) { await page.click('[data-act="st5a-libmore"]'); await page.waitForSelector('#st5aSheet [data-act="st5a-backup"]'); }   // Back up lives in the library More menu
 const bk = await dl(() => page.click('[data-act="st5a-backup"]'));
 const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
 const nPdf = Object.keys(before.shas).length;
