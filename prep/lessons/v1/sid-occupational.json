@@ -1,0 +1,356 @@
+{
+ "v": 1,
+ "module": "sid-occupational",
+ "title": "Occupational exposure and healthcare worker safety",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Occupational exposure means blood or body fluid contact** with a needle, instrument, eye or broken skin at work. **Needle-stick injury** is the commonest event; **sharps injury** includes scalpels and broken glass. **HIV risk after percutaneous exposure is 0.3%**; **mucous membrane risk is 0.09%**. **Hepatitis B transmits far more readily than HIV**; **hepatitis C sits between**. **First dose within 2 hours is ideal** and **72 hours is the cutoff**. **Prevention is engineered and vaccinated**, not lucky.",
+   "say": "Occupational exposure was reported to mean blood or body fluid contact with a needle, instrument, eye or broken skin at work, and needle-stick injury was reported to be the commonest event under the wider term sharps injury. HIV risk after percutaneous exposure was reported to be zero point three percent, while mucous membrane risk was reported to be zero point zero nine percent. Hepatitis B was reported to transmit far more readily than HIV, with hepatitis C sitting between the two. The first dose within two hours was reported to be ideal, and seventy two hours was reported to be the cutoff, while prevention was reported to be engineered and vaccination based.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Risk",
+     "Point"
+    ],
+    "rows": [
+     [
+      "Percutaneous HIV",
+      "0.3%",
+      "Low but real"
+     ],
+     [
+      "Mucous membrane HIV",
+      "0.09%",
+      "Lower"
+     ],
+     [
+      "Hepatitis B",
+      "Higher than HIV",
+      "Vaccinate all"
+     ],
+     [
+      "Hepatitis C",
+      "Between the two",
+      "No PEP exists"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Significant exposure needs blood or infectious fluid** reaching a hollow needle, eye lining or broken skin. **Higher-risk features are hollow-bore needle, deep injury and visible blood** on the device. **Source with high viral load raises risk further**. **Intact skin exposure carries no risk**; **urine, saliva or sweat without blood also carry none**. **Non-occupational exposures** such as sexual assault carry similar logic. **A damaged skin barrier** lets even low-risk agents penetrate skin more easily.",
+   "say": "Significant exposure was reported to need blood or infectious fluid reaching a hollow needle, eye lining or broken skin, and higher-risk features were reported to include hollow-bore needle, deep injury and visible blood on the device. A source with high viral load was reported to raise risk further, while intact skin exposure was reported to carry no risk and urine, saliva or sweat without blood was reported to also carry none. Non-occupational exposures such as sexual assault were reported to carry similar logic, and a damaged skin barrier was reported to let even low-risk agents penetrate skin more easily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Hollow-bore, deep, bloody",
+      "Highest HIV chance",
+      "Start PEP urgently"
+     ],
+     [
+      "Intact skin",
+      "No transmission",
+      "No PEP"
+     ],
+     [
+      "Bloodless fluid",
+      "Negligible",
+      "No PEP"
+     ],
+     [
+      "Sexual assault",
+      "Occupational logic applies",
+      "PEP plus care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HIV infects CD4 cells and needs early replication** to establish lifelong infection. **Post-exposure drugs must start before the virus seeds** tissues; **72 hours is the last useful point**. **Hepatitis B vaccine protection lasts years**; **anti-HBs 10 mIU/mL or more means immunity**. **Hepatitis C has no preventive drug**; **early direct-acting antivirals cure most infections**. **Occupational contact urticaria** is a separate immune event: **allergen-specific IgE on mast cells** meets **cross-linking** and releases **histamine** at once.",
+   "say": "HIV was reported to infect CD4 cells and to need early replication to establish lifelong infection, so post-exposure drugs were reported to need to start before the virus seeded tissues, with seventy two hours reported as the last useful point. Hepatitis B vaccine protection was reported to last years, and anti-HBs ten international units per millilitre or more was reported to mean immunity. Hepatitis C was reported to have no preventive drug, while early direct-acting antivirals were reported to cure most infections. Occupational contact urticaria was reported to be a separate immune event where allergen-specific IgE on mast cells met cross-linking and released histamine at once.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exposure"
+     },
+     {
+      "id": "b",
+      "label": "Viral replication window"
+     },
+     {
+      "id": "c",
+      "label": "PEP within 72 hours"
+     },
+     {
+      "id": "d",
+      "label": "Infection prevented"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First aid is immediate and mechanical**: **wash the wound** with soap and running water at once. **Do not scrub, squeeze or suck the wound**, and **never apply bleach or antiseptic** inside it. **Flush eyes** with water or saline; **rinse the mouth and spit**. **Document date, time, device, depth, fluid and source**. **Report to infection control** or occupational health. **Give the first dose in the emergency department**; **never wait for source results** before starting.",
+   "say": "First aid was reported to be immediate and mechanical, with the wound washed with soap and running water at once. Scrubbing, squeezing or sucking the wound was reported to be wrong, and bleach or antiseptic was reported to never be applied inside it. Eyes were reported to be flushed with water or saline, and the mouth was reported to be rinsed and spat. The date, time, device, depth, fluid and source were reported to be documented, and the event was reported to be reported to infection control or occupational health. The first dose was reported to be given in the emergency department, and waiting for source results was reported to be wrong before starting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Wash with soap and water"
+     },
+     {
+      "id": "b",
+      "label": "Document the event"
+     },
+     {
+      "id": "c",
+      "label": "First PEP dose"
+     },
+     {
+      "id": "d",
+      "label": "Follow-up testing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Test the source** for **HIV, HBsAg and anti-HCV** with consent. **Baseline tests** are **HIV test, HBsAg and anti-HBs, anti-HCV, creatinine and ALT**, plus **pregnancy test**. **A reactive baseline HIV test means prior infection**: **confirm and refer to ART**, not PEP. **HIV retesting at 4 to 6 weeks** with a **final check at 12 weeks** closes the window. **Fever, rash or sore throat** in follow-up may signal **acute HIV**: **test urgently with HIV RNA**. **Hepatitis C monitoring pairs HCV RNA at 3 weeks** with **antibody checks at 6 months**.",
+   "say": "The source was reported to be tested for HIV, HBsAg and anti-HCV with consent, while baseline testing of the exposed person covered HIV test, HBsAg and anti-HBs, anti-HCV, creatinine, ALT and pregnancy test. A reactive baseline HIV test meant prior infection, so confirmation and ART referral replaced PEP. Follow-up HIV testing at four to six weeks and twelve weeks closed the window, and fever, rash or sore throat in follow-up signalled possible acute HIV and needed urgent testing with HIV RNA. Hepatitis C follow-up was HCV RNA at three weeks or later and anti-HCV at six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "When",
+     "HIV",
+     "Hepatitis"
+    ],
+    "rows": [
+     [
+      "Baseline",
+      "Rapid test",
+      "HBsAg, anti-HBs, HCV"
+     ],
+     [
+      "4 to 6 weeks",
+      "Repeat HIV",
+      "HCV RNA if source positive"
+     ],
+     [
+      "12 weeks",
+      "Final HIV",
+      "Continue if RNA positive"
+     ],
+     [
+      "6 months",
+      "Done if negative",
+      "Anti-HCV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Preferred prophylaxis is TLD for 28 days**: **tenofovir disoproxil fumarate 300 mg plus lamivudine 300 mg plus dolutegravir 50 mg**, **one tablet once daily**. **Start as soon as possible**, ideally **within 2 hours** and **never later than 72 hours**. **Complete all 28 days**; **review within 3 days** for source results and side effects. **Nausea, headache and insomnia** are usually mild. **Free drugs and testing** reach government hospitals through **NACO ART centres and ICTCs**.",
+   "say": "Preferred prophylaxis was reported to be TLD for twenty eight days as tenofovir disoproxil fumarate three hundred milligrams plus lamivudine three hundred milligrams plus dolutegravir fifty milligrams as one tablet once daily. Starting as soon as possible was reported to be ideal, within two hours and never later than seventy two hours, with all twenty eight days reported to be completed. Review within three days was reported to check source results and side effects, with nausea, headache and insomnia reported to be usually mild. Free drugs and testing were reported to reach government hospitals through NACO ART centres and ICTCs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "TLD tablet",
+      "300 + 300 + 50 mg",
+      "28 days"
+     ],
+     [
+      "Raltegravir option",
+      "400 mg twice daily",
+      "28 days"
+     ],
+     [
+      "Atazanavir/ritonavir",
+      "300/100 mg daily",
+      "28 days"
+     ],
+     [
+      "Darunavir/ritonavir",
+      "800/100 mg daily",
+      "28 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alternatives replace dolutegravir when needed**: **raltegravir 400 mg twice daily** or **ritonavir-boosted protease inhibitors** with the same backbone. **Creatinine clearance below 50 mL/min** bans the fixed TLD tablet because **tenofovir DF and lamivudine need renal adjustment**. **Dolutegravir timing** separates **metal salts by 2 hours before or 6 hours after**; **rifampicin switches it to 50 mg twice daily**; **metformin climbs**. **Hepatitis B prophylaxis** depends on anti-HBs: **10 mIU/mL or more needs nothing**; **below 10 with a positive source needs HBIG plus vaccine**.",
+   "say": "Alternatives were reported to replace dolutegravir when needed, with raltegravir four hundred milligrams twice daily or ritonavir-boosted protease inhibitors on the same backbone. Creatinine clearance below fifty millilitres per minute banned the fixed TLD tablet because tenofovir DF and lamivudine needed renal adjustment. Dolutegravir timing was reported to separate metal salts by two hours before or six hours after, with rifampicin switching it to fifty milligrams twice daily and metformin reported to climb. Hepatitis B prophylaxis depended on anti-HBs, where ten international units per millilitre or more needed nothing and below ten with a positive source needed HBIG plus vaccine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dolutegravir preferred",
+     "points": [
+      "Once daily",
+      "28 days",
+      "Few interactions",
+      "Pregnancy compatible"
+     ]
+    },
+    "right": {
+     "title": "Alternatives",
+     "points": [
+      "Raltegravir twice daily",
+      "Boosted PI adds interactions",
+      "Renal dose adjustment",
+      "Expert advice first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Test and stop rules protect the exposed worker**: **stop PEP if the source is confirmed HIV-negative** with no recent high-risk exposure. **Known source HIV** needs **ART history, viral load and resistance**; **expert advice** follows treatment failure. **Hepatitis B non-responders** after 2 series get **HBIG 2 doses, 1 month apart**. **Hepatitis C infection** found on monitoring is **referred early for curative antivirals**. **Pregnancy and breastfeeding** do not block PEP; **the dolutegravir regimen can be used**. **After a negative course**, **move directly to PrEP** when risk continues.",
+   "say": "Test and stop rules were reported to protect the exposed worker, with PEP reported to be stopped if the source was confirmed HIV-negative with no recent high-risk exposure. Known source HIV was reported to need ART history, viral load and resistance, with expert advice reported to follow treatment failure. Hepatitis B non-responders after two series were reported to get HBIG two doses, one month apart. Hepatitis C infection found on monitoring was reported to be referred early for curative antivirals. Pregnancy and breastfeeding were reported to not block PEP, with the dolutegravir regimen reported to be usable, and after a negative course the worker was reported to move directly to PrEP when risk continues.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Rule",
+     "Next"
+    ],
+    "rows": [
+     [
+      "Source HIV-negative",
+      "Stop PEP",
+      "Testing follow-up"
+     ],
+     [
+      "Source HIV-positive",
+      "Record ART data",
+      "Expert input"
+     ],
+     [
+      "HBV non-responder",
+      "HBIG 2 doses",
+      "Revaccinate"
+     ],
+     [
+      "Ongoing risk",
+      "Negative PEP course",
+      "Start PrEP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** **Waiting for source tests before the first dose** kills prevention; **the first dose never waits**. **PEP after 72 hours is useless**; **test and follow instead**. **Whole-tablet TLD below creatinine clearance 50** mis-doses the kidneys. **Hepatitis C has no PEP**; providers often forget that **HBV prophylaxis matters more than HIV** after needlestick injury. **Dolutegravir with rifampicin needs 50 mg twice daily**, not once daily. **Sexual assault care includes levonorgestrel 1.5 mg within 72 hours** alongside PEP. **Occupational urticaria** resolves with avoidance, but **latex allergy can generalise**.",
+   "say": "Exam traps were reported as requested, with waiting for source tests before the first dose reported to kill prevention and PEP after seventy two hours reported to be useless, where testing and follow-up followed instead. Whole-tablet TLD below creatinine clearance fifty was reported to mis-dose the kidneys. Hepatitis C was reported to have no PEP, and hepatitis B prophylaxis was reported to matter more than HIV after needlestick injury. Dolutegravir with rifampicin was reported to need fifty milligrams twice daily rather than once daily, and sexual assault care was reported to include levonorgestrel one point five milligrams within seventy two hours alongside PEP. Occupational urticaria was reported to resolve with avoidance, while latex allergy was reported to generalise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Reality",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Wait for results",
+      "Loses the window",
+      "Dose first"
+     ],
+     [
+      "Late PEP",
+      "No benefit",
+      "Test, follow"
+     ],
+     [
+      "HCV drug",
+      "No PEP exists",
+      "Early RNA check"
+     ],
+     [
+      "Rifampicin dosing",
+      "Under-dosing risk",
+      "BID dolutegravir"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **HIV percutaneous risk 0.3%**, **mucous membrane 0.09%**. **TLD 300 + 300 + 50 mg once daily for 28 days**; **start within 2 hours**, **never after 72 hours**. **CrCl below 50 bans TLD**. **Raltegravir 400 mg twice daily** is the backup. **Anti-HBs 10 mIU/mL or more means no HBV prophylaxis**. **HBIG 0.06 mL/kg within 24 hours** plus vaccine. **HCV RNA at 3 weeks**, **anti-HCV at 6 months**. **Follow-up HIV at 4 to 6 and 12 weeks**. **Levonorgestrel 1.5 mg within 72 hours**.",
+   "say": "HIV percutaneous risk was zero point three percent and mucous membrane risk was zero point zero nine percent. TLD three hundred plus three hundred plus fifty milligrams once daily for twenty eight days was reported, to start within two hours and never after seventy two hours, with clearance below fifty banning TLD. Raltegravir four hundred milligrams twice daily was backup. Anti-HBs ten or more gave sufficient immunity and no hepatitis B prophylaxis. HBIG zero point zero six millilitres per kilo within twenty four hours plus vaccine covered the non-immune. HCV RNA at three weeks, anti-HCV at six months, HIV checks at four to six and twelve weeks, and levonorgestrel one point five milligrams within seventy two hours completed it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Fact",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "HIV risks",
+      "0.3% and 0.09%",
+      "Examiners love numbers"
+     ],
+     [
+      "TLD",
+      "28 days from exposure",
+      "First-line PEP"
+     ],
+     [
+      "HBV immunity",
+      "Anti-HBs 10 or more",
+      "Decides HBIG"
+     ],
+     [
+      "HCV follow-up",
+      "RNA 3 weeks, Ab 6 months",
+      "No PEP trap"
+     ],
+     [
+      "EC cutoff",
+      "72 hours",
+      "Commonest error"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
