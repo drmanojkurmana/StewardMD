@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "module": "shm-marrow-failure-pnh",
+ "subject": "ss-haematology",
+ "title": "Marrow failure aplastic anaemia and PNH",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 107 Bone Marrow Failure Syndromes",
+  "British Society for Haematology guideline on aplastic anaemia 2024"
+ ],
+ "steps": [
+  {
+   "tx": "**Aplastic anaemia** (marrow failure with fatty replacement) strikes **2** per million yearly in Europe and up to **7** per million in Asia, hitting teens and older adults. **Pancytopenia** (all lineages low) with low reticulocytes and empty marrow defines it. **T cell** (cytotoxic immune cell) attacks on **CD34** (stem cell marker) progenitors drive most acquired cases. **Benzene** exposure, radiation and **posthepatitis** failure (after hepatitis) cover classic triggers.",
+   "say": "Aplastic anaemia replaces marrow with fat and drops all lineages. Immune T cell attacks cause most acquired cases. Benzene and hepatitis remain classic triggers.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Detail",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Incidence",
+      "2 to 7 per million",
+      "Asia higher"
+     ],
+     [
+      "Blood picture",
+      "Pancytopenia low retics",
+      "Empty marrow"
+     ],
+     [
+      "Driver",
+      "T cell attack",
+      "CD34 progenitors"
+     ],
+     [
+      "Triggers",
+      "Benzene hepatitis drugs",
+      "Posthepatitis 5 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited failures arrive with clues. **Fanconi anaemia** (DNA repair defect) shows radial and skeletal deformities with chromosome breaks on **diepoxybutane** (DEB, breakage test) exposure. **Telomere biology disorders** (telomere shortening diseases) strike marrow, lung and liver together. **GATA2** (transcription factor) deficiency combines marrow failure, **NTM** (nontuberculous mycobacteria) and leukaemia risk. **Diamond Blackfan anaemia** (ribosome defect) isolates red lineage failure in infancy with thumb anomalies.",
+   "say": "Fanconi anaemia shows skeletal deformities and chromosome breaks. Telomere disorders strike marrow, lung and liver together. GATA2 deficiency combines marrow failure with mycobacterial infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DNA and telomere faults",
+     "points": [
+      "Fanconi skeletal signs",
+      "Telomere lung liver disease",
+      "Chromosome breakage positive"
+     ]
+    },
+    "right": {
+     "title": "Single lineage faults",
+     "points": [
+      "Diamond Blackfan red only",
+      "GATA2 immune marrow combo",
+      "Shwachman pancreatic signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Myelodysplastic syndromes** (MDS, clonal marrow dysplasia) mimic aplastic anaemia but carry dysplastic (abnormally formed) precursors and clonal mutations. **Blast percentage** (immature cells) governs leukaemia progression, with **20** percent marking leukaemia. **IPSS** (International Prognostic Scoring System) and **IPSS M** (molecular version) stratify risk by blasts, cytogenetics and mutations. **Ring sideroblasts** (iron granule cells) with **SF3B1** (splicing mutation) mark low risk disease.",
+   "say": "Myelodysplasia mimics aplastic anaemia but carries clonal mutations. Ring sideroblasts with SF3B1 mark low risk disease. IPSS M stratifies risk with molecular data.",
+   "vis": {
+    "cols": [
+     "Disease",
+     "Marrow",
+     "Clone"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Aplastic anaemia",
+      "Empty fatty marrow",
+      "Immune, occasional PNH"
+     ],
+     [
+      "MDS",
+      "Dysplastic precursors",
+      "Clonal mutations"
+     ],
+     [
+      "Low risk MDS",
+      "Ring sideroblasts",
+      "SF3B1 mutation"
+     ],
+     [
+      "High risk MDS",
+      "Blasts under 20 percent",
+      "Adverse mutations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PNH** (paroxysmal nocturnal haemoglobinuria, GPI anchor defect) arises from **PIGA** (phosphatidylinositol anchor gene) mutation on the X chromosome, losing **CD55** (decay accelerator) and **CD59** (protectin) proteins. Cells haemolyse intravascularly, especially in sleep, with **hemoglobinuria** (dark morning urine), pancytopenia and **thrombosis** (clots) in portal and cerebral veins. **Flow cytometry** (antibody cell test) for **FLAER** (reagent detecting missing anchors) confirms it.",
+   "say": "PNH loses GPI anchored CD55 and CD59 proteins from a PIGA mutation. Morning haemoglobinuria and venous thrombosis dominate. FLAER flow cytometry confirms the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "piga",
+      "label": "PIGA mutation"
+     },
+     {
+      "id": "loss",
+      "label": "CD55 CD59 lost"
+     },
+     {
+      "id": "haem",
+      "label": "Haemolysis thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "piga",
+      "loss"
+     ],
+     [
+      "loss",
+      "haem"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "PNH and aplastic anaemia overlap often, since immune attack selects PNH clones that escape T cell killing. **LDH** (cell damage enzyme) soars, **haptoglobin** (binding protein) vanishes and **reticulocytes** rise if marrow recovers. **Iron deficiency** develops from urinary iron loss. **Transfusion** is accepted but **eculizumab** (C5 complement blocker, terminal complement inhibitor) stops haemolysis, while **ravulizumab** (long acting C5 blocker) extends dosing intervals.",
+   "say": "PNH clones escape immune killing and often coexist with aplastic anaemia. Eculizumab stops complement haemolysis, and ravulizumab extends dosing intervals. Urinary iron loss causes iron deficiency.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Action",
+     "Dosing"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Eculizumab",
+      "Blocks C5 complement",
+      "Every 2 weeks"
+     ],
+     [
+      "Ravulizumab",
+      "Blocks C5 complement",
+      "Every 8 weeks"
+     ],
+     [
+      "Pegcetacoplan",
+      "Blocks C3 complement",
+      "Daily infusion"
+     ],
+     [
+      "Iptacopan",
+      "Blocks factor B",
+      "Oral twice daily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe aplastic anaemia needs **IST** (immunosuppressive therapy) or **HSCT** (stem cell transplantation) by severity and donor availability. **Horse ATG** (antithymocyte globulin) with **cyclosporine** (calcineurin blocker) and **eltrombopag** (thrombopoietin mimic) lifts response above **90** percent. **Eltrombopag** (platelet growth mimic) stimulates all lineages and is used even in moderate disease. Matched sibling transplantation is preferred in young patients, while IST suits older adults.",
+   "say": "Horse ATG with cyclosporine and eltrombopag lifts response above ninety percent. Eltrombopag stimulates all three lineages. Matched sibling transplantation suits young patients best.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transplantation",
+     "points": [
+      "Young matched sibling",
+      "Durable cure possible",
+      "Graft versus host risk"
+     ]
+    },
+    "right": {
+     "title": "Immunosuppression",
+     "points": [
+      "Older or no donor",
+      "ATG cyclosporine eltrombopag",
+      "Clonal evolution risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Supportive care decides survival while marrow recovers. **G-CSF** (granulocyte growth factor) bridges neutropenic infections, and irradiated blood prevents **TA-GVHD** (transfusion associated graft versus host disease). Fever with absolute neutrophil count below **500** needs immediate broad antibiotics. Transfusion thresholds favour platelets below **10**,000 and haemoglobin near **7** to **8** grams per decilitre in stable patients. **Growth factors** temper, but never replace, definitive therapy.",
+   "say": "Neutropenic fever needs immediate broad antibiotics. Irradiated blood prevents transfusion associated graft versus host disease. Growth factors bridge, but never replace, definitive therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Red cell support",
+     "points": [
+      "Haemoglobin near 7 to 8",
+      "Irradiated units",
+      "Alloimmunisation watch"
+     ]
+    },
+    "right": {
+     "title": "Platelet support",
+     "points": [
+      "Below 10000 prophylactic",
+      "Single donor platelets",
+      "Leukodepletion standard"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Leukaemic evolution haunts follow up. **MDS** (myelodysplasia) and **AML** (acute myeloid leukaemia) emerge in **10** to **15** percent after aplastic anaemia, especially with adverse clones. **PNH clones** expand without cancer in most patients, but monitoring continues. **Variceal bleeding** risks rise with thrombocytopenia and liver iron. Lifelong surveillance includes blood counts quarterly, clonal checks yearly and iron assessment in transfused patients.",
+   "say": "Leukaemic evolution follows aplastic anaemia in ten to fifteen percent. PNH clones usually expand without cancer. Lifelong counts and clonal surveillance remain mandatory.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "count",
+      "label": "Quarterly blood counts"
+     },
+     {
+      "id": "clone",
+      "label": "Yearly clonal checks"
+     },
+     {
+      "id": "treat",
+      "label": "Act on evolution"
+     }
+    ],
+    "edges": [
+     [
+      "count",
+      "clone"
+     ],
+     [
+      "clone",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy and vaccination add nuance. PNH flares in pregnancy with thrombosis risk, so complement blockade continues and thromboprophylaxis is standard. **Meningococcal vaccination** (meningitis vaccine) must precede eculizumab, since C5 blockade invites meningococcal sepsis. **PIGA** is X linked but somatic in PNH, explaining female predominance. **Iron** supplementation corrects urinary losses once complement is controlled.",
+   "say": "PNH flares in pregnancy with high thrombosis risk. Meningococcal vaccination must precede complement blockade. Iron corrects urinary losses once haemolysis is controlled.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PNH pregnancy",
+     "points": [
+      "Continue complement blockade",
+      "Thromboprophylaxis standard",
+      "Haematology obstetric care"
+     ]
+    },
+    "right": {
+     "title": "PNH vaccination",
+     "points": [
+      "Meningococcal vaccine first",
+      "Pneumococcal cover advised",
+      "Antibiotic standby plan"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rote numbers: aplastic incidence **2** to **7** per million; posthepatitis failure **5** percent; eltrombopag triple therapy response above **90** percent; MDS evolution **10** to **15** percent; blast threshold **20** percent for leukaemia; PNH marker **FLAER** by flow cytometry; and eculizumab every **2** weeks versus ravulizumab every **8** weeks. Never give non irradiated blood to severe aplastic patients.",
+   "say": "Aplastic anaemia strikes two to seven per million people. Triple therapy lifts response above ninety percent. Leukemic evolution follows in ten to fifteen percent of cases.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Aplastic incidence",
+      "Europe Israel",
+      "2 per million"
+     ],
+     [
+      "Asia incidence",
+      "Thailand China",
+      "5 to 7 per million"
+     ],
+     [
+      "Triple therapy",
+      "ATG cyclosporine eltrombopag",
+      "Above 90 percent"
+     ],
+     [
+      "Blast cutoff",
+      "Leukaemia threshold",
+      "20 percent"
+     ],
+     [
+      "PNH test",
+      "FLAER flow cytometry",
+      "CD55 CD59 absent"
+     ],
+     [
+      "Ravulizumab interval",
+      "Long acting C5 block",
+      "Every 8 weeks"
+     ]
+    ]
+   }
+  }
+ ]
+}

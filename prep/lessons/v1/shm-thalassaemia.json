@@ -1,0 +1,323 @@
+{
+ "v": 1,
+ "module": "shm-thalassaemia",
+ "subject": "ss-haematology",
+ "title": "Thalassaemias globin chain defects iron and transfusion",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 103 Disorders of Hemoglobin",
+  "Thalassaemia International Federation guidelines 2021"
+ ],
+ "steps": [
+  {
+   "tx": "Adult haemoglobin **HbA** (alpha 2 beta 2) needs balanced **alpha chains** and **beta chains** from globin genes. **Alpha thalassaemia** (alpha chain lack) deletes **HBA1** or **HBA2** genes, while **beta thalassaemia** mutates **HBB** (beta gene). Chain imbalance precipitates unpaired chains that poison red precursors. **HbF** (fetal haemoglobin, alpha 2 gamma 2) compensates in partial measure, and **HbA2** (alpha 2 delta 2) rises in beta disease.",
+   "say": "Balanced alpha and beta chains build normal adult haemoglobin. Unpaired chains damage red cell precursors in thalassaemia. Fetal haemoglobin compensates only partly, while HbA2 rises in beta disease.",
+   "vis": {
+    "cols": [
+     "Component",
+     "Source",
+     "Pattern"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "HbA",
+      "Alpha 2 beta 2",
+      "Normal adult form"
+     ],
+     [
+      "HbF",
+      "Alpha 2 gamma 2",
+      "Fetal rise"
+     ],
+     [
+      "HbA2",
+      "Alpha 2 delta 2",
+      "High in beta disease"
+     ],
+     [
+      "Alpha genes",
+      "HBA1 and HBA2",
+      "Four gene copies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Alpha disease scales with gene deletions. Losing **one** gene is silent, losing **two** gives trait with microcytosis, losing **three** gives **HbH disease** (beta 4 tetramers) with haemolysis, and losing all four causes **hydrops fetalis** (Barth syndrome of fetal anaemia). **HbH** (haemoglobin H, fast moving tetramer) appears on electrophoresis. **Mentzer index** (MCV divided by red count) below **13** favours thalassaemia trait over iron deficiency.",
+   "say": "Alpha thalassaemia scales with the number of deleted genes. Losing all four causes hydrops fetalis. HbH disease shows haemolysis, and the Mentzer index favours thalassaemia trait over iron deficiency.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "one",
+      "label": "One gene lost silent"
+     },
+     {
+      "id": "two",
+      "label": "Two lost trait microcytosis"
+     },
+     {
+      "id": "three",
+      "label": "Three lost HbH disease"
+     }
+    ],
+    "edges": [
+     [
+      "one",
+      "two"
+     ],
+     [
+      "two",
+      "three"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Beta thalassaemia major** (transfusion dependent disease) presents in infancy with severe anaemia, hepatosplenomegaly and **erythroid hyperplasia** (marrow overdrive) stunting growth. **Beta thalassaemia intermedia** (milder transfusion independent disease) presents later with haemolysis and iron loading. **Sickle beta thalassaemia** blends both diseases. **HbE** (HbE variant) adds coastline ancestry clues in South and Southeast Asia.",
+   "say": "Beta thalassaemia major needs lifelong transfusions from infancy. Intermedia presents later with milder disease. Sickle beta compounds sickling with ineffective erythropoiesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Beta major",
+     "points": [
+      "Infant presentation",
+      "Transfusion dependent",
+      "Iron overload certain"
+     ]
+    },
+    "right": {
+     "title": "Beta intermedia",
+     "points": [
+      "Late presentation",
+      "Transfusion independent",
+      "Iron loading slower"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Trait betrays itself early. **Screening** (cascade testing in families) finds microcytosis with normal ferritin and high HbA2. Iron therapy never corrects the indices and overloads the iron loaded marrow, so ferritin must be checked before long iron courses. **HbA2** (delta chain haemoglobin) above **3.5** percent is the bedside hallmark of beta trait. Parents of major cases need carrier counselling and prenatal options.",
+   "say": "Thalassaemia trait shows microcytosis with normal ferritin and high HbA2. Iron never corrects the indices and may overload the marrow. Parents of major cases need genetic counselling.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Trait result",
+     "Iron deficiency"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ferritin",
+      "Normal to high",
+      "Low"
+     ],
+     [
+      "HbA2",
+      "High, above 3.5 percent",
+      "Normal"
+     ],
+     [
+      "Mentzer index",
+      "Below 13",
+      "Above 13"
+     ],
+     [
+      "Haemoglobin",
+      "Near normal",
+      "Low if deficient"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic transfusion suppresses ineffective erythropoiesis and lifts haemoglobin above **9** grams per decilitre, but iron piles up inexorably. **Iron overload** (tissue iron excess) drives cardiomyopathy, diabetes and hypogonadism during adolescence. **Deferasirox** (oral chelator), **deferoxamine** (infusion chelator) and deferiprone strip iron daily. **MRI T2** (magnetic resonance iron mapping) steers chelation better than ferritin alone.",
+   "say": "Chronic transfusion suppresses ineffective erythropoiesis but loads iron relentlessly. Chelators strip iron daily in a lifelong cycle. MRI T2 guides chelation better than ferritin alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "txf",
+      "label": "Regular transfusions"
+     },
+     {
+      "id": "overload",
+      "label": "Iron overload builds"
+     },
+     {
+      "id": "chelate",
+      "label": "Chelation plus monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "txf",
+      "overload"
+     ],
+     [
+      "overload",
+      "chelate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Splenectomy** (spleen removal) in intermedia cuts transfusion need when the spleen grows huge and destroys cells, but thrombosis risk climbs after surgery. **HSCT** (haematopoietic stem cell transplantation) from matched donors cures major disease, with results best in young children. **Gene therapy** (lentiviral beta addition) and **CRISPR editing** (BCL11A editing raising HbF) are now approved for severe disease. **Hydroxyurea** (HbF inducer) helps selected intermedia patients.",
+   "say": "Splenectomy cuts transfusion need in selected intermedia patients. Stem cell transplantation cures major disease, best in young children. Gene therapy and CRISPR editing have now reached approval.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard care",
+     "points": [
+      "Transfusion plus chelation",
+      "Splenectomy selected cases",
+      "Hydroxyurea in intermedia"
+     ]
+    },
+    "right": {
+     "title": "Curative options",
+     "points": [
+      "Stem cell transplant",
+      "Lentiviral gene therapy",
+      "CRISPR BCL11A editing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac disease remains the killer without chelation. **Cardiomyopathy** (pump failure) starts silently and kills suddenly, so annual echocardiography and cardiac T2 are mandatory. **Endocrinopathy** (gland failure) includes hypogonadism, diabetes and hypothyroidism from iron deposition. **Pulmonary hypertension** (lung vessel pressure rise) and thrombosis complicate asplenic intermedia patients. Calcium channel drugs and anticoagulation are individualised, not routine.",
+   "say": "Cardiac iron kills silently without chelation, so yearly cardiac imaging is mandatory. Endocrine glands fail from iron deposition over adolescence. Asplenic patients carry extra thrombosis risk.",
+   "vis": {
+    "cols": [
+     "Organ",
+     "Iron injury",
+     "Monitor"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Heart",
+      "Cardiomyopathy sudden death",
+      "Yearly cardiac T2 echo"
+     ],
+     [
+      "Pancreas",
+      "Diabetes",
+      "Glucose surveillance"
+     ],
+     [
+      "Gonads",
+      "Hypogonadism",
+      "Puberty assessment"
+     ],
+     [
+      "Liver",
+      "Fibrosis cirrhosis",
+      "MRI T2 mapping"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug triggers and mismatched advice cause harm. **Oral iron** given blindly for trait microcytosis overloads iron replete patients, so ferritin precedes every iron course. **Deferiprone** (chelator) causes agranulocytosis and needs weekly neutrophil checks despite cardiac appeal. **Venesection** (therapeutic bleeding) replaces chelation only in iron neutral intermedia subsets. **Spleen** size, transfusion volume and liver iron together judge response.",
+   "say": "Blind iron courses harm trait patients who are already iron replete. Deferiprone needs weekly neutrophil counts despite cardiac benefits. Phlebotomy suits only selected iron neutral patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Safe steps",
+     "points": [
+      "Ferritin before iron",
+      "Mentzer index check",
+      "HbA2 confirmation"
+     ]
+    },
+    "right": {
+     "title": "Harmful habits",
+     "points": [
+      "Iron for trait microcytosis",
+      "Missing chelation in major",
+      "Deferiprone without counts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genetic nuance is exam favourite. **XmnI polymorphism** (HbF boosting variant) softens beta disease by raising HbF. **Coinheritance of alpha deletions** paradoxically improves beta intermedia balance by cutting excess alpha chains. **Sickle beta** behaves like sickle cell disease when beta zero dominates, and like intermedia when beta plus dominates. **HbE beta** compounds frequently in Bengal and Assam.",
+   "say": "HbF boosting variants soften beta thalassaemia severity. Coinherited alpha deletions paradoxically improve intermedia balance. HbE beta disease compounds frequently along the Bay of Bengal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "common",
+      "label": "Beta mutation common"
+     },
+     {
+      "id": "modifier",
+      "label": "Alpha deletion or XmnI"
+     },
+     {
+      "id": "severity",
+      "label": "Phenotype softened"
+     }
+    ],
+    "edges": [
+     [
+      "common",
+      "modifier"
+     ],
+     [
+      "modifier",
+      "severity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rote anchors: four alpha genes decide alpha severity, with **hydrops** at zero genes and **HbH** at three; beta trait shows HbA2 above **3.5** percent; **Mentzer** below **13** favours trait; major needs transfusion above **9** grams per decilitre; chelators save the heart; and **CRISPR** editing of **BCL11A** raising HbF is now approved. Never prescribe iron without ferritin in microcytosis.",
+   "say": "Four alpha genes decide alpha severity from silent to hydrops. HbA2 above three point five percent marks beta trait. CRISPR editing raising fetal haemoglobin is now approved for severe disease.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Alpha zero genes",
+      "Hydrops fetalis",
+      "Four deletions"
+     ],
+     [
+      "Alpha three genes",
+      "HbH disease",
+      "Beta 4 tetramers"
+     ],
+     [
+      "Beta trait",
+      "HbA2 high",
+      "Above 3.5 percent"
+     ],
+     [
+      "Mentzer index",
+      "Below 13 trait",
+      "Iron above 13"
+     ],
+     [
+      "Transfusion goal",
+      "Above 9 grams per dL",
+      "Suppress marrow"
+     ],
+     [
+      "Curative horizon",
+      "CRISPR BCL11A",
+      "Raises HbF"
+     ]
+    ]
+   }
+  }
+ ]
+}

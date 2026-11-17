@@ -1,0 +1,323 @@
+{
+ "v": 1,
+ "module": "shm-iron-deficiency-chronic-disease",
+ "subject": "ss-haematology",
+ "title": "Iron deficiency anaemia of inflammation and iron overload",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 102 Iron Deficiency and Other Acquired Anemias",
+  "World Health Organization guideline on iron deficiency 2024"
+ ],
+ "steps": [
+  {
+   "tx": "Iron is conserved and reused, with only **1** to **2** mg absorbed daily against equal losses, while macrophage recycling supplies **20** to **25** mg. **Transferrin** (iron carrying protein) is the central carrier. **Ferritin** (storage protein) below **30** micrograms per litre diagnoses absolute iron deficiency with **92** percent sensitivity and **98** percent specificity, and absent marrow iron remains the gold standard.",
+   "say": "Daily absorption is only one to two milligrams, dwarfed by macrophage recycled iron. Ferritin below thirty confirms absolute deficiency. Marrow iron absence is the gold standard but is rarely needed.",
+   "vis": {
+    "cols": [
+     "Pool",
+     "Iron amount",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Recycled daily",
+      "20 to 25 mg",
+      "Major supply"
+     ],
+     [
+      "Absorbed daily",
+      "1 to 2 mg",
+      "Balances loss"
+     ],
+     [
+      "Ferritin cutoff",
+      "Below 30 micrograms per L",
+      "Absolute deficiency"
+     ],
+     [
+      "Transferrin saturation",
+      "Below 15 to 20 percent",
+      "Iron restricted"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hepcidin** (liver peptide locking iron in stores) and **ferroportin** (iron export pump) govern the whole system. Iron lack lowers hepcidin and opens ferroportin, while inflammation raises hepcidin and sequesters iron in macrophages. **TMPRSS6** mutations cause **IRIDA** (iron refractory iron deficiency anaemia), a rare condition deaf to oral iron. **DCYTB** (duodenal iron reducer) and **DMT1** (duodenal iron importer) handle uptake.",
+   "say": "Hepcidin locks iron away by closing ferroportin, while iron lack opens it again. IRIDA is a rare genetic cause of oral iron failure. Inflammation produces functional deficiency through high hepcidin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hepcidin",
+      "label": "Hepcidin level"
+     },
+     {
+      "id": "ferro",
+      "label": "Ferroportin opens or closes"
+     },
+     {
+      "id": "iron",
+      "label": "Iron reaches marrow or not"
+     }
+    ],
+    "edges": [
+     [
+      "hepcidin",
+      "ferro"
+     ],
+     [
+      "ferro",
+      "iron"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iron deficiency affects about **1.2** billion people, nearly half the anaemic population. Growth, heavy menses, pregnancy and **blood loss** (especially gut) drive it, and multiple causes often coexist. Early deficiency leaves MCV normal while ferritin falls first. **Pica** (craving ice or soil), **koilonychia** (spoon nails), glossitis and **Plummer Vinson syndrome** (dysphagia from oesophageal webs) clinch the clinical picture.",
+   "say": "Iron deficiency touches over a billion people worldwide. Ferritin falls before MCV does, so early deficiency can hide. Pica and spoon nails are classic bedside clues.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absolute deficiency",
+     "points": [
+      "Stores exhausted",
+      "Ferritin low",
+      "Oral iron works"
+     ]
+    },
+    "right": {
+     "title": "Functional deficiency",
+     "points": [
+      "Stores present",
+      "Ferritin normal or high",
+      "Oral iron fails"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The iron panel pattern separates the mimics. Iron deficiency shows low ferritin, low transferrin saturation and high **sTfR** (soluble transferrin receptor), while **anaemia of inflammation** (anaemia of chronic disease) shows normal to high ferritin with low saturation. Mixed states show ferritin below **70** to **100**. Thalassaemia trait keeps ferritin and saturation normal despite microcytosis, a key exam trap.",
+   "say": "Ferritin and transferrin saturation separate iron deficiency from inflammation. Thalassaemia trait keeps both normal despite small cells. Mixed states sit in the middle range of ferritin.",
+   "vis": {
+    "cols": [
+     "Condition",
+     "Ferritin",
+     "MCV"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Iron deficiency",
+      "Low, below 30",
+      "Low, below 80"
+     ],
+     [
+      "Inflammation",
+      "Normal to high",
+      "Low to normal"
+     ],
+     [
+      "Mixed",
+      "Below 70 to 100",
+      "Low to normal"
+     ],
+     [
+      "Thalassaemia trait",
+      "Normal to high",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inflammation drives anaemia through interleukin **6** (IL-6, inflammatory cytokine) raising hepcidin, while **TNF** (tumour necrosis factor) and **interferon gamma** suppress **erythropoietin** (EPO, kidney hormone) response. **CKD** (chronic kidney disease) anaemia appears once more than **50** percent of kidney function is lost and carries cardiac risk. Heart failure also shows iron deficiency in **50** to **60** percent, and intravenous iron improves symptoms there.",
+   "say": "Interleukin six raises hepcidin and locks iron away in inflammation. Kidney disease anaemia worsens as function falls below half. Heart failure iron deficiency responds to intravenous iron.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inflam",
+      "label": "Inflammation raises hepcidin"
+     },
+     {
+      "id": "seq",
+      "label": "Iron locked in stores"
+     },
+     {
+      "id": "anemia",
+      "label": "Iron restricted anaemia"
+     }
+    ],
+    "edges": [
+     [
+      "inflam",
+      "seq"
+     ],
+     [
+      "seq",
+      "anemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oral ferrous salts supply **65** to **100** mg elemental iron daily or alternate day, and treatment continues months after haemoglobin normalises to refill stores. **Intravenous iron** (iron sucrose, ferric carboxymaltose up to **1000** mg) suits malabsorption, inflammation and heart failure with ferritin below **100** or saturation below **20** percent. In dialysis care, targets aim for saturation **30** to **40** percent with ferritin **200** to **700**.",
+   "say": "Oral iron is given daily or alternate day and continued after haemoglobin recovers. Intravenous iron suits malabsorption and heart failure. Saturation and ferritin targets guide dialysis care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral iron",
+     "points": [
+      "65 to 100 mg daily",
+      "Alternate day option",
+      "Gut side effects common"
+     ]
+    },
+    "right": {
+     "title": "Intravenous iron",
+     "points": [
+      "Malabsorption benefit",
+      "Rapid store refill",
+      "Hypophosphataemia risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Iron overload** (excess body iron) injures liver, heart and pancreas. Ferritin above **1000** with transferrin saturation high flags overload, and **MRI T2** (magnetic resonance T2 mapping) quantifies liver and cardiac iron better than ferritin. **Phlebotomy** (regular therapeutic bleeding) is first line in haemochromatosis, while **deferasirox** (oral chelator) and deferoxamine clear transfusional iron. Hypophosphataemia now limits several intravenous iron salts.",
+   "say": "Iron overload damages liver, heart and pancreas over time. MRI T2 quantifies tissue iron better than ferritin. Phlebotomy clears genetic overload while chelators handle transfusional iron.",
+   "vis": {
+    "cols": [
+     "Marker",
+     "Suggests",
+     "Tool"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ferritin above 1000",
+      "Overload likely",
+      "Tissue MRI T2"
+     ],
+     [
+      "Saturation high",
+      "Free iron risk",
+      "Chelation or phlebotomy"
+     ],
+     [
+      "Genetic overload",
+      "HFE related",
+      "Phlebotomy first line"
+     ],
+     [
+      "Transfusional iron",
+      "Chronic transfusion",
+      "Deferasirox option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every man and postmenopausal woman with iron deficiency needs upper and lower gut evaluation to exclude cancer, especially right colon malignancy. Hookworm, heavy menses and **von Willebrand disease** (clotting factor lack) interact frequently. **Heyde syndrome** (aortic stenosis, bleeding and acquired von Willebrand deficiency) links iron loss to valve disease. Missing endoscopy in older men is an indefensible exam error.",
+   "say": "Men and postmenopausal women need gut evaluation to exclude cancer. Von Willebrand disease often hides behind heavy menses. Heyde syndrome ties aortic stenosis to iron losing bleeding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "irondef",
+      "label": "Iron deficiency confirmed"
+     },
+     {
+      "id": "scope",
+      "label": "Endoscopy in older men"
+     },
+     {
+      "id": "cause",
+      "label": "Cause treated"
+     }
+    ],
+    "edges": [
+     [
+      "irondef",
+      "scope"
+     ],
+     [
+      "scope",
+      "cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prolyl hydroxylase inhibitors** (oral HIF stabilisers) raise both EPO and gut iron absorption and are approved in some countries for kidney disease anaemia, though long term safety remains uncertain. **ESAs** (erythropoiesis stimulating agents) stay standard in kidney care with a haemoglobin target below **11.5** grams per decilitre driven by iron coadministration. Restrictive transfusion thresholds of **7** to **8** grams per decilitre now govern stable intensive care patients.",
+   "say": "Prolyl hydroxylase inhibitors raise both EPO and iron absorption. ESA therapy stays the kidney disease standard with iron support. Stable intensive care patients get restrictive transfusion thresholds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral HIF drugs",
+     "points": [
+      "Raise EPO and iron uptake",
+      "Single tablet concept",
+      "Safety still uncertain"
+     ]
+    },
+    "right": {
+     "title": "Injected ESA",
+     "points": [
+      "Target below 11.5",
+      "Needs iron support",
+      "Established safety record"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High yield anchors: ferritin below **30** equals absolute deficiency; saturation below **15** to **20** percent restricts erythropoiesis; thalassaemia trait keeps ferritin normal; **IRIDA** resists oral iron; IV iron is indicated in heart failure under defined cutoffs; phlebotomy treats genetic overload; and MRI T2 beats ferritin for tissue iron. B12 and folate must be checked in malabsorption before calling iron therapy a failure.",
+   "say": "Ferritin below thirty means absolute deficiency, and normal ferritin never excludes thalassaemia trait confusion. IRIDA resists oral iron alone. MRI T2 remains the best tissue iron measure.",
+   "vis": {
+    "cols": [
+     "Question",
+     "Answer",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Absolute deficiency",
+      "Ferritin below 30",
+      "92 percent sensitive"
+     ],
+     [
+      "Iron restriction",
+      "Saturation below 15",
+      "20 percent limit"
+     ],
+     [
+      "Dialysis target",
+      "Saturation 30 to 40",
+      "Ferritin 200 to 700"
+     ],
+     [
+      "Heart failure IV iron",
+      "Ferritin below 100",
+      "Below 20 percent saturation"
+     ],
+     [
+      "Overload tool",
+      "MRI T2 mapping",
+      "Beats ferritin"
+     ],
+     [
+      "Genetic overload drug",
+      "Phlebotomy",
+      "First line therapy"
+     ]
+    ]
+   }
+  }
+ ]
+}
