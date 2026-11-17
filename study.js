@@ -1195,9 +1195,9 @@
         '</div>' +
       '</div>' +
       '<input id="stTbPage" type="hidden" value="' + cp + '">' +
-    '</div>' +
-    colorStripHtml() +
-    '<div id="stInsertOptions"></div>';
+      colorStripHtml() +
+      '<div id="stInsertOptions"></div>' +
+    '</div>';
   }
 
   function colorStripHtml() {
@@ -1353,8 +1353,8 @@
     if (G.STUDY_INK && G.STUDY_INK.drawStroke(ctx, s, W, H, dpr, isSel)) return;
     var p = s.pts, i;
     ctx.save(); ctx.scale(dpr, dpr); ctx.lineCap = "round"; ctx.lineJoin = "round";
-    ctx.strokeStyle = isSel ? "#42cdb5" : s.color;
-    if (isSel) { ctx.shadowColor = "#42cdb5"; ctx.shadowBlur = 4; }
+    ctx.strokeStyle = isSel ? "#c9a227" : s.color;
+    if (isSel) { ctx.shadowColor = "#c9a227"; ctx.shadowBlur = 4; }
     if (s.tool === "hl") {
       ctx.globalAlpha = 0.35; ctx.lineWidth = penW(s, W, 0.5); ctx.beginPath();
       for (i = 0; i < p.length; i++) { if (i) ctx.lineTo(p[i][0] * W, p[i][1] * H); else ctx.moveTo(p[i][0] * W, p[i][1] * H); }
@@ -1386,7 +1386,7 @@
     if (lassoLoop && lassoLoop.length > 1) {
       ctx.save();
       ctx.scale(dpr, dpr);
-      ctx.strokeStyle = "#42cdb5";
+      ctx.strokeStyle = "#c9a227";
       ctx.lineWidth = 2;
       ctx.setLineDash([5, 5]);
       ctx.beginPath();
@@ -1408,6 +1408,7 @@
 
   function syncTb() {
     var root = host && host.root(); if (!root || !V) return;
+    var tbEl = root.querySelector("#stTb"); if (tbEl) tbEl.style.setProperty("--st-pen", activeColor());
     Array.prototype.forEach.call(root.querySelectorAll("#stTb [data-act], #stMoreSheet [data-act], #stToolOptions [data-act]"), function (b) {
       var a = b.getAttribute("data-act"), v = b.getAttribute("data-v");
       var onb = (a === "st-tool" && v === V.tool) || (a === "st-color" && +v === V.ci) || (a === "st-width" && +v === V.wi);

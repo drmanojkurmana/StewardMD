@@ -310,7 +310,7 @@
       var V = api.getV(), p = V && V.pg[n]; if (!p || !p.live) return;
       var ctx = p.live.getContext("2d"), dpr = p.live.width / (p.el.clientWidth || 1), a = pos(e);
       ctx.clearRect(0, 0, p.live.width, p.live.height); ctx.save(); ctx.scale(dpr, dpr);
-      ctx.strokeStyle = "#42cdb5"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(a[0] * p.el.clientWidth, a[1] * p.el.clientHeight, eraseRadius(), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
+      ctx.strokeStyle = "#3e4c72"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(a[0] * p.el.clientWidth, a[1] * p.el.clientHeight, eraseRadius(), 0, Math.PI * 2); ctx.stroke(); ctx.restore();
     }
     function eraseAt(e) {
       var V = api.getV(), s = settingsOf(api), a = pos(e), W = ov.clientWidth, H = ov.clientHeight, rad = eraseRadius(), changed = false;

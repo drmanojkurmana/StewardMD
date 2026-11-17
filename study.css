@@ -3,6 +3,28 @@
    All interactive targets >= 44px. No em-dash in app-facing copy.
    Radius scale: pills 999px, sheets 16px, cards 12px, chips 10px. One accent: #42CDB5. */
 
+/* ===== RESKIN tokens (GoodNotes layout, navy bars + gold accent) =====
+   One navy, one gold, one cool-grey family. Gold is spent ONLY on: the active
+   tab indicator, selection handles + lasso active states, the selected colour
+   ring, focus rings, and primary buttons in sheets. No glows, no gradients,
+   no backdrop blur. Radius: tabs 0, tool buttons 8px, popover/sheets 12-16px. */
+.pn-root {
+  --st-navy: #3e4c72;
+  --st-navy-2: #55648c;
+  --st-navy-ink: #232f4a;
+  --st-navy-deep: #2b3653;
+  --st-toolrow-dark: #232e47;
+  --st-gold: #c9a227;
+  --st-gold-ink: #241d05;
+  --st-canvas: #e9ebee;
+  --st-canvas-dark: #171d2b;
+  --st-toolrow: #ffffff;
+  --st-ink: #1c2432;
+  --st-sub: #5b6575;
+  --st-hairline: #d8dce2;
+  --st-active-wash: #edeff2;
+}
+
 /* Base & Library Layout */
 .pn-root .st-lib {
   padding: 16px 16px calc(var(--pnv-h, 64px) + var(--pnv-b, 20px) + 32px);
@@ -2036,3 +2058,61 @@ body:not(.dark) .pn-root .st-ink-seg.on {
   .pn-root .st-lasso-bar, .pn-root .st-sel-panel, .pn-root .st-sh { animation: none !important; transition: none !important; }
   .pn-root .st-b:active, .pn-root .pn-btn:active, .pn-root .st-p3-btn:active { transform: none !important; }
 }
+
+/* ===== RESKIN: navy top bar, folder tabs, one white tool row ===== */
+.pn-root .st-p3-topbar {
+  background: var(--st-navy);
+  border-bottom: 0;
+  color: #ffffff;
+  padding: 4px 8px;
+  min-height: 52px;
+}
+.pn-root .st-p3-btn {
+  color: #ffffff;
+  border-radius: 8px;
+}
+.pn-root .st-p3-btn:active { background: rgba(255, 255, 255, 0.14); transform: scale(0.97); }
+.pn-root .st-p3-btn:disabled { opacity: 0.35; }
+.pn-root .st-p3-btn.on { color: #ffffff; background: rgba(255, 255, 255, 0.16); }
+.pn-root .st-p3-title { color: #ffffff; font-size: 15px; }
+.pn-root .st-p3-title:active { background: rgba(255, 255, 255, 0.12); }
+
+/* Document tabs: flat folder tabs on a lighter navy step, equal widths. */
+.pn-root .st-doc-tabs {
+  background: var(--st-navy-2);
+  border-bottom: 0;
+  padding: 0;
+  gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.pn-root .st-dt {
+  flex: 1 1 0;
+  min-width: 150px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.pn-root .st-dt + .st-dt { border-left: 1px solid rgba(255, 255, 255, 0.14); }
+.pn-root .st-dt-open {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 550;
+  padding: 0 6px;
+}
+.pn-root .st-dt-x {
+  order: -1;
+  flex: none;
+  color: rgba(255, 255, 255, 0.65);
+  border-radius: 0;
+}
+.pn-root .st-dt.on {
+  background: var(--st-toolrow);
+  box-shadow: inset 0 -3px 0 var(--st-gold);
+}
+.pn-root .st-dt.on .st-dt-open { color: var(--st-navy-ink); font-weight: 650; }
+.pn-root .st-dt.on .st-dt-x { color: var(--st-sub); }
