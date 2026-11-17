@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "shp-drug-induced-liver-injury",
+ "subject": "ss-hepatology",
+ "title": "Drug-induced liver injury: pattern, Hy law and the stop-the-drug rule",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Drug-induced liver injury)",
+  "EASL Clinical Practice Guidelines on Drug-Induced Liver Injury 2019",
+  "Sleisenger and Fordtran 11e (Toxic and drug-induced hepatitis)"
+ ],
+ "steps": [
+  {
+   "tx": "**Drug-induced liver injury (DILI)** is drug caused hepatotoxicity, the commonest cause of acute liver failure in developed settings. Two families exist: **intrinsic** dose related injury, shown by paracetamol, and **idiosyncratic** host dependent injury, which is rare and unpredictable. Herbal and dietary supplements now cause over **20** percent of cases in the United States, so the history must probe them directly.",
+   "say": "Drug induced liver injury splits into predictable toxicity and rare unpredictable reactions. Paracetamol poisons in proportion to dose, while idiosyncratic injury strikes a tiny minority without warning. Herbal weight loss products need the same suspicion as prescription medicines.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Prototype", "Course"],
+    "rows": [
+     ["Intrinsic", "Paracetamol", "Dose proportional"],
+     ["Idiosyncratic", "Co-amoxiclav", "Weeks after starting"],
+     ["Immunoallergic", "Fever, rash", "Eosinophilia present"],
+     ["Ischaemic-like", "Nitrofurantoin", "Mimics autoimmunity"]
+    ]
+   }
+  },
+  {
+   "tx": "The pattern is named by the **R value**, the ratio of **alanine aminotransferase (ALT)** to **alkaline phosphatase (ALP)**, each expressed as multiples of the upper limit of normal. An R above **5** means hepatocellular injury, below **2** means cholestatic injury, and **2** to **5** means mixed injury. The pattern points toward a drug family even before causality is proved.",
+   "say": "One ratio separates every case into hepatocellular, cholestatic or mixed damage. Above five the cells are dying, below two the ducts are failing, and between two and five both suffer. Pattern first, then the drug list follows.",
+   "vis": {
+    "kind": "table",
+    "cols": ["R value", "Pattern", "Fit"],
+    "rows": [
+     ["Above 5", "Hepatocellular", "Cell necrosis"],
+     ["2 to 5", "Mixed", "Cells plus ducts"],
+     ["Below 2", "Cholestatic", "Canalicular failure"],
+     ["Jaundice plus high R", "Hy law", "High mortality"]
+    ]
+   }
+  },
+  {
+   "tx": "**Hy law** states that jaundice with a hepatocellular pattern and no obstruction predicts serious injury, with roughly **10** hepatocellular jaundice cases for every acute liver failure case. It was named for **Hyman Zimmerman**, and it kills drug approvals. When jaundice appears in a hepatocellular injury, stop and escalate care at once, since failure follows in about one in ten patients.",
+   "say": "Jaundice during a hepatocellular injury warns that about one patient in ten moves toward liver failure. The rule carries the name of Hyman Zimmerman and it routinely sinks new drug applications. Yellow skin in this pattern needs urgent escalation.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hy law positive", "points": ["Jaundice present", "High R value", "No obstruction", "Near 1 in 10 failure"]},
+    "right": {"title": "Hy law negative", "points": ["No jaundice", "Pattern decides", "Monitor enzymes", "Review drug list"]}
+   }
+  },
+  {
+   "tx": "Paracetamol overloads **glutathione** defences through **cytochrome P450** metabolism to **NAPQI**, which binds hepatocyte proteins and produces **centrilobular necrosis**. Transaminases can top **10,000** units per litre with a surprisingly low bilirubin, the reverse of viral hepatitis. A timed level above **300** at **4** hours predicts severe injury, while below **150** makes damage unlikely.",
+   "say": "Paracetamol overdose destroys the centrilobular zone because protective glutathione runs out. Enzymes soar past ten thousand while bilirubin stays modest, which is the biochemical fingerprint. The timed level at four hours guides whether the antidote starts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "dose", "label": "Overdose saturates pathways"},
+     {"id": "napqi", "label": "NAPQI accumulates"},
+     {"id": "necrosis", "label": "Centrilobular necrosis"},
+     {"id": "level", "label": "Timed level guides NAC"}
+    ],
+    "edges": [["dose", "napqi"], ["napqi", "necrosis"], ["necrosis", "level"]]
+   }
+  },
+  {
+   "tx": "**Co-amoxiclav** and **flucloxacillin** cause delayed cholestatic hepatitis that may declare itself after the course ends. **Amoxicillin-clavulanate** is the most frequently implicated single agent in the United States. **Isoniazid** instead causes brief mild enzyme rise in about **10** percent of recipients, an adaptation that resolves, yet true injury can follow for **6** months and rises sharply after **50** years.",
+   "say": "The antibiotic culprits often appear after the prescription already ends, which fools muscle memory. Isoniazid adaptation fades with continued use, while genuine injury climbs with age. Both stories need a timeline that reaches months back.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug", "Pattern", "Timing"],
+    "rows": [
+     ["Co-amoxiclav", "Mixed or cholestatic", "After course ends"],
+     ["Flucloxacillin", "Cholestatic", "Delayed weeks"],
+     ["Isoniazid", "Hepatocellular", "Up to 6 months"],
+     ["Paracetamol", "Hepatocellular", "Within hours"]
+    ]
+   }
+  },
+  {
+   "tx": "Idiosyncratic injury reflects reactive metabolites meeting **mitochondrial stress** and adaptive immunity, often with a **human leukocyte antigen (HLA)** predisposition. Immunoallergic cases add fever, rash and eosinophilia, while some drugs sculpt an **autoimmune hepatitis** picture with positive **antinuclear antibody (ANA)**. **Checkpoint inhibitor** hepatitis arrives within weeks and answers to glucocorticoids.",
+   "say": "Unpredictable injury grows from reactive metabolites, strained mitochondria and misdirected immunity. Genetic markers such as HLA increase the odds for certain agents. Autoimmune mimicry with positive antibodies should widen the drug timeline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "metab", "label": "Reactive metabolites form"},
+     {"id": "mito", "label": "Mitochondrial stress"},
+     {"id": "hlar", "label": "HLA plus immunity"},
+     {"id": "injury", "label": "Patterned injury"}
+    ],
+    "edges": [["metab", "mito"], ["mito", "hlar"], ["hlar", "injury"]]
+   }
+  },
+  {
+   "tx": "Diagnosis remains one of exclusion, and structured tools support it: **RUCAM**, **RECAM** and **DILIN** expert opinion grade causality from definite to unlikely. Viral serology, autoimmune markers and ultrasound exclude infective, immune and obstructive disease first. A **liver biopsy** helps when the picture stays uncertain, though identical patterns overlap with viral hepatitis and **ischaemic hepatitis**.",
+   "say": "No blood test proves drug causation, so exclusion plus timing carries the argument. Structured scales such as RUCAM and RECAM discipline the reasoning. Biopsy enters only when the picture fails to settle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "pattern", "label": "R value pattern"},
+     {"id": "exclude", "label": "Exclude viral, biliary"},
+     {"id": "causality", "label": "Score RUCAM or RECAM"},
+     {"id": "withdraw", "label": "Stop the drug"}
+    ],
+    "edges": [["pattern", "exclude"], ["exclude", "causality"], ["causality", "withdraw"]]
+   }
+  },
+  {
+   "tx": "Management begins with **prompt withdrawal** of every suspect agent, including herbals and over the counter products, followed by supportive care. **N-acetylcysteine (NAC)** is the specific antidote for paracetamol poisoning and also helps selected non-paracetamol acute liver failure. Never rechallenge the culprit, and report the reaction while counseling the patient on lifetime avoidance with an allergy-style record.",
+   "say": "Withdrawal of the offending agent remains the single therapy that matters most. N-acetylcysteine rescues paracetamol poisoning when given early. Rechallenge causes a faster and more severe second injury.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Action", "Reason", "Note"],
+    "rows": [
+     ["Stop suspect drugs", "Removes the cause", "Include herbals"],
+     ["Give NAC", "Paracetamol antidote", "Start early"],
+     ["Monitor INR, bilirubin", "Tracks severity", "Watch Hy law"],
+     ["Refer if failure", "Coagulopathy, coma", "Transplant centre"]
+    ]
+   }
+  },
+  {
+   "tx": "Most injury resolves after withdrawal, yet **acute liver failure** develops in about **10** percent and then spontaneous recovery falls below **30** percent. Survivors of paracetamol poisoning rarely keep lasting liver injury, though renal failure strikes nearly **75** percent of severe cases and still recovers. Continued ingestion during nausea or jaundice marks the fatal isoniazid and paracetamol stories.",
+   "say": "Withdrawal rescues most patients, but the tenth who fail change the maths completely. Once coagulopathy and coma arrive, transplant becomes the only hope. Renal injury rides along in paracetamol poisoning yet usually recovers.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Resolves", "points": ["Drug stopped", "Enzymes fall", "Cholestasis slow", "Counselling given"]},
+    "right": {"title": "Fails", "points": ["Hy law positive", "INR rising", "Encephalopathy", "Transplant urgent"]}
+   }
+  },
+  {
+   "tx": "Traps reward the alert history taker. Long latency drugs injure after the course ends, adaptation fools the unwary, and trials miss reactions rarer than **1** in **10,000** recipients. Herbal products hide undeclared drugs such as **diclofenac**, and gentle transient enzyme rises during statin therapy need no stopping. Reaching for a culprit date from weeks ago catches the delayed cholestatic cases.",
+   "say": "Delayed reactions punish short histories and forgiving timelines. Adaptation resolves on its own, so reassurance beats reflex stopping. Herbal products should never slip past the medication review.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Why it fools", "Counter"],
+    "rows": [
+     ["Long latency", "Drug already stopped", "Ask months back"],
+     ["Adaptation", "Enzymes settle", "Reassure, monitor"],
+     ["Rare reaction", "Missed in trials", "Follow reports"],
+     ["Herbal hidden drug", "Undeclared compound", "Probe alternatives"]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: R above **5** is hepatocellular, below **2** cholestatic, between hepatocellular and mixed; **Hy law** means jaundice with high R and about **10** cases per failure case. Paracetamol level above **300** at **4** hours predicts severe injury and **NAC** is the antidote. **Co-amoxiclav** injures after stopping, isoniazid peaks after **50**, and withdrawal is the mainstay.",
+   "say": "Carry the R cutoffs, the Hy law ten to one ratio, and the paracetamol level thresholds. Co-amoxiclav appears late while isoniazid risk increases with age. Stopping the drug early decides most outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["R above 5", "Hepatocellular"],
+     ["R below 2", "Cholestatic"],
+     ["Hy law ratio", "10 to 1"],
+     ["Paracetamol 4 h", "300 severe"],
+     ["Paracetamol, safe", "Below 150"],
+     ["Antidote", "N-acetylcysteine"],
+     ["Late culprit", "Co-amoxiclav"],
+     ["Mainstay", "Withdrawal"]
+    ]
+   }
+  }
+ ]
+}

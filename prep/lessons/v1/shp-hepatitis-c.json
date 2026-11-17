@@ -1,0 +1,342 @@
+{
+  "steps": [
+    {
+      "say": "Hepatitis C virus is an RNA flavivirus spread mainly through blood, and it accounts for most chronic liver disease worldwide. Antibody positivity is marking exposure, while ribonucleic acid positivity is marking active infection. Genotypes are no longer dictating therapy, since pan genotypic regimens cover nearly all strains.",
+      "tx": "**Hepatitis C virus** is an RNA **flavivirus** spread mainly through blood, and it accounts for most chronic liver disease worldwide. **Anti hepatitis C antibody** positivity means exposure, while **hepatitis C ribonucleic acid** positivity means active infection. Genotypes no longer dictate therapy, since pan genotypic regimens cover nearly all strains. Fibrosis stage, not genotype, drives surveillance and treatment urgency in current guidance.",
+      "vis": {
+        "cols": [
+          "Test",
+          "Meaning",
+          "Action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Anti hepatitis C antibody",
+            "Past or present exposure",
+            "Confirm with ribonucleic acid"
+          ],
+          [
+            "Hepatitis C ribonucleic acid",
+            "Active replication",
+            "Stage fibrosis, treat"
+          ],
+          [
+            "Fibrosis assessment",
+            "F0 to F4 scale",
+            "Surveillance and regimen length"
+          ],
+          [
+            "Genotyping",
+            "Mostly obsolete",
+            "Reserve for failure cases"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "About fifty five to eighty five percent of acute infections are clearing spontaneously, unlike hepatitis B. Chronic disease is smouldering for decades before cirrhosis arrives. Injection drug use and unsafe injections are dominating transmission in most series.",
+      "tx": "About **55** to **85** percent of acute hepatitis C infections clear spontaneously, unlike hepatitis B where adults almost always recover. Chronic disease then smoulders for **20** to **30** years before cirrhosis arrives, and steatosis plus alcohol accelerate the march. Injection drug use, unsafe injections and unscreened blood drive most transmission. Screening all adults once in life catches the silent majority early enough to cure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Adult hepatitis B clears above 95 percent",
+            "Neonatal infection chronic in 90 percent",
+            "Chronicity markers well defined"
+          ],
+          "title": "Hepatitis B contrast"
+        },
+        "right": {
+          "points": [
+            "Spontaneous clearance 55 to 85 percent",
+            "Chronicity the rule thereafter",
+            "Blood borne spread dominates"
+          ],
+          "title": "Hepatitis C natural history"
+        }
+      }
+    },
+    {
+      "say": "Sofosbuvir with velpatasvir is curing above ninety five percent of cases in twelve weeks without interferon. Adding ribavirin helps the cirrhotic and the previously failed. Sustained virological response means undetectable ribonucleic acid twelve weeks after stopping.",
+      "tx": "**Sofosbuvir** with **velpatasvir** cures above **95** percent of cases in **12** weeks without interferon, and adding **ribavirin** helps cirrhotic and previously failed patients. **Sustained virological response** means undetectable ribonucleic acid **12** weeks after stopping, and it cuts cirrhosis and cancer risk sharply. Pan genotypic cover means one regimen fits nearly every genotype. Resistance testing is reserved for treatment failures.",
+      "vis": {
+        "edges": [
+          [
+            "diagnose",
+            "stage"
+          ],
+          [
+            "stage",
+            "regimen"
+          ],
+          [
+            "regimen",
+            "cure"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diagnose",
+            "label": "Antibody plus ribonucleic acid"
+          },
+          {
+            "id": "stage",
+            "label": "Fibrosis F0 to F4"
+          },
+          {
+            "id": "regimen",
+            "label": "Sofosbuvir velpatasvir 12 weeks"
+          },
+          {
+            "id": "cure",
+            "label": "Sustained response check"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Cryoglobulinaemia is marking the extrahepatic face of hepatitis C, with palpable purpura on the legs and glomerulonephritis. Treating the virus often melts the vasculitis without immunosuppression. B cell lymphoma association also fades once viraemia is cleared.",
+      "tx": "**Cryoglobulinaemia** marks the extrahepatic face of hepatitis C, with palpable **purpura** on the legs, arthralgias and membranoproliferative **glomerulonephritis**. Treating the virus often melts the vasculitis without immunosuppression, because the clone feeds on chronic antigen drive. B cell lymphoma association also fades once viraemia clears, though surveillance continues. Kidney involvement needs biopsy, since hepatitis B and lupus mimic the same picture.",
+      "vis": {
+        "cols": [
+          "Extrahepatic site",
+          "Finding",
+          "Treatment logic"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Skin",
+            "Palpable purpura",
+            "Antiviral first"
+          ],
+          [
+            "Kidney",
+            "Membranoproliferative pattern",
+            "Biopsy plus antiviral"
+          ],
+          [
+            "Joints",
+            "Arthralgias, fatigue",
+            "Viral clearance helps"
+          ],
+          [
+            "Lymphoid",
+            "B cell lymphoma risk",
+            "Antiviral plus oncology review"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Decompensated cirrhosis needs ribavirin added and kidney function watched closely. Sofosbuvir accumulates in renal failure, so dose caution applies below thirty. Treating before decompensation beats rescuing the failed liver, the modern guideline refrain.",
+      "tx": "**Decompensated cirrhosis** needs ribavirin added and kidney function watched closely, since sofosbuvir accumulates when filtration falls below **30** millilitres per minute. Treating before decompensation beats rescuing the failed liver, because viral clearance rarely reverses Child class C disease. Transplant referral must precede antiviral therapy in listed patients. Guideline updates across **2020** to **2024** removed genotype testing for most patients.",
+      "vis": {
+        "cols": [
+          "Stage",
+          "Regimen tweak",
+          "Watchpoint"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Compensated F4",
+            "Sofosbuvir velpatasvir 12 weeks",
+            "Six monthly cancer screen"
+          ],
+          [
+            "Decompensated",
+            "Add ribavirin, extend duration",
+            "Kidney dose caution"
+          ],
+          [
+            "Renal failure",
+            "Adjust sofosbuvir exposure",
+            "Dialysis timing"
+          ],
+          [
+            "Post transplant",
+            "Treat recurrence early",
+            "Hepatology co care"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Alcohol and metabolic steatosis are multiplying the pace of hepatitis C fibrosis. Diabetes is adding its own forty percent risk of cirrhosis. Curing the virus without touching weight and sugar leaves the second engine running.",
+      "tx": "**Alcohol** and metabolic **steatosis** multiply the pace of hepatitis C fibrosis, and diabetes adds about **40** percent extra cirrhosis risk. Curing the virus without touching weight and sugar leaves the second engine running, so clinics now pair antiviral therapy with metabolic review. Fibrosis regression follows viral clearance slowly over years, not weeks. Elastography therefore needs repeating at yearly intervals after cure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Alcohol doubles fibrosis speed",
+            "Steatosis adds metabolic injury",
+            "Review weight and sugars"
+          ],
+          "title": "Cofactors that accelerate"
+        },
+        "right": {
+          "points": [
+            "Viral cure stops viral injury",
+            "Fibrosis regresses slowly",
+            "Cancer risk persists in cirrhosis"
+          ],
+          "title": "After cure reality"
+        }
+      }
+    },
+    {
+      "say": "Reinfection follows cure in those with ongoing blood exposure. Ribonucleic acid retesting yearly protects the high risk group. Harm reduction and sterile injecting advice belong in every clinic visit, since a second course costs the same as the first.",
+      "tx": "**Reinfection** follows cure in those with ongoing blood exposure, and yearly ribonucleic acid retesting protects the high risk group. Harm reduction, sterile injecting advice and partner testing belong in every clinic visit, since a second course costs the same as the first. Spontaneous clearance after reinfection is common, yet chronicity still threatens. Counselling must cover this loop explicitly after sustained response.",
+      "vis": {
+        "edges": [
+          [
+            "cure",
+            "counsel"
+          ],
+          [
+            "counsel",
+            "retest"
+          ],
+          [
+            "retest",
+            "retreat"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cure",
+            "label": "Sustained response"
+          },
+          {
+            "id": "counsel",
+            "label": "Harm reduction talk"
+          },
+          {
+            "id": "retest",
+            "label": "Yearly ribonucleic acid"
+          },
+          {
+            "id": "retreat",
+            "label": "Second course if positive"
+          }
+        ]
+      }
+    },
+    {
+      "say": "De novo hepatitis C after transplant runs a fulminant course with cholestasis and rapid fibrosis. Pre transplant viral clearance is ideal, though post transplant therapy rescues most cases. The transplant team now treats rather than waits for graft failure.",
+      "tx": "**De novo hepatitis C** after transplant runs a fulminant course with cholestasis and rapid fibrosis, while pre transplant viral clearance is ideal. Post transplant direct antiviral therapy rescues most recurrent cases, so waiting for graft failure is obsolete. Timing follows engraftment and co morbidities, with ribavirin dose adjusted for renal function. Early biopsy separates rejection from recurrent viral injury.",
+      "vis": {
+        "cols": [
+          "Setting",
+          "Course",
+          "Move"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Active viraemia at transplant",
+            "Rapid fibrosis",
+            "Treat after engraftment"
+          ],
+          [
+            "Cleared before transplant",
+            "Protects graft",
+            "Continue surveillance"
+          ],
+          [
+            "Fibrosing cholestatic pattern",
+            "Fulminant course",
+            "Urgent antiviral therapy"
+          ],
+          [
+            "Rejection mimic",
+            "Similar histology",
+            "Biopsy decides"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Antibody positivity alone never starts treatment without ribonucleic acid proof. Genotype testing nowhere guards the first course. Cryoglobulinaemia points to hepatitis C before the liver complains. Three traps are covering most stem distractors.",
+      "tx": "Three traps dominate exam stems on hepatitis C. **Antibody positivity** alone never starts treatment without ribonucleic acid proof, because resolved exposure stays antibody positive for life. **Genotype testing** nowhere guards the first course under pan genotypic guidance. **Cryoglobulinaemia** with purpura and kidney disease points to hepatitis C before the liver complains. Keeping these three straight kills most distractors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Antibody positive, ribonucleic acid negative: resolved",
+            "Antibody positive, ribonucleic acid positive: active",
+            "Retest ribonucleic acid, not antibody"
+          ],
+          "title": "Antibody trap"
+        },
+        "right": {
+          "points": [
+            "First course: no genotype needed",
+            "Failure: resistance testing first",
+            "Cryoglobulinaemia: biopsy plus antiviral"
+          ],
+          "title": "Genotype and systemic trap"
+        }
+      }
+    },
+    {
+      "say": "The numbers that recur are twelve weeks of therapy, above ninety five percent cure, twelve weeks to sustained response, and fifty five to eighty five percent spontaneous clearance. Fibrosis stage is gating surveillance, while ribonucleic acid is gating therapy. One table carries the whole exam load.",
+      "tx": "Recurring numbers carry the exam load: **12** weeks of therapy, above **95** percent cure, **12** weeks to sustained response, and **55** to **85** percent spontaneous clearance. **Fibrosis** stage gates surveillance, while ribonucleic acid gates therapy. Decompensated disease adds ribavirin under renal caution. Pan genotypic cover removed genotype testing for the first course across current guidelines.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Regimen duration",
+            "12 weeks",
+            "Sofosbuvir velpatasvir"
+          ],
+          [
+            "Cure rate",
+            "Above 95 percent",
+            "Pan genotypic"
+          ],
+          [
+            "Sustained response timing",
+            "12 weeks after stop",
+            "Undetectable ribonucleic acid"
+          ],
+          [
+            "Spontaneous clearance",
+            "55 to 85 percent",
+            "Versus hepatitis B"
+          ],
+          [
+            "Cirrhosis doubling",
+            "Diabetes adds 40 percent",
+            "Pair metabolic review"
+          ],
+          [
+            "Renal caution threshold",
+            "Below 30 filtration",
+            "Adjust sofosbuvir"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-hepatitis-c",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, viral hepatitis chapters",
+    "EASL Recommendations on hepatitis C treatment 2024"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Hepatitis C: antibody versus active disease and cure rules",
+  "v": 1
+}

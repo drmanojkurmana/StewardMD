@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "shp-portal-hypertension-varices",
+ "subject": "ss-hepatology",
+ "title": "Portal hypertension and variceal bleeding: pressure cutoffs, bands and shunts",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Portal hypertension)",
+  "EASL Clinical Practice Guidelines on Decompensated Cirrhosis 2018",
+  "Baveno VII Portal Hypertension Consensus 2022"
+ ],
+ "steps": [
+  {
+   "tx": "**Portal hypertension** begins at a **hepatic venous pressure gradient (HVPG)** above **5** mmHg, where collaterals open and decompensation starts looming. Clinically significant disease, at **10** mmHg or more, carries substantial risk of variceal bleeding, ascites and **hepatic encephalopathy**. Beyond **12** mmHg varices bleed, and each bleed kills **20** to **30** percent of patients. Near **95** percent of portal hypertension traces to cirrhosis.",
+   "say": "Portal pressure above five millimeters of mercury forms collaterals, while ten marks clinically significant disease. Varix rupture becomes likely beyond twelve, and each bleed still kills roughly a quarter of patients. Cirrhosis accounts for nearly all cases seen in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": ["HVPG", "Meaning", "Risk"],
+    "rows": [
+     ["Above 5", "Portal hypertension", "Collaterals open"],
+     ["10 or more", "Clinically significant", "Decompensation looms"],
+     ["Above 12", "Bleeding range", "Varices rupture"],
+     ["Above 20", "High risk", "Pre-emptive shunt"]
+    ]
+   }
+  },
+  {
+   "tx": "Two processes raise pressure together: fibrosis and nodules increase **intrahepatic resistance**, while splanchnic vasodilation increases **portal inflow**. Falls in intrahepatic **nitric oxide** constrict sinusoids further, and systemic nitric oxide, **vascular endothelial growth factor (VEGF)** and **tumour necrosis factor (TNF)** dilate the gut circulation. Sodium and water retention then expand blood volume in a **hyperdynamic circulation**.",
+   "say": "Resisting liver tissue and flooding gut inflow combine to push pressure upward. Nitric oxide shifts toward the gut while abandoning the liver circulation, which worsens both sides. Retained salt and water expand the volume that the system must handle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "resistance", "label": "Intrahepatic resistance rises"},
+     {"id": "inflow", "label": "Splanchnic inflow rises"},
+     {"id": "collateral", "label": "Portosystemic collaterals"},
+     {"id": "vari", "label": "Varices form"}
+    ],
+    "edges": [["resistance", "collateral"], ["inflow", "collateral"], ["collateral", "vari"]]
+   }
+  },
+  {
+   "tx": "Prehepatic portal or splenic vein thrombosis and posthepatic **Budd-Chiari** or right heart congestion complete the map, with cirrhosis dominating. **Glasgow-Blatchford score** from **0** to **23** triages upper gastrointestinal bleeding, with **0** to **1** identifying very low risk patients for outpatient care. High risk stigmata such as **red wale signs** and cherry red spots mark varix size and bleeding odds.",
+   "say": "Vein thrombosis and cardiac congestion form the anatomical map beyond cirrhosis. The Glasgow Blatchford score separates bleeders into safe outpatient and urgent admission groups. Endoscopic stigmata refine the risk for the next bleed.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Site", "Example", "Direction"],
+    "rows": [
+     ["Prehepatic", "Vein thrombosis", "Before liver"],
+     ["Hepatic", "Cirrhosis", "Within liver"],
+     ["Posthepatic", "Budd-Chiari", "Beyond liver"],
+     ["Cardiac", "Right heart failure", "Back pressure"]
+    ]
+   }
+  },
+  {
+   "tx": "Varices decompress pressure through the **left gastric vein** into dilated submucosal veins, which is why thin walled oesophageal veins burst under portal pressure. **Gastric varices** inside the stomach or extending proximally often dodge bands and need tissue adhesive, **transjugular intrahepatic portosystemic shunt (TIPS)** or **balloon-occluded retrograde transvenous obliteration (BRTO)**. Placement decides therapy, not the label alone.",
+   "say": "Decompression runs backward through the left gastric vein into fragile submucosal veins. Gastric varices sitting inside the stomach often escape band ligation entirely. Site, not just size, decides whether bands, glue or shunts treat the lesion.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Oesophageal", "points": ["Bands work well", "EVL first choice", "Repeat to eradicate", "Surveillance endoscopy"]},
+    "right": {"title": "Gastric", "points": ["Bands often fail", "Glue or shunt", "BRTO option", "Site specific plan"]}
+   }
+  },
+  {
+   "tx": "Suspected **variceal bleeding** starts a vasoactive drug, **terlipressin**, **octreotide** or **somatostatin**, with **ceftriaxone** immediately, restrictive transfusion targeting haemoglobin **7** to **8**, and band ligation within **12** hours. **Pre-emptive TIPS** within **72** hours, ideally within **24**, suits high risk patients with Child-Pugh C below **14**, Child-Pugh B above **7** with active bleeding, or **HVPG** above **20**. Rescue balloons hold the line when endoscopy fails.",
+   "say": "Vasoactive drugs, antibiotics, restrictive transfusion and urgent bands start together in the first hours. High risk patients need pre-emptive shunts within a day or two. Balloon tamponade buys time when bands cannot control the bleed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "vaso", "label": "Terlipressin plus ceftriaxone"},
+     {"id": "band", "label": "Bands within 12 hours"},
+     {"id": "high", "label": "High risk? HVPG above 20"},
+     {"id": "tips", "label": "Pre-emptive TIPS"}
+    ],
+    "edges": [["vaso", "band"], ["band", "high"], ["high", "tips"]]
+   }
+  },
+  {
+   "tx": "After the bleed, secondary prophylaxis pairs a **beta blocker** with **endoscopic variceal ligation (EVL)** until eradication, then surveillance endoscopy, since bleeding recurs in most patients without definitive therapy. Lower **systolic blood pressure** below **90**, **mean arterial pressure (MAP)** below **65**, or kidney injury means reducing the beta blocker. **Carvedilol** gains favour as a nonselective blocker with additional alpha blockade in many centres.",
+   "say": "Band eradication plus beta blockade protects against the next bleed, which otherwise arrives in most patients. Low blood pressure or kidney injury forces beta blocker reduction or stopping. Carvedilol serves well through extra alpha blockade.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regimen", "Target", "Monitor"],
+    "rows": [
+     ["Beta blocker", "Reduce portal flow", "BP, kidney function"],
+     ["EVL series", "Eradicate varices", "Surveillance scope"],
+     ["Carvedilol", "Alpha plus beta", "Dizziness, BP"],
+     ["Hold if ill", "Hypotension, AKI", "Restart when well"]
+    ]
+   }
+  },
+  {
+   "tx": "TIPS creates a covered intrahepatic shunt that decompresses the portal system and controls refractory bleeding and ascites. Active bleeding with Child-Pugh B **8** to **9** at endoscopy or Child-Pugh C **10** to **13** favours early shunting, with transfer to a TIPS centre when unavailable locally. Watch for **shunt encephalopathy**, since diverting portal blood around the liver floods the brain with ammonia.",
+   "say": "Shunts decompress the portal circuit from inside the liver, rescuing refractory bleeding and ascites. Early shunting clearly suits high risk bleeders, but the diverted blood invites encephalopathy afterwards. Transfer decisions rest with the shunt centre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "bleed", "label": "Refractory bleeding"},
+     {"id": "tips", "label": "Covered TIPS placed"},
+     {"id": "pressure", "label": "Pressure decompressed"},
+     {"id": "encephalopathy", "label": "Watch ammonia brain"}
+    ],
+    "edges": [["bleed", "tips"], ["tips", "pressure"], ["pressure", "encephalopathy"]]
+   }
+  },
+  {
+   "tx": "Screening and primary prevention complete the picture. Once cirrhosis declares itself, **upper endoscopy** grades varices and starts prevention in large or high risk lesions. Elastography and pressure measurement refine risk between bleeds, while **nonselective beta blockers** prevent a first bleed in high risk varices. Hepatocellular carcinoma surveillance runs alongside, since the same cirrhotic liver breeds tumours.",
+   "say": "Screening endoscopy after cirrhosis diagnosis finds large varices before they ever bleed. Beta blockade prevents a first bleed in the highest risk scars. Liver cancer surveillance runs alongside portal pressure care.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Task", "Test", "Interval"],
+    "rows": [
+     ["Grade varices", "Endoscopy", "At diagnosis"],
+     ["Prevent first bleed", "Beta blocker", "High risk only"],
+     ["Refine risk", "Elastography", "Periodically"],
+     ["Watch cancer", "Ultrasound", "Every 6 months"]
+    ]
+   }
+  },
+  {
+   "tx": "Prognosis hinges on decompensation and the bleed itself. Once varices bleed, median survival falls below **2** years, and outcomes lag behind other gastrointestinal bleed sources. **Child-Pugh class** and **MELD score** stratify bleeding and decompensation risk at every stage. Prophylactic antibiotics, vasoactive drugs and restrictive transfusion each independently cut mortality when started early.",
+   "say": "A first bleed turns compensated cirrhosis into short horizon disease with median survival under two years. Child Pugh class and MELD score stratify every conversation that follows. Early antibiotics, vasoactive drugs and careful transfusion each reduce deaths.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Marker", "Guides", "Danger"],
+    "rows": [
+     ["Child-Pugh", "Bleed risk", "Class C worst"],
+     ["MELD", "Short term death", "High scores list"],
+     ["HVPG", "Bleed threshold", "Above 12 bleeds"],
+     ["Bleed itself", "Survival clock", "Below 2 years"]
+    ]
+   }
+  },
+  {
+   "tx": "Traps cluster around anatomy and timing. Banding gastric varices **wastes** the procedure, while delaying vasoactive drugs or antibiotics lets mortality **climb**, and transfusing to a normal haemoglobin worsens portal pressure. Skipping **EVL** after the bleed invites recurrence, and missing pre-emptive shunt eligibility leaves high risk patients unaided. Confirm the varix site before choosing the instrument.",
+   "say": "Anatomy decides the instrument, and the clock decides the drugs. Overtransfusion rebuilds the very pressure that caused the bleed. Skipping shunt assessment costs high risk patients their best protection.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Wrong move", "points": ["Bands on gastric varices", "Late vasoactive drugs", "Overtransfusion", "No EVL followup"]},
+    "right": {"title": "Right move", "points": ["Glue or shunt for gastric", "Drugs at suspicion", "Haemoglobin 7 to 8", "Eradicate then prevent"]}
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: **HVPG** above **5** defines hypertension, **10** clinically significant, **12** bleeding risk and **20** shunt trigger. Bands work within **12** hours with **terlipressin** or **octreotide** plus **ceftriaxone**, transfusion targets haemoglobin **7** to **8**, pre-emptive TIPS lands within **72** hours, and each bleed carries **20** to **30** percent mortality.",
+   "say": "The HVPG cutoffs, the twelve hour band window and the seven to eight haemoglobin target form the core. Pre-emptive shunts within seventy two hours help high risk bleeders. Secondary prevention starts with bands plus beta blockade until eradication.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["HVPG hypertension", "Above 5"],
+     ["Clinically significant", "10 or more"],
+     ["Bleeding risk", "Above 12"],
+     ["Shunt trigger", "Above 20"],
+     ["Band window", "Within 12 hours"],
+     ["Transfusion target", "Haemoglobin 7 to 8"],
+     ["TIPS window", "Within 72 hours"],
+     ["Bleed mortality", "20 to 30 percent"]
+    ]
+   }
+  }
+ ]
+}
