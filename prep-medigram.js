@@ -29,7 +29,7 @@
     if (e) { try { var k = "smd_prep_medigram_events", old = JSON.parse(lsGet(k) || "[]"); old.push(e); G.localStorage.setItem(k, JSON.stringify(old.slice(-100))); } catch (x) {} }
   }
   function subjName(sid) { try { var sb = H().subjectById(sid); return sb ? H().tx(sb.name) : ""; } catch (e) { return ""; } }
-  function firstSentence(t) { t = String(t || "").replace(/[​‌‍⁠﻿]/g, "").replace(/\s+/g, " ").trim(); var m = /^.*?[.!?](\s|$)/.exec(t); return (m ? m[0] : t).trim().slice(0, 260); }
+  function firstSentence(t) { t = String(t || "").replace(/\*\*|__/g, "").replace(/[​‌‍⁠﻿]/g, "").replace(/\s+/g, " ").trim(); var m = /^.*?[.!?](\s|$)/.exec(t); return (m ? m[0] : t).trim().slice(0, 260); }
   function imgUrl(f) { var u = (H().bankApi || "/api/prep/bank/") + "img/maikimg/" + f; return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u; }
 
   /* ---------- content ---------- */
@@ -39,8 +39,15 @@
     return Promise.all(h.subjectsOf(ex).map(function (sb) { return h.loadIndex(sb.id).then(function (ix) { return { sid: sb.id, ix: ix }; }, function () { return null; }); })).then(function (xs) {
       var mods = [];
       xs.forEach(function (x) { if (x && x.ix && x.ix.topics) x.ix.topics.forEach(function (t) { if (t.group !== "mixed" && h.countFor(t, ex) > 0) mods.push({ s: x.sid, m: t.id }); }); });
-      return Promise.all(h.shuffle(mods).slice(0, k).map(function (x) { return h.loadModule(x.s, x.m).then(function (items) { return h.pool(h.poolFor(items, ex, null)).filter(function (it) { return it.q && it.o && it.o.length; }); }, function () { return []; }); }));
+      return Promise.all(h.shuffle(mods).slice(0, k).map(function (x) { return h.loadModule(x.s, x.m).then(function (items) { return h.pool(h.poolFor(items, ex, null)).filter(textOnly); }, function () { return []; }); }));
     }).then(function (lists) { var all = []; lists.forEach(function (l) { all = all.concat(l); }); return h.shuffle(all); });
+  }
+  // A reel card shows text only, so questions that need their figure are left out (same rule as the daily question in prep.js).
+  function textOnly(it) {
+    if (!it || !it.id || !it.q || !it.o || it.o.length < 2 || it.o.length > L.length || !(it.a >= 0 && it.a < it.o.length)) return false;
+    if ((it.img && it.img.length) || /\b(image|shown|figure|photograph|picture|x-?ray below|graph)\b/i.test(it.q)) return false;
+    try { if (G.PREP_RAD && G.PREP_RAD.figure(it, H())) return false; } catch (e) {}
+    return true;
   }
   function videos() {
     if (VIDS || !FLAGS.youtube || !MEDIA) return Promise.resolve(VIDS || []);
@@ -85,6 +92,7 @@
       if (S !== s0) return;
       S.loading = false;
       if (!cards.length && !S.cards.length) S.err = true;
+      if (more && !cards.length) { H().toast("You have seen every card for now. Come back later for more."); return render(S.cards.length); }
       S.cards = S.cards.concat(cards);
       render(more ? S.cards.length - cards.length : -1);
     }, function () { if (S !== s0) return; S.loading = false; if (!S.cards.length) S.err = true; else H().toast("More cards need a connection."); render(); });
@@ -218,7 +226,7 @@
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
     if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
     if (a === "mg-understand") {
-      if (c && G.PREP_ASK && G.PREP_ASK.open) { stopMedia(); try { G.PREP_ASK.open({ kind: "card", title: firstSentence(c.it.q).slice(0, 80), ask: "Explain this question and its answer in plain language with one analogy.", fr: c.it.q }, host); } catch (e) {} }
+      if (c && G.PREP_ASK && G.PREP_ASK.open) { stopMedia(); try { G.PREP_ASK.open({ kind: "card", title: firstSentence(c.it.q).slice(0, 80), ask: "Explain this question and its answer in plain language with one analogy.", fr: c.it.q + "\n" + c.it.o.map(function (o, k) { return L[k] + ". " + o; }).join("\n"), bk: "Answer: " + L[c.it.a] + ". " + c.it.o[c.it.a] + "\n" + String(c.it.exp || (c.it.x && c.it.x.key) || "") }, host); } catch (e) {} }
       emit("understand_requested", {}); return;
     }
     if (a === "mg-yt") { if (MEDIA) MEDIA.openExternal(v); return; }

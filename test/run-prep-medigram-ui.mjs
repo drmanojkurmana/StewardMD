@@ -31,6 +31,7 @@ const fixtureFor = (u) => {
   if (/imglearn/.test(u)) return { set: "eye", items: [{ img: "fx.webp", dx: "Fixture diagnosis", finding: "Fixture finding.", deck: "Eye" }, { img: "fx2.webp", dx: "Second diagnosis", deck: "Eye" }] };
   const mid = (u.match(/\/mcq\/([^/?]+)\.json/) || [, "fx"])[1], items = [];
   for (let i = 0; i < 30; i++) items.push({ id: mid + "-" + i, q: "Fixture question " + i + " on " + mid + "?", o: ["One", "Two", "Three", "Four"], a: 0, exp: "Fixture explanation " + i + ". More.", kp: i % 2 ? "Pearl " + i + " of " + mid : undefined, t: mid, d: 3, prov: "LIC" });
+  items.push({ id: mid + "-fig", q: "Identify the lesion shown in the image.", o: ["One", "Two", "Three", "Four"], a: 0, exp: "Needs its figure.", t: mid, d: 3, prov: "LIC" });
   return { topic: mid, items };
 };
 let msgId = 1; const pending = new Map(); let ws, sessionId; const errors = []; const reqs = [];
@@ -68,6 +69,7 @@ try {
   const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
   ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
+  ok(await ev(`return !/shown in the image/.test(document.querySelector('#pnMgFeed').textContent);`) === true, "questions that need a figure are left out");
   ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows, Skip or Next before an answer: one card per swipe");
   ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "nothing wider than the 390 px screen");
   const subj = await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-q .pn-eb').textContent;`);
