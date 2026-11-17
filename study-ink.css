@@ -47,3 +47,4 @@ body.dark .pn-root .st-ink-c::before { border-color: var(--st-toolrow-dark, #232
 @media (max-width: 560px) { .pn-root .st-ink-pop { top: 140px; left: 8px; } }
 /* Ink sits on the page like real ink: multiply keeps PDF text crisp and dark under highlighter (real-paper look). */
 .pn-root .st-pg canvas.st-ov, .pn-root .st-pg canvas.st-live { mix-blend-mode: multiply; }
+.pn-root .st-pg canvas.st-tile-ink { mix-blend-mode: multiply; }
