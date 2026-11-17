@@ -147,6 +147,10 @@ for (const dev of DEVICES) {
     console.log(`Saved ${tag}-search-results.png`);
     await page.fill("#st5aSearchQ", "");
     await page.waitForTimeout(200);
+    if (await page.locator('[data-act="st5a-tab"][data-v="documents"]').count()) {
+      await page.click('[data-act="st5a-tab"][data-v="documents"]');
+      await page.waitForSelector(".st-doc, .st5a-card", { timeout: 10000 });
+    }
 
     // 4. Backup status / screen
     if (await page.locator('[data-act="st5a-backup"]').count()) {

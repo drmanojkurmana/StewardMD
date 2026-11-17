@@ -604,6 +604,7 @@
     e.id = "stSheet"; e.className = "st-sheet"; e.setAttribute("role", "dialog"); e.setAttribute("aria-modal", "true");
     e.innerHTML = '<div class="st-sh smd-books-keep smd-emo-keep">' + html + '<div class="st-acts">' + (ok ? '<button type="button" class="pn-btn pri" data-act="st-sok" id="stSheetOk">' + label + "</button>" : "") +
       '<button type="button" class="pn-btn" data-act="st-scancel">' + (ok ? "Cancel" : "Close") + "</button></div></div>";
+    e.addEventListener("click", function (ev) { if (ev.target === e) closeSheet(); });
     root.appendChild(e);
   }
   function closeSheet() { var r = hostRoot(); if (!r) return; var e = r.querySelector("#stSheet"); if (e && e.parentNode) e.parentNode.removeChild(e); }

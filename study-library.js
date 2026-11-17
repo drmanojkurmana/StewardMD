@@ -519,8 +519,8 @@
         var title = esc(d.title || "Untitled");
         var isCur = tid === curId;
         html += '<div class="st-dt' + (isCur ? " on" : "") + '" role="tab" aria-selected="' + (isCur ? "true" : "false") + '">' +
-          '<button type="button" class="st-dt-open" data-act="st-dt-open" data-id="' + tid + '" aria-label="Open ' + esc(d.title || "") + '">' + title + '</button>' +
-          '<button type="button" class="st-dt-x" data-act="st-dt-close" data-id="' + tid + '" aria-label="Close ' + esc(d.title || "") + '">' + LIB_ICO.x + '</button>' +
+          '<button type="button" class="st-dt-open" data-act="st5a-dt-open" data-id="' + tid + '" aria-label="Open ' + esc(d.title || "") + '">' + title + '</button>' +
+          '<button type="button" class="st-dt-x" data-act="st5a-dt-close" data-id="' + tid + '" aria-label="Close ' + esc(d.title || "") + '">' + LIB_ICO.x + '</button>' +
         '</div>';
       });
       tabsEl.innerHTML = html;
@@ -1173,8 +1173,8 @@
     if (a === "st5a-crumb") { libState.currentFolderId = el.getAttribute("data-id") || null; return renderLibBody(); }
     if (a === "st5a-open-folder") { libState.currentFolderId = idOf(el); return renderLibBody(); }
     if (a === "st5a-open") { openDocById(idOf(el), parseInt(el.getAttribute("data-page"), 10) || null); return; }
-    if (a === "st5a-dt-open") { openDocById(idOf(el), null); return; }
-    if (a === "st5a-dt-close") { removeTab(idOf(el)); return; }
+    if (a === "st5a-dt-open" || a === "st-dt-open") { openDocById(idOf(el), null); return; }
+    if (a === "st5a-dt-close" || a === "st-dt-close") { removeTab(idOf(el)); return; }
     if (a === "st5a-fav") { closeSheet5a(); return idbGet("docs", idOf(el)).then(function (d) { if (!d) return; d.favourite = !d.favourite; return idbPut("docs", d); }).then(renderLibBody); }
     if (a === "st5a-fav-folder") { closeSheet5a(); return idbGet("folders", idOf(el)).then(function (f) { if (!f) return; f.favourite = !f.favourite; return idbPut("folders", f); }).then(renderLibBody); }
     if (a === "st5a-doc-menu") return showDocMenu5a(idOf(el));
@@ -1337,7 +1337,7 @@
   /* self-delegation: prep.js only forwards data-act starting "st-"; st5a- needs its own listener */
   if (D && D.addEventListener) {
     D.addEventListener("click", function (e) {
-      var t = e.target && e.target.closest ? e.target.closest("[data-act^='st5a-']") : null;
+      var t = e.target && e.target.closest ? e.target.closest("[data-act^='st5a-'], [data-act='st-dt-open'], [data-act='st-dt-close']") : null;
       if (!t) return;
       var a = t.getAttribute("data-act");
       var h = getHost(); if (!h) return;
@@ -1358,7 +1358,7 @@
     };
     S.act = function (a, el, h) {
       host = h;
-      if (a.indexOf("st5a-") === 0) return libAct5a(a, el, h);
+      if (a.indexOf("st5a-") === 0 || a === "st-dt-open" || a === "st-dt-close") return libAct5a(a, el, h);
       // opening a document through the old actions also tracks tabs + injects the tab bar
       if (a === "st-open" || a === "st-hit" || a === "st-src" || a === "st-mknb" || a === "st5a-mknb") {
         captureCurrentTab();
