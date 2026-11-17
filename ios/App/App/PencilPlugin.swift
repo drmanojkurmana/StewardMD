@@ -62,7 +62,7 @@ public class PencilPlugin: CAPPlugin, CAPBridgedPlugin, UIPencilInteractionDeleg
         notifyListeners("pencilTap", data: ["action": "squeeze"])
     }
 
-    private static func actionString(_ action: UIPencilInteraction.TapAction) -> String {
+    private static func actionString(_ action: UIPencilPreferredAction) -> String {
         switch action {
         case .switchEraser:
             return "switchEraser"
