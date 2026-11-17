@@ -1,0 +1,362 @@
+{
+ "v": 1,
+ "module": "sne-chronic-fungal-other-infections",
+ "title": "Chronic, fungal and other CNS infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Chronic CNS infection** means inflammation that declares itself over months or years, unlike abrupt bacterial meningitis. **Tabes dorsalis** is a late tertiary form of neurosyphilis from **Treponema pallidum** that appears years after untreated infection. **Subacute sclerosing panencephalitis** is a fatal encephalitis from persistent defective **measles virus** that surfaces years after early measles. Both demand treponemal or measles testing, plus **HIV** testing because coinfection alters the course.",
+   "say": "Chronic CNS infection is inflammation that declares itself over months or years, unlike abrupt bacterial meningitis. Tabes dorsalis is a late tertiary form of neurosyphilis from Treponema pallidum that appears years after untreated infection. Subacute sclerosing panencephalitis is a fatal encephalitis from persistent defective measles virus that surfaces years after early measles. Both demand treponemal or measles testing, plus HIV testing because coinfection is a factor that alters the course.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Points to",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Slow decline over years with jerks",
+      "SSPE after early measles",
+      "Periodic complexes on EEG"
+     ],
+     [
+      "Sensory ataxia with lightning pains",
+      "Tabes dorsalis",
+      "Treponemal serology"
+     ],
+     [
+      "Pupil accommodating without light reaction",
+      "Argyll Robertson pupil",
+      "Neurosyphilis sign"
+     ],
+     [
+      "Mimic with dorsal column loss",
+      "Vitamin deficiency",
+      "Serology separates them"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Untreated syphilis** is the soil of tabes dorsalis, with degeneration of dorsal columns and roots years later, while **HIV coinfection** accelerates and complicates neurosyphilis. **Measles in infancy** without **immunisation** is the soil of SSPE, with a latent interval often **6 to 10 years**. Undertreated populations carry the highest burden. A history of missed measles vaccine or missed syphilis treatment is therefore the key question.",
+   "say": "Untreated syphilis is the soil of tabes dorsalis, with degeneration of dorsal columns and roots years later, while HIV coinfection accelerates and complicates neurosyphilis. Measles in infancy without immunisation is the soil of SSPE, with a latent interval often six to ten years. Undertreated populations carry the highest burden. A history of missed measles vaccine or missed syphilis treatment is therefore the key question.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk setting",
+     "Infection to expect"
+    ],
+    "rows": [
+     [
+      "Untreated syphilis",
+      "Tabes dorsalis years later"
+     ],
+     [
+      "HIV coinfection",
+      "Accelerated neurosyphilis"
+     ],
+     [
+      "Infancy measles without vaccine",
+      "SSPE after 6 to 10 years"
+     ],
+     [
+      "Missed treatment",
+      "Preventable burden"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dorsal column** and dorsal root degeneration is the engine of tabes, destroying proprioception and vibration sense while dorsal root injury generates lancinating pains. **Defective measles virus** persists inside neurons and glia, spreading cell to cell without forming complete particles. Perivascular inflammation, **gliosis** and **demyelination** advance relentlessly, with viral **inclusions** in neurons and oligodendrocytes. Grey and white matter destruction together explains the term **panencephalitis**.",
+   "say": "Dorsal column and dorsal root degeneration is the engine of tabes, destroying proprioception and vibration sense while dorsal root injury generates lancinating pains. Defective measles virus persists inside neurons and glia, spreading cell to cell without forming complete particles. Perivascular inflammation, gliosis and demyelination are advancing relentlessly, with viral inclusions deposited in neurons and oligodendrocytes. Grey and white matter destruction together is the reason behind the term panencephalitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Treponemal invasion of dorsal columns"
+     },
+     {
+      "id": "b",
+      "label": "Proprioception and vibration lost"
+     },
+     {
+      "id": "c",
+      "label": "Defective measles persists in glia"
+     },
+     {
+      "id": "d",
+      "label": "Inflammation with gliosis and demyelination"
+     },
+     {
+      "id": "e",
+      "label": "Ataxia, pain, then regression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sensory ataxia** with a broad stamping gait, positive **Romberg sign** and absent deep tendon reflexes marks dorsal column loss. **Lightning pains** stab the limbs or trunk in lancinating paroxysms. The **Argyll Robertson pupil** accommodates but fails to react to light. Painless **Charcot joints** and trophic ulcers follow lost protective sense, while visceral crises with sudden abdominal pain and bladder dysfunction demand urgent exclusion of other pathology.",
+   "say": "Sensory ataxia with a broad stamping gait, positive Romberg sign and absent deep tendon reflexes marks dorsal column loss. Lightning pains stab the limbs or trunk in lancinating paroxysms. The Argyll Robertson pupil accommodates but fails to react to light. Painless Charcot joints and trophic ulcers follow lost protective sense, while visceral crises with sudden abdominal pain and bladder dysfunction demand urgent exclusion of other pathology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tabes dorsalis",
+     "points": [
+      "Stamping sensory ataxia with Romberg sign",
+      "Absent reflexes with lost vibration sense",
+      "Lightning pains in limbs or trunk",
+      "Argyll Robertson pupil"
+     ]
+    },
+    "right": {
+     "title": "SSPE early stage",
+     "points": [
+      "Subtle cognitive and behavioural decline",
+      "Falling school performance",
+      "No focal ataxia at first",
+      "Measles history in infancy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**SSPE evolves** through recognisable stages, opening with falling school grades plus early shifts in thinking and behaviour. The next phase brings typical periodic myoclonic jerks, then advancing dementia with spasticity and rigidity toward a vegetative state. The **electroencephalogram** produces periodic complexes that coincide with the jerks. Most patients die within a few years, though an occasional prolonged or fluctuating course is recorded.",
+   "say": "SSPE evolves through recognisable stages, opening with falling school grades plus early shifts in thinking and behaviour. The next phase brings typical periodic myoclonic jerks, then advancing dementia with spasticity and rigidity toward a vegetative state. The electroencephalogram produces periodic complexes that coincide with the jerks. Most patients die within a few years, though an occasional prolonged or fluctuating course is recorded.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Features",
+     "Bedside clue"
+    ],
+    "rows": [
+     [
+      "Early",
+      "Cognitive and behavioural decline",
+      "School failure"
+     ],
+     [
+      "Middle",
+      "Periodic myoclonic jerks",
+      "Complexes coincide with jerks"
+     ],
+     [
+      "Late",
+      "Dementia, rigidity, vegetative state",
+      "Aspiration and airway risk"
+     ],
+     [
+      "Course",
+      "Fatal within a few years",
+      "Vaccine prevents it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Treponemal serology** with TPPA plus RPR or VDRL opens the workup, with **CSF VDRL**, cell count and protein confirming neurosyphilis. **HIV testing** is mandatory because coinfection alters the natural history. **Spine MRI** demonstrates posterior column change, excluding compressive myelopathy. For SSPE, **EEG** seeks periodic complexes synchronous with myoclonus, while **CSF measles antibody** with paired serum and **oligoclonal bands** proves intrathecal synthesis.",
+   "say": "Treponemal serology with TPPA plus RPR or VDRL opens the workup, with CSF VDRL, cell count and protein confirming neurosyphilis. HIV testing is mandatory because coinfection alters the natural history. Spine MRI is demonstrating posterior column change, excluding compressive myelopathy. For SSPE, EEG shows periodic complexes synchronous with myoclonus, while CSF measles antibody with paired serum and oligoclonal bands shows intrathecal synthesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Serum treponemal serology with HIV test"
+     },
+     {
+      "id": "b",
+      "label": "CSF VDRL with cells and protein"
+     },
+     {
+      "id": "c",
+      "label": "Spine MRI for posterior columns"
+     },
+     {
+      "id": "d",
+      "label": "EEG with CSF measles antibody"
+     },
+     {
+      "id": "e",
+      "label": "Treatment or supportive care pathway"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tabes demands parenteral **penicillin** in a neurosyphilis regimen with intravenous aqueous crystalline **penicillin** as the specific therapy, and **penicillin** desensitisation is required when allergy exists. Lightning pains respond to **carbamazepine**, while SSPE myoclonus and seizures need **clonazepam** or **valproate**. **Interferon** with **isoprinosine** has limited benefit and no cure exists for SSPE. Physiotherapy with walking aids plus protective foot care completes rehabilitation.",
+   "say": "Tabes demands parenteral penicillin in a neurosyphilis regimen with intravenous aqueous crystalline penicillin as the specific therapy, and penicillin desensitisation is required when allergy exists. Lightning pains respond to carbamazepine, while SSPE myoclonus and seizures need clonazepam or valproate. Interferon with isoprinosine has limited benefit and no cure exists for SSPE. Physiotherapy with walking aids plus protective foot care is completing rehabilitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Regimen",
+     "Key detail"
+    ],
+    "rows": [
+     [
+      "Neurosyphilis with tabes",
+      "Parenteral penicillin in neurosyphilis regimen",
+      "Desensitisation when allergic"
+     ],
+     [
+      "Lightning pains",
+      "Carbamazepine",
+      "Anticonvulsant control"
+     ],
+     [
+      "SSPE myoclonus and seizures",
+      "Clonazepam or valproate",
+      "Symptomatic control"
+     ],
+     [
+      "SSPE disease course",
+      "Interferon with isoprinosine",
+      "Limited benefit, vaccine prevents"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "SSPE care is largely **supportive and palliative**, with antispasticity measures and physiotherapy, nutritional support and aspiration prevention moving to enteral feeding as swallowing fails. Tabes needs follow-up **CSF examination** and serial serology to confirm response, plus partner notification and ophthalmology review. Never dismiss early behavioural decline as psychological, never rely on serum measles antibody alone, and never overlook **HIV** coinfection.",
+   "say": "SSPE care is largely supportive and palliative, with antispasticity measures and physiotherapy, nutritional support and aspiration prevention moving to enteral feeding as swallowing fails. Tabes needs follow-up CSF examination and serial serology to confirm response, plus partner notification and ophthalmology review. Never dismiss early behavioural decline as psychological, never rely on serum measles antibody alone, and HIV coinfection is never overlooked.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do",
+     "points": [
+      "Confirm intrathecal measles antibody synthesis",
+      "Arrange palliative and family support",
+      "Give enteral feeding as swallowing fails"
+     ]
+    },
+    "right": {
+     "title": "Avoid",
+     "points": [
+      "Dismissing early decline as psychological",
+      "Relying on serum antibody alone",
+      "Missing HIV coinfection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Antibiotics halt tabes progression yet established dorsal column damage often persists, leaving residual ataxia, pains and pupillary signs. SSPE is relentlessly progressive and **fatal**, most dying within a few years with only rare prolonged courses. Red flags demanding escalation are visceral crisis, Charcot destruction, loss of safe swallowing, rapid deterioration, intractable seizures and autonomic instability. Earlier treatment of syphilis gives better outcomes.",
+   "say": "Antibiotics halt tabes progression yet established dorsal column damage often persists, leaving residual ataxia, pains and pupillary signs. SSPE is relentlessly progressive and fatal, most dying within a few years with only rare prolonged courses. Red flags demanding escalation are visceral crisis, Charcot destruction, loss of safe swallowing, rapid deterioration, intractable seizures and autonomic instability. Earlier treatment of syphilis gives better outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Course",
+     "Features",
+     "Outlook"
+    ],
+    "rows": [
+     [
+      "Treated tabes",
+      "Halted progression with residual deficits",
+      "Rehabilitation and foot care"
+     ],
+     [
+      "SSPE typical",
+      "Fatal within a few years",
+      "Palliative focus"
+     ],
+     [
+      "SSPE red flags",
+      "Lost swallow, rapid decline, seizures",
+      "Escalate support urgently"
+     ],
+     [
+      "Prevention",
+      "Measles immunisation",
+      "Key public measure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** tabes dorsalis means untreated syphilis with sensory ataxia, lightning pains and Argyll Robertson pupil; SSPE means infancy measles with decline then myoclonus after 6 to 10 years; CSF VDRL confirms neurosyphilis and CSF measles antibody confirms SSPE; **penicillin** halts tabes, **carbamazepine** calms lightning pains, and **clonazepam** with **valproate** steadies myoclonus.",
+   "say": "High yield for the exam: tabes dorsalis is untreated syphilis with sensory ataxia, lightning pains and Argyll Robertson pupil. SSPE is infancy measles with decline then myoclonus after six to ten years. CSF VDRL is the test that confirms neurosyphilis and CSF measles antibody is the test that confirms SSPE. Penicillin is the drug that halts tabes, carbamazepine is the drug that calms lightning pains, and clonazepam with valproate is the therapy that steadies myoclonus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Course over years with jerks",
+      "SSPE after infancy measles"
+     ],
+     [
+      "Ataxia with lightning pains",
+      "Tabes dorsalis"
+     ],
+     [
+      "Pupil accommodating without light reaction",
+      "Argyll Robertson pupil"
+     ],
+     [
+      "Serum and CSF treponemal tests",
+      "TPPA with RPR or VDRL"
+     ],
+     [
+      "Periodic complexes with jerks",
+      "EEG in SSPE"
+     ],
+     [
+      "Intrathecal synthesis proof",
+      "CSF measles antibody"
+     ],
+     [
+      "Lightning pain control",
+      "Carbamazepine"
+     ],
+     [
+      "Myoclonus control",
+      "Clonazepam or valproate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
