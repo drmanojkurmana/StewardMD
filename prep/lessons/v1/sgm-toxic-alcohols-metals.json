@@ -1,0 +1,102 @@
+{
+  "v": 1,
+  "module": "sgm-toxic-alcohols-metals",
+  "subject": "ss-general-medicine",
+  "title": "Toxic alcohols, heavy metals and toxic gases",
+  "minutes": 11,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Methanol** and **ethylene glycol** are toxic alcohols metabolised to formic acid and glycolic acid causing high anion gap acidosis, while **lead**, arsenic, mercury and **thallium** are heavy metals accumulating in bone and kidney. Carbon monoxide, hydrogen **sulphide** and cyanide displace oxygen from **haemoglobin** or cytochrome oxidase. Blindness from thirty mL methanol, renal failure from 100 mL ethylene glycol, and **cherry red** skin from carbon monoxide are classic 3 poisonings.",
+      "say": "Methanol and ethylene glycol cause high anion gap acidosis through toxic acid metabolites, while lead and arsenic accumulate in bone and kidney. Carbon monoxide displaces oxygen from haemoglobin, and cyanide blocks cellular oxygen use. Blindness, kidney failure and cherry red skin are classic clues.",
+      "vis": null
+    },
+    {
+      "tx": "Risk factors include **moonshine** alcohol with five to 10 percent methanol, occupational antifreeze handling, suicidal **antifreeze** ingestion, and children swallowing **kerosene** like liquids. **Cooking coal** and faulty **heaters** cause carbon monoxide deaths in winter with 10 percent mortality, while **burning plastics** releases cyanide in five percent of fires. **Lead** exposure rises with battery work, **arsenic** with tube wells above 10 ug per L, and **mercury** with fishing and mining.",
+      "say": "Moonshine alcohol, antifreeze ingestion, faulty heaters and plastic fires cause most toxic alcohol and gas poisonings. Battery work, arsenic tube wells and mining expose workers to lead, arsenic and mercury. Children take household liquids accidentally in many cases.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Agent", "Tissue target", "Classic clue"],
+        "rows": [
+          ["Methanol", "Optic nerve", "Blindness and acidosis"],
+          ["Ethylene glycol", "Kidney", "Oxalate crystals"],
+          ["Lead", "Blood and nerves", "Burton line and anaemia"],
+          ["Arsenic", "Skin and gut", "Rain drop pigmentation"],
+          ["Carbon monoxide", "Haemoglobin", "Cherry red skin"]
+        ]
+      }
+    },
+    {
+      "tx": "Methanol is oxidised by alcohol dehydrogenase to a toxic intermediate then **formic acid** injuring optic nerve, while ethylene glycol forms glycolic and **oxalic acid** precipitating calcium oxalate in kidneys. Lead inhibits **delta haem synthesis enzyme** causing anaemia, **cyanide** inhibits cytochrome oxidase blocking **aerobic** respiration, and carbon monoxide binds **haemoglobin** 200 times tighter than oxygen. **Thallium** blocks potassium channels causing **alopecia** within fourteen days.",
+      "say": "Methanol forms formic acid that injures the optic nerve, while ethylene glycol forms oxalic acid crystals in the kidneys. Lead blocks haem synthesis, cyanide blocks oxygen use in cells, and carbon monoxide binds haemoglobin two hundred times tighter than oxygen. Thallium causes painful neuropathy with hair loss.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "absorb", "label": "Absorption and metabolism" },
+          { "id": "acid", "label": "Acid and enzyme block" },
+          { "id": "organ", "label": "Organ injury" },
+          { "id": "dialysis", "label": "Dialysis and chelation" }
+        ],
+        "edges": [["absorb", "acid"], ["acid", "organ"], ["organ", "dialysis"]]
+      }
+    },
+    {
+      "tx": "Methanol causes **visual blurring** like snowfield with hyperaemia of disc in 50 percent, ethylene glycol causes flank pain with **calcium oxalate** crystals in urine, lead causes **Burton line** on gums with wrist drop, arsenic causes **rain drop** pigmentation with **Mees lines**, and carbon monoxide causes headache, confusion and **cherry red** skin. **Hydrogen sulphide** causes rotten egg odour with olfactory fatigue, while **cyanide** causes lactic acidosis above 10 mmol per L with **bitter almond** odour.",
+      "say": "Methanol blurs vision like a snowfield, ethylene glycol causes oxalate crystals in urine, and lead causes gum lines with wrist drop. Arsenic causes rain drop pigmentation, while carbon monoxide causes headache and cherry red skin. Cyanide causes severe lactic acidosis with bitter almond odour.",
+      "vis": null
+    },
+    {
+      "tx": "**First test** is arterial blood gas with anion gap, osmolar gap, and bedside **visual acuity** for toxic alcohols, while **gold standard** is gas chromatography **blood level** for methanol and ethylene glycol. **Lead** level above 10 ug per dL with **basophilic stippling** guides chelation, **arsenic** above 50 ug per L in urine confirms exposure, and **carboxyhaemoglobin** above 10 percent with pulse oximetry gap points to carbon monoxide. **Osmolar gap** above 20 with acidosis mandates **fomepizole** before results.",
+      "say": "Check blood gas with anion and osmolar gaps plus visual acuity for toxic alcohols. Gas chromatography levels are the gold standard but treatment must start on osmolar gap alone. Lead levels, urine arsenic and carboxyhaemoglobin confirm metal and gas poisoning.",
+      "vis": null
+    },
+    {
+      "tx": "First line is **fomepizole** 15 mg per kg intravenous over thirty minutes to block alcohol dehydrogenase, then **sodium bicarbonate** 1 mEq per kg to correct acidosis below pH 7.2. **Haemodialysis** clears methanol, formic acid and ethylene glycol, and **thiamine** 100 mg intravenous plus pyridoxine 50 mg intravenous prevent **oxalate** deposition. **Hydroxocobalamin** five g intravenous treats cyanide, and 100 percent oxygen with half life 80 minutes treats carbon monoxide in 20 minutes.",
+      "say": "Give fomepizole fifteen milligrams per kilogram to block toxic alcohol metabolism, then bicarbonate and dialysis for severe acidosis. Add thiamine to prevent oxalate crystals in kidneys. Hydroxocobalamin treats cyanide, while one hundred percent oxygen clears carbon monoxide.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Methanol poisoning", "points": ["Visual changes in 50 percent", "Formic acid injury", "Fomepizole 15 mg per kg", "Dialysis for blindness"] },
+        "right": { "title": "Ethylene glycol poisoning", "points": ["Kidney failure in 50 percent", "Oxalate crystals", "Fomepizole plus thiamine", "Dialysis for renal failure"] }
+      }
+    },
+    {
+      "tx": "Chelation uses **calcium disodium EDTA** 20 to thirty mg per kg intravenous for lead above 70 ug per dL, **dimercaprol** 3 mg per kg plus **chelating tablet** 20 mg per kg orally for arsenic, and **dimercaprol** plus **succimer** for mercury. **British anti Lewisite** is dimercaprol 3 mg per kg, and **sodium calcium EDTA** never chelates arsenic alone. **Serial chelation** five days on and 2 weeks off prevents **rebound**, and dialysis removes chelated **lead** with half life cut to 2 days.",
+      "say": "Chelate severe lead poisoning with calcium EDTA and arsenic poisoning with dimercaprol plus a chelating tablet. Give chelation in five day courses with breaks to prevent rebound. Dialysis clears chelated metals when kidney failure is present.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **blindness** in thirty percent with delayed methanol treatment beyond 24 hours, **acute tubular necrosis** in 40 percent of glycol cases, **pneumonia** from carbon monoxide, **parkinsonism** after manganese, and **Minamata disease** from methyl mercury. **Arsenic** causes Bowen disease and lung cancer after 20 years, **lead** causes infertility and colic, and **hydrogen sulphide** causes pulmonary oedema in 10 percent. **Delayed neuropsychiatric** syndrome after carbon monoxide affects 10 to thirty percent at 3 weeks.",
+      "say": "Delayed treatment causes blindness, kidney necrosis, pneumonia and delayed behaviour changes. Arsenic causes skin cancers after twenty years, lead causes infertility, and methyl mercury causes Minamata disease. Carbon monoxide survivors face delayed brain injury at three weeks.",
+      "vis": null
+    },
+    {
+      "tx": "Prognosis depends on **time to fomepizole** within 6 hours with visual recovery above ninety percent, while delay beyond 24 hours leaves blindness in 70 percent. Lead encephalopathy mortality is five percent, **alkylmercury** survival is 50 percent, and acute cyanide survival exceeds 80 percent with early **hydroxocobalamin**. **Occupational** surveillance with blood lead every 6 months below five ug per dL limits **toxicity**, and **cohort** follow up detects **cancer** risk early.",
+      "say": "Early fomepizole within six hours preserves vision in over ninety percent, while delay beyond twenty four hours causes blindness. Lead encephalopathy kills five percent, and cyanide survival exceeds eighty percent with early treatment. Workplace surveillance keeps blood lead below five.",
+      "vis": null
+    },
+    {
+      "tx": "Exam traps confuse **osmolar gap** early with **anion gap** late in toxic alcohols, **isopropanol** ketosis without acidosis needing no fomepizole, and **ethylene glycol** hypocalcaemia with **calcium oxalate** versus **methanol** visual loss. **Lead** chelation with EDTA alone worsens brain lead without **dimercaprol** first, **hydroxocobalamin** is antidote for cyanide over **nitrite** in smoke inhalation, and **100 percent oxygen** halves carbon monoxide half life from three hundred twenty to 80 minutes in 4 options.",
+      "say": "Osmolar gap is high early and anion gap late in toxic alcohol poisoning, while isopropanol causes ketosis without acidosis. Give dimercaprol before EDTA for lead brain injury, and hydroxocobalamin for cyanide. One hundred percent oxygen cuts carbon monoxide half life to eighty minutes.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** pairs anion gap with osmolar gap for toxic alcohols, fomepizole 15 mg per kg within 6 hours, dialysis for blindness or renal failure, Burton line for lead above 10 ug per dL, rain drop pigmentation for arsenic, and cherry red skin for carbon monoxide above 10 percent. Hydroxocobalamin five g treats cyanide, dimercaprol 3 mg per kg treats arsenic and lead encephalopathy, and isopropanol needs only supportive care.",
+      "say": "Give early fomepizole and dialysis for blindness or kidney failure with anion plus osmolar gaps. Link gum lines to lead, rain drop skin to arsenic and cherry red skin to carbon monoxide. Hydroxocobalamin treats cyanide, and isopropanol needs only supportive care.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Agent", "Antidote or action", "Number"],
+        "rows": [
+          ["Methanol", "Fomepizole", "15 mg per kg"],
+          ["Ethylene glycol", "Fomepizole plus thiamine", "100 mg"],
+          ["Lead encephalopathy", "Dimercaprol first", "3 mg per kg"],
+          ["Arsenic", "Dimercaprol plus chelating tablet", "20 mg per kg"],
+          ["Cyanide", "Hydroxocobalamin", "five g intravenous"],
+          ["Carbon monoxide", "100 percent oxygen", "Half life 80 minutes"],
+          ["Dialysis trigger", "Blindness renal failure", "pH below 7.2"],
+          ["Isopropanol", "Supportive only", "No fomepizole"]
+        ]
+      }
+    }
+  ]
+}

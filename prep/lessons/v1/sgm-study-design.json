@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "sgm-study-design",
+ "subject": "ss-general-medicine",
+ "title": "Study designs and measures of association",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Study designs span **case series**, cross sectional surveys, case control studies, cohort studies and randomised trials, each with a defined population, exposure and outcome. Incidence needs follow up over time while prevalence is a snapshot at one point. Association is measured by **relative risk**, odds ratio and attributable fraction, with significance set at p less than zero point zero five.",
+   "say": "Study designs span case series, cross sectional surveys, case control studies, cohort studies and randomised trials, each with a defined population, exposure and outcome. Incidence needs follow up over time while prevalence is a snapshot. Association is measured by relative risk, odds ratio and attributable fraction, with significance set below zero point zero five.",
+   "vis": null
+  },
+  {
+   "tx": "Case control studies sample by **outcome first** and look back at exposure, yielding odds ratios at thirty percent lower cost than cohorts. Cohort studies sample by **exposure first** and follow forward, yielding relative risk directly. Randomised trials need one hundred to one thousand participants for eighty percent power at effect size zero point five, with **allocation concealment** in ninety-five percent of quality trials.",
+   "say": "Case control studies sample by outcome first and look back at exposure, yielding odds ratios at thirty percent lower cost than cohorts. Cohort studies sample by exposure first and follow forward, yielding relative risk directly. Randomised trials need one hundred to one thousand participants for eighty percent power, with allocation concealment.",
+   "vis": null
+  },
+  {
+   "tx": "Exposure to outcome flows forward in cohorts with temporal clarity, while case control flows backward and risks **recall bias** inflating odds ratios by twenty percent. Randomisation balances **confounders** such that ninety-five percent of measured and unmeasured confounders distribute equally. Bias categories are selection bias, information bias and confounding, with differential misclassification raising effect estimates above one point five.",
+   "say": "Exposure to outcome flows forward in cohorts with temporal clarity, while case control flows backward and risks recall bias inflating odds ratios by twenty percent. Randomisation can balance confounders so ninety five percent distribute equally. Bias categories are selection bias, information bias and confounding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Define population"
+     },
+     {
+      "id": "b",
+      "label": "Measure exposure"
+     },
+     {
+      "id": "c",
+      "label": "Follow outcome"
+     },
+     {
+      "id": "d",
+      "label": "Estimate risk"
+     },
+     {
+      "id": "e",
+      "label": "Infer cause"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic patterns are exposure first in cohorts with incidence in both groups,**outcome first** in case control with exposure odds in cases versus controls, and **random allocation** in trials with comparison of outcomes at twelve months. Cross sectional studies measure exposure and outcome together, so temporality cannot be assumed in one hundred percent of observations.",
+   "say": "Classic patterns are exposure first in cohorts with incidence in both groups, outcome first in case control with exposure odds in cases versus controls, and random allocation in trials with comparison of outcomes at twelve months. Cross sectional studies measure exposure and outcome together, so temporality cannot be assumed.",
+   "vis": null
+  },
+  {
+   "tx": "Sensitivity is true positives over all diseased with ninety percent being good, while specificity is **true negatives** over all healthy with ninety-five percent being excellent. Positive predictive value rises with prevalence from thirty percent at five percent prevalence to ninety percent at fifty percent prevalence. Likelihood ratios above ten rule in disease and below zero point one rule it out, independent of prevalence.",
+   "say": "Sensitivity is true positives over all diseased with ninety percent being good, while specificity is true negatives over all healthy with ninety five percent being excellent. Positive predictive value rises with prevalence. Likelihood ratios above ten rule in disease and below zero point one rule it out.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Design",
+     "Starts with",
+     "Yields",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Cohort study",
+      "Exposure",
+      "Relative risk",
+      "Rare exposure"
+     ],
+     [
+      "Case control study",
+      "Outcome",
+      "Odds ratio",
+      "Rare disease"
+     ],
+     [
+      "Randomised trial",
+      "Allocation",
+      "Risk difference",
+      "Treatment effect"
+     ],
+     [
+      "Cross sectional study",
+      "Population snapshot",
+      "Prevalence",
+      "Burden survey"
+     ],
+     [
+      "Case series",
+      "Cases only",
+      "No comparison",
+      "New phenomenon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First test is **two by two table** with cells a, b, c, d giving relative risk as a over a plus b divided by c over c plus d. Gold standard is **randomised controlled trial** with intention to treat analysis preserving one hundred percent randomisation benefit. Sample size formula uses alpha zero point zero five, power eighty percent and expected event rates of twenty percent versus ten percent.",
+   "say": "First test is two by two table with cells a, b, c, d giving relative risk as a over a plus b divided by c over c plus d. Gold standard is randomised controlled trial with intention to treat analysis preserving one hundred percent randomisation benefit. Sample size formula uses alpha zero point zero five and power eighty percent.",
+   "vis": null
+  },
+  {
+   "tx": "Relative risk formula is incidence in exposed divided by incidence in unexposed, and odds ratio is a times d over b times c. Number needed to treat equals one over absolute risk reduction, so ten percent absolute reduction gives **NNT** of ten.**Attributable fraction** near seventy percent of exposed cases means most disease was caused by exposure.",
+   "say": "Relative risk formula is incidence in exposed divided by incidence in unexposed, and odds ratio is a times d over b times c. Number needed to treat equals one over absolute risk reduction, so ten percent absolute reduction gives number needed to treat of ten. Attributable fraction near seventy percent means most disease was caused by exposure.",
+   "vis": null
+  },
+  {
+   "tx": "Odds ratio overestimates relative risk by twenty percent when disease is common above ten percent, so case control results need rare disease assumption. Confidence intervals of one point five to two point five exclude null value one and are significant, while zero point eight to one point two include null and are not significant.**Matching** in case control studies removes confounding by age and sex in eighty percent of designs.",
+   "say": "Odds ratio overestimates relative risk by twenty percent when disease is common above ten percent, so case control results need rare disease assumption. Confidence intervals of one point five to two point five exclude null value one and are significant, while zero point eight to one point two include null and are not significant. Matching removes confounding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cohort study",
+     "points": [
+      "Exposed and unexposed groups",
+      "Incidence and relative risk",
+      "Forward in time",
+      "Costly and long"
+     ]
+    },
+    "right": {
+     "title": "Case control study",
+     "points": [
+      "Cases and controls",
+      "Odds ratio only",
+      "Backward in time",
+      "Fast and cheap"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pitfalls include **Berkson bias** in hospital case control inflating odds ratios above two, lead time bias adding three years of apparent survival without true benefit and **immortal time bias** in thirty percent of pharmacoepidemiology studies. Publication bias hides forty percent of negative trials, so funnel plot asymmetry warns of missing studies.",
+   "say": "Pitfalls include Berkson bias in hospital case control inflating odds ratios above two, lead time bias adding three years of apparent survival without true benefit and immortal time bias in thirty percent of pharmacoepidemiology studies. Publication bias hides forty percent of negative trials, so funnel plot asymmetry warns of missing studies.",
+   "vis": null
+  },
+  {
+   "tx": "Hierarchy ranks systematic reviews of randomised trials highest, then randomised trials, cohorts, case control and series.**Grading** of evidence upgrades with dose response and downgrades with bias, with twenty percent of topics changing grade over five years. External validity holds for seventy percent of trials when populations match real clinic patients.",
+   "say": "Hierarchy ranks systematic reviews of randomised trials highest, then randomised trials, cohorts, case control and series. Grading of evidence upgrades with dose response and downgrades with bias. External validity holds for seventy percent of trials when populations match real clinic patients.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** memorise cohort starts with exposure and gives relative risk, case control starts with outcome and gives odds ratio, rare disease under ten percent equates odds ratio to relative risk, NNT equals one over absolute reduction, sensitivity ninety percent is good and specificity ninety-five percent is excellent, lateral ratios above ten rule in, p under zero point zero five is significant.",
+   "say": "This summary will help you remember the exam patterns. Memorise cohort starts with exposure and gives relative risk, case control starts with outcome and gives odds ratio, rare disease under ten percent equates odds ratio to relative risk, number needed to treat equals one over absolute reduction, sensitivity ninety percent is good and specificity ninety five percent is excellent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Answer",
+     "Number"
+    ],
+    "rows": [
+     [
+      "Cohort yields",
+      "Relative risk",
+      "a divided by a plus b"
+     ],
+     [
+      "Case control yields",
+      "Odds ratio",
+      "a times d over b times c"
+     ],
+     [
+      "NNT formula",
+      "Treatment benefit",
+      "one over absolute reduction"
+     ],
+     [
+      "Sensitivity good",
+      "Test performance",
+      "Above ninety percent"
+     ],
+     [
+      "Specificity excellent",
+      "Test performance",
+      "Above ninety-five percent"
+     ],
+     [
+      "Likelihood ratio rule in",
+      "Positive test",
+      "Above ten "
+     ],
+     [
+      "Significance cutoff",
+      "P value",
+      "Under zero point zero five "
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
