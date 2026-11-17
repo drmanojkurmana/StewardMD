@@ -68,11 +68,15 @@ try {
   const kinds = await ev(`var k={}; document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').forEach(function(e){ k[e.classList.contains('vf-q')?'q':e.classList.contains('vf-pearl')?'pearl':e.classList.contains('pn-mg-vid')?'video':e.classList.contains('vf-img')?'img':e.classList.contains('vf-end')?'end':'lesson']=1; }); return Object.keys(k).sort().join(",");`);
   ok(/q/.test(kinds) && /video/.test(kinds) && /pearl/.test(kinds) && /end/.test(kinds), "the reel mixes formats (questions, pearls, videos, end card): " + kinds);
   ok(await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-c').classList.contains('vf-q');`) === true, "the first card is a question");
-  ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows or Next/Skip buttons: one card per swipe");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mg-chip, #smdPrep [data-act=mg-next], #smdPrep [data-act=mg-skip]');`) === true, "no chip rows, Skip or Next before an answer: one card per swipe");
   ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "nothing wider than the 390 px screen");
   const subj = await ev(`return document.querySelector('#smdPrep #pnMgFeed .vf-q .pn-eb').textContent;`);
   await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-answer][data-k='0']");
   ok(await until(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`, 8000), "answering shows the explanation in place");
+  const top0 = await ev(`return document.querySelector('#pnMgFeed').scrollTop;`);
+  await click("#smdPrep #pnMgFeed .vf-c[data-i='0'] [data-act=mg-next]");
+  ok(await until(`return document.querySelector('#pnMgFeed').scrollTop > ${top0} + 100;`, 4000), "Next after an answer moves to the next card");
+  await ev(`document.querySelector('#pnMgFeed').scrollTop=0; return 1;`);
   ok(await ev(`return /of 1 right/.test(document.querySelector("#smdPrep .pn-t p").textContent);`) === true, "the bar keeps score");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}"); return Object.keys(s.cards||{}).length > 0;`) === true, "the answer wrote an FSRS card row (" + subj + ")");
   // Video: scrolling a video card into view mounts the https shim (never a direct YouTube embed from the app origin).
@@ -88,6 +92,7 @@ try {
   await click("#smdPrep [data-act=mg-more]");
   ok(await until(`return document.querySelectorAll('#smdPrep #pnMgFeed .vf-c').length > ${n0};`, 15000), "Keep going adds more cards");
   ok(await ev(`return !!document.querySelector("#smdPrep #pnMgFeed .vf-c[data-i='0'] .vf-why");`) === true, "earlier answers survive the new batch");
+  ok(await ev(`var k={}, d=0; PREP_MEDIGRAM._s().cards.forEach(function(c){ var x=c.kind+":"+(c.it?c.it.id||c.it.img:c.videoId||c.mid||c.text); if(k[x]) d++; k[x]=1; }); return d;`) === 0, "nothing repeats across batches");
   // A silent shim (offline, blocked; on a video that has not played yet) falls back to a Play on YouTube card instead of a black box.
   shimSilent = true;
   await ev(`var v=[].filter.call(document.querySelectorAll('#smdPrep .pn-mg-vid'), function(e){ return e.getAttribute('data-vid') !== ${JSON.stringify(played)}; })[0]; var b=document.querySelector('#pnMgFeed'); b.scrollTop=v.offsetTop-b.offsetTop; return 1;`);

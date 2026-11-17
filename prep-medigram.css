@@ -9,7 +9,8 @@
 .pn-root .pn-mg-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .pn-root .pn-mg-yt img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55; }
 .pn-root .pn-mg-yt span { position: relative; min-height: 44px; display: inline-flex; align-items: center; padding: 0 18px; border-radius: var(--pn-r-pill); background: #0d1d23; border: 1px solid #42cdb5; font-weight: 650; }
-.pn-root .pn-mg-ask { align-self: flex-start; }
+.pn-root .pn-mg-row { display: flex; gap: 8px; }
+.pn-root .pn-mg-row .pn-btn { flex: 1 1 0; }
 .pn-root .vf-end .pn-btn { min-width: 200px; }
 .pn-root .pn-mg-card { border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); padding: 16px; margin: 0 16px 14px; }
 .pn-root .pn-mg-h { font-size: 19px; font-weight: 700; line-height: 1.3; }

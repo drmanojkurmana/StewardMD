@@ -66,11 +66,15 @@
     while (v.length || l.length || im.length) { if (v.length) out.push(v.shift()); if (l.length) out.push(l.shift()); if (im.length) out.push(im.shift()); }
     return out;
   }
+  // Nothing repeats inside a session: questions, videos, lessons and images already shown are left out of later batches.
+  function keyOf(c) { return c.kind === "q" ? "q:" + c.it.id : c.kind === "video" ? "v:" + c.videoId : c.kind === "lesson" ? "l:" + c.mid : c.kind === "img" ? "i:" + c.it.img : c.kind === "pearl" ? "p:" + c.text : ""; }
+  function fresh(cards) { return cards.filter(function (c) { var k = keyOf(c); if (!k || S.seen[k]) return false; S.seen[k] = 1; return true; }); }
+  function unseen(xs, kind) { return xs.filter(function (x) { return !S.seen[keyOf(x.kind ? x : { kind: kind, it: x })]; }); }
   function batch() {
-    if (S.mode === "clinical") return Promise.all([videos(), images()]).then(function (x) { return rotate(x[0], [], x[1]).slice(0, BATCH); });
+    if (S.mode === "clinical") return Promise.all([videos(), images()]).then(function (x) { return fresh(rotate(unseen(x[0]), [], unseen(x[1], "img")).slice(0, BATCH)); });
     return Promise.all([draw(5), videos(), images()]).then(function (x) {
-      var items = x[0].slice(0, BATCH);
-      return lessonsFor(items).then(function (les) { return DATA.mixFeed(items, rotate(x[1], les, x[2]), lsGet("smd_prep_medigram_cadence") || 3); });
+      var items = unseen(x[0], "q").slice(0, BATCH);
+      return lessonsFor(items).then(function (les) { return fresh(DATA.mixFeed(items, rotate(unseen(x[1]), unseen(les), unseen(x[2], "img")), lsGet("smd_prep_medigram_cadence") || 3)); });
     });
   }
   function load(more) {
@@ -108,7 +112,8 @@
       return '<li><button type="button" class="' + cls + '" data-act="mg-answer" data-i="' + i + '" data-k="' + k + '"' + (done ? ' aria-disabled="true"' : "") + '><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></button></li>";
     }).join("") + "</ol>" +
       (done ? '<p class="vf-why" role="status"><b>' + (c.ans === it.a ? "Right. " : "Answer: " + L[it.a] + ". ") + "</b>" + esc(firstSentence(it.exp || (it.x && it.x.key))) + "</p>" +
-        (G.PREP_ASK && G.PREP_ASK.open ? '<button type="button" class="pn-btn pn-mg-ask" data-act="mg-understand" data-i="' + i + '">Explain this simply</button>' : "") : "") + "</article>";
+        '<div class="pn-mg-row"><button type="button" class="pn-btn pri" data-act="mg-next" data-i="' + i + '">Next</button>' +
+        (G.PREP_ASK && G.PREP_ASK.open ? '<button type="button" class="pn-btn" data-act="mg-understand" data-i="' + i + '">Explain simply</button>' : "") + "</div>" : "") + "</article>";
   }
   function subtitle() { return S.done ? S.right + " of " + S.done + " right" : "Swipe up for the next"; }
   function render(scrollTo) {
@@ -170,11 +175,11 @@
   function tickBreak() { if (!S || !S.brk || S.mode !== "break") return stopBreakTimer(); if (DATA.breakState(S.brk, Date.now()).expired) stopBreakTimer(); renderBreak(); }
   function stopBreakTimer() { if (S && S.timer) { G.clearInterval(S.timer); S.timer = 0; } }
   function stopMedia() { if (MEDIA) MEDIA.release(); if (S && S.io) { S.io.disconnect(); S.io = null; } }
-  function setMode(mode) { stopMedia(); stopBreakTimer(); S.brk = null; S.mode = mode; S.cards = []; S.top = 0; S.done = S.right = 0; if (mode === "break") return renderBreak(); load(); }
+  function setMode(mode) { stopMedia(); stopBreakTimer(); S.brk = null; S.mode = mode; S.cards = []; S.seen = {}; S.top = 0; S.done = S.right = 0; if (mode === "break") return renderBreak(); load(); }
 
   function start(host, mode) {
     if (G.PrepPro && G.PrepPro.can && !G.PrepPro.can("questions", { items: [] })) { G.PrepPro.openLimit("questions"); return; }
-    S = { host: host, mode: "study", cards: [], loading: false, err: false, done: 0, right: 0, top: 0, brk: null, timer: 0, io: null, ytFail: {} };
+    S = { host: host, mode: "study", cards: [], loading: false, err: false, done: 0, right: 0, top: 0, brk: null, timer: 0, io: null, ytFail: {}, seen: {} };
     if (mode === "clinical" && FLAGS.discovery) S.mode = "clinical";
     else if (!FLAGS.study && FLAGS.discovery) S.mode = "clinical";
     emit("session_started", { mode: S.mode });
@@ -202,7 +207,13 @@
       c.ans = k; S.done++; if (ok) S.right++;
       try { host.record(c.it, k, { ms: 0 }); } catch (e) {}   // FSRS + stats, exactly as the runner and Play feed do
       emit("mcq_answered", { correct: ok });
+      try { if (G.SMD_HAPTICS) G.SMD_HAPTICS[ok ? "success" : "warning"](); } catch (e) {}
       return redraw(i);
+    }
+    if (a === "mg-next") {
+      var box = host.root().querySelector("#pnMgFeed"), nx = box && box.querySelectorAll(".vf-c")[i + 1];
+      if (nx) box.scrollTo({ top: nx.offsetTop - box.offsetTop, behavior: G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      return;
     }
     if (a === "mg-reveal") { if (c) { c.shown = true; redraw(i); } return; }
     if (a === "mg-lesson") { if (c && G.PREP_LESSONS) { stopMedia(); emit("lesson_completed", {}); G.PREP_LESSONS.open(c.sid, c.mid, host); } return; }
