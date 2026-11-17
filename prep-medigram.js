@@ -195,16 +195,16 @@
   try { G.document.addEventListener("click", function (e) { TAPX = e.clientX; }, true); } catch (e) {}
   function lesEl(i) { return H().root().querySelector('#pnMgFeed .vf-c[data-i="' + i + '"]'); }
   function lesDraw(i) { var el = lesEl(i), c = S.cards[i]; if (!el || !c) return; var box = el.querySelector(".pn-mg-story"); if (box) box.innerHTML = storyHtml(c); var b = el.querySelector('[data-v="listen"]'); if (b) { b.textContent = c.listen ? "Stop listening" : "Listen"; b.setAttribute("aria-pressed", String(!!c.listen)); } }
-  function lesStop() { if (!S) return; G.clearTimeout(S.lt); S.lt = 0; try { if (S.les != null && G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {} S.les = null; }
+  function lesStop() { if (!S) return; G.clearTimeout(S.lt); S.lt = 0; if (S.les != null) hush(); S.les = null; }
+  function hush() { try { if (G.SMD_SPEAK) G.SMD_SPEAK.stop(); } catch (e) {} }
   function lesRun(i) {
     var c = S.cards[i];
     G.clearTimeout(S.lt);
     if (!c || !c.les || c.step >= c.les.steps.length || !c.playing) return lesDraw(i);
     lesDraw(i);
     var st = c.les.steps[c.step], k = c.step, adv = function () { if (!S || S.les !== i || c.step !== k) return; c.step++; lesRun(i); };
-    if (c.listen && G.speechSynthesis && G.SpeechSynthesisUtterance) {
-      try { G.speechSynthesis.cancel(); var u = new G.SpeechSynthesisUtterance(String(st.say || st.tx || "").replace(/\*\*/g, "")); u.lang = "en-IN"; u.rate = 1; u.onend = adv; G.speechSynthesis.speak(u); return; } catch (e) {}
-    }
+    // Listen: the app's standard voice (smd-speak.js: Phonon 31M, system voice until it is ready); the step moves on when it ends.
+    if (c.listen && G.SMD_SPEAK) { G.SMD_SPEAK.say(st.say || st.tx || "").then(adv, function () { if (S && S.les === i && c.step === k) S.lt = G.setTimeout(adv, stepMs(st)); }); return; }
     S.lt = G.setTimeout(adv, stepMs(st));
   }
   function lesStart(el) {
@@ -368,7 +368,7 @@
       if (!c || c.kind !== "lesson") return;
       if (a === "mg-les") {   // Listen: narration reads each step and moves on when it ends
         c.listen = !c.listen; c.playing = true;
-        if (!c.listen) { try { G.speechSynthesis.cancel(); } catch (e) {} }
+        if (c.listen) { try { if (G.SMD_SPEAK) G.SMD_SPEAK.unlock(); } catch (e) {} } else hush();   // unlock inside the tap (iOS audio)
         if (S.les !== i) { lesStart(el.closest(".vf-c")); return; }
         return lesRun(i);
       }
@@ -378,7 +378,7 @@
       else if (x < r.width / 3) c.step = Math.max(0, c.step - 1);
       else if (x > r.width * 2 / 3) c.step = Math.min(c.les.steps.length, c.step + 1);
       else c.playing = !c.playing;
-      if (!c.playing) { G.clearTimeout(S.lt); try { G.speechSynthesis.cancel(); } catch (e) {} return lesDraw(i); }
+      if (!c.playing) { G.clearTimeout(S.lt); hush(); return lesDraw(i); }
       S.les = i; return lesRun(i);
     }
     if (a === "mg-play") {
