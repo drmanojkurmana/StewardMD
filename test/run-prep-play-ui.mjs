@@ -125,12 +125,13 @@ try {
   await call("Fetch.enable", { patterns: ["*/api/prep/play/*", "*/api/prep/social/*", "*/api/prep/arena/*", "*imglearn/*", "*ana-brachial-plexus.json*"].map((u) => ({ urlPattern: u, requestStage: "Request" })) });
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_SETUP=false; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep","1");}catch(e){} ${SPEECH}` });
-  await call("Page.navigate", { url: BASE });
+  // PrepReels off here: Swipe feed is PrepReels when it is on (owner 2026-11-17), so the old feed below is its fallback.
+  await call("Page.navigate", { url: BASE + "?medigram=0" });
   ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots");
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_focus");}catch(e){} indexedDB.deleteDatabase("prep-bank"); ${SIGN_IN} return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-feed]");`, 20000), "Play loads and home shows its section");
-  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep167";`) === true, "all nine Play rows; loader prep167");
+  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep188";`) === true, "all nine Play rows; loader prep188");
   // Header: Close and Search at the same gutter (owner screenshot 2026-10-30: Search sat one slot in from the edge).
   const gut = await ev(`var c=document.querySelector("#smdPrep .pn-bar-brand [data-act=close]"), f=document.querySelector("#smdPrep .pn-bar-brand [data-act=find]"), m=document.querySelector("#smdPrep .pn-bar-brand [data-act=menu]"); var a=c.getBoundingClientRect(), b=f.getBoundingClientRect(); return JSON.stringify({ l: Math.round(a.left), r: Math.round(innerWidth - b.right), nav: document.getElementById("smdPrep").classList.contains("pn-navon"), menu: m ? getComputedStyle(m).display : "none" });`);
   const g = JSON.parse(gut);
@@ -318,6 +319,18 @@ try {
   ok(await store(`Object.keys(s.cards).length`) === before, "revenge: nothing written to memory");
 
   ok(!DASH.test(await screenText()), "no em or en dash");
+
+  // ---- one feed: with PrepReels on, Swipe feed is PrepReels (home row gone, the act and the deep link open the reel)
+  await call("Page.navigate", { url: BASE + "?medigram=1" });
+  ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "boots with PrepReels on");
+  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); PREP.open(); return 1;`);
+  ok(await until(`return !!window.PREP_MEDIGRAM && !!document.querySelector("#smdPrep .pn-home [data-act=mg-open]") && !!document.querySelector("#smdPrep .pn-strip [data-act=v-spot]");`, 20000), "home: the PrepReels card and the Play strip");
+  ok(await ev(`return !document.querySelector("#smdPrep [data-act=v-feed]") && !document.querySelector("#smdPrep .pn-strip [data-act=v-freeze]") && !!document.querySelector("#smdPrep .pn-home > .pn-you [data-act=v-freeze]");`) === true, "home: no Swipe feed row; Streak freezes sits with the progress");
+  ok(await ev(`var s=document.querySelector("#smdPrep .pn-strip"); return s.scrollWidth > s.clientWidth && document.documentElement.scrollWidth <= innerWidth;`) === true, "home: the strip scrolls sideways inside the screen");
+  await ev(`PREP_PLAY.act("v-feed", document.createElement("i"), PREP._host); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep #pnMgFeed") && !document.getElementById("pvFeed");`, 15000), "v-feed opens PrepReels");
+  await home(); await ev(`PREP.close(); return 1;`); await ev(`PREP.open({ play: "feed" }); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep #pnMgFeed");`, 15000), "the feed deep link (widget, watch, notification) opens PrepReels");
 
   // ---- flag off
   await call("Page.navigate", { url: BASE + "?play=0" });

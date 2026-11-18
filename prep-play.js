@@ -428,22 +428,34 @@
   /* ---------- home ---------- */
   function homeHtml(h) {
     H = h;
-    var s = store(), td = H.today();
-    if (P.freezeDay !== td) { P.freezeDay = td; var used = applyFreezes(s, td); if (used) { H.save(); H.toast(used === 1 ? "A streak freeze kept your streak." : used + " streak freezes kept your streak."); } }
-    var sp = s.spot && s.spot.day === istDay(Date.now()) ? s.spot : null, f = s.frz || { bank: 0 };
+    var s = freezeTick(), sp = s.spot && s.spot.day === istDay(Date.now()) ? s.spot : null;
     var beaten = Object.keys(s.boss || {}).filter(function (k) { return s.boss[k].won; }).length;
     var arena = !!(G.PREP_ARENA && G.PREP_ARENA.enabled && G.PREP_ARENA.enabled());
-    return '<h2 class="pn-h">Play</h2><div class="pn-group">' +
-      H.row("v-feed", ic(IC.feed), "Swipe feed", "Questions, pearls and images, one swipe each") +
+    // A sideways strip of cards (prep.css .pn-strip). Swipe feed is PrepReels now (reels()); its row stays only without it.
+    return '<h2 class="pn-h">Play</h2><div class="pn-group pn-strip">' +
+      (reels() ? "" : H.row("v-feed", ic(IC.feed), "Swipe feed", "Questions, pearls and images, one swipe each")) +
       H.row("v-spot", ic(IC.spot), "Spot diagnosis of the day", sp ? (sp.ok ? "Right in " + (sp.ms / 1000).toFixed(1) + " s today" : "Done for today") + " · see the board" : "One image, 10 seconds") +
       H.row("v-boss", ic(IC.boss), "Boss battles", (beaten ? beaten + " beaten · " : "") + BOSS_N + " hard questions, " + BOSS_LIVES + " lives") +
       H.row("v-quick", ic(IC.bolt), "Quick fire", "One question, right now") +
       H.row("v-voice", ic(IC.voice), "Voice mode", "Hear the question, say the answer") +
       H.row("v-focus", ic(IC.focus), "Focus room", focusOn() ? "In session: " + focusLeft() + " min left" : "A timed session with others studying now") +
       H.row("v-wrap", ic(IC.wrap), "Wrapped", "Your month in cards, ready to share") +
-      (arena ? H.row("v-season", ic(IC.season), "Season", "8-week league, Bronze to Diamond") : "") +
-      H.row("v-freeze", ic(IC.ice), "Streak freezes", f.bank + " of " + FREEZE_MAX + " banked · earn one with " + FREEZE_EXTRA + " extra questions in a day") + "</div>";
+      (arena ? H.row("v-season", ic(IC.season), "Season", "8-week league, Bronze to Diamond") : "") + "</div>";
   }
+  // Streak freezes are a status, not a game: home shows the row with the progress figures.
+  function freezeTick() {
+    var s = store(), td = H.today();
+    if (P.freezeDay !== td) { P.freezeDay = td; var used = applyFreezes(s, td); if (used) { H.save(); H.toast(used === 1 ? "A streak freeze kept your streak." : used + " streak freezes kept your streak."); } }
+    return s;
+  }
+  function freezeRow(h) {
+    H = h; var f = freezeTick().frz || { bank: 0 };
+    return H.row("v-freeze", ic(IC.ice), "Streak freezes", f.bank + " of " + FREEZE_MAX + " banked · earn one with " + FREEZE_EXTRA + " extra questions in a day");
+  }
+  // PrepReels (prep-medigram.js) is the swipe feed (owner 2026-11-17: "Swipe feed and PrepReels are same, unite them").
+  // openFeed below stays for when PrepReels is switched off (smd_prep_medigram=0).
+  function reels() { var M = G.PREP_MEDIGRAM; return M && M._flags && (M._flags.study || M._flags.discovery) ? M : null; }
+  function feed() { var M = reels(); return M ? M.open(H, "study") : openFeed(); }
 
   /* ---------- swipe feed ---------- */
   function feedCard(c, i) {
@@ -1172,7 +1184,7 @@
   function act(a, b, h) {
     H = h;
     var v = b.getAttribute("data-v");
-    if (a === "v-feed") return openFeed();
+    if (a === "v-feed") return feed();
     if (a === "v-fa") return feedAnswer(b);
     if (a === "v-more") return feedMore();
     if (a === "v-spot") return openSpot();
@@ -1213,11 +1225,11 @@
     H = h;
     if (kind === "quick") return quick();
     if (kind === "spot") return openSpot();
-    if (kind === "feed") return openFeed();
+    if (kind === "feed") return feed();
     if (kind === "focus") return H.push(renderFocus);
   }
   // A focus session that outlives a closed PrepNucleus picks its heartbeat back up on the next open.
   function bind(h) { H = h; if (focusOn() && !P.focusT) P.focusT = G.setInterval(focusTick, 60e3); }
 
-  G.PREP_PLAY = { act: act, back: back, leave: leave, open: open, bind: bind, homeHtml: function (h) { bind(h); return homeHtml(h); }, mnHtml: mnHtml, noteAnswer: noteAnswer, _pure: PURE, _p: P };
+  G.PREP_PLAY = { act: act, back: back, leave: leave, open: open, bind: bind, homeHtml: function (h) { bind(h); return homeHtml(h); }, freezeRow: freezeRow, mnHtml: mnHtml, noteAnswer: noteAnswer, _pure: PURE, _p: P };
 })(typeof window !== "undefined" ? window : this);

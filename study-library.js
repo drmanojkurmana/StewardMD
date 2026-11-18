@@ -67,6 +67,10 @@
   // Browser continues below; if G.STUDY is not yet defined we wait for study.js (loader order guarantees it).
   var D = G.document;
   var LIB_ICO = {
+    back: '<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
+    dots: '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>',
+    upload: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>',
+    restore: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>',
     folder: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
     folderStar: '<svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="#e5484d" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="none"/><polygon points="12 8 13.7 11.5 17.5 12 14.8 14.6 15.4 18.4 12 16.5 8.6 18.4 9.2 14.6 6.5 12 10.3 11.5" fill="#e5484d" stroke="#e5484d"/></svg>',
     star: '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
@@ -90,7 +94,7 @@
     favIc: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
     palette: '<svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.4-.4-.8-.4-1.3 0-1.1.9-2 2-2h2.3c3.9 0 7-3.1 7-7 0-5.5-5.4-9.1-10-9.1z"/></svg>'
   };
-  var FOLDER_COLORS = ["#42CDB5", "#60A5FA", "#F5854A", "#A78BFA", "#34D399", "#F87171", "#FBBF24", "#94A3B8"];
+  var FOLDER_COLORS = ["#C9A227", "#60A5FA", "#F5854A", "#A78BFA", "#34D399", "#F87171", "#FBBF24", "#94A3B8"];
   var uidN = 0;
   function uid() { return Date.now().toString(36) + (++uidN).toString(36) + Math.random().toString(36).slice(2, 7); }
   var host = null;
@@ -322,7 +326,7 @@
   function drawBgForExport(ctx, style, ratio, W) {
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
     if (style === "blank") return;
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400);
+    ctx.strokeStyle = style === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900);
     var s = 0.05, end = style === "cornell" ? ratio * 0.8 : ratio;
     ctx.beginPath();
     if (style === "ruled" || style === "cornell") { for (var y = s * 2; y < end; y += s) { ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); } }
@@ -519,8 +523,8 @@
         var title = esc(d.title || "Untitled");
         var isCur = tid === curId;
         html += '<div class="st-dt' + (isCur ? " on" : "") + '" role="tab" aria-selected="' + (isCur ? "true" : "false") + '">' +
-          '<button type="button" class="st-dt-open" data-act="st-dt-open" data-id="' + tid + '" aria-label="Open ' + esc(d.title || "") + '">' + title + '</button>' +
-          '<button type="button" class="st-dt-x" data-act="st-dt-close" data-id="' + tid + '" aria-label="Close ' + esc(d.title || "") + '">' + LIB_ICO.x + '</button>' +
+          '<button type="button" class="st-dt-open" data-act="st5a-dt-open" data-id="' + tid + '" aria-label="Open ' + esc(d.title || "") + '">' + title + '</button>' +
+          '<button type="button" class="st-dt-x" data-act="st5a-dt-close" data-id="' + tid + '" aria-label="Close ' + esc(d.title || "") + '">' + LIB_ICO.x + '</button>' +
         '</div>';
       });
       tabsEl.innerHTML = html;
@@ -570,7 +574,7 @@
     return html;
   }
   function folderCardHtml(f) {
-    var col = f.colour || "#42CDB5";
+    var col = f.colour || "#C9A227";
     var icon = f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder;
     var favBadge = f.favourite ? '<span class="st5a-fav-badge" title="Favourite">\u2605</span>' : "";
     return '<div class="st5a-card st5a-folder" data-folder="' + f.id + '" draggable="false">' +
@@ -591,7 +595,7 @@
   function docCardHtml(d, folders) {
     var isNb = d.kind === "nb";
     var when = d.lastOpened || d.created || Date.now();
-    var meta = (isNb ? "Notebook, " + d.pageCount + (d.pageCount === 1 ? " page" : " pages") : d.pageCount + (d.pageCount === 1 ? " page" : " pages")) + " \u00b7 " + fmtWhen(when);
+    var meta = d.pageCount + (d.pageCount === 1 ? " page" : " pages") + " \u00b7 " + fmtWhen(when); /* kind shows on the cover badge */
     var thumb = d.thumb ? '<img class="st5a-th st-th" alt="" src="' + d.thumb + '" width="160" height="226" loading="lazy">' : '<div class="st5a-th-ph">' + (isNb ? LIB_ICO.book : LIB_ICO.pdf) + '</div>';
     var favBadge = d.favourite ? '<span class="st5a-fav-badge" title="Favourite">\u2605</span>' : "";
     return '<div class="st5a-card st-doc" data-id="' + d.id + '" draggable="true">' +
@@ -638,13 +642,12 @@
   }
   function sortChipsHtml() {
     var s = libState.sort;
-    function chip(v, label) { return '<button type="button" class="st5a-chip' + (s === v ? " on" : "") + '" data-act="st5a-sort" data-v="' + v + '">' + label + '</button>'; }
-    var viewIc = libState.view === "grid" ? LIB_ICO.grid : LIB_ICO.list;
-    var nextView = libState.view === "grid" ? "list" : "grid";
-    return '<div class="st5a-sort-row" role="group" aria-label="Sort and view">' +
-      chip("date", "Date") + chip("name", "Name") + chip("type", "Type") +
-      '<button type="button" class="st5a-view-btn" data-act="st5a-view" data-v="' + nextView + '" aria-label="Show ' + (nextView === "grid" ? "grid" : "list") + ' view">' + viewIc + '</button>' +
-      '<button type="button" class="st5a-chip st5a-trash-chip" data-act="st5a-tab" data-v="trash">' + LIB_ICO.trash + ' Trash</button>' +
+    function seg(v, label) { return '<button type="button" class="st5a-chip st5a-seg-b' + (s === v ? " on" : "") + '" data-act="st5a-sort" data-v="' + v + '" aria-pressed="' + (s === v) + '">' + label + '</button>'; }
+    function vb(v, ic, label) { var on = libState.view === v; return '<button type="button" class="st5a-view-btn st5a-seg-b' + (on ? " on" : "") + '" data-act="st5a-view" data-v="' + v + '" aria-pressed="' + on + '" aria-label="' + label + '">' + ic + '</button>'; }
+    return '<div class="st5a-sort-row" role="toolbar" aria-label="Sort and view">' +
+      '<div class="st5a-seg" role="group" aria-label="Sort by">' + seg("date", "Date") + seg("name", "Name") + seg("type", "Type") + '</div>' +
+      '<span class="st5a-sp"></span>' +
+      '<div class="st5a-seg st5a-seg-ic" role="group" aria-label="View">' + vb("grid", LIB_ICO.grid, "Grid view") + vb("list", LIB_ICO.list, "List view") + '</div>' +
     '</div>';
   }
   function bottomBarHtml() {
@@ -658,10 +661,19 @@
   function libHtml() {
     var title = libState.tab === "trash" ? "Trash" : libState.tab === "search" ? "Search" : libState.tab === "favorites" ? "Favorites" : "Documents";
     var showBc = !!(libState.currentFolderId);
-    return '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
+    return '<header class="st5a-top" role="banner">' +
+        '<button type="button" class="st5a-top-ib" data-act="back" aria-label="Back to PrepNucleus">' + LIB_ICO.back + '</button>' +
+        '<h1 class="st5a-h1" id="st5aH1">' + esc(title) + '</h1>' +
+        '<div class="st5a-top-acts">' +
+          '<button type="button" class="st5a-top-ib" data-act="st5a-tab" data-v="search" aria-label="Search">' + LIB_ICO.search + '</button>' +
+          '<button type="button" class="st5a-top-ib" data-act="st5a-libmore" aria-label="More: back up, restore, trash">' + LIB_ICO.dots + '</button>' +
+          '<button type="button" class="st5a-new-btn" data-act="st5a-new" aria-label="New notebook or import">' + LIB_ICO.plus + '<span>New</span></button>' +
+        '</div>' +
+      '</header>' +
+      '<div class="st5a-wrap smd-books-keep smd-emo-keep">' +
       (showBc ? '<div class="st5a-header"><div class="st5a-bc" id="st5aBc"></div></div>' : '<div class="st5a-bc" id="st5aBc" hidden></div>') +
-      '<h1 class="st5a-h1" id="st5aH1">' + esc(title) + '</h1>' +
-      sortChipsHtml() +
+      (libState.tab === "search" ? '' : sortChipsHtml()) +
+      '<p class="st5a-status pn-note" id="stBk" role="status"></p>' +
       '<div id="stList" class="smd-books-keep smd-emo-keep"></div>' +
     '</div>';
   }
@@ -751,12 +763,12 @@
         }
         var isFav = libState.tab === "favorites";
         /* Always show the + New tile in the Documents tab even when the list is empty,
-           so the test (and user) can find .st5a-new and .st5a-card immediately. */
-        var emptyHtml = '<div class="st-empty-box"><div class="st-empty-ico">' + (isFav ? LIB_ICO.favIc : LIB_ICO.book) + '</div><h3>' + (isFav ? "No favourites yet" : "No PDFs yet") + '</h3><p>' + (isFav ? "Star a document or folder to pin it here." : "Import a PDF, create a notebook, or scan notes.") + '</p></div>';
+           so the test (and user) can find .st5a-new and .st5a-card immediately.
+           One empty message only: a single short line under the New tile. */
         if (!isFav && libState.tab === "documents") {
-          bodyEl.innerHTML = '<div class="st5a-grid">' + newTileHtml() + '</div>' + emptyHtml;
+          bodyEl.innerHTML = '<div class="st5a-grid">' + newTileHtml() + '</div><p class="st5a-empty-line">Import a PDF, create a notebook, or scan notes.</p>';
         } else {
-          bodyEl.innerHTML = emptyHtml;
+          bodyEl.innerHTML = '<div class="st-empty-box"><div class="st-empty-ico">' + LIB_ICO.favIc + '</div><h3>No favourites yet</h3><p>Star a document or folder to pin it here.</p></div>';
         }
         return;
       }
@@ -775,7 +787,7 @@
           if (it.type === "folder") {
             var f = it.f;
             return '<div class="st5a-list-row st5a-list-folder" data-folder="' + f.id + '">' +
-              '<button type="button" class="st5a-list-open" data-act="st5a-open-folder" data-id="' + f.id + '"><span class="st5a-list-th-ph" style="color:' + (f.colour || "#42CDB5") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><span class="st5a-list-tt"><b>' + esc(f.name) + '</b><small>' + esc(fmtWhen(f.mtime || f.created || Date.now())) + '</small></span></button>' +
+              '<button type="button" class="st5a-list-open" data-act="st5a-open-folder" data-id="' + f.id + '"><span class="st5a-list-th-ph" style="color:' + (f.colour || "#C9A227") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><span class="st5a-list-tt"><b>' + esc(f.name) + '</b><small>' + esc(fmtWhen(f.mtime || f.created || Date.now())) + '</small></span></button>' +
               '<button type="button" class="st5a-chev-btn" data-act="st5a-folder-menu" data-id="' + f.id + '" aria-label="Options for folder ' + esc(f.name) + '">' + LIB_ICO.chev + '</button>' +
             '</div>';
           }
@@ -879,7 +891,7 @@
       var html = '<div class="st-doc-menu-head"><div class="st-doc-menu-title"><h3>Move to folder</h3><small>' + esc(d.title) + '</small></div><button type="button" class="pn-btn sm" data-act="st5a-close">Done</button></div>' +
         '<div class="st-doc-menu-items">' +
           '<button type="button" class="st-menu-item' + (!d.folderId ? " on" : "") + '" data-act="st5a-set-folder" data-id="' + d.id + '" data-folder=""><div class="st-menu-ico">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>(No folder)</strong></div></button>' +
-          folders.map(function (f) { return '<button type="button" class="st-menu-item' + (d.folderId === f.id ? " on" : "") + '" data-act="st5a-set-folder" data-id="' + d.id + '" data-folder="' + f.id + '"><div class="st-menu-ico" style="color:' + (f.colour || "#42CDB5") + '">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>' + esc(f.name) + '</strong></div></button>'; }).join("") +
+          folders.map(function (f) { return '<button type="button" class="st-menu-item' + (d.folderId === f.id ? " on" : "") + '" data-act="st5a-set-folder" data-id="' + d.id + '" data-folder="' + f.id + '"><div class="st-menu-ico" style="color:' + (f.colour || "#C9A227") + '">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>' + esc(f.name) + '</strong></div></button>'; }).join("") +
           '<div class="st5a-new-folder-row" style="display:flex;gap:8px;margin-top:8px"><input id="st5aNewFolderName" type="text" placeholder="New folder name" maxlength="40" style="flex:1;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--pn-line);background:var(--pn-s1);color:var(--pn-text)"><button type="button" class="pn-btn sm" data-act="st5a-new-folder-for-move" data-id="' + d.id + '">Create</button></div>' +
         '</div>';
       openSheet(html);
@@ -893,11 +905,11 @@
       var docsIn = 0;
       idbAll("docs").then(function (docs) { docsIn = docs.filter(function (d) { return d.folderId === folderId && !d.trashedAt; }).length; });
       // open sheet quickly; doc count filled in on click? we already have all for folders; docs loaded separately will be silent
-      openSheet('<div class="st-doc-menu-head"><div class="st-doc-menu-title" style="display:flex;gap:10px;align-items:center;"><span style="color:' + (f.colour || "#42CDB5") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><div><h3>' + esc(f.name) + '</h3><small>' + kids + (kids === 1 ? " subfolder" : " subfolders") + '</small></div></div><button type="button" class="pn-btn sm" data-act="st5a-close">Done</button></div>' +
+      openSheet('<div class="st-doc-menu-head"><div class="st-doc-menu-title" style="display:flex;gap:10px;align-items:center;"><span style="color:' + (f.colour || "#C9A227") + '">' + (f.favourite ? LIB_ICO.folderStar : LIB_ICO.folder) + '</span><div><h3>' + esc(f.name) + '</h3><small>' + kids + (kids === 1 ? " subfolder" : " subfolders") + '</small></div></div><button type="button" class="pn-btn sm" data-act="st5a-close">Done</button></div>' +
         '<div class="st-doc-menu-items">' +
           '<button type="button" class="st-menu-item" data-act="st5a-rename-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.edit + '</div><div class="st-menu-txt"><strong>Rename folder</strong></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-fav-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + (f.favourite ? LIB_ICO.starFill : LIB_ICO.star) + '</div><div class="st-menu-txt"><strong>' + (f.favourite ? "Remove favourite" : "Mark as favourite") + '</strong><small>Red star</small></div></button>' +
-          '<button type="button" class="st-menu-item" data-act="st5a-folder-colour" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.palette + '</div><div class="st-menu-txt"><strong>Folder colour</strong><small>Current: ' + esc(f.colour || "#42CDB5") + '</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-folder-colour" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.palette + '</div><div class="st-menu-txt"><strong>Folder colour</strong><small>Current: ' + esc(f.colour || "#C9A227") + '</small></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-new-subfolder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.plus + '</div><div class="st-menu-txt"><strong>New subfolder</strong></div></button>' +
           '<button type="button" class="st-menu-item" data-act="st5a-move-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.move + '</div><div class="st-menu-txt"><strong>Move folder</strong></div></button>' +
           '<button type="button" class="st-menu-item bad" data-act="st5a-del-folder" data-id="' + f.id + '"><div class="st-menu-ico">' + LIB_ICO.trash + '</div><div class="st-menu-txt"><strong>Delete folder</strong><small>Items stay in library</small></div></button>' +
@@ -970,7 +982,7 @@
   function drawBgCanvas(ctx, style, ratio, W) {
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
     if (style === "blank") return;
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400);
+    ctx.strokeStyle = style === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900);
     var s = 0.05, end = style === "cornell" ? ratio * 0.8 : ratio;
     ctx.beginPath();
     if (style === "ruled" || style === "cornell") { for (var y = s * 2; y < end; y += s) { ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); } }
@@ -1173,8 +1185,8 @@
     if (a === "st5a-crumb") { libState.currentFolderId = el.getAttribute("data-id") || null; return renderLibBody(); }
     if (a === "st5a-open-folder") { libState.currentFolderId = idOf(el); return renderLibBody(); }
     if (a === "st5a-open") { openDocById(idOf(el), parseInt(el.getAttribute("data-page"), 10) || null); return; }
-    if (a === "st5a-dt-open") { openDocById(idOf(el), null); return; }
-    if (a === "st5a-dt-close") { removeTab(idOf(el)); return; }
+    if (a === "st5a-dt-open" || a === "st-dt-open") { openDocById(idOf(el), null); return; }
+    if (a === "st5a-dt-close" || a === "st-dt-close") { removeTab(idOf(el)); return; }
     if (a === "st5a-fav") { closeSheet5a(); return idbGet("docs", idOf(el)).then(function (d) { if (!d) return; d.favourite = !d.favourite; return idbPut("docs", d); }).then(renderLibBody); }
     if (a === "st5a-fav-folder") { closeSheet5a(); return idbGet("folders", idOf(el)).then(function (f) { if (!f) return; f.favourite = !f.favourite; return idbPut("folders", f); }).then(renderLibBody); }
     if (a === "st5a-doc-menu") return showDocMenu5a(idOf(el));
@@ -1239,6 +1251,17 @@
       return;
     }
     if (a === "st5a-scan") { closeSheet5a(); if (origAct) return origAct("st-scan", el, h); return; }
+    if (a === "st5a-libmore") {
+      openSheet('<div class="st-doc-menu-head"><div class="st-doc-menu-title">Library</div></div>' +
+        '<div class="st-menu-list">' +
+          '<button type="button" class="st-menu-item" data-act="st5a-backup"><div class="st-menu-ico">' + LIB_ICO.upload + '</div><div class="st-menu-txt"><strong>Back up library</strong><small>Save every notebook, PDF and ink as one file</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-restore-lib"><div class="st-menu-ico">' + LIB_ICO.restore + '</div><div class="st-menu-txt"><strong>Restore</strong><small>Bring back a library backup file</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-new-folder"><div class="st-menu-ico">' + LIB_ICO.folder + '</div><div class="st-menu-txt"><strong>New folder</strong><small>Group notebooks and PDFs</small></div></button>' +
+          '<button type="button" class="st-menu-item" data-act="st5a-tab" data-v="trash"><div class="st-menu-ico">' + LIB_ICO.trash + '</div><div class="st-menu-txt"><strong>Trash</strong><small>Deleted items stay 30 days</small></div></button>' +
+        '</div>' +
+        '<div class="st-sh-foot"><button type="button" class="pn-btn" data-act="st5a-close">Done</button></div>');
+      return;
+    }
     if (a === "st5a-backup") { closeSheet5a(); if (origAct) return origAct("st-backup", el, h); return; }
     if (a === "st5a-restore-lib") { closeSheet5a(); var rf = hRoot() && hRoot().querySelector("#stRestoreF"); if (rf) rf.click(); return; }
     if (a === "st5a-folder-colour") return showFolderColourSheet(idOf(el));
@@ -1295,13 +1318,7 @@
         '<input type="file" id="stFile" accept="application/pdf" hidden>' +
         '<input type="file" id="stPhotos" accept="image/*" multiple hidden>' +
         '<input type="file" id="stRestoreF" accept=".zip,application/zip" hidden>' +
-        '<div class="st-backup-box">' +
-          '<div class="st-acts">' +
-            '<button type="button" class="pn-btn sm" data-act="st5a-backup">Back up library</button>' +
-            '<button type="button" class="pn-btn sm" data-act="st5a-restore-lib">Restore</button>' +
-          '</div>' +
-          '<p class="pn-note" id="stBk" role="status" style="margin:0"></p>' +
-        '</div>' +
+
       '</div>');
     wireLib();
     try { if (G.STUDY && G.STUDY.kick) G.STUDY.kick(); } catch (e) {}
@@ -1337,7 +1354,7 @@
   /* self-delegation: prep.js only forwards data-act starting "st-"; st5a- needs its own listener */
   if (D && D.addEventListener) {
     D.addEventListener("click", function (e) {
-      var t = e.target && e.target.closest ? e.target.closest("[data-act^='st5a-']") : null;
+      var t = e.target && e.target.closest ? e.target.closest("[data-act^='st5a-'], [data-act='st-dt-open'], [data-act='st-dt-close']") : null;
       if (!t) return;
       var a = t.getAttribute("data-act");
       var h = getHost(); if (!h) return;
@@ -1358,7 +1375,7 @@
     };
     S.act = function (a, el, h) {
       host = h;
-      if (a.indexOf("st5a-") === 0) return libAct5a(a, el, h);
+      if (a.indexOf("st5a-") === 0 || a === "st-dt-open" || a === "st-dt-close") return libAct5a(a, el, h);
       // opening a document through the old actions also tracks tabs + injects the tab bar
       if (a === "st-open" || a === "st-hit" || a === "st-src" || a === "st-mknb" || a === "st5a-mknb") {
         captureCurrentTab();

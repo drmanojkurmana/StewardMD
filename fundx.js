@@ -168,17 +168,19 @@
     function on() { try { return localStorage.getItem("smd_fundx_voice") === "1"; } catch (e) { return false; } }
     return {
       enabled: on,
-      setEnabled: function (b) { try { localStorage.setItem("smd_fundx_voice", b ? "1" : "0"); } catch (e) {} },
+      setEnabled: function (b) { try { localStorage.setItem("smd_fundx_voice", b ? "1" : "0"); } catch (e) {} try { if (b && window.SMD_SPEAK) window.SMD_SPEAK.unlock(); } catch (e) {} },   // the toggle tap unlocks audio for the cues
       speak: function (text) {
         if (!on() || !text) return;
         var t = nowMs(); if (text === last && (t - lastAt) < 2800) return; last = text; lastAt = t;
+        // The app's standard voice (smd-speak.js: Phonon 31M once loaded, the system voice until then); a new cue cuts the last.
         try {
+          if (window.SMD_SPEAK) { window.SMD_SPEAK.say(text, { rate: 1.05 }).catch(function () {}); return; }
           if (!window.speechSynthesis || typeof SpeechSynthesisUtterance === "undefined") return;
           var u = new SpeechSynthesisUtterance(text); u.rate = 1.05; u.pitch = 1;
           window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);
         } catch (e) {}
       },
-      stop: function () { try { if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {} }
+      stop: function () { try { if (window.SMD_SPEAK) window.SMD_SPEAK.stop(); if (window.speechSynthesis) window.speechSynthesis.cancel(); } catch (e) {} }
     };
   })();
 

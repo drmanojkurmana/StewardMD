@@ -124,7 +124,11 @@ test("media: videos come from cleared CliniX manifest entries and play through t
   assert.match(shimHtml, /auto \? "&autoplay=1"/, "the shim forwards autoplay to the official player");
   assert.match(shimHtml, /onAutoplayBlocked: muteAndPlay/, "a blocked autoplay retries muted instead of sitting paused");
   assert.match(media, /"autoplay; /, "the app frame delegates autoplay");
-  assert.doesNotMatch(media + feed, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "videos never hand off to the YouTube app or site");
+  assert.match(shimHtml, /e\.source !== window\.parent/, "the shim takes commands only from the app frame that embeds it");
+  for (const c of ["play", "pause", "seek", "mute", "unmute"]) assert.match(shimHtml, new RegExp('d\\.smdCmd === "' + c + '"'), "shim handles " + c);
+  assert.match(media, /postMessage\(\{ smdCmd: cmd, by: by \|\| 0 \}, "https:\/\/stewardmd\.in"\)/, "commands are posted to the shim origin only");
+  assert.doesNotMatch(media, /youtube\.com\/watch|Browser\.open|Play on YouTube/, "the player never hands a video off to the YouTube app or site");
+  assert.doesNotMatch(feed, /youtube\.com\/watch|Play on YouTube/, "the reel never hands a video off either (Browser.open there is for sharing to WhatsApp only)");
   const vids = M.videosFrom({ media: {
     a: { kind: "embed", embeddable: true, cleared: true, videoId: "gRWSyqatWQQ", title: "Resp exam", attribution: "Geeky Medics" },
     b: { kind: "embed", embeddable: false, cleared: true, videoId: "XU_xeUMJ3Zc" },
@@ -155,6 +159,21 @@ test("official-channel videos: 100+, unique 11-char ids, all on the shim allow-l
   assert.doesNotMatch(read("prep-medigram.js") + read("prep-medigram-videos.js"), /dQw4w9WgXcQ/, "placeholder gone");
 });
 
+test("image systems: NEET-SS gets its specialty systems, every other exam any system", () => {
+  assert.equal(D.imgSystemsFor("neet-pg", ["anatomy"]), null);
+  assert.equal(D.imgSystemsFor("mrcp-part1", []), null);
+  assert.equal(D.imgSystemsFor("usmle", []), null);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-cardiology"]), ["cardiology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-paediatric-nephrology"]), ["paediatrics", "renal-and-urology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-surgical-gastroenterology"]), ["surgery", "gastroenterology"]);
+  assert.deepEqual(D.imgSystemsFor("neet-ss", ["ss-ctvs", "ss-neurosurgery"]), ["surgery", "cardiology", "neurology"]);
+  assert.ok(D.imgSystemsFor("neet-ss", ["ss-mixed"]).includes("medicine"), "unrecognised specialty falls back to the medical systems");
+  const slugs = JSON.parse(read("kb/dist/imglib/index.json")).systems.map((x) => x.slug);
+  const all = new Set();
+  for (const id of ["ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-pulmonology", "ss-infectious-diseases", "ss-rheumatology-immunology", "ss-critical-care", "ss-neonatology", "ss-obg", "ss-radiology", "ss-head-neck-surgery", "ss-plastic-surgery", "ss-urology", "ss-onco-pathology", "ss-cardiac-anaesthesia", "ss-geriatric-mental-health", "ss-clinical-pharmacology", "ss-general-medicine"]) D.imgSystemsFor("neet-ss", [id]).forEach((x) => all.add(x));
+  for (const x of all) assert.ok(slugs.includes(x), x + " is a real Image Library system");
+});
+
 test("mixFeed: every n questions one other card, pearls and extras alternate, pearls never come early", () => {
   const q = (id, kp) => ({ id, q: "Q" + id, o: ["a", "b"], a: 0, kp, _s: "s" });
   const items = [q(1, "P1"), q(2), q(3, "P3"), q(4), q(5), q(6)];
@@ -162,7 +181,7 @@ test("mixFeed: every n questions one other card, pearls and extras alternate, pe
   const out = D.mixFeed(items, ex, 3);
   assert.deepEqual(out.map((c) => c.kind), ["q", "q", "q", "pearl", "q", "q", "q", "video"]);
   assert.equal(out[3].text, "P1");
-  assert.deepEqual(D.mixFeed(items, ex, 2).map((c) => c.kind), ["q", "q", "pearl", "q", "q", "video", "q", "q", "pearl"]);
+  assert.deepEqual(D.mixFeed(items, ex, 2).map((c) => c.kind), ["q", "q", "pearl", "q", "q", "video", "q", "q", "lesson"], "one pearl in three slots");
   assert.deepEqual(D.mixFeed([], ex, 3), []);
   assert.deepEqual(D.mixFeed(items, [], "5").map((c) => c.kind), ["q", "q", "q", "q", "q", "pearl", "q"]);
 });
@@ -183,7 +202,8 @@ test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded;
   assert.match(css, /\.pn-mg-btn \{[^}]*min-height: 52px/);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /#42cdb5/i);
-  assert.doesNotMatch(css, /linear-gradient|radial-gradient|backdrop-filter/);
+  assert.doesNotMatch(css, /linear-gradient|radial-gradient/);
+  assert.equal((css.match(/(^|[^-])backdrop-filter:/g) || []).length, 1, "the only blur is the glass video controls");
   const ui = read("prep-medigram.js");
   assert.match(ui, /data-act="mg-done">Finish/);
   assert.doesNotMatch(ui, /data-act="mg-cadence"/);
@@ -195,36 +215,33 @@ test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded;
   assert.match(ui, /G\.fetch\("\/clinix\/media\/manifest\.json"\)/, "the only fetch is the bundled CliniX manifest");
 });
 
-test("home row: matches sibling rows with leading icon tile and trailing chevron", () => {
-  const mockG = {
-    PREP_MG_DATA: D,
-    PREP_MG_MEDIA: M,
-    localStorage: { getItem: () => null, setItem: () => {} },
-    location: { search: "?medigram=1" }
-  };
+test("home card: one PrepReels card in the Solve next style, Saved beside it once anything is saved", () => {
   const code = read("prep-medigram.js");
-  new Function("window", code)(mockG);
-  const mg = mockG.PREP_MEDIGRAM;
+  const boot = () => { const g = { PREP_MG_DATA: D, PREP_MG_MEDIA: M, localStorage: { getItem: () => null, setItem: () => {} }, location: { search: "?medigram=1" } }; new Function("window", code)(g); return g.PREP_MEDIGRAM; };
+  const mg = boot();
   assert.ok(mg, "PREP_MEDIGRAM registered");
+  const host = (mgsv) => ({ ico: (n) => `<ico-${n}/>`, store: () => ({ mgsv }) });
+  const html = mg.homeHtml(host({}));
+  assert.match(html, /^<div class="pn-mgh"><button type="button" class="pn-next" data-act="mg-open"><span class="pn-ri" aria-hidden="true"><ico-play\/><\/span><span class="pn-rb"><small>PrepReels<\/small><b>[^<]+<\/b><\/span><ico-chev\/><\/button><\/div>$/);
+  assert.doesNotMatch(html, /mg-saved/, "no Saved button with nothing saved");
+  const two = mg.homeHtml(host({ a: {}, b: {} }));
+  assert.match(two, /data-act="mg-saved" aria-label="Saved from PrepReels, 2 cards"/);
+  assert.match(two, /<small>Saved<\/small><b>2<\/b>/);
+});
 
-  const mockHost = {
-    row: (act, icon, title, sub, attrs) => `<button type="button" class="pn-row" data-act="${act}"${attrs || ""}><span class="pn-ri" aria-hidden="true">${icon}</span><span class="pn-rb"><b>${title}</b><small>${sub}</small></span><chev/></button>`,
-    ico: (n) => `<ico-${n}/>`,
-    esc: (s) => s
-  };
-
-  const html = mg.homeHtml(mockHost);
-  assert.match(html, /class="pn-row"/);
-  assert.match(html, /data-act="mg-open"/);
-  assert.match(html, /class="pn-ri"[^>]*><ico-play\/>/);
-  assert.match(html, /class="pn-rb"[^>]*><b>PrepReels<\/b><small>Questions, videos and pearls, one swipe each<\/small><\/span>/);
-  assert.match(html, /<chev\/>/);
-
-  // Standalone fallback without host also provides pn-ri, pn-rb, play icon and chevron
-  const fallbackHtml = mg.homeHtml({});
-  assert.match(fallbackHtml, /class="pn-row"/);
-  assert.match(fallbackHtml, /data-act="mg-open"/);
-  assert.match(fallbackHtml, /class="pn-ri"/);
-  assert.match(fallbackHtml, /d="M7 5l12 7-12 7z"/, "play icon path");
-  assert.match(fallbackHtml, /d="M9 6l6 6-6 6"/, "chevron icon path");
+test("one feed and a compact home (owner 2026-11-17): Swipe feed is PrepReels; moved rows stay reachable", () => {
+  const play = read("prep-play.js"), prep = read("prep.js"), css = read("prep.css");
+  assert.match(play, /if \(a === "v-feed"\) return feed\(\);/, "the Swipe feed act goes through feed()");
+  assert.match(play, /if \(kind === "feed"\) return feed\(\);/, "the widget, watch and notification link too");
+  assert.match(play, /function feed\(\) \{ var M = reels\(\); return M \? M\.open\(H, "study"\) : openFeed\(\); \}/, "PrepReels when on, the old feed only as its fallback");
+  assert.match(play, /\(reels\(\) \? "" : H\.row\("v-feed"/, "no Swipe feed row while PrepReels is on");
+  assert.match(play, /class="pn-group pn-strip"/);
+  assert.doesNotMatch(play.slice(play.indexOf("function homeHtml("), play.indexOf("function freezeTick(")), /v-freeze/, "Streak freezes left the Play strip");
+  // Rows that leave home with the tab bar are in the You menu (renderMenu) or the Tests tab (renderMocks).
+  const menu = prep.slice(prep.indexOf("function renderMenu("), prep.indexOf("/* ---------- image credit sheet"));
+  for (const a of ["a-stats", "soc-open", "soc-acc", "p-settings", "bookmarks"]) assert.ok(menu.includes('"' + a + '"'), "You menu has " + a);
+  assert.match(prep, /var tabbed = !!G\.PREP_NAV;/, "without the tab bar the rows stay on home");
+  assert.match(prep, /cut = !scope && !st\.subsAll && subs\.length > 7/);
+  assert.match(prep, /if \(a === "subs-all"\)/);
+  assert.match(css, /\.pn-subs\.pn-cut > \.pn-tile:nth-child\(n\+7\) \{ display: none; \}/);
 });

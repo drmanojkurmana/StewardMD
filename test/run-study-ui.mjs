@@ -70,7 +70,7 @@ ok(true, "flag on: the Study tab shows");
 await page.evaluate(() => new Promise((r) => { const q = indexedDB.deleteDatabase("study"); q.onsuccess = q.onerror = q.onblocked = () => r(); }));
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector("#stLib");
-ok(/No PDFs yet/.test(await page.locator("#stList").innerText()), "library: empty state");
+ok(/Import a PDF, create a notebook, or scan notes/.test(await page.locator("#stList").innerText()), "library: empty state");
 await page.setInputFiles("#stFile", { name: "fixture.pdf", mimeType: "application/pdf", buffer: PDF });
 await page.waitForSelector(".st-doc", { timeout: 20000 });
 ok(/2 pages/.test(await page.locator(".st-doc").innerText()), "library: imported PDF listed with 2 pages");
@@ -91,7 +91,7 @@ const stroke = (y) => page.evaluate((y) => {
 await stroke(0.2); await stroke(0.5);
 const live = () => page.evaluate(() => STUDY._state().strokes.filter((s) => !s.gone).length);
 ok(await live() === 2, "two pen strokes drawn");
-ok(await page.evaluate(() => STUDY._state().strokes.every((s) => s.pts.length >= 7 && s.pts.every((p) => p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1) && s.pts[1][2] === 0.6 && s.pts[0][2] === 0.3)), "points are page-relative (0..1) and keep pressure");
+ok(await page.evaluate(() => STUDY._state().strokes.every((s) => s.pts.length >= 7 && s.pts.every((p) => p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1) && s.pts[1][2] === Math.round(Math.pow(0.6, 0.43) * 1e4) / 1e4 && s.pts[0][2] === Math.round(Math.pow(0.3, 0.43) * 1e4) / 1e4)), "points are page-relative (0..1) and keep pressure (on the handwriting curve)");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 1, "undo hides one stroke");
 await page.click('[data-act="st-redo"]');
@@ -670,7 +670,7 @@ await page.waitForTimeout(300);
 await boot("prep=1&study=1");
 await page.click('#smdPrep .pnv-tab[data-tab="study"]');
 await page.waitForSelector(".st-doc");
-ok(await page.evaluate(() => /Notebook, 2 pages/.test(document.querySelector("#stList").innerText) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
+ok(await page.evaluate(() => (/Notebook, 2 pages/.test(document.querySelector("#stList").innerText) || Array.from(document.querySelectorAll("#stList .st-doc")).some((c) => /\bNB\b/.test(c.innerText) && /2 pages/.test(c.innerText))) && Array.from(document.querySelectorAll(".st-th")).every((i) => /^data:image\/jpeg/.test(i.src))), "notebook: listed beside the PDF with a thumbnail");
 await page.locator(".st-doc", { hasText: "Ward notes" }).locator(".st-open").click();
 await page.waitForSelector(".st-pg canvas.st-ov");
 await page.waitForFunction(() => STUDY._state() && STUDY._state().strokes.length === 1, null, { timeout: 10000 });
@@ -891,6 +891,7 @@ const snap = async () => {
   return { docs: docs.map((d) => d.id).sort(), per, shas, folders: (await idbAll("folders")).length, n: docs.length, st: strokes.length };
 };
 const before = await snap();
+if (!(await page.locator('[data-act="st5a-backup"]:visible').count())) { await page.click('[data-act="st5a-libmore"]'); await page.waitForSelector('#st5aSheet [data-act="st5a-backup"]'); }   // Back up lives in the library More menu
 const bk = await dl(() => page.click('[data-act="st5a-backup"]'));
 const zmap = FF.unzipSync(new Uint8Array(bk.buf)), zman = JSON.parse(Buffer.from(zmap["manifest.json"]).toString());
 const nPdf = Object.keys(before.shas).length;

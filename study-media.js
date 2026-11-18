@@ -195,7 +195,7 @@
   function drawBg(ctx, style, ratio, W) {
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, W, W * ratio);
     if (style === "blank") return;
-    ctx.strokeStyle = "#b8c4d6"; ctx.lineWidth = Math.max(1, W / 400);
+    ctx.strokeStyle = style === "grid" ? "#cfd8e6" : "#b9c5d8"; ctx.lineWidth = Math.max(1, W / 900);
     var s = 0.05, end = style === "cornell" ? ratio * 0.8 : ratio, y, x;
     ctx.beginPath();
     if (style === "ruled" || style === "cornell") for (y = s * 2; y < end; y += s) { ctx.moveTo(0, y * W); ctx.lineTo(W, y * W); }
@@ -604,6 +604,7 @@
     e.id = "stSheet"; e.className = "st-sheet"; e.setAttribute("role", "dialog"); e.setAttribute("aria-modal", "true");
     e.innerHTML = '<div class="st-sh smd-books-keep smd-emo-keep">' + html + '<div class="st-acts">' + (ok ? '<button type="button" class="pn-btn pri" data-act="st-sok" id="stSheetOk">' + label + "</button>" : "") +
       '<button type="button" class="pn-btn" data-act="st-scancel">' + (ok ? "Cancel" : "Close") + "</button></div></div>";
+    e.addEventListener("click", function (ev) { if (ev.target === e) closeSheet(); });
     root.appendChild(e);
   }
   function closeSheet() { var r = hostRoot(); if (!r) return; var e = r.querySelector("#stSheet"); if (e && e.parentNode) e.parentNode.removeChild(e); }

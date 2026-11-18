@@ -28,13 +28,42 @@
   /* ================= browser ================= */
   /* One live player, inside the app (never a hand-off to the YouTube app or site). It autoplays when its card arrives
      and is removed when the card leaves, so nothing plays off screen. */
-  var live = null;   // { holder, iframe }
+  var live = null, onState = null;   // live = { holder, iframe, videoId, state, muted }
+  // The shim reports { smdYt, v, state, muted } (YouTube states: 1 playing, 2 paused, 3 buffering, 0 ended).
+  try { G.addEventListener("message", function (e) {
+    var d = e && e.data;
+    if (!live || !d || d.smdYt !== true || d.v !== live.videoId || e.source !== live.iframe.contentWindow) return;
+    live.state = d.state; live.muted = !!d.muted;
+    if (onState) try { onState(live); } catch (x) {}
+  }); } catch (e) {}
+  function command(cmd, by) {
+    if (!live || !live.iframe.contentWindow) return false;
+    try { live.iframe.contentWindow.postMessage({ smdCmd: cmd, by: by || 0 }, "https://stewardmd.in"); return true; } catch (e) { return false; }
+  }
   function release() {
     if (!live) return;
     try { if (live.iframe.parentNode) live.iframe.parentNode.removeChild(live.iframe); } catch (e) {}
     try { live.holder.classList.remove("on"); } catch (e) {}
     live = null;
   }
+  /* The iPad layout zooms the page (html zoom 1.15, smd-refined). WebKit then lays the player's page out wider than the
+     box it is drawn in, so the right of every video was cut off (owner screenshots 2026-11-17). The frame undoes the
+     zoom (zoom 1/z) and is sized in px, so inside and outside agree on every device. fit() re-runs on resize. */
+  function effZoom(el) {
+    try { if (el.currentCSSZoom) return el.currentCSSZoom; } catch (e) {}
+    var z = 1;
+    for (var n = el; n && n.nodeType === 1; n = n.parentElement) { var v = parseFloat(G.getComputedStyle(n).zoom); if (v > 0) z *= v; }
+    return z;
+  }
+  function fit() {
+    if (!live) return;
+    var h = live.holder, f = live.iframe, z = effZoom(h);
+    if (Math.abs(z - 1) < 0.01) { f.style.zoom = ""; f.style.width = ""; f.style.height = ""; return; }
+    f.style.zoom = String(1 / z);
+    f.style.width = h.clientWidth * z + "px";
+    f.style.height = h.clientHeight * z + "px";
+  }
+  try { G.addEventListener("resize", function () { fit(); }); G.addEventListener("orientationchange", function () { G.setTimeout(fit, 300); }); } catch (e) {}
   function mount(holder, videoId, title) {
     if (live && live.holder === holder) return;
     release();
@@ -47,11 +76,12 @@
     f.setAttribute("allowfullscreen", "");
     holder.appendChild(f);
     holder.classList.add("on");
-    live = { holder: holder, iframe: f };
+    live = { holder: holder, iframe: f, videoId: videoId, state: -1, muted: false };
+    fit();
   }
   try {
     G.document.addEventListener("visibilitychange", function () { if (G.document.visibilityState === "hidden") release(); });
     G.addEventListener("pagehide", release);
   } catch (e) {}
-  G.PREP_MG_MEDIA = { validVideoId: validVideoId, shimUrl: shimUrl, videosFrom: videosFrom, mount: mount, release: release, _pure: PURE };
+  G.PREP_MG_MEDIA = { validVideoId: validVideoId, shimUrl: shimUrl, videosFrom: videosFrom, mount: mount, release: release, command: command, fit: fit, current: function () { return live; }, onState: function (fn) { onState = fn; }, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);

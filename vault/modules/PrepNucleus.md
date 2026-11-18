@@ -1882,8 +1882,10 @@ Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decis
   optional in `prep-loader.js`). Server `functions/api/prep/play/[[path]].js` + `functions/_prep-play.js`, D1 tables in
   `prep-arena-worker/migrations/0007_prep_play.sql` (apply before focus, spot board and mnemonics work). Squads live in
   `functions/api/prep/social` + `prep-social.js`; revenge in `prep-arena.js`.
-- **Home Play section:** Swipe feed, Spot diagnosis of the day, Boss battles, Quick fire, Voice mode, Focus room, Wrapped,
-  Season (Arena on), Streak freezes.
+- **Home Play section:** a sideways strip (`.pn-strip`): Spot diagnosis of the day, Boss battles, Quick fire, Voice mode,
+  Focus room, Wrapped, Season (Arena on). Streak freezes moved to Your progress (`PREP_PLAY.freezeRow`, 2026-11-17).
+  Swipe feed IS PrepReels since 2026-11-17: `v-feed` and `PREP.open({ play: "feed" })` go through `feed()` -> `PREP_MEDIGRAM.open`;
+  the old feed (`openFeed`, `#pvFeed`) runs only when PrepReels is off (`?medigram=0`), and only then shows its row.
 - **Swipe feed:** vertical scroll-snap cards from 4 random plan modules; a pearl after every 3rd question (only from a
   question already passed), an image card (eye/PSM atlas) after every 5th. Answers record through `HOST.record`.
 - **Spot diagnosis:** pool = `prep/imglearn/eye.json` + `psm.json` (now copied by build-www; the Eye and PSM atlases were
@@ -2045,3 +2047,20 @@ hairlines. Fallback rows keep a neutral tile. Then (owner: "3D effect and differ
 (tests pin it); icons are masked pseudo-elements. Items with the reasoning body (RX) keep Know more inside `.pn-rx`; the
 group then holds the figure and Ask MaiK. Known: `run-prep-relabel-ui` q4 and `run-beta-figure-ui` paracetamol fail on
 main before this change.
+
+## Compact home (2026-11-17, prep180; order prep183)
+Owner: "Homepage is overwhelming, more options more scrolling" and "Swipe feed and PrepReels are same, unite them". Phone home
+went from 6.7 screens to 3.7. Same rows and actions, laid out tighter (CSS block "Compact home" near the top of prep.css,
+ahead of the scoped "Reasoning explanations" / "Why option chips" blocks whose tests read everything after their marker):
+- Order (owner, same day, then moved by the owner's markup): readiness score, Question of the day, Today's plan (`#pnPlanTop` and `#pnPlanList` are separate boxes so `homeMounted` never wipes it), Practise, IQoach, Play, Subjects,
+  Your progress, Compete. `#pnQotd` keeps 300 px (`.pn-qotd-wait`) until the question loads, so the plan does not jump;
+  no question (offline, empty, failed index load) hides it.
+- PrepReels: one `.pn-next`-style card under Solve next (`.pn-mgh`), Saved beside it once anything is saved.
+- Practise: `.pn-group.pn-grid4` icon tiles (auto-fit, min 78 px: 4 a row on a phone, 3 under 360 px, one row on iPad),
+  subtitles hidden. Nucleus360, ReWise, Custom, Mistakes, Weak areas, Bookmarks, Previous year papers (NEET-PG), Cards due, decks.
+- With the tab bar (`G.PREP_NAV`) these leave home: My stats, Friends, Accuracy, Settings, Notebook (You tab) and Mock exam
+  (Tests tab). Without prep-nav.js they stay. Settings stays one tap away as "Change plan" in Today's plan once a plan exists.
+- Subjects: first 6, then "Show all N subjects" (`subs-all`, `st.subsAll`, CSS `.pn-cut`); the DOM keeps every tile.
+  NEET-SS scoped homes are not cut. Tests > QBank lists every subject too.
+- Harness note: overflow checks must skip `.pn-strip` (its off-screen cards are scroll content, not page overflow).
+

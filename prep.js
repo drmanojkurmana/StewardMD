@@ -2036,49 +2036,57 @@
     var tabs = plan ? "" : '<div class="pn-tabs" role="tablist" aria-label="Exam">' + EXAMS.map(function (e) {
       return '<button type="button" role="tab" class="pn-tab' + (e.id === ex.id ? " on" : "") + '" aria-selected="' + (e.id === ex.id) + '" data-act="exam" data-v="' + e.id + '">' + esc(e.label) + "</button>";
     }).join("") + "</div>";
-    var nb = Object.keys(s.bm).length;
+    var nb = Object.keys(s.bm).length, cut = !scope && !st.subsAll && subs.length > 7;
     // Back on home with every index already read: the subject rows and Solve next draw complete in the first paint, so
     // nothing above the kept scroll position grows after it is restored (no anchoring jump).
     var known = subs.every(function (sb) { return !!st.ix[sb.id]; }), nx0 = known ? solveNext(subs, st.ix, s, today(), s.exam) : null;
-    var you = (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
+    /* Compact home (owner 2026-11-17: "overwhelming, more options, more scrolling"). With the tab bar (prep-nav.js) the rows
+       it already holds (You: stats, friends, accuracy, settings, notebook; Tests: mock exam) leave
+       home; without it they stay, so nothing is ever out of reach. */
+    var tabbed = !!G.PREP_NAV;
+    var you = (G.PREP_PLAY && G.PREP_PLAY.freezeRow ? G.PREP_PLAY.freezeRow(HOST) : "") + (tabbed ? "" : (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days") : "") +
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") +
-      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : "");
+      (plan ? row("p-settings", ico("gear"), "Settings", "Exam: " + esc(exLabel) + " · plan and reminder") : ""));
     /* Quiet home (2026-10-10, owner brief): the brand is the mark and the name in the bar (no banner, no painted sky).
        Top down: readiness and days to the exam, today's next task and the rest of the plan, practice, subjects, then
        the secondary figures (streak, today, level) and Compete. */
+    var qotdSec = (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd pn-qotd-wait" id="pnQotd" aria-hidden="true"></section>');
     paint(bar("PrepNucleus", esc(exLabel), "close", '<button type="button" class="pn-ib" data-act="find" aria-label="Search questions, lessons, pearls and IDs">' + ico("search") + '</button><button type="button" class="pn-ib" data-act="menu" aria-label="Menu">' + ico("menu") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      // Readiness and Today's plan (prep-plan.js); the older Today card without it.
-      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
-      coachSecHtml("home") +
+      // Readiness, then Question of the day (owner 2026-11-17: under the score, above Today's plan), then Today's plan
+      // (prep-plan.js); the older Today card without it. IQoach sits after Practise.
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
-      (st.qotd && st.qotdDay === today() && st.qotdEx === s.exam ? '<section class="pn-qotd" id="pnQotd">' + qotdHtml(st.qotd) + "</section>" : '<section class="pn-qotd" id="pnQotd" hidden></section>') +
+      (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST, qotdSec) : qotdSec + '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       '<h2 class="pn-h">Practise</h2>' +
       '<button type="button" class="pn-next" data-act="solvenext" id="pnNext"' + (nx0 ? ' data-s="' + esc(nx0.subject) + '" data-m="' + esc(nx0.module) + '"' : " hidden") + '><span class="pn-ri" aria-hidden="true">' + ico("target") + '</span><span class="pn-rb"><small>Solve next</small><b id="pnNextT">' + (nx0 ? esc(nextLabel(nx0)) : "") + "</b></span>" + ico("chev") + "</button>" +
-      '<div class="pn-group">' +
+      // PrepReels (prep-medigram.js): the one swipe feed (Play's Swipe feed opens it too).
+      (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
+      // With the tab bar the Practise rows are a grid of icon tiles (prep.css .pn-grid4), the same rows and actions.
+      '<div class="pn-group' + (tabbed ? " pn-grid4" : "") + '">' +
       // Nucleus360 (prep-nucleus360.js): learn a topic A to Z. Was only a button inside a module; it leads the Practise group now.
       (G.PREP_NUCLEUS360 && G.PREP_NUCLEUS360.on() ? row("n360-hub", ico("grid"), "Nucleus360", "Learn a topic A to Z through MCQs") : "") +
       (G.PREP_TT ? G.PREP_TT.homeRow(HOST) : "") +
-      row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
-      (G.PREP_TOOLS ? G.PREP_TOOLS.notebookRow(HOST) : "") +
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
-      row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
       (G.PREP_PLAN ? row("weak", ico("target"), "Weak areas", "Mistakes and modules under 60%") : "") +
+      row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
       // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
       (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
+      (tabbed ? "" : (G.PREP_TOOLS ? G.PREP_TOOLS.notebookRow(HOST) : "") + row("mocks", ico("clock"), "Mock exam", "Full pattern, marked")) +
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       (G.STUDY ? G.STUDY.homeRow(HOST) : "") +
       "</div>" +
+      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
+      coachSecHtml("home") +
       (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
-      (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
-      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
+      // The first 6 subjects, then "Show all" opens the rest in place (prep.css .pn-cut); every subject is also in Tests, QBank.
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs' + (cut ? " pn-cut" : "") + '" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      (cut ? '<button type="button" class="pn-btn pn-subs-all" data-act="subs-all">Show all ' + subs.length + " subjects</button>" : "")) +
       // Secondary: streak, today and level (prep-plan.js), then the student's own pages and settings.
       (G.PREP_PLAN && G.PREP_PLAN.progressHtml ? G.PREP_PLAN.progressHtml(HOST) : '<h2 class="pn-h">You</h2>') +
       (you ? '<div class="pn-group pn-you">' + you + "</div>" : "") +
@@ -2095,7 +2103,7 @@
       if (G.PREP_PLAN) G.PREP_PLAN.homeMounted(HOST);
       if (nx && el) { el.hidden = false; el.setAttribute("data-s", nx.subject); el.setAttribute("data-m", nx.module); root.querySelector("#pnNextT").textContent = nextLabel(nx); }
       qotdMount(subs, s);
-    });
+    }, function () { var q = root && root.querySelector("#pnQotd.pn-qotd-wait"); if (q) q.hidden = true; });
   }
   /* ---------- question of the day (prep50) ----------
      One real bank question a day: the day picks a module of the exam's subjects already on this phone, the day
@@ -2147,9 +2155,12 @@
   function qotdMount(subs, s) {
     var box = root && root.querySelector("#pnQotd");
     if (!box) return;
-    qotdPick(subs, s).then(function (it) {
+    qotdPick(subs, s).then(null, function () { return null; }).then(function (it) {
       box = root && root.querySelector("#pnQotd");
-      if (!box || !it || !st.open) return;
+      if (!box || !st.open) return;
+      // At the top of home its space is kept while it loads (no jump); no question today (offline, empty) drops it.
+      box.classList.remove("pn-qotd-wait"); box.removeAttribute("aria-hidden");
+      if (!it) { box.hidden = true; return; }
       st.qotd = it; st.qotdDay = today(); st.qotdEx = s.exam;
       patchHtml(box, qotdHtml(it)); box.hidden = false;
     });
@@ -4637,6 +4648,7 @@
     if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
     if (a === "mocks") { ttSet("tests"); return push(renderMocks); }
+    if (a === "subs-all") { st.subsAll = true; var gr = root.querySelector("#pnGrid"); if (gr) gr.classList.remove("pn-cut"); if (b.parentNode) b.parentNode.removeChild(b); var t7 = gr && gr.children[6]; if (t7) t7.focus(); return; }
     if (a === "tt") { ttSet(v); nav(0); return rerender(); }
     if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], n: rt4.i + 1, side: true, topic: rt4.title }, HOST); return; }
     if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], n: i5 + 1, side: true, topic: rt5.title }, HOST); return; }

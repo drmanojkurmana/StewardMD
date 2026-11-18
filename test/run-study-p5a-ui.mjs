@@ -104,7 +104,7 @@ await page.waitForSelector('[data-act="st5a-trash"]');
 await page.click('[data-act="st5a-trash"]');
 await page.waitForFunction((n) => document.querySelectorAll(".st5a-card.st-doc").length === n - 1, cardsBeforeTrash, { timeout: 10000 });
 ok(await page.locator(".st5a-card.st-doc").count() === cardsBeforeTrash - 1, "5.4: doc leaves grid when trashed");
-await page.click('[data-act="st5a-tab"][data-v="trash"]');
+await (async () => { if (!(await page.locator('[data-act="st5a-tab"][data-v="trash"]:visible').count())) { await page.click('[data-act="st5a-libmore"]'); await page.waitForSelector('#st5aSheet [data-act="st5a-tab"][data-v="trash"]'); } await page.click('[data-act="st5a-tab"][data-v="trash"]:visible'); })();
 await page.waitForFunction(() => /alpha/.test(document.querySelector("#stList").innerText), null, { timeout: 10000 });
 ok(true, "5.4: Trash view shows the item");
 await page.locator(".st5a-card.st-doc", { hasText: "alpha" }).first().locator('[data-act="st5a-doc-menu"]').click();

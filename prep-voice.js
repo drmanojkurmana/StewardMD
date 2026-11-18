@@ -27,6 +27,7 @@
   function fadeIn(a) { var out = new Float32Array(a), lead = Math.min(out.length, 480); for (var i = 0; i < lead; i++) out[i] *= i / lead; return out; }
   var PURE = { wavBlob: wavBlob, fadeIn: fadeIn, SR: SR, RTF_MAX: RTF_MAX };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
+  if (G.PREP_VOICE) return;   // already loaded (smd-speak.js loads it outside PrepNucleus): one model, one state
 
   /* ---------- engine ---------- */
   // memo[text] = { p: Promise<Float32Array>, c: AbortController|null, done, want }: each render has its own controller, so

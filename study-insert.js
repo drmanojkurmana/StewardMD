@@ -180,7 +180,18 @@
     return r4(1 - ageMs / maxAgeMs);
   }
 
+  /* Laser trail opacity: "keep" or still drawing -> 1; "trail" (Fade) -> visible 5 s after lift, fading over the last 0.6 s. */
+  function laserStrokeAlpha(now, lift, mode, holdMs, fadeMs) {
+    holdMs = holdMs || 5000; fadeMs = fadeMs || 600;
+    if (mode === "keep" || !lift) return 1;
+    var age = now - lift;
+    if (age >= holdMs) return 0;
+    if (age <= holdMs - fadeMs) return 1;
+    return r4((holdMs - age) / fadeMs);
+  }
+
   var PURE = {
+    laserStrokeAlpha: laserStrokeAlpha,
     makeItem: makeItem,
     moveItemGeom: moveItemGeom,
     resizeItemGeom: resizeItemGeom,
@@ -214,7 +225,12 @@
   var curTextColor = "#111111";
   var curFill = "transparent";
   var curBorder = "none";
-  var laserMode = "trail"; // "dot" | "trail"
+  function laserPref(k, d) { try { return (G.localStorage && G.localStorage.getItem("smd_study_laser_" + k)) || d; } catch (e) { return d; } }
+  function laserSave(k, v) { try { if (G.localStorage) G.localStorage.setItem("smd_study_laser_" + k, v); } catch (e) {} }
+  var LASER_COLORS = ["#ff2d55", "#22c55e", "#3b82f6"];
+  var laserMode = laserPref("mode", "trail"); // "trail" = fade 5 s after lift | "keep" = stays until Clear / tool change | "dot"
+  var laserColor = laserPref("color", "#ff2d55");
+  var laserStrokes = []; // { n, pts: [{x, y}], lift: 0 | ms }
   var laserPoints = [];
   var laserActive = false;
   var laserRaf = 0;
@@ -289,6 +305,8 @@
   }
 
   /* ---- Laser Pointer (NEVER stored, never in undo) ---- */
+  /* same pixel cap as the page canvases: iPad blanks canvases over ~16.7 M px when zoomed */
+  function laserDpr(cw, ch) { return Math.max(0.25, Math.min(G.devicePixelRatio || 1, 2, Math.sqrt(8e6 / Math.max(1, cw * ch)))); }
   function getLaserCanvas(n) {
     var v = V();
     if (!v || !v.pg[n]) return null;
@@ -307,7 +325,7 @@
       el.appendChild(lcv);
     }
     var cw = el.clientWidth, ch = el.clientHeight;
-    var dpr = Math.min(G.devicePixelRatio || 1, 2);
+    var dpr = laserDpr(cw, ch);
     if (lcv.width !== Math.floor(cw * dpr) || lcv.height !== Math.floor(ch * dpr)) {
       lcv.width = Math.floor(cw * dpr);
       lcv.height = Math.floor(ch * dpr);
@@ -315,103 +333,98 @@
     return lcv;
   }
 
+  function laserPath(ctx, pts, cw, ch) {
+    ctx.beginPath();
+    for (var i = 0; i < pts.length; i++) {
+      var x = pts[i].x * cw, y = pts[i].y * ch;
+      if (!i) { ctx.moveTo(x, y); continue; }
+      if (i < pts.length - 1) { var mx = (x + pts[i + 1].x * cw) / 2, my = (y + pts[i + 1].y * ch) / 2; ctx.quadraticCurveTo(x, y, mx, my); }
+      else ctx.lineTo(x, y);
+    }
+    if (pts.length === 1) ctx.lineTo(pts[0].x * cw + 0.01, pts[0].y * ch);
+  }
   function drawLaserFrame(n) {
     var lcv = getLaserCanvas(n);
     if (!lcv) return;
     var ctx = lcv.getContext("2d");
-    var dpr = Math.min(G.devicePixelRatio || 1, 2);
+    var dpr = lcv.width / (lcv.clientWidth || lcv.width || 1);
     ctx.clearRect(0, 0, lcv.width, lcv.height);
-    if (!laserPoints.length) return;
-
     var cw = lcv.clientWidth || (lcv.width / dpr);
     var ch = lcv.clientHeight || (lcv.height / dpr);
+    var now = Date.now();
     ctx.save();
     ctx.scale(dpr, dpr);
-
-    var now = Date.now();
+    ctx.lineCap = "round"; ctx.lineJoin = "round";
     if (laserMode === "dot") {
       var lp = laserPoints[laserPoints.length - 1];
-      if (lp && (laserActive || now - lp.t < 150)) {
+      if (lp && laserActive) {
         var px = lp.x * cw, py = lp.y * ch;
-        ctx.beginPath();
-        ctx.arc(px, py, 7, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255, 45, 85, 0.4)";
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(px, py, 4, 0, Math.PI * 2);
-        ctx.fillStyle = "#ff2d55";
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(px, py, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = "#ffffff";
-        ctx.fill();
+        ctx.shadowColor = laserColor; ctx.shadowBlur = 16;
+        ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI * 2); ctx.fillStyle = laserColor; ctx.fill();
+        ctx.shadowBlur = 0; ctx.beginPath(); ctx.arc(px, py, 2.2, 0, Math.PI * 2); ctx.fillStyle = "#ffffff"; ctx.fill();
       }
-    } else {
-      // Trail mode
-      laserPoints = laserFilterPoints(laserPoints, now, 1000);
-      if (laserPoints.length > 1) {
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        for (var i = 1; i < laserPoints.length; i++) {
-          var p0 = laserPoints[i - 1], p1 = laserPoints[i];
-          var age = now - p1.t;
-          var alpha = laserFadeAlpha(age, 1000);
-          if (alpha <= 0) continue;
-          ctx.beginPath();
-          ctx.moveTo(p0.x * cw, p0.y * ch);
-          ctx.lineTo(p1.x * cw, p1.y * ch);
-          ctx.strokeStyle = "rgba(255, 45, 85, " + alpha + ")";
-          ctx.lineWidth = Math.max(2, 5 * alpha);
-          ctx.stroke();
-        }
-      }
+      ctx.restore(); return;
     }
+    laserStrokes.forEach(function (st) {
+      if (st.n !== n || !st.pts.length) return;
+      var al = laserStrokeAlpha(now, st.lift, laserMode);
+      if (al <= 0) return;
+      /* glow: coloured halo, then a coloured body, then a white core (GoodNotes laser look) */
+      ctx.globalAlpha = al;
+      ctx.shadowColor = st.color; ctx.shadowBlur = 18; ctx.strokeStyle = st.color; ctx.lineWidth = 7;
+      laserPath(ctx, st.pts, cw, ch); ctx.stroke();
+      ctx.shadowBlur = 6; ctx.lineWidth = 4.5; laserPath(ctx, st.pts, cw, ch); ctx.stroke();
+      ctx.shadowBlur = 0; ctx.strokeStyle = "rgba(255,255,255,0.92)"; ctx.lineWidth = 1.8;
+      laserPath(ctx, st.pts, cw, ch); ctx.stroke();
+    });
     ctx.restore();
   }
 
+  function laserPages() { var o = {}; laserStrokes.forEach(function (st) { o[st.n] = 1; }); return Object.keys(o).map(Number); }
+  function laserVisible(now) { for (var i = 0; i < laserStrokes.length; i++) if (laserStrokeAlpha(now, laserStrokes[i].lift, laserMode) > 0) return true; return false; }
   function startLaserLoop(n) {
     if (laserRaf) return;
     function loop() {
-      drawLaserFrame(n);
       var now = Date.now();
-      if (!laserActive && (laserMode === "dot" || !laserPoints.length || (now - laserLiftTime >= 1050))) {
-        laserRaf = 0;
-        var lcv = getLaserCanvas(n);
-        if (lcv) {
-          var ctx = lcv.getContext("2d");
-          ctx.clearRect(0, 0, lcv.width, lcv.height);
-        }
-        laserPoints = [];
-        return;
-      }
-      laserRaf = G.requestAnimationFrame(loop);
+      if (laserMode !== "keep") laserStrokes = laserStrokes.filter(function (st) { return laserStrokeAlpha(now, st.lift, laserMode) > 0; });
+      var pages = laserPages(); if (pages.indexOf(n) === -1) pages.push(n);
+      pages.forEach(function (pn) { drawLaserFrame(pn); });
+      /* keep looping while drawing or while a Fade trail is still on screen; Keep mode is static after lift */
+      if (laserActive || (laserMode === "trail" && laserVisible(now))) { laserRaf = G.requestAnimationFrame(loop); return; }
+      laserRaf = 0;
     }
     laserRaf = G.requestAnimationFrame(loop);
+  }
+
+  function clearLaser() {
+    laserStrokes = []; laserPoints = [];
+    if (laserRaf) { G.cancelAnimationFrame(laserRaf); laserRaf = 0; }
+    Array.prototype.forEach.call(D.querySelectorAll(".st-laser-cv"), function (c) { c.getContext("2d").clearRect(0, 0, c.width, c.height); });
   }
 
   function laserDown(e, n, ov, relPt) {
     laserActive = true;
     laserPoints = [{ x: relPt[0], y: relPt[1], t: Date.now() }];
+    if (laserMode !== "dot") laserStrokes.push({ n: n, color: laserColor, pts: [{ x: relPt[0], y: relPt[1] }], lift: 0 });
     startLaserLoop(n);
   }
 
   function laserMove(e, n, ov, relPt) {
     if (!laserActive) return;
     laserPoints.push({ x: relPt[0], y: relPt[1], t: Date.now() });
+    var st = laserStrokes[laserStrokes.length - 1];
+    if (laserMode !== "dot" && st && !st.lift) st.pts.push({ x: relPt[0], y: relPt[1] });
     if (!laserRaf) startLaserLoop(n);
   }
 
   function laserUp(e, n, ov) {
     laserActive = false;
     laserLiftTime = Date.now();
-    if (laserMode === "dot") {
-      laserPoints = [];
-      var lcv = getLaserCanvas(n);
-      if (lcv) lcv.getContext("2d").clearRect(0, 0, lcv.width, lcv.height);
-      if (laserRaf) { G.cancelAnimationFrame(laserRaf); laserRaf = 0; }
-    } else {
-      if (!laserRaf) startLaserLoop(n);
-    }
+    var st = laserStrokes[laserStrokes.length - 1];
+    if (st && !st.lift) st.lift = laserLiftTime;
+    if (laserMode === "dot") { laserPoints = []; drawLaserFrame(n); return; }
+    if (laserRaf) { G.cancelAnimationFrame(laserRaf); laserRaf = 0; }
+    startLaserLoop(n);
   }
 
   /* ---- Render Items for a Page ---- */
@@ -1012,6 +1025,17 @@
     });
   }
 
+  /* Where a new sticker or image goes: centred on the part of page n that is on screen (ratios of rects, so the
+     Display zoom cancels out). A fixed spot put it below the fold on a landscape iPad, so a tap seemed to do nothing. */
+  function placeInView(n, w, h) {
+    var v = V(), p = v && v.pg && v.pg[n], dflt = { x: (1 - w) / 2, y: 0.15 };
+    if (!p || !p.el || !v.sc) return dflt;
+    var r = p.el.getBoundingClientRect(), s = v.sc.getBoundingClientRect();
+    var top = Math.max(r.top, s.top), bot = Math.min(r.bottom, s.bottom), left = Math.max(r.left, s.left), right = Math.min(r.right, s.right);
+    if (bot - top < 20 || right - left < 20 || !r.width || !r.height) return dflt;
+    var cx = ((left + right) / 2 - r.left) / r.width, cy = ((top + bot) / 2 - r.top) / r.height;
+    return { x: Math.max(0, Math.min(1 - w, cx - w / 2)), y: Math.max(0, Math.min(1 - h, cy - h / 2)) };
+  }
   function insertImageRecord(dataUrl, w, h) {
     var v = V();
     if (!v) return;
@@ -1020,8 +1044,7 @@
     var ratio = h / w;
     var itemW = 0.55;
     var itemH = Math.min(0.8, itemW * ratio * (1 / (v.ratio || 1.414)));
-    var itemX = (1 - itemW) / 2;
-    var itemY = 0.15;
+    var at = placeInView(n, itemW, itemH), itemX = at.x, itemY = at.y;
 
     var item = makeItem(v.id, pageId, "image", itemX, itemY, itemW, itemH, {
       src: dataUrl,
@@ -1347,6 +1370,7 @@
 
   /* ---- Sync Toolbar & Options ---- */
   function syncTb(v, root) {
+    if (v && v.tool !== "laser" && laserStrokes.length) clearLaser(); /* Keep-mode trails live only while the laser is the tool */
     if (!v || !root) return;
     var insertOpt = root.querySelector("#stInsertOptions");
     if (!insertOpt) return;
@@ -1390,10 +1414,12 @@
     } else if (v.tool === "laser") {
       insertOpt.hidden = false;
       insertOpt.innerHTML =
-        '<div class="st-laser-strip">' +
-          '<span style="font-size:12px;color:var(--pn-km-mint,#42cdb5);font-weight:600;">Laser Mode:</span>' +
-          '<button type="button" class="st-ink-seg' + (laserMode === 'trail' ? ' on' : '') + '" data-act="st-laser-trail" aria-pressed="' + (laserMode === 'trail') + '">Trail (1s fade)</button>' +
+        '<div class="st-laser-strip" role="group" aria-label="Laser options">' +
+          '<button type="button" class="st-ink-seg' + (laserMode === 'trail' ? ' on' : '') + '" data-act="st-laser-trail" aria-pressed="' + (laserMode === 'trail') + '">Fade in 5 s</button>' +
+          '<button type="button" class="st-ink-seg' + (laserMode === 'keep' ? ' on' : '') + '" data-act="st-laser-keep" aria-pressed="' + (laserMode === 'keep') + '">Keep</button>' +
           '<button type="button" class="st-ink-seg' + (laserMode === 'dot' ? ' on' : '') + '" data-act="st-laser-dot" aria-pressed="' + (laserMode === 'dot') + '">Dot</button>' +
+          LASER_COLORS.map(function (c) { return '<button type="button" class="st-laser-col' + (laserColor === c ? ' on' : '') + '" data-act="st-laser-color" data-v="' + c + '" aria-label="Laser colour ' + c + '" aria-pressed="' + (laserColor === c) + '" style="--lc:' + c + '"></button>'; }).join('') +
+          '<button type="button" class="st-ink-seg" data-act="st-laser-clear">Clear</button>' +
         '</div>';
     } else {
       insertOpt.hidden = true;
@@ -1472,14 +1498,22 @@
       return false;
     }
     // Laser mode switches
-    if (a === "st-laser-trail") {
-      laserMode = "trail";
+    if (a === "st-laser-trail" || a === "st-laser-keep" || a === "st-laser-dot") {
+      laserMode = a === "st-laser-keep" ? "keep" : a === "st-laser-dot" ? "dot" : "trail";
+      laserSave("mode", laserMode);
+      if (laserMode === "trail") laserStrokes.forEach(function (st) { if (st.lift) st.lift = Date.now(); });
+      if (laserStrokes.length) startLaserLoop(laserStrokes[0].n);
       syncTb(v, h.root());
       return true;
     }
-    if (a === "st-laser-dot") {
-      laserMode = "dot";
+    if (a === "st-laser-color") {
+      laserColor = el.getAttribute("data-v") || laserColor;
+      laserSave("color", laserColor);
       syncTb(v, h.root());
+      return true;
+    }
+    if (a === "st-laser-clear") {
+      clearLaser();
       return true;
     }
 
@@ -1497,7 +1531,8 @@
       var svg = STICKERS[sName];
       if (svg && v) {
         var n = v.cur || 1;
-        var sItem = makeItem(v.id, S().pid(n), "sticker", 0.35, 0.35, 0.25, 0.25 * (v.ratio || 1.414), {
+        var sW = 0.25, sH = sW / (v.ratio || 1.414), sAt = placeInView(n, sW, sH); // h is a fraction of page height: square = w / ratio
+        var sItem = makeItem(v.id, S().pid(n), "sticker", sAt.x, sAt.y, sW, sH, {
           name: sName,
           svg: svg,
           color: "#42cdb5"
@@ -1519,7 +1554,8 @@
         var ue = userElems[idx];
         if (ue && v) {
           var n2 = v.cur || 1;
-          var ueItem = makeItem(v.id, S().pid(n2), "sticker", 0.35, 0.35, 0.3, 0.3 * (v.ratio || 1.414), {
+          var ueW = 0.3, ueH = ueW / (v.ratio || 1.414), ueAt = placeInView(n2, ueW, ueH);
+          var ueItem = makeItem(v.id, S().pid(n2), "sticker", ueAt.x, ueAt.y, ueW, ueH, {
             name: ue.name,
             svg: ue.svg,
             color: "#42cdb5"
