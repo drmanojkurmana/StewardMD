@@ -91,7 +91,7 @@ const stroke = (y) => page.evaluate((y) => {
 await stroke(0.2); await stroke(0.5);
 const live = () => page.evaluate(() => STUDY._state().strokes.filter((s) => !s.gone).length);
 ok(await live() === 2, "two pen strokes drawn");
-ok(await page.evaluate(() => STUDY._state().strokes.every((s) => s.pts.length >= 7 && s.pts.every((p) => p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1) && s.pts[1][2] === 0.6 && s.pts[0][2] === 0.3)), "points are page-relative (0..1) and keep pressure");
+ok(await page.evaluate(() => STUDY._state().strokes.every((s) => s.pts.length >= 7 && s.pts.every((p) => p[0] >= 0 && p[0] <= 1 && p[1] >= 0 && p[1] <= 1) && s.pts[1][2] === Math.round(Math.pow(0.6, 0.43) * 1e4) / 1e4 && s.pts[0][2] === Math.round(Math.pow(0.3, 0.43) * 1e4) / 1e4)), "points are page-relative (0..1) and keep pressure (on the handwriting curve)");
 await page.click('[data-act="st-undo"]');
 ok(await live() === 1, "undo hides one stroke");
 await page.click('[data-act="st-redo"]');

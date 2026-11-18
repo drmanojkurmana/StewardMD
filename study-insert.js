@@ -1025,6 +1025,17 @@
     });
   }
 
+  /* Where a new sticker or image goes: centred on the part of page n that is on screen (ratios of rects, so the
+     Display zoom cancels out). A fixed spot put it below the fold on a landscape iPad, so a tap seemed to do nothing. */
+  function placeInView(n, w, h) {
+    var v = V(), p = v && v.pg && v.pg[n], dflt = { x: (1 - w) / 2, y: 0.15 };
+    if (!p || !p.el || !v.sc) return dflt;
+    var r = p.el.getBoundingClientRect(), s = v.sc.getBoundingClientRect();
+    var top = Math.max(r.top, s.top), bot = Math.min(r.bottom, s.bottom), left = Math.max(r.left, s.left), right = Math.min(r.right, s.right);
+    if (bot - top < 20 || right - left < 20 || !r.width || !r.height) return dflt;
+    var cx = ((left + right) / 2 - r.left) / r.width, cy = ((top + bot) / 2 - r.top) / r.height;
+    return { x: Math.max(0, Math.min(1 - w, cx - w / 2)), y: Math.max(0, Math.min(1 - h, cy - h / 2)) };
+  }
   function insertImageRecord(dataUrl, w, h) {
     var v = V();
     if (!v) return;
@@ -1033,8 +1044,7 @@
     var ratio = h / w;
     var itemW = 0.55;
     var itemH = Math.min(0.8, itemW * ratio * (1 / (v.ratio || 1.414)));
-    var itemX = (1 - itemW) / 2;
-    var itemY = 0.15;
+    var at = placeInView(n, itemW, itemH), itemX = at.x, itemY = at.y;
 
     var item = makeItem(v.id, pageId, "image", itemX, itemY, itemW, itemH, {
       src: dataUrl,
@@ -1521,7 +1531,8 @@
       var svg = STICKERS[sName];
       if (svg && v) {
         var n = v.cur || 1;
-        var sItem = makeItem(v.id, S().pid(n), "sticker", 0.35, 0.35, 0.25, 0.25 * (v.ratio || 1.414), {
+        var sW = 0.25, sH = sW / (v.ratio || 1.414), sAt = placeInView(n, sW, sH); // h is a fraction of page height: square = w / ratio
+        var sItem = makeItem(v.id, S().pid(n), "sticker", sAt.x, sAt.y, sW, sH, {
           name: sName,
           svg: svg,
           color: "#42cdb5"
@@ -1543,7 +1554,8 @@
         var ue = userElems[idx];
         if (ue && v) {
           var n2 = v.cur || 1;
-          var ueItem = makeItem(v.id, S().pid(n2), "sticker", 0.35, 0.35, 0.3, 0.3 * (v.ratio || 1.414), {
+          var ueW = 0.3, ueH = ueW / (v.ratio || 1.414), ueAt = placeInView(n2, ueW, ueH);
+          var ueItem = makeItem(v.id, S().pid(n2), "sticker", ueAt.x, ueAt.y, ueW, ueH, {
             name: ue.name,
             svg: ue.svg,
             color: "#42cdb5"

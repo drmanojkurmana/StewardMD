@@ -58,8 +58,12 @@ test("stack is capped at 200 and survives a JSON round trip", () => {
   assert.equal(S.undo(back).op.id, "s249");
 });
 
-test("pressure: pen value kept, 0 or other pointer types fall back to 0.5", () => {
-  assert.equal(S.pressure({ pointerType: "pen", pressure: 0.8 }), 0.8);
+test("pressure: pen value on the handwriting curve, 0 or other pointer types fall back to 0.5", () => {
+  assert.equal(S.pressure({ pointerType: "pen", pressure: 0.8 }), Math.pow(0.8, 0.43));
+  assert.ok(Math.abs(S.penPressure(0.2) - 0.5) < 0.01, "everyday Apple Pencil writing (0.2) draws at the chosen width");
+  assert.ok(S.penPressure(0.07) > 0.3 && S.penPressure(0.07) < 0.35, "a feather-light touch still shows");
+  assert.equal(S.penPressure(1), 1);
+  assert.ok(S.penPressure(0.3) < S.penPressure(0.6), "harder is still wider");
   assert.equal(S.pressure({ pointerType: "pen", pressure: 0 }), 0.5);
   assert.equal(S.pressure({ pointerType: "touch", pressure: 1 }), 0.5);
   assert.equal(S.pressure({ pointerType: "mouse", pressure: 0.5 }), 0.5);

@@ -68,8 +68,25 @@
     return out;
   }
   // Variable-width outline (perfect-freehand style, written here): left/right offsets along normals, smoothed.
+  /* Points no further apart than `step` px (x, y and pressure interpolated). Sparse input (a mouse, a trackpad, a fast
+     flick) otherwise loses its corners to the outline smoothing: a zigzag drew as a trapezoid. Capped at 4,000. */
+  function densify(pts, W, H, step) {
+    if (!pts || pts.length < 2) return pts;
+    var i, len = 0;
+    for (i = 1; i < pts.length; i++) len += Math.sqrt(Math.pow((pts[i][0] - pts[i - 1][0]) * W, 2) + Math.pow((pts[i][1] - pts[i - 1][1]) * H, 2));
+    step = Math.max(step || 2, len / 4000);
+    var out = [pts[0]];
+    for (i = 1; i < pts.length; i++) {
+      var a = pts[i - 1], b = pts[i], d = Math.sqrt(Math.pow((b[0] - a[0]) * W, 2) + Math.pow((b[1] - a[1]) * H, 2)), k = Math.floor(d / step);
+      var pa = a[2] == null ? 0.5 : a[2], pb = b[2] == null ? 0.5 : b[2];
+      for (var j = 1; j <= k; j++) { var t = j / (k + 1); out.push([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, pa + (pb - pa) * t]); }
+      out.push(b);
+    }
+    return out;
+  }
   function outline(pts, opts, W, H) {
     if (!pts || !pts.length) return [];
+    pts = densify(pts, W, H, 2);
     var radii = strokeWidths(pts, opts, W), left = [], right = [], i;
     var px = pts.map(function (p) { return [p[0] * W, p[1] * H]; });
     if (px.length === 1) {
@@ -167,7 +184,7 @@
   }
   function toolSettings(s, tool) { return tool === "hl" ? s.hl : s.pen; }
   function activeWidth(s, tool) { var t = toolSettings(s, tool); return t.widths[t.wi] || t.widths[1]; }
-  var PURE = { PEN_COLORS: PEN_COLORS, HL_COLORS: HL_COLORS, ERASER_RADII: ERASER_RADII, defaults: defaults, mergeSettings: mergeSettings, loadSettings: loadSettings, saveSettings: saveSettings, validHex: validHex, addRecent: addRecent, widthFactor: widthFactor, effPressure: effPressure, pointScale: pointScale, strokeWidths: strokeWidths, outline: outline, splitPts: splitPts, snapStraight: snapStraight, isStraightSnap: isStraightSnap, recognizeShape: recognizeShape, pointerAction: pointerAction, activeWidth: activeWidth, distPtSeg: distPtSeg, clamp: clamp };
+  var PURE = { PEN_COLORS: PEN_COLORS, HL_COLORS: HL_COLORS, ERASER_RADII: ERASER_RADII, defaults: defaults, mergeSettings: mergeSettings, loadSettings: loadSettings, saveSettings: saveSettings, validHex: validHex, addRecent: addRecent, widthFactor: widthFactor, effPressure: effPressure, pointScale: pointScale, strokeWidths: strokeWidths, densify: densify, outline: outline, splitPts: splitPts, snapStraight: snapStraight, isStraightSnap: isStraightSnap, recognizeShape: recognizeShape, pointerAction: pointerAction, activeWidth: activeWidth, distPtSeg: distPtSeg, clamp: clamp };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
   G.STUDY_INK_PURE = PURE;
 

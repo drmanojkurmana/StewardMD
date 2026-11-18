@@ -162,10 +162,10 @@
     var H = W*ratio;
     var dark = tplIsDark(tpl), base = tplBase(tpl);
     var bg = dark ? "#0D1D23" : "#ffffff";
-    var line = dark ? "rgba(66,205,181,0.28)" : "#b8c4d6";
+    var line = dark ? "rgba(66,205,181,0.28)" : base === "grid" ? "#cfd8e6" : "#b9c5d8";
     var dot = dark ? "rgba(66,205,181,0.5)" : "#7a8aa0";
     ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
-    ctx.strokeStyle = line; ctx.lineWidth = Math.max(1, W/500);
+    ctx.strokeStyle = line; ctx.lineWidth = Math.max(1, W/900);
     ctx.beginPath();
     var i, s;
     if(base==="ruled"){
@@ -305,7 +305,7 @@
     root.appendChild(pager);
     /* zoom window */
     var zw=D.createElement("div"); zw.id="stP3ZoomWindow"; zw.className="st-p3-zoomwin"; zw.hidden=true;
-    zw.innerHTML='<div class="st-p3-zoomwin-bar"><span class="st-p3-zoom-tag">Zoom</span><button type="button" class="pn-btn sm st-p3-zoom-close" data-act="st-zoom-close" aria-label="Close zoom window">Done</button></div><canvas id="stP3ZoomCv" width="640" height="120"></canvas>';
+    zw.innerHTML='<div class="st-p3-zoomwin-bar"><span class="st-p3-zoom-tag">Zoom</span><div class="st-zw-ctl" role="group" aria-label="Zoom window"><button type="button" class="st-zw-b" data-act="st-zw-zout" aria-label="Zoom out" title="Zoom out"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></button><button type="button" class="st-zw-b" data-act="st-zw-zin" aria-label="Zoom in" title="Zoom in"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button><span class="st-zw-sep"></span><button type="button" class="st-zw-b" data-act="st-zw-up" aria-label="Line up" title="Line up"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" class="st-zw-b" data-act="st-zw-left" aria-label="Move left" title="Move left"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="st-zw-b" data-act="st-zw-right" aria-label="Move right" title="Move right"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button><button type="button" class="st-zw-b st-zw-nl" data-act="st-zw-nl" aria-label="New line" title="New line"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 5v6a3 3 0 0 1-3 3H5M9 10l-4 4 4 4"/></svg><span>New line</span></button></div><button type="button" class="pn-btn sm st-p3-zoom-close" data-act="st-zoom-close" aria-label="Close zoom window">Done</button></div><canvas id="stP3ZoomCv" width="640" height="160"></canvas>';
     root.appendChild(zw);
     refreshTopBar();
     applySettings();
