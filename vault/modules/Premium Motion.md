@@ -125,3 +125,17 @@ spring easing about 200 to 300 ms, the element visible the whole way.
   animations with id `smd-pop` first, or a reopened dialog opens at scale 0.2.
 - Tests: `test/run-smd-motion-ui.mjs` (exact rect in and out, card face, menu hidden and removed, dialog from button and
   from the edge), `test/menu-origin.test.mjs`. Not seen on a handset yet.
+
+## UI refine layer (2026-11-18, owner: "apply to whole app", ten UI hacks)
+`ui-refine.css` (after native-feel.css) + `scroll-fade.js`, switch `smd_ui_refine` = "0" (html.no-ui-refine).
+Applied app-wide: tabular numbers in numeric contexts (tables, inputs, and classes matching num/count/stat/dose/score/
+timer/clock/badge/price/qty/vital/kpi); play-icon optical nudge (`translate` 8%); balanced headings and pretty
+paragraphs; `hr` alpha hairline; tactile press on every button (`scale: .97` on :active, the individual property so a
+button's own transform and press stay, and NO transition set so its own transitions are untouched); horizontal scroll
+rows fade only on the side with more content (`data-sfade` = s / e / "s e", rows with their own mask skipped).
+Already app-wide before this: origin-aware menus/dialogs (menu-origin.js, dialog-motion.js) and spring ease-out
+(smd-motion.js). Tokens only (cannot be inferred globally): `--smd-r-in` concentric radius, `--smd-hair`,
+`--smd-elev-1/2/3` layered shadows, `--smd-ease-out`. scroll-fade rescans on DOM inserts, `hidden` toggles, taps and
+resize, never on class/style flips (animations fire those constantly). Tests: `test/run-ui-refine-ui.mjs`,
+`test/ui-refine.test.mjs`. Gotcha: `run-smd-motion-ui` timing checks flake while the full unit suite runs in parallel;
+run it on an idle machine.
