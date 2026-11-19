@@ -190,7 +190,13 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   404 file, 503, clock/signature codes, script errors) to that text. `quizErr(e)` now names the cause and the fix, and
   an unknown one shows its status and code ("code 403 ...") so a screenshot identifies it; the error is also logged to
   the console. Root cause of the owner's failure on `ss-general-medicine/sgm-genomic-testing` (v5 index lists 15
-  items) is NOT known yet: the bank needs the app's device binding, so it could not be fetched from the sandbox. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  items) is NOT known yet: the bank needs the app's device binding, so it could not be fetched from the sandbox.
+- **Ask MaiK is medical study only (owner 2026-11-19, it answered "Who is indias pm"):** three layers, the same predicate
+  as the MaiK assistant (`kb/ai/maik-scope.js isRefusable`): `prep-ask.js send()` refuses a positively non-medical message
+  in the app (both modes; no request, no model run, no token, no chat count); `functions/api/ai/_prep-teach.js` refuses
+  it on the server before quota, tokens or the model (`outOfScope`, 200 `{ text, outOfScope: true }`); `CHAT_SYSTEM` (and
+  its word-for-word copy in `prep-teacher.js`) carries a SCOPE block for what the classifier cannot place, which also
+  forbids refusing short medical follow-ups. Tests: `test/prep-teach-scope.test.mjs`, `test/run-prep-ask-scope-ui.mjs`. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
   real time and `usable()` is false, so the lesson uses the system voice rather than stall between sentences; the system voice is otherwise only the fallback when Phonon cannot load. Each
   sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
   the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.

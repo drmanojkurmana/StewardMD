@@ -54,4 +54,8 @@ source of the same bug.
 - `test/maik-router-scope.test.mjs` — the client gate requires certainty; no rival keyword list in `maikRoute`
 Configurable via `window.MAIK_SCOPE_CONFIG`.
 
+**PrepNucleus Ask MaiK (2026-11-19)** uses the same predicate in `prep-ask.js` (client, both modes) and
+`functions/api/ai/_prep-teach.js` (server, before quota/tokens/model), plus a SCOPE block in its chat prompt. Before this it
+had no gate and answered "Who is India's PM". See [[PrepNucleus]].
+
 See [[Decisions]] · analytics feed → [[AI Control Center]].

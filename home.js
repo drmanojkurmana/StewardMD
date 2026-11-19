@@ -10424,9 +10424,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!q) { extractBtn.classList.remove("show"); return; }
       if (!reasoningReady()) { toast("Clinical Reasoning isn’t ready yet."); return; }
       var catalog = []; try { catalog = DX.findingCatalog() || []; } catch (e) {}
-      extractBtn.disabled = true; extractBtn.textContent = "Extracting findings…";
+      // The button is a 44px round icon in the composer: busy is a spinning icon and a label for screen readers, never
+      // text inside the circle (owner 2026-11-19: "Extracting findings…" spilled out over the send button).
+      var exIdle = function () { extractBtn.disabled = false; extractBtn.classList.remove("busy"); extractBtn.setAttribute("aria-label", "Extract findings for Clinical Reasoning"); extractBtn.innerHTML = svg("brain", "smd-ico"); };
+      extractBtn.disabled = true; extractBtn.classList.add("busy"); extractBtn.setAttribute("aria-label", "Extracting findings");
       SMD_AI.extract(q, "reasoning", catalog).then(function (r) {
-        extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →";
+        exIdle();
         var raw = (r && r.findings) || [];
         var keys = raw.map(function (f) { return typeof f === "string" ? f : (f && f.key); }).filter(Boolean);
         // A toast, not a bubble: this is a tool result, not something MaiK said. As a bubble it landed in
@@ -10439,7 +10442,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var ob = document.createElement("button"); ob.className = "maik-chip"; ob.style.marginTop = "8px"; ob.textContent = "Open Clinical Reasoning →";
         ob.addEventListener("click", function () { close(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else if (window.DX && DX.open) DX.open({ workspace: true }); } catch (e) {} });
         d.appendChild(ob); scroll(); extractBtn.classList.remove("show");
-      }).catch(function () { extractBtn.disabled = false; extractBtn.innerHTML = svg("brain", "smd-ico") + " Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
+      }).catch(function () { exIdle(); toast("Couldn’t extract findings right now — please try again."); });
     });
     qEl.addEventListener("input", function () { autosizeQ(); refreshExtract(); maikBuddyCue("typing"); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });

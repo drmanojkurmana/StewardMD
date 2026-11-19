@@ -133,6 +133,11 @@ html body #maikSheet.maik-polished #maikImg{grid-column:3;grid-row:2}
 html body #maikSheet.maik-polished #maikLen{grid-column:4;grid-row:2;align-self:center;justify-self:start;min-height:44px;height:44px;margin:0;padding:0 14px;white-space:nowrap}
 html body #maikSheet.maik-polished #maikExtract{grid-column:7;grid-row:1;align-self:center;display:flex;align-items:center;justify-content:center;visibility:hidden;margin:0;padding:0}
 html body #maikSheet.maik-polished #maikExtract.show{visibility:visible}
+/* Extracting: the round icon spins; no text ever goes inside the 44px circle (owner 2026-11-19) */
+html body #maikSheet.maik-polished #maikExtract{overflow:hidden;white-space:nowrap}
+html body #maikSheet .maik-extract.busy svg{animation:maikExSpin 1s linear infinite}
+@keyframes maikExSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){html body #maikSheet .maik-extract.busy svg{animation:none;opacity:.5}}
 html body #maikSheet.maik-polished #maikSend{grid-column:7;grid-row:2;order:0}
 html body #maikSheet.maik-polished #maikModelChip{grid-column:6;grid-row:2;align-self:center;min-width:0;max-width:100%!important;min-height:44px;height:44px;margin:0 8px 0 0;padding:0 12px 0 14px!important;justify-content:center}
 html body #maikSheet.maik-polished #maikModelChipLbl{min-width:0}

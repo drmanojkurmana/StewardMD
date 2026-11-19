@@ -702,6 +702,8 @@
   function retryable(res) { var w = res && (res.why || res.reason); return !!w && w !== "check" && w !== "not-covered" && w !== "handoff" && w !== "tokens" && w !== "sign-in" && w !== "no-grounding" && w !== "no-local" && w !== "chat-limit"; }
   /* send(text?): the student's message (the box, or a quick reply). Trimmed, at most CHAT_LIM.user characters, ignored
      while MaiK is answering; online it stops at this chat's 10, on this phone it never stops. */
+  var SCOPE_MSG = "I only help with medical and exam study questions. Ask about this topic, another medical topic, or how to approach the question.";
+  function offTopic(t) { try { var M = G.MaiKScope; return !!(M && M.isRefusable && M.isRefusable(String(t || ""))); } catch (e) { return false; } }
   function send(quick) {
     var p = P(); if (!S || !p || S.phase === "run" || S.phase === "consent") return;
     var box = sheet() && sheet().querySelector("#paIn"), txt = String(quick || (box && box.value) || S.draft || "").replace(/\s+/g, " ").trim().slice(0, p.CHAT_LIM.user);
@@ -711,6 +713,9 @@
     if (!quick || (box && !box.value)) { S.draft = ""; if (box) box.value = ""; }
     S.th.rec.nc = 0;
     addTurn({ r: "u", t: txt });
+    // Medical study only (owner 2026-11-19: "Who is India's PM" was answered). The app's shared firewall refuses a
+    // question it can name as non-medical here, on the phone and online alike: no model run, no MaiK Tokens, no count.
+    if (offTopic(txt)) { S.mode = mode; S.phase = ""; S.scroll = true; addTurn({ r: "m", t: SCOPE_MSG, ok: true, mode: mode, scope: 1 }); return draw("#paIn"); }
     ask(mode);
   }
   /* resume(mode): open the chat in this place. A fresh thread opens empty with input focused (no automatic call);
