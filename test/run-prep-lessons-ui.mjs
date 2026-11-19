@@ -108,7 +108,7 @@ try {
   if (process.env.PN_LIGHT) {
     ok(pearlBg === "rgb(255, 255, 255)", "light theme lesson card background is white (#fff, follows app theme)");
   } else {
-    ok(pearlBg === "rgb(13, 29, 35)", "dark theme lesson card background is dark (#0D1D23, follows app theme body.dark, not OS media query)");
+    ok(pearlBg === "rgb(17, 18, 20)", "dark theme lesson card background is near-black grey (#111214, owner 2026-11-19: no teal; follows app theme body.dark, not OS media query)");
   }
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-vtbl tbody tr").length===5 && document.querySelectorAll("#smdPrep .pn-vtbl thead th").length===2;`) === true, "the table is real HTML: 2 columns, 5 rows");
   ok(await ev(`return !!document.querySelector("#smdPrep [data-act=l-prev]").disabled;`) === true, "Previous is disabled on the first step");

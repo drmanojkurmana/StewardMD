@@ -983,6 +983,15 @@
     } else if (A && A.actionRowHtml) row = A.actionRowHtml({ shareId: lid || undefined, bookmarked: bm });
     return row || chip ? '<footer class="pn-lsn-foot">' + row + chip + "</footer>" : "";
   }
+  /* The Pearl crumb's real names: the lesson's subject and the taxonomy section that holds its module. null when the
+     taxonomy is not loaded (prep-pearl.js then falls back to the ids, minus their codes). */
+  function crumbNames(les) {
+    var sb = host && host.subjectById ? host.subjectById(les.subject) : null, tx = host && host.tx ? host.tx : function (x) { return x && (x.en || x); };
+    if (!sb) return null;
+    var sec = null;
+    (sb.sections || []).forEach(function (x) { if (!sec && (x.modules || []).some(function (m) { return m.id === les.module; })) sec = x; });
+    return { subject: tx(sb.name), section: sec ? tx(sec.name) : "" };
+  }
   function readerHtml() {
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
@@ -990,7 +999,7 @@
     var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null;
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
-        (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
+        (isP && L.i === 0 ? PEARL.headerHtml(les, lid0, crumbNames(les)) : "") +
         '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-act="l-say" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         "</article>"
