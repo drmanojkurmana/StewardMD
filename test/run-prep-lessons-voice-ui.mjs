@@ -23,8 +23,8 @@ const FAKE = (o) => `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"
   Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speak:function(u){window.__tts.push(u.text);setTimeout(function(){u.onend&&u.onend({})},300)},cancel:function(){}}});
   var st=${o.ready ? '"ready"' : '"none"'}, cb=null; window.__pre=[]; window.__said=[]; window.__voice={ p:function(x){cb&&cb(x)}, done:null, fail:null };
   window.__V={available:function(){return true},state:function(){return st},progress:function(){return 0},saved:function(){return ${!!o.saved}},unlock:function(){},init:function(){window.__init=(window.__init||0)+1;return Promise.resolve(st==="ready")},idle:function(ms){window.__idle=ms},
-    usable:function(){return st==="ready"},stop:function(){},release:function(){},prefetch:function(t){window.__pre.push(t)},
-    say:function(t){window.__said.push(t);if(${!!o.sayFail}&&window.__said.length===1)return Promise.reject(new Error("audio"));return new Promise(function(r){setTimeout(r,300)})},
+    usable:function(){return st==="ready"},stop:function(){},release:function(){},prefetch:function(t){window.__pre.push(t);(window.__ops=window.__ops||[]).push("pre:"+t)},
+    say:function(t){window.__said.push(t);(window.__ops=window.__ops||[]).push("say:"+t);if(${!!o.sayFail}&&window.__said.length===1)return Promise.reject(new Error("audio"));return new Promise(function(r){setTimeout(r,300)})},
     download:function(f){st="downloading";cb=f;return new Promise(function(r,j){window.__voice.done=function(){st="ready";r()};window.__voice.fail=function(){st="error";j(new Error("x"))}})}};
   Object.defineProperty(window,"PREP_VOICE",{configurable:true,get:function(){return window.__V},set:function(){}});`;
 async function lesson(o) {
@@ -85,8 +85,25 @@ try {
   pg = await lesson({ ready: true, noPlay: true }); await sleep(500);
   const pr = await pg.evaluate(() => ({ pre: window.__pre.slice(), first: (document.querySelector("#smdPrep .pn-lsn-tx .pn-sent") || {}).textContent || "" }));
   ok(pr.pre.length >= 1 && pr.first && pr.pre[0].indexOf(pr.first.slice(0, 12)) === 0, "the first sentence is rendered before Play is tapped: " + JSON.stringify(pr.pre[0]));
+  // owner 2026-11-19: "5 secs to start on next page". While a page is read its next sentence is rendered only after the
+  // current one is claimed (say before prefetch), and the last sentence renders the NEXT page's first one ahead.
+  const ahead = await pg.evaluate(async () => {
+    const L = window.PREP_LESSONS._l; window.__ops = []; window.__pre.length = 0; window.__said.length = 0;
+    document.querySelector("#smdPrep [data-act=l-play]").click();
+    for (let i = 0; i < 80 && L.playing; i++) await new Promise((r) => setTimeout(r, 150));
+    const nx = document.querySelector("#smdPrep [data-act=l-next]"); if (nx) nx.click();
+    await new Promise((r) => setTimeout(r, 300));
+    const first2 = (document.querySelector("#smdPrep .pn-lsn-tx .pn-sent") || {}).textContent || "";
+    return { ops: window.__ops.slice(), first2 };
+  });
+  const sayIx = (t) => ahead.ops.indexOf("say:" + t), preIx = (t) => ahead.ops.indexOf("pre:" + t);
+  const pairs = ahead.ops.filter((o) => o.startsWith("pre:")).map((o) => o.slice(4)).filter((t) => sayIx(t) >= 0);
+  ok(pairs.length >= 1 && pairs.every((t) => preIx(t) < sayIx(t)), "each sentence is rendered ahead, then spoken from that render");
+  const firstPre = ahead.ops.findIndex((o) => o.startsWith("pre:") && ahead.first2 && o.indexOf(ahead.first2.slice(0, 14)) === 4);
+  ok(firstPre >= 0, "reading a page renders the next page's first sentence ahead: " + JSON.stringify(ahead.first2.slice(0, 40)));
   // owner 2026-11-13: tap a line to replay it or read on from there.
   const tap = await pg.evaluate(async () => {
+    window.__said.length = 0;
     const ss = document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent"); if (ss.length < 2) return { n: ss.length };
     ss[1].click(); await new Promise((r) => setTimeout(r, 450));
     const on = document.querySelector("#smdPrep .pn-sent.on"), playing = window.PREP_LESSONS._l.playing;

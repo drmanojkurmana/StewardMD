@@ -179,7 +179,12 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   **Loads as PrepNucleus / Learn opens (owner 2026-11-14):** `PREP_LESSONS.warmVoice()` runs in `PREP.open`, the Learn tab
   (`prep-nav.js learnView`) and `openSubject`: a voice saved on the phone starts loading then, not when a lesson opens.
   The first 65 MB download still waits for the first Play (never started unasked). Unused, it is released after 10 minutes
-  (`idle(600000, true)`: soft, never cuts speech playing in voice mode); a lesson's `init()` or any `say()` disarms it. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  (`idle(600000, true)`: soft, never cuts speech playing in voice mode); a lesson's `init()` or any `say()` disarms it.
+  **Next page without the wait (owner 2026-11-19, "5 secs to start on next page"):** `speak()` calls `say(part)` BEFORE
+  `prefetch(next)`. The old order let the prefetch cancel the current sentence while it was still rendering (prefetch drops
+  an unclaimed older render), so a page's first sentence started over. On a page's last sentence the NEXT page's first
+  piece (`firstOf(L.i + 1)`) is rendered ahead, so auto-advance and Next speak at once. A Next tapped mid-page still
+  renders on demand (the worker renders one sentence at a time). After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
   real time and `usable()` is false, so the lesson uses the system voice rather than stall between sentences; the system voice is otherwise only the fallback when Phonon cannot load. Each
   sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
   the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.

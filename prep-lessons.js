@@ -590,7 +590,7 @@
   function webVoice() {
     try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
   }
-  function speak(text, rate, done, onPiece) {
+  function speak(text, rate, done, onPiece, aheadFirst) {
     stopVoice();
     var tok = ++L.tok, chunks = Array.isArray(text) ? text : sayChunks(text), n = 0;
     var fail = function () { if (tok === L.tok) { L.playing = false; draw(); } };
@@ -615,7 +615,15 @@
         var V = G.PREP_VOICE;
         // A sentence the natural voice cannot read (synthesis or playback fails on the phone) is read by the phone's
         // voice and the lesson reads on; before this, one such sentence stopped the narration with no word (owner 2026-11-08).
-        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, system); return; }
+        // say() first: it claims the sentence, so the prefetch of the next one cannot cancel a render still in progress
+        // (that cancel restarted the page's first sentence: owner 2026-11-19, "5 secs to start on next page"). On the
+        // page's last sentence the next page's first one is rendered, so turning the page speaks at once.
+        if (V && V.usable()) {
+          var said = V.say(part, rate);
+          var ahead = chunks[n] || (n >= chunks.length && aheadFirst ? aheadFirst() : "");
+          if (ahead) V.prefetch(ahead, rate);
+          said.then(pause, system); return;
+        }
       } catch (e) {}
       system();
     };
@@ -623,9 +631,9 @@
     next();
   }
   /* What the page reads, and for each spoken piece the displayed sentence it lights (HL_VIS: the visual). */
-  function pageReading() {
-    var pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null;
-    if (!step) return { say: pageSay(), map: null };
+  function pageReading(i) {
+    var pg = i == null ? page() : pages(L.les)[i], step = typeof pg === "number" ? L.les.steps[pg] : null;
+    if (!step) return { say: i == null ? pageSay() : pageSayOf(pg), map: null };
     var ss = stepSay(step);
     return { say: ss.tx.concat(ss.vis), map: alignSay(ss.tx, stepSentences(step.tx)).concat(ss.vis.map(function () { return HL_VIS; })) };
   }
@@ -642,7 +650,15 @@
       if (!L.playing || L.fin) return;
       if (s.lsp.au && L.i < pages(L.les).length - 1) { go(L.i + 1, true); return; }
       L.playing = false; drawBar();
-    }, map ? function (k) { hlSet(map[k]); } : null);
+    }, map ? function (k) { hlSet(map[k]); } : null, function () { return firstOf(L.i + 1); });
+  }
+  // The first spoken piece of page i ("" when there is none), for rendering ahead.
+  function firstOf(i) {
+    try {
+      if (!L.les || i < 0 || i >= pages(L.les).length) return "";
+      var say = pageReading(i).say;
+      return (Array.isArray(say) ? say[0] : sayChunks(say)[0]) || "";
+    } catch (e) { return ""; }
   }
   function setPlaying(on) { L.playing = on && canSpeak(); stopVoice(); if (L.playing) naturalStart(function () { narrate(); }); drawBar(); }
   // Tap a sentence (or the table / figure): read from there, playing or not.
@@ -657,7 +673,7 @@
   function primeVoice() {
     try {
       var V = G.PREP_VOICE; if (!V || !V.usable || !V.usable() || L.fin || !L.les) return;
-      var say = pageReading().say, first = Array.isArray(say) ? say[0] : sayChunks(say)[0];
+      var first = firstOf(L.i);
       if (first) V.prefetch(first);
     } catch (e) {}
   }
@@ -947,8 +963,9 @@
       '<ol class="pn-keys">' + L.les.keys.map(function (k) { return "<li><i>" + svg(ICO.tick, 16) + "</i><span>" + boldHtml(k) + "</span></li>"; }).join("") + "</ol>" + scoreHtml();
   }
   function page() { return pages(L.les)[L.i]; }
-  function pageSay() {
-    var p = page(), les = L.les;
+  function pageSay() { return pageSayOf(page()); }
+  function pageSayOf(p) {
+    var les = L.les;
     if (p === "cards") return "Classic signs. " + les.cards.map(function (c) { return c.f + ". " + c.b; }).join(" ");
     if (p === "keys") return "Key points. " + les.keys.join(" ").replace(/\*\*/g, "");
     var ss = stepSay(les.steps[p]);
