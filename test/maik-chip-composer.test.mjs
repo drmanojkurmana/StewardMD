@@ -30,7 +30,7 @@ test("the polished grid puts the chip in the bottom row's own track, hugging Sen
   assert.match(CSS, /grid-template-columns:auto auto auto auto minmax\(8px,1fr\) minmax\(0,auto\) 44px/);
   assert.match(CSS, /#maikLen\{grid-column:4;grid-row:2;[^}]*min-height:44px/);
   // Extract findings moved to the text row, so it no longer takes width from the chip when it shows.
-  assert.match(CSS, /#maikExtract\{grid-column:7;grid-row:1;/);
+  assert.match(CSS, /#maikExtract\{grid-column:5\/-1;grid-row:1;align-self:start;justify-self:end;/);   // the Findings pill, top-right of the box (owner 2026-11-19)
   assert.doesNotMatch(CSS, /#maikExtract\.show\) #maikModelChip/);
   assert.doesNotMatch(CSS, /#maikModelChip\{grid-column:3;grid-row:1/, "the old header placement is gone");
 });

@@ -6065,7 +6065,7 @@
           // Detailed. Applies to every engine, cloud and on-device alike (see maikApplyLen).
           '<button class="maik-chip maik-len" id="maikLen" type="button" title="Answer length" aria-label="Answer length">' + maikLenLabel() + '</button>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" aria-label="Ask a clinical question" placeholder="Ask MaiK…"></textarea>' +
-          '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '</button>' +
+          '<button class="maik-extract" id="maikExtract" type="button" title="Extract findings for Clinical Reasoning" aria-label="Extract findings for Clinical Reasoning">' + svg("brain", "smd-ico") + '<span class="mx-l">Findings</span></button>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
       // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
@@ -10333,7 +10333,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
     function autosizeQ() { qEl.style.removeProperty("height"); }
-    function refreshExtract() { if (extractBtn) extractBtn.classList.toggle("show", !!((qEl.value || "").trim() && reasoningReady())); }
+    /* The Findings pill shows only when the text reads like a clinical case: 5 words or more that the MaiK classifier
+       calls medical (owner 2026-11-19: an unlabelled brain circle appeared for "Who"). */
+    function caseLike(t) {
+      t = String(t || "").trim();
+      if (t.split(/\s+/).length < 5) return false;
+      try { var M = window.MaiKScope; if (M && M.classify) return M.classify(t).medical === true; } catch (e) {}
+      return true;
+    }
+    function refreshExtract() { if (extractBtn && !extractBtn.classList.contains("busy")) extractBtn.classList.toggle("show", !!(caseLike(qEl.value) && reasoningReady())); }
     // MaiK Scribe mic → the shared voice dialog (the same one that works in Clinical
     // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
     // "Extract findings →". (Inline capture in the composer was unreliable while the
@@ -10424,10 +10432,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!q) { extractBtn.classList.remove("show"); return; }
       if (!reasoningReady()) { toast("Clinical Reasoning isn’t ready yet."); return; }
       var catalog = []; try { catalog = DX.findingCatalog() || []; } catch (e) {}
-      // The button is a 44px round icon in the composer: busy is a spinning icon and a label for screen readers, never
-      // text inside the circle (owner 2026-11-19: "Extracting findings…" spilled out over the send button).
-      var exIdle = function () { extractBtn.disabled = false; extractBtn.classList.remove("busy"); extractBtn.setAttribute("aria-label", "Extract findings for Clinical Reasoning"); extractBtn.innerHTML = svg("brain", "smd-ico"); };
+      // The Findings pill (owner 2026-11-19): busy reads "Extracting…" with a spinning icon, idle reads "Findings";
+      // the long sentence that used to be written into a 44px circle spilled out over the send button.
+      var exIdle = function () { extractBtn.disabled = false; extractBtn.classList.remove("busy"); extractBtn.setAttribute("aria-label", "Extract findings for Clinical Reasoning"); extractBtn.innerHTML = svg("brain", "smd-ico") + '<span class="mx-l">Findings</span>'; };
       extractBtn.disabled = true; extractBtn.classList.add("busy"); extractBtn.setAttribute("aria-label", "Extracting findings");
+      extractBtn.innerHTML = svg("brain", "smd-ico") + '<span class="mx-l">Extracting…</span>';
       SMD_AI.extract(q, "reasoning", catalog).then(function (r) {
         exIdle();
         var raw = (r && r.findings) || [];
