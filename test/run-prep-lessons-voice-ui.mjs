@@ -101,6 +101,12 @@ try {
   ok(pairs.length >= 1 && pairs.every((t) => preIx(t) < sayIx(t)), "each sentence is rendered ahead, then spoken from that render");
   const firstPre = ahead.ops.findIndex((o) => o.startsWith("pre:") && ahead.first2 && o.indexOf(ahead.first2.slice(0, 14)) === 4);
   ok(firstPre >= 0, "reading a page renders the next page's first sentence ahead: " + JSON.stringify(ahead.first2.slice(0, 40)));
+  // owner 2026-11-19: "need a connection" showed with the network on. Each cause now says what failed and the fix.
+  const qe = await pg.evaluate(() => { const f = window.PREP_LESSONS._quizErr; return {
+    off: f(new TypeError("Load failed")), nf: f({ status: 404, code: "error" }), clk: f({ status: 401, code: "stale-timestamp" }),
+    org: f({ status: 403, code: "origin-required" }), busy: f({ status: 503 }), other: f({ status: 403, code: "weird-thing" }) }; });
+  ok(/No connection/.test(qe.off) && /404/.test(qe.nf) && /clock/.test(qe.clk) && /did not recognise the app/.test(qe.org) && /503/.test(qe.busy) && /403 weird-thing/.test(qe.other) && !/need a connection the first time/.test(Object.values(qe).join(" ")),
+    "a failed question load names its real cause: " + qe.other);
   // owner 2026-11-13: tap a line to replay it or read on from there.
   const tap = await pg.evaluate(async () => {
     window.__said.length = 0;

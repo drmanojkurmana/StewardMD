@@ -1144,13 +1144,27 @@
       if (!list.length) return host.toast("These questions are not available right now. Practise the module instead.");
       host.run(list, "study", "Quick questions: " + les.title);
     }, function (e) {
-      // say what actually failed: a server refusal is not "no connection" (owner's phone showed this toast on a 429)
-      var c = e && e.code, st = e && e.status;
-      host.toast(c === "account-flagged" ? "Question access is paused for this account. Try again later."
-        : (st === 429 || c === "minute-limit" || c === "hour-limit" || c === "daily-limit" || c === "enumeration-detected") ? "Too many question files at once. Wait a minute and try again."
-        : (st === 401 || c === "login-required" || c === "invalid-session") ? "Sign in again to open the questions."
-        : "The questions need a connection the first time. Try again online.");
+      host.toast(quizErr(e));
+      try { if (G.console) G.console.warn("[prep-lessons] quiz load failed", L.sid, L.mid, e && e.status, e && e.code, e && e.message); } catch (x) {}
     });
+  }
+  /* What stopped the lesson's questions loading, in words that say the real cause and the fix (owner 2026-11-19: "need a
+     connection" showed with the network on, because every unrecognised refusal fell through to it). An unrecognised
+     cause names its status and code, so a screenshot says what failed. */
+  function quizErr(e) {
+    var c = (e && e.code) || "", st = (e && e.status) || 0, msg = String((e && e.message) || "");
+    var offline = (G.navigator && G.navigator.onLine === false) || (!st && /failed to fetch|load failed|network|internet connection|offline/i.test(msg));
+    if (offline) return "No connection. The questions need the internet the first time; once opened they work offline.";
+    if (c === "signin-expired" || st === 401 && (c === "login-required" || c === "invalid-session" || c === "app-binding-required"))
+      return G.PREP_BANK_MSG ? G.PREP_BANK_MSG("Sign in again to open the questions.") : "Sign in again to open the questions.";
+    if (c === "account-flagged") return "Question access is paused for this account. Try again later.";
+    if (st === 429 || c === "minute-limit" || c === "hour-limit" || c === "daily-limit" || c === "enumeration-detected") return "Too many question files at once. Wait a minute and try again.";
+    if (c === "stale-timestamp" || c === "replayed-nonce" || c === "invalid-signature" || c === "expired-or-invalid-expiry")
+      return "The phone's clock looks wrong, so the question server refused it. Set Date and Time to automatic, then try again.";
+    if (c === "origin-required" || c === "foreign-origin") return "The question server did not recognise the app. Close StewardMD fully, reopen it and try again.";
+    if (st === 404) return "This module's questions are not on the server yet. Practise from the module page instead (code 404).";
+    if (st >= 500) return "The question server is busy. Try again in a minute (code " + st + ").";
+    return "The questions did not load. Try again" + (st || c ? " (code " + [st || "", c].filter(Boolean).join(" ") + ")" : msg ? " (" + msg.slice(0, 60) + ")" : "") + ".";
   }
 
   /* ---------- public ---------- */
@@ -1412,5 +1426,5 @@
 
   // A link from outside PrepNucleus (the Image Library, owner 2026-11-13): this lesson, at the step that shows the image.
   function openAt(sid, mid, h, key, step) { L.jumpStep = step == null ? null : String(step); return open(sid, mid, h, key, true); }
-  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, warmVoice: warmVoice, _pure: PURE, _l: L };
+  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, warmVoice: warmVoice, _quizErr: quizErr, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);

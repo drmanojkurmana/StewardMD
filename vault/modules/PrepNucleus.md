@@ -184,7 +184,13 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   `prefetch(next)`. The old order let the prefetch cancel the current sentence while it was still rendering (prefetch drops
   an unclaimed older render), so a page's first sentence started over. On a page's last sentence the NEXT page's first
   piece (`firstOf(L.i + 1)`) is rendered ahead, so auto-advance and Next speak at once. A Next tapped mid-page still
-  renders on demand (the worker renders one sentence at a time). After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  renders on demand (the worker renders one sentence at a time).
+- **Lesson quiz errors say the cause (owner 2026-11-19):** "The questions need a connection the first time" showed on the
+  finish screen with the network on: `startQuiz` mapped only 401/429/flagged and sent every other refusal (403 origin,
+  404 file, 503, clock/signature codes, script errors) to that text. `quizErr(e)` now names the cause and the fix, and
+  an unknown one shows its status and code ("code 403 ...") so a screenshot identifies it; the error is also logged to
+  the console. Root cause of the owner's failure on `ss-general-medicine/sgm-genomic-testing` (v5 index lists 15
+  items) is NOT known yet: the bank needs the app's device binding, so it could not be fetched from the sandbox. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
   real time and `usable()` is false, so the lesson uses the system voice rather than stall between sentences; the system voice is otherwise only the fallback when Phonon cannot load. Each
   sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
   the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.
