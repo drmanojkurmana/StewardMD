@@ -31,6 +31,13 @@ test("no pool, or fewer than n usable questions, gives none (the Worker then say
   const bad = { v: 1, items: Array.from({ length: 20 }, (_, i) => ({ ...item(i, "s"), o: ["only", "two"] })) };
   assert.deepEqual(await drawFromPool(bankWith(bad), "neet-ss", 7, "x"), []);
 });
+test("a battle never draws a stem that points at a picture it does not carry", async () => {
+  const pool = poolOf(40, ["ss-a", "ss-b"]);
+  pool.items.forEach((it, i) => { if (i % 2) it.q = "The X-ray shown below is suggestive of which condition?"; });
+  const got = await drawFromPool(bankWith(pool), "neet-ss", 7, "img");
+  assert.equal(got.length, 7);
+  assert.ok(got.every((x) => !/shown below/.test(x.q)), "no image-less picture stems");
+});
 test("bankFrom reads the pool from R2 and ignores unsafe exam names", async () => {
   const seen = [];
   const r2 = { get: async (k) => { seen.push(k); return k === "prep-bank/arena/pool-neet-ss.json" ? { text: async () => JSON.stringify(poolOf(10, ["a"])) } : null; } };

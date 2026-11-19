@@ -69,7 +69,10 @@
     return host.getJSON(base(host) + "index.json").then(function (ix) {
       S.ix = ix; return host.getJSON(base(host) + ix.file);
     }).then(function (f) {
-      S.items = (f.items || []).map(function (it) { it._py = 1; it._s = SUBJECT; it._m = "pyq"; return it; });
+      // Drop items whose stem points at a picture they do not carry (prep-assess needsImage); this screen has no flag filter.
+      var AS = G.PREP_ASSESS;
+      S.items = (f.items || []).filter(function (it) { return !(AS && AS.needsImage && AS.needsImage(it)); })
+        .map(function (it) { it._py = 1; it._s = SUBJECT; it._m = "pyq"; return it; });
     });
   }
   function warm(host) { load(host).then(null, function () {}); }
