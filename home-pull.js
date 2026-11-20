@@ -27,26 +27,53 @@
   function off() { try { return localStorage.getItem("smd_home_pull") === "0"; } catch (e) { return false; } }
   function reduced() { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
 
-  // One trace: baseline, P wave, QRS, T wave, baseline; pathLength 100 so the draw is a plain dash offset.
-  var ECG = "M0 32 H118 q7 -7 14 0 H150 l5 5 7 -27 7 35 5 -13 H196 q11 -12 22 0 H262 q7 -7 14 0 H294 l5 5 7 -27 7 35 5 -13 H340 q11 -12 22 0 H400";
+  /* The ECG (owner 2026-11-20: "use this ecg css and make it blend", a heart-rate loader): one line whose middle beat
+     traces a heart, and a heart that pops and beats on top of it. pathLength 1, so the draw is a dash offset of 1 to 0.
+     Recoloured to the hero's mint with a soft pink heart; drawn by the pull, played once on release. */
+  var LINE = "M5.32 78.13c.96-.01 5-8.5 5.54-8.54.58-.05 6.1 8.51 7.1 8.51 3.66 0 9.29.06 10.71.05 2.53-.01 4.82-72.88 4.82-72.88l4.76 97.28 3.97-24.45 20.45-.22C64 77.86 77.1 63.66 78.36 63.8c1.31.15 6.68 14.08 7.94 14.07 2.3-.03 33.32.04 35.76.02.96 0 5-8.5 5.53-8.53.59-.05 6.1 8.51 7.1 8.5 3.66 0 9.3.07 10.72.06 2.53-.02 4.81-72.89 4.81-72.89l4.77 97.28 3.97-24.44s83.34-3.33 74.69 7.67c-8.65 11-45.3-42.94-31.65-53.58 25.6-19.96 49.96 36.94 40.26 36.5-12.2-.53 1.8-62.32 23.41-51.7 32.24 15.86-17.56 84.92-26.4 81.77-5.73-2.05-.68-21.68 31.4-26.58 26.65-6.42 29.5 2.35 52.62 7.11 2.53-.02 4.82-72.89 4.82-72.89l4.76 97.28 3.97-24.44 20.45-.22c1.31-.02 14.41-14.22 15.68-14.07 1.32.15 6.7 14.08 7.95 14.07 2.29-.03 33.32.04 35.76.02.95 0 5-8.5 5.53-8.54.58-.04 6.1 8.52 7.1 8.52 3.66 0 9.3.06 10.72.05 2.53-.02 4.81-72.89 4.81-72.89l4.77 97.28 3.97-24.44 20.45-.23c1.31-.01 14.4-14.22 15.68-14.07 1.32.16 6.69 14.09 7.94 14.07";
+  var HEART = "M213.35 29.43c19.41-15.19 33.68 10.86 37.73 18.82-.28-13.61 11.64-40.98 25.94-34.01 32.3 15.74-15.88 83.8-26.4 81.76-13.24-9-51.35-53.3-37.27-66.57Z";
   // Doubled id: appearance.css sets every child of Home to position:relative (html[data-appearance] #homeV2.rnav > *),
   // which would put the band in Home's column and push the scroller down by its own height.
   var CSS = "html #homeV2#homeV2 > .hv-pull{position:absolute;left:0;right:0;top:0;height:0;z-index:0;overflow:hidden;pointer-events:none;" +
-      "background:var(--hrf-h0,#0c3b3e);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;contain:strict}" +
-    "#homeV2 > .hv-pull .hvp-in{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:0 0 12px;opacity:0;transition:opacity .12s linear}" +
-    "#homeV2 > .hv-pull svg{display:block;width:min(100%,420px);height:40px;overflow:visible}" +
-    "#homeV2 > .hv-pull path.tr{fill:none;stroke:var(--hrf-mint,#6ee7c8);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:100;" +
-      "filter:drop-shadow(0 0 4px color-mix(in srgb,var(--hrf-mint,#6ee7c8) 55%,transparent))}" +
-    "#homeV2 > .hv-pull path.bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}" +
-    "#homeV2 > .hv-pull .hvp-t{font:500 13px/1.3 var(--rds-font,-apple-system,system-ui,sans-serif);letter-spacing:.01em;color:rgba(255,255,255,.72);text-align:center;padding:0 24px;max-width:340px;transition:opacity .15s ease}" +
-    "#homeV2 > .hv-pull.armed path.tr{stroke-width:2.6}" +
-    "#homeV2 > .hv-pull.armed .hvp-t,#homeV2 > .hv-pull.busy .hvp-t{color:#fff}" +
-    "#homeV2 > .hv-pull.busy .hvp-t{font-size:15px;font-weight:600;letter-spacing:0;animation:hvp-in .35s cubic-bezier(.23,1,.32,1) both}" +
-    "#homeV2 > .hv-pull.busy path.tr{animation:hvp-sweep 1.1s cubic-bezier(.4,0,.2,1) 2}" +
+      "background:var(--hvp-bg,var(--hrf-h0,#0c3b3e));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;contain:strict}" +
+    // a whisper of light from the line, so the band reads as one lit surface with the hero rather than a flat slab
+    "#homeV2 > .hv-pull::before{content:'';position:absolute;inset:0;background:radial-gradient(56% 64% at 50% 70%,rgba(245,196,98,.10),transparent 72%);opacity:0;transition:opacity .4s ease;" +
+      // the glow fades out before the band's bottom edge, so it never draws a line where the band meets the hero
+      "-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 92%);mask-image:linear-gradient(180deg,#000 55%,transparent 92%)}" +
+    "#homeV2 > .hv-pull.armed::before,#homeV2 > .hv-pull.busy::before{opacity:1}" +
+    "#homeV2 > .hv-pull .hvp-in{position:relative;display:flex;flex-direction:column-reverse;align-items:center;gap:8px;width:100%;padding:0 0 16px;opacity:0;transition:opacity .14s linear}" +
+    "#homeV2 > .hv-pull svg{display:block;width:min(68%,264px);height:auto;aspect-ratio:503/109;overflow:visible}" +
+    // a monitor trace: a fine line that fades in and out at its ends, a soft phosphor afterglow under it, a bright head
+    "#homeV2 > .hv-pull .ln,#homeV2 > .hv-pull .gl{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}" +
+    "#homeV2 > .hv-pull .ln{stroke:url(#hvpGr);stroke-width:1.75px}" +
+    "#homeV2 > .hv-pull .gl{stroke:#f5c462;stroke-width:8px;opacity:.28;filter:url(#hvpSoft)}" +
+    "#homeV2 > .hv-pull .dot{fill:#fff7e0;filter:url(#hvpHalo);opacity:0;transition:opacity .2s ease}" +
+    // the heart: a soft gradient, no outline; pops past the line and beats lub-dub
+    "#homeV2 > .hv-pull .ht{fill:url(#hvpHt);filter:url(#hvpHtGlow);transform-box:fill-box;transform-origin:50% 55%;transform:scale(0);opacity:0}" +
+    "#homeV2 > .hv-pull.armed .ht{animation:hvp-pop .55s cubic-bezier(.2,1.4,.4,1) forwards,hvp-lubdub 1.15s ease-in-out .55s infinite}" +
+    "#homeV2 > .hv-pull.busy .ht{opacity:0;transform:scale(0)}" +
+    "#homeV2 > .hv-pull.busy .ht.beat{animation:hvp-pop .5s cubic-bezier(.2,1.4,.4,1) forwards,hvp-lubdub 1.15s ease-in-out .5s 2}" +
+    "#homeV2 > .hv-pull .hvp-t{margin:0;font:500 12.5px/1.35 var(--rds-font,-apple-system,system-ui,sans-serif);letter-spacing:.012em;color:rgba(255,255,255,.62);text-align:center;padding:0 32px;max-width:320px;min-height:2.7em;display:flex;align-items:center;justify-content:center;text-wrap:balance;transition:color .2s ease}" +
+    "#homeV2 > .hv-pull.armed .hvp-t{color:rgba(255,255,255,.92)}" +
+    "#homeV2 > .hv-pull.busy .hvp-t{font-size:16px;font-weight:600;letter-spacing:-.012em;line-height:1.3;color:#fff;animation:hvp-in .45s cubic-bezier(.23,1,.32,1) .12s both}" +
     "#homeV2 > .hv-pull.native .hvp-t{opacity:0}" +
-    "@keyframes hvp-sweep{0%{stroke-dashoffset:100;opacity:1}70%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:.35}}" +
-    "@keyframes hvp-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}" +
-    "@media (prefers-reduced-motion: reduce){#homeV2 > .hv-pull.busy path.tr{animation:none;stroke-dashoffset:0}#homeV2 > .hv-pull.busy .hvp-t{animation:none}}";
+    "@keyframes hvp-pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}" +
+    "@keyframes hvp-lubdub{0%,100%{transform:scale(1)}12%{transform:scale(1.14)}24%{transform:scale(.98)}36%{transform:scale(1.07)}50%{transform:scale(1)}}" +
+    "@keyframes hvp-in{from{opacity:0;transform:translateY(5px);filter:blur(2px)}to{opacity:1;transform:none;filter:none}}" +
+    "@media (prefers-reduced-motion: reduce){#homeV2 > .hv-pull .ht,#homeV2 > .hv-pull.armed .ht,#homeV2 > .hv-pull.busy .ht.beat,#homeV2 > .hv-pull.busy .hvp-t{animation:none}" +
+      "#homeV2 > .hv-pull.armed .ht,#homeV2 > .hv-pull.busy .ht.beat{opacity:1;transform:none}}";
+
+  // The filled heart is recentred on the heart the line traces (its loop centres at x 238, the shape's own at 249) and drawn
+  // at 80%, so it sits inside the strokes as a soft fill rather than a second, offset heart.
+  // Order (column-reverse): the line sits next to the hero, so it is the first thing a pull reveals; the words come above.
+  // The trace's defs: an end-faded stroke, the afterglow blur, the head's halo, the heart's gradient.
+  var DEFS = '<defs>' +
+    '<linearGradient id="hvpGr" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="503" y2="0"><stop offset="0" stop-color="#e9b24f" stop-opacity="0"/><stop offset=".14" stop-color="#e9b24f"/><stop offset=".5" stop-color="#ffe6a6"/><stop offset=".86" stop-color="#e9b24f"/><stop offset="1" stop-color="#e9b24f" stop-opacity="0"/></linearGradient>' +
+    '<filter id="hvpSoft" x="-10%" y="-60%" width="120%" height="220%"><feGaussianBlur stdDeviation="3.2"/></filter>' +
+    '<filter id="hvpHalo" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    '<radialGradient id="hvpHt" cx="36%" cy="30%" r="85%"><stop offset="0" stop-color="#d4224a"/><stop offset=".5" stop-color="#8e0c2c"/><stop offset="1" stop-color="#4c0315"/></radialGradient>' +
+    '<filter id="hvpHtGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b"/><feFlood flood-color="#ff2b55" flood-opacity=".85"/><feComposite in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+    '</defs>';
 
   var S = { home: null, sc: null, band: null, path: null, txt: null, n: Math.floor(Math.random() * 1000), phase: "home", h: 0, mo: null };
   function css() { if (document.getElementById("hvp-css")) return; var st = document.createElement("style"); st.id = "hvp-css"; st.textContent = CSS; document.head.appendChild(st); }
@@ -54,10 +81,41 @@
     if (S.band && S.band.isConnected && S.band.parentNode === S.home) return S.band;
     css();
     var b = document.createElement("div"); b.className = "hv-pull"; b.setAttribute("aria-hidden", "true");
-    b.innerHTML = '<div class="hvp-in"><svg viewBox="0 0 400 48" preserveAspectRatio="xMidYMid meet"><path class="bg" d="' + ECG + '"/><path class="tr" pathLength="100" d="' + ECG + '"/></svg><p class="hvp-t">Pull for a pearl</p></div>';
+    b.innerHTML = '<div class="hvp-in"><svg viewBox="0 0 502.98 108.61" preserveAspectRatio="xMidYMid meet">' + DEFS +
+      '<path class="gl" pathLength="1" d="' + LINE + '"/><g transform="translate(238 56) scale(.8) translate(-249.1 -54.6)"><path class="ht" d="' + HEART + '"/></g><path class="ln" pathLength="1" d="' + LINE + '"/><circle class="dot" r="5.5" cx="5" cy="78"/></svg><p class="hvp-t">Pull for a pearl</p></div>';
     S.home.insertBefore(b, S.home.firstChild);
-    S.band = b; S.path = b.querySelector("path.tr"); S.txt = b.querySelector(".hvp-t");
+    S.band = b; S.path = b.querySelector(".ln"); S.glow = b.querySelector(".gl"); S.dot = b.querySelector(".dot"); S.heart = b.querySelector(".ht"); S.txt = b.querySelector(".hvp-t");
+    try { S.len = S.path.getTotalLength(); } catch (e) { S.len = 0; }
+    tone();
     return b;
+  }
+  /* The band's colour is the hero's own top edge: the artwork's first rows, averaged (it is opaque there and covers the
+     full width on a phone), so band and hero meet without a seam. Fallback: the hero's gradient top (--hrf-h0). */
+  function tone() {
+    try {
+      if (!S.band || !S.home) return;
+      var img = S.home.querySelector(".hrf-art"), hero = S.home.querySelector(".hrf-hero");
+      if (!img || !hero || !img.complete || !img.naturalWidth) { if (img && !img.complete) img.addEventListener("load", tone, { once: true }); return; }
+      var ir = img.getBoundingClientRect(), hr = hero.getBoundingClientRect();
+      if (Math.abs(ir.top - hr.top) > 2 || ir.width < hr.width * 0.9) { S.band.style.removeProperty("--hvp-bg"); return; }   // art not along the top edge (wide screens)
+      var c = document.createElement("canvas"); c.width = 24; c.height = 2;
+      var x = c.getContext("2d"); x.drawImage(img, 0, 0, img.naturalWidth, Math.max(2, img.naturalHeight * 0.006), 0, 0, 24, 2);
+      var d = x.getImageData(0, 0, 24, 2).data, r = 0, g = 0, bl = 0, n = 0;
+      for (var i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; bl += d[i + 2]; n++; }
+      S.band.style.setProperty("--hvp-bg", "rgb(" + Math.round(r / n) + "," + Math.round(g / n) + "," + Math.round(bl / n) + ")");
+    } catch (e) { /* a tainted or missing image: the variable fallback stays */ }
+  }
+  // The status bar's height, so the held band clears the Dynamic Island / notch.
+  function safeTop() {
+    try { var p = document.createElement("div"); p.style.cssText = "position:fixed;top:0;height:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden"; document.body.appendChild(p); var v = parseFloat(getComputedStyle(p).paddingTop) || 0; p.remove(); return v; } catch (e) { return 0; }
+  }
+  /* trace(p, head): the line drawn to p (0..1), its afterglow with it, and the bright head at the tip while drawing. */
+  function trace(p, head) {
+    p = Math.max(0, Math.min(1, p));
+    var off = String(1 - p);
+    S.path.style.strokeDashoffset = off; S.glow.style.strokeDashoffset = off;
+    if (!S.len || !head || p <= 0.002 || p >= 0.998) { S.dot.style.opacity = "0"; return; }
+    try { var pt = S.path.getPointAtLength(p * S.len); S.dot.setAttribute("cx", pt.x.toFixed(1)); S.dot.setAttribute("cy", pt.y.toFixed(1)); S.dot.style.opacity = "1"; } catch (e) {}
   }
   function pearls() { var P = window.MaiKCompanion && window.MaiKCompanion.PEARLS; return P && P.length ? P : OWN; }
 
@@ -80,23 +138,39 @@
     b.classList.toggle("busy", phase === "busy");
     // After the pearl the band springs shut with the pearl still in it (no flash of the prompt on the way down).
     if (wasBusy && phase !== "busy") S.closing = true;
-    if (h === 0) S.closing = false;
-    if (phase === "busy") S.path.style.strokeDashoffset = "";
-    else if (S.closing) S.path.style.strokeDashoffset = "0";
+    if (h === 0) { S.closing = false; S.sweep = (S.sweep || 0) + 1; if (S.heart) S.heart.classList.remove("beat"); }
+    if (phase === "busy") { /* the sweep (beat) owns the line */ }
+    else if (S.closing) trace(1, false);
     else {
       S.txt.textContent = phase === "armed" ? "Let go" : "Pull for a pearl";
-      S.path.style.strokeDashoffset = String(100 - 100 * PURE.prog(h, 72));
+      trace(PURE.prog(h, 72), !native && phase !== "armed");
     }
     b.firstChild.style.opacity = String(Math.min(1, h / 44));
     document.body.classList.toggle("hv-pulling", h > 0);
   }
 
   // The release: lub-dub, a pearl, the band held open for a moment (pull-refresh.js waits for this promise).
+  /* The release: the pearl appears, the monitor sweeps the trace once (linear, like a real sweep, its head leading), and
+     as the sweep passes the heart in the middle the heart pops and beats lub-dub with a matching double haptic. */
+  function haptic() { try { if (window.SMD_HAPTICS) SMD_HAPTICS.light(); } catch (e) {} }
   function beat() {
     S.n++;
     if (S.txt) S.txt.textContent = PURE.pick(pearls(), S.n);
-    try { if (window.SMD_HAPTICS) { SMD_HAPTICS.light(); setTimeout(function () { try { SMD_HAPTICS.light(); } catch (e) {} }, 170); } } catch (e) {}
-    return new Promise(function (res) { setTimeout(res, reduced() ? 2000 : 2400); });
+    var b = S.band; if (S.heart) S.heart.classList.remove("beat");
+    haptic();
+    if (reduced() || !b) { trace(1, false); if (S.heart) S.heart.classList.add("beat"); }
+    else {
+      var t0 = performance.now(), dur = 1500, beaten = false, me = S.sweep = (S.sweep || 0) + 1;
+      var step = function () {
+        if (S.sweep !== me) return;                                 // closed, or a newer pull took over: stop
+        var p = Math.min(1, (performance.now() - t0) / dur);
+        trace(p, true);
+        if (!beaten && p >= 0.5) { beaten = true; S.heart.classList.add("beat"); haptic(); setTimeout(haptic, 150); }
+        if (p < 1) requestAnimationFrame(step); else trace(1, false);
+      };
+      trace(0, false); requestAnimationFrame(step);
+    }
+    return new Promise(function (res) { setTimeout(res, reduced() ? 2000 : 2600); });
   }
 
   // A native bounce past the top (iOS fling): the same teal and trace, no words, drawn from the negative scrollTop.
@@ -114,9 +188,11 @@
     if (S.sc === sc && S.home === home) return;
     if (S.sc) S.sc.removeEventListener("scroll", onScroll);
     S.home = home; S.sc = sc;
-    SMD_pullRefresh.register(sc, beat, { hold: 104, own: true, draw: function (px, phase) { setH(px, phase, false); } });
+    // Held open tall enough for the line and a two-line pearl below the status bar.
+    SMD_pullRefresh.register(sc, beat, { hold: Math.round(safeTop() + 128), own: true, draw: function (px, phase) { setH(px, phase, false); } });
     sc.addEventListener("scroll", onScroll, { passive: true });
     band();
+    try { new MutationObserver(function () { setTimeout(tone, 60); }).observe(document.body, { attributes: true, attributeFilter: ["class"] }); } catch (e) {}
     // Home can rebuild its scroller: follow it.
     if (S.mo) S.mo.disconnect();
     try { S.mo = new MutationObserver(function () { if (!S.sc || !S.sc.isConnected || S.sc.parentNode !== S.home) attach(); }); S.mo.observe(home, { childList: true }); } catch (e) {}
