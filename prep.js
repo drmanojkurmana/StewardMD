@@ -2726,7 +2726,7 @@
   function whyHtml(it, xo, why, L, chosen) {
     // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
     var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
-    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig + (it._ax ? '<p class="pn-mut pn-small pn-axby">Explanation written by MaiK AI. Report it if something looks wrong.</p>' : "");
+    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig + (it._ax || it.ax ? '<p class="pn-mut pn-small pn-axby">Explanation written by MaiK AI. Report it if something looks wrong.</p>' : "");
     if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || xfExp(why, it) || mdLite(legacyExp(why))) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
     // Nothing stored: MaiK writes one (autoExplain, /api/prep/explain), and the block fills in when it arrives.

@@ -2152,3 +2152,7 @@ Owner (Revenge screenshot, "No explanation is stored for this question yet"): "I
   and shares it, so the gap closes as questions are seen.
 - Tests: `test/prep-autoexplain.test.mjs`; `test/run-prep-explain-ui.mjs` (stubbed `/__ax`). Its "nothing scrolls sideways" check
   fails on main too (measures during the reveal slide).
+- **Bank fill (2026-11-20):** `tools/prep-fill-missing.mjs` (owner-run, needs `~/.stewardmd-secrets/r2-s3.env` and the Anthropic key):
+  `scan` reads every served file from R2 (live bank version per subject, listed overlay sets, PYQ), `run --max-usd n` writes the
+  missing explanations with claude-haiku-5-5 Message Batches (resumable, one retry), `apply --yes` uploads the changed files and then
+  the touched manifests. Items get `x`, `r` (when none) and `ax: 1`. Work dir `~/prep-data/fill-missing`. Test: `test/prep-fill-missing.test.mjs`.
