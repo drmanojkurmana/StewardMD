@@ -5,6 +5,13 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-21 · Calculators: modern classic list and full-screen calculator (owner picked variant A plus variant C score card)
+
+**Decision.** Calculators v2 behind `smd_calc_v2`, default ON (`"0"` restores the old accordion). List is variant A grouped rows with Starred and Recent. A calculator is a full-screen pushed view with Auto-fill from patient and Ask MaiK on every screen, a grouped form with no silent select defaults, live compute, and variant C's pinned score card. The scale bar draws only when max and cut-off come from the calculator's own result.
+**Why.** The accordion kept the list chrome on screen while filling a form, results sat below the fold, units repeated, and selects scored inputs nobody chose.
+**Trade-off.** Two list and panel paths to keep until the owner approves on device. Starring from the list now happens in the calculator header for unstarred rows.
+**Status.** Branch calc-ui-v2. Tests in `test/calc-v2.test.mjs` and the `run-calc-*` harnesses. Needs build-www, cap sync and native rebuild or OTA. See [[modules/Calculators]].
+
 ## 2026-11-20 · Edge swipe presses the Back control it found at the start (owner recording: "still not fixed ... scroll got locked as sidebar is opened from behind")
 
 **Decision.** `swipe-back.js` remembers the top screen's Back control when an edge drag starts (`_heldCtrl`) and
