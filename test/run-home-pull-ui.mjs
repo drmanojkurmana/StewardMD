@@ -45,18 +45,20 @@ try {
   await ev(`document.querySelector('#homeV2 > .v3-main').scrollTop=0;1`);
   await sleep(300);
   const touch = (type, x, y) => call('Input.dispatchTouchEvent', { type, touchPoints: type === 'touchEnd' ? [] : [{ x, y, id: 1, radiusX: 4, radiusY: 4, force: 1 }] });
-  const band = () => ev(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull');const cs=getComputedStyle(b);return {h:b.getBoundingClientRect().height,bg:cs.backgroundColor,t:b.querySelector('.hvp-t').textContent,dash:parseFloat(getComputedStyle(b.querySelector('path.tr')).strokeDashoffset),cls:b.className,op:parseFloat(b.firstChild.style.opacity||'0'),pulling:document.body.classList.contains('hv-pulling')}})()`);
+  const band = () => ev(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull');const cs=getComputedStyle(b);return {h:b.getBoundingClientRect().height,bg:cs.backgroundColor,t:b.querySelector('.hvp-t').textContent,dash:parseFloat(getComputedStyle(b.querySelector('.ln')).strokeDashoffset),heart:parseFloat(getComputedStyle(b.querySelector('.ht')).opacity),cls:b.className,op:parseFloat(b.firstChild.style.opacity||'0'),pulling:document.body.classList.contains('hv-pulling')}})()`);
   const pullTo = async (dy) => { await touch('touchStart', 195, 260); for (let k = 1; k <= 12; k++) { await touch('touchMove', 195, 260 + dy * k / 12); await sleep(16); } };
   // a short pull: the trace is partly drawn, prompt shown, not armed
   await pullTo(40);
   let b = await band();
-  ok(b.h > 10 && b.h < 72 && b.dash > 5 && b.dash < 100 && /Pull for a pearl/.test(b.t) && !/armed/.test(b.cls), `a short pull: band ${Math.round(b.h)} px, trace part drawn (offset ${b.dash.toFixed(0)}), "${b.t}"`);
+  ok(b.h > 10 && b.h < 72 && b.dash > 0.05 && b.dash < 1 && /Pull for a pearl/.test(b.t) && !/armed/.test(b.cls), `a short pull: band ${Math.round(b.h)} px, trace part drawn (offset ${b.dash.toFixed(2)}), "${b.t}"`);
   const heroTop = await ev(`(()=>{const h=document.getElementById('homeV2');const d=document.createElement('div');d.style.color=getComputedStyle(h).getPropertyValue('--hrf-h0');h.appendChild(d);const c=getComputedStyle(d).color;d.remove();return c})()`);
-  ok(b.bg === heroTop, `the band is the hero's own top colour (${b.bg} = ${heroTop}), not the pale page`);
+  const tone = await ev(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull'),i=document.querySelector('#homeV2 .hrf-art'),h=document.querySelector('#homeV2 .hrf-hero');const artTop=Math.abs(i.getBoundingClientRect().top-h.getBoundingClientRect().top)<=2&&i.getBoundingClientRect().width>=h.getBoundingClientRect().width*.9;return {artTop, v:b.style.getPropertyValue('--hvp-bg')}})()`);
+  ok(tone.artTop ? /^rgb\(/.test(tone.v) && b.bg === tone.v.replace(/,/g, ', ') : b.bg === heroTop, tone.artTop ? `the band takes the hero artwork's own top edge colour (${b.bg})` : `art not along the top here: the band is the hero's top colour (${b.bg} = ${heroTop})`);
   // further: armed
   for (let k = 1; k <= 10; k++) { await touch('touchMove', 195, 300 + 220 * k / 10); await sleep(16); }
   b = await band();
-  ok(b.h >= 72 && b.dash < 1 && /Let go/.test(b.t) && /armed/.test(b.cls), `past the trigger: trace complete, "Let go" (${Math.round(b.h)} px)`);
+  await sleep(600); b = await band();
+  ok(b.h >= 72 && b.dash < 0.01 && /Let go/.test(b.t) && /armed/.test(b.cls) && b.heart > 0.9, `past the trigger: trace complete, the heart pops, "Let go" (${Math.round(b.h)} px)`);
   ok(b.pulling, 'body.hv-pulling while open');
   ok(await ev(`(()=>{const bb=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),h=document.querySelector('#homeV2 .hrf-hero').getBoundingClientRect();return Math.abs(bb.bottom-h.top)<=2})()`), 'no strip of page between the band and the hero');
   await ev(`window.SMD_SWIPE_BACK && SMD_SWIPE_BACK.syncHandle && SMD_SWIPE_BACK.syncHandle();1`);
@@ -66,7 +68,10 @@ try {
   await touch('touchEnd');
   await sleep(500);
   b = await band();
-  ok(/busy/.test(b.cls) && !/Pull for a pearl|Let go/.test(b.t) && b.t.length > 8 && b.h >= 104, `release: a pearl holds the band open ("${b.t}", ${Math.round(b.h)} px)`);
+  ok(/busy/.test(b.cls) && !/Pull for a pearl|Let go/.test(b.t) && b.t.length > 8 && b.h >= 112, `release: a pearl holds the band open ("${b.t}", ${Math.round(b.h)} px)`);
+  ok(await ev(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),s=document.querySelector('#homeV2 > .hv-pull svg').getBoundingClientRect(),t=document.querySelector('#homeV2 > .hv-pull .hvp-t').getBoundingClientRect();return s.height>20 && s.top>=b.top && t.bottom<=b.bottom && s.bottom<=t.top+2})()`), 'held open: the line and the pearl both fit inside the band, line above pearl');
+  await sleep(1300);
+  ok(await ev(`parseFloat(getComputedStyle(document.querySelector('#homeV2 > .hv-pull .ht')).opacity)>0.9`), 'the heart beats on the drawn line while the pearl is up');
   await shot('pearl-light');
   ok(await until(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull');return b.getBoundingClientRect().height<1 && !document.body.classList.contains('hv-pulling')})()`, 5000), 'then it springs home and closes');
   await sleep(300);
