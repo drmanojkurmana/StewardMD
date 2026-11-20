@@ -74,8 +74,8 @@ try {
 
 
   // A practice set of 12 synthetic questions (answer A is right), started through the runner the app uses.
-  const startSet = (mode, sid) => ev(`var items=[]; for (var i=0;i<12;i++) items.push({ id:"bq"+i, q:"Buddy question "+i+"?", o:["Right","Wrong one","Wrong two","Wrong three"], a:0, _s:${JSON.stringify(sid || "anatomy")}, _m:"ana-gametogenesis", exp:"Because." });
-    PREP._host.run(items, ${JSON.stringify(mode)}, "Buddy set"); return 1;`);
+  const startSet = (mode, sid, opts) => ev(`var items=[]; for (var i=0;i<12;i++) items.push({ id:"bq"+i, q:"Buddy question "+i+"?", o:["Right","Wrong one","Wrong two","Wrong three"], a:0, _s:${JSON.stringify(sid || "anatomy")}, _m:"ana-gametogenesis", exp:"Because." });
+    PREP._host.run(items, ${JSON.stringify(mode)}, "Buddy set", ${JSON.stringify(opts || {})}); return 1;`);
   const pickAns = async (k) => { await click(`#smdPrep [data-act=answer][data-k="${k}"]`); await sleep(200); };
   const next = async () => { await click(`#smdPrep [data-act=next]`); await sleep(250); };
   const bub = () => text(".pnb-bub");
@@ -141,10 +141,65 @@ try {
   ok(await until(`return /%/.test((document.querySelector(".pnb-bub")||{}).textContent||"");`, 3000), "end of set: he sums it up (" + await bub() + ")");
   await shot("done");
 
-  // A timed test shows no answers, so he is not there.
   await ev(`PREP.back(); return 1;`); await sleep(200);
-  await startSet("exam");
-  ok(await until(`return /Buddy question 0/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"");`, 4000) && await ev(`return !document.getElementById("pnBuddy");`) === true, "timed test or mock: no buddy");
+
+  // ---------- lively ----------
+  // A test clock drives the per-question timer (SMD_PREP_NOW), so tension can be stepped exactly.
+  await ev(`window.__t = 0; window.SMD_PREP_NOW = function () { return window.__t; }; return 1;`);
+  await startSet("study", "anatomy", { qsec: 60 });
+  ok(await until(`return /Buddy question 0/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"") && !!document.querySelector("#pnBuddy .pnm");`, 5000), "a timed practice set (60 s a question): Nucleo is there");
+  const mk = (js) => ev(`var m=PREP_BUDDY._s().mk; ${js}`);
+  ok(await until(`return PREP_BUDDY._s().mk.state().acts >= 1;`, 9000), "left alone for a few seconds he does something on his own (" + (await mk(`return m.state().acts;`)) + " idle acts)");
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: 20, y: 120, button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: 20, y: 120, button: "left", clickCount: 1 });
+  ok(/translate\(-/.test(await ev(`return document.querySelector("#pnBuddy .pnm-look").style.transform;`)), "his eyes follow a tap (top left: " + await ev(`return document.querySelector("#pnBuddy .pnm-look").style.transform;`) + ")");
+  await mk(`m.leftAlone(61000); return 1;`);
+  ok(await until(`return PREP_BUDDY._s().mk.state().sleepy === 2;`, 8000), "a minute without a touch: he falls asleep");
+  await shot("asleep");
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: 200, y: 300, button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: 200, y: 300, button: "left", clickCount: 1 });
+  ok(await mk(`return m.state().sleepy;`) === 0, "a tap wakes him");
+
+  // ---------- tension ----------
+  const body = () => ev(`return getComputedStyle(document.querySelector("#pnBuddy stop")).stopColor;`);
+  const calmColor = await body();
+  // The per-question clock ignores jumps over 3 s (it reads them as the app being away), so step it like a real clock.
+  const advance = async (ms) => { for (let left = ms; left > 0; left -= 2500) { await ev(`window.__t += ${Math.min(2500, ms)}; return 1;`); await sleep(300); } };
+  await advance(46000);
+  ok(await until(`var s=PREP_BUDDY._s().mk.state(); return s.tension === 1 && s.face === "tense" && document.querySelector("#pnBuddy .pnm").classList.contains("t1");`, 3000), "15 s left: tense, gritted teeth, sweating");
+  ok(await ev(`return getComputedStyle(document.querySelector("#pnBuddy .pnm-sweat")).display !== "none";`) === true, "sweat drops show");
+  await advance(10000);
+  ok(await until(`var s=PREP_BUDDY._s().mk.state(); return s.tension === 2 && s.face === "panic" && s.gesture === "flail";`, 3000), "5 s left: panic, scream, flailing arms");
+  ok(await ev(`return getComputedStyle(document.querySelector("#pnBuddy .pnm-steam")).display !== "none";`) === true, "steam from under the cap");
+  await sleep(900);
+  const red = await body();
+  const rgb = (c) => (c.match(/\d+(\.\d+)?/g) || []).map(Number);
+  ok(rgb(red)[0] > rgb(red)[2] && rgb(calmColor)[2] > rgb(calmColor)[0], "he turns red (" + calmColor + " to " + red + ")");
+  await shot("panic");
+  await pickAns(0);
+  ok(await until(`var s=PREP_BUDDY._s().mk.state(); return s.tension === 0 && !document.querySelector("#pnBuddy .pnm.t1, #pnBuddy .pnm.t2");`, 3000), "answered: relief, the colour drains back");
+  await next();
+  await advance(62500);
+  ok(await until(`return document.querySelector("#pnBuddy .pnm").classList.contains("go-boom");`, 3000), "time runs out: mind blown, the cap shoots off");
+  await sleep(300); await shot("timeup");
+  ok(await until(`return PREP_BUDDY._s().mk.state().tension === 0;`, 3000), "then he calms down");
+  await ev(`PREP.back(); delete window.SMD_PREP_NOW; return 1;`); await sleep(200);
+
+  // A timed test: he watches the clock only. No reaction to answers (hidden in a test), no help when tapped.
+  await startSet("exam", "anatomy", { limit: 600 });
+  ok(await until(`return /Buddy question 0/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"") && !!document.querySelector("#pnBuddy .pnm");`, 4000), "timed test: Nucleo is there for the clock");
+  await pickAns(1);
+  ok(await ev(`return !document.querySelector(".pnb-bub") && PREP_BUDDY._s().mk.state().face !== "sad";`) === true, "an answer in a test gets no reaction (it would give the answer away)");
+  await ev(`PREP_BUDDY.quickAsk(); return 1;`);
+  ok(await ev(`return !document.querySelector(".pnb-bub");`) === true, "tapping him in a test asks nothing");
+  await ev(`PREP._st.run.t0 = Date.now() - 545000; return 1;`);
+  ok(await until(`return PREP_BUDDY._s().mk.state().tension === 1;`, 3000), "the test's last minute (55 s of 10 min): tense");
+  await ev(`PREP._st.run.t0 = Date.now() - 585000; return 1;`);
+  ok(await until(`return PREP_BUDDY._s().mk.state().tension === 2;`, 3000), "the last 15 s: panic");
+  ok(/Last minute/.test(await bub()), "with one line (" + await bub() + ")");
+  await ev(`PREP.back(); return 1;`); await sleep(200);
+  await startSet("exam", "anatomy", { untimed: true });
+  ok(await until(`return /Buddy question 0/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"");`, 4000) && await ev(`return !document.getElementById("pnBuddy");`) === true, "an untimed test: no buddy");
   await ev(`PREP.back(); return 1;`); await sleep(200);
 
   // A topic whose index is not loaded: the slump has no Revise button (it would open a blank screen), only a thought for later.
@@ -165,13 +220,13 @@ try {
   // Every face and pose, side by side (for the owner's review; SHOTS only).
   if (process.env.SHOTS) {
     await ev(`var w=document.createElement("div"); w.id="pnmShow"; w.style.cssText="position:fixed;inset:0;z-index:99999;background:#f3f2ee;display:flex;flex-wrap:wrap;gap:6px;padding:20px;align-content:flex-start";
-      [["normal","rest","Idle"],["proud","thumbs","Right"],["happy","cheer","3 in a row"],["sad","droop","Wrong"],["cry","droop","3 wrong"],["think","hug","Low score"],["wow","rest","Wow"],["happy","wave","Hello"]].forEach(function(f){
+      [["normal","rest","Idle",""],["proud","thumbs","Right",""],["happy","cheer","3 in a row",""],["sad","droop","Wrong",""],["cry","droop","3 wrong",""],["tense","hug","Time running out","t1"],["panic","flail","Last seconds","t2"],["sleep","rest","Asleep",""]].forEach(function(f){
         var c=document.createElement("div"); c.style.cssText="width:170px;height:200px;position:relative;text-align:center;font:600 12px Inter,sans-serif;color:#13203d";
         var h=document.createElement("div"); h.style.cssText="position:absolute;left:53px;top:30px;width:64px;height:76px;transform:scale(1.9);transform-origin:50% 40%"; c.appendChild(h);
-        var m=PREP_MASCOT.mount(h,{reduceMotion:true,hideKey:"x_show"}); m.el.setAttribute("data-face",f[0]); m.el.setAttribute("data-pose",f[1]);
+        var m=PREP_MASCOT.mount(h,{reduceMotion:true,hideKey:"x_show"}); m.el.setAttribute("data-face",f[0]); m.el.setAttribute("data-pose",f[1]); if (f[3]) m.el.classList.add(f[3]);
         var l=document.createElement("div"); l.textContent=f[2]; l.style.cssText="position:absolute;left:0;right:0;top:172px"; c.appendChild(l); w.appendChild(c); });
       document.body.appendChild(w); return 1;`);
-    await sleep(500);
+    await sleep(1400);   // the red fades in over 0.8 s
     const r = await call("Page.captureScreenshot", { format: "png" });
     if (r.result) fs.writeFileSync(join(process.env.SHOTS, "nucleo-faces.png"), Buffer.from(r.result.data, "base64"));
     await ev(`document.body.classList.add("dark"); document.getElementById("pnmShow").style.background="#1a1a2e"; [].forEach.call(document.querySelectorAll("#pnmShow div div:last-child"),function(l){l.style.color="#e8eef2";}); return 1;`);

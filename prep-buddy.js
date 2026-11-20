@@ -4,7 +4,9 @@
    Owner 2026-11-20: "mascot to celebrate user if gets correct mcq or three in a row correct, motivate user, feel sad if
    wrong mcqs, more wrongs asking to prepare topic again". Tapping him opens a small quick-ask bubble (owner's pick)
    that hands the question to the existing Ask MaiK sheet (prep-ask.js) with the student's words filled in.
-   - Practice only (study mode). A timed test or mock shows no answers, so he is not drawn there (he would give them away).
+   - Practice sets, and timed tests (2026-11-20, "get tensed, turn red when time is almost up"): in a test he reacts only
+     to the clock (tension(), buddyClock), never to answers, and tapping him asks nothing (no help in a test). An untimed
+     test or mock has nothing for him, so he is not drawn there.
    - He does not speak on every answer: a right answer gets a line about one time in three, milestones and misses more.
    - A slump (3 wrong in a row, or 3 wrong in one topic in this set) offers "Revise topic" (opens that topic's module,
      back returns to the set) or "Keep going". Once per topic per set.
@@ -79,12 +81,22 @@
     if (ok === n && n >= 5) return { kind: "perfect", n: 100, say: pick(L.perfect, rnd) };
     return { kind: "done", n: p, say: fill(pick(p >= 80 ? L.hi80 : p >= 50 ? L.hi50 : L.lo, rnd), { p: p }) };
   }
+  /* tension(left, total, perQ) -> 0 calm, 1 tense, 2 panic, for the clock on screen (seconds).
+     A clock per question (perQ): tense at 30% left (5 to 15 s), panic at 12% (3 to 5 s); 60 s a question = 15 s / 5 s.
+     The whole test: tense in the last 10% (30 s to 5 min), panic in the last 3% (10 s to 1 min); 1 hour = 5 min / 1 min. */
+  function tension(left, total, perQ) {
+    if (!(total > 0) || left == null || !isFinite(left)) return 0;
+    if (left <= 0) return 2;
+    var t1 = perQ ? Math.max(5, Math.min(15, total * 0.3)) : Math.max(30, Math.min(300, total * 0.1));
+    var t2 = perQ ? Math.max(3, Math.min(5, total * 0.12)) : Math.max(10, Math.min(60, total * 0.03));
+    return left <= t2 ? 2 : left <= t1 ? 1 : 0;
+  }
   function lateNow(d) { var h = (d || new Date()).getHours(); return h >= 23 || h < 4; }
-  var PURE = { decide: decide, doneLine: doneLine, lines: L, fill: fill, isMs: isMs, lateNow: lateNow };
+  var PURE = { decide: decide, doneLine: doneLine, lines: L, fill: fill, isMs: isMs, lateNow: lateNow, tension: tension };
   if (typeof document === "undefined") { G.PREP_BUDDY = { _pure: PURE }; return; }
 
   /* ================= DOM ================= */
-  var D = document, S = { box: null, mk: null, run: null, host: null, bub: null, bubT: 0, lateSaid: false };
+  var D = document, S = { box: null, mk: null, run: null, host: null, bub: null, bubT: 0, lateSaid: false, tick: 0, lvl: 0, lvlI: -1, lastI: -1, booms: {}, panicSaid: false };
   function on() { try { return G.localStorage.getItem("smd_prep_buddy") !== "0"; } catch (e) { return true; } }
   function reduced() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   // Which character: "nucleo" (prep-mascot.js, PrepNucleus's own, default) or "maik" (the MaiK companion). smd_prep_mascot.
@@ -152,7 +164,7 @@
     return true;
   }
   function unmount() {
-    bubble(null);
+    bubble(null); clockOn(false); S.lvl = 0;
     if (S.mk) { try { S.mk.destroy(); } catch (e) {} S.mk = null; }
     if (S.box && S.box.parentNode) S.box.parentNode.removeChild(S.box);
     S.box = null;
@@ -175,7 +187,32 @@
     if (st.getPropertyValue("--pnb-lift") !== v) { st.setProperty("--pnb-lift", v); st.setProperty("--pnb-safe", lift ? "0px" : "env(safe-area-inset-bottom,0px)"); }
   }
   function placeSoon() { if (S.box && !placeRaf) placeRaf = G.requestAnimationFrame(place); }
+  function timed(r) { return !!(r && (r.limit || r.qsec)); }
+  /* The clock, read twice a second while a timed set is on screen: tension changes are cues; reaching 0 in panic is the
+     time-up moment, once a question (a clock per question) or once a test. */
+  function clockOn(on) {
+    if (on && !S.tick) S.tick = G.setInterval(clockTick, 500);
+    else if (!on && S.tick) { G.clearInterval(S.tick); S.tick = 0; if (S.lvl) { S.lvl = 0; cue("tense", 0); } }
+  }
+  function clockTick() {
+    var r = S.run; if (!r || !S.mk || !S.host || !S.host.buddyClock) return;
+    if (r.done) return clockOn(false);
+    var c = null; try { c = S.host.buddyClock(r); } catch (e) {}
+    var key = c && c.perQ ? r.i : "all";
+    if (S.lvlI !== key) { S.lvlI = key; if (S.lvl) { S.lvl = 0; cue("tense", 0); } }
+    var n = c ? tension(c.left, c.total, c.perQ) : 0;
+    if (c && c.left <= 0) {
+      if (!S.booms[key]) { S.booms[key] = 1; cue("timeout"); S.lvl = 0; }
+      return;
+    }
+    if (n !== S.lvl) {
+      S.lvl = n; cue("tense", n);
+      // One word in the whole set's last stretch (not per question: that would be every few seconds).
+      if (n === 2 && !c.perQ && !S.panicSaid) { S.panicSaid = true; say(r.mode === "study" ? "Clock's almost out. Trust your first read." : "Last minute. Answer what you know, skip the rest.", 3200); }
+    }
+  }
   function hiddenByUser() { try { return G.localStorage.getItem("smd_prep_buddy_off") === "1"; } catch (e) { return false; } }
+  // Every cue goes to the character as cue("quiz", { kind, n }); the MaiK companion ignores the kinds it does not know.
   function cue(kind, n) { if (S.mk) try { S.mk.cue("quiz", { kind: kind, n: n }); } catch (e) {} }
 
   /* bubble(html, life, onClick): one bubble at a time; life 0 = stays until tapped away or replaced. */
@@ -221,10 +258,13 @@
   /* sync(run, host): called after every PrepNucleus paint with the run when the set's own screen is on top, else null. */
   function sync(r, host) {
     if (host) S.host = host;
-    var want = !!(r && on() && r.mode === "study" && r.items && r.items.length);
+    // Practice sets, and timed tests too: in a test he never reacts to answers (they are hidden), only to the clock.
+    var want = !!(r && on() && r.items && r.items.length && !r.done && (r.mode === "study" || timed(r))) || !!(r && r.done && S.run === r && S.box);
     if (!want) { if (S.box) unmount(); S.run = null; return; }
-    if (S.run !== r) { bubble(null); S.run = r; }
+    if (S.run !== r) { bubble(null); S.run = r; S.lvl = 0; S.lvlI = -1; S.lastI = r.i; S.booms = {}; S.panicSaid = false; }
     if (!mount()) return;
+    if (r.i !== S.lastI) { S.lastI = r.i; if (!r.done) cue("newq"); }
+    clockOn(timed(r) && !r.done);
     var rt = S.host && S.host.root && S.host.root(); if (rt) rt.classList.add("pnb-on");
     place();
     if (!S.lateSaid && lateNow()) { S.lateSaid = true; G.setTimeout(function () { if (S.run === r && !S.bub) say(pick(L.late), 4200); }, 900); }
@@ -267,7 +307,7 @@
      question with the words filled in (prep-ask.js does the asking, on the phone or online, with its own rules). */
   function quickAsk() {
     if (S.bub && S.bub.querySelector(".pnb-in")) { bubble(null); return; }
-    var r = S.run, it = r && r.items[r.i]; if (!it || !S.host || !S.host.buddyAsk) return;
+    var r = S.run, it = r && r.items[r.i]; if (!it || !S.host || !S.host.buddyAsk || r.mode !== "study") return;
     var shown = r.ans[r.i] >= 0, chips = shown ? ["Explain this simply", "Why are the others wrong?", "Give me a memory trick"] : ["Give me a hint", "What is this question testing?"];
     var CHEV = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
     var SEND = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';

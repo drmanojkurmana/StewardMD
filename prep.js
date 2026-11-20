@@ -4781,6 +4781,14 @@
     // Only a topic whose subject index is loaded: renderModule draws nothing for an unknown one (a blank pushed screen).
     buddyCanRevise: function (it) { return !!(it && it._s && it._s !== "deck" && !it._py && (it._m || it.t) && topicOf(it._s, it._m || it.t)); },
     buddyRevise: function (it) { if (HOST.buddyCanRevise(it)) openModule(it._s, it._m || it.t); },
+    // The clock on screen for the buddy's tension: { left, total } in seconds, perQ for a clock per question; null when no
+    // clock is running for this question (no timer, sections, or a practice question already answered).
+    buddyClock: function (r) {
+      if (!r || r.done) return null;
+      if (r.qc) { if (r.qc.out[r.i]) return { left: 0, total: r.qsec, perQ: true }; if (!qOpen(r, r.i)) return null; return { left: qcLeft(r.qc, r.i, pnow()) / 1000, total: r.qsec, perQ: true }; }
+      if (r.limit && !r.sc) return { left: r.limit - (Date.now() - r.t0) / 1000, total: r.limit, perQ: false };
+      return null;
+    },
     buddyAsk: function (r, q) { var it = r && r.items[r.i]; if (it && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it, chosen: r.ans[r.i], n: r.i + 1, side: true, topic: r.title, prefill: q }, HOST); }, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).

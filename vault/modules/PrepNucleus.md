@@ -92,6 +92,17 @@ more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".
 - **Tests:** `test/prep-buddy.test.mjs` (decide/doneLine), `test/run-prep-buddy-ui.mjs` (headless, SHOTS=<dir>).
   Not seen on a phone yet.
 
+- **Lively + clock tension (2026-11-20, `?v=prep191`, owner: "very lively ... get tensed turn red when time is almost
+  up"):** Nucleo has an idle life (`idle()` every 3-6 s: glance, read the question, peek, stretch, sway, tassel flick,
+  hop, wave, a dance when mood is high), eyes follow taps and scrolling (`.pnm-look`), drowsy at 45 s and asleep at 60 s
+  without input (z's; a tap startles him awake). Clock: `prep-buddy.js` reads `HOST.buddyClock(r)` twice a second
+  (per-question clock via `qcLeft`, whole-test via `r.limit`; sections not covered) and `tension()` maps it to 0/1/2:
+  per question tense at 30% (5-15 s), panic at 12% (3-5 s); whole test tense in the last 10% (30 s-5 min), panic in the
+  last 3% (10 s-1 min). Tense = flushed body (`--pnm-*` registered with `@property` so the colour fades), sweat, gritted
+  teeth, tremble, glances at the clock; panic = red, steam, scream, flailing arms; 0 left = mind blown (cap shoots off),
+  then sad; back to calm = relief (brow wipe). **He now also appears in timed tests**, clock only: no answer reactions
+  (they would leak answers) and no quick ask (no help in a test). Untimed tests: still no buddy. The per-question clock
+  ignores jumps over `QC_GAP` (3 s), so the UI test steps `SMD_PREP_NOW` in 2.5 s steps.
 - **Bubble look (2026-11-20, owner: "premium non ai slop"):** the bubble copies PrepNucleus tokens from `#smdPrep`
   (`tokens()`, re-read when body's class changes) so it is the screen's own card in light and dark; slump = one tonal
   primary (`--pn-pri-soft` / `--pn-pri-ink`) + a text "Keep going"; topic named alone and bold (`buddyTopic` drops the

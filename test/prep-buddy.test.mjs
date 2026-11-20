@@ -72,3 +72,28 @@ test("late hours", () => {
   assert.equal(P.lateNow(new Date(2026, 0, 1, 23, 30)), true);
   assert.equal(P.lateNow(new Date(2026, 0, 1, 15, 0)), false);
 });
+
+test("clock tension: a clock per question", () => {
+  // 60 s a question: tense at 15 s left, panic at 5 s.
+  assert.equal(P.tension(40, 60, true), 0);
+  assert.equal(P.tension(15, 60, true), 1);
+  assert.equal(P.tension(5, 60, true), 2);
+  assert.equal(P.tension(0, 60, true), 2);
+  // 20 s a question: tense from 6 s, panic from 3 s.
+  assert.equal(P.tension(7, 20, true), 0);
+  assert.equal(P.tension(6, 20, true), 1);
+  assert.equal(P.tension(3, 20, true), 2);
+});
+
+test("clock tension: the whole test", () => {
+  // 1 hour: tense in the last 5 min, panic in the last minute.
+  assert.equal(P.tension(301, 3600, false), 0);
+  assert.equal(P.tension(300, 3600, false), 1);
+  assert.equal(P.tension(60, 3600, false), 2);
+  // 10 min: tense in the last 60 s, panic in the last 18 s.
+  assert.equal(P.tension(61, 600, false), 0);
+  assert.equal(P.tension(60, 600, false), 1);
+  assert.equal(P.tension(18, 600, false), 2);
+  // no clock
+  assert.equal(P.tension(null, 0, false), 0);
+});
