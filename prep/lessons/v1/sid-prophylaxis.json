@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-prophylaxis",
+ "title": "Antimicrobial Prophylaxis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Prophylaxis** prevents infection in a defined risk window; bug, drug and timing must match. **Too long** breeds resistance; too late misses bacteria. Every order needs a **written stop point**. Preventing one infection is the goal, not sterilising the patient, and audits enforce stop dates.",
+   "say": "Prophylaxis gives antimicrobials to prevent infection in a defined risk window, and it works only when bug with drug with timing all match. Giving too long breeds resistance, while too late misses the bacteria. Every regimen needs a start point with a stop point written at ordering. Preventing one infection is the goal, not sterilising the patient.",
+   "vis": {
+    "cols": [
+     "Prophylaxis",
+     "Given when",
+     "Stopped when"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Surgical",
+      "At induction",
+      "Within a day"
+     ],
+     [
+      "Bite wounds",
+      "At presentation",
+      "Three to five days"
+     ],
+     [
+      "Contacts",
+      "After exposure",
+      "Course complete"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Surgical prophylaxis** is a **single dose at induction** covering skin flora. **Repeat** for blood loss and long operations. **Stop within a day**; longer breeds resistance only. **Bowel surgery** adds anaerobic cover. **Clean surgery** without implants needs no antibiotics at all.",
+   "say": "Surgical prophylaxis is a single dose at induction that covers skin flora for the hours of cutting. Repeat dosing follows blood loss with long operations, and cover stops within a day because longer courses only breed resistance. Bowel surgery adds anaerobic cover, while joint replacement demands strict timing. Clean operations without implants need no antibiotics at all.",
+   "vis": {
+    "cols": [
+     "Surgery",
+     "Cover",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Clean, no implant",
+      "None",
+      "No doses"
+     ],
+     [
+      "Joint replacement",
+      "Skin flora, timed",
+      "Single, repeat if long"
+     ],
+     [
+      "Bowel",
+      "Aerobic plus anaerobic",
+      "Single, repeat if long"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rheumatic fever** prevention is full streptococcal treatment plus **monthly penicillin** for damaged valves. **Duration runs years**, longer with carditis and residual disease. **Benzathine penicillin** protects best despite pain. **Sore throats** in rheumatic children are cultured before treatment, and carriers in the house are treated too.",
+   "say": "Rheumatic fever is prevented by treating streptococcal sore throats fully and by monthly penicillin for damaged valves. Secondary prevention runs for years, longer with carditis with residual disease. Benzathine penicillin injections hurt but protect best, and missed doses invite recurrence. Sore throat with fever in a rheumatic child is always cultured before treatment.",
+   "vis": {
+    "cols": [
+     "Prevention",
+     "Who",
+     "How long"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Sore throat cure",
+      "All strep pharyngitis",
+      "Full ten days"
+     ],
+     [
+      "Secondary cover",
+      "Valve damage",
+      "Years, longer if carditis"
+     ],
+     [
+      "Endocarditis cover",
+      "High risk procedures",
+      "Single before procedure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Asplenia** risks overwhelming sepsis from **encapsulated bacteria**. **Pneumococcal, meningococcal and Haemophilus vaccines** precede planned removal. **Daily penicillin** protects young children. **Every fever** is an emergency needing immediate cover. **Alert cards** warn distant doctors, and travel standby antibiotics go along everywhere.",
+   "say": "People without spleens die of overwhelming sepsis from encapsulated bacteria, and vaccines with standby antibiotics are the shield. Pneumococcal with meningococcal with Haemophilus vaccines are given two weeks before planned removal, or after emergency surgery. Daily penicillin protects young children, and every fever is treated as an emergency. Medical alert cards are lifesaving when patients travel.",
+   "vis": {
+    "cols": [
+     "Shield",
+     "When",
+     "Note"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Vaccines",
+      "Before planned removal",
+      "Repeat on schedule"
+     ],
+     [
+      "Daily penicillin",
+      "Young children",
+      "Till at least five years"
+     ],
+     [
+      "Fever plan",
+      "Every spike",
+      "Treat as emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endocarditis prophylaxis** covers **highest risk hearts** before highest risk dental work. **Prosthetic valves, prior endocarditis and transplant valvulopathy** qualify. **Most murmurs** need nothing; hygiene matters more. A **single dose** before the procedure completes cover, with no doses after, and hygiene beats pills.",
+   "say": "Endocarditis prophylaxis is now narrow, covering only the highest risk hearts before the highest risk procedures. Prosthetic valves with prior endocarditis with transplant valvulopathy qualify, and dental work that bleeds triggers cover. Most murmurs need nothing, and brushing matters more than pills. A single dose before the procedure is the whole regimen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Prosthetic valve, prior infection, transplant valve"
+     ],
+     "title": "Needs cover"
+    },
+    "right": {
+     "points": [
+      "Simple murmur, pacemaker, stents"
+     ],
+     "title": "Needs none"
+    }
+   }
+  },
+  {
+   "tx": "**Bite prophylaxis** covers **hands, face and deep punctures**. **Human knuckle bites** need cover plus surgical review. **Cat scratches** seed joints fast. **Rabies with tetanus** protection runs alongside. **Washing** prevents more than pills; cleaning comes first and wounds stay open for review.",
+   "say": "Bite wounds are infected by mouth flora, and prophylaxis is offered for hands with faces with deep punctures. Human bites through knuckles need cover plus surgical review, while cat scratches seed joints quickly. Rabies with tetanus protection runs alongside antibiotics in animal bites. Wounds are washed hard before any pill is given, because cleaning prevents more than drugs.",
+   "vis": {
+    "cols": [
+     "Bite",
+     "Risk",
+     "Cover"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Human knuckle",
+      "Joint, tendon",
+      "Cover, review surgery"
+     ],
+     [
+      "Cat teeth",
+      "Deep joint seed",
+      "Cover early"
+     ],
+     [
+      "Dog, monkey",
+      "Rabies plus germs",
+      "Vaccine plus cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**TB contacts** are traced; young children and converters get **preventive treatment**. **Active disease is excluded first** as single drugs breed resistance. **Liver** is watched on treatment. **Shorter options** suit where available. **Household screening** protects families together, and children under 5 come first.",
+   "say": "Tuberculosis contacts are traced and tested, and young children with new converters receive preventive treatment. Long standard courses remain the norm, with shorter options where available. Liver is watched during treatment, and active disease is excluded first because single drug treatment breeds resistance. Household screening protects the whole family at once.",
+   "vis": {
+    "cols": [
+     "Contact",
+     "Risk",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Under five",
+      "Progress fast",
+      "Treat after exclusion"
+     ],
+     [
+      "Converter",
+      "New infection",
+      "Preventive course"
+     ],
+     [
+      "HIV contact",
+      "Progress fastest",
+      "Treat urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**UTI prevention** fixes **constipation and dysfunction** first; stasis beats pills. **Nightly low dose** cover suits selected reflux while awaiting growth. **Vaginal oestrogen** protects postmenopausal women. **Anatomy correction** cures most. **Catheters** are removed fastest; closed drainage harms least while they stay.",
+   "say": "Recurrent urinary infections in children are prevented by fixing constipation with foreskin with dysfunction first, because pills cannot beat stasis. Low dose nightly cover suits selected reflux cases while awaiting growth. Postmenopausal women are helped by vaginal oestrogen, which restores protective flora. Cranberry with water intake helps some, but anatomy correction cures most.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fix constipation, stasis"
+     },
+     {
+      "id": "b",
+      "label": "Nightly cover if reflux"
+     },
+     {
+      "id": "c",
+      "label": "Oestrogen after menopause"
+     },
+     {
+      "id": "d",
+      "label": "Remove catheters fast"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**HIV prophylaxis** starts at low immunity lines: standard preventive tablets below **200** cells, MAC cover below **50**. **Immunoglobulin** shields exposed newborns. **Stopping early kills**; restarting after default needs full workup. **Recovery on treatment** ends prophylaxis, rewarding adherence visibly at every review visit.",
+   "say": "Opportunistic prophylaxis in H I V starts when immunity falls below set lines, and stopping early kills. Standard preventive tablets shield below two hundred, while M A C cover joins below fifty. Immunoglobulin protects exposed newborns with transplant patients in defined windows. Prophylaxis is stopped when immunity recovers on treatment, which rewards adherence visibly.",
+   "vis": {
+    "cols": [
+     "Immunity",
+     "Shield",
+     "Till"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Below two hundred",
+      "Preventive tablets",
+      "Immunity recovers"
+     ],
+     [
+      "Below fifty",
+      "MAC cover added",
+      "Immunity recovers"
+     ],
+     [
+      "Exposed newborn",
+      "Immunoglobulin",
+      "Window closes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** surgical cover beyond a day breeds resistance. **Simple murmurs** need no endocarditis pills. **Vaccines** must precede splenectomy. **Active TB** must be excluded before preventive treatment. **Asplenic fever** is always an emergency. Every regimen needs timing with stop dates.",
+   "say": "The traps that waste marks are prolonging surgical cover for days, giving endocarditis pills to simple murmurs, and skipping vaccines before splenectomy. Preventive T B treatment without excluding active disease breeds resistance. Daily penicillin in asplenic children is protection, not overkill, and every fever in them is an emergency. Timing with stop dates decides every regimen.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Days of surgical cover",
+      "Breeds resistance",
+      "Stop within a day"
+     ],
+     [
+      "Pills for murmur",
+      "Not indicated",
+      "High risk only"
+     ],
+     [
+      "Preventive TB blind",
+      "Breeds resistance",
+      "Exclude active first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** surgical cover is a **single dose within a day**. Rheumatic valves get **monthly penicillin**. Asplenia needs **vaccines plus penicillin**; fever is emergency. Endocarditis cover is **narrow**. HIV shields start below **250**, and stopping early is fatal.",
+   "say": "For the exam, the facts to lock in are single dose at induction stopped within a day, monthly penicillin for rheumatic valves, vaccines before splenectomy with daily penicillin for young children, narrow endocarditis cover, and immunity lines of two hundred and fifty. Active T B is excluded before prevention and every asplenic fever is an emergency. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Surgical timing",
+      "Single, within a day",
+      "Duration trap"
+     ],
+     [
+      "Rheumatic cover",
+      "Monthly penicillin",
+      "Years long"
+     ],
+     [
+      "Asplenia shield",
+      "Vaccines, penicillin",
+      "Overwhelming sepsis"
+     ],
+     [
+      "Asplenic fever",
+      "Emergency always",
+      "Mortality"
+     ],
+     [
+      "Endocarditis rule",
+      "High risk only",
+      "Narrowed guidance"
+     ],
+     [
+      "HIV preventive",
+      "Below two hundred",
+      "Immunity line"
+     ],
+     [
+      "HIV MAC",
+      "Below fifty",
+      "Immunity line"
+     ],
+     [
+      "TB prevention",
+      "Exclude active first",
+      "Resistance trap"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

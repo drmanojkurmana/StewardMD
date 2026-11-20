@@ -1,0 +1,349 @@
+{
+ "v": 1,
+ "module": "sid-dr-tb",
+ "title": "Drug Resistant Tuberculosis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Resistant TB** is defined by survived drugs; **rifampicin resistance alone** triggers full workup. **Multidrug** survives isoniazid with rifampicin. **Extensive** adds fluoroquinolones with bedaquiline or linezolid. **Rapid molecular tests** name resistance in hours. **Contacts of resistant** cases need resistant regimens from the start.",
+   "say": "Drug resistant tuberculosis is defined by the drugs it survives, and rifampicin resistance now triggers full second line workup alone. Multidrug resistance is defined by surviving isoniazid with rifampicin, while extensive resistance adds fluoroquinolones with bedaquiline or linezolid. Rapid molecular tests name resistance in hours, which is why GeneXpert with line probe assays opens every retreatment case. Contacts of resistant cases need resistant regimens.",
+   "vis": {
+    "cols": [
+     "Resistance",
+     "Survives",
+     "Trigger"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Mono",
+      "One drug",
+      "Adjust that drug"
+     ],
+     [
+      "Multidrug",
+      "H with R",
+      "Full rebuild"
+     ],
+     [
+      "Extensive",
+      "Plus FQ, Bdq/Lzd",
+      "Newest combos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**BPaLM** cures most pulmonary MDR in **6 months**: bedaquiline, pretomanid, linezolid and moxifloxacin, all oral. **Linezolid lowered** when nerves or marrow suffer. **QT, liver and vision** watched throughout. **Failure at 4 months** with component resistance switches strategy; singles never added.",
+   "say": "BPaLM is curing most pulmonary multidrug resistance in six months with four all oral drugs. Bedaquiline with pretomanid with linezolid with moxifloxacin runs under monitoring, with linezolid dose lowered when nerves with marrow suffer. QT intervals with liver with vision are watched through treatment. Failure at four months with a resistant component is switching strategy, never adding singles.",
+   "vis": {
+    "cols": [
+     "BPaLM drug",
+     "Role",
+     "Watch"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bedaquiline",
+      "Core, QT risk",
+      "ECG monthly"
+     ],
+     [
+      "Pretomanid",
+      "Sterilising",
+      "Liver"
+     ],
+     [
+      "Linezolid",
+      "Potent, toxic",
+      "Nerves, marrow"
+     ],
+     [
+      "Moxifloxacin",
+      "Fourth shield",
+      "Dropped if resistant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bedaquiline** blocks mycobacterial energy and anchors regimens. **QT prolongs** with moxifloxacin companions; **monthly ECGs** track it, pausing at thresholds safely. **Fatty food aids** absorption; missed doses never doubled. **Delamanid substitutes** where bedaquiline is unusable, especially in young children. Monthly. Always.",
+   "say": "Bedaquiline blocks mycobacterial energy production and anchors modern regimens, but it prolongs QT intervals dangerously with moxifloxacin companions. Monthly ECGs track the interval, and the drug is paused when thresholds cross. Fatty food aids absorption, and missed doses are never doubled. Delamanid substitutes where bedaquiline cannot be used, especially in children.",
+   "vis": {
+    "cols": [
+     "QT danger",
+     "With",
+     "Act at"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bedaquiline",
+      "Moxifloxacin companions",
+      "ECG monthly, pause if long"
+     ],
+     [
+      "Vomiting, diarrhoea",
+      "Many drugs",
+      "Hydrate, review"
+     ],
+     [
+      "Nerve tingling",
+      "Linezolid",
+      "Lower dose, B6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Linezolid** sterilises but **suppresses marrow and nerves** over months. **Anaemia, low platelets and burning feet** force dose reduction, not abandonment. **Pyridoxine helps** some neuropathy. **Lactic acidosis with optic neuritis** stops it urgently. **Monthly counts** with symptom review are never skipped at all.",
+   "say": "Linezolid is the potent oxazolidinone that sterilises but suppresses marrow with nerves over months. Anaemia with low platelets with burning feet forces dose reduction, not abandonment, because the drug is saving the regimen. Pyridoxine helps some neuropathy, while lactic acidosis with optic neuritis stops it urgently. Counts with symptom review run monthly without exception.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Cures in six months, all oral, monitored toxicity"
+     ],
+     "title": "BPaLM short"
+    },
+    "right": {
+     "points": [
+      "Months longer, injectables past, tailored build"
+     ],
+     "title": "Individualised long"
+    }
+   }
+  },
+  {
+   "tx": "**Fluoroquinolone sensitivity** tested before every regimen. **Resistant cases** drop moxifloxacin and rebuild with bedaquiline, linezolid and cycloserine. **Fluoroquinolones cross resist** fully within class; switching never works. **Tendon pain with QT stretch** warns during use and needs rest with review. Always.",
+   "say": "Fluoroquinolone resistance is tested before every regimen, because moxifloxacin in BPaLM depends on sensitivity. Resistant cases are rebuilt without the drug, using bedaquiline with linezolid and cycloserine. Fluoroquinolones cross resist fully within class, so switching between them never works. Tendon pain with QT stretch warns during use.",
+   "vis": {
+    "cols": [
+     "FQ sensitive",
+     "FQ resistant",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Use BPaLM",
+      "Rebuild without",
+      "Test first always"
+     ],
+     [
+      "Moxifloxacin works",
+      "Drops out",
+      "No intra class swap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Children** get delamanid with linezolid with cycloserine regimens; **injectables avoided** as they deafen young ears. **Weight band doses** with syrups help adherence. **Growth with development** tracked with bugs. **Under 5 contacts** earn tailored prevention. **Family treatment** with nutrition cures households together.",
+   "say": "Children with resistant tuberculosis receive kinder regimens built on delamanid with linezolid with cycloserine, avoiding injectables that deafen. Doses run by weight bands with syrups where available, and growth with development is tracked alongside bugs. Contacts under five of resistant cases earn preventive tailored regimens. Family treatment with nutrition support cures households together.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resistance detected"
+     },
+     {
+      "id": "b",
+      "label": "FQ tested, ECG done"
+     },
+     {
+      "id": "c",
+      "label": "BPaLM or rebuild"
+     },
+     {
+      "id": "d",
+      "label": "Monitor, support, cure"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Surgery removes** destroyed lungs sheltering bugs; operate after months of effective cover. **Massive haemoptysis, aspergilloma and localised bronchiectasis** earn resection. **Nutrition with counselling** runs with drugs; thin patients fail regimens. **Alcohol with smoking cessation** multiplies cure odds measurably and durably.",
+   "say": "Surgery removes destroyed lungs that shelter bugs beyond drug reach, operating after months of effective cover. Massive haemoptysis with aspergilloma in old cavities with localised bronchiectasis earns resection. Nutritional rebuilding with protein with counselling runs alongside drugs, because thin patients fail regimens. Alcohol with smoking cessation multiplies cure odds measurably.",
+   "vis": {
+    "cols": [
+     "Surgery for",
+     "When",
+     "Cover"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Destroyed lobe",
+      "Bugs persist inside",
+      "Months effective first"
+     ],
+     [
+      "Haemoptysis",
+      "Bleeding kills",
+      "Resect urgently"
+     ],
+     [
+      "Aspergilloma",
+      "Fungus ball",
+      "Remove cavity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adverse events managed**, cures never stopped; interruptions breed resistance. **Nausea** ridden through with food timing. **QT stretch** pauses offenders. **Hearing with kidney** casualties ended with all oral regimens. **Psychosis, seizures** from cycloserine need cuts with pyridoxine. **Monthly review** catches all early.",
+   "say": "Adverse events are expected and managed without stopping cures, because interruptions breed wider resistance. Nausea with vomiting is ridden through with food timing, while QT stretch pauses the offender. Hearing with kidneys were the injectable era casualties, now avoided by all oral regimens. Psychosis with seizures from cycloserine needs dose cuts with pyridoxine cover.",
+   "vis": {
+    "cols": [
+     "Event",
+     "Drug",
+     "Fix"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "QT long",
+      "Bedaquiline",
+      "Pause, ECG"
+     ],
+     [
+      "Nerves, marrow",
+      "Linezolid",
+      "Lower, B6"
+     ],
+     [
+      "Mind changes",
+      "Cycloserine",
+      "Cut, B6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** single drugs added to failure breed wider resistance. **Moxifloxacin blind** without testing fails. **Linezolid stopped** instead of lowered loses the regimen. **QT unchecked** on bedaquiline kills suddenly. **Every failure is rebuilt** fully, never patched singly at all. Ever.",
+   "say": "The traps that fail examinations are adding single drugs to failing regimens, using moxifloxacin without sensitivity testing, and stopping linezolid instead of lowering it when nerves tingle. QT intervals unchecked on bedaquiline kill suddenly, and injectables in children deafen needlessly. Every failure is rebuilt fully, never patched with one addition.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Add one drug",
+      "Breeds wider",
+      "Rebuild fully"
+     ],
+     [
+      "Blind moxi",
+      "May resist",
+      "Test first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Monthly follow up** runs smears, cultures, ECGs, eyes and nerves together. **Cure declared** after completion with negative cultures. **Relapse within two years** restarts full resistance testing. **Supporters visit** homes; nutrition continues till weight returns. **Registers close** after two clean years.",
+   "say": "Follow up runs monthly with smears with cultures with ECGs with eyes with nerves, and cure is declared after completion with negative cultures. Relapse within two years restarts full resistance testing, because reinfection mimics failure. Treatment supporters are visiting homes, and nutritional aid continues till weight returns. Registers are closed only after two clean years.",
+   "vis": {
+    "cols": [
+     "Visit",
+     "Done",
+     "Till"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Monthly",
+      "Smear, culture, ECG",
+      "Completion"
+     ],
+     [
+      "Cure",
+      "Negative cultures",
+      "Two clean years"
+     ],
+     [
+      "Relapse",
+      "Full retest",
+      "Rebuild again"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** rifampicin resistance alone triggers **full workup**. **BPaLM 6 months** all oral cures most MDR. **Bedaquiline QT** needs monthly ECGs. **Linezolid lowered** for nerves, never abandoned at all. **FQ tested** before use. **Singles never added** to failure.",
+   "say": "For the exam, the facts to lock in are rifampicin resistance triggering full workup, BPaLM six months all oral, bedaquiline QT with monthly ECGs, linezolid marrow with nerves lowered not stopped, fluoroquinolone tested before use, and singles never added to failure. Children avoid injectables, surgery removes destroyed lobes, and contacts need resistant regimens. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Trigger",
+      "Rifampicin resistance",
+      "Full rebuild"
+     ],
+     [
+      "Short cure",
+      "BPaLM six months",
+      "All oral"
+     ],
+     [
+      "Bedaquiline risk",
+      "QT prolongs",
+      "Monthly ECG"
+     ],
+     [
+      "Linezolid risk",
+      "Marrow, nerves",
+      "Lower dose"
+     ],
+     [
+      "FQ rule",
+      "Test first",
+      "No class swap"
+     ],
+     [
+      "Failure rule",
+      "Never add singles",
+      "Rebuild fully"
+     ],
+     [
+      "Children",
+      "No injectables",
+      "Deafens"
+     ],
+     [
+      "Surgery",
+      "Destroyed lobes",
+      "Shelters bugs"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,348 @@
+{
+ "v": 1,
+ "module": "sne-csf-analysis",
+ "title": "Lumbar puncture and CSF analysis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Cerebrospinal fluid is examined in suspected meningitis, subarachnoid haemorrhage, demyelination, and leptomeningeal malignancy. The **opening pressure** is measured in the lateral decubitus position and the fluid is collected into several tubes for pressure, cell count with differential, protein, glucose with paired blood glucose, Gram stain, culture, and viral polymerase chain reaction. A **bloody tap** that clears across tubes is traumatic, not haemorrhagic.",
+   "say": "Cerebrospinal fluid is examined in suspected meningitis, subarachnoid haemorrhage, demyelination and leptomeningeal malignancy. The opening pressure is measured in the lateral decubitus position and the fluid is collected into several tubes for pressure, cell count with differential, protein, glucose with paired blood glucose, Gram stain, culture and viral polymerase chain reaction. A bloody tap that clears across tubes is traumatic, not haemorrhagic.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-proc-csf-disease.webp",
+    "alt": "Lumbar puncture procedure showing needle placement between lumbar vertebrae.",
+    "caption": "Lumbar puncture at the L3 to L4 space collects CSF for analysis (StewardMD).",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **indications** are suspected central nervous system infection and any febrile illness with seizures, altered consciousness, or meningeal signs. A mass lesion that has raised pressure, a clotting defect, very low platelets, and infected skin over the entry site are the classic **contraindications**. Focal deficits or papilloedema demand head imaging before the tap.",
+   "say": "The indications are suspected central nervous system infection and any febrile illness with seizures, altered consciousness or meningeal signs. A mass lesion that has raised pressure, a clotting defect, very low platelets and infected skin over the entry site are the classic contraindications. Focal deficits or papilloedema demand head imaging before the tap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Action before tap",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Focal neurological deficit",
+      "Image the head first",
+      "Risk of coning from a mass"
+     ],
+     [
+      "Papilloedema",
+      "Image the head first",
+      "Raised pressure from a mass"
+     ],
+     [
+      "Coagulopathy",
+      "Correct the defect first",
+      "Spinal epidural haematoma risk"
+     ],
+     [
+      "Skin infection at site",
+      "Choose another level or defer",
+      "Risk of seeding infection"
+     ],
+     [
+      "Immunosuppression",
+      "Image first if focal signs",
+      "Higher risk of mass lesions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In adults the needle is passed between **L3 and L4** or **L4 and L5**, below the conus medullaris which ends at L1 and L2. Neonates are tapped at **L3 and L4** or lower because the conus lies lower in infancy, with the baby seated or lateral with the spine flexed. A 22 G needle is standard, and small steps are taken checking for fluid at each advance.",
+   "say": "In adults the needle is passed between L3 and L4 or L4 and L5, below the conus medullaris which ends at L1 and L2. Neonates are tapped at L3 and L4 or lower because the conus lies lower in infancy, with the baby seated or lateral with the spine flexed. A 22 G needle is standard, and small steps are taken checking for fluid at each advance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Conus ends at L1 to L2"
+     },
+     {
+      "id": "b",
+      "label": "Tap below the conus level"
+     },
+     {
+      "id": "c",
+      "label": "Needle enters L3 to L4 space"
+     },
+     {
+      "id": "d",
+      "label": "CSF flows, pressure measured"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bacterial meningitis** gives turbid fluid with neutrophil pleocytosis in the thousands, very high protein, and low glucose well below half the blood value. **Viral meningitis** gives clear fluid with lymphocyte predominance, normal or mildly raised protein, and normal glucose. **Tuberculous meningitis** gives clear fluid with a lymphocyte differential, very high protein, and low glucose over days.",
+   "say": "Bacterial meningitis gives turbid fluid with neutrophil pleocytosis in the thousands, very high protein and low glucose well below half the blood value. Viral meningitis gives clear fluid with lymphocyte predominance, normal or mildly raised protein and normal glucose. Tuberculous meningitis gives clear fluid with a lymphocyte differential, very high protein and low glucose over days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Bacterial",
+     "Viral",
+     "Tuberculous"
+    ],
+    "rows": [
+     [
+      "Appearance",
+      "Turbid",
+      "Clear",
+      "Clear, may form pellicle"
+     ],
+     [
+      "Cell type",
+      "Thousands of neutrophils",
+      "Under 100 lymphocytes",
+      "Under 100 lymphocytes"
+     ],
+     [
+      "Protein",
+      "Very high",
+      "Normal or mildly raised",
+      "Very high"
+     ],
+     [
+      "Glucose ratio",
+      "Under half",
+      "Normal",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **glucose ratio** is the cerebrospinal fluid glucose divided by the simultaneous blood glucose, and a ratio under half points toward bacterial or tuberculous disease. **Gram stain** identifies the organism in most bacterial cases, while **culture** is definitive but takes days. **Cryptococcal antigen** is the first test when cryptococcal meningitis is suspected in advanced human immunodeficiency virus infection.",
+   "say": "The glucose ratio is the cerebrospinal fluid glucose divided by the simultaneous blood glucose, and a ratio under half points toward bacterial or tuberculous disease. Gram stain identifies the organism in most bacterial cases, while culture is definitive but takes days. Cryptococcal antigen is the first test when cryptococcal meningitis is suspected in advanced human immunodeficiency virus infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "What it answers",
+     "Turnaround"
+    ],
+    "rows": [
+     [
+      "Gram stain",
+      "Bacterial morphology and organism",
+      "Within the hour"
+     ],
+     [
+      "Culture",
+      "Definitive organism and sensitivities",
+      "Two to three days"
+     ],
+     [
+      "Viral polymerase chain reaction",
+      "Viral meningitis and encephalitis",
+      "Same day"
+     ],
+     [
+      "Fungal culture and antigen",
+      "Cryptococcal and fungal meningitis",
+      "Antigen same day, culture a week"
+     ],
+     [
+      "Cytology",
+      "Leptomeningeal metastasis",
+      "One to three days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subarachnoid haemorrhage** with a normal computed tomography scan still needs lumbar puncture, where the supernatant stays **xanthochromic** after centrifugation because blood has broken down in the subarachnoid space. A traumatic tap shows clearing between tubes and the supernatant stays clear. Spectroscopy is more sensitive than the naked eye for xanthochromia.",
+   "say": "Subarachnoid haemorrhage with a normal computed tomography scan still needs lumbar puncture, where the supernatant stays xanthochromic after centrifugation because blood has broken down in the subarachnoid space. A traumatic tap shows clearing between tubes and the supernatant stays clear. Spectroscopy is more sensitive than the naked eye for xanthochromia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Traumatic tap",
+     "points": [
+      "Bloody first tube that clears across tubes",
+      "Supernatant clear after centrifugation",
+      "Red cell count falls rapidly across tubes",
+      "Usually resolves with a lower level tap"
+     ]
+    },
+    "right": {
+     "title": "Subarachnoid haemorrhage",
+     "points": [
+      "Uniformly bloody in every tube",
+      "Supernatant xanthochromic after spinning",
+      "Red cells persist across tubes",
+      "Computed tomography and angiography next"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Oligoclonal bands** present only in the cerebrospinal fluid and not in the paired serum are the laboratory hallmark of **multiple sclerosis**. A high **IgG index** and intrathecal synthesis support the same diagnosis. Leptomeningeal metastasis gives a lymphocyte pleocytosis with raised protein and low glucose, and repeated cytology improves the yield.",
+   "say": "Oligoclonal bands present only in the cerebrospinal fluid and not in the paired serum are the laboratory hallmark of multiple sclerosis. A high IgG index and intrathecal synthesis support the same diagnosis. Leptomeningeal metastasis gives a lymphocyte pleocytosis with raised protein and low glucose, and repeated cytology improves the yield.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Interpretation",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Oligoclonal bands, fluid only",
+      "Intrathecal immunoglobulin synthesis",
+      "Multiple sclerosis"
+     ],
+     [
+      "High IgG index",
+      "Increased synthesis within the theca",
+      "Multiple sclerosis, neurosarcoidosis"
+     ],
+     [
+      "Lymphocytes with high protein and low glucose",
+      "Chronic meningeal inflammation",
+      "Tuberculosis, fungal disease, metastasis"
+     ],
+     [
+      "Polymorphs with very high protein",
+      "Acute suppurative inflammation",
+      "Bacterial meningitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Complications** of the tap are post dural puncture headache from continued leak, which worsens on standing and eases on lying down. The headache is treated with hydration, caffeine, and an epidural blood patch when it persists. **Coning** is the feared event when a mass lesion raises pressure, which is why imaging precedes the tap in focal cases. Haematoma and infection are uncommon.",
+   "say": "Complications of the tap are post dural puncture headache from continued leak, which worsens on standing and eases on lying down. The headache is treated with hydration, caffeine and an epidural blood patch when it persists. Coning is the feared event when a mass lesion raises pressure, which is why imaging precedes the tap in focal cases. Haematoma and infection are uncommon.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dural puncture leaves a leak"
+     },
+     {
+      "id": "b",
+      "label": "CSF volume falls"
+     },
+     {
+      "id": "c",
+      "label": "Brain sags and stretches pain fibres"
+     },
+     {
+      "id": "d",
+      "label": "Headache worse on standing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pitfalls** in CSF interpretation are perennial exam material. A partially treated bacterial meningitis shifts toward a lymphocyte pattern, a viral menu can still show an early neutrophil predominance, and a high protein with normal cells suggests a spinal block rather than infection. Always label the tubes in sequence, because cell counts in the first and last tubes separate a traumatic tap from true blood.",
+   "say": "Pitfalls in CSF interpretation are perennial exam material. A partially treated bacterial meningitis shifts toward a lymphocyte pattern, a viral menu can still show an early neutrophil predominance, and a high protein with normal cells suggests a spinal block rather than infection. Always label the tubes in sequence, because cell counts in the first and last tubes separate a traumatic tap from true blood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pitfall",
+     "Why it misleads",
+     "Correct reading"
+    ],
+    "rows": [
+     [
+      "Partially treated bacterial meningitis",
+      "Lymphocytes replace polymorphs",
+      "Still bacterial until culture returns"
+     ],
+     [
+      "Early viral meningitis",
+      "Polymorphs appear first",
+      "Repeat for the lymphocyte shift"
+     ],
+     [
+      "Spinal block",
+      "Very high protein with few cells",
+      "Froin syndrome, image the spine"
+     ],
+     [
+      "Traumatic tap",
+      "Blood in the first tube",
+      "Clearing across tubes means trauma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** bacterial fluid has thousands of neutrophils with a clearly reduced glucose ratio, viral fluid has under one hundred lymphocytes with normal glucose, and tuberculous fluid has lymphocytes with high protein and low glucose. Xanthochromia after centrifugation means subarachnoid blood, while clearing means trauma. Oligoclonal bands present only in fluid indicate multiple sclerosis. Imaging is advised first when focal signs or papilloedema are present.",
+   "say": "High yield for the exam: bacterial fluid has thousands of neutrophils with a clearly reduced glucose ratio, viral fluid has under one hundred lymphocytes with normal glucose, and tuberculous fluid has lymphocytes with high protein and low glucose. Xanthochromia after centrifugation means subarachnoid blood, while clearing means trauma. Oligoclonal bands present only in fluid indicate multiple sclerosis. Imaging is advised first when focal signs or papilloedema are present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid pattern",
+     "Cell and chemistry",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Turbid, thousands of polymorphs",
+      "Low glucose ratio, high protein",
+      "Bacterial meningitis"
+     ],
+     [
+      "Clear, under 100 lymphocytes",
+      "Normal glucose",
+      "Viral meningitis"
+     ],
+     [
+      "Clear, lymphocytes, high protein",
+      "Low glucose",
+      "Tuberculous meningitis"
+     ],
+     [
+      "Xanthochromic supernatant",
+      "Red cells persist across tubes",
+      "Subarachnoid haemorrhage"
+     ],
+     [
+      "Oligoclonal bands in fluid only",
+      "Raised IgG index",
+      "Multiple sclerosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

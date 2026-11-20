@@ -1,0 +1,338 @@
+{
+ "v": 1,
+ "module": "sne-secondary-headaches",
+ "title": "Secondary headaches and red flags",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Secondary headaches** are caused by another disease and demand same day exclusion when **red flags** appear. Thunderclap headache is the key emergency and **vasoconstriction syndromes** are a common recurrent cause. **SNOOP** screens systemic signs, neurologic deficit, onset, older age, and positional or precipitated patterns. Any new headache in later life, in pregnancy, or with fever is secondary until proven otherwise.",
+   "say": "Secondary headaches are caused by another disease and demand same day exclusion when red flags appear. Thunderclap headache is the key emergency and vasoconstriction syndromes are a common recurrent cause. SNOOP is used to screen systemic signs, neurologic deficit, onset, older age, and positional or precipitated patterns. Any new headache in later life, in pregnancy, or with fever is secondary until proven otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Red flag group",
+     "Example",
+     "Suspect"
+    ],
+    "rows": [
+     [
+      "Systemic or fever",
+      "Fever with neck stiffness",
+      "Meningitis or encephalitis"
+     ],
+     [
+      "Neurologic deficit",
+      "Weakness or papilloedema",
+      "Mass, stroke, venous thrombosis"
+     ],
+     [
+      "Onset thunderclap",
+      "Peak within one minute",
+      "Subarachnoid haemorrhage"
+     ],
+     [
+      "Older age or pregnancy",
+      "New headache in later life",
+      "Arteritis, mass, preeclampsia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vascular causes** are dominant in adult emergencies and causes include **subarachnoid haemorrhage**, **venous thrombosis**, **arterial dissection**, and **vasoconstriction syndromes**. Infectious causes are **bacterial meningitis** and **encephalitis**, while pressure causes are **intracranial hypotension** and **intracranial mass**. **Giant cell arteritis**, **preeclampsia**, and **carbon monoxide exposure** are treatable traps. **Medication overuse** with frequent analgesia use is followed by chronic daily headache.",
+   "say": "Vascular causes are dominant in adult emergencies and causes include subarachnoid haemorrhage, venous thrombosis, arterial dissection, and vasoconstriction syndromes. Infectious causes are bacterial meningitis and encephalitis, while pressure causes are intracranial hypotension and intracranial mass. Giant cell arteritis, preeclampsia, and carbon monoxide exposure are treatable traps. Medication overuse with frequent analgesia use is followed by chronic daily headache.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vascular and pressure causes",
+     "points": [
+      "Subarachnoid bleed with thunderclap onset",
+      "Venous thrombosis in pregnancy or pill use",
+      "Dissection with neck pain and Horner sign",
+      "Mass with morning vomiting and papilloedema"
+     ]
+    },
+    "right": {
+     "title": "Inflammatory and toxic causes",
+     "points": [
+      "Meningitis with fever and neck stiffness",
+      "Giant cell arteritis in later life",
+      "Preeclampsia with hypertension and fits",
+      "Carbon monoxide with family clustering"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pain arises when **meninges, large arteries, venous sinuses, or cranial nerves** are stretched, inflamed, or compressed. Raised **intracranial pressure** worsens headache on coughing, bending, or morning waking through **venous congestion**. Lowered pressure from a **cerebrospinal fluid leak** causes headache that eases lying flat and worsens upright. Vasospasm after bleeding and inflamed temporal arteries explain delayed deficits and scalp tenderness.",
+   "say": "Pain arises when meninges, large arteries, venous sinuses, or cranial nerves are stretched, inflamed, or compressed. Raised intracranial pressure worsens headache on coughing, bending, or morning waking through venous congestion. Lowered pressure from a cerebrospinal fluid leak causes headache that eases lying flat and worsens upright. Vasospasm after bleeding and inflamed temporal arteries explain delayed deficits and scalp tenderness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vessel or meninges irritated"
+     },
+     {
+      "id": "b",
+      "label": "Pressure rises or falls sharply"
+     },
+     {
+      "id": "c",
+      "label": "Cough or standing changes pain"
+     },
+     {
+      "id": "d",
+      "label": "Deficit follows from ischaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subarachnoid haemorrhage** announces itself with a **thunderclap headache** peaking within **one minute**, often called the worst headache of life. Vomiting, **neck stiffness**, photophobia, and transient loss of consciousness follow within hours. A **sentinel leak** days earlier and **third nerve palsy** from a posterior communicating aneurysm are classic examiner favourites. Any thunderclap headache is subarachnoid bleeding until imaging and spinal fluid prove otherwise.",
+   "say": "Subarachnoid haemorrhage announces itself with a thunderclap headache peaking within one minute, often called the worst headache of life. Vomiting, neck stiffness, photophobia, and transient loss of consciousness follow within hours. A sentinel leak days earlier and third nerve palsy from a posterior communicating aneurysm are classic examiner favourites. Any thunderclap headache is subarachnoid bleeding until imaging and spinal fluid prove otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Detail",
+     "Classic pointer"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Peak within one minute",
+      "Thunderclap, worst ever"
+     ],
+     [
+      "Associated signs",
+      "Vomiting with stiff neck",
+      "Meningism without fever"
+     ],
+     [
+      "Warning event",
+      "Milder sentinel headache days before",
+      "Ask every thunderclap history"
+     ],
+     [
+      "Localising sign",
+      "Third nerve palsy with dilated pupil",
+      "Posterior communicating aneurysm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Giant cell arteritis** causes new **temporal headache with scalp tenderness**, **jaw claudication**, and fleeting visual blurring in **later life**. **Idiopathic intracranial hypertension** gives daily pressure headache with **transient visual obscurations** and **pulse synchronous tinnitus** in young obese women. **Cerebral venous thrombosis** follows pregnancy, pills, or infection with seizures and papilloedema. **Bacterial meningitis** is followed by fever, rash, and altered sensorium, while **dissection** is followed by neck pain with **Horner syndrome**.",
+   "say": "Giant cell arteritis causes new temporal headache with scalp tenderness, jaw claudication, and fleeting visual blurring in later life. Idiopathic intracranial hypertension gives daily pressure headache with transient visual obscurations and pulse synchronous tinnitus in young obese women. Cerebral venous thrombosis follows pregnancy, pills, or infection with seizures and papilloedema. Bacterial meningitis is followed by fever, rash, and altered sensorium, while dissection is followed by neck pain with Horner syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arteritis and venous disease",
+     "points": [
+      "Arteritis: tender temporal artery, jaw pain",
+      "Arteritis: raised ESR and CRP",
+      "Venous thrombosis: fits with papilloedema",
+      "Venous thrombosis: pregnancy or pill risk"
+     ]
+    },
+    "right": {
+     "title": "Pressure and infection mimics",
+     "points": [
+      "Intracranial hypertension: obese young woman",
+      "Transient blackouts with whooshing tinnitus",
+      "Meningitis: fever with stiff neck",
+      "Dissection: neck pain plus Horner sign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The first test for thunderclap is **noncontrast CT of the head** done promptly, which is highly sensitive for blood. When CT is negative but suspicion persists, **lumbar puncture** seeks **xanthochromia** later as the gold standard confirmation. **MRI with venography** diagnoses venous thrombosis and mass, while **CT or MR angiography** finds aneurysm and dissection. Suspected arteritis needs urgent **ESR and CRP** plus **temporal artery biopsy** done promptly, with **corticosteroids** started same day.",
+   "say": "The first test for thunderclap is noncontrast CT of the head done promptly, which is highly sensitive for blood. When CT is negative but suspicion persists, lumbar puncture is used to seek xanthochromia later as the gold standard confirmation. MRI with venography diagnoses venous thrombosis and mass, while CT or MR angiography finds aneurysm and dissection. Suspected arteritis needs urgent ESR and CRP plus temporal artery biopsy done promptly, with corticosteroids started same day.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presentation",
+     "First test",
+     "Gold standard"
+    ],
+    "rows": [
+     [
+      "Thunderclap headache",
+      "Prompt noncontrast CT head",
+      "Lumbar puncture with xanthochromia later"
+     ],
+     [
+      "Suspected venous thrombosis",
+      "MRI plus MR venography",
+      "Empty delta sign with absent flow"
+     ],
+     [
+      "Suspected aneurysm or dissection",
+      "CT or MR angiography",
+      "Digital subtraction angiography"
+     ],
+     [
+      "Suspected arteritis",
+      "ESR and CRP same day",
+      "Temporal artery biopsy promptly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirmed subarachnoid bleeding needs **nimodipine** to prevent vasospasm plus urgent neurosurgical referral. Suspected **giant cell arteritis** needs same day **corticosteroids** with threatened vision, never waiting for biopsy. Suspected **bacterial meningitis** needs urgent hospital infection care before lumbar puncture. **Intracranial hypertension** is managed with **weight control** and eye follow-up, and leak care is given with **bed rest, hydration and caffeine**.",
+   "say": "Confirmed subarachnoid bleeding needs nimodipine to prevent vasospasm plus urgent neurosurgical referral. Suspected giant cell arteritis needs same day corticosteroids with threatened vision, never waiting for biopsy. Suspected bacterial meningitis needs urgent hospital infection care before lumbar puncture. Intracranial hypertension is managed with weight control and eye follow-up, and leak care is given with bed rest, hydration and caffeine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "First line care",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Subarachnoid haemorrhage",
+      "Nimodipine",
+      "Guards against vasospasm"
+     ],
+     [
+      "Giant cell arteritis",
+      "Same day corticosteroids",
+      "Never wait for biopsy"
+     ],
+     [
+      "Bacterial meningitis",
+      "Urgent infection care",
+      "Given before lumbar puncture"
+     ],
+     [
+      "Intracranial hypertension",
+      "Weight control plus eye care",
+      "Bed rest, hydration, caffeine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aneurysmal bleeding is favoured for **endovascular coiling** over clipping where anatomy allows, with **ventricular drainage** for hydrocephalus and **Triple H therapy** abandoned. **Venous thrombosis** is managed with **specialist clot care** even with haemorrhagic infarcts, then specialist care for months. Refractory intracranial hypertension uses **venous sinus stenting** or **cerebrospinal fluid diversion** for vision loss. **Vasoconstriction syndromes** are managed with **nimodipine or verapamil** with trigger removal under specialist care.",
+   "say": "Aneurysmal bleeding is now favoured for endovascular coiling over clipping where anatomy allows, with ventricular drainage for hydrocephalus and Triple H therapy abandoned. Venous thrombosis is managed with specialist clot care even when haemorrhagic infarcts are present, followed by specialist stroke care. Refractory intracranial hypertension is treated with venous sinus stenting or cerebrospinal fluid diversion for vision loss. Vasoconstriction syndromes are managed with nimodipine or verapamil with trigger removal under specialist care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Aneurysm found on angiography"
+     },
+     {
+      "id": "b",
+      "label": "Coiling preferred where feasible"
+     },
+     {
+      "id": "c",
+      "label": "Drain hydrocephalus urgently"
+     },
+     {
+      "id": "d",
+      "label": "Nimodipine guards against vasospasm"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rebleeding and delayed vasospasm** in the first days are the chief killers after subarachnoid haemorrhage, followed by hydrocephalus and seizures. Untreated arteritis causes **permanent bilateral blindness** within days, while venous thrombosis leaves epilepsy and visual loss. Most correctly treated secondary headaches resolve, but **medication overuse** and missed red flags convert them into chronic daily headache. Early imaging with correct referral decides vision, life, and long term disability.",
+   "say": "Rebleeding and delayed vasospasm in the first days are the chief killers after subarachnoid haemorrhage, followed by hydrocephalus and seizures. Untreated arteritis causes permanent bilateral blindness within days, while venous thrombosis leaves epilepsy and visual loss. Most correctly treated secondary headaches resolve, but medication overuse and missed red flags convert them into chronic daily headache. Early imaging with correct referral decides vision, life, and long term disability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Time critical complications",
+     "points": [
+      "Rebleed in the first day",
+      "Vasospasm in the first days",
+      "Arteritis blindness within days",
+      "Meningitis shock within hours"
+     ]
+    },
+    "right": {
+     "title": "Long term sequelae",
+     "points": [
+      "Hydrocephalus needing shunt",
+      "Epilepsy after venous infarct",
+      "Chronic daily headache from overuse",
+      "Depression with persistent visual loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam:** thunderclap peaking in one minute means bleed with xanthochromia later. Nimodipine prevents vasospasm with coiling and drainage. Arteritis in later life with jaw pain needs same day corticosteroids and prompt biopsy. Venous thrombosis is managed with specialist clot care despite bleed. Intracranial hypertension affects obese young women and is managed with weight control.",
+   "say": "High yield for the exam: thunderclap peaking in one minute means bleed with xanthochromia found later. Nimodipine prevents vasospasm with coiling and drainage. Arteritis in later life with jaw pain needs same day corticosteroids and prompt biopsy. Venous thrombosis is managed with specialist clot care despite bleed. Intracranial hypertension affects obese young women and is managed with weight control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Thunderclap bleed",
+      "Peak one minute, lumbar puncture later",
+      "CT then xanthochromia"
+     ],
+     [
+      "Vasospasm prevention",
+      "Nimodipine with coiling",
+      "Coiling plus drainage"
+     ],
+     [
+      "Giant cell arteritis",
+      "Later life, jaw pain, prompt biopsy",
+      "Same day corticosteroids"
+     ],
+     [
+      "Venous thrombosis",
+      "Pregnancy, pills, infection",
+      "Specialist clot care despite bleed"
+     ],
+     [
+      "Intracranial hypertension",
+      "Obese young woman",
+      "Weight control plus eye care"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

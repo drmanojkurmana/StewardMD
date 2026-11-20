@@ -1,0 +1,335 @@
+{
+ "v": 1,
+ "module": "sid-pcp-other-fungal",
+ "title": "Pneumocystis and other fungal infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Pneumocystis jirovecii** causes pneumonia in **CD4 below 200**, the classic AIDS-defining illness. The fungus cannot be cultured and spreads person to person. **Non-HIV immunosuppression** (steroids, transplant, biologics) now causes more cases with faster collapse. **Exertional breathlessness** with dry cough over weeks with clear chest defines HIV disease. **Hypoxaemia out of proportion** with normal examination is the hallmark.",
+   "say": "Pneumocystis jirovecii was reported to cause pneumonia when C D four falls below two hundred, the classic A I D S defining illness. The fungus could not be cultured and spread person to person. Non-H I V immunosuppression with steroids, transplant and biologics was reported to cause more cases now with faster collapse. Exertional breathlessness with dry cough over weeks and a clear chest defined H I V disease. Hypoxaemia out of proportion with a normal examination was recorded as the hallmark.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Host",
+     "Onset",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "HIV low CD4",
+      "Weeks, gradual",
+      "Clear chest, low oxygen"
+     ],
+     [
+      "Non-HIV drugs",
+      "Days, abrupt",
+      "Higher mortality"
+     ],
+     [
+      "Steroids stopped",
+      "Rebound weeks",
+      "Taper cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cellular immunity** with CD4 cells clears pneumocystis; loss lets organisms fill alveoli with **foamy exudate**. **Dying organisms** after treatment trigger inflammation that worsens breathing for days, the reason steroids save. **Prophylaxis gaps** (stopped co-trimoxazole, new biologics) precede most cases. **Concurrent TB with bacterial pneumonia** complicates 13 to 18%, hiding underneath. **Pneumothorax** marks advanced cystic damage and predicts death.",
+   "say": "Cellular immunity with C D four cells was shown to clear pneumocystis, while loss let organisms fill alveoli with foamy exudate. Dying organisms after treatment were reported to trigger inflammation that worsened breathing for days, which explained why steroids saved lives. Prophylaxis gaps with stopped co-trimoxazole and new biologics preceded most cases. Concurrent T B with bacterial pneumonia was recorded in thirteen to eighteen percent, hiding underneath. Pneumothorax was defined as advanced cystic damage predicting death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Result",
+     "Lesson"
+    ],
+    "rows": [
+     [
+      "CD4 loss",
+      "Foamy alveoli",
+      "Count decides risk"
+     ],
+     [
+      "Die-off flare",
+      "Early worsening",
+      "Steroids cover"
+     ],
+     [
+      "Prophylaxis gap",
+      "Breakthrough",
+      "Restart cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Desaturation on exertion** with **bilateral perihilar infiltrates** marks HIV PCP; early films may stay normal. **Ground glass on CT** appears before plain film changes and essentially excludes PCP when absent. **LDH rises** non-specifically with hypoxaemia and widened A-a gradient. **Cavities with effusion with nodes** argue another diagnosis. **Pneumothorax with cysts** in AIDS suggests PCP until proved otherwise.",
+   "say": "Desaturation on exertion with bilateral perihilar infiltrates was defined as H I V P C P, while early films stayed normal. Ground glass on C T was reported to appear before plain film changes and essentially excluded P C P when absent. L D H was recorded to rise non-specifically with hypoxaemia and widened gradient. Cavities with effusion and nodes argued another diagnosis. Pneumothorax with cysts in A I D S was reported to suggest P C P until proved otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Image",
+     "Means",
+     "Next"
+    ],
+    "rows": [
+     [
+      "Perihilar haze",
+      "PCP likely",
+      "ABG plus BAL"
+     ],
+     [
+      "Ground glass CT",
+      "Early PCP",
+      "Treat at once"
+     ],
+     [
+      "Cavity, nodes",
+      "Not PCP",
+      "Seek TB, cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**BAL with silver with immunofluorescence** is the gold test; **induced sputum** needs experts and varies widely. **Expectorated sputum never suffices**. **Beta-D-glucan supports** but never proves; **PCR too sensitive**, mixing colonisation with disease. **HIV with CD4 with TB test** runs with every workup. **Treat before confirmation** when suspected, as organisms linger for days after drugs start.",
+   "say": "B A L with silver and immunofluorescence was ordered as the gold test, while induced sputum needed experts and varied widely. Expectorated sputum never sufficed. Beta-D-glucan was reported to support but never prove, while P C R stayed too sensitive, mixing colonisation with disease. H I V with C D four with T B test was ordered with every workup. Treatment before confirmation was advised when suspected, as organisms lingered for days after drugs started.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect PCP"
+     },
+     {
+      "id": "b",
+      "label": "ABG plus CT plus BAL"
+     },
+     {
+      "id": "c",
+      "label": "Treat, review cover"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Co-trimoxazole for 21 days** cures: **trimethoprim 15 to 20 mg/kg daily** in divided doses, IV when severe. **Two double-strength tablets thrice daily** suits mild to moderate disease orally. **Steroids within 72 hours** when **PaO2 below 70 with gradient above 35**: prednisolone 40 mg twice daily for 5 days, then 40 mg daily for 5 days, then 20 mg daily to day 21. **Deterioration in 3 to 5 days** is expected, not failure.",
+   "say": "Co-trimoxazole for twenty one days was reported to cure, with trimethoprim at fifteen to twenty milligrams per kilo daily in divided doses, and I V when severe. Two double-strength tablets thrice daily suited mild to moderate disease orally. Steroids within seventy two hours were ordered when P a O two stayed below seventy with gradient above thirty five, starting prednisolone forty milligrams twice daily for five days, then forty daily for five days, then twenty daily to day twenty one. Deterioration in three to five days was expected, not failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Span"
+    ],
+    "rows": [
+     [
+      "Co-trimoxazole",
+      "TMP 15 to 20 per kg",
+      "21 days"
+     ],
+     [
+      "Prednisolone",
+      "40, 40, 20 taper",
+      "Days 1 to 21"
+     ],
+     [
+      "IV route",
+      "Severe disease",
+      "Switch when better"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clindamycin with primaquine** rescues sulfa failure; **IV pentamidine 4 mg/kg daily** covers when guts fail. **Dapsone with trimethoprim with atovaquone 750 mg twice daily** suits mild intolerance. **G6PD is checked** before dapsone with primaquine; haemolysis with methaemoglobinaemia follows deficiency. **Failure means** no better by day 8 with repeat lavage excluding second infection. **Aerosolised pentamidine never treats**; it only prevents.",
+   "say": "Clindamycin with primaquine was reported to rescue sulfa failure, while I V pentamidine at four milligrams per kilo daily covered when guts failed. Dapsone with trimethoprim and atovaquone at seven hundred fifty milligrams twice daily suited mild intolerance. G six P D was checked before dapsone with primaquine, as haemolysis with methaemoglobinaemia followed deficiency. Failure was defined as no better by day eight with repeat lavage excluding second infection. Aerosolised pentamidine never treated and only prevented.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rescue that works",
+     "points": [
+      "Clindamycin plus primaquine",
+      "IV pentamidine",
+      "Exclude second bug"
+     ]
+    },
+    "right": {
+     "title": "Traps to avoid",
+     "points": [
+      "Aerosolised to treat",
+      "Early switch at day 3",
+      "Folinic acid added"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fusarium with scedosporium** invade neutropenic lungs with **skin nodules**, resisting most azoles; **voriconazole** leads fusarium. **Dematiaceous moulds** mark sinuses with brain in the immunosuppressed. **Breakthrough on voriconazole prophylaxis** means mucor till proved otherwise. **Talaromyces with crypto** cross-refer their own lessons for HIV presentations. **Tissue with culture** decides every non-PCP mould, as biomarkers overlap.",
+   "say": "Fusarium with scedosporium was reported to invade neutropenic lungs with skin nodules, resisting most azoles, while voriconazole led fusarium treatment. Dematiaceous moulds were reported to mark sinuses with brain in the immunosuppressed. Breakthrough on voriconazole prophylaxis was treated as mucor till proved otherwise. Talaromyces with crypto were cross-referred to their own lessons for H I V presentations. Tissue with culture was ordered to decide every non-P C P mould, as biomarkers overlapped.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mould",
+     "Setting",
+     "Lead drug"
+    ],
+    "rows": [
+     [
+      "Fusarium",
+      "Neutropenia, nodules",
+      "Voriconazole"
+     ],
+     [
+      "Scedosporium",
+      "Near-drowning, lung",
+      "Voriconazole"
+     ],
+     [
+      "Breakthrough",
+      "On azole cover",
+      "Think mucor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prophylaxis starts below CD4 200** with co-trimoxazole daily; **thrush alone** earns it too. **Stops above 200 for 3 months** on ART, restarting on fall. **Desensitise after mild rash**; switch to **dapsone 100 mg daily with atovaquone 1500 mg daily** when needed. **ART within 2 weeks** of PCP treatment, never deferred like meningitis. **Secondary cover** runs till immune recovery completes.",
+   "say": "Prophylaxis was started below C D four two hundred with co-trimoxazole daily, while thrush alone earned it too. Cover was stopped above two hundred for three months on A R T, restarting on fall. Desensitisation was advised after mild rash, switching to dapsone at one hundred milligrams daily with atovaquone at fifteen hundred milligrams daily when needed. A R T was started within two weeks of P C P treatment, never deferred like meningitis. Secondary cover was continued till immune recovery completed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rule",
+     "Detail",
+     "Span"
+    ],
+    "rows": [
+     [
+      "Start",
+      "Below CD4 200",
+      "Daily Septran"
+     ],
+     [
+      "Stop",
+      "Above 200, 3 months",
+      "On ART"
+     ],
+     [
+      "ART",
+      "Within 2 weeks",
+      "No deferral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis follows oxygen**: ventilated cases still half survive with intensive care offered. **Non-HIV disease kills more** with abrupt course; HIV disease stretches weeks. **Relapse follows stopped prophylaxis**; lifelong vigilance with counts prevents it. **Steroids skipped in mild disease** avoid harm; given late they still help severe cases. **Pneumothorax with shock** escalates to ICU at once with transplant drugs reviewed.",
+   "say": "Prognosis was reported to follow oxygen, as ventilated cases still half survived with intensive care offered. Non-H I V disease was recorded to kill more with abrupt course, while H I V disease stretched weeks. Relapse was reported to follow stopped prophylaxis, while lifelong vigilance with counts prevented it. Steroids skipped in mild disease avoided harm, while late steroids still helped severe cases. Pneumothorax with shock was escalated to I C U at once with transplant drugs reviewed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Outlook",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Ventilated",
+      "Half survive",
+      "Offer ICU"
+     ],
+     [
+      "Non-HIV",
+      "Worse",
+      "Treat faster"
+     ],
+     [
+      "Stopped cover",
+      "Relapses",
+      "Watch counts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** normal film never excludes; CT with ABG decide. **Aerosolised pentamidine** prevents but never treats active disease. **Waiting past day 8** without lavage misses second infection. **Folinic acid added** worsens failure; dose reduced in renal disease instead. **Deferring ART like meningitis** harms; PCP starts ART within 2 weeks. **Dapsone without G6PD** haemolyses silently.",
+   "say": "For the exam, these traps were tabulated as requested. Normal film never excluded, while C T with A B G decided. Aerosolised pentamidine was reported to prevent but never treat active disease. Waiting past day eight without lavage was reported to miss second infection. Added folinic acid was reported to worsen failure, while dose was reduced in renal disease instead. Deferring A R T like meningitis harmed, while P C P started A R T within two weeks. Dapsone without G six P D check haemolysed silently.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Normal X-ray",
+      "Still PCP",
+      "CT plus ABG"
+     ],
+     [
+      "Aerosolised drug",
+      "Prevention only",
+      "Never treats"
+     ],
+     [
+      "Defer ART",
+      "Harms here",
+      "Start in 2 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** exertional breathlessness with **clear chest** marks PCP below **CD4 200**. **Ground glass with PaO2 below 70** stages severe; **steroids within 72 hours** save. **Co-trimoxazole 21 days** cures; **clindamycin with primaquine** rescues. **ART within 2 weeks**, never deferred. **Fusarium nodules** need voriconazole; **breakthrough on azoles** means mucor.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Exertional breathlessness with clear chest marked P C P below C D four two hundred. Ground glass with P a O two below seventy staged severe disease, while steroids within seventy two hours saved lives. Co-trimoxazole for twenty one days cured, while clindamycin with primaquine rescued. A R T within two weeks was advised, never deferred. Fusarium nodules needed voriconazole, while breakthrough on azoles meant mucor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Clear chest, low oxygen",
+      "PCP below 200",
+      "Classic picture"
+     ],
+     [
+      "PaO2 below 70",
+      "Severe, steroids",
+      "Threshold asked"
+     ],
+     [
+      "21 days cover",
+      "TMP 15 to 20",
+      "Dose asked"
+     ],
+     [
+      "ART in 2 weeks",
+      "No deferral",
+      "Versus meningitis"
+     ],
+     [
+      "Azole breakthrough",
+      "Think mucor",
+      "Trap"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

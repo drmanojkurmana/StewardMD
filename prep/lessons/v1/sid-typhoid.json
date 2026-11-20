@@ -1,0 +1,344 @@
+{
+ "v": 1,
+ "module": "sid-typhoid",
+ "title": "Enteric Fever",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Enteric fever** is Typhi and Paratyphi **bloodstream invasion** from contaminated food and water. **Step ladder fever** over a week with headache and abdominal pain is classic. **Rose spots with relative bradycardia** confirm suspicion. **Blood cultures** catch week one; **marrow stays positive** longest. **Carriers handling food** sustain epidemics.",
+   "say": "Enteric fever is a bloodstream invasion by Salmonella Typhi with Paratyphi, and it is spread by food with water contaminated with human waste. Step ladder fever rising over a week with headache with abdominal pain is the classic story, while rose spots with relative bradycardia confirm the bedside suspicion. The bug is isolated from blood in the first week, and bone marrow stays positive longest. Carriers handling food keep epidemics alive.",
+   "vis": {
+    "cols": [
+     "Week",
+     "Phase",
+     "Best test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "First",
+      "Bacteraemia, rising fever",
+      "Blood culture"
+     ],
+     [
+      "Second",
+      "Rose spots, slow pulse",
+      "Blood, stool"
+     ],
+     [
+      "Third",
+      "Complications, perforation",
+      "Surgery, cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Step ladder fever with relative bradycardia** defines typhoid; pulse lags behind temperature. **Headache with dry cough** mimics malaria in week one; smears with cultures drawn together. **Rose spots blanch** on trunks; **liver with spleen** enlarge by week two. **Constipation** beats diarrhoea in adults; children scour.",
+   "say": "Typhoid fever climbs like a ladder while the pulse refuses to race, and this pulse temperature dissociation is examined at every visit. Headache with dry cough with belly pain mimics malaria with dengue in week one, so smears with cultures are drawn together. Rose spots fade on pressure on the trunk, and the spleen with the liver enlarges by week two. Constipation is commoner than diarrhoea in adults.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Detail",
+     "Mimic split"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fever pattern",
+      "Rises daily, pulse slow",
+      "Malaria spikes, sweats"
+     ],
+     [
+      "Rose spots",
+      "Blanching trunk macules",
+      "Dengue rash itches"
+     ],
+     [
+      "Belly",
+      "Pain, constipation",
+      "Amoeba, diarrhoea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood cultures week one** are the gold standard; antibiotics blunt them fast. **Widal misleads** where endemic as old titres persist; rising pairs needed if used. **Stool with urine** turn positive later. **Marrow rescues** pretreated cases. **Cultures before cover** in every suspected case without exception.",
+   "say": "Blood cultures in the first week are the gold standard, and they stay positive before antibiotics blunt them. Widal test misleads in endemic zones because past infection keeps titres high, so rising pairs are needed where it is still used. Stool with urine cultures turn positive later, while bone marrow rescues antibiotic pretreated cases. Cultures are drawn before cover in every suspected case without exception.",
+   "vis": {
+    "cols": [
+     "Test",
+     "When",
+     "Trap"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Blood culture",
+      "Week one",
+      "Blunted by antibiotics"
+     ],
+     [
+      "Widal",
+      "Avoid alone",
+      "Old titres persist"
+     ],
+     [
+      "Marrow",
+      "Pretreated",
+      "Stays positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uncomplicated typhoid** takes **azithromycin or cefixime** tablets; fever clears in days. **Ceftriaxone injections** suit admitted vomiting patients. **Extensively resistant** strains need azithromycin with carbapenems by sensitivity. **Fluoroquinolones no longer trusted** blindly where resistance spread. **Fever clearance** with negative cultures is how cure is defined and documented.",
+   "say": "Uncomplicated typhoid is cured by azithromycin or cefixime tablets, and both clear fever within days in sensitive disease. Ceftriaxone injections suit admitted patients with vomiting, while extensively resistant strains need azithromycin with carbapenems by sensitivity. Fluoroquinolones failed where resistance spread, so they are no longer trusted blindly. Fever clearance with culture negativity is how cure is defined.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Tablets, sensitive disease, clears in days"
+     ],
+     "title": "Azithromycin, cefixime"
+    },
+    "right": {
+     "points": [
+      "Admitted, vomiting, resistant zones, injectable"
+     ],
+     "title": "Ceftriaxone"
+    }
+   }
+  },
+  {
+   "tx": "**Severe typhoid** (shock, confusion) earns **dexamethasone** with antibiotics, cutting deaths. **Bleeding with perforation** in week 3 needs **surgeons with cover**; waiting kills. **Encephalopathy, myocarditis and hepatitis** mark toxic cases for ICU. **Relapse within weeks** means gallbladder carriage persists and needs eradication.",
+   "say": "Severe typhoid with shock with confusion earns dexamethasone alongside antibiotics, which cuts mortality clearly. Intestinal bleeding with perforation in week three needs surgeons with cover together, as waiting kills. Encephalopathy with myocarditis with hepatitis marks the toxic patient needing intensive care. Relapse within weeks of stopping means the gallbladder still harbours the bug.",
+   "vis": {
+    "cols": [
+     "Complication",
+     "Week",
+     "Move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bleed, perforation",
+      "Third",
+      "Surgery with cover"
+     ],
+     [
+      "Encephalopathy",
+      "Second, toxic",
+      "Dexamethasone, ICU"
+     ],
+     [
+      "Relapse",
+      "After stopping",
+      "Hunt gallbladder"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Carriage hides in gallbladders** with stones; food handlers seed outbreaks for years. **Stool with Vi testing** hunts carriers. **Cholecystectomy with prolonged cover** eradicates most. **Conjugate vaccines** protect from infancy; travellers immunised before trips. **Clean water with safe food** ends epidemics permanently still.",
+   "say": "Chronic carriage is harboured in gallbladders with stones, and food handlers with carriage seed outbreaks for years. Stool cultures with Vi serology hunt carriers among contacts, while cholecystectomy with prolonged cover eradicates most. Vaccines protect travellers with schoolchildren in endemic zones, with conjugate vaccines working from infancy. Clean water with safe food is ending epidemics permanently.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect typhoid fever"
+     },
+     {
+      "id": "b",
+      "label": "Cultures before cover"
+     },
+     {
+      "id": "c",
+      "label": "Azithromycin or ceftriaxone"
+     },
+     {
+      "id": "d",
+      "label": "Vaccinate, hunt carriers"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Paratyphoid** mimics typhoid mildly with rarer spots and shorter courses; same drugs work. **Nontyphoidal salmonella** gives diarrhoea in health but **bacteraemia in HIV, sickle cell and extremes**. **Invasive disease** needs prolonged cover with HIV treatment. **Poultry with eggs** are usual sources; food histories guide tracing.",
+   "say": "Paratyphoid mimics typhoid mildly and responds to the same drugs, but rose spots are rarer and the course shorter. Nontyphoidal salmonella causes diarrhoea in healthy hosts but bacteraemia in H I V with sickle cell with extremes of age. Invasive nontyphoidal disease needs prolonged cover with H I V treatment alongside. Food histories separate outbreak strains, and poultry with eggs are usual sources.",
+   "vis": {
+    "cols": [
+     "Salmonella",
+     "Healthy host",
+     "Weak host"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Typhi, Paratyphi",
+      "Enteric fever",
+      "Severe, prolonged"
+     ],
+     [
+      "Nontyphoidal",
+      "Diarrhoea",
+      "Bacteraemia, long cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Conjugate vaccines** protect from **6 months**; older polysaccharide shots need boosters. **Travellers** eat cooked food with sealed water. **Carriers leave** food handling till cleared by cultures. **Handwashing with sanitation** breaks chains permanently across districts. **School programs** immunise whole cohorts before monsoon peaks.",
+   "say": "Prevention beats treatment in endemic zones, and conjugate vaccines have changed the game for children. Typbar style conjugate shots protect from six months of age, while older polysaccharide shots need boosters. Travellers eat cooked food with sealed water, and carriers leave food handling till cleared. Handwashing with sanitation breaks transmission chains permanently.",
+   "vis": {
+    "cols": [
+     "Shield",
+     "Who",
+     "When"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Conjugate vaccine",
+      "Infants onward",
+      "Before season"
+     ],
+     [
+      "Traveller shots",
+      "Visitors",
+      "Before travel"
+     ],
+     [
+      "Carrier clearance",
+      "Food handlers",
+      "Cultures negative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Resistance rewrote** treatment: ampicillin, chloramphenicol and older tablets fell first, then fluoroquinolones. **Extensively resistant** strains respect only azithromycin with carbapenems. **Sensitivity guides** every regimen; empiric choices follow local maps strictly. **Blind quinolones** fail most cases now and prolong fever dangerously.",
+   "say": "Drug resistance has rewritten typhoid treatment repeatedly, and blind fluoroquinolone use now fails most cases. Multidrug resistance took ampicillin with chloramphenicol with older tablets first, then fluoroquinolone resistance followed. Extensively resistant strains are answering only to azithromycin with carbapenems. Sensitivity testing guides every regimen, and empirical choices follow local maps.",
+   "vis": {
+    "cols": [
+     "Era",
+     "Lost drugs",
+     "Now use"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Multidrug",
+      "Ampicillin, chloramphenicol",
+      "Cipro once, now dead"
+     ],
+     [
+      "Quinolone dead",
+      "Ciprofloxacin",
+      "Azithro, ceftriaxone"
+     ],
+     [
+      "Extensive",
+      "Most orals",
+      "Azithro plus carbapenem"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** Widal alone misleads where endemic; rising pairs or cultures decide. **Week 3 pain** with guarding means perforation; surgeons join at once. **Toxic typhoid** without dexamethasone dies more. **Quinolones assumed dead** till sensitivity proves otherwise. **Carriers kept** from food till cleared.",
+   "say": "The traps that fail examinations are trusting Widal alone in endemic zones, missing perforation in week three, and forgetting dexamethasone in toxic typhoid. Fluoroquinolones are assumed dead until sensitivity proves otherwise. Carriers return to food handling before clearance, reseeding outbreaks. Blood cultures are drawn before cover in every fever without exception.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Widal alone",
+      "Old titres persist",
+      "Pairs or cultures"
+     ],
+     [
+      "Week three belly",
+      "Perforation likely",
+      "Surgery with cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** step ladder with **slow pulse** defines typhoid. **Blanching rose spots** confirm. **Blood cultures week 1** diagnose. **Azithromycin tablets** cure uncomplicated; **ceftriaxone** admits. **Dexamethasone** saves severely toxic cases from dying. **Week 3 perforation** needs surgeons urgently.",
+   "say": "For the exam, the facts to lock in are step ladder fever with slow pulse, rose spots blanching, blood cultures in week one, azithromycin tablets for uncomplicated, ceftriaxone injections for admitted, dexamethasone for severe toxic cases, and perforation in week three needing surgeons. Widal alone is misleading, carriers are hiding in gallbladders, and conjugate vaccines are protecting infants. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fever pattern",
+      "Step ladder, slow pulse",
+      "Classic definition"
+     ],
+     [
+      "Rash",
+      "Blanching rose spots",
+      "Trunk macules"
+     ],
+     [
+      "Gold test",
+      "Blood culture week one",
+      "Blunted by drugs"
+     ],
+     [
+      "Widal rule",
+      "Misleads endemic",
+      "Rising pairs only"
+     ],
+     [
+      "Oral cure",
+      "Azithromycin",
+      "Uncomplicated"
+     ],
+     [
+      "Admitted cure",
+      "Ceftriaxone",
+      "Vomiting, severe"
+     ],
+     [
+      "Severe saver",
+      "Dexamethasone",
+      "Shock, confusion"
+     ],
+     [
+      "Surgery week",
+      "Third, perforation",
+      "Waiting kills"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

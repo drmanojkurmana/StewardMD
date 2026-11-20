@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "sgm-skin-infections",
+ "subject": "ss-general-medicine",
+ "title": "Cutaneous infections and infestations",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Skin infections account for fifteen percent of dermatology visits, with cellulitis incidence twenty-five per one thousand per year and impetigo affecting ten percent of children. Dermatophytosis has prevalence twenty-five percent globally, while scabies affects two hundred million people yearly. These share the final common pathway of **barrier breach** with bacterial, fungal or parasitic colonisation of stratum corneum.",
+   "say": "Skin infections account for fifteen percent of dermatology visits, with cellulitis incidence twenty five per thousand per year and impetigo affecting ten percent of children. Dermatophytosis has prevalence twenty five percent globally, while scabies affects two hundred million people yearly. These conditions can share the final common pathway of barrier breach with bacterial, fungal or parasitic colonisation.",
+   "vis": null
+  },
+  {
+   "tx": "Risk factors include **diabetes** with two fold cellulitis risk, lymphoedema, venous ulcer, athlete foot in seventy percent of tinea pedis cases plus **immunosuppression** with HIV and chemotherapy. Household crowding raises scabies spread, with three or more contacts affected in eighty percent of outbreaks. Tinea capitis peaks at five to nine years of age.",
+   "say": "Risk factors are linked to diabetes with two fold cellulitis risk, lymphoedema, venous ulcer, athlete foot in seventy percent of tinea pedis cases plus immunosuppression with HIV and chemotherapy. Household crowding raises scabies spread, with three or more contacts affected in eighty percent of outbreaks. Tinea capitis can peak at five to nine years of age.",
+   "vis": null
+  },
+  {
+   "tx": "Staphylococcus aureus releases **exotoxins** that open tight junctions, while Streptococcus pyogenes produces M protein that blocks phagocytosis. Dermatophytes secrete **keratinases** that digest keratin and evade immunity by suppressing Toll like receptor signals. Sarcoptes scabiei burrows at zero point five mm per day and releases faecal pellets that trigger Th two itch.",
+   "say": "Staphylococcus aureus can release exotoxins that open tight junctions, while Streptococcus pyogenes can produce M protein that blocks phagocytosis. Dermatophytes secrete keratinases that digest keratin and evade immunity by suppressing Toll like receptor signals. Sarcoptes scabiei burrows slowly and releases faecal pellets that trigger strong itch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Barrier breach"
+     },
+     {
+      "id": "b",
+      "label": "Pathogen entry"
+     },
+     {
+      "id": "c",
+      "label": "Toxin or enzyme"
+     },
+     {
+      "id": "d",
+      "label": "Inflammation"
+     },
+     {
+      "id": "e",
+      "label": "Lesion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cellulitis shows acute spreading **erythema** with warmth, pain and a sharp advancing edge, often after a portal in seventy percent of cases. Impetigo crusts are **honey coloured** with honey crust exudate in eighty percent of children. Scabies classic signs are burrows in finger webs, wrist and genitals with itch worse at night in ninety percent.",
+   "say": "Cellulitis shows acute spreading redness with warmth, pain and a sharp advancing edge, often after a portal in seventy percent of cases. Impetigo crusts are honey coloured in eighty percent of children. Scabies classic signs are burrows in finger webs, wrist and genitals with itch worse at night in ninety percent.",
+   "vis": null
+  },
+  {
+   "tx": "Tinea corporis forms **annular plaques** with central clearing and scaly raised edges, while tinea capitis shows **black dot** pattern with broken hairs. Erysipelas has a sharply demarcated raised edge without bullae, and necrotising fasciitis shows crepitus with pain out of proportion. Pityriasis versicolor gives hypo or hyperpigmented macules with fine scale.",
+   "say": "Tinea corporis forms annular plaques with central clearing and scaly raised edges, while tinea capitis shows black dot pattern with broken hairs. Erysipelas has a sharply demarcated raised edge without bullae, and necrotising fasciitis shows crepitus with pain out of proportion. Pityriasis versicolor gives pigment change with fine scale.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection",
+     "Hallmark",
+     "Age peak",
+     "Key test"
+    ],
+    "rows": [
+     [
+      "Impetigo",
+      "Honey crust",
+      "two to five years",
+      "Culture swab"
+     ],
+     [
+      "Cellulitis",
+      "Spreading erythema",
+      "Adults fifty plus",
+      "Clinical diagnosis"
+     ],
+     [
+      "Tinea corporis",
+      "Annular scaly edge",
+      "Children",
+      "KOH mount"
+     ],
+     [
+      "Scabies",
+      "Burrows and night itch",
+      "All ages",
+      "Dermoscopy and scraping"
+     ],
+     [
+      "Tinea capitis",
+      "Black dot alopecia",
+      "five to nine years",
+      "KOH and fungal culture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First test is **clinical pattern** plus **KOH mount** for dermatophytes showing septate hyphae at eighty-five percent sensitivity. Gold standard is **fungal culture** on Sabouraud agar at twenty-five degrees for two to four weeks. Bacterial culture of pus confirms Staphylococcus aureus in seventy percent of impetigo, while skin scraping finds mites in sixty percent of scabies.",
+   "say": "First test is clinical pattern plus KOH mount for dermatophytes showing septate hyphae at eighty five percent sensitivity. Gold standard is fungal culture on Sabouraud agar at twenty five degrees for two to four weeks. Bacterial culture of pus confirms Staphylococcus aureus in seventy percent of impetigo.",
+   "vis": null
+  },
+  {
+   "tx": "Impetigo needs topical **topical antibiotic** two percent ointment three times daily for five days, or oral **anti-staphylococcal antibiotic** five hundred mg four times daily for seven days in extensive disease. Cellulitis starts with IV broad spectrum antibiotic one g twice daily or oral **oral antibiotic** in mild cases. Tinea corporis needs terbinafine two hundred fifty mg daily for two weeks.",
+   "say": "Impetigo needs topical topical antibiotic two percent ointment three times daily for five days, or oral anti-staphylococcal antibiotic five hundred milligrams four times daily for seven days in extensive disease. Cellulitis starts with IV broad spectrum antibiotic one gram twice daily. Tinea corporis needs terbinafine two hundred fifty milligrams daily for two weeks.",
+   "vis": null
+  },
+  {
+   "tx": "Tinea capitis needs griseofulvin five hundred mg daily for six to eight weeks because topical agents fail in hair shafts. Scabies needs **permethrin** five percent cream applied overnight and repeated on day eight, treating all contacts. Necrotising fasciitis needs emergency debridement within six hours plus broad spectrum cover four point five g every six hours.",
+   "say": "Tinea capitis needs griseofulvin five hundred milligrams daily for six to eight weeks because topical agents fail in hair shafts. Scabies needs permethrin five percent cream applied overnight and repeated on day eight, treating all contacts. Necrotising fasciitis needs emergency debridement within six hours plus broad spectrum cover.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacterial infections",
+     "points": [
+      "Honey crust impetigo",
+      "Spreading cellulitis",
+      "Culture before antibiotics",
+      "Tetanus update"
+     ]
+    },
+    "right": {
+     "title": "Fungal and parasitic",
+     "points": [
+      "KOH mount first",
+      "Oral antifungal for scalp",
+      "Permethrin for scabies",
+      "Treat household contacts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **necrotising fasciitis** with mortality twenty-five percent when debridement is delayed beyond twenty-four hours, plus **osteomyelitis** in five percent of diabetic foot ulcers. Impetigo can trigger post streptococcal glomerulonephritis in five percent of children at two weeks. Chronic tinea in twenty percent of cases becomes **resistant** with terbinafine and needs itraconazole one hundred mg daily for four weeks.",
+   "say": "Complications include necrotising fasciitis with mortality twenty five percent when debridement is delayed beyond twenty four hours, plus osteomyelitis in five percent of diabetic foot ulcers. Impetigo can trigger post streptococcal glomerulonephritis in five percent of children. Chronic tinea becomes resistant and needs itraconazole.",
+   "vis": null
+  },
+  {
+   "tx": "Most bacterial skin infections cure in seven to fourteen days with **response rates** over ninety percent on first line therapy. Dermatophytosis relapses in twenty percent within one year without footwear change. Diabetic foot ulcers recur in forty percent in a year, and scabies reinfection occurs in fifteen percent when contacts are missed.",
+   "say": "Most bacterial skin infections are cured in seven to fourteen days with response rates over ninety percent on first line therapy. Dermatophytosis can relapse in twenty percent within one year without footwear change. Diabetic foot ulcers recur in forty percent in a year, and scabies reinfection occurs when contacts are missed.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** memorise honey crust of impetigo, black dot of tinea capitis, night itch of scabies, burrows in finger webs, KOH showing septate hyphae, topical antibiotic two percent for five days, terbinafine two hundred fifty mg daily for two weeks, permethrin five percent repeated after eight days and debridement within six hours for necrotising fasciitis.",
+   "say": "This summary will help you remember the exam patterns. Memorise honey crust of impetigo, black dot of tinea capitis, night itch of scabies, burrows in finger webs, KOH showing septate hyphae, topical antibiotic for five days, terbinafine for two weeks, permethrin repeated after eight days and debridement within six hours for necrotising fasciitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Disease",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Honey crust",
+      "Impetigo",
+      "Topical antibiotic two percent"
+     ],
+     [
+      "Black dot",
+      "Tinea capitis",
+      "Griseofulvin six weeks"
+     ],
+     [
+      "Night itch burrows",
+      "Scabies",
+      "Permethrin day one and eight "
+     ],
+     [
+      "KOH septate hyphae",
+      "Dermatophytosis",
+      "Terbinafine two hundred fifty mg"
+     ],
+     [
+      "Pain out of proportion",
+      "Necrotising fasciitis",
+      "Debridement in six hours"
+     ],
+     [
+      "Annular central clearing",
+      "Tinea corporis",
+      "Topical or oral antifungal"
+     ],
+     [
+      "Diabetic foot ulcer",
+      "Cellulitis risk",
+      "Offloading and culture"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -1,0 +1,391 @@
+{
+ "v": 1,
+ "module": "sne-paraneoplastic-syndromes",
+ "title": "Paraneoplastic neurological syndromes",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Paraneoplastic syndromes** are remote effects of cancer on the nervous system, occurring without invasion, metastasis, compression or treatment toxicity. They affect only a small fraction of cancer patients, yet the neurologic illness reveals an occult tumour in more than half the cases of cerebellar degeneration. Small cell lung cancer, breast and ovarian adenocarcinoma, thymoma, Hodgkin disease and testicular tumours cause most cases. The antibody often matters more than the tumour size.",
+   "say": "Paraneoplastic syndromes are remote effects of cancer on the nervous system, occurring without invasion, metastasis, compression or treatment toxicity. They affect only a small fraction of cancer patients, yet the neurologic illness is revealing an occult tumour in more than half the cases of cerebellar degeneration. Small cell lung cancer, breast and ovarian adenocarcinoma, thymoma, Hodgkin disease and testicular tumours cause most cases. The antibody is often more important than the tumour size.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Paraneoplastic clue",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "Deficit precedes tumour detection",
+      "Cerebellar signs before breast cancer"
+     ],
+     [
+      "Tumour spectrum",
+      "Small cell lung, breast, ovary, thymoma, testis",
+      "Anti-Hu with small cell cancer"
+     ],
+     [
+      "Spread",
+      "No invasion or metastasis",
+      "Remote autoimmune effect"
+     ],
+     [
+      "Serum marker",
+      "Onconeural antibody panel",
+      "Some carry several antibodies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Small cell lung cancer** drives anti-Hu encephalomyelitis, sensory neuronopathy and Lambert Eaton syndrome. Breast and ovarian cancer drive anti-Yo cerebellar degeneration, while breast cancer also yields anti-Ri opsoclonus myoclonus. Testicular tumours pair with anti-Ma brainstem and limbic disease, thymoma with myasthenia and neuromyotonia, and ovarian teratoma with anti-**NMDA receptor** encephalitis. Some patients carry more than one antibody, so panels beat single tests.",
+   "say": "Small cell lung cancer is driving anti-Hu encephalomyelitis, sensory neuronopathy and Lambert Eaton syndrome. Breast and ovarian cancer are driving anti-Yo cerebellar degeneration, while breast cancer is also yielding anti-Ri opsoclonus myoclonus. Testicular tumours are paired with anti-Ma brainstem and limbic disease, thymoma with myasthenia and neuromyotonia, and ovarian teratoma with anti-NMDA receptor encephalitis. Some patients carry more than one antibody, so panel testing is better than single tests.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antibody",
+     "Syndrome",
+     "Tumour"
+    ],
+    "rows": [
+     [
+      "Anti-Hu",
+      "Encephalomyelitis, sensory neuronopathy",
+      "Small cell lung"
+     ],
+     [
+      "Anti-Yo",
+      "Cerebellar degeneration",
+      "Breast, ovary"
+     ],
+     [
+      "Anti-Ri",
+      "Opsoclonus myoclonus ataxia",
+      "Breast, small cell lung"
+     ],
+     [
+      "Anti-Ma",
+      "Brainstem and limbic disease",
+      "Testicular"
+     ],
+     [
+      "Anti-NMDA receptor",
+      "Psychosis, dyskinesia, hypoventilation",
+      "Ovarian teratoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Shared onconeural antigens** explain the attack: the tumour expresses proteins also found in neurons, and the immune response strikes both. Antibodies against surface targets such as NMDA and LGI1 receptors are directly pathogenic and respond to immunotherapy. Antibodies against intracellular targets such as Hu and Yo mark a **T cell** assault that destroys neurons permanently. Tumour immunity may even restrain the cancer, which is why inciting tumours stay tiny and hard to find.",
+   "say": "Shared onconeural antigens are the explanation for the attack: the tumour expresses proteins also found in neurons, and the immune response strikes both. Antibodies against surface targets such as NMDA and LGI1 receptors are directly pathogenic and respond to immunotherapy. Antibodies against intracellular targets such as Hu and Yo are marking a T cell assault that destroys neurons permanently. Tumour immunity may even restrain the cancer, which is why inciting tumours stay tiny and hard to find.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tumour expresses a neuronal protein"
+     },
+     {
+      "id": "b",
+      "label": "Immune response strikes the shared antigen"
+     },
+     {
+      "id": "c",
+      "label": "Surface antibody blocks the receptor"
+     },
+     {
+      "id": "d",
+      "label": "Reversible failure, therapy works"
+     },
+     {
+      "id": "e",
+      "label": "Intracellular antibody drives T cell killing"
+     },
+     {
+      "id": "f",
+      "label": "Neurons lost permanently"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lambert Eaton syndrome** is the most common paraneoplastic syndrome: weak proximal legs that briefly strengthen with repeated effort, plus dry mouth and erectile failure. Reflexes return after a few seconds of maximal contraction, and high frequency nerve stimulation markedly increments the response. **Paraneoplastic cerebellar degeneration** is its mirror: subacute symmetrical ataxia of arms, legs and speech with nystagmus, severe within weeks to months and recognised before the tumour in most cases.",
+   "say": "Lambert Eaton syndrome is the most common paraneoplastic syndrome: weak proximal legs that briefly strengthen with repeated effort, plus dry mouth and erectile failure. Reflexes are returning after a few seconds of maximal contraction, and high frequency nerve stimulation is markedly incrementing the response. Paraneoplastic cerebellar degeneration is its mirror: subacute symmetrical ataxia of arms, legs and speech with nystagmus, severe within weeks to months and recognised before the tumour in most cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lambert Eaton syndrome",
+     "points": [
+      "Proximal leg weakness that facilitates",
+      "Dry mouth with erectile failure",
+      "Reflexes return after brief exercise",
+      "Marked increment on repeated testing"
+     ]
+    },
+    "right": {
+     "title": "Cerebellar degeneration",
+     "points": [
+      "Symmetrical ataxia of limbs and speech",
+      "Nystagmus with severe gait failure",
+      "Subacute over weeks to months",
+      "Recognised before the tumour"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Limbic encephalitis** brings subacute confusion, agitation, memory loss in a Korsakoff pattern, seizures and hallucinations, with medial temporal inflammation. Anti-NMDA disease strikes young women with a psychiatric prodrome, then dyskinesias, seizures, hypoventilation and sympathetic storms of pulse and pressure. **Opsoclonus myoclonus ataxia** means chaotic dancing eye movements with jerks and gait failure, pointing to neuroblastoma in children and breast or small cell lung cancer in adults.",
+   "say": "Limbic encephalitis is bringing subacute confusion, agitation, memory loss in a Korsakoff pattern, seizures and hallucinations, with medial temporal inflammation. Anti-NMDA disease is striking young women with a psychiatric prodrome, then dyskinesias, seizures, hypoventilation and sympathetic storms of pulse and pressure. Opsoclonus myoclonus ataxia is a syndrome of chaotic dancing eye movements with jerks and gait failure, pointing to neuroblastoma in children and breast or small cell lung cancer in adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Picture",
+     "Antibody",
+     "Tumour hunt"
+    ],
+    "rows": [
+     [
+      "Confusion, amnesia, seizures",
+      "Anti-Hu, anti-Ma, LGI1",
+      "Chest CT, testicular ultrasound"
+     ],
+     [
+      "Psychosis then dyskinesia with hypoventilation",
+      "Anti-NMDA receptor",
+      "Ovarian imaging"
+     ],
+     [
+      "Dancing eyes with jerks and ataxia",
+      "Anti-Ri",
+      "Breast imaging, chest CT"
+     ],
+     [
+      "Photosensitivity with ring scotoma",
+      "Antirecoverin",
+      "Small cell lung search"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Onconeural antibody panels** in serum and CSF open the workup, paired with contrast MRI that shows medial temporal brightness in limbic disease and little early in cerebellar cases. CSF often carries a few dozen lymphocytes with oligoclonal bands. Tumour hunting follows the antibody: chest CT for small cell cancer, mammogram and pelvic imaging for Yo and Ri, testicular ultrasound for Ma, and ovarian imaging for NMDA disease. Whole body **PET** rescues occult cases, and repeat screening continues when the first hunt fails.",
+   "say": "Onconeural antibody panels in serum and CSF open the workup, paired with contrast MRI that shows medial temporal brightness in limbic disease and little early in cerebellar cases. CSF often carries a few dozen lymphocytes with oligoclonal bands. Tumour hunting follows the antibody: chest CT for small cell cancer, mammogram and pelvic imaging for Yo and Ri, testicular ultrasound for Ma, and ovarian imaging for NMDA disease. Whole body PET is the rescue when the first hunt fails, and repeat screening is continuing on schedule.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Serum and CSF antibody panel"
+     },
+     {
+      "id": "b",
+      "label": "Contrast MRI of the brain"
+     },
+     {
+      "id": "c",
+      "label": "Tumour hunt guided by antibody"
+     },
+     {
+      "id": "d",
+      "label": "Whole body PET when hunt fails"
+     },
+     {
+      "id": "e",
+      "label": "Repeat surveillance on schedule"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Removing the tumour** is the first treatment: resect the ovarian teratoma, treat the small cell cancer, remove the testicular lesion. Immunotherapy runs in parallel with high dose **methylprednisolone**, intravenous **immunoglobulin** or plasma exchange. Non responders receive **rituximab**, **cyclophosphamide**, **azathioprine** or **mycophenolate**. Seizures need standard anti seizure drugs alongside the immune therapy, and tumour control matters more than antibody titre.",
+   "say": "Removing the tumour is the first treatment: resect the ovarian teratoma, treat the small cell cancer, remove the testicular lesion. Immunotherapy is running in parallel with high dose methylprednisolone, intravenous immunoglobulin or plasma exchange. Non responders are receiving rituximab, cyclophosphamide, azathioprine or mycophenolate. Seizures need standard anti seizure drugs alongside the immune therapy, and tumour control is more important than antibody titre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Action",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Tumour",
+      "Remove or treat the primary",
+      "Teratoma resection, small cell chemotherapy"
+     ],
+     [
+      "Steroids",
+      "High dose methylprednisolone",
+      "First line acute therapy"
+     ],
+     [
+      "IVIG or exchange",
+      "Immunoglobulin or plasma exchange",
+      "Alternative first line option"
+     ],
+     [
+      "Second line",
+      "Rituximab, cyclophosphamide, azathioprine or mycophenolate",
+      "For non responders"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Surface antibody diseases** such as NMDA and LGI1 encephalitis respond to early rituximab or cyclophosphamide when first line therapy stalls, and most patients recover substantially. Intracellular antibody syndromes with Hu or Yo resist immunotherapy because neurons are already lost, so tumour control dominates. Relapses haunt NMDA disease for years, and antibody positive patients without a found tumour need imaging surveillance every four to six months for up to two years. Checkpoint inhibitor therapy can mimic the same encephalitis picture.",
+   "say": "Surface antibody diseases such as NMDA and LGI1 encephalitis are responding to early rituximab or cyclophosphamide when first line therapy is stalling, and most patients are recovering substantially. Intracellular antibody syndromes with Hu or Yo resist immunotherapy because neurons are already lost, so tumour control dominates. Relapses haunt NMDA disease for years, and antibody positive patients without a found tumour need imaging surveillance every four to six months for up to two years. Checkpoint inhibitor therapy can mimic the same encephalitis picture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Response",
+     "Plan"
+    ],
+    "rows": [
+     [
+      "Surface antibody disease",
+      "Often recovers substantially",
+      "Add rituximab or cyclophosphamide early"
+     ],
+     [
+      "Intracellular antibody disease",
+      "Resists immunotherapy",
+      "Tumour control dominates"
+     ],
+     [
+      "NMDA encephalitis",
+      "Relapses for years",
+      "Long follow up"
+     ],
+     [
+      "Antibody positive, no tumour",
+      "Occult primary likely",
+      "Image every four to six months for up to two years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypoventilation** kills in NMDA encephalitis when dysautonomia and depressed drive coincide, and prolonged seizures scar memory circuits. Cerebellar degeneration leaves most survivors with permanent severe ataxia despite tumour cure. Lambert Eaton patients face falls and dysphagia, plus autonomic failure of gut and bladder. Tumour progression, not neurology, decides survival in Hu and Yo disease, while early treated surface antibody patients often return to work with only mild cognitive scars.",
+   "say": "Hypoventilation is killing in NMDA encephalitis when dysautonomia and depressed drive coincide, and prolonged seizures are scarring memory circuits. Cerebellar degeneration leaves most survivors with permanent severe ataxia despite tumour cure. Lambert Eaton patients are facing falls and dysphagia, plus autonomic failure of gut and bladder. Tumour progression, not neurology, is deciding survival in Hu and Yo disease, while early treated surface antibody patients are often returning to work with only mild cognitive scars.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Better outlook",
+     "points": [
+      "Surface antibody with early treatment",
+      "Lambert Eaton with treated small cell cancer",
+      "NMDA disease with teratoma removed",
+      "Young patient with reversible blockade"
+     ]
+    },
+    "right": {
+     "title": "Worse outlook",
+     "points": [
+      "Intracellular antibody with neuronal loss",
+      "Cerebellar degeneration with fixed ataxia",
+      "Hypoventilation with dysautonomia",
+      "Tumour progression deciding survival"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** Lambert Eaton means small cell lung cancer with facilitating weakness and dry mouth. Anti-Yo means breast or ovarian cancer with subacute pancerebellar ataxia. Anti-Hu means small cell cancer with limbic or sensory neuron disease. Anti-NMDA means young women with ovarian teratoma, psychosis then dyskinesia and hypoventilation. Anti-Ma means testicular tumour, anti-Ri means opsoclonus myoclonus, and tumour removal leads every treatment list.",
+   "say": "High yield for the exam: Lambert Eaton is small cell lung cancer with facilitating weakness and dry mouth. Anti-Yo is breast or ovarian cancer with subacute pancerebellar ataxia. Anti-Hu is small cell cancer with limbic or sensory neuron disease. Anti-NMDA is young women with ovarian teratoma, psychosis then dyskinesia and hypoventilation. Anti-Ma is testicular tumour, anti-Ri is opsoclonus myoclonus, and tumour removal is leading every treatment list.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antibody or sign",
+     "Tumour",
+     "Syndrome"
+    ],
+    "rows": [
+     [
+      "Voltage gated calcium channel",
+      "Small cell lung",
+      "Lambert Eaton with facilitation"
+     ],
+     [
+      "Anti-Yo",
+      "Breast, ovary",
+      "Subacute pancerebellar ataxia"
+     ],
+     [
+      "Anti-Hu",
+      "Small cell lung",
+      "Limbic and sensory neuron disease"
+     ],
+     [
+      "Anti-NMDA receptor",
+      "Ovarian teratoma",
+      "Psychosis, dyskinesia, hypoventilation"
+     ],
+     [
+      "Anti-Ma",
+      "Testicular",
+      "Brainstem and limbic disease"
+     ],
+     [
+      "Anti-Ri",
+      "Breast",
+      "Opsoclonus myoclonus ataxia"
+     ],
+     [
+      "Antirecoverin",
+      "Small cell lung",
+      "Photosensitivity, ring scotoma"
+     ],
+     [
+      "Universal first step",
+      "Any suspected tumour",
+      "Remove or treat the primary"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

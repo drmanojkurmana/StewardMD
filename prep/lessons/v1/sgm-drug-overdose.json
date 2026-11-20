@@ -1,0 +1,102 @@
+{
+  "v": 1,
+  "module": "sgm-drug-overdose",
+  "subject": "ss-general-medicine",
+  "title": "Drug overdose",
+  "minutes": 11,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Drug overdose** means ingestion exceeding therapeutic limits, with 50 percent suicidal intent among emergency presentations and same medicines reused repeatedly. Paracetamol 200 mg per kg single ingestion harms the liver, **tricyclic antidepressants** threaten heart and seizures at 10 mg per kg, and **opioids** depress breathing at 2 mg per kg opioid equivalents. **Benzodiazepine** overdose alone rarely kills but mixed overdose with alcohol kills 8 times more often.",
+      "say": "Drug overdose means taking more than the therapeutic dose, with half of emergency cases being suicidal. Paracetamol above two hundred milligrams per kilogram harms the liver, while tricyclics and opioids can kill in small milligrams per kilogram doses. Benzodiazepines alone rarely kill but mixtures with alcohol are far deadlier.",
+      "vis": null
+    },
+    {
+      "tx": "Risk factors include **depression**, substance use, prior attempt, chronic pain, and easy access to 30 day drug supplies. Adolescents overdose impulsively in 30 percent after quarrels, elders err with duplicate **prescriptions**, and children swallow sweet coated tablets in 20 percent of cases. **Alcohol** co ingestion in 40 percent worsens sedation, and **polypharmacy** with 5 or more psychotropic drugs raises lethality 4 fold.",
+      "say": "Depression, substance use, prior attempts and access to large supplies raise overdose risk sharply. Adolescents often act impulsively after quarrels, elders take duplicates, and children swallow sweet tablets. Alcohol and multiple psychotropic drugs increase lethality several fold.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Drug", "Toxic dose", "Primary kill mechanism"],
+        "rows": [
+          ["Paracetamol", "200 mg per kg", "Hepatic necrosis"],
+          ["Tricyclic", "10 mg per kg", "Arrhythmia and seizures"],
+          ["Opioid", "2 mg per kg opioid", "Respiratory depression"],
+          ["Benzodiazepine", "Very high alone", "Airway depression"],
+          ["Beta blocker", "10 mg per kg heart rate drug", "Bradycardia and coma"]
+        ]
+      }
+    },
+    {
+      "tx": "Opioids activate **mu receptors** causing miosis, slow breathing and coma, tricyclics block **sodium channels** causing wide **QRS** above one hundred twenty ms and seizures, and beta blockers block **beta receptors** causing bradycardia and hypotension. **Paracetamol** forms toxic **NAPQI** metabolite depleting **antioxidant stores** below 30 percent, while **calcium channel blockers** block L type channels causing insulin failure and hyperglycaemia above 200 mg per dL.",
+      "say": "Opioids act on mu receptors causing pinpoint pupils and slow breathing, while tricyclics block sodium channels causing wide QRS complexes. Paracetamol forms a toxic metabolite that depletes antioxidant stores, and calcium blockers cause high sugars and bradycardia. Each mechanism indicates its ECG and laboratory signature.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ingest", "label": "Drug ingestion" },
+          { "id": "block", "label": "Receptor or channel block" },
+          { "id": "ecg", "label": "ECG and metabolic change" },
+          { "id": "organ", "label": "Organ failure and coma" }
+        ],
+        "edges": [["ingest", "block"], ["block", "ecg"], ["ecg", "organ"]]
+      }
+    },
+    {
+      "tx": "Clinical features show opioid **miosis** with respiratory rate below 8 per minute, tricyclic **anticholinergic** dryness with delirium and **QRS** widening, beta blocker bradycardia below 40 per minute, and paracetamol silent phase for 24 hours. **Seizures** present in 20 percent of tricyclic overdose, **serotonin storm** pairs **clonus** with hyperthermia above thirty eight C, and **neuroleptic malignant syndrome** pairs rigidity with fever above 40 C needing **muscle relaxant drug**.",
+      "say": "Opioid overdose slows breathing below eight per minute with pinpoint pupils, while tricyclics cause dryness and wide QRS complexes. Paracetamol stays silent for twenty four hours before liver injury appears. Seizures occur in twenty percent of tricyclic cases, and clonus with fever points to serotonin storm.",
+      "vis": null
+    },
+    {
+      "tx": "**First test** is 12 lead **ECG** with bedside glucose and gases, while **gold standard** is timed serum **drug level** with **bicarbonate** challenge for tricyclic widening. Paracetamol at 4 hours uses Rumack line, **digoxin** levels above two point five ng per mL predict toxicity, and **lithium** above 1.5 mmol per L causes confusion. **QRS** above one hundred twenty ms needs sodium bicarbonate 1 to 2 mEq per kg before **seizures** in 20 percent of tricyclic cases.",
+      "say": "Start with ECG, bedside glucose and blood gases while awaiting timed drug levels. Paracetamol levels at four hours guide N acetylcysteine, and digoxin above two point five predicts toxicity. A widened QRS above one hundred twenty needs sodium bicarbonate before seizures occur.",
+      "vis": null
+    },
+    {
+      "tx": "First line for opioids is **naloxone** zero point four to 2 mg intravenous titrated to breathing rate above 12 per minute, for tricyclics is **sodium bicarbonate** 1 to 2 mEq per kg intravenous for QRS above 100 ms, and for beta blockers is **glucagon** 5 to 10 mg intravenous infusion. **N acetylcysteine** starts 150 mg per kg over 1 hour for paracetamol, and **dextrose insulin** therapy with 25 g dextrose plus 10 units insulin treats calcium blocker collapse. **Charcoal** 1 g per kg suits early ingestion with protected airway.",
+      "say": "Treat opioid overdose with naloxone to breathing above twelve per minute and tricyclic widening with sodium bicarbonate. Give glucagon for beta blocker bradycardia and N acetylcysteine for paracetamol poisoning. Dextrose insulin infusion helps calcium blocker collapse, and charcoal helps early ingestion.",
+      "vis": {
+        "kind": "compare",
+        "left": { "title": "Tricyclic toxicity", "points": ["Wide QRS above one hundred twenty ms", "Seizures in 20 percent", "Sodium bicarbonate 1 to 2 mEq per kg", "No physostigmine or class 1 drugs"] },
+        "right": { "title": "Useful antidotes", "points": ["Naloxone for opioids zero point four mg", "Glucagon for beta blockers 5 mg", "N acetylcysteine 150 mg per kg", "Dextrose insulin for calcium blockers"] }
+      }
+    },
+    {
+      "tx": "Airway care uses **intubation** for coma score below 8, left lateral positioning, and avoidance of **flumazenil** in mixed tricyclic overdose because of seizures. **Multiple charcoal** doses 20 g every 4 hours help carbamazepine and rhythm drugs, while **whole bowel irrigation** with 2 L per hour clears iron and lithium packets. **Urinary alkalinisation** with bicarbonate to pH 7.5 to 8 helps **salicylate** and **cancer drug**, and **dialysis** clears lithium above 4 mmol per L.",
+      "say": "Intubate for deep coma, position on the left side, and avoid flumazenil in mixed tricyclic overdose. Multiple charcoal doses help carbamazepine, and alkalinised urine clears salicylate. Dialysis is needed for very high lithium or severe acidosis.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **hepatotoxicity** with transaminases above three thousand IU per L at 72 hours, **ventricular tachycardia** in 10 percent of tricyclic cases, **non cardiogenic pulmonary oedema** after opioids, and **aspiration** pneumonia in 12 percent. **Serotonin syndrome** mortality is 5 percent without cooling, **neuroleptic malignant syndrome** needs a muscle relaxant drug 2 mg per kg, and **metabolic acidosis** with anion gap above 15 needs **bicarbonate**. **Rhabdomyolysis** with creatine kinase above five thousand IU per L needs aggressive fluids.",
+      "say": "Watch for liver failure at seventy two hours, ventricular tachycardia in tricyclic poisoning, pulmonary oedema after opioids and aspiration pneumonia. Serotonin syndrome and neuroleptic malignant syndrome need active cooling and specific drugs. Rhabdomyolysis with high creatine kinase needs aggressive fluids.",
+      "vis": null
+    },
+    {
+      "tx": "Prognosis is excellent with early **N acetylcysteine** before 8 hours, with liver survival above ninety five percent when treated promptly. Repeat attempt rate is 20 percent at 1 year, so **psychiatric** follow up, means restriction and seven day prescriptions cut risk. **Paracetamol** non returners have 4 fold liver failure risk, and **tricyclic** veterans with access need **blister packaging** and 100 tablet limits to reduce **lethality**.",
+      "say": "Early N acetylcysteine before eight hours gives liver survival above ninety five percent. Repeat attempts reach twenty percent at one year, so psychiatric follow up and small prescription quantities are essential. Blister packaging and tablet limits reduce lethality significantly.",
+      "vis": null
+    },
+    {
+      "tx": "Exam traps warn that **flumazenil** causes seizures in tricyclic co ingestion in 10 percent, **physostigmine** worsens seizures and arrest, and **stress hormone** arrhythmia worsens with tricyclics. **Paracetamol** levels before 4 hours mislead, **Rumack line** needs single acute ingestion only, and **naloxone** 15 minute half life needs **infusion** in 30 percent of cases. **Digoxin** toxicity rises with **hypokalaemia** below three point five mmol per L and renal failure, tested in 3 to 5 questions per paper.",
+      "say": "Flumazenil and physostigmine cause seizures in tricyclic poisoning and must be avoided. Paracetamol levels before four hours mislead, and naloxone often needs infusion because its effect is brief. Digoxin toxicity worsens with low potassium and kidney failure.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** links ECG QRS above one hundred twenty ms to bicarbonate for tricyclics, breathing below 8 per minute to naloxone zero point four mg for opioids, and bradycardia below 40 per minute to glucagon 5 mg for beta blockers. N acetylcysteine 150 mg per kg protects the liver, flumazenil and physostigmine are contraindicated in tricyclic overdose, and charcoal 1 g per kg needs a protected airway. Repeat attempts occur in 20 percent at 1 year.",
+      "say": "Treat wide QRS with bicarbonate, slow breathing with naloxone, and bradycardia with glucagon. Give N acetylcysteine early for paracetamol, avoid flumazenil and physostigmine in tricyclic poisoning, and arrange psychiatric follow up for repeat risk.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Overdose", "First antidote", "Number"],
+        "rows": [
+          ["Tricyclic QRS above one hundred twenty ms", "Sodium bicarbonate", "1 to 2 mEq per kg"],
+          ["Opioid breathing below 8", "Naloxone", "zero point four mg intravenous"],
+          ["Beta blocker bradycardia", "Glucagon", "5 mg intravenous"],
+          ["Paracetamol liver risk", "N acetylcysteine", "150 mg per kg"],
+          ["Calcium blocker collapse", "Dextrose insulin", "10 units insulin"],
+          ["Charcoal window", "Protected airway", "1 g per kg"],
+          ["Contraindicated", "Flumazenil physostigmine", "In tricyclics"],
+          ["Repeat attempts", "Psychiatric follow up", "20 percent"]
+        ]
+      }
+    }
+  ]
+}

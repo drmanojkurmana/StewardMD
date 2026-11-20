@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "shp-ascites-sbp-hrs",
+ "subject": "ss-hepatology",
+ "title": "Ascites, SBP and hepatorenal syndrome: tap, sodium, albumin and terlipressin",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Ascites and hepatorenal syndrome)",
+  "AASLD Guidance on Ascites and SBP 2021",
+  "EASL Guidelines on Decompensated Cirrhosis 2018"
+ ],
+ "steps": [
+  {
+   "tx": "**Ascites** in cirrhosis signals portal hypertension with sodium and water retention, and under **50** percent survive **2** years after its onset. Tap every new or admitted ascites, since infection hides without symptoms. **Serum ascites albumin gradient (SAAG)** of **1.1** g per decilitre or more means portal hypertension with about **97** percent accuracy. Below **1.1**, hunt peritoneal tuberculosis, malignancy, pancreatic ascites or **nephrotic syndrome**.",
+   "say": "Ascites marks the turn from compensated to decompensating liver disease with short horizons. Every admission with ascites needs a diagnostic tap, even without fever or pain. The albumin gradient separates portal causes from peritoneal disease with high accuracy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["SAAG", "Meaning", "Next"],
+    "rows": [
+     ["1.1 or more", "Portal hypertension", "Cirrhosis pathway"],
+     ["Below 1.1", "Peritoneal disease", "TB, malignancy, pancreas"],
+     ["High, protein high", "Cardiac ascites", "Echocardiogram"],
+     ["Low, lymphocyte rich", "TB peritonitis", "Adenosine deaminase"]
+    ]
+   }
+  },
+  {
+   "tx": "Portal hypertension reduces effective circulating volume, so kidneys activate **antidiuretic hormone (ADH)**, sympathetic drive and the **renin-angiotensin-aldosterone system (RAAS)** to retain salt and water. Splanchnic vasodilation pools blood in the gut circuit while the arterial tree runs relatively empty. The kidney senses hypovolaemia and holds on, swelling the abdomen rather than the arteries.",
+   "say": "A dilated splanchnic circuit pools blood away from the arteries, and the kidney reads that as dehydration. Hormonal systems then retain salt and water until ascites forms. The abdomen swells while arterial filling stays poor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "splanchnic", "label": "Splanchnic dilation"},
+     {"id": "kidney", "label": "Kidney senses hypovolaemia"},
+     {"id": "raas", "label": "RAAS, ADH, sympathetic"},
+     {"id": "ascites", "label": "Ascites forms"}
+    ],
+    "edges": [["splanchnic", "kidney"], ["kidney", "raas"], ["raas", "ascites"]]
+   }
+  },
+  {
+   "tx": "Uncomplicated grade **2** ascites takes **2** grams of dietary sodium daily with dietitian advice, while fluid restriction waits for sodium at or below **125**. **Spironolactone** **100** mg daily forms the backbone, with or without **furosemide** **40** mg daily in a **100:40** ratio. Step up by at least **72** hour intervals to **400** plus **160** maximum, targeting loss up to **0.5** kilograms daily without oedema and **1** kilogram with oedema. Avoid nephrotoxins such as **nonsteroidal anti-inflammatory drugs (NSAIDs)** and **aminoglycosides**.",
+   "say": "Salt restriction to two grams daily anchors first line therapy, guided by a dietitian. Spironolactone leads, and furosemide joins in a fixed ratio for long standing ascites. Weight loss caps help the kidneys avoid over diuresis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug", "Start", "Ceiling"],
+    "rows": [
+     ["Spironolactone", "100 mg daily", "400 mg daily"],
+     ["Furosemide", "40 mg daily", "160 mg daily"],
+     ["Ratio", "100 to 40", "Step at 72 hours"],
+     ["Diet", "2 grams sodium", "No fluid limit"]
+    ]
+   }
+  },
+  {
+   "tx": "Removing more than **5** litres demands **20** percent albumin, **6** to **8** grams per litre removed, since circulatory dysfunction rises beyond **8** litres in one session. Consider albumin even for smaller taps with systolic pressure below **90**, sodium below **130** or acute kidney injury. **Refractory ascites**, with no diuretic response or recurrence within **4** weeks, shifts to serial large volume paracentesis, covered **transjugular intrahepatic portosystemic shunt (TIPS)** below **10** mmHg and transplant referral.",
+   "say": "Large volume taps need albumin cover because circulatory collapse follows depletion quickly. Refractory ascites answers to serial taps, shunt consideration and transplant referral. Diuretic limits with low sodium or rising creatinine confirm refractoriness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "tap", "label": "Drain more than 5 litres"},
+     {"id": "albumin", "label": "Albumin 6 to 8 grams"},
+     {"id": "refractory", "label": "Recurs within 4 weeks?"},
+     {"id": "tips", "label": "TIPS or transplant"}
+    ],
+    "edges": [["tap", "albumin"], ["albumin", "refractory"], ["refractory", "tips"]]
+   }
+  },
+  {
+   "tx": "**Spontaneous bacterial peritonitis (SBP)** means an ascitic **polymorphonuclear (PMN)** count above **250** cells per cubic millimetre, whatever grows in culture. Fever strikes roughly **80** percent, yet tenderness appears in only about **40** percent and the abdomen can feel benign. SBP presents as new confusion, jaundice or kidney injury with no abdominal signs at all. Gut translocation seeds protein poor ascites with mainly gram negative **Enterobacteriaceae**.",
+   "say": "An ascitic neutrophil count above two hundred fifty diagnoses SBP even when cultures grow nothing. Fever leads the story, but a quiet abdomen never excludes the diagnosis. Confusion or kidney injury may stand alone as the presentation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clue", "Frequency", "Lesson"],
+    "rows": [
+     ["Fever", "About 80 percent", "Commonest sign"],
+     ["Tenderness", "About 40 percent", "Benign exam lies"],
+     ["PMN 250 cutoff", "Diagnostic", "Treat regardless of culture"],
+     ["Gram negatives", "Majority", "Translocation source"]
+    ]
+   }
+  },
+  {
+   "tx": "Start intravenous antibiotics at once before culture results: **cefotaxime** **2** g every **12** hours for community acquired disease, broadening to **piperacillin-tazobactam** or **meropenem** for nosocomial or multidrug resistant risk. **Albumin** **1.5** grams per kilogram within **6** hours on day **1** and **1** gram per kilogram on day **3** helps most with kidney injury or jaundice. Repeat paracentesis at **48** hours must show at least a **25** percent PMN fall, for **5** to **7** days total.",
+   "say": "Antibiotics start immediately, since waiting for cultures costs lives. Albumin follows within hours and helps most when kidneys or jaundice suffer. A repeat tap at forty eight hours checks whether treatment works.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "pmn", "label": "PMN above 250"},
+     {"id": "abx", "label": "Cefotaxime at once"},
+     {"id": "albumin", "label": "Albumin day 1, day 3"},
+     {"id": "retap", "label": "Retap at 48 hours"}
+    ],
+    "edges": [["pmn", "abx"], ["abx", "albumin"], ["albumin", "retap"]]
+   }
+  },
+  {
+   "tx": "Long term secondary prophylaxis after SBP uses oral **norfloxacin** **400** mg daily, with **ciprofloxacin** **500** mg daily or **co-trimoxazole** **960** mg daily as alternatives. Primary prophylaxis can follow ascitic protein below **1.5** with kidney dysfunction, creatinine above **1.2**, blood urea nitrogen above **25**, sodium below **130**, or **Child-Pugh** above **9** with bilirubin above **3**. Recurrence strikes up to **70** percent within a year without prevention.",
+   "say": "Secondary prevention with daily norfloxacin follows recovery from SBP, preventing the seventy percent yearly recurrence risk. Primary prophylaxis targets protein poor fluid with failing kidneys or advanced liver scores. Alternatives run to ciprofloxacin or co-trimoxazole.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Setting", "Drug", "Dose"],
+    "rows": [
+     ["Secondary", "Norfloxacin", "400 mg daily"],
+     ["Alternative", "Ciprofloxacin", "500 mg daily"],
+     ["Alternative", "Co-trimoxazole", "960 mg daily"],
+     ["Bleed cover", "Ceftriaxone", "1 g daily, 7 days"]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute kidney injury (AKI)** in cirrhosis means creatinine rise of **0.3** mg per decilitre within **48** hours or **50** percent within **7** days. Stop diuretics, nephrotoxins and nonsteroidal drugs, hold beta blockers if hypotensive, treat infection or bleeding, and give albumin **1** gram per kilogram daily for **2** days. **Hepatorenal syndrome (HRS)**, with AKI unresponsive to albumin, needs **terlipressin** plus albumin, avoiding start when oxygen saturation falls below **90** percent. **Noradrenaline** with albumin serves in intensive care when terlipressin fails or cannot start.",
+   "say": "Kidney injury in cirrhosis starts with stopping diuretics and nephrotoxins, then an albumin challenge. Persistent injury after two days of albumin indicates hepatorenal syndrome. Terlipressin with albumin remains the preferred rescue, watched by pulse oximetry.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "AKI steps", "points": ["Stop diuretics, NSAIDs", "Treat infection, bleeding", "Albumin 1 gram per kg", "Two day challenge"]},
+    "right": {"title": "HRS treatment", "points": ["Terlipressin preferred", "Albumin alongside", "Oxygen saturation watch", "Noradrenaline in ICU"]}
+   }
+  },
+  {
+   "tx": "Hyponatraemia **120** to **125** stops diuretics and restricts water to **1000** millilitres daily, while below **120** needs stricter restriction plus albumin. Correct chronic hyponatraemia by **4** to **6** millimoles per **24** hours and never beyond **8**, since faster correction risks osmotic demyelination. Stop diuretics for kidney injury, sodium below **125**, potassium below **3** or above **6**, or worsening **encephalopathy**. **Sodium** balance and daily weights track the narrow corridor.",
+   "say": "Water restriction governs moderate hyponatraemia, while albumin joins for severe falls. Correction caps protect the brain from too rapid repair. Daily weights and frequent blood tests keep patients inside the safe corridor.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sodium", "Action", "Cap"],
+    "rows": [
+     ["120 to 125", "Stop diuretics", "Water 1000 mL"],
+     ["Below 120", "Stricter, albumin", "Urgent review"],
+     ["Correction rate", "4 to 6 daily", "Never above 8"],
+     ["Stop if", "AKI, K off", "Encephalopathy"]
+    ]
+   }
+  },
+  {
+   "tx": "Traps punish routine laziness. Missing the admission tap misses asymptomatic SBP, delaying antibiotics for cultures costs lives, and skipping albumin after large taps or during SBP loses its proven benefit. Over diuresis causes AKI and hyponatraemia, while labelling kidney injury as hepatorenal without the albumin challenge and exclusions misfires. **Secondary bacterial peritonitis**, with polymicrobial culture and very high PMN counts, needs computed tomography and surgical opinion rather than antibiotics alone.",
+   "say": "Untapped ascites, delayed antibiotics and forgotten albumin form the harmful trio. Secondary peritonitis with mixed organisms needs imaging and surgical input, not another antibiotic course. The albumin challenge must precede any hepatorenal label.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trap", "Harm", "Fix"],
+    "rows": [
+     ["No admission tap", "Missed SBP", "Tap every admission"],
+     ["Delayed antibiotics", "Rapid decline", "Treat at suspicion"],
+     ["No albumin", "Circulatory collapse", "Dose day 1, day 3"],
+     ["Mislabeled HRS", "Wrong therapy", "Albumin challenge first"]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: **SAAG** **1.1** or more means portal hypertension with **97** percent accuracy, diuretics run **100:40** spironolactone to furosemide up to **400:160**, albumin **6** to **8** grams per litre beyond **5** litres, SBP needs **PMN** above **250** with cefotaxime plus albumin, and hepatorenal syndrome answers to **terlipressin** plus albumin.",
+   "say": "The gradient cutoff, the diuretic ratio and the albumin doses form the exam spine. SBP rests on the neutrophil cutoff with immediate antibiotics and albumin. Hepatorenal syndrome improves with terlipressin and albumin therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["SAAG cutoff", "1.1 or more"],
+     ["Diuretic ratio", "100 to 40"],
+     ["Albumin per litre", "6 to 8 grams"],
+     ["SBP cutoff PMN", "Above 250"],
+     ["SBP albumin", "1.5 then 1 gram"],
+     ["Retap check", "25 percent fall"],
+     ["HRS therapy", "Terlipressin, albumin"],
+     ["Sodium diet", "2 grams daily"]
+    ]
+   }
+  }
+ ]
+}

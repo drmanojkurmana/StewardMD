@@ -1,0 +1,348 @@
+{
+  "steps": [
+    {
+      "say": "Hereditary haemochromatosis loads iron through HFE gene mutations and strikes about one in three hundred northern Europeans. Transferrin saturation above forty five percent flags it before the liver fails. Phlebotomy from diagnosis prevents cirrhosis in almost everyone caught early.",
+      "tx": "**Hereditary haemochromatosis** loads iron through **HFE** gene mutations and strikes about **1** in **300** northern Europeans, with transferrin saturation above **45** percent flagging it before the liver fails. Liver iron above **7** milligrams per gram dry weight confirms overload on biopsy or magnetic resonance imaging. **Phlebotomy** from diagnosis prevents cirrhosis in almost everyone caught early. The classic triad reads skin pigmentation, diabetes and arthropathy with a large iron load.",
+      "vis": {
+        "cols": [
+          "Clue",
+          "Organ",
+          "Why"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Slated skin pigmentation",
+            "Skin",
+            "Iron plus melanin drive"
+          ],
+          [
+            "Bronze diabetes",
+            "Pancreas",
+            "Beta cell iron injury"
+          ],
+          [
+            "Second and third joint disease",
+            "Joints",
+            "Cartilage iron deposition"
+          ],
+          [
+            "Pituitary iron",
+            "Gonads",
+            "Hypogonadism follows"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transferrin saturation is the first test, since it rises before ferritin does. Ferritin above a thousand is signalling heavy load or inflammation, and Trentorato's prussian blue stain maps it in the liver. Magnetic resonance imaging now replaces biopsy for iron quantification.",
+      "tx": "**Transferrin saturation** is the first test, since it rises before **ferritin** does, while ferritin above **1000** micrograms per litre signals heavy load or inflammation. **Prussian blue** stain maps iron in the liver biopsy, though magnetic resonance imaging now replaces biopsy for quantification in most centres. Liver iron concentration above **7** milligrams per gram dry weight defines overload needing phlebotomy. Inflammation alone raises ferritin, so saturation must accompany it.",
+      "vis": {
+        "edges": [
+          [
+            "screen",
+            "satur"
+          ],
+          [
+            "satur",
+            "ferritin"
+          ],
+          [
+            "ferritin",
+            "image"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "History plus family risk"
+          },
+          {
+            "id": "satur",
+            "label": "Saturation above 45 percent"
+          },
+          {
+            "id": "ferritin",
+            "label": "Ferritin trend and liver iron"
+          },
+          {
+            "id": "image",
+            "label": "Magnetic resonance iron map"
+          }
+        ]
+      }
+    },
+    {
+      "say": "Phlebotomy at five hundred millilitres weekly until ferritin falls below fifty is still the mainstay. Erythrocytapheresis is suiting those with heart failure. Chelation with deferasirox suits the transfusion loaded patient who cannot bleed.",
+      "tx": "**Phlebotomy** at **500** millilitres weekly until ferritin falls below **50** micrograms per litre remains the mainstay, removing **200** milligrams of iron per sitting. **Erythrocytapheresis** suits those with heart failure, while **deferasirox** chelation suits the transfusion loaded patient who cannot bleed. Maintenance phlebotomy every **2** to **4** months keeps ferritin between **50** and **100**. Haemoglobin checks guard against over bleeding in anaemic patients.",
+      "vis": {
+        "cols": [
+          "Method",
+          "Use",
+          "Target"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Weekly phlebotomy",
+            "Induction phase",
+            "Ferritin below 50"
+          ],
+          [
+            "Maintenance phlebotomy",
+            "Every 2 to 4 months",
+            "Ferritin 50 to 100"
+          ],
+          [
+            "Erythrocytapheresis",
+            "Heart failure cases",
+            "Same ferritin targets"
+          ],
+          [
+            "Deferasirox",
+            "Cannot bleed patients",
+            "Urine iron fall"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Bronze skin, diabetes and arthropathy form the classic bedside triad taught for a century. The second and third metacarpophalangeal joints are swelling early with normal inflammatory markers. Pituitary iron is bringing hypogonadism before cirrhosis declares itself.",
+      "tx": "**Bronze skin**, diabetes and **arthropathy** form the classic bedside triad taught for a century, with second and third metacarpophalangeal joints swelling early and normal inflammatory markers. **Pituitary** iron brings hypogonadism before cirrhosis declares itself, so libido and menses form part of the history. Cardiomyopathy with conduction disease follows heavy loads in young patients. The triad rarely assembles in full because screening catches disease earlier now. Exam stems still use it as the textbook picture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Skin: slate or bronze colour",
+            "Diabetes: pancreatic iron",
+            "Heart: conduction disease"
+          ],
+          "title": "Iron organs"
+        },
+        "right": {
+          "points": [
+            "Joints: second and third knuckles",
+            "Gonads: pituitary iron",
+            "Liver: fibrosis then cancer"
+          ],
+          "title": "Iron joints and glands"
+        }
+      }
+    },
+    {
+      "say": "Liver cancer complicates cirrhotic haemochromatosis in ten to thirty percent of cases. Removing iron early prevents most cancers, since the at risk years never accumulate. Six monthly ultrasound with alpha fetoprotein is therefore applying once cirrhosis exists, whatever the iron level.",
+      "tx": "**Liver cancer** complicates cirrhotic haemochromatosis in **10** to **30** percent of cases, and removing iron early prevents most cancers, since the at risk years never accumulate. Six monthly ultrasound with **alpha fetoprotein** therefore applies once cirrhosis exists, whatever the iron level. Diabetes control after phlebotomy rarely normalises fully, because beta cell loss is permanent. Family screening of siblings with saturation and genetics catches them before load builds. Alcohol abstinence matters double here.",
+      "vis": {
+        "cols": [
+          "Risk",
+          "Magnitude",
+          "Screen"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Liver cancer in cirrhosis",
+            "10 to 30 percent",
+            "Ultrasound 6 monthly"
+          ],
+          [
+            "Diabetes",
+            "Common, often permanent",
+            "Glucose yearly"
+          ],
+          [
+            "Cardiomyopathy",
+            "Young heavy load cases",
+            "Echo and rhythm checks"
+          ],
+          [
+            "Sibling risk",
+            "25 percent",
+            "Saturation and genetics"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Alpha one antitrypsin deficiency injures lung and liver through the same misfolded protein. The PiZZ genotype accounts for most liver disease in childhood, while smokers with PiSZ lose lung function fast. Smokers with deficiency should be told plainly that every cigarette costs lung.",
+      "tx": "**Alpha 1 antitrypsin deficiency** injures lung and liver through the same misfolded protein, with **PiZZ** genotype accounting for most liver disease in childhood. Triple helix PAS positive globules stain the biopsy, while serum alpha 1 antitrypsin runs below **1** gram per litre. Smokers with **PiSZ** lose lung function fast, so smoking cessation outranks any drug here. Emphysema arrives **10** years earlier than in smokers without deficiency. Augmentation therapy suits selected lung disease.",
+      "vis": {
+        "cols": [
+          "Genotype",
+          "Lung risk",
+          "Liver risk"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "PiZZ",
+            "High, early emphysema",
+            "Childhood liver disease"
+          ],
+          [
+            "PiSZ",
+            "Moderate, smoking driven",
+            "Mild to moderate"
+          ],
+          [
+            "PiMZ",
+            "Low, reassure",
+            "Rarely significant"
+          ],
+          [
+            "PiMM",
+            "Normal",
+            "None"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Neonatal cholestasis with low alpha 1 antitrypsin level is opening the diagnosis in infants. Chronic cough with early emphysema in a young smoker is opening it in adults. Genetic testing confirms the genotype when levels sit in the grey zone.",
+      "tx": "**Neonatal cholestasis** with low alpha 1 antitrypsin level opens the diagnosis in infants, while **chorioangioma** mimics and baffle the unwary at night. **Chronic cough** with early emphysema in a young smoker opens it in adults, and family history of liver disease sharpens suspicion. Genetic testing confirms the genotype when levels sit in the grey zone of **1** to **1.5** grams per litre. Siblings share **25** percent risk, so family screening applies here too. Transplant cures the lung arm of the disease as well as the liver.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Neonatal jaundice and cholestasis",
+            "Liver failure in PiZZ children",
+            "Biopsy globules visible"
+          ],
+          "title": "Childhood face"
+        },
+        "right": {
+          "points": [
+            "Early emphysema in smokers",
+            "Chronic cough and dyspnoea",
+            "Augmentation in selected cases"
+          ],
+          "title": "Adult lung face"
+        }
+      }
+    },
+    {
+      "say": "Other genetic liver diseases are filling exam lists: type one glycogen storage disease, erythropoietic protoporphyria and tyrosinaemia. Each is pairing one liver clue with one systemic clue the stem hides. Porphyria pains with photosensitivity, while tyrosinaemia is bringing renal and nerve disease.",
+      "tx": "Other genetic liver diseases are filling exam lists, each pairing one liver clue with one systemic clue the stem hides. **Glycogen storage disease type 1** pairs hepatomegaly with hypoglycaemia and lactic acidosis, while **erythropoietic protoporphyria** pairs jaundice with photosensitive burns. **Tyrosinaemia** pairs liver failure with renal tubular dysfunction and neuropathy. Alpha fetoprotein runs sky high in tyrosinaemia, mimicking liver cancer. Meticulous stem reading therefore carries the diagnosis more than any single test.",
+      "vis": {
+        "cols": [
+          "Disease",
+          "Liver clue",
+          "Extrahepatic clue"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Glycogen storage type 1",
+            "Hepatomegaly",
+            "Hypoglycaemia, acidosis"
+          ],
+          [
+            "Protoporphyria",
+            "Jaundice, pain",
+            "Photosensitive burns"
+          ],
+          [
+            "Tyrosinaemia",
+            "Liver failure",
+            "Renal and nerve disease"
+          ],
+          [
+            "Alpha 1 deficiency",
+            "Cholestasis, cirrhosis",
+            "Early emphysema"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Blood donation after iron unloading suits most patients and helps the blood bank as well. Diabetes follows iron load closely, so yearly glucose checks belong in the phlebotomy clinic. Family screening stays the cheapest cure in the whole pathway, since early phlebotomy prevents everything.",
+      "tx": "**Blood donation** after iron unloading suits most patients and helps the blood bank as well, with ferritin checks replacing many clinic visits. **Diabetes** follows iron load closely, so yearly glucose checks belong in the phlebotomy clinic. **Family screening** stays the cheapest cure in the whole pathway, since early phlebotomy prevents cirrhosis entirely. **Cardiac** iron remodelling reverses slowly after unloading, needing rhythm follow up for years.",
+      "vis": {
+        "cols": [
+          "Follow up",
+          "Frequency",
+          "Why"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Ferritin on maintenance",
+            "Every 2 to 4 months",
+            "Target 50 to 100"
+          ],
+          [
+            "Glucose",
+            "Yearly",
+            "Diabetes from load"
+          ],
+          [
+            "Heart rhythm",
+            "Yearly in heavy load",
+            "Conduction disease"
+          ],
+          [
+            "Sibling saturation",
+            "Once at diagnosis",
+            "Early phlebotomy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Saturation above forty five percent opens the iron workup, while ferritin above a thousand plus a heavy ferritin trend confirms load. Alpha one below one gram per litre opens the antitrypsin workup, while PiZZ confirms it. Two first tests gate two genetic pathways cleanly.",
+      "tx": "**Saturation** above **45** percent opens the iron workup, while **ferritin** above **1000** plus a heavy trend confirms load, and **alpha 1 antitrypsin** below **1** gram per litre opens the antitrypsin workup. **PiZZ** confirms antitrypsin disease, while transferrin saturation plus HFE genetics confirm iron disease. Magnetic resonance iron mapping replaces biopsy for quantification now. Two first tests gate two genetic pathways cleanly without over testing.",
+      "vis": {
+        "cols": [
+          "Fact",
+          "Number",
+          "Exam point"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Haemochromatosis frequency",
+            "1 in 300",
+            "Northern European HFE"
+          ],
+          [
+            "Saturation flag",
+            "Above 45 percent",
+            "First iron test"
+          ],
+          [
+            "Ferritin heavy load",
+            "Above 1000",
+            "Confirm with imaging"
+          ],
+          [
+            "Phlebotomy volume",
+            "500 millilitres weekly",
+            "Until ferritin below 50"
+          ],
+          [
+            "Alpha 1 low flag",
+            "Below 1 gram per litre",
+            "Confirm PiZZ genotype"
+          ],
+          [
+            "Cancer in cirrhosis",
+            "10 to 30 percent",
+            "Six monthly ultrasound"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "hand",
+  "minutes": 8,
+  "module": "shp-haemochromatosis-genetic",
+  "quiz": [],
+  "refs": [
+    "Harrison 2025 22nd Edition, genetic liver disease chapters",
+    "EASL Clinical Practice Guidelines on haemochromatosis and alpha 1 antitrypsin"
+  ],
+  "subject": "ss-hepatology",
+  "title": "Iron and alpha 1 disease: first tests and unloading rules",
+  "v": 1
+}

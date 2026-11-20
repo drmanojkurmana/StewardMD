@@ -1,0 +1,313 @@
+{
+ "v": 1,
+ "module": "shm-myelodysplastic-syndromes",
+ "subject": "ss-haematology",
+ "title": "Myelodysplastic syndromes risk and treatment",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison Principles of Internal Medicine 22e Ch 107 Bone Marrow Failure Syndromes",
+  "World Health Organization MDS classification 2022"
+ ],
+ "steps": [
+  {
+   "tx": "**Myelodysplastic syndromes** (MDS, clonal marrow dysplasias) are clonal precursor disorders with ineffective production, dysplastic maturation and blast excess. Most patients present after age **60** with **anaemia** (low red cells) as the commonest cytopenia. **Blast percentage** (immature cells) below **20** percent separates MDS from leukaemia, while **MDS with low blasts** and **MDS with excess blasts** frame the WHO spectrum. **Cytogenetic** (chromosome) abnormalities clinch clonality.",
+   "say": "Myelodysplastic syndromes are clonal marrow disorders with ineffective production. Anaemia is the commonest presentation in older adults. Blasts below twenty percent separate MDS from leukaemia.",
+   "vis": {
+    "cols": [
+     "WHO group",
+     "Blast level",
+     "Feature"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Low blasts",
+      "Under 5 percent",
+      "Ring sideroblasts subset"
+     ],
+     [
+      "Moderate blasts",
+      "5 to 10 percent",
+      "Higher progression risk"
+     ],
+     [
+      "Excess blasts",
+      "10 to 19 percent",
+      "Near leukaemia"
+     ],
+     [
+      "Defining lesions",
+      "Genetic entities",
+      "Overrule blast count"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**IPSS** (International Prognostic Scoring System) scores blasts, cytogenetics and cytopenias, while **IPSS M** (molecular version) adds mutation weights and improves discrimination. Favourable lesions include isolated **del 5q** (chromosome 5 loss) and **SF3B1** (splicing mutation) ring sideroblast disease. Adverse lesions include **TP53** (tumour suppressor) double hits, complex karyotypes and **minus 7** (chromosome 7 loss). Risk directs therapy intensity directly.",
+   "say": "IPSS M adds mutation weights and sharpens risk prediction. Del five q and SF3B1 favour good outcomes. TP53 hits and minus seven mark adverse risk.",
+   "vis": {
+    "cols": [
+     "Risk",
+     "Lesions",
+     "Course"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Low risk",
+      "Del 5q SF3B1 ring sideroblasts",
+      "Slow progression"
+     ],
+     [
+      "Intermediate",
+      "Mixed mutations",
+      "Transplant assess"
+     ],
+     [
+      "High risk",
+      "TP53 complex minus 7",
+      "Leukaemia likely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Marrow morphology is subtle. **Hypolobated megakaryocytes** (odd platelet mothers), **Pelger Huet anomaly** (bilobed neutrophils) and **ring sideroblasts** (iron granule precursors) flag dysplasia. A **dry tap** (scarce aspirate) signals reticulin fibrosis in some subsets. **Flow cytometry** (antibody cell test) adds immunophenotypic aberrations, while **targeted sequencing** maps the clone in nearly every case. Transfusion dependent anaemia is the dominant burden in low risk disease.",
+   "say": "Odd megakaryocytes and Pelger Huet neutrophils flag dysplasia. Ring sideroblasts mark specific subsets. Sequencing maps the clone in nearly every patient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Morphology clues",
+     "points": [
+      "Hypolobated megakaryocytes",
+      "Pelger Huet anomaly",
+      "Ring sideroblasts"
+     ]
+    },
+    "right": {
+     "title": "Molecular clues",
+     "points": [
+      "SF3B1 splicing mutation",
+      "TP53 adverse mutation",
+      "Del 5q chromosome loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Low risk care is symptom driven. **Iron chelation** follows transfusion iron load, while **ESAs** (erythropoiesis stimulating agents) lift anaemia in erythroid friendly disease. **Luspatercept** (activin trap, TGF beta blocker) boosts red cells in **SF3B1** and ring sideroblast disease with ESA failure. **Lenalidomide** (immunomodulator) cures del 5q anaemia in up to **70** percent. **G-CSF** (granulocyte growth factor) bridges neutropenia, and transfusions remain palliative support.",
+   "say": "Luspatercept boosts red cells in SF3B1 disease with ESA failure. Lenalidomide cures del five q anaemia in most patients. ESAs lift anaemia in erythroid friendly disease.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Target",
+     "Response"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Lenalidomide",
+      "Del 5q",
+      "Up to 70 percent"
+     ],
+     [
+      "Luspatercept",
+      "SF3B1 ring sideroblasts",
+      "Transfusion freedom"
+     ],
+     [
+      "ESAs",
+      "Low risk anaemia",
+      "Modest response"
+     ],
+     [
+      "Ivosidenib",
+      "IDH1 mutant",
+      "Disease modifying"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High risk disease needs **HMA** (hypomethylating agents, azacitidine or decitabine) as the backbone, with venetoclax added in trials and selected patients. **Ivosidenib** (IDH1 blocker) and **enasidenib** (IDH2 blocker) induce differentiation in mutant disease. **HSCT** (stem cell transplantation) is the sole cure and is offered to fit high risk patients early. **Clinical trials** dominate counselling because standard therapy alone rarely curative.",
+   "say": "High risk disease needs hypomethylating agents as the backbone. IDH inhibitors induce differentiation in mutant disease. Transplantation is the sole cure for fit high risk patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "IPSS M high risk"
+     },
+     {
+      "id": "hma",
+      "label": "HMA venetoclax trial"
+     },
+     {
+      "id": "hsct",
+      "label": "Transplant if fit"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "hma"
+     ],
+     [
+      "hma",
+      "hsct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Overlap **MDS MPN** (myelodysplastic myeloproliferative overlap) syndromes blend dysplasia with proliferation. **CMML** (chronic myelomonocytic leukaemia) with monocytosis is the prototype and carries adverse mutations. **Atypical CML** (now MDS MPN with neutrophilia) lacks BCR ABL. **Ring sideroblast MDS MPN with thrombocytosis** (RARS T, platelet disease) carries **JAK2** (kinase mutation) frequently. Management borrows from both MDS and MPN playbooks.",
+   "say": "CMML blends dysplasia with proliferation and carries adverse mutations. Atypical CML lacks the BCR ABL fusion. Overlap syndromes borrow therapy from both playbooks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pure MDS",
+     "points": [
+      "Cytopenias dominant",
+      "Blasts under 20 percent",
+      "Dysplasia central"
+     ]
+    },
+    "right": {
+     "title": "Overlap MDS MPN",
+     "points": [
+      "CMML monocytosis",
+      "RARS T thrombocytosis",
+      "JAK2 often positive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Therapy related disease and inherited predisposition deserve space. **Germline RUNX1** (transcription factor) and **GATA2** (immune transcription) mutations masquerade as sporadic MDS in young patients. Prior **alkylator** (DNA damaging drug) and radiation exposure cause **t-MDS** (therapy related disease). **Donor selection** must exclude germline carriers, since sibling grafts would reintroduce the defect. **Genetic testing** of young adults is now routine.",
+   "say": "Young patients need germline testing before donor selection. Therapy related disease follows alkylators and radiation. Sibling donors may share the predisposition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Germline clues",
+     "points": [
+      "Young age at MDS",
+      "Family cytopenias",
+      "RUNX1 GATA2 mutations"
+     ]
+    },
+    "right": {
+     "title": "Therapy related clues",
+     "points": [
+      "Prior alkylator exposure",
+      "Radiation history",
+      "Balanced translocations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications mirror marrow failure. Bleeding follows **thrombocytopenia** (low platelets), infection follows **neutropenia** (low neutrophils) and transfusion needs follow anaemia. **Iron overload** from chronic transfusions injures heart and liver, and chelation follows MDS iron guidelines borrowed from thalassaemia. **Venous thrombosis** (clots) accompanies **JAK2** overlap disease. **Prognosis** (outlook) spans months in adverse disease to normal lifespan in del 5q disease.",
+   "say": "Bleeding, infection and transfusion dependence dominate low risk disease. Iron overload needs chelation in chronic transfusions. Prognosis spans months to normal lifespan by risk group.",
+   "vis": {
+    "cols": [
+     "Complication",
+     "Cause",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Bleeding",
+      "Low platelets",
+      "Transfuse support"
+     ],
+     [
+      "Infection",
+      "Low neutrophils",
+      "G-CSF antibiotics"
+     ],
+     [
+      "Iron overload",
+      "Chronic transfusions",
+      "Chelation therapy"
+     ],
+     [
+      "Leukaemia",
+      "Blast rise",
+      "HMA transplant trial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recent gains reshaped therapy. **Luspatercept** (activin trap) won first line approval in ring sideroblast disease after ESA failure, and **lenalidomide** remains del 5q standard. **Ivosidenib** (IDH1 blocker) and **enasidenib** (IDH2 blocker) offer genotype guided options. **Pevonedistat** (NEDD8 blocker) failed confirmatory trials despite promise. **IPSS M** (molecular score) now replaces cytogenetics alone in labelling algorithms worldwide. Trial referral is the newest standard for high risk disease.",
+   "say": "Luspatercept won approval after ESA failure in ring sideroblast disease. IPSS M now replaces cytogenetics alone in guidelines. Trial referral is the newest high risk standard.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Older standard",
+     "points": [
+      "ESAs first line",
+      "Lenalidomide del 5q",
+      "HMA high risk"
+     ]
+    },
+    "right": {
+     "title": "Newer options",
+     "points": [
+      "Luspatercept ring sideroblasts",
+      "IDH inhibitors mutant disease",
+      "IPSS M molecular risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exam anchors: blast ceiling **20** percent; commonest cytopenia **anaemia**; favourable lesions del **5q** and **SF3B1** ring sideroblast disease; **lenalidomide** cure rate up to **70** percent in del 5q; **luspatercept** for ring sideroblast disease; **HMA** backbone in high risk; **CMML** as the prototype overlap syndrome; and **HSCT** as the sole cure. Young MDS always prompts germline testing.",
+   "say": "Blasts below twenty percent separate MDS from leukaemia. Lenalidomide cures del five q anaemia in most patients. Young MDS always prompts germline testing.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Rule",
+     "Number"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Blast ceiling",
+      "MDS versus leukaemia",
+      "Below 20 percent"
+     ],
+     [
+      "Commonest cytopenia",
+      "Anaemia",
+      "Older adults dominate"
+     ],
+     [
+      "Del 5q response",
+      "Lenalidomide",
+      "Up to 70 percent"
+     ],
+     [
+      "Ring sideroblasts",
+      "SF3B1 luspatercept",
+      "Transfusion freedom"
+     ],
+     [
+      "Overlap prototype",
+      "CMML",
+      "Monocytosis present"
+     ],
+     [
+      "Sole cure",
+      "HSCT",
+      "Fit high risk"
+     ]
+    ]
+   }
+  }
+ ]
+}

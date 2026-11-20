@@ -1,0 +1,414 @@
+{
+ "v": 1,
+ "module": "sne-status-epilepticus",
+ "title": "Status epilepticus",
+ "minutes": 10,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Convulsive status epilepticus** is recognised after 5 minutes of convulsions, or when seizures recur without recovery between them. Neuronal injury is likely after about 30 minutes. Treatment follows a strict timeline: stabilise in the first 5 minutes, benzodiazepine by 20 minutes, second line drug by 40 minutes, and anaesthetic infusion thereafter.",
+   "say": "Convulsive status epilepticus is recognised after 5 minutes of convulsions, or when seizures recur without recovery between them. Neuronal injury is likely after about 30 minutes. Treatment follows a strict timeline: stabilise in the first 5 minutes, benzodiazepine by 20 minutes, second line drug by 40 minutes and anaesthetic infusion thereafter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Window",
+     "Action",
+     "Goal"
+    ],
+    "rows": [
+     [
+      "0 to 5 minutes",
+      "Stabilise airway, oxygen, glucose",
+      "Stop metabolic mimics"
+     ],
+     [
+      "5 to 20 minutes",
+      "Benzodiazepine",
+      "Terminate the seizure"
+     ],
+     [
+      "20 to 40 minutes",
+      "One second line drug",
+      "Prevent refractory status"
+     ],
+     [
+      "40 minutes onward",
+      "Anaesthetic infusion with EEG",
+      "Burst suppression for refractory seizures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stabilise** means timing the seizure, protecting the airway, giving oxygen, and placing the patient in the recovery position with nothing in the mouth. Monitoring covers oxygen saturation, cardiac rhythm, and blood pressure. **Capillary glucose** is checked immediately, and glucose below 60 mg per decilitre causes seizures that respond to dextrose.",
+   "say": "Stabilise means timing the seizure, protecting the airway, giving oxygen and placing the patient in the recovery position with nothing in the mouth. Monitoring covers oxygen saturation, cardiac rhythm and blood pressure. Capillary glucose is checked immediately, and glucose below 60 mg per decilitre causes seizures that respond to dextrose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Seizure timed from onset"
+     },
+     {
+      "id": "b",
+      "label": "Airway, oxygen, recovery position"
+     },
+     {
+      "id": "c",
+      "label": "Capillary glucose checked"
+     },
+     {
+      "id": "d",
+      "label": "Glycaemic seizure corrected first"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intravenous lorazepam** at 0.1 mg per kg up to 4 mg per dose is the first line drug in hospital, and it may be repeated once after 5 to 10 minutes. **Intramuscular midazolam** is the first line option without venous access, at 10 mg if over 40 kg or 5 mg in the 13 to 40 kg band. **Diazepam** at 0.15 to 0.2 mg per kg up to 10 mg is an acceptable alternative.",
+   "say": "Intravenous lorazepam at 0.1 mg per kg up to 4 mg per dose is the first line drug in hospital, and it may be repeated once after 5 to 10 minutes. Intramuscular midazolam is the first line option without venous access, at 10 mg if over 40 kg or 5 mg in the 13 to 40 kg band. Diazepam at 0.15 to 0.2 mg per kg up to 10 mg is an acceptable alternative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "Setting"
+    ],
+    "rows": [
+     [
+      "Lorazepam IV",
+      "0.1 mg per kg, max 4 mg",
+      "Hospital first line, repeat once"
+     ],
+     [
+      "Midazolam IM",
+      "10 mg over 40 kg",
+      "First line without venous access"
+     ],
+     [
+      "Midazolam buccal",
+      "10 mg in adults",
+      "Children by age band"
+     ],
+     [
+      "Diazepam IV",
+      "0.15 to 0.2 mg per kg, max 10 mg",
+      "Alternative first line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Levetiracetam** at 60 mg per kg over 10 minutes up to 4500 mg is the preferred second line drug because of few interactions. **Fosphenytoin** at 20 mg PE per kg up to 1500 mg PE needs cardiac monitoring and is avoided in toxin induced seizures. **Valproate** at 40 mg per kg up to 3000 mg is avoided in liver disease, mitochondrial disorders, and pregnancy. About half of patients have seizure termination with each drug.",
+   "say": "Levetiracetam at 60 mg per kg over 10 minutes up to 4500 mg is the preferred second line drug because of few interactions. Fosphenytoin at 20 mg PE per kg up to 1500 mg PE needs cardiac monitoring and is avoided in toxin induced seizures. Valproate at 40 mg per kg up to 3000 mg is avoided in liver disease, mitochondrial disorders and pregnancy. About half of patients have seizure termination with each drug.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Second line drug",
+     "Dose",
+     "Avoid when"
+    ],
+    "rows": [
+     [
+      "Levetiracetam",
+      "60 mg per kg, max 4500 mg",
+      "Renal impairment needs dose adjustment"
+     ],
+     [
+      "Fosphenytoin",
+      "20 mg PE per kg, max 1500 PE",
+      "Toxin induced seizures, heart block"
+     ],
+     [
+      "Valproate",
+      "40 mg per kg, max 3000 mg",
+      "Liver disease, pregnancy, mitochondrial disease"
+     ],
+     [
+      "Phenobarbital",
+      "15 mg per kg single dose",
+      "Only if others are unavailable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Refractory status** from 40 minutes onward needs intensive care, anaesthesia, and continuous electroencephalogram. With **midazolam**, the bolus is 0.2 mg per kg. 0.05 to 2 mg per kg per hour is the maintenance infusion range. **Propofol** is given at 1 to 2 mg per kg bolus then 20 to 200 micrograms per kg per minute, with vigilance for infusion syndrome beyond 48 hours. **Thiopental** is an alternative.",
+   "say": "Refractory status from 40 minutes onward needs intensive care, anaesthesia and continuous electroencephalogram. With midazolam, the bolus is 0.2 mg per kg. 0.05 to 2 mg per kg per hour is the maintenance infusion range. Propofol is given at 1 to 2 mg per kg bolus then 20 to 200 micrograms per kg per minute, with vigilance for infusion syndrome beyond 48 hours. Thiopental is an alternative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anaesthetic agent",
+     "Bolus",
+     "Infusion"
+    ],
+    "rows": [
+     [
+      "Midazolam",
+      "0.2 mg per kg",
+      "0.05 to 2 mg per kg per hour"
+     ],
+     [
+      "Propofol",
+      "1 to 2 mg per kg",
+      "20 to 200 micrograms per kg per minute"
+     ],
+     [
+      "Thiopental",
+      "2 to 7 mg per kg",
+      "0.5 to 5 mg per kg per hour"
+     ],
+     [
+      "Ketamine",
+      "Specialist use",
+      "Super refractory status"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suppression is maintained for about 24 to 48 hours before weaning, and a maintenance second line drug continues alongside the infusion. **Nonconvulsive status** is suspected when consciousness does not recover after convulsions stop or with fluctuating confusion and subtle twitching. **Urgent electroencephalogram** excludes it. **Super refractory status** needs specialist care with ketamine and autoimmune workup.",
+   "say": "Suppression is maintained for about 24 to 48 hours before weaning, and a maintenance second line drug continues alongside the infusion. Nonconvulsive status is suspected when consciousness does not recover after convulsions stop or with fluctuating confusion and subtle twitching. Urgent electroencephalogram excludes it. Super refractory status needs specialist care with ketamine and autoimmune workup.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anaesthetic infusion started"
+     },
+     {
+      "id": "b",
+      "label": "Continuous electroencephalogram running"
+     },
+     {
+      "id": "c",
+      "label": "Suppression maintained 24 to 48 hours"
+     },
+     {
+      "id": "d",
+      "label": "Gradual wean with maintenance drugs"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cause** is searched alongside therapy, not after it. Common causes are missed or stopped antiseizure drugs, alcohol withdrawal, stroke, central infection, metabolic derangement, toxins, and eclampsia. Computed tomography is done once stable, and lumbar puncture follows imaging when meningitis is suspected. Empirical antibiotics and aciclovir are not delayed while investigations proceed.",
+   "say": "Cause is searched alongside therapy, not after it. Common causes are missed or stopped antiseizure drugs, alcohol withdrawal, stroke, central infection, metabolic derangement, toxins and eclampsia. Computed tomography is done once stable, and lumbar puncture follows imaging when meningitis is suspected. Empirical antibiotics and aciclovir are not delayed while investigations proceed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Clue",
+     "Immediate treatment"
+    ],
+    "rows": [
+     [
+      "Missed drugs",
+      "Low serum levels",
+      "Reload and maintain the drug"
+     ],
+     [
+      "Alcohol withdrawal",
+      "Tremor,25 to 48 hours course",
+      "Benzodiazepine taper"
+     ],
+     [
+      "Central infection",
+      "Fever with meningism",
+      "Ceftriaxone and aciclovir"
+     ],
+     [
+      "Eclampsia",
+      "Pregnant or postpartum",
+      "Magnesium sulfate alongside benzodiazepine"
+     ],
+     [
+      "Metabolic derangement",
+      "Low sodium or glucose",
+      "Correct and recheck"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Children** use the same weight based doses and timeline as adults. Buccal midazolam is banded by age: 2.5 mg covers the youngest infants, and 10 mg is the dose at 10 years and over. **Febrile status** is common in young children, so the seizure is treated first and meningitis or encephalitis sought next. Infants with refractory seizures and no clear cause need **pyridoxine** for pyridoxine dependent epilepsy.",
+   "say": "Children use the same weight based doses and timeline as adults. Buccal midazolam is banded by age: 2.5 mg covers the youngest infants, and 10 mg is the dose at 10 years and over. Febrile status is common in young children, so the seizure is treated first and meningitis or encephalitis sought next. Infants with refractory seizures and no clear cause need pyridoxine for pyridoxine dependent epilepsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age band",
+     "Buccal midazolam",
+     "Note"
+    ],
+    "rows": [
+     [
+      "3 to 11 months",
+      "2.5 mg",
+      "Same weight based logic"
+     ],
+     [
+      "1 to 4 years",
+      "5 mg",
+      "Give after first dose fails"
+     ],
+     [
+      "5 to 9 years",
+      "7.5 mg",
+      "Repeat once only"
+     ],
+     [
+      "10 years and over",
+      "10 mg",
+      "Adult dosing applies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pitfalls** are well described in the literature and the exam. Waiting for venous access gives an ineffective first line, and more than 2 benzodiazepine doses cause respiratory depression without benefit. **Functional seizures** must not be escalated to intubation, and **nonconvulsive status** after convulsions stop is easily missed. **Glucose, thiamine, and eclampsia** are forgotten causes.",
+   "say": "Pitfalls are well described in the literature and the exam. Waiting for venous access gives an ineffective first line, and more than 2 benzodiazepine doses cause respiratory depression without benefit. Functional seizures must not be escalated to intubation, and nonconvulsive status after convulsions stop is easily missed. Glucose, thiamine and eclampsia are forgotten causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pitfall",
+     "Why it happens",
+     "Correct action"
+    ],
+    "rows": [
+     [
+      "Waiting for venous access",
+      "No first line given",
+      "Give intramuscular midazolam"
+     ],
+     [
+      "More than 2 sedative doses",
+      "Respiratory depression",
+      "Stop, move to second line"
+     ],
+     [
+      "Functional seizures",
+      "Unnecessary intubation",
+      "Video electroencephalogram first"
+     ],
+     [
+      "Missed nonconvulsive status",
+      "Patient stays unconscious",
+      "Urgent electroencephalogram"
+     ],
+     [
+      "Forgotten eclampsia",
+      "Death in the mother",
+      "Magnesium sulfate promptly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Isoniazid toxicity** is a classic status trigger in tuberculosis programmes and it needs pyridoxine as an antidote. **Alcohol withdrawal** seizures respond to benzodiazepine taper rather than phenytoin. **Mimics** such as functional seizures, rigors, dystonia, and decerebrate posturing occur in about 1 in 10 patients. **Phenobarbital** at 15 mg per kg is the fallback when second line drugs are unavailable.",
+   "say": "Isoniazid toxicity is a classic status trigger in tuberculosis programmes and it needs pyridoxine as an antidote. Alcohol withdrawal seizures are treated with benzodiazepine taper rather than phenytoin. Mimics such as functional seizures, rigors, dystonia and decerebrate posturing occur in about 1 in 10 patients. Phenobarbital at 15 mg per kg is the fallback when second line drugs are unavailable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Drug",
+     "Dose"
+    ],
+    "rows": [
+     [
+      "Isoniazid toxicity",
+      "Pyridoxine",
+      "1 g per gram ingested, unknown 5 g"
+     ],
+     [
+      "Alcohol withdrawal",
+      "Benzodiazepine taper",
+      "Avoid phenytoin"
+     ],
+     [
+      "Functional seizures",
+      "No escalation",
+      "Electroencephalogram confirmation"
+     ],
+     [
+      "No second line drug",
+      "Phenobarbital",
+      "15 mg per kg single dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** status is 5 minutes of convulsions, injury is likely after 30 minutes, and the timeline is stabilise, benzodiazepine by 20 minutes, second line by 40 minutes, anaesthesia thereafter. Lorazepam is 0.1 mg per kg, levetiracetam is 60 mg per kg, and fosphenytoin is 20 mg PE per kg. Nonconvulsive status is excluded by electroencephalogram.",
+   "say": "High yield for the exam: status is 5 minutes of convulsions, injury is likely after 30 minutes and the timeline is stabilise, benzodiazepine by 20 minutes, second line by 40 minutes and anaesthesia thereafter. Lorazepam is 0.1 mg per kg, levetiracetam is 60 mg per kg and fosphenytoin is 20 mg PE per kg. Nonconvulsive status is excluded by electroencephalogram.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decision",
+     "Number",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Status definition",
+      "5 minutes",
+      "Start the timeline"
+     ],
+     [
+      "Injury threshold",
+      "About 30 minutes",
+      "Urgency escalates"
+     ],
+     [
+      "Lorazepam",
+      "0.1 mg per kg, max 4 mg",
+      "First line in hospital"
+     ],
+     [
+      "Levetiracetam",
+      "60 mg per kg, max 4500 mg",
+      "Preferred second line"
+     ],
+     [
+      "Fosphenytoin",
+      "20 mg PE per kg",
+      "Cardiac monitoring needed"
+     ],
+     [
+      "Refractory suppression",
+      "24 to 48 hours",
+      "Anaesthetic infusion with electroencephalogram"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

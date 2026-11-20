@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "sgm-depression-anxiety",
+ "subject": "ss-general-medicine",
+ "title": "Depression and anxiety in medical illness",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Depression affects five percent of the general population and twenty percent of patients with chronic disease like cancer, diabetes and stroke. Anxiety disorders affect eight percent globally and thirty percent of cardiac patients. Major depression needs **five symptoms** for two weeks including low mood or anhedonia, with suicide risk of ten percent in severe cases.",
+   "say": "Depression affects five percent of the general population and twenty percent of patients with chronic disease like cancer, diabetes and stroke. Anxiety disorders affect eight percent globally and thirty percent of cardiac patients. Major depression needs five symptoms for two weeks including low mood or anhedonia, with suicide risk of ten percent in severe cases.",
+   "vis": null
+  },
+  {
+   "tx": "Risk factors are **female sex** with one point five fold higher depression, prior episodes, family history in twenty percent, chronic pain, hypothyroidism and **social isolation** in forty percent of elderly patients. Beta blockers, steroids and isotretinoin can induce mood disorder in ten percent of users. Post stroke depression occurs in thirty percent within one year.",
+   "say": "Risk factors are female sex with one point five fold higher depression, prior episodes, family history in twenty percent, chronic pain, hypothyroidism and social isolation in forty percent of elderly patients. Beta blockers, steroids and isotretinoin can induce mood disorder. Post stroke depression occurs in thirty percent within one year.",
+   "vis": null
+  },
+  {
+   "tx": "Monoamine depletion lowers **serotonin** and norepinephrine in synapse, while chronic stress raises cortisol and damages hippocampal neurogenesis by ten percent volume loss. Inflammatory cytokines like interleukin six rise forty percent and divert **tryptophan** down the kynurenine pathway. Amygdala hyperactivity sustains anxiety loops with amygdala blood flow up fifteen percent.",
+   "say": "Monoamine depletion lowers serotonin and norepinephrine in synapse, while chronic stress raises cortisol and damages hippocampal neurogenesis with ten percent volume loss. Inflammatory cytokines like interleukin six rise forty percent and divert tryptophan down the kynurenine pathway. Amygdala hyperactivity can sustain anxiety loops.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chronic stress"
+     },
+     {
+      "id": "b",
+      "label": "Cortisol rise"
+     },
+     {
+      "id": "c",
+      "label": "Serotonin fall"
+     },
+     {
+      "id": "d",
+      "label": "Low mood"
+     },
+     {
+      "id": "e",
+      "label": "Anhedonia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Core features are depressed mood for two weeks,**anhedonia** in seventy percent, weight change over five percent in a month, insomnia or hypersomnia and poor concentration. Anxiety shows excessive worry for six months with **hypervigilance**, muscle tension and panic attacks in twenty-five percent. Medical mimics include hypothyroidism in fifteen percent of depression presentations.",
+   "say": "Core features are depressed mood for two weeks, anhedonia in seventy percent, weight change over five percent in a month, insomnia or hypersomnia and poor concentration. Anxiety can show excessive worry for six months with muscle tension and panic attacks in twenty five percent. Medical mimics can include hypothyroidism in fifteen percent.",
+   "vis": null
+  },
+  {
+   "tx": "Red flags are **suicidal intent** with plan, psychotic features in fifteen percent and catatonia in two percent. Generalised anxiety shows persistent worry beyond six months, while panic disorder has four attacks per month in sixty percent of cases. Somatisation dominates in fifty percent of medically ill patients with head pain in forty percent and fatigue in fifty-five percent.",
+   "say": "Red flags are suicidal intent with plan, psychotic features in fifteen percent and catatonia in two percent. Generalised anxiety shows persistent worry beyond six months, while panic disorder has frequent attacks. Somatisation dominates in half of medically ill patients with head pain and fatigue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Duration",
+     "Core clue",
+     "Screen tool"
+    ],
+    "rows": [
+     [
+      "Major depression",
+      "two weeks plus",
+      "Anhedonia and low mood",
+      "PHQ nine score"
+     ],
+     [
+      "Generalised anxiety",
+      "Over six months",
+      "Persistent worry",
+      "GAD seven score"
+     ],
+     [
+      "Panic disorder",
+      "Under ten minutes attacks",
+      "Fear of dying",
+      "Clinical interview"
+     ],
+     [
+      "Somatic disorder",
+      "Over six months",
+      "Multiple pain complaints",
+      "PHQ fifteen "
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First test is **PHQ nine** with score over ten giving eighty-eight percent sensitivity for depression, plus **GAD seven** with score over ten giving eighty-nine percent specificity for anxiety. Gold standard is **structured psychiatric interview** using DSM five criteria. Thyroid function, B twelve and CBC exclude organic mimics in every first presentation.",
+   "say": "First test is PHQ nine with score over ten giving eighty eight percent sensitivity for depression, plus GAD seven with score over ten giving eighty nine percent specificity for anxiety. Gold standard is structured psychiatric interview using DSM five criteria. Thyroid function, B twelve and CBC can exclude organic mimics.",
+   "vis": null
+  },
+  {
+   "tx": "First line for depression is **sertraline** fifty mg daily, titrating to one hundred mg daily over four weeks, or escitalopram ten mg daily to twenty mg. Anxiety first line is an anxiolytic five mg twice daily or sertraline fifty mg daily for eight weeks.**Psychotherapy** like cognitive behavioural therapy achieves sixty percent response within ten sessions.",
+   "say": "First line for depression is sertraline fifty milligrams daily, titrating to one hundred milligrams daily over four weeks, or escitalopram ten milligrams daily. Anxiety first line is an anxiolytic five milligrams twice daily or sertraline fifty milligrams daily for eight weeks. Psychotherapy can achieve sixty percent response.",
+   "vis": null
+  },
+  {
+   "tx": "Severe depression with suicidality needs **venlafaxine** seventy-five mg daily to two hundred twenty-five mg or addition of **mirtazapine** fifteen mg at night, plus six sessions of electroconvulsive therapy at eighty-five percent response. Benzodiazepines like a benzodiazepine zero point five mg twice daily are short term only for two weeks. Watch QT interval prolongation above twenty ms with escitalopram.",
+   "say": "Severe depression with suicidality needs venlafaxine seventy five milligrams daily or addition of mirtazapine fifteen milligrams at night, plus electroconvulsive therapy at eighty five percent response. Benzodiazepines like a benzodiazepine half a milligram twice daily are short term only for two weeks. Watch QT interval prolongation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Depression",
+     "points": [
+      "Sertraline or escitalopram",
+      "PHQ nine monitoring",
+      "six to eight weeks trial",
+      "ECT for suicidality"
+     ]
+    },
+    "right": {
+     "title": "Anxiety",
+     "points": [
+      "An anxiolytic or sertraline",
+      "GAD seven monitoring",
+      "Breathing and CBT",
+      "Avoid long benzodiazepines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **serotonin syndrome** in one percent on combined agents with fever, clonus and forty degrees hyperthermia, plus hyponatraemia under one hundred thirty in three percent of elderly patients.**Suicide** remains the leading killer at ten percent in severe depression. Untreated depression worsens glycaemic control with HbA one c rise of zero point eight percent in diabetics.",
+   "say": "Complications include serotonin syndrome in one percent on combined agents with fever, clonus and high hyperthermia, plus hyponatraemia in three percent of elderly patients. Suicide remains the leading killer at ten percent in severe depression. Untreated depression worsens glycaemic control with HbA one c rise.",
+   "vis": null
+  },
+  {
+   "tx": "Response at six weeks is sixty percent on first antidepressant, with **remission** in forty percent and relapse of fifty percent in two years without maintenance.**Maintenance therapy** for six to nine months halves relapse risk. Medical comorbidity improves when depression lifts, with HbA one c fall of zero point five percent and twenty percent fewer hospital visits.",
+   "say": "Response at six weeks is sixty percent on first antidepressant, with remission in forty percent and relapse of fifty percent in two years without maintenance. Maintenance therapy for six to nine months can halve relapse risk. Medical comorbidity improves when depression lifts, with HbA one c fall and fewer hospital visits.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** remember PHQ nine over ten for depression, GAD seven over ten for anxiety, five symptoms for two weeks for major depression, sertraline fifty mg daily as first line, venlafaxine up to two hundred twenty-five mg daily for severe cases, hypnotic free maintenance for six to nine months and red flag suicidal plan needs admission.",
+   "say": "This summary will help you remember the exam patterns. Remember PHQ nine over ten for depression, GAD seven over ten for anxiety, five symptoms for two weeks for major depression, sertraline fifty milligrams daily as first line, venlafaxine up to two hundred twenty five milligrams daily for severe cases and maintenance for six to nine months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Use",
+     "Number"
+    ],
+    "rows": [
+     [
+      "PHQ nine cutoff",
+      "Depression screen",
+      "Over ten "
+     ],
+     [
+      "GAD seven cutoff",
+      "Anxiety screen",
+      "Over ten "
+     ],
+     [
+      "Depression duration",
+      "Major episode",
+      "two weeks"
+     ],
+     [
+      "Sertraline start",
+      "First line",
+      "fifty mg daily"
+     ],
+     [
+      "Venlafaxine ceiling",
+      "Severe depression",
+      "two hundred twenty-five mg daily"
+     ],
+     [
+      "Maintenance period",
+      "Relapse prevention",
+      "six to nine months"
+     ],
+     [
+      "ECT response",
+      "Suicidal depression",
+      "eighty-five percent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

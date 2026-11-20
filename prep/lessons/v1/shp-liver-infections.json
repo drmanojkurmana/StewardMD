@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "shp-liver-infections",
+ "subject": "ss-hepatology",
+ "title": "Liver infections: hydatid cysts, pyogenic and amoebic abscesses compared",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Hepatic abscess and hydatid disease)",
+  "Sleisenger and Fordtran 11e (Liver infections)",
+  "NICE Guidance on Intra-abdominal Infections 2025"
+ ],
+ "steps": [
+  {
+   "tx": "**Hydatid liver cyst** is caused by the larval form of **Echinococcus granulosus**, where dogs maintain the adult worm and humans serve as accidental intermediate hosts by swallowing eggs shed in dog faeces. Embryos pierce the gut and ride portal blood to the liver, the commonest site of lodgement. The liver cyst grows slowly for years, then compresses ducts and vessels. Cyst fluid stays highly antigenic, so rupture seeds new cysts and triggers **anaphylaxis**.",
+   "say": "Hydatid cysts grow from dog tapeworm eggs that lodge in the liver after gut travel. The cyst wall carries three layers, and the fluid inside drives allergic catastrophe when spilled. Slow growth lets patients stay silent for many years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "egg", "label": "Eggs ingested"},
+     {"id": "liver", "label": "Portal travel to liver"},
+     {"id": "cyst", "label": "Three layer cyst forms"},
+     {"id": "rupture", "label": "Rupture seeds, allergy"}
+    ],
+    "edges": [["egg", "liver"], ["liver", "cyst"], ["cyst", "rupture"]]
+   }
+  },
+  {
+   "tx": "Outermost sits a host derived fibrous shell called the **pericyst**, the middle is an acellular **laminated membrane** sheet, and the innermost germinal layer makes **protoscolices** and daughter cysts. Communication with the biliary tree causes **cholangitis** and obstructive jaundice. Rupture, whether spontaneous, traumatic or iatrogenic, releases protoscolices that seed the peritoneum and thorax. Uncomplicated cysts treated well enjoy high cure rates after needle based **PAIR (puncture, aspiration, injection, re-aspiration)** with drug cover and after surgical removal.",
+   "say": "Three layers armour the cyst, and the innermost makes protoscolices with every drop of fluid. Secondary infection, biliary rupture and anaphylaxis turn a quiet cyst into an emergency. PAIR plus albendazole cures selected cysts without open surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Layer", "Source", "Role"],
+    "rows": [
+     ["Pericyst", "Host fibrous tissue", "Outer wall"],
+     ["Laminated membrane", "Parasite acellular", "Middle shield"],
+     ["Germinal layer", "Parasite epithelium", "Makes protoscolices"],
+     ["Daughter cysts", "Brood capsules", "Spread if spilled"]
+    ]
+   }
+  },
+  {
+   "tx": "**Ultrasound** and **computed tomography (CT)** show a cyst with a wall, internal daughter cysts and detached membranes, staged by the **Gharbi (World Health Organization) classification** for activity. Serology supports the diagnosis yet false negatives occur, and **eosinophilia** may appear. Diagnostic aspiration is traditionally avoided, since spillage risks anaphylaxis and seeding. **Magnetic resonance cholangiopancreatography (MRCP)** or **endoscopic retrograde cholangiopancreatography (ERCP)** maps biliary communication when obstruction is suspected.",
+   "say": "Ultrasound stages the cyst by wall, daughter cysts and detached membranes. Serology supports but never proves the diagnosis alone. Aspiration without protection remains the cardinal error in this disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Shows", "Trap"],
+    "rows": [
+     ["Ultrasound", "Daughter cysts, membranes", "Staging guides therapy"],
+     ["Serology", "Antibodies", "False negatives occur"],
+     ["MRCP, ERCP", "Biliary communication", "Scolicide danger"],
+     ["Chest imaging", "Pulmonary cysts", "Missing co-disease"]
+    ]
+   }
+  },
+  {
+   "tx": "Management choices follow cyst stage, size and complications within a hepatobiliary team. **PAIR** serves selected accessible cysts under **albendazole** cover, while **surgical cystectomy** or pericystectomy suits large, complicated or superficial cysts. Scolicidal precautions and perioperative anthelmintic cover reduce spillage and recurrence. Inactive calcified cysts on the classification merit **watch and wait** monitoring with serial imaging and serology.",
+   "say": "Albendazole runs alongside every intervention, and field protection stays mandatory at every operation. Inactive calcified cysts watch safely over time. Lung disease must never be forgotten in the workup.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "PAIR", "points": ["Puncture, aspirate, inject", "Albendazole cover", "Selected accessible cysts", "Minimally invasive"]},
+    "right": {"title": "Surgery", "points": ["Cystectomy or pericystectomy", "Large or complicated", "Field protection vital", "Endoscopic drainage option"]}
+   }
+  },
+  {
+   "tx": "**Pyogenic liver abscess** reaches the liver by ascending biliary infection, portal venous seeding from suppurative thrombophlebitis, direct spread or bloodstream seeding. **Klebsiella pneumoniae** dominates in this region, especially in diabetics, often via cryptogenic or biliary spread. **Escherichia coli** and streptococci follow, with anaerobes when biliary or colonic sources exist. Fever is the commonest presenting feature, yet half of patients show no localising signs. Raised **alkaline phosphatase (ALP)** is the most reliable laboratory clue, present in about **70** percent.",
+   "say": "Pyogenic abscesses arrive by biliary ascent, portal seeding or bloodstream spread. Klebsiella dominates in diabetics across this region. Fever leads the story while half the patients show no local signs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Route", "Source", "Clue"],
+    "rows": [
+     ["Ascending biliary", "Most common", "Duct obstruction"],
+     ["Portal venous", "Pylephlebitis", "Pelvic sepsis history"],
+     ["Direct spread", "Contiguous focus", "Intraabdominal sepsis"],
+     ["Bloodstream", "Bacteraemia", "Systemic source"]
+    ]
+   }
+  },
+  {
+   "tx": "**Amoebic liver abscess** from **Entamoeba histolytica** typically forms a single right lobe lesion and answers to a different specific therapy: **metronidazole**. Jaundice stays rare, and fewer than one third carry active diarrhoea at presentation. **Amoebic serology** exceeds **95** percent positivity, while aspirate testing separates amoebic from pyogenic disease. Leukocytosis near **77** percent and anaemia near **50** percent support the picture, with bacteraemia in one third to one half.",
+   "say": "Amoebic abscess forms a single right lobe lesion and answers to metronidazole alone. Serology exceeds ninety five percent positivity in published series. Jaundice remains rare in amoebic disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Pyogenic", "points": ["Klebsiella dominant", "Multiple organisms possible", "Jaundice more common", "Antibiotics plus drain"]},
+    "right": {"title": "Amoebic", "points": ["Entamoeba histolytica", "Single right lobe", "Jaundice rare", "Metronidazole first"]}
+   }
+  },
+  {
+   "tx": "Cross sectional imaging maps how many collections exist, how large they lie and where they sit, which steers the drain. Image guided aspiration with Gram stain, culture and microscopy distinguishes pyogenic from amoebic abscess and names the organism. Blood cultures identify Klebsiella in many cases, and **glycated haemoglobin (HbA1c)** exposes diabetes as a major risk factor. Start empiric antibiotics covering both possibilities pending imaging, since clinical features alone cannot reliably separate the two.",
+   "say": "Imaging confirms the abscess and maps drainage routes, while aspiration names the organism. Blood cultures and glucose control complete the picture. Empiric antibiotics cover both diagnoses until aspiration answers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "fever", "label": "Fever, RUQ pain"},
+     {"id": "image", "label": "Ultrasound or CT"},
+     {"id": "aspirate", "label": "Aspirate: stain, culture"},
+     {"id": "specific", "label": "Targeted therapy"}
+    ],
+    "edges": [["fever", "image"], ["image", "aspirate"], ["aspirate", "specific"]]
+   }
+  },
+  {
+   "tx": "Pyogenic abscess mortality averages about **15** percent despite treatment, worsening with delayed source control or failed percutaneous drainage. **Hypervirulent Klebsiella** threatens distant sites, with endophthalmitis blinding, meningitis and brain abscess as catastrophic sequelae. Multiple sizeable abscesses, viscous contents, yeast, an obstructed biliary tree, or no response in **4** to **7** days predict drainage failure and favour surgery. Fever of unknown origin in the elderly deserves abdominal imaging of the right upper quadrant.",
+   "say": "Pyogenic mortality still reaches fifteen percent, and hypervirulent Klebsiella blinds through distant spread. Drainage failure by one week leaves surgery as the better course. Elderly fever without source deserves right upper quadrant imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk", "Signal", "Action"],
+    "rows": [
+     ["Death", "Delayed control", "Drain early"],
+     ["Eye loss", "Endophthalmitis", "Urgent eye review"],
+     ["Drain failure", "No response 4 to 7 days", "Operate"],
+     ["Retrograde blindness", "Hypervirulent strain", "Hunt metastases"]
+    ]
+   }
+  },
+  {
+   "tx": "**Candida liver abscess** characteristically follows fungaemia during chemotherapy and surfaces as neutrophil counts recover after neutropenia. Splenic abscess mirrors the setting with endocarditis associations and high fatality without prompt treatment. Lung cysts travel with liver cysts often enough that chest imaging belongs in every workup. A lifted right hemidiaphragm with basal shadowing or right sided pleural fluid on chest radiography hints at a subphrenic hepatic source.",
+   "say": "Fungal abscesses appear as neutrophils return after chemotherapy. Splenic abscess follows the same pattern with endocarditis as its classic source. Chest clues often indicate a subphrenic hepatic focus.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Lesion", "Setting", "Source hint"],
+    "rows": [
+     ["Candida abscess", "Post chemotherapy", "Fungaemia history"],
+     ["Splenic abscess", "Endocarditis", "Often fatal if missed"],
+     ["Hydatid plus lung", "Sheep rearing areas", "Chest imaging needed"],
+     ["Actinomycosis", "Multiple abscesses", "Contiguous splenic lesion"]
+    ]
+   }
+  },
+  {
+   "tx": "Classic **traps** cross all three infections. Aspirating an undiagnosed hydatid cyst precipitates spillage, seeding and anaphylaxis, while injecting scolicidal agent with biliary communication risks sclerosing cholangitis. Dismissing amoebic disease for want of diarrhoea misses most cases, and tapping ascites alone misses the abscess behind fever. Peripheral pulmonary hydatid disease and diabetic Klebsiella risk both hide behind the first imaging impression.",
+   "say": "Aspiration without protection, scolicide with biliary leak, and diarrhoea free amoebic disease form the classic traps. Lung cysts and diabetic risk remain behind the first scan. Complete staging prevents every one of these errors.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hydatid traps", "points": ["Aspiration spillage", "Scolicide with bile leak", "Missed lung cysts", "Skipped albendazole"]},
+    "right": {"title": "Abscess traps", "points": ["No diarrhoea needed", "Jaundice rare amoebic", "Half without signs", "Diabetes missed"]}
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Liver is the commonest hydatid site with three wall layers and **anaphylaxis** on rupture, **albendazole** covers PAIR and surgery, **Klebsiella** dominates pyogenic abscess in diabetics, fever leads presentations while **ALP** rises in about **70** percent, and **Entamoeba** forms a single right lobe lesion cured by **metronidazole**.",
+   "say": "Hydatid layers, Klebsiella dominance and amoebic single lesions form the spine of this module. Fever without local signs keeps the liver on the differential list. ALP elevation and serology guide the specific therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["Hydatid host", "Dog definitive"],
+     ["Cyst layers", "Three, pericyst out"],
+     ["Rupture risk", "Anaphylaxis"],
+     ["Anthelmintic", "Albendazole"],
+     ["Pyogenic dominant", "Klebsiella, diabetes"],
+     ["ALP frequency", "About 70 percent"],
+     ["Amoebic site", "Single right lobe"],
+     ["Amoebic drug", "Metronidazole"]
+    ]
+   }
+  }
+ ]
+}

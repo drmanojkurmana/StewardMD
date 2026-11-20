@@ -1,0 +1,325 @@
+{
+ "gen": "AI",
+ "minutes": 9,
+ "module": "sne-developmental-neurology",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Global delay means two or more streams lag behind, while isolated delay touches only speech or movement. Hearing with vision is tested first in every late child, because deafness mimics autism and squint mimics clumsiness. The pattern of delay points to the cause: regression means degeneration, while static delay from birth means injury. Plotting milestones on a chart turns worry into a diagnosis.",
+   "tx": "**Global delay** slows two or more streams; **isolated delay** touches one. **Hearing and vision** are tested first, as deafness mimics autism. **Regression** means degeneration; static delay from birth means **early injury**. **Milestone charts** with red flags (no babble, no sit, no point) trigger referral.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Meaning",
+     "First test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Static from birth",
+      "Early injury",
+      "MRI, hearing"
+     ],
+     [
+      "Regression",
+      "Degeneration",
+      "Metabolic, genes"
+     ],
+     [
+      "Isolated speech",
+      "Hearing, autism",
+      "Hearing, screen"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cerebral palsy is a static injury of the growing brain that shows as evolving movement disorder, and prematurity with birth asphyxia are the top risks. Spastic diplegia scissors the legs of ex premature infants, while dyskinetic forms twist after kernicterus. Grading scales stage function from walking to wheeled mobility. Management is therapy with orthotics with tone control, and hips with spine are watched yearly.",
+   "tx": "**Cerebral palsy** is static brain injury with evolving movement disorder; **prematurity and asphyxia** lead risks. **Spastic diplegia** scissors legs of ex preterms; **dyskinetic** forms follow kernicterus. **Grading scales** stage walking to wheeled mobility. **Therapy, orthotics and tone control** carry care; hips and spine are watched yearly.",
+   "vis": {
+    "cols": [
+     "Type",
+     "Cause hint",
+     "Limbs"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Spastic diplegia",
+      "Prematurity",
+      "Legs scissors"
+     ],
+     [
+      "Dyskinetic",
+      "Kernicterus",
+      "Twisting all limbs"
+     ],
+     [
+      "Hemiplegic",
+      "Stroke in womb",
+      "One side weak"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Autism is diagnosed by persistent deficits in social exchange with restricted repetitive behaviour before three years. Poor eye contact with no pointing with no pretend play with echoing speech is the classic cluster. Screening questionnaires are confirmed by structured observation, and hearing is excluded first. Vaccines do not cause autism, and saying so clearly keeps trust. Early behavioural therapy is the main changer of trajectory.",
+   "tx": "**Autism** needs social deficits plus **restricted repetitive** behaviour before age 3. **No pointing, no pretend play, echoing speech** form the cluster. **Screening** plus structured observation confirms; **hearing** is excluded first. **Vaccines do not cause autism**. **Early behavioural therapy** changes trajectory most.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Seen as",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "No joint attention",
+      "No point, no show",
+      "Screen now"
+     ],
+     [
+      "Echolalia, rituals",
+      "Repeats, lines toys",
+      "Behavioural therapy"
+     ],
+     [
+      "Regression at two",
+      "Lost words",
+      "Rule out Landau Kleffner"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Fragile X is the commonest inherited learning disability, and long faces with big ears with large testes after puberty mark affected boys. F M R one gene testing confirms it, and mothers carry the premutation that expands in grandchildren. Attention deficit with anxiety with autism traits is seen in the classroom picture. Family cascade testing with counselling follows every diagnosis.",
+   "tx": "**Fragile X** is the commonest inherited learning disability. **Long face, big ears, large testes** mark boys after puberty. **FMR1 testing** confirms; maternal premutation expands next generation. **ADHD with anxiety** with autism traits fills classrooms. **Cascade testing** with counselling follows every diagnosis in the family.",
+   "vis": {
+    "cols": [
+     "Syndrome",
+     "Gene",
+     "Hallmark"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fragile X",
+      "FMR1",
+      "Large testes after puberty"
+     ],
+     [
+      "Rett",
+      "Girls only",
+      "Hand wringing, regression"
+     ],
+     [
+      "Angelman",
+      "Happy puppet",
+      "No speech, jerky moves"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Rett syndrome arrests a normal girl in the second year, then hand wringing with loss of speech with grinding teeth follows. Breathing goes irregular awake but normal asleep, which is almost unique. M E C P two testing confirms most classic cases. Children with Angelman syndrome are laughing and jerky with no speech from gene faults. Both need epilepsy watch with scoliosis care.",
+   "tx": "**Rett syndrome** arrests normal girls in year two: **hand wringing**, lost speech, teeth grinding. **Awake breathing irregularity** is near unique. **Gene testing** confirms most. **Angelman** gives happy puppet movements with no speech. **Epilepsy with scoliosis** is watched in both through childhood.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Girls, hand wringing, breathing awake bad"
+     ],
+     "title": "Rett"
+    },
+    "right": {
+     "points": [
+      "Laughing, jerky, no speech movements"
+     ],
+     "title": "Angelman"
+    }
+   }
+  },
+  {
+   "say": "Some causes of delay are treatable, and missing them is the unforgivable error. Congenital hypothyroidism is caught on newborn screening and needs lifelong thyroid replacement started within days. Phenylketonuria is diet controlled from the first weeks before brain damage sets in. Infantile spasms need urgent treatment to save development, and hearing aids rescue language when deafness is found early.",
+   "tx": "**Treatable causes** must never be missed: **congenital hypothyroidism** needs lifelong replacement from days old. **Phenylketonuria** is diet controlled from early weeks. **Infantile spasms** need urgent treatment to save development. **Hearing aids** rescue language when deafness is caught early in infancy.",
+   "vis": {
+    "cols": [
+     "Treatable cause",
+     "Test",
+     "Window"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Hypothyroidism",
+      "Newborn screen",
+      "Replace from days old"
+     ],
+     [
+      "Phenylketonuria",
+      "Newborn screen",
+      "Diet from weeks"
+     ],
+     [
+      "Infantile spasms",
+      "Hypsarrhythmia EEG",
+      "Treat urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Every delayed child is worked up in the same order, and genes now come before scans in many clinics. Hearing with vision with thyroid testing opens the list, then chromosomal microarray with fragile X testing follows dysmorphism. Resonance is reserved for regression with seizures with focal signs. Metabolic testing joins when consanguinity with crises with organ enlargement suggests it.",
+   "tx": "**Workup order** is fixed: **hearing, vision, thyroid** first, then **microarray with FMR1** for dysmorphism. **MRI** is reserved for regression, seizures and focal signs. **Metabolic testing** joins for consanguinity, crises and organ enlargement. **Treatable causes** are excluded before any label is given.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hearing, vision, thyroid"
+     },
+     {
+      "id": "b",
+      "label": "Microarray, fragile X test"
+     },
+     {
+      "id": "c",
+      "label": "MRI if regressing, fits"
+     },
+     {
+      "id": "d",
+      "label": "Metabolic if consanguineous"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Intervention starts before diagnosis is complete, because plasticity waits for no report. Physiotherapy with speech therapy with occupational therapy is prescribed together, not one by one. Special schooling with parent training multiplies clinic gains at home. Tone is eased with therapy with orthotics with targeted injections, while epilepsy with behaviour with sleep is treated in parallel.",
+   "tx": "**Early intervention** starts before labels: **physio, speech and occupational** therapy together. **Special schooling** with parent training multiplies gains. **Tone** is eased with therapy, orthotics and targeted injections chosen by the team. **Epilepsy, behaviour and sleep** are treated in parallel, never in sequence.",
+   "vis": {
+    "cols": [
+     "Need",
+     "Move",
+     "When"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Movement",
+      "Physio, orthotics",
+      "From diagnosis"
+     ],
+     [
+      "Speech",
+      "Speech therapy, aids",
+      "Before school"
+     ],
+     [
+      "Tone severe",
+      "Targeted injections",
+      "With therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Prognosis follows the cause with the timing of help, and honesty guides planning better than false hope. Static injuries plateau with therapy, while degenerative diseases need palliative planning early. Autism with support employs many adults, and treated hypothyroidism with phenylketonuria develops normally. Transition to adult services with guardianship is planned from the early teens.",
+   "tx": "**Prognosis** follows cause and timing: **static injuries** plateau with therapy; **degenerative** diseases need early palliative planning. **Supported autism** employs many adults. **Treated metabolic** causes develop normally. **Transition with guardianship** is planned from the early teens for dependent adolescents needing lifelong care.",
+   "vis": {
+    "cols": [
+     "Course",
+     "Example",
+     "Plan"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Static, improves",
+      "Cerebral palsy",
+      "Therapy, school"
+     ],
+     [
+      "Treatable, normal",
+      "Hypothyroid, PKU",
+      "Screen, replace early"
+     ],
+     [
+      "Degenerative",
+      "Rett, leukodystrophy",
+      "Palliate, counsel"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "For the exam, the facts to lock in are regression means degeneration, hearing first always, spastic diplegia in ex preterms, vaccines never cause autism, fragile X has large testes, Rett wrings hands in girls, and hypothyroidism with phenylketonuria are the treatable pair. Workup order runs hearing, genes, scan, metabolic. Memorise the facts in this table exactly as written.",
+   "tx": "**High yield for the exam:** **regression** means degeneration. **Hearing first** in every delay. **Spastic diplegia** marks ex preterms. **Vaccines never** cause autism. **Large testes** mark fragile X. **Hand wringing girls** mark Rett. **Hypothyroidism with PKU** are the treatable pair caught on newborn screening.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Regression",
+      "Degeneration",
+      "Versus static injury"
+     ],
+     [
+      "First test",
+      "Hearing, vision",
+      "Mimics everything"
+     ],
+     [
+      "CP diplegia",
+      "Ex preterm",
+      "Commonest type"
+     ],
+     [
+      "Autism myth",
+      "Vaccines innocent",
+      "Counselling trap"
+     ],
+     [
+      "Fragile X",
+      "Large testes",
+      "Inherited delay"
+     ],
+     [
+      "Rett",
+      "Hand wringing girls",
+      "Gene tested"
+     ],
+     [
+      "Treatable pair",
+      "Hypothyroid, PKU",
+      "Screen windows"
+     ],
+     [
+      "Spasms sign",
+      "Urgent treatment",
+      "Saves development"
+     ]
+    ]
+   }
+  }
+ ],
+ "title": "Developmental and Paediatric Neurology",
+ "v": 1
+}

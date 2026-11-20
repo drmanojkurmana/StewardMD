@@ -1,0 +1,360 @@
+{
+ "v": 1,
+ "module": "sne-vascular-malformations",
+ "title": "Cerebral vascular malformations",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Vascular malformations are congenital tangles of vessels that shunt arterial blood directly into veins without an intervening capillary bed. The four main types are **arteriovenous malformation**, **arteriovenous fistula**, **cavernous angioma**, and **venous angioma**. They present with haemorrhage, seizures, focal deficits, or headache, and the pattern of presentation differs by type.",
+   "say": "Vascular malformations are congenital tangles of vessels that shunt arterial blood directly into veins without an intervening capillary bed. The four main types are arteriovenous malformation, arteriovenous fistula, cavernous angioma and venous angioma. They present with haemorrhage, seizures, focal deficits or headache, and the pattern of presentation differs by type.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Vessel structure",
+     "Typical presentation"
+    ],
+    "rows": [
+     [
+      "Arteriovenous malformation",
+      "Nidus with feeding arteries and draining veins",
+      "Bleed, seizures, steal symptoms"
+     ],
+     [
+      "Arteriovenous fistula",
+      "Direct artery to vein shunt",
+      "Pulsatile bruit, bruit over the orbit"
+     ],
+     [
+      "Cavernous angioma",
+      "Low flow sinusoidal vascular spaces",
+      "Bleed, seizures, popcorn lesion"
+     ],
+     [
+      "Venous angioma",
+      "Dilated vein with radial medullary veins",
+      "Incidental developmental venous anomaly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Arteriovenous malformation** is the high flow lesion with a nidus of dysplastic vessels where arteries feed directly into draining veins. Seizures occur in about a third of patients and haemorrhage is the commonest presentation. **Bruit** over the lesion is characteristic, and steal from adjacent cortex causes progressive deficits. The Spetzler-Martin grade predicts surgical risk from size and eloquence.",
+   "say": "Arteriovenous malformation is the high flow lesion with a nidus of dysplastic vessels where arteries feed directly into draining veins. Seizures occur in about a third of patients and haemorrhage is the commonest presentation. Bruit over the lesion is characteristic, and steal from adjacent cortex causes progressive deficits. The Spetzler-Martin grade predicts surgical risk from size and eloquence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Seizures",
+      "About a third of patients",
+      "Cortical irritation by the nidus"
+     ],
+     [
+      "Bruit",
+      "Pulsatile systolic murmur",
+      "High flow shunting"
+     ],
+     [
+      "Steal deficits",
+      "Progressive weakness",
+      "Blood diverted from cortex"
+     ],
+     [
+      "Headache",
+      "Raised venous pressure",
+      "Venous hypertension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cavernous angioma** is a low flow mulberry-like cluster of endothelium lined sinusoids without intervening brain tissue. It is the classic **popcorn lesion** with a haemosiderin rim on susceptibility imaging. Seizures are the commonest presentation and bleeding risk is low. Familial forms are multiple and follow an autosomal dominant inheritance.",
+   "say": "Cavernous angioma is a low flow mulberry-like cluster of endothelium lined sinusoids without intervening brain tissue. It is the classic popcorn lesion with a haemosiderin rim on susceptibility imaging. Seizures are the commonest presentation and bleeding risk is low. Familial forms are multiple and follow an autosomal dominant inheritance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sinusoidal vessel cluster"
+     },
+     {
+      "id": "b",
+      "label": "Repeated microbleeds occur"
+     },
+     {
+      "id": "c",
+      "label": "Haemosiderin rim forms"
+     },
+     {
+      "id": "d",
+      "label": "Popcorn lesion on imaging"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Arteriovenous fistula** is a single shunt between artery and vein without a nidus, often dural or carotid cavernous in location. Pulsatile proptosis with a bruit is the carotid cavernous picture. **Venous angioma** is a developmental venous anomaly that is characteristically benign and needs no treatment. Each type needs different imaging and management.",
+   "say": "Arteriovenous fistula is a single shunt between artery and vein without a nidus, often dural or carotid cavernous in location. Pulsatile proptosis with a bruit is the carotid cavernous picture. Venous angioma is a developmental venous anomaly that is characteristically benign and needs no treatment. Each type needs different imaging and management.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Location",
+     "Hallmark sign"
+    ],
+    "rows": [
+     [
+      "Carotid cavernous fistula",
+      "Cavernous sinus",
+      "Pulsatile proptosis with bruit"
+     ],
+     [
+      "Dural fistula",
+      "Dura near sinuses",
+      "Pulsatile tinnitus"
+     ],
+     [
+      "Venous angioma",
+      "Deep white matter",
+      "Radial veins in a wheel pattern"
+     ],
+     [
+      "Cavernous angioma",
+      "Deep and lobar brain",
+      "Popcorn lesion with haemosiderin rim"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Magnetic resonance imaging** is the first test for suspected malformations because it shows nidus, flow voids, and haemosiderin in one study. **Catheter angiography** is the gold standard because it defines feeders, nidus, and draining veins for treatment. Unruptured lesions need individual risk counselling rather than automatic intervention.",
+   "say": "Magnetic resonance imaging is the first test for suspected malformations because it shows nidus, flow voids and haemosiderin in one study. Catheter angiography is the gold standard because it defines feeders, nidus and draining veins for treatment. Unruptured lesions need individual risk counselling rather than automatic intervention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Shows",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Magnetic resonance imaging",
+      "Nidus, flow voids, haemosiderin rim",
+      "First test in stable patients"
+     ],
+     [
+      "Magnetic resonance angiography",
+      "Feeders and draining veins",
+      "Noninvasive vascular mapping"
+     ],
+     [
+      "Catheter angiography",
+      "Reference standard anatomy",
+      "Treatment planning"
+     ],
+     [
+      "Computed tomography angiography",
+      "Feeder identification",
+      "Rapid alternative when magnetic resonance is impossible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment of arteriovenous malformation combines **surgery**, **embolisation**, and **stereotactic radiosurgery**, chosen by Spetzler-Martin grade and location. Low grade operable lesions are resected, while deep or large lesions are often managed by embolisation and radiosurgery. Venous angiomas and low risk cavernous angiomas are usually observed. Seizures need drug therapy regardless of surgery.",
+   "say": "Treatment of arteriovenous malformation combines surgery, embolisation and stereotactic radiosurgery, chosen by Spetzler-Martin grade and location. Low grade operable lesions are resected, while deep or large lesions are often managed by embolisation and radiosurgery. Venous angiomas and low risk cavernous angiomas are usually observed. Seizures need drug therapy regardless of surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Preferred approach",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Low grade malformation",
+      "Surgical resection",
+      "Low operative risk with full removal"
+     ],
+     [
+      "Deep or large malformation",
+      "Radiosurgery and embolisation",
+      "Surgery risk is high"
+     ],
+     [
+      "Ruptured lesion with deficit",
+      "Combined approach",
+      "Haematoma evacuation plus lesion treatment"
+     ],
+     [
+      "Venous angioma",
+      "Observation",
+      "Benign, no treatment needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Seizures** are the commonest presentation of cavernous angioma and cortical malformations because of haemosiderin irritation. **Antiseizure drugs** are continued through treatment and often long term. Progressive deficits from steal or venous congestion need lesion directed therapy, not just drugs. Haemorrhage makes the urgency far greater.",
+   "say": "Seizures are the commonest presentation of cavernous angioma and cortical malformations because of haemosiderin irritation. Antiseizure drugs are continued through treatment and often long term. Progressive deficits from steal or venous congestion need lesion directed therapy, not just drugs. Haemorrhage makes the urgency far greater.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haemosiderin surrounds the lesion"
+     },
+     {
+      "id": "b",
+      "label": "Cortical irritation develops"
+     },
+     {
+      "id": "c",
+      "label": "Seizures begin"
+     },
+     {
+      "id": "d",
+      "label": "Lesion treatment reduces seizures"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Complications** are haemorrhage, seizures, steal deficits, and venous hypertension with hydrocephalus. Malformations near eloquent cortex cause deficits with each bleed. Familial cavernous angiomas bleed more often and need surveillance imaging. Pregnancy and hypertension raise bleed risk and need careful counselling with surveillance imaging.",
+   "say": "Complications are haemorrhage, seizures, steal deficits and venous hypertension with hydrocephalus. Malformations near eloquent cortex cause deficits with each bleed. Familial cavernous angiomas bleed more often and need surveillance imaging. Pregnancy and hypertension raise bleed risk and need careful counselling with surveillance imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Mechanism",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Haemorrhage",
+      "Thin vessel wall rupture",
+      "Secure the lesion"
+     ],
+     [
+      "Seizures",
+      "Haemosiderin irritation",
+      "Drugs and lesion treatment"
+     ],
+     [
+      "Steal deficit",
+      "Blood diverted from cortex",
+      "Treat the shunt"
+     ],
+     [
+      "Hydrocephalus",
+      "Venous hypertension",
+      "Drainage as needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** in malformation papers test type recognition. Popcorn lesion with haemosiderin rim is cavernous angioma, pulsatile proptosis with bruit is carotid cavernous fistula, and a radial vein pattern is venous angioma. Venous angioma needs no treatment, which is the commonest wrong answer. Catheter angiography remains the gold standard for treatment planning.",
+   "say": "Traps in malformation papers test type recognition. Popcorn lesion with haemosiderin rim is cavernous angioma, pulsatile proptosis with bruit is carotid cavernous fistula and a radial vein pattern is venous angioma. Venous angioma needs no treatment, which is the commonest wrong answer. Catheter angiography remains the gold standard for treatment planning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Popcorn lesion",
+      "Arteriovenous malformation",
+      "Cavernous angioma"
+     ],
+     [
+      "Pulsatile proptosis",
+      "Orbital tumour",
+      "Carotid cavernous fistula"
+     ],
+     [
+      "Venous angioma incidental",
+      "Operate it",
+      "Observe, no treatment"
+     ],
+     [
+      "High flow nidus feeders",
+      "Computed tomography alone",
+      "Catheter angiography decides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** nidus with feeders and draining veins means arteriovenous malformation, and bruit with seizures is the presentation. Popcorn lesion with haemosiderin rim and seizures means cavernous angioma, which is low flow. Pulsatile proptosis with bruit is carotid cavernous fistula. Venous angioma is benign and needs no treatment. Catheter angiography is the gold standard.",
+   "say": "High yield for the exam: nidus with feeders and draining veins means arteriovenous malformation and bruit with seizures is the presentation. Popcorn lesion with haemosiderin rim and seizures means cavernous angioma, which is low flow. Pulsatile proptosis with bruit is carotid cavernous fistula. Venous angioma is benign and needs no treatment. Catheter angiography is the gold standard.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Hallmark",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Arteriovenous malformation",
+      "Nidus, bruit, seizures",
+      "High flow, bleed prone"
+     ],
+     [
+      "Cavernous angioma",
+      "Popcorn lesion, seizures",
+      "Low flow, low bleed risk"
+     ],
+     [
+      "Carotid cavernous fistula",
+      "Pulsatile proptosis, bruit",
+      "Needs embolisation"
+     ],
+     [
+      "Venous angioma",
+      "Radial vein wheel",
+      "Benign, observe only"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

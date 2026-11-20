@@ -1,0 +1,357 @@
+{
+ "v": 1,
+ "module": "sne-vascular-dementia-nph",
+ "title": "Vascular cognitive impairment and normal pressure hydrocephalus",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Vascular cognitive impairment** covers all cognitive loss from cerebrovascular disease, from single strategic infarcts to widespread **small vessel disease**, and ranks among the leading causes of dementia worldwide. **Normal pressure hydrocephalus** is an uncommon but treatable cause defined by **ventricular enlargement** with normal opening pressure. Its classic triad is **gait apraxia**, executive dementia, and **urinary incontinence**, often recalled as wet, wobbly, and wacky.",
+   "say": "Vascular cognitive impairment covers all cognitive loss from cerebrovascular disease, from single strategic infarcts to widespread small vessel disease, and ranks among the leading causes of dementia worldwide. Normal pressure hydrocephalus is an uncommon but treatable cause defined by ventricular enlargement with normal opening pressure. Its classic triad is gait apraxia, executive dementia, and urinary incontinence, often recalled as wet, wobbly, and wacky.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Defining feature",
+     "Key pointer"
+    ],
+    "rows": [
+     [
+      "Vascular cognitive impairment",
+      "Cognition lost to strokes and small vessel disease",
+      "Among top causes of dementia"
+     ],
+     [
+      "Strategic infarct",
+      "Small lesion in thalamus or angular gyrus",
+      "Large deficit from a small stroke"
+     ],
+     [
+      "Normal pressure hydrocephalus",
+      "Ventricular enlargement with normal pressure",
+      "DESH pattern with narrow callosal angle"
+     ],
+     [
+      "NPH triad",
+      "Gait apraxia plus executive loss plus incontinence",
+      "Gait improves most after shunting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypertension, diabetes, and advancing age** drive arteriolosclerosis of deep penetrating vessels supplying thalamus, basal ganglia, and brainstem. **Cerebral amyloid angiopathy** of ageing vessels causes lobar haemorrhages. **CADASIL** from NOTCH3 mutation brings young onset strokes with frontal and temporal white matter disease. Secondary **NPH** follows subarachnoid haemorrhage, meningitis, or head trauma that blocks CSF resorption.",
+   "say": "Hypertension, diabetes, and advancing age drive arteriolosclerosis of deep penetrating vessels supplying thalamus, basal ganglia, and brainstem. Cerebral amyloid angiopathy of ageing vessels causes lobar haemorrhages. CADASIL from NOTCH three mutation causes young onset strokes with frontal and temporal white matter disease. Secondary N P H follows subarachnoid haemorrhage, meningitis, or head trauma that blocks C S F resorption.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Small vessel risks",
+     "points": [
+      "Hypertension with diabetes",
+      "Advancing age",
+      "Deep thalamus and basal ganglia lesions",
+      "Lobar bleeds in amyloid angiopathy"
+     ]
+    },
+    "right": {
+     "title": "NPH and genetic causes",
+     "points": [
+      "NOTCH3 mutation causing CADASIL",
+      "Migraine aura with young strokes",
+      "Bleed, meningitis, or trauma before NPH",
+      "Blocked CSF resorption after bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infarcts in the **thalamus, medial temporal cortex, angular gyrus, or anterior corpus callosum** disconnect memory and language networks, so small strategic lesions cause large deficits. Chronic small vessel ischaemia produces **demyelination and gliosis** seen as white matter hyperintensities, confluent in **Binswanger disease**. In NPH, impaired CSF resorption enlarges the ventricles and stretches subfrontal white matter tracts that serve gait, bladder, and executive fibres.",
+   "say": "Infarcts in the thalamus, medial temporal cortex, angular gyrus, or anterior corpus callosum disconnect memory and language networks, so small strategic lesions cause large deficits. Chronic small vessel ischaemia produces demyelination and gliosis seen as white matter hyperintensities, confluent in Binswanger disease. In N P H, impaired C S F resorption enlarges the ventricles and stretches subfrontal white matter tracts that serve gait, bladder, and executive fibres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chronic small vessel ischaemia"
+     },
+     {
+      "id": "b",
+      "label": "Demyelination with gliosis"
+     },
+     {
+      "id": "c",
+      "label": "Confluent Binswanger change"
+     },
+     {
+      "id": "d",
+      "label": "Strategic thalamic infarct added"
+     },
+     {
+      "id": "e",
+      "label": "Network disconnection with dementia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular dementia shows a **stepwise** pattern with early **executive dysfunction**, slowed processing speed, and visuospatial errors rather than amnesia. Focal signs such as **pseudobulbar palsy**, dysarthria, and unilateral weakness follow prior strokes. In NPH the earliest and most responsive feature is a **magnetic gait** with short strides, low foot clearance, outward hip rotation, and prominent truncal sway.",
+   "say": "Vascular dementia shows a stepwise pattern with early executive dysfunction, slowed processing speed, and visuospatial errors rather than amnesia. Focal signs such as pseudobulbar palsy, dysarthria, and unilateral weakness follow prior strokes. In N P H the earliest and most responsive feature is a magnetic gait with short strides, low foot clearance, outward hip rotation, and prominent truncal sway.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Description",
+     "Indicates"
+    ],
+    "rows": [
+     [
+      "Stepwise course",
+      "Function steps down with each event",
+      "Vascular disease"
+     ],
+     [
+      "Executive slowing",
+      "Early failure of planning tasks",
+      "Vascular pattern"
+     ],
+     [
+      "Magnetic gait",
+      "Short strides, low clearance, outward rotation",
+      "Normal pressure hydrocephalus"
+     ],
+     [
+      "Pseudobulbar signs",
+      "Dysarthria with focal weakness",
+      "Prior strokes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "NPH includes **urinary urgency progressing to incontinence** plus apathetic executive slowing without early aphasia or agnosia. **Lobar haemorrhage** in an older patient suggests amyloid angiopathy, while midlife migraine with aura plus strokes suggests **CADASIL**. Alzheimer disease causes gradual amnesia with hippocampal atrophy, unlike the stepwise course and focal signs of vascular disease. Parkinson disease produces tremor and dream enactment, which NPH lacks.",
+   "say": "N P H includes urinary urgency progressing to incontinence plus apathetic executive slowing without early aphasia or agnosia. Lobar haemorrhage in an older patient indicates amyloid angiopathy, while midlife migraine with aura plus strokes indicates CADASIL. Alzheimer disease causes gradual amnesia with hippocampal atrophy, unlike the stepwise course and focal signs of vascular disease. Parkinson disease produces tremor and dream enactment, which N P H lacks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Favours NPH",
+     "points": [
+      "Magnetic gait arrives first",
+      "Urgency progressing to incontinence",
+      "Apathetic executive slowing",
+      "No tremor or dream enactment"
+     ]
+    },
+    "right": {
+     "title": "Favours other dementia",
+     "points": [
+      "Gradual amnesia with hippocampal loss",
+      "Stepwise course with focal signs",
+      "Lobar bleed in an older brain",
+      "Young strokes with aura"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The first test in both conditions is **MRI brain**. Vascular disease shows strategic infarcts, **lacunes**, confluent white matter hyperintensities, and **microbleeds** that are deep in arteriolosclerosis and lobar in amyloid angiopathy. NPH shows enlarged ventricles without matching cortical atrophy, with a narrow **callosal angle** and **DESH** pattern. The **gold standard** is extended inpatient **lumbar drainage**, with a **40 to 50 mL tap test** used as the bedside predictor.",
+   "say": "The first test in both conditions is M R I brain. Vascular disease shows strategic infarcts, lacunes, confluent white matter hyperintensities, and microbleeds that are deep in arteriolosclerosis and lobar in amyloid angiopathy. N P H shows enlarged ventricles without matching cortical atrophy, with a narrow callosal angle and D E S H pattern. The gold standard is extended inpatient lumbar drainage, with a forty to fifty millilitre tap test used as the bedside predictor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Role"
+    ],
+    "rows": [
+     [
+      "MRI brain",
+      "Strategic infarcts, lacunes, hyperintensities",
+      "First test in both"
+     ],
+     [
+      "Microbleed pattern",
+      "Deep means arteriolosclerosis, lobar means amyloid",
+      "Locates vessel disease"
+     ],
+     [
+      "Callosal angle and DESH",
+      "Narrow angle, disproportionate CSF spaces",
+      "Supports NPH"
+     ],
+     [
+      "Tap test",
+      "40 to 50 mL removed",
+      "Bedside predictor"
+     ],
+     [
+      "Inpatient drainage",
+      "Monitored gait and cognition response",
+      "Gold standard"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular impairment is managed by **secondary stroke prevention**: lowering blood pressure, high intensity **statin** therapy, controlling diabetes, and stopping smoking, since no drug reverses established deficits. Cognitive training and supervised exercise support recovery. Definitive treatment of NPH is a **ventriculoperitoneal shunt** in carefully selected patients with a positive drainage response. **Gait** often improves most, while established cognitive loss remains least responsive.",
+   "say": "Vascular impairment is managed by secondary stroke prevention: lowering blood pressure, high intensity statin therapy, controlling diabetes, and stopping smoking, since no drug reverses established deficits. Cognitive training and supervised exercise support recovery. Definitive treatment of N P H is a ventriculoperitoneal shunt in carefully selected patients with a positive drainage response. Gait often improves most, while established cognitive loss remains least responsive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vascular impairment confirmed on MRI"
+     },
+     {
+      "id": "b",
+      "label": "Statin, pressure and glucose control"
+     },
+     {
+      "id": "c",
+      "label": "Training plus supervised exercise"
+     },
+     {
+      "id": "d",
+      "label": "NPH selected by drainage response"
+     },
+     {
+      "id": "e",
+      "label": "Ventriculoperitoneal shunt placed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Peak width of skeletonised mean diffusivity** on diffusion tensor MRI now measures white matter disconnection and tracks with cognition and gait speed. Positive Alzheimer CSF biomarkers or **amyloid PET** deposits indicate poor shunt response and argue against surgery. Objective **gait improvement after tap testing** remains the strongest selector for shunting. Trials increasingly include separate **poststroke** and small vessel groups for targeted prevention.",
+   "say": "Peak width of skeletonised mean diffusivity on diffusion tensor M R I now measures white matter disconnection and tracks with cognition and gait speed. Positive Alzheimer C S F biomarkers or amyloid P E T deposits indicate poor shunt response and argue against surgery. Objective gait improvement after tap testing remains the strongest selector for shunting. Trials increasingly include separate poststroke and small vessel groups for targeted prevention.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Newer measures",
+     "points": [
+      "PSMD quantifies disconnection",
+      "Tracks cognition and gait speed",
+      "Separates poststroke trajectories",
+      "Built on diffusion tensor MRI"
+     ]
+    },
+    "right": {
+     "title": "Shunt selection today",
+     "points": [
+      "Gait response after tap test",
+      "Amyloid PET predicts poor result",
+      "Alzheimer CSF markers argue no",
+      "Triad alone is not enough"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Even after good early recovery, poststroke cognition falls faster than the prestroke trajectory, and each new stroke steps function downward. Shunt surgery risks **subdural haematoma** from overdrainage, infection, and **shunt blockage** needing revision. Untreated NPH leads toward wheelchair dependence and complete incontinence. Benefit from shunting remains best when selection rested on documented drainage response rather than the triad alone.",
+   "say": "Even after good early recovery, poststroke cognition falls faster than the prestroke trajectory, and each new stroke steps function downward. Shunt surgery risks subdural haematoma from overdrainage, infection, and shunt blockage needing revision. Untreated N P H leads toward wheelchair dependence and complete incontinence. Benefit from shunting remains best when selection rested on documented drainage response rather than the triad alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Setting",
+     "Reduction"
+    ],
+    "rows": [
+     [
+      "Recurrent stroke",
+      "Ongoing vascular disease",
+      "Pressure, statin, and smoking control"
+     ],
+     [
+      "Subdural haematoma",
+      "Shunt overdrainage",
+      "Careful drainage selection"
+     ],
+     [
+      "Shunt infection or blockage",
+      "Implanted hardware",
+      "Sterile technique with surveillance"
+     ],
+     [
+      "Wheelchair dependence",
+      "Untreated NPH progression",
+      "Timely selection and shunting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** stepwise executive loss marks vascular dementia, strategic thalamic infarcts cause large deficits, deep microbleeds mean arteriolosclerosis while lobar means amyloid, magnetic gait is the first NPH sign, the tap test removes **40 to 50 mL**, and shunting is offered to selected patients with a positive drainage response.",
+   "say": "High yield for the exam: stepwise executive loss marks vascular dementia, strategic thalamic infarcts cause large deficits, deep microbleeds mean arteriolosclerosis while lobar means amyloid, magnetic gait is the first N P H sign, the tap test removes forty to fifty millilitres, and shunting is offered to selected patients with a positive drainage response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Exam line"
+    ],
+    "rows": [
+     [
+      "Course",
+      "Stepwise executive loss marks vascular dementia"
+     ],
+     [
+      "Strategic stroke",
+      "Thalamic infarcts cause large deficits"
+     ],
+     [
+      "Microbleeds",
+      "Deep means arteriolosclerosis, lobar means amyloid"
+     ],
+     [
+      "NPH first sign",
+      "Magnetic gait arrives before incontinence"
+     ],
+     [
+      "Tap test",
+      "Removes 40 to 50 mL of CSF"
+     ],
+     [
+      "Shunt result",
+      "Offered to selected patients, gait responds best"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
