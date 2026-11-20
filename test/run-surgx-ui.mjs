@@ -212,6 +212,20 @@ try {
   ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
   ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Laparoscopic cholecystectomy");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 17,
+    "VIDEO batch 2: lap cholecystectomy shows its 17 timed step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Appendicectomy");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
 
   await clickText("#surgxRoot .sgx-tab", "Anatomy");
   await sleep(300);

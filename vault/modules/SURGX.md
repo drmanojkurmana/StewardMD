@@ -411,3 +411,6 @@ Lap cholecystectomy, Lichtenstein hernia repair, LSCS and total thyroidectomy (7
 
 ## Batch 3 prompts (2026-11-20)
 Haemorrhoidectomy, tonsillectomy, total knee replacement, laparoscopic right hemicolectomy and TURP (94 steps): [[SURGX-batch3-image-prompt]] and [[SURGX-batch3-video-prompt]].
+
+## Batch 2 video clips (2026-11-20)
+Gemini returned 12 videos; all embeddable (oEmbed 200). The best clip per step is wired as `med.surgx.{chole,hern,cs,thyr}-clip-NN` (59 clips); 11 ids added to the `_site/yt.html` ALLOW list (hM-WA6WOw1Y unused). Gaps with no clip: chole 4 and 14, hernia 10, LSCS 4, 11, 12 and 17, thyroid 2, 5, 14 and 15. The safety-step clips come from a WHO checklist video on another operation, and the hernia clips from a bench model; both caveats are in the captions. Thyroid step 11 uses the Columbia animation so it does not duplicate the step 13 clip.
