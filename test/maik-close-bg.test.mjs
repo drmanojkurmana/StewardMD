@@ -51,7 +51,7 @@ test("composer: one row of 44px round controls with margin spacing and the extra
   assert.match(P, /\.maik-cmp-in\{display:grid;grid-template-columns:auto auto auto auto minmax\(8px,1fr\) minmax\(0,auto\) 44px;grid-template-rows:64px 44px;gap:4px 0;/);
   assert.match(P, /\.maik-cmp-in :is\(#maikMic,#maikResearch,#maikImg,#maikExtract,#maikLen,#maikModelChip,#maikSend\)\{box-sizing:border-box;min-width:44px;height:44px;border-radius:22px!important\}/);
   assert.match(P, /\.maik-cmp-in :is\(#maikMic:not\(\.live\):not\(\.prep\),#maikResearch:not\(\.on\),#maikImg:not\(\.has\),#maikExtract,#maikLen,#maikModelChip\)\{border:1px solid var\(--mk-ctl-bd\)!important;background:var\(--mk-ctl-bg\)!important/, "one surface; live/on/has states keep their own colours");
-  assert.match(P, /\.maik-cmp-in:has\(#maikExtract\.show\) #maikQ\{padding-right:56px\}/, "text never runs under the extract button");
+  assert.match(P, /\.maik-cmp-in:has\(#maikExtract\.show\) #maikQ\{padding-right:124px\}/, "text never runs under the extract button");
   assert.match(P, /@media \(max-width:370px\)\{[^}]*minmax\(4px,1fr\)/, "narrow phones tighten to 4px");
   assert.match(P, /:is\(\.maik-hd-btn,\.maik-cmp-in button\):focus-visible\{outline:2px solid var\(--mk-teal\)!important/, "keyboard focus is visible");
 });

@@ -12492,3 +12492,18 @@ Owner: home "overwhelming, more options more scrolling"; "Swipe feed and PrepRee
 - Rejected: deleting the old Swipe feed now (wait for the owner to confirm PrepReels on device); hiding Subjects entirely
   (Tests > QBank has them, but subjects are the core browse on home).
 
+
+## Left-edge swipe: back everywhere, the menu on home only, and an off switch (owner, 2026-11-19)
+- Owner: the swipe brought the sidebar up behind PrepNucleus and locked its scrolling; it must open the sidebar on the home
+  screen only, go back one screen everywhere else, be switchable off in Preferences, and ignore accidental swipes.
+- `swipe-back.js`: `moduleOpen()` (PREP, ATLAS, OPHTHALMOS, TOKOS, NARKE, KARDIA, FUNDX, CLINIX, `html.pn-open`,
+  `body.maik-open`, `#smdPrep`) blocks the menu; the menu never opens within 900 ms of a back step (one swipe can't close
+  a module and open the menu); on home nothing is dragged under the finger (a stray back-style control's layer used to
+  slide the home screen itself, so the menu check then failed). Android back never exits from inside a module.
+- Accidental swipes: start within 30 px of the edge, not on a text box, slider or `[data-no-swipe]`; at least twice as
+  far across as down (a drag that becomes a scroll is dropped); a flick must travel 56 px (was 24); vertical drift at
+  release at most max(48 px, half the distance).
+- Off switch: Settings > Preferences "Swipe from the left edge" (`smd_swipe_back`, on by default). Off = no back-swipe and
+  no menu-swipe, also on the Settings pages; Back buttons and Android's system back keep working.
+- Guard: `test/run-swipe-guard-ui.mjs`. `test/run-swipe-back-ui.mjs` has 5 checks failing on main before this change
+  (it cannot open KardiQ, the later home checks follow from it).

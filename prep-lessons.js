@@ -590,7 +590,7 @@
   function webVoice() {
     try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
   }
-  function speak(text, rate, done, onPiece) {
+  function speak(text, rate, done, onPiece, aheadFirst) {
     stopVoice();
     var tok = ++L.tok, chunks = Array.isArray(text) ? text : sayChunks(text), n = 0;
     var fail = function () { if (tok === L.tok) { L.playing = false; draw(); } };
@@ -615,7 +615,15 @@
         var V = G.PREP_VOICE;
         // A sentence the natural voice cannot read (synthesis or playback fails on the phone) is read by the phone's
         // voice and the lesson reads on; before this, one such sentence stopped the narration with no word (owner 2026-11-08).
-        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, system); return; }
+        // say() first: it claims the sentence, so the prefetch of the next one cannot cancel a render still in progress
+        // (that cancel restarted the page's first sentence: owner 2026-11-19, "5 secs to start on next page"). On the
+        // page's last sentence the next page's first one is rendered, so turning the page speaks at once.
+        if (V && V.usable()) {
+          var said = V.say(part, rate);
+          var ahead = chunks[n] || (n >= chunks.length && aheadFirst ? aheadFirst() : "");
+          if (ahead) V.prefetch(ahead, rate);
+          said.then(pause, system); return;
+        }
       } catch (e) {}
       system();
     };
@@ -623,9 +631,9 @@
     next();
   }
   /* What the page reads, and for each spoken piece the displayed sentence it lights (HL_VIS: the visual). */
-  function pageReading() {
-    var pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null;
-    if (!step) return { say: pageSay(), map: null };
+  function pageReading(i) {
+    var pg = i == null ? page() : pages(L.les)[i], step = typeof pg === "number" ? L.les.steps[pg] : null;
+    if (!step) return { say: i == null ? pageSay() : pageSayOf(pg), map: null };
     var ss = stepSay(step);
     return { say: ss.tx.concat(ss.vis), map: alignSay(ss.tx, stepSentences(step.tx)).concat(ss.vis.map(function () { return HL_VIS; })) };
   }
@@ -642,7 +650,15 @@
       if (!L.playing || L.fin) return;
       if (s.lsp.au && L.i < pages(L.les).length - 1) { go(L.i + 1, true); return; }
       L.playing = false; drawBar();
-    }, map ? function (k) { hlSet(map[k]); } : null);
+    }, map ? function (k) { hlSet(map[k]); } : null, function () { return firstOf(L.i + 1); });
+  }
+  // The first spoken piece of page i ("" when there is none), for rendering ahead.
+  function firstOf(i) {
+    try {
+      if (!L.les || i < 0 || i >= pages(L.les).length) return "";
+      var say = pageReading(i).say;
+      return (Array.isArray(say) ? say[0] : sayChunks(say)[0]) || "";
+    } catch (e) { return ""; }
   }
   function setPlaying(on) { L.playing = on && canSpeak(); stopVoice(); if (L.playing) naturalStart(function () { narrate(); }); drawBar(); }
   // Tap a sentence (or the table / figure): read from there, playing or not.
@@ -657,7 +673,7 @@
   function primeVoice() {
     try {
       var V = G.PREP_VOICE; if (!V || !V.usable || !V.usable() || L.fin || !L.les) return;
-      var say = pageReading().say, first = Array.isArray(say) ? say[0] : sayChunks(say)[0];
+      var first = firstOf(L.i);
       if (first) V.prefetch(first);
     } catch (e) {}
   }
@@ -947,8 +963,9 @@
       '<ol class="pn-keys">' + L.les.keys.map(function (k) { return "<li><i>" + svg(ICO.tick, 16) + "</i><span>" + boldHtml(k) + "</span></li>"; }).join("") + "</ol>" + scoreHtml();
   }
   function page() { return pages(L.les)[L.i]; }
-  function pageSay() {
-    var p = page(), les = L.les;
+  function pageSay() { return pageSayOf(page()); }
+  function pageSayOf(p) {
+    var les = L.les;
     if (p === "cards") return "Classic signs. " + les.cards.map(function (c) { return c.f + ". " + c.b; }).join(" ");
     if (p === "keys") return "Key points. " + les.keys.join(" ").replace(/\*\*/g, "");
     var ss = stepSay(les.steps[p]);
@@ -983,6 +1000,15 @@
     } else if (A && A.actionRowHtml) row = A.actionRowHtml({ shareId: lid || undefined, bookmarked: bm });
     return row || chip ? '<footer class="pn-lsn-foot">' + row + chip + "</footer>" : "";
   }
+  /* The Pearl crumb's real names: the lesson's subject and the taxonomy section that holds its module. null when the
+     taxonomy is not loaded (prep-pearl.js then falls back to the ids, minus their codes). */
+  function crumbNames(les) {
+    var sb = host && host.subjectById ? host.subjectById(les.subject) : null, tx = host && host.tx ? host.tx : function (x) { return x && (x.en || x); };
+    if (!sb) return null;
+    var sec = null;
+    (sb.sections || []).forEach(function (x) { if (!sec && (x.modules || []).some(function (m) { return m.id === les.module; })) sec = x; });
+    return { subject: tx(sb.name), section: sec ? tx(sec.name) : "" };
+  }
   function readerHtml() {
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
@@ -990,7 +1016,7 @@
     var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null;
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
-        (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
+        (isP && L.i === 0 ? PEARL.headerHtml(les, lid0, crumbNames(les)) : "") +
         '<p class="pn-lsn-tx" data-hl-key="' + escH("ls:" + L.key + ":" + p) + '">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-act="l-say" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         "</article>"
@@ -1127,13 +1153,27 @@
       if (!list.length) return host.toast("These questions are not available right now. Practise the module instead.");
       host.run(list, "study", "Quick questions: " + les.title);
     }, function (e) {
-      // say what actually failed: a server refusal is not "no connection" (owner's phone showed this toast on a 429)
-      var c = e && e.code, st = e && e.status;
-      host.toast(c === "account-flagged" ? "Question access is paused for this account. Try again later."
-        : (st === 429 || c === "minute-limit" || c === "hour-limit" || c === "daily-limit" || c === "enumeration-detected") ? "Too many question files at once. Wait a minute and try again."
-        : (st === 401 || c === "login-required" || c === "invalid-session") ? "Sign in again to open the questions."
-        : "The questions need a connection the first time. Try again online.");
+      host.toast(quizErr(e));
+      try { if (G.console) G.console.warn("[prep-lessons] quiz load failed", L.sid, L.mid, e && e.status, e && e.code, e && e.message); } catch (x) {}
     });
+  }
+  /* What stopped the lesson's questions loading, in words that say the real cause and the fix (owner 2026-11-19: "need a
+     connection" showed with the network on, because every unrecognised refusal fell through to it). An unrecognised
+     cause names its status and code, so a screenshot says what failed. */
+  function quizErr(e) {
+    var c = (e && e.code) || "", st = (e && e.status) || 0, msg = String((e && e.message) || "");
+    var offline = (G.navigator && G.navigator.onLine === false) || (!st && /failed to fetch|load failed|network|internet connection|offline/i.test(msg));
+    if (offline) return "No connection. The questions need the internet the first time; once opened they work offline.";
+    if (c === "signin-expired" || st === 401 && (c === "login-required" || c === "invalid-session" || c === "app-binding-required"))
+      return G.PREP_BANK_MSG ? G.PREP_BANK_MSG("Sign in again to open the questions.") : "Sign in again to open the questions.";
+    if (c === "account-flagged") return "Question access is paused for this account. Try again later.";
+    if (st === 429 || c === "minute-limit" || c === "hour-limit" || c === "daily-limit" || c === "enumeration-detected") return "Too many question files at once. Wait a minute and try again.";
+    if (c === "stale-timestamp" || c === "replayed-nonce" || c === "invalid-signature" || c === "expired-or-invalid-expiry")
+      return "The phone's clock looks wrong, so the question server refused it. Set Date and Time to automatic, then try again.";
+    if (c === "origin-required" || c === "foreign-origin") return "The question server did not recognise the app. Close StewardMD fully, reopen it and try again.";
+    if (st === 404) return "This module's questions are not on the server yet. Practise from the module page instead (code 404).";
+    if (st >= 500) return "The question server is busy. Try again in a minute (code " + st + ").";
+    return "The questions did not load. Try again" + (st || c ? " (code " + [st || "", c].filter(Boolean).join(" ") + ")" : msg ? " (" + msg.slice(0, 60) + ")" : "") + ".";
   }
 
   /* ---------- public ---------- */
@@ -1395,5 +1435,5 @@
 
   // A link from outside PrepNucleus (the Image Library, owner 2026-11-13): this lesson, at the step that shows the image.
   function openAt(sid, mid, h, key, step) { L.jumpStep = step == null ? null : String(step); return open(sid, mid, h, key, true); }
-  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, warmVoice: warmVoice, _pure: PURE, _l: L };
+  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, openAt: openAt, act: act, back: back, leave: leave, index: index, warmVoice: warmVoice, _quizErr: quizErr, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);

@@ -20,6 +20,11 @@ test("breadcrumb header footer table escape", () => {
   assert.match(P.breadcrumb(l, "L-4FDN-0V2R-A"), /^Pearl · Anatomy · Perineal Body$/);   // one code: the lesson ID shows in the foot
   assert.match(P.breadcrumb(l), /^Pearl #PN-[0-9A-HJKMNP-TV-Z]{4} · Anatomy · Perineal Body$/);
   assert.match(P.headerHtml(l, "L-4FDN-0V2R-A"), /&lt;Body&gt;/);
+  // Owner 2026-11-19: real names, never ids turned into words.
+  const ss = { module: "son-neuro-onc-brain-mets-sega", subject: "ss-medical-oncology", title: "Brain metastases", steps: [] };
+  assert.equal(P.breadcrumb(ss, "L-4FDN-0V2R-A", { subject: "Medical Oncology", section: "Head and neck, CNS, skin and sarcoma" }), "Pearl · Medical Oncology · Head and neck, CNS, skin and sarcoma");
+  assert.equal(P.breadcrumb(ss, "L-4FDN-0V2R-A"), "Pearl · Medical Oncology", "no taxonomy: no 'Ss', no module code");
+  assert.match(P.headerHtml(ss, "L-4FDN-0V2R-A", { subject: "Medical Oncology", section: "Head and neck, CNS, skin and sarcoma" }), /Pearl · Medical Oncology · Head and neck, CNS, skin and sarcoma/);
   assert.match(P.footerHtml(l, "L-4FDN-0V2R-A"), /data-pearl-copy="PN-4FDN"/);
   assert.match(P.footerHtml(l, "L-4FDN-0V2R-A"), /data-act="id-share" data-v="L-4FDN-0V2R-A"/);
   assert.match(P.footerHtml(l, null, true), /aria-pressed="true"/);

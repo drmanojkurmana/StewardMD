@@ -117,7 +117,13 @@
       return getJSON(base(host) + ix.file, host);
     }).then(function (f) {
       // _s/_m: the subject and module FSRS and the mock analysis file it under; "pyq" until the mapping sorts it.
-      P.items = (f.items || []).map(function (it) { it._py = 1; it._s = it.ts || it.subject || "pyq"; it._m = it.t || "pyq"; return it; });
+      // img-missing: the stem points at a picture the item does not carry (prep-assess needsImage); usable() then hides it.
+      var AS = G.PREP_ASSESS;
+      P.items = (f.items || []).map(function (it) {
+        it._py = 1; it._s = it.ts || it.subject || "pyq"; it._m = it.t || "pyq";
+        if (AS && AS.needsImage && AS.needsImage(it) && !(it.flags && it.flags.indexOf("img-missing") >= 0)) it.flags = (it.flags || []).concat("img-missing");
+        return it;
+      });
       P.itP = null; return P.items;
     }, function (e) { P.itP = null; throw e; });
     return P.itP;

@@ -149,7 +149,9 @@ export function bankFrom(r2, defaultVer = "v5") {
   };
   return { index: (s) => read(s, "index.json"), module: (s, file) => (/^mcq\/[a-z0-9-]{2,80}\.json$/.test(file) ? read(s, file) : Promise.resolve(null)), pool };
 }
-const usable = (it) => !!it && !(it.flags && it.flags.length) && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && typeof it.id === "string";
+// needsImage: a stem pointing at a picture the item does not carry can never be answered (owner 2026-11-19); the app
+// flags these img-missing on load, but bank and pool items reach the server unflagged.
+const usable = (it) => !!it && !(it.flags && it.flags.length) && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && typeof it.id === "string" && !ASSESS.needsImage(it);
 // prep.js poolFor: flagged items out; for USMLE, vignettes when a module has at least 5.
 function poolFor(items, exam) {
   const ok = (items || []).filter(usable);
@@ -251,7 +253,7 @@ export async function drawItems(bank, exam, n, seed) {
  * seeded order; [] when there is no pool or it holds fewer than n usable questions. Items are { id, q, o, a, s, m }. */
 export async function drawFromPool(bank, exam, n, seed) {
   const pool = bank && bank.pool ? await bank.pool(exam) : null;
-  const items = pool && Array.isArray(pool.items) ? pool.items.filter((it) => it && it.q && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4) : [];
+  const items = pool && Array.isArray(pool.items) ? pool.items.filter((it) => it && it.q && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && !ASSESS.needsImage(it)) : [];
   if (items.length < n) return [];
   const rnd = mulberry32(seedFrom("pool:" + String(seed)));
   const bySubject = new Map();
