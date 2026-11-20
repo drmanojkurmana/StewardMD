@@ -92,6 +92,13 @@ more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".
 - **Tests:** `test/prep-buddy.test.mjs` (decide/doneLine), `test/run-prep-buddy-ui.mjs` (headless, SHOTS=<dir>).
   Not seen on a phone yet.
 
+- **After the set (2026-11-20, `?v=prep195`, owner screenshot: the question chips showed on "Set finished"):** a tap on
+  the result screen opens a what-next bubble from `HOST.buddyEnd(r)` (practise the missed, ask MaiK what I keep missing
+  via `PREP_ASK.open({kind:"card"})` with the missed stems, revise the topic most misses came from, show my mistakes /
+  practise all again); `buddyEndDo` clicks the result screen's own buttons where one exists. The result body now keeps
+  room for him (`> .pn-body` padding, not only `.pn-run`). After a low score a fist pump ("pep"), then a beckon wave.
+  Livelier: idle every 2-4.4 s, he wanders up to 64 px along the bottom edge and back (`walkTo`, `--pnm-x`), bounces,
+  tilts; `hold(true)` keeps him still while a bubble's tail points at him.
 - **Lively + clock tension (2026-11-20, `?v=prep191`, owner: "very lively ... get tensed turn red when time is almost
   up"):** Nucleo has an idle life (`idle()` every 3-6 s: glance, read the question, peek, stretch, sway, tassel flick,
   hop, wave, a dance when mood is high), eyes follow taps and scrolling (`.pnm-look`), drowsy at 45 s and asleep at 60 s

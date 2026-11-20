@@ -78,7 +78,7 @@ try {
     PREP._host.run(items, ${JSON.stringify(mode)}, "Buddy set", ${JSON.stringify(opts || {})}); return 1;`);
   const pickAns = async (k) => { await click(`#smdPrep [data-act=answer][data-k="${k}"]`); await sleep(200); };
   const next = async () => { await click(`#smdPrep [data-act=next]`); await sleep(250); };
-  const bub = () => text(".pnb-bub");
+  const bub = () => text(".pnb-bub:not(.out)");
   const mood = () => ev(`var s=PREP_BUDDY._s(); return s.mk ? s.mk.state() : null;`);
 
   await ev(`PREP.open(); return 1;`);
@@ -140,6 +140,32 @@ try {
   for (let i = 0; i < 6; i++) { if (await ev(`return !!document.querySelector("#smdPrep [data-act=answer]:not([aria-disabled])");`)) await pickAns(0); await next(); }
   ok(await until(`return /%/.test((document.querySelector(".pnb-bub")||{}).textContent||"");`, 3000), "end of set: he sums it up (" + await bub() + ")");
   await shot("done");
+  // The result screen: he leaves the last card alone, and tapping him offers what next for the set (not question chips).
+  await ev(`var b=document.querySelector("#smdPrep > .pn-body"); b.scrollTop=b.scrollHeight; return 1;`); await sleep(400);
+  ok(await ev(`var b=document.querySelector("#smdPrep > .pn-body"), kids=[].filter.call(b.querySelectorAll(":scope > *"), function(e){ return e.getBoundingClientRect().height; }), last=kids[kids.length-1], m=document.querySelector("#pnBuddy .pnm-hit").getBoundingClientRect(); return last.getBoundingClientRect().bottom <= m.top + 8;`) === true, "scrolled to the end, the last card is clear of him");
+  await ev(`PREP_BUDDY.quickAsk(); return 1;`);
+  ok(await until(`return !!document.querySelector(".pnb-bub .pnb-end");`, 2000), "tap after the set: a what-next bubble (" + await bub() + ")");
+  ok(await ev(`return !/about this question/.test(document.querySelector(".pnb-bub").textContent);`) === true, "no per-question chips after the set");
+  const endOpts = await ev(`return [].map.call(document.querySelectorAll(".pnb-end [data-e]"), function(b){ return b.getAttribute("data-e"); }).join(",");`);
+  ok(/missed/.test(endOpts) && /why/.test(endOpts) && /revise/.test(endOpts) && /review/.test(endOpts), "practise the missed, ask MaiK what I keep missing, revise the topic, show my mistakes (" + endOpts + ")");
+  ok(/Revise Gametogenesis/.test(await bub()), "the revise option names the topic most misses came from");
+  await shot("endask");
+  await theme(true); await shot("endask"); await theme(false);
+  await click('.pnb-end [data-e="review"]');
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=rfilter][data-v="wrong"][aria-pressed="true"]');`, 2000), "Show my mistakes filters the review to the wrong ones");
+  await ev(`PREP_BUDDY.quickAsk(); return 1;`); await until(`return !!document.querySelector(".pnb-end");`, 2000);
+  await click('.pnb-end [data-e="why"]');
+  ok(await until(`return !!document.getElementById("pnAsk");`, 3000), "Ask MaiK what I keep missing opens the Ask sheet with the misses");
+  await ev(`PREP_ASK.close(); return 1;`); await sleep(300);
+  await ev(`PREP_BUDDY.quickAsk(); return 1;`); await until(`return !!document.querySelector(".pnb-end");`, 2000);
+  await click('.pnb-end [data-e="missed"]');
+  ok(await until(`var r=PREP._st.run; return !!r && !r.done && r.items.length < 12;`, 3000), "Practise the missed starts a set of just those (" + await ev(`return PREP._st.run && PREP._st.run.items.length;`) + ")");
+  // He wanders a little and stays put while a bubble points at him.
+  ok(await ev(`var m=PREP_BUDDY._s().mk; m.walkTo(-40); return m.state().x;`) === -40, "he walks along the bottom edge");
+  await ev(`PREP_BUDDY.quickAsk(); return 1;`);
+  ok(await ev(`var m=PREP_BUDDY._s().mk; m.walkTo(0); return m.state().held && m.state().x === -40;`) === true, "with a bubble open he stays where its tail points");
+  await ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); return 1;`); await sleep(250);
+  ok(await ev(`return PREP_BUDDY._s().mk.state().held;`) === false, "the bubble gone, he is free to move again");
 
   await ev(`PREP.back(); return 1;`); await sleep(200);
 

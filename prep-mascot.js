@@ -80,7 +80,8 @@
   var CSS = "@property --pnm-hi{syntax:'<color>';inherits:true;initial-value:#7F8FEA}" +
     "@property --pnm-lo{syntax:'<color>';inherits:true;initial-value:#3B49A3}" +
     "@property --pnm-rim{syntax:'<color>';inherits:true;initial-value:#28337E}" +
-    ".pnm{position:absolute;right:0;bottom:0;width:64px;height:76px;pointer-events:none;--pnm-hi:" + C.hi + ";--pnm-lo:" + C.lo + ";--pnm-rim:" + C.rim + ";transition:--pnm-hi .8s ease,--pnm-lo .8s ease,--pnm-rim .8s ease}" +
+    ".pnm{position:absolute;right:0;bottom:0;width:64px;height:76px;pointer-events:none;--pnm-hi:" + C.hi + ";--pnm-lo:" + C.lo + ";--pnm-rim:" + C.rim + ";" +
+      "transform:translateX(var(--pnm-x,0px));transition:--pnm-hi .8s ease,--pnm-lo .8s ease,--pnm-rim .8s ease,transform var(--pnm-walk,1s) cubic-bezier(.45,0,.3,1)}" +
     // the flush: tense, then panic red
     ".pnm.t1{--pnm-hi:#F0A08F;--pnm-lo:#C84A5C;--pnm-rim:#8F2A40}" +
     ".pnm.t2{--pnm-hi:#FF7B66;--pnm-lo:#C21F2F;--pnm-rim:#7A0E1C;transition-duration:.45s}" +
@@ -131,6 +132,9 @@
     ".pnm[data-pose=wipe] .pnm-armR{transform:rotate(-165deg);animation:pnm-wipe .45s ease-in-out 2}" +
     ".pnm[data-pose=stretch] .pnm-armL{transform:rotate(160deg)}.pnm[data-pose=stretch] .pnm-armR{transform:rotate(-160deg)}" +
     ".pnm[data-pose=point] .pnm-armL{transform:rotate(120deg)}" +
+    ".pnm[data-pose=fist] .pnm-armR{transform:rotate(-150deg)}.pnm[data-pose=fist] .pnm-armL{transform:rotate(-30deg)}" +
+    ".pnm[data-pose=beckon] .pnm-armL{animation:pnm-beckon .42s ease-in-out 3}" +
+    "@keyframes pnm-beckon{0%,100%{transform:rotate(100deg)}50%{transform:rotate(140deg)}}" +
     // motion
     ".pnm .pnm-fig{animation:pnm-bob 2.8s ease-in-out infinite}" +
     ".pnm.go-jump .pnm-fig{animation:pnm-jump .62s cubic-bezier(.3,.7,.4,1)}" +
@@ -151,6 +155,13 @@
     ".pnm.go-startle .pnm-fig{animation:pnm-jump .5s cubic-bezier(.3,.7,.4,1)}" +
     ".pnm.go-boom .pnm-cap{animation:pnm-blow 1.3s cubic-bezier(.2,.7,.3,1)}.pnm.go-boom .pnm-fig{animation:pnm-squish .5s ease-out}" +
     ".pnm.go-exhale .pnm-fig{animation:pnm-exhale 1.1s ease-in-out}" +
+    ".pnm.go-walk .pnm-fig{animation:pnm-walk .26s ease-in-out infinite alternate}" +
+    ".pnm.go-pep .pnm-fig{animation:pnm-pep .9s cubic-bezier(.3,.7,.4,1)}" +
+    ".pnm.go-bounce .pnm-fig{animation:pnm-hop .42s cubic-bezier(.3,.7,.4,1) 3}" +
+    ".pnm.go-tilt .pnm-fig{animation:pnm-tilt 1.4s ease-in-out}" +
+    "@keyframes pnm-walk{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-2.5px) rotate(5deg)}}" +
+    "@keyframes pnm-pep{0%{transform:none}30%{transform:scale(1.06,.92)}55%{transform:translateY(-10px) scale(.97,1.04)}100%{transform:none}}" +
+    "@keyframes pnm-tilt{0%,100%{transform:none}30%,70%{transform:rotate(9deg)}}" +
     // the tremble (tense) and the shake (panic) live on the svg, so they stack with any move of the figure
     ".pnm.t1 .pnm-svg{animation:pnm-quake .18s linear infinite}.pnm.t2 .pnm-svg{animation:pnm-quake2 .1s linear infinite}" +
     ".pnm.t1 .pnm-look{animation:pnm-clock 2.6s ease-in-out infinite}" +
@@ -212,7 +223,7 @@
     host.appendChild(el);
     var hit = el.querySelector(".pnm-hit"), tab = el.querySelector(".pnm-tab");
     var timers = [], faceT = 0, poseT = 0, goT = 0, blinkT = 0, mood = 0.2, face = "normal", pose = "rest", hidden = false, dead = false;
-    var tens = 0, lastReact = 0, lastInput = Date.now(), sleepy = 0, idleT = 0, zzT = 0, lookT = 0, acts = 0;
+    var tens = 0, lastReact = 0, lastInput = Date.now(), sleepy = 0, idleT = 0, zzT = 0, lookT = 0, acts = 0, x = 0, held = false, walkT = 0;
     function later(fn, ms) {
       var t = G.setTimeout(function () { var k = timers.indexOf(t); if (k >= 0) timers.splice(k, 1); if (!dead) fn(); }, ms);
       timers.push(t); return t;
@@ -230,7 +241,7 @@
       G.clearTimeout(poseT);
       if (holdMs) poseT = later(function () { setPose(basePose()); }, holdMs);
     }
-    var MOVES = ["go-jump", "go-jump2", "go-nod", "go-sink", "go-shake", "go-toss", "go-squish", "go-hop", "go-stretch", "go-sway", "go-peek", "go-dance", "go-flick", "go-startle", "go-boom", "go-exhale"];
+    var MOVES = ["go-walk", "go-pep", "go-bounce", "go-tilt", "go-jump", "go-jump2", "go-nod", "go-sink", "go-shake", "go-toss", "go-squish", "go-hop", "go-stretch", "go-sway", "go-peek", "go-dance", "go-flick", "go-startle", "go-boom", "go-exhale"];
     function go(name, ms) {
       if (reduce) return;
       for (var i = 0; i < MOVES.length; i++) el.classList.remove(MOVES[i]);
@@ -283,13 +294,17 @@
           else if (!sleepy) idleAct();
         }
         idle();
-      }, 3000 + Math.random() * 3000);
+      }, 2000 + Math.random() * 2400);
     }
     function idleAct() {
       acts++;
       var r = Math.random(), happy = mood > 0.5;
       if (reduce) { if (r < 0.5) look(-2, -1.6, 1400); else look(2, 0, 1200); return; }
       if (happy && r < 0.22) { go("dance", 1900); setPose("cheer", 1700); return; }
+      // Away from the corner he usually heads home next; from the corner he sometimes sets off.
+      if (!held && (x < -8 ? Math.random() < 0.55 : Math.random() < 0.16)) { walkTo(x < -8 ? 0 : -(24 + Math.random() * 40)); return; }
+      if (Math.random() < 0.08) { go("bounce", 1300); return; }
+      if (Math.random() < 0.08) { go("tilt", 1400); look(1.8, -0.4, 1400); setFace("proud", 1300, baseFace()); return; }
       if (r < 0.2) { look(-2.1, -1.7, 1800); go("peek", 1500); return; }                 // a look at the question
       if (r < 0.34) { look(-2.2, -1, 450); later(function () { look(0.6, -1, 450); }, 500); later(function () { look(-2.2, -0.4, 450); }, 1000); later(function () { look(0.6, -0.4, 500); }, 1500); return; }   // reading
       if (r < 0.46) { var s = Math.random() < 0.5 ? -1 : 1; look(2 * s, (Math.random() - 0.5) * 2, 1200); return; }   // a glance
@@ -299,6 +314,22 @@
       if (r < 0.84) { go("hop", 500); return; }
       if (r < 0.92) { setPose("wave", 1100); return; }
       setFace("wow", 700); look(0, -2, 700);                                                // a thought
+    }
+    /* He wanders a little along the bottom edge (up to 64 px in from the corner) and comes back; not while a bubble is
+       open (its tail points at him), not while tense, asleep or under reduced motion. */
+    function walkTo(nx) {
+      if (reduce || held || tens || sleepy) return;
+      nx = Math.max(-64, Math.min(0, Math.round(nx)));
+      var d = Math.abs(nx - x); if (d < 8) return;
+      var ms = Math.round(300 + d * 14);
+      look(nx < x ? -2.1 : 2.1, 0.3, ms);
+      el.style.setProperty("--pnm-walk", ms + "ms"); el.style.setProperty("--pnm-x", nx + "px"); x = nx;
+      el.classList.add("go-walk"); G.clearTimeout(walkT);
+      walkT = later(function () { el.classList.remove("go-walk"); if (Math.random() < 0.5) go("squish", 350); }, ms);
+    }
+    function hold(on) {
+      held = !!on;
+      if (held && x !== 0) { el.style.setProperty("--pnm-walk", "0ms"); }   // the bubble aims at where he stands now
     }
     function sleep() {
       sleepy = 2; setFace("sleep"); setPose("rest"); el.classList.add("sleep");
@@ -347,6 +378,8 @@
       wake(false);
       if (kind === "tense") return setTension(n);
       if (kind === "timeout") return timeUp();
+      if (kind === "pep") { lastReact = Date.now(); mood = Math.max(mood, 0.2); setFace("proud", 2000); setPose("fist", 1300); go("pep", 900); fx("star", 2); return; }
+      if (kind === "beckon") { if (!tens && !sleepy) { look(-1.6, -1.6, 1300); setPose("beckon", 1300); go("hop", 500); } return; }
       if (kind === "newq") { if (!tens && !reduce) { setFace("wow", 700, baseFace()); look(-2, -1.8, 1400); go("hop", 500); } return; }
       lastReact = Date.now();
       el.classList.remove("go-sink");
@@ -403,11 +436,13 @@
       // Same fields the MaiK companion reports, so tests read either: mood, face, gesture (pose), mouth.
       state: function () {
         var mouth = { normal: "smile", happy: "grin", proud: "grin", sad: "frown", cry: "frown", wow: "o", think: "flat", tense: "grit", panic: "yell", drowsy: "smile", sleep: "o" }[face] || "smile";
-        return { style: "nucleo", mood: Math.round(mood * 100) / 100, face: face, gesture: pose, mouth: mouth, hidden: hidden, reduce: reduce, tension: tens, sleepy: sleepy, acts: acts };
+        return { style: "nucleo", mood: Math.round(mood * 100) / 100, face: face, gesture: pose, mouth: mouth, hidden: hidden, reduce: reduce, tension: tens, sleepy: sleepy, acts: acts, x: x, held: held };
       },
       setHidden: function (h) { applyHidden(h, true); },
       // Test hooks: run one idle act now; pretend he has been left alone for ms.
       idleNow: function () { idleAct(); },
+      hold: hold,
+      walkTo: function (nx) { walkTo(nx); },
       leftAlone: function (ms) { lastInput = Date.now() - ms; },
       destroy: function () {
         dead = true;
