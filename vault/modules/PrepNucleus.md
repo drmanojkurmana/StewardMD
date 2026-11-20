@@ -92,6 +92,12 @@ more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".
 - **Tests:** `test/prep-buddy.test.mjs` (decide/doneLine), `test/run-prep-buddy-ui.mjs` (headless, SHOTS=<dir>).
   Not seen on a phone yet.
 
+- **Bubble look (2026-11-20, owner: "premium non ai slop"):** the bubble copies PrepNucleus tokens from `#smdPrep`
+  (`tokens()`, re-read when body's class changes) so it is the screen's own card in light and dark; slump = one tonal
+  primary (`--pn-pri-soft` / `--pn-pri-ink`) + a text "Keep going"; topic named alone and bold (`buddyTopic` drops the
+  "Subject · " prefix); tail aimed at the mascot from layout sizes (`aim()`; rects are scaled mid-entrance); quick ask =
+  title, one hairline list with chevrons, one field with an inline send (disabled until typed). Entrance 280 ms
+  `--pn-ease` from the tail, 140 ms exit. Impeccable detector clean.
 - **Nucleo, PrepNucleus's own mascot (2026-11-20, `prep-mascot.js`, `?v=prep190`, owner: "create new mascot to suit
   prepnucleus"):** default character of the buddy. A cell nucleus in hematoxylin blue-violet (membrane with pores,
   nucleolus, chromatin curl) in a graduation cap with a PrepNucleus-amber tassel. One inline SVG; faces (`data-face`:

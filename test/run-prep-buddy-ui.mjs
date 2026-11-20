@@ -110,7 +110,11 @@ try {
   await next(); await pickAns(2); await next(); await pickAns(3);
   ok(await until(`return !!document.querySelector(".pnb-bub [data-b=rev]");`, 2000), "3 wrong in a row: he asks to revise the topic, with Revise topic and Keep going");
   ok(await ev(`return [].every.call(document.querySelectorAll(".pnb-bub button"), function(b){ return b.getBoundingClientRect().height >= 43.5; });`) === true, "bubble buttons are at least 44 px");
+  ok(await ev(`var b=document.querySelector(".pnb-bub"); return !!b.querySelector("b") && !/Anatomy \u00b7/.test(b.textContent);`) === true, "the topic is named on its own, in bold (" + await bub() + ")");
+  ok(await ev(`var b=document.querySelector(".pnb-bub"), a=document.querySelector("#pnBuddy .pnm-hit, #pnBuddy .mkc-a"), tail=parseFloat(b.style.getPropertyValue("--pnb-tail")), br=b.getBoundingClientRect(), r=a.getBoundingClientRect(); return Math.abs((br.right - tail) - (r.left + r.width/2)) < 3;`) === true, "the tail points at the mascot");
+  ok(await ev(`var b=document.querySelector(".pnb-bub"), rt=getComputedStyle(document.getElementById("smdPrep")); return b.style.getPropertyValue("--pn-card").trim() === rt.getPropertyValue("--pn-card").trim() && !!rt.getPropertyValue("--pn-card").trim();`) === true, "the bubble wears PrepNucleus's own card colour");
   await shot("slump");
+  await theme(true); await shot("slump"); await theme(false);
   await click(".pnb-bub [data-b=rev]"); await sleep(800);
   ok(await until(`return !document.querySelector("#pnBuddy") && !/Buddy question/.test((document.querySelector("#smdPrep .pn-q")||{textContent:""}).textContent);`, 4000), "Revise topic opens the module screen; the buddy leaves with the set");
   await ev(`PREP.back(); return 1;`);
@@ -121,8 +125,9 @@ try {
 
   // Tap him: the quick-ask bubble; a chip opens Ask MaiK for this question with the words filled in.
   await ev(`PREP_BUDDY.quickAsk(); return 1;`);
-  ok(await until(`return !!document.querySelector(".pnb-bub .pnb-chips button") && !!document.querySelector(".pnb-bub input");`, 2000), "tap: a quick-ask bubble with chips and a box");
+  ok(await until(`return !!document.querySelector(".pnb-bub .pnb-list button") && !!document.querySelector(".pnb-bub input");`, 2000), "tap: a quick-ask bubble with chips and a box");
   ok(await ev(`return parseFloat(getComputedStyle(document.querySelector(".pnb-bub input")).fontSize) >= 16;`) === true, "the box is 16 px (no iOS zoom on focus)");
+  ok(await ev(`return document.querySelector(".pnb-in button").disabled;`) === true, "send is disabled until something is typed");
   await shot("quickask");
   await theme(true); await shot("quickask"); await theme(false);
   await ev(`document.querySelector(".pnb-bub input").value = "Why is A right?"; document.querySelector(".pnb-bub form").requestSubmit(); return 1;`);

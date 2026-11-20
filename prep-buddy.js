@@ -24,10 +24,10 @@
     back: ["There you go. Back on track.", "That's the comeback.", "Back on form. Keep going."],
     wrong: ["Not this time. Read why, it will stick.", "Close one. The explanation is worth a look.",
       "A miss now saves marks later.", "Every miss teaches something. Keep going."],
-    slump: ["A few misses on {t}. Revise it and come back stronger?", "{t} needs a little more work. Revise it now?"],
+    slump: ["{t} is tripping you up. Revise it now?", "{t} needs another look. Revise it now?"],
     slumpNoT: ["A few misses in a row. Take a quick look at the topic?"],
     // No module screen to open (a deck, a paper, a topic not loaded): the same thought, for after the set.
-    later: ["A few misses on {t}. Worth revising after this set."],
+    later: ["{t} needs another look. Revise it after this set."],
     laterNoT: ["A few misses in a row. Worth a look at the topic after this set."],
     hi80: ["Excellent set, {p}%.", "{p}%. Superb work."],
     hi50: ["Good work, {p}%. Review the misses once.", "{p}%. Solid. Go over the misses."],
@@ -66,7 +66,7 @@
     if ((wrongRun >= 3 || inMod >= 3) && m !== "|" && !mem.rv[m]) {
       mem.rv[m] = 1;
       var t = String(o.topic || "").trim();
-      return { kind: "slump", n: wrongRun, revise: true, say: t ? fill(pick(L.slump, rnd), { t: t }) : pick(L.slumpNoT, rnd),
+      return { kind: "slump", n: wrongRun, revise: true, topic: t, say: t ? fill(pick(L.slump, rnd), { t: t }) : pick(L.slumpNoT, rnd),
         later: t ? fill(pick(L.later, rnd), { t: t }) : pick(L.laterNoT, rnd) };
     }
     // A miss speaks on the first of a run and then every other one, so a bad patch is not a lecture.
@@ -95,31 +95,48 @@
   var CSS = "#pnBuddy{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(var(--pnb-lift,0px) + 8px + var(--pnb-safe,env(safe-area-inset-bottom,0px)));width:150px;height:36px;z-index:886;pointer-events:none;transition:bottom .22s cubic-bezier(.23,1,.32,1)}" +
     "#pnBuddy .mkc{top:0}" +
     "#pnBuddy.pnb-nuc{width:64px;height:76px}" +
-    "body.pnb-nucleo .pnb-bub{bottom:calc(var(--pnb-lift,0px) + 90px + var(--pnb-safe,env(safe-area-inset-bottom,0px)))}" +
     "body.pnb-nucleo .pn-root.pnb-on .pn-run{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}" +
     "#pnBuddy .mkc-tab{left:auto;right:0;bottom:2px;border-left:1px solid var(--pn-edge,#d5dde6);border-right:0;border-radius:10px 0 0 10px;pointer-events:auto}" +
     "body:has(#pnAsk) #pnBuddy,body:has(.pn-zoom) #pnBuddy{display:none}" +
-    ".pnb-bub{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(var(--pnb-lift,0px) + 76px + var(--pnb-safe,env(safe-area-inset-bottom,0px)));z-index:887;max-width:min(300px,calc(100vw - 24px));box-sizing:border-box;padding:10px 12px;border-radius:14px;" +
-    "background:var(--pn-card,#fff);color:var(--pn-ink,#14202a);border:1px solid var(--pn-edge,#d5dde6);box-shadow:0 6px 24px rgba(8,19,26,.16);font:500 14.5px/1.4 Inter,system-ui,sans-serif;pointer-events:auto;" +
-    "transform-origin:90% 100%;animation:pnb-in .22s cubic-bezier(.23,1,.32,1)}" +
-    ".pnb-bub:after{content:'';position:absolute;right:30px;bottom:-6px;width:10px;height:10px;background:inherit;border-right:1px solid var(--pn-edge,#d5dde6);border-bottom:1px solid var(--pn-edge,#d5dde6);transform:rotate(45deg)}" +
-    ".pnb-bub p{margin:0}" +
-    ".pnb-row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}" +
-    ".pnb-row button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--pn-edge,#d5dde6);background:transparent;color:inherit;font:600 14px/1 Inter,system-ui,sans-serif;cursor:pointer}" +
-    ".pnb-row button.pri{background:var(--pn-acc,#0e6e63);border-color:transparent;color:#fff}" +
-    ".pnb-chips{display:flex;flex-direction:column;gap:6px;margin-top:8px}" +
-    ".pnb-chips button{min-height:44px;text-align:left;padding:0 12px;border-radius:12px;border:1px solid var(--pn-edge,#d5dde6);background:transparent;color:inherit;font:500 14px/1.2 Inter,system-ui,sans-serif;cursor:pointer}" +
-    ".pnb-in{display:flex;gap:6px;margin-top:8px}" +
-    ".pnb-in input{flex:1;min-width:0;min-height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--pn-edge,#d5dde6);background:var(--pn-bg,#fff);color:inherit;font:16px/1.2 Inter,system-ui,sans-serif}" +
-    ".pnb-in button{min-width:64px;min-height:44px;border-radius:12px;border:0;background:var(--pn-acc,#0e6e63);color:#fff;font:600 14px/1 Inter,system-ui,sans-serif}" +
-    "body.dark .pnb-bub{background:#16222b;color:#e8eef2;border-color:#2a3a46}" +
-    "body.dark .pnb-bub:after,body.dark .pnb-row button,body.dark .pnb-chips button{border-color:#2a3a46}" +
-    "body.dark .pnb-in input{background:#0e171d;border-color:#2a3a46;color:#e8eef2}" +
-    "body.dark .pnb-in input::placeholder{color:#8a9aa5}" +
+    /* The bubble lives on <body> (the set repaints #smdPrep), so it carries PrepNucleus's own tokens copied from the root
+       (tokens()): the same card, ink, hairline, radii and springs as the screen behind it, light and dark. */
+    ".pnb-bub{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(var(--pnb-lift,0px) + 76px + var(--pnb-safe,env(safe-area-inset-bottom,0px)));z-index:887;" +
+    "width:max-content;max-width:min(288px,calc(100vw - 24px));box-sizing:border-box;padding:14px 16px;border-radius:var(--pn-r-lg,16px);" +
+    "background:var(--pn-card,#fff);color:var(--pn-text,#13203d);border:1px solid var(--pn-edge,#e3e1da);" +
+    "box-shadow:0 1px 2px rgba(19,32,61,.08),0 18px 40px -16px rgba(19,32,61,.38);" +
+    "font:400 15px/1.45 var(--sans,-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,sans-serif);letter-spacing:-.005em;-webkit-font-smoothing:antialiased;pointer-events:auto;" +
+    "transform-origin:calc(100% - var(--pnb-tail,32px)) calc(100% + 8px);animation:pnb-in var(--pn-d-enter,280ms) var(--pn-ease,cubic-bezier(.23,1,.32,1)) both}" +
+    ".pnb-bub.out{animation:pnb-out .14s ease-in forwards;pointer-events:none}" +
+    "body.dark .pnb-bub{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 22px 44px -14px rgba(0,0,0,.7)}" +
+    // the tail: a rotated square in the card's own fill and hairline, aimed at the mascot's centre (--pnb-tail)
+    ".pnb-bub:after{content:'';position:absolute;right:calc(var(--pnb-tail,32px) - 6px);bottom:-6.5px;width:11px;height:11px;background:inherit;border:solid var(--pn-edge,#e3e1da);border-width:0 1px 1px 0;border-bottom-right-radius:3px;transform:rotate(45deg)}" +
+    ".pnb-bub p{margin:0;text-wrap:pretty}.pnb-bub b{font-weight:650}" +
+    ".pnb-bub :focus{outline:none}.pnb-bub :focus-visible{outline:2px solid var(--pn-pri,#0f3460);outline-offset:2px}" +
+    // slump: one tonal primary, a quiet text secondary
+    ".pnb-row{display:flex;align-items:center;gap:4px;margin:12px -6px -6px 0}" +
+    ".pnb-row button{min-height:44px;padding:0 16px;border:0;border-radius:var(--pn-r-md,12px);font-weight:600;font-size:15px;line-height:1;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color var(--pn-d-press,120ms) ease,transform var(--pn-d-press,120ms) var(--pn-ease,ease)}" +
+    ".pnb-row button.pri{background:var(--pn-pri-soft,#e4eaf3);color:var(--pn-pri-ink,#0f3460)}" +
+    ".pnb-row button.txt{background:none;color:var(--pn-mut,#556079);font-weight:550}" +
+    ".pnb-row button:active{transform:scale(.97)}.pnb-row button.txt:active{background:var(--pn-s1,#ebe9e3)}" +
+    // quick ask: a title, the suggestions as one hairline-divided list, and one field with a send button inside it
+    ".pnb-ask{width:min(288px,calc(100vw - 24px));padding:14px 16px 12px}" +
+    ".pnb-ask .pnb-t{font-weight:650}" +
+    ".pnb-list{margin:8px -16px 0;border-top:1px solid var(--pn-line,#e9e7e1)}" +
+    ".pnb-list button{display:flex;align-items:center;gap:10px;width:100%;min-height:46px;padding:0 14px 0 16px;border:0;border-bottom:1px solid var(--pn-line,#e9e7e1);background:none;color:inherit;font-weight:500;font-size:15px;line-height:1.25;font-family:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}" +
+    ".pnb-list button span{flex:1}.pnb-list button svg{flex:0 0 auto;color:var(--pn-mut2,#6f7890)}" +
+    ".pnb-list button:active{background:var(--pn-s1,#ebe9e3)}" +
+    ".pnb-in{display:flex;align-items:center;gap:4px;margin-top:12px;padding:4px 4px 4px 12px;border-radius:var(--pn-r-md,12px);background:var(--pn-s1,#ebe9e3);border:1px solid transparent;transition:border-color var(--pn-d-quick,180ms) ease}" +
+    ".pnb-in:focus-within{border-color:var(--pn-edge,#e3e1da)}" +
+    ".pnb-in input{flex:1;min-width:0;height:36px;padding:0;border:0;background:none;color:inherit;font-size:16px;line-height:1.2;font-family:inherit;caret-color:var(--pn-fill,#efc07b)}" +
+    ".pnb-in input::placeholder{color:var(--pn-mut2,#6f7890)}.pnb-in input:focus-visible{outline:none}" +
+    ".pnb-in button{flex:0 0 auto;display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:10px;background:var(--pn-fill,#efc07b);color:var(--pn-on-fill,#1a1a2e);cursor:pointer;transition:opacity var(--pn-d-quick,180ms) ease,transform var(--pn-d-press,120ms) var(--pn-ease,ease)}" +
+    ".pnb-in button:disabled{background:transparent;color:var(--pn-mut2,#6f7890);cursor:default}.pnb-in button:not(:disabled):active{transform:scale(.94)}" +
+    "body.pnb-nucleo .pnb-bub{bottom:calc(var(--pnb-lift,0px) + 92px + var(--pnb-safe,env(safe-area-inset-bottom,0px)))}" +
     "#pnBuddy,.pnb-bub{transition:bottom .22s cubic-bezier(.23,1,.32,1)}" +
     ".pn-root.pnb-on .pn-run{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}" +
-    "@keyframes pnb-in{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}" +
-    "@media (prefers-reduced-motion: reduce){.pnb-bub{animation:none}#pnBuddy,.pnb-bub{transition:none}}";
+    "@keyframes pnb-in{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:none}}" +
+    "@keyframes pnb-out{to{opacity:0;transform:translateY(4px) scale(.97)}}" +
+    "@media (prefers-reduced-motion: reduce){.pnb-bub,.pnb-bub.out{animation:none}#pnBuddy,.pnb-bub{transition:none}}";
   function css() { if (D.getElementById("pnb-css")) return; var s = D.createElement("style"); s.id = "pnb-css"; s.textContent = CSS; (D.head || D.documentElement).appendChild(s); }
 
   function mount() {
@@ -162,13 +179,39 @@
   function cue(kind, n) { if (S.mk) try { S.mk.cue("quiz", { kind: kind, n: n }); } catch (e) {} }
 
   /* bubble(html, life, onClick): one bubble at a time; life 0 = stays until tapped away or replaced. */
-  function bubble(html, life, onClick) {
+  // PrepNucleus tokens the bubble needs, read from the root (theme-correct, dark included) onto the bubble.
+  var TOK = ["--pn-card", "--pn-text", "--pn-mut", "--pn-mut2", "--pn-edge", "--pn-line", "--pn-s1", "--pn-pri", "--pn-pri-soft", "--pn-pri-ink",
+    "--pn-fill", "--pn-on-fill", "--pn-r-md", "--pn-r-lg", "--pn-ease", "--pn-d-enter", "--pn-d-press", "--pn-d-quick"];
+  function tokens(b) {
+    var rt = S.host && S.host.root && S.host.root(); if (!rt) return;
+    try { var cs = G.getComputedStyle(rt); TOK.forEach(function (k) { var v = cs.getPropertyValue(k).trim(); if (v) b.style.setProperty(k, v); }); } catch (e) {}
+  }
+  // The tail points at the mascot's middle, wherever he stands (the MaiK companion walks; Nucleo stays put).
+  function aim(b) {
+    try {
+      // Layout sizes, not getBoundingClientRect: the bubble is mid-entrance (scaled) when this runs.
+      var who = S.box && (S.box.querySelector(".pnm-hit") || S.box.querySelector(".mkc-a")), w = b.offsetWidth;
+      if (!who || !w) return;
+      var right = D.documentElement.clientWidth - (parseFloat(G.getComputedStyle(b).right) || 0);
+      var r = who.getBoundingClientRect(), off = right - (r.left + r.width / 2);
+      b.style.setProperty("--pnb-tail", Math.round(Math.max(22, Math.min(w - 22, off))) + "px");
+    } catch (e) {}
+  }
+  function drop(b) {
+    if (!b || !b.parentNode) return;
+    if (reduced()) { b.parentNode.removeChild(b); return; }
+    b.classList.add("out");
+    G.setTimeout(function () { if (b.parentNode) b.parentNode.removeChild(b); }, 160);
+  }
+  function bubble(html, life, onClick, cls) {
     G.clearTimeout(S.bubT);
-    if (S.bub && S.bub.parentNode) S.bub.parentNode.removeChild(S.bub);
+    drop(S.bub);
     S.bub = null;
     if (!html || !S.box || hiddenByUser()) return null;
-    var b = D.createElement("div"); b.className = "pnb-bub"; b.setAttribute("role", "status"); b.innerHTML = html;
+    var b = D.createElement("div"); b.className = "pnb-bub" + (cls ? " " + cls : ""); b.setAttribute("role", "status"); b.innerHTML = html;
+    tokens(b);
     D.body.appendChild(b); S.bub = b;
+    aim(b);
     if (onClick) b.addEventListener("click", onClick);
     if (life) S.bubT = G.setTimeout(function () { if (S.bub === b) bubble(null); }, life);
     return b;
@@ -197,7 +240,8 @@
     var canRev = false; try { canRev = !!(d.revise && S.host && S.host.buddyCanRevise && S.host.buddyCanRevise(it)); } catch (e) {}
     if (d.revise && !canRev) { say(d.later, 4600); return; }
     if (canRev) {
-      var b = bubble("<p>" + esc(d.say) + '</p><div class="pnb-row"><button type="button" class="pri" data-b="rev">Revise topic</button><button type="button" data-b="go">Keep going</button></div>', 0, function (e) {
+      var line = esc(d.say); if (d.topic) line = line.replace(esc(d.topic), "<b>" + esc(d.topic) + "</b>");
+      var b = bubble("<p>" + line + '</p><div class="pnb-row"><button type="button" class="pri" data-b="rev">Revise topic</button><button type="button" class="txt" data-b="go">Keep going</button></div>', 0, function (e) {
         var t = e.target && e.target.closest && e.target.closest("[data-b]"); if (!t) return;
         bubble(null);
         if (t.getAttribute("data-b") === "rev") { try { S.host.buddyRevise(it); } catch (x) {} }
@@ -225,13 +269,16 @@
     if (S.bub && S.bub.querySelector(".pnb-in")) { bubble(null); return; }
     var r = S.run, it = r && r.items[r.i]; if (!it || !S.host || !S.host.buddyAsk) return;
     var shown = r.ans[r.i] >= 0, chips = shown ? ["Explain this simply", "Why are the others wrong?", "Give me a memory trick"] : ["Give me a hint", "What is this question testing?"];
-    var b = bubble("<p>Ask MaiK about this question</p>" +
-      '<div class="pnb-chips">' + chips.map(function (c) { return '<button type="button" data-q="' + esc(c) + '">' + esc(c) + "</button>"; }).join("") + "</div>" +
-      '<form class="pnb-in"><input type="text" enterkeyhint="send" aria-label="Your question" placeholder="Or type a question"><button type="submit">Ask</button></form>', 0, function (e) {
+    var CHEV = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+    var SEND = '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>';
+    var b = bubble('<p class="pnb-t">Ask MaiK about this question</p>' +
+      '<div class="pnb-list">' + chips.map(function (c) { return '<button type="button" data-q="' + esc(c) + '"><span>' + esc(c) + "</span>" + CHEV + "</button>"; }).join("") + "</div>" +
+      '<form class="pnb-in"><input type="text" enterkeyhint="send" aria-label="Your question" placeholder="Or type your own"><button type="submit" aria-label="Ask MaiK" disabled>' + SEND + "</button></form>", 0, function (e) {
       var c = e.target && e.target.closest && e.target.closest("[data-q]"); if (c) go(c.getAttribute("data-q"));
-    });
+    }, "pnb-ask");
     if (!b) return;
-    var form = b.querySelector("form");
+    var form = b.querySelector("form"), inp = form.querySelector("input"), sendB = form.querySelector("button");
+    inp.addEventListener("input", function () { sendB.disabled = !String(inp.value || "").trim(); });
     form.addEventListener("submit", function (e) { e.preventDefault(); var v = String(form.querySelector("input").value || "").trim(); if (v) go(v); });
     function go(q) { bubble(null); try { S.host.buddyAsk(r, q); } catch (x) {} }
   }
@@ -239,6 +286,8 @@
   // A tap outside the bubble (not on him) closes it; Escape too.
   D.addEventListener("pointerdown", function (e) { if (S.bub && !S.bub.contains(e.target) && !(S.box && S.box.contains(e.target))) bubble(null); }, true);
   D.addEventListener("keydown", function (e) { if (S.bub && e.key === "Escape") bubble(null); });
+  // Light/dark switched while a bubble is open: it takes the new theme's tokens.
+  try { new G.MutationObserver(function () { if (S.bub) tokens(S.bub); }).observe(D.body, { attributes: true, attributeFilter: ["class"] }); } catch (e) {}
   // The Next bar sticks or unsticks as the set's page scrolls.
   D.addEventListener("scroll", placeSoon, true);
   G.addEventListener("resize", placeSoon);

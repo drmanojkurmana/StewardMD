@@ -4776,7 +4776,8 @@
   var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
     run: runQuestions, fixes: fixesFor,
     // MaiK buddy (prep-buddy.js): the topic's name, revise it (its module screen; back returns to the set), ask MaiK.
-    buddyTopic: kyItemName,
+    // The topic's own name ("Gametogenesis"), not the coach's "Subject · Topic" breadcrumb.
+    buddyTopic: function (it) { var n = kyItemName(it), k = n.lastIndexOf(" \u00b7 "); return k >= 0 ? n.slice(k + 3) : n; },
     // Only a topic whose subject index is loaded: renderModule draws nothing for an unknown one (a blank pushed screen).
     buddyCanRevise: function (it) { return !!(it && it._s && it._s !== "deck" && !it._py && (it._m || it.t) && topicOf(it._s, it._m || it.t)); },
     buddyRevise: function (it) { if (HOST.buddyCanRevise(it)) openModule(it._s, it._m || it.t); },
