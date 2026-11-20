@@ -190,7 +190,7 @@
     if (!body) return "";
     return '<div class="sgx-media">' + body +
       '<div class="cap">' + esc(m.caption) + "</div>" +
-      '<div class="attr">' + esc(m.attribution) + (m.licence ? " · " + esc(m.licence) : "") + "</div></div>";
+      '<div class="attr">' + esc(m.attribution) + (m.licence && m.licence !== m.attribution ? " · " + esc(m.licence) : "") + "</div></div>";
   }
 
   /* ── citations ───────────────────────────────────────────────────────────── */

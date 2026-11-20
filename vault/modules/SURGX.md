@@ -381,7 +381,8 @@ ids `fpTqrJVSxpI`, `H7LyCwzaZEo`; `D1NmYz66D9w` removed 2026-11-20 as an audio p
 ## Step pictures (2026-11-20, owner experiment)
 Appendicectomy: one AI-generated 3D teaching picture per step (19), made in Gemini from the prompt in this session,
 reviewed only by eye. `surgx/media/appendicectomy/*.webp` (1200x900, 852 KB total), registry ids
-`med.surgx.app-step-01..19`, attribution `StewardMD` (passes `isOwnerProduced`).
+`med.surgx.app-step-01..19`. Credit line reads "StewardMD original" (owner 2026-11-20); the AI origin is kept in
+the entry's `generator` field, not shown. `mediaBlock()` prints the licence only when it differs from the attribution.
 - Pictures attach to the PROCEDURE's step reference (`{ "ref": ..., "media": [id] }`), not the shared step, because a
   shared step serves many procedures. `compileProcedure()` concatenates `ref.media` onto the step's own `media`.
 - `renderStep()` renders step media when `smd_surgx_step_images` is on (def true, `?surgxstepimg=0` hides).
