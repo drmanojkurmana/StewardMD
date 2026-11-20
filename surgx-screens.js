@@ -181,6 +181,12 @@
     var body = "";
     if (m.inline && DIA()) body = DIA().get(m.diagramId) || "";
     else if (m.src) body = '<img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">';
+    // YouTube rejects capacitor://localhost as an origin, so play through the https shim CliniX uses (ids allow-listed there).
+    else if (m.kind === "embed" && m.embeddable) {
+      body = '<div class="sgx-embed"><iframe src="https://stewardmd.in/_site/yt?v=' + attr(m.videoId) + '" title="' + attr(m.title) +
+        '" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe></div>' +
+        '<div class="cap"><b>' + esc(m.title) + "</b></div>";
+    }
     if (!body) return "";
     return '<div class="sgx-media">' + body +
       '<div class="cap">' + esc(m.caption) + "</div>" +

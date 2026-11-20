@@ -363,3 +363,17 @@ as CliniX `.cx-hero-close`), the monogram inline with the live-text wordmark (`.
 heading and one grouped card (`.sgx-secs`) of rows with icon tiles (`SECTIONS[].icon`). The educational-content
 note moved to the footer disclaimer. Inner screens still use `head()` and its sticky bar. CSS block at the end
 of `surgx.css`.
+
+## YouTube videos in Procedures (2026-11-20, owner experiment)
+Owner asked for YouTube surgery videos in the Steps tab while per-step 3D images (Gemini) are being made.
+Appendicectomy first: three `kind:"embed"` entries in `surgx/media/manifest.json` (`med.surgx.appendix-video-*`,
+ids `fpTqrJVSxpI`, `H7LyCwzaZEo`, `D1NmYz66D9w`), listed in the procedure's `media.steps`.
+- `surgx-screens.js` `mediaBlock()` plays an embed through the CliniX shim `https://stewardmd.in/_site/yt?v=`
+  (YouTube rejects the `capacitor://` origin). Each id must be in `_site/yt.html` `ALLOW`, or the shim refuses it.
+- Licence gate: a cleared embed must pass `isEmbeddable()` AND be in the shim allow-list
+  (`test/surgx-content.test.mjs`). Embedding was confirmed allowed by the uploader via YouTube oEmbed (200, not 401).
+  The Nucleus Medical Media animations refuse embedding (401), so they are not used.
+- **Not clinically vetted.** The videos were chosen by title and channel; nobody has watched them for accuracy.
+  Videos are whole-operation, not per step: chapter timestamps could not be read from here.
+- Revert: delete the three media entries and their ids from `media.steps`.
+- The shim change is live only once `main` deploys; the app change needs build-www + native rebuild.

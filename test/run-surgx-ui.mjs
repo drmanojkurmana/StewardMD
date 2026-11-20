@@ -206,6 +206,9 @@ try {
     "the step runner renders the shared + local steps in order");
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('At risk:')")) === true,
     "structures at risk are surfaced on the steps that carry them");
+  ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return f.src.split('v=')[1]; }).join(',')")) ===
+    "fpTqrJVSxpI,H7LyCwzaZEo,D1NmYz66D9w",
+    "VIDEO: the Steps tab plays the three appendicectomy videos through the stewardmd.in YouTube shim");
 
   await clickText("#surgxRoot .sgx-tab", "Anatomy");
   await sleep(300);

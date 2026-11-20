@@ -440,6 +440,8 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 
 #surgxRoot .sgx-media { margin: 10px 0; }
 #surgxRoot .sgx-media img, #surgxRoot .sgx-media svg { width: 100%; height: auto; display: block; border-radius: var(--sgx-r-ctl); }
+#surgxRoot .sgx-embed { aspect-ratio: 16 / 9; border-radius: var(--sgx-r-ctl); overflow: hidden; background: #000; }
+#surgxRoot .sgx-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 #surgxRoot .sgx-media .cap { margin-top: 6px; font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-media .attr { margin-top: 3px; font: 500 10.5px/1.4 var(--sgx-sans); color: var(--sgx-faint); }
 #surgxRoot .sgx-media.pending {

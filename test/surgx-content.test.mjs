@@ -334,10 +334,16 @@ test("media: every entry validates", () => {
   });
 });
 
-test("media: ONLY self-authored inline diagrams are cleared, and every one has a real diagram", () => {
+test("media: cleared = a self-authored inline diagram OR a YouTube embed the inline shim allow-lists", () => {
+  const shim = readFileSync(join(ROOT, "_site", "yt.html"), "utf8");
   Object.keys(media.media).forEach((id) => {
     const m = media.media[id];
     if (!m.cleared) return;
+    if (m.kind === "embed") {
+      assert.equal(M.isEmbeddable(m), true, id + " is a cleared embed but not embeddable");
+      assert.ok(shim.includes('"' + m.videoId + '": 1'), id + " (" + m.videoId + ") is missing from _site/yt.html ALLOW, so it cannot play in the app");
+      return;
+    }
     assert.equal(m.inline, true, id + " is cleared but is not a self-authored inline diagram");
     assert.ok(/StewardMD/i.test(m.attribution), id + " is cleared but not attributed to StewardMD");
     assert.ok(DIA.get(m.diagramId), id + " references diagram '" + m.diagramId + "' which surgx-diagrams.js does not draw");

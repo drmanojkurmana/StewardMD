@@ -1,7 +1,7 @@
 {
   "_comment": "SURGX media registry AND THE LICENCE GATE. Absence of a licence record is a REFUSAL, not a default-allow (assets/kardiox-learn/ holds 872 images with no manifest and no licence record; that is the failure mode this exists to prevent). An uncleared entry is a WORK ORDER: it must say what is needed and where to look, and it renders as a caption plus 'visual pending' until it is cleared. Only self-authored inline SVG is cleared today, because it is the one kind of media that needs no sourcing and whose provenance we can honestly assert.",
   "schemaVersion": 1,
-  "updated": "2026-08-24",
+  "updated": "2026-11-20",
   "media": {
     "med.surgx.appendix-anatomy": {
       "id": "med.surgx.appendix-anatomy",
@@ -79,6 +79,45 @@
       "caption": "A narrated laparoscopic cholecystectomy demonstrating achievement of the Critical View of Safety.",
       "cleared": false,
       "note": "WORK ORDER: SAGES publishes safe-cholecystectomy teaching video. Confirm the embedding terms in writing before adding videoId + embeddable:true. Do not hotlink or re-host. Note that a permitted embed also needs the /_site/yt shim on native, as CliniX documents."
+    },
+
+    "med.surgx.appendix-video-animation": {
+      "id": "med.surgx.appendix-video-animation",
+      "kind": "embed",
+      "videoId": "fpTqrJVSxpI",
+      "embeddable": true,
+      "title": "Laparoscopic and open appendicectomy: medical animation",
+      "caption": "Animated walk-through of both approaches. Watch first for the overall sequence.",
+      "cleared": true,
+      "licence": "Standard YouTube Licence, played in the rights holder's embedded player",
+      "attribution": "E-Pulsepoints",
+      "sourceUrl": "https://www.youtube.com/watch?v=fpTqrJVSxpI"
+    },
+
+    "med.surgx.appendix-video-technique": {
+      "id": "med.surgx.appendix-video-technique",
+      "kind": "embed",
+      "videoId": "H7LyCwzaZEo",
+      "embeddable": true,
+      "title": "Laparoscopic appendicectomy: step-by-step technique and landmarks",
+      "caption": "Short technique video focused on the landmarks used at each step.",
+      "cleared": true,
+      "licence": "Standard YouTube Licence, played in the rights holder's embedded player",
+      "attribution": "Visceral Focus",
+      "sourceUrl": "https://www.youtube.com/watch?v=H7LyCwzaZEo"
+    },
+
+    "med.surgx.appendix-video-guide": {
+      "id": "med.surgx.appendix-video-guide",
+      "kind": "embed",
+      "videoId": "D1NmYz66D9w",
+      "embeddable": true,
+      "title": "Laparoscopic appendicectomy: a step-by-step surgical guide",
+      "caption": "Longer step-by-step guide to the whole operation.",
+      "cleared": true,
+      "licence": "Standard YouTube Licence, played in the rights holder's embedded player",
+      "attribution": "The Surgical Edge",
+      "sourceUrl": "https://www.youtube.com/watch?v=D1NmYz66D9w"
     }
   }
 }
