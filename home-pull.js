@@ -37,7 +37,7 @@
   var CSS = "html #homeV2#homeV2 > .hv-pull{position:absolute;left:0;right:0;top:0;height:0;z-index:0;overflow:hidden;pointer-events:none;" +
       "background:var(--hvp-bg,var(--hrf-h0,#0c3b3e));display:flex;flex-direction:column;align-items:center;justify-content:flex-end;contain:strict}" +
     // a whisper of light from the line, so the band reads as one lit surface with the hero rather than a flat slab
-    "#homeV2 > .hv-pull::before{content:'';position:absolute;inset:0;background:radial-gradient(56% 64% at 50% 70%,color-mix(in srgb,var(--hrf-mint,#6ee7c8) 9%,transparent),transparent 72%);opacity:0;transition:opacity .4s ease;" +
+    "#homeV2 > .hv-pull::before{content:'';position:absolute;inset:0;background:radial-gradient(56% 64% at 50% 70%,rgba(245,196,98,.10),transparent 72%);opacity:0;transition:opacity .4s ease;" +
       // the glow fades out before the band's bottom edge, so it never draws a line where the band meets the hero
       "-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 92%);mask-image:linear-gradient(180deg,#000 55%,transparent 92%)}" +
     "#homeV2 > .hv-pull.armed::before,#homeV2 > .hv-pull.busy::before{opacity:1}" +
@@ -46,10 +46,10 @@
     // a monitor trace: a fine line that fades in and out at its ends, a soft phosphor afterglow under it, a bright head
     "#homeV2 > .hv-pull .ln,#homeV2 > .hv-pull .gl{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}" +
     "#homeV2 > .hv-pull .ln{stroke:url(#hvpGr);stroke-width:1.75px}" +
-    "#homeV2 > .hv-pull .gl{stroke:var(--hrf-mint,#7fe3cf);stroke-width:7px;opacity:.16;filter:url(#hvpSoft)}" +
-    "#homeV2 > .hv-pull .dot{fill:#effffa;filter:url(#hvpHalo);opacity:0;transition:opacity .2s ease}" +
+    "#homeV2 > .hv-pull .gl{stroke:#f5c462;stroke-width:8px;opacity:.28;filter:url(#hvpSoft)}" +
+    "#homeV2 > .hv-pull .dot{fill:#fff7e0;filter:url(#hvpHalo);opacity:0;transition:opacity .2s ease}" +
     // the heart: a soft gradient, no outline; pops past the line and beats lub-dub
-    "#homeV2 > .hv-pull .ht{fill:url(#hvpHt);transform-box:fill-box;transform-origin:50% 55%;transform:scale(0);opacity:0}" +
+    "#homeV2 > .hv-pull .ht{fill:url(#hvpHt);filter:url(#hvpHtGlow);transform-box:fill-box;transform-origin:50% 55%;transform:scale(0);opacity:0}" +
     "#homeV2 > .hv-pull.armed .ht{animation:hvp-pop .55s cubic-bezier(.2,1.4,.4,1) forwards,hvp-lubdub 1.15s ease-in-out .55s infinite}" +
     "#homeV2 > .hv-pull.busy .ht{opacity:0;transform:scale(0)}" +
     "#homeV2 > .hv-pull.busy .ht.beat{animation:hvp-pop .5s cubic-bezier(.2,1.4,.4,1) forwards,hvp-lubdub 1.15s ease-in-out .5s 2}" +
@@ -68,10 +68,11 @@
   // Order (column-reverse): the line sits next to the hero, so it is the first thing a pull reveals; the words come above.
   // The trace's defs: an end-faded stroke, the afterglow blur, the head's halo, the heart's gradient.
   var DEFS = '<defs>' +
-    '<linearGradient id="hvpGr" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="503" y2="0"><stop offset="0" stop-color="#9ff0de" stop-opacity="0"/><stop offset=".14" stop-color="#9ff0de"/><stop offset=".5" stop-color="#c8fff1"/><stop offset=".86" stop-color="#9ff0de"/><stop offset="1" stop-color="#9ff0de" stop-opacity="0"/></linearGradient>' +
+    '<linearGradient id="hvpGr" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="503" y2="0"><stop offset="0" stop-color="#e9b24f" stop-opacity="0"/><stop offset=".14" stop-color="#e9b24f"/><stop offset=".5" stop-color="#ffe6a6"/><stop offset=".86" stop-color="#e9b24f"/><stop offset="1" stop-color="#e9b24f" stop-opacity="0"/></linearGradient>' +
     '<filter id="hvpSoft" x="-10%" y="-60%" width="120%" height="220%"><feGaussianBlur stdDeviation="3.2"/></filter>' +
     '<filter id="hvpHalo" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
-    '<radialGradient id="hvpHt" cx="38%" cy="32%" r="80%"><stop offset="0" stop-color="#ffd0da"/><stop offset=".55" stop-color="#ff8aa3"/><stop offset="1" stop-color="#e85a7c"/></radialGradient>' +
+    '<radialGradient id="hvpHt" cx="36%" cy="30%" r="85%"><stop offset="0" stop-color="#d4224a"/><stop offset=".5" stop-color="#8e0c2c"/><stop offset="1" stop-color="#4c0315"/></radialGradient>' +
+    '<filter id="hvpHtGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceAlpha" stdDeviation="6" result="b"/><feFlood flood-color="#ff2b55" flood-opacity=".85"/><feComposite in2="b" operator="in" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
     '</defs>';
 
   var S = { home: null, sc: null, band: null, path: null, txt: null, n: Math.floor(Math.random() * 1000), phase: "home", h: 0, mo: null };
