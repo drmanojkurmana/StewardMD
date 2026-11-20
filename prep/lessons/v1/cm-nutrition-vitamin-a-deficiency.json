@@ -26,12 +26,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Retinal rod function fails"},
-     {"id": "b", "label": "Child stumbles at dusk"},
-     {"id": "c", "label": "Mother reports night blindness"},
-     {"id": "d", "label": "Treatment before surface signs"}
+     {
+      "id": "a",
+      "label": "Retinal rod function fails"
+     },
+     {
+      "id": "b",
+      "label": "Child stumbles at dusk"
+     },
+     {
+      "id": "c",
+      "label": "Mother reports night blindness"
+     },
+     {
+      "id": "d",
+      "label": "Treatment before surface signs"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -40,12 +65,27 @@
    "say": "Treat on sight, repeat tomorrow. Fifty, one hundred or two hundred thousand units by age band, third dose in a month when eye signs exist. Corneal disease never waits for laboratory confirmation.",
    "vis": {
     "kind": "table",
-    "cols": ["Age", "Dose, day 1 and day 2"],
+    "cols": [
+     "Age",
+     "Dose, day 1 and day 2"
+    ],
     "rows": [
-     ["Under 6 months", "50000 IU"],
-     ["6 to 11 months", "100000 IU"],
-     ["12 months and above", "200000 IU"],
-     ["With clinical eye signs", "Third dose at 4 to 6 weeks"]
+     [
+      "Under 6 months",
+      "50000 IU"
+     ],
+     [
+      "6 to 11 months",
+      "100000 IU"
+     ],
+     [
+      "12 months and above",
+      "200000 IU"
+     ],
+     [
+      "With clinical eye signs",
+      "Third dose at 4 to 6 weeks"
+     ]
     ]
    }
   },
@@ -66,11 +106,23 @@
    "say": "Prevention rides the vaccine visit. One lakh units at nine months, two lakh six-monthly to age five. Bitot spots fell under one percent and keratomalacia nearly vanished on that cadence nationally.",
    "vis": {
     "kind": "table",
-    "cols": ["Contact", "Prophylactic dose"],
+    "cols": [
+     "Contact",
+     "Prophylactic dose"
+    ],
     "rows": [
-     ["9 months, with MR vaccine", "100000 IU (1 ml)"],
-     ["16 to 18 months", "200000 IU (2 ml)"],
-     ["Every 6 months to 5 years", "200000 IU, doses to the 9th"]
+     [
+      "9 months, with MR vaccine",
+      "100000 IU (1 ml)"
+     ],
+     [
+      "16 to 18 months",
+      "200000 IU (2 ml)"
+     ],
+     [
+      "Every 6 months to 5 years",
+      "200000 IU, doses to the 9th"
+     ]
     ]
    }
   },
@@ -82,11 +134,19 @@
     "kind": "compare",
     "left": {
      "title": "Subclinical deficiency",
-     "points": ["Low liver stores, normal eyes", "Common in poor diet districts", "Invisible without surveys"]
+     "points": [
+      "Low liver stores, normal eyes",
+      "Common in poor diet districts",
+      "Invisible without surveys"
+     ]
     },
     "right": {
      "title": "After precipitating illness",
-     "points": ["Measles or diarrhoea drains stores", "Night blindness then corneal signs", "Blindness within weeks possible"]
+     "points": [
+      "Measles or diarrhoea drains stores",
+      "Night blindness then corneal signs",
+      "Blindness within weeks possible"
+     ]
     }
    }
   },
@@ -96,11 +156,27 @@
    "say": "Two food families supply it. Animal retinol ready-made; plant carotenoids from green leaves and orange fruit needing fat for absorption. Colostrum is the first rich dose, uniting nutrition and breastfeeding messages.",
    "vis": {
     "kind": "table",
-    "cols": ["Source family", "Examples", "Caveat"],
+    "cols": [
+     "Source family",
+     "Examples",
+     "Caveat"
+    ],
     "rows": [
-     ["Preformed retinol", "Milk, egg, liver", "Cost limits daily use"],
-     ["Carotenoids", "Leafy greens, mango, papaya", "Needs fat for absorption"],
-     ["Colostrum", "First breast milk", "Free, at birth itself"]
+     [
+      "Preformed retinol",
+      "Milk, egg, liver",
+      "Cost limits daily use"
+     ],
+     [
+      "Carotenoids",
+      "Leafy greens, mango, papaya",
+      "Needs fat for absorption"
+     ],
+     [
+      "Colostrum",
+      "First breast milk",
+      "Free, at birth itself"
+     ]
     ]
    }
   },
@@ -110,12 +186,27 @@
    "say": "Thresholds convert surveys into duty. Night blindness over one percent, Bitot spots over half a percent, any corneal signal at population scale. Cross the line and supplementation stops being optional.",
    "vis": {
     "kind": "table",
-    "cols": ["Indicator (24 to 71 months)", "Public health threshold"],
+    "cols": [
+     "Indicator (24 to 71 months)",
+     "Public health threshold"
+    ],
     "rows": [
-     ["Night blindness", "Above 1 percent"],
-     ["Bitot spots", "Above 0.5 percent"],
-     ["Corneal xerophthalmia", "Above 0.01 percent"],
-     ["Low serum retinol", "10 percent or more of children"]
+     [
+      "Night blindness",
+      "Above 1 percent"
+     ],
+     [
+      "Bitot spots",
+      "Above 0.5 percent"
+     ],
+     [
+      "Corneal xerophthalmia",
+      "Above 0.01 percent"
+     ],
+     [
+      "Low serum retinol",
+      "10 percent or more of children"
+     ]
     ]
    }
   },
@@ -127,11 +218,19 @@
     "kind": "compare",
     "left": {
      "title": "Children",
-     "points": ["Periodic megadose safe and effective", "Age-banded IU schedule", "Eye signs trigger treatment course"]
+     "points": [
+      "Periodic megadose safe and effective",
+      "Age-banded IU schedule",
+      "Eye signs trigger treatment course"
+     ]
     },
     "right": {
      "title": "Women of reproductive age",
-     "points": ["Avoid high dose if pregnancy possible", "Dietary and low-dose strategies", "Corneal emergency judged individually"]
+     "points": [
+      "Avoid high dose if pregnancy possible",
+      "Dietary and low-dose strategies",
+      "Corneal emergency judged individually"
+     ]
     }
    }
   },
@@ -142,12 +241,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Marginal vitamin A stores"},
-     {"id": "b", "label": "Infection severity amplified"},
-     {"id": "c", "label": "Eye signs appear as sentinels"},
-     {"id": "d", "label": "Supplementation cuts both risks"}
+     {
+      "id": "a",
+      "label": "Marginal vitamin A stores"
+     },
+     {
+      "id": "b",
+      "label": "Infection severity amplified"
+     },
+     {
+      "id": "c",
+      "label": "Eye signs appear as sentinels"
+     },
+     {
+      "id": "d",
+      "label": "Supplementation cuts both risks"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Xerophthalmia runs XN night blindness, X1A conjunctival xerosis, X1B Bitot spots, X2 corneal xerosis, then X3 ulceration or keratomalacia, XS scar and XF fundus. Treatment repeats on days one and two: 50000 IU below six months, 100000 IU at six to eleven months, 200000 IU from twelve months. Prophylaxis gives 100000 IU at nine months, then 200000 IU six monthly until five years.",
+   "say": "High-yield for the exam: Xerophthalmia runs XN night blindness, X1A conjunctival xerosis, X1B Bitot spots, X2 corneal xerosis, then X3 ulceration or keratomalacia, XS scar and XF fundus. Treatment repeats on days one and two: 50000 IU below six months, 100000 IU at six to eleven months, 200000 IU from twelve months. Prophylaxis gives 100000 IU at nine months, then 200000 IU six monthly until five years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "XN meaning",
+      "Night blindness, earliest functional sign"
+     ],
+     [
+      "X1B meaning",
+      "Bitot spots on conjunctiva"
+     ],
+     [
+      "X2 meaning",
+      "Corneal xerosis, emergency stage"
+     ],
+     [
+      "Treatment below six months",
+      "50000 IU on days one and two"
+     ],
+     [
+      "Treatment six to eleven months",
+      "100000 IU on days one and two"
+     ],
+     [
+      "Treatment from twelve months",
+      "200000 IU on days one and two"
+     ],
+     [
+      "First prophylactic dose",
+      "100000 IU at nine months"
+     ],
+     [
+      "Later prophylactic doses",
+      "200000 IU six monthly till five years"
+     ]
+    ]
    }
   }
  ],

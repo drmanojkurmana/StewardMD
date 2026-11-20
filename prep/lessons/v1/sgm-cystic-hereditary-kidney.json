@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-cystic-hereditary-kidney",
+ "subject": "ss-general-medicine",
+ "title": "Cystic and Hereditary Kidney Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Autosomal dominant polycystic kidney disease** (ADPKD, dominant cystic disease) affects **1 in 400** people and is the commonest hereditary kidney disease. **Autosomal recessive polycystic disease** (ARPKD, recessive cystic disease) causes neonatal respiratory distress. **Medullary cystic disease** (nephronophthisis, recessive tubule disease) causes childhood kidney failure. **Simple cysts** (acquired benign cysts) increase with age and need no treatment. **Acquired cystic disease** (dialysis kidney cysts) predisposes to cancer.",
+   "say": "Autosomal dominant polycystic disease affects one in four hundred and is the commonest hereditary kidney disease. Recessive disease causes neonatal respiratory distress. Medullary cystic disease causes childhood kidney failure. Simple cysts increase with age and need no treatment and dialysis kidney cysts predispose to cancer.",
+   "vis": null
+  },
+  {
+   "tx": "**PKD1 gene** (polycystin 1, chromosome 16) causes severe disease, while **PKD2 gene** (polycystin 2, chromosome 4) causes milder disease. **Polycystins** (ciliary channel proteins) regulate tubule differentiation. **Nephronophthisis genes** (NPHP family) cause tubule basement membrane failure. **Alport syndrome** (collagen IV defect) causes haematuria with deafness. **Fabry disease** (alpha galactosidase deficiency) causes acral pain with angiokeratoma.",
+   "say": "Polycystin one on chromosome sixteen causes severe disease, while polycystin two on chromosome four causes milder disease. Ciliary proteins regulate tubule differentiation and this is examined in viva examinations for revision. Nephronophthisis genes cause basement membrane failure and collagen defect causes haematuria with deafness and enzyme deficiency causes pain with skin spots.",
+   "vis": null
+  },
+  {
+   "tx": "Defective polycystins cause **tubule dilatation** (cystic outpouchings) that enlarge bilaterally and compress parenchyma. **Cyst fluid secretion** (chloride driven expansion) grows cysts progressively. **Hypertension** (early onset) precedes kidney failure in ADPKD. **Intracranial aneurysm** (berry aneurysm) coexists in 8 percent and needs screening. **Mitral valve prolapse** (valve redundancy) is the cardiac association. ARPKD causes **congenital hepatic fibrosis** (liver scarring) with portal hypertension.",
+   "say": "Defective polycystins cause tubule outpouchings that enlarge bilaterally and compress parenchyma. Chloride driven fluid grows cysts progressively and this is examined in viva examinations for revision. Early hypertension precedes kidney failure and this is examined in viva examinations for revision. Berry aneurysms coexist in eight percent and need screening and valve prolapse is the cardiac association and recessive disease causes liver scarring with portal hypertension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gene defect"
+     },
+     {
+      "id": "b",
+      "label": "Tubule dilatation"
+     },
+     {
+      "id": "c",
+      "label": "Cyst expansion"
+     },
+     {
+      "id": "d",
+      "label": "Parenchymal compression"
+     },
+     {
+      "id": "e",
+      "label": "ESKD and aneurysm"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "ADPKD presents with flank pain from cyst haemorrhage or infection, hypertension and haematuria. **Palpable kidneys** (enlarged masses) are present in advanced disease. **Berry aneurysm rupture** (subarachnoid haemorrhage) presents with thunderclap headache. ARPKD neonates present with oligohydramnios and Potter sequence. Nephronophthisis children present with polyuria and growth failure. Alport patients present with sensorineural deafness in adolescence.",
+   "say": "Dominant disease presents with flank pain from cyst bleeding or infection and hypertension and blood in urine. Enlarged masses are palpable in advanced disease. Aneurysm rupture causes thunderclap headache. Neonatal disease is marked by oligohydramnios and Potter sequence. Medullary disease is marked by large urine volumes and growth failure and alport is marked by deafness in adolescence.",
+   "vis": null
+  },
+  {
+   "tx": "**Ultrasound** (kidney scan) is the screening gold standard showing bilateral enlarged cystic kidneys. **Magnetic resonance imaging** (MRI, cyst volumetry) quantifies total kidney volume for prognosis. **Genetic testing** (PKD1 PKD2 sequencing) confirms diagnosis in atypical cases. **Aneurysm screening** (MR angiography) is advised with family rupture history. **Liver imaging** (polycystic liver) assesses hepatic cyst burden.",
+   "say": "Ultrasound is the screening gold standard showing bilateral enlarged cystic kidneys. Magnetic resonance quantifies volume for prognosis and this is examined in viva examinations for revision. Genetic testing confirms atypical cases and aneurysm screening is advised with family rupture history and liver imaging assesses cyst burden.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Ultrasound",
+      "Screening",
+      "Bilateral enlarged cysts"
+     ],
+     [
+      "MRI volumetry",
+      "Prognosis",
+      "Total kidney volume"
+     ],
+     [
+      "Genetic testing",
+      "Confirmation",
+      "PKD1 PKD2 genes"
+     ],
+     [
+      "MR angiography",
+      "Aneurysm screen",
+      "Family rupture history"
+     ],
+     [
+      "Liver imaging",
+      "Hepatic burden",
+      "Polycystic liver"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tolvaptan** (vasopressin receptor antagonist) slows cyst growth and eGFR decline in rapidly progressive ADPKD. **Blood pressure control** (ACE inhibitors first) delays progression. **Statins** (cholesterol reducers) control cardiovascular risk. **Aneurysm treatment** (coiling or clipping) prevents rupture in high risk lesions. **Infection treatment** (lipophilic antibiotics) reaches cysts better. **Cyst aspiration** (drainage) relieves compressive pain.",
+   "say": "Tolvaptan slows cyst growth and filter decline in rapidly progressive disease and this is examined in viva examinations for revision. Blood pressure control delays progression and this is examined in viva examinations for revision. Statins control heart risk and aneurysm treatment prevents rupture and lipophilic antibiotics reach cysts better and drainage relieves compressive pain.",
+   "vis": null
+  },
+  {
+   "tx": "**Alport syndrome** (collagen IV disease) needs ACE inhibitors and audiology surveillance. **Fabry disease** (enzyme deficiency) needs agalsidase replacement therapy. **Nephronophthisis** (NPHP disease) needs dialysis and transplantation. **Simple cysts** need reassurance without intervention. **Acquired cystic disease** needs cancer surveillance. **Autosomal dominant medullary cystic disease** (UMOD mutation) causes gout with kidney failure.",
+   "say": "Collagen disease needs ACE inhibitors and hearing surveillance. Enzyme deficiency needs replacement therapy. Medullary disease needs dialysis and transplant and simple cysts need reassurance and dialysis cysts need cancer surveillance and uMOD disease causes gout with kidney failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ADPKD dominant",
+     "points": [
+      "PKD1 severe PKD2 mild",
+      "Hypertension early",
+      "Berry aneurysms",
+      "Tolvaptan eligible"
+     ]
+    },
+    "right": {
+     "title": "ARPKD recessive",
+     "points": [
+      "Neonatal respiratory distress",
+      "Hepatic fibrosis",
+      "Enlarged kidneys",
+      "Poor prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cyst haemorrhage** (bleeding into cyst) presents with flank pain and falling haemoglobin. **Cyst infection** (infected kidney cyst) needs prolonged antibiotics. **Aneurysm rupture** (brain bleeding) is fatal without treatment. **Liver cyst complications** (compression, torsion) need surgery rarely. **Transplantation** (kidney replacement) is needed in end stage disease. **Genetic counselling** (family screening) is mandatory for siblings and children.",
+   "say": "Bleeding into cysts presents with flank pain and falling haemoglobin. Infected cysts need prolonged antibiotics. Brain aneurysm rupture is fatal without treatment and liver cyst complications need surgery rarely and transplantation is needed in end stage disease and family screening is mandatory.",
+   "vis": null
+  },
+  {
+   "tx": "**ADPKD reaches** end stage kidney disease by 60 years in PKD1 and 70 years in PKD2. Tolvaptan delays eGFR decline by 30 percent in trials. Aneurysm rupture accounts for 5 percent of deaths. ARPKD survival is poor in neonates with pulmonary hypoplasia. Fabry survival improves with enzyme replacement. Alport survival depends on transplantation timing.",
+   "say": "Dominant disease reaches end stage by sixty years in severe gene and seventy years in mild gene and this is examined in viva examinations for revision. Tolvaptan delays decline by thirty percent in trials and this is examined in viva examinations for revision. Aneurysm rupture accounts for five percent of deaths and this is examined in viva examinations for revision. Neonatal recessive survival is poor and enzyme replacement improves Fabry survival and alport survival depends on transplant timing.",
+   "vis": null
+  },
+  {
+   "tx": "Kidney Disease Improving Global Outcomes 2024 stresses total kidney volume prognosis, blood pressure targets and tolvaptan eligibility. **Screening aneurysms** (MR angiography) thresholds remain debated. Examination traps include confusing simple cysts with ADPKD, missing family aneurysm history, and ignoring hepatic fibrosis in recessive disease. **Deafness with haematuria** (Alport clue) is a favourite vignette.",
+   "say": "Current guidance stresses volume prognosis and blood pressure targets and tolvaptan eligibility and this is examined in viva examinations for revision. Aneurysm screening thresholds remain debated. Traps include confusing simple cysts with dominant disease and missing family history and deafness with blood in urine is a favourite vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers gene loci, aneurysm rates and tolvaptan use. PKD1 versus PKD2 severity and berry aneurysm frequency are the most asked points in theory and viva examinations. Systematic revision of complication triggers aids rapid answers during viva examinations.",
+   "say": "This table gathers gene loci and aneurysm rates and tolvaptan use for revision and this is examined in viva examinations for revision. Severity differences and aneurysm frequency are the most asked points and deafness with haematuria is a favourite vignette theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "ADPKD frequency",
+      "1 in 400"
+     ],
+     [
+      "Severe gene",
+      "PKD1 chromosome 16"
+     ],
+     [
+      "Mild gene",
+      "PKD2 chromosome 4"
+     ],
+     [
+      "Aneurysm rate",
+      "8 percent"
+     ],
+     [
+      "Drug to slow",
+      "Tolvaptan"
+     ],
+     [
+      "Screening gold",
+      "Ultrasound"
+     ],
+     [
+      "Deafness gene disease",
+      "Alport syndrome"
+     ],
+     [
+      "Enzyme disease",
+      "Fabry disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

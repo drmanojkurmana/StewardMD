@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "bg1", "label": "Total family income over family size" },
-          { "id": "bg2", "label": "Per capita monthly income obtained" },
-          { "id": "bg3", "label": "Match to updated class I to V bands" }
+          {
+            "id": "bg1",
+            "label": "Total family income over family size"
+          },
+          {
+            "id": "bg2",
+            "label": "Per capita monthly income obtained"
+          },
+          {
+            "id": "bg3",
+            "label": "Match to updated class I to V bands"
+          }
         ],
-        "edges": [["bg1", "bg2"], ["bg2", "bg3"]]
+        "edges": [
+          [
+            "bg1",
+            "bg2"
+          ],
+          [
+            "bg2",
+            "bg3"
+          ]
+        ]
       }
     },
     {
@@ -30,11 +48,19 @@
         "kind": "compare",
         "left": {
           "title": "Kuppuswamy scale",
-          "points": ["Education plus occupation plus income", "Head of family scored", "Urban families, total 3 to 29"]
+          "points": [
+            "Education plus occupation plus income",
+            "Head of family scored",
+            "Urban families, total 3 to 29"
+          ]
         },
         "right": {
           "title": "BG Prasad scale",
-          "points": ["Per capita monthly income only", "Whole family income divided", "Rural and urban, classes I to V"]
+          "points": [
+            "Per capita monthly income only",
+            "Whole family income divided",
+            "Rural and urban, classes I to V"
+          ]
         }
       }
     },
@@ -44,12 +70,27 @@
       "say": "Multiply old income bands by the price index chain. Unrevised rupee bands from 1961 classify nobody correctly today.",
       "vis": {
         "kind": "table",
-        "cols": ["Scale maintenance", "Method"],
+        "cols": [
+          "Scale maintenance",
+          "Method"
+        ],
         "rows": [
-          ["Price index used", "All India CPI (industrial workers)"],
-          ["Linking factors", "Chained across base year revisions"],
-          ["Publication rhythm", "Periodic revised income slabs"],
-          ["Thesis requirement", "State scale version and year used"]
+          [
+            "Price index used",
+            "All India CPI (industrial workers)"
+          ],
+          [
+            "Linking factors",
+            "Chained across base year revisions"
+          ],
+          [
+            "Publication rhythm",
+            "Periodic revised income slabs"
+          ],
+          [
+            "Thesis requirement",
+            "State scale version and year used"
+          ]
         ]
       }
     },
@@ -59,12 +100,27 @@
       "say": "Udai Pareek scores nine rural items including land and farm power. Village wealth hides in assets, not monthly cash.",
       "vis": {
         "kind": "table",
-        "cols": ["Pareek item", "What it captures"],
+        "cols": [
+          "Pareek item",
+          "What it captures"
+        ],
         "rows": [
-          ["Land holding and farm power", "Agrarian productive wealth"],
-          ["Housing and possessions", "Accumulated living standard"],
-          ["Caste and participation", "Social standing and influence"],
-          ["Education and occupation", "Human capital"]
+          [
+            "Land holding and farm power",
+            "Agrarian productive wealth"
+          ],
+          [
+            "Housing and possessions",
+            "Accumulated living standard"
+          ],
+          [
+            "Caste and participation",
+            "Social standing and influence"
+          ],
+          [
+            "Education and occupation",
+            "Human capital"
+          ]
         ]
       }
     },
@@ -75,11 +131,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ma1", "label": "Physiological and safety needs first" },
-          { "id": "ma2", "label": "Belonging and esteem needs next" },
-          { "id": "ma3", "label": "Self actualisation at the apex" }
+          {
+            "id": "ma1",
+            "label": "Physiological and safety needs first"
+          },
+          {
+            "id": "ma2",
+            "label": "Belonging and esteem needs next"
+          },
+          {
+            "id": "ma3",
+            "label": "Self actualisation at the apex"
+          }
         ],
-        "edges": [["ma1", "ma2"], ["ma2", "ma3"]]
+        "edges": [
+          [
+            "ma1",
+            "ma2"
+          ],
+          [
+            "ma2",
+            "ma3"
+          ]
+        ]
       }
     },
     {
@@ -101,11 +175,17 @@
         "kind": "compare",
         "left": {
           "title": "Rights of the sick role",
-          "points": ["Exempt from normal role duties", "Not blamed for the illness"]
+          "points": [
+            "Exempt from normal role duties",
+            "Not blamed for the illness"
+          ]
         },
         "right": {
           "title": "Duties of the sick role",
-          "points": ["Obligation to try to get well", "Seek and cooperate with competent care"]
+          "points": [
+            "Obligation to try to get well",
+            "Seek and cooperate with competent care"
+          ]
         }
       }
     },
@@ -115,11 +195,23 @@
       "say": "Emergencies justify doctor led care; chronic disease demands partnership. Match the relationship model to the illness phase.",
       "vis": {
         "kind": "table",
-        "cols": ["Model", "Fits which situation"],
+        "cols": [
+          "Model",
+          "Fits which situation"
+        ],
         "rows": [
-          ["Activity passivity", "Coma, emergency surgery, anaesthesia"],
-          ["Guidance cooperation", "Acute infection, short treatment"],
-          ["Mutual participation", "Diabetes, hypertension, lifestyle change"]
+          [
+            "Activity passivity",
+            "Coma, emergency surgery, anaesthesia"
+          ],
+          [
+            "Guidance cooperation",
+            "Acute infection, short treatment"
+          ],
+          [
+            "Mutual participation",
+            "Diabetes, hypertension, lifestyle change"
+          ]
         ]
       }
     },
@@ -130,11 +222,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ss1", "label": "Risk strikes: sickness, injury, old age" },
-          { "id": "ss2", "label": "Insurance or pension replaces income" },
-          { "id": "ss3", "label": "Family avoids destitution and debt" }
+          {
+            "id": "ss1",
+            "label": "Risk strikes: sickness, injury, old age"
+          },
+          {
+            "id": "ss2",
+            "label": "Insurance or pension replaces income"
+          },
+          {
+            "id": "ss3",
+            "label": "Family avoids destitution and debt"
+          }
         ],
-        "edges": [["ss1", "ss2"], ["ss2", "ss3"]]
+        "edges": [
+          [
+            "ss1",
+            "ss2"
+          ],
+          [
+            "ss2",
+            "ss3"
+          ]
+        ]
       }
     },
     {
@@ -145,12 +255,61 @@
         "kind": "compare",
         "left": {
           "title": "Stem fingerprints",
-          "points": ["Per capita income: BG Prasad", "Nine items with land: Udai Pareek", "Head's education job income: Kuppuswamy"]
+          "points": [
+            "Per capita income: BG Prasad",
+            "Nine items with land: Udai Pareek",
+            "Head's education job income: Kuppuswamy"
+          ]
         },
         "right": {
           "title": "Setting checks",
-          "points": ["Urban study favours Kuppuswamy", "Rural study favours Prasad or Pareek", "Always quote updated version"]
+          "points": [
+            "Urban study favours Kuppuswamy",
+            "Rural study favours Prasad or Pareek",
+            "Always quote updated version"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: The BG Prasad socioeconomic classification relies exclusively on per capita monthly family income and requires continuous updating with the Consumer Price Index for Industrial Workers. In contrast, the modified Kuppuswamy scale evaluates urban families using education, occupation, and family income. Maslow hierarchy places physiological needs at the base and self-actualisation at the summit. The sick role exempts individuals from normal social obligations while requiring them to seek competent medical help.",
+      "say": "The BG Prasad socioeconomic classification relies exclusively on per capita monthly family income and requires continuous updating with the Consumer Price Index for Industrial Workers. In contrast, the modified Kuppuswamy scale evaluates urban families using education, occupation, and family income. Maslow hierarchy places physiological needs at the base and self-actualisation at the summit. The sick role exempts individuals from normal social obligations while requiring them to seek competent medical help.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "BG Prasad scale variable",
+            "Per capita monthly family income only"
+          ],
+          [
+            "BG Prasad update tool",
+            "Consumer Price Index for Industrial Workers linked formula"
+          ],
+          [
+            "Kuppuswamy scale variables",
+            "Education and occupation of head plus total family income"
+          ],
+          [
+            "Kuppuswamy target setting",
+            "Validated for urban families and clinical outpatient studies"
+          ],
+          [
+            "Udai Pareek scale",
+            "Socioeconomic scale designed specifically for rural Indian households"
+          ],
+          [
+            "Maslow foundational need",
+            "Physiological survival needs forming base of the pyramid"
+          ],
+          [
+            "Talcott Parsons sick role",
+            "Exemption from normal duties requiring motivation to recover"
+          ]
+        ]
       }
     }
   ]

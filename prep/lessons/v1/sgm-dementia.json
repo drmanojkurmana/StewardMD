@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-dementia",
+ "subject": "ss-general-medicine",
+ "title": "Dementia and cognitive disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Dementia** is acquired cognitive decline with functional impairment. **Delirium** is acute fluctuating inattention with altered consciousness. **Mild cognitive impairment** is decline without functional impairment. **Pseudodementia** is depression mimicking dementia with poor effort. Function should be assessed during every evaluation for grading.",
+   "say": "Dementia is acquired cognitive decline with functional impairment for diagnosis. Delirium is acute fluctuating inattention with altered consciousness for emergency recognition. Mild cognitive impairment is decline without functional impairment for early detection. Pseudodementia is depression mimicking dementia with poor effort for differential diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dementia",
+     "points": [
+      "Acquired cognitive decline",
+      "Functional impairment present",
+      "Delirium excluded first",
+      "Course is progressive"
+     ]
+    },
+    "right": {
+     "title": "Delirium",
+     "points": [
+      "Acute fluctuating course",
+      "Inattention dominant",
+      "Consciousness altered",
+      "Reversible with cause care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Alzheimer disease** causes progressive amnesia with parietal involvement. **Vascular dementia** follows strokes with stepwise decline. **Lewy body dementia** causes visual hallucinations with parkinsonism. **Frontotemporal dementia** causes personality change with disinhibition. Imaging patterns differ across these types during evaluation here today.",
+   "say": "Alzheimer disease causes progressive amnesia with parietal involvement for cortical pattern. Vascular dementia follows strokes with stepwise decline for vascular pattern. Lewy body dementia causes visual hallucinations with parkinsonism for Lewy pattern. Frontotemporal dementia causes personality change with disinhibition for frontal pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Alzheimer disease",
+      "Amnesia with apraxia",
+      "Short term memory loss"
+     ],
+     [
+      "Vascular dementia",
+      "Stepwise decline",
+      "Focal stroke history"
+     ],
+     [
+      "Lewy body dementia",
+      "Visual hallucinations",
+      "Parkinsonism with dementia"
+     ],
+     [
+      "Frontotemporal dementia",
+      "Personality change",
+      "Younger onset with disinhibition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Age** is the major risk factor for dementia. **Hypertension** and diabetes increase vascular risk significantly. **Head injury** increases later dementia risk progressively. **Down syndrome** carries high early Alzheimer risk. Vascular risk control is advised in these patients during follow-up care today.",
+   "say": "Age is the major risk factor for dementia with increasing prevalence. Hypertension and diabetes increase vascular risk significantly for prevention. Head injury increases later dementia risk progressively for long term sequelae. Down syndrome carries high early Alzheimer risk for genetic association.",
+   "vis": null
+  },
+  {
+   "tx": "**Acetylcholine deficiency** underlies Alzheimer memory loss. **Amyloid plaques** with tau tangles mark Alzheimer pathology. **Lewy bodies** with alpha-synuclein mark Lewy dementia. **TDP43** pathology accompanies many elderly dementias. Cholinergic therapy targets acetylcholine deficiency in these patients during therapy for benefit today.",
+   "say": "Acetylcholine deficiency is the basis for Alzheimer memory loss for cholinergic therapy. Amyloid plaques with tau tangles are the mark of Alzheimer pathology for biomarker assessment. Lewy bodies with alpha-synuclein are the mark of Lewy dementia for Lewy diagnosis. TDP43 pathology is present with many elderly dementias for mixed pathology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acetylcholine deficiency"
+     },
+     {
+      "id": "b",
+      "label": "Memory loss emerges"
+     },
+     {
+      "id": "c",
+      "label": "Cholinesterase use"
+     },
+     {
+      "id": "d",
+      "label": "Memantine added later"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MMSE score** below 24 suggests cognitive impairment. **MoCA score** is more sensitive for mild impairment. **Clock drawing** assesses visuospatial function during testing. **Functional scales** assess daily living during evaluation. Informant history is advised during every evaluation for completeness and accuracy.",
+   "say": "MMSE score below 24 suggests cognitive impairment for cognitive screening. MoCA score is more sensitive for mild impairment for early detection. Clock drawing assesses visuospatial function during testing for bedside assessment. Functional scales assess daily living during evaluation for severity grading.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Domain",
+     "Use"
+    ],
+    "rows": [
+     [
+      "MMSE",
+      "Orientation and recall",
+      "Screening for impairment"
+     ],
+     [
+      "MoCA",
+      "Visuospatial and executive",
+      "Mild impairment detection"
+     ],
+     [
+      "Clock drawing",
+      "Visuospatial planning",
+      "Bedside assessment"
+     ],
+     [
+      "Functional scales",
+      "Daily living",
+      "Severity grading"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Donepezil** with **rivastigmine** and **galantamine** inhibit cholinesterase. **Memantine** blocks glutamate excitoxicity in moderate disease. **Lecanemab** targets amyloid in early disease. **Melatonin** helps sleep disturbance in dementia. Combination therapy is advised in these patients for benefit and control today with monitoring.",
+   "say": "Donepezil with rivastigmine and galantamine inhibit cholinesterase for Alzheimer therapy. Memantine blocks glutamate excitoxicity in moderate disease for advance stage. Lecanemab targets amyloid in early disease for early intervention. Melatonin helps sleep disturbance in dementia for sleep support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Stage"
+    ],
+    "rows": [
+     [
+      "Donepezil rivastigmine",
+      "Cholinesterase inhibition",
+      "Mild to moderate disease"
+     ],
+     [
+      "Memantine",
+      "Glutamate block",
+      "Moderate to severe disease"
+     ],
+     [
+      "Lecanemab",
+      "Amyloid targeting",
+      "Early disease stage"
+     ],
+     [
+      "Melatonin",
+      "Sleep regulation",
+      "Sleep disturbance support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anticholinergics** worsen cognition in elderly patients. **Chlorphenamine** with **oxybutynin** impair cognition significantly. **Haloperidol** with **risperidone** worsen parkinsonism in Lewy dementia. **Deprescribing** improves cognition in many patients. Medication review is advised in these patients during follow-up care today with monitoring today.",
+   "say": "Anticholinergics worsen cognition in elderly patients for prescribing caution. Chlorphenamine with oxybutynin are the impairing drugs for drug avoidance. Haloperidol with risperidone worsen parkinsonism in Lewy dementia for Lewy sensitivity. Deprescribing improves cognition in many patients for medication review.",
+   "vis": null
+  },
+  {
+   "tx": "**Behavioural symptoms** include agitation with psychosis. **Sundowning** worsens confusion in evening hours. **Wandering** complicates moderate dementia during course. **Caregiver burden** is substantial in dementia care. Support groups are advised in these patients for relief and guidance today with care today.",
+   "say": "Behavioural symptoms are agitation with psychosis for behavioral management. Sundowning worsens confusion in evening hours for evening pattern. Wandering complicates moderate dementia during course for safety planning. Caregiver burden is substantial in dementia care for support needs.",
+   "vis": null
+  },
+  {
+   "tx": "**Driving** assessment is advised in early dementia. **Legal capacity** assessment is advised during course. **Advance directives** planning is advised early in disease. **Caregiver support** groups are advised in these patients for burden relief. Legal advice is advised in these patients during follow-up.",
+   "say": "Driving assessment is advised in early dementia for safety evaluation. Legal capacity assessment is advised during course for legal protection. Advance directives planning is advised early in disease for future care. Caregiver support groups are advised in these patients for burden relief.",
+   "vis": null
+  },
+  {
+   "tx": "**Reversible causes** include hypothyroidism with B12 deficiency. **Normal pressure hydrocephalus** presents with gait apraxia. **Depression** is reversible pseudodementia with poor effort. **Delirium** should be excluded in every dementia case. Workup completeness is advised in these patients for accuracy and care today.",
+   "say": "Reversible causes include hypothyroidism with B12 deficiency for workup completeness. Normal pressure hydrocephalus presents with gait apraxia for hydrocephalus recognition. Depression is reversible pseudodementia with poor effort for differential diagnosis. Delirium should be excluded in every dementia case for diagnostic accuracy.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on dementia. Remember MMSE 24 as the impairment cutoff, lecanemab for early disease and donepezil for Alzheimer symptoms. Memantine suits moderate disease with galantamine as the comparator. Lewy hallucinations with parkinsonism are the hallmark of Lewy dementia.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. MMSE 24 is the impairment cutoff for cognitive screening. Lecanemab is the early disease therapy for amyloid targeting. Donepezil is the Alzheimer therapy for cholinergic benefit. Lewy hallucinations with parkinsonism are the hallmark of Lewy dementia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Screening cutoff",
+      "MMSE below 24 suggests impairment"
+     ],
+     [
+      "Early therapy",
+      "Lecanemab targets amyloid early"
+     ],
+     [
+      "Alzheimer therapy",
+      "Donepezil inhibits cholinesterase"
+     ],
+     [
+      "Advance stage therapy",
+      "Memantine blocks glutamate"
+     ],
+     [
+      "Lewy clue",
+      "Hallucinations with parkinsonism"
+     ],
+     [
+      "Reversible causes",
+      "Thyroid and B12 workup needed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -14,12 +14,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "All hypertensives in community"},
-     {"id": "b", "label": "Half detected"},
-     {"id": "c", "label": "Half of those treated"},
-     {"id": "d", "label": "Half of those controlled: one eighth"}
+     {
+      "id": "a",
+      "label": "All hypertensives in community"
+     },
+     {
+      "id": "b",
+      "label": "Half detected"
+     },
+     {
+      "id": "c",
+      "label": "Half of those treated"
+     },
+     {
+      "id": "d",
+      "label": "Half of those controlled: one eighth"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -39,12 +64,32 @@
    "say": "Thresholds need naming. One forty over ninety diagnoses in classic teaching on repeated readings; stage two begins at one sixty over one hundred. Newer American cut-offs differ, so state your system in answers.",
    "vis": {
     "kind": "table",
-    "cols": ["Category (classic)", "Systolic", "Diastolic"],
+    "cols": [
+     "Category (classic)",
+     "Systolic",
+     "Diastolic"
+    ],
     "rows": [
-     ["Normal", "Under 120", "Under 80"],
-     ["Prehypertension", "120 to 139", "80 to 89"],
-     ["Stage 1 hypertension", "140 to 159", "90 to 99"],
-     ["Stage 2 hypertension", "160 or more", "100 or more"]
+     [
+      "Normal",
+      "Under 120",
+      "Under 80"
+     ],
+     [
+      "Prehypertension",
+      "120 to 139",
+      "80 to 89"
+     ],
+     [
+      "Stage 1 hypertension",
+      "140 to 159",
+      "90 to 99"
+     ],
+     [
+      "Stage 2 hypertension",
+      "160 or more",
+      "100 or more"
+     ]
     ]
    }
   },
@@ -54,12 +99,27 @@
    "say": "Technique decides truth. Seated rest, supported arm at heart level, right cuff, silence, two readings averaged, another day before labelling. White-coat and masked patterns explain office-home discordance examiners love.",
    "vis": {
     "kind": "table",
-    "cols": ["Error", "False result"],
+    "cols": [
+     "Error",
+     "False result"
+    ],
     "rows": [
-     ["Cuff too small", "Falsely high reading"],
-     ["Arm below heart level", "Falsely high reading"],
-     ["Talking during measurement", "Raised reading"],
-     ["Single rushed reading", "Label without confirmation"]
+     [
+      "Cuff too small",
+      "Falsely high reading"
+     ],
+     [
+      "Arm below heart level",
+      "Falsely high reading"
+     ],
+     [
+      "Talking during measurement",
+      "Raised reading"
+     ],
+     [
+      "Single rushed reading",
+      "Label without confirmation"
+     ]
     ]
    }
   },
@@ -82,11 +142,19 @@
     "kind": "compare",
     "left": {
      "title": "Population approach",
-     "points": ["Salt reduction for everyone", "Small average fall, huge event saving", "No screening needed to start"]
+     "points": [
+      "Salt reduction for everyone",
+      "Small average fall, huge event saving",
+      "No screening needed to start"
+     ]
     },
     "right": {
      "title": "High-risk approach",
-     "points": ["Treat detected hypertensives", "Large individual benefit", "Needs detection machinery first"]
+     "points": [
+      "Treat detected hypertensives",
+      "Large individual benefit",
+      "Needs detection machinery first"
+     ]
     }
    }
   },
@@ -97,12 +165,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Adult 30 plus attends or camped"},
-     {"id": "b", "label": "BP and glucose measured"},
-     {"id": "c", "label": "Raised values confirmed on repeat"},
-     {"id": "d", "label": "Registered at NCD clinic, followed"}
+     {
+      "id": "a",
+      "label": "Adult 30 plus attends or camped"
+     },
+     {
+      "id": "b",
+      "label": "BP and glucose measured"
+     },
+     {
+      "id": "c",
+      "label": "Raised values confirmed on repeat"
+     },
+     {
+      "id": "d",
+      "label": "Registered at NCD clinic, followed"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -111,11 +204,23 @@
    "say": "Pressure tracks from childhood percentiles into adult ranks. Target organ damage stages urgency in the established case. Resistance on three drugs including a diuretic demands secondary cause hunting.",
    "vis": {
     "kind": "table",
-    "cols": ["Finding", "Action"],
+    "cols": [
+     "Finding",
+     "Action"
+    ],
     "rows": [
-     ["Child in high percentile repeatedly", "Family screening, lifestyle counsel"],
-     ["Retinopathy or renal damage", "Urgent specialist referral"],
-     ["Uncontrolled on 3 drugs with diuretic", "Evaluate secondary causes"]
+     [
+      "Child in high percentile repeatedly",
+      "Family screening, lifestyle counsel"
+     ],
+     [
+      "Retinopathy or renal damage",
+      "Urgent specialist referral"
+     ],
+     [
+      "Uncontrolled on 3 drugs with diuretic",
+      "Evaluate secondary causes"
+     ]
     ]
    }
   },
@@ -125,12 +230,27 @@
    "say": "Prescribe lifestyle in numbers. Kilogram for millimetre in teaching estimates, DASH plates, thirty active minutes most days, alcohol capped, tobacco zero. Drug scripts without lifestyle scripts waste half the consultation.",
    "vis": {
     "kind": "table",
-    "cols": ["Measure", "Expected direction"],
+    "cols": [
+     "Measure",
+     "Expected direction"
+    ],
     "rows": [
-     ["Weight loss", "Systolic falls with kilograms"],
-     ["Salt restriction", "Falls more in salt-sensitive"],
-     ["Regular aerobic activity", "Sustained modest fall"],
-     ["Tobacco cessation", "Vascular risk falls steeply"]
+     [
+      "Weight loss",
+      "Systolic falls with kilograms"
+     ],
+     [
+      "Salt restriction",
+      "Falls more in salt-sensitive"
+     ],
+     [
+      "Regular aerobic activity",
+      "Sustained modest fall"
+     ],
+     [
+      "Tobacco cessation",
+      "Vascular risk falls steeply"
+     ]
     ]
    }
   },
@@ -142,11 +262,19 @@
     "kind": "compare",
     "left": {
      "title": "Compelling preferences",
-     "points": ["Diabetes with albuminuria: ACE or ARB", "Coronary disease: beta blocker included", "Older isolated systolic: CCB or thiazide"]
+     "points": [
+      "Diabetes with albuminuria: ACE or ARB",
+      "Coronary disease: beta blocker included",
+      "Older isolated systolic: CCB or thiazide"
+     ]
     },
     "right": {
      "title": "Avoid",
-     "points": ["ACE or ARB in pregnancy", "Abrupt clonidine withdrawal", "Duplicate ACE plus ARB routinely"]
+     "points": [
+      "ACE or ARB in pregnancy",
+      "Abrupt clonidine withdrawal",
+      "Duplicate ACE plus ARB routinely"
+     ]
     }
    }
   },
@@ -156,11 +284,68 @@
    "say": "Damage, not numbers, defines emergency. Acute organ injury takes monitored intravenous control; no damage takes oral therapy over hours to days. Precipitous drops stroke watershed brain in chronic hypertensives.",
    "vis": {
     "kind": "table",
-    "cols": ["Presentation", "Pace of reduction"],
+    "cols": [
+     "Presentation",
+     "Pace of reduction"
+    ],
     "rows": [
-     ["Emergency with organ damage", "Controlled IV reduction, monitored"],
-     ["Urgency without damage", "Oral drugs, hours to days"],
-     ["Chronic stable severe reading", "Confirm, start oral therapy, review soon"]
+     [
+      "Emergency with organ damage",
+      "Controlled IV reduction, monitored"
+     ],
+     [
+      "Urgency without damage",
+      "Oral drugs, hours to days"
+     ],
+     [
+      "Chronic stable severe reading",
+      "Confirm, start oral therapy, review soon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The rule of halves leaves only about one in eight hypertensives adequately controlled. Diagnosis needs 140 over 90 on repeated readings, with stage 2 from 160 over 100. Population salt reduction toward 5 grams daily prevents more events than treating severe cases alone. Screening under the national programme starts at age 30 years.",
+   "say": "The rule of halves leaves only about one in eight hypertensives adequately controlled. Diagnosis needs 140 over 90 on repeated readings, with stage 2 from 160 over 100. Population salt reduction toward 5 grams daily prevents more events than treating severe cases alone. Screening under the national programme starts at age 30 years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rule of halves result",
+      "Only one in eight adequately controlled"
+     ],
+     [
+      "Diagnostic threshold classic",
+      "140 over 90 on repeated measurement"
+     ],
+     [
+      "Stage 2 hypertension",
+      "160 over 100 or higher readings"
+     ],
+     [
+      "Cuff too small effect",
+      "Falsely high blood pressure reading recorded"
+     ],
+     [
+      "Salt intake target",
+      "Toward 5 grams daily for population"
+     ],
+     [
+      "NPCDCS screening age",
+      "All adults 30 years and above"
+     ],
+     [
+      "First line drug classes",
+      "Thiazide, calcium blocker, ACE or ARB"
+     ],
+     [
+      "Resistant hypertension definition",
+      "Uncontrolled on three drugs including diuretic"
+     ]
     ]
    }
   }

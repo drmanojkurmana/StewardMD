@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-diabetes-complications",
+ "subject": "ss-general-medicine",
+ "title": "Chronic Complications of Diabetes",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Diabetic retinopathy** (retinal microvascular disease) is the commonest diabetes complication worldwide. **Diabetic nephropathy** (kidney proteinuria) affects 30 percent of type 2 patients. **Diabetic neuropathy** (nerve damage) causes painful feet and ulcers. **Cardiovascular disease** (heart attack) kills 50 percent of type 2 patients. **Diabetic foot** (ulcer with osteomyelitis) needs multidisciplinary care. **Gastroparesis** (stomach paralysis) causes vomiting and erratic glucose.",
+   "say": "Diabetic retinopathy is characterised by retinal microvascular disease, and it is the commonest diabetes complication worldwide that threatens vision in patients. Diabetic nephropathy is characterised by kidney proteinuria, and it affects thirty percent of type two patients who require annual urine screening. Diabetic neuropathy is characterised by nerve damage, and it causes painful feet and ulcers that require foot care.",
+   "vis": null
+  },
+  {
+   "tx": "**Hyperglycaemia** (chronic high glucose) causes **polyol pathway activation** (sorbitol accumulation) in retina and nerve. **Advanced glycation end products** (protein glycation) thicken basement membranes. **Protein kinase C activation** (cell signalling) increases vascular permeability. **Oxidative stress** (free radical excess) is the unifying mechanism. **Haemodynamic injury** (pressure damage) accelerates nephropathy. **Inflammation** (cytokine excess) drives microvascular injury.",
+   "say": "Hyperglycaemia is characterised by chronic high glucose, and it causes polyol pathway activation that accumulates sorbitol in retina and nerve. Advanced glycation end products are characterised by protein glycation, and they thicken basement membranes that impair microvascular flow. Protein kinase C activation is characterised by cell signalling excess, and it increases vascular permeability that drives retinal leakage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chronic hyperglycaemia"
+     },
+     {
+      "id": "b",
+      "label": "Polyol and glycation"
+     },
+     {
+      "id": "c",
+      "label": "Basement thickening"
+     },
+     {
+      "id": "d",
+      "label": "Microvascular ischaemia"
+     },
+     {
+      "id": "e",
+      "label": "Retinopathy nephropathy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Microaneurysms** (retinal sacs) with **dot blots** (small haemorrhages) are the earliest retinopathy signs. **Flame haemorrhages** (retinal blood with nerve fibre pattern) mark hypertension overlap. **Macular oedema** (retinal swelling) is the commonest vision loss cause. **Proliferative retinopathy** (new vessel growth) causes vitreous haemorrhage. **Foot ulcers** (neuropathic wounds) precede amputations. **Charcot foot** (joint collapse) follows neuropathy.",
+   "say": "Microaneurysms are characterised by retinal sacs, and they are accompanied by dot blots that are the earliest retinopathy signs in diabetes. Flame haemorrhages are characterised by retinal blood with nerve fibre pattern, and they mark hypertension overlap that worsens retinal disease. Macular oedema is characterised by retinal swelling, and it is the commonest vision loss cause that requires anti VEGF therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Dilated fundoscopy** (retinal examination) is the screening gold standard. **Optical coherence tomography** (retinal cross section) confirms macular oedema. **Urine albumin ratio** (protein quantification) screens nephropathy. **Foot examination** (monofilament test) screens neuropathy. **HbA1c** (glycated haemoglobin) above 7 percent predicts complications. **Lipid profile** (cholesterol test) assesses cardiovascular risk.",
+   "say": "Dilated fundoscopy is characterised by retinal examination, and it is the screening gold standard for retinopathy that requires annual photography. Optical coherence tomography is characterised by retinal cross section imaging, and it confirms macular oedema that guides anti VEGF therapy. Urine albumin ratio is characterised by protein quantification, and it screens nephropathy that requires ACE inhibitor therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Dilated fundoscopy",
+      "Screening",
+      "Retinopathy gold"
+     ],
+     [
+      "OCT macula",
+      "Oedema confirm",
+      "Anti VEGF guide"
+     ],
+     [
+      "Urine albumin ratio",
+      "Nephropathy screen",
+      "ACE therapy trigger"
+     ],
+     [
+      "Monofilament foot",
+      "Neuropathy screen",
+      "10 g loss"
+     ],
+     [
+      "HbA1c",
+      "Control track",
+      "Below 7 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glycaemic control** (HbA1c below 7 percent) is first line for all microvascular disease. **Blood pressure control** (below 130 over 80) slows retinopathy and nephropathy. **Statins** (atorvastatin 80 mg) reduce cardiovascular death. **ACE inhibitors** (ramipril) reduce albuminuria. **Anti VEGF therapy** (ranibizumab) treats macular oedema. **Laser photocoagulation** (panretinal ablation) treats proliferative disease.",
+   "say": "Glycaemic control is characterised by HbA1c below seven percent, and it is the first line for all microvascular disease that requires intensive monitoring. Blood pressure control is characterised by below one hundred thirty over eighty, and it slows retinopathy and nephropathy that progress with hypertension. Statins are characterised by atorvastatin eighty milligrams, and they reduce cardiovascular death that dominates diabetic mortality.",
+   "vis": null
+  },
+  {
+   "tx": "**SGLT2 inhibitors** (dapagliflozin) protect kidney and heart in type 2 disease. **GLP1 agonists** (semaglutide) protect heart and kidney with weight benefit. **Foot offloading** (pressure relief) heals neuropathic ulcers. **Chronic kidney disease progression** (proteinuria rise) needs nephrology referral. **Peripheral arterial disease** (leg vessel narrowing) needs statins and antiplatelets. **Erectile dysfunction** (nerve vascular failure) needs phosphodiesterase inhibitors.",
+   "say": "SGLT2 inhibitors are characterised by dapagliflozin, and they protect kidney and heart in type two disease with proven benefit. GLP1 agonists are characterised by semaglutide, and they protect heart and kidney with weight benefit that improves control. Foot offloading is characterised by pressure relief, and it heals neuropathic ulcers that require multidisciplinary care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Microvascular disease",
+     "points": [
+      "Retinopathy nephropathy neuropathy",
+      "HbA1c control first",
+      "Laser and anti VEGF",
+      "Annual screening"
+     ]
+    },
+    "right": {
+     "title": "Macrovascular disease",
+     "points": [
+      "Coronary stroke peripheral",
+      "Statin and antiplatelet",
+      "SGLT2 GLP1 protection",
+      "Smoking cessation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diabetic macular oedema** (retinal swelling) is the commonest blindness cause. **Vitreous haemorrhage** (retinal bleeding) from proliferative disease needs vitrectomy. **Foot osteomyelitis** (bone infection) needs amputation often. **Charcot joint** (collapse) needs total contact casting. **Autonomic neuropathy** (gut bladder failure) needs symptomatic care. **Erectile dysfunction** (vascular failure) needs vacuum devices.",
+   "say": "Diabetic macular oedema is characterised by retinal swelling, and it is the commonest blindness cause that requires anti VEGF therapy. Vitreous haemorrhage is characterised by retinal bleeding, and it requires vitrectomy when persistent that obscures vision. Foot osteomyelitis is characterised by bone infection, and it needs amputation often that follows neuroischaemic ulcers.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetic kidney** disease is the commonest dialysis cause worldwide. Retinopathy blindness incidence falls with laser and anti VEGF therapy. Diabetic foot amputation halves with multidisciplinary care. Cardiovascular mortality halves with statins and SGLT2 therapy. Neuropathy disability improves with glycaemic control. Gastroparesis needs prokinetic therapy.",
+   "say": "Diabetic kidney disease is characterised by the commonest dialysis cause worldwide, and it progresses despite glycaemic control that requires nephrology referral. Retinopathy blindness incidence is characterised by a fall with laser and anti VEGF therapy, and it improves with annual screening that detects early disease. Diabetic foot amputation is characterised by halving with multidisciplinary care, and it improves with foot clinics that provide offloading.",
+   "vis": null
+  },
+  {
+   "tx": "American Diabetes Association 2024 guidance stresses HbA1c targets, SGLT2 kidney protection and annual retinal screening. **Monofilament loss** (10 g insensitivity) is a favourite examination sign. **Charcot foot** (joint collapse) is a favourite viva trap. Traps include missing annual fundoscopy, omitting statins, and calling neuropathic ulcers arterial. **Macular oedema** (retinal swelling) is the commonest blindness vignette.",
+   "say": "Current guidance is characterised by HbA1c targets and SGLT2 kidney protection and annual retinal screening, and it is stressed by the American Diabetes Association for diabetes care. Monofilament loss is characterised by ten gram insensitivity, and it is a favourite examination sign that screens neuropathy in clinics. Charcot foot is characterised by joint collapse, and it is a favourite viva trap that follows neuropathy and trauma.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers retinal signs, kidney thresholds and cardiovascular protection. Macular oedema and monofilament loss are the most asked points in theory and viva examinations. Focused review of screening intervals aids viva responses. Fundus screening yearly detects proliferative disease early.",
+   "say": "This table is characterised by retinal signs and kidney thresholds and cardiovascular protection, and it gathers the high yield points for revision in theory. Macular oedema and monofilament loss are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Retinopathy screen",
+      "Dilated fundoscopy"
+     ],
+     [
+      "Macular therapy",
+      "Anti VEGF ranibizumab"
+     ],
+     [
+      "Proliferative therapy",
+      "Laser panretinal"
+     ],
+     [
+      "Nephropathy screen",
+      "Urine albumin ratio"
+     ],
+     [
+      "Neuropathy screen",
+      "10 g monofilament"
+     ],
+     [
+      "Kidney protection",
+      "SGLT2 dapagliflozin"
+     ],
+     [
+      "Heart protection",
+      "Semaglutide GLP1"
+     ],
+     [
+      "HbA1c target",
+      "Below 7 percent"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

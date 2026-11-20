@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "pc1", "label": "Analyse situation, set objectives" },
-          { "id": "pc2", "label": "Assess resources, fix priorities, implement" },
-          { "id": "pc3", "label": "Monitor and evaluate, feed back" }
+          {
+            "id": "pc1",
+            "label": "Analyse situation, set objectives"
+          },
+          {
+            "id": "pc2",
+            "label": "Assess resources, fix priorities, implement"
+          },
+          {
+            "id": "pc3",
+            "label": "Monitor and evaluate, feed back"
+          }
         ],
-        "edges": [["pc1", "pc2"], ["pc2", "pc3"]]
+        "edges": [
+          [
+            "pc1",
+            "pc2"
+          ],
+          [
+            "pc2",
+            "pc3"
+          ]
+        ]
       }
     },
     {
@@ -28,12 +46,27 @@
       "say": "Goals point, objectives plan outcomes, targets count activities by date. Keep the five planning words in their nests.",
       "vis": {
         "kind": "table",
-        "cols": ["Term", "Example"],
+        "cols": [
+          "Term",
+          "Example"
+        ],
         "rows": [
-          ["Policy", "Free essential drugs in public facilities"],
-          ["Goal", "Universal health coverage"],
-          ["Objective", "Cut infant mortality to 25 by 2027"],
-          ["Target", "Immunise 90 percent infants by March"]
+          [
+            "Policy",
+            "Free essential drugs in public facilities"
+          ],
+          [
+            "Goal",
+            "Universal health coverage"
+          ],
+          [
+            "Objective",
+            "Cut infant mortality to 25 by 2027"
+          ],
+          [
+            "Target",
+            "Immunise 90 percent infants by March"
+          ]
         ]
       }
     },
@@ -45,11 +78,19 @@
         "kind": "compare",
         "left": {
           "title": "Cost benefit analysis",
-          "points": ["Outcomes converted to money", "Benefit cost ratio decides", "Suits cross sector comparisons"]
+          "points": [
+            "Outcomes converted to money",
+            "Benefit cost ratio decides",
+            "Suits cross sector comparisons"
+          ]
         },
         "right": {
           "title": "Cost effectiveness analysis",
-          "points": ["Outcomes in natural units", "Cost per DALY or life saved", "Compares health interventions"]
+          "points": [
+            "Outcomes in natural units",
+            "Cost per DALY or life saved",
+            "Compares health interventions"
+          ]
         }
       }
     },
@@ -60,11 +101,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "pt1", "label": "List events and activities as network" },
-          { "id": "pt2", "label": "Estimate optimistic likely pessimistic times" },
-          { "id": "pt3", "label": "Compute expected timeline and risks" }
+          {
+            "id": "pt1",
+            "label": "List events and activities as network"
+          },
+          {
+            "id": "pt2",
+            "label": "Estimate optimistic likely pessimistic times"
+          },
+          {
+            "id": "pt3",
+            "label": "Compute expected timeline and risks"
+          }
         ],
-        "edges": [["pt1", "pt2"], ["pt2", "pt3"]]
+        "edges": [
+          [
+            "pt1",
+            "pt2"
+          ],
+          [
+            "pt2",
+            "pt3"
+          ]
+        ]
       }
     },
     {
@@ -86,11 +145,19 @@
         "kind": "compare",
         "left": {
           "title": "PERT",
-          "points": ["Three time estimates, probabilistic", "Event oriented network", "Research and one off projects"]
+          "points": [
+            "Three time estimates, probabilistic",
+            "Event oriented network",
+            "Research and one off projects"
+          ]
         },
         "right": {
           "title": "CPM",
-          "points": ["Single time estimate, deterministic", "Activity oriented, finds critical path", "Construction and routine projects"]
+          "points": [
+            "Single time estimate, deterministic",
+            "Activity oriented, finds critical path",
+            "Construction and routine projects"
+          ]
         }
       }
     },
@@ -100,12 +167,27 @@
       "say": "Cost accounting prices a bed day honestly. Without it, budgets repeat last year's guesses dressed as plans.",
       "vis": {
         "kind": "table",
-        "cols": ["Technique", "Question it answers"],
+        "cols": [
+          "Technique",
+          "Question it answers"
+        ],
         "rows": [
-          ["Cost accounting", "What does one bed day truly cost?"],
-          ["Input output analysis", "How do sectors supply each other?"],
-          ["Systems analysis", "What happens system wide if we change this?"],
-          ["Network analysis (PERT CPM)", "In what order and how long?"]
+          [
+            "Cost accounting",
+            "What does one bed day truly cost?"
+          ],
+          [
+            "Input output analysis",
+            "How do sectors supply each other?"
+          ],
+          [
+            "Systems analysis",
+            "What happens system wide if we change this?"
+          ],
+          [
+            "Network analysis (PERT CPM)",
+            "In what order and how long?"
+          ]
         ]
       }
     },
@@ -117,11 +199,19 @@
         "kind": "compare",
         "left": {
           "title": "Inside the organisation",
-          "points": ["Strengths to exploit", "Weaknesses to repair", "Staff, funds, infrastructure audit"]
+          "points": [
+            "Strengths to exploit",
+            "Weaknesses to repair",
+            "Staff, funds, infrastructure audit"
+          ]
         },
         "right": {
           "title": "Outside environment",
-          "points": ["Opportunities to seize", "Threats to defend against", "Policy, market, disease trends"]
+          "points": [
+            "Opportunities to seize",
+            "Threats to defend against",
+            "Policy, market, disease trends"
+          ]
         }
       }
     },
@@ -131,12 +221,27 @@
       "say": "Delphi polls experts anonymously to consensus. Work sampling snapshots random moments to map how staff time is spent.",
       "vis": {
         "kind": "table",
-        "cols": ["Technique", "Best problem"],
+        "cols": [
+          "Technique",
+          "Best problem"
+        ],
         "rows": [
-          ["Delphi technique", "Expert consensus without meetings"],
-          ["Operations research", "Queues, inventory, allocation optima"],
-          ["Work sampling", "How staff time actually divides"],
-          ["Network analysis", "Project sequencing and deadlines"]
+          [
+            "Delphi technique",
+            "Expert consensus without meetings"
+          ],
+          [
+            "Operations research",
+            "Queues, inventory, allocation optima"
+          ],
+          [
+            "Work sampling",
+            "How staff time actually divides"
+          ],
+          [
+            "Network analysis",
+            "Project sequencing and deadlines"
+          ]
         ]
       }
     },
@@ -147,11 +252,74 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "tp1", "label": "Spot stem fingerprint: money, times, experts, instants" },
-          { "id": "tp2", "label": "Map to CBA, PERT CPM, Delphi, work sampling" },
-          { "id": "tp3", "label": "Answer the named technique" }
+          {
+            "id": "tp1",
+            "label": "Spot stem fingerprint: money, times, experts, instants"
+          },
+          {
+            "id": "tp2",
+            "label": "Map to CBA, PERT CPM, Delphi, work sampling"
+          },
+          {
+            "id": "tp3",
+            "label": "Answer the named technique"
+          }
         ],
-        "edges": [["tp1", "tp2"], ["tp2", "tp3"]]
+        "edges": [
+          [
+            "tp1",
+            "tp2"
+          ],
+          [
+            "tp2",
+            "tp3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: The planning cycle moves from situation analysis through objectives, resources, priorities, implementation and monitoring to evaluation, which restarts analysis. Cost benefit analysis converts outcomes into money, but cost effectiveness keeps natural units like cost per DALY averted. PERT uses three probabilistic time estimates, CPM uses one deterministic estimate, and the critical path is the longest chain.",
+      "say": "High-yield for the exam: The planning cycle moves from situation analysis through objectives, resources, priorities, implementation and monitoring to evaluation, which restarts analysis. Cost benefit analysis converts outcomes into money, but cost effectiveness keeps natural units like cost per DALY averted. PERT uses three probabilistic time estimates, CPM uses one deterministic estimate, and the critical path is the longest chain.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Planning cycle closing step",
+            "Evaluation feeds back into analysis"
+          ],
+          [
+            "Goal versus target",
+            "Goal broad, target countable dated activity"
+          ],
+          [
+            "Cost benefit outcome unit",
+            "Health gains converted into money"
+          ],
+          [
+            "Cost effectiveness outcome unit",
+            "Cost per life saved or DALY"
+          ],
+          [
+            "PERT time estimates",
+            "Optimistic, most likely, pessimistic three estimates"
+          ],
+          [
+            "CPM time estimate",
+            "Single deterministic duration per activity"
+          ],
+          [
+            "Critical path length",
+            "Longest dependent chain in network"
+          ],
+          [
+            "SWOT external pair",
+            "Opportunities and threats outside organisation"
+          ]
+        ]
       }
     }
   ]

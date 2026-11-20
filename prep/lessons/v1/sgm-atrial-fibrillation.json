@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "sgm-atrial-fibrillation",
+ "subject": "ss-general-medicine",
+ "title": "Atrial fibrillation and flutter",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Atrial fibrillation** (irregular rapid atrial rhythm with chaotic atria) shows no organised P waves and an **irregularly irregular** (variable) QRS response on electrocardiogram. **Atrial flutter** (regular sawtooth atrial activation) usually runs at about 300 atrial rate with variable conduction. Both cause stasis in atria, so **stroke** (brain infarction from clot) becomes the dominant early risk rather than simple palpitation.",
+   "say": "Atrial fibrillation is an irregular rapid atrial rhythm where the atria fire chaotically without organised P waves on the electrocardiogram. Atrial flutter is a regular sawtooth atrial activation usually running near three hundred per minute with variable conduction to the ventricles. Both rhythms cause stasis inside the atria, so stroke from clot formation becomes the dominant early risk rather than simple palpitation.",
+   "vis": null
+  },
+  {
+   "tx": "Hypertension, ageing, obesity, alcohol, **hyperthyroidism** (overactive thyroid) and **heart failure** (pump failure) drive atrial remodelling. **Obstructive sleep apnoea** (airway collapse during sleep) and post operative stress precipitate episodes. Flutter reentry circulates around the **tricuspid annulus** (ring around tricuspid valve), while fibrillation arises from multiple ectopic foci especially near **pulmonary veins** (veins draining lungs to atrium).",
+   "say": "Hypertension, ageing, obesity, alcohol use, hyperthyroidism, heart failure and obstructive sleep apnoea all drive atrial remodelling and electrical instability. Post operative stress, infection and electrolyte disturbances can also precipitate episodes. Flutter reentry circulates around the tricuspid annulus, while fibrillation arises from multiple ectopic foci especially near the pulmonary veins where rapid firing triggers sustained arrhythmia.",
+   "vis": null
+  },
+  {
+   "tx": "Loss of **atrial kick** (atrial contraction contributing to filling) drops cardiac output, particularly in stiff ventricles with diastolic dysfunction. Rapid rates shorten diastole, causing **rate related cardiomyopathy** (muscle weakness from sustained tachycardia) and demand ischaemia. Stasis plus endothelial dysfunction in the **left atrial appendage** (small pouch on atrium) promotes thrombus, explaining systemic embolism to brain and limbs in untreated disease.",
+   "say": "Loss of atrial kick, which is the atrial contraction that helps fill the ventricles, drops cardiac output especially in stiff ventricles with diastolic dysfunction. Rapid rates shorten diastole and cause rate related cardiomyopathy with demand ischaemia. Stasis plus endothelial dysfunction in the left atrial appendage, which is the small pouch on the atrium, promotes thrombus formation and systemic embolism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Atrial remodelling"
+     },
+     {
+      "id": "b",
+      "label": "AF or flutter starts"
+     },
+     {
+      "id": "c",
+      "label": "Stasis in appendage"
+     },
+     {
+      "id": "d",
+      "label": "Thrombus embolises"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Symptoms range from silent events to palpitations, dyspnoea, chest discomfort and **presyncope** (near fainting) during rapid response. Pulse is **irregularly irregular** (cannot be regularised) with variable volume and a pulse deficit versus apex rate. Signs of heart failure, **mitral stenosis** (narrowed mitral valve) and hyperthyroidism guide cause. Flutter often shows atrial activity near 300 with conducted rates near 150.",
+   "say": "Symptoms range from completely silent events to palpitations, breathlessness, chest discomfort and near fainting during rapid ventricular response. The pulse is irregularly irregular with variable volume and a pulse deficit compared with the apex rate. Look for heart failure signs, mitral stenosis and hyperthyroidism as clues to the underlying cause. Flutter often shows atrial activity near three hundred with conducted rates near one hundred and fifty.",
+   "vis": null
+  },
+  {
+   "tx": "12-lead **electrocardiogram** (ECG) is the immediate test, confirming absent P waves and irregular QRS intervals. Bloods reveal thyroid status, electrolytes and anaemia, while **echocardiography** (ultrasound of heart) assesses valve disease, chamber size and thrombus risk. A **Holter monitor** (24 hour recorder) captures paroxysmal episodes missed on single tracings, and **transoesophageal echocardiogram** (probe down oesophagus) excludes left atrial thrombus before cardioversion.",
+   "say": "Twelve lead electrocardiogram is the immediate test confirming absent P waves and irregular QRS intervals. Blood tests can reveal thyroid dysfunction, electrolytes and anaemia, while echocardiography can assess valve disease, chamber size and thrombus risk. A twenty four hour Holter monitor captures paroxysmal episodes missed on single tracings, and transoesophageal echocardiography excludes left atrial thrombus before urgent cardioversion.",
+   "vis": null
+  },
+  {
+   "tx": "Unstable patients need immediate **synchronised direct current cardioversion** (timed electric shock) with sedation. Stable patients need rate control first: **metoprolol** (beta blocker) or **diltiazem** (calcium blocker) to bring rate below 100, avoiding these drugs only in acute decompensation. **European Society of Cardiology** (ESC) 2024 guidance emphasises early rhythm control in recently diagnosed disease, improving symptoms and reducing hospitalisation.",
+   "say": "Unstable patients need immediate synchronised direct current cardioversion with sedation. Stable patients need rate control first with metoprolol, which is a beta blocker, or diltiazem, which is a calcium blocker, aiming for a rate below one hundred. You should avoid these negative inotropic drugs in acute decompensation. European Society of Cardiology guidance from twenty twenty four emphasises early rhythm control in recently diagnosed disease with clear benefit.",
+   "vis": null
+  },
+  {
+   "tx": "Rhythm agents include **flecainide** (sodium channel blocker) or **propafenone** only without structural disease, and **amiodarone** (multichannel antiarrhythmic) with heart failure. **Sotalol** (beta blocker plus potassium blocker) needs renal dosing and QT monitoring. **Pulmonary vein isolation** (ablation freezing vein entrances) is first line for drug refractory disease per **American Heart Association, American College of Cardiology and Heart Rhythm Society** (AHA ACC HRS) guidance.",
+   "say": "Rhythm agents can include flecainide or propafenone only in patients without structural heart disease, and amiodarone as the multichannel antiarrhythmic for heart failure. Sotalol combines beta blockade with potassium blockade and needs renal dosing plus QT monitoring. Pulmonary vein isolation by ablation is now first line for drug refractory disease according to the major American guidance statements.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rate control",
+     "points": [
+      "Metoprolol or diltiazem first",
+      "Target resting rate below one hundred",
+      "Avoid blunting acutely decompensated failure",
+      "Screen for precipitants every time"
+     ]
+    },
+    "right": {
+     "title": "Rhythm control",
+     "points": [
+      "Flecainide without structural disease",
+      "Amiodarone with heart failure",
+      "Early rhythm improves symptoms",
+      "Ablation for drug refractory cases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stroke prevention uses **CHA2DS2-VASc score** (risk score from clinical factors including age, hypertension and prior stroke), not CHADS2 alone. **Apixaban 5 mg twice daily** (direct factor Xa inhibitor) or **rivaroxaban 20 mg daily** are preferred over warfarin in most non valvular cases. **HAS-BLED score** (bleeding risk score) guides modifiable risks, not withholding anticoagulation, and recent **European Society of Cardiology** guidance lowers thresholds for treatment.",
+   "say": "Stroke prevention uses the cha two ds two vasc score, which is a clinical risk score including age, hypertension and prior stroke, not the older chads score alone. Apixaban five milligrams twice daily or rivaroxaban twenty milligrams daily are preferred over warfarin in most non valvular cases. Has bled score guides modifiable bleeding risks rather than withholding anticoagulation, and recent European guidance lowers thresholds for treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Fluoroscopic **cardioversion** (electrical restoration of sinus rhythm) needs therapeutic anticoagulation for at least 4 weeks after, because atrial stunning prolongs stasis risk. Flutter responds well to **cavotricuspid isthmus ablation** (lining ablation of flutter circuit) with high success. Complications include **tachycardia induced cardiomyopathy** (reversible muscle dysfunction), silent stroke and bleeding on anticoagulation, all worsened by rapid rates and untreated hypertension.",
+   "say": "Electrical cardioversion for restoration of sinus rhythm needs therapeutic anticoagulation for at least four weeks afterwards, because atrial stunning prolongs stasis risk. Typical flutter can respond very well to cavotricuspid isthmus ablation of the flutter circuit with high success rates. Complications include tachycardia induced cardiomyopathy, silent stroke and bleeding on anticoagulation, all worsened by rapid rates and untreated hypertension.",
+   "vis": null
+  },
+  {
+   "tx": "Exam traps distinguish **flutter with fixed 2:1 conduction** from fibrillation, and remember flutter atrial rate near 300 with ventricular near 150. Mitral stenosis with atrial fibrillation always needs **warfarin** (vitamin K antagonist), never direct anticoagulants. **Mechanical valves** (prosthetic valves) also mandate warfarin, and cardioversion without adequate anticoagulation cover risks devastating embolic stroke even when symptoms have settled.",
+   "say": "Examination traps distinguish flutter with fixed two to one conduction from fibrillation, and remember atrial rate near three hundred with ventricular near one hundred and fifty. Mitral stenosis with atrial fibrillation always needs warfarin, never direct anticoagulants alone. Mechanical prosthetic valves also mandate warfarin therapy, and cardioversion without adequate anticoagulation cover risks devastating embolic stroke even when symptoms have settled.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: quote irregularly irregular pulse, flutter atrial rate 300, first test 12-lead electrocardiogram, first rate drugs metoprolol and diltiazem, first line anticoagulants apixaban and rivaroxaban, CHA2DS2-VASc points, warfarin mandates for mitral stenosis and mechanical valves, and ablation options for flutter and drug refractory fibrillation. These pairings answer most classification and drug questions.",
+   "say": "High yield for the exam includes the irregularly irregular pulse, flutter atrial rate near three hundred, twelve lead electrocardiogram as first test, metoprolol and diltiazem for rate control, apixaban and rivaroxaban as first line anticoagulants, cha two ds two vasc scoring points, warfarin mandates for mitral stenosis and mechanical valves, and ablation options for flutter and drug refractory fibrillation. These pairings can answer most classification and drug questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High-yield fact to quote"
+    ],
+    "rows": [
+     [
+      "Pulse",
+      "Irregularly irregular, variable volume"
+     ],
+     [
+      "Flutter rates",
+      "Atrial 300, conducted 150"
+     ],
+     [
+      "First test",
+      "Twelve lead electrocardiogram"
+     ],
+     [
+      "Rate drugs",
+      "Metoprolol, diltiazem"
+     ],
+     [
+      "Anticoagulants",
+      "Apixaban, rivaroxaban, warfarin"
+     ],
+     [
+      "Stroke score",
+      "CHA2DS2-VASc"
+     ],
+     [
+      "Ablation",
+      "Pulmonary vein isolation, flutter isthmus"
+     ],
+     [
+      "Warfarin mandate",
+      "Mitral stenosis, mechanical valves"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

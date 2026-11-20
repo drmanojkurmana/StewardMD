@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-gout-crystal",
+ "subject": "ss-general-medicine",
+ "title": "Gout and crystal arthropathy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Gout** is monosodium urate crystal arthritis in these patients. **Podagra** is first metatarsal joint pain in these patients. **Double contour sign** is the ultrasound hallmark in these patients. **Hyperuricaemia** is the metabolic driver in these patients. Synovial microscopy confirms the diagnosis in these patients.",
+   "say": "Gout is monosodium urate crystal arthritis in these patients. Podagra is first metatarsal joint pain in these patients. Double contour sign is the ultrasound hallmark in these patients. Hyperuricaemia is the metabolic driver in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Crystal",
+     "Shape",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Urate",
+      "Needle shaped",
+      "Gout disease"
+     ],
+     [
+      "CPPD",
+      "Rhombohedral shaped",
+      "Pseudogout disease"
+     ],
+     [
+      "Basic calcium",
+      "Tiny clumps",
+      "Calcific tendinitis"
+     ],
+     [
+      "Basic calcium",
+      "Amorphous deposits",
+      "Milwaukee shoulder"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Colchicine** prevents flares during urate lowering therapy in these patients. **Diclofenac** relieves acute pain in these patients in many protocols. **Allopurinol** is first line urate lowering therapy in these patients. **Febuxostat** is an alternative in these patients. Education improves adherence in these patients.",
+   "say": "Colchicine prevents flares during urate lowering therapy in these patients. Diclofenac is relief for acute pain in these patients in many protocols. Allopurinol is first line urate lowering therapy in these patients. Febuxostat is an alternative in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute podagra attack"
+     },
+     {
+      "id": "b",
+      "label": "Diclofenac relief"
+     },
+     {
+      "id": "c",
+      "label": "Colchicine flare cover"
+     },
+     {
+      "id": "d",
+      "label": "Allopurinol titration"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tophi** are chronic deposits in helix and elbows in these patients. **Pegloticase** dissolves tophi in these patients. **Probenecid** increases urate excretion in these patients. **Ascorbic acid** has a minor urate lowering effect in these patients. Kidney function guides dosing in these patients.",
+   "say": "Tophi are chronic deposits in helix and elbows in these patients. Pegloticase is dissolution for tophi in these patients. Probenecid increases urate excretion in these patients. Ascorbic acid has a minor urate lowering effect in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Pseudogout** causes knee arthritis in older patients in these patients. **Crowned dens syndrome** is cervical pseudogout in these patients. **Insulin** has no gout role despite its presence in listings confusion. **Diuresis** increases urate in these patients. Elderly onset is typical in these patients.",
+   "say": "Pseudogout causes knee arthritis in older patients in these patients. Crowned dens syndrome is cervical pseudogout in these patients. Insulin has no gout role despite its presence in listings confusion. Diuresis increases urate in these patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gout pattern",
+     "points": [
+      "Podagra first joint",
+      "Needle crystals seen",
+      "Tophi in chronic disease",
+      "Allopurinol treats"
+     ]
+    },
+    "right": {
+     "title": "Pseudogout pattern",
+     "points": [
+      "Knee joint involved",
+      "Rhombohedral crystals seen",
+      "Crowned dens syndrome",
+      "Colchicine treats"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Urate target** is below 6 in these patients in many guidelines. **Treat to target** titration is advised in these patients. **HLA-B*5801** screens allopurinol risk in these patients. **Dietary** measures are adjuncts in these patients. Diet counselling is provided in these patients.",
+   "say": "Urate target is below six in these patients in many guidelines. Treat to target titration is advised in these patients. HLA B fifty eight zero one is the screen for allopurinol risk in these patients. Dietary measures are adjuncts in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Target",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Allopurinol",
+      "Urate below 6",
+      "First line therapy"
+     ],
+     [
+      "Febuxostat",
+      "Urate below 6",
+      "Alternative option"
+     ],
+     [
+      "Probenecid",
+      "Urate excretion",
+      "Augmentation option"
+     ],
+     [
+      "Pegloticase",
+      "Tophi dissolution",
+      "Refractory disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alcohol** avoidance reduces flares in these patients. **Weight loss** reduces urate in these patients. **Fructose** avoidance reduces flares in these patients. **Cherry** intake has no proven benefit in these patients. Calorie control helps these patients. Careful follow-up is advised in these patients today. Calorie control helps these patients worldwide today.",
+   "say": "Alcohol avoidance reduces flares in these patients with purine control. Weight loss reduces urate in these patients with metabolic improvement. Fructose avoidance reduces flares in these patients with dietary modification. Cherry intake has no proven benefit in these patients despite anecdotal reports.",
+   "vis": null
+  },
+  {
+   "tx": "**Urate** lowering starts after flare resolution in these patients. **Colchicine** covers the first months in these patients. **Kidney stones** are urate stones in these patients. **Metabolic syndrome** accompanies gout in these patients. Diary tracking helps titration in these patients. Careful follow-up is advised in these patients today. Diary tracking helps titration in these patients worldwide today.",
+   "say": "Urate lowering starts after flare resolution in these patients with colchicine cover. Colchicine is cover for the first months in these patients. Kidney stones are urate stones in these patients with obstruction risk. Metabolic syndrome is associated with gout in these patients with cardiovascular risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Flare resolved"
+     },
+     {
+      "id": "b",
+      "label": "Allopurinol started"
+     },
+     {
+      "id": "c",
+      "label": "Colchicine cover"
+     },
+     {
+      "id": "d",
+      "label": "Titrate to target"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tumour lysis** precipitates gout flares in these patients. **Dehydration** precipitates flares in these patients. **Surgery** precipitates flares in these patients. **Diuretic** review is needed in these patients. Hospitalisation precedes flares in these patients. Careful follow-up is advised in these patients today. Hospitalisation precedes flares in these patients worldwide today.",
+   "say": "Tumour lysis precipitates gout flares in these patients with urate load. Dehydration precipitates flares in these patients with reduced excretion. Surgery precipitates flares in these patients with dehydration and fasting. Diuretic review is needed in these patients with medication reconciliation.",
+   "vis": null
+  },
+  {
+   "tx": "**Dual energy CT** identifies urate deposits in these patients. **Ultrasound** double contour is the hallmark in these patients. **Lipid** therapy has no gout role despite its presence in listings confusion. **Steroids** relieve flares in these patients. No routine ultrasound is needed in these patients.",
+   "say": "Dual energy CT identifies urate deposits in these patients. Ultrasound double contour is the hallmark in these patients. Lipid therapy has no gout role despite its presence in listings confusion. Steroids are relief for flares in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Shows",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Synovial fluid",
+      "Needle crystals",
+      "Diagnostic standard"
+     ],
+     [
+      "Ultrasound",
+      "Double contour sign",
+      "Non invasive hallmark"
+     ],
+     [
+      "Dual energy CT",
+      "Urate deposits",
+      "Deposit localisation"
+     ],
+     [
+      "Serum urate",
+      "Hyperuricaemia",
+      "Not diagnostic alone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follow up** needs urate monitoring in these patients. **Flare diary** helps titration in these patients. **Kidney function** monitors allopurinol in these patients. **Blood pressure** control helps these patients. Comorbidity control helps these patients. Careful follow-up is advised in these patients today. Comorbidity control helps these patients worldwide today.",
+   "say": "Follow up needs urate monitoring in these patients with serial testing. Flare diary helps titration in these patients with attack records. Kidney function monitors allopurinol in these patients with dose adjustment. Blood pressure control helps these patients with vascular protection.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** completes this lesson on crystal disease. Remember podagra with needle crystals, double contour on ultrasound, treat to target below 6 and allopurinol as first line therapy. Colchicine prevents flares while tophi need pegloticase in these patients. Pseudogout shows rhombohedral crystals in older patients clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Podagra with needle crystals is the hallmark of gout clearly. Double contour is the ultrasound hallmark in these patients. Treat to target below six is the urate goal in practice. Allopurinol is first line therapy for gout cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Gout hallmark",
+      "Podagra with needle crystals"
+     ],
+     [
+      "Ultrasound sign",
+      "Double contour hallmark present"
+     ],
+     [
+      "Urate target",
+      "Below 6 for treat to target"
+     ],
+     [
+      "First line therapy",
+      "Allopurinol for gout cases"
+     ],
+     [
+      "Flare prevention",
+      "Colchicine prevents flares effectively"
+     ],
+     [
+      "Pseudogout crystal",
+      "Rhombohedral crystals in older patients"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

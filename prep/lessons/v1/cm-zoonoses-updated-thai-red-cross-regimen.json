@@ -13,12 +13,37 @@
    "say": "The Updated Thai Red Cross schedule gives two intradermal injections on days zero, three, seven and twenty-eight. A small pale bleb is raised over both deltoid muscles at each visit.",
    "vis": {
     "kind": "table",
-    "cols": ["Clinic visit", "Day of schedule", "Number of injection sites", "Volume per site"],
+    "cols": [
+     "Clinic visit",
+     "Day of schedule",
+     "Number of injection sites",
+     "Volume per site"
+    ],
     "rows": [
-     ["First visit", "Day 0", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"],
-     ["Second visit", "Day 3", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"],
-     ["Third visit", "Day 7", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"],
-     ["Fourth visit", "Day 28", "2 sites (left and right deltoid)", "0.1 ml intradermal per site"]
+     [
+      "First visit",
+      "Day 0",
+      "2 sites (left and right deltoid)",
+      "0.1 ml intradermal per site"
+     ],
+     [
+      "Second visit",
+      "Day 3",
+      "2 sites (left and right deltoid)",
+      "0.1 ml intradermal per site"
+     ],
+     [
+      "Third visit",
+      "Day 7",
+      "2 sites (left and right deltoid)",
+      "0.1 ml intradermal per site"
+     ],
+     [
+      "Fourth visit",
+      "Day 28",
+      "2 sites (left and right deltoid)",
+      "0.1 ml intradermal per site"
+     ]
     ]
    }
   },
@@ -41,11 +66,19 @@
     "kind": "compare",
     "left": {
      "title": "Intradermal (2-site TRC)",
-     "points": ["4 clinic visits (days 0, 3, 7, 28)", "Uses 0.2 ml total vaccine per visit", "Total volume 0.8 ml across therapy"]
+     "points": [
+      "4 clinic visits (days 0, 3, 7, 28)",
+      "Uses 0.2 ml total vaccine per visit",
+      "Total volume 0.8 ml across therapy"
+     ]
     },
     "right": {
      "title": "Intramuscular (5-dose Essen)",
-     "points": ["5 clinic visits (days 0, 3, 7, 14, 28)", "Uses 1 full vial (0.5 to 1.0 ml) per visit", "Total volume 2.5 to 5.0 ml across therapy"]
+     "points": [
+      "5 clinic visits (days 0, 3, 7, 14, 28)",
+      "Uses 1 full vial (0.5 to 1.0 ml) per visit",
+      "Total volume 2.5 to 5.0 ml across therapy"
+     ]
     }
    }
   },
@@ -55,11 +88,31 @@
    "say": "Rabies immunoglobulin provides immediate protection during the first week before vaccine antibodies develop. The dose is twenty units per kilogram for human product and forty for equine.",
    "vis": {
     "kind": "table",
-    "cols": ["Immunoglobulin product", "Origin source", "Recommended dosage", "Skin test requirement"],
+    "cols": [
+     "Immunoglobulin product",
+     "Origin source",
+     "Recommended dosage",
+     "Skin test requirement"
+    ],
     "rows": [
-     ["Equine RIG (ERIG)", "Hyperimmunised horse serum", "40 IU per kilogram body weight", "Skin testing no longer routinely required"],
-     ["Human RIG (HRIG)", "Purified human plasma donors", "20 IU per kilogram body weight", "No sensitivity test needed; zero serum sickness"],
-     ["Monoclonal antibodies", "Recombinant rabies mAbs", "Per manufacturer guidelines (3.3 mg/kg)", "Synthetic consistency; no animal biological risk"]
+     [
+      "Equine RIG (ERIG)",
+      "Hyperimmunised horse serum",
+      "40 IU per kilogram body weight",
+      "Skin testing no longer routinely required"
+     ],
+     [
+      "Human RIG (HRIG)",
+      "Purified human plasma donors",
+      "20 IU per kilogram body weight",
+      "No sensitivity test needed; zero serum sickness"
+     ],
+     [
+      "Monoclonal antibodies",
+      "Recombinant rabies mAbs",
+      "Per manufacturer guidelines (3.3 mg/kg)",
+      "Synthetic consistency; no animal biological risk"
+     ]
     ]
    }
   },
@@ -70,11 +123,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Calculate total RIG dose by body weight"},
-     {"id": "b", "label": "Infiltrate thoroughly into all bite wounds"},
-     {"id": "c", "label": "Inject any surplus IM distant from vaccine"}
+     {
+      "id": "a",
+      "label": "Calculate total RIG dose by body weight"
+     },
+     {
+      "id": "b",
+      "label": "Infiltrate thoroughly into all bite wounds"
+     },
+     {
+      "id": "c",
+      "label": "Inject any surplus IM distant from vaccine"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -85,11 +156,19 @@
     "kind": "compare",
     "left": {
      "title": "Unimmunised individual",
-     "points": ["Full 4-visit ID or 5-dose IM series", "Mandatory RIG infiltration for Category III", "Takes 7 to 10 days to produce antibodies"]
+     "points": [
+      "Full 4-visit ID or 5-dose IM series",
+      "Mandatory RIG infiltration for Category III",
+      "Takes 7 to 10 days to produce antibodies"
+     ]
     },
     "right": {
      "title": "Documented prior vaccinee",
-     "points": ["Only 2 booster doses on days 0 and 3", "Immunoglobulin is strictly not required", "Anamnestic IgG surge within 48 to 72 hours"]
+     "points": [
+      "Only 2 booster doses on days 0 and 3",
+      "Immunoglobulin is strictly not required",
+      "Anamnestic IgG surge within 48 to 72 hours"
+     ]
     }
    }
   },
@@ -99,11 +178,27 @@
    "say": "Veterinarians, animal handlers and rabies laboratory workers receive pre-exposure vaccination on days zero, seven, and twenty-one. This protects against unrecognised exposures.",
    "vis": {
     "kind": "table",
-    "cols": ["Target occupational group", "Pre-exposure vaccination schedule", "Post-exposure action if bitten"],
+    "cols": [
+     "Target occupational group",
+     "Pre-exposure vaccination schedule",
+     "Post-exposure action if bitten"
+    ],
     "rows": [
-     ["Veterinarians and animal handlers", "Days 0, 7, and 21 or 28 (0.1 ml ID)", "Two booster doses on days 0 and 3; no RIG"],
-     ["Rabies laboratory scientists", "Days 0, 7, and 21 or 28 + regular titres", "Booster if virus neutralising titre < 0.5 IU/ml"],
-     ["Wildlife park rangers and travelers", "Days 0, 7, and 21 or 28", "Two booster doses on days 0 and 3; no RIG"]
+     [
+      "Veterinarians and animal handlers",
+      "Days 0, 7, and 21 or 28 (0.1 ml ID)",
+      "Two booster doses on days 0 and 3; no RIG"
+     ],
+     [
+      "Rabies laboratory scientists",
+      "Days 0, 7, and 21 or 28 + regular titres",
+      "Booster if virus neutralising titre < 0.5 IU/ml"
+     ],
+     [
+      "Wildlife park rangers and travelers",
+      "Days 0, 7, and 21 or 28",
+      "Two booster doses on days 0 and 3; no RIG"
+     ]
     ]
    }
   },
@@ -114,12 +209,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Rodent renal carrier sheds leptospires in urine"},
-     {"id": "b", "label": "Monsoon floodwater and mud contamination"},
-     {"id": "c", "label": "Entry via abraded skin or conjunctiva"},
-     {"id": "d", "label": "Systemic endothelial damage and vasculitis"}
+     {
+      "id": "a",
+      "label": "Rodent renal carrier sheds leptospires in urine"
+     },
+     {
+      "id": "b",
+      "label": "Monsoon floodwater and mud contamination"
+     },
+     {
+      "id": "c",
+      "label": "Entry via abraded skin or conjunctiva"
+     },
+     {
+      "id": "d",
+      "label": "Systemic endothelial damage and vasculitis"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -130,11 +250,19 @@
     "kind": "compare",
     "left": {
      "title": "Anicteric leptospirosis (90%)",
-     "points": ["Sudden fever, headache and calf myalgia", "Prominent conjunctival suffusion", "Complete recovery without renal failure"]
+     "points": [
+      "Sudden fever, headache and calf myalgia",
+      "Prominent conjunctival suffusion",
+      "Complete recovery without renal failure"
+     ]
     },
     "right": {
      "title": "Severe Weil disease (10%)",
-     "points": ["Deep jaundice and acute kidney failure", "Pulmonary alveolar haemorrhage", "High case fatality requiring intensive dialysis"]
+     "points": [
+      "Deep jaundice and acute kidney failure",
+      "Pulmonary alveolar haemorrhage",
+      "High case fatality requiring intensive dialysis"
+     ]
     }
    }
   },
@@ -155,12 +283,73 @@
    "say": "Rescue workers and flood victims take two hundred milligrams of doxycycline once weekly to prevent leptospirosis. Severe cases are treated in hospital with intravenous penicillin or ceftriaxone.",
    "vis": {
     "kind": "table",
-    "cols": ["Clinical setting", "Antibiotic regimen", "Administration guidance"],
+    "cols": [
+     "Clinical setting",
+     "Antibiotic regimen",
+     "Administration guidance"
+    ],
     "rows": [
-     ["High-risk flood exposure", "Oral doxycycline 200 mg once weekly", "Continue weekly throughout exposure period"],
-     ["Mild anicteric illness", "Oral doxycycline 100 mg twice daily", "7-day course taken after food"],
-     ["Severe Weil disease", "Intravenous crystalline penicillin G", "1.5 million units IV every 6 hours for 7 days"],
-     ["Penicillin allergic severe case", "Intravenous ceftriaxone 1 g daily", "7-day course with hemodynamic monitoring"]
+     [
+      "High-risk flood exposure",
+      "Oral doxycycline 200 mg once weekly",
+      "Continue weekly throughout exposure period"
+     ],
+     [
+      "Mild anicteric illness",
+      "Oral doxycycline 100 mg twice daily",
+      "7-day course taken after food"
+     ],
+     [
+      "Severe Weil disease",
+      "Intravenous crystalline penicillin G",
+      "1.5 million units IV every 6 hours for 7 days"
+     ],
+     [
+      "Penicillin allergic severe case",
+      "Intravenous ceftriaxone 1 g daily",
+      "7-day course with hemodynamic monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Updated Thai Red Cross regimen gives 0.1 ml intradermally at two sites on days 0, 3, 7 and 28. Essen regimen gives one vial intramuscularly on days 0, 3, 7, 14 and 28, never in the gluteal region. Human immunoglobulin is 20 units per kilogram and equine is 40 units per kilogram. Previously immunised patients need only days 0 and 3 boosters, without immunoglobulin.",
+   "say": "Updated Thai Red Cross regimen gives 0.1 ml intradermally at two sites on days 0, 3, 7 and 28. Essen regimen gives one vial intramuscularly on days 0, 3, 7, 14 and 28, never in the gluteal region. Human immunoglobulin is 20 units per kilogram and equine is 40 units per kilogram. Previously immunised patients need only days 0 and 3 boosters, without immunoglobulin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Thai Red Cross dose",
+      "0.1 ml intradermal at two sites per visit"
+     ],
+     [
+      "Thai Red Cross days",
+      "Days zero, three, seven and twenty eight"
+     ],
+     [
+      "Essen regimen days",
+      "Days zero, three, seven, fourteen, twenty eight"
+     ],
+     [
+      "Gluteal injection trap",
+      "Never inject rabies vaccine into gluteal region"
+     ],
+     [
+      "Human RIG dose",
+      "Twenty international units per kilogram body weight"
+     ],
+     [
+      "Equine RIG dose",
+      "Forty international units per kilogram body weight"
+     ],
+     [
+      "Re exposure boosters",
+      "Days zero and three only, no immunoglobulin"
+     ]
     ]
    }
   }

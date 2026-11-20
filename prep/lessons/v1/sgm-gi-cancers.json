@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "sgm-gi-cancers",
+ "subject": "ss-general-medicine",
+ "title": "Gastrointestinal Cancers",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Gastrointestinal cancers** include oesophageal, gastric, hepatic, pancreatic and colorectal malignancies. **Colorectal cancer** is the second commonest cancer worldwide and pancreatic cancer has the lowest survival. **Histology is usually adenocarcinoma** except squamous oesophagus and gastrointestinal stromal tumours. Early symptoms are vague and present late despite effective screening for colorectal disease.",
+   "say": "Gastrointestinal cancers are classified as oesophageal, gastric, hepatic, pancreatic and colorectal types. Colorectal cancer is among the commonest cancers and pancreatic cancer has the lowest survival rate. Histology is usually adenocarcinoma except for specific subtypes such as stromal tumours. Early symptoms are often vague and presentation is late despite effective screening for colorectal disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Helicobacter pylori infection** causes gastric adenocarcinoma and mucosa associated lymphoid tissue lymphoma. **Hepatitis B and C viruses** plus aflatoxin exposure drive hepatocellular carcinoma. **Lynch syndrome** with mismatch repair defects and **familial adenomatous polyposis** with APC mutation predispose to colorectal cancer. **Barrett oesophagus**, smoking, alcohol and betel nut use raise oesophageal risk. Chronic atrophic gastritis and pernicious anaemia further increase gastric risk.",
+   "say": "Helicobacter pylori infection is a major cause of gastric adenocarcinoma and reactive lymphoid disease. Hepatitis B and C viruses together with aflatoxin exposure can drive hepatocellular carcinoma in patients. Lynch syndrome with mismatch repair defects predisposes to colorectal cancer at young age. Barrett oesophagus, smoking and alcohol use can increase oesophageal cancer risk substantially.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cancer",
+     "Major risk factor",
+     "Precursor"
+    ],
+    "rows": [
+     [
+      "Gastric",
+      "Helicobacter pylori",
+      "Atrophic gastritis intestinal metaplasia"
+     ],
+     [
+      "Colorectal",
+      "Polyps Lynch syndrome",
+      "Adenoma serrated lesions"
+     ],
+     [
+      "Oesophageal",
+      "Smoking alcohol betel",
+      "Barrett squamous dysplasia"
+     ],
+     [
+      "Hepatocellular",
+      "Hepatitis B C aflatoxin",
+      "Cirrhosis dysplastic nodule"
+     ],
+     [
+      "Pancreatic",
+      "Smoking chronic pancreatitis",
+      "Pancreatic intraepithelial neoplasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adenoma to carcinoma sequence** proceeds through progressive accumulation of mutations over 10 to 15 years. **KRAS, TP53 and APC** mutations define colorectal pathways. **Pancreatic ductal adenocarcinoma** arises through PanIN lesions with stepwise KRAS and p53 changes. **Gastrointestinal stromal tumours** are driven by KIT or platelet derived growth factor receptor mutations. Tumor marker rise reflects burden, not diagnosis, and never replaces histology.",
+   "say": "Adenoma to carcinoma sequence is associated with progressive accumulation of mutations over many years. KRAS and APC mutations are central to colorectal pathways in tumour development. Pancreatic ductal adenocarcinoma arises through precursor lesions with stepwise genetic changes. Gastrointestinal stromal tumours are driven by specific receptor mutations and tumour markers reflect burden rather than diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Oesophageal squamous cancer** presents with progressive solid liquid dysphagia and weight loss. **Gastric cancer** causes early satiety, epigastric pain and iron deficiency anaemia. **Colorectal cancer** alters bowel habit with bleeding per rectum and tenesmus. **Pancreatic head cancer** produces Courvoisier gallbladder with painless jaundice. **Hepatocellular carcinoma** declares itself with abdominal mass, ascites and encephalopathy in cirrhotic liver.",
+   "say": "Oesophageal squamous cancer presents with progressive dysphagia and significant weight loss in patients. Gastric cancer causes early satiety, epigastric pain and iron deficiency anaemia together. Colorectal cancer can alter bowel habit with bleeding per rectum and tenesmus. Pancreatic head cancer produces painless jaundice with gallbladder enlargement and hepatocellular carcinoma presents with mass and ascites.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oesophageal signs",
+     "points": [
+      "Progressive solid liquid dysphagia",
+      "Weight loss in months",
+      "Virchow node metastasis"
+     ]
+    },
+    "right": {
+     "title": "Pancreatic signs",
+     "points": [
+      "Painless jaundice pruritus",
+      "Courvoisier gallbladder palpable",
+      "Trousseau migratory thrombophlebitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Upper gastrointestinal endoscopy with biopsy** is the gold standard for gastric and oesophageal cancers. **Colonoscopy with polypectomy and biopsy** remains the reference standard for colorectal cancer. **Contrast enhanced computed tomography** stages nodal and metastatic disease. **Tumour markers** include carcinoembryonic antigen for colorectal, CA 19-9 for pancreas and alpha fetoprotein for hepatocellular carcinoma. **Positron emission tomography** detects distant spread before curative surgery.",
+   "say": "Upper gastrointestinal endoscopy with biopsy is the reference standard for gastric and oesophageal cancers. Colonoscopy with polypectomy and biopsy remains the reference standard for colorectal cancer screening. Contrast enhanced computed tomography is used for staging nodal and metastatic disease in patients. Tumour markers are carcinoembryonic antigen, CA nineteen dash nine and alpha fetoprotein for hepatocellular carcinoma.",
+   "vis": null
+  },
+  {
+   "tx": "**Surgical resection** offers cure in localised disease when margins can be cleared. **Neoadjuvant chemotherapy** improves resectability, with FLOT regimen for gastric cancer. **Adjuvant chemotherapy** after surgery reduces recurrence in stage 3 colorectal disease. **FOLFOX and CAPOX regimens** are standard adjuvant choices. **Imatinib** is the targeted therapy for resected gastrointestinal stromal tumours at high risk.",
+   "say": "Surgical resection can offer cure in localised disease when margins can be cleared completely. Neoadjuvant chemotherapy improves resectability and gastric cancer uses FLOT regimen. Adjuvant chemotherapy after surgery can reduce recurrence in stage three colorectal disease. FOLFOX regimens are standard adjuvant choices and imatinib is used for high risk stromal tumours after resection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resectable disease surgery"
+     },
+     {
+      "id": "b",
+      "label": "Neoadjuvant chemotherapy"
+     },
+     {
+      "id": "c",
+      "label": "Adjuvant treatment"
+     },
+     {
+      "id": "d",
+      "label": "Surveillance markers imaging"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Advanced cancers receive **palliative chemotherapy** for symptom control and survival benefit. **Microsatellite instability** predicts response to immune checkpoint blockade in colorectal cancer. **FOLFIRINOX and gemcitabine nab paclitaxel** are options for metastatic pancreatic cancer. **Sorafenib, atezolizumab bevacizumab and durvalumab** options guide hepatocellular therapy by stage. The **National Comprehensive Cancer Network guidelines** update regimens annually by molecular profile.",
+   "say": "Advanced cancers can receive palliative chemotherapy for symptom control and survival benefit. Microsatellite instability can predict response to immune checkpoint blockade in colorectal cancer. FOLFIRINOX options are used for metastatic pancreatic cancer with good performance status. Multidrug regimens for hepatocellular carcinoma are selected by liver function and tumor burden in practice.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **malignant obstruction, perforation and upper gastrointestinal bleeding**. **Krukenberg tumours** indicate ovarian spread from gastric signet ring carcinoma. **Peritoneal carcinomatosis** presents with ascites, omental cake and sister Mary Joseph nodule. **Cancer cachexia** with weight loss and hypoalbuminaemia worsens surgical outcomes. **Venous thromboembolism** risk is high in pancreatic and gastric malignancies.",
+   "say": "Complications include malignant obstruction, perforation and upper gastrointestinal bleeding in patients. Krukenberg tumours indicate ovarian spread from gastric signet ring carcinoma. Peritoneal carcinomatosis presents with ascites, omental cake and periumbilical nodule. Cancer cachexia with weight loss and hypoalbuminaemia can worsen surgical outcomes substantially.",
+   "vis": null
+  },
+  {
+   "tx": "**Colorectal screening with colonoscopy** starts at 45 years in average risk adults. **Faecal immunochemical test** annually is an accepted non invasive alternative. **Early satiety with lymphadenopathy** should raise suspicion of gastric cancer rather than dyspepsia. **Painless jaundice** in an elderly patient means pancreatic head malignancy until proven otherwise. **Alpha fetoprotein rise** in cirrhotic liver needs hepatocellular carcinoma evaluation.",
+   "say": "Colorectal screening with colonoscopy should start at forty five years in average risk adults. Faecal immunochemical testing annually is an accepted non invasive alternative for screening. Early satiety with lymphadenopathy should raise suspicion of gastric cancer rather than dyspepsia. Painless jaundice in an elderly patient is strongly associated with pancreatic head malignancy.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis depends on **stage at presentation** with early disease carrying much better survival. **Pancreatic cancer** retains 5-year survival below 15% even with therapy. **Colorectal cancer** survival exceeds 80% when disease is localised at detection. Gastric and oesophageal cancers present late and carry poor prognosis overall. Nutrition, smoking cessation and Helicobacter eradication provide primary prevention value.",
+   "say": "Prognosis depends on stage at presentation with early disease carrying much better survival. Pancreatic cancer has low five year survival even with modern multimodal therapy. Colorectal cancer survival is much higher when disease is localised at detection by screening. Gastric and oesophageal cancers present late and they carry poor prognosis overall in practice.",
+   "vis": null
+  },
+  {
+   "tx": "Remember **adenoma sequence duration**, screening age, and **GIST targeted drug**. Courvoisier gallbladder points to pancreatic head cancer while Virchow node points to gastric spread. FLOT neoadjuvant and FOLFOX adjuvant regimens are high yield. Helicobacter causes gastric cancer and lymphoma at high frequency.",
+   "say": "You should remember adenoma sequence duration and the screening age for colorectal cancer. Courvoisier gallbladder points to pancreatic head cancer while Virchow node points to gastric spread. FLOT neoadjuvant and FOLFOX adjuvant regimens are high yield for examinations. Helicobacter infection is a major cause of gastric cancer and lymphoid disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Screening age",
+      "Forty five years average risk"
+     ],
+     [
+      "Adenoma sequence",
+      "Ten to fifteen years"
+     ],
+     [
+      "GIST drug",
+      "Imatinib KIT driven"
+     ],
+     [
+      "Gastric node",
+      "Virchow left supraclavicular"
+     ],
+     [
+      "Pancreas sign",
+      "Courvoisier gallbladder jaundice"
+     ],
+     [
+      "Regimens",
+      "FLOT neoadjuvant FOLFOX adjuvant"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

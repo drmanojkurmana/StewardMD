@@ -25,12 +25,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Unsterile cutting or dirty cord dressing"},
-     {"id": "b", "label": "Spore germination in necrotic umbilical stump"},
-     {"id": "c", "label": "Day 7 inability to suckle and feed"},
-     {"id": "d", "label": "Fatal autonomic instability and spasms"}
+     {
+      "id": "a",
+      "label": "Unsterile cutting or dirty cord dressing"
+     },
+     {
+      "id": "b",
+      "label": "Spore germination in necrotic umbilical stump"
+     },
+     {
+      "id": "c",
+      "label": "Day 7 inability to suckle and feed"
+     },
+     {
+      "id": "d",
+      "label": "Fatal autonomic instability and spasms"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -50,12 +75,32 @@
    "say": "India eliminated maternal and neonatal tetanus by achieving less than one case per thousand live births across all districts, powered by hospital births and antenatal immunization.",
    "vis": {
     "kind": "table",
-    "cols": ["Elimination pillar", "Strategic intervention", "Protective outcome"],
+    "cols": [
+     "Elimination pillar",
+     "Strategic intervention",
+     "Protective outcome"
+    ],
     "rows": [
-     ["Institutional delivery", "Free hospital births under JSY", "Clean umbilical cutting with sterile kits"],
-     ["Five cleans at birth", "Clean hands, surface, blade, cord tie, stump", "Zero contamination of neonatal tissues"],
-     ["Antenatal immunization", "Two doses of Td during pregnancy", "Maternal IgG crosses placenta to shield infant"],
-     ["Validation benchmark", "Neonatal tetanus < 1 per 1,000 live births", "Sustained across every district in India"]
+     [
+      "Institutional delivery",
+      "Free hospital births under JSY",
+      "Clean umbilical cutting with sterile kits"
+     ],
+     [
+      "Five cleans at birth",
+      "Clean hands, surface, blade, cord tie, stump",
+      "Zero contamination of neonatal tissues"
+     ],
+     [
+      "Antenatal immunization",
+      "Two doses of Td during pregnancy",
+      "Maternal IgG crosses placenta to shield infant"
+     ],
+     [
+      "Validation benchmark",
+      "Neonatal tetanus < 1 per 1,000 live births",
+      "Sustained across every district in India"
+     ]
     ]
    }
   },
@@ -67,11 +112,19 @@
     "kind": "compare",
     "left": {
      "title": "Legacy tetanus toxoid (TT)",
-     "points": ["Contains tetanus toxoid only", "Ignored waning adult diphtheria immunity", "Permitted adolescent diphtheria outbreaks"]
+     "points": [
+      "Contains tetanus toxoid only",
+      "Ignored waning adult diphtheria immunity",
+      "Permitted adolescent diphtheria outbreaks"
+     ]
     },
     "right": {
      "title": "Modern Td vaccine",
-     "points": ["Contains tetanus toxoid + reduced diphtheria", "Boosts both antibodies simultaneously", "Standard in pregnancy, schools and wound care"]
+     "points": [
+      "Contains tetanus toxoid + reduced diphtheria",
+      "Boosts both antibodies simultaneously",
+      "Standard in pregnancy, schools and wound care"
+     ]
     }
    }
   },
@@ -81,11 +134,27 @@
    "say": "Pregnant mothers receive two doses of Td four weeks apart. Maternal antibodies travel across the placenta, shielding the newborn baby from umbilical tetanus during the first months of life.",
    "vis": {
     "kind": "table",
-    "cols": ["Maternal immunization status", "Antenatal schedule recommended", "Timing of doses"],
+    "cols": [
+     "Maternal immunization status",
+     "Antenatal schedule recommended",
+     "Timing of doses"
+    ],
     "rows": [
-     ["Unvaccinated / Unknown", "Two doses of Td (0.5 ml IM)", "Td-1 early in pregnancy; Td-2 after 4 weeks"],
-     ["Vaccinated within past 3 years", "Single booster dose of Td (0.5 ml IM)", "Given early in index pregnancy"],
-     ["Late presentation in third trimester", "Two doses at minimum 4-week gap", "Second dose at least 2 weeks before delivery"]
+     [
+      "Unvaccinated / Unknown",
+      "Two doses of Td (0.5 ml IM)",
+      "Td-1 early in pregnancy; Td-2 after 4 weeks"
+     ],
+     [
+      "Vaccinated within past 3 years",
+      "Single booster dose of Td (0.5 ml IM)",
+      "Given early in index pregnancy"
+     ],
+     [
+      "Late presentation in third trimester",
+      "Two doses at minimum 4-week gap",
+      "Second dose at least 2 weeks before delivery"
+     ]
     ]
    }
   },
@@ -97,11 +166,19 @@
     "kind": "compare",
     "left": {
      "title": "Human tetanus immunoglobulin (HTIG)",
-     "points": ["250 to 500 IU intramuscular dose", "Immediate passive neutralizing antibodies", "No serum sickness; half-life 3 to 4 weeks"]
+     "points": [
+      "250 to 500 IU intramuscular dose",
+      "Immediate passive neutralizing antibodies",
+      "No serum sickness; half-life 3 to 4 weeks"
+     ]
     },
     "right": {
      "title": "Active Td vaccine",
-     "points": ["0.5 ml intramuscular deltoid injection", "Stimulates host B cells to make antibodies", "Takes 7 to 14 days to produce IgG response"]
+     "points": [
+      "0.5 ml intramuscular deltoid injection",
+      "Stimulates host B cells to make antibodies",
+      "Takes 7 to 14 days to produce IgG response"
+     ]
     }
    }
   },
@@ -111,12 +188,32 @@
    "say": "Clean minor wounds need a tetanus booster only if ten years have passed. Dirty or deep puncture wounds need a booster after five years, plus tetanus immunoglobulin if the person is unvaccinated.",
    "vis": {
     "kind": "table",
-    "cols": ["Prior vaccination history", "Clean minor wound action", "Dirty, contaminated wound action"],
+    "cols": [
+     "Prior vaccination history",
+     "Clean minor wound action",
+     "Dirty, contaminated wound action"
+    ],
     "rows": [
-     ["Unimmunised or < 3 doses", "Complete Td series; no HTIG", "Complete Td series + HTIG 250 IU"],
-     ["3 or more doses; last < 5 years", "No vaccine; no HTIG", "No vaccine; no HTIG"],
-     ["3 or more doses; last 5 to 10 years", "No vaccine; no HTIG", "Give single Td booster; no HTIG"],
-     ["3 or more doses; last > 10 years", "Give single Td booster; no HTIG", "Give single Td booster + HTIG if high risk"]
+     [
+      "Unimmunised or < 3 doses",
+      "Complete Td series; no HTIG",
+      "Complete Td series + HTIG 250 IU"
+     ],
+     [
+      "3 or more doses; last < 5 years",
+      "No vaccine; no HTIG",
+      "No vaccine; no HTIG"
+     ],
+     [
+      "3 or more doses; last 5 to 10 years",
+      "No vaccine; no HTIG",
+      "Give single Td booster; no HTIG"
+     ],
+     [
+      "3 or more doses; last > 10 years",
+      "Give single Td booster; no HTIG",
+      "Give single Td booster + HTIG if high risk"
+     ]
     ]
    }
   },
@@ -127,12 +224,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Copious sterile normal saline irrigation"},
-     {"id": "b", "label": "Excision of devitalised necrotic margins"},
-     {"id": "c", "label": "Removal of embedded foreign dirt and soil"},
-     {"id": "d", "label": "Open wound care to prevent anaerobic environment"}
+     {
+      "id": "a",
+      "label": "Copious sterile normal saline irrigation"
+     },
+     {
+      "id": "b",
+      "label": "Excision of devitalised necrotic margins"
+     },
+     {
+      "id": "c",
+      "label": "Removal of embedded foreign dirt and soil"
+     },
+     {
+      "id": "d",
+      "label": "Open wound care to prevent anaerobic environment"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,12 +263,73 @@
    "say": "Patients with established tetanus need intensive care in a quiet, darkened room. Treatment combines tetanus immunoglobulin, metronidazole, muscle relaxants and early tracheostomy.",
    "vis": {
     "kind": "table",
-    "cols": ["Clinical priority", "Intervention administered", "Therapeutic goal"],
+    "cols": [
+     "Clinical priority",
+     "Intervention administered",
+     "Therapeutic goal"
+    ],
     "rows": [
-     ["Toxin neutralization", "HTIG 3,000 to 6,000 IU intramuscularly", "Binds circulating unbound tetanospasmin"],
-     ["Eradicate vegetative bacilli", "Metronidazole 500 mg IV every 8 hours", "Destroys anaerobic bacteria at wound bed"],
-     ["Control reflex spasms", "IV diazepam infusions or magnesium sulphate", "Calms reflex motor convulsions and rigidity"],
-     ["Airway protection", "Elective tracheostomy and mechanical support", "Prevents fatal laryngospasm and suffocation"]
+     [
+      "Toxin neutralization",
+      "HTIG 3,000 to 6,000 IU intramuscularly",
+      "Binds circulating unbound tetanospasmin"
+     ],
+     [
+      "Eradicate vegetative bacilli",
+      "Metronidazole 500 mg IV every 8 hours",
+      "Destroys anaerobic bacteria at wound bed"
+     ],
+     [
+      "Control reflex spasms",
+      "IV diazepam infusions or magnesium sulphate",
+      "Calms reflex motor convulsions and rigidity"
+     ],
+     [
+      "Airway protection",
+      "Elective tracheostomy and mechanical support",
+      "Prevents fatal laryngospasm and suffocation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Neonatal tetanus presents around day seven when a feeding baby stops sucking. India eliminated maternal and neonatal tetanus in 2015, below one case per thousand live births per district. Unimmunised pregnant women get two Td doses four weeks apart. Human tetanus immunoglobulin is 250 units, or 500 units for severe wounds, at a separate site.",
+   "say": "Neonatal tetanus presents around day seven when a feeding baby stops sucking. India eliminated maternal and neonatal tetanus in 2015, below one case per thousand live births per district. Unimmunised pregnant women get two Td doses four weeks apart. Human tetanus immunoglobulin is 250 units, or 500 units for severe wounds, at a separate site.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Causative toxin action",
+      "Tetanospasmin blocks GABA and glycine release centrally"
+     ],
+     [
+      "Neonatal tetanus timing",
+      "Stops sucking around seventh day after birth"
+     ],
+     [
+      "Elimination threshold India",
+      "Below one per thousand live births per district, 2015"
+     ],
+     [
+      "Antenatal Td schedule",
+      "Two doses four weeks apart if previously unimmunised"
+     ],
+     [
+      "Human immunoglobulin dose",
+      "250 units, 500 units for severe contaminated wounds"
+     ],
+     [
+      "Clean wound booster rule",
+      "Td booster if over ten years elapsed"
+     ],
+     [
+      "Dirty wound booster rule",
+      "Td booster if over five years elapsed"
+     ]
     ]
    }
   }

@@ -12,12 +12,37 @@
     "kind": "flow",
     "title": "ADA failure to SCID",
     "nodes": [
-     {"id": "ada", "label": "ADA absent, deoxyadenosine floods"},
-     {"id": "datp", "label": "dATP locks reductase off"},
-     {"id": "starve", "label": "All dNTPs starve in precursors"},
-     {"id": "scid", "label": "T B NK SCID from birth"}
+     {
+      "id": "ada",
+      "label": "ADA absent, deoxyadenosine floods"
+     },
+     {
+      "id": "datp",
+      "label": "dATP locks reductase off"
+     },
+     {
+      "id": "starve",
+      "label": "All dNTPs starve in precursors"
+     },
+     {
+      "id": "scid",
+      "label": "T B NK SCID from birth"
+     }
     ],
-    "edges": [["ada", "datp"], ["datp", "starve"], ["starve", "scid"]]
+    "edges": [
+     [
+      "ada",
+      "datp"
+     ],
+     [
+      "datp",
+      "starve"
+     ],
+     [
+      "starve",
+      "scid"
+     ]
+    ]
    }
   },
   {
@@ -25,8 +50,21 @@
    "say": "PNP deficiency accumulates dGTP selectively in T cells later than ADA SCID presents. Ribonucleotide reductase is the S phase chokepoint every deoxy starvation strategy shares mechanistically across drugs.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "ADA deficiency", "points": ["dATP locks reductase globally", "T B NK absent, earliest SCID", "PEG-ADA bridge therapy"]},
-    "right": {"title": "PNP deficiency", "points": ["dGTP T selective toxicity", "Later, neurology and autoimmunity", "Transplant mainstay"]
+    "left": {
+     "title": "ADA deficiency",
+     "points": [
+      "dATP locks reductase globally",
+      "T B NK absent, earliest SCID",
+      "PEG-ADA bridge therapy"
+     ]
+    },
+    "right": {
+     "title": "PNP deficiency",
+     "points": [
+      "dGTP T selective toxicity",
+      "Later, neurology and autoimmunity",
+      "Transplant mainstay"
+     ]
     }
    }
   },
@@ -35,12 +73,32 @@
    "say": "Hydroxyurea raises fetal haemoglobin in sickle disease decisively beyond its reductase history. Thiopurines require HGPRT activation with TPMT genotyping, and allopurinol co prescription dangerously shunts activation requiring dose cuts.",
    "vis": {
     "kind": "table",
-    "cols": ["Drug", "Nucleotide chokepoint", "Fatal interaction or screen"],
+    "cols": [
+     "Drug",
+     "Nucleotide chokepoint",
+     "Fatal interaction or screen"
+    ],
     "rows": [
-     ["Hydroxyurea", "Reductase radical quenched; HbF up", "Monitor marrow; sickle cornerstone"],
-     ["6-Mercaptopurine", "HGPRT activated fake purine", "TPMT/NUDT15 genotype; allopurinol shunt"],
-     ["Methotrexate", "DHFR folate starvation", "Leucovorin timing rescue"],
-     ["5-Fluorouracil", "Thymidylate synthase suicide", "DPYD screen; leucovorin potentiates"]
+     [
+      "Hydroxyurea",
+      "Reductase radical quenched; HbF up",
+      "Monitor marrow; sickle cornerstone"
+     ],
+     [
+      "6-Mercaptopurine",
+      "HGPRT activated fake purine",
+      "TPMT/NUDT15 genotype; allopurinol shunt"
+     ],
+     [
+      "Methotrexate",
+      "DHFR folate starvation",
+      "Leucovorin timing rescue"
+     ],
+     [
+      "5-Fluorouracil",
+      "Thymidylate synthase suicide",
+      "DPYD screen; leucovorin potentiates"
+     ]
     ]
    }
   },
@@ -54,8 +112,21 @@
    "say": "Rasburicase prevents tumour lysis nephropathy but haemolyses G6PD deficient cells and falsely lowers urate unless tubes ice immediately. Pegloticase immunogenicity limits refractory gout durability without methotrexate co therapy.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Synthesis blockers (prevent urate birth)", "points": ["Allopurinol and febuxostat (xanthine oxidase)", "Treat to target chronic gout", "Start low, prophylaxis cover"]},
-    "right": {"title": "Urate destroyers (remove existing load)", "points": ["Rasburicase (TLS acute), pegloticase (refractory chronic)", "G6PD screen mandatory", "Ice tubes after rasburicase draws"]
+    "left": {
+     "title": "Synthesis blockers (prevent urate birth)",
+     "points": [
+      "Allopurinol and febuxostat (xanthine oxidase)",
+      "Treat to target chronic gout",
+      "Start low, prophylaxis cover"
+     ]
+    },
+    "right": {
+     "title": "Urate destroyers (remove existing load)",
+     "points": [
+      "Rasburicase (TLS acute), pegloticase (refractory chronic)",
+      "G6PD screen mandatory",
+      "Ice tubes after rasburicase draws"
+     ]
     }
    }
   },
@@ -66,11 +137,74 @@
     "kind": "flow",
     "title": "Deoxy supply compartments",
     "nodes": [
-     {"id": "cyto", "label": "Cytosol: reductase plus TK1 (S phase)"},
-     {"id": "mito", "label": "Mitochondria: TK2 salvage constitutive"},
-     {"id": "fail", "label": "Either fails: division or mtDNA depletes"}
+     {
+      "id": "cyto",
+      "label": "Cytosol: reductase plus TK1 (S phase)"
+     },
+     {
+      "id": "mito",
+      "label": "Mitochondria: TK2 salvage constitutive"
+     },
+     {
+      "id": "fail",
+      "label": "Either fails: division or mtDNA depletes"
+     }
     ],
-    "edges": [["cyto", "fail"], ["mito", "fail"]]
+    "edges": [
+     [
+      "cyto",
+      "fail"
+     ],
+     [
+      "mito",
+      "fail"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Adenosine deaminase deficiency causes SCID with absent thymic shadow, lymphopenia from birth, and live vaccine disasters, bridged by PEG-ADA to transplant or gene therapy. Hydroxyurea inhibits ribonucleotide reductase and raises fetal haemoglobin in sickle cell disease. Acyclovir needs herpes thymidine kinase for selective activation. Rasburicase prevents tumour lysis nephropathy but haemolyses G6PD deficient red cells and requires iced tubes for urate testing.",
+   "say": "High-yield for the exam. Adenosine deaminase deficiency causes S C I D with absent thymic shadow, lymphopenia from birth, and live vaccine disasters, bridged by P E G A D A to transplant or gene therapy. Hydroxyurea inhibits ribonucleotide reductase and raises fetal haemoglobin in sickle cell disease. Acyclovir needs herpes thymidine kinase for selective activation. Rasburicase prevents tumour lysis nephropathy but haemolyses G six P D deficient red cells and requires iced tubes for urate testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "ADA SCID presentation",
+      "Absent thymus, lymphopenia from birth"
+     ],
+     [
+      "ADA SCID vaccine trap",
+      "BCG and rotavirus live vaccine disaster"
+     ],
+     [
+      "PNP deficiency pattern",
+      "dGTP in T cells, B spared early"
+     ],
+     [
+      "Hydroxyurea target",
+      "Ribonucleotide reductase tyrosyl radical quenched"
+     ],
+     [
+      "Hydroxyurea sickle benefit",
+      "Raises fetal haemoglobin, fewer crises"
+     ],
+     [
+      "Thiopurine activation",
+      "HGPRT activation, TPMT detoxifies"
+     ],
+     [
+      "Allopurinol thiopurine trap",
+      "Shunts activation, cut thiopurine dose"
+     ],
+     [
+      "Acyclovir selectivity",
+      "Herpes thymidine kinase first phosphorylation"
+     ]
+    ]
    }
   }
  ],

@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "w1", "label": "World Health Assembly sets policy yearly" },
-          { "id": "w2", "label": "Executive Board prepares and follows up" },
-          { "id": "w3", "label": "Secretariat (Director General) executes" }
+          {
+            "id": "w1",
+            "label": "World Health Assembly sets policy yearly"
+          },
+          {
+            "id": "w2",
+            "label": "Executive Board prepares and follows up"
+          },
+          {
+            "id": "w3",
+            "label": "Secretariat (Director General) executes"
+          }
         ],
-        "edges": [["w1", "w2"], ["w2", "w3"]]
+        "edges": [
+          [
+            "w1",
+            "w2"
+          ],
+          [
+            "w2",
+            "w3"
+          ]
+        ]
       }
     },
     {
@@ -39,12 +57,27 @@
       "say": "India sits in the South East Asia region headquartered in New Delhi. Six regional offices bring WHO close to member problems.",
       "vis": {
         "kind": "table",
-        "cols": ["WHO region", "Headquarters city"],
+        "cols": [
+          "WHO region",
+          "Headquarters city"
+        ],
         "rows": [
-          ["South East Asia (SEARO)", "New Delhi, India"],
-          ["Africa (AFRO)", "Brazzaville, Congo"],
-          ["Europe (EURO)", "Copenhagen, Denmark"],
-          ["Western Pacific (WPRO)", "Manila, Philippines"]
+          [
+            "South East Asia (SEARO)",
+            "New Delhi, India"
+          ],
+          [
+            "Africa (AFRO)",
+            "Brazzaville, Congo"
+          ],
+          [
+            "Europe (EURO)",
+            "Copenhagen, Denmark"
+          ],
+          [
+            "Western Pacific (WPRO)",
+            "Manila, Philippines"
+          ]
         ]
       }
     },
@@ -56,11 +89,19 @@
         "kind": "compare",
         "left": {
           "title": "Normative power",
-          "points": ["ICD and essential medicines lists", "Treatment and safety guidelines", "Prequalification of vaccines and drugs"]
+          "points": [
+            "ICD and essential medicines lists",
+            "Treatment and safety guidelines",
+            "Prequalification of vaccines and drugs"
+          ]
         },
         "right": {
           "title": "Operational power",
-          "points": ["Outbreak alerts under IHR 2005", "Eradication initiatives (polio, Guinea worm)", "Country technical cooperation"]
+          "points": [
+            "Outbreak alerts under IHR 2005",
+            "Eradication initiatives (polio, Guinea worm)",
+            "Country technical cooperation"
+          ]
         }
       }
     },
@@ -71,11 +112,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "u1", "label": "1946: emergency relief for war children" },
-          { "id": "u2", "label": "Permanent child survival mandate" },
-          { "id": "u3", "label": "GOBI: growth, ORS, breastfeeding, immunisation" }
+          {
+            "id": "u1",
+            "label": "1946: emergency relief for war children"
+          },
+          {
+            "id": "u2",
+            "label": "Permanent child survival mandate"
+          },
+          {
+            "id": "u3",
+            "label": "GOBI: growth, ORS, breastfeeding, immunisation"
+          }
         ],
-        "edges": [["u1", "u2"], ["u2", "u3"]]
+        "edges": [
+          [
+            "u1",
+            "u2"
+          ],
+          [
+            "u2",
+            "u3"
+          ]
+        ]
       }
     },
     {
@@ -84,12 +143,27 @@
       "say": "GOBI is growth, oral rehydration, breastfeeding, immunisation. Add food, female education, and family planning for GOBI FFF.",
       "vis": {
         "kind": "table",
-        "cols": ["Letter", "Intervention"],
+        "cols": [
+          "Letter",
+          "Intervention"
+        ],
         "rows": [
-          ["G O B I", "Growth monitoring, ORS, Breastfeeding, Immunisation"],
-          ["First F", "Food supplementation"],
-          ["Second F", "Female education"],
-          ["Third F", "Family planning"]
+          [
+            "G O B I",
+            "Growth monitoring, ORS, Breastfeeding, Immunisation"
+          ],
+          [
+            "First F",
+            "Food supplementation"
+          ],
+          [
+            "Second F",
+            "Female education"
+          ],
+          [
+            "Third F",
+            "Family planning"
+          ]
         ]
       }
     },
@@ -101,11 +175,19 @@
         "kind": "compare",
         "left": {
           "title": "WHO versus World Bank",
-          "points": ["Norms and standards versus loans", "Technical legitimacy versus financing muscle", "Geneva secretariat versus Washington bank"]
+          "points": [
+            "Norms and standards versus loans",
+            "Technical legitimacy versus financing muscle",
+            "Geneva secretariat versus Washington bank"
+          ]
         },
         "right": {
           "title": "Shared ground",
-          "points": ["Disease burden measurement (DALY)", "Health system strengthening funds", "Joint programme evaluations"]
+          "points": [
+            "Disease burden measurement (DALY)",
+            "Health system strengthening funds",
+            "Joint programme evaluations"
+          ]
         }
       }
     },
@@ -115,12 +197,27 @@
       "say": "FAO guards food, ILO guards workers, UNFPA guards reproductive health. Examiners map each agency to one mandate.",
       "vis": {
         "kind": "table",
-        "cols": ["Agency", "Health mandate"],
+        "cols": [
+          "Agency",
+          "Health mandate"
+        ],
         "rows": [
-          ["FAO", "Food security, Codex food standards, zoonoses"],
-          ["ILO", "Occupational safety, social security conventions"],
-          ["UNFPA", "Reproductive health and contraceptive supply"],
-          ["UNDP", "Development coordination, SDG support"]
+          [
+            "FAO",
+            "Food security, Codex food standards, zoonoses"
+          ],
+          [
+            "ILO",
+            "Occupational safety, social security conventions"
+          ],
+          [
+            "UNFPA",
+            "Reproductive health and contraceptive supply"
+          ],
+          [
+            "UNDP",
+            "Development coordination, SDG support"
+          ]
         ]
       }
     },
@@ -131,11 +228,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ih1", "label": "Nation detects unusual health event" },
-          { "id": "ih2", "label": "Assess and notify WHO within framework" },
-          { "id": "ih3", "label": "PHEIC declared if criteria met" }
+          {
+            "id": "ih1",
+            "label": "Nation detects unusual health event"
+          },
+          {
+            "id": "ih2",
+            "label": "Assess and notify WHO within framework"
+          },
+          {
+            "id": "ih3",
+            "label": "PHEIC declared if criteria met"
+          }
         ],
-        "edges": [["ih1", "ih2"], ["ih2", "ih3"]]
+        "edges": [
+          [
+            "ih1",
+            "ih2"
+          ],
+          [
+            "ih2",
+            "ih3"
+          ]
+        ]
       }
     },
     {
@@ -146,12 +261,65 @@
         "kind": "compare",
         "left": {
           "title": "Geneva cluster",
-          "points": ["WHO headquarters", "ILO headquarters", "ICRC and UNAIDS neighbourhood"]
+          "points": [
+            "WHO headquarters",
+            "ILO headquarters",
+            "ICRC and UNAIDS neighbourhood"
+          ]
         },
         "right": {
           "title": "New York and elsewhere",
-          "points": ["UNICEF, UNFPA, UNDP: New York", "FAO: Rome", "World Bank: Washington DC"]
+          "points": [
+            "UNICEF, UNFPA, UNDP: New York",
+            "FAO: Rome",
+            "World Bank: Washington DC"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: WHO headquarters is in Geneva, founded on 7 April 1948, and India belongs to SEARO in New Delhi. UNICEF headquarters is in New York and promoted GOBI: growth monitoring, oral rehydration, breastfeeding and immunisation. FAO is in Rome, ILO in Geneva, and the World Bank and PAHO are in Washington. Headquarters pairings are the surest marks here.",
+      "say": "High-yield for the exam: WHO headquarters is in Geneva, founded on 7 April 1948, and India belongs to SEARO in New Delhi. UNICEF headquarters is in New York and promoted GOBI: growth monitoring, oral rehydration, breastfeeding and immunisation. FAO is in Rome, ILO in Geneva, and the World Bank and PAHO are in Washington. Headquarters pairings are the surest marks here.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "WHO headquarters founded",
+            "Geneva, constitution in force 7 April 1948"
+          ],
+          [
+            "World Health Day date",
+            "7 April yearly, WHO founding anniversary"
+          ],
+          [
+            "India WHO region",
+            "SEARO New Delhi, eleven member countries"
+          ],
+          [
+            "UNICEF headquarters",
+            "New York, created 1946 for child relief"
+          ],
+          [
+            "GOBI expansion",
+            "Growth monitoring oral rehydration breastfeeding immunisation"
+          ],
+          [
+            "GOBI FFF additions",
+            "Food supplementation female education family planning"
+          ],
+          [
+            "FAO headquarters role",
+            "Rome, food security and Codex with WHO"
+          ],
+          [
+            "ILO headquarters role",
+            "Geneva, occupational safety and social security conventions"
+          ]
+        ]
       }
     }
   ]

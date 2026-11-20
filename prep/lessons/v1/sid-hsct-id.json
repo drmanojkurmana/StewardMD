@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "module": "sid-hsct-id",
+ "title": "Infections in HSCT and cellular therapy",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**HSCT infection risk follows immune reconstitution by phase**: **pre-engraftment days 0 to 30** brings neutropenia with bacterial and candida sepsis, **post-engraftment days 30 to 100** brings T-cell deficiency with CMV, HHV-6 and toxoplasma, and **late phase after day 100** brings humoral defects with encapsulated bacteria and late CMV. **Allogeneic HSCT** carries higher risk than autologous, and **CAR-T therapy** adds B-cell aplasia with hypogammaglobulinaemia. **Prophylaxis and monitoring** are phase-specific.",
+   "say": "HSCT infection risk was reported to follow immune reconstitution by phase, with pre-engraftment days zero to thirty bringing neutropenia with bacterial and candida sepsis, post-engraftment days thirty to one hundred bringing T-cell deficiency with CMV, HHV-6 and toxoplasma, and late phase after day one hundred bringing humoral defects with encapsulated bacteria and late CMV. Allogeneic HSCT was reported to carry higher risk than autologous, and CAR-T therapy was reported to add B-cell aplasia with hypogammaglobulinaemia, while prophylaxis and monitoring were reported to be phase-specific.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Immune defect",
+     "Dominant infections"
+    ],
+    "rows": [
+     [
+      "Pre-engraftment 0 to 30",
+      "Neutropenia",
+      "Bacteria, candida"
+     ],
+     [
+      "Post-engraftment 30 to 100",
+      "T-cell deficiency",
+      "CMV, HHV-6, toxoplasma"
+     ],
+     [
+      "Late after 100",
+      "Humoral defect",
+      "Encapsulated bacteria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Allogeneic HSCT risk rises with GVHD, CMV imbalance, T-cell depletion and myeloablation**, where donor or recipient CMV seropositivity, GVHD steroids and mucosal injury compound neutropenia. **Autologous HSCT** is shorter and neutropenia-dominated. **CAR-T recipients** develop prolonged B-cell aplasia with **hypogammaglobulinaemia needing IVIG replacement** when deficient. **Cord blood, GVHD, prior CMV and CD4 recovery** shape late vigilance, including **revaccination needs** after immune recovery.",
+   "say": "Allogeneic HSCT risk was reported to rise with GVHD, CMV imbalance, T-cell depletion and myeloablation, with donor or recipient CMV seropositivity, GVHD steroids and mucosal injury compounding neutropenia. Autologous HSCT was reported to be shorter and neutropenia-dominated. CAR-T recipients were reported to develop prolonged B-cell aplasia with hypogammaglobulinaemia needing IVIG replacement when deficient, and cord blood, GVHD, prior CMV and CD4 recovery were reported to shape late vigilance, including revaccination needs after immune recovery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Allogeneic HSCT",
+     "points": [
+      "Long T-cell defect",
+      "GVHD steroids",
+      "CMV reactivation risk"
+     ]
+    },
+    "right": {
+     "title": "CAR-T therapy",
+     "points": [
+      "B-cell aplasia",
+      "Hypogammaglobulinaemia",
+      "IVIG when deficient"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pre-engraftment neutropenia permits gut translocation** and catheter sepsis similar to febrile neutropenia, while **T-cell deficiency permits CMV and HHV-6 reactivation** from latency or transmission. **Mucosal barrier injury plus GVHD** amplify bacterial, fungal and viral entry. **Humoral recovery lags** by months, leaving **encapsulated organisms** unchecked. **ECIL transplant guidance** therefore pairs **neutropenic empiric therapy** with **CMV surveillance**, **antifungal prophylaxis** and **Pneumocystis prophylaxis** by phase.",
+   "say": "Pre-engraftment neutropenia was reported to permit gut translocation and catheter sepsis similar to febrile neutropenia, while T-cell deficiency was reported to permit CMV and HHV-6 reactivation from latency or transmission. Mucosal barrier injury plus GVHD was reported to amplify bacterial, fungal and viral entry, and humoral recovery was reported to lag by months and to leave encapsulated organisms unchecked. ECIL transplant guidance was therefore reported to pair neutropenic empiric therapy with CMV surveillance, antifungal prophylaxis and Pneumocystis prophylaxis by phase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Conditioning plus neutropenia"
+     },
+     {
+      "id": "b",
+      "label": "Mucosal injury plus GVHD"
+     },
+     {
+      "id": "c",
+      "label": "CMV and HHV-6 reactivation"
+     },
+     {
+      "id": "d",
+      "label": "Phase-specific prophylaxis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Classic signs are phase-specific presentations**, not generic fever: **HHV-6 encephalitis** with confusion after engraftment, **CMV colitis with diarrhoea and pneumonitis**, **adenovirus haemorrhagic cystitis and pneumonia** in children, **invasive aspergillosis nodules** with GVHD, and **tonic late encapsulated pneumonia**. **GVHD abdominal pain and rash mimic infection** yet predispose to it. **CAR-T late hypogammaglobulinaemia** gives **recurrent sinus and chest infections**. Absence of pus again misleads during T-cell defects.",
+   "say": "Classic signs were reported to be phase-specific presentations, not generic fever. HHV-6 encephalitis with confusion after engraftment was reported, CMV colitis with diarrhoea and pneumonitis was reported, adenovirus haemorrhagic cystitis and pneumonia in children was reported, invasive aspergillosis nodules with GVHD was reported, and tonic late encapsulated pneumonia was reported. GVHD abdominal pain and rash were reported to mimic infection yet predispose to it, and CAR-T late hypogammaglobulinaemia was reported to give recurrent sinus and chest infections, while absence of pus was reported to again mislead during T-cell defects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Classic syndrome",
+     "Hint"
+    ],
+    "rows": [
+     [
+      "30 to 100 days",
+      "HHV-6 encephalitis",
+      "Confusion"
+     ],
+     [
+      "30 to 100 days",
+      "CMV colitis, pneumonitis",
+      "Diarrhoea, cough"
+     ],
+     [
+      "Late phase",
+      "Encapsulated pneumonia",
+      "Sinus, chest recurrence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First test is weekly CMV PCR surveillance** from engraftment through day 100 in high-risk pairs, with **pre-emptive thresholds** triggering therapy before symptoms. **Gold workup adds organ-directed tests**: **bronchoalveolar lavage PCR for pneumonitis**, **colonic biopsy for colitis**, **HHV-6 PCR for encephalitis**, **galactomannan and CT for aspergillosis**, and **adenovirus PCR with viral load kinetics**. **Serial immunoglobulin and CD4 counts** guide IVIG and revaccination. **Blood cultures** stay mandatory for any fever.",
+   "say": "First test was reported to be weekly CMV PCR surveillance from engraftment through day one hundred in high-risk pairs, with pre-emptive thresholds triggering therapy before symptoms. Gold workup was reported to add organ-directed tests, with bronchoalveolar lavage PCR for pneumonitis, colonic biopsy for colitis, HHV-6 PCR for encephalitis, galactomannan and CT for aspergillosis, and adenovirus PCR with viral load kinetics. Serial immunoglobulin and CD4 counts were reported to guide IVIG and revaccination, and blood cultures were reported to stay mandatory for any fever.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Engraftment"
+     },
+     {
+      "id": "b",
+      "label": "Weekly CMV PCR"
+     },
+     {
+      "id": "c",
+      "label": "Pre-emptive therapy if rising"
+     },
+     {
+      "id": "d",
+      "label": "Organ testing if symptomatic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CMV prevention uses Letermovir 480 mg daily**, or 240 mg daily with cyclosporine, to **day 100** in seropositive recipients. **Active disease gets Ganciclovir 5 mg per kg twice daily or Valganciclovir 900 mg twice daily**, switching to **Foscarnet 60 mg per kg three times daily** for resistance. **Varicella prevention uses Acyclovir 800 mg twice daily**. **Pneumocystis prophylaxis uses Cotrimoxazole 960 mg three times weekly**. **Antifungals are Fluconazole 400 mg daily, Posaconazole 300 mg daily or Voriconazole**, with **empiric Cefepime plus Vancomycin** for neutropenic fever. **Adenovirus gets Cidofovir**.",
+   "say": "CMV prevention was reported to use letermovir four hundred eighty milligrams daily, or two hundred forty milligrams daily with cyclosporine, to day one hundred in seropositive recipients. Active disease was reported to get ganciclovir five milligrams per kilo twice daily or valganciclovir nine hundred milligrams twice daily, switching to foscarnet sixty milligrams per kilo three times daily for resistance. Varicella prevention was reported to use acyclovir eight hundred milligrams twice daily. Pneumocystis prophylaxis was reported to use cotrimoxazole nine hundred sixty milligrams three times weekly, and antifungals were reported to be fluconazole four hundred milligrams daily, posaconazole three hundred milligrams daily or voriconazole, with empiric cefepime plus vancomycin for neutropenic fever. Adenovirus was reported to get cidofovir.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Use",
+     "Drug",
+     "Dose"
+    ],
+    "rows": [
+     [
+      "CMV prophylaxis",
+      "Letermovir 480 mg daily",
+      "To day 100"
+     ],
+     [
+      "CMV treatment",
+      "Valganciclovir 900 mg twice daily",
+      "Pre-emptive or therapy"
+     ],
+     [
+      "PJP prophylaxis",
+      "Cotrimoxazole 960 mg",
+      "Three times weekly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Letermovir era halved clinically significant CMV infection** by day 100 without counting neutropenia, shifting care from universal pre-emptive ganciclovir to targeted prophylaxis in seropositive patients. **Maribavir is now the salvage option** for refractory or resistant CMV, sparing marrow and kidney. **Duration is phase-anchored**: Letermovir to day 100, CMV surveillance through day 100 and beyond with GVHD, Acyclovir for VZV for 1 year, Cotrimoxazole until CD4 recovery, and **revaccination once immunosuppression allows** after live vaccines are deferred. **CAR-T hypogammaglobulinaemia follow-up** includes IVIG thresholds and annual humoral checks.",
+   "say": "Letermovir era was reported to halve clinically significant CMV infection by day one hundred without counting neutropenia, shifting care from universal pre-emptive ganciclovir to targeted prophylaxis in seropositive patients. Maribavir was reported to now be the salvage option for refractory or resistant CMV and was reported to spare marrow and kidney. Duration was reported to be phase-anchored, with letermovir to day one hundred, CMV surveillance through day one hundred and beyond with GVHD, acyclovir for VZV for one year, cotrimoxazole until CD4 recovery, and revaccination once immunosuppression allows after live vaccines are deferred, while CAR-T hypogammaglobulinaemia follow-up was reported to include IVIG thresholds and annual humoral checks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Era",
+     "Change",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Letermovir era",
+      "Prophylaxis over universal pre-emptive",
+      "To day 100"
+     ],
+     [
+      "Maribavir",
+      "Salvage for refractory CMV",
+      "Therapeutic course"
+     ],
+     [
+      "Revaccination",
+      "After immune recovery",
+      "Live vaccines deferred"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**GVHD plus steroids remain the strongest driver** of late bacterial, fungal and CMV disease, with **invasive aspergillosis and CMV as leading late killers**. **HHV-6 encephalitis and adenovirus dissemination** carry high mortality in children and mismatched grafts. **Relapse and second malignancy** follow prolonged immune suppression. **Non-relapse mortality clusters in mismatched, CMV-mismatched and GVHD cases**, while **successful CD4 above 200 and immunoglobulin recovery** predict durable control. **CSF and lung biopsy** often decide when surveillance is ambiguous.",
+   "say": "GVHD plus steroids were reported to remain the strongest driver of late bacterial, fungal and CMV disease, with invasive aspergillosis and CMV as leading late killers. HHV-6 encephalitis and adenovirus dissemination were reported to carry high mortality in children and mismatched grafts. Relapse and second malignancy were reported to follow prolonged immune suppression. Non-relapse mortality was reported to cluster in mismatched, CMV-mismatched and GVHD cases, while successful CD4 above two hundred and immunoglobulin recovery were reported to predict durable control, and CSF and lung biopsy were reported to often decide when surveillance is ambiguous.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Outcome",
+     "Driver",
+     "Guard"
+    ],
+    "rows": [
+     [
+      "Late CMV, aspergillosis",
+      "GVHD steroids",
+      "Surveillance, letermovir"
+     ],
+     [
+      "HHV-6, adenovirus",
+      "T-cell defect",
+      "PCR, early therapy"
+     ],
+     [
+      "Encapsulated pneumonia",
+      "Hypogammaglobulinaemia",
+      "IVIG, revaccination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** **CMV reactivation peaks at 30 to 100 days**, not only in the first days; **Letermovir prevents but does not treat** established disease; **Ganciclovir causes myelosuppression** so counts fall further; **azoles raise tacrolimus and cyclosporine levels**; **Live vaccines are contraindicated during suppression**; **IVIG is for deficiency** not universal replacement; and **deferring revaccination until immune recovery** is mandatory. **Foscarnet spares marrow but injures kidney** with hydration and electrolyte watch. **Cidofovir needs probenecid**.",
+   "say": "For the exam, CMV reactivation was reported to peak at thirty to one hundred days, not only in the first days. Letermovir was reported to prevent but not treat established disease. Ganciclovir was reported to cause myelosuppression so counts fall further. Azoles were reported to raise tacrolimus and cyclosporine levels. Live vaccines were reported to be contraindicated during suppression. IVIG was reported to be for deficiency not universal replacement, and deferring revaccination until immune recovery was reported to be mandatory. Foscarnet was reported to spare marrow but injure kidney with hydration and electrolyte watch, and cidofovir was reported to need probenecid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Letermovir treats active CMV",
+      "Prevention only",
+      "Use ganciclovir if active"
+     ],
+     [
+      "Ganciclovir is marrow safe",
+      "Myelosuppressive",
+      "Watch counts, switch"
+     ],
+     [
+      "Live vaccines early",
+      "Contraindicated",
+      "Defer, revaccinate late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **0 to 30 neutropenia**, **30 to 100 T-cell CMV**, **after 100 humoral**; **Letermovir 480 mg daily to day 100**, **240 mg with cyclosporine**; **Valganciclovir 900 mg twice daily**, **Ganciclovir 5 mg per kg twice daily**, **Foscarnet 60 mg per kg three times daily**; **Acyclovir 800 mg twice daily**; **Cotrimoxazole 960 mg three times weekly**; **Fluconazole 400 mg daily, Posaconazole 300 mg daily**; **Cidofovir for adenovirus**; **Maribavir for refractory CMV**; **IVIG for deficient CAR-T**; **revaccinate late**.",
+   "say": "For the exam, zero to thirty neutropenia, thirty to one hundred T-cell CMV, and after one hundred humoral defect were reported to define phases. Letermovir four hundred eighty milligrams daily to day one hundred with two hundred forty milligrams with cyclosporine was reported. Valganciclovir nine hundred milligrams twice daily, ganciclovir five milligrams per kilo twice daily, and foscarnet sixty milligrams per kilo three times daily were reported. Acyclovir eight hundred milligrams twice daily was reported, cotrimoxazole nine hundred sixty milligrams three times weekly was reported, and fluconazole four hundred milligrams daily with posaconazole three hundred milligrams daily was reported. Cidofovir for adenovirus, maribavir for refractory CMV, IVIG for deficient CAR-T, and revaccination late were reported.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Value",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Windows",
+      "0 to 30, 30 to 100, after 100",
+      "Timeline"
+     ],
+     [
+      "Letermovir",
+      "480 mg daily to day 100",
+      "Prophylaxis"
+     ],
+     [
+      "CMV therapy",
+      "900 mg, 5 mg per kg, 60 mg per kg",
+      "Doses asked"
+     ],
+     [
+      "PJP",
+      "Cotrimoxazole 960 mg thrice weekly",
+      "Regimen"
+     ],
+     [
+      "Adenovirus",
+      "Cidofovir",
+      "Paediatric"
+     ],
+     [
+      "Salvage",
+      "Maribavir refractory",
+      "Guideline"
+     ],
+     [
+      "CAR-T",
+      "IVIG if deficient",
+      "Humoral rule"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ci1", "label": "Compute estimate and its standard error" },
-          { "id": "ci2", "label": "Add and subtract 1.96 times SE" },
-          { "id": "ci3", "label": "Report 95 percent confidence interval" }
+          {
+            "id": "ci1",
+            "label": "Compute estimate and its standard error"
+          },
+          {
+            "id": "ci2",
+            "label": "Add and subtract 1.96 times SE"
+          },
+          {
+            "id": "ci3",
+            "label": "Report 95 percent confidence interval"
+          }
         ],
-        "edges": [["ci1", "ci2"], ["ci2", "ci3"]]
+        "edges": [
+          [
+            "ci1",
+            "ci2"
+          ],
+          [
+            "ci2",
+            "ci3"
+          ]
+        ]
       }
     },
     {
@@ -41,11 +59,19 @@
         "kind": "compare",
         "left": {
           "title": "Difference measures",
-          "points": ["Null value is zero", "Interval crossing zero: not significant", "Mean difference, risk difference"]
+          "points": [
+            "Null value is zero",
+            "Interval crossing zero: not significant",
+            "Mean difference, risk difference"
+          ]
         },
         "right": {
           "title": "Ratio measures",
-          "points": ["Null value is one", "Interval crossing one: not significant", "Odds ratio, relative risk, hazard ratio"]
+          "points": [
+            "Null value is one",
+            "Interval crossing one: not significant",
+            "Odds ratio, relative risk, hazard ratio"
+          ]
         }
       }
     },
@@ -55,12 +81,27 @@
       "say": "Unpaired t compares two separate groups' means. Difference over its standard error, judged on the t distribution.",
       "vis": {
         "kind": "table",
-        "cols": ["Feature", "Unpaired t test"],
+        "cols": [
+          "Feature",
+          "Unpaired t test"
+        ],
         "rows": [
-          ["Groups", "Two independent samples"],
-          ["Data type", "Continuous, near normal"],
-          ["Statistic", "Mean difference over pooled SE"],
-          ["Degrees of freedom", "n1 plus n2 minus 2"]
+          [
+            "Groups",
+            "Two independent samples"
+          ],
+          [
+            "Data type",
+            "Continuous, near normal"
+          ],
+          [
+            "Statistic",
+            "Mean difference over pooled SE"
+          ],
+          [
+            "Degrees of freedom",
+            "n1 plus n2 minus 2"
+          ]
         ]
       }
     },
@@ -71,11 +112,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "pt1", "label": "Measure each subject twice" },
-          { "id": "pt2", "label": "Compute each subject's difference" },
-          { "id": "pt3", "label": "Test mean difference against zero" }
+          {
+            "id": "pt1",
+            "label": "Measure each subject twice"
+          },
+          {
+            "id": "pt2",
+            "label": "Compute each subject's difference"
+          },
+          {
+            "id": "pt3",
+            "label": "Test mean difference against zero"
+          }
         ],
-        "edges": [["pt1", "pt2"], ["pt2", "pt3"]]
+        "edges": [
+          [
+            "pt1",
+            "pt2"
+          ],
+          [
+            "pt2",
+            "pt3"
+          ]
+        ]
       }
     },
     {
@@ -84,12 +143,27 @@
       "say": "Chi square compares counted observations with counts expected under no association. Feed it counts, never percentages.",
       "vis": {
         "kind": "table",
-        "cols": ["Chi square requirement", "Reason"],
+        "cols": [
+          "Chi square requirement",
+          "Reason"
+        ],
         "rows": [
-          ["Raw counts as input", "Percentages destroy sample size information"],
-          ["Expected count 5 plus ideally", "Approximation breaks in sparse cells"],
-          ["Independent observations", "Paired tables need McNemar instead"],
-          ["Degrees of freedom", "(Rows minus 1) times (columns minus 1)"]
+          [
+            "Raw counts as input",
+            "Percentages destroy sample size information"
+          ],
+          [
+            "Expected count 5 plus ideally",
+            "Approximation breaks in sparse cells"
+          ],
+          [
+            "Independent observations",
+            "Paired tables need McNemar instead"
+          ],
+          [
+            "Degrees of freedom",
+            "(Rows minus 1) times (columns minus 1)"
+          ]
         ]
       }
     },
@@ -101,11 +175,19 @@
         "kind": "compare",
         "left": {
           "title": "Repeated t tests (wrong)",
-          "points": ["Each test adds false positive risk", "Ten groups give 45 pairwise tests", "Family error explodes"]
+          "points": [
+            "Each test adds false positive risk",
+            "Ten groups give 45 pairwise tests",
+            "Family error explodes"
+          ]
         },
         "right": {
           "title": "ANOVA (right)",
-          "points": ["One joint F test first", "Between over within variance", "Post hoc tests only if F significant"]
+          "points": [
+            "One joint F test first",
+            "Between over within variance",
+            "Post hoc tests only if F significant"
+          ]
         }
       }
     },
@@ -116,11 +198,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "zt1", "label": "Compute difference and its SE" },
-          { "id": "zt2", "label": "Divide to obtain z statistic" },
-          { "id": "zt3", "label": "Beyond 1.96: significant at 5 percent" }
+          {
+            "id": "zt1",
+            "label": "Compute difference and its SE"
+          },
+          {
+            "id": "zt2",
+            "label": "Divide to obtain z statistic"
+          },
+          {
+            "id": "zt3",
+            "label": "Beyond 1.96: significant at 5 percent"
+          }
         ],
-        "edges": [["zt1", "zt2"], ["zt2", "zt3"]]
+        "edges": [
+          [
+            "zt1",
+            "zt2"
+          ],
+          [
+            "zt2",
+            "zt3"
+          ]
+        ]
       }
     },
     {
@@ -129,12 +229,27 @@
       "say": "Name the test from the data structure: independent, paired, categorical, or many groups. That naming is the examination mark.",
       "vis": {
         "kind": "table",
-        "cols": ["Data structure", "Test"],
+        "cols": [
+          "Data structure",
+          "Test"
+        ],
         "rows": [
-          ["Two independent means", "Unpaired t test"],
-          ["Before after same subjects", "Paired t test"],
-          ["Three or more means", "ANOVA"],
-          ["Categorical association", "Chi square test"]
+          [
+            "Two independent means",
+            "Unpaired t test"
+          ],
+          [
+            "Before after same subjects",
+            "Paired t test"
+          ],
+          [
+            "Three or more means",
+            "ANOVA"
+          ],
+          [
+            "Categorical association",
+            "Chi square test"
+          ]
         ]
       }
     },
@@ -146,12 +261,65 @@
         "kind": "compare",
         "left": {
           "title": "Assumption holds",
-          "points": ["Proceed with t or ANOVA", "Report checks performed", "Interpret p and interval together"]
+          "points": [
+            "Proceed with t or ANOVA",
+            "Report checks performed",
+            "Interpret p and interval together"
+          ]
         },
         "right": {
           "title": "Assumption fails",
-          "points": ["Transform skewed data", "Use Welch or non parametric test", "Never force the planned test"]
+          "points": [
+            "Transform skewed data",
+            "Use Welch or non parametric test",
+            "Never force the planned test"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: A 95 percent confidence interval is the estimate plus or minus 1.96 times its standard error. It is non significant when it includes zero for differences or one for ratios, and narrower intervals mean greater precision. Two independent means need an unpaired t test, paired readings need a paired t test, three or more means need ANOVA, and categorical counts need chi square.",
+      "say": "High-yield for the exam: A 95 percent confidence interval is the estimate plus or minus 1.96 times its standard error. It is non significant when it includes zero for differences or one for ratios, and narrower intervals mean greater precision. Two independent means need an unpaired t test, paired readings need a paired t test, three or more means need ANOVA, and categorical counts need chi square.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Confidence interval construction",
+            "Estimate plus minus 1.96 standard errors"
+          ],
+          [
+            "Null value for differences",
+            "Zero means no difference"
+          ],
+          [
+            "Null value for ratios",
+            "One means no association"
+          ],
+          [
+            "Interval width meaning",
+            "Narrow interval means greater precision"
+          ],
+          [
+            "Two independent means",
+            "Unpaired t test is used"
+          ],
+          [
+            "Before after same subjects",
+            "Paired t test on within person differences"
+          ],
+          [
+            "Three or more means",
+            "ANOVA with F ratio test"
+          ],
+          [
+            "Chi square input rule",
+            "Raw counts, expected cells preferably five plus"
+          ]
+        ]
       }
     }
   ]

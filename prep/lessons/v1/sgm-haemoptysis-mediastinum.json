@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "sgm-haemoptysis-mediastinum",
+ "subject": "ss-general-medicine",
+ "title": "Haemoptysis, mediastinum and interventional pulmonology",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Haemoptysis** (coughing blood) is defined by volume: scanty streaks under 100 millilitres per day, massive above 600 millilitres. Airway bleeding threatens **asphyxiation** (blocked breathing) before exsanguination (blood loss shock). **Bronchial arteries** (systemic arteries feeding airways) supply most bleeding, while pulmonary arteries rarely bleed. Emergency care is airway protection first, with the bleeding lung kept dependent to prevent flooding of the good lung.",
+   "say": "Haemoptysis is coughing blood, and it is defined by volume per day. Scanty streaks are under one hundred millilitres daily, and massive bleeding is above six hundred millilitres. Airway bleeding is the main threat, and asphyxiation is the immediate danger. The bleeding lung is kept dependent, and most bleeding is from bronchial arteries.",
+   "vis": null
+  },
+  {
+   "tx": "**Bronchiectasis** (permanently dilated airways) is the commonest cause in younger patients. Tuberculosis remains major in endemic regions, with cavitation and paracicatricial disease. Malignancy presents with weight loss and persistent cough, while **pulmonary embolism** (clot in lung arteries) causes haemoptysis with pleuritic pain. **Mitral stenosis** (a narrowed heart valve) and pulmonary arteriovenous malformations (abnormal vessels) are classical causes.",
+   "say": "Bronchiectasis is the commonest cause in younger patients, and productive purulent sputum is the clue. Tuberculosis remains a major cause in endemic regions, and cavitation is the imaging clue. Malignancy presents with weight loss and persistent cough. Pulmonary embolism causes haemoptysis with pleuritic pain, and mitral stenosis is a classical cardiac cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Clue",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Bronchiectasis",
+      "Productive purulent sputum",
+      "CT scan"
+     ],
+     [
+      "Tuberculosis",
+      "Fever, cavitation",
+      "Sputum test"
+     ],
+     [
+      "Malignancy",
+      "Weight loss, cough",
+      "Biopsy"
+     ],
+     [
+      "Pulmonary embolism",
+      "Pleuritic pain",
+      "CT angiography"
+     ],
+     [
+      "Mitral stenosis",
+      "Atrial fibrillation",
+      "Echocardiography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding **localises** by repeated large volume haemoptysis on the same side, focal crackles (localised breath sounds) and chest radiograph opacity. The side of bleeding is confirmed by auscultation over the affected zone and by computed tomography (CT, cross sectional imaging) angiography. Bronchial artery hypertrophy (enlarged feeding vessels) sustains bronchiectatic bleeding. Phrenic stimulation from basal tumours produces hiccups in some patients.",
+   "say": "Bleeding is localised by repeated large volume haemoptysis on the same side, and focal crackles are the bedside clue. The side of bleeding is confirmed by auscultation and by computed tomography angiography. Bronchial artery hypertrophy is the mechanism of bronchiectatic bleeding. Phrenic stimulation from basal tumours produces hiccups in some patients.",
+   "vis": null
+  },
+  {
+   "tx": "First tests are chest radiograph, complete blood count and coagulation profile. Contrast computed tomography angiography (CTPA, vessel imaging) is the first line imaging test and shows the bleeding vessel. **Bronchoscopy** (direct airway visualisation) is the gold standard for localising and treating bleeding, though it can obscure vision during active bleeding. Culture and cytology from bronchial washings exclude infection and malignancy.",
+   "say": "The first tests are chest radiograph, blood count and coagulation profile. Contrast computed tomography angiography is the first line imaging test, and it shows the bleeding vessel. Bronchoscopy is the gold standard test for localising and treating bleeding. Culture and cytology are required to exclude infection and malignancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chest X ray and blood tests"
+     },
+     {
+      "id": "b",
+      "label": "CT angiography"
+     },
+     {
+      "id": "c",
+      "label": "Bronchoscopy at bedside"
+     },
+     {
+      "id": "d",
+      "label": "Embolisation or surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive haemoptysis needs intensive care with airway protection and large bore intravenous access. **Tranexamic acid** (TXA, an antifibrinolytic) 1 gram intravenously is given early. **Bronchial artery embolisation** (BAE, blocking feeder vessels with particles) is first line for most patients and stops bleeding in over 80%. Surgery is reserved for localised disease failing embolisation, and steroids are indicated in vasculitic haemorrhage.",
+   "say": "Massive haemoptysis needs intensive care with airway protection and large bore access. Tranexamic acid at one gram intravenously is given early. Bronchial artery embolisation is the first line treatment for most patients, and it stops bleeding in over eighty percent. Surgery is reserved for localised disease failing embolisation.",
+   "vis": null
+  },
+  {
+   "tx": "The **mediastinum** (the central chest compartment) is divided for diagnosis. The anterior compartment (front) holds **thymoma** (thymus tumour), lymphoma and germ cell tumours (a characteristic triad). The middle compartment holds nodal disease and cysts. The posterior compartment (back) holds **neurogenic tumours** (nerve sheath tumours) like schwannoma and neuroblastoma, plus ganglion cell tumours.",
+   "say": "The mediastinum is the central chest compartment, and it is divided for diagnosis. The anterior compartment is the front, and thymoma, lymphoma and germ cell tumours are the characteristic triad. The middle compartment has nodal disease and cysts. The posterior compartment is the back, and it holds neurogenic tumours like schwannoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior compartment",
+     "points": [
+      "Thymoma",
+      "Lymphoma",
+      "Germ cell tumours"
+     ]
+    },
+    "right": {
+     "title": "Posterior compartment",
+     "points": [
+      "Schwannoma",
+      "Neuroblastoma",
+      "Ganglion cell tumours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anterior mediastinal tumours compress the **superior vena cava** (SVC, a large vein) causing facial swelling and neck vein distension. **Thymoma** is associated with myasthenia gravis (muscle weakness worsening through the day), and fatigability is the clue. Posterior tumours invade the spine with cord compression in children. Biopsy by computed tomography guided needle is diagnostic, and markers like alpha fetoprotein guide germ cell tumours.",
+   "say": "Anterior mediastinal tumours are a cause of superior vena cava compression, and facial swelling is the result. Thymoma is associated with myasthenia gravis, and fatigability is the clue. Posterior tumours can invade the spine with cord compression in children. Biopsy by guided needle is diagnostic, and markers like alpha fetoprotein guide germ cell tumours.",
+   "vis": null
+  },
+  {
+   "tx": "**Endobronchial ultrasound** (EBUS, ultrasound guided nodal sampling) stages lung cancer and diagnoses sarcoidosis. **Rigid bronchoscopy** (wide bore airway surgery) removes central obstructing tumours and places stents (tubes keeping airways open). **Endobronchial valves** (one way valves) collapse hyperinflated lobes in severe emphysema (lung destruction). Pleural manometry (pressure measurement during tapping) guides drainage, and pleural biopsy diagnoses mesothelioma.",
+   "say": "Endobronchial ultrasound is used for nodal staging, and it diagnoses sarcoidosis. Rigid bronchoscopy is used for central obstruction, and stents keep the airways open. Endobronchial valves are used for severe emphysema, and they produce lobar collapse. Pleural manometry is required for safe drainage, and pleural biopsy diagnoses mesothelioma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Use",
+     "Key effect"
+    ],
+    "rows": [
+     [
+      "EBUS",
+      "Nodal staging",
+      "Diagnosis without surgery"
+     ],
+     [
+      "Rigid bronchoscopy",
+      "Central obstruction",
+      "Airway clearance and stents"
+     ],
+     [
+      "Endobronchial valves",
+      "Severe emphysema",
+      "Lobar collapse"
+     ],
+     [
+      "Pleural biopsy",
+      "Mesothelioma",
+      "Tissue diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent haemoptysis needs definitive treatment, since repeated bleeding causes **iron deficiency anaemia** (low iron blood level) and lung scarring. Massive haemoptysis mortality is high without embolisation, and immediate control halves it. Bronchiectasis is managed with physiotherapy and vaccinations, as exacerbations worsen bleeding. Follow up imaging catches recurrence, and smoking cessation prevents further episodes.",
+   "say": "Recurrent haemoptysis needs definitive treatment, and repeated bleeding causes anaemia and lung scarring. Massive haemoptysis mortality is high without embolisation, and immediate control halves it. Bronchiectasis is managed with physiotherapy and vaccinations, and exacerbations worsen bleeding. Follow up imaging is required to catch recurrence, and smoking cessation prevents further episodes.",
+   "vis": null
+  },
+  {
+   "tx": "The **CHEST guideline** (the American chest physician guideline) recommends embolisation over surgery for most massive haemoptysis. A clear chest radiograph never excludes bleeding, and volume history is often overestimated. **Pseudo haemoptysis** (blood disguised as from mouth or nose) needs oral inspection. Exam trap: haemoptysis under 100 millilitres is scanty, and over 600 millilitres is massive, so 300 millilitres is moderate.",
+   "say": "Embolisation over surgery is the recommendation of the American chest physician guideline for most massive bleeding. A clear chest radiograph can miss bleeding, and volume history is often overestimated. Pseudo haemoptysis from the mouth or nose needs oral inspection. Haemoptysis under one hundred millilitres is scanty, and over six hundred millilitres is massive.",
+   "vis": null
+  },
+  {
+   "tx": "High yield numbers: scanty haemoptysis is under 100 millilitres per day and massive is above 600. First line imaging is computed tomography angiography, and **bronchoscopy** is the gold standard for localisation. **Bronchial artery embolisation** is first line treatment, and tranexamic acid is 1 gram intravenously. Anterior mediastinum means thymoma, lymphoma and germ cell tumours, and posterior means neurogenic tumours.",
+   "say": "Scanty haemoptysis is under one hundred millilitres per day, and massive is above six hundred. First line imaging is computed tomography angiography, and bronchoscopy is the gold standard test. Bronchial artery embolisation is the first line treatment, and tranexamic acid is one gram intravenously. The anterior mediastinum has a characteristic triad, and the posterior mediastinum has neurogenic tumours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield point",
+     "Value or rule"
+    ],
+    "rows": [
+     [
+      "Scanty haemoptysis",
+      "Under 100 millilitres per day"
+     ],
+     [
+      "Massive haemoptysis",
+      "Above 600 millilitres"
+     ],
+     [
+      "First line imaging",
+      "CT angiography"
+     ],
+     [
+      "Gold standard",
+      "Bronchoscopy"
+     ],
+     [
+      "First line treatment",
+      "Bronchial artery embolisation"
+     ],
+     [
+      "Anterior mediastinum",
+      "Thymoma, lymphoma, germ cell"
+     ],
+     [
+      "Posterior mediastinum",
+      "Neurogenic tumours"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

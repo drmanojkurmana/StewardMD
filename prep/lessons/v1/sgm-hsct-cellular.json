@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-hsct-cellular",
+ "subject": "ss-general-medicine",
+ "title": "Haematopoietic stem cell transplantation and cellular therapy",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Haematopoietic stem cell transplantation** replaces diseased marrow with healthy donor cells. **Autologous** transplant uses the patient own cells and carries transfer risk low. **Allogeneic** transplant provides graft versus tumour effect against leukaemia and lymphoma. **CAR T cells** are engineered lymphocytes that target B cell antigens after 2 prior lines in relapsed cancers.",
+   "say": "Haematopoietic stem cell transplantation replaces diseased marrow with healthy donor cells. Autologous transplant uses the patient own cells and carries transfer risk low. Allogeneic transplant provides graft versus tumour effect against leukaemia and lymphoma. CAR T cells are engineered lymphocytes that target CD nineteen in B cell cancers.",
+   "vis": null
+  },
+  {
+   "tx": "**Donor search** starts with HLA matched siblings for allogeneic transplantation planning. **Myeloablative** conditioning clears disease but needs young fit recipients for safety. **Reduced intensity** conditioning suits older patients with comorbidities in most centres today. **Plerixafor** mobilises stem cells for autologous collection in poor mobilisers clearly.",
+   "say": "Donor search starts with HLA matched siblings for allogeneic transplantation planning. Myeloablative conditioning clears disease but needs young fit recipients for safety. Reduced intensity conditioning suits older patients with comorbidities in most centres today. Plerixafor mobilises stem cells for autologous collection in poor mobilisers clearly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Disease control check"
+     },
+     {
+      "id": "b",
+      "label": "Donor search start"
+     },
+     {
+      "id": "c",
+      "label": "Conditioning choice"
+     },
+     {
+      "id": "d",
+      "label": "Infusion and engraftment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute graft versus host disease** affects skin, gut and liver early after infusion. **Steroids** are first line therapy for moderate acute disease in most patients. **Ruxolitinib** treats steroid refractory acute disease in many protocols globally. **Tacrolimus** with **methotrexate** is standard prophylaxis for acute disease prevention today.",
+   "say": "Acute graft versus host disease affects skin, gut and liver early after infusion. Steroids are first line therapy for moderate acute disease in most patients. Ruxolitinib is an option for steroid refractory acute disease in many protocols globally. Tacrolimus with methotrexate is standard prophylaxis for acute disease prevention today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Acute GVHD sign",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Skin",
+      "Maculopapular rash",
+      "Steroids and skin care"
+     ],
+     [
+      "Gut",
+      "Watery diarrhoea",
+      "Steroids and nutrition"
+     ],
+     [
+      "Liver",
+      "Cholestatic jaundice",
+      "Steroids and monitoring"
+     ],
+     [
+      "Overall",
+      "Fever and malaise",
+      "Infection exclusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Engraftment syndrome** mimics infection with fever and rash around neutrophil recovery. **Sinusoidal obstruction** follows conditioning with weight gain and tender liver in many cases. Supportive nursing care prevents sinusoidal obstruction in allogeneic transplantation protocols globally. **Budesonide** treats gut graft disease with less systemic toxicity in many centres.",
+   "say": "Engraftment syndrome is fever and rash around neutrophil recovery similar to infection. Sinusoidal obstruction follows conditioning with weight gain and tender liver in many cases. Nursing care is the prevention of sinusoidal obstruction in allogeneic transplantation protocols globally. Budesonide treats gut graft disease with less systemic toxicity in many centres.",
+   "vis": null
+  },
+  {
+   "tx": "**Ciclosporin** is the classic calcineurin inhibitor for prophylaxis after infusion. **Cyclophosphamide** based post transplant prophylaxis is now standard in many centres. Infections remain the leading cause of death after allogeneic transplantation in many series. **Cytomegalovirus** monitoring guides preemptive therapy after allogeneic transplantation in every patient.",
+   "say": "Ciclosporin is the classic calcineurin inhibitor for prophylaxis after infusion. Cyclophosphamide based post transplant prophylaxis is now standard in many centres. Infections remain the leading cause of death after allogeneic transplantation in many series. Cytomegalovirus monitoring guides preemptive therapy after allogeneic transplantation in every patient.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autologous transplant",
+     "points": [
+      "Own cells are the graft",
+      "No graft versus host disease",
+      "Myeloma and lymphoma use",
+      "Lower non relapse mortality"
+     ]
+    },
+    "right": {
+     "title": "Allogeneic transplant",
+     "points": [
+      "Donor cells are the graft",
+      "Graft versus host disease risk",
+      "Leukaemia use is common",
+      "Graft versus tumour benefit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CAR T cells** are engineered lymphocytes for relapsed large B cell lymphoma in eligible patients. **Bispecific antibodies** engage T cells against leukaemia antigens in residual ALL disease today. Antibody drug conjugates target CD22 in ALL therapy in many protocols. Transplant referral is required for eligible relapsed disease in these patients.",
+   "say": "CAR T cells are engineered lymphocytes for relapsed large B cell lymphoma in eligible patients. Bispecific antibodies are T cell engagers against CD nineteen in residual ALL disease today. Antibody drug conjugates target CD twenty two in ALL therapy in many protocols. Transplant referral is required for eligible relapsed disease in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Target",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Relapsed large B cell",
+      "CD nineteen CAR",
+      "Lymphoma therapy"
+     ],
+     [
+      "Relapsed ALL",
+      "CD nineteen bispecific",
+      "Residual disease"
+     ],
+     [
+      "Relapsed T ALL",
+      "Cellular therapy",
+      "Transplant referral"
+     ],
+     [
+      "Mobilization failure",
+      "Plerixafor",
+      "Stem cell collection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cytokine release syndrome** follows CAR T cells with fever and hypotension in many cases. Steroid therapy with cytokine blockade controls severe cytokine release rapidly. **Neurotoxicity** is the second major risk after CAR T therapy administration in many centres. Supportive intensive care is required when neurotoxicity occurs in these patients.",
+   "say": "Cytokine release syndrome follows CAR T cells with fever and hypotension in many cases. Steroid therapy with cytokine blockade controls severe cytokine release rapidly. Neurotoxicity is the second major risk after CAR T therapy administration in many centres. Supportive intensive care is required when neurotoxicity occurs in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CAR infusion"
+     },
+     {
+      "id": "b",
+      "label": "Fever and hypotension"
+     },
+     {
+      "id": "c",
+      "label": "Cytokine blockade for CRS"
+     },
+     {
+      "id": "d",
+      "label": "Neurotoxicity watch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic graft versus host disease** causes sclerotic skin, dry eyes and bronchiolitis. Immunosuppression adjustments help chronic graft disease in some reports. **Ruxolitinib** is an option for resistant graft disease in many protocols. Cellular therapy referral is required for relapsed disease in these patients.",
+   "say": "Chronic graft versus host disease causes sclerotic skin, dry eyes and bronchiolitis. Immunosuppression adjustments help chronic graft disease in some reports. Ruxolitinib is an option for resistant graft disease in many protocols. Cellular therapy referral is required for relapsed disease in these patients.",
+   "vis": null
+  },
+  {
+   "tx": "**Cord blood** transplantation suits smaller recipients when adult donors are unavailable. **Haploidentical** transplantation with post transplant cyclophosphamide expanded donor pools worldwide. **Long term** follow-up needs infection, malignancy and endocrine surveillance in these patients. Vaccination restarts after transplantation once immune recovery is documented in every case.",
+   "say": "Cord blood transplantation suits smaller recipients when adult donors are unavailable. Haploidentical transplantation with post transplant cyclophosphamide expanded donor pools worldwide. Long term follow-up needs infection, malignancy and endocrine surveillance in these patients. Vaccination restarts after transplantation once immune recovery is documented in every case.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Option",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Relapsed large B cell",
+      "Cellular therapy",
+      "After CAR failure"
+     ],
+     [
+      "Relapsed T ALL",
+      "Cellular therapy",
+      "Transplant referral"
+     ],
+     [
+      "Mobilization failure",
+      "Plerixafor",
+      "Stem cell collection"
+     ],
+     [
+      "GVHD prophylaxis",
+      "Tacrolimus combo",
+      "Standard prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cord blood** transplantation suits smaller recipients when adult donors are unavailable. **Haploidentical** transplantation with post transplant cyclophosphamide expanded donor pools worldwide. **Long term** follow-up needs infection, malignancy and endocrine surveillance in these patients. Vaccination restarts after transplantation once immune recovery is documented in every case.",
+   "say": "Cord blood transplantation suits smaller recipients when adult donors are unavailable. Haploidentical transplantation with post transplant cyclophosphamide expanded donor pools worldwide. Long term follow-up needs infection, malignancy and endocrine surveillance in these patients. Vaccination restarts after transplantation once immune recovery is documented in every case.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** finishes the transplant and cellular summary here. Remember ciclosporin with methotrexate as prophylaxis, plerixafor for mobilization and cytokine blockade for cytokine release after CAR therapy. Acute graft disease affects skin, gut and liver while chronic disease causes sclerosis and bronchiolitis. Cord blood suits small recipients and haploidentical expands donor pools.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Ciclosporin with methotrexate is the standard prophylaxis for acute graft disease. Plerixafor is the mobilization agent for stem cell collection. Cytokine blockade controls cytokine release after CAR therapy effectively. Cord blood is the donor source for small recipients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Acute GVHD organs",
+      "Skin, gut and liver are the targets"
+     ],
+     [
+      "Prophylaxis",
+      "Ciclosporin with methotrexate standard"
+     ],
+     [
+      "Mobilization",
+      "Plerixafor helps poor mobilizers"
+     ],
+     [
+      "CRS therapy",
+      "Cytokine blockade for release syndrome"
+     ],
+     [
+      "Donor source",
+      "Cord blood for small recipients"
+     ],
+     [
+      "Chemo free option",
+      "Bispecific antibodies after CAR failure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

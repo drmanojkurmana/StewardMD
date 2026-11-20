@@ -1,0 +1,180 @@
+{
+  "v": 1,
+  "module": "sgm-ards",
+  "subject": "ss-general-medicine",
+  "title": "Acute respiratory distress syndrome",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Acute respiratory distress syndrome** is acute diffuse **alveolar capillary membrane** injury causing protein rich pulmonary oedema with refractory hypoxaemia. The **Berlin definition** requires bilateral opacities, positive end expiratory pressure at least 5 cm H2O and **PaO2 FiO2 ratio 300 mmHg** or less. Global incidence is 10 per 100,000 people yearly with forty percent mortality in severe disease. **Lung protective ventilation** remains the only proven survival benefit to date.",
+      "say": "Acute respiratory distress syndrome is acute diffuse alveolar capillary membrane injury causing protein rich pulmonary oedema with refractory hypoxaemia. The Berlin definition requires bilateral opacities, positive end expiratory pressure at least five centimetres of water and arterial oxygen ratio three hundred millimetres of mercury or less. Global incidence is ten per one hundred thousand people yearly with forty percent mortality in severe disease. Lung protective ventilation remains the only proven survival benefit to date.",
+      "vis": null
+    },
+    {
+      "tx": "Direct causes include **pneumonia**, aspiration, pulmonary contusion and **sepsis**, while indirect causes include pancreatitis, transfusion related lung injury and **intra abdominal sepsis**. Risk factors are smoking, chronic alcohol use, obesity and high tidal volume ventilation itself. **Volutrauma** from 10 mL per kg tidal volume worsens injury in 30% of ventilated patients. **Transfusion related acute lung injury** occurs within 6 hours of plasma transfusion. Sepsis alone accounts for 50% of cases.",
+      "say": "Direct causes include pneumonia, aspiration, pulmonary contusion and sepsis, while indirect causes include pancreatitis, transfusion related lung injury and intra abdominal sepsis. Risk factors are smoking, chronic alcohol use, obesity and high tidal volume ventilation itself. Volutrauma from ten millilitres per kilogram tidal volume worsens injury in thirty percent of ventilated patients. Transfusion related lung injury occurs within six hours of plasma transfusion. Sepsis alone causes fifty percent of cases.",
+      "vis": null
+    },
+    {
+      "tx": "Mechanism follows **exudative phase** with neutrophil influx, endothelial and epithelial necrosis, then **proliferative phase** with type II pneumocyte hyperplasia and collagen deposition. **Hyaline membranes** line alveoli and thicken diffusion distance by 5 to 10 times normal. **Dead space ventilation** rises as perfused alveoli collapse, raising **PaCO2** despite hyperventilation. **Surfactant dysfunction** promotes atelectrauma. Failure of alveolar fluid clearance sustains oedema for weeks without repair.",
+      "say": "Mechanism follows exudative phase with neutrophil influx, endothelial and epithelial necrosis, then proliferative phase with type two pneumocyte hyperplasia and collagen deposition. Hyaline membranes form along alveoli and increase diffusion distance by five to ten times normal. Dead space ventilation rises as perfused alveoli collapse, raising PaCO2 despite hyperventilation. Surfactant dysfunction promotes atelectrauma. Failure of alveolar fluid clearance sustains oedema for weeks without repair.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Direct or indirect lung insult"
+          },
+          {
+            "id": "b",
+            "label": "Neutrophil influx and membrane necrosis"
+          },
+          {
+            "id": "c",
+            "label": "Hyaline membranes and oedema"
+          },
+          {
+            "id": "d",
+            "label": "Alveolar collapse and dead space"
+          },
+          {
+            "id": "e",
+            "label": "Fibrosis and stiff lung"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classic presentation is acute hypoxaemia within **1 week** of insult with bilateral **crepitations** and refractory **PaO2 FiO2 below 300 mmHg** despite oxygen. **Increased work of breathing** over 30 per minute and pink frothy sputum signal alveolar flooding. Chest X ray shows bilateral **whiteout** without cardiomegaly. Severe disease shows ratio **100 mmHg** or less with 60% mortality. **Echocardiography** excludes left ventricular failure with normal ejection fraction and low **pulmonary artery occlusion pressure**.",
+      "say": "Classic presentation is acute hypoxaemia within one week of insult with bilateral crepitations and refractory arterial oxygen ratio below three hundred millimetres of mercury despite oxygen. Increased work of breathing over thirty per minute and pink frothy sputum signal alveolar flooding. Chest X ray has bilateral whiteout without cardiomegaly. Severe disease shows ratio one hundred millimetres of mercury or less with sixty percent mortality. Echocardiography excludes left ventricular failure.",
+      "vis": null
+    },
+    {
+      "tx": "The **first test** is **arterial blood gas** with PaO2 FiO2 ratio on known FiO2, plus chest X ray and echocardiography to exclude cardiac cause. The **gold standard** remains **lung biopsy** showing **diffuse alveolar damage** with hyaline membranes, though rarely performed now. **Computed tomography** shows dependent consolidation with eighty five percent specificity for diffuse injury. **Extravascular lung water index above 10 mL per kg** confirms permeability oedema. **Lung ultrasound** B lines support bilateral interstitial syndrome early.",
+      "say": "The first test is arterial blood gas with oxygen ratio on known oxygen fraction, plus chest X ray and echocardiography to exclude cardiac cause. The gold standard remains lung biopsy showing diffuse alveolar damage with hyaline membranes, though rarely performed now. Computed tomography shows dependent consolidation with eighty five percent specificity for diffuse injury. Extravascular lung water index above ten millilitres per kilogram confirms permeability oedema. Lung ultrasound B lines support bilateral interstitial syndrome early.",
+      "vis": null
+    },
+    {
+      "tx": "First line therapy is **low tidal volume ventilation 6 mL per kg predicted body weight** with **plateau pressure below 30 cm H2O**, proven to cut mortality by twenty two percent. **Positive end expiratory pressure** titration by Acute Respiratory Distress Syndrome Network tables improves recruitment. **Prone ventilation** 16 hours daily cuts mortality in ratio below 150 mmHg. **Neuromuscular blockade** for 48 hours aids synchrony in severe disease. **Conservative fluids** after resuscitation reduce ventilator days by 2 days.",
+      "say": "First line therapy is low tidal volume ventilation six millilitres per kilogram predicted body weight with plateau pressure below thirty centimetres of water, proven to cut mortality by twenty two percent. Positive end expiratory pressure titration by Network tables improves recruitment. Prone ventilation sixteen hours daily cuts mortality in ratio below one hundred and fifty millimetres of mercury. Neuromuscular blockade for forty eight hours supports synchrony in severe disease. Conservative fluids after resuscitation reduce ventilator days.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mild syndrome",
+          "points": [
+            "Tidal volume 6 mL per kg",
+            "Positive end expiratory pressure 5 to 10",
+            "Prone only if deteriorates",
+            "Conservative fluids"
+          ]
+        },
+        "right": {
+          "title": "Severe syndrome",
+          "points": [
+            "Tidal volume 6 mL per kg",
+            "Positive end expiratory pressure 10 to twenty four",
+            "Prone 16 hours daily",
+            "Consider extracorporeal support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Escalation adds **recruitment manoeuvres**, closed suction and **tracheal pressure 30 cm H2O** limitation during spontaneous breaths. **Extracorporeal membrane oxygenation** is reserved for refractory ratio below 80 mmHg with forty percent survival benefit in selected centres. **Corticosteroids** have no routine survival benefit outside specific causes. **Inhaled nitric oxide** 5 to 20 ppm improves oxygenation transiently without mortality benefit. **Diuresis** assists fluid conservative strategy after shock resolves.",
+      "say": "Escalation adds recruitment manoeuvres, closed suction and tracheal pressure thirty centimetres of water limitation during spontaneous breaths. Extracorporeal membrane oxygenation is reserved for refractory ratio below eighty millimetres of mercury with forty percent survival benefit in selected centres. Corticosteroids have no routine survival benefit outside specific causes. Inhaled nitric oxide five to twenty parts per million improves oxygenation transiently without mortality benefit. Diuresis supports fluid conservative strategy after shock resolves.",
+      "vis": null
+    },
+    {
+      "tx": "Monitoring uses 4 hourly arterial blood gases, plateau pressure charting and **driving pressure below 15 cm H2O** as a safety target. **Oxygen saturation 88 to 95%** avoids hyperoxia while preventing hypoxia. Daily chest X ray and **static compliance** trending declare recovery or fibrosis. **Sedation** plus analgesia permits proning and synchrony. **Venous thromboembolism prophylaxis** is mandatory during immobility and proning.",
+      "say": "Monitoring uses four hourly arterial blood gases, plateau pressure charting and driving pressure below fifteen centimetres of water as a safety target. Oxygen saturation eighty eight to ninety five percent avoids hyperoxia while preventing hypoxia. Daily chest X ray and static compliance trending declare recovery or fibrosis. Sedation plus analgesia permits proning and synchrony. Venous thromboembolism prophylaxis is mandatory during immobility and proning.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **ventilator induced lung injury**, **barotrauma** with 15% pneumothorax rate and **ventilator associated pneumonia** in 30% of prolonged cases. **Multi organ failure** dominates mortality with 60% of deaths. **Critical illness polyneuropathy** affects 30% during neuromuscular blockade. Long term survivors show 50% cognitive impairment and **fibrotic lung** change with 30% persistent restriction. Mortality reaches 60% when ratio falls below 100 mmHg despite proning.",
+      "say": "Complications include ventilator induced lung injury, barotrauma with fifteen percent pneumothorax rate and ventilator associated pneumonia in thirty percent of prolonged cases. Multi organ failure dominates mortality with sixty percent of deaths. Critical illness polyneuropathy affects thirty percent during neuromuscular blockade. Long term survivors have fifty percent cognitive impairment and fibrotic lung change with thirty percent persistent restriction. Mortality reaches sixty percent when ratio falls below one hundred millimetres of mercury despite proning.",
+      "vis": null
+    },
+    {
+      "tx": "Learn the **exam traps**: Berlin criteria demand **peep at least 5 cm H2O** and bilateral opacities not fully explained by cardiac failure. **Whiteout** alone is not syndrome, and **PaO2 FiO2 300 mmHg** is the diagnostic cut off. **Tidal volume 6 mL per kg** with plateau below **30 cm H2O** is non negotiable. **Prone 16 hours** helps only in ratio below **150 mmHg**. Steroids and inhaled nitric oxide improve oxygenation without proven survival benefit routinely.",
+      "say": "Learn the exam traps. Berlin criteria demand positive end expiratory pressure at least five centimetres of water and bilateral opacities not fully explained by cardiac failure. Whiteout alone is not syndrome, and oxygen ratio three hundred millimetres of mercury is the diagnostic cut off. Tidal volume six millilitres per kilogram with plateau below thirty centimetres of water is non negotiable. Prone sixteen hours helps only in ratio below one hundred and fifty millimetres of mercury. Steroids and inhaled nitric oxide improve oxygenation without proven survival benefit routinely.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** table summarises severity, ventilation and outcome. Mild disease has ratio 200 to 300 mmHg with positive end expiratory pressure 5 to 10. **Tidal volume 6 mL per kg** with plateau below **30 cm H2O** is universal. **Prone 16 hours** daily helps ratio below 150 mmHg. **Driving pressure below 15 cm H2O** targets safety. Mortality is twenty seven percent mild, forty five percent moderate and sixty percent severe. Lung biopsy shows diffuse alveolar damage.",
+      "say": "This high yield table summarises severity, ventilation and outcome. Mild disease has ratio two hundred to three hundred millimetres of mercury with positive end expiratory pressure five to ten. Tidal volume six millilitres per kilogram with plateau below thirty centimetres of water is universal. Prone sixteen hours daily helps ratio below one hundred and fifty millimetres of mercury. Driving pressure below fifteen centimetres of water targets safety. Mortality is twenty seven percent mild, forty five percent moderate and sixty percent severe. Lung biopsy has diffuse alveolar damage.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Severity",
+          "Ratio mmHg",
+          "Ventilation",
+          "Mortality"
+        ],
+        "rows": [
+          [
+            "Mild",
+            "200 to 300",
+            "Tidal volume 6 mL per kg",
+            "twenty seven percent"
+          ],
+          [
+            "Moderate",
+            "100 to 200",
+            "Tidal volume 6 mL per kg with peep 10 to eighteen",
+            "45 percent"
+          ],
+          [
+            "Severe",
+            "Below 100",
+            "Tidal volume 6 mL per kg with peep eighteen to twenty four",
+            "60 percent"
+          ],
+          [
+            "Prone eligible",
+            "Below 150",
+            "Prone 16 hours daily",
+            "twenty two percent survival gain"
+          ],
+          [
+            "Plateau limit",
+            "Any severity",
+            "Below 30 cm H2O",
+            "Must be documented 4 hourly"
+          ],
+          [
+            "Driving pressure",
+            "Any severity",
+            "Below 15 cm H2O target",
+            "Safer ventilation signal"
+          ],
+          [
+            "Gold standard",
+            "Any severity",
+            "Lung biopsy diffuse alveolar damage",
+            "Rarely performed"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

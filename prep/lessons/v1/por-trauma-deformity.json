@@ -1,0 +1,338 @@
+{
+  "v": 1,
+  "module": "por-trauma-deformity",
+  "subject": "ss-paediatric-orthopaedics",
+  "title": "Paediatric trauma, infection and deformity: Salter-Harris to rickets",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Sabiston Surgery 22nd edition"
+  ],
+  "steps": [
+    {
+      "tx": "**Growth plate fractures** are Salter-Harris injuries through the open physis in children under 16 years. About 18 percent of childhood fractures cross the growth plate at some point. Types 1 to 5 run from pure physeal slip to crush of the plate. Type 3 deserves respect because 30 percent of cases in this group need surgery.",
+      "say": "Growth plate fractures pass through the open growth plate in children. About eighteen percent of childhood fractures cross the plate. Types run from pure slip to crush injury of the plate. One type involves the joint and needs surgery in a large minority.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Pattern"
+        ],
+        "rows": [
+          [
+            "Type 1",
+            "Through physis only"
+          ],
+          [
+            "Type 2",
+            "Through physis plus metaphysis"
+          ],
+          [
+            "Type 3",
+            "Through physis plus epiphysis"
+          ],
+          [
+            "Types 4 and 5",
+            "Across joint and crush"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Distal radius sites** account for 40 to 50 percent of growth injuries near the wrist. Boys aged 10 to 14 years dominate in sports and falls, a 2 to 1 male pattern. About 25 percent of cases stay undiagnosed for 5 days after the fall. Family history of rickets or renal disease surfaces in 3 percent of deformity clinics.",
+      "say": "The wrist accounts for nearly half of growth injuries near the wrist. Boys in the ten to fourteen year range dominate after sports and falls. About a quarter stay undiagnosed for days after the fall. A family pattern of bone disease surfaces in a few percent of deformity clinics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fall or sport injury",
+            "sub": "low energy"
+          },
+          {
+            "id": "b",
+            "label": "Growth plate X-ray",
+            "sub": "compare both sides"
+          },
+          {
+            "id": "c",
+            "label": "Classify type",
+            "sub": "1 to 5"
+          },
+          {
+            "id": "d",
+            "label": "Reduce or pin",
+            "sub": "same week"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Arrest lines** form when growth slows under 2.0 cm per year, leaving dark bands on films. Physeal bars tether one side and bend the bone by 10 to 15 degrees in 3 years. Genu valgum widens over 8 degrees before age 2, then narrows after 6 years. Rickets widens the plate with cupping and fraying in 2.5 percent of undernourished children.",
+      "say": "Growth slowdown leaves dark bands on X-rays. A tethering bar bends the bone by ten to fifteen degrees over three years. Knock knees widen before age two and narrow after six years. Rickets widens the plate with cupping and fraying in undernourished children.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Growth insult",
+            "sub": "fracture or disease"
+          },
+          {
+            "id": "b",
+            "label": "Bar formation",
+            "sub": "tether over 3 years"
+          },
+          {
+            "id": "c",
+            "label": "Angular bend",
+            "sub": "10 to 15 degrees"
+          },
+          {
+            "id": "d",
+            "label": "Corrective surgery",
+            "sub": "guided growth"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Septic hip** destroys the femoral head within 5 to 7 days without urgent drainage. The infant under 3 months refuses to move the limb with fever over 38 degrees. Joint exudate in 5 to 10 mL of pus distends the capsule. Swelling over 2 cm with 20 mm of fluid on ultrasound confirms effusion in 90 percent of cases.",
+      "say": "Septic hip destroys the hip ball within a week without urgent drainage. Babies refuse to move the limb and run high fever. Pus distends the joint capsule and stops motion. Ultrasound shows fluid clearly when swelling is present.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Septic hip",
+          "points": [
+            "Fever over 38 degrees",
+            "Refuses to move limb",
+            "5 to 10 mL of pus",
+            "Drain within hours"
+          ]
+        },
+        "right": {
+          "title": "Osteomyelitis",
+          "points": [
+            "Pain over metaphysis",
+            "Pus inside bone",
+            "Bone lysis at 2 to 3 weeks",
+            "Drain plus antibiotics"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acute osteomyelitis** follows blood spread of staphylococcus in 60 percent of cases. Metaphyseal pain with swelling and 4 to 5 days of fever marks the onset. Subperiosteal pus lifts the membrane and points through skin in 10 percent. Chronic sinuses discharge for 10 to 20 years with 3 to 4 percent risk of amyloid after 15 years.",
+      "say": "Bone infection follows blood spread, most often from staphylococcus. Pain over the bone end with swelling and fever marks onset. Pus lifts the membrane and can point through skin. Chronic discharging sinuses need long follow up for late systemic effects.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "Acute week 1",
+            "Metaphyseal pain, fever 4 to 5 days"
+          ],
+          [
+            "Subperiosteal week 2",
+            "Fluctuant swelling, points outward"
+          ],
+          [
+            "Chronic year 1 plus",
+            "Sinus discharge for 10 to 20 years"
+          ],
+          [
+            "Late amyloid risk",
+            "After 15 years of discharge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**MRI at 2 to 3 days** picks early marrow infection with 95 percent sensitivity before lysis appears. Blood culture turns positive in 50 to 60 percent of acute cases. C-reactive protein above 8 mg per litre tracks severity over 6 weeks of therapy. Ultrasound of 5 mL effusion confirms joint tension with 85 percent accuracy.",
+      "say": "MRI in two to three days picks early marrow infection before X-ray change. Blood cultures confirm the germ in about half of acute cases. Inflammatory markers track severity over six weeks of therapy. Ultrasound confirms joint fluid when tension is suspected.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bone infection workup",
+          "points": [
+            "MRI at 2 to 3 days",
+            "Blood culture 50 to 60 percent",
+            "CRP over 8 milligrams",
+            "Biopsy if doubtful"
+          ]
+        },
+        "right": {
+          "title": "Joint infection workup",
+          "points": [
+            "Ultrasound for 5 mL fluid",
+            "Aspirate before antibiotics",
+            "Cell count above 50,000 cells",
+            "Drain same day"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Emergency drainage** of septic hip within 6 hours saves the head in 80 percent of cases. Limited open debridement clears pus for 3 cm of capsular opening. Intravenous antibiotics start with cefuroxime 50 mg per kg divided daily. Definitive peg for 4 to 6 weeks follows culture and sensitivity at 2 weeks.",
+      "say": "Emergency drainage of septic hip within six hours saves the head in most cases. Open clearing removes pus through a small capsular opening. Intravenous antibiotics start after cultures are taken. Definitive therapy then continues for four to six weeks guided by sensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspect septicaemia",
+            "sub": "fever over 38 degrees"
+          },
+          {
+            "id": "b",
+            "label": "Aspirate joint",
+            "sub": "before antibiotics"
+          },
+          {
+            "id": "c",
+            "label": "Drain within 6 hours",
+            "sub": "open or arthroscopic"
+          },
+          {
+            "id": "d",
+            "label": "Antibiotics 4 to 6 weeks",
+            "sub": "by culture"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Antibiotic courses** of 3 weeks suit uncomplicated bone infection, but 4 to 6 weeks guard the hip joint. Drilling the metaphysis through 2 burr holes drains pus with 90 percent success. Vitamin D 60,000 IU weekly for 8 weeks heals nutritional rickets and softens growth plates. Orthotic correction starts after 3 months when leg length settles within 1 cm.",
+      "say": "Bone infection needs three weeks of therapy, while hip infection needs longer cover. Drilling drains pus through small burr holes with high success. Vitamin D heals nutritional rickets over eight weeks. Correction starts after three months when length settles.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment",
+          "Course"
+        ],
+        "rows": [
+          [
+            "Bone infection course",
+            "About 3 weeks"
+          ],
+          [
+            "Hip infection course",
+            "About 4 to 6 weeks"
+          ],
+          [
+            "Rickets therapy",
+            "Vitamin D weekly for 8 weeks"
+          ],
+          [
+            "Deformity splintage",
+            "Start after 3 months"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Growth arrest** after type 4 fractures shortens 20 percent of affected limbs by 2 cm at maturity. Avascular necrosis destroys 15 to 25 percent of delayed septic hips within 2 years. Chronic osteomyelitis recurs in 10 to 15 percent after 5 years despite 6 weeks of cover. Rickets deformity over 20 degrees needs guided growth surgery in 8 percent of cases.",
+      "say": "Growth arrest after joint crossing fractures shortens a minority of limbs by two centimetres. Delayed hip infection destroys many heads within two years. Chronic bone infection recurs in a minority after five years. Marked bowing needs guided growth surgery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Late outcome",
+          "Frequency"
+        ],
+        "rows": [
+          [
+            "Shortening after type 4",
+            "About 20 percent"
+          ],
+          [
+            "Neck necrosis after delay",
+            "About 15 to 25 percent"
+          ],
+          [
+            "Recurrence at 5 years",
+            "About 10 to 15 percent"
+          ],
+          [
+            "Bowing needing surgery",
+            "About 8 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fever over 38 degrees** with hip refusal in a 4 year old means septic hip until drained within 6 hours. Type 3 Salter-Harris at the ankle needs open reduction because 30 percent need surgery anyway. Widened frayed plates with bowing over 20 degrees at 3 years means rickets needing 8 weeks of vitamin D first.",
+      "say": "High-yield for the exam: fever with hip refusal in a young child means septic hip until drained within hours. Joint crossing ankle fracture needs open reduction. Widened frayed plates with marked bowing mean rickets needing vitamin D first.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Scenario",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Fever with hip refusal age 4",
+            "Drain within 6 hours"
+          ],
+          [
+            "Type 3 ankle fracture",
+            "Open reduction, 30 percent need it"
+          ],
+          [
+            "Bowing over 20 degrees age 3",
+            "Vitamin D for 8 weeks first"
+          ],
+          [
+            "Metaphyseal pain 5 days",
+            "MRI within 2 to 3 days"
+          ]
+        ]
+      }
+    }
+  ]
+}

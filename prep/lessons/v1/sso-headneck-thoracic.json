@@ -1,0 +1,341 @@
+{
+  "v": 1,
+  "module": "sso-headneck-thoracic",
+  "subject": "ss-surgical-oncology",
+  "title": "Head Neck and Thoracic Oncology: Resectable Early, Curative Often",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Sabiston Surgery 22nd edition"
+  ],
+  "steps": [
+    {
+      "tx": "**Oral cancer** of the tongue and floor of mouth forms 60 percent of head neck malignancies in South Asia. **Betel quid** chewing raises risk 7 to 10 times over baseline. Early lesions under 2 cm with a clear **1 cm margin** achieve 80 percent survival. **Neck dissection** addresses occult spread present in 25 to 30 percent of early cases.",
+      "say": "Oral cancer dominates head neck oncology here. Tongue and floor of mouth sites form the majority. Betel quid chewing raises risk many times over baseline. Early small lesions with clear margins achieve strong survival. Neck dissection addresses hidden spread in a quarter of early cases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Share",
+          "Risk habit"
+        ],
+        "rows": [
+          [
+            "Tongue",
+            "40 percent",
+            "Tobacco and betel"
+          ],
+          [
+            "Floor of mouth",
+            "20 percent",
+            "Alcohol plus tobacco"
+          ],
+          [
+            "Gingiva",
+            "15 percent",
+            "Chewing tobacco"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cause centres on **tobacco** in smoked and chewed forms plus **alcohol** at 2 to 6 times interaction risk. **HPV 16** drives oropharyngeal tumours and improves prognosis markedly. Chronic trauma from sharp teeth and **areca nut** constituents add independent carcinogenic effect. Poor oral hygiene doubles risk of squamous transformation in field-change mucosa.",
+      "say": "Tobacco and alcohol pair as the chief causes. Betel quid and areca nut add independent carcinogenic effect. A virus drives oropharyngeal tumours with a better outlook. Chronic dental trauma and poor hygiene also matter. Field change mucosa explains second primary risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tobacco",
+            "label": "Tobacco use"
+          },
+          {
+            "id": "betel",
+            "label": "Betel quid habit"
+          },
+          {
+            "id": "hpv",
+            "label": "HPV sixteen"
+          },
+          {
+            "id": "risk",
+            "label": "Oral cancer risk"
+          }
+        ],
+        "edges": [
+          [
+            "tobacco",
+            "risk"
+          ],
+          [
+            "betel",
+            "risk"
+          ],
+          [
+            "hpv",
+            "risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Carcinogens trigger **TP53 mutation** in 70 percent of tumours with **loss of heterozygosity** at 3p and 9p early in the cascade. **Cyclin D1** amplification drives cell cycle entry in 40 percent of cases. Field cancerisation explains multifocal **dysplasia** beyond the primary mass. **PD-L1** expression above 1 percent predicts benefit from pembrolizumab therapy in recurrent disease.",
+      "say": "Molecular change begins early in precursor mucosa. A tumour suppressor gene mutates in most tumours. Loss of chromosomal segments also appears early. Cell cycle genes amplify and drive growth. Field change explains new tumours nearby. Immune markers predict checkpoint therapy benefit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HPV positive oropharynx",
+          "points": [
+            "Better prognosis",
+            "Radiation sensitive",
+            "Less neck surgery needed"
+          ]
+        },
+        "right": {
+          "title": "HPV negative oral cavity",
+          "points": [
+            "Worse prognosis",
+            "Surgery plus radiation",
+            "High second primary rate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Patients report a **non-healing ulcer** beyond 2 weeks, white or red patches, and loose teeth in alveolar disease. **Trismus** signals masticator invasion and poor surgical access. **Antral fullness** with epistaxis occurs in maxillary tumours. Palpable **level 1 to 3** neck nodes accompany 50 percent of presentations.",
+      "say": "Ulcers that heal poorly should prompt biopsy. White or red patches also need sampling. Loose teeth over a tumour bed signal alveolar spread. Jaw tightening signals deep muscle invasion. Half of patients present with palpable neck nodes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ulcer",
+            "label": "Non-healing ulcer"
+          },
+          {
+            "id": "patch",
+            "label": "White or red patch"
+          },
+          {
+            "id": "node",
+            "label": "Neck node palpable"
+          },
+          {
+            "id": "biopsy",
+            "label": "Prompt biopsy"
+          }
+        ],
+        "edges": [
+          [
+            "ulcer",
+            "biopsy"
+          ],
+          [
+            "patch",
+            "biopsy"
+          ],
+          [
+            "node",
+            "biopsy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Incisional biopsy** from the lesion edge gives diagnostic tissue in 95 percent of cases. **Contrast CT** maps mandible erosion and depth beyond 10 mm of invasion. **PET-CT** detects second primaries in 8 to 10 percent of patients. **Ultrasound-guided FNAC** of level 2 nodes confirms nodal spread before planning dissection.",
+      "say": "Biopsy of the lesion edge confirms diagnosis often. Contrast CT maps jaw erosion and invasion depth. PET imaging detects second primaries in a minority. Ultrasound guided needle sampling confirms nodal spread. Marrow imaging is not needed in early disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Purpose",
+          "Timing"
+        ],
+        "rows": [
+          [
+            "Incisional biopsy",
+            "Confirm cancer",
+            "First visit"
+          ],
+          [
+            "Contrast CT",
+            "Map bone invasion",
+            "Preoperative"
+          ],
+          [
+            "PET-CT",
+            "Find second primary",
+            "Selected cases"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Selective neck dissection** of levels 1 to 3 clears occult disease while preserving the internal jugular vein and accessory nerve. **Depth of invasion** beyond 4 mm upgrades nodal risk and adjuvant radiation. **Sentinel node biopsy** serves early tongue cancers with a 95 percent negative predictive value. **Induction chemotherapy** is reserved for borderline resectable tumours.",
+      "say": "Neck dissection choice balances clearance with function. Selective dissection clears early nodal basins while preserving key vessels and nerves. Invasion depth beyond four millimetres upgrades nodal risk. Sentinel biopsy serves early tongue cancers. Induction chemotherapy stays reserved for borderline cases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Selective dissection",
+          "points": [
+            "Levels one to three",
+            "Preserves jugular vein",
+            "Better shoulder function"
+          ]
+        },
+        "right": {
+          "title": "Comprehensive dissection",
+          "points": [
+            "All levels cleared",
+            "For advanced nodal disease",
+            "Higher morbidity cost"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**NSCLC** represents 85 percent of lung cancers with **lobectomy** as the standard operation for resectable disease. **VATS** approach reduces pain and shortens stay by 2 to 3 days versus thoracotomy. **Systematic nodal sampling** of at least 10 nodes stages accurately. **FEV1** above 1.5 litres permits lobectomy in most patients.",
+      "say": "Non small cell lung cancer calls for lobectomy often. Video assisted approach shortens stay and cuts pain. Systematic nodal sampling stages accurately. Breathing reserve above a litre and a half permits lobectomy. Adjuvant chemotherapy follows large pathologic stage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stage",
+            "label": "Stage confirmed"
+          },
+          {
+            "id": "vats",
+            "label": "VATS lobectomy"
+          },
+          {
+            "id": "nodes",
+            "label": "Nodal sampling"
+          },
+          {
+            "id": "chemo",
+            "label": "Adjuvant plan"
+          }
+        ],
+        "edges": [
+          [
+            "stage",
+            "vats"
+          ],
+          [
+            "vats",
+            "nodes"
+          ],
+          [
+            "nodes",
+            "chemo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Thymoma** arises from anterior mediastinal rests with **myasthenia gravis** in 30 to 50 percent of patients. **Masaoka stage 1** disease with intact capsule is cured by resection alone in 90 percent. **Thymic carcinoma** lacks the myasthenia link and needs adjuvant therapy. **Asbestos** exposure carries no role, unlike mesothelioma with 250 fibre per ml exposure history.",
+      "say": "Thymoma begins in the anterior mediastinum. Myasthenia accompanies many patients. Encapsulated early disease is cured by surgery alone often. Carcinoma lacks the muscle weakness link and needs added therapy. Asbestos plays no role here unlike pleural mesothelioma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Entity",
+          "Myasthenia link",
+          "Treatment"
+        ],
+        "rows": [
+          [
+            "Thymoma",
+            "30 to 50 percent",
+            "Resection and radiation"
+          ],
+          [
+            "Thymic carcinoma",
+            "Rare",
+            "Surgery plus chemotherapy"
+          ],
+          [
+            "Mesothelioma",
+            "None",
+            "Multimodal therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mesothelioma** follows **asbestos** exposure after a 30 to 40 year latency with risk 7 to 12 times baseline. **Pleurectomy-decortication** strips rind while preserving lung with 5 to 10 percent mortality. **Extrapleural pneumonectomy** carries 10 to 20 percent mortality and is seldom favoured. **Hemithoracic radiation** of 54 Gy prevents port site recurrence after surgery.",
+      "say": "Mesothelioma comes decades after asbestos exposure. Latency of three to four decades is typical. Pleurectomy with decortication preserves the lung in selected patients. Pneumonectomy carries higher mortality and is seldom favoured. Radiation to the hemithorax prevents chest wall recurrence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pleurectomy-decortication",
+          "points": [
+            "Preserves lung",
+            "Lower mortality",
+            "Better quality of life"
+          ]
+        },
+        "right": {
+          "title": "Extrapleural pneumonectomy",
+          "points": [
+            "Removes whole lung",
+            "Higher mortality",
+            "Seldom favoured now"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Great vessel injury** during dissection causes sudden haemodynamic collapse needing cross-clamp control. **Bronchopleural fistula** leaks air in 3 to 5 percent of pneumonectomies with recurrent infection. **Chylothorax** follows mediastinal dissection in 2 to 3 percent of cases. **Prolonged air leak** beyond 5 days after lobectomy meets the threshold for intervention.",
+      "say": "Complications demand vigilance after thoracic surgery. Prolonged air leak extends chest drain stay. Bronchopleural fistula causes recurrent infection after pneumonectomy. Chylothorax follows mediastinal dissection rarely. Major vessel injury remains the feared event.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Rate",
+          "Procedure"
+        ],
+        "rows": [
+          [
+            "Prolonged air leak",
+            "Over 5 days",
+            "Lobectomy"
+          ],
+          [
+            "Bronchopleural fistula",
+            "3 to 5 percent",
+            "Pneumonectomy"
+          ],
+          [
+            "Chylothorax",
+            "2 to 3 percent",
+            "Mediastinal dissection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For the **exam**, recall **selective neck dissection** levels **1 to 3** for early oral cancers with 25 to 30 percent occult spread. **Lobectomy** with **10 nodes** sampled is standard in NSCLC, and **VATS** cuts stay by 2 to 3 days. Resectable **thymoma** at **Masaoka 1** needs no adjuvant therapy, while mesothelioma follows **asbestos** with 30 to 40 year latency.",
+      "say": "High-yield for the exam lock the operation names. Levels one to three define selective neck dissection for early oral cancers. Ten nodes sampled define standard lung resection. Stage one thymoma needs no added therapy after resection. Mesothelioma follows asbestos after decades.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Operation",
+          "Pivotal detail"
+        ],
+        "rows": [
+          [
+            "Neck dissection",
+            "Levels one to three for early disease"
+          ],
+          [
+            "Lobectomy",
+            "Ten nodes sampled with VATS"
+          ],
+          [
+            "Thymectomy",
+            "Stage one needs no adjuvant therapy"
+          ]
+        ]
+      }
+    }
+  ]
+}

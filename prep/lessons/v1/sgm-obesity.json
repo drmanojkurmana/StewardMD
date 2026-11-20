@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-obesity",
+ "subject": "ss-general-medicine",
+ "title": "Obesity and Metabolic Syndrome",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Obesity** (excess adiposity) is defined by **body mass index above 30 kg per m2** (weight height ratio). **Metabolic syndrome** (insulin resistance cluster) needs 3 of 5 criteria. **Indian obesity cutoff** (above 27) is lower than Western thresholds. **Waist circumference** (central obesity) above 90 cm in men predicts risk. **Visceral adiposity** (inner fat) drives insulin resistance. **Leptin resistance** (satiety failure) sustains weight gain.",
+   "say": "Obesity is characterised by excess adiposity, and it is defined by body mass index above thirty kilograms per metre squared that predicts risk. Metabolic syndrome is characterised by insulin resistance cluster, and it needs three of five criteria that diagnose disease. Indian obesity cutoff is characterised by above twenty seven, and it is lower than Western thresholds that reflect Asian risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Caloric excess** (energy surplus) with **sedentary lifestyle** (low activity) drives obesity. **Genetic predisposition** (polygenic risk) accounts for 40 percent. **Thyroid disease** (hypothyroidism) causes modest weight gain. **Cushing syndrome** (cortisol excess) causes central obesity. **Insulin therapy** (weight gain effect) complicates diabetes care. **Leptin signalling** (satiety failure) sustains hyperphagia. **Gut microbiome** (bacterial influence) modulates energy harvest.",
+   "say": "Caloric excess is characterised by energy surplus, and it is accompanied by sedentary lifestyle that drives obesity with low activity. Genetic predisposition is characterised by polygenic risk, and it accounts for forty percent of weight variation. Thyroid disease is characterised by hypothyroidism, and it causes modest weight gain that requires thyroxine replacement.",
+   "vis": null
+  },
+  {
+   "tx": "Positive energy balance expands **adipocytes** (fat cells) with **hyperplasia** (new cell formation). **Hypoxia** (fat tissue oxygen lack) triggers **inflammation** (macrophage infiltration). **Insulin resistance** (reduced signalling) raises glucose. **Dyslipidaemia** (high triglycerides) accelerates atherosclerosis. **Hypertension** (volume expansion) follows sodium retention. **Sleep apnoea** (airway collapse) fragments sleep.",
+   "say": "Positive energy balance is characterised by expanding adipocytes, and it is accompanied by hyperplasia that forms new fat cells with weight gain. Hypoxia is characterised by fat tissue oxygen lack, and it triggers inflammation that infiltrates macrophages with metabolic harm. Insulin resistance is characterised by reduced signalling, and it raises glucose that drives diabetes with complications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Caloric excess"
+     },
+     {
+      "id": "b",
+      "label": "Adipocyte expansion"
+     },
+     {
+      "id": "c",
+      "label": "Inflammation hypoxia"
+     },
+     {
+      "id": "d",
+      "label": "Insulin resistance"
+     },
+     {
+      "id": "e",
+      "label": "Metabolic syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Weight gain** (progressive obesity) with **acanthosis nigricans** (dark skin folds) marks insulin resistance. **Dyspnoea** (breathlessness) with **snoring** marks sleep apnoea. **Hypertension** (high pressure) with **dyslipidaemia** (high triglycerides) marks metabolic syndrome. **Infertility** (anovulation) marks PCOS overlap. **Osteoarthritis** (knee pain) marks mechanical burden. **Depression** (low mood) complicates obesity commonly.",
+   "say": "Weight gain is characterised by progressive obesity, and it is accompanied by acanthosis nigricans that marks insulin resistance with metabolic risk. Dyspnoea is characterised by breathlessness, and it is accompanied by snoring that marks sleep apnoea with daytime somnolence. Hypertension is characterised by high pressure, and it is accompanied by dyslipidaemia that marks metabolic syndrome requiring therapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Body mass index** (weight height ratio) grades obesity severity. **Waist circumference** (central obesity) above 90 cm predicts risk. **Fasting glucose** (sugar test) above 100 screens diabetes. **Lipid profile** (triglycerides above 150) screens dyslipidaemia. **Blood pressure** (pressure check) above 130 over 85 screens hypertension. **HbA1c** (glycated haemoglobin) above 6.5 percent confirms diabetes.",
+   "say": "Body mass index is characterised by weight height ratio grading, and it grades obesity severity that guides therapy. Waist circumference is characterised by central obesity measurement, and it predicts risk above ninety centimetres in men. Fasting glucose is characterised by sugar testing, and it screens diabetes above one hundred milligrams per decilitre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Body mass index",
+      "Grading",
+      "Above 30 obesity"
+     ],
+     [
+      "Waist circumference",
+      "Central risk",
+      "Above 90 men India"
+     ],
+     [
+      "Fasting glucose",
+      "Diabetes screen",
+      "Above 100 prediabetes"
+     ],
+     [
+      "Lipids",
+      "Dyslipidaemia",
+      "Triglycerides above 150"
+     ],
+     [
+      "Blood pressure",
+      "Hypertension",
+      "Above 130 over 85"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lifestyle therapy** (diet, exercise, behaviour) is first line for all obesity. **Very low calorie diet** (800 kcal daily) suits severe obesity. **Orlistat** (lipase inhibitor) reduces fat absorption. **Semaglutide** (GLP1 agonist) reduces weight and cardiovascular risk. **Phentermine** (sympathomimetic) is short term adjunct. **Bariatric surgery** (gastric bypass) is definitive for severe obesity.",
+   "say": "Lifestyle therapy is characterised by diet and exercise and behaviour, and it is the first line for all obesity that improves metabolic risk. Very low calorie diet is characterised by eight hundred kilocalories daily, and it suits severe obesity that requires supervision. Orlistat is characterised by lipase inhibition, and it reduces fat absorption that causes steatorrhoea.",
+   "vis": null
+  },
+  {
+   "tx": "**Semaglutide 2.4 mg** (weekly injection) achieves 15 percent weight loss. **Tirzepatide** (dual GIP GLP1) achieves 20 percent loss. **Bariatric surgery** (Roux en Y bypass) achieves 30 percent loss. **Metformin** (insulin sensitiser) aids diabetes obesity. **Statins** (cholesterol reducers) control dyslipidaemia. **Thiazolidinediones** (insulin sensitisers) worsen weight gain.",
+   "say": "Semaglutide is characterised by weekly injection of two point four milligrams, and it achieves fifteen percent weight loss that improves control. Tirzepatide is characterised by dual GIP GLP1 agonism, and it achieves twenty percent loss that exceeds semaglutide. Bariatric surgery is characterised by Roux en Y bypass, and it achieves thirty percent loss that remits diabetes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lifestyle therapy",
+     "points": [
+      "Diet exercise first",
+      "Behaviour therapy",
+      "Very low calorie supervised",
+      "First line all"
+     ]
+    },
+    "right": {
+     "title": "Pharmacotherapy surgery",
+     "points": [
+      "Semaglutide fifteen percent",
+      "Tirzepatide twenty percent",
+      "Bariatric thirty percent",
+      "Severe obesity definite"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Weight regain** (yo yo pattern) complicates diet therapy. **Nutritional deficiencies** (vitamin D, iron) follow bariatric surgery. **Sarcopenia** (muscle loss) complicates rapid loss. **Gallstones** (rapid loss complication) need prophylaxis. **Sleep apnoea persistence** (airway collapse) needs CPAP. **Depression** (weight stigma) needs screening.",
+   "say": "Weight regain is characterised by yo yo pattern, and it complicates diet therapy that requires maintenance support. Nutritional deficiencies are characterised by vitamin D and iron lack, and they follow bariatric surgery that requires supplementation. Sarcopenia is characterised by muscle loss, and it complicates rapid loss that requires protein intake.",
+   "vis": null
+  },
+  {
+   "tx": "**Obesity halves** life expectancy by 10 years with cardiovascular disease. Bariatric surgery reduces mortality by 40 percent. Semaglutide reduces cardiovascular events by 20 percent. Metabolic syndrome diabetes risk increases sevenfold. Sleep apnoea accident risk doubles. Weight loss of 10 percent halves diabetes incidence.",
+   "say": "Obesity is characterised by halving life expectancy by ten years with cardiovascular disease, and it is driven by metabolic complications. Bariatric surgery is characterised by reducing mortality by forty percent, and it is achieved with bypass that remits diabetes. Semaglutide is characterised by reducing cardiovascular events by twenty percent, and it is achieved with weekly injection therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Obesity Society 2024 guidance stresses semaglutide and tirzepatide, bariatric surgery and lifestyle therapy. **Indian BMI cutoff 27** (Asian obesity threshold) is a favourite examination number. **Waist 90 cm** (central obesity) is a favourite viva marker. Traps include calling BMI obesity in muscular athletes, missing Cushing obesity, and omitting sleep apnoea screening. **Acanthosis nigricans** (dark folds) is the classic insulin resistance sign.",
+   "say": "Current guidance is characterised by semaglutide and tirzepatide and bariatric surgery and lifestyle therapy, and it is stressed by the Obesity Society for weight care. Indian BMI cutoff twenty seven is characterised by Asian obesity threshold, and it is a favourite examination number that defines disease. Waist ninety centimetres is characterised by central obesity measurement, and it is a favourite viva marker that predicts risk.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers BMI cutoffs, waist thresholds and drug weight loss. Twenty seven and ninety centimetres are the most asked points in theory and viva examinations. Focused revision of weight targets aids viva performance. Semaglutide improves metabolic control substantially with lifestyle change.",
+   "say": "This table is characterised by BMI cutoffs and waist thresholds and drug weight loss, and it gathers the high yield points for revision in theory. Twenty seven and ninety centimetres are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Obesity BMI Western",
+      "Above 30"
+     ],
+     [
+      "Obesity BMI Indian",
+      "Above 27"
+     ],
+     [
+      "Waist men India",
+      "Above 90 cm"
+     ],
+     [
+      "Semaglutide loss",
+      "Fifteen percent"
+     ],
+     [
+      "Tirzepatide loss",
+      "Twenty percent"
+     ],
+     [
+      "Bariatric loss",
+      "Thirty percent"
+     ],
+     [
+      "Syndrome criteria",
+      "Three of five"
+     ],
+     [
+      "Diabetes risk",
+      "Sevenfold"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

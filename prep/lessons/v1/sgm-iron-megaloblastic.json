@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-iron-megaloblastic",
+ "subject": "ss-general-medicine",
+ "title": "Iron Deficiency and Megaloblastic Anaemia",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Iron deficiency anaemia** (low iron stores) is the commonest world anaemia with microcytic hypochromic indices. **Megaloblastic anaemia** (DNA synthesis failure) is B12 or folate driven with hypersegmentation. **Ferritin below 15** (iron stores) confirms iron deficiency. **B12 below 200** (cobalamin lack) confirms megaloblastic disease. **Folate below 3** (folate lack) confirms folate deficiency. **RDW elevation** (size variation) favours iron deficiency.",
+   "say": "Iron deficiency anaemia is characterised by low iron stores, and it is the commonest world anaemia with microcytic hypochromic indices. Megaloblastic anaemia is characterised by DNA synthesis failure, and it is driven by B twelve or folate deficiency with hypersegmentation. Ferritin below fifteen is characterised by iron store measurement, and it confirms iron deficiency that requires iron replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Chronic blood loss** (menorrhagia, gastrointestinal bleeding) is the commonest iron deficiency cause. **Hookworm infestation** (worm blood loss) is the Indian cause. **Malabsorption** (coeliac disease) impairs iron uptake. **Strict vegetarian diet** (low haem iron) causes deficiency. **B12 malabsorption** (pernicious anaemia) causes megaloblastic disease. **Alcoholism** (folate depletion) causes megaloblastic disease. **Pregnancy** (increased demand) causes both deficiencies.",
+   "say": "Chronic blood loss is characterised by menorrhagia and gastrointestinal bleeding, and it is the commonest iron deficiency cause that requires source control. Hookworm infestation is characterised by worm blood loss, and it is the Indian cause that requires deworming therapy. Malabsorption is characterised by coeliac disease, and it impairs iron uptake that requires gluten exclusion.",
+   "vis": null
+  },
+  {
+   "tx": "Iron deficiency impairs **haem synthesis** (protoporphyrin accumulation) with **microcytosis** (small red cells). B12 deficiency impairs **methylation** (methionine failure) with **hypersegmentation** (over segmented neutrophils). Folate deficiency impairs **thymidylate synthesis** (DNA replication) with **megaloblasts** (large precursors). **Epithelial failure** (glossitis, cheilosis) follows mucosal turnover. **Marrow hypercellularity** (compensatory growth) precedes ineffective erythropoiesis.",
+   "say": "Iron deficiency is characterised by impairing haem synthesis, and it is accompanied by protoporphyrin accumulation that produces microcytosis. B12 deficiency is characterised by impairing methylation, and it is accompanied by methionine failure that causes hypersegmentation. Folate deficiency is characterised by impairing thymidylate synthesis, and it is accompanied by DNA replication failure that produces megaloblasts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nutrient deficiency"
+     },
+     {
+      "id": "b",
+      "label": "Synthesis failure"
+     },
+     {
+      "id": "c",
+      "label": "Abnormal red cells"
+     },
+     {
+      "id": "d",
+      "label": "Epithelial signs"
+     },
+     {
+      "id": "e",
+      "label": "Anaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Microcytic hypochromic anaemia** (pale small cells) is the iron deficiency hallmark. **Hypersegmented neutrophils** (over segmented cells) are pathognomonic of megaloblastic disease. **Koilonychia** (spoon nails) with **glossitis** (smooth tongue) marks iron deficiency. **Cheilosis** (mouth cracking) with **dysphagia** (Paterson Kelly syndrome) marks iron deficiency. **Neuropathy** (tingling, cord degeneration) marks B12 deficiency. **Pancytopenia** (all lines low) marks severe megaloblastic disease.",
+   "say": "Microcytic hypochromic anaemia is characterised by pale small cells, and it is the iron deficiency hallmark that requires ferritin confirmation. Hypersegmented neutrophils are characterised by over segmented cells, and they are pathognomonic of megaloblastic disease that requires B twelve testing. Koilonychia is characterised by spoon nails, and it is accompanied by glossitis that marks iron deficiency with epithelial changes.",
+   "vis": null
+  },
+  {
+   "tx": "**Ferritin below 15** (iron stores) confirms iron deficiency. **Serum iron** (low iron) with **high TIBC** (binding capacity) confirms deficiency. **B12 below 200** (cobalamin lack) confirms megaloblastic disease. **Folate below 3** (folate lack) confirms folate deficiency. **Anti intrinsic factor antibodies** (pernicious markers) confirm autoimmune disease. **Peripheral smear** (hypersegmentation) supports megaloblastic diagnosis.",
+   "say": "Ferritin below fifteen is characterised by iron store measurement, and it confirms iron deficiency that requires iron replacement. Serum iron is characterised by low iron with high binding capacity, and it confirms deficiency that requires gastrointestinal evaluation. B12 below two hundred is characterised by cobalamin measurement, and it confirms megaloblastic disease that requires injection therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Ferritin",
+      "Iron stores",
+      "Below 15 deficiency"
+     ],
+     [
+      "Serum iron TIBC",
+      "Iron confirm",
+      "Low iron high TIBC"
+     ],
+     [
+      "B12 level",
+      "Megaloblastic",
+      "Below 200 deficiency"
+     ],
+     [
+      "Folate level",
+      "Folate confirm",
+      "Below 3 deficiency"
+     ],
+     [
+      "Peripheral smear",
+      "Morphology",
+      "Hypersegmentation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral iron** (ferrous sulphate 200 mg daily) is first line for iron deficiency. **Intravenous iron** (ferric carboxymaltose) suits malabsorption. Pernicious anaemia requires **B12 injection** (1000 mcg) lifelong replacement. **Folate supplementation** (5 mg daily) treats deficiency. **Deworming** (albendazole) treats hookworm disease. **Gastrointestinal evaluation** (endoscopy) excludes malignancy in adults.",
+   "say": "Oral iron is characterised by ferrous sulphate two hundred milligrams daily, and it is the first line for iron deficiency that requires compliance counselling. Intravenous iron is characterised by ferric carboxymaltose, and it suits malabsorption that requires infusion therapy. B12 injection is characterised by one thousand micrograms, and it treats pernicious anaemia that requires lifelong replacement.",
+   "vis": null
+  },
+  {
+   "tx": "**Menorrhagia control** (hormonal therapy) stops gynaecological loss. **Endoscopy** (visual examination) excludes gastrointestinal cancer. **Gluten free diet** (coeliac exclusion) improves iron absorption. **Antiparietal antibodies** (autoimmune markers) confirm pernicious anaemia. **Dietary counselling** (meat, B12 fortification) prevents recurrence. **Pregnancy supplementation** (iron folate) prevents deficiency.",
+   "say": "Menorrhagia control is characterised by hormonal therapy, and it stops gynaecological loss that depletes iron. Endoscopy is characterised by visual examination, and it excludes gastrointestinal cancer that causes chronic loss. Gluten free diet is characterised by coeliac exclusion, and it improves iron absorption that was previously impaired.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Iron deficiency",
+     "points": [
+      "Microcytic hypochromic",
+      "Ferritin below fifteen",
+      "Oral iron first",
+      "Evaluate blood loss"
+     ]
+    },
+    "right": {
+     "title": "Megaloblastic anaemia",
+     "points": [
+      "Macrocytic hypersegmented",
+      "B12 below two hundred",
+      "B12 injection folate oral",
+      "Neuropathy warning"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transfusion reaction** (iron overload) complicates overtransfusion. **Hypersensitivity** (iron infusion reaction) needs slow infusion. **B12 neuropathy** (cord degeneration) is irreversible if delayed. **Folate masking** (B12 anaemia masked) needs B12 correction first. **Hookworm recurrence** (reinfection) needs sanitation. **Pregnancy anaemia** (iron demand) needs supplementation.",
+   "say": "Transfusion reaction is characterised by iron overload, and it complicates overtransfusion that requires chelation. Hypersensitivity is characterised by iron infusion reaction, and it needs slow infusion that prevents anaphylaxis. B12 neuropathy is characterised by cord degeneration, and it is irreversible if delayed that requires early injection.",
+   "vis": null
+  },
+  {
+   "tx": "**Iron deficiency** anaemia recovers haemoglobin within 6 weeks with iron. Hookworm anaemia recovers with deworming and iron. B12 anaemia recovers with injections, while neuropathy needs early therapy. Folate anaemia recovers with supplementation. Pernicious anaemia needs lifelong injections. Pregnancy anaemia recovers with supplementation.",
+   "say": "Iron deficiency anaemia is characterised by recovering haemoglobin within six weeks with iron, and it is achieved with compliance that sustains absorption. Hookworm anaemia is characterised by recovery with deworming and iron, and it is achieved with sanitation that prevents reinfection. B12 anaemia is characterised by recovery with injections, and it is achieved with lifelong replacement that prevents neuropathy.",
+   "vis": null
+  },
+  {
+   "tx": "Indian anaemia guidelines stress hookworm deworming, periconceptional folate and gastrointestinal evaluation. **Hypersegmentation** (over segmented neutrophils) is a favourite examination sign. **Koilonychia** (spoon nails) is a favourite viva sign. **B12 before folate** (ordering rule) prevents neuropathy masking. Traps include calling thalassaemia trait iron deficiency, omitting endoscopy in adults, and giving folate before B12. **Paterson Kelly syndrome** (dysphagia) is the iron deficiency vignette.",
+   "say": "Current guidelines are characterised by hookworm deworming and periconceptional folate and gastrointestinal evaluation, and they are stressed for anaemia control in India. Hypersegmentation is characterised by over segmented neutrophils, and it is a favourite examination sign that confirms megaloblastic disease. Koilonychia is characterised by spoon nails, and it is a favourite viva sign that indicates iron deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers ferritin cutoffs, B12 thresholds and hypersegmentation signs. Below fifteen and below two hundred are the most asked points in theory and viva examinations. Structured review of smear signs aids viva responses. Bedside practice on nail signs strengthens viva performance reliably.",
+   "say": "This table is characterised by ferritin cutoffs and B twelve thresholds and hypersegmentation signs, and it gathers the high yield points for revision in theory. Below fifteen and below two hundred are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Iron ferritin",
+      "Below 15"
+     ],
+     [
+      "B12 cutoff",
+      "Below 200"
+     ],
+     [
+      "Folate cutoff",
+      "Below 3"
+     ],
+     [
+      "Smear sign",
+      "Hypersegmentation"
+     ],
+     [
+      "Nail sign",
+      "Koilonychia spoon nails"
+     ],
+     [
+      "Oral iron dose",
+      "200 mg daily"
+     ],
+     [
+      "B12 dose",
+      "1000 mcg injection"
+     ],
+     [
+      "Order rule",
+      "B12 before folate"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

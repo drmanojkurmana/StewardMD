@@ -15,11 +15,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "bc1", "label": "List categories on horizontal axis" },
-          { "id": "bc2", "label": "Draw separated bars from zero baseline" },
-          { "id": "bc3", "label": "Label heights with counts or percents" }
+          {
+            "id": "bc1",
+            "label": "List categories on horizontal axis"
+          },
+          {
+            "id": "bc2",
+            "label": "Draw separated bars from zero baseline"
+          },
+          {
+            "id": "bc3",
+            "label": "Label heights with counts or percents"
+          }
         ],
-        "edges": [["bc1", "bc2"], ["bc2", "bc3"]]
+        "edges": [
+          [
+            "bc1",
+            "bc2"
+          ],
+          [
+            "bc2",
+            "bc3"
+          ]
+        ]
       }
     },
     {
@@ -30,11 +48,19 @@
         "kind": "compare",
         "left": {
           "title": "Multiple (grouped) bars",
-          "points": ["Series side by side per category", "Compares absolute values", "Best for two to four series"]
+          "points": [
+            "Series side by side per category",
+            "Compares absolute values",
+            "Best for two to four series"
+          ]
         },
         "right": {
           "title": "Component (stacked) bars",
-          "points": ["Segments stacked in one bar", "Compares composition", "Percent version fixes length at 100"]
+          "points": [
+            "Segments stacked in one bar",
+            "Compares composition",
+            "Percent version fixes length at 100"
+          ]
         }
       }
     },
@@ -44,12 +70,27 @@
       "say": "Pie charts show shares of one whole. Convert each percent to degrees by multiplying by three point six.",
       "vis": {
         "kind": "table",
-        "cols": ["Share", "Sector angle"],
+        "cols": [
+          "Share",
+          "Sector angle"
+        ],
         "rows": [
-          ["50 percent", "180 degrees"],
-          ["25 percent", "90 degrees"],
-          ["10 percent", "36 degrees"],
-          ["5 percent", "18 degrees"]
+          [
+            "50 percent",
+            "180 degrees"
+          ],
+          [
+            "25 percent",
+            "90 degrees"
+          ],
+          [
+            "10 percent",
+            "36 degrees"
+          ],
+          [
+            "5 percent",
+            "18 degrees"
+          ]
         ]
       }
     },
@@ -60,11 +101,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ln1", "label": "Plot value at each time point" },
-          { "id": "ln2", "label": "Join points in time order" },
-          { "id": "ln3", "label": "Read trend, season, and spikes" }
+          {
+            "id": "ln1",
+            "label": "Plot value at each time point"
+          },
+          {
+            "id": "ln2",
+            "label": "Join points in time order"
+          },
+          {
+            "id": "ln3",
+            "label": "Read trend, season, and spikes"
+          }
         ],
-        "edges": [["ln1", "ln2"], ["ln2", "ln3"]]
+        "edges": [
+          [
+            "ln1",
+            "ln2"
+          ],
+          [
+            "ln2",
+            "ln3"
+          ]
+        ]
       }
     },
     {
@@ -86,11 +145,19 @@
         "kind": "compare",
         "left": {
           "title": "Patterned clouds",
-          "points": ["Rising band: positive correlation", "Falling band: negative correlation", "Curve: non linear relation"]
+          "points": [
+            "Rising band: positive correlation",
+            "Falling band: negative correlation",
+            "Curve: non linear relation"
+          ]
         },
         "right": {
           "title": "Warnings in the cloud",
-          "points": ["Round cloud: no correlation", "One distant dot: outlier to check", "Clusters: hidden subgroups"]
+          "points": [
+            "Round cloud: no correlation",
+            "One distant dot: outlier to check",
+            "Clusters: hidden subgroups"
+          ]
         }
       }
     },
@@ -100,12 +167,27 @@
       "say": "Pictograms speak to lay readers through repeated symbols. Keep symbols identical in size or the picture exaggerates.",
       "vis": {
         "kind": "table",
-        "cols": ["Pictogram rule", "Why"],
+        "cols": [
+          "Pictogram rule",
+          "Why"
+        ],
         "rows": [
-          ["One fixed value per symbol", "Honest counting by the reader"],
-          ["Never stretch symbol size", "Area grows as square of height"],
-          ["Round to whole or half symbols", "Avoids false precision"],
-          ["Title states the unit value", "Reader can decode quantities"]
+          [
+            "One fixed value per symbol",
+            "Honest counting by the reader"
+          ],
+          [
+            "Never stretch symbol size",
+            "Area grows as square of height"
+          ],
+          [
+            "Round to whole or half symbols",
+            "Avoids false precision"
+          ],
+          [
+            "Title states the unit value",
+            "Reader can decode quantities"
+          ]
         ]
       }
     },
@@ -117,11 +199,19 @@
         "kind": "compare",
         "left": {
           "title": "Spot map",
-          "points": ["One dot per case at residence", "Reveals clustering near a source", "Snow's Broad Street cholera map"]
+          "points": [
+            "One dot per case at residence",
+            "Reveals clustering near a source",
+            "Snow's Broad Street cholera map"
+          ]
         },
         "right": {
           "title": "Choropleth map",
-          "points": ["Districts shaded by rate", "Compares regional burden", "Needs population denominators"]
+          "points": [
+            "Districts shaded by rate",
+            "Compares regional burden",
+            "Needs population denominators"
+          ]
         }
       }
     },
@@ -131,12 +221,27 @@
       "say": "A box plot shows median, quartiles, and outliers in one glance. Stem and leaf keeps every value visible for small datasets.",
       "vis": {
         "kind": "table",
-        "cols": ["Box plot element", "Represents"],
+        "cols": [
+          "Box plot element",
+          "Represents"
+        ],
         "rows": [
-          ["Box edges", "First and third quartiles"],
-          ["Line inside box", "Median"],
-          ["Whisker ends", "Fences at 1.5 times IQR"],
-          ["Dots beyond fences", "Outliers to investigate"]
+          [
+            "Box edges",
+            "First and third quartiles"
+          ],
+          [
+            "Line inside box",
+            "Median"
+          ],
+          [
+            "Whisker ends",
+            "Fences at 1.5 times IQR"
+          ],
+          [
+            "Dots beyond fences",
+            "Outliers to investigate"
+          ]
         ]
       }
     },
@@ -147,11 +252,70 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ch1", "label": "Ask: share, compare, trend, or relation?" },
-          { "id": "ch2", "label": "Pick pie, bar, line, or scatter" },
-          { "id": "ch3", "label": "Label fully, start bars at zero" }
+          {
+            "id": "ch1",
+            "label": "Ask: share, compare, trend, or relation?"
+          },
+          {
+            "id": "ch2",
+            "label": "Pick pie, bar, line, or scatter"
+          },
+          {
+            "id": "ch3",
+            "label": "Label fully, start bars at zero"
+          }
         ],
-        "edges": [["ch1", "ch2"], ["ch2", "ch3"]]
+        "edges": [
+          [
+            "ch1",
+            "ch2"
+          ],
+          [
+            "ch2",
+            "ch3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Bar charts display discrete qualitative or categorical data with distinct spaces between bars, whereas histograms depict continuous numerical data with contiguous bars touching each other. The area of a histogram represents total frequency. Scatter plots evaluate correlation between two continuous variables. Forest plots summarize effect estimates in meta-analyses. Survival curves are generated by Kaplan-Meier analysis and compared using the log-rank test.",
+      "say": "Bar charts display discrete qualitative or categorical data with distinct spaces between bars, whereas histograms depict continuous numerical data with contiguous bars touching each other. The area of a histogram represents total frequency. Scatter plots evaluate correlation between two continuous variables. Forest plots summarize effect estimates in meta-analyses. Survival curves are generated by Kaplan-Meier analysis and compared using the log-rank test.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Bar chart data type",
+            "Discrete categorical variables with separated equal-width bars"
+          ],
+          [
+            "Histogram data type",
+            "Continuous numerical variables with touching contiguous bars"
+          ],
+          [
+            "Histogram area meaning",
+            "Total surface area proportional to total sample frequency"
+          ],
+          [
+            "Pie chart presentation",
+            "Divides 360-degree circle into slices proportional to frequencies"
+          ],
+          [
+            "Scatter diagram utility",
+            "Visualises direction and strength of correlation between continuous variables"
+          ],
+          [
+            "Forest plot application",
+            "Displays individual study odds ratios and pooled meta-analytic effect"
+          ],
+          [
+            "Funnel plot utility",
+            "Detects publication bias and systematic heterogeneity in meta-analyses"
+          ]
+        ]
       }
     }
   ]

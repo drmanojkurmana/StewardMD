@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "sgm-environmental",
+ "subject": "ss-general-medicine",
+ "title": "Environmental emergencies",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Environmental emergencies** are heat stroke above 40 degrees C, hypothermia below thirty-five degrees C, altitude illness above 2500 m and decompression sickness below ten m depth. Their incidence is five to ten per one hundred thousand yearly in temperate zones and thirty per one hundred thousand in tropical zones. Core body temperature is thirty-seven degrees C plus or minus 1 degree. Mortality without treatment is thirty percent for heat stroke and fifteen percent for severe hypothermia.",
+   "say": "Environmental injuries present heat stroke, hypothermia and altitude illness. Core temperature must stay near thirty seven degrees. Untreated heat stroke has about thirty percent mortality.",
+   "vis": null
+  },
+  {
+   "tx": "Causes include **exertion**, alcohol, age above sixty-five, winter housing below sixteen degrees C, ascent above 2500 m in 12 hours and diving below ten m. Risk factors are 5 groups: extremes of age, alcohol use, beta blockers, diabetes and prior frostbite. Homeless patients face ten fold risk of hypothermia. Pilots and mountaineers face twenty percent risk of altitude sickness.",
+   "say": "Alcohol and old age increase risk a lot in the community. Fast ascent above twenty five hundred metres causes sickness in adults. A homeless person is at ten fold hypothermia risk in winter.",
+   "vis": null
+  },
+  {
+   "tx": "The **mechanism** is heat balance failure when heat production exceeds dissipation by twenty percent during exercise at thirty-five degrees C. Hypothalamus set point control fails after 40 degrees C, shutting sweating and vasodilation. Hypothermia slows enzymes by ten degrees C per 5 degrees fall and raises arrhythmia risk. Altitude hypoxia follows Dalton law with alveolar PO2 below sixty mmHg at 3000 m.",
+   "say": "Heat stroke starts when heat gain beats dissipation and sweating stops completely. Cold reduces enzyme activity and causes arrhythmia in patients. Altitude reduces alveolar oxygen below sixty in the unit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Heat or cold stress"
+     },
+     {
+      "id": "b",
+      "label": "Hypothalamic failure"
+     },
+     {
+      "id": "c",
+      "label": "Organ dysfunction"
+     },
+     {
+      "id": "d",
+      "label": "Cooling or rewarming"
+     },
+     {
+      "id": "e",
+      "label": "ICU support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical features include heat stroke with agitation above 40 degrees C, **classic sign** of hot dry skin with absent sweating. Hypothermia shows bradycardia below 50 per minute and Osborne waves below thirty-three degrees C. Altitude illness shows headache, dyspnoea and SpO2 below eighty-five percent at rest. Decompression sickness shows joint pain, skin mottling and vertigo within 6 hours.",
+   "say": "Heat stroke presents with hot dry skin and no sweating. Hypothermia presents with slow heart and Osborn waves. Altitude illness reduces saturation below eighty five percent.",
+   "vis": null
+  },
+  {
+   "tx": "First test is core temperature by rectal probe, ECG and arterial blood gas with lactate above 4 mmol per L in heat stroke. **Gold standard** is continuous core monitoring plus creatine kinase above 5000 units per L for rhabdomyolysis. Chest X ray excludes pneumonia in hypothermia. Pachymetry and bubble study confirm decompression bubbles in 40% of cases.",
+   "say": "Core rectal temperature is the first vital sign. Blood gas and creatine kinase indicate organ injury in cases. Bubble study confirms decompression sickness in many cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exposure",
+     "Core temperature",
+     "First action"
+    ],
+    "rows": [
+     [
+      "Heat stroke",
+      "Above 40 degrees C",
+      "Cool 0.1 degree per min"
+     ],
+     [
+      "Hypothermia",
+      "Below thirty-five degrees C",
+      "Rewarm zero point five degree per hour"
+     ],
+     [
+      "Altitude illness",
+      "SpO2 below eighty-five percent",
+      "Oxygen and descend"
+     ],
+     [
+      "Decompression",
+      "Depth below ten m",
+      "Recompression chamber"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line for heat stroke is rapid cooling with **ice water** immersion at 1 degree C per min to reach thirty-eight point five degrees C in thirty minutes. Give cold IV fluids thirty mL per kg and oxygen ten litres per min. Correct K to 4 to 5 mmol per L and glucose above seventy mg per dL. Avoid antipyretics because antipyretic 1 g is ineffective above 40 degrees C and adds liver injury in ten percent.",
+   "say": "Ice water immersion reduces temperature fastest at one degree per minute in adults. Cold fluids support circulation and reduce collapse in patients. Antipyretics do not work well in heat stroke patients.",
+   "vis": null
+  },
+  {
+   "tx": "Hypothermia first line is active rewarming with **warmed** fluids above thirty-eight degrees C, forced air at 40 degrees C and afterdrop watch below thirty-four degrees C. Give sedative zero point two to zero point seven micrograms per kg per hour for shivering at thirty-five to thirty-six degrees C. For altitude give acetazolamide two hundred fifty mg twice daily and dexamethasone 4 mg every 6 hours. Oxygen 2 to 4 litres per min raises SpO2 by ten percent.",
+   "say": "Forced air and warmed fluids help rewarm hypothermia safely in patients. Acetazolamide helps altitude acclimatisation in most patients. Oxygen increases saturation by about ten percent in patients.",
+   "vis": null
+  },
+  {
+   "tx": "Rescue therapies differ by timing in the first 6 hours after exposure. **Comparison** shows cooling at 1 degree per min saves eighty percent versus sixty percent with evaporative cooling. Recompression within 6 hours cures ninety percent of decompression cases versus 50% after twenty-four hours. Descent of five hundred m improves altitude SpO2 by 5% within 1 hour and headache resolves in eighty percent.",
+   "say": "Fast cooling helps save most heat stroke patients in time. Recompression helps best within six hours of injury. Descending five hundred metres improves altitude symptoms quickly in patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heat stroke",
+     "points": [
+      "Cool 1 degree per min",
+      "Target thirty-eight point five degrees C in thirty minutes",
+      "Ice immersion best"
+     ]
+    },
+    "right": {
+     "title": "Altitude illness",
+     "points": [
+      "Descend five hundred m at once",
+      "Oxygen 2 to 4 litres per min",
+      "Acetazolamide two hundred fifty mg twice daily"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications are **DIC** in twenty percent of heat stroke, acute kidney injury with creatinine above 2 times baseline in thirty percent and rhabdomyolysis with CK above 5000 in seventy percent. Hypothermia complications include arrhythmia below twenty-eight degrees C in 50%, coagulopathy and aspiration in twenty-five percent. Decompression complications include spinal cord injury in 5% and death in 2%. Frostbite needs 2% tissue loss removal.",
+   "say": "Heat stroke causes kidney injury and muscle breakdown often in patients. Deep hypothermia causes arrhythmia in half of cases. Spinal injury follows in five percent of diving cases.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis is good when **core temperature** normalises within 6 hours, lactate clears below 2 mmol per L by 12 hours and GCS returns to fifteen. Persistent coma beyond twenty-four hours predicts death in sixty percent with heat stroke. Altitude recovery is expected in forty-eight hours after descent for ninety percent of patients. Mild hypothermia at thirty-four degrees C has ninety-five percent survival with rewarming in 4 hours.",
+   "say": "Normalising temperature within six hours gives good outcomes for patients. Persistent coma beyond one day indicates poor recovery in many cases. Descent helps cure most altitude illness within two days.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** table for environmental emergencies in seven high yield points. Remember heat stroke above 40 degrees C, hypothermia below thirty-five degrees C, mild rewarming zero point five degree per hour and altitude above 2500 m. Decompression below ten m needs recompression within 6 hours. Antipyretics fail in heat stroke so physical cooling is mandatory.",
+   "say": "This table has the temperature thresholds and rescue times for revision. Physical cooling helps more than antipyretics every time.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "Number to recall",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Heat stroke",
+      "Above 40 degrees C",
+      "Cool 1 degree per min"
+     ],
+     [
+      "Hypothermia",
+      "Below thirty-five degrees C",
+      "Rewarm zero point five degree per hour"
+     ],
+     [
+      "Altitude risk",
+      "Above 2500 m",
+      "Descend five hundred m"
+     ],
+     [
+      "Oxygen target",
+      "SpO2 above ninety-two percent",
+      "2 to 4 litres per min"
+     ],
+     [
+      "Acetazolamide",
+      "two hundred fifty mg twice daily",
+      "Altitude acclimatisation"
+     ],
+     [
+      "Recompression",
+      "Within 6 hours",
+      "Diving injury"
+     ],
+     [
+      "Cooling target",
+      "thirty-eight point five degrees C",
+      "In thirty minutes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

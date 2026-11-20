@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "sgm-peptic-ulcer",
+ "subject": "ss-general-medicine",
+ "title": "Peptic ulcer and Helicobacter pylori",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "A **peptic ulcer** (a mucosal break deeper than muscularis mucosa) forms in stomach or duodenum when acid and pepsin overcome mucosal defence. About 10% of people develop an ulcer in their lifetime, and most duodenal ulcers are linked to **Helicobacter pylori** (a spiral bacterium) while gastric ulcers also occur with non steroid anti inflammatory drugs. Ulcers are usually solitary, chronic and recurrent. The classic pain is epigastric, periodic, nocturnal, worse when fasting and relieved by food or antacids. H pylori colonises more than 50% of the world population.",
+   "say": "A peptic ulcer is a mucosal break that is deeper than the muscularis layer. About ten percent of people develop an ulcer in their lifetime, and most duodenal ulcers are linked to Helicobacter pylori. Gastric ulcers also occur with non steroid anti inflammatory drugs in many patients. The classic pain is epigastric, periodic and nocturnal, and it is worse when fasting. Food and antacids relieve the pain, and the bacterium colonises more than half of the world population.",
+   "vis": null
+  },
+  {
+   "tx": "Risk factors are H pylori infection, **non steroid anti inflammatory drugs** (acid and prostaglandin altering agents), corticosteroids, smoking, alcohol excess and Zollinger Ellison syndrome. Blood group O, psychological stress and prolonged illness add risk. H pylori virulence factors include cagA, vacA and urease, which helps the organism survive acid. Eradication lowers recurrence sharply. **Zollinger Ellison syndrome** (gastrinoma causing massive acid secretion) presents with recurrent, multiple and atypical ulcers plus diarrhoea. Acidic foods and coffee worsen symptoms in susceptible patients, although they are not the root cause of ulceration.",
+   "say": "Risk factors are Helicobacter infection, anti inflammatory drugs, steroids, smoking and alcohol excess. The bacterium carries virulence factors like cagA, vacA and urease, which help survival in acid. Eradication of the bacterium lowers recurrence sharply in treated patients. Gastrinoma causes massive acid secretion, and it presents with recurrent and multiple ulcers. Blood group O and prolonged illness also add risk in some patients with ulcer disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Duodenal ulcer profile",
+     "points": [
+      "Almost all H pylori linked",
+      "Younger patients, acid high",
+      "Pain relieved by food",
+      "Bimodal nocturnal pain"
+     ]
+    },
+    "right": {
+     "title": "Gastric ulcer profile",
+     "points": [
+      "H pylori or drugs linked",
+      "Older patients, acid normal",
+      "Pain worsened by food",
+      "Malignancy must be excluded"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mucosal defence comprises mucus bicarbonate barrier, prostaglandin dependent blood flow, and rapid epithelial repair. **Acid** (hydrogen ion secretion by parietal cells) plus pepsin digests mucosa once the barrier breaks. H pylori inflames the antrum, reduces somatostatin, raises gastrin and increases acid load, while also impairing duodenal bicarbonate. Drugs reduce prostaglandins and mucosal blood flow. Smoking reduces bicarbonate and delays healing. Ulcer occurs when acid load exceeds defence, so both excess acid and weak defence can tip the balance toward ulceration.",
+   "say": "Mucosal defence includes a mucus barrier, prostaglandin blood flow and rapid repair of epithelium. Acid plus pepsin digest mucosa once the barrier is broken down. Helicobacter inflames the antrum, lowers somatostatin and raises gastrin with acid load. Drugs reduce prostaglandins, and smoking reduces bicarbonate with delayed healing. Ulcer occurs when acid exceeds defence, so both excess acid and weak defence can tip the balance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "H pylori or drugs"
+     },
+     {
+      "id": "b",
+      "label": "Barrier and blood flow fall"
+     },
+     {
+      "id": "c",
+      "label": "Acid and pepsin digest"
+     },
+     {
+      "id": "d",
+      "label": "Ulcer forms"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classic sign is **epigastric tenderness** (pain on palpation over the epigastrium) during an active phase. Pain is rhythmic, food related or nocturnal, with at least 3 weeks of pain followed by remission. Chronic NSAID ulcers may be silent and present with bleeding or perforation. Features favouring malignancy in a gastric ulcer are weight loss, persistent pain, anorexia and failure to heal in 8 weeks. Zollinger Ellison syndrome is suspected with recurrent ulcers despite therapy and diarrhoea. Complications present as haematemesis, melaena or sudden epigastric pain with rigidity.",
+   "say": "The classic sign is epigastric tenderness during an active phase of ulcer disease. Pain is rhythmic and food related, with weeks of pain followed by remission. Chronic drug ulcers may be silent and can present with bleeding or perforation. Gastric ulcers with weight loss and persistent pain need exclusion of malignancy. Gastrinoma is suspected with recurrent ulcers despite therapy and diarrhoea with pain.",
+   "vis": null
+  },
+  {
+   "tx": "**Upper gastrointestinal endoscopy** (flexible scope inspection with biopsies) is the gold standard for gastric ulcers and excludes malignancy by biopsy of ulcer edges. Non invasive H pylori testing uses **urea breath test** (labelled carbon detection) or **stool antigen** (enzyme immunoassay on stool) before treatment. Serology is not useful after treatment. First test in dyspepsia without alarm is H pylori stool antigen or breath test. Fasting for 2 days and proton pump inhibitor withdrawal improve test accuracy. Barium studies are obsolete for diagnosis.",
+   "say": "Upper endoscopy with biopsies is the gold standard for gastric ulcers. Biopsy of ulcer edges excludes malignancy and it is mandatory in gastric disease. Stool antigen and urea breath test are the first tests in dyspepsia without alarm. Serology is less useful after treatment and the test needs fasting. Proton pump inhibitor use lowers accuracy, so the drug is stopped before testing when possible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Upper endoscopy with biopsies",
+      "Gold standard for gastric ulcer"
+     ],
+     [
+      "Urea breath test",
+      "Best non invasive H pylori test"
+     ],
+     [
+      "Stool antigen test",
+      "First test in dyspepsia"
+     ],
+     [
+      "Serology for H pylori",
+      "Not useful after treatment"
+     ],
+     [
+      "Barium meal",
+      "Obsolete for diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Eradication plus acid suppression is the backbone. First line **clarithromycin triple therapy** (proton pump inhibitor plus clarithromycin 500 mg twice daily plus amoxicillin 1 g twice daily) runs for 14 days. Where clarithromycin resistance is high, **bismuth quadruple therapy** (bismuth, proton pump inhibitor, tetracycline and metronidazole) is preferred. Duodenal ulcers heal with proton pump inhibitor alone for 4 weeks, but eradication is still needed. **Proton pump inhibitor** (acid suppressing drug) dose is doubled for bleeding ulcers. Repeat test of cure is done 4 weeks after antibiotics end.",
+   "say": "First line eradication is a proton pump inhibitor with clarithromycin and amoxicillin for fourteen days. The clarithromycin dose is five hundred milligrams twice daily with amoxicillin one gram twice daily. Bismuth quadruple therapy is preferred where clarithromycin resistance is high. Duodenal ulcers heal with acid suppression, but eradication is still needed for cure. A test of cure is repeated four weeks after antibiotics are finished in all patients.",
+   "vis": null
+  },
+  {
+   "tx": "Recent guidance favours bismuth therapy and rifabutin regimens. The **ACG 2024 H pylori guideline** (American gastroenterology consensus) recommends bismuth quadruple therapy as first line in most regions and rifabutin triple therapy after failure. Test of cure is mandatory with stool antigen or breath test. For NSAID ulcers, the offending drug is stopped and a proton pump inhibitor is given. Bleeding ulcers are treated with high dose intravenous pantoprazole for 3 days after endoscopic haemostasis. Endoscopic adrenaline alone is not recommended for haemostasis.",
+   "say": "Recent guidance is in favour of bismuth therapy and rifabutin regimens after failure. The American guideline of twenty twenty four says that bismuth therapy is first line. Test of cure is mandatory with stool antigen or breath test. For drug ulcers, the offending drug is stopped and a proton pump inhibitor is given. Bleeding ulcers need high dose intravenous pantoprazole for three days after endoscopic control.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ulcer confirmed behind"
+     },
+     {
+      "id": "b",
+      "label": "Test H pylori off PPI"
+     },
+     {
+      "id": "c",
+      "label": "Bismuth or triple therapy"
+     },
+     {
+      "id": "d",
+      "label": "Test of cure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications are bleeding, perforation, penetration and gastric outlet obstruction. **Bleeding** (haemorrhage from the ulcer base) is the commonest complication and can be massive. Anterior duodenal ulcers perforate into the peritoneal cavity causing peritonitis, while posterior ulcers bleed into the gastroduodenal artery. Penetration into pancreas gives boring back pain. Gastric outlet obstruction follows chronic pyloric scarring. **Zollinger Ellison syndrome** (gastrinoma) is suggested by fasting gastrin above 1000 pg/mL. Prognosis after eradication is excellent, with recurrence under 5% yearly.",
+   "say": "Complications are bleeding, perforation, penetration and outlet obstruction in ulcer disease. Bleeding is the commonest complication, and it can be massive in many patients. Anterior ulcers perforate into the peritoneal cavity, while posterior ulcers bleed heavily. Penetration into pancreas gives boring back pain and poor response. Prognosis after eradication is excellent, with recurrence under five percent per year after cure.",
+   "vis": null
+  },
+  {
+   "tx": "Examination traps are frequent. **Gastric ulcer** (stomach ulcer) must be biopsied to exclude malignancy, whereas duodenal ulcers are almost never malignant and biopsy is unnecessary. Serology cannot confirm eradication, so breath or stool tests are used for cure. Clarithromycin resistance in India is high, so bismuth quadruple therapy is the safe first choice in many centres. NSAID ulcers need drug withdrawal plus acid suppression. Fasting gastrin must be measured off acid suppression. Perforation gives sudden pain with absent liver dullness and pneumoperitoneum.",
+   "say": "Gastric ulcers must be biopsied to exclude malignancy in every case. Duodenal ulcers are almost never malignant, so biopsy is not needed there. Serology cannot confirm eradication, so breath and stool tests are used instead. Clarithromycin resistance is high in India, so bismuth therapy is safe. Fasting gastrin must be measured off acid suppression, and perforation gives sudden severe pain.",
+   "vis": null
+  },
+  {
+   "tx": "This step gathers the **numbers and regimens** most likely to be asked in a viva. Lifetime ulcer risk is about 10%, H pylori infects more than 50% of humanity, clarithromycin triple therapy lasts 14 days with doses of 500 mg twice daily, bismuth quadruple therapy is 4 drugs, test of cure is at 4 weeks, and fasting gastrin above 1000 pg/mL suggests gastrinoma. Hold the pair together: duodenal ulcers are acid driven and benign, while gastric ulcers with alarm features are biopsy driven.",
+   "say": "Keep the numbers and regimens together for viva preparation. Lifetime ulcer risk is about ten percent, and Helicobacter infects more than half of humanity. Triple therapy lasts fourteen days, with clarithromycin five hundred milligrams twice daily. Test of cure is at four weeks after antibiotics finish. Fasting gastrin is above one thousand in gastrinoma, and acid suppression is given for four weeks in duodenal disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "Lifetime ulcer risk",
+      "About 10 percent"
+     ],
+     [
+      "H pylori prevalence",
+      "More than 50 percent worldwide"
+     ],
+     [
+      "Triple therapy duration",
+      "14 days, clarithromycin 500 mg BD"
+     ],
+     [
+      "Bismuth quadruple therapy",
+      "4 drugs, preferred where resistance high"
+     ],
+     [
+      "Test of cure timing",
+      "4 weeks after antibiotics"
+     ],
+     [
+      "Gastrinoma gastrin",
+      "Above 1000 pg per ml fasting"
+     ],
+     [
+      "Gold standard test",
+      "Upper endoscopy with biopsies"
+     ],
+     [
+      "Best non invasive test",
+      "Urea breath test"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

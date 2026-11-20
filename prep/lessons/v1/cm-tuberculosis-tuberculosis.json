@@ -13,25 +13,40 @@
    "say": "A quarter of the world's TB, fed by nutrition, diabetes, smoke and crowding. The elimination programme renamed itself in 2020 to match its ambition.",
    "vis": {
     "kind": "table",
-    "cols": ["Driver", "Contribution"],
+    "cols": [
+     "Driver",
+     "Contribution"
+    ],
     "rows": [
-     ["Undernutrition", "Largest population risk share"],
-     ["Diabetes", "Roughly triples individual risk"],
-     ["Smoking and alcohol", "Raise incidence and death"],
-     ["Crowding, poor ventilation", "Household transmission"]
+     [
+      "Undernutrition",
+      "Largest population risk share"
+     ],
+     [
+      "Diabetes",
+      "Roughly triples individual risk"
+     ],
+     [
+      "Smoking and alcohol",
+      "Raise incidence and death"
+     ],
+     [
+      "Crowding, poor ventilation",
+      "Household transmission"
+     ]
     ]
    }
   },
   {
-    "tx": "A crowded queue at a district tuberculosis centre ends at a Nikshay registration desk, where each patient is entered before treatment. **Tuberculosis burden** in India is the largest of any country, about a quarter of cases worldwide. Undernutrition, diabetes, smoking, alcohol, indoor smoke and crowded housing all amplify an infection that spreads in air. The National TB Elimination Programme, the name given in 2020 to the former control programme, aims to end tuberculosis sooner than the global target date.",
-    "say": "A crowded queue at a district tuberculosis centre ends at a Nikshay registration desk, where each patient is entered before treatment. Tuberculosis burden in India is the largest of any country, about a quarter of cases worldwide. Undernutrition, diabetes, smoking, alcohol, indoor smoke and crowded housing all amplify an infection that spreads in air. The National TB Elimination Programme, the name given in 2020 to the former control programme, aims to end tuberculosis sooner than the global target date.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n515-cm-tuberculosis-tuberculosis.webp",
-      "alt": "Crowded outpatient queue at a district tuberculosis centre with a Nikshay registration desk",
-      "caption": "Patients queue at a district tuberculosis centre where a Nikshay desk registers them for care. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "A crowded queue at a district tuberculosis centre ends at a Nikshay registration desk, where each patient is entered before treatment. **Tuberculosis burden** in India is the largest of any country, about a quarter of cases worldwide. Undernutrition, diabetes, smoking, alcohol, indoor smoke and crowded housing all amplify an infection that spreads in air. The National TB Elimination Programme, the name given in 2020 to the former control programme, aims to end tuberculosis sooner than the global target date.",
+   "say": "A crowded queue at a district tuberculosis centre ends at a Nikshay registration desk, where each patient is entered before treatment. Tuberculosis burden in India is the largest of any country, about a quarter of cases worldwide. Undernutrition, diabetes, smoking, alcohol, indoor smoke and crowded housing all amplify an infection that spreads in air. The National TB Elimination Programme, the name given in 2020 to the former control programme, aims to end tuberculosis sooner than the global target date.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n515-cm-tuberculosis-tuberculosis.webp",
+    "alt": "Crowded outpatient queue at a district tuberculosis centre with a Nikshay registration desk",
+    "caption": "Patients queue at a district tuberculosis centre where a Nikshay desk registers them for care. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "From control to elimination: what changed",
@@ -41,11 +56,21 @@
     "kind": "compare",
     "left": {
      "title": "Earlier control era",
-     "points": ["Passive case finding", "Smear first diagnosis", "Alternate day regimens", "Paper registers"]
+     "points": [
+      "Passive case finding",
+      "Smear first diagnosis",
+      "Alternate day regimens",
+      "Paper registers"
+     ]
     },
     "right": {
      "title": "Elimination era",
-     "points": ["Active case finding drives", "Upfront molecular tests", "Daily fixed dose combinations", "Nikshay digital tracking"]
+     "points": [
+      "Active case finding drives",
+      "Upfront molecular tests",
+      "Daily fixed dose combinations",
+      "Nikshay digital tracking"
+     ]
     }
    }
   },
@@ -56,12 +81,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Vulnerable groups mapped"},
-     {"id": "b", "label": "Symptom and radiograph screen"},
-     {"id": "c", "label": "Molecular test for suspects"},
-     {"id": "d", "label": "Treatment and contact evaluation"}
+     {
+      "id": "a",
+      "label": "Vulnerable groups mapped"
+     },
+     {
+      "id": "b",
+      "label": "Symptom and radiograph screen"
+     },
+     {
+      "id": "c",
+      "label": "Molecular test for suspects"
+     },
+     {
+      "id": "d",
+      "label": "Treatment and contact evaluation"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -70,25 +120,40 @@
    "say": "Two months of four drugs, four months of continuation, daily weight banded tablets. Daily replaced alternate day to starve resistance and simplify support.",
    "vis": {
     "kind": "table",
-    "cols": ["Phase", "Drugs and duration"],
+    "cols": [
+     "Phase",
+     "Drugs and duration"
+    ],
     "rows": [
-     ["Intensive", "HRZE for 2 months"],
-     ["Continuation", "HRE for 4 months"],
-     ["Packaging", "Weight band fixed dose tablets"],
-     ["Cover", "Pyridoxine where indicated"]
+     [
+      "Intensive",
+      "HRZE for 2 months"
+     ],
+     [
+      "Continuation",
+      "HRE for 4 months"
+     ],
+     [
+      "Packaging",
+      "Weight band fixed dose tablets"
+     ],
+     [
+      "Cover",
+      "Pyridoxine where indicated"
+     ]
     ]
    }
   },
   {
-    "tx": "Weight bands printed on a blister tell which fixed dose tablet a patient takes each day. The **daily regimen** for drug sensitive tuberculosis starts with isoniazid plus rifampicin, pyrazinamide and ethambutol for two months. Ethambutol then continues beside the first pair for four further months, as current guidance states. Pyridoxine is added where indicated to limit isoniazid neuropathy. Daily tablets replaced alternate day schedules so resistance is selected less often and supporters have a simpler routine.",
-    "say": "Weight bands printed on a blister tell which fixed dose tablet a patient takes each day. The daily regimen for drug sensitive tuberculosis starts with isoniazid plus rifampicin, pyrazinamide and ethambutol for two months. Ethambutol then continues beside the first pair for four further months, as current guidance states. Pyridoxine is added where indicated to limit isoniazid neuropathy. Daily tablets replaced alternate day schedules so resistance is selected less often and supporters have a simpler routine.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n516-cm-tuberculosis-tuberculosis.webp",
-      "alt": "Blister of fixed dose tuberculosis tablets arranged by weight band for daily treatment",
-      "caption": "Daily tuberculosis treatment is packed as fixed dose tablets chosen according to weight band. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Weight bands printed on a blister tell which fixed dose tablet a patient takes each day. The **daily regimen** for drug sensitive tuberculosis starts with isoniazid plus rifampicin, pyrazinamide and ethambutol for two months. Ethambutol then continues beside the first pair for four further months, as current guidance states. Pyridoxine is added where indicated to limit isoniazid neuropathy. Daily tablets replaced alternate day schedules so resistance is selected less often and supporters have a simpler routine.",
+   "say": "Weight bands printed on a blister tell which fixed dose tablet a patient takes each day. The daily regimen for drug sensitive tuberculosis starts with isoniazid plus rifampicin, pyrazinamide and ethambutol for two months. Ethambutol then continues beside the first pair for four further months, as current guidance states. Pyridoxine is added where indicated to limit isoniazid neuropathy. Daily tablets replaced alternate day schedules so resistance is selected less often and supporters have a simpler routine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n516-cm-tuberculosis-tuberculosis.webp",
+    "alt": "Blister of fixed dose tuberculosis tablets arranged by weight band for daily treatment",
+    "caption": "Daily tuberculosis treatment is packed as fixed dose tablets chosen according to weight band. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Notification: the private sector frontier",
@@ -96,12 +161,27 @@
    "say": "Notification has been mandatory since 2012. Free drugs and tests woo private patients into Nikshay. Elimination fails if private care stays outside the count.",
    "vis": {
     "kind": "table",
-    "cols": ["Device", "Purpose"],
+    "cols": [
+     "Device",
+     "Purpose"
+    ],
     "rows": [
-     ["Legal mandate", "Every provider notifies"],
-     ["Free drugs via programme", "Removes cost barrier"],
-     ["Incentives", "Notification and outcomes paid"],
-     ["Patient tracking", "Nikshay across sectors"]
+     [
+      "Legal mandate",
+      "Every provider notifies"
+     ],
+     [
+      "Free drugs via programme",
+      "Removes cost barrier"
+     ],
+     [
+      "Incentives",
+      "Notification and outcomes paid"
+     ],
+     [
+      "Patient tracking",
+      "Nikshay across sectors"
+     ]
     ]
    }
   },
@@ -111,12 +191,27 @@
    "say": "Gadgets witness doses; people retrieve patients. Video, blister calls or human supporters by circumstance, escalation on every miss. Relationships finish treatments.",
    "vis": {
     "kind": "table",
-    "cols": ["Option", "Suits"],
+    "cols": [
+     "Option",
+     "Suits"
+    ],
     "rows": [
-     ["Human supporter", "Complex lives, low connectivity"],
-     ["Video observed therapy", "Smartphone equipped patients"],
-     ["99DOTS calls", "Blister based confirmation"],
-     ["Event monitor boxes", "Silent non adherence patterns"]
+     [
+      "Human supporter",
+      "Complex lives, low connectivity"
+     ],
+     [
+      "Video observed therapy",
+      "Smartphone equipped patients"
+     ],
+     [
+      "99DOTS calls",
+      "Blister based confirmation"
+     ],
+     [
+      "Event monitor boxes",
+      "Silent non adherence patterns"
+     ]
     ]
    }
   },
@@ -126,12 +221,27 @@
    "say": "Test every TB patient for HIV and sugar; screen every HIV and diabetes clinic for cough. Tobacco counselling rides free. Silos lose these patients twice.",
    "vis": {
     "kind": "table",
-    "cols": ["Crossing", "Routine"],
+    "cols": [
+     "Crossing",
+     "Routine"
+    ],
     "rows": [
-     ["TB clinic to HIV", "Offer HIV test to all"],
-     ["TB clinic to diabetes", "Blood sugar at diagnosis"],
-     ["HIV clinic to TB", "Four symptom screen each visit"],
-     ["Diabetes clinic to TB", "Cough enquiry, radiograph if positive"]
+     [
+      "TB clinic to HIV",
+      "Offer HIV test to all"
+     ],
+     [
+      "TB clinic to diabetes",
+      "Blood sugar at diagnosis"
+     ],
+     [
+      "HIV clinic to TB",
+      "Four symptom screen each visit"
+     ],
+     [
+      "Diabetes clinic to TB",
+      "Cough enquiry, radiograph if positive"
+     ]
     ]
    }
   },
@@ -141,12 +251,27 @@
    "say": "Annual infection risk forecasts tomorrow's cases from today's infected children. Latent infection is the reservoir. Preventive therapy drains it before reactivation speaks.",
    "vis": {
     "kind": "table",
-    "cols": ["Concept", "Meaning"],
+    "cols": [
+     "Concept",
+     "Meaning"
+    ],
     "rows": [
-     ["Annual risk of infection", "Yearly infection probability"],
-     ["Tuberculin surveys", "Measured in child cohorts"],
-     ["Latent infection", "Future reactivation reservoir"],
-     ["Preventive therapy", "Reservoir reduction tool"]
+     [
+      "Annual risk of infection",
+      "Yearly infection probability"
+     ],
+     [
+      "Tuberculin surveys",
+      "Measured in child cohorts"
+     ],
+     [
+      "Latent infection",
+      "Future reactivation reservoir"
+     ],
+     [
+      "Preventive therapy",
+      "Reservoir reduction tool"
+     ]
     ]
    }
   },
@@ -157,12 +282,78 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Incidence and mortality tracked"},
-     {"id": "b", "label": "Subnational certification claims"},
-     {"id": "c", "label": "Independent verification surveys"},
-     {"id": "d", "label": "Last mile groups intensively served"}
+     {
+      "id": "a",
+      "label": "Incidence and mortality tracked"
+     },
+     {
+      "id": "b",
+      "label": "Subnational certification claims"
+     },
+     {
+      "id": "c",
+      "label": "Independent verification surveys"
+     },
+     {
+      "id": "d",
+      "label": "Last mile groups intensively served"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: India carries about a quarter of global TB cases, and NTEP replaced the old control programme in 2020. Drug sensitive TB gets two months of four drugs, then four months of continuation, in daily weight banded tablets. Notification has been mandatory since 2012 through Nikshay. Every TB patient is screened for HIV and diabetes.",
+   "say": "India carries about a quarter of global TB cases, and NTEP replaced the old control programme in 2020. Drug sensitive TB gets two months of four drugs, then four months of continuation, in daily weight banded tablets. Notification has been mandatory since 2012 through Nikshay. Every TB patient is screened for HIV and diabetes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "India global TB share",
+      "About one quarter of all cases worldwide"
+     ],
+     [
+      "NTEP rename year",
+      "National TB Elimination Programme named in 2020"
+     ],
+     [
+      "Intensive phase regimen",
+      "Two months isoniazid, rifampicin, pyrazinamide, ethambutol"
+     ],
+     [
+      "Continuation phase regimen",
+      "Four months isoniazid, rifampicin plus ethambutol daily"
+     ],
+     [
+      "Mandatory notification since",
+      "Year 2012 for public and private providers"
+     ],
+     [
+      "Adherence tool 99DOTS",
+      "Blister call based digital adherence support system"
+     ],
+     [
+      "Comorbidity screening rule",
+      "Test every TB patient for HIV and diabetes"
+     ]
+    ]
    }
   }
  ],

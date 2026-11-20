@@ -1,0 +1,338 @@
+{
+ "v": 1,
+ "module": "sid-helminths",
+ "title": "Helminthic infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Soil-transmitted worms** (ascaris, hookworm, whipworm) stunt growth and anaemise kids; **strongyloides autoinfects** lifelong. **Filaria blocks lymphatics** to elephantiasis; **schistosomes bleed bladders** and fibrose livers. **Pork tapeworm seeds brain cysts**; hydatid cysts burst fatally. **Single-dose albendazole deworms** masses; **stool microscopy diagnoses** most. **Eosinophilia with high IgE** flags tissue migrants.",
+   "say": "Soil-transmitted worms with ascaris, hookworm and whipworm were reported to stunt growth and anaemise kids, while strongyloides was reported to autoinfect lifelong. Filaria was reported to block lymphatics to elephantiasis, while schistosomes bled bladders and fibrosed livers. Pork tapeworm was reported to seed brain cysts, while hydatid cysts burst fatally. Single-dose albendazole was reported to deworm masses, while stool microscopy diagnosed most. Eosinophilia with high I g E was reported to flag tissue migrants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Example",
+     "Mark"
+    ],
+    "rows": [
+     [
+      "STH",
+      "Ascaris, hookworm",
+      "Anaemia, obstruction"
+     ],
+     [
+      "Filaria",
+      "Wuchereria",
+      "Elephantiasis"
+     ],
+     [
+      "Flukes",
+      "Schisto, liver",
+      "Blood in urine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Barefoot soil** invites hookworm larvae; **faecal food** carries ascaris eggs. **Pork with beef** carry tapeworms; **watercress with fish** carry flukes. **Mosquitoes seed filaria** at night; **snails release schistosome** cercariae into water. **Autoinfection keeps strongyloides** decades after travel. **Pig-human cysticercosis** spreads without pork via dirty hands.",
+   "say": "Barefoot soil was reported to invite hookworm larvae, while faecal food carried ascaris eggs. Pork with beef were reported to carry tapeworms, while watercress with fish carried flukes. Mosquitoes were reported to seed filaria at night, while snails released schistosome cercariae into water. Autoinfection was reported to keep strongyloides decades after travel. Pig-human cysticercosis was reported to spread without pork via dirty hands.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Soil, food, water"
+     },
+     {
+      "id": "b",
+      "label": "Larvae penetrate"
+     },
+     {
+      "id": "c",
+      "label": "Gut, lung, tissue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ascaris balls obstruct** ileum and wander into bile ducts causing cholangitis. **Hookworm sucks blood** causing iron deficiency with ground itch and cough (Loeffler). **Whipworm dysentery with rectal prolapse** strikes heavy loads. **Threadworm itches anuses** at night; **tape-measure stools** tape parents. **Deworm before complications**; obstruction needs surgical watch.",
+   "say": "Ascaris balls were reported to obstruct ileum and wander into bile ducts causing cholangitis. Hookworm was reported to suck blood causing iron deficiency with ground itch and cough. Whipworm dysentery with rectal prolapse was reported to strike heavy loads. Threadworm was reported to itch anuses at night, while tape-measured stools taped parents. Deworming before complications was advised, while obstruction needed surgical watch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Worm",
+     "Classic harm",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Ascaris",
+      "Bowel, bile block",
+      "Vomited worm"
+     ],
+     [
+      "Hookworm",
+      "Iron deficiency",
+      "Ground itch"
+     ],
+     [
+      "Whipworm",
+      "Prolapse",
+      "Dysentery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Larva currens races** buttocks and thighs in strongyloidiasis. **Steroids or HTLV trigger hyperinfection** with Gram-negative sepsis and meningitis. **Disseminated larvae reach everywhere**; mortality nears total without rapid ivermectin. **Eosinophilia may vanish** in hyperinfection, misleading. **Screen before steroids** in migrants with eosinophilia. **Chronic diarrhoea with wheeze** in ex-travellers suggests it.",
+   "say": "Larva currens was reported to race buttocks and thighs in strongyloidiasis. Steroids or H T L V were reported to trigger hyperinfection with Gram-negative sepsis and meningitis. Disseminated larvae were reported to reach everywhere, while mortality neared total without rapid ivermectin. Eosinophilia was reported to vanish in hyperinfection, misleading doctors. Screening before steroids was advised in migrants with eosinophilia. Chronic diarrhoea with wheeze in ex-travellers was reported to suggest it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "State",
+     "Sign",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Chronic",
+      "Racing rash",
+      "Ivermectin"
+     ],
+     [
+      "Hyperinfection",
+      "Sepsis, no eos",
+      "ICU, ivermectin"
+     ],
+     [
+      "Pre-steroid",
+      "Migrant plus eos",
+      "Screen first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydrocele with elephantiasis** marks chronic filariasis; **acute adenolymphangitis** burns red streaks. **Tropical pulmonary eosinophilia** wheezes at night with massive eosinophils. **Microfilariae circulate at night**; day blood misses them. **DEC provocation** unmasks hidden loads. **Lymphoedema needs hygiene** with antibiotics for entry lesions; **surgery debulks** late elephantiasis rarely.",
+   "say": "Hydrocele with elephantiasis was reported to mark chronic filariasis, while acute adenolymphangitis burned red streaks. Tropical pulmonary eosinophilia was reported to wheeze at night with massive eosinophils. Microfilariae were reported to circulate at night, so day blood missed them. D E C provocation was reported to unmask hidden loads. Lymphoedema was reported to need hygiene with antibiotics for entry lesions, while surgery debulked late elephantiasis rarely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Face",
+     "Clue",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Hydrocele legs",
+      "Chronic block",
+      "Wuchereria"
+     ],
+     [
+      "Night wheeze",
+      "Huge eos",
+      "TPE, DEC works"
+     ],
+     [
+      "Red streaks",
+      "Acute attacks",
+      "Antibiotics help"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Katayama fever** (serum sickness-like) opens acute schistosomiasis weeks after water. **Terminal haematuria** marks S. haematobium; **bladder cancer follows** chronicity. **Bloody dysentery with periportal fibrosis** marks mansoni and japonicum. **Swimmer's itch** warns at exposure. **Portal hypertension bleeds varices** while liver function stays normal. **Genital schisto** causes infertility and hematuria.",
+   "say": "Katayama fever was reported to open acute schistosomiasis weeks after water, like serum sickness. Terminal haematuria was reported to mark S haematobium, while bladder cancer followed chronicity. Bloody dysentery with periportal fibrosis was reported to mark mansoni and japonicum. Swimmer's itch was reported to warn at exposure. Portal hypertension was reported to bleed varices while liver function stayed normal. Genital schisto was reported to cause infertility and hematuria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Species",
+     "Classic",
+     "Fate"
+    ],
+    "rows": [
+     [
+      "Haematobium",
+      "Bloody urine",
+      "Bladder cancer"
+     ],
+     [
+      "Mansoni, japonicum",
+      "Bloody stools",
+      "Varices bleed"
+     ],
+     [
+      "Katayama",
+      "Fever weeks after",
+      "Self then chronic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cysticercosis causes adult-onset seizures** with calcified grains on CT; **racemose basal cysts** hydrocephalus. **Hydatid liver cysts** grow silently; rupture anaphylaxes. **Pork tapeworm carriers** seed household cysticercosis. **Neurocysticercosis needs imaging plus serology**; single enhancing lesions confuse with TB. **Ocular cysts never get anthelminthics alone**; surgical referral decides.",
+   "say": "Cysticercosis was reported to cause adult-onset seizures with calcified grains on C T, while racemose basal cysts caused hydrocephalus. Hydatid liver cysts were reported to grow silently, while rupture anaphylaxed. Pork tapeworm carriers were reported to seed household cysticercosis. Neurocysticercosis was reported to need imaging plus serology, while single enhancing lesions confused with T B. Ocular cysts were reported to never get anthelminthics alone, while surgical referral decided.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tapeworm",
+     "Disease",
+     "Source"
+    ],
+    "rows": [
+     [
+      "Cysticercosis",
+      "Seizures, grains",
+      "Pigs, dirty hands"
+     ],
+     [
+      "Hydatid",
+      "Liver cyst, silent",
+      "Dogs, sheep"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Three stools on alternate days** catch intermittent shedding; **agar culture** grows strongyloides. **Midnight blood films** catch filaria; **antigen ICT works day or night**. **Urine midday sample** finds haematobium eggs; **stool Kato-Katz** quantifies others. **Tape test at dawn** catches threadworm. **Serology stays positive** after cure; use for migrants. **Eosinophils guide** but vanish in hyperinfection and filarial elephantiasis.",
+   "say": "Three stools on alternate days were reported to catch intermittent shedding, while agar culture grew strongyloides. Midnight blood films were reported to catch filaria, while antigen I C T worked day or night. Midday urine was reported to find haematobium eggs, while stool Kato-Katz quantified others. Tape test at dawn was reported to catch threadworm. Serology was reported to stay positive after cure, so it suited migrants. Eosinophils were reported to guide but vanish in hyperinfection and filarial elephantiasis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Sample",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Stool x3",
+      "Alternate days",
+      "Kato-Katz counts"
+     ],
+     [
+      "Night blood",
+      "Around midnight",
+      "Filaria only"
+     ],
+     [
+      "Urine midday",
+      "Haematuria",
+      "Haematobium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Albendazole 400 mg once** cures ascaris; **mebendazole 500 mg once or 100 mg twice daily 3 days** alternates. **Hookworm takes albendazole 400 mg daily 3 days**. **Strongyloides takes ivermectin 200 micrograms per kilo daily 2 days**, 14 days past negative stools if disseminated. **DEC 6 mg/kg daily 12 days** treats active filaria; **MDA uses single-dose triple therapy**. **Praziquantel 40 mg/kg once** (mansoni, haematobium) or 60 mg/kg (japonicum) cures schisto. **Cysticercosis takes albendazole 15 mg/kg with steroids**; hydatid needs surgery plus albendazole.",
+   "say": "Albendazole four hundred milligrams once was reported to cure ascaris, while mebendazole five hundred milligrams once or one hundred twice daily for three days alternated. Hookworm was reported to take albendazole four hundred milligrams daily for three days. Strongyloides was reported to take ivermectin two hundred micrograms per kilo daily for two days, and fourteen days past negative stools if disseminated. D E C six milligrams per kilo daily for twelve days was reported to treat active filaria, while M D A used single-dose triple therapy. Praziquantel forty milligrams per kilo once or sixty for japonicum was reported to cure schisto. Cysticercosis was reported to take albendazole fifteen milligrams per kilo with steroids, while hydatid needed surgery plus albendazole.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identify worm"
+     },
+     {
+      "id": "b",
+      "label": "Dose by species"
+     },
+     {
+      "id": "c",
+      "label": "Recheck stool"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** single stool misses most worms; three samples decide. **Treating elephantiasis with DEC alone** misses bacterial superinfection care. **Steroids before excluding strongyloides** kills migrants. **Praziquantel in pregnancy** waits (except severe schisto); **albendazole in first trimester** avoids unless heavy harm outweighs. **Killing cysticerci without steroids** swells brains fatally. **Hydatid aspiration without surgery** anaphylaxes.",
+   "say": "For the exam, these traps were tabulated as requested. Single stool was reported to miss most worms, while three samples decided. Treating elephantiasis with D E C alone was reported to miss bacterial superinfection care. Steroids before excluding strongyloides were reported to kill migrants. Praziquantel in pregnancy was reported to wait except severe schisto, while albendazole in the first trimester was avoided unless heavy harm outweighed. Killing cysticerci without steroids was reported to swell brains fatally. Hydatid aspiration without surgery was reported to anaphylax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "One stool",
+      "Misses",
+      "Three samples"
+     ],
+     [
+      "Steroids first",
+      "Hyperinfection kills",
+      "Screen migrants"
+     ],
+     [
+      "Kill cysts bare",
+      "Brain swells",
+      "Add steroids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **albendazole 400 mg single** deworms; **hookworm needs 3 days**. **Ivermectin 200 micrograms 2 days** cures strongyloides; **screen before steroids**. **DEC 6 mg/kg 12 days** treats filaria; **night blood** diagnoses. **Praziquantel 40 once, 60 japonicum** cures schisto; **terminal haematuria** marks haematobium. **Calcified brain grains** mark cysticercosis.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. Albendazole four hundred milligrams single was reported to deworm, while hookworm needed three days. Ivermectin two hundred micrograms for two days was reported to cure strongyloides, while screening before steroids was advised. D E C six milligrams per kilo for twelve days was reported to treat filaria, while night blood diagnosed it. Praziquantel forty once and sixty for japonicum were reported to cure schisto, while terminal haematuria marked haematobium. Calcified brain grains were reported to mark cysticercosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Dose",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Albendazole 400 single",
+      "STH",
+      "Mass drug"
+     ],
+     [
+      "Ivermectin 200, 2 days",
+      "Strongyloides",
+      "Dose asked"
+     ],
+     [
+      "DEC 6, 12 days",
+      "Filaria",
+      "Regimen"
+     ],
+     [
+      "Praziquantel 40/60",
+      "Schisto",
+      "Species split"
+     ],
+     [
+      "Brain grains",
+      "Cysticercosis",
+      "CT sign"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

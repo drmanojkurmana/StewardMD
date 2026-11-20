@@ -25,12 +25,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Bat sap or fruit ingestion"},
-     {"id": "b", "label": "Acute fever, dizziness, sore throat"},
-     {"id": "c", "label": "Brainstem dysfunction and myoclonus"},
-     {"id": "d", "label": "Rapid coma with 40-75% case fatality"}
+     {
+      "id": "a",
+      "label": "Bat sap or fruit ingestion"
+     },
+     {
+      "id": "b",
+      "label": "Acute fever, dizziness, sore throat"
+     },
+     {
+      "id": "c",
+      "label": "Brainstem dysfunction and myoclonus"
+     },
+     {
+      "id": "d",
+      "label": "Rapid coma with 40-75% case fatality"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -50,12 +75,32 @@
    "say": "Nipah containment demands strict isolation wards, full protective gowns and N95 masks for staff. All close contacts are quarantined for twenty-one days with twice-daily temperature checks.",
    "vis": {
     "kind": "table",
-    "cols": ["Containment action", "Public health standard", "Underlying objective"],
+    "cols": [
+     "Containment action",
+     "Public health standard",
+     "Underlying objective"
+    ],
     "rows": [
-     ["Isolation ward", "Dedicated negative-pressure rooms", "Prevents nosocomial droplet spread"],
-     ["Staff protection", "Full PPE, double gloves, N95 respirators", "Shields healthcare workers from body fluids"],
-     ["Contact surveillance", "Active follow-up for 21 days", "Covers maximum biological incubation window"],
-     ["Environmental action", "Bamboo skirts on date palm trees", "Stops bats accessing sap collecting pots"]
+     [
+      "Isolation ward",
+      "Dedicated negative-pressure rooms",
+      "Prevents nosocomial droplet spread"
+     ],
+     [
+      "Staff protection",
+      "Full PPE, double gloves, N95 respirators",
+      "Shields healthcare workers from body fluids"
+     ],
+     [
+      "Contact surveillance",
+      "Active follow-up for 21 days",
+      "Covers maximum biological incubation window"
+     ],
+     [
+      "Environmental action",
+      "Bamboo skirts on date palm trees",
+      "Stops bats accessing sap collecting pots"
+     ]
     ]
    }
   },
@@ -67,11 +112,19 @@
     "kind": "compare",
     "left": {
      "title": "Acute Q fever",
-     "points": ["Atypical pneumonia and high fever", "Granulomatous hepatitis with doughnut rings", "Responds to oral doxycycline in 14 days"]
+     "points": [
+      "Atypical pneumonia and high fever",
+      "Granulomatous hepatitis with doughnut rings",
+      "Responds to oral doxycycline in 14 days"
+     ]
     },
     "right": {
      "title": "Chronic Q fever",
-     "points": ["Culture-negative infective endocarditis", "Develops on pre-existing damaged valves", "Requires dual antibiotics for 18 months"]
+     "points": [
+      "Culture-negative infective endocarditis",
+      "Develops on pre-existing damaged valves",
+      "Requires dual antibiotics for 18 months"
+     ]
     }
    }
   },
@@ -82,12 +135,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Inhalation of farm dust during calving"},
-     {"id": "b", "label": "Subclinical infection or acute pneumonia"},
-     {"id": "c", "label": "Colonisation of damaged heart valves"},
-     {"id": "d", "label": "Phase I IgG titre >= 1:800 endocarditis"}
+     {
+      "id": "a",
+      "label": "Inhalation of farm dust during calving"
+     },
+     {
+      "id": "b",
+      "label": "Subclinical infection or acute pneumonia"
+     },
+     {
+      "id": "c",
+      "label": "Colonisation of damaged heart valves"
+     },
+     {
+      "id": "d",
+      "label": "Phase I IgG titre >= 1:800 endocarditis"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -97,12 +175,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Adult tapeworm in dog small intestine"},
-     {"id": "b", "label": "Infective ova shed in canine stool"},
-     {"id": "c", "label": "Sheep and human ingest contaminated ova"},
-     {"id": "d", "label": "Hydatid cyst expansion in human liver"}
+     {
+      "id": "a",
+      "label": "Adult tapeworm in dog small intestine"
+     },
+     {
+      "id": "b",
+      "label": "Infective ova shed in canine stool"
+     },
+     {
+      "id": "c",
+      "label": "Sheep and human ingest contaminated ova"
+     },
+     {
+      "id": "d",
+      "label": "Hydatid cyst expansion in human liver"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -111,12 +214,32 @@
    "say": "Hydatid cysts grow slowly inside the liver, filled with pressurized fluid and larval tapeworms. Accidental rupture spills fluid into the abdomen, triggering fatal allergic shock.",
    "vis": {
     "kind": "table",
-    "cols": ["Cyst anatomical layer", "Biological source", "Surgical / clinical significance"],
+    "cols": [
+     "Cyst anatomical layer",
+     "Biological source",
+     "Surgical / clinical significance"
+    ],
     "rows": [
-     ["Pericyst", "Host inflammatory fibrous tissue", "Vascular shell; safe surgical plane outside it"],
-     ["Laminated membrane", "Parasite acellular chitinous layer", "Elastic white layer; curls inward when torn"],
-     ["Germinal layer", "Living parasite cellular layer", "Produces scolices and daughter cysts"],
-     ["Hydatid fluid", "Clear pressurized antigenic fluid", "Spillage causes anaphylactic shock and dissemination"]
+     [
+      "Pericyst",
+      "Host inflammatory fibrous tissue",
+      "Vascular shell; safe surgical plane outside it"
+     ],
+     [
+      "Laminated membrane",
+      "Parasite acellular chitinous layer",
+      "Elastic white layer; curls inward when torn"
+     ],
+     [
+      "Germinal layer",
+      "Living parasite cellular layer",
+      "Produces scolices and daughter cysts"
+     ],
+     [
+      "Hydatid fluid",
+      "Clear pressurized antigenic fluid",
+      "Spillage causes anaphylactic shock and dissemination"
+     ]
     ]
    }
   },
@@ -127,12 +250,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Puncture cyst under real-time ultrasound"},
-     {"id": "b", "label": "Aspirate clear pressurized hydatid fluid"},
-     {"id": "c", "label": "Inject scolicidal 20% hypertonic saline"},
-     {"id": "d", "label": "Re-aspirate completely after 10 minutes"}
+     {
+      "id": "a",
+      "label": "Puncture cyst under real-time ultrasound"
+     },
+     {
+      "id": "b",
+      "label": "Aspirate clear pressurized hydatid fluid"
+     },
+     {
+      "id": "c",
+      "label": "Inject scolicidal 20% hypertonic saline"
+     },
+     {
+      "id": "d",
+      "label": "Re-aspirate completely after 10 minutes"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -141,12 +289,73 @@
    "say": "Eradicating hydatid requires deworming farm dogs every two months with praziquantel and strictly stopping dogs from eating raw sheep offal at village slaughterhouses.",
    "vis": {
     "kind": "table",
-    "cols": ["Control strategy", "Operational action", "Target transmission seam"],
+    "cols": [
+     "Control strategy",
+     "Operational action",
+     "Target transmission seam"
+    ],
     "rows": [
-     ["Abattoir inspection", "Condemnation and burial of cystic offal", "Prevents canine infection from sheep meat"],
-     ["Canine chemoprophylaxis", "Praziquantel 5 mg/kg every 6 to 8 weeks", "Destroys adult tapeworms in dog gut"],
-     ["Food hygiene education", "Washing raw vegetables and boiling water", "Prevents human ingestion of canine ova"],
-     ["Stray dog population control", "Shelter impounding and sterilisation", "Reduces environmental faecal contamination"]
+     [
+      "Abattoir inspection",
+      "Condemnation and burial of cystic offal",
+      "Prevents canine infection from sheep meat"
+     ],
+     [
+      "Canine chemoprophylaxis",
+      "Praziquantel 5 mg/kg every 6 to 8 weeks",
+      "Destroys adult tapeworms in dog gut"
+     ],
+     [
+      "Food hygiene education",
+      "Washing raw vegetables and boiling water",
+      "Prevents human ingestion of canine ova"
+     ],
+     [
+      "Stray dog population control",
+      "Shelter impounding and sterilisation",
+      "Reduces environmental faecal contamination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Nipah virus is harboured by Pteropus fruit bats and spreads through raw date palm sap and close contact. Incubation is four to fourteen days, contacts are quarantined for 21 days, and fatality is 40 to 75 percent. Chronic Q fever causes culture negative endocarditis treated with doxycycline plus hydroxychloroquine. PAIR treats hydatid cysts with albendazole cover.",
+   "say": "Nipah virus is harboured by Pteropus fruit bats and spreads through raw date palm sap and close contact. Incubation is four to fourteen days, contacts are quarantined for 21 days, and fatality is 40 to 75 percent. Chronic Q fever causes culture negative endocarditis treated with doxycycline plus hydroxychloroquine. PAIR treats hydatid cysts with albendazole cover.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Nipah natural reservoir",
+      "Fruit bats genus Pteropus, flying foxes"
+     ],
+     [
+      "Nipah incubation period",
+      "Four to fourteen days before illness onset"
+     ],
+     [
+      "Nipah case fatality",
+      "Forty to seventy five percent of cases"
+     ],
+     [
+      "Nipah contact quarantine",
+      "Twenty one days with daily temperature monitoring"
+     ],
+     [
+      "Chronic Q fever form",
+      "Culture negative endocarditis on damaged valves"
+     ],
+     [
+      "Hydatid PAIR procedure",
+      "Puncture, aspirate, inject scolicidal, reaspirate cyst"
+     ],
+     [
+      "Dog deworming dose",
+      "Praziquantel five milligrams per kilogram regularly given"
+     ]
     ]
    }
   }

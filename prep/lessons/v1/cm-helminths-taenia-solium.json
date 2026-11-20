@@ -25,12 +25,27 @@
    "say": "The gut carrier feels little yet sheds egg packed segments daily. Household cysticercosis starts at this kitchen table. Treat carriers for their family's sake.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Taeniasis"],
+    "cols": [
+     "Feature",
+     "Taeniasis"
+    ],
     "rows": [
-     ["Acquired by", "Cystic larvae in undercooked pork"],
-     ["Site", "Adult worm, small intestine"],
-     ["Symptoms", "Often none, segments noticed"],
-     ["Danger", "Egg shedding to contacts"]
+     [
+      "Acquired by",
+      "Cystic larvae in undercooked pork"
+     ],
+     [
+      "Site",
+      "Adult worm, small intestine"
+     ],
+     [
+      "Symptoms",
+      "Often none, segments noticed"
+     ],
+     [
+      "Danger",
+      "Egg shedding to contacts"
+     ]
     ]
    }
   },
@@ -53,12 +68,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Vesicular cyst, scolex visible"},
-     {"id": "b", "label": "Degenerating, ring and oedema"},
-     {"id": "c", "label": "Granulomatous nodule"},
-     {"id": "d", "label": "Calcified scar"}
+     {
+      "id": "a",
+      "label": "Vesicular cyst, scolex visible"
+     },
+     {
+      "id": "b",
+      "label": "Degenerating, ring and oedema"
+     },
+     {
+      "id": "c",
+      "label": "Granulomatous nodule"
+     },
+     {
+      "id": "d",
+      "label": "Calcified scar"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -67,12 +107,27 @@
    "say": "Examine eyes before any cyst killing drug; intraocular cysts come out surgically. Steroids first, seizure cover ready, hospital setting. Casual prescriptions blind and convulse.",
    "vis": {
     "kind": "table",
-    "cols": ["Before treatment", "Reason"],
+    "cols": [
+     "Before treatment",
+     "Reason"
+    ],
     "rows": [
-     ["Dilated eye examination", "Exclude intraocular cysts"],
-     ["Corticosteroid started", "Blunt degeneration inflammation"],
-     ["Antiepileptic cover", "Seizures during treatment"],
-     ["Hospital setting", "Observe deterioration"]
+     [
+      "Dilated eye examination",
+      "Exclude intraocular cysts"
+     ],
+     [
+      "Corticosteroid started",
+      "Blunt degeneration inflammation"
+     ],
+     [
+      "Antiepileptic cover",
+      "Seizures during treatment"
+     ],
+     [
+      "Hospital setting",
+      "Observe deterioration"
+     ]
     ]
    }
   },
@@ -84,11 +139,21 @@
     "kind": "compare",
     "left": {
      "title": "Viable or degenerating cyst",
-     "points": ["Antiparasitic may help", "Steroid cover mandatory", "Hospital initiation", "Eye check first"]
+     "points": [
+      "Antiparasitic may help",
+      "Steroid cover mandatory",
+      "Hospital initiation",
+      "Eye check first"
+     ]
     },
     "right": {
      "title": "Calcified cyst",
-     "points": ["Parasite already dead", "No antiparasitic benefit", "Antiepileptics mainstay", "Taper after seizure freedom"]
+     "points": [
+      "Parasite already dead",
+      "No antiparasitic benefit",
+      "Antiepileptics mainstay",
+      "Taper after seizure freedom"
+     ]
     }
    }
   },
@@ -98,12 +163,27 @@
    "say": "Beef worm never cysts humans; pork worm does. Armed scolex and fewer uterine branches name solium. That one difference drives control urgency.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Solium versus saginata"],
+    "cols": [
+     "Feature",
+     "Solium versus saginata"
+    ],
     "rows": [
-     ["Intermediate host", "Pig versus cattle"],
-     ["Human cysticercosis", "Solium yes, saginata no"],
-     ["Scolex", "Armed hooks versus unarmed"],
-     ["Public health weight", "Solium far greater"]
+     [
+      "Intermediate host",
+      "Pig versus cattle"
+     ],
+     [
+      "Human cysticercosis",
+      "Solium yes, saginata no"
+     ],
+     [
+      "Scolex",
+      "Armed hooks versus unarmed"
+     ],
+     [
+      "Public health weight",
+      "Solium far greater"
+     ]
     ]
    }
   },
@@ -113,12 +193,27 @@
    "say": "Confine pigs, inspect pork, cook through, treat carriers, toilets and handwashing everywhere. Break any link and the cycle starves; programmes press all links at once.",
    "vis": {
     "kind": "table",
-    "cols": ["Link", "Intervention"],
+    "cols": [
+     "Link",
+     "Intervention"
+    ],
     "rows": [
-     ["Pig access to faeces", "Confined pig rearing"],
-     ["Measly pork", "Meat inspection, thorough cooking"],
-     ["Human carrier", "Detect and treat"],
-     ["Eggs to mouths", "Toilets, handwashing"]
+     [
+      "Pig access to faeces",
+      "Confined pig rearing"
+     ],
+     [
+      "Measly pork",
+      "Meat inspection, thorough cooking"
+     ],
+     [
+      "Human carrier",
+      "Detect and treat"
+     ],
+     [
+      "Eggs to mouths",
+      "Toilets, handwashing"
+     ]
     ]
    }
   },
@@ -128,12 +223,72 @@
    "say": "New adult seizures: ask pork, carriers, nodules, household seizures. Screen the table, not just the patient. The source of eggs usually shares the roof.",
    "vis": {
     "kind": "table",
-    "cols": ["Ask about", "Points toward"],
+    "cols": [
+     "Ask about",
+     "Points toward"
+    ],
     "rows": [
-     ["Segments passed by family", "Household carrier source"],
-     ["Pork habits", "Taeniasis exposure"],
-     ["Skin nodules", "Subcutaneous cysts"],
-     ["Family seizures", "Shared egg exposure"]
+     [
+      "Segments passed by family",
+      "Household carrier source"
+     ],
+     [
+      "Pork habits",
+      "Taeniasis exposure"
+     ],
+     [
+      "Skin nodules",
+      "Subcutaneous cysts"
+     ],
+     [
+      "Family seizures",
+      "Shared egg exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Eating cystic larvae in undercooked pork causes intestinal taeniasis, while swallowing Taenia solium eggs causes tissue cysticercosis. Neurocysticercosis is a common preventable cause of adult onset seizures, worst as cysts degenerate. Examine the eye before antiparasitic treatment, and give brain treatment with steroid cover. Calcified lesions need only antiepileptic drugs, never albendazole.",
+   "say": "High-yield for the exam: Eating cystic larvae in undercooked pork causes intestinal taeniasis, while swallowing Taenia solium eggs causes tissue cysticercosis. Neurocysticercosis is a common preventable cause of adult onset seizures, worst as cysts degenerate. Examine the eye before antiparasitic treatment, and give brain treatment with steroid cover. Calcified lesions need only antiepileptic drugs, never albendazole.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Larvae in pork eaten",
+      "Adult intestinal tapeworm, taeniasis develops"
+     ],
+     [
+      "Eggs swallowed faecal oral",
+      "Tissue cysticercosis in muscle eye brain"
+     ],
+     [
+      "Neurocysticercosis presentation",
+      "Adult onset seizures as cysts degenerate inflame"
+     ],
+     [
+      "Vesicular cyst sign",
+      "Hole with dot sign, visible scolex, little inflammation"
+     ],
+     [
+      "Colloidal stage sign",
+      "Ring enhancement with surrounding cerebral oedema"
+     ],
+     [
+      "Eye rule before treatment",
+      "Ocular cysts removed surgically, never killed medically"
+     ],
+     [
+      "Brain treatment cover",
+      "Antiparasitic under corticosteroid and antiepileptic cover"
+     ],
+     [
+      "Calcified lesion treatment",
+      "Antiepileptic drugs only, antiparasitic offers nothing"
+     ]
     ]
    }
   }

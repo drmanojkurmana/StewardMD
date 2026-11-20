@@ -48,12 +48,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "rapid", "label": "Short acting nifedipine absorbed in minutes" },
-          { "id": "crash", "label": "Abrupt vasodilatation and pressure crash" },
-          { "id": "reflex", "label": "Reflex tachycardia raises myocardial oxygen demand" },
-          { "id": "harm", "label": "Ischaemia and stroke reported; practice abandoned" }
+          {
+            "id": "rapid",
+            "label": "Short acting nifedipine absorbed in minutes"
+          },
+          {
+            "id": "crash",
+            "label": "Abrupt vasodilatation and pressure crash"
+          },
+          {
+            "id": "reflex",
+            "label": "Reflex tachycardia raises myocardial oxygen demand"
+          },
+          {
+            "id": "harm",
+            "label": "Ischaemia and stroke reported; practice abandoned"
+          }
         ],
-        "edges": [["rapid", "crash"], ["crash", "reflex"], ["reflex", "harm"]]
+        "edges": [
+          [
+            "rapid",
+            "crash"
+          ],
+          [
+            "crash",
+            "reflex"
+          ],
+          [
+            "reflex",
+            "harm"
+          ]
+        ]
       }
     },
     {
@@ -97,12 +122,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "hyd", "label": "Hydralazine opens arteriolar potassium channels" },
-          { "id": "drop", "label": "Peripheral resistance and afterload fall" },
-          { "id": "reflex", "label": "Reflex tachycardia and salt retention follow" },
-          { "id": "partners", "label": "Beta blocker plus diuretic complete the classic triple" }
+          {
+            "id": "hyd",
+            "label": "Hydralazine opens arteriolar potassium channels"
+          },
+          {
+            "id": "drop",
+            "label": "Peripheral resistance and afterload fall"
+          },
+          {
+            "id": "reflex",
+            "label": "Reflex tachycardia and salt retention follow"
+          },
+          {
+            "id": "partners",
+            "label": "Beta blocker plus diuretic complete the classic triple"
+          }
         ],
-        "edges": [["hyd", "drop"], ["drop", "reflex"], ["reflex", "partners"]]
+        "edges": [
+          [
+            "hyd",
+            "drop"
+          ],
+          [
+            "drop",
+            "reflex"
+          ],
+          [
+            "reflex",
+            "partners"
+          ]
+        ]
       }
     },
     {
@@ -135,12 +185,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "snp", "label": "Nitroprusside infusion donates nitric oxide" },
-          { "id": "dilate", "label": "Balanced arterial and venous dilatation in seconds" },
-          { "id": "titrate", "label": "Stop the infusion and effect fades in minutes" },
-          { "id": "cyanide", "label": "Prolonged high dose: cyanide accumulates, acidosis warns" }
+          {
+            "id": "snp",
+            "label": "Nitroprusside infusion donates nitric oxide"
+          },
+          {
+            "id": "dilate",
+            "label": "Balanced arterial and venous dilatation in seconds"
+          },
+          {
+            "id": "titrate",
+            "label": "Stop the infusion and effect fades in minutes"
+          },
+          {
+            "id": "cyanide",
+            "label": "Prolonged high dose: cyanide accumulates, acidosis warns"
+          }
         ],
-        "edges": [["snp", "dilate"], ["dilate", "titrate"], ["snp", "cyanide"]]
+        "edges": [
+          [
+            "snp",
+            "dilate"
+          ],
+          [
+            "dilate",
+            "titrate"
+          ],
+          [
+            "snp",
+            "cyanide"
+          ]
+        ]
       }
     },
     {
@@ -151,6 +226,51 @@
         "src": "clinix/media/practicals/obg-drug-labetalol.webp",
         "alt": "Concurrent alpha 1 and beta adrenergic blockade by labetalol lowering blood pressure",
         "caption": "Combined alpha and beta blockade by labetalol, lowering pressure without reflex tachycardia. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Amlodipine blocks vascular L type calcium channels with a 30 to 50 hour half life. Ankle oedema is precapillary dilatation, not overload, so diuretics disappoint. Never use short acting nifedipine capsules for hypertension. Clonidine withdrawal causes rebound hypertensive crisis. Methyldopa remains a pregnancy option and can give a positive Coombs test. Sodium nitroprusside titrates in seconds but releases cyanide. Labetalol blocks alpha and beta receptors together.",
+      "say": "High-yield for the exam: Amlodipine blocks vascular L type calcium channels with a 30 to 50 hour half life. Ankle oedema is precapillary dilatation, not overload, so diuretics disappoint. Never use short acting nifedipine capsules for hypertension. Clonidine withdrawal causes rebound hypertensive crisis. Methyldopa remains a pregnancy option and can give a positive Coombs test. Sodium nitroprusside titrates in seconds but releases cyanide. Labetalol blocks alpha and beta receptors together.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Amlodipine oedema",
+            "Arteriolar, not salt retention"
+          ],
+          [
+            "Capsule ban",
+            "Short acting nifedipine abandoned"
+          ],
+          [
+            "Clonidine stop",
+            "Taper, or pressure rebounds"
+          ],
+          [
+            "Pregnancy agent",
+            "Methyldopa, long fetal safety"
+          ],
+          [
+            "Coombs clue",
+            "Positive in up to 20 percent"
+          ],
+          [
+            "Last resort",
+            "Minoxidil needs a loop diuretic"
+          ],
+          [
+            "Minute titrator",
+            "Nitroprusside, cyanide risk"
+          ],
+          [
+            "Pregnancy emergency",
+            "Labetalol blocks alpha and beta"
+          ]
+        ]
       }
     }
   ]

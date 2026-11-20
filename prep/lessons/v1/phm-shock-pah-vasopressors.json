@@ -38,12 +38,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "sepsis", "label": "Septic shock: fluids given, pressure still low" },
-          { "id": "norad", "label": "Noradrenaline started, peripherally if needed" },
-          { "id": "map", "label": "Titrate to MAP 65 with perfusion markers" },
-          { "id": "vaso", "label": "Add fixed dose vasopressin as second agent" }
+          {
+            "id": "sepsis",
+            "label": "Septic shock: fluids given, pressure still low"
+          },
+          {
+            "id": "norad",
+            "label": "Noradrenaline started, peripherally if needed"
+          },
+          {
+            "id": "map",
+            "label": "Titrate to MAP 65 with perfusion markers"
+          },
+          {
+            "id": "vaso",
+            "label": "Add fixed dose vasopressin as second agent"
+          }
         ],
-        "edges": [["sepsis", "norad"], ["norad", "map"], ["map", "vaso"]]
+        "edges": [
+          [
+            "sepsis",
+            "norad"
+          ],
+          [
+            "norad",
+            "map"
+          ],
+          [
+            "map",
+            "vaso"
+          ]
+        ]
       }
     },
     {
@@ -88,12 +113,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "phenyl", "label": "Phenylephrine bolus or infusion started" },
-          { "id": "alpha", "label": "Alpha 1 vasoconstriction raises systemic resistance" },
-          { "id": "reflex", "label": "Baroreflex slows heart rate reflexly" },
-          { "id": "fit", "label": "Best fit: vasodilatation with tachyarrhythmia" }
+          {
+            "id": "phenyl",
+            "label": "Phenylephrine bolus or infusion started"
+          },
+          {
+            "id": "alpha",
+            "label": "Alpha 1 vasoconstriction raises systemic resistance"
+          },
+          {
+            "id": "reflex",
+            "label": "Baroreflex slows heart rate reflexly"
+          },
+          {
+            "id": "fit",
+            "label": "Best fit: vasodilatation with tachyarrhythmia"
+          }
         ],
-        "edges": [["phenyl", "alpha"], ["alpha", "reflex"], ["reflex", "fit"]]
+        "edges": [
+          [
+            "phenyl",
+            "alpha"
+          ],
+          [
+            "alpha",
+            "reflex"
+          ],
+          [
+            "reflex",
+            "fit"
+          ]
+        ]
       }
     },
     {
@@ -162,12 +212,82 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "risk", "label": "Risk stratification at diagnosis and follow up" },
-          { "id": "oral", "label": "Oral combination: endothelin blocker plus PDE5 inhibitor" },
-          { "id": "prost", "label": "Add prostacyclin pathway agent as risk demands" },
-          { "id": "parenteral", "label": "Intravenous epoprostenol for high risk disease" }
+          {
+            "id": "risk",
+            "label": "Risk stratification at diagnosis and follow up"
+          },
+          {
+            "id": "oral",
+            "label": "Oral combination: endothelin blocker plus PDE5 inhibitor"
+          },
+          {
+            "id": "prost",
+            "label": "Add prostacyclin pathway agent as risk demands"
+          },
+          {
+            "id": "parenteral",
+            "label": "Intravenous epoprostenol for high risk disease"
+          }
         ],
-        "edges": [["risk", "oral"], ["oral", "prost"], ["prost", "parenteral"]]
+        "edges": [
+          [
+            "risk",
+            "oral"
+          ],
+          [
+            "oral",
+            "prost"
+          ],
+          [
+            "prost",
+            "parenteral"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: In septic shock, **noradrenaline** is first line and is titrated toward a mean arterial pressure of 65 mmHg, checked against mentation, urine output, and lactate. Vasopressin is the usual second agent, constricts by V1a receptors, and still works in acidosis. **Phenylephrine** is pure alpha 1 agonism with reflex slowing, suited to vasodilatation with tachyarrhythmia and wrong for a weak pump. Low dose dopamine raises urine output but does not prevent kidney failure. Never combine riociguat with a PDE5 inhibitor.",
+      "say": "High-yield for the exam: In septic shock, noradrenaline is first line and is titrated toward a mean arterial pressure of 65 mmHg, checked against mentation, urine output, and lactate. Vasopressin is the usual second agent, constricts by V1a receptors, and still works in acidosis. Phenylephrine is pure alpha 1 agonism with reflex slowing, suited to vasodilatation with tachyarrhythmia and wrong for a weak pump. Low dose dopamine raises urine output but does not prevent kidney failure. Never combine riociguat with a PDE5 inhibitor.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Septic shock first drug",
+            "Noradrenaline, proximal peripheral cannula allowed"
+          ],
+          [
+            "Pressure target",
+            "Mean arterial pressure of 65 mmHg"
+          ],
+          [
+            "Second vasopressor",
+            "Fixed low dose vasopressin"
+          ],
+          [
+            "Vasopressin niche",
+            "V1a constriction, still works in acidosis"
+          ],
+          [
+            "Phenylephrine",
+            "Pure alpha 1, reflex slowing of heart"
+          ],
+          [
+            "Renal dose dopamine",
+            "More urine, no protection from kidney failure"
+          ],
+          [
+            "Bosentan",
+            "Endothelin block, liver injury, teratogen"
+          ],
+          [
+            "Riociguat",
+            "Never combine with a PDE5 inhibitor"
+          ]
+        ]
       }
     }
   ]

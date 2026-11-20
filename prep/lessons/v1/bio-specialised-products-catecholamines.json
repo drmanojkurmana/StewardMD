@@ -21,12 +21,27 @@
    "say": "Vesicles protect transmitters from oxidase until release. Parkinson disease loses nigral dopamine neurons, and L-DOPA plus carbidopa remains its cornerstone because dopamine itself cannot cross into brain.",
    "vis": {
     "kind": "table",
-    "cols": ["Station", "Drug or disease lever"],
+    "cols": [
+     "Station",
+     "Drug or disease lever"
+    ],
     "rows": [
-     ["Tyrosine hydroxylase", "Metyrosine blocks (phaeochromocytoma adjunct)"],
-     ["VMAT storage", "Reserpine depletes; tetrabenazine in chorea"],
-     ["DAT reuptake", "Cocaine blocks; stimulants reverse"],
-     ["DOPA replacement", "L-DOPA plus carbidopa in Parkinson disease"]
+     [
+      "Tyrosine hydroxylase",
+      "Metyrosine blocks (phaeochromocytoma adjunct)"
+     ],
+     [
+      "VMAT storage",
+      "Reserpine depletes; tetrabenazine in chorea"
+     ],
+     [
+      "DAT reuptake",
+      "Cocaine blocks; stimulants reverse"
+     ],
+     [
+      "DOPA replacement",
+      "L-DOPA plus carbidopa in Parkinson disease"
+     ]
     ]
    }
   },
@@ -35,8 +50,21 @@
    "say": "COMT and monoamine oxidase end breakdown as VMA and HVA. MAO inhibitors risk hypertensive crisis with tyramine foods because gut oxidase normally destroys dietary pressor amines.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "COMT first ( periphery, liver)", "points": ["Metanephrines formed", "SAM consumed", "Plasma metanephrines most sensitive tumour test"]},
-    "right": {"title": "MAO first (neurons, gut)", "points": ["Aldehydes then acids (VMA, HVA)", "Tyramine crisis if blocked", "Antidepressant and Parkinson drug targets"]
+    "left": {
+     "title": "COMT first ( periphery, liver)",
+     "points": [
+      "Metanephrines formed",
+      "SAM consumed",
+      "Plasma metanephrines most sensitive tumour test"
+     ]
+    },
+    "right": {
+     "title": "MAO first (neurons, gut)",
+     "points": [
+      "Aldehydes then acids (VMA, HVA)",
+      "Tyramine crisis if blocked",
+      "Antidepressant and Parkinson drug targets"
+     ]
     }
    }
   },
@@ -50,12 +78,27 @@
    "say": "Roughly a third carry germline drivers including RET, VHL and SDH subunits, so genetic testing follows biochemistry and imaging. Neuroblastoma raises urine VMA and HVA in childhood counterpart stems.",
    "vis": {
     "kind": "table",
-    "cols": ["Test", "Role in phaeochromocytoma"],
+    "cols": [
+     "Test",
+     "Role in phaeochromocytoma"
+    ],
     "rows": [
-     ["Plasma free metanephrines", "Most sensitive screen"],
-     ["Urine metanephrines plus VMA", "Confirmation, 24 hour pattern"],
-     ["CT or MRI, then functional imaging", "Localise, hunt metastases"],
-     ["Germline genetics (RET, VHL, SDH)", "Syndromes, family screening"]
+     [
+      "Plasma free metanephrines",
+      "Most sensitive screen"
+     ],
+     [
+      "Urine metanephrines plus VMA",
+      "Confirmation, 24 hour pattern"
+     ],
+     [
+      "CT or MRI, then functional imaging",
+      "Localise, hunt metastases"
+     ],
+     [
+      "Germline genetics (RET, VHL, SDH)",
+      "Syndromes, family screening"
+     ]
     ]
    }
   },
@@ -66,12 +109,82 @@
     "kind": "flow",
     "title": "Medulla output logic",
     "nodes": [
-     {"id": "cort", "label": "Cortisol portal flow induces PNMT"},
-     {"id": "adr", "label": "Adrenaline about 80 percent output"},
-     {"id": "spl", "label": "Splanchnic drive releases on stress"},
-     {"id": "met", "label": "Metanephrines leak continuously (test)"}
+     {
+      "id": "cort",
+      "label": "Cortisol portal flow induces PNMT"
+     },
+     {
+      "id": "adr",
+      "label": "Adrenaline about 80 percent output"
+     },
+     {
+      "id": "spl",
+      "label": "Splanchnic drive releases on stress"
+     },
+     {
+      "id": "met",
+      "label": "Metanephrines leak continuously (test)"
+     }
     ],
-    "edges": [["cort", "adr"], ["spl", "adr"], ["adr", "met"]]
+    "edges": [
+     [
+      "cort",
+      "adr"
+     ],
+     [
+      "spl",
+      "adr"
+     ],
+     [
+      "adr",
+      "met"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Tyrosine hydroxylase is the rate limiting step in catecholamine synthesis and needs tetrahydrobiopterin. PNMT makes adrenaline in the adrenal medulla and is induced by cortisol. In phaeochromocytoma, alpha blockade and fluids must precede beta blockade or surgery. Plasma free metanephrines are the most sensitive screening test for this tumour.",
+   "say": "High-yield for the exam. Tyrosine hydroxylase is the rate limiting step in catecholamine synthesis and needs tetrahydrobiopterin. PNMT makes adrenaline in the adrenal medulla and is induced by cortisol. In phaeochromocytoma, alpha blockade and fluids must precede beta blockade or surgery. Plasma free metanephrines are the most sensitive screening test for this tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate limiting step",
+      "Tyrosine hydroxylase, needs BH4"
+     ],
+     [
+      "Dopamine to noradrenaline",
+      "Dopamine beta hydroxylase, vitamin C"
+     ],
+     [
+      "PNMT location",
+      "Adrenal medulla, induced by cortisol"
+     ],
+     [
+      "Adrenaline end product",
+      "Vanillylmandelic acid in urine"
+     ],
+     [
+      "Dopamine end product",
+      "Homovanillic acid in urine"
+     ],
+     [
+      "Best phaeochromocytoma screen",
+      "Plasma free metanephrines"
+     ],
+     [
+      "Before surgery rule",
+      "Alpha blockade before beta blockade"
+     ],
+     [
+      "MAO inhibitor trap",
+      "Tyramine cheese effect hypertensive crisis"
+     ]
+    ]
    }
   }
  ],

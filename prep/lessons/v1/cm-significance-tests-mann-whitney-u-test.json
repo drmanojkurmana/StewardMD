@@ -16,11 +16,19 @@
         "kind": "compare",
         "left": {
           "title": "Parametric (t, ANOVA)",
-          "points": ["Uses raw values and means", "Assumes near normal data", "Maximum power when assumptions hold"]
+          "points": [
+            "Uses raw values and means",
+            "Assumes near normal data",
+            "Maximum power when assumptions hold"
+          ]
         },
         "right": {
           "title": "Non parametric (rank based)",
-          "points": ["Uses ranks of values", "No normality assumption", "Suits skew, ordinal, small n"]
+          "points": [
+            "Uses ranks of values",
+            "No normality assumption",
+            "Suits skew, ordinal, small n"
+          ]
         }
       }
     },
@@ -31,11 +39,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "mw1", "label": "Pool both groups, rank all values" },
-          { "id": "mw2", "label": "Sum ranks within each group" },
-          { "id": "mw3", "label": "Compare rank sums against chance" }
+          {
+            "id": "mw1",
+            "label": "Pool both groups, rank all values"
+          },
+          {
+            "id": "mw2",
+            "label": "Sum ranks within each group"
+          },
+          {
+            "id": "mw3",
+            "label": "Compare rank sums against chance"
+          }
         ],
-        "edges": [["mw1", "mw2"], ["mw2", "mw3"]]
+        "edges": [
+          [
+            "mw1",
+            "mw2"
+          ],
+          [
+            "mw2",
+            "mw3"
+          ]
+        ]
       }
     },
     {
@@ -44,12 +70,27 @@
       "say": "Signed rank is the paired twin: rank the changes, keep their signs, test the balance.",
       "vis": {
         "kind": "table",
-        "cols": ["Design", "Parametric versus rank test"],
+        "cols": [
+          "Design",
+          "Parametric versus rank test"
+        ],
         "rows": [
-          ["Two independent groups", "Unpaired t versus Mann Whitney U"],
-          ["Paired before after", "Paired t versus Wilcoxon signed rank"],
-          ["Three plus independent groups", "ANOVA versus Kruskal Wallis"],
-          ["Paired categories", "McNemar (categorical special case)"]
+          [
+            "Two independent groups",
+            "Unpaired t versus Mann Whitney U"
+          ],
+          [
+            "Paired before after",
+            "Paired t versus Wilcoxon signed rank"
+          ],
+          [
+            "Three plus independent groups",
+            "ANOVA versus Kruskal Wallis"
+          ],
+          [
+            "Paired categories",
+            "McNemar (categorical special case)"
+          ]
         ]
       }
     },
@@ -60,11 +101,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "kw1", "label": "Rank all values across groups" },
-          { "id": "kw2", "label": "Compare mean ranks by H statistic" },
-          { "id": "kw3", "label": "Post hoc pairs if H significant" }
+          {
+            "id": "kw1",
+            "label": "Rank all values across groups"
+          },
+          {
+            "id": "kw2",
+            "label": "Compare mean ranks by H statistic"
+          },
+          {
+            "id": "kw3",
+            "label": "Post hoc pairs if H significant"
+          }
         ],
-        "edges": [["kw1", "kw2"], ["kw2", "kw3"]]
+        "edges": [
+          [
+            "kw1",
+            "kw2"
+          ],
+          [
+            "kw2",
+            "kw3"
+          ]
+        ]
       }
     },
     {
@@ -75,11 +134,19 @@
         "kind": "compare",
         "left": {
           "title": "Correlation asks",
-          "points": ["How strongly are they associated?", "Symmetric: x with y equals y with x", "One coefficient, no prediction"]
+          "points": [
+            "How strongly are they associated?",
+            "Symmetric: x with y equals y with x",
+            "One coefficient, no prediction"
+          ]
         },
         "right": {
           "title": "Regression asks",
-          "points": ["What y follows from this x?", "Asymmetric: prediction direction matters", "Equation with slope and intercept"]
+          "points": [
+            "What y follows from this x?",
+            "Asymmetric: prediction direction matters",
+            "Equation with slope and intercept"
+          ]
         }
       }
     },
@@ -100,12 +167,27 @@
       "say": "Pearson uses values; Spearman uses ranks. Both run minus one to plus one for direction and strength.",
       "vis": {
         "kind": "table",
-        "cols": ["Absolute r", "Strength wording"],
+        "cols": [
+          "Absolute r",
+          "Strength wording"
+        ],
         "rows": [
-          ["0.9 to 1.0", "Very strong"],
-          ["0.7 to 0.9", "Strong"],
-          ["0.4 to 0.7", "Moderate"],
-          ["Below 0.4", "Weak"]
+          [
+            "0.9 to 1.0",
+            "Very strong"
+          ],
+          [
+            "0.7 to 0.9",
+            "Strong"
+          ],
+          [
+            "0.4 to 0.7",
+            "Moderate"
+          ],
+          [
+            "Below 0.4",
+            "Weak"
+          ]
         ]
       }
     },
@@ -116,11 +198,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "r21", "label": "Pearson r equals 0.8" },
-          { "id": "r22", "label": "Square it: 0.64" },
-          { "id": "r23", "label": "64 percent explained, 36 percent other causes" }
+          {
+            "id": "r21",
+            "label": "Pearson r equals 0.8"
+          },
+          {
+            "id": "r22",
+            "label": "Square it: 0.64"
+          },
+          {
+            "id": "r23",
+            "label": "64 percent explained, 36 percent other causes"
+          }
         ],
-        "edges": [["r21", "r22"], ["r22", "r23"]]
+        "edges": [
+          [
+            "r21",
+            "r22"
+          ],
+          [
+            "r22",
+            "r23"
+          ]
+        ]
       }
     },
     {
@@ -129,12 +229,27 @@
       "say": "Regression draws the prediction line: intercept plus slope times x. Never extrapolate beyond observed data.",
       "vis": {
         "kind": "table",
-        "cols": ["Regression element", "Meaning"],
+        "cols": [
+          "Regression element",
+          "Meaning"
+        ],
         "rows": [
-          ["Intercept a", "Predicted y when x is zero"],
-          ["Slope b", "Change in y per one unit x"],
-          ["Residual", "Observed minus predicted value"],
-          ["Least squares", "Line minimising squared residuals"]
+          [
+            "Intercept a",
+            "Predicted y when x is zero"
+          ],
+          [
+            "Slope b",
+            "Change in y per one unit x"
+          ],
+          [
+            "Residual",
+            "Observed minus predicted value"
+          ],
+          [
+            "Least squares",
+            "Line minimising squared residuals"
+          ]
         ]
       }
     },
@@ -146,12 +261,61 @@
         "kind": "compare",
         "left": {
           "title": "Trust the coefficient when",
-          "points": ["Scatter looks linear without wild outliers", "Full range of x represented", "Confounders considered separately"]
+          "points": [
+            "Scatter looks linear without wild outliers",
+            "Full range of x represented",
+            "Confounders considered separately"
+          ]
         },
         "right": {
           "title": "Distrust it when",
-          "points": ["One point drives the line", "Groups averaged (ecological data)", "Extreme group remeasured improvement claimed"]
+          "points": [
+            "One point drives the line",
+            "Groups averaged (ecological data)",
+            "Extreme group remeasured improvement claimed"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Mann Whitney U suits two independent groups with skewed or ordinal data. Wilcoxon signed rank suits paired data, and Kruskal Wallis suits three or more independent groups. Pearson r needs normal continuous data, while Spearman uses ranks. Squaring r gives variation explained. Correlation never proves causation, and regression predicts within range only.",
+      "say": "Mann Whitney U suits two independent groups with skewed or ordinal data. Wilcoxon signed rank suits paired data, and Kruskal Wallis suits three or more independent groups. Pearson r needs normal continuous data, while Spearman uses ranks. Squaring r gives variation explained. Correlation never proves causation, and regression predicts within range only.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Mann Whitney U test",
+            "Two independent groups, non parametric t test twin"
+          ],
+          [
+            "Wilcoxon signed rank",
+            "Paired before after data, non parametric twin"
+          ],
+          [
+            "Kruskal Wallis test",
+            "Three or more independent groups, rank ANOVA"
+          ],
+          [
+            "Pearson correlation r",
+            "Linear association needing near normal continuous data"
+          ],
+          [
+            "Spearman correlation",
+            "Rank based, tolerates skew and outliers well"
+          ],
+          [
+            "Coefficient of determination",
+            "r squared equals variation in y explained"
+          ],
+          [
+            "Regression line",
+            "y equals a plus b x, no extrapolation"
+          ]
+        ]
       }
     }
   ]

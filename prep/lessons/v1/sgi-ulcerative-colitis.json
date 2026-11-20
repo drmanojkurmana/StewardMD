@@ -21,11 +21,27 @@
       "say": "The Montreal classification categorizes ulcerative colitis by anatomical disease extent. Category E1 indicates proctitis limited entirely to the rectum. Category E2 represents left-sided colitis extending up to the splenic flexure. Category E3 designates extensive colitis that progresses proximally beyond the splenic flexure.",
       "vis": {
         "kind": "table",
-        "cols": ["Montreal Category", "Anatomical Distribution", "Clinical Characteristics"],
+        "cols": [
+          "Montreal Category",
+          "Anatomical Distribution",
+          "Clinical Characteristics"
+        ],
         "rows": [
-          ["E1 (Proctitis)", "Confined strictly to rectum", "Tenesmus, urgency, rectal bleeding; no systemic signs"],
-          ["E2 (Left-sided)", "Distal to splenic flexure", "Bloody diarrhoea, left lower quadrant cramps"],
-          ["E3 (Extensive)", "Proximal to splenic flexure", "Frequent bloody stools, weight loss, higher cancer risk"]
+          [
+            "E1 (Proctitis)",
+            "Confined strictly to rectum",
+            "Tenesmus, urgency, rectal bleeding; no systemic signs"
+          ],
+          [
+            "E2 (Left-sided)",
+            "Distal to splenic flexure",
+            "Bloody diarrhoea, left lower quadrant cramps"
+          ],
+          [
+            "E3 (Extensive)",
+            "Proximal to splenic flexure",
+            "Frequent bloody stools, weight loss, higher cancer risk"
+          ]
         ]
       }
     },
@@ -35,15 +51,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Severe bloody diarrhoea (>= 6 stools/day)"},
-          {"id": "b", "label": "Systemic toxicity: T > 37.8 C, HR > 90, Hb < 10.5, ESR > 30"},
-          {"id": "c", "label": "Inpatient admission & IV hydrocortisone or methylprednisolone"},
-          {"id": "d", "label": "Plain abdominal radiography to exclude toxic megacolon"}
+          {
+            "id": "a",
+            "label": "Severe bloody diarrhoea (>= 6 stools/day)"
+          },
+          {
+            "id": "b",
+            "label": "Systemic toxicity: T > 37.8 C, HR > 90, Hb < 10.5, ESR > 30"
+          },
+          {
+            "id": "c",
+            "label": "Inpatient admission & IV hydrocortisone or methylprednisolone"
+          },
+          {
+            "id": "d",
+            "label": "Plain abdominal radiography to exclude toxic megacolon"
+          }
         ],
         "edges": [
-          ["a", "b", "plus"],
-          ["b", "c", "mandates"],
-          ["c", "d", "accompanied by"]
+          [
+            "a",
+            "b",
+            "plus"
+          ],
+          [
+            "b",
+            "c",
+            "mandates"
+          ],
+          [
+            "c",
+            "d",
+            "accompanied by"
+          ]
         ]
       }
     },
@@ -53,15 +93,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "ASUC receiving IV corticosteroids (Day 3 assessment)"},
-          {"id": "b", "label": "> 8 stools/day OR 3-8 stools with CRP > 45 mg/L"},
-          {"id": "c", "label": "85% predicted risk of inpatient colectomy"},
-          {"id": "d", "label": "Initiate medical rescue (infliximab or ciclosporin)"}
+          {
+            "id": "a",
+            "label": "ASUC receiving IV corticosteroids (Day 3 assessment)"
+          },
+          {
+            "id": "b",
+            "label": "> 8 stools/day OR 3-8 stools with CRP > 45 mg/L"
+          },
+          {
+            "id": "c",
+            "label": "85% predicted risk of inpatient colectomy"
+          },
+          {
+            "id": "d",
+            "label": "Initiate medical rescue (infliximab or ciclosporin)"
+          }
         ],
         "edges": [
-          ["a", "b", "assess"],
-          ["b", "c", "indicates"],
-          ["c", "d", "mandates"]
+          [
+            "a",
+            "b",
+            "assess"
+          ],
+          [
+            "b",
+            "c",
+            "indicates"
+          ],
+          [
+            "c",
+            "d",
+            "mandates"
+          ]
         ]
       }
     },
@@ -95,11 +159,27 @@
       "say": "Toxic megacolon is a dangerous complication featuring acute non-obstructive colonic dilatation beyond six centimetres on abdominal radiograph, occurring with severe systemic toxicity. Precipitating triggers include hypokalaemia, anticholinergic medications, and narcotics. Treatment requires intravenous resuscitation, broad-spectrum antibiotics, and urgent surgical consultation.",
       "vis": {
         "kind": "table",
-        "cols": ["Diagnostic Criteria", "Required Clinical Threshold", "Pathophysiological Implication"],
+        "cols": [
+          "Diagnostic Criteria",
+          "Required Clinical Threshold",
+          "Pathophysiological Implication"
+        ],
         "rows": [
-          ["Radiographic dilatation", "Transverse colon diameter > 6 cm", "Loss of neuromuscular tone and thinning of muscularis"],
-          ["Systemic toxicity", "Fever > 38.6 C, HR > 120, leucocytosis", "Bacterial translocation and systemic cytokine release"],
-          ["Surgical indication", "Perforation, peritonitis, or worsening dilatation", "Emergency subtotal colectomy with end ileostomy"]
+          [
+            "Radiographic dilatation",
+            "Transverse colon diameter > 6 cm",
+            "Loss of neuromuscular tone and thinning of muscularis"
+          ],
+          [
+            "Systemic toxicity",
+            "Fever > 38.6 C, HR > 120, leucocytosis",
+            "Bacterial translocation and systemic cytokine release"
+          ],
+          [
+            "Surgical indication",
+            "Perforation, peritonitis, or worsening dilatation",
+            "Emergency subtotal colectomy with end ileostomy"
+          ]
         ]
       }
     },
@@ -119,12 +199,77 @@
       "say": "Surveillance colonoscopy using high-definition chromoendoscopy reduces colorectal cancer mortality in longstanding ulcerative colitis. Screening begins eight years after symptom onset for extensive or left-sided disease. In contrast, patients with concomitant primary sclerosing cholangitis require annual colonoscopic surveillance beginning immediately upon diagnosis.",
       "vis": {
         "kind": "table",
-        "cols": ["Clinical Cohort", "Onset of Surveillance", "Surveillance Interval"],
+        "cols": [
+          "Clinical Cohort",
+          "Onset of Surveillance",
+          "Surveillance Interval"
+        ],
         "rows": [
-          ["Extensive colitis (E3)", "8 years from initial symptom onset", "Every 1 to 3 years based on risk features"],
-          ["Left-sided colitis (E2)", "8 years from initial symptom onset", "Every 2 to 3 years based on risk features"],
-          ["Proctitis alone (E1)", "No routine dysplasia surveillance needed", "Standard population screening guidelines"],
-          ["Co-existing PSC", "Immediately upon diagnosis of PSC/UC", "Annual colonoscopy with chromoendoscopy"]
+          [
+            "Extensive colitis (E3)",
+            "8 years from initial symptom onset",
+            "Every 1 to 3 years based on risk features"
+          ],
+          [
+            "Left-sided colitis (E2)",
+            "8 years from initial symptom onset",
+            "Every 2 to 3 years based on risk features"
+          ],
+          [
+            "Proctitis alone (E1)",
+            "No routine dysplasia surveillance needed",
+            "Standard population screening guidelines"
+          ],
+          [
+            "Co-existing PSC",
+            "Immediately upon diagnosis of PSC/UC",
+            "Annual colonoscopy with chromoendoscopy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Ulcerative colitis begins in the rectum and is continuous and mucosal, without skip lesions. Truelove and Witts severe colitis is at least 6 bloody stools a day plus systemic toxicity. On day 3, more than 8 stools or CRP over 45 predicts about 85 percent colectomy. Toxic megacolon means colon wider than 6 cm. Start surveillance at 8 years, or at once if sclerosing cholangitis coexists.",
+      "say": "High-yield for the exam: Ulcerative colitis begins in the rectum and is continuous and mucosal, without skip lesions. Truelove and Witts severe colitis is at least 6 bloody stools a day plus systemic toxicity. On day 3, more than 8 stools or CRP over 45 predicts about 85 percent colectomy. Toxic megacolon means colon wider than 6 cm. Start surveillance at 8 years, or at once if sclerosing cholangitis coexists.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Extent E1",
+            "Inflammation confined to the rectum"
+          ],
+          [
+            "Extent E3",
+            "Disease beyond the splenic flexure"
+          ],
+          [
+            "Severe flare",
+            "At least 6 bloody stools each day"
+          ],
+          [
+            "Oxford day 3",
+            "Over 8 stools, or CRP over 45"
+          ],
+          [
+            "Colectomy risk",
+            "About 85 percent when criteria are met"
+          ],
+          [
+            "Rescue pair",
+            "Infliximab or intravenous ciclosporin"
+          ],
+          [
+            "Megacolon",
+            "Nonobstructive dilatation beyond 6 cm"
+          ],
+          [
+            "With PSC",
+            "Colonoscopy from diagnosis, then yearly"
+          ]
         ]
       }
     }

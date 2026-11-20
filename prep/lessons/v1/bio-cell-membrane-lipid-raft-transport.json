@@ -21,11 +21,27 @@
    "say": "Lipid rafts concentrate signalling receptors for efficient switching and are exploited by toxins for entry. Their ordered stiffness contrasts with surrounding fluid phospholipids in living membranes.",
    "vis": {
     "kind": "table",
-    "cols": ["Membrane feature", "Composition bias", "Functional payoff"],
+    "cols": [
+     "Membrane feature",
+     "Composition bias",
+     "Functional payoff"
+    ],
     "rows": [
-     ["Lipid rafts and caveolae", "Cholesterol, sphingolipids, caveolin", "Signal concentration, endocytosis"],
-     ["Fluid bulk bilayer", "Unsaturated phospholipids", "Flexibility, fusion competence"],
-     ["Glycocalyx", "Glycoprotein and glycolipid sugars", "Identity, ABO antigens, protection"]
+     [
+      "Lipid rafts and caveolae",
+      "Cholesterol, sphingolipids, caveolin",
+      "Signal concentration, endocytosis"
+     ],
+     [
+      "Fluid bulk bilayer",
+      "Unsaturated phospholipids",
+      "Flexibility, fusion competence"
+     ],
+     [
+      "Glycocalyx",
+      "Glycoprotein and glycolipid sugars",
+      "Identity, ABO antigens, protection"
+     ]
     ]
    }
   },
@@ -45,8 +61,21 @@
    "say": "The sodium potassium ATPase maintains gradients for excitability and volume, consuming roughly a quarter of resting ATP. Digoxin binds it outside, and related pumps handle calcium and gastric acid.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Primary active (ATP direct)", "points": ["Na/K ATPase (3 out, 2 in)", "SERCA calcium into stores", "Gastric H/K ATPase (PPI target)"]},
-    "right": {"title": "Secondary active (gradient borrowed)", "points": ["SGLT sodium glucose symport", "Sodium calcium exchanger", "Sodium hydrogen antiport"]
+    "left": {
+     "title": "Primary active (ATP direct)",
+     "points": [
+      "Na/K ATPase (3 out, 2 in)",
+      "SERCA calcium into stores",
+      "Gastric H/K ATPase (PPI target)"
+     ]
+    },
+    "right": {
+     "title": "Secondary active (gradient borrowed)",
+     "points": [
+      "SGLT sodium glucose symport",
+      "Sodium calcium exchanger",
+      "Sodium hydrogen antiport"
+     ]
     }
    }
   },
@@ -62,12 +91,82 @@
     "kind": "flow",
     "title": "Bulk traffic decisions",
     "nodes": [
-     {"id": "pit", "label": "Clathrin pit or caveola captures cargo"},
-     {"id": "endo", "label": "Early endosome sorts (acidifies)"},
-     {"id": "rec", "label": "Recycle receptor to surface"},
-     {"id": "lys", "label": "Cargo to lysosome for digestion"}
+     {
+      "id": "pit",
+      "label": "Clathrin pit or caveola captures cargo"
+     },
+     {
+      "id": "endo",
+      "label": "Early endosome sorts (acidifies)"
+     },
+     {
+      "id": "rec",
+      "label": "Recycle receptor to surface"
+     },
+     {
+      "id": "lys",
+      "label": "Cargo to lysosome for digestion"
+     }
     ],
-    "edges": [["pit", "endo"], ["endo", "rec"], ["endo", "lys"]]
+    "edges": [
+     [
+      "pit",
+      "endo"
+     ],
+     [
+      "endo",
+      "rec"
+     ],
+     [
+      "endo",
+      "lys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The fluid mosaic membrane incorporates cholesterol- and sphingolipid-rich lipid rafts that organize cell signaling platforms. Primary active transport via Na-K ATPase expels three sodium ions and imports two potassium ions per ATP hydrolysed, generating the resting membrane potential. Cardiac glycosides such as digoxin reversibly inhibit this pump, elevating intracellular calcium to augment myocardial contractility.",
+   "say": "High-yield for the exam: The fluid mosaic membrane incorporates cholesterol- and sphingolipid-rich lipid rafts that organize cell signaling platforms. Primary active transport via Na-K ATPase expels three sodium ions and imports two potassium ions per ATP hydrolysed, generating the resting membrane potential. Cardiac glycosides such as digoxin reversibly inhibit this pump, elevating intracellular calcium to augment myocardial contractility.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Lipid raft composition",
+      "Enriched in cholesterol, glycosphingolipids, and GPI-anchored proteins"
+     ],
+     [
+      "Na-K ATPase stoichiometry",
+      "Pumps 3 Na+ out and 2 K+ in per ATP"
+     ],
+     [
+      "Cardiac glycoside target",
+      "Digoxin and ouabain bind extracellular alpha-subunit, inhibiting ATPase activity"
+     ],
+     [
+      "Secondary active transport",
+      "SGLT1 and SGLT2 utilize sodium electrochemical gradient to cotransport glucose"
+     ],
+     [
+      "Facilitated diffusion",
+      "GLUT uniporters move glucose down concentration gradient without metabolic energy expenditure"
+     ],
+     [
+      "Membrane fluidity factor",
+      "Unsaturated fatty acids and cis double bonds increase lipid bilayer fluidity"
+     ],
+     [
+      "Flippase versus floppase",
+      "Flippase moves phospholipids inward; floppase transports phospholipids outward using ATP"
+     ],
+     [
+      "Scramblase activation",
+      "Calcium-activated bidirectional lipid movement independent of direct ATP cleavage"
+     ]
+    ]
    }
   }
  ],

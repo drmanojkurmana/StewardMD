@@ -1,0 +1,351 @@
+{
+  "v": 1,
+  "module": "sso-breast",
+  "subject": "ss-surgical-oncology",
+  "title": "Breast Cancer Surgery: Subtypes Guide the Operation",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Sabiston Surgery 22nd edition"
+  ],
+  "steps": [
+    {
+      "tx": "**Breast cancer** is managed by **receptor subtype**, not by lump size alone. Oestrogen receptor and progesterone receptor status guides **endocrine therapy**, HER2 guides **trastuzumab**, and triple-negative tumours lack these targets. A 2 cm cut off and a 5 cm cut off still structure **staging** and breast conservation decisions.",
+      "say": "Begin with the subtype framework that decides surgery. Hormone receptors guide hormone therapy. The HER two receptor guides trastuzumab treatment. Triple negative tumours have none of these targets. Size still frames staging. A tumour under two centimetres is small, and beyond five centimetres is large.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hormone receptor positive",
+          "points": [
+            "Endocrine therapy is the backbone",
+            "Often goes to surgery first",
+            "Prognosis is generally favourable"
+          ]
+        },
+        "right": {
+          "title": "HER2 positive",
+          "points": [
+            "Trastuzumab and pertuzumab add benefit",
+            "High response to neoadjuvant therapy",
+            "Worse prognosis without targeted therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Risk factors** for breast cancer include increasing **age**, prior chest **radiotherapy** before 30 years, family history of breast or ovarian cancer, and long term exposure to oestrogen. Nulliparity, late first birth, and **BRCA1** or BRCA2 mutations raise risk further. About 70 percent of tumours are hormone receptor positive, yet 13 to 15 percent are HER2 positive.",
+      "say": "Next comes cause and risk. Ageing and early chest radiation are strong risks. A family history of breast or ovarian cancer matters. Nulliparity and late first births also raise risk. Inherited B R C A one mutations raise risk further. Most tumours are hormone receptor positive, while only a minority are HER two positive.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "age",
+            "label": "Increasing age"
+          },
+          {
+            "id": "gene",
+            "label": "BRCA mutation"
+          },
+          {
+            "id": "horm",
+            "label": "Oestrogen exposure"
+          },
+          {
+            "id": "screen",
+            "label": "Surveillance plan"
+          }
+        ],
+        "edges": [
+          [
+            "age",
+            "screen"
+          ],
+          [
+            "gene",
+            "screen"
+          ],
+          [
+            "horm",
+            "screen"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **oestrogen receptor** is a **transcription factor** that drives cell division when liganded. **HER2** is a **receptor tyrosine kinase**; amplification copies the gene and overexpresses the protein, accelerating growth. Triple-negative tumours often carry **p53** mutations and have high proliferation with a **Ki-67** index beyond 30 percent. These drivers explain why targeted drugs work only in matched subtypes.",
+      "say": "Mechanism follows the receptors. The oestrogen receptor acts as a switch that drives cell division. The HER two receptor is a growth signalling kinase. When its gene is copied many times, the cell grows faster. Triple negative tumours often lack these drivers and grow quickly. This biology explains why targeted drugs help only matched subtypes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Driver",
+          "Key drug"
+        ],
+        "rows": [
+          [
+            "ER positive",
+            "Oestrogen receptor",
+            "tamoxifen"
+          ],
+          [
+            "HER2 positive",
+            "HER2 kinase",
+            "trastuzumab"
+          ],
+          [
+            "Triple negative",
+            "High proliferation",
+            "pembrolizumab"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Most patients notice a painless **lump** in the upper outer quadrant, but **Paget disease** causes eczematous nipple change and **inflammatory cancer** gives skin redness, oedema, and peau d orange. Retraction, bloody nipple discharge, and a firm axillary node at level 2 or 3 raise suspicion. About 1 in 8 women will develop the disease in a lifetime.",
+      "say": "Clinically the common story is a painless lump. Paget disease changes the nipple skin like eczema. Inflammatory cancer reddens and swells the breast with puckered skin. Retraction or bloody discharge points strongly to cancer. A firm node in the armpit raises concern at levels two or three.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lump",
+            "label": "Lump noticed"
+          },
+          {
+            "id": "exam",
+            "label": "Clinical examination"
+          },
+          {
+            "id": "tests",
+            "label": "Mammogram and biopsy"
+          },
+          {
+            "id": "receptor",
+            "label": "Receptor report"
+          }
+        ],
+        "edges": [
+          [
+            "lump",
+            "exam"
+          ],
+          [
+            "exam",
+            "tests"
+          ],
+          [
+            "tests",
+            "receptor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Triple assessment** combines examination, mammography or ultrasound, and core needle **biopsy** with immunohistochemistry for ER, PR, and HER2. A 2 mm clear margin is the standard for invasive cancer in breast conservation. Axillary ultrasound with node biopsy stages the armpit preoperatively. Staging needs chest imaging when 3 or more nodes are involved or the tumour exceeds 5 cm.",
+      "say": "Investigations begin with triple assessment. Palpation, mammography or ultrasound, and core needle biopsy confirm cancer. Immunohistochemistry measures hormone receptors and HER two status. A clear margin of two millimetres is the standard for invasive cancer during conservation. Armpit ultrasound stages the axilla before surgery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Purpose",
+          "Done when"
+        ],
+        "rows": [
+          [
+            "Core biopsy",
+            "Confirm cancer",
+            "Triple assessment"
+          ],
+          [
+            "Mammogram",
+            "Map extent",
+            "Before surgery"
+          ],
+          [
+            "Axillary ultrasound",
+            "Stage nodes",
+            "Node suspicion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sentinel node biopsy uses **blue dye** and **radioisotope** technetium-99m to find the first draining node. Suspicious nodes are sampled by fine needle aspiration before surgery. **Germline** testing for BRCA1, BRCA2, and TP53 is offered when cancer occurs under 50 years or is triple-negative. A PET-CT at 2 cm size or nodal disease surveys for distant spread and guides treatment.",
+      "say": "Staging then moves to the work up. Sentinel node biopsy follows blue dye and a radioactive tracer to the first draining node. A suspicious node is sampled by fine needle aspiration before surgery. Germline testing is offered for young onset or triple negative disease. A PET scan surveys the whole body when the tumour is large or nodes are involved.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sentinel node biopsy",
+          "points": [
+            "Dye plus radioisotope tracer",
+            "Least arm swelling",
+            "Staging precision is high"
+          ]
+        },
+        "right": {
+          "title": "Axillary sampling",
+          "points": [
+            "Needle aspiration first",
+            "Positive result changes plan",
+            "Avoids unnecessary clearance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Neoadjuvant therapy** is given before surgery to shrink the tumour and test chemosensitivity. Triple-negative and HER2-positive tumours of 2 cm or larger receive it routinely. Regimens pair **anthracyclines** with **taxanes**, adding **pembrolizumab** in triple-negative disease. A pathologic complete response at surgery predicts better survival and may allow de-escalation of further therapy.",
+      "say": "Neoadjuvant therapy comes first for large or aggressive tumours. It shrinks the breast primary and tests chemotherapy sensitivity. Triple negative and HER two positive tumours of two centimetres or more routinely receive it. Anthracyclines and taxanes form the backbone, with pembrolizumab added in triple negative disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stage",
+            "label": "Staging confirms disease"
+          },
+          {
+            "id": "nact",
+            "label": "Neoadjuvant therapy"
+          },
+          {
+            "id": "reassess",
+            "label": "Reassess response"
+          },
+          {
+            "id": "surgery",
+            "label": "Definitive surgery"
+          }
+        ],
+        "edges": [
+          [
+            "stage",
+            "nact"
+          ],
+          [
+            "nact",
+            "reassess"
+          ],
+          [
+            "reassess",
+            "surgery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Breast conservation is offered when the tumour-to-breast ratio allows clear margins with good cosmesis. **Mastectomy** remains standard for multicentric tumours, large tumours beyond 5 cm, or patient preference. **Oncoplastic** techniques reshape residual tissue after wide excision. Margins of 2 mm suffice for invasive cancer, while DCIS requires a 2 mm or wider rim when radiation follows.",
+      "say": "Surgery choice balances clearance with shape. Conservation suits tumours that can be removed with clear margins and good cosmesis. Mastectomy remains standard for multicentred disease and very large tumours. Oncoplastic techniques reshape the remaining breast after wide excision. Margins of two millimetres are enough for invasive cancer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Breast conservation",
+          "points": [
+            "Needs clear margins",
+            "Best with oncoplastic reshape",
+            "Radiation always follows"
+          ]
+        },
+        "right": {
+          "title": "Mastectomy",
+          "points": [
+            "Multicentric or huge tumours",
+            "Patient preference counts",
+            "Reconstruction can follow"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sentinel node biopsy stages the axilla with less **lymphedema** than clearance. When 1 to 2 sentinel nodes carry disease, axillary dissection can be omitted if radiation and systemic therapy follow. Node-negative status after neoadjuvant therapy restores a favourable prognosis. At least 12 nodes removed at dissection satisfy staging, though sentinel technique alone is enough in early disease.",
+      "say": "Axillary management has become selective. Sentinel node biopsy stages the armpit with far less long term swelling than full clearance. When only one or two sentinel nodes carry disease, dissection can be omitted with radiation and systemic therapy. Node clearance after chemotherapy restores a favourable outlook.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "snb",
+            "label": "Sentinel result"
+          },
+          {
+            "id": "few",
+            "label": "One or two nodes positive"
+          },
+          {
+            "id": "omit",
+            "label": "Omit dissection"
+          },
+          {
+            "id": "follow",
+            "label": "Radiation and therapy"
+          }
+        ],
+        "edges": [
+          [
+            "snb",
+            "few"
+          ],
+          [
+            "few",
+            "omit"
+          ],
+          [
+            "few",
+            "follow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Seroma** collects under the flap and prolongs drain time, while haematoma and infection occur in 5 to 10 percent of cases. **Lymphedema** follows axillary clearance in 20 to 30 percent of women, versus 5 percent after sentinel biopsy. Chest wall recurrence and distant spread drive long term mortality. Shoulder stiffness follows dissection, so early physiotherapy preserves range of motion.",
+      "say": "Complications begin with wound problems. Seroma collects under the flap and keeps drains in longer. Infection and haematoma affect a minority of patients. Long term swelling called lymphedema follows axillary clearance in up to one third of women, but is far less common after sentinel biopsy. Shoulder stiffness needs early physiotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "After sentinel",
+          "After dissection"
+        ],
+        "rows": [
+          [
+            "Lymphedema",
+            "About 5 percent",
+            "About 20 to 30 percent"
+          ],
+          [
+            "Seroma",
+            "Common",
+            "Common"
+          ],
+          [
+            "Shoulder stiffness",
+            "Uncommon",
+            "More common"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For the **exam**, link subtype to surgery: HER2-positive and triple-negative tumours receive **neoadjuvant therapy** first, hormone-positive tumours may proceed to surgery. Margins of **2 mm** count as clear in invasive disease, and 1 to 2 involved sentinel nodes rarely need dissection. Basal TNBC carries the poorest prognosis and the highest response to neoadjuvant chemotherapy.",
+      "say": "High-yield for the exam remember the subtype rule. HER two positive and triple negative tumours get chemotherapy before surgery. Hormone positive tumours often go to surgery first. Two millimetres counts as a clear margin in invasive disease. Only one or two involved sentinel nodes rarely needs full dissection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Topic",
+          "Fact to quote"
+        ],
+        "rows": [
+          [
+            "Margins",
+            "2 mm clear in invasive disease"
+          ],
+          [
+            "Sentinel",
+            "One to two nodes rarely needs dissection"
+          ],
+          [
+            "TNBC",
+            "Poorest prognosis, best neoadjuvant response"
+          ]
+        ]
+      }
+    }
+  ]
+}

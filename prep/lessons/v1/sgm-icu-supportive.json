@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "sgm-icu-supportive",
+ "subject": "ss-general-medicine",
+ "title": "Sedation, delirium and supportive ICU care",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Supportive ICU care means sedation, analgesia, delirium control and ventilation support for critically ill patients, with 60% to eighty percent needing sedation during ventilation. Target is calm, awake and comfortable with **Richmond Agitation Sedation Scale** score of 0 to minus 2. Daily interruption helps cut ventilation by 1 to 2 days. Pain score should be below 3 on a 10 point scale.",
+   "say": "Supportive care keeps ventilated patients calm and comfortable. Most ICU patients need sedation during ventilation. The target is light sedation with daily awakening checks.",
+   "vis": null
+  },
+  {
+   "tx": "Causes of **delirium** are 5 groups: infection, drugs, metabolic failure, withdrawal and sleep loss. Risk factors include age above sixty-five, prior dementia in twenty percent, surgery, ICU stay beyond forty-eight hours, benzodiazepine dose and sleep below 4 hours. Male sex, alcohol use and basal ganglia disease raise risk 2 fold. About seventy percent of ventilated patients develop delirium.",
+   "say": "Delirium has many causes including infection, drugs and sleep loss. Older age and prior dementia increase risk over time. Most ventilated patients have some delirium during the stay.",
+   "vis": null
+  },
+  {
+   "tx": "The **mechanism** links sedation to GABA and NMDA imbalance, with benzodiazepines enhancing GABA and propofol acting similarly. Excess cholinergic block, hypoxia and interleukin cytokines disturb sleep wake cycling. Disrupted circadian rhythm with 2 hour day cycle worsens attention. The result is hyperactive, hypoactive or mixed states with attention loss within twenty-four hours.",
+   "say": "Sedatives change GABA and NMDA signalling and disturb sleep cycles. Cytokines and metabolic changes worsen attention. The result is confusion and agitation over one to two days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sedative load and infection"
+     },
+     {
+      "id": "b",
+      "label": "GABA and NMDA imbalance"
+     },
+     {
+      "id": "c",
+      "label": "Sleep wake disruption"
+     },
+     {
+      "id": "d",
+      "label": "Delirium"
+     },
+     {
+      "id": "e",
+      "label": "Ventilator weaning delay"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical features are acute attention loss, disorientation and pain with **classic sign** of waxing and waning awareness over twenty-four hours. Use CAM ICU 4 features: acute change, inattention, disorganised thinking and altered consciousness. RASS ranges from minus 5 unarousable to plus 4 combative. Feeding intolerance, constipation in 50% and pressure injury in 30% are frequent bedside clues.",
+   "say": "Delirium fluctuates over the day with attention loss and disorientation. The CAM test checks four key features. Feeding and bowel problems often give the first clue.",
+   "vis": null
+  },
+  {
+   "tx": "First test is RASS plus CAM ICU at bedside twice daily, with arterial blood gas and salts for Na one hundred thirty-five to one hundred forty-five mmol per L. **Gold standard** is psychiatrist interview with DSM 5 criteria showing acute inattention plus awareness change. EEG helps when nonconvulsive seizures mimic delirium. Bladder scan excludes retention in 15% and rectal exam excludes impaction.",
+   "say": "Bedside scores come first for every patient twice each day. Blood gas and salts help find the cause quickly. The psychiatrist interview remains the gold standard check.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scale",
+     "Range",
+     "Target"
+    ],
+    "rows": [
+     [
+      "RASS",
+      "Minus 5 to plus 4",
+      "0 to minus 2"
+     ],
+     [
+      "CAM ICU",
+      "4 features",
+      "4 positive equals delirium"
+     ],
+     [
+      "Pain score",
+      "0 to 10",
+      "Below 3"
+     ],
+     [
+      "Bowel pattern",
+      "Every 1 to 2 days",
+      "Avoid retention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First line sedation is **propofol** 5 to 50 micrograms per kg per min by infusion, or dexmedetomidine 0.2 to 0.7 micrograms per kg per hour. Give fentanyl 25 to 50 micrograms for analgesia first. Avoid midazolam 0.02 to 0.1 mg per kg per hour when delirium is present because risk rises by 30%. Interrupt sedation daily for at least 15 minutes.",
+   "say": "Propofol or dexmedetomidine infusions are first line for calm sedation. Analgesia comes first with a small fentanyl dose. Daily interruption helps weaning within one or two days.",
+   "vis": null
+  },
+  {
+   "tx": "Second line care uses **haloperidol** 0.5 to 2 mg every 6 hours for hyperactive delirium and sleep aid 25 to 50 mg at night for sleep. Offer early mobilisation within twenty-four hours, daylight exposure for eight hours and ear plugs to raise sleep by twenty percent. Provide bowel care with 15 mg bowel aid and VTE prophylaxis with clot prevention five thousand units twice daily.",
+   "say": "Haloperidol in small doses treats severe agitation in hyperactive patients. Early walking and daylight help sleep and recovery for most patients. Bowel care and clot prevention run alongside daily care in the unit.",
+   "vis": null
+  },
+  {
+   "tx": "Delirium types need different care in the first forty-eight hours. **Comparison** of propofol versus benzodiazepine sedation shows 1 day shorter ventilation with propofol and delirium in twenty percent versus 60% with midazolam. Dexmedetomidine gives next day extubation in 30% more cases than midazolam. Hypoactive delirium carries 2 fold higher mortality than hyperactive delirium.",
+   "say": "Propofol gives shorter ventilation than the alternative sedation. Dexmedetomidine helps patients wake faster after ventilation. Quiet delirium remains more dangerous than loud delirium for survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Propofol sedation",
+     "points": [
+      "Ventilation 1 day shorter",
+      "Delirium twenty percent",
+      "Fast offset in 2 hours"
+     ]
+    },
+    "right": {
+     "title": "Midazolam sedation",
+     "points": [
+      "Longer delirium 60 percent",
+      "Accumulates over 5 days",
+      "Slower weaning by 2 days"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complications include **propofol infusion syndrome** after forty-eight hours above 50 micrograms per kg per min, hypertriglyceridaemia above five hundred mg per dL and laryngospasm in 2%. Mortality rises from twenty percent to forty percent when delirium persists beyond 5 days. Prognosis improves with mobilisation within twenty-four hours, cutting ICU stay by 2 days. Survivors have 30% risk of cognitive decline at 6 months.",
+   "say": "Long high dose propofol can cause infusion syndrome after two days. Delirium beyond five days doubles mortality. Early walking cuts ICU stay and improves memory later.",
+   "vis": null
+  },
+  {
+   "tx": "Prognosis is better when **sedation is light** with RASS 0 to minus 2 and pain is controlled below 3. Families report 25% faster recovery with 6 hours of night sleep and day light. Audit shows forty percent less delirium with a written bundle of sleep, mobilisation and bowel care. Persistent coma beyond 10 days predicts poor recovery in seventy percent.",
+   "say": "Light sedation and good sleep give the best recovery for patients. Families see faster progress with six hours of quiet sleep. A simple bundle reduces delirium by about forty percent in the unit.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** table for sedation delirium and supportive ICU care in seven high yield points. Remember RASS target 0 to minus 2, propofol 5 to 50 micrograms per kg per min, fentanyl 25 to 50 micrograms and haloperidol 0.5 to 2 mg. Daily interruption of 15 minutes and mobilisation within twenty-four hours cut ventilation by 1 to 2 days.",
+   "say": "This table has the core numbers for the exam. You must remember sedation targets and the daily interruption rule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "Number to recall",
+     "Action"
+    ],
+    "rows": [
+     [
+      "RASS target",
+      "0 to minus 2",
+      "Calm and awake"
+     ],
+     [
+      "Propofol infusion",
+      "5 to 50 mc per kg per min",
+      "First line sedation"
+     ],
+     [
+      "Fentanyl dose",
+      "25 to 50 mc",
+      "Analgesia first"
+     ],
+     [
+      "Haloperidol dose",
+      "0.5 to 2 mg every 6 hours",
+      "Hyperactive delirium"
+     ],
+     [
+      "Sleep goal",
+      "6 hours",
+      "Daylight eight hours"
+     ],
+     [
+      "Mobilisation",
+      "Within twenty-four hours",
+      "Cut stay 2 days"
+     ],
+     [
+      "Delirium risk",
+      "60 percent with midazolam",
+      "Avoid benzodiazepine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

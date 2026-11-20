@@ -13,12 +13,27 @@
    "say": "Water liners freeze while power runs, then hold the cabinet between two and eight degrees through cuts. No generator needed. That is the design's whole point.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Value"],
+    "cols": [
+     "Feature",
+     "Value"
+    ],
     "rows": [
-     ["Storage range", "Plus 2 to plus 8 degrees Celsius"],
-     ["Lining", "Water packs frozen into ice wall"],
-     ["Level of use", "PHC and district stores"],
-     ["Backup", "Ice wall holdover, no generator"]
+     [
+      "Storage range",
+      "Plus 2 to plus 8 degrees Celsius"
+     ],
+     [
+      "Lining",
+      "Water packs frozen into ice wall"
+     ],
+     [
+      "Level of use",
+      "PHC and district stores"
+     ],
+     [
+      "Backup",
+      "Ice wall holdover, no generator"
+     ]
     ]
    }
   },
@@ -39,12 +54,27 @@
    "say": "Holdover is survival time with power off and door shut. Know your unit's number at local summer temperature. It decides rescue or routine waiting during outages.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Meaning"],
+    "cols": [
+     "Situation",
+     "Meaning"
+    ],
     "rows": [
-     ["Power cut within holdover", "Keep door shut, monitor"],
-     ["Cut beyond holdover", "Shift vaccines in cold boxes"],
-     ["Door opened repeatedly", "Holdover shortens sharply"],
-     ["Ice lining melted", "Recharge fully before restocking"]
+     [
+      "Power cut within holdover",
+      "Keep door shut, monitor"
+     ],
+     [
+      "Cut beyond holdover",
+      "Shift vaccines in cold boxes"
+     ],
+     [
+      "Door opened repeatedly",
+      "Holdover shortens sharply"
+     ],
+     [
+      "Ice lining melted",
+      "Recharge fully before restocking"
+     ]
     ]
    }
   },
@@ -56,11 +86,21 @@
     "kind": "compare",
     "left": {
      "title": "Top opening ILR",
-     "points": ["Cold air retained on opening", "Long holdover time", "Baskets organise vaccines", "Programme standard"]
+     "points": [
+      "Cold air retained on opening",
+      "Long holdover time",
+      "Baskets organise vaccines",
+      "Programme standard"
+     ]
     },
     "right": {
      "title": "Front opening domestic",
-     "points": ["Cold air spills each opening", "Short holdover", "Freezer compartment risks freezing", "Emergency use only"]
+     "points": [
+      "Cold air spills each opening",
+      "Short holdover",
+      "Freezer compartment risks freezing",
+      "Emergency use only"
+     ]
     }
    }
   },
@@ -70,25 +110,40 @@
    "say": "Baskets keep cartons off cold walls with air moving around them. Freeze sensitive vaccines never touch the lining. One silent freeze can kill a whole batch.",
    "vis": {
     "kind": "table",
-    "cols": ["Rule", "Reason"],
+    "cols": [
+     "Rule",
+     "Reason"
+    ],
     "rows": [
-     ["Use baskets", "Air circulation, no wall contact"],
-     ["Keep floor clear", "Cold pooling and freezing risk"],
-     ["Separate by expiry", "Earliest expiry used first"],
-     ["No food or specimens", "Contamination and confusion"]
+     [
+      "Use baskets",
+      "Air circulation, no wall contact"
+     ],
+     [
+      "Keep floor clear",
+      "Cold pooling and freezing risk"
+     ],
+     [
+      "Separate by expiry",
+      "Earliest expiry used first"
+     ],
+     [
+      "No food or specimens",
+      "Contamination and confusion"
+     ]
     ]
    }
   },
   {
-    "tx": "Morning and evening readings on a chart pinned to an ice lined refrigerator prove the cabinet stayed in range. **Vaccine placement** uses perforated baskets so cold air can move, and cartons must stay off the floor and the walls. Hepatitis B, pentavalent vaccine and tetanus toxoid are freeze sensitive. They must not touch the ice lining or sit in a direct blast of cold air, because a single freezing event destroys them without any visible change.",
-    "say": "Morning and evening readings on a chart pinned to an ice lined refrigerator prove the cabinet stayed in range. Vaccine placement uses perforated baskets so cold air can move, and cartons must stay off the floor and the walls. Hepatitis B, pentavalent vaccine and tetanus toxoid are freeze sensitive. They must not touch the ice lining or sit in a direct blast of cold air, because a single freezing event destroys them without any visible change.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n497-cm-vaccines-cold-chain-ice-lined-refrigerator.webp",
-      "alt": "Twice daily temperature chart on an ice lined refrigerator with morning and evening entries",
-      "caption": "Morning and evening temperatures are charted on an ice lined refrigerator used to store vaccines. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Morning and evening readings on a chart pinned to an ice lined refrigerator prove the cabinet stayed in range. **Vaccine placement** uses perforated baskets so cold air can move, and cartons must stay off the floor and the walls. Hepatitis B, pentavalent vaccine and tetanus toxoid are freeze sensitive. They must not touch the ice lining or sit in a direct blast of cold air, because a single freezing event destroys them without any visible change.",
+   "say": "Morning and evening readings on a chart pinned to an ice lined refrigerator prove the cabinet stayed in range. Vaccine placement uses perforated baskets so cold air can move, and cartons must stay off the floor and the walls. Hepatitis B, pentavalent vaccine and tetanus toxoid are freeze sensitive. They must not touch the ice lining or sit in a direct blast of cold air, because a single freezing event destroys them without any visible change.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n497-cm-vaccines-cold-chain-ice-lined-refrigerator.webp",
+    "alt": "Twice daily temperature chart on an ice lined refrigerator with morning and evening entries",
+    "caption": "Morning and evening temperatures are charted on an ice lined refrigerator used to store vaccines. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Twice daily temperature recording",
@@ -97,12 +152,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Read thermometer twice daily"},
-     {"id": "b", "label": "Record on temperature chart"},
-     {"id": "c", "label": "Spot out of range reading"},
-     {"id": "d", "label": "Shift vaccines, report fault"}
+     {
+      "id": "a",
+      "label": "Read thermometer twice daily"
+     },
+     {
+      "id": "b",
+      "label": "Record on temperature chart"
+     },
+     {
+      "id": "c",
+      "label": "Spot out of range reading"
+     },
+     {
+      "id": "d",
+      "label": "Shift vaccines, report fault"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -111,12 +191,27 @@
    "say": "Frost past five millimetres insulates and warms the chamber. Move vaccines to cold boxes, never the bench, defrost, drain, and only then restock.",
    "vis": {
     "kind": "table",
-    "cols": ["Sign", "Action"],
+    "cols": [
+     "Sign",
+     "Action"
+    ],
     "rows": [
-     ["Frost over 5 mm", "Plan defrosting"],
-     ["Temperature creeping up", "Check frost and door seal"],
-     ["Water pooling inside", "Drain and dry lining"],
-     ["Compressor running constantly", "Service call with vaccine shift"]
+     [
+      "Frost over 5 mm",
+      "Plan defrosting"
+     ],
+     [
+      "Temperature creeping up",
+      "Check frost and door seal"
+     ],
+     [
+      "Water pooling inside",
+      "Drain and dry lining"
+     ],
+     [
+      "Compressor running constantly",
+      "Service call with vaccine shift"
+     ]
     ]
    }
   },
@@ -126,12 +221,27 @@
    "say": "Stabiliser fitted, unit level, shade kept, back ventilated. Never share its line with heaters. Most compressor deaths trace back to bad power and bad siting.",
    "vis": {
     "kind": "table",
-    "cols": ["Siting rule", "Protects against"],
+    "cols": [
+     "Siting rule",
+     "Protects against"
+    ],
     "rows": [
-     ["Voltage stabiliser", "Surge compressor damage"],
-     ["Shade from sunlight", "Extra heat load"],
-     ["Gap behind unit", "Condenser overheating"],
-     ["Dedicated socket", "Voltage drop trips"]
+     [
+      "Voltage stabiliser",
+      "Surge compressor damage"
+     ],
+     [
+      "Shade from sunlight",
+      "Extra heat load"
+     ],
+     [
+      "Gap behind unit",
+      "Condenser overheating"
+     ],
+     [
+      "Dedicated socket",
+      "Voltage drop trips"
+     ]
     ]
    }
   },
@@ -142,12 +252,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Failure or outage noticed"},
-     {"id": "b", "label": "Door shut, temperature read"},
-     {"id": "c", "label": "Shift to cold boxes if breached"},
-     {"id": "d", "label": "Quarantine and report upward"}
+     {
+      "id": "a",
+      "label": "Failure or outage noticed"
+     },
+     {
+      "id": "b",
+      "label": "Door shut, temperature read"
+     },
+     {
+      "id": "c",
+      "label": "Shift to cold boxes if breached"
+     },
+     {
+      "id": "d",
+      "label": "Quarantine and report upward"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -156,12 +291,68 @@
    "say": "Manufacturer to walk in cooler to this cabinet to the session carrier. The ice-lined refrigerator anchors the middle, buffering supply where outreach days begin.",
    "vis": {
     "kind": "table",
-    "cols": ["Stage", "Equipment"],
+    "cols": [
+     "Stage",
+     "Equipment"
+    ],
     "rows": [
-     ["State and district", "Walk in cooler"],
-     ["PHC level", "Ice-lined refrigerator"],
-     ["Session day", "Vaccine carrier, ice packs"],
-     ["Return", "Open vial policy if eligible"]
+     [
+      "State and district",
+      "Walk in cooler"
+     ],
+     [
+      "PHC level",
+      "Ice-lined refrigerator"
+     ],
+     [
+      "Session day",
+      "Vaccine carrier, ice packs"
+     ],
+     [
+      "Return",
+      "Open vial policy if eligible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: An ice lined refrigerator stores vaccines at plus two to plus eight degrees at PHC level. Its ice wall gives holdover during power cuts without a generator. Top opening prevents cold air loss because cold air sinks. Temperature is recorded twice daily. Defrost when frost exceeds about five millimetres, shifting vaccines to cold boxes first.",
+   "say": "An ice lined refrigerator stores vaccines at plus two to plus eight degrees at PHC level. Its ice wall gives holdover during power cuts without a generator. Top opening prevents cold air loss because cold air sinks. Temperature is recorded twice daily. Defrost when frost exceeds about five millimetres, shifting vaccines to cold boxes first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "ILR storage range",
+      "Plus two to plus eight degrees Celsius always"
+     ],
+     [
+      "ILR service level",
+      "Standard vaccine store at primary health centre"
+     ],
+     [
+      "Holdover mechanism",
+      "Frozen ice lining maintains cold without power"
+     ],
+     [
+      "Top opening reason",
+      "Cold air sinks, less loss than front opening"
+     ],
+     [
+      "Temperature recording rule",
+      "Twice daily morning and evening including weekends"
+     ],
+     [
+      "Defrosting threshold",
+      "Frost thicker than about five millimetres needs defrosting"
+     ],
+     [
+      "Freeze sensitive placement",
+      "Hepatitis B, pentavalent, TT away from ice lining"
+     ]
     ]
    }
   }

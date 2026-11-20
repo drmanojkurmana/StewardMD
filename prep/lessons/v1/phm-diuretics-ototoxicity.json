@@ -83,12 +83,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ddavp", "label": "Desmopressin given nasally, orally or parenterally" },
-          { "id": "v2", "label": "V2 receptors insert aquaporin 2 in collecting duct" },
-          { "id": "water", "label": "Water reabsorbed, urine volume falls and concentrates" },
-          { "id": "vwf", "label": "Endothelial von Willebrand factor also released" }
+          {
+            "id": "ddavp",
+            "label": "Desmopressin given nasally, orally or parenterally"
+          },
+          {
+            "id": "v2",
+            "label": "V2 receptors insert aquaporin 2 in collecting duct"
+          },
+          {
+            "id": "water",
+            "label": "Water reabsorbed, urine volume falls and concentrates"
+          },
+          {
+            "id": "vwf",
+            "label": "Endothelial von Willebrand factor also released"
+          }
         ],
-        "edges": [["ddavp", "v2"], ["v2", "water"], ["ddavp", "vwf"]]
+        "edges": [
+          [
+            "ddavp",
+            "v2"
+          ],
+          [
+            "v2",
+            "water"
+          ],
+          [
+            "ddavp",
+            "vwf"
+          ]
+        ]
       }
     },
     {
@@ -97,12 +122,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "thiaz", "label": "Thiazide blocks distal NaCl cotransporter" },
-          { "id": "vol", "label": "Mild volume contraction develops" },
-          { "id": "prox", "label": "Proximal sodium and water reabsorption increases" },
-          { "id": "less", "label": "Less fluid reaches collecting duct, urine volume falls" }
+          {
+            "id": "thiaz",
+            "label": "Thiazide blocks distal NaCl cotransporter"
+          },
+          {
+            "id": "vol",
+            "label": "Mild volume contraction develops"
+          },
+          {
+            "id": "prox",
+            "label": "Proximal sodium and water reabsorption increases"
+          },
+          {
+            "id": "less",
+            "label": "Less fluid reaches collecting duct, urine volume falls"
+          }
         ],
-        "edges": [["thiaz", "vol"], ["vol", "prox"], ["prox", "less"]]
+        "edges": [
+          [
+            "thiaz",
+            "vol"
+          ],
+          [
+            "vol",
+            "prox"
+          ],
+          [
+            "prox",
+            "less"
+          ]
+        ]
       }
     },
     {
@@ -136,12 +186,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "find", "label": "Confirm SIADH and stop culprit drugs" },
-          { "id": "restrict", "label": "Restrict fluid to 800 to 1000 ml daily" },
-          { "id": "severe", "label": "Severe symptoms: hypertonic saline, monitored bed" },
-          { "id": "refract", "label": "Refractory: urea, demeclocycline or tolvaptan" }
+          {
+            "id": "find",
+            "label": "Confirm SIADH and stop culprit drugs"
+          },
+          {
+            "id": "restrict",
+            "label": "Restrict fluid to 800 to 1000 ml daily"
+          },
+          {
+            "id": "severe",
+            "label": "Severe symptoms: hypertonic saline, monitored bed"
+          },
+          {
+            "id": "refract",
+            "label": "Refractory: urea, demeclocycline or tolvaptan"
+          }
         ],
-        "edges": [["find", "restrict"], ["find", "severe"], ["restrict", "refract"]]
+        "edges": [
+          [
+            "find",
+            "restrict"
+          ],
+          [
+            "find",
+            "severe"
+          ],
+          [
+            "restrict",
+            "refract"
+          ]
+        ]
       }
     },
     {
@@ -167,6 +242,51 @@
             "Test: paired osmolalities, urine sodium, drug review"
           ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Loop diuretic ototoxicity blocks the stria vascularis cotransporter. Furosemide hearing loss usually reverses if the infusion stays at or below 4 mg per minute. Ethacrynic acid can deafen permanently. A loop plus an aminoglycoside can make that loss permanent. Central diabetes insipidus concentrates after desmopressin. Nephrogenic disease, often lithium, needs a thiazide. SIADH is euvolaemic hyponatraemia with urine osmolality above 100. Restrict fluid first.",
+      "say": "High-yield for the exam: Loop diuretic ototoxicity blocks the stria vascularis cotransporter. Furosemide hearing loss usually reverses if the infusion stays at or below 4 mg per minute. Ethacrynic acid can deafen permanently. A loop plus an aminoglycoside can make that loss permanent. Central diabetes insipidus concentrates after desmopressin. Nephrogenic disease, often lithium, needs a thiazide. SIADH is euvolaemic hyponatraemia with urine osmolality above 100. Restrict fluid first.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Injury site",
+            "Stria vascularis cotransporter"
+          ],
+          [
+            "Infusion cap",
+            "Furosemide 4 mg per minute"
+          ],
+          [
+            "Permanent risk",
+            "Ethacrynic acid can deafen"
+          ],
+          [
+            "Classic pair",
+            "Loop plus aminoglycoside"
+          ],
+          [
+            "Central insipidus",
+            "Concentrates after desmopressin"
+          ],
+          [
+            "Nephrogenic care",
+            "Thiazide and low salt"
+          ],
+          [
+            "SIADH urine",
+            "Osmolality above 100"
+          ],
+          [
+            "First SIADH step",
+            "Restrict fluid, not saline"
+          ]
+        ]
       }
     }
   ]

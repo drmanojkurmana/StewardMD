@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-hereditary-cancer",
+ "subject": "ss-general-medicine",
+ "title": "Hereditary cancer syndromes and cancer screening",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**BRCA1 and BRCA2** confer high breast and ovarian cancer risks in carriers. **Lynch syndrome** confers colorectal and endometrial cancer risks in most families. Family history of early onset cancer is the screening trigger in these families. **Genetic counselling** precedes testing in every family with suspected hereditary cancer in many centres.",
+   "say": "BRCA one and BRCA two are high risk genes for breast and ovarian cancers in carriers. Lynch syndrome is the syndrome for colorectal and endometrial cancers in most families. Family history of early onset cancer is the screening trigger in these families. Genetic counselling precedes testing in every family with suspected hereditary cancer in many centres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Gene clue",
+     "Cancer spectrum"
+    ],
+    "rows": [
+     [
+      "BRCA related",
+      "BRCA1 and BRCA2",
+      "Breast, ovarian, prostate"
+     ],
+     [
+      "Lynch syndrome",
+      "Mismatch repair genes",
+      "Colorectal, endometrial"
+     ],
+     [
+      "Cowden syndrome",
+      "PTEN gene",
+      "Breast, thyroid, skin"
+     ],
+     [
+      "Li Fraumeni",
+      "TP53",
+      "Broad childhood and adult cancers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cowden syndrome** presents with hamartomas and macrocephaly in many patients. **Peutz Jeghers** presents with mucocutaneous pigmentation and hamartomatous polyps in many families. **Li Fraumeni** presents with sarcoma, leukaemia and brain tumours in many families. **Aspirin** prophylaxis benefits Lynch carriers in many chemoprevention studies globally.",
+   "say": "Cowden syndrome presents with hamartomas and macrocephaly in many patients. Peutz Jeghers presents with mucocutaneous pigmentation and hamartomatous polyps in many families. Li Fraumeni presents with sarcoma, leukaemia and brain tumours in many families. Aspirin prophylaxis is of benefit for Lynch carriers in many chemoprevention studies globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Risk reducing mastectomy** substantially lowers breast cancer risk in BRCA carriers. **Risk reducing oophorectomy** lowers ovarian cancer risk by 80% in carriers in many protocols globally. **Screening** with MRI plus mammography starts in their 20s for carriers in many guidelines. **Progesterone** receptor status is often positive in BRCA1 associated tumours in many series.",
+   "say": "Risk reducing mastectomy lowers breast cancer risk by ninety percent in BRCA carriers. Risk reducing oophorectomy lowers ovarian cancer risk in carriers in many protocols globally. Screening with MRI plus mammography starts in the twenties for carriers in many guidelines. Progesterone receptor status is often positive in BRCA one associated tumours in many series.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High risk family"
+     },
+     {
+      "id": "b",
+      "label": "Genetic counselling"
+     },
+     {
+      "id": "c",
+      "label": "Gene testing result"
+     },
+     {
+      "id": "d",
+      "label": "Screening or surgery plan"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Colonoscopy** every 2 years screens Lynch carriers effectively in many guidelines. **Endometrial** surveillance with biopsy is advised in Lynch carriers in many protocols globally. **Smoking** cessation prevents additional cancer risks in these families in many studies. Chemoprevention with **aspirin** is discussed in Lynch families in many centres today.",
+   "say": "Colonoscopy every two years is the screening test for Lynch carriers in many guidelines. Endometrial surveillance with biopsy is advised in Lynch carriers in many protocols globally. Smoking cessation prevents additional cancer risks in these families in many studies. Chemoprevention with aspirin is discussed in Lynch families in many centres today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Surveillance",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "BRCA carriers",
+      "MRI plus mammography",
+      "Yearly from 20s"
+     ],
+     [
+      "Lynch syndrome",
+      "Colonoscopy",
+      "Every 2 years"
+     ],
+     [
+      "Lynch syndrome",
+      "Endometrial biopsy",
+      "Yearly in many protocols"
+     ],
+     [
+      "Li Fraumeni",
+      "Whole body MRI",
+      "Yearly surveillance protocol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cascade testing** offers testing to all blood relatives once the mutation is found. **Variant of uncertain significance** needs family segregation study in many centres today. **Reproductive** options include prenatal diagnosis and preimplantation testing in many families. **Insurance** discrimination fears deter testing in many families despite legal protections in many countries.",
+   "say": "Cascade testing offers testing to all blood relatives once the mutation is found. Variant of uncertain significance needs family segregation study in many centres today. Reproductive options include prenatal diagnosis and preimplantation testing in many families. Insurance discrimination fears deter testing in many families despite legal protections in many countries.",
+   "vis": null
+  },
+  {
+   "tx": "**Mammography** screening reduces breast cancer mortality in average risk women in many trials. **Cervical screening** with HPV testing prevents cervical cancer in population programmes. **Colorectal screening** with colonoscopy reduces incidence and mortality in many studies globally. Screening intervals differ for high risk families in many guidelines today.",
+   "say": "Mammography screening reduces breast cancer mortality in average risk women in many trials. Cervical screening with HPV testing prevents cervical cancer in population programmes. Colorectal screening with colonoscopy reduces incidence and mortality in many studies globally. Screening intervals differ for high risk families in many guidelines today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Screening",
+     "Population",
+     "Benefit"
+    ],
+    "rows": [
+     [
+      "Mammography",
+      "Average risk women",
+      "Mortality reduction proven"
+     ],
+     [
+      "HPV cervical screening",
+      "Screening eligible women",
+      "Cervical cancer prevention"
+     ],
+     [
+      "Colonoscopy",
+      "Average risk adults",
+      "Incidence and mortality fall"
+     ],
+     [
+      "Lung CT",
+      "Heavy smokers",
+      "Mortality reduction shown"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Familial adenomatous polyposis** needs colectomy before malignant transformation in many families. **PTEN** hamartoma syndrome needs breast and thyroid surveillance in many protocols. **TP53** surveillance needs whole body MRI in many centres for these families. **Median** age at cancer onset guides surveillance start in these families in many guidelines.",
+   "say": "Familial adenomatous polyposis needs colectomy before malignant transformation in many families. PTEN hamartoma syndrome needs breast and thyroid surveillance in many protocols. TP fifty three surveillance needs whole body MRI in many centres for these families. Median age at cancer onset guides surveillance start in these families in many guidelines.",
+   "vis": null
+  },
+  {
+   "tx": "**Lynch** tumours show microsatellite instability on testing in many cases. **Immunohistochemistry** for mismatch repair proteins screens Lynch tumours in many centres. **Germline** testing confirms Lynch syndrome before cascade testing is offered in these families. **Prophylactic** hysterectomy is discussed after childbearing in these carriers in many protocols.",
+   "say": "Lynch tumours show microsatellite instability on testing in many cases. Immunohistochemistry for mismatch repair proteins screens Lynch tumours in many centres. Germline testing confirms Lynch syndrome before cascade testing is offered in these families. Prophylactic hysterectomy is discussed after childbearing in these carriers in many protocols.",
+   "vis": null
+  },
+  {
+   "tx": "**Contralateral** breast cancer risk is high in BRCA carriers in many cohorts. **Pancreatic** surveillance with MRI is considered in BRCA2 families in many protocols. **Prostate** cancer screening with PSA starts early in BRCA2 carriers in many guidelines. **Melanoma** risk is increased in BRCA carriers in many series with skin surveillance advised in these families.",
+   "say": "Contralateral breast cancer risk is high in BRCA carriers in many cohorts. Pancreatic surveillance with MRI is considered in BRCA two families in many protocols. Prostate cancer screening with PSA starts early in BRCA two carriers in many guidelines. Melanoma risk is increased in BRCA carriers in many series with skin surveillance advised in these families.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "BRCA1 pattern",
+     "points": [
+      "Early breast cancer onset",
+      "High ovarian cancer risk",
+      "Triple negative tumours common",
+      "Triannual MRI surveillance"
+     ]
+    },
+    "right": {
+     "title": "BRCA2 pattern",
+     "points": [
+      "Later breast cancer onset",
+      "Pancreatic cancer risk",
+      "Prostate cancer risk",
+      "Luminal tumours commoner"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Risk models** combine family history with gene and lifestyle factors in these families. **Lifestyle** modification lowers risk in mutation carriers in many studies globally. **Endocrine** risk reduction is an alternative to surgery in many carriers. Counselling must be non directive in every family with hereditary cancer in many centres.",
+   "say": "Risk models are based on family history with gene and lifestyle factors in these families. Lifestyle modification is a reducer of risk in mutation carriers in many studies globally. Endocrine risk reduction is an alternative to surgery in many carriers. Counselling must be non directive in every family with hereditary cancer in many centres.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** tops off the hereditary summary below. Remember BRCA1 and BRCA2 for breast ovarian risk, Lynch syndrome for colorectal endometrial risk and Cowden syndrome with PTEN gene. Risk reducing mastectomy lowers breast risk while colonoscopy every 2 years screens Lynch carriers. Aspirin prophylaxis benefits Lynch families in many studies.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. BRCA one and two are the genes for breast and ovarian risk clearly. Lynch syndrome is the syndrome for colorectal and endometrial risk. Colonoscopy every two years is the screening for Lynch carriers. Aspirin prophylaxis is of benefit for Lynch families in many studies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "BRCA genes",
+      "BRCA1 and BRCA2 confer breast ovarian risk"
+     ],
+     [
+      "Lynch risk",
+      "Colorectal and endometrial cancers"
+     ],
+     [
+      "Cowden gene",
+      "PTEN is the Cowden syndrome gene"
+     ],
+     [
+      "Risk reducing surgery",
+      "Mastectomy lowers breast risk greatly"
+     ],
+     [
+      "Lynch screening",
+      "Colonoscopy every two years"
+     ],
+     [
+      "Lynch prevention",
+      "Aspirin prophylaxis benefits carriers"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -12,11 +12,29 @@
     "kind": "flow",
     "title": "The three regulated steps",
     "nodes": [
-     {"id": "hk", "label": "Hexokinase or glucokinase"},
-     {"id": "pfk", "label": "PFK-1 committed step"},
-     {"id": "pk", "label": "Pyruvate kinase exit step"}
+     {
+      "id": "hk",
+      "label": "Hexokinase or glucokinase"
+     },
+     {
+      "id": "pfk",
+      "label": "PFK-1 committed step"
+     },
+     {
+      "id": "pk",
+      "label": "Pyruvate kinase exit step"
+     }
     ],
-    "edges": [["hk", "pfk"], ["pfk", "pk"]]
+    "edges": [
+     [
+      "hk",
+      "pfk"
+     ],
+     [
+      "pfk",
+      "pk"
+     ]
+    ]
    }
   },
   {
@@ -24,13 +42,37 @@
    "say": "Energy shortage switches the enzyme on through AMP and ADP, which signal that ATP is being spent too fast. Abundance switches it off through ATP itself and through citrate from a well fed citric acid cycle. Falling pH also inhibits it, which slows lactate production when tissue is already acidic.",
    "vis": {
     "kind": "table",
-    "cols": ["Signal", "Effect on PFK-1", "What it reports"],
+    "cols": [
+     "Signal",
+     "Effect on PFK-1",
+     "What it reports"
+    ],
     "rows": [
-     ["AMP and ADP rise", "Strong activation", "ATP spent, energy short"],
-     ["Fructose-2,6-bisphosphate", "Strongest activation", "Fed signal from insulin in liver"],
-     ["ATP high", "Inhibition", "Energy plentiful"],
-     ["Citrate high", "Inhibition", "TCA cycle fed, spare glucose"],
-     ["Low pH", "Inhibition", "Lactate already high"]
+     [
+      "AMP and ADP rise",
+      "Strong activation",
+      "ATP spent, energy short"
+     ],
+     [
+      "Fructose-2,6-bisphosphate",
+      "Strongest activation",
+      "Fed signal from insulin in liver"
+     ],
+     [
+      "ATP high",
+      "Inhibition",
+      "Energy plentiful"
+     ],
+     [
+      "Citrate high",
+      "Inhibition",
+      "TCA cycle fed, spare glucose"
+     ],
+     [
+      "Low pH",
+      "Inhibition",
+      "Lactate already high"
+     ]
     ]
    }
   },
@@ -39,8 +81,23 @@
    "say": "The strongest activator is fructose-2,6-bisphosphate, made by a bifunctional enzyme that both builds and destroys it. When insulin dephosphorylates the liver form, its kinase half dominates and the activator floods phosphofructokinase-one. When glucagon phosphorylates it, the phosphatase half dominates and glycolysis yields to glucose production.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Fed liver (insulin high)", "points": ["Bifunctional enzyme dephosphorylated", "Kinase half makes fructose-2,6-BP", "PFK-1 on, glycolysis runs", "F-1,6-bisphosphatase off"]},
-    "right": {"title": "Fasting liver (glucagon high)", "points": ["Bifunctional enzyme phosphorylated", "Phosphatase half destroys the activator", "PFK-1 off, glycolysis rests", "Gluconeogenesis allowed to run"]
+    "left": {
+     "title": "Fed liver (insulin high)",
+     "points": [
+      "Bifunctional enzyme dephosphorylated",
+      "Kinase half makes fructose-2,6-BP",
+      "PFK-1 on, glycolysis runs",
+      "F-1,6-bisphosphatase off"
+     ]
+    },
+    "right": {
+     "title": "Fasting liver (glucagon high)",
+     "points": [
+      "Bifunctional enzyme phosphorylated",
+      "Phosphatase half destroys the activator",
+      "PFK-1 off, glycolysis rests",
+      "Gluconeogenesis allowed to run"
+     ]
     }
    }
   },
@@ -54,11 +111,27 @@
    "say": "Fructose-1,6-bisphosphate feed forward activates pyruvate kinase, so the exit opens only after the committed step has run. That coupling prevents intermediates from pooling uselessly. Liver pyruvate kinase is also switched off by glucagon and by alanine from muscle, sparing carbon for glucose rebuilding during a fast.",
    "vis": {
     "kind": "table",
-    "cols": ["Regulator", "Pyruvate kinase effect", "Physiological logic"],
+    "cols": [
+     "Regulator",
+     "Pyruvate kinase effect",
+     "Physiological logic"
+    ],
     "rows": [
-     ["Fructose-1,6-bisphosphate", "Activates", "Exit follows commitment"],
-     ["ATP and alanine", "Inhibit", "Energy and substrate plentiful"],
-     ["Glucagon (liver only)", "Phosphorylates off", "Fasting liver exports glucose"]
+     [
+      "Fructose-1,6-bisphosphate",
+      "Activates",
+      "Exit follows commitment"
+     ],
+     [
+      "ATP and alanine",
+      "Inhibit",
+      "Energy and substrate plentiful"
+     ],
+     [
+      "Glucagon (liver only)",
+      "Phosphorylates off",
+      "Fasting liver exports glucose"
+     ]
     ]
    }
   },
@@ -67,9 +140,67 @@
    "say": "Fructose-1,6-bisphosphatase, the gluconeogenesis bypass, answers the same signals in opposite directions. Fructose-2,6-bisphosphate and AMP inhibit it while citrate activates it. The liver therefore never runs glycolysis and gluconeogenesis hard together, which would waste ATP as heat in a futile cycle.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Glycolysis forward (PFK-1)", "points": ["On with AMP and F-2,6-BP", "Off with ATP and citrate", "Dominates after meals"]},
-    "right": {"title": "Gluconeogenesis bypass (F-1,6-BPase)", "points": ["Off with AMP and F-2,6-BP", "On with citrate", "Dominates during fasting"]
+    "left": {
+     "title": "Glycolysis forward (PFK-1)",
+     "points": [
+      "On with AMP and F-2,6-BP",
+      "Off with ATP and citrate",
+      "Dominates after meals"
+     ]
+    },
+    "right": {
+     "title": "Gluconeogenesis bypass (F-1,6-BPase)",
+     "points": [
+      "Off with AMP and F-2,6-BP",
+      "On with citrate",
+      "Dominates during fasting"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Phosphofructokinase-1 is the committed and rate limiting step of glycolysis. Fructose-2,6-bisphosphate is its strongest activator. AMP and ADP activate it, while ATP, citrate and low pH inhibit it. In liver, insulin raises fructose-2,6-bisphosphate and glucagon lowers it. Fructose-1,6-bisphosphate feed forward activates pyruvate kinase. The same signals reciprocally inhibit fructose-1,6-bisphosphatase, preventing a futile cycle.",
+   "say": "High-yield for the exam. Phosphofructokinase one is the committed and rate limiting step of glycolysis. Fructose two six bisphosphate is its strongest activator. Adenosine monophosphate and adenosine diphosphate activate it, while adenosine triphosphate, citrate and low acidity inhibit it. In liver, insulin raises fructose two six bisphosphate and glucagon lowers it. Fructose one six bisphosphate feed forward activates pyruvate kinase. The same signals reciprocally inhibit fructose one six bisphosphatase, preventing a futile cycle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "PFK-1 reaction",
+      "Fructose-6-phosphate to fructose-1,6-bisphosphate, uses ATP"
+     ],
+     [
+      "Strongest activator",
+      "Fructose-2,6-bisphosphate activates PFK-1"
+     ],
+     [
+      "Energy shortage signal",
+      "AMP and ADP activate PFK-1"
+     ],
+     [
+      "Abundance signals",
+      "ATP and citrate inhibit PFK-1"
+     ],
+     [
+      "Acidosis effect",
+      "Low pH inhibits PFK-1"
+     ],
+     [
+      "Insulin in liver",
+      "Dephosphorylates bifunctional enzyme, raises activator"
+     ],
+     [
+      "Glucagon in liver",
+      "Phosphorylates bifunctional enzyme, destroys activator"
+     ],
+     [
+      "Heart isoform trap",
+      "Adrenaline raises fructose-2,6-bisphosphate in heart"
+     ]
+    ]
    }
   }
  ],

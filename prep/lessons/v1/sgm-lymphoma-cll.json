@@ -1,0 +1,264 @@
+{
+ "v": 1,
+ "module": "sgm-lymphoma-cll",
+ "subject": "ss-general-medicine",
+ "title": "Lymphomas and chronic lymphoproliferative disorders",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Hodgkin lymphoma** is a Reed Sternberg cell malignancy with mixed inflammation. **Non Hodgkin lymphoma** includes diffuse large B cell as the commonest aggressive type. **Chronic lymphocytic leukaemia** is the commonest adult leukaemia with blood involvement. Tissue biopsy with immunophenotyping confirms the exact subtype in every case.",
+   "say": "Hodgkin lymphoma is a Reed Sternberg cell malignancy with mixed inflammation. Non Hodgkin lymphoma comprises diffuse large B cell as the commonest aggressive type. Chronic lymphocytic leukaemia is the commonest adult leukaemia with blood involvement. Tissue biopsy with immunophenotyping is required to confirm the exact subtype in every case.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hodgkin lymphoma",
+     "points": [
+      "Reed Sternberg cells present",
+      "Young adults commonly affected",
+      "B symptoms are frequent",
+      "High cure rates with therapy"
+     ]
+    },
+    "right": {
+     "title": "Non Hodgkin lymphoma",
+     "points": [
+      "Older adults commonly affected",
+      "Diffuse large B cell is common",
+      "Extranodal disease is frequent",
+      "Subtype drives therapy choice"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**ABVD** regimen cures most Hodgkin patients with classic disease patterns. **Brentuximab vedotin** is an antibody drug conjugate active in Hodgkin lymphoma widely. **Nivolumab** and **pembrolizumab** checkpoint inhibitors salvage relapsed Hodgkin disease in many patients. **Rituximab** transformed B cell lymphoma outcomes dramatically over decades.",
+   "say": "ABVD regimen is the curative backbone for most Hodgkin patients with classic disease. Brentuximab vedotin is an antibody drug conjugate active in Hodgkin lymphoma. Nivolumab and pembrolizumab checkpoint inhibitors are options for relapsed Hodgkin disease in many patients. Rituximab transformed B cell lymphoma outcomes dramatically over decades.",
+   "vis": null
+  },
+  {
+   "tx": "**R-CHOP** combining rituximab, **cyclophosphamide**, doxorubicin, **vincristine** and **prednisone** is the DLBCL backbone. **Polatuzumab** vedotin replaces vincristine in some newer DLBCL regimens globally. **Bendamustine** with rituximab suits indolent follicular lymphoma in older patients. **Cytarabine** based therapy serves mantle cell disease in younger patients.",
+   "say": "R-CHOP is the DLBCL backbone combining rituximab, cyclophosphamide, doxorubicin, vincristine and prednisone. Polatuzumab vedotin is a replacement for vincristine in some newer DLBCL regimens globally. Bendamustine with rituximab is an option for indolent follicular lymphoma in older patients. Cytarabine based therapy is standard for mantle cell disease in younger patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Backbone",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Diffuse large B cell",
+      "R-CHOP",
+      "Most common aggressive type"
+     ],
+     [
+      "Follicular lymphoma",
+      "Rituximab bendamustine",
+      "Indolent course usual"
+     ],
+     [
+      "Mantle cell",
+      "Cytarabine based",
+      "Aggressive biology common"
+     ],
+     [
+      "Hodgkin lymphoma",
+      "ABVD",
+      "Reed Sternberg disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic lymphocytic leukaemia** presents with lymphocytosis and smudge cells on film. **Ibrutinib** and **zanubrutinib** are BTK inhibitors that transformed CLL therapy. **Venetoclax** with obinutuzumab is the preferred fixed duration chemo free option. **Acalabrutinib** and **pirtobrutinib** extend options for relapsed disease in many patients.",
+   "say": "Chronic lymphocytic leukaemia presents with lymphocytosis and smudge cells on film. Ibrutinib and zanubrutinib are BTK inhibitors that transformed CLL therapy. Venetoclax with obinutuzumab is the preferred fixed duration chemo free option. Acalabrutinib and pirtobrutinib extend options for relapsed disease in many patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "BTK inhibitors",
+     "points": [
+      "Ibrutinib and zanubrutinib",
+      "Acalabrutinib also active",
+      "Continuous oral therapy",
+      "AF and bleeding need watch"
+     ]
+    },
+    "right": {
+     "title": "Venetoclax based",
+     "points": [
+      "Venetoclax with obinutuzumab",
+      "Fixed duration 1 year",
+      "Tumour lysis prophylaxis needed",
+      "Preferred for many patients"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**PET CT** is the staging gold standard for Hodgkin and aggressive lymphoma. **Bone marrow** biopsy retains value in indolent lymphoma staging decisions today. **Lumbar puncture** screens CNS involvement in high risk DLBCL presentations. Ann Arbor staging guides radiation decisions in early Hodgkin disease.",
+   "say": "PET CT is the staging gold standard for Hodgkin and aggressive lymphoma. Bone marrow biopsy retains value in indolent lymphoma staging decisions today. Lumbar puncture is advised for CNS involvement in high risk DLBCL presentations. Ann Arbor staging guides radiation decisions in early Hodgkin disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Biopsy subtype"
+     },
+     {
+      "id": "b",
+      "label": "PET CT staging"
+     },
+     {
+      "id": "c",
+      "label": "Marrow if indicated"
+     },
+     {
+      "id": "d",
+      "label": "CNS assessment if high risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Axicabtagene ciloleucel** is CAR T therapy for relapsed DLBCL in eligible patients. **Brentuximab vedotin** serves relapsed Hodgkin and anaplastic large cell lymphoma. **Lenalidomide** is an immunomodulatory option in relapsed indolent lymphoma in many protocols. **Gemcitabine** based salvage suits transplant eligible relapsed disease before collection.",
+   "say": "Axicabtagene ciloleucel is CAR T therapy for relapsed DLBCL in eligible patients. Brentuximab vedotin serves relapsed Hodgkin and anaplastic large cell lymphoma. Lenalidomide is an immunomodulatory option in relapsed indolent lymphoma in many protocols. Gemcitabine based salvage suits transplant eligible relapsed disease before collection.",
+   "vis": null
+  },
+  {
+   "tx": "**Burkitt lymphoma** is the fastest growing human tumour with a starry sky pattern. **BCL-6** rearrangement is the genetic hallmark of Burkitt disease in most cases. Short intensive chemotherapy with rituximab is the standard curative approach today. **Tumour lysis** prophylaxis is mandatory during initial therapy for Burkitt lymphoma.",
+   "say": "Burkitt lymphoma is the fastest growing human tumour with a starry sky pattern. BCL six rearrangement is the genetic hallmark of Burkitt disease in most cases. Short intensive chemotherapy with rituximab is the standard curative approach today. Tumour lysis prophylaxis is mandatory during initial therapy for Burkitt lymphoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Hallmark",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Burkitt lymphoma",
+      "Starry sky, MYC rearranged",
+      "Short intensive therapy"
+     ],
+     [
+      "Diffuse large B cell",
+      "Large blasts, BCL-6 common",
+      "R-CHOP backbone"
+     ],
+     [
+      "Follicular lymphoma",
+      "Tangled follicles",
+      "Watch or rituximab based"
+     ],
+     [
+      "Mantle cell",
+      "Cyclin D1 positive",
+      "Cytarabine based therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Watch and wait** suits asymptomatic indolent lymphoma without organ threat in many cases. **Autoimmune cytopenias** complicate CLL and respond to steroids and futher therapy. ** Richter transformation** is the aggressive lymphoma switch that changes management urgently. **Infection** risk stays high because CLL itself impairs immune function severely.",
+   "say": "Watch and wait is appropriate for asymptomatic indolent lymphoma without organ threat in many cases. Autoimmune cytopenias are a complication of CLL and respond to steroids and further therapy. Richter transformation is the aggressive lymphoma switch that requires urgent change of management. Infection risk remains high because CLL itself impairs immune function severely.",
+   "vis": null
+  },
+  {
+   "tx": "**Early Hodgkin disease** with favourable features receives combined chemoradiation in most centres. **Interim PET** after 2 cycles predicts outcome in Hodgkin lymphoma reliably. **Deauville** scoring standardises PET response assessment across trials globally. Undetectable disease after therapy defines complete metabolic response for management.",
+   "say": "Early Hodgkin disease with favourable features is treated with combined chemoradiation in most centres. Interim PET after two cycles is predictive of outcome in Hodgkin lymphoma reliably. Deauville scoring standardises PET response assessment across trials globally. Undetectable disease after therapy is the complete metabolic response for management.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diagnosis and stage"
+     },
+     {
+      "id": "b",
+      "label": "Two cycles ABVD"
+     },
+     {
+      "id": "c",
+      "label": "Interim PET check"
+     },
+     {
+      "id": "d",
+      "label": "RT if PET positive"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mantle cell** carries t(11;14) with cyclin D1 excess in most patients. **BCL-2** overexpression is universal in CLL cells and targeted by venetoclax. **Anthracycline** based therapy remains central for aggressive B cell disease management today. **Cyclophosphamide** appears in nearly every lymphoma backbone regimen used globally.",
+   "say": "Mantle cell carries t eleven fourteen with cyclin D one excess in most patients. BCL two overexpression is universal in CLL cells and is targeted by venetoclax. Anthracycline based therapy remains central for aggressive B cell disease management today. Cyclophosphamide appears in nearly every lymphoma backbone regimen used globally.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** ends the lymphoma summary clearly. Remember Reed Sternberg cells for Hodgkin lymphoma, ABVD as its backbone and R-CHOP for diffuse large B cell disease. BTK inhibitors and venetoclax transformed CLL care while PET CT stages aggressive lymphoma. Starry sky histology flags Burkitt lymphoma with MYC rearrangement.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Reed Sternberg cells are the hallmark of Hodgkin lymphoma clearly. ABVD is the backbone regimen for Hodgkin disease. R-CHOP is the backbone regimen for diffuse large B cell disease. PET CT is the staging gold standard for aggressive lymphoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Hodgkin hallmark",
+      "Reed Sternberg cells define the disease"
+     ],
+     [
+      "Hodgkin regimen",
+      "ABVD cures most Hodgkin patients"
+     ],
+     [
+      "DLBCL regimen",
+      "R-CHOP remains the backbone therapy"
+     ],
+     [
+      "CLL therapy",
+      "BTK inhibitors and venetoclax transformed care"
+     ],
+     [
+      "Staging gold standard",
+      "PET CT for aggressive lymphoma staging"
+     ],
+     [
+      "Burkitt clue",
+      "Starry sky with MYC rearrangement"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

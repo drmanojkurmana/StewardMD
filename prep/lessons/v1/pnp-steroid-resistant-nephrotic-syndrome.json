@@ -9,7 +9,7 @@
   "steps": [
     {
       "say": "Steroid resistance in nephrotic children is formally diagnosed when daily prednisolone fails to induce remission after four to six weeks.",
-      "tx": "Apply the standardized **Steroid resistance operational definition** when assessing children with inadequate treatment response. Steroid resistance (SRNS) is defined as the persistence of nephrotic-range proteinuria despite four to six weeks of daily oral prednisolone at sixty milligrams per square meter per day (60 mg/m\u00b2/day, maximum 60 mg/day). Clinicians distinguish initial resistance (presenting from disease onset) from late resistance occurring in children who previously experienced documented steroid sensitivity.",
+      "tx": "Apply the standardized **Steroid resistance operational definition** when assessing children with inadequate treatment response. Steroid resistance (SRNS) is defined as the persistence of nephrotic-range proteinuria despite four to six weeks of daily oral prednisolone at sixty milligrams per square meter per day (60 mg/m²/day, maximum 60 mg/day). Clinicians distinguish initial resistance (presenting from disease onset) from late resistance occurring in children who previously experienced documented steroid sensitivity.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -19,7 +19,7 @@
           },
           {
             "id": "pred",
-            "label": "Oral Prednisolone 60 mg/m\u00b2/day x 4-6 weeks"
+            "label": "Oral Prednisolone 60 mg/m²/day x 4-6 weeks"
           },
           {
             "id": "eval",
@@ -223,6 +223,51 @@
             "Anti-fibrotic signaling",
             "Attenuates interstitial fibrosis",
             "Blood pressure (avoid hypotension)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Steroid-resistant nephrotic syndrome means proteinuria persists after four to six weeks of prednisolone at 60 mg/m2/day, maximum 60 mg/day. Up to thirty percent is monogenic, including NPHS1, NPHS2, and WT1, and those children should leave immunosuppression. Non-genetic disease often remits on tacrolimus with a trough of 5-8 ng/mL. Idiopathic FSGS can recur within forty-eight hours after transplant from a circulating permeability factor.",
+      "say": "High-yield for the exam: Steroid-resistant nephrotic syndrome means proteinuria persists after four to six weeks of prednisolone at 60 mg/m2/day, maximum 60 mg/day. Up to thirty percent is monogenic, including NPHS1, NPHS2, and WT1, and those children should leave immunosuppression. Non-genetic disease often remits on tacrolimus with a trough of 5-8 ng/mL. Idiopathic FSGS can recur within forty-eight hours after transplant from a circulating permeability factor.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Resistance definition",
+            "No remission after four to six weeks"
+          ],
+          [
+            "Prednisolone dose",
+            "60 mg/m2/day, max 60 mg"
+          ],
+          [
+            "Biopsy triggers",
+            "Under one year or over twelve"
+          ],
+          [
+            "Monogenic share",
+            "Up to thirty percent of SRNS"
+          ],
+          [
+            "Key genes",
+            "NPHS1, NPHS2, and WT1"
+          ],
+          [
+            "Genetic treatment",
+            "Stop futile immunosuppression"
+          ],
+          [
+            "Tacrolimus trough",
+            "Aim for 5-8 ng/mL"
+          ],
+          [
+            "Allograft recurrence",
+            "Often within forty-eight hours"
           ]
         ]
       }

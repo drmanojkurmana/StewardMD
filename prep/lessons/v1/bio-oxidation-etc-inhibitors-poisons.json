@@ -10,13 +10,37 @@
    "say": "Rotenone blocks complex one, antimycin complex three, cyanide complex four, oligomycin the synthase, and uncouplers the gradient itself. Site first predicts carrier patterns before antidotes in poisoning stems accurately.",
    "vis": {
     "kind": "table",
-    "cols": ["Blocker", "Site", "Oxygen use after block"],
+    "cols": [
+     "Blocker",
+     "Site",
+     "Oxygen use after block"
+    ],
     "rows": [
-     ["Rotenone, amobarbital", "Complex I", "Restored partly by succinate (complex II entry)"],
-     ["Antimycin A", "Complex III", "Stalled; downstream starved"],
-     ["Cyanide, CO, azide", "Complex IV", "Stalled; tissues cannot extract oxygen"],
-     ["Oligomycin", "ATP synthase", "Stalled secondarily; uncoupler restores use without ATP"],
-     ["Dinitrophenol, UCP1 (physiological)", "Gradient leak", "Maximal; heat replaces ATP"]
+     [
+      "Rotenone, amobarbital",
+      "Complex I",
+      "Restored partly by succinate (complex II entry)"
+     ],
+     [
+      "Antimycin A",
+      "Complex III",
+      "Stalled; downstream starved"
+     ],
+     [
+      "Cyanide, CO, azide",
+      "Complex IV",
+      "Stalled; tissues cannot extract oxygen"
+     ],
+     [
+      "Oligomycin",
+      "ATP synthase",
+      "Stalled secondarily; uncoupler restores use without ATP"
+     ],
+     [
+      "Dinitrophenol, UCP1 (physiological)",
+      "Gradient leak",
+      "Maximal; heat replaces ATP"
+     ]
     ]
    }
   },
@@ -25,8 +49,21 @@
    "say": "Cyanide halts oxygen extraction despite normal PaO2 with scarlet venous blood and severe lactic acidosis. Hydroxocobalamin is first line, thiosulfate donates sulfur, and nitrites endanger carbon monoxide co-exposure cases.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Hydroxocobalamin route (preferred in smoke)", "points": ["Binds cyanide directly", "No methaemoglobin cost", "Red urine, assay interference warns lab"]},
-    "right": {"title": "Nitrite route (caution)", "points": ["Methaemoglobin baits cyanide off oxidase", "Worsens CO carriage and hypoxia", "Follow with thiosulfate sulfur donation"]
+    "left": {
+     "title": "Hydroxocobalamin route (preferred in smoke)",
+     "points": [
+      "Binds cyanide directly",
+      "No methaemoglobin cost",
+      "Red urine, assay interference warns lab"
+     ]
+    },
+    "right": {
+     "title": "Nitrite route (caution)",
+     "points": [
+      "Methaemoglobin baits cyanide off oxidase",
+      "Worsens CO carriage and hypoxia",
+      "Follow with thiosulfate sulfur donation"
+     ]
     }
    }
   },
@@ -40,12 +77,32 @@
    "say": "Metformin weakly inhibits complex one until kidney failure accumulates drug and lactate together for dialysis consideration. Salicylate uncouples with mixed acid base chaos completing toxic differentials across wards.",
    "vis": {
     "kind": "table",
-    "cols": ["Poison pattern", "Chain or gradient lesion", "Bedside flag"],
+    "cols": [
+     "Poison pattern",
+     "Chain or gradient lesion",
+     "Bedside flag"
+    ],
     "rows": [
-     ["Cyanide", "Complex IV locked, extraction zero", "Scarlet veins, lactate extreme, PaO2 normal"],
-     ["Carbon monoxide", "Haemoglobin plus complex IV", "Co-oximetry carboxyhaemoglobin; oximeter lies"],
-     ["Metformin accumulation", "Weak complex I, clearance failed", "Lactate with AKI and sepsis; dialysis threshold"],
-     ["Salicylate (aspirin overdose)", "Uncoupler plus respiratory centre drive", "Alkalosis plus gap acidosis, fever, tinnitus"]
+     [
+      "Cyanide",
+      "Complex IV locked, extraction zero",
+      "Scarlet veins, lactate extreme, PaO2 normal"
+     ],
+     [
+      "Carbon monoxide",
+      "Haemoglobin plus complex IV",
+      "Co-oximetry carboxyhaemoglobin; oximeter lies"
+     ],
+     [
+      "Metformin accumulation",
+      "Weak complex I, clearance failed",
+      "Lactate with AKI and sepsis; dialysis threshold"
+     ],
+     [
+      "Salicylate (aspirin overdose)",
+      "Uncoupler plus respiratory centre drive",
+      "Alkalosis plus gap acidosis, fever, tinnitus"
+     ]
     ]
    }
   },
@@ -54,8 +111,21 @@
    "say": "Leber optic neuropathy, Leigh, MELAS and Kearns-Sayre present by energy hungry organs with maternal heteroplasmy grading severity. Heart block pacing and stroke like episode recognition save function and life.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "LHON (complex I mtDNA)", "points": ["Young men, sequential painless central blindness", "Maternal inheritance", "Avoid smoking and excess alcohol"]},
-    "right": {"title": "MELAS (tRNA mtDNA)", "points": ["Stroke like episodes, seizures, lactate", "Diabetes and deafness cluster", "MRI crosses vascular territories"]
+    "left": {
+     "title": "LHON (complex I mtDNA)",
+     "points": [
+      "Young men, sequential painless central blindness",
+      "Maternal inheritance",
+      "Avoid smoking and excess alcohol"
+     ]
+    },
+    "right": {
+     "title": "MELAS (tRNA mtDNA)",
+     "points": [
+      "Stroke like episodes, seizures, lactate",
+      "Diabetes and deafness cluster",
+      "MRI crosses vascular territories"
+     ]
     }
    }
   },
@@ -66,12 +136,82 @@
     "kind": "flow",
     "title": "Mitochondrial red flag cluster",
     "nodes": [
-     {"id": "eye", "label": "Ptosis, ophthalmoplegia, retinitis, optic atrophy"},
-     {"id": "sys", "label": "Diabetes, deafness, heart block, short stature"},
-     {"id": "lac", "label": "Lactate rises early with exercise"},
-     {"id": "mat", "label": "Maternal pattern: test mtDNA (urine if blood negative)"}
+     {
+      "id": "eye",
+      "label": "Ptosis, ophthalmoplegia, retinitis, optic atrophy"
+     },
+     {
+      "id": "sys",
+      "label": "Diabetes, deafness, heart block, short stature"
+     },
+     {
+      "id": "lac",
+      "label": "Lactate rises early with exercise"
+     },
+     {
+      "id": "mat",
+      "label": "Maternal pattern: test mtDNA (urine if blood negative)"
+     }
     ],
-    "edges": [["eye", "sys"], ["sys", "lac"], ["lac", "mat"]]
+    "edges": [
+     [
+      "eye",
+      "sys"
+     ],
+     [
+      "sys",
+      "lac"
+     ],
+     [
+      "lac",
+      "mat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Rotenone blocks complex I, antimycin A blocks complex III, and cyanide or carbon monoxide block complex IV, while oligomycin blocks ATP synthase and uncouplers maximise respiration without ATP. Cyanide gives severe lactic acidosis and scarlet venous blood, treated first line with hydroxocobalamin. Carbon monoxide needs co-oximetry because pulse oximetry lies, and 100 percent oxygen shortens its elimination half life markedly.",
+   "say": "High-yield for the exam. Rotenone blocks complex one, antimycin A blocks complex three, and cyanide or carbon monoxide block complex four, while oligomycin blocks A T P synthase and uncouplers maximise respiration without A T P. Cyanide gives severe lactic acidosis and scarlet venous blood, treated first line with hydroxocobalamin. Carbon monoxide needs co oximetry because pulse oximetry lies, and one hundred percent oxygen shortens its elimination half life markedly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rotenone site",
+      "Complex I blocked, succinate bypasses"
+     ],
+     [
+      "Antimycin A site",
+      "Complex III blocked"
+     ],
+     [
+      "Cyanide target",
+      "Ferric cytochrome a3 in complex IV"
+     ],
+     [
+      "Cyanide first line antidote",
+      "Hydroxocobalamin binds cyanide safely"
+     ],
+     [
+      "Nitrite antidote trap",
+      "Methaemoglobin danger in carbon monoxide poisoning"
+     ],
+     [
+      "Carbon monoxide test",
+      "Co-oximetry, pulse oximetry lies"
+     ],
+     [
+      "Carbon monoxide treatment",
+      "100 percent oxygen by non-rebreather"
+     ],
+     [
+      "Metformin lactic acidosis",
+      "Complex I inhibition plus accumulation"
+     ]
+    ]
    }
   }
  ],

@@ -10,12 +10,32 @@
    "say": "Tryptophan hydroxylase limits serotonin synthesis in gut and brain isoforms. Ninety percent resides in gut, platelets carry what they cannot make, and raphe neurons supply mood and sleep circuits.",
    "vis": {
     "kind": "table",
-    "cols": ["Serotonin pool", "Share and job", "Drug lever"],
+    "cols": [
+     "Serotonin pool",
+     "Share and job",
+     "Drug lever"
+    ],
     "rows": [
-     ["Gut enterochromaffin", "About 90 percent, motility and nausea", "Ondansetron (5-HT3) antiemetic"],
-     ["Platelets (carried)", "Clot amplification delivery", "SSRIs deplete platelet serotonin, bleeding nuance"],
-     ["Raphe brain neurons", "Mood, sleep, appetite", "SSRIs, triptans (5-HT1) in migraine"],
-     ["Pineal (evening)", "Melatonin precursor", "Light suppresses, darkness releases"]
+     [
+      "Gut enterochromaffin",
+      "About 90 percent, motility and nausea",
+      "Ondansetron (5-HT3) antiemetic"
+     ],
+     [
+      "Platelets (carried)",
+      "Clot amplification delivery",
+      "SSRIs deplete platelet serotonin, bleeding nuance"
+     ],
+     [
+      "Raphe brain neurons",
+      "Mood, sleep, appetite",
+      "SSRIs, triptans (5-HT1) in migraine"
+     ],
+     [
+      "Pineal (evening)",
+      "Melatonin precursor",
+      "Light suppresses, darkness releases"
+     ]
     ]
    }
   },
@@ -26,12 +46,37 @@
     "kind": "flow",
     "title": "Night signal assembly",
     "nodes": [
-     {"id": "dark", "label": "Darkness: clock permits signal"},
-     {"id": "na", "label": "Noradrenaline to pineal"},
-     {"id": "ac", "label": "Serotonin acetylated"},
-     {"id": "mel", "label": "Melatonin secreted (SAM methyl)"}
+     {
+      "id": "dark",
+      "label": "Darkness: clock permits signal"
+     },
+     {
+      "id": "na",
+      "label": "Noradrenaline to pineal"
+     },
+     {
+      "id": "ac",
+      "label": "Serotonin acetylated"
+     },
+     {
+      "id": "mel",
+      "label": "Melatonin secreted (SAM methyl)"
+     }
     ],
-    "edges": [["dark", "na"], ["na", "ac"], ["ac", "mel"]]
+    "edges": [
+     [
+      "dark",
+      "na"
+     ],
+     [
+      "na",
+      "ac"
+     ],
+     [
+      "ac",
+      "mel"
+     ]
+    ]
    }
   },
   {
@@ -39,8 +84,21 @@
    "say": "Breakdown yields urinary 5-HIAA. Midgut tumours with liver metastases flood systemic serotonin past first pass destruction, while gut primaries without liver spread stay silent anatomically.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Silent carcinoid", "points": ["Gut primary, no liver deposits", "Portal MAO destroys serotonin", "Found incidentally or obstructs"]},
-    "right": {"title": "Carcinoid syndrome", "points": ["Liver deposits or systemic primary", "Flushing, diarrhoea, wheeze", "Urine 5-HIAA high"]
+    "left": {
+     "title": "Silent carcinoid",
+     "points": [
+      "Gut primary, no liver deposits",
+      "Portal MAO destroys serotonin",
+      "Found incidentally or obstructs"
+     ]
+    },
+    "right": {
+     "title": "Carcinoid syndrome",
+     "points": [
+      "Liver deposits or systemic primary",
+      "Flushing, diarrhoea, wheeze",
+      "Urine 5-HIAA high"
+     ]
     }
    }
   },
@@ -49,12 +107,27 @@
    "say": "Flushing, diarrhoea, bronchospasm and right sided cardiac fibrosis map to mediators, because lung oxidase protects the left heart. Pellagra can supervene as tryptophan diverts from niacin synthesis.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Mediator logic"],
+    "cols": [
+     "Feature",
+     "Mediator logic"
+    ],
     "rows": [
-     ["Flushing episodes", "Tachykinins, histamine, serotonin mix"],
-     ["Secretory diarrhoea", "Serotonin gut drive"],
-     ["Right valve fibrosis", "Serotonin reaches right heart, lung clears rest"],
-     ["Pellagra in high output", "Tryptophan stolen from niacin (60 to 1)"]
+     [
+      "Flushing episodes",
+      "Tachykinins, histamine, serotonin mix"
+     ],
+     [
+      "Secretory diarrhoea",
+      "Serotonin gut drive"
+     ],
+     [
+      "Right valve fibrosis",
+      "Serotonin reaches right heart, lung clears rest"
+     ],
+     [
+      "Pellagra in high output",
+      "Tryptophan stolen from niacin (60 to 1)"
+     ]
     ]
    }
   },
@@ -68,9 +141,67 @@
    "say": "Serotonin syndrome gives clonus and hyperreflexia, distinguished from neuroleptic malignant syndrome by reflexes and bowel activity. Stop serotonergic drugs, cool, and use benzodiazepines with cyproheptadine.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Serotonin syndrome", "points": ["Clonus, hyperreflexia", "Diarrhoea, agitation, fast onset", "Stop serotonergics, cyproheptadine"]},
-    "right": {"title": "Neuroleptic malignant syndrome", "points": ["Lead pipe rigidity, bradyreflexia", "Slow onset after dopamine blockade", "Dantrolene/bromocriptine pathways"]
+    "left": {
+     "title": "Serotonin syndrome",
+     "points": [
+      "Clonus, hyperreflexia",
+      "Diarrhoea, agitation, fast onset",
+      "Stop serotonergics, cyproheptadine"
+     ]
+    },
+    "right": {
+     "title": "Neuroleptic malignant syndrome",
+     "points": [
+      "Lead pipe rigidity, bradyreflexia",
+      "Slow onset after dopamine blockade",
+      "Dantrolene/bromocriptine pathways"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Tryptophan hydroxylase is rate limiting for serotonin synthesis, and monoamine oxidase A breaks serotonin down to urinary 5-HIAA. Midgut carcinoid causes systemic syndrome only after liver metastases bypass first pass clearance. Carcinoid heart disease affects the right heart first. Octreotide cover prevents carcinoid crisis during anaesthesia in high risk patients.",
+   "say": "High-yield for the exam. Tryptophan hydroxylase is rate limiting for serotonin synthesis, and monoamine oxidase A breaks serotonin down to urinary five HIAA. Midgut carcinoid causes systemic syndrome only after liver metastases bypass first pass clearance. Carcinoid heart disease affects the right heart first. Octreotide cover prevents carcinoid crisis during anaesthesia in high risk patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Rate limiting serotonin step",
+      "Tryptophan hydroxylase, needs BH4"
+     ],
+     [
+      "Urinary serotonin metabolite",
+      "5-HIAA raised in carcinoid"
+     ],
+     [
+      "Carcinoid silent without spread",
+      "Portal serotonin destroyed first pass"
+     ],
+     [
+      "Carcinoid heart valves",
+      "Right sided fibrosis, lung protects left"
+     ],
+     [
+      "Melatonin synthesis",
+      "Darkness gated, pineal, from serotonin"
+     ],
+     [
+      "Serotonin syndrome hallmark",
+      "Clonus and hyperreflexia"
+     ],
+     [
+      "NMS contrast",
+      "Lead pipe rigidity and bradyreflexia"
+     ],
+     [
+      "Niacin conversion",
+      "About 60 mg tryptophan equals 1 mg niacin"
+     ]
+    ]
    }
   }
  ],

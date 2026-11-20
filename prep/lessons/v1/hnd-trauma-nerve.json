@@ -1,0 +1,338 @@
+{
+  "v": 1,
+  "module": "hnd-trauma-nerve",
+  "subject": "ss-hand-surgery",
+  "title": "Hand trauma and nerve repair: fractures, tendons and replantation",
+  "minutes": 8,
+  "gen": "hand",
+  "quiz": [],
+  "refs": [
+    "Plastic Surgery 5th edition 2024"
+  ],
+  "steps": [
+    {
+      "tx": "**Hand trauma** covers fractures, tendon and nerve injuries, dislocations and amputations, often from crushing machinery or road crashes. About 10 percent of emergency fractures involve the hand, and one third involve more than 2 structures. Stable alignment, early motion and protection of nerves decide the final hand function in 6 weeks.",
+      "say": "Hand trauma includes fractures, tendon cuts, nerve injuries and amputations from machines and road crashes. It forms a tenth of emergency fractures, and many cases involve several structures. Final function depends on alignment, early movement and nerve protection over six weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Structure",
+          "Injury pattern"
+        ],
+        "rows": [
+          [
+            "Bone",
+            "Fracture with loss of alignment"
+          ],
+          [
+            "Flexor tendon",
+            "Loss of active finger flexion"
+          ],
+          [
+            "Extensor tendon",
+            "Loss of active extension"
+          ],
+          [
+            "Nerve",
+            "Numbness and weak hand muscles"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High energy crashes** cause comminuted fractures and open wounds in 20 to 30 percent of manual injuries. Lacerations from glass or blades divide tendons cleanly in 3 to 5 cm wounds. Crush injuries destroy microvessels and set up compartment syndrome within 6 hours. Industrial presses and doors dreadfully crush fingertips in workers aged 20 to 45.",
+      "say": "High energy crashes cause broken shattered bones and open wounds in a large minority of cases. Sharp cuts divide tendons neatly through small wounds. Crush injuries destroy tiny vessels and raise compartment pressure within six hours. Presses and doors commonly crush fingertips in workers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Energy of injury",
+            "sub": "low or high"
+          },
+          {
+            "id": "b",
+            "label": "Wound type",
+            "sub": "open or closed"
+          },
+          {
+            "id": "c",
+            "label": "Structures hit",
+            "sub": "bone tendon nerve"
+          },
+          {
+            "id": "d",
+            "label": "Compartment check",
+            "sub": "within 6 hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Flexor zones** describe 5 tendon zones, with zone 2 between 2.5 and 5.0 cm from the distal crease. Healing needs epithelial growth into the cut tendon by 48 hours, then collagen laying over 3 weeks. Adhesions form when 10 to 14 days pass without controlled motion. Nerve fibres regrow at 1 mm per day after 3 weeks of wallerian degeneration.",
+      "say": "Flexor tendons are mapped into five zones, with the critical zone near the finger crease. Healing starts within two days and collagen forms over three weeks. Without controlled movement, adhesions build within two weeks. Nerve fibres regrow slowly at about one millimetre each day.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cut tendon",
+            "sub": "gap created"
+          },
+          {
+            "id": "b",
+            "label": "Cell growth",
+            "sub": "by 48 hours"
+          },
+          {
+            "id": "c",
+            "label": "Collagen stage",
+            "sub": "over 3 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Motion window",
+            "sub": "days 10 to 14"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Loss of flexion** signals a flexor cut, with the resting finger posture falling flat in 60 percent of cases. Tetanus immunisation 5 to 10 years ago still protects, so history must be checked at triage. Extensor cuts drop active extension while passive motion stays full. Nerve division causes numbness in the median field, tested in 2 pin points.",
+      "say": "A flexor cut flattens the resting finger and stops active bending, while passive bending stays possible. Extensor cuts drop active straightening with passive motion preserved. Nerve injury gives numbness in that nerve field, so test sensation at two points.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Flexor injury",
+          "points": [
+            "Active flexion lost",
+            "Passive flexion preserved",
+            "Resting posture flattened",
+            "Fist incomplete"
+          ]
+        },
+        "right": {
+          "title": "Extensor injury",
+          "points": [
+            "Active extension lost",
+            "Passive extension preserved",
+            "Extension lag present",
+            "Grip strength reduced"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Deformity with shortening** of 3 to 5 mm predicts later arthritis and weak grip, so equal length matters. Mallet finger after distal extensor failure lags 15 to 30 degrees behind. Gamekeeper thumb rupture loosens the ulnar joint, tested with valgus stress in 4 positions. Open wounds over joints need exploration in 6 hours, not next day.",
+      "say": "Shortening of even a few millimetres predicts later arthritis and weak grip. A dropped fingertip lags behind on extension after mallet injury. Ligament rupture of the thumb loosens the joint on stress testing. Open joint wounds need urgent exploration the same day.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sign",
+          "Test that confirms it"
+        ],
+        "rows": [
+          [
+            "Shortening over 3 mm",
+            "Measure against normal finger"
+          ],
+          [
+            "Mallet lag 15 to 30 degrees",
+            "Active versus passive extension"
+          ],
+          [
+            "Gamekeeper thumb",
+            "Valgus stress on ulnar joint"
+          ],
+          [
+            "Open joint wound",
+            "Urgent exploration within 6 hours"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**X-ray in 2 views** guides closed reduction for 85 percent of hand fractures, with repeat films at 7 days. Ultrasound picks tendon rupture when swelling hides inspection in 95 percent of cases. Nerve conduction studies map complete versus partial division after 3 weeks. Photographs document wound size for the 6 hour debridement window.",
+      "say": "Two view X-rays guide closed reduction for most fractures, repeated after a week. Ultrasound confirms tendon rupture when swelling hides the cut. Nerve conduction studies after three weeks show partial versus complete division. Photos record wound size for timely cleaning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bone assessment",
+          "points": [
+            "X-ray in 2 views",
+            "Repeat film at 7 days",
+            "CT for 3 cm fragments",
+            "Check rotation clinically"
+          ]
+        },
+        "right": {
+          "title": "Soft tissue assessment",
+          "points": [
+            "Ultrasound for tendon cuts",
+            "Nerve conduction at 3 weeks",
+            "Tetanus history check",
+            "Photograph the wound"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Closed reduction** with splintage for 3 to 4 weeks suits stable fractures, with fingers kept free for motion. Traction splints hold alignment while swelling settles over 2 to 3 days. Unstable patterns need K-wire fixation, as 7 in 10 unstable fractures redisplace without pins. Early mobilisation starts within 5 days of fixation for stiffness control.",
+      "say": "Stable fractures settle with reduction and splintage for three to four weeks, keeping fingers free. Traction holds alignment while swelling settles. Unstable fractures need wire fixation because most would shift without pins. Motion starts within days to prevent stiffness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Reduce fracture",
+            "sub": "closed under anaesthesia"
+          },
+          {
+            "id": "b",
+            "label": "Splint 3 to 4 weeks",
+            "sub": "fingers kept free"
+          },
+          {
+            "id": "c",
+            "label": "Repeat X-ray",
+            "sub": "at 7 days"
+          },
+          {
+            "id": "d",
+            "label": "Begin motion",
+            "sub": "within 5 days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Flexor repair** uses core suture plus epitendinous stitching, then early controlled motion from day 2. Nerve repair joins ends without tension using 8 to 10 stitches under 3.5 times magnification. Replantation suits sharp amputations at 10 to 20 hours of warm ischemia, with veins repaired in groups of 3. Antibiotics cover 5 to 7 days for open injuries only.",
+      "say": "Flexor repair pairs a core stitch with a surface stitch, then motion from day two. Nerve repair joins ends under magnification without tension. Replantation succeeds best after sharp cuts with short warm time and several veins repaired. Antibiotics run for about a week in open wounds.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Repair",
+          "Core principle"
+        ],
+        "rows": [
+          [
+            "Flexor tendon",
+            "Core plus surface stitch, early motion"
+          ],
+          [
+            "Nerve",
+            "Tension free join under 3.5 times magnification"
+          ],
+          [
+            "Replantation",
+            "Sharp cut, short warm time, 3 vein groups"
+          ],
+          [
+            "Open wounds",
+            "Debride within 6 hours, 5 to 7 days antibiotics"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Stiffness** follows 4 weeks of immobilisation in older patients and needs therapy for 12 weeks. Complex regional pain syndrome strikes 2 to 5 percent after wrist fractures, with colour and temperature change. Nonunion affects 3 to 6 percent of scaphoid waist fractures. Infection after open wounds rises to 8 to 12 percent without early cleaning.",
+      "say": "Stiffness follows prolonged immobilisation and needs months of therapy. A pain syndrome with colour and temperature change affects a few percent after wrist injuries. Scaphoid nonunion and wound infection remain the key late problems to counsel for.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Typical frequency"
+        ],
+        "rows": [
+          [
+            "Stiffness after 4 weeks splint",
+            "Common in older patients"
+          ],
+          [
+            "Pain syndrome",
+            "About 2 to 5 percent"
+          ],
+          [
+            "Scaphoid nonunion",
+            "About 3 to 6 percent"
+          ],
+          [
+            "Infection without early cleaning",
+            "About 8 to 12 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Zone 2 flexor cut** with flat finger posture plus numb median field in a 30 year old means both tendon and nerve in 1 wound. Replantation advice needs warm ischemia under 10 hours and sharp edges, not crush at 18 hours. Missing early motion by 14 days cements adhesions that surgery later struggles to free.",
+      "say": "High-yield for the exam: flat finger posture with numbness means tendon plus nerve in one wound. Replantation needs sharp edges and short warm time, not crush injury. Missing the two week motion window locks adhesions that are hard to release later.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clue",
+          "Exam response"
+        ],
+        "rows": [
+          [
+            "Flat finger with numbness",
+            "Explore tendon and nerve together"
+          ],
+          [
+            "Sharp cut under 10 hours",
+            "Attempt replantation"
+          ],
+          [
+            "Crush at 18 hours",
+            "Debride and stump closure"
+          ],
+          [
+            "No motion by 14 days",
+            "Expect adhesions, start therapy"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -117,6 +117,47 @@
    "tx": "Statistical significance is not clinical significance. A result must exceed the **minimal clinically important difference**, the MCID, to matter to patients. Pearson r measures linear association; squaring it gives the shared variance r squared. Confounding, where a third variable such as smoking links exposure and outcome, can distort associations. Always report effect size with its interval, not the P value alone.",
    "say": "Statistical significance is not clinical significance. A result must exceed the minimal clinically important difference, the MCID, to matter to patients. Pearson r measures linear association, and squaring it gives the shared variance. Confounding, where a third variable such as smoking links exposure and outcome, can distort associations. Always report effect size with its interval, not the P value alone.",
    "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: Biostatistics questions test hypothesis testing, Type I and II errors, power calculations, and test selection based on data distribution. Type I error represents false positive rejection of a true null hypothesis. Use Student t-test for comparing two continuous means and Chi-square test for categorical contingency tables.",
+   "say": "High-yield for the exam: Biostatistics questions test hypothesis testing, Type I and II errors, power calculations, and test selection based on data distribution. Type I error represents false positive rejection of a true null hypothesis. Use Student t-test for comparing two continuous means and Chi-square test for categorical contingency tables.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Type I error (alpha)",
+      "False positive; rejecting true null hypothesis typically set at 0.05"
+     ],
+     [
+      "Type II error (beta)",
+      "False negative; failing to reject false null hypothesis"
+     ],
+     [
+      "Statistical power",
+      "1 minus beta; probability of detecting true treatment difference"
+     ],
+     [
+      "Student t-test",
+      "Compares continuous variables between two independent parametric groups"
+     ],
+     [
+      "ANOVA test",
+      "Compares continuous variables among three or more parametric groups"
+     ],
+     [
+      "Mann-Whitney U",
+      "Non-parametric alternative to independent two-sample t-test"
+     ],
+     [
+      "Chi-square test",
+      "Tests association between categorical variables in contingency tables"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [
