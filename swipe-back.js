@@ -173,7 +173,7 @@
     return !!(engineActive() && typeof window._SMD_goBack === "function");
   }
 
-  var _last = 0;
+  var _last = 0, _heldCtrl = null;
   /* Settings > Preferences > "Swipe from the left edge" (owner 2026-11-19). localStorage smd_swipe_back "0" turns the
      gesture off everywhere: no back-swipe, no menu-swipe. Back buttons and Android's system back keep working. */
   function swipeOn() { try { return window.localStorage.getItem("smd_swipe_back") !== "0"; } catch (e) { return true; } }
@@ -203,7 +203,10 @@
       if (_sheet && _scrim && _sheet.classList.contains("on")) { _last = now; _scrim.click(); return true; }
     } catch (e) {}
     // 1) top-most open overlay → its BACK control (never Close, so we step back, not jump home)
-    var ctrl = topBackControl();
+    // A completed drag slides the screen fully off before this runs, so its Back control is no longer "on screen":
+    // the control found when the drag started is the one to press (owner recording 2026-11-20: from Settings the swipe
+    // found nothing, fell through to "open the menu", and Settings slid back over an open menu with its scroll lock).
+    var ctrl = topBackControl() || (_heldCtrl && _heldCtrl.isConnected ? _heldCtrl : null);
     if (ctrl) { _last = now; try { ctrl.click(); } catch (e) {} return true; }
     // 2) clinical engine (incl. the Clinical Decision output, which has no visible Back button)
     if (engineActive() && typeof window._SMD_goBack === "function") {
@@ -253,13 +256,14 @@
    * opened the menu on a screen the user expected to step back from, and — when SB was missing —
    * could fall through to goBack() ON HOME and click whatever stray "-close" element BACK_SEL
    * matched there. Home (and only home) opens the menu; every other screen goes back. */
-  function edgeSwipeAction() {
+  // fromScreen: the swipe dragged a screen (it is not home), so the only possible outcome is back, never the menu.
+  function edgeSwipeAction(fromScreen) {
     if (!swipeOn()) return false;
     if (document.getElementById("wsq-alert")) return true;   // the alert screen owns the edge gesture too
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
-    if (!moduleOpen() && homeIsForeground()) return openMenuAtHome();
+    if (!fromScreen && !moduleOpen() && homeIsForeground()) return openMenuAtHome();
     if (goBack()) return true;
-    return openMenuAtHome(true);
+    return fromScreen ? false : openMenuAtHome(true);
   }
   function homeOn() {
     try { var h = document.getElementById("homeV2"), hs = document.getElementById("hvSheet"); return !!(h && h.classList.contains("on") && !(hs && hs.classList.contains("on"))); } catch (e) { return false; }
@@ -428,10 +432,10 @@
           // Finish the slide off-screen on the drawer curve, THEN go back, so the screen is not yanked.
           var ms = settleMs(vw() - curDx, vx);
           finishing = true; setX(el, vw(), true, ms);
-          setTimeout(function () { finishing = false; edgeSwipeAction(); clearEl(el); setTimeout(syncHandle, 80); }, Math.max(120, ms - 60));
+          setTimeout(function () { finishing = false; edgeSwipeAction(true); _heldCtrl = null; clearEl(el); setTimeout(syncHandle, 80); }, Math.max(120, ms - 60));
           return;
         }
-        edgeSwipeAction(); if (el) clearEl(el); setTimeout(syncHandle, 80);
+        edgeSwipeAction(!!el); _heldCtrl = null; if (el) clearEl(el); setTimeout(syncHandle, 80);
       }
       else if (el) { setX(el, 0, true, settleMs(curDx, vx)); setTimeout(function () { try { if (dragEl !== el && el.style.transition !== "none") el.style.transition = ""; } catch (e) {} }, 320); }
     }
@@ -449,6 +453,7 @@
       // there moved the home screen itself off, so the menu check no longer saw home in front and did nothing.
       var atHome = !moduleOpen() && homeIsForeground();
       var ctrl = atHome ? null : topBackControl(); dragEl = ctrl ? overlayRootOf(ctrl) : null;
+      _heldCtrl = dragEl ? ctrl : null;   // pressed on release even after the screen has slid off (goBack)
     }, { passive: true });
     document.addEventListener("touchmove", function (e) {
       if (!tracking) return;

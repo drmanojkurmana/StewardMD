@@ -79,6 +79,25 @@ try {
   const o0 = await st(); await swipe(8, 260); const o1 = await st();
   ok(o1.stack === o0.stack && !o1.drawer, "switched off: no back-swipe inside modules either");
   await p.evaluate(() => { localStorage.removeItem("smd_swipe_back"); PREP.close && PREP.close(); });
+  await sleep(400);
+  /* Owner recording 2026-11-20: Settings opened from the sidebar, a left-edge swipe slid it off, found no Back button
+     (off-screen by then), opened the menu instead, and Settings slid back over it with the menu's scroll lock. */
+  const openFromMenu = async (label) => {
+    await p.evaluate(() => { try { SB.open(); } catch (e) {} }); await sleep(700);
+    const hit = await p.evaluate((l) => { const r = [...document.querySelectorAll("#sbDrawer .sbr-row")].find((e) => e.textContent.trim() === l); if (!r) return false; r.click(); return true; }, label);
+    await sleep(1200); return hit;
+  };
+  ok(await openFromMenu("Settings") && await p.evaluate(() => !!document.getElementById("sbrSettings") && !document.getElementById("sbDrawer").classList.contains("open")), "Settings opened from the menu (the menu closes)");
+  await swipe(8, 300);
+  ok(await p.evaluate(() => !document.getElementById("sbrSettings") && !document.getElementById("sbDrawer").classList.contains("open") && !document.body.classList.contains("sbr-set-open")),
+    "a swipe on Settings goes back: Settings closes, the menu does NOT open behind it, no scroll lock left");
+  for (const label of ["AI Usage", "Mail", "Help & support"]) {
+    if (!(await openFromMenu(label))) { await p.evaluate(() => { try { SB.close(); } catch (e) {} }); continue; }
+    const before = await p.evaluate(() => document.getElementById("sbDrawer").classList.contains("open"));
+    await swipe(8, 300);
+    ok(before || !(await p.evaluate(() => document.getElementById("sbDrawer").classList.contains("open"))), label + " from the menu: a swipe never opens the menu behind it");
+    await p.evaluate(() => { try { SB.close(); } catch (e) {} for (let i = 0; i < 3; i++) SMD_SWIPE_BACK.goBack(); }); await sleep(600);
+  }
   const src = await (await fetch(BASE + "sidebar-redesign.js")).text();
   ok(/id: "swipeback", key: "smd_swipe_back", def: true, title: "Swipe from the left edge"/.test(src), "Settings > Preferences carries the on/off switch (on by default)");
 } catch (e) { console.log("FAIL " + (e && e.stack || e)); fails++; }
