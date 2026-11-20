@@ -107,7 +107,7 @@
   var CSS = "#pnBuddy{position:fixed;right:max(12px,env(safe-area-inset-right,0px));bottom:calc(var(--pnb-lift,0px) + 8px + var(--pnb-safe,env(safe-area-inset-bottom,0px)));width:150px;height:36px;z-index:886;pointer-events:none;transition:bottom .22s cubic-bezier(.23,1,.32,1)}" +
     "#pnBuddy .mkc{top:0}" +
     "#pnBuddy.pnb-nuc{width:64px;height:76px}" +
-    "body.pnb-nucleo .pn-root.pnb-on .pn-run{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}" +
+    "body.pnb-nucleo .pn-root.pnb-on > .pn-body{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}" +
     "#pnBuddy .mkc-tab{left:auto;right:0;bottom:2px;border-left:1px solid var(--pn-edge,#d5dde6);border-right:0;border-radius:10px 0 0 10px;pointer-events:auto}" +
     "body:has(#pnAsk) #pnBuddy,body:has(.pn-zoom) #pnBuddy{display:none}" +
     /* The bubble lives on <body> (the set repaints #smdPrep), so it carries PrepNucleus's own tokens copied from the root
@@ -137,6 +137,7 @@
     ".pnb-list button{display:flex;align-items:center;gap:10px;width:100%;min-height:46px;padding:0 14px 0 16px;border:0;border-bottom:1px solid var(--pn-line,#e9e7e1);background:none;color:inherit;font-weight:500;font-size:15px;line-height:1.25;font-family:inherit;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent}" +
     ".pnb-list button span{flex:1}.pnb-list button svg{flex:0 0 auto;color:var(--pn-mut2,#6f7890)}" +
     ".pnb-list button:active{background:var(--pn-s1,#ebe9e3)}" +
+    ".pnb-endb{padding-bottom:0}.pnb-endb .pnb-list button:last-child{border-bottom:0;border-radius:0 0 calc(var(--pn-r-lg,16px) - 1px) calc(var(--pn-r-lg,16px) - 1px)}" +
     ".pnb-in{display:flex;align-items:center;gap:4px;margin-top:12px;padding:4px 4px 4px 12px;border-radius:var(--pn-r-md,12px);background:var(--pn-s1,#ebe9e3);border:1px solid transparent;transition:border-color var(--pn-d-quick,180ms) ease}" +
     ".pnb-in:focus-within{border-color:var(--pn-edge,#e3e1da)}" +
     ".pnb-in input{flex:1;min-width:0;height:36px;padding:0;border:0;background:none;color:inherit;font-size:16px;line-height:1.2;font-family:inherit;caret-color:var(--pn-fill,#efc07b)}" +
@@ -145,7 +146,7 @@
     ".pnb-in button:disabled{background:transparent;color:var(--pn-mut2,#6f7890);cursor:default}.pnb-in button:not(:disabled):active{transform:scale(.94)}" +
     "body.pnb-nucleo .pnb-bub{bottom:calc(var(--pnb-lift,0px) + 92px + var(--pnb-safe,env(safe-area-inset-bottom,0px)))}" +
     "#pnBuddy,.pnb-bub{transition:bottom .22s cubic-bezier(.23,1,.32,1)}" +
-    ".pn-root.pnb-on .pn-run{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}" +
+    ".pn-root.pnb-on > .pn-body{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}" +
     "@keyframes pnb-in{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:none}}" +
     "@keyframes pnb-out{to{opacity:0;transform:translateY(4px) scale(.97)}}" +
     "@media (prefers-reduced-motion: reduce){.pnb-bub,.pnb-bub.out{animation:none}#pnBuddy,.pnb-bub{transition:none}}";
@@ -236,6 +237,7 @@
   }
   function drop(b) {
     if (!b || !b.parentNode) return;
+    if (S.mk && S.mk.hold) try { S.mk.hold(false); } catch (e) {}
     if (reduced()) { b.parentNode.removeChild(b); return; }
     b.classList.add("out");
     G.setTimeout(function () { if (b.parentNode) b.parentNode.removeChild(b); }, 160);
@@ -248,6 +250,7 @@
     var b = D.createElement("div"); b.className = "pnb-bub" + (cls ? " " + cls : ""); b.setAttribute("role", "status"); b.innerHTML = html;
     tokens(b);
     D.body.appendChild(b); S.bub = b;
+    if (S.mk && S.mk.hold) try { S.mk.hold(true); } catch (e) {}
     aim(b);
     if (onClick) b.addEventListener("click", onClick);
     if (life) S.bubT = G.setTimeout(function () { if (S.bub === b) bubble(null); }, life);
@@ -302,11 +305,15 @@
     var d = doneLine(ok, n);
     // A perfect set already plays "You are the boss" (prep.js perfectCele); he bows under it and keeps quiet.
     G.setTimeout(function () { cue(d.kind, d.n); if (d.kind !== "perfect") say(d.say, 4200); }, d.kind === "perfect" ? 1600 : 500);
+    // A tough set: after the thought, a fist pump. Then a nudge that he has ideas for what next.
+    if (d.kind === "done" && d.n < 50) G.setTimeout(function () { if (S.run === r) cue("pep"); }, 3600);
+    G.setTimeout(function () { if (S.run === r && !S.bub) cue("beckon"); }, 5200);
   }
   /* Tap: a small quick-ask bubble about the question on screen. Chips or a typed line open the Ask MaiK sheet for this
      question with the words filled in (prep-ask.js does the asking, on the phone or online, with its own rules). */
   function quickAsk() {
-    if (S.bub && S.bub.querySelector(".pnb-in")) { bubble(null); return; }
+    if (S.bub && (S.bub.querySelector(".pnb-in") || S.bub.querySelector(".pnb-end"))) { bubble(null); return; }
+    if (S.run && S.run.done) return endAsk();
     var r = S.run, it = r && r.items[r.i]; if (!it || !S.host || !S.host.buddyAsk || r.mode !== "study") return;
     var shown = r.ans[r.i] >= 0, chips = shown ? ["Explain this simply", "Why are the others wrong?", "Give me a memory trick"] : ["Give me a hint", "What is this question testing?"];
     var CHEV = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
@@ -321,6 +328,20 @@
     inp.addEventListener("input", function () { sendB.disabled = !String(inp.value || "").trim(); });
     form.addEventListener("submit", function (e) { e.preventDefault(); var v = String(form.querySelector("input").value || "").trim(); if (v) go(v); });
     function go(q) { bubble(null); try { S.host.buddyAsk(r, q); } catch (x) {} }
+  }
+  /* After the set: what next, from this set's own result (practise the missed, ask MaiK what the misses share, revise
+     the topic most of them came from, show the mistakes). The words above say where the set stands. */
+  function endAsk() {
+    var r = S.run, acts = []; try { acts = S.host && S.host.buddyEnd ? S.host.buddyEnd(r) : []; } catch (e) {}
+    if (!acts.length) return;
+    var ok = 0, n = 0; r.items.forEach(function (it, i) { if (it._gone) return; n++; if (r.ans[i] === it.a) ok++; });
+    var miss = n - ok, head = !miss ? "Every one right. What next?" : ok * 2 >= n ? "Nice. Let's fix the " + miss + " you missed." : "Let's turn the " + miss + " misses around.";
+    var CHEV = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+    bubble('<p class="pnb-t">' + esc(head) + '</p><div class="pnb-list pnb-end">' + acts.map(function (a) { return '<button type="button" data-e="' + esc(a[0]) + '"><span>' + esc(a[1]) + "</span>" + CHEV + "</button>"; }).join("") + "</div>", 0, function (e) {
+      var b = e.target && e.target.closest && e.target.closest("[data-e]"); if (!b) return;
+      bubble(null); cue("right");
+      try { S.host.buddyEndDo(r, b.getAttribute("data-e")); } catch (x) {}
+    }, "pnb-ask pnb-endb");
   }
   function leave() { unmount(); S.run = null; }
   // A tap outside the bubble (not on him) closes it; Escape too.

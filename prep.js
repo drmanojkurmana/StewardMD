@@ -4789,6 +4789,41 @@
       if (r.limit && !r.sc) return { left: r.limit - (Date.now() - r.t0) / 1000, total: r.limit, perQ: false };
       return null;
     },
+    /* End of a set: what the buddy offers when tapped (owner 2026-11-20: the question chips made no sense there).
+       buddyEnd(r) -> [[id, label]]; buddyEndDo(r, id) runs it, through the result screen's own buttons where one exists. */
+    buddyEnd: function (r) {
+      if (!r || !r.done || r.custom) return [];
+      var miss = [], acts = [], mods = {}, top = null, best = 0;
+      r.items.forEach(function (it, i) { if (r.ans[i] !== it.a && !it._gone) { miss.push(it); var k = HOST.buddyCanRevise(it) ? it._s + "|" + (it._m || it.t) : ""; if (k) { mods[k] = (mods[k] || 0) + 1; if (mods[k] > best) { best = mods[k]; top = it; } } } });
+      if (miss.length && root && root.querySelector("[data-act=retrymissed]")) acts.push(["missed", miss.length === r.items.length ? "Practise the set again" : "Practise the " + miss.length + " I missed"]);
+      if (miss.length && G.PREP_ASK) acts.push(["why", "Ask MaiK what I keep missing"]);
+      if (top) acts.push(["revise", "Revise " + HOST.buddyTopic(top)]);
+      if (miss.length && root && root.querySelector('[data-act=rfilter][data-v="wrong"]')) acts.push(["review", "Show my mistakes"]);
+      if (!miss.length && root && root.querySelector("[data-act=retryall]")) acts.push(["again", "Practise all again"]);
+      return acts.slice(0, 4);
+    },
+    buddyEndDo: function (r, id) {
+      if (!r || !r.done || !root) return;
+      var click = function (sel) { var b = root.querySelector(sel); if (b) b.click(); return !!b; };
+      if (id === "missed") return click("[data-act=retrymissed]");
+      if (id === "again") return click("[data-act=retryall]");
+      if (id === "review") {
+        click('[data-act=rfilter][data-v="wrong"]');
+        var h = root.querySelector("#pnRvH"); if (h) try { h.scrollIntoView({ behavior: reducedMo() ? "auto" : "smooth", block: "start" }); } catch (e) {}
+        return;
+      }
+      var miss = r.items.filter(function (it, i) { return r.ans[i] !== it.a && !it._gone; });
+      if (id === "revise") {
+        var mods = {}, top = null, best = 0;
+        miss.forEach(function (it) { if (!HOST.buddyCanRevise(it)) return; var k = it._s + "|" + (it._m || it.t); mods[k] = (mods[k] || 0) + 1; if (mods[k] > best) { best = mods[k]; top = it; } });
+        return top && HOST.buddyRevise(top);
+      }
+      if (id === "why" && G.PREP_ASK) {
+        var L = ["A", "B", "C", "D", "E", "F", "G", "H"];
+        var bk = miss.slice(0, 12).map(function (it, k) { var ch = r.ans[r.items.indexOf(it)]; return (k + 1) + ". " + String(it.q || "").slice(0, 220) + "\nI chose: " + (ch >= 0 ? L[ch] + ". " + it.o[ch] : "not answered") + "\nAnswer: " + L[it.a] + ". " + it.o[it.a]; }).join("\n\n");
+        G.PREP_ASK.open({ kind: "card", fr: "The questions I missed in " + String(r.title || "this set").replace(/<[^>]*>/g, ""), bk: bk, title: "What I keep missing", ask: "What do these misses have in common, and what should I revise first?" }, HOST);
+      }
+    },
     buddyAsk: function (r, q) { var it = r && r.items[r.i]; if (it && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it, chosen: r.ans[r.i], n: r.i + 1, side: true, topic: r.title, prefill: q }, HOST); }, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
