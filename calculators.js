@@ -8151,16 +8151,56 @@
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function byId(id){ for(var i=0;i<CALCS.length;i++) if(CALCS[i].id===id) return CALCS[i]; return null; }
+  function calcV2On(){ try{ return localStorage.getItem("smd_calc_v2")!=="0"; }catch(e){ return true; } }
+  function calcRecent(){ try{ var a=JSON.parse(localStorage.getItem("smd_calc_recent")||"[]"); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+  function pushRecent(id){ try{ var a=calcRecent().filter(function(x){return x!==id;}); a.unshift(id); localStorage.setItem("smd_calc_recent", JSON.stringify(a.slice(0,8))); }catch(e){} }
+  function cleanLabel(label, unit){
+    var s=String(label||"");
+    if(unit){
+      var u=String(unit).toLowerCase();
+      // The unit is shown as the field suffix, so drop a trailing bracket that only restates units or a conversion.
+      s=s.replace(/\s*\([^)]*\)\s*$/, function(m){ var t=m.toLowerCase(); return (t.indexOf(u)>=0||/\/|\bper\b|=/.test(t)) ? "" : m; });
+      s=s.replace(new RegExp("\\s+in\\s+"+u.replace(/[.*+?^${}()|[\]\\\/]/g,"\\$&")+"$","i"), "");
+    }
+    return s;
+  }
+  function hlText(text){
+    var t=String(text||""); if(!q) return esc(t);
+    var i=t.toLowerCase().indexOf(q); if(i<0) return esc(t);
+    return esc(t.slice(0,i))+"<mark>"+esc(t.slice(i,i+q.length))+"</mark>"+esc(t.slice(i+q.length));
+  }
+  function missingCount(c){
+    var v=readValuesSafe(c), n=0;
+    c.inputs.forEach(function(f){
+      if(f.type==="check") return;
+      if(f.type==="select"){ if(v[f.id]===""||v[f.id]==null) n++; return; }
+      if(f.type==="date"){ if(!v[f.id]) n++; return; }
+      if(typeof v[f.id]!=="number"||isNaN(v[f.id])) n++;
+    });
+    return n;
+  }
+  function readValuesSafe(c){
+    var v={};
+    c.inputs.forEach(function(f){
+      var el=document.getElementById("mc_"+c.id+"_"+f.id);
+      if(!el){ if(f.type==="check") v[f.id]=false; else if(f.type==="select") v[f.id]=""; else v[f.id]=NaN; return; }
+      if(f.type==="check") v[f.id]=!!el.checked;
+      else if(f.type==="select") v[f.id]=el.value;
+      else if(f.type==="date") v[f.id]=el.value;
+      else v[f.id]=el.value===""?NaN:parseFloat(el.value);
+    });
+    return v;
+  }
 
   function ensureRoot(){
     if(root) return root;
     injectCSS();
     root=document.createElement("div");
-    root.id="mcOverlay"; root.className="mc-overlay";
+    root.id="mcOverlay"; root.className="mc-overlay"+(calcV2On()?" mc-v2":"");
     root.innerHTML=
       '<div class="mc-top">'+
         '<button class="mc-back" id="mcClose" aria-label="Close calculators">‹ Close</button>'+
-        '<div class="mc-title">Clinical Calculators <span class="mc-count">'+CALCS.length+'</span></div>'+
+        '<div class="mc-title">Calculators <span class="mc-count">'+CALCS.length+'</span></div>'+
         '<span style="width:64px"></span>'+
       '</div>'+
       // Search and the category rail sit in their own strip under the header, outside the scrolling
@@ -8169,17 +8209,26 @@
         '<input id="mcSearch" class="mc-search" type="text" placeholder="Search, e.g. MELD, sepsis, sodium" aria-label="Search calculators" autocomplete="off">'+
         '<div id="mcCats" class="mc-cats"></div>'+
       '</div>'+
-      '<div class="mc-body">'+
+      '<div class="mc-body" id="mcBody">'+
         '<div id="mcList" class="mc-list"></div>'+
         '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">'+mcIco("interact")+' Check Drug Interactions</button>'+
         '<div class="mc-disc">'+mcIco("warn")+' For licensed healthcare professionals. These calculators are faithful implementations of established, peer-reviewed clinical tools, each attributed to its original author and publication; the scientific validity and all intellectual-property rights in those instruments belong to their respective authors and publishers. StewardMD computes and presents the score for decision support only; the clinician verifies every input, formula and result against the individual patient and local protocol before acting. Copyright-restricted instruments (e.g. DLQI, MNA-SF, Clinical Frailty Scale, BASDAI/BASFI) must be administered using the official questionnaire from the rights-holder.</div>'+
-      '</div>';
+      '</div>'+
+      '<div class="mc-calcview" id="mcCalcView" hidden></div>';
     document.body.appendChild(root);
     root.querySelector("#mcClose").addEventListener("click", close);
     root.querySelector("#mcInteractionsBtn").addEventListener("click", openInteractions);
     var si=root.querySelector("#mcSearch");
     si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); renderList(); });
     si.addEventListener("keydown", function(e){ e.stopPropagation(); });
+    var bodyEl=root.querySelector("#mcBody"), lastY=0;
+    bodyEl.addEventListener("scroll", function(){
+      if(!calcV2On()) return;
+      var y=bodyEl.scrollTop;
+      var pin=root.querySelector(".mc-pin");
+      if(pin){ if(y>40 && y>lastY+4) pin.classList.add("mc-pin-hide"); else if(y<lastY-4||y<=40) pin.classList.remove("mc-pin-hide"); }
+      lastY=y;
+    }, { passive:true });
     return root;
   }
 
@@ -8242,6 +8291,14 @@
   // Card markup, shared between the browse (grouped-by-category) and search (flat) layouts below.
   function calcCardHTML(c){
     var favOn=isWatchFav(c.id), W=window.SMD_HAS_WATCH?" Apple Watch":"";
+    if(calcV2On()){
+      var tail=favOn
+        ? '<button class="mc-star on" data-fav="'+c.id+'" aria-pressed="true" aria-label="Remove from'+(W||" starred")+'">'+mcIco("star","mc-fav on")+'</button>'
+        : '<span class="mc-chev" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></span>';
+      return '<div class="mc-card mc-row" data-id="'+c.id+'">'+
+        '<button class="mc-card-head mc-row-main" data-open="'+c.id+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+hlText(c.title)+'</span><span class="mc-card-d">'+hlText(c.desc)+'</span></span></button>'+tail+
+      '</div>';
+    }
     return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'">'+
       '<button class="mc-star'+(favOn?" on":"")+'" data-fav="'+c.id+'" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(W||" starred")+'" title="'+(W?"Show on Apple Watch":"Star this calculator")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
       '<button class="mc-card-head" data-open="'+c.id+'" aria-expanded="'+(openId===c.id?"true":"false")+'"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></span></button>'+
@@ -8258,11 +8315,30 @@
     // exactly the reference screenshot's layout. Browsing (no query) is completely unchanged.
     var catsEl=root.querySelector("#mcCats"); if(catsEl) catsEl.style.display=q?"none":"";
     var list=CALCS.filter(matches);
-    if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here'+(window.SMD_HAS_WATCH?' (and to your Apple Watch).':'.'):'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
+    if(!list.length){
+      if(calcV2On() && q) el.innerHTML='<div class="mc-empty"><div class="mc-empty-t">No calculator matches '+esc(q)+'</div><div>Check the spelling, or try an abbreviation like MELD or a condition like sepsis.</div></div>';
+      else el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet. Tap the '+mcIco("star")+' on any calculator to pin it here'+(window.SMD_HAS_WATCH?' (and to your Apple Watch).':'.'):'No calculators match "'+esc(q)+'".')+'</div>';
+      return;
+    }
     if(q){
       el.innerHTML='<div class="mc-grp-h">Results <span>'+list.length+'</span></div><div class="mc-grid">'+list.map(calcCardHTML).join("")+'</div>';
       wireListEvents(el);
-      if(openId) renderPanel(openId);
+      if(openId && !calcV2On()) renderPanel(openId);
+      return;
+    }
+    if(calcV2On() && !favOnly && !activeCat){
+      var html2="", favs=watchFavs(), rec=calcRecent();
+      var favCalcs=favs.map(byId).filter(function(c){ return c && matches(c); });
+      if(favCalcs.length) html2+='<div class="mc-grp-h">Starred</div><div class="mc-grid mc-group">'+favCalcs.map(calcCardHTML).join("")+'</div>';
+      var recCalcs=rec.map(byId).filter(function(c){ return c && matches(c) && favs.indexOf(c.id)<0; });
+      if(recCalcs.length) html2+='<div class="mc-grp-h">Recent</div><div class="mc-grid mc-group">'+recCalcs.map(calcCardHTML).join("")+'</div>';
+      CAT_ORDER.forEach(function(cat){
+        var inCat2=list.filter(function(c){ return c.cat===cat; });
+        if(!inCat2.length) return;
+        html2+='<div class="mc-grp-h">'+esc(cat)+' <span>'+inCat2.length+'</span></div><div class="mc-grid mc-group">'+inCat2.map(calcCardHTML).join("")+'</div>';
+      });
+      el.innerHTML=html2;
+      wireListEvents(el);
       return;
     }
     // group by category preserving order
@@ -8283,7 +8359,11 @@
   }
   function wireListEvents(el){
     el.querySelectorAll("[data-open]").forEach(function(b){
-      b.addEventListener("click", function(){ var id=b.getAttribute("data-open"); openId=(openId===id?null:id); renderList(); });
+      b.addEventListener("click", function(){
+        var id=b.getAttribute("data-open");
+        if(calcV2On()){ openCalcView(id); return; }
+        openId=(openId===id?null:id); renderList();
+      });
     });
     el.querySelectorAll("[data-fav]").forEach(function(b){
       b.addEventListener("click", function(ev){ ev.stopPropagation(); toggleWatchFav(b.getAttribute("data-fav")); renderList(); });
@@ -8291,6 +8371,7 @@
   }
 
   function inputHTML(c){
+    if(calcV2On()) return inputHTMLV2(c);
     return c.inputs.map(function(f,fi,fa){
       var fid="mc_"+c.id+"_"+f.id;
       var unit=f.unit?'<span class="mc-unit">'+esc(f.unit)+'</span>':"";
@@ -8298,9 +8379,6 @@
         return '<label class="mc-check"><input type="checkbox" id="'+fid+'"><span>'+esc(f.label)+'</span></label>';
       }
       if(f.type==="select"){
-        // First listed option is the default (browser-native). Author responsibility: order each
-        // select so the FIRST option is the clinically-sensible default (normal band for additive
-        // severity scores; best/alert for inverted coma/functional scales).
         var opts=(f.opts||[]).map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
         return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+'</label><select class="mc-input" id="'+fid+'">'+opts+'</select></div>';
       }
@@ -8310,6 +8388,42 @@
       var min=f.min!=null?' min="'+esc(f.min)+'"':"";
       var hint=typ==="number"?' inputmode="decimal" enterkeyhint="'+(fi===fa.length-1?"done":"next")+'"':"";
       return '<div class="mc-field"><label class="mc-lbl" for="'+fid+'">'+esc(f.label)+unit+'</label><input class="mc-input" id="'+fid+'" type="'+typ+'"'+step+min+hint+def+' placeholder=""></div>';
+    }).join("");
+  }
+  function isShortOpts(opts){
+    if(!opts||opts.length<2||opts.length>4) return false;
+    for(var i=0;i<opts.length;i++){ if(String(opts[i].t||"").length>22) return false; }
+    return true;
+  }
+  function inputHTMLV2(c){
+    return c.inputs.map(function(f,fi,fa){
+      var fid="mc_"+c.id+"_"+f.id;
+      var lbl=cleanLabel(f.label, f.unit);
+      if(f.type==="check"){
+        return '<div class="mc-frow mc-frow-switch"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><button type="button" class="mc-switch" data-switch="'+fid+'" role="switch" aria-checked="false" aria-label="'+esc(lbl)+'"><span></span></button><input type="checkbox" id="'+fid+'" class="mc-check-hidden" tabindex="-1"></div>';
+      }
+      if(f.type==="select"){
+        var opts=f.opts||[];
+        var hasEmpty=opts.length&&String(opts[0].v)==="";
+        var allOpts=(!hasEmpty && f.def==null)?[{v:"",t:"Select"}].concat(opts):opts;
+        if(isShortOpts(opts)){
+          var seg=allOpts.map(function(o){
+            if(String(o.v)==="") return "";
+            return '<button type="button" class="mc-seg-btn" data-seg="'+fid+'" data-v="'+esc(o.v)+'" aria-label="'+esc(o.t)+'">'+esc(String(o.t).replace(/\s*\([+-]?\d+(\.\d+)?( ?pts?)?\)\s*$/i,"")||o.t)+'</button>';
+          }).join("");
+          var selOpts=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+          return '<div class="mc-frow mc-frow-seg"><span class="mc-flbl" id="'+fid+'_lbl">'+esc(lbl)+'</span><span class="mc-seg" role="group" aria-labelledby="'+fid+'_lbl">'+seg+'</span><select class="mc-input mc-seg-select" id="'+fid+'" aria-label="'+esc(lbl)+'">'+selOpts+'</select><span class="mc-src" data-src-for="'+fid+'"></span></div>';
+        }
+        var opts2=allOpts.map(function(o){return '<option value="'+esc(o.v)+'">'+esc(o.t)+'</option>';}).join("");
+        return '<div class="mc-frow"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><span class="mc-fval"><select class="mc-input mc-select" id="'+fid+'">'+opts2+'</select></span><span class="mc-src" data-src-for="'+fid+'"></span></div>';
+      }
+      var typ=f.type==="date"?"date":"number";
+      var step=f.step?' step="'+esc(f.step)+'"':(typ==="number"?' step="any"':"");
+      var def=f.def!=null?' value="'+esc(f.def)+'"':"";
+      var min=f.min!=null?' min="'+esc(f.min)+'"':"";
+      var hint=typ==="number"?' inputmode="decimal" enterkeyhint="'+(fi===fa.length-1?"done":"next")+'"':"";
+      var unitHtml=f.unit?'<span class="mc-suffix">'+esc(f.unit)+'</span>':"";
+      return '<div class="mc-frow"><label class="mc-flbl" for="'+fid+'">'+esc(lbl)+'</label><span class="mc-fval mc-numwrap"><input class="mc-input mc-num" id="'+fid+'" type="'+typ+'"'+step+min+hint+def+' placeholder="">'+unitHtml+'</span><span class="mc-src" data-src-for="'+fid+'"></span></div>';
     }).join("");
   }
 
@@ -8324,6 +8438,146 @@
       else v[f.id]=el.value===""?NaN:parseFloat(el.value);
     });
     return v;
+  }
+
+  function fmtTime(ts){
+    if(!ts) return "";
+    try{ var d=new Date(ts); var h=d.getHours(), m=d.getMinutes(); return (h<10?"0":"")+h+":"+(m<10?"0":"")+m; }catch(e){ return ""; }
+  }
+  function patientSnapshot(){
+    var snap={ has:false, src:"", ts:null, age:null, sex:"", vitals:{}, labs:{}, srcMap:{} };
+    try{
+      var S=window.ICU_STATE;
+      if(S && S.patient && (S.patient.name||S.patient.age!=null)){
+        snap.has=true; snap.src="ICU"; snap.age=S.patient.age; snap.sex=S.patient.sex||"";
+        snap.vitals.weight=S.patient.weightKg; snap.vitals.height=S.patient.heightCm;
+        var vit=S.vitals||[];
+        var merged={};
+        var rows=vit.slice().sort(function(a,b){ return ((a&&a.ts)||0)-((b&&b.ts)||0); });
+        rows.forEach(function(r){ if(!r) return; for(var k in r){ if(k!=="ts"&&r[k]!=null&&r[k]!=="") merged[k]=r[k]; } });
+        for(var vk in merged) snap.vitals[vk]=merged[vk];
+        if(rows.length) snap.ts=rows[rows.length-1].ts;
+        var rec=(S.labs&&S.labs.recent)||{};
+        for(var lk in rec){ if(rec[lk]!=null&&rec[lk]!=="") snap.labs[lk]=rec[lk]; }
+        snap.srcMap=S.src||{};
+        if(S.wardSync && S.wardSync.patientId) snap.src="Ward Sync";
+        return snap;
+      }
+    }catch(e){}
+    try{
+      if(window.OPDEMR && OPDEMR._state){
+        var st=OPDEMR._state();
+        var p=st && (st.patient||st.profile||st);
+        if(p && (p.age!=null||p.Age!=null||p.name||p.Name)){
+          snap.has=true; snap.src="OPD";
+          snap.age=(p.age!=null?p.age:p.Age); snap.sex=p.sex||p.Sex||p.gender||"";
+          return snap;
+        }
+      }
+    }catch(e){}
+    try{
+      if(window.GHIS && GHIS.getSelectedPatient){
+        var g=GHIS.getSelectedPatient();
+        if(g){ snap.has=true; snap.src="Ward Sync"; return snap; }
+      }
+    }catch(e){}
+    return snap;
+  }
+  var VITAL_MAP={ age:"age", sex:"sex", hr:"hr", heart:"hr", sbp:"sbp", systolic:"sbp", dbp:"dbp", diastolic:"dbp", map:"map", rr:"rr", resp:"rr", temp:"temp", temperature:"temp", spo2:"spo2", gcs:"gcs", weight:"weight", wt:"weight", height:"height", ht:"height" };
+  function vitalKeyFor(f){
+    var id=String(f.id||"").toLowerCase(), lbl=String(f.label||"").toLowerCase();
+    if(f.demo==="age") return "age";
+    if(f.demo==="sex") return "sex";
+    if(VITAL_MAP[id]) return VITAL_MAP[id];
+    if(/heart rate|pulse/.test(lbl)) return "hr";
+    if(/systolic/.test(lbl)) return "sbp";
+    if(/diastolic/.test(lbl)) return "dbp";
+    if(/mean arterial|\bmap\b/.test(lbl)) return "map";
+    if(/respiratory rate/.test(lbl)) return "rr";
+    if(/temperature/.test(lbl)) return "temp";
+    if(/spo2|oxygen saturation/.test(lbl)) return "spo2";
+    if(/glasgow|gcs/.test(lbl)) return "gcs";
+    if(/\bage\b/.test(lbl)) return "age";
+    if(/\bsex\b|gender/.test(lbl)) return "sex";
+    if(/weight/.test(lbl)) return "weight";
+    if(/height/.test(lbl)) return "height";
+    return null;
+  }
+  function stripTags(s){ return String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim(); }
+  function scaleFor(c, out){
+    if(!out||out.v==null) return null;
+    var u=String(out.u||"");
+    var m=u.match(/^\/\s*(\d+(?:\.\d+)?)/);
+    if(!m) return null;
+    var max=parseFloat(m[1]), val=parseFloat(out.v);
+    if(isNaN(max)||isNaN(val)||max<=0) return null;
+    var txt=stripTags(out.i||"");
+    var cut=null;
+    var mm=txt.match(/score\s+(\d+(?:\.\d+)?)\s+or less/i)||txt.match(/above\s+(\d+(?:\.\d+)?)/i)||txt.match(/cut.?off[^0-9]*(\d+(?:\.\d+)?)/i);
+    if(mm) cut=parseFloat(mm[1]);
+    if(cut==null||isNaN(cut)||cut<=0||cut>=max) return { min:0, max:max, val:val, cuts:[] };
+    return { min:0, max:max, val:val, cuts:[cut] };
+  }
+  function pointsFor(f, v){
+    if(f.type==="select"){
+      var val=v[f.id];
+      var opts=f.opts||[];
+      for(var i=0;i<opts.length;i++){
+        if(String(opts[i].v)===String(val)){
+          var mm=String(opts[i].t||"").match(/\(\+?(\d+(?:\.\d+)?)\)/);
+          return mm?parseFloat(mm[1]):null;
+        }
+      }
+      return null;
+    }
+    return null;
+  }
+  function buildMaikQuestion(c){
+    var v=readValuesSafe(c);
+    var parts=[];
+    c.inputs.forEach(function(f){
+      var val=v[f.id];
+      if(f.type==="check"){ if(val) parts.push(cleanLabel(f.label,f.unit)+": yes"); return; }
+      if(f.type==="select"){
+        if(val===""||val==null) return;
+        var t=val; var opts=f.opts||[];
+        for(var i=0;i<opts.length;i++) if(String(opts[i].v)===String(val)) t=opts[i].t;
+        parts.push(cleanLabel(f.label,f.unit)+": "+t);
+        return;
+      }
+      if(typeof val==="number"&&!isNaN(val)) parts.push(cleanLabel(f.label,f.unit)+": "+val+(f.unit?" "+f.unit:""));
+    });
+    var miss=missingCount(c);
+    var out=null;
+    try{ out=c.compute(v); }catch(e){}
+    var title=c.title.replace(/\s*\([^)]*\)\s*/," ").trim()||c.title;
+    if(miss>0||!out||out.err){
+      return c.title+" for a patient with "+(parts.length?parts.join(", "):"no inputs entered yet")+". How should I use this score, what inputs matter most, and what should I check before acting?";
+    }
+    var verdict=stripTags(out.i||"").split(".")[0];
+    return c.title+" "+out.v+(out.u?" "+out.u:"")+(verdict?" ("+verdict+")":"")+" for "+parts.join(", ")+". What does this mean for this patient and what should I do next?";
+  }
+  function openCalcView(id){
+    var c=byId(id); if(!c) return;
+    pushRecent(id); openId=id;
+    var view=root.querySelector("#mcCalcView");
+    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
+    if(bodyEl) bodyEl.style.display="none";
+    if(pin) pin.style.display="none";
+    if(top) top.style.display="none";
+    view.hidden=false;
+    view.classList.remove("mc-push"); void view.offsetWidth; view.classList.add("mc-push");
+    renderPanel(id);
+  }
+  function closeCalcView(){
+    var view=root.querySelector("#mcCalcView");
+    view.hidden=true; view.innerHTML="";
+    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
+    if(bodyEl) bodyEl.style.display="";
+    if(pin) pin.style.display=q?"none":"";
+    if(top) top.style.display="";
+    openId=null;
+    renderList();
   }
 
   /* ---- Ward Sync / imported-report auto-fill (gold136) --------------------
@@ -8433,7 +8687,7 @@
       if(f.demo==="sex" && f.type==="select"){
         var ch=String(demo.sex||"").trim().toLowerCase().charAt(0);   // 'm' / 'f'
         var opt=ch && Array.prototype.slice.call(inp.options).filter(function(o){ return o.value.toLowerCase()===ch; })[0];
-        if(opt){ inp.value=opt.value; filled.push({ label:f.label, val:opt.textContent, units:"", src:demo.src||"Patient" }); }
+        if(opt){ inp.value=opt.value; try{ syncSeg(inp.id); }catch(e){} filled.push({ label:f.label, val:opt.textContent, units:"", src:demo.src||"Patient" }); }
         else missing.push(f.label);
         return;
       }
@@ -8511,8 +8765,205 @@
     btn.addEventListener("click", function(){ open=!open; btn.classList.toggle("on", open); if(!open){ body.innerHTML=""; } else renderPicker(); });
   }
 
+  function syncSeg(fid){
+    var sel=document.getElementById(fid); if(!sel) return;
+    var btns=document.querySelectorAll('[data-seg="'+fid+'"]');
+    btns.forEach(function(b){ var on=b.getAttribute("data-v")===sel.value; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on?"true":"false"); });
+  }
+  function syncSwitch(fid){
+    var inp=document.getElementById(fid); if(!inp) return;
+    var btn=document.querySelector('[data-switch="'+fid+'"]');
+    if(btn){ btn.classList.toggle("on", !!inp.checked); btn.setAttribute("aria-checked", inp.checked?"true":"false"); }
+  }
+  function breakdownHTML(c, v, out){
+    var rows=c.inputs.map(function(f){
+      var val=v[f.id], disp="";
+      if(f.type==="check") disp=val?"Yes":"No";
+      else if(f.type==="select"){
+        if(val===""||val==null) disp="Not answered";
+        else { disp=String(val); var opts=f.opts||[]; for(var i=0;i<opts.length;i++) if(String(opts[i].v)===String(val)) disp=opts[i].t; }
+      }
+      else if(typeof val==="number"&&!isNaN(val)) disp=String(val)+(f.unit?" "+f.unit:"");
+      else disp="Not answered";
+      var pts=pointsFor(f, v);
+      return '<div class="mc-bd-row"><span>'+esc(cleanLabel(f.label,f.unit))+'</span><span class="mc-bd-val">'+esc(disp)+'</span><span class="mc-bd-pt">'+(pts==null?"":("+"+pts))+'</span></div>';
+    }).join("");
+    return '<div class="mc-bd">'+rows+'</div>';
+  }
+  function updateScoreCard(c, out){
+    var card=document.getElementById("mcScore_"+c.id); if(!card) return;
+    var miss=missingCount(c);
+    var main=card.querySelector(".mc-score-main");
+    var det=card.querySelector(".mc-score-detail");
+    if(miss>0){
+      main.innerHTML='<span class="mc-score-todo">Answer '+miss+' more</span>';
+      det.innerHTML="";
+      card.classList.remove("mc-score-done");
+      return;
+    }
+    if(!out||out.err){ main.innerHTML='<span class="mc-score-todo">Answer '+Math.max(miss,1)+' more</span>'; det.innerHTML=""; return; }
+    if(out.html){ main.innerHTML='<div class="mc-score-html">'+out.html+'</div>'; det.innerHTML=""; card.classList.add("mc-score-done"); return; }
+    try { if (window.SMD_KU) SMD_KU.emit("calc", c.id); } catch(e){}
+    var sc=scaleFor(c, out);
+    var verdict=stripTags(out.i||"");
+    var first=verdict.split(".")[0]||"";
+    var rest=verdict.slice(first.length).replace(/^\.\s*/,"");
+    var h='<div class="mc-score-top"><span class="mc-score-lbl">Total</span><span class="mc-score-num">'+esc(out.v)+(sc?' <small>/ '+esc(sc.max)+'</small>':(out.u?' <small>'+esc(out.u)+'</small>':""))+'</span></div>';
+    if(sc && sc.cuts.length){
+      var pct=Math.max(0,Math.min(100,((sc.val-sc.min)/(sc.max-sc.min))*100));
+      var cutPct=((sc.cuts[0]-sc.min)/(sc.max-sc.min))*100;
+      h+='<div class="mc-scale" aria-hidden="true"><span class="mc-scale-lo" style="width:'+cutPct+'%"></span><span class="mc-scale-hi" style="left:'+cutPct+'%;width:'+(100-cutPct)+'%"></span><span class="mc-scale-mark" style="left:'+pct+'%"></span></div>';
+      h+='<div class="mc-scale-lab"><span>'+esc(sc.min)+'</span><span>'+esc(sc.cuts[0])+' cut-off</span><span>'+esc(sc.max)+'</span></div>';
+    }
+    h+='<div class="mc-score-verdict"><b>'+esc(first)+'</b>'+(rest?esc(". "+rest):"")+'</div>';
+    main.innerHTML=h;
+    var v=readValuesSafe(c);
+    det.innerHTML=breakdownHTML(c, v, out)+   // the verdict line above already carries the full interpretation
+      '<div class="mc-score-actions"><button type="button" class="mc-copy-btn" id="mcCopy_'+c.id+'">Copy result</button>'+(c.ref?'<div class="mc-score-src">Source: '+esc(c.ref)+'</div>':"")+'</div>';
+    card.classList.add("mc-score-done");
+    var cp=document.getElementById("mcCopy_"+c.id);
+    if(cp) cp.addEventListener("click", function(){
+      var txt=c.title+": "+out.v+(out.u?" "+out.u:"")+". "+stripTags(out.i||"");
+      try{ if(navigator.clipboard) navigator.clipboard.writeText(txt); }catch(e){}
+      cp.textContent="Copied";
+      setTimeout(function(){ cp.textContent="Copy result"; }, 1200);
+    });
+  }
+  function fillFromSnapshot(c, run){
+    var snap=patientSnapshot();
+    var noteEl=document.getElementById("mcAFnote_"+c.id);
+    if(!snap.has){
+      if(noteEl) noteEl.innerHTML='<div class="mc-af-msg">Open a patient first. Open Ward, ICU or an OPD patient, then return here.</div>';
+      var body=document.getElementById("mcAFbody_"+c.id);
+      if(body && calcHasLab(c)){ body.innerHTML=""; }
+      return { filled:0, total:c.inputs.length };
+    }
+    var filled=0, total=c.inputs.length;
+    var timeStr=fmtTime(snap.ts);
+    var srcLabel=snap.src+(timeStr?" "+timeStr:"");
+    c.inputs.forEach(function(f){
+      var inp=document.getElementById("mc_"+c.id+"_"+f.id); if(!inp) return;
+      var val=null, isSex=false;
+      if(f.lab && snap.labs[f.lab]!=null) val=snap.labs[f.lab];
+      // Haemoglobin fields without a lab hint (many added calculators): fill only a g/dL field with a plausible g/dL value, never a g/L one.
+      else if(/haemoglobin|hemoglobin/i.test(f.label||"") && /g\/dl/i.test(f.unit||"") && snap.labs.hb!=null && +snap.labs.hb>=2 && +snap.labs.hb<=25) val=snap.labs.hb;
+      else {
+        var vk=vitalKeyFor(f);
+        if(vk==="age" && snap.age!=null) val=snap.age;
+        else if(vk==="sex" && snap.sex){ val=snap.sex; isSex=true; }
+        else if(vk && snap.vitals[vk]!=null) val=snap.vitals[vk];
+        else if(vk==="map" && snap.vitals.sbp!=null && snap.vitals.dbp!=null) val=Math.round((+snap.vitals.sbp+2*+snap.vitals.dbp)/3);
+      }
+      if(val==null||val==="") return;
+      if(f.type==="check"){ inp.checked=!!val; syncSwitch(inp.id); }
+      else if(f.type==="select"){
+        var want=String(val).toLowerCase();
+        var opts=inp.options, done=false;
+        for(var i=0;i<opts.length;i++){ if(String(opts[i].value).toLowerCase()===want||String(opts[i].value).toLowerCase().charAt(0)===want.charAt(0)){ inp.value=opts[i].value; done=true; break; } }
+        if(!done) return;
+        syncSeg(inp.id);
+      }
+      else inp.value=val;
+      filled++;
+      var srcEl=document.querySelector('[data-src-for="'+inp.id+'"]');
+      if(srcEl) srcEl.textContent=srcLabel;
+    });
+    if(noteEl) noteEl.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">Auto-filled: verify each value</div><div>Filled '+filled+' of '+total+'. Source: '+esc(srcLabel)+'.</div></div>';
+    if(run) run(false);
+    return { filled:filled, total:total };
+  }
+  function renderPanelV2(id){
+    var c=byId(id); if(!c) return;
+    var view=root.querySelector("#mcCalcView"); if(!view) return;
+    var favOn=isWatchFav(id);
+    view.innerHTML=
+      '<div class="mc-cv-head"><button type="button" class="mc-cv-back" id="mcCvBack">‹ Calculators</button><button type="button" class="mc-cv-star'+(favOn?" on":"")+'" id="mcCvStar" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(window.SMD_HAS_WATCH?" Apple Watch":" starred")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button></div>'+
+      '<div class="mc-cv-title"><h2>'+esc(c.title)+'</h2><p>'+esc(c.desc)+'</p></div>'+
+      '<div class="mc-action-row"><button type="button" class="mc-act-btn" id="mcAuto_'+id+'">Auto-fill from patient</button><button type="button" class="mc-act-btn" id="mcAsk_'+id+'">Ask MaiK</button></div>'+
+      '<div id="mcAFnote_'+id+'"></div>'+
+      '<div class="mc-panel" id="mcPanel_'+id+'">'+
+        (calcHasLab(c)?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">'+mcIco("flask")+' Choose patient (Ward Sync labs)</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
+        '<div class="mc-form">'+inputHTML(c)+'</div>'+
+        '<button class="mc-calc-btn'+(_resultCb&&id===_resultCbId?" mc-use":"")+'" id="mcCalc_'+id+'">'+(_resultCb&&id===_resultCbId?"Use this result":"Calculate")+'</button>'+
+        '<button type="button" class="mc-reset-btn" id="mcReset_'+id+'">Reset</button>'+
+        '<div class="mc-result" id="mcRes_'+id+'"></div>'+
+        (c.draft?'<div class="mc-draft">Draft: AI-drafted from the cited source, not yet clinician-approved.</div>':"")+
+        (c.ref?'<div class="mc-ref">'+mcIco("book")+' <b>Reference:</b> '+esc(c.ref)+'</div>':"")+
+        (c.srcHtml||"")+
+      '</div>'+
+      '<div class="mc-score" id="mcScore_'+id+'" aria-live="polite"><button type="button" class="mc-score-bar" id="mcScoreBar_'+id+'" aria-expanded="false"><span class="mc-score-grab"></span><span class="mc-score-main"></span></button><div class="mc-score-detail" hidden></div></div>';
+    function run(fromBtn){
+      var vals=readValuesSafe(c);
+      var out; try { out=c.compute(vals); } catch(e){ out={err:"Could not compute. Check the inputs."}; }
+      var res=document.getElementById("mcRes_"+id);
+      if(calcV2On()){
+        if(res){
+          if(!out) res.innerHTML="";
+          else if(out.err) res.innerHTML='<div class="mc-res-err">'+esc(out.err)+'</div>';
+          else if(out.html) res.innerHTML=out.html;
+          else res.innerHTML="";
+        }
+        updateScoreCard(c, out);
+        if(fromBtn && !_suppressCb && _resultCb && id===_resultCbId && out && !out.err){ try { _resultCb(id, out); } catch(e){} }
+        return out;
+      }
+      return out;
+    }
+    view.querySelector("#mcCvBack").addEventListener("click", closeCalcView);
+    view.querySelector("#mcCvStar").addEventListener("click", function(){
+      toggleWatchFav(id);
+      var on=isWatchFav(id), b=view.querySelector("#mcCvStar");
+      b.classList.toggle("on", on); b.setAttribute("aria-pressed", on?"true":"false");
+      renderList();
+    });
+    view.querySelector("#mcAuto_"+id).addEventListener("click", function(){ fillFromSnapshot(c, run); });
+    view.querySelector("#mcAsk_"+id).addEventListener("click", function(){
+      var qq=buildMaikQuestion(c);
+      try{ if(window.SMD_askMaik) SMD_askMaik(qq); else if(window.SMD_askMaikHandoff) SMD_askMaikHandoff({ prefill:qq }); }catch(e){}
+    });
+    var calcBtn=document.getElementById("mcCalc_"+id);
+    if(calcBtn) calcBtn.addEventListener("click", function(){ run(true); });
+    var rst=document.getElementById("mcReset_"+id);
+    if(rst) rst.addEventListener("click", function(){
+      c.inputs.forEach(function(f){
+        var el=document.getElementById("mc_"+c.id+"_"+f.id); if(!el) return;
+        if(f.type==="check"){ el.checked=false; syncSwitch(el.id); }
+        else { el.value=(f.def!=null?String(f.def):""); if(f.type==="select") syncSeg(el.id); }
+        var s=document.querySelector('[data-src-for="'+el.id+'"]'); if(s) s.textContent="";
+      });
+      var n=document.getElementById("mcAFnote_"+id); if(n) n.innerHTML="";
+      run(false);
+    });
+    var bar=document.getElementById("mcScoreBar_"+id), det=view.querySelector(".mc-score-detail");
+    bar.addEventListener("click", function(){
+      var open=det.hidden;
+      det.hidden=!open; bar.setAttribute("aria-expanded", open?"true":"false");
+      view.querySelector(".mc-score").classList.toggle("mc-score-open", open);
+    });
+    view.querySelectorAll("[data-seg]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var fid=b.getAttribute("data-seg"), sel=document.getElementById(fid);
+        if(sel){ sel.value=b.getAttribute("data-v"); syncSeg(fid); run(false); }
+      });
+    });
+    view.querySelectorAll("[data-switch]").forEach(function(b){
+      b.addEventListener("click", function(){
+        var fid=b.getAttribute("data-switch"), inp=document.getElementById(fid);
+        if(inp){ inp.checked=!inp.checked; syncSwitch(fid); run(false); }
+      });
+    });
+    view.querySelectorAll(".mc-input").forEach(function(inp){
+      inp.addEventListener("keydown", function(e){ e.stopPropagation(); if(e.key==="Enter") run(true); });
+      inp.addEventListener("input", function(){ run(false); });
+      inp.addEventListener("change", function(){ if(inp.classList.contains("mc-seg-select")) syncSeg(inp.id); run(false); });
+    });
+    if(calcHasLab(c)) wireAutofill(c, function(){ run(false); });
+    c.inputs.forEach(function(f){ if(f.type==="select") syncSeg("mc_"+c.id+"_"+f.id); });
+    run(false);
+  }
   function renderPanel(id){
     var c=byId(id); if(!c) return;
+    if(calcV2On()){ renderPanelV2(id); return; }
     var el=document.getElementById("mcPanel_"+id); if(!el) return;
     var hasLab=calcHasLab(c);
     el.innerHTML=
@@ -8549,8 +9000,12 @@
   /* ---- open/close + public API ---- */
   function openList(cat){
     ensureRoot();
+    root.classList.toggle("mc-v2", calcV2On());
     activeCat = (cat && CAT_ORDER.indexOf(cat)>=0) ? cat : "";
     q=""; openId=null;
+    var view=root.querySelector("#mcCalcView"); if(view){ view.hidden=true; view.innerHTML=""; }
+    var bodyEl=root.querySelector("#mcBody"), pin=root.querySelector(".mc-pin"), top=root.querySelector(".mc-top");
+    if(bodyEl) bodyEl.style.display=""; if(pin) pin.style.display=""; if(top) top.style.display="";
     var si=root.querySelector("#mcSearch"); if(si) si.value="";
     renderCats(); renderList();
     root.classList.add("on"); document.body.classList.add("mc-lock");
@@ -8567,11 +9022,12 @@
       if(val==null || (typeof val==="number" && isNaN(val))) return;
       var el=document.getElementById("mc_"+c.id+"_"+f.id);
       if(!el) return;
-      if(f.type==="check") el.checked=!!val;
-      else el.value=String(val);
+      if(f.type==="check"){ el.checked=!!val; syncSwitch(el.id); }
+      else { el.value=String(val); if(f.type==="select") syncSeg(el.id); }
     });
     var btn=document.getElementById("mcCalc_"+id);
-    if(btn){ _suppressCb=true; try { btn.click(); } finally { _suppressCb=false; } }   // render the prefilled result WITHOUT reporting it back — only an explicit user Calculate writes to the opener
+    if(btn){ _suppressCb=true; try { btn.click(); } finally { _suppressCb=false; } }
+    else { c.inputs.forEach(function(f){ var e2=document.getElementById("mc_"+c.id+"_"+f.id); if(e2){ e2.dispatchEvent(new Event("change",{bubbles:true})); } }); }
   }
   // open(id, prefill, onResult): onResult(scoreId, out) is called when the user hits Calculate, so
   // an opener (e.g. the ICU dashboard) can store the computed result back on the patient.
@@ -8579,11 +9035,17 @@
     _resultCb = (typeof onResult === "function") ? onResult : null; _resultCbId = _resultCb ? id : null;
     openList();
     var c=byId(id); if(!c) return;
+    if(calcV2On()){
+      activeCat=""; renderCats();
+      openCalcView(id);
+      if(prefill) applyPrefill(id, prefill);
+      return;
+    }
     activeCat=""; openId=id; renderCats(); renderList();
     if(prefill) applyPrefill(id, prefill);
     setTimeout(function(){ var el=document.getElementById("mcPanel_"+id); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); }, 80);
   }
-  function close(){ _resultCb=null; _resultCbId=null; if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
+  function close(){ _resultCb=null; _resultCbId=null; if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); var v=root.querySelector("#mcCalcView"); if(v){ v.hidden=true; v.innerHTML=""; } } }
 
   /* ---- Drug Interactions entry point (Tools) — delegates to drugs.js's
      window.MEDDRUGS.openInteractions, the single shared MEDLIST overlay (Task 5/6). ---- */
@@ -8689,8 +9151,117 @@
       ".mc-af-ok span{color:var(--slate-soft,#888);font-size:10.5px}",
       ".mc-af-miss{color:#b45309;margin-top:6px}",
       ".mc-af-verify{margin-top:7px;font-size:10.5px;color:var(--slate-soft,#888)}"
-    ].join("") + polishCSS();
+    ].join("") + polishCSS() + v2CSS();
     var st=document.createElement("style"); st.id="mc-styles"; st.textContent=css; document.head.appendChild(st);
+  }
+  function v2CSS(){
+    var Q="html body #mcOverlay#mcOverlay#mcOverlay.mc-v2";
+    return [
+      Q+" .mc-top{background:var(--paper,#f6f7f5);border-bottom:none;padding-bottom:2px}",
+      Q+" .mc-title{font-size:28px;font-weight:800;text-align:left;letter-spacing:-.02em}",
+      Q+" .mc-title .mc-count{font-size:13px;background:none;color:var(--slate-soft,#5a7184);padding:0;font-weight:600}",
+      Q+" .mc-back{border:none;color:var(--teal,#0e6e63);font-size:15px;height:44px}",
+      Q+" .mc-pin{transition:transform .2s ease,opacity .2s ease}",
+      Q+" .mc-pin.mc-pin-hide{transform:translateY(-8px);opacity:0;pointer-events:none;height:0;overflow:hidden;padding:0;border:none}",
+      Q+" .mc-search{background:var(--line,#e5ebee);border:none;border-radius:10px;height:38px}",
+      Q+" .mc-cats .mc-cat{border-radius:14px;min-height:28px;padding:4px 11px;font-size:12.5px;box-shadow:none!important}",
+      Q+" .mc-grp-h{text-transform:uppercase;letter-spacing:.05em;font-size:12px;color:var(--slate-soft,#5a7184);margin:16px 4px 6px}",
+      Q+" .mc-grid.mc-group{background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:12px;overflow:hidden;display:block}",
+      Q+" .mc-row{display:flex;align-items:center;min-height:56px;border:none;border-bottom:1px solid var(--line,#e3eaee);border-radius:0;box-shadow:none!important;background:var(--panel,#fff);content-visibility:auto}",
+      Q+" .mc-row:last-child{border-bottom:none}",
+      Q+" .mc-row-main{flex:1;display:flex;align-items:center;gap:11px;padding:8px 4px 8px 12px;text-align:left;background:none;border:none;min-height:56px;cursor:pointer}",
+      Q+" .mc-row-main:active{background:var(--paper,#f6f7f5)}",
+      Q+" .mc-ic{width:26px;height:26px;border-radius:7px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);display:grid;place-items:center;flex:0 0 auto}",
+      Q+" .mc-ic svg{width:15px;height:15px}",
+      Q+" .mc-card-t{font-size:14.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      Q+" .mc-card-d{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}",
+      Q+" .mc-card-d mark,"+Q+" .mc-card-t mark{background:var(--teal-soft,#e3f1ee);color:inherit;padding:0 1px;border-radius:2px}",
+      Q+" .mc-row .mc-star{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:none;color:#d69e2e;cursor:pointer;flex:0 0 auto}",
+      Q+" .mc-row .mc-chev{position:static;width:22px;height:44px;display:flex;align-items:center;justify-content:center;color:#b8c3ca;margin:0}",
+      Q+" .mc-empty-t{font-size:15px;font-weight:700;color:var(--ink,#14202b);margin-bottom:4px}",
+      Q+" .mc-calcview{position:absolute;inset:0;background:var(--paper,#f6f7f5);overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:120px;z-index:4}",
+      Q+" .mc-calcview.mc-push{animation:mcPush .22s ease}",
+      "@keyframes mcPush{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}",
+      "@media(prefers-reduced-motion:reduce){"+Q+" .mc-calcview.mc-push{animation:none}"+Q+" .mc-pin{transition:none}}",
+      Q+" .mc-cv-head{display:flex;align-items:center;justify-content:space-between;padding:calc(8px + env(safe-area-inset-top)) 8px 0}",
+      Q+" .mc-cv-back{background:none;border:none;color:var(--teal,#0e6e63);font:600 15px var(--sans,system-ui);min-height:44px;cursor:pointer}",
+      Q+" .mc-cv-star{width:44px;height:44px;background:none;border:none;color:#b6bcc4;cursor:pointer;display:flex;align-items:center;justify-content:center}",
+      Q+" .mc-cv-star.on{color:#d69e2e}",
+      Q+" .mc-cv-title{padding:2px 16px 0}",
+      Q+" .mc-cv-title h2{margin:0;font:800 21px var(--sans,system-ui);letter-spacing:-.01em;color:var(--ink,#14202b)}",
+      Q+" .mc-cv-title p{margin:4px 0 0;font:500 13px var(--sans,system-ui);color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      Q+" .mc-action-row{display:flex;gap:8px;padding:12px 16px 0}",
+      Q+" .mc-act-btn{flex:1;min-height:44px;border:1px solid var(--line,#e3eaee);background:var(--panel,#fff);border-radius:10px;font:700 13px var(--sans,system-ui);color:var(--teal,#0e6e63);cursor:pointer}",
+      Q+" .mc-act-btn:active{background:var(--teal-soft,#e3f1ee)}",
+      Q+" #mcCalcView [id^=mcAFnote_]:not(:empty){padding:8px 16px 0}",
+      Q+" .mc-form{margin:12px 16px 0;background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:12px;overflow:hidden}",
+      Q+" .mc-frow{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 12px;border-bottom:1px solid var(--line,#e3eaee);flex-wrap:wrap}",
+      Q+" .mc-frow:last-child{border-bottom:none}",
+      Q+" .mc-flbl{flex:1;min-width:120px;font:600 14px var(--sans,system-ui);color:var(--ink,#14202b)}",
+      Q+" .mc-fval{display:flex;align-items:center;gap:6px}",
+      Q+" .mc-numwrap{background:var(--paper,#f6f7f5);border:1px solid var(--line,#e3eaee);border-radius:8px;padding:0 8px}",
+      Q+" .mc-num{border:none;background:none;text-align:right;font:700 15px var(--sans,system-ui);font-variant-numeric:tabular-nums;width:84px;padding:8px 0;color:var(--ink,#14202b)}",
+      Q+" .mc-num:focus{outline:none}",
+      Q+" .mc-numwrap:focus-within{border-color:var(--teal,#0e6e63);outline:2px solid var(--teal,#0e6e63);outline-offset:1px}",
+      Q+" .mc-suffix{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-select{border:1px solid var(--line,#e3eaee);border-radius:8px;padding:8px;font:600 14px var(--sans,system-ui);background:var(--paper,#f6f7f5);color:var(--ink,#14202b);max-width:190px}",
+      Q+" .mc-seg{display:flex;background:var(--line,#e8edf0);border-radius:8px;padding:2px}",
+      Q+" .mc-seg-btn{border:none;background:none;padding:7px 12px;border-radius:6px;font:600 12.5px var(--sans,system-ui);color:var(--slate,#2d4356);cursor:pointer;min-height:32px}",
+      Q+" .mc-seg-btn.on{background:var(--panel,#fff);color:var(--ink,#14202b);box-shadow:0 1px 2px rgba(0,0,0,.12)}",
+      Q+" .mc-seg-select{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}",
+      Q+" .mc-switch{width:46px;height:28px;border-radius:14px;background:#dce3e7;border:none;position:relative;cursor:pointer;flex:0 0 auto;padding:0}",
+      Q+" .mc-switch span{position:absolute;width:24px;height:24px;border-radius:50%;background:#fff;top:2px;left:2px;box-shadow:0 1px 2px rgba(0,0,0,.2);transition:left .18s ease}",
+      Q+" .mc-switch.on{background:var(--teal,#0e6e63)}",
+      Q+" .mc-switch.on span{left:20px}",
+      Q+" .mc-check-hidden{position:absolute;width:1px;height:1px;opacity:0}",
+      Q+" .mc-src{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);width:100%}",
+      Q+" .mc-src:empty{display:none}",
+      Q+" .mc-panel{border-top:none;padding:0 0 8px}",
+      Q+" .mc-panel .mc-af{margin:12px 16px 0}",
+      Q+" .mc-calc-btn{margin:12px 16px 0;width:calc(100% - 32px)}",
+      Q+" .mc-reset-btn{display:block;margin:10px auto 0;background:none;border:none;color:var(--slate-soft,#5a7184);font:600 13px var(--sans,system-ui);min-height:44px;cursor:pointer;text-decoration:underline}",
+      Q+" .mc-score{position:fixed;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));background:var(--panel,#fff);border:1px solid var(--line,#e3eaee);border-radius:16px;z-index:5;max-height:70vh;overflow:hidden}",
+      "body.dark "+Q+" .mc-score,body.v3-dark "+Q+" .mc-score{background:#0d1d23;border-color:#17303a}",
+      Q+" .mc-score-bar{width:100%;background:none;border:none;text-align:left;padding:10px 14px;cursor:pointer;color:var(--ink,#14202b);font:inherit}",
+      Q+" .mc-score-grab{display:block;width:34px;height:4px;border-radius:2px;background:var(--line,#d5dde2);margin:0 auto 8px}",
+      Q+" .mc-score-todo{font:700 15px var(--sans,system-ui);color:var(--slate,#2d4356)}",
+      Q+" .mc-score-top{display:flex;align-items:baseline;justify-content:space-between}",
+      Q+" .mc-score-lbl{font:700 11px var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-score-num{font:800 30px var(--sans,system-ui);font-variant-numeric:tabular-nums;letter-spacing:-.02em}",
+      Q+" .mc-score-num small{font-size:13px;color:var(--slate-soft,#5a7184);font-weight:600}",
+      Q+" .mc-scale{position:relative;height:8px;border-radius:4px;margin:10px 0 4px;background:var(--line,#e3eaee);overflow:hidden}",
+      Q+" .mc-scale-lo{position:absolute;left:0;top:0;bottom:0;background:var(--teal,#0e6e63)}",
+      Q+" .mc-scale-hi{position:absolute;top:0;bottom:0;background:var(--red,#ab1c2c)}",
+      Q+" .mc-scale-mark{position:absolute;top:-2px;width:3px;height:12px;background:var(--ink,#14202b);border-radius:2px;transform:translateX(-1px)}",
+      Q+" .mc-scale-lab{display:flex;justify-content:space-between;font:600 11px var(--mono,monospace);color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-score-verdict{font:500 12.5px var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:6px;line-height:1.45}",
+      Q+" .mc-score-detail{padding:0 14px 14px;max-height:46vh;overflow-y:auto}",
+      Q+" .mc-score-interp{font:500 13px var(--sans,system-ui);line-height:1.55;color:var(--ink,#14202b)}",
+      Q+" .mc-bd{margin-top:10px;border-top:1px solid var(--line,#e3eaee)}",
+      Q+" .mc-bd-row{display:grid;grid-template-columns:1fr auto 44px;gap:10px;padding:7px 0;border-bottom:1px solid var(--line,#e3eaee);font:500 13px var(--sans,system-ui)}",
+      Q+" .mc-bd-val{font-weight:700;font-variant-numeric:tabular-nums;text-align:right}",
+      Q+" .mc-bd-pt{font-weight:700;text-align:right;color:var(--slate-soft,#5a7184)}",
+      Q+" .mc-copy-btn{margin-top:10px;min-height:44px;padding:0 16px;border:1px solid var(--line,#e3eaee);background:var(--paper,#f6f7f5);border-radius:10px;font:700 13px var(--sans,system-ui);color:var(--teal,#0e6e63);cursor:pointer}",
+      Q+" .mc-score-src{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px;line-height:1.5}",
+      Q+" :focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}",
+      "@media(max-width:360px){"+Q+" .mc-num{width:64px}"+Q+" .mc-select{max-width:150px}}",
+      /* Review fixes: appearance.css glass and the .mc-card rules use !important, so the plain variant A look must too. */
+      Q+" .mc-top,"+Q+" .mc-pin{background:var(--paper,#f6f7f5)!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:none!important}",
+      Q+" .mc-back{background:none!important;box-shadow:none!important;border:none!important;padding:0 4px!important}",
+      Q+" .mc-search{box-shadow:none!important;border:none!important;outline:none;background:var(--line,#e5ebee)!important}",
+      Q+" .mc-search:focus{outline:2px solid var(--teal,#0e6e63)!important;outline-offset:1px}",
+      Q+" .mc-cats .mc-cat{background:var(--panel,#fff)!important;border:1px solid var(--line,#e3eaee)!important;backdrop-filter:none!important}",
+      Q+" .mc-cats .mc-cat.on{background:#0F766E!important;border-color:#0F766E!important;color:#fff!important}",
+      Q+" .mc-grid.mc-group,"+Q+" .mc-grid{display:block!important;gap:0!important;background:var(--panel,#fff)!important;border:1px solid var(--line,#e3eaee)!important;border-radius:12px!important;overflow:hidden!important;box-shadow:none!important}",
+      Q+" .mc-card.mc-row{margin:0!important;border:none!important;border-bottom:1px solid var(--line,#e3eaee)!important;border-radius:0!important;box-shadow:none!important;background:var(--panel,#fff)!important;backdrop-filter:none!important}",
+      Q+" .mc-card.mc-row:last-child{border-bottom:none!important}",
+      Q+" .mc-row-main,"+Q+" .mc-card-main{min-width:0!important;flex:1 1 auto}",
+      Q+" .mc-card-main{display:flex;flex-direction:column}",
+      Q+" #mcCalcView .mc-result,"+Q+" #mcCalcView .mc-ref{display:none!important}",
+      Q+" #mcCalcView .mc-calc-btn:not(.mc-use){display:none!important}",
+      Q+","+Q+" .mc-body,"+Q+" #mcList{background:var(--paper,#f6f7f5)!important;background-image:none!important}",
+      "body.dark "+Q+",body.dark "+Q+" .mc-body,body.dark "+Q+" #mcList,body.v3-dark "+Q+",body.v3-dark "+Q+" .mc-body,body.v3-dark "+Q+" #mcList,"+"body.dark "+Q+" .mc-top,body.dark "+Q+" .mc-pin,body.v3-dark "+Q+" .mc-top,body.v3-dark "+Q+" .mc-pin{background:#071318!important}"
+    ].join("");
   }
 
   /* Polish pass (owner 2026-11-11: "just polish this rather than changing whole UI"). Same screen, same
@@ -8848,5 +9419,5 @@
     if (c.cat && !CAT_ICON[c.cat]) CAT_ICON[c.cat] = "baby";
     return true;
   }
-  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind, register: register };
+  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS, get: calcById, run: calcRun, list: calcList, find: calcFind, register: register, _v2: { on: calcV2On, recent: calcRecent, snapshot: patientSnapshot, maikQuestion: buildMaikQuestion, scaleFor: scaleFor, missingCount: missingCount, fillFromSnapshot: fillFromSnapshot, openCalcView: openCalcView, closeCalcView: closeCalcView } };
 })();

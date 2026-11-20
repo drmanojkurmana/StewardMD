@@ -82,7 +82,7 @@ try {
   ok(await overlayOn() === true, "tapping 'with these values' opens the calculator");
   const vals = await ev(`function v(i){var e=document.getElementById("mc_crcl_"+i); return e ? e.value : null;} return [v("age"),v("wt"),v("scr"),v("sex")].join("|");`);
   ok(vals === "72|58|1.4|f", "the calculator inputs are prefilled (" + vals + ")");
-  ok(/33/.test(String(await ev(`var p=document.getElementById("mcPanel_crcl"); return p ? p.innerText : "";`))), "and the calculator shows its computed result");
+  ok(/33/.test(String(await ev(`var p=document.getElementById("mcScore_crcl")||document.getElementById("mcPanel_crcl"); return p ? p.innerText : "";`))), "and the calculator shows its computed result");
   await closeCalc();
 
   // ── clinical meaning ──
