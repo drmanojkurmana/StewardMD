@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-men-endocrine-tumours",
+ "subject": "ss-general-medicine",
+ "title": "Multiple Endocrine Neoplasia and Endocrine Tumour Syndromes",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Multiple endocrine neoplasia** (MEN, hereditary tumour syndromes) links pituitary, parathyroid and pancreatic tumours. **MEN 1** (menin gene) causes parathyroid, pituitary and pancreatic tumours. **MEN 2** (RET gene) causes medullary thyroid cancer and phaeochromocytoma. **MEN 2B** (mucosal neuroma) causes Marfan habitus with ganglioneuromatosis. **von Hippel Lindau** (VHL gene) causes renal cancer and paraganglioma. **Neurofibromatosis** (NF1 gene) causes phaeochromocytoma.",
+   "say": "Multiple endocrine neoplasia is characterised by hereditary tumour syndromes, and it links pituitary and parathyroid and pancreatic tumours that require screening. MEN one is characterised by menin gene mutation, and it causes parathyroid and pituitary and pancreatic tumours in families. MEN two is characterised by RET gene mutation, and it causes medullary thyroid cancer and phaeochromocytoma that require prophylaxis.",
+   "vis": null
+  },
+  {
+   "tx": "**Menin tumour suppressor** (chromosome 11) loss causes MEN 1 tumours. **RET proto oncogene** (chromosome 10) mutation causes MEN 2 tumours. **VHL tumour suppressor** (chromosome 3) loss causes VHL tumours. **Pituitary adenomas** (prolactinomas) dominate MEN 1 pituitary disease. **Parathyroid hyperplasia** (four gland disease) dominates MEN 1 parathyroid disease. **Gastrinoma** (gastrin tumour) dominates MEN 1 pancreatic disease.",
+   "say": "Menin tumour suppressor is characterised by chromosome eleven loss, and it causes MEN one tumours that require parathyroid surgery. RET proto oncogene is characterised by chromosome ten mutation, and it causes MEN two tumours that require prophylactic thyroidectomy. VHL tumour suppressor is characterised by chromosome three loss, and it causes VHL tumours that require surveillance.",
+   "vis": null
+  },
+  {
+   "tx": "Menin loss causes **parathyroid hyperplasia** (four gland excess) with hypercalcaemia. RET activation causes **C cell hyperplasia** (thyroid precursor excess) with medullary cancer. Catecholamine excess causes **paroxysmal hypertension** (spells) in phaeochromocytoma. **Gastrin excess** (acid hypersecretion) causes peptic ulcers in gastrinoma. **Prolactin excess** (galactorrhoea) marks prolactinoma. **Marfan habitus** (tall stature) marks MEN 2B disease.",
+   "say": "Menin loss is characterised by parathyroid hyperplasia, and it causes four gland excess with hypercalcaemia that requires surgery. RET activation is characterised by C cell hyperplasia, and it causes medullary cancer that requires prophylaxis. Catecholamine excess is characterised by paroxysmal hypertension, and it causes spells that require alpha blockade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gene mutation"
+     },
+     {
+      "id": "b",
+      "label": "Tumour suppressor loss"
+     },
+     {
+      "id": "c",
+      "label": "Hormone excess"
+     },
+     {
+      "id": "d",
+      "label": "Multi gland tumours"
+     },
+     {
+      "id": "e",
+      "label": "Family screening"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypercalcaemia** (high calcium) is the earliest MEN 1 sign. **Galactorrhoea** (milk leak) marks prolactinoma. **Peptic ulcers** (acid ulcers) mark gastrinoma. **Medullary thyroid cancer** (calcitonin tumour) is the MEN 2 hallmark. **Phaeochromocytoma spells** (headache, palpitations) mark MEN 2 disease. **Mucosal neuromas** (lip bumps) mark MEN 2B disease. **Marfan habitus** (tall stature) marks MEN 2B disease.",
+   "say": "Hypercalcaemia is characterised by high calcium, and it is the earliest MEN one sign that requires parathyroid evaluation. Galactorrhoea is characterised by milk leak, and it marks prolactinoma that requires prolactin testing. Peptic ulcers are characterised by acid ulcers, and they mark gastrinoma that requires gastrin testing.",
+   "vis": null
+  },
+  {
+   "tx": "**Genetic testing** (MEN1 and RET sequencing) is the diagnostic gold standard. **Prolactin level** (milk hormone) screens pituitary disease. **Calcium PTH** (parathyroid panel) screens parathyroid disease. **Calcitonin level** (thyroid marker) screens medullary cancer. **Plasma metanephrines** (catecholamine metabolites) screen phaeochromocytoma. **Gastrin level** (acid hormone) screens gastrinoma.",
+   "say": "Genetic testing is characterised by MEN one and RET sequencing, and it is the diagnostic gold standard that requires family counselling. Prolactin level is characterised by milk hormone testing, and it screens pituitary disease that requires MRI imaging. Calcium PTH is characterised by parathyroid panel testing, and it screens parathyroid disease that requires localisation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Genetic sequencing",
+      "Gold standard",
+      "MEN1 RET genes"
+     ],
+     [
+      "Prolactin",
+      "Pituitary screen",
+      "Prolactinoma"
+     ],
+     [
+      "Calcium PTH",
+      "Parathyroid screen",
+      "Hyperplasia"
+     ],
+     [
+      "Calcitonin",
+      "Medullary screen",
+      "C cell tumour"
+     ],
+     [
+      "Metanephrines",
+      "Phaeochromocytoma",
+      "Spells screen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prophylactic thyroidectomy** (preventive removal) is standard in MEN 2 carriers. **Parathyroidectomy** (gland removal) treats MEN 1 hypercalcaemia. **Phaeochromocytoma surgery** (alpha blockade first) follows prophylactic thyroidectomy. **Gastrinoma surgery** (tumour excision) suits localised disease. **Prolactinoma therapy** (cabergoline) treats pituitary disease. **Family screening** (genetic counselling) is mandatory for siblings.",
+   "say": "Prophylactic thyroidectomy is characterised by preventive removal, and it is standard in MEN two carriers that prevents medullary cancer. Parathyroidectomy is characterised by gland removal, and it treats MEN one hypercalcaemia that requires localisation. Phaeochromocytoma surgery is characterised by alpha blockade first, and it follows prophylactic thyroidectomy that requires sequencing.",
+   "vis": null
+  },
+  {
+   "tx": "**MEN 1 parathyroid surgery** (four gland disease) needs subtotal resection. **MEN 2 thyroidectomy timing** (early childhood) prevents medullary cancer. **Phaeochromocytoma cortical sparing** (adrenal preservation) is debated. **Gastrinoma medical therapy** (proton pump inhibitors) controls acid. **Prolactinoma macroadenoma** (large tumour) needs cabergoline. **VHL renal cancer** (clear cell cancer) needs nephron sparing surgery.",
+   "say": "MEN one parathyroid surgery is characterised by four gland disease, and it needs subtotal resection that reduces recurrence. MEN two thyroidectomy timing is characterised by early childhood surgery, and it prevents medullary cancer that requires RET testing. Phaeochromocytoma cortical sparing is characterised by adrenal preservation, and it is debated in hereditary disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MEN 1 syndrome",
+     "points": [
+      "Menin chromosome eleven",
+      "Parathyroid pituitary pancreas",
+      "Four gland hyperplasia",
+      "Family screening"
+     ]
+    },
+    "right": {
+     "title": "MEN 2 syndrome",
+     "points": [
+      "RET chromosome ten",
+      "Medullary phaeochromocytoma",
+      "Prophylactic thyroidectomy",
+      "Alpha blockade first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Post thyroidectomy hypocalcaemia** (calcium fall) complicates prophylactic surgery. **Phaeochromocytoma crisis** (hypertensive emergency) needs phentolamine. **Gastrinoma ulcer bleeding** (acid ulcers) needs proton pump inhibitors. **Prolactinoma apoplexy** (bleeding tumour) needs urgent surgery. **VHL haemangioblastoma** (brain tumour) needs neurosurgery. Each needs syndrome specific care.",
+   "say": "Post thyroidectomy hypocalcaemia is characterised by calcium fall, and it complicates prophylactic surgery that requires calcium replacement. Phaeochromocytoma crisis is characterised by hypertensive emergency, and it needs phentolamine infusion that controls pressure. Gastrinoma ulcer bleeding is characterised by acid ulcers, and it needs proton pump inhibitors that control acid.",
+   "vis": null
+  },
+  {
+   "tx": "**MEN 1** survival is driven by gastrinoma and parathyroid disease control. MEN 2 survival improves dramatically with prophylactic thyroidectomy. VHL survival depends on renal cancer surveillance. MEN 2B survival is guarded without prophylaxis. Prolactinoma survival is excellent with cabergoline. Family screening halves mortality in carriers.",
+   "say": "MEN one survival is characterised by gastrinoma and parathyroid disease control, and it improves with screening that detects early tumours. MEN two survival is characterised by dramatic improvement with prophylactic thyroidectomy, and it is achieved with RET testing. VHL survival is characterised by dependence on renal cancer surveillance, and it is improved with MRI screening.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2024 MEN guidance stresses genetic diagnosis, prophylactic thyroidectomy and family screening. **RET testing thresholds** (codon 634) guide prophylactic timing. **Menin chromosome 11** (MEN 1 locus) and **RET chromosome 10** (MEN 2 locus) are favourite examination numbers. Traps include missing calcitonin screening, delaying prophylactic thyroidectomy, and skipping family counselling. **Mucosal neuromas** (lip bumps) is the MEN 2B vignette.",
+   "say": "Current guidance is characterised by genetic diagnosis and prophylactic thyroidectomy and family screening, and it is stressed by the Endocrine Society for MEN care. RET testing thresholds are characterised by codon six hundred thirty four, and they guide prophylactic timing that prevents medullary cancer. Menin chromosome eleven is characterised by MEN one locus, and it is a favourite examination number that identifies hereditary disease.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers gene loci, tumour triads and prophylactic timing. Chromosome 11 and 10 loci are the most asked points in theory and viva examinations. Targeted review of gene loci aids viva responses. RET counselling guides family screening and prophylactic timing.",
+   "say": "This table is characterised by gene loci and tumour triads and prophylactic timing, and it gathers the high yield points for revision in theory. Chromosome eleven and ten loci are characterised by frequent examination testing, and they are the most asked points in viva examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "MEN 1 locus",
+      "Chromosome 11 menin"
+     ],
+     [
+      "MEN 2 locus",
+      "Chromosome 10 RET"
+     ],
+     [
+      "MEN 1 triad",
+      "Parathyroid pituitary pancreas"
+     ],
+     [
+      "MEN 2 triad",
+      "Medullary phaeochromocytoma"
+     ],
+     [
+      "Prophylactic surgery",
+      "Thyroidectomy MEN 2"
+     ],
+     [
+      "Gastrinoma acid control",
+      "Proton pump inhibitors"
+     ],
+     [
+      "MEN 2B sign",
+      "Mucosal neuromas"
+     ],
+     [
+      "Family action",
+      "Genetic counselling"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

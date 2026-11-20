@@ -1,0 +1,195 @@
+{
+ "v": 1,
+ "module": "sgm-aortic-peripheral",
+ "subject": "ss-general-medicine",
+ "title": "Aortic and Peripheral Arterial Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Peripheral arterial disease (arrest of limb flow from arterial narrowing) is usually atherosclerotic, while an abdominal aortic aneurysm means focal aortic dilatation. An ankle brachial index below **0.90** confirms peripheral disease, and an aortic diameter of **3.0 cm** or more defines aneurysm. Prevalence rises steeply after age 65 years, especially in smokers with hypertension and diabetes mellitus.",
+   "say": "Peripheral arterial disease is narrowing of limb arteries from fatty plaque and it is usually atherosclerotic in older adults. Abdominal aortic aneurysm is focal dilatation of the aorta and it should be suspected in older men with smoking history. Ankle brachial index below zero point nine is abnormal and indicates disease while aortic diameter of three centimetres or more is aneurysm. The disease is common after sixty five years and it develops more often with hypertension and diabetes.",
+   "vis": null
+  },
+  {
+   "tx": "Atherosclerosis (artery wall disease with fatty plaque) accounts for most limb artery narrowing. Major risks are **smoking**, hypertension, diabetes, hyperlipidaemia and chronic kidney disease, with male sex and age over 65 years. Non atherosclerotic causes include vasculitis, fibromuscular dysplasia, thrombophilia, embolism and infective aneurysms such as syphilitic or mycotic lesions.",
+   "say": "Atherosclerosis is the main cause and it involves intimal plaque in large arteries such as the aorta and leg vessels. Smoking is the strongest risk factor and it increases plaque growth and aneurysm expansion. Hypertension and diabetes and high cholesterol also increase risk and they should be controlled early. Drug history, age and family history and kidney disease also matter and they should be checked in every patient.",
+   "vis": null
+  },
+  {
+   "tx": "Endothelial injury from smoke, lipids and hypertension lets lipid enter the intima. Inflammation and fibrosis form **atherosclerotic plaque** that narrows the lumen, so collateral vessels develop and exercise brings calf pain. Plaque cap thinning and rupture trigger **thrombosis**, causing sudden occlusion, while aneurysmal wall thinning instead threatens dissection or rupture of the aorta.",
+   "say": "Endothelial injury allows lipid to enter the vessel wall and inflammation and fibrosis then form a fixed plaque. Plaque narrows the lumen and it causes flow limitation during exercise and pain in the calf muscle. Flow may also be diverted through collateral vessels and symptoms follow the severity of demand. Severe plaque may ulcerate or rupture and thrombosis then causes sudden occlusion with limb threat.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Risk factors"
+     },
+     {
+      "id": "b",
+      "label": "Endothelial injury"
+     },
+     {
+      "id": "c",
+      "label": "Plaque and stenosis"
+     },
+     {
+      "id": "d",
+      "label": "Claudication"
+     },
+     {
+      "id": "e",
+      "label": "Thrombosis or rupture"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "Intermittent claudication (calf pain on walking relieved by rest) reflects demand ischaemia. Classic eponyms are **Leriche syndrome** with buttock claudication and erectile dysfunction and absent femoral pulses, and Buerger sign with colour change on leg elevation. Critical limb ischaemia (rest pain with ulcer or gangrene) signals threatened limb and needs urgent vascular referral and revascularisation planning.",
+   "say": "Intermittent claudication is calf pain on walking that is relieved by rest and it reflects demand ischaemia. Leriche syndrome is buttock or thigh claudication with erectile dysfunction and absent femoral pulses and it indicates aortoiliac disease. Examination should include pulse deficits and bruits and trophic skin changes and it should assess exercise tolerance. Critical limb ischaemia is rest pain with ulcers or gangrene and it needs urgent referral.",
+   "vis": null
+  },
+  {
+   "tx": "Bedside ankle brachial index (blood pressure ratio) below **0.90** establishes peripheral disease. Duplex ultrasound (ultrasound flow and anatomy) is the first imaging test, while computed tomography angiography (contrast cross section angiogram) is the planning gold standard. Catheter angiography shows dynamic flow and allows intervention, and abdominal ultrasound screens for aneurysm in at risk men.",
+   "say": "Ankle brachial index is the first test and it is quick and reliable in the clinic with values below zero point nine being abnormal. Duplex ultrasound is noninvasive and it shows stenosis severity and aneurysm size and flow pattern. Computed tomography angiography is the definitive anatomic test and it allows planning of surgery or stenting. Magnetic resonance angiography is useful when contrast load is a concern and catheter angiography shows dynamic flow.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ankle brachial index",
+      "First bedside test",
+      "Below 0.90 is diagnostic"
+     ],
+     [
+      "Duplex ultrasound",
+      "First imaging",
+      "Stenosis and aneurysm size"
+     ],
+     [
+      "CT angiography",
+      "Planning gold standard",
+      "Surgical and stent planning"
+     ],
+     [
+      "Catheter angiography",
+      "Dynamic and therapeutic",
+      "Pressure and intervention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smoking cessation (giving up tobacco) slows progression most. High intensity **statin** therapy such as atorvastatin 80 mg daily, antiplatelet therapy with aspirin or **clopidogrel** 75 mg daily, and strict blood pressure and diabetes control are first line. Supervised exercise therapy improves walking distance, and cilostazol (phosphodiesterase inhibitor) can improve claudication but is avoided in heart failure.",
+   "say": "Smoking cessation is the most important step and it reduces progression and amputation risk. High intensity statin therapy is needed and atorvastatin is commonly used with good effect on events. Antiplatelet therapy is indicated and aspirin or clopidogrel is used for daily protection. Supervised exercise therapy improves walking distance and cilostazol may improve claudication symptoms and glucose and lipid control should remain strict.",
+   "vis": null
+  },
+  {
+   "tx": "Revascularisation (restoring flow by stent or bypass) is for lifestyle limiting claudication refractory to exercise, or for rest pain and ulceration. Iliac lesions favour **stenting**, femoropopliteal disease often favours bypass, and multilevel disease is individualised. Abdominal aneurysm repair (endovascular or open) is advised at **5.5 cm** in men and **5.0 cm** in women, or with rapid growth or symptoms.",
+   "say": "Revascularisation is indicated when lifestyle limiting claudication fails medical therapy or when rest pain or ulceration persists. Endovascular stenting is preferred for focal iliac disease and bypass surgery is often better for long femoropopliteal disease. Abdominal aortic aneurysm repair is advised in men at fifty five millimetres and in women at fifty millimetres. Inferior vena cava filter has no role in stable peripheral disease and endograft repair needs lifelong surveillance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Well suited for focal iliac stenosis",
+      "Short hospital stay",
+      "Needs surveillance for restenosis"
+     ],
+     "title": "Endovascular stent"
+    },
+    "right": {
+     "points": [
+      "Best for long leg disease",
+      "Durable benefit",
+      "Greater perioperative risk"
+     ],
+     "title": "Surgical bypass"
+    }
+   }
+  },
+  {
+   "tx": "Acute limb ischaemia (sudden arterial cutoff) shows the 6 Ps: pain, pallor, pulselessness, paraesthesia, paralysis and perishing cold. Embolism is commonest, and prognosis worsens after 6 hours. Aneurysm **rupture** (wall failure with bleeding) presents with hypotension and back or abdominal pain and carries mortality above 80%, demanding immediate surgery.",
+   "say": "Acute limb ischaemia is a sudden occlusion and it presents with severe pain and pallor and absent pulses and loss of sensation. The classic description has six features and it should be treated as an emergency. Abdominal aneurysm rupture presents with hypotension and flank or abdominal pain and it causes high mortality. Compartment syndrome mays follow ischaemia and it needs urgent fasciotomy with reperfusion therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Peripheral arterial disease is a systemic atherosclerosis marker, and heart attack and stroke kill most patients, not leg disease itself. 5-year  mortality after claudication is about **20%**, rising above 50% with critical ischaemia. Aneurysm growth is faster in smokers and women and with larger diameter, so surveillance duplex and aggressive risk control remain lifelong duties.",
+   "say": "Peripheral disease is a marker of systemic atherosclerosis and myocardial infarction is the commonest cause of death. Five year mortality after claudication is roughly twenty percent and it rises sharply with critical ischaemia. Aneurysm expansion is faster in smokers and in women and in large aneurysms. Duplex surveillance and risk factor control reduce late events and rupture and should continue lifelong.",
+   "vis": null
+  },
+  {
+   "tx": "The **ESC 2024** peripheral arterial disease guideline (European Society of Cardiology, 2024 update) stresses supervised exercise, universal statin, and risk control, with dual pathway inhibition (rivaroxaban 2.5 mg twice daily plus aspirin 100 mg daily) in selected symptomatic patients. Examination traps are falsely high ankle brachial index from calcified diabetic arteries with incompressible vessels, underusing statins, and forgetting coronary risk dominates prognosis.",
+   "say": "The 2024 European guideline update is structured and it emphasises supervised exercise for claudication and statin for every patient. Dual pathway inhibition with low dose rivaroxaban and aspirin is considered in selected symptomatic patients. Bypass versus stent choice follows anatomy rather than device fashion and it should be discussed in a vascular team. The main examination trap is bilateral disease with falsely raised index due to calcified vessels and repeat testing in diabetes.",
+   "vis": null
+  },
+  {
+   "tx": "The table gathers the most asked thresholds, first line medicines, gold standard tests and classic eponyms in one view. Ankle brachial index **0.90**, aneurysm **3.0 cm**, repair thresholds and dual pathway doses repay rapid revision before the examination hall. Every value here is directly asked in theory and in ward based viva examinations daily.",
+   "say": "This summary gathers the high yield thresholds and first line drugs and gold standard tests for revision. Ankle brachial index below zero point nine confirms disease and aneurysm starts at three centimetres. Computed tomography angiography is the planning standard and duplex is the first imaging test. Statin and antiplatelet therapy and smoking cessation remain the backbone with exercise and timely repair at size thresholds.",
+   "vis": {
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ankle brachial index cutoff",
+      "Below 0.90 confirms peripheral disease"
+     ],
+     [
+      "Aneurysm definition",
+      "3.0 cm or more in diameter"
+     ],
+     [
+      "Repair threshold",
+      "Five point five centimetres in men"
+     ],
+     [
+      "Repair threshold women",
+      "Five point zero centimetres"
+     ],
+     [
+      "Gold standard planning test",
+      "Computed tomography angiography"
+     ],
+     [
+      "First imaging test",
+      "Duplex ultrasound with ankle brachial index"
+     ],
+     [
+      "First line medicines",
+      "Statin, antiplatelet and smoking cessation"
+     ],
+     [
+      "Classic eponym",
+      "Leriche syndrome of aortoiliac disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

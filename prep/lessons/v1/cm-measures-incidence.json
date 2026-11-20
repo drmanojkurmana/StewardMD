@@ -13,12 +13,27 @@
    "say": "Count only what is new. New cases arising in a population at risk over a defined period give this rate. People already ill or immune leave the denominator. Fresh events reveal whether control measures are stopping new disease.",
    "vis": {
     "kind": "table",
-    "cols": ["Part", "Rule"],
+    "cols": [
+     "Part",
+     "Rule"
+    ],
     "rows": [
-     ["Numerator", "New cases in the period"],
-     ["Denominator", "Population at risk, excluding existing cases"],
-     ["Time", "Clearly specified period"],
-     ["Meaning", "Force of morbidity, risk of developing disease"]
+     [
+      "Numerator",
+      "New cases in the period"
+     ],
+     [
+      "Denominator",
+      "Population at risk, excluding existing cases"
+     ],
+     [
+      "Time",
+      "Clearly specified period"
+     ],
+     [
+      "Meaning",
+      "Force of morbidity, risk of developing disease"
+     ]
     ]
    }
   },
@@ -30,11 +45,19 @@
     "kind": "compare",
     "left": {
      "title": "Incidence thinking",
-     "points": ["New cases only", "Needs a time period", "Tests control of spread"]
+     "points": [
+      "New cases only",
+      "Needs a time period",
+      "Tests control of spread"
+     ]
     },
     "right": {
      "title": "Prevalence thinking",
-     "points": ["Old plus new cases", "Snapshot of total burden", "Plans services and supplies"]
+     "points": [
+      "Old plus new cases",
+      "Snapshot of total burden",
+      "Plans services and supplies"
+     ]
     }
    }
   },
@@ -46,11 +69,19 @@
     "kind": "compare",
     "left": {
      "title": "Suits point prevalence",
-     "points": ["Chronic stable disease", "One week village survey", "Slowly changing burden"]
+     "points": [
+      "Chronic stable disease",
+      "One week village survey",
+      "Slowly changing burden"
+     ]
     },
     "right": {
      "title": "Defeats point prevalence",
-     "points": ["Illness lasting two days", "Rapid outbreak peaks", "Strong seasonal swings"]
+     "points": [
+      "Illness lasting two days",
+      "Rapid outbreak peaks",
+      "Strong seasonal swings"
+     ]
     }
    }
   },
@@ -60,11 +91,23 @@
    "say": "Stretch the window. Everyone ill at any point during the interval counts, including starters, developers and recoverers. Six students give six across a year but three on its last day. Longer windows always raise the figure; name the interval before comparing.",
    "vis": {
     "kind": "table",
-    "cols": ["Measure", "Same six students"],
+    "cols": [
+     "Measure",
+     "Same six students"
+    ],
     "rows": [
-     ["Point prevalence, 31 December", "3 currently ill"],
-     ["Period prevalence, whole year", "6 ill at some time"],
-     ["Incidence during the year", "3 newly ill"]
+     [
+      "Point prevalence, 31 December",
+      "3 currently ill"
+     ],
+     [
+      "Period prevalence, whole year",
+      "6 ill at some time"
+     ],
+     [
+      "Incidence during the year",
+      "3 newly ill"
+     ]
     ]
    }
   },
@@ -75,11 +118,29 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "New cases arise (incidence)"},
-     {"id": "b", "label": "Cases persist (duration)"},
-     {"id": "c", "label": "Existing load (prevalence)"}
+     {
+      "id": "a",
+      "label": "New cases arise (incidence)"
+     },
+     {
+      "id": "b",
+      "label": "Cases persist (duration)"
+     },
+     {
+      "id": "c",
+      "label": "Existing load (prevalence)"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
    }
   },
   {
@@ -99,24 +160,36 @@
    "say": "Outbreaks rename incidence. Cases among the exposed over the short outbreak period give this rate: 2800 of 4000 villagers, seventy percent, in one malaria month. Wedding meal food poisoning is the other classic, with eaters as the denominator.",
    "vis": {
     "kind": "table",
-    "cols": ["Setting", "Denominator used"],
+    "cols": [
+     "Setting",
+     "Denominator used"
+    ],
     "rows": [
-     ["Village malaria outbreak", "Whole village population, 4000"],
-     ["Wedding meal poisoning", "People who ate the meal"],
-     ["Hostel meningitis scare", "Hostel residents exposed"]
+     [
+      "Village malaria outbreak",
+      "Whole village population, 4000"
+     ],
+     [
+      "Wedding meal poisoning",
+      "People who ate the meal"
+     ],
+     [
+      "Hostel meningitis scare",
+      "Hostel residents exposed"
+     ]
     ]
    }
   },
   {
-    "tx": "**Secondary attack rate** counts new measles among susceptible household contacts of one primary case, limited to those who fall ill inside one incubation period. For measles that figure is about 90 percent, far above the general outbreak attack rate. In a village example, malaria in 2800 of 4000 people over one month in 1996 gave an attack rate of 70 percent, with every exposed person, not only household contacts, in the denominator.",
-    "say": "Secondary attack rate counts new measles among susceptible household contacts of one primary case, limited to those who fall ill inside one incubation period. For measles that figure is about 90 percent, far above the general outbreak attack rate. In a village example, malaria in 2800 of 4000 people over one month in 1996 gave an attack rate of 70 percent, with every exposed person, not only household contacts, in the denominator.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n147-cm-measures-incidence.webp",
-      "alt": "Household with one primary measles case and susceptible contacts, several developing measles, secondary attack rate near 90 percent",
-      "caption": "One primary measles case is shown with household contacts who become secondary cases inside one incubation period. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "**Secondary attack rate** counts new measles among susceptible household contacts of one primary case, limited to those who fall ill inside one incubation period. For measles that figure is about 90 percent, far above the general outbreak attack rate. In a village example, malaria in 2800 of 4000 people over one month in 1996 gave an attack rate of 70 percent, with every exposed person, not only household contacts, in the denominator.",
+   "say": "Secondary attack rate counts new measles among susceptible household contacts of one primary case, limited to those who fall ill inside one incubation period. For measles that figure is about 90 percent, far above the general outbreak attack rate. In a village example, malaria in 2800 of 4000 people over one month in 1996 gave an attack rate of 70 percent, with every exposed person, not only household contacts, in the denominator.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n147-cm-measures-incidence.webp",
+    "alt": "Household with one primary measles case and susceptible contacts, several developing measles, secondary attack rate near 90 percent",
+    "caption": "One primary measles case is shown with household contacts who become secondary cases inside one incubation period. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Secondary attack rate measures contagiousness",
@@ -124,12 +197,27 @@
    "say": "Within households, count what the first case sparks. Susceptible contacts falling ill within one incubation period, divided by susceptible contacts, gives this rate. Measles near ninety percent marks extreme contagiousness. Immune contacts must leave the denominator.",
    "vis": {
     "kind": "table",
-    "cols": ["Part", "Rule"],
+    "cols": [
+     "Part",
+     "Rule"
+    ],
     "rows": [
-     ["Numerator", "Contacts ill within one incubation period"],
-     ["Denominator", "Susceptible exposed contacts only"],
-     ["Excluded", "The primary case and immune contacts"],
-     ["Meaning", "Contagiousness within households or institutions"]
+     [
+      "Numerator",
+      "Contacts ill within one incubation period"
+     ],
+     [
+      "Denominator",
+      "Susceptible exposed contacts only"
+     ],
+     [
+      "Excluded",
+      "The primary case and immune contacts"
+     ],
+     [
+      "Meaning",
+      "Contagiousness within households or institutions"
+     ]
     ]
    }
   },
@@ -141,11 +229,19 @@
     "kind": "compare",
     "left": {
      "title": "Choose incidence when",
-     "points": ["Testing what causes disease", "Judging prevention of new cases", "Following a cohort forward"]
+     "points": [
+      "Testing what causes disease",
+      "Judging prevention of new cases",
+      "Following a cohort forward"
+     ]
     },
     "right": {
      "title": "Choose prevalence when",
-     "points": ["Planning beds, clinics and drugs", "Running a one sweep survey", "Estimating community burden"]
+     "points": [
+      "Planning beds, clinics and drugs",
+      "Running a one sweep survey",
+      "Estimating community burden"
+     ]
     }
    }
   },
@@ -155,11 +251,68 @@
    "say": "Definitions decide the numbers. Without one operational case definition, districts count different diseases under a single name. Clinics miss mild illness, private cases escape returns, and surveys plus surveillance must correct the facility picture.",
    "vis": {
     "kind": "table",
-    "cols": ["Distortion", "Correction"],
+    "cols": [
+     "Distortion",
+     "Correction"
+    ],
     "rows": [
-     ["No shared case definition", "Operational definition plus standard classification"],
-     ["Mild illness never seeks care", "Community morbidity surveys"],
-     ["Private cases escape returns", "Surveillance including private sector"]
+     [
+      "No shared case definition",
+      "Operational definition plus standard classification"
+     ],
+     [
+      "Mild illness never seeks care",
+      "Community morbidity surveys"
+     ],
+     [
+      "Private cases escape returns",
+      "Surveillance including private sector"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Incidence counts only new cases in a population at risk, while prevalence counts all existing cases. The relation is P equals I times D when incidence and duration are steady. Attack rate is incidence during an outbreak. Secondary attack rate counts susceptible contacts falling ill within one incubation period, excluding the primary case.",
+   "say": "Incidence counts only new cases in a population at risk, while prevalence counts all existing cases. The relation is P equals I times D when incidence and duration are steady. Attack rate is incidence during an outbreak. Secondary attack rate counts susceptible contacts falling ill within one incubation period, excluding the primary case.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Incidence denominator",
+      "Population at risk excluding existing cases"
+     ],
+     [
+      "Point prevalence",
+      "All cases at a single moment"
+     ],
+     [
+      "Period prevalence",
+      "All cases during a defined interval"
+     ],
+     [
+      "P equals I times D",
+      "Prevalence equals incidence times average duration"
+     ],
+     [
+      "Attack rate setting",
+      "Incidence during outbreak over short period"
+     ],
+     [
+      "Measles secondary attack rate",
+      "About 90 percent among susceptible contacts"
+     ],
+     [
+      "Cohort studies yield",
+      "Incidence by following healthy people forward"
+     ],
+     [
+      "Cross sectional surveys yield",
+      "Prevalence in one sweep survey"
+     ]
     ]
    }
   }

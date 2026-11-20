@@ -1,0 +1,397 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-sarcoid",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e sarcoidosis chapter",
+  "ERS ATS sarcoidosis statement"
+ ],
+ "steps": [
+  {
+   "say": "Sarcoidosis is a multisystem non caseating granulomatous disease of unknown cause. Bilateral hilar lymphadenopathy with erythema nodosum and Lofgren syndrome is the classic early presentation.",
+   "tx": "**Sarcoidosis** (multisystem granulomatous disease) is defined by **non caseating granulomas** (immune clusters without necrosis) of unknown cause, with **bilateral hilar lymphadenopathy** (enlarged nodes both sides) and **erythema nodosum** (painful shin bumps) marking Lofgren syndrome. Diagnose by compatible imaging plus **histology** (tissue proof) after excluding tuberculosis.",
+   "vis": {
+    "cols": [
+     "Scadding stage",
+     "Imaging",
+     "Course"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stage 0",
+      "Normal chest X ray",
+      "Self limited"
+     ],
+     [
+      "Stage 1",
+      "Hilar nodes only",
+      "Remission common"
+     ],
+     [
+      "Stage 2",
+      "Nodes plus infiltrates",
+      "Treatment often needed"
+     ],
+     [
+      "Stage 3",
+      "Parenchymal infiltrates",
+      "Fibrosis risk"
+     ],
+     [
+      "Stage 4",
+      "Fibrosis, honeycombing",
+      "Irreversible"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Granulomas cluster in lungs, skin, eyes, heart and nervous system, so presentation varies widely. Cardiac involvement is the killer, while Heerfordt parotid fever and lupus pernio are the zebras to know.",
+   "tx": "**Granulomas** (immune cell clusters) cluster in lungs, skin, eyes, heart and nervous system, so presentation varies from incidental nodes to organ failure. **Cardiac sarcoid** (heart involvement) is the killer with arrhythmia and heart block, while **Heerfordt syndrome** (parotid swelling, uveitis, fever) and **lupus pernio** (purple nose and ears) are the eponym zebras examiners love.",
+   "vis": {
+    "edges": [
+     [
+      "granuloma",
+      "lung"
+     ],
+     [
+      "granuloma",
+      "eye"
+     ],
+     [
+      "granuloma",
+      "heart"
+     ],
+     [
+      "heart",
+      "monitor"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "granuloma",
+      "label": "Non caseating granulomas"
+     },
+     {
+      "id": "lung",
+      "label": "Lung most common"
+     },
+     {
+      "id": "eye",
+      "label": "Uveitis, Heerfordt"
+     },
+     {
+      "id": "heart",
+      "label": "Heart block, arrhythmia"
+     },
+     {
+      "id": "monitor",
+      "label": "ECG, imaging, device"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Stage one disease remits in most patients without treatment, so observation is correct. Stage three and four disease with symptoms, hypercalcaemia and organ threats needs systemic therapy.",
+   "tx": "**Stage 1** disease (hilar nodes alone) remits in most patients without treatment, so **observation** (watchful waiting) is correct, while **stage 3** or **4** disease with symptoms, **hypercalcaemia** (high calcium) and organ threats needs systemic therapy. **Pulmonary function** (FVC and DLCO) decides treatment need, not chest X ray stage alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Stage 1, asymptomatic",
+      "Observation, serial films",
+      "Remission in most"
+     ],
+     "title": "Observe"
+    },
+    "right": {
+     "points": [
+      "Symptoms, organ threat",
+      "Steroids first line",
+      "Steroid sparing added"
+     ],
+     "title": "Treat"
+    }
+   }
+  },
+  {
+   "say": "Diagnosis needs tissue from EBUS guided nodal sampling in most cases, with BAL lymphocytosis and PET for cardiac and occult disease. Tuberculosis and fungal infection must be excluded on every specimen.",
+   "tx": "Diagnosis needs tissue from **EBUS** (camera guided node sampling) in most cases, with **BAL** (washing fluid) lymphocytosis above **15** percent and **PET** (metabolic imaging) for cardiac and occult disease. **Tuberculosis** (bacterial infection) and fungal infection must be excluded on every specimen by **culture** (growth testing) and **GeneXpert** (rapid molecular test), since steroids without exclusion are fatal.",
+   "vis": {
+    "cols": [
+     "Test",
+     "Signal",
+     "Use"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "EBUS node sampling",
+      "Non caseating granuloma",
+      "Tissue diagnosis"
+     ],
+     [
+      "BAL lymphocytosis",
+      "Above 15 percent",
+      "Inflammation type"
+     ],
+     [
+      "Calcium",
+      "Raised in granuloma disease",
+      "Activity marker"
+     ],
+     [
+      "ACE level",
+      "Supportive only",
+      "Not diagnostic alone"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "ACE level is neither sensitive nor specific and must never diagnose sarcoidosis alone. Hypercalcaemia, hypercalciuria and vitamin D metabolites reflect granuloma activity and need monitoring during therapy.",
+   "tx": "**ACE** (angiotensin converting enzyme) level is neither sensitive nor specific and must never diagnose sarcoidosis alone, since many other conditions raise it. **Hypercalcaemia**, hypercalciuria (calcium in urine) and vitamin D metabolites reflect granuloma activity and need monitoring during therapy, and **vitamin D** supplementation is withheld until hypercalcaemia resolves.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "ACE raised in many diseases",
+      "Angiotensin level is supportive",
+      "Never diagnostic alone"
+     ],
+     "title": "ACE trap"
+    },
+    "right": {
+     "points": [
+      "Calcium and urine calcium",
+      "Granuloma makes vitamin D",
+      "Sun and supplements caution"
+     ],
+     "title": "Calcium signal"
+    }
+   }
+  },
+  {
+   "say": "Prednisolone is first line for organ threatening disease, with methotrexate as the classically tested steroid sparing agent. Anti TNF therapy suits refractory cardiac, lung and skin disease.",
+   "tx": "**Prednisolone** (oral steroid) at **20** to **40** milligrams daily is first line for organ threatening disease, with **methotrexate** (immune suppressant) as the classically tested steroid sparing agent. **Anti TNF** therapy (infliximab) suits refractory cardiac, lung and skin disease but demands tuberculosis and hepatitis screening before initiation.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Role",
+     "Watch"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Prednisolone",
+      "First line organ disease",
+      "Diabetes, bone, weight"
+     ],
+     [
+      "Methotrexate",
+      "Steroid sparing",
+      "Liver, lung toxicity"
+     ],
+     [
+      "Infliximab",
+      "Refractory disease",
+      "TB, hepatitis screening"
+     ],
+     [
+      "Hydroxychloroquine",
+      "Skin, hypercalcaemia",
+      "Eye monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cardiac sarcoid needs Holter, cardiac MRI and PET guided decisions on pacemaker and defibrillator. High grade block, ventricular tachycardia and ejection fraction below forty trigger device therapy.",
+   "tx": "**Cardiac sarcoid** (heart involvement) needs **Holter** (rhythm recorder), **cardiac MRI** (magnetic imaging) with **late gadolinium** and PET guided decisions on **pacemaker** (rhythm device) and **defibrillator** (shock device). High grade block, **ventricular tachycardia** (dangerous rhythm) and **ejection fraction** under **40** percent trigger device therapy with steroids.",
+   "vis": {
+    "edges": [
+     [
+      "block",
+      "holter"
+     ],
+     [
+      "holter",
+      "mri"
+     ],
+     [
+      "mri",
+      "pet"
+     ],
+     [
+      "pet",
+      "device"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "block",
+      "label": "Suspected cardiac disease"
+     },
+     {
+      "id": "holter",
+      "label": "Holter, ECG"
+     },
+     {
+      "id": "mri",
+      "label": "Cardiac MRI late enhancement"
+     },
+     {
+      "id": "pet",
+      "label": "PET active inflammation"
+     },
+     {
+      "id": "device",
+      "label": "Pacemaker or defibrillator"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Neurosarcoid needs MRI and CSF examination with steroids and methotrexate, while pulmonary hypertension complicates advanced fibrosis. Uveitis needs urgent ophthalmology because silent sight loss is the price of delay.",
+   "tx": "**Neurosarcoid** (nervous system disease) needs **MRI** (brain imaging) and **CSF** (spinal fluid) examination with steroids and **methotrexate**, while **pulmonary hypertension** complicates advanced fibrosis. **Uveitis** (eye inflammation) needs urgent ophthalmology because silent sight loss is the price of delay, and **facial nerve palsy** (face weakness) often responds well to steroids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Eye, parotid, nerve",
+      "Steroid responsive",
+      "Ophthalmology urgent"
+     ],
+     "title": "Reversible organ disease"
+    },
+    "right": {
+     "points": [
+      "Fibrosis, PAH, heartblock",
+      "Device, transplant thought",
+      "Irreversible damage"
+     ],
+     "title": "Irreversible damage"
+    }
+   }
+  },
+  {
+   "say": "Chronic disease brings fibrosis, pulmonary hypertension, aspergilloma and chronic kidney injury from hypercalcaemia. Regular FVC, DLCO, eye and calcium checks catch each complication early.",
+   "tx": "Chronic disease brings **fibrosis**, **pulmonary hypertension**, **aspergilloma** (fungal ball in scar) and **chronic kidney injury** from hypercalcaemia, so regular **FVC**, DLCO, eye and calcium checks catch each complication early. **Fungal ball** in scarred lung bleeds heavily and needs embolisation, and **immunosuppression** (therapy that lowers immunity) raises infection risk that must be counselled.",
+   "vis": {
+    "cols": [
+     "Complication",
+     "Screen",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fibrosis",
+      "FVC, DLCO trend",
+      "Antifibrotic thought"
+     ],
+     [
+      "Pulmonary hypertension",
+      "Echo, BNP",
+      "Vasodilator referral"
+     ],
+     [
+      "Fungal ball",
+      "CT, sputum fungus",
+      "Embolisation if bleed"
+     ],
+     [
+      "Hypercalcaemia",
+      "Calcium, urine calcium",
+      "Hydration, steroid"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Differentiate sarcoid from tuberculosis, lymphoma and berylliosis on every biopsy. Necrosis, caseation and positive cultures redirect immediately, and exposure history filters beryllium disease.",
+   "tx": "Differentiate **sarcoid** from **tuberculosis**, lymphoma and **berylliosis** (beryllium lung disease) on every biopsy, since necrosis, caseation (cheese like death) and positive cultures redirect immediately. **Beryllium** (metal exposure) history filters berylliosis, **lymphoma** (cancer) shows clonal cells, and non caseating granulomas alone never prove sarcoid without exclusion.",
+   "vis": {
+    "cols": [
+     "Mimic",
+     "Distinguishing point",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Tuberculosis",
+      "Caseation, cultures",
+      "GeneXpert, culture"
+     ],
+     [
+      "Lymphoma",
+      "Clonal cells",
+      "Biopsy immunophenotype"
+     ],
+     [
+      "Berylliosis",
+      "Metal exposure",
+      "Exposure history"
+     ],
+     [
+      "Fungal disease",
+      "Culture positive",
+      "Stain and culture"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The sarcoid high yield points are non caseating granulomas, bilateral hilar nodes, Lofgren syndrome, EBUS diagnosis, steroid first line, methotrexate sparing and cardiac device thresholds.",
+   "tx": "Recall **non caseating granulomas**, **bilateral hilar lymphadenopathy**, **Lofgren syndrome** as benign Lofgren pattern, **EBUS** diagnosis with exclusion first, **prednisolone** first line, **methotrexate** sparing, **infliximab** for refractory disease, and **cardiac device** thresholds by block and **ejection fraction**. ACE level never diagnoses sarcoid alone before histology confirmation.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Histology",
+      "Non caseating granuloma",
+      "Diagnosis"
+     ],
+     [
+      "Lofgren syndrome",
+      "Nodes, nodules, arthritis, fever",
+      "Benign pattern"
+     ],
+     [
+      "First line drug",
+      "Prednisolone 20 to 40 mg",
+      "Organ disease"
+     ],
+     [
+      "Steroid sparing",
+      "Methotrexate",
+      "Second line"
+     ],
+     [
+      "Cardiac device",
+      "Ejection fraction under 40",
+      "Threshold"
+     ],
+     [
+      "ACE trap",
+      "Not diagnostic alone",
+      "Never alone"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "Pulmonary sarcoidosis diagnosis and organ care",
+ "v": 1
+}

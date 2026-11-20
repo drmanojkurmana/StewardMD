@@ -24,14 +24,42 @@
    "say": "The WHO classifies xerophthalmia from night blindness and Bitot spots up to severe corneal ulceration and keratomalacia. Prompt treatment at early stages reverses eye damage completely.",
    "vis": {
     "kind": "table",
-    "cols": ["Xerophthalmia stage", "Defining clinical sign", "Reversibility with treatment"],
+    "cols": [
+     "Xerophthalmia stage",
+     "Defining clinical sign",
+     "Reversibility with treatment"
+    ],
     "rows": [
-     ["XN", "Night blindness (nyctalopia)", "Completely reversible within 24 to 48 hours"],
-     ["X1A", "Conjunctival xerosis (dry, muddy conjunctiva)", "Completely reversible with oral therapy"],
-     ["X1B", "Bitot spots (foamy triangular plaques)", "Reversible; may leave harmless residual mark"],
-     ["X2", "Corneal xerosis (hazy, dry, lustreless cornea)", "Completely reversible before ulceration"],
-     ["X3A", "Corneal ulceration affecting < 1/3 cornea", "Leaves permanent corneal scar (XS)"],
-     ["X3B", "Keratomalacia affecting >= 1/3 cornea", "Irreversible melting leading to phthisis bulbi"]
+     [
+      "XN",
+      "Night blindness (nyctalopia)",
+      "Completely reversible within 24 to 48 hours"
+     ],
+     [
+      "X1A",
+      "Conjunctival xerosis (dry, muddy conjunctiva)",
+      "Completely reversible with oral therapy"
+     ],
+     [
+      "X1B",
+      "Bitot spots (foamy triangular plaques)",
+      "Reversible; may leave harmless residual mark"
+     ],
+     [
+      "X2",
+      "Corneal xerosis (hazy, dry, lustreless cornea)",
+      "Completely reversible before ulceration"
+     ],
+     [
+      "X3A",
+      "Corneal ulceration affecting < 1/3 cornea",
+      "Leaves permanent corneal scar (XS)"
+     ],
+     [
+      "X3B",
+      "Keratomalacia affecting >= 1/3 cornea",
+      "Irreversible melting leading to phthisis bulbi"
+     ]
     ]
    }
   },
@@ -43,11 +71,19 @@
     "kind": "compare",
     "left": {
      "title": "Active Bitot spot (X1B)",
-     "points": ["Bilateral, silvery, foamy triangular plaque", "Situated in temporal interpalpebral fissure", "Disappears within weeks of high-dose vitamin A"]
+     "points": [
+      "Bilateral, silvery, foamy triangular plaque",
+      "Situated in temporal interpalpebral fissure",
+      "Disappears within weeks of high-dose vitamin A"
+     ]
     },
     "right": {
      "title": "Inactive residual plaque",
-     "points": ["Persistent flat conjunctival marking", "Seen in older children after past deficiency", "Unaffected by therapeutic vitamin A doses"]
+     "points": [
+      "Persistent flat conjunctival marking",
+      "Seen in older children after past deficiency",
+      "Unaffected by therapeutic vitamin A doses"
+     ]
     }
    }
   },
@@ -58,12 +94,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Severe vitamin A depletion + measles or diarrhoea"},
-     {"id": "b", "label": "Corneal stromal liquefactive necrosis (X3B)"},
-     {"id": "c", "label": "Spontaneous perforation and iris prolapse"},
-     {"id": "d", "label": "Permanent blindness and phthisis bulbi"}
+     {
+      "id": "a",
+      "label": "Severe vitamin A depletion + measles or diarrhoea"
+     },
+     {
+      "id": "b",
+      "label": "Corneal stromal liquefactive necrosis (X3B)"
+     },
+     {
+      "id": "c",
+      "label": "Spontaneous perforation and iris prolapse"
+     },
+     {
+      "id": "d",
+      "label": "Permanent blindness and phthisis bulbi"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -83,13 +144,37 @@
    "say": "Children receive nine doses of vitamin A syrup from nine months up to five years old. The first dose is one lakh units at nine months, followed by two lakh units every six months.",
    "vis": {
     "kind": "table",
-    "cols": ["Child age point", "Dose number", "Volume and dosage administered"],
+    "cols": [
+     "Child age point",
+     "Dose number",
+     "Volume and dosage administered"
+    ],
     "rows": [
-     ["9 completed months", "Dose 1", "100,000 IU (1 ml spoon) with MR-1"],
-     ["16 to 18 months", "Dose 2", "200,000 IU (2 ml spoon) with DPT booster"],
-     ["24 months (2 years)", "Dose 3", "200,000 IU (2 ml spoon) oral suspension"],
-     ["30, 36, 42, 48, 54, 60 mos", "Doses 4 through 9", "200,000 IU every 6 months up to 5 years"],
-     ["Total childhood series", "Total 9 doses", "Cumulative 1,700,000 IU (17 lakh IU)"]
+     [
+      "9 completed months",
+      "Dose 1",
+      "100,000 IU (1 ml spoon) with MR-1"
+     ],
+     [
+      "16 to 18 months",
+      "Dose 2",
+      "200,000 IU (2 ml spoon) with DPT booster"
+     ],
+     [
+      "24 months (2 years)",
+      "Dose 3",
+      "200,000 IU (2 ml spoon) oral suspension"
+     ],
+     [
+      "30, 36, 42, 48, 54, 60 mos",
+      "Doses 4 through 9",
+      "200,000 IU every 6 months up to 5 years"
+     ],
+     [
+      "Total childhood series",
+      "Total 9 doses",
+      "Cumulative 1,700,000 IU (17 lakh IU)"
+     ]
     ]
    }
   },
@@ -99,11 +184,31 @@
    "say": "For active corneal ulcers or severe measles, give two lakh units immediately, repeat the dose the very next day, and give a third dose after two weeks to save the eye.",
    "vis": {
     "kind": "table",
-    "cols": ["Treatment timing", "Child >= 1 year", "Child 6 to 11 months", "Infant < 6 months"],
+    "cols": [
+     "Treatment timing",
+     "Child >= 1 year",
+     "Child 6 to 11 months",
+     "Infant < 6 months"
+    ],
     "rows": [
-     ["Day 0 (Immediate)", "200,000 IU oral", "100,000 IU oral", "50,000 IU oral"],
-     ["Day 1 (Next day)", "200,000 IU oral", "100,000 IU oral", "50,000 IU oral"],
-     ["Day 14 (Two weeks later)", "200,000 IU oral", "100,000 IU oral", "50,000 IU oral"]
+     [
+      "Day 0 (Immediate)",
+      "200,000 IU oral",
+      "100,000 IU oral",
+      "50,000 IU oral"
+     ],
+     [
+      "Day 1 (Next day)",
+      "200,000 IU oral",
+      "100,000 IU oral",
+      "50,000 IU oral"
+     ],
+     [
+      "Day 14 (Two weeks later)",
+      "200,000 IU oral",
+      "100,000 IU oral",
+      "50,000 IU oral"
+     ]
     ]
    }
   },
@@ -115,11 +220,19 @@
     "kind": "compare",
     "left": {
      "title": "Preformed retinol (animal foods)",
-     "points": ["Liver, fish liver oil, butter, egg yolk", "High bioavailability (~70 to 90%)", "Directly incorporated into chylomicrons"]
+     "points": [
+      "Liver, fish liver oil, butter, egg yolk",
+      "High bioavailability (~70 to 90%)",
+      "Directly incorporated into chylomicrons"
+     ]
     },
     "right": {
      "title": "Beta-carotene (plant foods)",
-     "points": ["Drumstick leaves, spinach, carrots, mango, papaya", "Requires intestinal enzymatic cleavage", "8 mcg beta-carotene = 1 mcg retinol equivalent"]
+     "points": [
+      "Drumstick leaves, spinach, carrots, mango, papaya",
+      "Requires intestinal enzymatic cleavage",
+      "8 mcg beta-carotene = 1 mcg retinol equivalent"
+     ]
     }
    }
   },
@@ -130,12 +243,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Vitamin A depletion in mucosal tissues"},
-     {"id": "b", "label": "Squamous metaplasia and loss of goblet cells"},
-     {"id": "c", "label": "Severe bacterial invasion of lungs and gut"},
-     {"id": "d", "label": "Child mortality reduced 24% by prophylaxis"}
+     {
+      "id": "a",
+      "label": "Vitamin A depletion in mucosal tissues"
+     },
+     {
+      "id": "b",
+      "label": "Squamous metaplasia and loss of goblet cells"
+     },
+     {
+      "id": "c",
+      "label": "Severe bacterial invasion of lungs and gut"
+     },
+     {
+      "id": "d",
+      "label": "Child mortality reduced 24% by prophylaxis"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -144,12 +282,77 @@
    "say": "A community has a vitamin A crisis if night blindness exceeds one percent, Bitot spots exceed half a percent, or over ten percent of children have low blood retinol levels.",
    "vis": {
     "kind": "table",
-    "cols": ["Surveillance indicator", "Public health significance threshold", "Field significance"],
+    "cols": [
+     "Surveillance indicator",
+     "Public health significance threshold",
+     "Field significance"
+    ],
     "rows": [
-     ["Night blindness (XN) in children 2-5 yrs", "Prevalence greater than 1.0 percent", "High community retinal deficiency"],
-     ["Bitot spots (X1B) in children 6-71 mos", "Prevalence greater than 0.5 percent", "Active epithelial squamous metaplasia"],
-     ["Corneal xerosis / ulceration (X2/X3)", "Prevalence greater than 0.01 percent", "Critical emergency; imminent blindness"],
-     ["Serum retinol (< 0.70 umol/L or < 20 mcg/dl)", "Prevalence greater than 10.0 percent", "Widespread subclinical biochemical depletion"]
+     [
+      "Night blindness (XN) in children 2-5 yrs",
+      "Prevalence greater than 1.0 percent",
+      "High community retinal deficiency"
+     ],
+     [
+      "Bitot spots (X1B) in children 6-71 mos",
+      "Prevalence greater than 0.5 percent",
+      "Active epithelial squamous metaplasia"
+     ],
+     [
+      "Corneal xerosis / ulceration (X2/X3)",
+      "Prevalence greater than 0.01 percent",
+      "Critical emergency; imminent blindness"
+     ],
+     [
+      "Serum retinol (< 0.70 umol/L or < 20 mcg/dl)",
+      "Prevalence greater than 10.0 percent",
+      "Widespread subclinical biochemical depletion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Xerophthalmia runs XN night blindness, X1A conjunctival xerosis, X1B Bitot spots, X2 corneal xerosis, then X3 ulceration or keratomalacia. Prophylaxis gives 100000 IU at nine months, then 200000 IU six monthly to five years. Active corneal disease needs doses on day zero, day one and at two weeks.",
+   "say": "High-yield for the exam: Xerophthalmia runs XN night blindness, X1A conjunctival xerosis, X1B Bitot spots, X2 corneal xerosis, then X3 ulceration or keratomalacia. Prophylaxis gives 100000 IU at nine months, then 200000 IU six monthly to five years. Active corneal disease needs doses on day zero, day one and at two weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "XN stage meaning",
+      "Night blindness, earliest ocular sign"
+     ],
+     [
+      "X1B stage meaning",
+      "Bitot spots, foamy triangular plaques"
+     ],
+     [
+      "X3B stage meaning",
+      "Keratomalacia over one third cornea"
+     ],
+     [
+      "First prophylaxis dose",
+      "100000 IU at nine completed months"
+     ],
+     [
+      "Later prophylaxis dose",
+      "200000 IU every six months to five years"
+     ],
+     [
+      "Total prophylaxis doses",
+      "Nine doses, 17 lakh IU total"
+     ],
+     [
+      "Therapeutic dose age one plus",
+      "200000 IU day zero, one, later dose"
+     ],
+     [
+      "Bitot spot site",
+      "Temporal bulbar conjunctiva, interpalpebral fissure"
+     ]
     ]
    }
   }

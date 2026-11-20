@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-insulin-t1dm",
+ "subject": "ss-general-medicine",
+ "title": "Insulin Therapy and Type 1 Diabetes",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Insulin therapy** (replacement hormone) is mandatory in **type 1 diabetes** (autoimmune beta cell loss). **Basal bolus regime** (long acting plus meal doses) mimics physiology. **Multiple daily injections** (4 injections daily) are the standard. **Continuous subcutaneous infusion** (pump therapy) delivers programmed basal and bolus. **Honeymoon phase** (transient remission after diagnosis) reduces needs briefly. **Insulin initiation** (early start) prevents ketoacidosis.",
+   "say": "Replacement hormone is mandatory in autoimmune beta cell loss. Long acting plus meal doses mimic physiology. Four injections daily are the standard and programmed pump delivery is an option and transient remission reduces needs briefly and early start prevents ketoacidosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Rapid acting insulin** (lispro, aspart) covers meals with onset in 15 minutes. **Long acting insulin** (glargine, degludec) covers basal needs. **Premixed insulin** (mixed formulations) simplifies but risks hypoglycaemia. **Pork insulin** (animal insulin) is obsolete. **Inhaled insulin** (Afrezza) is short acting adjunct. **Basal insulin alone** (once daily) suits adjunct therapy.",
+   "say": "Rapid acting insulins cover meals with onset in fifteen minutes. Long acting covers basal needs. Mixed formulations simplify but risk low glucose and animal insulin is obsolete and inhaled insulin is short acting adjunct and once daily basal suits adjunct therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Insulin drives **GLUT4 translocation** (glucose transporter insertion) into muscle and fat. **Glycogenesis promotion** (liver storage) lowers glucose. **Lipogenesis promotion** (fat storage) explains weight gain. **Proteolysis suppression** (muscle preservation) prevents wasting. **Keto suppression** (fat burning block) prevents ketoacidosis. **Ketoacidosis prevention** (acid block) is the life saving role.",
+   "say": "Insulin drives glucose transporter insertion into muscle and fat and this is examined in viva examinations for revision. Liver storage promotion lowers glucose and this is examined in viva examinations for revision. Fat storage promotion explains weight gain and muscle preservation prevents wasting and fat burning block prevents ketoacidosis and acid block is the life saving role.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Insulin receptor"
+     },
+     {
+      "id": "b",
+      "label": "GLUT4 insertion"
+     },
+     {
+      "id": "c",
+      "label": "Glucose uptake"
+     },
+     {
+      "id": "d",
+      "label": "Glycogenesis"
+     },
+     {
+      "id": "e",
+      "label": "Keto suppression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polyuria** (large urine volumes) with **polydipsia** (thirst) remits with insulin. **Weight recovery** (anabolic effect) follows control. **Ketoacidosis** (acid buildup) resolves with insulin and fluids. **Honeymoon phase** (temporary easing) is brief. **Hypoglycaemia** (low glucose) with sweating and confusion is the commonest side effect. **Lipodystrophy** (fat lumps) marks poor injection technique.",
+   "say": "Large urine volumes with thirst remit with insulin and this is examined in viva examinations for revision. Weight recovery follows control. Acid buildup resolves with insulin and fluids and temporary easing is brief and low glucose with sweating is the commonest side effect and fat lumps mark poor technique.",
+   "vis": null
+  },
+  {
+   "tx": "**HbA1c** (glycated haemoglobin) tracks control with target below 7 percent. **Continuous glucose monitoring** (sensor readings) shows time in range. **C peptide** (endogenous marker) confirms type 1 disease. **GAD antibodies** (autoimmune markers) support diagnosis. **Urine ketones** (ketone strips) guide sick day rules. **Blood ketones** (beta hydroxybutyrate) are more accurate than urine.",
+   "say": "Glycated haemoglobin tracks control with target below seven percent. Sensor readings are marked by time in range. Endogenous marker confirms type one disease and autoimmune markers support diagnosis and ketone strips guide sick day rules and blood ketones are more accurate than urine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "HbA1c",
+      "Control track",
+      "Below 7 percent target"
+     ],
+     [
+      "Continuous monitoring",
+      "Time in range",
+      "Sensor readings"
+     ],
+     [
+      "C peptide",
+      "Type confirm",
+      "Low in type 1"
+     ],
+     [
+      "GAD antibodies",
+      "Autoimmune",
+      "Type 1 support"
+     ],
+     [
+      "Blood ketones",
+      "Sick day guide",
+      "Beta hydroxybutyrate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Basal bolus** (glargine plus lispro) is first line insulin regime. **Carbohydrate counting** (meal matching) improves flexibility. **Correction dosing** (sliding scale) covers hyperglycaemia. **Sick day rules** (never stop insulin) prevent ketoacidosis. **Hypoglycaemia rescue** (15 g glucose) treats lows. **Glucagon kits** (rescue injection) treat severe hypoglycaemia. **Site rotation** (injection rotation) prevents lipodystrophy.",
+   "say": "Glargine plus lispro is first line regime. Meal matching improves flexibility. Sliding scale covers hyperglycaemia and never stop insulin prevents ketoacidosis and glucose rescue treats lows and rescue injection treats severe lows and rotation prevents fat lumps.",
+   "vis": null
+  },
+  {
+   "tx": "**Pump therapy** (continuous infusion) suits brittle diabetes with hypoglycaemia. **Closed loop systems** (artificial pancreas) automate delivery. **Ketone monitoring** (sick day checks) prevents ketoacidosis. **Exercise adjustment** (dose reduction) prevents exertional lows. **Travel rules** (dose time zones) prevent mismatches. **Pregnancy insulin** (intensified regime) needs tight control.",
+   "say": "Continuous infusion suits brittle disease with lows and this is examined in viva examinations for revision. Automated systems automate delivery. Sick day checks prevent ketoacidosis and dose reduction prevents exertional lows and time zone rules prevent mismatches and pregnancy needs tight control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal bolus",
+     "points": [
+      "Glargine plus lispro",
+      "Four injections daily",
+      "Flexible meal matching",
+      "First line standard"
+     ]
+    },
+    "right": {
+     "title": "Pump therapy",
+     "points": [
+      "Continuous infusion",
+      "Automated closed loop",
+      "Brittle disease suit",
+      "Higher cost"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Severe hypoglycaemia** (coma, seizures) needs glucagon and intravenous dextrose. **Dawn phenomenon** (early morning rise) needs basal titration. **Somogyi effect** (rebound hyperglycaemia) follows nocturnal lows. **Allergy** (insulin allergy) needs desensitisation. **Lipodystrophy** (fat atrophy) needs site change. **Weight gain** (anabolic effect) needs dietary discipline.",
+   "say": "Coma and seizures need glucagon and dextrose. Early morning rise needs basal titration. Rebound hyperglycaemia follows nocturnal lows and allergy needs desensitisation and fat atrophy needs site change and weight gain needs dietary discipline.",
+   "vis": null
+  },
+  {
+   "tx": "**Type 1** diabetes mortality is driven by ketoacidosis and cardiovascular disease. Early insulin initiation reduces mortality by 80 percent. Pump therapy reduces severe hypoglycaemia by 50 percent. HbA1c below 7 percent halves microvascular risk. Hypoglycaemia unawareness predicts severe events. Diabetic ketoacidosis mortality is below 1 percent with prompt therapy.",
+   "say": "Type one mortality is driven by ketoacidosis and heart disease. Early initiation reduces mortality by eighty percent. Pump therapy reduces severe lows by fifty percent. Below seven percent halves microvascular risk and unawareness predicts severe events and ketoacidosis mortality is below one percent with prompt therapy.",
+   "vis": null
+  },
+  {
+   "tx": "American Diabetes Association 2024 guidance stresses basal bolus, continuous monitoring and pump therapy. **Honeymoon phase** (transient remission) is a favourite examination trap. **Sick day never stop** (insulin continuation) is the classic rule. Traps include stopping insulin in illness, missing ketone checks, and omitting glucagon kits. **Hypoglycaemia rescue 15 g** (fast glucose) is the classic numerical vignette.",
+   "say": "Current guidance stresses basal bolus and continuous monitoring and pump therapy. Transient remission is a favourite examination trap. Never stop insulin is the classic rule. Traps include stopping insulin in illness and missing ketone checks and omitting glucagon kits and fifteen grams is the classic numerical vignette.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers insulin types, HbA1c targets and hypoglycaemia actions. Basal bolus and 15 g rescue are the most asked points in theory and viva examinations. Focused revision of monitoring targets aids viva performance. Glucagon rescues severe hypoglycaemia very promptly.",
+   "say": "This table gathers insulin types and HbA1c targets and low glucose actions for revision and this is examined in viva examinations for revision. Basal bolus and rescue grams are the most asked points and never stop insulin is a classic rule theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Meal insulin",
+      "Lispro aspart rapid"
+     ],
+     [
+      "Basal insulin",
+      "Glargine degludec"
+     ],
+     [
+      "HbA1c target",
+      "Below 7 percent"
+     ],
+     [
+      "Hypoglycaemia rescue",
+      "15 g fast glucose"
+     ],
+     [
+      "Severe rescue",
+      "Glucagon kit"
+     ],
+     [
+      "Sick day rule",
+      "Never stop insulin"
+     ],
+     [
+      "Pump suit",
+      "Brittle with lows"
+     ],
+     [
+      "Lipodystrophy prevention",
+      "Site rotation"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

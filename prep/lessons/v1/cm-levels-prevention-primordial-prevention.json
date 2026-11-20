@@ -13,12 +13,27 @@
    "say": "The earliest level acts before risk factors even appear. Childhood is the target, because smoking, eating and activity habits form then. Healthy public policy plus mass education keep harmful lifestyles from taking root in the first place.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Primordial prevention"],
+    "cols": [
+     "Feature",
+     "Primordial prevention"
+    ],
     "rows": [
-     ["Target", "Populations without the risk factor"],
-     ["Timing", "Before risk factors emerge"],
-     ["Main tools", "Education and healthy public policy"],
-     ["Classic example", "Stopping children taking up smoking"]
+     [
+      "Target",
+      "Populations without the risk factor"
+     ],
+     [
+      "Timing",
+      "Before risk factors emerge"
+     ],
+     [
+      "Main tools",
+      "Education and healthy public policy"
+     ],
+     [
+      "Classic example",
+      "Stopping children taking up smoking"
+     ]
     ]
    }
   },
@@ -28,11 +43,23 @@
    "say": "Next level, still before any disease. Action in the prepathogenesis phase removes the chance of disease occurring. General health promotion joins specific protection here: sanitation, safe water, immunisation and workplace protection, long before a patient exists.",
    "vis": {
     "kind": "table",
-    "cols": ["Primary action", "Disease it removes"],
+    "cols": [
+     "Primary action",
+     "Disease it removes"
+    ],
     "rows": [
-     ["Safe water and sanitation", "Cholera and typhoid"],
-     ["Immunisation", "Measles and poliomyelitis"],
-     ["Occupational protection", "Industrial injury and poisoning"]
+     [
+      "Safe water and sanitation",
+      "Cholera and typhoid"
+     ],
+     [
+      "Immunisation",
+      "Measles and poliomyelitis"
+     ],
+     [
+      "Occupational protection",
+      "Industrial injury and poisoning"
+     ]
     ]
    }
   },
@@ -44,11 +71,19 @@
     "kind": "compare",
     "left": {
      "title": "Population strategy",
-     "points": ["Targets everyone, whatever their risk", "Small shifts, large event reduction", "No screening needed to start"]
+     "points": [
+      "Targets everyone, whatever their risk",
+      "Small shifts, large event reduction",
+      "No screening needed to start"
+     ]
     },
     "right": {
      "title": "High risk strategy",
-     "points": ["Targets individuals at special risk", "Needs screening for detection", "Benefit concentrated in few people"]
+     "points": [
+      "Targets individuals at special risk",
+      "Needs screening for detection",
+      "Benefit concentrated in few people"
+     ]
     }
    }
   },
@@ -70,13 +105,45 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Unrecognised early disease"},
-     {"id": "b", "label": "Screening or case finding"},
-     {"id": "c", "label": "Early diagnosis confirmed"},
-     {"id": "d", "label": "Adequate prompt treatment"},
-     {"id": "e", "label": "Progress arrested"}
+     {
+      "id": "a",
+      "label": "Unrecognised early disease"
+     },
+     {
+      "id": "b",
+      "label": "Screening or case finding"
+     },
+     {
+      "id": "c",
+      "label": "Early diagnosis confirmed"
+     },
+     {
+      "id": "d",
+      "label": "Adequate prompt treatment"
+     },
+     {
+      "id": "e",
+      "label": "Progress arrested"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
    }
   },
   {
@@ -87,11 +154,19 @@
     "kind": "compare",
     "left": {
      "title": "Limit what disease left",
-     "points": ["Reduce impairment after stroke", "Limit disability after injury", "Minimise suffering in chronic disease"]
+     "points": [
+      "Reduce impairment after stroke",
+      "Limit disability after injury",
+      "Minimise suffering in chronic disease"
+     ]
     },
     "right": {
      "title": "Restore a life role",
-     "points": ["Retrain for work within limits", "Restore family and social roles", "Adjust to irremediable conditions"]
+     "points": [
+      "Retrain for work within limits",
+      "Restore family and social roles",
+      "Adjust to irremediable conditions"
+     ]
     }
    }
   },
@@ -101,12 +176,32 @@
    "say": "Align the levels with the disease timeline. Conditions first, causal factors next, early disease after that, late disease last. Aims shift from minimising hazards toward cutting complications, and targets narrow from whole populations to individual patients.",
    "vis": {
     "kind": "table",
-    "cols": ["Level", "Phase targeted", "Aim"],
+    "cols": [
+     "Level",
+     "Phase targeted",
+     "Aim"
+    ],
     "rows": [
-     ["Primordial", "Underlying conditions", "Minimise hazards to health"],
-     ["Primary", "Specific causal factors", "Reduce incidence"],
-     ["Secondary", "Early disease", "Shorten duration"],
-     ["Tertiary", "Late disease", "Reduce complications"]
+     [
+      "Primordial",
+      "Underlying conditions",
+      "Minimise hazards to health"
+     ],
+     [
+      "Primary",
+      "Specific causal factors",
+      "Reduce incidence"
+     ],
+     [
+      "Secondary",
+      "Early disease",
+      "Shorten duration"
+     ],
+     [
+      "Tertiary",
+      "Late disease",
+      "Reduce complications"
+     ]
     ]
    }
   },
@@ -129,11 +224,19 @@
     "kind": "compare",
     "left": {
      "title": "Primordial examples",
-     "points": ["Children never start smoking", "Healthy food policy before obesity spreads", "Activity habits formed in childhood"]
+     "points": [
+      "Children never start smoking",
+      "Healthy food policy before obesity spreads",
+      "Activity habits formed in childhood"
+     ]
     },
     "right": {
      "title": "Primary examples",
-     "points": ["Vaccination against measles", "Iodised salt in an endemic area", "Helmets for current riders"]
+     "points": [
+      "Vaccination against measles",
+      "Iodised salt in an endemic area",
+      "Helmets for current riders"
+     ]
     }
    }
   },
@@ -143,11 +246,23 @@
    "say": "Borders blur in real programmes. One food supplement protects a healthy sibling yet treats a malnourished child, serving two levels at once. Scholars accept that fuzziness. The timeline still organises teaching and budgets, and examiners reward the logic.",
    "vis": {
     "kind": "table",
-    "cols": ["Same supplement given to", "Level served"],
+    "cols": [
+     "Same supplement given to",
+     "Level served"
+    ],
     "rows": [
-     ["Healthy family member", "Primary prevention"],
-     ["Mildly malnourished child", "Secondary, almost curative"],
-     ["Recovering wasted child", "Tertiary support to function"]
+     [
+      "Healthy family member",
+      "Primary prevention"
+     ],
+     [
+      "Mildly malnourished child",
+      "Secondary, almost curative"
+     ],
+     [
+      "Recovering wasted child",
+      "Tertiary support to function"
+     ]
     ]
    }
   },
@@ -157,11 +272,72 @@
    "say": "Cost rises as you move later. Primary action stays cheap and spares suffering, hospital care costs more, rehabilitation costs most. Cholera and typhoid fell mainly with sanitation and living standards, before vaccines became universal. Hospital only budgets keep paying for preventable disease.",
    "vis": {
     "kind": "table",
-    "cols": ["Level", "Relative cost", "Suffering before benefit"],
+    "cols": [
+     "Level",
+     "Relative cost",
+     "Suffering before benefit"
+    ],
     "rows": [
-     ["Primordial and primary", "Lowest", "None, disease never occurs"],
-     ["Secondary", "Moderate", "Early disease already present"],
-     ["Tertiary", "Highest", "Disability already established"]
+     [
+      "Primordial and primary",
+      "Lowest",
+      "None, disease never occurs"
+     ],
+     [
+      "Secondary",
+      "Moderate",
+      "Early disease already present"
+     ],
+     [
+      "Tertiary",
+      "Highest",
+      "Disability already established"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Primordial prevention stops risk factors emerging, mainly through childhood education and healthy policy. Primary prevention acts before disease through health promotion and specific protection like immunisation. Secondary prevention uses early diagnosis and treatment. Tertiary prevention limits impairment and disability after late disease. Vaccines, iodised salt and helmets are primary, not primordial.",
+   "say": "Primordial prevention stops risk factors emerging, mainly through childhood education and healthy policy. Primary prevention acts before disease through health promotion and specific protection like immunisation. Secondary prevention uses early diagnosis and treatment. Tertiary prevention limits impairment and disability after late disease. Vaccines, iodised salt and helmets are primary, not primordial.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Primordial target",
+      "Populations where risk factors have not emerged"
+     ],
+     [
+      "Primary phase",
+      "Prepathogenesis, before disease onset occurs"
+     ],
+     [
+      "Primary examples",
+      "Immunisation, sanitation, safe water, occupational protection"
+     ],
+     [
+      "Secondary tools",
+      "Screening, case finding, early adequate treatment"
+     ],
+     [
+      "Tertiary aim",
+      "Reduce impairment, disability and suffering"
+     ],
+     [
+      "Population strategy",
+      "Shift whole risk factor distribution slightly"
+     ],
+     [
+      "High risk strategy",
+      "Screen and treat individuals at special risk"
+     ],
+     [
+      "Classic trap",
+      "Vaccination is primary, never primordial prevention"
+     ]
     ]
    }
   }

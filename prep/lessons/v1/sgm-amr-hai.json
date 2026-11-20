@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sgm-amr-hai",
+ "subject": "ss-general-medicine",
+ "title": "Multidrug-resistant organisms and healthcare-associated infection",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Multidrug resistance** is acquired antibiotic resistance. **Healthcare associated infection** follows hospital exposure. **MRSA** causes healthcare infection in many patients. **VRE** causes healthcare infection in many patients. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Multidrug resistance is acquired antibiotic resistance for resistance definition. Healthcare associated infection follows hospital exposure for HAI definition. MRSA causes healthcare infection in many patients for MRSA pattern. VRE causes healthcare infection in many patients for VRE pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MRSA",
+     "points": [
+      "Staphylococcus aureus resistant",
+      "Vancomycin therapy used",
+      "Nasal screening done",
+      "Contact precautions used"
+     ]
+    },
+    "right": {
+     "title": "VRE",
+     "points": [
+      "Enterococcus resistant",
+      "VRE therapy required",
+      "Rectal screening done",
+      "Contact precautions used"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Carbapenem resistance** follows broad spectrum use. **ESBL** enzymes hydrolyse cephalosporins here. **Ampicillin** is ineffective for ESBL here. **Cefotaxime** is ineffective for ESBL here. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Carbapenem resistance follows broad spectrum use for carbapenem pattern. ESBL enzymes are the hydrolysers of cephalosporins here for ESBL mechanism. Ampicillin is ineffective for ESBL here for ESBL distinction. Cefotaxime is ineffective for ESBL here for ESBL distinction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resistance",
+     "Mechanism",
+     "Therapy"
+    ],
+    "rows": [
+     [
+      "MRSA",
+      "PBP2a production",
+      "Vancomycin therapy"
+     ],
+     [
+      "ESBL",
+      "Beta lactamase",
+      "Meropenem therapy"
+     ],
+     [
+      "Carbapenem resistance",
+      "Carbapenemase production",
+      "Colistin therapy"
+     ],
+     [
+      "VRE",
+      "VanA gene",
+      "VRE therapy required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Meropenem** with **ertapenem** cover ESBL. **Ceftazidime** with **cefepime** fail for ESBL. **Aztreonam** with **avibactam** cover KPC. **Colistin** covers carbapenem resistant infection. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Meropenem with ertapenem are the cover for ESBL for ESBL coverage. Ceftazidime with cefepime are ineffective for ESBL for ESBL distinction. Aztreonam with avibactam are the cover for KPC for KPC coverage. Colistin is the cover for carbapenem resistant infection for last line coverage.",
+   "vis": null
+  },
+  {
+   "tx": "**Central line** infection follows catheter use. **Catheter associated UTI** follows catheterization. **Ventilator pneumonia** follows ventilation use. **Surgical site** infection follows surgery here. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Central line infection follows catheter use for line associated pattern. Catheter associated UTI follows catheterization for CAUTI pattern. Ventilator pneumonia follows ventilation use for VAP pattern. Surgical site infection follows surgery here for SSI pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Device",
+     "Infection",
+     "Prevention"
+    ],
+    "rows": [
+     [
+      "Central line",
+      "CLABSI",
+      "Bundle insertion"
+     ],
+     [
+      "Urinary catheter",
+      "CAUTI",
+      "Early removal"
+     ],
+     [
+      "Ventilator",
+      "VAP",
+      "Oral care bundle"
+     ],
+     [
+      "Surgical wound",
+      "SSI",
+      "Aseptic technique"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hand hygiene** prevents HAI in hospitals. **Bundle care** prevents CLABSI in hospitals. **Screening** detects MRSA carriage in patients. **Isolation** prevents spread in these patients. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Hand hygiene prevents HAI in hospitals for hygiene benefit. Bundle care prevents CLABSI in hospitals for bundle benefit. Screening detects MRSA carriage in patients for screening detection. Isolation prevents spread in these patients for isolation benefit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HAI suspicion"
+     },
+     {
+      "id": "b",
+      "label": "Culture sent"
+     },
+     {
+      "id": "c",
+      "label": "Sensitivity reviewed"
+     },
+     {
+      "id": "d",
+      "label": "Narrowing done"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vancomycin** with **chloramphenicol** have niches. **Ceftriaxone** is community therapy here. **MSSA therapy** is required here here. **Piperacillin** with **tazobactam** treat Pseudomonas here. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Vancomycin with chloramphenicol have niches for niche distinction. Ceftriaxone is community therapy here for community coverage. MSSA therapy is required here here for MSSA therapy. Piperacillin with tazobactam are the therapies for Pseudomonas here for Pseudomonas therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Coverage",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Vancomycin",
+      "MRSA cover",
+      "MRSA therapy"
+     ],
+     [
+      "Meropenem",
+      "ESBL cover",
+      "ESBL therapy"
+     ],
+     [
+      "Colistin",
+      "Carbapenem resistance",
+      "Last line therapy"
+     ],
+     [
+      "Ceftriaxone",
+      "MSSA cover",
+      "MSSA therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Device removal** treats device infection definitively. **Duration** is short after source control. **Daily review** is advised in these patients. **Culture** guides duration in these patients. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Device removal treats device infection definitively for source control. Duration is short after source control for duration control. Daily review is advised in these patients for review protocol. Culture guides duration in these patients for culture guidance.",
+   "vis": null
+  },
+  {
+   "tx": "**Aminoglycoside** resistance complicates therapy here. **Tetracycline** resistance complicates therapy here. **Tigecycline** covers resistant infection here. **Cefiderocol** covers resistant infection here. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Aminoglycoside resistance complicates therapy here for resistance burden. Tetracycline resistance complicates therapy here for resistance burden. Tigecycline is the cover for resistant infection here for resistant coverage. Cefiderocol is the cover for resistant infection here for resistant coverage.",
+   "vis": null
+  },
+  {
+   "tx": "**Outbreaks** need investigation in hospitals. **Environmental cleaning** is advised in hospitals. **Chlorhexidine** bathing is advised in ICUs. **Antimicrobial stewardship** is advised in hospitals. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Outbreaks need investigation in hospitals for outbreak investigation. Environmental cleaning is advised in hospitals for cleaning protocol. Chlorhexidine bathing is advised in ICUs for decolonization protocol. Antimicrobial stewardship is advised in hospitals for stewardship benefit.",
+   "vis": null
+  },
+  {
+   "tx": "**Pregnancy** restricts tetracycline use here. **Renal dysfunction** restricts aminoglycoside use. **Allergy** restricts beta lactam use here. **Supportive care** is advised in these patients. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "Pregnancy restriction is the restriction for tetracycline use here for pregnancy restriction. Renal dysfunction restriction is the restriction for aminoglycoside use for renal restriction. Allergy restriction is the restriction for beta lactam use here for allergy restriction. Supportive care is advised in these patients for supportive care.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** closes this lesson on AMR. Remember vancomycin for MRSA, meropenem for ESBL and colistin for carbapenem resistance. Hand hygiene with bundle care prevent HAI with screening for carriage. Carbapenem resistance follows broad spectrum use clearly. Resistance assessment guides HAI management in these patients during evaluation today clearly. HAI evaluation guides resistance management in these patients during assessment today clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Vancomycin is the MRSA therapy for MRSA coverage. Meropenem is the ESBL therapy for ESBL coverage. Colistin is the carbapenem resistance therapy for last line coverage. Hand hygiene with bundle care are the HAI prevention for prevention benefit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "MRSA therapy",
+      "Vancomycin is first line therapy"
+     ],
+     [
+      "ESBL therapy",
+      "Meropenem is first line therapy"
+     ],
+     [
+      "Last line therapy",
+      "Colistin is last line therapy"
+     ],
+     [
+      "HAI prevention",
+      "Hand hygiene with bundle care"
+     ],
+     [
+      "ESBL mechanism",
+      "Beta lactamase hydrolyses cephalosporins"
+     ],
+     [
+      "Carbapenem resistance",
+      "Carbapenemase production causes resistance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

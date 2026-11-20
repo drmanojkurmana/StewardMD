@@ -13,12 +13,27 @@
    "say": "Severe dehydration is circulatory failure arriving. Lethargy, deeply sunken eyes, no drinking, skin lingering seconds after pinch. Access and volume precede every other investigation; minutes outrank elegance.",
    "vis": {
     "kind": "table",
-    "cols": ["Severe sign", "Physiology it announces"],
+    "cols": [
+     "Severe sign",
+     "Physiology it announces"
+    ],
     "rows": [
-     ["Lethargic or unconscious", "Brain perfusion failing"],
-     ["Drinks poorly or unable", "Oral route unavailable"],
-     ["Skin pinch very slow", "Interstitial volume depleted"],
-     ["Weak or absent radial pulse", "Shock present or imminent"]
+     [
+      "Lethargic or unconscious",
+      "Brain perfusion failing"
+     ],
+     [
+      "Drinks poorly or unable",
+      "Oral route unavailable"
+     ],
+     [
+      "Skin pinch very slow",
+      "Interstitial volume depleted"
+     ],
+     [
+      "Weak or absent radial pulse",
+      "Shock present or imminent"
+     ]
     ]
    }
   },
@@ -41,24 +56,32 @@
     "kind": "compare",
     "left": {
      "title": "Use",
-     "points": ["Ringer lactate first choice", "Normal saline acceptable", "Volume 100 ml per kg total"]
+     "points": [
+      "Ringer lactate first choice",
+      "Normal saline acceptable",
+      "Volume 100 ml per kg total"
+     ]
     },
     "right": {
      "title": "Never use alone",
-     "points": ["Plain dextrose, ineffective", "Colloids as routine first fluid", "Slow cautious dripping in shock"]
+     "points": [
+      "Plain dextrose, ineffective",
+      "Colloids as routine first fluid",
+      "Slow cautious dripping in shock"
+     ]
     }
    }
   },
   {
-    "tx": "Severe dehydration uses Plan C: 100 ml per kg of **Ringer lactate** in total, or normal saline if it is missing. Plain dextrose never stands alone. Age splits the volume. Infants get 30 ml per kg during the first hour and 70 ml per kg across the next 5 hours. Older children get 30 ml per kg within 30 minutes and 70 ml per kg across the next 2.5 hours. Infant veins tolerate pace less well than older children.",
-    "say": "Severe dehydration uses Plan C: 100 ml per kg of Ringer lactate in total, or normal saline if it is missing. Plain dextrose never stands alone. Age splits the volume. Infants get 30 ml per kg during the first hour and 70 ml per kg across the next 5 hours. Older children get 30 ml per kg within 30 minutes and 70 ml per kg across the next 2.5 hours. Infant veins tolerate pace less well than older children.",
-    "vis": {
-      "kind": "image",
-      "src": "v1/lessons/media/need-n318-cm-diarrhoea-ors-plan-c.webp",
-      "alt": "Plan C age chart of intravenous volumes and times for infants and older children",
-      "caption": "Plan C splits 100 ml per kg by age: infants over about 6 hours in two steps, and older children over about 3 hours in two steps. Illustration: StewardMD original.",
-      "ar": 1.3393
-    }
+   "tx": "Severe dehydration uses Plan C: 100 ml per kg of **Ringer lactate** in total, or normal saline if it is missing. Plain dextrose never stands alone. Age splits the volume. Infants get 30 ml per kg during the first hour and 70 ml per kg across the next 5 hours. Older children get 30 ml per kg within 30 minutes and 70 ml per kg across the next 2.5 hours. Infant veins tolerate pace less well than older children.",
+   "say": "Severe dehydration uses Plan C: 100 ml per kg of Ringer lactate in total, or normal saline if it is missing. Plain dextrose never stands alone. Age splits the volume. Infants get 30 ml per kg during the first hour and 70 ml per kg across the next 5 hours. Older children get 30 ml per kg within 30 minutes and 70 ml per kg across the next 2.5 hours. Infant veins tolerate pace less well than older children.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n318-cm-diarrhoea-ors-plan-c.webp",
+    "alt": "Plan C age chart of intravenous volumes and times for infants and older children",
+    "caption": "Plan C splits 100 ml per kg by age: infants over about 6 hours in two steps, and older children over about 3 hours in two steps. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Infants: 30 then 70, over six hours",
@@ -67,12 +90,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "30 ml/kg in first hour"},
-     {"id": "b", "label": "70 ml/kg over next 5 hours"},
-     {"id": "c", "label": "Pulse reassessed every 15 to 30 min"},
-     {"id": "d", "label": "Reclassify at 6 hours"}
+     {
+      "id": "a",
+      "label": "30 ml/kg in first hour"
+     },
+     {
+      "id": "b",
+      "label": "70 ml/kg over next 5 hours"
+     },
+     {
+      "id": "c",
+      "label": "Pulse reassessed every 15 to 30 min"
+     },
+     {
+      "id": "d",
+      "label": "Reclassify at 6 hours"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -81,10 +129,25 @@
    "say": "Older children compress the clock: thirty per kilogram in half an hour, seventy over two and a half hours, reclassify at three. Same total volume, faster delivery. Stems test this age split precisely.",
    "vis": {
     "kind": "table",
-    "cols": ["Age band", "First 30 ml/kg", "Next 70 ml/kg", "Reassess fully"],
+    "cols": [
+     "Age band",
+     "First 30 ml/kg",
+     "Next 70 ml/kg",
+     "Reassess fully"
+    ],
     "rows": [
-     ["Under 12 months", "Over 1 hour", "Over 5 hours", "At 6 hours"],
-     ["12 months to 5 years", "Over 30 minutes", "Over 2.5 hours", "At 3 hours"]
+     [
+      "Under 12 months",
+      "Over 1 hour",
+      "Over 5 hours",
+      "At 6 hours"
+     ],
+     [
+      "12 months to 5 years",
+      "Over 30 minutes",
+      "Over 2.5 hours",
+      "At 3 hours"
+     ]
     ]
    }
   },
@@ -95,12 +158,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "IV volume restoring pulse"},
-     {"id": "b", "label": "Child begins drinking"},
-     {"id": "c", "label": "ORS 5 ml/kg/hour added"},
-     {"id": "d", "label": "IV tapered as oral takes over"}
+     {
+      "id": "a",
+      "label": "IV volume restoring pulse"
+     },
+     {
+      "id": "b",
+      "label": "Child begins drinking"
+     },
+     {
+      "id": "c",
+      "label": "ORS 5 ml/kg/hour added"
+     },
+     {
+      "id": "d",
+      "label": "IV tapered as oral takes over"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -109,11 +197,23 @@
    "say": "Failed veins need bridges, not surrender. Supervised nasogastric ORS where guts work and airways are protected, bone access where trained, rapid referral throughout. Unconscious children never take unprotected tube fluids.",
    "vis": {
     "kind": "table",
-    "cols": ["Situation", "Bridge chosen"],
+    "cols": [
+     "Situation",
+     "Bridge chosen"
+    ],
     "rows": [
-     ["No IV access, conscious, gut working", "Nasogastric ORS supervised"],
-     ["Shock, trained team present", "Intraosseous then IV fluids"],
-     ["Unconscious", "Protect airway, IV route only"]
+     [
+      "No IV access, conscious, gut working",
+      "Nasogastric ORS supervised"
+     ],
+     [
+      "Shock, trained team present",
+      "Intraosseous then IV fluids"
+     ],
+     [
+      "Unconscious",
+      "Protect airway, IV route only"
+     ]
     ]
    }
   },
@@ -125,11 +225,19 @@
     "kind": "compare",
     "left": {
      "title": "Improving",
-     "points": ["Pulse strong, eyes recovering", "Drinking resumes", "Step down to Plan B or A"]
+     "points": [
+      "Pulse strong, eyes recovering",
+      "Drinking resumes",
+      "Step down to Plan B or A"
+     ]
     },
     "right": {
      "title": "Not improving",
-     "points": ["Run IV faster, reassess cause", "Consider sepsis or surgical disease", "Escalate and refer urgently"]
+     "points": [
+      "Run IV faster, reassess cause",
+      "Consider sepsis or surgical disease",
+      "Escalate and refer urgently"
+     ]
     }
    }
   },
@@ -139,11 +247,23 @@
    "say": "Cholera outruns fixed prescriptions. Volumes repeat against measured losses until output is matched. Ringer lactate suits the losses; antibiotics shorten purging after fluids lead. Stems invert that order to trap you.",
    "vis": {
     "kind": "table",
-    "cols": ["Cholera feature", "Plan C adaptation"],
+    "cols": [
+     "Cholera feature",
+     "Plan C adaptation"
+    ],
     "rows": [
-     ["Purging exceeds fixed volumes", "Repeat volume to match losses"],
-     ["Rice-water stool losses", "Ringer lactate preferred"],
-     ["Antibiotic role", "After fluids, shortens purging"]
+     [
+      "Purging exceeds fixed volumes",
+      "Repeat volume to match losses"
+     ],
+     [
+      "Rice-water stool losses",
+      "Ringer lactate preferred"
+     ],
+     [
+      "Antibiotic role",
+      "After fluids, shortens purging"
+     ]
     ]
    }
   },
@@ -154,12 +274,78 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Drinking well, signs resolved"},
-     {"id": "b", "label": "Caregiver mixes ORS observed"},
-     {"id": "c", "label": "Zinc and packets supplied"},
-     {"id": "d", "label": "Danger signs recited back"}
+     {
+      "id": "a",
+      "label": "Drinking well, signs resolved"
+     },
+     {
+      "id": "b",
+      "label": "Caregiver mixes ORS observed"
+     },
+     {
+      "id": "c",
+      "label": "Zinc and packets supplied"
+     },
+     {
+      "id": "d",
+      "label": "Danger signs recited back"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Plan C provides rapid intravenous rehydration for severe dehydration using Ringer lactate at 100 millilitres per kilogram. For infants under 12 months, give 30 millilitres per kilogram in the first hour, then 70 millilitres per kilogram over five hours. For children aged one to five years, give 30 millilitres per kilogram over thirty minutes, then 70 millilitres per kilogram over two and a half hours. Reassess hydration every fifteen to thirty minutes.",
+   "say": "Plan C provides rapid intravenous rehydration for severe dehydration using Ringer lactate at 100 millilitres per kilogram. For infants under 12 months, give 30 millilitres per kilogram in the first hour, then 70 millilitres per kilogram over five hours. For children aged one to five years, give 30 millilitres per kilogram over thirty minutes, then 70 millilitres per kilogram over two and a half hours. Reassess hydration every fifteen to thirty minutes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Total fluid volume Plan C",
+      "100 millilitres per kilogram of intravenous Ringer lactate solution"
+     ],
+     [
+      "Infant initial bolus",
+      "30 ml per kg administered over first one hour"
+     ],
+     [
+      "Infant maintenance volume",
+      "70 ml per kg administered over subsequent five hours"
+     ],
+     [
+      "Child older than 1 year bolus",
+      "30 ml per kg administered rapidly over thirty minutes"
+     ],
+     [
+      "Child maintenance volume",
+      "70 ml per kg administered over two and half hours"
+     ],
+     [
+      "Nasogastric ORS rescue rate",
+      "20 ml per kg per hour when intravenous access fails"
+     ],
+     [
+      "Oral fluid resumption",
+      "Give 5 ml per kg hourly ORS if child can drink"
+     ]
+    ]
    }
   }
  ],

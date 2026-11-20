@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgm-systemic-sclerosis",
+ "subject": "ss-general-medicine",
+ "title": "Systemic sclerosis and Raynaud phenomenon",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Systemic sclerosis** is skin thickening with internal organ fibrosis in these patients. **Raynaud phenomenon** is the earliest symptom in these patients in many histories. **Sclerodactyly** starts in fingers and spreads proximally in these patients. **Anti centromere** antibodies flag limited disease in these patients in many cohorts.",
+   "say": "Systemic sclerosis is skin thickening with internal organ fibrosis in these patients. Raynaud phenomenon is the earliest symptom in these patients in many histories. Sclerodactyly starts in fingers and spreads proximally in these patients. Anti centromere antibodies flag limited disease in these patients in many cohorts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limited disease",
+     "points": [
+      "Skin below elbows",
+      "Anti centromere positive",
+      "Slow visceral progression",
+      "Pulmonary hypertension risk"
+     ]
+    },
+    "right": {
+     "title": "Diffuse disease",
+     "points": [
+      "Skin above elbows",
+      "Anti Scl seventy positive",
+      "Rapid visceral progression",
+      "Renal crisis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Scleroderma renal crisis** presents with malignant hypertension and rising creatinine in these patients. **ACE inhibitors** are life saving treatment for scleroderma renal crisis in these patients. **Nintedanib** slows lung fibrosis in these patients in many protocols globally. **Cyclophosphamide** treats interstitial lung disease in these patients in many guidelines.",
+   "say": "Scleroderma renal crisis presents with malignant hypertension and rising creatinine in these patients. ACE inhibitors are life saving treatment for scleroderma renal crisis in these patients. Nintedanib is the antifibrotic for lung fibrosis in these patients in many protocols globally. Cyclophosphamide is the treatment of interstitial lung disease in these patients in many guidelines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hypertension rise"
+     },
+     {
+      "id": "b",
+      "label": "Creatinine rising trend"
+     },
+     {
+      "id": "c",
+      "label": "ACE inhibitor started"
+     },
+     {
+      "id": "d",
+      "label": "Nephrology urgent care"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pulmonary hypertension** is the leading cause of death in limited disease in these patients. **Interstitial lung disease** dominates diffuse disease mortality in these patients. **Mycophenolate** is first line therapy for lung disease in these patients in many protocols. **Tocilizumab** helps early diffuse disease in these patients in many trials globally.",
+   "say": "Pulmonary hypertension is the leading cause of death in limited disease in these patients. Interstitial lung disease dominates diffuse disease mortality in these patients. Mycophenolate is first line therapy for lung disease in these patients in many protocols. Tocilizumab helps early diffuse disease in these patients in many trials globally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ",
+     "Limited pattern",
+     "Diffuse pattern"
+    ],
+    "rows": [
+     [
+      "Skin",
+      "Below elbows only",
+      "Trunk and proximal spread"
+     ],
+     [
+      "Lung",
+      "Hypertension predominant",
+      "Fibrosis predominant"
+     ],
+     [
+      "Kidney",
+      "Rare crisis",
+      "Crisis risk high"
+     ],
+     [
+      "Antibody",
+      "Anti centromere",
+      "Anti Scl seventy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gastrointestinal dysmotility** causes reflux and pseudoobstruction in these patients. **Gastric antral ectasia** bleeds with watermelon stomach pattern in these patients. **Calcinosis** with fingertip ulcers is the cutaneous complication in these patients. **Telangiectasia** covers lips and hands in these patients in many histories.",
+   "say": "Gastrointestinal dysmotility causes reflux and pseudoobstruction in these patients. Gastric antral ectasia bleeds with watermelon stomach pattern in these patients. Calcinosis with fingertip ulcers is the cutaneous complication in these patients. Telangiectasia is on lips and hands in these patients in many histories.",
+   "vis": null
+  },
+  {
+   "tx": "**Sine scleroderma** lacks skin disease with visceral features in these patients. **Raynaud** severity guides vascular therapy in these patients in many protocols. **Smoking** cessation prevents digital ulceration in these patients in many studies. **Vascular** therapy heals ulcers in these patients in many protocols globally today.",
+   "say": "Sine scleroderma is visceral disease without skin findings in these patients. Raynaud severity guides vascular therapy in these patients in many protocols. Smoking cessation prevents digital ulceration in these patients in many studies. Vascular therapy heals ulcers in these patients in many protocols globally today.",
+   "vis": null
+  },
+  {
+   "tx": "**Prednisone** in low dose bridges early diffuse disease in these patients. **Rituximab** helps skin disease in these patients in many case reports. **Haematopoietic** transplantation suits young diffuse disease with visceral risk in these patients. **Skin** softening follows immunosuppression in these patients in many cohorts.",
+   "say": "Prednisone in low dose bridges early diffuse disease in these patients. Rituximab helps skin disease in these patients in many case reports. Haematopoietic transplantation is an option for young diffuse disease with visceral risk in these patients. Skin softening follows immunosuppression in these patients in many cohorts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Assessment",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Raynaud severity",
+      "Digital ulcer count",
+      "Vascular therapy escalation"
+     ],
+     [
+      "Lung function",
+      "FVC and DLCO serial",
+      "Mycophenolate first line"
+     ],
+     [
+      "Heart strain",
+      "Echo and NT proBNP",
+      "PH pathway referral"
+     ],
+     [
+      "Kidney risk",
+      "Creatinine and BP",
+      "ACE inhibitor readiness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CREST syndrome** is limited disease with calcinosis and telangiectasia in these patients. **Oesophageal** involvement causes aspiration in these patients in many histories. **Prokinetics** manage reflux in these patients in many protocols globally. **PPIs** protect the oesophagus in these patients in many guidelines.",
+   "say": "CREST syndrome is limited disease with calcinosis and telangiectasia in these patients. Oesophageal involvement causes aspiration in these patients in many histories. Prokinetics are the management of reflux in these patients in many protocols globally. PPIs are the protection of the oesophagus in these patients in many guidelines.",
+   "vis": null
+  },
+  {
+   "tx": "**Myocardial** fibrosis causes conduction blocks in these patients in many reports. **Pericardial** effusion is common in these patients in many cohorts. **Muscle** disease mimics myositis in these patients. **Surveillance** with echo is advised in these patients in many protocols globally.",
+   "say": "Myocardial fibrosis causes conduction blocks in these patients in many reports. Pericardial effusion is common in these patients in many cohorts. Muscle disease is similar to myositis in these patients. Surveillance with echo is advised in these patients in many protocols globally.",
+   "vis": null
+  },
+  {
+   "tx": "**Digital ulcers** need wound care with vasodilator therapy in these patients. Wound care is the mainstay of digital ulcer management in these patients. **Smoking** advice is mandatory in these patients in many clinics today. **Steroid** avoidance is advised in diffuse disease in these patients in many guidelines.",
+   "say": "Digital ulcers need wound care with vasodilator therapy in these patients. Wound care is the mainstay of digital ulcer management in these patients. Smoking advice is mandatory in these patients in many clinics today. Steroid avoidance is advised in diffuse disease in these patients in many guidelines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raynaud assessment"
+     },
+     {
+      "id": "b",
+      "label": "Ulcer count documented"
+     },
+     {
+      "id": "c",
+      "label": "Vasodilator escalation"
+     },
+     {
+      "id": "d",
+      "label": "Wound care support"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** depends on lung, heart and kidney involvement in these patients. **Transplant** referral is needed for young diffuse disease in these patients. **Pulmonary hypertension** screening with echo is yearly in these patients in many protocols. **Nintedanib** is the antifibrotic for lung disease in these patients in many guidelines.",
+   "say": "Prognosis depends on lung, heart and kidney involvement in these patients. Transplant referral is needed for young diffuse disease in these patients. Pulmonary hypertension screening with echo is yearly in these patients in many protocols. Nintedanib is the antifibrotic for lung disease in these patients in many guidelines.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** heads the closing summary of this lesson specifically. Remember Raynaud as the earliest symptom, ACE inhibitors as life saving in renal crisis and pulmonary hypertension as the limited disease killer. Anti centromere flags limited disease while mycophenolate treats lung disease in these patients. Sine scleroderma lacks skin disease with visceral features clearly.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Raynaud phenomenon is the earliest symptom in these patients. ACE inhibitors are life saving in scleroderma renal crisis cases. Pulmonary hypertension is the killer in limited disease cases. Anti centromere flags limited disease in these patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "Earliest symptom",
+      "Raynaud phenomenon of fingers"
+     ],
+     [
+      "Renal crisis therapy",
+      "ACE inhibitors are life saving"
+     ],
+     [
+      "Limited killer",
+      "Pulmonary hypertension dominates mortality"
+     ],
+     [
+      "Limited antibody",
+      "Anti centromere flags limited disease"
+     ],
+     [
+      "Lung therapy",
+      "Mycophenolate first line for lung disease"
+     ],
+     [
+      "Skin free disease",
+      "Sine scleroderma lacks skin findings"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

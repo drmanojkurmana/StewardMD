@@ -1,0 +1,397 @@
+{
+ "v": 1,
+ "module": "spu-pe",
+ "subject": "ss-pulmonology",
+ "title": "Pulmonary embolism: probability scores, risk classes and anticoagulation",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "ESC 2019",
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Pulmonary embolism** (**PE**) is acute thrombus in the pulmonary arteries and presents with breathlessness, pleuritic pain, haemoptysis, syncope or unexplained tachycardia and hypoxaemia. Surgery, immobility, cancer, pregnancy, oestrogen use and **previous venous thromboembolism** drive risk through Virchow triad mechanics of stasis, injury and hypercoagulability.",
+   "say": "PE presents with breathlessness, pleuritic pain or syncope in exams for students. Tachycardia and hypoxaemia often lack another explanation in patients presenting. Surgery, immobility and cancer raise the risk greatly in studies conducted.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom",
+     "Why it occurs",
+     "Next step"
+    ],
+    "rows": [
+     [
+      "Breathlessness",
+      "Dead space ventilation",
+      "Assess probability"
+     ],
+     [
+      "Pleuritic chest pain",
+      "Pleural infarction",
+      "Clinical score"
+     ],
+     [
+      "Syncope",
+      "Low cardiac output",
+      "Shock pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The two level **Wells score** assigns **3** points for signs of deep vein thrombosis and **3** for PE as the likeliest diagnosis, with **1.5** each for heart rate above **100**, immobilisation or surgery, and previous thrombosis, plus **1** each for haemoptysis and active cancer. Scores above **4** mean PE is likely.",
+   "say": "Wells assigns three points for leg signs and likeliest diagnosis in patients. Heart rate, immobility and past thrombosis each is worth one and a half points. Scores above four indicate likely PE in practice daily for clinicians.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wells item",
+     "Points",
+     "Remember"
+    ],
+    "rows": [
+     [
+      "DVT signs present",
+      "3",
+      "Largest weight"
+     ],
+     [
+      "PE most likely diagnosis",
+      "3",
+      "Clinical judgement"
+     ],
+     [
+      "Heart rate above 100",
+      "1.5",
+      "Tachycardia counts"
+     ],
+     [
+      "Immobilisation or surgery",
+      "1.5",
+      "Within 4 weeks"
+     ],
+     [
+      "Previous DVT or PE",
+      "1.5",
+      "Recurrence risk"
+     ],
+     [
+      "Haemoptysis",
+      "1",
+      "Smallest weight"
+     ],
+     [
+      "Active cancer",
+      "1",
+      "Never ignore"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Young patients meeting all **PERC criteria** need no further testing, with age under **50**, heart rate under **100**, oxygen saturation **95 percent** or more, and no surgery or trauma within **4 weeks**. When PERC fails but PE is unlikely, an **age adjusted D dimer** above **50** years uses age multiplied by **10** as the cutoff before imaging studies proceed.",
+   "say": "Young low risk patients satisfying PERC safely avoid further testing in clinic practice. Unlikely PE starts with D dimer testing first in practice for clinicians. The age adjusted cutoff uses age multiplied by ten above fifty years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected PE"
+     },
+     {
+      "id": "b",
+      "label": "Wells likely"
+     },
+     {
+      "id": "c",
+      "label": "D dimer negative"
+     },
+     {
+      "id": "d",
+      "label": "CT scan or VQ"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "a",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CT pulmonary angiography** is the confirmatory test, while **V/Q scanning** serves when contrast is contraindicated in severe kidney disease or allergy, or in pregnancy with a normal chest radiograph. Proximal deep vein thrombosis on compression **ultrasound** confirms venous thromboembolism and suffices to start anticoagulant therapy.",
+   "say": "CT angiography confirms PE in most patients today in practice for clinicians. VQ scanning suits contrast allergy or pregnancy cases well in practice. Proximal leg thrombosis on ultrasound supports immediate treatment in patients presenting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Test",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Likely PE",
+      "CT angiography",
+      "Direct visualisation"
+     ],
+     [
+      "Contrast contraindication",
+      "VQ scan",
+      "Avoids dye load"
+     ],
+     [
+      "Pregnancy normal film",
+      "VQ scan",
+      "Low radiation burden"
+     ],
+     [
+      "Leg DVT shown",
+      "Ultrasound",
+      "Enough to treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High risk PE** means shock with systolic pressure below **90** or a fall of **40** or more sustained over **15 minutes**, and the **sPESI score** points per item include age over **80**, cancer, chronic heart or lung disease, rate **110** or more, systolic below **100**, and saturation below **90** percent. A score of **0** marks low risk disease.",
+   "say": "Shock defines high risk PE in every major guideline used for teaching. Old age, cancer and vital sign changes increase the sPESI score in patients presenting. A score of zero indicates low risk disease in clinic practice for patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "sPESI item",
+     "Cutoff",
+     "Implication"
+    ],
+    "rows": [
+     [
+      "Age over 80",
+      "Older patient",
+      "Higher risk"
+     ],
+     [
+      "Heart rate",
+      "110 or more per minute",
+      "Compensation failing"
+     ],
+     [
+      "Systolic pressure",
+      "Below 100",
+      "Shock approaching"
+     ],
+     [
+      "Oxygen saturation",
+      "Below 90 percent",
+      "Oxygenation poor"
+     ],
+     [
+      "Cancer",
+      "Active disease",
+      "Higher risk"
+     ],
+     [
+      "Chronic heart or lung disease",
+      "Present",
+      "Higher risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resuscitation emphasises oxygen, cautious fluids capped near **500 mL** and **noradrenaline** for hypotension, avoiding intubation where possible in shocked patients. **UFH** bolus starts immediately without waiting for imaging, and **alteplase** **100 mg** over **2 hours** rescues high risk PE, with cardiopulmonary resuscitation continued **60 to 90 minutes** after dosing in arrest.",
+   "say": "High risk PE needs oxygen and cautious fluid support daily in resus. Noradrenaline supports blood pressure in shock cases well for patients. Unfractionated heparin starts at once and alteplase rescues shock in patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Shock recognised"
+     },
+     {
+      "id": "b",
+      "label": "UFH bolus at once"
+     },
+     {
+      "id": "c",
+      "label": "Alteplase infusion"
+     },
+     {
+      "id": "d",
+      "label": "ICU monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stable patients generally receive **LMWH** or fondaparinux rather than UFH initially, while **apixaban** or rivaroxaban start directly and dabigatran or **edoxaban** follow at least **5 days** of parenteral therapy. **UFH** remains preferred in shock, likely reperfusion, creatinine clearance below **30** or severe obesity, and pregnancy relies on LMWH throughout.",
+   "say": "Stable patients usually start with low molecular weight heparin in practice for clinicians. Apixaban and rivaroxaban start directly without parenteral run in for patients. Shock or renal failure favours unfractionated heparin use daily in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dose anchor",
+     "Regimen",
+     "Where used"
+    ],
+    "rows": [
+     [
+      "UFH bolus",
+      "80 IU per kg then 18 per kg per hour",
+      "Shock or reperfusion possible"
+     ],
+     [
+      "LMWH",
+      "1 mg per kg every 12 hours",
+      "Stable patients"
+     ],
+     [
+      "Apixaban long term",
+      "2.5 mg twice daily",
+      "After 6 months"
+     ],
+     [
+      "Rivaroxaban long term",
+      "10 mg daily",
+      "After 6 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anticoagulation continues for at least **3 months**, stopping after provoked PE from a major transient cause such as surgery. Unprovoked PE, persistent risk factors or recurrence merit indefinite therapy with a reduced maintenance regimen beyond **6 months**, plus review at **3 to 6 months** for chronic thromboembolic hypertension. **2.5 mg twice daily** of apixaban, and **10 mg daily** of rivaroxaban, form the reduced long term doses.",
+   "say": "Provoked PE needs three months of therapy minimum daily for patients. Unprovoked disease merits indefinite treatment in most patients seen in clinic. Reduced dose therapy follows six months of full treatment in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PE treated 3 months"
+     },
+     {
+      "id": "b",
+      "label": "Provoked transient cause"
+     },
+     {
+      "id": "c",
+      "label": "Stop anticoagulant"
+     },
+     {
+      "id": "d",
+      "label": "Unprovoked or recurrent"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exam traps cluster around testing and treatment excess: **D dimer** must not be used in likely PE, a fixed cutoff misleads in older patients, and routine full dose thrombolysis in stable intermediate disease increases bleeding including intracranial haemorrhage. Large fluid boluses worsen right ventricular failure, and reduced dose **50 mg alteplase** remains a specialist decision rather than standard care.",
+   "say": "D dimer misleads in likely PE and must be skipped always in practice. Fixed cutoffs cause false positives in older patients greatly in clinic practice daily. Routine thrombolysis increases bleeding in stable intermediate disease cases often in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Correct approach",
+     "Why"
+    ],
+    "rows": [
+     [
+      "D dimer in likely PE",
+      "Go straight to CT",
+      "False reassurance"
+     ],
+     [
+      "Fixed D dimer cutoff",
+      "Age adjust over 50",
+      "Elderly false positives"
+     ],
+     [
+      "Routine thrombolysis",
+      "Anticoagulate and watch",
+      "Intracranial bleeding"
+     ],
+     [
+      "Large fluid boluses",
+      "Cautious 500 mL",
+      "Right heart overload"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: Wells likely means above **4**, PERC needs age under **50**, rate under **100** and saturation **95 percent** or more, age adjusted D dimer equals age times **10** above **50**, high risk shock means systolic below **90** or fall of **40** over **15 minutes**, CPR after alteplase continues **60 to 90 minutes**, minimum therapy lasts **3 months**, and reduced long term doses are apixaban **2.5 mg** twice daily or rivaroxaban **10 mg** daily.",
+   "say": "Wells likely means above four points always in exams for students. Shock with pressure below ninety indicates high risk disease in practice for patients. Minimum therapy lasts three months in all cases treated by clinicians.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Wells likely",
+      "Above 4 points"
+     ],
+     [
+      "PERC age",
+      "Under 50 years"
+     ],
+     [
+      "D dimer age cut",
+      "Age times 10 above 50"
+     ],
+     [
+      "Shock cutoff",
+      "Systolic below 90 mmHg"
+     ],
+     [
+      "Arrest CPR",
+      "60 to 90 minutes after alteplase"
+     ],
+     [
+      "Minimum duration",
+      "3 months"
+     ],
+     [
+      "Reduced dose",
+      "Apixaban 2.5 mg twice daily; rivaroxaban 10 mg daily"
+     ]
+    ]
+   }
+  }
+ ]
+}

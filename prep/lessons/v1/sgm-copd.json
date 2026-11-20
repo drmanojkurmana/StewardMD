@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-copd",
+ "subject": "ss-general-medicine",
+ "title": "Chronic Obstructive Pulmonary Disease",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Chronic obstructive pulmonary disease** (COPD, chronic airflow obstruction often from smoking) is defined by post bronchodilator forced expiratory volume in one second below **80% predicted** pattern with ratio below **0.70**. **Chronic bronchitis** (chronic cough with sputum) and **emphysema** (alveolar wall destruction) overlap in many patients. Global Initiative for Chronic Obstructive Lung Disease groups A, B and E guide inhaler choice. Prevalence in Indian adults exceeds 5% and rises with biomass smoke exposure.",
+   "say": "Chronic obstructive pulmonary disease is persistent airflow blockage, usually from long smoking. The diagnosis rests on spirometry after the inhaler, with the key ratio below seventy percent of expected. Chronic bronchitis means daily productive cough, while emphysema means destroyed air sac walls, and many patients have both. The global guideline groups patients as A, B or E to choose inhalers, and the disease affects more than one in twenty Indian adults, especially with biomass smoke.",
+   "vis": null
+  },
+  {
+   "tx": "Tobacco smoking causes about 80% of cases, while **biomass fuel** (wood and dung smoke) affects indoor women in rural India. **Alpha 1 antitrypsin deficiency** (inherited enzyme lack) rarely causes early emphysema. **Chronic bronchitis** phenotype has frequent exacerbations, while **emphysema predominant** disease has more dyspnoea and less sputum. **Eosinophilic exacerbations** (high blood eosinophils) respond better to systemic steroids and dupilumab in later stages.",
+   "say": "Tobacco causes about four fifths of cases, while indoor biomass smoke is a major cause in rural Indian women. A rare inherited enzyme lack can cause early emphysema. The bronchitis pattern means more sputum and more flareups, while the emphysema pattern means more breathlessness and this is examined in viva examinations for revision. High eosinophil counts in blood predict better steroid response and newer biologic options and this is examined in viva examinations for revision.",
+   "vis": null
+  },
+  {
+   "tx": "Smoke particles injure small airways and alveoli, causing **airway remodelling** (wall thickening) and **alveolar destruction** (loss of elastic recoil). **Air trapping** (air retained behind narrowed airways) hyperinflates lungs and flattens the diaphragm, increasing work of breathing. **Ventilation perfusion mismatch** (airflow and blood flow imbalance) causes hypoxaemia. Chronic hypoxia triggers **cor pulmonale** (right heart failure from lung disease) with pulmonary hypertension and oedema.",
+   "say": "Smoke particles damage small airways and air sacs over years and this is examined in viva examinations for revision. The airway walls thicken and the air sacs lose elasticity and this is examined in viva examinations for revision. Air gets trapped behind narrowed airways, so the lungs overinflate and the breathing muscle flattens. The mismatch of air and blood flow lowers oxygen, and long hypoxia strains the right side of the heart and this is examined in viva examinations for revision. That right heart failure from lung disease is called cor pulmonale.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chronic smoke"
+     },
+     {
+      "id": "b",
+      "label": "Airway remodelling"
+     },
+     {
+      "id": "c",
+      "label": "Air trapping"
+     },
+     {
+      "id": "d",
+      "label": "Hypoxia"
+     },
+     {
+      "id": "e",
+      "label": "Cor pulmonale"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive exertional dyspnoea, chronic productive cough and wheeze are classic, with **hyperinflated chest** (barrel shaped) and **accessory muscle use** (neck muscles) in advanced disease. **Pink puffer** (emphysema, dyspnoeic, thin) and **blue bloater** (bronchitic, cyanosed) eponyms are examination favourites but are oversimplified. **Exacerbation** (acute worsening with more sputum and dyspnoea) lasts days and needs antibiotics and steroids. Weight loss and frequent infections mark systemic disease.",
+   "say": "Breathlessness on effort with chronic cough and wheeze is classic. Advanced patients are marked by a barrel chest and use neck muscles to breathe. The pink puffer and blue bloater names are examination favourites but oversimplify the picture. Acute flareups bring more sputum and breathlessness for several days and need medicines promptly. Weight loss and repeated infections are marked by the disease affects the whole body.",
+   "vis": null
+  },
+  {
+   "tx": "**Spirometry** (breathing blows into machine) post bronchodilator confirms obstruction, and **chest computed tomography** (cross section scan) shows emphysema and bronchiectasis and screens for lung cancer. **Blood eosinophils** (white cell fraction) guide inhaled steroid and biologic decisions. **Arterial blood gas** (blood oxygen test) assesses chronic carbon dioxide retention. **Echocardiography** (heart ultrasound) detects pulmonary hypertension in cor pulmonale.",
+   "say": "Spirometry after the inhaler confirms the blockage and this is examined in viva examinations for revision. Chest computed tomography is marked by emphysema and bronchial widening and screens for lung cancer. Blood eosinophil counts guide steroid and biologic choices. Blood gas testing checks chronic carbon dioxide buildup and heart ultrasound detects raised pressure in the lung vessels during right heart failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Post bronchodilator spirometry",
+      "Diagnosis",
+      "FEV1 to FVC below 0.70"
+     ],
+     [
+      "Chest computed tomography",
+      "Phenotype and screening",
+      "Emphysema and nodules"
+     ],
+     [
+      "Blood eosinophils",
+      "Treatment guide",
+      "Steroid and biologic response"
+     ],
+     [
+      "Arterial blood gas",
+      "Retention check",
+      "Chronic CO2 rise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Smoking cessation** (stopping tobacco) is the only intervention that slows progression. **Long acting muscarinic antagonist** (tiotropium, LAMA) plus **long acting beta agonist** (indacaterol, LABA) is first line maintenance, with inhaled corticosteroid added for frequent exacerbations and eosinophilia. **Short acting beta agonist** (salbutamol, SABA) relieves acute breathlessness. **Pulmonary rehabilitation** (exercise and education programme) improves dyspnoea and reduces admissions and is recommended for symptomatic patients.",
+   "say": "Stopping smoking is the only treatment that truly slows progression. The main maintenance inhalers combine a long acting muscarinic blocker with a long acting beta agonist, and a steroid inhaler is added for frequent exacerbations with high eosinophils. A short acting blue inhaler relieves sudden breathlessness. Supervised exercise and education programmes improve breathlessness and reduce hospital admissions.",
+   "vis": null
+  },
+  {
+   "tx": "Exacerbations receive **systemic corticosteroids** (prednisolone 40 mg daily for 5 days), antibiotics when bacterial features exist, and controlled oxygen. **Noninvasive ventilation** (mask assisted breathing) is life saving in acute hypercapnic failure with acidosis. Chronic hypercapnia needs **long term oxygen therapy** (daily oxygen for 15 hours) when arterial oxygen stays below 55 mmHg. **Lung volume reduction** surgery or valves helps selected emphysema with hyperinflation and high residual volume.",
+   "say": "Flareups need a short course of steroid tablets and antibiotics when bacterial signs exist, plus careful oxygen. Mask assisted breathing can save life in acute carbon dioxide failure. Long term daily oxygen for fifteen hours helps when oxygen stays very low. Selected emphysema patients benefit from volume reduction surgery or valves that collapse overinflated areas.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Group A (low exacerbations)",
+     "points": [
+      "LABA or LAMA alone",
+      "Short acting relief only",
+      "Reassess symptoms yearly",
+      "Vaccinate and rehabilitate"
+     ]
+    },
+    "right": {
+     "title": "Group E (frequent exacerbations)",
+     "points": [
+      "LABA and LAMA baseline",
+      "Add inhaled steroid if eosinophils high",
+      "Consider roflumilast or azithromycin",
+      "Biologic options in advanced disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute severe exacerbation with drowsiness, flapping tremor and acidosis is hypercapnic respiratory failure needing high dependency care. **Pneumonia** (lung infection), **pulmonary embolism** (clotted lung artery) and **pneumothorax** (collapsed lung from ruptured emphysematous bleb) are common precipitants. **Lung cancer** risk is high in smokers with emphysema. Right heart failure with oedema signals advanced pulmonary hypertension and poor prognosis. Precipitants should be sought in every admission.",
+   "say": "Severe flareups with drowsiness and flapping tremor and acidosis need intensive care. Chest infection and clotted lung arteries and collapsed lung are common triggers. Smokers with emphysema carry high lung cancer risk and this is examined in viva examinations for revision. Swollen legs with right heart failure signal advanced lung vessel disease. Every admission should search for a trigger rather than treating only the flareup.",
+   "vis": null
+  },
+  {
+   "tx": "COPD is the third leading cause of death globally, and exacerbation frequency predicts faster decline. Most deaths are from respiratory failure or lung cancer rather than heart disease alone. Weight loss, low body mass index and frequent exacerbations worsen survival. **BODE index** (BMI, obstruction, dyspnoea, exercise) predicts death better than spirometry alone. Smoking continuation after diagnosis is the strongest predictor of disability in young patients.",
+   "say": "Chronic obstructive pulmonary disease is a leading cause of death worldwide, and frequent flareups predict faster decline. Most deaths come from breathing failure or lung cancer. Low body weight and frequent exacerbations worsen survival and this is examined in viva examinations for revision. The BODE index combining weight and lung function and breathlessness and exercise predicts death better than breathing tests alone. Continuing to smoke after diagnosis is the strongest predictor of disability.",
+   "vis": null
+  },
+  {
+   "tx": "Global Initiative for Chronic Obstructive Lung Disease 2024 stresses ABE grouping, eosinophil guided inhaled steroids and early pulmonary rehabilitation. **Triple inhaler** (LABA plus LAMA plus inhaled steroid in one device) improves adherence in group E disease. Dupilumab is an emerging add on for eosinophilic exacerbations. Examination traps include overdiagnosing COPD from one spirometry without bronchodilator, missing alpha 1 deficiency in young patients, and ignoring lung cancer screening in heavy smokers.",
+   "say": "The twenty twenty four global guideline organises treatment by ABE grouping and eosinophil counts. A single triple inhaler improves adherence in frequent exacerbators and this is examined in viva examinations for revision. Newer biologic drugs help selected eosinophilic patients. Common traps include diagnosing from a single blowing test without the inhaler, missing enzyme deficiency in young patients, and forgetting lung cancer screening in heavy smokers.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers spirometry cutoffs, inhaler choices and oxygen rules. Post bronchodilator ratio below **0.70**, long term oxygen rules and noninvasive ventilation indications are the most asked points. Alpha 1 deficiency age and biomass smoke are favourite viva themes.",
+   "say": "This table gathers the blowing test cutoffs and inhaler combinations and oxygen rules for revision. The post inhaler ratio and long term oxygen criteria and mask ventilation indications are asked repeatedly. Young onset with smoke exposure should raise suspicion of enzyme deficiency. Biomass smoke in rural women is a classic clinical vignette.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Diagnostic ratio",
+      "Below 0.70 post bronchodilator"
+     ],
+     [
+      "First maintenance",
+      "LABA plus LAMA combination"
+     ],
+     [
+      "Steroid add on clue",
+      "Frequent exacerbations, high eosinophils"
+     ],
+     [
+      "Acute steroid course",
+      "Prednisolone 40 mg for 5 days"
+     ],
+     [
+      "Acute NIV trigger",
+      "Hypercapnia with acidosis"
+     ],
+     [
+      "Long term oxygen rule",
+      "Arterial oxygen below 55 mmHg"
+     ],
+     [
+      "Young emphysema clue",
+      "Alpha 1 antitrypsin deficiency"
+     ],
+     [
+      "Prognosis index",
+      "BODE predicts mortality"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

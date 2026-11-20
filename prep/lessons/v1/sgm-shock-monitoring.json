@@ -1,0 +1,180 @@
+{
+  "v": 1,
+  "module": "sgm-shock-monitoring",
+  "subject": "ss-general-medicine",
+  "title": "Shock and haemodynamic monitoring",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Shock** is acute circulatory failure causing cellular hypoxia despite oxygen delivery, classified as hypovolaemic, cardiogenic, distributive and obstructive. The **cardiac index below two point two L per min per m2** and **mean arterial pressure 65 mmHg** mark shock severity. Global incidence exceeds five point six million intensive care admissions yearly with 30% mortality. Immediate classification directs fluids, vasopressors or pericardiocentesis without waiting for full data.",
+      "say": "Shock is acute circulatory failure causing cellular hypoxia despite oxygen delivery, classified as hypovolaemic, cardiogenic, distributive and obstructive. The cardiac index below two point two litres per minute per square metre and mean arterial pressure sixty five millimetres of mercury mark shock severity. Global incidence exceeds five point six million intensive care admissions yearly with thirty percent mortality. Immediate classification directs fluids, vasopressors or pericardiocentesis without waiting for full data.",
+      "vis": null
+    },
+    {
+      "tx": "Risk factors include **major haemorrhage**, **myocardial infarction**, **anaphylaxis**, pulmonary embolism and **sepsis** as the leading distributive cause. Trauma accounts for twenty five percent of hypovolaemic admissions and myocardial infarction for 20% of cardiogenic cases. **Tension pneumothorax**, cardiac tamponade and massive embolism cause obstructive shock. Age above 65 years, diabetes and prior heart failure double shock mortality. **Central venous catheters** themselves carry 1 to 2 per one thousand device day infection risk.",
+      "say": "Risk factors include major haemorrhage, myocardial infarction, anaphylaxis, pulmonary embolism and sepsis as the leading distributive cause. Trauma causes twenty five percent of hypovolaemic admissions and myocardial infarction causes twenty percent of cardiogenic cases. Tension pneumothorax, cardiac tamponade and massive embolism cause obstructive shock. Age above sixty five years, diabetes and prior heart failure double shock mortality. Central lines themselves carry infection risk.",
+      "vis": null
+    },
+    {
+      "tx": "Mechanism centres on **oxygen delivery** falling below consumption, tracked by **mixed venous oxygen saturation below 70%** and lactate above 2 mmol per L. Early phase shows compensatory tachycardia and vasoconstriction, while late phase adds metabolic acidosis, capillary leak and myocardial depression. **Capillary refill above 3 seconds** predicts mortality better than blood pressure alone. Microcirculatory shunting sustains hypoxia even after pressure normalises. **Sequential organ failure** follows uncorrected hypoperfusion.",
+      "say": "Mechanism centres on oxygen delivery falling below consumption, tracked by mixed venous oxygen saturation below seventy percent and lactate above two millimoles per litre. Early phase has compensatory tachycardia and vasoconstriction, while late phase adds metabolic acidosis, capillary leak and myocardial depression. Capillary refill above three seconds reflects mortality better than blood pressure alone. Microcirculatory shunting sustains hypoxia even after pressure normalises. Sequential organ failure follows uncorrected hypoperfusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Insult reduces stroke volume or resistance"
+          },
+          {
+            "id": "b",
+            "label": "Falling oxygen delivery and lactate rise"
+          },
+          {
+            "id": "c",
+            "label": "Compensatory tachycardia and vasoconstriction"
+          },
+          {
+            "id": "d",
+            "label": "Microcirculatory shunting"
+          },
+          {
+            "id": "e",
+            "label": "Organ failure and death"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classic signs are cold clammy skin, **narrow pulse pressure**, collapsed veins and **oliguria below 0.5 mL per kg per hour** in hypovolaemic shock. Cardiogenic shock shows raised jugular venous pressure, pulmonary crackles and **gallop rhythm**. Distributive shock keeps warm peripheries with **bounding pulse** and low diastolic pressure. Obstructive shock shows distended neck veins with muffled heart sounds in tamponade. **Mottling over knees** predicts 30% excess mortality in shock cohorts.",
+      "say": "Classic signs are cold clammy skin, narrow pulse pressure, collapsed veins and oliguria below zero point five millilitres per kilogram per hour in hypovolaemic shock. Cardiogenic shock shows raised jugular venous pressure, pulmonary crackles and gallop rhythm. Distributive shock keeps warm peripheries with bounding pulse and low diastolic pressure. Obstructive shock shows distended neck veins with muffled heart sounds in tamponade. Mottling over knees predicts thirty percent excess mortality in shock cohorts.",
+      "vis": null
+    },
+    {
+      "tx": "The **first test** is **bedside echocardiography** with inferior vena cava view and lung sliding, plus **central venous pressure** monitoring and arterial line for pressure. The **gold standard** is **pulmonary artery catheter** measurement of **cardiac output** with 90% accuracy for mixed shock, though less invasive monitors dominate now. **Point of care ultrasound** of veins detects volume responsiveness with eighty five percent sensitivity. **Serum lactate** clearance of 20% per 2 hours confirms resuscitation. **ScvO2 above 70%** guides transfusion thresholds.",
+      "say": "The first test is bedside echocardiography with inferior vena cava view and lung sliding, plus central venous pressure monitoring and arterial line for pressure. The gold standard is pulmonary artery catheter measurement of cardiac output with ninety percent accuracy for mixed shock, though less invasive monitors dominate now. Point of care ultrasound of veins detects volume responsiveness with eighty five percent sensitivity. Serum lactate clearance confirms resuscitation. Central venous oxygen saturation above seventy percent guides transfusion thresholds.",
+      "vis": null
+    },
+    {
+      "tx": "First line therapy for hypovolaemic shock is **balanced crystalloid 30 mL per kg** with blood transfusion 1:1:1 ratio for major haemorrhage. **Norepinephrine zero point zero five to 1 mcg per kg per minute** restores **mean arterial pressure 65 mmHg** in distributive shock. **Intramuscular vasopressor 0.5 mg** is the first dose for anaphylaxis followed by infusion. Cardiogenic shock needs **dobutamine 5 to 20 mcg per kg per minute** bridging to revascularisation. Obstructive cause needs needle decompression or pericardiocentesis urgently.",
+      "say": "First line therapy for hypovolaemic shock is balanced crystalloid thirty millilitres per kilogram with blood transfusion in one to one to one ratio for major haemorrhage. Norepinephrine zero point zero five to one microgram per kilogram per minute restores mean arterial pressure sixty five millimetres of mercury in distributive shock. Intramuscular vasopressor zero point five milligrams is the first dose for anaphylaxis followed by infusion. Cardiogenic shock needs dobutamine five to twenty micrograms per kilogram per minute bridging to revascularisation. Obstructive cause needs needle decompression urgently.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fluid responsive shock",
+          "points": [
+            "Balanced crystalloid 30 mL per kg",
+            "Stop bleeding or drain sepsis source",
+            "Lactate clearance 20 percent per 2 hours",
+            "Urine output 0.5 mL per kg per hour"
+          ]
+        },
+        "right": {
+          "title": "Vasopressor dependent shock",
+          "points": [
+            "Norepinephrine zero point zero five to 1 microgram per kg per minute",
+            "Mean pressure target 65 mmHg",
+            "Add vasopressin zero point zero three units per minute",
+            "Dobutamine when cardiac index stays low"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Monitoring escalation includes **dynamic arterial pressure** waveform analysis, hourly urine output and 4 hourly lactate. **Pulse pressure variation above thirteen percent** predicts fluid responsiveness with eighty five percent accuracy. **Transpulmonary thermodilution** and **dilution systems** estimate cardiac output within 10% of catheter. **Bispectral index** targets 40 to 60 during sedation.Daily weight, fluid balance and **extravascular lung water index** guard against overload during resuscitation.",
+      "say": "Monitoring escalation includes dynamic arterial pressure waveform analysis, hourly urine output and four hourly lactate. Pulse pressure variation above thirteen percent reflects fluid responsiveness with eighty five percent accuracy. Transpulmonary thermodilution and dilution systems measure cardiac output within ten percent of catheter values. Bispectral index targets forty to sixty during sedation. Daily weight, fluid balance and lung water index guard against overload during resuscitation.",
+      "vis": null
+    },
+    {
+      "tx": "Post resuscitation care maintains **mean arterial pressure 65 mmHg**, central venous oxygen saturation above 70% and lactate clearance above 20% per 2 hours. **Procalcitonin** above 2 ng per mL supports bacterial sepsis and de escalation. **Mechanical ventilation** uses 6 mL per kg predicted body weight with plateau pressure below 30 cm H2O. **Renal replacement therapy** starts for refractory acidosis or overload. **Stress ulcer prophylaxis** with proton pump inhibitor 40 mg daily prevents bleeding in 2% of shock patients.",
+      "say": "Post resuscitation care targets mean arterial pressure sixty five millimetres of mercury, central venous oxygen saturation above seventy percent and lactate clearance above twenty percent per two hours. Procalcitonin above two nanograms per millilitre supports bacterial sepsis and de escalation. Mechanical ventilation uses six millilitres per kilogram predicted body weight with plateau pressure below thirty centimetres of water. Renal replacement therapy starts for refractory acidosis or overload. Stress ulcer prophylaxis prevents bleeding.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **acute kidney injury** in 40% of shock, **acute respiratory distress syndrome** in 25% and hepatic ischaemia with transaminases rising tenfold. **Disseminated intravascular coagulation** complicates 20% with excess mortality. Cardiac arrest occurs in 15% of refractory distributive shock. Fluid overload causes pulmonary oedema with 30% ventilator days increase. **Critical illness polyneuropathy** affects 30% of long stay shock survivors with prolonged weakness.",
+      "say": "Complications include acute kidney injury in forty percent of shock, acute respiratory distress syndrome in twenty five percent and hepatic ischaemia with transaminases rising tenfold. Disseminated intravascular coagulation complicates twenty percent with excess mortality. Cardiac arrest occurs in fifteen percent of refractory distributive shock. Fluid overload causes pulmonary oedema with increased ventilator days. Critical illness polyneuropathy affects thirty percent of long stay shock survivors with prolonged weakness.",
+      "vis": null
+    },
+    {
+      "tx": "Learn the **exam traps**: warm peripheries with bounding pulse mean distributive, cold with narrow pulse mean hypovolaemic or cardiogenic. **Central venous pressure** alone never assesses fluid responsiveness, while **pulse pressure variation** does. **Intramuscular vasopressor** is the drug for anaphylaxis, not intravenous bolus first. **Norepinephrine** is the first vasopressor, not alternatives routinely. **Lactate above 2 mmol per L** with **ScvO2 below 70%** defines ongoing shock despite normal pressure.",
+      "say": "Learn the exam traps. Warm peripheries with bounding pulse mean distributive, cold with narrow pulse mean hypovolaemic or cardiogenic. Central venous pressure alone never assesses fluid responsiveness, while pulse pressure variation does. Intramuscular vasopressor is the drug for anaphylaxis, not intravenous bolus first. Norepinephrine is the first vasopressor, not alternatives routinely. Lactate above two millimoles per litre with low central venous saturation defines ongoing shock despite normal pressure.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** table binds type, sign and drug. Hypovolaemic shock needs **30 mL per kg** fluids and blood. Cardiogenic shock needs **dobutamine 5 to 20 mcg per kg per minute**. Distributive shock needs **norepinephrine zero point zero five to 1 mcg per kg per minute** for pressure 65 mmHg. Anaphylaxis needs **intramuscular vasopressor 0.5 mg**. Obstructive shock needs decompression. Lactate clearance 20% per 2 hours judges response.",
+      "say": "This high yield table binds type, sign and drug. Hypovolaemic shock needs thirty millilitres per kilogram fluids and blood. Cardiogenic shock needs dobutamine five to twenty micrograms per kilogram per minute. Distributive shock needs norepinephrine zero point zero five to one microgram per kilogram per minute for pressure sixty five millimetres of mercury. Anaphylaxis needs intramuscular vasopressor zero point five milligrams. Obstructive shock needs decompression. Lactate clearance twenty percent per two hours reflects response.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Shock type",
+          "Classic sign",
+          "First drug",
+          "Next action"
+        ],
+        "rows": [
+          [
+            "Hypovolaemic",
+            "Cold skin with narrow pulse",
+            "Balanced crystalloid 30 mL per kg",
+            "Transfuse 1:1:1 for bleeding"
+          ],
+          [
+            "Cardiogenic",
+            "Raised jugular pressure with crackles",
+            "Dobutamine 5 to 20 mcg per kg per minute",
+            "Revascularisation bridge"
+          ],
+          [
+            "Distributive",
+            "Warm skin with bounding pulse",
+            "Norepinephrine zero point zero five to 1 mcg per kg per minute",
+            "Sepsis bundle and source control"
+          ],
+          [
+            "Anaphylaxis",
+            "Angioedema with bronchospasm",
+            "Intramuscular vasopressor 0.5 mg",
+            "Infusion and steroids"
+          ],
+          [
+            "Obstructive tamponade",
+            "Muffled heart with distended veins",
+            "Pericardiocentesis urgent",
+            "Surgical referral"
+          ],
+          [
+            "Obstructive tension",
+            "Tracheal shift with absent breath",
+            "Needle decompression urgent",
+            "Chest drain insertion"
+          ],
+          [
+            "Mixed septic cardiogenic",
+            "Low cardiac index two point two",
+            "Norepinephrine plus dobutamine",
+            "Echo guided titration"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

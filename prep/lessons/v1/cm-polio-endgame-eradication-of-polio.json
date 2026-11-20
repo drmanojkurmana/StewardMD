@@ -13,11 +13,23 @@
    "say": "Two dates close the Indian story. Last case onset 13 January 2011 in Howrah; regional certification 27 March 2014. Three silent years under sensitive surveillance had to prove that no reports meant no virus.",
    "vis": {
     "kind": "table",
-    "cols": ["Date", "Event"],
+    "cols": [
+     "Date",
+     "Event"
+    ],
     "rows": [
-     ["13 January 2011", "Last case onset, Howrah, West Bengal"],
-     ["2011 to 2014", "Zero cases under AFP surveillance"],
-     ["27 March 2014", "India and region certified polio-free"]
+     [
+      "13 January 2011",
+      "Last case onset, Howrah, West Bengal"
+     ],
+     [
+      "2011 to 2014",
+      "Zero cases under AFP surveillance"
+     ],
+     [
+      "27 March 2014",
+      "India and region certified polio-free"
+     ]
     ]
    }
   },
@@ -28,12 +40,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Routine coverage sustained high"},
-     {"id": "b", "label": "Pulse Polio days each year"},
-     {"id": "c", "label": "AFP surveillance detects every case"},
-     {"id": "d", "label": "Mopping-up in residual foci"}
+     {
+      "id": "a",
+      "label": "Routine coverage sustained high"
+     },
+     {
+      "id": "b",
+      "label": "Pulse Polio days each year"
+     },
+     {
+      "id": "c",
+      "label": "AFP surveillance detects every case"
+     },
+     {
+      "id": "d",
+      "label": "Mopping-up in residual foci"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -53,12 +90,27 @@
    "say": "One day, every under-five, whatever the card says. Repeated rounds flood guts with vaccine virus until wild virus finds no home. Booths then hunt missed children house to house, finger marks auditing coverage.",
    "vis": {
     "kind": "table",
-    "cols": ["Element", "Design"],
+    "cols": [
+     "Element",
+     "Design"
+    ],
     "rows": [
-     ["Target", "All children under five years"],
-     ["Prior status", "Irrelevant, every child dosed"],
-     ["Follow-up", "House-to-house missed child search"],
-     ["Audit", "Finger marking and tally review"]
+     [
+      "Target",
+      "All children under five years"
+     ],
+     [
+      "Prior status",
+      "Irrelevant, every child dosed"
+     ],
+     [
+      "Follow-up",
+      "House-to-house missed child search"
+     ],
+     [
+      "Audit",
+      "Finger marking and tally review"
+     ]
     ]
    }
   },
@@ -69,12 +121,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "AFP case reported immediately"},
-     {"id": "b", "label": "Two stools, 24 to 48 hours apart"},
-     {"id": "c", "label": "Virus isolation in laboratory"},
-     {"id": "d", "label": "60-day residual paralysis review"}
+     {
+      "id": "a",
+      "label": "AFP case reported immediately"
+     },
+     {
+      "id": "b",
+      "label": "Two stools, 24 to 48 hours apart"
+     },
+     {
+      "id": "c",
+      "label": "Virus isolation in laboratory"
+     },
+     {
+      "id": "d",
+      "label": "60-day residual paralysis review"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -83,11 +160,23 @@
    "say": "Silence must prove itself. Eighty percent timely reports including zeros, enough non-polio paralysis found to prove sensitivity, adequate stools in most cases. Quiet districts count as blind spots, never as healthy by default.",
    "vis": {
     "kind": "table",
-    "cols": ["Indicator", "Certification expectation"],
+    "cols": [
+     "Indicator",
+     "Certification expectation"
+    ],
     "rows": [
-     ["Timely weekly reports incl. zero", "80 percent or more"],
-     ["Non-polio AFP rate", "Proves system sensitivity"],
-     ["Adequate stool specimens", "80 percent or more of cases"]
+     [
+      "Timely weekly reports incl. zero",
+      "80 percent or more"
+     ],
+     [
+      "Non-polio AFP rate",
+      "Proves system sensitivity"
+     ],
+     [
+      "Adequate stool specimens",
+      "80 percent or more of cases"
+     ]
     ]
    }
   },
@@ -99,11 +188,19 @@
     "kind": "compare",
     "left": {
      "title": "Booth strategy reaches",
-     "points": ["Settled, motivated families", "Children brought to fixed sites", "High volume per day"]
+     "points": [
+      "Settled, motivated families",
+      "Children brought to fixed sites",
+      "High volume per day"
+     ]
     },
     "right": {
      "title": "Mopping-up reaches",
-     "points": ["Migrant and mobile families", "Newborns missed by registers", "Residual transmission pockets"]
+     "points": [
+      "Migrant and mobile families",
+      "Newborns missed by registers",
+      "Residual transmission pockets"
+     ]
     }
    }
   },
@@ -114,12 +211,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Virus detected, case investigated"},
-     {"id": "b", "label": "Stools and contacts sampled"},
-     {"id": "c", "label": "Large supplementary rounds launched"},
-     {"id": "d", "label": "Surveillance intensified around focus"}
+     {
+      "id": "a",
+      "label": "Virus detected, case investigated"
+     },
+     {
+      "id": "b",
+      "label": "Stools and contacts sampled"
+     },
+     {
+      "id": "c",
+      "label": "Large supplementary rounds launched"
+     },
+     {
+      "id": "d",
+      "label": "Surveillance intensified around focus"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -128,11 +250,23 @@
    "say": "The finish retires the weapon. Certify wild types, strip Sabin strains stepwise as in 2016, cover with injectable vaccine, then stop oral vaccine globally together. Derived outbreaks meanwhile meet targeted newer type-two vaccine.",
    "vis": {
     "kind": "table",
-    "cols": ["Endgame step", "Status logic"],
+    "cols": [
+     "Endgame step",
+     "Status logic"
+    ],
     "rows": [
-     ["Wild type certification", "Type 2 certified 2015, type 3 in 2019"],
-     ["tOPV to bOPV switch", "Completed April 2016 globally"],
-     ["IPV everywhere, then OPV cessation", "Final sequence after types 1 and 3"]
+     [
+      "Wild type certification",
+      "Type 2 certified 2015, type 3 in 2019"
+     ],
+     [
+      "tOPV to bOPV switch",
+      "Completed April 2016 globally"
+     ],
+     [
+      "IPV everywhere, then OPV cessation",
+      "Final sequence after types 1 and 3"
+     ]
     ]
    }
   },
@@ -144,12 +278,65 @@
     "kind": "compare",
     "left": {
      "title": "Smallpox advantages",
-     "points": ["Every case visible by rash", "No subclinical carrier state", "Ring containment sufficient"]
+     "points": [
+      "Every case visible by rash",
+      "No subclinical carrier state",
+      "Ring containment sufficient"
+     ]
     },
     "right": {
      "title": "Polio difficulties",
-     "points": ["Most infections silent", "Gut transmission widespread", "Vaccine-derived strains emerge"]
+     "points": [
+      "Most infections silent",
+      "Gut transmission widespread",
+      "Vaccine-derived strains emerge"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: India's last polio case was on 13 January 2011 in Howrah, with certification on 27 March 2014. Eradication rests on routine immunisation, Pulse Polio, acute flaccid paralysis surveillance and mopping up. Two stools 24 to 48 hours apart within 14 days are needed. The trivalent to bivalent oral vaccine switch happened in 2016.",
+   "say": "India's last polio case was on 13 January 2011 in Howrah, with certification on 27 March 2014. Eradication rests on routine immunisation, Pulse Polio, acute flaccid paralysis surveillance and mopping up. Two stools 24 to 48 hours apart within 14 days are needed. The trivalent to bivalent oral vaccine switch happened in 2016.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Last India polio case",
+      "13 January 2011, Howrah, West Bengal"
+     ],
+     [
+      "India certification date",
+      "27 March 2014, polio free region"
+     ],
+     [
+      "Pulse Polio target",
+      "All children under five years dosed"
+     ],
+     [
+      "AFP stool timing",
+      "Two stools within 14 days of onset"
+     ],
+     [
+      "AFP follow up",
+      "60 day residual paralysis review done"
+     ],
+     [
+      "Adequate stool target",
+      "80 percent or more cases adequate"
+     ],
+     [
+      "Mopping up meaning",
+      "Door to door immunisation in residual foci"
+     ],
+     [
+      "OPV switch year",
+      "Trivalent to bivalent switch in 2016"
+     ]
+    ]
    }
   }
  ],

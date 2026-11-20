@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "module": "sid-encephalitis-abscess",
+ "title": "Encephalitis and brain abscess",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Encephalitis is parenchymal brain inflammation** shown by altered mental status **lasting 24 hours or more** without another cause. Minor features include **fever 38 degrees within 72 hours**, new seizures, focal signs, **CSF white cells 5 or more**, imaging or electroencephalogram change. **Two minor features suggest possible, three or more probable encephalitis**. **Herpes simplex virus type 1 is the commonest identified cause** of sporadic disease.",
+   "say": "Encephalitis was reported to mean inflammation of brain tissue itself. The core symptom was reported to be altered mental status lasting twenty four hours or more. Fever was reported to reach thirty eight degrees within seventy two hours in many patients. Spinal fluid was reported to show five white cells or more in genuine cases. Two minor features were reported to suggest possible encephalitis overall. Three or more minor features were reported to make probable encephalitis much more likely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Counts",
+     "Means"
+    ],
+    "rows": [
+     [
+      "Major",
+      "Altered status 24 hours",
+      "Core feature"
+     ],
+     [
+      "Minor fever",
+      "38 degrees 72 hours",
+      "Supports case"
+     ],
+     [
+      "Minor CSF",
+      "5 cells or more",
+      "Supports case"
+     ],
+     [
+      "Rule",
+      "2 or 3 to classify",
+      "Possible or probable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Herpes simplex virus type 1 dominates sporadic disease worldwide**. Varicella zoster virus, enteroviruses and arboviruses follow; **Japanese encephalitis and West Nile virus** suit endemic areas. **Brain abscess follows sinusitis, otitis media or hematogenous spread**, usually polymicrobial. **Cytomegalovirus and HHV-6** affect immunocompromised hosts. Autoimmune disease such as **anti-NMDA receptor encephalitis** rivals viral causes. Travel, season, bites and immune suppression guide the search.",
+   "say": "Herpes simplex virus type one was reported to dominate sporadic encephalitis worldwide. Varicella zoster virus and enteroviruses were reported to cause many other cases. Brain abscess was reported to follow sinus or ear infection in many patients. Cytomegalovirus was reported to affect immune suppressed hosts in hospital practice. Autoimmune encephalitis was reported to rival viral causes in frequency overall. Travel, season and bites were reported to guide the search for cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Fits whom",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Herpes simplex 1",
+      "Sporadic adults",
+      "Temporal lobe"
+     ],
+     [
+      "Arboviruses",
+      "Endemic summer",
+      "Mosquito bite"
+     ],
+     [
+      "Autoimmune",
+      "Young women",
+      "Psychiatric prodrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neurotropic viruses injure characteristic brain regions**, producing the clinical pattern. **Herpes simplex targets inferomedial frontotemporal and limbic zones**, causing hemorrhagic necrosis and microbleeds. **Flaviviruses prefer deep grey structures** including thalamus, basal ganglia and brainstem. **Varicella zoster virus causes vasculopathy** with hemorrhagic and ischemic infarction. Some infections **trigger later antibody-mediated autoimmune encephalitis**, notably anti-NMDA receptor disease after herpes simplex infection.",
+   "say": "Each virus was reported to tend to injure its favourite part of the brain. Herpes simplex was reported to favour the front temporal and limbic regions. That preference was reported to explain behavioural change and memory disturbance. Flaviviruses were reported to favour deep grey structures and the brainstem. Varicella zoster virus was reported to damage vessels more than brain tissue directly. Some viral infections were reported to trigger later autoimmune encephalitis in the recovery weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Virus reaches brain"
+     },
+     {
+      "id": "b",
+      "label": "Region pattern decides"
+     },
+     {
+      "id": "c",
+      "label": "Dead tissue plus swelling"
+     },
+     {
+      "id": "d",
+      "label": "Symptoms localize"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Altered consciousness is the major criterion**, from lethargy and personality change to coma. **Temporal clues include behaviour change, aphasia, olfactory hallucinations and memory loss**. **Seizures are frequent**, sometimes focal and prolonged. **Brainstem and movement disorder features suggest flaviviruses**. A **psychiatric prodrome with seizures and dyskinesia suggests anti-NMDA receptor disease**. **Normal examination never excludes early encephalitis** before deficits evolve.",
+   "say": "Altered consciousness was reported to stand as the major criterion for encephalitis. Confusion was reported to range from lethargy through personality change to coma. Temporal lobe clues were reported to include behaviour change and memory loss. Olfactory hallucinations were reported to point strongly toward herpes simplex virus. Seizures were reported to appear frequently and to remain focal for hours. Psychiatric symptoms with dyskinesia were reported to suggest autoimmune disease instead.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Points where",
+     "Virus"
+    ],
+    "rows": [
+     [
+      "Behaviour change",
+      "Temporal lobe",
+      "Herpes simplex"
+     ],
+     [
+      "Movement disorder",
+      "Deep grey",
+      "Flavivirus"
+     ],
+     [
+      "Flaccid paralysis",
+      "Cord",
+      "West Nile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spinal fluid polymerase chain reaction for herpes simplex is definitive**. Routine fluid shows **lymphocytic pleocytosis with normal glucose**; low glucose suggests bacterial, fungal or tuberculous disease. **Magnetic resonance imaging is preferred to computed tomography**, ideally within **24 to 48 hours**, showing temporal lobe signal on T2 and FLAIR. **Electroencephalogram detects nonconvulsive seizures**. **Extra frozen fluid is stored** for later viral polymerase chain reaction or sequencing.",
+   "say": "Spinal fluid polymerase chain reaction testing was reported to confirm herpes simplex virus. Routine fluid was reported to show lymphocytic pleocytosis with normal glucose. Low glucose was reported to point away from viral encephalitis toward other causes. Magnetic resonance imaging was reported to be preferred over computed tomography scans. Temporal lobe signal was reported to support herpes simplex infection strongly. Brain electricity testing was reported to detect seizures without outward movement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Shows",
+     "When"
+    ],
+    "rows": [
+     [
+      "CSF PCR",
+      "Herpes DNA",
+      "At once plus repeat"
+     ],
+     [
+      "MRI brain",
+      "Temporal signal",
+      "Within 24 to 48 hours"
+     ],
+     [
+      "EEG",
+      "Firing patterns",
+      "Seizure hunt"
+     ],
+     [
+      "Stored fluid",
+      "Future proof",
+      "Later tests"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Start aciclovir within 6 hours of admission without waiting for tests**: **10 mg/kg every 8 hours** in adults and older children, **500 mg/m2** from 3 months to 12 years and **20 mg/kg in neonates**. Add **ceftriaxone 2 g every 12 hours** when bacterial meningitis is possible. Add **doxycycline 100 mg twice daily** for rickettsial clues. **Hydrate well and watch kidneys**, since crystal nephropathy is common. **Treat seizures with benzodiazepines** first.",
+   "say": "Aciclovir was reported to start immediately in every suspected case under study. Adults were reported to receive ten milligrams per kilogram every eight hours. Children were reported to receive five hundred milligrams per square metre instead. Neonates were reported to receive twenty milligrams per kilogram every eight hours. Ceftriaxone was reported to be added when bacterial meningitis cannot be excluded. Doxycycline was reported to be added when rickettsial disease looks possible.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "For"
+    ],
+    "rows": [
+     [
+      "Aciclovir",
+      "10 mg/kg 8 hourly",
+      "Herpes cover"
+     ],
+     [
+      "Ceftriaxone",
+      "2 g 12 hourly",
+      "Bacterial cover"
+     ],
+     [
+      "Doxycycline",
+      "100 mg twice daily",
+      "Rickettsia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Confirmed herpes encephalitis needs 14 to 21 days of aciclovir**, repeating polymerase chain reaction at the end in neonates and immunocompromised hosts. **Varicella zoster encephalitis needs 10 to 14 days** at 10 to 15 mg/kg. **Early polymerase chain reaction can be falsely negative**, so repeat testing **3 to 7 days later** when suspicion persists. **Stop empirical aciclovir only on confirmed alternative diagnosis**. **Corticosteroids are not routine**, but **methylprednisolone 1 g daily for 3 to 5 days** treats ADEM.",
+   "say": "Confirmed herpes encephalitis was reported to require fourteen to twenty one days of aciclovir. Varicella zoster disease was reported to require ten to fourteen days instead. Early polymerase chain reaction testing was reported to miss herpes in the first days. Repeat testing three to seven days later was reported to resolve doubtful cases. Steroids were reported to lack routine benefit in herpes encephalitis overall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Herpes",
+     "points": [
+      "14 to 21 days",
+      "10 mg/kg dosing",
+      "Repeat PCR at end"
+     ]
+    },
+    "right": {
+     "title": "Varicella zoster",
+     "points": [
+      "10 to 14 days",
+      "10 to 15 mg/kg",
+      "Vasculopathy risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Untreated herpes encephalitis kills most patients**, while treated disease leaves **half of survivors with minor or no sequelae**. Outcome worsens with **coma at treatment start**. **Japanese encephalitis kills 20 to 30%** of hospital patients with lasting disability. **Brain abscess needs aspiration plus prolonged antibiotics**. **Tuberculous and cryptococcal meningitis run subacute courses** with lymphocytic fluid and low glucose, needing prolonged therapy and immune workup.",
+   "say": "Untreated herpes encephalitis was reported to kill most patients it strikes. Treated disease was reported to still leave many survivors with memory problems. Coma at the start of treatment was reported to predict the worst outcomes. Japanese encephalitis was reported to kill twenty to thirty percent of hospital patients. Brain abscess was reported to require aspiration drainage with prolonged antibiotics. Tuberculous and cryptococcal meningitis were reported to run a subacute course with lymphocytic fluid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Outcome",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Herpes",
+      "Half recover well",
+      "Early therapy saves"
+     ],
+     [
+      "Japanese encephalitis",
+      "20 to 30% deaths",
+      "Disability common"
+     ],
+     [
+      "Abscess",
+      "Aspiration plus antibiotics",
+      "Prolonged course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Never delay aciclovir for polymerase chain reaction or imaging**; early treatment saves memory. **Never stop aciclovir on one early negative polymerase chain reaction**; repeat at **3 to 7 days** if suspicion persists. **Never attribute focal signs or seizures to simple meningitis**; think encephalitis or abscess. **New psychosis after herpes encephalitis is often autoimmune**, needing immunotherapy, not more aciclovir. **Serum herpes serology has no diagnostic value**.",
+   "say": "Delaying aciclovir for tests was reported to be the commonest exam trap. One early negative polymerase chain reaction was reported to never exclude herpes. Repeat testing three to seven days later was reported to be required. Focal signs or seizures were reported to never belong to simple meningitis. New psychosis after herpes was reported to often signal autoimmune encephalitis. Serum herpes serology was reported to have no diagnostic value at all.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong move",
+     "Right move"
+    ],
+    "rows": [
+     [
+      "Waiting for PCR",
+      "Delays aciclovir",
+      "Start within 6 hours"
+     ],
+     [
+      "One negative PCR",
+      "Stops therapy",
+      "Repeat at 3 to 7 days"
+     ],
+     [
+      "Psychosis after herpes",
+      "More aciclovir",
+      "Think autoimmune"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam:** **aciclovir 10 mg/kg every 8 hours** starts immediately. **Confirm by CSF polymerase chain reaction**; early negatives repeat at **3 to 7 days**. **Treat herpes for 14 to 21 days**; varicella for **10 to 14 days**. **Add ceftriaxone 2 g** when bacterial disease is possible. **Temporal lobe signal means herpes** until proven otherwise. **Focal signs mean encephalitis or abscess**, not simple meningitis.",
+   "say": "For the exam, aciclovir was reported to be the drug that matters most. Adults were reported to receive ten milligrams per kilogram every eight hours. Confirmed herpes was reported to need fourteen to twenty one days of therapy. CSF polymerase chain reaction was reported to confirm herpes simplex virus. Temporal lobe signal was reported to mean herpes until proven otherwise. Focal signs were reported to mean encephalitis or abscess in this setting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Aciclovir 10 mg/kg",
+      "Every 8 hours",
+      "Empirical cover"
+     ],
+     [
+      "CSF PCR",
+      "Repeat 3 to 7 days",
+      "Early negative"
+     ],
+     [
+      "Herpes 14 to 21 days",
+      "Full course",
+      "Duration asked"
+     ],
+     [
+      "Varicella 10 to 14 days",
+      "10 to 15 mg/kg",
+      "Duration asked"
+     ],
+     [
+      "Ceftriaxone 2 g",
+      "When bacterial possible",
+      "Co-cover"
+     ],
+     [
+      "Temporal lobe",
+      "MRI signal",
+      "Herpes clue"
+     ],
+     [
+      "Focal signs",
+      "Abscess or encephalitis",
+      "Not meningitis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

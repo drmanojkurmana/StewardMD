@@ -1,0 +1,180 @@
+{
+  "v": 1,
+  "module": "sgm-skin-bone-device",
+  "subject": "ss-general-medicine",
+  "title": "Skin, soft tissue, bone and device infections",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Skin and soft tissue infections** range from uncomplicated **cellulitis** to fulminant **necrotising fasciitis** and are among the commonest hospital admissions. Prompt distinction between **purulent** and **non purulent** presentations guides empiric therapy. Worldwide, diabetic foot infections alone affect 30% of people with diabetes at some point. Osteomyelitis and septic arthritis carry lifelong deformity risk if diagnosis is delayed beyond 48 hours.",
+      "say": "Skin and soft tissue infections range from uncomplicated cellulitis to fulminant necrotising fasciitis and are among the commonest hospital admissions. Prompt distinction between purulent and non purulent presentations guides empiric therapy. Worldwide, diabetic foot infections alone affect thirty percent of people with diabetes at some point. Osteomyelitis and septic arthritis carry lifelong deformity risk if diagnosis is delayed beyond forty eight hours.",
+      "vis": null
+    },
+    {
+      "tx": "Major pathogens include **Staphylococcus aureus** including **resistant Staphylococcus aureus**, **Streptococcus pyogenes**, anaerobes and gram negative bacilli in diabetic and immunocompromised hosts. Risk factors are trauma, burns, surgical wounds, venous insufficiency, diabetes, cirrhosis and indwelling devices. **Prosthetic joints** and implants raise biofilm mediated persistence, with device infections accounting for twenty five percent of orthopaedic hospital stays. Decubitus ulcers and water exposure add Pseudomonas risk.",
+      "say": "Major pathogens include Staphylococcus aureus including resistant strains, Streptococcus pyogenes, anaerobes and gram negative bacilli in diabetic and immunocompromised hosts. Risk factors are trauma, burns, surgical wounds, venous insufficiency, diabetes, cirrhosis and indwelling devices. Prosthetic joints and implants raise biofilm mediated persistence, with device infections accounting for twenty five percent of orthopaedic hospital stays. Decubitus ulcers can carry Pseudomonas risk.",
+      "vis": null
+    },
+    {
+      "tx": "The **biofilm** mechanism explains device relapse: bacteria attach to foreign material, produce extracellular matrix and enter dormancy resistant to antibiotics and immunity. **Necrotising fasciitis** spreads along fascial planes releasing toxins that thrombose nutrient vessels and cause rapid tissue loss. Osteomyelitis follows bacterial seeding of metaphyseal bone in children and contiguous spread in adults. Sequestrum and involucrum formation isolates organisms from blood borne drug delivery, demanding surgical removal.",
+      "say": "The biofilm mechanism explains device relapse because bacteria attach to foreign material, produce extracellular matrix and enter dormancy resistant to antibiotics and immunity. Necrotising fasciitis spreads along fascial planes releasing toxins that thrombose nutrient vessels and cause rapid tissue loss. Osteomyelitis follows bacterial seeding of metaphyseal bone in children and contiguous spread in adults. Sequestrum formation isolates organisms from blood borne drug delivery, demanding surgical removal.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bacterial inoculation of skin or tissue"
+          },
+          {
+            "id": "b",
+            "label": "Adherence and microcolony formation"
+          },
+          {
+            "id": "c",
+            "label": "Biofilm maturation on device or bone"
+          },
+          {
+            "id": "d",
+            "label": "Quiescent persistence and shedding"
+          },
+          {
+            "id": "e",
+            "label": "Relapse or bacteraemia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Osteomyelitis** in children shows metaphyseal pain, fever and **limping** in fifty five percent of cases, while adults present with chronic sinus, pain and raised inflammatory markers. **Septic arthritis** causes a **hot swollen joint** with refusal to move in under 72 hours. Necrotising infection shows bullae, crepitus, rapid pain out of proportion and 30% mortality at 24 hours. Diabetic foot shows ulcer with neuropathy in 60% and osteomyelitis on probe to bone test.",
+      "say": "Osteomyelitis in children shows metaphyseal pain, fever and limping in fifty five percent of cases, while adults present with chronic sinus, pain and raised inflammatory markers. Septic arthritis causes a hot swollen joint with refusal to move in under seventy two hours. Necrotising infection shows bullae, crepitus, rapid pain out of proportion and thirty percent mortality at twenty four hours. Diabetic foot shows ulcer with neuropathy in sixty percent and osteomyelitis on probe to bone test.",
+      "vis": null
+    },
+    {
+      "tx": "The **first test** for bone infection is **plain X ray** which shows periosteal reaction and sequestrum after ten to fourteen days, plus blood cultures before antibiotics. **Magnetic resonance imaging** of the bone is the investigation of choice with ninety percent sensitivity for early osteomyelitis. For synovial fluid, cell count above **fifty thousand per cubic millimetre** with neutrophil predominance suggests septic arthritis. **Ultrasonography** of the joint guides aspiration. Pus culture and tissue biopsy remain definitive for organism identification.",
+      "say": "The first test for bone infection is plain X ray which shows periosteal reaction and sequestrum after ten to fourteen days, plus blood cultures before antibiotics. Magnetic resonance imaging of the bone is the investigation of choice with ninety percent sensitivity for early osteomyelitis. For synovial fluid, cell count above fifty thousand per cubic millimetre with neutrophil predominance suggests septic arthritis. Ultrasonography guides aspiration. Pus culture and tissue biopsy remain definitive for organism identification.",
+      "vis": null
+    },
+    {
+      "tx": "**Cellulitis** is drug therapy without mandatory drainage, while abscess, necrotising infection and foreign body require **surgical debridement** within 6 hours for limb salvage and survival. Prosthetic joint infection needs staged explantation with antibiotic spacer, because antibiotics alone cure under 20%. Acute osteomyelitis gets empiric **broad spectrum cover** plus vancomycin when resistant risk exists. Chronic disease needs 4 to 6 weeks of targeted therapy.",
+      "say": "Cellulitis is drug therapy without mandatory drainage, while abscess, necrotising infection and foreign body require surgical debridement within six hours for limb salvage and survival. Prosthetic joint infection needs staged explantation with antibiotic spacer, because antibiotics alone cure under twenty percent. Acute osteomyelitis needs empiric broad spectrum cover plus vancomycin when resistant risk exists. Chronic disease needs four to six weeks of targeted therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Simple cellulitis and abscess",
+          "points": [
+            "Broad cover 2 g intravenously every 8 hours",
+            "Incision and drainage for abscess",
+            "Oral step down after 48 hours",
+            "Review at 48 hours for spread"
+          ]
+        },
+        "right": {
+          "title": "Necrotising or device infection",
+          "points": [
+            "Broad cover including vancomycin",
+            "Urgent surgical debridement in 6 hours",
+            "Staged explantation for prosthesis",
+            "Four to six weeks targeted therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prosthetic joint **two stage exchange** removes infected hardware, inserts a loaded cement spacer and delivers 6 weeks of organism specific antibiotics before reimplantation. Diabetic foot needs offloading, daily dressing, glycemic control and broad **piperacillin-tazobactam** cover. **Resistant Staphylococcus aureus** abscess needs vancomycin 1 g intravenously every 12 hours or linezolid 600 mg orally twice daily. Tetanus prophylaxis is mandatory for contaminated wounds.",
+      "say": "Prosthetic joint two stage exchange removes infected hardware, inserts a loaded cement spacer and delivers six weeks of organism specific antibiotics before reimplantation. Diabetic foot needs offloading, daily dressing, glycemic control and piperacillin-tazobactam broad cover. Resistant Staphylococcus aureus abscess, needs vancomycin one gram intravenously every twelve hours or linezolid six hundred milligrams orally twice daily. Tetanus prophylaxis is mandatory for contaminated wounds.",
+      "vis": null
+    },
+    {
+      "tx": "Monitoring includes **C reactive protein** trending, wound size charting and repeat ultrasound for undrained collections. **Did not improve in 48 hours** on therapy means reconsider the regimen, image again and seek surgical opinion. Blood cultures must be repeated every 48 hours until clearance in bacteraemia. Imported devices, cement and grafts should be recorded with lot numbers for traceability. Physiotherapy and glycaemic optimisation decide long term function after cure.",
+      "say": "Monitoring includes C reactive protein trending, wound size charting and repeat ultrasound for undrained collections. Did not improve in forty eight hours on therapy means reconsider the regimen, image again and seek surgical opinion. Blood cultures must be repeated every forty eight hours until clearance in bacteraemia. Imported devices and grafts should be recorded with lot numbers for traceability. Physiotherapy and glycaemic optimisation decide long term function after cure.",
+      "vis": null
+    },
+    {
+      "tx": "Complications include **sepsis**, necrotising spread with 20% amputation rate, metastatic abscess and endocarditis in ten percent of bacteraemic patients. Chronic osteomyelitis leads to sinus formation, amyloidosis in 5% and **Marjolin ulcer** transformation near 2% after decades. Septic arthritis destroys cartilage within seven days. Prosthesis failure recurs in 30% if biofilm is not fully removed. Early source control therefore decides whether the limb and joint survive.",
+      "say": "Complications include sepsis, necrotising spread with twenty percent amputation rate, metastatic abscess and endocarditis in ten percent of bacteraemic patients. Chronic osteomyelitis leads to sinus formation, amyloidosis in five percent and malignant transformation near two percent after decades. Septic arthritis causes cartilage destruction within seven days. Prosthesis failure recurs in thirty percent if biofilm is not fully removed. Early source control therefore decides whether the limb and joint survive.",
+      "vis": null
+    },
+    {
+      "tx": "Learn the **exam traps**: absence of fluctuance does not exclude abscess, so ultrasound and aspiration decide drainage. **Prosthetic joint infection** is never cured by antibiotics alone, and late chronic infection always needs explantation. **Probe to bone** in diabetic foot strongly predicts osteomyelitis and needs magnetic resonance imaging. Microbiology before antibiotics in acute bone infection is mandatory. Synovial **white cell count fifty thousand per cubic millimetre** with positive Gram stain secures septic arthritis diagnosis.",
+      "say": "Learn the exam traps. Absence of fluctuance does not exclude abscess, so ultrasound and aspiration decide drainage. Prosthetic joint infection is never cured by antibiotics alone, and late chronic infection always needs explantation. Probe to bone in diabetic foot strongly predicts osteomyelitis and needs magnetic resonance imaging. Microbiology before antibiotics in acute bone infection is mandatory. Synovial white cell count above fifty thousand per cubic millimetre suggests septic arthritis with positive Gram stain.",
+      "vis": null
+    },
+    {
+      "tx": "**High-yield for the exam** table links site, likely bug and drug. Cellulitis needs piperacillin-tazobactam broad cover. Necrotising fasciitis needs vancomycin plus piperacillin tazobactam 4.5 g every 6 hours with surgery. Acute osteomyelitis needs 4 to 6 weeks targeted therapy. Diabetic foot needs piperacillin-tazobactam broad cover. Prosthetic joint needs two stage exchange. Rapid spread demands immediate surgical referral.",
+      "say": "This high yield table links site, likely bug and drug. Cellulitis needs piperacillin-tazobactam broad cover while cultures develop. Necrotising fasciitis needs vancomycin plus piperacillin tazobactam four point five grams every six hours with surgery. Acute osteomyelitis needs four to six weeks targeted therapy. Diabetic foot needs piperacillin-tazobactam broad cover. Prosthetic joint needs two stage exchange. Rapid spread demands immediate surgical referral.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Likely organism",
+          "First line drug",
+          "Key action"
+        ],
+        "rows": [
+          [
+            "Cellulitis",
+            "Staphylococcus and Streptococcus",
+            "Broad cover two grams every six hours",
+            "Review at 48 hours"
+          ],
+          [
+            "Necrotising fasciitis",
+            "Mixed aerobes and anaerobes",
+            "Vancomycin plus piperacillin tazobactam 4.5 g every 6 hours",
+            "Debridement in 6 hours"
+          ],
+          [
+            "Acute osteomyelitis",
+            "Staphylococcus aureus",
+            "Targeted 4 to 6 weeks",
+            "Biopsy before antibiotics"
+          ],
+          [
+            "Diabetic foot",
+            "Polymicrobial cover",
+            "Piperacillin-tazobactam broad cover",
+            "Offloading and dressing"
+          ],
+          [
+            "Septic arthritis",
+            "Staphylococcus aureus",
+            "Aspiration plus broad cover",
+            "Arthroscopy when needed"
+          ],
+          [
+            "Prosthetic joint",
+            "Biofilm coagulase negative staphylococci",
+            "Two stage exchange with spacer",
+            "Six weeks antibiotics"
+          ],
+          [
+            "Abscess",
+            "Community resistant strains",
+            "Vancomycin 1 g every 12 hours",
+            "Incision and drainage"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

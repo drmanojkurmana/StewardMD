@@ -15,11 +15,19 @@
     "kind": "compare",
     "left": {
      "title": "Cereal grains (rice, wheat)",
-     "points": ["70 to 80% carbohydrate energy", "8 to 12% protein density", "Rich in methionine, deficient in lysine"]
+     "points": [
+      "70 to 80% carbohydrate energy",
+      "8 to 12% protein density",
+      "Rich in methionine, deficient in lysine"
+     ]
     },
     "right": {
      "title": "Legume pulses (dal, gram)",
-     "points": ["55 to 60% carbohydrate content", "20 to 25% concentrated protein", "Rich in lysine, deficient in methionine"]
+     "points": [
+      "55 to 60% carbohydrate content",
+      "20 to 25% concentrated protein",
+      "Rich in lysine, deficient in methionine"
+     ]
     }
    }
   },
@@ -41,12 +49,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Severe drought and failure of traditional crops"},
-     {"id": "b", "label": "Khesari dal exceeds 30% of daily diet for 2 to 6 mos"},
-     {"id": "c", "label": "Excitotoxic injury to Betz cells and corticospinal tracts"},
-     {"id": "d", "label": "Permanent spastic paraplegia of lower limbs"}
+     {
+      "id": "a",
+      "label": "Severe drought and failure of traditional crops"
+     },
+     {
+      "id": "b",
+      "label": "Khesari dal exceeds 30% of daily diet for 2 to 6 mos"
+     },
+     {
+      "id": "c",
+      "label": "Excitotoxic injury to Betz cells and corticospinal tracts"
+     },
+     {
+      "id": "d",
+      "label": "Permanent spastic paraplegia of lower limbs"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -55,11 +88,27 @@
    "say": "The neurotoxin BOAA overstimulates glutamate receptors in brain motor cells. Flooding the cells with calcium permanently destroys the pyramidal nerve tracts that control the legs.",
    "vis": {
     "kind": "table",
-    "cols": ["Pathological phase", "Biochemical mechanism", "Clinical neurological outcome"],
+    "cols": [
+     "Pathological phase",
+     "Biochemical mechanism",
+     "Clinical neurological outcome"
+    ],
     "rows": [
-     ["AMPA receptor agonism", "BOAA mimics glutamate neurotransmitter", "Sustained postsynaptic motor neuron depolarization"],
-     ["Intracellular calcium surge", "Excitotoxic calcium influx via receptor channels", "Mitochondrial depolarization and free radical burst"],
-     ["Selective degeneration", "Pyramidal tract axonal apoptosis in spinal cord", "Permanent spasticity; sensory pathways completely spared"]
+     [
+      "AMPA receptor agonism",
+      "BOAA mimics glutamate neurotransmitter",
+      "Sustained postsynaptic motor neuron depolarization"
+     ],
+     [
+      "Intracellular calcium surge",
+      "Excitotoxic calcium influx via receptor channels",
+      "Mitochondrial depolarization and free radical burst"
+     ],
+     [
+      "Selective degeneration",
+      "Pyramidal tract axonal apoptosis in spinal cord",
+      "Permanent spasticity; sensory pathways completely spared"
+     ]
     ]
    }
   },
@@ -69,12 +118,32 @@
    "say": "Neurolathyrism begins with stiff, jerky legs, progresses to needing one and then two walking sticks, and ends with the patient crawling on hands and knees. Sensation remains perfectly normal.",
    "vis": {
     "kind": "table",
-    "cols": ["Clinical stage", "Mobility status of patient", "Gait and functional impairment"],
+    "cols": [
+     "Clinical stage",
+     "Mobility status of patient",
+     "Gait and functional impairment"
+    ],
     "rows": [
-     ["Non-stick stage", "Walks without aid; short jerky steps", "Scissoring gait, crossed knees, walks on toes"],
-     ["One-stick stage", "Requires single walking stick for balance", "Marked spasticity, pronounced knee and ankle clonus"],
-     ["Two-stick stage", "Requires two crutches / sticks to walk", "Severely crippled; waddling cross-legged gait"],
-     ["Crawler stage", "Unable to stand or bear weight on legs", "Crawls on hands and knees using leather hand pads"]
+     [
+      "Non-stick stage",
+      "Walks without aid; short jerky steps",
+      "Scissoring gait, crossed knees, walks on toes"
+     ],
+     [
+      "One-stick stage",
+      "Requires single walking stick for balance",
+      "Marked spasticity, pronounced knee and ankle clonus"
+     ],
+     [
+      "Two-stick stage",
+      "Requires two crutches / sticks to walk",
+      "Severely crippled; waddling cross-legged gait"
+     ],
+     [
+      "Crawler stage",
+      "Unable to stand or bear weight on legs",
+      "Crawls on hands and knees using leather hand pads"
+     ]
     ]
    }
   },
@@ -96,12 +165,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Steeping khesari dal seeds in boiling water for 30 min"},
-     {"id": "b", "label": "Thoroughly discarding toxin-laden steep water"},
-     {"id": "c", "label": "Sun-drying seeds prior to standard cooking"},
-     {"id": "d", "label": "70 to 80% extraction of water-soluble BOAA toxin"}
+     {
+      "id": "a",
+      "label": "Steeping khesari dal seeds in boiling water for 30 min"
+     },
+     {
+      "id": "b",
+      "label": "Thoroughly discarding toxin-laden steep water"
+     },
+     {
+      "id": "c",
+      "label": "Sun-drying seeds prior to standard cooking"
+     },
+     {
+      "id": "d",
+      "label": "70 to 80% extraction of water-soluble BOAA toxin"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -112,11 +206,19 @@
     "kind": "compare",
     "left": {
      "title": "Acute aflatoxicosis",
-     "points": ["Massive high-dose contaminated grain ingestion", "Acute hepatic necrosis, jaundice, high mortality", "Reported in western India famine outbreaks"]
+     "points": [
+      "Massive high-dose contaminated grain ingestion",
+      "Acute hepatic necrosis, jaundice, high mortality",
+      "Reported in western India famine outbreaks"
+     ]
     },
     "right": {
      "title": "Chronic aflatoxin exposure",
-     "points": ["Low-level daily dietary intake in groundnuts", "p53 tumour suppressor codon 249 mutation", "Synergizes with Hepatitis B to cause liver cancer"]
+     "points": [
+      "Low-level daily dietary intake in groundnuts",
+      "p53 tumour suppressor codon 249 mutation",
+      "Synergizes with Hepatitis B to cause liver cancer"
+     ]
     }
    }
   },
@@ -126,12 +228,32 @@
    "say": "Drying harvested peanuts below ten percent moisture stops mould from growing. Food laws strictly cap total aflatoxins at thirty parts per billion, requiring sorting to remove mouldy nuts.",
    "vis": {
     "kind": "table",
-    "cols": ["Control strategy", "Operational practice", "Regulatory standard"],
+    "cols": [
+     "Control strategy",
+     "Operational practice",
+     "Regulatory standard"
+    ],
     "rows": [
-     ["Post-harvest sun drying", "Rapid moisture reduction below 10 percent", "Prevents Aspergillus mould germination"],
-     ["Storage ventilation", "Raised dry wooden pallets in ventilated silos", "Stops condensation and heat accumulation"],
-     ["Sorting and grading", "Electronic or hand-picking of shrivelled kernels", "Eliminates highly contaminated individual nuts"],
-     ["FSSAI statutory cap", "Maximum 15 to 30 parts per billion (ppb)", "Routine laboratory inspection of groundnuts"]
+     [
+      "Post-harvest sun drying",
+      "Rapid moisture reduction below 10 percent",
+      "Prevents Aspergillus mould germination"
+     ],
+     [
+      "Storage ventilation",
+      "Raised dry wooden pallets in ventilated silos",
+      "Stops condensation and heat accumulation"
+     ],
+     [
+      "Sorting and grading",
+      "Electronic or hand-picking of shrivelled kernels",
+      "Eliminates highly contaminated individual nuts"
+     ],
+     [
+      "FSSAI statutory cap",
+      "Maximum 15 to 30 parts per billion (ppb)",
+      "Routine laboratory inspection of groundnuts"
+     ]
     ]
    }
   },
@@ -143,11 +265,19 @@
     "kind": "compare",
     "left": {
      "title": "Genuine mustard seed (Brassica)",
-     "points": ["Smooth, rounded, uniform spherical surface", "Yellow inside when crushed; clean pungent aroma", "Completely safe culinary vegetable oil source"]
+     "points": [
+      "Smooth, rounded, uniform spherical surface",
+      "Yellow inside when crushed; clean pungent aroma",
+      "Completely safe culinary vegetable oil source"
+     ]
     },
     "right": {
      "title": "Argemone mexicana seed (Weed)",
-     "points": ["Rough, pitted, reticulated surface with pointed tip", "White inside when crushed; odorless bitter taste", "Releases lethal sanguinarine alkaloid into pressed oil"]
+     "points": [
+      "Rough, pitted, reticulated surface with pointed tip",
+      "White inside when crushed; odorless bitter taste",
+      "Releases lethal sanguinarine alkaloid into pressed oil"
+     ]
     }
    }
   },
@@ -158,12 +288,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Ingestion of sanguinarine-adulterated mustard oil"},
-     {"id": "b", "label": "Inhibition of Na+/K+ ATPase and pyruvate kinase"},
-     {"id": "c", "label": "Widespread capillary dilatation and massive leakage"},
-     {"id": "d", "label": "Bilateral pedal dropsy, heart failure, ocular glaucoma"}
+     {
+      "id": "a",
+      "label": "Ingestion of sanguinarine-adulterated mustard oil"
+     },
+     {
+      "id": "b",
+      "label": "Inhibition of Na+/K+ ATPase and pyruvate kinase"
+     },
+     {
+      "id": "c",
+      "label": "Widespread capillary dilatation and massive leakage"
+     },
+     {
+      "id": "d",
+      "label": "Bilateral pedal dropsy, heart failure, ocular glaucoma"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Neurolathyrism follows Khesari dal above thirty percent of calories for two to six months, from BOAA acting on upper motor neurons. It causes pure spastic paraplegia with normal sensation, progressing to the crawler stage. Steeping in hot water removes most toxin. Aflatoxin B1 from Aspergillus flavus is the strongest natural hepatocarcinogen, and sanguinarine causes epidemic dropsy with glaucoma.",
+   "say": "High-yield for the exam: Neurolathyrism follows Khesari dal above thirty percent of calories for two to six months, from BOAA acting on upper motor neurons. It causes pure spastic paraplegia with normal sensation, progressing to the crawler stage. Steeping in hot water removes most toxin. Aflatoxin B1 from Aspergillus flavus is the strongest natural hepatocarcinogen, and sanguinarine causes epidemic dropsy with glaucoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Khesari risk threshold",
+      "Above 30 percent calories for two to six months"
+     ],
+     [
+      "BOAA mechanism",
+      "AMPA agonist damaging corticospinal upper motor neurons"
+     ],
+     [
+      "Neurolathyrism signs",
+      "Spastic paraplegia, brisk reflexes, sensation bladder spared"
+     ],
+     [
+      "Neurolathyrism final stage",
+      "Crawler stage after one stick two stick stages"
+     ],
+     [
+      "Khesari detoxification",
+      "Steep hot water 30 minutes removes 70 to 80 percent"
+     ],
+     [
+      "Aflatoxin source",
+      "Aspergillus flavus on groundnuts maize humid storage"
+     ],
+     [
+      "Aflatoxin B1 effect",
+      "Potent hepatocarcinogen, p53 mutation, liver cancer"
+     ],
+     [
+      "Safe crop moisture",
+      "Below ten percent within 48 hours of harvest"
+     ]
+    ]
    }
   }
  ],

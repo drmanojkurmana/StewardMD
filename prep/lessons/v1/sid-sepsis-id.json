@@ -1,0 +1,342 @@
+{
+ "v": 1,
+ "module": "sid-sepsis-id",
+ "title": "Sepsis and septic shock",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Sepsis means fatal organ failure driven by an uncontrolled immune reaction to germs**, counted as a **SOFA rise of 2 points or more**. **Septic shock is sepsis needing vasopressors** to keep **MAP above 65 mmHg with lactate above 2 mmol/L**. Hospital mortality stands **near 15% for sepsis alone and climbs to 40% once shock sets in**. About **88%** of cases start in the community.",
+   "say": "Sepsis was reported to mark life threatening organ failure from a disordered response to infection. The count was reported to rise when the SOFA score climbed by two points or more. Septic shock was reported to need an infusion that keeps blood pressure up. That target was reported to be sixty five millimetres of mercury, while lactate stayed above two millimoles per litre. Hospital mortality was reported to stand near fifteen percent for sepsis alone. The risk was reported to climb to forty percent once shock set in.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sepsis",
+     "points": [
+      "SOFA rise 2 or more",
+      "Organ dysfunction present",
+      "Not a single germ",
+      "Needs source control"
+     ]
+    },
+    "right": {
+     "title": "Septic shock",
+     "points": [
+      "Vasopressor for MAP 65",
+      "Lactate above 2",
+      "Mortality 40%",
+      "Antibiotics within 1 hour"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Urinary tract is the commonest source**, then respiratory, intra-abdominal and skin sources. **About 88% of sepsis is community onset**; hospital onset brings more intra-abdominal and blood infection with worse ICU outcome. Causative organisms depend on source: **Escherichia coli for urinary sepsis** and **Streptococcus pneumoniae for lung sepsis**. **Polymicrobial flora** fits abdominal sources; recent antibiotics or hospital care raise resistant organism risk.",
+   "say": "The urinary tract was reported to be the commonest source of sepsis overall. Next came respiratory, intra-abdominal and skin sources in that order. About eighty eight percent of sepsis was reported to start in the community rather than in hospital. Hospital onset disease was reported to bring more complicated infections and sicker patients. The germ responsible was reported to depend entirely on the likely source of infection. Polymicrobial infection was reported to fit abdominal sources, while recent antibiotic use raised resistant germ risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source",
+     "Germ pattern",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Urinary",
+      "Escherichia coli",
+      "Most common"
+     ],
+     [
+      "Respiratory",
+      "Streptococcus pneumoniae",
+      "Lung source"
+     ],
+     [
+      "Abdomen",
+      "Polymicrobial mix",
+      "Needs source control"
+     ],
+     [
+      "Skin",
+      "Staphylococcus aureus",
+      "Line or wound"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dysregulated immunity releases cytokines and chemokines** that injure vessels and organs. **Endothelial leak widens capillary gaps**, causing fluid escape, tissue oedema and poor oxygen diffusion. **Excess nitric oxide relaxes vessels**, dropping systemic vascular resistance and blood pressure. A **prothrombotic shift forms microthrombi**, then consumes clotting factors and platelets. **Mitochondrial failure blocks energy use**, so organs fail even when oxygen delivery looks adequate.",
+   "say": "A disordered immune response was reported to flood the body with cytokines and chemokines. Those mediators were reported to damage blood vessels and vital organs directly. The inner lining of vessels was reported to become leaky, so fluids escaped into tissues. That leaking was reported to produce tissue swelling and to block oxygen from reaching cells. Excess nitric oxide was reported to relax vessels and to lower blood pressure sharply. Tiny clots were reported to form in small vessels, while mitochondria failed to use oxygen for energy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Infection triggers response"
+     },
+     {
+      "id": "b",
+      "label": "Cytokines and leak"
+     },
+     {
+      "id": "c",
+      "label": "Vasodilation and clots"
+     },
+     {
+      "id": "d",
+      "label": "Organs fail"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Presentation is nonspecific, often fever with tachycardia**, lethargy and myalgia without localizing signs. **Altered mentation, oliguria and mottled skin** act as early windows onto poor perfusion. **qSOFA flags high risk with respiratory rate 22 or more**, altered mentation or **systolic pressure 100 or less**. **Warm extremities with wide pulse pressure** mark distributive shock. **Absent tachycardia never excludes sepsis** when blocking drugs or conduction disease are present.",
+   "say": "Fever with a fast pulse was reported to appear without any clear localising sign. Confusion, reduced urine and blotchy skin can show poor circulation early. A simple bedside score was reported to flag the sickest patients using three items. The breathing rate was reported to be twenty two or more per minute in this score. Altered mental status or systolic pressure of one hundred or less was reported to complete the list.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Meaning",
+     "Bedside clue"
+    ],
+    "rows": [
+     [
+      "Fast breathing",
+      "High risk",
+      "Count the rate"
+     ],
+     [
+      "Confusion",
+      "Brain effect",
+      "Check mentation"
+     ],
+     [
+      "Low pressure",
+      "Shock risk",
+      "Repeat reading"
+     ],
+     [
+      "Mottling",
+      "Poor perfusion",
+      "Capillary refill"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**No single test diagnoses sepsis**; diagnosis combines history, examination, labs, imaging and cultures. **2 blood culture sets before antibiotics** identify the causative organism and susceptibility. **Serial lactate tracks tissue perfusion** and response to resuscitation. **Complete blood count with renal and liver tests and clotting profile** stage organ dysfunction for SOFA. **Source-directed imaging** such as chest X-ray or abdominal ultrasound localizes infection and shows where control is needed.",
+   "say": "No single laboratory test was reported to diagnose sepsis on its own. Two blood culture sets were reported to be taken before antibiotics start. Those cultures were reported to reveal the causative organism and its susceptibility pattern. Repeated lactate measurements were reported to show whether tissue perfusion improved with treatment. Blood counts with kidney, liver and clotting tests were reported to help grade organ dysfunction. Imaging directed at the suspected source was reported to show where control is needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect infection"
+     },
+     {
+      "id": "b",
+      "label": "Cultures plus lactate"
+     },
+     {
+      "id": "c",
+      "label": "Source imaging"
+     },
+     {
+      "id": "d",
+      "label": "SOFA grading"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood cultures first, then broad empirical cover within 1 hour**. **Piperacillin-tazobactam 4.5 g intravenously every 6 to 8 hours** is the default broad beta-lactam. Add **Vancomycin 15 to 20 mg/kg every 8 to 12 hours** for MRSA or line risk. Choose **Meropenem 1 to 2 g every 8 hours** after known resistant organisms or hospital exposure. **Linezolid 600 mg twice daily** substitutes for Vancomycin when needed. Pursue **source control in parallel**, never after antibiotics.",
+   "say": "Blood cultures were reported to come first, then broad empirical cover started within one hour. The default broad antibiotic was reported to be piperacillin tazobactam given into the vein. It was reported to be dosed at four point five grams every six to eight hours. Vancomycin was reported to be added when MRSA or a line infection formed a real risk. That dose was reported to be fifteen to twenty milligrams per kilogram every eight to twelve hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Dose",
+     "When"
+    ],
+    "rows": [
+     [
+      "Piperacillin-tazobactam",
+      "4.5 g every 6 to 8 hours",
+      "Default broad"
+     ],
+     [
+      "Vancomycin",
+      "15 to 20 mg/kg every 8 to 12 hours",
+      "MRSA or line risk"
+     ],
+     [
+      "Meropenem",
+      "1 to 2 g every 8 hours",
+      "Known resistant germ"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sepsis-3 in 2016 retired SIRS and the term severe sepsis** for poor specificity. **qSOFA is risk stratification only**, not a diagnostic test. **Antibiotics within 1 hour of recognition** and **source control as fast as possible** remain the core bundle. Review at **48 to 72 hours** and narrow to targeted cover, stopping Vancomycin if cultures do not support it. Usual duration is **7 to 10 days** once the source is controlled.",
+   "say": "The newest definition was reported to arrive in twenty sixteen and to change older teaching. That system was reported to retire SIRS entirely because it proved too nonspecific. The term severe sepsis was reported to disappear for the same reason. Bedside risk stratification was reported to stay, but it never became a diagnostic test. Antibiotics must still start within one hour of recognition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before 2016",
+     "points": [
+      "SIRS defined sepsis",
+      "Severe sepsis used",
+      "qSOFA as screen",
+      "SBP drop rule"
+     ]
+    },
+    "right": {
+     "title": "Sepsis-3 now",
+     "points": [
+      "SOFA rise 2 defines sepsis",
+      "MAP 65 plus lactate 2",
+      "qSOFA risk only",
+      "Shock antibiotics by 1 hour"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acute kidney injury affects up to two thirds** of septic patients. **Consumptive coagulopathy with DIC and bleeding** follows platelet and clotting factor depletion. **Sepsis-induced cardiomyopathy affects up to half**, converting distributive into mixed shock. Overall mortality is **15%** rising to **40%** in shock. Survivors face fatigue, weakness, cognitive decline and repeat infection, with **half rehospitalized within a year**.",
+   "say": "Kidney injury was reported to develop in up to two thirds of septic patients. A consumptive clotting failure was reported to follow, sometimes with frank bleeding. The heart muscle was reported to weaken in up to half of shock patients. This weakness was reported to turn distributive shock into a mixed shock picture. Overall mortality was reported to be fifteen percent, climbing to forty percent in septic shock. Survivors were reported to face fatigue, weakness, cognitive decline and repeat infections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Clue",
+     "Outcome"
+    ],
+    "rows": [
+     [
+      "Kidney injury",
+      "Oliguria",
+      "Dialysis risk"
+     ],
+     [
+      "Clotting failure",
+      "Low platelets",
+      "Bleeding risk"
+     ],
+     [
+      "Heart weakness",
+      "Warm shock plus strain",
+      "Mixed shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SIRS criteria mislead; Sepsis-3 uses SOFA rise of 2 or more**. **qSOFA never diagnoses sepsis**, it only stratifies risk. **Normal heart rate never excludes sepsis** when beta blockade or conduction disease blunts rhythm. **Delaying antibiotics kills**, so start within **1 hour** and control the source in parallel. **Do not continue broad cover**, review at **48 to 72 hours** and narrow or stop. **A quarter of ICU sepsis labels are mimics**, such as pancreatitis, burns or adrenal crisis.",
+   "say": "Examiners were reported to love the old SIRS criteria as a trap. Modern teaching was reported to use a SOFA rise of two or more instead. The bedside score was reported to stratify risk but never to diagnose sepsis. A normal heart rate was reported to never exclude sepsis in a blocked heart. Delaying antibiotics was reported to kill, so cover started within one hour. Review was reported to happen at forty eight to seventy two hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "SIRS based call",
+      "Too nonspecific",
+      "SOFA rise 2"
+     ],
+     [
+      "Normal pulse",
+      "Blunted response",
+      "Look at perfusion"
+     ],
+     [
+      "Late antibiotics",
+      "Higher mortality",
+      "Start by 1 hour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam:** **SOFA rise 2 or more defines sepsis**; **MAP 65 plus lactate 2 defines shock**. **Piperacillin-tazobactam 4.5 g every 6 to 8 hours** is default broad cover. Add **Vancomycin 15 to 20 mg/kg** for MRSA risk. **Antibiotics within 1 hour**, review at **48 to 72 hours**, total **7 to 10 days**. **qSOFA is risk only**. Mortality **15%** rising to **40%** in shock.",
+   "say": "For the exam, the core definitions were reported to be worth remembering with their numbers. Sepsis was reported to mean a SOFA rise of two or more points. Shock was reported to mean MAP sixty five plus lactate above two. Default broad cover was reported to be piperacillin tazobactam at four point five grams. Vancomycin was reported to be added at fifteen to twenty milligrams per kilogram when MRSA threatened. Review was reported to happen at forty eight to seventy two hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "SOFA rise 2",
+      "Defines sepsis",
+      "Definition asked"
+     ],
+     [
+      "MAP 65 plus lactate 2",
+      "Defines shock",
+      "Threshold asked"
+     ],
+     [
+      "Piperacillin-tazobactam 4.5 g",
+      "Every 6 to 8 hours",
+      "Default dose"
+     ],
+     [
+      "Vancomycin",
+      "15 to 20 mg/kg",
+      "MRSA cover"
+     ],
+     [
+      "Antibiotics 1 hour",
+      "Source control parallel",
+      "Bundle asked"
+     ],
+     [
+      "Review 48 to 72 hours",
+      "Narrow or stop",
+      "Stewardship"
+     ],
+     [
+      "Duration 7 to 10 days",
+      "After control",
+      "Duration asked"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

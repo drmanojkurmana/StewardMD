@@ -13,12 +13,27 @@
    "say": "Two continuums cross. Life stages run horizontally, home to facility vertically, in the five by five matrix. Chained interventions compound: fed adolescents become safer mothers whose newborns survive to immunise.",
    "vis": {
     "kind": "table",
-    "cols": ["Life stage", "Signature interventions"],
+    "cols": [
+     "Life stage",
+     "Signature interventions"
+    ],
     "rows": [
-     ["Adolescence", "Iron, nutrition, menstrual and mental health"],
-     ["Pregnancy", "Antenatal care, Td, IFA, screening"],
-     ["Childbirth and newborn", "Skilled delivery, essential newborn care"],
-     ["Childhood", "Immunisation, nutrition, IMNCI care"]
+     [
+      "Adolescence",
+      "Iron, nutrition, menstrual and mental health"
+     ],
+     [
+      "Pregnancy",
+      "Antenatal care, Td, IFA, screening"
+     ],
+     [
+      "Childbirth and newborn",
+      "Skilled delivery, essential newborn care"
+     ],
+     [
+      "Childhood",
+      "Immunisation, nutrition, IMNCI care"
+     ]
     ]
    }
   },
@@ -30,11 +45,19 @@
     "kind": "compare",
     "left": {
      "title": "JSY (demand side)",
-     "points": ["Cash incentive for institutional delivery", "ASHA incentive linked", "BPL and state categories historically"]
+     "points": [
+      "Cash incentive for institutional delivery",
+      "ASHA incentive linked",
+      "BPL and state categories historically"
+     ]
     },
     "right": {
      "title": "JSSK (supply side)",
-     "points": ["Zero user charges guaranteed", "Free drugs, diet, blood, transport", "Mother and sick newborn covered"]
+     "points": [
+      "Zero user charges guaranteed",
+      "Free drugs, diet, blood, transport",
+      "Mother and sick newborn covered"
+     ]
     }
    }
   },
@@ -45,12 +68,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Institutional deliveries rise (JSY)"},
-     {"id": "b", "label": "Outcomes plateau without quality"},
-     {"id": "c", "label": "LaQshya certifies labour rooms"},
-     {"id": "d", "label": "Death audits feed corrections"}
+     {
+      "id": "a",
+      "label": "Institutional deliveries rise (JSY)"
+     },
+     {
+      "id": "b",
+      "label": "Outcomes plateau without quality"
+     },
+     {
+      "id": "c",
+      "label": "LaQshya certifies labour rooms"
+     },
+     {
+      "id": "d",
+      "label": "Death audits feed corrections"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -59,11 +107,27 @@
    "say": "Warmth tiers by sickness. Every delivery room holds a care corner; stabilisation units and district special care units take the sick and small. Kangaroo care and home visits complete the chain.",
    "vis": {
     "kind": "table",
-    "cols": ["Unit", "Level", "Handles"],
+    "cols": [
+     "Unit",
+     "Level",
+     "Handles"
+    ],
     "rows": [
-     ["NBCC", "Every delivery point", "Resuscitation, warmth at birth"],
-     ["NBSU", "FRU level", "Stabilisation of sick newborns"],
-     ["SNCU", "District hospital", "Sick and low birth weight care"]
+     [
+      "NBCC",
+      "Every delivery point",
+      "Resuscitation, warmth at birth"
+     ],
+     [
+      "NBSU",
+      "FRU level",
+      "Stabilisation of sick newborns"
+     ],
+     [
+      "SNCU",
+      "District hospital",
+      "Sick and low birth weight care"
+     ]
     ]
    }
   },
@@ -85,12 +149,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Mobile team screens at AWC or school"},
-     {"id": "b", "label": "4D condition identified"},
-     {"id": "c", "label": "Referral card issued"},
-     {"id": "d", "label": "DEIC confirms and treats free"}
+     {
+      "id": "a",
+      "label": "Mobile team screens at AWC or school"
+     },
+     {
+      "id": "b",
+      "label": "4D condition identified"
+     },
+     {
+      "id": "c",
+      "label": "Referral card issued"
+     },
+     {
+      "id": "d",
+      "label": "DEIC confirms and treats free"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -110,12 +199,27 @@
    "say": "Adolescence got its own programme. Friendly clinics, peer educators, weekly blue iron tablets against anaemia, menstrual and mental health included. Anaemic girls become high-risk mothers; the chain starts here.",
    "vis": {
     "kind": "table",
-    "cols": ["Component", "Delivers"],
+    "cols": [
+     "Component",
+     "Delivers"
+    ],
     "rows": [
-     ["WIFS", "Weekly iron folic acid, schools and AWCs"],
-     ["AFHC clinics", "Confidential adolescent services"],
-     ["Peer educators", "Village-level health dialogue"],
-     ["Menstrual hygiene scheme", "Sanitary product access"]
+     [
+      "WIFS",
+      "Weekly iron folic acid, schools and AWCs"
+     ],
+     [
+      "AFHC clinics",
+      "Confidential adolescent services"
+     ],
+     [
+      "Peer educators",
+      "Village-level health dialogue"
+     ],
+     [
+      "Menstrual hygiene scheme",
+      "Sanitary product access"
+     ]
     ]
    }
   },
@@ -127,11 +231,19 @@
     "kind": "compare",
     "left": {
      "title": "Pink and yellow",
-     "points": ["Danger signs present: refer urgently", "Specific treatment started at facility", "Pre-referral dose given"]
+     "points": [
+      "Danger signs present: refer urgently",
+      "Specific treatment started at facility",
+      "Pre-referral dose given"
+     ]
     },
     "right": {
      "title": "Green",
-     "points": ["No danger signs", "Home fluids, feeding counsel", "Clear return precautions"]
+     "points": [
+      "No danger signs",
+      "Home fluids, feeding counsel",
+      "Clear return precautions"
+     ]
     }
    }
   },
@@ -141,12 +253,27 @@
    "say": "Spacing is prevention twice over. Postpartum devices before discharge, injectables in the basket, intensified districts where fertility runs high. Under-three-year spacing protects mother and next newborn together.",
    "vis": {
     "kind": "table",
-    "cols": ["Moment", "Method offered"],
+    "cols": [
+     "Moment",
+     "Method offered"
+    ],
     "rows": [
-     ["Within 48 hours of delivery", "Postpartum IUCD"],
-     ["Interval, any contact", "Pills, injectable, IUCD, condoms"],
-     ["Completed family", "Sterilisation services"],
-     ["High fertility districts", "Mission Parivar Vikas intensity"]
+     [
+      "Within 48 hours of delivery",
+      "Postpartum IUCD"
+     ],
+     [
+      "Interval, any contact",
+      "Pills, injectable, IUCD, condoms"
+     ],
+     [
+      "Completed family",
+      "Sterilisation services"
+     ],
+     [
+      "High fertility districts",
+      "Mission Parivar Vikas intensity"
+     ]
     ]
    }
   },
@@ -157,12 +284,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Coverage indicators rise"},
-     {"id": "b", "label": "Quality certification spreads"},
-     {"id": "c", "label": "MMR, IMR, U5MR fall"},
-     {"id": "d", "label": "Equity gaps audited by group"}
+     {
+      "id": "a",
+      "label": "Coverage indicators rise"
+     },
+     {
+      "id": "b",
+      "label": "Quality certification spreads"
+     },
+     {
+      "id": "c",
+      "label": "MMR, IMR, U5MR fall"
+     },
+     {
+      "id": "d",
+      "label": "Equity gaps audited by group"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: RMNCHA uses a 5 by 5 matrix of life stages and delivery platforms. JSSK gives free delivery, drugs, diagnostics, diet, blood and transport. RBSK screens birth to eighteen years for defects, diseases, deficiencies and developmental delays. IMNCI uses pink for referral, yellow for facility treatment and green for home care in sick children.",
+   "say": "High-yield for the exam: RMNCHA uses a 5 by 5 matrix of life stages and delivery platforms. JSSK gives free delivery, drugs, diagnostics, diet, blood and transport. RBSK screens birth to eighteen years for defects, diseases, deficiencies and developmental delays. IMNCI uses pink for referral, yellow for facility treatment and green for home care in sick children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "RMNCHA matrix",
+      "Five life stages by five delivery platforms"
+     ],
+     [
+      "Janani Suraksha Yojana",
+      "Conditional cash incentive for institutional delivery"
+     ],
+     [
+      "JSSK entitlements",
+      "Free delivery drugs diagnostics diet blood transport"
+     ],
+     [
+      "Newborn care corner",
+      "Every delivery room, warmer and resuscitation equipment"
+     ],
+     [
+      "Special newborn care unit",
+      "District hospital for sick low birth weight babies"
+     ],
+     [
+      "RBSK four Ds",
+      "Defects diseases deficiencies developmental delays including disability"
+     ],
+     [
+      "RKSK age group",
+      "Adolescents ten to nineteen years, peer educators clinics"
+     ],
+     [
+      "WIFS tablets",
+      "Weekly iron folic acid, blue tablets for adolescents"
+     ]
+    ]
    }
   }
  ],

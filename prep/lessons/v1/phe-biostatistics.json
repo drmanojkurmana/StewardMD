@@ -105,6 +105,47 @@
    "tx": "A **p value** is the probability of results at least this extreme if the **null hypothesis** is true. It is not the probability that the hypothesis is true. A **confidence interval** that includes the null value, such as a relative risk of 1, means the result is not statistically significant at that level.",
    "say": "A p value is the probability of results at least this extreme if the null hypothesis is true. It is not the probability that the hypothesis is true. A confidence interval that includes the null value, such as a relative risk of 1, means the result is not statistically significant at that level.",
    "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: Sensitivity is the true positive rate, while specificity is the true negative rate. Positive predictive value rises with disease prevalence, whereas negative predictive value falls. Cohort studies measure relative risk prospectively, whereas case-control studies determine odds ratio retrospectively. Type one alpha error is rejecting a true null hypothesis, while type two beta error is failing to reject a false null hypothesis. Power equals one minus beta.",
+   "say": "Sensitivity is the true positive rate, while specificity is the true negative rate. Positive predictive value rises with disease prevalence, whereas negative predictive value falls. Cohort studies measure relative risk prospectively, whereas case-control studies determine odds ratio retrospectively. Type one alpha error is rejecting a true null hypothesis, while type two beta error is failing to reject a false null hypothesis. Power equals one minus beta.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Sensitivity definition",
+      "Proportion of diseased individuals testing positive, true positive rate"
+     ],
+     [
+      "Specificity definition",
+      "Proportion of non-diseased individuals testing negative, true negative rate"
+     ],
+     [
+      "Prevalence effect on PPV and NPV",
+      "Increasing prevalence increases PPV and decreases NPV"
+     ],
+     [
+      "Study design for rare diseases",
+      "Case-control study, measures odds ratio retrospectively"
+     ],
+     [
+      "Study design for incidence",
+      "Prospective cohort study, directly calculates relative risk"
+     ],
+     [
+      "Type one alpha error",
+      "False positive conclusion, rejecting true null hypothesis"
+     ],
+     [
+      "Statistical power definition",
+      "Probability of rejecting false null hypothesis, one minus beta"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [],

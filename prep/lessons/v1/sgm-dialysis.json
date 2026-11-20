@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sgm-dialysis",
+ "subject": "ss-general-medicine",
+ "title": "Dialysis",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Dialysis** (artificial kidney replacement) clears toxins and corrects fluids and electrolytes in kidney failure. **Intermittent haemodialysis** (sessional blood dialysis) is the commonest modality, using a dialyser (filter membrane). **Continuous kidney replacement therapy** (24 hour slow filtration) suits intensive care instability. **Peritoneal dialysis** (belly membrane exchange) suits rural and paediatric settings. **Nocturnal dialysis** (night long sessions) improves clearance and diet freedom.",
+   "say": "Dialysis is artificial kidney replacement that clears toxins and corrects fluids and electrolytes. Sessional blood dialysis is the commonest modality using a filter membrane. Continuous slow filtration suits intensive care instability and this is examined in viva examinations for revision. Belly membrane exchange suits rural and paediatric settings and night long sessions improve clearance and diet freedom and this is examined in viva examinations for revision.",
+   "vis": null
+  },
+  {
+   "tx": "**Uraemic syndrome** (toxin symptoms): encephalopathy, pericarditis, bleeding and intractable pruritus mandate dialysis. **Refractory hyperkalaemia** (high potassium unresponsive to drugs) and **refractory acidosis** (acid buildup) are biochemical triggers. **Refractory fluid overload** (pulmonary oedema unresponsive to diuretics) needs ultrafiltration. **Refractory hyperphosphataemia** (high phosphate with itching) is a softer indication. Early initiation does not improve survival in asymptomatic patients.",
+   "say": "Brain dysfunction and heart sac inflammation and bleeding mandate dialysis. Refractory high potassium and acid buildup are biochemical triggers. Fluid overload unresponsive to diuretics needs filtration. High phosphate with itching is a softer indication and early initiation does not improve survival in asymptomatic patients.",
+   "vis": null
+  },
+  {
+   "tx": "Haemodialysis blood flows across a **semipermeable membrane** (filter sheet) against dialysate (cleaning fluid), clearing toxins by diffusion. **Ultrafiltration** (pressure driven water removal) removes excess fluid. **Heparin anticoagulation** (blood thinner) prevents circuit clotting. **Blood flow 300 to 400 ml per minute** with dialysate flow 500 ml per minute is standard. **Kt over V** (clearance index) above 1.2 is the adequacy target.",
+   "say": "Blood flows across a filter membrane against cleaning fluid, clearing toxins by diffusion. Pressure driven water removal clears excess fluid and this is examined in viva examinations for revision. Heparin prevents circuit clotting and standard blood and cleaning fluid flows are specified and clearance index above one point two is the adequacy target.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Arterial blood"
+     },
+     {
+      "id": "b",
+      "label": "Membrane diffusion"
+     },
+     {
+      "id": "c",
+      "label": "Toxin clearance"
+     },
+     {
+      "id": "d",
+      "label": "Ultrafiltration"
+     },
+     {
+      "id": "e",
+      "label": "Venous return"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypotension during dialysis is the commonest adverse event, managed by stopping ultrafiltration and giving saline. **Dialysis disequilibrium syndrome** (brain swelling from rapid urea fall) presents with headache and seizures and is prevented by slow initial runs. **Hypoxaemia** (low oxygen) from membrane reaction needs oxygen and membrane change. **Air embolism** (air bubble entry) needs urgent positioning and aspiration. **Pyrogenic reaction** (contaminated dialysate fever) needs cultures and circuit discard.",
+   "say": "Low blood pressure is the commonest event and responds to stopping filtration and saline. Brain swelling from rapid toxin fall is prevented by slow initial runs. Membrane reaction causes low oxygen. Air entry needs urgent positioning and contaminated fluid fever needs cultures and circuit discard.",
+   "vis": null
+  },
+  {
+   "tx": "**Arteriovenous fistula** (artery vein anastomosis) is the preferred long term access for durability. **Tunnelled central catheter** (neck line) is temporary or backup access with higher infection. **Arteriovenous graft** (synthetic loop) suits poor veins. **Peritoneal dialysis catheter** (abdominal tube) is placed laparoscopically. **Fistula maturation** (enlargement) needs 6 to 8 weeks before cannulation. **Needle infiltration** (blood leak) needs pressure and rest.",
+   "say": "Artery vein fistula is the preferred long term access. Tunnelled neck lines are temporary with higher infection. Synthetic grafts suit poor veins and abdominal tubes serve peritoneal dialysis and fistulas need six to eight weeks to mature and blood leaks need pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Access",
+     "Use",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Arteriovenous fistula",
+      "Long term preferred",
+      "Mature 6 to 8 weeks"
+     ],
+     [
+      "Tunnelled catheter",
+      "Temporary backup",
+      "Higher infection risk"
+     ],
+     [
+      "Arteriovenous graft",
+      "Poor veins",
+      "Synthetic loop"
+     ],
+     [
+      "Peritoneal catheter",
+      "Peritoneal dialysis",
+      "Laparoscopic placement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Heparin dosing** (50 to 100 units per kg) anticoagulates the circuit, with saline flushes for heparin free runs. **Erythropoietin** (kidney hormone) with iron corrects anaemia. **Phosphate binders** (sevelamer) control itching and bone disease. **Vitamin D analogues** (calcitriol) suppress parathyroid. **Euvolemia** (balanced fluid state) is tracked by weights and lung ultrasound. **Interdialytic weight gain** (between session gain) above 1 kg daily needs counselling.",
+   "say": "Heparin dosing anticoagulates the circuit, with saline for heparin free runs. Erythropoietin with iron corrects anaemia and this is examined in viva examinations for revision. Phosphate binders control itching and bone disease. Vitamin D analogues suppress parathyroid and fluid balance is tracked by weights and lung ultrasound and large between session weight gains need counselling.",
+   "vis": null
+  },
+  {
+   "tx": "**Kt over V** (dialysis adequacy) above 1.2 per session is targeted by urea reduction. **Urea reduction ratio** (fall percent) above 65 percent confirms adequacy. **Phosphate control** (binder titration) prevents calciphylaxis (skin calcification). **Intradialytic hypotension** (session low pressure) predicts mortality and needs longer sessions. **Access surveillance** (flow checks) prevents thrombosis. **Vaccination status** (hepatitis B and influenza) is tracked yearly.",
+   "say": "Clearance index above one point two is targeted by urea reduction above sixty five percent. Phosphate control prevents skin calcification. Session low pressure predicts mortality and needs longer sessions and flow checks prevent access clotting and vaccination is tracked yearly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemodialysis",
+     "points": [
+      "Sessional hospital based",
+      "High clearance per session",
+      "Diet and fluid limits",
+      "Fistula or graft needed"
+     ]
+    },
+    "right": {
+     "title": "Peritoneal dialysis",
+     "points": [
+      "Home based exchanges",
+      "Gentler continuous clearance",
+      "More diet freedom",
+      "Peritonitis risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Peritonitis** (abdominal membrane infection) is the signature peritoneal dialysis complication needing intraperitoneal antibiotics. **Exit site infection** (catheter entry pus) needs antibiotics and exit care. **Hernias** (abdominal bulges) and **leaks** (fluid escape) need surgical review. **Ultrafiltration failure** (poor water removal) signals membrane failure and modality change. **Malnutrition** (low protein) threatens peritoneal patients with occupational losses.",
+   "say": "Abdominal membrane infection is the signature peritoneal complication needing antibiotics inside the abdomen. Catheter entry pus needs antibiotics and exit care. Hernias and leaks need surgical review and poor water removal signals membrane failure and low protein threatens peritoneal patients.",
+   "vis": null
+  },
+  {
+   "tx": "Dialysis survival depends on age, diabetes and cardiovascular disease, with home modalities showing quality of life advantage. **Kidney transplantation** (organ replacement) offers survival advantage over dialysis in eligible patients. **Conservative care** (without dialysis) suits elderly multimorbid patients with symptom focus. **Shared decision making** (patient preference elicitation) is mandatory before access creation. Late planning without access causes emergency catheter sepsis.",
+   "say": "Survival depends on age and diabetes and heart disease, with home modalities showing quality of life advantage. Transplantation offers survival advantage in eligible patients and this is examined in viva examinations for revision. Conservative care suits elderly multimorbid patients and this is examined in viva examinations for revision. Shared decision making is mandatory before access creation and late planning causes emergency catheter sepsis.",
+   "vis": null
+  },
+  {
+   "tx": "Indian examinations stress fistula maturation time, Kt over V targets and disequilibrium prevention. **Dialyser reaction** (membrane allergy) and **reprocessing reuse** (dialyser recycling) are practical viva topics. **Water quality** (endotoxin limits) and reverse osmosis standards are tested in infection control. Traps include cannulating immature fistulas, ignoring weight gains and continuing heparin in bleeding patients.",
+   "say": "Examinations stress fistula maturation time and clearance targets and disequilibrium prevention and this is examined in viva examinations for revision. Membrane allergy and dialyser recycling are practical viva topics. Water quality and reverse osmosis standards are tested in infection control. Traps include cannulating immature fistulas and ignoring weight gains and continuing heparin in bleeding patients.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers access maturation, adequacy targets and emergency triggers. Fistula timing and Kt over V cutoffs are the most asked points in theory and ward viva examinations. Disequilibrium prevention and peritonitis management are the favourite viva themes that need precise recall.",
+   "say": "This table gathers access maturation and adequacy targets and emergency triggers for revision and this is examined in viva examinations for revision. Fistula timing and clearance cutoffs are the most asked points and disequilibrium prevention and peritonitis management are favourite viva themes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Fistula maturation",
+      "6 to 8 weeks"
+     ],
+     [
+      "Kt over V target",
+      "Above 1.2 per session"
+     ],
+     [
+      "Urea reduction ratio",
+      "Above 65 percent"
+     ],
+     [
+      "Session complication",
+      "Intradialytic hypotension"
+     ],
+     [
+      "Disequilibrium cause",
+      "Rapid urea fall"
+     ],
+     [
+      "Peritoneal signature",
+      "Peritonitis"
+     ],
+     [
+      "Preferred access",
+      "Arteriovenous fistula"
+     ],
+     [
+      "Adequacy alternative",
+      "Urea reduction ratio"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

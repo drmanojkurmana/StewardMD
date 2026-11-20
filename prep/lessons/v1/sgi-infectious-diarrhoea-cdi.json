@@ -46,12 +46,32 @@
       "say": "Fulminant Clostridioides difficile infection is a life-threatening presentation characterized by shock, hypotension, paralytic ileus, or toxic megacolon. Management requires high-dose oral vancomycin at five hundred milligrams four times daily, combined with rectal vancomycin enemas and intravenous metronidazole, alongside surgical consultation.",
       "vis": {
         "kind": "table",
-        "cols": ["Therapeutic Route", "Drug Regimen in Fulminant CDI", "Mechanism & Rationale"],
+        "cols": [
+          "Therapeutic Route",
+          "Drug Regimen in Fulminant CDI",
+          "Mechanism & Rationale"
+        ],
         "rows": [
-          ["Enteral (oral / NG)", "Vancomycin 500 mg four times daily", "Maximizes intraluminal bactericidal drug concentrations"],
-          ["Rectal enema", "Vancomycin 500 mg in 100 mL saline q6h", "Delivers drug retrogradely past an adynamic ileus"],
-          ["Intravenous", "Metronidazole 500 mg every 8 hours", "Reaches ischemic colonic mucosa via tissue perfusion"],
-          ["Surgical consult", "Subtotal colectomy with end ileostomy", "Indicated for perforation, peritonitis, or refractory shock"]
+          [
+            "Enteral (oral / NG)",
+            "Vancomycin 500 mg four times daily",
+            "Maximizes intraluminal bactericidal drug concentrations"
+          ],
+          [
+            "Rectal enema",
+            "Vancomycin 500 mg in 100 mL saline q6h",
+            "Delivers drug retrogradely past an adynamic ileus"
+          ],
+          [
+            "Intravenous",
+            "Metronidazole 500 mg every 8 hours",
+            "Reaches ischemic colonic mucosa via tissue perfusion"
+          ],
+          [
+            "Surgical consult",
+            "Subtotal colectomy with end ileostomy",
+            "Indicated for perforation, peritonitis, or refractory shock"
+          ]
         ]
       }
     },
@@ -61,15 +81,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Multiply recurrent CDI after >= 2 recurrences"},
-          {"id": "b", "label": "Screened donor stool processing or oral spore capsule"},
-          {"id": "c", "label": "Engraftment of Bacteroidetes and Clostridial cluster XIVa"},
-          {"id": "d", "label": "Restoration of secondary bile acids & > 80% clinical cure"}
+          {
+            "id": "a",
+            "label": "Multiply recurrent CDI after >= 2 recurrences"
+          },
+          {
+            "id": "b",
+            "label": "Screened donor stool processing or oral spore capsule"
+          },
+          {
+            "id": "c",
+            "label": "Engraftment of Bacteroidetes and Clostridial cluster XIVa"
+          },
+          {
+            "id": "d",
+            "label": "Restoration of secondary bile acids & > 80% clinical cure"
+          }
         ],
         "edges": [
-          ["a", "b", "indication"],
-          ["b", "c", "administration"],
-          ["c", "d", "restores"]
+          [
+            "a",
+            "b",
+            "indication"
+          ],
+          [
+            "b",
+            "c",
+            "administration"
+          ],
+          [
+            "c",
+            "d",
+            "restores"
+          ]
         ]
       }
     },
@@ -78,12 +122,32 @@
       "say": "Bezlotoxumab is a fully human monoclonal antibody designed for passive adjunctive immunotherapy. The antibody binds directly to Clostridioides difficile toxin B with high affinity, neutralizing its cytopathic effects. Given as a single intravenous infusion with antibiotics, it substantially lowers recurrence rates in high-risk patients.",
       "vis": {
         "kind": "table",
-        "cols": ["Feature", "Bezlotoxumab Profile", "Clinical Context"],
+        "cols": [
+          "Feature",
+          "Bezlotoxumab Profile",
+          "Clinical Context"
+        ],
         "rows": [
-          ["Molecular target", "C. difficile Toxin B (neutralizing epitope)", "Prevents epithelial cell necrosis and mucosal loss"],
-          ["Antibody class", "Fully human IgG1 monoclonal antibody", "Half-life of approximately 19 days"],
-          ["Dosing regimen", "Single IV infusion (10 mg/kg)", "Administered concurrently with standard oral antibiotics"],
-          ["Safety precaution", "Caution in congestive heart failure", "Increased heart failure events reported in clinical trials"]
+          [
+            "Molecular target",
+            "C. difficile Toxin B (neutralizing epitope)",
+            "Prevents epithelial cell necrosis and mucosal loss"
+          ],
+          [
+            "Antibody class",
+            "Fully human IgG1 monoclonal antibody",
+            "Half-life of approximately 19 days"
+          ],
+          [
+            "Dosing regimen",
+            "Single IV infusion (10 mg/kg)",
+            "Administered concurrently with standard oral antibiotics"
+          ],
+          [
+            "Safety precaution",
+            "Caution in congestive heart failure",
+            "Increased heart failure events reported in clinical trials"
+          ]
         ]
       }
     },
@@ -104,15 +168,39 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Cholera toxin B subunit binds GM1 ganglioside"},
-          {"id": "b", "label": "Active A subunit enters enterocyte"},
-          {"id": "c", "label": "ADP-ribosylation of G-alpha-s & permanent adenylate cyclase activation"},
-          {"id": "d", "label": "Profuse secretory rice-water diarrhoea (up to 1 L/h)"}
+          {
+            "id": "a",
+            "label": "Cholera toxin B subunit binds GM1 ganglioside"
+          },
+          {
+            "id": "b",
+            "label": "Active A subunit enters enterocyte"
+          },
+          {
+            "id": "c",
+            "label": "ADP-ribosylation of G-alpha-s & permanent adenylate cyclase activation"
+          },
+          {
+            "id": "d",
+            "label": "Profuse secretory rice-water diarrhoea (up to 1 L/h)"
+          }
         ],
         "edges": [
-          ["a", "b", "endocytosis"],
-          ["b", "c", "enzymatic action"],
-          ["c", "d", "chloride secretion"]
+          [
+            "a",
+            "b",
+            "endocytosis"
+          ],
+          [
+            "b",
+            "c",
+            "enzymatic action"
+          ],
+          [
+            "c",
+            "d",
+            "chloride secretion"
+          ]
         ]
       }
     },
@@ -139,6 +227,47 @@
             "Reduces person-to-person transmission"
           ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Clostridioides difficile infection requires clinical diarrhea with three or more unformed stools in twenty-four hours and positive testing for toxigenic C. difficile. First-line therapy for initial CDI is oral fidaxomicin two hundred milligrams twice daily for ten days, with oral vancomycin as alternative. Severe CDI is defined by white blood cell count exceeding fifteen thousand or creatinine over one point five. Fulminant CDI warrants oral vancomycin plus intravenous metronidazole.",
+      "say": "Clostridioides difficile infection requires clinical diarrhea with three or more unformed stools in twenty-four hours and positive testing for toxigenic C. difficile. First-line therapy for initial CDI is oral fidaxomicin two hundred milligrams twice daily for ten days, with oral vancomycin as alternative. Severe CDI is defined by white blood cell count exceeding fifteen thousand or creatinine over one point five. Fulminant CDI warrants oral vancomycin plus intravenous metronidazole.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Two-step diagnostic laboratory algorithm",
+            "GDH antigen screen plus toxin A/B EIA; NAAT resolves discordance"
+          ],
+          [
+            "First-line therapy for initial episode",
+            "Oral fidaxomicin two hundred milligrams twice daily for ten days"
+          ],
+          [
+            "Standard alternative first-line drug",
+            "Oral vancomycin one hundred twenty-five milligrams four times daily"
+          ],
+          [
+            "Severe CDI defining laboratory criteria",
+            "Leukocytes over fifteen thousand or serum creatinine over one point five"
+          ],
+          [
+            "Fulminant CDI management regimen",
+            "High-dose oral vancomycin plus intravenous metronidazole plus rectal vancomycin"
+          ],
+          [
+            "First recurrence treatment options",
+            "Fidaxomicin if vancomycin used initial, or pulsed-tapered vancomycin regimen"
+          ],
+          [
+            "Fecal microbiota transplantation indication",
+            "Second or subsequent recurrence of C. difficile infection refractory to antibiotics"
+          ]
+        ]
       }
     }
   ],

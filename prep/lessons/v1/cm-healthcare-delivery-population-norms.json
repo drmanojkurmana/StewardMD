@@ -14,12 +14,27 @@
       "say": "Five, thirty, one hundred twenty thousand in plains; three, twenty, eighty in hills. Learn the two triplets cold.",
       "vis": {
         "kind": "table",
-        "cols": ["Facility", "Plains versus hilly population"],
+        "cols": [
+          "Facility",
+          "Plains versus hilly population"
+        ],
         "rows": [
-          ["Sub centre", "5000 versus 3000"],
-          ["Primary health centre", "30000 versus 20000"],
-          ["Community health centre", "120000 versus 80000"],
-          ["Sub district hospital", "Per about 5 lakh (state norms vary)"]
+          [
+            "Sub centre",
+            "5000 versus 3000"
+          ],
+          [
+            "Primary health centre",
+            "30000 versus 20000"
+          ],
+          [
+            "Community health centre",
+            "120000 versus 80000"
+          ],
+          [
+            "Sub district hospital",
+            "Per about 5 lakh (state norms vary)"
+          ]
         ]
       }
     },
@@ -30,11 +45,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "as1", "label": "Village selects resident woman as ASHA" },
-          { "id": "as2", "label": "Trained, equipped with drug kit" },
-          { "id": "as3", "label": "Mobilises, escorts, follows up at home" }
+          {
+            "id": "as1",
+            "label": "Village selects resident woman as ASHA"
+          },
+          {
+            "id": "as2",
+            "label": "Trained, equipped with drug kit"
+          },
+          {
+            "id": "as3",
+            "label": "Mobilises, escorts, follows up at home"
+          }
         ],
-        "edges": [["as1", "as2"], ["as2", "as3"]]
+        "edges": [
+          [
+            "as1",
+            "as2"
+          ],
+          [
+            "as2",
+            "as3"
+          ]
+        ]
       }
     },
     {
@@ -54,12 +87,27 @@
       "say": "The ANM is the salaried clinical anchor of the sub centre. Immunisation, pregnancy care, and records run through her.",
       "vis": {
         "kind": "table",
-        "cols": ["ANM duty", "Setting"],
+        "cols": [
+          "ANM duty",
+          "Setting"
+        ],
         "rows": [
-          ["Immunisation sessions", "Sub centre plus village health days"],
-          ["Antenatal and postnatal care", "Clinics and home visits"],
-          ["Family planning services", "Counselling, pills, condoms, IUCD support"],
-          ["Records and reports", "Registers, HMIS, due lists"]
+          [
+            "Immunisation sessions",
+            "Sub centre plus village health days"
+          ],
+          [
+            "Antenatal and postnatal care",
+            "Clinics and home visits"
+          ],
+          [
+            "Family planning services",
+            "Counselling, pills, condoms, IUCD support"
+          ],
+          [
+            "Records and reports",
+            "Registers, HMIS, due lists"
+          ]
         ]
       }
     },
@@ -71,11 +119,19 @@
         "kind": "compare",
         "left": {
           "title": "Female line",
-          "points": ["ANM at sub centre", "Lady health visitor supervises", "Maternal child focus"]
+          "points": [
+            "ANM at sub centre",
+            "Lady health visitor supervises",
+            "Maternal child focus"
+          ]
         },
         "right": {
           "title": "Male line",
-          "points": ["MPW male in villages", "Health assistant male supervises", "Disease surveillance focus"]
+          "points": [
+            "MPW male in villages",
+            "Health assistant male supervises",
+            "Disease surveillance focus"
+          ]
         }
       }
     },
@@ -86,11 +142,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "aw1", "label": "Supplementary nutrition and preschool" },
-          { "id": "aw2", "label": "Monthly weighing and growth charts" },
-          { "id": "aw3", "label": "Referral of malnourished to health system" }
+          {
+            "id": "aw1",
+            "label": "Supplementary nutrition and preschool"
+          },
+          {
+            "id": "aw2",
+            "label": "Monthly weighing and growth charts"
+          },
+          {
+            "id": "aw3",
+            "label": "Referral of malnourished to health system"
+          }
         ],
-        "edges": [["aw1", "aw2"], ["aw2", "aw3"]]
+        "edges": [
+          [
+            "aw1",
+            "aw2"
+          ],
+          [
+            "aw2",
+            "aw3"
+          ]
+        ]
       }
     },
     {
@@ -99,12 +173,27 @@
       "say": "The community health officer leads the wellness centre team with protocol based care and tele backup from the PHC doctor.",
       "vis": {
         "kind": "table",
-        "cols": ["CHO function", "Example"],
+        "cols": [
+          "CHO function",
+          "Example"
+        ],
         "rows": [
-          ["Clinical care by protocol", "Minor illness, stable chronic refills"],
-          ["Population screening", "BP, sugar, cancer screening camps"],
-          ["Team leadership", "ASHA and ANM task planning"],
-          ["Teleconsultation", "Escalation to PHC medical officer"]
+          [
+            "Clinical care by protocol",
+            "Minor illness, stable chronic refills"
+          ],
+          [
+            "Population screening",
+            "BP, sugar, cancer screening camps"
+          ],
+          [
+            "Team leadership",
+            "ASHA and ANM task planning"
+          ],
+          [
+            "Teleconsultation",
+            "Escalation to PHC medical officer"
+          ]
         ]
       }
     },
@@ -116,11 +205,19 @@
         "kind": "compare",
         "left": {
           "title": "Historical roles",
-          "points": ["Dai conducted home deliveries", "Village health guide 1977 scheme", "Jan Swasthya Rakshak proposal 1975"]
+          "points": [
+            "Dai conducted home deliveries",
+            "Village health guide 1977 scheme",
+            "Jan Swasthya Rakshak proposal 1975"
+          ]
         },
         "right": {
           "title": "Current design",
-          "points": ["ASHA mobilises and escorts", "ANM and CHO provide skilled care", "Institutions conduct deliveries"]
+          "points": [
+            "ASHA mobilises and escorts",
+            "ANM and CHO provide skilled care",
+            "Institutions conduct deliveries"
+          ]
         }
       }
     },
@@ -130,12 +227,27 @@
       "say": "Sanctioned, posted, and present are three different workforces. Audits and examinations both punish confusing them.",
       "vis": {
         "kind": "table",
-        "cols": ["Worker", "Norm population"],
+        "cols": [
+          "Worker",
+          "Norm population"
+        ],
         "rows": [
-          ["ASHA", "About 1000 (relaxed in hills)"],
-          ["Anganwadi worker", "400 to 800 per centre"],
-          ["ANM", "Per sub centre (5000 or 3000)"],
-          ["Community health officer", "Per health and wellness centre"]
+          [
+            "ASHA",
+            "About 1000 (relaxed in hills)"
+          ],
+          [
+            "Anganwadi worker",
+            "400 to 800 per centre"
+          ],
+          [
+            "ANM",
+            "Per sub centre (5000 or 3000)"
+          ],
+          [
+            "Community health officer",
+            "Per health and wellness centre"
+          ]
         ]
       }
     },
@@ -146,11 +258,74 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "tn1", "label": "Recall triplets: 5-30-120 plains, 3-20-80 hills" },
-          { "id": "tn2", "label": "Check worker status and ministry" },
-          { "id": "tn3", "label": "Answer norm with terrain qualifier" }
+          {
+            "id": "tn1",
+            "label": "Recall triplets: 5-30-120 plains, 3-20-80 hills"
+          },
+          {
+            "id": "tn2",
+            "label": "Check worker status and ministry"
+          },
+          {
+            "id": "tn3",
+            "label": "Answer norm with terrain qualifier"
+          }
         ],
-        "edges": [["tn1", "tn2"], ["tn2", "tn3"]]
+        "edges": [
+          [
+            "tn1",
+            "tn2"
+          ],
+          [
+            "tn2",
+            "tn3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: An ASHA serves about one thousand population, is selected by the community and paid incentives, not a salary. The ANM is the salaried sub centre worker supervising ASHAs. One anganwadi serves four hundred to eight hundred people under the women and child ministry. The community health officer, a nursing or AYUSH graduate, leads the wellness centre team.",
+      "say": "High-yield for the exam: An ASHA serves about one thousand population, is selected by the community and paid incentives, not a salary. The ANM is the salaried sub centre worker supervising ASHAs. One anganwadi serves four hundred to eight hundred people under the women and child ministry. The community health officer, a nursing or AYUSH graduate, leads the wellness centre team.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "ASHA population norm",
+            "About one per thousand, relaxed in hills"
+          ],
+          [
+            "ASHA payment trap",
+            "Performance incentives only, not salaried employee"
+          ],
+          [
+            "ANM status",
+            "Salaried female worker at sub centre, supervises ASHAs"
+          ],
+          [
+            "ANM training duration",
+            "Eighteen to twenty four months training"
+          ],
+          [
+            "Anganwadi population",
+            "400 to 800 per centre, helper assisted"
+          ],
+          [
+            "Anganwadi ministry trap",
+            "Women and child ministry, not health ministry"
+          ],
+          [
+            "CHO qualification",
+            "BSc nursing or AYUSH with community health certificate"
+          ],
+          [
+            "Male MPW population",
+            "Historically five to seven thousand in plains"
+          ]
+        ]
       }
     }
   ]

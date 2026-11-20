@@ -15,11 +15,19 @@
     "kind": "compare",
     "left": {
      "title": "Above the waterline",
-     "points": ["Clinical cases with symptoms", "Patients who seek care", "Cases entering routine records"]
+     "points": [
+      "Clinical cases with symptoms",
+      "Patients who seek care",
+      "Cases entering routine records"
+     ]
     },
     "right": {
      "title": "Below the waterline",
-     "points": ["Latent and inapparent infection", "Presymptomatic and undiagnosed cases", "Carriers spreading infection"]
+     "points": [
+      "Latent and inapparent infection",
+      "Presymptomatic and undiagnosed cases",
+      "Carriers spreading infection"
+     ]
     }
    }
   },
@@ -40,12 +48,27 @@
    "say": "Below the waterline lies the hidden mass: latent, inapparent, presymptomatic and undiagnosed cases, plus carriers. That reservoir keeps transmission alive after visible cases are treated. Case treatment alone therefore fails against endemic disease again and again.",
    "vis": {
     "kind": "table",
-    "cols": ["Hidden state", "Why it sustains transmission"],
+    "cols": [
+     "Hidden state",
+     "Why it sustains transmission"
+    ],
     "rows": [
-     ["Latent infection", "Activates later into clinical disease"],
-     ["Inapparent infection", "Spreads without symptoms"],
-     ["Undiagnosed case", "Receives no treatment or isolation"],
-     ["Carrier state", "Sheds agent while feeling well"]
+     [
+      "Latent infection",
+      "Activates later into clinical disease"
+     ],
+     [
+      "Inapparent infection",
+      "Spreads without symptoms"
+     ],
+     [
+      "Undiagnosed case",
+      "Receives no treatment or isolation"
+     ],
+     [
+      "Carrier state",
+      "Sheds agent while feeling well"
+     ]
     ]
    }
   },
@@ -55,12 +78,27 @@
    "say": "Some diseases hide most of their burden. Hypertension, diabetes, anaemia, malnutrition and mental illness carry far more unknown than known cases. Surveys find most hypertensive adults undetected or uncontrolled. Screening, not waiting for symptoms, exposes that hidden share.",
    "vis": {
     "kind": "table",
-    "cols": ["Disease", "Hidden pattern"],
+    "cols": [
+     "Disease",
+     "Hidden pattern"
+    ],
     "rows": [
-     ["Hypertension", "Most cases undetected or uncontrolled"],
-     ["Diabetes", "Years of silent hyperglycaemia"],
-     ["Anaemia", "Mild cases never reach a clinic"],
-     ["Mental illness", "Stigma keeps cases unreported"]
+     [
+      "Hypertension",
+      "Most cases undetected or uncontrolled"
+     ],
+     [
+      "Diabetes",
+      "Years of silent hyperglycaemia"
+     ],
+     [
+      "Anaemia",
+      "Mild cases never reach a clinic"
+     ],
+     [
+      "Mental illness",
+      "Stigma keeps cases unreported"
+     ]
     ]
    }
   },
@@ -71,13 +109,45 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Subclinical infection"},
-     {"id": "b", "label": "Mild illness"},
-     {"id": "c", "label": "Moderate illness"},
-     {"id": "d", "label": "Severe illness"},
-     {"id": "e", "label": "Fatal illness"}
+     {
+      "id": "a",
+      "label": "Subclinical infection"
+     },
+     {
+      "id": "b",
+      "label": "Mild illness"
+     },
+     {
+      "id": "c",
+      "label": "Moderate illness"
+     },
+     {
+      "id": "d",
+      "label": "Severe illness"
+     },
+     {
+      "id": "e",
+      "label": "Fatal illness"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
    }
   },
   {
@@ -97,11 +167,23 @@
    "say": "Three corners explain occurrence. Agent, host and environment must interact; mere presence starts nothing. Their combination also decides whether one case or an epidemic follows. Draw this triangle first in any outbreak answer.",
    "vis": {
     "kind": "table",
-    "cols": ["Corner", "Question it answers"],
+    "cols": [
+     "Corner",
+     "Question it answers"
+    ],
     "rows": [
-     ["Agent", "What causes the disease?"],
-     ["Host", "Who gets it and why them?"],
-     ["Environment", "Where and when does transmission favour?"]
+     [
+      "Agent",
+      "What causes the disease?"
+     ],
+     [
+      "Host",
+      "Who gets it and why them?"
+     ],
+     [
+      "Environment",
+      "Where and when does transmission favour?"
+     ]
     ]
    }
   },
@@ -111,11 +193,23 @@
    "say": "Fill each corner. Agents include microbes, nutrients, heat, chemicals, mechanical forces and social agents. Host factors stay intrinsic: age, sex, heredity, immunity, behaviour. Environment stays extrinsic, split into physical, biological and psychosocial surroundings.",
    "vis": {
     "kind": "table",
-    "cols": ["Corner", "Factors inside it"],
+    "cols": [
+     "Corner",
+     "Factors inside it"
+    ],
     "rows": [
-     ["Agent", "Biological, nutrient, physical, chemical, mechanical, social"],
-     ["Host", "Age, sex, heredity, immunity, behaviour"],
-     ["Environment", "Physical, biological and psychosocial surroundings"]
+     [
+      "Agent",
+      "Biological, nutrient, physical, chemical, mechanical, social"
+     ],
+     [
+      "Host",
+      "Age, sex, heredity, immunity, behaviour"
+     ],
+     [
+      "Environment",
+      "Physical, biological and psychosocial surroundings"
+     ]
     ]
    }
   },
@@ -125,11 +219,23 @@
    "say": "Not every association causes disease. Smoking truly causes lung cancer. Inactivity contributes to coronary disease. Illiteracy only predicts perinatal deaths statistically. After detecting any factor, ask whether cutting it cheaply would delay the outcome.",
    "vis": {
     "kind": "table",
-    "cols": ["Type", "Example"],
+    "cols": [
+     "Type",
+     "Example"
+    ],
     "rows": [
-     ["Causative", "Smoking and lung cancer"],
-     ["Contributory", "Inactivity and coronary disease"],
-     ["Predictive only", "Illiteracy and perinatal mortality"]
+     [
+      "Causative",
+      "Smoking and lung cancer"
+     ],
+     [
+      "Contributory",
+      "Inactivity and coronary disease"
+     ],
+     [
+      "Predictive only",
+      "Illiteracy and perinatal mortality"
+     ]
     ]
    }
   },
@@ -141,11 +247,19 @@
     "kind": "compare",
     "left": {
      "title": "Modifiable",
-     "points": ["Smoking and tobacco use", "Hypertension and raised cholesterol", "Obesity and physical inactivity"]
+     "points": [
+      "Smoking and tobacco use",
+      "Hypertension and raised cholesterol",
+      "Obesity and physical inactivity"
+     ]
     },
     "right": {
      "title": "Unmodifiable",
-     "points": ["Age and sex", "Race and genetic make-up", "Family history of disease"]
+     "points": [
+      "Age and sex",
+      "Race and genetic make-up",
+      "Family history of disease"
+     ]
     }
    }
   },
@@ -157,12 +271,65 @@
     "kind": "compare",
     "left": {
      "title": "Criteria that define risk groups",
-     "points": ["Biological: age, pregnancy, blood pressure", "Physical: slums, crowding, water supply", "Socio-cultural: class, education, habits"]
+     "points": [
+      "Biological: age, pregnancy, blood pressure",
+      "Physical: slums, crowding, water supply",
+      "Socio-cultural: class, education, habits"
+     ]
     },
     "right": {
      "title": "Groups reached first",
-     "points": ["At-risk mothers and infants", "Chronically ill and handicapped people", "Elderly people living alone"]
+     "points": [
+      "At-risk mothers and infants",
+      "Chronically ill and handicapped people",
+      "Elderly people living alone"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: The visible tip holds symptomatic clinical cases that enter routine records. Below the waterline lie latent, inapparent, presymptomatic and undiagnosed cases plus carriers sustaining transmission. Hypertension and diabetes show hidden burden far above known cases, linked to the rule of halves. Screening surveys reveal that submerged mass.",
+   "say": "High-yield for the exam: The visible tip holds symptomatic clinical cases that enter routine records. Below the waterline lie latent, inapparent, presymptomatic and undiagnosed cases plus carriers sustaining transmission. Hypertension and diabetes show hidden burden far above known cases, linked to the rule of halves. Screening surveys reveal that submerged mass.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Floating tip contents",
+      "Symptomatic cases seeking care, entering records"
+     ],
+     [
+      "Submerged mass contents",
+      "Latent, inapparent, presymptomatic, undiagnosed, carriers"
+     ],
+     [
+      "Waterline meaning",
+      "Separates apparent from inapparent disease"
+     ],
+     [
+      "Hidden reservoir effect",
+      "Transmission continues after visible treatment"
+     ],
+     [
+      "Classic hidden diseases",
+      "Hypertension, diabetes, anaemia, malnutrition, mental illness"
+     ],
+     [
+      "Rule of halves setting",
+      "Hypertension mostly undetected, untreated or uncontrolled"
+     ],
+     [
+      "Spectrum of disease example",
+      "Leprosy from indeterminate to lepromatous"
+     ],
+     [
+      "Spectrum exception",
+      "Rabies almost uniformly fatal after symptoms"
+     ]
+    ]
    }
   }
  ],

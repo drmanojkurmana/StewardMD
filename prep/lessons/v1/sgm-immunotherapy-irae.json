@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sgm-immunotherapy-irae",
+ "subject": "ss-general-medicine",
+ "title": "Immunotherapy and immune-related adverse events",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Immune checkpoint inhibitors** block PD-1 and CTLA-4 pathways in cancer. **Nivolumab** and **pembrolizumab** are PD-1 antibodies approved across tumour types. **Ipilimumab** blocks CTLA-4 and is most toxic among checkpoints in practice. Combined nivolumab with ipilimumab increases response but also toxicity substantially.",
+   "say": "Immune checkpoint inhibitors block PD one and CTLA four pathways in cancer. Nivolumab and pembrolizumab are PD one antibodies approved across tumour types. Ipilimumab blocks CTLA four and is most toxic among checkpoints in practice. Combined nivolumab with ipilimumab increases response but also toxicity substantially.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PD-1 blockade",
+     "points": [
+      "Nivolumab and pembrolizumab",
+      "Pneumonitis and thyroiditis",
+      "Colitis risk is moderate",
+      "Steroids treat most events"
+     ]
+    },
+    "right": {
+     "title": "CTLA-4 blockade",
+     "points": [
+      "Ipilimumab is the agent",
+      "Severe colitis is common",
+      "Hypophysitis is characteristic",
+      "Combination increases risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pneumonitis** presents with cough and ground glass opacity on imaging. **Steroids** at 1 mg/kg are first line for grade 2 or higher disease. **Infliximab** rescues steroid refractory pneumonitis in many protocols globally. **Mycophenolate** is an alternative when infliximab is not preferred in these patients.",
+   "say": "Pneumonitis presents with cough and ground glass opacity on imaging. Steroids at one milligram per kilogram are first line for grade two or higher disease. Infliximab is the salvage option for steroid refractory pneumonitis in many protocols globally. Mycophenolate is an alternative when infliximab is not preferred in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cough and infiltrates"
+     },
+     {
+      "id": "b",
+      "label": "Steroids started"
+     },
+     {
+      "id": "c",
+      "label": "Reassess in 2 days"
+     },
+     {
+      "id": "d",
+      "label": "Infliximab if refractory"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Colitis** causes watery diarrhoea with or without blood in many patients. **Vedolizumab** is gut selective and suits steroid refractory colitis in many protocols. **Infliximab** is the other salvage option for severe refractory colitis in these patients. **Carboplatin** with pemetrexed adds chemotherapy in lung cancer regimens using pembrolizumab in many centres.",
+   "say": "Colitis causes watery diarrhoea with or without blood in many patients. Vedolizumab is gut selective and suits steroid refractory colitis in many protocols. Infliximab is the other salvage option for severe refractory colitis in these patients. Carboplatin with pemetrexed adds chemotherapy in lung cancer regimens using pembrolizumab in many centres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicity",
+     "Grading clue",
+     "Salvage"
+    ],
+    "rows": [
+     [
+      "Colitis",
+      "Diarrhoea frequency",
+      "Vedolizumab or infliximab"
+     ],
+     [
+      "Pneumonitis",
+      "Oxygen need",
+      "Infliximab if refractory"
+     ],
+     [
+      "Hepatitis",
+      "Transaminase height",
+      "Mycophenolate option"
+     ],
+     [
+      "Thyroiditis",
+      "TSH rise",
+      "Hormone replacement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypophysitis** is ipilimumab signature with pituitary enlargement and hormone loss. **Axitinib** with pembrolizumab is a renal cell regimen that adds vascular toxicity in many patients. **Cisplatin** and **oxaliplatin** appear in chemo immunotherapy backbones across gastrointestinal cancers in many protocols. Testosterone replacement is needed in hypogonadotropic hypogonadism during follow-up care.",
+   "say": "Hypophysitis is ipilimumab signature with pituitary enlargement and hormone loss. Axitinib with pembrolizumab is a renal cell regimen that adds vascular toxicity in many patients. Cisplatin and oxaliplatin appear in chemo immunotherapy backbones across gastrointestinal cancers in many protocols. Testosterone replacement is needed in hypogonadotropic hypogonadism during follow-up care.",
+   "vis": null
+  },
+  {
+   "tx": "**Sunitinib** and **lenvatinib** partner with pembrolizumab in renal cell carcinoma therapy. **Cabozantinib** is the third tyrosine kinase partner in that combination family globally. **Everolimus** is the mTOR partner in other renal regimens in many protocols. **Belzutifan** targets HIF-2alpha in von Hippel Lindau associated tumours in many centres.",
+   "say": "Sunitinib and lenvatinib are partners of pembrolizumab in renal cell carcinoma therapy. Cabozantinib is the third tyrosine kinase partner in that combination family globally. Everolimus is the mTOR partner in other renal regimens in many protocols. Belzutifan targets HIF two alpha in von Hippel Lindau associated tumours in many centres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Partner",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Pembrolizumab combo",
+      "Axitinib",
+      "Renal cell carcinoma"
+     ],
+     [
+      "Pembrolizumab combo",
+      "Lenvatinib",
+      "Renal cell carcinoma"
+     ],
+     [
+      "Nivolumab combo",
+      "Cabozantinib",
+      "Renal cell carcinoma"
+     ],
+     [
+      "Immunotherapy backbone",
+      "Carboplatin pemetrexed",
+      "Lung cancer therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trastuzumab deruxtecan** and **capecitabine** appear in gastric chemo immunotherapy regimens. **Fluorouracil** with oxaliplatin forms gastrointestinal chemo immunotherapy backbones in many protocols. **Hyaluronidase** helps subcutaneous trastuzumab administration in breast care in many centres today. Checkpoint choice follows PD-L1 testing in most solid tumours today.",
+   "say": "Trastuzumab deruxtecan and capecitabine appear in gastric chemo immunotherapy regimens. Fluorouracil with oxaliplatin forms gastrointestinal chemo immunotherapy backbones in many protocols. Hyaluronidase helps subcutaneous trastuzumab administration in breast care in many centres today. Checkpoint choice follows PD L one testing in most solid tumours today.",
+   "vis": null
+  },
+  {
+   "tx": "**Dermatitis** ranges from rash to Stevens Johnson syndrome with checkpoints in rare cases. **Arthralgia** and inflammatory arthritis are musculoskeletal immune events in many patients. **Myocarditis** is rare yet fatal and needs early troponin surveillance in many protocols. **Nephritis** with rising creatinine needs steroids when infection and obstruction are excluded in these patients.",
+   "say": "Dermatitis ranges from rash to Stevens Johnson syndrome with checkpoints in rare cases. Arthralgia and inflammatory arthritis are musculoskeletal immune events in many patients. Myocarditis is rare yet fatal and needs early troponin surveillance in many protocols. Nephritis with rising creatinine needs steroids when infection and obstruction are excluded in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "New symptom onset"
+     },
+     {
+      "id": "b",
+      "label": "Hold checkpoint therapy"
+     },
+     {
+      "id": "c",
+      "label": "Steroids by grade"
+     },
+     {
+      "id": "d",
+      "label": "Rechallenge if resolved"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thyroiditis** is biphasic with hyperthyroidism followed by hypothyroidism in many cases. **Diabetes** with ketoacidosis is an uncommon pancreatic immune event in many series. **Bowel perforation** is the surgical emergency of severe checkpoint colitis in these patients. **Prophylactic antibiotics** do not prevent immune toxicities despite common misconceptions in practice.",
+   "say": "Thyroiditis is biphasic with hyperthyroidism followed by hypothyroidism in many cases. Diabetes with ketoacidosis is an uncommon pancreatic immune event in many series. Bowel perforation is the surgical emergency of severe checkpoint colitis in these patients. Prophylactic steroids do not prevent immune toxicities despite common misconceptions in practice.",
+   "vis": null
+  },
+  {
+   "tx": "**Cervical cancer** regimens add pembrolizumab to chemotherapy in many protocols globally. **Mesothelioma** regimens combine nivolumab with ipilimumab in first line therapy in many centres. Overall survival benefit is the approval basis for most checkpoint combinations in solid tumours today. Rechallenge decisions are based on resolved grade and organ involved today.",
+   "say": "Cervical cancer regimens are combinations of pembrolizumab with chemotherapy in many protocols globally. Mesothelioma regimens are combinations of nivolumab with ipilimumab in first line therapy in many centres. Overall survival benefit is the approval basis for most checkpoint combinations in solid tumours. Rechallenge decisions are based on resolved grade and organ involved today.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Guideline point",
+     "Advice",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Grade 2 event",
+      "Hold and steroids",
+      "Reassess in 1 week"
+     ],
+     [
+      "Grade 3 event",
+      "Hold and high steroids",
+      "Infliximab or mycophenolate"
+     ],
+     [
+      "Grade 4 event",
+      "Stop permanently",
+      "Rare rechallenge setting"
+     ],
+     [
+      "Endocrine event",
+      "Replace hormone",
+      "Checkpoint may continue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long term** survivors experience durable responses after checkpoint therapy in many cancers. **Pseudoprogression** with enlarging lesions can precede true response in these patients. **Immune** memory explains benefit that persists after therapy discontinuation in many cases. Smoking status and PD-L1 expression refine selection in lung cancer practice.",
+   "say": "Long term survivors have durable responses after checkpoint therapy in many cancers. Pseudoprogression with enlarging lesions can precede true response in these patients. Immune memory is the explanation of benefit that persists after therapy discontinuation in many cases. Smoking status and PD L one expression guide selection in lung cancer practice.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** seals the immunotherapy summary below. Remember ipilimumab colitis and hypophysitis as CTLA-4 signatures, steroids as first line for most events and vedolizumab or infliximab for colitis salvage. Axitinib with pembrolizumab is the renal regimen while carboplatin with pemetrexed partners pembrolizumab in lung cancer. Pseudoprogression heralds response in many cancers.",
+   "say": "High-yield facts are the points the examination asks most often in these presentations. Ipilimumab colitis and hypophysitis are the CTLA four signatures clearly. Steroids are the first line treatment for most immune events. Vedolizumab and infliximab are salvage options for colitis. Axitinib with pembrolizumab is the renal regimen for therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High-yield point"
+    ],
+    "rows": [
+     [
+      "CTLA signature",
+      "Ipilimumab colitis and hypophysitis"
+     ],
+     [
+      "First line toxicity",
+      "Steroids for most immune events"
+     ],
+     [
+      "Colitis salvage",
+      "Vedolizumab or infliximab option"
+     ],
+     [
+      "Renal regimen",
+      "Axitinib with pembrolizumab combination"
+     ],
+     [
+      "Lung regimen",
+      "Carboplatin pemetrexed with pembrolizumab"
+     ],
+     [
+      "Pseudoprogression",
+      "Enlarging lesions before true response"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

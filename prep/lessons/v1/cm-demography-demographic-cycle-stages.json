@@ -14,13 +14,31 @@
       "say": "The demographic cycle has five stages. India is in late stage three, where births are falling but population momentum still pushes growth.",
       "vis": {
         "kind": "table",
-        "cols": ["Stage", "Birth and death pattern"],
+        "cols": [
+          "Stage",
+          "Birth and death pattern"
+        ],
         "rows": [
-          ["1: High stationary", "High birth rate, high death rate, no growth"],
-          ["2: Early expanding", "Births high, deaths falling, rapid growth"],
-          ["3: Late expanding", "Births falling, deaths low, growth slows"],
-          ["4: Low stationary", "Low births, low deaths, near zero growth"],
-          ["5: Declining", "Deaths exceed births, population shrinks"]
+          [
+            "1: High stationary",
+            "High birth rate, high death rate, no growth"
+          ],
+          [
+            "2: Early expanding",
+            "Births high, deaths falling, rapid growth"
+          ],
+          [
+            "3: Late expanding",
+            "Births falling, deaths low, growth slows"
+          ],
+          [
+            "4: Low stationary",
+            "Low births, low deaths, near zero growth"
+          ],
+          [
+            "5: Declining",
+            "Deaths exceed births, population shrinks"
+          ]
         ]
       }
     },
@@ -31,11 +49,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "c1", "label": "Houselisting and housing census phase" },
-          { "id": "c2", "label": "Population enumeration of every person" },
-          { "id": "c3", "label": "Tables published for planning denominators" }
+          {
+            "id": "c1",
+            "label": "Houselisting and housing census phase"
+          },
+          {
+            "id": "c2",
+            "label": "Population enumeration of every person"
+          },
+          {
+            "id": "c3",
+            "label": "Tables published for planning denominators"
+          }
         ],
-        "edges": [["c1", "c2"], ["c2", "c3"]]
+        "edges": [
+          [
+            "c1",
+            "c2"
+          ],
+          [
+            "c2",
+            "c3"
+          ]
+        ]
       }
     },
     {
@@ -46,11 +82,19 @@
         "kind": "compare",
         "left": {
           "title": "Overall sex ratio",
-          "points": ["943 females per 1000 males in 2011", "Kerala highest at 1084", "Reflects survival across all ages"]
+          "points": [
+            "943 females per 1000 males in 2011",
+            "Kerala highest at 1084",
+            "Reflects survival across all ages"
+          ]
         },
         "right": {
           "title": "Child sex ratio (0 to 6 years)",
-          "points": ["919 girls per 1000 boys in 2011", "Falling for five decades", "Lowest in Haryana and Punjab"]
+          "points": [
+            "919 girls per 1000 boys in 2011",
+            "Falling for five decades",
+            "Lowest in Haryana and Punjab"
+          ]
         }
       }
     },
@@ -61,11 +105,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "d1", "label": "Count under 15 plus elderly dependents" },
-          { "id": "d2", "label": "Divide by population aged 15 to 59" },
-          { "id": "d3", "label": "Multiply by 100 for the ratio" }
+          {
+            "id": "d1",
+            "label": "Count under 15 plus elderly dependents"
+          },
+          {
+            "id": "d2",
+            "label": "Divide by population aged 15 to 59"
+          },
+          {
+            "id": "d3",
+            "label": "Multiply by 100 for the ratio"
+          }
         ],
-        "edges": [["d1", "d2"], ["d2", "d3"]]
+        "edges": [
+          [
+            "d1",
+            "d2"
+          ],
+          [
+            "d2",
+            "d3"
+          ]
+        ]
       }
     },
     {
@@ -85,12 +147,27 @@
       "say": "Growth rate is births minus deaths plus migration. Divide seventy by the growth rate to get the doubling time in years.",
       "vis": {
         "kind": "table",
-        "cols": ["Growth rate", "Doubling time"],
+        "cols": [
+          "Growth rate",
+          "Doubling time"
+        ],
         "rows": [
-          ["0.5 percent a year", "About 140 years"],
-          ["1 percent a year", "About 70 years"],
-          ["2 percent a year", "About 35 years"],
-          ["3 percent a year", "About 23 years"]
+          [
+            "0.5 percent a year",
+            "About 140 years"
+          ],
+          [
+            "1 percent a year",
+            "About 70 years"
+          ],
+          [
+            "2 percent a year",
+            "About 35 years"
+          ],
+          [
+            "3 percent a year",
+            "About 23 years"
+          ]
         ]
       }
     },
@@ -102,11 +179,19 @@
         "kind": "compare",
         "left": {
           "title": "With momentum",
-          "points": ["Huge young cohorts reach parenthood", "Births stay numerous for decades", "Population peaks only mid century"]
+          "points": [
+            "Huge young cohorts reach parenthood",
+            "Births stay numerous for decades",
+            "Population peaks only mid century"
+          ]
         },
         "right": {
           "title": "Without momentum",
-          "points": ["Age structure already old", "Births fall as soon as fertility falls", "Population stabilises quickly"]
+          "points": [
+            "Age structure already old",
+            "Births fall as soon as fertility falls",
+            "Population stabilises quickly"
+          ]
         }
       }
     },
@@ -116,12 +201,27 @@
       "say": "Nearly one third of Indians lived in towns by 2011. Urban crowding now drives demand for water, sanitation, and city primary care.",
       "vis": {
         "kind": "table",
-        "cols": ["Census measure 2011", "Value"],
+        "cols": [
+          "Census measure 2011",
+          "Value"
+        ],
         "rows": [
-          ["Total population", "121 crore"],
-          ["Density", "382 persons per square kilometre"],
-          ["Urban share", "31.1 percent"],
-          ["Decadal growth", "17.7 percent"]
+          [
+            "Total population",
+            "121 crore"
+          ],
+          [
+            "Density",
+            "382 persons per square kilometre"
+          ],
+          [
+            "Urban share",
+            "31.1 percent"
+          ],
+          [
+            "Decadal growth",
+            "17.7 percent"
+          ]
         ]
       }
     },
@@ -132,11 +232,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "a1", "label": "Read base, middle, and top of structure" },
-          { "id": "a2", "label": "Match services to dominant age groups" },
-          { "id": "a3", "label": "Project needs ten years forward" }
+          {
+            "id": "a1",
+            "label": "Read base, middle, and top of structure"
+          },
+          {
+            "id": "a2",
+            "label": "Match services to dominant age groups"
+          },
+          {
+            "id": "a3",
+            "label": "Project needs ten years forward"
+          }
         ],
-        "edges": [["a1", "a2"], ["a2", "a3"]]
+        "edges": [
+          [
+            "a1",
+            "a2"
+          ],
+          [
+            "a2",
+            "a3"
+          ]
+        ]
       }
     },
     {
@@ -147,12 +265,61 @@
         "kind": "compare",
         "left": {
           "title": "Census",
-          "points": ["Complete count every ten years", "Stock at one reference moment", "Denominator for all rates"]
+          "points": [
+            "Complete count every ten years",
+            "Stock at one reference moment",
+            "Denominator for all rates"
+          ]
         },
         "right": {
           "title": "Sample Registration System",
-          "points": ["Continuous dual recording in samples", "Annual birth and death rates", "Flow between two censuses"]
+          "points": [
+            "Continuous dual recording in samples",
+            "Annual birth and death rates",
+            "Flow between two censuses"
+          ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: The demographic cycle comprises five stages: high stationary, early expanding, late expanding, low stationary, and declining. India currently occupies the late expanding stage, characterized by a declining birth rate and a rapidly falling death rate. The demographic gap is the widening difference between birth rate and death rate during the expanding stages. Population momentum causes population to continue growing for decades even after achieving replacement-level fertility.",
+      "say": "The demographic cycle comprises five stages: high stationary, early expanding, late expanding, low stationary, and declining. India currently occupies the late expanding stage, characterized by a declining birth rate and a rapidly falling death rate. The demographic gap is the widening difference between birth rate and death rate during the expanding stages. Population momentum causes population to continue growing for decades even after achieving replacement-level fertility.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Stage 1 High stationary",
+            "High birth rate and high death rate maintaining stable population"
+          ],
+          [
+            "Stage 2 Early expanding",
+            "High birth rate with rapidly falling death rate; population expands"
+          ],
+          [
+            "Stage 3 Late expanding",
+            "Declining birth rate with continued low death rate; India present stage"
+          ],
+          [
+            "Stage 4 Low stationary",
+            "Low birth rate and low death rate stabilizing population"
+          ],
+          [
+            "Stage 5 Declining",
+            "Birth rate drops below death rate; negative growth seen in Germany"
+          ],
+          [
+            "Demographic gap",
+            "Difference between birth rate and death rate driving rapid growth"
+          ],
+          [
+            "Population momentum",
+            "Growth driven by young age structure despite replacement fertility"
+          ]
+        ]
       }
     }
   ]

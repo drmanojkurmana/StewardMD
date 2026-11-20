@@ -14,12 +14,27 @@
       "say": "Literacy in 2011 was seventy three percent, with Kerala at ninety four. Educating girls delays marriage and cuts both fertility and child deaths.",
       "vis": {
         "kind": "table",
-        "cols": ["Literacy 2011", "Percent"],
+        "cols": [
+          "Literacy 2011",
+          "Percent"
+        ],
         "rows": [
-          ["Total (age 7 plus)", "73.0"],
-          ["Male", "80.9"],
-          ["Female", "64.6"],
-          ["Kerala total", "94.0"]
+          [
+            "Total (age 7 plus)",
+            "73.0"
+          ],
+          [
+            "Male",
+            "80.9"
+          ],
+          [
+            "Female",
+            "64.6"
+          ],
+          [
+            "Kerala total",
+            "94.0"
+          ]
         ]
       }
     },
@@ -41,11 +56,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "b1", "label": "Count births in one calendar year" },
-          { "id": "b2", "label": "Divide by mid year population" },
-          { "id": "b3", "label": "Multiply by 1000 for the crude rate" }
+          {
+            "id": "b1",
+            "label": "Count births in one calendar year"
+          },
+          {
+            "id": "b2",
+            "label": "Divide by mid year population"
+          },
+          {
+            "id": "b3",
+            "label": "Multiply by 1000 for the crude rate"
+          }
         ],
-        "edges": [["b1", "b2"], ["b2", "b3"]]
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ]
+        ]
       }
     },
     {
@@ -56,11 +89,19 @@
         "kind": "compare",
         "left": {
           "title": "Crude birth rate",
-          "points": ["Denominator: whole population", "Distorted by age and sex structure", "Quick but crude comparison"]
+          "points": [
+            "Denominator: whole population",
+            "Distorted by age and sex structure",
+            "Quick but crude comparison"
+          ]
         },
         "right": {
           "title": "General fertility rate",
-          "points": ["Denominator: women 15 to 49", "Removes male and child dilution", "Still ignores age spread within span"]
+          "points": [
+            "Denominator: women 15 to 49",
+            "Removes male and child dilution",
+            "Still ignores age spread within span"
+          ]
         }
       }
     },
@@ -70,12 +111,27 @@
       "say": "Total fertility rate sums age specific rates into children per woman. India is near two point zero, close to replacement level.",
       "vis": {
         "kind": "table",
-        "cols": ["Age group", "What its rate shows"],
+        "cols": [
+          "Age group",
+          "What its rate shows"
+        ],
         "rows": [
-          ["15 to 19", "Adolescent fertility, early marriage signal"],
-          ["20 to 29", "Peak childbearing years in India"],
-          ["30 to 39", "Falling tail as family size completes"],
-          ["40 to 49", "Low residual fertility"]
+          [
+            "15 to 19",
+            "Adolescent fertility, early marriage signal"
+          ],
+          [
+            "20 to 29",
+            "Peak childbearing years in India"
+          ],
+          [
+            "30 to 39",
+            "Falling tail as family size completes"
+          ],
+          [
+            "40 to 49",
+            "Low residual fertility"
+          ]
         ]
       }
     },
@@ -86,11 +142,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "r1", "label": "TFR reaches 2.1 replacement level" },
-          { "id": "r2", "label": "Momentum keeps growth for decades" },
-          { "id": "r3", "label": "Population stabilises then ages" }
+          {
+            "id": "r1",
+            "label": "TFR reaches 2.1 replacement level"
+          },
+          {
+            "id": "r2",
+            "label": "Momentum keeps growth for decades"
+          },
+          {
+            "id": "r3",
+            "label": "Population stabilises then ages"
+          }
         ],
-        "edges": [["r1", "r2"], ["r2", "r3"]]
+        "edges": [
+          [
+            "r1",
+            "r2"
+          ],
+          [
+            "r2",
+            "r3"
+          ]
+        ]
       }
     },
     {
@@ -101,11 +175,19 @@
         "kind": "compare",
         "left": {
           "title": "Urban fertility drivers down",
-          "points": ["Later marriage and higher schooling", "Costly housing and child education", "Easy contraceptive and abortion access"]
+          "points": [
+            "Later marriage and higher schooling",
+            "Costly housing and child education",
+            "Easy contraceptive and abortion access"
+          ]
         },
         "right": {
           "title": "Slum fertility stays up",
-          "points": ["Early marriage persists", "Services crowded and distant", "Higher child mortality fears"]
+          "points": [
+            "Early marriage persists",
+            "Services crowded and distant",
+            "Higher child mortality fears"
+          ]
         }
       }
     },
@@ -115,12 +197,27 @@
       "say": "Child woman ratio estimates fertility from census counts alone. Short birth intervals under three years harm both mother and baby.",
       "vis": {
         "kind": "table",
-        "cols": ["Measure", "Needs birth registration?"],
+        "cols": [
+          "Measure",
+          "Needs birth registration?"
+        ],
         "rows": [
-          ["Child woman ratio", "No, census counts suffice"],
-          ["General fertility rate", "Yes, annual births required"],
-          ["Parity distribution", "Survey history based"],
-          ["Birth interval", "Survey or register dates"]
+          [
+            "Child woman ratio",
+            "No, census counts suffice"
+          ],
+          [
+            "General fertility rate",
+            "Yes, annual births required"
+          ],
+          [
+            "Parity distribution",
+            "Survey history based"
+          ],
+          [
+            "Birth interval",
+            "Survey or register dates"
+          ]
         ]
       }
     },
@@ -131,11 +228,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "m1", "label": "Girl completes secondary schooling" },
-          { "id": "m2", "label": "Marriage and first birth delayed" },
-          { "id": "m3", "label": "Fewer, healthier, better spaced children" }
+          {
+            "id": "m1",
+            "label": "Girl completes secondary schooling"
+          },
+          {
+            "id": "m2",
+            "label": "Marriage and first birth delayed"
+          },
+          {
+            "id": "m3",
+            "label": "Fewer, healthier, better spaced children"
+          }
         ],
-        "edges": [["m1", "m2"], ["m2", "m3"]]
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ]
+        ]
       }
     },
     {
@@ -144,12 +259,68 @@
       "say": "Match the denominator to the stem. Children per woman means total fertility; births per thousand women fifteen to forty nine means general fertility.",
       "vis": {
         "kind": "table",
-        "cols": ["Stem wording", "Rate intended"],
+        "cols": [
+          "Stem wording",
+          "Rate intended"
+        ],
         "rows": [
-          ["Children per woman over lifetime", "Total fertility rate"],
-          ["Births per 1000 women 15 to 49", "General fertility rate"],
-          ["Births per 1000 married women", "General marital fertility rate"],
-          ["Births per 1000 population", "Crude birth rate"]
+          [
+            "Children per woman over lifetime",
+            "Total fertility rate"
+          ],
+          [
+            "Births per 1000 women 15 to 49",
+            "General fertility rate"
+          ],
+          [
+            "Births per 1000 married women",
+            "General marital fertility rate"
+          ],
+          [
+            "Births per 1000 population",
+            "Crude birth rate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Literacy in India is defined as the ability of an individual aged seven years or older to read and write with understanding in any language. Crude birth rate uses mid-year population in the denominator. Total fertility rate is the average number of children a woman would bear through reproductive age fifteen to forty-nine; replacement-level fertility is 2.1. Net Reproduction Rate equals one when a female newborn is replaced by one daughter.",
+      "say": "Literacy in India is defined as the ability of an individual aged seven years or older to read and write with understanding in any language. Crude birth rate uses mid-year population in the denominator. Total fertility rate is the average number of children a woman would bear through reproductive age fifteen to forty-nine; replacement-level fertility is 2.1. Net Reproduction Rate equals one when a female newborn is replaced by one daughter.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Literacy definition age",
+            "Person aged seven years or above who can read and write"
+          ],
+          [
+            "Crude birth rate denominator",
+            "Total mid-year population multiplied by one thousand"
+          ],
+          [
+            "General fertility rate denominator",
+            "Total women in reproductive age group 15 to 49 years"
+          ],
+          [
+            "Total fertility rate definition",
+            "Completed family size per woman surviving through reproductive years"
+          ],
+          [
+            "Replacement-level TFR",
+            "TFR value of 2.1 ensures population stabilization"
+          ],
+          [
+            "Net reproduction rate NRR 1",
+            "Average of one surviving daughter born per mother"
+          ],
+          [
+            "Child-woman ratio denominator",
+            "Women of reproductive age 15 to 49 years"
+          ]
         ]
       }
     }

@@ -23,12 +23,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "ecg", "label": "Peaked T waves or widening QRS on the ECG" },
-          { "id": "calcium", "label": "Intravenous calcium gluconate stabilises the membrane" },
-          { "id": "shift", "label": "Insulin glucose and salbutamol shift potassium into cells" },
-          { "id": "remove", "label": "Binders, loop diuretics or dialysis remove potassium" }
+          {
+            "id": "ecg",
+            "label": "Peaked T waves or widening QRS on the ECG"
+          },
+          {
+            "id": "calcium",
+            "label": "Intravenous calcium gluconate stabilises the membrane"
+          },
+          {
+            "id": "shift",
+            "label": "Insulin glucose and salbutamol shift potassium into cells"
+          },
+          {
+            "id": "remove",
+            "label": "Binders, loop diuretics or dialysis remove potassium"
+          }
         ],
-        "edges": [["ecg", "calcium"], ["calcium", "shift"], ["shift", "remove"]]
+        "edges": [
+          [
+            "ecg",
+            "calcium"
+          ],
+          [
+            "calcium",
+            "shift"
+          ],
+          [
+            "shift",
+            "remove"
+          ]
+        ]
       }
     },
     {
@@ -72,12 +97,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "alb", "label": "Persistent albuminuria in diabetes" },
-          { "id": "start", "label": "Start ACE inhibitor or receptor blocker" },
-          { "id": "titrate", "label": "Titrate to highest tolerated dose" },
-          { "id": "gain", "label": "Albuminuria falls about a third, decline slows" }
+          {
+            "id": "alb",
+            "label": "Persistent albuminuria in diabetes"
+          },
+          {
+            "id": "start",
+            "label": "Start ACE inhibitor or receptor blocker"
+          },
+          {
+            "id": "titrate",
+            "label": "Titrate to highest tolerated dose"
+          },
+          {
+            "id": "gain",
+            "label": "Albuminuria falls about a third, decline slows"
+          }
         ],
-        "edges": [["alb", "start"], ["start", "titrate"], ["titrate", "gain"]]
+        "edges": [
+          [
+            "alb",
+            "start"
+          ],
+          [
+            "start",
+            "titrate"
+          ],
+          [
+            "titrate",
+            "gain"
+          ]
+        ]
       }
     },
     {
@@ -111,12 +161,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "nsaid", "label": "NSAID constricts the afferent arteriole" },
-          { "id": "diur", "label": "Diuretic and illness deplete circulating volume" },
-          { "id": "raas", "label": "RAAS blocker dilates the efferent arteriole" },
-          { "id": "aki", "label": "Glomerular pressure collapses: acute kidney injury" }
+          {
+            "id": "nsaid",
+            "label": "NSAID constricts the afferent arteriole"
+          },
+          {
+            "id": "diur",
+            "label": "Diuretic and illness deplete circulating volume"
+          },
+          {
+            "id": "raas",
+            "label": "RAAS blocker dilates the efferent arteriole"
+          },
+          {
+            "id": "aki",
+            "label": "Glomerular pressure collapses: acute kidney injury"
+          }
         ],
-        "edges": [["nsaid", "aki"], ["diur", "aki"], ["raas", "aki"]]
+        "edges": [
+          [
+            "nsaid",
+            "aki"
+          ],
+          [
+            "diur",
+            "aki"
+          ],
+          [
+            "raas",
+            "aki"
+          ]
+        ]
       }
     },
     {
@@ -142,6 +217,47 @@
             "When unsure, test first and ask the same day"
           ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: RAAS blockers raise potassium, and a rise beyond 5.5 mmol per litre usually means stop the drug while peaked T waves need calcium first, then insulin with glucose to shift potassium. In pregnancy these drugs cause fetopathy, so switch to labetalol, methyldopa or nifedipine before conception. A creatinine rise beyond 30 percent suggests bilateral renal artery stenosis, and an NSAID plus a diuretic plus a blocker is the triple whammy.",
+      "say": "RAAS blockers raise potassium, and a rise beyond 5.5 mmol per litre usually means stop the drug while peaked T waves need calcium first, then insulin with glucose to shift potassium. In pregnancy these drugs cause fetopathy, so switch to labetalol, methyldopa or nifedipine before conception. A creatinine rise beyond 30 percent suggests bilateral renal artery stenosis, and an NSAID plus a diuretic plus a blocker is the triple whammy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Potassium stop point",
+            "Usually stop beyond 5.5 mmol"
+          ],
+          [
+            "Dangerous ECG",
+            "Peaked T waves then sine wave"
+          ],
+          [
+            "Membrane protection",
+            "Intravenous calcium gluconate first"
+          ],
+          [
+            "Pregnancy switch",
+            "Labetalol methyldopa or nifedipine"
+          ],
+          [
+            "Efferent action",
+            "Dilates efferent arteriole in glomerulus"
+          ],
+          [
+            "Stenosis alarm",
+            "Creatinine rise beyond 30 percent"
+          ],
+          [
+            "Triple whammy",
+            "NSAID diuretic and RAAS blocker"
+          ]
+        ]
       }
     }
   ]

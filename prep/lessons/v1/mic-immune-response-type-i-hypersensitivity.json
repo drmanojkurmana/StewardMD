@@ -13,12 +13,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "sens", "label": "First exposure: allergen specific IgE made" },
-          { "id": "arm", "label": "IgE arms mast cells for weeks" },
-          { "id": "cross", "label": "Re exposure crosslinks IgE" },
-          { "id": "mediator", "label": "Histamine and lipid mediators released in minutes" }
+          {
+            "id": "sens",
+            "label": "First exposure: allergen specific IgE made"
+          },
+          {
+            "id": "arm",
+            "label": "IgE arms mast cells for weeks"
+          },
+          {
+            "id": "cross",
+            "label": "Re exposure crosslinks IgE"
+          },
+          {
+            "id": "mediator",
+            "label": "Histamine and lipid mediators released in minutes"
+          }
         ],
-        "edges": [["sens", "arm"], ["arm", "cross"], ["cross", "mediator"]]
+        "edges": [
+          [
+            "sens",
+            "arm"
+          ],
+          [
+            "arm",
+            "cross"
+          ],
+          [
+            "cross",
+            "mediator"
+          ]
+        ]
       }
     },
     {
@@ -216,6 +241,47 @@
             "Food panels without history mislead elimination diets"
           ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Type I hypersensitivity is IgE on mast cells crosslinked within minutes on re-exposure. Anaphylaxis needs intramuscular adrenaline into the thigh at once, repeated about every five minutes. Antihistamines and steroids are only adjuncts. Arthus reaction is local type III at four to ten hours. Serum sickness is systemic type III at seven to fourteen days.",
+      "say": "High-yield for the exam: Type I hypersensitivity is IgE on mast cells crosslinked within minutes on re-exposure. Anaphylaxis needs intramuscular adrenaline into the thigh at once, repeated about every five minutes. Antihistamines and steroids are only adjuncts. Arthus reaction is local type III at four to ten hours. Serum sickness is systemic type III at seven to fourteen days.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Type I mechanism",
+            "IgE crosslinking on mast cells within minutes"
+          ],
+          [
+            "Anaphylaxis first drug",
+            "Intramuscular adrenaline into thigh, repeat five minutely"
+          ],
+          [
+            "Anaphylaxis adjunct trap",
+            "Antihistamines and steroids never replace adrenaline"
+          ],
+          [
+            "Serum tryptase use",
+            "Supports mast cell degranulation after anaphylaxis event"
+          ],
+          [
+            "Arthus reaction timing",
+            "Local type III injury at four to ten hours"
+          ],
+          [
+            "Serum sickness timing",
+            "Systemic type III at seven to fourteen days"
+          ],
+          [
+            "Allergy gold standard",
+            "Supervised challenge when history and tests disagree"
+          ]
+        ]
       }
     }
   ]

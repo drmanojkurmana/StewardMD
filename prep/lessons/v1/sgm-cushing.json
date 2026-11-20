@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "sgm-cushing",
+ "subject": "ss-general-medicine",
+ "title": "Cushing Syndrome and Adrenal Incidentaloma",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Cushing syndrome** (cortisol excess) is ACTH dependent or adrenal autonomous. **Cushing disease** (pituitary ACTH tumour) accounts for 70 percent of cases. **Adrenal adenoma** (benign adrenal tumour) causes autonomous disease. **Ectopic ACTH** (lung cancer secretion) causes severe disease. **Adrenal incidentaloma** (imaging found tumour) affects 5 percent of scans. **Pseudo Cushing** (physiological hypercortisolism) mimics syndrome in depression and alcohol.",
+   "say": "Cushing syndrome is cortisol excess, ACTH dependent or adrenal autonomous. Pituitary ACTH tumour accounts for seventy percent and this is examined in viva examinations for revision. Benign adrenal tumour causes autonomous disease and lung cancer secretion causes severe disease and incidental tumours affect five percent of scans and depression and alcohol mimic syndrome.",
+   "vis": null
+  },
+  {
+   "tx": "**Pituitary adenoma** (ACTH secreting tumour) causes Cushing disease. **Adrenal adenoma** (cortisol secreting tumour) causes autonomous disease. **Small cell lung cancer** (ectopic ACTH) causes aggressive disease. **Iatrogenic steroids** (exogenous glucocorticoids) are the commonest overall cause. **Alcohol and depression** (physiological) cause pseudo Cushing. **Pregnancy hypercortisolism** (placental ACTH) is rare.",
+   "say": "Pituitary tumour causes Cushing disease. Adrenal tumour causes autonomous disease. Small cell lung cancer causes aggressive disease and exogenous steroids are the commonest overall cause and alcohol and depression cause pseudo Cushing and placental ACTH is rare.",
+   "vis": null
+  },
+  {
+   "tx": "ACTH drives **adrenal cortisol production** (steroid synthesis) with hyperplasia. Autonomous tumours secrete cortisol **independent of ACTH**. Cortisol causes **central obesity** (visceral fat), **skin thinning** (striae) and **muscle wasting**. **Insulin resistance** (glucose intolerance) causes diabetes. **Hypokalaemia** (potassium loss) follows mineralocorticoid activity. **Hypertension** (volume expansion) complicates most cases.",
+   "say": "ACTH drives cortisol production with hyperplasia and this is examined in viva examinations for revision. Autonomous tumours secrete independently. Cortisol causes visceral fat and skin thinning and muscle wasting and glucose intolerance causes diabetes and potassium loss follows mineralocorticoid activity and volume expansion complicates most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ACTH or tumour"
+     },
+     {
+      "id": "b",
+      "label": "Cortisol excess"
+     },
+     {
+      "id": "c",
+      "label": "Obesity striae"
+     },
+     {
+      "id": "d",
+      "label": "Diabetes hypertension"
+     },
+     {
+      "id": "e",
+      "label": "Hypokalaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Central obesity** (moon facies, buffalo hump) with **purple striae** (wide skin marks) is classic. **Hirsutism** (male hair pattern) with **amenorrhoea** (absent periods) affects women. **Hypertension** (high pressure) with **diabetes** (high glucose) are systemic features. **Proximal weakness** (thigh wasting) limits stair climbing. **Easy bruising** (skin fragility) is prominent. **Osteoporosis** (bone loss) presents with fractures.",
+   "say": "Moon face and buffalo hump with wide skin marks are classic. Male hair pattern with absent periods affects women. High pressure with high glucose are systemic features and thigh wasting limits stair climbing and easy bruising is prominent and bone loss presents with fractures.",
+   "vis": null
+  },
+  {
+   "tx": "**Twenty four hour urinary free cortisol** (urine cortisol test) screens hypercortisolism. **One milligram dexamethasone suppression** (overnight test) screens Cushing syndrome. **High dose dexamethasone suppression** (pituitary versus adrenal test) distinguishes disease. **ACTH level** (pituitary hormone) classifies dependence. **Adrenal computed tomography** (adrenal scan) localises adrenal tumours. **Pituitary magnetic resonance** (pituitary scan) localises Cushing disease.",
+   "say": "Urine cortisol test screens hypercortisolism. Overnight suppression test screens syndrome and high dose suppression distinguishes disease and aCTH level classifies dependence and adrenal scan localises adrenal tumours and pituitary scan localises Cushing disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Urine free cortisol",
+      "Screen",
+      "Cushing syndrome"
+     ],
+     [
+      "1 mg dexamethasone",
+      "Screen",
+      "Overnight suppression"
+     ],
+     [
+      "High dose dexamethasone",
+      "Classify",
+      "Pituitary versus adrenal"
+     ],
+     [
+      "ACTH level",
+      "Dependence",
+      "High versus low"
+     ],
+     [
+      "Pituitary MRI",
+      "Localise",
+      "Cushing disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transsphenoidal surgery** (nose route resection) is first line for Cushing disease. **Adrenalectomy** (adrenal removal) cures adrenal tumours. **Metyrapone** (steroidynthesis blocker) controls cortisol preoperatively. **Osilodrostat** (CYP11B inhibitor) treats severe disease. **Pasireotide** (somatostatin analogue) treats pituitary disease. **Radiotherapy** (focused radiation) treats residual pituitary tumours.",
+   "say": "Nose route resection is first line for Cushing disease. Adrenal removal cures adrenal tumours and this is examined in viva examinations for revision. Metyrapone blocks synthesis preoperatively and osilodrostat treats severe disease and pasireotide treats pituitary disease and focused radiation treats residual tumours.",
+   "vis": null
+  },
+  {
+   "tx": "**Adrenal incidentaloma** (imaging found tumour) needs hormonal workup with dexamethasone and aldosterone. **Phaeochromocytoma** (adrenal medulla tumour) is excluded with metanephrines. **Adrenalectomy indications** (tumours above 4 cm) guide surgery. **Follow up imaging** (interval scanning) monitors small benign tumours. **Ectopic ACTH** needs lung cancer treatment. **Iatrogenic taper** (steroid withdrawal) prevents adrenal crisis.",
+   "say": "Imaging found tumours need hormonal workup. Medulla tumours are excluded with metanephrines. Tumours above four centimetres guide surgery and interval scanning monitors small benign tumours and lung cancer needs treatment and withdrawal taper prevents crisis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ACTH dependent",
+     "points": [
+      "High ACTH",
+      "Pituitary or ectopic",
+      "High dose suppression in disease",
+      "Surgery first"
+     ]
+    },
+    "right": {
+     "title": "ACTH independent",
+     "points": [
+      "Low ACTH",
+      "Adrenal tumour",
+      "Adrenalectomy curative",
+      "Benign adenoma common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Adrenal crisis** (steroid withdrawal) presents with hypotension and hyperkalaemia. **Infection** (pneumocystis risk) complicates severe hypercortisolism. **Thromboembolism** (venous clots) complicates surgery. **Hyperglycaemia** (steroid diabetes) needs insulin. **Osteoporosis fractures** (vertebral collapse) need calcium and vitamin D. **Psychosis** (steroid psychosis) needs antipsychotics. Each needs complication surveillance.",
+   "say": "Steroid withdrawal presents with low pressure and high potassium. Pneumocystis risk complicates severe disease. Venous clots complicate surgery and steroid diabetes needs insulin and vertebral collapse needs calcium and vitamin D and steroid psychosis needs antipsychotics.",
+   "vis": null
+  },
+  {
+   "tx": "**Cushing disease** remission with transsphenoidal surgery exceeds 80 percent. Adrenal adenoma cure with adrenalectomy exceeds 90 percent. Ectopic ACTH survival depends on lung cancer stage. Untreated Cushing mortality is driven by infection and cardiovascular disease. Incidentaloma malignancy risk below 4 cm is under 2 percent. Lifelong surveillance is needed after pituitary disease.",
+   "say": "Cushing disease remission exceeds eighty percent. Adrenal adenoma cure exceeds ninety percent and this is examined in viva examinations for revision. Ectopic survival depends on lung cancer stage and untreated mortality is driven by infection and heart disease and incidentaloma risk below four centimetres is under two percent and lifelong surveillance is needed.",
+   "vis": null
+  },
+  {
+   "tx": "Endocrine Society 2021 Cushing guidance stresses urinary screening, ACTH classification and surgery first. **Incidentaloma thresholds** (4 cm) guide adrenalectomy. Examination traps include missing iatrogenic steroid history, calling pseudo Cushing syndrome, and skipping hormonal workup in incidentalomas. **Purple striae** (wide marks) versus white marks is a favourite viva distinction.",
+   "say": "Current guidance stresses urinary screening and classification and surgery first. Thresholds above four centimetres guide surgery. Traps include missing steroid history and misreading pseudo Cushing and skipping incidentaloma workup and wide marks versus white marks is a favourite viva distinction.",
+   "vis": null
+  },
+  {
+   "tx": "The **high yield table** gathers screening tests, ACTH classification and surgery thresholds. Urinary screening and 4 cm cutoffs are the most asked points in theory and viva examinations. Focused review of incidentaloma thresholds aids viva responses. Night salivary cortisol confirms Cushing syndrome reliably.",
+   "say": "This table gathers screening tests and classification and surgery thresholds for revision. Urinary screening and cutoffs are the most asked points and wide marks versus white marks is a favourite viva theme.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Topic",
+     "High yield point"
+    ],
+    "rows": [
+     [
+      "Screen test",
+      "Urine free cortisol"
+     ],
+     [
+      "Overnight test",
+      "1 mg dexamethasone"
+     ],
+     [
+      "Cushing disease share",
+      "70 percent"
+     ],
+     [
+      "Dependence test",
+      "ACTH level"
+     ],
+     [
+      "Incidentaloma surgery",
+      "Above 4 cm"
+     ],
+     [
+      "Pituitary surgery",
+      "Transsphenoidal"
+     ],
+     [
+      "Adrenal cure",
+      "Adrenalectomy"
+     ],
+     [
+      "Pseudo clue",
+      "Depression alcohol"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": []
+}

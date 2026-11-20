@@ -44,7 +44,7 @@
     },
     {
       "say": "The bedside Schwartz formula provides an accurate, rapid calculation of pediatric glomerular filtration rate from serum creatinine.",
-      "tx": "Calculate estimated filtration using the validated **Bedside Schwartz formula for pediatric eGFR** across outpatient and inpatient settings. The updated bedside Schwartz equation is: eGFR (in mL/min/1.73m\u00b2) = 0.413 multiplied by Height (in centimeters) divided by Serum Creatinine (in milligrams per deciliter). This formula is formally validated for children aged one to sixteen years utilizing enzymatic, isotope dilution mass spectrometry (IDMS)-traceable creatinine assays.",
+      "tx": "Calculate estimated filtration using the validated **Bedside Schwartz formula for pediatric eGFR** across outpatient and inpatient settings. The updated bedside Schwartz equation is: eGFR (in mL/min/1.73m²) = 0.413 multiplied by Height (in centimeters) divided by Serum Creatinine (in milligrams per deciliter). This formula is formally validated for children aged one to sixteen years utilizing enzymatic, isotope dilution mass spectrometry (IDMS)-traceable creatinine assays.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -75,13 +75,13 @@
     },
     {
       "say": "Standard KDIGO staging classifies chronic kidney disease into five stages based on glomerular filtration rate thresholds.",
-      "tx": "Classify disease severity by applying formal **CKD staging thresholds (KDIGO)** to establish clinical management plans. Pediatric CKD is staged by GFR: Stage 1 (>= 90 mL/min/1.73m\u00b2 with structural kidney damage), Stage 2 (60-89 mL/min/1.73m\u00b2), Stage 3a (45-59 mL/min/1.73m\u00b2), Stage 3b (30-44 mL/min/1.73m\u00b2), Stage 4 (15-29 mL/min/1.73m\u00b2, representing severe reduction), and Stage 5 (< 15 mL/min/1.73m\u00b2, representing kidney failure).",
+      "tx": "Classify disease severity by applying formal **CKD staging thresholds (KDIGO)** to establish clinical management plans. Pediatric CKD is staged by GFR: Stage 1 (>= 90 mL/min/1.73m² with structural kidney damage), Stage 2 (60-89 mL/min/1.73m²), Stage 3a (45-59 mL/min/1.73m²), Stage 3b (30-44 mL/min/1.73m²), Stage 4 (15-29 mL/min/1.73m², representing severe reduction), and Stage 5 (< 15 mL/min/1.73m², representing kidney failure).",
       "vis": {
         "kind": "table",
         "title": "KDIGO Pediatric CKD Staging",
         "cols": [
           "Stage",
-          "eGFR (mL/min/1.73m\u00b2)",
+          "eGFR (mL/min/1.73m²)",
           "Clinical Description",
           "Key Focus"
         ],
@@ -226,7 +226,7 @@
     },
     {
       "say": "Pre-emptive living donor kidney transplantation avoids dialysis and delivers superior neurodevelopmental outcomes.",
-      "tx": "Establish early multidisciplinary planning to achieve the **Pre-emptive kidney transplantation goal** in advanced stages. Pre-emptive living donor kidney transplantation (transplantation performed before the initiation of maintenance dialysis) is the gold standard for pediatric CKD stage 5 (eGFR < 15 mL/min/1.73m\u00b2). Pre-emptive transplantation avoids dialysis-related morbidity, maximizes neurocognitive and linear growth outcomes, and extends long-term allograft survival.",
+      "tx": "Establish early multidisciplinary planning to achieve the **Pre-emptive kidney transplantation goal** in advanced stages. Pre-emptive living donor kidney transplantation (transplantation performed before the initiation of maintenance dialysis) is the gold standard for pediatric CKD stage 5 (eGFR < 15 mL/min/1.73m²). Pre-emptive transplantation avoids dialysis-related morbidity, maximizes neurocognitive and linear growth outcomes, and extends long-term allograft survival.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/ckd-dialysis-transplant-long-case-fig1.webp",
@@ -236,6 +236,51 @@
       },
       "caption": "Comprehensive clinical management of pediatric end-stage renal disease: vascular access, peritoneal dialysis, and transplantation",
       "alt": "Comprehensive clinical management of pediatric end-stage renal disease: vascular access, peritoneal dialysis, and transplantation"
+    },
+    {
+      "tx": "**High-yield for the exam**: Pediatric CKD staging is driven by congenital anomalies in about 50% and hereditary disease in about 20%, not adult diabetes. Bedside Schwartz eGFR equals 0.413 times height in centimeters divided by creatinine. Stage 3a is 45-59, stage 4 is 15-29, and stage 5 is below 15. The ESCAPE trial used blood pressure below the 50th percentile and cut progression risk by 35%. Keep bicarbonate at or above 22 mEq/L.",
+      "say": "High-yield for the exam: Pediatric CKD staging is driven by congenital anomalies in about 50% and hereditary disease in about 20%, not adult diabetes. Bedside Schwartz eGFR equals 0.413 times height in centimeters divided by creatinine. Stage 3a is 45-59, stage 4 is 15-29, and stage 5 is below 15. The ESCAPE trial used blood pressure below the 50th percentile and cut progression risk by 35%. Keep bicarbonate at or above 22 mEq/L.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Top pediatric cause",
+            "CAKUT about 50% of CKD"
+          ],
+          [
+            "Hereditary share",
+            "About 20% of pediatric CKD"
+          ],
+          [
+            "Schwartz constant",
+            "0.413 times height over creatinine"
+          ],
+          [
+            "Stage 3a band",
+            "eGFR 45 to 59"
+          ],
+          [
+            "Stage 4 band",
+            "eGFR 15 to 29"
+          ],
+          [
+            "Stage 5 band",
+            "eGFR below 15"
+          ],
+          [
+            "ESCAPE target",
+            "Blood pressure under 50th percentile"
+          ],
+          [
+            "Bicarbonate floor",
+            "Keep at or above 22 mEq/L"
+          ]
+        ]
+      }
     }
   ]
 }

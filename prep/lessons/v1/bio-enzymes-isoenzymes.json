@@ -10,12 +10,32 @@
    "say": "Isoenzymes catalyse the same reaction with different kinetics and tissue addresses combinatorially. They serve opposite physiologies and leak diagnostically from injured tissues in recognisable proportions worth examining still.",
    "vis": {
     "kind": "table",
-    "cols": ["Isoenzyme system", "Forms and tissues", "Separator used"],
+    "cols": [
+     "Isoenzyme system",
+     "Forms and tissues",
+     "Separator used"
+    ],
     "rows": [
-     ["Lactate dehydrogenase (H/M tetramers)", "LDH1 H4 heart to LDH5 M4 liver/muscle", "Electrophoresis, kinetics with pyruvate"],
-     ["Creatine kinase (M/B dimers)", "MM skeletal, MB cardiac enriched, BB brain", "Immunoassay mass, electrophoresis"],
-     ["Alkaline phosphatase", "Liver, bone, placental, intestinal genes/products", "Heat stability (placental stable), levamisole"],
-     ["Amylase", "Salivary versus pancreatic", "Isoenzyme assay when lipase ambiguous"]
+     [
+      "Lactate dehydrogenase (H/M tetramers)",
+      "LDH1 H4 heart to LDH5 M4 liver/muscle",
+      "Electrophoresis, kinetics with pyruvate"
+     ],
+     [
+      "Creatine kinase (M/B dimers)",
+      "MM skeletal, MB cardiac enriched, BB brain",
+      "Immunoassay mass, electrophoresis"
+     ],
+     [
+      "Alkaline phosphatase",
+      "Liver, bone, placental, intestinal genes/products",
+      "Heat stability (placental stable), levamisole"
+     ],
+     [
+      "Amylase",
+      "Salivary versus pancreatic",
+      "Isoenzyme assay when lipase ambiguous"
+     ]
     ]
    }
   },
@@ -24,8 +44,21 @@
    "say": "LDH tetramers assort heart and muscle subunits into five bands with opposite kinetic favours. Flipped LDH1 above LDH2 flags haemolysis and ineffective erythropoiesis beyond its historic cardiac role today.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "LDH1 (H4, heart type kinetics)", "points": ["Prefers lactate to pyruvate (burns lactate)", "Pyruvate inhibits excess", "Flipped high in haemolysis, MI history"]},
-    "right": {"title": "LDH5 (M4, muscle type kinetics)", "points": ["Prefers pyruvate to lactate", "Liver and skeletal muscle injury raises it", "Hepatitis and muscle necrosis patterns"]
+    "left": {
+     "title": "LDH1 (H4, heart type kinetics)",
+     "points": [
+      "Prefers lactate to pyruvate (burns lactate)",
+      "Pyruvate inhibits excess",
+      "Flipped high in haemolysis, MI history"
+     ]
+    },
+    "right": {
+     "title": "LDH5 (M4, muscle type kinetics)",
+     "points": [
+      "Prefers pyruvate to lactate",
+      "Liver and skeletal muscle injury raises it",
+      "Hepatitis and muscle necrosis patterns"
+     ]
     }
    }
   },
@@ -36,11 +69,29 @@
     "kind": "flow",
     "title": "CK timing versus troponin (next lesson)",
     "nodes": [
-     {"id": "ck", "label": "CK-MB up 4 to 8 h, peak 24 h, down 3 days"},
-     {"id": "trop", "label": "Troponin up similar, stays 7 to 14 days"},
-     {"id": "use", "label": "CK-MB reinfarction timing niche survives"}
+     {
+      "id": "ck",
+      "label": "CK-MB up 4 to 8 h, peak 24 h, down 3 days"
+     },
+     {
+      "id": "trop",
+      "label": "Troponin up similar, stays 7 to 14 days"
+     },
+     {
+      "id": "use",
+      "label": "CK-MB reinfarction timing niche survives"
+     }
     ],
-    "edges": [["ck", "trop"], ["trop", "use"]]
+    "edges": [
+     [
+      "ck",
+      "trop"
+     ],
+     [
+      "trop",
+      "use"
+     ]
+    ]
    }
   },
   {
@@ -53,12 +104,27 @@
    "say": "Hexokinase isoenzymes unify prior modules from housekeeping to glucokinase sensing genetics. Pseudocholinesterase dibucaine numbers quantify succinylcholine apnoea pharmacogenetics numerically for anaesthesia examinations across specialties.",
    "vis": {
     "kind": "table",
-    "cols": ["Isoform pair", "Kinetic or clinical split"],
+    "cols": [
+     "Isoform pair",
+     "Kinetic or clinical split"
+    ],
     "rows": [
-     ["Hexokinase I vs IV (glucokinase)", "Low Km housekeeping vs high Km sensing (MODY2)"],
-     ["Pyruvate kinase R vs L (same gene promoters)", "Red cell haemolysis vs liver phosphorylation control"],
-     ["Acetyl vs butyryl (pseudo) cholinesterase", "Synapse versus plasma; dibucaine number and apnoea"],
-     ["CYP isoforms (3A4, 2D6, 2C9 preview)", "Drug metabolism pharmacogenetics ahead"]
+     [
+      "Hexokinase I vs IV (glucokinase)",
+      "Low Km housekeeping vs high Km sensing (MODY2)"
+     ],
+     [
+      "Pyruvate kinase R vs L (same gene promoters)",
+      "Red cell haemolysis vs liver phosphorylation control"
+     ],
+     [
+      "Acetyl vs butyryl (pseudo) cholinesterase",
+      "Synapse versus plasma; dibucaine number and apnoea"
+     ],
+     [
+      "CYP isoforms (3A4, 2D6, 2C9 preview)",
+      "Drug metabolism pharmacogenetics ahead"
+     ]
     ]
    }
   },
@@ -67,9 +133,67 @@
    "say": "Mass immunoassays replace electrophoresis while interpretation logic transfers intact to novel biomarkers. The next lessons apply that logic organ by organ, heart and muscle first where timing decides diagnoses.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "Old electrophoretic logic", "points": ["Bands by charge and heat", "Patterns flipped and fractionated", "Still definitive for macro enzymes"]},
-    "right": {"title": "Modern mass immunoassay logic", "points": ["Antibody specific mass numbers", "CK-MB mass, bone ALP, troponins", "Same tissue and timing reasoning"]
+    "left": {
+     "title": "Old electrophoretic logic",
+     "points": [
+      "Bands by charge and heat",
+      "Patterns flipped and fractionated",
+      "Still definitive for macro enzymes"
+     ]
+    },
+    "right": {
+     "title": "Modern mass immunoassay logic",
+     "points": [
+      "Antibody specific mass numbers",
+      "CK-MB mass, bone ALP, troponins",
+      "Same tissue and timing reasoning"
+     ]
     }
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Isoenzymes are physically distinct enzyme forms catalyzing the same chemical reaction with differing kinetic properties and tissue distributions. Serum lactate dehydrogenase flips from normal LDH-2 dominance to LDH-1 (H4) dominance following acute myocardial infarction. Creatine kinase-MB rises within 4 to 6 hours and normalizes within 48 to 72 hours, proving ideal for detecting early reinfarction, while cardiac troponins remain the definitive diagnostic gold standard.",
+   "say": "High-yield for the exam: Isoenzymes are physically distinct enzyme forms catalyzing the same chemical reaction with differing kinetic properties and tissue distributions. Serum lactate dehydrogenase flips from normal LDH-2 dominance to LDH-1 H4 dominance following acute myocardial infarction. Creatine kinase-MB rises within 4 to 6 hours and normalizes within 48 to 72 hours, proving ideal for detecting early reinfarction, while cardiac troponins remain the definitive diagnostic gold standard.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Isoenzyme definition",
+      "Different primary amino acid sequences catalyzing identical reaction in different tissues"
+     ],
+     [
+      "LDH subunit composition",
+      "Tetrameric assembly composed of heart H and muscle M polypeptide subunits"
+     ],
+     [
+      "Flipped LDH pattern",
+      "LDH-1 exceeding LDH-2 indicates myocardial necrosis or intravascular haemolysis"
+     ],
+     [
+      "CK-MB kinetics",
+      "Rises in 4-6 hours, peaks at 24, normalizes within 72 hours"
+     ],
+     [
+      "CK-MB clinical niche",
+      "Detects early reinfarction due to rapid return to baseline"
+     ],
+     [
+      "Cardiac troponin I and T",
+      "Gold standard biomarkers of myocardial injury, remaining elevated for 7-14 days"
+     ],
+     [
+      "Alkaline phosphatase bone",
+      "Heat-labile fraction differentiated from heat-stable placental or hepatic ALP fractions"
+     ],
+     [
+      "Amylase versus lipase",
+      "Lipase provides greater sensitivity and persistence than amylase in acute pancreatitis"
+     ]
+    ]
    }
   }
  ],

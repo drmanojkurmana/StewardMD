@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "module": "sid-uti",
+ "title": "Urinary tract infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Urinary tract infection (UTI)** is a symptomatic infection anywhere from urethra to kidney; bacteria in urine without symptoms is **asymptomatic bacteriuria**, not UTI. Up to **80 percent of women** have at least one UTI in life, and **Escherichia coli** causes **75 to 90 percent** of acute cystitis. About **20 to 30 percent** of women develop recurrences, so repeated episodes are common.",
+   "say": "Urinary tract infection is a symptomatic infection anywhere from the urethra to the kidney. Bacteria in urine without symptoms form asymptomatic bacteriuria, not urinary tract infection. Up to eighty percent of women have at least one urinary infection in their lifetime. Escherichia coli causes seventy five to ninety percent of acute cystitis cases. About twenty to thirty percent of women develop recurrent episodes, so repeated infection is common.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Frequency",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Cystitis",
+      "Bladder only",
+      "Short course"
+     ],
+     [
+      "Pyelonephritis",
+      "Fever plus flank pain",
+      "Tissue levels needed"
+     ],
+     [
+      "Asymptomatic",
+      "No symptoms",
+      "Do not treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ascending infection** starts with gut flora colonising the vaginal introitus and periurethral area, then passes the urethra into the bladder and sometimes up the ureter. A **short female urethra**, intercourse, spermicide use and menopausal change raise entry. Catheters, stones, obstruction, diabetes and pregnancy promote retention. **Staphylococcus saprophyticus** affects younger women, while blood spread accounts for **under 2 percent** of cases.",
+   "say": "Colonisation of the vaginal introitus and periurethral area occurs first. The organisms then pass the urethra into the bladder and sometimes ascend the ureter. A short female urethra, intercourse, spermicide use and menopausal change all increase entry. Catheters, stones, obstruction, diabetes and pregnancy cause retention. Staphylococcus saprophyticus appears in younger women, while bloodborne spread causes under two percent of cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Barrier",
+     "Effect",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Short urethra",
+      "Easy ascent",
+      "Young women"
+     ],
+     [
+      "Retention",
+      "Stasis grows bacteria",
+      "Stones, catheters"
+     ],
+     [
+      "Diabetes",
+      "Higher risk",
+      "Emphysematous disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once inside the bladder, **uropathogenic Escherichia coli** anchors with **type 1 pili** to bladder uroepithelium; strains with **P fimbriae** reach the renal epithelium and drive pyelonephritis and bloodstream invasion. **Normal voiding** flushes organisms away, while stasis, foreign bodies and biofilm let them persist. Urine flowing downward normally protects the kidney, so blocked drainage reverses that protection and favours ascent of infection.",
+   "say": "Inside the bladder, uropathogenic Escherichia coli binds with type one pili to the bladder uroepithelium. Strains with P fimbriae reach the renal epithelium and cause pyelonephritis and bloodstream invasion. Normal voiding removes organisms away, while stasis, foreign bodies and biofilm let them persist. Urine flowing downward serves to protect the kidney, so blocked drainage reduces that protection and increases ascent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Colonisation"
+     },
+     {
+      "id": "b",
+      "label": "Ascent"
+     },
+     {
+      "id": "c",
+      "label": "Bladder"
+     },
+     {
+      "id": "d",
+      "label": "Kidney"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cystitis** causes dysuria, frequency and urgency with suprapubic pain, while fever, rigors and flank pain signal infection beyond the bladder. **Pyelonephritis** adds fever, vomiting and costovertebral angle tenderness. **Acute bacterial prostatitis** brings perineal and pelvic pain with a tender prostate and retention. Cloudy or smelly urine alone never proves infection; localising or systemic signs must be present.",
+   "say": "Cystitis causes dysuria, frequency and urgency with suprapubic pain. Fever, rigors and flank pain indicate infection beyond the bladder. Pyelonephritis presents with fever, vomiting and costovertebral angle tenderness. Acute bacterial prostatitis causes perineal and pelvic pain with a tender prostate and retention. Cloudy or smelly urine alone does not prove infection, so localising or systemic signs must be present.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cystitis",
+     "points": [
+      "Dysuria, frequency, urgency",
+      "No fever",
+      "Suprapubic pain"
+     ]
+    },
+    "right": {
+     "title": "Pyelonephritis",
+     "points": [
+      "Fever, rigors",
+      "Flank pain",
+      "Vomiting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **gold standard** is **midstream urine culture with susceptibility**, taken before antibiotics in every complicated case; typical cystitis in a non-pregnant woman needs none. **Dipstick** nitrite and leukocyte esterase serve mainly to exclude infection. Classic growth needs **10 to the power 5** colonies per millilitre, while catheter infection uses **10 to the power 3**. Add blood cultures when febrile and scan for obstruction if no response in **48 to 72 hours**.",
+   "say": "The gold standard is midstream urine culture with susceptibility, taken before antibiotics in complicated cases. Typical cystitis in a non-pregnant woman needs no culture at all. Dipstick nitrite and leukocyte esterase serve mainly to exclude infection. Classic growth needs ten to the power five colonies per millilitre, while catheter infection takes ten to the power three. Blood cultures follow when febrile, and imaging checks for obstruction if there is no response in forty eight to seventy two hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finds",
+     "When"
+    ],
+    "rows": [
+     [
+      "Culture",
+      "Species",
+      "Complicated cases"
+     ],
+     [
+      "Dipstick",
+      "Nitrites",
+      "To exclude"
+     ],
+     [
+      "Blood culture",
+      "Bacteraemia",
+      "Febrile patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Afebrile cystitis gets **nitrofurantoin 100 mg twice daily for 5 days** or single-dose **fosfomycin 3 g**; co-trimoxazole suits only susceptible strains. Complicated disease needs culture first, then **ceftriaxone 1 to 2 g daily** or **piperacillin-tazobactam 4.5 g 6 to 8-hourly**. Suspected ESBL or septic shock favours **ertapenem 1 g daily** or **meropenem 1 g 8-hourly**; **amikacin 15 mg per kg daily** is an alternative.",
+   "say": "Afebrile cystitis is treated with nitrofurantoin one hundred milligrams twice daily for five days, or with fosfomycin three grams as a single dose. Co trimoxazole serves only for susceptible strains. Complicated disease requires culture first, then ceftriaxone one to two grams daily. Piperacillin tazobactam four point five grams six to eight hourly follows for sicker patients. Suspected ESBL or septic shock requires ertapenem one gram daily or meropenem one gram eight hourly. Amikacin fifteen milligrams per kilogram daily serves as an alternative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Drug",
+     "Dose"
+    ],
+    "rows": [
+     [
+      "Cystitis",
+      "Nitrofurantoin",
+      "100 mg BD 5 days"
+     ],
+     [
+      "Alternative",
+      "Fosfomycin",
+      "3 g once"
+     ],
+     [
+      "Complicated",
+      "Ceftriaxone",
+      "1 to 2 g daily"
+     ],
+     [
+      "ESBL risk",
+      "Meropenem",
+      "1 g 8-hourly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "IDSA 2025 keeps complicated UTI short: **7 days** for most, **5 to 7 days** for fluoroquinolones, counted from the first effective dose. Oral switch adds **ciprofloxacin 500 to 750 mg twice daily for 5 to 7 days**, **levofloxacin 750 mg daily**, **co-trimoxazole 160 over 800 mg twice daily**, **amoxicillin-clavulanate 875 over 125 mg** or **cefpodoxime 200 to 400 mg twice daily**. Male prostatitis still needs **10 to 14 days**, with ICMR advising at least **21 days** for acute prostatitis.",
+   "say": "IDSA twenty twenty five allows seven days for most complicated urinary infections, and five to seven days with fluoroquinolones, counted from the first effective dose. Oral switch to ciprofloxacin five hundred to seven hundred fifty milligrams twice daily follows once improving. Levofloxacin seven hundred fifty milligrams daily serves as an oral switch. Co trimoxazole one hundred sixty over eight hundred milligrams twice daily serves as an oral switch. Amoxicillin clavulanate eight hundred seventy five over one hundred twenty five milligrams serves as an oral switch. Cefpodoxime two hundred to four hundred milligrams twice daily serves as an oral switch. Male prostatitis still requires ten to fourteen days, while ICMR requires at least twenty one days for acute prostatitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Switch",
+     "Dose",
+     "Span"
+    ],
+    "rows": [
+     [
+      "Ciprofloxacin",
+      "500 to 750 mg BD",
+      "5 to 7 days"
+     ],
+     [
+      "Levofloxacin",
+      "750 mg daily",
+      "5 to 7 days"
+     ],
+     [
+      "Prostatitis",
+      "Prolonged course",
+      "10 to 14 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most patients respond quickly, but tissue-invasive disease risks **sepsis with acute kidney injury**, infected obstruction and abscess. **Emphysematous pyelonephritis**, gas in the kidney, occurs almost only in poorly controlled diabetes. Untreated asymptomatic bacteriuria in pregnancy raises pyelonephritis and preterm birth, and failure to improve in **48 to 72 hours** points to an undrained source.",
+   "say": "Many patients improve quickly, but tissue invasive disease can cause sepsis with acute kidney injury, infected obstruction and abscess. Emphysematous pyelonephritis with gas in the kidney occurs almost only in poorly controlled diabetes. Untreated asymptomatic bacteriuria in pregnancy increases pyelonephritis and preterm birth. Failure to improve in forty eight to seventy two hours points to an undrained source.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Danger",
+     "Who",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Sepsis",
+      "Any complicated case",
+      "Resuscitate early"
+     ],
+     [
+      "Emphysematous",
+      "Poor diabetes control",
+      "Urgent imaging"
+     ],
+     [
+      "Abscess",
+      "No response at 72 hours",
+      "Drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Do not treat asymptomatic bacteriuria** outside pregnancy and pre-procedure screening. **Nitrofurantoin and fosfomycin** never treat febrile or renal disease because kidney levels fail. Empirical **ciprofloxacin** without susceptibility data fails often where resistance runs high. Antibiotics alone **never salvage an obstructed infected kidney**; relief of obstruction is mandatory.",
+   "say": "Asymptomatic bacteriuria does not require treatment outside pregnancy and before urological procedures that breach mucosa. Nitrofurantoin and fosfomycin never treat febrile or renal disease because kidney levels fail. Empirical ciprofloxacin without susceptibility data fails often where resistance runs high. Antibiotics alone never salvage an obstructed infected kidney, so relief of obstruction is mandatory.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Why",
+     "Do"
+    ],
+    "rows": [
+     [
+      "Treat ASB",
+      "No benefit",
+      "Only pregnancy"
+     ],
+     [
+      "Nitro for fever",
+      "Poor kidney level",
+      "Bladder only"
+     ],
+     [
+      "Antibiotics alone",
+      "Obstruction persists",
+      "Relief first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **nitrofurantoin 100 mg twice daily for 5 days** treats cystitis; **fosfomycin 3 g single dose** is the alternative. **Culture first** in complicated disease; **piperacillin-tazobactam 4.5 g** or **meropenem** covers ESBL risk. Most complicated courses run **7 days**, and **10 to the power 5** with symptoms means true cystitis.",
+   "say": "For the exam, cystitis is treated with nitrofurantoin one hundred milligrams twice daily for five days. Fosfomycin three grams as a single dose is the alternative. Culture first in complicated disease, with piperacillin tazobactam four point five grams or meropenem covering ESBL risk. Most complicated courses run seven days. Ten to the power five colonies with symptoms indicate true cystitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Nitrofurantoin",
+      "100 mg BD 5 days",
+      "Cystitis dose"
+     ],
+     [
+      "Fosfomycin",
+      "3 g single",
+      "Cystitis option"
+     ],
+     [
+      "Ceftriaxone",
+      "1 to 2 g daily",
+      "Complicated dose"
+     ],
+     [
+      "Pip-taz",
+      "4.5 g q6 to 8h",
+      "Pyelonephritis"
+     ],
+     [
+      "Meropenem",
+      "1 g q8h",
+      "Shock, ESBL"
+     ],
+     [
+      "7 days",
+      "Most complicated",
+      "Duration"
+     ],
+     [
+      "10 to power 5",
+      "True cystitis",
+      "Threshold"
+     ],
+     [
+      "Culture first",
+      "Before antibiotics",
+      "Rule"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

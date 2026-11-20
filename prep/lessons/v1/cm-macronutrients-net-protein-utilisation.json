@@ -15,11 +15,19 @@
     "kind": "compare",
     "left": {
      "title": "Complete reference proteins (egg, milk)",
-     "points": ["Contains all 9 essential amino acids", "Proportions match human tissue synthesis", "High digestibility and nitrogen retention"]
+     "points": [
+      "Contains all 9 essential amino acids",
+      "Proportions match human tissue synthesis",
+      "High digestibility and nitrogen retention"
+     ]
     },
     "right": {
      "title": "Incomplete plant proteins (cereals, pulses)",
-     "points": ["Lacks one or more essential amino acids", "Lower digestibility due to phytates and fibre", "Requires mutual dietary supplementation"]
+     "points": [
+      "Lacks one or more essential amino acids",
+      "Lower digestibility due to phytates and fibre",
+      "Requires mutual dietary supplementation"
+     ]
     }
    }
   },
@@ -40,14 +48,42 @@
    "say": "Biological value measures the percentage of absorbed nitrogen that the body retains for repair. Whole egg sets the international gold standard with a biological value near one hundred.",
    "vis": {
     "kind": "table",
-    "cols": ["Food protein source", "Biological Value (BV)", "Digestibility Coefficient (%)"],
+    "cols": [
+     "Food protein source",
+     "Biological Value (BV)",
+     "Digestibility Coefficient (%)"
+    ],
     "rows": [
-     ["Whole hen egg", "96 to 100", "97 to 100"],
-     ["Cow milk", "84 to 90", "95 to 97"],
-     ["Fish and meat", "76 to 80", "94 to 97"],
-     ["Soybean meal", "74 to 75", "85 to 90"],
-     ["Rice protein", "68 to 70", "80 to 85"],
-     ["Wheat protein", "60 to 65", "85 to 90"]
+     [
+      "Whole hen egg",
+      "96 to 100",
+      "97 to 100"
+     ],
+     [
+      "Cow milk",
+      "84 to 90",
+      "95 to 97"
+     ],
+     [
+      "Fish and meat",
+      "76 to 80",
+      "94 to 97"
+     ],
+     [
+      "Soybean meal",
+      "74 to 75",
+      "85 to 90"
+     ],
+     [
+      "Rice protein",
+      "68 to 70",
+      "80 to 85"
+     ],
+     [
+      "Wheat protein",
+      "60 to 65",
+      "85 to 90"
+     ]
     ]
    }
   },
@@ -58,12 +94,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Ingested food nitrogen intake"},
-     {"id": "b", "label": "Faecal nitrogen loss subtracted"},
-     {"id": "c", "label": "Absorbed nitrogen / Ingested nitrogen x 100"},
-     {"id": "d", "label": "Digestibility coefficient (DC)"}
+     {
+      "id": "a",
+      "label": "Ingested food nitrogen intake"
+     },
+     {
+      "id": "b",
+      "label": "Faecal nitrogen loss subtracted"
+     },
+     {
+      "id": "c",
+      "label": "Absorbed nitrogen / Ingested nitrogen x 100"
+     },
+     {
+      "id": "d",
+      "label": "Digestibility coefficient (DC)"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -73,12 +134,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Biological value (nitrogen retention)"},
-     {"id": "b", "label": "Digestibility coefficient (nitrogen absorption)"},
-     {"id": "c", "label": "Net Protein Utilisation = (BV x DC) / 100"},
-     {"id": "d", "label": "Percentage of eaten protein retained by body"}
+     {
+      "id": "a",
+      "label": "Biological value (nitrogen retention)"
+     },
+     {
+      "id": "b",
+      "label": "Digestibility coefficient (nitrogen absorption)"
+     },
+     {
+      "id": "c",
+      "label": "Net Protein Utilisation = (BV x DC) / 100"
+     },
+     {
+      "id": "d",
+      "label": "Percentage of eaten protein retained by body"
+     }
     ],
-    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -100,11 +186,19 @@
     "kind": "compare",
     "left": {
      "title": "Amino acid chemical score",
-     "points": ["(mg of amino acid in 1 g test protein / mg in reference) x 100", "Identifies chemical amino acid deficits", "Does not account for digestive losses in the gut"]
+     "points": [
+      "(mg of amino acid in 1 g test protein / mg in reference) x 100",
+      "Identifies chemical amino acid deficits",
+      "Does not account for digestive losses in the gut"
+     ]
     },
     "right": {
      "title": "PDCAAS (Digestibility corrected)",
-     "points": ["Amino acid score multiplied by faecal digestibility", "Modern regulatory standard for nutrition labeling", "Truncated at a maximum score of 1.0"]
+     "points": [
+      "Amino acid score multiplied by faecal digestibility",
+      "Modern regulatory standard for nutrition labeling",
+      "Truncated at a maximum score of 1.0"
+     ]
     }
    }
   },
@@ -114,13 +208,37 @@
    "say": "The limiting amino acid is the essential amino acid present in the smallest amount relative to need. In wheat and rice, lysine is limiting; in lentils and pulses, methionine is limiting.",
    "vis": {
     "kind": "table",
-    "cols": ["Staple dietary food", "Primary limiting amino acid", "Secondary limiting amino acid"],
+    "cols": [
+     "Staple dietary food",
+     "Primary limiting amino acid",
+     "Secondary limiting amino acid"
+    ],
     "rows": [
-     ["Wheat and rice cereals", "Lysine (severely deficient)", "Threonine"],
-     ["Maize (corn)", "Lysine and Tryptophan", "Methionine"],
-     ["Pulses, lentils and beans", "Methionine and Cysteine", "Tryptophan"],
-     ["Soybean meal", "Methionine", "Threonine"],
-     ["Groundnut (peanut)", "Methionine and Lysine", "Threonine"]
+     [
+      "Wheat and rice cereals",
+      "Lysine (severely deficient)",
+      "Threonine"
+     ],
+     [
+      "Maize (corn)",
+      "Lysine and Tryptophan",
+      "Methionine"
+     ],
+     [
+      "Pulses, lentils and beans",
+      "Methionine and Cysteine",
+      "Tryptophan"
+     ],
+     [
+      "Soybean meal",
+      "Methionine",
+      "Threonine"
+     ],
+     [
+      "Groundnut (peanut)",
+      "Methionine and Lysine",
+      "Threonine"
+     ]
     ]
    }
   },
@@ -131,12 +249,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Cereals: Rich in methionine, poor in lysine"},
-     {"id": "b", "label": "Pulses: Rich in lysine, poor in methionine"},
-     {"id": "c", "label": "Traditional 4:1 cereal-pulse combination"},
-     {"id": "d", "label": "Near-complete protein equivalent to milk"}
+     {
+      "id": "a",
+      "label": "Cereals: Rich in methionine, poor in lysine"
+     },
+     {
+      "id": "b",
+      "label": "Pulses: Rich in lysine, poor in methionine"
+     },
+     {
+      "id": "c",
+      "label": "Traditional 4:1 cereal-pulse combination"
+     },
+     {
+      "id": "d",
+      "label": "Near-complete protein equivalent to milk"
+     }
     ],
-    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -145,12 +288,32 @@
    "say": "Protein should supply ten to fifteen percent of your daily calories. Growing children and pregnant mothers require the higher end of this range to build new muscle and organs.",
    "vis": {
     "kind": "table",
-    "cols": ["Population group", "Recommended PE percentage", "Dietary implication"],
+    "cols": [
+     "Population group",
+     "Recommended PE percentage",
+     "Dietary implication"
+    ],
     "rows": [
-     ["Healthy adult man / woman", "10 to 12 percent of total kcal", "Easily met by balanced cereal-pulse diet"],
-     ["Infants and young children", "10 to 12 percent of total kcal", "Demands nutrient-dense complementary foods"],
-     ["Pregnant and lactating mothers", "12 to 15 percent of total kcal", "Requires extra pulse, milk or egg portions"],
-     ["Severe acute malnutrition recovery", "12 to 15 percent of total kcal", "Therapeutic feeds (F-75, F-100, RUTF)"]
+     [
+      "Healthy adult man / woman",
+      "10 to 12 percent of total kcal",
+      "Easily met by balanced cereal-pulse diet"
+     ],
+     [
+      "Infants and young children",
+      "10 to 12 percent of total kcal",
+      "Demands nutrient-dense complementary foods"
+     ],
+     [
+      "Pregnant and lactating mothers",
+      "12 to 15 percent of total kcal",
+      "Requires extra pulse, milk or egg portions"
+     ],
+     [
+      "Severe acute malnutrition recovery",
+      "12 to 15 percent of total kcal",
+      "Therapeutic feeds (F-75, F-100, RUTF)"
+     ]
     ]
    }
   },
@@ -161,12 +324,82 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Primary school child: 450 kcal + 12g protein"},
-     {"id": "b", "label": "Upper primary child: 700 kcal + 20g protein"},
-     {"id": "c", "label": "Use of sprouted pulses, millets and eggs"},
-     {"id": "d", "label": "Prevention of stunting, wasting and anaemia"}
+     {
+      "id": "a",
+      "label": "Primary school child: 450 kcal + 12g protein"
+     },
+     {
+      "id": "b",
+      "label": "Upper primary child: 700 kcal + 20g protein"
+     },
+     {
+      "id": "c",
+      "label": "Use of sprouted pulses, millets and eggs"
+     },
+     {
+      "id": "d",
+      "label": "Prevention of stunting, wasting and anaemia"
+     }
     ],
-    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Net protein utilisation equals biological value multiplied by digestibility coefficient divided by 100. Egg is the reference protein, with biological value near 100 and net utilisation about 90 to 95. Lysine limits cereals, while methionine limits pulses. Mixing cereal and pulse in about four to one ratio achieves mutual supplementation.",
+   "say": "Net protein utilisation equals biological value multiplied by digestibility coefficient divided by 100. Egg is the reference protein, with biological value near 100 and net utilisation about 90 to 95. Lysine limits cereals, while methionine limits pulses. Mixing cereal and pulse in about four to one ratio achieves mutual supplementation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Biological value definition",
+      "Percentage absorbed nitrogen retained by body"
+     ],
+     [
+      "Reference protein",
+      "Whole egg, biological value 96 to 100"
+     ],
+     [
+      "Net protein utilisation formula",
+      "Biological value times digestibility divided by 100"
+     ],
+     [
+      "Egg net utilisation",
+      "About 90 to 95 percent retained"
+     ],
+     [
+      "Cereal limiting amino acid",
+      "Lysine limits wheat, rice and maize"
+     ],
+     [
+      "Pulse limiting amino acid",
+      "Methionine and cysteine limit pulses"
+     ],
+     [
+      "Mutual supplementation ratio",
+      "Cereal to pulse about four to one"
+     ],
+     [
+      "Protein energy percentage",
+      "Adults need 10 to 15 percent energy"
+     ]
+    ]
    }
   }
  ],

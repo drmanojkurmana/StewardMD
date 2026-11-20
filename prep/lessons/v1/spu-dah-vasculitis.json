@@ -1,0 +1,342 @@
+{
+ "v": 1,
+ "module": "spu-dah-vasculitis",
+ "subject": "ss-pulmonology",
+ "title": "Diffuse alveolar haemorrhage and pulmonary vasculitis",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Pulmonary capillaritis** is neutrophilic small vessel injury of alveolar septa with leukocytoclasis and fibrinoid necrosis that floods alveoli with blood. **ANCA** vasculitides dominate through microscopic polyangiitis and granulomatosis with polyangiitis, alongside anti GBM disease, lupus, IgA vasculitis, antiphospholipid syndrome, and drugs such as **propylthiouracil** and **hydralazine**.",
+   "say": "Capillaritis is neutrophilic injury of alveolar capillaries in most cases worldwide. ANCA vasculitides cause most cases overall in reported series. Anti GBM disease and drug triggers also cause disease frequently.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Hallmark",
+     "Cause direction"
+    ],
+    "rows": [
+     [
+      "Capillaritis",
+      "Neutrophils with fibrinoid necrosis",
+      "ANCA vasculitis, anti GBM"
+     ],
+     [
+      "Bland haemorrhage",
+      "Bleeding without inflammation",
+      "Mitral disease, coagulopathy"
+     ],
+     [
+      "Damage with bleed",
+      "Capillary injury plus infection or drugs",
+      "Diffuse alveolar damage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diffuse alveolar haemorrhage** reflects basement membrane disruption with red cells flooding alveolar spaces through three broad mechanisms. Capillaritis brings immune inflammation, bland haemorrhage bleeds without inflammation as in coagulopathy or mitral stenosis, and diffuse alveolar damage adds haemorrhage to infection, drugs or toxins in critically ill patients.",
+   "say": "Haemorrhage floods alveoli through three broad mechanisms described in practice. Capillaritis involves inflammation of lung vessels in affected patients. Bland bleeding lacks inflammation and damage adds toxins daily.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Capillaritis",
+     "points": [
+      "Neutrophilic necrosis",
+      "ANCA or anti GBM linked",
+      "Immunosuppression required",
+      "Renal disease often coexists"
+     ]
+    },
+    "right": {
+     "title": "Bland haemorrhage",
+     "points": [
+      "No vessel inflammation",
+      "Mitral stenosis or clotting failure",
+      "Fix pressure or clotting",
+      "No immunosuppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The classic clinical triad pairs **haemoptysis** with falling haemoglobin and diffuse ground glass infiltrates on imaging. Haemoptysis is absent in a substantial minority, so absent coughing of blood must not exclude the diagnosis, and anaemia with bilateral infiltrates should already trigger an autoimmune workup urgently in the ward.",
+   "say": "Haemoptysis, falling haemoglobin and infiltrates form the classic triad in practice. Many patients have no haemoptysis at presentation entirely in series. Anaemia with infiltrates requires urgent testing in affected patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triad member",
+     "How it shows",
+     "Caution"
+    ],
+    "rows": [
+     [
+      "Haemoptysis",
+      "Coughing blood varying in amount",
+      "Absent in a minority"
+     ],
+     [
+      "Falling haemoglobin",
+      "Anaemia without other bleed",
+      "Tracks alveolar loss"
+     ],
+     [
+      "Ground glass change",
+      "Bilateral infiltrates",
+      "Mimics infection or oedema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sequential **bronchoalveolar lavage** showing progressively bloodier aliquots confirms alveolar haemorrhage even without reported haemoptysis. **Haemosiderin laden macrophages** prove bleeding over some duration rather than purely acute events, while **surgical lung biopsy** settles unclear cases and small transbronchial samples usually prove inadequate for capillaritis.",
+   "say": "Serial lavage is increasingly bloody in active disease cases seen. Iron laden macrophages prove older bleeding episodes clearly in smokers. Surgical biopsy confirms the diagnosis in unclear cases seen in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect alveolar bleed"
+     },
+     {
+      "id": "b",
+      "label": "Serial BAL aliquots"
+     },
+     {
+      "id": "c",
+      "label": "Bloodier each time"
+     },
+     {
+      "id": "d",
+      "label": "Haemosiderin confirms age"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Urgent serology includes **ANCA** with myeloperoxidase and proteinase **3** specificity, **anti GBM antibody**, **ANA** with dsDNA, complement levels and antiphospholipid antibodies. **Urinalysis** with microscopy plus renal function screens every patient for glomerulonephritis, because a pulmonary renal syndrome raises urgency and changes the whole treatment plan immediately.",
+   "say": "Serology tests ANCA, anti GBM and lupus markers together in practice. Urine and kidney tests screen every patient with haemorrhage. A renal syndrome greatly affects urgency and therapy for patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Target",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "ANCA MPO and PR3",
+      "Microscopic polyangiitis, GPA",
+      "Guides immunosuppression"
+     ],
+     [
+      "Anti GBM",
+      "Goodpasture disease",
+      "Plasma exchange decision"
+     ],
+     [
+      "ANA and complement",
+      "Lupus disease",
+      "Different therapy"
+     ],
+     [
+      "Urinalysis",
+      "Glomerulonephritis",
+      "Pulmonary renal syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measured transfer climbs sharply while the lungs bleed because inhaled carbon monoxide is avidly absorbed by intra alveolar blood. A raised **DLCO** or **KCO** with infiltrates and anaemia therefore supports alveolar bleeding, while falling transfer suits fibrotic parenchymal disease instead.",
+   "say": "Gas transfer rises during active alveolar bleeding episodes in patients. Blood avidly absorbs inhaled carbon monoxide inside alveoli daily. A raised transfer supports haemorrhage over fibrosis in practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Raised transfer",
+     "points": [
+      "Active alveolar bleed",
+      "Blood absorbs carbon monoxide",
+      "Anaemia with infiltrates",
+      "Supports haemorrhage"
+     ]
+    },
+    "right": {
+     "title": "Falling transfer",
+     "points": [
+      "Fibrosis or emphysema",
+      "Capillary loss or destruction",
+      "Smoking related disease",
+      "Argues against bleed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Treatment starts with urgent pulsed **corticosteroids** for immune mediated haemorrhage, followed by **cyclophosphamide** or **rituximab** induction for ANCA associated capillaritis. **Plasma exchange** serves anti GBM disease and severe refractory alveolar bleeding with renal involvement, while oxygen, transfusion, clotting correction and ventilation support failing lungs.",
+   "say": "Pulsed steroids come first for immune haemorrhage cases in practice. Cyclophosphamide or rituximab causes remission in ANCA disease directly. Plasma exchange helps anti GBM disease in practice daily for patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Immune haemorrhage"
+     },
+     {
+      "id": "b",
+      "label": "Pulsed corticosteroids"
+     },
+     {
+      "id": "c",
+      "label": "Cyclophosphamide or rituximab"
+     },
+     {
+      "id": "d",
+      "label": "Maintenance and watch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug triggers deserve direct questioning since **propylthiouracil** and **hydralazine** can provoke ANCA vasculitis with pulmonary haemorrhage. Stopping the trigger forms part of therapy, and maintenance immunosuppression needs monitoring for relapse plus opportunistic infection, usually through combined respiratory, rheumatology and nephrology care.",
+   "say": "Drug history can reveal the underlying trigger in many cases presenting. Propylthiouracil and hydralazine cause disease in reported cases. Combined specialty care guides maintenance therapy afterwards for patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trigger",
+     "Action",
+     "Follow up"
+    ],
+    "rows": [
+     [
+      "Propylthiouracil",
+      "Stop drug",
+      "Watch for relapse"
+     ],
+     [
+      "Hydralazine",
+      "Stop drug",
+      "Repeat serology"
+     ],
+     [
+      "Any ANCA disease",
+      "Maintenance therapy",
+      "Infection prophylaxis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentials without **capillaritis** include haemorrhagic infective pneumonia from aspergillosis, leptospirosis or severe influenza, pulmonary embolism with infarction, veno occlusive disease and intrathoracic malignancy. Misreading infiltrates as infection or fluid overload delays serology and immunosuppression, so analysts keep asking what else explains anaemia with bilaterality.",
+   "say": "Infection and embolism have features mimicking alveolar haemorrhage in films daily in practice. Misreading infiltrates delays serology and treatment badly in patients. Anaemia plus bilaterality should reopen debate quickly in clinic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mimic",
+     "Distinguishing point",
+     "Trap"
+    ],
+    "rows": [
+     [
+      "Haemorrhagic pneumonia",
+      "Fever with infection signs",
+      "Treats antibiotics alone"
+     ],
+     [
+      "Pulmonary embolism",
+      "Pleuritic pain, wedge defect",
+      "Missed anticoagulation"
+     ],
+     [
+      "Mitral stenosis bleed",
+      "Bland, no capillaritis",
+      "Needs valve care"
+     ],
+     [
+      "Malignancy",
+      "Mass or vessel tumour",
+      "Bleeds without vasculitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: capillaritis means neutrophilic fibrinoid necrosis, haemoptysis may be absent, serial lavage grows bloodier per aliquot, haemosiderin macrophages date the bleed, raised **DLCO** suits active haemorrhage, urgent serology covers **ANCA** with myeloperoxidase and proteinase **3**, anti GBM and lupus markers, urine screens for renal disease, **cyclophosphamide** or **rituximab** induces remission, plasma exchange treats anti GBM disease, and triggers include **propylthiouracil** and **hydralazine**.",
+   "say": "Serial lavage growing bloodier confirms alveolar haemorrhage correctly in practice. Raised transfer supports active bleeding in exams for students. Kidney screening changes urgency and therapy every time in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Histology",
+      "Neutrophils with fibrinoid necrosis"
+     ],
+     [
+      "Lavage",
+      "Progressively bloodier aliquots"
+     ],
+     [
+      "Chronicity",
+      "Haemosiderin macrophages"
+     ],
+     [
+      "Function",
+      "Raised DLCO during bleed"
+     ],
+     [
+      "Serology",
+      "ANCA, anti GBM, ANA, complement"
+     ],
+     [
+      "Kidneys",
+      "Urinalysis every case"
+     ],
+     [
+      "Induction",
+      "Cyclophosphamide or rituximab"
+     ],
+     [
+      "Anti GBM",
+      "Plasma exchange"
+     ]
+    ]
+   }
+  }
+ ]
+}

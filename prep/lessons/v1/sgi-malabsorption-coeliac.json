@@ -21,12 +21,32 @@
       "say": "Genetic susceptibility to coeliac disease involves class two human leukocyte antigen molecules. Over ninety-nine percent of affected patients express HLA-DQ2 or HLA-DQ8 heterodimers. The absence of both alleles carries an extraordinary negative predictive value exceeding ninety-nine percent, effectively ruling out coeliac disease in individuals already maintaining a gluten-free diet.",
       "vis": {
         "kind": "table",
-        "cols": ["HLA Allele", "Heterodimer Molecular Code", "Prevalence in Coeliac Disease"],
+        "cols": [
+          "HLA Allele",
+          "Heterodimer Molecular Code",
+          "Prevalence in Coeliac Disease"
+        ],
         "rows": [
-          ["HLA-DQ2.5", "DQA1*05:01 and DQB1*02:01", "Approx. 90% of cases"],
-          ["HLA-DQ2.2", "DQA1*02:01 and DQB1*02:02", "Approx. 5% of cases"],
-          ["HLA-DQ8", "DQA1*03:01 and DQB1*03:02", "Approx. 5% to 10% of cases"],
-          ["Absence of DQ2 & DQ8", "Neither allele present", "< 1% (NPV > 99% to exclude)"]
+          [
+            "HLA-DQ2.5",
+            "DQA1*05:01 and DQB1*02:01",
+            "Approx. 90% of cases"
+          ],
+          [
+            "HLA-DQ2.2",
+            "DQA1*02:01 and DQB1*02:02",
+            "Approx. 5% of cases"
+          ],
+          [
+            "HLA-DQ8",
+            "DQA1*03:01 and DQB1*03:02",
+            "Approx. 5% to 10% of cases"
+          ],
+          [
+            "Absence of DQ2 & DQ8",
+            "Neither allele present",
+            "< 1% (NPV > 99% to exclude)"
+          ]
         ]
       }
     },
@@ -35,12 +55,37 @@
       "say": "The Marsh-Oberhuber histological system classifies duodenal enteropathy from mucosal biopsies. Marsh one shows intraepithelial lymphocytosis exceeding twenty-five lymphocytes per one hundred enterocytes with preserved villi. Marsh two develops distinct crypt hyperplasia. Marsh three exhibits progressive villous atrophy, categorized into partial, subtotal, and total mucosal flattening.",
       "vis": {
         "kind": "table",
-        "cols": ["Marsh Stage", "IEL Count (> 25/100)", "Crypt Architecture", "Villous Architecture"],
+        "cols": [
+          "Marsh Stage",
+          "IEL Count (> 25/100)",
+          "Crypt Architecture",
+          "Villous Architecture"
+        ],
         "rows": [
-          ["Marsh 0 (Pre-infiltrative)", "Normal (< 25)", "Normal", "Normal villi"],
-          ["Marsh 1 (Infiltrative)", "Increased (> 25)", "Normal", "Normal villi"],
-          ["Marsh 2 (Hyperplastic)", "Increased (> 25)", "Hyperplastic", "Normal villi"],
-          ["Marsh 3a-c (Destructive)", "Increased (> 25)", "Hyperplastic", "Partial to total villous atrophy"]
+          [
+            "Marsh 0 (Pre-infiltrative)",
+            "Normal (< 25)",
+            "Normal",
+            "Normal villi"
+          ],
+          [
+            "Marsh 1 (Infiltrative)",
+            "Increased (> 25)",
+            "Normal",
+            "Normal villi"
+          ],
+          [
+            "Marsh 2 (Hyperplastic)",
+            "Increased (> 25)",
+            "Hyperplastic",
+            "Normal villi"
+          ],
+          [
+            "Marsh 3a-c (Destructive)",
+            "Increased (> 25)",
+            "Hyperplastic",
+            "Partial to total villous atrophy"
+          ]
         ]
       }
     },
@@ -74,12 +119,32 @@
       "say": "Refractory coeliac disease is defined by persistent malabsorption and villous atrophy despite twelve months of confirmed strict adherence to a gluten-free diet. Type one demonstrates normal polyclonal T cells. Type two contains clonal aberrant intraepithelial lymphocytes that lose surface CD3 and CD8 markers while retaining intracellular CD3 epsilon.",
       "vis": {
         "kind": "table",
-        "cols": ["Parameter", "Type 1 Refractory Coeliac", "Type 2 Refractory Coeliac"],
+        "cols": [
+          "Parameter",
+          "Type 1 Refractory Coeliac",
+          "Type 2 Refractory Coeliac"
+        ],
         "rows": [
-          ["T-cell receptor clonality", "Polyclonal TCR rearrangement", "Monoclonal TCR gamma gene rearrangement"],
-          ["IEL immunophenotype", "Normal (surface CD3+ / CD8+)", "Aberrant (loss of surface CD3/CD8)"],
-          ["EATL transformation risk", "Low (< 5%)", "High (up to 50% within 5 years)"],
-          ["First-line therapy", "Systemic steroids", "Cladribine or autologous HSCT"]
+          [
+            "T-cell receptor clonality",
+            "Polyclonal TCR rearrangement",
+            "Monoclonal TCR gamma gene rearrangement"
+          ],
+          [
+            "IEL immunophenotype",
+            "Normal (surface CD3+ / CD8+)",
+            "Aberrant (loss of surface CD3/CD8)"
+          ],
+          [
+            "EATL transformation risk",
+            "Low (< 5%)",
+            "High (up to 50% within 5 years)"
+          ],
+          [
+            "First-line therapy",
+            "Systemic steroids",
+            "Cladribine or autologous HSCT"
+          ]
         ]
       }
     },
@@ -124,12 +189,73 @@
       "say": "Bile acid diarrhoea occurs when excess unabsorbed bile salts enter the colon and stimulate chloride and water secretion. Diagnosis relies on selenium-75 SeHCAT retention scintigraphy, where seven-day retention below ten percent confirms malabsorption, and retention below five percent indicates severe deficiency. Oral colestyramine provides effective symptomatic control.",
       "vis": {
         "kind": "table",
-        "cols": ["Severity Category", "7-Day SeHCAT Retention", "Therapeutic Response to Colestyramine"],
+        "cols": [
+          "Severity Category",
+          "7-Day SeHCAT Retention",
+          "Therapeutic Response to Colestyramine"
+        ],
         "rows": [
-          ["Normal retention", "> 15% retention at 7 days", "Bile acid malabsorption excluded"],
-          ["Mild malabsorption", "10% to 15% retention", "Variable response to bile acid binder"],
-          ["Moderate malabsorption", "5% to 10% retention", "Prompt clinical response to colestyramine"],
-          ["Severe malabsorption", "< 5% retention", "Excellent response to colestyramine"]
+          [
+            "Normal retention",
+            "> 15% retention at 7 days",
+            "Bile acid malabsorption excluded"
+          ],
+          [
+            "Mild malabsorption",
+            "10% to 15% retention",
+            "Variable response to bile acid binder"
+          ],
+          [
+            "Moderate malabsorption",
+            "5% to 10% retention",
+            "Prompt clinical response to colestyramine"
+          ],
+          [
+            "Severe malabsorption",
+            "< 5% retention",
+            "Excellent response to colestyramine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: Initial screening for coeliac disease is serum IgA tissue transglutaminase antibody paired with total IgA to exclude selective IgA deficiency. In IgA deficiency, use IgG deamidated gliadin peptide or IgG tTG. Over ninety-nine percent of patients carry HLA-DQ2 or HLA-DQ8. Confirmatory duodenal biopsy shows Marsh three features: intraepithelial lymphocytosis exceeding twenty-five per one hundred enterocytes, crypt hyperplasia, and villous atrophy. Lifelong strict gluten-free diet is curative. Enteropathy-associated T-cell lymphoma is a lethal complication of refractory coeliac disease.",
+      "say": "Initial screening for coeliac disease is serum IgA tissue transglutaminase antibody paired with total IgA to exclude selective IgA deficiency. In IgA deficiency, use IgG deamidated gliadin peptide or IgG tTG. Over ninety-nine percent of patients carry HLA-DQ2 or HLA-DQ8. Confirmatory duodenal biopsy shows Marsh three features: intraepithelial lymphocytosis exceeding twenty-five per one hundred enterocytes, crypt hyperplasia, and villous atrophy. Lifelong strict gluten-free diet is curative. Enteropathy-associated T-cell lymphoma is a lethal complication of refractory coeliac disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "First-line serologic screening test",
+            "IgA anti-tissue transglutaminase tTG paired with total serum IgA level"
+          ],
+          [
+            "Testing strategy in IgA deficiency",
+            "Order IgG-based anti-deamidated gliadin peptides DGP or IgG tTG"
+          ],
+          [
+            "Genetic susceptibility markers",
+            "Human leukocyte antigens HLA-DQ2 in ninety percent, HLA-DQ8 in ten percent"
+          ],
+          [
+            "Marsh three histopathology classification",
+            "Intraepithelial lymphocytosis, crypt hyperplasia, and blunted partial/complete villous atrophy"
+          ],
+          [
+            "Definitive management of coeliac disease",
+            "Lifelong strict gluten-free diet excluding wheat, rye, and barley"
+          ],
+          [
+            "Associated cutaneous manifestation",
+            "Dermatitis herpetiformis: pruritic vesiculopapular eruption on elbows, knees, buttocks"
+          ],
+          [
+            "Severe neoplastic complication",
+            "Enteropathy-associated T-cell lymphoma EATL arising in refractory type two coeliac"
+          ]
         ]
       }
     }

@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "sgm-sleep-resp-failure",
+ "subject": "ss-general-medicine",
+ "title": "Sleep-disordered breathing and chronic respiratory failure",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Obstructive sleep apnoea** (OSA, repeated upper airway collapse in sleep) is defined by an apnoea hypopnoea index (AHI, events per hour) of 5 or more with symptoms. An AHI above 15 needs no symptoms, and above 30 is severe. **Chronic respiratory failure** (persistent low oxygen with high carbon dioxide) is defined by daytime arterial carbon dioxide (PaCO2, blood gas measure) above 45 mmHg. Overlap syndrome (OSA with chronic obstructive pulmonary disease) worsens nocturnal desaturation.",
+   "say": "Obstructive sleep apnoea is repeated upper airway collapse in sleep, and it is defined by an apnoea hypopnoea index of five or more with symptoms. An index above fifteen needs no symptoms, and an index above thirty is severe. Chronic respiratory failure is persistent low oxygen with high carbon dioxide. Daytime arterial carbon dioxide above forty five millimetres of mercury indicates chronic hypercapnia.",
+   "vis": null
+  },
+  {
+   "tx": "Obesity with body mass index (BMI, weight per height squared) above 30 is the strongest risk factor, and central fat deposition narrows the upper airway. Large neck circumference (over 40 cm in men), enlarged tonsils, **micrognathia** (small jaw) and alcohol or sedative use all worsen collapse. Hypothyroidism (low thyroid function) and acromegaly (growth hormone excess) are secondary causes. Pregnancy raises risk, and men predominate.",
+   "say": "Obesity with a body mass index above thirty is the strongest risk factor for obstructive sleep apnoea. Central fat deposition is a major factor, and a large neck circumference worsens collapse. Enlarged tonsils, a small jaw, and alcohol or sedative use all cause worsening collapse. Hypothyroidism and acromegaly are secondary causes, and pregnancy raises risk.",
+   "vis": null
+  },
+  {
+   "tx": "During sleep, pharyngeal muscle tone falls and negative inspiratory pressure collapses the floppy airway. **Apnoea** (no airflow) and **hypopnoea** (reduced airflow) alternate with arousal, which fragments sleep and causes daytime sleepiness. Intermittent **hypoxaemia** (low oxygen episodes) drives sympathetic surges, pulmonary hypertension (high lung artery pressure) and arrhythmia. Chronic hypercapnia (high carbon dioxide) adds morning headache and confusion.",
+   "say": "During sleep, pharyngeal muscle tone is reduced, and negative inspiratory pressure collapses the floppy airway. Apnoea and hypopnoea alternate with arousal, and sleep fragmentation causes daytime sleepiness. Intermittent low oxygen produces sympathetic surges, pulmonary hypertension and arrhythmia. Chronic high carbon dioxide also produces morning headache and confusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway collapses in sleep"
+     },
+     {
+      "id": "b",
+      "label": "Apnoea and hypopnoea"
+     },
+     {
+      "id": "c",
+      "label": "Arousal fragments sleep"
+     },
+     {
+      "id": "d",
+      "label": "Daytime sleepiness and hypoxia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Witnessed apnoeas (pauses in breathing reported by partners), loud snoring and gasping are classic. Daytime sleepiness with road traffic accidents is the burden, and morning headache, dry mouth and nocturia (night urination) are common. The **Epworth sleepiness scale** (a questionnaire scoring dozing tendency) grades sleepiness, with scores above 10 abnormal. **Pickwickian syndrome** (obesity hypoventilation) adds daytime hypercapnia and cyanosis.",
+   "say": "Witnessed apnoeas with loud snoring and gasping are classic features of obstructive sleep apnoea. Daytime sleepiness with road accidents is the major burden, and morning headache and nocturia are common. The Epworth sleepiness scale is a questionnaire that grades dozing tendency, and a score above ten is abnormal. Obesity hypoventilation syndrome has daytime carbon dioxide retention and bluish discoloration.",
+   "vis": null
+  },
+  {
+   "tx": "Overnight oximetry (continuous oxygen saturation recording) is the screening test, but **polysomnography** (overnight recording of sleep, breathing and oxygen) is the gold standard and calculates AHI. Daytime arterial blood gas shows hypercapnia in hypoventilation syndrome. Spirometry (breathing test) excludes overlap disease, and lateral cephalometry (jaw profile imaging) helps surgical planning. 24 hour blood pressure shows nocturnal non dipping in severe disease.",
+   "say": "Overnight oximetry is the screening test, and polysomnography is the gold standard test. Polysomnography is an overnight recording of sleep, breathing and oxygen, and it calculates the index. Daytime arterial blood gas has hypercapnia in hypoventilation syndrome. Spirometry is required to exclude overlap disease, and lateral jaw imaging helps surgical planning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role",
+     "Key result"
+    ],
+    "rows": [
+     [
+      "Overnight oximetry",
+      "Screening",
+      "Dips in saturation"
+     ],
+     [
+      "Polysomnography",
+      "Gold standard",
+      "Calculates AHI"
+     ],
+     [
+      "Blood gas",
+      "Detects hypercapnia",
+      "PaCO2 above 45"
+     ],
+     [
+      "Spirometry",
+      "Excludes overlap",
+      "Obstructive pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Continuous positive airway pressure** (CPAP, a mask delivering pressurised air) is first line therapy and reduces AHI below 5. A **mandibular advancement device** (oral appliance advancing the jaw) suits mild disease. Weight loss, alcohol avoidance and positional therapy help all grades. Upper airway surgery (uvulopalatopharyngoplasty, soft palate surgery) is reserved for anatomical obstruction. **Tracheostomy** is definitive for severe obstruction with hypercapnia.",
+   "say": "Continuous positive airway pressure is the first line therapy, and it reduces the index below five. A mandibular advancement device is suitable for mild disease, and it improves snoring. Weight loss, alcohol avoidance and positional therapy help all grades of disease. Upper airway surgery is reserved for anatomical obstruction, and tracheostomy is definitive for severe obstruction.",
+   "vis": null
+  },
+  {
+   "tx": "**Bilevel positive airway pressure** (BiPAP, two pressure levels) is first line for chronic hypercapnic failure after an exacerbation, as British Thoracic Society (BTS) guidance advises. Inspiratory pressure supports the breath and expiratory pressure splints airways, improving alveolar ventilation. Initiation needs blood gas monitoring, and normocapnia is the target. Settings start low and titrate against repeat gases and symptoms.",
+   "say": "Bilevel positive airway pressure is the first line therapy for chronic hypercapnic failure, and it improves alveolar ventilation. Inspiratory pressure is the support for the breath, and expiratory pressure splints the airways. Initiation needs blood gas monitoring, and normal carbon dioxide is the target. Settings are started low, and they are titrated against repeat gases and symptoms.",
+   "vis": null
+  },
+  {
+   "tx": "**Long term oxygen therapy** (LTOT, continuous home oxygen) is indicated when resting arterial oxygen (PaO2, blood gas measure) is at or below 55 mmHg or saturation is 88% or less. **Cor pulmonale** (right heart strain) or polycythaemia (excess red cells) allows 60 mm. Oxygen is given at least 15 hours daily, including sleep. Benefit is survival, and smoking cessation remains mandatory.",
+   "say": "Long term oxygen therapy is indicated when resting arterial oxygen is at or below fifty five millimetres of mercury. A saturation of eighty eight percent or less is also an indication for therapy. Heart strain or excess red cells allows a higher threshold of sixty millimetres. Oxygen is given for at least fifteen hours daily, and benefit is improved survival.",
+   "vis": null
+  },
+  {
+   "tx": "Untreated severe OSA raises cardiovascular death, arrhythmia and insulin resistance (reduced insulin action). Pulmonary hypertension (high lung artery pressure) progresses to **cor pulmonale** (right heart failure) with oedema (swelling) and raised jugular venous pressure. CPAP adherence above 4 hours per night improves outcomes. Exam trap: a normal overnight oximetry never excludes OSA, and **polysomnography** is required for diagnosis.",
+   "say": "Untreated severe sleep apnoea is associated with cardiovascular death, arrhythmia and insulin resistance. Pulmonary hypertension leads to right heart failure with ankle swelling and raised venous pressure. Adherence of more than four hours per night improves outcomes. A normal overnight oximetry can miss sleep apnoea, and polysomnography is required for diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "The **AASM 2017 criteria** (American Academy of Sleep Medicine) diagnose OSA at AHI 5 or more with symptoms or above 15 without. Central sleep apnoea (breathing effort falls) needs different therapy with adaptive servo ventilation warnings about heart failure. **Overlap syndrome** (OSA with obstructive lung disease) needs combined therapy. Obesity hypoventilation needs weight loss with CPAP, and steroids rarely help.",
+   "say": "The American Academy of Sleep Medicine criteria require an index of five or more with symptoms for diagnosis. An index above fifteen requires no symptoms for the diagnosis, and central apnoea needs different therapy. Adaptive servo ventilation has warnings in heart failure, and overlap disease needs combined therapy. Obesity hypoventilation needs weight loss with CPAP, and steroids rarely help.",
+   "vis": null
+  },
+  {
+   "tx": "High yield numbers: AHI 5 with symptoms and 15 without diagnose OSA, with above 30 severe. Daytime **PaCO2** above 45 defines chronic hypercapnia. **Epworth score** above 10 is abnormal. **CPAP** is first line, **polysomnography** is the gold standard, and LTOT means 15 hours daily at PaO2 at or below 55 or saturation at or below 88%.",
+   "say": "Sleep apnoea is diagnosed at an index of five with symptoms or fifteen without symptoms. Severe disease is an index above thirty, and chronic hypercapnia is daytime carbon dioxide above forty five. The Epworth score above ten is abnormal. CPAP is the first line therapy, and polysomnography is the gold standard test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High yield point",
+     "Value or rule"
+    ],
+    "rows": [
+     [
+      "OSA diagnosis",
+      "AHI 5 with symptoms"
+     ],
+     [
+      "OSA without symptoms",
+      "AHI 15 or more"
+     ],
+     [
+      "Severe OSA",
+      "AHI above 30"
+     ],
+     [
+      "Chronic hypercapnia",
+      "PaCO2 above 45"
+     ],
+     [
+      "Epworth abnormal",
+      "Above 10"
+     ],
+     [
+      "First line therapy",
+      "CPAP"
+     ],
+     [
+      "Gold standard",
+      "Polysomnography"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

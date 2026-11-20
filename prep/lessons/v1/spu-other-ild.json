@@ -1,0 +1,381 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-other-ild",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e interstitial lung disease and hypersensitivity chapters",
+  "ATS ERS hypersensitivity pneumonitis statement"
+ ],
+ "steps": [
+  {
+   "say": "ILD is a broad group of diffuse lung diseases that share reticular patterns and restrictive physiology. Pattern recognition on HRCT plus exposure and serology sort the dozens of causes.",
+   "tx": "**ILD** (interstitial lung disease) is a broad group of diffuse lung diseases sharing reticular patterns and **restrictive** physiology with low **DLCO** (diffusing capacity). **Pattern recognition** (HRCT distribution) plus exposure history and serology sort the dozens of causes, and **multidisciplinary discussion** (expert review) remains mandatory before labelling any case idiopathic.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Distribution",
+     "Suggested disease"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Basilar, subpleural",
+      "Honeycombing",
+      "IPF, UIP"
+     ],
+     [
+      "Upper zone, ground glass",
+      "Mid lung",
+      "Hypersensitivity, sarcoid"
+     ],
+     [
+      "Mosaic, tree in bud",
+      "Airway centric",
+      "Bronchiolitis, fumes"
+     ],
+     [
+      "Peripheral consolidation",
+      "Patchy, migratory",
+      "Eosinophilic disease"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Hypersensitivity pneumonitis follows inhaled organic antigens with acute, subacute and chronic forms. Bird, farmer and hot tub exposures each leave a different antigenic fingerprint.",
+   "tx": "**Hypersensitivity pneumonitis** (immune lung disease from inhaled organic antigens) follows **bird**, farmer and hot tub exposures (**thermophilic bacteria**, mould) with acute, subacute and chronic forms. **Precipitins** (antibodies against antigen) and bronchoalveolar lavage lymphocytosis support diagnosis, and chronic disease progresses to **fibrosis** indistinguishable from IPF without exposure history.",
+   "vis": {
+    "edges": [
+     [
+      "exposure",
+      "sensitise"
+     ],
+     [
+      "sensitise",
+      "inflammation"
+     ],
+     [
+      "inflammation",
+      "groundglass"
+     ],
+     [
+      "groundglass",
+      "fibrosis"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "exposure",
+      "label": "Organic antigen inhaled"
+     },
+     {
+      "id": "sensitise",
+      "label": "Sensitisation, IgG"
+     },
+     {
+      "id": "inflammation",
+      "label": "Granuloma, lymphocytosis"
+     },
+     {
+      "id": "groundglass",
+      "label": "Ground glass, mosaic"
+     },
+     {
+      "id": "fibrosis",
+      "label": "Fibrosis if chronic"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Acute HP presents with fever and dyspnoea four to eight hours after heavy exposure, while chronic HP creeps with cough, weight loss and basal fibrosis. Antigen avoidance is the treatment that actually changes course.",
+   "tx": "**Acute HP** (acute hypersensitivity pneumonitis) presents with fever and dyspnoea **4** to **8** hours after heavy exposure, while **chronic HP** creeps with cough, weight loss and basal fibrosis. **Antigen avoidance** (removing the exposure) is the treatment that changes course, with steroids for severe acute episodes and antifibrotics for fibrosing chronic disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Fever 4 to 8 hours",
+      "Ground glass, mid zones",
+      "Avoidance plus steroids"
+     ],
+     "title": "Acute HP"
+    },
+    "right": {
+     "points": [
+      "Insidious cough, weight loss",
+      "Basal fibrosis, mosaic",
+      "Antifibrotic if fibrosing"
+     ],
+     "title": "Chronic HP"
+    }
+   }
+  },
+  {
+   "say": "NSIP shows basal ground glass with subpleural sparing and responds better to steroids than UIP. Connective tissue diseases, drugs and hypersensitivity each leave that NSIP fingerprint.",
+   "tx": "**NSIP** (nonspecific interstitial pneumonia) shows basal ground glass with **subpleural sparing** (outer lung clear) and responds better to steroids than **UIP**. **Connective tissue diseases** (lupus, scleroderma), drugs and hypersensitivity each leave that NSIP fingerprint, so serology and exposure history always precede a steroid trial.",
+   "vis": {
+    "cols": [
+     "Disease",
+     "HRCT clue",
+     "First therapy"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "NSIP",
+      "Ground glass, sparing",
+      "Steroids"
+     ],
+     [
+      "UIP",
+      "Honeycombing, traction",
+      "Antifibrotic"
+     ],
+     [
+      "DIP",
+      "Centrilobular nodules",
+      "Smoking cessation"
+     ],
+     [
+      "LIP",
+      "Cysts, nodules",
+      "Autoimmune workup"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Desquamative interstitial pneumonia and respiratory bronchiolitis track smoking closely. Stopping cigarettes can reverse early disease, and steroids help only after cessation fails.",
+   "tx": "**DIP** (desquamative interstitial pneumonia) and **respiratory bronchiolitis** (smoke related airway disease) track smoking closely, with macrophage filled air spaces on lavage. **Smoking cessation** (stopping cigarettes) can reverse early disease, and steroids help only after cessation fails, while **amiodarone** (heart drug) and **nitrofurantoin** (urinary antibiotic) cause drug induced ILD mimicking the same patterns.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Ground glass, centrilobular nodules",
+      "Macrophages in lavage",
+      "Cessation reverses early"
+     ],
+     "title": "Smoking related ILD"
+    },
+    "right": {
+     "points": [
+      "Drug exposure history",
+      "Basal or apical fibrosis",
+      "Drug withdrawal first"
+     ],
+     "title": "Drug induced ILD"
+    }
+   }
+  },
+  {
+   "say": "Connective tissue ILD spans scleroderma, myositis, Sjogren and rheumatoid disease, each with its own autoantibody fingerprint. Early serology in every ILD prevents years of diagnostic delay.",
+   "tx": "**Connective tissue ILD** (ILD with autoimmune disease) spans scleroderma, **myositis** (muscle inflammation), **Sjogren syndrome** (dry eyes and mouth) and **rheumatoid disease**, each with its own autoantibody fingerprint. **ANA** (antinuclear antibody), myositis blot and **anti CCP** (joint antibody) in every ILD prevents years of diagnostic delay before fibrosis becomes irreversible.",
+   "vis": {
+    "cols": [
+     "CTD",
+     "Antibody",
+     "Lung phenotype"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Scleroderma",
+      "Anti Scl70",
+      "NSIP to UIP"
+     ],
+     [
+      "Myositis",
+      "Anti Jo1, MDA5",
+      "Organising pneumonia"
+     ],
+     [
+      "Sjogren",
+      "Anti Ro, La",
+      "LIP, NSIP"
+     ],
+     [
+      "Rheumatoid",
+      "Anti CCP",
+      "UIP pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Organising pneumonia responds dramatically to steroids with migratory consolidations on imaging. Cryptogenic disease hides secondary causes, and biopsy separates it from malignancy masquerading as pneumonia.",
+   "tx": "**Organising pneumonia** (inflammatory lung scarring) responds dramatically to steroids with **migratory consolidations** (moving opacities) on imaging, and cryptogenic disease hides secondary causes in half of cases. **Surgical lung biopsy** (tissue diagnosis) separates it from malignancy masquerading as pneumonia, and relapse commonly occurs during taper, so prolong therapy slowly.",
+   "vis": {
+    "edges": [
+     [
+      "consolidation",
+      "steroid"
+     ],
+     [
+      "steroid",
+      "response"
+     ],
+     [
+      "response",
+      "taper"
+     ],
+     [
+      "taper",
+      "relapse"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "consolidation",
+      "label": "Migratory consolidation"
+     },
+     {
+      "id": "steroid",
+      "label": "Steroids started"
+     },
+     {
+      "id": "response",
+      "label": "Dramatic response"
+     },
+     {
+      "id": "taper",
+      "label": "Slow months taper"
+     },
+     {
+      "id": "relapse",
+      "label": "Relapse on taper"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Alveolar proteinosis fills alveoli with surfactant and shows crazy paving on CT. GM CSF antibody and whole lung lavage are the diagnostic and therapeutic pair to recall.",
+   "tx": "**Alveolar proteinosis** (surfactant filled alveoli) shows **crazy paving** (ground glass with septal lines) on CT with milky lavage fluid, caused by **GM CSF autoantibody** (immune blocking antibody) in most adults. **Whole lung lavage** (washing each lung under anaesthesia) remains the treatment for symptomatic disease, with **GM CSF inhalation** as adjunct for partial disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Crazy paving on CT",
+      "Milky lavage fluid",
+      "GM CSF antibody positive"
+     ],
+     "title": "Autoimmune proteinosis"
+    },
+    "right": {
+     "points": [
+      "Onset after dust exposure",
+      "Childhood genetic form",
+      "Lavage plus genetics"
+     ],
+     "title": "Secondary proteinosis"
+    }
+   }
+  },
+  {
+   "say": "Progressive fibrosing phenotype unites IPF like behaviour across HP, NSIP and CTD ILD. Nintedanib slows decline in fibrosing non IPF ILD after INBUILD, expanding antifibrotic use beyond IPF.",
+   "tx": "**Progressive fibrosing phenotype** (advancing fibrosis across ILDs) unites IPF like behaviour across **hipersensitivity**, **NSIP** and connective tissue ILD, defined by worsening symptoms, **FVC** fall above **10** percent or honeycombing spread. **Nintedanib** (antifibrotic) slows decline in fibrosing non IPF ILD after **INBUILD** trial, expanding antifibrotic use beyond IPF.",
+   "vis": {
+    "cols": [
+     "Progression sign",
+     "Cutoff",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "FVC decline",
+      "Above 10 percent yearly",
+      "Progressive disease"
+     ],
+     [
+      "DLCO decline",
+      "Above 15 percent yearly",
+      "Gas exchange loss"
+     ],
+     [
+      "Symptoms",
+      "Worse cough, dyspnoea",
+      "Clinical progression"
+     ],
+     [
+      "Imaging",
+      "New honeycombing",
+      "Fibrotic spread"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Drug induced ILD usually improves with withdrawal, while CTD ILD needs disease modifying therapy plus antifibrotic in fibrosing disease. Timing matters because early immunosuppression controls inflammation before fibrosis locks in.",
+   "tx": "**Drug induced ILD** (drug caused lung damage) usually improves with withdrawal within weeks, while connective tissue ILD needs disease modifying therapy plus antifibrotic in fibrosing disease. Timing matters because early **immunosuppression** (mycophenolate, rituximab) controls inflammation before **fibrosis** locks in, and **cryobiopsy** (frozen tissue sampling) now replaces surgical biopsy in many centres.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Exposure history clear",
+      "Withdrawal improves",
+      "No chronic therapy"
+     ],
+     "title": "Drug induced ILD"
+    },
+    "right": {
+     "points": [
+      "Autoantibodies positive",
+      "Immunosuppression needed",
+      "Antifibrotic if fibrosing"
+     ],
+     "title": "CTD ILD"
+    }
+   }
+  },
+  {
+   "say": "The ILD high yield set is HP antigen avoidance, NSIP sparing, OP steroid response, crazy paving proteinosis, progressive fibrosis definition and INBUILD antifibrotic expansion.",
+   "tx": "Recall **hypersensitivity** antigen avoidance, **NSIP** subpleural sparing, **organising pneumonia** steroid response, crazy paving **proteinosis** with whole lung lavage, progressive fibrosis by **FVC** fall above **10** percent, and **INBUILD** antifibrotic expansion to non IPF ILD. CTD serology in every ILD catches hidden autoimmunity early.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Acute HP timing",
+      "4 to 8 hours",
+      "Exposure link"
+     ],
+     [
+      "NSIP clue",
+      "Subpleural sparing",
+      "Steroid responsive"
+     ],
+     [
+      "Proteinosis",
+      "Crazy paving, milky lavage",
+      "Lavage therapy"
+     ],
+     [
+      "Progressive fibrosis",
+      "FVC fall above 10 percent",
+      "Definition"
+     ],
+     [
+      "INBUILD drug",
+      "Nintedanib",
+      "Non IPF fibrosis"
+     ],
+     [
+      "CTD screen",
+      "ANA, blot, CCP",
+      "Every ILD"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "Hypersensitivity and non IPF interstitial diseases",
+ "v": 1
+}

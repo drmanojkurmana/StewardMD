@@ -1,0 +1,346 @@
+{
+ "v": 1,
+ "module": "spu-pleural",
+ "subject": "ss-pulmonology",
+ "title": "Pleural effusion and pleural infection: Light criteria to drainage",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "The pleural space normally holds only a thin fluid film coupling lung to chest wall at roughly **minus 3 to minus 5** cmH2O. **Transudates** arise from systemic pressures such as heart failure, while **exudates** reflect local inflammation, infection or malignancy increasing capillary leak, and parietal lymphatics absorb up to **20 times** the formation rate.",
+   "say": "A thin film links lung to chest wall always in practice daily. Systemic pressure builds transudates in the chest daily in patients. Local inflammation builds exudates instead of transudates in practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transudate",
+     "points": [
+      "Raised hydrostatic pressure",
+      "Low oncotic pressure",
+      "Heart failure commonest",
+      "Bilateral or cardiac picture"
+     ]
+    },
+    "right": {
+     "title": "Exudate",
+     "points": [
+      "Local capillary leak",
+      "Inflammation or cancer",
+      "Infection or embolism",
+      "Needs cause hunt"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic **thoracentesis** separates transudate from exudate before further workup, since exudates demand cause hunting. **Light criteria** call an exudate when any one holds: fluid to serum protein above **0.5**, fluid to serum LDH above **0.6**, or fluid LDH above two thirds of the upper normal serum limit in absolute value.",
+   "say": "Thoracentesis separates transudate from exudate quite reliably in practice. Light criteria need only one positive test result in practice. Exudates then need cause hunting urgently in patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Light test",
+     "Exudate cutoff",
+     "Source"
+    ],
+    "rows": [
+     [
+      "Protein ratio",
+      "Above 0.5",
+      "Fluid over serum"
+     ],
+     [
+      "LDH ratio",
+      "Above 0.6",
+      "Fluid over serum"
+     ],
+     [
+      "Fluid LDH",
+      "Above two thirds upper normal",
+      "Absolute value"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Light criteria** misclassify about **25 percent** of transudates as exudates, the pseudoexudate problem after diuresis. A serum minus pleural protein gradient above **3.1 g/dL** or an albumin gradient above **1.2 g/dL** reclassifies these and works well in heart failure and hepatic hydrothorax patterns.",
+   "say": "A quarter of diuresed transudates look exudative always in practice. Gradients identify these cases in practice daily for clinicians. Albumin gradient above one point two works well in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Light says exudate"
+     },
+     {
+      "id": "b",
+      "label": "Clinical transudate picture"
+     },
+     {
+      "id": "c",
+      "label": "Protein gradient 3.1"
+     },
+     {
+      "id": "d",
+      "label": "Treat as transudate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Left ventricular failure** is the commonest pleural effusion cause worldwide as a transudate, with cirrhosis next in the United States pattern. **Hepatic hydrothorax** moves ascitic fluid through diaphragmatic defects into the chest and can develop spontaneous bacterial empyema, so asymmetry with ascites should prompt that specific search.",
+   "say": "Heart failure causes most transudates in clinical practice reported. Cirrhosis comes next in most series in practice daily. Hepatic hydrothorax allows ascites to enter the chest always in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transudate",
+     "Mechanism",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Heart failure",
+      "Raised hydrostatic pressure",
+      "Bilateral, NT proBNP high"
+     ],
+     [
+      "Cirrhosis",
+      "Portal pressure plus low albumin",
+      "Ascites present"
+     ],
+     [
+      "Hepatic hydrothorax",
+      "Diaphragmatic defects",
+      "Right sided, ascites"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exudate causes split into infection, **pulmonary embolism**, malignancy, and autoimmune or post surgical disease. Parapneumonic effusions reach up to **50 percent** of community pneumonias and constitute the commonest exudate, while malignancy accounts for roughly **75 percent** lung, breast and lymphoma cases, and embolism stays the most overlooked exudate cause.",
+   "say": "Infection, embolism and malignancy dominate exudates widely in practice. Half of pneumonias develop effusions in series reported daily. Embolism is often overlooked in practice daily in clinic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exudate cause",
+     "Share or clue",
+     "Typical fluid"
+    ],
+    "rows": [
+     [
+      "Parapneumonic",
+      "Up to 50 percent of CAP",
+      "Neutrophil rich"
+     ],
+     [
+      "Malignant",
+      "About 75 percent lung breast lymphoma",
+      "Lymphocytic"
+     ],
+     [
+      "Embolism",
+      "Most overlooked",
+      "Almost always exudative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parapneumonic effusions evolve through exudative, fibrinopurulent and organising phases with pleural peel and trapped lung. Drainage is mandatory with loculated fluid, pus, positive Gram stain, **pH** below **7.20**, glucose below **60 mg/dL**, or LDH above **900 IU/L**, and about **10 percent** progress to frank empyema without early action.",
+   "say": "Parapneumonic phases are progressing toward empyema in patients daily. Low pH with pus requires drainage urgently in practice daily. About ten percent go on to empyema in pneumonia cases daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drainage marker",
+     "Cutoff",
+     "Implication"
+    ],
+    "rows": [
+     [
+      "pH",
+      "Below 7.20",
+      "Chamber needs drain"
+     ],
+     [
+      "Glucose",
+      "Below 60 mg/dL",
+      "Bacterial consumption"
+     ],
+     [
+      "LDH",
+      "Above 900 IU/L",
+      "Cellular injury"
+     ],
+     [
+      "Gram stain",
+      "Positive or pus",
+      "Drain immediately"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tuberculous pleuritis** is largely hypersensitivity to mycobacterial protein in the pleural space and yields a lymphocyte predominant exudate. **Adenosine deaminase** above **40 IU/L** or interferon gamma above **140 pg/mL** supports the diagnosis, while pleural biopsy culture yield exceeds fluid culture and adds pleural thickening on imaging.",
+   "say": "TB pleuritis gives lymphocyte rich exudates always in practice. Adenosine deaminase above forty supports TB disease in patients. Biopsy is better than fluid culture for diagnosis in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Cutoff",
+     "Use"
+    ],
+    "rows": [
+     [
+      "ADA",
+      "Above 40 IU/L",
+      "TB support"
+     ],
+     [
+      "Interferon gamma",
+      "Above 140 pg/mL",
+      "TB support"
+     ],
+     [
+      "Biopsy culture",
+      "Exceeds fluid yield",
+      "Confirm disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Special fluid tests include triglycerides above **110 mg/dL** for **chylothorax** with milky appearance, haematocrit above half the blood value for **haemothorax**, **NT proBNP** above **1500 pg/mL** for cardiac origin, amylase for pancreatic or oesophageal disease, eosinophils for drug causation, and low glucose with rheumatoid disease. Malignant fluid gains from cytology and flow cytometry.",
+   "say": "Triglycerides above one hundred ten mark chyle clearly in practice. Haematocrit above half indicates blood in fluid daily in patients. NT proBNP above fifteen hundred marks cardiac origin in fluid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid",
+     "Test cutoff",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "Chyle",
+      "Triglyceride above 110 mg/dL",
+      "Chylothorax"
+     ],
+     [
+      "Blood",
+      "Hematocrit above half",
+      "Haemothorax"
+     ],
+     [
+      "Heart",
+      "NT proBNP above 1500 pg/mL",
+      "Cardiac cause"
+     ],
+     [
+      "Pancreas oesophagus",
+      "Raised amylase",
+      "Leak source"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Manage the cause first since transudates improve once heart failure or cirrhosis is treated, while complicated parapneumonic fluid with loculation, low **pH** or pus needs immediate tube drainage. Malignant effusions reflect disseminated disease with survival often under **6 months**, and recurrent effusions need pleural procedures rather than repeated taps alone for lasting relief.",
+   "say": "Treating the cause shrinks transudates over weeks in practice. Infected fluid needs prompt drainage in practice daily for patients. Malignant effusions signal disseminated disease stage in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fluid characterised"
+     },
+     {
+      "id": "b",
+      "label": "Complicated infected"
+     },
+     {
+      "id": "c",
+      "label": "Drain plus antibiotics"
+     },
+     {
+      "id": "d",
+      "label": "Cause therapy follows"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: Light protein ratio above **0.5** and LDH ratio above **0.6** define exudates, pseudoexudates misclassify about **25 percent**, gradients of **3.1** and **1.2 g/dL** rescue heart failure cases, parapneumonic fluid reaches **50 percent** of pneumonias with **10 percent** becoming empyema, drainage triggers at **pH 7.20**, glucose **60**, LDH **900**, **ADA** above **40**, triglyceride above **110**, **NT proBNP** above **1500**, and malignant survival often under **6 months**.",
+   "say": "Light cutoffs are zero point five and zero point six daily. Drainage triggers at pH seven point two daily in practice. Malignant effusions indicate poor survival ahead in patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Light protein",
+      "Ratio above 0.5"
+     ],
+     [
+      "Light LDH",
+      "Ratio above 0.6"
+     ],
+     [
+      "Pseudoexudate",
+      "About 25 percent"
+     ],
+     [
+      "Gradients",
+      "3.1 protein, 1.2 albumin g/dL"
+     ],
+     [
+      "Parapneumonic",
+      "50 percent of CAP"
+     ],
+     [
+      "Empyema",
+      "10 percent progress"
+     ],
+     [
+      "Drain pH",
+      "Below 7.20"
+     ],
+     [
+      "Chyle",
+      "Triglyceride above 110 mg/dL"
+     ]
+    ]
+   }
+  }
+ ]
+}

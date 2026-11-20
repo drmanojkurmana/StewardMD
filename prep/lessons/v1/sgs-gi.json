@@ -1,0 +1,345 @@
+{
+ "v": 1,
+ "module": "sgs-gi",
+ "subject": "ss-general-surgery",
+ "title": "Gastrointestinal surgery emergencies: ulcer, appendix, ischaemia and obstruction",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22nd edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Peptic ulcer** is a mucosal defect that breaches the muscularis mucosa, most often in the duodenum or stomach. About 13 to 15 percent of adults develop ulcer disease in their lifetime, and prompt recognition prevents 2.5 times more deaths from complications. A careful history separates uncomplicated pain from perforation or bleeding.",
+   "say": "Peptic ulcer is a mucosal defect that breaks through a layer deep in the stomach wall. About thirteen to fifteen percent of adults develop ulcer disease in their lifetime. Prompt recognition prevents far more deaths from complications, and a careful history separates simple pain from perforation or bleeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Typical age",
+     "Key symptom"
+    ],
+    "rows": [
+     [
+      "Duodenum",
+      "35 to 50 years",
+      "Pain 2 to 3 hours after meals"
+     ],
+     [
+      "Stomach",
+      "50 to 65 years",
+      "Pain soon after eating"
+     ],
+     [
+      "Both",
+      "Middle age",
+      "Epigastric pain at night"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Helicobacter pylori** infection and **nonsteroidal antiinflammatory drugs** cause most ulcers through mucosal injury and loss of protective prostaglandins. Roughly 80 percent of duodenal ulcers test positive for infection, while 15 to 20 percent relate to drug use alone. Smoking adds 2.5 times the risk and delays healing.",
+   "say": "Helicobacter pylori infection and antiinflammatory drugs cause most ulcers through mucosal injury. Roughly eighty percent of duodenal ulcers test positive for infection. Smoking adds about two and a half times the risk and delays healing in every patient who continues the habit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infective cause",
+     "points": [
+      "Test for bacteria",
+      "Needs eradication therapy",
+      "Explains recurrence"
+     ]
+    },
+    "right": {
+     "title": "Drug cause",
+     "points": [
+      "Aspirin and diclofenac",
+      "Protects less mucosa",
+      "Stop the drug when possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acid and pepsin digest the mucosa when **defensive prostaglandins** fail, and ulcers deepen once the mucosal barrier breaks. Bacterial toxins and drug induced loss of blood flow each weaken that barrier further. Ulcer depth matters because a defect reaching 5 mm can erode a vessel or the full wall.",
+   "say": "Acid and pepsin digest the mucosa when protective prostaglandins fail. Germ toxins and drug effects each reduce blood flow, so the barrier weakens more. Ulcer depth matters because a defect reaching five millimeters can erode a vessel or break through the full wall in a short time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mucosal injury"
+     },
+     {
+      "id": "b",
+      "label": "Barrier failure"
+     },
+     {
+      "id": "c",
+      "label": "Acid digestion"
+     },
+     {
+      "id": "d",
+      "label": "Ulcer deepens"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Perforation** presents with sudden severe epigastric pain, boardlike rigidity and absent bowel sounds within 6 hours. **Bleeding** causes haematemesis, melaena and hypotension, and 15 percent of ulcers bleed at some stage. **Penetration** into pancreas gives back pain that persists after meals for days.",
+   "say": "Perforation presents with sudden severe epigastric pain and rigid abdominal wall within six hours. Bleeding causes vomiting of blood, black stools and low blood pressure. Penetration into the pancreas gives back pain that persists after meals for many days and resists simple antacids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Onset",
+     "Hallmark sign"
+    ],
+    "rows": [
+     [
+      "Perforation",
+      "Sudden, minutes",
+      "Boardlike rigidity"
+     ],
+     [
+      "Bleeding",
+      "Hours to days",
+      "Melaena and shock"
+     ],
+     [
+      "Penetration",
+      "Days to weeks",
+      "Back pain radiation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Appendicitis is **lumen obstruction** by a faecalith or lymphoid hyperplasia, and it strikes 13 to 15 per 100000 people each year. Classic pain starts periumbilical then shifts to the right iliac fossa within 8 to 12 hours. **Alvarado score** of 7 or more supports the diagnosis with 82 percent sensitivity.",
+   "say": "Appendicitis begins when the appendix lumen is blocked by a stool stone or swollen lymphoid tissue. It strikes thirteen to fifteen people per one hundred thousand each year. Classic pain starts around the navel then shifts to the lower right abdomen within eight to twelve hours in most patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Lumen blocked"
+     },
+     {
+      "id": "q",
+      "label": "Bacterial overgrowth"
+     },
+     {
+      "id": "r",
+      "label": "Wall ischaemia"
+     },
+     {
+      "id": "s",
+      "label": "Perforation risk"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "q"
+     ],
+     [
+      "q",
+      "r"
+     ],
+     [
+      "r",
+      "s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mesenteric ischaemia** follows embolism to the superior mesenteric artery in 40 percent of cases, often with atrial fibrillation. Pain is severe and out of proportion to tenderness, with bloody stool after 12 hours. Blood tests show raised **lactate** above 2.5 mmol per litre and metabolic acidosis early.",
+   "say": "Mesenteric ischaemia follows a blood clot travelling to the superior mesenteric artery in forty percent of cases. Pain is severe and out of proportion to tenderness. Blood tests show raised lactate above two point five millimoles per litre and metabolic acidosis appears early in this condition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Embolic occlusion",
+     "points": [
+      "Sudden pain",
+      "Atrial fibrillation clue",
+      "Needs heparin early"
+     ]
+    },
+    "right": {
+     "title": "Thrombotic occlusion",
+     "points": [
+      "Gradual pain",
+      "Atherosclerosis history",
+      "Needs urgent scan"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mechanical obstruction** occurs in 70 percent of cases from adhesions, hernias or malignancy, and presents with colicky pain, vomiting and distension. Absent flatus for 24 hours points to complete blockage. **Small bowel obstruction** vomits early, while large bowel obstruction distends more over 5 to 7 days.",
+   "say": "Mechanical obstruction occurs in seventy percent of cases from adhesions, hernias or cancers. It presents with cramping pain, vomiting and abdominal swelling. Absent passage of flatus for twenty four hours points to complete blockage. Small bowel blockage vomits early, while large bowel blockage distends more slowly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Vomiting",
+     "Distension"
+    ],
+    "rows": [
+     [
+      "Small bowel",
+      "Early",
+      "Moderate"
+     ],
+     [
+      "Large bowel",
+      "Late",
+      "Marked"
+     ],
+     [
+      "Closed loop",
+      "Very early",
+      "Severe pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Investigations include **erect chest Xray** showing free air under the diaphragm in 75 percent of perforations. **CT abdomen with contrast** confirms appendicitis, ischaemia and the site of obstruction in over 90 percent of doubtful cases. Amylase and lipase help only when pancreatitis mimics the acute abdomen.",
+   "say": "Investigations include an erect chest X-ray showing free air under the diaphragm in most perforations. CT abdomen with contrast confirms appendicitis, ischaemia and the site of obstruction in over ninety percent of doubtful cases. Amylase helps only when pancreatitis mimics the acute abdomen in the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finds",
+     "Accuracy"
+    ],
+    "rows": [
+     [
+      "Chest Xray",
+      "Free air",
+      "75 percent"
+     ],
+     [
+      "CT abdomen",
+      "Cause and site",
+      "90 percent"
+     ],
+     [
+      "Ultrasound",
+      "Appendix",
+      "70 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management starts with **resuscitation**, nasogastric decompression and broad spectrum antibiotics within 6 hours of presentation. Uncomplicated appendicitis needs **appendicectomy** within 24 hours, while perforation with localised abscess may settle with drainage. Mesenteric ischaemia demands laparotomy once bowel infarction is suspected.",
+   "say": "Management starts with resuscitation, stomach tube decompression and broad spectrum antibiotics within six hours. Uncomplicated appendicitis needs removal of the appendix within twenty four hours. Perforation with a localised collection may settle with drainage, while bowel infarction demands emergency operation without delay.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Resuscitate"
+     },
+     {
+      "id": "r2",
+      "label": "Antibiotics"
+     },
+     {
+      "id": "r3",
+      "label": "Imaging"
+     },
+     {
+      "id": "r4",
+      "label": "Operate"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications include **faecal peritonitis** after perforation, **pylephlebitis** in 5 percent of appendicitis, and **short bowel syndrome** after major resection. Adhesive obstruction recurs in 30 percent of patients after first episode within 10 years. Mortality reaches 15 percent once infarction of bowel exceeds 3 metres in length.",
+   "say": "Complications include faecal peritonitis after perforation and liver vein infection in about five percent of appendicitis. Adhesive obstruction recurs in thirty percent of patients after the first episode within ten years. Mortality reaches fifteen percent once infarcted bowel exceeds three metres in length in the abdomen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early complications",
+     "points": [
+      "Peritonitis",
+      "Sepsis and shock",
+      "Needs surgery"
+     ]
+    },
+    "right": {
+     "title": "Late complications",
+     "points": [
+      "Adhesions",
+      "Recurrent obstruction",
+      "Reoperation risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acute abdomen** after 6 hours needs surgical review before imaging, and surgery within 2 hours for perforation. Appendicectomy cures most cases, while **lactate above 2.5** with severe pain means ischaemia until proven otherwise. Early CT, antibiotics and fluids cut mortality from 25 percent to under 8 percent.",
+   "say": "High-yield for the exam. Acute abdomen after six hours needs surgical review before imaging, and surgery within two hours for perforation. Lactate above two point five with severe pain means ischaemia until proven otherwise. Early CT, antibiotics and fluids cut mortality from twenty five percent to under eight percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Emergency",
+     "Time window",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Perforation",
+      "Within 2 hours",
+      "Urgent surgery"
+     ],
+     [
+      "Appendicitis",
+      "Within 24 hours",
+      "Appendicectomy"
+     ],
+     [
+      "Ischaemia",
+      "Immediate",
+      "Laparotomy"
+     ]
+    ]
+   }
+  }
+ ]
+}

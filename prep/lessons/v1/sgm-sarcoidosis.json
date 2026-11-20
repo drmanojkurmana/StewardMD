@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sgm-sarcoidosis",
+ "subject": "ss-general-medicine",
+ "title": "Sarcoidosis: multisystem essentials",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Sarcoidosis** (multisystem granulomatous disease of unknown aetiology) targets lungs and mediastinal nodes with **non caseating granulomas** (epithelioid granulomas without necrosis). Peak age is 20 to 40 years, with young adults and women more affected. About 70% have thoracic disease, and **bilateral hilar lymphadenopathy** (symmetrical node enlargement) is classic on chest film. Spontaneous remission occurs in 50 to 70%.",
+   "say": "Sarcoidosis is multisystem granulomatous disease and it targets lungs and mediastinal nodes. Non caseating granulomas are epithelioid granulomas without necrosis and they are hallmark. Peak age is twenty to forty years and young adults are affected. About seventy percent have thoracic disease. Bilateral hilar lymphadenopathy is symmetrical node enlargement and it is classic. Spontaneous remission occurs in fifty to seventy percent and it is common.",
+   "vis": null
+  },
+  {
+   "tx": "Cause is unknown but **genetic predisposition** (human leukocyte antigen) plus **environmental trigger** (dust, infection) activates helper T cells. Pathogenesis involves **CD4 T cell** (helper T) accumulation with **interleukin two** (IL2, T cell cytokine) and tumour necrosis factor. **Angiotensin converting enzyme** (ACE, macrophage enzyme) rises from granuloma macrophages. **Hypercalcaemia** (raised serum calcium from extra renal calcitriol synthesis) and **hypercalciuria** (calcium in urine) occur. Skin and eye involvement are common.",
+   "say": "Cause is unknown but genetic predisposition and environmental trigger activate helper T cells. Pathogenesis involves CD four T cell accumulation with interleukin two and tumour necrosis factor. Angiotensin converting enzyme rises from granuloma macrophages and it is elevated. Hypercalcaemia is raised serum calcium and it is from extra renal calcitriol synthesis. Hypercalciuria is calcium in urine and it is common. Skin and eye involvement are common and they are important.",
+   "vis": null
+  },
+  {
+   "tx": "**Non caseating granulomas** (tight clusters of epithelioid macrophages and Langhans giant cells) form along lymphatics and cause **perilymphatic nodules** (nodules in fissures and septa) and **hilar adenopathy**. Lymphatic thickening and fibrosis stiffen lung and reduce diffusion, but obstruction is rare. **Scadding staging** (stage 0 to 4 chest film) predicts outcome: stage 1 is nodes only, stage 4 is fibrosis. Granulomas may resolve or progress to **pulmonary fibrosis** (irreversible scarring).",
+   "say": "Non caseating granulomas are tight clusters of epithelioid macrophages and they form along lymphatics. Perilymphatic nodules are nodules in fissures and septa and they are classic. Lymphatic thickening stiffens the lung and it reduces diffusion. Scadding staging is stage zero to four and it predicts outcome. Stage one is nodes only and stage four is fibrosis. Granulomas may resolve or progress to fibrosis and it is irreversible.",
+   "vis": null
+  },
+  {
+   "tx": "**Löfgren syndrome** (acute triad of erythema nodosum, bihilar nodes and ankle arthritis with fever) has excellent prognosis and needs no biopsy. Chronic disease shows **dry cough**, exertional dyspnoea and weight loss. Skin lesions include **erythema nodosum** (tender pretibial nodules), **lupus pernio** (indurated nose and cheeks) and **plaque** lesions. Eye disease includes **anterior uveitis** (red painful eye) and **posterior uveitis**. **Hypercalcaemia** may cause polyuria, thirst and renal stones. **Cardiac sarcoid** (myocardial granuloma) causes heart block and arrhythmia.",
+   "say": "Lofgren syndrome is acute triad of erythema nodosum, bihilar nodes and ankle arthritis and it has excellent prognosis. Chronic disease is dry cough and exertional dyspnoea and weight loss and it is progressive. Skin lesions include erythema nodosum and lupus pernio and plaque lesions and they are distinctive. Eye disease includes anterior uveitis and posterior uveitis and it needs referral. Hypercalcaemia may cause polyuria and thirst and renal stones and it is serious. Cardiac sarcoid causes heart block and arrhythmia and it is dangerous.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Hallmark"
+    ],
+    "rows": [
+     [
+      "Lung",
+      "Dry cough, bihilar nodes, perilymphatic nodules"
+     ],
+     [
+      "Skin",
+      "Erythema nodosum, lupus pernio"
+     ],
+     [
+      "Eye",
+      "Anterior and posterior uveitis"
+     ],
+     [
+      "Calcium",
+      "Hypercalcaemia, hypercalciuria, stones"
+     ],
+     [
+      "Heart",
+      "Heart block, ventricular arrhythmia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chest radiography** (X ray) is first test and shows **Scadding stage** and perilymphatic pattern. **High resolution CT** (HRCT chest) shows perilymphatic nodules, ground glass and fibrosis. **Endobronchial ultrasound guided nodal biopsy** (EBUS TBNA, needle sampling) with **non caseating granulomas** is diagnostic and is preferred gold standard over mediastinoscopy. **Serum ACE** (angiotensin converting enzyme) is elevated in 60% but is non specific. **Bronchoalveolar lavage CD4 ratio** (CD4 to CD8 above 3.5) supports diagnosis.",
+   "say": "Chest radiography is the first test and it shows Scadding stage and perilymphatic pattern. High resolution CT is a test and it shows perilymphatic nodules and ground glass. Endobronchial ultrasound guided nodal biopsy is preferred and it shows non caseating granulomas. Serum ACE is elevated in sixty percent but it is non specific. Bronchoalveolar lavage ratio supports diagnosis and it is above three point five. Biopsy is diagnostic when granulomas are seen and infection is excluded.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chest X ray stage"
+     },
+     {
+      "id": "b",
+      "label": "HRCT pattern"
+     },
+     {
+      "id": "c",
+      "label": "EBUS biopsy granuloma"
+     },
+     {
+      "id": "d",
+      "label": "Exclude infection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Observation** (watchful waiting) is appropriate for asymptomatic **stage 1** disease with 80% remission. **Corticosteroids** (prednisolone 20 to 40 mg daily) are first line for symptomatic, cardiac, ocular or hypercalcaemic disease. **Methotrexate** (15 mg weekly) is second line and steroid sparing. **Tumour necrosis factor inhibitors** (infliximab) are third line for refractory disease. **Calcium and vitamin D** restriction (avoid supplements, low sun) helps hypercalcaemia. **Mycophenolate** is an alternative.",
+   "say": "Observation is appropriate for asymptomatic stage one disease and it is safe. Corticosteroids are first line for symptomatic disease and they are effective. Prednisolone dose is twenty to forty milligrams daily and it is taper. Methotrexate is second line and it is steroid sparing. Tumour necrosis factor inhibitors are third line for refractory disease. Calcium restriction helps hypercalcaemia and it is advised. Mycophenolate is an alternative agent.",
+   "vis": null
+  },
+  {
+   "tx": "**ATS and WASOG guidelines** (American Thoracic Society, World Association of Sarcoidosis) emphasise that **biopsy** is not needed in classic Löfgren or Heerfordt (fever, parotid, uveitis) presentations. **Cardiac magnetic resonance** (CMR, heart imaging) and **positron emission tomography** (PET, metabolic scan) detect cardiac disease. **Pulmonary function** (restrictive pattern with reduced diffusion) monitors response. **Early steroid use** in asymptomatic stage 1 is not beneficial and is avoided. **Smoking cessation** is advised as smoking worsens dyspnoea.",
+   "say": "ATS and WASOG guidelines are the standard and they emphasise selective biopsy. Biopsy is not needed in classic Lofgren presentations and it is safe to omit. Cardiac MRI and PET detect cardiac disease and they are useful. Pulmonary function monitors response and it is restrictive pattern. Early steroid use in asymptomatic disease is not beneficial and it is avoided. Smoking cessation is advised and it improves symptoms.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **pulmonary fibrosis** (irreversible upper lobe scarring, stage 4) with respiratory failure and **pulmonary hypertension**. **Hypercalcaemia** causes nephrolithiasis, renal failure and polyuria. **Neurosarcoidosis** (meningitis, cranial neuropathy, hydrocephalus) is dangerous. **Cardiac sarcoid** (heart block, ventricular tachycardia, sudden death) needs pacemaker or defibrillator. **Uveitis** can cause blindness if untreated. Most patients have excellent prognosis, but 5 to 10% have chronic progressive disease. Black patients have more severe disease.",
+   "say": "Complications include pulmonary fibrosis and it is irreversible upper lobe scarring. Pulmonary hypertension causes right heart failure and it worsens prognosis. Hypercalcaemia causes stones and renal failure and it is serious. Neurosarcoidosis is rare but it is dangerous and needs steroids. Cardiac sarcoid causes heart block and sudden death and it needs device. Uveitis can cause blindness if untreated and it needs referral. Most patients have excellent prognosis but some have chronic disease.",
+   "vis": null
+  },
+  {
+   "tx": "Examiners test distinction between sarcoidosis and **tuberculosis** (both cause granulomas, but TB is caseating and sarcoid is non caseating). **Berylliosis** (beryllium exposure) and **hypersensitivity pneumonitis** mimic sarcoidosis radiologically. **Lymphoma** (malignant adenopathy) also causes bihilar nodes but is unilateral and irregular. **ACE** elevation is non specific and is seen in Gaucher disease and hyperthyroidism. **Schaumann bodies** (laminated inclusions) and **asteroid bodies** are characteristic but not diagnostic alone.",
+   "say": "Examiners test the distinction between sarcoidosis and tuberculosis and it is important. Tuberculosis is caseating granulomas and sarcoid is non caseating and it is key. Berylliosis and hypersensitivity mimic sarcoid radiologically and exposure history is needed. Lymphoma also causes bihilar nodes but it is often unilateral and irregular. ACE elevation is non specific and it is seen in other diseases. Schaumann bodies are characteristic and they support diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sarcoidosis",
+     "points": [
+      "Non caseating granulomas",
+      "Bilateral hilar nodes",
+      "Perilymphatic nodules",
+      "ACE may be high, hypercalcaemia"
+     ]
+    },
+    "right": {
+     "title": "TB",
+     "points": [
+      "Caseating granulomas",
+      "Upper lobe cavity",
+      "Fever, AFB positive",
+      "Responds to anti TB therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Skin biopsy** (punch biopsy) is easiest and shows granulomas and is preferred in cutaneous disease. **Lacrimal gland enlargement** (dacryoadenitis) and **parotid swelling** (Heerfordt) are classic head and neck signs. **Audiology and vision** screening is routine as eye and ear disease may be subclinical. **Serum calcium** (corrected calcium) and **urinary calcium** must be checked at each visit. **ECG** (electrocardiogram) screens for heart block and is mandatory in cardiac disease. **Pulmonary function** tracks fibrotic change.",
+   "say": "Skin biopsy is easiest and it shows granulomas and it is preferred in cutaneous disease. Lacrimal gland enlargement and parotid swelling are classic head and neck signs. Audiology and vision screening is routine and it is essential. Serum calcium and urinary calcium must be checked at each visit. ECG screens for heart block and it is mandatory in cardiac disease. Pulmonary function tracks fibrotic change and it is useful.",
+   "vis": null
+  },
+  {
+   "tx": "High yield patterns are bilateral hilar nodes, perilymphatic nodules, non caseating granulomas and Löfgren triad. Remember Scadding stages, ACE hypercalcaemia and EBUS as gold biopsy. **Steroids** first line for cardiac, ocular and symptomatic disease and **methotrexate** second line. A quick table below collects systems, tests, stages and treatments for revision.",
+   "say": "High yield patterns include bilateral hilar nodes, perilymphatic nodules and non caseating granulomas and Lofgren triad. Clinicians should remember Scadding stages and ACE hypercalcaemia. Endobronchial ultrasound biopsy is gold standard and it is preferred. Steroids are first line for cardiac and ocular disease and methotrexate is second line. The table below collects systems, tests, stages and treatments for quick revision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "High yield detail"
+    ],
+    "rows": [
+     [
+      "Classic X ray",
+      "Bilateral hilar lymphadenopathy"
+     ],
+     [
+      "CT pattern",
+      "Perilymphatic nodules"
+     ],
+     [
+      "Granuloma",
+      "Non caseating, no necrosis"
+     ],
+     [
+      "Löfgren triad",
+      "Erythema nodosum, nodes, ankle arthritis"
+     ],
+     [
+      "ACE",
+      "Elevated in sixty percent, non specific"
+     ],
+     [
+      "Calcium",
+      "Hypercalcaemia from calcitriol"
+     ],
+     [
+      "Gold biopsy",
+      "EBUS TBNA nodal granuloma"
+     ],
+     [
+      "First drug",
+      "Prednisolone if symptomatic"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

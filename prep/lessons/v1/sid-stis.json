@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "module": "sid-stis",
+ "title": "Sexually transmitted infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Sexually transmitted infections** are managed **by syndrome first**, organism later, in most clinics. **More than 40 microorganisms** spread sexually, spanning **bacteria, viruses, protozoa, fungi and parasites**. **Four curable infections** are **gonorrhoea, chlamydia, syphilis and trichomoniasis**. **Syphilis in 2022 reached 207,255 total cases** in the United States, with **congenital rate 102.5 per 100,000 births**. **Genital HPV** is **commonest sexually transmitted pathogen** there. **Curable infections plus BV** raise **HIV risk**.",
+   "say": "Sexually transmitted infections were reported to be managed by syndrome first, organism later, in most clinics worldwide. More than forty microorganisms were reported to spread sexually, spanning bacteria, viruses, protozoa, fungi and parasites in humans. Four curable infections were reported as gonorrhoea, chlamydia, syphilis and trichomoniasis in guidelines. Syphilis in twenty twenty two reached two hundred seven thousand two hundred fifty five total cases in the United States, with congenital rate one hundred two point five per one hundred thousand births. Genital HPV was reported as the commonest sexually transmitted pathogen there in surveys. Curable infections plus BV were reported to raise HIV risk across exposed people.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Examples",
+     "Control point"
+    ],
+    "rows": [
+     [
+      "Curable bacterial",
+      "Gonorrhoea, syphilis",
+      "Early cure"
+     ],
+     [
+      "Curable protozoal",
+      "Trichomoniasis",
+      "Partner cure"
+     ],
+     [
+      "Viral suppressible",
+      "Herpes, HPV, HIV",
+      "Suppression, vaccines"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urethritis and cervicitis** come from **Neisseria gonorrhoeae and Chlamydia trachomatis** most often. **Genital ulcer** is **syphilis and herpes** commonest, with **chancroid and LGV** regional. **LGV serovars** involve **rectal disease** after **receptive anal sex** with **gonorrhoea and herpes** as mimics. **Vaginal discharge** is mostly **BV, candida or trichomonas**, with **cervicitis** when **mucopurulent discharge** exists. **Epididymitis under 35** is mostly **chlamydia**, sometimes **gonorrhoea**, with **overt urethritis**. **Network spread** needs **partner change with concurrent partners**.",
+   "say": "Urethritis and cervicitis were reported to arise from Neisseria gonorrhoeae and Chlamydia trachomatis most often in clinics. Genital ulcer was reported to be syphilis and herpes commonest, while chancroid and LGV stayed regional in many areas. LGV serovars were reported to involve rectal disease after receptive anal sex with gonorrhoea and herpes as mimics in practice. Vaginal discharge was reported to be mostly BV, candida or trichomonas, while cervicitis appeared when mucopurulent discharge existed without odor change. Epididymitis under thirty five was reported to be mostly chlamydia, sometimes gonorrhoea, with overt urethritis in young men. Network spread was reported to need partner change with concurrent partners across communities.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Organisms",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Urethritis, cervicitis",
+      "Gonococcus, chlamydia",
+      "Discharge, dysuria"
+     ],
+     [
+      "Genital ulcer",
+      "Syphilis, herpes",
+      "Pain pattern"
+     ],
+     [
+      "PID pain",
+      "Gonococcus, chlamydia",
+      "Motion tenderness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Initial spread rate** equals **exposure rate times per-exposure efficiency times infectivity duration**. **Chlamydia lives inside cells**, while **Treponema pallidum is motile** and **invades mucosa** quietly. **Trichomonas and BV** disturb **vaginal flora** without **frank ulcer** yet **raise HIV risk**. **Ulcer inflammation disrupts mucosal barrier**, easing **HIV entry** and **shedding**. **Herpes ulceration** is **commonest worldwide** cause, with **HSV-2 recurring more** and **infecting partners more** than HSV-1. **Condoms, vaccines, early cure and fewer partners** cut transmission.",
+   "say": "Initial spread rate was reported to equal exposure rate times per exposure efficiency times infectivity duration in models. Chlamydia was reported to live inside cells, while Treponema pallidum was reported as motile and quietly invading mucosa in humans. Trichomonas and BV were reported to disturb vaginal flora without frank ulcer yet raise HIV risk in studies. Ulcer inflammation was reported to disrupt mucosal barrier, easing HIV entry and shedding across partners in cohorts. Herpes ulceration was reported as the commonest worldwide cause, while HSV two recurred more and infected partners more than HSV one. Condoms, vaccines, early cure and fewer partners were reported to cut transmission in control programmes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exposure"
+     },
+     {
+      "id": "b",
+      "label": "Mucosal breach"
+     },
+     {
+      "id": "c",
+      "label": "Spread network"
+     },
+     {
+      "id": "d",
+      "label": "Partner risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urethritis** shows **visible discharge, 2 or more WBC per field on Gram stain**, or **leucocyte esterase with 10 or more WBC per field**. **PID** needs **cervical motion with uterine or adnexal tenderness**, after **excluding ectopic and surgical causes**. **Syphilis chancre** is **painless, firm, indurated**, while **chancroid** is **painful, soft with suppurative nodes**. **Herpes gives painful clustered ulcers**, **LGV gives buboes**, **donovanosis gives beefy friable ulcer with pseudobubo**. **Donovan bodies cluster in mononuclear cells** in granuloma inguinale. **Mixed ulcers** occur, so **one lesion never excludes another cause**.",
+   "say": "Urethritis was reported with visible discharge, two or more WBC per field on Gram stain, or leucocyte esterase with ten or more WBC per field in first void urine. PID was reported to need cervical motion with uterine or adnexal tenderness, after excluding ectopic and surgical causes in women. Syphilis chancre was reported as painless, firm and indurated, while chancroid was reported as painful, soft with suppurative nodes in clinics. Herpes was reported with painful clustered ulcers, LGV with buboes, and donovanosis with beefy friable ulcer and pseudobubo in case series. Donovan bodies were reported to cluster inside mononuclear cells in granuloma inguinale lesions. Mixed ulcers were reported as common, so one lesion never excluded another cause in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ulcer type",
+     "Pain",
+     "Node picture"
+    ],
+    "rows": [
+     [
+      "Syphilis chancre",
+      "Painless, firm",
+      "Painless nodes"
+     ],
+     [
+      "Chancroid",
+      "Painful, soft",
+      "Suppurative bubo"
+     ],
+     [
+      "Donovanosis",
+      "Painless, beefy",
+      "Pseudobubo, granuloma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**NAAT first** tests **gonorrhoea and chlamydia** on **first void urine or vaginal swab**, plus **rectal and throat swabs by exposure**. **Gonococcal culture with susceptibility** follows **treatment failure**. **Syphilis** needs **treponemal plus non-treponemal tests**, recording **RPR titre on treatment day**. **Dual rapid tests** allow **same-day therapy**. **Trichomonas NAAT** beats **wet mount**, **BV uses Amsel criteria**, **herpes uses PCR from ulcer**. **Every patient gets HIV testing**, with **hepatitis B and C by risk** and **pregnancy testing in women**.",
+   "say": "NAAT testing was ordered first for gonorrhoea and chlamydia on first void urine or vaginal swab, plus rectal and throat swabs by exposure in clinics. Gonococcal culture with susceptibility was ordered after treatment failure in many centres worldwide. Syphilis testing was reported to need treponemal plus non-treponemal tests, while recording RPR titre on treatment day guided follow up. Dual rapid tests were reported to allow same day therapy in field clinics, in many regions. Trichomonas NAAT was reported to beat wet mount, BV testing used Amsel criteria, and herpes testing used PCR from ulcer material in labs. HIV testing was ordered for every patient, while hepatitis B and C testing followed risk and pregnancy testing covered women in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "First test",
+     "Confirms with"
+    ],
+    "rows": [
+     [
+      "Gonorrhoea, chlamydia",
+      "NAAT by site",
+      "Culture if failure"
+     ],
+     [
+      "Syphilis",
+      "Dual treponemal tests",
+      "RPR titre follow-up"
+     ],
+     [
+      "Ulcer cause",
+      "Herpes PCR plus serology",
+      "Syphilis excluded"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gonorrhoea gets ceftriaxone 500 mg IM once**, **with 1 g when weight reaches 150 kg**, while **WHO 2024 gives 1 g to all**. **Chlamydia gets doxycycline 100 mg twice daily for 7 days**. **Early syphilis gets benzathine penicillin G 2.4 million units IM once**. **Late latent needs 3 weekly 2.4 doses, total 7.2 million units**. **Trichomonas in women gets metronidazole 500 mg twice daily for 7 days**, in **men 2 g once**. **PID gets triple therapy for 14 days**, **LGV 21 days** of doxycycline.",
+   "say": "Gonorrhoea was reported to get Ceftriaxone five hundred milligrams once, one gram if reached one hundred fifty kilos, while WHO twenty twenty four gave one gram to all. Chlamydia was reported to get Doxycycline one hundred milligrams twice daily for seven days. Early syphilis was reported to get Benzathine Penicillin G two point four million units once by injection. Late latent syphilis was reported to get three weekly doses, total seven point two million units by course. Trichomonas in women was reported to get Metronidazole five hundred milligrams twice daily for seven days, while men received two grams once. PID was reported to get triple therapy for fourteen days, while LGV received twenty one days of Doxycycline.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Regimen",
+     "Span"
+    ],
+    "rows": [
+     [
+      "Gonorrhoea",
+      "Ceftriaxone single dose",
+      "One visit"
+     ],
+     [
+      "Chlamydia",
+      "Doxycycline twice daily",
+      "7 days"
+     ],
+     [
+      "Early syphilis",
+      "Benzathine single dose",
+      "Single visit"
+     ],
+     [
+      "PID",
+      "Triple therapy",
+      "14 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chlamydia prefers doxycycline** over **azithromycin 1 g single dose**; **levofloxacin 500 mg daily for 7 days** is alternative. **Persistent urethritis** links to **Mycoplasma genitalium**, treated by **doxycycline then moxifloxacin 400 mg daily for 7 days**. **Neurosyphilis needs aqueous penicillin 18 to 24 million units daily for 10 to 14 days**. **Penicillin allergy in early syphilis** uses **doxycycline for 14 days** or **ceftriaxone daily for 10 days**; **late syphilis 28 days**. **Azithromycin fails in syphilis by resistance**. **Jarisch-Herxheimer fever** starts **within 24 hours**, not **allergy**.",
+   "say": "Chlamydia therapy was reported to prefer Doxycycline over Azithromycin one gram once, while Levofloxacin five hundred milligrams daily for seven days stayed alternative. Persistent urethritis was reported to link to Mycoplasma genitalium, treated by Doxycycline then Moxifloxacin four hundred milligrams daily for seven days. Neurosyphilis was reported to need Aqueous Penicillin eighteen to twenty four million units daily for ten to fourteen days. Penicillin allergy in early syphilis was reported to use Doxycycline for fourteen days or Ceftriaxone daily for ten days, while late syphilis used twenty eight days. Azithromycin was reported to fail in syphilis by resistance in many reports. Jarisch Herxheimer fever was reported to start within twenty four hours, not as allergy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preferred now",
+     "points": [
+      "Doxycycline for chlamydia",
+      "Ceftriaxone for gonorrhoea",
+      "Benzathine for syphilis"
+     ]
+    },
+    "right": {
+     "title": "Avoid as sole therapy",
+     "points": [
+      "Azithromycin lone gonorrhoea",
+      "Ciprofloxacin gonorrhoea",
+      "Azithromycin syphilis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Partners from 60 days before symptoms** or **diagnosis** get **tested and treated** for **gonorrhoea, chlamydia and PID**. **Early syphilis partners within 90 days** get **presumptive therapy** even if **seronegative**. **Abstinence runs 7 days** after **single-dose therapy** or **until 7-day course ends** with **symptoms resolved**. **Retest at about 3 months** for **gonorrhoea, chlamydia and trichomonas**. **Test of cure at 7 to 14 days** suits **throat gonorrhoea**, and **4 weeks** suits **chlamydia in pregnancy**. **Admission for PID** follows **tubo-ovarian abscess, pregnancy, severe illness, vomiting, temperature above 38.5 or failure at 72 hours**.",
+   "say": "Partners from sixty days before symptoms or diagnosis were ordered to get tested and treated for gonorrhoea, chlamydia and PID. Early syphilis partners within ninety days were ordered to get presumptive therapy even if seronegative at testing. Abstinence was ordered for seven days after single dose therapy or until a seven day course ended with symptoms resolved. Retest at about three months was ordered for gonorrhoea, chlamydia and trichomonas after treatment. Test of cure at seven to fourteen days was ordered for throat gonorrhoea, while four weeks suited chlamydia in pregnancy. Admission for PID was ordered after tubo ovarian abscess, pregnancy, severe illness, vomiting, temperature above thirty eight point five or failure at seventy two hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Window",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Partner trace",
+      "60 days gonorrhoea group",
+      "Test plus treat"
+     ],
+     [
+      "Syphilis partners",
+      "90 days early disease",
+      "Treat presumptively"
+     ],
+     [
+      "Follow-up",
+      "3 months retest",
+      "Test of cure by site"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** **azithromycin alone or ciprofloxacin** for gonorrhoea fails by **widespread resistance**. **Urine-only testing** misses **throat and rectal gonorrhoea**. **Syphilis therapy without baseline RPR** makes **follow-up unreadable**; **failure is 4-fold rise or no 4-fold fall by 12 months**. **BV partner therapy is not recommended**, and **alcohol avoidance is unnecessary**. **IUD need not be removed** in PID. **Painful ulcer never excludes syphilis**, since **mixed infection** is common. **Donovanosis needs prolonged therapy until re-epithelialisation**, not **until ulcer looks better**.",
+   "say": "For the exam, these traps were listed. Azithromycin alone or Ciprofloxacin for gonorrhoea was reported to fail by resistance. Urine only testing was reported to miss throat and rectal gonorrhoea in MSM patients, in many clinics. Syphilis therapy without baseline RPR was reported to make follow up unreadable, while failure meant a fourfold rise or no fourfold fall by twelve months. BV partner therapy was reported as not recommended, while alcohol avoidance stayed unnecessary. An IUD was reported as need not being removed in PID treatment. A painful ulcer was reported as never excluding syphilis, since mixed infection stayed common in ulcers. Donovanosis therapy was reported to need prolonged treatment until re epithelialisation, not until ulcer looked better.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Azithromycin lone cure",
+      "Resistant gonorrhoea",
+      "Ceftriaxone first"
+     ],
+     [
+      "Urine only test",
+      "Misses throat, rectum",
+      "Test by exposure"
+     ],
+     [
+      "No baseline RPR",
+      "Follow-up unreadable",
+      "Record titre first"
+     ],
+     [
+      "Stop when better",
+      "Donovanosis relapses",
+      "Treat until healed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **ceftriaxone 500 mg single dose, 1 g if 150 kg or more**, covers gonorrhoea. **Doxycycline 100 mg twice daily for 7 days** covers chlamydia and urethritis. **Benzathine 2.4 million units once** covers early syphilis, **7.2 million total** covers late latent. **Doxycycline 21 days** covers LGV, **14 days** covers PID triple therapy. **Chancroid gets azithromycin 1 g once or ceftriaxone 250 mg once**. **Partners from 60 days, syphilis 90 days**, abstain **7 days**, retest **3 months**.",
+   "say": "For the exam, these high yield facts were tabulated. Ceftriaxone five hundred milligrams once, one gram if reached one hundred fifty kilos, was reported to cover gonorrhoea. Doxycycline one hundred milligrams twice daily for seven days was reported to cover chlamydia and urethritis. Benzathine two point four million units once was reported to cover early syphilis, while seven point two million total covered late latent disease. Doxycycline twenty one days was reported to cover LGV, while fourteen days covered PID triple therapy. Chancroid was reported to get Azithromycin one gram once or Ceftriaxone two hundred fifty milligrams once. Partners from sixty days and syphilis partners from ninety days were reported with abstinence seven days and retest three months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why asked"
+    ],
+    "rows": [
+     [
+      "Ceftriaxone 500",
+      "1 g if 150 kg plus",
+      "Gonorrhoea dose"
+     ],
+     [
+      "Doxycycline 7 days",
+      "100 twice daily",
+      "Chlamydia first"
+     ],
+     [
+      "Benzathine totals",
+      "2.4 once, 7.2 late",
+      "Stage rule"
+     ],
+     [
+      "LGV 21 days",
+      "PID 14 days",
+      "Duration asked"
+     ],
+     [
+      "Chancroid doses",
+      "1 g or 250 mg",
+      "Ulcer cure"
+     ],
+     [
+      "Partner windows",
+      "60 and 90 days",
+      "Epidemiology"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

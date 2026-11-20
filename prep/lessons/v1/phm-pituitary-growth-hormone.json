@@ -48,12 +48,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "resist", "label": "Acromegaly uncontrolled on somatostatin analogues" },
-          { "id": "peg", "label": "Pegvisomant blocks peripheral GH receptors" },
-          { "id": "igf", "label": "IGF 1 normalises, GH rises behind blockade" },
-          { "id": "image", "label": "Adenoma imaged periodically, liver enzymes monitored" }
+          {
+            "id": "resist",
+            "label": "Acromegaly uncontrolled on somatostatin analogues"
+          },
+          {
+            "id": "peg",
+            "label": "Pegvisomant blocks peripheral GH receptors"
+          },
+          {
+            "id": "igf",
+            "label": "IGF 1 normalises, GH rises behind blockade"
+          },
+          {
+            "id": "image",
+            "label": "Adenoma imaged periodically, liver enzymes monitored"
+          }
         ],
-        "edges": [["resist", "peg"], ["peg", "igf"], ["igf", "image"]]
+        "edges": [
+          [
+            "resist",
+            "peg"
+          ],
+          [
+            "peg",
+            "igf"
+          ],
+          [
+            "igf",
+            "image"
+          ]
+        ]
       }
     },
     {
@@ -97,12 +122,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "surgery", "label": "Transsphenoidal resection where feasible" },
-          { "id": "ssa", "label": "Somatostatin analogue for residual disease" },
-          { "id": "peg", "label": "Pegvisomant added or substituted for IGF 1 control" },
-          { "id": "caber", "label": "Cabergoline for mild or prolactin co secreting disease" }
+          {
+            "id": "surgery",
+            "label": "Transsphenoidal resection where feasible"
+          },
+          {
+            "id": "ssa",
+            "label": "Somatostatin analogue for residual disease"
+          },
+          {
+            "id": "peg",
+            "label": "Pegvisomant added or substituted for IGF 1 control"
+          },
+          {
+            "id": "caber",
+            "label": "Cabergoline for mild or prolactin co secreting disease"
+          }
         ],
-        "edges": [["surgery", "ssa"], ["ssa", "peg"], ["ssa", "caber"]]
+        "edges": [
+          [
+            "surgery",
+            "ssa"
+          ],
+          [
+            "ssa",
+            "peg"
+          ],
+          [
+            "ssa",
+            "caber"
+          ]
+        ]
       }
     },
     {
@@ -153,6 +203,51 @@
             "Pregnancy: tumour expansion vigilance, drug often stopped"
           ]
         }
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: **Pegvisomant** blocks the growth hormone receptor, so IGF 1 falls while growth hormone rises behind the blockade. Dose it by IGF 1 and keep imaging the adenoma. **Octreotide** and lanreotide are somatostatin analogues that suppress growth hormone in acromegaly. Gallstones and glucose swings mark their review. Cabergoline is first line for most prolactinomas. Continuous GnRH agonists flare, then downregulate receptors. Antagonists such as degarelix skip that flare. Surgery comes before drugs when an acromegaly adenoma is resectable.",
+      "say": "High-yield for the exam: Pegvisomant blocks the growth hormone receptor, so IGF 1 falls while growth hormone rises behind the blockade. Dose it by IGF 1 and keep imaging the adenoma. Octreotide and lanreotide are somatostatin analogues that suppress growth hormone in acromegaly. Gallstones and glucose swings mark their review. Cabergoline is first line for most prolactinomas. Continuous GnRH agonists flare, then downregulate receptors. Antagonists such as degarelix skip that flare. Surgery comes before drugs when an acromegaly adenoma is resectable.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Somatropin",
+            "Replaces GH, dose against IGF 1"
+          ],
+          [
+            "Mecasermin",
+            "IGF 1 replacement, hypoglycaemia risk"
+          ],
+          [
+            "Octreotide",
+            "Somatostatin analogue for acromegaly"
+          ],
+          [
+            "Analogue harms",
+            "Gallstones, steatorrhoea, glucose swings"
+          ],
+          [
+            "Pegvisomant",
+            "IGF 1 falls, GH rises behind block"
+          ],
+          [
+            "Cabergoline",
+            "First line for most prolactinomas"
+          ],
+          [
+            "GnRH agonists",
+            "Flare first, then receptor downregulation"
+          ],
+          [
+            "GnRH antagonists",
+            "Immediate suppression with no flare"
+          ]
+        ]
       }
     }
   ]

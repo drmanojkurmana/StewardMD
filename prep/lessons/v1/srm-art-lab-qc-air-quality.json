@@ -79,7 +79,7 @@
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Precise Thermal Control (37.0\u00b0C)",
+          "title": "Precise Thermal Control (37.0°C)",
           "points": [
             "Birefringent meiotic spindle intact",
             "Normal chromosomal alignment",
@@ -88,7 +88,7 @@
           ]
         },
         "right": {
-          "title": "Thermal Deviation (<35.0\u00b0C)",
+          "title": "Thermal Deviation (<35.0°C)",
           "points": [
             "Microtubule depolymerization in 2 min",
             "Dispersed maternal chromatids",
@@ -266,7 +266,7 @@
           "points": [
             "Vacuum insulation jacket intact",
             "Liquid nitrogen level monitored daily",
-            "Temperature stable below -190\u00b0C",
+            "Temperature stable below -190°C",
             "Continuous automated telemetry"
           ]
         },
@@ -275,11 +275,52 @@
           "points": [
             "Rapid outer tank sweating and frosting",
             "Accelerated liquid nitrogen boil-off",
-            "Temperature rises above -130\u00b0C",
+            "Temperature rises above -130°C",
             "Immediate emergency tank transfer"
           ]
         }
       }
+    },
+    {
+      "tx": "**High-yield for the exam**: The embryology lab is ISO class 7, while handling benches reach ISO class 5. HEPA filters remove 99.97 percent of particles at 0.3 micrometres, and carbon filters remove volatile compounds. Keep everything at 37 degrees; chilling below 35 depolymerises the spindle. Culture pH stays 7.25 to 7.35, osmolality 270 to 290, and low oxygen culture uses 5 percent oxygen.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Lab cleanroom class",
+            "ISO 7; benches ISO 5"
+          ],
+          [
+            "HEPA performance",
+            "Removes 99.97 percent at 0.3 micrometres"
+          ],
+          [
+            "Working temperature",
+            "37.0 degrees, tolerance 0.2 degrees"
+          ],
+          [
+            "Cold injury",
+            "Below 35 degrees depolymerises meiotic spindle"
+          ],
+          [
+            "Culture pH",
+            "7.25 to 7.35 with 5 to 7 percent CO2"
+          ],
+          [
+            "Low oxygen culture",
+            "5 percent oxygen in trigas incubators"
+          ],
+          [
+            "Osmolality range",
+            "270 to 290 mOsm per kilogram"
+          ]
+        ]
+      },
+      "say": "High-yield for the exam: The embryology lab is ISO class 7, while handling benches reach ISO class 5. HEPA filters remove 99.97 percent of particles at 0.3 micrometres, and carbon filters remove volatile compounds. Keep everything at 37 degrees; chilling below 35 depolymerises the spindle. Culture pH stays 7.25 to 7.35, osmolality 270 to 290, and low oxygen culture uses 5 percent oxygen."
     }
   ],
   "v": 1

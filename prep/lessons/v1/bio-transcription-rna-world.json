@@ -10,12 +10,32 @@
    "say": "Ribosomal RNA is eighty percent of cellular RNA while messenger is only a few percent informationally. Abundance inversely tracks information density across silencing and scaffold species completing the RNA census quantitatively.",
    "vis": {
     "kind": "table",
-    "cols": ["RNA species", "Share and polymerase", "Signature job"],
+    "cols": [
+     "RNA species",
+     "Share and polymerase",
+     "Signature job"
+    ],
     "rows": [
-     ["rRNA (18/28/5.8 plus 5S)", "About 80 percent; Pol I plus III (5S)", "Ribosome catalysis (peptidyl transferase)"],
-     ["tRNA", "About 15 percent; Pol III", "Adaptor decoding, wobble modifications"],
-     ["mRNA", "1 to 5 percent; Pol II", "Protein information, cap/tail regulated half lives"],
-     ["miRNA and siRNA (21 to 23 nt)", "Trace mass; Pol II pri (mi) or dsRNA (si)", "RISC silencing, therapies patisiran/givosiran"]
+     [
+      "rRNA (18/28/5.8 plus 5S)",
+      "About 80 percent; Pol I plus III (5S)",
+      "Ribosome catalysis (peptidyl transferase)"
+     ],
+     [
+      "tRNA",
+      "About 15 percent; Pol III",
+      "Adaptor decoding, wobble modifications"
+     ],
+     [
+      "mRNA",
+      "1 to 5 percent; Pol II",
+      "Protein information, cap/tail regulated half lives"
+     ],
+     [
+      "miRNA and siRNA (21 to 23 nt)",
+      "Trace mass; Pol II pri (mi) or dsRNA (si)",
+      "RISC silencing, therapies patisiran/givosiran"
+     ]
     ]
    }
   },
@@ -26,12 +46,37 @@
     "kind": "flow",
     "title": "MicroRNA assembly line",
     "nodes": [
-     {"id": "pri", "label": "Pri-miRNA hairpin (Pol II)"},
-     {"id": "dro", "label": "Drosha crops (nucleus)"},
-     {"id": "dic", "label": "Dicer dices (cytoplasm)"},
-     {"id": "risc", "label": "Argonaute RISC represses targets"}
+     {
+      "id": "pri",
+      "label": "Pri-miRNA hairpin (Pol II)"
+     },
+     {
+      "id": "dro",
+      "label": "Drosha crops (nucleus)"
+     },
+     {
+      "id": "dic",
+      "label": "Dicer dices (cytoplasm)"
+     },
+     {
+      "id": "risc",
+      "label": "Argonaute RISC represses targets"
+     }
     ],
-    "edges": [["pri", "dro"], ["dro", "dic"], ["dic", "risc"]]
+    "edges": [
+     [
+      "pri",
+      "dro"
+     ],
+     [
+      "dro",
+      "dic"
+     ],
+     [
+      "dic",
+      "risc"
+     ]
+    ]
    }
   },
   {
@@ -39,8 +84,21 @@
    "say": "Silencing therapeutics industrialised within a decade from patisiran nanoparticles to GalNAc conjugates and splice antisense drugs. Modified nucleoside mRNA vaccines apply processing rules from this module clinically and Nobel recognised.",
    "vis": {
     "kind": "compare",
-    "left": {"title": "RNase H gapmer antisense", "points": ["DNA gap degrades target RNA", "Tofersen (SOD1 ALS) exemplar", "Liver and CNS intrathecal delivery"]},
-    "right": {"title": "Steric block antisense (no cleavage)", "points": ["Splice switching or translation block", "Nusinersen and eteplirsen exemplars", "Chemistry (PMO, 2-prime modifications) decides fate"]
+    "left": {
+     "title": "RNase H gapmer antisense",
+     "points": [
+      "DNA gap degrades target RNA",
+      "Tofersen (SOD1 ALS) exemplar",
+      "Liver and CNS intrathecal delivery"
+     ]
+    },
+    "right": {
+     "title": "Steric block antisense (no cleavage)",
+     "points": [
+      "Splice switching or translation block",
+      "Nusinersen and eteplirsen exemplars",
+      "Chemistry (PMO, 2-prime modifications) decides fate"
+     ]
     }
    }
   },
@@ -54,11 +112,27 @@
    "say": "Ribosomal RNA catalyses peptide bonds as ribozyme heart with antibiotics binding its pockets druggably. Ribosomopathies prove biogenesis stress surveillance through p53 in marrow failure syndromes genetically and clinically.",
    "vis": {
     "kind": "table",
-    "cols": ["Ribosome fact", "Eukaryote (80S)", "Bacteria (70S drug target)"],
+    "cols": [
+     "Ribosome fact",
+     "Eukaryote (80S)",
+     "Bacteria (70S drug target)"
+    ],
     "rows": [
-     ["Subunits", "60S plus 40S", "50S plus 30S (Svedbergs not additive)"],
-     ["Catalytic rRNA", "28S in 60S", "23S in 50S (peptidyl transferase)"],
-     ["Antibiotic pockets (bridge)", "Cycloheximide experimental only", "Macrolide 50S, aminoglycoside 30S (next module)"]
+     [
+      "Subunits",
+      "60S plus 40S",
+      "50S plus 30S (Svedbergs not additive)"
+     ],
+     [
+      "Catalytic rRNA",
+      "28S in 60S",
+      "23S in 50S (peptidyl transferase)"
+     ],
+     [
+      "Antibiotic pockets (bridge)",
+      "Cycloheximide experimental only",
+      "Macrolide 50S, aminoglycoside 30S (next module)"
+     ]
     ]
    }
   },
@@ -71,6 +145,51 @@
     "alt": "Blot lanes show a faded target band after knockdown with a steady GAPDH loading control band below.",
     "caption": "Knockdown blot with preserved loading control, Illustration: StewardMD original.",
     "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Ribosomal RNA forms about eighty percent of cellular RNA, while messenger RNA forms only one to five percent. MicroRNAs pair partly through seed nucleotides to repress translation, while small interfering RNAs pair perfectly to slice targets. Patisiran was the first small interfering RNA drug, targeting transthyretin in the liver.",
+   "say": "High-yield for the exam. Ribosomal RNA forms about eighty percent of cellular RNA, while messenger RNA forms only one to five percent. MicroRNAs pair partly through seed nucleotides to repress translation, while small interfering RNAs pair perfectly to slice targets. Patisiran was the first small interfering RNA drug, targeting transthyretin in the liver.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Most abundant RNA",
+      "Ribosomal RNA about eighty percent"
+     ],
+     [
+      "Least abundant listed RNA",
+      "Messenger RNA one to five percent"
+     ],
+     [
+      "MicroRNA seed region",
+      "Nucleotides two to eight pair partly"
+     ],
+     [
+      "MicroRNA processing",
+      "Drosha in nucleus, Dicer in cytoplasm"
+     ],
+     [
+      "Small interfering RNA pairing",
+      "Perfect pairing causes target slicing"
+     ],
+     [
+      "First siRNA drug",
+      "Patisiran targets transthyretin in liver"
+     ],
+     [
+      "Long noncoding RNA example",
+      "Xist coats inactive X chromosome"
+     ],
+     [
+      "Mitochondrial transfer RNA disease",
+      "MELAS mutation impairs mitochondrial translation"
+     ]
+    ]
    }
   }
  ],

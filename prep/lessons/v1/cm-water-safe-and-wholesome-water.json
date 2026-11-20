@@ -13,12 +13,32 @@
    "say": "Safe and wholesome water is completely free from disease-causing germs and toxic chemicals. It is crystal clear, pleasant to taste, and odorless for all domestic cooking and drinking.",
    "vis": {
     "kind": "table",
-    "cols": ["Wholesomeness parameter", "Statutory public health standard", "Health hazard if breached"],
+    "cols": [
+     "Wholesomeness parameter",
+     "Statutory public health standard",
+     "Health hazard if breached"
+    ],
     "rows": [
-     ["Microbiological safety", "Zero E. coli / thermotolerant coliforms per 100 ml", "Water-borne cholera, typhoid, viral hepatitis"],
-     ["Chemical safety", "Arsenic < 0.01 mg/L, Fluoride < 1.0 mg/L, Lead < 0.01 mg/L", "Chronic arsenicosis, fluorosis, neurotoxicity"],
-     ["Physical aesthetic quality", "Turbidity < 1 NTU, pleasant taste, zero odor", "Aesthetic rejection drives consumers to unsafe sources"],
-     ["Corrosion and hardness", "Total dissolved solids < 500 mg/L, moderate hardness", "Scale encrustation in pipes or heavy metal leaching"]
+     [
+      "Microbiological safety",
+      "Zero E. coli / thermotolerant coliforms per 100 ml",
+      "Water-borne cholera, typhoid, viral hepatitis"
+     ],
+     [
+      "Chemical safety",
+      "Arsenic < 0.01 mg/L, Fluoride < 1.0 mg/L, Lead < 0.01 mg/L",
+      "Chronic arsenicosis, fluorosis, neurotoxicity"
+     ],
+     [
+      "Physical aesthetic quality",
+      "Turbidity < 1 NTU, pleasant taste, zero odor",
+      "Aesthetic rejection drives consumers to unsafe sources"
+     ],
+     [
+      "Corrosion and hardness",
+      "Total dissolved solids < 500 mg/L, moderate hardness",
+      "Scale encrustation in pipes or heavy metal leaching"
+     ]
     ]
    }
   },
@@ -39,12 +59,32 @@
    "say": "Water-borne diseases are caught by swallowing contaminated water. Water-washed infections like scabies and eye trachoma happen when water is too scarce for people to wash their skin and clothes.",
    "vis": {
     "kind": "table",
-    "cols": ["Transmission class", "Mechanism of human infection", "Representative disease examples"],
+    "cols": [
+     "Transmission class",
+     "Mechanism of human infection",
+     "Representative disease examples"
+    ],
     "rows": [
-     ["Water-borne", "Ingesting water contaminated with human or animal faeces", "Cholera, typhoid fever, hepatitis A and E, amoebiasis"],
-     ["Water-washed", "Inadequate water volume for personal body and facial hygiene", "Trachoma, scabies, pediculosis, bacillary dysentery"],
-     ["Water-based", "Infection through aquatic intermediate snail hosts", "Schistosomiasis, dracunculiasis (guinea worm)"],
-     ["Water-related vector", "Biting insects that breed in or near water bodies", "Malaria, dengue, filariasis, yellow fever"]
+     [
+      "Water-borne",
+      "Ingesting water contaminated with human or animal faeces",
+      "Cholera, typhoid fever, hepatitis A and E, amoebiasis"
+     ],
+     [
+      "Water-washed",
+      "Inadequate water volume for personal body and facial hygiene",
+      "Trachoma, scabies, pediculosis, bacillary dysentery"
+     ],
+     [
+      "Water-based",
+      "Infection through aquatic intermediate snail hosts",
+      "Schistosomiasis, dracunculiasis (guinea worm)"
+     ],
+     [
+      "Water-related vector",
+      "Biting insects that breed in or near water bodies",
+      "Malaria, dengue, filariasis, yellow fever"
+     ]
     ]
    }
   },
@@ -55,12 +95,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Storage and natural sedimentation (10-14 days)"},
-     {"id": "b", "label": "Chemical coagulation with alum and flocculation"},
-     {"id": "c", "label": "Rapid or slow sand bed filtration"},
-     {"id": "d", "label": "Disinfection with chlorine (0.5 ppm residual)"}
+     {
+      "id": "a",
+      "label": "Storage and natural sedimentation (10-14 days)"
+     },
+     {
+      "id": "b",
+      "label": "Chemical coagulation with alum and flocculation"
+     },
+     {
+      "id": "c",
+      "label": "Rapid or slow sand bed filtration"
+     },
+     {
+      "id": "d",
+      "label": "Disinfection with chlorine (0.5 ppm residual)"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -69,12 +134,32 @@
    "say": "Slow sand filters treat water at low speed through fine sand. They need no added chemicals because a natural living biological skin on the sand digests and destroys passing bacteria.",
    "vis": {
     "kind": "table",
-    "cols": ["Design parameter", "Slow sand filter (Biological)", "Rapid sand filter (Mechanical)"],
+    "cols": [
+     "Design parameter",
+     "Slow sand filter (Biological)",
+     "Rapid sand filter (Mechanical)"
+    ],
     "rows": [
-     ["Filtration rate", "0.1 to 0.4 m/hour (2-5 mgd/acre)", "5.0 to 15.0 m/hour (100-120 mgd/acre)"],
-     ["Sand grain effective size", "Fine sand: 0.25 to 0.35 mm", "Coarse sand: 0.55 to 0.65 mm"],
-     ["Pre-treatment needed", "Plain sedimentation only (low turbidity)", "Coagulation with alum + rapid flocculation"],
-     ["Primary cleaning method", "Scraping upper 1 to 2 cm sand layer", "Backwashing with compressed air and water"]
+     [
+      "Filtration rate",
+      "0.1 to 0.4 m/hour (2-5 mgd/acre)",
+      "5.0 to 15.0 m/hour (100-120 mgd/acre)"
+     ],
+     [
+      "Sand grain effective size",
+      "Fine sand: 0.25 to 0.35 mm",
+      "Coarse sand: 0.55 to 0.65 mm"
+     ],
+     [
+      "Pre-treatment needed",
+      "Plain sedimentation only (low turbidity)",
+      "Coagulation with alum + rapid flocculation"
+     ],
+     [
+      "Primary cleaning method",
+      "Scraping upper 1 to 2 cm sand layer",
+      "Backwashing with compressed air and water"
+     ]
     ]
    }
   },
@@ -96,12 +181,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Continuous filtration for 3 to 5 days"},
-     {"id": "b", "label": "Algae, diatoms and bacteria form slimy zoogleal layer"},
-     {"id": "c", "label": "Schmutzdecke biological carpet active"},
-     {"id": "d", "label": "99.9% bacterial removal and organic digestion"}
+     {
+      "id": "a",
+      "label": "Continuous filtration for 3 to 5 days"
+     },
+     {
+      "id": "b",
+      "label": "Algae, diatoms and bacteria form slimy zoogleal layer"
+     },
+     {
+      "id": "c",
+      "label": "Schmutzdecke biological carpet active"
+     },
+     {
+      "id": "d",
+      "label": "99.9% bacterial removal and organic digestion"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -111,12 +221,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Loss of head reaches 1.2 metres threshold"},
-     {"id": "b", "label": "Drain supernatant water below sand surface"},
-     {"id": "c", "label": "Scrape top 1 to 2 cm of dirty sand with shovels"},
-     {"id": "d", "label": "Filter-to-waste for 48 hours until new Schmutzdecke matures"}
+     {
+      "id": "a",
+      "label": "Loss of head reaches 1.2 metres threshold"
+     },
+     {
+      "id": "b",
+      "label": "Drain supernatant water below sand surface"
+     },
+     {
+      "id": "c",
+      "label": "Scrape top 1 to 2 cm of dirty sand with shovels"
+     },
+     {
+      "id": "d",
+      "label": "Filter-to-waste for 48 hours until new Schmutzdecke matures"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -127,11 +262,19 @@
     "kind": "compare",
     "left": {
      "title": "Land and space efficiency",
-     "points": ["Compact footprint; fits urban plants", "Handles raw water turbidity up to 500 NTU", "Easily scaled up for large metropolitan cities"]
+     "points": [
+      "Compact footprint; fits urban plants",
+      "Handles raw water turbidity up to 500 NTU",
+      "Easily scaled up for large metropolitan cities"
+     ]
     },
     "right": {
      "title": "Operational demands",
-     "points": ["Requires skilled engineering operators", "Continuous electrical power for backwash pumps", "Chemical alum coagulant expenditure"]
+     "points": [
+      "Requires skilled engineering operators",
+      "Continuous electrical power for backwash pumps",
+      "Chemical alum coagulant expenditure"
+     ]
     }
    }
   },
@@ -142,12 +285,37 @@
    "vis": {
     "kind": "flow",
     "nodes": [
-     {"id": "a", "label": "Filter loss of head reaches 2.5 metres"},
-     {"id": "b", "label": "Compressed air forced upward to agitate sand grains"},
-     {"id": "c", "label": "High-velocity upward wash water flushes trapped sludge"},
-     {"id": "d", "label": "Back to forward filtration within 15 minutes"}
+     {
+      "id": "a",
+      "label": "Filter loss of head reaches 2.5 metres"
+     },
+     {
+      "id": "b",
+      "label": "Compressed air forced upward to agitate sand grains"
+     },
+     {
+      "id": "c",
+      "label": "High-velocity upward wash water flushes trapped sludge"
+     },
+     {
+      "id": "d",
+      "label": "Back to forward filtration within 15 minutes"
+     }
     ],
-    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
    }
   },
   {
@@ -156,13 +324,82 @@
    "say": "Slow sand filters are ideal for rural towns with clear water, needing no chemicals or electricity. Rapid sand filters suit crowded cities, handling muddy river water through compact machinery.",
    "vis": {
     "kind": "table",
-    "cols": ["Feature", "Slow Sand Filter", "Rapid Sand Filter"],
+    "cols": [
+     "Feature",
+     "Slow Sand Filter",
+     "Rapid Sand Filter"
+    ],
     "rows": [
-     ["Area occupied", "Very large land footprint", "Extremely compact (1/50th of slow filter)"],
-     ["Filter sand size", "Fine sand (0.25 to 0.35 mm)", "Coarse sand (0.55 to 0.65 mm)"],
-     ["Bacterial removal efficiency", "99.9% without post-chlorine", "80 to 90% (strictly requires chlorination)"],
-     ["Turbidity handling capacity", "Handles low turbidity (< 30 NTU)", "Handles high turbidity (> 500 NTU)"],
-     ["Cost and skill requirement", "Low operational cost, unskilled labour", "High capital cost, skilled electrical operators"]
+     [
+      "Area occupied",
+      "Very large land footprint",
+      "Extremely compact (1/50th of slow filter)"
+     ],
+     [
+      "Filter sand size",
+      "Fine sand (0.25 to 0.35 mm)",
+      "Coarse sand (0.55 to 0.65 mm)"
+     ],
+     [
+      "Bacterial removal efficiency",
+      "99.9% without post-chlorine",
+      "80 to 90% (strictly requires chlorination)"
+     ],
+     [
+      "Turbidity handling capacity",
+      "Handles low turbidity (< 30 NTU)",
+      "Handles high turbidity (> 500 NTU)"
+     ],
+     [
+      "Cost and skill requirement",
+      "Low operational cost, unskilled labour",
+      "High capital cost, skilled electrical operators"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: Safe wholesome water is free from pathogens and toxic chemicals, clear and odourless, and fit for domestic use. Slow sand filters work biologically through the Schmutzdecke vital layer at low rates without coagulant. Rapid sand filters need alum coagulation first, run much faster on less land, and are cleaned by backwashing. Slow filters are cleaned by scraping the top sand layer.",
+   "say": "High-yield for the exam: Safe wholesome water is free from pathogens and toxic chemicals, clear and odourless, and fit for domestic use. Slow sand filters work biologically through the Schmutzdecke vital layer at low rates without coagulant. Rapid sand filters need alum coagulation first, run much faster on less land, and are cleaned by backwashing. Slow filters are cleaned by scraping the top sand layer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "What the exam asks"
+    ],
+    "rows": [
+     [
+      "Safe water criteria",
+      "No pathogens, no toxic chemicals, pleasant"
+     ],
+     [
+      "Microbial standard",
+      "Zero E. coli per 100 millilitres"
+     ],
+     [
+      "Slow filter rate",
+      "0.1 to 0.4 metres per hour"
+     ],
+     [
+      "Vital layer name",
+      "Schmutzdecke, living zoogleal film"
+     ],
+     [
+      "Slow filter cleaning",
+      "Scrape top 1 to 2 centimetres"
+     ],
+     [
+      "Rapid filter rate",
+      "5 to 15 metres per hour"
+     ],
+     [
+      "Rapid filter pretreatment",
+      "Alum coagulation and flocculation required"
+     ],
+     [
+      "Rapid filter cleaning",
+      "Backwashing with air and water"
+     ]
     ]
    }
   }

@@ -16,11 +16,19 @@
         "kind": "compare",
         "left": {
           "title": "Geriatrics (clinical)",
-          "points": ["Multimorbidity assessment", "Frailty, falls, and dementia care", "Rational prescribing in old age"]
+          "points": [
+            "Multimorbidity assessment",
+            "Frailty, falls, and dementia care",
+            "Rational prescribing in old age"
+          ]
         },
         "right": {
           "title": "Gerontology (science of ageing)",
-          "points": ["Biology of senescence", "Psychology and sociology of ageing", "Retirement and social security research"]
+          "points": [
+            "Biology of senescence",
+            "Psychology and sociology of ageing",
+            "Retirement and social security research"
+          ]
         }
       }
     },
@@ -30,12 +38,27 @@
       "say": "India's elderly share is growing fast as births fall and survival rises. Dependency ratios tell planners how many workers support each retired elder.",
       "vis": {
         "kind": "table",
-        "cols": ["Indicator", "Definition"],
+        "cols": [
+          "Indicator",
+          "Definition"
+        ],
         "rows": [
-          ["Old age dependency ratio", "Age 60 plus per 100 persons aged 15 to 59"],
-          ["Ageing index", "Age 65 plus per 100 children aged 0 to 14"],
-          ["Elderly proportion", "Share of age 60 plus in total population"],
-          ["Life expectancy at 60", "Average years remaining at age sixty"]
+          [
+            "Old age dependency ratio",
+            "Age 60 plus per 100 persons aged 15 to 59"
+          ],
+          [
+            "Ageing index",
+            "Age 65 plus per 100 children aged 0 to 14"
+          ],
+          [
+            "Elderly proportion",
+            "Share of age 60 plus in total population"
+          ],
+          [
+            "Life expectancy at 60",
+            "Average years remaining at age sixty"
+          ]
         ]
       }
     },
@@ -45,12 +68,27 @@
       "say": "Elders rarely have one disease; they have five interacting ones. Confusion, falls, and withdrawal often replace the textbook symptoms in this age group.",
       "vis": {
         "kind": "table",
-        "cols": ["System", "Common elderly problems"],
+        "cols": [
+          "System",
+          "Common elderly problems"
+        ],
         "rows": [
-          ["Cardiometabolic", "Hypertension, diabetes, coronary disease, stroke"],
-          ["Musculoskeletal", "Osteoarthritis, osteoporosis, fractures after falls"],
-          ["Sensory", "Cataract, glaucoma, presbycusis (age related hearing loss)"],
-          ["Mental health", "Depression, dementia, loneliness after bereavement"]
+          [
+            "Cardiometabolic",
+            "Hypertension, diabetes, coronary disease, stroke"
+          ],
+          [
+            "Musculoskeletal",
+            "Osteoarthritis, osteoporosis, fractures after falls"
+          ],
+          [
+            "Sensory",
+            "Cataract, glaucoma, presbycusis (age related hearing loss)"
+          ],
+          [
+            "Mental health",
+            "Depression, dementia, loneliness after bereavement"
+          ]
         ]
       }
     },
@@ -62,11 +100,21 @@
         "kind": "compare",
         "left": {
           "title": "Intrinsic causes",
-          "points": ["Sarcopenia and poor balance", "Postural drop in blood pressure", "Sedatives and multiple medicines", "Cataract and uncorrected refraction"]
+          "points": [
+            "Sarcopenia and poor balance",
+            "Postural drop in blood pressure",
+            "Sedatives and multiple medicines",
+            "Cataract and uncorrected refraction"
+          ]
         },
         "right": {
           "title": "Extrinsic causes",
-          "points": ["Loose carpets and clutter", "Poor lighting on stairs", "Slippery bathroom floors", "Ill fitting footwear"]
+          "points": [
+            "Loose carpets and clutter",
+            "Poor lighting on stairs",
+            "Slippery bathroom floors",
+            "Ill fitting footwear"
+          ]
         }
       }
     },
@@ -98,12 +146,27 @@
       "say": "Ask what the elder can still do alone. The Katz index scores six basic activities, and losing them predicts decline better than any disease list.",
       "vis": {
         "kind": "table",
-        "cols": ["Domain", "Example item"],
+        "cols": [
+          "Domain",
+          "Example item"
+        ],
         "rows": [
-          ["Basic activities (Katz)", "Bathing, dressing, toileting, feeding"],
-          ["Instrumental activities", "Cooking, shopping, medicines, money"],
-          ["Mobility", "Timed walking, chair rise, stair use"],
-          ["Cognition and mood", "Memory screen, depression questions"]
+          [
+            "Basic activities (Katz)",
+            "Bathing, dressing, toileting, feeding"
+          ],
+          [
+            "Instrumental activities",
+            "Cooking, shopping, medicines, money"
+          ],
+          [
+            "Mobility",
+            "Timed walking, chair rise, stair use"
+          ],
+          [
+            "Cognition and mood",
+            "Memory screen, depression questions"
+          ]
         ]
       }
     },
@@ -114,11 +177,29 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "g1", "label": "Home screening by community health worker" },
-          { "id": "g2", "label": "Elderly clinic at PHC and CHC level" },
-          { "id": "g3", "label": "District geriatric ward and regional centre" }
+          {
+            "id": "g1",
+            "label": "Home screening by community health worker"
+          },
+          {
+            "id": "g2",
+            "label": "Elderly clinic at PHC and CHC level"
+          },
+          {
+            "id": "g3",
+            "label": "District geriatric ward and regional centre"
+          }
         ],
-        "edges": [["g1", "g2"], ["g2", "g3"]]
+        "edges": [
+          [
+            "g1",
+            "g2"
+          ],
+          [
+            "g2",
+            "g3"
+          ]
+        ]
       }
     },
     {
@@ -129,11 +210,19 @@
         "kind": "compare",
         "left": {
           "title": "Economic support",
-          "points": ["National old age pension for the poor", "Subsidised health insurance schemes", "Concessions in travel and banking"]
+          "points": [
+            "National old age pension for the poor",
+            "Subsidised health insurance schemes",
+            "Concessions in travel and banking"
+          ]
         },
         "right": {
           "title": "Legal protection",
-          "points": ["Maintenance tribunals order family support", "Protection against property grabbing", "State old age homes for the destitute"]
+          "points": [
+            "Maintenance tribunals order family support",
+            "Protection against property grabbing",
+            "State old age homes for the destitute"
+          ]
         }
       }
     },
@@ -144,11 +233,74 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "p1", "label": "Assess pain and other symptoms" },
-          { "id": "p2", "label": "Treat with stepwise analgesia and support" },
-          { "id": "p3", "label": "Home based care with family involvement" }
+          {
+            "id": "p1",
+            "label": "Assess pain and other symptoms"
+          },
+          {
+            "id": "p2",
+            "label": "Treat with stepwise analgesia and support"
+          },
+          {
+            "id": "p3",
+            "label": "Home based care with family involvement"
+          }
         ],
-        "edges": [["p1", "p2"], ["p2", "p3"]]
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-yield for the exam**: India counts elderly as sixty years and above, and one in three elders falls each year from combined intrinsic and extrinsic causes. Alzheimer disease is the commonest dementia, vascular dementia second, while delirium starts abruptly. The Katz index grades basic daily activities. NPHCE provides elderly clinics, ten bedded district geriatric wards, and regional geriatric centres for referral.",
+      "say": "High-yield for the exam: India counts elderly as sixty years and above, and one in three elders falls each year from combined intrinsic and extrinsic causes. Alzheimer disease is the commonest dementia, vascular dementia second, while delirium starts abruptly. The Katz index grades basic daily activities. NPHCE provides elderly clinics, ten bedded district geriatric wards, and regional geriatric centres for referral.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "What the exam asks"
+        ],
+        "rows": [
+          [
+            "Elderly age cut off India",
+            "Sixty years and above for programmes"
+          ],
+          [
+            "Falls frequency",
+            "One in three elders falls each year"
+          ],
+          [
+            "Fall assessment",
+            "Medicines, postural blood pressure, gait balance, home hazards"
+          ],
+          [
+            "Commonest dementia",
+            "Alzheimer disease first, vascular dementia second"
+          ],
+          [
+            "Delirium distinction",
+            "Abrupt onset, clouded consciousness during acute illness"
+          ],
+          [
+            "Katz index",
+            "Bathing dressing toileting transferring continence feeding"
+          ],
+          [
+            "NPHCE district provision",
+            "Ten bedded geriatric ward at district hospital"
+          ],
+          [
+            "Senior Citizens Act year",
+            "Maintenance and Welfare Act passed in 2007"
+          ]
+        ]
       }
     }
   ]
