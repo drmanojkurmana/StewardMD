@@ -1,0 +1,400 @@
+{
+ "gen": "hand",
+ "minutes": 8,
+ "module": "spu-bronchiectasis",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e bronchiectasis and cystic fibrosis chapters",
+  "European Respiratory Society bronchiectasis guideline"
+ ],
+ "steps": [
+  {
+   "say": "Bronchiectasis is permanent bronchial dilatation with impaired mucociliary clearance and chronic infection. HRCT is the diagnostic standard, and the vicious circle of infection, inflammation and dilatation explains progression.",
+   "tx": "**Bronchiectasis** (permanent bronchial dilatation) results from a vicious circle of **impaired clearance**, **chronic infection** and **inflammation** that destroys airway walls. **High resolution CT** (thin slice chest imaging) is the diagnostic standard with signet ring and tram track signs, and **cystic fibrosis** (inherited chloride channel disease) is the commonest diffuse cause in younger patients.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Meaning",
+     "Test"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Signet ring",
+      "Bronchus wider than artery",
+      "HRCT axial cut"
+     ],
+     [
+      "Tram track",
+      "Parallel wall thickening",
+      "HRCT longitudinal cut"
+     ],
+     [
+      "Lack of tapering",
+      "Bronchus seen peripherally",
+      "HRCT peripheral view"
+     ],
+     [
+      "Mosaic perfusion",
+      "Small airway disease",
+      "Expiratory HRCT"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Post infective, immunodeficiency and ciliary causes dominate the aetiology list. Every new diffuse case needs sweat chloride, immunoglobulins, alpha one level and aspergillus screening.",
+   "tx": "**Post infective** damage (after pneumonia or tuberculosis), **immunodeficiency** (low antibodies) and **ciliary dyskinesia** (defective mucus transport) dominate aetiology, with allergic fungal disease and **alpha 1** deficiency contributing. Every diffuse case needs **sweat chloride** (salt in sweat), **immunoglobulins** (antibodies), alpha 1 level and **Aspergillus** screening, since treatable causes hide behind chronic sputum.",
+   "vis": {
+    "edges": [
+     [
+      "cough",
+      "sputum"
+     ],
+     [
+      "sputum",
+      "culture"
+     ],
+     [
+      "culture",
+      "hrct"
+     ],
+     [
+      "hrct",
+      "airway"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cough",
+      "label": "Chronic cough"
+     },
+     {
+      "id": "sputum",
+      "label": "Daily sputum culture"
+     },
+     {
+      "id": "culture",
+      "label": "Organism and sensitivity"
+     },
+     {
+      "id": "hrct",
+      "label": "HRCT morphology"
+     },
+     {
+      "id": "airway",
+      "label": "Clearance programme"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Clinical clues are copious foul sputum, finger clubbing, coarse crackles and recurrent lower respiratory infections. Haemoptysis and wheeze confuse with asthma, but fixed dullness and recurrent same lobe pneumonia point away.",
+   "tx": "**Copious foul sputum** (smelly mucus), **finger clubbing** (nail bed broadening), coarse crackles and recurrent infections in the same lobe mark bronchiectasis clinically. **Haemoptysis** (coughing blood) and wheeze mimic asthma, but recurrent **same lobe pneumonia** (repeated infection in one segment) and fixed basal crackles redirect toward bronchial dilatation and HRCT.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Chronic purulent sputum",
+      "Recurrent same lobe infection",
+      "Clubbing with basal crackles"
+     ],
+     "title": "Bronchiectasis pattern"
+    },
+    "right": {
+     "points": [
+      "Episodic dry cough",
+      "Wheeze with triggers",
+      "Complete reversibility"
+     ],
+     "title": "Asthma pattern"
+    }
+   }
+  },
+  {
+   "say": "Severity tools include the bronchiectasis severity index and FACED, with Pseudomonas colonisation, advanced FEV1 loss and extensive radiology driving prognosis.",
+   "tx": "**Bronchiectasis severity index** (a scored prognostic tool) and **FACED** (FEV1, age, colonisation, extent, dyspnoea) both predict mortality, with **Pseudomonas colonisation** (persistent bacterial carriage), FEV1 loss and extensive radiology driving prognosis. Quantify exacerbation frequency, hospital days and **quality of life** scores to grade severity before choosing long term therapy.",
+   "vis": {
+    "cols": [
+     "Tool",
+     "Domains",
+     "Use"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "FACED",
+      "FEV1, age, colonisation, extent, symptoms",
+      "Mortality prediction"
+     ],
+     [
+      "Severity index",
+      "Exacerbations, admission, FEV1, CT",
+      "Management intensity"
+     ],
+     [
+      "Culture history",
+      "Pseudomonas, NTM, fungi",
+      "Pathogen directed therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Airway clearance is the foundation of daily therapy. Devices, physiotherapy and hypertonic saline improve mucus transport, and eradication antibiotics follow new Pseudomonas isolation.",
+   "tx": "**Airway clearance** (techniques that move mucus outwards) with physiotherapy, oscillatory devices and **hypertonic saline** (salt water inhalation) forms the daily foundation, while **eradication antibiotics** (short courses to remove newly isolated Pseudomonas) reduce colonisation. Treat exacerbations promptly by culture results, and **mucolytics** help selected patients with tenacious sputum.",
+   "vis": {
+    "edges": [
+     [
+      "isolate",
+      "eradicate"
+     ],
+     [
+      "eradicate",
+      "clearance"
+     ],
+     [
+      "clearance",
+      "monitor"
+     ],
+     [
+      "monitor",
+      "exacerbation"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "isolate",
+      "label": "New Pseudomonas"
+     },
+     {
+      "id": "eradicate",
+      "label": "Eradication course"
+     },
+     {
+      "id": "clearance",
+      "label": "Daily clearance"
+     },
+     {
+      "id": "monitor",
+      "label": "Culture surveillance"
+     },
+     {
+      "id": "exacerbation",
+      "label": "Treat early"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Chronic colonisation suits inhaled antibiotics and macrolides. Azithromycin cuts exacerbations in selected frequent exacerbators when NTM and cardiac causes are excluded first.",
+   "tx": "**Inhaled antibiotics** (tobramycin or colistin by nebuliser) suit chronic **Pseudomonas colonisation** (persistent carriage) and reduce exacerbations, while **azithromycin** (a macrolide) cuts exacerbation frequency in frequent exacerbators. Exclude non tuberculous mycobacteria and **QT prolongation** (heart conduction delay) before macrolides, and vaccinate against influenza and pneumococci.",
+   "vis": {
+    "cols": [
+     "Therapy",
+     "Best for",
+     "Check first"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Inhaled colistin",
+      "Chronic Pseudomonas",
+      "Airway tolerance"
+     ],
+     [
+      "Azithromycin",
+      "Frequent exacerbations",
+      "NTM culture and ECG"
+     ],
+     [
+      "Hypertonic saline",
+      "Tenacious sputum",
+      "Bronchospasm trial"
+     ],
+     [
+      "Oxygen and NIV",
+      "Advanced hypoxaemia",
+      "Blood gas pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cystic fibrosis follows autosomal recessive CFTR failure with pancreatic insufficiency and chronic Pseudomonas infection. Sweat chloride and genetic testing confirm it, and CFTR modulators have transformed survival.",
+   "tx": "**Cystic fibrosis** (autosomal recessive chloride channel disease) follows **CFTR** (cystic fibrosis transmembrane conductance regulator) failure with pancreatic insufficiency, salty sweat and chronic **Pseudomonas** infection. **Sweat chloride** above **60** millimoles per litre and genetic testing confirm disease, and **CFTR modulators** (correctors and potentiators) have transformed lung function and survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Sweat chloride high",
+      "Pancreatic insufficiency",
+      "Chronic Pseudomonas infection"
+     ],
+     "title": "Classic cystic fibrosis"
+    },
+    "right": {
+     "points": [
+      "Sweat chloride borderline",
+      "Lateral or single CFTR variant",
+      "Adult mild phenotype"
+     ],
+     "title": "Mild variant"
+    }
+   }
+  },
+  {
+   "say": "Exacerbations of bronchiectasis are recognised by rising sputum volume, purulence and dyspnoea lasting a week or more. Treatment covers cultured organisms, and massive haemoptysis needs embolisation.",
+   "tx": "**Exacerbation** (acute bronchiectasis worsening) is recognised by rising sputum volume, purulence and dyspnoea lasting a week or more and is treated by covering cultured organisms for **7** to **14** days. **Massive haemoptysis** (large volume coughing of blood) needs urgent **bronchial artery embolisation** (blocking bleeding vessels) and surgical opinion for localised disease.",
+   "vis": {
+    "cols": [
+     "Problem",
+     "Action",
+     "Timeframe"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Acute exacerbation",
+      "Culture led antibiotics",
+      "7 to 14 days"
+     ],
+     [
+      "New Pseudomonas",
+      "Eradication therapy",
+      "Prompt course"
+     ],
+     [
+      "Massive haemoptysis",
+      "Artery embolisation",
+      "Emergency"
+     ],
+     [
+      "Localised disease",
+      "Lobectomy opinion",
+      "Elective review"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cystic fibrosis management layers pancre enzymes, fat soluble vitamins, bronchodilators and aggressive exacerbation therapy. Multidisciplinary care with nutrition, physiotherapy and infection control is non negotiable.",
+   "tx": "**Pancreatic enzymes** (replacement capsules), fat soluble vitamins, bronchodilators and aggressive exacerbation therapy form the daily core of cystic fibrosis care, with **nutritional support** (high calorie diet) and multidisciplinary care from physiotherapy to genetics as non negotiables. Chronic colonisation needs inhaled antibiotics, and **transplant** referral suits advanced respiratory failure.",
+   "vis": {
+    "edges": [
+     [
+      "diagnose",
+      "enzymes"
+     ],
+     [
+      "enzymes",
+      "clearance"
+     ],
+     [
+      "clearance",
+      "nutrition"
+     ],
+     [
+      "nutrition",
+      "modulator"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diagnose",
+      "label": "Confirm CFTR defect"
+     },
+     {
+      "id": "enzymes",
+      "label": "Enzymes and vitamins"
+     },
+     {
+      "id": "clearance",
+      "label": "Airway clearance daily"
+     },
+     {
+      "id": "nutrition",
+      "label": "High calorie support"
+     },
+     {
+      "id": "modulator",
+      "label": "CFTR modulator"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Non tuberculous mycobacteria and allergic fungal disease complicate bronchiectasis and demand specific regimens. AFB culture on three samples and Aspergillus IgE and IgG are the screening pair to remember.",
+   "tx": "**Non tuberculous mycobacteria** (environmental mycobacteria such as MAC, Mycobacterium avium complex) and **Aspergillus** (fungal colonisation) complicate bronchiectasis and demand specific prolonged regimens. **AFB culture** (acid fast bacilli culture) on three samples plus Aspergillus **IgE** and **IgG** are the screening pair, and **MAC** regimens combine macrolide, ethambutol and rifampin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Three AFB cultures",
+      "Nodular bronchiectasis",
+      "Macrolide based regimen"
+     ],
+     "title": "NTM disease"
+    },
+    "right": {
+     "points": [
+      "Aspergillus IgE high",
+      "Central bronchiectasis",
+      "Steroid plus antifungal"
+     ],
+     "title": "Allergic fungal disease"
+    }
+   }
+  },
+  {
+   "say": "The classic bronchiectasis and cystic fibrosis facts are HRCT diagnosis, Pseudomonas eradication, inhaled antibiotics, sweat chloride above sixty, CFTR modulators and FACED prognosis.",
+   "tx": "Recall **HRCT** diagnosis with signet ring sign, **Pseudomonas eradication**, inhaled antibiotics, **FACED** prognosis, sweat chloride above **60** millimoles per litre for cystic fibrosis, **CFTR modulators** as transformative therapy, and **MAC** triple regimens for mycobacterial disease. Airway clearance remains the daily therapy that changes outcomes.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Value",
+     "Exam angle"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "HRCT sign",
+      "Signet ring, tram track",
+      "Diagnosis"
+     ],
+     [
+      "Pseudomonas eradication",
+      "New isolate prompt therapy",
+      "Colonisation prevention"
+     ],
+     [
+      "Asthma mimic",
+      "Recurrent same lobe infection",
+      "Clinical clue"
+     ],
+     [
+      "Sweat chloride",
+      "Above 60 millimoles",
+      "CF diagnosis"
+     ],
+     [
+      "MAC regimen",
+      "Macrolide, ethambutol, rifampin",
+      "NTM therapy"
+     ],
+     [
+      "Prognosis tool",
+      "FACED score",
+      "Mortality prediction"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-pulmonology",
+ "title": "Bronchiectasis and cystic fibrosis essentials",
+ "v": 1
+}

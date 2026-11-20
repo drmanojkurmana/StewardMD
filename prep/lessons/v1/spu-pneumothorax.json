@@ -1,0 +1,343 @@
+{
+ "v": 1,
+ "module": "spu-pneumothorax",
+ "subject": "ss-pulmonology",
+ "title": "Pneumothorax: BTS pathway, drains and recurrence prevention",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "BTS 2023",
+  "Harrison 2025, 22nd Edition"
+ ],
+ "steps": [
+  {
+   "tx": "**Primary spontaneous pneumothorax** (**PSP**) strikes without known lung disease, while secondary disease follows COPD, bronchiectasis, active or post TB lung disease, cystic disease or ILD. Patients aged **50** or more with significant smoking history count as secondary, and sudden pleuritic pain with breathlessness, reduced breath sounds and hyperresonance define the bedside picture.",
+   "say": "Primary pneumothorax affects healthy lungs in young patients daily in practice. Secondary disease follows underlying lung disease always in practice. Older smokers are considered as secondary disease in clinic practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Lung background",
+     "Default caution"
+    ],
+    "rows": [
+     [
+      "Primary",
+      "No known disease",
+      "Young tall smokers"
+     ],
+     [
+      "Secondary",
+      "COPD, TB, cystic, ILD",
+      "Lower reserve"
+     ],
+     [
+      "Age 50 plus smoker",
+      "Significant history",
+      "Treat as secondary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tension pneumothorax** shows haemodynamic compromise, severe hypoxia and tracheal deviation away from the affected side. Immediate **decompression** without waiting for imaging is mandatory, followed by chest drain insertion, and any delay for a film in a shocked patient converts a reversible emergency into an avoidable death.",
+   "say": "Tension pneumothorax compromises circulation at once always in practice. Decompression cannot wait for imaging studies in patients. A chest drain follows immediately after decompression in practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tension signs"
+     },
+     {
+      "id": "b",
+      "label": "Immediate decompression"
+     },
+     {
+      "id": "c",
+      "label": "Chest drain"
+     },
+     {
+      "id": "d",
+      "label": "Recheck haemodynamics"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **BTS 2023** pathway starts from high risk features: haemodynamic compromise, significant hypoxia, bilateral disease, underlying lung disease, age **50** or more with smoking history, or haemopneumothorax. High risk symptomatic patients with safe access receive a chest drain and admission, while others choose conservative care, an ambulatory valve or needle aspiration by preference and symptoms.",
+   "say": "High risk features push toward chest drains directly in practice. Lower risk patients choose the method themselves in clinic. Preference guides ambulatory or conservative paths well in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway group",
+     "Default action",
+     "Setting"
+    ],
+    "rows": [
+     [
+      "High risk symptomatic",
+      "Chest drain",
+      "Admit, review daily"
+     ],
+     [
+      "No high risk, symptoms",
+      "Aspiration or ambulatory valve",
+      "Preference based"
+     ],
+     [
+      "Minimal symptoms PSP",
+      "Conservative care",
+      "Outpatient review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enough size for safe intervention is usually **2 cm** or more laterally or apically on radiograph, or any safely accessible size on CT. **Needle aspiration** succeeds when symptoms improve with sustained radiographic resolution, and failure leads to an ambulatory device or drain, while minimally symptomatic PSP receives conservative management regardless of size with review every **2 to 4 days**.",
+   "say": "Two centimetres indicates safe intervention size clearly in guidelines daily. Aspiration success needs sustained improvement clinically in patients. Small PSP is suited to conservative care in practice daily.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Symptomatic PSP"
+     },
+     {
+      "id": "b",
+      "label": "Needle aspiration"
+     },
+     {
+      "id": "c",
+      "label": "Improved sustained"
+     },
+     {
+      "id": "d",
+      "label": "No improvement drain"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Analgesia must be generous and oxygen given when hypoxaemic, targeting saturation **94 to 98 percent**, or **88 to 92 percent** when hypercapnia threatens as in COPD. Conservative SSP needs inpatient review rather than discharge, and enlarging pneumothorax or worsening symptoms at any review means admission with drain insertion without debate.",
+   "say": "Analgesia must be adequate from the start always in practice. Oxygen targets differ with hypercapnia risk present in COPD. Enlargement at review indicates admission urgently in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Oxygen target",
+     "Saturation",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Standard",
+      "94 to 98 percent",
+      "Most patients"
+     ],
+     [
+      "Hypercapnia risk",
+      "88 to 92 percent",
+      "COPD present"
+     ],
+     [
+      "Conservative SSP",
+      "Inpatient review",
+      "Never day case"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chest drains** go in by trained operators with imaging confirming a safe site and an **underwater seal**, and a bubbling drain must never be clamped. The drain or ambulatory device comes out only after resolution without air leak, evidence shows no benefit from routine suction, and persistent leak or failure to reexpand needs thoracic surgical discussion.",
+   "say": "Drains need an underwater seal in practice daily for patients. A bubbling drain must never be clamped shut in practice. Suction provides no benefit after insertion daily in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drain rule",
+     "Practice",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Underwater seal",
+      "Always attached",
+      "One way drainage"
+     ],
+     [
+      "Bubbling leak",
+      "Never clamp",
+      "Pressure can build"
+     ],
+     [
+      "Suction",
+      "Not routine",
+      "No proven benefit"
+     ],
+     [
+      "Removal",
+      "Resolved, no leak",
+      "Confirm on film"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unfit for surgery patients may receive autologous blood pleurodesis or endobronchial valves for persistent leak. **Talc pleurodesis** can be considered at the first episode when recurrence would be hazardous such as severe COPD decompensation, while **VATS** pleurodesis with bullectomy suits first presentation tension, high risk occupations, second ipsilateral or first contralateral episodes.",
+   "say": "Persistent leaks need surgical opinions in most cases daily in practice. Talc is suited to hazardous recurrence risks today in practice. VATS is suited to occupational or repeat disease in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Procedure",
+     "Indication"
+    ],
+    "rows": [
+     [
+      "Persistent leak, unfit",
+      "Blood pleurodesis or valves",
+      "No operation possible"
+     ],
+     [
+      "First episode, hazardous",
+      "Talc pleurodesis",
+      "Severe COPD at risk"
+     ],
+     [
+      "Repeat or tension",
+      "VATS pleurodesis plus bullectomy",
+      "Durable prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Counselling covers no commercial flights until complete radiological resolution and only **7 days** later after a film confirms full resolution, permanent scuba discouragement unless definitive surgery occurred, smoking cessation to cut recurrence, and clinic followup with radiograph at **2 to 4 weeks**. About **10 percent** of cases are familial and prompt **Birt Hogg Dube**, tuberous sclerosis, LAM, Marfan and Ehlers Danlos screening.",
+   "say": "Flights are delayed until resolution plus seven days always in practice. Scuba remains discouraged after treatment courses in patients. Familial cases need syndrome screening workup in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Advice",
+     "Timing",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Flights",
+      "7 days after resolution film",
+      "No early flying"
+     ],
+     [
+      "Scuba",
+      "Discouraged permanently",
+      "Unless definitive surgery"
+     ],
+     [
+      "Followup",
+      "2 to 4 weeks",
+      "Confirm resolution"
+     ],
+     [
+      "Familial",
+      "About 10 percent",
+      "Syndrome screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In India, hunt active TB or post TB fibrocavitary disease in secondary disease with sputum **NAAT**, and remember iatrogenic pneumothorax after biopsy or line insertion often resolves without intervention. Pregnancy management observes under **2 cm** without breathlessness or fetal distress, otherwise aspirates or drains, planning delivery jointly with obstetric, respiratory and thoracic teams.",
+   "say": "Secondary disease in India needs TB testing always in practice. Iatrogenic cases often heal alone without intervention in patients daily. Pregnancy needs joint team planning daily in practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Secondary clues",
+     "points": [
+      "Sputum NAAT for TB",
+      "Post TB fibrosis pattern",
+      "CT for bullae vs leak",
+      "Smoking history review"
+     ]
+    },
+    "right": {
+     "title": "Iatrogenic",
+     "points": [
+      "After biopsy or line",
+      "Often resolves alone",
+      "Watch and review",
+      "Drain if enlarging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High yield anchors: tension needs decompression without imaging, age **50** or more with smoking counts as secondary, safe size is **2 cm** or more, oxygen targets are **94 to 98 percent** or **88 to 92 percent** with hypercapnia risk, conservative PSP reviews every **2 to 4 days**, ambulatory devices review every **2 to 3 days**, flights resume **7 days** after resolution film, clinic film follows at **2 to 4 weeks**, familial cases make about **10 percent**, and bubbling drains are never clamped.",
+   "say": "Tension needs decompression without imaging studies in practice. Safe size is two centimetres on film for clinicians. Flights are allowed seven days after resolution in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Tension",
+      "Decompress, no imaging"
+     ],
+     [
+      "Age threshold",
+      "50 or more, secondary"
+     ],
+     [
+      "Safe size",
+      "2 cm or more"
+     ],
+     [
+      "Oxygen standard",
+      "94 to 98 percent"
+     ],
+     [
+      "Oxygen hypercapnia",
+      "88 to 92 percent"
+     ],
+     [
+      "Conservative review",
+      "Every 2 to 4 days"
+     ],
+     [
+      "Flight rule",
+      "7 days after resolution"
+     ]
+    ]
+   }
+  }
+ ]
+}

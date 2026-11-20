@@ -1,0 +1,357 @@
+{
+ "v": 1,
+ "module": "spu-pneumonia",
+ "subject": "ss-pulmonology",
+ "title": "Community and hospital acquired pneumonia: scores, cover and duration",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "ICMR",
+  "ATS 2025",
+  "IDSA/ATS"
+ ],
+ "steps": [
+  {
+   "tx": "Community acquired pneumonia means acute cough, dyspnoea or pleuritic pain for under **1 week** with systemic features, new focal signs and a new shadow without other cause. **Streptococcus pneumoniae** leads Indian aetiology ahead of Haemophilus, Mycoplasma and viruses, while scrub typhus, leptospirosis, melioidosis and **TB** enter the list when illness is protracted.",
+   "say": "CAP involves acute symptoms with a new shadow on film in patients. Pneumococcus leads Indian aetiology in most series reported. Tropical infections and TB enter protracted cases in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Threshold",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Illness duration",
+      "Under 1 week",
+      "Acute course"
+     ],
+     [
+      "Fever",
+      "Above 37.7 degrees",
+      "Systemic illness"
+     ],
+     [
+      "Commonest bug",
+      "S. pneumoniae",
+      "Guides empiric cover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CURB 65** scores one point each for Confusion, Urea above **7 mmol/L**, Respiratory rate **30** or more, Blood pressure systolic below **90** or diastolic **60** or less, and age **65** or more. Scores **0 to 1** usually allow home care, score **2** suggests hospital admission, and scores **3 to 5** mark severe disease needing intensive care assessment.",
+   "say": "CURB sixty five grades pneumonia severity in practice daily. Urea, rate and pressure each are worth one point toward the total. Scores three to five need intensive care assessment in practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CURB item",
+     "Cutoff",
+     "Points"
+    ],
+    "rows": [
+     [
+      "Confusion",
+      "New disorientation",
+      "1"
+     ],
+     [
+      "Urea",
+      "Above 7 mmol/L",
+      "1"
+     ],
+     [
+      "Respiratory rate",
+      "30 or more per minute",
+      "1"
+     ],
+     [
+      "Blood pressure",
+      "Systolic below 90 or diastolic 60 or less",
+      "1"
+     ],
+     [
+      "Age",
+      "65 or more years",
+      "1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe CAP means one major **IDSA ATS** criterion of septic shock needing vasopressors or respiratory failure needing ventilation, or three or more minor criteria. Minor criteria include rate **30** or more, **PaO2 FiO2** ratio **250** or less, multilobar infiltrates, confusion, urea about **43 mg/dL**, white cells below **4000**, platelets below **100,000**, temperature below **36**, and hypotension needing aggressive fluids.",
+   "say": "Severe pneumonia needs one major or three minor criteria for care. Low oxygen ratio and multilobar change count heavily in scoring. Platelet and white cell falls are also minor criteria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity",
+     "Criteria",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Major (one enough)",
+      "Shock vasopressors or ventilation",
+      "ICU care"
+     ],
+     [
+      "Minor (three enough)",
+      "Rate 30, ratio 250 or less, multilobar",
+      "ICU assessment"
+     ],
+     [
+      "Minor (three enough)",
+      "WBC below 4000, platelets below 100,000",
+      "ICU assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chest radiograph confirms a new shadow while lung ultrasound serves where trained operators exist. Blood cultures and sputum testing suit severe disease, prior broad cover, or hospitalisation with intravenous antibiotics in the past **90 days**, and influenza or SARS CoV **2 PCR** plus urinary antigens target severe cases with TB testing reserved for prolonged cough or upper lobe cavitation.",
+   "say": "Radiograph confirms the shadow in suspected pneumonia cases daily. Cultures suit severe or previously treated patients in practice. TB testing targets prolonged or upper lobe disease cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected CAP"
+     },
+     {
+      "id": "b",
+      "label": "Radiograph plus labs"
+     },
+     {
+      "id": "c",
+      "label": "Cultures if severe"
+     },
+     {
+      "id": "d",
+      "label": "Empiric antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Outpatient therapy without comorbidity favours **amoxicillin clavulanate** in India because pneumococcal macrolide resistance runs **25 to 30 percent**. Comorbidity or antibiotics within **3 months** adds **azithromycin**, clarithromycin or **doxycycline**, with total duration of **5 days** by ICMR and **3 days** minimum once stable by ATS **2025** guidance.",
+   "say": "Co amoxiclav remains the Indian outpatient base therapy in practice. Macrolide resistance is high here in pneumococci reported. Comorbidity needs a macrolide or doxycycline in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Outpatient group",
+     "Regimen anchor",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "No comorbidity",
+      "Amoxicillin clavulanate",
+      "5 days ICMR"
+     ],
+     [
+      "Comorbidity present",
+      "Add azithromycin or doxycycline",
+      "5 days ICMR"
+     ],
+     [
+      "Stable early",
+      "ATS allows 3 days minimum",
+      "Stable afebrile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ward patients receive **ceftriaxone** plus **azithromycin** or doxycycline, with cefotaxime or intravenous co amoxiclav as alternatives. Severe beta lactam allergy allows **levofloxacin** or moxifloxacin only after **TB** is excluded, and ICU care prefers beta lactam plus macrolide while piperacillin tazobactam, cefepime or carbapenems cover Pseudomonas and enteric risks.",
+   "say": "Ward pneumonia needs ceftriaxone with a macrolide agent in practice daily. Fluoroquinolones wait until TB is excluded in India daily. ICU therapy requires Pseudomonas risk assessment in practice daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Base regimen",
+     "Add on"
+    ],
+    "rows": [
+     [
+      "Ward",
+      "Ceftriaxone plus azithromycin",
+      "Doxycycline alternative"
+     ],
+     [
+      "ICU severe",
+      "Ceftriaxone plus macrolide",
+      "Piperacillin tazobactam if Pseudomonas risk"
+     ],
+     [
+      "Beta lactam allergy",
+      "Fluoroquinolone after TB excluded",
+      "Levofloxacin or moxifloxacin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MRSA** cover with **vancomycin** or teicoplanin suits post influenza disease, cavitation, septic shock, empyema or prior MRSA isolation, while **linezolid** waits until TB is excluded by ICMR advice. Pseudomonas cover uses piperacillin tazobactam, cefepime or a carbapenem, stopping **48 hours** after negative cultures when the patient improves clinically.",
+   "say": "MRSA cover is needed in cavitation and shock cases well. Linezolid waits until TB is excluded in India in practice. Negative cultures allow early de escalation decisions in clinic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Cover anchor",
+     "Review"
+    ],
+    "rows": [
+     [
+      "MRSA risk",
+      "Vancomycin or teicoplanin",
+      "Stop at 48 hours if negative"
+     ],
+     [
+      "Pseudomonas risk",
+      "Piperacillin tazobactam or cefepime",
+      "Stop at 48 hours if negative"
+     ],
+     [
+      "Influenza positive",
+      "Add oseltamivir",
+      "Outbreak also qualifies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical stability means temperature **37.8** or less, heart rate **100** or less, rate **24** or less, systolic **90** or more, saturation **90 percent** or more on air, normal mentation and eating. Switch from intravenous to oral once swallowing works, with inpatient course totalling about **7 days**, longer for bacteraemia, abscess, empyema or endocarditis.",
+   "say": "Stability criteria guide the oral switch in practice for patients. Seven days suits most inpatients with CAP treated daily. Complications make the course longer considerably in sick patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Therapy started"
+     },
+     {
+      "id": "b",
+      "label": "Stability criteria met"
+     },
+     {
+      "id": "c",
+      "label": "Switch to oral"
+     },
+     {
+      "id": "d",
+      "label": "Complete about 7 days"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe CAP without influenza suits systemic **hydrocortisone** **200 mg** daily intravenously, ideally within **24 hours**, while non severe pneumonia gets no steroids. Traps include empiric fluoroquinolones or **linezolid** masking TB in India, macrolide monotherapy against resistant pneumococci, missed scrub typhus or melioidosis, and unnecessarily prolonged broad spectrum courses after negative cultures.",
+   "say": "Hydrocortisone suits severe pneumonia when given early in practice. Steroids lack benefit in mild disease cases treated daily. Empiric quinolones can mask hidden TB easily in patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pitfall",
+     "What happens",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Quinolone first",
+      "TB masked",
+      "Exclude TB before use"
+     ],
+     [
+      "Macrolide alone",
+      "Resistant pneumococci survive",
+      "Use beta lactam base"
+     ],
+     [
+      "Steroids in mild CAP",
+      "No benefit",
+      "Reserve for severe disease"
+     ],
+     [
+      "Long broad course",
+      "Resistance selects",
+      "Review at 48 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High yield anchors: CURB score **2** needs admission while **3 to 5** needs ICU assessment, severe means one major or three minor criteria, rate **30** and ratio **250** count as minor criteria, **co amoxiclav** is the preferred Indian outpatient base, ward therapy is **ceftriaxone** plus **azithromycin**, **linezolid** waits until TB excluded, review at **48 hours**, inpatient total is about **7 days**, outpatient total is **5 days**, and severe disease suits hydrocortisone **200 mg** daily within **24 hours**.",
+   "say": "CURB two admits and three to five escalates care in practice. Ceftriaxone plus azithromycin provides ward cover in clinic practice daily. Seven days suits inpatients in most series reported daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anchor",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "CURB 2",
+      "Hospital admission"
+     ],
+     [
+      "CURB 3 to 5",
+      "Severe, ICU assess"
+     ],
+     [
+      "Outpatient base",
+      "Amoxicillin clavulanate"
+     ],
+     [
+      "Ward base",
+      "Ceftriaxone plus azithromycin"
+     ],
+     [
+      "MRSA review",
+      "48 hours"
+     ],
+     [
+      "Inpatient total",
+      "About 7 days"
+     ],
+     [
+      "Outpatient total",
+      "5 days"
+     ],
+     [
+      "Severe steroid",
+      "Hydrocortisone 200 mg daily within 24 hours"
+     ]
+    ]
+   }
+  }
+ ]
+}
