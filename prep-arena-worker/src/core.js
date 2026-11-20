@@ -118,7 +118,7 @@ export function botPlan(s, now) {
 export function newBattle({ id, exam, players, items, now, bot }) {
   return {
     id, exam, n: Math.min(N_ROUNDS, items.length), secs: ROUND_SECS,
-    items: items.slice(0, N_ROUNDS).map((it) => ({ id: it.id, q: it.q, o: it.o, a: it.a })),
+    items: items.slice(0, N_ROUNDS).map((it) => ({ id: it.id, q: it.q, o: it.o, a: it.a, ...(it.e ? { e: it.e } : {}) })),
     p: players.map((x) => ({ uidh: x.uidh, name: x.name, rating: x.rating, gone: null, ...(x.bot ? { bot: true } : {}) })),
     ...(bot ? { bot: { side: 1, wins: !!bot.wins, plan: null } } : {}),
     phase: "new", i: -1, at: now, deadline: 0, next: 0,
@@ -146,7 +146,7 @@ function closeRound(s, now, out) {
   }
   for (const to of [0, 1]) {
     const o = 1 - to, mine = s.ans[to][s.i], theirs = s.ans[o][s.i];
-    out.push({ to, msg: { t: "r", i: s.i, a: it.a, you: { k: mine ? mine.k : null, pts: s.pts[to][s.i] }, opp: { k: theirs ? theirs.k : null, pts: s.pts[o][s.i] }, score: [s.score[to], s.score[o]] } });
+    out.push({ to, msg: { t: "r", i: s.i, a: it.a, ...(it.e ? { e: it.e } : {}), you: { k: mine ? mine.k : null, pts: s.pts[to][s.i] }, opp: { k: theirs ? theirs.k : null, pts: s.pts[o][s.i] }, score: [s.score[to], s.score[o]] } });
   }
   if (s.i + 1 >= s.n) finish(s, now, null, out);
   else { s.phase = "gap"; s.next = now + GAP_MS; }
