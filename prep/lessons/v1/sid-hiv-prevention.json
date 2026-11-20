@@ -1,0 +1,345 @@
+{
+ "v": 1,
+ "module": "sid-hiv-prevention",
+ "title": "HIV prevention, PEP and PrEP",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Combination prevention** layers condoms, testing, treatment-as-prevention, PrEP, PEP, PMTCT and needle programmes; no single method suffices alone. **Undetectable equals untransmittable** makes ART itself prevention. **PEP within 72 hours** rescues after exposure; **PrEP before exposure** shields ongoing risk. **Test every linked partner** with counselling; **circumcision cuts** female-to-male spread by half. **Needle exchange** protects injectors who keep using.",
+   "say": "Combination prevention was defined to layer condoms, testing, treatment as prevention, Pr E P, P E P, P M T C T and needle programmes, as no single method sufficed alone. Undetectable was equated with untransmittable, which made A R T itself prevention. P E P within seventy two hours was reported to rescue after exposure, while Pr E P before exposure shielded ongoing risk. Every linked partner was tested with counselling, while circumcision was reported to cut female to male spread by half. Needle exchange was reported to protect injectors who kept using.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "When",
+     "Who"
+    ],
+    "rows": [
+     [
+      "Condoms, testing",
+      "Always",
+      "Everyone at risk"
+     ],
+     [
+      "TasP, U=U",
+      "Suppressed RNA",
+      "On ART"
+     ],
+     [
+      "PrEP",
+      "Before exposure",
+      "Ongoing risk"
+     ],
+     [
+      "PEP",
+      "Within 72 hours",
+      "After exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Significant exposure** means percutaneous injury or mucous splash with blood or sexual fluids; **intact skin with saliva never counts**. **Start TLD one tablet daily for 28 days** as soon as possible, ideally within 2 hours and never later than 72 hours. **First dose in casualty** without waiting for source results. **Wash, never scrub**; flush eyes with saline and spit mouthfuls. **Report to infection control** with date, device and depth recorded.",
+   "say": "Significant exposure was defined as percutaneous injury or mucous splash with blood or sexual fluids, while intact skin with saliva never counted. T L D one tablet daily for twenty eight days was started as soon as possible, ideally within two hours and never later than seventy two hours. The first dose was given in casualty without waiting for source results. Washing was advised, never scrubbing, while eyes were flushed with saline and mouthfuls spat. Reporting to infection control was ordered with date, device and depth recorded.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Act",
+     "Detail",
+     "Clock"
+    ],
+    "rows": [
+     [
+      "Wash wound",
+      "Soap, water",
+      "At once"
+     ],
+     [
+      "First TLD dose",
+      "In casualty",
+      "Within 2 hours"
+     ],
+     [
+      "Full course",
+      "Daily 28 days",
+      "Before 72 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Baseline HIV with hepatitis B with C** with pregnancy test precedes PEP; **source tested** for HIV, Hep B and C in parallel. **Follow-up HIV tests at 6 weeks, 12 weeks and 6 months** catch late seroconversion. **Hepatitis B vaccine with HBIG** follows anti-HBs status in the exposed. **Ongoing risk after PEP** moves directly to PrEP with a negative test. **Side effects with adherence** decide completion; counsel through nausea.",
+   "say": "Baseline H I V with hepatitis B and C with pregnancy test was ordered before P E P, while the source was tested for H I V, Hep B and C in parallel. Follow-up H I V tests at six weeks, twelve weeks and six months were ordered to catch late seroconversion. Hepatitis B vaccine with H B I G was reported to follow anti-H B s status in the exposed. Ongoing risk after P E P was moved directly to Pr E P with a negative test. Side effects with adherence were reported to decide completion, so counselling continued through nausea.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exposure plus first dose"
+     },
+     {
+      "id": "b",
+      "label": "Baseline tests plus 28 days"
+     },
+     {
+      "id": "c",
+      "label": "Test at 6, 12, 24 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PrEP shields the uninfected** with substantial ongoing risk: **serodiscordant couples, MSM, sex workers and injectors**. **Daily tenofovir with emtricitabine** prevents 99% with strict adherence. **On-demand 2-1-1 dosing** (2 pills before, 1 daily for 2 days after sex) suits MSM with infrequent exposure. **Cabotegravir injection every 2 months** frees from pills; **lenacapavir twice yearly** follows. **Confirm HIV negative** with creatinine before starting any PrEP.",
+   "say": "Pr E P was reported to shield the uninfected with substantial ongoing risk, including serodiscordant couples, M S M, sex workers and injectors. Daily tenofovir with emtricitabine was reported to prevent ninety nine percent with strict adherence. On-demand two-one-one dosing with two pills before and one daily for two days after sex was reported to suit M S M with infrequent exposure. Cabotegravir injection every two months was reported to free users from pills, while lenacapavir twice yearly followed. H I V negative status was confirmed with creatinine before starting any Pr E P.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Daily cover",
+     "points": [
+      "TDF plus FTC one pill",
+      "Any exposure pattern",
+      "Strict adherence needed"
+     ]
+    },
+    "right": {
+     "title": "Event or injectable",
+     "points": [
+      "2-1-1 for MSM only",
+      "Cabotegravir 2 monthly",
+      "Lenacapavir 6 monthly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**HIV test every 3 months** on PrEP catches breakthrough early; **creatinine with STI screen** runs alongside. **Pregnancy is no bar** to TDF-based PrEP; **breastfeeding continues** with adherence. **Stop PrEP 28 days after** last substantial exposure to cover the tail. **Adherence decides everything**; drug levels with counselling rescue strugglers. **Vaccinate hepatitis B** in the non-immune on PrEP visits.",
+   "say": "H I V test every three months on Pr E P was ordered to catch breakthrough early, while creatinine with S T I screen ran alongside. Pregnancy was defined as no bar to T D F based Pr E P, while breastfeeding continued with adherence. Stopping Pr E P twenty eight days after last substantial exposure was advised to cover the tail. Adherence was reported to decide everything, while drug levels with counselling rescued strugglers. Hepatitis B vaccination was advised in the non-immune on Pr E P visits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Check",
+     "When",
+     "Acts on"
+    ],
+    "rows": [
+     [
+      "HIV test",
+      "Every 3 months",
+      "Stop if positive"
+     ],
+     [
+      "Creatinine",
+      "Each visit",
+      "Swap TAF"
+     ],
+     [
+      "STI screen",
+      "Quarterly",
+      "Treat partners"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Test every pregnancy** for HIV at first visit; **lifelong ART for the mother** regardless of CD4 prevents transmission below 1%. **Vaginal delivery is allowed** with suppressed load; **elective section** when load is high near term. **Infant prophylaxis runs 6 weeks** with early DNA PCR testing. **Breastfeeding with ART** with undetectable load is advised where formula is unsafe; **mixed feeding never** in the first 6 months.",
+   "say": "Testing every pregnancy for H I V at first visit was ordered, while lifelong A R T for the mother regardless of C D four was reported to prevent transmission below one percent. Vaginal delivery was allowed with suppressed load, while elective section was advised when load stayed high near term. Infant prophylaxis was reported to run six weeks with early D N A P C R testing. Breastfeeding with A R T and undetectable load was advised where formula stayed unsafe, while mixed feeding was never advised in the first six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Action",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Mother",
+      "Lifelong ART",
+      "Any CD4"
+     ],
+     [
+      "Baby",
+      "Prophylaxis 6 weeks",
+      "Early PCR"
+     ],
+     [
+      "Feeding",
+      "ART plus exclusive",
+      "No mixed feeds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Condom with lubricant** every time remains the base; **test partners together** with assisted notification. **Circumcision cuts acquisition by half** where acceptable; **sterile needles with exchange** serve injectors. **Treat STIs fast** as ulcers multiply transmission. **Blood safety with universal precautions** closes hospital spread. **Post-assault care** bundles PEP with emergency contraception with counselling.",
+   "say": "Condom with lubricant every time remained the base, while partners were tested together with assisted notification. Circumcision was reported to cut acquisition by half where acceptable, while sterile needles with exchange served injectors. Treating S T Is fast was advised as ulcers multiplied transmission. Blood safety with universal precautions was reported to close hospital spread. Post-assault care was reported to bundle P E P with emergency contraception and counselling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Effect",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Condoms",
+      "Blocks most",
+      "Every act"
+     ],
+     [
+      "Circumcision",
+      "Cuts by half",
+      "Where accepted"
+     ],
+     [
+      "Needle exchange",
+      "Cuts sharing",
+      "No more use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**All adults with TB with STI clinic** attenders get provider-initiated testing; **self-tests** reach hidden networks. **Retest high-risk negatives** yearly with PrEP linkage the same day. **Serodiscordant couples** start ART in the positive partner at once with PrEP bridging till suppression. **Acute seroconversion illness** (fever, rash, glands) is tested with RNA, not antibody alone. **Window of 12 days with NAT** guides repeat timing after exposure.",
+   "say": "Provider-initiated testing was advised for all adults with T B and S T I clinic attenders, while self-tests reached hidden networks. High-risk negatives were retested yearly with Pr E P linkage the same day. Serodiscordant couples were started on A R T in the positive partner at once with Pr E P bridging till suppression. Acute seroconversion illness with fever, rash and glands was tested with R N A, not antibody alone. A window of forty five days for fourth-generation tests was reported to guide repeat timing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Test",
+     "Link"
+    ],
+    "rows": [
+     [
+      "TB, STI clinics",
+      "Provider-initiated",
+      "Same day ART"
+     ],
+     [
+      "Self-testers",
+      "Confirmatory lab",
+      "Link to care"
+     ],
+     [
+      "Discordant pair",
+      "RNA if acute",
+      "PrEP bridge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** waiting for source results before PEP wastes the 72 hours. **Two-drug or short PEP** fails; 28 days TLD is fixed. **On-demand PrEP for vaginal exposure** is unproven; daily alone counts. **Stopping PrEP the day risk ends** misses the tail; 28 days cover follows. **Breastfeeding mixed feeds** transmits; exclusive with ART only. **Circumcision alone** never replaces condoms.",
+   "say": "For the exam, these traps were tabulated as requested. Waiting for source results before P E P was reported to waste the seventy two hours. Two-drug or short P E P was reported to fail, while twenty eight days T L D stayed fixed. On-demand Pr E P for vaginal exposure was unproven, while daily alone counted. Stopping Pr E P the day risk ended was reported to miss the tail, while twenty eight days cover followed. Mixed breastfeeding feeds were reported to transmit, while exclusive feeds with A R T alone were advised. Circumcision alone was reported to never replace condoms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Wait for source",
+      "Loses hours",
+      "Dose at once"
+     ],
+     [
+      "Short PEP",
+      "Fails",
+      "28 days fixed"
+     ],
+     [
+      "2-1-1 vaginal",
+      "Unproven",
+      "Daily only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bites with blood with discarded needles** rarely need PEP; **intact skin exposure never does**. **Source suppressed on ART** carries negligible risk, yet PEP is still offered per protocol. **Sexual assault gets TLD** with emergency contraception with STI cover together. **Pregnancy never blocks PEP**; TLD stays the choice with folate. **Hepatitis B non-immune** gets vaccine with HBIG by anti-HBs titre. **Renal failure doses** tenofovir by creatinine or swaps agents.",
+   "say": "Bites with blood and discarded needles were reported to rarely need P E P, while intact skin exposure never did. Source suppressed on A R T was reported to carry negligible risk, yet P E P was still offered per protocol. Sexual assault was reported to get T L D with emergency contraception and S T I cover together. Pregnancy was defined to never block P E P, while T L D stayed the choice with folate. Hepatitis B non-immune status was reported to get vaccine with H B I G by anti-H B s titre. Renal failure was reported to dose tenofovir by creatinine or swap agents.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Case",
+     "PEP?",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Discarded needle",
+      "No",
+      "No live virus"
+     ],
+     [
+      "Suppressed source",
+      "Offer still",
+      "Negligible risk"
+     ],
+     [
+      "Assault",
+      "Yes plus bundle",
+      "Contraception too"
+     ],
+     [
+      "Pregnancy",
+      "Yes TLD",
+      "With folate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** **PEP is TLD 28 days within 72 hours**, first dose in casualty. **Follow-up at 6 weeks, 12 weeks, 6 months**. **PrEP is TDF with FTC daily**; **cabotegravir every 2 months** frees pills. **Treat all pregnancies with ART**; transmission below 1%. **U equals U** with suppression. **2-1-1 suits MSM only**; **mixed feeds never** with HIV.",
+   "say": "For the exam, these high-yield facts were tabulated as requested. P E P with T L D for twenty eight days within seventy two hours was advised, with the first dose in casualty. Follow-up at six weeks, twelve weeks and six months was ordered. Pr E P with T D F and F T C daily was reported to lead, while cabotegravir every two months freed pills. All pregnancies with A R T were treated, with transmission below one percent. U equals U with suppression was defined. Two-one-one was reported to suit M S M only, while mixed feeds were never advised with H I V.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "TLD 28 days",
+      "Within 72 hours",
+      "PEP dose asked"
+     ],
+     [
+      "6, 12, 24 weeks",
+      "Follow-up tests",
+      "Schedule"
+     ],
+     [
+      "TDF plus FTC",
+      "Daily PrEP",
+      "Regimen"
+     ],
+     [
+      "Cabotegravir 2 monthly",
+      "Injectable",
+      "New drug"
+     ],
+     [
+      "U equals U",
+      "Suppressed RNA",
+      "Concept"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,371 @@
+{
+ "v": 1,
+ "module": "sne-intracerebral-haemorrhage",
+ "title": "Intracerebral haemorrhage",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Intracerebral haemorrhage is bleeding into the brain parenchyma from a ruptured small vessel, and it accounts for roughly 10 to 15 percent of all strokes. **Hypertension** is the commonest cause and produces deep haemorrhages in the basal ganglia, thalamus, pons, and cerebellum. The classic presentation is sudden headache, vomiting, hypertension, and depressed consciousness.",
+   "say": "Intracerebral haemorrhage is bleeding into the brain parenchyma from a ruptured small vessel, and it accounts for roughly 10 to 15 percent of all strokes. Hypertension is the commonest cause and produces deep haemorrhages in the basal ganglia, thalamus, pons and cerebellum. The classic presentation is sudden headache, vomiting, hypertension and depressed consciousness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Typical cause",
+     "Clinical clue"
+    ],
+    "rows": [
+     [
+      "Basal ganglia",
+      "Hypertension",
+      "Hemiparesis with headache"
+     ],
+     [
+      "Thalamus",
+      "Hypertension",
+      "Sensory loss with dysphasia"
+     ],
+     [
+      "Pons",
+      "Hypertension",
+      "Pinpoint pupils with coma"
+     ],
+     [
+      "Cerebellum",
+      "Hypertension",
+      "Vertigo, ataxia, vomiting"
+     ],
+     [
+      "Lobar",
+      "Amyloid angiopathy",
+      "Elderly, recurrent bleeds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The mechanism is chronic **hypertensive arteriopathy** with lipohyalinosis and microaneurysm formation in deep perforators. Acute pressure surges rupture these fragile vessels, and haematoma expansion in the first hours worsens the deficit. **Amyloid angiopathy** affects cortical and leptomeningeal vessels and causes lobar bleeds in the elderly, often recurrent.",
+   "say": "The mechanism is chronic hypertensive arteriopathy with lipohyalinosis and microaneurysm formation in deep perforators. Acute pressure surges rupture these fragile vessels, and haematoma expansion in the first hours worsens the deficit. Amyloid angiopathy affects cortical and leptomeningeal vessels and causes lobar bleeds in the elderly, often recurrent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chronic hypertension injures perforators"
+     },
+     {
+      "id": "b",
+      "label": "Lipohyalinosis and microaneurysms form"
+     },
+     {
+      "id": "c",
+      "label": "Acute surge ruptures the vessel"
+     },
+     {
+      "id": "d",
+      "label": "Haematoma expands in early hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cerebellar haemorrhage** is the surgical emergency of this group because the haematoma compresses the brainstem and obstructs cerebrospinal fluid flow. Vertigo, vomiting, ataxia, and rapidly falling consciousness are the presenting features. The **first test** is noncontrast computed tomography, which shows blood immediately, and posterior fossa bleeds need urgent neurosurgical review.",
+   "say": "Cerebellar haemorrhage is the surgical emergency of this group because the haematoma compresses the brainstem and obstructs cerebrospinal fluid flow. Vertigo, vomiting, ataxia and rapidly falling consciousness are the presenting features. The first test is noncontrast computed tomography, which shows blood immediately, and posterior fossa bleeds need urgent neurosurgical review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Structure affected",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Vertigo and nystagmus",
+      "Vestibular nuclei",
+      "Vertebral and cerebellar bleeding"
+     ],
+     [
+      "Ataxia and dysarthria",
+      "Cerebellar hemispheres",
+      "Large cerebellar haematoma"
+     ],
+     [
+      "Falling consciousness",
+      "Brainstem compression",
+      "Surgical emergency"
+     ],
+     [
+      "Pinpoint pupils",
+      "Pontine lesion",
+      "Pontine haemorrhage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood pressure** management uses intravenous agents to lower systolic pressure in the 130 to 150 range without dropping perfusion. **Reversal** of anticoagulation is urgent with vitamin K and prothrombin complex concentrate or idarucizumab after dabigatran. Haematoma expansion is the mechanism that kills in the first day, so early control matters.",
+   "say": "Blood pressure management uses intravenous agents to lower systolic pressure in the 130 to 150 range without dropping perfusion. Reversal of anticoagulation is urgent with vitamin K and prothrombin complex concentrate or idarucizumab after dabigatran. Haematoma expansion is the mechanism that kills in the first day, so early control matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention",
+     "Target",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Blood pressure control",
+      "Systolic 130 to 150",
+      "Limits haematoma expansion"
+     ],
+     [
+      "Anticoagulant reversal",
+      "Prothrombin complex concentrate",
+      "Stops ongoing bleeding"
+     ],
+     [
+      "Dabigatran reversal",
+      "Idarucizumab",
+      "Specific antibody fragment"
+     ],
+     [
+      "Airway and oxygenation",
+      "Protect the airway",
+      "Coma kills before the haematoma does"
+     ],
+     [
+      "Repeat imaging",
+      "At 6 hours or on deterioration",
+      "Detects expansion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **gold standard** test for the cause is susceptibility imaging together with angiography for vascular lesions, because computed tomography only shows the bleed. **Computed tomography angiography** identifies the spot sign, which predicts haematoma expansion. Follow-up imaging detects expansion or hydrocephalus that changes management.",
+   "say": "The gold standard test for the cause is susceptibility imaging together with angiography for vascular lesions, because computed tomography only shows the bleed. Computed tomography angiography identifies the spot sign, which predicts haematoma expansion. Follow-up imaging detects expansion or hydrocephalus that changes management.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging",
+     "Finding",
+     "Decision"
+    ],
+    "rows": [
+     [
+      "Noncontrast computed tomography",
+      "Blood immediately visible",
+      "Confirms haemorrhage"
+     ],
+     [
+      "Computed tomography angiography",
+      "Spot sign present",
+      "High expansion risk, intensive control"
+     ],
+     [
+      "Susceptibility imaging",
+      "Microbleeds and lobar pattern",
+      "Amyloid angiopathy likely"
+     ],
+     [
+      "Catheter angiography",
+      "Aneurysm or malformation",
+      "Surgery or coiling considered"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prognosis** turns on haematoma volume, location, consciousness, and expansion on repeat imaging. Posterior fossa bleeds and intraventricular extension carry the worst outcomes. Mortality is near 40 percent at 30 days in hospital series. Survivors need aggressive blood pressure control and antithrombotic review to prevent recurrence.",
+   "say": "Prognosis turns on haematoma volume, location, consciousness and expansion on repeat imaging. Posterior fossa bleeds and intraventricular extension carry the worst outcomes. Mortality is near 40 percent at 30 days in hospital series. Survivors need aggressive blood pressure control and antithrombotic review to prevent recurrence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on outcome",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Volume over 30 mL",
+      "High mortality",
+      "Neurocritical care admission"
+     ],
+     [
+      "Cerebellar location",
+      "Brainstem compression risk",
+      "Urgent surgical review"
+     ],
+     [
+      "Intraventricular extension",
+      "Hydrocephalus likely",
+      "Consider external drain"
+     ],
+     [
+      "Recurrent bleed",
+      "Amyloid angiopathy",
+      "Strict pressure control, review antithrombotics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** separate haemorrhage from ischaemia at the bedside and on the scanner. Sudden headache with vomiting and hypertension favours bleed, while a normal early computed tomography excludes infarction far less often than it excludes blood. Anticoagulant reversal is time critical, and the spot sign on angiography predicts expansion. Cerebellar bleeds deteriorate fast despite small volumes.",
+   "say": "Traps separate haemorrhage from ischaemia at the bedside and on the scanner. Sudden headache with vomiting and hypertension favours bleed, while a normal early computed tomography excludes infarction far less often than it excludes blood. Anticoagulant reversal is time critical, and the spot sign on angiography predicts expansion. Cerebellar bleeds deteriorate fast despite small volumes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemorrhagic stroke",
+     "points": [
+      "Headache and vomiting at onset",
+      "Hypertension with depressed consciousness",
+      "Blood visible on immediate computed tomography",
+      "Spot sign predicts expansion"
+     ]
+    },
+    "right": {
+     "title": "Ischaemic stroke",
+     "points": [
+      "Deficit maximal at onset, painless",
+      "Blood pressure often normal initially",
+      "Early scan may look normal",
+      "Diffusion imaging shows the infarct"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Complications** include haematoma expansion, hydrocephalus, seizures, and aspiration. Deep bleeds cause mass effect on adjacent tracts, while posterior fossa bleeds obstruct the fourth ventricle. Fever and hyperglycaemia worsen outcome and are treated aggressively. External ventricular drainage is the answer for obstructive hydrocephalus with declining consciousness.",
+   "say": "Haematoma expansion, hydrocephalus, seizures and aspiration are the standard complications. Deep bleeds cause mass effect on adjacent tracts, while posterior fossa bleeds obstruct the fourth ventricle. Fever and hyperglycaemia worsen outcome and are treated aggressively. External ventricular drainage is the answer for obstructive hydrocephalus with declining consciousness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haematoma causes mass effect"
+     },
+     {
+      "id": "b",
+      "label": "Ventricles obstructed"
+     },
+     {
+      "id": "c",
+      "label": "Hydrocephalus develops"
+     },
+     {
+      "id": "d",
+      "label": "Consciousness falls, drain considered"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prevention** after the first bleed is meticulous long term blood pressure control and review of antithrombotic therapy. Resuming anticoagulation after a bleed is balanced against cardiac risk and decided with neurology input. Lipid lowering therapy follows ischaemic risk, not the haemorrhage itself. Elderly patients with amyloid angiopathy need the strictest pressure targets.",
+   "say": "Prevention after the first bleed is meticulous long term blood pressure control and review of antithrombotic therapy. Resuming anticoagulation after a bleed is balanced against cardiac risk and decided with neurology input. Lipid lowering therapy follows ischaemic risk, not the haemorrhage itself. Elderly patients with amyloid angiopathy need the strictest pressure targets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Target",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Blood pressure control",
+      "Systolic under 140",
+      "Prevent recurrence"
+     ],
+     [
+      "Antithrombotic review",
+      "Stop where possible",
+      "Reduce rebleed risk"
+     ],
+     [
+      "Lipid lowering therapy",
+      "Per ischaemic risk",
+      "Vascular protection"
+     ],
+     [
+      "Repeat imaging",
+      "Recovery phase",
+      "Document baseline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** hypertension causes deep bleeds, amyloid causes lobar bleeds, and cerebellar bleed is the surgical emergency. Noncontrast computed tomography is the first test because it shows blood immediately, and the spot sign predicts expansion. Systolic pressure is targeted at 130 to 150, anticoagulant reversal is urgent, and posterior fossa bleeds deteriorate fast.",
+   "say": "High yield for the exam: hypertension causes deep bleeds, amyloid causes lobar bleeds and cerebellar bleed is the surgical emergency. Noncontrast computed tomography is the first test because it shows blood immediately, and the spot sign predicts expansion. Systolic pressure is targeted at 130 to 150, anticoagulant reversal is urgent and posterior fossa bleeds deteriorate fast.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "rows": [
+     [
+      "Commonest cause",
+      "Hypertension",
+      "Deep bleeds in perforator territory"
+     ],
+     [
+      "Surgical emergency",
+      "Cerebellar haemorrhage",
+      "Brainstem compression, hydrocephalus"
+     ],
+     [
+      "First test",
+      "Noncontrast computed tomography",
+      "Blood is immediately visible"
+     ],
+     [
+      "Spot sign",
+      "Predicts haematoma expansion",
+      "Intensive pressure control needed"
+     ],
+     [
+      "Pressure target",
+      "Systolic 130 to 150",
+      "Limits expansion"
+     ],
+     [
+      "Amyloid pattern",
+      "Lobar bleeds in elderly",
+      "Recurrent bleeds, microbleeds"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

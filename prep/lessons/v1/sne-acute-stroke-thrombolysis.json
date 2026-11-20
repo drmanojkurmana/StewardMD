@@ -1,0 +1,377 @@
+{
+ "v": 1,
+ "module": "sne-acute-stroke-thrombolysis",
+ "title": "Acute ischaemic stroke and thrombolysis",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Acute ischaemic stroke is a **time critical** emergency where every minute of delay loses brain tissue. The **door to needle** target is under 60 minutes, and the **door to groin** target for thrombectomy is under 90 minutes. Rapid recognition with **BE-FAST** and immediate stroke team alerting forms the first link in the chain of survival.",
+   "say": "Acute ischaemic stroke is a time critical emergency where every minute of delay loses brain tissue. The door to needle target is under 60 minutes, and the door to groin target for thrombectomy is under 90 minutes. Rapid recognition with BE-FAST and immediate stroke team alerting forms the first link in the chain of survival.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ischemic-stroke-fig2.webp",
+    "alt": "Brain imaging showing a large vessel occlusion causing ischaemic stroke.",
+    "caption": "Large vessel occlusion blocks flow and drives the thrombolysis decision (StewardMD).",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classic presentation is sudden **face, arm, or leg weakness**, speech disturbance, vision loss, or imbalance. The exact time **last known well** must be recorded at first contact because every later decision counts from it. For wake-up strokes the time last seen normal serves the same purpose, and perfusion imaging can still open the window.",
+   "say": "The classic presentation is sudden face, arm or leg weakness, speech disturbance, vision loss or imbalance. The exact time last known well must be recorded at first contact because every later decision counts from it. For wake-up strokes the time last seen normal serves the same purpose, and perfusion imaging can still open the window.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden focal deficit recognised"
+     },
+     {
+      "id": "b",
+      "label": "Capillary glucose checked"
+     },
+     {
+      "id": "c",
+      "label": "Noncontrast computed tomography"
+     },
+     {
+      "id": "d",
+      "label": "Thrombolysis and thrombectomy decided"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Capillary glucose** is checked immediately because hypoglycaemia below 60 mg/dL mimics stroke and must be corrected before any thrombolysis decision. Only glucose is required before treatment, and platelets or international normalised ratio are not awaited unless anticoagulant use or a bleeding disorder is suspected. Cardiac investigations must not delay reperfusion.",
+   "say": "Capillary glucose is checked immediately because hypoglycaemia below 60 mg/dL mimics stroke and must be corrected before any thrombolysis decision. Only glucose is required before treatment, and platelets or international normalised ratio are not awaited unless anticoagulant use or a bleeding disorder is suspected. Cardiac investigations must not delay reperfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Target",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Capillary glucose",
+      "Under 60 mg/dL needs correction",
+      "Mimics stroke and is reversible"
+     ],
+     [
+      "Door to needle",
+      "Under 60 minutes",
+      "Faster reperfusion saves brain"
+     ],
+     [
+      "Door to groin puncture",
+      "Under 90 minutes",
+      "Thrombectomy needs a clear large vessel"
+     ],
+     [
+      "Blood pressure ceiling",
+      "Below 185/110 mmHg",
+      "Higher pressures raise bleed risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tenecteplase** is given as a single intravenous bolus at 0.25 mg per kg, and 25 mg is the maximum dose. **Alteplase** is given at 0.9 mg per kg, and 90 mg is the maximum within 4.5 hours of onset for disabling deficits. Both agents are equally endorsed, but tenecteplase needs only one bolus, which suits transfer situations.",
+   "say": "Tenecteplase is given as a single intravenous bolus at 0.25 mg per kg, and 25 mg is the maximum dose. Alteplase is given at 0.9 mg per kg, and 90 mg is the maximum within 4.5 hours of onset for disabling deficits. Both agents are equally endorsed, but tenecteplase needs only one bolus, which suits transfer situations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Dose",
+     "Maximum"
+    ],
+    "rows": [
+     [
+      "Tenecteplase",
+      "0.25 mg per kg single bolus",
+      "25 mg"
+     ],
+     [
+      "Alteplase",
+      "0.9 mg per kg intravenous",
+      "90 mg"
+     ],
+     [
+      "Extended window alteplase",
+      "Perfusion selected up to 9 hours",
+      "90 mg"
+     ],
+     [
+      "Blood pressure ceiling",
+      "Below 185/110 mmHg",
+      "Treat first, then lyse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **extended window** of thrombolysis from 4.5 to 9 hours from last known well is reasonable when perfusion imaging or diffusion FLAIR mismatch shows salvageable tissue. Wake-up strokes within 9 hours of the midpoint of sleep are included on the same basis. 4.5 to 24 hours is the window for tenecteplase in large vessel occlusion with salvageable tissue when thrombectomy is unavailable.",
+   "say": "An extended window of thrombolysis from 4.5 to 9 hours from last known well is reasonable when perfusion imaging or diffusion FLAIR mismatch shows salvageable tissue. Wake-up strokes within 9 hours of the midpoint of sleep are included on the same basis. 4.5 to 24 hours is the window for tenecteplase in large vessel occlusion with salvageable tissue when thrombectomy is unavailable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Onset 4.5 to 9 hours"
+     },
+     {
+      "id": "b",
+      "label": "Perfusion mismatch present"
+     },
+     {
+      "id": "c",
+      "label": "Salvageable penumbra confirmed"
+     },
+     {
+      "id": "d",
+      "label": "Thrombolyse with tenecteplase"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exclusions** from thrombolysis include any intracranial haemorrhage and previous intracerebral haemorrhage. Recent ischaemic stroke within 3 months, severe head injury, and intracranial or spinal surgery are also exclusions. Gastrointestinal bleeding or malignancy within 2 weeks is a further exclusion. A seizure at onset does not by itself exclude thrombolysis.",
+   "say": "The following occur as exclusions from thrombolysis: any intracranial haemorrhage and previous intracerebral haemorrhage. Recent ischaemic stroke within 3 months, severe head injury and intracranial or spinal surgery are also exclusions. Gastrointestinal bleeding or malignancy within 2 weeks is a further exclusion. A seizure at onset does not by itself exclude thrombolysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exclusion",
+     "Period",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Intracranial haemorrhage",
+      "Any time",
+      "Fatal bleed risk"
+     ],
+     [
+      "Previous intracerebral haemorrhage",
+      "Ever",
+      "Recurrence risk"
+     ],
+     [
+      "Ischaemic stroke",
+      "Within 3 months",
+      "Haemorrhagic transformation"
+     ],
+     [
+      "Head injury or brain surgery",
+      "Within 3 months",
+      "Bleeding into surgical bed"
+     ],
+     [
+      "Gastrointestinal bleed or malignancy",
+      "Within 2 weeks",
+      "Systemic bleeding risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thrombectomy** is indicated for large vessel occlusion up to 24 hours in selected patients with salvageable tissue. Large vessel occlusion is diagnosed on computed tomography angiography of the head and neck. Tenecteplase may be considered for such patients at 4.5 to 24 hours when thrombectomy is not available. **Aspirin** and stroke unit care follow reperfusion.",
+   "say": "Thrombectomy is indicated for large vessel occlusion up to 24 hours in selected patients with salvageable tissue. Large vessel occlusion is diagnosed on computed tomography angiography of the head and neck. Tenecteplase may be considered for such patients at 4.5 to 24 hours when thrombectomy is not available. Aspirin and stroke unit care follow reperfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Time from onset",
+     "Test",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Within 4.5 hours",
+      "Noncontrast computed tomography",
+      "Tenecteplase or alteplase"
+     ],
+     [
+      "4.5 to 9 hours",
+      "Perfusion or diffusion FLAIR imaging",
+      "Thrombolysis if mismatch exists"
+     ],
+     [
+      "Up to 24 hours",
+      "Computed tomography angiography",
+      "Thrombectomy for large vessel occlusion"
+     ],
+     [
+      "After reperfusion",
+      "Stroke unit monitoring",
+      "Aspirin and secondary prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mimics** include post-ictal paresis, migraine aura, hypoglycaemia, functional deficit, and sepsis that unmasks an old deficit. A seizure at onset does not exclude thrombolysis when the deficit is judged to be from stroke. Hypoglycaemia is corrected first because it is the mimic that is dangerous to treat as stroke.",
+   "say": "Mimics present as post-ictal paresis, migraine aura, hypoglycaemia, functional deficit and sepsis that unmasks an old deficit. A seizure at onset does not exclude thrombolysis when the deficit is judged to be from stroke. Hypoglycaemia is corrected first because it is the mimic that is dangerous to treat as stroke.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True stroke",
+     "points": [
+      "Sudden focal deficit with a vascular territory",
+      "Normal capillary glucose",
+      "Computed tomography excludes bleed",
+      "Time last known well is clear"
+     ]
+    },
+    "right": {
+     "title": "Stroke mimic",
+     "points": [
+      "Hypoglycaemia below 60 mg/dL",
+      "Post-ictal or migraine aura pattern",
+      "Functional deficit with inconsistency",
+      "Sepsis unmasking an old deficit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Complications** of thrombolysis include symptomatic intracranial haemorrhage in about 1 in 50 treated patients, angioedema, and systemic bleeding. Blood pressure is monitored closely for the first day with frequent neurological checks. Any deterioration after treatment triggers immediate repeat computed tomography to exclude haemorrhage.",
+   "say": "Complications of thrombolysis include symptomatic intracranial haemorrhage in about 1 in 50 treated patients, angioedema and systemic bleeding. Blood pressure is monitored closely for the first day with frequent neurological checks. Any deterioration after treatment triggers immediate repeat computed tomography to exclude haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Clue",
+     "Immediate action"
+    ],
+    "rows": [
+     [
+      "Symptomatic bleed in brain",
+      "Headache with falling consciousness",
+      "Stop, repeat computed tomography, reverse"
+     ],
+     [
+      "Angioedema",
+      "Swelling of lips and tongue",
+      "Airway protection and observation"
+     ],
+     [
+      "Systemic bleeding",
+      "Bleeding at puncture sites",
+      "Pressure, review drugs, transfuse as needed"
+     ],
+     [
+      "Early deterioration",
+      "New weakness or pupillary change",
+      "Urgent repeat imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** in stroke papers exploit the window and the sugar. Wake-up stroke is still thrombolysable within 9 hours of the sleep midpoint, 60 mg per decilitre, and last known well are the three numbers that recur. Platelets and international normalised ratio are not awaited, and cardiac tests must not delay the needle. A normal early computed tomography scan never excludes ischaemia.",
+   "say": "Traps in stroke papers are built around the window and the sugar. Wake-up stroke is still thrombolysable within 9 hours of the sleep midpoint, 60 mg per decilitre and last known well are the three numbers that recur. Platelets and international normalised ratio are not awaited, and cardiac tests must not delay the needle. A normal early computed tomography scan never excludes ischaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Wrong answer",
+     "Correct answer"
+    ],
+    "rows": [
+     [
+      "Wake-up stroke",
+      "Too late for thrombolysis",
+      "Thrombolyse within 9 hours of sleep midpoint"
+     ],
+     [
+      "Glucose 50 mg per decilitre",
+      "Give tenecteplase",
+      "Correct glucose first, then decide"
+     ],
+     [
+      "Waiting for platelets",
+      "Standard pre-lysis check",
+      "Only glucose is required before treatment"
+     ],
+     [
+      "Normal early scan",
+      "No stroke",
+      "It is still an ischaemic stroke"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** tenecteplase is 0.25 mg per kg capped at 25 mg as one bolus, and alteplase is 0.9 mg per kg capped at 90 mg within 4.5 hours. Blood pressure must be below 185/110 mmHg, glucose below 60 mg per decilitre mimics stroke, door to needle is under 60 minutes, and thrombectomy extends to 24 hours. Extended thrombolysis to 9 hours needs a perfusion or diffusion FLAIR mismatch.",
+   "say": "High yield for the exam: tenecteplase is 0.25 mg per kg capped at 25 mg as one bolus, and alteplase is 0.9 mg per kg capped at 90 mg within 4.5 hours. Blood pressure must be below 185/110 mmHg, glucose below 60 mg per decilitre mimics stroke, door to needle is under 60 minutes and thrombectomy extends to 24 hours. Extended thrombolysis to 9 hours needs a perfusion or diffusion FLAIR mismatch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decision",
+     "Number",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Tenecteplase",
+      "0.25 mg per kg, max 25 mg",
+      "Single bolus within window"
+     ],
+     [
+      "Alteplase",
+      "0.9 mg per kg, max 90 mg",
+      "Within 4.5 hours"
+     ],
+     [
+      "Blood pressure ceiling",
+      "185/110 mmHg",
+      "Control before lysing"
+     ],
+     [
+      "Glucose mimic",
+      "Below 60 mg per decilitre",
+      "Correct, then reassess"
+     ],
+     [
+      "Door to needle",
+      "Under 60 minutes",
+      "Reperfuse fast"
+     ],
+     [
+      "Thrombectomy window",
+      "Up to 24 hours",
+      "Large vessel occlusion only"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

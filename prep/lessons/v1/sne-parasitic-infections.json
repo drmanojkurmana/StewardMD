@@ -1,0 +1,341 @@
+{
+ "v": 1,
+ "module": "sne-parasitic-infections",
+ "title": "Neurocysticercosis and parasitic infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Neurocysticercosis** is brain infection by the larvae of the pork tapeworm **Taenia solium** and the most common parasitic disease of the human nervous system worldwide. Larvae lodge silently and symptoms appear years later when cysts degenerate. A single enhancing **5 to 20 mm** round lesion with seizures in an endemic patient is almost always neurocysticercosis, and a cyst with a visible **scolex** is diagnostic.",
+   "say": "Neurocysticercosis is brain infection by the larvae of the pork tapeworm Taenia solium and the most common parasitic disease of the human nervous system worldwide. Larvae lodge silently and symptoms appear years later when cysts degenerate. A single enhancing five to twenty millimetre round lesion with seizures in an endemic patient is almost always neurocysticercosis, and a cyst with a visible scolex is diagnostic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Key number"
+    ],
+    "rows": [
+     [
+      "Neurocysticercosis",
+      "Most common parasitic brain disease worldwide"
+     ],
+     [
+      "Symptom lag",
+      "Years until cysts degenerate"
+     ],
+     [
+      "Single lesion clue",
+      "5 to 20 mm enhancing lesion with seizures"
+     ],
+     [
+      "Scolex sign",
+      "Dot-in-hole cyst is diagnostic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Humans develop cysticercosis by swallowing **Taenia solium eggs** in contaminated food or water, while eating undercooked pork causes the intestinal tapeworm. Tapeworm carriers can infect themselves and their households by the **fecal oral** route, so close contacts need screening. **Hydatid** disease follows ingestion of canine tapeworm eggs, and oncospheres then spread through blood to liver, lung, and other organs.",
+   "say": "Humans develop cysticercosis by swallowing Taenia solium eggs in contaminated food or water, while eating undercooked pork causes the intestinal tapeworm. Tapeworm carriers can infect themselves and their households by the fecal oral route, so close contacts need screening. Hydatid disease follows ingestion of canine tapeworm eggs, and oncospheres then spread through blood to liver, lung, and other organs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fecal oral route",
+     "points": [
+      "Taenia solium eggs in food or water",
+      "Undercooked pork gives intestinal tapeworm",
+      "Carriers infect household contacts",
+      "Screen close contacts and treat carriers"
+     ]
+    },
+    "right": {
+     "title": "Tissue dissemination",
+     "points": [
+      "Oncospheres penetrate the gut wall",
+      "Bloodstream seeds liver and lung",
+      "Hydatid cysts grow slowly for years",
+      "Rupture risks anaphylaxis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hatched oncospheres break through the gut wall and spread through the **bloodstream** to brain, muscle, and ventricles. Living cysts cause little inflammation, but degenerating cysts trigger **granulomatous inflammation**, edema, and later calcification. Basilar **racemose** cysts provoke meningitis with hydrocephalus and vasculitis, and ventricular cysts obstruct flow and increase intracranial pressure.",
+   "say": "Hatched oncospheres break through the gut wall and spread through the bloodstream to brain, muscle, and ventricles. Living cysts cause little inflammation, but degenerating cysts trigger granulomatous inflammation, edema, and later calcification. Basilar racemose cysts provoke meningitis with hydrocephalus and vasculitis, and ventricular cysts obstruct flow and increase intracranial pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Eggs hatch in the gut"
+     },
+     {
+      "id": "b",
+      "label": "Oncospheres enter venules"
+     },
+     {
+      "id": "c",
+      "label": "Bloodstream seeds the brain"
+     },
+     {
+      "id": "d",
+      "label": "Cyst death triggers granuloma"
+     },
+     {
+      "id": "e",
+      "label": "Calcification with seizures"
+     },
+     {
+      "id": "f",
+      "label": "Racemose meningitis and hydrocephalus"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "d",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Seizures** are the classic presentation of neurocysticercosis, with single cysts common outside endemic zones and multiple cysts within them. The textbook clue is new epilepsy plus **muscle calcifications** or a visible scolex on imaging. Large subarachnoid or ventricular cysts increase intracranial pressure with headache, vomiting and papilledema mimicking a tumor.",
+   "say": "Seizures are the classic presentation of neurocysticercosis, with single cysts common outside endemic zones and multiple cysts within them. The textbook clue is new epilepsy plus muscle calcifications or a visible scolex on imaging. Large subarachnoid or ventricular cysts increase intracranial pressure with headache, vomiting and papilledema mimicking a tumor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Means"
+    ],
+    "rows": [
+     [
+      "New seizures in endemic adult",
+      "Neurocysticercosis first"
+     ],
+     [
+      "Visible scolex in a cyst",
+      "Pathognomonic of cysticercosis"
+     ],
+     [
+      "Calcified thigh and shoulder muscles",
+      "Old disseminated larval load"
+     ],
+     [
+      "Large cyst with papilledema",
+      "Raised pressure, tumor mimic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Racemose** cysts in the basal cisterns cause chronic meningitis with cranial nerve palsies, vasculitis, and stroke. Subarachnoid and ventricular disease is more difficult to treat and needs prolonged therapy with **CSF diversion** or endoscopic removal. Sudden rupture or leakage of a **hydatid** cyst can provoke urticaria, eosinophilia, or anaphylaxis and spread the infection.",
+   "say": "Racemose cysts in the basal cisterns cause chronic meningitis with cranial nerve palsies, vasculitis, and stroke. Subarachnoid and ventricular disease is more difficult to treat and needs prolonged therapy with CSF diversion or endoscopic removal. Sudden rupture or leakage of a hydatid cyst can provoke urticaria, eosinophilia, or anaphylaxis and spread the infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Racemose and ventricular",
+     "points": [
+      "Basilar cysts with nerve palsies",
+      "Hydrocephalus with vasculitic stroke",
+      "Prolonged drugs plus shunt for hydrocephalus",
+      "Avoid cysticidal drugs before removal"
+     ]
+    },
+    "right": {
+     "title": "Hydatid rupture",
+     "points": [
+      "Urticaria and sudden itching",
+      "Eosinophilia with leakage",
+      "Anaphylaxis from spillage",
+      "Only expert hands aspirate cysts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Contrast **MRI or CT** is the first test and may reveal the pathognomonic **scolex** inside a cyst, ring enhancement with edema, or old calcifications. **FIESTA or 3D-CISS** sequences best detect ventricular and subarachnoid cysts, while CT is more sensitive for calcification. Serum **immunoblot (EITB)** supports cysticercosis, and thigh or shoulder radiographs can show cigar-shaped muscle calcifications.",
+   "say": "Contrast MRI or CT is the first test and may reveal the pathognomonic scolex inside a cyst, ring enhancement with edema, or old calcifications. FIESTA or 3D-CISS sequences best detect ventricular and subarachnoid cysts, while CT is more sensitive for calcification. Serum immunoblot EITB supports cysticercosis, and thigh or shoulder radiographs can show cigar-shaped muscle calcifications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Finding",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Contrast MRI or CT",
+      "Scolex, ring lesion, calcification",
+      "First test for cysticercosis"
+     ],
+     [
+      "FIESTA or 3D-CISS",
+      "Ventricular and subarachnoid cysts",
+      "Best for extraparenchymal disease"
+     ],
+     [
+      "Serum EITB immunoblot",
+      "Antibody to larval antigen",
+      "Supports imaging diagnosis"
+     ],
+     [
+      "Limb radiographs",
+      "Cigar-shaped thigh calcifications",
+      "Marks endemic larval load"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Viable parenchymal cysts are treated with **albendazole**, with or without **praziquantel**, always with **corticosteroid** cover, since dying cysts provoke damaging inflammation. High dose **glucocorticoids** always accompany therapy, since dying parasites can worsen seizures or hydrocephalus. Intestinal carriers take **praziquantel** or **niclosamide**, and ocular cysts must be excluded before any cysticidal therapy.",
+   "say": "Viable parenchymal cysts are treated with albendazole, with or without praziquantel, always with corticosteroid cover, since dying cysts provoke damaging inflammation. High dose glucocorticoids always accompany therapy, since dying parasites can worsen seizures or hydrocephalus. Intestinal carriers take praziquantel or niclosamide, and ocular cysts must be excluded before any cysticidal therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Viable parenchymal cysts"
+     },
+     {
+      "id": "b",
+      "label": "Albendazole with corticosteroid cover"
+     },
+     {
+      "id": "c",
+      "label": "Heavy cyst burden"
+     },
+     {
+      "id": "d",
+      "label": "Add praziquantel"
+     },
+     {
+      "id": "e",
+      "label": "Intestinal carrier"
+     },
+     {
+      "id": "f",
+      "label": "Niclosamide or praziquantel"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Current guidance includes combined **albendazole plus praziquantel** with corticosteroid cover for **1 to 2** viable parenchymal cysts or heavy burden, which hastens resolution. The immunoblot is more than **99%** accurate with multiple cysts but may be negative with a single lesion or only calcifications. **Calcified** inactive lesions need seizure control only, and single enhancing lesions often resolve within months.",
+   "say": "Current guidance includes combined albendazole plus praziquantel with corticosteroid cover for one to two viable parenchymal cysts or heavy burden, which hastens resolution. The immunoblot is more than ninety percent accurate with multiple cysts but may be negative with a single lesion or only calcifications. Calcified inactive lesions need seizure control only, and single enhancing lesions often resolve within months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Advance",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Dual cysticidal therapy",
+      "Albendazole plus praziquantel with corticosteroid cover"
+     ],
+     [
+      "Immunoblot limits",
+      "Single or calcified lesions may test negative"
+     ],
+     [
+      "Burnt out calcified cysts",
+      "Seizure control without cysticidal drugs"
+     ],
+     [
+      "Single enhancing lesions",
+      "Often resolve, taper drugs after 6 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dying cysts swell transiently, so symptoms may **worsen** in the first days before imaging shows improvement. Antiparasitic drugs are avoided before neurosurgical removal because they make ventricular cysts friable and harder to extract. Old calcified lesions raise the chance of repeat seizures, especially when edema surrounds them, and extraparenchymal disease needs prolonged therapy.",
+   "say": "Dying cysts swell transiently, so symptoms may worsen in the first days before imaging shows improvement. Antiparasitic drugs are avoided before neurosurgical removal because they make ventricular cysts friable and harder to extract. Old calcified lesions raise the chance of repeat seizures, especially when edema surrounds them, and extraparenchymal disease needs prolonged therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early flare",
+     "points": [
+      "Symptoms worsen as cysts die",
+      "Cells and protein rise transiently",
+      "Corticosteroid cover blunts the swelling",
+      "Imaging shows improvement after the flare"
+     ]
+    },
+    "right": {
+     "title": "Lasting damage",
+     "points": [
+      "Calcified lesions risk repeat seizures",
+      "Racemose brings stroke and hydrocephalus",
+      "Diffuse edema needs glucocorticoids first",
+      "Never start drugs with raised pressure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** seizures with a visible scolex indicate neurocysticercosis, and cigar-shaped muscle calcifications show endemic exposure. Racemose basilar cysts cause hydrocephalus and stroke. Single enhancing **5 to 20 mm** lesions with seizures are almost always cysticercosis. Serum EITB remains over **99%** accurate with multiple cysts.",
+   "say": "High yield for the exam: seizures with a visible scolex indicate neurocysticercosis, and cigar-shaped muscle calcifications show endemic exposure. Racemose basilar cysts cause hydrocephalus and stroke. Single enhancing five to twenty millimetre lesions with seizures are almost always cysticercosis. Serum EITB remains over ninety percent accurate with multiple cysts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pearl",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Seizures with visible scolex",
+      "Neurocysticercosis"
+     ],
+     [
+      "Cigar-shaped calcifications",
+      "Endemic larval exposure"
+     ],
+     [
+      "Single 5 to 20 mm lesion",
+      "Almost always cysticercosis"
+     ],
+     [
+      "Basilar cysts with stroke",
+      "Racemose disease"
+     ],
+     [
+      "Multiple cysts, EITB",
+      "Over 99 percent accurate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

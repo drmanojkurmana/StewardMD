@@ -117,24 +117,46 @@
       if (cs.pointerEvents === "none") continue;                   // click-through -> not a real layer
       var z = parseInt(cs.zIndex, 10); if (isNaN(z) || z <= hz) continue;
       var r = n.getBoundingClientRect();
+      // Only a layer that covers at least half the screen is a screen above home. Bars, chips, the bottom nav, a floating
+      // buddy or a parked strip are not (owner 2026-11-20 recording: one of them made home "not in front", so the edge
+      // swipe dragged the home screen off over a blank white page and the menu never opened).
       if (r.width < 120 || r.height < 80) continue;                // toasts/badges are not screens
+      if (visArea(r) < 0.5) continue;
       if (r.right <= 0 || r.left >= window.innerWidth) continue;   // parked off-screen (closed drawer)
       if (r.bottom <= 0 || r.top >= window.innerHeight) continue;  // parked below (closed sheet)
       return true;
     }
     return false;
   }
+  function visArea(r) {
+    var W = window.innerWidth || 1, H = window.innerHeight || 1;
+    var w = Math.max(0, Math.min(r.right, W) - Math.max(r.left, 0)), h = Math.max(0, Math.min(r.bottom, H) - Math.max(r.top, 0));
+    return (w * h) / (W * H);
+  }
+  // The positioned layer that holds el and covers at least half the screen (a real screen), else null.
+  function screenLayerOf(el) {
+    var n = el;
+    while (n && n.nodeType === 1 && n !== document.body) {
+      var cs = window.getComputedStyle(n);
+      if ((cs.position === "fixed" || cs.position === "absolute") && visArea(n.getBoundingClientRect()) >= 0.5) return n;
+      n = n.parentElement;
+    }
+    return null;
+  }
   function homeIsForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !h.classList.contains("on")) return false;
     var cs = window.getComputedStyle(h);
     if (cs.display === "none" || cs.visibility === "hidden") return false;
+    try { var hs = document.getElementById("hvSheet"); if (hs && hs.classList.contains("on")) return false; } catch (e) {}   // a home sheet is up
     if (overlayAboveHome()) return false;          // a sheet/dialog is up -> home is NOT the root screen
     try {
       // Kept as a second, independent condition: it still catches an overlay rendered INSIDE #homeV2,
       // which the body-level scan above cannot see. Both must agree that home owns the screen.
       var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
-      return !!(el && h.contains(el));
+      // what sits at the centre is home, or something small floating over it (not a screen layer)
+      if (!el || h.contains(el)) return true;
+      return !screenLayerOf(el);
     } catch (e) { return false; }
   }
   // True when there is somewhere to go back to (drives the universal edge back-handle's visibility).
@@ -213,10 +235,13 @@
   }
   // The menu never opens in the same breath as a back step: one swipe that closes a screen must not also open the menu.
   var MENU_AFTER_BACK_MS = 900;
-  function openMenuAtHome() {
+  function openMenuAtHome(nothingBehind) {
     if (!swipeOn()) return false;                 // Settings > Preferences: the edge swipe is off
     if (Date.now() - _last < MENU_AFTER_BACK_MS) return false;
-    if (moduleOpen() || !homeIsForeground()) return false;
+    if (moduleOpen()) return false;
+    // nothingBehind: the swipe found no screen to go back to and no module is open, so home is what the user sees even if
+    // the layer test was unsure (owner 2026-11-20: the swipe then did nothing at all on home).
+    if (!homeIsForeground() && !(nothingBehind && homeOn())) return false;
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return false; } catch (e) {}
     try { if (window.SB && typeof SB.open === "function") { SB.open(); return true; } } catch (e) {}
     return false;
@@ -233,7 +258,11 @@
     if (document.getElementById("wsq-alert")) return true;   // the alert screen owns the edge gesture too
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
     if (!moduleOpen() && homeIsForeground()) return openMenuAtHome();
-    return goBack();
+    if (goBack()) return true;
+    return openMenuAtHome(true);
+  }
+  function homeOn() {
+    try { var h = document.getElementById("homeV2"), hs = document.getElementById("hvSheet"); return !!(h && h.classList.contains("on") && !(hs && hs.classList.contains("on"))); } catch (e) { return false; }
   }
 
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
@@ -244,7 +273,7 @@
       var cs = window.getComputedStyle(n);
       if (cs.position === "fixed" || cs.position === "absolute") {
         var r = n.getBoundingClientRect();
-        if (r.width >= window.innerWidth * 0.55 && r.height >= window.innerHeight * 0.45) best = n;
+        if (r.width >= window.innerWidth * 0.55 && r.height >= window.innerHeight * 0.45 && n.id !== "homeV2" && !(n.querySelector && n.querySelector("#homeV2"))) best = n;   // never the home screen
       }
       n = n.parentElement;
     }

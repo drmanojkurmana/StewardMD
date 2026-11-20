@@ -1,0 +1,354 @@
+{
+ "v": 1,
+ "module": "sid-toxin-mediated",
+ "title": "Toxin-Mediated Infections",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Toxin diseases** injure from afar while bacteria stay local; cultures may be negative in dying patients. **Superantigens** flood immunity in toxic shock. **Diphtheria, tetanus and botulinum** toxins each hit one target. **Remove the focus** with toxin suppression treats all. **Vaccines** prevent the 3 classic ones.",
+   "say": "Toxin diseases injure from afar while bacteria stay local, so cultures may be negative while the patient is dying. Staphylococcal with streptococcal superantigens flood the immune system, while diphtheria with tetanus with botulinum toxins each hit one target. Removing the focus with suppressing toxin production treats all of them together. Vaccines prevent the three classic ones, which is why boosters matter lifelong.",
+   "vis": {
+    "cols": [
+     "Toxin",
+     "Target",
+     "Prevention"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Superantigen",
+      "Immune flood",
+      "Remove focus"
+     ],
+     [
+      "Diphtheria",
+      "Heart, nerves",
+      "Vaccine, early serum"
+     ],
+     [
+      "Tetanus",
+      "Spinal inhibition",
+      "Vaccine, wound care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Staphylococcal shock** drops pressure with **sunburn rash** in tampon, pack or wound patients. **Remove the focus** at once. **Clindamycin** suppresses toxin; fluids with ICU reverse shock. **Cultures stay negative**, unlike septic shock. **Peeling in a week** confirms retrospectively and guides counselling.",
+   "say": "Staphylococcal toxic shock drops pressure with sunburn rash in menstruating or packed patients, and peeling follows in a week. Tampons with nasal packs with wound packing are removed at once, because the focus feeds the toxin. Clindamycin is used to suppress toxin production while fluids with intensive care reverse the shock. Blood cultures stay negative, which separates it from septic shock with bacteraemia.",
+   "vis": {
+    "cols": [
+     "Shock type",
+     "Cultures",
+     "Focus move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Staph toxic",
+      "Negative",
+      "Remove tampon, pack"
+     ],
+     [
+      "Strep toxic",
+      "Often positive",
+      "Debride necrotic tissue"
+     ],
+     [
+      "Septic",
+      "Positive",
+      "Drain, bactericidal drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Streptococcal shock** complicates necrotising infection; **pain beyond redness** precedes crashing. **Penicillin with clindamycin** is the classic pairing. **Surgery removes** dead tissue urgently. **Immunoglobulin** rescues selected severe cases. **Early theatre** saves more than any drug; mortality stays high regardless of speed.",
+   "say": "Streptococcal shock complicates necrotising infection with bacteraemia, and pain beyond redness precedes the crash. Penicillin with clindamycin is the classic pairing, with surgery removing dead tissue urgently. Intravenous immunoglobulin rescues selected severe cases. Mortality stays high even with perfect care, which is why early theatre saves more than any drug.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Tampon, packs, cultures negative, remove focus"
+     ],
+     "title": "Staph shock"
+    },
+    "right": {
+     "points": [
+      "Necrosis, bacteraemia, debride urgently"
+     ],
+     "title": "Strep shock"
+    }
+   }
+  },
+  {
+   "tx": "**Diphtheria** coats throats with **bleeding pseudomembrane** and **bull neck** swelling. **Myocarditis with palsies** follows in weeks. **Antitoxin at once** on suspicion, before proof, as delay kills. **Erythromycin or penicillin** clears carriage. **Contacts** get vaccine with cover and throat swabs taken daily.",
+   "say": "Diphtheria coats the throat with a bleeding pseudomembrane and swells the neck into a bull neck. Myocarditis with palatal palsy with eye muscle weakness follows in weeks as toxin travels. Antitoxin is given at once on clinical suspicion, before any laboratory proof, because delay kills. Erythromycin with penicillin is clearing carriage, while contacts receive vaccine with cover.",
+   "vis": {
+    "cols": [
+     "Stage",
+     "Sign",
+     "Act now"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Throat",
+      "Bleeding membrane",
+      "Antitoxin, swab"
+     ],
+     [
+      "Neck",
+      "Bull swelling",
+      "Airway watch"
+     ],
+     [
+      "Weeks later",
+      "Heart, palsies",
+      "Monitor, support"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tetanus** locks jaws with **sardonic grin** and descending spasms, awake throughout. **Wounds are cleaned** with dead tissue removed. **Relaxants with ventilation** bridge weeks of storm. **Toxoid vaccine** prevents entirely; boosters follow dirty wounds. **Neonatal cases** follow unclean cord cutting in home deliveries.",
+   "say": "Tetanus locks the jaw with a sardonic grin as spasms spread down the body, and the patient stays fully awake throughout. Wounds are cleaned with dead tissue removed, while muscle relaxants with ventilation bridge the weeks of storm. Vaccination with toxoid prevents it entirely, and boosters follow dirty wounds in the unvaccinated. Neonatal cases follow cord cutting with unclean blades.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Tetanus",
+     "Strychnine"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Awareness",
+      "Awake always",
+      "Awake too"
+     ],
+     [
+      "Trigger",
+      "Touch, noise",
+      "None needed"
+     ],
+     [
+      "Gaps",
+      "Spasms relax between",
+      "Rigid throughout"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Botulism** descends eyes to limbs with **no sensory loss**, awake throughout. **Canned food, infant honey and wounds** are sources. **Antitoxin halts** but never reverses; **ventilation bridges** weeks. **Increment on stimulation** marks EMG; stool toxin confirms infants. **Wounds are debrided** alongside serum.",
+   "say": "In botulism weakness spreads from eyes to limbs without sensory loss, and the patient watches it happen. Home canned food with honey in infants with wound soil are the sources. Antitoxin halts progression but reverses nothing, so ventilation bridges weeks of recovery. Electromyography shows increment on rapid stimulation, and stool toxin confirms infants. Wound cases need debridement alongside serum.",
+   "vis": {
+    "cols": [
+     "Botulism source",
+     "Clue",
+     "Extra move"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Canned food",
+      "House cluster",
+      "Avoid, notify"
+     ],
+     [
+      "Infant honey",
+      "Floppy, constipated",
+      "No honey under one"
+     ],
+     [
+      "Wound",
+      "Dirty trauma",
+      "Debride, serum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gas gangrene** gives **bronze skin with crackling gas** and sweet discharge. **Pain with toxicity** outruns visible wounds. **Penicillin with clindamycin** runs while surgeons remove dead tissue; drugs cannot reach it. **Amputation** saves life when limbs die. **Hyperbaric oxygen** remains unproven and never delays theatre.",
+   "say": "Gas gangrene paints bronze skin with sweet smelling discharge and gas that crackles under fingers. Clostridial toxins are liquefying muscle within hours, and pain with toxicity outruns the visible wound. Penicillin with clindamycin runs while surgeons remove all dead tissue, because antibiotics cannot reach it. Amputation saves life when limbs are unsalvageable, and hyperbaric oxygen remains unproven.",
+   "vis": {
+    "cols": [
+     "Gas sign",
+     "Meaning",
+     "Theatre"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Crackling gas",
+      "Clostridial myonecrosis",
+      "Remove all dead tissue"
+     ],
+     [
+      "Bronze bullae",
+      "Toxin spread",
+      "Wide margins"
+     ],
+     [
+      "Sweet smell",
+      "Anaerobic rot",
+      "Amputate if dead"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Workup runs with treatment:** Gram stain, cultures and toxin assays first. **Imaging hunts** retained tampons and deep collections. **Throat swabs with Elek** confirm diphtheria. **Exploration confirms** necrotising infection. **Samples saved** before antibiotics. **Notification** follows for diphtheria, tetanus and botulism without delay.",
+   "say": "Every suspected toxin case is worked up while treatment runs, because waiting kills. Gram stain with cultures with toxin assays open the file, while imaging hunts retained tampons with deep collections. Throat swabs with Elek testing confirm diphtheria, and wound exploration confirms necrotising infection. Samples are saved before antibiotics, and notification follows for vaccine preventable cases.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stain, culture, assays"
+     },
+     {
+      "id": "b",
+      "label": "Image, explore focus"
+     },
+     {
+      "id": "c",
+      "label": "Remove focus, suppress"
+     },
+     {
+      "id": "d",
+      "label": "Vaccinate, notify"
+     }
+    ]
+   }
+  },
+  {
+   "tx": "**Intensive care** carries toxin patients: fluids, pressors and ventilation bridge shock, spasms and paralysis. **Sedation titrates** to tetanus spasms. **Early tracheostomy** suits expected weeks. **Physiotherapy** starts ventilated and continues after discharge. **Vaccination before discharge** prevents recurrence. **Counselling** closes the admission with booster dates.",
+   "say": "Intensive care carries toxin patients through, because support outlasts poison. Fluids with vasopressors with ventilation are bridging shock with spasms with paralysis for days to weeks. Sedation is titrated to spasms in tetanus, while paralysis is expected in botulism. Tracheostomy is timed early when weeks are expected, and physiotherapy starts on the ventilator. Boosters are given before discharge.",
+   "vis": {
+    "cols": [
+     "Support",
+     "Bridges",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ventilation",
+      "Botulism, tetanus",
+      "Days to weeks"
+     ],
+     [
+      "Sedation",
+      "Tetanus spasms",
+      "Titrated daily"
+     ],
+     [
+      "Tracheostomy",
+      "Long weakness",
+      "Week two if needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exam traps:** shocked teenager with tampon in place means **staph shock**; examine and remove. **Antitoxin waits for no laboratory** in diphtheria. **Boosters** are never delayed for mild illness. **Honey warnings** go at every infant visit. **Cultures may be negative** while toxin kills.",
+   "say": "The fatal trap is missing a retained tampon in a shocked teenager, which is removed by examination not imaging. The second trap is waiting for laboratory proof before diphtheria antitoxin, which kills the heart while reports pend. Tetanus boosters are never delayed for mild illness, and botulism honey warnings are given at every infant visit.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Wait for proof",
+      "Heart dies meanwhile",
+      "Antitoxin at once"
+     ],
+     [
+      "Miss tampon",
+      "Shock continues",
+      "Examine, remove"
+     ],
+     [
+      "Delay booster",
+      "Tetanus strikes",
+      "Vaccinate now"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** sunburn with **peeling** marks staph shock. **Pain beyond redness** marks strep shock. **Bleeding membrane with bull neck** marks diphtheria; antitoxin precedes proof. **Sardonic grin awake** marks tetanus. **Descending alert** paralysis marks botulism over hours to days.",
+   "say": "For the exam, the facts to lock in are sunburn rash with peeling for staph shock, pain beyond redness for strep shock, bleeding membrane with bull neck for diphtheria with antitoxin before proof, sardonic grin awake for tetanus, and descending alert paralysis for botulism. Cultures may be negative, focus removal comes first, and vaccines prevent three of them. Memorise the facts in this table exactly as written.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Staph shock source",
+      "Tampon, pack, wound",
+      "Remove focus"
+     ],
+     [
+      "Staph rash",
+      "Sunburn, peels week",
+      "Classic sign"
+     ],
+     [
+      "Strep shock pair",
+      "Penicillin, clindamycin",
+      "Toxin suppression"
+     ],
+     [
+      "Diphtheria throat",
+      "Bleeding membrane",
+      "Bull neck"
+     ],
+     [
+      "Diphtheria serum",
+      "Antitoxin before proof",
+      "Delay kills"
+     ],
+     [
+      "Tetanus look",
+      "Grin, awake",
+      "Vaccine prevents"
+     ],
+     [
+      "Botulism course",
+      "Descends, alert",
+      "Ventilate weeks"
+     ],
+     [
+      "Gas gangrene",
+      "Bronze, crackles",
+      "Theatre now"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

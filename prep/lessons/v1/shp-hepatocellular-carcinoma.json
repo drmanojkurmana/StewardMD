@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "shp-hepatocellular-carcinoma",
+ "subject": "ss-hepatology",
+ "title": "Hepatocellular carcinoma: LI-RADS diagnosis, BCLC therapy and transplant rules",
+ "minutes": 8,
+ "gen": "hand",
+ "quiz": [],
+ "refs": [
+  "Harrison 2025 22e (Hepatocellular carcinoma)",
+  "NCCN Hepatocellular Carcinoma 2025",
+  "Sleisenger and Fordtran 11e (Liver tumours)"
+ ],
+ "steps": [
+  {
+   "tx": "**Hepatocellular carcinoma (HCC)** is the dominant primary liver cancer, arising in cirrhosis or chronic **hepatitis B (HBV)**. **Barcelona Clinic Liver Cancer (BCLC)** staging ties liver function with tumour spread, performance status and treatment. Surveillance pairs **ultrasound** every **6** months with **alpha fetoprotein (AFP)** in at risk livers. Arterial hyperenhancement with washout on multiphase imaging seals the diagnosis in the right liver.",
+   "say": "Hepatocellular carcinoma grows almost always in cirrhotic or hepatitis B infected livers. BCLC staging blends liver function, tumour spread and performance status into one decision. Six monthly ultrasound with AFP catches tumours while curative options remain open.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stage", "Disease", "Aim"],
+    "rows": [
+     ["Very early, early", "Solitary, small", "Curative options"],
+     ["Intermediate", "Multinodular, liver only", "Locoregional therapy"],
+     ["Advanced", "Vascular or extrahepatic", "Systemic therapy"],
+     ["Terminal", "Failing liver", "Supportive care"]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic HBV, hepatitis C, heavy alcohol use, **metabolic dysfunction associated steatotic liver disease (MASLD)** and aflatoxin exposure drive the soil. **Child-Pugh class** and **albumin-bilirubin (ALBI)** grade judge the liver that must survive treatment. Variceal screening precedes bevacizumab containing therapy, since bleeding risk reshapes drug choice. Viral serologies complete the baseline before any systemic line.",
+   "say": "Viral hepatitis, alcohol and metabolic liver disease form the soil for this cancer. Child Pugh class and ALBI grade judge whether the liver survives aggressive therapy. Variceal screening guards the bevacizumab decision.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Driver", "Soil", "Screen"],
+    "rows": [
+     ["HBV, HCV", "Chronic infection", "Antivirals, HCC watch"],
+     ["Alcohol", "Cirrhosis", "Abstinence, surveillance"],
+     ["MASLD", "Metabolic syndrome", "Weight, diabetes care"],
+     ["Aflatoxin", "Stored grains", "Prevention focus"]
+    ]
+   }
+  },
+  {
+   "tx": "**Multiphase contrast computed tomography (CT)** or dynamic contrast liver **magnetic resonance imaging (MRI)** using **Liver Imaging Reporting and Data System (LI-RADS)** criteria diagnoses HCC without biopsy. **LR-5 (arterial hyperenhancement with washout)** is definitive in cirrhosis or chronic HBV. Biopsy is reserved for indeterminate lesions or non cirrhotic, non HBV livers. Short interval repeat imaging reassesses borderline categories.",
+   "say": "LI-RADS category five gives the diagnosis without biopsy in cirrhotic or hepatitis B livers. Indeterminate lesions and healthy livers still need tissue. Short interval repeat imaging sorts the borderline categories.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "at-risk", "label": "At risk liver, new mass"},
+     {"id": "multiphase", "label": "Multiphase CT or MRI"},
+     {"id": "lr5", "label": "LR-5 definitive HCC"},
+     {"id": "biopsy", "label": "Biopsy if indeterminate"}
+    ],
+    "edges": [["at-risk", "multiphase"], ["multiphase", "lr5"], ["lr5", "biopsy"]]
+   }
+  },
+  {
+   "tx": "Early disease offers curative arms. **Resection** suits solitary tumours without vascular invasion with preserved function. **Transplantation** within **Milan criteria**, solitary lesion up to **5** cm or up to **3** lesions each up to **3** cm with no macrovascular invasion or extrahepatic spread, treats both tumour and cirrhosis. **Thermal ablation (microwave or radiofrequency)** serves tumours up to **3** cm. Downstaging can select favourable biology before listing.",
+   "say": "Early disease needs curative arms, with resection for solitary tumours and transplantation within Milan limits. Ablation controls small tumours up to three centimetres. Downstaging selects patients with favourable biology before listing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Curative arm", "Fits", "Limit"],
+    "rows": [
+     ["Resection", "Solitary, no invasion", "Needs liver reserve"],
+     ["Transplant", "Within Milan criteria", "Solitary 5 cm or 3 times 3 cm"],
+     ["Ablation", "Up to 3 cm", "Small, accessible"],
+     ["Downstaging", "Selected beyond Milan", "Observation interval"]
+    ]
+   }
+  },
+  {
+   "tx": "Intermediate **BCLC B** disease, multinodular and confined to the liver without vascular invasion, takes **transarterial chemoembolisation (TACE)** or **selective internal radiation (transarterial radioembolisation, TARE)**. Response and refractoriness triage comes next: responders repeat locoregional therapy, while refractory disease moves to systemic therapy. Liver confined spread without vascular invasion defines suitability. Untreatable burden or deteriorating function shifts the plan.",
+   "say": "Intermediate liver confined disease takes chemoembolisation or internal radiation therapy. Response triage decides whether to repeat the procedure or switch to systemic drugs. Deteriorating liver function reshapes every choice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "b", "label": "BCLC B, liver confined"},
+     {"id": "tace", "label": "TACE or TARE"},
+     {"id": "response", "label": "Responds? Repeat"},
+     {"id": "systemic", "label": "Refractory: systemic drugs"}
+    ],
+    "edges": [["b", "tace"], ["tace", "response"], ["response", "systemic"]]
+   }
+  },
+  {
+   "tx": "Advanced disease starts with **atezolizumab plus bevacizumab**, preferred when variceal screening is safe, or **durvalumab plus tremelimumab (STRIDE)** when bleeding risk contraindicates bevacizumab. **Lenvatinib** or **sorafenib** serve as alternatives when immunotherapy is contraindicated. Biomarker guided later lines include **cabozantinib**, **regorafenib** after sorafenib, **ramucirumab** for **AFP** at or above **400**, or **nivolumab plus ipilimumab**. Prior line and bleeding risk steer each switch.",
+   "say": "Atezolizumab with bevacizumab leads first line therapy when varices allow, while STRIDE suits bleeding risk. Lenvatinib or sorafenib serve immunotherapy ineligible patients. Later lines follow prior exposure and AFP levels.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Line", "Regimen", "Condition"],
+    "rows": [
+     ["First", "Atezolizumab, bevacizumab", "Varices screened"],
+     ["First alt", "Durvalumab, tremelimumab", "Bleeding risk"],
+     ["First alt", "Lenvatinib or sorafenib", "No immunotherapy"],
+     ["Later", "Cabozantinib, regorafenib", "After prior line"]
+    ]
+   }
+  },
+  {
+   "tx": "Liver function gates every systemic choice, since **Child-Pugh** class and performance status decide tolerance. Worsening **ALBI** grade predicts poor tolerance and shorter courses. Portal vein invasion or extrahepatic spread confirms advanced stage and bars curative arms. **AFP** trends track biology, with levels at or above **400** opening ramucirumab eligibility later. Multifaceted assessment beats any single marker.",
+   "say": "Liver function gates every drug choice, while AFP trends track tumour biology. Portal invasion or distant spread bars curative surgery. No single marker decides therapy alone.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Gate", "Tool", "Effect"],
+    "rows": [
+     ["Liver reserve", "Child-Pugh, ALBI", "Decides tolerance"],
+     ["Performance", "ECOG status", "Sets treatment ceiling"],
+     ["Vascular spread", "Imaging", "Bars curative arms"],
+     ["Biology", "AFP trends", "Opens later lines"]
+    ]
+   }
+  },
+  {
+   "tx": "Post curative surveillance hunts recurrence relentlessly. Imaging with **AFP** repeats at prescribed intervals after resection, ablation or transplant, since recurrence erodes survival quickly. New lesions re-enter BCLC staging for another curative or locoregional attempt. Antiviral therapy continues for HBV related tumours, and variceal surveillance protects systemic candidates. Missed surveillance converts curable recurrence into advanced disease.",
+   "say": "Recurrence after curative therapy comes frequently and erodes survival quickly. Scheduled imaging with AFP finds it while options remain. Antivirals and variceal care run alongside tumour surveillance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "curative", "label": "Curative therapy done"},
+     {"id": "surveillance", "label": "Imaging plus AFP watch"},
+     {"id": "recur", "label": "Recurrence found?"},
+     {"id": "restage", "label": "Re stage, retreat"}
+    ],
+    "edges": [["curative", "surveillance"], ["surveillance", "recur"], ["recur", "restage"]]
+   }
+  },
+  {
+   "tx": "Prognosis blends **stage**, liver function and treatment access. Early curative therapy offers the longest horizons, while beyond Milan criteria without downstaging outcomes fall sharply. Terminal stage disease focuses on symptom control and liver support. Screening at risk livers remains the most powerful lever, since it shifts diagnosis into the curative window. Surgical candidacy extrahepatic disease and viable parenchyma size decide resectability jointly.",
+   "say": "Early curative therapy offers the longest horizons, while advanced disease shifts to systemic control. Screening remains the strongest lever on survival. Restaging every recurrence keeps options alive.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Horizon", "Stage", "Outlook"],
+    "rows": [
+     ["Curative", "Early, within Milan", "Longest survival"],
+     ["Locoregional", "Intermediate", "Months, triaged"],
+     ["Systemic", "Advanced", "Prolonged control"],
+     ["Supportive", "Terminal", "Symptom focus"]
+    ]
+   }
+  },
+  {
+   "tx": "Traps punish single minded thinking. Diagnosing HCC by biopsy in cirrhosis when LI-RADS is definitive adds risk without gain, while skipping **variceal screening** before bevacizumab invites fatal bleeding. Treating beyond **Milan criteria** without downstaging wastes organs, and repeating TACE through refractoriness delays systemic therapy. Equally, abandoning curative arms at intermediate stage without locoregional triage loses months of control.",
+   "say": "Unnecessary biopsy, unscreened varices and wasted transplantation criteria head the trap list. Refractory TACE repetition holds systemic therapy waiting needlessly. Each error loses months that the disease never refunds.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Wrong move", "points": ["Biopsy when LR-5", "Bevacizumab unscreened", "Beyond Milan listed", "TACE through refractoriness"]},
+    "right": {"title": "Right move", "points": ["Image diagnosis in cirrhosis", "Scope before bevacizumab", "Downstage or locoregional", "Switch to systemic drugs"]}
+   }
+  },
+  {
+   "tx": "**High-yield for the exam**: **LI-RADS** LR-5 is definitive without biopsy in at risk livers, **Milan criteria** allow solitary **5** cm or **3** lesions of **3** cm, ablation serves **3** cm tumours, **atezolizumab plus bevacizumab** leads first line, **ramucirumab** needs **AFP** at or above **400**, and surveillance pairs ultrasound with **AFP** every **6** months.",
+   "say": "LI-RADS, Milan limits and first line immunotherapy form the exam spine. Ramucirumab eligibility depends on AFP levels. Six monthly surveillance shifts diagnosis into the curative window.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Answer"],
+    "rows": [
+     ["LR-5 means", "Definitive HCC"],
+     ["Milan solitary", "5 cm"],
+     ["Milan multiple", "3 times 3 cm"],
+     ["Ablation limit", "3 cm"],
+     ["First line", "Atezolizumab plus bevacizumab"],
+     ["Ramucirumab needs", "AFP 400 or more"],
+     ["Surveillance", "Every 6 months"],
+     ["Intermediate therapy", "TACE or TARE"]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,359 @@
+{
+ "v": 1,
+ "module": "sne-brainstem-cranial-nerves",
+ "title": "Cranial nerves and brainstem syndromes",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **brainstem** has the cranial nerve nuclei, long tracts and reticular formation in a tiny space into a small space. A single small stroke therefore produces cranial nerve signs plus body signs, which is exactly the **crossed** pattern described in localisation. The exam tests whether you can name the syndrome from the nerves involved, not just the level.",
+   "say": "The brainstem has the cranial nerve nuclei, long tracts and reticular formation in a tiny space. A single small stroke therefore produces cranial nerve signs plus body signs, which is exactly the crossed pattern described in localisation. The exam tests whether you can name the syndrome from the nerves involved, not just the level.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brainstem level",
+     "Nerves at risk",
+     "Typical syndrome"
+    ],
+    "rows": [
+     [
+      "Midbrain",
+      "Third and fourth nerves",
+      "Weber and Benedikt syndromes"
+     ],
+     [
+      "Mid pons",
+      "Fifth, sixth, and seventh nerves",
+      "Millard-Gubler syndrome"
+     ],
+     [
+      "Lower pons",
+      "Seventh and eighth nerves",
+      "Dejerine-Roussy pattern"
+     ],
+     [
+      "Medulla",
+      "Ninth to twelfth nerves",
+      "Wallenberg lateral medullary syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Millard-Gubler** syndrome is the prototype ventral pontine syndrome: a lesion of the sixth nerve nucleus or fascicle causes convergent squint, the seventh nerve palsy causes facial weakness, and the corticospinal tract causes contralateral hemiparesis. The triad of abducens palsy, facial palsy, and opposite limb weakness must be recalled verbatim for the exam.",
+   "say": "Millard-Gubler syndrome is the prototype ventral pontine syndrome: a lesion of the sixth nerve nucleus or fascicle causes convergent squint, the seventh nerve palsy causes facial weakness, and the corticospinal tract causes contralateral hemiparesis. The triad of abducens palsy, facial palsy and opposite limb weakness must be recalled verbatim for the exam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Structure injured",
+     "Eye or face effect"
+    ],
+    "rows": [
+     [
+      "Convergent squint",
+      "Sixth nerve nucleus or fascicle",
+      "Eye cannot abduct"
+     ],
+     [
+      "Facial weakness",
+      "Seventh nerve fascicle",
+      "Whole face weak on same side"
+     ],
+     [
+      "Contralateral hemiparesis",
+      "Corticospinal tract",
+      "Limb power lost on opposite side"
+     ],
+     [
+      "Gaze palsy",
+      "Paramedian pontine reticular formation",
+      "Eyes cannot look toward lesion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **lateral medullary** syndrome of Wallenberg follows occlusion of the posterior inferior cerebellar artery and affects the spinal trigeminal nucleus, spinothalamic tract, and sympathetic fibres. Pain and temperature are lost over the face on the same side and over the body on the opposite side, with **horner syndrome**, ataxia, and vertigo. Motor power is characteristically preserved, which separates it from a hemispheric stroke.",
+   "say": "The lateral medullary syndrome of Wallenberg follows occlusion of the posterior inferior cerebellar artery and affects the spinal trigeminal nucleus, spinothalamic tract and sympathetic fibres. Pain and temperature are lost over the face on the same side and over the body on the opposite side, with Horner syndrome, ataxia and vertigo. Motor power is characteristically preserved, which separates it from a hemispheric stroke.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PICA territory infarct"
+     },
+     {
+      "id": "b",
+      "label": "Descending sympathetic fibres injured"
+     },
+     {
+      "id": "c",
+      "label": "Horner syndrome on same side"
+     },
+     {
+      "id": "d",
+      "label": "Spinothalamic tract injured"
+     },
+     {
+      "id": "e",
+      "label": "Pain and temperature lost on opposite body"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Internuclear ophthalmoplegia** is a brainstem sign with a famous mechanism. A lesion of the medial longitudinal fasciculus disconnects the abducens nucleus from the contralateral oculomotor nucleus, so the adducting eye fails on horizontal gaze while abduction is preserved, often with nystagmus. In a young patient it points toward **multiple sclerosis** affecting the brainstem.",
+   "say": "Internuclear ophthalmoplegia is a brainstem sign with a famous mechanism. A lesion of the medial longitudinal fasciculus disconnects the abducens nucleus from the contralateral oculomotor nucleus, so the adducting eye fails on horizontal gaze while abduction is preserved, often with nystagmus. In a young patient it points toward multiple sclerosis affecting the brainstem.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Eye finding",
+     "Mechanism",
+     "Typical association"
+    ],
+    "rows": [
+     [
+      "Adduction fails on gaze",
+      "Medial longitudinal fasciculus lesion",
+      "Multiple sclerosis in young patients"
+     ],
+     [
+      "Convergent squint",
+      "Sixth nerve fascicle lesion",
+      "Ventral pontine stroke"
+     ],
+     [
+      "Upgaze palsy",
+      "Posterior commissure involvement",
+      "Midbrain lesion"
+     ],
+     [
+      "One eye fails to abduct and other fails to converge",
+      "Pontine gaze centre lesion",
+      "Massive pontine haemorrhage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bell palsy** is the commonest cause of an acute lower motor neuron seventh nerve palsy, and it affects the whole face including the forehead. The textbook cause is reactivation of herpes simplex within the geniculate ganglion, and the classic test is that the patient cannot wrinkle the forehead on the affected side. Sparing of the forehead means the lesion is central, above the facial nucleus.",
+   "say": "Bell palsy is the commonest cause of an acute lower motor neuron seventh nerve palsy, and it affects the whole face including the forehead. The textbook cause is reactivation of herpes simplex within the geniculate ganglion, and the classic test is that the patient cannot wrinkle the forehead on the affected side. Sparing of the forehead means the lesion is central, above the facial nucleus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper motor neuron facial palsy",
+     "points": [
+      "Forehead spared and still wrinkles",
+      "Weakness below the eye only",
+      "Usually due to a cortical stroke",
+      "Salvageable cortex with poor collateral flow"
+     ]
+    },
+    "right": {
+     "title": "Lower motor neuron facial palsy",
+     "points": [
+      "Whole face weak including forehead",
+      "Cannot wrinkle the forehead",
+      "Bell palsy, Ramsay Hunt, Lyme disease",
+      "Eye closure fails on the weak side"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ramsay Hunt** syndrome is geniculate ganglion reactivation with vesicles in the ear or palate, and it carries a worse prognosis than simple Bell palsy. **Trigeminal neuralgia** produces brief electric shock-like pains in the fifth nerve territory triggered by touch or chewing, and it has a female predominance. Each of these is a one line answer in the exam if the trigger and territory are stated precisely.",
+   "say": "Ramsay Hunt syndrome is geniculate ganglion reactivation with vesicles in the ear or palate, and it carries a worse prognosis than simple Bell palsy. Trigeminal neuralgia produces brief electric shock-like pains in the fifth nerve territory triggered by touch or chewing, and it has a female predominance. Each of these is a one line answer in the exam if the trigger and territory are stated precisely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Signature finding",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Bell palsy",
+      "Whole face weak, no vesicles",
+      "Good recovery in most patients"
+     ],
+     [
+      "Ramsay Hunt",
+      "Facial palsy with ear vesicles",
+      "Poorer recovery, synkinesis common"
+     ],
+     [
+      "Trigeminal neuralgia",
+      "Triggered electric shock pain",
+      "Remitting attacks over years"
+     ],
+     [
+      "Sphenopalatine ganglion neuralgia",
+      "Pain with lacrimation and rhinorrhoea",
+      "Cluster-like attacks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **first test** for a brainstem syndrome is magnetic resonance imaging with thin cuts through the posterior fossa, and the **gold standard** for the vascular cause is angiography when an aneurysm or dissection is suspected. A normal early computed tomography scan never excludes a brainstem infarct. Deterioration with coma, irregular breathing, and hypertension is the **herniation** picture.",
+   "say": "The first test for a brainstem syndrome is magnetic resonance imaging with thin cuts through the posterior fossa, and the best test for the vascular cause is angiography when an aneurysm or dissection is suspected. A normal early computed tomography scan never excludes a brainstem infarct. Deterioration with coma, irregular breathing and hypertension is the herniation picture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Structure injured",
+     "Bedside test"
+    ],
+    "rows": [
+     [
+      "Adduction failure",
+      "Medial longitudinal fasciculus",
+      "Horizontal gaze tracking"
+     ],
+     [
+      "Facial palsy with forehead involved",
+      "Facial nucleus or fascicle",
+      "Wrinkle the forehead"
+     ],
+     [
+      "Horner syndrome",
+      "Descending sympathetics",
+      "Check pupils and lid in bright light"
+     ],
+     [
+      "Locked-in state",
+      "Ventral pons",
+      "Voluntary vertical eye movement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Complications** of brainstem strokes are airway loss and aspiration from bulbar failure, so swallowing assessment and protected airway come before any drug. **Central** neurogenic hyperventilation and Cheyne-Stokes respiration are the breathing patterns examiners link to pontine and medullary lesions. Prognosis turns on consciousness at presentation and the extent of infarction on imaging.",
+   "say": "Complications of brainstem strokes are airway loss and aspiration from bulbar failure, so swallowing assessment and protected airway come before any drug. Central neurogenic hyperventilation and Cheyne-Stokes respiration are the breathing patterns examiners link to pontine and medullary lesions. Prognosis turns on consciousness at presentation and the extent of infarction on imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Respiratory pattern",
+     "Lesion level",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Cheyne-Stokes breathing",
+      "Diencephalon or rostral pons",
+      "Loss of cortical breathing control"
+     ],
+     [
+      "Central neurogenic hyperventilation",
+      "Midbrain and pontine tegmentum",
+      "Irritation of respiratory centres"
+     ],
+     [
+      "Apneustic breathing",
+      "Pons",
+      "Uninjured pontine pneumotaxic centre isolated"
+     ],
+     [
+      "Ataxic breathing",
+      "Medulla",
+      "Failure of medullary rhythm generator"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traps** are built around the forehead and the gaze. Forehead spared means central and the answer is stroke, forehead involved means peripheral and the answer is Bell palsy. Adduction that fails on gaze means internuclear ophthalmoplegia, while failure of both eyes to look toward the lesion means a gaze centre lesion. Reading the eye movements carefully prevents most marking errors.",
+   "say": "Traps are built around the forehead and the gaze. Forehead spared means central and the answer is stroke, forehead involved means peripheral and the answer is Bell palsy. Adduction that fails on gaze means internuclear ophthalmoplegia, while failure of both eyes to look toward the lesion means a gaze centre lesion. Reading the eye movements carefully prevents most marking errors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trap",
+     "Distractor",
+     "Correct reading"
+    ],
+    "rows": [
+     [
+      "Forehead spared",
+      "Bell palsy",
+      "Upper motor neuron facial weakness"
+     ],
+     [
+      "Forehead involved",
+      "Stroke",
+      "Lower motor neuron facial weakness"
+     ],
+     [
+      "Adduction fails on gaze",
+      "Sixth nerve palsy",
+      "Internuclear ophthalmoplegia"
+     ],
+     [
+      "Vesicles with facial palsy",
+      "Bell palsy",
+      "Ramsay Hunt syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High yield for the exam:** Millard-Gubler is sixth and seventh nerve palsy with opposite hemiparesis. Wallenberg is lateral medullary with Horner syndrome and crossed pain temperature loss but normal power. Internuclear ophthalmoplegia is failed adduction from a medial longitudinal fasciculus lesion. Bell palsy involves the forehead while stroke spares it. Ramsay Hunt presents vesicles with facial palsy.",
+   "say": "High yield for the exam: Millard-Gubler is sixth and seventh nerve palsy with opposite hemiparesis. Wallenberg is lateral medullary with Horner syndrome and crossed pain temperature loss but normal power. Internuclear ophthalmoplegia is failed adduction from a medial longitudinal fasciculus lesion. Bell palsy involves the forehead while stroke spares it. Ramsay Hunt presents vesicles with facial palsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Nerves and signs",
+     "Level"
+    ],
+    "rows": [
+     [
+      "Millard-Gubler",
+      "Sixth and seventh palsy with opposite weakness",
+      "Ventral pons"
+     ],
+     [
+      "Wallenberg",
+      "Horner, vertigo, crossed pain loss",
+      "Lateral medulla"
+     ],
+     [
+      "Internuclear ophthalmoplegia",
+      "Failed adduction on gaze",
+      "Medial longitudinal fasciculus"
+     ],
+     [
+      "Bell palsy",
+      "Whole face weak including forehead",
+      "Facial nerve"
+     ],
+     [
+      "Ramsay Hunt",
+      "Facial palsy with vesicles",
+      "Geniculate ganglion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

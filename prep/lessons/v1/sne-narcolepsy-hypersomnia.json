@@ -1,0 +1,364 @@
+{
+ "gen": "AI",
+ "minutes": 9,
+ "module": "sne-narcolepsy-hypersomnia",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Narcolepsy is a disorder of rapid eye movement sleep that intrudes into the day, and it is caused by loss of hypocretin signalling. Type one includes cataplexy with very low spinal fluid hypocretin, while type two has neither. Both cause irresistible daytime sleep with broken nights, and both are diagnosed with an overnight study followed by a daytime nap test.",
+   "tx": "**Narcolepsy** is REM sleep intruding into wakefulness from lost **hypocretin (orexin)** signalling. **Type 1** has **cataplexy** with low CSF hypocretin. **Type 2** lacks cataplexy with normal hypocretin. Both cause irresistible **daytime sleep** with broken nights. **Polysomnography** plus next day **MSLT** confirms the diagnosis.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Type 1",
+     "Type 2"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cataplexy",
+      "Present",
+      "Absent"
+     ],
+     [
+      "CSF hypocretin",
+      "Very low",
+      "Normal"
+     ],
+     [
+      "HLA link",
+      "Strong DQB1",
+      "Weaker"
+     ],
+     [
+      "Treatment",
+      "Stimulants plus oxybate",
+      "Stimulants first"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cataplexy is sudden loss of muscle tone triggered by laughter or surprise, and it never clouds consciousness. Knees buckle, the jaw drops and speech slurs for seconds to minutes, which witnesses mistake for fainting or seizures. It is preserved awareness with areflexia that separates it from syncope. Asking about laughter triggered weakness finds cases that years of sleepiness hid.",
+   "tx": "**Cataplexy** is brief bilateral tone loss triggered by **laughter or emotion** with preserved awareness. Knees buckle, jaw drops and speech slurs for seconds. It is never loss of consciousness, which separates it from **syncope and seizures**. **Status cataplecticus** is prolonged clustering on abrupt drug withdrawal.",
+   "vis": {
+    "cols": [
+     "Spell",
+     "Awareness",
+     "Duration"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cataplexy",
+      "Preserved, triggered by laugh",
+      "Seconds to minutes"
+     ],
+     [
+      "Syncope",
+      "Lost, with pallor",
+      "Brief, then confused"
+     ],
+     [
+      "Seizure",
+      "Lost, with jerks",
+      "Minutes, then sleepy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The full tetrad is completed by sleep paralysis with dream like hallucinations on falling asleep or waking. Patients see intruders or feel pressure on the chest while unable to move or cry out. These terrors are REM dreams leaking into half wakefulness, and explanation alone halves their fear. Nocturia with vivid dreams with automatic behaviour is reported in the night history.",
+   "tx": "**Sleep paralysis** with **hypnagogic hallucinations** completes the tetrad. Patients see intruders while unable to move, which is REM dreaming leaking into wakefulness. **Fragmented nights** with vivid dreams and automatic behaviour are typical. **HLA DQB1*06:02** supports type 1 but is also common in health, so it never confirms alone.",
+   "vis": {
+    "cols": [
+     "Night symptom",
+     "Mechanism",
+     "Reassurance"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Paralysis on waking",
+      "REM atonia awake",
+      "Harmless, explain well"
+     ],
+     [
+      "Intruder visions",
+      "Dream leaking in",
+      "Not psychosis"
+     ],
+     [
+      "Broken nights",
+      "REM unstable",
+      "Treat, sleep returns"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Diagnosis needs an overnight sleep study that excludes apnoea, followed by four or five daytime naps. A mean sleep latency under eight minutes with rapid eye movement in two or more naps confirms narcolepsy. Spinal fluid hypocretin below one hundred ten picograms seals type one. Shift work with sleep deprivation with sedating drugs must be excluded first, or the test misleads.",
+   "tx": "**MSLT** follows overnight **polysomnography**: mean latency under **8 minutes** with REM in **2 or more** naps confirms narcolepsy. **CSF hypocretin** below 110 seals type 1. **Shift work, deprivation and sedatives** must be excluded first. A prior week of **actigraphy with sleep diary** proves adequate nights.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exclude apnoea overnight"
+     },
+     {
+      "id": "b",
+      "label": "Four naps next day"
+     },
+     {
+      "id": "c",
+      "label": "Short latency, REM in naps"
+     },
+     {
+      "id": "d",
+      "label": "Hypocretin seals type 1"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Idiopathic hypersomnia looks like narcolepsy type two but naps are long and unrefreshing with terrible sleep inertia. Patients sleep ten hours or more yet wake drunk and confused, needing several alarms. No cataplexy occurs and hypocretin is normal, while the nap test shows short latency without rapid eye movement. It is a diagnosis of exclusion that needs the same overnight study.",
+   "tx": "**Idiopathic hypersomnia** gives long unrefreshing naps with severe **sleep inertia** (sleep drunkenness). Nights run **10 hours or more** yet mornings stay impaired. **No cataplexy** occurs and hypocretin is normal. **MSLT** shows short latency without REM. **Depression, apnoea and delayed phase** must be excluded first.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Short naps refresh, cataplexy, REM in naps"
+     ],
+     "title": "Narcolepsy"
+    },
+    "right": {
+     "points": [
+      "Long naps fail, sleep drunk, no REM in naps"
+     ],
+     "title": "Idiopathic hypersomnia"
+    }
+   }
+  },
+  {
+   "say": "Kleine Levin syndrome strikes teenage boys with weeks of sleeping twenty hours a day with binge eating with hypersexuality. Episodes recur for years then burn out, and stimulants change nothing. Menstrual linked hypersomnia recurs with each period in teenage girls and responds to hormonal control. Post traumatic hypersomnia follows head injury and is commoner than recognised, so trauma history is asked in every case.",
+   "tx": "**Kleine Levin syndrome** strikes teenage boys: weeks asleep with **hyperphagia and hypersexuality**, then normal between episodes. **Menstrual hypersomnia** recurs with periods and responds to **hormonal control**. **Post-traumatic** hypersomnia follows head injury. **Tumours, MS and Parkinson disease** cause secondary hypersomnia, and low ferritin with renal failure with hypothyroidism mimics it.",
+   "vis": {
+    "cols": [
+     "Syndrome",
+     "Who",
+     "Rhythm"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Kleine Levin",
+      "Teenage boys",
+      "Weeks asleep, then normal"
+     ],
+     [
+      "Menstrual linked",
+      "Teenage girls",
+      "With each period"
+     ],
+     [
+      "Post-traumatic",
+      "After head injury",
+      "Persistent, improves slow"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Daytime sleepiness is treated with wake promoting agents taken each morning, and modafinil is the usual first choice. Pitolisant helps cataplexy as well as sleepiness, while solriamfetol suits resistant cases. Older stimulants like methylphenidate with amphetamine are reserved for severe disease because of abuse with cardiac risk. Scheduled naps with protected night sleep multiply every drug effect.",
+   "tx": "**Modafinil or armodafinil** each morning is first line for sleepiness. **Pitolisant** helps sleepiness plus cataplexy. **Solriamfetol** suits resistant cases. **Methylphenidate and amphetamine** are reserved for severe disease given abuse and cardiac risk. **Scheduled naps** with protected nights multiply drug benefit.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Helps",
+     "Caution"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Modafinil, armodafinil",
+      "Sleepiness first line",
+      "Headache, rash, pregnancy"
+     ],
+     [
+      "Pitolisant",
+      "Sleepiness plus cataplexy",
+      "QT, morning dosing"
+     ],
+     [
+      "Solriamfetol",
+      "Resistant sleepiness",
+      "Blood pressure rises"
+     ],
+     [
+      "Methylphenidate, amphetamine",
+      "Severe disease only",
+      "Abuse, cardiac risk"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cataplexy is suppressed by night time sodium oxybate, which also deepens night sleep and cuts daytime naps. Antidepressants that suppress rapid eye movement are the daytime alternative for cataplexy control. Abrupt withdrawal of either triggers rebound cataplexy storms, so doses are tapered slowly. Driving with safety critical work is restricted until sleepiness with cataplexy is controlled and documented.",
+   "tx": "**Sodium oxybate** at night suppresses **cataplexy** and deepens sleep. **REM suppressing antidepressants** control daytime cataplexy. Abrupt withdrawal triggers **rebound storms**, so tapering is slow. **Driving** with safety critical work is restricted until control is documented. Pregnancy needs planned switches off stimulants and oxybate.",
+   "vis": {
+    "cols": [
+     "Cataplexy drug",
+     "When",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Sodium oxybate",
+      "Night, severe cases",
+      "No alcohol, safe sleep"
+     ],
+     [
+      "Antidepressants",
+      "Daytime control",
+      "Taper, never stop fast"
+     ],
+     [
+      "Scheduled naps",
+      "All patients",
+      "Protects driving safety"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Narcolepsy is lifelong but compatible with full work when treated, while untreated patients crash cars and lose jobs. Children present with hyperactivity mistaken for attention deficit, with precocious puberty with weight gain as associated clues. Depression with social withdrawal follows years of being called lazy. Transition to adult care with driving rules with contraception advice is planned from early teens.",
+   "tx": "**Prognosis** is lifelong control, not cure; treated patients work fully. **Children** show hyperactivity with weight gain mistaken for ADHD. **Crashes, job loss and depression** follow untreated disease. **Contraception** interacts with stimulants, so planning starts early. **Support groups** with school letters change outcomes.",
+   "vis": {
+    "cols": [
+     "Risk",
+     "Cause",
+     "Answer"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Road crashes",
+      "Untreated sleepiness",
+      "Treat, restrict till controlled"
+     ],
+     [
+      "School failure",
+      "Hyperactive phenotype",
+      "Recognise, support"
+     ],
+     [
+      "Unplanned pregnancy",
+      "Enzyme induction",
+      "Plan contraception"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The commonest trap is calling narcolepsy epilepsy or laziness, and the second is testing without a sleep diary. Stimulants with antidepressants with caffeine distort the nap test, so they are stopped two weeks before. Apnoea must be excluded overnight first, because it shortens latency without rapid eye movement. A normal nap test never overrules convincing cataplexy witnessed by the family.",
+   "tx": "**Exam traps:** testing without excluding **apnoea, deprivation and drugs** misleads. **Stimulants and antidepressants** stop two weeks before MSLT. **Cataplexy witnessed** by family outweighs a normal test. **HLA alone** never confirms, and **sleepiness alone** never equals narcolepsy without the nap pattern.",
+   "vis": {
+    "cols": [
+     "Trap",
+     "Truth",
+     "Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Normal MSLT, clear cataplexy",
+      "Clinic wins",
+      "Repeat test later"
+     ],
+     [
+      "HLA positive alone",
+      "Common in health",
+      "Needs naps or hypocretin"
+     ],
+     [
+      "Apnoea untested",
+      "Latency short, no REM",
+      "Study the night first"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "For the exam, the facts to lock in are cataplexy with laughter trigger, eight minute latency with two rapid eye movement naps, very low hypocretin for type one, modafinil first line, and sodium oxybate for cataplexy. Teenage boys asleep for weeks means Kleine Levin, and long unrefreshing naps with sleep drunkenness means idiopathic hypersomnia. Memorise the facts in this table exactly as written.",
+   "tx": "**High yield for the exam:** **laughter triggered** weakness marks cataplexy. Latency under **8 minutes** with REM in **2 naps** confirms narcolepsy. Very low **hypocretin** seals type 1. **Modafinil** leads daytime treatment and **sodium oxybate** suppresses cataplexy. Teenage boys asleep for weeks mark **Kleine Levin**.",
+   "vis": {
+    "cols": [
+     "Fact",
+     "Detail",
+     "Why it is asked"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cataplexy trigger",
+      "Laughter, emotion",
+      "Definition"
+     ],
+     [
+      "MSLT latency",
+      "Under eight minutes",
+      "Criterion"
+     ],
+     [
+      "MSLT REM",
+      "Two or more naps",
+      "Criterion"
+     ],
+     [
+      "Type 1 marker",
+      "Very low hypocretin",
+      "Confirms type 1"
+     ],
+     [
+      "First line sleepiness",
+      "Modafinil",
+      "Drug of choice"
+     ],
+     [
+      "Cataplexy drug",
+      "Sodium oxybate",
+      "Drug of choice"
+     ],
+     [
+      "Teenage weeks asleep",
+      "Kleine Levin",
+      "Syndrome"
+     ],
+     [
+      "Long dead naps",
+      "Idiopathic hypersomnia",
+      "Versus narcolepsy"
+     ]
+    ]
+   }
+  }
+ ],
+ "title": "Narcolepsy and Central Hypersomnias",
+ "v": 1
+}

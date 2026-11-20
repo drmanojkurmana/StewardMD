@@ -18,6 +18,7 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] KardiQ X Learn images/content → remote (~8 MB, non-clinical; needs `onerror` fallback)
 - [ ] ML Kit face detector → Google **downloadable** model (~8 MB/device)
 - [ ] offline clinical KB → download on first launch (biggest ~46 MB; touches offline-first core)
+- [ ] **PENDING OWNER STEP: set `PREP_LESSONS_GATED=1`** (Cloudflare Pages env) once older app versions are gone. It makes PrepNucleus lessons and their pictures signed-in only on the server. App builds already on phones fetch them without app proof, so setting it earlier breaks them. The current client signs these requests, so it works in both modes. Not set in the 2026-11-13/14 rollout (PR #2482; lessons, lesson diagrams and CliniX photos load from R2 on first view, `SMD_REMOTE_MEDIA=1`).
 
 ## [[AI Control Center]]
 - [ ] X-ray ([[ThoreX]]) daily cap — cap belongs at the IMAGE-analysis entry (on-device), not the text `thorex/llm`

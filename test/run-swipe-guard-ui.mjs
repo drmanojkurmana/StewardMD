@@ -56,6 +56,19 @@ try {
   await sleep(1000);
   await swipe(8, 260);
   ok((await st()).drawer, "on the home screen the swipe opens the menu");
+  await closeDrawer(); await sleep(1200);
+  // owner 2026-11-20 recording: a small floating layer over home (a chip at the centre, a full-width bar) made the old home
+  // test say "not home", so the swipe dragged the home screen off over a blank white page and no menu opened.
+  await p.evaluate(() => {
+    const mk = (css) => { const d = document.createElement("div"); d.className = "sg-float"; d.style.cssText = "position:fixed;z-index:99999;background:#0a7;" + css; document.body.appendChild(d); };
+    mk("left:calc(50% - 90px);top:calc(50% - 45px);width:180px;height:90px;"); mk("left:0;right:0;bottom:0;height:110px;");
+  });
+  const moved = [];
+  const watch = await p.evaluate(() => { window.__homeMoved = 0; const h = document.getElementById("homeV2"); new MutationObserver(() => { if (/translateX\(\s*[1-9]/.test(h.style.transform || "")) window.__homeMoved++; }).observe(h, { attributes: true, attributeFilter: ["style"] }); return 1; });
+  await swipe(8, 260);
+  const fl = await p.evaluate(() => ({ drawer: document.getElementById("sbDrawer").classList.contains("open"), moved: window.__homeMoved, handle: (document.getElementById("smdTopBack") || { style: {} }).style.visibility }));
+  ok(fl.drawer && fl.moved === 0, "with small layers floating over home the swipe still opens the menu and never slides home away: " + JSON.stringify(fl));
+  await p.evaluate(() => document.querySelectorAll(".sg-float").forEach((e) => e.remove()));
   await closeDrawer(); await sleep(600);
   // Preferences switch
   await p.evaluate(() => localStorage.setItem("smd_swipe_back", "0"));

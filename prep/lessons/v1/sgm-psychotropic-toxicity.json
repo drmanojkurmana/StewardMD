@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "sgm-psychotropic-toxicity",
+ "subject": "ss-general-medicine",
+ "title": "Psychosis and psychotropic drug toxicity",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "Schizophrenia affects zero point seven percent of adults with lifetime onset near twenty years in men and thirty years in women, and seven percent of suicide deaths occur in this group. Psychotropic toxicity accounts for ten percent of poisoning admissions.**Antipsychotics** block dopamine D two receptors, and withdrawal seizures occur in fifteen percent of abrupt stops of short acting agents.",
+   "say": "Schizophrenia affects zero point seven percent of adults with lifetime onset near twenty years in men and thirty years in women, and seven percent of suicide deaths occur in this group. Psychotropic toxicity accounts for ten percent of poisoning admissions. Antipsychotics block dopamine D two receptors, and withdrawal seizures occur in fifteen percent of abrupt stops.",
+   "vis": null
+  },
+  {
+   "tx": "Risk factors include **family history** with ten percent risk in first degree relatives versus one percent baseline, cannabis use doubling risk by age twenty-five, urban birth in twenty-five percent of cases and maternal infection. Drug toxicity is favoured by **polypharmacy** in sixty percent, CYP two D six inhibitors and renal failure. Older patients have three fold higher anticholinergic toxicity risk.",
+   "say": "Risk factors include family history with ten percent risk in first degree relatives versus one percent baseline, cannabis use doubling risk by age twenty five, urban birth and maternal infection. Drug toxicity is favoured by polypharmacy in sixty percent, CYP two D six inhibitors and renal failure. Older patients have three fold higher toxicity risk.",
+   "vis": null
+  },
+  {
+   "tx": "D two blockade in nigrostriatal pathway causes **extrapyramidal** effects in forty percent of first generation users, while mesolimbic blockade treats psychosis. Tricyclic toxicity blocks **sodium channels** causing QRS widening over one hundred twenty ms and seizures at ten mg per kg. Serotonin syndrome arises when serotonin load exceeds disposal by thirty percent after MAOI plus SSRI overlap.",
+   "say": "D two blockade in nigrostriatal pathway causes extrapyramidal effects in forty percent of first generation users, while mesolimbic blockade treats psychosis. Tricyclic toxicity blocks sodium channels causing QRS widening over one hundred twenty milliseconds and seizures. Serotonin syndrome arises when serotonin load exceeds disposal cap.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drug overdose"
+     },
+     {
+      "id": "b",
+      "label": "Channel blockade"
+     },
+     {
+      "id": "c",
+      "label": "ECG widening"
+     },
+     {
+      "id": "d",
+      "label": "Seizure risk"
+     },
+     {
+      "id": "e",
+      "label": "Arrhythmia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute psychosis shows **delusions** in eighty percent, hallucinations in seventy percent strongest auditory and disorganised speech in sixty percent. Classic signs include thought broadcast and passivity. Tricyclic poisoning shows **anticholinergic** toxidrome with dry skin, absent bowel sounds and dilated pupils in eighty-five percent. Serotonin syndrome shows clonus, hyperreflexia and forty degrees hyperthermia.",
+   "say": "Acute psychosis shows delusions in eighty percent, hallucinations in seventy percent strongest auditory and disorganised speech in sixty percent. Classic signs can include thought broadcast and passivity. Tricyclic poisoning shows anticholinergic toxidrome with dry skin, absent bowel sounds and dilated pupils in eighty five percent. Serotonin syndrome can show clonus and hyperthermia.",
+   "vis": null
+  },
+  {
+   "tx": "Neuroleptic malignant syndrome gives lead pipe **rigidity** with fever over thirty-eight point five degrees, creatine kinase over five thousand and leucocytosis in ninety percent. Antipsychotic induced parkinsonism appears at four weeks with **tremor** in fifty percent, while tardive dyskinesia affects twenty percent after five years. Tricyclic QRS over one hundred twenty ms predicts seizures, and QRS over one hundred sixty ms predicts ventricular arrhythmia.",
+   "say": "Neuroleptic malignant syndrome gives lead pipe rigidity with fever over thirty eight point five degrees, creatine kinase over five thousand and leucocytosis. Antipsychotic induced parkinsonism appears at four weeks with tremor in fifty percent, while tardive dyskinesia affects twenty percent after five years. Tricyclic QRS over one hundred twenty milliseconds predicts seizures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicity",
+     "Hallmark",
+     "Key number",
+     "First action"
+    ],
+    "rows": [
+     [
+      "Tricyclic overdose",
+      "Anticholinergic toxidrome",
+      "QRS over one hundred twenty ms",
+      "Alkalinising therapy"
+     ],
+     [
+      "Serotonin syndrome",
+      "Clonus and hyperthermia",
+      "forty degrees fever",
+      "Cyproheptadine"
+     ],
+     [
+      "NMS",
+      "Lead pipe rigidity",
+      "CK over five thousand ",
+      "Dantrolene"
+     ],
+     [
+      "EPS",
+      "Tremor and dystonia",
+      "four weeks",
+      "Anticholinergic prophylaxis"
+     ],
+     [
+      "Tardive dyskinesia",
+      "Involuntary movements",
+      "five years",
+      "Switch agent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First test is **ECG** in every psychotropic overdose plus basic labs and toxic screen. Gold standard for tricyclic severity is **serum level** above one thousand ng per mL predicting seizures at seventy percent accuracy. Brain imaging is indicated in ten percent of first psychosis with focal signs, while prolactin rise above four hundred confirms seizures.",
+   "say": "First test is ECG in every psychotropic overdose plus basic labs and toxic screen. Gold standard for tricyclic severity is serum level above one thousand nanograms per millilitre predicting seizures well. Brain imaging is indicated in ten percent of first psychosis with focal signs, while prolactin rise confirms seizures.",
+   "vis": null
+  },
+  {
+   "tx": "First line prophylaxis for extrapyramidal effects is **anticholinergic prophylaxis** one mg twice daily for three months, with an anticholinergic agent five mg three times daily as an alternative. First episode psychosis starts with **risperidone** two mg daily, titrating to four mg daily, with clozapine one hundred mg daily reserved for resistant cases after two failed trials. ECG monitoring is required two weekly.",
+   "say": "First line prophylaxis for extrapyramidal effects is anticholinergic prophylaxis one milligram twice daily for three months, with an anticholinergic agent five milligrams three times daily as an alternative. First episode psychosis starts with risperidone two milligrams daily, titrating to four milligrams daily, with clozapine reserved for resistant cases after two failed trials.",
+   "vis": null
+  },
+  {
+   "tx": "Tricyclic overdose needs alkalinising therapy one mEq per kg IV bolus for QRS widening plus **benzodiazepines** five mg diazepam for seizures, with vasopressors for hypotension. Serotonin syndrome needs cyproheptadine twelve mg then two mg every two hours up to thirty-two mg daily.**Dantrolene** two point five mg per kg every six hours is used in malignant rigidity.",
+   "say": "Tricyclic overdose needs alkalinising therapy one milliequivalent per kilogram IV bolus for QRS widening plus benzodiazepines for seizures, with vasopressors for hypotension. Serotonin syndrome needs cyproheptadine twelve milligrams then two milligrams every two hours. Dantrolene two point five milligrams per kilogram is used in malignant rigidity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serotonin syndrome",
+     "points": [
+      "Clonus and hyperreflexia",
+      "Agitation and fever",
+      "Cyproheptadine",
+      "Benzodiazepine sedation"
+     ]
+    },
+    "right": {
+     "title": "NMS",
+     "points": [
+      "Lead pipe rigidity",
+      "Bradykinesia",
+      "Dantrolene",
+      "Bromocriptine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Late complications include **tardive dyskinesia** in twenty percent at five years, metabolic syndrome in forty percent on olanzapine with weight gain of six kg in ten weeks, diabetes in ten percent and hyperprolactinaemia in fifty percent on risperidone.**Agranulocytosis** occurs in one percent on clozapine within six months, and sudden cardiac death risk rises two fold on QT prolonging agents.",
+   "say": "Late complications can include tardive dyskinesia in twenty percent at five years, metabolic syndrome in forty percent on olanzapine with weight gain of six kilograms in ten weeks, diabetes in ten percent and hyperprolactinaemia on risperidone. Agranulocytosis occurs in one percent on clozapine within six months.",
+   "vis": null
+  },
+  {
+   "tx": "First episode psychosis without treatment lasts six months in thirty percent and becomes chronic in eighty-five percent with **remission rates** of twenty-five percent per year on maintenance.**Relapse** within one year reaches seventy percent without drugs versus twenty percent with maintenance. Clozapine needs blood counts weekly for six months then monthly, with eighty percent response in resistant disease.",
+   "say": "First episode psychosis without treatment can last six months in thirty percent and becomes chronic in eighty five percent with remission rates of twenty five percent per year on maintenance. Relapse within one year can reach seventy percent without drugs versus twenty percent with maintenance. Clozapine needs blood counts weekly for six months.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam** memorise QRS over one hundred twenty ms needs bicarbonate, QRS over one hundred sixty ms risks arrhythmia, CK over five thousand marks NMS, clonus marks serotonin syndrome, tardive dyskinesia at five years in twenty percent, risperidone two mg start, anticholinergic prophylaxis one mg twice daily, clozapine blood counts weekly for six months and agranulocytosis risk one percent.",
+   "say": "This summary will help you remember the exam patterns. Memorise QRS over one hundred twenty milliseconds needs bicarbonate, QRS over one hundred sixty milliseconds risks arrhythmia, CK over five thousand marks NMS, clonus marks serotonin syndrome, tardive dyskinesia at five years, risperidone two milligrams start, anticholinergic prophylaxis one milligram twice daily and clozapine blood counts weekly for six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Meaning",
+     "Number"
+    ],
+    "rows": [
+     [
+      "Tricyclic QRS",
+      "Seizure risk",
+      "Over one hundred twenty ms"
+     ],
+     [
+      "Arrhythmia risk",
+      "Tricyclic toxicity",
+      "Over one hundred sixty ms"
+     ],
+     [
+      "Creatine kinase",
+      "NMS severity",
+      "Over five thousand "
+     ],
+     [
+      "Clonus",
+      "Serotonin syndrome",
+      "Key sign"
+     ],
+     [
+      "Risperidone start",
+      "First episode",
+      "two mg daily"
+     ],
+     [
+      "Anticholinergic prophylaxis dose",
+      "EPS prophylaxis",
+      "one mg twice daily"
+     ],
+     [
+      "Clozapine monitoring",
+      "Agranulocytosis watch",
+      "Weekly six months"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

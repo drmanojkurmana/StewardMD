@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "sgm-envenomation",
+ "subject": "ss-general-medicine",
+ "title": "Snakebite and envenomation",
+ "minutes": 11,
+ "steps": [
+  {
+   "tx": "**Snakebite envenomation** is injection of venom through fang punctures into tissues and circulation, causing local necrosis and systemic toxicity in about ten% to twenty% of bites. India reports forty five thousand eight hundred deaths yearly with **Russell viper**, common krait, saw scaled viper and spectacled cobra accounting for most cases. Immediate **immobilisation** and rapid hospital transfer save life.",
+   "say": "Snakebite envenomation is injection of venom through fang punctures into tissues and into circulation. It causes local tissue damage and systemic toxicity in about ten to twenty percent of bites. India reports many thousands of deaths each year, mostly from Russell viper, common krait, saw scaled viper and spectacled cobra. Early immobilisation and rapid transfer can save life.",
+   "vis": null
+  },
+  {
+   "tx": "Risk follows habitat and work pattern. Farmers, plantation workers, children walking barefoot and people sleeping on ground floors face highest exposure, with **about seventy% of bites** on lower limbs in open fields. Nocturnal krait bites indoors, **monsoon season** surges, non use of footwear and torch, and delay beyond four hours to care all raise risk of severe envenoming.",
+   "say": "Risk follows habitat and work pattern. Farmers, plantation workers, children walking barefoot and people sleeping on ground floors face highest exposure. About seventy percent of bites involve lower limbs in open fields. Nocturnal krait bites occur indoors and monsoon surges calls for extra care. Delay beyond four hours to reach care raises risk of severe envenoming.",
+   "vis": null
+  },
+  {
+   "tx": "Exposure and outcome turn on **snake species**, bite depth, venom load, victim weight and first aid given. A local table sorts who is at risk and what decides severity at presentation, since history of species, site and delay shapes every later decision about **antivenom**, airway support and observation. Record **bite time** and track swelling every fifteen minutes so shift teams spot **thirty% faster spread** early.",
+   "say": "Exposure and outcome turn on snake species, bite depth, venom load, victim weight and first aid given. This table sorts who is at risk and what decides severity at presentation. History of species, site and delay shapes later decisions about antivenom, airway support and close observation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "At risk",
+     "Why risk is high"
+    ],
+    "rows": [
+     [
+      "Farm workers",
+      "Barefoot field work at dusk, monsoon season"
+     ],
+     [
+      "Sleeping on floor homes",
+      "Nocturnal common krait bites indoors"
+     ],
+     [
+      "Children under ten years",
+      "Low body weight, high venom per kilogram"
+     ],
+     [
+      "Fishing and wood collectors",
+      "Encounter vipers in brush and logs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Venom spreads by **lymphatic drainage** and bloodstream to distant organs. A flow links fang injection to venom absorption, then to coagulopathy, neurotoxic blockade and shock, which explains why immobilised limbs and early **antivenom** limit spread while tourniquets and incisions worsen injury and do not neutralise venom. Most systemic cases progress within **six hours** without treatment, while **one hour** of splinting cuts lymphatic spread by **forty%** in cohorts.",
+   "say": "Venom spreads by lymphatic drainage and by bloodstream to distant organs. This flow links fang injection to venom absorption, then to clotting failure, nerve blockade and shock. It explains why an immobilised limb and early antivenom limit spread, while tourniquets and skin incisions worsen injury and do not neutralise venom.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fang puncture"
+     },
+     {
+      "id": "b",
+      "label": "Venom absorption"
+     },
+     {
+      "id": "c",
+      "label": "Coagulopathy and neurotoxicity"
+     },
+     {
+      "id": "d",
+      "label": "Shock and organ injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Local signs appear within thirty minutes as **pain**, swelling, blistering and dark ecchymosis, progressing every fifteen minutes with a spreading edge. Mark the **leading edge** and circumference hourly, because rapid swelling crossing a joint, tense blisters or fang marks with bleeding signal systemic absorption and need immediate systemic staging before antivenom is decided.",
+   "say": "Local signs appear within thirty minutes as pain, swelling, blistering and dark bruising, spreading every fifteen minutes. Mark the leading edge and measure circumference hourly, because rapid swelling crossing a joint or tense blisters signal systemic absorption. Staging early guides the decision about antivenom.",
+   "vis": null
+  },
+  {
+   "tx": "Systemic groups diverge sharply. A comparison separates **neurotoxic** from **haemotoxic** envenoming so airway risk and bleeding risk are never confused at the bedside, which is a repeated examination trap when ptosis is missed or gum bleeding is dismissed as minor. Repeat clotting at **six hours** decides the second antivenom dose, since **twenty% of patients** stay incoagulable after the first ten vials.",
+   "say": "Systemic groups diverge sharply. This comparison separates neurotoxic envenoming from haemotoxic envenoming so airway risk and bleeding risk are never confused at the bedside. Missing drooping of eyelid or dismissing gum bleeding is a repeated examination trap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neurotoxic krait and cobra",
+     "points": [
+      "Descending ptosis and ophthalmoplegia",
+      "Bulbar weakness and breathing failure",
+      "Minimal local swelling",
+      "Pupils often normal early"
+     ]
+    },
+    "right": {
+     "title": "Haemotoxic viper",
+     "points": [
+      "Bleeding gums and haematuria",
+      "Incoagulable blood and shock",
+      "Swollen painful bite site",
+      "Kidney injury and necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First test is **twenty minute whole blood clotting test** in a dry glass tube, repeated serially, while first hour labs include **full blood count**, PT INR, kidney profile and a salt balance treatment. Bedside **neurotoxic staging** with ptosis and single breath count guides intubation, and **gold standard** confirmation is clinical syndrome plus laboratory trend, not venom antigen levels.",
+   "say": "First test is the twenty minute whole blood clotting test in a dry glass tube, repeated serially. First hour tests include full blood count, prothrombin time with INR, kidney profile and a salt balance treatment. Bedside nerve staging with single breath count guides intubation. The clinical syndrome plus lab trend is the reference standard, not venom levels.",
+   "vis": null
+  },
+  {
+   "tx": "Resuscitation comes first. Give **oxygen**, airway support and neostigmine for krait paralysis, correct shock with **crystalloids** and blood products for bleeding, and keep the limb **splinted at heart level** without tourniquets. Start **antivenom** diluted in saline only for systemic signs, severe local spread or incoagulable blood, watching for anaphylaxis with adrenaline ready. Watch infusion for one hour with **adrenaline zero point five mg** ready, as **five% to ten%** react within the first **fifteen minutes**.",
+   "say": "Resuscitation comes first. Give oxygen, airway support and neostigmine for krait paralysis, correct shock with fluids and blood products for bleeding, and keep the limb splinted at heart level without tourniquets. Start antivenom diluted in saline only for systemic signs or severe local spread, watching for allergy with adrenaline ready.",
+   "vis": null
+  },
+  {
+   "tx": "Give **polyvalent antivenom** ten vials in one hundred mL saline over one hour for systemic envenoming, repeating ten vials if incoagulable blood persists at six hours, with **neostigmine** ten mg and atropine for reversible neurotoxicity. Give **tetanus vaccine** zero point five mL, analgesia and **worm medicine** free wound care, while antibiotics stay reserved for necrosis or delayed presentation beyond twenty four hours.",
+   "say": "Give polyvalent antivenom, ten vials in one hundred millilitres of saline over one hour for systemic envenoming, repeating ten vials if blood does not clot after six hours. Give neostigmine with atropine for reversible nerve paralysis. Give tetanus vaccine, good pain relief and careful wound care, reserving antibiotics for tissue death or late presentation.",
+   "vis": null
+  },
+  {
+   "tx": "Complications include **anaphylaxis** in ten% to twenty% during infusion, **serum sickness** at seven to fourteen days, acute kidney injury, intracranial bleed and compartment syndrome. Mortality is **under two%** with early care but rises sharply beyond eight hours, while survivors need physiotherapy for stiff joints and contracture, plus six week review of **renal function** and coagulation trends.",
+   "say": "Complications include fast allergy in ten to twenty percent during infusion, serum sickness after seven to fourteen days, acute kidney injury, brain bleeding and compartment syndrome. Mortality is under two percent with early care but rises sharply after eight hours. Survivors need physiotherapy and six week review of kidney function and clotting.",
+   "vis": null
+  },
+  {
+   "tx": "**High-yield for the exam**: snakebite traps are tourniquets and incisions, confusing neurotoxic with haemotoxic signs, giving antivenom for mild local pain, and missing coagulopathy on repeat testing. Use this **summary table** to anchor first aid, whole blood clotting test timing, antivenom indications and airway decisions in viva answers. Keep the **six row table** ready for viva scoring on **twenty minute** testing and **ten vial** dosing accuracy.",
+   "say": "This high yield material helps in the exam. Snakebite traps are tourniquets, incisions, confusing nerve and clotting signs, giving antivenom for mild local pain and missing clotting failure on repeat testing. Use this summary table to anchor first aid, clotting test timing, antivenom indications and airway decisions in viva answers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Domain",
+     "Must know"
+    ],
+    "rows": [
+     [
+      "First aid",
+      "Immobilise, no tourniquet, rapid transfer"
+     ],
+     [
+      "Clotting test",
+      "twenty minute whole blood test, repeat six hourly"
+     ],
+     [
+      "Antivenom",
+      "ten vials for systemic signs"
+     ],
+     [
+      "Neurotoxic care",
+      "Neostigmine ten mg with atropine"
+     ],
+     [
+      "Antibiotic",
+      "Only for necrosis or late cases"
+     ],
+     [
+      "Follow up",
+      "Renal profile at six weeks"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

@@ -55,6 +55,19 @@ android {
     }
 }
 
+// Android's asset merge treats "x.gz" and "x" as one resource and fails with "Duplicate resources". The Kardia probe lab
+// ships both (sim/AorticTrial.rgba and .rgba.gz). Its loader asks for the .gz first and falls back to the plain file, so
+// the .gz goes and nothing is lost. A .gz with no plain twin (anatomy.bin.mesh.gz) stays. Runs on the cap-synced copy.
+tasks.register('dropGzTwinAssets') {
+    doLast {
+        fileTree(dir: "$projectDir/src/main/assets/public", include: '**/*.gz').each { gz ->
+            def plain = new File(gz.path.substring(0, gz.path.length() - 3))
+            if (plain.exists()) { logger.lifecycle("dropGzTwinAssets: removed ${gz.name}"); gz.delete() }
+        }
+    }
+}
+tasks.configureEach { t -> if (t.name ==~ /merge.*Assets/) t.dependsOn('dropGzTwinAssets') }
+
 repositories {
     flatDir{
         dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
