@@ -68,8 +68,8 @@ try {
   await touch('touchEnd');
   await sleep(500);
   b = await band();
-  ok(/busy/.test(b.cls) && !/Pull for a pearl|Let go/.test(b.t) && b.t.length > 8 && b.h >= 112, `release: a pearl holds the band open ("${b.t}", ${Math.round(b.h)} px)`);
-  ok(await ev(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),s=document.querySelector('#homeV2 > .hv-pull svg').getBoundingClientRect(),t=document.querySelector('#homeV2 > .hv-pull .hvp-t').getBoundingClientRect();return s.height>20 && s.top>=b.top && t.bottom<=b.bottom && s.bottom<=t.top+2})()`), 'held open: the line and the pearl both fit inside the band, line above pearl');
+  ok(/busy/.test(b.cls) && !/Pull for a pearl|Let go/.test(b.t) && b.t.length > 8 && b.h >= 128, `release: a pearl holds the band open ("${b.t}", ${Math.round(b.h)} px)`);
+  ok(await ev(`(()=>{const b=document.querySelector('#homeV2 > .hv-pull').getBoundingClientRect(),s=document.querySelector('#homeV2 > .hv-pull svg').getBoundingClientRect(),t=document.querySelector('#homeV2 > .hv-pull .hvp-t').getBoundingClientRect();return s.height>20 && t.top>=b.top && s.bottom<=b.bottom && t.bottom<=s.top+2})()`), 'held open: the pearl and the line both fit inside the band, the line next to the hero');
   await sleep(1300);
   ok(await ev(`parseFloat(getComputedStyle(document.querySelector('#homeV2 > .hv-pull .ht')).opacity)>0.9`), 'the heart beats on the drawn line while the pearl is up');
   await shot('pearl-light');
