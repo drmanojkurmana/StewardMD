@@ -417,3 +417,6 @@ Gemini returned 12 videos; all embeddable (oEmbed 200). The best clip per step i
 
 ## Batch 3 video clips (2026-11-20)
 73 clips as `med.surgx.{hmd,tons,tkr,rhc,turp}-clip-NN`; 13 ids added to the shim ALLOW list. TVASurg 0twYSCkEnYk refuses embedding (oEmbed 401), so right hemicolectomy step 7 uses the Colorectal Disease Journal trocar clip. Changed from Gemini picks: TKR step 4 uses the body-exhaust-suit clip, not hand rub; right hemicolectomy step 14 uses the ZJU-SAH exteriorisation clip so it does not sit inside the step 18 clip. Gaps: haemorrhoidectomy 8, 9, 10, 13, 14; tonsillectomy 11; TKR 10, 11, 12, 14, 16, 18, 19; right hemicolectomy 6, 17, 21, 22; TURP 4, 5, 11, 14.
+
+## Batch 2 step pictures (2026-11-20)
+68 of 70 wired as `med.surgx.{chole,hern,cs,thyr}-step-NN`, WebP 1200x900 q78 in `surgx/media/<procedure>/`. Lap chole 04 and thyroid 05 (positioning) left out: Gemini drew a generic flat table; the regeneration prompt is in [[SURGX-batch2-image-prompt]]. Gemini also used near-identical scenes for the shared safety steps (time-out, counts, labelling) across operations; acceptable for generic steps.

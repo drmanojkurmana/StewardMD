@@ -378,3 +378,37 @@ Make FOUR zip files, one per operation, with the PNGs named exactly as above:
 Put credits.txt in each zip: for each image the filename, a one-line description and the reference sources you
 studied (titles and links). Then give me the four zips as downloads.
 ```
+
+## Round 2: regenerate two images (2026-11-20)
+The other 68 are in the app. Gemini drew the same generic flat-table theatre scene for every positioning step, so these two
+are wrong. Paste into the same Gemini chat:
+
+```
+Two images from the 70 are wrong. Regenerate ONLY these two, in exactly the same style, patient and team as the rest
+of their operation, with the IMAGE GENERATION MODEL (never code). Do NOT reuse or edit the earlier generic theatre
+scene; draw each one new, as a pure SIDE VIEW of the operating table at eye level, so the table angle is obvious.
+
+1. lap-cholecystectomy/04_positioning.png
+   - Camera exactly side-on from the patient's RIGHT side, at table height.
+   - The table top is visibly TILTED: the HEAD end is HIGHER than the foot end by 20 degrees (reverse Trendelenburg).
+     The floor line and the table top must clearly form that angle.
+   - Small inset (circle, lower corner) viewed from the foot of the table: the table rolled so the patient's LEFT side is
+     LOWER and the RIGHT side higher, by about 15 degrees.
+   - BOTH arms tucked at the patient's sides inside the drape, not on arm boards. A padded foot board against both
+     soles, a safety strap across the thighs, padding under the heels.
+   - Patient anaesthetised, covered with a green drape from chest to feet; anaesthetist at the head.
+   - Teach: head up and left side down so the bowel falls away from the gallbladder. Check: the tilt is unmistakable.
+
+2. total-thyroidectomy/05_positioning.png
+   - Camera exactly side-on, at table height, close enough that the head, neck and shoulders fill the left half.
+   - A firm roll under BOTH shoulders (across the upper back, at shoulder-blade level); the neck EXTENDED so the chin
+     is lifted and the front of the neck is stretched and prominent; the back of the head resting in a soft ring.
+   - The table head end HIGHER than the foot end by about 15 degrees (reverse Trendelenburg), clearly visible.
+   - BOTH arms tucked at the sides. The nerve-monitoring breathing tube in the mouth, its cable going to the
+     anaesthetist at the head.
+   - Teach: shoulder roll and neck extension open the neck; head up reduces venous bleeding. Check: shoulder roll and
+     neck extension are the first thing the eye lands on.
+
+No text, numbers, labels or angle markings anywhere. Landscape 4:3, 1600 x 1200 px, PNG, same filenames.
+Put both in one zip: surgx-batch2-fix.zip
+```

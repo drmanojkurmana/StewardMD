@@ -25,6 +25,7 @@ procedure's own JSON (`surgx/procedures/<id>.json` + the step packs), never from
 | Count board | Handwritten scribbles | "The count board is a BLANK whiteboard with an empty grid. No marks, ticks or numbers." |
 | Specimen label | Pseudo-text | "The label is a BLANK white rectangle." |
 | Screens | Faux UI text | "Any screen shows only abstract grey bars and blocks." |
+| Positioning (batch 2) | Reused one generic flat-table theatre scene for every operation | "Draw this one NEW as a pure side view at table height; the table angle and the operation-specific supports (shoulder roll, wedge, stirrups) must be obvious. Do not reuse another operation's scene." |
 
 General rules that held: one teaching point per image; laparoscopic round-vignette view for inside steps; 3D cutaway
 for wall layers; theatre view for team steps; key structure sharp with background softened; no text anywhere.
