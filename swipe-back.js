@@ -345,7 +345,10 @@
       var b = ensureBackBtn();
       // Measure BEFORE deciding: the button must be laid out for wouldOverlap() to read its rect,
       // which is why hiding is visibility-based rather than display:none.
-      var show = canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
+      // Home pulled down (home-pull.js): the hero slides away from this corner, which made wouldOverlap() false and put
+      // a Back button over Home itself (owner screenshot 2026-11-20). Home never shows it.
+      var homePulled = false; try { homePulled = document.body.classList.contains("hv-pulling") || !!(window.SMD_HOME_PULL && SMD_HOME_PULL.open()); } catch (e) {}
+      var show = !homePulled && canGoBack() && !hasTopLeftControl() && !topExposesHome() && !wouldOverlap(b);
       b.style.visibility = show ? "visible" : "hidden";
       b.style.opacity = show ? "1" : "0";
       b.style.pointerEvents = show ? "auto" : "none";

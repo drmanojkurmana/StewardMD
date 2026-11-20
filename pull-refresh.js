@@ -9,6 +9,10 @@
  * Generic: the Refresh control is found by its accessible name (aria-label / title starting
  * "Refresh") in the same top-level layer as the list. Modules can also register explicitly:
  *   SMD_pullRefresh.register(scrollerEl, function () { return promiseOrNothing; })
+ * Optional third argument (2026-11-20, Home's "Pull for a pulse", home-pull.js): register(el, fn, { draw(pull, phase),
+ * hold, own }) - draw replaces the spinner (phase "pull" | "armed" | "busy" | "home"), hold is the open height while
+ * fn runs, own = settle only when fn's promise settles (no "the list changed" observer, no 4 s cap). Existing callers
+ * pass two arguments and behave exactly as before.
  * Non-passive touchmove only on the armed list, only during the touch (iOS scroll performance).
  * Kill switch: localStorage smd_pull_refresh=0. */
 (function () {
@@ -42,6 +46,16 @@
     return null;
   }
   function layerOf(el) { var n = el; while (n.parentElement && n.parentElement !== document.body) n = n.parentElement; return n; }
+  function optsFor(sc) {
+    for (var i = 0; i < registry.length; i++) if (registry[i].el === sc || registry[i].el.contains(sc)) return registry[i].o || null;
+    return null;
+  }
+  function holdOf(st) { return st && st.o && st.o.hold > 0 ? st.o.hold : HOLD; }
+  // The pull's picture: a registered screen's own drawing, else the spinner.
+  function paint(st, x, busyNow) {
+    if (st && st.o && st.o.draw) { try { st.o.draw(x, busyNow ? "busy" : x <= 0 ? "home" : triggered(x) ? "armed" : "pull"); } catch (e) {} return; }
+    drawSpinner(st.top, x, busyNow);
+  }
   function actionFor(sc) {
     for (var i = 0; i < registry.length; i++) if (registry[i].el === sc || registry[i].el.contains(sc)) return registry[i].fn;
     var layer = layerOf(sc), c = layer.querySelectorAll(REFRESH);
@@ -104,7 +118,7 @@
     if (lr.bottom >= innerHeight - 2 && lr.top > innerHeight * 0.06 && lr.height < innerHeight - 4) return;
     var fn = actionFor(sc); if (!fn) return;
     if (caught && sc !== caught.st.sc) return;
-    g = { sc: sc, fn: fn, y0: e.touches[0].clientY, x0: e.touches[0].clientX, on: false, dead: false, pull: caught ? caught.pos : 0, armed: false,
+    g = { sc: sc, fn: fn, o: optsFor(sc), y0: e.touches[0].clientY, x0: e.touches[0].clientX, on: false, dead: false, pull: caught ? caught.pos : 0, armed: false,
           base: caught ? caught.pos : 0, raw0: caught ? rawFor(caught.pos) : 0, heldCatch: !!caught, caughtBusy: busy, heldTo: caught ? caught.to : null,
           tr: window.SMD_SPRING ? SMD_SPRING.tracker() : null, top: sc.getBoundingClientRect().top };
     if (caught) catchParked = false;
@@ -125,14 +139,14 @@
     g.pull = resist(g.raw0 + dy);
     if (g.tr) g.tr.add(g.pull, e.timeStamp || Date.now());
     g.sc.style.transform = "translate3d(0," + g.pull + "px,0)";
-    drawSpinner(g.top, g.pull, false);
+    paint(g, g.pull, false);
     var over = triggered(g.pull);
     if (over && !g.armed) { g.armed = true; try { window.SMD_HAPTICS && SMD_HAPTICS.light(); } catch (x) {} try { window.SMD_SOUND && SMD_SOUND.play("tick"); } catch (x) {} }
     else if (!over && g.armed) g.armed = false;
   }
 
   function springTo(st, to, v, done) {
-    var put = function (x) { st.sc.style.transform = x ? "translate3d(0," + x + "px,0)" : ""; drawSpinner(st.top, x, to === HOLD); if (to === 0 && spin) spin.style.opacity = String(Math.min(1, x / TRIGGER)); };
+    var put = function (x) { st.sc.style.transform = x ? "translate3d(0," + x + "px,0)" : ""; paint(st, x, to === holdOf(st) && to > 0); if (to === 0 && spin && !(st.o && st.o.draw)) spin.style.opacity = String(Math.min(1, x / TRIGGER)); };
     flightSt = st; flightTo = to;
     var wrap = function () { if (flightSt === st) flightSt = null; st.pull = to; put(to); if (done) done(); };
     if (settleCtl) settleCtl.start({ from: st.pull, to: to, velocity: v || 0, stiffness: 340, damping: 32, onUpdate: function (x) { st.pull = x; put(x); }, onDone: wrap });
@@ -148,27 +162,28 @@
     }
     if (st.caughtBusy) {   // dragged while a refresh settle was held: return to its target, refresh flow untouched
       st.heldCatch = false;
-      if (settleCtl) settleCtl.resume(st.pull); else springTo(st, st.heldTo || HOLD, 0);
+      if (settleCtl) settleCtl.resume(st.pull); else springTo(st, st.heldTo || holdOf(st), 0);
       return;
     }
     var v = st.tr ? st.tr.velocity() : 0;
-    if (!triggered(st.pull)) { springTo(st, 0, v, function () { st.sc.style.willChange = ""; st.sc.style.transition = ""; }); return; }
+    if (!triggered(st.pull)) { springTo(st, 0, v, function () { st.sc.style.willChange = ""; st.sc.style.transition = ""; paint(st, 0, false); }); return; }
     busy = true;
-    springTo(st, HOLD, v);
+    springTo(st, holdOf(st), v);
     var t0 = Date.now(), finished = false, mo = null, quiet = 0;
     function finish() {
       if (finished) return; finished = true;
       try { mo && mo.disconnect(); } catch (x) {}
       var wait = Math.max(0, 650 - (Date.now() - t0));   // never flash: the spinner shows for at least 650ms
       setTimeout(function () {
-        springTo(st, 0, 0, function () { busy = false; st.sc.style.willChange = ""; st.sc.style.transition = ""; if (spin) spin.style.opacity = "0"; });
+        springTo(st, 0, 0, function () { busy = false; st.sc.style.willChange = ""; st.sc.style.transition = ""; if (spin) spin.style.opacity = "0"; paint(st, 0, false); });
       }, wait);
     }
-    try {
+    // A screen that owns its timing (o.own) settles on its promise only: its content may change on its own meanwhile.
+    if (!(st.o && st.o.own)) try {
       mo = new MutationObserver(function () { clearTimeout(quiet); quiet = setTimeout(finish, 250); });
       mo.observe(st.sc, { childList: true, subtree: true, characterData: true });
     } catch (x) {}
-    setTimeout(finish, 4000);
+    setTimeout(finish, st.o && st.o.own ? 8000 : 4000);
     var r; try { r = st.fn(); } catch (x) { finish(); }
     if (r && typeof r.then === "function") r.then(finish, finish);
   }
@@ -176,6 +191,12 @@
   document.addEventListener("touchcancel", release, { capture: true });
 
   window.SMD_pullRefresh = {
-    register: function (el, fn) { if (el && typeof fn === "function") registry.push({ el: el, fn: fn }); }
+    register: function (el, fn, o) {
+      if (!el || typeof fn !== "function") return;
+      for (var i = 0; i < registry.length; i++) if (registry[i].el === el) { registry[i].fn = fn; registry[i].o = o || null; return; }   // re-register replaces
+      registry.push({ el: el, fn: fn, o: o || null });
+    },
+    // Home's pull hides the global back button while it is open (swipe-back.js asks).
+    active: function () { return !!(g && g.on) || busy; }
   };
 })();
