@@ -408,3 +408,6 @@ Picked by title and channel only; none watched.
 
 ## Batch 2 prompts (2026-11-20)
 Lap cholecystectomy, Lichtenstein hernia repair, LSCS and total thyroidectomy (70 steps): [[SURGX-batch2-image-prompt]] and [[SURGX-batch2-video-prompt]].
+
+## Batch 3 prompts (2026-11-20)
+Haemorrhoidectomy, tonsillectomy, total knee replacement, laparoscopic right hemicolectomy and TURP (94 steps): [[SURGX-batch3-image-prompt]] and [[SURGX-batch3-video-prompt]].
