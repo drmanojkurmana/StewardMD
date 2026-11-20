@@ -8877,7 +8877,7 @@
     var view=root.querySelector("#mcCalcView"); if(!view) return;
     var favOn=isWatchFav(id);
     view.innerHTML=
-      '<div class="mc-cv-head"><button type="button" class="mc-cv-back" id="mcCvBack">‹ Calculators</button><button type="button" class="mc-cv-star'+(favOn?" on":"")+'" id="mcCvStar" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from starred":"Add to starred")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button></div>'+
+      '<div class="mc-cv-head"><button type="button" class="mc-cv-back" id="mcCvBack">‹ Calculators</button><button type="button" class="mc-cv-star'+(favOn?" on":"")+'" id="mcCvStar" aria-pressed="'+(favOn?"true":"false")+'" aria-label="'+(favOn?"Remove from":"Add to")+(window.SMD_HAS_WATCH?" Apple Watch":" starred")+'">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button></div>'+
       '<div class="mc-cv-title"><h2>'+esc(c.title)+'</h2><p>'+esc(c.desc)+'</p></div>'+
       '<div class="mc-action-row"><button type="button" class="mc-act-btn" id="mcAuto_'+id+'">Auto-fill from patient</button><button type="button" class="mc-act-btn" id="mcAsk_'+id+'">Ask MaiK</button></div>'+
       '<div id="mcAFnote_'+id+'"></div>'+
