@@ -1495,6 +1495,8 @@
     try { if (G.PREP_TIDE) G.PREP_TIDE.sync(root); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.sync(root); } catch (e) {}   // the floating tab bar (prep-nav.js)
     try { tableFit(root); } catch (e) {}
+    // MaiK buddy (prep-buddy.js): stands in the corner of a practice set only, gone on every other screen.
+    try { if (G.PREP_BUDDY) G.PREP_BUDDY.sync(top === renderRun ? st.run : null, HOST); } catch (e) {}
   }
   /* Tables (lesson steps, explanations): one that nearly fits is tightened until it does; one that is really wider
      scrolls sideways, fades the edge that has more, and nudges once when first on screen so nobody has to guess. */
@@ -1692,6 +1694,7 @@
     stopTimer();
     try { if (G.PREP_TOOLS) G.PREP_TOOLS.flush(); } catch (e) {}
     try { if (G.PREP_PLAY) G.PREP_PLAY.leave(); } catch (e) {}
+    try { if (G.PREP_BUDDY) G.PREP_BUDDY.leave(); } catch (e) {}
     try { if (G.PREP_SOUND) G.PREP_SOUND.leave(); } catch (e) {}
     try { if (G.PREP_MEDIGRAM) G.PREP_MEDIGRAM.leave(); } catch (e) {}
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
@@ -3194,6 +3197,7 @@
     if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; if (!r.norec) record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
     else r.ans[r.i] = k;
     streakCele(r);
+    if (r.mode === "study" && G.PREP_BUDDY) { try { G.PREP_BUDDY.answered(r); } catch (e) {} }
     // A run's own rule after each answer (prep-play.js boss lives); it may finish the run.
     if (r.onAnswer) { try { r.onAnswer(r, k); } catch (e) {} if (r.done) return; }
     renderRun();
@@ -3230,6 +3234,7 @@
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
     perfectCele(r);
+    if (G.PREP_BUDDY) { try { G.PREP_BUDDY.finished(r); } catch (e) {} }
     if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
   }
   /* Owner 2026-11-11: every question right in a set of 5 or more (any module, practice or test) plays the
@@ -4769,7 +4774,13 @@
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
   var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
-    run: runQuestions, fixes: fixesFor, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
+    run: runQuestions, fixes: fixesFor,
+    // MaiK buddy (prep-buddy.js): the topic's name, revise it (its module screen; back returns to the set), ask MaiK.
+    buddyTopic: kyItemName,
+    // Only a topic whose subject index is loaded: renderModule draws nothing for an unknown one (a blank pushed screen).
+    buddyCanRevise: function (it) { return !!(it && it._s && it._s !== "deck" && !it._py && (it._m || it.t) && topicOf(it._s, it._m || it.t)); },
+    buddyRevise: function (it) { if (HOST.buddyCanRevise(it)) openModule(it._s, it._m || it.t); },
+    buddyAsk: function (r, q) { var it = r && r.items[r.i]; if (it && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it, chosen: r.ans[r.i], n: r.i + 1, side: true, topic: r.title, prefill: q }, HOST); }, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
     setExam: function (id) { var s = load(); s.exam = examOf(id).id; save(); nav(0); rerender(); },
