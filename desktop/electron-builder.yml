@@ -1,0 +1,31 @@
+appId: in.stewardmd.desktop
+productName: StewardMD
+asar: true
+directories:
+  output: dist
+files:
+  - main.cjs
+  - preload.cjs
+  - security.cjs
+  - app/**/*
+  - package.json
+mac:
+  category: public.app-category.medical
+  target:
+    - target: dmg
+      arch:
+        - universal
+    - target: zip
+      arch:
+        - universal
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true

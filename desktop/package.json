@@ -1,0 +1,19 @@
+{
+  "name": "stewardmd-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StewardMD desktop application for macOS and Windows",
+  "main": "main.cjs",
+  "scripts": {
+    "build:assets": "node scripts/build-assets.cjs",
+    "start": "npm run build:assets && electron .",
+    "start:app": "electron .",
+    "test": "node --test test/*.test.cjs",
+    "pack": "npm run build:assets && electron-builder --dir",
+    "dist": "npm run build:assets && electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^45.3.1",
+    "electron-builder": "^26.0.12"
+  }
+}
