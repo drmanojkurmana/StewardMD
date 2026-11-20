@@ -376,3 +376,21 @@ Make FIVE zip files, one per operation, with the PNGs named exactly as above:
 Put credits.txt in each zip: for each image the filename, a one-line description and the reference sources you
 studied (titles and links). Then give me the five zips as downloads.
 ```
+
+## Round 2: redo prompt (TURP 09)
+
+```
+One image from the 94 is wrong. Regenerate ONLY this one, in exactly the same style as the other TURP endoscopic
+views (round vignette, black surround, 12 o'clock at the top), with the IMAGE GENERATION MODEL (never code).
+
+uro-turp/09_lateral-lobes.png
+- Endoscopic view through clear irrigation fluid inside the prostatic urethra, after the median lobe channel is cut.
+- The LEFT lateral lobe (viewer's right) being shaved: the resectoscope loop drawing a chip from proximal to distal.
+- Adenoma tissue is PINK-WHITE and granular, like the prostate in images 06 and 08. NOT yellow, NOT orange, NOT
+  fatty. A curled pink chip lifting off the loop.
+- Where the resection is complete, the floor shows the glistening WHITE capsule: fine parallel CIRCULAR fibres
+  running around the channel. No yellow fat, no dark gaps, no black space anywhere.
+- A few small red bleeding points only; the view stays clear.
+- Teach: shave the adenoma down to the white circular fibres and stop there. Check: zero yellow anywhere.
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filename. Zip: surgx-batch3-fix.zip
+```

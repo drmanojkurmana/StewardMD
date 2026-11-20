@@ -420,3 +420,6 @@ Gemini returned 12 videos; all embeddable (oEmbed 200). The best clip per step i
 
 ## Batch 2 step pictures (2026-11-20)
 All 70 wired as `med.surgx.{chole,hern,cs,thyr}-step-NN`, WebP 1200x900 q78 in `surgx/media/<procedure>/`. Lap chole 04 and thyroid 05 (positioning) came first as a generic flat table; redrawn as side views from the Round 2 prompt in [[SURGX-batch2-image-prompt]] and wired 2026-11-20 (captions written by hand). Gemini also used near-identical scenes for the shared safety steps (time-out, counts, labelling) across operations; acceptable for generic steps.
+
+## Batch 3 step pictures (2026-11-20)
+93 of 94 wired as `med.surgx.{hmd,tons,tkr,rhc,turp}-step-NN` (WebP 1200x900 q78), picture first then clip on each step. Captions are the prompt's Teach lines; "Common" steps take the COMMON SAFETY STEPS Teach line, positioning steps a sentence from PRECISE FACTS. TURP 09 (lateral lobes) left out: Gemini drew the adenoma yellow and fatty, which reads as perforation fat; the redo prompt is at the end of [[SURGX-batch3-image-prompt]].
