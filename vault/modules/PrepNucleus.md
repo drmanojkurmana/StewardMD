@@ -67,6 +67,57 @@ FSRS-6 spaced review through `specialty-core.js`. Students can also turn their o
 - Share IDs: `prep-ids.js` + `prep-ids.css` (optional), `tools/prep-ids.mjs` (fetch, build, verify, publish the
   `v1/ids/` index). See "Share IDs".
 
+## MaiK buddy (2026-11-20, `prep-buddy.js`, `?v=prep189`)
+Owner: "mascot to celebrate user if gets correct mcq or three in a row correct, motivate user, feel sad if wrong mcqs,
+more wrongs asking to prepare topic again"; tap = "mini quick-ask bubble".
+- **What:** the MaiK companion (`maik-companion.js`, style from `smd_maik_doc_style`, "classic" maps to attending) stands
+  bottom-right in a **practice** set only (`mode === "study"`; never in a timed test or mock, it would give answers away).
+  Reacts per answer through the new `cue("quiz", { kind, n })`: right (thumbs, speaks about 1 in 3), streak 3/5/10/every
+  10 (hop + hearts; the existing confetti still fires), back (right after 2+ misses), wrong (shrug + frown, mood forced to
+  -0.3), slump (3 wrong in a row or 3 wrong in one module this set, once per module: "Revise topic" / "Keep going"),
+  end of set (5+ answered; perfect = bow, quiet under "You are the boss"). One late-hours line (23:00-04:00) per open.
+- **Words** live in `prep-buddy.js` (`L`), drawn in its own bubble on `document.body` (z 887; `#smdPrep` is 885), not
+  the companion's `say()`, so it can carry buttons. The companion is body language only.
+- **Revise topic** calls `HOST.buddyRevise` -> `openModule` (back returns to the set). Only when `buddyCanRevise`: the
+  subject index must be loaded, because `renderModule` paints nothing for an unknown topic (a blank pushed screen).
+  Otherwise the line says "worth revising after this set" with no button.
+- **Tap him:** quick-ask bubble (2-3 chips + a 16 px box) -> `HOST.buddyAsk` -> `PREP_ASK.open({ kind: "mcq", prefill })`;
+  the Ask sheet does the asking (device/online/tokens). No answer is generated inside the bubble.
+- **Placement:** stands on the sticky Next bar when it is on the bottom edge (`--pnb-lift`, `place()` on paint, scroll,
+  resize), else the bottom edge. Hidden while `#pnAsk` or `.pn-zoom` is open (CSS `:has`).
+- **Flags:** `smd_prep_buddy` default ON, "0" off. Swipe left hides him, kept in `smd_prep_buddy_off` (new companion
+  `opts.hideKey`, so it does not hide the MaiK sheet's buddy). Companion also got `opts.onTap`.
+- **Hooks in prep.js:** `paint()` end -> `PREP_BUDDY.sync(top === renderRun ? st.run : null, HOST)`; `answer()` ->
+  `answered(r)`; `finish()` -> `finished(r)`; `close()` -> `leave()`.
+- **Tests:** `test/prep-buddy.test.mjs` (decide/doneLine), `test/run-prep-buddy-ui.mjs` (headless, SHOTS=<dir>).
+  Not seen on a phone yet.
+
+- **Lively + clock tension (2026-11-20, `?v=prep191`, owner: "very lively ... get tensed turn red when time is almost
+  up"):** Nucleo has an idle life (`idle()` every 3-6 s: glance, read the question, peek, stretch, sway, tassel flick,
+  hop, wave, a dance when mood is high), eyes follow taps and scrolling (`.pnm-look`), drowsy at 45 s and asleep at 60 s
+  without input (z's; a tap startles him awake). Clock: `prep-buddy.js` reads `HOST.buddyClock(r)` twice a second
+  (per-question clock via `qcLeft`, whole-test via `r.limit`; sections not covered) and `tension()` maps it to 0/1/2:
+  per question tense at 30% (5-15 s), panic at 12% (3-5 s); whole test tense in the last 10% (30 s-5 min), panic in the
+  last 3% (10 s-1 min). Tense = flushed body (`--pnm-*` registered with `@property` so the colour fades), sweat, gritted
+  teeth, tremble, glances at the clock; panic = red, steam, scream, flailing arms; 0 left = mind blown (cap shoots off),
+  then sad; back to calm = relief (brow wipe). **He now also appears in timed tests**, clock only: no answer reactions
+  (they would leak answers) and no quick ask (no help in a test). Untimed tests: still no buddy. The per-question clock
+  ignores jumps over `QC_GAP` (3 s), so the UI test steps `SMD_PREP_NOW` in 2.5 s steps.
+- **Bubble look (2026-11-20, owner: "premium non ai slop"):** the bubble copies PrepNucleus tokens from `#smdPrep`
+  (`tokens()`, re-read when body's class changes) so it is the screen's own card in light and dark; slump = one tonal
+  primary (`--pn-pri-soft` / `--pn-pri-ink`) + a text "Keep going"; topic named alone and bold (`buddyTopic` drops the
+  "Subject · " prefix); tail aimed at the mascot from layout sizes (`aim()`; rects are scaled mid-entrance); quick ask =
+  title, one hairline list with chevrons, one field with an inline send (disabled until typed). Entrance 280 ms
+  `--pn-ease` from the tail, 140 ms exit. Impeccable detector clean.
+- **Nucleo, PrepNucleus's own mascot (2026-11-20, `prep-mascot.js`, `?v=prep190`, owner: "create new mascot to suit
+  prepnucleus"):** default character of the buddy. A cell nucleus in hematoxylin blue-violet (membrane with pores,
+  nucleolus, chromatin curl) in a graduation cap with a PrepNucleus-amber tassel. One inline SVG; faces (`data-face`:
+  normal, proud, happy, sad, cry, think, wow) and arm poses (`data-pose`: rest, thumbs, cheer, wave, droop, hug) are CSS
+  states, motion is CSS keyframes (bob, jump, nod, sink, squish, cap toss on 80%+ and perfect). No rAF loop. Reduced
+  motion: faces only. `window.PREP_MASCOT.mount(host, opts)` has the companion's shape (`cue("quiz")`, `state()`,
+  `destroy()`), so `prep-buddy.js` drives either. `smd_prep_mascot = "maik"` brings back the MaiK companion.
+  Face sheet: `SHOTS=<dir> node test/run-prep-buddy-ui.mjs` writes `nucleo-faces.png` / `-dark.png`.
+
 ## Arena server (2026-10-06, merged into `feat/prepnucleus`, not deployed)
 Plan: [[plans/PrepNucleus-Arena]] (deviations listed there). Flags `smd_prep` + `smd_prep_arena` stay OFF.
 - **Pages:** `functions/api/prep/arena/[[path]].js` (consent, events, start, submit, event board, rating board,

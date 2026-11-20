@@ -365,6 +365,8 @@
     var isBot = style === "bot", K = SKIN[style] || null, P = PERSONA[style], G2 = isBot ? BOTG : HUM;
     var reduce = !!opts.reduceMotion, sleepMs = opts.sleepMs > 0 ? opts.sleepMs : 45000;
     var CW = 46, CH = 54, SVG_TOP = 36 - 1 - CH;
+    // hideKey: where "swiped away" is remembered. PrepNucleus keeps its own, so hiding him there leaves MaiK alone.
+    var hideKey = opts.hideKey || "smd_maik_doc_off";
 
     var box = document.createElement("div");
     box.className = "mkc mkc-" + style;
@@ -860,6 +862,32 @@
       else if (r < 0.72 && !reduce) gesture("hop");
       else gesture("heart");
     }
+    /* PrepNucleus MCQ reactions (owner 2026-11-20: celebrate right answers and three in a row, motivate, look sad on a
+       wrong one, more wrongs ask to revise). Body language only: the words live in prep-buddy.js's own bubble.
+       right / streak n / back (right after misses) / wrong / slump n / done {pct} / perfect. */
+    function onQuiz(kind, n) {
+      touch(true); clearSay();
+      if (A.name === "think" || A.name === "read" || A.name === "listen") setAct("idle");
+      switch (kind) {
+        case "right": feel(0.2); gesture("thumbs"); fx("check", -12, -2, 1100); break;
+        case "streak":
+          feel(0.5); gesture(reduce ? "thumbs" : "hop"); hearts(n >= 10 ? 4 : 3);
+          if (!reduce && n >= 5) later(function () { if (!G) gesture("hop"); }, 1000);
+          break;
+        case "back": feel(0.4); gesture("thumbs"); fx("sparkle", 10, -4, 1300); break;
+        // A miss lands his mood just below neutral whatever came before (a streak's joy must not keep him smiling); shrug
+        // draws the frown: sad, not cross. Valence below -0.2 keeps the concerned face after the gesture.
+        case "wrong": feel(-0.3 - valence()); gesture("shrug"); break;
+        case "slump": feel(-0.6 - valence()); gesture("shrug"); later(function () { if (!G) gesture("nod"); }, 1700); break;
+        case "perfect": feel(0.8); gesture("bow"); hearts(4); if (!reduce) later(function () { if (!G) gesture("hop"); }, 1400); break;
+        case "done":
+          var p = n || 0;
+          if (p >= 80) { feel(0.55); gesture(reduce ? "thumbs" : "hop"); hearts(3); }
+          else if (p >= 50) { feel(0.2); gesture("thumbs"); }
+          else { feel(-0.2); gesture("comfort"); }
+          break;
+      }
+    }
     function greetNow() {
       if (!opts.greet || destroyed) return;
       var first = !lsGet("smd_maik_doc_hi");
@@ -878,7 +906,7 @@
     function applyHidden(h, persist) {
       hidden = !!h;
       box.classList.toggle("mkc-hidden", hidden); tab.classList.toggle("on", hidden);
-      if (persist) lsSet("smd_maik_doc_off", hidden ? "1" : "0");
+      if (persist) lsSet(hideKey, hidden ? "1" : "0");
       if (hidden) { clearSay(); if (raf) { cancelAnimationFrame(raf); raf = 0; } }
       else { touch(true); if (persist) gesture("wave"); }
     }
@@ -908,7 +936,11 @@
       var was = pd, dx = e.clientX - was.x; pd = null; box.style.transform = "";
       if (was.long) return;
       if (dx < -56) { applyHidden(true, true); return; }
-      if (!was.moved) onTapSelf();
+      if (!was.moved) {
+        // opts.onTap (PrepNucleus quick ask): he waves and the host opens its own bubble; no pearl of his own on top.
+        if (opts.onTap) { touch(true); gesture("wave"); try { opts.onTap(); } catch (x) {} }
+        else onTapSelf();
+      }
     }
     function onCancel() { pd = null; clearTimeout(lpT); box.style.transform = ""; }
     actor.addEventListener("pointerdown", onDown);
@@ -955,7 +987,7 @@
       if (tab.parentNode) tab.parentNode.removeChild(tab);
     }
 
-    applyHidden(lsGet("smd_maik_doc_off") === "1", false);
+    applyHidden(lsGet(hideKey) === "1", false);
     render(nowMs());
     scheduleBlink(); scheduleAmbient();
     if (atHome) later(greetNow, reduce ? 250 : 400);
@@ -978,6 +1010,7 @@
             case "tap": onTapSelf(); break;
             case "sleep": goSit(); break;
             case "wake": touch(true); break;
+            case "quiz": onQuiz(data && data.kind, data && data.n); break;
             default: if (KIND_SET[kind]) onSend(kind);
           }
         } catch (e) {}

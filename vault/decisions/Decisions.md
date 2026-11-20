@@ -5,6 +5,30 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-20 · Nucleo: PrepNucleus gets its own mascot (owner: "Create new mascot to suit prepnucleus")
+
+**Decision.** A new character, Nucleo (`prep-mascot.js`), replaces the MaiK companion as the PrepNucleus buddy by
+default: a cell nucleus stained hematoxylin blue-violet, in a graduation cap with an amber tassel. Pure SVG + CSS states
+and keyframes, same mount API as the companion. `smd_prep_mascot = "maik"` restores the MaiK companion.
+**Why.** PrepNucleus has its own identity (amber and navy, exam prep); a nucleus is the module's name made literal and a
+histology image every medical student knows; the cap says exam. CSS states are cheaper than the companion's spring/IK rig
+and need no animation loop.
+**Trade-off.** Two characters to keep; Nucleo does not walk around (he stays in his corner and reacts in place).
+**Status.** Default on with the buddy (`smd_prep_buddy`). Needs build-www + cap sync + native rebuild/OTA.
+
+## 2026-11-20 · PrepNucleus MaiK buddy reacts to MCQ answers (owner: "celebrate ... feel sad if wrong ... asking to prepare topic again")
+
+**Decision.** Reuse the existing MaiK companion (`maik-companion.js`) rather than a new mascot: new `cue("quiz")` body
+language plus `opts.onTap` / `opts.hideKey`; all words and buttons live in `prep-buddy.js`'s own bubble. Practice sets
+only. Tap opens a quick-ask bubble that hands off to the existing Ask MaiK sheet (`prep-ask.js`) instead of answering
+inside the bubble.
+**Why.** One character across MaiK and PrepNucleus; the companion already has moods, shrug/frown, hop, hearts and
+reduced motion. Answering inside the bubble would duplicate prep-ask's device check, online/on-phone choice and token
+limits. Mocks hide answers, so a reacting buddy there would leak them.
+**Trade-off.** The owner asked for the answer to show in the bubble; it opens the Ask sheet with the words filled in.
+He does not speak on every answer (about 1 in 3 for right ones), to avoid noise.
+**Status.** Flag `smd_prep_buddy` default on ("0" off). Needs build-www + cap sync + native rebuild/OTA. See [[modules/PrepNucleus]].
+
 ## 2026-11-04 · iPad shell: native iPad layout and hardware keyboard (owner: "work like native iPad app")
 
 **Decision.** A shell layer for large touch screens, `ipad-native.css` + `ipad-native.js`, scoped to `html.smd-tablet`
