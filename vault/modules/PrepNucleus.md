@@ -2132,3 +2132,27 @@ ahead of the scoped "Reasoning explanations" / "Why option chips" blocks whose t
   NEET-SS scoped homes are not cut. Tests > QBank lists every subject too.
 - Harness note: overflow checks must skip `.pn-strip` (its off-screen cards are scroll content, not page overflow).
 
+
+## Auto explanations (2026-11-20, `?v=prep195`)
+Owner (Revenge screenshot, "No explanation is stored for this question yet"): "I shouldnt see a single mcq without explanation. Fix all. Use haiku 5.5".
+- **Cause of the screenshot:** Arena battle questions reached the phone as stem + options only, so Revenge items had no `exp`/`x`.
+  Now `functions/_prep-arena.js expOf` keeps the bank's stored explanation (`exp`, `x`, `r`, `kp`, capped) on each drawn item,
+  `prep-arena-worker` keeps it in the room and sends it only in the round result `r` (`e`), never with the question; `prep-arena.js`
+  puts it on the Revenge items. The worker needs `wrangler deploy` (prep-arena-worker) for this half.
+- **Every other gap:** `functions/api/prep/explain.js` (POST `{ q, o, a }`): `claude-haiku-5-5` (env `PREP_AX_MODEL`), effort medium,
+  json_schema `{ key, notes, others: {letter}, pearl }`, told the key, never asked to judge it. One copy per question in R2
+  `PREP_BANK_R2` `prep-explain/v1/<sha256>.json` (outside `prep-bank/`), served to every later caller with no call. Limits (code
+  defaults): 300 a day signed in, 40 by IP for guests, $4 a day all callers (KV `prep:ax:*`); `PREP_AX_ON` "0" turns it off. Uses
+  the existing `ANTHROPIC_API_KEY` (`key::workspace`); no new binding.
+- **Client** (`prep.js`): `whyHtml` no longer says "No explanation is stored"; `autoExplain(it)` starts on question render (ready by
+  answer time), fills `.pn-ax` in place (`axFill`, no repaint), sets `it.x` + `it._ax` so Ask MaiK and the offline teacher read it,
+  shows "Explanation written by MaiK AI. Report it if something looks wrong." Phone copy: localStorage `smd_prep_ax` (newest 400).
+  Offline/failure: "could not be loaded" + Try again (`axretry`).
+- **Not done:** a bank-wide Batch backfill (no R2/Anthropic creds in the cloud session). The route fills each question on first view
+  and shares it, so the gap closes as questions are seen.
+- Tests: `test/prep-autoexplain.test.mjs`; `test/run-prep-explain-ui.mjs` (stubbed `/__ax`). Its "nothing scrolls sideways" check
+  fails on main too (measures during the reveal slide).
+- **Bank fill (2026-11-20):** `tools/prep-fill-missing.mjs` (owner-run, needs `~/.stewardmd-secrets/r2-s3.env` and the Anthropic key):
+  `scan` reads every served file from R2 (live bank version per subject, listed overlay sets, PYQ), `run --max-usd n` writes the
+  missing explanations with claude-haiku-5-5 Message Batches (resumable, one retry), `apply --yes` uploads the changed files and then
+  the touched manifests. Items get `x`, `r` (when none) and `ax: 1`. Work dir `~/prep-data/fill-missing`. Test: `test/prep-fill-missing.test.mjs`.

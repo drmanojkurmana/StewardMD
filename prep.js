@@ -750,7 +750,7 @@
 
   /* ================= browser ================= */
   var D = G.document, C = G.SPECIALTY_CORE;
-  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
+  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", AX_API = G.SMD_PREP_AX_API || "/api/prep/explain", VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
   var HID_TTL = 6 * 3600e3;
   var KEY = "smd_prep_v1", SESSION = 20;
   var st = { open: false, stack: [], tax: null, ix: {}, mem: {}, store: null, run: null, timer: 0, prevOverflow: "", prevFocus: null, sub: null, filter: "all" };
@@ -2723,13 +2723,84 @@
   }
   /* The explanation under the answer: the key line and topic notes when the item has x, else its stored text (old "*"
      bullets made into a list), else a plain "not written yet" line. */
-  function whyHtml(it, xo, why, L) {
+  function whyHtml(it, xo, why, L, chosen) {
     // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
     var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
-    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
+    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig + (it._ax || it.ax ? '<p class="pn-mut pn-small pn-axby">Explanation written by MaiK AI. Report it if something looks wrong.</p>' : "");
     if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || xfExp(why, it) || mdLite(legacyExp(why))) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
-    return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
+    // Nothing stored: MaiK writes one (autoExplain, /api/prep/explain), and the block fills in when it arrives.
+    if (!it || it._gone || !it.o) return '<p class="pn-mut">No explanation for this question.</p>';
+    if (autoExplain(it) && explainOf(it).x) return whyHtml(it, explainOf(it), "", L, chosen);
+    return '<div class="pn-ax" data-ax="' + axKey(it) + '" data-ch="' + (chosen >= 0 ? chosen : -1) + '" role="status" aria-live="polite"><h3>Explanation</h3><p class="pn-mut">' + (axState[axKey(it)] === "fail" ? 'The explanation could not be loaded. <button type="button" class="pn-link" data-act="axretry" data-v="' + axKey(it) + '">Try again</button>' : "MaiK is writing the explanation for this question...") + "</p></div>";
+  }
+  /* Auto explanations (owner 2026-11-20: "I shouldnt see a single mcq without explanation"). An item with no exp, x, r
+     or figure gets one written once by claude-haiku-5-5 on the server and kept there for every phone; this phone keeps
+     its own copy (localStorage smd_prep_ax, newest 400). The result is set on the item as x, so the answer screen, Ask
+     MaiK and the offline teacher all read it the same way as a bank explanation. */
+  var AX_LS = "smd_prep_ax", AX_MAX = 400, axState = {}, axMem = null, axItems = {};
+  function axKey(it) {
+    var str = JSON.stringify([String(it.q || ""), (it.o || []).map(String), it.a]), h = 5381, h2 = 52711;
+    for (var i = 0; i < str.length; i++) { var c = str.charCodeAt(i); h = ((h << 5) + h + c) | 0; h2 = ((h2 << 5) + h2 + c * 31) | 0; }
+    return "ax" + (h >>> 0).toString(36) + (h2 >>> 0).toString(36);
+  }
+  function axStore() {
+    if (axMem) return axMem;
+    try { axMem = JSON.parse(G.localStorage.getItem(AX_LS) || "{}") || {}; } catch (e) { axMem = {}; }
+    return axMem;
+  }
+  function axSave(k, x) {
+    var m = axStore(); m[k] = { x: x, t: Date.now() };
+    var ks = Object.keys(m);
+    if (ks.length > AX_MAX) ks.sort(function (p, q) { return m[p].t - m[q].t; }).slice(0, ks.length - AX_MAX).forEach(function (d) { delete m[d]; });
+    try { G.localStorage.setItem(AX_LS, JSON.stringify(m)); } catch (e) {}
+  }
+  function hasExplain(it) {
+    if (!it || it._gone || !it.o || !(it.a >= 0)) return true;
+    if (String(it.exp || "").trim()) return true;
+    var xo = explainOf(it);
+    if (xo.x || (xo.r && String(xo.r[it.a] || "").trim())) return true;
+    return !!(G.PREP_PYQ && it.img && it.imgPlace === "exp");
+  }
+  function axApply(it, x) {
+    if (!x || typeof x.key !== "string") return false;
+    it.x = { key: x.key, notes: x.notes || "", others: x.others || {}, pearl: x.pearl || "" };
+    it._ax = 1;
+    return true;
+  }
+  /* autoExplain(it) -> true when the item has (or now has, from this phone's copy) an explanation; otherwise starts
+     the request once and returns false. On the reply every open placeholder for the item is filled in place. */
+  function autoExplain(it) {
+    if (hasExplain(it)) return true;
+    var k = axKey(it), m = axStore();
+    if (m[k] && axApply(it, m[k].x)) return true;
+    axItems[k] = it;
+    if (axState[k] === "busy" || axState[k] === "fail") return false;
+    axState[k] = "busy";
+    var u = G.SMD_AUTH && G.SMD_AUTH.currentUser;
+    (u && u.getIdToken ? u.getIdToken().then(null, function () { return null; }) : Promise.resolve(null)).then(function (tok) {
+      var h = { "Content-Type": "application/json" }; if (tok) h.Authorization = "Bearer " + tok;
+      return G.fetch(AX_API, { method: "POST", headers: h, body: JSON.stringify({ q: it.q, o: it.o, a: it.a }) });
+    }).then(function (res) { return res && res.ok ? res.json() : null; }).then(function (j) {
+      if (!j || !axApply(it, j.x)) throw new Error("ax");
+      axSave(k, it.x); axState[k] = "ok"; axFill(it, k);
+    }).then(null, function () { axState[k] = "fail"; axFill(it, k); });
+    return false;
+  }
+  // Fill (or mark failed) every placeholder for this question on screen, without repainting the page.
+  function axFill(it, k) {
+    var D = G.document; if (!D || !D.querySelectorAll) return;
+    var nodes = D.querySelectorAll('.pn-ax[data-ax="' + k + '"]'), L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i], ch = parseInt(n.getAttribute("data-ch"), 10);
+      if (axState[k] !== "ok") { n.outerHTML = whyHtml(it, explainOf(it), "", L, ch); continue; }
+      var xo = explainOf(it), rs = xo.r;
+      var others = rs ? it.o.map(function (o, j) { return j; }).filter(function (j) { return j !== it.a && rs[j] && String(rs[j]).trim(); }) : [];
+      others.sort(function (x, y) { return (y === ch) - (x === ch) || x - y; });
+      n.outerHTML = '<div class="pn-axdone">' + whyHtml(it, xo, "", L, ch) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (j) {
+        return "<li" + (j === ch ? ' class="mine"' : "") + '><span class="pn-l">' + L[j] + "</span><p><small>" + (j === ch ? "Your pick: " : "") + lfOpt(it.o[j]) + "</small><span>" + xfInline(rs[j], it) + "</span></p></li>";
+      }).join("") + "</ul>" : "") + pearlHtml(it, xo) + "</div>";
+    }
   }
   /* One figure, every place it helps (fig-viewer.js registry): after the explanation, a "How it works" button when the question
      names a drug or class that has an interactive figure. A link only; the answer flow is unchanged. */
@@ -2809,6 +2880,8 @@
     if (r.t2) persistRun(r);
     syncClock(r);
     var locked = !!(r.qc && r.qc.out[r.i]);
+    // An item with no explanation starts MaiK writing one now, so it is usually ready by the time the answer shows.
+    if (r.items[r.i]) autoExplain(r.items[r.i]);
     // Learning Mode: an answer, or the time running out, shows the answer and the explanation.
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && (chosen >= 0 || locked), s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
@@ -2859,8 +2932,8 @@
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + lfOpt(it.o[it.a]) + "</span></p>" +
         (TOOLS ? TOOLS.peerHtml(it, chosen) + TOOLS.noteHtml(it) : "") + (G.PREP_PLAY && !r.norec ? G.PREP_PLAY.mnHtml(it) : "") +
-        (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
-        whyHtml(it, xo, why, L) +
+        (RX ? RX.body(it, { why: whyHtml(it, xo, why, L, chosen), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
+        whyHtml(it, xo, why, L, chosen) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
@@ -3332,8 +3405,8 @@
       var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
       var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(rs[k] || "").trim(); }) : [];
       others.sort(function (x, y) { return (y === a) - (x === a) || x - y; });
-      var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
-        whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+      var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L, a), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
+        whyHtml(it, xo, why, L, a) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo);
       ex += lmGroup((RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it));
@@ -3481,8 +3554,8 @@
     var pager = multi ? '<div class="ky-pager" role="group" aria-label="Review position"><button type="button" class="pn-btn sm" data-act="rvprev"' + (P.pos ? "" : " disabled") + ">" + ico("back") + ' Previous</button><span class="ky-pos" aria-live="polite">' + (P.pos + 1) + " of " + n + '</span><button type="button" class="pn-btn sm" data-act="rvnext"' + (P.pos < n - 1 ? "" : " disabled") + '>Next <span class="ky-flip">' + ico("back") + "</span></button></div>" : "";
     var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
     var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
-    var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
-      whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+    var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L, r.ans[i]), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
+      whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L, r.ans[i]) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
         return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo);
     var rvLm = (RX ? "" : (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) + figRowHtml(it) + (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "");
@@ -4569,6 +4642,7 @@
     if (a === "bookmark") return toggleBookmark();
     if (a === "report") return openReport();
     if (a === "sendreport") return sendReport(v);
+    if (a === "axretry") { var axIt = axItems[v]; if (axIt) { delete axState[v]; var axBtn = G.document && G.document.querySelector('.pn-ax[data-ax="' + v + '"] .pn-mut'); if (axBtn) axBtn.textContent = "MaiK is writing the explanation for this question..."; autoExplain(axIt); } return; }
     if (a === "reviewq") return reviewQuestion(Number(b.getAttribute("data-i")));
     if (a === "kyfixq") { var rk = st.run, lk = b.getAttribute("data-l") === "rem" ? "rem" : "fix"; return reviewQuestion(Number(b.getAttribute("data-i")), rk && rk.ky ? rk.ky[lk] : null); }
     if (a === "rvnext") return void rvGo(1);

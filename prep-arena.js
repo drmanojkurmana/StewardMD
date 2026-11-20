@@ -121,7 +121,9 @@
       x.them = { k: isInt(m.opp && m.opp.k) ? m.opp.k : -1, pts: Number(m.opp && m.opp.pts) || 0 };
       if (Array.isArray(m.score) && m.score.length === 2) x.score = [Number(m.score[0]) || 0, Number(m.score[1]) || 0];
       // Each closed round, for Revenge (replay the ones missed): question, options, answer, the player's pick.
-      x.log = (b.log || []).concat([{ q: b.q, o: b.o, a: m.a, k: x.you.k }]);
+      // e: the stored explanation the server sends once the round has closed (never with the question).
+      var e = m.e && typeof m.e === "object" ? m.e : null;
+      x.log = (b.log || []).concat([{ q: b.q, o: b.o, a: m.a, k: x.you.k, e: e }]);
       return x;
     }
     if (m.t === "end" && (m.result === "win" || m.result === "loss" || m.result === "draw")) {
@@ -560,7 +562,15 @@
   function missedRounds(b) { return (b && b.log || []).filter(function (x) { return x && x.q && x.o && x.a >= 0 && x.k !== x.a; }); }
   function revenge() {
     var b = A.battle, miss = missedRounds(b); if (!miss.length) return;
-    var items = miss.map(function (x, i) { return { id: "rv-" + (b.id || "b") + "-" + i, q: x.q, o: x.o, a: x.a, _s: "deck", _rv: 1 }; });
+    var items = miss.map(function (x, i) {
+      var it = { id: "rv-" + (b.id || "b") + "-" + i, q: x.q, o: x.o, a: x.a, _s: "deck", _rv: 1 }, e = x.e || {};
+      // The bank's own explanation when the server sent it; otherwise prep.js writes one (autoExplain) under the answer.
+      if (typeof e.exp === "string" && e.exp.trim()) it.exp = e.exp;
+      if (e.x && typeof e.x.key === "string") it.x = e.x;
+      if (Array.isArray(e.r) && e.r.length === x.o.length) it.r = e.r;
+      if (typeof e.kp === "string") it.kp = e.kp;
+      return it;
+    });
     H.run(items, "study", "Revenge", { norec: true, custom: { submit: revengeDone, render: revengeDone } });
   }
   function revengeDone(r) {
