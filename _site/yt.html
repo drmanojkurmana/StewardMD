@@ -47,7 +47,6 @@
   var ALLOW = {
     "fpTqrJVSxpI": 1,   // Laparoscopic and open appendicectomy: medical animation - E-Pulsepoints
     "H7LyCwzaZEo": 1,   // Laparoscopic appendicectomy: step-by-step technique and landmarks - Visceral Focus
-    "D1NmYz66D9w": 1,   // Laparoscopic appendicectomy: a step-by-step surgical guide - The Surgical Edge
     "0sqCIzuotWo": 1,   // Deep Tendon Reflexes - Stanford Medicine 25
     "4Ii_lFmd7hw": 1,   // Cerebellar Examination - OSCE Guide - Geeky Medics
     "7KF5_Br9MaE": 1,   // Respiratory History - OSCE Tips - Geeky Medics
@@ -292,6 +291,7 @@
   if (ALLOW[v] !== 1) { fail("That video is not part of CliniX."); return; }
 
   var start = parseInt(param("start") || param("t") || "0", 10);
+  var end = parseInt(param("end") || "0", 10);   // SURGX step clips stop where the step ends
   // autoplay=1 (PrepReels): start as soon as the card is on screen. With sound when the WebView allows it,
   // otherwise muted (YouTube's own unmute button stays), so a blocked autoplay never leaves a paused frame.
   var auto = param("autoplay") === "1";
@@ -300,7 +300,7 @@
   // link card if it did not. playsinline keeps it in the lesson on iOS instead of going fullscreen.
   f.src = "https://www.youtube.com/embed/" + v +
           "?rel=0&modestbranding=1&playsinline=1&enablejsapi=1" +
-          (start > 0 ? "&start=" + start : "") + (auto ? "&autoplay=1" : "") +
+          (start > 0 ? "&start=" + start : "") + (end > start ? "&end=" + end : "") + (auto ? "&autoplay=1" : "") +
           "&origin=" + encodeURIComponent(location.origin);
   f.setAttribute("allow", "autoplay; accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen");
   f.setAttribute("allowfullscreen", "");

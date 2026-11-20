@@ -367,7 +367,7 @@ of `surgx.css`.
 ## YouTube videos in Procedures (2026-11-20, owner experiment)
 Owner asked for YouTube surgery videos in the Steps tab while per-step 3D images (Gemini) are being made.
 Appendicectomy first: three `kind:"embed"` entries in `surgx/media/manifest.json` (`med.surgx.appendix-video-*`,
-ids `fpTqrJVSxpI`, `H7LyCwzaZEo`, `D1NmYz66D9w`), listed in the procedure's `media.steps`.
+ids `fpTqrJVSxpI`, `H7LyCwzaZEo`; `D1NmYz66D9w` removed 2026-11-20 as an audio podcast with no footage), listed in the procedure's `media.steps`.
 - `surgx-screens.js` `mediaBlock()` plays an embed through the CliniX shim `https://stewardmd.in/_site/yt?v=`
   (YouTube rejects the `capacitor://` origin). Each id must be in `_site/yt.html` `ALLOW`, or the shim refuses it.
 - Licence gate: a cleared embed must pass `isEmbeddable()` AND be in the shim allow-list
@@ -389,3 +389,10 @@ reviewed only by eye. `surgx/media/appendicectomy/*.webp` (1200x900, 852 KB tota
   media ids must exist), `test/run-surgx-ui.mjs` (19 distinct pictures, every file loads).
 - Known inaccuracies to regenerate: 04 table is flat (no head-down/left tilt shown); 14 endoloop drawn as a bow;
   16 and 15 carry pseudo-text. Clinician review of all 19 is still owed.
+
+## Timed step clips (2026-11-20)
+Gemini watched V1/V2 and gave per-step timestamps. Steps 4, 7, 9, 10 carry a clip of V2 (`med.surgx.app-clip-NN`,
+`start`/`end` seconds) after the step picture. `_site/yt.html` now honours `end=` (YouTube `end` player var).
+Not used: V1 at step 8 (low confidence, 5 s), and step 13 from V1/V2 (both pull the appendix out WITHOUT a retrieval
+bag, contradicting the step). Gemini's concerns: V2 advises razor shaving nipples to pubis and no retrieval bag;
+V1 omits base ligation and the bag. The two whole videos still render after the steps pending the owner's call.

@@ -183,7 +183,7 @@
     else if (m.src) body = '<img src="' + attr(m.src) + '" alt="' + attr(m.caption) + '" loading="lazy">';
     // YouTube rejects capacitor://localhost as an origin, so play through the https shim CliniX uses (ids allow-listed there).
     else if (m.kind === "embed" && m.embeddable) {
-      body = '<div class="sgx-embed"><iframe src="https://stewardmd.in/_site/yt?v=' + attr(m.videoId) + '" title="' + attr(m.title) +
+      body = '<div class="sgx-embed"><iframe src="https://stewardmd.in/_site/yt?v=' + attr(m.videoId) + (m.start ? "&start=" + m.start : "") + (m.end ? "&end=" + m.end : "") + '" title="' + attr(m.title) +
         '" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe></div>' +
         '<div class="cap"><b>' + esc(m.title) + "</b></div>";
     }
