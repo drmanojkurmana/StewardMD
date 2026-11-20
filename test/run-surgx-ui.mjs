@@ -218,8 +218,8 @@ try {
   await waitFor("#surgxRoot .sgx-tab");
   await clickText("#surgxRoot .sgx-tab", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 17,
-    "VIDEO batch 2: lap cholecystectomy shows its 17 timed step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 18,
+    "VIDEO batch 2: lap cholecystectomy shows its 18 step clips through the shim");
   ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 19 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES batch 2: lap cholecystectomy shows 19 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
@@ -228,8 +228,8 @@ try {
   await waitFor("#surgxRoot .sgx-tab");
   await clickText("#surgxRoot .sgx-tab", "Steps");
   await sleep(300);
-  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 19,
-    "VIDEO batch 3: right hemicolectomy shows its 19 timed step clips through the shim");
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 22,
+    "VIDEO batch 3: right hemicolectomy shows its 22 step clips through the shim");
   ok((await ev("(function () { var src = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step .sgx-media img')).map(function (i) { return i.src; }); if (src.length !== 23 || new Set(src).size !== 23) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES batch 3: right hemicolectomy shows 23 distinct step pictures and every file loads");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");

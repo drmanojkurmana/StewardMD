@@ -394,3 +394,34 @@ uro-turp/09_lateral-lobes.png
 - Teach: shave the adenoma down to the white circular fibres and stop there. Check: zero yellow anywhere.
 No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filename. Zip: surgx-batch3-fix.zip
 ```
+
+## Round 2b: redo prompt (tonsillectomy 04 and 09)
+
+```
+Two more images are wrong. Regenerate ONLY these two, same style, patient and team as the other tonsillectomy
+images, with the IMAGE GENERATION MODEL (never code).
+
+1. tonsillectomy/04_antibiotic-thromboprophylaxis.png
+   - Theatre, the adult patient asleep on the table, seen from the patient's side at the level of the chest.
+   - The patient's arm runs continuously from the SHOULDER out onto an arm board beside the CHEST (never near the
+     legs); a cannula taped on the back of that hand with an injection port.
+   - The anaesthetist connects a syringe with a blank white label to the cannula PORT (needle-free, Luer connector)
+     and pushes the drug. No needle into the skin.
+   - Both lower legs in white compression sleeves with tubing to a pump, visible further along the table.
+   - Teach: antibiotic only if indicated, VTE prophylaxis by risk. Check: the arm is attached to the body.
+
+2. tonsillectomy/09_capsular-dissection.png
+   - Surgeon's view through a Boyle-Davis gag: the curved tongue blade presses the tongue down; the reinforced
+     breathing tube lies INSIDE the groove of the tongue blade, in the MIDLINE, under the blade. It must NOT cross the
+     open pharynx or the uvula.
+   - The uvula hangs free in the middle. The patient's RIGHT tonsil is on the viewer's LEFT.
+   - That RIGHT tonsil (viewer's left) is pulled MEDIALLY with tonsil-holding forceps; the anterior pillar mucosa is
+     incised; the dissector sits in the plane between the pale-white tonsil CAPSULE and the muscle of the fossa,
+     with the white capsule clearly visible. The posterior pillar mucosa is intact. Bleeding minimal.
+   - The left tonsil (viewer's right) untouched. No swab on any tonsil.
+   - Small inset (circle): the snare closing around the LOWER pole of the tonsil.
+   - Teach: stay on the capsule. Check: tube in the blade groove, right tonsil being dissected, capsule plane visible.
+
+No text, numbers or labels. Landscape 4:3, 1600 x 1200 px, PNG, same filenames.
+Put both (plus uro-turp/09_lateral-lobes.png if not already sent) in one zip: surgx-batch3-fix.zip
+```
