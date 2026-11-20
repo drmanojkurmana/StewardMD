@@ -5,6 +5,19 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-20 · Edge swipe presses the Back control it found at the start (owner recording: "still not fixed ... scroll got locked as sidebar is opened from behind")
+
+**Decision.** `swipe-back.js` remembers the top screen's Back control when an edge drag starts (`_heldCtrl`) and
+`goBack()` presses that one when the live search finds none; a drag that moved a screen (`edgeSwipeAction(true)`)
+can only go back, never fall through to "open the menu".
+**Why.** On release the gesture first slides the screen fully off (depth mode), then looks for its Back control, which
+is off-screen by then. From Settings (opened from the sidebar) it found nothing, took the "nothing behind, at home"
+branch, opened the menu, and Settings slid back over the open menu with the menu's scroll lock. Every dragged screen
+was exposed to this, not only Settings.
+**Trade-off.** None found: the held control is used only when the live search comes back empty.
+**Status.** Test `test/run-swipe-guard-ui.mjs` (Settings, AI Usage, Help & support from the menu; fails without the fix).
+`run-swipe-back-ui` keeps its 5 failures that exist on main without this change. Needs OTA.
+
 ## 2026-11-20 · Nucleo: PrepNucleus gets its own mascot (owner: "Create new mascot to suit prepnucleus")
 
 **Decision.** A new character, Nucleo (`prep-mascot.js`), replaces the MaiK companion as the PrepNucleus buddy by
