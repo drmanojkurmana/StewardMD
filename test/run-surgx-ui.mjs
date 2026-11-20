@@ -207,8 +207,8 @@ try {
   ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('At risk:')")) === true,
     "structures at risk are surfaced on the steps that carry them");
   ok((await ev("[].slice.call(document.querySelectorAll('#surgxRoot .sgx-embed iframe')).map(function (f) { return (f.closest('.sgx-step') ? 'step' + f.closest('.sgx-step').querySelector('.n').textContent + ':' : '') + f.src.split('v=')[1]; }).join(',')")) ===
-    "step4:H7LyCwzaZEo&start=62&end=77,step7:H7LyCwzaZEo&start=94&end=111,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,fpTqrJVSxpI,H7LyCwzaZEo",
-    "VIDEO: steps 4, 7, 9 and 10 carry their timed clip; the two whole videos follow the steps; all through the stewardmd.in YouTube shim");
+    "step1:IX0DNOBEItE,step2:_jE5NgLkTo4,step3:pqCD1bVDXvI,step4:H7LyCwzaZEo&start=62&end=77,step5:uny6rK8Mbs0,step6:m5u1kHwGDk8,step7:H7LyCwzaZEo&start=94&end=111,step8:fpTqrJVSxpI&start=67&end=72,step9:H7LyCwzaZEo&start=134&end=153,step10:H7LyCwzaZEo&start=154&end=171,step11:zIcHlU-L1-E,step12:hxnSwIdtagA,step13:H7LyCwzaZEo&start=211&end=230,step15:eUr-Mj2qCgI,step16:LzfLvDLCD7Y,step17:5nCCHgU0LDE,step18:6OERElPC3EI,step19:3HhXz5QhDzw,fpTqrJVSxpI,H7LyCwzaZEo",
+    "VIDEO: every step except 14 carries its video or timed clip, the two whole videos follow the steps, all through the stewardmd.in YouTube shim");
   ok(await waitFor("#surgxRoot .sgx-step .sgx-media img"), "IMAGES: step pictures render");
   ok((await ev("(function () { var st = [].slice.call(document.querySelectorAll('#surgxRoot .sgx-step')); var src = st.map(function (x) { var i = x.querySelector('.sgx-media img'); return i ? i.src : ''; }); if (st.length !== 19 || src.indexOf('') >= 0 || new Set(src).size !== 19) return false; return Promise.all(src.map(function (u) { return fetch(u).then(function (r) { return r.ok; }); })).then(function (a) { return a.every(Boolean); }); })()")) === true,
     "IMAGES: each of the 19 appendicectomy steps shows its own picture, and every file loads");

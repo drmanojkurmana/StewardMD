@@ -397,3 +397,10 @@ Gemini watched V1/V2 and gave per-step timestamps. Steps 4, 7, 9, 10 carry a cli
 Not used: V1 at step 8 (low confidence, 5 s), and step 13 from V1/V2 (both pull the appendix out WITHOUT a retrieval
 bag, contradicting the step). Gemini's concerns: V2 advises razor shaving nipples to pubis and no retrieval bag;
 V1 omits base ligation and the bag. The two whole videos still render after the steps pending the owner's call.
+
+## A video on every step (2026-11-20, owner)
+Owner: "videos cannot be the same as the book or guidelines; use video steps where available, search for more where not,
+else ignore." So the step 8 (V1 1:07-1:12) and step 13 (V2 3:31-3:50, no retrieval bag, said in the caption) clips are in,
+and a focused short video (`med.surgx.app-vid-NN`, found by YouTube search, embeddable per oEmbed, allow-listed in the
+shim) covers steps 1, 2, 3, 5, 6, 11, 12, 15, 16, 17, 18, 19. Step 14 (haemostasis) found nothing and has none.
+Picked by title and channel only; none watched.
