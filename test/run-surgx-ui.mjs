@@ -222,6 +222,14 @@ try {
     "VIDEO batch 2: lap cholecystectomy shows its 17 timed step clips through the shim");
   await ev("window.SMD_SURGX_SCREENS.go('procedures')");
   await waitFor("#surgxRoot .sgx-row");
+  await clickText("#surgxRoot .sgx-row", "Right hemicolectomy");
+  await waitFor("#surgxRoot .sgx-tab");
+  await clickText("#surgxRoot .sgx-tab", "Steps");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#surgxRoot .sgx-step .sgx-embed iframe[src*=\"_site/yt?v=\"]').length")) === 19,
+    "VIDEO batch 3: right hemicolectomy shows its 19 timed step clips through the shim");
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await waitFor("#surgxRoot .sgx-row");
   await clickText("#surgxRoot .sgx-row", "Appendicectomy");
   await waitFor("#surgxRoot .sgx-tab");
   await clickText("#surgxRoot .sgx-tab", "Steps");

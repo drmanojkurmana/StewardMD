@@ -414,3 +414,6 @@ Haemorrhoidectomy, tonsillectomy, total knee replacement, laparoscopic right hem
 
 ## Batch 2 video clips (2026-11-20)
 Gemini returned 12 videos; all embeddable (oEmbed 200). The best clip per step is wired as `med.surgx.{chole,hern,cs,thyr}-clip-NN` (59 clips); 11 ids added to the `_site/yt.html` ALLOW list (hM-WA6WOw1Y unused). Gaps with no clip: chole 4 and 14, hernia 10, LSCS 4, 11, 12 and 17, thyroid 2, 5, 14 and 15. The safety-step clips come from a WHO checklist video on another operation, and the hernia clips from a bench model; both caveats are in the captions. Thyroid step 11 uses the Columbia animation so it does not duplicate the step 13 clip.
+
+## Batch 3 video clips (2026-11-20)
+73 clips as `med.surgx.{hmd,tons,tkr,rhc,turp}-clip-NN`; 13 ids added to the shim ALLOW list. TVASurg 0twYSCkEnYk refuses embedding (oEmbed 401), so right hemicolectomy step 7 uses the Colorectal Disease Journal trocar clip. Changed from Gemini picks: TKR step 4 uses the body-exhaust-suit clip, not hand rub; right hemicolectomy step 14 uses the ZJU-SAH exteriorisation clip so it does not sit inside the step 18 clip. Gaps: haemorrhoidectomy 8, 9, 10, 13, 14; tonsillectomy 11; TKR 10, 11, 12, 14, 16, 18, 19; right hemicolectomy 6, 17, 21, 22; TURP 4, 5, 11, 14.
