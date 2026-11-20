@@ -388,8 +388,9 @@ the entry's `generator` field, not shown. `mediaBlock()` prints the licence only
 - `renderStep()` renders step media when `smd_surgx_step_images` is on (def true, `?surgxstepimg=0` hides).
 - Tests: `test/surgx-content.test.mjs` (cleared image must be StewardMD-produced and the file must exist; step-ref
   media ids must exist), `test/run-surgx-ui.mjs` (19 distinct pictures, every file loads).
-- Known inaccuracies to regenerate: 04 table is flat (no head-down/left tilt shown); 14 endoloop drawn as a bow;
-  16 and 15 carry pseudo-text. Clinician review of all 19 is still owed.
+- Round 2 (owner, same day): 04, 14, 15, 16 regenerated and shipped as `*-v2.webp` (new names so no cached copy is
+  shown). Clinician review of all 19 is still owed. 04 still has the arms out.
+- **The prompt template and every lesson are in [[SURGX-image-prompt]]. Build the next procedure's prompt from it.**
 
 ## Timed step clips (2026-11-20)
 Gemini watched V1/V2 and gave per-step timestamps. Steps 4, 7, 9, 10 carry a clip of V2 (`med.surgx.app-clip-NN`,
