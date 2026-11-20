@@ -3396,6 +3396,21 @@
       return { v:r0(s), u:"", i:b+" (threshold 87). Ref: Hasford, Blood 2011 (EUTOS)." };
     } },
 
+  { id:"elts", cat:"Haematology", onc:1, icon:"", title:"ELTS Score (EUTOS Long-Term Survival, CML)",
+    desc:"Risk of dying of chronic myeloid leukaemia on tyrosine kinase inhibitor (TKI) therapy, scored at diagnosis in chronic phase. Preferred over Sokal for choosing the first-line TKI.",
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"years", step:"1" },
+      { id:"spleen", label:"Spleen size below costal margin", type:"number", unit:"cm", step:"0.5" },
+      { id:"blasts", label:"Peripheral blood blasts", type:"number", unit:"%", step:"0.1" },
+      { id:"plt", label:"Platelet count", type:"number", unit:"×10⁹/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.spleen)||!ok(v.blasts)||!ok(v.plt)||v.age<0||v.spleen<0||v.blasts<0||v.plt<=0) return ERR;
+      var s=0.0025*Math.pow(v.age/10,3)+0.0615*v.spleen+0.1052*v.blasts+0.4104*Math.pow(v.plt/1000,-0.5);
+      var b=s<=1.5680?"Low risk":s<=2.2185?"Intermediate risk":"High risk";
+      return { v:Math.round(s*10000)/10000, u:"", i:b+" (low 1.5680 or less, intermediate above 1.5680 to 2.2185, high above 2.2185). Use values from diagnosis, before any treatment. High risk predicts more CML-related deaths and slower deep molecular response on imatinib, favouring a second-generation TKI." };
+    } },
+
   { id:"chads2", cat:"Cardiovascular", icon:"", title:"CHADS₂ Score",
     desc:"Stroke risk in non-valvular atrial fibrillation (predecessor of CHA₂DS₂-VASc).",
     inputs:[
@@ -7429,6 +7444,7 @@
     hat:["hat score","haemorrhage after thrombolysis","hemorrhage after thrombolysis","sich risk tpa"],
     feua:["fractional excretion of uric acid","feua","urate excretion","siadh urate"],
     mdq:["mood disorder questionnaire","mdq","bipolar screen","bipolar screening"],
+    elts:["elts","elts score","eutos long term survival","cml prognosis","chronic myeloid leukaemia risk","chronic myeloid leukemia score"],
     eutos:["eutos score","cml prognosis","chronic myeloid leukaemia risk","chronic myeloid leukemia score"],
     chads2:["chads2","cha ds2","af stroke risk","atrial fibrillation stroke"],
     ca_phos_product:["calcium phosphate product","ca x po4","calcium phosphorus product","ckd mbd"],
@@ -7779,6 +7795,7 @@
     hat:"Lou M, et al. Neurology 2008;71(18):1417–23 (HAT).",
     feua:"Standard nephrology reference (fractional excretion of urate).",
     mdq:"Hirschfeld RMA, et al. Am J Psychiatry 2000;157(11):1873–5 (MDQ).",
+    elts:"Pfirrmann M, et al. Leukemia 2016;30(1):48-56 (ELTS score); Hochhaus A, et al. European LeukemiaNet 2020 CML recommendations, Leukemia 2020;34:966.",
     eutos:"Hasford J, et al. Blood 2011;118(3):686–92 (EUTOS).",
     chads2:"Gage BF, et al. JAMA 2001;285(22):2864–70.",
     ca_phos_product:"KDIGO CKD-MBD Work Group. Kidney Int Suppl 2009/2017.",
